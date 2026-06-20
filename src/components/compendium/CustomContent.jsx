@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, swatch } from '../theme.js';
 import { Sparkles, Plus, Edit3, Trash2, Copy, Wand2 } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, DEITY_ALIGNMENT, DEITY_TEMPER, DEITY_TIER, satisfiesOptions } from '../../domain/customContentSchema.js';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, DEITY_ALIGNMENT, DEITY_TEMPER, DEITY_TIER, DEITY_LAW, satisfiesOptions } from '../../domain/customContentSchema.js';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
 import { useStore } from '../../store/index.js';
@@ -57,6 +57,7 @@ const FIELD_HINTS = {
   alignmentAxis:  'The god’s moral cast — good, evil, or neutral. Shapes how its faithful behave and which settlements it can win.',
   temperamentAxis:'Whether the god is warlike, peacelike, or neutral. A warlike god is a banner for conquest.',
   rankAxis:       'How grand the god is — a major pillar of the pantheon, a minor god, or a fringe cult. A major god anchors religious authority more strongly.',
+  lawAxis:        'Whether the god is lawful, chaotic, or neutral. A lawful god strengthens law & order; a chaotic god erodes order and makes corruption more tolerated.',
   domain:         'What the god presides over — e.g. war, the harvest, the dead (optional flavour).',
 };
 
@@ -83,6 +84,7 @@ export function CustomItemAttributes({ item }) {
   if (item.alignmentAxis) chips.push({ label: `Alignment · ${keyLabel(DEITY_ALIGNMENT, item.alignmentAxis)}`, color: '#7a5a1a' });
   if (item.temperamentAxis) chips.push({ label: `Temperament · ${keyLabel(DEITY_TEMPER, item.temperamentAxis)}`, color: '#7a5a1a' });
   if (item.rankAxis) chips.push({ label: `Rank · ${keyLabel(DEITY_TIER, item.rankAxis).split(' —')[0]}`, color: '#7a5a1a' });
+  if (item.lawAxis) chips.push({ label: `Law · ${keyLabel(DEITY_LAW, item.lawAxis).split(' —')[0]}`, color: '#7a5a1a' });
   if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5a1a' });
   if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
   if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
@@ -284,7 +286,7 @@ export function CustomContentManager({ search }) {
   // A fresh draft for the active bucket — deities open with valid default axes so
   // validateDeity passes; everything else starts blank.
   const freshDraft = () => (activeCat === 'deities'
-    ? { alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' }
+    ? { alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor', lawAxis: 'neutral' }
     : {});
 
   const handleSave = () => {
@@ -376,6 +378,7 @@ export function CustomContentManager({ search }) {
       case 'alignmentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_ALIGNMENT.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
       case 'temperamentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_TEMPER.map(t=><option key={t.key} value={t.key}>{t.label}</option>)}</select>;
       case 'rankAxis': return <select {...shared} value={val||'minor'}>{DEITY_TIER.map(r=><option key={r.key} value={r.key}>{r.label}</option>)}</select>;
+      case 'lawAxis': return <select {...shared} value={val||'neutral'}>{DEITY_LAW.map(l=><option key={l.key} value={l.key}>{l.label}</option>)}</select>;
       case 'essential':
       case 'magical':
       case 'criminal': {

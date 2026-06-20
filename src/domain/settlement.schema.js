@@ -652,11 +652,12 @@ export const FIELD_ALIASES = Object.freeze({
  *          | 'ruling_authority' | 'faction_power' | 'trade_connectivity'
  *          | 'healing_capacity' | 'defense_readiness' | 'criminal_opportunity'
  *          | 'religious_authority' | 'housing_pressure' | 'infrastructure_condition'
- *          | 'magical_stability' | 'social_trust' | 'economic_capacity'} SystemVariableName
+ *          | 'magical_stability' | 'social_trust' | 'economic_capacity'
+ *          | 'law_order'} SystemVariableName
  *
  * Tier 2.4 canonical substrate variable names. Every subsystem (events,
  * conditions, institutions, factions, supply chains, AI) reads from
- * the same 14-variable map produced by domain/causalState.js.
+ * the same 16-variable map produced by domain/causalState.js.
  */
 
 /**

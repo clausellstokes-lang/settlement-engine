@@ -28,7 +28,8 @@ const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG004 = resolve(dir, '004_custom_content.sql');
 const MIG017 = resolve(dir, '017_fix_credit_auth_integrity.sql');
 const MIG049 = resolve(dir, '049_custom_content_deities.sql');
-const allExist = [MIG004, MIG017, MIG049].every(existsSync);
+const MIG056 = resolve(dir, '056_deity_law_axis.sql');
+const allExist = [MIG004, MIG017, MIG049, MIG056].every(existsSync);
 
 const UID = '11111111-1111-1111-1111-111111111111';
 
@@ -67,9 +68,11 @@ describe.runIf(allExist)('migration 049 — deities bucket constraints (pglite)'
       create table public.profiles (id uuid primary key, role text);
     `);
     // 004 creates the table + the original CHECK + RLS. 049 widens the CHECK and
-    // adds the deity-axes CHECK. Run both in order.
+    // adds the deity-axes CHECK. 056 (B5) widens that axes CHECK to also validate
+    // the 4th axis (lawAxis). Run all three in order.
     await db.exec(loadSql(MIG004));
     await db.exec(loadSql(MIG049));
+    await db.exec(loadSql(MIG056));
     await db.exec(`set test.uid = '${UID}';`);
   });
 
@@ -116,6 +119,24 @@ describe.runIf(allExist)('migration 049 — deities bucket constraints (pglite)'
 
   it('rejects a deity missing an axis entirely', async () => {
     await expect(insert('deities', { name: 'Axeless' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  // ── B5: the 4th axis (lawAxis) — migration 056 ─────────────────────────────
+  it('accepts a deity with a valid 4th axis (lawAxis)', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, lawAxis: 'lawful' })).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, lawAxis: 'chaotic' })).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, lawAxis: 'neutral' })).resolves.toBeTruthy();
+  });
+
+  it('admits a legacy 3-axis deity with NO lawAxis (back-compat — tolerated as neutral)', async () => {
+    // Unlike the first three axes, a MISSING lawAxis is ADMITTED (not rejected),
+    // so deity content authored before B5 never hard-rejects on the next write.
+    await expect(insert('deities', VALID_DEITY)).resolves.toBeTruthy();
+  });
+
+  it('rejects a deity with a PRESENT-but-invalid lawAxis', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, lawAxis: 'orderly' }))
       .rejects.toThrow(/custom_content_deity_axes_check/);
   });
 

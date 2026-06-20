@@ -151,7 +151,7 @@ function PremiumWriteHint({ onUpgrade }) {
  */
 export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
-  const { campaign, worldState, regionalGraph, nameFor } = useSettlementLiveWorld(saveId);
+  const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
 
   if (!settlement) return null;
@@ -207,6 +207,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           settlementId={saveId}
           worldState={worldState}
           regionalGraph={regionalGraph}
+          settlements={settlements}
           nameFor={nameFor}
         />
       </WorkshopCard>
@@ -224,6 +225,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           settlementId={saveId}
           worldState={worldState}
           regionalGraph={regionalGraph}
+          settlements={settlements}
           nameFor={nameFor}
           forceLevel="standard"
         />

@@ -34,6 +34,7 @@ const SNAPSHOT = {
   alignmentAxis: 'good',
   temperamentAxis: 'warlike',
   rankAxis: 'major',
+  lawAxis: 'lawful', // B5 — the 4th axis carried through the embed.
   domain: 'war',
 };
 
@@ -54,8 +55,15 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
       alignmentAxis: 'good',
       temperamentAxis: 'warlike',
       rankAxis: 'major',
+      lawAxis: 'lawful',
       domain: 'war',
     });
+  });
+
+  test('a legacy 3-axis snapshot (no lawAxis) embeds lawAxis as neutral (back-compat)', () => {
+    const legacy = { name: 'Old God', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' };
+    const next = assign(baseSettlement(), 'custom:old_god', legacy);
+    expect(next.config.primaryDeitySnapshot.lawAxis).toBe('neutral');
   });
 
   test('the snapshot is self-contained — mutating the source does not change it', () => {
@@ -74,7 +82,7 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
     expect(snap._embeddedAt).toBeUndefined();
     expect(snap.secret).toBeUndefined();
     // Exactly the whitelisted keys.
-    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'domain', 'name', 'rankAxis', 'temperamentAxis']);
+    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'domain', 'lawAxis', 'name', 'rankAxis', 'temperamentAxis']);
   });
 
   test('a null assignment clears both keys (returns to dormant)', () => {

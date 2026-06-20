@@ -127,8 +127,10 @@ describe('war layer — OFF byte-identity', () => {
       edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
       relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
     };
-    const off = previewCampaignWorldPulse({ campaign: warCampaign({ warLayerEnabled: false }, { edges }), saves, interval: 'one_month', now: NOW });
-    const on = previewCampaignWorldPulse({ campaign: warCampaign({ warLayerEnabled: true }, { edges }), saves, interval: 'one_month', now: NOW });
+    // B1: a settlement cannot siege from peace — seed `strong` at a war-ready posture.
+    const MOBILIZED = { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } } };
+    const off = previewCampaignWorldPulse({ campaign: warCampaign({ warLayerEnabled: false }, { edges, extraState: MOBILIZED }), saves, interval: 'one_month', now: NOW });
+    const on = previewCampaignWorldPulse({ campaign: warCampaign({ warLayerEnabled: true }, { edges, extraState: MOBILIZED }), saves, interval: 'one_month', now: NOW });
 
     expect(off.worldState.deployments).toEqual({});
     expect(on.worldState.deployments.strong).toMatchObject({ targetId: 'weak', role: 'siege' });
@@ -144,10 +146,15 @@ describe('war layer — deployment + drain', () => {
       edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
       relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
     };
-    const snap = snapshotFor(warCampaign({}, { edges }), saves);
+    // B1: seed `strong` mobilized so the deploy gate (war-ready posture) admits it.
+    const snap = snapshotFor(warCampaign({}, { edges, extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } } } }), saves);
     const war = evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('r'), tick: 5, now: NOW, rules: { warLayerEnabled: true } });
 
-    expect(war.deployments.strong).toEqual({ targetId: 'weak', sinceTick: 5, role: 'siege' });
+    // B2 — the deployment record is now STATEFUL (enriched at deploy time): it keeps
+    // the light A1 fields AND carries effective strength + supporting facets.
+    expect(war.deployments.strong).toMatchObject({ targetId: 'weak', sinceTick: 5, role: 'siege' });
+    expect(war.deployments.strong.maxStartStrength).toBeGreaterThan(0);
+    expect(war.deployments.strong.currentEffectiveStrength).toBe(war.deployments.strong.maxStartStrength);
     expect(war.graphChannels.map(c => `${c.from}->${c.to}:${c.type}`)).toEqual(['strong->weak:war_front']);
     const kinds = war.outcomes.map(o => o.candidateType).sort();
     expect(kinds).toEqual(['army_deployed', 'war_drain']);
@@ -163,7 +170,8 @@ describe('war layer — deployment + drain', () => {
       edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
       relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
     };
-    const pulse = previewCampaignWorldPulse({ campaign: warCampaign({}, { edges }), saves, interval: 'one_month', now: NOW });
+    // B1: seed `strong` mobilized so it actually deploys and accrues war_drain.
+    const pulse = previewCampaignWorldPulse({ campaign: warCampaign({}, { edges, extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } } } }), saves, interval: 'one_month', now: NOW });
     const before = deriveCausalState(saves[0].settlement).scores.economic_capacity;
     const conquered = pulse.settlementUpdates.find(u => String(u.saveId) === 'strong');
     const after = deriveCausalState(conquered.settlement).scores.economic_capacity;

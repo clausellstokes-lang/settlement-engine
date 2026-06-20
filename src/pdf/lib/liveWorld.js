@@ -45,6 +45,10 @@ import {
   warExhaustionBand,
   occupiedSettlements,
 } from '../../domain/display/warStatus.js';
+import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
+import { deployedArmyStatus } from '../../domain/display/armyStrength.js';
+import { settlementOccupation, occupierHoldings } from '../../domain/display/occupationStatus.js';
+import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { pantheonStandings, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
@@ -91,7 +95,12 @@ function resolveSettlementId(settlement, campaign) {
  *   exhaustion: { value: number, band: string } | null,
  *   standing: { wins: number, losses: number, score: number } | null,
  *   tradeWars: Array<{ prizeId: string, role: 'supplier'|'displaced'|'contesting', commodityLabel: string, buyer: string }>,
- *   deity: { name: string, rankAxis: string|null, alignmentAxis: string|null, temperamentAxis: string|null, domain: string|null, effects: string[] } | null,
+ *   mobilization: { phrase: string, ticksToDeploy: number } | null,
+ *   army: { targetName: string, remainingPhrase: string, conditionPhrase: string } | null,
+ *   occupationLive: { occupierName: string, statePhrase: string, resistancePhrase: string } | null,
+ *   holdings: { holds: string[], stretchedThin: boolean, strengthened: boolean } | null,
+ *   tradePressure: Array<{ partnerName: string, phrase: string, role: 'dependent'|'supplier'|'partner' }>,
+ *   deity: { name: string, rankAxis: string|null, alignmentAxis: string|null, temperamentAxis: string|null, lawAxis: string|null, domain: string|null, effects: string[] } | null,
  *   pantheon: Array<{ id: string, name: string, seats: number, tier: string, wins: number, losses: number, fromMajor: number }>,
  *   realmArcs: string[],
  * }}
@@ -125,6 +134,17 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     ? occupiedSettlements(occItems).find(o => o.id === id) || null
     : null;
 
+  // ── B-track surfaces (heuristic, PLAYER-SAFE). The PDF is shareable/exported, so
+  // covert state is EXCLUDED (includeCovert defaults false) — same channel-
+  // visibility convention as the screen's WarFaithSection + the gallery sanitizer.
+  const mobilization = id ? settlementMobilization({ settlementId: id, worldState }) : null;
+  const army = id ? deployedArmyStatus({ settlementId: id, worldState, nameFor }) : null;
+  const occupationLive = id ? settlementOccupation({ settlementId: id, worldState, nameFor }) : null;
+  const holdings = id ? occupierHoldings({ settlementId: id, worldState, nameFor }) : null;
+  const tradeTies = id
+    ? settlementTradePressure({ settlementId: id, regionalGraph, settlements: occItems, worldState, includeCovert: false, nameFor })
+    : [];
+
   // ── Settlement-local aggressiveness (meaningful even without a campaign) ──
   const aggrItem = { id: id || s?.id, settlement: s };
   const aggressiveness = computeAggressiveness(aggrItem, worldState || {});
@@ -139,6 +159,8 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
         rankAxis: snap.rankAxis || null,
         alignmentAxis: snap.alignmentAxis || null,
         temperamentAxis: snap.temperamentAxis || null,
+        // lawAxis (B5) — a legacy 3-axis snapshot has none ⇒ null ⇒ no law tag.
+        lawAxis: snap.lawAxis && snap.lawAxis !== 'neutral' ? snap.lawAxis : null,
         domain: snap.domain || null,
         effects: describeDeityEffects(snap),
       }
@@ -147,7 +169,8 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // ── Self-gating: nothing live AND no deity ⇒ dormant ⇒ null. ─────────────
   // This is the byte-identity seam: identical result with/without an empty
   // worldState, and identical result for campaign === null.
-  const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow;
+  const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow
+    || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0;
   if (!hasLive && !deity) return null;
 
   const tradeWars = tradeWarsRaw.map(t => {
@@ -178,6 +201,16 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
       : null,
     standing: standing ? { wins: standing.wins, losses: standing.losses, score: standing.score } : null,
     tradeWars,
+    // ── B-track heuristic surfaces (player-safe; mirror WarFaithSection) ──────
+    mobilization: mobilization ? { phrase: mobilization.phrase, ticksToDeploy: mobilization.ticksToDeploy } : null,
+    army: army ? { targetName: army.targetName, remainingPhrase: army.remainingPhrase, conditionPhrase: army.conditionPhrase } : null,
+    occupationLive: occupationLive
+      ? { occupierName: occupationLive.occupierName, statePhrase: occupationLive.statePhrase, resistancePhrase: occupationLive.resistancePhrase }
+      : null,
+    holdings: holdings
+      ? { holds: holdings.holds.map(h => h.name), stretchedThin: holdings.stretchedThin, strengthened: holdings.strengthened }
+      : null,
+    tradePressure: tradeTies.map(t => ({ partnerName: t.partnerName, phrase: t.phrase, role: t.role })),
     deity,
     // Realm-scope context (pantheon + named arcs) — same selectors the Realm
     // surfaces read. Both [] when religion / war is dormant.

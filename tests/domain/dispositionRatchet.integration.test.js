@@ -33,6 +33,7 @@ function settlement(name, patch = {}) {
     },
     npcs: [],
     activeConditions: [],
+    ...('settlementPatch' in patch ? patch.settlementPatch : {}),
   };
 }
 
@@ -42,10 +43,22 @@ function save(id, name, patch = {}) {
 
 // A strong besieger A (army deployed, war_front into B) vs a weak target B, plus
 // a bystander D. The siege resolves to a conquest on the first pulse: A banks a
-// WIN, B a LOSS — the canonical multi-settlement contest.
+// WIN, B a LOSS — the canonical multi-settlement contest. B1: A is a well-found war
+// city (a citadel garrison + a domestic weapons forge → high military-capacity
+// facets) so the feasibility-PLAUSIBLE matchup over a bare village conquers reliably
+// on the first tick; the test is about the ratchet, not the siege calibration.
 function siegeSaves() {
   return [
-    save('a', 'Ashford', { tier: 'city', population: 90000, legitimacy: 85, factions: [{ faction: 'Garrison Command', category: 'military', power: 90, isGoverning: true }] }),
+    save('a', 'Ashford', {
+      tier: 'city',
+      population: 90000,
+      legitimacy: 85,
+      factions: [{ faction: 'Garrison Command', category: 'military', power: 90, isGoverning: true }],
+      settlementPatch: {
+        institutions: [{ name: 'Citadel Garrison' }, { name: 'Royal Armory' }],
+        economicState: { prosperity: 'Prosperous', primaryExports: [{ name: 'Forged Weapons' }, { name: 'Plate Armor' }], primaryImports: [] },
+      },
+    }),
     save('b', 'Briar', { tier: 'village', population: 200, legitimacy: 25 }),
     save('d', 'Dale'),
   ];

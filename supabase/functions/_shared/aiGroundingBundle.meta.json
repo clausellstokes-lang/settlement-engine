@@ -1,9 +1,11 @@
 {
-  "generatedAt": "2026-06-19T06:23:28.629Z",
+  "generatedAt": "2026-06-19T23:55:14.636Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "64d2029e244b2ffd",
+  "sourceHash": "2e4020b425d2d225",
   "inputs": [
     "src/data/constants.js",
+    "src/data/entityTags.js",
+    "src/data/npcData.js",
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
     "src/domain/canonStatus.js",
@@ -12,6 +14,7 @@
     "src/domain/causalState.js",
     "src/domain/clock.js",
     "src/domain/contradictions.js",
+    "src/domain/corruption.js",
     "src/domain/dailyLife.js",
     "src/domain/defenseLedger.js",
     "src/domain/districtProfile.js",
@@ -31,9 +34,11 @@
     "src/domain/threatProfile.js",
     "src/domain/tradeRouteSemantics.js",
     "src/domain/userEdits.js",
+    "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",
     "src/domain/worldPulse/relationshipHierarchy.js",
     "src/domain/worldPulse/relationshipMemory.js",
+    "src/lib/entities.js",
     "src/lib/text.js"
   ]
 }

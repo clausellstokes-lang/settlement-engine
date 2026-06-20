@@ -1,5 +1,6 @@
 import { TIER_ORDER } from '../../data/constants.js';
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
+import { isBattlefieldPrimary } from './relationshipCompatibility.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
@@ -311,6 +312,13 @@ export function ensureRelationshipState(edge, existing = {}) {
     relationshipMemory: existing.relationshipMemory && typeof existing.relationshipMemory === "object"
       ? { ...existing.relationshipMemory }
       : null,
+    // Phase B4: the LAYERED secondary-status overlay (B0 compatibility-enforced
+    // trade statuses), stamped post-apply ONLY under the war layer. Preserved
+    // across the per-tick ensure/relax passes; absent on a legacy edge (the field
+    // is conditionally spread so it never serializes for a no-overlay edge).
+    ...(Array.isArray(existing.secondaryStatuses) && existing.secondaryStatuses.length
+      ? { secondaryStatuses: existing.secondaryStatuses }
+      : {}),
   };
 }
 
@@ -414,6 +422,26 @@ export function signedDispositionFactor(/** @type {any} */ rawFactor, /** @type 
   return 1.0;
 }
 
+// ── Phase B4 trade-salience seam ─────────────────────────────────────────────
+// A per-EDGE centered-on-1.0 factor (computed in tradeSalience.js) that DAMPENS
+// hostile/escalation candidates when a VALUABLE trade tie exists between the
+// parties, and symmetrically RAISES de-escalation. The raw factor is < 1.0 for a
+// valuable tie, EXACTLY 1.0 otherwise. Unlike the disposition factor (per-actor),
+// this is keyed on the relationship edge (the tie is a property of the pair).
+// Signed by candidate intent like signedDispositionFactor: escalation gets the
+// raw damp (< 1.0 ⇒ less likely/severe); de-escalation gets the mirror (2 - raw
+// ⇒ > 1.0 ⇒ more likely). Neutral drifts are untouched. raw==1.0 ⇒ 1.0 in EVERY
+// branch ⇒ byte-identical when the war layer is off (the map is empty).
+const EMPTY_TRADE_SALIENCE = Object.freeze({});
+
+export function signedTradeSalienceFactor(/** @type {any} */ rawFactor, /** @type {any} */ direction) {
+  const raw = Number.isFinite(rawFactor) ? rawFactor : 1.0;
+  if (raw === 1.0) return 1.0;
+  if (direction === "escalation") return raw;        // < 1.0 ⇒ hostility costlier
+  if (direction === "de_escalation") return 2 - raw; // > 1.0 ⇒ peace easier
+  return 1.0;
+}
+
 const candidateBase = ({
   edge,
   relState,
@@ -432,18 +460,28 @@ const candidateBase = ({
   targetSaveId,
   conflictTags = [],
   dispositionFactor = EMPTY_DISPOSITION,
+  tradeSalienceFactor = EMPTY_TRADE_SALIENCE,
 }) => {
   const key = relationshipKeyFromEdge(edge);
   const settlements = getRelationshipSettlements(edge);
   const metadataAny = /** @type {any} */ (metadata);
   const toType = typeof metadataAny.toType === "string" ? metadataAny.toType : null;
+  const direction = candidateDirection(candidateType, relState, metadataAny);
   // The actor (the settlement driving this candidate) is the attributed save. Its
   // disposition multiplier, signed by the candidate's escalation/de-escalation
   // intent, scales severity + probability. 1.0 for a legacy/empty ledger.
   const actorId = String(targetSaveId || settlements.from);
   const factor = signedDispositionFactor(
     /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
-    candidateDirection(candidateType, relState, metadataAny),
+    direction,
+  );
+  // B4: the trade-salience dampener COMPOSES with the disposition factor on the
+  // SAME severity/probability product (not a parallel candidate path). Keyed on
+  // the EDGE (the trade tie belongs to the pair). 1.0 ⇒ no-op ⇒ byte-identical
+  // when the war layer is off (the map is empty).
+  const tradeFactor = signedTradeSalienceFactor(
+    /** @type {Record<string, any>} */ (tradeSalienceFactor)?.[key],
+    direction,
   );
   return {
     id: `candidate.relationship.${candidateType}.${key}.${tick}`,
@@ -453,8 +491,8 @@ const candidateBase = ({
     ruleFamily: "relationship",
     relationshipKey: key,
     targetSaveId: targetSaveId || settlements.from,
-    severity: clamp01(severity * factor),
-    probability: clamp01(probability * factor),
+    severity: clamp01(severity * factor * tradeFactor),
+    probability: clamp01(probability * factor * tradeFactor),
     applyMode,
     headline: toType
       ? `${relState.relationshipType.replace(/_/g, " ")} may become ${toType.replace(/_/g, " ")}`
@@ -2080,6 +2118,141 @@ function criminalNetworkRules(ctx) {
   return candidates;
 }
 
+// ── Phase B4 §6 — trade dependency → coercion + war-prevention / embargo ──────
+// A critical-supplier dependency is LEVERAGE. The supplier can COERCE the
+// dependent (a coercion candidate), and the dependent AVOIDS war with its
+// critical supplier (extra hostility dampening is already applied via the
+// CRITICAL_EXTRA_DAMPEN factor in tradeSalience). When military/religious tension
+// spikes on the edge, a valuable tie can COLLAPSE into an embargo. A peaceful
+// deity raises trade-diplomacy salience (a softer coercion, more likely to hold
+// as leverage); a warlike deity makes the tie feel like a weapon (a sharper
+// embargo-collapse). All gated on tradeSalienceInfo being present (war layer on +
+// a valuable tie) ⇒ byte-identical legacy when absent.
+//
+// The cross-cutting candidate is emitted on the SORTED edge (a property of the
+// pair), mirroring sharedEnemyAllianceCandidate. Returns null when no salience
+// info is threaded or the tie is not critical / no tension spike.
+
+// A settlement's embedded deity temper sign: warlike +1, peacelike −1, else 0.
+// Reads the resolved primaryDeitySnapshot (store-decoupled), tolerant of the two
+// field spellings the snapshot uses across phases.
+function deityTemperSign(/** @type {any} */ settlement) {
+  const deity = settlement?.config?.primaryDeitySnapshot;
+  const axis = String(deity?.temperamentAxis || deity?.temperAxis || deity?.temper || '');
+  if (/warlike|war/i.test(axis)) return 1;
+  if (/peace/i.test(axis)) return -1;
+  return 0;
+}
+
+function tradeLeverageCandidate(ctx) {
+  const info = ctx.tradeSalienceInfo;
+  if (!info || !Number.isFinite(info.salience) || info.salience <= 0) return null;
+  const settlements = getRelationshipSettlements(ctx.edge);
+  if (!settlements.from || !settlements.to) return null;
+  const relType = ctx.relState.relationshipType;
+  // Battlefield enemies don't carry a normal trade tie — any commerce there is
+  // covert/forced (the overlay handles it); no peacetime coercion/embargo rule.
+  if (isBattlefieldPrimary(relType)) return null;
+
+  const dependentId = String(info.dependentId || settlements.from);
+  const supplierId = String(info.supplierId || settlements.to);
+  if (dependentId === supplierId) return null;
+  const dependentItem = itemFor(ctx.snapshot, dependentId);
+  const supplierItem = itemFor(ctx.snapshot, supplierId);
+  // Military/religious tension on the edge — the trigger for an embargo collapse.
+  const dependentPressure = dependentId === String(settlements.from) ? ctx.sourcePressure : ctx.targetPressure;
+  const supplierPressure = supplierId === String(settlements.from) ? ctx.sourcePressure : ctx.targetPressure;
+  const militaryTension = Math.max(
+    dependentPressure.conflict, supplierPressure.conflict,
+    dependentPressure.hostility, supplierPressure.hostility,
+    ctx.relState.resentment, ctx.relState.fear,
+  );
+  // A warlike supplier deity sharpens the embargo; a peaceful one softens it.
+  const supplierTemper = deityTemperSign(supplierItem?.settlement);
+  const dependentTemper = deityTemperSign(dependentItem?.settlement);
+  // Tension that collapses the tie: high resentment/conflict + a non-pacific
+  // deity tilt. A peaceful deity raises the bar (the tie is diplomacy, not a
+  // weapon); a warlike one lowers it.
+  const tensionDrive = clamp01(militaryTension + supplierTemper * 0.12 + dependentTemper * 0.06);
+
+  // EMBARGO COLLAPSE: a valuable tie + a real tension spike ⇒ the supplier (or
+  // the dependent, when adversarial) weaponizes the dependency. Stamps a coercive
+  // economic condition on the dependent + an embargo trajectory.
+  if (info.critical && tensionDrive > 0.5) {
+    const sev = clamp01(0.32 + info.salience * 0.3 + tensionDrive * 0.24);
+    return candidateBase({
+      ...ctx,
+      candidateType: "trade_embargo_collapse",
+      ruleId: "trade_dependency_embargo",
+      type: "condition",
+      targetSaveId: dependentId,
+      severity: sev,
+      probability: clamp01(0.05 + tensionDrive * 0.18 + info.salience * 0.08),
+      reasons: [
+        "A valuable, hard-to-replace trade dependency has become a weapon: rising military or religious tension collapses it into an embargo.",
+        `Trade salience ${info.salience.toFixed(2)} with tension ${tensionDrive.toFixed(2)}.`,
+      ],
+      relationshipPatch: {
+        tradeBalance: clamp01(ctx.relState.tradeBalance - 0.08),
+        resentment: clamp01(ctx.relState.resentment + 0.05),
+        leverage: clamp01(ctx.relState.leverage + 0.05),
+        dependency: clamp01(ctx.relState.dependency - 0.04),
+        trajectory: "embargo_collapse",
+      },
+      condition: {
+        archetype: "trade_embargo",
+        label: "Trade embargo",
+        description: "A critical supplier has cut off the flow — the dependent economy reels.",
+        severity: sev,
+        source: "world_pulse_relationship",
+        relatedSettlementId: supplierId,
+        affectedSystems: ["trade_connectivity", "food_security", "public_legitimacy"],
+      },
+      metadata: {
+        incidentType: "trade_embargo",
+        secondaryStatus: "embargo",
+        tradeSalience: info.salience,
+        tensionDrive,
+        supplierSaveId: supplierId,
+        dependentSaveId: dependentId,
+      },
+    });
+  }
+
+  // COERCION: a critical-supplier dependency without an open spike lets the
+  // supplier press its advantage — a non-violent leverage candidate (concessions,
+  // preferential terms). De-escalation-shaped (it is an ALTERNATIVE to war), so
+  // the salience factor RAISES it. The dependent's own avoidance of war with its
+  // supplier is already in the dampener; this is the supplier's active push.
+  if (info.critical && militaryTension < 0.5) {
+    const sev = clamp01(0.26 + info.salience * 0.28);
+    return internalDrift(ctx, "trade_dependency_coercion", {
+      ruleId: "trade_dependency_coercion",
+      targetSaveId: supplierId,
+      severity: sev,
+      probability: clamp01(0.06 + info.salience * 0.14),
+      reasons: [
+        "A critical-supplier dependency is leverage: the supplier extracts concessions or preferential terms rather than risk war over the relationship.",
+        `Trade salience ${info.salience.toFixed(2)} (critical supplier).`,
+      ],
+      relationshipPatch: {
+        leverage: clamp01(ctx.relState.leverage + 0.05),
+        dependency: clamp01(ctx.relState.dependency + 0.03),
+        tradeBalance: clamp01(ctx.relState.tradeBalance + 0.02),
+        trajectory: "supplier_leverage",
+      },
+      metadata: {
+        incidentType: "trade_coercion",
+        secondaryStatus: "critical_supplier",
+        tradeSalience: info.salience,
+        supplierSaveId: supplierId,
+        dependentSaveId: dependentId,
+      },
+    });
+  }
+  return null;
+}
+
 const RULE_EVALUATORS = {
   neutral: neutralRules,
   trade_partner: tradePartnerRules,
@@ -2134,9 +2307,18 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any}
       // Feature C: per-settlement aggressiveness multipliers (centered on 1.0).
       // Empty/absent ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy.
       dispositionFactor: context.dispositionFactor || EMPTY_DISPOSITION,
+      // Phase B4: per-EDGE trade-salience multipliers (centered on 1.0). A valuable
+      // trade tie DAMPENS hostile/escalation candidates on that edge. Empty/absent
+      // ⇒ 1.0 in every branch ⇒ byte-identical legacy (off-path map is empty).
+      tradeSalienceFactor: context.tradeSalienceFactor || EMPTY_TRADE_SALIENCE,
+      // Phase B4: per-EDGE salience rollup ({ salience, critical, dependentId,
+      // supplierId }) for the coercion/embargo cross-cutting rules. Absent/empty ⇒
+      // the §6 leverage rules emit nothing ⇒ byte-identical legacy.
+      tradeSalienceInfo: /** @type {any} */ (context.tradeSalienceInfo || EMPTY_TRADE_SALIENCE)[key] || null,
     };
     return [
       ...evaluator(ctx),
+      tradeLeverageCandidate(ctx),
       sharedEnemyAllianceCandidate(ctx),
     ].filter(Boolean);
   });

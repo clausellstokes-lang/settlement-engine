@@ -1608,6 +1608,9 @@ export const createSettlementSlice = (set, get) => ({
       alignmentAxis: raw.alignmentAxis,
       temperamentAxis: raw.temperamentAxis,
       rankAxis: raw.rankAxis,
+      // lawAxis (B5) — a legacy 3-axis deity has none; mutate.js defaults it to
+      // 'neutral' in the embed, so the snapshot stays self-contained either way.
+      lawAxis: raw.lawAxis,
       ...(raw.domain ? { domain: raw.domain } : {}),
     };
     return state.applyEvent({

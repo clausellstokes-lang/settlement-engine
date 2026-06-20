@@ -18,9 +18,11 @@ describe('F5 — war-layer condition archetypes', () => {
     for (const a of ['war_drain', 'army_deployed', 'occupation_lifted', 'relief_burden']) {
       expect(catalog.has(a), `${a} missing`).toBe(true);
     }
-    // Z2a extended the aggressor-home group with the non-reverting war_exhaustion scar.
-    expect(WAR_HOME_CONDITIONS).toEqual(['war_drain', 'army_deployed', 'war_exhaustion']);
+    // Z2a extended the aggressor-home group with the non-reverting war_exhaustion scar;
+    // B2 added the reverting reinforcement_cost (the bleed of feeding a deployed army).
+    expect(WAR_HOME_CONDITIONS).toEqual(['war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost']);
     expect(catalog.has('war_exhaustion')).toBe(true);
+    expect(catalog.has('reinforcement_cost')).toBe(true);
   });
 
   test('war_drain DRAINS economic_capacity (the homeostasis SOURCE deriveEconomicCapacity was missing)', () => {

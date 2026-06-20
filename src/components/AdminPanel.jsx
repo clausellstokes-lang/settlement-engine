@@ -9,13 +9,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, RefreshCw, Crown, Flag, BarChart3, TrendingUp, Ticket,
+  Check, X, RefreshCw, Crown, Flag, BarChart3, TrendingUp, Ticket, Swords,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
+import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
 import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import Button from './primitives/Button.jsx';
@@ -354,6 +355,12 @@ export default function AdminPanel({ onBack }) {
 
       <Section title="Analytics" icon={BarChart3}>
         <AdminAnalyticsPanel />
+      </Section>
+
+      {/* F1 — simulation tuning: war/occupation/trade/faith balance + the
+          player-safe visibility audit, read from the live campaigns' worldState. */}
+      <Section title="Sim Tuning" icon={Swords}>
+        <AdminSimTuningPanel />
       </Section>
 
       {/* A5: support-ticket queue — claim / assign / transition / reply /

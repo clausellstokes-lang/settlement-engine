@@ -21,13 +21,14 @@ import Button from '../primitives/Button.jsx';
 // projections down. Self-gates to nothing for a peaceful, deity-free, non-campaign
 // town — byte-identical off-state.
 function FaithWarBlock({ settlement, saveId }) {
-  const { worldState, regionalGraph, nameFor } = useSettlementLiveWorld(saveId);
+  const { worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   return (
     <WarFaithSection
       settlement={settlement}
       settlementId={saveId || settlement?.id || settlement?.config?.id}
       worldState={worldState}
       regionalGraph={regionalGraph}
+      settlements={settlements}
       nameFor={nameFor}
     />
   );

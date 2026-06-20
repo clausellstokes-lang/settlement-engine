@@ -96,6 +96,21 @@ describe('prepareImport — re-namespace + re-validate', () => {
     expect(rejected[0].errors).toEqual(validateDeity({ name: 'Bad', alignmentAxis: 'lawful-good', temperamentAxis: 'warlike', rankAxis: 'major' }).errors);
   });
 
+  // ── B5: the 4th axis (lawAxis) in validateDeity ────────────────────────────
+  test('validateDeity requires the first three axes; lawAxis is back-compat tolerant', () => {
+    const threeAxis = { name: 'Old', alignmentAxis: 'good', temperamentAxis: 'neutral', rankAxis: 'minor' };
+    // A legacy 3-axis deity (no lawAxis) STILL validates (tolerated as neutral).
+    expect(validateDeity(threeAxis).ok).toBe(true);
+    // A valid 4th axis is accepted.
+    expect(validateDeity({ ...threeAxis, lawAxis: 'lawful' }).ok).toBe(true);
+    expect(validateDeity({ ...threeAxis, lawAxis: 'chaotic' }).ok).toBe(true);
+    expect(validateDeity({ ...threeAxis, lawAxis: 'neutral' }).ok).toBe(true);
+    // A PRESENT-but-invalid lawAxis is rejected (a typo can't slip through).
+    const bad = validateDeity({ ...threeAxis, lawAxis: 'orderly' });
+    expect(bad.ok).toBe(false);
+    expect(bad.errors.some(e => /lawAxis/.test(e))).toBe(true);
+  });
+
   test('re-importing the SAME pack twice never produces colliding uids', () => {
     const pack = buildContentPack({ deities: [{ name: 'Mara', alignmentAxis: 'good', temperamentAxis: 'peacelike', rankAxis: 'minor', localUid: 'lu_m' }] });
     const first = prepareImport(pack).items[0].item.localUid;

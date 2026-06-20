@@ -349,6 +349,39 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.4,
   },
+  // ── Phase B1 — WAR-ECONOMY MOBILIZATION. A settlement on a war footing (the
+  // war_preparation → mobilized → deployed posture ramp, mobilization.js) shifts
+  // economic priorities toward the war effort BEFORE a shot is fired. Lists ONLY
+  // economic_capacity (the homeostasis dial) — the cost of standing up a war
+  // economy — and is LIGHTER than war_drain (preparing for war is cheaper than
+  // sustaining a campaign abroad). It is the VISIBLE "this settlement is gearing for
+  // war" marker the DM read-model + the neighbour-reaction layer key on. Reversible
+  // (it eases as the posture cools back to peace), so it does not become a scar.
+  war_mobilization: {
+    label: 'War mobilization',
+    description: 'The settlement is shifting onto a war footing — its economy is reorganizing for the coming campaign.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.35,
+  },
+  // ── Phase B2 — REINFORCEMENT COST. Replenishing a deployed army DRAINS the
+  // origin: levies, coin, supply trains, and grain flow OUT to the front, and the
+  // home pays for it. Heavier than war_drain (sustaining a static siege is cheaper
+  // than continuously feeding fresh manpower and materiel into one), and the longer
+  // the army has been away (deploymentAge) the deeper the bleed. Lists the systems a
+  // sustained reinforcement effort actually saps — economic_capacity (coin/supply),
+  // public_legitimacy (the home tires of the levy), and defense_readiness (the home
+  // garrison is repeatedly stripped to top up the field army). Reverts as the
+  // reinforcement effort winds down — it is a cost-of-war condition, NOT a scar.
+  reinforcement_cost: {
+    label: 'Reinforcement burden',
+    description: 'The home keeps bleeding men, coin, and grain to the front to keep the army in the field.',
+    affectedSystems: ['economic_capacity', 'public_legitimacy', 'defense_readiness'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.4,
+  },
   // The recovery counterpart of occupation (polarity clone of siege_lifted): an
   // occupied settlement has been liberated and is rebuilding its authority.
   occupation_lifted: {
@@ -390,6 +423,49 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultExpiresAtTicks: 7,
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
+  },
+  // ── Phase B3 — OCCUPATION layer (the stateful occupier-benefit/burden/resistance
+  // loop). occupation_resistance is the OCCUPIED-side condition: sabotage, noncompliance,
+  // and an organizing resistance that GROWS when the occupied is intact/loyalist/populous
+  // and SHRINKS when devastated/compliant. It strains the occupier's hold (defense), the
+  // public order, and the war economy — the thing that makes a contested occupation a
+  // NET LOSS for the occupier.
+  occupation_resistance: {
+    label: 'Occupation resistance',
+    description: 'Sabotage, noncompliance, and an organizing resistance harry the occupiers.',
+    affectedSystems: ['public_legitimacy', 'defense_readiness', 'economic_capacity', 'social_trust'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.45,
+  },
+  // occupation_burden is the OCCUPIER-side cost: garrisons, administrators, and suppression
+  // tie down strength across every occupation, and OVEREXTENSION (each additional
+  // occupation) deepens it. Bites the war economy AND the home garrison (force committed
+  // to holding conquests cannot fight elsewhere). Reversible — it eases as occupations
+  // stabilize or are released; it is a cost-of-empire condition, not a scar.
+  occupation_burden: {
+    label: 'Occupation burden',
+    description: 'Garrisoning and administering conquered settlements ties down the occupier\'s strength.',
+    affectedSystems: ['economic_capacity', 'defense_readiness', 'public_legitimacy'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.4,
+  },
+  // war_spoils is the OCCUPIER-side BENEFIT — the INVERSE of war_exhaustion. The CAPPED
+  // benefit a STABILIZED occupation yields (tribute, levies, materiel) sustains the
+  // occupier's war effort. deriveEconomicCapacity treats it as a POSITIVE (relieving)
+  // economic-capacity term (the sole one), and the occupation layer HARD-CAPS its severity
+  // (the anti-snowball containment), so the relief is bounded no matter how many
+  // settlements the occupier holds. Easing by default (a transient, re-upserted gain), and
+  // it does NOT list economic_capacity in affectedSystems — the deriver handles it by
+  // archetype so the generic drain scan never mistakes it for a cost.
+  war_spoils: {
+    label: 'War spoils',
+    description: 'Tribute, levies, and materiel from stabilized occupations sustain the war effort.',
+    affectedSystems: [],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.3,
   },
 });
 

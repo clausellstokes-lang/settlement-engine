@@ -121,3 +121,38 @@ describe('WarFaithMapOverlay — siege visibility is law', () => {
     expect(container.querySelector('.sf-siege-ring')).toBeTruthy();
   });
 });
+
+describe('WarFaithMapOverlay — mobilization glyph visibility is law (F1)', () => {
+  test('an OVERT mobilizer draws a mobilization glyph in any view', () => {
+    STORE = buildStore({
+      showGm: false,
+      worldState: { warPosture: { a: { state: 'mobilized', progress: 1, sinceTick: 0, covert: false } } },
+      regionalGraph: { channels: [] },
+    });
+    const { container } = render(<svg><WarFaithMapOverlay /></svg>);
+    expect(container.querySelector('.sf-mobilization')).toBeTruthy();
+    expect(container.querySelector('.sf-mobilization-covert')).toBeNull();
+  });
+
+  test('a COVERT mobilizer is NOT drawn for a non-DM view', () => {
+    STORE = buildStore({
+      showGm: false,
+      worldState: { warPosture: { a: { state: 'war_preparation', progress: 0.5, sinceTick: 0, covert: true } } },
+      regionalGraph: { channels: [] },
+    });
+    const { container } = render(<svg><WarFaithMapOverlay /></svg>);
+    // No mobilization glyph at all (the only mobilizer is covert).
+    expect(container.querySelector('.sf-mobilization')).toBeNull();
+    expect(container.querySelector('[data-testid="war-faith-overlay"]')).toBeNull();
+  });
+
+  test('the SAME covert mobilizer IS drawn for the DM view, flagged covert', () => {
+    STORE = buildStore({
+      showGm: true,
+      worldState: { warPosture: { a: { state: 'war_preparation', progress: 0.5, sinceTick: 0, covert: true } } },
+      regionalGraph: { channels: [] },
+    });
+    const { container } = render(<svg><WarFaithMapOverlay /></svg>);
+    expect(container.querySelector('.sf-mobilization-covert')).toBeTruthy();
+  });
+});

@@ -38,6 +38,9 @@ const peacefulSettlement = {
   config: { magicLevel: 'high' },
   institutions: [
     { name: 'Temple of Healing' }, { name: 'House of Mercy' }, { name: 'Infirmary' },
+    // A peaceful, well-ordered town keeps the peace through courts + a watch —
+    // without these law_order would (correctly) read 'strained' (Phase B0).
+    { name: 'Magistrate Court' }, { name: 'Town Watch' },
     ...Array.from({ length: 14 }, (_, i) => ({ name: `Guildhall ${i}` })),
   ],
   powerStructure: {
@@ -67,13 +70,13 @@ describe('CausalViewTabs — altitude-driven causal readout', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  test('Engine (expert) renders the FULL 15-variable grid', () => {
+  test('Engine (expert) renders the FULL 16-variable grid', () => {
     const { container, getByTestId } = render(
       <CausalViewTabs settlement={pressuredSettlement} forceLevel="expert" />,
     );
     expect(getByTestId('causal-view-tabs')).toBeTruthy();
     const rows = container.querySelectorAll('[data-variable]');
-    expect(rows).toHaveLength(SYSTEM_VARIABLES.length); // all 15
+    expect(rows).toHaveLength(SYSTEM_VARIABLES.length); // all 16
   });
 
   test('Engine altitude shows the Pressures section and the strength readout', () => {
@@ -130,7 +133,7 @@ describe('CausalViewTabs — altitude-driven causal readout', () => {
     expect(container.textContent).toMatch(/within the adequate band/i);
   });
 
-  test('a peaceful settlement at Engine still shows all 15 + pressures + strength', () => {
+  test('a peaceful settlement at Engine still shows all 16 + pressures + strength', () => {
     const { container, getByTestId } = render(
       <CausalViewTabs settlement={peacefulSettlement} forceLevel="expert" />,
     );

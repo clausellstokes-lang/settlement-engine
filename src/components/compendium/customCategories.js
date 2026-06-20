@@ -80,7 +80,7 @@ export const CUSTOM_CATEGORIES = [
   // dependencies — a deity stands alone; it acts through the assignment, not
   // through generation wiring.
   { key:'deities',      label:'Deities',      Icon:Sun,      color:'#7a5a1a',
-    fields:['name','alignmentAxis','temperamentAxis','rankAxis','domain','description'],
+    fields:['name','alignmentAxis','temperamentAxis','rankAxis','lawAxis','domain','description'],
   },
   // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
   // above), not hand-authored — this tab renders its own discover/verify

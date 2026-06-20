@@ -35,13 +35,17 @@ import {
   dispositionStandings,
   liveTradeWars,
 } from '../../domain/display/warStatus.js';
+import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
+import { deployedArmyStatus } from '../../domain/display/armyStrength.js';
+import { settlementOccupation, occupierHoldings } from '../../domain/display/occupationStatus.js';
+import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { useAltitude } from '../../hooks/useAltitude.js';
 import Button from '../primitives/Button.jsx';
 import {
-  MUTED, BODY, BORDER, RED, RED_BG, GOLD, sans, FS, swatch,
+  MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, sans, FS, swatch,
 } from '../theme.js';
 
 const INK_BROWN = swatch['#3A2A10'];
@@ -84,6 +88,7 @@ function Line({ children, strong }) {
  *   settlementId?: string|null,
  *   worldState?: any,
  *   regionalGraph?: any,
+ *   settlements?: Array<{ id?: any, settlement?: any }>,
  *   nameFor?: (id: any) => string,
  *   forceLevel?: 'guided'|'standard'|'expert',
  * }} props
@@ -93,6 +98,7 @@ export default function WarFaithSection({
   settlementId,
   worldState,
   regionalGraph,
+  settlements = [],
   nameFor = (id) => String(id),
   forceLevel,
 }) {
@@ -115,6 +121,19 @@ export default function WarFaithSection({
         )
       : [];
 
+    // ── B-track surfaces (heuristic, player-safe). Covert state is EXCLUDED
+    // (includeCovert defaults false) — the dossier can be shared/exported, so it
+    // honours the channel-visibility convention exactly like the gallery sanitizer.
+    const mobilization = id ? settlementMobilization({ settlementId: id, worldState }) : null; // covert excluded
+    const army = id ? deployedArmyStatus({ settlementId: id, worldState, nameFor }) : null;
+    const occupied = id ? settlementOccupation({ settlementId: id, worldState, nameFor }) : null;
+    const holdings = id ? occupierHoldings({ settlementId: id, worldState, nameFor }) : null;
+    const tradeTies = id
+      ? settlementTradePressure({
+          settlementId: id, regionalGraph, settlements, worldState, includeCovert: false, nameFor,
+        }).filter(t => t.role !== 'partner' || t.phrase) // valuable/critical ties only
+      : [];
+
     // Aggressiveness is settlement-local — meaningful even without a campaign.
     const item = { id: id || settlement?.id, settlement };
     const aggressiveness = computeAggressiveness(item, worldState || {});
@@ -123,16 +142,25 @@ export default function WarFaithSection({
     const deity = settlement?.config?.primaryDeitySnapshot || null;
     const faithEffects = describeDeityEffects(deity);
 
-    return { status, exhaustionRaw, exhaustionBand, standing, prizes, aggressiveness, posture, deity, faithEffects };
-  }, [settlement, settlementId, worldState, regionalGraph]);
+    return {
+      status, exhaustionRaw, exhaustionBand, standing, prizes,
+      mobilization, army, occupied, holdings, tradeTies,
+      aggressiveness, posture, deity, faithEffects,
+    };
+  }, [settlement, settlementId, worldState, regionalGraph, settlements, nameFor]);
 
-  const { status, exhaustionRaw, exhaustionBand, standing, prizes, aggressiveness, posture, deity, faithEffects } = model;
+  const {
+    status, exhaustionRaw, exhaustionBand, standing, prizes,
+    mobilization, army, occupied, holdings, tradeTies,
+    aggressiveness, posture, deity, faithEffects,
+  } = model;
 
   // ── Self-gating ─────────────────────────────────────────────────────────────
   // Nothing live AND no deity ⇒ render nothing (byte-identical off-state). A
   // settlement-local "even-handed" aggressiveness is NOT, by itself, a reason to
   // render — only LIVE geopolitical state or an assigned deity opens the block.
-  const hasLive = !!status || exhaustionRaw > 0 || !!standing || prizes.length > 0;
+  const hasLive = !!status || exhaustionRaw > 0 || !!standing || prizes.length > 0
+    || !!mobilization || !!army || !!occupied || !!holdings || tradeTies.length > 0;
   if (!hasLive && !deity) return null;
 
   return (
@@ -191,6 +219,53 @@ export default function WarFaithSection({
         </div>
       )}
 
+      {/* ── Mobilization posture (B1) — heuristic, covert excluded ───────── */}
+      {mobilization && (
+        <div data-testid="mobilization-posture" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
+          <strong>Mobilization:</strong> {mobilization.phrase}
+          {detail && mobilization.ticksToDeploy > 0 && (
+            <span style={{ color: MUTED }}> — roughly {mobilization.ticksToDeploy} {mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.</span>
+          )}
+        </div>
+      )}
+
+      {/* ── Deployed army strength + attrition (B0/B2) — heuristic ────────── */}
+      {army && (
+        <div data-testid="army-strength" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
+          <strong>Army in the field:</strong> marching on {army.targetName} — {army.remainingPhrase}
+          {detail && <span style={{ color: MUTED }}>; {army.conditionPhrase}.</span>}
+        </div>
+      )}
+
+      {/* ── Occupation: this settlement is OCCUPIED (B3) ──────────────────── */}
+      {occupied && (
+        <div data-testid="occupation-occupied" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
+          <strong>Occupied:</strong> held by {occupied.occupierName} — {occupied.statePhrase}
+          {detail && <span style={{ color: MUTED }}>; the population is {occupied.resistancePhrase}.</span>}
+        </div>
+      )}
+
+      {/* ── Occupier: this settlement HOLDS occupations (B3) — burden/benefit  */}
+      {holdings && (
+        <div data-testid="occupation-holder" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
+          <strong>Occupier:</strong> holds {holdings.holds.map(h => h.name).join(', ')}
+          {holdings.stretchedThin && <span style={{ color: RED }}> — stretched thin holding them</span>}
+          {!holdings.stretchedThin && holdings.strengthened && <span style={{ color: GREEN }}> — they now pay for themselves</span>}.
+        </div>
+      )}
+
+      {/* ── Strategic trade pressure / dependency / coercion (B4) ─────────── */}
+      {detail && tradeTies.map((tie, i) => (
+        <div key={`trade-tie-${i}`} data-testid="trade-pressure" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
+          <strong>Trade pressure:</strong>{' '}
+          {tie.role === 'dependent'
+            ? `dependent on ${tie.partnerName} — ${tie.phrase}; losing it would bite hard`
+            : tie.role === 'supplier'
+              ? `holds leverage over ${tie.partnerName} — ${tie.phrase} it relies on`
+              : `${tie.phrase} with ${tie.partnerName} — war between them would be costly`}.
+        </div>
+      ))}
+
       {/* ── Disposition standing ─────────────────────────────────────────── */}
       {standing && (
         <div data-testid="disposition-standing" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
@@ -219,6 +294,8 @@ export default function WarFaithSection({
         <>
           <Line strong="Primary faith:">
             {deity.name}{deity.rankAxis ? ` (${deity.rankAxis})` : ''}
+            {/* B5 — surface the 4th (law) axis tag; legacy 3-axis / law-neutral says nothing. */}
+            {deity.lawAxis && deity.lawAxis !== 'neutral' ? ` · ${deity.lawAxis}` : ''}
             {deity.domain ? ` · ${deity.domain}` : ''}.
           </Line>
           {detail && faithEffects.length > 0 && (

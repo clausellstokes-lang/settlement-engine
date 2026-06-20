@@ -2,9 +2,10 @@
  * domain/display/deityEffects.js — the SINGLE SOURCE describing "what each deity
  * axis does" to the living-world substrate (UX overhaul Phase 0).
  *
- * The three deity authoring axes (good/evil · warlike/peacelike · major/minor/cult)
- * couple into four engine systems, today scattered across:
+ * The four deity authoring axes (good/evil · warlike/peacelike · major/minor/cult
+ * · lawful/chaotic) couple into five engine systems, today scattered across:
  *   - corruption.js     DEITY_CORRUPTION_TUNING  — good/evil → corruption direction+magnitude
+ *   - corruption.js     DEITY_LAW_TUNING         — lawful/chaotic → law_order + corruption-tolerance (B5)
  *   - disposition.js    DEITY_TEMPER_SIGN, AGGRESSION_TUNING.W_DEITY — warlike/peacelike → aggression
  *   - causalState.js    DEITY_RANK_AUTHORITY     — major/minor/cult → religious_authority lift
  *   - magicProfile.js   DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory — major (+ warlike/evil) → magic legality
@@ -22,11 +23,13 @@
  *
  * The deity snapshot shape (the embedded `config.primaryDeitySnapshot`) carries
  * `alignmentAxis` (good|evil|neutral), `temperamentAxis` (warlike|peacelike|
- * neutral), and `rankAxis` (major|minor|cult). We read the `*Axis` fields — NEVER
- * a legacy `tier`/`alignment` — matching the engine couplings.
+ * neutral), `rankAxis` (major|minor|cult), and (B5) `lawAxis` (lawful|chaotic|
+ * neutral). We read the `*Axis` fields — NEVER a legacy `tier`/`alignment` —
+ * matching the engine couplings. A legacy 3-axis deity has no `lawAxis` ⇒ no law
+ * effect (back-compat).
  */
 
-import { DEITY_CORRUPTION_TUNING } from '../corruption.js';
+import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../corruption.js';
 import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../worldPulse/disposition.js';
 import { DEITY_RANK_AUTHORITY } from '../causalState.js';
 import { DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory } from '../magicProfile.js';
@@ -35,6 +38,7 @@ import { DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory } from '../magicProfile.j
 // source the UI imports, while the values remain owned by the engine.
 export {
   DEITY_CORRUPTION_TUNING,
+  DEITY_LAW_TUNING,
   DEITY_TEMPER_SIGN,
   AGGRESSION_TUNING,
   DEITY_RANK_AUTHORITY,
@@ -96,6 +100,24 @@ export const DEITY_AXIS_EFFECTS = Object.freeze({
       effect: 'Cult — a fringe following with little authority',
     }),
   }),
+  // B5 — the 4th axis. Couples to law_order (a DISTINCT lever from the good/evil
+  // corruption knobs): a lawful god lifts order; a chaotic god lowers it AND
+  // makes corruption more tolerated. The signed lift is READ from the engine's
+  // DEITY_LAW_TUNING (never re-typed), so the preview can never disagree.
+  law: Object.freeze({
+    lawful: Object.freeze({
+      system: 'law_order',
+      direction: DEITY_LAW_TUNING.axisSign.lawful,
+      lawOrderLift: DEITY_LAW_TUNING.axisSign.lawful * DEITY_LAW_TUNING.lawOrderSwing,
+      effect: 'Lawful — strengthens law & order',
+    }),
+    chaotic: Object.freeze({
+      system: 'law_order',
+      direction: DEITY_LAW_TUNING.axisSign.chaotic,
+      lawOrderLift: DEITY_LAW_TUNING.axisSign.chaotic * DEITY_LAW_TUNING.lawOrderSwing,
+      effect: 'Chaotic — erodes order, tolerates corruption',
+    }),
+  }),
 });
 
 /** The signed alignment direction of a deity snapshot: evil −1, good +1, else 0.
@@ -109,6 +131,13 @@ function alignmentDir(deity) {
  * @param {any} deity @returns {number} */
 function temperamentDir(deity) {
   const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[deity?.temperamentAxis];
+  return Number.isFinite(sign) ? sign : 0;
+}
+
+/** The signed law direction of a deity snapshot: lawful +1, chaotic −1, else 0
+ * (a legacy 3-axis deity with no lawAxis ⇒ 0). @param {any} deity @returns {number} */
+function lawDir(deity) {
+  const sign = /** @type {Record<string, number>} */ (DEITY_LAW_TUNING.axisSign)[deity?.lawAxis];
   return Number.isFinite(sign) ? sign : 0;
 }
 
@@ -153,6 +182,13 @@ export function describeDeityEffects(deitySnapshot) {
       ? 'Tightens magic legality — magic is openly opposed'
       : 'Tightens magic legality');
   }
+
+  // 5. Law/chaos → law_order (B5). Appended last so the alignment/temperament/
+  //    rank/magic order stays stable. A legacy 3-axis deity (no lawAxis ⇒ 0) and
+  //    a law-neutral deity say nothing here — the dormancy/back-compat guarantee.
+  const lDir = lawDir(deitySnapshot);
+  if (lDir > 0) out.push(DEITY_AXIS_EFFECTS.law.lawful.effect);
+  else if (lDir < 0) out.push(DEITY_AXIS_EFFECTS.law.chaotic.effect);
 
   return out;
 }

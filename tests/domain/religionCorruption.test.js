@@ -6,6 +6,7 @@ import { computeAggressiveness, AGGRESSION_TUNING } from '../../src/domain/world
 import {
   hasCorruptingDeity, hasRepressingDeity, npcAlignmentScore, npcDeityDisfavor,
   deityAlignmentDirection, DEITY_CORRUPTION_TUNING,
+  deityLawDirection, deityCorruptionTolerance, DEITY_LAW_TUNING,
 } from '../../src/domain/corruption.js';
 import { TRAIT_ALIGNMENT } from '../../src/data/npcData.js';
 import { createPRNG } from '../../src/generators/prng.js';
@@ -422,6 +423,52 @@ describe('dormancy byte-identity — no deity / religionActive false is unchange
       return Object.values(ws.npcStates).map((s) => `${s.name}:${s.corruption}:${s.dotRank}`);
     };
     expect(run(withDeity)).toEqual(run(withoutDeity));
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// B5 — the lawful/chaotic axis is a DISTINCT corruption lever (NO double-count
+// with the good/evil knobs). Good/evil drives onset/exposure RATE (npcDeityDisfavor);
+// the law axis shifts corruption-TOLERANCE / the order check (deityCorruptionTolerance)
+// and feeds law_order — never re-touching the onset/exposure magnitude.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('B5 — lawful/chaotic is a SEPARATE corruption lever (no double-count with good/evil)', () => {
+  const LAWFUL = { ...GOOD, lawAxis: 'lawful' };   // good + lawful
+  const CHAOTIC = { ...GOOD, lawAxis: 'chaotic' };  // good + chaotic
+  const GOOD_NO_LAW = { ...GOOD };                  // good, no lawAxis (legacy)
+
+  it('deityLawDirection: lawful +1, chaotic −1, neutral/absent 0', () => {
+    expect(deityLawDirection({ lawAxis: 'lawful' })).toBe(1);
+    expect(deityLawDirection({ lawAxis: 'chaotic' })).toBe(-1);
+    expect(deityLawDirection({ lawAxis: 'neutral' })).toBe(0);
+    expect(deityLawDirection(GOOD_NO_LAW)).toBe(0); // legacy 3-axis ⇒ no law term
+    expect(deityLawDirection(null)).toBe(0);
+  });
+
+  it('the law axis does NOT move the good/evil onset/exposure knobs (no double-count)', () => {
+    // The SAME NPC under a good deity reads identical onset/exposure whether the
+    // deity is lawful, chaotic, or law-neutral — the law axis touches a DIFFERENT
+    // lever, so it cannot inflate the good/evil corruption magnitude.
+    const npc = { personality: { flaw: 'ruthless' } }; // evil-leaning, corruptible
+    const baseline = npcDeityDisfavor(GOOD_NO_LAW, npc);
+    expect(npcDeityDisfavor(LAWFUL, npc)).toEqual(baseline);
+    expect(npcDeityDisfavor(CHAOTIC, npc)).toEqual(baseline);
+  });
+
+  it('the corruption-tolerance lever moves with the law axis (chaotic + / lawful −), zero for good/evil-only', () => {
+    expect(deityCorruptionTolerance(CHAOTIC)).toBeCloseTo(DEITY_LAW_TUNING.tolerance, 10);
+    expect(deityCorruptionTolerance(LAWFUL)).toBeCloseTo(-DEITY_LAW_TUNING.tolerance, 10);
+    // A good/evil-only deity (no law axis) moves the tolerance lever NOT AT ALL —
+    // proving the two couplings are orthogonal.
+    expect(deityCorruptionTolerance(GOOD_NO_LAW)).toBe(0);
+    expect(deityCorruptionTolerance(EVIL)).toBe(0);
+  });
+
+  it('the two levers are orthogonal: alignment direction is unchanged by the law axis', () => {
+    // The good/evil alignment direction (the corruption-rate lever) is read off
+    // alignmentAxis alone, so adding a law axis cannot perturb it.
+    expect(deityAlignmentDirection(LAWFUL)).toBe(deityAlignmentDirection(GOOD_NO_LAW));
+    expect(deityAlignmentDirection(CHAOTIC)).toBe(deityAlignmentDirection(GOOD_NO_LAW));
   });
 });
 

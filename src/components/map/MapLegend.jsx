@@ -141,6 +141,12 @@ export default function MapLegend() {
               </svg>
               <Label>Trade-war prize</Label>
             </Row>
+            <Row>
+              <svg width="22" height="16" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <path d="M5,11 A5,5 0 1 1 13,11" fill="none" stroke="#0369a1" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              <Label>Mobilizing (covert: dashed, DM-only)</Label>
+            </Row>
           </div>
 
           <div style={{ display: 'grid', gap: 4 }}>

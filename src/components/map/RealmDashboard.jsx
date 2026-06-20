@@ -31,6 +31,8 @@ import {
   warExhaustionStandings,
   warExhaustionBand,
 } from '../../domain/display/warStatus.js';
+import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
+import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { hasPantheon } from './PantheonPanel.jsx';
 import { BODY, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, R, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -180,6 +182,9 @@ export default function RealmDashboard({ campaign, canManageCampaigns, tier, onU
   const weariest = weary.slice().sort((a, b) => b.warExhaustion - a.warExhaustion)[0] || null;
   const faith = hasPantheon(campaign) ? dominantFaith(worldState) : null;
   const tension = tensionLabel({ worldState, regionalGraph, settlementCount });
+  // DM-only Realm dashboard (canManageCampaigns gate) ⇒ includeCovert is safe here.
+  const mobilizing = mobilizationStandings({ worldState, includeCovert: true });
+  const occupations = occupationStandings({ worldState });
 
   return (
     <div data-testid="realm-dashboard" style={{ display: 'grid', gap: SP.md }}>
@@ -220,6 +225,22 @@ export default function RealmDashboard({ campaign, canManageCampaigns, tier, onU
           value={weariest ? weariest.id : '—'}
           sub={weariest ? warExhaustionBand(weariest.warExhaustion) : 'None war-weary'}
           tone={weariest && weariest.warExhaustion >= 0.6 ? 'hot' : undefined}
+        />
+        <Stat
+          Icon={Swords}
+          label="Mobilizing"
+          value={mobilizing.length}
+          sub={mobilizing.length
+            ? `${mobilizing.length} gearing for war${mobilizing.some(m => m.covert) ? ' (some covert)' : ''}`
+            : 'None mobilizing'}
+          tone={mobilizing.length ? 'hot' : undefined}
+        />
+        <Stat
+          Icon={Swords}
+          label="Occupations"
+          value={occupations.length}
+          sub={occupations.length ? `${occupations.length} held by conquest` : 'None occupied'}
+          tone={occupations.length ? 'hot' : undefined}
         />
         <Stat
           Icon={Swords}

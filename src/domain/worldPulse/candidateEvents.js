@@ -2,6 +2,7 @@ import { evaluateFactionRules } from './factionCompetition.js';
 import { evaluateNpcRules } from './npcAgency.js';
 import { evaluateRelationshipRules } from './relationshipEvolution.js';
 import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
+import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules } from './simulationRules.js';
@@ -228,6 +229,17 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
     tick,
     simulationRules: rules,
     rng: /** @type {any} */ (context).rng,
+  }));
+  // Phase B1 — NEIGHBOUR REACTIONS to a visibly-mobilizing rival/target/trade-
+  // dependent. GATED behind warLayerEnabled (default false ⇒ [] ⇒ byte-identical).
+  // rng-FREE here (the candidate's own downstream roll is the only stochastic step);
+  // reads the persisted worldState.warPosture written by the war block this tick.
+  // Each reactor shares a `strategy:<reactor>` exclusive tag so a reaction and a
+  // strategy move never double-fire for the same settlement.
+  candidates.push(...evaluateMobilizationReactions(snapshot, pressureIndex, {
+    ...context,
+    tick,
+    simulationRules: rules,
   }));
   if (rules.npcAgencyEnabled) {
     candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));

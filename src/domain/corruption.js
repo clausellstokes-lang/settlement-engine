@@ -135,6 +135,52 @@ export function deityAlignmentDirection(deity) {
   return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
 }
 
+// ── Feature D (B5): lawful/chaotic deity → corruption-TOLERANCE ──────────────
+// The 4th deity axis is a DISTINCT lever from the good/evil knobs above. Good/
+// evil drives the ONSET/EXPOSURE *rate* (npcDeityDisfavor); the law axis instead
+// shifts how much corruption a settlement TOLERATES — a chaotic god means the
+// streets shrug at graft (corruption sits easier, order checks slacken), a lawful
+// god means oaths are kept and order is enforced. We model that tolerance shift
+// as a small, bounded, signed term primarily consumed by law_order (causalState
+// deriveLawOrder), NOT re-applied to onset/exposure — so it can NEVER double-count
+// the good/evil corruption magnitude. The magnitudes are deliberately small.
+export const DEITY_LAW_TUNING = Object.freeze({
+  // The law-axis magnitude as a signed direction: lawful +1 (raises order /
+  // lowers tolerance), chaotic −1 (lowers order / raises tolerance), else 0.
+  axisSign: Object.freeze({ lawful: 1, chaotic: -1, neutral: 0 }),
+  // The law_order score swing a fully lawful/chaotic patron applies (B5). A
+  // lawful god ADDS this; a chaotic god SUBTRACTS it. Comparable in scale to the
+  // government-archetype term in deriveLawOrder (±8), so a patron meaningfully
+  // tilts order without overwhelming the institutional signals.
+  lawOrderSwing: 8,
+  // The signed corruption-TOLERANCE shift (0..1 scale): a chaotic god raises
+  // tolerance (corruption sits easier), a lawful god lowers it. Distinct lever —
+  // surfaced for callers that want the tolerance signal itself (e.g. the order
+  // check), never folded into onset/exposure. Chaotic → +, lawful → −.
+  tolerance: 0.15,
+});
+
+/** The signed law direction of an embedded deity snapshot: lawful → +1,
+ *  chaotic → −1, neutral / absent / legacy-3-axis → 0. A deity authored before
+ *  B5 carries no lawAxis ⇒ 0 ⇒ no law_order term (back-compat, byte-identical).
+ * @param {any} deity @returns {-1|0|1} */
+export function deityLawDirection(deity) {
+  if (!deity) return 0;
+  const sign = /** @type {Record<string, number>} */ (DEITY_LAW_TUNING.axisSign)[deity.lawAxis];
+  return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
+}
+
+/** The signed corruption-TOLERANCE shift an embedded deity snapshot imposes: a
+ *  chaotic god RAISES tolerance (+), a lawful god LOWERS it (−), neutral/absent 0.
+ *  DISTINCT from the good/evil onset/exposure magnitude — this is the order-check
+ *  slackening lever, not the corruption *rate*. @param {any} deity @returns {number} */
+export function deityCorruptionTolerance(deity) {
+  // dir<0 (chaotic) ⇒ +tolerance; dir>0 (lawful) ⇒ −tolerance; dir 0 ⇒ exactly 0
+  // (the `|| 0` collapses the −0 that `-0 * x` would otherwise yield).
+  const dir = deityLawDirection(deity);
+  return (-dir * DEITY_LAW_TUNING.tolerance) || 0;
+}
+
 /** True iff the settlement carries an embedded EVIL-aligned primary deity. This
  *  is the per-settlement form of the F2 activation gate: the caller still gates
  *  on religionDynamicsEnabled + isSubsystemActive, but the per-settlement deity

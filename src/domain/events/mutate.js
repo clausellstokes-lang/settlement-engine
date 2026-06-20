@@ -1414,6 +1414,9 @@ function setPrimaryDeity(s, event) {
     alignmentAxis: snapshot.alignmentAxis || 'neutral',
     temperamentAxis: snapshot.temperamentAxis || 'neutral',
     rankAxis: snapshot.rankAxis || 'minor',
+    // lawAxis (B5): a legacy 3-axis deity carries none ⇒ default 'neutral' (no
+    // law_order term, byte-identical to a deity-free settlement on that axis).
+    lawAxis: snapshot.lawAxis || 'neutral',
     ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
   });
   return { ...s, config };

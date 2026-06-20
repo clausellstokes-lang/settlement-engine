@@ -47,6 +47,7 @@ const VARIABLE_LABEL = {
   magical_stability: 'Magical stability',
   social_trust: 'Social trust',
   economic_capacity: 'Economic capacity',
+  law_order: 'Law & order',
 };
 
 // Color per causal band (the 5-band substrate vocabulary). Greener = healthier,

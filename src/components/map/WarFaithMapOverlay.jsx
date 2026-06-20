@@ -33,6 +33,7 @@ import {
   liveTradeWars,
   occupiedSettlements,
 } from '../../domain/display/warStatus.js';
+import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { regionalChannelColor } from '../../lib/regionalMapOverlay.js';
 
 // Source the glyph colors from the SAME canonical channel palette the map's other
@@ -41,6 +42,7 @@ import { regionalChannelColor } from '../../lib/regionalMapOverlay.js';
 const COLOR_WAR = regionalChannelColor('war_front');             // siege/deploy red
 const COLOR_OCCUPATION = regionalChannelColor('criminal_corridor'); // occupation violet
 const COLOR_PRIZE = regionalChannelColor('export_market');       // trade-prize gold
+const COLOR_MOBILIZE = regionalChannelColor('information_flow');  // mobilization amber/gm
 
 /** Map every placement to { settlementId → {x,y} } (string keys). */
 function pointsBySettlement(placements) {
@@ -122,8 +124,17 @@ export default function WarFaithMapOverlay() {
       .filter(t => t.p)
       .map(t => ({ id: `prize-${t.prizeId}`, x: t.p.x, y: t.p.y, label: t.commodityLabel }));
 
-    if (!arrows.length && !sieges.length && !occupations.length && !prizes.length) return null;
-    return { arrows, sieges, occupations, prizes };
+    // Mobilization glyph — a settlement gearing for war. VISIBILITY IS LAW: a
+    // COVERT mobilizer (its preparation hidden from neighbours) is drawn ONLY for
+    // the DM view (includeCovert: showGm) — never on a player view. mobilization
+    // standings already filters covert out unless includeCovert is true.
+    const mobilizers = mobilizationStandings({ worldState, includeCovert: showGm })
+      .map(m => ({ ...m, p: xy.get(String(m.id)) }))
+      .filter(m => m.p)
+      .map(m => ({ id: `mob-${m.id}`, x: m.p.x, y: m.p.y, covert: m.covert === true, phrase: m.phrase }));
+
+    if (!arrows.length && !sieges.length && !occupations.length && !prizes.length && !mobilizers.length) return null;
+    return { arrows, sieges, occupations, prizes, mobilizers };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCampaign, placements, savedSettlements, showGm, geometryVersion]);
 
@@ -143,6 +154,28 @@ export default function WarFaithMapOverlay() {
           <circle r={13} fill={COLOR_OCCUPATION} fillOpacity={0.16} stroke={COLOR_OCCUPATION} strokeOpacity={0.4} strokeWidth={1} strokeDasharray="3 2">
             <title>Occupied — under an occupation authority</title>
           </circle>
+        </g>
+      ))}
+
+      {/* ── Mobilization glyph (gearing for war) ──────────────────────────── */}
+      {/* A covert mobilizer is rendered ONLY when showGm (filtered above); it is
+          dashed + flagged so the DM can tell a HIDDEN preparation from an overt one. */}
+      {model.mobilizers.map(m => (
+        <g key={m.id} className={`sf-mobilization${m.covert ? ' sf-mobilization-covert' : ''}`} transform={`translate(${m.x} ${m.y})`}>
+          {/* a pulsing readiness arc above-left of the node */}
+          <g transform="translate(-10 -10)">
+            <path
+              d="M-4,3 A5,5 0 1 1 4,3"
+              fill="none"
+              stroke={COLOR_MOBILIZE}
+              strokeOpacity={m.covert ? 0.6 : 0.9}
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeDasharray={m.covert ? '2 2' : undefined}
+            >
+              <title>{m.covert ? `Mobilizing (covert) — ${m.phrase}` : `Mobilizing — ${m.phrase}`}</title>
+            </path>
+          </g>
         </g>
       ))}
 

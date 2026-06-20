@@ -29,14 +29,15 @@ import {
   pressuresOn,
   summarizeCausalState,
   supportedSystemVariables,
+  variablePolarity,
 } from '../../src/domain/causalState.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 // ── Canonical catalog ──────────────────────────────────────────────────
 
 describe('SYSTEM_VARIABLES', () => {
-  it('exposes 15 canonical variable names', () => {
-    expect(SYSTEM_VARIABLES).toHaveLength(15);
+  it('exposes 16 canonical variable names', () => {
+    expect(SYSTEM_VARIABLES).toHaveLength(16);
   });
 
   it('contains every variable named in the Tier 2.4 roadmap', () => {
@@ -46,7 +47,7 @@ describe('SYSTEM_VARIABLES', () => {
       'ruling_authority', 'faction_power', 'trade_connectivity',
       'healing_capacity', 'defense_readiness', 'criminal_opportunity',
       'religious_authority', 'housing_pressure', 'infrastructure_condition',
-      'magical_stability', 'social_trust',
+      'magical_stability', 'social_trust', 'economic_capacity', 'law_order',
     ]) {
       expect(set.has(name), `missing canonical variable: ${name}`).toBe(true);
     }
@@ -525,7 +526,7 @@ describe('deriveCausalState()', () => {
       ...state.summary.critical,
       ...state.summary.collapsed,
     ];
-    expect(new Set(flat).size).toBe(15);
+    expect(new Set(flat).size).toBe(16);
   });
 
   it('every band value is canonical', () => {
@@ -600,7 +601,7 @@ describe('summarizeCausalState()', () => {
 describe('supportedSystemVariables()', () => {
   it('returns a copy of the canonical list', () => {
     const list = supportedSystemVariables();
-    expect(list).toHaveLength(15);
+    expect(list).toHaveLength(16);
     expect(list).not.toBe(SYSTEM_VARIABLES);  // copy, not the frozen original
   });
 });
@@ -669,6 +670,171 @@ describe('deriveCausalState() — real generated settlement', () => {
       expect(typeof c.delta).toBe('number');
       expect(typeof c.reason).toBe('string');
     }
+  });
+});
+
+// ── Phase B0: law_order — the 16th variable ──────────────────────────────────
+// Added the same way economic_capacity was (the 15th): purely ADDITIVE — it
+// reads only signals other derivers already read, so the existing 15 scores are
+// byte-identical for the same settlement.
+describe('law_order — the 16th system variable (Phase B0)', () => {
+  const lawful = {
+    name: 'Lawhold', tier: 'city', population: 12000,
+    powerStructure: {
+      government: 'Military autocracy',
+      publicLegitimacy: { score: 72, label: 'Endorsed' },
+      factions: [],
+    },
+    institutions: [
+      { name: 'High Court of Assize' },
+      { name: 'City Watch' },
+      { name: 'Magistrate Hall' },
+    ],
+    defenseProfile: { scores: { military: 70, monster: 50, internal: 78, economic: 50, magical: 50 } },
+    activeConditions: [],
+  };
+  const anarchic = {
+    name: 'Freehcollow', tier: 'town', population: 3000,
+    powerStructure: {
+      government: 'Peasant commune',
+      publicLegitimacy: { score: 28, label: 'Contested' },
+      factions: [{ faction: 'The Shadow Hand', power: 70, archetype: 'criminal' }],
+    },
+    institutions: [
+      { name: 'Smugglers Den' },
+      { name: 'Tannery' },
+    ],
+    economicState: { safetyProfile: { blackMarketCapture: 60 } },
+    defenseProfile: { scores: { military: 30, monster: 40, internal: 20, economic: 40, magical: 40 } },
+    activeConditions: [],
+  };
+
+  it('is present in the envelope with a band + contributors', () => {
+    const state = deriveCausalState(lawful);
+    expect(SYSTEM_VARIABLES).toContain('law_order');
+    expect(state.variables.law_order.variable).toBe('law_order');
+    expect(CAUSAL_BANDS).toContain(state.bands.law_order);
+    expect(state.variables.law_order.contributors.length).toBeGreaterThan(0);
+  });
+
+  it('scores a lawful/ordered settlement far above an anarchic one', () => {
+    const lawScore = deriveSystemVariable('law_order', lawful).score;
+    const anarchyScore = deriveSystemVariable('law_order', anarchic).score;
+    expect(lawScore).toBeGreaterThan(anarchyScore);
+    expect(lawScore).toBeGreaterThan(60);
+    expect(anarchyScore).toBeLessThan(40);
+  });
+
+  it('higher_is_better polarity (lawful => surplus/adequate band)', () => {
+    expect(variablePolarity('law_order')).toBe('higher_is_better');
+    const band = bandForVariable(lawful, 'law_order');
+    expect(['surplus', 'adequate']).toContain(band);
+  });
+
+  it('is purely additive — the existing 15 scores are byte-identical', () => {
+    // Adding law_order must not perturb any of the 15 pre-existing variables.
+    // We assert the OTHER fifteen derive to the same score with/without the
+    // settlement carrying any law-order-specific signal: deriveSystemVariable
+    // for each of them is independent of law_order's deriver.
+    const settlement = generateSettlementPipeline(
+      { settType: 'city', culture: 'germanic' },
+      null,
+      { seed: 'causalState-law-order-additive', customContent: {} },
+    );
+    const state = deriveCausalState(settlement);
+    const fifteen = SYSTEM_VARIABLES.filter(n => n !== 'law_order');
+    // Each of the 15 derives identically when queried in isolation — proving
+    // law_order's deriver shares no mutable state with them.
+    for (const name of fifteen) {
+      expect(state.scores[name]).toBe(deriveSystemVariable(name, settlement).score);
+    }
+    expect(fifteen).toHaveLength(15);
+  });
+
+  it('a law_order-declaring condition moves it live (the future-layer seam)', () => {
+    const base = deriveSystemVariable('law_order', lawful).score;
+    const eroded = deriveSystemVariable('law_order', {
+      ...lawful,
+      activeConditions: [
+        { archetype: 'corruption_exposed', severity: 0.6, affectedSystems: ['law_order'] },
+      ],
+    }).score;
+    expect(eroded).toBeLessThan(base);
+  });
+});
+
+// ── Phase B5: the 4th deity axis (lawful/chaotic) couples INTO law_order ──────
+// The deity term in deriveLawOrder is DORMANT until a primaryDeitySnapshot whose
+// lawAxis is lawful/chaotic is embedded — exactly like the deriveReligiousAuthority
+// deity term. A deity-free settlement, a legacy 3-axis deity (no lawAxis), and a
+// law-neutral deity all see NO law_order term ⇒ byte-identical on that axis.
+describe('law_order — the B5 lawful/chaotic deity coupling', () => {
+  // A middling base settlement so the deity swing is observable above the floor.
+  const base = {
+    name: 'Midhold', tier: 'town', population: 3000,
+    powerStructure: {
+      government: 'Town council',
+      publicLegitimacy: { score: 50, label: 'Measured' },
+      factions: [],
+    },
+    institutions: [{ name: 'Town Hall' }],
+    defenseProfile: { scores: { military: 50, monster: 50, internal: 50, economic: 50, magical: 50 } },
+    activeConditions: [],
+  };
+  const withDeity = (lawAxis) => ({
+    ...base,
+    config: { primaryDeitySnapshot: { _deityRef: 'custom:patron', name: 'Patron', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor', lawAxis } },
+  });
+
+  it('a lawful deity raises law_order; a chaotic deity lowers it; neutral/none sit between', () => {
+    const lawfulScore  = deriveSystemVariable('law_order', withDeity('lawful')).score;
+    const chaoticScore = deriveSystemVariable('law_order', withDeity('chaotic')).score;
+    const neutralScore = deriveSystemVariable('law_order', withDeity('neutral')).score;
+    const noDeityScore = deriveSystemVariable('law_order', base).score;
+
+    expect(lawfulScore).toBeGreaterThan(neutralScore);
+    expect(chaoticScore).toBeLessThan(neutralScore);
+    // A law-neutral deity is byte-identical on law_order to no deity at all.
+    expect(neutralScore).toBe(noDeityScore);
+    // The full ordering: chaotic < neutral === none < lawful.
+    expect(chaoticScore).toBeLessThan(lawfulScore);
+  });
+
+  it('the contributors name the lawful/chaotic patron (the band shows it)', () => {
+    const lawfulVar = deriveSystemVariable('law_order', withDeity('lawful'));
+    const tag = lawfulVar.contributors.find(c => c.effect === 'lawful_patron');
+    expect(tag).toBeTruthy();
+    expect(tag.delta).toBeGreaterThan(0);
+    expect(tag.reason).toMatch(/strengthens law & order/);
+
+    const chaoticVar = deriveSystemVariable('law_order', withDeity('chaotic'));
+    const ctag = chaoticVar.contributors.find(c => c.effect === 'chaotic_patron');
+    expect(ctag).toBeTruthy();
+    expect(ctag.delta).toBeLessThan(0);
+  });
+
+  it('a legacy 3-axis deity (no lawAxis) adds NO law_order term — byte-identical', () => {
+    const legacy = {
+      ...base,
+      config: { primaryDeitySnapshot: { _deityRef: 'custom:old', name: 'Old', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' } },
+    };
+    const legacyVar = deriveSystemVariable('law_order', legacy);
+    const baseVar = deriveSystemVariable('law_order', base);
+    expect(legacyVar.score).toBe(baseVar.score);
+    expect(legacyVar.contributors.some(c => /patron/.test(c.effect))).toBe(false);
+  });
+
+  it('the law axis is purely additive on law_order — it perturbs no other variable', () => {
+    const lawful  = deriveCausalState(withDeity('lawful'));
+    const chaotic = deriveCausalState(withDeity('chaotic'));
+    // Every variable EXCEPT law_order is identical between a lawful and a chaotic
+    // patron (the law axis touches only law_order in the substrate; the good/evil
+    // corruption coupling lives in a SEPARATE engine path, not the substrate).
+    for (const name of SYSTEM_VARIABLES) {
+      if (name === 'law_order') continue;
+      expect(lawful.scores[name]).toBe(chaotic.scores[name]);
+    }
+    expect(lawful.scores.law_order).not.toBe(chaotic.scores.law_order);
   });
 });
 

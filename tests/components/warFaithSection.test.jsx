@@ -121,3 +121,72 @@ describe('WarFaithSection — self-gating + altitude', () => {
     expect(queryByTestId('trade-war-prize')).toBeNull();
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// F1 — the B-track surfaces (mobilization / army strength / occupation), in
+// heuristic language, self-gating, player-safe (covert excluded by default).
+// ─────────────────────────────────────────────────────────────────────────────
+
+const bTrackWorldState = {
+  warPosture: { A: { state: 'mobilized', progress: 1, sinceTick: 0 } },
+  deployments: { A: { targetId: 'B', sinceTick: 3, role: 'siege', maxStartStrength: 100, currentEffectiveStrength: 38, supplyIntegrity: 0.3, morale: 0.4, foodReserve: 0.3 } },
+  occupations: { D: { occupierId: 'A', state: 'contested', resistance: 0.7, sinceTick: 0 } },
+};
+
+describe('WarFaithSection — B-track surfaces (heuristic, player-safe)', () => {
+  const nameFor = (id) => ({ A: 'Ashford', B: 'Brightvale', D: 'Dunmoor' }[id] || id);
+
+  test('mobilization, army strength + attrition, and occupier holdings render in plain words', () => {
+    const { getByTestId } = render(
+      <WarFaithSection
+        settlement={warTown} settlementId="A"
+        worldState={bTrackWorldState} regionalGraph={warGraph}
+        settlements={[]} nameFor={nameFor}
+        forceLevel="standard"
+      />,
+    );
+    expect(getByTestId('mobilization-posture').textContent).toMatch(/mobiliz/i);
+    const army = getByTestId('army-strength');
+    expect(army.textContent).toMatch(/Brightvale/);
+    expect(army.textContent).toMatch(/strength|gutted|battered/i);
+    // The occupier-holdings surface names who it holds.
+    expect(getByTestId('occupation-holder').textContent).toMatch(/Dunmoor/);
+    // No raw enum / engine internal leaks into the B-track surfaces (the deeper
+    // heuristic-no-internals + no-float property is pinned on the read-models in
+    // tests/domain/display/visibilityAudit.test.js).
+    for (const id of ['mobilization-posture', 'army-strength', 'occupation-holder']) {
+      const text = getByTestId(id).textContent;
+      expect(text).not.toMatch(/war_preparation|currentEffectiveStrength|accumulatedAttrition|occupation_burden/);
+    }
+  });
+
+  test('the OCCUPIED settlement reads its occupier + resistance', () => {
+    const occupiedTown = { id: 'D', name: 'Dunmoor', population: 600, config: {}, powerStructure: { factions: [] }, economicState: {} };
+    const { getByTestId } = render(
+      <WarFaithSection
+        settlement={occupiedTown} settlementId="D"
+        worldState={bTrackWorldState} regionalGraph={warGraph}
+        settlements={[]} nameFor={nameFor}
+        forceLevel="standard"
+      />,
+    );
+    const occ = getByTestId('occupation-occupied');
+    expect(occ.textContent).toMatch(/Ashford/);
+    expect(occ.textContent).toMatch(/revolt|resist/i);
+  });
+
+  test('a covert mobilizer never surfaces on the dossier (player-safe default)', () => {
+    const covertWorld = { warPosture: { A: { state: 'war_preparation', progress: 0.5, sinceTick: 0, covert: true } } };
+    const { queryByTestId } = render(
+      <WarFaithSection
+        settlement={warTown} settlementId="A"
+        worldState={covertWorld} regionalGraph={null}
+        settlements={[]} nameFor={nameFor}
+        forceLevel="standard"
+      />,
+    );
+    // The covert prep must NOT render a mobilization line (the section may still
+    // render for the deity, but the mobilization surface is suppressed).
+    expect(queryByTestId('mobilization-posture')).toBeNull();
+  });
+});

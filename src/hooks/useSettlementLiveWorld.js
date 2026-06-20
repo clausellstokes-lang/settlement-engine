@@ -25,6 +25,7 @@ import { useStore } from '../store/index.js';
  *   worldState: any,
  *   regionalGraph: any,
  *   inCampaign: boolean,
+ *   settlements: Array<{ id: string, settlement: any }>,
  *   nameFor: (id: any) => string,
  * }}
  */
@@ -47,11 +48,18 @@ export function useSettlementLiveWorld(saveId) {
       const nm = sv?.name || sv?.settlement?.name;
       if (id && nm) nameById.set(String(id), nm);
     }
+    // The campaign's member settlement items — for read-models that need the
+    // regional roster (trade pressure / occupation usefulness). Empty off-campaign.
+    const memberIds = new Set((campaign?.settlementIds || []).map(String));
+    const settlements = (savedSettlements || [])
+      .filter((/** @type {any} */ sv) => memberIds.has(String(sv?.id || sv?.settlement?.id)))
+      .map((/** @type {any} */ sv) => ({ id: String(sv?.id || sv?.settlement?.id), settlement: sv?.settlement || sv }));
     return {
       campaign,
       worldState,
       regionalGraph,
       inCampaign: !!campaign,
+      settlements,
       nameFor: (/** @type {any} */ id) => nameById.get(String(id)) || String(id),
     };
   }, [campaign, savedSettlements]);

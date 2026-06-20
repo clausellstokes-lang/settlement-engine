@@ -58,6 +58,12 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
   const { posture, exhaustion, standing, tradeWars, deity, pantheon, realmArcs } = lw;
+  // B-track heuristic surfaces (player-safe; mirror the screen WarFaithSection).
+  const mobilization = lw.mobilization || null;
+  const army = lw.army || null;
+  const occupationLive = lw.occupationLive || null;
+  const holdings = lw.holdings || null;
+  const tradePressure = Array.isArray(lw.tradePressure) ? lw.tradePressure : [];
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
   const headline = lw.atWar
@@ -127,6 +133,45 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
+      {/* ── B-track heuristic surfaces (mobilization / army / occupation / trade) ── */}
+      {(mobilization || army || occupationLive || holdings || tradePressure.length > 0) && (
+        <View style={{ marginBottom: space.sm }}>
+          {mobilization && (
+            <Line label="Mobilization." tone="warn">
+              {mobilization.phrase}
+              {mobilization.ticksToDeploy > 0
+                ? ` — roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`
+                : '.'}
+            </Line>
+          )}
+          {army && (
+            <Line label="Army in the field." tone="bad">
+              Marching on {army.targetName} — {army.remainingPhrase}; {army.conditionPhrase}.
+            </Line>
+          )}
+          {occupationLive && (
+            <Line label="Occupied." tone="bad">
+              Held by {occupationLive.occupierName} — {occupationLive.statePhrase}; the population is {occupationLive.resistancePhrase}.
+            </Line>
+          )}
+          {holdings && (
+            <Line label="Occupier." tone={holdings.stretchedThin ? 'bad' : 'warn'}>
+              Holds {holdings.holds.join(', ')}
+              {holdings.stretchedThin ? ' — stretched thin holding them.' : holdings.strengthened ? ' — they now pay for themselves.' : '.'}
+            </Line>
+          )}
+          {tradePressure.map((tie, i) => (
+            <Line key={`tp-${i}`} label="Trade pressure." tone="muted">
+              {tie.role === 'dependent'
+                ? `Dependent on ${tie.partnerName} — ${tie.phrase}; losing it would bite hard.`
+                : tie.role === 'supplier'
+                  ? `Holds leverage over ${tie.partnerName} — ${tie.phrase} it relies on.`
+                  : `${cap(tie.phrase)} with ${tie.partnerName} — war between them would be costly.`}
+            </Line>
+          ))}
+        </View>
+      )}
+
       {/* ── Trade-war prizes ──────────────────────────────────────────── */}
       {tradeWars.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
@@ -153,6 +198,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             {deity.rankAxis && <Tag tone="gold">{cap(deity.rankAxis)}</Tag>}
             {deity.alignmentAxis && <Tag tone={ALIGN_TONE[deity.alignmentAxis] || 'muted'}>{cap(deity.alignmentAxis)}</Tag>}
             {deity.temperamentAxis && <Tag tone={deity.temperamentAxis === 'warlike' ? 'bad' : 'cool'}>{cap(deity.temperamentAxis)}</Tag>}
+            {deity.lawAxis && <Tag tone={deity.lawAxis === 'lawful' ? 'good' : 'warn'}>{cap(deity.lawAxis)}</Tag>}
           </View>
           {deity.domain && (
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 3, fontStyle: 'italic' }}>

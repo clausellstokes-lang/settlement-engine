@@ -7,10 +7,13 @@ import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
 import { evaluateWarLayer } from './warDeployment.js';
+import { evaluateMobilization } from './mobilization.js';
+import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
 import { evaluateReligiousContest } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
+import { evaluateOccupations } from './occupation.js';
 import { addRegionalChannels } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
@@ -33,6 +36,7 @@ import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from '.
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
 import { computeDispositionFactorMap } from './disposition.js';
+import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
@@ -126,6 +130,29 @@ function compactImpactDigest(entries = []) {
 
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.name || 'unknown');
+}
+
+// Phase B1 — the upward pressure to mobilize: a settlement RAMPS its war posture
+// when it faces a hostile-axis neighbour (rival / cold_war / hostile). Returns a
+// memoized `(id) => boolean` over the pre-tick edges + relationshipStates. Pure,
+// codepoint-stable (the result is a set membership test, order-free).
+const MOBILIZATION_HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
+function buildWantsWarLookup(snapshot) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  /** @type {Set<string>} */
+  const wants = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const key = rawEdge?.id || `${rawEdge?.from}->${rawEdge?.to}`;
+    const relType = String(states[key]?.relationshipType || rawEdge?.relationshipType || 'neutral');
+    if (!MOBILIZATION_HOSTILE_TYPES.has(relType)) continue;
+    const a = String(rawEdge?.from);
+    const b = String(rawEdge?.to);
+    if (snapshot?.byId?.has?.(a) && snapshot?.byId?.has?.(b)) {
+      wants.add(a);
+      wants.add(b);
+    }
+  }
+  return (/** @type {string} */ id) => wants.has(String(id));
 }
 
 function buildSettlementMap(snapshot, localSettlements) {
@@ -369,15 +396,60 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   const postTimeCampaign = { ...campaign, worldState, regionalGraph: snapshot.regionalGraph };
   let postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
+  // Phase B1 — WAR-ECONOMY MOBILIZATION POSTURE. Runs FIRST inside the gated war
+  // block (so the war layer's deploy gate reads THIS tick's posture): the per-
+  // settlement posture state machine ramps peace→…→mobilized, gated on disposition/
+  // economy/legitimacy, and cools under strain. A settlement must reach a war-ready
+  // posture (mobilized) before the war layer will let it OPEN a new siege — it cannot
+  // siege from peace. The mobilization is a DETERMINISTIC classifier (no rng). It
+  // stamps war_mobilization conditions (the war-economy footing cost) and mints
+  // VISIBLE information_flow mobilization signals (public overt / gm covert) the
+  // neighbour-reaction candidates key on. GATED + byte-neutral: the warPosture ledger
+  // is CONDITIONAL (absent when no settlement leaves peace) so a no-war campaign is
+  // byte-identical.
+  let mobilizationOutcomes = [];
+  if (simulationRules.warLayerEnabled) {
+    const wantsWarFor = buildWantsWarLookup(postTimeSnapshot);
+    const mobilization = evaluateMobilization({
+      snapshot: postTimeSnapshot,
+      worldState,
+      tick: worldState.tick,
+      wantsWarFor,
+    });
+    // Persist the NEXT-tick posture ledger (deep-cloned via ensureWorldState's
+    // conditional clone on the next read). Only materialize the key when non-empty —
+    // a dormant campaign keeps NO warPosture key (byte-neutral under the oracle).
+    worldState = Object.keys(mobilization.warPosture).length
+      ? { ...worldState, warPosture: mobilization.warPosture }
+      : (() => { const { warPosture: _drop, ...rest } = worldState; return rest; })();
+    const effects = mobilizationEffects({
+      snapshot: postTimeSnapshot,
+      events: mobilization.events,
+      tick: worldState.tick,
+      now,
+    });
+    mobilizationOutcomes = effects.outcomes;
+    // Rebuild the snapshot so the war layer's deploy gate + the reaction rule read the
+    // persisted posture AND the freshly-minted mobilization signals.
+    const postureCampaign = { ...campaign, worldState, regionalGraph: postTimeSnapshot.regionalGraph };
+    if (effects.graphChannels.length) {
+      const signalGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, effects.graphChannels, { now });
+      postTimeSnapshot = buildWorldSnapshot({ campaign: { ...postureCampaign, regionalGraph: signalGraph }, saves: postTimeSaves, worldState });
+    } else {
+      postTimeSnapshot = buildWorldSnapshot({ campaign: postureCampaign, saves: postTimeSaves, worldState });
+    }
+  }
   // Feature A (war/deployment) — GATED behind simulationRules.warLayerEnabled
   // (default false ⇒ pure no-op ⇒ byte-identical legacy). Reads the SINGLE pre-tick
   // postTimeSnapshot: resolves coalition sieges (a fallen target → a conquest
-  // power_transfer), opens new sieges (confident attacker → weaker hostile target →
-  // a directed war_front mint + war_drain/army_deployed home conditions), and turns
-  // each army that came home (a resolved siege) into a CONTEXTUAL return outcome.
-  // war_drain severity is derived from the PRE-TICK war_front count INSIDE the
-  // evaluator (this-tick's fresh mints are appended to graphChannels, never re-read),
-  // so a fresh deploy raises the drain only NEXT tick — no intra-tick read-after-write.
+  // power_transfer), opens new sieges (a war-ready, confident attacker whose CURRENT-
+  // capacity matchup is feasibility-PLAUSIBLE → a directed war_front mint +
+  // war_drain/army_deployed home conditions), and turns each army that came home (a
+  // resolved siege) into a CONTEXTUAL return outcome. The hard feasibility gate sits
+  // IN FRONT of the siege RNG (deterministic), and the deploy gate requires a
+  // mobilized posture — so a thorpe cannot storm a city on a lucky roll, and no one
+  // sieges from peace. war_drain severity is derived from the PRE-TICK war_front count
+  // INSIDE the evaluator (no intra-tick read-after-write).
   const war = evaluateWarLayer({
     snapshot: postTimeSnapshot,
     worldState,
@@ -388,6 +460,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   let warReturnOutcomes = [];
   let tradeWarOutcomes = [];
+  // Phase B3 — occupation-layer outcomes (occupation_resistance / occupation_burden /
+  // war_spoils / vassalization). Empty unless the war layer is ON and an occupation
+  // exists — so the conditional `occupations` ledger never materializes and the apply
+  // set is byte-identical on the OFF path / a campaign with no conquests.
+  /** @type {any[]} */
+  let occupationOutcomes = [];
   // Feature C (C1) write-side accumulator: the id-stable win/loss deltas from the
   // contests resolved this tick (siege conquests + trade-war flips). Empty unless
   // the war layer is ON and something actually resolved — so the post-apply fold
@@ -438,10 +516,42 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       const realignedCampaign = { ...campaign, worldState, regionalGraph: realignedGraph };
       postTimeSnapshot = buildWorldSnapshot({ campaign: realignedCampaign, saves: postTimeSaves, worldState });
     }
+    // Phase B3 — the OCCUPATION layer. A successful conquest (war.outcomes, cause:
+    // 'conquest') seeds a `contested` occupation; a deployment-return liberation
+    // (warReturnOutcomes, occupation_lifted/siege_lifted) drops one. The state machine
+    // then advances each occupation toward stabilization (hysteresis dwell + single-rung
+    // + collapse→liberated), grows/shrinks resistance, and computes the CAPPED/DELAYED/
+    // CONDITIONAL occupier benefit + burden. Reads the POST-mint graph (garrison
+    // presence) + the live deployments + the pre-tick snapshot (usefulness/resistance).
+    // Deterministic (no rng — the state machine is pure). The occupations ledger is
+    // read-last/write-next and CONDITIONAL: absent until the first conquest.
+    const occupation = evaluateOccupations({
+      snapshot: postTimeSnapshot,
+      worldState,
+      graph: postTimeSnapshot.regionalGraph,
+      deployments: war.deployments,
+      warOutcomes: war.outcomes,
+      returnOutcomes: warReturnOutcomes,
+      tick: worldState.tick,
+      rules: simulationRules,
+    });
+    occupationOutcomes = occupation.outcomes;
+    // Only materialize the occupations key when the ledger is non-empty — a war with no
+    // surviving occupation stays absent (byte-neutral under the dormancy oracle).
+    if (Object.keys(occupation.occupations).length) {
+      worldState = { ...worldState, occupations: occupation.occupations };
+    } else if (worldState.occupations) {
+      // The last occupation was liberated/collapsed this tick — drop the now-empty key
+      // so the ledger returns to absent (byte-neutral) rather than lingering as `{}`.
+      const { occupations: _drop, ...rest } = worldState;
+      worldState = rest;
+    }
     // C1 write-side: gather this tick's resolved-contest win/loss deltas (H16-
     // attributed at the resolver). Folded into next-tick dispositionStats below,
-    // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline.
-    pendingDispositionDeltas = collectDispositionDeltas(war, tradeWar);
+    // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline. The occupation
+    // layer contributes its own consolidation-win / liberation-loss deltas (deterministic,
+    // id-stable) alongside the war/trade contests.
+    pendingDispositionDeltas = [...collectDispositionDeltas(war, tradeWar), ...occupation.dispositionDeltas];
   }
   // Feature D (R2) — religion dynamics: the deity contest + conversion spread +
   // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
@@ -492,7 +602,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       postTimeSnapshot = buildWorldSnapshot({ campaign: faithCampaign, saves: postTimeSaves, worldState });
     }
   }
-  const warOutcomes = [...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...religiousOutcomes];
+  const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
   const pressures = deriveSettlementPressures(postTimeSnapshot);
   const pIndex = pressureIndex(pressures);
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
@@ -528,6 +638,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const dispositionFactor = simulationRules.warLayerEnabled
     ? computeDispositionFactorMap(postTimeSnapshot, worldState)
     : dispositionFactorMap(worldState.dispositionStats);
+  // Phase B4 — STRATEGIC TRADE → REDUCED HOSTILITY. Compute the per-edge trade-
+  // salience map (a centered-on-1.0 factor that DAMPENS hostile/escalation
+  // candidates when a VALUABLE trade tie exists) ONLY under the war layer — off ⇒
+  // empty map ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy. The
+  // `salience` rollup feeds the §6 coercion/embargo cross-cutting rule. Reads the
+  // post-mint snapshot (so this tick's trade realignments are visible) and the
+  // pre-tick worldState (tradeWarState recency, relationship primaries).
+  const tradeSalienceResult = simulationRules.warLayerEnabled
+    ? computeTradeSalienceMap(postTimeSnapshot, worldState, { tick: worldState.tick })
+    : { factors: {}, salience: {} };
   const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
     pressures,
     pressureIndex: pIndex,
@@ -535,6 +655,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     interval: tickInterval,
     simulationRules,
     dispositionFactor,
+    tradeSalienceFactor: tradeSalienceResult.factors,
+    tradeSalienceInfo: tradeSalienceResult.salience,
     // C2: thread a stable fork to the settlement strategy chooser (the ONLY
     // candidate rule that samples). Forked from the master pulse rng on a constant
     // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
@@ -595,6 +717,41 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...memoryState,
       dispositionStats: applyDispositionDeltas(memoryState.dispositionStats, pendingDispositionDeltas),
     };
+  }
+  // Phase B4 — the SECONDARY-STATUS OVERLAY (B0 compatibility-enforced). Trade
+  // ties create/reinforce LAYERED secondary statuses (critical/preferred/military
+  // supplier; smuggling for a battlefield primary) on each edge, OVER the primary
+  // `relationshipType` (never replacing it). Derived from the post-apply primaries
+  // + this tick's salience ties, every status run through the B0 isCompatible gate
+  // so a hostile primary cannot carry normal commerce. ONLY under the war layer ⇒
+  // a legacy campaign never gains a `secondaryStatuses` key (byte-neutral under the
+  // dormancy oracle). Anti-oscillation: an edge whose status set is unchanged keeps
+  // its reference; an edge that lost all coherent statuses drops the key.
+  if (simulationRules.warLayerEnabled) {
+    const overlaySnapshot = buildWorldSnapshot({
+      campaign: { ...campaign, worldState: memoryState, regionalGraph: applied.regionalGraph },
+      saves: postTimeSaves,
+      worldState: memoryState,
+    });
+    const overlay = computeSecondaryStatusOverlay(overlaySnapshot, memoryState, { tick: worldState.tick });
+    const relationshipStates = memoryState.relationshipStates || {};
+    let overlayChanged = false;
+    const nextStates = { ...relationshipStates };
+    for (const [key, state] of Object.entries(relationshipStates)) {
+      const next = overlay[key] || null;
+      const prev = state?.secondaryStatuses || null;
+      // Codepoint-stable compare (both already sorted) — only rewrite on a real change.
+      const same = JSON.stringify(prev) === JSON.stringify(next);
+      if (same) continue;
+      overlayChanged = true;
+      if (next && next.length) {
+        nextStates[key] = { ...state, secondaryStatuses: next };
+      } else if (prev) {
+        const { secondaryStatuses: _drop, ...rest } = state;
+        nextStates[key] = rest;
+      }
+    }
+    if (overlayChanged) memoryState = { ...memoryState, relationshipStates: nextStates };
   }
   // R4 pantheon — the READ-LAST/WRITE-NEXT pantheon ratchet, post-apply, mirroring
   // the dispositionStats seam directly above. ONLY when religion is active this tick

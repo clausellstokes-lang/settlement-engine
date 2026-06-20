@@ -130,10 +130,16 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   // R4 pantheon — the SHALLOW `...cloneObject(raw)` spread would otherwise carry a
   // present-but-EMPTY `pantheon:{}` through to the result (breaking dormancy). Strip
   // it from the shallow spread; the conditional deep-clone below is the SOLE source
-  // of the key — materialized only when non-empty.
+  // of the key — materialized only when non-empty. B1 `warPosture` is CONDITIONAL the
+  // same way: a no-war campaign carries NO warPosture key at all (byte-neutral under
+  // the dormancy oracle), so it is stripped here and re-added conditionally below.
   const shallowRaw = cloneObject(raw);
   if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
+  if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
+  if ('occupations' in shallowRaw) delete shallowRaw.occupations;
   const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
+  const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
+  const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
   return {
     ...base,
     ...shallowRaw,
@@ -171,6 +177,21 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // dormancy oracle), while an active world's pantheon never aliases live state
     // across ticks.
     ...(clonedPantheon !== undefined ? { pantheon: clonedPantheon } : {}),
+    // B1 warPosture — CONDITIONAL materialization, identical discipline to pantheon:
+    // the per-settlement mobilization posture ledger ({ id -> { state, progress,
+    // sinceTick, covert } }). ABSENT while no settlement has left peace (a no-war /
+    // layer-off campaign carries NO warPosture key ⇒ byte-identical under the
+    // dormancy oracle), DEEP-cloned when present so a pre-tick snapshot never aliases
+    // live posture state across ticks.
+    ...(clonedWarPosture !== undefined ? { warPosture: clonedWarPosture } : {}),
+    // B3 occupations — CONDITIONAL materialization, identical discipline to pantheon/
+    // warPosture: the per-OCCUPIED-settlement occupation-state ledger ({ occupiedId ->
+    // { occupierId, state, sinceTick, stateHeld, resistance, benefitYield, lastTick } }).
+    // ABSENT until the first conquest creates an occupation (a no-war / layer-off
+    // campaign carries NO occupations key ⇒ byte-identical under the dormancy oracle),
+    // DEEP-cloned when present so a pre-tick snapshot never aliases live occupation state
+    // across ticks (read-last/write-next).
+    ...(clonedOccupations !== undefined ? { occupations: clonedOccupations } : {}),
   };
 }
 

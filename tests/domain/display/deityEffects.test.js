@@ -4,6 +4,7 @@ import {
   describeDeityEffects,
   DEITY_AXIS_EFFECTS,
   DEITY_CORRUPTION_TUNING as RX_CORRUPTION,
+  DEITY_LAW_TUNING as RX_LAW,
   DEITY_TEMPER_SIGN as RX_TEMPER,
   AGGRESSION_TUNING as RX_AGGRESSION,
   DEITY_RANK_AUTHORITY as RX_RANK,
@@ -11,7 +12,7 @@ import {
 } from '../../../src/domain/display/deityEffects.js';
 
 // The ENGINE sources of truth (the inline couplings the engine actually applies).
-import { DEITY_CORRUPTION_TUNING } from '../../../src/domain/corruption.js';
+import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../../../src/domain/corruption.js';
 import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../../../src/domain/worldPulse/disposition.js';
 import { DEITY_RANK_AUTHORITY } from '../../../src/domain/causalState.js';
 import {
@@ -111,6 +112,48 @@ describe('describeDeityEffects — per-axis', () => {
       'Major — anchors religious authority',
       'Tightens magic legality — magic is openly opposed',
     ]);
+  });
+
+  // ── B5: the 4th axis (lawful/chaotic) → law_order ──────────────────────────
+  test('lawful → strengthens law & order', () => {
+    expect(describeDeityEffects({ lawAxis: 'lawful' })).toContain('Lawful — strengthens law & order');
+  });
+
+  test('chaotic → erodes order, tolerates corruption', () => {
+    expect(describeDeityEffects({ lawAxis: 'chaotic' })).toContain('Chaotic — erodes order, tolerates corruption');
+  });
+
+  test('a law-neutral deity (or a legacy 3-axis deity with no lawAxis) says nothing about law', () => {
+    expect(describeDeityEffects({ lawAxis: 'neutral' }).some(s => /law & order|tolerates corruption/.test(s))).toBe(false);
+    // Legacy 3-axis deity: rank still speaks, but NO law string.
+    const legacy = describeDeityEffects({ alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' });
+    expect(legacy.some(s => /law & order|tolerates corruption/.test(s))).toBe(false);
+    expect(legacy).toContain('Minor — lends modest religious authority');
+  });
+
+  test('law string is APPENDED last, leaving the first four axes order stable', () => {
+    const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', lawAxis: 'chaotic' });
+    expect(out).toEqual([
+      "Evil — corrupts the faithful even without a thieves' guild",
+      "Warlike — raises the realm's aggression",
+      'Major — anchors religious authority',
+      'Tightens magic legality — magic is openly opposed',
+      'Chaotic — erodes order, tolerates corruption',
+    ]);
+  });
+});
+
+// The law-axis coupling constant is the ENGINE's (corruption.js DEITY_LAW_TUNING),
+// re-exported verbatim — never a hand-copied drift.
+describe('B5 law-axis constants are the ENGINE constants (proven equal)', () => {
+  test('re-export is referentially the engine object', () => {
+    expect(RX_LAW).toBe(DEITY_LAW_TUNING);
+  });
+  test('the consolidated map reads the engine law values verbatim', () => {
+    expect(DEITY_AXIS_EFFECTS.law.lawful.direction).toBe(DEITY_LAW_TUNING.axisSign.lawful);
+    expect(DEITY_AXIS_EFFECTS.law.chaotic.direction).toBe(DEITY_LAW_TUNING.axisSign.chaotic);
+    expect(DEITY_AXIS_EFFECTS.law.lawful.lawOrderLift).toBe(DEITY_LAW_TUNING.axisSign.lawful * DEITY_LAW_TUNING.lawOrderSwing);
+    expect(DEITY_AXIS_EFFECTS.law.chaotic.lawOrderLift).toBe(DEITY_LAW_TUNING.axisSign.chaotic * DEITY_LAW_TUNING.lawOrderSwing);
   });
 });
 
