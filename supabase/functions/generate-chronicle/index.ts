@@ -19,6 +19,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard } from '../_shared/requestMeta.ts';
+import { logError } from '../_shared/logError.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -151,8 +152,17 @@ serve(async (req) => {
     // even though its JWT is still valid (review B16 finding #1). The DB
     // spend_credits RPC also enforces this (migration 057); this is the cheaper
     // upfront check so a locked account never reaches the model call.
-    const { data: isActive } = await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
-    if (isActive === false) return json({ error: 'Account is not active' }, 403, cors);
+    //
+    // FAIL CLOSED: gate on `!== true`, not `=== false`. The RPC returns true only
+    // for a confirmed-active account; null (RPC error / unexpected shape) or any
+    // non-true value must be treated as inactive, so a transient RPC failure can
+    // never fail OPEN and admit a banned account to the paid model call.
+    const { data: isActive, error: activeErr } =
+      await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
+    if (activeErr) {
+      logError('generate-chronicle', user.id, `account_is_active errored: ${activeErr.message}`);
+    }
+    if (isActive !== true) return json({ error: 'Account is not active' }, 403, cors);
 
     // Cap the body before parsing (mirrors ingest-events): the credit charged is
     // fixed at 2 regardless of input size, so an unbounded grounding payload
@@ -181,10 +191,22 @@ serve(async (req) => {
       // Elevated (dev/admin) spends aren't real debits — refunding them would
       // mint phantom credits (mirrors generate-narrative's guard).
       if (isElevated) return;
-      await supabaseAdmin.rpc('refund_credits', {
-        spend_ledger_row: spendId,
-        refund_reason: why,
-      }).catch(() => {});
+      // The supabase RPC builder is a thenable, not a real Promise (no `.catch`);
+      // await it and inspect `error` instead. A refund failure is logged as a
+      // structured line so a stuck/uncredited refund is greppable + alertable.
+      try {
+        const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+          spend_ledger_row: spendId,
+          refund_reason: why,
+        });
+        if (refundErr) {
+          logError('generate-chronicle', user.id, refundErr.message, {
+            stage: 'refund', spend_id: spendId,
+          });
+        }
+      } catch (e) {
+        logError('generate-chronicle', user.id, e, { stage: 'refund', spend_id: spendId });
+      }
     };
 
     let prose = '';

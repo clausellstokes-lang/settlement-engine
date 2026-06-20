@@ -488,18 +488,26 @@ export function deriveThreatProfile(source, _settlement) {
 }
 
 /**
- * De-duplicate threats by (type, target), keeping the highest-severity
- * instance. The same underlying pressure is frequently expressed on more
- * than one surface (e.g. config.monsterThreat AND a matching stressor, or an
- * activeCondition AND a stressor of the same kind). Without this collapse,
- * every downstream consumer that sums threat contributions — most importantly
- * capacityModel's demand math — counts the one pressure multiple times,
- * inflating demand and tipping capacity bands on phantom load.
+ * Collapse threats by (type, target), keeping the highest-severity instance.
+ * This is the PRESSURE view: it answers "how many DISTINCT KINDS of pressure
+ * (per target) press the settlement?", deliberately folding away both
+ * cross-surface duplicates (e.g. config.monsterThreat AND a matching stressor)
+ * AND legitimately-distinct same-type instances (e.g. two hostile neighbours).
  *
- * @param {Object[]} profiles
- * @returns {Object[]} one profile per (type, target), max severity wins.
+ * It exists ONLY for consumers that SUM threat contributions — most importantly
+ * capacityModel's demand math, where charging the same kind of pressure once per
+ * surface/neighbour would double-count it and tip capacity bands on phantom load.
+ * It is NOT the enumeration view: deriveAllThreatProfiles below stays un-collapsed
+ * so explanation / contradictions / map / AI-grounding see every distinct threat.
+ *
+ * Determinism: iterates input order (collectThreatSources is deterministic) and
+ * keeps the first max-severity instance, so the per-(type,target) survivor and
+ * the summed demand it drives are byte-stable across runs.
+ *
+ * @param {any[]} profiles
+ * @returns {any[]} one profile per (type, target), max severity wins.
  */
-function dedupeThreatProfiles(profiles) {
+export function dedupeThreatsByPressure(profiles) {
   const byKey = new Map();
   for (const p of profiles) {
     if (!p) continue;
@@ -510,12 +518,23 @@ function dedupeThreatProfiles(profiles) {
   return Array.from(byKey.values());
 }
 
-/** Derive every threat across all surfaces, de-duplicated by (type, target). */
+/**
+ * Derive every threat across all surfaces, un-collapsed: each distinct threat
+ * survives enumeration so consumers can address them individually (e.g. two
+ * hostile neighbours both surface in explanations / contradictions / map /
+ * AI-grounding). Note: the same underlying pressure expressed on more than one
+ * surface CAN therefore appear more than once here — that is intentional for
+ * enumeration. Summation consumers must collapse first via
+ * dedupeThreatsByPressure (capacityModel does this in its demand math) so they
+ * do not double-count a single pressure.
+ *
+ * @param {any} settlement
+ * @returns {any[]} every derived ThreatProfile, un-collapsed.
+ */
 export function deriveAllThreatProfiles(settlement) {
   if (!settlement) return [];
   const sources = collectThreatSources(settlement);
-  const profiles = sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean);
-  return dedupeThreatProfiles(profiles);
+  return /** @type {any[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────

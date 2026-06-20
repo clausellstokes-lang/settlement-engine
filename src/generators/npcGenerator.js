@@ -13,7 +13,7 @@ import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
 import { computeRelTension } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
-import { roleToCategory, institutionCategoryFlags, isCommerceGuild } from './roleCategory.js';
+import { roleToCategory, roleTakesMerchantStress, institutionCategoryFlags, isCommerceGuild } from './roleCategory.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -1000,13 +1000,19 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       // Classify the role via the shared role→category map (longest-keyword-first)
       // instead of four hand-rolled substring lists. The override below is keyed
       // gov/mil/rel/merchant; map the role's category onto those buckets, keeping
-      // the same gov > mil > rel > merchant priority by virtue of single-category
-      // resolution. Pure string work — no rng, so draw order is unchanged.
+      // the same gov > mil > rel > merchant priority via the selector's branch
+      // order. The merchant bucket uses roleTakesMerchantStress, NOT a bare
+      // roleCat === 'economy', so guild/overseer crafts roles (e.g. 'Journeyman
+      // Overseer', 'Craft Guild Representative') still get the merchant override
+      // the pre-unification merchant test (merchant|guild|factor|overseer) gave
+      // them — longest-keyword-first would otherwise resolve them to crafts and
+      // silently drop the override. Pure string work — no rng, so draw order is
+      // unchanged.
       const roleCat = roleToCategory(roleLower);
       const isGov = roleCat === 'government';
       const isMil = roleCat === 'military';
       const isRel = roleCat === 'religious';
-      const isMerchant = roleCat === 'economy';
+      const isMerchant = roleTakesMerchantStress(roleLower);
 
       const STRESS_GOAL_OVERRIDES = {
         wartime: {

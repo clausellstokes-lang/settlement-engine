@@ -26,9 +26,12 @@ export const COPY = {
     // competing on the same surfaces). Now one verb per action class.
     // "Draft" is still the artifact noun (draft → canon lifecycle is
     // preserved); only the action verb changed.
+    // ModeSelector renders only Basic + Advanced. The "Custom Generate"
+    // mode (the Workshop) was removed; its copy key was deleted so this
+    // file can't drift back into advertising a surface that no longer
+    // exists.
     quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config. Set the foundations and go.' },
     advancedMode: { title: 'Advanced Generate', cta: 'Forge a Draft',  subtitle: 'Full configuration, step by step' },
-    customMode:   { title: 'Custom Generate',   cta: 'Forge a Draft',  subtitle: 'Power-user dashboard with every parameter exposed' },
     regenerate:   { cta: 'Reforge Draft',       confirm: 'Reforge the settlement? All unsaved placements will be lost.' },
   },
 

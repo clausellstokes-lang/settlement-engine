@@ -406,7 +406,10 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (ra !== rb) return ra - rb;
     if (a.activatedByResource !== b.activatedByResource)
       return a.activatedByResource ? -1 : 1;
-    return a.needLabel.localeCompare(b.needLabel);
+    // Codepoint-stable tiebreak, NOT localeCompare: this output feeds the hashed
+    // golden master, so a locale-/ICU-dependent sort would make the SAME seed
+    // emit a DIFFERENT chain order across machines.
+    return a.needLabel < b.needLabel ? -1 : a.needLabel > b.needLabel ? 1 : 0;
   });
 
   // ── Inter-chain dependency cascade ─────────────────────────────────────────────

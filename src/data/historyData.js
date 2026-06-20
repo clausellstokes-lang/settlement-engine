@@ -220,6 +220,12 @@ export const HISTORY_EVENTS = {
       priority: 10,
       minTier: 'metropolis',
       goalCategories: ['power', 'wealth'],
+      // Coherence gate (consumed by getUpgradeOpportunities' requiresInstKeyword
+      // filter): feudal leadership only appears where a palace / royal seat /
+      // noble-governor / government complex exists. The noble→government merge
+      // dropped this guard; restored so a Duke can't materialise in a settlement
+      // with no seat of feudal power.
+      requiresInstKeyword: ['palace', 'royal seat', 'noble governor', 'government complex'],
     },
     {
       role: 'Royal Chamberlain',
@@ -227,6 +233,9 @@ export const HISTORY_EVENTS = {
       priority: 8,
       minTier: 'city',
       goalCategories: ['power', 'personal'],
+      // Coherence gate (see Duke/Duchess): a royal chamberlain serves a palace /
+      // royal seat / government complex. Restored after the noble→government merge.
+      requiresInstKeyword: ['palace', 'royal seat', 'government complex'],
     },
   ],
   religious: [

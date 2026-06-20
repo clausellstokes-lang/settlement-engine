@@ -36,7 +36,8 @@ components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
              @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
-             existing 118 files burning down; every icon-only button must carry an
+             existing 35 files burning down (scripts/.raw-button-baseline.json);
+             every icon-only button must carry an
              accessible name — @enforced-by jsx-hygiene/icon-button-needs-label) +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
@@ -155,8 +156,10 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~2,400 tests / ~159 files (unit, property-based, domain/
-  store/lib integration, component/UI smoke, a11y, security, edge-function).
+- **test** — Vitest (unit, property-based, domain/store/lib integration,
+  component/UI smoke, a11y, security, edge-function). The suite grows every PR;
+  the live count is whatever CI runs (`npx vitest list | wc -l` for a local
+  snapshot) — hard numbers here rot, so trust the CI run over this line.
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
 

@@ -1,12 +1,15 @@
 /**
  * tests/domain/threatDedupAndCapacityFixes.test.js — B04 review fixes.
  *
- * Pins the cross-surface threat de-dup + the capacity-demand / supply
- * corrections that depended on it:
+ * Pins the cross-surface threat pressure-collapse + the capacity-demand /
+ * supply corrections that depend on it. The pressure-collapse lives in
+ * capacityModel's demand math (dedupeThreatsByPressure), NOT at the shared
+ * enumeration entry — deriveAllThreatProfiles stays honest so explanation /
+ * contradictions / map / AI-grounding see every distinct threat:
  *
- *   1. deriveAllThreatProfiles collapses threats by (type, target), keeping
- *      the max-severity instance, so the same pressure expressed on more than
- *      one surface (config.monsterThreat + a matching stressor) is counted once.
+ *   1. capacity demand counts the same pressure expressed on more than one
+ *      surface (config.monsterThreat + a matching stressor) once, while
+ *      deriveAllThreatProfiles still enumerates both surfaces.
  *   2. deriveDefense no longer double-charges monster pressure (config charge
  *      AND the config-derived monster_pressure threat charge).
  *   3. deriveHealing grants magical-healing supply for BOTH 'high' and
@@ -20,34 +23,42 @@ import { describe, it, expect } from 'vitest';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
 import { deriveCapacityProfile } from '../../src/domain/capacityModel.js';
 
-// ── Finding 1: cross-surface threat de-dup ─────────────────────────────────
+// ── Finding 1: cross-surface threat pressure-collapse ──────────────────────
 
-describe('deriveAllThreatProfiles — cross-surface de-dup (Finding 1)', () => {
-  it('collapses the same (type, target) threat from two surfaces into one', () => {
+describe('threat enumeration vs capacity-demand pressure-collapse (Finding 1)', () => {
+  it('enumerates a cross-surface pressure on every surface (no enumeration collapse)', () => {
     // config.monsterThreat 'frontier' (sev 0.45) AND a monster-tagged stressor
-    // (sev default 0.4) both materialize a monster_pressure threat on the
-    // settlement target. De-dup keeps a single instance.
+    // (sev default 0.4) each materialize a distinct monster_pressure threat.
+    // Enumeration is honest — both survive so downstream consumers can address
+    // each surface's threat (different ids, descriptions, provenance).
     const settlement = {
       config: { monsterThreat: 'frontier' },
       stressors: [{ name: 'Monster raids in the outlying hills' }],
     };
     const threats = deriveAllThreatProfiles(settlement);
     const monster = threats.filter(t => t.type === 'monster_pressure' && t.target === 'settlement');
-    expect(monster).toHaveLength(1);
+    expect(monster.length).toBeGreaterThanOrEqual(2);
+    // ...and they are genuinely distinct (different ids), not accidental clones.
+    expect(new Set(monster.map(t => t.id)).size).toBe(monster.length);
   });
 
-  it('keeps the highest-severity instance when de-duping', () => {
-    const settlement = {
-      config: { monsterThreat: 'frontier' },          // 0.45
-      stressors: [{ name: 'Monster sightings', severity: 0.9 }], // 0.9 (higher)
-    };
-    const threats = deriveAllThreatProfiles(settlement);
-    const monster = threats.find(t => t.type === 'monster_pressure');
-    expect(monster).toBeTruthy();
-    expect(monster.severity).toBeCloseTo(0.9);
+  it('charges defense demand for the cross-surface pressure exactly once', () => {
+    // Two surfaces, one underlying monster pressure: demand must reflect a
+    // SINGLE charge (the max-severity instance), not one per surface.
+    const oneSurface = deriveCapacityProfile('defense', {
+      config: { monsterThreat: 'frontier' }, // 0.45
+    });
+    const twoSurfaces = deriveCapacityProfile('defense', {
+      config: { monsterThreat: 'frontier' },                  // 0.45
+      stressors: [{ name: 'Monster raids', severity: 0.45 }], // same kind, same sev
+    });
+    // Same single pressure charge → identical demand despite the extra surface.
+    expect(twoSurfaces.demand).toBe(oneSurface.demand);
+    const monsterRows = twoSurfaces.demandContributors.filter(c => /monster/i.test(c.effect));
+    expect(monsterRows).toHaveLength(1);
   });
 
-  it('does not collapse distinct threat types', () => {
+  it('does not collapse distinct threat types in enumeration', () => {
     const settlement = {
       config: { monsterThreat: 'frontier' },
       stressors: [{ name: 'Plague in the slums' }],

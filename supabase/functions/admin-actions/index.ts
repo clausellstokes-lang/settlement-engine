@@ -282,6 +282,30 @@ serve(async (req) => {
       }
     };
 
+    // Layer 2 (review B16 #1): toggle GoTrue's NATIVE ban via the service-role
+    // admin client. A native ban invalidates the user's refresh tokens/sessions at
+    // the auth provider, so a banned/disabled account's LIVE JWT stops working —
+    // something the profiles.banned_at flag alone never did. `'876000h'` (~100y) is
+    // the conventional "permanent" ban_duration; `'none'` clears it on un-ban/enable.
+    // Returns whether the auth call succeeded; the caller treats a false as
+    // soft-fail (the DB flag + RLS/trigger gate already closed the write boundary).
+    const setGoTrueBan = async (target: string, banned: boolean): Promise<boolean> => {
+      try {
+        const { error: banErr } = await adminClient.auth.admin.updateUserById(
+          target,
+          { ban_duration: banned ? "876000h" : "none" },
+        );
+        if (banErr) {
+          console.warn("[admin-actions] GoTrue ban toggle failed:", banErr.message);
+          return false;
+        }
+        return true;
+      } catch (e) {
+        console.warn("[admin-actions] GoTrue ban toggle threw:", errorMessage(e));
+        return false;
+      }
+    };
+
     // Shared date defaults for the analytics reads (last 30 days).
     const today = new Date().toISOString().slice(0, 10);
     const monthAgo = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
@@ -728,7 +752,15 @@ serve(async (req) => {
           p_disabled: wantDisabled, p_reason: auditReason,
         });
         if (error) return json({ error: error.message }, 500);
-        return json({ success: true, ...(data || {}) });
+        // Layer 2 (review B16 #1): invalidate the user's tokens/sessions at the
+        // auth provider so the live JWT dies too. The DB profiles.disabled_at flag
+        // (above) + the RLS/trigger account-status gate (migrations 057/059) reject
+        // a disabled account's writes even with a valid JWT, but GoTrue's native ban
+        // also kills the SESSION so the locked account can't keep reading either.
+        // Soft-fails: if the admin call errors we still report success — the DB +
+        // RLS layer already closed the write boundary.
+        const authBan = await setGoTrueBan(userId, wantDisabled);
+        return json({ success: true, sessionRevoked: authBan, ...(data || {}) });
       }
 
       // Ban / unban account — reversible soft flag. HIGHEST role only.
@@ -749,13 +781,15 @@ serve(async (req) => {
           p_banned: wantBanned, p_reason: auditReason,
         });
         if (error) return json({ error: error.message }, 500);
-        // Enforcement note (review B16 #1): a still-valid JWT no longer grants
-        // write access once banned_at is set — spend_credits / mutate_settlement_
-        // batch (migration 057) and the AI edge functions' account_is_active gate
-        // both reject a banned account. Eagerly revoking the live refresh token
-        // here (so the SESSION also dies) is a further hardening tracked
-        // separately; the trust boundary is already closed by the DB gate.
-        return json({ success: true, notified, ...(data || {}) });
+        // Layer 2 (review B16 #1): a still-valid JWT no longer grants WRITE access
+        // once banned_at is set — spend_credits / mutate_settlement_batch (057), the
+        // direct-table RLS/trigger gate (059), and the AI edge functions'
+        // account_is_active gate all reject a banned account. This ALSO eagerly
+        // revokes the live session at the auth provider (GoTrue native ban) so the
+        // SESSION dies, not just write access — closing the gap the profiles flag
+        // alone never could. Soft-fails: the DB+RLS layer stands even if it errors.
+        const sessionRevoked = await setGoTrueBan(userId, wantBanned);
+        return json({ success: true, notified, sessionRevoked, ...(data || {}) });
       }
 
       // Soft-delete / restore a settlement — reversible. HIGHEST role only.

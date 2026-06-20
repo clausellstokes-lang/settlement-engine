@@ -24,8 +24,18 @@ playwright-report/
 playwright/.cache/
 
 .claude/tmp-digests/
+
+# Point-in-time analysis artifacts (regenerable, large, churny). These are
+# OUTPUTS of scripts, never imported by code — keep them out of git so a stray
+# `node scripts/simulate-generations.mjs` / `deep-profile-generations.mjs` run
+# can't bloat the tree. sim-report.json (~150KB) is written by
+# scripts/simulate-generations.mjs; deep-profile.json (~3.4MB) by
+# scripts/deep-profile-generations.mjs; docs/.review_findings.json (~1.2MB) is
+# the frozen raw dump of the old adversarial review (the curated register lives
+# in docs/RISK_REGISTER.md).
 sim-report.json
 deep-profile.json
+docs/.review_findings.json
 
 # A+ P0.6: fence throwaway audit/probe scripts out of the repo root
 /_audit*.mjs

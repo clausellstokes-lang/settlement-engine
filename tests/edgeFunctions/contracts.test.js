@@ -185,7 +185,10 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
   });
 
   it('founder_lifetime grants the one-time 30 credit bonus', () => {
-    expect(src).toMatch(/grantCredits\([\s\S]{0,200}30[\s\S]{0,200}founder_grant/);
+    // grantCreditsForSessionOnce is the idempotent wrapper (dedups on session id);
+    // grantCredits is the legacy direct form — accept either so the "one-time"
+    // contract holds whether or not the redelivery guard is in place.
+    expect(src).toMatch(/grantCredits(?:ForSessionOnce)?\([\s\S]{0,200}30[\s\S]{0,200}founder_grant/);
   });
 
   it('downgrades through the retention RPC, not a bare profile tier write', () => {

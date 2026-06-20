@@ -46,6 +46,14 @@ const TIER_GATE = {
 // output internally for elevated roles.
 const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
 
+// Legitimate NON-ranked settType sentinels the wizard's selector offers
+// alongside the ranked tiers (ConfigurationPanel's <option value="random"> /
+// <option value="custom">). These are not subject to the size paywall: 'random'
+// rolls a tier (then re-gated at generation), and 'custom' is a size the user
+// types. isTierAllowed must let these through, but FAIL CLOSED on everything
+// else (typos, undefined, tampered values) rather than fail open.
+const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
+
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
 
@@ -406,15 +414,23 @@ export const createAuthSlice = (set, get) => ({
 
   isTierAllowed: (settlementTier) => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
-    // Fail-open for tiers outside the rank table (e.g. the 'random'/'custom'
-    // sentinels, or any unknown value): an absent rank made `undefined <= n`
-    // evaluate to false, silently clamping a sentinel to disallowed. The live
-    // caller guards the sentinels first, but make the gate safe in isolation so
-    // a future caller can't be silently blocked. Only RANKED tiers are gated.
+    // FAIL CLOSED for anything that is neither a known ranked tier nor an
+    // explicitly-allowlisted sentinel. A permission gate that returns true for
+    // an unknown value (typo / undefined / tampered settType) is a security
+    // hole: a caller that forgot to guard the sentinels would silently grant
+    // access to an unrecognized tier. So the ONLY non-ranked values that pass
+    // are the legitimate wizard sentinels ('random'/'custom'); every other
+    // unranked value is denied.
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
     const rank = TIER_RANK[settlementTier];
-    if (rank === undefined) return true;
+    if (rank === undefined) return false;
     const maxTier = get().maxAllowedTier();
-    return rank <= TIER_RANK[maxTier];
+    const maxRank = TIER_RANK[maxTier];
+    // Defense-in-depth: if maxAllowedTier ever resolves to an unranked value,
+    // deny rather than compare against undefined (which would clamp to false
+    // for every input — fail-open's mirror image, but still wrong to rely on).
+    if (maxRank === undefined) return false;
+    return rank <= maxRank;
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */

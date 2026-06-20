@@ -1,13 +1,20 @@
 /**
  * accountStatusGate.pglite.test.js — EXECUTION test of the account ban/disable/
- * soft-delete enforcement at the DB write boundary (review B16 finding #1).
+ * soft-delete enforcement at the DB write boundary, RPC PATH (review B16 finding #1).
+ *
+ * SCOPE (read this before extending): this file exercises ONLY the SECURITY DEFINER
+ * RPC path — spend_credits + mutate_settlement_batch (migration 057). The client
+ * ALSO writes settlements/maps via the plain PostgREST table path
+ * (`.from('settlements').insert/update/delete`) and the gallery write paths, which
+ * are governed by RLS policies + triggers, NOT these RPCs. That real direct-table
+ * path is covered by accountStatusDirectWrites.pglite.test.js (migration 059) —
+ * a green run HERE alone does NOT prove the direct path is gated.
  *
  * 053 added profiles.banned_at / disabled_at and 054 added deleted_at, but NOTHING
  * enforced them: a banned/disabled/anonymised user kept full write access with a
  * still-valid JWT. Migration 057 adds account_is_active(uid) and gates the two
- * write RPCs (spend_credits, mutate_settlement_batch) on it. This RUNS the real
- * net-current SQL against in-process Postgres (pglite) and asserts a flagged
- * account is actually cut off — that the moderation flags are no longer cosmetic.
+ * write RPCs on it. This RUNS the real net-current SQL against in-process Postgres
+ * (pglite) and asserts a flagged account is actually cut off through the RPC path.
  *
  * Loads: account_is_active + spend_credits + mutate_settlement_batch from 057,
  * get_credit_balance from 018. auth.uid() / current_user_is_privileged are GUC

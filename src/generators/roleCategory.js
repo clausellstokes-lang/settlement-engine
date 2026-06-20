@@ -88,6 +88,32 @@ export function roleToCategory(role, fallback = 'other') {
   return fallback;
 }
 
+// Merchant-stress keywords. The wartime/migration/slave-revolt goal overrides in
+// npcGenerator key a 'merchant' bucket that must catch economically-oriented
+// roles even when roleToCategory resolves them to a NON-economy category because
+// a longer keyword wins under longest-keyword-first matching. Concretely:
+// 'Journeyman Overseer' resolves to crafts ('journeyman' > 'overseer') and
+// 'Craft Guild Representative' resolves to crafts ('craft'), yet both are guild/
+// trade leadership that should take the merchant stress goal — exactly as the
+// pre-unification hand-rolled merchant test (merchant|guild|factor|overseer) did.
+// gov/mil/rel still win via the override selector's branch precedence.
+const MERCHANT_STRESS_KEYWORDS = Object.freeze(['merchant', 'guild', 'factor', 'overseer']);
+
+/**
+ * Does this role take the merchant/economic stress-goal override? True for the
+ * economy category and for any role carrying a merchant-economic keyword (so
+ * guild/overseer crafts roles are not silently dropped). Pure and deterministic.
+ *
+ * @param {string} role
+ * @returns {boolean}
+ */
+export function roleTakesMerchantStress(role) {
+  const r = String(role || '').toLowerCase();
+  if (!r) return false;
+  if (roleToCategory(r) === 'economy') return true;
+  return MERCHANT_STRESS_KEYWORDS.some(kw => r.includes(kw));
+}
+
 // ─── Institution-metadata category detection ──────────────────────────────────
 // Catalog institutions carry a `category` (the catalog GROUP — 'Criminal',
 // 'Magic', 'Religious', …), `tags`, and `catalogId` (assembleInstitutions stamps

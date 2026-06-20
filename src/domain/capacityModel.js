@@ -51,7 +51,7 @@
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
-import { deriveAllThreatProfiles } from './threatProfile.js';
+import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
@@ -252,7 +252,7 @@ function deriveHealing(s, ctx) {
       demand += m; push(demandContributors, cond.id, 'plague', +m, `${cond.label} overwhelms healing.`);
     }
   }
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'siege' || threat.type === 'monster_pressure') {
       const m = Math.round(threat.severity * 12);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives injury rates up.`);
@@ -307,7 +307,12 @@ function deriveDefense(s, ctx) {
   // threat loop below is the single source of truth for monster demand.
   // Charging both double-counted the same pressure and over-inflated defense
   // demand for every frontier/plagued settlement.
-  for (const threat of ctx.threats) {
+  //
+  // ctx.demandThreats is the pressure-deduped view (one row per (type,target),
+  // max severity): two hostile neighbours both ENUMERATE distinctly elsewhere,
+  // but charge defense demand once here so the band tracks the worst pressure
+  // rather than inflating on each duplicate.
+  for (const threat of ctx.demandThreats) {
     if (['siege', 'bandit_raids', 'rival_neighbor', 'monster_pressure'].includes(threat.type)) {
       const m = Math.round(threat.severity * 15);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives defense need.`);
@@ -635,7 +640,7 @@ function deriveMagical(s, ctx) {
   }
 
   // DEMAND: threats requiring magical response + magical conditions
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'arcane_instability' || threat.type === 'cult') {
       const m = Math.round(threat.severity * 14);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} requires arcane response.`);
@@ -705,13 +710,21 @@ function finalizeCapacity(name, supply, demand, supplyContributors, demandContri
 /**
  * Build the context (active conditions, threats, factions, chains)
  * once per settlement so each capacity deriver doesn't re-derive.
+ *
+ * `threats` is the honest, un-collapsed enumeration (every distinct threat).
+ * `demandThreats` is the pressure-deduped view (one row per (type,target), max
+ * severity) — the demand loops sum it so the same underlying pressure surfaced
+ * on multiple surfaces, or two distinct same-type neighbours, is charged once
+ * rather than inflating demand per duplicate.
  */
 function buildContext(settlement) {
+  const threats = deriveAllThreatProfiles(settlement);
   return {
     conditions: deriveAllActiveConditions(settlement),
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
-    threats:    deriveAllThreatProfiles(settlement),
+    threats,
+    demandThreats: dedupeThreatsByPressure(threats),
   };
 }
 

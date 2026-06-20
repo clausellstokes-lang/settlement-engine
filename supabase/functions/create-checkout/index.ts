@@ -37,6 +37,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+// Structured error logging for the money path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -143,6 +145,10 @@ export async function handleCreateCheckout(
   const guard = botGuard(req, 'create-checkout');
   if (guard.reject) return guard.reject;
 
+  // Hoisted above the try so the catch can attribute a failure to the acting user
+  // (when one was resolved) in the structured error log.
+  let user: { id: string; email?: string | null } | null = null;
+
   try {
     // Parse request body first so we know whether the product requires auth.
     const { product, checkoutToken } = await req.json();
@@ -163,7 +169,6 @@ export async function handleCreateCheckout(
     }
 
     const authHeader = req.headers.get('Authorization');
-    let user: { id: string; email?: string | null } | null = null;
 
     if (authHeader) {
       // If auth is provided (even for an anonymous-allowed product), try
@@ -242,6 +247,8 @@ export async function handleCreateCheckout(
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    // One structured line per checkout failure so the money path is greppable.
+    logError('create-checkout', user?.id ?? null, message);
     return new Response(
       JSON.stringify({ error: message }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
@@ -249,4 +256,7 @@ export async function handleCreateCheckout(
   }
 }
 
-serve(handleCreateCheckout);
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flagged
+// the direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleCreateCheckout(req));

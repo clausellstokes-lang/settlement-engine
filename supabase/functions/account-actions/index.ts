@@ -145,6 +145,21 @@ serve(async (req) => {
       subject, message, category, priority, links, ticketId, body, metadata,
     } = await req.json();
 
+    // A+ defense-in-depth (finding #1): a banned/disabled/soft-deleted account may
+    // not write NEW support content (mirrors the account_is_active gate on the AI
+    // edge functions). Fail-CLOSED on null/RPC-error (isActive !== true). Read-only
+    // ticket actions and the account-deletion lifecycle stay reachable.
+    // NOTE: the user-facing reply action handled HERE is "reply_ticket" (switch case
+    // below); "post_ticket_reply" is the admin-actions name and never reaches this
+    // function — gating on it would be dead. Both write paths must fail-closed.
+    const TICKET_WRITE_ACTIONS = new Set(["create_ticket", "reply_ticket"]);
+    if (TICKET_WRITE_ACTIONS.has(action)) {
+      const { data: isActive } = await adminClient.rpc("account_is_active", { p_uid: callingUser.id });
+      if (isActive !== true) {
+        return json({ error: "Account is not active" }, 403);
+      }
+    }
+
     switch (action) {
       // ── A5: create_ticket — the CALLER files their OWN ticket. The user_id is
       // taken from the verified JWT (forwarded as p_actor), never the body, so a
@@ -317,9 +332,46 @@ serve(async (req) => {
         });
         if (error) return json({ error: error.message }, 500);
 
+        // Layer 2 (review B16 #1): the RPC stamped deleted_at + disabled_at (so the
+        // 057/059 DB+RLS gate already rejects every WRITE from the anonymised shell),
+        // but the user's LIVE JWT/session would otherwise survive until expiry. Ban
+        // each just-processed account at the auth provider (GoTrue native ban) so the
+        // session dies immediately too. The RPC returns the deletion_request ids it
+        // advanced; resolve each to its user_id and ban it. Soft-fails per user — a
+        // GoTrue error never undoes the soft-delete (the DB anonymise/lock stands).
+        let sessionsRevoked = 0;
+        const requestIds = Array.isArray((data as Record<string, unknown> | null)?.ids)
+          ? ((data as Record<string, unknown>).ids as unknown[]).map(String)
+          : [];
+        if (requestIds.length > 0) {
+          const { data: processedRows } = await adminClient
+            .from("deletion_requests")
+            .select("user_id")
+            .in("id", requestIds);
+          const userIds = (processedRows || [])
+            .map((r: Record<string, unknown>) => r.user_id)
+            .filter((id: unknown): id is string => typeof id === "string");
+          for (const uid of userIds) {
+            try {
+              const { error: banErr } = await adminClient.auth.admin.updateUserById(
+                uid,
+                { ban_duration: "876000h" },
+              );
+              if (banErr) {
+                console.warn("[account-actions] GoTrue ban on deletion failed:", banErr.message);
+              } else {
+                sessionsRevoked += 1;
+              }
+            } catch (e) {
+              console.warn("[account-actions] GoTrue ban on deletion threw:", errorMessage(e));
+            }
+          }
+        }
+
         return json({
           success: true,
           result: data,
+          sessionsRevoked,
           processedAt: new Date().toISOString(),
         });
       }

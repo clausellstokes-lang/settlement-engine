@@ -212,6 +212,33 @@ function dedupeById(items) {
   return [...map.values()];
 }
 
+/**
+ * True if an evidence list carries a war-layer provenance tag (a source string
+ * prefixed 'war_layer', minted by warDeployment.js via mintDirectedChannel).
+ * Used to de-alias war-layer fronts from relationship-bundle fronts that share
+ * an id (channelIdFor keys only type/from/to/goods).
+ *
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {boolean}
+ */
+function hasWarLayerEvidence(evidence) {
+  return Array.isArray(evidence)
+    && evidence.some(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'));
+}
+
+/**
+ * The war-layer provenance rows from an evidence list (sources prefixed
+ * 'war_layer'), in original order.
+ *
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {Array<{source?: string}>}
+ */
+function warLayerEvidenceRows(evidence) {
+  return Array.isArray(evidence)
+    ? evidence.filter(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'))
+    : [];
+}
+
 export function ensureRegionalGraph(graph = {}, options = {}) {
   // Deterministic timestamps: ensure mints state (inferred edges below, plus
   // any missing default stamp), so callers that thread options.now get
@@ -387,9 +414,11 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
  * never curation: an existing channel keeps its status (suggested, confirmed,
  * dormant, and disabled are all sticky), visibility, confirmedAt, and original
  * discoveredAt, while the candidate refreshes the measurement fields
- * (strength, confidence, goods, evidence, explanation). Only a brand-new
- * channel takes the candidate's status (discovery candidates are born
- * 'suggested').
+ * (strength, confidence, goods, evidence, explanation). Evidence is the one
+ * partial exception: prior 'war_layer*' provenance rows are carried forward so a
+ * relationship bundle that collides ids with a war-layer front cannot erase its
+ * ownership tag. Only a brand-new channel takes the candidate's status (discovery
+ * candidates are born 'suggested').
  */
 export function addRegionalChannels(graph, channels = [], options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
@@ -402,6 +431,18 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
     if (!channel) continue;
     const prev = byId.get(channel.id);
     if (prev) {
+      // War-layer provenance is STICKY: channelIdFor keys only (type,from,to,goods),
+      // so a relationship bundle can collide ids with a war-layer-minted front and
+      // its candidate evidence ('relationship_label') would otherwise erase the
+      // 'war_layer*' tag — defeating the de-aliasing guard in
+      // syncRelationshipChannelBundle the NEXT time the relationship is relabelled.
+      // Carry the prior war-layer evidence rows forward so the front stays
+      // recognisably war-layer-owned across any number of label changes.
+      const priorWarLayerEvidence = warLayerEvidenceRows(prev.evidence);
+      const candidateEvidence = Array.isArray(channel.evidence) ? channel.evidence : [];
+      const mergedEvidence = (priorWarLayerEvidence.length && !hasWarLayerEvidence(candidateEvidence))
+        ? [...priorWarLayerEvidence, ...candidateEvidence]
+        : channel.evidence;
       byId.set(channel.id, {
         ...prev,
         ...channel,
@@ -413,6 +454,7 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
         // provenance must not orphan a relationship-generated channel.
         relationshipType: channel.relationshipType || prev.relationshipType || null,
         relationshipKey: channel.relationshipKey || prev.relationshipKey || null,
+        evidence: mergedEvidence,
         updatedAt: now,
       });
     } else {
@@ -564,6 +606,23 @@ export function mintDirectedChannel({
   }, /** @type {any} */ (stamp));
 }
 
+// A war-layer-minted directed channel (today: a war_front from mintDirectedChannel
+// with source 'war_layer_deploy') carries a 'war_layer*' evidence source. Its
+// lifecycle is owned by the war layer's mobilization gate + siege-resolution
+// retirement, NOT by relationship labels — so a relationship relabel must never
+// revive it. This matters because channelIdFor keys only (type, from, to, goods):
+// a hostile-relationship war_front bundle mints the SAME id as a war-layer front,
+// so without this guard the dedormancy branch below would silently re-confirm a
+// war-layer front the war layer had retired to 'dormant', re-seeding a phantom
+// siege that bypasses the mobilization gate.
+/**
+ * @param {{evidence?: Array<{source?: string}>}|null|undefined} channel
+ * @returns {boolean}
+ */
+function isWarLayerMinted(channel) {
+  return hasWarLayerEvidence(channel?.evidence);
+}
+
 export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -583,6 +642,10 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
       // overridden, and plain Discover still resurrects nothing
       // (addRegionalChannels keeps every prior status sticky).
       if (channel.status !== 'dormant') return channel;
+      // De-alias war-layer fronts: a dormant front the war layer retired is
+      // owned by the war layer, so the relationship relabel leaves it dormant
+      // (no phantom re-confirm). The war layer alone re-mobilizes it.
+      if (isWarLayerMinted(channel)) return channel;
       return {
         ...channel,
         status: 'confirmed',

@@ -10,7 +10,9 @@ commands run with your Supabase + Stripe credentials.
 After pushing to `origin/master`:
 
 1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate data/edge/map
-   → typecheck → lint → ~4,480 tests → build). Watch:
+   → typecheck → lint → the full Vitest suite → build). The test count grows every
+   PR — the live number is whatever the CI run reports, not a figure pinned here.
+   Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
 2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
@@ -26,16 +28,31 @@ bundle**. Check the two manual sections.
 
 ## Gating production on CI
 
-**In-repo gate (now wired): `vercel.json` → `ignoreCommand`.** `vercel.json`
+**In-repo gate (wired and ARMED): `vercel.json` → `ignoreCommand`.** `vercel.json`
 sets `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`. Vercel runs that
 BEFORE every build and reads its exit code (exit 0 = skip build, exit 1 =
 proceed — Vercel's inverted convention). The script queries the GitHub Checks
 API for the commit being deployed and only PROCEEDS when the required checks
-(`check`, `e2e`, `deno-tests`) are all green. To activate the hard gate, set a
-read-only `GITHUB_CI_STATUS_TOKEN` (a PAT with `repo:status`/checks read) in
-Vercel → Project → Settings → Environment Variables. **Until that token is set
-the script fails OPEN** (it proceeds, deferring to branch protection) so it can
-never wedge every deploy — see the script header for the fail-closed switch.
+(`check`, `e2e`, `deno-tests`) are all green.
+
+**The gate is FAIL-CLOSED.** Inside a Vercel git deploy, anything that prevents
+verifying CI — a missing `GITHUB_CI_STATUS_TOKEN`, a network error reaching
+GitHub, a non-2xx response (bad/expired token, rate limit, 404), checks that
+haven't reported yet, or any required check that isn't `success` — BLOCKS the
+deploy (exit 0 = skip) rather than shipping unverified bytes. There is exactly
+one documented escape hatch: setting `VERCEL_ALLOW_UNGATED_DEPLOY=1` makes the
+script proceed UNGATED while emitting a loud warning (intended for a deliberate
+hotfix while the token is being rotated, never as a steady state). Runs that are
+NOT inside a Vercel git deploy (local `vercel build`, `vite preview`, missing git
+metadata) always proceed — the gate only ever governs production/preview deploys.
+
+To make the gate actually verify CI rather than just block, set a read-only
+`GITHUB_CI_STATUS_TOKEN` (a PAT with `repo:status` / checks read) in Vercel →
+Project → Settings → Environment Variables. Without that token every Vercel
+deploy is blocked (unless you set the `VERCEL_ALLOW_UNGATED_DEPLOY=1` opt-out),
+so provisioning the token is a required setup step, not an optional hardening one.
+See the script header in `scripts/vercel-ignore-build.mjs` for the full decision
+table.
 
 For defense in depth, also do one of the two below (weakest → strongest):
 
@@ -61,8 +78,11 @@ For defense in depth, also do one of the two below (weakest → strongest):
 
    Now CI is the only path to production: no green gate, no deploy.
 
-Until one of these is in place, **always let the `pre-push` hook run** (never
-`--no-verify` to `master`) and watch the Actions tab after pushing.
+The in-repo gate above is the first line of defense, but it lives in the deploy
+step, not in `master`'s history — branch protection (option 1) is what stops a
+red commit from reaching `master` at all. Regardless of which defenses are on,
+**always let the `pre-push` hook run** (never `--no-verify` to `master`) and watch
+the Actions tab after pushing.
 
 ## Client app (Vercel) — automatic
 

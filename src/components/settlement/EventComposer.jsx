@@ -125,8 +125,13 @@ export default function EventComposer() {
       .filter(f => f && f !== governing)
       .map(f => ({ id: String(f.faction || f.name || ''), name: String(f.faction || f.name || '') }))
       .filter(o => o.id);
-    // Narrow deps to what this reads — the faction list + which one is seated
-    // (governingFactionOf keys off powerStructure.factions + governingName).
+    // Narrow deps to what this reads — the faction list + which one is seated.
+    // governingFactionOf keys off the per-faction `f.isGoverning` flag FIRST,
+    // then falls back to powerStructure.governingName. `isGoverning` lives on
+    // objects inside the factions array, so the `factions` reference dep already
+    // covers it: every seat change is an immutable update that mints a fresh
+    // array (and fresh faction objects), re-running this memo. governingName is
+    // listed for the fallback path.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settlement?.powerStructure?.factions, settlement?.powerStructure?.governingName]);
   // ADD_TRADE_GOOD — datalist suggestions: every catalogued export label

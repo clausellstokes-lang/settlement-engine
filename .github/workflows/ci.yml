@@ -59,6 +59,14 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
+      # Domain STRICT gate: tsc with strict flags over src/domain (+ the
+      # generation path) against a frozen baseline of allowed errors, so new
+      # strict violations can't sneak in. `npm run check` and the pre-push hook
+      # already run this; CI ran `typecheck` but NOT this, leaving a parity gap
+      # where a strict regression could land on master green. Closed here.
+      - name: Type check (domain strict)
+        run: npm run typecheck:domain:strict
+
       # ESLint on the full src/ + tests + scripts. Correctness rules
       # (undefined vars, dupe keys, rules-of-hooks, the design-token and
       # analytics-event contracts) are errors; forward-looking React 19
@@ -124,6 +132,21 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+
+      # Type-check the money-path edge sources (deno check over the trust-boundary
+      # entrypoints + refund policy). This is BLOCKING: a type regression in
+      # stripe-webhook / create-checkout / generate-narrative refund logic must
+      # not ship. This is how the money-path PRODUCTION code gets type-checked in
+      # CI. (test:edge below still runs with --no-check until the edge *.test.ts
+      # mock clients are typed to satisfy the handler deps — see deno.json //gate.)
+      - name: Type check edge functions (Deno)
+        run: deno task check:edge
+
+      # Deno lint over the edge sources. Non-blocking for now (|| true) so a new
+      # lint rule can't wedge the gate, but the output is surfaced in the log so
+      # drift is visible. Promote to blocking once the edge tree lints clean.
+      - name: Lint edge functions (Deno — non-blocking)
+        run: deno task lint:edge || true
 
       - name: Run edge-function Deno tests
         run: deno task test:edge

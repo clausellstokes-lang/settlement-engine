@@ -21,6 +21,8 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
+// Structured error logging for the money path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET')!;
@@ -57,9 +59,46 @@ async function grantCredits(
   });
 
   if (rpcErr) {
-    console.error('[stripe-webhook] system_grant_credits RPC failed:', rpcErr.message);
+    logError('stripe-webhook', userId, rpcErr.message, { stage: 'grant_credits', source, amount });
     throw new Error(`Credit grant failed: ${rpcErr.message}`);
   }
+}
+
+/**
+ * Idempotent credit grant for one-shot checkout.session.completed grants
+ * (founder bonus, credit packs). Stripe delivers webhooks AT-LEAST-ONCE, so a
+ * redelivered checkout event must not double-grant real money. This SELECT is a
+ * cheap fast-path skip (mirroring grantMonthlyAllowanceIfNeeded's invoice dedup);
+ * the AUTHORITATIVE, race-safe guarantee is in system_grant_credits (migration
+ * 024), which atomically claims (source, idempotency_key=stripe_session_id) via
+ * INSERT ... ON CONFLICT DO NOTHING before granting — so even two truly-concurrent
+ * redeliveries that both pass this SELECT cannot double-grant. Do not remove the
+ * RPC's atomic claim on the strength of this pre-check alone.
+ *
+ * @param {ReturnType<typeof adminClient>} supabase
+ * @param {string} userId
+ * @param {number} amount
+ * @param {string} source
+ * @param {string} sessionId
+ */
+async function grantCreditsForSessionOnce(
+  supabase: ReturnType<typeof adminClient>,
+  userId: string,
+  amount: number,
+  source: string,
+  sessionId: string,
+) {
+  const { data: existing } = await supabase
+    .from('credit_ledger')
+    .select('id')
+    .eq('source', source)
+    .eq('metadata->>stripe_session_id', sessionId)
+    .maybeSingle();
+  if (existing?.id) {
+    console.log(`[stripe-webhook] ${source} for session ${sessionId} already granted — skipping (idempotent redelivery)`);
+    return;
+  }
+  await grantCredits(supabase, userId, amount, source, { stripe_session_id: sessionId });
 }
 
 async function findUserIdForStripeCustomer(
@@ -189,7 +228,7 @@ export async function handleStripeWebhook(
       body, signature, webhookSecret, undefined, Stripe.createSubtleCryptoProvider(),
     );
   } catch (err) {
-    console.error('Webhook signature verification failed:', err);
+    logError('stripe-webhook', null, err, { stage: 'signature_verification' });
     return new Response('Invalid signature', { status: 400 });
   }
 
@@ -251,10 +290,8 @@ export async function handleStripeWebhook(
         const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
-        // Founder bonus: one-time 30-credit grant.
-        await grantCredits(supabase, userId!, 30, 'founder_grant', {
-          stripe_session_id: session.id,
-        });
+        // Founder bonus: one-time 30-credit grant (idempotent on session id).
+        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id);
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
         // One-shot purchase, no account required. Nothing to mutate on
@@ -266,10 +303,9 @@ export async function handleStripeWebhook(
         console.log(`single_dossier purchased: session=${session.id}`);
       } else if (credits > 0) {
         // Credit pack purchase. The RPC handles ledger, legacy counter,
-        // compatibility table, and audit writes atomically.
-        await grantCredits(supabase, userId!, credits, 'purchase', {
-          stripe_session_id: session.id,
-        });
+        // compatibility table, and audit writes atomically; the wrapper makes
+        // the grant idempotent against Stripe's at-least-once redelivery.
+        await grantCreditsForSessionOnce(supabase, userId!, credits, 'purchase', session.id);
         console.log(`Added ${credits} credits to user ${userId}`);
       }
       break;
@@ -319,4 +355,7 @@ export async function handleStripeWebhook(
   });
 }
 
-serve(handleStripeWebhook);
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flagged
+// the direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleStripeWebhook(req));

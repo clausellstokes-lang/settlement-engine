@@ -2320,8 +2320,13 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _subLocal.forEach((g) => v.localProduction.push(g));
   }
 
-  // Sort income sources by percentage desc, then alphabetically — must be LAST
-  incomeNormalized.sort((a, b) => b.percentage - a.percentage || a.source.localeCompare(b.source));
+  // Sort income sources by percentage desc, then by source — must be LAST.
+  // The tiebreak is codepoint-stable, NOT localeCompare: this output feeds the
+  // hashed golden master, so a locale-/ICU-dependent sort would make the SAME
+  // seed emit a DIFFERENT income-source order across machines.
+  incomeNormalized.sort(
+    (a, b) => b.percentage - a.percentage || (a.source < b.source ? -1 : a.source > b.source ? 1 : 0)
+  );
   // ── Base prosperity model ───────────────────────────────────────────────
   // Inputs: route (channel), tier (capacity), economy slider (investment),
   //         magic (tier-scaled production), threat (drag), military (dual effect),

@@ -34,7 +34,12 @@ function makeStub() {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
     from: (_table: string) => ({
       update: (vals: unknown) => ({ eq: (_col: string, _val: string) => { calls.profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
-      select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }),
+      // Chainable select builder: supports any number of .eq() before .maybeSingle()
+      // (the checkout dedup chains .eq('source',…).eq('metadata->>stripe_session_id',…)).
+      select: () => {
+        const builder = { eq: () => builder, ilike: () => builder, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+        return builder;
+      },
     }),
     rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
   };
@@ -183,4 +188,66 @@ Deno.test('invoice.paid + invoice.payment_succeeded for the SAME invoice grant o
   await handleStripeWebhook(req(succeeded, { 'stripe-signature': await sign(succeeded, SECRET) }), stub);
   const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
   assertEquals(grants.length, 1);   // Stripe's double-fire is collapsed to one grant
+});
+
+// ── Checkout one-shot grants (credit packs / founder bonus) ───────────────────
+// checkout.session.completed is ALSO delivered at-least-once; a redelivered
+// purchase must NOT double-grant real money. grantCreditsForSessionOnce dedups
+// on the (source, stripe_session_id) credit_ledger row, mirroring the invoice
+// path. (holistic-review money-path risk #4)
+
+/** Stub whose credit_ledger dedup keys on stripe_session_id and whose
+ *  system_grant_credits records the granted session ids. */
+function makeCheckoutStub() {
+  const granted = new Set<string>();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => ({
+      select: (_cols?: string) => {
+        const chain: Record<string, string> = {};
+        const builder = {
+          eq: (col: string, val: string) => { chain[col] = val; return builder; },
+          maybeSingle: () => {
+            if (table === 'credit_ledger') {
+              const sid = chain['metadata->>stripe_session_id'];
+              return Promise.resolve({ data: granted.has(sid) ? { id: 'existing' } : null, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
+        };
+        return builder;
+      },
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'system_grant_credits') {
+        const meta = (args as { metadata?: { stripe_session_id?: string } }).metadata;
+        if (meta?.stripe_session_id) granted.add(meta.stripe_session_id);
+      }
+      return Promise.resolve({ error: null });
+    },
+  };
+  return { rpc, granted, adminClient: () => client };
+}
+
+Deno.test('a signed credit-pack checkout grants the metadata credits exactly once', async () => {
+  const stub = makeCheckoutStub();
+  const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);
+  assertEquals((grants[0].args as { amount: number; source: string }).amount, 60);
+  assertEquals((grants[0].args as { source: string }).source, 'purchase');
+});
+
+Deno.test('a replayed credit-pack checkout (same session id) does NOT double-grant', async () => {
+  const stub = makeCheckoutStub();
+  const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);   // the redelivery is a no-op (idempotent on session id)
 });

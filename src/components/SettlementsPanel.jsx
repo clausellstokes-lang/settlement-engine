@@ -149,7 +149,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       try {
         // Persist, refresh savedSettlements so the count is correct, then fire
         // the real-save instrumentation (first_save/third_save pricing moments
-        // + 'saved' fingerprint). Fire-and-forget; never blocks the fork.
+        // + 'saved' fingerprint). These are awaited deliberately: the fork must
+        // land in the library (and the count must be current) BEFORE we navigate
+        // to the generate view, so the user doesn't arrive ahead of their own
+        // save. A failure here is caught below and only logged — it never blocks
+        // the navigation that follows.
         const saveId = await savesService.save({ name: result.name || sample.name, tier: result.tier || sample.tier, settlement: result, config: result._config || forkedConfig });
         await savesService.list().then(setSavedSettlements).catch(() => {});
         notePersistedSave?.(result, saveId);

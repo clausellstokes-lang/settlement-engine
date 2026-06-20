@@ -5,6 +5,7 @@ import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Packa
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import PipelineRail from './PipelineRail.jsx';
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
@@ -815,13 +816,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           )}
           <Suspense
             fallback={
-              <div style={{ padding: 32, textAlign: 'center', color: swatch.mutedBrown,
-                fontFamily: 'Nunito,sans-serif', fontSize: FS.md }}>Loading\u2026</div>
+              <div style={{ padding: 32, textAlign: 'center', color: swatch.mutedBrown, fontFamily: 'Nunito,sans-serif', fontSize: FS.md }}>Loading\u2026</div>
             }
           >
-            <div ref={dossierContentRef} style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}>
-              {renderTab()}
-            </div>
+            {/* Resilience: the active tab renders live, malformed-by-construction
+                simulation data (forks, imports, regen drift). A throw in any one
+                tab must degrade to a recoverable fallback INSIDE the dossier card
+                \u2014 not propagate to the root boundary and blank the whole app. The
+                resetKey is the selected tab so switching tabs auto-recovers. */}
+            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle="This section of the dossier couldn't be displayed." resetKeys={[selectedTab, readSessionSubject]}>
+              <div ref={dossierContentRef} style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}>{renderTab()}</div>
+            </FeatureErrorBoundary>
           </Suspense>
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>

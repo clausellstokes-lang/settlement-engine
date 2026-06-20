@@ -6,6 +6,7 @@
  */
 
 import { useState } from 'react';
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
@@ -72,31 +73,52 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
   } = useGalleryPageState(routeSlug);
 
   if (activeSlug) {
+    // Resilience: a public dossier is third-party, server-projected data — a
+    // malformed gallery payload (bad chronicle, missing fields) must degrade to
+    // a recoverable fallback, not blank the app. resetKey is the slug so opening
+    // a different dossier clears a stale error.
     return (
-      <GalleryDetail
-        dossier={dossier}
-        loading={dossierLoading}
-        error={dossierError}
-        actionError={actionError}
-        actionNotice={actionNotice}
-        onBack={backToList}
-        onOpen={openDossier}
-        onVote={voteOn}
-        onReport={reportOn}
-        onImport={importDossier}
-        importBusy={!!importBusyId}
-        imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
-        onCommentCountChange={setDossierCommentCount}
-        voteBusy={!!voteBusyId}
-        reportBusy={!!reportBusyId}
-        auth={auth}
-      />
+      <FeatureErrorBoundary
+        label="GalleryPage.detail"
+        kind="react.render.gallery"
+        fallbackTitle="This gallery dossier couldn't be displayed."
+        resetKeys={[activeSlug]}
+      >
+        <GalleryDetail
+          dossier={dossier}
+          loading={dossierLoading}
+          error={dossierError}
+          actionError={actionError}
+          actionNotice={actionNotice}
+          onBack={backToList}
+          onOpen={openDossier}
+          onVote={voteOn}
+          onReport={reportOn}
+          onImport={importDossier}
+          importBusy={!!importBusyId}
+          imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
+          onCommentCountChange={setDossierCommentCount}
+          voteBusy={!!voteBusyId}
+          reportBusy={!!reportBusyId}
+          auth={auth}
+        />
+      </FeatureErrorBoundary>
     );
   }
 
   return (
     <>
       <GalleryTabs tab={tab} setTab={setTab} />
+      {/* Resilience: the browsing list + the maps grid render server-projected
+          community payloads. A throw in either degrades to a recoverable
+          fallback in place of the panel, not a full-app white screen. resetKey
+          is the active tab so toggling tabs clears a stale error. */}
+      <FeatureErrorBoundary
+        label="GalleryPage.list"
+        kind="react.render.gallery"
+        fallbackTitle="The gallery couldn't be displayed."
+        resetKeys={[tab]}
+      >
       {tab === 'maps' ? (
         <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
           <GalleryMaps onNavigate={onNavigate} />
@@ -126,6 +148,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
           isSignedIn={!!auth?.user}
         />
       )}
+      </FeatureErrorBoundary>
     </>
   );
 }

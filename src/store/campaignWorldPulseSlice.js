@@ -38,6 +38,7 @@ import {
 } from './campaignSliceShared.js';
 import {
   capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
+  restorePulseSnapshot,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
@@ -172,11 +173,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // pure function over plain clones, so running it on the draft only made
     // Immer track a draft it never touches. We split it out below WITHOUT an
     // await between the two set() calls — JS is single-threaded, so no other
-    // action can observe the intermediate (drained-but-not-advanced) state, and
-    // the drain already committed unconditionally in the prior implementation
-    // (advance returning null still left the drain applied), so behaviour is
-    // preserved. This also removes the second full clone of every member save:
-    // the simulation now consumes the SAME plain clones we hand it here. */
+    // action can observe the intermediate (drained-but-not-advanced) state.
+    // The drain IS committed here before the pure pulse runs, but it is no longer
+    // left committed UNCONDITIONALLY: if the pure pulse throws, the compute block
+    // below rolls the full pre-drain snapshot back (atomic rollback), so a failed
+    // advance neither consumes the queue nor advances a tick. This split also
+    // removes the second full clone of every member save: the simulation now
+    // consumes the SAME plain clones we hand it here. */
     /** @type {any} */ let preSnapshot = null;
     /** @type {any} */ let simCampaign = null;
     /** @type {any} */ let simSaves = null;
@@ -223,13 +226,32 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
 
     // Pure, heavy compute OUTSIDE the producer (synchronous — no await before
     // the commit set() below, so the action stays atomic w.r.t. other actions).
+    //
+    // ATOMICITY: Phase 1 ALREADY committed the queue drain (player intentions
+    // consumed off worldState.pendingEvents, member settlements + the live view
+    // advanced). If this pure pulse THROWS, that drain must NOT survive — leaving
+    // it committed with no tick advanced and no undo snapshot is silent data
+    // loss: the queued intentions are gone and the world never moved. So on a
+    // throw we roll the FULL pre-drain snapshot back onto the draft, making the
+    // whole action a no-op and preserving the queue for a retry. preSnapshot was
+    // captured BEFORE the drain (above), so it is a complete pre-drain rewind
+    // point for everything the drain touched.
     if (simCampaign) {
-      result = domainAdvanceCampaignWorld({
-        campaign: simCampaign,
-        saves: simSaves,
-        interval,
-        now,
-      });
+      try {
+        result = domainAdvanceCampaignWorld({
+          campaign: simCampaign,
+          saves: simSaves,
+          interval,
+          now,
+        });
+      } catch (e) {
+        console.error('[campaignWorldPulseSlice] world pulse compute threw; rolling back drain', e);
+        set(state => { restorePulseSnapshot(state, preSnapshot); });
+        // Abort Phase 2 + the persist/analytics tail: the drain is reverted and
+        // nothing was advanced, so there is nothing to commit or persist. Re-throw
+        // so the caller learns the advance failed rather than reading a silent null.
+        throw e;
+      }
     }
 
     // ── Phase 2: commit the pure result back onto the draft.
@@ -306,8 +328,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // Replay party-caused queued events through the party-impact pipeline — the
     // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
     // party branch (faction/NPC world state, condition resolution, Wizard News).
-    // Best-effort: the world half never blocks the advance, and the pre-pulse
-    // snapshot already covers these for undo (they land after the snapshot).
+    // Best-effort in that each replay is individually try/catch'd so one failure
+    // can't abort the rest or the advance. Unlike the immediate path (which fires
+    // these off unawaited), these ARE awaited sequentially before advance
+    // resolves, so the advance's promise does not settle until every replay has
+    // run — callers that await advanceCampaignWorld see the world fully settled.
+    // The tick itself is already committed above, so a replay failure never
+    // rolls the advance back, and the pre-pulse snapshot already covers these
+    // for undo (they land after the snapshot).
     if (result && result.ok !== false && drainedPartyImpacts.length
         && typeof get().recordPartyImpact === 'function') {
       for (const pi of drainedPartyImpacts) {

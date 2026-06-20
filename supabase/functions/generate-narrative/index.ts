@@ -43,6 +43,8 @@ import {
 } from '../_shared/aiGroundingBundle.js';
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from '../_shared/requestMeta.ts';
+// Structured error logging for the money/AI path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
@@ -2019,6 +2021,20 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
     );
 
+    // ── Trust-boundary gate: reject a banned / disabled / soft-deleted account ──
+    // Defense-in-depth (review B16 finding #1): spend_credits (migration 057) ALSO
+    // rejects a non-active account, so this is a redundant upfront check — but it
+    // keeps a locked account from ever reaching the spend path or the model call.
+    // FAIL CLOSED: gate on `!== true`. The RPC returns true only for a confirmed-
+    // active account; null (RPC error / unexpected shape) or any non-true value is
+    // treated as inactive, so a transient failure can never fail OPEN.
+    const { data: isActive, error: activeErr } =
+      await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
+    if (activeErr) {
+      logError('generate-narrative', user.id, `account_is_active errored: ${activeErr.message}`);
+    }
+    if (isActive !== true) throw new Error('Account is not active');
+
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
     // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
     // The legacy read-then-write fallback was dropped after migration
@@ -2088,10 +2104,24 @@ serve(async (req) => {
       dynamicPreservation = preservationBlockFor(settlement);
     } catch (e) {
       if (!isElevated && spendId) {
-        await supabaseAdmin.rpc('refund_credits', {
-          spend_ledger_row: spendId,
-          refund_reason: 'pre-stream setup failed',
-        }).catch(() => {});
+        // The supabase RPC builder is a thenable, not a real Promise (no `.catch`);
+        // await it and inspect `error`. A failed pre-stream refund leaves the user
+        // charged, so it's logged as a structured line for alerting.
+        try {
+          const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+            spend_ledger_row: spendId,
+            refund_reason: 'pre-stream setup failed',
+          });
+          if (refundErr) {
+            logError('generate-narrative', user.id, refundErr.message, {
+              stage: 'pre-stream-refund', spend_id: spendId,
+            });
+          }
+        } catch (refundErr) {
+          logError('generate-narrative', user.id, refundErr, {
+            stage: 'pre-stream-refund', spend_id: spendId,
+          });
+        }
       }
       throw e;
     }
@@ -2137,8 +2167,11 @@ serve(async (req) => {
               // Loud failure. The user got partial value (the spend
               // happened) and the refund didn't land — a support
               // ticket is the right resolution, not a silent racy
-              // direct write that could compound the inconsistency.
-              console.error('[generate-narrative] refund_credits RPC failed:', refundErr.message);
+              // direct write that could compound the inconsistency. The
+              // structured line makes the stuck refund greppable + alertable.
+              logError('generate-narrative', user.id, refundErr.message, {
+                stage: 'refund', spend_id: spendId,
+              });
               send({
                 refund: 'failed',
                 spend_id: spendId,
@@ -2147,7 +2180,9 @@ serve(async (req) => {
               });
             }
           } catch (refundErr) {
-            console.error('[generate-narrative] refund threw:', refundErr);
+            logError('generate-narrative', user.id, refundErr, {
+              stage: 'refund', spend_id: spendId,
+            });
           }
         };
 

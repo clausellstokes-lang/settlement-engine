@@ -47,7 +47,7 @@ export const GATE_FEATURES = {
     requires: ["Docks/port facilities"],
     requiresAccess: ["port"],
     reason: "Naval forces require port infrastructure. A river militia is not a navy.",
-    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked — SEVERITY can have river patrols but not a navy."
+    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked — it can have river patrols but not a navy."
   },
   "Multiple garrisons": {
     minTier: "city",

@@ -2,6 +2,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
+// Structured error logging for the money path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -148,6 +150,9 @@ export async function handleVerifyDossier(
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Purchase verification failed';
+    // One structured line per verification failure. This endpoint is anonymous-
+    // allowed (single-dossier microtransaction), so there is no user id to attribute.
+    logError('verify-single-dossier', null, message);
     return new Response(JSON.stringify({ verified: false, error: message }), {
       status: 400,
       headers: { ...headers, 'Content-Type': 'application/json' },
@@ -155,4 +160,7 @@ export async function handleVerifyDossier(
   }
 }
 
-serve(handleVerifyDossier);
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flagged
+// the direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleVerifyDossier(req));

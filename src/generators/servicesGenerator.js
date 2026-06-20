@@ -330,7 +330,12 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         ),
       Object.keys(l).forEach(function (A) {
         l[A].sort(function (S, y) {
-          return S.name.localeCompare(y.name);
+          // Codepoint-stable, NOT localeCompare: this output feeds the hashed
+          // golden master, so a locale-/ICU-dependent sort would make the SAME
+          // seed emit a DIFFERENT service order across machines.
+          var Sn = S.name,
+            yn = y.name;
+          return Sn < yn ? -1 : Sn > yn ? 1 : 0;
         });
       }),
       l

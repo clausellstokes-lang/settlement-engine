@@ -6,7 +6,7 @@
  * Protected writes go through the admin-actions edge function so role,
  * tier, founder, and credit changes are audited server-side.
  */
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
   Check, X, RefreshCw, Crown, Flag, BarChart3, TrendingUp, Ticket, Swords,
@@ -197,11 +197,21 @@ export default function AdminPanel({ onBack }) {
 
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
+  // `searchQuery` is the live, per-keystroke input value (controlled). The
+  // search REQUEST is keyed off `debouncedQuery`, which lags behind by
+  // SEARCH_DEBOUNCE_MS — so the audited list_users edge call (one edge
+  // invocation + one audit-log row) fires once the user pauses, not on every
+  // character. Manual triggers (Enter, Refresh) flush immediately by syncing
+  // debouncedQuery to the live value, bypassing the timer.
+  const SEARCH_DEBOUNCE_MS = 350;
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [stats, setStats] = useState(null);
 
-  // Fetch users via the audited admin-actions edge function.
-  const fetchUsers = useCallback(async () => {
+  // Fetch users via the audited admin-actions edge function. The search term is
+  // passed explicitly (defaulting to the debounced value) so manual triggers can
+  // fetch the live query without waiting for the debounce window.
+  const fetchUsers = useCallback(async (searchTerm = debouncedQuery) => {
     if (!supabase) return;
     setUsersLoading(true);
     try {
@@ -210,8 +220,10 @@ export default function AdminPanel({ onBack }) {
       // gating, returns a redacted (non-PII-leaking) column set, runs the search
       // server-side, and writes an audit row — none of which a raw client query
       // did (it returned raw email + every column to any elevated role, unaudited).
+      // Debouncing the trigger (below) keeps that audited path intact while
+      // collapsing a burst of keystrokes into a single invocation + audit row.
       const { data, error } = await supabase.functions.invoke('admin-actions', {
-        body: { action: 'list_users', metadata: { search: searchQuery.trim() } },
+        body: { action: 'list_users', metadata: { search: String(searchTerm || '').trim() } },
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
@@ -228,17 +240,51 @@ export default function AdminPanel({ onBack }) {
     } finally {
       setUsersLoading(false);
     }
+  }, [debouncedQuery]);
+
+  // Debounce layer: when the user types, schedule a single sync of the live
+  // `searchQuery` into `debouncedQuery` after a quiet period. Each keystroke
+  // clears the prior timer, so only the final pause commits — one edge call,
+  // one audit row. Skipped on the mount-equal pass (both empty) and re-skips
+  // when a manual flush already advanced debouncedQuery to match.
+  const searchTimerRef = useRef(null);
+  useEffect(() => {
+    if (searchQuery === debouncedQuery) return undefined;
+    // The setState is deferred inside setTimeout (not a synchronous effect
+    // body setState), so it doesn't trip react-hooks/set-state-in-effect.
+    searchTimerRef.current = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(searchTimerRef.current);
+    // debouncedQuery is intentionally excluded: including it would reset the
+    // timer the instant the debounced value catches up, never settling. The
+    // guard above reads the latest value on each keystroke-driven run.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
-  // Mount-fetch pattern: the fetch setStates internally, which trips
-  // react-hooks/set-state-in-effect under React Compiler. Migrating away
-  // requires a query library (TanStack Query, SWR) or Suspense — outside the
-  // scope of this panel's one-time admin load.
+  // Mount-fetch + debounced-search fetch. Fires on mount (debouncedQuery '') and
+  // whenever the debounced search term settles. The fetch setStates internally,
+  // which trips react-hooks/set-state-in-effect under React Compiler. Migrating
+  // away requires a query library (TanStack Query, SWR) or Suspense — outside
+  // the scope of this panel's admin load.
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     fetchUsers();
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [fetchUsers]);
+
+  // Manual flush for Enter / Refresh: cancel any pending debounce and fetch the
+  // live query immediately, exactly once. Two cases:
+  //   • the live query differs from the debounced value → advance debouncedQuery;
+  //     that re-keys fetchUsers and the fetch effect runs the search for us. We
+  //     must NOT also call fetchUsers here or it would double-fire.
+  //   • the live query already equals the debounced value (e.g. Refresh with an
+  //     unchanged box) → the effect won't re-run, so fetch directly.
+  const flushSearch = useCallback(() => {
+    clearTimeout(searchTimerRef.current);
+    if (searchQuery !== debouncedQuery) setDebouncedQuery(searchQuery);
+    else fetchUsers(searchQuery);
+  }, [searchQuery, debouncedQuery, fetchUsers]);
 
   if (!isElevated) {
     return (
@@ -290,7 +336,7 @@ export default function AdminPanel({ onBack }) {
 
       {/* User management */}
       <Section title="User Management" icon={Users} actions={
-        <Button variant="ghost" size="sm" onClick={fetchUsers} icon={<RefreshCw size={12} />}>
+        <Button variant="ghost" size="sm" onClick={flushSearch} icon={<RefreshCw size={12} />}>
           Refresh
         </Button>
       }>
@@ -305,7 +351,7 @@ export default function AdminPanel({ onBack }) {
             type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && fetchUsers()}
+            onKeyDown={e => e.key === 'Enter' && flushSearch()}
             style={{
               flex: 1, border: 'none', outline: 'none',
               fontSize: FS.sm, fontFamily: sans, background: 'transparent',

@@ -614,14 +614,12 @@ export const en = Object.freeze({
     cascadeHeading:  'What changes if you apply these edits',
   },
 
-  // ── Workshop (P107 / CP-2) ───────────────────────────────────────────────
-  workshop: {
-    navLabel:       'Workshop',
-    locked:         'Workshop unlocks with Cartographer.',
-    lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
-    upgradeCta:     'Upgrade for $6/mo',
-    samplePreview:  'See a sample →',
-  },
+  // The "Workshop" (P107 / CP-2) copy block lived here. The Workshop / Custom
+  // Generate feature was removed (the /workshop route redirects to Create and
+  // ModeSelector renders only Basic + Advanced), so its strings were deleted —
+  // they had no live consumer and only described a surface that no longer
+  // exists. The editor's institution/faith gate toggles (the unrelated
+  // `Workshop.jsx` / `WorkshopGateToggle.jsx` components) do not read this block.
 
   // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
   // Renders below HomeHero for anonymous visitors. Three callouts, each

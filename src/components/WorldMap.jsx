@@ -28,6 +28,7 @@ import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
 import { useRealmInspector } from '../hooks/useRealmInspector.js';
 
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
 import { WorldMapContextToolbars } from './map/WorldMapContextToolbars.jsx';
 import { WorldMapStage } from './map/WorldMapStage.jsx';
@@ -135,12 +136,19 @@ export default function WorldMap({ onNavigate } = {}) {
   }, [activeCampaignId, activeCampaign, setActiveCampaign]);
 
   // ── Toasts ─── (declared early so the Realm-inspector hook below can use it)
+  // Stabilized with useCallback (empty deps — it only touches the stable
+  // setToast setter and a ref). This is load-bearing for perf, not cosmetic:
+  // useRealmInspector derives handleApplyPreset via useCallback([…, showToast]),
+  // and that handler is a prop on the React.memo'd WorldMapToolbar. An unstable
+  // showToast would mint a new handleApplyPreset every parent render, defeating
+  // the toolbar memo on every keystroke/tick. Keeping showToast stable lets the
+  // memo actually hold.
   const toastTimerRef = useRef(null);
-  function showToast(kind, text) {
+  const showToast = useCallback((kind, text) => {
     if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
     setToast({ kind, text });
     toastTimerRef.current = setTimeout(() => setToast(null), 2600);
-  }
+  }, []);
 
   // UX Phase 4 — the Realm Inspector state + handlers live in a dedicated hook so
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
@@ -351,11 +359,12 @@ export default function WorldMap({ onNavigate } = {}) {
       });
     } catch (err) {
       console.warn('[WorldMap] place failed', err);
-      // showToast is a store-action setter; called from an async drop
-      // handler (not during render), so the immutability rule doesn't apply.
+      // showToast is the component's own stable (useCallback) toast helper;
+      // called from an async drop handler (not during render), so the
+      // set-state-in-render immutability rule doesn't apply.
       showToast('error', `Place failed: ${err.message || err}`);
     }
-  }, [setDraggingOver]);
+  }, [setDraggingOver, addPlacement, showToast]);
 
   // ── Campaign save/load ────────────────────────────────────────────────
   // Tracks which campaign (or 'none') the map has been synced to, so the
@@ -443,7 +452,7 @@ export default function WorldMap({ onNavigate } = {}) {
     // `activeCampaign` is no longer a dependency: the success toast now resolves
     // the campaign by `id` from the live store (above) instead of the closed-over
     // value, so this callback no longer reads it.
-  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, bumpGeometryVersion]);
+  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, bumpGeometryVersion, showToast]);
 
   // On entry to the map (bridge ready) — and whenever the active campaign
   // resolves — re-sync the map. With a campaign active, its saved snapshot is
@@ -496,7 +505,7 @@ export default function WorldMap({ onNavigate } = {}) {
       console.warn('[WorldMap] save snapshot failed', err);
       showToast('error', `Save failed: ${err.message || err}`);
     }
-  }, [activeCampaignId, activeCampaign, saveCampaignMap, setMapSnapshot]);
+  }, [activeCampaignId, activeCampaign, saveCampaignMap, setMapSnapshot, showToast]);
 
   // Save entry point. On a canonized map, first confirm that placed settlements
   // can't be moved (newly added ones still save in place); otherwise save directly.
@@ -513,7 +522,7 @@ export default function WorldMap({ onNavigate } = {}) {
     if (!activeCampaignId) return;
     clearCampaignMap(activeCampaignId);
     showToast('info', 'Campaign map cleared');
-  }, [activeCampaignId, clearCampaignMap]);
+  }, [activeCampaignId, clearCampaignMap, showToast]);
 
   const handleAdvanceRealm = useCallback(async () => {
     if (!activeCampaignId || worldPulseBusy) return;
@@ -538,7 +547,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } finally {
       setWorldPulseBusy(false);
     }
-  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval, openInspectorAt]);
+  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval, openInspectorAt, showToast]);
 
   // Campaign-clock: reverse the most recent World Pulse for this campaign,
   // restoring the pre-pulse world + every member settlement. Multi-step — the
@@ -555,7 +564,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } finally {
       setWorldPulseBusy(false);
     }
-  }, [activeCampaignId, undoLastPulse, worldPulseBusy]);
+  }, [activeCampaignId, undoLastPulse, worldPulseBusy, showToast]);
 
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
@@ -606,7 +615,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } catch (err) {
       showToast('error', `Regenerate failed: ${err.message || err}`);
     }
-  }, [resetMapState, bumpGeometryVersion]);
+  }, [resetMapState, bumpGeometryVersion, showToast]);
 
   // ── Fit map to viewport ───────────────────────────────────────────────
   const handleFit = useCallback(async () => {
@@ -654,14 +663,14 @@ export default function WorldMap({ onNavigate } = {}) {
       }
     };
     input.click();
-  }, [activeCampaignId, setMapBackdrop]);
+  }, [activeCampaignId, setMapBackdrop, showToast]);
 
   const handleClearImage = useCallback(() => {
     const url = useStore.getState().mapState.customBackdrop?.imageUrl;
     clearMapBackdrop();
     if (url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(url)).catch(() => {});
     showToast('info', 'Reverted to generated terrain.');
-  }, [clearMapBackdrop]);
+  }, [clearMapBackdrop, showToast]);
 
   // ── Share map to the gallery (Project 2, blank canvas) ────────────────
   const [sharingMap, setSharingMap] = useState(false);
@@ -690,7 +699,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } finally {
       setSharingMap(false);
     }
-  }, [activeCampaignId, saveCampaignMap]);
+  }, [activeCampaignId, saveCampaignMap, showToast]);
 
   // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
@@ -752,8 +761,7 @@ export default function WorldMap({ onNavigate } = {}) {
         handleShareMap={handleShareMap} sharingMap={sharingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange}
         handleFit={handleFit} handleRegenerate={handleRegenerate}
-        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector}
-        openInspectorAt={openInspectorAt}
+        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} openInspectorAt={openInspectorAt}
         activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
       />
 
@@ -768,16 +776,22 @@ export default function WorldMap({ onNavigate } = {}) {
       <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
         {/* placements, isDraggingOver, mapMode, mapReady, and imageMode are no
             longer passed down — the memoized stage reads them from the store. */}
-        <WorldMapStage
-          showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
-          activeCampaign={activeCampaign} activeSaves={activeSaves}
-          mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
-          handleDragLeave={handleDragLeave} handleDrop={handleDrop}
-          iframeRef={iframeRef}
-          bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
-          onNavigate={onNavigate}
-          showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
-        />
+        {/* Resilience: the stage renders the SVG annotation overlay over live
+            placement/relationship data (a corrupt save, a stale road-edge set,
+            a bad backdrop import can all throw). Wrapped so a stage throw shows
+            a recoverable fallback in place of the map rather than blanking the
+            whole app via the root boundary. resetKey is the active campaign so
+            switching campaigns clears a stale error. */}
+        <FeatureErrorBoundary label="WorldMap.stage" kind="react.render.map" fallbackTitle="The map couldn't be displayed." resetKeys={[activeCampaignId]}>
+          <WorldMapStage
+            showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
+            activeCampaign={activeCampaign} activeSaves={activeSaves}
+            mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
+            handleDragLeave={handleDragLeave} handleDrop={handleDrop} iframeRef={iframeRef}
+            bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
+            onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
+          />
+        </FeatureErrorBoundary>
 
         {inspectorOpen && (
           <Suspense fallback={null}>
@@ -785,8 +799,7 @@ export default function WorldMap({ onNavigate } = {}) {
               open={inspectorOpen} section={inspectorSection}
               onSection={setInspectorSection} onClose={() => setInspectorOpen(false)}
               campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
-              tier={authTier} onUpgrade={handleUpgrade}
-            />
+              tier={authTier} onUpgrade={handleUpgrade} />
           </Suspense>
         )}
       </div>
@@ -796,8 +809,7 @@ export default function WorldMap({ onNavigate } = {}) {
         setRegenerateConfirm={setRegenerateConfirm} mapSaveConfirm={mapSaveConfirm}
         setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
-        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen}
-      />
+        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />
     </div>
   );
 }
