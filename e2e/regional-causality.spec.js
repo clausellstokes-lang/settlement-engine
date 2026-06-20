@@ -257,15 +257,20 @@ test.describe('regional causality campaign UI', () => {
     const campaignValue = await campaignSelect.locator('option', { hasText: 'Trade Belt' }).getAttribute('value');
     await campaignSelect.selectOption(campaignValue);
 
-    await page.getByTitle('Show Wizard News').click();
+    // P4/P5 IA move: the standalone "Show Wizard News" view is gone — the news
+    // feed now lives in the Chronicle tab of the Realm Inspector, opened from
+    // the toolbar "News" button.
+    await page.getByTitle('Show the Chronicle in the Realm Inspector').click();
 
-    await expect(page.getByRole('heading', { name: 'Wizard News' })).toBeVisible();
+    // The Realm Inspector opens at the Chronicle section, which renders the
+    // WizardNewsPanel with the seeded entries.
     await expect(page.getByText('Most Significant News')).toBeVisible();
     await expect(page.getByText('Millcross faces import shortage')).toBeVisible();
     await expect(page.getByText('Realm Notables')).toBeVisible();
     await expect(page.getByText('Route disruption reaches Millcross')).toBeVisible();
 
-    await page.getByTitle('Show campaign map').click();
+    // Close the inspector to return to the map workspace.
+    await page.getByTitle('Close inspector').click();
     await expect(page.getByTitle('Toggle layer visibility')).toBeVisible();
   });
 
