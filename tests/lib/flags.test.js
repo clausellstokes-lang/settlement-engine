@@ -31,12 +31,10 @@ describe('flag() resolution', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(flag(name)).toBe(decl.default);
     }
-    // discordOauth/googleOauth default to FALSE (Phase A1): the OAuth code is
-    // complete, but the buttons stay hidden until the operator enables the
-    // providers in the Supabase dashboard AND flips these flags — so users never
-    // see a button that errors before the dashboard config is live.
-    expect(flag('discordOauth')).toBe(false);
-    expect(flag('googleOauth')).toBe(false);
+    // discordOauth/googleOauth default to TRUE: the providers are now
+    // configured in the Supabase dashboard, so the OAuth buttons are live.
+    expect(flag('discordOauth')).toBe(true);
+    expect(flag('googleOauth')).toBe(true);
     // mobileSingleChrome is also default-false, used below to exercise the
     // override-over-false-default resolution mechanics.
     expect(flag('mobileSingleChrome')).toBe(false);

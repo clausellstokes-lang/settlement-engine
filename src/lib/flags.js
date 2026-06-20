@@ -39,12 +39,12 @@ import { useSyncExternalStore } from 'react';
 export const FLAGS = Object.freeze({
   // ── Auth ─────────────────────────────────────────────────────────────────
   discordOauth: {
-    default: false,
-    description: 'Discord OAuth button (below the password form). Code is complete — flip to TRUE once the Discord provider is enabled in the Supabase dashboard, so users never see a button that errors.',
+    default: true,
+    description: 'Discord OAuth button (below the password form). LIVE — the Discord provider is configured in the Supabase dashboard.',
   },
   googleOauth: {
-    default: false,
-    description: 'Google OAuth button (below the password form). Code is complete — flip to TRUE once the Google provider is enabled in the Supabase dashboard, so users never see a button that errors.',
+    default: true,
+    description: 'Google OAuth button (below the password form). LIVE — the Google provider is configured in the Supabase dashboard.',
   },
 
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
