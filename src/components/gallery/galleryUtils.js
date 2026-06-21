@@ -85,7 +85,7 @@ export function galleryUrlFor(slug) {
 }
 
 /**
- * Share a gallery dossier (§7): Web Share API when available, else copy the
+ * Share a gallery dossier: Web Share API when available, else copy the
  * public URL to clipboard. Never throws — returns { ok, method } so callers can
  * show success/failure feedback. A cancelled native share sheet is { ok:false,
  * cancelled:true } (not an error to surface).

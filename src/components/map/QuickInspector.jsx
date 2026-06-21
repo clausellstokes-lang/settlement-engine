@@ -1,5 +1,5 @@
 /**
- * QuickInspector.jsx — P136 / M-6 hover-peek for placed settlements.
+ * QuickInspector.jsx — hover-peek for placed settlements.
  *
  * When the user hovers a placement marker (without clicking), this
  * floating card surfaces three high-leverage lines:

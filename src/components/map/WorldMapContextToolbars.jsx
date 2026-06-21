@@ -11,7 +11,7 @@ import { MAP_MODES } from '../../store/mapSlice.js';
 
 const AnnotateToolbar = lazy(() => import('./AnnotateToolbar.jsx'));
 const TerrainToolbar  = lazy(() => import('./TerrainToolbar.jsx'));
-// P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
+// Routes mode contextual toolbar. Lazy because
 // terrain/annotate users never need it.
 const RoutesToolbar   = lazy(() => import('./RoutesToolbar.jsx'));
 

@@ -424,7 +424,7 @@ function tokenOverlap(a, b) {
   return tokens.some(t => haystack.includes(t));
 }
 
-// Wave 8: the 12-char-prefix PROCESSOR_MATCH moved into the shared id-first
+// The 12-char-prefix PROCESSOR_MATCH moved into the shared id-first
 // join (institutionMatchesProcessor) — stamped institutions compare by
 // catalogId, unstamped ones keep the legacy fuzzy name match.
 

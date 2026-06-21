@@ -1,7 +1,7 @@
 /**
- * AccountFAQ.jsx — P138 / AC-4 inline FAQ in the AccountPage.
+ * AccountFAQ.jsx — inline FAQ in the AccountPage.
  *
- * The critique flagged that account-page surfaces were credit-counters
+ * Account-page surfaces were credit-counters
  * and Stripe portal links with no "what do I do if I run out of
  * credits" / "can I cancel my subscription" guidance inline. Users
  * ended up in support emails for things the answer to which was one

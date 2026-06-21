@@ -1,5 +1,5 @@
 /**
- * primitives/RegenerationModeSelector — Tier 5.2 surface.
+ * primitives/RegenerationModeSelector
  *
  * Three rerun strengths the DM can choose from before regenerating:
  *

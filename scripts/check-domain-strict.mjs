@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-domain-strict.mjs — A+ domain.7 strict-typecheck ratchet.
+ * check-domain-strict.mjs — strict-typecheck ratchet for the domain kernel.
  *
  * The domain is the pure kernel every other layer trusts and the layer best
  * positioned to be strict. Turning strict + noImplicitAny ON over src/domain

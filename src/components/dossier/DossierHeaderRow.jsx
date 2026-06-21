@@ -72,7 +72,7 @@ export default function DossierHeaderRow({
               </Button>
             )}
             {/* ── AI Narrative Layer button group ──────────────────────────────────
-                P121 / D-4 — When `narrativeLayerStrip` flag is on, the
+                When `narrativeLayerStrip` flag is on, the
                 narrative buttons move out of the header into a labeled strip
                 below (rendered further down). The header remains lean. When
                 the flag is off, the legacy header-button cluster renders.

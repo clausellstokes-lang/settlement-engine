@@ -19,9 +19,9 @@ function instId(name) {
 
 registerStep('cascadePass', {
   deps: ['subsumptionPass'],
-  reads: ['institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
+  mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place
   phase: 'institutions',
 }, (ctx, rng) => {
   // terrainType comes from resolveConfig — the cascade re-rolls catalog
@@ -36,7 +36,7 @@ registerStep('cascadePass', {
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);
 
-    // Tier 2.1 — emit a trace per cascade addition. Cascade additions
+    // Emit a trace per cascade addition. Cascade additions
     // are chain-adjacent institutions: "you got a smelter, so you also
     // got a charcoal burner." The cause is the existence of whichever
     // institution triggered the chain — we surface that as a coarse

@@ -1,7 +1,7 @@
 /**
  * domain/defenseLedger.js — the canonical conserved defense quantities for a settlement.
  *
- * P3.3b Stage 1b. Mirrors foodLedger: defenseGenerator already computes the five scored
+ * Mirrors foodLedger: defenseGenerator already computes the five scored
  * defense dimensions + a numeric readiness and persists them on `settlement.defenseProfile`.
  * The drift it cures is the same parallel-model pattern food had — capacityModel.deriveDefense
  * read the military score AND separately re-counted the fortification institutions that score

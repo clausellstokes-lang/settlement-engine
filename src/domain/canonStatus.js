@@ -1,7 +1,7 @@
 /**
  * domain/canonStatus.js — Canon boundary tagging.
  *
- * Tier 5.3 of the roadmap. Every entity on a settlement comes from
+ * Every entity on a settlement comes from
  * one of four sources: the procedural generator, the user's own
  * additions, an applied event, or an AI overlay polish. The
  * canonStatus tag tells downstream consumers (AI overlay, reroll
@@ -19,7 +19,7 @@
  * `locked`, `_source`, `_authored`) first and falls back to a
  * conservative inference.
  *
- * The set of taggable entities matches Phase 19's EXPLAINABLE_TYPES
+ * The set of taggable entities matches 's EXPLAINABLE_TYPES
  * — institutions, factions, npcs, hooks, chains, conditions, etc.
  */
 

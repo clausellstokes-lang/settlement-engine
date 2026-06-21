@@ -12,7 +12,7 @@
  *      historyBeats derives "defining crisis" / "recent disruption" from.
  *      Until now that record was frozen at generation — campaign events
  *      could never become history.
- *   3. ORIGIN SYNC (Wave 8 #4) — an ORGANIC resolution winds down the
+ *   3. ORIGIN SYNC — an ORGANIC resolution winds down the
  *      origin settlement's local crisis representations through the crisis
  *      lifecycle (withOrganicStressorResolution below), so the dossier
  *      stops showing a stressor the world already ended.

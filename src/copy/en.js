@@ -44,7 +44,7 @@ export const en = Object.freeze({
   },
 
   // ── Hero (homepage anonymous-first generator) ─────────────────────────────
-  // Pre-P117 strings preserved for the legacy hero variant. The two-voice
+  // Original strings preserved for the legacy hero variant. The two-voice
   // rewrite lives under `hero.v2.*` and is selected when the
   // `homepage.heroV2` flag is on.
   hero: {
@@ -55,7 +55,7 @@ export const en = Object.freeze({
     cta:        'Begin a settlement',
     ctaSubline: 'No account needed. Your first dossier is yours to keep.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
-    // ── P117 two-voice rewrite ──────────────────────────────────────────
+    // ── Two-voice rewrite ───────────────────────────────────────────────
     v2: {
       headline:     'Most generators roll on a table.',
       headlineAccent: 'This one simulates.',
@@ -63,14 +63,14 @@ export const en = Object.freeze({
       ctaTemplate:  'Forge a {tier} →',
       subline:      '{remaining} of {cap} free today · no account',
     },
-    // ── P108 anon cap as unlock (X-5) ───────────────────────────────────
+    // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
       body:       'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
       primaryCta: 'Create free account →',
       sideDoor:   'or just take this one: buy the dossier for $2.99 ↓',
     },
-    // ── P115 return-visit ───────────────────────────────────────────────
+    // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
       eyebrow:    'Welcome back',
       titleTpl:   'It’s been {days} days, {name}.',
@@ -243,7 +243,7 @@ export const en = Object.freeze({
     },
     faqLink: 'See the full pricing FAQ',
 
-    // ── P9 — Simulation-led pricing variant (A/B, decision 4) ───────────────
+    // ── Simulation-led pricing variant (A/B) ───────────────────────────────
     // Selected when the `pricingSimulationCopy` flag is ON. Leads with the
     // actual premium product — the living simulation — and DELIBERATELY names
     // NO size/metropolis/capital as a premium feature (size is free). The
@@ -285,7 +285,7 @@ export const en = Object.freeze({
     },
   },
 
-  // ── P9 — The "What the Realm unlocks" value ladder ───────────────────────
+  // ── The "What the Realm unlocks" value ladder ────────────────────────────
   // Three rungs (anon TRIES / free SAVES + full-size generation / premium
   // SIMULATES), lens-labeled. Size is FREE — it lives on the FREE rung, never
   // pitched as premium. Rendered on the About landing + the canonical
@@ -472,10 +472,10 @@ export const en = Object.freeze({
     aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected. Your settlement still generates and exports.',
   },
 
-  // ── Verb registry (P124 / C-1) ───────────────────────────────────────────
-  // Single source of truth for action verbs. The critique flagged
-  // Begin/Forge/Generate/Roll/Reroll/Regenerate competing on the same
-  // surfaces. We commit to Forge (first generation), Reforge (regenerate),
+  // ── Verb registry ─────────────────────────────────────────────────────────
+  // Single source of truth for action verbs. Begin/Forge/Generate/Roll/Reroll/
+  // Regenerate were all competing on the same surfaces. We commit to Forge
+  // (first generation), Reforge (regenerate),
   // Reroll (one section only), Narrate (AI prose), with explicit loading
   // verbs. Centralizing here means a future tone shift is one file edit.
   verbs: {
@@ -489,7 +489,7 @@ export const en = Object.freeze({
     rerolling:   'Rerolling…',
   },
 
-  // ── Save / signup / cap surfaces (P101 / X-3) ────────────────────────────
+  // ── Save / signup / cap surfaces ─────────────────────────────────────────
   save: {
     button:        'Save',
     signupButton:  'Save this town (free account) →',
@@ -498,9 +498,9 @@ export const en = Object.freeze({
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
   },
 
-  // ── Pricing-moment registry (P103 / X-2) ─────────────────────────────────
-  // Augments the existing COPY.pricing.moments registry with the new
-  // moments the critique calls for. usePricingMoment reads from here when
+  // ── Pricing-moment registry ──────────────────────────────────────────────
+  // Augments the existing COPY.pricing.moments registry with the
+  // conversion-arc moments. usePricingMoment reads from here when
   // resolving copy by reason. Keep keys snake_case to match the existing
   // pricingMoments.js storage layout.
   moments: {
@@ -528,7 +528,7 @@ export const en = Object.freeze({
       headline: 'World Map unlocks with Cartographer.',
       body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
     },
-    // ── UX Phase 4 — the Realm hub locked-state teaser ───────────────────
+    // ── The Realm hub locked-state teaser ────────────────────────────────
     map_realm_teaser: {
       headline: 'The Realm is where your world comes alive.',
       body:     'Advance time and watch wars ignite and end, faiths rise, and the chronicle write itself. Cartographer runs the living simulation across your whole campaign.',
@@ -543,7 +543,7 @@ export const en = Object.freeze({
     },
   },
 
-  // ── Audience-led pricing tile copy (P122 / X-10) ─────────────────────────
+  // ── Audience-led pricing tile copy ───────────────────────────────────────
   // The three tiers each get an audience-shifted pitch line that
   // PricingPage surfaces above the existing feature list.
   // NOTE: size is FREE (free accounts reach metropolis), so NO pitch line here
@@ -566,7 +566,7 @@ export const en = Object.freeze({
     },
   },
 
-  // ── Pipeline reveal step labels (P100 / X-1) ─────────────────────────────
+  // ── Pipeline reveal step labels ──────────────────────────────────────────
   // Marketing-facing translations of the actual pipeline step names.
   // Theatrical by design — the user sees engine work, not function names.
   pipelineSteps: {
@@ -587,7 +587,7 @@ export const en = Object.freeze({
     assembleSettlement:     'assembling the dossier…',
   },
 
-  // ── Dossier surfaces (P102 / D-1, D-3) ───────────────────────────────────
+  // ── Dossier surfaces ─────────────────────────────────────────────────────
   dossier: {
     fiveTabGroups: {
       summary:  'Summary',
@@ -614,14 +614,14 @@ export const en = Object.freeze({
     cascadeHeading:  'What changes if you apply these edits',
   },
 
-  // The "Workshop" (P107 / CP-2) copy block lived here. The Workshop / Custom
+  // The "Workshop" copy block lived here. The Workshop / Custom
   // Generate feature was removed (the /workshop route redirects to Create and
   // ModeSelector renders only Basic + Advanced), so its strings were deleted —
   // they had no live consumer and only described a surface that no longer
   // exists. The editor's institution/faith gate toggles (the unrelated
   // `Workshop.jsx` / `WorkshopGateToggle.jsx` components) do not read this block.
 
-  // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
+  // ── Sample dossier proof card ────────────────────────────────────────────
   // Renders below HomeHero for anonymous visitors. Three callouts, each
   // aimed at a different reader. The teach beats are deliberate — every
   // line should let the reader recognize themselves and the moat in one
@@ -648,7 +648,7 @@ export const en = Object.freeze({
     footer: 'A real settlement from the simulator. Yours generates in eight seconds.',
   },
 
-  // ── First-dossier teaching callouts (P130 / O-2) ─────────────────────────
+  // ── First-dossier teaching callouts ──────────────────────────────────────
   // Three permanent-dismiss callouts on a first-time user's first
   // generated dossier. Each points at what the engine already did and
   // teaches by example, not by tutorial.
@@ -683,7 +683,7 @@ export const en = Object.freeze({
     copyright: '© {year} SettlementForge',
   },
 
-  // ── P9 — AuthModal premium blurb (simulation-led) ─────────────────────────
+  // ── AuthModal premium blurb (simulation-led) ──────────────────────────────
   // Rewritten to lead with the SIMULATION, not storage. Size is free — a free
   // account unlocks FULL-SIZE generation, so it sits on the free line, never
   // the premium one.
@@ -694,7 +694,7 @@ export const en = Object.freeze({
     premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
   },
 
-  // ── P9 — About "The Living World" tab + landing thesis ────────────────────
+  // ── About "The Living World" tab + landing thesis ─────────────────────────
   // The About page is reframed as LANDING + HOW-TO around one thesis. The
   // Living World tab names each premium system as a claim + a one-line
   // "how it stays coherent" + the opt-in / off-by-default / reversible
@@ -729,7 +729,7 @@ export const en = Object.freeze({
     },
   },
 
-  // ── P9 — Anon "Watch a region wake up" replay ─────────────────────────────
+  // ── Anon "Watch a region wake up" replay ──────────────────────────────────
   // A READ-ONLY, deterministic, pre-baked sequence over a small canned fixture,
   // rendered through the EXISTING projections (no live engine, no rng). The
   // anon teaser that lets a no-account user SEE the premium product.
@@ -746,8 +746,8 @@ export const en = Object.freeze({
     empty:    'At peace.',
   },
 
-  // P138 / AC-4 — Inline FAQ on the Account page. Each entry is a
-  // short Q + a 1-2 sentence A. Keep tone plain and free of marketing
+  // Inline FAQ on the Account page. Each entry is a short Q + a 1-2
+  // sentence A. Keep tone plain and free of marketing
   // hedge — these are the answers users would otherwise email support
   // for. Edit freely; the keys are stable.
   accountFaq: {

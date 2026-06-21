@@ -1,9 +1,9 @@
 /**
- * domain/dossier/chronicleFeed.js — the unified campaign Chronicle (spec §8 M3c).
+ * domain/dossier/chronicleFeed.js — the unified campaign Chronicle.
  *
  * One chronological feed that merges the three event sources a DM cares about:
  *   - manual events   — the authored Make Changes events (campaignState.eventLog)
- *   - party-caused     — manual events flagged "caused by the party" (M3b)
+ *   - party-caused     — manual events flagged "caused by the party"
  *   - world pulse      — autonomous world-engine events (worldPulse / worldState)
  * plus the settlement's own historical recentEvents.
  *
@@ -87,8 +87,8 @@ export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = []
   const undated = deduped.filter(e => toTime(e.at) == null);
   const sorted = [...dated, ...undated];
 
-  // Relative timing from the campaign-start / canonization reference (spec §8
-  // M3c: "starting at zero"). Day 0 is the reference; entries before it clamp to 0.
+  // Relative timing from the campaign-start / canonization reference
+  // ("starting at zero"). Day 0 is the reference; entries before it clamp to 0.
   const refTime = toTime(reference);
   const DAY_MS = 86400000;
   const timed = sorted.map((e) => {
@@ -106,7 +106,7 @@ function arr(v) {
 
 /**
  * Pick the most grounding-relevant Chronicle entries to feed the AI overlay +
- * Daily Life regeneration (spec §8 M3c: "feed into AI; recent weighted more
+ * Daily Life regeneration ("feed into AI; recent weighted more
  * heavily, party-caused weighted strongly").
  *
  * Scores each entry by recency (the feed is newest-first, so earlier = newer)

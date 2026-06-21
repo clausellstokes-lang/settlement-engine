@@ -10,7 +10,7 @@
  *   - GENERATION-born: stressGenerator stamps a `settlement.stress[]` entry whose
  *     `type` is a generation key — `under_siege`, `occupied`, `wartime`,
  *     `insurgency` (the STRESS_TYPE_MAP vocabulary).
- *   - PULSE-born: the world pulse (Feature A / war layer) never writes a
+ *   - PULSE-born: the world pulse (war layer) never writes a
  *     `stress[]` entry. It stamps `settlement.activeConditions[]` — the besieged
  *     VICTIM carries `war_pressure`; the AGGRESSOR carries `war_drain` +
  *     `army_deployed` (archetypeCatalog WAR_* groups). It also tracks the army in

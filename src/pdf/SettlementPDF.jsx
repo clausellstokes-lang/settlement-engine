@@ -55,7 +55,7 @@ export function SettlementPDF({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // UX Phase 7 — the LIVE campaign world for this settlement
+  // The LIVE campaign world for this settlement
   // ({ worldState, regionalGraph, settlements?, nameFor? }). Threaded ONLY for
   // premium exports (data-layer gate in SettlementDetail). When absent/dormant
   // the liveWorld slice resolves to null and the Faith & War chapter renders

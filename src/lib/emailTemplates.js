@@ -1,5 +1,5 @@
 /**
- * emailTemplates.js — Tier 8.5 lifecycle email templates.
+ * emailTemplates.js — lifecycle email templates.
  *
  * Defines the six lifecycle email types as plain JS templates with
  * subject + plain-text body + minimal HTML body. The edge function

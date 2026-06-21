@@ -1,6 +1,6 @@
 /**
  * CharacterPresetCard — the 17-archetype "Character" preset, PROMOTED to a
- * top-level Tier-1 card in the Create flow (UX overhaul Phase 6, plan §4.3).
+ * top-level Tier-1 card in the Create flow.
  *
  * It was buried inside SliderPanel's "Archetype preset" dropdown; a new DM never
  * found it. Now it's the first thing on the layered ConfigurationPanel: pick a

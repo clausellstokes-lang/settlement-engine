@@ -1,10 +1,10 @@
 /**
- * domain/display/tradePressure.js — Phase B4 read-model SELECTOR for the DM UI:
+ * domain/display/tradePressure.js — read-model SELECTOR for the DM UI:
  * STRATEGIC TRADE in heuristic DM language — trade PRESSURE, DEPENDENCY, and
  * COERCION leverage.
  *
- * A projection of the B4 trade-salience model (worldPulse/tradeSalience.js) that
- * surfaces, in PLAIN WORDS, what the F1 brief asks for:
+ * A projection of the trade-salience model (worldPulse/tradeSalience.js) that
+ * surfaces, in PLAIN WORDS:
  *   - trade PRESSURE: a valuable, hard-to-replace tie makes war between two
  *     settlements costlier ⇒ less likely ("a vital grain tie restrains them");
  *   - DEPENDENCY: a CRITICAL-supplier dependency ("dependent on N for X — losing
@@ -12,7 +12,7 @@
  *   - COERCION: the leverage a critical supplier holds over its dependent ("holds
  *     leverage over N — it could choke the supply").
  *
- * ── PLAYER-SAFE / NO LEAKS (the F1 headline). ────────────────────────────────────
+ * ── PLAYER-SAFE / NO LEAKS. ──────────────────────────────────────────────────
  * COVERT/SMUGGLING ties between battlefield enemies are GM-ONLY. A player-facing /
  * public call (`includeCovert: false`, the DEFAULT) NEVER surfaces a covert
  * smuggling tie — honouring the channel-visibility convention exactly like

@@ -1,5 +1,5 @@
 {
-  "_comment": "Pillar G — Hand-curated sample dossier used by the landing-page proof card (H-2), first-dossier callouts (O-2), and the workshop locked-state preview. Crafted around the canonical Hightower's Reach example the critique uses verbatim. Schema-compatible with a real generated settlement but tuned for teaching: NPC 0 carries the wall-fund corruption secret, the supply chain has a stated 11-day failure timeline, plot hook 0 is the missing-ledger arc. Update the script scripts/build-sample-dossier.mjs if regeneration is ever needed.",
+  "_comment": "Hand-curated sample dossier used by the landing-page proof card, first-dossier callouts, and the workshop locked-state preview. Crafted around the canonical Hightower's Reach example the critique uses verbatim. Schema-compatible with a real generated settlement but tuned for teaching: NPC 0 carries the wall-fund corruption secret, the supply chain has a stated 11-day failure timeline, plot hook 0 is the missing-ledger arc. Update the script scripts/build-sample-dossier.mjs if regeneration is ever needed.",
   "_seed": "hightowers-reach-2026-04-canon",
   "_version": 1,
   "schemaVersion": 1,

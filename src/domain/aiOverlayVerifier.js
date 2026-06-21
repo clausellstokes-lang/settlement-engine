@@ -1,9 +1,9 @@
 /**
  * domain/aiOverlayVerifier.js — runtime canon-preservation guard.
  *
- * Tier 6.4 of the roadmap. The AI overlay is supposed to refine prose
+ * The AI overlay is supposed to refine prose
  * without inventing entities, renaming proper nouns, or contradicting
- * facts (per Tier 6.3 PRESERVATION_RULES + Tier 6.1 forbidden-changes
+ * facts (per PRESERVATION_RULES + forbidden-changes
  * catalog). Models are statistical — sometimes they violate the
  * contract anyway. This module is the safety net that catches it:
  *
@@ -50,7 +50,7 @@ export const VIOLATION_KINDS = Object.freeze([
   'changed_fact',
   'changed_canon',
   'removed_history_beat',
-  // Tier 6.6: user-edited prose is canon. The verifier checks that
+  // User-edited prose is canon. The verifier checks that
   // every value still equals the user's authored string.
   'changed_user_field',
 ]);
@@ -260,7 +260,7 @@ function compareHistoryBeats(original, refined) {
  * Verify that every field the user has hand-edited in the ORIGINAL
  * settlement still carries the user's exact value in the REFINED
  * output. User-edited prose is canon — the AI must pass it through
- * verbatim. Tier 6.6.
+ * verbatim.
  */
 function compareUserFields(original, refined) {
   const violations = [];
@@ -405,7 +405,7 @@ export function verifyAiOverlay(original, refined) {
   // History beat drop-out.
   violations.push(...compareHistoryBeats(original, refined));
 
-  // Tier 6.6: user-edited prose must round-trip verbatim.
+  // User-edited prose must round-trip verbatim.
   violations.push(...compareUserFields(original, refined));
 
   return {

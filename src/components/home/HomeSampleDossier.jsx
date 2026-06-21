@@ -1,10 +1,10 @@
 /**
- * HomeSampleDossier.jsx — P128 / H-2 sample dossier proof card.
+ * HomeSampleDossier.jsx — sample dossier proof card.
  *
  * Renders below HomeHero for anonymous visitors. Three callouts —
  * green/violet/amber — each aimed at a different reader. Pulls the
- * fixture from Pillar G so the entities the callouts reference are
- * stable across renders.
+ * shared SAMPLE_DOSSIER fixture so the entities the callouts reference
+ * are stable across renders.
  *
  * Self-gates on auth.tier === 'anon' AND !settlement (don't render once
  * the user has already generated; they have the real thing).

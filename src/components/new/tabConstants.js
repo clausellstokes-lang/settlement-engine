@@ -3,7 +3,7 @@ import { swatch } from '../theme.js';
 
 export const isMobile = () => window.innerWidth < 640;
 
-// ── Tier 7.19 — BODY token (sweep across components) ─────────────────────────
+// ── BODY token ───────────────────────────────────────────────────────────────
 // The tabs historically used a per-file `const second=swatch['#6B5340']` for body
 // copy. Centralising it here means a future contrast adjustment is one edit,
 // not 13. The hex value matches the existing ink-mid brown so the visual

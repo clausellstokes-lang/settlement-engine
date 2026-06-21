@@ -1,9 +1,9 @@
 /**
  * domain/districtProfile.js — Promote quarters to structured districts.
  *
- * Tier 4.9 of the roadmap. The generator already produces
+ * The generator already produces
  * `settlement.spatialLayout.quarters[]` with light fields (name,
- * location, desc, landmarks). Phase 29 keeps that shape and enriches
+ * location, desc, landmarks). This module keeps that shape and enriches
  * it with structural fields by reading the rest of the settlement:
  *
  *   deriveDistrictProfile(quarter, settlement) -> {
@@ -18,8 +18,8 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Composes Phase 9 factions, Phase 10 chains,
- * Phase 16 conditions, Phase 17 substrate, Phase 20 threats.
+ * Pure read-only. Composes factions, chains,
+ * conditions, substrate, threats.
  * Doesn't rewrite the generator — it derives.
  */
 

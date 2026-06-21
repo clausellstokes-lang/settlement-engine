@@ -1,10 +1,10 @@
 /**
- * domain/display/mobilizationStatus.js — Phase B1 read-model SELECTOR for the DM UI.
+ * domain/display/mobilizationStatus.js — read-model SELECTOR for the DM UI.
  *
  * A `warStatus.js`-style projection of the LIVE mobilization posture
  * (worldState.warPosture) and the FEASIBILITY of a hypothetical siege, in HEURISTIC
  * DM language — NO internal jargon (no posture enum names, no capacity numbers, no
- * ratio, no rng). The UI wiring is F1; B1 just provides the read-model.
+ * ratio, no rng). This module just provides the read-model; the UI does the wiring.
  *
  * PRESENTATION ONLY. Pure projection: nothing here mutates worldState, forks rng, or
  * reads a wall clock. INERT, NOT CRASH, WHEN ABSENT — a no-war campaign (absent

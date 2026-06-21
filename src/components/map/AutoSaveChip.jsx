@@ -1,5 +1,5 @@
 /**
- * AutoSaveChip.jsx — P136 / M-5 visible save-state indicator.
+ * AutoSaveChip.jsx — visible save-state indicator.
  *
  * A pill that tells the user "Saved 2 min ago" so they don't keep
  * pressing Ctrl-S out of anxiety. Lives in the WorldMap top toolbar

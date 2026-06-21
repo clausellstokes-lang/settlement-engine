@@ -1,5 +1,5 @@
 /**
- * eslint-plugin-visual-budget.js — Local ESLint rules for P120 / V-1/V-2/V-5.
+ * eslint-plugin-visual-budget.js — Local ESLint rules guarding the visual budget.
  *
  * Three rules, all warnings (not errors — the codebase has legitimate
  * legacy violations to migrate). They surface drift without blocking
@@ -18,9 +18,9 @@
  *
  *   no-raw-button-copy — strings inside JSX <button> that look like
  *     verbs ("Generate", "Reroll", "Save"). Encourages routing through
- *     copy/index.js so the verb-unification (C-1) stays honest.
+ *     copy/index.js so the verb wording stays unified.
  *
- * no-forked-color-const (A+ P1.3) — a module-scope `const X = '#hex'` that
+ * no-forked-color-const — a module-scope `const X = '#hex'` that
  *   re-declares a value the token system owns. no-raw-color only inspects JSX
  *   `style` props, so these forks (≈43 files) bypassed it entirely. ERROR for any
  *   file NOT in the checked-in baseline (scripts/.forked-color-baseline.json) and
@@ -196,7 +196,7 @@ export default {
       },
     },
 
-    // no-raw-color-literal (A+ design-a11y.1) — broadens color governance beyond
+    // no-raw-color-literal — broadens color governance beyond
     // JSX style props (no-raw-color) and beyond `const X='#hex'` consts
     // (no-forked-color-const) to ANY pure-hex string literal anywhere (object
     // values, JSX attrs, config maps, …). The token DEFINITION files are exempt,

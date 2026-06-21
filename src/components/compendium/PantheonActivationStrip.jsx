@@ -1,6 +1,6 @@
 /**
  * PantheonActivationStrip — teaches the dormant-until-assigned + premium model
- * for authored deities (UX Phase 8). It shows the three activation milestones a
+ * for authored deities. It shows the three activation milestones a
  * homebrew pantheon passes through before it touches the simulation:
  *
  *   1. AUTHORED      — at least one deity exists in customContent.deities.

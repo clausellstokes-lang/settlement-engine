@@ -1,7 +1,7 @@
 /**
  * domain/simulationSpine.js — Compact causal summary of a settlement.
  *
- * Tier 2.5 of the roadmap. The spine answers seven structured questions
+ * The spine answers seven structured questions
  * about a settlement in single-line answers derived from existing
  * simulation fields. No new generator work needed; this is read-only
  * over current settlement state.

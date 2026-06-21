@@ -1,6 +1,6 @@
 /**
  * regionalFingerprint.js — privacy-safe extraction of REGIONAL / intersettlement
- * mutations (Wave 2). Same allowlist discipline as structuralFingerprint.js /
+ * mutations. Same allowlist discipline as structuralFingerprint.js /
  * pulseFingerprint.js: copy ONLY enums, catalog ids, bands, counts — never
  * settlement names, prose headlines/summaries, or coordinates. The guarantee is
  * a TEST (tests/lib/regionalFingerprint.test.js).

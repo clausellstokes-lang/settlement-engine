@@ -1,7 +1,7 @@
 /**
  * domain/trace.js — Causal trace API for the simulation pipeline.
  *
- * Tier 2.1 of the roadmap. This is the foundation the rest of the
+ * This is the foundation the rest of the
  * simulator's causality work compounds on: faction profiles, supply-
  * chain state, district simulation, AI grounded-in-trace prompts all
  * become much easier when every important decision the engine made
@@ -9,7 +9,7 @@
  *
  * Storage:
  *   Traces live on `settlement.simulationTrace[]`. The container is
- *   created by `normalizeSettlement` (see Phase 6); this module never
+ *   created by `normalizeSettlement`; this module never
  *   creates the array itself, only appends to it.
  *
  *   During a generation run, traces accumulate on `ctx.simulationTrace`

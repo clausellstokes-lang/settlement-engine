@@ -59,9 +59,9 @@ function suppressorNames(stressType, institutions) {
 
 registerStep('stressConfirmPass', {
   deps: ['resolveStress', 'isolationPass'],
-  reads: ['effectiveConfig', 'institutions', 'stress', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['effectiveConfig', 'institutions', 'stress', 'tier'], // ctx keys this step consumes that another step produces
   provides: ['stress', 'stressTypes'],
-  mutates: ['effectiveConfig'], // re-stamps confirmed stress keys on effectiveConfig in place (A+ P1.7)
+  mutates: ['effectiveConfig'], // re-stamps confirmed stress keys on effectiveConfig in place
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, effectiveConfig, institutions } = ctx;

@@ -1,6 +1,6 @@
 /**
- * AltitudeControl — the 3-segment progressive-disclosure control (UX overhaul
- * Phase 1, plan §3.2). Overview / Detail / Engine ↔ guided / standard / expert,
+ * AltitudeControl — the 3-segment progressive-disclosure control.
+ * Overview / Detail / Engine ↔ guided / standard / expert,
  * bound to the persisted `userPrefs.detailLevel` via useAltitude().
  *
  * Pure presentational + the store binding. Mounted NOWHERE yet — it is wired

@@ -171,7 +171,7 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // dismissed proposals must score nothing. Application is recorded twice:
   // accepting stamps the proposal row 'applied' (worldState.proposals), and
   // the apply-time writes stamp the outcome id onto every incident/history/
-  // hierarchy row (R3). Either marker admits the outcome; auto outcomes
+  // hierarchy row. Either marker admits the outcome; auto outcomes
   // applied at selection and need no marker.
   const appliedMarkers = new Set();
   for (const proposal of worldState?.proposals || []) {
@@ -358,7 +358,7 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const relState = ensureRelationshipState(edge, states[relationshipKey]);
     const rawSettlements = getRelationshipSettlements(edge);
     if (!rawSettlements.from || !rawSettlements.to) continue;
-    // H16: when a subjugation/patronage crowned the edge's authored 'to' side
+    // When a subjugation/patronage crowned the edge's authored 'to' side
     // the senior party is stamped on the STATE — present senior-first like
     // every other hierarchy edge so direction summaries stay truthful.
     const roles = relationshipRoles(edge, relState);

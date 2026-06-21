@@ -1,5 +1,5 @@
 /**
- * SupplyChainsManager.jsx — the "Supply Chains" tab of My Custom Content (§14 P3).
+ * SupplyChainsManager.jsx — the "Supply Chains" tab of My Custom Content.
  *
  * Supply chains aren't hand-authored — they're DISCOVERED. inferSupplyChains
  * walks the inputs/outputs of the user's custom institutions, services,

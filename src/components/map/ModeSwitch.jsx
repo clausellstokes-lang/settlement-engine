@@ -13,7 +13,7 @@ import { BORDER2, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export function ModeSwitch({ mapMode, setMapMode, imageMode }) {
-  // P110 / M-4 — Routes mode appended to the mode pill group. The
+  // Routes mode appended to the mode pill group. The
   // existing mode pill is already segmented; this is one more entry.
   // Click promotes relationship/road/supply-chain layers to primary
   // content and fires MAP_ROUTES_MODE_ENTERED analytics.

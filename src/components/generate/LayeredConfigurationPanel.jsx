@@ -1,7 +1,6 @@
 /**
- * LayeredConfigurationPanel — the ONE progressive Create panel (UX overhaul
- * Phase 6, plan §4.3). Collapses the Basic/Advanced ModeSelector fork into a
- * single layered surface:
+ * LayeredConfigurationPanel — the ONE progressive Create panel. Collapses
+ * the Basic/Advanced ModeSelector fork into a single layered surface:
  *
  *   Character (Tier-1 card)  — the 17 archetypes, promoted out of SliderPanel.
  *   Foundations (always-on)  — size up to metropolis + the essentials.

@@ -18,7 +18,7 @@ import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relations
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
-// UX Phase 7 — the campaign PDF's Realm Chronicle & Geopolitics section reads the
+// The campaign PDF's Realm Chronicle & Geopolitics section reads the
 // SAME pure selectors the settlement PDF + the on-screen Realm surfaces use, so
 // the three artifacts can never drift. All inert ([]/null) when dormant.
 import {
@@ -731,7 +731,7 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Realm Chronicle & Geopolitics (UX Phase 7)
+// Realm Chronicle & Geopolitics
 // ─────────────────────────────────────────────────────────────────────────────
 // Reads the live worldState through the shared warStatus / pantheon / realmArc
 // selectors (no recompute, no three-way drift). Renders NOTHING when the realm
@@ -904,7 +904,7 @@ export function generateCampaignPDF(campaign, allSaves) {
     footer(doc, campaign.name, pageN);
   }
 
-  // Realm Chronicle & Geopolitics — the living-world section (UX Phase 7).
+  // Realm Chronicle & Geopolitics — the living-world section.
   // Self-gates: a dormant / non-simulated campaign carries no worldState ledgers
   // ⇒ buildRealmGeopolitics renders nothing and adds no page.
   if (settlements.length > 0) {

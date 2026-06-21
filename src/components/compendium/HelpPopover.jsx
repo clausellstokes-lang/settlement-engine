@@ -1,5 +1,5 @@
 /**
- * HelpPopover.jsx — P126 / CP-1 inline Compendium help.
+ * HelpPopover.jsx — inline Compendium help.
  *
  * Drop a `<HelpPopover topic="trade-route" />` next to any config
  * label and the user gets a "?" affordance that opens a small popover

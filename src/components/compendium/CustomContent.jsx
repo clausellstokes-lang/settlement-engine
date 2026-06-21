@@ -36,7 +36,7 @@ const GOV_TYPES = ['monarchy','republic','theocracy','oligarchy','tribal','milit
 const POSTURES = ['peaceful','defensive','aggressive','fortified','guerrilla'];
 
 // Plain-language helper text under each field, so the form explains itself
-// (spec §14: as intuitive as possible). Keyed by field name; missing = no hint.
+// and stays as intuitive as possible. Keyed by field name; missing = no hint.
 const FIELD_HINTS = {
   category:       'Which part of settlement life this belongs to — also where it appears in the dossier. Pick “+ New category…” to add your own.',
   authority:      'Which power it feeds in the settlement’s leadership — e.g. a temple → religious authority, a garrison → martial.',
@@ -61,7 +61,7 @@ const FIELD_HINTS = {
   domain:         'What the god presides over — e.g. war, the harvest, the dead (optional flavour).',
 };
 
-// §14 — resolve a stored enum key to its human label for the detail view.
+// Resolve a stored enum key to its human label for the detail view.
 const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
 
 /**
@@ -373,7 +373,7 @@ export function CustomContentManager({ search }) {
       case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
       case 'economicWeight': return <select {...shared} value={val||''}><option value="">Select…</option>{ECONOMIC_WEIGHT.map(w=><option key={w.key} value={w.key}>{w.label}</option>)}</select>;
       case 'scale': return <select {...shared} value={val||''}><option value="">Select…</option>{['cell','minor','significant','dominant'].map(s=><option key={s} value={s}>{s}</option>)}</select>;
-      // Deity axes (Feature D / R1). Default to a valid enum so a saved deity
+      // Deity axes (Feature D). Default to a valid enum so a saved deity
       // always passes validateDeity / the 049 DB CHECK; never an empty option.
       case 'alignmentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_ALIGNMENT.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
       case 'temperamentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_TEMPER.map(t=><option key={t.key} value={t.key}>{t.label}</option>)}</select>;

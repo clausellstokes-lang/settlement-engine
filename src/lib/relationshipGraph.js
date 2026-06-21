@@ -73,7 +73,7 @@ function getStrength(save, modifiers = null) {
     economy:       (cfg.priorityEconomy  ?? 50) / 100,
     safety:        (cfg.priorityMilitary ?? 50) / 100,
     supply:        ((cfg.priorityEconomy ?? 50) + (cfg.priorityMilitary ?? 50)) / 200,
-    // B06 #8: priorityReligion is an INTENTIONAL proxy for political strength —
+    // priorityReligion is an INTENTIONAL proxy for political strength —
     // config carries no dedicated political slider, and faction power /
     // legitimacy live in the derived settlement state, not on the save config
     // this helper reads. Documented as a proxy rather than rewired to avoid a
@@ -102,7 +102,7 @@ function getStrength(save, modifiers = null) {
 export function buildGraph(savedSettlements) {
   const graph = new Map();
 
-  // B06 #9: build the resolution indexes ONCE instead of an O(settlements)
+  // Build the resolution indexes ONCE instead of an O(settlements)
   // inner scan per link (the old loop was O(N^2 * links) and also kept a dead
   // idByLinkTarget map it never read).
   //   - linkOwners:  linkId → settlement ids carrying that linkId (insertion
@@ -195,7 +195,7 @@ export function computeModifiers(settlementId, graph, saveIndex = null, currentM
   const targetPop = targetSave ? getPopulation(targetSave) : 500;
 
   // BFS wave: [targetId, relType, cumulativeDecay, depth, targetName]
-  // Processed level-by-level so the result is ORDER-INDEPENDENT (B06 #2). When a
+  // Processed level-by-level so the result is ORDER-INDEPENDENT. When a
   // node is reachable via several equal-depth paths, the earlier shift()-wins
   // BFS picked whichever link happened to be enqueued first — so re-ordering a
   // settlement's links silently changed the displayed/exported numbers. We now
@@ -373,7 +373,7 @@ export function getAllModifiers(savedSettlements, maxIterations = 4) {
     lastResult = nextResult;
   }
 
-  // B06 #4: on exhaustion return the LAST DAMPED result rather than a fresh
+  // On exhaustion return the LAST DAMPED result rather than a fresh
   // undamped recompute. The old final pass recomputed totals from
   // currentModifiers without re-applying the 0.8x damping, so a non-converging
   // network returned numbers that disagreed with the damping it advertised (and

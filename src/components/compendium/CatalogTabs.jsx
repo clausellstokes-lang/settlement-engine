@@ -2,10 +2,10 @@ import { useState, useMemo } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, swatch } from '../theme.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes';
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../generators/lookups.js';
-// P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
-// global-search index (CP-4) and these tabs render from one source of truth.
+// REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
+// global-search index and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
-// UX Phase 8 — the Religion & the Pantheon catalog tab documents the deity axes
+// The Religion & the Pantheon catalog tab documents the deity axes
 // + their effects FROM THE SHARED SINGLE SOURCE (the same coupling strings the
 // engine + the dossier read), never hand-copied numbers.
 import { DEITY_AXIS_EFFECTS } from '../../domain/display/deityEffects.js';
@@ -109,7 +109,7 @@ const PANTHEON_AXES = [
   },
 ];
 
-// Religion & the Pantheon (UX Phase 8) — replaces the stale "Magic & Religion"
+// Religion & the Pantheon — replaces the stale "Magic & Religion"
 // tab. Documents the three deity axes + their effects (from the shared source),
 // the dormant-until-assigned model, the conversion contest, tiers, and the
 // Ascendancy / Twilight arcs. Keeps the legacy `#magic` anchor so search index
@@ -149,7 +149,7 @@ export function ArcaneTab() {
   </>;
 }
 
-// Living World (UX Phase 8) — the missing static→living-world bridge in the
+// Living World — the missing static→living-world bridge in the
 // reference catalog. Five plain-language groups documenting the simulation
 // substrate the generator feeds into once a campaign runs.
 const LIVING_WORLD_GROUPS = [

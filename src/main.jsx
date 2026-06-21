@@ -23,7 +23,7 @@ emitCssTokens();
 // (highest precedence) but no longer write during render (see flags.js).
 persistUrlFlags();
 
-// Tier 8.8 - install the analytics provider (Plausible by default, when
+// Install the analytics provider (Plausible by default, when
 // VITE_PLAUSIBLE_DOMAIN is set; PostHog as an opt-in alternative). No-op
 // when neither env var is set, in which case analytics.js falls back to
 // the dev-mode console log. The 4 wired funnel events

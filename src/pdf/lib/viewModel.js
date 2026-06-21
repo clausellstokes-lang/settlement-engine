@@ -159,7 +159,7 @@ export function buildViewModel({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // UX Phase 7 — the LIVE campaign world for this settlement. Shape:
+  // The LIVE campaign world for this settlement. Shape:
   //   { worldState, regionalGraph, settlements?, nameFor? }
   // Threaded ONLY for premium exports (data-layer gate in SettlementDetail).
   // When absent / dormant, the liveWorld slice resolves to `null` — so a
@@ -181,7 +181,7 @@ export function buildViewModel({
     eventLog,
     phase,
 
-    // UX Phase 7 — live-world slice. Built ONLY from the existing pure
+    // Live-world slice. Built ONLY from the existing pure
     // warStatus / pantheon / realmArc / deityEffects selectors (NO recompute,
     // NO screen↔PDF drift). `null` when dormant ⇒ the Faith & War chapter and
     // the additive enrichments self-gate to nothing ⇒ byte-identical off-state.
@@ -296,7 +296,7 @@ function identitySlice(s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
-  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
   const food = deriveFoodBalance(s);
@@ -460,7 +460,7 @@ function dailySlice(active, aiDailyLife) {
         { time: 'Night',   text: aiDailyLife.night },
       ].filter(p => p.text)
     : [];
-  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — so the daily-life fallback shows the
   // SAME food number as the identity anchor, the overview/economics chapters, and the
   // on-screen DailyLifeTab. `available` is false when food was never calculated, which
@@ -881,7 +881,7 @@ function viabilitySlice(active) {
   const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
-  // Magic legality facets (UX Phase 7) — the 10-facet magic profile summarized
+  // Magic legality facets — the 10-facet magic profile summarized
   // for the Viability/Identity chapter, via the SAME summarizeMagic the screen
   // Magic sub-tab reads. Self-gating: a dead-magic world (magicExists === false)
   // yields { exists:false, lines:[] } ⇒ the section renders nothing extra, so a

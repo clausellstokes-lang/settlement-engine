@@ -13,7 +13,7 @@
  * to ~0 the instant ONE factor is weak, collapsing the field. Summing in LOG-ODDS
  * space and squashing ONCE keeps every factor's marginal influence alive.
  *
- * Cross-platform reproducibility caveat (B06 #10): logistic/logit/softmax use
+ * Cross-platform reproducibility caveat: logistic/logit/softmax use
  * Math.exp and Math.log, which the ECMAScript spec does NOT require to be
  * bit-identical across engines/platforms. In rare boundary cases — a contest
  * score sitting exactly on its pHold cutoff, or a near-tie cumulative-weight

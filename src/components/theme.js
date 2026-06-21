@@ -52,7 +52,7 @@ export const PARCH    = L.PARCH;
 export const CARD_ALT = L.CARD_ALT;
 export const CARD_HDR = L.CARD_HDR;
 
-// Flat aliases for dashed-key palette colors (P120 / V-2 color burn-down).
+// Flat aliases for dashed-key palette colors.
 export const VIOLET    = L.VIOLET;
 export const VIOLET_BG = L.VIOLET_BG;
 export const RED       = L.RED;

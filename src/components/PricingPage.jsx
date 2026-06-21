@@ -71,7 +71,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
     ? variantFeatures
     : (tx(`pricing.tiers.${tier.key}.features`) || []);
   const variantTagline = simulationVariant ? t(`pricing.variant.tiers.${tier.key}.tagline`) : null;
-  // P122 / X-10 — Prefer audience-led pitch over generic tagline when the
+  // Prefer audience-led pitch over generic tagline when the
   // flag is on and a per-audience line is available. Falls back to the
   // simulation-variant tagline, then the legacy tagline.
   const tagline  = audienceLine || variantTagline || t(`pricing.tiers.${tier.key}.tagline`);
@@ -137,7 +137,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
 
       {tier.key === 'founder' && (
         <p style={{ margin: 0, fontSize: FS.xs, color: swatch['#7C3AED'], fontFamily: sans, fontWeight: 600 }}>
-          {/* Tier 7.6: live seat count via the founder_seats_taken RPC
+          {/* Live seat count via the founder_seats_taken RPC
               (migration 010). The fetch may fail or be pending; fall
               back to the safe "Limited to 500 seats" copy in those
               cases so the card stays informative either way. */}
@@ -236,7 +236,7 @@ export default function PricingPage({ onNavigate }) {
     ? t('pricing.variant.pageSubtitle')
     : t('pricing.pageSubtitle');
 
-  // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
+  // Audience-led pricing pitch. The same tier gets a
   // different lead line depending on the current reader's archetype.
   const copy = useCopy();
   const audienceLineFor = (tierKey) => {
@@ -245,7 +245,7 @@ export default function PricingPage({ onNavigate }) {
     return copy.audience(prefix);
   };
 
-  // Tier 7.6: live founder seat counter. Null until the RPC resolves
+  // Live founder seat counter. Null until the RPC resolves
   // OR on any failure — TierCard falls back to "Limited to 500 seats"
   // when null, so a transient backend hiccup doesn't break the page.
   const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
@@ -335,7 +335,7 @@ export default function PricingPage({ onNavigate }) {
         }}>
           {pageSubtitle}
         </p>
-        {/* ── Anti-AI positioning (Tier 7.13) ─────────────────────────── */}
+        {/* ── Anti-AI positioning ──────────────────────────────────────── */}
         <p style={{
           margin: `${SP.md}px auto 0`, maxWidth: 580,
           padding: `${SP.xs}px ${SP.md}px`,

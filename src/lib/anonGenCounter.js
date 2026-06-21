@@ -10,7 +10,7 @@
  *   "you've hit the free limit, sign in for unlimited" nudge, not
  *   security.
  *
- * Tier 7.2 — two-bucket cap:
+ * Two-bucket cap:
  *   The roadmap's "1 full dossier + 2 lightweight rerolls/previews"
  *   pattern is more forgiving than a flat 3/day cap without inviting
  *   abuse. We split the counter into two:
@@ -63,9 +63,9 @@ function read() {
     if (!parsed || typeof parsed.date !== 'string') {
       return emptyShape();
     }
-    // Tier 7.2 backward-compat: pre-7.2 saves only have `count`.
-    // Treat that legacy count as `full` so the user doesn't lose
-    // their day's quota on schema upgrade.
+    // Backward-compat: legacy saves only have `count`. Treat that
+    // legacy count as `full` so the user doesn't lose their day's
+    // quota on schema upgrade.
     if (typeof parsed.full !== 'number') {
       const legacyCount = typeof parsed.count === 'number' ? parsed.count : 0;
       return { date: parsed.date, full: legacyCount, reroll: 0 };
@@ -93,7 +93,7 @@ function todaySnapshot() {
   return cur;
 }
 
-// ── Per-bucket accessors (Tier 7.2) ─────────────────────────────────
+// ── Per-bucket accessors ────────────────────────────────────────────
 
 /** Full-generation count for today (does not persist a date roll). */
 export function getAnonFullCount() {
@@ -150,8 +150,8 @@ export function incrementAnonReroll() {
 // ── Combined-bucket helpers (backward compatible API) ───────────────
 
 /**
- * Combined count for today (full + reroll). Tier 7.2 splits the
- * counter but legacy callers reading "the user's daily count" still
+ * Combined count for today (full + reroll). The counter is split into
+ * two buckets, but legacy callers reading "the user's daily count" still
  * get a single number that matches DEFAULT_DAILY_CAP.
  */
 export function getAnonGenCount() {

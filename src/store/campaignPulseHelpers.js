@@ -91,8 +91,8 @@ export function campaignClockTick(campaign) {
 export function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
-  // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
-  // decision: SYNC IT): roaming stressors the pulse resolved ORGANICALLY
+  // Crisis-triple sync (a deliberate decision to keep the two sides in step):
+  // roaming stressors the pulse resolved ORGANICALLY
   // wind down their origin settlement's local representations — the stress
   // entry, the promoted condition (eased per the event-resolution
   // semantics), and the stressorEdits suppression — through the same

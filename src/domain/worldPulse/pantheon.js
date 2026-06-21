@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/pantheon.js — Feature D / R4: the per-DEITY faith ledger.
+ * domain/worldPulse/pantheon.js — the per-DEITY faith ledger.
  *
  * This is the SAME ratcheted-disposition shape `dispositionLedger.js` instantiates
  * for settlements, instantiated here for DEITIES. An entry accumulates a deity's
@@ -7,8 +7,8 @@
  *
  *     worldState.pantheon[deityId] = { wins, losses, seats, tier, tierHeld }
  *
- *  - wins/losses — ratcheted from R2's deity-contest outcomes (a deity that wins a
- *    conversion banks a win; the displaced deity a loss). Reuses the F4 fold idiom:
+ *  - wins/losses — ratcheted from the deity-contest outcomes (a deity that wins a
+ *    conversion banks a win; the displaced deity a loss). Reuses the shared fold idiom:
  *    immutable, bounded, commutative (sorted by deityId so apply order can't change
  *    the result).
  *  - seats — `seatsControlled`: the count of settlements whose embedded

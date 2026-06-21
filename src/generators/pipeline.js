@@ -21,7 +21,7 @@
 
 import { setActiveRng, clearActiveRng } from './rngContext.js';
 
-// ── A+ P1.7 — pipeline data-flow contract (strict mode) ──────────────────────
+// ── Pipeline data-flow contract (strict mode) ────────────────────────────────
 // The topo-sort orders steps by `deps` (step names), but the REAL data flow is the
 // set of ctx keys each step writes — via its returned patch AND via in-place
 // mutation of shared ctx objects (e.g. a step that mutates ctx.institutions while
@@ -77,8 +77,8 @@ const _steps = new Map();
  * @param {Object}   meta     — Step metadata
  * @param {string[]} meta.deps     — Names of steps this one reads from
  * @param {string[]} meta.provides — Context keys this step writes via its returned patch
- * @param {string[]} [meta.reads]   - Ctx keys this step CONSUMES that another step produces (A+ generators.3 data-flow contract; strict mode asserts each is present before the step runs)
- * @param {string[]} [meta.mutates] - Existing ctx keys this step mutates IN PLACE (A+ P1.7 data-flow contract)
+ * @param {string[]} [meta.reads]   - Ctx keys this step CONSUMES that another step produces (data-flow contract; strict mode asserts each is present before the step runs)
+ * @param {string[]} [meta.mutates] - Existing ctx keys this step mutates IN PLACE (data-flow contract)
  * @param {string[]} [meta.scratch] - Internal/flag ctx keys this step sets (declared so strict mode stays quiet)
  * @param {string}   [meta.phase]  - Logical phase grouping (for UI/debugging)
  * @param {Function} fn       — (ctx, rng) => Object  (patch to merge into ctx)
@@ -138,7 +138,7 @@ export function getStepOrder() {
  * @param {Object} rng           — Root PRNG instance from createPRNG()
  * @param {Object} [options]
  * @param {Function} [options.onStep]  - Called after each step: (name, ctx, patch) => void
- * @param {boolean}  [options.strict]  - A+ P1.7: throw if any step writes a ctx key it didn't declare (provides/mutates/scratch)
+ * @param {boolean}  [options.strict]  - Throw if any step writes a ctx key it didn't declare (provides/mutates/scratch)
  * @param {Function} [options.onStrictViolation] - Collect undeclared writes instead of throwing: ({step, keys}) => void
  * @returns {Object} Final accumulated context
  */
@@ -156,9 +156,9 @@ export function runPipeline(initialContext, rng, options = {}) {
     const step = _steps.get(name);
     // Fork a PRNG for this step so it's deterministic regardless of step order changes
     const stepRng = rng.fork(name);
-    // Strict mode (A+ P1.7): snapshot before so we can detect undeclared writes.
+    // Strict mode: snapshot before so we can detect undeclared writes.
     const before = (strict || onStrictViolation) ? _snapshotCtx(ctx) : null;
-    // Strict mode (A+ generators.3): every declared `reads` key must already be
+    // Strict mode: every declared `reads` key must already be
     // present in ctx — i.e. a prior step produced it. A read of a not-yet-produced
     // key means the run order is wrong (a step is scheduled before its producer).
     if (before) {

@@ -81,7 +81,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const setWizardMode = useStore(s => s.setWizardMode);
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
-  // P115 / X-9 — the WelcomeBackCard "Open" CTA selects a saved
+  // The WelcomeBackCard "Open" CTA selects a saved
   // settlement; SettlementsPanel reads selectedSettlementId on mount and
   // opens the matching save in detail view.
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
@@ -97,7 +97,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
-  // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
+  // Fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
   // via sessionStorage so a re-render doesn't double-count. For the
   // signed-in variant this fires too — it's still a homepage view,
@@ -122,7 +122,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         // generateSettlement now (so wizard "Regenerate Draft" and the
         // sample fork count too, not just this first-gen button). Here
         // we only fire the anon-attribution analytics event.
-        // Tier 8.8 — anon attribution. Permanent flag once set; drives
+        // Anon attribution. Permanent flag once set; drives
         // signup_after_anon and paid_after_anon reporting downstream.
         Funnel.anonGenerationCompleted({ tier: pickedSize });
       }
@@ -135,7 +135,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
 
   return (
     <>
-      {/* P115 / X-9 — Welcome-back card. Self-gates inside; renders
+      {/* Welcome-back card. Self-gates inside; renders
           nothing for anons, first-visit signed-in users, or users
           without a saved settlement. */}
       {!isAnon && (
@@ -167,7 +167,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       */}
       {isAnon ? (
         flag('heroV2') ? (
-          // P117 / H-1 — Two-voice hero rewrite. Anti-AI line as H1
+          // Two-voice hero rewrite. Anti-AI line as H1
           // (worldbuilder hook); italic deck translates for the new DM
           // ("the pieces explain each other"). Eyebrow + footer-signin +
           // anti-AI quote block all removed — the H1 IS the anti-AI line.
@@ -271,7 +271,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>
         {isAnon && atCap ? (
-          // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
+          // Reframe the anon cap as an unlock, not a wall.
           // Lead with what signin gets you, not with what you've used up.
           // Side-door $2.99 link below catches intermediates who just need
           // Friday's town.

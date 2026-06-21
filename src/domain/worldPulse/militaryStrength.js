@@ -84,7 +84,7 @@ const MATERIEL_PATTERN = /weapon|armor|armour|blade|sword|spear|bow|arrow|smith|
 const MILITARY_INSTITUTION_PATTERN = /garrison|barrack|armory|armoury|watch|militia|guard|fort|citadel|keep|bastion|war ?college|drill|mercenary|company|legion|warden|marshal/i;
 
 // War-condition archetypes this model can observe (the LIVE-facet hooks). These
-// are the same archetypes warDeployment stamps; B0 only reads them.
+// are the same archetypes warDeployment stamps; this model only reads them.
 const WAR_EXHAUSTION_ARCHETYPE = 'war_exhaustion';
 const WAR_DRAIN_ARCHETYPE = 'war_drain';
 const ARMY_DEPLOYED_ARCHETYPE = 'army_deployed';
@@ -273,7 +273,7 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   // war_exhaustion is the non-reverting scar; war_drain the reverting bleed. Both
   // are stamped ONLY by the gated war layer, so a no-war settlement carries
   // neither ⇒ currentCapacity === theoreticalCapacity. army_deployed is exposed as
-  // a hook (B1/B2 turn it into the deployed/homeDefense split), not subtracted here.
+  // a hook (the war layer turns it into the deployed/homeDefense split), not subtracted here.
   const warExhaustion = conditionSeverity(s, WAR_EXHAUSTION_ARCHETYPE);
   const warDrain = conditionSeverity(s, WAR_DRAIN_ARCHETYPE);
   const armyDeployed = conditionSeverity(s, ARMY_DEPLOYED_ARCHETYPE);

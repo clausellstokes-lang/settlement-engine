@@ -1,6 +1,6 @@
 /**
  * PlaceInRegionCard — the premium "Place in Region" close-out for the Create
- * flow (UX overhaul Phase 6, plan §4.3). A worldbuilder's birth-time intent:
+ * flow. A worldbuilder's birth-time intent:
  * assign the settlement-to-be to a campaign/region and (optionally) name a patron
  * deity at birth.
  *

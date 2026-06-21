@@ -1,5 +1,5 @@
 /**
- * CompendiumGlobalSearch.jsx — P139 / CP-4 global type-ahead search.
+ * CompendiumGlobalSearch.jsx — global type-ahead search.
  *
  * Sits above the Compendium tab bar. Type once, search every built-in
  * section; pick a result and the parent (CompendiumPanel) switches to

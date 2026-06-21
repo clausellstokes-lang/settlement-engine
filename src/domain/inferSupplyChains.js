@@ -1,6 +1,6 @@
 /**
  * domain/inferSupplyChains.js — discover candidate supply chains from custom
- * content (§14 P3). Pure + deterministic.
+ * content. Pure + deterministic.
  *
  * Each custom entity exposes OUTPUTS (what it provides) and INPUTS (what it
  * requires); this matches one entity's outputs against another's inputs across
@@ -15,7 +15,7 @@
  * discovery + verification metadata live under namespaced `.discovered` /
  * `.verification` keys the renderer ignores. The user confirms/corrects/names
  * these in the Supply Chains tab; confirmed ones persist to
- * customContent.supplyChains and (P3b) feed generation.
+ * customContent.supplyChains and feed generation.
  *
  * Determinism: all iteration is over lexicographically sorted ids; no Date,
  * no Math.random, no set-iteration-order reliance. Same inputs → same chains.
@@ -99,7 +99,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     addNode(good, 'good', [good.name], requires);
   }
 
-  // §14 — seed prebuilt nodes for any BUILT-IN item a custom item references, so
+  // Seed prebuilt nodes for any BUILT-IN item a custom item references, so
   // a mixed chain assembles end-to-end: a custom good processed by a built-in
   // mill from a built-in resource renders as one connected resource → mill →
   // good path instead of the built-in step collapsing to a trade endpoint. The

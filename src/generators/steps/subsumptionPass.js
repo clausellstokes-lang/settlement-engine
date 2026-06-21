@@ -116,7 +116,7 @@ function applySubsumption(institutions, ctx = null, trace = {}) {
     });
   });
 
-  // Tier 2.1 — emit one trace per subsumption so the rail / AI overlay
+  // Emit one trace per subsumption so the rail / AI overlay
   // can explain why a smaller institution disappeared. The "greater"
   // institution is recorded as the cause; the lesser is the target.
   if (ctx) {
@@ -144,9 +144,9 @@ function applySubsumption(institutions, ctx = null, trace = {}) {
 
 registerStep('subsumptionPass', {
   deps: ['assembleInstitutions'],
-  reads: ['institutions'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['institutions'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['institutions'], // subsumes/merges roster entries in place (A+ P1.7)
+  mutates: ['institutions'], // subsumes/merges roster entries in place
   scratch: ['_subsumed'],     // sets a flag recording what was subsumed
   phase: 'institutions',
 }, (ctx) => {

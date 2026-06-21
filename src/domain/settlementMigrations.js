@@ -1,5 +1,5 @@
 /**
- * domain/settlementMigrations.js — Tier 1.4 migration runner.
+ * domain/settlementMigrations.js — migration runner.
  *
  * Saved settlements survive engine evolution. Every settlement
  * carries `schemaVersion` (stamped by normalizeSettlement at create

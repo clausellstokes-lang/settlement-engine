@@ -1,5 +1,5 @@
 /**
- * FounderTile.jsx — P116 / X-8 personalized Founder Lifetime recognition.
+ * FounderTile.jsx — personalized Founder Lifetime recognition.
  *
  * $99 lifetime is a conviction product. Wrong for the new DM (premature),
  * neutral for the intermediate (don't know they'll use it long-term),

@@ -14,7 +14,7 @@ const SYMMETRIC_TYPES = new Set([
 // domain/regionalGraph, domain/region/graph) so a label authored as 'ally',
 // 'overlord', or the legacy plural 'trade_partners' resolves to the same
 // canonical base label everywhere instead of silently drifting in one
-// subsystem (B06 finding #3). Each subsystem still maps FROM this canonical
+// subsystem. Each subsystem still maps FROM this canonical
 // label to its own effect profile.
 //
 // This table is CROSS-VOCAB-SAFE: it only collapses spelling/synonym variants
@@ -25,7 +25,7 @@ const SYMMETRIC_TYPES = new Set([
 // localPropagationType (see PROPAGATION_ALIASES below).
 /** @type {Readonly<Record<string, string>>} */
 const RELATIONSHIP_LABEL_ALIASES = Object.freeze({
-  // Legacy plural the old 'Opened Trade Route' event wrote (H12).
+  // Legacy plural the old 'Opened Trade Route' event wrote.
   trade_partners: 'trade_partner',
   trade: 'trade_partner',
   // Alliance spellings.
@@ -59,8 +59,8 @@ export function canonicalRelationshipLabel(label) {
 // Matrix/channel-bundle vocabulary: canonical labels that have NO row in the
 // propagation matrix (lib/relationshipGraph PROPAGATION_MATRIX) map onto the
 // row that carries their semantics. Applied AFTER canonicalRelationshipLabel so
-// 'smuggling'→'smuggling_partner'→'criminal_network' resolves in one pass
-// (B06 finding #1). Kept separate from the cross-vocab table so the regional
+// 'smuggling'→'smuggling_partner'→'criminal_network' resolves in one pass.
+// Kept separate from the cross-vocab table so the regional
 // structural graph keeps 'smuggling_partner' as a first-class type.
 /** @type {Readonly<Record<string, string>>} */
 const PROPAGATION_ALIASES = Object.freeze({
@@ -193,7 +193,7 @@ export function canonicalEdgeForLink(link, sourceSave, targetSave) {
     return { from: String(sourceId), to: String(targetId), relationshipType: 'patron' };
   }
   if (rawType === 'vassal' || rawType === 'overlord') {
-    // B06 #5: prefer the link's AUTHORED direction over the size heuristic.
+    // Prefer the link's AUTHORED direction over the size heuristic.
     // A legacy save where the smaller settlement is canonically the overlord
     // (a deposed-but-sovereign capital, a small theocratic seat) was silently
     // inverted by strongerFirst, mis-attributing who owes/commands whom.
@@ -219,7 +219,7 @@ export function localPropagationType(link) {
   if (role === 'patron') return 'client';
   if (role === 'vassal') return 'vassal';
   if (role === 'overlord') return 'client';
-  // B06 #1: a legacy link with a raw relationshipType ('ally', 'overlord',
+  // A legacy link with a raw relationshipType ('ally', 'overlord',
   // 'smuggling_partner', 'trade_partners') carries no localRelationshipRole, so
   // it reached the propagation matrix unnormalized and silently fell through to
   // 'neutral'. Route it through the matrix-vocab normalizer so it lands on a

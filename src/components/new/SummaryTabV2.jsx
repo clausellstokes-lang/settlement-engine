@@ -1,5 +1,5 @@
 /**
- * SummaryTabV2.jsx — P129 / D-2 magazine-spread Summary.
+ * SummaryTabV2.jsx — magazine-spread Summary.
  *
  * Two-column layout:
  *   LEFT (flex 1.2) — "The town in 4 sentences"
@@ -15,13 +15,13 @@
  *     mirror the canvas mockup.
  *
  *   FOOTER — "📱 Open in Table View" button that triggers the
- *     P142 / D-6 Table View flag in user preferences.
+ *     Table View flag in user preferences.
  *
  * Self-gates upstream — OutputContainer renders SummaryTabV2 vs the
  * legacy SummaryTab based on flag('summaryMagazineV2').
  *
  * Read-only on the props. No store mutation, no state. The user-edits
- * surfaces (E-1 inline rename on faction/NPC etc.) live in PeopleTab
+ * surfaces (inline rename on faction/NPC etc.) live in PeopleTab
  * and friends; the Summary tab is the "read this at the table" view.
  */
 

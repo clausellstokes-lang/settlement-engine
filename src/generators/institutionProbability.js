@@ -221,7 +221,7 @@ export const getBaseChance = (
         chance *= 0.4;
       }
 
-      // H13/H14 join repair (R3): this branch used to read dyn.defense/
+      // Join repair: this branch used to read dyn.defense/
       // dyn.market/dyn.craft/dyn.criminal/dyn.espionage/dyn.government —
       // keys REL_DYNAMICS never defined — so every relationship type
       // multiplied by the same 1.0 and the picker's promised effect was a

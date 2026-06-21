@@ -540,7 +540,7 @@ function magicalInstabilityGate(snapshot, pressure) {
   if (!entry) return null;
   const sid = String(pressure.settlementId);
   const ledger = magicLedger(entry.settlement);
-  if (!ledger.magicExists) return null; // low magic is not wild magic (Wave 1 #5)
+  if (!ledger.magicExists) return null; // low magic is not wild magic
   const arcane = institutionClassValue(entry.settlement, 'arcane');
   if (arcane === 0 && !['medium', 'high'].includes(ledger.magicLevel)) return null;
   // Dead ground and wild surges cannot share a sky.

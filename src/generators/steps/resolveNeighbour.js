@@ -24,9 +24,9 @@ const SCORE_SHIFTING_RELTYPES = ['hostile', 'rival', 'cold_war', 'tense', 'allie
 
 registerStep('resolveNeighbour', {
   deps: ['resolveConfig'],
-  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces
   provides: ['neighbourProfile', 'neighbourEconBias', 'neighbourFacBias', 'rawNeighbour'],
-  mutates: ['effectiveConfig'], // threads neighborRelationship onto effectiveConfig in place when a neighbour is bound (H14 / A+ P1.7)
+  mutates: ['effectiveConfig'], // threads neighborRelationship onto effectiveConfig in place when a neighbour is bound
   phase: 'config',
 }, (ctx) => {
   const config = ctx.config || {};
@@ -44,7 +44,7 @@ registerStep('resolveNeighbour', {
   // faction mirroring done by the neighbourFactions step (neighbourFacBias).
   const neighbourFacBias  = getNeighbourFactionBias(neighbourProfile);
 
-  // H14 (R3): config.neighborRelationship was read by getInstFlags (the
+  // config.neighborRelationship was read by getInstFlags (the
   // military/economy effective-score modifiers) and generateHistory (the
   // external-threat/trade-dispute tensions) but NEVER written — the
   // hostile-neighbour militarization path was dead on this half. Thread it

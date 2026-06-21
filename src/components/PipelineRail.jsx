@@ -111,7 +111,7 @@ function StepRow({ entry, isLast, traces }) {
           </div>
         )}
         {/* Trace decisions — only rendered when the step has emitted
-            structured traces (Tier 2.1). Today only assembleInstitutions
+            structured traces. Today only assembleInstitutions
             emits these; the rest of the pipeline will adopt incrementally.
             Each trace is rendered as a small block: "what was decided"
             on top, then the bullet causes, then downstream effects. */}
@@ -174,7 +174,7 @@ function StepRow({ entry, isLast, traces }) {
 
 // ── Simulation spine card ──────────────────────────────────────────────────
 // Sits at the top of the rail, above the step list. Seven-line distillation
-// of the settlement's causal identity (Tier 2.5). Renders only when at
+// of the settlement's causal identity. Renders only when at
 // least one spine line is non-placeholder.
 
 function SimulationSpine({ settlement }) {

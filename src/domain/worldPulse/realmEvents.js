@@ -214,7 +214,7 @@ export function synthesizeCompoundSignatures({ worldState, tick = 0, now = null 
   return entries;
 }
 
-// ── Pantheon realm arcs (R4) ────────────────────────────────────────────────
+// ── Pantheon realm arcs ─────────────────────────────────────────────────────
 // A deity crossing INTO 'major' is the campaign-epic payoff — "The Ascendancy of
 // X". A deity falling TO 'cult' (or losing its last seat — extinction) is "The
 // Twilight of X". A minor↔minor drift is not realm news. These are synthesized
@@ -333,8 +333,8 @@ function stablePantheonPart(deityId) {
  * @param {(string|null)} [args.now]
  * @param {any} [args.regionalGraph]  the live regional graph — its confirmed
  *   war_front channels name the besieging COALITION for war-shaped stressors, so
- *   "The War" counts instigators + supporters, not just the besieged victim
- *   (§S4). Absent ⇒ war-shaped stressors fall back to victim-count (legacy).
+ *   "The War" counts instigators + supporters, not just the besieged victim.
+ *   Absent ⇒ war-shaped stressors fall back to victim-count (legacy).
  * @returns {Array<Object>} Wizard-News-shaped realm entries (may be empty)
  */
 export function synthesizeRealmEvents({ worldState, tick = 0, now = null, regionalGraph = null } = {}) {
@@ -347,7 +347,7 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
     for (const id of s.affectedSettlementIds || []) set.add(String(id));
     byType.set(s.type, set);
   }
-  // §S4 fix — count the COALITION for war-shaped types. The membership the realm
+  // Count the COALITION for war-shaped types. The membership the realm
   // threshold tests is the union of the besieged victims AND the war_front
   // besiegers into them (instigators + supporters). This is what makes a
   // 4-vs-1 coalition siege promote to "The War" — the old victim-only count

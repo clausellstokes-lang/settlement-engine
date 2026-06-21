@@ -127,7 +127,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
-      {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
+      {/* Cross-settlement trade with the neighbour */}
       {e.tradeLinks?.length > 0 && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>

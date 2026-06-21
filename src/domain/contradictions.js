@@ -1,7 +1,7 @@
 /**
  * domain/contradictions.js — Structured anomaly detection + classification.
  *
- * Tier 4.18 of the roadmap. Detects places where the settlement has
+ * Detects places where the settlement has
  * structural mismatches — outsized institutions for tier, missing
  * enforcement, factional power without supporting institutions, etc.
  * Each contradiction gets a classification + a structured
@@ -15,8 +15,8 @@
  *   interesting_tension      — narrative-worthy contradiction
  *   user_authored_exception  — user explicitly added this
  *
- * Pure read-only. Composes Phase 9 factions, Phase 17 substrate,
- * Phase 20 threats, Phase 21 capacities.
+ * Pure read-only. Composes factions, substrate,
+ * threats, capacities.
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';

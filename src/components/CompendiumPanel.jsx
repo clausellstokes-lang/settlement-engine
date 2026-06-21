@@ -20,7 +20,7 @@ const TABS = [
   { id:'institutions',label:'Institutions',            Icon: Building2 },
 ];
 
-// P127 / CP-3 — Anchor → tab map. HelpPopover and external deep-links
+// Anchor → tab map. HelpPopover and external deep-links
 // land at URL hashes like `#trade-routes` or `#magic`. The hash maps
 // to a Compendium tab; once that tab mounts, the matching DOM `id`
 // inside the tab is scrolled into view by the effect in
@@ -47,7 +47,7 @@ const ANCHOR_TO_TAB = Object.freeze({
 
 // ── Main component ──────────────────────────────────────────────────────────
 
-// Tier 8.7 — per-tab SEO metadata. Each tab maps to a discrete
+// Per-tab SEO metadata. Each tab maps to a discrete
 // document.title + meta description so search engines index each
 // compendium section with its own snippet rather than the generic
 // SettlementForge title. Standalone mode (the public route) wires
@@ -76,7 +76,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
   //
-  // P127 / CP-3 — Also honor URL hash anchors (#trade-routes etc.) so
+  // Also honor URL hash anchors (#trade-routes etc.) so
   // the HelpPopover's "Read full reference →" links can deep-link
   // into a specific section. We map the hash to the matching tab via
   // ANCHOR_TO_TAB below; if the hash doesn't match a known anchor, we
@@ -93,7 +93,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   })();
   const [activeTab, setActiveTab] = useState(initialTab);
 
-  // P127 / CP-3 — Scroll-to-anchor on mount when a hash points into a
+  // Scroll-to-anchor on mount when a hash points into a
   // specific section. The DOM IDs are stamped onto each section by the
   // tab renderers; here we just trigger the scroll once content is in
   // the DOM. Re-runs on tab change so cross-tab anchors work.
@@ -113,7 +113,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
 
-  // Tier 8.7 — swap document.title + meta description per tab. Only
+  // Swap document.title + meta description per tab. Only
   // applies in standalone mode (i.e. when the compendium is the page,
   // not an in-app panel); embedded use cases keep their host title.
   useEffect(() => {
@@ -151,7 +151,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }
   };
 
-  // P139 / CP-4 — global-search result → navigate. Switch to the catalog,
+  // Global-search result → navigate. Switch to the catalog,
   // activate the owning tab, pre-filter that tab's local search to the term,
   // then scroll the section anchor into view (works same-tab or cross-tab).
   const handleGlobalSelect = (entry) => {
@@ -169,7 +169,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }, 140);
   };
 
-  // P139 / CP-3 — content width. Embedded panels are narrow, so a fixed
+  // Content width. Embedded panels are narrow, so a fixed
   // reading cap is fine. On the standalone page we frame the whole panel
   // at PAGE_MAX (below); inside it, the grid tabs (Power, Institutions)
   // fill the frame so they flow into more columns, while the prose/row
@@ -196,7 +196,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
 
       {mode === 'catalog' ? (
         <>
-          {/* P139 / CP-4 — global type-ahead search across every section. */}
+          {/* Global type-ahead search across every section. */}
           <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
           {/* Tab bar + search */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>

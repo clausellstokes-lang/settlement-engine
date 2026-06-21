@@ -1,5 +1,5 @@
 /**
- * ImageCropper.jsx — landscape pan/zoom cropper (§3).
+ * ImageCropper.jsx — landscape pan/zoom cropper.
  *
  * Shows the chosen image inside a fixed-aspect (landscape) viewport, behaving
  * like CSS `object-fit: cover` at minimum zoom. The user drags to reposition

@@ -20,15 +20,15 @@
  *   3. history       — `readDispositionMultiplier` over the ratcheted win/loss
  *                      ledger (worldState.dispositionStats): the "we succeed at
  *                      war / at trade" memory.
- *   4. deityTemper   — Feature D (R3 / OQ22): ONE additional term derived from
+ *   4. deityTemper   — ONE additional term derived from
  *                      the embedded primary-deity snapshot's temperamentAxis
  *                      (warlike ⇒ +, peacelike ⇒ −, neutral / absent ⇒ 0). It
  *                      folds into the SAME signed `drive` sum as ONE additive
  *                      term — NEVER a parallel war/peace multiplier elsewhere.
  *                      Absent deity ⇒ 0 ⇒ byte-identical. Only takes effect when
  *                      the disposition layer is itself active (warLayerEnabled —
- *                      C1's gate at the candidate-build call site); when the war
- *                      layer is off this function isn't on the live path.
+ *                      the disposition gate at the candidate-build call site); when
+ *                      the war layer is off this function isn't on the live path.
  *
  * Determinism: pure — no rng, no wall-clock, no mutation. Iterates NPCs in array
  * order but the aggregation is an order-INDEPENDENT weighted mean (commutative
@@ -78,7 +78,7 @@ function importanceWeight(npc = {}) {
   return 0.38;
 }
 
-// AUTHORED personality strings only (OQ13). Reads the {dominant, flaw, modifier}
+// AUTHORED personality strings only. Reads the {dominant, flaw, modifier}
 // slots the generator writes (npcGenerator.js:81-84); tolerant of a flat string
 // or array shape. NEVER reads npcStates.alignment.
 /** @param {any} npc @returns {string[]} */
@@ -152,7 +152,7 @@ function personalityDrive(settlement) {
 const W_GOV = 0.3;
 const W_PERS = 0.45;
 const W_HIST = 0.25;
-// Feature D (R3 / OQ22): the warlike-deity term's weight. Modest — a deity
+// The warlike-deity term's weight. Modest — a deity
 // tilts a settlement's posture, it does not by itself make a peaceful merchant
 // town a crusader state (the tanh squash bounds the combined drive regardless).
 const W_DEITY = 0.35;
@@ -204,7 +204,7 @@ export function computeAggressiveness(item, worldState, opts = {}) {
     : (id != null ? readDispositionMultiplier(worldState?.dispositionStats || {}, id) : 1.0);
   const hist = (histMult - 1) / MULTIPLIER_SPAN;
 
-  // Feature D (R3 / OQ22): ONE additive warlike-deity term into the SAME drive
+  // ONE additive warlike-deity term into the SAME drive
   // sum — never a parallel multiplier. 0 when no deity ⇒ the legacy blend ⇒
   // byte-identical.
   const deityTemper = deityTemperDrive(settlement);

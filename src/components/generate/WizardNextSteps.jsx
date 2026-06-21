@@ -1,14 +1,14 @@
 /**
- * WizardNextSteps.jsx — P134 / W-4 post-generate "what's next" guide.
+ * WizardNextSteps.jsx — post-generate "what's next" guide.
  *
  * The post-generate flow used to end on a lone Save button: the user
- * walks through the pipeline reveal (X-1), reads their dossier, and then
+ * walks through the pipeline reveal, reads their dossier, and then
  * the page just… stops. Power users know they can also export a PDF,
  * refine fields, drop the settlement on the world map, or roll another —
  * but a first-timer is left wondering "now what?".
  *
  * This card closes out the post-generate flow the way WizardCloseout
- * (W-2) closes out the pre-generate flow: a short, state-aware checklist
+ * closes out the pre-generate flow: a short, state-aware checklist
  * of next steps. It is GUIDANCE, not a second set of action buttons —
  * the canonical Save / Export / New controls keep their existing homes,
  * so this never competes with (or duplicates) them. The only piece of

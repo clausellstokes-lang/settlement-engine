@@ -75,8 +75,8 @@
  *   Foundation (v1):      ADD/REMOVE/DAMAGE_INSTITUTION, DEPLETE_RESOURCE, CUT_TRADE_ROUTE
  *   NPC (v2):             ADD_NPC, KILL_NPC, ASSIGN_NPC_TO_ROLE
  *   Impairment (v2):      IMPAIR/RESTORE_INSTITUTION, IMPAIR/RESTORE_FACTION
- *   Extended (Wave 2+):   KILL_LEADER, EXPOSE_CORRUPTION, REFUGEE_WAVE, PLAGUE, RAID_OR_MONSTER_ATTACK
- *   Player intervention (Phase 24): REMOVED_THREAT, BROKERED_ALLIANCE, STARTED_RIOT, OPENED_TRADE_ROUTE, RECOVERED_RESOURCE, DESTROY_SETTLEMENT
+ *   Extended:             KILL_LEADER, EXPOSE_CORRUPTION, REFUGEE_WAVE, PLAGUE, RAID_OR_MONSTER_ATTACK
+ *   Player intervention: REMOVED_THREAT, BROKERED_ALLIANCE, STARTED_RIOT, OPENED_TRADE_ROUTE, RECOVERED_RESOURCE, DESTROY_SETTLEMENT
  *   Coup d'état wave:     APPLY_STRESSOR (authored crisis onset, full catalog + custom), CHANGE_RULING_POWER (user-permissioned transfer of the governing seat)
  *   Editor roster wave:   RESOLVE_STRESSOR (authored crisis wind-down, the inverse of APPLY_STRESSOR),
  *                         ADD/REMOVE_TRADE_GOOD (export/import/transit labels, incl. entrepôt suffixing),
@@ -124,8 +124,8 @@
  *  @property {Delta[]} deltas
  *  @property {FactionResponse[]} factionResponses
  *  @property {string} narrativeSummary       short DM-facing summary
- *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate-layer diff
- *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
+ *  @property {Array<Object>=} causalStateDeltas          substrate-layer diff
+ *  @property {Array<Object>=} factionRelationshipDeltas  structured faction deltas
  *  @property {Object=} undo  pre-event snapshot of the provenance-free authored
  *                            records (undoEvent.captureEventUndoSnapshot);
  *                            undoLastEvent restores from it — resource/trade events only
@@ -144,7 +144,7 @@
  * happen" before the user confirms. `applyEvent` materializes it into a
  * real EventLogEntry.
  *
- * Phase 18 (Tier 2.2): preview now also exposes the substrate-layer
+ * Preview now also exposes the substrate-layer
  * diff and the projected mutated settlement so consumers can build
  * counterfactual surfaces without re-running the pipeline.
  *
@@ -156,8 +156,8 @@
  *  @property {string} narrativeSummary
  *  @property {string[]} affectedSteps        which pipeline steps would re-run
  *  @property {CoherenceWarning[]} warnings   coherence issues introduced by the event
- *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate diff
- *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
+ *  @property {Array<Object>=} causalStateDeltas          substrate diff
+ *  @property {Array<Object>=} factionRelationshipDeltas  structured faction deltas
  *
  * Note: the projected nextSettlement is intentionally NOT on the
  * preview shape — mutateSettlement embeds Date.now() timestamps in

@@ -1,7 +1,7 @@
 /**
  * domain/causalViews.js — Multiple causal views over one settlement.
  *
- * Tier 5.7 of the roadmap. The same dossier, filtered through 7
+ * The same dossier, filtered through 7
  * different causal lenses. Each view is a pure derivation that
  * pulls the relevant subset from the substrate already built.
  *

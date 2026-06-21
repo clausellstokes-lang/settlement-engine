@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/occupation.js — Phase B3: occupation STATE machine + the
+ * domain/worldPulse/occupation.js — the occupation STATE machine + the
  * CAPPED/DELAYED/CONDITIONAL occupier-benefit loop + burden/resistance/overextension.
  *
  * A successful conquest (warDeployment.js → cause:'conquest') becomes a STATEFUL
@@ -592,8 +592,8 @@ function edgeBetween(snapshot, a, b) {
  * `vassalized` rung CONVERTS to a formal vassal relationship — the occupation matures
  * into a vassalage EDGE. Emitted as the canonical `relationship_label_change` outcome (the
  * SAME shape a subjugation contest emits, the labelProposal idiom) so the vassal edge
- * forms through relationshipEvolution's existing vassal-label apply path (H16 seniority,
- * channel bundle, hierarchy cascade) — NOT a parallel model. Keyed on the REAL occupier↔
+ * forms through relationshipEvolution's existing vassal-label apply path (state-first
+ * seniority, channel bundle, hierarchy cascade) — NOT a parallel model. Keyed on the REAL occupier↔
  * occupied edge so applyRelationshipLabelToGraph can relabel it; skipped if no edge exists
  * (the apply path needs an edge to relabel). Codepoint-sorted; emits once on arrival.
  *

@@ -120,7 +120,7 @@ function exclusiveTags(candidate) {
     || /^faction:[^:]+$/.test(tag)
     || /^strategy:[^:]+$/.test(tag)
   );
-  // C2 de-conflict: the strategy chooser emits one move per settlement under a
+  // Strategy de-conflict: the strategy chooser emits one move per settlement under a
   // `strategy:<S>` exclusive tag. A REACTIVE war candidate (hostileRules raid /
   // occupation pressure) where S is the state-decided aggressor resolves to the
   // SAME exclusive tag here — derived from its `metadata.aggressorSaveId` — so
@@ -218,7 +218,7 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   if (rules.relationshipDynamicsEnabled) {
     candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
-  // Feature C (C2) — the settlement strategy chooser. GATED behind
+  // The settlement strategy chooser. GATED behind
   // settlementStrategyEnabled (default false ⇒ no candidate emitted, no rng draw ⇒
   // byte-identical). Runs ONCE per settlement (not per edge), softmax-samples one
   // move via the threaded rng (forked on `strategy:<S>:<tick>`), and emits a
@@ -230,7 +230,7 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
     simulationRules: rules,
     rng: /** @type {any} */ (context).rng,
   }));
-  // Phase B1 — NEIGHBOUR REACTIONS to a visibly-mobilizing rival/target/trade-
+  // NEIGHBOUR REACTIONS to a visibly-mobilizing rival/target/trade-
   // dependent. GATED behind warLayerEnabled (default false ⇒ [] ⇒ byte-identical).
   // rng-FREE here (the candidate's own downstream roll is the only stochastic step);
   // reads the persisted worldState.warPosture written by the war block this tick.

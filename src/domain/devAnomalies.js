@@ -1,7 +1,7 @@
 /**
  * domain/devAnomalies.js — DEV-only anomaly detector.
  *
- * Tier 3.11 of the roadmap. Surfaces internal warnings about
+ * Surfaces internal warnings about
  * generation edge cases that production users don't see but
  * developers care about:
  *
@@ -16,7 +16,7 @@
  *     count
  *   }
  *
- * Pure read-only. Separate from Phase 25 contradictions (those are
+ * Pure read-only. Separate from contradictions (those are
  * narrative tensions); these are STRUCTURAL inconsistencies the dev
  * UI flags for diagnosis.
  */

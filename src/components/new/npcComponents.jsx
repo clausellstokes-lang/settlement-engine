@@ -107,7 +107,7 @@ export function ConflictCard({conflict:c}) {
 
 // Inline NPC card — replaces the removed NPCCard export
 function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
-  // Tier 5.4 — manual prose editing. editMode is the global toggle on
+  // Manual prose editing. editMode is the global toggle on
   // the dossier header. The save/revert handlers look up the NPC's
   // index by id at edit time so the action targets the right entity
   // even if the npcs array has been re-sorted upstream.

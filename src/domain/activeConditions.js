@@ -1,11 +1,11 @@
 /**
  * domain/activeConditions.js — First-class persistent world conditions.
  *
- * Tier 2.3 of the roadmap. Plague, refugee waves, cut routes, sieges,
+ * Plague, refugee waves, cut routes, sieges,
  * corruption scandals — these are not one-shot events. They linger,
  * accumulate effects, and eventually resolve or escalate. Today the
  * generator stamps them onto stressors and the time-progression layer
- * (Phase 15) takes them as an external array. This module promotes
+ * takes them as an external array. This module promotes
  * them to canonical state on the settlement.
  *
  *   settlement.activeConditions = [
@@ -28,15 +28,15 @@
  * return new settlements. No mutation. No imports from src/lib.
  *
  * Compounding fit:
- *   - advanceTime (Phase 15) reads archetypesFromSettlement() when the
+ *   - advanceTime reads archetypesFromSettlement() when the
  *     caller doesn't pass an external override; ages elapsed; drops
  *     expired conditions on its own. The simulator owns its conditions.
- *   - factionRelationshipUpdate (Phase 14) keyed by the same archetype
+ *   - factionRelationshipUpdate keyed by the same archetype
  *     vocabulary, so condition archetypes map 1:1 to delta templates.
- *   - hookEscalation (Phase 11) clocks already key off settlement state;
+ *   - hookEscalation clocks already key off settlement state;
  *     a 'plague' condition can become the trigger for a healing-crisis
- *     clock once Tier 4.4 capacity modeling lands.
- *   - The AI overlay (Tier 6) reads conditions as grounded facts and
+ *     clock once capacity modeling lands.
+ *   - The AI overlay reads conditions as grounded facts and
  *     narrates "the plague has lasted four months" from real state.
  */
 
@@ -139,7 +139,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
-  // Wave 7: the magical crisis family (magical_instability / magic_deadzone
+  // The magical crisis family (magical_instability / magic_deadzone
   // world-pulse stressors) finally promotes — before this archetype a town
   // generated (or struck) mid-arcane-crisis carried it as pure narrative and
   // the substrate's magical_stability variable never heard about it. One
@@ -245,7 +245,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_migration_pressure: {
     label: 'Regional migration pressure',
     description: 'A nearby shock is pushing people across the regional network.',
-    // housing_pressure declared (Wave 7): deriveHousingPressure reads this
+    // housing_pressure declared: deriveHousingPressure reads this
     // condition through the affectedSystems contract like every other
     // deriver — the explanation/AI surfaces must list every system the
     // substrate actually charges.
@@ -310,7 +310,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
   },
-  // ── Geopolitical war layer (Feature A) — the AGGRESSOR's home conditions. Every
+  // ── Geopolitical war layer — the AGGRESSOR's home conditions. Every
   // pre-existing war archetype models the VICTIM; these model the cost a settlement
   // pays to wage war. war_drain is the missing SOURCE of the economic-homeostasis
   // loop (deriveEconomicCapacity subtracts severity×18 for any economic_capacity
@@ -332,7 +332,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.5,
   },
-  // The NON-REVERTING war-exhaustion SCAR (Z2a homeostasis). war_drain is a
+  // The NON-REVERTING war-exhaustion SCAR (the homeostasis ratchet). war_drain is a
   // reverting condition (re-upserted each tick from the live front count, drifting
   // and expiring like any condition); the SCAR is the lasting mark a long war leaves.
   // It accumulates from a worldState ledger that ratchets up with sustained
@@ -349,7 +349,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.4,
   },
-  // ── Phase B1 — WAR-ECONOMY MOBILIZATION. A settlement on a war footing (the
+  // ── WAR-ECONOMY MOBILIZATION. A settlement on a war footing (the
   // war_preparation → mobilized → deployed posture ramp, mobilization.js) shifts
   // economic priorities toward the war effort BEFORE a shot is fired. Lists ONLY
   // economic_capacity (the homeostasis dial) — the cost of standing up a war
@@ -365,7 +365,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.35,
   },
-  // ── Phase B2 — REINFORCEMENT COST. Replenishing a deployed army DRAINS the
+  // ── REINFORCEMENT COST. Replenishing a deployed army DRAINS the
   // origin: levies, coin, supply trains, and grain flow OUT to the front, and the
   // home pays for it. Heavier than war_drain (sustaining a static siege is cheaper
   // than continuously feeding fresh manpower and materiel into one), and the longer
@@ -401,7 +401,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
   },
-  // ── Geopolitical war layer (Feature B) — trade war. ─────────────────────────
+  // ── Geopolitical war layer — trade war. ─────────────────────────────────────
   // A buyer realigning its primary supplier (the WINNER side's market gain is a
   // mild local adjustment as new trade lanes settle in). Reversible, light.
   trade_realignment: {
@@ -424,7 +424,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
-  // ── Phase B4 — STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a
+  // ── STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a
   // valuable, hard-to-replace trade tie is weaponized under military/religious tension
   // (the tradeLeverageCandidate embargo-collapse branch). It is the hostile escalation
   // of regional_import_shortage — a critical supplier deliberately cutting the flow — so
@@ -440,7 +440,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.55,
   },
-  // ── Phase B3 — OCCUPATION layer (the stateful occupier-benefit/burden/resistance
+  // ── OCCUPATION layer (the stateful occupier-benefit/burden/resistance
   // loop). occupation_resistance is the OCCUPIED-side condition: sabotage, noncompliance,
   // and an organizing resistance that GROWS when the occupied is intact/loyalist/populous
   // and SHRINKS when devastated/compliant. It strains the occupier's hold (defense), the
@@ -620,7 +620,7 @@ export function deriveAllActiveConditions(settlement) {
   return arr.map(deriveActiveCondition).filter(Boolean);
 }
 
-/** Flat archetype keys from canonical conditions. Used by Phase 15 advanceTime. */
+/** Flat archetype keys from canonical conditions. Used by advanceTime. */
 export function activeArchetypes(settlement) {
   return deriveAllActiveConditions(settlement).map(c => c.archetype);
 }
@@ -721,10 +721,10 @@ export function withEventConditionsSynced(settlement) {
 
 /**
  * Advance every condition's elapsedTicks by the interval-scaled amount.
- * Mirrors the Phase 15 INTERVAL_SCALES so a per-week tick adds 0.25 to
+ * Mirrors the INTERVAL_SCALES so a per-week tick adds 0.25 to
  * elapsed; per-month adds 1.0; per-year adds 6.0.
  *
- * Also applies the W5#5 severity dynamics: the status written on the
+ * Also applies the severity dynamics: the status written on the
  * condition nudges severity per tick (worsening climbs toward 1, easing
  * falls toward the 0.05 floor, anything else holds flat), and a condition
  * inside the pre-expiry window ramps toward easing instead of
@@ -742,7 +742,7 @@ const INTERVAL_TICK_INCREMENTS = Object.freeze({
   one_year:   6.00,
 });
 
-// Severity dynamics (W5#5): the status written on the condition drives a
+// Severity dynamics: the status written on the condition drives a
 // small, bounded, deterministic per-tick severity drift — a written
 // 'worsening' climbs, a written 'easing' falls, anything else ('stable',
 // legacy 'active', or no status at all) holds flat. The drift reads the
@@ -877,7 +877,7 @@ export function summarizeActiveConditions(settlement) {
   };
 }
 
-/** Catalog keys. Useful for drift detection + Tier 4.16 custom content. */
+/** Catalog keys. Useful for drift detection + custom content. */
 export function supportedConditionArchetypes() {
   return Object.keys(CONDITION_ARCHETYPE_TEMPLATES);
 }

@@ -1,5 +1,5 @@
 /**
- * FactionEventBanner — the faction relabel (UX Phase 8, decision 5).
+ * FactionEventBanner — the faction relabel.
  *
  * Custom factions never reach generation (`eligibleCustomContent` doesn't read
  * the factions bucket). Rather than wire them in (fixture / byte-identity risk),

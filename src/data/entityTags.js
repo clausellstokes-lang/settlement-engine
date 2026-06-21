@@ -88,7 +88,7 @@ export const TAG = Object.freeze({
   RESOURCE_EXTRACTION: 'resource_extraction',
   INDUSTRY:            'industry',
 
-  // ── A+ P1.6 — the 27 tags the institutionalCatalog actually uses that were
+  // ── The 27 tags the institutionalCatalog actually uses that were
   // previously ungoverned (validateTag/isKnownTag silently passed them). Adding
   // them as canonical constants brings catalog coverage to 42/42 WITHOUT editing
   // the catalog data (zero behavior change). Some are synonyms of the tags above

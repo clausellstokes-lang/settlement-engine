@@ -1,8 +1,8 @@
 /**
- * SimulationDrawer.jsx — P135 / D-5 slide-out for "how this was simulated".
+ * SimulationDrawer.jsx — slide-out for "how this was simulated".
  *
  * The original Simulation tab lived as the last entry on the dossier
- * tab strip. The critique's D-5 calls this out as noise: most DMs
+ * tab strip, where it read as noise: most DMs
  * never open it, but it dilutes the strip and competes for attention
  * with the dossier-meaningful tabs. Moving it to a drawer:
  *

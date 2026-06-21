@@ -24,7 +24,7 @@ interface ImportMeta {
 interface Window {
   /** Dev-only store handle exposed in main.jsx for map automation. */
   __store?: unknown;
-  /** Analytics bridge installed by lib/analyticsProvider.js (Tier 8.8). */
+  /** Analytics bridge installed by lib/analyticsProvider.js. */
   __sf_analytics_provider?: (event: string, props?: Record<string, unknown>) => void;
   /** Which analytics provider installed ('plausible' | 'posthog'), if any. */
   __sf_analytics_installed?: string;

@@ -2354,7 +2354,7 @@ export const institutionalCatalog = {
 
 const INSTITUTION_CATALOG = institutionalCatalog;
 
-// ── Catalog identity (Cohesion Wave 8 — structural prevention) ───────────────
+// ── Catalog identity ─────────────────────────────────────────────────────────
 // Every catalog entry has a stable id: the deterministic slug of its canonical
 // name. Entries appearing at multiple tiers under the SAME name share the id
 // (same name → same slug); distinct entries ('Merchant guilds (3-8)' vs

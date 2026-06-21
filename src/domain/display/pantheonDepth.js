@@ -1,6 +1,6 @@
 /**
  * domain/display/pantheonDepth.js — read-side projection of the LIVE pantheon
- * ledger for the Realm Pantheon section's "depth" view (UX Phase 5, plan §4.5).
+ * ledger for the Realm Pantheon section's "depth" view.
  *
  * Three pure projections over `worldState.pantheon` (+ the regional graph's
  * religious_authority channels), with NO rng, NO worldState mutation, NO contest

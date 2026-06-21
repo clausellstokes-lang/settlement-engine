@@ -1,9 +1,9 @@
 /**
  * domain/mapProfile.js — Map ↔ simulator interface.
  *
- * Tier 4.14 of the roadmap. Map features (terrain, biome, rivers,
+ * Map features (terrain, biome, rivers,
  * roads, regional danger) are already simulation inputs via
- * `config.*`. Phase 31 makes the interface explicit in BOTH
+ * `config.*`. This module makes the interface explicit in BOTH
  * directions:
  *
  *   inputs:  what the simulator reads from map-derived config
@@ -22,8 +22,8 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Composes Phase 17 substrate (trade_connectivity,
- * defense_readiness), Phase 20 threats (hazard markers), and Phase 30
+ * Pure read-only. Composes substrate (trade_connectivity,
+ * defense_readiness), threats (hazard markers), and the
  * regional graph (authority hubs).
  *
  * No active map mutation here — this is the interface SHAPE map

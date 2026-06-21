@@ -1,7 +1,7 @@
 /**
  * domain/causalState.js — Unified causal state substrate.
  *
- * Tier 2.4 of the roadmap. Today's settlement state is scattered across
+ * Today's settlement state is scattered across
  * a dozen subsystem-specific fields (`economicState.foodSecurity`,
  * `powerStructure.publicLegitimacy`, `safetyProfile.blackMarketCapture`,
  * etc.). Each one reads its own narrow slice and produces its own
@@ -18,7 +18,7 @@
  *
  * Each SystemVariable has structured contributors so consumers can
  * answer "why is food_security strained?" by reading the chain of
- * deltas that produced the score. This is the Phase 7 trace pattern
+ * deltas that produced the score. This is the trace pattern
  * applied at the system-variable level.
  *
  * Relationship to existing code:
@@ -30,14 +30,14 @@
  *     for. The UI surface can later derive FROM this substrate
  *     (Strangler Fig) without breaking consumers today.
  *   - The 5-band vocabulary (surplus / adequate / strained / critical
- *     / collapsed) matches Tier 5.4's qualitative-banding direction
+ *     / collapsed) matches the qualitative-banding direction
  *     and is the canonical substrate vocabulary going forward.
  *
  * Inputs the substrate reads from:
- *   - Phase 9  factionProfile.js          — archetype + power
- *   - Phase 10 supplyChainState.js        — canonical chain statuses
- *   - Phase 13 npcProfile.js              — NPC composition
- *   - Phase 16 activeConditions.js        — canonical condition state
+ *   - factionProfile.js          — archetype + power
+ *   - supplyChainState.js        — canonical chain statuses
+ *   - npcProfile.js              — NPC composition
+ *   - activeConditions.js        — canonical condition state
  *   - Settlement generator output         — population, prosperity,
  *                                            stressors, defenseProfile,
  *                                            safetyProfile, etc.
@@ -118,17 +118,17 @@ function cachedFactionProfiles(s) {
  * this array to cover every dimension.
  *
  * `economic_capacity` (15th) is the live "war-affordability / economic slack"
- * dial added for the geopolitical war layer (OQ7=A, docs/GEOPOLITICAL_WAR_LAYER.md
- * Phase 0): economicState.prosperity/economicComplexity are generation-frozen, so
+ * dial added for the geopolitical war layer (see docs/GEOPOLITICAL_WAR_LAYER.md):
+ * economicState.prosperity/economicComplexity are generation-frozen, so
  * they seed a BASELINE that active conditions (war_drain / vassal_extraction /
  * market_shock / occupation extraction) move live — the seam the homeostasis loop
  * and the trade-war contest read. Distinct from trade_connectivity (routes/chains).
  *
- * `law_order` (16th) is the rule-of-law dial added the same way (Phase B0): it
+ * `law_order` (16th) is the rule-of-law dial added the same way: it
  * reads government archetype, public legitimacy, the internal-security score, the
  * law/order institution roster, and the crime/corruption signals — higher = more
  * lawful/ordered. Purely ADDITIVE — it reads only signals other derivers already
- * read, so the existing 15 scores are byte-identical. B5's lawful/chaotic deity
+ * read, so the existing 15 scores are byte-identical. The lawful/chaotic deity
  * axis will later couple INTO this.
  */
 export const SYSTEM_VARIABLES = Object.freeze([
@@ -151,7 +151,7 @@ export const SYSTEM_VARIABLES = Object.freeze([
 ]);
 
 /**
- * The canonical 5-band vocabulary. Per Tier 5.4 this is the
+ * The canonical 5-band vocabulary. This is the
  * vocabulary user-facing surfaces (PDF / UI / AI) should display
  * instead of raw numeric scores.
  */
@@ -322,7 +322,7 @@ function derivePublicLegitimacy(s) {
       `${cond.label} ${direction > 0 ? 'lifts' : 'erodes'} public legitimacy.`);
   }
 
-  // Wave 7: a monster-plagued region indicts the crown only when the garrison
+  // A monster-plagued region indicts the crown only when the garrison
   // visibly cannot answer it — plagued threat over a weak measured defense
   // reads as "the crown cannot protect us." Small and conservative; a strong
   // garrison under the same threat pays nothing (protection delivered).
@@ -458,7 +458,7 @@ function deriveTradeConnectivity(s) {
 
   // Trade supply chains. The real need-group key is 'trade_entrepot'
   // (supplyChainData.js) — the old 'trade' filter matched nothing, so
-  // trade chains never fed connectivity at all (Cohesion Wave 5 #2).
+  // trade chains never fed connectivity at all.
   const chains = deriveAllSupplyChainStates(s);
   const tradeChains = chains.filter(c => c.needKey === 'trade_entrepot');
   for (const c of tradeChains) {
@@ -486,7 +486,7 @@ function deriveTradeConnectivity(s) {
 // conditions (war_drain / vassal_extraction / market_shock / occupation
 // extraction) move it live. This — NOT the frozen prosperity string and NOT
 // trade_connectivity — is what the war homeostasis loop and the trade-war
-// contest read. (OQ7=A; docs/GEOPOLITICAL_WAR_LAYER.md Phase 0.)
+// contest read. (See docs/GEOPOLITICAL_WAR_LAYER.md.)
 const PROSPERITY_BASE = Object.freeze({
   impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
   moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
@@ -512,7 +512,7 @@ function deriveEconomicCapacity(s) {
 
   // Active conditions move economic capacity live — the war-layer seam.
   for (const cond of cachedActiveConditions(s)) {
-    // war_spoils (Phase B3) is the INVERSE of war_drain/war_exhaustion: the CAPPED
+    // war_spoils is the INVERSE of war_drain/war_exhaustion: the CAPPED
     // benefit a stabilized occupation yields RELIEVES the occupier's war economy
     // (extends supply endurance) rather than draining it. It is the ONLY economic-
     // capacity condition that adds a POSITIVE magnitude — and the occupation layer
@@ -541,8 +541,8 @@ function deriveEconomicCapacity(s) {
 // ADDITIVE: it reads only signals other derivers already read (governance
 // ledger, defense ledger's internal-order score, the safetyProfile crime
 // signals, the criminal faction, and the institution roster), so the existing
-// 15 scores are byte-identical. B5's lawful/chaotic deity axis will later couple
-// INTO this; B0 only establishes the variable + a sensible base deriver.
+// 15 scores are byte-identical. The lawful/chaotic deity axis will later couple
+// INTO this; this deriver only establishes the variable + a sensible base.
 //
 // Government archetypes that concentrate authority (autocracy, military rule,
 // theocracy, monarchy/lordship) lift law_order; anarchic / weakly-governed forms
@@ -651,7 +651,7 @@ function deriveLawOrder(s) {
       `${cond.label} ${direction > 0 ? 'restores' : 'erodes'} the rule of law.`);
   }
 
-  // Deity term (Phase B5) — DORMANT until assigned, exactly like the deity term
+  // Deity term — DORMANT until assigned, exactly like the deity term
   // in deriveReligiousAuthority. Only a settlement with an embedded
   // primaryDeitySnapshot whose lawAxis is lawful/chaotic reads this; a deity-free
   // settlement, a legacy 3-axis deity (no lawAxis ⇒ dir 0), and a law-NEUTRAL
@@ -679,7 +679,7 @@ function deriveHealingCapacity(s) {
   const contributors = [];
 
   // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
-  // Offered healing services rescue the harsh "absent" penalty (informal care; P3.3b Stage 4b):
+  // Offered healing services rescue the harsh "absent" penalty (informal care):
   // a town providing wound care / medical care / relief is not "no healing", just not robust.
   const heal = healingLedger(s);
   const healers = heal.healerCount;
@@ -796,7 +796,7 @@ function deriveReligiousAuthority(s) {
 
   // Active conditions move religious authority live — the religion-layer seam
   // (mirrors deriveEconomicCapacity's condition scan). regional_religious_pressure
-  // now declares `religious_authority` (F5, landed with this consumer), so a
+  // now declares `religious_authority`, so a
   // regional spread presses the substrate here. Filtered on the affectedSystems
   // contract like every other deriver; signed by the condition's status.
   for (const cond of cachedActiveConditions(s)) {
@@ -840,7 +840,7 @@ function deriveHousingPressure(s) {
     score -= 18;
     push(contributors, 'stressors.refugee', 'influx', -18, 'Refugee influx strains available housing.');
   } else {
-    // Wave 7: migration that arrives as a CONDITION — a regional spread or an
+    // Migration that arrives as a CONDITION — a regional spread or an
     // authored migration event produces regional_migration_pressure without
     // any local stressor — must still press housing, modestly (a default-
     // severity wave reads -6 against the local stressor's -18). Skipped when
@@ -904,7 +904,7 @@ function deriveMagicalStability(s) {
     push(contributors, arcane.id, 'arcane_present', +5, `${arcane.name} provides arcane oversight.`);
   }
 
-  // Active conditions that affect magical_stability (Wave 7: the
+  // Active conditions that affect magical_stability (the
   // magical_instability archetype the deadzone/instability stressor family
   // promotes to). Until this scan, magical_stability was the one substrate
   // variable no condition could reach.
@@ -1132,7 +1132,7 @@ export function variablePolarity(variable) {
 // ── compareCausalState ──────────────────────────────────────────────────
 //
 // Returns a structured delta list for two CausalState snapshots. Used
-// by the Phase 18 event pipeline so the substrate-layer delta is
+// by the event pipeline so the substrate-layer delta is
 // reported alongside the legacy 4-dimension delta. Mirrors the shape of
 // compareSystemState so consumers can render the two side-by-side.
 

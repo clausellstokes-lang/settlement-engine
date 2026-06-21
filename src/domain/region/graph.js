@@ -16,22 +16,22 @@ import { wallClockNow } from '../clock.js';
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
-// H18: the eventLog is a bounded audit trail, not cold storage. Wizard News is
+// The eventLog is a bounded audit trail, not cold storage. Wizard News is
 // the durable DM-facing record; the log keeps the newest entries (FIFO drop)
 // so campaign JSON stops growing without bound in localStorage/cloud sync.
 export const REGIONAL_EVENT_LOG_LIMIT = 50;
 
 export const REGIONAL_CHANNEL_TYPES = Object.freeze([
-  // P0: logistics/economic
+  // Logistics / economic
   'trade_dependency',
   'export_market',
   'trade_route',
-  // P1: governance/force
+  // Governance / force
   'political_authority',
   'tax_obligation',
   'military_protection',
   'war_front',
-  // P2: social/cross-cutting
+  // Social / cross-cutting
   'service_dependency',
   'religious_authority',
   'criminal_corridor',
@@ -77,10 +77,10 @@ function nowIso() {
   return wallClockNow();
 }
 
-// B06 #3: the regional layer's label normalizer now DELEGATES to the single
+// The regional layer's label normalizer now DELEGATES to the single
 // canonical alias table in relationships/canonicalRelationship.js, so the three
 // regional systems can no longer drift. The old local table only healed the
-// H12 plural 'trade_partners'; the shared table covers that plus 'ally',
+// legacy plural 'trade_partners'; the shared table covers that plus 'ally',
 // 'overlord', cold-war spellings, etc. Re-exported under the same name so
 // existing importers (worldPulse/stressorDynamics, worldPulse/populationDynamics)
 // are unaffected.
@@ -101,7 +101,7 @@ export function edgeIdFor(from, to) {
 }
 
 export function channelIdFor(channel) {
-  // B06 #7: an id-less good object used to stringify to '[object Object]', so two
+  // An id-less good object used to stringify to '[object Object]', so two
   // distinct un-normalized goods sets collapsed onto one channel id and merged
   // semantically different channels. Coerce each good to a stable scalar key
   // (id, then label) so malformed/un-normalized goods still mint distinct ids.
@@ -117,7 +117,7 @@ export function channelIdFor(channel) {
   ].join('.');
 }
 
-// Deterministic timestamps (R4): every normalize* default-stamp path takes a
+// Deterministic timestamps: every normalize* default-stamp path takes a
 // threaded `now` so replay stamps no wall-clock time; nowIso() is the
 // fallback ONLY when no `now` is provided.
 function normalizeNode(node, now = null) {
@@ -258,7 +258,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   const nodes = dedupeById((graph.nodes || []).map(node => normalizeNode(node, now)).filter(Boolean));
   const edges = dedupeById((graph.edges || []).map(edge => normalizeEdge(edge, now)).filter(Boolean));
   const channels = dedupeById((graph.channels || []).map(channel => normalizeChannel(channel, now)).filter(Boolean));
-  // Cap heals legacy saves that accumulated an unbounded log (H18).
+  // Cap heals legacy saves that accumulated an unbounded log.
   const eventLog = Array.isArray(graph.eventLog)
     ? graph.eventLog.slice(-REGIONAL_EVENT_LOG_LIMIT)
     : [];
@@ -364,11 +364,11 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
       const existingEdge = edgesById.get(edgeIdFor(canonical.from, canonical.to))
         || edgesByPair.get(pairKeyFor(canonical.from, canonical.to));
       if (existingEdge) {
-        // H10: the saves' neighbourNetwork is the canonical relationship
+        // The saves' neighbourNetwork is the canonical relationship
         // source — a rebuild refreshes the edge's relationshipType from the
         // live link instead of freezing the first build forever. Pulse-
         // authored label changes stay authoritative between rebuilds because
-        // the pulse writes them back to the links (H11): both sources
+        // the pulse writes them back to the links: both sources
         // converge. Orientation stays as authored (the pulse's own label
         // updates do the same). Identity no-op when the label is unchanged;
         // edges for pairs no longer linked are preserved as-is.
@@ -512,7 +512,7 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
   if (!edge?.from || !edge?.to || !relationshipType) return [];
   let from = String(edge.from);
   let to = String(edge.to);
-  // Legacy plural 'trade_partners' still mints the full trade bundle (H12).
+  // Legacy plural 'trade_partners' still mints the full trade bundle.
   let rel = canonicalRelationshipLabel(relationshipType);
   if (rel === 'client') {
     [from, to] = [to, from];
@@ -557,7 +557,7 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
       ...twoWayChannels('information_flow', from, to, rel, base, 0.44, 0.56, { visibility: 'gm' }),
     );
   } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
-    // B06 #1: a 'smuggling_partner' label used to mint ZERO channels here (no
+    // A 'smuggling_partner' label used to mint ZERO channels here (no
     // branch matched), so an authored smuggling relationship transmitted nothing
     // through the regional layer. It is a criminal-corridor relationship.
     out.push(
@@ -572,9 +572,9 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
 /**
  * Mint a single DIRECTED regional channel that is NOT implied by a relationship
  * label — the one home for ad-hoc directed mints driven by the simulation rather
- * than diplomacy: a coalition war_front (each attacker → the besieged target,
- * Feature A) and a deity-gated religious_authority edge (faith carrier → convert,
- * Feature D). Returns a normalized channel, or null if the type/endpoints are
+ * than diplomacy: a coalition war_front (each attacker → the besieged target)
+ * and a deity-gated religious_authority edge (faith carrier → convert).
+ * Returns a normalized channel, or null if the type/endpoints are
  * invalid. Deterministic: the id derives from type+from+to and `now` is INJECTED
  * (the pulse passes its tick clock — never wall-time here).
  *
@@ -731,7 +731,7 @@ export function appendRegionalEvent(graph, event, options = {}) {
   return ensureRegionalGraph({
     ...current,
     // The append-side cap (newest REGIONAL_EVENT_LOG_LIMIT survive, FIFO drop)
-    // keeps the log bounded even before the next ensure pass (H18).
+    // keeps the log bounded even before the next ensure pass.
     eventLog: [...current.eventLog, { ...event, recordedAt: event.recordedAt || now }]
       .slice(-REGIONAL_EVENT_LOG_LIMIT),
     updatedAt: now,

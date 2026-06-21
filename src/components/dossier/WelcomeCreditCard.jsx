@@ -1,5 +1,5 @@
 /**
- * WelcomeCreditCard.jsx — P104 / X-4 "every paying user has felt what
+ * WelcomeCreditCard.jsx — "every paying user has felt what
  * they're paying for."
  *
  * The single strongest pitch for Narrate is a Narrate credit the user

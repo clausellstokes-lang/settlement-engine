@@ -1,6 +1,5 @@
 /**
- * pdf/lib/liveWorld.js — the PDF's LIVE-CAMPAIGN-WORLD view-model slice
- * (UX overhaul Phase 7, plan §4.4).
+ * pdf/lib/liveWorld.js — the PDF's LIVE-CAMPAIGN-WORLD view-model slice.
  *
  * This is the PDF's mirror of the screen's WarFaithSection + the Realm
  * Pantheon depth: it reads the LIVE campaign ledgers through the SAME pure
@@ -159,7 +158,7 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
         rankAxis: snap.rankAxis || null,
         alignmentAxis: snap.alignmentAxis || null,
         temperamentAxis: snap.temperamentAxis || null,
-        // lawAxis (B5) — a legacy 3-axis snapshot has none ⇒ null ⇒ no law tag.
+        // lawAxis — a legacy 3-axis snapshot has none ⇒ null ⇒ no law tag.
         lawAxis: snap.lawAxis && snap.lawAxis !== 'neutral' ? snap.lawAxis : null,
         domain: snap.domain || null,
         effects: describeDeityEffects(snap),

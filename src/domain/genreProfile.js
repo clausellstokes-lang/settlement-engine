@@ -1,7 +1,7 @@
 /**
  * domain/genreProfile.js — Genre as a structured input.
  *
- * Tier 4.15 of the roadmap. Genre is currently a single config flag
+ * Genre is currently a single config flag
  * (`config.genre`). This module promotes it to a structured profile
  * exposing the modifiers consumers (AI overlay, daily-life prose,
  * threat selection, hook style) should read.
@@ -19,8 +19,8 @@
  *   }
  *
  * Pure read-only. Doesn't reshape generation today — it exposes the
- * structured modifiers so downstream consumers (Tier 6 AI overlay,
- * Phase 22 daily life, Phase 20 threat selection) can read uniform
+ * structured modifiers so downstream consumers (AI overlay,
+ * daily life, threat selection) can read uniform
  * shape instead of branching on config.genre internally.
  */
 

@@ -4,7 +4,7 @@
  * Extracted byte-for-byte from WorldMap.jsx (no logic change). Side-effect
  * hook (returns nothing).
  *
- * P112 / M-5 — Auto-save the working map into the active campaign so it
+ * Auto-save the working map into the active campaign so it
  * persists per account and across devices without a manual click. The key
  * mirrors AutoSaveChip's "dirty" fingerprint (placement ids + layer counts);
  * the save is debounced and only fires when the live map differs from the

@@ -9,7 +9,7 @@ import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 
-// ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
+// ── Id-first processor matching ──────────────────────────────────────────────
 // chain.processingInstitutions patterns are static data written for the fuzzy
 // 12-char-prefix matcher below. Each pattern is resolved ONCE (memoized) to
 // the SET of catalog ids whose names the fuzzy matcher accepts; thereafter
@@ -65,7 +65,7 @@ export function institutionMatchesProcessor(inst, pattern) {
 }
 
 // ── Keyword (substring) id-set — the tradition / magic-transit twin of the
-// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
+// processor id-set. The tradition + _hasInst gates match by
 // raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
 // they need their own keyword→catalog-id resolution built from that exact rule.
 // Built once per keyword: id-match === name-includes-match for an unrenamed
@@ -95,7 +95,7 @@ export function institutionMatchesKeyword(inst, keyword) {
   return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
 }
 
-// ── Export-gate id-set (A+ generators.6). The export extraction/processing
+// ── Export-gate id-set. The export extraction/processing
 // gates match by whole-name predicates with one bespoke special case: the
 // 'mill' keyword must NOT match "access to external mill" (a non-local access
 // note), only the real processing units. Build the gate's id-set from that
@@ -299,7 +299,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // External mill detection: if the settlement has "Access to external mill" but no
       // actual local mill institution, the grain chain functions (food security is real)
       // but surplus cannot be exported — the lord's mill toll captures any excess.
-      // Id-first (A+ generators.6): the local-mill gate reuses the shared
+      // Id-first: the local-mill gate reuses the shared
       // export-gate matcher (its 'mill' predicate already excludes "access to
       // external mill"); external-mill access is a plain keyword match. Both are
       // rename-proof for stamped institutions and id===name-predicate by
@@ -354,7 +354,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   if (tradeDependencies.length > 0) {
     activeChains.forEach(chain => {
       // Find matching trade dependency for any processing institution in this
-      // chain (A+ generators.7, owner-approved). Id-first: when the dependency
+      // chain (owner-approved). Id-first: when the dependency
       // names a catalog institution, resolve it to its id and ask whether it is
       // in the chain pattern's id-set — the same rename-proof join the chain
       // processors use. The fragile mutual 10-char-prefix substring match
@@ -624,8 +624,8 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   // we match only the institution name as a whole, not substrings of longer names.
   // Id-first for stamped institutions (rename-proof exports), with the bespoke
   // gate name-predicate — including the 'mill' ≠ "access to external mill"
-  // special case — preserved as the fallback for unstamped institutions
-  // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
+  // special case — preserved as the fallback for unstamped institutions.
+  // id-match === name-predicate by construction → golden-stable.
   const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
 
   nearbyResources.forEach(rk => {

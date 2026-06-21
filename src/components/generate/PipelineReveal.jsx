@@ -1,5 +1,5 @@
 /**
- * PipelineReveal.jsx — P100 / X-1 "the wow is the simulation."
+ * PipelineReveal.jsx — "the wow is the simulation."
  *
  * Renders a 2-3 second overlay narrating the pipeline steps the engine
  * just ran. Each user-facing step name is sourced from

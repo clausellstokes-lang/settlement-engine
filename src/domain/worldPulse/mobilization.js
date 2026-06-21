@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/mobilization.js — Phase B1 WAR-ECONOMY MOBILIZATION POSTURE.
+ * domain/worldPulse/mobilization.js — the WAR-ECONOMY MOBILIZATION POSTURE.
  *
  * A per-settlement posture STATE MACHINE that a settlement must RAMP THROUGH
  * before it can launch a serious siege. A settlement at `peace` cannot deploy an

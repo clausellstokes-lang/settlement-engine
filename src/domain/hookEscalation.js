@@ -1,7 +1,7 @@
 /**
  * domain/hookEscalation.js — Structured hooks + escalation-clock derivation.
  *
- * Tier 4.10 of the roadmap. Today's hooks live scattered across:
+ * Today's hooks live scattered across:
  *
  *   settlement.economicViability.plotHooks      — economic pressures
  *   settlement.history.events[].plotHooks       — historical event hooks
@@ -326,7 +326,7 @@ export function deriveAllStructuredHooks(settlement) {
 //   6. Riot breaks out in the market.
 //
 // We don't try to construct clocks from prose; we derive them from the
-// structured Tier 4.3 + 4.1 foundations. A disrupted food chain spawns
+// structured supply-chain and faction foundations. A disrupted food chain spawns
 // a bread-riot clock; a disrupted trade chain spawns a smuggling-rise
 // clock; a low-legitimacy governing faction spawns a legitimacy-crisis
 // clock. The stages are templated per clock type and the actors are

@@ -109,7 +109,7 @@ export const useStore = create(
             // returning user keeps their default detail level, PDF style,
             // player-view/AI-polish defaults, etc.
             productPrefs: state.productPrefs,
-            // Lifetime narrate-spend count (P104 / X-4) feeds useReaderAudience's
+            // Lifetime narrate-spend count feeds useReaderAudience's
             // anonymous → intermediate progression. Persist it so the signal
             // survives reloads instead of resetting to 0 every session.
             lifetimeNarrateCount: state.lifetimeNarrateCount,
@@ -143,7 +143,7 @@ export const useStore = create(
 // runnable headlessly (snapshot tests, scripts, server jobs).
 setCustomContentSource(() => useStore.getState().customContent);
 
-// ── P101 / X-3 — Auth intent handlers ───────────────────────────────────
+// ── Auth intent handlers ─────────────────────────────────────────────────
 // Register handlers for post-auth pending intents. Keep authIntents itself
 // lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
 // chunk that Vite has to warn about.

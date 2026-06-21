@@ -1,6 +1,6 @@
 /**
  * compendium/customCategories.js — the per-bucket authoring schema + the two
- * authoring lanes (UX Phase 8). Extracted from CustomContent.jsx so the data is
+ * authoring lanes. Extracted from CustomContent.jsx so the data is
  * importable without pulling the whole manager component (and to break the
  * CustomContent ↔ Dependencies ↔ FactionEventBanner import cycle).
  *
@@ -74,7 +74,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Factions this one is in conflict with — flagged if both are present.' },
     ],
   },
-  // Deities (Feature D / R1) — a homebrew god with three frozen tag axes
+  // Deities (Feature D) — a homebrew god with three frozen tag axes
   // (alignment · temperament · rank). INERT until assigned as a settlement's
   // primary deity (the embed-on-assign bridge in SettlementDetail). No
   // dependencies — a deity stands alone; it acts through the assignment, not
@@ -86,7 +86,7 @@ export const CUSTOM_CATEGORIES = [
   // above), not hand-authored — this tab renders its own discover/verify
   // manager (SupplyChainsManager) instead of the generic add form.
   { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
-  // Trade Routes / Power Presets / Defense Presets removed (§14 + UX Phase 8):
+  // Trade Routes / Power Presets / Defense Presets removed:
   // redundant with the trade-route, government, and defense controls already in
   // the generation config. PRUNED from the authoring UI + registry, but the
   // slice still tolerates a save/profile that carries them (migration-safe — they
@@ -94,7 +94,7 @@ export const CUSTOM_CATEGORIES = [
   // bucket and the read-only/grandfathered viewer can still surface them).
 ];
 
-// ── UX Phase 8 — two authoring lanes ────────────────────────────────────────
+// ── Two authoring lanes ─────────────────────────────────────────────────────
 // The flat 8-bucket row is reorganized into two labeled lanes so the worldbuilder
 // sees the conceptual split: STATIC settlement content vs the LIVING-WORLD content
 // that powers the simulation. Each lane lists its own bucket keys (referencing

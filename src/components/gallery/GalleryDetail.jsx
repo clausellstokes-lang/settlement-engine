@@ -75,7 +75,7 @@ export default function GalleryDetail({
     const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
     if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
   };
-  // §4 — owner controls. The viewer owns this dossier iff one of their saved
+  // Owner controls. The viewer owns this dossier iff one of their saved
   // settlements is published under this slug (saves carry public_slug). Pure
   // client; the public dossier itself is anonymized.
   const savedSettlements = useStore(s => s.savedSettlements);

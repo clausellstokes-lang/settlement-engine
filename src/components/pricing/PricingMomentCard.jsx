@@ -6,7 +6,7 @@
  * the store action `setActivePricingMoment(content)`. This component
  * subscribes to that and renders the corresponding card.
  *
- * Visual design follows the critique (X-7):
+ * Visual design:
  *   - Inline card, not a modal wall
  *   - Violet accent for premium-upgrade moments (Cartographer, Founder)
  *   - Gold accent for tier-unlock moments
@@ -70,7 +70,7 @@ export default function PricingMomentCard() {
     handleExit();
   }, [reason, setPurchaseModalOpen, handleExit]);
 
-  // Auto-dismiss after 30s if the user doesn't interact. Critique X-2:
+  // Auto-dismiss after 30s if the user doesn't interact:
   // moments are doors, not walls — they don't hold the screen.
   useEffect(() => {
     if (!activeMoment) return undefined;

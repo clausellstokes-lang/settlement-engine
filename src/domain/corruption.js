@@ -87,7 +87,7 @@ export const CORRUPTION_TUNING = Object.freeze({
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
-// ── Feature D (R3): good/evil deity → corruption pressure ───────────────────
+// ── Good/evil deity → corruption pressure ───────────────────────────────────
 // A bounded, centered-on-1.0 multiplier into the corruption knobs. ONE
 // multiplier (onset OR exposure per NPC, never both stacked) keeps the deity
 // pressure inside corruption's deliberate equilibrium damping — no death
@@ -103,7 +103,7 @@ export const DEITY_CORRUPTION_TUNING = Object.freeze({
 
 /** Lowercased authored personality descriptor strings for an NPC: reads the
  *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
- *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled, OQ13).
+ *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
  * @param {any} npc @returns {string[]} */
 function authoredAlignmentTraits(npc = {}) {
   const p = npc?.personality;
@@ -135,7 +135,7 @@ export function deityAlignmentDirection(deity) {
   return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
 }
 
-// ── Feature D (B5): lawful/chaotic deity → corruption-TOLERANCE ──────────────
+// ── Lawful/chaotic deity → corruption-TOLERANCE ─────────────────────────────
 // The 4th deity axis is a DISTINCT lever from the good/evil knobs above. Good/
 // evil drives the ONSET/EXPOSURE *rate* (npcDeityDisfavor); the law axis instead
 // shifts how much corruption a settlement TOLERATES — a chaotic god means the
@@ -148,7 +148,7 @@ export const DEITY_LAW_TUNING = Object.freeze({
   // The law-axis magnitude as a signed direction: lawful +1 (raises order /
   // lowers tolerance), chaotic −1 (lowers order / raises tolerance), else 0.
   axisSign: Object.freeze({ lawful: 1, chaotic: -1, neutral: 0 }),
-  // The law_order score swing a fully lawful/chaotic patron applies (B5). A
+  // The law_order score swing a fully lawful/chaotic patron applies. A
   // lawful god ADDS this; a chaotic god SUBTRACTS it. Comparable in scale to the
   // government-archetype term in deriveLawOrder (±8), so a patron meaningfully
   // tilts order without overwhelming the institutional signals.
@@ -162,7 +162,7 @@ export const DEITY_LAW_TUNING = Object.freeze({
 
 /** The signed law direction of an embedded deity snapshot: lawful → +1,
  *  chaotic → −1, neutral / absent / legacy-3-axis → 0. A deity authored before
- *  B5 carries no lawAxis ⇒ 0 ⇒ no law_order term (back-compat, byte-identical).
+ *  the law axis existed carries no lawAxis ⇒ 0 ⇒ no law_order term (back-compat, byte-identical).
  * @param {any} deity @returns {-1|0|1} */
 export function deityLawDirection(deity) {
   if (!deity) return 0;
@@ -182,7 +182,7 @@ export function deityCorruptionTolerance(deity) {
 }
 
 /** True iff the settlement carries an embedded EVIL-aligned primary deity. This
- *  is the per-settlement form of the F2 activation gate: the caller still gates
+ *  is the per-settlement form of the activation gate: the caller still gates
  *  on religionDynamicsEnabled + isSubsystemActive, but the per-settlement deity
  *  presence is what relaxes the onset gate for THAT settlement.
  * @param {any} settlement @returns {boolean} */
@@ -268,7 +268,7 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * Independent per-NPC rolls make the settlement's corrupt FRACTION saturate
  * naturally (corrupt NPCs stop rolling), so no explicit logistic is needed here.
  *
- * `deityDisfavor` (Feature D / R3) is a bounded, centered-on-1.0 multiplier
+ * `deityDisfavor` is a bounded, centered-on-1.0 multiplier
  * applied AFTER the existing sum and BEFORE the final clamp — an evil deity's
  * patronage (>1) raises the hazard for its aligned faithful; a good deity (<1)
  * represses onset. Defaults to 1.0 ⇒ deity-free / dormant is byte-identical (the
@@ -291,7 +291,7 @@ export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, prior
  * Per-tick organic exposure probability for a corrupt NPC. Rises with security +
  * prosperity and the NPC's visibility (standing); falls with guild strength.
  *
- * `deityDisfavor` (Feature D / R3) is the SAME bounded centered-on-1.0
+ * `deityDisfavor` is the SAME bounded centered-on-1.0
  * multiplier as `onsetHazard`, applied AFTER the existing product and BEFORE the
  * clamp. This is the side that runs REGARDLESS of a criminal institution, so a
  * GOOD deity's repression rides HERE: a good deity passes a disfavor > 1 for an
@@ -335,7 +335,7 @@ export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
 
-// ── Faction capture ladder (Phase 2) ────────────────────────────────────────
+// ── Faction capture ladder ──────────────────────────────────────────────────
 // Reuses the engine's existing criminalCaptureState vocabulary. A faction with
 // corrupt seat-holders climbs toward 'capture'; one that's been cleaned recedes
 // toward 'none'. Higher the corrupt member's seat, the faster it climbs.
@@ -371,7 +371,7 @@ export function captureRecoverChance({ security = 0.5, prosperity = 0.5 } = {}) 
   return clamp(p, t.min, t.max);
 }
 
-// ── Thieves-guild power loop (Phase 3) ──────────────────────────────────────
+// ── Thieves-guild power loop ─────────────────────────────────────────────────
 // The guild's strength accrues from the factions it has captured — their POWER
 // and their DIVERSITY — but SATURATES (exp curve) so it can never run away. A
 // stronger guild drags effective security down (the feedback loop) but only by a

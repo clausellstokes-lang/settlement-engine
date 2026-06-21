@@ -1,9 +1,9 @@
 /**
  * domain/magicProfile.js — Magic as a structured system.
  *
- * Tier 4.8 of the roadmap. Until now magic existed as a single
+ * Until now magic existed as a single
  * config flag (`config.magicLevel`: low / moderate / high / pervasive)
- * plus a Phase 17 substrate variable (`magical_stability`). The
+ * plus a substrate variable (`magical_stability`). The
  * roadmap calls for 10 facets covering availability, legality,
  * institutional control, cost, risk, religious acceptance, and four
  * role facets (economic / military / medical / infrastructure).
@@ -15,7 +15,7 @@
  *     contributors[],
  *   }
  *
- * Pure read-only. Composes Phase 9 factions and Phase 17 substrate.
+ * Pure read-only. Composes factions and substrate.
  * No mutation.
  */
 
@@ -63,7 +63,7 @@ function institutionsByPattern(s, pattern) {
   return inst.filter(i => pattern.test(String(i?.name || '')));
 }
 
-// ── Z2b: dominant-deity ⇄ magic regulation (gated follow-up) ─────────────────
+// ── Dominant-deity ⇄ magic regulation ───────────────────────────────────────
 // A theocracy regulates magic. When a settlement carries an embedded major-deity
 // snapshot (the same config.primaryDeitySnapshot the religion layer activates on),
 // a dominant orthodox god shifts magic LEGALITY tighter and RELIGIOUS ACCEPTANCE more
@@ -145,7 +145,7 @@ function deriveLegality(settlement, profiles, contributors) {
     });
   }
 
-  // Z2b — a dominant major deity regulates magic (a theocracy polices arcane power).
+  // A dominant major deity regulates magic (a theocracy polices arcane power).
   // One band tighter for any major god; a WARLIKE/EVIL orthodoxy tightens a second
   // step (it treats free magic as a rival authority). Gated on the embedded deity
   // snapshot ⇒ a deity-free settlement is byte-identical.
@@ -220,7 +220,7 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
   const arcane = profiles.find(p => p.archetype === 'arcane');
   const deity = dominantDeityOf(settlement);
 
-  // Z2b — a dominant WARLIKE/EVIL major deity forces OPEN hostility toward magic
+  // A dominant WARLIKE/EVIL major deity forces OPEN hostility toward magic
   // regardless of the faction balance (the orthodoxy treats arcane power as a rival
   // it must suppress). This OVERRIDES the faction-derived band. A non-regulatory
   // major god nudges acceptance one notch warier below. Gated on the deity snapshot.

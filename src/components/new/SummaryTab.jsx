@@ -34,7 +34,7 @@ function FaithWarBlock({ settlement, saveId }) {
   );
 }
 
-// Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
+// `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
 // changes — keep the local `second` name so we don't churn every usage.
 const gold=swatch['#A0762A'], ink=swatch['#1C1409'], muted=swatch['#9C8068'], second=BODY;

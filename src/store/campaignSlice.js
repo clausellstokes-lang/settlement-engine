@@ -160,7 +160,7 @@ export const createCampaignSlice = (set, get) => {
   // Route module-scoped persist failures (in campaignSliceShared) into store
   // state so the UI can warn the user instead of silently losing a cloud save.
   initPersistFailureReporter(() => set(state => {
-    // Covers BOTH campaign saves and (since A+ P0.1 unified persistSaveUpdate) the
+    // Covers BOTH campaign saves and (since persistSaveUpdate was unified) the
     // canon settlement path — applied-locally-but-not-persisted, surfaced via the banner.
     state.campaignSyncError = 'Some changes could not be saved to the cloud. '
       + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
@@ -452,7 +452,7 @@ export const createCampaignSlice = (set, get) => {
         neighborRelationship: null,
         interSettlementRelationships: [],
         _seed: undefined,
-        // Strip the seed AND the religion embed bridge (Feature D / R1): an
+        // Strip the seed AND the religion embed bridge: an
         // imported settlement must arrive DORMANT — no foreign pantheon. Without
         // this, the preserved config would carry the source's primaryDeityRef +
         // primaryDeitySnapshot and the imported copy would be non-dormant,

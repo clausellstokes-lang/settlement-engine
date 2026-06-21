@@ -67,7 +67,7 @@ function edgesTouching(snapshot, settlementId) {
 }
 
 export function relationshipTypeOf(edge) {
-  // H12 shim: legacy saves carry the plural 'trade_partners' the old
+  // Compatibility shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }

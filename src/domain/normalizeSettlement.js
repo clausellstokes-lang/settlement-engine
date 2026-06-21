@@ -14,7 +14,7 @@
  *   - Cheap. This runs at save / load / PDF / AI boundaries. O(n) over
  *     settlement size, no deep traversal of nested generator output.
  *
- * Current behavior (Phase 6 / Tier 1.3):
+ * Current behavior:
  *
  *   1. Stamps version fields if absent (schemaVersion, simulationVersion,
  *      generatorVersion). Existing values are preserved — never overwritten.
@@ -163,7 +163,7 @@ export function normalizeSettlement(settlement) {
   if (!Array.isArray(out.aiOverlays))       out.aiOverlays       = [];
   if (out.userCanon == null || typeof out.userCanon !== 'object') out.userCanon = {};
 
-  // ── 5. Apply schema migrations (Tier 1.4) ─────────────────────────────
+  // ── 5. Apply schema migrations ─────────────────────────────
   // Older saved settlements may carry a lower schemaVersion than the
   // current SCHEMA_VERSION constant. Walk the migration chain so the
   // returned object matches the current shape regardless of when it

@@ -1,8 +1,8 @@
 /**
  * domain/regionalGraph.js — Typed neighbour graph.
  *
- * Tier 4.13 of the roadmap. Neighbours are currently a free-form
- * list (or empty). Phase 30 promotes them to a typed graph where
+ * Neighbours are currently a free-form
+ * list (or empty). This module promotes them to a typed graph where
  * each link has a canonical relationship type, a direction, and
  * propagation hints describing how events on the other settlement
  * affect this one.
@@ -13,12 +13,12 @@
  *     links: [{ from, to, relationshipType, severity, direction, propagationHints[] }]
  *   }
  *
- * Pure read-only. Composes Phase 9 factions (for "tax_authority"
- * inference) and Phase 17 substrate (for "supplier" / "market_hub"
+ * Pure read-only. Composes factions (for "tax_authority"
+ * inference) and substrate (for "supplier" / "market_hub"
  * inference based on trade connectivity).
  *
  * Active propagation (Ironmere mine collapse → Westford tool prices)
- * is reserved for a future tier — Phase 30 exposes the structural
+ * is reserved for a future tier — exposes the structural
  * graph that future propagation logic will read.
  */
 
@@ -62,8 +62,8 @@ function neighbourName(n) {
 }
 
 // Map CANONICAL relationship labels → regional relationship types. Raw legacy
-// strings are first run through the shared canonicalRelationshipLabel normalizer
-// (B06 #3), so spelling/synonym variants ('ally', 'alliance', 'overlord',
+// strings are first run through the shared canonicalRelationshipLabel normalizer,
+// so spelling/synonym variants ('ally', 'alliance', 'overlord',
 // 'trade_partners', 'coldwar', ...) are collapsed there rather than re-listed
 // here. This map only needs the canonical bases plus regional-only aliases.
 const LEGACY_RELATIONSHIP_MAP = Object.freeze({
@@ -102,7 +102,7 @@ function inferRelationshipType(rawNeighbour) {
     return rawNeighbour.regionalType;
   }
   // Map legacy relationshipType — normalize spelling/synonym variants through
-  // the shared canonical label table first (B06 #3), then map the canonical
+  // the shared canonical label table first, then map the canonical
   // base to a regional type.
   const legacy = canonicalRelationshipLabel(
     String(rawNeighbour.relationshipType || '').toLowerCase()

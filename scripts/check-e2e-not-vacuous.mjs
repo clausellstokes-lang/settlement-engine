@@ -2,7 +2,7 @@
 /**
  * check-e2e-not-vacuous.mjs — CI anti-vacuity ratchet for the Playwright gate.
  *
- * The #1 trust bug the A+ review pinned: a REQUIRED CI check counted GREEN while
+ * The trust bug this guards against: a REQUIRED CI check counted GREEN while
  * running ZERO assertions. Concretely, the "Audit mobile pointer targets" step
  * ran `playwright test … --project=mobile-safari` and Playwright exits 0 even
  * when every test was SKIPPED (the mobile spec carries a

@@ -33,13 +33,13 @@ export { EDIT_KINDS };
 export const EVENTS_REV = 5;
 
 export const EVENTS = Object.freeze({
-  // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
+  // ── Minimum 4-event funnel ─────────────────────────────────────────────
   HOMEPAGE_VIEW:                  'homepage_view',
   ANONYMOUS_GENERATION_COMPLETED: 'anonymous_generation_completed',
   SIGNUP_AFTER_ANON:              'signup_after_anon',
   PAID_AFTER_ANON:                'paid_after_anon',
 
-  // ── Tier 8.9 — full schema ─────────────────────────────────────────────
+  // ── Full schema ────────────────────────────────────────────────────────
   ANONYMOUS_GENERATION_STARTED:   'anonymous_generation_started',
   DOSSIER_PREVIEW_VIEWED:         'dossier_preview_viewed',
   HOW_SIMULATED_OPENED:           'how_simulated_opened',
@@ -59,7 +59,7 @@ export const EVENTS = Object.freeze({
   NEIGHBOR_PREVIEW_CLICKED:       'neighbor_preview_clicked',
   UPGRADE_AFTER_NEIGHBOR_CLICKED: 'upgrade_after_neighbor_clicked',
 
-  // ── P100 / Pillar C — critique-implementation expansion ────────────────
+  // ── Critique-implementation expansion ──────────────────────────────────
   WOW_REVEAL_SHOWN:               'wow_reveal_shown',
   WOW_REVEAL_COMPLETED:           'wow_reveal_completed',
   SAVE_BUTTON_CLICKED:            'save_button_clicked',

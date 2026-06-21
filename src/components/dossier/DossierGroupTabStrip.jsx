@@ -1,7 +1,7 @@
 import { swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
-// P102 / D-1 — Thematic group tab strip (Summary / Systems / World / Notes).
+// Thematic group tab strip (Summary / Systems / World / Notes).
 // Extracted verbatim from OutputContainer's render; the parent still owns the
 // `fiveTabsEnabled` gate and all state. Presentational only — the visible group
 // list, the selected group, and the click handler arrive via props.

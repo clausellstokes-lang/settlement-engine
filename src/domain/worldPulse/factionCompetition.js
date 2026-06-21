@@ -156,7 +156,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
         riskTolerance: 0.22 + local.random() * 0.5,
         momentum: 0,
         exhaustion: 0,
-        captureState: faction.captureState || 'none', // §corruption Phase 2 — criminalCaptureState ladder
+        captureState: faction.captureState || 'none', // the criminalCaptureState ladder rung
         lastActedTick: null,
         recentAction: null,
       };
@@ -337,13 +337,13 @@ function sameStringList(a, b) {
 }
 
 /**
- * Wave 7 #2 — the dossier stops lying: project each faction's LIVE state
+ * The dossier stops lying: project each faction's LIVE state
  * (worldState.factionStates) onto the settlement's powerStructure.factions
  * roster, which until now stayed generation-frozen while the pulse moved
  * capture rungs, momentum, rivalries, and institution control around it.
  *
  * Projected per roster entry (minimal additive fields, no reshaping):
- *   • captureState   — the §corruption Phase 2 rung (ensureFactionStates
+ *   • captureState   — the capture rung (ensureFactionStates
  *                      already reads this field back, so the loop closes)
  *   • momentumBand   — qualitative band of live momentum (see above)
  *   • rivals         — live rival faction NAMES (ids resolved via states)
@@ -353,7 +353,7 @@ function sameStringList(a, b) {
  * power scalar — the roster IS the live power source (competition normalizes
  * from it each tick; power transfers and the guild floor already write it).
  *
- * Discipline matches the R3 neighbourNetwork write-back: identity no-op when
+ * Discipline matches the neighbourNetwork write-back: identity no-op when
  * nothing moved (same settlement reference back), per-entry identity, and an
  * updatedByPulse provenance stamp only on entries that actually changed.
  * Quiet/empty live state is not materialized onto entries that never carried

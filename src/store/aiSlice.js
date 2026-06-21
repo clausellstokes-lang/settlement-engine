@@ -38,7 +38,7 @@ import {
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
-// Tier 6.5 — every AI overlay commit runs through aiOverlayVerifier. The
+// Every AI overlay commit runs through aiOverlayVerifier. The
 // result is stored on state for UI/PDF surfaces to consume. We never
 // REFUSE to commit on violations (display-only, no blocking): the user
 // paid for the call, and a "your AI output had drift" warning is more
@@ -185,7 +185,7 @@ function buildDailyLifeRelationshipMemory(state, saveId) {
 
 /**
  * Build the ai_data blob to persist on a saved settlement.
- * Preserves chronicle/pinnedNpcs across updates (populated in AI-3+/AI-4+).
+ * Preserves chronicle/pinnedNpcs across updates.
  */
 function buildAiDataBlob(existing, patch) {
   const prev = existing || {};
@@ -246,12 +246,12 @@ export const createAiSlice = (set, get) => ({
   showNarrative:    false,  // toggle: true = show AI narrative, false = show raw data
   aiDataVersion:    null,   // timestamp of settlement data the narrative was built from
   aiSourceFingerprint: null, // stable settlement content hash for stale detection
-  aiViolations:     null,   // Tier 6.5 verifier report (null when no overlay committed)
+  aiViolations:     null,   // verifier report (null when no overlay committed)
 
   // ── Actions ────────────────────────────────────────────────────────────────
   setAiSettlement: (aiData) =>
     set(state => {
-      // Tier 6.5: run the canon-preservation verifier against the
+      // Run the canon-preservation verifier against the
       // current raw settlement BEFORE committing. The overlay still
       // commits regardless (display-only guard); the verification
       // report is surfaced on state so UI/PDF can show warnings.
@@ -447,7 +447,7 @@ export const createAiSlice = (set, get) => ({
 
       const sourceFingerprint = settlementFingerprint(settlement);
 
-      // Tier 6.5: verify the final atomic result against the source
+      // Verify the final atomic result against the source
       // settlement so UI surfaces (and the upcoming PDF appendix) can
       // show violation warnings.
       const verificationN = runOverlayVerifier(settlement, result);
@@ -464,7 +464,7 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationN;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
-        // Reader-audience signal (P104 / X-4): a successful narrate run is the
+        // Reader-audience signal: a successful narrate run is the
         // "I'm coming back to use this" behaviour useReaderAudience keys on.
         // Bumped here on the success path (the server-authoritative spend has
         // just landed) rather than from the never-called spendCredits action.
@@ -622,7 +622,7 @@ export const createAiSlice = (set, get) => ({
         state.aiRegenerating = false;
         state.aiProgress = '';
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
-        // Reader-audience signal (P104 / X-4): see requestNarrative — a paid
+        // Reader-audience signal: see requestNarrative — a paid
         // daily-life run is the same return-engagement signal.
         state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
@@ -665,7 +665,7 @@ export const createAiSlice = (set, get) => ({
   },
 
   /**
-   * Progress the AI narrative against a specific structural edit (AI-4b).
+   * Progress the AI narrative against a specific structural edit.
    *
    * Unlike `requestNarrative` (which rewrites from raw), progression evolves
    * the existing refined prose against a `changeType` + `changeLabel` pair
@@ -779,7 +779,7 @@ export const createAiSlice = (set, get) => ({
 
       const sourceFingerprint = settlementFingerprint(settlement);
 
-      // Tier 6.5: verify the evolved narrative against the source
+      // Verify the evolved narrative against the source
       // settlement (progression v1 only refines existing prose).
       const verificationP = runOverlayVerifier(settlement, result);
       logHardViolations(verificationP, 'requestProgression');
@@ -795,7 +795,7 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationP;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
-        // Reader-audience signal (P104 / X-4): see requestNarrative — a paid
+        // Reader-audience signal: see requestNarrative — a paid
         // progression run is the same return-engagement signal.
         state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
@@ -939,7 +939,7 @@ export const createAiSlice = (set, get) => ({
     return dossierNotes;
   },
 
-  // ── Pinned NPCs (AI-4a) ───────────────────────────────────────────────────
+  // ── Pinned NPCs ───────────────────────────────────────────────────────────
   //
   // The DM can pin specific NPCs on a save; pinned ids ride along with every
   // narrative and (future) progression request, and the `npcs` refinement pass
@@ -1026,7 +1026,7 @@ export const createAiSlice = (set, get) => ({
    * both the savedSettlements entry and (if it's the currently viewed save)
    * the in-session aiSettlement/aiDailyLife state.
    *
-   * This is the cosmetic tier of the AI-2 change classifier — mechanical
+   * This is the cosmetic tier of the change classifier — mechanical
    * substitution is semantically safe, no credit spend, no user confirm.
    */
   applyCosmeticRename: async ({ saveId, oldName, newName }) => {

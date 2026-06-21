@@ -33,11 +33,11 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   // before the 't'), so wartime settlements silently skipped promotion.
   { re: /\bwar\b|wartime|warfront|invasion|incursion|hostilit/i, archetype: 'war_pressure' },
   // Occupation -> vassal_extraction is VERIFIED honest for both faces of an
-  // occupation (Wave 7): the condition's affectedSystems carry trade_connectivity
+  // occupation: the condition's affectedSystems carry trade_connectivity
   // AND defense_readiness, so the substrate registers economic extraction and
   // military strain from the one condition; the pulse layer's conflict/defense
   // pressures read those substrate scores, so the war side flows end to end.
-  // R3's TRADE_ARCHETYPES classification (pressureModel.js) only governs the
+  // The TRADE_ARCHETYPES classification (pressureModel.js) only governs the
   // flat condition-bonus there — re-pointing the condition at war_pressure
   // would instead LOSE the extraction face. The stressor's pressureKinds
   // ['conflict','legitimacy'] are an input gate (what feeds its birth/growth),

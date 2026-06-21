@@ -52,7 +52,7 @@ export const PRIMARY_RELATIONSHIP_TYPES = Object.freeze([
 ]);
 
 // ── Secondary-relationship-status vocabulary (frozen registry) ───────────────
-// The proposal §5 "secondary status" list. Each entry declares its CATEGORY
+// The "secondary status" list. Each entry declares its CATEGORY
 // (what kind of tie it is) and whether it is an EXCEPTION channel (only valid
 // with a hostile primary when the matching exception flag is set). `commerceLike`
 // marks the statuses that count as "trade" for the battlefield-enemy rule.
@@ -92,7 +92,7 @@ export const EXCEPTION_FLAGS = Object.freeze(['covert', 'forced', 'mediated', 't
 // forbidden between them; only the exception channels above are valid.
 const BATTLEFIELD_PRIMARIES = new Set(['hostile']);
 // Primaries that are adversarial but NOT open warfare — they MAY carry normal
-// commerce (rivals who trade, a cold-war back channel) per §5.
+// commerce (rivals who trade, a cold-war back channel).
 const ADVERSARIAL_PRIMARIES = new Set(['rival', 'cold_war']);
 
 // ── Per-primary allowed secondary sets ───────────────────────────────────────
@@ -106,7 +106,7 @@ const ALLOWED_SECONDARIES = Object.freeze({
   patron: ['trade_partner', 'preferred_supplier', 'critical_supplier', 'military_supplier', 'tribute', 'creditor', 'client'],
   client: ['trade_partner', 'preferred_supplier', 'critical_supplier', 'tribute', 'debtor', 'patron'],
   vassal: ['trade_partner', 'preferred_supplier', 'critical_supplier', 'military_supplier', 'tribute', 'debtor', 'patron'],
-  // Rivals & cold-war: §5's "rivals who trade" — commerce is allowed, but the
+  // Rivals & cold-war: "rivals who trade" — commerce is allowed, but the
   // relationship colors it (embargo / sanctioned / proxy coexist too).
   rival: ['trade_partner', 'preferred_supplier', 'critical_supplier', 'embargo', 'sanctioned', 'proxy', 'creditor', 'debtor'],
   cold_war: ['trade_partner', 'preferred_supplier', 'critical_supplier', 'embargo', 'sanctioned', 'proxy', 'creditor', 'debtor'],

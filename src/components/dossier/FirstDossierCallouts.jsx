@@ -1,12 +1,12 @@
 /**
- * FirstDossierCallouts.jsx — P130 / O-2 first-dossier teaching callouts.
+ * FirstDossierCallouts.jsx — first-dossier teaching callouts.
  *
  * Renders THREE permanent-dismiss callouts on a first-time user's
  * first generated dossier. Each points at what the engine already did
  * and teaches worldbuilding by example — not by tutorial-before-the-work.
  *
- * Self-gates on every condition the critique requires:
- *   - auth.tier !== 'anon'           (anons see the H-2 sample card instead)
+ * Self-gates on every condition below:
+ *   - auth.tier !== 'anon'           (anons see the sample card instead)
  *   - savedSettlements.length === 0  (first-time user)
  *   - !localStorage['sf:dismissed_callouts'] (each callout dismissed independently)
  *

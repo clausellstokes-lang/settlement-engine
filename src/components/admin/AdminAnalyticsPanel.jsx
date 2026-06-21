@@ -1,6 +1,6 @@
 /**
  * AdminAnalyticsPanel.jsx — owner-facing read view over the first-party analytics
- * dashboards (doc §9). Self-contained (mirrors GalleryModerationPanel): calls the
+ * dashboards. Self-contained (mirrors GalleryModerationPanel): calls the
  * admin-actions `get_analytics_dashboard` action, which dispatches to the fixed
  * report_* SECURITY DEFINER functions (migration 038). The privilege gate is
  * server-side in admin-actions; this is read-only.

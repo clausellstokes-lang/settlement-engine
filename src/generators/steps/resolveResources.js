@@ -29,9 +29,9 @@ const RARE_RESOURCES = { 'ancient_ruins': 0.15, 'magical_node': 0.15 };
 
 registerStep('resolveResources', {
   deps: ['resolveConfig'],
-  reads: ['resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: ['nearbyResources', 'nearbyResourcesDepleted', 'nearbyResourcesCustom'],
-  mutates: ['effectiveConfig'], // stamps derived resource keys onto effectiveConfig (A+ P1.7)
+  mutates: ['effectiveConfig'], // stamps derived resource keys onto effectiveConfig
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, tradeRoute, resolvedTerrain, effectiveConfig } = ctx;
@@ -231,7 +231,7 @@ registerStep('resolveResources', {
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
   effectiveConfig.nearbyResourcesCustom = nearbyResourcesCustom;
 
-  // Tier 2.1 — emit one trace per nearby resource so downstream
+  // Emit one trace per nearby resource so downstream
   // consumers (assembleInstitutions reads these to bias institution
   // selection) and human readers can answer "why is this a fishing
   // town?" / "why does this town have a mine?"

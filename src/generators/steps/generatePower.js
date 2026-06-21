@@ -5,7 +5,7 @@
  *
  * Power-structure step for the settlement generation pipeline.
  *
- * Tier 4.1: emits structured faction traces after the legacy power
+ * Emits structured faction traces after the legacy power
  * generator finishes. The generator itself is not refactored — the
  * traces are layered on top via deriveFactionProfile, which is the
  * same Strangler Fig pattern the rest of the simulator's causality
@@ -19,7 +19,7 @@ import { deriveFactionProfile } from '../../domain/factionProfile.js';
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
-  reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces
   provides: ['powerStructure'],
   phase: 'power',
 }, (ctx) => {
@@ -48,7 +48,7 @@ registerStep('generatePower', {
     institutions
   );
 
-  // ── Trace recording (Tier 4.1) ───────────────────────────────────────
+  // ── Trace recording ──────────────────────────────────────────────────
   // Emit one trace per faction the generator produced. Causes describe
   // what gave the faction its power; downstream describes what
   // subsystems the faction's archetype influences. The
@@ -82,7 +82,7 @@ registerStep('generatePower', {
     if (Array.isArray(institutions) && institutions.length) {
       // Mention the institutional ground-truth that the power generator
       // keys off. We don't try to attribute specific institutions to
-      // specific factions here — that's a Tier 4.2 concern.
+      // specific factions here — that's a separate concern.
       causes.push({
         source: 'institutionMix',
         effect: 'archetype context',

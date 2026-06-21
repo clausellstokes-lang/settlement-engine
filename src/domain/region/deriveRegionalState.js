@@ -107,7 +107,7 @@ function resourceDepletionState(settlement) {
 /**
  * Derive a compact, stable regional read model from a settlement or save.
  *
- * R4/H18 projection diet: the former `services`, `unhealthyChains`,
+ * Projection diet: the former `services`, `unhealthyChains`,
  * `activeConditions`, `causal`, and `systemState` fields had ZERO consumers
  * (deriveLocalDelta diffs `activeChains` directly and diffCausal re-derives
  * causal state from the raw settlements; discovery reads exports/imports/
@@ -380,7 +380,7 @@ export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
 
   const sourceSettlementId = afterState.id || beforeState.id;
   const causeId = cause.event?.id || cause.event?.type || cause.reason || 'manual';
-  // Wave 8 (producer/consumer manifest): the former `hasRegionalSignal`
+  // The former `hasRegionalSignal`
   // boolean was write-only — every consumer thresholds `changes` magnitudes
   // itself. Removed as a dead write; tombstoned in fieldManifest.js so it
   // cannot quietly return without a reader.

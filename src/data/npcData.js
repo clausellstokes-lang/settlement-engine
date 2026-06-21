@@ -160,7 +160,7 @@ export const NPC_RELIGION_DATA = {
  * TRAIT_AGGRESSION — signed aggression weights over the AUTHORED personality
  * descriptor vocabulary (NPC_RELIGION_DATA positive/negative/neutral above).
  *
- * Feature C / OQ13: an NPC's belligerence is read from the AUTHORED
+ * An NPC's belligerence is read from the AUTHORED
  * `npc.personality.{dominant,flaw,modifier}` strings (what the dossier shows),
  * NEVER the RNG-rolled `npcStates.alignment` (write-only, dossier-mismatched).
  *
@@ -221,7 +221,7 @@ export const TRAIT_AGGRESSION = Object.freeze({
  * TRAIT_ALIGNMENT — signed good↔evil weights over the AUTHORED personality
  * descriptor vocabulary (NPC_RELIGION_DATA positive/negative/neutral above).
  *
- * Feature D (R3) / OQ13: the sibling of TRAIT_AGGRESSION. It reads the SAME
+ * The sibling of TRAIT_AGGRESSION. It reads the SAME
  * AUTHORED `npc.personality.{dominant,flaw,modifier}` strings (what the dossier
  * shows), NEVER the RNG-rolled `npcStates.alignment` (write-only,
  * dossier-mismatched). It encodes HOW an individual NPC responds to an embedded

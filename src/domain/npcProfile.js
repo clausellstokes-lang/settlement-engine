@@ -1,7 +1,7 @@
 /**
  * domain/npcProfile.js — Structured NPC profiles + removal consequences.
  *
- * Tier 4.5 of the roadmap. Today's NPC entries are already rich:
+ * Today's NPC entries are already rich:
  *
  *   { id, name, role, category, factionAffiliation,
  *     structuralPosition, structuralRank, influence, power,
@@ -20,12 +20,12 @@
  * without anyone migrating the generator.
  *
  * No imports from src/lib — domain tsconfig include stays
- * self-contained, same constraint Phases 9-12 honored.
+ * self-contained, the same constraint the sibling derivations honor.
  */
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
-// the faction archetype vocabulary established in Phase 9. We map them
+// the faction archetype vocabulary. We map them
 // to the canonical archetypes so the leverage / vulnerability / removal
 // templates can be shared across both surfaces.
 
@@ -55,7 +55,7 @@ function archetypeFromCategory(category) {
 }
 
 // ── Per-archetype leverage / vulnerability templates ─────────────────────
-// Similar shape to the faction-archetype templates from Phase 9. The
+// Similar shape to the faction-archetype templates. The
 // templates here are NPC-specific: what an individual at the top of
 // this archetype controls, and what hangs over their head. Each entry
 // is a fresh clone on every call so consumers can mutate safely.
@@ -108,7 +108,7 @@ function templateForArchetype(archetype) {
 }
 
 // ── Consequence-if-removed templates ─────────────────────────────────────
-// The headline Tier 4.5 feature: each NPC carries a structured forecast
+// The headline feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
 // Severity scales with `structuralRank` ('dominant' / 'secondary' /
 // 'minor'); the consequence palette comes from the archetype.
@@ -299,7 +299,7 @@ function inferInstitutionLink(npc, settlement) {
 }
 
 // ── Relationship-triangle inference ─────────────────────────────────────
-// For Tier 4.5 V1, we surface a single primary relationship: the
+// For V1, we surface a single primary relationship: the
 // strongest ally or rival the NPC has, sourced from
 // settlement.relationships. Triangles (three-way structures) are a
 // follow-up — the data is there, but the surface needs careful UX.
@@ -389,7 +389,7 @@ export function deriveNpcProfile(npc, settlement) {
     timesExposed:     npc.timesExposed || 0,
     ousted:           npc.ousted === true,
 
-    // Tier 4.5 structured fields — leverage / vulnerability from template,
+    // structured fields — leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],
     vulnerabilities: (() => {
@@ -405,7 +405,7 @@ export function deriveNpcProfile(npc, settlement) {
     offerToPlayers:    Array.isArray(npc.plotHooks) ? npc.plotHooks.slice(0, 2) : [],
     wantsFromPlayers:  firstNonEmpty(npc.goal?.short),
 
-    // The headline Tier 4.5 contribution: structured forecast of what
+    // The headline contribution: structured forecast of what
     // happens if this NPC is removed from play.
     consequenceIfRemoved: {
       severity: rank,

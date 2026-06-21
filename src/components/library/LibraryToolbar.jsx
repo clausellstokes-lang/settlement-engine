@@ -1,11 +1,11 @@
 /**
- * LibraryToolbar.jsx — P108 / E-6 campaign-aware library toolbar.
+ * LibraryToolbar.jsx — campaign-aware library toolbar.
  *
  * Drops above the saves list in SettlementsPanel. The DEFAULT face stays
  * uncluttered for a new DM: `Search · Sort · Filters▾ · Select`. All filter chips
  * — including the now-wired orphaned `draftOnly`/`hasPendingEdits` and the new
  * living-world filters (At war / Has deity / In crisis / campaign selector) — live
- * behind the `Filters▾` disclosure (UX overhaul Phase 3, plan §4.2).
+ * behind the `Filters▾` disclosure.
  *
  * Pure controlled component — owns no state EXCEPT the local Filters▾ open/closed
  * toggle. The parent (SettlementsPanel) holds {query, sort, filters} and passes
@@ -43,7 +43,7 @@ export const SORT_OPTIONS = Object.freeze({
     const order = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 6 };
     return (order[a.tier] ?? 99) - (order[b.tier] ?? 99);
   } },
-  // "Needs attention" — float strained/critical settlements up (UX Phase 3). The
+  // "Needs attention" — float strained/critical settlements up. The
   // severity is the worst 4-dim health band (deriveSystemState via healthPip);
   // higher severity = needs more attention = sorts first. Ties fall back to
   // recency so the order stays stable.
@@ -85,7 +85,7 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
         s.tier,
         s.settlement?.name,
         s.settlement?.config?.tradeRouteAccess,
-        // NPC names — searchable per the critique ("search across saves + NPCs + factions")
+        // NPC names — search spans saves + NPCs + factions, so include them here
         ...(Array.isArray(s.settlement?.npcs)
           ? s.settlement.npcs.map(n => n.name).slice(0, 50)
           : []),
@@ -117,7 +117,7 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
     out = out.filter(s => s.campaignState?.editedAt && s.campaignState?.editedAt !== s.campaignState?.canonizedAt);
   }
 
-  // ── Living-world filters (Phase 3) ──────────────────────────────────────────
+  // ── Living-world filters ────────────────────────────────────────────────────
   // Has deity is settlement-local (the embedded snapshot), so it needs no context.
   if (filters.hasDeity) {
     out = out.filter(s => !!s.settlement?.config?.primaryDeitySnapshot?.name);

@@ -1,13 +1,13 @@
 /**
  * domain/customContentSchema.js — the shared backbone for homebrew custom
- * content (§14 P1). One source of truth for the cross-type taxonomies every
+ * content. One source of truth for the cross-type taxonomies every
  * custom entity (institution, service, resource, trade good, faction, supply
  * chain) shares — the domain GROUP it belongs to, its TAGS (magical / criminal
  * / …), how much it reinforces the economy, how critical it is, and its tier
  * gate — consumed by BOTH the management UI and the structural classifier so
  * they never drift.
  *
- * Pure data + tiny helpers; no store / React. Generation phases (P2–P4) read
+ * Pure data + tiny helpers; no store / React. The generation phases read
  * the helpers here (tier gates, effective tags, criticality) so homebrew flows
  * through the same simulation rails as built-in content.
  */
@@ -28,7 +28,7 @@ export const CONTENT_GROUPS = Object.freeze([
 export const CONTENT_GROUP_KEYS = Object.freeze(CONTENT_GROUPS.map((g) => g.key));
 
 // How critical a good / resource / service is. Drives consequence weight when
-// its supply is disrupted (P4 wires this into stressors + viability): a broken
+// its supply is disrupted (wired into stressors + viability): a broken
 // CRITICAL chain (food, timber) is a crisis; a luxury one is a minor dip.
 export const CRITICALITY = Object.freeze([
   { key: 'critical',      label: 'Critical — food, water, timber' },
@@ -47,7 +47,7 @@ export const ECONOMIC_WEIGHT = Object.freeze([
 export const ECONOMIC_WEIGHT_KEYS = Object.freeze(ECONOMIC_WEIGHT.map((w) => w.key));
 
 // How (if at all) an entity contributes to the settlement's defense. Feeds the
-// Defense readiness model in generation (P2): garrisons/militia raise standing
+// Defense readiness model in generation: garrisons/militia raise standing
 // forces, fortifications raise the wall rating, arcane wards add magical defense.
 export const DEFENSE_ROLES = Object.freeze([
   { key: 'none',          label: 'Does not contribute to defense' },
@@ -63,7 +63,7 @@ export const DEFENSE_ROLE_KEYS = Object.freeze(DEFENSE_ROLES.map((d) => d.key));
 
 // Which authority an entity feeds in the power structure (e.g. a temple →
 // religious authority, a garrison → martial). Feeds legitimacy/power generation
-// (P2) so homebrew shifts who actually holds sway.
+// so homebrew shifts who actually holds sway.
 export const POWER_AUTHORITIES = Object.freeze([
   { key: 'religious', label: 'Religious authority' },
   { key: 'martial',   label: 'Martial authority' },
@@ -87,7 +87,7 @@ export const FOOD_IMPACT = Object.freeze([
 ]);
 export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
 
-// §14 — the unified TRADE-CATEGORY taxonomy a custom good/institution declares via
+// The unified TRADE-CATEGORY taxonomy a custom good/institution declares via
 // `satisfies`. One list, two kinds:
 //   • demandLive (military…alchemical): keys MUST match INSTITUTION_FINISHED_GOODS_DEMAND
 //     in src/data/economicData.js — the generator counts the item as local supply
@@ -142,15 +142,15 @@ export function satisfiesOptions(customContent) {
 export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) => c.demandLive));
 export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
 
-// ── Deities (Feature D / R1) ──────────────────────────────────────────────────
+// ── Deities ─────────────────────────────────────────────────────────────────
 // A homebrew deity is authored content under the `religious` group. It is INERT
 // (dormant) until a DM assigns it as a settlement's primary deity — only then
 // does a resolved snapshot embed on the settlement record (the embed bridge) and
 // feed the religion substrate. Three frozen tag axes describe the god; all three
 // are required at author time (the DB CHECK in 049 mirrors these enums exactly).
 
-// Moral alignment — good / evil / neutral. Feeds the good↔evil NPC substrate (D.5)
-// and the contest's alignment-direction match (D.3).
+// Moral alignment — good / evil / neutral. Feeds the good↔evil NPC substrate
+// and the contest's alignment-direction match.
 export const DEITY_ALIGNMENT = Object.freeze([
   { key: 'good',    label: 'Good' },
   { key: 'evil',    label: 'Evil' },
@@ -158,8 +158,8 @@ export const DEITY_ALIGNMENT = Object.freeze([
 ]);
 export const DEITY_ALIGNMENT_KEYS = Object.freeze(DEITY_ALIGNMENT.map((a) => a.key));
 
-// Temperament — warlike / peacelike / neutral. A warlike-evil god is a casus belli
-// (D.4); feeds the warlike-posture term of the contest.
+// Temperament — warlike / peacelike / neutral. A warlike-evil god is a casus belli;
+// feeds the warlike-posture term of the contest.
 export const DEITY_TEMPER = Object.freeze([
   { key: 'warlike',   label: 'Warlike' },
   { key: 'peacelike', label: 'Peacelike' },
@@ -176,12 +176,12 @@ export const DEITY_TIER = Object.freeze([
 ]);
 export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
 
-// Law/chaos (Feature D / B5) — lawful / chaotic / neutral. The 4th axis. Couples
-// into the law_order causal variable (B0): a lawful god RAISES order/legitimacy
+// Law/chaos — lawful / chaotic / neutral. The 4th axis. Couples
+// into the law_order causal variable: a lawful god RAISES order/legitimacy
 // pressure; a chaotic god LOWERS order AND makes corruption more TOLERATED — a
-// DISTINCT lever from the good/evil corruption knobs (R3), which drive onset/
+// DISTINCT lever from the good/evil corruption knobs, which drive onset/
 // exposure directly. `neutral` is the back-compat default: a 3-axis deity
-// authored before B5 is tolerated as lawAxis === 'neutral' (no law_order term).
+// authored before this axis existed is tolerated as lawAxis === 'neutral' (no law_order term).
 export const DEITY_LAW = Object.freeze([
   { key: 'lawful',  label: 'Lawful — upholds order and oaths' },
   { key: 'chaotic', label: 'Chaotic — erodes order, tolerates corruption' },
@@ -197,8 +197,8 @@ export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
  * a bad axis never reaches the cloud (where the 049/056 CHECK would hard-reject
  * it).
  *
- * The 4th axis `lawAxis` (B5) is BACK-COMPAT TOLERANT: a NEW deity should set it
- * (the authoring UI always does), but a deity authored before B5 carries no
+ * The 4th axis `lawAxis` is BACK-COMPAT TOLERANT: a NEW deity should set it
+ * (the authoring UI always does), but a deity authored before the axis existed carries no
  * lawAxis at all — that ABSENCE is tolerated and read as `neutral` (no law_order
  * term), so legacy deity content never breaks. An explicitly PRESENT-but-invalid
  * lawAxis is still rejected (a typo can't slip through). The 056 DB CHECK mirrors
@@ -220,7 +220,7 @@ export function validateDeity(deity = {}) {
   if (!DEITY_TIER_KEYS.includes(deity?.rankAxis)) {
     errors.push(`rankAxis must be one of: ${DEITY_TIER_KEYS.join(', ')}.`);
   }
-  // lawAxis (B5): tolerate ABSENCE (legacy 3-axis deity ⇒ neutral); reject only a
+  // lawAxis: tolerate ABSENCE (legacy 3-axis deity ⇒ neutral); reject only a
   // present-but-invalid value. `== null` covers both undefined and null.
   if (deity?.lawAxis != null && !DEITY_LAW_KEYS.includes(deity.lawAxis)) {
     errors.push(`lawAxis must be one of: ${DEITY_LAW_KEYS.join(', ')}.`);
@@ -258,7 +258,7 @@ export function isCriminal(entity = {}) {
 
 /**
  * Filter a whole customContent blob to the items eligible for a settlement of
- * `tier`, honoring each item's tier gate (§14 P2 — gates honored in generation).
+ * `tier`, honoring each item's tier gate (gates honored in generation).
  * Items with no gate pass through, so ungated buckets (resources, stressors, …)
  * are unaffected. Pure — never mutates the input; returns the blob unchanged
  * when no tier is given.

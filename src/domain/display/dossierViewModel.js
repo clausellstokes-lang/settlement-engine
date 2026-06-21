@@ -16,8 +16,8 @@
  *     so reported "No exports" while Economics listed economicState
  *     .primaryExports (§1d).
  *
- * M0.1 proves the spine end-to-end on those two field-families; later
- * milestones extend the same model (viability, score labels, timeline, AI
+ * The first milestone proves the spine end-to-end on those two field-families;
+ * later work extends the same model (viability, score labels, timeline, AI
  * grounding, public-safe projection).
  *
  * Pure; no store / React / time dependencies.
@@ -142,7 +142,7 @@ export function deriveExportPosture(settlement) {
 }
 
 /**
- * The canonical display model. M0.1 surfaces foodBalance + exportPosture.
+ * The canonical display model. Surfaces foodBalance + exportPosture.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); food + exports are canonical simulation facts and always read
  * from the base settlement, never an AI clone.
@@ -225,7 +225,7 @@ export function deriveViability(settlement) {
 }
 
 /**
- * Blockade relief (Wave 8 — blockadeBypass gains its reader). The stockpile
+ * Blockade relief — blockadeBypass gains its reader. The stockpile
  * bookkeeping (economicState.foodSecurity.stockpile, written every pulse by
  * advanceFoodStockpile) records whether a blockade currently grips the
  * settlement and which magical channel, if any, runs it. This is the display
@@ -259,7 +259,7 @@ const MAGIC_ROLE_LABEL = Object.freeze({
 });
 
 /**
- * Magic posture (Wave 7 — MagicProfile surfaced). One read of the Tier 4.8
+ * Magic posture — MagicProfile surfaced. One read of the magic
  * profile for every display surface: the availability/legality/cost/risk
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
@@ -288,8 +288,8 @@ export function deriveMagicPosture(settlement) {
 }
 
 /**
- * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
- * adds viability; Wave 7 adds the magic posture; Wave 8 adds blockade relief.
+ * The canonical display model. Surfaces foodBalance + exportPosture,
+ * viability, the magic posture, and blockade relief.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); these are canonical simulation facts and always read from the
  * base settlement, never an AI clone.

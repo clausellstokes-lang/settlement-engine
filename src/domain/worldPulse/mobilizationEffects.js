@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/mobilizationEffects.js — Phase B1 mobilization side-effects.
+ * domain/worldPulse/mobilizationEffects.js — mobilization side-effects.
  *
  * Turns the per-tick mobilization posture events (mobilization.js) into the three
  * things the rest of the pulse consumes:

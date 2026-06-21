@@ -30,8 +30,8 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
 import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
-// Tier 7.15 — phased UI redesign rollout: the Narrated/Raw chip below
-// migrates from an inline ad-hoc <span> to the StateBadge primitive,
+// The Narrated/Raw chip below uses the StateBadge primitive rather than
+// an inline ad-hoc <span>,
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
@@ -81,7 +81,7 @@ export default function SettlementDetail({
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
 
-  // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
+  // Pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
   // this, the OutputContainer's narrative chrome would show "Generate"
   // for a save that already has a narrative on disk.
@@ -98,7 +98,7 @@ export default function SettlementDetail({
   // store value tracks this detail view. Renames are a draft-only affordance.
   const isCanonLocked = useStore(s => s.phase) === 'canon';
 
-  // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
+  // Premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
   // prop threading. Non-premium users see a greyed-out button that
   // opens the pricing modal on click.
@@ -112,7 +112,7 @@ export default function SettlementDetail({
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
-  // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
+  // Chronicle, pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const chronicleEntries = liveSaveEntry?.aiData?.chronicle;
@@ -260,7 +260,7 @@ export default function SettlementDetail({
           <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
           <PhaseBadge />
           <span style={{flex:1}} />
-          {/* Narrated/Raw — Tier 7.15 phased rollout: migrated to StateBadge primitive. */}
+          {/* Narrated/Raw state, rendered via the StateBadge primitive. */}
           <StateBadge
             kind={narrated ? 'narrated' : 'raw'}
             size="sm"
@@ -280,7 +280,7 @@ export default function SettlementDetail({
             </Button>
           )}
 
-          {/* Tier 5.4 — Edited badge surfaces when ANY field on this
+          {/* Edited badge surfaces when ANY field on this
               settlement has been hand-authored. Tooltip explains the
               guarantees (engine preserves on reroll, AI passes through). */}
           {editedCount > 0 && (
@@ -299,7 +299,7 @@ export default function SettlementDetail({
             </span>
           )}
 
-          {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
+          {/* Edit-mode toggle. Premium-gated; non-premium
               users see a greyed-out variant that opens the pricing
               modal so they understand it's a premium feature. */}
           <Button
@@ -519,7 +519,7 @@ export default function SettlementDetail({
           fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
         >
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-            {/* P139 — cap the dossier body to the shared page width (the
+            {/* Cap the dossier body to the shared page width (the
                 detail toolbar above stays full-width). The settlement name is
                 inline-editable on the dossier header in edit mode (the single
                 consolidated rename control); the commit routes through the

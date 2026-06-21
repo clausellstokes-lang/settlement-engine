@@ -1,7 +1,7 @@
 /**
  * domain/region/contestOverThirdParty.js — THE shared "two aggressors over a third
- * party" contest. War-front primacy (Feature A), trade-partner primacy (Feature B),
- * and religious conversion (Feature D) are all thin callers that supply a
+ * party" contest. War-front primacy, trade-partner primacy,
+ * and religious conversion are all thin callers that supply a
  * `scoreFor` per contender; the contest math, incumbency, determinism, and tie
  * handling live here ONCE.
  *

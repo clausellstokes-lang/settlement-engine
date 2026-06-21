@@ -45,7 +45,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState = null,
     eventLog = [],
     phase = 'draft',
-    // UX Phase 7 — the LIVE campaign world ({ worldState, regionalGraph,
+    // The LIVE campaign world ({ worldState, regionalGraph,
     // settlements?, nameFor? }) for the Faith & War chapter. Passed ONLY for
     // premium exports (the caller gates at the data layer). Absent/null for
     // free/anon/non-campaign exports ⇒ the base PDF renders unchanged.
@@ -71,7 +71,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
   const startedAt = Date.now();
 
   // Run the canonical-shape adapter at the export boundary. Saves loaded
-  // from before Phase 6 don't yet carry version stamps; normalizing here
+  // from before version stamps existed don't carry one; normalizing here
   // means every PDF chapter can rely on the canonical contract without
   // each section adding its own defensive guards.
   const normalizedSettlement = normalizeSettlement(settlement);

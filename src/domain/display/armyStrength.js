@@ -1,12 +1,12 @@
 /**
- * domain/display/armyStrength.js — Phase B0/B2 read-model SELECTOR for the DM UI:
+ * domain/display/armyStrength.js — read-model SELECTOR for the DM UI:
  * "how strong is this settlement's army right now, and how worn-down is it?".
  *
  * A `warStatus.js`-style projection of:
  *   - the LATENT military strength (militaryStrength.deriveMilitaryCapacity) — what
  *     the realm could field if fully mustered, in HEURISTIC bands ("a formidable
  *     host" … "a thin levy"), never the 0..100 capacity number; and
- *   - the LIVE deployed-army state (worldState.deployments[homeId] — the B2 stateful
+ *   - the LIVE deployed-army state (worldState.deployments[homeId] — the stateful
  *     record) — how much of the marched-out army is LEFT after attrition
  *     ("battered — about two-fifths of its strength remains"), the supply/morale
  *     condition in plain words, NEVER the raw currentEffectiveStrength /
@@ -14,7 +14,7 @@
  *
  * HEURISTIC DM LANGUAGE — NO INTERNALS. No capacity number, no attrition fraction,
  * no facet score, no rng. The fractions are bucketed into words. This is the
- * "army strength + attrition in plain words" surface the F1 brief asks for.
+ * "army strength + attrition in plain words" surface.
  *
  * PRESENTATION ONLY. Pure projection: nothing here mutates worldState, forks rng,
  * or reads a wall clock. INERT, NOT CRASH, WHEN ABSENT — a no-war campaign (absent
@@ -36,7 +36,7 @@ const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
 
 // Heuristic bands for the LATENT (theoretical) strength of a host, 0..100 → words.
-// Bands only — never the number. A thorpe levy ≠ a city host (the B0 finding).
+// Bands only — never the number. A thorpe levy ≠ a city host.
 const STRENGTH_BANDS = Object.freeze([
   { floor: 78, phrase: 'a formidable host — few in the region could match it in the field' },
   { floor: 60, phrase: 'a strong army — it can take the field with confidence' },
@@ -129,7 +129,7 @@ export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) =>
 
   const start = num(rec.maxStartStrength, NaN);
   const current = num(rec.currentEffectiveStrength, NaN);
-  // A LIGHT (pre-B2) record carries no strength fields — treat it as full strength
+  // A LIGHT (legacy) record carries no strength fields — treat it as full strength
   // (the army just marched out; attrition hasn't been modelled). Never throws.
   const remaining = (Number.isFinite(start) && start > 0 && Number.isFinite(current))
     ? clamp01(current / start)

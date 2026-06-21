@@ -1,5 +1,5 @@
 /**
- * WizardChipRow.jsx — P119 chrome-diet combined chip row.
+ * WizardChipRow.jsx — chrome-diet combined chip row.
  *
  * Extracted byte-for-byte from GenerateWizard.jsx. A single
  * max-32px-tall strip with: an inline "Advanced ⇄ Quick" toggle, a

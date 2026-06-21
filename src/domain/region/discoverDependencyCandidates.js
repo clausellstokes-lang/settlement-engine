@@ -1,7 +1,7 @@
 /**
  * domain/region/discoverDependencyCandidates.js
  *
- * Finds likely P0 regional channels between saved settlements. Discovery is
+ * Finds likely logistics/economic regional channels between saved settlements. Discovery is
  * deliberately advisory: candidates start as suggested channels and become
  * campaign truth only after the DM confirms them.
  */
@@ -194,8 +194,8 @@ function candidate(raw) {
   });
 }
 
-// ── R3 decision (2026-06-11): SUGGESTED-only heuristics for the two formerly
-// uncreatable channel types (service_dependency, migration_pressure).
+// ── SUGGESTED-only heuristics for the two formerly uncreatable channel types
+// (service_dependency, migration_pressure).
 // Deliberately conservative and low-confidence — the DM confirm gate is the
 // safety; nothing here (or anywhere) auto-confirms them.
 
@@ -209,7 +209,7 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
 /**
  * Healing/service capacity, read from the raw save's institutions via the
  * canonical classifier (healingLedger) — the regional projection dropped its
- * dead `services` field in R4/H18 and it must NOT come back without a real
+ * dead `services` field in the projection diet and it must NOT come back without a real
  * reader; discovery reads the raw save the same way relationBetween reads the
  * raw neighbourNetwork. A lone shrine is not a regional service hub — and
  * neither are two of them: a provider needs two-plus healing-capable
@@ -241,8 +241,8 @@ function tierRankOf(tier) {
  * - trade_dependency supplier -> dependent
  * - export_market buyer/market -> exporter
  * - trade_route one route endpoint -> the other endpoint
- * - service_dependency service provider -> dependent (R3, suggested-only)
- * - migration_pressure smaller pole -> bigger pole (R3, suggested-only)
+ * - service_dependency service provider -> dependent (suggested-only)
+ * - migration_pressure smaller pole -> bigger pole (suggested-only)
  *
  * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
@@ -320,7 +320,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   const friendly = !rel || TRADE_FRIENDLY_RELATIONSHIPS.has(rel);
   const hasTradeEvidence = !!rel || sourceExportsTargetImports.length > 0 || targetExportsSourceImports.length > 0;
   // The exact predicate under which a trade_route is suggested below — the
-  // R3 service/migration heuristics ride the same route/trade link.
+  // service/migration heuristics ride the same route/trade link.
   const routeTradeLink = bothHaveRoutes && friendly && hasTradeEvidence;
   if (routeTradeLink) {
     const routeStrength = rel === 'trade_partner' ? 0.72 : rel === 'allied' || rel === 'ally' ? 0.6 : 0.45;
@@ -341,7 +341,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
     }
   }
 
-  // R3: service_dependency — provider -> dependent when the provider has real
+  // service_dependency — provider -> dependent when the provider has real
   // healing/service capacity the dependent lacks, and the route/trade link
   // above makes the service reachable. Born suggested, never auto-confirmed.
   if (routeTradeLink) {
@@ -368,7 +368,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
     }
   }
 
-  // R3: migration_pressure — along the same suggested trade route when the
+  // migration_pressure — along the same suggested trade route when the
   // poles are unbalanced (tier gap >= 2 or population ratio >= 4x). People
   // flow toward the bigger pole, so the channel runs smaller -> larger: a
   // crisis at the small end (health/security shock, population loss) sends

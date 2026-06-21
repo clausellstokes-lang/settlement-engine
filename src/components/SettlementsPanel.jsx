@@ -102,7 +102,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [forkingId, setForkingId] = useState(null);
 
   /**
-   * Fork a Tier 8.2 sample. "Generate" on a sample card now actually
+   * Fork a sample. "Generate" on a sample card now actually
    * produces the settlement (it used to only pre-fill the wizard and
    * navigate, which read as a no-op). The flow:
    *   1. Load the sample's config into generator state with a
@@ -393,7 +393,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     const updatedDetailSave = updatedSaves.find(s => s.id === saveId);
     if (updatedDetailSave) setDetail(d => ({ ...d, ...updatedDetailSave, saveData: updatedDetailSave }));
 
-    // AI-2: cosmetic-tier change — cascade the rename into every touched
+    // Cosmetic-tier change: cascade the rename into every touched
     // save's ai_data blob too. applyCosmeticRename no-ops when a save has
     // no narrative, so this is cheap for unnarrated saves.
     for (const mid of modifiedIds) {
@@ -574,7 +574,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     ignoreAllQueuedRegionalImpacts(campaignId);
   }, [ignoreAllQueuedRegionalImpacts]);
 
-  // P108 / E-6 — Library search + sort + filter state. Self-contained
+  // Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
   // (applyLibraryFilters) is a pure function over the saves array.
   const [libraryQuery, setLibraryQuery] = useState('');
@@ -667,7 +667,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         onSignIn={() => onNavigate?.('pricing')}
       />
 
-      {/* P108 / E-6 — Library toolbar (search + sort + Filters▾ + Select). */}
+      {/* Library toolbar (search + sort + Filters▾ + Select). */}
       {saves.length > 0 && (
         <LibraryToolbar
           query={libraryQuery}
@@ -718,7 +718,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       {savesLoading ? (
         <div style={{ padding:'24px 16px', textAlign:'center', fontSize:FS.md, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
       ) : saves.length === 0 ? (
-        // Tier 8.2 — show sample dossiers instead of a bare empty state.
+        // Show sample dossiers instead of a bare empty state.
         // Eliminates the "you have nothing — go figure it out" first run.
         <SampleDashboard onFork={forkSample} forkingId={forkingId} />
       ) : (

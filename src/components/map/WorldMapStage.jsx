@@ -154,7 +154,7 @@ function WorldMapStageImpl({
               }}
             />
           </Suspense>
-          {/* P136 / M-6 — Hover peek. Self-gated; renders nothing
+          {/* Hover peek. Self-gated; renders nothing
               when no hover-id is set or when click-selection wins. */}
           <Suspense fallback={null}>
             <QuickInspector />
@@ -185,7 +185,7 @@ function WorldMapStageImpl({
                 borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
                 pointerEvents: 'none',
               }} />
-              {/* P111 / M-3 — Drop preview tooltip. Shows during drag with
+              {/* Drop preview tooltip. Shows during drag with
                   the data the user needs to decide if this is a sensible
                   placement: terrain hint + trade-route candidacy +
                   proximity to existing placements. We render a static

@@ -1,8 +1,8 @@
 /**
  * domain/regenerationMode.js — Reactive regeneration modes.
  *
- * Tier 5.2 of the roadmap. Three modes control how aggressive a
- * rerun is. Phase 35 produces the structured preservation plan
+ * Three modes control how aggressive a
+ * rerun is. This module produces the structured preservation plan
  * consumers (the regen UI, the pipeline) read:
  *
  *   Nudge      — preserve most; reroll only minor service / detail fields
@@ -18,7 +18,7 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Composes Phase 19 entityCatalog + Phase 33 canon
+ * Pure read-only. Composes entityCatalog + canon
  * tagging. The pipeline that performs the rerun is a separate
  * concern.
  */

@@ -67,7 +67,7 @@ export const STOCKPILE_TUNING = Object.freeze({
   blockadeSeverityGate: 0.4,    // siege/occupation severity that cuts imports
   famineSeverityGate: 0.3,      // famine severity below this is ambient scarcity, not crop failure
   famineDeficitScale: 45,       // a full-severity famine cuts ~45% of need (production failure)
-  // Z1 — a settlement with an active OUTBOUND deployment feeds its army from the
+  // A settlement with an active OUTBOUND deployment feeds its army from the
   // home granary: the marching host eats ~12% of home need beyond civilian demand
   // (mirrors economicGenerator's ×1.2 occupier consumption, the other side of the
   // same coin). Lands on the SAME effectiveDeficit the blockade/famine use — never a
@@ -79,7 +79,7 @@ export const STOCKPILE_TUNING = Object.freeze({
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 
-// ── Blockade bypass channel — LIVE-FIRST (Wave 8 frozen-vs-live) ─────────
+// ── Blockade bypass channel — LIVE-FIRST (frozen-vs-live) ────────────────
 // Magical transport vs the blockade: a teleportation circle is point-to-
 // point — the besieger cannot interdict it; an airship dock keeps flying
 // but impaired against countermeasures. Either way the channel carries at
@@ -174,7 +174,7 @@ export function storageCapacityMonths(settlement) {
  * The active blockade (siege/occupation) gripping a settlement, if any.
  * `severity` on the returned object is the EFFECTIVE severity for THIS
  * settlement (a spread target carries an attenuated entry in the stressor's
- * severityBySettlement map, H8) — the gate and the drain math both run on
+ * severityBySettlement map) — the gate and the drain math both run on
  * the severity the settlement actually experiences. Origins (full severity)
  * return the stressor record itself, identity intact.
  */
@@ -275,9 +275,9 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   const faminePct = famished
     ? clamp(famine.severity ?? 0, 0, 1) * T.famineDeficitScale
     : 0;
-  // Z1 — an active OUTBOUND deployment eats the home granary (the army eats its
+  // An active OUTBOUND deployment eats the home granary (the army eats its
   // home stockpile). Don't double-cut an origin already under blockade: a BESIEGED
-  // settlement's army defends home (the A1 layer never deploys a besieged town), and
+  // settlement's army defends home (the war layer never deploys a besieged town), and
   // even on a legacy save the blockade cut already models a starving garrison — so
   // the deploy drain only applies when the home is NOT itself blockaded. Lands on the
   // same effectiveDeficit so it composes with famine and gets answered by the drawdown.

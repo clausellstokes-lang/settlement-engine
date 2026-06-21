@@ -1,8 +1,8 @@
 /**
  * RoutesToolbar — contextual toolbar for MAP_MODES.ROUTES.
  *
- * P110 / M-4 + P132 / M-4 promote. When Routes mode is the active map
- * mode, this strip surfaces beneath the mode pills and gives the user:
+ * When Routes mode is the active map mode, this strip surfaces beneath
+ * the mode pills and gives the user:
  *
  *   • A relationship-type filter (Trade / Allied / Patron / Rival /
  *     Hostile) — clicking a chip toggles that edge type on the

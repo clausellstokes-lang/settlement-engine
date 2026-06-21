@@ -1,7 +1,7 @@
 /**
  * domain/healingLedger.js — the canonical conserved healing-supply quantity for a settlement.
  *
- * P3.3b Stage 4. The healing classifier — the regex over institution names that decides what
+ * The healing classifier — the regex over institution names that decides what
  * counts as a healing-capable institution — was COPY-PASTED, byte-identical, in three places:
  * capacityModel.deriveHealing, causalState.deriveHealingCapacity, and magicProfile. Any change to
  * "what counts as healing" had to be edited in all three. This is the single home for that

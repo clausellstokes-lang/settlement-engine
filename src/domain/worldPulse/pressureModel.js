@@ -19,11 +19,11 @@ const SUPPLIER_FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', '
 const DISEASE_ARCHETYPES = new Set(['plague', 'regional_migration_pressure']);
 const CONFLICT_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap']);
 // Trade and economy share one commerce class: every route/market/tax archetype,
-// plus vassal_extraction — tribute drains wealth (R3 decision: it is NOT war,
-// so it must never read as conflict/defense pressure). vassal_trade_coercion
-// (Feature B, gated) routes a forced ruinous trade through the SAME trade
-// pressure lever so vassalStrain rises and `vassal_rebellion` stays reachable —
-// byte-neutral when the war layer is OFF (the condition never exists then).
+// plus vassal_extraction — tribute drains wealth (it is NOT war, so it must never
+// read as conflict/defense pressure). vassal_trade_coercion (gated) routes a
+// forced ruinous trade through the SAME trade pressure lever so vassalStrain rises
+// and `vassal_rebellion` stays reachable — byte-neutral when the war layer is OFF
+// (the condition never exists then).
 const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions', 'vassal_extraction', 'vassal_trade_coercion']);
 const LEGITIMACY_ARCHETYPES = new Set(['regional_authority_instability', 'corruption_exposed', 'dominant_npc_removed', 'regional_information_shock', 'regional_religious_pressure', 'government_overthrown']);
 const DEFENSE_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap', 'rebellion']);
@@ -42,7 +42,7 @@ function matchedConditionArchetypes(item, archetypes, systems = []) {
   return [...new Set(matched)];
 }
 
-// B02-6: build ONE from-keyed index of confirmed channels per pressure pass.
+// Build ONE from-keyed index of confirmed channels per pressure pass.
 // countChannels/activeChannelsFrom used to re-run ensureRegionalGraph (a full
 // graph re-normalize) on every call — ~3N times per tick. The snapshot's graph
 // is already ensured, so a single Map<fromId, channel[]> over its confirmed
@@ -114,7 +114,7 @@ function supplierInFoodCrisis(snapshot, settlementId) {
 export function deriveSettlementPressures(snapshot) {
   const out = [];
   const season = snapshot.worldState.calendar?.season;
-  // B02-6: index the confirmed channels once for all per-settlement lookups
+  // Index the confirmed channels once for all per-settlement lookups
   // below instead of re-normalizing the whole graph on each countChannels call.
   const channelIndex = buildConfirmedChannelIndex(snapshot.regionalGraph);
 

@@ -1,6 +1,5 @@
 /**
- * RegionWakeReplay.jsx — the anon "Watch a region wake up" replay (UX Phase 9,
- * plan §4.7).
+ * RegionWakeReplay.jsx — the anon "Watch a region wake up" replay.
  *
  * A READ-ONLY, deterministic teaser rendered below HomeSampleDossier for anon
  * visitors. It scrubs a small CANNED fixture (domain/display/regionWakeReplay.js)

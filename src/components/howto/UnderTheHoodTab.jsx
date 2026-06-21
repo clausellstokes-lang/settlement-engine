@@ -1,6 +1,6 @@
 /**
- * howto/UnderTheHoodTab.jsx — the About page's "Under the Hood" tab (UX Phase 9,
- * plan §4.7), split into the engine's two layers. Extracted from HowToUse.jsx
+ * howto/UnderTheHoodTab.jsx — the About page's "Under the Hood" tab,
+ * split into the engine's two layers. Extracted from HowToUse.jsx
  * (which sits at its line budget).
  *
  *   - GENERATION — the existing 12 Insights (the static dossier the free tier

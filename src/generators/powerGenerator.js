@@ -2217,7 +2217,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
 
   const safetyRatio = instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
   const criminalCaptureState = computeCriminalCaptureState(p, safetyRatio, instFlags.inst || {});
-  // Wave 7 #1 — birth seeds the play-time ladder: a settlement born at
+  // Birth seeds the play-time ladder: a settlement born at
   // equilibrium+ stamps the rung onto the GOVERNING faction entry, which
   // ensureFactionStates reads (faction.captureState) when it mints the
   // §corruption Phase 2 faction state. Without the stamp, the first pulse's

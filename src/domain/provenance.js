@@ -1,9 +1,8 @@
 /**
  * domain/provenance.js — Generated-vs-authored transparency summary.
  *
- * Tier 5.6 of the roadmap. Reads the canon-tag breakdown from
- * Phase 33 plus the settlement's aiOverlays state, and produces the
- * structured payload the transparency UI consumes:
+ * Reads the canon-tag breakdown plus the settlement's aiOverlays state,
+ * and produces the structured payload the transparency UI consumes:
  *
  *   deriveProvenanceSummary(settlement) -> {
  *     procedurallyGenerated,     count of generated entities
@@ -57,7 +56,7 @@ export function deriveProvenanceSummary(settlement) {
   const eventApplied          = breakdown.bySource.event || 0;
   const aiPolished            = breakdown.bySource.ai_overlay || 0;
 
-  // AI overlays array is a Phase 1 canonical container; treat any
+  // AI overlays array is a canonical container; treat any
   // non-empty array as "AI has been applied."
   const aiOverlays = Array.isArray(settlement.aiOverlays) ? settlement.aiOverlays : [];
   const hasAiPolish = aiPolished > 0 || aiOverlays.length > 0;

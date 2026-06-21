@@ -1,5 +1,5 @@
 /**
- * primitives/CanonBadge — Tier 5.3 surface.
+ * primitives/CanonBadge
  *
  * Inline chip that surfaces an entity's canon tag (source +
  * canonStatus + locked). Drops next to entity names in the dossier

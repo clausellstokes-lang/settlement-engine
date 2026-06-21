@@ -11,7 +11,7 @@
  *                       failing supply chain)
  *
  * Pure — same input always yields the same output. The Summary tab
- * (P129) calls this once per settlement and renders the cards.
+ * calls this once per settlement and renders the cards.
  *
  * Returns an array of `{ kind, title, body }` entries, capped at 6 so
  * the right column doesn't outgrow the left.

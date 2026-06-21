@@ -17,7 +17,7 @@ import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
 import { deepClone } from '../domain/clone.js';
 
-// A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
+// persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
 // persistSaveUpdate from here; re-exporting the single failure-reporting impl from
 // campaignSliceShared means those writes report cloud-save failures into

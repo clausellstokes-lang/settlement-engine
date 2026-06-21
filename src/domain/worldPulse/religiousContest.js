@@ -1,11 +1,11 @@
 /**
- * domain/worldPulse/religiousContest.js — Feature D core (deity contest +
- * conversion spread + religious_authority mint), R2.
+ * domain/worldPulse/religiousContest.js — the religion core (deity contest +
+ * conversion spread + religious_authority mint).
  *
  * "C's primary faith" is a CONTESTABLE PRIZE. C's embedded deity (the incumbent)
  * holds it; neighbouring deities that reach C along a religious_authority carrier
  * channel contest to convert it. The contest math, the incumbency amplifier, the
- * determinism, and the tie-break all live in the shared F3 primitive
+ * determinism, and the tie-break all live in the shared primitive
  * `contestOverThirdParty`; this module is a thin caller that enumerates contests
  * deterministically and supplies a single blended 0..1 `scoreFor` per contender.
  *
@@ -23,8 +23,8 @@
  * a parallel spread.
  *
  * DOUBLE GATE — byte-identical when dormant. Religion ACTS only when BOTH hold:
- *   (a) rules.religionDynamicsEnabled (the R2 opt-in flag, default false), AND
- *   (b) isSubsystemActive(snapshot,'religion') (F2 — true iff ≥1 settlement carries
+ *   (a) rules.religionDynamicsEnabled (the opt-in flag, default false), AND
+ *   (b) isSubsystemActive(snapshot,'religion') (true iff ≥1 settlement carries
  *       an embedded config.primaryDeitySnapshot).
  * If EITHER is false ⇒ pure no-op returning empties (no mints, no contests, no
  * conversions) ⇒ byte-identical legacy. A no-deity campaign is unchanged even with
@@ -237,7 +237,7 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
  */
 export function evaluateReligiousContest({ snapshot, worldState = null, rng, tick = 0, now = null, rules = {} }) {
   void worldState;
-  // ── DOUBLE GATE: byte-identical no-op unless BOTH the opt-in flag AND the F2
+  // ── DOUBLE GATE: byte-identical no-op unless BOTH the opt-in flag AND the
   //    activation gate hold. Either false ⇒ empties (no mint, no contest). ─────
   if (!rules?.religionDynamicsEnabled) return { outcomes: [], graphChannels: [] };
   if (!isSubsystemActive(snapshot, 'religion')) return { outcomes: [], graphChannels: [] };

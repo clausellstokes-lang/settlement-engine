@@ -417,7 +417,7 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   applyQueuedRegionalImpact: async (campaignId, impactId) => {
-    // ORDERED writes to prevent split truth (F2): the settlement is the source
+    // ORDERED writes to prevent split truth: the settlement is the source
     // of truth for the condition, so the campaign graph must NOT advertise the
     // impact 'applied' until that settlement is durably saved. Previously both
     // writes were fire-and-forget and unordered, so a settlement-save failure
@@ -523,7 +523,7 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   resolveRegionalImpact: async (campaignId, impactId) => {
-    // ORDERED writes to prevent split truth (F2, mirroring applyQueuedRegionalImpact):
+    // ORDERED writes to prevent split truth (mirroring applyQueuedRegionalImpact):
     // the settlement is the source of truth for the condition. Resolving REMOVES the
     // active condition, so the campaign graph must NOT advertise the impact 'resolved'
     // until that condition-removed settlement is durably saved. Previously the graph

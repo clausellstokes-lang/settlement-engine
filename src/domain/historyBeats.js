@@ -1,7 +1,7 @@
 /**
  * domain/historyBeats.js — Structured causal beats over settlement history.
  *
- * Tier 4.7 of the roadmap. Today's history fields are descriptive prose:
+ * Today's history fields are descriptive prose:
  *
  *   settlement.history.age
  *   settlement.history.founding             { age, reason, foundedBy, … }

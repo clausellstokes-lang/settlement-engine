@@ -3,7 +3,7 @@
  *
  * Extracted byte-for-byte from GenerateWizard.jsx. When the user can save,
  * persists the dossier via savesService. When they can't (anonymous or at
- * cap), renders the P101 / X-3 "free account" door that stashes a pending
+ * cap), renders the "free account" door that stashes a pending
  * save intent and opens the auth flow.
  */
 
@@ -53,7 +53,7 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
     }
   };
 
-  // P101 / X-3 — Save-as-signup. When the user can't save (anonymous,
+  // Save-as-signup. When the user can't save (anonymous,
   // or hit the per-tier cap), instead of a disabled tombstone we render
   // an active "free account" door. Clicking stashes the current dossier
   // as a pending intent, opens the AuthModal, and on success the auth

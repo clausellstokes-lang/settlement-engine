@@ -1,7 +1,7 @@
 /**
  * domain/governanceLedger.js — the canonical conserved governance quantity for a settlement.
  *
- * P3.3b Stage 2b. Mirrors foodLedger / defenseLedger. powerGenerator persists the public
+ * Mirrors foodLedger / defenseLedger. powerGenerator persists the public
  * legitimacy on `powerStructure.publicLegitimacy = { score, label, breakdown, ... }`. Four
  * lenses read that score, each with slightly DIFFERENT null-handling: causalState
  * derivePublicLegitimacy + deriveRulingAuthority (`leg && typeof leg.score === 'number'`),

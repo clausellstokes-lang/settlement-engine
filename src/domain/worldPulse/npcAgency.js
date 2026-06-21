@@ -182,8 +182,8 @@ export function npcId(saveId, npc, index) {
 }
 
 /**
- * §corruption Phase 1b-ii — mirror tick-evolved corruption from worldState.npcStates
- * back onto a settlement's NPCs, so the dossier reflects corruption acquired (or
+ * Mirror tick-evolved corruption from worldState.npcStates back onto a
+ * settlement's NPCs, so the dossier reflects corruption acquired (or
  * shed) during world-pulse ticks — not just at generation. Pure + deterministic
  * (no rng/Date); returns the same settlement reference when nothing changed.
  */
@@ -262,7 +262,7 @@ function dominantRelationshipContext(snapshot, settlementId) {
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
     if (rel === 'vassal') {
-      // H16: a pulse-driven subjugation may have crowned the authored 'to'
+      // A pulse-driven subjugation may have crowned the authored 'to'
       // side as overlord — resolve roles state-first, never raw orientation,
       // or the conqueror's NPCs plot to break their own vassalage.
       const { juniorId } = relationshipRoles(edge, states[key]);
@@ -371,8 +371,8 @@ export function ensureNpcStates(worldState, snapshot, rng) {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
         let st = npcStates[id];
-        // §corruption Phase 4 — adopt DM/event-driven corruption changes from the
-        // settlement NPC (authoritative between ticks): EXPOSE_CORRUPTION and
+        // Adopt DM/event-driven corruption changes from the settlement NPC
+        // (authoritative between ticks): EXPOSE_CORRUPTION and
         // criminal-institution removal clear npc.corrupt + bump timesExposed, so
         // they must stick here instead of being re-mirrored from stale npcState.
         if (typeof npc.corrupt === 'boolean'
@@ -501,7 +501,7 @@ export const NPC_STATE_PRUNE_GRACE_TICKS = 3;
  *  • a grace window (missingSinceTick, NPC_STATE_PRUNE_GRACE_TICKS) so a
  *    transient absence doesn't amnesia NPC history;
  *  • pruned ids are stripped from surviving rivalryTargets[] lists.
- * Note: the §corruption 1b-ii-c ousted-and-replaced cleanup in
+ * Note: the ousted-and-replaced cleanup in
  * advanceCampaignWorld deletes ousted ids immediately (their replacement carries
  * a new id); this is the general roster-reconciliation pass for every other way
  * an NPC leaves. Identity no-op when nothing changes. Deterministic — derived
@@ -590,7 +590,7 @@ export function relaxNpcStates(worldState) {
 }
 
 /**
- * §corruption Phase 1b — per-tick onset + organic exposure over worldState.npcStates.
+ * Per-tick onset + organic exposure over worldState.npcStates.
  *
  *  • Onset: a clean, eligible NPC (corruptible flaw) in a settlement with a
  *    criminal institution turns corrupt at the climate-scaled `onsetHazard`.
@@ -606,7 +606,7 @@ export function relaxNpcStates(worldState) {
  * forked per (npc, tick) so replays are deterministic. No criminal institution →
  * no onset/exposure pressure (the rule).
  *
- * Feature D (R3): when `religionActive` (the caller's religionDynamicsEnabled +
+ * When `religionActive` (the caller's religionDynamicsEnabled +
  * isSubsystemActive gate) AND a settlement carries an embedded EVIL deity, the
  * onset gate is RELAXED (`hasCriminalInst || hasCorruptingDeity`) so the evil
  * deity can corrupt the faithful even in a crime-free town. A per-NPC,
@@ -626,8 +626,8 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
-    // Feature D (R3): the embedded deity snapshot (only consulted when the
-    // religion layer is ACTIVE — religionDynamicsEnabled + isSubsystemActive).
+    // The embedded deity snapshot (only consulted when the religion layer is
+    // ACTIVE — religionDynamicsEnabled + isSubsystemActive).
     // null ⇒ deityDisfavor stays 1.0 and the gate is unrelaxed ⇒ byte-identical.
     const deity = religionActive ? (item.settlement?.config?.primaryDeitySnapshot || null) : null;
     const corruptingDeity = religionActive && hasCorruptingDeity(item.settlement);
@@ -636,17 +636,17 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // sponsor, not a local guild) would otherwise be permanently immune to
     // discovery in any settlement without a criminal institution, and each
     // betrayal re-ignition would monotonically corrupt one more NPC.
-    // Feature D (R3) RELAXES this gate: an embedded EVIL deity enables onset in
+    // An embedded EVIL deity RELAXES this gate, enabling onset in
     // a crime-free town ("the faithful are corrupted from within"). Additive
     // and 0 when no deity ⇒ a deity-free town is byte-identical.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeity;
-    // §corruption Phase 3 — real thieves-guild strength (if threaded) drags
-    // effective security down (the feedback loop); falls back to the crime proxy.
+    // Real thieves-guild strength (if threaded) drags effective security down
+    // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
     const guildStr = gs != null ? gs : climate.crime;
     const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
-    // §corruption duality — patronage drag (onset side only): a compromised
-    // watch/court shields NEW recruits. Exposure deliberately reads RAW
+    // Patronage drag (onset side only): a compromised watch/court shields NEW
+    // recruits. Exposure deliberately reads RAW
     // security instead: the guild's shielding is already priced into
     // exposureChance's -guildStrength term, and a strong watch keeps catching
     // people even while parts of it are bought.
@@ -663,7 +663,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
 
       const priorExposures = s.timesExposed || 0;
 
-      // Feature D (R3): the per-NPC, bounded, centered-on-1.0 deity-disfavor
+      // The per-NPC, bounded, centered-on-1.0 deity-disfavor
       // multipliers (at most ONE knob ≠ 1.0). Reads the AUTHORED personality
       // only — NO rng draw, NO extra fork, so the deterministic stream position
       // is unchanged (an additive-after-sum term moves the threshold, not the
@@ -672,7 +672,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
 
       if (!s.corruption) {
         // Onset — only eligible NPCs, only the corruptible ones turn, and only
-        // where criminal infrastructure exists (RELAXED for an evil deity, R3).
+        // where criminal infrastructure exists (RELAXED for an evil deity).
         // A prior exposure (organic or DM) makes re-corruption progressively
         // harder. An evil deity's onset disfavor rides here.
         if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset })) {

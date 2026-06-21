@@ -54,19 +54,19 @@ export const FLAGS = Object.freeze({
   // removed and their on-path inlined, per the doctrine note above.
   dossierFiveTabs: {
     default: true,
-    description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch.',
+    description: 'Consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch.',
   },
   inlineEdit: {
     default: true,
-    description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
+    description: 'Click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
   },
   workshopNav: {
     default: true,
-    description: 'P107 / CP-2: Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
+    description: 'Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
   },
   canonicalViewModel: {
     default: true,
-    description: 'M0.1 / doc §1: route food balance + export posture + viability through the canonical display model (deriveDossierViewModel). PROMOTED default-on; flag retained as soak killswitch.',
+    description: 'Route food balance + export posture + viability through the canonical display model (deriveDossierViewModel). PROMOTED default-on; flag retained as soak killswitch.',
   },
   pdfVisualChains: {
     default: true,
@@ -74,57 +74,57 @@ export const FLAGS = Object.freeze({
   },
   versionHistory: {
     default: true,
-    description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated. PROMOTED default-on after revert-mutation soak (P133).',
+    description: 'Per-settlement version timeline + diff + revert. Cartographer-gated. PROMOTED default-on after revert-mutation soak.',
   },
   mapDropPreview: {
     default: true,
-    description: 'P111 / M-3: hover-tooltip during drag with terrain + trade-route context.',
+    description: 'Hover-tooltip during drag with terrain + trade-route context.',
   },
   mapAutosave: {
     default: true,
-    description: 'P112 / M-5: auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
+    description: 'Auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
   },
   welcomeBack: {
     default: true,
-    description: 'P115 / X-9: welcome-back hero variant on return visits + post-session check-in.',
+    description: 'Welcome-back hero variant on return visits + post-session check-in.',
   },
   founderRecognition: {
     default: false,
-    description: 'P116 / X-8: Founder Lifetime surfaces only to demonstrated worldbuilders.',
+    description: 'Founder Lifetime surfaces only to demonstrated worldbuilders.',
   },
   heroV2: {
     default: true,
-    description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
+    description: 'Two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
   onboardingDiet: {
     default: true,
-    description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
+    description: 'Collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
   },
   wizardChromeDiet: {
     default: true,
-    description: 'P119 / W-1: collapse 7 wizard chrome rows into one combined header.',
+    description: 'Collapse 7 wizard chrome rows into one combined header.',
   },
   narrativeLayerStrip: {
     default: true,
-    description: 'P121 / D-4: lift narrative buttons into labeled strip below dossier title.',
+    description: 'Lift narrative buttons into labeled strip below dossier title.',
   },
   mobileSingleChrome: {
     default: false,
-    description: 'P123 / A-2: drop mobile top header; auth chip joins bottom nav.',
+    description: 'Drop mobile top header; auth chip joins bottom nav.',
   },
   compendiumInlineHelp: {
     default: false,
-    description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
+    description: '"?" affordance on every config control opens Compendium snippet.',
   },
   summaryMagazineV2: {
     default: true,
-    description: 'P129 / D-2: Summary tab as two-column magazine spread. Replaces single-column layout.',
+    description: 'Summary tab as two-column magazine spread. Replaces single-column layout.',
   },
   tableView: {
     default: true,
-    description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
+    description: '380px phone-optimized session-running view of a settlement.',
   },
-  // ── P9 — Pricing copy A/B experiment (decision 4) ──────────────────────────
+  // ── Pricing copy A/B experiment ────────────────────────────────────────────
   // The current concrete "unlimited saves" pitch vs. the simulation-led copy
   // ("Generate a town in seconds, then run the region for years."). Ship the
   // simulation-led variant behind this flag against the current copy; the
@@ -132,7 +132,7 @@ export const FLAGS = Object.freeze({
   // simulation-led variant must NOT pitch size/metropolis/capital as premium.
   pricingSimulationCopy: {
     default: false,
-    description: 'P9 / decision 4: simulation-led premium pricing copy variant (A/B). OFF = current "unlimited saves / full size" copy; ON = "generate a town, then run the region" — names the simulation, never size.',
+    description: 'Simulation-led premium pricing copy variant (A/B). OFF = current "unlimited saves / full size" copy; ON = "generate a town, then run the region" — names the simulation, never size.',
   },
 });
 

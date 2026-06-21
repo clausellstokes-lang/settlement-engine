@@ -160,7 +160,7 @@ export default function WorldMap({ onNavigate } = {}) {
     consumeMapWorkspace, updateCampaignSimulationRules, onNavigate, showToast,
   });
 
-  // P112 / M-5 — Auto-save the working map into the active campaign so it
+  // Auto-save the working map into the active campaign so it
   // persists per account and across devices without a manual click. Extracted
   // to a side-effect hook; behaviour (debounce, dirty-key gate, flag gate) is
   // unchanged.
@@ -579,7 +579,7 @@ export default function WorldMap({ onNavigate } = {}) {
   }, []);
 
   // ── Regenerate map (new world) ────────────────────────────────────────
-  // P112 / M-7 — When `mapAutosave` flag is on (a stand-in for the
+  // When `mapAutosave` flag is on (a stand-in for the
   // safer-regenerate behavior since both ride the same campaign-active
   // signal), the regenerate confirm shows the explicit count of items
   // that will be lost. Falls back to the legacy single-line confirm
@@ -701,7 +701,7 @@ export default function WorldMap({ onNavigate } = {}) {
     }
   }, [activeCampaignId, saveCampaignMap, showToast]);
 
-  // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
+  // ── Worldbuilder keymap ───────────────────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
   // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
   // the (future) undo stack.

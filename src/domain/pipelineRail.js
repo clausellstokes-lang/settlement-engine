@@ -2,9 +2,9 @@
  * domain/pipelineRail.js — Structured payload for the rail's
  * step-expansion view.
  *
- * Tier 5.5 of the roadmap. The PipelineRail UI already exists; this
+ * The PipelineRail UI already exists; this
  * module produces the structured payload it consumes when the user
- * taps a step open. Composes Phase 7 traces + Phase 19 explainEntity.
+ * taps a step open. Composes traces + explainEntity.
  *
  *   expandPipelineStep(settlement, stepName) -> {
  *     step,

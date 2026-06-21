@@ -69,7 +69,7 @@ function Row({ label, children, lw=120 }) {
 }
 
 function QuickTab() {
-  // P126 / HT-1 — "How-To inversion". Newcomers open this tab to learn what
+  // How-To inversion: newcomers open this tab to learn what
   // to *do*, not to read the design philosophy first: we lead with the
   // 60-second action steps and demote the constraint-driven concept essay
   // to a "Why it works this way" coda below. Pure presentational order; the

@@ -1,22 +1,22 @@
 /**
  * domain/dailyLife.js — Daily-life prose grounded in structural state.
  *
- * Tier 4.19 of the roadmap. The most consumed output a dossier
- * produces is the "what is life like here?" prose. Until Phase 22,
- * this had to be hand-authored or AI-invented. Phase 22 derives it
- * directly from the substrate that earlier phases built:
+ * The most consumed output a dossier
+ * produces is the "what is life like here?" prose. This used to be
+ * hand-authored or AI-invented; this module derives it
+ * directly from the substrate that earlier stages built:
  *
- *   - Phase 9  faction profiles (archetype + power)
- *   - Phase 10 supply chain states (food + trade)
- *   - Phase 11 escalation clocks (recent / completed)
- *   - Phase 12 history beats (recentDisruption + unresolvedWound)
- *   - Phase 13 NPC profiles (dominant figures)
- *   - Phase 16 active conditions (current pressures)
- *   - Phase 17 substrate (14 system variables)
- *   - Phase 20 threats (typed pressures, visibility)
- *   - Phase 21 capacity model (supply vs demand for 9 capacities)
+ *   - faction profiles (archetype + power)
+ *   - supply chain states (food + trade)
+ *   - escalation clocks (recent / completed)
+ *   - history beats (recentDisruption + unresolvedWound)
+ *   - NPC profiles (dominant figures)
+ *   - active conditions (current pressures)
+ *   - substrate (14 system variables)
+ *   - threats (typed pressures, visibility)
+ *   - capacity model (supply vs demand for 9 capacities)
  *
- * The 8 canonical daily-life slots — the same shape as Phase 12
+ * The 8 canonical daily-life slots — the same shape as the
  * history beats so consumers render them the same way:
  *
  *   food_culture           What people eat / who controls grain
@@ -30,7 +30,7 @@
  *
  * Pure read-only derivation. Returns structured prose with `references`
  * arrays so the UI can let the user click through to the explainEntity
- * envelope for any cited subsystem (Phase 19).
+ * envelope for any cited subsystem.
  *
  * No imports from src/lib. No mutation. No AI — this is the pre-AI
  * substrate the AI overlay later grounds in.
@@ -77,7 +77,7 @@ const SLOT_LABELS = Object.freeze({
 //   { key, label, text, source, references }
 //
 // references[] is an array of structured pointers (id + type + label)
-// that consumers can hand to Phase 19's explainEntity. The deriver
+// that consumers can hand to 's explainEntity. The deriver
 // always produces a slot — even when data is thin, it falls back to
 // a generic but truthful line.
 
@@ -128,7 +128,7 @@ function deriveFoodCulture(s, ctx) {
   return slot('food_culture', text, 'capacity.food_production + supply chains', refs);
 }
 
-// Owner decision (W6#4): labor/craft/transport are noise lenses — this
+// Labor/craft/transport are noise lenses — this
 // slot no longer reads or cites them. Dawn work re-anchors on the
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
@@ -459,9 +459,9 @@ export function supportedDailyLifeSlots() {
 // ── compareDailyLife ────────────────────────────────────────────────────
 //
 // Diff two daily-life envelopes. Returns one entry per slot whose
-// text changed. Useful for the Phase 23 counterfactual tool — "after
+// text changed. Useful for the counterfactual tool — "after
 // removing the granary, food_culture changed from X to Y" — and for
-// Tier 5.1 (causal delta summaries after regeneration).
+// causal delta summaries after regeneration.
 
 /**
  * @typedef {Object} DailyLifeDelta

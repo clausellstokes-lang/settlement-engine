@@ -2,7 +2,7 @@
  * authIntents.js — Pending action registry for "click → auth → continue" flows.
  *
  * The single highest-leverage conversion gate in the app (per the UX/UI
- * critique X-3) is "Save this town — free account." The button promises
+ * critique) is "Save this town — free account." The button promises
  * to save the dossier; the auth modal opens; the user signs in; the
  * save must fire automatically.
  *

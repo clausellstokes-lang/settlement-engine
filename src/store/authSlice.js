@@ -187,7 +187,7 @@ export const createAuthSlice = (set, get) => ({
           };
         });
 
-        // Tier 8.5 — fire the welcome email once per account. We mark a
+        // Fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
         // SIGNED_IN events (e.g. after a token refresh or a sign-out +
         // sign-in cycle on the same browser). The send is
@@ -205,7 +205,7 @@ export const createAuthSlice = (set, get) => ({
                 notifyWelcome({ displayName: displayName || 'there' });
               }).catch(() => { /* swallow — never block auth */ });
 
-              // Tier 8.8 — fire SIGNUP_COMPLETED + (if applicable)
+              // Fire SIGNUP_COMPLETED + (if applicable)
               // SIGNUP_AFTER_ANON. We piggyback on the same first-
               // signin-per-user flag so this fires once per account.
               import('../lib/analytics.js').then(({ Funnel }) => {
@@ -215,7 +215,7 @@ export const createAuthSlice = (set, get) => ({
           } catch { /* localStorage unavailable; skip */ }
         }
 
-        // P101 / X-3 — Auth intent fulfillment. If the user clicked
+        // Auth intent fulfillment. If the user clicked
         // "Save this town — free account" before signing in, the
         // authIntents registry has a pending SAVE_SETTLEMENT entry. Now
         // that auth is real, dispatch it. The handler is registered at

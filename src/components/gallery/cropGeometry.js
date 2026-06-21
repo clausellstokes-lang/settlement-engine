@@ -1,5 +1,5 @@
 /**
- * cropGeometry.js — pure geometry for the landscape cover cropper (§3).
+ * cropGeometry.js — pure geometry for the landscape cover cropper.
  *
  * The cropper shows a fixed-aspect landscape VIEWPORT (an overflow-hidden box).
  * The source image is rendered inside it scaled + panned, exactly like CSS

@@ -14,7 +14,7 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, san
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
   const [query, setQuery] = useState('');
   const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
-  // P136 / M-6 — hover on a palette card sets the QuickInspector
+  // Hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
   const setHover = useStore(s => s.setHoveredSettlementId);
   const clearHover = useStore(s => s.clearHoveredSettlementId);
@@ -114,7 +114,7 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
   );
 }
 
-// P136 / M-2 — Enriched palette. The card surfaces tier + pop + threat
+// Enriched palette. The card surfaces tier + pop + threat
 // + stress so a worldbuilder choosing where to place a settlement sees
 // the relevant facts without opening the dossier.
 //

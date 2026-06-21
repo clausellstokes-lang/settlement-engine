@@ -2,7 +2,7 @@ import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY 
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 
-// ── Sample dashboard (Tier 8.2) ────────────────────────────────────────────
+// ── Sample dashboard ────────────────────────────────────────────────────────
 // Rendered in the saves empty state. Three teaser cards seed expectations
 // so new accounts never see "you have nothing — go figure it out." Forking
 // loads the sample's config into the wizard with a user-suffixed seed.

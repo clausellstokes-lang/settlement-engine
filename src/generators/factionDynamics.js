@@ -146,7 +146,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
  * Classify the criminal faction's relationship with formal power structures.
  * Three inflection points based on criminal power vs enforcement capacity.
  *
- * Wave 7 #1 — birth-scale reconciliation with the play-time capture ladder
+ * Birth-scale reconciliation with the play-time capture ladder
  * (domain/corruption.js CAPTURE_LADDER, same vocabulary):
  *  • The criminal finder EXCLUDES the governing seat. 'Corrupt Council' /
  *    'Shadow Senate' carry category 'criminal' (the 'Corrupt'/'Shadow'

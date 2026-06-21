@@ -37,15 +37,15 @@ function conditionsFor(item) {
 const INFLUX_ARCHETYPES = new Set(['regional_migration_pressure']);
 const FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
 const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
-// Z1 — population is no longer blind to occupation or to the cost of waging war.
+// Population is no longer blind to occupation or to the cost of waging war.
 // vassal_extraction is the canonical OCCUPATION condition (conditionPromotion maps
-// the 'occupied' stressor AND the A1 conquest aftermath into it — see §Z1): an
-// occupied town bleeds people (extraction + a hated garrison). war_drain is the
-// AGGRESSOR's home condition: a settlement bankrupting itself abroad sheds people
-// too. Both are gated behind warLayerEnabled at the SOURCE (the A1 evaluator never
-// mints war_drain when OFF, and a generation-occupied town already carried
-// vassal_extraction pre-Z1 — but it never lost population for it until now), so a
-// no-war campaign that never stamps either is byte-identical.
+// the 'occupied' stressor AND the conquest aftermath into it): an occupied town
+// bleeds people (extraction + a hated garrison). war_drain is the AGGRESSOR's home
+// condition: a settlement bankrupting itself abroad sheds people too. Both are
+// gated behind warLayerEnabled at the SOURCE (the war evaluator never mints
+// war_drain when OFF, and a generation-occupied town already carried
+// vassal_extraction before this change — but it never lost population for it until
+// now), so a no-war campaign that never stamps either is byte-identical.
 const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain']);
 const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap', 'relief_burden']);
 // siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
@@ -117,8 +117,8 @@ const RELATIONSHIP_DISPERSAL_WEIGHTS = Object.freeze({
   hostile: 0.15,
 });
 
-// H12 shim mirrored from stressorDynamics.relationshipTypeOf: legacy saves
-// carry the plural 'trade_partners'; read it as the canonical singular.
+// Compatibility shim mirrored from stressorDynamics.relationshipTypeOf: legacy
+// saves carry the plural 'trade_partners'; read it as the canonical singular.
 function edgeLabel(edge) {
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }

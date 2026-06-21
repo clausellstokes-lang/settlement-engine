@@ -1,13 +1,13 @@
 /**
- * PrimaryDeityPicker — assign (or clear) the current settlement's primary deity
- * (Feature D / R1). This is the UI half of the embed-on-assign bridge: the
+ * PrimaryDeityPicker — assign (or clear) the current settlement's primary deity.
+ * This is the UI half of the embed-on-assign bridge: the
  * picker dispatches the store action `setPrimaryDeity(refId)`, which resolves the
  * authored deity → a frozen snapshot and commits it on the settlement record via
  * the SET_PRIMARY_DEITY canon event. The pulse never sees this picker or the
  * store — only the embedded snapshot.
  *
- * Premium-gated by `canUseCustomContent()` (D.0: the simulation is the premium
- * gate; deity authoring/assignment reuses the same client gate as the rest of
+ * Premium-gated by `canUseCustomContent()`: the simulation is the premium
+ * gate, and deity authoring/assignment reuses the same client gate as the rest of
  * custom content). A non-premium user sees a short upsell line instead of the
  * control. With zero authored deities the picker explains how to author one.
  */

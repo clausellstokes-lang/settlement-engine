@@ -16,25 +16,25 @@ import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
-// P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
+// Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
-// P106 / E-2 — Pending changes drawer (queue + cascade preview).
+// Pending changes drawer (queue + cascade preview).
 // Self-gates inside on flag + pending queue presence.
 const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
-// P130 / O-2 — First-dossier teaching callouts. Self-gates on
+// First-dossier teaching callouts. Self-gates on
 // flag + signed-in + savedCount===0; renders nothing otherwise.
 const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
-// P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
+// Simulation drawer. Replaces the Simulation tab when
 // `simulationDrawer` flag is on. Self-mounted via a trigger button.
 const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
-// P142 / D-6 — Phone-optimized "at the table" view. Mounted only when
+// Phone-optimized "at the table" view. Mounted only when
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
-// P131 / E-1 — Click-to-edit settlement name in the header.
+// Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
-// edit through the pending-edits drawer (E-2). The editable name now
+// edit through the pending-edits drawer. The editable name now
 // lives inside DossierHeaderRow, which imports EditableInline directly.
 import DossierNarrativeButtons from './dossier/DossierNarrativeButtons.jsx';
 import DossierHeaderRow from './dossier/DossierHeaderRow.jsx';
@@ -49,7 +49,7 @@ import { useAltitude } from '../hooks/useAltitude.js';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
-// P129 / D-2 — Magazine-spread Summary V2. Self-gated by the
+// Magazine-spread Summary V2. Self-gated by the
 // `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
 // loads in parallel so toggling the flag is instant.
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
@@ -75,7 +75,7 @@ const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
 const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 
 
-// P102 / D-1 — Thematic group tabs façade (spec §8: Summary / Systems / World /
+// Thematic group tabs façade (spec §8: Summary / Systems / World /
 // Notes). Each group maps to the existing sub-tabs the dossier already renders;
 // this is a navigation layer, not a content change. Flag: `dossierFiveTabs`
 // (name retained as the soak killswitch even though the count is now four).
@@ -180,29 +180,29 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeAiError = useStore(s => s.aiError);
   const storeAiProgress = useStore(s => s.aiProgress);
   const storeAiPartialFailure = useStore(s => s.aiPartialFailure);
-  // Tier 6.7 — runtime canon-preservation report from the AI overlay
+  // Runtime canon-preservation report from the AI overlay
   // verifier. Surfaces drift (invented entity, renamed proper noun,
   // overridden user edit) to the DM via the AiOverlayViolations card.
   const storeAiViolations = useStore(s => s.aiViolations);
   const clearAiViolations = useStore(s => s.clearAiViolations);
-  // Tier 5.1 — most-recent regeneration delta, populated by
+  // Most-recent regeneration delta, populated by
   // settlementSlice.regenSection. Persists until dismissed or until
   // the next regen overwrites it.
   const storeLastRegenerationDelta = useStore(s => s.lastRegenerationDelta);
   const clearLastRegenerationDelta = useStore(s => s.clearLastRegenerationDelta);
   const storeShowNarrative = useStore(s => s.showNarrative);
   const setShowNarrative = useStore(s => s.setShowNarrative);
-  // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
+  // Pinned NPCs. The live save entry is the source of truth so the
   // pin icons stay in sync across tabs without an extra hydration hop.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
-  // P131 / E-1 — inline-edit pipe. queueEdit goes into the
+  // Inline-edit pipe. queueEdit goes into the
   // PendingChangesBar's drawer where the cascade preview lives.
   const queueEdit = useStore(s => s.queueEdit);
 
   const rawSettlement = propSettlement || storeSettlement;
-  // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
+  // AI narrative is now gated behind a saveId: the ai_data has a
   // durable home on the saved settlement row. readOnly still controls
   // editing affordances (regen, setAi from local-dev mock) independently.
   const narrativeEnabled = isConfigured ? !!saveId : true; // local-dev mock is ungated
@@ -219,7 +219,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const trackTabExplored = useStore(s => s.trackTabExplored);
   const onboardingActive = useStore(s => s.onboardingActive);
   const onboardingStep = useStore(s => s.onboardingStep);
-  // P142 / D-6 — Table View overlay state. The trigger lives in
+  // Table View overlay state. The trigger lives in
   // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
   const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
@@ -337,7 +337,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   }) : null;
 
   // DM Compass tab is visible only when the narrative layer has produced at
-  // least one of its four fields (AI-3a). Unnarrated saves don't need the tab.
+  // least one of its four fields. Unnarrated saves don't need the tab.
   const hasCompass = (o) => !!(o && (
     (Array.isArray(o.identityMarkers) && o.identityMarkers.length) ||
     (Array.isArray(o.frictionPoints)  && o.frictionPoints.length)  ||
@@ -370,7 +370,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     [rawSettlement]
   );
 
-  // P135 / D-5 — The simulation drawer trigger (below the header) is the
+  // The simulation drawer trigger (below the header) is the
   // entry point, so drop the Simulation entry from the tab strip.
   const baseTabs = TABS.filter(t => {
     if (t.id === 'simulation') return false;
@@ -409,7 +409,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
-  // P102 / D-1 — Five thematic group tabs. When the flag is on, render
+  // Five thematic group tabs. When the flag is on, render
   // a group selector ABOVE the existing tab strip; clicking a group
   // filters the strip to its sub-tabs and selects the group's primary.
   // When the flag is off, the strip behaves as before (legacy 14 tabs).
@@ -629,7 +629,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
           />
         )}
-        {/* P121 — Labeled narrative-layer strip. Below the header, above
+        {/* Labeled narrative-layer strip. Below the header, above
             the tab strip. Lives in its own card with title + cost pill +
             single primary action. The renderNarrativeButtons() output
             sits inside the strip; the buttons themselves are unchanged. */}
@@ -686,7 +686,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               galleryShareDm={liveSaveEntry?.gallery_share_dm}
               galleryImportable={liveSaveEntry?.gallery_importable}
             />
-            {/* P135 / D-5 — "How this was simulated" trigger. Lives next to
+            {/* "How this was simulated" trigger. Lives next to
                 BuyThisDossier so the user finds it as a "more info" affordance,
                 not a chrome surface. */}
             <Suspense fallback={null}>
@@ -694,7 +694,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             </Suspense>
           </div>
         )}
-        {/* P104 — Welcome credit gift card. Self-gates inside; shown to
+        {/* Welcome credit gift card. Self-gates inside; shown to
             signed-in users on their first saved dossier when their ledger
             still has an available welcome grant. */}
         {!readOnly && (
@@ -702,17 +702,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             <WelcomeCreditCard saveId={saveId} />
           </Suspense>
         )}
-        {/* P106 / E-2 — Pending changes bar + cascade preview. Self-gates
+        {/* Pending changes bar + cascade preview. Self-gates
             inside; renders nothing when no edits are queued. */}
         {!readOnly && (
           <Suspense fallback={null}>
             <PendingChangesBar />
           </Suspense>
         )}
-        {/* P130 / O-2 — First-dossier teaching callouts now render INSIDE the
+        {/* First-dossier teaching callouts now render INSIDE the
             Summary tab (the DM summary), not as a banner above every tab — see
             renderTab's 'summary' case. */}
-        {/* P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
+        {/* Thematic group tab strip (Summary / Systems / World /
             Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
             group selects its first sub-tab and filters the strip below. */}
         {fiveTabsEnabled && (
@@ -781,7 +781,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               }}
             >{`Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`}</div>
           )}
-          {/* Tier 6.7 — runtime verifier findings. Surfaces hard
+          {/* Runtime verifier findings. Surfaces hard
               violations (invented entity, renamed proper noun,
               overwritten user edit) so the DM sees the AI output isn't
               safe to ship without inspection. */}
@@ -791,7 +791,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               onDismiss={clearAiViolations}
             />
           )}
-          {/* Tier 5.1 — what changed in the most recent regenerate.
+          {/* What changed in the most recent regenerate.
               Visible regardless of narrative mode so the DM can audit
               engine-side decisions independently of AI prose. */}
           <RegenerationDeltaCard
@@ -831,7 +831,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>
-      {/* P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
+      {/* Table View overlay. Rendered as a sibling of the dossier
           card so it takes over the full viewport. Gated on flag + the
           tableViewOpen pref so the lazy chunk only loads when actually opened. */}
       {flag('tableView') && tableViewOpen && (

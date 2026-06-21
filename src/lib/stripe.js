@@ -78,7 +78,7 @@ export async function startCheckout(product, options = {}) {
     throw new Error(`Unknown product: ${product}`);
   }
 
-  // Tier 7.4 — single-dossier checkout is anonymous-allowed (per
+  // Single-dossier checkout is anonymous-allowed (per
   // pricing.js SINGLE_DOSSIER.requiresAccount=false). All other
   // products still require auth because they grant ongoing account
   // benefits (subscription, founder seat, credit pack) that need a

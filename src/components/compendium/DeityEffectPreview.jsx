@@ -1,6 +1,6 @@
 /**
- * DeityEffectPreview — the "This god will…" panel on the deity authoring form
- * (UX Phase 8). It renders the EXACT couplings the engine applies, read live
+ * DeityEffectPreview — the "This god will…" panel on the deity authoring form.
+ * It renders the EXACT couplings the engine applies, read live
  * from the shared single source `describeDeityEffects` (src/domain/display/
  * deityEffects.js) — never hand-copied numbers. As the author sets the three
  * axes (alignment · temperament · rank), the preview updates because the draft

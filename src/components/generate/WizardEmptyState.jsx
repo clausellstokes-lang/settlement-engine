@@ -14,13 +14,13 @@ import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
 
-// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
+// Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
 // flip. Mounted directly below HomeHero so anon visitors see proof of
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 
-// P9 / §4.7 — "Watch a region wake up" read-only replay. Self-gates inside on
+// "Watch a region wake up" read-only replay. Self-gates inside on
 // anon + no-settlement (same as the sample dossier), so it renders nothing once
 // the visitor has the real thing. Mounted below the sample dossier so the
 // teaser ladder reads: proof of the static dossier → proof of the LIVING world.

@@ -1,17 +1,17 @@
 /**
  * domain/regenerationDelta.js — Structured diff between two settlements.
  *
- * Tier 5.1 of the roadmap. After a user change + rerun, the UI needs
+ * After a user change + rerun, the UI needs
  * to show what changed at every layer: substrate variables, capacity
  * supply/demand, daily-life prose, which entities were preserved /
- * added / removed. Phase 32 composes the existing comparators from
- * Phases 17, 18, 21, 22, 23 plus an entity-catalog set diff.
+ * added / removed. Composes the existing per-layer comparators plus an
+ * entity-catalog set diff.
  *
  *   deriveRegenerationDelta(before, after) -> {
- *     directEffects:       SystemStateDelta[]      Phase 7
- *     rippleEffects:       CausalStateDelta[]      Phase 17
- *     capacityShifts:      CapacityDelta[]         Phase 21
- *     dailyLifeShifts:     DailyLifeDelta[]        Phase 22
+ *     directEffects:       SystemStateDelta[]
+ *     rippleEffects:       CausalStateDelta[]
+ *     capacityShifts:      CapacityDelta[]
+ *     dailyLifeShifts:     DailyLifeDelta[]
  *     preservedCanon:      Reference[]
  *     brokenDependencies:  string[]
  *     newEntities:         Reference[]
@@ -93,12 +93,12 @@ export function deriveRegenerationDelta(before, after) {
   // Layer 2: entity catalog diff.
   const { preserved, added, removed } = diffEntityCatalogs(before, after);
 
-  // A "broken dependency" in Phase 32's lean form is a removed entity id
+  // A "broken dependency" in 's lean form is a removed entity id
   // that a remaining (preserved) entity's references[] points to.
   // We don't run full reference walk here (would require explaining
   // every preserved entity, expensive); instead we just surface the
   // removed ids — consumers that need full link analysis can call
-  // Phase 19 explainEntity on each.
+  // explainEntity on each.
   const brokenDependencies = removed.map(e => e.id);
 
   // Risk-vs-opportunity split on added entities.

@@ -114,7 +114,7 @@ export const semantic = Object.freeze({
   warningBg:      color['amber-100'],
 });
 
-// ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
+// ── Exact-value migration swatchbook (colour burn-down) ──────────────────────
 // The burn-down found ~140 distinct raw hex colours inline across the screen
 // UI — a long tail of near-duplicate browns, creams, reds, greens, blues and
 // purples accumulated over many phases. Consolidating them onto the curated
@@ -461,8 +461,8 @@ export const legacy = Object.freeze({
   CARD_HDR: '#FAF4E8',
 
   // Flat aliases for palette colours that previously had only dashed keys
-  // (color['violet-500'] etc.). Added in the P120 / V-2 colour burn-down so
-  // exact-match call sites can route through a flat name like the rest.
+  // (color['violet-500'] etc.). Added in the colour burn-down so exact-match
+  // call sites can route through a flat name like the rest.
   VIOLET:    color['violet-500'],
   VIOLET_BG: color['violet-100'],
   RED:       color['red-600'],
@@ -484,11 +484,11 @@ export const legacy = Object.freeze({
   R:  { sm: radius.sm, md: radius.md, lg: radius.lg, xl: radius.xl },
   // pico/nano/micro extend the scale below xxs for the dense micro-typography
   // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
-  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
-  // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
+  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. These give the
+  // ~400 raw sub-10px sizes exact tokens to migrate to (zero visual change).
   //
   // The half-step and gap/display sizes below were added in the visual-budget
-  // burn-down (P120 close-out) so EVERY raw inline fontSize in the screen UI has
+  // burn-down so EVERY raw inline fontSize in the screen UI has
   // an exact token to route through — keyed by size so the migration is
   // pixel-identical (zero visual change). The curated t-shirt steps above remain
   // the preferred vocabulary for new code; a future pass can consolidate the
@@ -501,7 +501,7 @@ export const legacy = Object.freeze({
   },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
-  // Added in P141/V-4 so components stop inventing bespoke shadows.
+  // Added so components stop inventing bespoke shadows.
   ELEV: elevation,
 
   // Layout — shared page content widths (see `layout` above). Added so every

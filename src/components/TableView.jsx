@@ -1,5 +1,5 @@
 /**
- * TableView.jsx — P142 / D-6 phone-optimized "at the table" view.
+ * TableView.jsx — phone-optimized "at the table" view.
  *
  * A ~380px single-column takeover for running a settlement live during a
  * session. Where the dossier is the wide read-at-home surface, this is the

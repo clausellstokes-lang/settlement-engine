@@ -1,5 +1,5 @@
 /**
- * domain/fieldManifest.js — Wave 8 structural prevention: the two field
+ * domain/fieldManifest.js — Structural prevention: the two field
  * manifests, as data.
  *
  * Two bug classes kept regrowing faster than audits could weed them:
@@ -11,7 +11,7 @@
  *      code written under the program's own discipline).
  *   2. DEAD WRITES — a field written "for the dossier" that no surface
  *      ever reads (`blockadeBypass`, `economicGates` until 1fd128e, the
- *      six dead reads of Wave 6 #1).
+ *      six dead reads found in an earlier audit).
  *
  * This module turns both classes into DATA that a walking test
  * (tests/joins/fieldManifest.test.js) enforces with comment-stripped
@@ -117,7 +117,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     guards: [],
   },
   {
-    // Wave 8 decision (recorded): resolution is LIVE-FIRST from the standing
+    // Resolution is LIVE-FIRST from the standing
     // institution roster; the verdict is FALLBACK ONLY for rosters with no
     // name signal either way (legacy/custom-renamed content). A roster whose
     // only sniffable transport lies removed/destroyed is a NEGATIVE signal —
@@ -148,7 +148,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: 'updatedByPulse',
     mode: 'live',
     pulseWriter: 'src/domain/worldPulse/factionCompetition.js#projectFactionStatesOntoSettlement',
-    displayRule: 'Wave 7: faction live state projects onto powerStructure.factions with '
+    displayRule: 'Faction live state projects onto powerStructure.factions with '
       + 'updatedByPulse provenance and identity no-ops; the dossier faction panel reads the '
       + 'projection, never worldState.factionStates directly.',
     guards: [],
@@ -231,7 +231,7 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     path: 'economicState.activeChains[].magicRecovery',
     producer: 'src/generators/chainMagicSubstitution.js',
     consumers: [
-      'src/domain/supplyChainState.js',        // Wave 8: carried into the canonical envelope
+      'src/domain/supplyChainState.js',        // carried into the canonical envelope
       'src/components/new/tabs/EconomicsTab.jsx',
     ],
   },
@@ -265,7 +265,7 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     path: 'economicState.foodSecurity.stockpile.blockadeBypass',
     producer: 'src/domain/worldPulse/foodStockpile.js',
     producerProbe: '(?<![.\\w])blockadeBypass\\s*,', // shorthand property write
-    consumers: ['src/domain/display/dossierViewModel.js'], // Wave 8: deriveBlockadeRelief
+    consumers: ['src/domain/display/dossierViewModel.js'], // deriveBlockadeRelief
   },
   {
     // Entity-identity package: generation stamps canonical institution ids
@@ -311,7 +311,7 @@ export const REMOVED_DEAD_FIELDS = Object.freeze([
   {
     field: 'hasRegionalSignal',
     file: 'src/domain/region/deriveRegionalState.js',
-    removed: 'Wave 8 — write-only boolean on deriveLocalDelta; every consumer thresholds '
+    removed: 'Write-only boolean on deriveLocalDelta; every consumer thresholds '
       + 'changes[].magnitude itself.',
   },
 ]);

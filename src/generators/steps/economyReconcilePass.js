@@ -22,7 +22,7 @@
  *   3. Spatial layout + available services (+ §14 custom services) — moved
  *      here from generateEconomy so every roster member, including
  *      faction-pulled institutions, is placed and provides services.
- *   4. Supply-chain traces (Tier 4.3) — emitted here so the receipts
+ *   4. Supply-chain traces — emitted here so the receipts
  *      describe the final chains, not the provisional ones.
  */
 
@@ -77,7 +77,7 @@ export function finalizeTradeLists(economicState, customTradeGoods = null) {
 
 registerStep('economyReconcilePass', {
   deps: ['factionCorrelationPass'],
-  reads: ['economicState'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['economicState'], // ctx keys this step consumes that another step produces
   provides: ['economicState', 'spatialLayout', 'availableServices'],
   phase: 'economy',
 }, (ctx, rng) => {

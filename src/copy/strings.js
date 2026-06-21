@@ -20,10 +20,10 @@
 
 export const COPY = {
   generate: {
-    // P124 / C-1 — Verb unification. Forge (first generation) / Reforge
-    // (regenerate). Was: "Generate Draft" / "Regenerate Draft" — the
-    // critique flagged the verb chaos (Begin / Generate / Forge / Roll
-    // competing on the same surfaces). Now one verb per action class.
+    // Verb unification. Forge (first generation) / Reforge (regenerate).
+    // Was: "Generate Draft" / "Regenerate Draft" — Begin / Generate / Forge /
+    // Roll were all competing on the same surfaces, so we settled on one verb
+    // per action class.
     // "Draft" is still the artifact noun (draft → canon lifecycle is
     // preserved); only the action verb changed.
     // ModeSelector renders only Basic + Advanced. The "Custom Generate"
@@ -107,7 +107,7 @@ export const COPY = {
         headline: 'Save your campaign across devices.',
         body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
       },
-      // ── P103 / X-2 — Conversion-arc moments ────────────────────────────
+      // ── Conversion-arc moments ─────────────────────────────────────────
       first_save: {
         headline: 'Save it. Come back tomorrow.',
         body:     'Your dossier is yours to keep. Free tier holds 3 saves, plenty for a campaign’s first arc.',
@@ -132,14 +132,14 @@ export const COPY = {
         headline: 'World Map unlocks with Cartographer.',
         body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
       },
-      // ── UX Phase 4 — the Realm hub locked-state teaser ─────────────────
+      // ── The Realm hub locked-state teaser ──────────────────────────────
       // Fired from the Realm Dashboard when an anon/free user opens the
       // Realm. Names the actual premium product: the living simulation.
       map_realm_teaser: {
         headline: 'The Realm is where your world comes alive.',
         body:     'Advance time and watch wars ignite and end, faiths rise, and the chronicle write itself. Cartographer runs the living simulation across your whole campaign.',
       },
-      // ── UX Phase 9 — simulation-intent moments ─────────────────────────
+      // ── Simulation-intent moments ──────────────────────────────────────
       // Fired when a non-premium user reaches toward a specific simulation
       // system. Each NAMES that system (never size — size is free) and routes
       // to the canonical "What the Realm unlocks" surface.

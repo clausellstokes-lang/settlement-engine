@@ -220,7 +220,7 @@ export const createSettlementSlice = (set, get) => ({
   // on regeneration.
   pipelineHistory: [],
 
-  // P100 / X-1 — Transient flag set right after the pipeline runs and
+  // Transient flag set right after the pipeline runs and
   // cleared when the PipelineReveal overlay finishes its playback. The
   // overlay reads `pipelineHistory` to animate; the wizard hides the
   // dossier until this flag drops. Cleared on a fresh generate so the
@@ -228,7 +228,7 @@ export const createSettlementSlice = (set, get) => ({
   pipelineRevealActive: false,
   dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
 
-  // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
+  // Active pricing moment. usePricingMoment opens these via
   // setActivePricingMoment({ headline, body, reason }); the
   // PricingMomentCard subscribes here and renders. Single-active-at-a-time
   // by design (the cooldown library handles dedupe).
@@ -240,7 +240,7 @@ export const createSettlementSlice = (set, get) => ({
     state.activePricingMoment = null;
   }),
 
-  // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
+  // Lifetime narrate count, used by useReaderAudience to
   // bump anonymous → intermediate after first narrate spend. Bumped on the
   // AI generation SUCCESS paths in aiSlice (requestNarrative / requestDailyLife
   // / requestProgression), where the server-authoritative credit spend has
@@ -251,7 +251,7 @@ export const createSettlementSlice = (set, get) => ({
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
   }),
 
-  // P105 / E-2 — Pending edits queue. Each edit is a frozen object
+  // Pending edits queue. Each edit is a frozen object
   // produced by domain/pendingEdits.buildEdit(). The PendingChangesBar
   // reads this; commitPendingEdits applies the queue to the live
   // settlement; revertPendingEdits drops it.
@@ -348,7 +348,7 @@ export const createSettlementSlice = (set, get) => ({
     // Clear the queue. Failed-commit retry is a future-tier feature;
     // for now, all-or-nothing matches the cascade-preview UX.
     set(s => { s.pendingEditsQueue = []; });
-    // P133 / E-5 — Snapshot the post-commit state so the version
+    // Snapshot the post-commit state so the version
     // timeline records this as a discrete edit checkpoint. The
     // snapshot label summarises what edits were applied; the user
     // can revert to before this batch from VersionsTab.
@@ -418,7 +418,7 @@ export const createSettlementSlice = (set, get) => ({
     }
   },
 
-  // ── P133 / E-5 · Version history mutations ──────────────────────────
+  // ── Version history mutations ───────────────────────────────────────
   //
   // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
   // snapshot of the live settlement (or a specified save) into
@@ -525,7 +525,7 @@ export const createSettlementSlice = (set, get) => ({
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
   pendingChange: null,   // { type, payload } describing the proposed mutation
-  // Tier 5.1: structured delta from the most recent regenerate. UI
+  // Structured delta from the most recent regenerate. UI
   // surfaces it via the RegenerationDeltaCard until dismissed.
   lastRegenerationDelta: null,
 
@@ -576,7 +576,7 @@ export const createSettlementSlice = (set, get) => ({
       }
     }
 
-    // Anonymous daily generation cap (Tier 7.2). Every full-settlement
+    // Anonymous daily generation cap. Every full-settlement
     // generation funnels through this action, so this is the single point
     // of enforcement. A *regeneration* (a settlement is already on screen)
     // now counts the same as a first generation — previously rerolls were
@@ -690,7 +690,7 @@ export const createSettlementSlice = (set, get) => ({
         state.pendingChange = null;
         state.pendingPreview = null;
         state.pipelineHistory = pipelineHistory;
-        // P100 — arm the reveal overlay. PipelineReveal mounts when this
+        // Arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
         // dismissPipelineReveal() to clear it. Gated by the flag at the
         // consumer site (GenerateWizard) so a flag-flip kills the
@@ -782,7 +782,7 @@ export const createSettlementSlice = (set, get) => ({
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
   // Async — same reason as generateSettlement (lazy engine load).
-  // Tier 5.1: every regenerate computes a structured delta against
+  // Every regenerate computes a structured delta against
   // the prior settlement so the UI's RegenerationDeltaCard can show
   // what changed. The delta is lazy-imported to keep its transitive
   // domain modules out of the cold-start chunk.
@@ -791,7 +791,7 @@ export const createSettlementSlice = (set, get) => ({
     const { settlement, config } = state;
     if (!settlement) return;
 
-    // P103 / X-2 — Track session regen-burst. When the user crosses 5
+    // Track session regen-burst. When the user crosses 5
     // regens in a single session, fire regen_burst (worldbuilder hint
     // for locks/drift/chronicle). Counter lives in-memory only since
     // it's a session-scoped behavior signal.
@@ -837,7 +837,7 @@ export const createSettlementSlice = (set, get) => ({
     }
   },
 
-  // Tier 5.1: dismiss the most recent delta summary card.
+  // Dismiss the most recent delta summary card.
   clearLastRegenerationDelta: () =>
     set(state => { state.lastRegenerationDelta = null; }),
 
@@ -1080,7 +1080,7 @@ export const createSettlementSlice = (set, get) => ({
       });
     });
 
-    // P103 / X-2 — first_save + third_save pricing moments. Fire-and-
+    // first_save + third_save pricing moments. Fire-and-
     // forget so the save action returns promptly; the moment library
     // enforces 24h-per-moment cooldown so this can't spam.
     if (wasFirstSave || wasThirdSave) {
@@ -1138,7 +1138,7 @@ export const createSettlementSlice = (set, get) => ({
       const wasFirstSave = activeCount === 1;
       const wasThirdSave = activeCount === 3 && max === 3;
 
-      // P103 / X-2 — first_save + third_save pricing moments. Fire-and-forget;
+      // first_save + third_save pricing moments. Fire-and-forget;
       // the moment library enforces a 24h-per-moment cooldown so firing from
       // multiple save sites can't spam.
       if (wasFirstSave || wasThirdSave) {
@@ -1274,7 +1274,7 @@ export const createSettlementSlice = (set, get) => ({
       if ('faction' in fac) fac.faction = newName;
     }),
 
-  // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
+  // ── User-edited prose ────────────────────────────────────────────────────
   //
   // Edit-mode toggle: when true, EditableText components in the
   // dossier become clickable. False by default so casual readers see
@@ -1469,7 +1469,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastExportAt = new Date().toISOString();
     });
     if (wasFirstExport) {
-      // P103 / X-2 — first_pdf_export pricing moment.
+      // first_pdf_export pricing moment.
       import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
         triggerPricingMoment('first_pdf_export', (content) => {
           get().setActivePricingMoment(content);
@@ -1550,7 +1550,7 @@ export const createSettlementSlice = (set, get) => ({
       systemState: state.systemState,
       event,
       // The store is the I/O boundary: thread the real apply time so the domain
-      // stays a pure function of (settlement, event, now) (A+ domain.6).
+      // stays a pure function of (settlement, event, now).
       now: new Date().toISOString(),
     });
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
@@ -1638,7 +1638,7 @@ export const createSettlementSlice = (set, get) => ({
 
   /**
    * Assign (or clear) the current settlement's primary deity — the STORE half
-   * of the embed-on-assign bridge (Feature D / R1). This is the ONLY place a
+   * of the embed-on-assign bridge. This is the ONLY place a
    * deity ref is resolved against customContent: we look the authored deity up
    * here (where the store is available), build a self-contained snapshot, and
    * dispatch SET_PRIMARY_DEITY with the snapshot already in the payload. The

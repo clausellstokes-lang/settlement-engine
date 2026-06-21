@@ -7,7 +7,7 @@
 import { FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
-// Tier 7.19 — local BODY alias. The body-copy color used to be a
+// Local BODY alias. The body-copy color used to be a
 // hard-coded '#6b5340' literal; surfacing it as a named constant means
 // a future contrast tweak is one edit. (We don't import from tabConstants
 // because that's a tabs-only concern; this component is reused outside

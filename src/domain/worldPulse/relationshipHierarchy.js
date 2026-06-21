@@ -145,7 +145,7 @@ function cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vas
 }
 
 /**
- * H15 preview — the realignments the cascade WILL execute once this vassal
+ * Preview the realignments the cascade WILL execute once this vassal
  * edge applies. Called at proposal-authoring time (the edge is still hostile,
  * so no vassal-state gate) with the projected post-apply vassal state, so the
  * proposal summary tells the DM the full consequence before accepting. Pure
@@ -192,7 +192,7 @@ export function resolveRelationshipHierarchy(args = {}) {
   if (vassalState.relationshipType !== 'vassal') {
     return { worldState, regionalGraph, changes: [], cascadeChanges: [] };
   }
-  // H16: the overlord may be state-stamped onto the relationship (subjugation
+  // The overlord may be state-stamped onto the relationship (subjugation
   // by the authored 'to' side) rather than sitting at the edge's 'from'.
   const { seniorId: overlordId, juniorId: vassalId } = relationshipRoles(vassalEdge, vassalState);
 
@@ -238,7 +238,7 @@ export function resolveRelationshipHierarchy(args = {}) {
     worldState: { ...worldState, relationshipStates: states },
     regionalGraph: { ...regionalGraph, edges },
     changes,
-    // H15 coordination shape for the applyWorldPulse news wiring (T2): one
+    // Coordination shape for the applyWorldPulse news wiring: one
     // entry per flipped third-party edge, with truthful from/to labels.
     cascadeChanges: changes.map(change => ({
       edgeKey: change.relationshipKey,

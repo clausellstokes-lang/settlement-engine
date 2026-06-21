@@ -7,7 +7,7 @@
  *
  * Economy step for the settlement generation pipeline.
  *
- * Ordering note (Wave 4b): generatePower consumes economicState (prosperity
+ * Ordering note: generatePower consumes economicState (prosperity
  * drives merchant-faction naming/caps and public legitimacy), and the
  * faction-institution pull consumes powerStructure — so the economy MUST be
  * computed once before factions exist. When factionCorrelationPass later
@@ -17,7 +17,7 @@
  * Services, spatial layout, and supply-chain traces are derived in
  * economyReconcilePass so they always describe the final roster.
  *
- * Tier 4.3: emits structured supply-chain traces after the legacy
+ * Emits structured supply-chain traces after the legacy
  * economic generator finishes (now from economyReconcilePass). Traces are
  * layered on top via deriveSupplyChainState — same Strangler Fig pattern
  * Phase 7 + 9 established. The generator itself is not refactored.
@@ -242,7 +242,7 @@ export function computeEconomyState(ctx) {
 }
 
 /**
- * emitChainTraces — one structured trace per active supply chain (Tier 4.3).
+ * emitChainTraces — one structured trace per active supply chain.
  *
  * Causes describe what activated the chain (resource availability,
  * processing institution, upstream chain); downstream describes which
@@ -341,9 +341,9 @@ export function emitChainTraces(ctx, economicState, tier, step = 'economyReconci
 
 registerStep('generateEconomy', {
   deps: ['stressConfirmPass', 'resolveNeighbour'],
-  reads: ['effectiveConfig', 'goodsToggles', 'institutions', 'neighbourEconBias', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['effectiveConfig', 'goodsToggles', 'institutions', 'neighbourEconBias', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: ['economicState'],
-  mutates: ['effectiveConfig'], // threads _neighbourEconBias/_neighbourEconMode onto effectiveConfig in place when a neighbour is bound (A+ P1.7)
+  mutates: ['effectiveConfig'], // threads _neighbourEconBias/_neighbourEconMode onto effectiveConfig in place when a neighbour is bound
   phase: 'economy',
 }, (ctx) => {
   return { economicState: computeEconomyState(ctx) };

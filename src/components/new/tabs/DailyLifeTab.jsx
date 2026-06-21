@@ -58,7 +58,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
 
   if (!r) return null;
 
-  // AI-1: Daily-life generation is gated on a saved settlement (same rule
+  // Daily-life generation is gated on a saved settlement (same rule
   // as the narrative layer). Local-dev mock remains ungated.
   const dailyLifeEnabled = isConfigured ? !!saveId : true;
 

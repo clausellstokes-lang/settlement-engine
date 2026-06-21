@@ -97,14 +97,14 @@ export const RERUN_KEYS_FOR_EVENT = {
   IMPAIR_FACTION:         ['powerStructure', 'narrative'],
   RESTORE_FACTION:        ['powerStructure', 'narrative'],
   ADD_FACTION:            ['powerStructure', 'narrative'],
-  // Wave 1 extended events.
+  // Extended events.
   KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
   EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
   IMPOSE_CORRUPTION:      ['npcs', 'powerStructure', 'narrative'],
   REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
-  // Phase 24 / Tier 4.11 — player intervention events
+  // Player intervention events.
   REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
   BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
   SETTLEMENT_DISPUTE:     ['powerStructure', 'narrative'],
@@ -123,7 +123,7 @@ export const RERUN_KEYS_FOR_EVENT = {
   REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
   PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
   DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
-  // Feature D / R1 — assigning a primary deity re-derives the religion substrate
+  // Assigning a primary deity re-derives the religion substrate
   // (the deity term in deriveReligiousAuthority) and refreshes the narrative.
   SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
 };
@@ -394,7 +394,7 @@ export const EVENT_REGISTRY = {
     },
   },
 
-  // ── Wave 1: extended event surface ──────────────────────────────────────
+  // ── Extended event surface ──────────────────────────────────────────────
   // Five events that cover ~80% of common in-world incidents in canon
   // play. Each is implemented as a thin wrapper over the existing
   // mutation primitives — no new architecture, just authored content.
@@ -510,7 +510,7 @@ export const EVENT_REGISTRY = {
     },
   },
 
-  // ── Phase 24 / Tier 4.11 — Player intervention events ────────────────────
+  // ── Player intervention events ───────────────────────────────────────────
 
   REMOVED_THREAT: {
     label: 'Removed threat',

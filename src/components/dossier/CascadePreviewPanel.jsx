@@ -1,12 +1,12 @@
 /**
- * CascadePreviewPanel.jsx — P105 / E-2 side-panel cascade preview.
+ * CascadePreviewPanel.jsx — side-panel cascade preview.
  *
  * Opens when the user clicks "Preview cascade" in PendingChangesBar.
  * Reads the live settlement + pending queue, calls
  * `domain/pendingEdits.previewCascade()`, and renders the structured
  * delta: counts, narrative impact, warnings.
  *
- * The point is "no mystery edits" (E-2's headline). Before commit:
+ * The point is "no mystery edits". Before commit:
  *   - what counts change (institutions, resources, stressors)
  *   - what gets renamed
  *   - what the narrative layer's status becomes

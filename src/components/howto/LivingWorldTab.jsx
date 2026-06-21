@@ -1,6 +1,6 @@
 /**
- * howto/LivingWorldTab.jsx — the About page's "The Living World" tab (UX Phase 9,
- * plan §4.7). Extracted from HowToUse.jsx (which sits at its line budget).
+ * howto/LivingWorldTab.jsx — the About page's "The Living World" tab.
+ * Extracted from HowToUse.jsx (which sits at its line budget).
  *
  * The bridge from the static dossier to the premium living simulation:
  *   - the landing thesis ("It generates a town in seconds, then it runs the

@@ -15,8 +15,8 @@ import { t } from '../../copy/index.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, R, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
-// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
-// behavior. Self-gates inside; renders null for non-worldbuilder users.
+// Founder Lifetime tile, audience-gated to worldbuilder behavior.
+// Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
 
 export default function AccountSubscriptionSection({
@@ -35,7 +35,7 @@ export default function AccountSubscriptionSection({
   return (
     <Section title={t('account.subscriptionHeading')} icon={Crown}>
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-        {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
+        {/* Tier card — grows an "unlock" footer for free users. */}
         <div style={{
           flex: '1 1 180px',
           background: GOLD_BG, borderRadius: R.lg,
@@ -168,7 +168,7 @@ export default function AccountSubscriptionSection({
           )}
 
           <div style={{ display: 'flex', gap: SP.sm }}>
-            {/* P125 / AC-2 — Read packs from getActivePacks() so the
+            {/* Read packs from getActivePacks() so the
                 `packsRepriced` flag wins. Hardcoded list was bypassing
                 the flag and showing legacy 5/15/40 even when the new
                 25/60/150 catalog was active. The pack record carries
@@ -208,7 +208,7 @@ export default function AccountSubscriptionSection({
         </div>
       )}
 
-      {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
+      {/* Founder Lifetime tile. Self-gates on
           audience='worldbuilder' + flag + seats-remaining > 0.
           Renders null for everyone else, so this is safe to mount
           unconditionally here. */}

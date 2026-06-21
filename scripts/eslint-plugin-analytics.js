@@ -1,5 +1,5 @@
 /**
- * eslint-plugin-analytics.js — Local ESLint rule for P146.
+ * eslint-plugin-analytics.js — Local ESLint rule for the analytics event contract.
  *
  * funnel-event-contract — event names passed to the analytics `track()`
  *   and `Funnel.track()` must be EVENTS.* constants from

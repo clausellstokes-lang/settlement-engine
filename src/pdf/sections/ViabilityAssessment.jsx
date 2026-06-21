@@ -90,7 +90,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
-      {/* ── Magic legality (UX Phase 7, premium live exports only) ──────── */}
+      {/* ── Magic legality (premium live exports only) ─────────────────── */}
       {/* Additive + self-gating: only a campaign export (vm.liveWorld present)
           with a functioning magic system surfaces the legality facets, so a
           non-campaign / dead-magic export is byte-identical. */}

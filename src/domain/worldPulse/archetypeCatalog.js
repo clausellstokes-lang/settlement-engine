@@ -14,10 +14,10 @@ import { supportedConditionArchetypes } from '../activeConditions.js';
 
 export { supportedConditionArchetypes };
 
-// The AGGRESSOR's home conditions stamped by a deployment (Feature A). Every other
-// war archetype models the victim; these model the cost of waging war. war_exhaustion
-// (Z2a) is the NON-REVERTING scar — the lasting economic wound a long war leaves,
-// distinct from the per-tick reverting war_drain. reinforcement_cost (B2) is the
+// The AGGRESSOR's home conditions stamped by a deployment. Every other war
+// archetype models the victim; these model the cost of waging war. war_exhaustion
+// is the NON-REVERTING scar — the lasting economic wound a long war leaves,
+// distinct from the per-tick reverting war_drain. reinforcement_cost is the
 // reverting per-tick bleed of feeding fresh manpower/coin/grain to a deployed army.
 export const WAR_HOME_CONDITIONS = Object.freeze(['war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost']);
 

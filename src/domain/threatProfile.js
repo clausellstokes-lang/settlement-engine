@@ -1,7 +1,7 @@
 /**
  * domain/threatProfile.js — Structured threat modeling.
  *
- * Tier 4.6 of the roadmap. Today the generator implies threats
+ * Today the generator implies threats
  * across several surfaces without ever materializing them as
  * canonical entities:
  *
@@ -11,11 +11,11 @@
  *   - `stressors[]`: free-form, but commonly include siege/raid/plague/
  *     refugee/war tags
  *   - `neighbours[]` with relationshipType: 'hostile' | 'cold_war'
- *   - `activeConditions[]`: the canonical Phase 16 conditions, several
+ *   - `activeConditions[]`: the canonical conditions, several
  *     of which are themselves threat-shaped (plague, siege_lifted's
  *     aftermath, food_anchor_lost's ongoing pressure)
  *
- * Phase 20 walks every surface and emits canonical ThreatProfile
+ * walks every surface and emits canonical ThreatProfile
  * entries with the roadmap-required fields:
  *
  *   {
@@ -28,16 +28,16 @@
  *   }
  *
  * Pure read-only derivation. No imports from src/lib. Composes
- * Phase 16 (activeConditions) so threats keyed off a canonical
+ * active conditions so threats keyed off a canonical
  * condition share its provenance.
  *
  * Architectural payoff:
- *   - Phase 17 substrate variables (defense_readiness, social_trust,
+ *   - Substrate variables (defense_readiness, social_trust,
  *     food_security, etc.) can quote threat profiles as contributors.
- *   - Phase 19's explainEntity gains a 'threat' explainer.
- *   - Tier 4.11 (player intervention events) gets a stable target
+ *   - explainEntity gains a 'threat' explainer.
+ *   - Player intervention events get a stable target
  *     vocabulary: events like 'removed_threat' reference threat ids.
- *   - Tier 6.1 (AI grounded-in-trace) — AI can ground "the settlement
+ *   - For AI grounded-in-trace, the AI can ground "the settlement
  *     fears X" claims in real threat-profile state.
  */
 
@@ -194,14 +194,14 @@ const THREAT_TYPE_TEMPLATES = Object.freeze({
 const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 
 // NOTE: severityBand (4-band) and currentStage (5-stage) measure DIFFERENT
-// axes of the same threat — band is "how bad" (matching Phase 16 conditions'
+// axes of the same threat — band is "how bad" (matching conditions'
 // 4-band cut points) while stage is "how far along the progression." Their
 // boundaries are intentionally offset (e.g. critical≥0.75 vs imminent≥0.6),
 // so a high-band threat can read as 'active' rather than 'imminent'. This is by
 // design, not an off-by error; do not "align" them — consumers that quote both
 // rely on the two scales being independent.
 
-/** 0..1 score → 4-band severity. Matches Phase 16 conditions. */
+/** 0..1 score → 4-band severity. Matches conditions. */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.75) return 'critical';
@@ -393,7 +393,7 @@ export function collectThreatSources(settlement) {
     }
   }
 
-  // 7. Active conditions — Phase 16 — that are themselves threats
+  // 7. Active conditions — — that are themselves threats
   for (const cond of deriveAllActiveConditions(settlement)) {
     let inferredType;
     switch (cond.archetype) {
@@ -561,7 +561,7 @@ export function threatBreakdown(settlement) {
 
 /**
  * Flat list of system variables pressured by the active threats.
- * Useful for the Phase 17 substrate to cross-reference. Deduplicated.
+ * Useful for the substrate to cross-reference. Deduplicated.
  */
 export function pressuresOnSubstrate(settlement) {
   const out = new Set();

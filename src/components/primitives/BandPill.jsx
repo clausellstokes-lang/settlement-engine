@@ -1,5 +1,5 @@
 /**
- * primitives/BandPill — Tier 5.4 surface.
+ * primitives/BandPill
  *
  * Color-coded pill that renders a qualitative band label
  * ("Abundant", "Strained", "Critical", "Collapsed") instead of an

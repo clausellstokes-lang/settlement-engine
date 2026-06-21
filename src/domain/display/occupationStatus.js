@@ -1,10 +1,10 @@
 /**
- * domain/display/occupationStatus.js — Phase B3 read-model SELECTOR for the DM UI:
+ * domain/display/occupationStatus.js — read-model SELECTOR for the DM UI:
  * the OCCUPATION layer in heuristic DM language.
  *
- * A `warStatus.js`-style projection of `worldState.occupations` (the B3 stateful
- * ledger keyed by the OCCUPIED settlement) — surfacing, in PLAIN WORDS, what the
- * F1 brief asks for: occupation BURDEN + BENEFIT, WHO RESISTS, and what the
+ * A `warStatus.js`-style projection of `worldState.occupations` (the stateful
+ * ledger keyed by the OCCUPIED settlement) — surfacing, in PLAIN WORDS,
+ * occupation BURDEN + BENEFIT, WHO RESISTS, and what the
  * occupation is worth vs. what it costs:
  *
  *   - the occupation STATE in DM language ("a contested occupation — the occupier

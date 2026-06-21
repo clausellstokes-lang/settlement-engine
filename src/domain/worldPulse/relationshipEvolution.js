@@ -215,7 +215,7 @@ export function getRelationshipSettlements(edge) {
 }
 
 /**
- * H16 — directional roles for hierarchical labels. Edges are one-per-pair and
+ * Directional roles for hierarchical labels. Edges are one-per-pair and
  * for relationships that BEGAN symmetric the from/to orientation is a pure
  * authoring artifact (save iteration order), so a pulse-driven subjugation or
  * patronage stamps the chosen senior side onto the relationship STATE
@@ -302,7 +302,7 @@ export function ensureRelationshipState(edge, existing = {}) {
     dailyLifeWeight: clamp01(existing.dailyLifeWeight ?? 0),
     postureUpdatedAtTick: Number.isFinite(existing.postureUpdatedAtTick) ? existing.postureUpdatedAtTick : null,
     postureReasons: Array.isArray(existing.postureReasons) ? existing.postureReasons.slice(0, 4) : [],
-    // H16: direction stamps for hierarchy labels born from symmetric edges
+    // Direction stamps for hierarchy labels born from symmetric edges
     // (the subjugating/patronizing side may be the authored 'to'). Null on
     // DM-authored hierarchy edges, which keep strict edge direction.
     overlordSaveId: existing.overlordSaveId != null ? String(existing.overlordSaveId) : null,
@@ -312,7 +312,7 @@ export function ensureRelationshipState(edge, existing = {}) {
     relationshipMemory: existing.relationshipMemory && typeof existing.relationshipMemory === "object"
       ? { ...existing.relationshipMemory }
       : null,
-    // Phase B4: the LAYERED secondary-status overlay (B0 compatibility-enforced
+    // The LAYERED secondary-status overlay (compatibility-enforced
     // trade statuses), stamped post-apply ONLY under the war layer. Preserved
     // across the per-tick ensure/relax passes; absent on a legacy edge (the field
     // is conditionally spread so it never serializes for a no-overlay edge).
@@ -374,7 +374,7 @@ const strongestPressure = (pressureIdx, saveId, types) =>
 
 const mean = (...values) => values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length;
 
-// ── Feature C disposition seam ──────────────────────────────────────────────
+// ── Disposition seam ────────────────────────────────────────────────────────
 // A settlement's centered-on-1.0 aggressiveness multiplier modulates the
 // candidates it drives, SIGNED BY INTENT: aggression boosts escalation and damps
 // de-escalation (and a pacifist does the reverse), so an aggressive settlement
@@ -422,7 +422,7 @@ export function signedDispositionFactor(/** @type {any} */ rawFactor, /** @type 
   return 1.0;
 }
 
-// ── Phase B4 trade-salience seam ─────────────────────────────────────────────
+// ── Trade-salience seam ──────────────────────────────────────────────────────
 // A per-EDGE centered-on-1.0 factor (computed in tradeSalience.js) that DAMPENS
 // hostile/escalation candidates when a VALUABLE trade tie exists between the
 // parties, and symmetrically RAISES de-escalation. The raw factor is < 1.0 for a
@@ -475,7 +475,7 @@ const candidateBase = ({
     /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
     direction,
   );
-  // B4: the trade-salience dampener COMPOSES with the disposition factor on the
+  // The trade-salience dampener COMPOSES with the disposition factor on the
   // SAME severity/probability product (not a parallel candidate path). Keyed on
   // the EDGE (the trade tie belongs to the pair). 1.0 ⇒ no-op ⇒ byte-identical
   // when the war layer is off (the map is empty).
@@ -571,8 +571,8 @@ function populationFor(item) {
   return Math.max(0, Number(item?.settlement?.population) || 0);
 }
 
-// Z2a homeostasis gearing — the DIRECT war-cost penalty subtracted from raw
-// strength. The headline finding (§6): war_drain dropped economic_capacity 18pts but
+// War homeostasis gearing — the DIRECT war-cost penalty subtracted from raw
+// strength. The problem this fixes: war_drain dropped economic_capacity 18pts but
 // settlementStrength moved <1% per front, because economic_capacity has NO wired path
 // into the `economy` PRESSURE the strength term reads (pressureModel's economy is
 // trade/labor/infra/food only). So the homeostasis loop never closed — a besieging
@@ -597,15 +597,15 @@ function warCostPenalty(/** @type {any} */ item) {
   return drain * WAR_DRAIN_STRENGTH_WEIGHT + exhaustion * WAR_EXHAUSTION_STRENGTH_WEIGHT;
 }
 
-// Exported for the war layer (Feature A): the SAME confidence input the
+// Exported for the war layer: the SAME confidence input the
 // subjugation/rival contests read, reused verbatim so a deploy-confidence gate
 // and the relationship gate can never diverge. 0..1.
 export function settlementStrength(/** @type {any} */ item, /** @type {any} */ pressure = {}) {
   const pop = populationFor(item);
   const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
-  // economy (0.12) is the war-layer homeostasis lever (OQ7=A, Phase 0). conflict
+  // economy (0.12) is the war-layer homeostasis lever. conflict
   // stays 0.18 so war's direct effect isn't diluted; the weight came from tier/pop/
-  // trade/legitimacy. Weights sum to 1.0. The war-cost penalty (Z2a) is then
+  // trade/legitimacy. Weights sum to 1.0. The war-cost penalty is then
   // subtracted OUTSIDE the weighted blend — it is a direct, gearing-raising erosion
   // (not a pressure diluted by a small weight), so sustained war meaningfully lowers
   // the aggressor's confidence and the homeostasis loop CLOSES. Byte-identical when
@@ -719,7 +719,7 @@ function protectorBackingScore(ctx, targetId, attackerId) {
       protectorId = String(s.from) === String(targetId) ? s.to : s.from;
       score = 0.08 + relState.dependency * 0.16 + relState.trust * 0.12;
     } else if (relState.relationshipType === "patron" || relState.relationshipType === "vassal") {
-      // H16: the protecting senior party resolves state-first, not by raw
+      // The protecting senior party resolves state-first, not by raw
       // edge orientation (a subjugation may have crowned the authored 'to').
       const roles = relationshipRoles(edge, relState);
       if (roles.juniorId === String(targetId)) {
@@ -756,7 +756,7 @@ function canSubjugateDirection(ctx, { overlordId, vassalId, overlordPressure, va
   return { overlordId: String(overlordId), vassalId: String(vassalId), strength: sourceStrength };
 }
 
-// H16: subjugation is decided by STATE — the stronger side qualifies no matter
+// Subjugation is decided by STATE — the stronger side qualifies no matter
 // which side the save authored at 'from'. Both directions run the original
 // math; if both qualify the stronger side leads, with the settlement id as a
 // stable, orientation-independent tiebreak.
@@ -806,7 +806,7 @@ function patronageEligibilityDirection(ctx, { patronId, clientId, patronPressure
   };
 }
 
-// H16: patronage forms from the STRONGER side regardless of edge orientation;
+// Patronage forms from the STRONGER side regardless of edge orientation;
 // same math both ways, stronger patron wins a double-qualify, id tiebreak.
 function patronageEligibility(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
@@ -1090,7 +1090,7 @@ function tradePartnerRules(ctx) {
 function alliedRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure } = ctx;
   const settlements = getRelationshipSettlements(edge);
-  // H16: the alliance burden lands on the side actually carrying the support
+  // The alliance burden lands on the side actually carrying the support
   // cost. Each direction is scored with the original formula (the partner's
   // food/conflict/disease strain plus the supporter's own conflict exposure)
   // and the heavier direction wins; ties break on settlement id, so the
@@ -1137,7 +1137,7 @@ function alliedRules(ctx) {
     );
   }
 
-  // H16 triage: the obligation gate reads BOTH allies — whichever side is
+  // Triage: the obligation gate reads BOTH allies — whichever side is
   // under conflict/hostility pressure pulls the OTHER into the obligation,
   // never the authored 'to'. When both qualify, the harder-pressed side is
   // the one mirrored; an exact tie breaks on the sorted pair.
@@ -1166,7 +1166,7 @@ function alliedRules(ctx) {
     );
   }
 
-  // H16 triage: EITHER ally may be the one fighting a cold war — the other
+  // Triage: EITHER ally may be the one fighting a cold war — the other
   // side is the supporter, whichever way the save authored the edge. When
   // both allies have cold-war fronts the higher-resentment front is supported
   // first; an exact tie breaks on the sorted pair.
@@ -1257,7 +1257,7 @@ function alliedRules(ctx) {
 
 function patronRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure } = ctx;
-  // H16: a pulse-driven patronage may have crowned the edge's authored 'to'
+  // A pulse-driven patronage may have crowned the edge's authored 'to'
   // side as the patron — roles and the per-side pressures follow the STATE
   // stamp, like vassalRules. A DM-authored patron edge has no stamp and
   // keeps strict edge direction (from = patron).
@@ -1443,7 +1443,7 @@ function clientRules(ctx) {
 
 function vassalRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, tick } = ctx;
-  // H16: a subjugation may have crowned the edge's authored 'to' side as the
+  // A subjugation may have crowned the edge's authored 'to' side as the
   // overlord — roles and the per-side pressures follow the STATE stamp. A
   // DM-authored vassal edge has no stamp and keeps strict edge direction.
   const { seniorId: overlordId, juniorId: vassalId, reversed } = relationshipRoles(edge, relState);
@@ -1674,7 +1674,7 @@ function rivalRules(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const sourcePower = settlementStrength(itemFor(ctx.snapshot, settlements.from), sourcePressure);
   const targetPower = settlementStrength(itemFor(ctx.snapshot, settlements.to), targetPressure);
-  // H16 triage: the CONFIDENT side of a power play is whichever rival is
+  // Triage: the CONFIDENT side of a power play is whichever rival is
   // stronger by state, never the authored 'from'. The gate requires a real
   // gap, so there is no tie case to fork.
   const confidenceGap = Math.abs(sourcePower - targetPower);
@@ -1822,7 +1822,7 @@ function coldWarRules(ctx) {
   }
 
   if ((exposure > 0.35 || tradeStress > 0.38) && relState.tradeBalance < 0.42) {
-    // H16 triage: the sanction CONDITION lands on the economically weaker
+    // Triage: the sanction CONDITION lands on the economically weaker
     // side by STATE (higher economy/trade strain = more dependent on the
     // exposed supply line); the other side imposes. An exact tie breaks on
     // the sorted pair — never on which side the save authored at 'from'.
@@ -1916,7 +1916,7 @@ function hostileRules(ctx) {
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
   const candidates = [];
 
-  // H16: either side of a war can raid. The aggressor is the stronger side by
+  // Either side of a war can raid. The aggressor is the stronger side by
   // STATE; a genuine strength tie forks on pair identity + tick, so a
   // symmetric war raids in both directions across ticks and never depends on
   // which side the save authored at 'from'.
@@ -1928,7 +1928,7 @@ function hostileRules(ctx) {
     aggressorId = hash01(`raid.${pair[0]}.${pair[1]}.${ctx.tick}`) < 0.5 ? pair[0] : pair[1];
   }
   const victimId = aggressorId === String(settlements.from) ? String(settlements.to) : String(settlements.from);
-  // H16 triage: attrition is read on the AGGRESSOR — the same state-decided
+  // Triage: attrition is read on the AGGRESSOR — the same state-decided
   // side the raid uses — never on the authored 'from'. High economy/defense/
   // legitimacy pressure on the attacking side saps support for the war.
   const aggressorPressure = aggressorId === String(settlements.from) ? sourcePressure : targetPressure;
@@ -1958,7 +1958,7 @@ function hostileRules(ctx) {
     }),
   );
 
-  // H16: the STRONGER side qualifies to subjugate regardless of orientation.
+  // The STRONGER side qualifies to subjugate regardless of orientation.
   const subjugation = powerGap > 0.48 && conflictStress > 0.55 ? subjugationDirection(ctx) : null;
   if (subjugation) {
     const patchValues = {
@@ -1967,7 +1967,7 @@ function hostileRules(ctx) {
       leverage: clamp01(relState.leverage + 0.08),
       trust: clamp01(relState.trust - 0.02),
     };
-    // H15: the vassal cascade must be visible BEFORE the DM accepts — preview
+    // The vassal cascade must be visible BEFORE the DM accepts — preview
     // the third-party realignments against the projected post-apply vassal
     // state and put them in the proposal summary.
     const cascadePreview = previewRelationshipHierarchyCascade({
@@ -2012,7 +2012,7 @@ function hostileRules(ctx) {
     );
   }
 
-  // H16: the dominant side extracts — economic pressure is read per side
+  // The dominant side extracts — economic pressure is read per side
   // (higher pressure = the weaker economy), not by authoring orientation.
   if (relState.leverage > 0.45 && sourcePressure.economy !== targetPressure.economy) {
     const fromDominant = sourcePressure.economy < targetPressure.economy;
@@ -2178,7 +2178,7 @@ function criminalNetworkRules(ctx) {
   return candidates;
 }
 
-// ── Phase B4 §6 — trade dependency → coercion + war-prevention / embargo ──────
+// ── Trade dependency → coercion + war-prevention / embargo ───────────────────
 // A critical-supplier dependency is LEVERAGE. The supplier can COERCE the
 // dependent (a coercion candidate), and the dependent AVOIDS war with its
 // critical supplier (extra hostility dampening is already applied via the
@@ -2325,7 +2325,7 @@ const RULE_EVALUATORS = {
   criminal_network: criminalNetworkRules,
 };
 
-// Exported for the war layer (Feature A): builds the {conflict,trade,legitimacy,
+// Exported for the war layer: builds the {conflict,trade,legitimacy,
 // economy,...} summary settlementStrength reads, so the deploy gate consumes the
 // identical pressure vector the relationship rules do.
 export function buildPressureSummary(/** @type {any} */ pressureIdx, /** @type {any} */ saveId) {
@@ -2372,16 +2372,16 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any}
       // shared by every candidate helper (see buildRelationshipIndex).
       relIndex,
       tick,
-      // Feature C: per-settlement aggressiveness multipliers (centered on 1.0).
+      // Per-settlement aggressiveness multipliers (centered on 1.0).
       // Empty/absent ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy.
       dispositionFactor: context.dispositionFactor || EMPTY_DISPOSITION,
-      // Phase B4: per-EDGE trade-salience multipliers (centered on 1.0). A valuable
+      // Per-EDGE trade-salience multipliers (centered on 1.0). A valuable
       // trade tie DAMPENS hostile/escalation candidates on that edge. Empty/absent
       // ⇒ 1.0 in every branch ⇒ byte-identical legacy (off-path map is empty).
       tradeSalienceFactor: context.tradeSalienceFactor || EMPTY_TRADE_SALIENCE,
-      // Phase B4: per-EDGE salience rollup ({ salience, critical, dependentId,
+      // Per-EDGE salience rollup ({ salience, critical, dependentId,
       // supplierId }) for the coercion/embargo cross-cutting rules. Absent/empty ⇒
-      // the §6 leverage rules emit nothing ⇒ byte-identical legacy.
+      // the leverage rules emit nothing ⇒ byte-identical legacy.
       tradeSalienceInfo: /** @type {any} */ (context.tradeSalienceInfo || EMPTY_TRADE_SALIENCE)[key] || null,
     };
     return [
@@ -2419,7 +2419,7 @@ export function applyRelationshipPatch(worldState, outcome, now) {
     patch.relationshipType = outcome.proposalPayload.toType;
     patch.proposedRelationshipType = null;
     patch.lastTransitionTick = worldState.tick;
-    // H16: seniority stamps are only meaningful for the label that minted
+    // Seniority stamps are only meaningful for the label that minted
     // them — a transition away from vassal/patron clears them so a later
     // re-subjugation can never inherit a stale senior side. A patch that
     // explicitly re-stamps (the subjugation itself) wins.

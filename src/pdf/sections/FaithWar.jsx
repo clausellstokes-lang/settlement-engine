@@ -1,6 +1,5 @@
 /**
- * FaithWar — chapter 03D, the PDF's LIVE "Faith & War" read surface
- * (UX overhaul Phase 7, plan §4.4).
+ * FaithWar — chapter 03D, the PDF's LIVE "Faith & War" read surface.
  *
  * The screen↔PDF parity fix: the dossier's WarFaithSection has long rendered a
  * live war/faith block the PDF could not, because the PDF never received the

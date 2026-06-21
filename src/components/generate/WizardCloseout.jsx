@@ -1,5 +1,5 @@
 /**
- * WizardCloseout.jsx — P145 / W-2 wizard close-out summary.
+ * WizardCloseout.jsx — wizard close-out summary.
  *
  * The advanced wizard's final ("Ready to Generate") state used to be a
  * bare button: the user walked through four steps of configuration and

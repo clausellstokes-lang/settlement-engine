@@ -205,7 +205,7 @@ export const toneBg = {
   muted: '#f5f0e8',
 };
 
-// ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
+// ── Exact-value migration swatchbook (colour burn-down) ──────────────────────
 // A handful of raw inline hex colours in the PDF sections had no palette token.
 // Routed through this map at their exact value (zero rendered change) so the
 // no-raw-color rule can go to error. value === the hex it replaces. Consolidate

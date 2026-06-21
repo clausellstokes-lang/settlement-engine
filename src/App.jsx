@@ -55,16 +55,15 @@ import OnboardingCoach from './components/OnboardingCoach.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
-// P103 / X-2 — Active pricing-moment card (inline, not modal). Renders
-// when a moment fires; cooldown enforced by the moments library so it
-// can't hammer the user.
+// Active pricing-moment card — inline, not a modal. Renders when a moment
+// fires; cooldown enforced by the moments library so it can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
 // Top-nav destinations. Gallery sits between Compendium and About. (Workshop /
 // "Custom Generate" was removed; the /workshop route redirects to Create.)
 // Pricing stays a header hero link (HERO_LINKS), not a primary destination.
 //
-// UX Phase 4 (the Realm IA move):
+// The Realm IA move:
 //   - `settlements` keeps its view id + /settlements path for back-compat, but the
 //     LABEL is now "Library".
 //   - `realm` is the new destination — the simulation's IA home. It hosts the
@@ -201,7 +200,7 @@ export default function App() {
   // About. The route entries stay (so the URLs still resolve and old links /
   // SEO keep working), but we bounce them to the new surface.
   //
-  // UX Phase 4 — the World Map moved INTO the Realm hub. `/map` (and any
+  // The World Map moved INTO the Realm hub. `/map` (and any
   // `?view=map`, which resolveLocation already aliases to `realm`) redirects to
   // `/realm` so legacy links + bookmarks never 404. The Realm body IS the World
   // Map workspace, so the destination is identical content under the new URL.
@@ -285,7 +284,7 @@ export default function App() {
   // Gate premium-only views
   const handleNavClick = (id) => {
     setView(id);
-    // UX Phase 4 — the Realm nav. Free wanderers clicking Realm see a
+    // The Realm nav. Free wanderers clicking Realm see a
     // Cartographer-upgrade pitch (cooldown 24h; premium auto-skipped). Anon are
     // NOT skipped here at click time — the Realm Dashboard fires the richer
     // `map_realm_teaser` moment on landing for both anon and free, so we only
@@ -307,7 +306,7 @@ export default function App() {
     setView('generate');
   };
 
-  // Filter nav items based on visibility. UX Phase 4 — the Realm is REACHABLE
+  // Filter nav items based on visibility. The Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
   const visibleNav = NAV;
@@ -351,8 +350,8 @@ export default function App() {
           Uses the same ink → ink-deep gradient as the bottom nav so the
           top + bottom chrome read as one unified frame.
         */}
-        {/* P123 / A-2 — When `mobileSingleChrome` is on, drop the mobile
-            top header entirely. The bottom nav becomes the only chrome;
+        {/* When `mobileSingleChrome` is on, drop the mobile top header
+            entirely. The bottom nav becomes the only chrome;
             the auth chip lives there as a 6th slot (added below in the
             bottom-nav block). Frees ~52px of vertical real estate on
             every mobile screen — meaningful on a 640px viewport. */}
@@ -530,7 +529,7 @@ export default function App() {
                 />
               )}
 
-              {/* UX Phase 4 — persistent tier chip. Anon → "Sign in" (the
+              {/* Persistent tier chip. Anon → "Sign in" (the
                   AccountMenu below). Free → an "Upgrade" chip routing to the
                   canonical premium-value surface. Premium → the account chip
                   (no upgrade chip). */}
@@ -570,7 +569,7 @@ export default function App() {
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
-            {/* UX Phase 4 — the Realm hub. WorldMap is the Realm body (Map + the
+            {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
                 still renders it for the one frame before the redirect effect
                 upgrades the URL to /realm, so there's no blank flash. */}
@@ -695,9 +694,9 @@ export default function App() {
                 </button>
               );
             })}
-            {/* P123 / A-2 — Auth chip as 6th bottom-nav slot. Replaces
-                the dropped mobile top header. Icon-only, gold-outline
-                for anon, green-fill for signed-in. */}
+            {/* Auth chip as 6th bottom-nav slot. Replaces the dropped
+                mobile top header. Icon-only, gold-outline for anon,
+                green-fill for signed-in. */}
             {_readFlag('mobileSingleChrome') && (
               <button
                 type="button"
@@ -788,7 +787,7 @@ export default function App() {
       )}
 
       {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
-          P118 NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
+          NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
           uses it to surface "Saved as {name}" after a signup-save flow.
           The onboardingDiet flag should NOT suppress those. Only the
           OnboardingCoach overlay is gated (above). If onboarding tips
@@ -836,7 +835,7 @@ export default function App() {
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
 
-      {/* P103 — Active pricing moment card. Always mounted; renders null
+      {/* Active pricing moment card. Always mounted; renders null
           when no moment is active. Bottom-right fixed-position so it
           doesn't fight the dossier or wizard for vertical space. */}
       <Suspense fallback={null}>

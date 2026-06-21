@@ -19,7 +19,7 @@ import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 
-// ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
+// ── Trace helpers ────────────────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
 // PipelineRail / AI overlay / future faction-profile readers can answer
 // "why does this institution exist on this settlement?"
@@ -48,7 +48,7 @@ function chanceCause(baseChance, resourceMult) {
 }
 
 /** Downstream effect inferred from institution tags. Light heuristic;
- *  the real version of this lives in Tier 2.4's unified causal state. */
+ *  the real version of this lives in the unified causal state. */
 function tagsToDownstream(tags) {
   if (!Array.isArray(tags) || tags.length === 0) return [];
   const effects = [];
@@ -192,7 +192,7 @@ export function collapseUpgradeChains(institutions) {
 
 registerStep('assembleInstitutions', {
   deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
-  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: ['institutions', 'catalogForTier'],
   phase: 'institutions',
 }, (ctx, rng) => {
@@ -459,7 +459,7 @@ registerStep('assembleInstitutions', {
     }
   }
 
-  // Wave 8 — stamp catalog identity on every catalog-derived institution.
+  // Stamp catalog identity on every catalog-derived institution.
   // Pure name→id lookup: consumes no rng, changes no other field, so
   // same-seed output is byte-identical except the new catalogId fields
   // (pinned by tests/joins/institutionIdentity.test.js). Custom/DM
@@ -471,7 +471,7 @@ registerStep('assembleInstitutions', {
     if (catalogId) inst.catalogId = catalogId;
   }
 
-  // Structural validation moved to structuralValidationPass (Wave 4b): it
+  // Structural validation moved to structuralValidationPass: it
   // must run AFTER the last roster mutation (subsumption / cascade /
   // isolation / factionCorrelation) or the coherence receipt describes a
   // roster that no longer exists.

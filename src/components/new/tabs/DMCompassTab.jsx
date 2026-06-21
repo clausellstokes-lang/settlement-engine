@@ -1,7 +1,7 @@
 /**
  * DMCompassTab — Consolidated DM-facing meta-guidance from the narrative layer.
  *
- * Four fields produced by the AI narrative pipeline (AI-3a) live here:
+ * Four fields produced by the AI narrative pipeline live here:
  *   • dmCompass       — 3 hooks, 2 red flags, 1 twist. Ready-to-run guidance.
  *   • identityMarkers — 4-6 concrete sensory/physical details.
  *   • frictionPoints  — 3-5 small-scale interpersonal grievances with named parties.

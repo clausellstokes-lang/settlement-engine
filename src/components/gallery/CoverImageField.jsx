@@ -1,5 +1,5 @@
 /**
- * CoverImageField.jsx — gallery cover picker (§3).
+ * CoverImageField.jsx — gallery cover picker.
  *
  * Replaces the old "paste an image URL" input with a proper file flow:
  *   choose a file (button) OR drag-and-drop → landscape pan/zoom crop

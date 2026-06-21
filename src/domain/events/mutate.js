@@ -115,7 +115,7 @@ export function mutateSettlement({ settlement, event, now = null }) {
       next = addFaction(next, stampedEvent);
       break;
 
-    // Wave 1 extended events. Each is implemented by reusing primitives:
+    // Extended events. Each is implemented by reusing primitives:
     // KILL_LEADER is a KILL_NPC with importance forced to 'pillar';
     // EXPOSE_CORRUPTION applies a legitimacy impairment to the target
     // (faction or institution) and propagates; the population-shifting
@@ -275,7 +275,7 @@ function removeInstitution(s, event) {
       },
     },
   });
-  // §corruption Phase 4 — closing a criminal institution frees the NPCs tied to it.
+  // Closing a criminal institution frees the NPCs tied to it.
   next = severCorruptionTiesTo(next, inst.name);
   // Losing a food anchor entirely is the canonical food_anchor_lost crisis.
   next = withFoodAnchorLostIfAnchor(next, inst, event, 0.7);
@@ -603,7 +603,7 @@ function startedRiot(s, event) {
 // reciprocal neighbour link is reconciled by the regional graph that already
 // ingests neighbourNetwork. No-op when the named neighbour isn't linked.
 const ALLIANCE_REL = 'allied';
-// H12: the canonical label is the SINGULAR 'trade_partner' — the plural this
+// The canonical label is the SINGULAR 'trade_partner' — the plural this
 // event historically wrote is recognized by no other subsystem (channel
 // bundles minted 0 channels from it). Composer payloads still carry the
 // plural, so normalize at the write chokepoint. (Kept tiny + local: the
@@ -771,7 +771,7 @@ function assignNpcMutation(s, event) {
   return next;
 }
 
-// ── Wave 1 extended event handlers ─────────────────────────────────────────
+// ── Extended event handlers ─────────────────────────────────────────────────
 
 /**
  * KILL_LEADER — kill the named NPC at pillar importance regardless of
@@ -793,7 +793,7 @@ function killLeaderMutation(s, event) {
  * captain hits both the watch institution and the controlling faction.
  */
 function exposeCorruption(s, event) {
-  // §corruption Phase 4 — prefer a corrupt NPC target: clean + scar them and
+  // Prefer a corrupt NPC target: clean + scar them and
   // impair BOTH the tied criminal institution and their home institution/faction
   // (the same path organic exposure uses). Falls back to faction/institution.
   const npc = findNpc(s, event.targetId);
@@ -841,7 +841,7 @@ function exposeCorruption(s, event) {
   return scandal(next);
 }
 
-// §corruption Phase 4 + 1b-ii-c — DM exposes a specific corrupt NPC: impair the
+// DM exposes a specific corrupt NPC: impair the
 // tied criminal + home institution/faction (shared organic path), then remove the
 // disgraced NPC and install a fresh successor in their seat.
 function exposeCorruptNpc(s, npc, event) {
@@ -865,7 +865,7 @@ function exposeCorruptNpc(s, npc, event) {
   });
 }
 
-// §corruption Phase 4 — removing/destroying a criminal institution severs the
+// Removing/destroying a criminal institution severs the
 // corruption ties of NPCs bound to it: they separate from criminal activity.
 // No-op for a non-criminal institution (no NPC names it as a tie).
 function severCorruptionTiesTo(s, institutionName) {
@@ -882,7 +882,7 @@ function severCorruptionTiesTo(s, institutionName) {
   return changed ? { ...s, npcs: nextNpcs } : s;
 }
 
-// §corruption — IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
+// IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
 // organization in the settlement. We write the EXACT shape the world-pulse corruption loop
 // seeds from — npc.corrupt + corruptionVector + corruptTies.criminalInstitution (npcAgency.js
 // reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
@@ -1090,7 +1090,7 @@ function raidOrMonsterAttack(s, event) {
 
 /**
  * APPLY_STRESSOR — an authored crisis ONSET. A thin wrapper over the crisis
- * lifecycle (domain/crisisLifecycle.js, Wave 8 #4): crisisOnset performs the
+ * lifecycle (domain/crisisLifecycle.js): crisisOnset performs the
  * three settlement writes (container upsert, config.stressorEdits record,
  * condition promotion) and ALSO composes the roaming-twin directive — this
  * mutation path keeps only the settlement half (mutateSettlement has no
@@ -1141,8 +1141,8 @@ function changeRulingPower(s, event) {
 
 /**
  * RESOLVE_STRESSOR — the inverse of APPLY_STRESSOR: an authored crisis ENDS.
- * A thin wrapper over the crisis lifecycle (domain/crisisLifecycle.js,
- * Wave 8 #4): crisisResolve removes the matching stress entry, winds down
+ * A thin wrapper over the crisis lifecycle (domain/crisisLifecycle.js):
+ * crisisResolve removes the matching stress entry, winds down
  * the conditions the crisis promoted ('easing' + near-term expiry, event
  * provenance on the causes), and records the resolution in
  * config.stressorEdits — see its doc for the full semantics, all of which
@@ -1440,7 +1440,7 @@ function swapNpcStanding(s, event) {
   return next;
 }
 
-// ── Religion (Feature D / R1) ──────────────────────────────────────────────
+// ── Religion ────────────────────────────────────────────────────────────────
 
 /**
  * SET_PRIMARY_DEITY — assign (or clear) a settlement's primary deity. This is
@@ -1478,7 +1478,7 @@ function setPrimaryDeity(s, event) {
     alignmentAxis: snapshot.alignmentAxis || 'neutral',
     temperamentAxis: snapshot.temperamentAxis || 'neutral',
     rankAxis: snapshot.rankAxis || 'minor',
-    // lawAxis (B5): a legacy 3-axis deity carries none ⇒ default 'neutral' (no
+    // lawAxis: a legacy 3-axis deity carries none ⇒ default 'neutral' (no
     // law_order term, byte-identical to a deity-free settlement on that axis).
     lawAxis: snapshot.lawAxis || 'neutral',
     ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),

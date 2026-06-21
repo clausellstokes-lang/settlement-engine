@@ -1,8 +1,8 @@
 /**
- * domain/compendium/searchIndex.js — P139 / CP-4 global type-ahead search.
+ * domain/compendium/searchIndex.js — global type-ahead search.
  *
  * The Compendium's per-tab search only ever filters the tab you're
- * already on. The critique (CP-4) flagged that a reader who knows the
+ * already on. A reader who knows the
  * word "theocracy" but not which tab it lives under has no way in — the
  * search is local, the knowledge is global.
  *

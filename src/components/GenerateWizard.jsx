@@ -35,7 +35,7 @@ import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
-// P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
+// Pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
 
@@ -78,7 +78,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
 
-  // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
+  // Pipeline reveal state. When `pipelineRevealActive` is
   // true, the dossier is hidden behind the reveal overlay. Once the
   // overlay's playback completes it calls dismissPipelineReveal and the
   // dossier appears.
@@ -158,7 +158,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   }, []);
 
   const handleGenerate = useCallback(() => {
-    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
+    // Anonymous daily cap. Regeneration counts against the same
     // 3/day allowance as the first generation (enforced in the store), so
     // when an anon is already at cap, route to the sign-in/unlock flow
     // rather than dead-clicking — generateSettlement would no-op anyway.
@@ -412,7 +412,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </div>
       )}
 
-      {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
+      {/* Pipeline reveal overlay. Renders only when the flag is on,
           a settlement was just generated, and the slice flagged the reveal
           as active. Dismisses itself by calling dismissPipelineReveal()
           when its playback completes. */}
@@ -436,7 +436,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
-            {/* P139 — cap the dossier body to the shared page width so it
+            {/* Cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
                 toolbar above stays full-width. */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
@@ -454,7 +454,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             />
           </div>
 
-          {/* P134 / W-4 — post-generate "what's next" guide. Closes out the
+          {/* Post-generate "what's next" guide. Closes out the
               post-generate flow (mirrors WizardCloseout's pre-generate
               close-out) with a state-aware next-step checklist. Self-gates
               on the flag; guidance only, so it never competes with the

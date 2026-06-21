@@ -1,5 +1,5 @@
 /**
- * GalleryMaps.jsx — browse + import shared MAPS (Project 2, Phase 1).
+ * GalleryMaps.jsx — browse + import shared MAPS.
  *
  * Self-contained (does not use the settlement-shaped useGalleryPageState):
  * fetches public maps via gallery.fetchGalleryMaps, renders anonymized tiles

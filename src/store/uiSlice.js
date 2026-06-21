@@ -7,7 +7,7 @@
  * dumped back into whatever overlay they happened to leave open.
  *
  * Keys in use:
- *   tableViewOpen — P142 / D-6. When true, the phone-optimized Table View
+ *   tableViewOpen — when true, the phone-optimized Table View
  *                   overlay is shown over the dossier. Set true by the
  *                   "Open in Table View" button in SummaryTabV2 (routed via
  *                   OutputContainer) and back to false by the close
