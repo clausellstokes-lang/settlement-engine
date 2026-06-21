@@ -27,6 +27,16 @@ const AUDIT_DOC = join(ROOT, 'docs', 'refund-ledger-audit.md');
 
 const migExists = existsSync(MIG_009);
 
+// Hard-fail (not a silent vacuous skip) when the target migration has moved/been
+// renamed: the `describe.runIf(migExists)` suite below would otherwise go GREEN
+// with 0 tests run — exactly the green-on-nothing failure this contract exists to
+// prevent. Mirrors the guard in creditLedger.pglite.test.js / migrationSequence*.
+describe('refund-ledger contract target exists (guards against silent vacuous skip)', () => {
+  it('migration 009 is present (a moved/renamed migration must fail loudly)', () => {
+    expect(migExists, `missing ${MIG_009} — refund-ledger contract coverage dropped`).toBe(true);
+  });
+});
+
 /** Compute the NET-CURRENT set of roles holding EXECUTE on a public function, by
  *  replaying every migration's grant/revoke in file order (mirrors the helper in
  *  creditLedger.pglite.test.js). This is what catches a LATER migration silently
@@ -48,7 +58,12 @@ function netExecuteGrants(fnName) {
 }
 
 describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
-  const sql = readFileSync(MIG_009, 'utf-8');
+  // Guard the read: vitest EXECUTES a describe.runIf(false) callback at collection
+  // (to register the skipped tests), so an unguarded readFileSync here would throw
+  // a raw ENOENT at collection time when 009 is moved — pre-empting the dedicated
+  // "migration 009 is present" guard `it` above, which is the assertion meant to
+  // report the loss loudly. Reading only when migExists keeps that guard the signal.
+  const sql = migExists ? readFileSync(MIG_009, 'utf-8') : '';
 
   it('spend_credits(feature text) RPC exists with the right signature', () => {
     // Allow either order of clauses (language plpgsql / security definer

@@ -269,7 +269,7 @@ export const createAuthSlice = (set, get) => ({
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
-          tier: result.tier, role: result.role || 'user',
+          tier: resolveTier(result.tier, result.role), role: result.role || 'user',
           displayName: result.displayName || null,
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,

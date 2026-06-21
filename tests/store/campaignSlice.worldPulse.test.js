@@ -103,11 +103,15 @@ describe('campaignSlice world pulse', () => {
       }];
     });
 
-    const preview = store.getState().previewCampaignWorldPulse('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
+    // previewCampaignWorldPulse is now ASYNC — it lazy-loads the worldPulse
+    // simulation (kept out of the first-paint entry chunk) before computing the
+    // preview, so callers await it (the production caller already wraps it in
+    // `await Promise.resolve(...)`). Result contract is otherwise unchanged.
+    const preview = await store.getState().previewCampaignWorldPulse('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
     expect(preview.tick).toBe(1);
     expect(store.getState().campaigns[0].worldState.tick).toBe(0);
 
-    const draftPreview = store.getState().previewCampaignWorldPulse('camp-1', 'one_month', {
+    const draftPreview = await store.getState().previewCampaignWorldPulse('camp-1', 'one_month', {
       now: '2026-01-01T00:00:00.000Z',
       simulationRules: { propagationMode: 'local', intensity: 'conservative', migrationFlowsEnabled: false },
     });
@@ -148,7 +152,8 @@ describe('campaignSlice world pulse', () => {
     store.getState().renameCampaign('retained-campaign', 'Changed');
     store.getState().clearCampaignWizardNews('retained-campaign');
 
-    expect(store.getState().previewCampaignWorldPulse('retained-campaign')).toBeNull();
+    // Async now (lazy worldPulse load); the not-found contract still resolves null.
+    expect(await store.getState().previewCampaignWorldPulse('retained-campaign')).toBeNull();
     expect(store.getState().campaigns[0]).toMatchObject({
       name: 'Retained Realm',
       collapsed: false,

@@ -1,5 +1,5 @@
 {
-  "total": 4497,
+  "total": 4489,
   "files": {
     "src/domain/activeConditions.js": 72,
     "src/domain/aiGrounding.js": 39,
@@ -8,7 +8,7 @@
     "src/domain/canonicalAccessors.js": 13,
     "src/domain/canonStatus.js": 14,
     "src/domain/capacityModel.js": 190,
-    "src/domain/causalState.js": 146,
+    "src/domain/causalState.js": 138,
     "src/domain/causalViews.js": 28,
     "src/domain/coherence/checkDraftEdit.js": 9,
     "src/domain/compendium/searchIndex.js": 12,

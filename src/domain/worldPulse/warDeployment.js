@@ -33,7 +33,7 @@ import {
   ensureRelationshipState,
 } from './relationshipEvolution.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
-import { mintDirectedChannel } from '../region/graph.js';
+import { mintDirectedChannel, hasWarLayerEvidence } from '../region/graph.js';
 import { logistic, clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
@@ -115,8 +115,51 @@ const AGE_DRAIN_CAP = 0.35;
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
- * Active CONFIRMED war_front channels FROM a settlement, read from a graph snapshot.
- * Codepoint-sorted by `to` for deterministic iteration.
+ * True if a war_front's provenance is a RELATIONSHIP-LABEL bundle (a 'relationship_label'
+ * evidence source, minted by graph.js relationshipChannelBundle §hostile) and it carries
+ * NO war-layer ownership tag. channelIdFor keys only (type, from, to), so a hostile
+ * relationship and a war-layer siege collide on the SAME war_front id; war-layer evidence
+ * is the STICKY ownership tag (addRegionalChannels carries it forward across label
+ * collisions, syncRelationshipChannelBundle de-aliases on it). A front that is
+ * relationship-tagged WITHOUT a war-layer tag is therefore a pure hostility front, not a
+ * mobilized siege. (A war-layer front that has ALSO accreted a relationship_label row
+ * still reads as war-layer-owned via hasWarLayerEvidence, so it is NOT a phantom.)
+ * @param {any} channel
+ * @returns {boolean}
+ */
+function isRelationshipMintedFront(channel) {
+  const evidence = channel?.evidence;
+  return Array.isArray(evidence)
+    && evidence.some(item => item?.source === 'relationship_label')
+    && !hasWarLayerEvidence(evidence);
+}
+
+/**
+ * The READ-SIDE SIEGE GATE: a CONFIRMED war_front is a live siege UNLESS its provenance
+ * is a pure hostile-RELATIONSHIP bundle (isRelationshipMintedFront). channelIdFor keys
+ * only (type, from, to), so a hostile relationship (relationshipChannelBundle §hostile)
+ * mints the SAME confirmed war_front shape as a mobilized siege — but it represents
+ * mutual hostility, NOT an army at the walls. Reading it as a siege would emit phantom
+ * war_pressure (harassment) / count toward war_drain with NO army, BYPASSING the
+ * mobilization + feasibility gates the war layer enforces on a real deploy. So every
+ * siege-DETECTION read filters relationship-minted fronts out; a war-layer front
+ * (hasWarLayerEvidence) and a bare/light/legacy front are still read as sieges (the
+ * latter is always backed by a deployment in the union below). (The retirement read
+ * `warFrontChannelIds` is deliberately NOT gated: a resolving war-layer siege must drop
+ * whatever channel exists at its from→to, relationship-aliased or not.)
+ * @param {any} channel
+ * @returns {boolean}
+ */
+function isLiveWarFront(channel) {
+  return channel?.type === 'war_front'
+    && channel.status === 'confirmed'
+    && !isRelationshipMintedFront(channel);
+}
+
+/**
+ * Active CONFIRMED WAR-LAYER war_front channels FROM a settlement, read from a graph
+ * snapshot. Codepoint-sorted by `to` for deterministic iteration. Hostile-relationship
+ * fronts (no war-layer provenance) are NOT counted — they are not sieges (isLiveWarFront).
  * @param {any} graph
  * @param {any} fromId
  * @returns {string[]}
@@ -124,8 +167,7 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 function warFrontsFrom(graph, fromId) {
   const out = [];
   for (const channel of graph?.channels || []) {
-    if (channel.type !== 'war_front') continue;
-    if (channel.status !== 'confirmed') continue;
+    if (!isLiveWarFront(channel)) continue;
     if (String(channel.from) !== String(fromId)) continue;
     out.push(String(channel.to));
   }
@@ -133,7 +175,9 @@ function warFrontsFrom(graph, fromId) {
 }
 
 /**
- * Active CONFIRMED war_front channels INTO a settlement (besiegers), codepoint-sorted.
+ * Active CONFIRMED WAR-LAYER war_front channels INTO a settlement (besiegers),
+ * codepoint-sorted. Hostile-relationship fronts (no war-layer provenance) are NOT read
+ * as besiegers — they are not sieges (isLiveWarFront).
  * @param {any} graph
  * @param {any} toId
  * @returns {string[]}
@@ -141,8 +185,7 @@ function warFrontsFrom(graph, fromId) {
 function warFrontsInto(graph, toId) {
   const out = [];
   for (const channel of graph?.channels || []) {
-    if (channel.type !== 'war_front') continue;
-    if (channel.status !== 'confirmed') continue;
+    if (!isLiveWarFront(channel)) continue;
     if (String(channel.to) !== String(toId)) continue;
     out.push(String(channel.from));
   }
@@ -689,7 +732,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // (the union of war_front recipients and deployment targets), codepoint-sorted. ─
   const targetSet = new Set();
   for (const channel of graph?.channels || []) {
-    if (channel.type === 'war_front' && channel.status === 'confirmed') {
+    // Only a WAR-LAYER war_front (provenance-gated) is a live siege; a hostile-
+    // relationship war_front bundle shares the shape but is not a mobilized siege.
+    if (isLiveWarFront(channel)) {
       targetSet.add(String(channel.to));
     }
   }

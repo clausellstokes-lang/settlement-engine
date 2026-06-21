@@ -1,6 +1,7 @@
-import { useState, useEffect, lazy, Suspense, Component } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
@@ -46,27 +47,13 @@ const REL_COLORS = {
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
 
-class DetailErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
-
-  componentDidCatch(error, info) {
-    console.error('[SettlementDetail] detail render failed', error, info);
-  }
-
-  render() {
-    if (this.state.error) {
-      return <div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>;
-    }
-    return this.props.children;
-  }
-}
+// The dossier-render error boundary used to be a bespoke `DetailErrorBoundary`
+// here (console.error only, no telemetry, no auto-recovery). It now delegates to
+// the shared FeatureErrorBoundary — the same seam used by OutputContainer.tab,
+// WorldMap.stage and GalleryPage.detail — which does console.error AND
+// reportError telemetry plus guarded resetKeys recovery, so a swallowed dossier
+// throw is reported, not silently hidden. The inline danger-text fallback below
+// preserves the original UX verbatim.
 
 // NOTE: a block of local duplicate logic (`_migrateConfig`,
 // `_buildInterSettlementNPCs` + its `NPC_PAIR_CATS`/`CONTACT_DESC` tables, and
@@ -525,7 +512,12 @@ export default function SettlementDetail({
       )}
 
       {detail.settlement&&<div style={{marginBottom:12}}>
-        <DetailErrorBoundary>
+        <FeatureErrorBoundary
+          label="SettlementDetail.output"
+          kind="react.render.dossier"
+          resetKeys={[saveId]}
+          fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
+        >
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
             {/* P139 — cap the dossier body to the shared page width (the
                 detail toolbar above stays full-width). The settlement name is
@@ -542,7 +534,7 @@ export default function SettlementDetail({
               />
             </div>
           </Suspense>
-        </DetailErrorBoundary>
+        </FeatureErrorBoundary>
       </div>}
 
       <ConfirmDialog

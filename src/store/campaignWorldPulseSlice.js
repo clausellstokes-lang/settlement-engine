@@ -14,24 +14,64 @@
  * through get(), so nothing about call semantics changes. The slice owns the
  * session-scoped `pulseUndoStack` state (NOT persisted; a reload clears it).
  *
- * Imports only leaf helpers (shared persistence, pulse helpers, the
- * region/worldPulse domains, and the fingerprint/analytics libs) and never
- * campaignSlice, so there is no cycle.
+ * Imports only leaf helpers (shared persistence, pulse helpers, the region
+ * domain + light worldPulse schema leaves, and the fingerprint/analytics libs)
+ * and never campaignSlice, so there is no cycle. The HEAVY worldPulse simulation
+ * is NOT a static import — it loads lazily (see below).
+ *
+ * ── Lazy worldPulse simulation ──────────────────────────────────────────────
+ * The full worldPulse domain barrel (../domain/worldPulse/index.js) is ~22.7k
+ * LOC of simulation. Statically importing it here pulled the entire simulation
+ * into store/index.js's static graph, so it landed in the eager entry chunk at
+ * first paint even though a user only touches it when they advance a campaign's
+ * world clock. Mirroring settlementSlice.loadEngine(), the HEAVY simulation
+ * entry points (advance / preview / apply-proposal / party-impact) now load
+ * through a module-level memoized `loadWorldPulse()` dynamic import — each action
+ * that runs the simulation does `const { ... } = await loadWorldPulse()` before
+ * its `set()` producer (Immer producers can't be async), exactly as the engine
+ * loader does. Those actions are already async and already awaited by callers
+ * (SettlementsPanel/WorldMap await advanceCampaignWorld; SimulationRulesDialog
+ * wraps preview in `await Promise.resolve(...)`), so making preview return a
+ * Promise is contract-compatible.
+ *
+ * The LIGHT, schema-shaped helpers (ensureWorldState / canonizeWorldState /
+ * updateProposalStatus / normalizeSimulationRules) stay STATIC, imported from
+ * their leaf modules (worldState.js / simulationRules.js) rather than the barrel.
+ * Those leaves only import simulationRules + ../clock + ../clone (no heavy
+ * transitive deps), so they cost ~nothing on first paint, and keeping them sync
+ * preserves the contract of `getCampaignWorldState` — which aiSlice consumes
+ * SYNCHRONOUSLY (its result is read immediately, not awaited), so it must NOT
+ * become async. Importing them from the leaves (not index.js) is also what lets
+ * the architecture-boundary ratchet assert this slice has no top-level
+ * `worldPulse/index.js` edge.
  */
+// ── Lazy worldPulse simulation loader ───────────────────────────────────────
+// Declared BEFORE the import block (mirroring settlementSlice.loadEngine()) so
+// the module's static `import` statements stay first — keeping `import/first`
+// happy — while the dynamic import() boundary lives in a function body. This is
+// the seam that keeps the ~22.7k-LOC simulation OUT of the first-paint entry
+// chunk: it loads only when an action that runs the simulation is first invoked.
+/** @type {?Promise<typeof import('../domain/worldPulse/index.js')>} */
+let _worldPulsePromise = null;
+/** Memoized dynamic import of the worldPulse simulation barrel. Resolves once
+ *  and is shared by every action that runs the simulation. */
+function loadWorldPulse() {
+  return _worldPulsePromise ??= import('../domain/worldPulse/index.js');
+}
+
 import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
+// LIGHT, sync schema helpers (leaf modules — no heavy transitive deps). Imported
+// from the leaves (not the barrel) so this slice has NO top-level edge to
+// worldPulse/index.js: the heavy simulation only enters via loadWorldPulse().
 import {
-  advanceCampaignWorld as domainAdvanceCampaignWorld,
-  applyPartyImpact as domainApplyPartyImpact,
-  applyWorldPulseProposal as domainApplyWorldPulseProposal,
   canonizeWorldState,
   ensureWorldState,
-  normalizeSimulationRules,
-  previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
-} from '../domain/worldPulse/index.js';
+} from '../domain/worldPulse/worldState.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, syncCampaignSnapshot,
   flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
@@ -73,10 +113,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
-  previewCampaignWorldPulse: (campaignId, interval = 'one_month', options = {}) => {
+  previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
+    // Lazy-load the simulation before the (pure, synchronous) preview compute.
+    // The sole caller already awaits this (SimulationRulesDialog wraps it in
+    // `await Promise.resolve(...)`), so returning a Promise is contract-safe.
+    const { previewCampaignWorldPulse: domainPreviewCampaignWorldPulse } = await loadWorldPulse();
     const previewCampaign = cloneJson(campaign);
     if (options.simulationRules) {
       previewCampaign.worldState = {
@@ -167,6 +211,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
      *  immediate path's rippleEventThroughWorld party branch). */
     let drainedPartyImpacts = [];
     const now = options.now || new Date().toISOString();
+
+    // Lazy-load the simulation BEFORE Phase 1. This is the ONLY await in the
+    // critical region, and it sits before the first set() — so the two-phase
+    // drain→compute→commit sequence below still runs with NO await between its
+    // set() calls and stays atomic w.r.t. other actions (JS is single-threaded;
+    // once the synchronous Phase 1 begins no other action can observe the
+    // drained-but-not-advanced intermediate state). Memoized, so only the first
+    // advance pays the import; subsequent advances resolve from cache.
+    const { advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
 
     // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
     // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
@@ -351,6 +404,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     let appliedDecision = /** @type {any} */ (null);
     const now = new Date().toISOString();
+    // Lazy-load the simulation before the (synchronous) Immer producer below —
+    // Immer producers can't be async, so the import is awaited up front.
+    const { applyWorldPulseProposal: domainApplyWorldPulseProposal } = await loadWorldPulse();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -386,6 +442,8 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
+    // Lazy-load the simulation before the (synchronous) Immer producer below.
+    const { applyPartyImpact: domainApplyPartyImpact } = await loadWorldPulse();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;

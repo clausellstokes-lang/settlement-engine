@@ -58,6 +58,58 @@ import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 
+// ── Per-settlement derivation memo ───────────────────────────────────────
+//
+// deriveCausalState runs all 16 derivers against the SAME settlement object,
+// and they collectively re-derive deriveAllActiveConditions ~17x and
+// deriveAllFactionProfiles ~6x per call — each derivation walking the full
+// roster from scratch. Both depend SOLELY on the settlement object (neither
+// reads any other state), so a WeakMap keyed on the settlement IDENTITY yields
+// correct cache HITS for the repeated reads within one deriveCausalState call
+// and correct MISSES when the settlement actually changes (copy-on-write ⇒ a
+// changed settlement is a NEW object reference). This mirrors worldSnapshot.js's
+// derivationCache exactly. The cached arrays are READ-ONLY at every call site
+// (for-of / find / filter / map — never mutated), so sharing the reference is
+// byte-identical to re-deriving: same input ⇒ same output, just computed once.
+// WeakMap lets entries be GC'd once the settlement object is unreferenced, so
+// the memo never leaks across calls.
+
+/** @type {WeakMap<object, any[]>} */
+const activeConditionsMemo = new WeakMap();
+/** @type {WeakMap<object, any[]>} */
+const factionProfilesMemo = new WeakMap();
+
+/**
+ * Memoized deriveAllActiveConditions, keyed on the settlement identity.
+ * Byte-identical to calling deriveAllActiveConditions(s) directly — only the
+ * repeated derivations within a single deriveCausalState call are collapsed.
+ * @param {any} s
+ * @returns {any[]}
+ */
+function cachedActiveConditions(s) {
+  if (!s || typeof s !== 'object') return deriveAllActiveConditions(s);
+  const hit = activeConditionsMemo.get(s);
+  if (hit) return hit;
+  const derived = deriveAllActiveConditions(s);
+  activeConditionsMemo.set(s, derived);
+  return derived;
+}
+
+/**
+ * Memoized deriveAllFactionProfiles, keyed on the settlement identity.
+ * Byte-identical to calling deriveAllFactionProfiles(s) directly.
+ * @param {any} s
+ * @returns {any[]}
+ */
+function cachedFactionProfiles(s) {
+  if (!s || typeof s !== 'object') return deriveAllFactionProfiles(s);
+  const hit = factionProfilesMemo.get(s);
+  if (hit) return hit;
+  const derived = deriveAllFactionProfiles(s);
+  factionProfilesMemo.set(s, derived);
+  return derived;
+}
+
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
@@ -198,7 +250,7 @@ function deriveFoodSecurity(s) {
   }
 
   // Active conditions that affect food_security
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('food_security')) continue;
     const magnitude = Math.round(cond.severity * 20);
     if (magnitude === 0) continue;
@@ -235,7 +287,7 @@ function deriveLaborCapacity(s) {
   else if (pop > 0 && pop < 200) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
 
   // Active conditions that affect labor (plague especially)
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('labor_capacity')) continue;
     const magnitude = Math.round(cond.severity * 20);
     if (magnitude === 0) continue;
@@ -260,7 +312,7 @@ function derivePublicLegitimacy(s) {
   }
 
   // Active conditions that affect public_legitimacy (corruption etc.)
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('public_legitimacy')) continue;
     const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
     const magnitude = Math.round(cond.severity * 15) * direction;
@@ -302,23 +354,42 @@ function deriveRulingAuthority(s) {
     }
   }
 
-  // Identify governing faction's power
-  const profiles = deriveAllFactionProfiles(s);
+  // Identify the governing faction's power. Match the SAME way the precedent
+  // does (timeProgression.js:194/195, factionProfile.js legitimacyFor):
+  // governingName is the governing roster faction's EXACT name, so an exact
+  // case-insensitive equality against the profile's name is the correct join.
+  // The old `lower.includes(firstToken)` matched any faction sharing a leading
+  // token — e.g. a "Merchant League" government wrongly drew its authority from
+  // a "Merchant Guilds" faction. A whole-word startsWith is kept as a narrow
+  // fallback ONLY when no exact name matches, so legacy rosters whose
+  // governingName carries a trailing qualifier (e.g. "Merchant Guilds Council"
+  // vs a "Merchant Guilds" faction) still resolve — but it is anchored on a
+  // word boundary so it can never re-introduce the substring misroute.
+  const profiles = cachedFactionProfiles(s);
   const governingName = s.powerStructure?.governingName || '';
   if (governingName && profiles.length) {
     const lower = governingName.toLowerCase();
-    const gov = profiles.find(p => p.name && lower.includes(p.name.toLowerCase().split(/[\s/(]/)[0]));
-    if (gov && typeof gov.power === 'number') {
-      const c = Math.round((gov.power - 30) * 0.5);
+    let govFaction = profiles.find(p => p.name && p.name.toLowerCase() === lower);
+    if (!govFaction) {
+      govFaction = profiles.find(p => {
+        if (!p.name) return false;
+        const pn = p.name.toLowerCase();
+        // Whole-word startsWith: governingName begins with the faction name
+        // followed by a word boundary (or is exactly it), never mid-token.
+        return lower === pn || lower.startsWith(`${pn} `);
+      });
+    }
+    if (govFaction && typeof govFaction.power === 'number') {
+      const c = Math.round((govFaction.power - 30) * 0.5);
       if (c !== 0) {
         score += c;
-        push(contributors, gov.id, 'governing_power', c, `${gov.name} commands power ${gov.power}.`);
+        push(contributors, govFaction.id, 'governing_power', c, `${govFaction.name} commands power ${govFaction.power}.`);
       }
     }
   }
 
   // Active conditions that affect ruling_authority
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('public_legitimacy')
      && !cond.affectedSystems.includes('faction_power')) continue;
     if (cond.archetype === 'corruption_exposed') {
@@ -337,7 +408,7 @@ function deriveFactionPower(s) {
 
   // Healthy faction system = balance with a clear governing center.
   // We use the power-share spread among profiles.
-  const profiles = deriveAllFactionProfiles(s);
+  const profiles = cachedFactionProfiles(s);
   if (profiles.length === 0) {
     return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
   }
@@ -357,7 +428,7 @@ function deriveFactionPower(s) {
   }
 
   // Active conditions affecting faction_power
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('faction_power')) continue;
     const magnitude = Math.round(cond.severity * 15);
     score -= magnitude;
@@ -400,7 +471,7 @@ function deriveTradeConnectivity(s) {
   }
 
   // Active conditions
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('trade_connectivity')) continue;
     const magnitude = Math.round(cond.severity * 18);
     score -= magnitude;
@@ -440,7 +511,7 @@ function deriveEconomicCapacity(s) {
   }
 
   // Active conditions move economic capacity live — the war-layer seam.
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     // war_spoils (Phase B3) is the INVERSE of war_drain/war_exhaustion: the CAPPED
     // benefit a stabilized occupation yields RELIEVES the occupier's war economy
     // (extends supply endurance) rather than draining it. It is the ONLY economic-
@@ -555,7 +626,7 @@ function deriveLawOrder(s) {
         `Black-market capture at ${safety.blackMarketCapture}% undermines lawful order.`);
     }
   }
-  const profiles = deriveAllFactionProfiles(s);
+  const profiles = cachedFactionProfiles(s);
   const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number' && criminal.power > 30) {
     const c = Math.round((criminal.power - 30) * 0.35);
@@ -570,7 +641,7 @@ function deriveLawOrder(s) {
   // archetypes that declare law_order press here; signed by the condition's
   // status. A condition that does NOT declare law_order is ignored, so no-op for
   // every settlement today (none declare it yet) ⇒ byte-identical.
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('law_order')) continue;
     const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
     const magnitude = Math.round(cond.severity * 15) * direction;
@@ -623,7 +694,7 @@ function deriveHealingCapacity(s) {
   }
 
   // Active conditions
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('healing_capacity')) continue;
     const magnitude = Math.round(cond.severity * 20);
     score -= magnitude;
@@ -653,7 +724,7 @@ function deriveDefenseReadiness(s) {
   }
 
   // Active conditions
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('defense_readiness')) continue;
     const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
     const magnitude = Math.round(cond.severity * 12) * direction;
@@ -679,7 +750,7 @@ function deriveCriminalOpportunity(s) {
   }
 
   // Faction power: criminal factions
-  const profiles = deriveAllFactionProfiles(s);
+  const profiles = cachedFactionProfiles(s);
   const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number') {
     const c = Math.round((criminal.power - 20) * 0.4);
@@ -690,7 +761,7 @@ function deriveCriminalOpportunity(s) {
   }
 
   // Active conditions
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('criminal_opportunity')) continue;
     const magnitude = Math.round(cond.severity * 15);
     score += magnitude;
@@ -712,7 +783,7 @@ function deriveReligiousAuthority(s) {
   /** @type {any[]} */
   const contributors = [];
 
-  const profiles = deriveAllFactionProfiles(s);
+  const profiles = cachedFactionProfiles(s);
   const religious = profiles.find(p => p.archetype === 'religious');
   if (religious && typeof religious.power === 'number') {
     const c = Math.round((religious.power - 20) * 0.6);
@@ -728,7 +799,7 @@ function deriveReligiousAuthority(s) {
   // now declares `religious_authority` (F5, landed with this consumer), so a
   // regional spread presses the substrate here. Filtered on the affectedSystems
   // contract like every other deriver; signed by the condition's status.
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('religious_authority')) continue;
     const magnitude = Math.round(cond.severity * 15);
     if (magnitude === 0) continue;
@@ -777,7 +848,7 @@ function deriveHousingPressure(s) {
     // that stressor, and counting both would double-penalize one crisis.
     // Filtered on the affectedSystems contract like every other deriver, so
     // the explanation/AI surfaces list exactly what the substrate charges.
-    for (const cond of deriveAllActiveConditions(s)) {
+    for (const cond of cachedActiveConditions(s)) {
       if (!cond.affectedSystems.includes('housing_pressure')) continue;
       const magnitude = Math.round(cond.severity * 12);
       if (magnitude === 0) continue;
@@ -826,7 +897,7 @@ function deriveMagicalStability(s) {
   else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, `Low magic investment limits arcane resilience.`); }
 
   // Arcane factions present?
-  const profiles = deriveAllFactionProfiles(s);
+  const profiles = cachedFactionProfiles(s);
   const arcane = profiles.find(p => p.archetype === 'arcane');
   if (arcane) {
     score += 5;
@@ -837,7 +908,7 @@ function deriveMagicalStability(s) {
   // magical_instability archetype the deadzone/instability stressor family
   // promotes to). Until this scan, magical_stability was the one substrate
   // variable no condition could reach.
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('magical_stability')) continue;
     const magnitude = Math.round(cond.severity * 15);
     if (magnitude === 0) continue;
@@ -865,7 +936,7 @@ function deriveSocialTrust(s) {
   }
 
   // Conditions that affect social_trust
-  for (const cond of deriveAllActiveConditions(s)) {
+  for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('social_trust')) continue;
     const magnitude = Math.round(cond.severity * 15);
     score -= magnitude;

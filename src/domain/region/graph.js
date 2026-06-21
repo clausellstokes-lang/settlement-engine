@@ -218,10 +218,19 @@ function dedupeById(items) {
  * Used to de-alias war-layer fronts from relationship-bundle fronts that share
  * an id (channelIdFor keys only type/from/to/goods).
  *
+ * EXPORTED for the war layer's READ-SIDE provenance gate: warDeployment.js reads
+ * confirmed war_front channels as live sieges, but channelIdFor keys only
+ * type/from/to — so a hostile-RELATIONSHIP war_front bundle (relationshipChannelBundle
+ * §hostile, source 'relationship_label') mints a confirmed war_front that is NOT a
+ * mobilized siege (no army, never passed the mobilization/feasibility gates). The read
+ * helpers gate on this so only war-layer-minted fronts (source 'war_layer*') are read
+ * as sieges — the same provenance check syncRelationshipChannelBundle already uses to
+ * de-alias the two (isWarLayerMinted).
+ *
  * @param {Array<{source?: string}>|undefined|null} evidence
  * @returns {boolean}
  */
-function hasWarLayerEvidence(evidence) {
+export function hasWarLayerEvidence(evidence) {
   return Array.isArray(evidence)
     && evidence.some(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'));
 }

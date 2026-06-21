@@ -75,6 +75,23 @@ function hasOwn(record: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(record, key);
 }
 
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (bypasses RLS for the role gate + RPC dispatch). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  );
+}
+
 function buildProfilePatch(metadata: Record<string, unknown>) {
   const unsupported = Object.keys(metadata).filter((key) =>
     !ALLOWED_METADATA_KEYS.includes(key)
@@ -124,7 +141,21 @@ function buildProfilePatch(metadata: Record<string, unknown>) {
   return patch;
 }
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the privilege gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected supabase stubs and asserts a
+// non-privileged caller is REJECTED (403) before any RPC runs, and that a valid
+// admin action routes to the right RPC. `deps` is the optional injection seam
+// (userClient verifies the JWT, adminClient dispatches); production passes nothing
+// so behavior is identical to the previous inline handler.
+export async function handleAdminActions(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   // CORS + JSON helper are per-request so the allowed Origin can reflect the
   // caller (when an allowlist is configured).
   const cors = corsHeadersFor(req);
@@ -150,13 +181,7 @@ serve(async (req) => {
     }
 
     // Create a client with the user's JWT to verify their identity
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
-    const userClient = createClient(supabaseUrl, supabaseKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const userClient = makeUserClient(authHeader);
 
     // Verify the calling user
     const {
@@ -169,7 +194,7 @@ serve(async (req) => {
     }
 
     // Check that the calling user has an elevated role
-    const adminClient = createClient(supabaseUrl, serviceKey);
+    const adminClient = makeAdminClient();
     const { data: callerProfile } = await adminClient
       .from("profiles")
       .select("role, email")
@@ -1000,4 +1025,9 @@ serve(async (req) => {
   } catch (err) {
     return json({ error: errorMessage(err) }, 500);
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleAdminActions(req));

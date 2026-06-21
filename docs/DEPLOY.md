@@ -123,15 +123,26 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The current tree runs through `046_gallery_map_with_campaign.sql`.** A production
-DB that predates the analytics / map / gallery work needs the whole **036 → 046**
-set applied, in order:
+**Apply every file in `supabase/migrations/` in lexical order — do not stop at a
+remembered number.** `db push` does this for you (it applies all pending migrations
+on top of the current schema). Migration numbers grow every release, so this guide
+deliberately does NOT pin a "latest" number that would rot and cause an operator to
+under-apply. Highlights of the later set a production DB that predates this work
+still needs:
 
-- `036`–`040` — analytics core, settlement snapshots, rollups, cron, trends
-- `041` — system-mutation capture
-- `042`–`043` — regional NPC reports + regional propagation report
-- `044` — map-backdrop storage (bucket + RLS)
-- `045`–`046` — gallery maps + map-with-campaign share
+- analytics core, settlement snapshots, rollups, cron, trends
+- system-mutation capture; regional NPC reports + regional propagation report
+- map-backdrop storage (bucket + RLS); gallery maps + map-with-campaign share +
+  importable dossiers
+- admin least-privilege, audit log, deletion-request + account-deletion
+  processing, support tickets
+
+**SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
+writes and RLS (a disabled/banned account must not be able to write), **058**
+scopes `system_config` public reads, and **061** locks profile moderation
+columns. These are not optional hardening — skipping them leaves the
+trust-boundary open. `db push` applies them with everything else; if you ever
+hand-apply, never stop before this set has landed.
 
 `db push` applies every pending migration on top of the current schema; they must
 ALL land before deploying the corresponding functions and client. Confirm what is
@@ -165,6 +176,7 @@ npx supabase functions deploy verify-single-dossier --no-verify-jwt
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
+npx supabase functions deploy account-actions     # self-serve account export/deletion requests
 npx supabase functions deploy send-email
 npx supabase functions deploy ingest-events       # analytics event sink (verify_jwt default — client sends anon JWT)
 npx supabase functions deploy analytics-export    # admin analytics/trends read API
@@ -172,7 +184,11 @@ npx supabase functions deploy analytics-export    # admin analytics/trends read 
 
 (Only `stripe-webhook` and `verify-single-dossier` set `verify_jwt = false` in
 `config.toml`; everything else keeps JWT verification on, so they deploy with no
-flag. There are 10 functions total — deploy all of them on a first cutover.)
+flag. Deploy **every** function directory under `supabase/functions/` — the only
+non-deployable one is `_shared/` (a helper bundle, not a function). There are 11
+functions total; on a first cutover deploy all of them, and after adding a new
+function confirm the list with `ls -d supabase/functions/*/ | grep -v _shared`
+rather than trusting this block. <!-- @enforced-by tests/docs/docCounts.test.js -->)
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:

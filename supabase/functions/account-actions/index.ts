@@ -80,6 +80,23 @@ function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
 }
 
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (the account_is_active gate + RLS-bypassing RPCs). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  );
+}
+
 // Best-effort email send (Resend). Soft-fails to false when unconfigured or on
 // error — a ticket lifecycle email must never block or fail the user action.
 async function sendEmail(to: string | null, subject: string, text: string): Promise<boolean> {
@@ -99,7 +116,22 @@ async function sendEmail(to: string | null, subject: string, text: string): Prom
   }
 }
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the account_is_active gate can be
+// EXECUTION-tested: index.test.ts feeds requests with injected supabase stubs and
+// asserts a banned/disabled actor is REJECTED (403) on the ticket-WRITE paths
+// before any write RPC runs, and that an active actor is allowed through. `deps`
+// is the optional injection seam (userClient verifies the JWT, adminClient runs
+// the gate + service-role RPCs); production passes nothing so behavior is
+// identical to the previous inline handler.
+export async function handleAccountActions(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   const cors = corsHeadersFor(req);
   const jsonHeaders = { ...cors, "Content-Type": "application/json" };
   const json = (body: Record<string, unknown>, status = 200) =>
@@ -120,14 +152,8 @@ serve(async (req) => {
       return json({ error: "Missing authorization" }, 401);
     }
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
     // User-scoped client → verify the caller's identity from their JWT.
-    const userClient = createClient(supabaseUrl, supabaseKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const userClient = makeUserClient(authHeader);
     const {
       data: { user: callingUser },
       error: authError,
@@ -137,7 +163,7 @@ serve(async (req) => {
     }
 
     // Service-role client → RLS-bypassing reads/writes + the processor RPC.
-    const adminClient = createClient(supabaseUrl, serviceKey);
+    const adminClient = makeAdminClient();
 
     const {
       action, graceDays: graceOverride,
@@ -382,4 +408,9 @@ serve(async (req) => {
   } catch (err) {
     return json({ error: errorMessage(err) }, 500);
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleAccountActions(req));

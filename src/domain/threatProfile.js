@@ -224,7 +224,10 @@ export function severityToStage(severity) {
 
 /** @type {ReadonlyArray<{pattern: RegExp, type: string}>} */
 const TYPE_PATTERNS = Object.freeze([
-  { pattern: /siege|invasion|war/i,                 type: 'siege' },
+  // war is word-bounded (\bwar\b) so it no longer fires on substrings like
+  // 'seaward' / 'warden' / 'warehouse', which the old bare /war/ minted as
+  // phantom siege threats. siege/invasion/warfare stay as their own whole tokens.
+  { pattern: /siege|invasion|warfare|\bwar\b/i,     type: 'siege' },
   { pattern: /bandit|highwayman|raider/i,           type: 'bandit_raids' },
   { pattern: /plague|pestilence|epidemic|disease/i, type: 'plague' },
   { pattern: /famine|hunger|food.*deficit/i,        type: 'famine' },
@@ -232,9 +235,12 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /cult|conspiracy|hidden/i,             type: 'cult' },
   { pattern: /corruption|graft|bribe/i,             type: 'corruption' },
   { pattern: /riot|unrest|protest|sedition/i,       type: 'unrest' },
+  // The specific arcane / wild-magic pattern MUST precede the generic monster
+  // 'wild' pattern below — 'wild magic' contains 'wild', so the old ordering
+  // misclassified arcane instability as monster_pressure. Specific-before-generic.
+  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /monster|beast|wilderness|wild/i,      type: 'monster_pressure' },
   { pattern: /dragon|undead|fey|abyss/i,            type: 'monster_pressure' },
-  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /rival|neighbour|neighbor|hostile/i,   type: 'rival_neighbor' },
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);

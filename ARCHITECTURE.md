@@ -14,7 +14,7 @@ through a multi-step pipeline that produces an internally-coherent settlement �
 economy, factions, institutions, NPCs, stressors, history — rendered as an
 on-screen dossier and an exportable PDF, with an optional AI prose layer.
 
-Stack: **React 19 + Zustand 5 + Vite 5 (oxc transform / Rollup build)**, JS with
+Stack: **React 19 + Zustand 5 + Vite 7 (oxc transform / Rollup build)**, JS with
 **JSDoc types** (no `.ts` in app code), **Supabase** (auth, Postgres + RLS, edge
 functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 
@@ -108,12 +108,18 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (22) — schema + RLS policies + credit ledger + gallery +
-  version history + save-limit + profile-security + auth/credit trust-boundary
-  repair (017) + account/billing models (018) + the community gallery —
-  votes, comments, privacy sanitization, reports, moderation (019-022), all via
+- **migrations/** (61) — schema + RLS policies + credit ledger + version
+  history + save-limit + profile-security + auth/credit trust-boundary repair +
+  account/billing models + the community gallery (votes, comments, privacy
+  sanitization, reports, moderation, importable dossiers) + analytics core +
+  regional NPC/propagation reports + map-backdrop storage + admin
+  least-privilege/audit-log/deletion/support + the **account-status SECURITY
+  migrations** (057/059/060 enforce account-status writes/RLS) — all via
   SECURITY DEFINER RPCs with sanitized public reads. RLS is the security spine.
-- **functions/** (Deno edge):
+  Apply every file in `supabase/migrations/` in lexical order; never skip the
+  057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
+- **functions/** (11 Deno edge functions; `_shared/` is a helper dir, not a
+  deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
@@ -179,9 +185,10 @@ separate (`npm run test:e2e`), not in the default gate.
 - **The gate type-checks the full src logic tree** (it was domain-only; the
   punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
   `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
-- **`OutputContainer.jsx`** (the dossier renderer) is written in raw
-  `React.createElement`, not JSX — the densest, highest-stakes view. Edit
-  carefully; it's a candidate for a test-guarded JSX refactor.
+- **`OutputContainer.jsx`** (the dossier renderer) is the densest,
+  highest-stakes view — now written in plain JSX (the old raw
+  `React.createElement` form was refactored out; grep confirms zero
+  `createElement`). Edit carefully; PDF parity (below) rides on it.
 - **`public/map/main.js`** is a ~1.4k-line fork of Azgaar FMG — outside all
   gates, reconciled by hand on upstream releases (`docs/fmg-fork.md`).
 - **PDF parity**: the on-screen dossier and the PDF render from related but

@@ -78,7 +78,8 @@ jobs:
 
       # Vitest: unit + property-based (fast-check) engine tests, domain +
       # store + lib integration, component/UI smoke, a11y, security, and
-      # edge-function contract tests. ~2,600 tests across ~170 files.
+      # edge-function contract tests. The exact count grows every PR — see this
+      # step's log for the live total rather than a number that rots in a comment.
       - name: Run tests
         run: npm run test
 
@@ -90,6 +91,17 @@ jobs:
       # required gate before a production deploy.
       - name: Build
         run: npm run build
+
+      # Post-build verification: the vendor-pdf lazy-chunk contract reads the
+      # built dist/ graph (chunk isolation + modulepreload filter). In the unit
+      # pass above dist/ doesn't exist yet, so that suite is `runIf(distExists)`
+      # and silently NO-OPs — re-run it here AFTER the build with VERIFY_DIST=1,
+      # which turns a missing dist/ into a HARD failure so the chunk contract can
+      # never count green having verified nothing.
+      - name: Verify vendor-pdf lazy chunk (post-build, anti-vacuity)
+        run: npx vitest run tests/build/vendorPdfLazy.test.js
+        env:
+          VERIFY_DIST: '1'
 
   e2e:
     name: Chromium end-to-end
@@ -112,11 +124,41 @@ jobs:
         # fails at browser launch ("Executable doesn't exist … webkit").
         run: npx playwright install --with-deps chromium webkit
 
+      # ANTI-VACUITY (review #1 trust fix): a required Playwright step counted
+      # GREEN while running ZERO assertions (the mobile spec's
+      # `test.skip(!isMobile)` guard means a renamed/typo'd project skips every
+      # test and Playwright still exits 0). This STATIC guard asserts each
+      # project resolves to >0 discovered specs BEFORE we run — a moved spec or a
+      # renamed project fails the job here instead of going green-on-nothing.
+      - name: Assert E2E projects discover specs (anti-vacuity, static)
+        run: |
+          node scripts/check-e2e-not-vacuous.mjs --project=chromium --projects chromium
+          node scripts/check-e2e-not-vacuous.mjs e2e/mobile-pointer-targets.spec.js --project=mobile-safari --projects mobile-safari
+
       - name: Run Chromium E2E
-        run: npx playwright test --project=chromium
+        # Emit a JSON report alongside the run (--reporter github,json keeps the
+        # readable GitHub annotations) so the RUNTIME anti-vacuity guard below can
+        # prove the run actually executed tests (not all-skipped).
+        run: npx playwright test --project=chromium --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-chromium.json
+
+      # RUNTIME anti-vacuity guard: fail HARD if the chromium run executed 0 real
+      # tests (`expected:0`) — i.e. everything was skipped but Playwright exited
+      # 0. This is the ratchet that makes "green-on-nothing" impossible.
+      - name: Assert Chromium E2E executed tests (anti-vacuity, runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-chromium.json
 
       - name: Audit mobile pointer targets
-        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari
+        # Emit JSON so the runtime guard can confirm the mobile spec actually RAN
+        # under mobile-safari (isMobile=true) rather than being skipped — the
+        # exact failure the review pinned (the mobile check ran 0 specs).
+        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-mobile.json
+
+      - name: Assert mobile pointer-target audit executed tests (anti-vacuity, runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
 
   # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
   # The money-path trust boundaries (stripe-webhook signature verification; later

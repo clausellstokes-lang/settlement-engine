@@ -412,48 +412,30 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     return a.needLabel < b.needLabel ? -1 : a.needLabel > b.needLabel ? 1 : 0;
   });
 
-  // ── Inter-chain dependency cascade ─────────────────────────────────────────────
+  // ── Inter-chain dependency cascade — SINGLE source of truth ─────────────────────
   // Upstream chain status propagates to downstream chains that depend on them.
-  // brewing ← grain | smelting ← fuel | leather_goods ← livestock/hunting
-  // textile_finishing ← textiles | ceramics_brick ← fuel | weapons_armor ← smelting
+  // The ONLY dependency graph is the data-driven `chain.upstreamChains` declared
+  // in supplyChainData.js. A previous revision ran a SECOND, hardcoded inline
+  // dependency map here whose edges disagreed with the data (e.g. it declared
+  // smelting ← fuel/timber while the data declares smelting ← iron/fuel);
+  // whichever pass ran last won, silently overwriting the other's upstreamNote
+  // and — because it downgraded `running` → `vulnerable` first — suppressing the
+  // data pass's `upstreamMissing` (so `deriveImportsFromChains` dropped the real
+  // missing import). Collapsing to the data graph removes that contradiction by
+  // making chain.upstreamChains the SINGLE SOURCE OF TRUTH: where the old inline
+  // map disagreed with the data, the DATA now wins, so the contradictory
+  // CHAIN_DEPS-only edges (e.g. caravan_trade←animal_husbandry/grain,
+  // smelting←timber) are intentionally NOT carried — each chain's real upstreams
+  // are whatever the data declares. Do not reintroduce a second inline dependency
+  // table here — the single-graph invariant is pinned by chainUpstreamSingleSource.test.js.
+  //
+  // An upstream chain whose own RESOURCE is depleted is treated as weak even
+  // while its status is still 'running' (depletion never sets a status) — this
+  // depleted-upstream signal was the one behaviour only the old CHAIN_DEPS pass
+  // carried, preserved here on the single graph.
   const chainById = Object.fromEntries(activeChains.map(c => [c.chainId, c]));
-
-  const CHAIN_DEPS = {
-    brewing:          ['grain'],
-    food_processing:  ['grain'],
-    animal_husbandry: ['livestock','forage'],
-    smelting:         ['fuel','timber'],
-    weapons_armor:    ['iron','smelting'],
-    ceramics_brick:   ['fuel','reed_marsh'],
-    textile_finishing:['textiles'],
-    leather_goods:    ['leather','livestock','hunting'],
-    bowyer_fletcher:  ['timber'],
-    shipbuilding:     ['timber'],
-    coastal_shipbuilding: ['timber'],
-    beekeeping_wax:   ['forage'],
-    precious_metals_mining: ['fuel'],
-    caravan_trade:    ['animal_husbandry','grain'],
-  };
-
-  Object.entries(CHAIN_DEPS).forEach(([downstreamId, upstreamIds]) => {
-    const downstream = chainById[downstreamId];
-    if (!downstream) return;
-    const impaired = upstreamIds.some(uid => {
-      const up = chainById[uid];
-      return up && (up.status === 'impaired' || up.resourceDepleted);
-    });
-    const vulnerable = !impaired && upstreamIds.some(uid => {
-      const up = chainById[uid];
-      return up && up.status === 'vulnerable';
-    });
-    if (impaired && downstream.status === 'running') {
-      downstream.status = 'vulnerable';
-      downstream.upstreamNote = `Upstream supply chain impaired — ${upstreamIds.join(' or ')} disrupted`;
-    } else if (vulnerable && downstream.status === 'running') {
-      // vulnerable upstream makes downstream slightly at risk — don't change status, just note
-      downstream.upstreamNote = `Dependent on stressed upstream: ${upstreamIds.join(' or ')}`;
-    }
-  });
+  const isUpstreamWeak = (up) =>
+    !!up && (up.status === 'impaired' || up.status === 'vulnerable' || up.resourceDepleted);
 
   // Magic substitution — delegated to chainMagicSubstitution.js
   applyMagicSubstitution(activeChains, traditions, magicPriority, tier);
@@ -461,7 +443,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   // ── Multi-order chain resolution ─────────────────────────────────────────────
   // For each active chain, check if its upstream dependencies are also active.
   // Missing upstream → chain is impaired (must import intermediate goods).
-  // Impaired upstream → chain is vulnerable (inherits upstream weakness).
+  // Impaired/depleted upstream → chain is vulnerable (inherits upstream weakness).
   // This runs after magic substitution so magic recovery already applied.
 
   const activeChainIds = new Set(activeChains.map(c => c.chainId));
@@ -471,10 +453,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (upstream.length === 0) return;
 
     const missingUpstream = upstream.filter(uid => !activeChainIds.has(uid));
-    const impairedUpstream = upstream.filter(uid => {
-      const up = activeChains.find(c => c.chainId === uid);
-      return up && (up.status === 'impaired' || up.status === 'vulnerable');
-    });
+    const impairedUpstream = upstream.filter(uid => isUpstreamWeak(chainById[uid]));
 
     if (missingUpstream.length > 0) {
       // Upstream chain not present → must import intermediate goods
@@ -501,10 +480,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     const upstream = chain.upstreamChains || [];
     if (upstream.length === 0) return;
     if (chain.status === 'vulnerable' || chain.status === 'impaired') return; // already downgraded
-    const impairedUpstream = upstream.filter(uid => {
-      const up = activeChains.find(c => c.chainId === uid);
-      return up && (up.status === 'impaired' || up.status === 'vulnerable');
-    });
+    const impairedUpstream = upstream.filter(uid => isUpstreamWeak(chainById[uid]));
     if (impairedUpstream.length > 0) {
       chain.status = 'vulnerable';
       chain.upstreamNote = chain.upstreamNote ||

@@ -1932,7 +1932,42 @@ function isEmptyPayload(payload: unknown): boolean {
 
 // ── Main handler ────────────────────────────────────────────────────────────
 
-serve(async (req) => {
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity
+ *  and runs the user-context spend_credits RPC. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (the account_is_active gate + the service-role-only
+ *  refund_credits RPC). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Exported (not just inlined into serve) so the money/AI trust boundary can be
+// EXECUTION-tested: index.test.ts feeds requests with injected supabase stubs and
+// asserts an inactive account is REJECTED (fail-closed, never spends), and that a
+// generation FAILURE refunds via the captured spend_id (refund_credits called with
+// that exact ledger row) and does NOT double-spend. `deps` is the optional
+// injection seam (userClient verifies the JWT + spends, adminClient gates +
+// refunds); production passes nothing so behavior is identical to the previous
+// inline handler.
+export async function handleGenerateNarrative(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
 
   if (req.method === 'OPTIONS') {
@@ -1958,11 +1993,7 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) throw new Error('Missing authorization header');
 
-    const supabaseUser = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
+    const supabaseUser = makeUserClient(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
 
@@ -2016,10 +2047,7 @@ serve(async (req) => {
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
     const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseAdmin = makeAdminClient();
 
     // ── Trust-boundary gate: reject a banned / disabled / soft-deleted account ──
     // Defense-in-depth (review B16 finding #1): spend_credits (migration 057) ALSO
@@ -2482,4 +2510,9 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleGenerateNarrative(req));

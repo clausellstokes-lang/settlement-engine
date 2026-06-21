@@ -118,7 +118,7 @@ export const COPY = {
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
-        body:     'Wanderer gives you 3 exports a month. Cartographer is unlimited, plus cloud sync: phone, laptop, table.',
+        body:     'Wanderer exports any saved dossier to PDF, unlimited. Cartographer adds unlimited saves and cloud sync: phone, laptop, table.',
       },
       third_save: {
         headline: 'You’re building a campaign.',

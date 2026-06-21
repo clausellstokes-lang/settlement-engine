@@ -151,7 +151,7 @@ const GOLDEN_CHAINS = [
   'manufacturing.weapons_armor:vulnerable', 'manufacturing.textile_finishing:vulnerable',
   'manufacturing.leather_goods:vulnerable', 'raw_extraction.iron:running',
   'raw_extraction.smelting:vulnerable', 'trade_entrepot.spices_dyes:running',
-  'trade_entrepot.warehouse_logistics:running', 'trade_entrepot.caravan_trade:vulnerable',
+  'trade_entrepot.warehouse_logistics:running', 'trade_entrepot.caravan_trade:running',
   'trade_entrepot.crossroads_trade:running', 'criminal_economy.smuggling:entrepot',
   'trade_entrepot.wine_spirits:entrepot', 'trade_entrepot.camel_caravan:entrepot',
   'criminal_economy.black_market:operational', 'criminal_economy.slave_trade:operational',
