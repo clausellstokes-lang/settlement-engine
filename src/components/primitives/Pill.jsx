@@ -18,6 +18,7 @@
  * supports the discount badge's corner-anchored layout variant.
  */
 import { FS, R, sans } from '../theme.js';
+import { useIconsOn } from './IconsContext.js';
 
 export default function Pill({
   children,
@@ -28,6 +29,7 @@ export default function Pill({
   style,
   ...rest
 }) {
+  const iconsOn = useIconsOn();
   return (
     <span
       style={{
@@ -42,7 +44,7 @@ export default function Pill({
       }}
       {...rest}
     >
-      {icon}
+      {iconsOn ? icon : null}
       {children}
     </span>
   );

@@ -6,7 +6,6 @@
  * its own surface, not a mode listed here.
  */
 
-import { Zap, Settings } from 'lucide-react';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER2, CARD, serif_, SP, R, FS, ELEV } from '../theme.js';
 import { backgroundImageUrl, MODE_BACKGROUNDS } from '../../config/pageBackgrounds.js';
 
@@ -22,8 +21,8 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
   // not a mode listed here. Anonymous users see the hero only — these mode
   // cards are gated to signed-in users (Basic/Advanced require a free sign-in).
   const modes = [
-    { id: 'basic',    label: 'Basic Generate',    desc: 'Character + foundations. The rest is rolled.', Icon: Zap,      longDesc: 'Pick a character and set the foundations: size, culture, terrain. The simulator rolls priorities, institutions, services, and trade for you. The fastest way to a usable settlement; refine it afterward.' },
-    { id: 'advanced', label: 'Advanced Generate', desc: 'Every dial: institutions, services, trade.',   Icon: Settings, longDesc: 'Everything in Basic, plus the Fine-tune sliders and hard constraints on institutions, services, and trade. Full control over the probability space, for when you have a specific settlement in mind.' },
+    { id: 'basic',    label: 'Basic Generate',    desc: 'Character + foundations. The rest is rolled.', longDesc: 'Pick a character and set the foundations: size, culture, terrain. The simulator rolls priorities, institutions, services, and trade for you. The fastest way to a usable settlement; refine it afterward.' },
+    { id: 'advanced', label: 'Advanced Generate', desc: 'Every dial: institutions, services, trade.',   longDesc: 'Everything in Basic, plus the Fine-tune sliders and hard constraints on institutions, services, and trade. Full control over the probability space, for when you have a specific settlement in mind.' },
   ];
 
   return (
@@ -45,7 +44,7 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
           box-shadow: 0 0 0 4px ${GOLD_BG};
         }
       `}</style>
-      {modes.map(({ id, label, desc, Icon, longDesc }) => {
+      {modes.map(({ id, label, desc, longDesc }) => {
         const active = mode === id;
         return (
           <button
@@ -95,7 +94,6 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
               e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
             }}
           >
-            <Icon size={large ? 40 : 24} color={active ? GOLD : (large ? GOLD : MUTED)} style={{ marginBottom: large ? SP.md : 6 }} />
             <div style={{
               fontSize: large ? FS.xxl : FS.lg,
               fontWeight: 700,

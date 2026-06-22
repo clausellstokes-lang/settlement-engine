@@ -13,7 +13,6 @@
  * settlement (the embed-on-assign bridge).
  */
 
-import { Sun } from 'lucide-react';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { SECOND as SEC, MUTED as MUT, BORDER as BOR, FS, swatch } from '../theme.js';
 
@@ -37,7 +36,6 @@ export default function DeityEffectPreview({ draft }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-        <Sun size={13} color={DEITY_ACCENT} />
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           This god will…
         </span>

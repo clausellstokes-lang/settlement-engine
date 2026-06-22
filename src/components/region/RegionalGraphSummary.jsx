@@ -1,9 +1,9 @@
-import { Check, CheckCheck, CircleSlash, FastForward, Network, RadioTower, RefreshCw, Sparkles } from 'lucide-react';
+import { Check, CheckCheck, CircleSlash, FastForward, RefreshCw } from 'lucide-react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
+import { BODY, CARD, FS, GOLD_BG, INK, SECOND, SP, sans, swatch } from '../theme.js';
 import RegionalCausalChainViewer from './RegionalCausalChainViewer.jsx';
 
 function labelForType(type) {
@@ -64,7 +64,6 @@ export default function RegionalGraphSummary({
       background: CARD,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-        <Network size={13} color={GOLD} />
         <span style={{ fontSize: FS.xs, color: INK, fontWeight: 800, fontFamily: sans }}>
           Regional graph
         </span>
@@ -179,7 +178,6 @@ export default function RegionalGraphSummary({
                 background: GOLD_BG,
               }}
             >
-              <Sparkles size={12} color={GOLD} />
               <div style={{ minWidth: 0, flex: 1 }}>
                 <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 700, fontFamily: sans }}>
                   {nodeNames.get(String(impact.targetSettlementId)) || impact.targetSettlementId} · {labelForType(impact.kind)}
@@ -231,7 +229,6 @@ export default function RegionalGraphSummary({
                 fontFamily: sans,
               }}
             >
-              <RadioTower size={10} color={MUTED} />
               <span style={{ color: BODY, fontWeight: 700 }}>
                 {nodeNames.get(String(event.sourceSettlementId)) || event.sourceSettlementName || event.sourceSettlementId}
               </span>

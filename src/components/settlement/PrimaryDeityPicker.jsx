@@ -13,7 +13,6 @@
  */
 
 import { useMemo } from 'react';
-import { Sun } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme.js';
@@ -46,7 +45,6 @@ export default function PrimaryDeityPicker() {
   };
   const heading = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-      <Sun size={14} color={DEITY_ACCENT} />
       <span style={{ fontSize: FS.xs, fontWeight: 700, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         Primary Deity
       </span>

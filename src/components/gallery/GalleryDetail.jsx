@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ChevronLeft, Eye, MessageCircle, Share2, Download, Sparkles } from 'lucide-react';
+import { Check, ChevronLeft, Share2, Download, Sparkles } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -253,11 +253,11 @@ export default function GalleryDetail({
               />
               {/* Read-only ledger: quiet, trailing, one tier below the controls. */}
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.md, marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                  <Eye size={13} /> {formatNumber(dossier.viewCount)} views
+                <span>
+                  {formatNumber(dossier.viewCount)} views
                 </span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                  <MessageCircle size={13} /> {formatNumber(dossier.commentCount)} comments
+                <span>
+                  {formatNumber(dossier.commentCount)} comments
                 </span>
               </div>
             </div>

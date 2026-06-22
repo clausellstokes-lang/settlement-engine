@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
 import { sans, TabIntro } from '../Primitives';
@@ -123,7 +122,6 @@ export default function NotesTab({ saveId, notes, section }) {
             variant="primary"
             onClick={save}
             disabled={saving}
-            icon={<Save size={15} />}
             style={{ justifySelf: 'start' }}
           >
             {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}

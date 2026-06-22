@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link2, Check } from 'lucide-react';
 import { RELATIONSHIP_SELECTIONS } from '../../domain/relationships/canonicalRelationship.js';
 import { INK, BODY, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
 import Button from '../primitives/Button.jsx';
@@ -25,7 +24,7 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
   // host card's body rather than a card-within-a-card (P5).
   return<div style={{background:swatch.infoBg,borderRadius:8,padding:'4px 2px'}}>
     <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
-      <Link2 size={12}/> Link as Neighbour
+      Link as Neighbour
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
       {others.map(s=>{
@@ -35,7 +34,7 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
               a leading check glyph + bolder name, so selection survives a
               grayscale/squint test, not just the aria-pressed announcement. */}
           {isSel
-            ? <Check size={13} color="#2a3a7a" style={{flexShrink:0}} aria-hidden="true"/>
+            ? <span style={{width:13,flexShrink:0,color:swatch.info,fontWeight:800,lineHeight:1}} aria-hidden="true">{'✓'}</span>
             : <span style={{width:13,flexShrink:0}} aria-hidden="true"/>}
           <span style={{flex:1,fontSize:FS.sm,fontWeight:isSel?800:600,color:INK}}>{s.name}</span>
           {/* Tier is the only fact distinguishing one pick from another — it is

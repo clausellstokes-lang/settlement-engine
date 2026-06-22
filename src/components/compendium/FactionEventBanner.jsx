@@ -12,7 +12,6 @@
  * literal) so the colour stays in lockstep with the bucket chip.
  */
 
-import { Info } from 'lucide-react';
 import { navigate } from '../../hooks/useRoute.js';
 import { SECOND as SEC, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -28,7 +27,6 @@ export default function FactionEventBanner() {
       borderRadius: 7,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-        <Info size={13} color={FACTION} />
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Factions enter through an event
         </span>

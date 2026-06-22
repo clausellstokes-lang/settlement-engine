@@ -17,7 +17,6 @@
  */
 
 import { useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
@@ -125,7 +124,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            Icon={X}
+            glyph={'✕'}
             label="Close"
             onClick={onClose}
             tone="ghost"

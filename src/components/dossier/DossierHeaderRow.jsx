@@ -1,7 +1,6 @@
 import { FS, swatch } from '../theme.js';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
-import { AlertTriangle } from 'lucide-react';
 import EditableInline from '../primitives/EditableInline.jsx';
 import { threatDisplay } from '../map/settlementThreat.js';
 
@@ -70,8 +69,9 @@ export default function DossierHeaderRow({
                     SettlementPalette pill (P2) — the old inline map showed the
                     SAME value as a different word on each surface. Colors stay
                     parchment-toned for the dark header bar; only the label is
-                    unified. AlertTriangle on 'plagued' is the two-channel cue. */}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' && <AlertTriangle size={11} aria-hidden="true" />}{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
+                    unified. The text label carries the threat alongside the
+                    tone, so the state is never color-only. */}
+                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
                 {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
               </div>
             </div>

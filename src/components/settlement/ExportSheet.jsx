@@ -18,19 +18,12 @@
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
-import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { COPY } from '../../copy/strings.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
-
-const VARIANT_ICON = {
-  draft_brief:     Edit3,
-  canon_dossier:   BookMarked,
-  timeline_packet: Clock,
-  campaign_state:  Swords,
-};
 
 // Variants that print canon-only chapters as their reason for being — disabled
 // in draft (a draft export of them would degrade to a thin shell).
@@ -62,7 +55,6 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
 
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
-    Icon: VARIANT_ICON[id] || FileText,
     disabled: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon',
     disabledReason: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon'
       ? 'Available once the settlement is canonized.'
@@ -84,7 +76,7 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="export-sheet-title" style={titleStyle}>
-            <FileText size={16} aria-hidden="true" /> {COPY.export.sheetTitle}
+            {COPY.export.sheetTitle}
           </h2>
           <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
         </header>
@@ -154,7 +146,6 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
 }
 
 function VariantCard({ v, picked, onPick }) {
-  const Icon = v.Icon;
   return (
     <button
       type="button"
@@ -174,9 +165,18 @@ function VariantCard({ v, picked, onPick }) {
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch['#A0762A'] }} />
+      {/* Selection in a second channel (P7): a leading check glyph + heavier
+          label weight when picked, not the gold border/tint alone. The slot is
+          width-reserved so the layout does not shift between states. */}
+      <span aria-hidden="true" style={{
+        flexShrink: 0, width: '1em', marginTop: 1, lineHeight: 1.4,
+        fontSize: FS.md, fontWeight: 800,
+        color: picked ? '#a0762a' : 'transparent',
+      }}>
+        {picked ? '✓' : ''}
+      </span>
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
+        <div style={{ fontSize: FS.md, fontWeight: picked ? 800 : 700, color: swatch.inkMag }}>
           {v.label}
         </div>
         <div style={{ fontSize: FS.xs, color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>

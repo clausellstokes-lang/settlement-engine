@@ -14,7 +14,7 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Search, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -107,7 +107,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         border: `1px solid ${BOR}`, borderRadius: 6,
         background: CARD, padding: '6px 10px',
       }}>
-        <Search size={13} style={{ color: GOLD, flexShrink: 0 }} />
         <input
           value={query}
           onChange={(e) => { setQuery(e.target.value); setActive(0); setOpen(true); }}
@@ -128,6 +127,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         {query && (
           <IconButton
             Icon={X}
+            glyph="×"
             label="Clear search"
             tone="ghost"
             size="sm"
@@ -196,7 +196,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
             No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, institution, neighbour, route, or stress name.
           </span>
           {/* Recovery CTA at the point of failure, not just the X up in the input. */}
-          <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
+          <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
         </div>
       )}
     </div>

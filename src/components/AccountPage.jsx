@@ -11,7 +11,7 @@
  */
 import { useState } from 'react';
 import {
-  User, Shield, ChevronRight,
+  Shield, ChevronRight,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
@@ -20,7 +20,7 @@ import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
-import { INK, MUTED, SECOND, BORDER, sans, FS, SP, layout } from './theme.js';
+import { INK, MUTED, SECOND, sans, FS, layout } from './theme.js';
 import { space } from '../design/tokens.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
@@ -224,7 +224,6 @@ export default function AccountPage({ onNavigateAdmin }) {
   if (!auth.user) {
     return (
       <div style={{ textAlign: 'center', padding: '60px 20px', color: MUTED, fontFamily: sans }}>
-        <User size={48} color={BORDER} style={{ marginBottom: SP.lg }} />
         <p style={{ fontSize: FS.lg }}>Sign in to access your account settings.</p>
       </div>
     );

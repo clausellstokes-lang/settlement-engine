@@ -11,7 +11,7 @@
  * this component only ever calls onChange(url) with a public URL or ''.
  */
 import { useEffect, useRef, useState } from 'react';
-import { ImagePlus, UploadCloud, Trash2, AlertCircle } from 'lucide-react';
+import { ImagePlus, Trash2 } from 'lucide-react';
 
 import ImageCropper from './ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
@@ -139,7 +139,6 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           fontFamily: sans, fontSize: FS.xxs, transition: 'border-color 120ms, background 120ms',
         }}
       >
-        <UploadCloud size={20} style={{ color: dragOver ? GOLD : MUTED }} />
         <span style={{ color: INK, fontWeight: 800 }}>Drag an image here, or click to choose a file</span>
         <span style={{ color: MUTED }}>You’ll crop it to a landscape cover. JPEG, PNG, WebP, or GIF · up to 8&nbsp;MB.</span>
       </div>
@@ -152,7 +151,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
 function ErrorLine({ text }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontFamily: sans, fontSize: FS.xxs }}>
-      <AlertCircle size={12} /> {text}
+      {text}
     </span>
   );
 }

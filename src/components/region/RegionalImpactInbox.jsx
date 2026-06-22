@@ -1,4 +1,4 @@
-import { Check, CircleSlash, GitBranch, RadioTower, Undo2 } from 'lucide-react';
+import { Check, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -92,7 +92,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
       marginBottom: 12,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9 }}>
-        <GitBranch size={14} color={GOLD} />
         <div style={{ fontSize: FS.xs, fontWeight: 800, color: INK, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Regional Causality
         </div>
@@ -169,7 +168,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
         <div style={{ marginTop: context.incoming.length ? 10 : 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
           {context.outgoingEvents.map(event => (
             <div key={event.id} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: FS.xxs, color: SECOND, fontFamily: sans }}>
-              <RadioTower size={11} color={MUTED} />
               <span style={{ color: INK, fontWeight: 700 }}>{event.sourceEvent?.type || 'Regional event'}</span>
               <span>sent {event.impactIds?.length || 0} impact{(event.impactIds?.length || 0) === 1 ? '' : 's'}</span>
             </div>

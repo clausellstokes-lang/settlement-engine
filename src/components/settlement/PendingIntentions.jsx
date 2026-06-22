@@ -11,7 +11,7 @@
  */
 
 import { useMemo } from 'react';
-import { Hourglass, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -73,7 +73,6 @@ export default function PendingIntentions() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
-        <Hourglass size={12} />
         Queued for next World Pulse
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {queued.length} pending

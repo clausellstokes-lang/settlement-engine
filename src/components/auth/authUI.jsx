@@ -7,7 +7,7 @@
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
 import { useState } from 'react';
-import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, GOLD_TXT, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, PARCH, sans, serif_,
   SP, R, FS, ELEV, swatch, VIOLET, VIOLET_DEEP, VIOLET_BG, RED, RED_BG,
@@ -208,9 +208,9 @@ export function Button({ onClick, children, variant = 'primary', disabled, style
 
 export function Alert({ type, children }) {
   const colors = {
-    error:   { bg: swatch.dangerBg, border: DANGER_BORDER, text: swatch.danger, Icon: AlertCircle },
-    success: { bg: swatch.successBg, border: SUCCESS_BORDER, text: GREEN_DEEP, Icon: CheckCircle },
-    info:    { bg: swatch['#FEF9EE'], border: GOLD, text: SECOND, Icon: Mail },
+    error:   { bg: swatch.dangerBg, border: DANGER_BORDER, text: swatch.danger },
+    success: { bg: swatch.successBg, border: SUCCESS_BORDER, text: GREEN_DEEP },
+    info:    { bg: swatch['#FEF9EE'], border: GOLD, text: SECOND },
   };
   const c = colors[type] || colors.info;
   // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
@@ -227,7 +227,6 @@ export function Alert({ type, children }) {
         background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
         fontSize: FS.sm, color: c.text, lineHeight: 1.5,
       }}>
-      <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
       <span>{children}</span>
     </div>
   );
@@ -237,12 +236,12 @@ export function Alert({ type, children }) {
 export function RoleBadge({ role }) {
   if (role === 'user') return null;
   const cfg = {
-    developer: { color: VIOLET_DEEP, bg: VIOLET_BG, label: 'Developer', Icon: Shield },
-    admin:     { color: RED, bg: RED_BG, label: 'Admin', Icon: Shield },
+    developer: { color: VIOLET_DEEP, bg: VIOLET_BG, label: 'Developer' },
+    admin:     { color: RED, bg: RED_BG, label: 'Admin' },
   };
   const c = cfg[role] || cfg.admin;
   return (
-    <Pill bg={c.bg} color={c.color} icon={<c.Icon size={11} aria-hidden="true" />}>
+    <Pill bg={c.bg} color={c.color}>
       {c.label}
     </Pill>
   );
@@ -281,7 +280,6 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
         }}>
-          <MapIcon size={22} color={GOLD} />
           <span style={{
             fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
             letterSpacing: '0.02em', textTransform: 'lowercase',

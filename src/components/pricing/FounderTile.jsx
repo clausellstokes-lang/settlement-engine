@@ -20,7 +20,6 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Crown } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
@@ -142,15 +141,12 @@ export default function FounderTile() {
         }}>
           You’ve earned this offer
         </div>
-        {/* P11 — the lucide Crown (aria-hidden), matching the PricingPage founder
-            card, instead of a literal 👑 emoji that screen readers announced
-            inline ("crown Founder Lifetime") with no aria-hidden. */}
+        {/* Text-only title, matching the icons-off PricingPage founder card. */}
         <h2 style={{
           margin: `${SP.sm}px 0 0`, fontFamily: serif_, fontWeight: 600,
           fontSize: FS['22'], color: GOLD_500, letterSpacing: '-0.005em',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.xs,
         }}>
-          <Crown size={20} aria-hidden="true" />
           Founder Lifetime
         </h2>
         {typeof seatsRemaining === 'number' && (

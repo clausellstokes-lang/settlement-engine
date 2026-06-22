@@ -21,7 +21,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { X, Search, AlertTriangle } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, DANGER_BORDER, ELEV, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
@@ -142,7 +142,6 @@ export default function EntityPicker({
                   color: accent, fontFamily: sans,
                 }}
               >
-                {missing && <AlertTriangle size={9} />}
                 <span>{label}</span>
                 {isCustom && !missing && (
                   <span style={{
@@ -173,7 +172,6 @@ export default function EntityPicker({
           borderRadius: 4,
           background: swatch.white,
         }}>
-          <Search size={11} color={MUTED} />
           <input
             type="text"
             value={query}
@@ -255,7 +253,6 @@ export default function EntityPicker({
           fontSize: FS.xxs, color: RED,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
-          <AlertTriangle size={10} />
           <span>
             {selectedEntries.filter(s => !s.entry).length} reference(s) point
             to deleted or missing items. Remove or replace them.

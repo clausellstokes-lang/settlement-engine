@@ -15,10 +15,10 @@
  * result, so there's nothing here to spoof or replay.
  */
 import { useEffect } from 'react';
-import { CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate, navigatePath } from '../../hooks/useRoute.js';
-import { GOLD, SECOND, MUTED, FS, SP } from '../theme.js';
+import { GOLD, SECOND, FS, SP } from '../theme.js';
 import { AuthPageShell, Button, Alert } from './authUI.jsx';
 import { t } from '../../copy/index.js';
 
@@ -52,7 +52,6 @@ export default function VerifyEmailPage() {
           </>
         ) : confirmed ? (
           <>
-            <CheckCircle size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <Alert type="success">
               {t('auth.verify.confirmed')}
             </Alert>
@@ -62,7 +61,6 @@ export default function VerifyEmailPage() {
           </>
         ) : (
           <>
-            <AlertCircle size={40} color={MUTED} style={{ margin: '0 auto' }} />
             <Alert type="error">
               {t('auth.verify.expired')}
             </Alert>

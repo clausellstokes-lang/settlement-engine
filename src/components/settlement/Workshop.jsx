@@ -35,7 +35,7 @@
  */
 
 import { useState } from 'react';
-import { ChevronDown, ChevronRight, Lock } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { useSettlementLiveWorld } from '../../hooks/useSettlementLiveWorld.js';
 
@@ -136,7 +136,6 @@ function PremiumWriteHint({ onUpgrade }) {
       border: `1px dashed ${BORDER}`, borderRadius: R.sm,
       fontSize: FS.xxs, color: SECOND, fontFamily: sans,
     }}>
-      <Lock size={11} color={MUTED} />
       <span style={{ flex: 1 }}>The read surface is free. Editing is a Cartographer (premium) feature.</span>
       {onUpgrade && (
         <Button

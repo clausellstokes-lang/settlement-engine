@@ -10,7 +10,6 @@
  * The merge/normalize/classify/sort/relative-timing all live in the pure,
  * tested domain/dossier/chronicleFeed helper; this is presentation only.
  */
-import { Swords } from 'lucide-react';
 import { Section, Empty } from '../Primitives';
 import { FS, swatch, MUTED } from '../../theme.js';
 
@@ -46,7 +45,7 @@ export default function ChronicleTab({ entries = [] }) {
                     {String(event.title || 'Event').replace(/_/g, ' ')}
                   </span>
                   {event.partyCaused
-                    ? <span title="Caused by the party" style={{ ...chip(PARTY, PARTY_BG), display: 'inline-flex', alignItems: 'center', gap: 3 }}><Swords size={10} aria-hidden="true" />Party</span>
+                    ? <span title="Caused by the party" style={chip(PARTY, PARTY_BG)}>Party</span>
                     : event.source === 'manual'
                       ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>Edit</span>
                       : <span title="Driven by the wider world" style={chip(swatch.info, swatch['#F4F6FD'])}>World</span>}

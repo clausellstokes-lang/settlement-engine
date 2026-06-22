@@ -16,7 +16,7 @@
  * deep-links are plain `navigate` calls.
  */
 
-import { Sun, Check, Circle, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { INK, SECOND as SEC, MUTED as MUT, BORDER as BOR, CARD, FS, swatch } from '../theme.js';
@@ -54,10 +54,11 @@ export function computePantheonActivation(state) {
 }
 
 function Milestone({ on, label, detail, action }) {
-  const Icon = on ? Check : Circle;
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '6px 0' }}>
-      <Icon size={14} color={on ? OK : MUT} style={{ marginTop: 2, flexShrink: 0 }} />
+      <span aria-hidden="true" style={{ marginTop: 1, flexShrink: 0, fontSize: FS.sm, fontWeight: 800, lineHeight: 1.4, color: on ? OK : MUT }}>
+        {on ? '✓' : '○'}
+      </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: on ? INK : MUT }}>{label}</div>
         <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.45 }}>{detail}</div>
@@ -101,7 +102,6 @@ export default function PantheonActivationStrip() {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <Sun size={14} color={DEITY_ACCENT} />
         <span style={{ fontSize: FS.xs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em', flex: 1 }}>
           Pantheon activation
         </span>

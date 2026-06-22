@@ -10,7 +10,7 @@
  *   40 credits / $19.99 ($0.50/ea, 50% off)
  */
 import { useState } from 'react';
-import { X, Zap, AlertCircle, TrendingDown } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -49,7 +49,6 @@ export default function PurchaseModal({ onClose }) {
   // the catalog was repriced to credits_25/60/150 and PRODUCTS[key] went undefined.
   const creditPacks = Object.values(getActivePacks()).map((pack) => ({
     key: pack.key,
-    icon: <Zap size={20} />,
     tier: pack.tier,
   }));
 
@@ -131,7 +130,6 @@ export default function PurchaseModal({ onClose }) {
               background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md,
               fontSize: FS.sm, color: swatch.danger,
             }}>
-              <AlertCircle size={16} />
               <span>{error}</span>
             </div>
           )}
@@ -151,11 +149,11 @@ export default function PurchaseModal({ onClose }) {
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            <TrendingDown size={14} /> {t('purchase.packsHeading')}
+            {t('purchase.packsHeading')}
           </div>
 
           <div style={{ display: 'flex', gap: SP.sm }}>
-            {creditPacks.map(({ key, icon, tier }) => {
+            {creditPacks.map(({ key, tier }) => {
               const p = PRODUCTS[key];
               if (!p) return null;
               const isBest = tier === 'best';
@@ -198,7 +196,6 @@ export default function PurchaseModal({ onClose }) {
                     </div>
                   )}
 
-                  <div style={{ color: accentColor }}>{icon}</div>
                   <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</div>
                   <div style={{ fontSize: FS.xxs, color: BODY, textTransform: 'uppercase' }}>Credits</div>
                   <div style={{ fontSize: FS.xl, fontWeight: 700, color: accentColor }}>{p.price}</div>

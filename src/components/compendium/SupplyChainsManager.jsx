@@ -10,7 +10,7 @@
  * Reject (dismiss). Confirmed chains (P3b) feed generation.
  */
 import { useMemo, useState } from 'react';
-import { Check, X, Trash2, Sparkles } from 'lucide-react';
+import { Check, X, Trash2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { inferSupplyChains } from '../../domain/inferSupplyChains.js';
@@ -62,7 +62,6 @@ export default function SupplyChainsManager() {
           chain cards' grammar and doesn't out-weight the content it introduces
           — the heaviest container is reserved for the chains, not the explainer (P5). */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, borderLeft: `3px solid ${swatch.magic}`, borderRadius: 7, background: swatch['#F8F4FF'] }}>
-        <Sparkles size={14} style={{ color: swatch.magic, marginTop: 2, flexShrink: 0 }} />
         <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
           Supply chains are <strong>discovered automatically</strong> from your custom institutions,
           services, resources, and trade goods. The engine connects what each one produces to what

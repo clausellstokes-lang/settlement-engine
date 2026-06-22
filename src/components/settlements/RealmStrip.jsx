@@ -16,9 +16,8 @@
  * store, no rng, no wall clock.
  */
 
-import { Clock, Shield, ShieldOff, Sparkles, Newspaper } from 'lucide-react';
 import { liveSieges } from '../../domain/display/warStatus.js';
-import { GOLD_TXT, MUTED, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
+import { GOLD_TXT, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
 
@@ -108,30 +107,26 @@ export default function RealmStrip({ campaign, settlements = [] }) {
         fontFamily: sans, fontSize: FS.xs, color: BODY,
       }}
     >
-      <Seg icon={<Clock size={11} color={GOLD_TXT} aria-hidden="true" />} title="In-world clock. One advance step is one month.">
+      <Seg title="In-world clock. One advance step is one month.">
         <strong style={{ color: GOLD_TXT, fontSize: FS.sm }}>{clock}</strong>
         <span style={{ color: BODY }}> · month {tick}</span>
       </Seg>
 
-      <Seg
-        icon={siegeCount > 0
-          ? <Shield size={11} color={SIEGE_RED} aria-hidden="true" />
-          : <ShieldOff size={11} color={MUTED} aria-hidden="true" />}
-        title="Active sieges in the realm">
+      <Seg title="Active sieges in the realm">
         <span style={{ color: siegeCount > 0 ? SIEGE_RED : BODY, fontWeight: siegeCount > 0 ? 700 : 400 }}>
           {siegeCount} {siegeCount === 1 ? 'siege' : 'sieges'}
         </span>
       </Seg>
 
       {faith && (
-        <Seg icon={<Sparkles size={11} color={VIOLET_DEEP} aria-hidden="true" />} title={`Dominant faith: ${faith.name} (${faith.tier})`}>
+        <Seg title={`Dominant faith: ${faith.name} (${faith.tier})`}>
           <span style={{ color: VIOLET_DEEP, fontWeight: 700 }}>{faith.name}</span>
           <span style={{ color: BODY }}> · {faith.tier}</span>
         </Seg>
       )}
 
       {newsAge != null && (
-        <Seg icon={<Newspaper size={11} color={GOLD_TXT} aria-hidden="true" />} title="Wizard News recency">
+        <Seg title="Wizard News recency">
           <span style={{ color: BODY }}>
             {newsAge === 0 ? 'News this month' : `News ${newsAge} month${newsAge === 1 ? '' : 's'} ago`}
           </span>
@@ -142,10 +137,10 @@ export default function RealmStrip({ campaign, settlements = [] }) {
 }
 
 /** One labelled segment of the strip. */
-function Seg({ icon, children, title }) {
+function Seg({ children, title }) {
   return (
     <span title={title} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
-      {icon}{children}
+      {children}
     </span>
   );
 }

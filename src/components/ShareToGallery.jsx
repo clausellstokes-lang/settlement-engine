@@ -15,7 +15,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
+import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { validateDossier } from '../domain/validation/consistency.js';
@@ -151,9 +151,6 @@ export default function ShareToGallery({
       background: CARD_ALT, color: BODY,
       fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
     }}>
-      {shareNarrated && hasNarrative
-        ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
-        : <Lock size={12} style={{ marginTop: 1, flexShrink: 0, color: MUTED }} />}
       <span>
         {shareNarrated && hasNarrative
           ? <>The gallery displays your <strong>narrated dossier</strong>. Viewers read the refined prose. Private DM content (secrets, hooks, notes) remains hidden.</>
@@ -171,7 +168,7 @@ export default function ShareToGallery({
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
-        <Lock size={12} /> Save the settlement first to share publicly.
+        Save the settlement first to share publicly.
       </div>
     );
   }
@@ -322,11 +319,8 @@ export default function ShareToGallery({
           onChange={event => setShareDm(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
-          <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
-          <span>
-            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become visible to all readers. Disabled by default; save details or re-share to enable.
-          </span>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become visible to all readers. Disabled by default; save details or re-share to enable.
         </span>
       </label>
       {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
@@ -426,7 +420,7 @@ export default function ShareToGallery({
           fontSize: FS.xs, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
-          <Globe size={11} /> Public
+          Public
         </span>
         <Button
           variant="gold"
@@ -458,7 +452,7 @@ export default function ShareToGallery({
             display: 'inline-flex', alignItems: 'center', gap: 4,
             fontSize: FS.xs, color: RED,
           }}>
-            <AlertCircle size={11} /> {error}
+            {error}
           </span>
         )}
         {aiOverlayNote}
@@ -504,7 +498,7 @@ export default function ShareToGallery({
           display: 'inline-flex', alignItems: 'center', gap: 4,
           fontSize: FS.xs, color: RED,
         }}>
-          <AlertCircle size={11} /> {error}
+          {error}
         </span>
       )}
       <span style={{

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, RotateCcw, Loader2, AlertTriangle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { FS, swatch, CARD, BODY } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
@@ -44,7 +44,8 @@ function MetaFact({ label, value, accent }) {
 }
 
 // Active-stress chip — the one secondary signal that must stay loud. Emphasis
-// in two channels: the danger color plus a warning icon and explicit label.
+// in two channels: the danger color plus the explicit uppercase label and the
+// danger border.
 function StressFact({ value }) {
   const danger = swatch['#8B1A1A'];
   return (
@@ -56,7 +57,6 @@ function StressFact({ value }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 1 }}>
-        <AlertTriangle size={11} color={danger} aria-hidden="true" />
         <span style={{ fontSize: FS['8.5'], fontWeight: 700, color: danger, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Active stress</span>
       </div>
       <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value}</div>
@@ -176,14 +176,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       : 'Generate Daily Life: Narrative refinement';
   })();
 
-  // The action icon mirrors the label: a fresh pass uses Sparkles, a repeat
-  // pass uses RotateCcw. When busy, Button supplies its own spinner.
-  const buttonIcon = loading
-    ? null
-    : hasContent
-      ? <RotateCcw size={16} aria-hidden="true" />
-      : <Sparkles size={16} aria-hidden="true" />;
-
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
       <TabIntro tabKey="dailyLife" />
@@ -244,7 +236,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           variant="primary"
           size="lg"
           fullWidth
-          icon={buttonIcon}
           onClick={generate}
           busy={loading}
           title={hasContent

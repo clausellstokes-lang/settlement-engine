@@ -1,4 +1,3 @@
-import { Eye, MessageCircle, Sparkles } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -85,7 +84,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
                 fontSize: FS.xs,
                 fontWeight: 950,
               }}>
-                <Sparkles size={11} /> Curated
+                Curated
               </span>
             </div>
           )}
@@ -175,11 +174,11 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
           {/* One quiet muted ledger of read-only counts + date — a single tier
               below the interactive vote control. (P4 <=3 levels / P5 quiet the neighbors.) */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
-            <span aria-label={`${formatNumber(item.viewCount)} views`} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
-              <Eye size={12} aria-hidden="true" /> {formatNumber(item.viewCount)}
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
+              {formatNumber(item.viewCount)} views
             </span>
-            <span aria-label={`${formatNumber(item.commentCount)} comments`} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
-              <MessageCircle size={12} aria-hidden="true" /> {formatNumber(item.commentCount)}
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
+              {formatNumber(item.commentCount)} comments
             </span>
             <span>{formatDate(item.updatedAt || item.publishedAt)}</span>
           </div>

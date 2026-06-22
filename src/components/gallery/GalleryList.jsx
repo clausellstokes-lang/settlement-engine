@@ -1,4 +1,4 @@
-import { Image as ImageIcon, Sparkles, X } from 'lucide-react';
+import { Sparkles, X } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import {
@@ -8,7 +8,6 @@ import {
   BORDER,
   CARD,
   FS,
-  GOLD,
   GREEN,
   GREEN_BG,
   MUTED,
@@ -123,7 +122,6 @@ export default function GalleryList({
           )}
           {!listLoading && items.length === 0 && !listError && (
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.xl, textAlign: 'center', color: BODY, display: 'grid', gap: SP.md, justifyItems: 'center' }}>
-              <ImageIcon size={26} color={GOLD} style={{ justifySelf: 'center' }} />
               {/* Two distinct dead-ends share one screen: a filtered query with no
                   matches needs a "clear filters" recovery; a genuinely empty gallery
                   needs the forge next-step. Branch the recovery ACTION on the filter

@@ -18,6 +18,7 @@
 import { Crown } from 'lucide-react';
 import { FS, INK } from '../theme.js';
 import { useStore } from '../../store/index.js';
+import { useIconsOn } from './IconsContext.js';
 
 const SIZES = {
   sm: { fontSize: FS.micro,  iconSize: 9,  pad: '1px 5px',  gap: 3, radius: 3 },
@@ -27,6 +28,7 @@ const SIZES = {
 
 export default function FounderBadge({ size = 'md', force = false, style }) {
   const isFounder = useStore(s => s.isFounder?.() ?? false);
+  const iconsOn = useIconsOn();
   if (!force && !isFounder) return null;
 
   const s = SIZES[size] || SIZES.md;
@@ -56,7 +58,7 @@ export default function FounderBadge({ size = 'md', force = false, style }) {
         ...style,
       }}
     >
-      <Crown size={s.iconSize} aria-hidden="true" />
+      {iconsOn && <Crown size={s.iconSize} aria-hidden="true" />}
       Founder
     </span>
   );

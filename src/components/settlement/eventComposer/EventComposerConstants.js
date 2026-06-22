@@ -7,16 +7,7 @@
  * presentational children can share one source of truth.
  */
 
-import { Plus, Trash2, Flame, AlertOctagon, MapPinOff } from 'lucide-react';
 import { GOLD, INK, MUTED, BORDER, sans, FS, R, swatch } from '../../theme.js';
-
-export const _TYPE_ICONS = {
-  ADD_INSTITUTION:    Plus,
-  REMOVE_INSTITUTION: Trash2,
-  DAMAGE_INSTITUTION: Flame,
-  DEPLETE_RESOURCE:   AlertOctagon,
-  CUT_TRADE_ROUTE:    MapPinOff,
-};
 
 // Code-review fix: target field used to be a free-text input. The user
 // shouldn't have to TYPE the name of an NPC they want to kill — the NPC

@@ -10,7 +10,7 @@
  * No upload here: the parent (CoverImageField) owns file selection + storage.
  */
 import { useEffect, useRef, useState } from 'react';
-import { ZoomIn, RotateCcw, Check, X } from 'lucide-react';
+import { RotateCcw, Check, X } from 'lucide-react';
 
 import {
   clampOffset,
@@ -205,7 +205,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <ZoomIn size={14} style={{ color: MUTED, flexShrink: 0 }} />
+        <span style={{ color: MUTED, flexShrink: 0, fontSize: FS.xxs, fontWeight: 800 }}>Zoom</span>
         <input
           type="range"
           min={1}
@@ -218,6 +218,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
         />
         <IconButton
           Icon={RotateCcw}
+          glyph="↺"
           label="Reset zoom and position"
           onClick={reset}
           tone="default"

@@ -19,7 +19,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Swords, Flame, Sparkles, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { FS, PARCH, INK_DEEP, INK, GOLD, GOLD_B, MUTED, BORDER, sans, serif_, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
@@ -152,17 +152,17 @@ export default function RegionWakeReplay({ onUpgrade }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
           {view.sieges.length > 0 && (
             <span style={chip(CRIMSON)}>
-              <Swords size={11} /> {view.sieges.length} siege{view.sieges.length === 1 ? '' : 's'}
+              {view.sieges.length} siege{view.sieges.length === 1 ? '' : 's'}
             </span>
           )}
           {view.pantheon.length > 0 && (
             <span style={chip(VIOLET)}>
-              <Sparkles size={11} /> {view.pantheon[0].id.split(/[:_]/).pop()} · {view.pantheon[0].tier}
+              {view.pantheon[0].id.split(/[:_]/).pop()} · {view.pantheon[0].tier}
             </span>
           )}
           {view.sieges.length === 0 && view.arcs.length === 0 && (
             <span style={chip(swatch['#4A7A3A'])}>
-              <Flame size={11} /> At peace
+              At peace
             </span>
           )}
         </div>

@@ -13,7 +13,6 @@
  * because the settlement has no factions) degrades gracefully.
  */
 
-import { Sparkles, AlertTriangle, Shuffle, MapPin, Users, Network } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { Section, TabIntro } from '../Primitives';
 
@@ -21,13 +20,12 @@ import { Section, TabIntro } from '../Primitives';
 
 const has = (x) => x != null && (Array.isArray(x) ? x.length > 0 : typeof x === 'object' ? Object.keys(x).length > 0 : String(x).length > 0);
 
-// A compass/identity-marker row: icon + prose.
-function BulletRow({ icon: Icon, color, children }) {
+// A compass/identity-marker row: an accent-led prose line. The leading rule
+// carries the group's accent colour so the rows still read as a set.
+function BulletRow({ color, children }) {
   return (
     <div style={{ display: 'flex', gap: 9, alignItems: 'flex-start', padding: '6px 0' }}>
-      <span style={{ color, flexShrink: 0, marginTop: 3, display: 'flex' }}>
-        <Icon size={13} />
-      </span>
+      <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 2, borderRadius: 1, background: color }} />
       <div style={{ flex: 1, fontSize: FS['12.5'], color: swatch.inkMag, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
         {children}
       </div>
@@ -51,7 +49,7 @@ function CompassPanel({ compass }) {
             Adventure hooks
           </div>
           {hooks.map((h, i) => (
-            <BulletRow key={i} icon={Sparkles} color="#6a2a9a">{h}</BulletRow>
+            <BulletRow key={i} color="#6a2a9a">{h}</BulletRow>
           ))}
         </div>
       )}
@@ -62,7 +60,7 @@ function CompassPanel({ compass }) {
             Red flags
           </div>
           {redFlags.map((r, i) => (
-            <BulletRow key={i} icon={AlertTriangle} color="#8b1a1a">{r}</BulletRow>
+            <BulletRow key={i} color="#8b1a1a">{r}</BulletRow>
           ))}
         </div>
       )}
@@ -72,7 +70,7 @@ function CompassPanel({ compass }) {
           <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch['#A0762A'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
             If the session is dragging
           </div>
-          <BulletRow icon={Shuffle} color="#a0762a">{twist}</BulletRow>
+          <BulletRow color="#a0762a">{twist}</BulletRow>
         </div>
       )}
     </Section>
@@ -87,7 +85,7 @@ function IdentityMarkersPanel({ markers }) {
         Concrete details to drop into a scene as you describe the place.
       </div>
       {markers.map((m, i) => (
-        <BulletRow key={i} icon={MapPin} color="#1a5a28">{m}</BulletRow>
+        <BulletRow key={i} color="#1a5a28">{m}</BulletRow>
       ))}
     </Section>
   );
@@ -102,7 +100,6 @@ function FrictionPointsPanel({ points }) {
       </div>
       {points.map((p, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: 'rgba(160,118,42,0.06)', border: '1px solid rgba(160,118,42,0.18)', borderRadius: 5 }}>
-          <Users size={13} color="#a0762a" style={{ marginTop: 3, flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>
               {p.who}
@@ -126,7 +123,6 @@ function ConnectionsMapPanel({ edges }) {
       </div>
       {edges.map((e, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '5px 10px', borderBottom: i < edges.length - 1 ? '1px solid #e0d0b0' : 'none', flexWrap: 'wrap' }}>
-          <Network size={12} color="#2a3a7a" style={{ flexShrink: 0 }} />
           <span style={{ fontSize: FS['11.5'], fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>
           <span style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', padding: '0 4px', fontFamily: 'Georgia, serif' }}>{e.nature}</span>
           {e.via && (

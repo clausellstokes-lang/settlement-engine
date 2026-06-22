@@ -17,7 +17,7 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info } from 'lucide-react';
+import { Map as MapIcon, Zap, Shield } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
@@ -70,12 +70,12 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
-  { id: 'generate',    label: 'Create',     Icon: MapPin },
-  { id: 'settlements', label: 'Library',    Icon: FolderOpen },
-  { id: 'realm',       label: 'Realm',      Icon: MapIcon },
-  { id: 'compendium',  label: 'Compendium', Icon: BookOpen },
-  { id: 'gallery',     label: 'Gallery',    Icon: Images },
-  { id: 'howto',       label: 'About',      Icon: Info },
+  { id: 'generate',    label: 'Create' },
+  { id: 'settlements', label: 'Library' },
+  { id: 'realm',       label: 'Realm' },
+  { id: 'compendium',  label: 'Compendium' },
+  { id: 'gallery',     label: 'Gallery' },
+  { id: 'howto',       label: 'About' },
 ];
 
 function Loading() {
@@ -394,7 +394,6 @@ export default function App() {
                 keeps the "simulator for DMs" framing visible for
                 signed-in users who'd otherwise never see it. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <MapIcon size={24} color={GOLD} />
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
                 <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
                   SettlementForge
@@ -588,7 +587,7 @@ export default function App() {
               padding: isMobile ? `0 ${SP.sm}px` : 0,
               minHeight: isMobile ? 44 : undefined,
             }}>
-              <Headphones size={11} /> {t('footer.contact')}
+              {t('footer.contact')}
             </a>
           </nav>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
@@ -607,7 +606,7 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {mobileNav.map(({ id, label, Icon }) => {
+            {mobileNav.map(({ id, label }) => {
               const active = view === id;
               return (
                 <button
@@ -629,14 +628,14 @@ export default function App() {
                     letterSpacing: '0.04em', textTransform: 'uppercase',
                   }}
                 >
-                  <Icon size={18} />
                   <span style={{ lineHeight: 1 }}>{label}</span>
                 </button>
               );
             })}
-            {/* Auth chip as 6th bottom-nav slot. Replaces the dropped
-                mobile top header. Icon-only, gold-outline for anon,
-                green-fill for signed-in. */}
+            {/* Auth chip as 6th bottom-nav slot. Replaces the dropped mobile
+                top header. Text-only label (Sign in / Account): gold for anon,
+                parchment for signed-in, with a gold top-border when Account is
+                the active view. */}
             {_readFlag('mobileSingleChrome') && (
               <button
                 type="button"
@@ -656,7 +655,6 @@ export default function App() {
                   letterSpacing: '0.04em', textTransform: 'uppercase',
                 }}
               >
-                <User size={18} />
                 <span style={{ lineHeight: 1 }}>
                   {authTier === 'anon' ? 'Sign in' : 'Account'}
                 </span>

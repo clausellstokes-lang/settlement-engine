@@ -6,6 +6,7 @@ import {
 } from '../theme.js';
 import Button from './Button.jsx';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
+import { useIconsOn } from './IconsContext.js';
 
 function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
   // Shared focus trap: focus-in on open, Tab cycling, Escape-to-cancel, and
@@ -14,6 +15,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
   // mid-typing.
   const dialogRef = useDialogFocusTrap(open, onCancel);
 
+  const iconsOn = useIconsOn();
   if (!open) return null;
   const iconColor = tone === 'danger' ? RED : tone === 'warning' ? AMBER : GOLD;
 
@@ -58,6 +60,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           borderBottom: `1px solid ${BORDER}`,
           background: CARD_ALT,
         }}>
+          {iconsOn && (
           <div style={{
             width: 32,
             height: 32,
@@ -72,6 +75,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           }}>
             <AlertTriangle size={16} />
           </div>
+          )}
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{
               margin: 0,
@@ -108,7 +112,9 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
               display: 'inline-flex',
             }}
           >
-            <X size={16} />
+            {iconsOn
+              ? <X size={16} />
+              : <span aria-hidden="true" style={{ fontSize: FS.xl, lineHeight: 1, fontWeight: 700 }}>×</span>}
           </button>
         </header>
         <div style={{ padding: SP.lg }}>

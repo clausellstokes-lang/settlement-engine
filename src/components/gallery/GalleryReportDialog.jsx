@@ -8,7 +8,6 @@ import {
   CARD_ALT,
   ELEV,
   FS,
-  GOLD,
   INK,
   R,
   RED,
@@ -116,12 +115,12 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               borderBottom: `1px solid ${BORDER}`,
               background: CARD_ALT,
             }}>
-              <Flag size={16} color={GOLD} />
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
                 Report settlement
               </h2>
               <IconButton
                 Icon={X}
+                glyph="×"
                 label="Close"
                 tone="ghost"
                 size="lg"

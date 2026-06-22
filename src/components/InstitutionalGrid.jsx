@@ -199,11 +199,14 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
     : isExcluded                 ? muted
     : ink;
 
-  // Excluded = opacity only, no label. Forced/required still show label.
+  // Two channels for every pole of the constraint (P7): excluded carries an
+  // uppercase EXCLUDED text label, not strikethrough + opacity alone, mirroring
+  // the Forced chip so colour is never the sole carrier of state.
   const labelText = reqOverridden                  ? '✕ Overridden'
     : def.required && !reqOverridden               ? '✦ Required'
     : req && isOutOfTier                           ? 'Cross-tier'
     : req                                          ? 'Forced'
+    : isExcluded                                   ? 'Excluded'
     : null;
 
   const labelColor = reqOverridden ? swatch['#8B1A1A']
@@ -255,7 +258,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
             <span style={{ fontSize: FS.micro, fontWeight: 700, color: labelColor,
               background: `${labelColor}15`, border: `1px solid ${labelColor}40`,
               borderRadius: 3, padding: '1px 4px',
-              letterSpacing: '0.04em' }}>
+              textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               {labelText}
             </span>
           )}

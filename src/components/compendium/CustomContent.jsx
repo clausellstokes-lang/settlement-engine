@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, SP, swatch } from '../theme.js';
-import { Sparkles, Plus, Edit3, Trash2, Copy, Wand2, X } from 'lucide-react';
+import { Plus, Edit3, Trash2, Copy, Wand2, X } from 'lucide-react';
 import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, DEITY_ALIGNMENT, DEITY_TEMPER, DEITY_TIER, DEITY_LAW, satisfiesOptions } from '../../domain/customContentSchema.js';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
@@ -107,7 +107,7 @@ export function ReadOnlyCustomContentList({ search }) {
               background: activeCat === c.key ? `${c.color}14` : 'transparent',
               color: activeCat === c.key ? c.color : SEC,
             }}>
-              <c.Icon size={11} /> {c.label}
+              {c.label}
               <span style={{
                 fontSize: FS.micro, fontWeight: 700, background: `${c.color}20`, color: c.color,
                 borderRadius: 6, padding: '0 4px', marginLeft: 2,
@@ -420,7 +420,6 @@ export function CustomContentManager({ search }) {
           end (P10). The full skeleton still covers the empty-bucket first load. */}
       {customContentLoading && !customContentError && (
         <div role="status" style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 12px', marginBottom:10, fontSize:FS.xs, color:BODY, fontStyle:'italic' }}>
-          <Sparkles size={12} style={{ color:swatch.magic, flexShrink:0 }} />
           Syncing your custom content…
         </div>
       )}
@@ -454,7 +453,7 @@ export function CustomContentManager({ search }) {
               return (
                 <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
                   style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
-                  <c.Icon size={11}/> {c.label}
+                  {c.label}
                   {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
                 </button>
               );
@@ -502,7 +501,6 @@ export function CustomContentManager({ search }) {
             {seedEntries.map(entry => (
               <Button key={entry.refId} variant="ghost" size="sm" onClick={() => cloneFromSeed(entry)}
                 style={{ display:'flex', alignItems:'center', gap:6, justifyContent:'flex-start', textAlign:'left', border:`1px solid ${BOR}`, borderRadius:5, padding:'5px 8px', background:'transparent', color:INK }}>
-                <Copy size={11} style={{ color:MUT, flexShrink:0 }}/>
                 <span style={{ fontSize:FS.xs, fontWeight:600, flex:1 }}>{entry.name}</span>
                 {entry.subcategory && <Tag label={entry.subcategory} color={catDef.color}/>}
               </Button>
@@ -525,7 +523,7 @@ export function CustomContentManager({ search }) {
           <Button variant="ai" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')}>
             Test in a generation
           </Button>
-          <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
+          <IconButton Icon={X} glyph="×" label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
         </div>
       )}
 

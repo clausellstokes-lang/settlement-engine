@@ -7,8 +7,6 @@
  * Pure data + the lane grouping. No store, no React state.
  */
 
-import { Link2, Building2, Package, HeartHandshake, Flag, Coins, Sun, AlertTriangle } from 'lucide-react';
-
 // Per-category schema:
 //   fields:        flat scalar fields rendered in the main form
 //   dependencies:  refId-array fields rendered in the always-visible Dependencies
@@ -18,7 +16,7 @@ import { Link2, Building2, Package, HeartHandshake, Flag, Coins, Sun, AlertTrian
 //                  `category` (or `categories` for a multi-bucket picker, e.g.
 //                  tradeGoods + services) is the registry category to pick from.
 export const CUSTOM_CATEGORIES = [
-  { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
+  { key:'institutions', label:'Institutions',  color:'#1a3a7a',
     fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
     dependencies: [
       { key:'produces',    label:'Produces (goods/services)', categories:['tradeGoods','services'],
@@ -29,7 +27,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Institutions this one represents. When present, the smaller ones aren’t listed separately.' },
     ],
   },
-  { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
+  { key:'services',     label:'Services',      color:'#0e7c86',
     fields:['name','category','authority','criticality','economicWeight','magical','criminal','foodImpact','description','tierMin','tierMax'],
     dependencies: [
       { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
@@ -38,7 +36,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Resources, goods, or services this service consumes to operate.' },
     ],
   },
-  { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
+  { key:'resources',    label:'Resources',     color:'#1a5a28',
     fields:['name','category','criticality','foodImpact','commodities','description'],
     dependencies: [
       { key:'yields',  label:'Output (goods/services)', categories:['tradeGoods','services'],
@@ -47,7 +45,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Institutions whose viability is boosted by access to this resource.' },
     ],
   },
-  { key:'stressors',    label:'Stressors',    Icon:AlertTriangle, color:'#8b1a1a',
+  { key:'stressors',    label:'Stressors',     color:'#8b1a1a',
     fields:['name','description','severity','affects'],
     dependencies: [
       { key:'disablesInstitutions', label:'Disables institutions', category:'institutions',
@@ -56,7 +54,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Goods whose production halts under this stressor.' },
     ],
   },
-  { key:'tradeGoods',   label:'Trade Goods',  Icon:Coins,     color:'#a0762a',
+  { key:'tradeGoods',   label:'Trade Goods',    color:'#a0762a',
     fields:['name','category','criticality','economicWeight','foodImpact','satisfies','description'],
     dependencies: [
       { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
@@ -65,7 +63,7 @@ export const CUSTOM_CATEGORIES = [
         hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
     ],
   },
-  { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
+  { key:'factions',     label:'Factions',       color:'#6a1a4a',
     fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
     dependencies: [
       { key:'controls',  label:'Controls institutions', category:'institutions',
@@ -79,13 +77,13 @@ export const CUSTOM_CATEGORIES = [
   // primary deity (the embed-on-assign bridge in SettlementDetail). No
   // dependencies — a deity stands alone; it acts through the assignment, not
   // through generation wiring.
-  { key:'deities',      label:'Deities',      Icon:Sun,      color:'#7a5a1a',
+  { key:'deities',      label:'Deities',       color:'#7a5a1a',
     fields:['name','alignmentAxis','temperamentAxis','rankAxis','lawAxis','domain','description'],
   },
   // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
   // above), not hand-authored — this tab renders its own discover/verify
   // manager (SupplyChainsManager) instead of the generic add form.
-  { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
+  { key:'supplyChains', label:'Supply Chains',  color:'#a0762a', discovered:true },
   // Trade Routes / Power Presets / Defense Presets removed:
   // redundant with the trade-route, government, and defense controls already in
   // the generation config. PRUNED from the authoring UI + registry, but the

@@ -1,4 +1,5 @@
 import { FS, SP, INK, MUTED, sans, serif_ } from '../theme.js';
+import { useIconsOn } from './IconsContext.js';
 
 /**
  * primitives/Stat — one labelled figure, read as a clean ledger entry.
@@ -16,9 +17,10 @@ import { FS, SP, INK, MUTED, sans, serif_ } from '../theme.js';
  * @param {'sm'|'md'} [props.size='md']
  */
 export default function Stat({ label, value, tone, icon: Icon, size = 'md' }) {
+  const iconsOn = useIconsOn();
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, minWidth: 0 }}>
-      {Icon && <Icon size={size === 'sm' ? 14 : 16} aria-hidden="true" />}
+      {iconsOn && Icon && <Icon size={size === 'sm' ? 14 : 16} aria-hidden="true" />}
       <div style={{ minWidth: 0 }}>
         <div style={{
           fontFamily: sans, fontSize: FS.micro, fontWeight: 800,

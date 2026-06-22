@@ -10,7 +10,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import { Zap, X, Check } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
@@ -326,7 +326,6 @@ export default function EventComposer() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
-        <Zap size={12} />
         Make Changes
       </div>
       <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: -2, marginBottom: SP.sm, lineHeight: 1.4 }}>

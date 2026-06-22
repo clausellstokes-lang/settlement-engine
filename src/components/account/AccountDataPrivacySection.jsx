@@ -16,15 +16,13 @@
  *     by the durable productPrefs store (setProductPref).
  */
 import { useState } from 'react';
-import {
-  Database, Download, Trash2, AlertTriangle, Eye,
-} from 'lucide-react';
+import { Download, AlertTriangle } from 'lucide-react';
 import { downloadAccountExport, requestAccountDeletion } from '../../lib/accountData.js';
 import { useStore } from '../../store/index.js';
 import PrivacySettings from '../PrivacySettings.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD, INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
   DANGER_BORDER, SUCCESS_BORDER,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -121,13 +119,13 @@ export default function AccountDataPrivacySection({
   };
 
   return (
-    <Section title="Data &amp; Privacy" icon={Database}>
+    <Section title="Data and privacy">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
 
         {/* ── Export ────────────────────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Download size={14} color={GOLD} /> Export my data
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Export my data
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Download all your saved settlements and campaigns as a single JSON file.
@@ -139,8 +137,8 @@ export default function AccountDataPrivacySection({
 
         {/* ── Visibility defaults ───────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
-            <Eye size={14} color={GOLD} /> Sharing &amp; visibility defaults
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
+            Sharing and visibility defaults
           </div>
           <VisibilityToggle
             id="pref-gallery-public"
@@ -182,8 +180,8 @@ export default function AccountDataPrivacySection({
 
         {/* ── Bulk content deletion ─────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Trash2 size={14} color={swatch.danger} /> Delete content
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Delete content
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Permanently remove all your saved content. This cannot be undone.
@@ -213,8 +211,8 @@ export default function AccountDataPrivacySection({
 
         {/* ── Account deletion (soft-delete request) ────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: swatch.danger }}>
-            <AlertTriangle size={14} color={swatch.danger} /> Delete my account
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.danger }}>
+            Delete my account
           </div>
           {deleteQueued ? (
             <div style={{ marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
@@ -226,7 +224,7 @@ export default function AccountDataPrivacySection({
                 This requests permanent deletion of your account and all associated data. There is a short grace
                 window during which you can contact support to cancel.
               </p>
-              <Button variant="danger" size="md" icon={<AlertTriangle size={14} />} onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
+              <Button variant="ghost" size="md" icon={<AlertTriangle size={14} />} onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
                 Request account deletion
               </Button>
             </>

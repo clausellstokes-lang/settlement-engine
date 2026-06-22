@@ -1,4 +1,4 @@
-import { Check, SlidersHorizontal, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import { useId } from 'react';
 
 import { TIER_LABELS } from '../new/design.js';
@@ -117,7 +117,6 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <SlidersHorizontal size={15} color={GOLD} />
         <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
           Filters
         </h2>

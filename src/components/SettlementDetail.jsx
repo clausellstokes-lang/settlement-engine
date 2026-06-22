@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
+import {ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import Button from './primitives/Button.jsx';
@@ -47,7 +47,6 @@ import { ConfirmDialog } from './primitives/Dialog.jsx';
 import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
-import { AlertTriangle } from 'lucide-react';
 // Read-only network-effect echo: the SAME modifier selector + effect taxonomy
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
@@ -398,7 +397,7 @@ export default function SettlementDetail({
                   border:'1px solid rgba(160,100,220,0.22)',
                 }}
               >
-                <Edit3 size={10}/> Edited · {editedCount}
+                Edited · {editedCount}
               </span>
             )}
           </div>
@@ -466,7 +465,6 @@ export default function SettlementDetail({
             <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px'}}>
               {summaryPressure && (
                 <span style={{display:'inline-flex',alignItems:'baseline',gap:6,flex:'1 1 240px',minWidth:0}}>
-                  <AlertTriangle size={13} color={AMBER_DEEP} style={{alignSelf:'center',flexShrink:0}} aria-hidden="true"/>
                   <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:AMBER_DEEP,lineHeight:1.35}}>{summaryPressure}</span>
                 </span>
               )}
@@ -507,7 +505,7 @@ export default function SettlementDetail({
         // an off-scale 14 (P5 spacing-scale discipline).
         <div style={{ marginBottom:16 }}>
           <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
-            <Share2 size={12}/> {liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery'}
+            {liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery'}
           </div>
           <ShareToGallery
             saveId={saveId}
@@ -675,7 +673,6 @@ export default function SettlementDetail({
             aria-expanded={linking} aria-pressed={linking}
             onClick={()=>setLinking(v=>!v)}
             style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
-            <Link2 size={14} color="#2a3a7a"/>
             <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
             <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
           </Button>
@@ -689,7 +686,7 @@ export default function SettlementDetail({
             anti-box-soup). */}
         {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
           <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
-            <Link2 size={12}/> Neighbour Network ({network.length})
+            Neighbour Network ({network.length})
           </h3>
           {/* Rows separated by spacing, not per-row hairlines: the single card
               border + the colored relationship dot already group the list, so

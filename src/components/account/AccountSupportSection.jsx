@@ -12,7 +12,6 @@
  * accepted for back-compat with AccountPage but are no longer the primary path;
  * ticket creation goes through AccountTickets. A direct email fallback remains.
  */
-import { Headphones } from 'lucide-react';
 import { GOLD_TXT, MUTED, SECOND, sans, SP, FS } from '../theme.js';
 import Section from './AccountSection.jsx';
 import AccountFAQ from './AccountFAQ.jsx';
@@ -20,7 +19,7 @@ import AccountTickets from './AccountTickets.jsx';
 
 export default function AccountSupportSection({ auth: _auth } = {}) {
   return (
-    <Section title="Customer Support" icon={Headphones}>
+    <Section title="Customer Support">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
         {/* FAQ FIRST — self-resolve before opening a ticket. */}
         <div>

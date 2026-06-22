@@ -1,5 +1,3 @@
-import { Search } from 'lucide-react';
-
 import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
   BORDER,
@@ -7,7 +5,6 @@ import {
   BODY,
   FS,
   INK,
-  MUTED,
   R,
   SP,
   sans,
@@ -22,7 +19,6 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       marginBottom: SP.md,
     }}>
       <label htmlFor="gallery-search" style={{ position: 'relative', minWidth: 0 }}>
-        <Search size={15} color={MUTED} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)' }} />
         <input
           id="gallery-search"
           type="search"
@@ -36,7 +32,7 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
             width: '100%',
             minHeight: 44,
             boxSizing: 'border-box',
-            padding: '8px 10px 8px 32px',
+            padding: '8px 10px',
             border: `1px solid ${BORDER}`,
             borderRadius: R.md,
             background: CARD,

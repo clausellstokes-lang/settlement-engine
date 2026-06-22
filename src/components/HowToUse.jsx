@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle, Globe2 } from 'lucide-react';
 import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, layout, PROSE_MAX, SP, sans, serif_, FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
@@ -33,16 +32,16 @@ const SECTION_GAP = SP.xxl + SP.sm; // 24 + 8 = 32 (space-7)
 
 
 const TABS = [
-  { id:'quick',  label:'Quick Start',     Icon: Zap },
-  { id:'power',  label:'Power User',      Icon: Star },
+  { id:'quick',  label:'Quick Start' },
+  { id:'power',  label:'Power User' },
   // P9 — "The Living World" sits between Power User and Under the Hood: the
   // bridge from the static dossier to the premium living simulation.
-  { id:'living', label:'The Living World',Icon: Globe2 },
-  { id:'logic',  label:'Under the Hood',  Icon: Cpu },
-  { id:'phil',   label:'DM Philosophy',   Icon: BookOpen },
-  { id:'ref',    label:'Reference',       Icon: List },
-  { id:'compare',label:'How We Compare',  Icon: Scale },
-  { id:'faq',    label:'FAQ',             Icon: HelpCircle },
+  { id:'living', label:'The Living World' },
+  { id:'logic',  label:'Under the Hood' },
+  { id:'phil',   label:'DM Philosophy' },
+  { id:'ref',    label:'Reference' },
+  { id:'compare',label:'How We Compare' },
+  { id:'faq',    label:'FAQ' },
 ];
 
 // Flattened to a left-accented prose block (P5 anti-box-soup): grouping rides on
@@ -181,7 +180,7 @@ function QuickTab() {
       {/* P8/P9: the guide's primary task is generating — close the Quick Start
           region on the runnable next step rather than only documenting it. */}
       <div style={{ marginTop:SP.xl }}>
-        <Button variant="primary" size="lg" icon={<Zap />} onClick={() => navigate('generate')}>
+        <Button variant="primary" size="lg" onClick={() => navigate('generate')}>
           Generate your first settlement
         </Button>
       </div>
@@ -627,14 +626,14 @@ export default function HowToUse({ onNavigate = navigate } = {}) {
         <div className="tab-strip" role="tablist" aria-label="Guide sections"
           style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
           overflowX:'auto' }}>
-          {TABS.map(({ id, label, Icon }) => {
+          {TABS.map(({ id, label }) => {
             const selected = activeTab === id;
             return (
               <button key={id} type="button" role="tab" id={`howto-tab-${id}`}
                 aria-selected={selected} aria-controls={`howto-panel-${id}`}
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveTab(id)} onKeyDown={onTabKeyDown}
-                style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
+                style={{ display:'flex', alignItems:'center', padding:'12px 18px',
                   // P7/Fitts: lift to the ~44px at-the-table tap target (the 12px
                   // vertical padding nearly got there; minHeight does the rest
                   // without changing the visual rhythm). Buttons stay raw for the
@@ -647,7 +646,7 @@ export default function HowToUse({ onNavigate = navigate } = {}) {
                   cursor:'pointer', color: selected ? INK : BODY, fontFamily:sans,
                   fontSize:FS.sm, fontWeight:selected?700:500, whiteSpace:'nowrap',
                   WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-                <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
+                <span>{label}</span>
               </button>
             );
           })}

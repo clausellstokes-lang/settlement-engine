@@ -7,10 +7,6 @@
  * tier, founder, and credit changes are audited server-side.
  */
 import { useState, useEffect, useCallback, useRef } from 'react';
-import {
-  Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, RefreshCw, Crown, Flag, BarChart3, TrendingUp, Ticket, Swords,
-} from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
@@ -26,13 +22,12 @@ import PageHeader from './primitives/PageHeader.jsx';
 import Stat from './primitives/Stat.jsx';
 import { GOLD_TXT, INK, BODY, MUTED, BORDER, BORDER2, BORDER_STRONG, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, VIOLET_DEEP, RED, GREEN, VIOLET_BG, RED_BG } from './theme.js';
 
-// `readonly` mutes the header glyph: the icon hue is the cheap channel that
-// teaches the action-vs-reference boundary (P5 "the boundary teaches as it
-// groups") — the operator's high-frequency action tools keep the saturated
-// VIOLET_DEEP header glyph; the read-only analytics/reference sections get a
-// quiet MUTED glyph so a squint separates "tools I act in" from "dashboards I
-// read", giving the page a hierarchy instead of seven co-equal cards (P4).
-function Section({ title, icon: Icon, children, actions, readonly = false }) {
+// Icons-off surface: the section header is text-only. The action-vs-reference
+// boundary the old header glyph carried is now held by the differential
+// spacing that sets the read-only Insights cluster farther out from the action
+// tools (P5), so the page still reads as a hierarchy rather than co-equal cards
+// (P4).
+function Section({ title, children, actions }) {
   return (
     <div style={{
       border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden',
@@ -43,7 +38,6 @@ function Section({ title, icon: Icon, children, actions, readonly = false }) {
         padding: `${SP.md}px ${SP.lg}px`,
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
-        {Icon && <Icon size={16} color={readonly ? MUTED : VIOLET_DEEP} />}
         <h2 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
           {title}
         </h2>
@@ -163,8 +157,8 @@ function UserRow({ user, onUpdate }) {
               <option value="admin">Admin</option>
               <option value="developer">Developer</option>
             </select>
-            <IconButton Icon={Check} label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
-            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
+            <IconButton glyph="✓" label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton glyph="×" label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
           <Button variant="ghost" size="sm" onClick={() => startEdit('role', user.role)}
@@ -189,8 +183,8 @@ function UserRow({ user, onUpdate }) {
               <option value="free">Free</option>
               <option value="premium">Premium</option>
             </select>
-            <IconButton Icon={Check} label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
-            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
+            <IconButton glyph="✓" label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton glyph="×" label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
           <Button variant="ghost" size="sm" onClick={() => startEdit('tier', user.tier || 'free')}
@@ -215,15 +209,14 @@ function UserRow({ user, onUpdate }) {
               style={{ width: 60, fontSize: FS.xs, padding: '4px 4px', borderRadius: R.sm, border: `1px solid ${BORDER_STRONG}`, textAlign: 'right' }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
               autoFocus />
-            <IconButton Icon={Check} label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
-            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
+            <IconButton glyph="✓" label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton glyph="×" label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
           // De-emphasized vs the identity column (P4): credits is an editable
           // attribute, not the row's hero — quieter than the name, and routed
           // to the AA violet token rather than violet-as-text.
           <Button variant="ghost" size="sm" onClick={() => startEdit('credits', user.credits)}
-            icon={<Zap size={11} />}
             title="Generation credits remaining. Each run spends one. Zero means this user cannot generate until granted more."
             style={{
               ...editTriggerStyle, justifyContent: 'flex-end',
@@ -338,8 +331,7 @@ export default function AdminPanel({ onBack }) {
 
   if (!isElevated) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 20px', color: MUTED, fontFamily: sans }}>
-        <Shield size={48} color={BORDER} style={{ marginBottom: SP.lg }} />
+      <div style={{ textAlign: 'center', padding: '60px 20px', color: BODY, fontFamily: sans }}>
         <p style={{ fontSize: FS.lg }}>Access denied. Developer or Admin role required.</p>
       </div>
     );
@@ -359,21 +351,21 @@ export default function AdminPanel({ onBack }) {
         title="Admin"
         subtitle="Manage users, credits, and system settings."
         actions={onBack && (
-          <Button variant="gold" size="md" onClick={onBack} icon={<ChevronLeft size={14} />}>
+          <Button variant="gold" size="md" onClick={onBack}>
             Back
           </Button>
         )}
       />
 
-      {/* Stats — the three KPI figures as ledger Stats (muted uppercase label
-          over a serif value). Category is carried per-card by the leading glyph
-          (P7 second channel); Total Users keeps the saturated GOLD_TXT value as
-          the operator's first-scan figure (P4 one focal value). */}
+      {/* Stats — the three KPI figures as text-only ledger Stats (muted
+          uppercase label over a serif value). Category is carried by the label
+          text; Total Users keeps the saturated GOLD_TXT value as the operator's
+          first-scan figure (P4 one focal value). */}
       {stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: SP.md }}>
-          <Stat label="Total Users" value={stats.total} icon={Users} tone={GOLD_TXT} />
-          <Stat label="Premium" value={stats.premiumCount} icon={Crown} />
-          <Stat label="Credits Pool" value={stats.totalCredits} icon={Zap} />
+          <Stat label="Total Users" value={stats.total} tone={GOLD_TXT} />
+          <Stat label="Premium" value={stats.premiumCount} />
+          <Stat label="Credits Pool" value={stats.totalCredits} />
         </div>
       )}
 
@@ -382,8 +374,8 @@ export default function AdminPanel({ onBack }) {
           page-identity group above. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
       {/* User management */}
-      <Section title="User Management" icon={Users} actions={
-        <Button variant="ghost" size="sm" onClick={flushSearch} icon={<RefreshCw size={12} />}>
+      <Section title="User Management" actions={
+        <Button variant="ghost" size="sm" onClick={flushSearch}>
           Refresh
         </Button>
       }>
@@ -396,7 +388,6 @@ export default function AdminPanel({ onBack }) {
             padding: `${SP.sm}px ${SP.md}px`,
             background: swatch.white, borderRadius: R.md,
           }}>
-            <Search size={14} color={MUTED} />
             <input
               type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
               value={searchQuery}
@@ -408,7 +399,7 @@ export default function AdminPanel({ onBack }) {
               }}
             />
           </div>
-          <Button variant="secondary" size="sm" onClick={flushSearch} icon={<Search size={12} />}>
+          <Button variant="secondary" size="sm" onClick={flushSearch}>
             Search
           </Button>
         </div>
@@ -444,7 +435,7 @@ export default function AdminPanel({ onBack }) {
         ) : usersError ? (
           <div style={{ textAlign: 'center', padding: SP.xl, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm }}>
             <p role="alert" style={{ margin: 0, color: RED, fontSize: FS.sm }}>{usersError}</p>
-            <Button variant="secondary" size="sm" onClick={flushSearch} icon={<RefreshCw size={12} />}>
+            <Button variant="secondary" size="sm" onClick={flushSearch}>
               Retry
             </Button>
           </div>
@@ -463,11 +454,11 @@ export default function AdminPanel({ onBack }) {
 
       {/* A4: search / inspect / act on a single user (redacted-by-default,
           audited, role-gated server-side; reveal-full requires a reason). */}
-      <Section title="User Search & Actions" icon={Search}>
+      <Section title="User Search and Actions">
         <AdminUsersPanel />
       </Section>
 
-      <Section title="Gallery Reports" icon={Flag}>
+      <Section title="Gallery Reports">
         <GalleryModerationPanel />
       </Section>
 
@@ -475,7 +466,7 @@ export default function AdminPanel({ onBack }) {
           internal-note / link-FAQ, all audited + role-gated server-side. The
           second high-frequency action surface, so it sits with the action tools
           above the read-only Insights cluster (P4 3-tier hierarchy). */}
-      <Section title="Support Queue" icon={Ticket}>
+      <Section title="Support Queue">
         <SupportQueuePanel />
       </Section>
 
@@ -485,17 +476,17 @@ export default function AdminPanel({ onBack }) {
           "dashboards I read", so the page reads as a hierarchy instead of seven
           co-equal cards. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
-        <Section title="Usage Trends" icon={TrendingUp} readonly>
+        <Section title="Usage Trends">
           <AdminTrendsPanel />
         </Section>
 
-        <Section title="Analytics" icon={BarChart3} readonly>
+        <Section title="Analytics">
           <AdminAnalyticsPanel />
         </Section>
 
-        {/* F1 — simulation tuning: war/occupation/trade/faith balance + the
+        {/* F1 — simulation tuning: war/occupation/trade/faith balance and the
             player-safe visibility audit, read from the live campaigns' worldState. */}
-        <Section title="Sim Tuning" icon={Swords} readonly>
+        <Section title="Sim Tuning">
           <AdminSimTuningPanel />
         </Section>
       </div>

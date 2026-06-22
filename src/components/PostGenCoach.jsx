@@ -23,7 +23,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
@@ -118,13 +118,6 @@ export default function PostGenCoach() {
         background: 'rgba(201,162,76,0.10)',
         borderBottom: `1px solid rgba(201,162,76,0.25)`,
       }}>
-        <span style={{
-          width: 22, height: 22, borderRadius: '50%',
-          background: GOLD, color: swatch.white,
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <Sparkles size={12} />
-        </span>
         <span style={{
           fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
           textTransform: 'uppercase', color: GOLD,

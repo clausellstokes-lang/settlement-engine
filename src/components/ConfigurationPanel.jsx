@@ -29,7 +29,7 @@ function Lbl({children,topic}){
   if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
   return<div style={base}>{children}</div>;
 }
-function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
+function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 
 function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
   // Archetype selection lives in exactly ONE place now — the promoted Character
@@ -301,7 +301,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
       })()}
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="tier">Population</Lbl>
-          <Sel value={blockTownPlus && isTownPlus ? 'village' : config.settType}
+          <Sel ariaLabel="Population" value={blockTownPlus && isTownPlus ? 'village' : config.settType}
             onChange={e=>{
               const v = e.target.value;
               // If blocked tier somehow selected, snap to village
@@ -324,6 +324,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         </div>
         <div><Lbl topic="trade-route">Trade Route</Lbl>
           <Sel
+            ariaLabel="Trade Route"
             value={blockIsolated && isIsolated ? 'road' : config.tradeRouteAccess}
             onChange={e=>{
               const v = e.target.value;
@@ -360,7 +361,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         )}
 
         <div><Lbl topic="terrain">Terrain</Lbl>
-          <Sel value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
+          <Sel ariaLabel="Terrain" value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
             <option value="auto">Auto (from route)</option>
             <option value="plains">Plains / Farmland</option>
             <option value="forest">Forest / Woodland</option>
@@ -375,7 +376,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
       {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Culture</Lbl>
-          <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
+          <Sel ariaLabel="Culture" value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
             <option value="random_culture"> Random</option>
             <option value="mixed">Mixed</option>
             <option value="germanic">Germanic</option>
@@ -393,7 +394,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         </div>
         <div>
           <Lbl topic="settlement-age">Age</Lbl>
-          <Sel value={config.settlementAgeMode||'auto'} onChange={e=>updateConfig({settlementAgeMode:e.target.value})}>
+          <Sel ariaLabel="Settlement age" value={config.settlementAgeMode||'auto'} onChange={e=>updateConfig({settlementAgeMode:e.target.value})}>
             <option value="auto">Auto</option>
             <option value="new">Newly founded</option>
             <option value="custom">Custom years</option>
@@ -412,7 +413,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         </div>
         <div>
           <Lbl topic="monster-threat">Regional Threat</Lbl>
-          <Sel value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
+          <Sel ariaLabel="Regional Threat" value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
             <option value="random_threat"> Random</option>
             <option value="heartland">Safe Heartland</option>
             <option value="frontier">Active Frontier</option>
@@ -422,7 +423,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         </div>
         <div>
           <Lbl topic="magic-level">Magic in the World?</Lbl>
-          <Sel value={config.magicExists===false?'no':'yes'}
+          <Sel ariaLabel="Magic in the World" value={config.magicExists===false?'no':'yes'}
             onChange={e=>{
               const noMagicNow = e.target.value==='no';
               const isTownPlusNow = ['town','city','metropolis'].includes(config.settType);

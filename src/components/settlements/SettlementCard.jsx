@@ -1,5 +1,5 @@
 import { useMemo, useState, useRef, useEffect } from 'react';
-import {Link2, Clock, FolderOpen, ArrowRight, GitBranch, Unlock, BookMarked, MoreVertical, Trash2} from 'lucide-react';
+import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, MoreVertical, Trash2} from 'lucide-react';
 
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 import { GOLD, GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, FS, SP, swatch } from '../theme.js';
@@ -173,7 +173,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                     {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                       const nc = relColor(n.relationshipType);
                       return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
-                        <Link2 size={9} style={{display:'inline',verticalAlign:'middle',marginRight:2,color:nc}}/>{n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
+                        {n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                       </span>;
                     })}
                     {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:FS.xs,color:BODY}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
@@ -199,17 +199,17 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {regionalCounts.queued > 0 && (
                       <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                        <GitBranch size={9}/> {regionalCounts.queued} queued
+                        {regionalCounts.queued} queued
                       </span>
                     )}
                     {regionalCounts.applied > 0 && (
                       <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                        <GitBranch size={9}/> {regionalCounts.applied} applied
+                        {regionalCounts.applied} applied
                       </span>
                     )}
                     {regionalCounts.resolved > 0 && (
                       <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                        <GitBranch size={9}/> {regionalCounts.resolved} resolved
+                        {regionalCounts.resolved} resolved
                       </span>
                     )}
                   </div>
@@ -233,7 +233,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 save date), pushed below the gameable state (P6). BODY (ink-600,
                 9.95:1) not MUTED (3.57:1, fails AA) since the GM reads this. */}
             <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6, marginTop:SP.xs }}>
-              <Clock size={11}/> Saved {ts(s.timestamp)}
+              Saved {ts(s.timestamp)}
             </div>
           </div>
         </div>

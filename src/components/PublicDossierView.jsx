@@ -17,7 +17,7 @@
  *   object is the world's view of the place, nothing more.
  */
 
-import { ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import Button from './primitives/Button.jsx';
 import { TIER_LABELS } from './new/design.js';
@@ -85,8 +85,8 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
               </>
             )}
             <span aria-hidden="true">·</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-              <Eye size={11} /> {viewCount} {viewCount === 1 ? 'view' : 'views'}
+            <span>
+              {viewCount} {viewCount === 1 ? 'view' : 'views'}
             </span>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { GOLD, INK, BODY, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe, X } from 'lucide-react';
+import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
+import { Sparkles, Building2, X } from 'lucide-react';
 import IconButton from './primitives/IconButton.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -13,14 +13,14 @@ import { CustomContentManager } from './compendium/CustomContent.jsx';
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
 const TABS = [
-  { id:'tiers',       label:'Tiers & Routes',         Icon: Layers },
-  { id:'economy',     label:'Economy',                 Icon: Coins },
-  { id:'power',       label:'Power & Factions',        Icon: Shield },
-  { id:'arcane',      label:'Religion & the Pantheon', Icon: Sparkles },
-  { id:'living',      label:'Living World',            Icon: Globe },
-  { id:'stress',      label:'Stress',                  Icon: AlertTriangle },
-  { id:'neighbour',   label:'Neighbour System',        Icon: Link2 },
-  { id:'institutions',label:'Institutions',            Icon: Building2 },
+  { id:'tiers',       label:'Tiers and Routes' },
+  { id:'economy',     label:'Economy' },
+  { id:'power',       label:'Power and Factions' },
+  { id:'arcane',      label:'Religion and the Pantheon' },
+  { id:'living',      label:'Living World' },
+  { id:'stress',      label:'Stress' },
+  { id:'neighbour',   label:'Neighbour System' },
+  { id:'institutions',label:'Institutions' },
 ];
 
 // Tabs whose content actually consumes the per-tab filter. The prose tabs
@@ -228,16 +228,15 @@ export default function CompendiumPanel({ standalone=false }) {
               previous one (P8). */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
-              {TABS.map(({ id, label, Icon }) => (
+              {TABS.map(({ id, label }) => (
                 <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>{ setActiveTab(id); setSearch(''); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'13px 14px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:BODY, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
-                  <Icon size={12}/> {label}
+                  {label}
                 </button>))}
             </div>
             {SEARCHABLE_TABS.has(activeTab) && (
               <div style={{ ...contentColumn, display:'flex', alignItems:'center', gap:6, padding:'2px 14px 6px', minHeight:42 }}>
-                <Search size={11} style={{ color:MUT, flexShrink:0 }}/>
                 <input aria-label="Filter this tab" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Filter this tab…" style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.xs, color:INK, outline:'none' }}/>
-                {search && <IconButton Icon={X} label="Clear filter" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
+                {search && <IconButton Icon={X} glyph="×" label="Clear filter" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
               </div>
             )}
           </div>
@@ -251,9 +250,8 @@ export default function CompendiumPanel({ standalone=false }) {
         <>
           {/* Custom content search */}
           <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}`, minHeight:36 }}>
-            <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
             <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
-            {search && <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
+            {search && <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <CustomContentManager search={search.toLowerCase()}/>

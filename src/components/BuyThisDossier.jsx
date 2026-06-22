@@ -21,7 +21,7 @@
  */
 
 import { useState } from 'react';
-import { Download, AlertCircle } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
 import { createDossierCheckoutToken, stashPendingDossier } from '../lib/pendingDossier.js';
@@ -99,7 +99,7 @@ export default function BuyThisDossier({ settlement }) {
           display: 'inline-flex', alignItems: 'center', gap: 4,
           fontSize: FS.xs, color: RED,
         }}>
-          <AlertCircle size={11} /> {error}
+          {error}
         </span>
       )}
     </div>

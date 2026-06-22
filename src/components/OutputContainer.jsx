@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, lazy, Suspense } from 'react';
 import { FS, SP, swatch } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, StickyNote, Sparkles, Drama, ScrollText, Network, Wand2 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
@@ -109,22 +108,22 @@ export const TAB_GROUPS = Object.freeze({
 // tests/ui/dossierAltitude.test.jsx, which is outside this surface's editable
 // file set.)
 const TABS = [
-  { id: 'overview',   label: 'Overview',   Icon: MapPin },
-  { id: 'summary',    label: 'DM Summary', Icon: Scroll },
-  { id: 'substrate',  label: 'Substrate',  Icon: Network },
-  { id: 'magic',      label: 'Magic',      Icon: Wand2 },
-  { id: 'power',      label: 'Power',      Icon: Shield },
-  { id: 'economics',  label: 'Economics',  Icon: Coins },
-  { id: 'services',   label: 'Services',   Icon: Building2 },
-  { id: 'defense',    label: 'Defense',    Icon: Swords },
-  { id: 'resources',  label: 'Resources',  Icon: Package },
-  { id: 'viability',  label: 'Viability',  Icon: CircleCheckBig },
-  { id: 'history',    label: 'History',    Icon: History },
-  { id: 'daily_life', label: 'Daily Life', Icon: Users },
-  { id: 'npcs',       label: 'NPCs',       Icon: Users },
-  { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
-  { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
-  { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
+  { id: 'overview',   label: 'Overview' },
+  { id: 'summary',    label: 'DM Summary' },
+  { id: 'substrate',  label: 'Substrate' },
+  { id: 'magic',      label: 'Magic' },
+  { id: 'power',      label: 'Power' },
+  { id: 'economics',  label: 'Economics' },
+  { id: 'services',   label: 'Services' },
+  { id: 'defense',    label: 'Defense' },
+  { id: 'resources',  label: 'Resources' },
+  { id: 'viability',  label: 'Viability' },
+  { id: 'history',    label: 'History' },
+  { id: 'daily_life', label: 'Daily Life' },
+  { id: 'npcs',       label: 'NPCs' },
+  { id: 'dm_notes',   label: 'DM Notes' },
+  { id: 'ai_notes',   label: 'AI Notes' },
+  { id: 'chronicle',  label: 'Chronicle' },
 ];
 
 // Coarse dwell-time banding (taxonomy §"Banding vocabularies": dwell_ms_band).
@@ -475,13 +474,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
-    ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
-    ...(hasWarFaith ? [{ id:'war_faith', label:'War & Faith', Icon: Swords }] : []),
+    ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks' }] : []),
+    ...(hasWarFaith ? [{ id:'war_faith', label:'War and Faith' }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
-    ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
+    ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance' }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
-      ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : [])
+      ? [{ id:'neighbours', label:'Neighbours' }] : [])
   ];
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab

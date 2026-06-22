@@ -19,9 +19,12 @@
  *                co-equal boxes collapse toward the ~3 perceivable levels P4/P5
  *                want (page header → feature card → quiet utility groups).
  */
-import { GOLD_DEEP, INK, BORDER, CARD, CARD_HDR, serif_, SP, R, FS } from '../theme.js';
+import { INK, BORDER, CARD, CARD_HDR, serif_, SP, R, FS } from '../theme.js';
 
-export default function Section({ title, icon: Icon, tone = 'default', as = 'h2', children }) {
+// Icons are suppressed on every surface but the Realm map (P7). The legacy
+// `icon` prop is still accepted so callers don't have to be edited in lockstep,
+// but it is intentionally not rendered — the serif title is the scan anchor.
+export default function Section({ title, icon: _icon, tone = 'default', as = 'h2', children }) {
   const feature = tone === 'feature';
   const Title = as;
   const containerStyle = feature
@@ -34,7 +37,6 @@ export default function Section({ title, icon: Icon, tone = 'default', as = 'h2'
         padding: feature ? `${SP.md}px ${SP.lg}px` : `${SP.md}px 0 0`,
         background: feature ? CARD_HDR : 'transparent',
       }}>
-        {Icon && <Icon size={feature ? 18 : 16} color={GOLD_DEEP} />}
         <Title style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: feature ? 700 : 600, color: INK, margin: 0 }}>
           {title}
         </Title>

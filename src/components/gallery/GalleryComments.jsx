@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { MessageCircle, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 import {
   addGalleryComment,
@@ -12,7 +12,6 @@ import {
   CARD,
   CARD_ALT,
   FS,
-  GOLD,
   INK,
   MUTED,
   R,
@@ -89,7 +88,6 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
   return (
     <section style={{ display: 'grid', gap: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <MessageCircle size={16} color={GOLD} />
         <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.xl, fontWeight: 700 }}>
           Comments
         </h2>

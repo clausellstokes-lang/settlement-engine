@@ -16,7 +16,6 @@
  * store reads, no rng.
  */
 
-import { Save, Sparkles } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
 
@@ -50,7 +49,6 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
-        <Save size={14} color={GOLD_TXT} aria-hidden="true" />
         {isAnon ? (
           <span data-testid="quota-label" style={{ color: BODY }}>
             <strong style={{ color: INK }}>Sign in to save</strong>. Keep your settlements across sessions.
@@ -113,7 +111,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
             display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: GOLD_TXT,
             fontWeight: 700, background: GOLD_BG, borderRadius: 8, padding: '2px 8px',
           }}>
-            <Sparkles size={10} aria-hidden="true"/> {PREMIUM_PITCH}
+            {PREMIUM_PITCH}
           </span>
           <Button variant="gold" size="sm" onClick={() => onUpgrade?.()}>
             Upgrade

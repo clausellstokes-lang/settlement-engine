@@ -27,7 +27,7 @@ export function WizardLoadedBanners({
             <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch['#5A3A00'] }}>Config loaded: {loadedFromSave.name}</span>
             {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: swatch['#8A6020'], marginLeft: 8 }}>{loadedFromSave.tier}</span>}
           </div>
-          <IconButton Icon={X} label="Clear loaded config" tone="active" size="md" onClick={clearLoadedFromSave} />
+          <IconButton Icon={X} glyph="×" label="Clear loaded config" tone="active" size="md" onClick={clearLoadedFromSave} />
         </div>
       )}
 
@@ -38,7 +38,7 @@ export function WizardLoadedBanners({
             <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>Neighbour active: {importedNeighbour.name}</span>
             <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: 8 }}>{importedNeighbour.tier}</span>
           </div>
-          <IconButton Icon={X} label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
+          <IconButton Icon={X} glyph="×" label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
         </div>
       )}
     </>

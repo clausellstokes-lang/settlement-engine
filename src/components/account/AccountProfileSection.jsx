@@ -7,7 +7,7 @@
  * used by this section).
  */
 import {
-  User, Check, X, Edit3, Bot,
+  Check, X, Edit3,
 } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
@@ -62,7 +62,7 @@ export default function AccountProfileSection({
   // initial-letter gradient.
   const avatarBg = avatarBackground(avatarInput);
   return (
-    <Section title="Profile" icon={User}>
+    <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
         {/* Avatar */}
         <div style={{
@@ -157,7 +157,7 @@ export default function AccountProfileSection({
         {/* Email-notifications toggle is the single source of truth in
             Preferences now; it was duplicated here against the same handler. */}
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> Narration model</span>
+          <span>Narration model</span>
           <select
             id="account-model-preference"
             value={modelPreference}

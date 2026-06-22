@@ -1,4 +1,4 @@
-import { Check, ChevronDown, ChevronRight, CircleSlash, SlidersHorizontal, Undo2 } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -89,7 +89,6 @@ export default function RegionalCausalChainViewer({
         borderBottom: `1px solid ${BORDER}`,
         flexWrap: 'wrap',
       }}>
-        <SlidersHorizontal size={12} color={GOLD} />
         <span style={{ fontSize: FS.xxs, color: INK, fontWeight: 800, fontFamily: sans }}>
           Causal chains
         </span>

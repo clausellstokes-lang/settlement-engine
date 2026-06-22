@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
-import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
@@ -191,7 +190,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               transition:'all 0.15s',
             }}
           >
-            <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
+            <span aria-hidden="true" style={{fontSize:FS.xs,fontWeight:isPinned?800:600,lineHeight:1}}>{isPinned ? '●' : '○'}</span>
           </span>
         )}
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>

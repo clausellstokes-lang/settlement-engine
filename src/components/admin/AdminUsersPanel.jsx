@@ -22,10 +22,6 @@
  * isElevated). The real authority is server-side; this gate is UX, not security.
  */
 import { useCallback, useState } from 'react';
-import {
-  Search, RefreshCw, Eye, AlertTriangle, StickyNote, Coins, CreditCard,
-  Ban, Power, Trash2, Link2, FileDown, Mail, ShieldCheck,
-} from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Stat from '../primitives/Stat.jsx';
@@ -156,7 +152,6 @@ export default function AdminUsersPanel() {
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
         background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
       }}>
-        <Search size={14} color={MUTED} />
         <input
           type="text" aria-label="Search users by id, email, or name"
           placeholder="Search by id, email, or display name…"
@@ -165,8 +160,7 @@ export default function AdminUsersPanel() {
           onKeyDown={(e) => e.key === 'Enter' && search()}
           style={{ flex: 1, border: 'none', fontSize: FS.sm, fontFamily: sans, background: 'transparent' }}
         />
-        <Button variant="gold" size="sm" onClick={search} disabled={searching}
-          icon={<RefreshCw size={12} />}>
+        <Button variant="gold" size="sm" onClick={search} disabled={searching}>
           Search
         </Button>
       </div>
@@ -226,18 +220,17 @@ export default function AdminUsersPanel() {
                 {' · '}{selected.role}{' · '}{selected.tier}
                 {selected.banned && (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
-                    {' · '}<Ban size={12} aria-hidden="true" />Banned
+                    {' · '}Banned
                   </span>
                 )}
                 {selected.disabled && (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
-                    {' · '}<Power size={12} aria-hidden="true" />Disabled
+                    {' · '}Disabled
                   </span>
                 )}
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}
-              icon={<Eye size={12} />}>
+            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
               Reveal full details
             </Button>
           </div>
@@ -255,7 +248,7 @@ export default function AdminUsersPanel() {
 
           {/* Action set */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Mail size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Send email to user', label: 'Message', confirmLabel: 'Send' },
                 (body) => runAction(
@@ -264,7 +257,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Send email</Button>
 
-            <Button variant="warning" size="sm" disabled={busy} icon={<AlertTriangle size={12} />}
+            <Button variant="warning" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Issue warning', label: 'Warning reason', confirmLabel: 'Issue' },
                 (reason) => runAction(
@@ -273,7 +266,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Issue warning</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<StickyNote size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Add internal note', body: 'The user can never read this note.', label: 'Note', confirmLabel: 'Add' },
                 (note) => runAction(
@@ -282,7 +275,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Add note</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Coins size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Grant / refund credits', body: 'Positive grants, negative refunds (e.g. 50 or -10).', label: 'Credits delta', confirmLabel: 'Apply' },
                 (raw) => {
@@ -294,27 +287,27 @@ export default function AdminUsersPanel() {
                 },
               )}>Grant / refund</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<CreditCard size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => runAction({ action: 'review_billing', userId: id }, 'Billing summary loaded.')}>
               Review billing</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Power size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => runAction(
                 { action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action' },
                 selected.disabled ? 'Account enabled.' : 'Account disabled.',
               )}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
 
-            <Button variant="danger" size="sm" disabled={busy} icon={<Ban size={12} />}
+            <Button variant="danger" size="sm" disabled={busy}
               onClick={() => runAction(
                 { action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', metadata: { notify: !selected.banned } },
                 selected.banned ? 'Account unbanned.' : 'Account banned.',
               )}>{selected.banned ? 'Unban' : 'Ban'}</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<FileDown size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => runAction({ action: 'diagnostic_bundle', userId: id }, 'Redacted bundle exported.')}>
               Export bundle</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<ShieldCheck size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Create full debug copy', body: 'A full debug copy is audited and includes raw PII.', label: 'Justification', confirmLabel: 'Create' },
                 (reason) => runAction(
@@ -327,15 +320,15 @@ export default function AdminUsersPanel() {
           {/* Per-settlement moderation (id-driven; soft-delete-first) */}
           <div style={{ marginTop: SP.md, paddingTop: SP.md, borderTop: `1px solid ${BORDER2}`, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
             <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Content moderation (by settlement id):</span>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Trash2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
-                { title: 'Soft-delete settlement', body: 'Reversible: hides + unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
+                { title: 'Soft-delete settlement', body: 'Reversible: hides and unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
                 (sid) => runAction(
                   { action: 'soft_delete_settlement', settlementId: sid, reason: 'moderation' },
                   'Settlement soft-deleted (reversible).',
                 ),
               )}>Soft-delete settlement</Button>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Trash2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Remove gallery item', body: 'Reversible: unpublishes the public dossier.', label: 'Settlement id', confirmLabel: 'Remove' },
                 (sid) => runAction(
@@ -343,7 +336,7 @@ export default function AdminUsersPanel() {
                   'Removed from gallery (reversible).',
                 ),
               )}>Remove gallery item</Button>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Link2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Revoke share link', body: 'Reversible: clears the share slug (re-sharing mints a new one).', label: 'Settlement id', confirmLabel: 'Revoke' },
                 (sid) => runAction(

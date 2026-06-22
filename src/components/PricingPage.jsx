@@ -21,7 +21,6 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Crown, Zap, Map as MapIcon, Sparkles, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -31,7 +30,7 @@ import {
 import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
 import { useFlag } from '../lib/flags.js';
-import { GOLD, GOLD_DEEP, GOLD_TXT, INK, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PROSE_MAX, FORM_MAX } from './theme.js';
+import { GOLD, GOLD_TXT, INK, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PROSE_MAX, FORM_MAX } from './theme.js';
 import { space } from '../design/tokens.js';
 
 // Between-section rhythm: SP tops out at xxl=24, which also appears as
@@ -53,14 +52,6 @@ import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 
-// Tier-icon mapping. Kept here (not in pricing config) because icons
-// are a UI concern — the config stays headless.
-const TIER_ICONS = {
-  wanderer:     MapIcon,
-  cartographer: Sparkles,
-  founder:      Crown,
-};
-
 function FeatureRow({ children }) {
   return (
     <li style={{
@@ -68,18 +59,12 @@ function FeatureRow({ children }) {
       padding: '4px 0', color: BODY, fontSize: FS.sm,
       fontFamily: sans, lineHeight: 1.5,
     }}>
-      {/* P7 — the check is the only mark distinguishing an included feature; at
-          brand GOLD it was 2.33:1 on card (under the 3:1 graphics floor). The
-          gold-700 step (4.6:1) makes the glyph itself perceivable for low-vision
-          / CVD readers. (aria-hidden + the text label keep it multi-channel.) */}
-      <Check size={14} color={GOLD_DEEP} aria-hidden="true" style={{ flexShrink: 0, marginTop: 4 }} />
       <span>{children}</span>
     </li>
   );
 }
 
 function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
-  const Icon = TIER_ICONS[tier.key] || Sparkles;
   // P9 / decision 4 — when the simulation-led A/B variant is on, source the
   // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
   // the current copy. The variant DELIBERATELY names no size as premium (size
@@ -149,11 +134,10 @@ function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, empha
       )}
 
       <header style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <Icon size={22} color={GOLD} aria-hidden="true" />
-        {/* P4 — the name is the card's quiet label channel, not a second focal
-            point. The icon already establishes the row; demoting the name to
-            FS.lg/BODY leaves the price as the unambiguous single focus and caps
-            the card at ~3 levels (price > lead benefit > everything else). */}
+        {/* P4 — the name is the card's quiet tier label, not a second focal
+            point. Held at FS.lg/BODY so the price stays the unambiguous single
+            focus and the card caps at ~3 levels (price > lead benefit >
+            everything else). */}
         <h3 id={headingId} style={{
           margin: 0,
           fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: BODY,
@@ -289,7 +273,6 @@ function PackTile({ pack, onBuy, loading, emphasised }) {
         position: 'relative',
       }}
     >
-      <Zap size={20} color={emphasised ? GOLD : SECOND} aria-hidden="true" />
       {/* P3/P4/P6 — three ranked levels, delta-first. The PRICE keeps the
           size-dominant focal level (FS.xxl). The per-credit value + the N%-off
           discount are the WHY-buy-bigger delta — the entire purpose of a

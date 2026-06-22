@@ -11,7 +11,6 @@
  * apply going forward; full erasure goes through the account-deletion path.
  */
 import { useState } from 'react';
-import { ShieldCheck } from 'lucide-react';
 import { getConsent, setConsent, dntEnabled } from '../lib/consent.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R } from './theme.js';
@@ -87,17 +86,17 @@ export default function PrivacySettings({ bare = false }) {
       };
 
   return (
-    <section aria-label="Privacy &amp; data" style={sectionStyle}>
+    <section aria-label="Privacy and data" style={sectionStyle}>
       {bare ? (
         // Inline keyword-row title — matches the "Export my data" / "Delete
         // content" sub-group headers in AccountDataPrivacySection so the
         // embedded instance reads as one more sub-group, not a second card.
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>
-          <ShieldCheck size={14} color={GOLD} /> Privacy &amp; analytics
+        <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>
+          Privacy and analytics
         </div>
       ) : (
         <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>
-          Privacy &amp; data
+          Privacy and data
         </h3>
       )}
       <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock} from 'lucide-react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, FileText, Clock} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
@@ -60,7 +60,6 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         background:swatch['#EEE9DF'], border:'1px solid #c9c0b2', borderRadius:8,
         opacity:0.72, color:MUTED, fontFamily:sans,
       }}>
-        <FolderOpen size={14}/>
         <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
         <span style={{ fontSize:FS.xs, fontWeight:700, color:BODY }}>
           {retainedInactive
@@ -80,7 +79,6 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       {/* Campaign header */}
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <IconButton Icon={collapsed ? ChevronRight : ChevronDown} label={collapsed ? 'Expand campaign' : 'Collapse campaign'} onClick={() => toggleCollapsed(campaign.id)} tone="ghost" size="md"/>
-        <FolderOpen size={14} color={GOLD_TXT}/>
         {editing ? (
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
             <input value={editDraft} onChange={e => setEditDraft(e.target.value)} aria-label="Campaign name"
@@ -94,7 +92,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
         <span style={{ fontSize:FS.xs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
-        {campaign.mapState && <MapIcon size={11} color={GOLD_TXT} title="Map saved" aria-label="Map saved"/>}
+        {campaign.mapState && <span style={{ fontSize:FS.xs, fontWeight:700, color:GOLD_TXT, fontFamily:sans }}>Map saved</span>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
             {/* Advance Time is a per-CAMPAIGN action, not the page's first-click

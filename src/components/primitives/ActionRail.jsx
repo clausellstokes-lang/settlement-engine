@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
+import { useIconsOn } from './IconsContext.js';
 
 const VISIBLE_CAP = 5;
 
@@ -38,6 +39,7 @@ const VISIBLE_CAP = 5;
  */
 export default function ActionRail({ title = 'Next best action', items = [] }) {
   const [showMore, setShowMore] = useState(false);
+  const iconsOn = useIconsOn();
   if (!items.length) return null;
 
   // Dedupe: only the first primary actually renders as primary.
@@ -71,7 +73,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
               color: swatch.inkMag3, cursor: 'pointer',
             }}
           >
-            {showMore ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+            {iconsOn && (showMore ? <ChevronUp size={11} /> : <ChevronDown size={11} />)}
             {showMore ? 'Show fewer' : `Show ${overflow} more`}
           </button>
         )}
@@ -82,6 +84,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
 
 function ActionRow({ item }) {
   const Icon = item.Icon;
+  const iconsOn = useIconsOn();
   const tone = item.primary ? primaryTone : secondaryTone;
   return (
     <button
@@ -106,7 +109,7 @@ function ActionRow({ item }) {
         width: '100%',
       }}
     >
-      {Icon && (
+      {iconsOn && Icon && (
         <span style={{ display: 'flex', flexShrink: 0, marginTop: 1 }}>
           <Icon size={13} aria-hidden="true" />
         </span>

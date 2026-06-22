@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { X, Circle } from 'lucide-react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans, TabIntro } from '../Primitives';
@@ -103,7 +102,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
+          {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton glyph={'✕'} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
 
         {searchResults !== null && (
@@ -115,15 +114,12 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 </div>
               : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',borderRadius:6,padding:'10px 14px'}}>
                   <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
-                  {searchResults.map((r,i)=>{
-                    const Icon = Ts[r.cat]?.icon;
-                    return (
+                  {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
                       <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
-                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'inline-flex',alignItems:'center',gap:4,marginTop:1}}>{Icon && <Icon size={14} aria-hidden="true" />} {Ts[r.cat]?.label}</span>
+                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'inline-flex',alignItems:'center',gap:4,marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
-                    );
-                  })}
+                  ))}
                 </div>
             }
           </div>
@@ -138,8 +134,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
             <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
               {catOrder.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:Circle};
-                const Icon = meta.icon;
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 const cs = catStats[cat] || {total:0,imp:0,deg:0,vul:0};
                 const hasImp = cs.imp > 0;
                 const hasDeg = cs.deg > 0 && !hasImp;
@@ -159,7 +154,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                       }
                     }}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      {Icon && <Icon size={14} aria-hidden="true" />}
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                       <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
@@ -170,12 +164,10 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 );
               })}
               {missing.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:Circle};
-                const Icon = meta.icon;
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      {Icon && <Icon size={14} aria-hidden="true" />}
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                     </div>
                     <div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:swatch['#7A5010']}}> not available</div>
@@ -198,8 +190,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           {catOrder.map(cat => {
             const list = services[cat];
             if (!list?.length) return null;
-            const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:Circle};
-            const Icon = meta.icon;
+            const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
             const cs = catStats[cat];
             const isCriminal = cat === 'criminal';
             const open = isOpen(cat);
@@ -225,7 +216,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  {Icon && <Icon size={14} aria-hidden="true" />}
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',borderRadius:3,padding:'1px 5px',marginLeft:2}}> {cs.imp} impaired</span>}

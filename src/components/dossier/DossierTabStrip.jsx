@@ -1,6 +1,7 @@
 import { FS, swatch, GOLD_TXT } from '../theme.js';
 import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
+import { useIconsOn } from '../primitives/IconsContext.js';
 
 // One-line affordance glosses for tab labels a first-time DM can't guess from
 // the word alone. Surfaced via the native title= tooltip, so the visible label
@@ -25,13 +26,14 @@ export default function DossierTabStrip({
   selectedTab,
   setActiveTab,
 }) {
+  const iconsOn = useIconsOn();
   return (
         <div data-onboard-highlight={onboardingActive && onboardingStep === 2 ? 'true' : undefined} style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
           {/* The gradient-fade edge stays on this absolute wrapper; the
               interactive control is the IconButton inside it, so the
               aria-label, focus ring, and 44px target come from the primitive. */}
           <span style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', display: 'flex', alignItems: 'center', paddingLeft: 2 }}>
-            <IconButton Icon={ChevronLeft} label="Scroll tabs left" tone="ghost" size="xl" onClick={() => scroll(-1)} />
+            <IconButton Icon={ChevronLeft} glyph="‹" label="Scroll tabs left" tone="ghost" size="xl" onClick={() => scroll(-1)} />
           </span>
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
           <div
@@ -62,7 +64,7 @@ export default function DossierTabStrip({
             }}
             style={{ display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' }}
           >
-            {tabs.map(({ id, label, Icon }) => {
+            {tabs.map(({ id, label }) => {
               const active = selectedTab === id;
               // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
               // purple tint so the AI surface reads as distinct from the
@@ -103,8 +105,7 @@ export default function DossierTabStrip({
                         the same ✦ glyph the narrative layer uses, so the
                         AI-vs-simulation distinction survives the squint test and
                         color-blind reads. */}
-                    {purple && <Sparkles size={11} aria-hidden="true" />}
-                    <Icon size={14} />
+                    {iconsOn && purple && <Sparkles size={11} aria-hidden="true" />}
                   </span>
                   {label}
                 </button>
@@ -112,7 +113,7 @@ export default function DossierTabStrip({
             })}
           </div>
           <span style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 2 }}>
-            <IconButton Icon={ChevronRight} label="Scroll tabs right" tone="ghost" size="xl" onClick={() => scroll(1)} />
+            <IconButton Icon={ChevronRight} glyph="›" label="Scroll tabs right" tone="ghost" size="xl" onClick={() => scroll(1)} />
           </span>
         </div>
   );

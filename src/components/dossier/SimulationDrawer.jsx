@@ -22,7 +22,6 @@
 
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { FS, swatch } from '../theme.js';
-import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -144,7 +143,7 @@ export default function SimulationDrawer() {
                 </div>
               </div>
               <IconButton
-                Icon={X}
+                glyph={'✕'}
                 label="Close"
                 tone="ghost"
                 size="lg"

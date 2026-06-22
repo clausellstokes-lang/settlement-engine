@@ -97,6 +97,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
     <span ref={ref} style={{ position: 'relative', display: 'inline-block' }}>
       <IconButton
         Icon={HelpCircle}
+        glyph="?"
         label={`${label}: ${content?.title || topic}`}
         onClick={handleToggle}
         tone="default"

@@ -16,7 +16,6 @@
  */
 
 import { useMemo } from 'react';
-import { MapPin, Lock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
 import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, R, PROSE_MAX } from '../theme.js';
@@ -44,7 +43,6 @@ export default function PlaceInRegionCard() {
   };
   const heading = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-      <MapPin size={15} color={GOLD} />
       <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>Place in Region</span>
       {/* Subordinate qualifier pushed to the far right so the title is the
           unambiguous single focal point of the header. */}
@@ -58,7 +56,6 @@ export default function PlaceInRegionCard() {
       <div data-testid="place-in-region-card" style={wrap}>
         {heading}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>
-          <Lock size={13} color={BODY} />
           <span style={{ flex: 1 }}>
             Assign this settlement to a campaign and a patron deity at birth, then advance the region for years.
           </span>

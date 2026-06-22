@@ -4,6 +4,7 @@ import {
   GREEN, GREEN_BG, MUTED, RED, RED_BG, R, SECOND, SP, VIOLET, VIOLET_BG,
   sans,
 } from '../theme.js';
+import { useIconsOn } from './IconsContext.js';
 
 const TONES = {
   neutral: { bg: CARD_ALT, fg: SECOND, border: BORDER },
@@ -32,6 +33,7 @@ export default function Badge({
 }) {
   const t = TONES[tone] || TONES.neutral;
   const s = SIZES[size] || SIZES.sm;
+  const iconsOn = useIconsOn();
 
   return (
     <span
@@ -53,7 +55,7 @@ export default function Badge({
         ...style,
       }}
     >
-      {icon}
+      {iconsOn ? icon : null}
       {children}
       {onRemove && (
         <button
@@ -72,7 +74,9 @@ export default function Badge({
             cursor: 'pointer',
           }}
         >
-          <X size={s.icon} />
+          {iconsOn
+            ? <X size={s.icon} />
+            : <span aria-hidden="true" style={{ fontSize: s.icon + 2, lineHeight: 1, fontWeight: 700 }}>×</span>}
         </button>
       )}
     </span>

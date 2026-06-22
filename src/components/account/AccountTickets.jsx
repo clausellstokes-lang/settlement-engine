@@ -18,7 +18,7 @@
  * thread payload simply doesn't contain them.
  */
 import { useCallback, useState } from 'react';
-import { Ticket, Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
+import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
@@ -155,7 +155,6 @@ export default function AccountTickets() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <Ticket size={15} color={GOLD_TXT} />
         <span style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans, flex: 1 }}>
           My tickets
         </span>

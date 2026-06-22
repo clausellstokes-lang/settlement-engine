@@ -14,7 +14,7 @@
  * saves recede one step.
  */
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-import { Crown, TrendingDown, CreditCard, ArrowRight, AlertTriangle } from 'lucide-react';
+import { Crown, CreditCard, ArrowRight } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
@@ -53,7 +53,7 @@ export default function AccountSubscriptionSection({
   // the generic CTA drops to secondary — exactly one focal click survives.
   const founderTileShowing = useFounderTileEligible();
   return (
-    <Section title={t('account.subscriptionHeading')} icon={Crown} tone="feature">
+    <Section title={t('account.subscriptionHeading')} tone="feature">
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {/* Tier card — the dominant stat (larger value), grows an "unlock"
             footer for free users. */}
@@ -144,10 +144,10 @@ export default function AccountSubscriptionSection({
               fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               {/* Two-channel warning: AMBER_DEEP (amber-700, AA on the amber
-                  tint — brand AMBER failed at 2.72:1) + an AlertTriangle glyph,
-                  so the state reads in icon + weight + colour, not amber alone. */}
-              <b style={{ color: AMBER_DEEP, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <AlertTriangle size={12} aria-hidden="true" />
+                  tint — brand AMBER failed at 2.72:1) carries the colour, and
+                  the bold warning text carries the meaning, so the state reads
+                  in weight + text + colour, never amber alone (P7). */}
+              <b style={{ color: AMBER_DEEP }}>
                 {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
               </b>{' '}
               Cartographer lifts the cap and syncs your library across every device.
@@ -211,7 +211,7 @@ export default function AccountSubscriptionSection({
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            <TrendingDown size={14} /> {t('account.purchaseCreditsLabel')}
+            {t('account.purchaseCreditsLabel')}
           </div>
 
           {/* Show the purchase error here only when there's no premium Manage

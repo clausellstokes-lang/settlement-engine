@@ -29,7 +29,6 @@
 
 import { useState } from 'react';
 import { FS, swatch, sans, serif_ } from './theme.js';
-import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
@@ -49,9 +48,7 @@ function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
   const meta = metaForStep(entry.id);
   const isAi = entry.kind === 'ai';
-  const Icon = isAi ? Feather : Cog;
   const color = isAi ? QUILL_COLOR : COG_COLOR;
-  const Chevron = open ? ChevronDown : ChevronRight;
   const stepTraces = Array.isArray(traces) ? traces : [];
 
   return (
@@ -67,16 +64,16 @@ function StepRow({ entry, isLast, traces }) {
           width: 1, background: RAIL_BORDER,
         }} />
       )}
-      {/* Icon */}
-      <span style={{
-        position: 'absolute', left: 0, top: 2,
-        width: 22, height: 22, borderRadius: '50%',
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        background: swatch.white, border: `1px solid ${color}`,
-        color,
-      }}>
-        <Icon size={12} aria-hidden="true" />
-      </span>
+      {/* Timeline node — a dot on the thread whose FILL encodes the step kind in
+          a non-colour channel (P7): a solid violet dot for an AI refinement
+          step, a hollow amber ring for a procedural step. The legend above
+          mirrors the same fill-vs-outline grammar, so the mapping survives a
+          grayscale read. */}
+      <span aria-hidden="true" style={{
+        position: 'absolute', left: 5, top: 7,
+        width: 12, height: 12, borderRadius: '50%',
+        background: isAi ? color : swatch.white, border: `1px solid ${color}`,
+      }} />
       {/* Row content (clickable to expand) */}
       <button
         type="button"
@@ -93,7 +90,9 @@ function StepRow({ entry, isLast, traces }) {
           <span style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>
             {meta.label}
           </span>
-          <Chevron size={11} color={MUTED} style={{ flexShrink: 0, transform: 'translateY(1px)' }} aria-hidden="true" />
+          <span aria-hidden="true" style={{ flexShrink: 0, color: MUTED, fontWeight: 700, fontSize: FS.sm, lineHeight: 1 }}>
+            {open ? '−' : '+'}
+          </span>
         </div>
         {entry.summary && (
           <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
@@ -267,11 +266,18 @@ export default function PipelineRail({ compact = false }) {
           textTransform: 'uppercase', letterSpacing: '0.04em',
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <Cog size={11} color={COG_COLOR} aria-hidden="true" />
+            {/* Hollow ring = procedural, mirroring the procedural step nodes. */}
+            <span aria-hidden="true" style={{
+              width: 9, height: 9, borderRadius: '50%',
+              background: swatch.white, border: `1px solid ${COG_COLOR}`,
+            }} />
             {t('pipeline.cogLabel')}
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <Feather size={11} color={QUILL_COLOR} aria-hidden="true" />
+            {/* Solid dot = AI refinement, mirroring the AI step nodes. */}
+            <span aria-hidden="true" style={{
+              width: 9, height: 9, borderRadius: '50%', background: QUILL_COLOR,
+            }} />
             {t('pipeline.quillLabel')}
           </span>
         </div>

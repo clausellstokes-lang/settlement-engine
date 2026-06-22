@@ -18,12 +18,12 @@
  */
 import { useEffect, useState } from 'react';
 import {
-  Lock, KeyRound, Link2, Unlink, LogOut, ShieldCheck, Smartphone, Check,
+  KeyRound, Link2, Unlink, Check,
 } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD, GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
   DANGER_BORDER, SUCCESS_BORDER, TINT_GOLD,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -177,13 +177,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   const onlyOneIdentity = (identities || []).length <= 1;
 
   return (
-    <Section title="Login &amp; Security" icon={ShieldCheck}>
+    <Section title="Login and security">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
 
         {/* ── Password ──────────────────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Lock size={14} color={GOLD} /> Password
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Password
           </div>
           {pwDone && <div style={{ marginTop: SP.sm }}><OkBanner>Your password has been updated.</OkBanner></div>}
           {!pwOpen ? (
@@ -230,8 +230,8 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
 
         {/* ── Linked accounts ───────────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Link2 size={14} color={GOLD} /> Linked accounts
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Linked accounts
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Sign in with any connected provider. You must keep at least one method connected.
@@ -250,8 +250,8 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                     <span style={{ flex: 1, fontSize: FS.sm, color: INK, fontWeight: 600 }}>{label}</span>
                     {linked ? (
                       <>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>
-                          <Check size={12} aria-hidden="true" /> Connected
+                        <span style={{ fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>
+                          Connected
                         </span>
                         <Button
                           variant="ghost" size="md" busy={busy}
@@ -283,7 +283,6 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
         {/* ── Two-factor (coming soon) ──────────────────────────────────── */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-            <Smartphone size={16} color={MUTED} />
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, fontWeight: 700, color: INK }}>
                 Two-factor authentication
@@ -302,7 +301,6 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
         {/* ── Sign out everywhere ───────────────────────────────────────── */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-            <LogOut size={16} color={SECOND} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sign out everywhere</div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>

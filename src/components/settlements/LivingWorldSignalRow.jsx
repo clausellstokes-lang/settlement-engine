@@ -16,7 +16,6 @@
  * Pure presentational. No store, no rng, no effects.
  */
 
-import { Swords, Shield, Flame, Landmark, Minus } from 'lucide-react';
 import { SECOND, FS, SP, sans, swatch } from '../theme.js';
 import { BAND_COLOR } from '../../domain/state/bands.js';
 
@@ -38,7 +37,7 @@ const CRISIS_TXT = swatch.white;
  * the must-not-miss war/siege/occupied states, isolating the anomaly within the
  * row (Von Restorff) so it out-weighs the faith / disposition / standing pips.
  */
-function Pip({ color, icon, children, title, crisis = false }) {
+function Pip({ color, children, title, crisis = false }) {
   return (
     <span
       title={title}
@@ -50,18 +49,9 @@ function Pip({ color, icon, children, title, crisis = false }) {
         borderRadius: 8, padding: '1px 6px', whiteSpace: 'nowrap',
       }}
     >
-      {icon}{children}
+      {children}
     </span>
   );
-}
-
-/** Disposition glyph — a second, non-color channel so the aggression chip is
- *  distinguishable from the same-hue faith pip without relying on color alone. */
-function dispositionIcon(label) {
-  const belligerent = label === 'Belligerent' || label === 'Aggressive';
-  return belligerent
-    ? <Swords size={11} />
-    : <Shield size={11} />;
 }
 
 /**
@@ -97,7 +87,7 @@ export default function LivingWorldSignalRow({ model }) {
       {/* Siege / occupied / at-war — the must-not-miss crisis states get the
           loudest (solid-fill) pip so they lead the row, not whisper alongside it. */}
       {war?.occupied && (
-        <Pip crisis color={RED} icon={<Landmark size={11} />} title={`Occupied by ${names.besiegedBy.join(', ')}`}>
+        <Pip crisis color={RED} title={`Occupied by ${names.besiegedBy.join(', ')}`}>
           Occupied
         </Pip>
       )}
@@ -105,7 +95,6 @@ export default function LivingWorldSignalRow({ model }) {
         <Pip
           crisis
           color={RED}
-          icon={<Shield size={11} />}
           title={names.besiegedBy.length >= 2
             ? `Besieged by a coalition: ${names.besiegedBy.join(', ')}`
             : `Under siege by ${names.besiegedBy[0]}`}
@@ -114,45 +103,43 @@ export default function LivingWorldSignalRow({ model }) {
         </Pip>
       )}
       {war && war.besiegingTargets.length > 0 && (
-        <Pip crisis color={RED} icon={<Swords size={11} />} title={`At war, besieging ${names.besiegingTargets.join(', ')}`}>
+        <Pip crisis color={RED} title={`At war, besieging ${names.besiegingTargets.join(', ')}`}>
           At war{war.fresh ? ' · new' : ''}
         </Pip>
       )}
 
-      {/* Faith pip — deity glyph + rank, alignment-colored */}
+      {/* Faith pip — deity name + rank, alignment-colored. The settlement's name
+          and rank carry the meaning; color is a second channel beside the text. */}
       {faith && (
         <Pip
           color={faith.color}
-          icon={<span aria-hidden style={{ fontSize: FS.xs, lineHeight: 1 }}>{faith.glyph}</span>}
           title={`Primary faith: ${faith.name}${faith.rank ? ` (${faith.rank})` : ''}`}
         >
-          {faith.name}{faith.rank ? ` · ${faith.rank}` : ''}
+          {faith.glyph ? <span aria-hidden="true">{faith.glyph} </span> : null}{faith.name}{faith.rank ? ` · ${faith.rank}` : ''}
         </Pip>
       )}
 
-      {/* Disposition / aggression chip — carries a posture glyph so it is
-          distinguishable from the same-hue faith pip by shape, not color alone. */}
+      {/* Disposition / aggression chip — the label text distinguishes it from the
+          faith pip; color is the second channel. */}
       {aggression && (
-        <Pip color={aggression.color} icon={dispositionIcon(aggression.label)} title={`Disposition: ${aggression.label}`}>
+        <Pip color={aggression.color} title={`Disposition: ${aggression.label}`}>
           {aggression.label}
         </Pip>
       )}
 
       {/* War-weary pip */}
       {warWeary && (
-        <Pip color={WAR_WEARY} icon={<Flame size={11} />} title={`War-weariness: ${warWeary.band} (${warWeary.value.toFixed(2)})`}>
+        <Pip color={WAR_WEARY} title={`War-weariness: ${warWeary.band} (${warWeary.value.toFixed(2)})`}>
           {warWeary.band}
         </Pip>
       )}
 
-      {/* Disposition standing W/L. The even-record (score 0) case is the lone
-          icon-less pip in the row, and MUTED failed AA — so it carries a neutral
-          Minus glyph + SECOND (ink-800) text, matching the icon+color+label
-          pattern every other pip already follows. */}
+      {/* Disposition standing W/L. The W/L text plus the AA-vetted color (SECOND
+          for an even record, win-green / siege-red otherwise) carry the standing
+          on two channels. */}
       {standing && (standing.wins > 0 || standing.losses > 0) && (
         <Pip
           color={standing.score > 0 ? STANDING_WIN : standing.score < 0 ? RED : SECOND}
-          icon={standing.score === 0 ? <Minus size={11} /> : undefined}
           title={`Cross-settlement record: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score})`}
         >
           {standing.wins}W/{standing.losses}L

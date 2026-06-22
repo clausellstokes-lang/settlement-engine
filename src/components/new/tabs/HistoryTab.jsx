@@ -6,7 +6,6 @@ import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 import Button from '../../primitives/Button.jsx';
-import { Swords, RotateCcw } from 'lucide-react';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -81,7 +80,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
-          {onReroll&&<Button variant="gold" size="sm" icon={<RotateCcw size={12} aria-hidden="true" />} onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>Reroll</Button>}
+          {onReroll&&<Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>Reroll</Button>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
@@ -101,7 +100,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{display:'inline-flex',alignItems:'center',gap:3,fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}><Swords size={10} aria-hidden="true" />Party</span>
+                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Party</span>
                   : event.source==='manual'
                     ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Edit</span>
                     : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>World</span>}

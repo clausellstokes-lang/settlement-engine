@@ -8,7 +8,6 @@
  *
  * Re-exported through CustomContent.jsx so existing import sites keep working.
  */
-import { Sparkles } from 'lucide-react';
 import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, serif_, FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
@@ -25,13 +24,6 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(160,118,42,0.06) 100%)',
       border: '1px solid rgba(124,58,237,0.25)', borderRadius: 10,
     }}>
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        width: 56, height: 56, borderRadius: '50%',
-        background: 'rgba(124,58,237,0.12)', marginBottom: 12,
-      }}>
-        <Sparkles size={26} color="#7c3aed" />
-      </div>
       <div style={{
         fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
       }}>
@@ -61,7 +53,7 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
           <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.4, marginTop: 4 }}>
             A warlike, major god of forge and conquest. Assigned as a settlement&rsquo;s primary deity, she pulls the realm toward aggression and anchors religious authority.
           </div>
-          <CustomItemAttributes item={{ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', domain: 'forge & conquest' }} />
+          <CustomItemAttributes item={{ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', domain: 'forge and conquest' }} />
         </div>
       </div>
 

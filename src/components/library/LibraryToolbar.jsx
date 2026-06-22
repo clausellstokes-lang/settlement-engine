@@ -20,7 +20,7 @@
  */
 
 import { useState } from 'react';
-import { X, SlidersHorizontal, CheckSquare, Search } from 'lucide-react';
+import { X, SlidersHorizontal, CheckSquare } from 'lucide-react';
 import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
@@ -190,7 +190,6 @@ export default function LibraryToolbar({
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
       }}>
-        <Search size={13} color={MUTED} aria-hidden="true" style={{ flexShrink: 0 }} />
         <input
           type="search"
           value={query}

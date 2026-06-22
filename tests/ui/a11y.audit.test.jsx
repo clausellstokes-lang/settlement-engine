@@ -230,10 +230,18 @@ describe('A+ design-a11y.5 — icon-only buttons carry an accessible name', () =
     for (const b of buttons) {
       expect(accName(b), `a button rendered with no accessible name: ${b.outerHTML.slice(0, 90)}`).not.toBe('');
     }
-    // The top-right close is icon-only; it must resolve via aria-label, not text.
+    // The top-right close carries no text label; its name must resolve via
+    // aria-label. Icons-off renders an aria-hidden "×" glyph in the slot, so the
+    // glyph is hidden from assistive tech and the accessible name still comes
+    // from the label — assert no NON-hidden text contributes to the name.
     const close = buttons.find((b) => b.getAttribute('aria-label') === 'Close');
-    expect(close, 'expected an icon-only close button labeled "Close"').toBeTruthy();
-    expect(close.textContent.trim()).toBe(''); // genuinely icon-only — name comes from the label
+    expect(close, 'expected a label-only close button labeled "Close"').toBeTruthy();
+    const closeVisibleText = Array.from(close.childNodes)
+      .filter((n) => !(n.nodeType === 1 && n.getAttribute?.('aria-hidden') === 'true'))
+      .map((n) => n.textContent)
+      .join('')
+      .trim();
+    expect(closeVisibleText).toBe(''); // name comes from the label, not visible text
   });
 });
 

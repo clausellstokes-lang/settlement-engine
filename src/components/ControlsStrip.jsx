@@ -3,7 +3,7 @@
  * Renders: search input, action buttons (Force All / Reset / Exclude All / Expand / Collapse),
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
-import {Search, X} from 'lucide-react';
+import {X} from 'lucide-react';
 import { GOLD_TXT, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -40,17 +40,16 @@ export default function ControlsStrip({
       {/* Search + action buttons */}
       <div style={{ display: 'flex', gap: 5, alignItems: 'center', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: '1 1 120px', minWidth: 100 }}>
-          <Search size={12} style={{ position: 'absolute', left: 7, top: '50%', transform: 'translateY(-50%)', color: MUTED, pointerEvents: 'none' }} />
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={placeholder}
             aria-label={placeholder}
-            style={{ width: '100%', padding: '5px 8px 5px 24px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
+            style={{ width: '100%', padding: '5px 24px 5px 8px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
           />
           {search && (
             <span style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', display: 'inline-flex' }}>
-              <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setSearch('')} />
+              <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => setSearch('')} />
             </span>
           )}
         </div>

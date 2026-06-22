@@ -18,7 +18,7 @@
  * and the human-readable label of what just changed.
  */
 
-import { Sparkles, X, Zap, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
@@ -80,7 +80,6 @@ export default function StaleNarrativeModal({
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'center', gap: 10,
         }}>
-          <Sparkles size={16} color={PURPLE} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
               {t('staleNarrative.heading')}
@@ -113,6 +112,7 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onRegenerate}
+            aria-label={t('staleNarrative.regenerateTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '10px 12px', borderRadius: 6,
@@ -122,7 +122,6 @@ export default function StaleNarrativeModal({
               cursor: 'pointer', textAlign: 'left',
             }}
           >
-            <Zap size={14} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>{t('staleNarrative.regenerateTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.82 }}>
@@ -136,6 +135,7 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onClose}
+            aria-label={t('staleNarrative.continueTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '10px 12px', borderRadius: 6,
@@ -145,7 +145,6 @@ export default function StaleNarrativeModal({
               cursor: 'pointer', textAlign: 'left',
             }}
           >
-            <ArrowRight size={14} color={PURPLE} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('staleNarrative.continueTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, color: MUTED }}>

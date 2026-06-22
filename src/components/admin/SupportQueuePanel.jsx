@@ -16,9 +16,6 @@
  * authority is server-side.
  */
 import { useCallback, useState } from 'react';
-import {
-  RefreshCw, Hand, MessageSquare, StickyNote, BookOpen,
-} from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
@@ -157,7 +154,7 @@ export default function SupportQueuePanel() {
             {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}
           </select>
         </label>
-        <Button variant="gold" size="sm" onClick={load} disabled={loading} icon={<RefreshCw size={12} />}>
+        <Button variant="gold" size="sm" onClick={load} disabled={loading}>
           Load queue
         </Button>
       </div>
@@ -212,7 +209,7 @@ export default function SupportQueuePanel() {
 
           {/* Action set */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.md }}>
-            <Button variant="gold" size="sm" disabled={busy} icon={<Hand size={12} />}
+            <Button variant="gold" size="sm" disabled={busy}
               onClick={() => runAction({ action: 'claim_ticket', ticketId: id }, 'Ticket claimed.')}>
               Claim
             </Button>
@@ -229,7 +226,7 @@ export default function SupportQueuePanel() {
               </select>
             </label>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<MessageSquare size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Reply to user', body: 'This reply is visible to the ticket owner.', label: 'Reply', confirmLabel: 'Send reply' },
                 (body) => runAction(
@@ -238,7 +235,7 @@ export default function SupportQueuePanel() {
                 ),
               )}>Reply to user</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<StickyNote size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Add internal note', body: 'The ticket owner can never read this note.', label: 'Internal note', confirmLabel: 'Add note' },
                 (body) => runAction(
@@ -248,7 +245,7 @@ export default function SupportQueuePanel() {
               )}>Internal note</Button>
 
             <label htmlFor="queue-link-faq" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
-              <BookOpen size={12} color={MUTED} /> Link FAQ
+              Link FAQ
               <select id="queue-link-faq" value={active.linked_faq || ''} disabled={busy}
                 onChange={(e) => { if (e.target.value) runAction(
                   { action: 'link_ticket_faq', ticketId: id, faq: e.target.value },

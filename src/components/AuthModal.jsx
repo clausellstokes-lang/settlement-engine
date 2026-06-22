@@ -71,7 +71,7 @@ export default function AuthModal({ onClose }) {
           <h2 id="auth-modal-title" style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
             {t('auth.modalTitle')}
           </h2>
-          <IconButton Icon={X} label={t('common.close')} onClick={onClose} tone="ghost" size="lg" />
+          <IconButton Icon={X} glyph={'×'} label={t('common.close')} onClick={onClose} tone="ghost" size="lg" />
         </div>
 
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>

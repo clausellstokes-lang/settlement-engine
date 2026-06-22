@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { X, Pin, RotateCcw, Search } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
@@ -66,21 +65,20 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           <span
             title="Pinned figures hold steady when you reforge or advance time. Their goal and secret stay as written."
             style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',textTransform:'uppercase',flexShrink:0,cursor:'help'}}>
-            <Pin size={12} aria-hidden="true" /> {pinnedCount} pinned
+            {pinnedCount} pinned
           </span>
         )}
-        {onRerollNPCs&&<Button variant="gold" size="sm" onClick={onRerollNPCs} icon={<RotateCcw size={12} aria-hidden="true" />} style={{flexShrink:0}}>Reroll</Button>}
+        {onRerollNPCs&&<Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>Reroll</Button>}
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
-          <Search size={14} aria-hidden="true" style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',color:MUTED}} />
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Filter by name, role, or faction"
             placeholder="Filter by name, role, or faction…"
-            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
+            style={{width:'100%',padding:'7px 28px 7px 10px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
+          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton glyph={'✕'} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
         {[
           {key:'all',   label:'All'},
