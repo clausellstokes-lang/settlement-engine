@@ -27,6 +27,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sa
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
+import HomeLanding from './components/HomeLanding.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
@@ -70,6 +71,7 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
+  { id: 'home',        label: 'Home' },
   { id: 'generate',    label: 'Create' },
   { id: 'settlements', label: 'Library' },
   { id: 'realm',       label: 'Realm' },
@@ -128,6 +130,21 @@ export default function App() {
   const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
+
+  // First-visit gate: a brand-new visitor landing on the bare root is routed to
+  // the staged Home front door (and flagged so it happens only once); a
+  // returning visitor falls through to the default (/create). Deep links are
+  // respected — the gate fires only on a root visit.
+  useEffect(() => {
+    try {
+      const atRoot = window.location.pathname === '/' || window.location.pathname === '';
+      if (!atRoot) return;
+      const KEY = 'sf.returningVisitor';
+      if (window.localStorage.getItem(KEY)) return;   // returning → default (/create)
+      window.localStorage.setItem(KEY, '1');
+      replacePath('/home');                            // new → the staged Home
+    } catch { /* private mode → fall through to the default */ }
+  }, []);
 
   // Initialize auth session on mount + check post-checkout result + load credits
   useEffect(() => {
@@ -550,6 +567,9 @@ export default function App() {
               doubles as the SAVE_SETTLEMENT intent toast and was never the coach. */}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
+            {/* Home is the marketing landing. First-visit gating routes new
+                visitors here; returning visitors land on /create. */}
+            {view === 'home'        && <HomeLanding isMobile={isMobile} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`

@@ -31,6 +31,11 @@ const DEFAULT_VIEW = 'generate';
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
+  // The staged front door for new visitors: a hero over the same generation
+  // flow as /create. Leftmost nav tab. First-time visitors are routed here on a
+  // bare root visit; returning visitors land on /create — the gate lives in
+  // App's init effect, keyed on a localStorage flag.
+  { view: 'home',                  path: '/home',                  title: 'Home' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (App's NAV array).
   { view: 'settlements',           path: '/settlements',           title: 'Your Library' },

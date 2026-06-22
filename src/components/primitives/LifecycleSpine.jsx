@@ -55,9 +55,11 @@ function Step({ id, index, here, active, compact, onStep, label, hint }) {
       )}
     </>
   );
+  // Style only — kept separate from aria-current so the non-interactive branch
+  // can spread it into `style` (not as DOM attributes, which leaked
+  // display/alignItems/gap onto the span and tripped a React unknown-prop warning).
   const shared = {
     display: 'inline-flex', alignItems: 'center', gap: SP.sm,
-    'aria-current': here ? 'step' : undefined,
   };
   if (interactive) {
     return (
@@ -77,7 +79,7 @@ function Step({ id, index, here, active, compact, onStep, label, hint }) {
     );
   }
   return (
-    <span {...shared} title={hint} aria-label={compact ? `${label}. ${hint}` : undefined}>
+    <span style={shared} aria-current={here ? 'step' : undefined} title={hint} aria-label={compact ? `${label}. ${hint}` : undefined}>
       {content}
     </span>
   );

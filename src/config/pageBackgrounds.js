@@ -52,6 +52,7 @@ export const MODE_BACKGROUNDS = Object.freeze({
  * cream field; everything else keeps its scene.
  */
 export const CLEAN_VIEWS = Object.freeze(new Set([
+  'home',         // marketing landing — its hero band carries its own scrim
   'settlements',  // Library
   'compendium',
   'gallery',
