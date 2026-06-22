@@ -9,17 +9,9 @@ import Disclosure from './primitives/Disclosure.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
-// Priority-slider accents routed through the swatch escape hatch (no forked
-// color consts). The accent is DECORATION on the track + value number; the
-// magnitude itself is carried by the number text, so colour is never the sole
-// channel (P7).
-const PRIORITIES=[
-  {key:'priorityEconomy',label:'Economy',accent:swatch['#A0762A']},
-  {key:'priorityMilitary',label:'Military',accent:swatch['#8B1A1A']},
-  {key:'priorityMagic',label:'Magic',accent:swatch['#5A2A8A']},
-  {key:'priorityReligion',label:'Religion',accent:swatch['#1A5A28']},
-  {key:'priorityCriminal',label:'Criminal',accent:swatch['#4A1A4A']},
-];
+// Priority sliders moved to the Character card (PrioritySliders.jsx): archetype
+// chips and the five sliders are the same config values, now reconciled into one
+// card. This Fine-tune disclosure keeps Nearby Resources + Settlement Stress.
 
 function Lbl({children,topic}){
   const base={fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4};
@@ -30,45 +22,6 @@ function Lbl({children,topic}){
   return<div style={base}>{children}</div>;
 }
 function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
-
-function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
-  // Archetype selection lives in exactly ONE place now — the promoted Character
-  // card above. The legacy "Archetype preset" dropdown that used to sit here was
-  // a second door to the same 17 presets; removed so the sliders are pure manual
-  // tuning. Picking a Character still snaps these sliders (same priority config).
-  return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
-    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
-      <Lbl>Priority Sliders</Lbl>
-      <Button variant={randomSliderMode?'gold':'secondary'} size="sm" aria-pressed={randomSliderMode} onClick={()=>setRandomSliderMode(!randomSliderMode)}>{randomSliderMode?'Random':'Set manually'}</Button>
-    </div>
-    {randomSliderMode
-      ? <p style={{fontSize:FS.xs,color:BODY,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually, or pick a Character above to shape them.</p>
-      : <>
-        <div style={{display:'flex',flexDirection:'column',gap:8}}>
-          {PRIORITIES.map(({key,label,accent})=>{
-            // Hide magic slider entirely when magic doesn't exist in this world
-            if (key === 'priorityMagic' && config.magicExists === false) return null;
-            const val = config[key] ?? 50;
-            return <div key={key} style={{display:'flex',alignItems:'center',gap:8}}>
-              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,width:62,flexShrink:0}}>
-                {label}
-              </span>
-              <input type="range"
-                aria-label={label}
-                min={5} max={95}
-                value={Math.max(5,val)}
-                onChange={e=>updateConfig({[key]:Number(e.target.value)})}
-                style={{flex:1,accentColor:accent,height:4}}/>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:accent,width:46,textAlign:'right',whiteSpace:'nowrap'}}>
-                {val}
-              </span>
-            </div>;
-          })}
-        </div>
-      </>
-    }
-  </div>;
-}
 
 function StressPanel({config,updateConfig}){
   const isRandom=config.selectedStressesRandom!==false;
@@ -271,8 +224,6 @@ function NearbyResourcesPanel({config,updateConfig}){
 export default function ConfigurationPanel({ showFineTune = true } = {}){
   const config = useStore(s => s.config);
   const updateConfig = useStore(s => s.updateConfig);
-  const randomSliderMode = useStore(s => s.randomSliderMode);
-  const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
   // §14b — "Use custom content" toggle: only meaningful for users who can author
   // custom content and actually have some. Default ON (undefined === on).
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -456,16 +407,16 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       {/* ── Fine-tune ───────────────────────────────────────────────────────
-            Priority sliders + nearby resources + settlement stress behind ONE
-            "Fine-tune" disclosure. Flattened to a single level (the resource +
-            stress panels were collapsibles-inside-this-collapsible, 3 deep);
-            each shows its own compact "Random" default until tuned. Basic mode
-            hides this whole block (showFineTune=false) — the simulator randomises
-            priorities/resources/stress — while Advanced shows it. */}
+            Nearby resources + settlement stress behind ONE "Fine-tune"
+            disclosure. Priority sliders moved up to the Character card, where the
+            archetype chips and sliders are reconciled into one control. Flattened
+            to a single level (the resource + stress panels were
+            collapsibles-inside-this-collapsible, 3 deep); each shows its own
+            compact "Random" default until tuned. Basic mode hides this whole
+            block (showFineTune=false) while Advanced shows it. */}
       {showFineTune && (
-        <Disclosure title="Fine-tune: priorities, resources, stress" hint="Optional">
-          <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
-          <div style={{marginTop:10}}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></div>
+        <Disclosure title="Fine-tune: resources and stress" hint="Optional">
+          <NearbyResourcesPanel config={config} updateConfig={updateConfig}/>
           <div style={{marginTop:6}}><StressPanel config={config} updateConfig={updateConfig}/></div>
         </Disclosure>
       )}

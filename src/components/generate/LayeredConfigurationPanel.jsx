@@ -90,8 +90,10 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
 
   return (
     <div data-testid="layered-configuration-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* Tier-1: Character preset (promoted out of SliderPanel). */}
-      <CharacterPresetCard />
+      {/* Tier-1: Character preset. In Advanced this card also hosts the five
+          always-on priority sliders (archetype chips + Random/Custom + sliders
+          reconciled into one control); Basic shows archetype chips only. */}
+      <CharacterPresetCard advanced={advanced} />
 
       {/* Foundations (always-on) + Fine-tune (collapsible). The outer bordered
           wrapper was removed: ConfigurationPanel already renders its OWN bordered
