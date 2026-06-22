@@ -10,10 +10,20 @@
  *                      worldState simulation rules.
  *
  * Until all three hold, the pantheon is INERT — byte-identical to a deity-free
- * world. The strip deep-links the two actionable steps: "assign a deity" routes
- * to the Realm (where PrimaryDeityPicker lives) and "enable religion dynamics"
- * routes to the Realm's SimulationRulesDialog. Pure read of store state; the
- * deep-links are plain `navigate` calls.
+ * world. The strip deep-links the two actionable steps into their named
+ * destinations rather than the bare Realm hub:
+ *
+ *   - "Assign a deity" requests the Realm Inspector's Pantheon section (where
+ *     AssignDeityFromMap lives) via the one-shot `requestMapWorkspace('pantheon')`
+ *     signal, then navigates to the Realm. While no deity is embedded in the
+ *     active campaign world the Pantheon tab self-hides and the Inspector falls
+ *     back to its Dashboard, so the GM still lands inside the Realm with context.
+ *   - "Enable dynamics" requests the Realm's Simulation Rules dialog (the only
+ *     surface carrying the religion-dynamics toggle) via the one-shot
+ *     `requestSimulationRules()` signal, then navigates to the Realm.
+ *
+ * Both signals are consumed once on the Realm's mount; if a selector is absent
+ * (a stubbed store in tests) the CTA degrades to a plain `navigate('realm')`.
  */
 
 import { ArrowRight } from 'lucide-react';
@@ -73,6 +83,8 @@ export default function PantheonActivationStrip() {
   const settlement = useStore((s) => s.settlement);
   const savedSettlements = useStore((s) => s.savedSettlements);
   const campaigns = useStore((s) => s.campaigns);
+  const requestMapWorkspace = useStore((s) => s.requestMapWorkspace);
+  const requestSimulationRules = useStore((s) => s.requestSimulationRules);
 
   const { authoredCount, authored, assigned, dynamicsOn } = computePantheonActivation({
     customContent, settlement, savedSettlements, campaigns,
@@ -82,11 +94,23 @@ export default function PantheonActivationStrip() {
   if (!authored) return null;
 
   const live = authored && assigned && dynamicsOn;
-  const linkBtn = (label, view) => (
+
+  // Deep-link into the Pantheon section (AssignDeityFromMap), then the Realm.
+  const goAssignDeity = () => {
+    requestMapWorkspace?.('pantheon');
+    navigate('realm');
+  };
+  // Deep-link into the Simulation Rules dialog (the religion-dynamics toggle), then the Realm.
+  const goEnableDynamics = () => {
+    requestSimulationRules?.(true);
+    navigate('realm');
+  };
+
+  const linkBtn = (label, onClick) => (
     <Button
       variant="secondary" size="sm"
       icon={<ArrowRight size={11} />}
-      onClick={() => navigate(view)}
+      onClick={onClick}
       style={{ flexShrink: 0, padding: '2px 8px', fontSize: FS.xxs }}
     >
       {label}
@@ -122,13 +146,13 @@ export default function PantheonActivationStrip() {
         on={assigned}
         label="Assigned to a settlement"
         detail="A deity must be a settlement's primary god before it embeds and acts."
-        action={linkBtn('Assign a deity', 'realm')}
+        action={linkBtn('Assign a deity', goAssignDeity)}
       />
       <Milestone
         on={dynamicsOn}
         label="Religion dynamics enabled"
         detail="Turn on the campaign rule so deities contest converts and gain seats."
-        action={linkBtn('Enable dynamics', 'realm')}
+        action={linkBtn('Enable dynamics', goEnableDynamics)}
       />
 
       {!live && (

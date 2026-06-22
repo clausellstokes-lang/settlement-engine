@@ -282,6 +282,7 @@ export default function AccountPage({ onNavigateAdmin }) {
         campaignCount={(campaigns || []).length}
         onDeleteAllSettlements={handleDeleteAllSettlements}
         onDeleteAllCampaigns={handleDeleteAllCampaigns}
+        onSignOut={authSignOut}
       />
 
       {/* ── Product Preferences ─────────────────────────────────── */}

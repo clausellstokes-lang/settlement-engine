@@ -439,7 +439,6 @@ export const en = Object.freeze({
       step3Title:   'Save it.',
       step3Body:    'Sign in and your work survives the tab close. Your first three saves are free.',
       dismiss:      'I’ve got it from here',
-      skipTour:     'Skip the tour',
     },
     firstRun: {
       stepCounter:  'Step {current} of {total}',

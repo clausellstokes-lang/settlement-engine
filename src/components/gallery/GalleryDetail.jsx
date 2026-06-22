@@ -234,6 +234,7 @@ export default function GalleryDetail({
                 count={dossier.netVotes}
                 voted={dossier.voteState?.voted}
                 disabled={voteBusy}
+                isSignedIn={!!auth?.user}
                 onClick={() => onVote(dossier)}
               />
               <Button

@@ -54,7 +54,6 @@ export default function WorldMap({ onNavigate } = {}) {
   const [currentTemplate, setCurrentTemplate] = useState('');
   const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
   const [worldPulseBusy, setWorldPulseBusy] = useState(false);
-  const [showSimulationRules, setShowSimulationRules] = useState(false);
   const [regenerateConfirm, setRegenerateConfirm] = useState(null);
   // Confirm shown when saving a canonized map — placed settlements can't move.
   const [mapSaveConfirm, setMapSaveConfirm] = useState(false);
@@ -105,10 +104,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const isElevated     = useStore(s => s.isElevated());
   const campaigns      = useStore(s => s.campaigns);
   const canManageCampaigns = authTier === 'premium' || isElevated;
-  const activeCampaigns = useMemo(
-    () => canManageCampaigns ? campaigns.filter(isCampaignActive) : [],
-    [campaigns, canManageCampaigns],
-  );
+  const activeCampaigns = useMemo(() => canManageCampaigns ? campaigns.filter(isCampaignActive) : [], [campaigns, canManageCampaigns]);
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
   const saveCampaignMap   = useStore(s => s.saveCampaignMap);
@@ -118,6 +114,8 @@ export default function WorldMap({ onNavigate } = {}) {
   const updateCampaignSimulationRules = useStore(s => s.updateCampaignSimulationRules);
   const pendingMapWorkspace = useStore(s => s.pendingMapWorkspace);
   const consumeMapWorkspace = useStore(s => s.consumeMapWorkspace);
+  const pendingSimulationRules = useStore(s => s.pendingSimulationRules);
+  const consumeSimulationRules = useStore(s => s.consumeSimulationRules);
   // Campaign-clock (Phase C2/C3): multi-step undo of the last World Pulse.
   const undoLastPulse = useStore(s => s.undoLastPulse);
   const canUndoPulse = useStore(s =>
@@ -148,12 +146,10 @@ export default function WorldMap({ onNavigate } = {}) {
   // all times (the WorldMapStage never swaps the map away; its `showing*` props are
   // pinned false). The single Inspector toggle is the gateway; the Inspector owns
   // Pantheon's self-hide when religion is dormant.
-
-  // Audit recommendation: when a campaign is active, default to canon-
-  // only filtering so the map represents the *deployed* world, not
-  // every draft the user is tinkering with. Canon-only is enforced now
-  // (the old toolbar toggle was removed): only canon settlements may be
-  // placed on a campaign map.
+  // Audit recommendation: when a campaign is active, default to canon-only filtering
+  // so the map represents the *deployed* world, not every draft the user is tinkering
+  // with. Canon-only is enforced now (the old toolbar toggle was removed): only canon
+  // settlements may be placed on a campaign map.
   const canonOnlyFilter = true;
 
   useEffect(() => {
@@ -182,10 +178,10 @@ export default function WorldMap({ onNavigate } = {}) {
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
   const {
     inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
-    openInspectorAt, handleApplyPreset, handleUpgrade,
+    openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
   } = useRealmInspector({
-    canManageCampaigns, pendingMapWorkspace, activeCampaign, activeCampaignId,
-    consumeMapWorkspace, updateCampaignSimulationRules, onNavigate, showToast,
+    canManageCampaigns, pendingMapWorkspace, activeCampaign, activeCampaignId, consumeMapWorkspace,
+    updateCampaignSimulationRules, onNavigate, showToast, pendingSimulationRules, consumeSimulationRules,
   });
 
   // Auto-save the working map into the active campaign so it

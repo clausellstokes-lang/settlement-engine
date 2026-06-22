@@ -18,7 +18,6 @@ export default function SettlementPalette({
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
 }) {
   const [query, setQuery] = useState('');
-  const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
   // Hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
   const setHover = useStore(s => s.setHoveredSettlementId);
@@ -150,7 +149,6 @@ export default function SettlementPalette({
               key={save.id}
               save={save}
               placed={placedSettlements.has(String(save.id))}
-              onClick={() => setSelectedBurgId(null)}
               onHover={(hovering) => {
                 if (hovering) setHover?.(save.id);
                 else clearHover?.();

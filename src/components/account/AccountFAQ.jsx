@@ -21,6 +21,7 @@
 import { BODY, MUTED, sans, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Disclosure from '../primitives/Disclosure.jsx';
+import Button from '../primitives/Button.jsx';
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
@@ -34,7 +35,12 @@ const Q_KEYS = [
   'aiOrSim',
 ];
 
-export default function AccountFAQ() {
+// `linkAccount` gates the closing self-help line's destination. On the public
+// About > FAQ tab the reader is off the Account page, so "your Account page"
+// renders as a ghost Button that routes there via onNavigate('account'). On the
+// Account page itself (the default), that link would point at the page the
+// reader is already on — a decoy — so the phrase stays plain text.
+export default function AccountFAQ({ linkAccount = false, onNavigate } = {}) {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
@@ -61,7 +67,16 @@ export default function AccountFAQ() {
         marginTop: 4, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         fontFamily: sans,
       }}>
-        Still stuck? Reach Customer Support from your Account page.
+        {linkAccount
+          // Off the Account page (public About > FAQ): make the destination a
+          // real control so the first click lands instead of dead-ending in
+          // text. Ghost keeps it a low-stakes inline link, not a second CTA.
+          ? <>Still stuck? Reach Customer Support from{' '}
+              <Button variant="ghost" size="sm" onClick={() => onNavigate?.('account')}>
+                your Account page
+              </Button>.
+            </>
+          : 'Still stuck? Reach Customer Support from your Account page.'}
       </div>
     </div>
   );

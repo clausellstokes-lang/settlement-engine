@@ -486,6 +486,15 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance' }] : []),
+    // Relationships — the full World-group relationship web (NPC ties, factions,
+    // conflicts, the neighbour network). Gated on the same data the full
+    // RelationshipsTab renders so a town with no relational content shows no tab;
+    // without this registration the World group dropped the sub-tab AND the
+    // Overview 'Full relationship web' jump fell back to the first tab.
+    ...(rawSettlement?.relationships?.length || rawSettlement?.factions?.length
+      || rawSettlement?.conflicts?.length || rawSettlement?.prominentRelationship
+      || rawSettlement?.neighbourNetwork?.length || rawSettlement?.neighborRelationship?.name
+      ? [{ id:'relationships', label:'Relationships' }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours' }] : [])
   ];
@@ -638,7 +647,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
       case 'overview':   return <OverviewTab settlement={s} hideIdentity={!hideHeader} onNavigateTab={(id) => setActiveTab(id)} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;

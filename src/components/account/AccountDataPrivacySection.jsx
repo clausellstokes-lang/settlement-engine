@@ -54,6 +54,7 @@ export default function AccountDataPrivacySection({
   campaignCount = 0,
   onDeleteAllSettlements,
   onDeleteAllCampaigns,
+  onSignOut,
 }) {
   const galleryPublicDefault = useStore(s => s.productPrefs?.galleryPublicDefault);
   const shareDefault = useStore(s => s.productPrefs?.shareDefault);
@@ -107,10 +108,14 @@ export default function AccountDataPrivacySection({
     setDeleteBusy(true);
     setDeleteError(null);
     try {
+      // File the soft-delete request BEFORE signing out, so it is durably
+      // recorded even if ending the session tears down the auth context.
       await requestAccountDeletion(auth.user);
       setDeleteQueued(true);
       setDeleteOpen(false);
       setDeletePhrase('');
+      // Honor the banner's promise: end the session so the user is signed out.
+      if (typeof onSignOut === 'function') await onSignOut();
     } catch (e) {
       setDeleteError(e?.message || 'Could not submit your request. Please contact support.');
     } finally {
@@ -216,7 +221,7 @@ export default function AccountDataPrivacySection({
           </div>
           {deleteQueued ? (
             <div style={{ marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
-              Your deletion request has been received. Your account is scheduled for removal and you will be signed out shortly. Contact support if this was a mistake.
+              Your deletion request has been received. Your account is scheduled for removal and we are signing you out now. Contact support if this was a mistake.
             </div>
           ) : !deleteOpen ? (
             <>

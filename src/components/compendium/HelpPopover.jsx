@@ -56,6 +56,11 @@ const COMPENDIUM_HINTS = Object.freeze({
     body: 'Thorp through Metropolis. Each tier sets the institution count, NPC count, district count, and what kinds of stressors are likely. Bigger ≠ better; a thorp can carry one perfect hook better than a metropolis.',
     anchor: 'tiers',
   },
+  'settlement-age': {
+    title: 'Settlement Age',
+    body: 'How long the place has stood. Auto lets the simulator pick a plausible age for the tier. A newly founded settlement reads raw and provisional, with thin institutions and unsettled factions. An old one carries layered history, entrenched power, and inherited grudges. Custom years sets the founding date exactly.',
+    anchor: 'living-world',
+  },
 });
 
 export default function HelpPopover({ topic, label = 'Help' }) {

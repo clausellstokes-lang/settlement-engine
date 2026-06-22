@@ -24,7 +24,16 @@ const COLORS = {
   canon: { bg: '#1a3a2a', fg: '#e0d6b8', border: '#2d5a44', icon: BookMarked, label: 'Canon' },
 };
 
-export default function PhaseBadge() {
+/**
+ * @param {Object} props
+ * @param {() => void} [props.onCanonizeRequest]  When provided (the SettlementDetail
+ *   host always does), the "Canonize" button delegates to the parent's shared
+ *   canonize-confirm gate, so the header badge and the NextActionRail rung route
+ *   through ONE ConfirmDialog + ONE first_canonize pricing moment (BLOCKER #3).
+ *   When absent, the badge falls back to its own self-contained confirm so it
+ *   stays usable in isolation.
+ */
+export default function PhaseBadge({ onCanonizeRequest } = {}) {
   const phase     = useStore(s => s.phase);
   const canonize  = useStore(s => s.canonize);
   const uncanonize = useStore(s => s.uncanonize);
@@ -41,9 +50,14 @@ export default function PhaseBadge() {
   const Icon = c.icon;
 
   const onCanonize = () => {
+    // Prefer the host's shared canonize gate so the badge and the NextActionRail
+    // canonize rung commit through one confirm + one pricing moment. Fall back to
+    // the local confirm only when used standalone (no host handler supplied).
+    if (onCanonizeRequest) { onCanonizeRequest(); return; }
     setConfirmAction('canonize');
   };
 
+  // Local fallback commit — only reachable when no onCanonizeRequest is passed.
   const confirmCanonize = () => {
     setConfirmAction(null);
     canonize();

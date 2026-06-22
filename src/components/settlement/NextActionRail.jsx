@@ -52,7 +52,11 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
 }
 
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, simulated, _settlement, save, handlers }) {
+function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers }) {
+  // `settlement` is destructured (previously dropped as `_settlement`) so callers
+  // that branch on it can. The current ladder reads phase/event/narrated facts;
+  // settlement is kept available for future phase-aware rungs.
+  void settlement;
   const items = [];
   // The Realm (map chains) is gated to the Cartographer subscription tier
   // (authSlice TIER_GATE: mapChains is premium-only). We surface the required
@@ -63,6 +67,13 @@ function computeItems({ phase, eventCount, narrated, simulated, _settlement, sav
   // ── Primary ladder ──────────────────────────────────────────────────
   // The first applicable rung is promoted; the rest fall through as
   // secondaries.
+  //
+  // The Save-Draft rung is doubly unreachable on the saved-detail surface: that
+  // surface mounts the rail only for an already-saved record (`save` is truthy),
+  // and SettlementDetail intentionally never wires `handlers.onSave`. Both the
+  // `!save` and the `handlers.onSave` guards below therefore gate it off there.
+  // The rung is kept (not dropped) so the rail stays reusable on a future
+  // unsaved-draft surface that does pass an onSave handler.
   if (phase === 'draft' && !save && handlers.onSave) {
     items.push({
       id: 'save', primary: true, Icon: Save,

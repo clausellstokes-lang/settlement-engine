@@ -544,7 +544,7 @@ function CompareTab() {
   );
 }
 
-function FaqTab() {
+function FaqTab({ onNavigate }) {
   return (
     <div style={{ maxWidth: PROSE_MAX, margin:'0 auto' }}>
       <h2 style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'0 0 10px' }}>
@@ -554,7 +554,10 @@ function FaqTab() {
         Credits, billing, gallery privacy, and how the simulator relates to AI. Account-specific
         controls (your plan, credit balance, billing portal) live on your Account page.
       </p>
-      <AccountFAQ />
+      {/* Public About surface: the reader is off the Account page, so the FAQ's
+          closing self-help line gets a live route there (linkAccount). The
+          Account-page render of AccountFAQ omits the prop, keeping it plain. */}
+      <AccountFAQ linkAccount onNavigate={onNavigate} />
     </div>
   );
 }
@@ -571,7 +574,7 @@ function TabPanel({ id, onNavigate }) {
     case 'phil':    return <PhilosophyTab />;
     case 'ref':     return <RefTab onNavigate={onNavigate} />;
     case 'compare': return <CompareTab />;
-    case 'faq':     return <FaqTab />;
+    case 'faq':     return <FaqTab onNavigate={onNavigate} />;
     default:        return <QuickTab />;
   }
 }

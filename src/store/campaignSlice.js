@@ -177,6 +177,11 @@ export const createCampaignSlice = (set, get) => {
    *  for 'news'). WorldMap reads & clears it on mount. Session-only — NOT in
    *  persist.partialize, so it never survives a reload. */
   pendingMapWorkspace: null,
+  /** One-shot: an outside view asks the Realm to open the Simulation Rules dialog
+   *  on arrival (e.g. the Pantheon "Enable dynamics" CTA, which steers to the
+   *  religion-dynamics toggle that lives only in that dialog). WorldMap reads and
+   *  clears it on mount. Session-only — NOT in persist.partialize. */
+  pendingSimulationRules: false,
   /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
    *  null when the last persist succeeded (or was cleared by the user). */
   campaignSyncError: null,
@@ -653,6 +658,18 @@ export const createCampaignSlice = (set, get) => {
     const w = get().pendingMapWorkspace;
     if (w) set(state => { state.pendingMapWorkspace = null; });
     return w;
+  },
+
+  /** Ask the Realm to open the Simulation Rules dialog the next time WorldMap
+   *  mounts. One-shot; pass false to clear. */
+  requestSimulationRules: (want = true) =>
+    set(state => { state.pendingSimulationRules = !!want; }),
+
+  /** Read-and-clear the pending Simulation Rules request (one-shot). Returns it. */
+  consumeSimulationRules: () => {
+    const want = get().pendingSimulationRules;
+    if (want) set(state => { state.pendingSimulationRules = false; });
+    return want;
   },
 
   /**

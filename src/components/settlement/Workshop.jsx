@@ -69,11 +69,12 @@ import { INK, MUTED, BODY, SECOND, BORDER, CARD, CARD_HDR, GOLD_TXT, sans, FS, R
  *   editMode?: boolean, children: React.ReactNode,
  * }} props
  */
-function WorkshopCard({ id, title, hint, headline, defaultOpen = false, editMode = false, children }) {
+function WorkshopCard({ id, anchorId, title, hint, headline, defaultOpen = false, editMode = false, children }) {
   const [open, setOpen] = useState(defaultOpen);
   const Chevron = open ? ChevronDown : ChevronRight;
   return (
     <section
+      id={anchorId}
       data-testid={`workshop-card-${id}`}
       data-card={id}
       data-mode={editMode ? 'edit' : 'view'}
@@ -288,6 +289,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 5 ── Make Changes ──────────────────────────────────────────────────── */}
       <WorkshopCard
         id="make-changes"
+        anchorId="workshop-make-changes"
         title="Make Changes"
         hint="Apply an in-world event. It is preceded above by the state it mutates, so you edit the substrate with eyes open."
         editMode={showWrite}

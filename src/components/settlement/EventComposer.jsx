@@ -316,9 +316,18 @@ export default function EventComposer() {
   }
 
   return (
-    <div data-anchor="event-composer" style={{
+    <div
+      data-anchor="event-composer"
+      id="event-composer"
+      // Programmatic-focus target: the NextActionRail's "Apply an event" rung
+      // enters edit mode then focuses this composer (it is otherwise unreachable
+      // from the rail without a hunt down the Workshop). tabIndex={-1} makes the
+      // container focusable without adding it to the natural tab order.
+      tabIndex={-1}
+      style={{
       background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
       padding: SP.sm, marginTop: SP.sm,
+      outline: 'none',
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,

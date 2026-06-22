@@ -25,8 +25,8 @@
 
 import { useMemo } from 'react';
 import { useStore } from '../../store';
-import { GOLD, GOLD_TXT, INK, SECOND, BORDER, BORDER2, MUTED, RED, RED_BG, sans, FS, SP, R } from '../theme.js';
-import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff, Check } from 'lucide-react';
+import { GOLD, GOLD_TXT, INK, SECOND, BORDER, BORDER2, RED, RED_BG, sans, FS, SP, R } from '../theme.js';
+import { Link as LinkIcon, AlertTriangle, Eye, EyeOff, Check } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 // The relationship-type list (id + label + color) is the SHARED list used by
 // LayersPanel and MapLegend, so the chips here name and color each type
@@ -211,7 +211,6 @@ export default function RoutesToolbar() {
           <span style={{ color: SECOND }}>
             {topFailure.good ? `${topFailure.good} stalled` : 'a supply line is failing'}
           </span>
-          <ChevronRight size={11} color={MUTED} />
         </div>
       )}
     </div>

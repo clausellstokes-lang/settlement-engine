@@ -11,11 +11,6 @@ const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
-// Canonical app navigation entry point (URL-based). The next-action rail's
-// "Send it to the Realm" / "Open the Realm" rung routes through this rather than
-// inventing a bespoke navigation path.
-import { navigate } from '../hooks/useRoute.js';
-
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
@@ -47,6 +42,9 @@ import { ConfirmDialog } from './primitives/Dialog.jsx';
 import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
+// Next-action rail wiring + the shared canonize confirm/commit, extracted to keep
+// SettlementDetail under the component-size ratchet (behavior-preserving).
+import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailHandlers.js';
 // Read-only network-effect echo: the SAME modifier selector + effect taxonomy
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
@@ -125,6 +123,10 @@ export default function SettlementDetail({
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
+  // Shared canonize-confirm gate — BOTH PhaseBadge and the rail route through this
+  // one dialog + commit, so neither fires the persisted transition unconfirmed or
+  // skips the pricing moment (BLOCKER #3). The commit is confirmCanonize() below.
+  const [confirmCanonizeOpen, setConfirmCanonizeOpen] = useState(false);
   // Holds the index of the neighbour link pending removal-confirmation, or null.
   // Removing a link is a consequential cross-settlement write (it also clears the
   // paired NPC contacts + network effects on BOTH settlements and persists
@@ -320,21 +322,16 @@ export default function SettlementDetail({
     }
   };
 
-  // ── Next-action rail handlers ───────────────────────────────────────────────
-  // Each maps to an action SettlementDetail ALREADY performs — the rail is an
-  // aggregation surface, it invents nothing. Canonize is store-direct; Apply an
-  // event / Polish enter edit mode (where the EventComposer + AI polish live) so
-  // the rail is honest about where the action happens; Export opens the existing
-  // sheet; the Realm rung routes through the canonical navigate().
-  const enterEdit = () => { if (canEdit && !editMode) toggleEditMode(); };
-  const railHandlers = {
-    onCanonize: (canEdit && phase !== 'canon') ? () => canonize?.() : undefined,
-    onApplyEvent: canEdit ? enterEdit : undefined,
-    onPolishAi: (canEdit && !narrated) ? enterEdit : undefined,
-    onExport: () => { setPdfError(null); setExportSheetOpen(true); },
-    onPlaceOnMap: () => navigate('realm'),
-    onEdit: canEdit ? toggleEditMode : undefined,
-  };
+  // Next-action rail wiring + the shared canonize confirm/commit live in the
+  // co-located hook (extracted to keep this surface under the size ratchet). The
+  // rail is an aggregation surface; the hook routes canonize through the shared
+  // gate (BLOCKER #3) and the event/AI rungs through enter-edit + scroll-focus
+  // (MAJOR #8).
+  const { railHandlers, requestCanonize, confirmCanonize } = useNextActionRailHandlers({
+    saveId, phase, canEdit, editMode, narrated,
+    toggleEditMode, canonize, setConfirmCanonizeOpen,
+    openExportSheet: () => { setPdfError(null); setExportSheetOpen(true); },
+  });
 
     return<div style={{maxWidth:PAGE_MAX,margin:'0 auto',width:'100%'}}>
       {/* Single top-level frame: the whole detail surface — header, summary,
@@ -370,7 +367,7 @@ export default function SettlementDetail({
             and Share are subordinate secondary buttons. */}
         <div style={{display:'flex',alignItems:'center',gap:16,flexWrap:'wrap'}}>
           <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',flex:1,minWidth:0}}>
-            <PhaseBadge />
+            <PhaseBadge onCanonizeRequest={requestCanonize} />
             {/* Narrated/Raw state, rendered via the StateBadge primitive. */}
             <StateBadge
               kind={narrated ? 'narrated' : 'raw'}
@@ -782,6 +779,18 @@ export default function SettlementDetail({
           onExport={handlePdfExport}
         />
       )}
+
+      {/* Shared canonize confirm — opened by both the PhaseBadge button and the
+          rail's Canonize rung; confirmCanonize() runs canonize() + first_canonize. */}
+      <ConfirmDialog
+        open={confirmCanonizeOpen}
+        tone="warning"
+        title="Mark settlement as canon?"
+        body="Future changes will be logged as in-world events with timeline entries."
+        confirmLabel="Canonize"
+        onConfirm={confirmCanonize}
+        onCancel={() => setConfirmCanonizeOpen(false)}
+      />
 
       <ConfirmDialog
         open={confirmRevertRaw}

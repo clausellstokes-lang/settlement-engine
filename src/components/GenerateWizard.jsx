@@ -21,7 +21,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { INK, MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
+import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -481,40 +481,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               PostGenCoach card (mounted at the App level) so it floats as one
               dismissible helper instead of a second in-page block. */}
         </>
-      )}
-
-      {/* When settlement exists but user navigated back — re-view + start-new.
-          The full Basic/Advanced picker lives on the Create landing; offering a
-          second copy of it here was a redundant entry point, so "Start a new
-          settlement" simply returns there (Regenerate above still re-rolls the
-          same config). */}
-      {settlement && !showOutput && (
-        // "You navigated back" is not a success EVENT, so it loses the green
-        // bordered card (a fourth distinct border treatment for a non-success
-        // state). A borderless spacing-grouped row carries it instead — name+tier
-        // text on the left, the two nav controls on the right (P5). "View" is the
-        // lead action (primary); "Start new" is the subordinate reset.
-        <div style={{
-          padding: `${SP.sm}px ${SP.xs}px`,
-          display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap',
-        }}>
-          <div style={{ flex: 1, minWidth: 160 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: INK }}>
-              Last generated: {settlement.name || 'Untitled'}
-            </span>
-            <span style={{ fontSize: FS.sm, color: MUTED, marginLeft: SP.sm }}>
-              {settlement.tier}
-            </span>
-          </div>
-          <div style={{ display: 'flex', gap: SP.sm }}>
-            <Button variant="secondary" size="sm" onClick={handleNewSettlement}>
-              Start a new settlement
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => setShowOutput(true)}>
-              View Settlement
-            </Button>
-          </div>
-        </div>
       )}
 
       {/* Leave-confirm — rendered once at the top level so it works whether the

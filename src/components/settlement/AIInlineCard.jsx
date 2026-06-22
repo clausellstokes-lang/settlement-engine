@@ -55,6 +55,12 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
   return (
     <Card
       variant="suggestion"
+      // Programmatic-focus target: the NextActionRail's "Polish with AI" rung
+      // enters edit mode then scrolls/focuses this card. tabIndex={-1} makes the
+      // card focusable without joining the natural tab order. Card forwards
+      // unknown props to its root <section>, so id + tabIndex land on the DOM.
+      id="ai-inline-card"
+      tabIndex={-1}
       kicker={COPY.ai.inlineHook}
       actions={
         <IconButton

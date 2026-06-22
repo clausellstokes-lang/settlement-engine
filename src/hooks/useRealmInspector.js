@@ -36,6 +36,8 @@ const WORKSPACE_TO_SECTION = Object.freeze({
  * @param {Object} args
  * @param {boolean} args.canManageCampaigns  premium/elevated → live controls
  * @param {string|null} args.pendingMapWorkspace  one-shot workspace request
+ * @param {boolean} args.pendingSimulationRules  one-shot "open the rules dialog" request
+ * @param {() => boolean} args.consumeSimulationRules  read-and-clear that request
  * @param {any} args.activeCampaign
  * @param {string|null} args.activeCampaignId
  * @param {() => string|null} args.consumeMapWorkspace
@@ -46,6 +48,8 @@ const WORKSPACE_TO_SECTION = Object.freeze({
 export function useRealmInspector({
   canManageCampaigns,
   pendingMapWorkspace,
+  pendingSimulationRules,
+  consumeSimulationRules,
   activeCampaign,
   activeCampaignId,
   consumeMapWorkspace,
@@ -55,6 +59,11 @@ export function useRealmInspector({
 }) {
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [inspectorSection, setInspectorSection] = useState('dashboard');
+  // The Simulation Rules dialog (which carries the religion-dynamics toggle) is an
+  // overlay over the map; its open state lives here alongside the Inspector's so the
+  // one-shot deep-link consumption below can drive it the way the workspace request
+  // drives the Inspector section.
+  const [showSimulationRules, setShowSimulationRules] = useState(false);
 
   // Open the locked Dashboard teaser for anon/free on entry (reachable, not hidden).
   const lockedPreviewShownRef = useRef(false);
@@ -82,6 +91,20 @@ export function useRealmInspector({
       setInspectorOpen(true);
     }
   }, [pendingMapWorkspace, activeCampaign, consumeMapWorkspace]);
+
+  // Honor a one-shot request to open the Simulation Rules dialog (e.g. the Pantheon
+  // "Enable dynamics" CTA, which steers to the religion-dynamics toggle that lives
+  // only in that dialog). Consume once a campaign is active and the GM can manage it,
+  // so the dialog has rules to edit; consume() makes it fire exactly once.
+  useEffect(() => {
+    if (!pendingSimulationRules || !activeCampaign || !canManageCampaigns) return;
+    if (consumeSimulationRules?.()) {
+      // One-shot sync of an external store signal into local overlay state — the
+      // consume() read-and-clear makes this fire once, not a cascading render.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowSimulationRules(true);
+    }
+  }, [pendingSimulationRules, activeCampaign, canManageCampaigns, consumeSimulationRules]);
 
   // Toolbar preset chips — Quiet / Realistic / Dramatic in one click.
   const handleApplyPreset = useCallback(async (presetId) => {
@@ -116,5 +139,7 @@ export function useRealmInspector({
     openInspectorAt,
     handleApplyPreset,
     handleUpgrade,
+    showSimulationRules,
+    setShowSimulationRules,
   };
 }

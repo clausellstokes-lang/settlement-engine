@@ -524,7 +524,12 @@ export default function PricingPage({ onNavigate }) {
               ctaKind={cta.kind}
               isPrimaryCta={tier.key === primaryKey}
               onCta={cta.onCta}
-              loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : tier.key === 'cartographer' ? 'premium' : null)}
+              // Wanderer has no in-flight checkout product (its CTA only
+              // navigates), so map it to a sentinel that buy()/manageBilling()
+              // never pass to setLoading. Mapping to null instead matched the
+              // page's initial loading===null at rest, which left the free
+              // tier's button permanently disabled showing 'Redirecting…'.
+              loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : tier.key === 'cartographer' ? 'premium' : 'wanderer')}
               emphasised={tier.key === 'cartographer'}
               founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
               audienceLine={audienceLineFor(tier.key)}

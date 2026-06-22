@@ -39,11 +39,36 @@ async function callAdmin(body) {
   return data;
 }
 
+/**
+ * Deliver a diagnostic bundle as a downloaded JSON file. Guards the DOM/Blob
+ * APIs so a non-browser environment (or a stubbed test) doesn't throw. Returns
+ * the filename used so callers can surface it. Mirrors downloadAccountExport.
+ */
+function downloadBundle(bundle, userId, full) {
+  const json = JSON.stringify(bundle ?? {}, null, 2);
+  const stamp = new Date().toISOString().slice(0, 10);
+  const variant = full ? 'full-debug' : 'diagnostic';
+  const filename = `${variant}-${(userId || 'user').slice(0, 8)}-${stamp}.json`;
+  if (typeof document !== 'undefined' && typeof URL !== 'undefined' && typeof URL.createObjectURL === 'function') {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    try { URL.revokeObjectURL(url); } catch { /* ignore */ }
+  }
+  return filename;
+}
+
 export default function AdminUsersPanel() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [selected, setSelected] = useState(null);   // redacted summary
+  const [billing, setBilling] = useState(null);      // review_billing payload
   const [fullEmail, setFullEmail] = useState(null);  // unmasked email after reveal
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -64,7 +89,7 @@ export default function AdminUsersPanel() {
   }, [query]);
 
   const openUser = useCallback(async (id) => {
-    setBusy(true); setError(null); setStatus(null); setFullEmail(null);
+    setBusy(true); setError(null); setStatus(null); setFullEmail(null); setBilling(null);
     try {
       const data = await callAdmin({ action: 'get_user_summary', userId: id });
       setSelected(data?.summary || null);
@@ -75,21 +100,68 @@ export default function AdminUsersPanel() {
     }
   }, []);
 
-  /** Run an action against the selected user, then refresh the summary. */
+  /**
+   * Run an action against the selected user, then refresh the summary. Returns
+   * the action's response payload so a caller can deliver it (e.g. render a
+   * billing summary or download a bundle), or null on failure.
+   */
   const runAction = useCallback(async (body, successMsg) => {
-    if (!selected?.id) return;
+    if (!selected?.id) return null;
     setBusy(true); setError(null); setStatus(null);
     try {
-      await callAdmin(body);
+      const result = await callAdmin(body);
       setStatus(successMsg);
       const data = await callAdmin({ action: 'get_user_summary', userId: selected.id });
       setSelected(data?.summary || null);
+      return result;
     } catch (e) {
       setError(e?.message || 'Action failed');
+      return null;
     } finally {
       setBusy(false);
     }
   }, [selected]);
+
+  /** Review billing — capture the summary payload and render it in the panel. */
+  const reviewBilling = useCallback(async () => {
+    setBilling(null);
+    const result = await runAction({ action: 'review_billing', userId: selected?.id }, 'Billing summary loaded.');
+    if (result?.billing) setBilling(result.billing);
+  }, [runAction, selected]);
+
+  /**
+   * Export the redacted diagnostic bundle — capture the payload and deliver it
+   * as a downloaded JSON file rather than dropping it on the floor.
+   */
+  const exportBundle = useCallback(async () => {
+    const result = await runAction({ action: 'diagnostic_bundle', userId: selected?.id }, null);
+    if (result?.bundle) {
+      const name = downloadBundle(result.bundle, selected?.id, false);
+      setStatus(`Redacted bundle downloaded (${name}).`);
+    }
+  }, [runAction, selected]);
+
+  /**
+   * Create the full debug copy (audited, includes raw PII) — capture the
+   * payload and deliver it: download the JSON file and copy it to the clipboard.
+   */
+  const fullDebugCopy = useCallback(async (reason) => {
+    const result = await runAction(
+      { action: 'diagnostic_bundle', userId: selected?.id, full: true, reason },
+      null,
+    );
+    if (result?.bundle) {
+      const name = downloadBundle(result.bundle, selected?.id, true);
+      let copied = false;
+      const json = JSON.stringify(result.bundle, null, 2);
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        try { await navigator.clipboard.writeText(json); copied = true; } catch { /* clipboard blocked */ }
+      }
+      setStatus(copied
+        ? `Full debug copy downloaded (${name}) and copied to clipboard (audited).`
+        : `Full debug copy downloaded (${name}) (audited).`);
+    }
+  }, [runAction, selected]);
 
   /** Reveal full PII — requires a reason; calls the audited highest-role RPC. */
   const revealFull = useCallback(() => {
@@ -246,6 +318,24 @@ export default function AdminUsersPanel() {
             <Stat size="sm" label="Warnings" value={selected.warnings == null ? '–' : selected.warnings} />
           </div>
 
+          {/* Billing summary — rendered after Review billing captures the payload.
+              Redacted by contract: masked Stripe customer id, no raw payment data. */}
+          {billing && (
+            <div aria-label="Billing summary" style={{
+              display: 'flex', flexWrap: 'wrap', gap: SP.lg, alignItems: 'center',
+              padding: SP.md, marginBottom: SP.md,
+              background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
+            }}>
+              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Billing
+              </span>
+              <Stat size="sm" label="Tier" value={billing.tier || '–'} />
+              <Stat size="sm" label="Credits" value={billing.credits == null ? '–' : billing.credits} />
+              <Stat size="sm" label="Founder" value={billing.is_founder ? 'Yes' : 'No'} />
+              <Stat size="sm" label="Stripe customer" value={billing.customer_masked || 'None on file'} />
+            </div>
+          )}
+
           {/* Action set */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
             <Button variant="ghost" size="sm" disabled={busy}
@@ -287,8 +377,7 @@ export default function AdminUsersPanel() {
                 },
               )}>Grant / refund</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => runAction({ action: 'review_billing', userId: id }, 'Billing summary loaded.')}>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
               Review billing</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
@@ -303,17 +392,13 @@ export default function AdminUsersPanel() {
                 selected.banned ? 'Account unbanned.' : 'Account banned.',
               )}>{selected.banned ? 'Unban' : 'Ban'}</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => runAction({ action: 'diagnostic_bundle', userId: id }, 'Redacted bundle exported.')}>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
               Export bundle</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
-                { title: 'Create full debug copy', body: 'A full debug copy is audited and includes raw PII.', label: 'Justification', confirmLabel: 'Create' },
-                (reason) => runAction(
-                  { action: 'diagnostic_bundle', userId: id, full: true, reason },
-                  'Full debug copy created (audited).',
-                ),
+                { title: 'Create full debug copy', body: 'A full debug copy is audited and includes raw PII. The copy downloads as a file and is placed on your clipboard.', label: 'Justification', confirmLabel: 'Create' },
+                (reason) => fullDebugCopy(reason),
               )}>Full debug copy</Button>
           </div>
 

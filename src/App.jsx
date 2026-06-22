@@ -20,7 +20,6 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { Map as MapIcon, Zap, Shield } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
-import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
@@ -336,7 +335,7 @@ export default function App() {
   const mobileNav = MOBILE_NAV_PRIORITY
     .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)
-    .slice(0, _readFlag('mobileSingleChrome') ? 4 : 5);
+    .slice(0, 5);
 
   const headerStyle = {
     background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
@@ -367,12 +366,7 @@ export default function App() {
           Uses the same ink → ink-deep gradient as the bottom nav so the
           top + bottom chrome read as one unified frame.
         */}
-        {/* When `mobileSingleChrome` is on, drop the mobile top header
-            entirely. The bottom nav becomes the only chrome;
-            the auth chip lives there as a 6th slot (added below in the
-            bottom-nav block). Frees ~52px of vertical real estate on
-            every mobile screen — meaningful on a 640px viewport. */}
-        {isMobile && !isAuthRoute && !_readFlag('mobileSingleChrome') && (
+        {isMobile && !isAuthRoute && (
           <header style={{
             ...headerStyle,
             padding: `${SP.sm}px ${SP.md}px`,
@@ -696,34 +690,6 @@ export default function App() {
                 </button>
               );
             })}
-            {/* Auth chip as 6th bottom-nav slot. Replaces the dropped mobile
-                top header. Text-only label (Sign in / Account): gold for anon,
-                parchment for signed-in, with a gold top-border when Account is
-                the active view. */}
-            {_readFlag('mobileSingleChrome') && (
-              <button
-                type="button"
-                onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
-                aria-label={authTier === 'anon' ? 'Sign in' : 'Account'}
-                style={{
-                  flex: 1, display: 'flex', flexDirection: 'column',
-                  alignItems: 'center', justifyContent: 'center', gap: SP.xs,
-                  padding: `${SP.sm + 2}px ${SP.xs}px`,
-                  background: 'transparent',
-                  border: 'none',
-                  borderTop: view === 'account' ? `2px solid ${GOLD}` : '2px solid transparent',
-                  cursor: 'pointer',
-                  color: authTier === 'anon' ? GOLD : PARCH_100,
-                  fontSize: FS.xxs, fontWeight: 700,
-                  fontFamily: sans,
-                  letterSpacing: '0.04em', textTransform: 'uppercase',
-                }}
-              >
-                <span style={{ lineHeight: 1 }}>
-                  {authTier === 'anon' ? 'Sign in' : 'Account'}
-                </span>
-              </button>
-            )}
           </div>
         )}
       </div>
