@@ -89,6 +89,27 @@ export function setSessionPersistence(rememberMe) {
   } catch { /* storage unavailable — falls back to the localStorage default */ }
 }
 
+/**
+ * Synchronous check: is there a persisted Supabase auth token in either store
+ * (localStorage when "remember me" is on, sessionStorage otherwise)? Lets callers
+ * decide "this visitor is definitely logged out" WITHOUT awaiting the async
+ * session restore — a returning member always has a token, a fresh visitor never
+ * does. Used by the root gate to route logged-out visitors to the landing with no
+ * wait, while token-holders wait for validation so they never flash it.
+ */
+export function hasStoredAuthToken() {
+  const has = (store) => {
+    try {
+      for (let i = 0; i < store.length; i++) {
+        const k = store.key(i);
+        if (k && k.startsWith('sb-') && k.includes('-auth-token')) return true;
+      }
+    } catch { /* storage unavailable */ }
+    return false;
+  };
+  return has(localStorage) || has(sessionStorage);
+}
+
 const authStorageAdapter = {
   getItem: (key) => {
     try { return (isSessionOnly() ? sessionStorage : localStorage).getItem(key); }

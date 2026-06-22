@@ -21,6 +21,7 @@ import { Map as MapIcon, Zap, Shield } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { hasStoredAuthToken } from './lib/supabase.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { t } from './copy/index.js';
@@ -130,20 +131,27 @@ export default function App() {
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
 
-  // First-visit gate: a brand-new visitor landing on the bare root is routed to
-  // the staged Home front door (and flagged so it happens only once); a
-  // returning visitor falls through to the default (/create). Deep links are
-  // respected — the gate fires only on a root visit.
+  // Logged-out front door. A visitor who is NOT signed in — and has no saved
+  // session to restore — is routed from the bare root to the marketing landing;
+  // a signed-in member (or one whose saved session is still restoring) falls
+  // through to the app (/create), and is moved off the landing if they sign in
+  // while sitting on it. Deep links elsewhere are respected; only the root and
+  // /home are gated. Replaces the old once-per-device first-visit flag.
   useEffect(() => {
+    // No stored auth token at all ⇒ definitely logged out ⇒ route immediately,
+    // with no wait and no landing-then-app flash. Otherwise wait for the saved
+    // session to restore so a returning member never flashes the landing.
+    if (hasStoredAuthToken() && authLoading) return;
     try {
-      const atRoot = window.location.pathname === '/' || window.location.pathname === '';
-      if (!atRoot) return;
-      const KEY = 'sf.returningVisitor';
-      if (window.localStorage.getItem(KEY)) return;   // returning → default (/create)
-      window.localStorage.setItem(KEY, '1');
-      replacePath('/home');                            // new → the staged Home
+      const path = window.location.pathname;
+      const atRoot = path === '/' || path === '';
+      if (authTier === 'anon') {
+        if (atRoot) replacePath('/home');            // logged out → the landing
+      } else if (view === 'home') {
+        replacePath('/create');                      // member on the landing → the app
+      }
     } catch { /* private mode → fall through to the default */ }
-  }, []);
+  }, [authLoading, authTier, view]);
 
   // Initialize auth session on mount + check post-checkout result + load credits
   useEffect(() => {
@@ -319,7 +327,9 @@ export default function App() {
   // Filter nav items based on visibility. The Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
-  const visibleNav = NAV;
+  // The Home tab fronts the logged-out landing; signed-in members go straight to
+  // Create, so Home is dropped from their nav (the landing is logged-out-only).
+  const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
 
   // Dedicated auth surfaces (/signin · /register · /reset-password ·
   // /verify-email) render full-bleed: the persistent top nav and the mobile
