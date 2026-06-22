@@ -12,6 +12,7 @@ import { track, EVENTS } from './lib/analytics.js';
 import { returnVisitBand, stampVisit, getSessionId } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
 import { persistUrlFlags } from './lib/flags.js';
+import { installCopyGuard } from './lib/copyGuard.js';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
@@ -57,6 +58,12 @@ installAnalyticsQueue();
 // Production error reporting: window-level errors + unhandled rejections.
 // No-op network unless VITE_ERROR_REPORT_URL is set; always logs locally.
 installGlobalErrorHandlers();
+
+// Content-copy deterrent: block casual copy/cut/right-click + disable text
+// selection site-wide (exempting form fields, [data-allow-copy], and elevated
+// operators) to nudge readers toward the PDF export and premium. Flag-gated
+// (copyGuard, default on); a deterrent, not security.
+installCopyGuard();
 
 // Expose store globally in dev so we can validate map features via automation.
 if (import.meta.env.DEV) {

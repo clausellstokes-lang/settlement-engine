@@ -108,6 +108,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: '"?" affordance on every config control opens Compendium snippet.',
   },
+  copyGuard: {
+    default: true,
+    description: 'Content-copy deterrent: block copy/cut/right-click and disable text selection site-wide (exempting form fields, [data-allow-copy], and elevated users) to nudge readers toward the PDF export and premium. A deterrent, not security — text stays in the DOM for rendering, SEO, and screen readers.',
+  },
   // ── Pricing copy ────────────────────────────────────────────────────────────
   // The simulation-led copy ("Generate a town in seconds, then run the region for
   // years.") vs. the old "unlimited saves" pitch. PROMOTED default-ON: the live
