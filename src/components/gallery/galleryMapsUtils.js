@@ -38,6 +38,29 @@ export function human(value) {
 }
 
 /**
+ * Build a strict slug -> owned-campaign lookup for the gallery edit gate.
+ *
+ * The gallery RPCs anonymize every tile (no user_id, no campaign id), so
+ * ownership is proven entirely client-side: a signed-in user owns a tile only
+ * when one of their own loaded campaigns is currently public under that slug.
+ * Anonymous users have no matching campaigns, so the map stays empty and the
+ * Edit affordance never shows. This is UX-correct defense-in-depth; the publish
+ * RPCs remain owner-gated on auth.uid() server-side.
+ *
+ * @param {Array} campaigns the signed-in user's own loaded campaigns
+ * @returns {Map<string, object>} publicSlug -> owned campaign
+ */
+export function ownedCampaignBySlug(campaigns = []) {
+  const map = new Map();
+  for (const c of Array.isArray(campaigns) ? campaigns : []) {
+    if (c && c.isPublic === true && typeof c.publicSlug === 'string' && c.publicSlug) {
+      map.set(c.publicSlug, c);
+    }
+  }
+  return map;
+}
+
+/**
  * The union of tags across the fetched items, lowercased and de-duped, sorted
  * for a stable chip order. The maps vocabulary is dynamic (owner-authored), not
  * a fixed catalog, so it is derived from the batch rather than declared.

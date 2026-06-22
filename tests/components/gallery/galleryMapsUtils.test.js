@@ -7,6 +7,7 @@ import {
   deriveTagVocabulary,
   activeMapFilterCount,
   applyMapFilters,
+  ownedCampaignBySlug,
 } from '../../../src/components/gallery/galleryMapsUtils.js';
 
 // Fixture mirrors the list_gallery_maps tile shape (migration 045).
@@ -111,5 +112,48 @@ describe('applyMapFilters', () => {
     }));
     const out = applyMapFilters(batch, { sort: 'most_viewed' });
     expect(out[0].slug).toBe('m49');
+  });
+});
+
+describe('ownedCampaignBySlug (owner edit gate)', () => {
+  it('keys ONLY currently-public campaigns with a non-empty publicSlug', () => {
+    const campaigns = [
+      { id: 'c1', name: 'Coastal Realm', publicSlug: 'a', isPublic: true },
+      { id: 'c2', name: 'Draft', publicSlug: 'd', isPublic: false }, // not public
+      { id: 'c3', name: 'No slug', publicSlug: '', isPublic: true }, // empty slug
+      { id: 'c4', name: 'Null slug', publicSlug: null, isPublic: true }, // missing slug
+      null, // malformed entry
+      { id: 'c5', name: 'Mountain Pass', publicSlug: 'c', isPublic: true },
+    ];
+    const map = ownedCampaignBySlug(campaigns);
+
+    expect(map.get('a')?.id).toBe('c1');
+    expect(map.get('c')?.id).toBe('c5');
+    // Strict gate: anything not public with a real slug must be absent.
+    expect(map.get('d')).toBeUndefined();
+    expect(map.get('')).toBeUndefined();
+    expect(map.size).toBe(2);
+  });
+
+  it('tolerates empty / malformed input (anonymous users see no Edit)', () => {
+    expect(ownedCampaignBySlug().size).toBe(0);
+    expect(ownedCampaignBySlug(null).size).toBe(0);
+    expect(ownedCampaignBySlug([]).size).toBe(0);
+  });
+
+  it('gates the Edit affordance: owned slug resolves an id, non-owned is undefined', () => {
+    // Mirrors the GalleryMaps per-tile derivation: items vs the owned lookup.
+    const items = [{ slug: 'a' }, { slug: 'b' }];
+    const campaigns = [{ id: 'c1', publicSlug: 'a', isPublic: true }];
+    const ownedBySlug = ownedCampaignBySlug(campaigns);
+
+    // Tile 'a' is owned -> Edit shown, shareMap/unshareMap key on c1.
+    const ownedA = ownedBySlug.get(items[0].slug) || null;
+    expect(ownedA?.id).toBe('c1');
+    expect(!!ownedA).toBe(true);
+
+    // Tile 'b' is not owned -> no Edit (strict).
+    const ownedB = ownedBySlug.get(items[1].slug) || null;
+    expect(ownedB).toBeNull();
   });
 });

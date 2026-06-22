@@ -106,6 +106,15 @@ function campaignFromRow(row) {
       inactiveReason: row.inactive_reason || null,
       inactiveSince: row.inactive_since || null,
       retentionExpiresAt: row.retention_expires_at || null,
+      // Server-owned publish state (migration 045). Read-only on the client:
+      // shareMap/unshareMap own these via SECURITY DEFINER RPCs; the campaign
+      // write path (rowForCampaign) never echoes them back. They let the gallery
+      // match an owned campaign to its anonymized public tile by slug.
+      publicSlug: row.public_slug || null,
+      isPublic: row.is_public === true,
+      shareKind: row.share_kind || 'map',
+      galleryDescription: row.gallery_description || '',
+      galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     };
   }
 
@@ -137,6 +146,11 @@ function campaignFromRow(row) {
     inactiveReason: row.inactive_reason || null,
     inactiveSince: row.inactive_since || null,
     retentionExpiresAt: row.retention_expires_at || null,
+    publicSlug: row.public_slug || null,
+    isPublic: row.is_public === true,
+    shareKind: row.share_kind || 'map',
+    galleryDescription: row.gallery_description || '',
+    galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
   };
 }
 
@@ -157,7 +171,7 @@ function rowForCampaign(campaign, userId) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('saved_maps')
-    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at')
+    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at, public_slug, is_public, share_kind, gallery_description, gallery_tags')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return (data || []).map(campaignFromRow);

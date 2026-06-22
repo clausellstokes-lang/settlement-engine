@@ -10,15 +10,16 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useStore } from '../../store';
-import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
+import { fetchGalleryMaps, fetchGalleryMap, shareMap, unshareMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
+import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import {
   INK, INK_DEEP, BODY, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, PROSE_MAX,
   GREEN, GREEN_BG, RED, RED_BG,
   sans, serif_, SP, R, FS,
 } from '../theme.js';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { applyMapFilters, deriveTagVocabulary, MAP_SORT_OPTIONS } from './galleryMapsUtils.js';
+import { applyMapFilters, deriveTagVocabulary, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 // Mirror the settlements tab's StatusMessage so the two sibling tabs render the
@@ -57,16 +58,33 @@ function MapsSkeleton() {
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
+  const campaigns = useStore(s => s.campaigns);
+  const renameCampaign = useStore(s => s.renameCampaign);
   const importGalleryMap = useStore(s => s.importGalleryMap);
   const importGalleryMapWithCampaign = useStore(s => s.importGalleryMapWithCampaign);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
   const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+
+  // Owner gate: the gallery tiles are anonymized, so ownership is proven
+  // entirely from the user's own loaded campaigns — a tile is editable only when
+  // one of them is currently public under that tile's slug. Anonymous users have
+  // no matching campaigns, so Edit never shows.
+  const ownedBySlug = useMemo(() => ownedCampaignBySlug(campaigns), [campaigns]);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [importingSlug, setImportingSlug] = useState(null);
   const [notice, setNotice] = useState(null);
+
+  // Owner edit state. editingSlug opens the inline editor for one owned tile;
+  // the draft mirrors the owned campaign's authoritative local copy so the form
+  // is correct before any refetch. confirmUnpublishSlug gates unpublish.
+  const [editingSlug, setEditingSlug] = useState(null);
+  const [editDraft, setEditDraft] = useState({ name: '', description: '', tags: '' });
+  const [editSaving, setEditSaving] = useState(false);
+  const [editError, setEditError] = useState(null);
+  const [confirmUnpublishSlug, setConfirmUnpublishSlug] = useState(null);
 
   // Client-side faceting state (list_gallery_maps takes only pagination; the
   // batch is filtered/searched/sorted in the browser — see galleryMapsUtils).
@@ -110,13 +128,19 @@ export default function GalleryMaps({ onNavigate }) {
     return () => { ignore = true; };
   }, [viewingSlug]);
 
+  // Fetch the full server batch (list_gallery_maps caps at 60 — migration 045)
+  // so client-side faceting, counts, and the empty state see every published
+  // map, not a truncated head. Without this, the globally most-viewed map could
+  // never surface through the most_viewed sort. Reused as a post-edit refetch so
+  // owner edits show without an optimistic merge.
+  const refreshMaps = useCallback(async () => {
+    const r = await fetchGalleryMaps({ page: 0, pageSize: 60 });
+    setItems(Array.isArray(r?.items) ? r.items : []);
+  }, []);
+
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    // Fetch the full server batch (list_gallery_maps caps at 60 — migration 045)
-    // so client-side faceting, counts, and the empty state see every published
-    // map, not a truncated head. Without this, the globally most-viewed map could
-    // never surface through the most_viewed sort.
     fetchGalleryMaps({ page: 0, pageSize: 60 })
       .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
@@ -143,8 +167,82 @@ export default function GalleryMaps({ onNavigate }) {
     }
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
+  // Open the inline editor for an owned tile, seeding the draft from the owned
+  // campaign's authoritative local copy (correct before any server refetch).
+  const openEditor = useCallback((slug) => {
+    const owned = ownedBySlug.get(slug);
+    if (!owned) return;
+    setEditError(null);
+    setEditDraft({
+      name: owned.name || '',
+      description: owned.galleryDescription || '',
+      tags: Array.isArray(owned.galleryTags) ? owned.galleryTags.join(', ') : '',
+    });
+    setEditingSlug(slug);
+  }, [ownedBySlug]);
+
+  const closeEditor = useCallback(() => {
+    setEditingSlug(null);
+    setEditError(null);
+  }, []);
+
+  // Save description + tags via publish_map, plus an optional rename when the
+  // name changed. All keyed on the owned campaign id (the saved_maps row id),
+  // never the slug. Rename writes saved_maps.name through the campaign persist;
+  // both rows of truth reflect after the post-action maps refetch.
+  const handleSaveEdit = useCallback(async (slug) => {
+    const owned = ownedBySlug.get(slug);
+    if (!owned) return;
+    setEditSaving(true); setEditError(null);
+    try {
+      const nextName = String(editDraft.name || '').trim();
+      if (nextName && nextName !== owned.name) renameCampaign(owned.id, nextName);
+      await shareMap(owned.id, {
+        kind: owned.shareKind || 'map',
+        description: editDraft.description,
+        tags: String(editDraft.tags || '').split(',').map(t => t.trim()).filter(Boolean),
+      });
+      await refreshMaps();
+      setEditingSlug(null);
+      setNotice({ kind: 'ok', text: 'Map details saved.' });
+    } catch (e) {
+      setEditError(e?.message || 'Could not save the map details.');
+    } finally {
+      setEditSaving(false);
+    }
+  }, [ownedBySlug, editDraft, renameCampaign, refreshMaps]);
+
+  // Unpublish via unpublish_map (owner-gated server-side), then refetch so the
+  // tile leaves the gallery.
+  const handleUnpublish = useCallback(async (slug) => {
+    const owned = ownedBySlug.get(slug);
+    setConfirmUnpublishSlug(null);
+    if (!owned) return;
+    setEditSaving(true); setEditError(null);
+    try {
+      await unshareMap(owned.id);
+      await refreshMaps();
+      setEditingSlug(null);
+      setNotice({ kind: 'ok', text: 'Map removed from the gallery.' });
+    } catch (e) {
+      setEditError(e?.message || 'Could not remove the map from the gallery.');
+    } finally {
+      setEditSaving(false);
+    }
+  }, [ownedBySlug, refreshMaps]);
+
   return (
     <div style={{ fontFamily: sans }}>
+      <ConfirmDialog
+        open={!!confirmUnpublishSlug}
+        title="Remove from gallery?"
+        body="This unpublishes the map from the public gallery. Your campaign stays in your account, and you can publish it again later."
+        confirmLabel="Unpublish"
+        cancelLabel="Keep published"
+        tone="danger"
+        onConfirm={() => handleUnpublish(confirmUnpublishSlug)}
+        onCancel={() => setConfirmUnpublishSlug(null)}
+      />
       {notice && (
         notice.kind === 'upgrade' ? (
           <MapsNotice tone="err">
@@ -264,7 +362,13 @@ export default function GalleryMaps({ onNavigate }) {
 
           {!loading && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}>
-        {visibleItems.map((m) => (
+        {visibleItems.map((m) => {
+          // Strict owner gate: editable only when a loaded owned campaign is
+          // public under this tile's slug. null for anonymous / non-owners.
+          const owned = ownedBySlug.get(m.slug) || null;
+          const canEdit = !!owned;
+          const isEditing = editingSlug === m.slug;
+          return (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
               {m.backdrop_kind === 'image' && m.thumb_url ? (
@@ -290,6 +394,58 @@ export default function GalleryMaps({ onNavigate }) {
                 </div>
               )}
               <div style={{ flex: 1 }} />
+
+              {/* Owner inline editor — description, tags, and an optional rename.
+                  Mirrors the tile tokens; keyed entirely on the owned campaign. */}
+              {isEditing && owned && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.sm, marginTop: SP.xs, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+                  {editError && (
+                    <div role="alert" style={{ fontSize: FS.xs, color: RED, fontFamily: sans, fontWeight: 850 }}>{editError}</div>
+                  )}
+                  <label htmlFor={`gallery-edit-name-${m.slug}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <span style={{ fontSize: FS.xs, fontWeight: 850, color: INK, fontFamily: sans }}>Name</span>
+                    <input
+                      id={`gallery-edit-name-${m.slug}`}
+                      type="text"
+                      aria-label="Map name"
+                      value={editDraft.name}
+                      onChange={e => setEditDraft(d => ({ ...d, name: e.target.value }))}
+                      style={{ minHeight: 36, boxSizing: 'border-box', padding: '6px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}
+                    />
+                  </label>
+                  <label htmlFor={`gallery-edit-desc-${m.slug}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <span style={{ fontSize: FS.xs, fontWeight: 850, color: INK, fontFamily: sans }}>Description</span>
+                    <textarea
+                      id={`gallery-edit-desc-${m.slug}`}
+                      aria-label="Map description"
+                      rows={3}
+                      value={editDraft.description}
+                      onChange={e => setEditDraft(d => ({ ...d, description: e.target.value }))}
+                      style={{ boxSizing: 'border-box', padding: '6px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 600, resize: 'vertical' }}
+                    />
+                  </label>
+                  <label htmlFor={`gallery-edit-tags-${m.slug}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <span style={{ fontSize: FS.xs, fontWeight: 850, color: INK, fontFamily: sans }}>Tags</span>
+                    <input
+                      id={`gallery-edit-tags-${m.slug}`}
+                      type="text"
+                      aria-label="Map tags"
+                      value={editDraft.tags}
+                      onChange={e => setEditDraft(d => ({ ...d, tags: e.target.value }))}
+                      placeholder="coastal, trade"
+                      style={{ minHeight: 36, boxSizing: 'border-box', padding: '6px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}
+                    />
+                    <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>Separate tags with commas.</span>
+                  </label>
+                  <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
+                    <Button variant="primary" size="sm" busy={editSaving} onClick={() => handleSaveEdit(m.slug)}>Save</Button>
+                    <Button variant="ghost" size="sm" onClick={closeEditor}>Cancel</Button>
+                    <div style={{ flex: 1 }} />
+                    <Button variant="danger" size="sm" onClick={() => setConfirmUnpublishSlug(m.slug)}>Unpublish</Button>
+                  </div>
+                </div>
+              )}
+
               <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs }}>
                 <Button
                   variant="ghost"
@@ -297,6 +453,14 @@ export default function GalleryMaps({ onNavigate }) {
                   onClick={() => setViewingSlug(m.slug)}
                   title="Preview this map (and its settlements) before importing"
                 >View</Button>
+                {canEdit && !isEditing && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => openEditor(m.slug)}
+                    title="Edit this map's gallery details"
+                  >Edit</Button>
+                )}
                 <Button
                   variant="primary"
                   size="sm"
@@ -310,7 +474,8 @@ export default function GalleryMaps({ onNavigate }) {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
           </div>
           )}
         </main>
