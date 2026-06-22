@@ -11,7 +11,9 @@
 
 /** Clamp to [0, 1]. VERBATIM copy of the former stressors.js clamp01 — a
  *  non-finite (incl. non-number) input becomes 0, then Math clamps. Kept
- *  byte-for-byte so the determinism golden master is unaffected. */
+ *  byte-for-byte so the determinism golden master is unaffected.
+ *  @param {number} value
+ *  @returns {number} */
 export function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
@@ -20,6 +22,9 @@ export function clamp01(value) {
 /**
  * The severity a stressor actually exerts on ONE settlement: the recorded global
  * severity, optionally tightened by a per-settlement override (the lower of the two).
+ * @param {any} stressor
+ * @param {string|number} saveId
+ * @returns {number}
  */
 export function effectiveStressorSeverity(stressor, saveId) {
   const recorded = clamp01(stressor?.severity ?? 0);

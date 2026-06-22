@@ -12,8 +12,10 @@
  * behavior change: definitions are moved verbatim.
  */
 
+/** @param {number} value @returns {number} */
 export const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
+/** @type {Record<string, any>} */
 export const RELATIONSHIP_DEFAULTS = {
   neutral: {
     trust: 0.45,
@@ -107,6 +109,7 @@ export const RELATIONSHIP_DEFAULTS = {
   },
 };
 
+/** @type {Record<string, string>} */
 export const RELATIONSHIP_TYPE_ALIASES = {
   trade: "trade_partner",
   alliance: "allied",
@@ -118,11 +121,13 @@ export const RELATIONSHIP_TYPE_ALIASES = {
   criminal_corridor: "criminal_network",
 };
 
+/** @param {string} [type] @returns {string} */
 export const normalizeRelationshipType = (type) =>
   RELATIONSHIP_TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
 
 export const normalizeType = normalizeRelationshipType;
 
+/** @param {any} edge @returns {string} */
 export function relationshipKeyFromEdge(edge) {
   if (edge?.id) return edge.id;
   const from = edge?.from || edge?.source || edge?.a || "unknown-a";
@@ -130,6 +135,7 @@ export function relationshipKeyFromEdge(edge) {
   return `rel.${from}.${to}`;
 }
 
+/** @param {any} edge */
 export function getRelationshipSettlements(edge) {
   return {
     from: edge?.from || edge?.source || edge?.a || edge?.settlementAId,
@@ -145,6 +151,8 @@ export function getRelationshipSettlements(edge) {
  * (overlordSaveId / patronSaveId). Readers resolve direction state-first; a
  * DM-authored vassal/patron edge carries no stamp and keeps its strict edge
  * direction (from = overlord/patron).
+ * @param {any} edge
+ * @param {any} relState
  */
 export function relationshipRoles(edge, relState) {
   const { from, to } = getRelationshipSettlements(edge);
@@ -160,6 +168,7 @@ export function relationshipRoles(edge, relState) {
   return { seniorId: fromId, juniorId: toId, reversed: false };
 }
 
+/** @param {any} [edge] */
 export function normalizeRelationshipEdge(edge = {}) {
   const relationshipType = normalizeRelationshipType(edge.relationshipType || edge.type || edge.relation || "neutral");
   if (relationshipType !== "client") {
@@ -190,6 +199,7 @@ export function normalizeRelationshipEdge(edge = {}) {
   };
 }
 
+/** @param {any} edge @param {any} [existing] */
 export function ensureRelationshipState(edge, existing = {}) {
   const normalizedEdge = normalizeRelationshipEdge(edge);
   const rawType = existing.relationshipType || normalizedEdge?.relationshipType || "neutral";

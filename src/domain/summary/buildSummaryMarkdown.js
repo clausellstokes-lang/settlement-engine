@@ -13,6 +13,7 @@
  * no engine work of its own and never reaches past what its caller computed.
  */
 
+/** @param {any} s @returns {string} */
 function metaLine(s) {
   return [
     s.tierLabel || (s.tier != null && String(s.tier)),
@@ -26,7 +27,7 @@ function metaLine(s) {
  * V2 magazine shape: the "Tonight at the table" cast is the body. Mirrors the
  * cards a GM sees on screen so the paste matches the read.
  *
- * @param {object} settlement
+ * @param {any} settlement
  * @param {Array<{kind:string,title:string,body?:string}>} tableEntries
  */
 export function buildSummaryMarkdown(settlement, tableEntries) {
@@ -51,18 +52,18 @@ export function buildSummaryMarkdown(settlement, tableEntries) {
  * defense one-liners, full NPC + plot-hook rosters). The caller passes the
  * pre-derived strings/rosters it already computed so this stays pure.
  *
- * @param {object} settlement
+ * @param {any} settlement
  * @param {object} parts
  * @param {string} [parts.tierLabel]
  * @param {string} [parts.tradeAccess]
  * @param {number} [parts.age]
- * @param {Array}  [parts.stresses]        active-crisis records ({label,crisisHook})
+ * @param {Array<any>} [parts.stresses]        active-crisis records ({label,crisisHook})
  * @param {string} [parts.characterSentence]
  * @param {string} [parts.powerLine]
  * @param {string} [parts.economyLine]
  * @param {string} [parts.defenseLine]
- * @param {Array}  [parts.npcs]            [{ line }] pre-formatted NPC bullet bodies
- * @param {Array}  [parts.hooks]           [{ source, text }]
+ * @param {Array<any>} [parts.npcs]            [{ line }] pre-formatted NPC bullet bodies
+ * @param {Array<any>} [parts.hooks]           [{ source, text }]
  */
 export function buildLegacySummaryMarkdown(settlement, parts = {}) {
   if (!settlement) return '';
