@@ -30,6 +30,7 @@ import PageHeader from './primitives/PageHeader.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
+import ExportDraftButton from './generate/ExportDraftButton.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
@@ -471,6 +472,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               onSignIn={onSignIn}
             />
             <BuyThisDossier settlement={settlement} />
+            {/* Premium / elevated can export the draft as a PDF without saving;
+                self-gates on canExport so anon (Buy) and free see nothing here. */}
+            <ExportDraftButton />
           </div>
 
           {/* The post-generate "what's next" checklist now lives folded into the
