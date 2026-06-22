@@ -52,10 +52,6 @@ export const FLAGS = Object.freeze({
   // promoted to GA — defaults are false; flip to true (locally, via env, or
   // here) to light it up. Flags that soaked default-on everywhere have been
   // removed and their on-path inlined, per the doctrine note above.
-  dossierFiveTabs: {
-    default: true,
-    description: 'Consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch.',
-  },
   inlineEdit: {
     default: true,
     description: 'Click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
@@ -96,10 +92,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
-  onboardingDiet: {
-    default: true,
-    description: 'Collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
-  },
   wizardChromeDiet: {
     default: true,
     description: 'Collapse 7 wizard chrome rows into one combined header.',
@@ -113,12 +105,8 @@ export const FLAGS = Object.freeze({
     description: 'Drop mobile top header; auth chip joins bottom nav.',
   },
   compendiumInlineHelp: {
-    default: false,
-    description: '"?" affordance on every config control opens Compendium snippet.',
-  },
-  summaryMagazineV2: {
     default: true,
-    description: 'Summary tab as two-column magazine spread. Replaces single-column layout.',
+    description: '"?" affordance on every config control opens Compendium snippet.',
   },
   tableView: {
     default: true,

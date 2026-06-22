@@ -17,6 +17,7 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import Button from '../primitives/Button.jsx';
+import { useIconsOn } from '../primitives/IconsContext.js';
 
 const COLORS = {
   draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', icon: Edit3,      label: 'Draft' },
@@ -35,6 +36,7 @@ export default function PhaseBadge() {
     typeof s.isSettlementClockBound === 'function' && s.isSettlementClockBound(activeSaveId));
   const [confirmAction, setConfirmAction] = useState(null);
 
+  const iconsOn = useIconsOn();
   const c = COLORS[phase] || COLORS.draft;
   const Icon = c.icon;
 
@@ -79,7 +81,7 @@ export default function PhaseBadge() {
             fontSize: FS.xs, fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
           }}
         >
-          <Icon size={11} /> {c.label.toUpperCase()}
+          {iconsOn && <Icon size={11} />}{c.label.toUpperCase()}
           {phase === 'canon' && eventCount > 0 && (
             <span style={{ opacity: 0.7, marginLeft: 4 }}>· {eventCount}</span>
           )}
@@ -117,7 +119,7 @@ export default function PhaseBadge() {
               fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
             }}
           >
-            <Lock size={10} /> Clock-bound
+            {iconsOn && <Lock size={10} />} Clock-bound
           </span>
         )}
       </div>

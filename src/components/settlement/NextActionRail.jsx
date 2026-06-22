@@ -5,10 +5,10 @@
  * matters at the current state is gathered here, with at most one
  * promoted to primary. The primary follows a deterministic ladder:
  *
- *   draft + unsaved   → Save Draft
- *   draft + saved     → Canonize for Campaign
- *   canon + no events → Apply your first event
- *   canon + has events→ Apply another event
+ *   draft + unsaved        → Save Draft
+ *   draft + saved          → Canonize for Campaign
+ *   canon + not in Realm   → Send it to the Realm   (the gold lifecycle rung)
+ *   canon + in Realm       → Apply an event
  *
  * Secondaries (Polish, Export, Place on Map, Edit) are always offered
  * when applicable. The rail itself enforces a 5-item visible cap; the
@@ -36,22 +36,23 @@ import { COPY } from '../../copy/strings.js';
  * @param {() => void} props.handlers.onApplyEvent     scrolls to / focuses EventComposer
  * @param {() => void} props.handlers.onPolishAi
  * @param {() => void} props.handlers.onExport
- * @param {() => void} [props.handlers.onPlaceOnMap]
+ * @param {() => void} [props.handlers.onPlaceOnMap]    enters / opens the Realm
  * @param {() => void} [props.handlers.onEdit]
+ * @param {boolean} [props.simulated]    whether the settlement's realm is clock-bound (in the Realm)
  */
-export default function NextActionRail({ settlement, save, handlers }) {
+export default function NextActionRail({ settlement, save, handlers, simulated = false }) {
   const phase      = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const aiSettlement = useStore(s => s.aiSettlement);
   const narrated = !!(aiSettlement || save?.aiSettlement);
 
-  const items = computeItems({ phase, eventCount, narrated, settlement, save, handlers });
+  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers });
   if (!items.length) return null;
   return <ActionRail title="Next best action" items={items} />;
 }
 
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, _settlement, save, handlers }) {
+function computeItems({ phase, eventCount, narrated, simulated, _settlement, save, handlers }) {
   const items = [];
 
   // ── Primary ladder ──────────────────────────────────────────────────
@@ -70,6 +71,15 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
       label: COPY.detail.canonizeCta,
       hint:  COPY.detail.canonizeHint,
       onClick: handlers.onCanonize,
+    });
+  } else if (phase === 'canon' && !simulated && handlers.onPlaceOnMap) {
+    // The gold lifecycle rung: a canonized settlement that has not yet entered
+    // the Realm. Naming the destination gives the next step strong scent (P3/P9).
+    items.push({
+      id: 'send_to_realm', primary: true, Icon: MapPin,
+      label: COPY.detail.sendToRealmCta,
+      hint:  COPY.detail.sendToRealmHint,
+      onClick: handlers.onPlaceOnMap,
     });
   } else if (phase === 'canon' && handlers.onApplyEvent) {
     items.push({
@@ -98,11 +108,13 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
       onClick: handlers.onExport,
     });
   }
-  if (phase === 'canon' && handlers.onPlaceOnMap) {
+  // Once the settlement is in the Realm, the gold primary above is no longer the
+  // realm rung, so offer "Open the Realm" as an anytime secondary to return to it.
+  if (phase === 'canon' && simulated && handlers.onPlaceOnMap) {
     items.push({
-      id: 'place_on_map', Icon: MapPin,
-      label: 'Place on World Map',
-      hint:  'Track this canon settlement geographically.',
+      id: 'open_realm', Icon: MapPin,
+      label: COPY.detail.openRealmCta,
+      hint:  COPY.detail.openRealmHint,
       onClick: handlers.onPlaceOnMap,
     });
   }

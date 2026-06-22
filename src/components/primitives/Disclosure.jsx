@@ -2,6 +2,7 @@ import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
 import Badge from './Badge.jsx';
+import { useIconsOn } from './IconsContext.js';
 
 export default function Disclosure({
   title,
@@ -17,6 +18,7 @@ export default function Disclosure({
   const [open, setOpen] = useState(defaultOpen);
   const fired = useRef(defaultOpen);
   const panelId = useId();
+  const iconsOn = useIconsOn();
   const Icon = open ? ChevronDown : ChevronRight;
 
   // Fire onFirstOpen once, the first time the section is revealed. Lets a
@@ -57,7 +59,9 @@ export default function Disclosure({
           fontFamily: sans,
         }}
       >
-        <Icon size={14} color={MUTED} />
+        {iconsOn
+          ? <Icon size={14} color={MUTED} />
+          : <span aria-hidden="true" style={{ width: 14, textAlign: 'center', color: MUTED, fontWeight: 800, lineHeight: 1, flexShrink: 0 }}>{open ? '−' : '+'}</span>}
         <span style={{
           flex: 1,
           minWidth: 0,

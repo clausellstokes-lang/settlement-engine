@@ -1,5 +1,9 @@
 /**
- * primitives/CausalViewTabs
+ * primitives/CausalNarrativeTable
+ *
+ * (Renamed from CausalViewTabs to resolve the name collision with the engine
+ * 16-variable grid at settlement/CausalViewTabs.jsx. This is the Tier-5.7
+ * narrative-lens table; that one is the causal substrate grid.)
  *
  * Tabbed view-switcher that renders the same settlement through any
  * of seven causal lenses. The dossier is one set of facts; this
@@ -56,7 +60,7 @@ const VIEW_DESCRIPTIONS = Object.freeze({
   district:     'Spatial read: per-district sensory profiles.',
 });
 
-export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewChange }) {
+export function CausalNarrativeTable({ settlement, defaultView = 'narrative', onViewChange }) {
   const [view, setView] = useState(defaultView);
 
   const derived = useMemo(() => {
@@ -65,7 +69,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
     try {
       return deriveCausalView(settlement, view);
     } catch (e) {
-      console.warn(`[CausalViewTabs] deriveCausalView(${view}) failed`, e);
+      console.warn(`[CausalNarrativeTable] deriveCausalView(${view}) failed`, e);
       return null;
     }
   }, [settlement, view]);
@@ -385,4 +389,4 @@ function Empty({ text }) {
   );
 }
 
-export default CausalViewTabs;
+export default CausalNarrativeTable;

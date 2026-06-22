@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react';
+import { useIconsOn } from './IconsContext.js';
 import {
   AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER_STRONG, CARD, ELEV, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
@@ -118,7 +119,11 @@ export default function Button({
   const v = VARIANTS[variant] || VARIANTS.secondary;
   const s = SIZES[size] || SIZES.md;
   const inert = disabled || busy;
-  const Icon = busy ? <Loader2 className="sf-spin" size={s.icon} /> : icon;
+  // Icons-off everywhere but the Realm map (IconsContext). The busy spinner is
+  // a functional status, not decoration, so it always renders; leading/trailing
+  // lucide icons render only inside the map's Provider.
+  const iconsOn = useIconsOn();
+  const Icon = busy ? <Loader2 className="sf-spin" size={s.icon} /> : (iconsOn ? icon : null);
 
   return (
     <button
@@ -152,7 +157,7 @@ export default function Button({
     >
       {Icon}
       {children}
-      {trailingIcon}
+      {iconsOn ? trailingIcon : null}
     </button>
   );
 }

@@ -4,8 +4,7 @@
  *
  * Returns the current altitude level (the persisted `userPrefs.detailLevel`) plus
  * a setter, so any surface can decide how much engine depth to render from ONE
- * axis instead of the scattered legacy flags (dossierFiveTabs / summaryMagazineV2
- * / simulationDrawer / tableView). The three rungs:
+ * axis rather than a scatter of per-surface depth flags. The three rungs:
  *
  *   'guided'   → Overview  (a new DM's clean face)
  *   'standard' → Detail    (band pills + plain "why")

@@ -17,8 +17,8 @@
  *   FOOTER — "📱 Open in Table View" button that triggers the
  *     Table View flag in user preferences.
  *
- * Self-gates upstream — OutputContainer renders SummaryTabV2 vs the
- * legacy SummaryTab based on flag('summaryMagazineV2').
+ * The one Summary now — OutputContainer renders this unconditionally. The legacy
+ * single-column SummaryTab and its `summaryMagazineV2` flag-twin were deleted.
  *
  * Read-only on the props. No store mutation, no state. The user-edits
  * surfaces (inline rename on faction/NPC etc.) live in PeopleTab

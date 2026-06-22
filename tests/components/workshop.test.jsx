@@ -17,9 +17,7 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 // ── Stub the read surfaces (Phase 2) — bare markers. ──────────────────────────
 vi.mock('../../src/components/settlement/ReadSystemStateBar.jsx', () => ({ default: () => <div data-testid="read-system-state-bar" /> }));
-vi.mock('../../src/components/settlement/CausalViewTabs.jsx', () => ({ default: () => <div data-testid="causal-view-tabs" /> }));
 vi.mock('../../src/components/settlement/WarFaithSection.jsx', () => ({ default: () => <div data-testid="war-faith-section" /> }));
-vi.mock('../../src/components/settlement/WhatChangedPanel.jsx', () => ({ default: () => <div data-testid="what-changed-panel" /> }));
 vi.mock('../../src/components/dossier/EngineSections.jsx', () => ({
   EconomicsGranarySection: () => <div data-testid="economics-granary-section" />,
   DefenseWarFrontSection: () => <div data-testid="defense-warfront-section" />,
@@ -69,8 +67,11 @@ describe('Workshop — read/write boundary', () => {
     // COLLAPSED (the dossier above is the hero; the rail is the collapsed
     // drill-down). Open the Causal State card to reveal its read surface.
     fireEvent.click(screen.getByTestId('workshop-card-causal-state').querySelector('button'));
-    // A read surface (the substrate) is present...
-    expect(screen.getAllByTestId('causal-view-tabs').length).toBeGreaterThan(0);
+    // The Causal State card's surviving read surface is the four-dimension health
+    // glance. The 16-variable Substrate grid + What-changed deltas were de-duped
+    // out of the Workshop (the tabbed dossier owns those reads now — dossier
+    // keystone §4), so the card keeps only the ReadSystemStateBar.
+    expect(screen.getAllByTestId('read-system-state-bar').length).toBeGreaterThan(0);
     // ...but the premium write controls are NOT mounted.
     expect(screen.queryByTestId('event-composer')).toBeNull();
     expect(screen.queryByTestId('primary-deity-picker')).toBeNull();

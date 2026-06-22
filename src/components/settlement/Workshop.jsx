@@ -5,15 +5,20 @@
  * long scroll. Instead, the engine is presented as a stack of labeled,
  * collapsible cards that:
  *   - READ in view mode (the free→premium teaser — the dossier read components
- *     built in Phase 2: CausalViewTabs, WarFaithSection, EngineSections,
- *     ReadSystemStateBar, WhatChangedPanel), and
+ *     built in Phase 2: WarFaithSection, EngineSections, ReadSystemStateBar), and
  *   - become EDITABLE in edit mode (the write controls stay premium — the
  *     existing EventComposer, PrimaryDeityPicker, Timeline, etc.).
  *
+ * The canonical Substrate/Causal READ (the 16-variable grid) and the
+ * What-changed deltas are NOT duplicated here: they live in the tabbed dossier
+ * above (Systems -> Substrate; Summary owns WhatChangedPanel). The Workshop keeps
+ * the four-dimension health glance + the surfaces the dossier does not carry
+ * (granary / war-front / standing) plus all WRITE controls (dossier keystone §4).
+ *
  * Card order (plan §4.3):
- *   1. Causal State          — 4-dim header → 16-var grid.
- *   2. Pressures & Strength  — + live granary + disposition (read via the
- *                              Substrate Engine altitude + EngineSections).
+ *   1. Causal State          — 4-dim health glance (the grid is in the dossier).
+ *   2. Pressures & Strength  — live granary + war-front + disposition standing
+ *                              (EngineSections), the dossier does not carry these.
  *   3. Faith & Pantheon      — describeDeityEffects axis disclosure + the
  *                              PrimaryDeityPicker (write) + "Awaken religion".
  *   4. Power & Succession    — coup forecast + lineage (PowerSuccessionSection).
@@ -36,9 +41,7 @@ import { useSettlementLiveWorld } from '../../hooks/useSettlementLiveWorld.js';
 
 // Read surfaces (Phase 2). These are the free→premium teaser.
 import ReadSystemStateBar from './ReadSystemStateBar.jsx';
-import CausalViewTabs from './CausalViewTabs.jsx';
 import WarFaithSection from './WarFaithSection.jsx';
-import WhatChangedPanel from './WhatChangedPanel.jsx';
 import {
   EconomicsGranarySection,
   DefenseWarFrontSection,
@@ -203,32 +206,27 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
         defaultOpen={showWrite}
         editMode={showWrite}
       >
+        {/* The canonical Substrate/Causal READ now lives in the tabbed dossier
+            (Systems -> Substrate, SubstrateTab -> settlement/CausalViewTabs), and
+            the What-changed deltas in the Summary (SummaryTabV2 owns
+            WhatChangedPanel). Both were duplicated here in edit mode, so the
+            Workshop card keeps only the four-dimension health glance — the
+            scent-bearing header that introduces the drill-down — and defers the
+            grid + deltas to the dossier above (dossier keystone §4). */}
         <ReadSystemStateBar settlement={settlement} />
-        <CausalViewTabs
-          settlement={settlement}
-          settlementId={saveId}
-          worldState={worldState}
-          regionalGraph={regionalGraph}
-          flat
-        />
-        <WhatChangedPanel settlement={settlement} />
       </WorkshopCard>
 
       {/* 2 ── Pressures & Strength ──────────────────────────────────────────── */}
       <WorkshopCard
         id="pressures-strength"
         title="Pressures & Strength"
-        hint="Where the settlement is under pressure, its war-cost-aware strength, the live granary, and its standing in the wider realm."
+        hint="The live granary, its war-cost-aware strength, and its standing in the wider realm. The full 16-variable substrate grid lives in the dossier above (Systems -> Substrate)."
         editMode={showWrite}
       >
-        <CausalViewTabs
-          settlement={settlement}
-          settlementId={saveId}
-          worldState={worldState}
-          regionalGraph={regionalGraph}
-          forceLevel="expert"
-          flat
-        />
+        {/* The Engine-altitude causal grid was removed here too — Systems ->
+            Substrate is the one canonical Substrate read (dossier keystone §4).
+            This card keeps the granary / war-front / standing surfaces the
+            dossier does NOT carry. */}
         <EconomicsGranarySection settlement={settlement} />
         <DefenseWarFrontSection
           settlement={settlement}

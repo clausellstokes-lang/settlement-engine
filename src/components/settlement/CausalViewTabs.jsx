@@ -1,6 +1,6 @@
 /**
- * CausalViewTabs — the 16-variable causal readout (UX overhaul Phase 2 spec,
- * BUILT in Phase 1 and mounted NOWHERE yet).
+ * CausalViewTabs — the 16-variable causal readout (UX overhaul Phase 2 spec).
+ * Mounted via Systems -> Substrate (SubstrateTab) and the editor Workshop.
  *
  * Renders the engine's causal substrate for one settlement, driven by the single
  * altitude axis (useAltitude):

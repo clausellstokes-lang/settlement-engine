@@ -30,6 +30,7 @@ import AccountMenu from './components/AccountMenu.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
+import { IconsContext } from './components/primitives/IconsContext.js';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -51,7 +52,6 @@ const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'
 const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
 const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
 
-import OnboardingCoach from './components/OnboardingCoach.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
@@ -499,15 +499,12 @@ export default function App() {
 
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
-          {/* Onboarding coach (first-run, generate view), gated to signed-in
-              accounts. NOTE: `onboardingDiet` defaults ON (flags.js:100), so
-              this spotlight-overlay variant is intentionally DARK in
-              production today — the Checklist + first-dossier callouts carry
-              first-run coaching instead. Kept mounted (not deleted) so the
-              variant can be re-enabled by flipping the flag, without a revert;
-              the companion nudge toast is deliberately NOT gated here because
-              it doubles as the SAVE_SETTLEMENT intent toast (see below). */}
-          {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
+          {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
+              along with its forever-off `onboardingDiet` flag-twin: the Checklist
+              + first-dossier callouts carry first-run coaching, and PostGenCoach
+              (mounted below) is the active post-generation coach. The companion
+              onboarding nudge toast survives near the bottom of the tree — it
+              doubles as the SAVE_SETTLEMENT intent toast and was never the coach. */}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
@@ -515,7 +512,11 @@ export default function App() {
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
                 still renders it for the one frame before the redirect effect
                 upgrades the URL to /realm, so there's no blank flash. */}
-            {(view === 'realm' || view === 'map') && <WorldMap onNavigate={setView} />}
+            {/* The Realm map is the ONE icons-on surface (template IconCtx parity):
+                everything else renders icons-off via the default IconsContext. */}
+            {(view === 'realm' || view === 'map') && (
+              <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
+            )}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse onNavigate={setView} />}
             {/* Guarded views: render only once authorized. The guard effect
@@ -730,10 +731,10 @@ export default function App() {
 
       {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
           NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
-          uses it to surface "Saved as {name}" after a signup-save flow.
-          The onboardingDiet flag should NOT suppress those. Only the
-          OnboardingCoach overlay is gated (above). If onboarding tips
-          ever become a problem, route them through a separate channel. */}
+          uses it to surface "Saved as {name}" after a signup-save flow, so it
+          must survive even though the OnboardingCoach overlay it once partnered
+          was deleted. If onboarding tips ever become a problem, route them
+          through a separate channel. */}
       {onboardingNudge && (
         <div
           role="button"

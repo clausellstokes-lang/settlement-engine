@@ -1,4 +1,5 @@
 import { FS, SP, INK, MUTED, BORDER, CARD, CARD_ALT, ELEV, sans } from '../theme.js';
+import { useIconsOn } from './IconsContext.js';
 
 /**
  * primitives/Segmented — a pill toggle for 2-4 mutually exclusive views.
@@ -17,6 +18,7 @@ import { FS, SP, INK, MUTED, BORDER, CARD, CARD_ALT, ELEV, sans } from '../theme
  * @param {string} [props.ariaLabel]
  */
 export default function Segmented({ options = [], value, onChange, size = 'md', ariaLabel }) {
+  const iconsOn = useIconsOn();
   const padY = size === 'sm' ? 5 : 7;
   const padX = size === 'sm' ? SP.md : SP.lg;
   return (
@@ -50,7 +52,7 @@ export default function Segmented({ options = [], value, onChange, size = 'md', 
               whiteSpace: 'nowrap',
             }}
           >
-            {Icon && <Icon size={14} aria-hidden="true" />}
+            {iconsOn && Icon && <Icon size={14} aria-hidden="true" />}
             {o.label}
           </button>
         );

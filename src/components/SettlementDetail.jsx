@@ -11,6 +11,10 @@ const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
+// Canonical app navigation entry point (URL-based). The next-action rail's
+// "Send it to the Realm" / "Open the Realm" rung routes through this rather than
+// inventing a bespoke navigation path.
+import { navigate } from '../hooks/useRoute.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import ChroniclePanel from './ChroniclePanel.jsx';
@@ -22,6 +26,10 @@ import PhaseBadge       from './settlement/PhaseBadge.jsx';
 // long-scroll with a right-rail of READ-then-WRITE collapsible cards
 // (the engine read surfaces are the free→premium teaser; write is premium).
 import Workshop         from './settlement/Workshop.jsx';
+// The persistent "what should I do next?" rail (the audit's highest-leverage
+// win). Reused as-is — phase-aware ladder, no new state machine, no new
+// analytics — mounted as a sticky right column on this owner saved view.
+import NextActionRail   from './settlement/NextActionRail.jsx';
 import AIInlineCard     from './settlement/AIInlineCard.jsx';
 import ExportSheet      from './settlement/ExportSheet.jsx';
 // Modal that fires after pillar-tier KILL_NPC commits. Reads
@@ -141,7 +149,14 @@ export default function SettlementDetail({
   // Campaign-clock identity lock: NPC + faction names freeze once the settlement
   // is canonized. The store hydrates `phase` from the opened save, so the live
   // store value tracks this detail view. Renames are a draft-only affordance.
-  const isCanonLocked = useStore(s => s.phase) === 'canon';
+  const phase = useStore(s => s.phase);
+  const isCanonLocked = phase === 'canon';
+  // Next-action-rail inputs (reuse existing selectors; no new store fields).
+  const canonize = useStore(s => s.canonize);
+  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
+  // Whether this settlement's realm is clock-bound (already in the Realm). Drives
+  // the rail's gold "Send it to the Realm" vs "Open the Realm" rung.
+  const simulated = !!(saveId && typeof isSettlementClockBound === 'function' && isSettlementClockBound(saveId));
 
   // Premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
@@ -304,6 +319,22 @@ export default function SettlementDetail({
     } finally {
       setExporting(false);
     }
+  };
+
+  // ── Next-action rail handlers ───────────────────────────────────────────────
+  // Each maps to an action SettlementDetail ALREADY performs — the rail is an
+  // aggregation surface, it invents nothing. Canonize is store-direct; Apply an
+  // event / Polish enter edit mode (where the EventComposer + AI polish live) so
+  // the rail is honest about where the action happens; Export opens the existing
+  // sheet; the Realm rung routes through the canonical navigate().
+  const enterEdit = () => { if (canEdit && !editMode) toggleEditMode(); };
+  const railHandlers = {
+    onCanonize: (canEdit && phase !== 'canon') ? () => canonize?.() : undefined,
+    onApplyEvent: canEdit ? enterEdit : undefined,
+    onPolishAi: (canEdit && !narrated) ? enterEdit : undefined,
+    onExport: () => { setPdfError(null); setExportSheetOpen(true); },
+    onPlaceOnMap: () => navigate('realm'),
+    onEdit: canEdit ? toggleEditMode : undefined,
   };
 
     return<div style={{maxWidth:PAGE_MAX,margin:'0 auto',width:'100%'}}>
@@ -500,28 +531,47 @@ export default function SettlementDetail({
             factions — leads the page directly under the runnable-essentials
             summary, BEFORE the Workshop rail and edit chrome. It is the content
             the GM came for; the engine-mechanics Workshop and the edit clusters
-            below are the progressive-disclosure drill-down. */}
-      {detail.settlement&&<div style={{marginBottom:24}}>
-        <FeatureErrorBoundary
-          label="SettlementDetail.output"
-          kind="react.render.dossier"
-          resetKeys={[saveId]}
-          fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
-        >
-          <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-            {/* The dossier inherits the one top-level PAGE_MAX frame; no
-                per-section cap. The settlement name is inline-editable on the
-                dossier header in edit mode (the single consolidated rename
-                control); the commit routes through applyRename('settlement', …). */}
-            <OutputContainer
+            below are the progressive-disclosure drill-down.
+
+            Two-column at desktop width (dossier keystone §2): the runnable
+            dossier on the left, the phase-aware NextActionRail sticky on the
+            right. The row reflows to a single column on narrow (flexWrap), where
+            the rail drops BELOW the dossier so the read stays single-column
+            legible. The rail is an owner-only affordance, gated on saveId (this
+            saved view is owner-by-construction; never a public route). */}
+      {detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
+        <div style={{flex:'1 1 520px',minWidth:0}}>
+          <FeatureErrorBoundary
+            label="SettlementDetail.output"
+            kind="react.render.dossier"
+            resetKeys={[saveId]}
+            fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
+          >
+            <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
+              {/* The dossier inherits the one top-level PAGE_MAX frame; no
+                  per-section cap. The settlement name is inline-editable on the
+                  dossier header in edit mode (the single consolidated rename
+                  control); the commit routes through applyRename('settlement', …). */}
+              <OutputContainer
+                settlement={detail.settlement}
+                readOnly
+                saveId={saveId}
+                allowRename={editMode && canEdit && !isCanonLocked}
+                onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
+              />
+            </Suspense>
+          </FeatureErrorBoundary>
+        </div>
+        {saveId && (
+          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:12,alignSelf:'flex-start'}}>
+            <NextActionRail
               settlement={detail.settlement}
-              readOnly
-              saveId={saveId}
-              allowRename={editMode && canEdit && !isCanonLocked}
-              onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
+              save={detail.saveData || detail}
+              simulated={simulated}
+              handlers={railHandlers}
             />
-          </Suspense>
-        </FeatureErrorBoundary>
+          </aside>
+        )}
       </div>}
 
       {/* Edit-mode chrome — hidden in the read-only View, revealed by "Edit

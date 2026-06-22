@@ -39,10 +39,9 @@ import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
-const SummaryTab = lazy(() => import('./new/SummaryTab'));
-// Magazine-spread Summary V2. Self-gated by the
-// `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
-// loads in parallel so toggling the flag is instant.
+// Magazine-spread Summary. The legacy single-column SummaryTab and its
+// `summaryMagazineV2` flag-twin were deleted (the doctrine note in flags.js: a
+// forever-on flag is inlined). SummaryTabV2 is the one Summary now.
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
 const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab.jsx'));
 const ChronicleTab = lazy(() => import('./new/tabs/ChronicleTab.jsx'));
@@ -56,6 +55,10 @@ const DefenseTab = lazy(() => import('./new/tabs/DefenseTab'));
 // altitude-gate inside.
 const SubstrateTab = lazy(() => import('./new/tabs/SubstrateTab.jsx'));
 const MagicTab = lazy(() => import('./new/tabs/MagicTab.jsx'));
+// War & Faith — re-homed into the tabbed dossier (dossier keystone §1) so a
+// fresh generation meets it. Resolves the owning campaign's live worldState and
+// self-gates to nothing for a peaceful, deity-free town.
+const WarFaithTab = lazy(() => import('./new/tabs/WarFaithTab.jsx'));
 const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
 const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
 const ResourcesTab = lazy(() => import('./new/tabs/ResourcesTab'));
@@ -68,13 +71,16 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 
 // Thematic group tabs façade (spec §8: Summary / Systems / World /
 // Notes). Each group maps to the existing sub-tabs the dossier already renders;
-// this is a navigation layer, not a content change. Flag: `dossierFiveTabs`
-// (the flag name is the soak killswitch; it gates the four group tabs below).
+// this is a navigation layer, not a content change. (The `dossierFiveTabs`
+// flag-twin and the flat-14-tab fallback it gated were deleted — the facade is
+// now the only path.)
 //
 //   summary  → Overview, DM Summary, Plot Hooks, Guidance (spec §8). Plot Hooks
 //              is its own sub-tab (PlotHooksTab); Guidance (DM Compass) is the
 //              AI-narrated layer and only appears when narration produced it.
-//   systems  → Services, Economics, Power, Defense, Resources, Viability
+//   systems  → Services, Economics, Power, Defense, Resources, Viability,
+//              Substrate, Magic, War & Faith (the last conditional — present
+//              only when a deity snapshot or live campaign world is possible).
 //   world    → Relationships, Daily Life, NPCs, History, Neighbours
 //   notes    → DM Notes, AI Notes, Chronicle (the living-history feed, §8 M3c).
 //              DM/AI notes are owner-private; the Chronicle is the one Notes
@@ -92,7 +98,7 @@ export const TAB_GROUPS = Object.freeze({
   // group lands on something immediately usable; Substrate (the 16-var causal
   // engine grid — the deepest diagnostic view) sits later as the explicit deep
   // view rather than being the group's primary landing. (P8 first-click-lands.)
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic'] },
+  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle'] },
 });
@@ -458,10 +464,19 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     if (t.id === 'dm_notes' && readOnly && !saveId) return false;
     return true;
   });
+  // War & Faith (dossier keystone §1) is a Systems sub-tab that re-homes
+  // WarFaithSection into the tabbed dossier. The SECTION self-gates to null for a
+  // peaceful, deity-free, non-campaign town, so to avoid a blank tab body we gate
+  // the tab PRESENCE on a cheap predicate (an embedded deity snapshot OR a saveId,
+  // which means live war/faith state is at least possible), mirroring the
+  // hasPlotHooks/hasDMCompass conditional-tab pattern. A peaceful, deity-free,
+  // non-campaign town is byte-identical: no War & Faith tab.
+  const hasWarFaith = !!(rawSettlement?.config?.primaryDeitySnapshot || saveId);
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
     ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
+    ...(hasWarFaith ? [{ id:'war_faith', label:'War & Faith', Icon: Swords }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
@@ -474,11 +489,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
-  // Five thematic group tabs. When the flag is on, render
-  // a group selector ABOVE the existing tab strip; clicking a group
-  // filters the strip to its sub-tabs and selects the group's primary.
-  // When the flag is off, the strip behaves as before (legacy 14 tabs).
-  const fiveTabsEnabled = flag('dossierFiveTabs');
+  // Four thematic group tabs (Summary / Systems / World / Notes). A group
+  // selector renders ABOVE the sub-tab strip; clicking a group filters the strip
+  // to its sub-tabs and selects the group's primary. The `dossierFiveTabs`
+  // flag-twin that used to gate the flat-14-tab fallback was deleted (the flags
+  // doctrine: a forever-on flag is inlined) — the group facade is now the only path.
   // TAB_GROUPS is frozen/constant, so this map has a stable value for the life
   // of the component. Memoizing it (rather than rebuilding a fresh object every
   // render) keeps the tabGroupRef-sync effect below from firing on every render.
@@ -521,15 +536,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     Funnel.track(EVENTS.DOSSIER_GROUP_TAB_CLICKED, { group: gid });
   };
 
-  const tabs = fiveTabsEnabled
-    // Sub-tab order follows the group's DECLARED order in TAB_GROUPS (e.g.
-    // World shows NPCs before History; Systems leads with Services), not the
-    // flat TABS array. Resolve each declared id to its live tab object and
-    // drop any the current settlement doesn't render.
-    ? (TAB_GROUPS[selectedGroup]?.tabs || [])
-        .map(tid => allTabs.find(t => t.id === tid))
-        .filter(Boolean)
-    : allTabs;
+  // Sub-tab order follows the group's DECLARED order in TAB_GROUPS (e.g. World
+  // shows NPCs before History; Systems leads with Services), not the flat TABS
+  // array. Resolve each declared id to its live tab object and drop any the
+  // current settlement doesn't render.
+  const tabs = (TAB_GROUPS[selectedGroup]?.tabs || [])
+    .map(tid => allTabs.find(t => t.id === tid))
+    .filter(Boolean);
 
   const scroll = (dir) => scrollRef.current?.scrollBy({ left: dir * 120, behavior: 'smooth' });
 
@@ -610,15 +623,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           {/* First-dossier teaching callouts now live inside the DM summary (was a
               top-of-dossier banner above every tab). Self-gates inside. */}
           {!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}
-          {flag('summaryMagazineV2')
-            ? <SummaryTabV2
-                settlement={s}
-                hideIdentity={!hideHeader}
-                onOpenTableView={flag('tableView')
-                  ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
-                  : undefined}
-              />
-            : <SummaryTab settlement={s} saveId={saveId} hideIdentity={!hideHeader} onNavigateTab={(id) => setActiveTab(id)} />}
+          <SummaryTabV2
+            settlement={s}
+            hideIdentity={!hideHeader}
+            onOpenTableView={flag('tableView')
+              ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
+              : undefined}
+          />
         </>
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
@@ -631,6 +642,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'substrate':  return <SubstrateTab settlement={s} saveId={saveId} />;
       case 'magic':      return <MagicTab settlement={s} />;
+      case 'war_faith':  return <WarFaithTab settlement={s} saveId={saveId || s?.id} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
@@ -732,7 +744,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             the header renders and the stage is derivable. */}
         {!playerView && !hideHeader && (
           <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', overflowX: 'auto' }}>
-            <LifecycleSpine stage={lifecycleStage} compact />
+            <LifecycleSpine stage={lifecycleStage} />
           </div>
         )}
         {/* Single chrome band below the header — see DossierActionBand. Skipped
@@ -767,15 +779,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             Summary tab (the DM summary), not as a banner above every tab — see
             renderTab's 'summary' case. */}
         {/* Thematic group tab strip (Summary / Systems / World /
-            Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
-            group selects its first sub-tab and filters the strip below. */}
-        {fiveTabsEnabled && (
-          <DossierGroupTabStrip
-            visibleGroupEntries={visibleGroupEntries}
-            selectedGroup={selectedGroup}
-            handleGroupClick={handleGroupClick}
-          />
-        )}
+            Notes). Clicking a group selects its first sub-tab and filters the
+            strip below. Always rendered (the dossierFiveTabs flag-twin and its
+            flat-14-tab fallback were deleted; the facade is the only path). */}
+        <DossierGroupTabStrip
+          visibleGroupEntries={visibleGroupEntries}
+          selectedGroup={selectedGroup}
+          handleGroupClick={handleGroupClick}
+        />
         {/* The global "Detail" altitude row was removed: it spent a full-width
             bordered band on a control whose only structural job was to show/hide
             ONE tab (Substrate). Substrate now renders unconditionally and owns a

@@ -1,9 +1,10 @@
 /**
  * PostGenCoach.jsx — Three-step coach shown after a first generation.
  *
- * The pre-generation OnboardingCoach (src/components/OnboardingCoach.jsx)
- * walks the user through "pick a size, hit generate, scroll the tabs".
- * Once they have a settlement, a different conversation starts:
+ * The pre-generation OnboardingCoach was retired (its spotlight-overlay walked
+ * the user through "pick a size, hit generate, scroll the tabs"; first-run
+ * coaching now lives in the Checklist + first-dossier callouts). Once a user has
+ * a settlement, this coach starts a different conversation:
  *
  *   1. Read the dossier — here's what to look at first.
  *   2. Watch how it was simulated — the rail to the right shows it.

@@ -49,6 +49,13 @@ export const COPY = {
     resetToDraft:   'Reset to Draft',
     resetWarning:   (n) => `Reset to draft and discard ${n} timeline entr${n === 1 ? 'y' : 'ies'}? This cannot be undone.`,
     backToList:     'Back to list',
+    // The next-action rail's gold rung for a canon settlement that has not yet
+    // entered the Realm. Naming the destination ("the Realm") gives the step
+    // strong information scent without inventing a new action.
+    sendToRealmCta:  'Send it to the Realm',
+    sendToRealmHint: 'Place this canon settlement in the Realm so the region advances around it.',
+    openRealmCta:    'Open the Realm',
+    openRealmHint:   'This settlement lives in the Realm. Open it to advance the region.',
   },
 
   events: {
