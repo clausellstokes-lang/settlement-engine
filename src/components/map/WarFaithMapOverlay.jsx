@@ -112,10 +112,15 @@ export default function WarFaithMapOverlay() {
       }));
 
     // Occupation shading — conquered nodes (conquest provenance on the snapshot).
+    // Carry the occupier name + sinceTick through so the glyph tooltip can name who
+    // holds it and since when (occupiedSettlements already resolves both).
     const occupations = occupiedSettlements(memberItems)
       .map(o => ({ ...o, p: xy.get(String(o.id)) }))
       .filter(o => o.p)
-      .map(o => ({ id: `occ-${o.id}`, x: o.p.x, y: o.p.y }));
+      .map(o => ({
+        id: `occ-${o.id}`, x: o.p.x, y: o.p.y,
+        occupier: o.occupier, sinceTick: o.sinceTick,
+      }));
 
     // Trade-war prize glyph — on the contested BUYER (the third party the war is
     // fought over). Public-tier ledger.
@@ -152,7 +157,7 @@ export default function WarFaithMapOverlay() {
       {model.occupations.map(o => (
         <g key={o.id} className="sf-occupation" transform={`translate(${o.x} ${o.y})`}>
           <circle r={13} fill={COLOR_OCCUPATION} fillOpacity={0.16} stroke={COLOR_OCCUPATION} strokeOpacity={0.4} strokeWidth={1} strokeDasharray="3 2">
-            <title>Occupied: under an occupation authority</title>
+            <title>{`Occupied by ${o.occupier || 'an occupation authority'}${o.sinceTick != null ? ` since tick ${o.sinceTick}` : ''}`}</title>
           </circle>
         </g>
       ))}

@@ -193,6 +193,51 @@ function GateToggle({ checked, label, description, onChange }) {
   );
 }
 
+// A disclosure group header — a real button with aria-expanded controlling a
+// region, so the Detail / Engine altitudes collapse without trapping focus. The
+// caret + the open/closed word carry the state in two channels (P7), never on a
+// rotation alone. `summary` is quiet scent describing what is inside while closed.
+function DisclosureHeader({ open, onToggle, regionId, title, summary }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={open}
+      aria-controls={regionId}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: SP.sm,
+        width: '100%',
+        padding: `${SP.sm}px ${SP.md}px`,
+        border: `1px solid ${BORDER2}`,
+        borderRadius: R.md,
+        background: CARD,
+        color: INK,
+        cursor: 'pointer',
+        textAlign: 'left',
+      }}
+    >
+      <span aria-hidden style={{ color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+        {open ? '▾' : '▸'}
+      </span>
+      <span style={{ minWidth: 0, flex: 1 }}>
+        <span style={{ display: 'block', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+          {title}
+        </span>
+        {summary && (
+          <span style={{ display: 'block', marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+            {summary}
+          </span>
+        )}
+      </span>
+      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {open ? 'Hide' : 'Show'}
+      </span>
+    </button>
+  );
+}
+
 function Metric({ label, value }) {
   return (
     <div style={{
@@ -239,6 +284,12 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewResult, setPreviewResult] = useState(null);
   const [error, setError] = useState(null);
+  // Progressive disclosure: the presets (Overview) stay open; the fine-grained
+  // toggles (Detail) and the advanced living-world gates (Engine) collapse into
+  // disclosure groups so the dialog reads as three altitudes, not one flat scroll.
+  // Default the deeper groups closed; all field wiring is untouched when expanded.
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [engineOpen, setEngineOpen] = useState(false);
 
   const presets = Object.values(SIMULATION_RULE_PRESETS);
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;
@@ -436,73 +487,100 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             )}
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 170px), 1fr))',
-            gap: SP.md,
-          }}>
-            <Field label="Propagation">
-              <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} onChange={value => setField('propagationMode', value)} />
-            </Field>
-            <Field label="Intensity">
-              <Select value={draft.intensity} options={INTENSITY_OPTIONS} onChange={value => setField('intensity', value)} />
-            </Field>
-            <Field label="Migration">
-              <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} onChange={value => setField('migrationMode', value)} />
-            </Field>
+          {/* ── DETAIL altitude: the propagation/intensity/migration selects and
+              the 12 fine-grained subsystem toggles, behind a disclosure so the
+              dialog opens on presets, not a wall of switches. ───────────────── */}
+          <div style={{ display: 'grid', gap: SP.sm }}>
+            <DisclosureHeader
+              open={detailOpen}
+              onToggle={() => setDetailOpen(o => !o)}
+              regionId={`${titleId}-detail`}
+              title="Detail toggles"
+              summary="Propagation, intensity, migration, and the twelve subsystem switches."
+            />
+            {detailOpen && (
+              <div id={`${titleId}-detail`} style={{ display: 'grid', gap: SP.lg }}>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 170px), 1fr))',
+                  gap: SP.md,
+                }}>
+                  <Field label="Propagation">
+                    <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} onChange={value => setField('propagationMode', value)} />
+                  </Field>
+                  <Field label="Intensity">
+                    <Select value={draft.intensity} options={INTENSITY_OPTIONS} onChange={value => setField('intensity', value)} />
+                  </Field>
+                  <Field label="Migration">
+                    <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} onChange={value => setField('migrationMode', value)} />
+                  </Field>
+                </div>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
+                  gap: SP.sm,
+                }}>
+                  {TOGGLES.map(([key, label]) => (
+                    <Toggle
+                      key={key}
+                      label={label}
+                      checked={draft[key] !== false}
+                      onChange={value => setField(key, value)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
-            gap: SP.sm,
-          }}>
-            {TOGGLES.map(([key, label]) => (
-              <Toggle
-                key={key}
-                label={label}
-                checked={draft[key] !== false}
-                onChange={value => setField(key, value)}
-              />
-            ))}
-          </div>
-
-          {/* ── UX Phase 4 — Living-world systems (advanced) ─────────────────
+          {/* ── ENGINE altitude — UX Phase 4 living-world systems ─────────────
               The three premium gates (war / strategy / religion) that had no
               UI toggle anywhere until now. Each defaults OFF and is byte-
               identical when off. This is the fix that makes the premium engine
-              reachable. */}
-          <div style={{
-            display: 'grid',
-            gap: SP.sm,
-            padding: SP.md,
-            border: `1px solid ${GOLD}`,
-            borderRadius: R.md,
-            background: GOLD_BG,
-          }}>
-            <div style={{ display: 'grid', gap: 2 }}>
-              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
-                Living-world systems (advanced)
+              reachable. Now behind its own disclosure as the deepest altitude. */}
+          <div style={{ display: 'grid', gap: SP.sm }}>
+            <DisclosureHeader
+              open={engineOpen}
+              onToggle={() => setEngineOpen(o => !o)}
+              regionId={`${titleId}-engine`}
+              title="Engine gates (advanced)"
+              summary="Opt-in living-world subsystems, off by default and byte-identical to today while off."
+            />
+            {engineOpen && (
+              <div id={`${titleId}-engine`} style={{
+                display: 'grid',
+                gap: SP.sm,
+                padding: SP.md,
+                border: `1px solid ${GOLD}`,
+                borderRadius: R.md,
+                background: GOLD_BG,
+              }}>
+                <div style={{ display: 'grid', gap: 2 }}>
+                  <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+                    Living-world systems (advanced)
+                  </div>
+                  <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+                    Opt-in subsystems, off by default. Each is byte-identical to today while off. Turn one on and the realm starts moving.
+                  </div>
+                </div>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+                  gap: SP.sm,
+                }}>
+                  {ADVANCED_GATES.map(([key, label, description]) => (
+                    <GateToggle
+                      key={key}
+                      label={label}
+                      description={description}
+                      checked={draft[key] === true}
+                      onChange={value => setField(key, value)}
+                    />
+                  ))}
+                </div>
               </div>
-              <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-                Opt-in subsystems, off by default. Each is byte-identical to today while off. Turn one on and the realm starts moving.
-              </div>
-            </div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
-              gap: SP.sm,
-            }}>
-              {ADVANCED_GATES.map(([key, label, description]) => (
-                <GateToggle
-                  key={key}
-                  label={label}
-                  description={description}
-                  checked={draft[key] === true}
-                  onChange={value => setField(key, value)}
-                />
-              ))}
-            </div>
+            )}
           </div>
 
           <div style={{

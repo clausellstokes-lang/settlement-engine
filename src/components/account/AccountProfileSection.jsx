@@ -9,13 +9,14 @@
 import {
   Check, X, Edit3,
 } from 'lucide-react';
-import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
+import { AI_MODEL_OPTIONS, getTierDisplayName } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import Pill from '../primitives/Pill.jsx';
 import { RoleBadge } from '../auth/authUI.jsx';
-import { GOLD, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, DANGER_BORDER } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, TINT_GOLD, DANGER_BORDER } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 /**
@@ -131,6 +132,17 @@ export default function AccountProfileSection({
           )}
           <div style={{ fontSize: FS.sm, color: BODY }}>{auth.user.email}</div>
           <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
+            {/* Quiet tier chip so a free user sees their plan in the header,
+                not only in the Subscription section. The label is the tier
+                display name only ('Wanderer') — the raw lowercase tier key is a
+                code identifier and stays out of user copy (voice rule). Calm
+                parchment/gold-tint surface, matching the demoted-control house
+                style, so it never reads as a loud control. */}
+            {getTierDisplayName(auth.tier) && (
+              <Pill bg={TINT_GOLD} color={GOLD_TXT}>
+                {getTierDisplayName(auth.tier)}
+              </Pill>
+            )}
             <RoleBadge role={auth.role} />
             <FounderBadge size="md" />
           </div>

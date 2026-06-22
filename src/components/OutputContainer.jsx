@@ -8,10 +8,12 @@ import { flag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
+import { navigate } from '../hooks/useRoute.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import LifecycleSpine from './primitives/LifecycleSpine.jsx';
+import Button from './primitives/Button.jsx';
 // Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -80,7 +82,7 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 //   systems  → Services, Economics, Power, Defense, Resources, Viability,
 //              Substrate, Magic, War & Faith (the last conditional — present
 //              only when a deity snapshot or live campaign world is possible).
-//   world    → Relationships, Daily Life, NPCs, History, Neighbours
+//   world    → NPCs, Relationships, Daily Life, History, Neighbours (NPC-first)
 //   notes    → DM Notes, AI Notes, Chronicle (the living-history feed, §8 M3c).
 //              DM/AI notes are owner-private; the Chronicle is the one Notes
 //              sub-tab that also renders on public gallery dossiers, fed by
@@ -98,7 +100,12 @@ export const TAB_GROUPS = Object.freeze({
   // engine grid — the deepest diagnostic view) sits later as the explicit deep
   // view rather than being the group's primary landing. (P8 first-click-lands.)
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  // World leads with NPCs: the people are the strongest reading scent into the
+  // group, so a fresh click into World lands on the cast (the group's primary)
+  // rather than the relationship graph. Relationships, Daily Life, History, and
+  // the conditional Neighbours follow. (P8 first-click-lands.) War and Faith is
+  // NOT duplicated here; it lives as a single Systems sub-tab.
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'daily_life', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle'] },
 });
 
@@ -730,17 +737,20 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
           />
         )}
-        {/* Lifecycle spine — a thin parchment band under the identity header that
-            shows how far this dossier has travelled (draft to shared). Rendered
-            read-only (no onStep): no in-card handler maps cleanly across the
-            Library/Realm/Gallery routes. It sits on parchment, not the dark
-            header, because LifecycleSpine uses light tokens. It carries NO bottom
-            divider: it shares one continuous parchment field with the action band
-            below, so the two group via spacing instead of laddering two bordered
-            bands before the reader reaches the hero. Gated to owner surfaces where
-            the header renders and the stage is derivable. */}
+        {/* Lifecycle secondary bar — a thin parchment band under the identity
+            header: a Library back-link plus the lifecycle breadcrumb showing how
+            far this dossier has travelled (draft to shared). The spine itself is
+            read-only (no onStep): the in-card steps don't map cleanly across the
+            Realm/Gallery routes, so only the explicit Library link navigates. It
+            sits on parchment (LifecycleSpine uses light tokens) and carries NO
+            bottom divider — it shares one continuous parchment field with the
+            action band below. Gated to owner surfaces where the header renders. */}
         {!playerView && !hideHeader && (
-          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', overflowX: 'auto' }}>
+          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
+            {/* Library back-link — secondary-bar return path to the saved
+                settlements list (canonical 'settlements' route), paired with the
+                lifecycle breadcrumb as a "where am I / how to get back" bar. */}
+            <Button variant="ghost" size="sm" onClick={() => navigate('settlements')} style={{ flexShrink: 0, padding: 0, color: swatch.inkMag3, whiteSpace: 'nowrap' }}>{'‹ Library'}</Button>
             <LifecycleSpine stage={lifecycleStage} />
           </div>
         )}

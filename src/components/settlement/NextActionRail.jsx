@@ -22,7 +22,7 @@ import {
   Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { getAiCost } from '../../config/pricing.js';
+import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
 import { COPY } from '../../copy/strings.js';
 
@@ -54,6 +54,11 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
 /** Pure derivation — testable without the store. */
 function computeItems({ phase, eventCount, narrated, simulated, _settlement, save, handlers }) {
   const items = [];
+  // The Realm (map chains) is gated to the Cartographer subscription tier
+  // (authSlice TIER_GATE: mapChains is premium-only). We surface the required
+  // tier name as a small text tag on the rung that enters the Realm, resolved
+  // from the canonical tier display map (never a hardcoded literal).
+  const realmTier = getTierDisplayName('premium');
 
   // ── Primary ladder ──────────────────────────────────────────────────
   // The first applicable rung is promoted; the rest fall through as
@@ -78,6 +83,7 @@ function computeItems({ phase, eventCount, narrated, simulated, _settlement, sav
     items.push({
       id: 'send_to_realm', primary: true, Icon: MapPin,
       label: COPY.detail.sendToRealmCta,
+      tag:   realmTier,
       hint:  COPY.detail.sendToRealmHint,
       onClick: handlers.onPlaceOnMap,
     });
@@ -114,6 +120,7 @@ function computeItems({ phase, eventCount, narrated, simulated, _settlement, sav
     items.push({
       id: 'open_realm', Icon: MapPin,
       label: COPY.detail.openRealmCta,
+      tag:   realmTier,
       hint:  COPY.detail.openRealmHint,
       onClick: handlers.onPlaceOnMap,
     });

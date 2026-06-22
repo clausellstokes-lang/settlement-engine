@@ -73,6 +73,10 @@ describe('SimulationRulesDialog', () => {
       onClose={() => {}}
     />);
 
+    // The advanced gates now live behind the "Engine gates" progressive-disclosure
+    // group — expand it before asserting on the gate controls.
+    fireEvent.click(screen.getByText('Engine gates (advanced)'));
+
     expect(screen.getByText('Living-world systems (advanced)')).toBeTruthy();
     const warGate = screen.getByRole('checkbox', { name: 'War layer' });
     const strategyGate = screen.getByRole('checkbox', { name: 'Settlement strategy' });
@@ -94,6 +98,9 @@ describe('SimulationRulesDialog', () => {
       campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
       onClose={onClose}
     />);
+
+    // Expand the "Engine gates" disclosure to reach the advanced gate toggles.
+    fireEvent.click(screen.getByText('Engine gates (advanced)'));
 
     fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'Settlement strategy' }));

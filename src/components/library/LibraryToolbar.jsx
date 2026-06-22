@@ -26,6 +26,7 @@ import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import Segmented from '../primitives/Segmented.jsx';
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -166,9 +167,21 @@ export default function LibraryToolbar({
 }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const toggleFilter = (key) => setFilters({ ...filters, [key]: !filters[key] });
+
+  // Phase segment — a front-line lens over the same canonOnly/draftOnly filter
+  // keys the Filters disclosure used to own. 'all' clears both; 'drafts' sets
+  // draftOnly (clears canonOnly); 'canon' sets canonOnly (clears draftOnly).
+  const phaseValue = filters?.canonOnly ? 'canon' : filters?.draftOnly ? 'drafts' : 'all';
+  const setPhase = (id) => setFilters({
+    ...filters,
+    canonOnly: id === 'canon' || undefined,
+    draftOnly: id === 'drafts' || undefined,
+  });
   // The campaign selector is a value, not a boolean — count it once if set.
+  // canonOnly/draftOnly are surfaced on the front-line All|Drafts|Canon segment,
+  // so they no longer count toward the disclosure's hidden-filter badge.
   const activeFilterCount = Object.entries(filters || {})
-    .filter(([k, v]) => k === 'campaignId' ? !!v : !!v).length;
+    .filter(([k, v]) => k !== 'canonOnly' && k !== 'draftOnly' && !!v).length;
 
   return (
     <div style={{
@@ -240,6 +253,23 @@ export default function LibraryToolbar({
         </select>
       </label>
 
+      {/* Phase segment — front-line All | Drafts | Canon lens. Mutually exclusive,
+          so a Segmented pill group reads the three views at a glance where the old
+          Canon/Draft chips were buried behind Filters▾. Wired to the same
+          canonOnly/draftOnly filter keys; the secondary filters stay in the
+          disclosure below. */}
+      <Segmented
+        size="sm"
+        ariaLabel="Filter settlements by phase"
+        options={[
+          { id: 'all', label: 'All' },
+          { id: 'drafts', label: 'Drafts' },
+          { id: 'canon', label: 'Canon' },
+        ]}
+        value={phaseValue}
+        onChange={setPhase}
+      />
+
       {/* Filters▾ disclosure — keeps the default toolbar uncluttered for a new DM.
           All chips (incl. the now-wired draftOnly / hasPendingEdits + the new
           living-world filters) live behind this. */}
@@ -289,9 +319,8 @@ export default function LibraryToolbar({
             flexWrap: 'wrap', paddingTop: SP.xs, borderTop: `1px solid ${BORDER}`, marginTop: 2,
           }}
         >
-          {/* Phase */}
-          <Button size="sm" variant={filters?.canonOnly ? 'success' : 'secondary'} aria-pressed={!!filters?.canonOnly} onClick={() => toggleFilter('canonOnly')} title="Show only canon settlements: names locked, the campaign timeline started.">Canon</Button>
-          <Button size="sm" variant={filters?.draftOnly ? 'gold' : 'secondary'} aria-pressed={!!filters?.draftOnly} onClick={() => toggleFilter('draftOnly')} title="Show only drafts: not yet canonized, still freely editable.">Draft</Button>
+          {/* Phase — All | Drafts | Canon now lives on the front-line Segmented
+              control above; the disclosure keeps the secondary filters only. */}
           <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
           {/* Structure */}
           <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>

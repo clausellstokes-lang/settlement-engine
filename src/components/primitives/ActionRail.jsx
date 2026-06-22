@@ -25,6 +25,7 @@ const VISIBLE_CAP = 5;
  * @property {string}   id
  * @property {string}   label
  * @property {string=}  hint               one-line context shown below
+ * @property {string=}  tag                small text tag (e.g. a required tier) shown beside the label
  * @property {boolean=} primary            at most one per rail; visually dominant
  * @property {React.ComponentType<{size?:number}>=} Icon
  * @property {boolean=} disabled
@@ -115,7 +116,23 @@ function ActionRow({ item }) {
         </span>
       )}
       <span style={{ flex: 1, minWidth: 0 }}>
-        <span style={{ display: 'block' }}>{item.label}</span>
+        <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
+          <span>{item.label}</span>
+          {item.tag && (
+            <span
+              style={{
+                flexShrink: 0,
+                fontSize: FS.xxs, fontWeight: 700,
+                letterSpacing: '0.02em',
+                padding: '1px 5px', borderRadius: 3,
+                background: item.primary ? 'rgba(255,251,245,0.18)' : '#f3ecdc',
+                border: `1px solid ${item.primary ? 'rgba(255,251,245,0.45)' : tone.border}`,
+              }}
+            >
+              {item.tag}
+            </span>
+          )}
+        </span>
         {item.hint && (
           <span
             id={`${item.id}-hint`}

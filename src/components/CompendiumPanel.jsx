@@ -29,6 +29,17 @@ const TABS = [
 // silently no-ops — the cardinal correct-mapping failure.
 const SEARCHABLE_TABS = new Set(['tiers', 'power', 'stress', 'neighbour', 'institutions']);
 
+// Category-specific filter placeholders, keyed by the searchable tabs above.
+// Naming the target category orients the reader to what the filter scopes,
+// rather than a generic "Filter this tab". Keeps the existing ellipsis char.
+const TAB_FILTER_PLACEHOLDER = Object.freeze({
+  tiers:        'Search tiers and routes…',
+  power:        'Search archetypes…',
+  stress:       'Search stresses…',
+  neighbour:    'Search neighbour relationships…',
+  institutions: 'Search institutions…',
+});
+
 // Anchor → tab map. HelpPopover and external deep-links
 // land at URL hashes like `#trade-routes` or `#magic`. The hash maps
 // to a Compendium tab; once that tab mounts, the matching DOM `id`
@@ -235,7 +246,7 @@ export default function CompendiumPanel({ standalone=false }) {
             </div>
             {SEARCHABLE_TABS.has(activeTab) && (
               <div style={{ ...contentColumn, display:'flex', alignItems:'center', gap:6, padding:'2px 14px 6px', minHeight:42 }}>
-                <input aria-label="Filter this tab" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Filter this tab…" style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.xs, color:INK, outline:'none' }}/>
+                <input aria-label="Filter this tab" value={search} onChange={e=>setSearch(e.target.value)} placeholder={TAB_FILTER_PLACEHOLDER[activeTab] || 'Filter this tab…'} style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.xs, color:INK, outline:'none' }}/>
                 {search && <IconButton Icon={X} glyph="×" label="Clear filter" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
               </div>
             )}

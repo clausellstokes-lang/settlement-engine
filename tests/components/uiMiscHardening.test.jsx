@@ -142,6 +142,18 @@ describe('AccountProfileSection avatar URL (finding #2)', () => {
     // The malformed value is not a valid http(s) URL, so no background image.
     expect(tile.getAttribute('style') || '').not.toMatch(/url\(/);
   });
+
+  test('shows a tier chip with the tier display name for a free user', () => {
+    render(<AccountProfileSection {...baseProps} auth={{ ...baseProps.auth, tier: 'free' }} />);
+    // The 'free' tier resolves to its display name; the raw key never appears.
+    expect(screen.getByText('Wanderer')).toBeTruthy();
+    expect(screen.queryByText(/free/i)).toBeNull();
+  });
+
+  test('omits the tier chip when no tier is present', () => {
+    render(<AccountProfileSection {...baseProps} />);
+    expect(screen.queryByText('Wanderer')).toBeNull();
+  });
 });
 
 describe('ImageCropper error surfacing (finding #5)', () => {

@@ -79,6 +79,14 @@ const COUNT_MAX = 9999;
 const TIER_RANK = Object.freeze({ cult: 0, minor: 1, major: 2 });
 const TIER_FOR_RANK = Object.freeze(['cult', 'minor', 'major']);
 
+// Deity rank → base 0..1 strength (major god > minor god > cult). The canonical
+// source the religion contest reads as its `deityRankStrength` base; lives here on
+// the zero-import tuning leaf so both the engine and the presentation layer read
+// ONE constant (a re-tune flows to both) without the display importing the contest
+// engine. Keyed identically for `tier` (pantheon ledger) and `rankAxis` (deity
+// snapshot) — the label sets match.
+const DEITY_RANK_STRENGTH = Object.freeze({ major: 0.95, minor: 0.6, cult: 0.35 });
+
 /**
  * The numeric rank of a tier label (cult 0 / minor 1 / major 2). Unknown labels
  * resolve to the cult floor. Total + typed so strict indexing never implies any.
@@ -392,5 +400,5 @@ export function advancePantheon({ pantheon = {}, snapshot, faithDeltas = [] }) {
 
 export const PANTHEON_TUNING = Object.freeze({
   MINOR_PROMOTE, MINOR_DEMOTE, MAJOR_PROMOTE, MAJOR_DEMOTE,
-  TIER_HOLD_TICKS, MAX_TIER_CHANGES_PER_TICK, TIER_RANK, TIER_FOR_RANK,
+  TIER_HOLD_TICKS, MAX_TIER_CHANGES_PER_TICK, TIER_RANK, TIER_FOR_RANK, DEITY_RANK_STRENGTH,
 });

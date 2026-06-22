@@ -76,6 +76,12 @@ export function TiersTab({ search='' }) {
 export function EconomyTab() {
   return <>
     <div id="economy" />
+    {/* Italic descriptor lead-in, the per-category one-liner that sets the
+        section's frame before its cards. Reuses the FS.xs / BODY / italic
+        pattern the prose tabs already use for sub-labels. */}
+    <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 12px' }}>
+      How prosperity is produced, traded, and stressed.
+    </div>
     {/* The lead concept — prosperity is an OUTPUT, not a dial — is the focal
         tier; the remaining cards are the quieter supporting set (P4). */}
     <Card title="Prosperity Tiers" accent={GOLD} lead>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
@@ -301,6 +307,11 @@ export function InstitutionsTab({ search }) {
     );
   }
   return <>
+    {/* Italic descriptor lead-in, the per-category one-liner above the entry
+        list. Reuses the FS.xs / BODY / italic sub-label pattern. */}
+    <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 8px' }}>
+      Every institution the simulator can generate, and what selects it.
+    </div>
     {/* The load-bearing fact (the counts) reads loud in BODY/bold; the label
         words around it are quieted, not the value. */}
     <p style={{ fontSize:FS.sm, color:BODY, lineHeight:1.5, margin:'0 0 10px' }}>

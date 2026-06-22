@@ -18,6 +18,8 @@ import IconButton from '../primitives/IconButton.jsx';
 import Page from '../primitives/Page.jsx';
 import Pill from '../primitives/Pill.jsx';
 import { t } from '../../copy/index.js';
+import { navigate } from '../../hooks/useRoute.js';
+import { viewToPath } from '../../lib/routes.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -277,15 +279,27 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
         padding: `${SP.xl}px`,
         display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.lg,
       }}>
+        {/* Brand lockup doubles as the way back to the app. The dedicated auth
+            routes render full-bleed (App suppresses the persistent nav on these
+            surfaces), so without a home affordance here the only exits would be
+            the browser Back button and the inter-mode footer links. The wordmark
+            is a real anchor to /create (crawlable, middle-click-friendly) with
+            an onClick that preventDefaults into the SPA navigator, the same
+            pattern the footer FooterLinks use. */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
         }}>
-          <span style={{
-            fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-            letterSpacing: '0.02em', textTransform: 'lowercase',
-          }}>
+          <a
+            href={viewToPath('generate')}
+            onClick={(e) => { e.preventDefault(); navigate('generate'); }}
+            aria-label="SettlementForge home"
+            style={{
+              fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
+              letterSpacing: '0.02em', textTransform: 'lowercase', textDecoration: 'none',
+            }}
+          >
             SettlementForge
-          </span>
+          </a>
         </div>
 
         <div style={{

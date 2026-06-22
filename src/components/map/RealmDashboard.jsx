@@ -30,6 +30,9 @@ import {
   liveSieges,
   warExhaustionStandings,
   warExhaustionBand,
+  activeDeployments,
+  liveTradeWars,
+  dispositionStandings,
 } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
@@ -315,12 +318,23 @@ export default function RealmDashboard({
     mobilizing: mobilizing.length, occupations: occupations.length,
   });
 
+  // Three more pure read-side ledgers the Conflict stat already folds in spirit:
+  // armies abroad (activeDeployments), trade routes that have actually flipped
+  // (liveTradeWars), and the cross-settlement aggressor/beaten record
+  // (dispositionStandings). Each is dormant-safe (returns [] when no campaign
+  // motion has occurred) so an early-turn realm renders nothing extra.
+  const deployments = activeDeployments(worldState);
+  const tradeWars = liveTradeWars({ worldState, regionalGraph });
+  const standings = dispositionStandings(worldState);
+  const topAggressor = standings.slice().sort((a, b) => b.score - a.score)[0] || null;
+
   // One focal Conflict digest: the tension band is the headline, and the four
   // former war stats survive as a one-line component breakdown beneath it. The
   // four facts the GM scans for ("is the realm at war, and how?") now win the
   // squint test as a single card instead of fragmenting across four equals.
   const conflictParts = [];
   if (sieges.length) conflictParts.push(`${sieges.length} siege${sieges.length === 1 ? '' : 's'}`);
+  if (deployments.length) conflictParts.push(`${deployments.length} ${deployments.length === 1 ? 'army' : 'armies'} abroad`);
   if (occupations.length) conflictParts.push(`${occupations.length} occupied`);
   if (mobilizing.length) conflictParts.push(`${mobilizing.length} mobilizing${mobilizing.some(m => m.covert) ? ' (some covert)' : ''}`);
   if (weariest && weariest.warExhaustion >= 0.6) {
@@ -328,7 +342,7 @@ export default function RealmDashboard({
   }
   const conflictSub = conflictParts.length ? conflictParts.join(' · ') : 'No sieges, occupations, or mobilizations';
   const conflictTone = tension.tone === 'crisis' ? 'crisis'
-    : (tension.tone === 'hot' || sieges.length || occupations.length || mobilizing.length) ? 'hot'
+    : (tension.tone === 'hot' || sieges.length || occupations.length || mobilizing.length || deployments.length) ? 'hot'
     : undefined;
 
   // The change channel (P3): what moved last advance. At turn 0 (no history)
@@ -395,6 +409,27 @@ export default function RealmDashboard({
           sub={`Month ${calendar.month || 1}`}
         />
         <Stat Icon={Users} label="Settlements" value={settlementCount} />
+        {/* Trade routes that have actually FLIPPED at least once (liveTradeWars
+            returns only contested prizes). Dormant ⇒ "–", same idiom as the
+            War-weariest / Dominant-faith null cases above. */}
+        <Stat
+          Icon={Globe2}
+          label="Trade routes flipped"
+          value={tradeWars.length ? tradeWars.length : '–'}
+          sub={tradeWars.length
+            ? tradeWars.slice(0, 2).map(t => t.commodityLabel).filter(Boolean).join(' · ')
+            : 'No supplier has been displaced'}
+        />
+        {/* The cross-settlement aggressor record (dispositionStandings). Names the
+            top scorer by net win/loss. Dormant ⇒ "–". */}
+        <Stat
+          Icon={Flame}
+          label="Top aggressor"
+          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || topAggressor.id) : '–'}
+          sub={topAggressor
+            ? `${topAggressor.wins}W / ${topAggressor.losses}L`
+            : 'No win record yet'}
+        />
       </div>
     </div>
   );

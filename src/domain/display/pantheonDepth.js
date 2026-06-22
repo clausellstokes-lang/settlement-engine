@@ -27,6 +27,22 @@ import { PANTHEON_TUNING } from '../worldPulse/pantheon.js';
 // must read the SAME promote boundary the engine ratchets on, never a copy.
 export const MAJOR_PROMOTE_SEATS = PANTHEON_TUNING.MAJOR_PROMOTE;
 
+// The same deity rank → 0..1 base strength the religion contest reads (major 0.95 /
+// minor 0.6 / cult 0.35), sourced from the tuning leaf so the pantheon strength
+// meter reads the engine's own number, never a re-typed copy.
+const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
+
+/**
+ * The 0..1 base strength of a deity tier (cult/minor/major), from the engine's own
+ * DEITY_RANK_STRENGTH. Unknown tiers resolve to the minor mid-point (the engine's
+ * own fallback). Pure lookup; the panel's strength meter reads this by tier.
+ * @param {string} tier
+ * @returns {number} 0..1
+ */
+export function deityTierStrength(tier) {
+  return /** @type {Record<string, number>} */ (DEITY_RANK_STRENGTH)[String(tier)] ?? DEITY_RANK_STRENGTH.minor;
+}
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
@@ -52,6 +68,25 @@ export function seatsFromMajor(entry) {
   const seats = Number.isFinite(entry?.seats) ? Number(entry.seats) : 0;
   if (entry?.tier === 'major') return 0;
   return Math.max(0, MAJOR_PROMOTE_SEATS - seats);
+}
+
+/**
+ * A deity's faith STATUS word, derived from the real ledger fields (tier + the
+ * cumulative win/loss conversion record). A cult is named for its tier; a faith
+ * with a net positive conversion record is Ascendant, a net negative one is Waning,
+ * and an even/empty record falls back to the tier-neutral "Established". This reads
+ * only fields that exist on the ledger entry — it never invents a per-tick trend the
+ * data cannot support (the record is cumulative, which is the honest signal here).
+ * @param {{ tier?: string, wins?: number, losses?: number }} entry
+ * @returns {'Cult'|'Ascendant'|'Waning'|'Established'}
+ */
+export function deityStatusWord(entry) {
+  if (String(entry?.tier) === 'cult') return 'Cult';
+  const wins = Number.isFinite(entry?.wins) ? Number(entry.wins) : 0;
+  const losses = Number.isFinite(entry?.losses) ? Number(entry.losses) : 0;
+  if (wins > losses) return 'Ascendant';
+  if (losses > wins) return 'Waning';
+  return 'Established';
 }
 
 /**

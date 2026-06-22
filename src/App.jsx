@@ -23,7 +23,7 @@ import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -122,6 +122,7 @@ export default function App() {
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
+  const creditBalance = useStore(s => s.creditBalance);
   const loadCampaigns = useStore(s => s.loadCampaigns);
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
   const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
@@ -304,6 +305,12 @@ export default function App() {
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
   const visibleNav = NAV;
 
+  // Dedicated auth surfaces (/signin · /register · /reset-password ·
+  // /verify-email) render full-bleed: the persistent top nav and the mobile
+  // bottom nav are suppressed so the AuthPanel owns the whole frame. Each auth
+  // page carries its own back/exit affordance, so no navigation is stranded.
+  const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'verify-email';
+
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
   // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
   // silently evicts whatever falls past the slice (this is how About, then Gallery,
@@ -348,7 +355,7 @@ export default function App() {
             the auth chip lives there as a 6th slot (added below in the
             bottom-nav block). Frees ~52px of vertical real estate on
             every mobile screen — meaningful on a 640px viewport. */}
-        {isMobile && !_readFlag('mobileSingleChrome') && (
+        {isMobile && !isAuthRoute && !_readFlag('mobileSingleChrome') && (
           <header style={{
             ...headerStyle,
             padding: `${SP.sm}px ${SP.md}px`,
@@ -386,7 +393,7 @@ export default function App() {
         )}
 
         {/* ── Desktop header ──────────────────────────────────── */}
-        {!isMobile && (
+        {!isMobile && !isAuthRoute && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
             {/* Brand block — logo + wordmark on top row, italic tagline
                 beneath. The HomeHero (which carries the full positioning
@@ -438,7 +445,11 @@ export default function App() {
                         color: active ? GOLD : PARCH_100,
                         fontSize: FS.sm, fontWeight: active ? 700 : 500,
                         fontFamily: sans,
-                        letterSpacing: '0.04em', textTransform: 'uppercase',
+                        // Title-case the links (Create / Library / Realm): the
+                        // labels are already correctly-cased strings; only the
+                        // CSS was upcasing them. Voice + template both want
+                        // title-case here, not the shouted CREATE/LIBRARY.
+                        letterSpacing: '0.04em', textTransform: 'none',
                         transition: 'all 0.2s',
                       }}
                     >
@@ -457,6 +468,39 @@ export default function App() {
                   onClick={() => setView('admin')}
                   size="md"
                 />
+              )}
+
+              {/* Persistent credit badge. The credit balance fetched at mount
+                  (and refreshed on auth transitions) now reads at a glance from
+                  the right cluster, not only after opening the account menu.
+                  Additive: the green name-chip identity and the ghost Upgrade
+                  both stay. Two channels (P7): the violet count plus the
+                  "credits" word carry the meaning, so it never relies on the
+                  violet colour alone, and there is no glyph since icons stay off
+                  outside the Realm map. Signed-in only: an anonymous visitor has
+                  no balance to read. Routes to the same subscription-and-credits
+                  surface the account menu links to. */}
+              {authTier !== 'anon' && (
+                <button
+                  type="button"
+                  onClick={() => setView('pricing')}
+                  title="Credits remaining"
+                  aria-label={`${creditBalance} credits remaining`}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: SP.xs,
+                    height: 32, padding: `0 ${SP.md}px`,
+                    borderRadius: 999,
+                    background: TINT_VIOLET,
+                    border: `1px solid ${VIOLET}`,
+                    color: VIOLET,
+                    fontSize: FS.sm, fontFamily: sans,
+                    letterSpacing: '0.02em', cursor: 'pointer',
+                    transition: 'all 0.2s', whiteSpace: 'nowrap',
+                  }}
+                >
+                  <span style={{ fontWeight: 700 }}>{creditBalance}</span>
+                  <span style={{ fontWeight: 500, opacity: 0.85 }}>credits</span>
+                </button>
               )}
 
               {/* Persistent tier chip. Anon → "Sign in" (the
@@ -597,7 +641,7 @@ export default function App() {
         </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
-        {isMobile && (
+        {isMobile && !isAuthRoute && (
           <div style={{
             position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
             background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,

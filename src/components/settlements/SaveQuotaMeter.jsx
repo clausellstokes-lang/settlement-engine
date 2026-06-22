@@ -18,6 +18,7 @@
 
 import Button from '../primitives/Button.jsx';
 import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
+import { getTierDisplayName } from '../../config/pricing.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
@@ -59,7 +60,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
           </span>
         ) : (
           <span data-testid="quota-label" style={{ color: BODY }}>
-            <strong style={{ color: INK }}>{used} of {max} saves</strong> used
+            <strong style={{ color: INK }}>{Math.max(0, max - used)} of {max} saves</strong> left on {getTierDisplayName(tier)}
             {used >= max && (
               <strong style={{ color: swatch.danger, marginLeft: 6 }}>· at cap</strong>
             )}
@@ -79,7 +80,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
           aria-valuenow={used}
           aria-valuemin={0}
           aria-valuemax={max}
-          aria-valuetext={`${used} of ${max} saves used`}
+          aria-valuetext={`${Math.max(0, max - used)} of ${max} saves left on ${getTierDisplayName(tier)}${used >= max ? '. at cap' : ''}`}
           style={{ flex: '0 1 140px', minWidth: 100, height: 7, background: swatch['#E8D9B0'], borderRadius: 4, overflow: 'hidden' }}
         >
           <div style={{

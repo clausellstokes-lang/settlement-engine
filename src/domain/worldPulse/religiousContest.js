@@ -46,6 +46,7 @@ import { mintDirectedChannel, stablePart } from '../region/graph.js';
 import { clamp01 } from '../region/contestMath.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { normalizeStressor } from './stressors.js';
+import { PANTHEON_TUNING } from './pantheon.js';
 
 const CHANNEL_TYPE = 'religious_authority';
 // The relationship labels that carry a faith — a deity's influence travels with
@@ -62,8 +63,10 @@ const FAITH_CARRIER_CHANNELS = Object.freeze([
 ]);
 // A neighbour deity needs a minimally-real carrier strength to even contest.
 const MIN_CARRIER = 0.15;
-// Deity rank → base 0..1 strength (major god > minor god > cult).
-const DEITY_RANK_STRENGTH = Object.freeze({ major: 0.95, minor: 0.6, cult: 0.35 });
+// Deity rank → base 0..1 strength (major god > minor god > cult). Sourced from the
+// zero-import pantheon tuning leaf so the engine and the presentation layer read ONE
+// constant; re-exported here for back-compat with the engine's public surface.
+export const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
