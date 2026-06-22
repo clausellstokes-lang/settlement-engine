@@ -129,12 +129,50 @@ export async function unshareMap(campaignId) {
   try { track(EVENTS.GALLERY_UNPUBLISHED, { kind: 'map' }); } catch { /* never affects unshare */ }
 }
 
-/** Browse public maps (anonymized tiles). */
-export async function fetchGalleryMaps({ page = 0, pageSize = 24 } = {}) {
+/**
+ * Browse public maps (anonymized tiles). Filter/sort/search run SERVER-SIDE
+ * (migration 065) — the tile carries import_count + a REAL member_count, and the
+ * RPC applies the kind/backdrop/tags/has-settlements facets + ilike search +
+ * ORDER BY before pagination. Owner identity is never projected.
+ */
+export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest', search = '', filters = {} } = {}) {
   if (!isConfigured) return { items: [] };
-  const { data, error } = await supabase.rpc('list_gallery_maps', { p_page: page, p_page_size: pageSize });
+  const { data, error } = await supabase.rpc('list_gallery_maps', {
+    p_page: page,
+    p_page_size: pageSize,
+    p_sort_key: sort,
+    p_search_query: search || '',
+    p_filters: normalizeMapFilters(filters),
+  });
   if (error) throw new Error(error.message || 'Could not load shared maps');
   return { items: Array.isArray(data) ? data : [] };
+}
+
+// Forward only the map facets the RPC understands: the non-empty IN-list arrays
+// (kind / backdrop / tags) and the real has-settlements toggle. Mirrors
+// normalizeGalleryFilters so an empty facet never narrows the server query.
+function normalizeMapFilters(filters = {}) {
+  const out = {};
+  for (const key of ['kind', 'backdrop', 'tags']) {
+    const arr = Array.isArray(filters[key]) ? filters[key].filter(Boolean).map(String) : [];
+    if (arr.length) out[key] = arr;
+  }
+  if (filters.hasSettlements) out.hasSettlements = true;
+  return out;
+}
+
+/**
+ * Fire-and-forget import counter for a shared map. Called from the import path
+ * (campaignSlice) after a successful clone; the importer is not the map's owner,
+ * so the bump runs in a SECURITY DEFINER RPC (bump_map_import, migration 065).
+ * A counter failure must never fail the import, so the error is swallowed.
+ */
+export async function bumpMapImport(slug) {
+  if (!isConfigured || !slug) return;
+  const { error } = await supabase.rpc('bump_map_import', { p_slug: slug });
+  if (error && import.meta?.env?.DEV) {
+    console.warn('[gallery] bump_map_import failed:', error.message);
+  }
 }
 
 /** Fetch one public map payload (blank-canvas backdrop in Phase 1). */

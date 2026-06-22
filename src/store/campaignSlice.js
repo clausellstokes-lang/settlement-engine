@@ -309,6 +309,9 @@ export const createCampaignSlice = (set, get) => {
     if (!newId) throw new Error('Could not create a campaign for the imported map.');
     get().saveCampaignMap(newId, mapState);
     try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map' }); } catch { /* analytics never affects import */ }
+    // Source import counter — atomic server-side bump (migration 065). A counter
+    // failure must never fail the import, so it is fire-and-forget.
+    try { const { bumpMapImport } = await import('../lib/gallery.js'); bumpMapImport(slug).catch(() => {}); } catch { /* never affects import */ }
     return newId;
   },
 
@@ -412,6 +415,9 @@ export const createCampaignSlice = (set, get) => {
     });
     get().saveCampaignMap(campaignId, mapState);
     try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map_with_campaign', member_count: members.length }); } catch { /* analytics never affects import */ }
+    // Source import counter — atomic server-side bump (migration 065). A counter
+    // failure must never fail the import, so it is fire-and-forget.
+    try { const { bumpMapImport } = await import('../lib/gallery.js'); bumpMapImport(slug).catch(() => {}); } catch { /* never affects import */ }
     return campaignId;
   },
 

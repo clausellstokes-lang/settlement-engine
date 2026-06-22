@@ -19,7 +19,7 @@ import {
   sans, serif_, SP, R, FS,
 } from '../theme.js';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { applyMapFilters, deriveTagVocabulary, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
+import { activeMapFilterCount, deriveTagVocabulary, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 // Mirror the settlements tab's StatusMessage so the two sibling tabs render the
@@ -86,10 +86,12 @@ export default function GalleryMaps({ onNavigate }) {
   const [editError, setEditError] = useState(null);
   const [confirmUnpublishSlug, setConfirmUnpublishSlug] = useState(null);
 
-  // Client-side faceting state (list_gallery_maps takes only pagination; the
-  // batch is filtered/searched/sorted in the browser — see galleryMapsUtils).
+  // Filter/search/sort state. Narrowing runs SERVER-SIDE now (list_gallery_maps,
+  // migration 065): a change refetches with the active facets. Search is debounced
+  // so each keystroke doesn't hit the RPC.
   const [filters, setFilters] = useState({ kind: [], backdrop: [], tags: [], hasSettlements: false });
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [sort, setSort] = useState('newest');
 
   const toggleArrayFilter = useCallback((key, value) => {
@@ -108,10 +110,10 @@ export default function GalleryMaps({ onNavigate }) {
   }, []);
 
   const tagVocabulary = useMemo(() => deriveTagVocabulary(items), [items]);
-  const visibleItems = useMemo(
-    () => applyMapFilters(items, { filters, search, sort }),
-    [items, filters, search, sort],
-  );
+  // Whether any facet or search is active — distinguishes "no shared maps yet"
+  // from "no match for the current narrowing" now that the server returns the
+  // already-filtered set.
+  const hasActiveFacets = activeMapFilterCount(filters) > 0 || !!debouncedSearch.trim();
   // Read-only preview: view a map (and its settlements, if any) before importing.
   const [viewingSlug, setViewingSlug] = useState(null);
   const [detail, setDetail] = useState(null);
@@ -128,25 +130,32 @@ export default function GalleryMaps({ onNavigate }) {
     return () => { ignore = true; };
   }, [viewingSlug]);
 
-  // Fetch the full server batch (list_gallery_maps caps at 60 — migration 045)
-  // so client-side faceting, counts, and the empty state see every published
-  // map, not a truncated head. Without this, the globally most-viewed map could
-  // never surface through the most_viewed sort. Reused as a post-edit refetch so
-  // owner edits show without an optimistic merge.
-  const refreshMaps = useCallback(async () => {
-    const r = await fetchGalleryMaps({ page: 0, pageSize: 60 });
-    setItems(Array.isArray(r?.items) ? r.items : []);
-  }, []);
+  // Debounce the search box so each keystroke doesn't refetch (~300ms).
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search), 300);
+    return () => clearTimeout(t);
+  }, [search]);
 
+  // Refetch with the active facets/search/sort. list_gallery_maps now narrows
+  // server-side (migration 065) and caps at 60. Reused as a post-edit refetch so
+  // owner edits show under the current facets without an optimistic merge.
+  const refreshMaps = useCallback(async () => {
+    const r = await fetchGalleryMaps({ page: 0, pageSize: 60, sort, search: debouncedSearch, filters });
+    setItems(Array.isArray(r?.items) ? r.items : []);
+  }, [sort, debouncedSearch, filters]);
+
+  // Server-side narrowing: refetch whenever the facets, debounced search, or sort
+  // change. The empty-vs-no-results distinction reads from whether any facet/search
+  // is active, since the server already returned the narrowed set.
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    fetchGalleryMaps({ page: 0, pageSize: 60 })
+    fetchGalleryMaps({ page: 0, pageSize: 60, sort, search: debouncedSearch, filters })
       .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
-  }, []);
+  }, [filters, debouncedSearch, sort]);
 
   const handleImport = useCallback(async (slug, kind) => {
     // P9: a tier cap is a preview, not a dead-end. Reframe the denial as an
@@ -345,7 +354,7 @@ export default function GalleryMaps({ onNavigate }) {
               {MAP_SORT_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
             </select>
             <div style={{ gridColumn: '1 / -1', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, justifySelf: 'start' }}>
-              {loading ? 'Loading maps...' : `${visibleItems.length} map${visibleItems.length === 1 ? '' : 's'}`}
+              {loading ? 'Loading maps...' : `${items.length} map${items.length === 1 ? '' : 's'}`}
             </div>
           </div>
 
@@ -353,16 +362,16 @@ export default function GalleryMaps({ onNavigate }) {
           {error && (
             <MapsNotice tone="err">Could not load maps: {error}</MapsNotice>
           )}
-          {!loading && !error && items.length === 0 && (
+          {!loading && !error && items.length === 0 && !hasActiveFacets && (
             <p style={{ color: BODY, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
           )}
-          {!loading && !error && items.length > 0 && visibleItems.length === 0 && (
+          {!loading && !error && items.length === 0 && hasActiveFacets && (
             <p style={{ color: BODY, fontSize: FS.sm }}>No maps match these filters. Clear a facet to widen the search.</p>
           )}
 
           {!loading && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}>
-        {visibleItems.map((m) => {
+        {items.map((m) => {
           // Strict owner gate: editable only when a loaded owned campaign is
           // public under this tile's slug. null for anonymous / non-owners.
           const owned = ownedBySlug.get(m.slug) || null;
@@ -391,6 +400,13 @@ export default function GalleryMaps({ onNavigate }) {
                   {m.tags.slice(0, 4).map((t) => (
                     <span key={t} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, borderRadius: R.sm, padding: '2px 6px' }}>{t}</span>
                   ))}
+                </div>
+              )}
+              {/* Real member count (migration 065). Calm-archivist line, text only;
+                  the kind badge above still signals blank vs campaign. */}
+              {Number(m.member_count) > 0 && (
+                <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700, marginTop: 2 }}>
+                  {m.member_count} settlement{Number(m.member_count) === 1 ? '' : 's'}
                 </div>
               )}
               <div style={{ flex: 1 }} />

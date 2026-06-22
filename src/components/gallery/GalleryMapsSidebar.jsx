@@ -171,7 +171,7 @@ export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onTogg
       <SidebarSection title="Settlements">
         <ToggleRow
           checked={!!filters.hasSettlements}
-          label="Includes settlements"
+          label="Has settlements"
           onChange={value => onToggleBool('hasSettlements', value)}
         />
       </SidebarSection>
