@@ -41,7 +41,11 @@ const sans = '"Nunito", system-ui, sans-serif';
  * the consumer mounts it; the drawer is portal-style — fixed-position
  * over the page chrome — so it doesn't push content around.
  */
-export default function SimulationDrawer() {
+export default function SimulationDrawer({ variant = 'inline' }) {
+  // 'inline' = the parchment owner-action band (ghost + light border).
+  // 'toolbar' = the dark sticky wizard toolbar, where the trigger joins Back /
+  // Regenerate / New as a matching secondary button.
+  const toolbar = variant === 'toolbar';
   const [open, setOpen] = useState(false);
   const firedRef = useRef(false);
 
@@ -66,12 +70,12 @@ export default function SimulationDrawer() {
   return (
     <>
       <Button
-        variant="ghost"
-        size="sm"
+        variant={toolbar ? 'secondary' : 'ghost'}
+        size={toolbar ? 'md' : 'sm'}
         onClick={() => setOpen(true)}
         title="See the 17-step simulation pipeline that built this settlement"
-        icon={<span style={{ color: GOLD }}>✦</span>}
-        style={{
+        icon={toolbar ? undefined : <span style={{ color: GOLD }}>✦</span>}
+        style={toolbar ? undefined : {
           border: `1px solid ${BORDER}`,
           color: MUTED,
         }}

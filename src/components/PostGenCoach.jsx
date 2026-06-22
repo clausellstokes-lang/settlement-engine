@@ -29,6 +29,7 @@ import { t } from '../copy/index.js';
 import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+import { buildNextSteps } from './generate/WizardNextSteps.jsx';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
 // Retoned for the dark-ink coach card: light parchment tones that clear AA on INK.
@@ -54,6 +55,13 @@ const STEPS = [
 
 export default function PostGenCoach() {
   const settlement = useStore(s => s.settlement);
+  // The final step folds in the post-generate "what's next" checklist (formerly
+  // the standalone WizardNextSteps card), so the coach reads the same save/auth
+  // state that shapes the save step's framing.
+  const canSave = useStore(s => s.canSave());
+  const authTier = useStore(s => s.auth?.tier);
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const savedSettlements = useStore(s => s.savedSettlements);
 
   // Skip immediately for users who've already seen / dismissed it.
   // Read once on mount so a fresh write during this session doesn't
@@ -75,6 +83,12 @@ export default function PostGenCoach() {
 
   const isLast = step === STEPS.length - 1;
   const stepDef = STEPS[step];
+  // Folded "what's next" checklist for the final step.
+  const signedIn = !!authTier && authTier !== 'anon';
+  const saved = activeSaveId != null
+    || (Array.isArray(savedSettlements)
+        && savedSettlements.some(e => e?.name === settlement.name && e?.tier === settlement.tier));
+  const guide = buildNextSteps({ settlement, canSave, signedIn, saved });
 
   function close() {
     setDismissedThisSession(true);
@@ -127,6 +141,7 @@ export default function PostGenCoach() {
         </span>
         <IconButton
           Icon={X}
+          glyph={'✕'}
           label="Dismiss coach"
           onClick={close}
           tone="default"
@@ -147,14 +162,35 @@ export default function PostGenCoach() {
           margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
           color: PARCH,
         }}>
-          {t(stepDef.titleKey)}
+          {isLast ? guide.headline : t(stepDef.titleKey)}
         </h3>
-        <p style={{
-          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
-          lineHeight: 1.55,
-        }}>
-          {t(stepDef.bodyKey)}
-        </p>
+        {isLast ? (
+          // The folded "what's next" checklist: the forward moves that build on
+          // this dossier (save, export, refine, place). Save leads with a gold
+          // left-rule + weight; the rest are quiet parchment rows. Guidance, not
+          // buttons — the canonical Save / Buy / toolbar controls keep their homes.
+          <ul style={{
+            listStyle: 'none', margin: `${SP.sm}px 0 0`, padding: 0,
+            display: 'flex', flexDirection: 'column', gap: SP.sm,
+          }}>
+            {guide.steps.map((s2, i) => (
+              <li key={s2.id} style={{
+                paddingLeft: SP.md,
+                borderLeft: `2px solid ${i === 0 ? GOLD : 'rgba(201,162,76,0.30)'}`,
+              }}>
+                <div style={{ fontSize: FS.sm, fontWeight: i === 0 ? 800 : 700, color: i === 0 ? PARCH : BODY, lineHeight: 1.3 }}>{s2.label}</div>
+                <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.4 }}>{s2.hint}</div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p style={{
+            margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
+            lineHeight: 1.55,
+          }}>
+            {t(stepDef.bodyKey)}
+          </p>
+        )}
 
         {/* Progress dots */}
         <div style={{ display: 'flex', gap: 6, marginTop: SP.md }} aria-hidden="true">

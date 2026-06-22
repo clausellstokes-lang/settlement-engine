@@ -216,31 +216,32 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
           <ScoreRow label="Internal Security" score={scores.internal} icon=""/>
           <ScoreRow label="Economic Resilience" score={scores.economic} icon=""/>
           <ScoreRow label="Magical Capability" score={scores.magical} icon=""/>
-          {sp.safetyRatio!==undefined&&(()=>{
-            const er=sp.safetyRatio;
-            const erAlert=typeof er==='number'&&er<1;          // under-enforced is the anomaly
-            const erWord=typeof er!=='number'?'':er>=2?'Strong':er>=1?'Fair':'Weak';
-            const erColor=erAlert?'#8b1a1a':BODY;              // mute the healthy/fair case
+          {foodBal&&(()=>{
+            // Food Security — production's coverage of daily need (mirrors the
+            // Economics tab's canonical "production covers N% of need" framing),
+            // shown as an always-on band in the slot the Enforcement Ratio used to
+            // hold. A surplus reads Secure; a shortfall reads Strained or Critical
+            // by how deep it runs. Replaces the old deficit-only sliver that a
+            // well-fed town never showed.
+            const prod=foodBal.dailyProduction, need=foodBal.dailyNeed;
+            const coverage=(prod!=null&&need)
+              ? Math.min(100,Math.round(prod/Math.max(1,need)*100))
+              : (foodBal.deficitPercent!=null?Math.max(0,100-foodBal.deficitPercent):null);
+            if(coverage==null) return null;
+            const deficit=foodBal.deficit>0, surplus=foodBal.surplus>0;
+            const word=deficit?(coverage<75?'Critical':'Strained'):surplus?'Secure':'Fair';
+            const color=deficit?'#8b1a1a':surplus?'#1a5a28':BODY;
             return <div style={{marginBottom:8}}>
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}> Enforcement Ratio</span>
-                <span style={{fontSize:FS.xs,fontWeight:700,color:erColor}}>{erWord&&<span style={{fontWeight:600,marginRight:5}}>{erWord}</span>}{typeof er==='number'?er.toFixed(1):NO_VALUE}×</span>
+                <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
+                <span style={{fontSize:FS.xs,fontWeight:700,color:color}}><span style={{fontWeight:600,marginRight:5}}>{word}</span>{coverage}%</span>
               </div>
               <div style={{height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden'}}>
-                <div style={{height:'100%',width:`${Math.min(100,(er||0)*25)}%`,background:erColor,borderRadius:3}}/>
+                <div style={{height:'100%',width:`${coverage}%`,background:color,borderRadius:3}}/>
               </div>
             </div>;
           })()}
         </div>
-
-        {/* Food balance if significant */}
-        {foodBal?.deficit>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
-          <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}> Food Deficit</span>
-          <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:3,height:6,overflow:'hidden'}}>
-            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPercent)}%`,background:swatch.danger,borderRadius:3}}/>
-          </div>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,flexShrink:0}}>{foodBal.deficitPercent}%</span>
-        </div>}
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}

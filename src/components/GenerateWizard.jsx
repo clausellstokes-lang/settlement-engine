@@ -21,7 +21,6 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import WizardNextSteps from './generate/WizardNextSteps.jsx';
 import { INK, MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
@@ -30,6 +29,7 @@ import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
+import BuyThisDossier from './BuyThisDossier.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
@@ -387,35 +387,21 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           out-shout the content the reveal just earned. It's a quiet right-aligned
           secondary, not a full-width gold band. Save (below the dossier) is the
           single primary post-generate action. */}
-      {settlement && (
-        <>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleGenerate}
-              aria-label="Regenerate draft"
-              title="Roll a fresh draft from the same configuration. The current draft is discarded."
-            >
-              {/* The ↻ glyph is decorative; the aria-label carries the accessible name. */}
-              <span aria-hidden="true">↻ </span>Regenerate draft
-            </Button>
-          </div>
-          {generateError && (
-            <div role="alert" style={{
-              marginTop: SP.sm,
-              padding: `${SP.sm}px ${SP.md}px`,
-              background: swatch.dangerBg,
-              border: `1px solid ${DANGER_BORDER}`,
-              borderRadius: R.md,
-              color: swatch.danger,
-              fontFamily: sans,
-              fontSize: FS.sm,
-            }}>
-              {generateError}
-            </div>
-          )}
-        </>
+      {/* Regenerate moved into the sticky toolbar (beside New). The re-roll error
+          alert stays here so a failed regenerate surfaces above the dossier. */}
+      {settlement && generateError && (
+        <div role="alert" style={{
+          marginTop: SP.sm,
+          padding: `${SP.sm}px ${SP.md}px`,
+          background: swatch.dangerBg,
+          border: `1px solid ${DANGER_BORDER}`,
+          borderRadius: R.md,
+          color: swatch.danger,
+          fontFamily: sans,
+          fontSize: FS.sm,
+        }}>
+          {generateError}
+        </div>
       )}
 
       {/* Pipeline reveal overlay. Renders only when the flag is on,
@@ -438,6 +424,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             settlement={settlement}
             isMobile={isMobile}
             handleBack={handleBack}
+            handleGenerate={handleGenerate}
             handleNewSettlement={handleNewSettlement}
           />
 
@@ -461,21 +448,23 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             </div>
           </Suspense>
 
-          {/* Save to library */}
-          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: SP.xs }}>
+          {/* Save to library — the single primary post-generate action. "Buy this
+              dossier" sits beside it as the quiet one-time-purchase alternative,
+              hoisted from the dossier action band so the two commit actions live
+              together. Save leads; Buy is the neighbour. */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', paddingTop: SP.xs }}>
             <SaveToLibraryButton
               settlement={settlement}
               canSave={canSave}
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
+            <BuyThisDossier settlement={settlement} />
           </div>
 
-          {/* Post-generate "what's next" guide. Closes out the
-              post-generate flow with a state-aware next-step checklist.
-              Self-gates on the flag; guidance only, so it never competes with
-              the canonical Save / Export / New controls above. */}
-          <WizardNextSteps />
+          {/* The post-generate "what's next" checklist now lives folded into the
+              PostGenCoach card (mounted at the App level) so it floats as one
+              dismissible helper instead of a second in-page block. */}
         </>
       )}
 

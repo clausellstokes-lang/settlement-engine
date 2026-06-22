@@ -765,6 +765,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             settlement={settlement}
             saveId={saveId}
             liveSaveEntry={liveSaveEntry}
+            embedded={hideHeader}
           />
         )}
         {/* Welcome credit gift card. Self-gates inside; shown to

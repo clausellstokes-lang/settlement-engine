@@ -25,11 +25,18 @@ export default function DossierActionBand({
   // Narrate pitch in this region; the band then collapses to its plain
   // owner-actions utility row so only one pitch competes for the focal point.
   suppressNarrativePitch = false,
+  // Wizard generate-flow: Buy + "How this was simulated" are hoisted into the
+  // wizard toolbar / Save row, so this band suppresses them here.
+  embedded = false,
 }) {
   // The narrative-layer pitch (violet tint + eyebrow + copy + Narrate buttons) is
   // earned only when the strip flag is on, narrative can fire here, AND no other
   // surface is already carrying the pitch (the welcome card).
   const showNarrativePitch = flag('narrativeLayerStrip') && narrativeEnabled && !suppressNarrativePitch;
+  // In the embedded flow the only possible content is the narrative pitch — no
+  // saveId means ShareToGallery self-gates to null, and Buy/How moved out — so
+  // the band collapses to nothing when the pitch isn't live.
+  if (embedded && !showNarrativePitch) return null;
   return (
     <div
       // Grouping is carried by DIFFERENTIAL SPACING, not a 4-sided box. The violet
@@ -66,7 +73,7 @@ export default function DossierActionBand({
           primary's lead so it reads as subordinate. On narrow widths it reflows
           BELOW the narrative primary (last flex item with marginLeft:auto). */}
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', marginLeft: 'auto' }}>
-        <BuyThisDossier settlement={settlement} />
+        {!embedded && <BuyThisDossier settlement={settlement} />}
         <ShareToGallery
           saveId={saveId}
           isPublic={liveSaveEntry?.is_public}
@@ -81,10 +88,13 @@ export default function DossierActionBand({
           galleryShareDm={liveSaveEntry?.gallery_share_dm}
           galleryImportable={liveSaveEntry?.gallery_importable}
         />
-        {/* "How this was simulated" trigger — a "more info" affordance. */}
-        <Suspense fallback={null}>
-          <SimulationDrawer />
-        </Suspense>
+        {/* "How this was simulated" trigger — a "more info" affordance. In the
+            embedded generate flow it lives in the wizard toolbar instead. */}
+        {!embedded && (
+          <Suspense fallback={null}>
+            <SimulationDrawer />
+          </Suspense>
+        )}
       </div>
     </div>
   );
