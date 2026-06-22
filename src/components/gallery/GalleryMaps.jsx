@@ -7,7 +7,7 @@
  * premium campaign via the importGalleryMap store action. Viewing is free;
  * importing is premium (it creates a campaign).
  */
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
@@ -17,6 +17,9 @@ import {
   GREEN, GREEN_BG, RED, RED_BG,
   sans, serif_, SP, R, FS,
 } from '../theme.js';
+import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
+import { applyMapFilters, deriveTagVocabulary, MAP_SORT_OPTIONS } from './galleryMapsUtils.js';
+import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 // Mirror the settlements tab's StatusMessage so the two sibling tabs render the
 // same tones/tokens (P10 parity) instead of inline hex fallbacks.
@@ -64,6 +67,33 @@ export default function GalleryMaps({ onNavigate }) {
   const [error, setError] = useState(null);
   const [importingSlug, setImportingSlug] = useState(null);
   const [notice, setNotice] = useState(null);
+
+  // Client-side faceting state (list_gallery_maps takes only pagination; the
+  // batch is filtered/searched/sorted in the browser — see galleryMapsUtils).
+  const [filters, setFilters] = useState({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+  const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('newest');
+
+  const toggleArrayFilter = useCallback((key, value) => {
+    setFilters(prev => {
+      const current = Array.isArray(prev[key]) ? prev[key] : [];
+      const next = current.includes(value) ? current.filter(v => v !== value) : [...current, value];
+      return { ...prev, [key]: next };
+    });
+  }, []);
+  const toggleBoolFilter = useCallback((key, value) => {
+    setFilters(prev => ({ ...prev, [key]: !!value }));
+  }, []);
+  const clearFilters = useCallback(() => {
+    setFilters({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+    setSearch('');
+  }, []);
+
+  const tagVocabulary = useMemo(() => deriveTagVocabulary(items), [items]);
+  const visibleItems = useMemo(
+    () => applyMapFilters(items, { filters, search, sort }),
+    [items, filters, search, sort],
+  );
   // Read-only preview: view a map (and its settlements, if any) before importing.
   const [viewingSlug, setViewingSlug] = useState(null);
   const [detail, setDetail] = useState(null);
@@ -83,7 +113,11 @@ export default function GalleryMaps({ onNavigate }) {
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    fetchGalleryMaps({ page: 0, pageSize: 36 })
+    // Fetch the full server batch (list_gallery_maps caps at 60 — migration 045)
+    // so client-side faceting, counts, and the empty state see every published
+    // map, not a truncated head. Without this, the globally most-viewed map could
+    // never surface through the most_viewed sort.
+    fetchGalleryMaps({ page: 0, pageSize: 60 })
       .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
@@ -172,17 +206,65 @@ export default function GalleryMaps({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && loading && <MapsSkeleton />}
-      {!viewingSlug && error && (
-        <MapsNotice tone="err">Could not load maps: {error}</MapsNotice>
-      )}
-      {!viewingSlug && !loading && !error && items.length === 0 && (
-        <p style={{ color: BODY, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
-      )}
+      {!viewingSlug && (
+      <>
+      <style>{GALLERY_RESPONSIVE_CSS}</style>
+      <div className="gallery-main-layout" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
+        <GalleryMapsSidebar
+          filters={filters}
+          tagVocabulary={tagVocabulary}
+          onToggleArray={toggleArrayFilter}
+          onToggleBool={toggleBoolFilter}
+          onClear={clearFilters}
+        />
+        <main style={{ minWidth: 0 }}>
+          {/* Search + sort, mirroring GalleryTopbar tokens (text/glyph only). */}
+          <div className="gallery-topbar" style={{ display: 'grid', gap: SP.sm, alignItems: 'center', marginBottom: SP.md }}>
+            <label htmlFor="gallery-maps-search" style={{ position: 'relative', minWidth: 0 }}>
+              <input
+                id="gallery-maps-search"
+                type="search"
+                aria-label="Search maps"
+                value={search}
+                onChange={event => setSearch(event.target.value)}
+                placeholder="Search maps"
+                style={{
+                  width: '100%', minHeight: 44, boxSizing: 'border-box', padding: '8px 10px',
+                  border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, color: INK,
+                  fontFamily: sans, fontSize: FS.sm, fontWeight: 800, cursor: 'text',
+                }}
+              />
+            </label>
+            <select
+              value={sort}
+              onChange={event => setSort(event.target.value)}
+              aria-label="Sort maps"
+              style={{
+                minHeight: 44, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD,
+                color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, padding: '8px 10px', cursor: 'pointer',
+              }}
+            >
+              {MAP_SORT_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+            </select>
+            <div style={{ gridColumn: '1 / -1', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, justifySelf: 'start' }}>
+              {loading ? 'Loading maps...' : `${visibleItems.length} map${visibleItems.length === 1 ? '' : 's'}`}
+            </div>
+          </div>
 
-      {!viewingSlug && !loading && (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}>
-        {items.map((m) => (
+          {loading && <MapsSkeleton />}
+          {error && (
+            <MapsNotice tone="err">Could not load maps: {error}</MapsNotice>
+          )}
+          {!loading && !error && items.length === 0 && (
+            <p style={{ color: BODY, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
+          )}
+          {!loading && !error && items.length > 0 && visibleItems.length === 0 && (
+            <p style={{ color: BODY, fontSize: FS.sm }}>No maps match these filters. Clear a facet to widen the search.</p>
+          )}
+
+          {!loading && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}>
+        {visibleItems.map((m) => (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
               {m.backdrop_kind === 'image' && m.thumb_url ? (
@@ -194,7 +276,7 @@ export default function GalleryMaps({ onNavigate }) {
                 </div>
               )}
               <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '2px 6px' }}>
-                {m.kind === 'map_with_campaign' ? 'Map + Campaign' : 'Blank map'}
+                {m.kind === 'map_with_campaign' ? 'Map and campaign' : 'Blank map'}
               </span>
             </div>
             <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.xs, flex: 1 }}>
@@ -229,7 +311,11 @@ export default function GalleryMaps({ onNavigate }) {
             </div>
           </div>
         ))}
+          </div>
+          )}
+        </main>
       </div>
+      </>
       )}
     </div>
   );
