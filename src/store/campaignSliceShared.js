@@ -57,6 +57,22 @@ export function findActiveCampaign(campaigns, campaignId) {
   return isCampaignActive(campaign) ? campaign : null;
 }
 
+/**
+ * Pick which campaign the Realm should auto-resume on entry: the one the user
+ * last opened if it still resolves to an active campaign, else the
+ * most-recently-updated active campaign (the campaign list arrives ordered
+ * updated_at-desc), else null. `activeCampaigns` is the already-filtered list of
+ * the user's selectable campaigns. A stale or cross-user lastActiveCampaignId
+ * (not in the list) safely falls through to the most-recent campaign.
+ */
+export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
+  if (!Array.isArray(activeCampaigns) || activeCampaigns.length === 0) return null;
+  if (lastActiveCampaignId && activeCampaigns.some(c => c?.id === lastActiveCampaignId)) {
+    return lastActiveCampaignId;
+  }
+  return activeCampaigns[0]?.id || null;
+}
+
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];

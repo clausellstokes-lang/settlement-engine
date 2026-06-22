@@ -113,6 +113,11 @@ export const useStore = create(
             // anonymous → intermediate progression. Persist it so the signal
             // survives reloads instead of resetting to 0 every session.
             lifetimeNarrateCount: state.lifetimeNarrateCount,
+            // The last campaign the user opened, so the Realm resumes their
+            // last-used campaign + map on a return visit. A single id string;
+            // validated against the loaded campaigns before use, so a stale or
+            // cross-user value safely falls back to the most-recent campaign.
+            lastActiveCampaignId: state.lastActiveCampaignId,
           }),
           // Deep-merge the durable bags (config / userPrefs / productPrefs) so a
           // persisted value overlays the slice defaults WITHOUT clobbering keys

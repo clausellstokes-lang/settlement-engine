@@ -24,6 +24,7 @@ import { isCanonSave } from '../domain/campaign/canon.js';
 import { SP, CARD, BORDER, R } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
+import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
 import { useRealmInspector, ADVANCE_ERROR_TEXT } from '../hooks/useRealmInspector.js';
@@ -443,6 +444,11 @@ export default function WorldMap({ onNavigate } = {}) {
   // Empty-state activation (P1/P8): the no-campaign states get a real first click
   // (create-and-select / select-first). Hooked out to hold the size ratchet.
   const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast });
+
+  // Premium / elevated auto-resume: on a cold Realm entry, reopen the campaign
+  // the user last used so its map loads first (sets the active id; the mount-sync
+  // effect below paints the saved map). No-ops when a campaign is already active.
+  useCampaignAutoResume({ canManageCampaigns, activeCampaigns, activeCampaignId });
 
   // On entry to the map (bridge ready) — and whenever the active campaign
   // resolves — re-sync the map. With a campaign active, its saved snapshot is

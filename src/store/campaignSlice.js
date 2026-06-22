@@ -172,6 +172,12 @@ export const createCampaignSlice = (set, get) => {
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
+  /** The last campaign the user actually opened. Unlike activeCampaignId (which
+   *  is session-only and resets to null on reload), this IS persisted, so the
+   *  Realm can auto-resume the campaign + map the user last used on a return
+   *  visit. Set by setActiveCampaign on a real selection; never cleared on a
+   *  blank (id=null). */
+  lastActiveCampaignId: null,
   /** One-shot: which WorldMap workspace ('map'|'news'|'pulse') an outside view
    *  wants opened on arrival (e.g. the Settlements "Advance Time" button asks
    *  for 'news'). WorldMap reads & clears it on mount. Session-only — NOT in
@@ -646,6 +652,10 @@ export const createCampaignSlice = (set, get) => {
     set(state => {
       const campaign = findActiveCampaign(state.campaigns, id);
       state.activeCampaignId = id && campaign ? id : null;
+      // Remember the last campaign actually opened so the Realm can resume it on
+      // a later visit. Never cleared on a blank (id=null) selection, so blanking
+      // the map doesn't forget which campaign to resume next time.
+      if (id && campaign) state.lastActiveCampaignId = id;
     }),
 
   /** Ask WorldMap to open on a specific workspace the next time it mounts with
