@@ -29,7 +29,7 @@ import { t } from '../copy/index.js';
 import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
-import { buildNextSteps } from './generate/WizardNextSteps.jsx';
+import { buildNextSteps } from './generate/nextSteps.js';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
 // Retoned for the dark-ink coach card: light parchment tones that clear AA on INK.
@@ -81,14 +81,22 @@ export default function PostGenCoach() {
   if (dismissedThisSession) return null;
   if (!settlement) return null;
 
-  const isLast = step === STEPS.length - 1;
-  const stepDef = STEPS[step];
-  // Folded "what's next" checklist for the final step.
+  // Coach panels: two intro steps (read the dossier, watch the simulation), then
+  // each forward "what's next" move (save, export, refine, place) as its own
+  // step — one idea per panel, instead of a single checklist screen.
   const signedIn = !!authTier && authTier !== 'anon';
   const saved = activeSaveId != null
     || (Array.isArray(savedSettlements)
         && savedSettlements.some(e => e?.name === settlement.name && e?.tier === settlement.tier));
   const guide = buildNextSteps({ settlement, canSave, signedIn, saved });
+  const panels = [
+    ...STEPS.slice(0, 2).map(s => ({ title: t(s.titleKey), body: t(s.bodyKey), primary: false })),
+    ...guide.steps.map((s2, i) => ({ title: s2.label, body: s2.hint, primary: i === 0 })),
+  ];
+  const total = panels.length;
+  const safeStep = Math.min(step, total - 1);
+  const cur = panels[safeStep];
+  const isLast = safeStep === total - 1;
 
   function close() {
     setDismissedThisSession(true);
@@ -156,50 +164,34 @@ export default function PostGenCoach() {
           letterSpacing: '0.08em', textTransform: 'uppercase',
           marginBottom: 4,
         }}>
-          Step {step + 1} of {STEPS.length}
+          Step {safeStep + 1} of {total}
         </div>
         <h3 id="postgen-coach-title" style={{
           margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
           color: PARCH,
         }}>
-          {isLast ? guide.headline : t(stepDef.titleKey)}
+          {cur.title}
         </h3>
-        {isLast ? (
-          // The folded "what's next" checklist: the forward moves that build on
-          // this dossier (save, export, refine, place). Save leads with a gold
-          // left-rule + weight; the rest are quiet parchment rows. Guidance, not
-          // buttons — the canonical Save / Buy / toolbar controls keep their homes.
-          <ul style={{
-            listStyle: 'none', margin: `${SP.sm}px 0 0`, padding: 0,
-            display: 'flex', flexDirection: 'column', gap: SP.sm,
-          }}>
-            {guide.steps.map((s2, i) => (
-              <li key={s2.id} style={{
-                paddingLeft: SP.md,
-                borderLeft: `2px solid ${i === 0 ? GOLD : 'rgba(201,162,76,0.30)'}`,
-              }}>
-                <div style={{ fontSize: FS.sm, fontWeight: i === 0 ? 800 : 700, color: i === 0 ? PARCH : BODY, lineHeight: 1.3 }}>{s2.label}</div>
-                <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.4 }}>{s2.hint}</div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p style={{
-            margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
-            lineHeight: 1.55,
-          }}>
-            {t(stepDef.bodyKey)}
-          </p>
-        )}
+        {/* One idea per panel. The first forward move (Save) gets a gold left-rule
+            + weight so it reads as the key next step; the rest are quiet rows. */}
+        <p style={{
+          margin: `${SP.sm}px 0 0`, fontSize: FS.sm,
+          color: cur.primary ? PARCH : BODY,
+          fontWeight: cur.primary ? 600 : 400,
+          lineHeight: 1.55,
+          ...(cur.primary ? { paddingLeft: SP.md, borderLeft: `2px solid ${GOLD}` } : null),
+        }}>
+          {cur.body}
+        </p>
 
         {/* Progress dots */}
-        <div style={{ display: 'flex', gap: 6, marginTop: SP.md }} aria-hidden="true">
-          {STEPS.map((_, i) => (
+        <div style={{ display: 'flex', gap: 6, marginTop: SP.md, flexWrap: 'wrap' }} aria-hidden="true">
+          {panels.map((_, i) => (
             <span
               key={i}
               style={{
                 width: 6, height: 6, borderRadius: '50%',
-                background: i === step ? GOLD : 'rgba(140,111,50,0.30)',
+                background: i === safeStep ? GOLD : 'rgba(140,111,50,0.30)',
                 transition: 'background 0.15s',
               }}
             />

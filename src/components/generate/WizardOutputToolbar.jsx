@@ -75,15 +75,16 @@ export function WizardOutputToolbar({
         >
           <span aria-hidden="true">↻ </span>Regenerate draft
         </Button>
-        {/* "New" is a reset (start over), not the high-value action — a quiet
-            outline. Save (below the dossier) is the one primary. */}
+        {/* "New Draft" restarts in the same path you chose (instant / Basic /
+            Advanced) with a clean slate — a quiet outline. Save (below the
+            dossier) is the one primary. */}
         <Button
           variant="secondary"
           size="md"
           onClick={handleNewSettlement}
-          title="Start a new settlement from the Create landing"
+          title="Start a fresh draft in the same generation path. Your current configuration is cleared."
         >
-          New
+          New Draft
         </Button>
       </div>
     </div>

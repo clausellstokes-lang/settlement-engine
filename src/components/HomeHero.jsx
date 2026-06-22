@@ -81,6 +81,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
+  const setEntryPath = useStore(s => s.setEntryPath);
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
   // The WelcomeBackCard "Open" CTA selects a saved
@@ -121,6 +122,10 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       // Signed-in users go to 'basic' (renamed from 'quick'); anon
       // also uses 'basic' so the post-hero state shows them the same
       // single-step flow if they navigate back to the wizard.
+      // Instant path: Back / New Draft return to the Create landing, not the
+      // Basic config panel (wizardMode is still set to 'basic' so Regenerate has
+      // a config to re-roll, but entryPath is the source of truth for exit).
+      setEntryPath('instant');
       setWizardMode('basic');
       updateConfig({ settType: pickedSize });
       generate();
@@ -429,7 +434,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                   type="button"
                   variant="ghost"
                   size="sm"
-                  onClick={() => setWizardMode('advanced')}
+                  onClick={() => { setEntryPath('advanced'); setWizardMode('advanced'); }}
                   style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'underline', minHeight: 44 }}
                 >
                   Configure instead →

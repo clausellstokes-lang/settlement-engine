@@ -1,12 +1,12 @@
 /**
  * wizardNextSteps.test.js — P134 / W-4 contract over the pure next-step
- * builder. WizardNextSteps renders a post-generate "what's next" guide;
- * buildNextSteps() derives the ordered checklist from settlement + save/
- * auth state. Tested here in isolation (no DOM).
+ * builder. buildNextSteps() derives the ordered "what's next" checklist
+ * from settlement + save/auth state; it is folded into the final step of
+ * PostGenCoach. Tested here in isolation (no DOM).
  */
 
 import { describe, it, expect } from 'vitest';
-import { buildNextSteps } from '../../src/components/generate/WizardNextSteps.jsx';
+import { buildNextSteps } from '../../src/components/generate/nextSteps.js';
 
 const ids = (g) => g.steps.map(s => s.id);
 const stepById = (g, id) => g.steps.find(s => s.id === id);

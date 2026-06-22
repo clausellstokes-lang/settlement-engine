@@ -34,7 +34,6 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import Button from '../primitives/Button.jsx';
 import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
@@ -101,14 +100,9 @@ export default function PipelineReveal({ onComplete }) {
     return () => clearInterval(id);
   }, [steps.length, onComplete]);
 
-  // Esc dismisses immediately — the power-user fast-path the docstring promised
-  // but never implemented (a repeat-regenerating GM shouldn't sit through the
-  // ~2s reveal every time). A visible "Skip" affordance offers the same.
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onComplete?.(); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onComplete]);
+  // No skip / Esc fast-path: the reveal plays to completion so the first dossier
+  // view is the finished settlement, not a half-played pipeline. It auto-dismisses
+  // when playback finishes (the interval effect above calls onComplete).
 
   if (!steps.length) return null;
 
@@ -117,7 +111,10 @@ export default function PipelineReveal({ onComplete }) {
       role="status"
       aria-live="polite"
       style={{
-        position: 'fixed', inset: 0, zIndex: 99999,
+        // Sits below the sticky top nav (z-index 50) so the header stays visible
+        // through the reveal — the loading screen is the content area, not a full
+        // viewport takeover.
+        position: 'fixed', inset: 0, zIndex: 45,
         background: INK_DEEP,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontFamily: sans, color: swatch['#C8B098'],
@@ -167,14 +164,6 @@ export default function PipelineReveal({ onComplete }) {
             background: GOLD, transition: 'width 0.3s',
           }} />
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onComplete?.()}
-          style={{ marginTop: SP.lg, color: GOLD, fontFamily: sans, fontSize: FS.xs, letterSpacing: '0.04em' }}
-        >
-          Skip ▸ <span style={{ opacity: 0.6 }}>(Esc)</span>
-        </Button>
       </div>
     </div>
   );

@@ -42,6 +42,11 @@ export const createConfigSlice = (set, get) => ({
   // Wizard UI state (persisted)
   wizardStep: 0,                   // current step in the wizard
   wizardMode: null,                // null (card picker) | 'basic' (was 'quick') | 'advanced' | 'custom'
+  // How the CURRENT settlement was started: 'instant' (the one-click hero
+  // generate) | 'basic' | 'advanced'. Drives where Back / New Draft return to
+  // (instant -> Create landing; basic/advanced -> that config panel). Not
+  // persisted, mirrors wizardMode.
+  entryPath: null,
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,
@@ -75,6 +80,9 @@ export const createConfigSlice = (set, get) => ({
       // at the beginning.
       state.wizardStep = 0;
     }),
+
+  setEntryPath: (p) =>
+    set(state => { state.entryPath = p; }),
 
   setConfigPanelOpen: (open) =>
     set(state => { state.configPanelOpen = open; }),

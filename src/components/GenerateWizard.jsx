@@ -64,6 +64,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const activeSaveId  = useStore(s => s.activeSaveId);
   const config        = useStore(s => s.config);
   const wizardMode    = useStore(s => s.wizardMode);
+  const entryPath     = useStore(s => s.entryPath);
   const loadedFromSave = useStore(s => s.loadedFromSave);
   const importedNeighbour = useStore(s => s.importedNeighbour);
   const canSave       = useStore(s => s.canSave());
@@ -75,6 +76,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const generate        = useStore(s => s.generateSettlement);
   const setWizardStep   = useStore(s => s.setWizardStep);
   const setWizardMode   = useStore(s => s.setWizardMode);
+  const setEntryPath    = useStore(s => s.setEntryPath);
+  const resetConfig     = useStore(s => s.resetConfig);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
@@ -215,11 +218,19 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     setPendingExit(null);
     if (clearSettlement) clearSettlement();
     setShowOutput(false);
-    if (kind === 'new') {
-      setWizardMode(null);   // → Create landing: mode picker + instant generation
+    if (kind === 'back') {
+      // Back → where you generated from, choices intact. Instant generation has
+      // no config screen, so it returns to the Create landing; basic/advanced
+      // keep their wizardMode + config so you can tweak and re-roll.
+      if (entryPath === 'instant') { setWizardMode(null); setWizardStep(0); }
+    } else {
+      // New Draft → the SAME path you chose, but fresh: configs are cleared so
+      // none of your prior choices carry over.
+      setWizardMode(entryPath === 'instant' ? null : (entryPath || wizardMode || null));
+      resetConfig();
       setWizardStep(0);
     }
-  }, [clearSettlement, setWizardMode, setWizardStep]);
+  }, [clearSettlement, setWizardMode, setWizardStep, entryPath, wizardMode, resetConfig]);
 
   const requestExit = useCallback((kind) => {
     // Unsaved + generated → warn before discarding the random draft.
@@ -300,7 +311,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       // Cap the config stage to the shared page width — mirrors the dossier
       // branch (PAGE_MAX, below) so the input view is framed, not full-bleed (P12).
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
-        <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
+        <ChangeModeBar mode={wizardMode} onChangeMode={(m) => { if (m) setEntryPath(m); setWizardMode(m); }} />
 
         {/* The anon-in-panel "Free mode generates Thorp/Hamlet/Village" banner
             was removed: anon users never pick a mode, so this config-panel branch
