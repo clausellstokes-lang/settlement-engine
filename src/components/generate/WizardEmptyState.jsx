@@ -9,7 +9,7 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { SECOND, BORDER, CARD, SP, R, FS, LANDING_MAX } from '../theme.js';
+import { SECOND, BORDER, CARD, INK, BODY, sans, serif_, SP, R, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
@@ -77,15 +77,42 @@ export function WizardEmptyState({
           control?" affordance, so it renders in the quiet (non-large) variant —
           smaller compact cards, no background image, no hover-lift — rather than
           two large cards competing with the hero CTA for the squint-test winner. */}
+      {/* The mode picker reads as ONE parchment card matching the signed-in
+          instant-generator hero above it (same gradient, hairline, radius, and
+          soft shadow), with the two named modes as side-by-side buttons inside.
+          The heading sits a step below the hero's so the "roll now" CTA stays
+          the squint-test winner. */}
       {showModePicker && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, width: '100%', margin: '0 auto' }}>
-          <div className="sf-readable-strip" style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-            Want full control? Use one of the modes below.
-          </div>
+        <section
+          aria-label="Generation modes"
+          style={{
+            maxWidth: LANDING_MAX, margin: '0 auto',
+            padding: `${SP.xl}px ${SP.lg}px`,
+            background: 'linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.xl + 2,
+            boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
+            fontFamily: sans,
+            textAlign: 'center',
+          }}
+        >
+          <h2 style={{
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: FS.xl, color: INK, lineHeight: 1.2,
+          }}>
+            Want full control?
+          </h2>
+          <p style={{
+            margin: `${SP.xs}px auto 0`, maxWidth: 480,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.sm, color: BODY, lineHeight: 1.55,
+          }}>
+            Use one of the modes below.
+          </p>
           {/* This branch only renders when no mode is selected, so no card is
               active — ModeSelector reads `mode` as undefined. */}
           <ModeSelector mode={undefined} onModeChange={setWizardMode} />
-        </div>
+        </section>
       )}
       {/* Anonymous visitors get instant generation (the hero) only; Basic and
           Advanced are gated to signed-in users. Surface the (free) path so the

@@ -55,7 +55,7 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
             onClick={() => onModeChange(id)}
             className={`sf-mode-card${large ? ` mode-card-bg${active ? ' is-active' : ''}` : ''}`}
             style={{
-              flex: large ? '1 1 280px' : '1 1 200px',
+              flex: large ? '1 1 280px' : '1 1 150px',
               maxWidth: large ? 360 : 260,
               minHeight: 44,
               padding: large ? `${SP.xxl}px ${SP.xl}px` : `${SP.xl - 2}px ${SP.lg}px`,

@@ -421,26 +421,9 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 </span>
               </p>
             )}
-            {/* Signed-in scent to the expert accelerator. The instant CTA above is
-                the dominant "roll now" path; this subordinate link routes the
-                paying GM into the layered config panel (setWizardMode WITHOUT
-                generating) so their depth isn't hidden behind a generate-then-back
-                detour. Ghost variant keeps it clearly lower in the hierarchy. */}
-            {!isAnon && (
-              <p style={{
-                margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
-              }}>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => { setEntryPath('advanced'); setWizardMode('advanced'); }}
-                  style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'underline', minHeight: 44 }}
-                >
-                  Configure instead →
-                </Button>
-              </p>
-            )}
+            {/* The Basic/Advanced mode picker sits directly below this hero for
+                signed-in GMs, so the expert path is already one tap away — no
+                subordinate "configure instead" link needed here. */}
           </>
         )}
       </div>
