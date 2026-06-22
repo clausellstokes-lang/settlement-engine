@@ -16,7 +16,7 @@
 
 import { useStore } from '../../store/index.js';
 import { ARCHETYPES, ARCHETYPE_GROUPS, archetypePatch } from './characterPresets.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const PARCHMENT = swatch['#F7F0E4'];
@@ -73,6 +73,9 @@ export default function CharacterPresetCard() {
                 const a = ARCHETYPES.find(x => x.key === key);
                 if (!a) return null;
                 const on = active === key;
+                // Selected chip uses the `gold` variant's own (now WCAG-passing)
+                // colors — no inline color/background/border override, which is
+                // what previously forced illegible gold-on-gold-wash text.
                 return (
                   <Button
                     key={key}
@@ -83,8 +86,7 @@ export default function CharacterPresetCard() {
                     title={a.desc}
                     style={{
                       fontSize: FS.xs, padding: '4px 10px', borderRadius: R.md, minHeight: 'auto',
-                      border: `1px solid ${on ? GOLD : BORDER2}`, background: on ? `${GOLD}18` : CARD,
-                      color: on ? GOLD : SECOND, fontWeight: on ? 700 : 500, fontFamily: sans,
+                      fontWeight: on ? 700 : 500, fontFamily: sans,
                     }}
                   >
                     {a.name}

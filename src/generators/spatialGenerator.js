@@ -84,7 +84,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     quarters.push({
       name:      'Alehouse & Common',
       location:  'Village centre',
-      desc:      'The alehouse and a scrap of common ground — the social heart of the settlement',
+      desc:      'The alehouse and a scrap of common ground: the social heart of the settlement',
       landmarks: ['Common well', 'Alehouse', 'Notice post'],
     });
   }

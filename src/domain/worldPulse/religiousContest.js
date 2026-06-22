@@ -367,7 +367,7 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
       targetSaveId: convertId,
       severity: clamp01(0.45 + (1 - cOrthodoxy) * 0.25),
       headline: `${nameFor(convertId)} converts to the faith of ${winnerSnapshot.name || nameFor(winnerHomeId)}`,
-      summary: `${nameFor(winnerHomeId)}'s creed — ${winnerSnapshot.name || 'a foreign faith'} — has displaced the old orthodoxy in ${nameFor(convertId)}.`,
+      summary: `${nameFor(winnerHomeId)}'s creed (${winnerSnapshot.name || 'a foreign faith'}) has displaced the old orthodoxy in ${nameFor(convertId)}.`,
       reasons: [
         `${winnerSnapshot.name || nameFor(winnerHomeId)} (${winnerSnapshot.rankAxis || 'minor'}) won the faith contest over ${nameFor(convertId)}.`,
         `${nameFor(convertId)}'s orthodoxy ${cOrthodoxy.toFixed(2)} could not hold its flock.`,

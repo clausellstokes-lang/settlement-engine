@@ -65,7 +65,7 @@ function deriveRoadImportance(settlement, causal, contributors) {
   let band = 'low';
   if (access === 'major' || trade >= 70) {
     band = 'critical';
-    contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'critical', reason: 'Major trade route AND high trade connectivity — roads are critical.' });
+    contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'critical', reason: 'Major trade route and high trade connectivity. Roads are critical.' });
   } else if (access === 'minor' || access === 'standard' || access === 'road' || trade >= 55) {
     band = 'major';
     contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'major', reason: 'Settled trade route presence; roads are major.' });
@@ -124,7 +124,7 @@ function deriveRegionalAuthority(settlement, contributors) {
     contributors.push({
       source: 'regionalGraph',
       effect: 'authority_detected',
-      reason: `${authorities.length} authority link(s) — map should render hierarchy.`,
+      reason: `${authorities.length} authority link(s). Map should render hierarchy.`,
     });
   }
   return authorities;
@@ -150,7 +150,7 @@ function deriveHazardMarkers(settlement, contributors) {
     contributors.push({
       source: 'threatProfile',
       effect: 'hazards_present',
-      reason: `${out.length} threat(s) above moderate severity — map should pin them.`,
+      reason: `${out.length} threat(s) above moderate severity. Map should pin them.`,
     });
   }
   return out;
@@ -227,11 +227,11 @@ export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; 
 export function summarizeMap(settlement) {
   const m = deriveMapProfile(settlement);
   return [
-    `Inputs — terrain: ${m.inputs.terrain || 'unset'}; biome: ${m.inputs.biome || 'unset'}; trade access: ${m.inputs.tradeRouteAccess || 'unset'}; monster threat: ${m.inputs.monsterThreat || 'unset'}.`,
-    `Roads — ${m.outputs.roadImportance} importance.`,
-    `Terrain defense — ${m.outputs.defensiveTerrain}.`,
-    `Regional authorities — ${m.outputs.regionalAuthority.length}.`,
-    `Hazards pinned — ${m.outputs.hazardMarkers.length}.`,
-    `Suggested features — ${m.outputs.suggestedFeatures.map(f => f.feature).join(', ') || 'none'}.`,
+    `Inputs: terrain: ${m.inputs.terrain || 'unset'}; biome: ${m.inputs.biome || 'unset'}; trade access: ${m.inputs.tradeRouteAccess || 'unset'}; monster threat: ${m.inputs.monsterThreat || 'unset'}.`,
+    `Roads: ${m.outputs.roadImportance} importance.`,
+    `Terrain defense: ${m.outputs.defensiveTerrain}.`,
+    `Regional authorities: ${m.outputs.regionalAuthority.length}.`,
+    `Hazards pinned: ${m.outputs.hazardMarkers.length}.`,
+    `Suggested features: ${m.outputs.suggestedFeatures.map(f => f.feature).join(', ') || 'none'}.`,
   ];
 }

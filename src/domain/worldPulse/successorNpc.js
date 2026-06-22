@@ -18,7 +18,7 @@ const FIRST_NAMES = Object.freeze([
 // Dispositions that are NOT in CORRUPTIBLE_FLAWS — a successor won't instantly relapse.
 const HONEST_DOMINANT = Object.freeze(['diligent', 'earnest', 'principled', 'vigilant', 'dutiful', 'steadfast', 'plain-spoken']);
 const HONEST_FLAW = Object.freeze(['stubborn', 'proud', 'aloof', 'blunt', 'rigid', 'severe']);
-const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal — determined to stay above suspicion.';
+const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal. Determined to stay above suspicion.';
 
 /** Build a fresh successor for an ousted NPC, inheriting their seat. */
 export function successorNpc(ousted = {}, rng) {

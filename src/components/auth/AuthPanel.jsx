@@ -19,7 +19,7 @@
 import { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, GOLD_BG, MUTED, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
+import { GOLD, GOLD_TXT, GOLD_BG, MUTED, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
@@ -64,6 +64,10 @@ export default function AuthPanel({
   const [loading, setLoading] = useState(false);
   const [authMethod, setAuthMethod] = useState('magic'); // 'magic' | 'password'
   const [moreOpen, setMoreOpen] = useState(false);
+  // A successful magic-link send swaps the form for a dedicated "check your
+  // inbox" close (P9 peak/end) rather than re-rendering the same form under a
+  // green strip — a boolean, not the dual-purpose `message` string, gates it.
+  const [magicSent, setMagicSent] = useState(false);
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
@@ -72,6 +76,7 @@ export default function AuthPanel({
     setError(null);
     setMessage(null);
     setMoreOpen(false);
+    setMagicSent(false);
     if (onModeChange) onModeChange(next);
     else setMode(next);
   };
@@ -85,11 +90,14 @@ export default function AuthPanel({
     try {
       const result = await authOAuth(provider);
       if (result?.mock) {
-        setMessage(`OAuth (${provider}) is mocked in local mode. No real sign-in occurred.`);
+        // Dev-only branch (fires only when !isConfigured): keep it terse and
+        // free of engine-internal wording ("local mode" / "mocked") — a GM who
+        // somehow hits it still reads a plain next step, not an internals leak.
+        setMessage(t('auth.localMode'));
       }
       // Real mode: Supabase has navigated away; nothing more to do.
     } catch (e) {
-      setError(e.message || 'OAuth sign-in failed');
+      setError(e.message || t('auth.error.oauthFailed'));
     } finally {
       setLoading(false);
     }
@@ -103,7 +111,7 @@ export default function AuthPanel({
       await authSignIn(email.trim(), password, rememberMe);
       onAuthed?.();
     } catch (e) {
-      setError(e.message || 'Sign-in failed');
+      setError(e.message || t('auth.error.signInFailed'));
     } finally {
       setLoading(false);
     }
@@ -111,7 +119,7 @@ export default function AuthPanel({
 
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
-    if (password.length < 6) { setError('Password must be at least 6 characters'); return; }
+    if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
     setError(null);
     setLoading(true);
     try {
@@ -122,44 +130,73 @@ export default function AuthPanel({
         onAuthed?.();
       }
     } catch (e) {
-      setError(e.message || 'Sign-up failed');
+      setError(e.message || t('auth.error.signUpFailed'));
     } finally {
       setLoading(false);
     }
   };
 
   const handleResetPassword = async () => {
-    if (!email.trim()) { setError('Enter your email address'); return; }
+    if (!email.trim()) { setError(t('auth.error.emailRequired')); return; }
     setError(null);
     setLoading(true);
     try {
       await authResetPassword(email.trim());
-      setMessage('Check your email for a password reset link.');
+      setMessage(t('auth.reset.sent'));
     } catch (e) {
-      setError(e.message || 'Password reset failed');
+      setError(e.message || t('auth.error.resetFailed'));
     } finally {
       setLoading(false);
     }
   };
 
   const handleMagicLink = async () => {
-    if (!email.trim()) { setError('Enter your email address'); return; }
+    if (!email.trim()) { setError(t('auth.error.emailRequired')); return; }
     setError(null);
     setLoading(true);
     try {
       await authMagicLink(email.trim());
-      setMessage(`Check ${email.trim()} for a sign-in link. The link works for 1 hour.`);
+      setMagicSent(true);
     } catch (e) {
-      setError(e.message || 'Could not send sign-in link');
+      setError(e.message || t('auth.error.magicLinkFailed'));
     } finally {
       setLoading(false);
     }
   };
 
+  // Forward affordances out of the sent-state: re-fire the link, or clear back
+  // to the form to correct a mistyped address (P9 — a satisfying, actionable
+  // close, never a dead-end on an untouchable form).
+  const resendMagicLink = () => { setMagicSent(false); handleMagicLink(); };
+  const editEmail = () => { setMagicSent(false); setError(null); setMessage(null); };
+
   const submit = authMethod === 'magic'
     ? handleMagicLink
     : mode === 'signup' ? handleSignUp : handleSignIn;
   const onEnter = (e) => { if (e.key === 'Enter') submit(); };
+
+  // ── Magic-link sent ("check your inbox") ──────────────────────────────────
+  // The default auth path's close. Mirrors the verify branch shape (Mail glyph
+  // + status + next steps) so the most-common flow ends on a satisfying,
+  // actionable note rather than a flat form the user has no reason to touch.
+  if (magicSent) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
+        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
+        <Alert type="success">
+          {t('auth.magic.sent', { email: email.trim() })}
+        </Alert>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
+          <Button variant="ghost" size="sm" onClick={resendMagicLink} disabled={loading}>
+            {loading ? t('auth.button.working') : t('auth.button.resend')}
+          </Button>
+          <Button variant="ghost" size="sm" onClick={editEmail}>
+            {t('auth.button.differentEmail')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // ── Email verification (post sign-up "check your inbox") ──────────────────
   if (mode === 'verify') {
@@ -167,11 +204,11 @@ export default function AuthPanel({
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
         <Alert type="success">
-          We sent a confirmation link to <strong>{email}</strong>. Check your inbox and click the link to activate your account.
+          {t('auth.verify.sent', { email })}
         </Alert>
-        <AuthCTAButton variant="ghost" onClick={() => requestMode('signin')}>
-          Back to Sign In
-        </AuthCTAButton>
+        <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
+          {t('auth.button.backToSignIn')}
+        </Button>
       </div>
     );
   }
@@ -181,16 +218,16 @@ export default function AuthPanel({
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
         <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-          Enter your email and we'll send a link to reset your password.
+          {t('auth.reset.prose')}
         </p>
         {error && <Alert type="error">{error}</Alert>}
         {message && <Alert type="success">{message}</Alert>}
-        <Input type="email" placeholder="Email address" value={email} onChange={setEmail} />
+        <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} />
         <AuthCTAButton onClick={handleResetPassword} disabled={loading}>
-          {loading ? 'Sending...' : 'Send Reset Link'}
+          {loading ? t('auth.button.working') : 'Send reset link'}
         </AuthCTAButton>
         <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
-          Back to Sign In
+          {t('auth.button.backToSignIn')}
         </Button>
       </div>
     );
@@ -213,8 +250,13 @@ export default function AuthPanel({
                 flex: 1, padding: `${SP.sm}px 0`,
                 background: mode === id ? GOLD_BG : 'transparent',
                 border: 'none', cursor: 'pointer',
+                // Active state in two non-color channels (weight + a gold
+                // underline) so it survives the squint/grayscale test, not
+                // hue alone. GOLD_TXT/SECOND are the AA-legible label tokens
+                // (gold-500/MUTED fail 4.5:1 as control text).
+                borderBottom: mode === id ? `2px solid ${GOLD}` : '2px solid transparent',
                 fontSize: FS.sm, fontWeight: mode === id ? 700 : 500,
-                color: mode === id ? GOLD : MUTED, fontFamily: sans,
+                color: mode === id ? GOLD_TXT : SECOND, fontFamily: sans,
               }}
             >
               {label}
@@ -233,6 +275,13 @@ export default function AuthPanel({
       {message && <Alert type="success">{message}</Alert>}
 
       <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
+      {authMethod === 'magic' && (
+        // Plain gloss on the default path: name what happens next so the absent
+        // password field reads as deliberate, not missing.
+        <p style={{ fontSize: FS.xs, color: SECOND, margin: 0, lineHeight: 1.5 }}>
+          No password needed. We email you a sign-in link.
+        </p>
+      )}
       {authMethod === 'password' && (
         <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
       )}
@@ -256,7 +305,7 @@ export default function AuthPanel({
           Supabase dashboard (the wrapper maps "provider not enabled" to a safe
           message rather than throwing). */}
       {(showGoogle || showDiscord) && (
-        <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+        <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           {showGoogle && (
             <OAuthButton
@@ -282,17 +331,19 @@ export default function AuthPanel({
         size="sm"
         onClick={() => setMoreOpen(o => !o)}
         aria-expanded={moreOpen}
+        aria-controls="auth-more-options"
+        style={{ marginTop: SP.xs }}
       >
         {moreOpen ? t('auth.button.moreClose') : t('auth.button.moreOpen')}
       </Button>
 
       {moreOpen && (
-        <div style={{
-          display: 'flex', flexDirection: 'column', gap: SP.sm,
-          padding: `${SP.md}px ${SP.md}px`,
-          background: 'rgba(248, 240, 220, 0.35)',
-          border: `1px solid ${BORDER}`,
-          borderRadius: R.md,
+        // Revealed sub-options under the CTA — a spaced/indented cluster, not a
+        // framed panel-in-panel (P5 anti-box-soup): the indent + spacing carry
+        // the subordination, no border/tint card needed.
+        <div id="auth-more-options" style={{
+          display: 'flex', flexDirection: 'column', gap: SP.xs,
+          paddingLeft: SP.md,
           fontSize: FS.xs, color: SECOND,
         }}>
           <Button
@@ -317,7 +368,7 @@ export default function AuthPanel({
       )}
 
       {!isConfigured && (
-        <div style={{ textAlign: 'center', fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
+        <div style={{ textAlign: 'center', fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
           {t('auth.localMode')}
         </div>
       )}

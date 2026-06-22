@@ -20,17 +20,12 @@
  */
 
 import { useState } from 'react';
-import { X, SlidersHorizontal, CheckSquare } from 'lucide-react';
-import { sans, FS, SP, R, swatch } from '../theme.js';
+import { X, SlidersHorizontal, CheckSquare, Search } from 'lucide-react';
+import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-
-const BORDER = swatch['#E8D9B0'];
-const PARCH = swatch['#FBF5E6'];
-const INK = swatch['#1B1408'];
-const MUTED = swatch['#9C8068'];
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -177,23 +172,25 @@ export default function LibraryToolbar({
 
   return (
     <div style={{
+      // Tint-only strip (no perimeter border) — matches the demoted, borderless
+      // SaveQuotaMeter so the framing band recedes under blur and the town cards
+      // below survive as the focal layer. The inner inputs carry their own borders.
       padding: SP.sm,
       background: PARCH,
-      border: `1px solid ${BORDER}`,
       borderRadius: R.sm,
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       fontFamily: sans, fontSize: FS.xs, color: INK,
     }}>
       {/* Search */}
       <div style={{
-        flex: 1, minWidth: 180,
+        flex: 1, minWidth: 180, minHeight: 44, boxSizing: 'border-box',
         display: 'flex', alignItems: 'center', gap: SP.xs,
-        padding: '4px 8px',
+        padding: '8px',
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
       }}>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>🔍</span>
+        <Search size={13} color={MUTED} aria-hidden="true" style={{ flexShrink: 0 }} />
         <input
           type="search"
           value={query}
@@ -220,7 +217,8 @@ export default function LibraryToolbar({
       {/* Sort */}
       <label htmlFor="library-sort" style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
-        padding: '4px 8px',
+        minHeight: 44, boxSizing: 'border-box',
+        padding: '8px',
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
@@ -270,10 +268,11 @@ export default function LibraryToolbar({
         </Button>
       )}
 
-      {/* Result count */}
+      {/* Result count — BODY (ink-600, 9.95:1), not MUTED (3.57:1, fails AA):
+          the visible/total count is a scan fact the GM reads, not chrome (P7). */}
       <span style={{
         marginLeft: 'auto',
-        fontSize: FS.xs, color: MUTED,
+        fontSize: FS.xs, color: BODY,
       }}>
         {visibleCount === totalCount
           ? `${totalCount} settlement${totalCount === 1 ? '' : 's'}`
@@ -292,19 +291,19 @@ export default function LibraryToolbar({
           }}
         >
           {/* Phase */}
-          <Button size="sm" variant={filters?.canonOnly ? 'success' : 'secondary'} aria-pressed={!!filters?.canonOnly} onClick={() => toggleFilter('canonOnly')}>Canon</Button>
-          <Button size="sm" variant={filters?.draftOnly ? 'gold' : 'secondary'} aria-pressed={!!filters?.draftOnly} onClick={() => toggleFilter('draftOnly')}>Draft</Button>
-          <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')}>Pending edits</Button>
+          <Button size="sm" variant={filters?.canonOnly ? 'success' : 'secondary'} aria-pressed={!!filters?.canonOnly} onClick={() => toggleFilter('canonOnly')} title="Show only canon settlements: names locked, the campaign timeline started.">Canon</Button>
+          <Button size="sm" variant={filters?.draftOnly ? 'gold' : 'secondary'} aria-pressed={!!filters?.draftOnly} onClick={() => toggleFilter('draftOnly')} title="Show only drafts: not yet canonized, still freely editable.">Draft</Button>
+          <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
           {/* Structure */}
-          <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')}>🔗 Linked</Button>
+          <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
           {/* Living world */}
-          <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')}>At war</Button>
-          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')}>Has deity</Button>
-          <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')}>In crisis</Button>
+          <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
+          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a primary deity.">Has deity</Button>
+          <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
           {/* Campaign selector */}
           {campaigns.length > 0 && (
-            <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, padding: '4px 8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
+            <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
               <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
               <select
                 id="library-campaign-filter"

@@ -113,7 +113,7 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
           </ul>
         ) : (
           <div style={{ fontSize: FS.sm, color: MUTED }}>
-            The causal substrate held steady — no variable moved.
+            The causal substrate held steady. No variable moved.
           </div>
         )}
 

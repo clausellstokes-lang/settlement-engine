@@ -30,17 +30,26 @@ export default function DossierNarrativeBanner({
           return (
             <div
               style={{
+                // ONE violet AI-layer treatment, matching the action band: a
+                // gradient tint + a single violet LEFT accent, no full or bottom
+                // border. Spacing (a bottom margin), not a hairline, separates the
+                // banner from tab content — so the narrative layer never paints two
+                // stacked violet bands with their own bottom borders (false floor).
                 padding: '12px 18px',
-                borderBottom: '1px solid rgba(160,100,220,0.2)',
+                margin: '0 0 12px',
+                borderLeft: '3px solid rgba(123,79,207,0.70)',
                 background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
                 opacity: aiRegenerating ? 0.55 : 1,
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#8A50B0'] }}>{'\u2726'}</span>
+                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#7B4FCF'] }}>{'\u2726'}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A50B0'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
-                    {showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'}
+                  {/* One label vocabulary across every narrative-layer shell (the
+                      action strip, this banner, the per-tab note): "Narrative
+                      Layer" in one violet treatment. */}
+                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#7B4FCF'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                    Narrative Layer
                   </div>
                   {showThesis
                     ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) => (

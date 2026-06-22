@@ -95,7 +95,7 @@ const evaluateInstitutionDeps = (exploitation, terrain) => {
       product: chain.intermediateGoods.join(', '),
       chain:   chain.rawResource,
       value:   'medium',
-      reason:  'Partial processing - exports semi-finished goods',
+      reason:  'Partial processing. Exports semi-finished goods',
     });
   });
 
@@ -233,7 +233,7 @@ export const generateResourceAnalysis = (
     const unexploited = exploitation.unexploited || [];
     if (unexploited.length > 0) {
       priorityNotes.push(
-        `Strong economic focus creates pressure to develop untapped ${unexploited[0].rawResource || 'resources'} — significant trade opportunity.`
+        `Strong economic focus presses to work the untapped ${unexploited[0].rawResource || 'resources'}: a real trade opportunity.`
       );
     }
   }
@@ -242,7 +242,7 @@ export const generateResourceAnalysis = (
   if ((priorityToCategory(pri.economy) === 'low' || priorityToCategory(pri.economy) === 'very_low') &&
       (exploitation.partiallyExploited?.length || 0) > 0) {
     priorityNotes.push(
-      'Weak economic focus leaves several resource chains underdeveloped — production capacity exists but is not being realised.'
+      'Weak economic focus leaves several resource chains underdeveloped. The capacity is there; nothing draws it out.'
     );
   }
 
@@ -253,7 +253,7 @@ export const generateResourceAnalysis = (
     );
     if (strategicGaps.length > 0) {
       priorityNotes.push(
-        `Military focus highlights gap: ${strategicGaps[0].rawResource} processing is incomplete — strategic vulnerability.`
+        `Military focus exposes a gap: ${strategicGaps[0].rawResource} processing is incomplete. A strategic vulnerability.`
       );
     }
   }

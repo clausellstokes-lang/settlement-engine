@@ -11,7 +11,7 @@
  *     existing EventComposer, PrimaryDeityPicker, Timeline, etc.).
  *
  * Card order (plan §4.3):
- *   1. Causal State          — 4-dim header → 15-var grid.
+ *   1. Causal State          — 4-dim header → 16-var grid.
  *   2. Pressures & Strength  — + live granary + disposition (read via the
  *                              Substrate Engine altitude + EngineSections).
  *   3. Faith & Pantheon      — describeDeityEffects axis disclosure + the
@@ -56,7 +56,7 @@ import ProvenanceBlock from './ProvenanceBlock.jsx';
 import WorkshopGateToggle from './WorkshopGateToggle.jsx';
 import Button from '../primitives/Button.jsx';
 
-import { INK, MUTED, BODY, SECOND, BORDER, CARD, CARD_HDR, GOLD, sans, FS, R, SP, swatch } from '../theme.js';
+import { INK, MUTED, BODY, SECOND, BORDER, CARD, CARD_HDR, GOLD_TXT, sans, FS, R, SP, swatch } from '../theme.js';
 
 // ── Collapsible card shell ───────────────────────────────────────────────────
 
@@ -66,7 +66,7 @@ import { INK, MUTED, BODY, SECOND, BORDER, CARD, CARD_HDR, GOLD, sans, FS, R, SP
  *   editMode?: boolean, children: React.ReactNode,
  * }} props
  */
-function WorkshopCard({ id, title, hint, defaultOpen = false, editMode = false, children }) {
+function WorkshopCard({ id, title, hint, headline, defaultOpen = false, editMode = false, children }) {
   const [open, setOpen] = useState(defaultOpen);
   const Chevron = open ? ChevronDown : ChevronRight;
   return (
@@ -93,10 +93,21 @@ function WorkshopCard({ id, title, hint, defaultOpen = false, editMode = false, 
           textAlign: 'left', borderRadius: 0,
         }}
       >
-        <span style={{ flex: 1, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: INK }}>{title}</span>
+        <span style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: INK }}>{title}</span>
+          {/* Keyword-first headline fact (P6): a single de-emphasized line so the
+              collapsed rail is scannable without expansion — "who runs this town
+              / why is it tense" reads off the closed card. Hidden once open
+              (the card's own content then carries the detail). */}
+          {headline && !open && (
+            <span style={{ fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, color: BODY, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {headline}
+            </span>
+          )}
+        </span>
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase',
-          color: editMode ? GOLD : MUTED,
+          color: editMode ? GOLD_TXT : MUTED,
         }}>
           {editMode ? 'Edit' : 'Read'}
         </span>
@@ -129,7 +140,7 @@ function PremiumWriteHint({ onUpgrade }) {
           variant="ghost"
           size="sm"
           onClick={onUpgrade}
-          style={{ background: 'none', border: 'none', color: GOLD, fontWeight: 800, fontSize: FS.xxs, padding: 0, minHeight: undefined }}
+          style={{ background: 'none', border: 'none', color: GOLD_TXT, fontWeight: 800, fontSize: FS.xs }}
         >
           Upgrade
         </Button>
@@ -162,14 +173,34 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
   // read surface only.
   const showWrite = editMode && canEdit;
 
+  // Keyword-first headline facts for the collapsed cards (P6 scannability). Each
+  // is a single short fact pulled from the already-computed settlement data, so a
+  // GM can read "who runs this town / why is it tense" off the closed rail
+  // without expanding. All null-safe — a missing fact simply omits the line.
+  const rulerName = settlement.powerStructure?.governingName || null;
+  const pressureLine = (settlement.pressureSentence || '').trim() || null;
+  const deityName = settlement.patronDeity?.name || settlement.powerStructure?.patronDeity || null;
+  const eventCount = Array.isArray(settlement.eventLog) ? settlement.eventLog.length : 0;
+  const headlines = {
+    'causal-state': pressureLine,
+    'power-succession': rulerName ? `Ruler: ${rulerName}` : null,
+    'faith-pantheon': deityName ? `Patron: ${deityName}` : null,
+    'timeline-chronicle': eventCount > 0 ? `${eventCount} logged change${eventCount === 1 ? '' : 's'}` : null,
+  };
+
   return (
     <div data-testid="workshop-rail" style={{ marginBottom: SP.md }}>
       {/* 1 ── Causal State ──────────────────────────────────────────────────── */}
       <WorkshopCard
         id="causal-state"
         title="Causal State"
-        hint="The four-dimension health glance, then the fifteen causal variables beneath it. Drill into a variable for the engine's own “why”."
-        defaultOpen
+        headline={headlines['causal-state']}
+        hint="The four-dimension health glance, then the sixteen causal variables beneath it. Drill into a variable for the engine's own “why”."
+        // Open by default ONLY in edit mode. In the read-only View the dossier
+        // above is the hero (P1); the Workshop is the collapsed drill-down, so
+        // its first card stays a scent-bearing closed affordance rather than an
+        // upfront mechanics dump.
+        defaultOpen={showWrite}
         editMode={showWrite}
       >
         <ReadSystemStateBar settlement={settlement} />
@@ -178,6 +209,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           settlementId={saveId}
           worldState={worldState}
           regionalGraph={regionalGraph}
+          flat
         />
         <WhatChangedPanel settlement={settlement} />
       </WorkshopCard>
@@ -195,6 +227,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           worldState={worldState}
           regionalGraph={regionalGraph}
           forceLevel="expert"
+          flat
         />
         <EconomicsGranarySection settlement={settlement} />
         <DefenseWarFrontSection
@@ -216,6 +249,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       <WorkshopCard
         id="faith-pantheon"
         title="Faith & Pantheon"
+        headline={headlines['faith-pantheon']}
         hint="What this settlement's patron deity does to the substrate, and the controls to assign one and awaken the religion layer."
         editMode={showWrite}
       >
@@ -245,6 +279,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       <WorkshopCard
         id="power-succession"
         title="Power & Succession"
+        headline={headlines['power-succession']}
         hint="The ruler, the coup-risk forecast, the contenders, and the lineage of governments that came before."
         editMode={showWrite}
       >
@@ -274,8 +309,8 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           </>
         ) : (
           <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
-            In edit mode, the event composer applies in-world changes — declare war, install a ruler,
-            add an institution — each written to the timeline.
+            In edit mode, the event composer applies in-world changes: declare a war, install a ruler,
+            raze an institution. Each one lands on the timeline.
             <PremiumWriteHint onUpgrade={onUpgrade} />
           </div>
         )}
@@ -285,7 +320,8 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       <WorkshopCard
         id="timeline-chronicle"
         title="Timeline & Chronicle"
-        hint="The canon event log — every committed change, in order."
+        headline={headlines['timeline-chronicle']}
+        hint="The canon event log: every committed change, in order."
         editMode={showWrite}
       >
         {showWrite ? (

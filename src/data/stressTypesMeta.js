@@ -55,7 +55,7 @@ export const STRESS_TYPE_META = {
   infiltrated: {
     label: 'Infiltrated',
     historyColour: 'political',
-    viabilityNote: 'No economic impact yet. The infiltration is strategic, not extractive — so far.',
+    viabilityNote: 'No economic impact yet. The infiltration is strategic, not extractive. So far.',
   },
   plague_onset: {
     label: 'Disease Outbreak',

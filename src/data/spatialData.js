@@ -16,12 +16,12 @@ export const INSTITUTION_SPATIAL = [
     institution: "Docks/port facilities",
     requiredAccess: ["port", "river"],
     exception: "Airship docking (high magic)",
-    reason: "Dock facilities require navigable water — ocean coast or navigable river."
+    reason: "Dock facilities require navigable water (ocean coast or navigable river)."
   },
   {
     institution: "Fishmonger",
     requiredAccess: ["port", "river", "crossroads", "road"],
-    reason: "A fishmonger requires access to fresh fish — coastal, river, or trade route supply."
+    reason: "A fishmonger requires access to fresh fish (coastal, river, or trade route supply)."
   }
 ];
 
@@ -29,7 +29,7 @@ export const GATE_FEATURES = {
   "Gates (if walled)": {
     suggestionOnly: true,
     requires: ["Town walls", "City walls and gates", "Massive walls and fortifications"],
-    reason: "Gates are entry points in walls — walls must exist first."
+    reason: "Gates are entry points in walls. Walls must exist first."
   },
   Citadel: {
     requires: ["City walls and gates", "Massive walls and fortifications"],
@@ -47,7 +47,7 @@ export const GATE_FEATURES = {
     requires: ["Docks/port facilities"],
     requiresAccess: ["port"],
     reason: "Naval forces require port infrastructure. A river militia is not a navy.",
-    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked — it can have river patrols but not a navy."
+    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked and can have river patrols but not a navy."
   },
   "Multiple garrisons": {
     minTier: "city",
@@ -137,7 +137,7 @@ export const GATE_FEATURES = {
   "International trade center": {
     minTier: "metropolis",
     requires: ["Warehouse district", "Banking houses", "Multiple warehouse districts"],
-    reason: "Global trade requires major trade infrastructure — port access or substantial overland networksstructure with banking."
+    reason: "Global trade requires major trade infrastructure (port access or substantial overland networksstructure with banking)."
   },
   "Stock exchange (early)": {
     minTier: "metropolis",
@@ -146,14 +146,14 @@ export const GATE_FEATURES = {
   },
   "Docks/port facilities": {
     requiresAccess: ["port", "river"],
-    reason: "Docking facilities require waterfront access — ocean port or navigable river.",
+    reason: "Docking facilities require waterfront access (ocean port or navigable river).",
     accessViolationReason: "Docks require water access. This settlement has no river or coastal access."
   },
   "Major port": {
     requiresAccess: ["port"],
     requires: ["Docks/port facilities"],
     reason: "A major port requires both ocean access and existing dock infrastructure.",
-    accessViolationReason: "A major port requires coastal ocean access. River docks serve river trade only — they cannot become a major port."
+    accessViolationReason: "A major port requires coastal ocean access. River docks serve river trade only and cannot become a major port."
   },
   "Money changers": {
     minTier: "town",
@@ -323,7 +323,7 @@ export const GATE_FEATURES = {
   Mill: {
     minTier: "village",
     requires: ["Farmland", "Subsistence farming", "Market square", "Weekly market"],
-    reason: "A miller needs grain — either from local farmland or via market access."
+    reason: "A miller needs grain, either from local farmland or via market access."
   },
   "Mills (2-5)": {
     minTier: "town",
@@ -345,7 +345,7 @@ export const GATE_FEATURES = {
       "Subsistence farming",
       "Common grazing land"
     ],
-    reason: "A sawmill needs timber access — local forest, a market, or an agricultural economy to source bulk timber commercially."
+    reason: "A sawmill needs timber access (local forest, a market, or an agricultural economy to source bulk timber commercially)."
   },
   Theaters: {
     minTier: "city",
@@ -577,12 +577,12 @@ export const GATE_FEATURES = {
   "Planar embassy": {
     minTier: "metropolis",
     requires: ["Teleportation circle"],
-    reason: "Stable planar contact requires a permanent teleportation circle — no circle, no embassy."
+    reason: "Stable planar contact requires a permanent teleportation circle. No circle means no embassy."
   },
   "Planar traders": {
     minTier: "metropolis",
     requires: ["Teleportation circle"],
-    reason: "Extraplanar commerce arrives through a permanent teleportation circle — no circle, no planar trade."
+    reason: "Extraplanar commerce arrives through a permanent teleportation circle. No circle means no planar trade."
   },
   "Dragon resident": {
     minTier: "metropolis",

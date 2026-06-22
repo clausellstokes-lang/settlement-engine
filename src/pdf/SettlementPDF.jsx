@@ -91,7 +91,7 @@ export function SettlementPDF({
   // gates must pass; a dormant slice ⇒ no chapter ⇒ byte-identical.
   const showFaithWar = inc('faithWar') && !!vm.liveWorld;
   // The "Campaign State / War Room" variant promotes the State chapter to its
-  // layered causal-detail form (15-var grid + pressures). Every other variant
+  // layered causal-detail form (16-var grid + pressures). Every other variant
   // keeps the default 4-dim snapshot byte-identical.
   const stateCausalDetail = variant === 'campaign_state';
 

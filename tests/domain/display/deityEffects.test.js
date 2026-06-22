@@ -61,32 +61,32 @@ describe('describeDeityEffects — per-axis', () => {
 
   test('evil → corruption onset string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'evil' })).toContain(
-      "Evil — corrupts the faithful even without a thieves' guild",
+      "Evil, and corrupts the faithful even without a thieves' guild",
     );
   });
 
   test('good → corruption purge string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'good' })).toContain(
-      'Good — purges corruption, installing incorruptible successors',
+      'Good, and purges corruption, installing incorruptible successors',
     );
   });
 
   test('warlike → aggression string', () => {
     expect(describeDeityEffects({ temperamentAxis: 'warlike' })).toContain(
-      "Warlike — raises the realm's aggression",
+      "Warlike, and raises the realm's aggression",
     );
   });
 
   test('peacelike → aggression-tempering string', () => {
     expect(describeDeityEffects({ temperamentAxis: 'peacelike' })).toContain(
-      "Peacelike — tempers the realm's aggression",
+      "Peacelike, and tempers the realm's aggression",
     );
   });
 
   test('rank strings for major / minor / cult', () => {
-    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('Major — anchors religious authority');
-    expect(describeDeityEffects({ rankAxis: 'minor' })).toContain('Minor — lends modest religious authority');
-    expect(describeDeityEffects({ rankAxis: 'cult' })).toContain('Cult — a fringe following with little authority');
+    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('Major, and anchors religious authority');
+    expect(describeDeityEffects({ rankAxis: 'minor' })).toContain('Minor, and lends modest religious authority');
+    expect(describeDeityEffects({ rankAxis: 'cult' })).toContain('Cult: a fringe following with little authority');
   });
 
   test('ONLY a major god tightens magic legality', () => {
@@ -97,48 +97,48 @@ describe('describeDeityEffects — per-axis', () => {
 
   test('a warlike/evil major god is the OPENLY OPPOSED magic variant', () => {
     expect(describeDeityEffects({ rankAxis: 'major', temperamentAxis: 'warlike' })).toContain(
-      'Tightens magic legality — magic is openly opposed',
+      'Tightens magic legality: the art is openly opposed',
     );
     expect(describeDeityEffects({ rankAxis: 'major', alignmentAxis: 'evil' })).toContain(
-      'Tightens magic legality — magic is openly opposed',
+      'Tightens magic legality: the art is openly opposed',
     );
   });
 
   test('a full war-god lists alignment, temperament, rank, and magic in order', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major' });
     expect(out).toEqual([
-      "Evil — corrupts the faithful even without a thieves' guild",
-      "Warlike — raises the realm's aggression",
-      'Major — anchors religious authority',
-      'Tightens magic legality — magic is openly opposed',
+      "Evil, and corrupts the faithful even without a thieves' guild",
+      "Warlike, and raises the realm's aggression",
+      'Major, and anchors religious authority',
+      'Tightens magic legality: the art is openly opposed',
     ]);
   });
 
   // ── B5: the 4th axis (lawful/chaotic) → law_order ──────────────────────────
-  test('lawful → strengthens law & order', () => {
-    expect(describeDeityEffects({ lawAxis: 'lawful' })).toContain('Lawful — strengthens law & order');
+  test('lawful → strengthens law and order', () => {
+    expect(describeDeityEffects({ lawAxis: 'lawful' })).toContain('Lawful, and strengthens law and order');
   });
 
   test('chaotic → erodes order, tolerates corruption', () => {
-    expect(describeDeityEffects({ lawAxis: 'chaotic' })).toContain('Chaotic — erodes order, tolerates corruption');
+    expect(describeDeityEffects({ lawAxis: 'chaotic' })).toContain('Chaotic, and erodes order, tolerating corruption');
   });
 
   test('a law-neutral deity (or a legacy 3-axis deity with no lawAxis) says nothing about law', () => {
-    expect(describeDeityEffects({ lawAxis: 'neutral' }).some(s => /law & order|tolerates corruption/.test(s))).toBe(false);
+    expect(describeDeityEffects({ lawAxis: 'neutral' }).some(s => /law and order|tolerating corruption/.test(s))).toBe(false);
     // Legacy 3-axis deity: rank still speaks, but NO law string.
     const legacy = describeDeityEffects({ alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' });
-    expect(legacy.some(s => /law & order|tolerates corruption/.test(s))).toBe(false);
-    expect(legacy).toContain('Minor — lends modest religious authority');
+    expect(legacy.some(s => /law and order|tolerating corruption/.test(s))).toBe(false);
+    expect(legacy).toContain('Minor, and lends modest religious authority');
   });
 
   test('law string is APPENDED last, leaving the first four axes order stable', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', lawAxis: 'chaotic' });
     expect(out).toEqual([
-      "Evil — corrupts the faithful even without a thieves' guild",
-      "Warlike — raises the realm's aggression",
-      'Major — anchors religious authority',
-      'Tightens magic legality — magic is openly opposed',
-      'Chaotic — erodes order, tolerates corruption',
+      "Evil, and corrupts the faithful even without a thieves' guild",
+      "Warlike, and raises the realm's aggression",
+      'Major, and anchors religious authority',
+      'Tightens magic legality: the art is openly opposed',
+      'Chaotic, and erodes order, tolerating corruption',
     ]);
   });
 });

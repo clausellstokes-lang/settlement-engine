@@ -716,7 +716,7 @@ const buildHistoricalEvent = (
         const commodity = economicState?.tradeCommodity || 'key goods';
         selected.push({
           ...tmpl,
-          description: `The supply of ${commodity} — the settlement's economic backbone — is under pressure. ${economicViability.issues[0].message}`,
+          description: `The supply of ${commodity} (the settlement's economic backbone) is under pressure. ${economicViability.issues[0].message}`,
           specificIssue: economicViability.issues[0].message,
         });
         usedTypes.add('resource_scarcity');
@@ -1014,7 +1014,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         "Compact signatories' families still hold preferential market positions",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales — and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
@@ -1027,13 +1027,13 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     resourceEvents.push({
       name: 'The Great Construction',
       description:
-        "A period of ambitious stone construction transformed the settlement's character — walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+        "A period of ambitious stone construction transformed the settlement's character: walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
       lastingEffects: [
         "Quarrymen's guild retains unusual civic influence",
         "Architectural legacy of the construction period defines the settlement's visual character",
       ],
       plotHooks: [
-        'Something was sealed inside the walls during construction — deliberately',
+        'Something was sealed inside the walls during construction. Deliberately.',
         "The quarry foreman's descendants claim unpaid wages from the original commission",
       ],
       severity: ['major'],
@@ -1052,7 +1052,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         'Arcane regulatory body established with unusual local authority',
       ],
       plotHooks: [
-        'The incident was caused by deliberate misuse of the node — someone covered it up',
+        'The incident was caused by deliberate misuse of the node. Someone covered it up.',
         'The transformation affected a family lineage in ways that are only now becoming apparent',
       ],
       severity: ['major', 'catastrophic'],

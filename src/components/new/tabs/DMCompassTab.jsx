@@ -84,7 +84,7 @@ function IdentityMarkersPanel({ markers }) {
   return (
     <Section title="Identity Markers" accent="#1a5a28">
       <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 6, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Drop-in details the DM can sprinkle into description.
+        Concrete details to drop into a scene as you describe the place.
       </div>
       {markers.map((m, i) => (
         <BulletRow key={i} icon={MapPin} color="#1a5a28">{m}</BulletRow>
@@ -122,7 +122,7 @@ function ConnectionsMapPanel({ edges }) {
   return (
     <Section title="Connections Map" accent="#2a3a7a">
       <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Explicit edges between named entities. Useful for navigating politics at the table.
+        Named ties between people, factions, and institutions. A map for the table's politics.
       </div>
       {edges.map((e, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '5px 10px', borderBottom: i < edges.length - 1 ? '1px solid #e0d0b0' : 'none', flexWrap: 'wrap' }}>
@@ -159,7 +159,7 @@ export default function DMCompassTab({ settlement: s }) {
     // gentle empty state just in case.
     return (
       <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontSize: FS.sm, fontFamily: 'Nunito, sans-serif' }}>
-        No DM guidance yet. Generate the AI narrative to populate this tab.
+        No guidance yet. Run the Narrative Layer to draw it out.
       </div>
     );
   }

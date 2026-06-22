@@ -65,6 +65,10 @@ describe('Workshop — read/write boundary', () => {
     // The seven cards render their read surface (data-mode="view").
     expect(screen.getByTestId('workshop-rail')).toBeTruthy();
     expect(screen.getByTestId('workshop-card-causal-state').getAttribute('data-mode')).toBe('view');
+    // Per the P1 reorder, in the read-only View the Workshop cards start
+    // COLLAPSED (the dossier above is the hero; the rail is the collapsed
+    // drill-down). Open the Causal State card to reveal its read surface.
+    fireEvent.click(screen.getByTestId('workshop-card-causal-state').querySelector('button'));
     // A read surface (the substrate) is present...
     expect(screen.getAllByTestId('causal-view-tabs').length).toBeGreaterThan(0);
     // ...but the premium write controls are NOT mounted.

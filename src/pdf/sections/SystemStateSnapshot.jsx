@@ -85,9 +85,9 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm, causalDetai
 }
 
 /**
- * The 15-variable causal substrate grid — band-pill per variable with the
+ * The 16-variable causal substrate grid — band-pill per variable with the
  * top "why" contributor, pressured bands first. Reads deriveCausalState (the
- * SAME 15-var substrate the screen's Substrate sub-tab uses) so the printed
+ * SAME 16-var substrate the screen's Substrate sub-tab uses) so the printed
  * grid and the screen agree.
  */
 function CausalSubstrate({ settlement, vm }) {
@@ -104,7 +104,7 @@ function CausalSubstrate({ settlement, vm }) {
     <View style={{ marginTop: space.md }} wrap={false}>
       <HairRule />
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-        CAUSAL SUBSTRATE — 15 VARIABLES
+        CAUSAL SUBSTRATE (16 VARIABLES)
       </Text>
       <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 4 }}>
         The deterministic engine substrate, banded; strained / critical / collapsed float to the top.

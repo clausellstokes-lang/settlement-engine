@@ -28,9 +28,10 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
+import Stat from '../primitives/Stat.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
-  INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, RED, GREEN,
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN,
   sans, serif_, SP, R, FS, swatch,
 } from '../theme.js';
 
@@ -40,19 +41,6 @@ async function callAdmin(body) {
   if (error) throw error;
   if (data?.error) throw new Error(data.error);
   return data;
-}
-
-function Stat({ label, value }) {
-  return (
-    <div style={{ minWidth: 78 }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans }}>
-        {value == null ? '—' : String(value)}
-      </div>
-      <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        {label}
-      </div>
-    </div>
-  );
 }
 
 export default function AdminUsersPanel() {
@@ -144,9 +132,13 @@ export default function AdminUsersPanel() {
   }, []);
 
   return (
-    <section aria-label="User management" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg,
-    }}>
+    // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
+    // <Section>, which already supplies the card frame + the "User Search &
+    // Actions" <h2> and its body padding — a self-framed card-in-card here
+    // would be a doubled boundary + doubled padding (the nested-card false
+    // floor). The inner reveal-detail panels below keep their own frame.
+    <section aria-label="User management">
+
       {/* In-app text prompt (replaces native window.prompt). */}
       <TextInputDialog
         open={!!prompt}
@@ -171,7 +163,7 @@ export default function AdminUsersPanel() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && search()}
-          style={{ flex: 1, border: 'none', outline: 'none', fontSize: FS.sm, fontFamily: sans, background: 'transparent' }}
+          style={{ flex: 1, border: 'none', fontSize: FS.sm, fontFamily: sans, background: 'transparent' }}
         />
         <Button variant="gold" size="sm" onClick={search} disabled={searching}
           icon={<RefreshCw size={12} />}>
@@ -188,22 +180,32 @@ export default function AdminUsersPanel() {
 
       {/* Results list */}
       {results.length > 0 && (
-        <div style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+        <div role="table" aria-label="Search results"
+          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+          <div role="row" style={{
+            display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
+            background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
+            fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+          }}>
+            <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Name</span>
+            <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Email (masked)</span>
+            <span role="columnheader" style={{ flex: 1, textAlign: 'left' }}>Role</span>
+          </div>
           {results.map((u) => (
-            <Button key={u.id} variant="ghost" size="sm" fullWidth onClick={() => openUser(u.id)}
+            <Button key={u.id} variant="ghost" size="sm" fullWidth role="row" onClick={() => openUser(u.id)}
               style={{
                 gap: SP.sm, justifyContent: 'flex-start', whiteSpace: 'normal',
                 padding: `${SP.sm}px ${SP.md}px`, background: u.id === id ? CARD_HDR : 'transparent',
                 borderRadius: 0, borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm,
                 fontWeight: 400, color: INK,
               }}>
-              <span style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span role="cell" style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {u.display_name || u.email_masked || u.id.slice(0, 8)}
               </span>
-              <span style={{ flex: 2, color: MUTED, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {u.email_masked || '—'}
+              <span role="cell" title="Masked email" style={{ flex: 2, color: MUTED, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {u.email_masked || '–'}
               </span>
-              <span style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs, textAlign: 'left' }}>{u.role}</span>
+              <span role="cell" style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs, textAlign: 'left' }}>{u.role}</span>
             </Button>
           ))}
         </div>
@@ -218,10 +220,20 @@ export default function AdminUsersPanel() {
                 {selected.display_name || 'User'}
               </h4>
               <div style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
-                {fullEmail || selected.email_masked || '—'}
+                <span title={fullEmail ? undefined : 'Masked email'}>
+                  {fullEmail || selected.email_masked || '–'}
+                </span>
                 {' · '}{selected.role}{' · '}{selected.tier}
-                {selected.banned && <span style={{ color: RED, fontWeight: 700 }}> · BANNED</span>}
-                {selected.disabled && <span style={{ color: RED, fontWeight: 700 }}> · DISABLED</span>}
+                {selected.banned && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
+                    {' · '}<Ban size={12} aria-hidden="true" />Banned
+                  </span>
+                )}
+                {selected.disabled && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
+                    {' · '}<Power size={12} aria-hidden="true" />Disabled
+                  </span>
+                )}
               </div>
             </div>
             <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}
@@ -232,13 +244,13 @@ export default function AdminUsersPanel() {
 
           {/* Redacted counters */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.lg, padding: `${SP.md}px 0`, borderTop: `1px solid ${BORDER2}`, borderBottom: `1px solid ${BORDER2}`, marginBottom: SP.md }}>
-            <Stat label="Account age" value={selected.account_age_days != null ? `${selected.account_age_days}d` : null} />
-            <Stat label="Credits" value={selected.credits} />
-            <Stat label="Settlements" value={selected.settlements} />
-            <Stat label="Gallery" value={selected.gallery_items} />
-            <Stat label="Campaigns" value={selected.campaigns} />
-            <Stat label="Tickets" value={selected.tickets} />
-            <Stat label="Warnings" value={selected.warnings} />
+            <Stat size="sm" label="Account age" value={selected.account_age_days != null ? `${selected.account_age_days}d` : '–'} />
+            <Stat size="sm" label="Credits" value={selected.credits == null ? '–' : selected.credits} />
+            <Stat size="sm" label="Settlements" value={selected.settlements == null ? '–' : selected.settlements} />
+            <Stat size="sm" label="Gallery" value={selected.gallery_items == null ? '–' : selected.gallery_items} />
+            <Stat size="sm" label="Campaigns" value={selected.campaigns == null ? '–' : selected.campaigns} />
+            <Stat size="sm" label="Tickets" value={selected.tickets == null ? '–' : selected.tickets} />
+            <Stat size="sm" label="Warnings" value={selected.warnings == null ? '–' : selected.warnings} />
           </div>
 
           {/* Action set */}
@@ -344,7 +356,7 @@ export default function AdminUsersPanel() {
       )}
 
       {!selected && !searching && results.length === 0 && (
-        <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+        <p style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
           Search for a user to inspect their redacted profile and take action.
         </p>
       )}

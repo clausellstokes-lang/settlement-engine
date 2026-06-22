@@ -202,7 +202,7 @@ function FullCard({ npc }) {
             const t = typeof s === 'string'
               ? s
               : (s?.text || s?.description ||
-                 (s?.what ? (s.stakes ? `${s.what} — ${s.stakes}` : s.what) : '') ||
+                 (s?.what ? (s.stakes ? `${s.what}: ${s.stakes}` : s.what) : '') ||
                  s?.stakes || s?.label || '');
             if (!t) return null;
             return (

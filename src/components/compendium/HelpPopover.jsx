@@ -20,7 +20,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { HelpCircle } from 'lucide-react';
-import { FS, ELEV, PARCH_100, INK, GOLD, swatch } from '../theme.js';
+import { FS, ELEV, PARCH_100, INK, GOLD, GOLD_DEEP, swatch, sans, serif_ } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -116,12 +116,12 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             padding: 12,
             background: INK,
             color: PARCH_100,
-            border: '1px solid #8C6F32',
+            border: `1px solid ${GOLD_DEEP}`,
             borderRadius: 6,
             boxShadow: ELEV[3],
             fontSize: FS.xs,
             lineHeight: 1.55,
-            fontFamily: '"Nunito", system-ui, sans-serif',
+            fontFamily: sans,
           }}
         >
           <div style={{
@@ -129,14 +129,14 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             top: -6, left: '50%', transform: 'translateX(-50%) rotate(45deg)',
             width: 10, height: 10,
             background: INK,
-            borderLeft: '1px solid #8C6F32',
-            borderTop: '1px solid #8C6F32',
+            borderLeft: `1px solid ${GOLD_DEEP}`,
+            borderTop: `1px solid ${GOLD_DEEP}`,
           }} />
           {content ? (
             <>
               <div style={{
                 color: GOLD,
-                fontFamily: '"Crimson Text", Georgia, serif',
+                fontFamily: serif_,
                 fontWeight: 600, fontSize: FS.md, marginBottom: 4,
               }}>
                 {content.title}

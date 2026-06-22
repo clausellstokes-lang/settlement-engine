@@ -229,7 +229,7 @@ export function validateRelationship(primary, secondaries = []) {
     } else if (BATTLEFIELD_PRIMARIES.has(p) && descriptor.commerceLike) {
       issues.push({
         primary: p, secondary: sec, code: 'commerce_with_battlefield_enemy',
-        reason: `Normal commerce ('${descriptor.label}') cannot coexist with an active '${p}' relationship — only smuggling, forced tribute, mediated, or ceasefire commerce can.`,
+        reason: `Normal commerce ('${descriptor.label}') cannot coexist with an active '${p}' relationship. Only smuggling, forced tribute, mediated, or ceasefire commerce can.`,
       });
     } else {
       issues.push({

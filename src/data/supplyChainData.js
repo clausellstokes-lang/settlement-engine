@@ -584,7 +584,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Luxury goods are the primary cargo of long-distance trade. Entrepôt cities profit enormously from the markup.',
+          'Luxury goods are the chief cargo of long-distance trade. Entrepôt cities live on the markup.',
         minTier: 'city',
       },
       {
@@ -688,7 +688,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Trade & Entrepôt',
     icon: '️',
     color: '#a0762a',
-    desc: 'Goods that flow through for redistribution — the wealth of crossroads, ports, and river hubs',
+    desc: 'Goods that flow through for redistribution: the wealth of crossroads, ports, and river hubs',
     chains: [
       {
         id: 'spices_dyes',
@@ -747,7 +747,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Entrepôt cities develop banking infrastructure to facilitate large-volume trade. The bank profits from the flow of others.',
+          'Entrepôt cities build banks to move large volumes of trade. The banks take their cut from the flow of other people\'s goods.',
         minTier: 'town',
       },
       {
@@ -763,7 +763,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Ports and crossroads profit by charging for storage, loading, and onward transport — not by producing anything themselves.',
+          'Ports and crossroads profit by charging for storage, loading, and onward transport rather than by producing goods themselves.',
         minTier: 'town',
       },
       {
@@ -959,7 +959,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Healing & Medicine',
     icon: '️',
     color: '#8b1a1a',
-    desc: 'What keeps the population alive and attracts pilgrims and the infirm',
+    desc: 'What keeps the people alive and draws pilgrims and the infirm',
     chains: [
       {
         id: 'herbalism',
@@ -1109,7 +1109,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Arcane & Magical',
     icon: '',
     color: '#5a2a8a',
-    desc: 'What the settlement can offer in magical services, goods, and infrastructure',
+    desc: 'What the settlement works in magic: the services it sells, the goods it makes, the circles it keeps',
     chains: [
       {
         id: 'alchemy',
@@ -1194,7 +1194,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can support the infrastructure.',
+          'Planar goods carry the highest value of any entrepôt cargo. Only a metropolis holds the circles and the standing to traffic them.',
         // Was 'city' — but 'Planar traders' carries its own minTier:'metropolis'
         // gate in the catalog and 'Planar embassy' lives in the metropolis
         // section, so no city settlement can generate a processor. metropolis
@@ -1209,7 +1209,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Religion & Civic',
     icon: '',
     color: '#5a3a1a',
-    desc: 'What holds the settlement together — faith, law, administration, and social order',
+    desc: 'What holds the settlement together: faith, law, administration, and social order',
     chains: [
       {
         id: 'parish',
@@ -1293,7 +1293,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'hamlet',
-        note: 'Holy sites generate economic activity through pilgrim spending — effectively a non-trade income stream.',
+        note: 'Pilgrims arrive, lodge, and spend. The coin comes in without a single cargo leaving.',
       },
     ],
   },
@@ -1370,7 +1370,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Criminal Economy',
     icon: '️',
     color: '#4a1a4a',
-    desc: 'The shadow economy — what moves without documentation and who profits',
+    desc: 'The shadow economy: what moves without documentation and who profits',
     chains: [
       {
         id: 'smuggling',
@@ -1395,7 +1395,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Smuggling is the dark entrepôt model. Goods that cannot be taxed or declared flow through criminal infrastructure.',
+          'Smuggling is the dark entrepôt. Goods that cannot be taxed or declared move through the hands of the underworld instead.',
         minTier: 'thorp',
       },
       {

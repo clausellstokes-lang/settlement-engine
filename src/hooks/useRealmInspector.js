@@ -16,6 +16,14 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+// Plain-language, GM-facing text for the engine's known advance-failure reasons
+// (P10/P11): the raw reason code goes to console.warn, never the toast.
+export const ADVANCE_ERROR_TEXT = Object.freeze({
+  world_not_canonized: 'The realm advances only after you canonize this campaign world.',
+  no_settlements: 'Add at least one settlement to this campaign before advancing.',
+  busy: 'The realm is already advancing. Give it a moment.',
+});
+
 // The old campaign-workspace tabs map onto Inspector sections. The
 // pendingMapWorkspace store signal (e.g. the Library Advance-Time CTA requesting
 // 'news') is translated to an Inspector section so the post-advance "what changed"

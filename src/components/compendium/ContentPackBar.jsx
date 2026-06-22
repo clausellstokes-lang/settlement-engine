@@ -107,7 +107,7 @@ export default function ContentPackBar() {
       />
       <Button
         variant="ghost" size="sm" icon={<Share2 size={12} />} disabled
-        title="Coming soon — share an authored pack to the public Gallery."
+        title="Coming soon. Share an authored pack to the public Gallery."
       >
         Share to Gallery (soon)
       </Button>

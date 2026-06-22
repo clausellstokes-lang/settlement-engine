@@ -68,11 +68,11 @@ function _pickNPC(npcs, cat) {
 function buildConflictDesc(npcA, npcB, settA, settB, relType, nature) {
   const templates = {
     trade_partner: [
-      `${npcA.name} (${npcA.role}) and ${npcB.name} (${npcB.role}) of ${settB.name} are locked in a ${nature} — both claim the right to set terms for the shared corridor.`,
+      `${npcA.name} (${npcA.role}) and ${npcB.name} (${npcB.role}) of ${settB.name} are locked in a ${nature}. Both claim the right to set terms for the shared corridor.`,
       `A ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has stalled the trade agreement renewal for two seasons.`,
     ],
     allied: [
-      `${npcA.name} and ${npcB.name} of ${settB.name} have reached an impasse over a ${nature} — the alliance holds, but with open tension.`,
+      `${npcA.name} and ${npcB.name} of ${settB.name} have reached an impasse over a ${nature}. The alliance holds, but with open tension.`,
       `The ${nature} between ${npcA.name} and ${settB.name}'s ${npcB.name} risks destabilizing the mutual defense pact.`,
     ],
     patron: [
@@ -80,20 +80,20 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature) {
       `A ${nature} has put ${npcA.name} in direct conflict with ${settB.name}'s ${npcB.name}, who represents the patron's interests.`,
     ],
     client: [
-      `${npcA.name} is negotiating with ${settB.name}'s ${npcB.name} over a ${nature} — the client settlement needs better terms.`,
+      `${npcA.name} is negotiating with ${settB.name}'s ${npcB.name} over a ${nature}. The client settlement needs better terms.`,
       `Tension over a ${nature} has led ${npcA.name} to consider breaking with ${npcB.name}'s faction in ${settB.name}.`,
     ],
     rival: [
       `${npcA.name} and ${settB.name}'s ${npcB.name} are engaged in open ${nature}, with neither willing to concede ground.`,
       `The ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has escalated from professional friction to personal enmity.`,
-      `${npcA.name} accuses ${settB.name}'s ${npcB.name} of deliberately undercutting a ${nature} — the charge is probably true.`,
+      `${npcA.name} accuses ${settB.name}'s ${npcB.name} of deliberately undercutting a ${nature}. The charge is probably true.`,
     ],
     cold_war: [
-      `${npcA.name} suspects ${settB.name}'s ${npcB.name} of orchestrating a ${nature} — no proof, but the suspicion is corrosive.`,
+      `${npcA.name} suspects ${settB.name}'s ${npcB.name} of orchestrating a ${nature}. No proof, but the suspicion is corrosive.`,
       `A ${nature} involving ${npcA.name} and ${npcB.name} of ${settB.name} has both sides operating through intermediaries.`,
     ],
     hostile: [
-      `${npcA.name} and ${settB.name}'s ${npcB.name} are on opposite sides of an active ${nature} — formal violence is a matter of timing.`,
+      `${npcA.name} and ${settB.name}'s ${npcB.name} are on opposite sides of an active ${nature}. Formal violence is a matter of timing.`,
       `The ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has claimed blood on both sides.`,
     ],
     neutral: [
@@ -112,7 +112,7 @@ function buildFactionDesc(facA, facB, settA, settB, relType) {
       `${facA.name} has been systematically undercutting ${facB.name}'s influence in ${settB.name}. Retaliation is expected.`,
     ],
     cold_war: [
-      `${facA.name} and ${settB.name}'s ${facB.name} are running parallel intelligence operations — each knows the other knows.`,
+      `${facA.name} and ${settB.name}'s ${facB.name} are running parallel intelligence operations. Each knows the other knows.`,
       `The ${facA.name} has placed assets inside ${facB.name} of ${settB.name}. The infiltration goes both ways.`,
     ],
     hostile: [

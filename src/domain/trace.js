@@ -213,11 +213,11 @@ export function summarizeTrace(trace) {
   if (!trace) return null;
   const causeLines = (trace.causes || []).map(c => {
     const lead = c.effect ? `${c.effect}` : '';
-    const tail = c.reason ? ` — ${c.reason}` : '';
+    const tail = c.reason ? `. ${c.reason}` : '';
     return `${c.source}${lead ? ' (' + lead + ')' : ''}${tail}`;
   });
   const downstreamLines = (trace.downstreamEffects || []).map(d => {
-    return `${d.target}: ${d.effect}${d.reason ? ` — ${d.reason}` : ''}`;
+    return `${d.target}: ${d.effect}${d.reason ? `. ${d.reason}` : ''}`;
   });
   return {
     headline: `${trace.targetId} ${trace.result}`,

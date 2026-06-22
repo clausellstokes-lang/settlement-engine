@@ -64,21 +64,30 @@ export default function BuyThisDossier({ settlement }) {
       display: 'inline-flex', alignItems: 'center', gap: SP.sm,
       flexWrap: 'wrap', fontFamily: sans,
     }}>
+      {/* Outline (secondary), not a filled CTA: in the dossier chrome the
+          purchase is a contextual offer, not the region's primary task, so it
+          must not be the loudest control. Per P8, upgrade/credits CTAs are
+          primary only on Pricing/Account and secondary elsewhere; it stays
+          visually distinct (gold-bordered outline + Download glyph) without
+          dominating the freshly generated dossier at its peak moment. (P8 / P9.) */}
       <Button
         type="button"
-        variant="primary"
+        variant="secondary"
         size="sm"
         icon={<Download size={12} />}
         busy={busy}
         disabled={!isConfigured}
         onClick={handleBuy}
+        // Purchase is a real money control, so it must clear the ~44px touch
+        // target even though it renders at the dense `sm` size in dossier chrome.
+        style={{ minHeight: 44 }}
         title={
           isConfigured
             ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
             : 'Payments are not configured in this environment.'
         }
       >
-        {busy ? 'Redirecting…' : `Buy this dossier${SINGLE_DOSSIER.priceLabel}`}
+        {busy ? 'Redirecting…' : `Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
       </Button>
       <span style={{
         fontSize: FS.xs, color: MUTED, fontStyle: 'italic',

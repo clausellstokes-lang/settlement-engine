@@ -1,5 +1,21 @@
 # SettlementForge — Comprehensive Codebase Review
 
+> **⚠️ Historical snapshot (2026-06-20) — partially superseded. Do NOT read as current state.**
+> This review was generated and then committed in the SAME change (`00ae91d`) that
+> began fixing its own top findings, so several items below describe a
+> **pre-remediation** state that no longer matches `master`. Verified as ADDRESSED:
+> finding **#1** (war_front channels never retired — fixed: `warDeployment.js`
+> retires the channel on resolution); finding **#2** (ban/disable/soft-delete
+> cosmetic — fixed: migrations **057/059/060** enforce account-status on the
+> spend/mutate RPCs + owner RLS + definer write paths); the **Report-Only CSP**
+> (now an enforcing `Content-Security-Policy` with a real `/api/csp-report` sink);
+> and **CI-ungated deploys** (now gated by `vercel.json`'s fail-closed
+> `ignoreCommand` → `scripts/vercel-ignore-build.mjs`). For the CURRENT system map
+> use **`ARCHITECTURE.md`**; for the live, curated risk list use
+> **`docs/RISK_REGISTER.md`**. This file is retained for the still-valid findings
+> and as a record of the review pass — treat every line as a CLAIM TO RE-VERIFY
+> against current code, never as fact.
+
 _Generated 2026-06-20 by a 45-agent orchestrated review (21 parallel deep-reads + adversarial verification of every critical/high finding + synthesis). Branch: harden-https-headers._
 
 - **Areas reviewed:** 21

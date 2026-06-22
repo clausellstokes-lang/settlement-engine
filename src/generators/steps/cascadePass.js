@@ -52,7 +52,7 @@ registerStep('cascadePass', {
         causes: [
           { source: 'supplyChainCascade',
             effect: 'added',
-            reason: `"${add.name}" was pulled in by the cascade pass — a chain-adjacent institution already on the roster created demand for this one.` },
+            reason: `"${add.name}" was pulled in by the cascade pass. A chain-adjacent institution already on the roster created demand for this one.` },
         ],
         downstreamEffects: Array.isArray(add.tags)
           ? add.tags.slice(0, 3).map(t => ({ target: `tag.${t}`, effect: 'reinforced' }))

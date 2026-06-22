@@ -19,11 +19,13 @@ import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { pantheonDepthModel, seatsFromMajor, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SECOND, VIOLET, VIOLET_DEEP, sans, swatch } from '../theme.js';
 
 const TIER_ORDER = ['major', 'minor', 'cult'];
 const TIER_LABEL = { major: 'Major Powers', minor: 'Minor Faiths', cult: 'Cults & Remnants' };
-const TIER_COLOR = { major: '#7c3aed', minor: '#9333ea', cult: '#a78bda' };
+// Tier accents routed through violet tokens (lint bans raw hex): major reuses the
+// exact #7c3aed swatch; minor/cult take the named VIOLET / VIOLET_DEEP tokens.
+const TIER_COLOR = { major: swatch['#7C3AED'], minor: VIOLET, cult: VIOLET_DEEP };
 
 /**
  * Whether the campaign has an active (materialized) pantheon — the religion gate
@@ -67,6 +69,10 @@ function carrierDeityMap(settlements) {
   return map;
 }
 
+// P9 gating: the free-vs-Cartographer wall lives UPSTREAM. RealmDashboard returns
+// the locked teaser for `!canManageCampaigns` (anon/free), and RealmInspector only
+// routes here when a campaign exists — so this panel is reached only by Cartographer
+// and needs no local tier prop or `pantheon_preview` upsell hook.
 export default function PantheonPanel({ campaign }) {
   const saves = useStore(s => s.savedSettlements);
   const settlementItems = useMemo(() => {
@@ -110,6 +116,8 @@ export default function PantheonPanel({ campaign }) {
       flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column',
       background: CARD, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden',
     }}>
+      {/* P11: bespoke 34px-chip + h2 + meta header, token-matched to WorldPulsePanel
+          so Pantheon and Pulse read identically (the same reconciliation made there). */}
       <header style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '13px 16px', borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
         <div style={{ width: 34, height: 34, borderRadius: 8, border: `1px solid ${BORDER2}`, background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Sparkles size={18} color={GOLD} />
@@ -125,7 +133,7 @@ export default function PantheonPanel({ campaign }) {
 
       <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: 16, display: 'flex', flexDirection: 'column', gap: 16 }}>
         {!hasPantheon(campaign) ? (
-          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No pantheon yet. Assign a primary deity to a settlement to awaken the realm&apos;s faith.
           </div>
         ) : (
@@ -169,7 +177,7 @@ export default function PantheonPanel({ campaign }) {
                     <strong>{deityName(settlementItems, c.aId)}</strong> ({c.aSeats} seat{c.aSeats === 1 ? '' : 's'})
                     {' vs '}
                     <strong>{deityName(settlementItems, c.bId)}</strong> ({c.bSeats} seat{c.bSeats === 1 ? '' : 's'})
-                    <span style={{ color: MUTED }}> — contesting {deityName(settlementItems, c.contestedId)}</span>
+                    <span style={{ color: BODY }}>: contesting {deityName(settlementItems, c.contestedId)}</span>
                   </div>
                 ))}
               </div>
@@ -193,7 +201,7 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800 }}>{name}</div>
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>
+          <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
             {seats} seat{seats === 1 ? '' : 's'} · {Number(deity.wins) || 0}W / {Number(deity.losses) || 0}L
             {deity.tier !== 'major' && (
               <> · <span style={{ color: GOLD, fontWeight: 800 }}>{fromMajor} from Major</span></>
@@ -209,7 +217,7 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
             size="sm"
             onClick={() => setOpen(o => !o)}
             aria-expanded={open}
-            style={{ background: 'none', border: 'none', padding: 0, minHeight: undefined, color: tierColor, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, justifyContent: 'flex-start' }}
+            style={{ background: 'none', border: 'none', padding: '4px 0', minHeight: 32, color: tierColor, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, justifyContent: 'flex-start' }}
           >
             {open ? '▾' : '▸'} How this faith couples ({effects.length})
           </Button>

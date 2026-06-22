@@ -16,18 +16,11 @@
  * per-question opens.
  */
 
-import { useState } from 'react';
-import { FS, swatch } from '../theme.js';
-import { Plus, Minus } from 'lucide-react';
+// Use shared theme tokens (no private palette that can silently diverge):
+// BODY/MUTED/sans are the canonical parchment-theme values; SP spaces the stack.
+import { BODY, MUTED, sans, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
-import Button from '../primitives/Button.jsx';
-
-const GOLD = swatch['#8C6F32'];
-const INK = swatch['#1B1408'];
-const BODY = swatch['#3A2F18'];
-const MUTED = swatch['#9C8068'];
-const BORDER = swatch['#E8D9B0'];
-const sans = '"Nunito", system-ui, sans-serif';
+import Disclosure from '../primitives/Disclosure.jsx';
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
@@ -42,60 +35,26 @@ const Q_KEYS = [
 ];
 
 export default function AccountFAQ() {
-  const [open, setOpen] = useState(null);
-
   return (
     <div style={{
-      display: 'flex', flexDirection: 'column', gap: 6,
+      display: 'flex', flexDirection: 'column', gap: SP.sm,
     }}>
-      {Q_KEYS.map(key => {
-        const isOpen = open === key;
+      {Q_KEYS.map((key) => {
         const question = t(`accountFaq.${key}.q`);
         const answer   = t(`accountFaq.${key}.a`);
         if (!question || !answer) return null;
+        // Route each Q through the canonical Disclosure primitive: it owns its
+        // own per-item open state (independent toggles), a real native button
+        // with aria-expanded/aria-controls, and the shared caret/header styling.
         return (
-          <div
-            key={key}
-            style={{
-              border: `1px solid ${BORDER}`,
-              borderRadius: 5,
-              overflow: 'hidden',
-              background: swatch.white,
-            }}
-          >
-            <Button
-              variant="ghost"
-              size="md"
-              fullWidth
-              onClick={() => setOpen(isOpen ? null : key)}
-              aria-expanded={isOpen}
-              icon={isOpen
-                ? <Minus size={13} color={GOLD} />
-                : <Plus size={13} color={GOLD} />}
-              style={{
-                gap: 8,
-                padding: '10px 12px',
-                background: isOpen ? '#FBF5E6' : 'transparent',
-                justifyContent: 'flex-start',
-                textAlign: 'left',
-                whiteSpace: 'normal',
-                fontFamily: sans, fontSize: FS.md, fontWeight: 600,
-                color: INK,
-              }}
-            >
-              <span style={{ flex: 1 }}>{question}</span>
-            </Button>
-            {isOpen && (
-              <div style={{
-                padding: '8px 14px 12px',
-                fontSize: FS.sm, color: BODY,
-                lineHeight: 1.55, fontFamily: sans,
-                borderTop: `1px solid ${BORDER}`,
-              }}>
-                {answer}
-              </div>
-            )}
-          </div>
+          <Disclosure key={key} title={question} compact>
+            <div style={{
+              fontSize: FS.sm, color: BODY,
+              lineHeight: 1.55, fontFamily: sans,
+            }}>
+              {answer}
+            </div>
+          </Disclosure>
         );
       })}
       <div style={{

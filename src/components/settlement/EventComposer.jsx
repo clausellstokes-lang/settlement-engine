@@ -391,7 +391,7 @@ export default function EventComposer() {
           ) : (
             <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
               <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
-                This settlement has no criminal organization — add one (e.g. a Thieves&rsquo; Guild) before imposing corruption.
+                This settlement has no criminal organization. Add one (e.g. a Thieves&rsquo; Guild) before imposing corruption.
               </div>
             </Field>
           )
@@ -411,7 +411,7 @@ export default function EventComposer() {
           </Field>
         )}
         {type === 'ADD_TRADE_GOOD' && tradeDirection === 'export' && (
-          <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses — listed as "(transit)"' : 'Produced locally'}>
+          <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses, listed as (transit)' : 'Produced locally'}>
             <select
               value={tradeEntrepot ? 'transit' : 'local'}
               onChange={e => setTradeEntrepot(e.target.value === 'transit')}
@@ -426,7 +426,7 @@ export default function EventComposer() {
         {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
         {type === 'APPLY_STRESSOR' && (
           <Field label="Severity" hint={
-            stressorSeverity === 'severe' ? 'A defining crisis — expect cascades' :
+            stressorSeverity === 'severe' ? 'A defining crisis; expect cascades' :
             stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
                                             'A serious, active crisis'
           }>
@@ -441,11 +441,11 @@ export default function EventComposer() {
         {/* CHANGE_RULING_POWER — how power changes hands shapes the aftermath */}
         {type === 'CHANGE_RULING_POWER' && (
           <Field label="How" hint={
-            powerCause === 'election'   ? 'A fresh mandate — legitimacy starts warmer' :
-            powerCause === 'conquest'   ? 'Imposed from outside — legitimacy starts cold' :
+            powerCause === 'election'   ? 'A fresh mandate. Legitimacy starts warmer' :
+            powerCause === 'conquest'   ? 'Imposed from outside. Legitimacy starts cold' :
             powerCause === 'succession' ? 'The line held; the household reorders' :
             powerCause === 'appointment'? 'Installed by a higher authority' :
-                                          'Seized by force — loyalties re-sworn at swordpoint'
+                                          'Seized by force. Loyalties re-sworn at swordpoint'
           }>
             <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle}>
               {RULING_POWER_CAUSES.map(c => (
@@ -618,7 +618,7 @@ export default function EventComposer() {
               {isDestroy && (
                 <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, borderRadius: R.sm, background: swatch.dangerBg }}>
                   <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
-                    ⚠ This destroys {settlement?.name || 'the settlement'} — services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
+                    ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by deliberate action.
                   </div>
                   <input
                     value={destroyConfirm}

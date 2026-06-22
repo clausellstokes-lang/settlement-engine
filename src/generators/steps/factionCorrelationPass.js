@@ -95,7 +95,7 @@ registerStep('factionCorrelationPass', {
           result:     'requires_teleportation_circle',
           causes: [
             { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-              reason: `"${removedName}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+              reason: `"${removedName}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
           ],
         });
       }

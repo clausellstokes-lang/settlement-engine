@@ -71,8 +71,8 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
   test('scrubbing to an older tick selects it', () => {
     STORE = { setSelectedSettlementId };
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
-    // Click the tick-5 rail button.
-    fireEvent.click(screen.getByRole('tab', { name: 'Tick 5' }));
+    // Click the tick-5 rail button (role=group + aria-pressed toggle, not a tab).
+    fireEvent.click(screen.getByRole('button', { name: 'Tick 5' }));
     expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
     expect(screen.queryByText('Bram falls')).toBeNull();
   });

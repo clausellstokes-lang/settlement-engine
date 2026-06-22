@@ -28,7 +28,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { decideDeploy } from '../../scripts/vercel-ignore-build.mjs';
+import { decideDeploy, REQUIRED_CHECKS } from '../../scripts/vercel-ignore-build.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -292,5 +292,18 @@ describe('production deploy is gated on CI', () => {
     const src = readFileSync(join(ROOT, 'scripts/vercel-ignore-build.mjs'), 'utf8');
     expect(src).toMatch(/REQUIRED_CHECKS/);
     expect(src).toMatch(/Validate, test, build/);
+  });
+
+  it('every REQUIRED_CHECKS name is the `name:` of a real job in ci.yml (rename-drift guard)', () => {
+    // The gate matches CI by the human-readable JOB NAME from the GitHub Checks
+    // API. If a job is renamed in ci.yml without updating REQUIRED_CHECKS, the
+    // gate would require a check that never reports and block every deploy
+    // forever (fail-closed → safe but total outage of the deploy path). Assert
+    // each required check is literally a `name:` line in the workflow.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const jobNames = [...ci.matchAll(/^\s{4}name:\s*(.+?)\s*$/gm)].map((m) => m[1].replace(/^['"]|['"]$/g, ''));
+    for (const required of REQUIRED_CHECKS) {
+      expect(jobNames, `REQUIRED_CHECKS "${required}" must be a job name in ci.yml`).toContain(required);
+    }
   });
 });

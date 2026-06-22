@@ -1,18 +1,18 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import {FolderPlus} from 'lucide-react';
+import {FolderPlus, Plus} from 'lucide-react';
 
 import { track, EVENTS } from '../lib/analytics.js';
 import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
-import { MUTED, BORDER, sans, FS, swatch, PAGE_MAX } from './theme.js';
+import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
-import { activeSaveCount, inactiveRetentionCount, isSaveActive } from '../lib/saveAccess.js';
+import { activeSaveCount, isSaveActive } from '../lib/saveAccess.js';
 import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
 import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import {
@@ -28,9 +28,11 @@ import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
-import LibraryBulkBar from './settlements/LibraryBulkBar.jsx';
+import BulkActionBar from './settlements/BulkActionBar.jsx';
 import { ADVANCE_TIME_NAV_TARGET } from './settlements/advanceTimeTarget.js';
 import Button from './primitives/Button.jsx';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
@@ -100,6 +102,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // per-card disabled state + transient "Generating…" label so a slow
   // engine load can't be double-clicked into two concurrent forks.
   const [forkingId, setForkingId] = useState(null);
+  // Declared here (above forkSample) so the fork auto-save failure path can set
+  // it without a forward reference. Shared with the persistBatch recovery row.
+  const [persistenceError, setPersistenceError] = useState('');
 
   /**
    * Fork a sample. "Generate" on a sample card now actually
@@ -158,13 +163,19 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         await savesService.list().then(setSavedSettlements).catch(() => {});
         notePersistedSave?.(result, saveId);
       } catch (e) {
+        // P10: the fork's "generate AND save" promise failed. Surface a
+        // recoverable message on the Library (where the missing save is noticed)
+        // rather than landing the user on the dossier believing it was saved.
         console.error('[SettlementsPanel] fork auto-save failed:', e);
+        setPersistenceError('Your settlement was generated but could not be saved to your library. Open it and use Save to retry.');
       }
     }
 
     clearLoadedFromSave();
     setForkingId(null);
     onNavigate?.('generate');
+    // setPersistenceError is a stable useState setter — omitted from deps
+    // (exhaustive-deps exempts setters; it is also declared below this callback).
   }, [
     authUser?.id, updateConfig, generateSettlement, canSave, clearLoadedFromSave,
     onNavigate, setPurchaseModalOpen, forkingId, setSavedSettlements, notePersistedSave,
@@ -192,11 +203,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [showNewCampaign, setShowNewCampaign] = useState(false);
   const [reactivatingId, setReactivatingId] = useState(null);
   const [reactivationError, setReactivationError] = useState('');
-  const [persistenceError, setPersistenceError] = useState('');
 
   const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
-  const inactiveRetained = useMemo(() => inactiveRetentionCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
 
   const reloadSaves = useCallback(async () => {
@@ -550,29 +559,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setShowNewCampaign(false);
   };
 
-  const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
-    applyQueuedRegionalImpact(campaignId, impactId);
-  }, [applyQueuedRegionalImpact]);
+  // Routes a card's "Create a campaign" CTA to the panel's new-campaign input
+  // (which autoFocuses on open), so the kebab's no-campaign state has a real path
+  // forward instead of a path-less label (deferred item 2).
+  // The new-campaign input autoFocuses on open, so the browser scrolls it into
+  // view; this just reveals it as the path forward from the card's kebab.
+  const openCreateCampaign = useCallback(() => setShowNewCampaign(true), []);
 
-  const handleIgnoreRegionalImpact = useCallback((campaignId, impactId) => {
-    ignoreQueuedRegionalImpact(campaignId, impactId);
-  }, [ignoreQueuedRegionalImpact]);
-
-  const handleResolveRegionalImpact = useCallback((campaignId, impactId) => {
-    resolveRegionalImpact(campaignId, impactId);
-  }, [resolveRegionalImpact]);
-
-  const handleAdvanceRegionalImpacts = useCallback((campaignId, ticks) => {
-    advanceCampaignRegionalImpacts(campaignId, ticks);
-  }, [advanceCampaignRegionalImpacts]);
-
-  const handleApplyAllRegionalImpacts = useCallback((campaignId) => {
-    applyAllQueuedRegionalImpacts(campaignId);
-  }, [applyAllQueuedRegionalImpacts]);
-
-  const handleIgnoreAllRegionalImpacts = useCallback((campaignId) => {
-    ignoreAllQueuedRegionalImpacts(campaignId);
-  }, [ignoreAllQueuedRegionalImpacts]);
+  // The regional-impact store actions are forwarded to CampaignFolder directly
+  // (they share the folder's exact (campaignId, …) signature) — the former
+  // identity-wrapper useCallbacks added no behaviour and only diluted this file.
 
   // Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
@@ -647,46 +643,59 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   }
 
   // ── List view ───────────────────────────────────────────────────────────
+  // One shared trust-surface alert treatment: persistenceError and
+  // reactivationError both render through this so the two error rows stay
+  // visually identical and neither forks a raw-hex border. No dedicated
+  // danger-border token exists, so the border falls back to swatch.danger.
+  const alertStyle = { padding:'9px 12px', background:swatch.dangerBg, color:swatch.danger, border:`1px solid ${swatch.danger}`, borderRadius:6, fontFamily:sans, fontSize:FS.sm };
   return (
-    <div style={{ display:'flex', flexDirection:'column', gap:12, maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
-      {persistenceError && (
-        <div role="alert" style={{
-          padding:'9px 12px', background:swatch.dangerBg, color:swatch.danger,
-          border:'1px solid #e8c0c0', borderRadius:6, fontFamily:sans, fontSize:FS.sm,
-        }}>
-          {persistenceError}
-        </div>
-      )}
+    // Differential rhythm, not a flat 12px stack: the funnel cluster (alerts +
+    // header + meter) groups tight via local margins, then a single loose break
+    // (SP.xl) drops to the GM's own content so the town list reads as the
+    // dominant band rather than another peer in an even stack.
+    <Page>
+     <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
+      {persistenceError && <div role="alert" style={alertStyle}>{persistenceError}</div>}
+      {reactivationError && <div role="alert" style={alertStyle}>{reactivationError}</div>}
 
-      {/* Save-quota meter + funnel header (Phase 3) — COUNT limit, not size. */}
-      <SaveQuotaMeter
-        tier={authTier}
-        used={activeSlotsUsed}
-        max={maxSaves}
-        onUpgrade={() => onNavigate?.('pricing')}
-        onSignIn={() => onNavigate?.('pricing')}
+      {/* Page header — the GM's own content owns the top of their own page; the
+          SaveQuotaMeter is demoted to a slim strip below so the funnel frames
+          rather than leads, and the eyebrow/title/subtitle give 5-second
+          orientation. The single solid-gold primary on the list region —
+          'New settlement' — lives here so the first click lands on the GM's
+          own creation task. */}
+      <PageHeader
+        eyebrow="Your settlements"
+        title="Library"
+        subtitle="Your saved settlements and campaigns. Reopen a town, advance its world, or export a dossier for the table."
+        actions={<Button variant="primary" size="md" icon={<Plus size={16}/>} onClick={() => onNavigate?.('generate')}>New settlement</Button>}
       />
 
-      {/* Library toolbar (search + sort + Filters▾ + Select). */}
+      {/* Save-quota meter + funnel header (Phase 3) — COUNT limit, not size.
+          'Sign in' routes to the real sign-in flow (was mis-wired to pricing).
+          Tight to the header above (one funnel cluster); the loose content
+          break lives on the toolbar/list region below, not here. */}
+      <SaveQuotaMeter tier={authTier} used={activeSlotsUsed} max={maxSaves}
+        onUpgrade={() => onNavigate?.('pricing')} onSignIn={() => onNavigate?.('signin')} />
+
+      {/* Library toolbar (search + sort + Filters▾ + Select). The loose break
+          (SP.xl) lives here: the toolbar opens the GM's own content region, so
+          the funnel cluster above (header + meter) reads as a separate, lighter
+          band and the town list survives the squint as the dominant layer. */}
       {saves.length > 0 && (
-        <LibraryToolbar
-          query={libraryQuery}
-          setQuery={setLibraryQuery}
-          sort={librarySort}
-          setSort={setLibrarySort}
-          filters={libraryFilters}
-          setFilters={setLibraryFilters}
-          totalCount={saves.length}
-          visibleCount={filteredSaves.length}
+        <div style={{ marginTop:SP.xl }}><LibraryToolbar
+          query={libraryQuery} setQuery={setLibraryQuery}
+          sort={librarySort} setSort={setLibrarySort}
+          filters={libraryFilters} setFilters={setLibraryFilters}
+          totalCount={saves.length} visibleCount={filteredSaves.length}
           campaigns={activeCampaigns}
-          selectMode={selectMode}
-          onToggleSelectMode={bulk.toggleMode}
-        />
+          selectMode={selectMode} onToggleSelectMode={bulk.toggleMode}
+        /></div>
       )}
 
       {/* Bulk multi-select action bar + its delete confirm (Phase 3). */}
       {selectMode && saves.length > 0 && (
-        <LibraryBulkBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
+        <BulkActionBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
       )}
 
       {/* The old "Saved Settlements / Save Current Settlement / N of ∞ slots"
@@ -708,21 +717,41 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
           ) : (
-            <Button variant="gold" size="md" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
-              New Campaign
+            <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
+              New campaign
             </Button>
           )}
         </div>
       )}
 
       {savesLoading ? (
-        <div style={{ padding:'24px 16px', textAlign:'center', fontSize:FS.md, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
+        // Skeleton card rows (P9): first paint matches the eventual list shape so
+        // the layout doesn't pop when saves resolve. PARCH-tinted, card-height
+        // rhythm; role=status + the SR-only text announce load completion.
+        <div role="status" aria-busy="true" aria-label="Loading saves" style={{ marginTop:SP.xl, display:'flex', flexDirection:'column', gap:SP.sm }}>
+          {[0,1,2].map(i => (
+            <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}`, borderRadius:7 }} />
+          ))}
+        </div>
       ) : saves.length === 0 ? (
         // Show sample dossiers instead of a bare empty state.
         // Eliminates the "you have nothing — go figure it out" first run.
-        <SampleDashboard onFork={forkSample} forkingId={forkingId} />
+        <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} /></div>
+      ) : filteredSaves.length === 0 ? (
+        // The library has saves, but none survive the active search/filters.
+        // Offer a recovery CTA rather than a silent dead-end (no inert list).
+        // Flat PARCH placeholder surface — distinct from the CARD-filled real
+        // cards so the surface itself carries the elevation difference (P5).
+        <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, borderRadius:8, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
+          <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK }}>No settlements match your search or filters</div>
+          <div style={{ maxWidth:PROSE_MAX, fontFamily:sans, fontSize:FS.sm, color:BODY }}>Try a broader term, or clear the active filters to see all {saves.length} saved settlement{saves.length === 1 ? '' : 's'}.</div>
+          <Button variant="secondary" size="sm" onClick={() => { setLibraryQuery(''); setLibraryFilters({}); }}>Clear filters</Button>
+        </div>
       ) : (
-        <>
+        // Group-of-groups rhythm: campaign folders and the unassigned pile are
+        // distinct chunks (loose SP.lg between), while the cards within each
+        // chunk stay tight (SP.xs, below).
+        <div style={{ display:'flex', flexDirection:'column', gap:SP.lg }}>
           {/* Campaign folders */}
           {campaigns.map(campaign => {
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
@@ -738,18 +767,20 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 toggleCollapsed={toggleCampaignCollapsed}
                 onDiscoverRegional={discoverCampaignRegionalChannels}
                 onConfirmRegionalChannel={(campaignId, channelId) => setRegionalChannelStatus(campaignId, channelId, 'confirmed')}
-                onApplyRegionalImpact={handleApplyRegionalImpact}
-                onIgnoreRegionalImpact={handleIgnoreRegionalImpact}
-                onResolveRegionalImpact={handleResolveRegionalImpact}
-                onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
-                onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
-                onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
+                onApplyRegionalImpact={applyQueuedRegionalImpact}
+                onIgnoreRegionalImpact={ignoreQueuedRegionalImpact}
+                onResolveRegionalImpact={resolveRegionalImpact}
+                onAdvanceRegionalImpacts={advanceCampaignRegionalImpacts}
+                onApplyAllRegionalImpacts={applyAllQueuedRegionalImpacts}
+                onIgnoreAllRegionalImpacts={ignoreAllQueuedRegionalImpacts}
                 onReactivate={handleReactivateSave}
                 canReactivate={canReactivateInactive}
                 reactivatingId={reactivatingId}
                 canManageCampaigns={canManageCampaigns}
                 onCanonize={handleCanonize}
                 onAdvanceTime={handleAdvanceCampaignTime}
+                onCreateCampaign={openCreateCampaign}
+                onNavigate={onNavigate}
                 worldCanonized={!!campaign.worldState?.canonizedAt}
                 selectMode={selectMode}
                 selectedIds={selectedIds}
@@ -757,15 +788,31 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
             );
           })}
 
-          {/* Unassigned settlements */}
+          {/* Unassigned settlements — a real <h2> (was a styled div) for
+              5-second orientation + screen-reader landmarking. The heading
+              renders unconditionally so the common no-campaign library (a bare
+              pile of saves) still has a layer-cake anchor over the cards:
+              'Settlements (n)' when there are no campaigns, 'Unassigned (n)'
+              when they exist. Quiet eyebrow style keeps it from adding a fourth
+              dominance level. */}
           {unassignedSaves.length > 0 && (
-            <div>
-              {campaigns.length > 0 && (
-                <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:6, paddingLeft:4 }}>
-                  Unassigned ({unassignedSaves.length})
-                </div>
-              )}
-              <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+            <section>
+              {/* The list's one structural anchor — lifted to FS.xs + SECOND
+                  (ink-800, clears AA; MUTED at FS.xxs failed 4.5:1 and was the
+                  smallest text on the surface). The quiet eyebrow read is kept via
+                  uppercase + letterspacing, not via a failing color (P7). It now
+                  sits at a consistent dominance tier with the campaign-folder name,
+                  so the two sibling group headings read as one peer level (P4). */}
+              <h2 style={{ margin:'0 0 6px', paddingLeft:4, fontSize:FS.xs, fontWeight:700, color:SECOND, textTransform:'uppercase', letterSpacing:'0.06em', fontFamily:sans }}>
+                {campaigns.length > 0 ? 'Unassigned' : 'Settlements'} ({unassignedSaves.length})
+              </h2>
+              {/* Card grid reflow (P12 + cross-surface consistency with
+                  GalleryList): cards reflow to 2-3 columns on a wide monitor and
+                  collapse to one readable column on a tablet, instead of a single
+                  full-1200 column with View/Delete stranded ~1100px from the name.
+                  A grid also breaks the equal-weight single-file card-wall (P5);
+                  the semantic left rail stays the per-card scan anchor. */}
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap:SP.sm }}>
                 {unassignedSaves.map(s => (
                   <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
                     onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
@@ -777,15 +824,19 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                     reactivatingId={reactivatingId}
                     onCanonize={handleCanonize}
                     onAdvanceTime={handleAdvanceCampaignTime}
+                    onCreateCampaign={openCreateCampaign}
+                    onNavigate={onNavigate}
+                    canManageCampaigns={canManageCampaigns}
                     selectMode={selectMode}
                     selected={selectedIds.has(s.id)}
                     onToggleSelect={toggleSelect}/>
                 ))}
               </div>
-            </div>
+            </section>
           )}
-        </>
+        </div>
       )}
-    </div>
+     </div>
+    </Page>
   );
 }

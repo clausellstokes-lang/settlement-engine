@@ -514,6 +514,10 @@ function sanitizeDossier(row) {
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
+    // Headline living-world state for the dossier hero — the one fact that
+    // signals a simulated settlement, not a generator snapshot. Same derivation
+    // as the list tile so card and dossier agree.
+    stability:    row.stability || row.data?.viability?.stability || row.data?.systemState?.stability || row.data?.stability || '',
     description:  row.gallery_description || '',
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',

@@ -31,7 +31,7 @@ import { HISTORY_EVENTS } from '../../src/data/historyData.js';
 // The exact wartime merchant goal copy (the override the two crafts roles must
 // receive). Sourced from STRESS_GOAL_OVERRIDES.wartime.merchant.short.
 const WARTIME_MERCHANT_SHORT =
-  'Secure a war contract before a rival does — or find a way to profit from the disruption instead of suffering it';
+  'Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it';
 
 function overrideGoalFor(role) {
   setActiveRng(createPRNG('merchant-override-seed'));

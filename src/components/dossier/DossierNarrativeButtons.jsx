@@ -1,4 +1,4 @@
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, VIOLET_DEEP } from '../theme.js';
 import { Eye, EyeOff, RefreshCw } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 
@@ -15,7 +15,6 @@ export default function DossierNarrativeButtons({
   aiSettlement,
   aiLoading,
   aiRegenerating,
-  aiError,
   displayProgress,
   storeShowNarrative,
   setShowNarrative,
@@ -40,21 +39,19 @@ export default function DossierNarrativeButtons({
     // State 1: no narrative yet → single generate button
     if (!aiSettlement && !aiLoading) {
       return (
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
+        // aiError no longer renders as a floating tooltip here \u2014 moved to a
+        // persistent inline notice + recovery CTA in OutputContainer's session-
+        // notices cluster (the strip-band placement floated it off-target). (P10.)
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <Button
             variant="ai"
-            size="sm"
+            size="md"
             onClick={runNarrativeLayer}
             title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
             icon={<span style={{ fontSize: FS.xs }}>{'\u2726'}</span>}
           >
             {`Generate Narrative${costLabel}`}
           </Button>
-          {aiError && (
-            <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-              {' '}{aiError}
-            </div>
-          )}
         </div>
       );
     }
@@ -64,11 +61,16 @@ export default function DossierNarrativeButtons({
       return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <div
+            role="status"
+            aria-live="polite"
             style={{
               ...btnBase,
-              background: 'rgba(90,42,138,0.3)',
-              border: '1px solid rgba(160,100,220,0.35)',
-              color: 'rgba(200,160,240,0.8)',
+              // Opaque violet text token on an opaque violet-tint surface so the
+              // progress text clears 4.5:1 on the light strip (the prior
+              // translucent-on-translucent pair fell below the floor).
+              background: swatch['#EBE2FA'],
+              border: '1px solid rgba(160,100,220,0.45)',
+              color: VIOLET_DEEP,
               cursor: 'default',
             }}
           >
@@ -86,24 +88,29 @@ export default function DossierNarrativeButtons({
     const regenerating = aiLoading && aiRegenerating;
 
     return (
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
-        {/* Toggle view button — free action */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {/* Toggle view button — the free, safe, expected first click, so it
+            stays the dominant action of the pair (gold when already in narrative
+            view, else the violet 'ai' affordance). */}
         <Button
           variant={inNarrativeView ? 'gold' : 'ai'}
-          size="sm"
+          size="md"
           onClick={() => setShowNarrative(!inNarrativeView)}
           disabled={regenerating}
           title={inNarrativeView
-            ? 'Switch to the raw generated data (no AI polish). No credits used.'
-            : 'Switch to the AI-refined view. No credits used.'}
+            ? 'Switch back to the raw simulation. No credits used.'
+            : 'Switch to the refined prose. No credits used.'}
           icon={inNarrativeView ? <EyeOff size={12} /> : <Eye size={12} />}
         >
           {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
         </Button>
-        {/* Regenerate button — spends credits */}
+        {/* Regenerate button — spends credits AND discards the current prose, so
+            it recedes to a low-emphasis ghost: the costly/destructive action must
+            never out-shout the free toggle (this reinforces the three-button split
+            that exists so view-toggling can't accidentally spend credits). */}
         <Button
-          variant="ai"
-          size="sm"
+          variant="ghost"
+          size="md"
           onClick={runNarrativeLayer}
           disabled={regenerating}
           busy={regenerating}
@@ -112,11 +119,8 @@ export default function DossierNarrativeButtons({
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>
-        {aiError && (
-          <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-            {' '}{aiError}
-          </div>
-        )}
+        {/* aiError moved to OutputContainer's persistent session-notices cluster
+            (with a recovery CTA) \u2014 see State 1 note. (P10.) */}
       </div>
     );
 }

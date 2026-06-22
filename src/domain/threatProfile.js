@@ -576,7 +576,7 @@ export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
   return profiles.map(t =>
-    `${t.label} — ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
+    `${t.label}: ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
   );
 }
 

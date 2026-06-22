@@ -18,11 +18,11 @@
 
 import { Save, Sparkles } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, sans, swatch } from '../theme.js';
+import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
-export const PREMIUM_PITCH = 'Unlock the simulation — advance time, run campaigns, author your pantheon.';
+export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns, author your pantheon.';
 
 /**
  * @param {{
@@ -42,34 +42,58 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
       data-testid="save-quota-meter"
       data-tier={tier}
       style={{
+        // Borderless tinted strip — demoted so this monetization frame doesn't
+        // add to the list's box-soup or out-rank the page header above it.
         display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
-        padding: '9px 12px', background: swatch['#FBF5E6'], border: `1px solid ${BORDER}`,
+        padding: '7px 12px', background: swatch['#FBF5E6'],
         borderRadius: 7, fontFamily: sans, fontSize: FS.xs, color: INK,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
-        <Save size={14} color={GOLD} />
+        <Save size={14} color={GOLD_TXT} aria-hidden="true" />
         {isAnon ? (
-          <span data-testid="quota-label" style={{ color: MUTED }}>
-            <strong style={{ color: INK }}>Sign in to save</strong> — keep your settlements across sessions.
+          <span data-testid="quota-label" style={{ color: BODY }}>
+            <strong style={{ color: INK }}>Sign in to save</strong>. Keep your settlements across sessions.
           </span>
         ) : isPremium ? (
-          <span data-testid="quota-label" style={{ color: MUTED }}>
+          <span data-testid="quota-label" style={{ color: BODY }}>
             <strong style={{ color: INK }}>Unlimited saves</strong> · the living world is unlocked.
           </span>
         ) : (
-          <span data-testid="quota-label" style={{ color: MUTED }}>
+          <span data-testid="quota-label" style={{ color: BODY }}>
             <strong style={{ color: INK }}>{used} of {max} saves</strong> used
+            {used >= max && (
+              <strong style={{ color: swatch.danger, marginLeft: 6 }}>· at cap</strong>
+            )}
           </span>
         )}
       </div>
 
-      {/* Meter (free only) — the COUNT limit, never a size cap. */}
+      {/* Meter (free only) — the COUNT limit, never a size cap. role=progressbar
+          + aria-value* give the fill a non-visual channel; the 'at cap' state is
+          also carried by the inline '· at cap' text label beside the count above
+          the bar, plus a hatch/border cue on the fill, so it is never color-alone. */}
       {!isAnon && !isPremium && (
-        <div data-testid="quota-bar" style={{ flex: '0 1 140px', minWidth: 100, height: 7, background: swatch['#E8D9B0'], borderRadius: 4, overflow: 'hidden' }}>
+        <div
+          data-testid="quota-bar"
+          role="progressbar"
+          aria-label="Saves used"
+          aria-valuenow={used}
+          aria-valuemin={0}
+          aria-valuemax={max}
+          aria-valuetext={`${used} of ${max} saves used`}
+          style={{ flex: '0 1 140px', minWidth: 100, height: 7, background: swatch['#E8D9B0'], borderRadius: 4, overflow: 'hidden' }}
+        >
           <div style={{
             width: `${Math.min(100, max > 0 ? (used / max) * 100 : 0)}%`, height: '100%',
-            background: used >= max ? swatch['#8B1A1A'] : GOLD, transition: 'width 200ms',
+            // At-cap rides a second visual channel beyond the red/gold hue swap:
+            // a diagonal hatch + high-contrast inset border so a near-full gold
+            // fill and the at-cap fill are distinguishable without color alone.
+            background: used >= max
+              ? `repeating-linear-gradient(45deg, ${swatch['#8B1A1A']}, ${swatch['#8B1A1A']} 4px, ${swatch.danger} 4px, ${swatch.danger} 8px)`
+              : GOLD,
+            boxShadow: used >= max ? `inset 0 0 0 1px ${INK}` : 'none',
+            transition: 'width 200ms',
           }}/>
         </div>
       )}
@@ -82,10 +106,14 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
       ) : !isPremium ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           <span data-testid="premium-pitch" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xxs, color: GOLD,
-            fontWeight: 700, background: GOLD_BG, border: `1px solid ${BORDER}`, borderRadius: 8, padding: '2px 8px',
+            // Tint-only token-pill (no border): a bordered chip inside the
+            // borderless meter strip re-introduced a box-on-tint and undercut the
+            // strip's demotion (P5). GOLD_BG fill + the Sparkles glyph + bold
+            // GOLD_TXT carry it, matching the card pips' tint-only pattern.
+            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: GOLD_TXT,
+            fontWeight: 700, background: GOLD_BG, borderRadius: 8, padding: '2px 8px',
           }}>
-            <Sparkles size={10}/> {PREMIUM_PITCH}
+            <Sparkles size={10} aria-hidden="true"/> {PREMIUM_PITCH}
           </span>
           <Button variant="gold" size="sm" onClick={() => onUpgrade?.()}>
             Upgrade

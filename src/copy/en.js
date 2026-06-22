@@ -66,9 +66,18 @@ export const en = Object.freeze({
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:       'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
       primaryCta: 'Create free account →',
-      sideDoor:   'or just take this one: buy the dossier for $2.99 ↓',
+      sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
+    },
+    // ── At-cap unlock copy rendered by HomeHero ─────────────────────────
+    // `spent` is the quiet recap; `unlockTpl` is the louder next-step value.
+    // The lead phrase is bolded in JSX, so it lives in its own key and the
+    // template carries a {signin} placeholder where that bold span renders.
+    anonCap: {
+      signin:    'Sign in (free)',
+      spent:     'You’ve explored hamlet, village, town.',
+      unlockTpl: '{signin} to reach thorp through metropolis, save every draft, and export the PDF.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -88,6 +97,12 @@ export const en = Object.freeze({
     subtitle: 'Pick a size and a region. The rest is up to the simulator.',
     button:   'Generate',
     subline:  'Roughly 10 to 20 seconds. Watch the pipeline as it runs.',
+    // Pre-generate config-screen header (canonical PageHeader idiom).
+    introEyebrow:  'Forge a settlement',
+    introTitle:    'Create a settlement',
+    // Mode-specific guidance, chunked to one idea per sentence (voice rule 6).
+    introSubtitleBasic:    'Pick a character and set the foundations, then generate. The simulator fills in everything else. To shape institutions, services, and trade yourself, switch to Advanced.',
+    introSubtitleAdvanced: 'Pick a character and the foundations. Open Fine-tune and the deep constraints to control institutions, services, and trade. Generate when ready.',
     sizes: {
       thorp:   'Thorpe',
       hamlet:  'Hamlet',
@@ -119,10 +134,12 @@ export const en = Object.freeze({
 
   // ── Auth modal ────────────────────────────────────────────────────────────
   auth: {
+    modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
     subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
     signinSubtitle: 'Sign in to keep your work: saves, exports, larger settlements, and the Neighbourhood System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, push to larger sizes, and link settlements in the Neighbourhood System.',
+    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
+    resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
       placeholder: 'Coming soon. We’re finishing the OAuth review.',
@@ -144,18 +161,48 @@ export const en = Object.freeze({
     },
     password: {
       label:    'Sign in with a password',
+      show:     'Show password',
+      hide:     'Hide password',
       forgot:   'Forgot password?',
       register: 'Create an account',
     },
     button: {
-      working:     'Working...',
-      sendLink:    'Send sign-in link',
-      createAcct:  'Create account',
-      signIn:      'Sign in',
-      moreOpen:    'More sign-in options',
-      moreClose:   'Hide more options',
-      usePassword: 'Use a password instead',
-      useMagic:    'Use a magic link instead (recommended)',
+      working:        'Working...',
+      sendLink:       'Send sign-in link',
+      createAcct:     'Create account',
+      signIn:         'Sign in',
+      moreOpen:       'More sign-in options',
+      moreClose:      'Hide more options',
+      usePassword:    'Use a password instead',
+      useMagic:       'Use a magic link instead (recommended)',
+      resend:         'Resend link',
+      differentEmail: 'Use a different email',
+      backToSignIn:   'Back to sign in',
+    },
+    // Password-reset request: the prose intro and the post-send confirmation.
+    // Formal register, no contractions (auth/security copy).
+    reset: {
+      prose: 'Enter your email address and we will send a link to reset your password.',
+      sent:  'Check your email for a password reset link.',
+    },
+    // Magic-link "check your inbox" close. {email} is interpolated; the link
+    // window is a scannable spec, so a digit is acceptable there.
+    magic: {
+      sent: 'Check {email} for a sign-in link. The link works for 1 hour.',
+    },
+    // Post sign-up email verification close. {email} is interpolated.
+    // `sent` is AuthPanel's inline close; the rest power the /verify-email
+    // link-landing page, a thin status surface over auth state (loading /
+    // confirmed / expired). Supabase confirms via the emailed link, so there
+    // is no code field here.
+    verify: {
+      sent:       'We sent a confirmation link to {email}. Check your inbox and click the link to activate your account.',
+      title:      'Verify your email',
+      confirming: 'Confirming your email…',
+      confirmed:  'Your email is confirmed. Taking you to your settlements…',
+      expired:    'This confirmation link is invalid or has expired. Try signing in. If your account is not active yet, request a fresh link.',
+      continue:   'Continue',
+      goSignIn:   'Go to Sign In',
     },
     placeholder: {
       email:    'Email address',
@@ -165,19 +212,32 @@ export const en = Object.freeze({
     localMode:  'Running in local mode. No backend configured.',
     error: {
       generic:    'Something went wrong. Try again.',
-      invalid:    'That email or password didn’t work.',
+      invalid:    'That email or password did not work.',
       rateLimit:  'Too many attempts. Try again in a minute.',
       network:    'No network. Check your connection.',
+      // Bare fallbacks for the auth handlers. Each states what went wrong and
+      // what to do, with no blame. Formal register, no contractions (auth copy).
+      // The catch sites keep `e.message || t(...)` so an upstream lib message
+      // still wins; only these literals moved off the handler.
+      passwordTooShort: 'Your password must be at least six characters.',
+      emailRequired:    'Enter your email address to continue.',
+      signInFailed:     'We could not sign you in. Please try again.',
+      signUpFailed:     'We could not create your account. Please try again.',
+      resetFailed:      'We could not send the password reset link. Please try again.',
+      magicLinkFailed:  'We could not send the sign-in link. Please try again.',
+      oauthFailed:      'We could not complete the sign-in. Please try again.',
     },
     legal: 'By continuing you agree to the Terms and Privacy Policy.',
   },
 
   // ── Pricing ───────────────────────────────────────────────────────────────
   pricing: {
+    eyebrow:      'Plans',
     pageTitle:    'Pricing',
-    pageSubtitle: 'Pay once for credits. Subscribe if you want more room.',
+    pageSubtitle: 'Generate a town in seconds. Then run the region for years.',
     antiAi:       'Settlements are simulated from constraints, not generated by AI. Only the optional Narrative Layer uses language synthesis, and it grounds itself in the simulator output.',
     tiers: {
+      heading:     'Subscription tiers',
       wanderer: {
         name:        'Wanderer',
         priceLabel:  'Free',
@@ -187,7 +247,7 @@ export const en = Object.freeze({
         // Size is FREE: a free account generates ANY size up to metropolis
         // (anon visitors cap at town — signing up is what unlocks full size).
         features: [
-          'Generate any size — hamlet through metropolis',
+          'Generate any size, from hamlet to metropolis',
           '3 saved settlements',
           'PDF export of any saved dossier',
           'Pay-per-use narrative refinement (credit packs)',
@@ -197,13 +257,13 @@ export const en = Object.freeze({
         name:        'Cartographer',
         priceLabel:  '$6',
         priceSub:    'per month',
-        tagline:     'For the DM running a real campaign.',
+        tagline:     'For the DM running a campaign.',
         cta:         'Subscribe',
         // NOTE: size is FREE (free accounts reach metropolis), so "capital size"
         // is no longer a premium bullet. The premium product is the living
         // SIMULATION; storage/saves stays as a secondary bullet.
         features: [
-          'Advance time — run the region for years',
+          'Advance time and run the region for years',
           'Campaigns: link settlements into one living world',
           'The self-ending war layer + the living pantheon',
           'Custom content + share to the Gallery',
@@ -235,7 +295,7 @@ export const en = Object.freeze({
     },
     creditPacks: {
       heading:  'Narrative Credit Packs',
-      subhead:  'Buy in bulk for a deeper discount. Credits never expire.',
+      subhead:  'A credit refines one settlement\'s data into narrated prose. Buy in bulk for a deeper discount. Credits never expire.',
       pack:     '{credits} credits',
       perEach:  '{price}/ea',
       best:     'Best value',
@@ -253,9 +313,9 @@ export const en = Object.freeze({
       pageSubtitle: 'Generate a town in seconds. Then run the region for years.',
       tiers: {
         wanderer: {
-          tagline:  'Generate any town, full size, free. See if the engine earns a campaign.',
+          tagline:  'Generate any size from hamlet to metropolis, free. See if a campaign takes root.',
           features: [
-            'Generate any size — hamlet through metropolis, free',
+            'Generate any size, from hamlet to metropolis, free',
             '3 saved settlements',
             'PDF export of any saved dossier',
             'Pay-per-use narrative refinement (credit packs)',
@@ -264,7 +324,7 @@ export const en = Object.freeze({
         cartographer: {
           tagline:  'Generate a town in seconds, then run the region for years.',
           features: [
-            'Advance time — the region runs for years',
+            'Advance time and the region runs for years',
             'The self-ending war layer: sieges, coalitions, conquest',
             'The living pantheon: deities contest converts and rise',
             'Campaigns + a chronicle that writes itself',
@@ -296,7 +356,7 @@ export const en = Object.freeze({
     heading:  'Three rungs, one engine',
     subhead:  'It generates a town in seconds, then it runs the region for years.',
     lens: {
-      new:          'A great town in seconds — and a region that grows with you.',
+      new:          'A great town in seconds, then a region that grows with you.',
       intermediate: 'A town a week, then a campaign that runs itself.',
       worldbuilder: 'A living region you can run for years.',
     },
@@ -311,7 +371,7 @@ export const en = Object.freeze({
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates ANY size — hamlet through metropolis — saves your work, and exports the PDF.',
+        body:    'A free account generates any size, from hamlet to metropolis. It saves your work and exports the PDF.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -329,7 +389,7 @@ export const en = Object.freeze({
     narrative: {
       button:      'Generate narrative ({cost} credits)',
       shortLabel:  'Narrative',
-      description: 'A literary thesis of the settlement, refined across 13 passes.',
+      description: 'A settlement thesis, written and refined across thirteen passes.',
       running:     'Composing the thesis…',
     },
     dailyLife: {
@@ -341,7 +401,7 @@ export const en = Object.freeze({
     progression: {
       button:      'Generate progression ({cost} credits)',
       shortLabel:  'Progression',
-      description: 'A diff-aware evolution of the prior narrative against new state.',
+      description: 'The prior narrative evolved against what changed, line by line.',
       running:     'Tracking what changed…',
     },
     insufficient: 'You need {cost} credits for this. You have {balance}.',
@@ -380,6 +440,19 @@ export const en = Object.freeze({
       step3Body:    'Sign in and your work survives the tab close. Your first three saves are free.',
       dismiss:      'I’ve got it from here',
     },
+    firstRun: {
+      stepCounter:  'Step {current} of {total}',
+      step0Title:   "Let's build your first settlement",
+      step0Body:    'Pick a size below (Thorp is small, Metropolis is huge), then click Generate. You can always regenerate or tweak the sliders.',
+      step1Title:   'Ready to forge your world',
+      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, factions, NPCs, crises.',
+      step2Title:   'Here it is. Explore the tabs',
+      step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
+      step3Title:   "You're all set",
+      step3Body:    'Save this to your library, export a PDF, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
+      finish:       'Finish tour',
+      dismiss:      'Dismiss onboarding',
+    },
     checklist: {
       title:           'Get the most from SettlementForge',
       subtitle:        'Five small things. Knock them out as you explore.',
@@ -388,13 +461,13 @@ export const en = Object.freeze({
       itemRail:        'Tap a step in the simulation rail',
       itemSave:        'Save the dossier',
       itemNeighbour:   'Link a second settlement (Neighbourhood System)',
-      completeBadge:   'Complete!',
+      completeBadge:   'Complete',
     },
   },
 
   // ── Account page ─────────────────────────────────────────────────────────
   account: {
-    setDisplayName:        'Set Display Name',
+    setDisplayName:        'Set display name',
     subscriptionHeading:   'Subscription & Credits',
     profileHeading:        'Profile',
     cardCurrentTier:       'Current Tier',
@@ -402,19 +475,20 @@ export const en = Object.freeze({
     cardSaves:             'Saved Settlements',
     fullAccess:            'Full Access',
     purchaseCreditsLabel:  'Purchase Credits (Volume Discounts)',
-    purchaseErrorTitle:    'Purchase couldn’t start. Try again or refresh the page.',
+    purchaseErrorTitle:    'Purchase could not start. Try again or refresh the page.',
   },
 
   // ── Gallery (public dossier listing) ────────────────────────────────────
   gallery: {
+    eyebrow:      'From the community',
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
     antiAi:       'Every dossier in the gallery was simulated, not AI-generated. The settlements are derived from the same constraint engine, coherent because the simulator made them so.',
     forgeYourOwn: 'Forge your own',
     untitled:     'Untitled settlement',
     emptyTitle:   'No public dossiers yet.',
-    emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent, crawlable page.',
-    loadError:    'Couldn’t load the gallery. Try again in a moment.',
+    emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent page anyone can find.',
+    loadError:    'The gallery could not be loaded. Try again in a moment.',
     backToList:   'Back to gallery',
   },
 
@@ -444,7 +518,7 @@ export const en = Object.freeze({
   // "re-run the narrative now" or "carry on with the raw simulation".
   staleNarrative: {
     heading:         'The narrative is now out of date.',
-    body:            'Your change is applied. The AI narrative on this save was written against the previous state — its prose doesn’t know about what just happened.',
+    body:            'Your change is applied. The prose on this save was written against the previous state, so it does not yet know what just happened.',
     regenerateTitle: 'Regenerate narrative',
     regenerateBody:  'Re-run the narrative against the new state. Spends {cost} credits.',
     continueTitle:   'Continue with raw simulation',
@@ -460,7 +534,7 @@ export const en = Object.freeze({
     bestLabel:         'Best value',
     valueLabel:        'Most popular',
     perCreditTemplate: '{price}/credit',
-    failureMessage:    'Couldn’t start checkout. Try once more.',
+    failureMessage:    'Checkout could not start. Try once more.',
   },
 
   // ── Errors (user-facing only — internal logs stay in console) ────────────
@@ -510,7 +584,7 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:     'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
@@ -522,11 +596,11 @@ export const en = Object.freeze({
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
-      body:     'Locks, drift, chronicle: Cartographer surfaces the worldbuilder-tier controls.',
+      body:     'Locks, drift, chronicle: Cartographer hands you the worldbuilder controls.',
     },
     map_clicked: {
       headline: 'World Map unlocks with Cartographer.',
-      body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
+      body:     'Place settlements, draw routes, trace where the supply chains strain. Your campaign becomes a map.',
     },
     // ── The Realm hub locked-state teaser ────────────────────────────────
     map_realm_teaser: {
@@ -539,7 +613,7 @@ export const en = Object.freeze({
     },
     welcome_credit: {
       headline: 'Try the Narrative Layer once, on us.',
-      body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
+      body:     'One credit on every signup. The Narrative Layer turns this town’s data into prose your players can hear.',
     },
   },
 
@@ -550,9 +624,9 @@ export const en = Object.freeze({
   // sells size/metropolis/capital as premium. Premium is the simulation.
   pricingPitch: {
     wanderer: {
-      lineNew:          'Generate any town, full size, free. Find out if this works for you.',
-      lineIntermediate: 'Any size, free forever. See if a session a week earns the upgrade.',
-      lineWorldbuilder: 'Try the engine, full size. Three saves is enough to see if the moat is real.',
+      lineNew:          'Generate any size, free. Find out if it works for you.',
+      lineIntermediate: 'Any size, free forever. See if a session a week calls for more.',
+      lineWorldbuilder: 'Try the engine, full size. Three saves is enough to see if the coherence holds.',
     },
     cartographer: {
       lineNew:          'When you’re ready for a campaign instead of an evening: advance time and watch the region run.',
@@ -562,7 +636,7 @@ export const en = Object.freeze({
     founder: {
       lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
       lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
-      lineWorldbuilder: 'For DMs running living regions. Pay once, ship every campaign you’ll ever run.',
+      lineWorldbuilder: 'For DMs running living regions. Pay once, run every campaign you’ll ever build.',
     },
   },
 
@@ -638,14 +712,14 @@ export const en = Object.freeze({
       },
       worldbuilder: {
         eyebrow: 'For the worldbuilder',
-        body:    'Salt-road supply chain breaks at Whitestone Pass → preserved-meat exports halt in 11 days. Famine cascade primed. Pull any thread and the next one tightens.',
+        body:    'The salt road breaks at Whitestone Pass and preserved-meat exports halt in 11 days. The famine cascade is primed. Pull any thread and the next one tightens.',
       },
       fridaysSession: {
         eyebrow: 'For Friday’s session',
         body:    '“The wall-fund ledger has gone missing. The Captain blames the merchants. The merchants blame the militia. Someone is hiding it in plain sight.”',
       },
     },
-    footer: 'A real settlement from the simulator. Yours generates in eight seconds.',
+    footer: 'A whole settlement from the simulator. Yours generates in eight seconds.',
   },
 
   // ── First-dossier teaching callouts ──────────────────────────────────────
@@ -659,7 +733,7 @@ export const en = Object.freeze({
     },
     supply: {
       eyebrow: 'Why this is a session',
-      body:    'If the salt road closes, this town runs out in 11 days. That’s a session. Supply chains aren’t flavor, they’re fuel.',
+      body:    'If the salt road closes, this town runs out in eleven days. That is a session waiting to happen.',
     },
     hook: {
       eyebrow: 'Where hooks come from',
@@ -689,7 +763,7 @@ export const en = Object.freeze({
   // the premium one.
   authBlurb: {
     freeLabel:    'Free account',
-    freeBody:     'Generate any size — hamlet through metropolis — save your work, and export the PDF.',
+    freeBody:     'Generate any size, from hamlet to metropolis. Save your work and export the PDF.',
     premiumLabel: 'Cartographer',
     premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
   },
@@ -700,31 +774,33 @@ export const en = Object.freeze({
   // "how it stays coherent" + the opt-in / off-by-default / reversible
   // qualifier. Size is FREE and is never sold here as premium.
   aboutLiving: {
+    headerEyebrow: 'How the simulator works',
+    headerTitle:   'About SettlementForge',
     thesis:      'It generates a town in seconds, then it runs the region for years.',
-    thesisSub:   'The static dossier is the start. Advance time and the whole region becomes a living, self-consistent simulation — wars that end themselves, faiths that rise, a chronicle that writes itself.',
+    thesisSub:   'The static dossier is the start. Advance time and the whole region becomes a living, self-consistent simulation: wars that end themselves, faiths that rise, a chronicle that writes itself.',
     premiumChip: 'Cartographer',
     qualifier:   'Off by default · opt-in · reversible',
-    intro:       'These are the systems the simulation runs once you advance time. Each one is premium, opt-in, and off until you turn it on — a peacetime, non-campaign save renders exactly as it does today.',
+    intro:       'These are the systems the simulation runs once you advance time. Each one is premium, opt-in, and off until you turn it on. A peacetime, non-campaign save renders exactly as it does today.',
     systems: {
       advanceTime: {
         title:     'Advance Time',
         claim:     'Push the world forward a month at a time and the whole region responds at once.',
-        coherence: 'Every change is derived from the same causal substrate the dossier already shows — nothing moves at random; each delta carries a "what changed and why".',
+        coherence: 'Every change is derived from the same causal substrate the dossier already shows. Nothing moves at random, and each shift carries its own record of what changed and why.',
       },
       war: {
         title:     'The self-ending war',
-        claim:     'Sieges form, coalitions gather, settlements fall — and wars burn themselves out.',
+        claim:     'Sieges form, coalitions gather, settlements fall, yet wars burn themselves out.',
         coherence: 'War drains the economy, which feeds war-exhaustion, which drives the realm back to peace. The homeostasis is the engine, not a script.',
       },
       pantheon: {
         title:     'The living pantheon',
         claim:     'Deities contest converts, win seats, and rise from cult to major across the region.',
-        coherence: 'Faith couples back into the world: alignment shifts corruption, temperament shifts aggression, rank shifts magic legality — the same constants the dossier reads.',
+        coherence: 'Faith couples back into the world: alignment shifts corruption, temperament shifts aggression, rank shifts magic legality. These are the same constants the dossier reads.',
       },
       chronicle: {
         title:     'The chronicle',
         claim:     'Every advance writes itself into a scrubbable history of what happened and to whom.',
-        coherence: 'The chronicle is derived from the pulse record, not authored separately — it can only say what the simulation actually did.',
+        coherence: 'The chronicle is derived from the pulse record, not authored separately. It can only say what the simulation actually did.',
       },
     },
   },
@@ -736,7 +812,7 @@ export const en = Object.freeze({
   replay: {
     eyebrow:  'A region waking up',
     title:    'Watch a region wake up',
-    subtitle: 'A pre-baked campaign, advanced four months. No account, no live engine — just the same read-outs the simulation produces.',
+    subtitle: 'One campaign, advanced four months. No account, the same read-outs the simulation produces.',
     stepLabel: 'Month {step} of {total}',
     prev:     'Back',
     next:     'Advance a month',

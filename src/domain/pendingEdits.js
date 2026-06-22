@@ -213,7 +213,7 @@ export function previewCascade(settlement, queue) {
   // Warnings — surface the things the DM should think about.
   if (structuralCount > 0 && isNarrated) {
     out.warnings.push(
-      'Structural change on a narrated save — the narrative layer will need regeneration to stay coherent.'
+      'Structural change on a narrated save. The narrative layer will need regeneration to stay coherent.'
     );
   }
   if (netInstitutions < 0 && Math.abs(netInstitutions) >= 2) {

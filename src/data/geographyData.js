@@ -82,7 +82,7 @@ export const TERRAIN_DATA = {
       "Salt production",
       "Shipbuilding"
     ],
-    strategicValue: "High - controls sea routes and naval access"
+    strategicValue: "High: controls sea routes and naval access"
   },
   riverside: {
     name: "Riverside",
@@ -164,7 +164,7 @@ export const TERRAIN_DATA = {
       "River trade",
       "Brewing"
     ],
-    strategicValue: "Medium - controls river crossing and inland trade"
+    strategicValue: "Medium: controls the river crossing and inland trade"
   },
   mountain: {
     name: "Mountain",
@@ -259,7 +259,7 @@ export const TERRAIN_DATA = {
       "Stoneworking",
       "Gemcutting"
     ],
-    strategicValue: "High - defensible position, controls mountain passes, mineral wealth"
+    strategicValue: "High: a defensible position that controls the mountain passes and holds mineral wealth"
   },
   forest: {
     name: "Forest",
@@ -363,7 +363,7 @@ export const TERRAIN_DATA = {
       "Woodcraft",
       "Hunting"
     ],
-    strategicValue: "Low-Medium - provides timber and game, difficult to besiege"
+    strategicValue: "Low to medium: yields timber and game, and the trees make it hard to besiege"
   },
   plains: {
     name: "Plains",
@@ -468,7 +468,7 @@ export const TERRAIN_DATA = {
       "Wool and textiles",
       "Central trade hub"
     ],
-    strategicValue: "Medium - agricultural heartland, but exposed to raids"
+    strategicValue: "Medium: an agricultural heartland, but open to raids"
   },
   hills: {
     name: "Hills",
@@ -561,7 +561,7 @@ export const TERRAIN_DATA = {
       "Wool production",
       "Mining"
     ],
-    strategicValue: "Medium-High - defensible terrain, good visibility"
+    strategicValue: "Medium to high: defensible terrain with a long view"
   },
   desert: {
     name: "Desert/Arid",
@@ -660,7 +660,7 @@ export const TERRAIN_DATA = {
       "Salt trade",
       "Exotic goods"
     ],
-    strategicValue: "Medium - controls caravan routes, water sources are strategic"
+    strategicValue: "Medium: controls the caravan routes, and the water sources decide who passes"
   }
 };
 

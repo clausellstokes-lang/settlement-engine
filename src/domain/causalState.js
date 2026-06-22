@@ -331,7 +331,7 @@ function derivePublicLegitimacy(s) {
     if (led.present && led.readinessScore < 40) {
       score -= 6;
       push(contributors, 'config.monsterThreat', 'unprotected', -6,
-        `Monsters plague the region and defense readiness is ${led.readinessScore} — the crown cannot protect its people.`);
+        `Monsters plague the region and defense readiness is ${led.readinessScore}. The crown cannot protect its people.`);
     }
   }
 
@@ -500,7 +500,7 @@ function deriveEconomicCapacity(s) {
   const base = /** @type {Record<string, number>} */ (PROSPERITY_BASE)[prosperity.toLowerCase()] ?? 50;
   let score = base;
   push(contributors, 'economicState.prosperity', prosperity || 'unknown', base - 50,
-    prosperity ? `Prosperity is ${prosperity}.` : 'Prosperity unrecorded — neutral baseline.');
+    prosperity ? `Prosperity is ${prosperity}.` : 'Prosperity unrecorded: neutral baseline.');
 
   // Diversified economies absorb shocks; concentrated/specialized ones are brittle.
   const complexity = String(eco.economicComplexity || '').toLowerCase();
@@ -611,7 +611,7 @@ function deriveLawOrder(s) {
   } else if (lawCount === 1) {
     score += 5; push(contributors, 'institutions', 'limited', +5, 'A single law-and-order institution maintains the peace.');
   } else if (institutions.length > 0) {
-    score -= 6; push(contributors, 'institutions', 'absent', -6, 'No courts or watch — order rests on informal mechanisms.');
+    score -= 6; push(contributors, 'institutions', 'absent', -6, 'No courts or watch. Order rests on informal mechanisms.');
   }
 
   // Criminal / corruption signals erode the rule of law. Black-market capture is
@@ -1163,9 +1163,9 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
   const better = (polar === 'higher_is_better' && change > 0) ||
                  (polar === 'lower_is_better'  && change < 0);
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '. Pressure increased'}`;
   }
-  return `${label} ${dir} ${mag}${better ? '' : ' — pressure increased'}`;
+  return `${label} ${dir} ${mag}${better ? '' : '. Pressure increased'}`;
 }
 
 /**

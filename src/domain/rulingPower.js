@@ -242,7 +242,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
   if (!challengers.length) {
     return {
       holds: true, pHold: 1, roll: 0, winner: null, challengers, incumbent,
-      reason: 'No faction holds enough power to move against the seat — the plot collapses on its own.',
+      reason: 'No faction holds enough power to move against the seat. The plot collapses on its own.',
     };
   }
 
@@ -284,7 +284,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
     reason: incumbent.gated
       ? `${winner.name} out-maneuvered both the seat and its rivals (weight ${winner.weight} of ${round2(total)}).`
-      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field — ${winner.name} took the seat near-unopposed.`,
+      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field. ${winner.name} took the seat near-unopposed.`,
   };
 }
 
@@ -331,11 +331,11 @@ const LEGITIMACY_SEEDS = Object.freeze({
 });
 
 const STABILITY_BY_CAUSE = Object.freeze({
-  coup:        'Unsettled — power changed hands by force; loyalties are being re-sworn',
-  conquest:    'Subjugated — an outside power imposed the new order',
-  election:    'Stable — a fresh mandate, still finding its footing',
-  succession:  'Transitional — the succession held, the household is reordering',
-  appointment: 'Transitional — an appointed authority is establishing itself',
+  coup:        'Unsettled: power changed hands by force; loyalties are being re-sworn',
+  conquest:    'Subjugated: an outside power imposed the new order',
+  election:    'Stable: a fresh mandate, still finding its footing',
+  succession:  'Transitional: the succession held, the household is reordering',
+  appointment: 'Transitional: an appointed authority is establishing itself',
 });
 
 const MAX_PREVIOUS_GOVERNMENTS = 6;
@@ -430,7 +430,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   // (whatever friction it carried died with the old order); the (coup) losers
   // get grudge edges.
   const winnerName = nameOf(winner);
-  const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()} — the seat answers to them now.`;
+  const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()}. The seat answers to them now.`;
   let pairedWithWinner = false;
   const renamedRelationships = (ps.factionRelationships || []).map(rel => {
     if (!Array.isArray(rel?.pair)) return rel;
@@ -461,7 +461,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
       pair: [toGovernment, loser],
       type: 'competitive',
       direction: 'escalating',
-      narrative: `${loser} moved for the seat and lost — the new order has not forgotten, and neither have they.`,
+      narrative: `${loser} moved for the seat and lost. The new order has not forgotten, and neither have they.`,
     });
   }
 

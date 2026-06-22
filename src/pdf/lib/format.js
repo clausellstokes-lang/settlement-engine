@@ -10,24 +10,24 @@ export function cap(s) {
 }
 
 export function num(n, dec = 0) {
-  if (n == null || Number.isNaN(n) || n === '') return '—';
+  if (n == null || Number.isNaN(n) || n === '') return '–';
   if (typeof n !== 'number') return String(n);
   if (dec === 0) return String(Math.round(n));
   return Number(n.toFixed(dec)).toString();
 }
 
 export function pct(n, dec = 0) {
-  if (n == null || Number.isNaN(n)) return '—';
+  if (n == null || Number.isNaN(n)) return '–';
   if (typeof n !== 'number') return String(n);
   return `${num(n, dec)}%`;
 }
 
 /**
  * Format a float that might appear in raw engine output (e.g. food balance,
- * safety ratio). Caps to 2 decimals, drops trailing zeros, returns '—' if null.
+ * safety ratio). Caps to 2 decimals, drops trailing zeros, returns '–' if null.
  */
 export function smart(n) {
-  if (n == null || Number.isNaN(n) || n === '') return '—';
+  if (n == null || Number.isNaN(n) || n === '') return '–';
   if (typeof n !== 'number') return String(n);
   if (Number.isInteger(n)) return String(n);
   if (Math.abs(n) >= 100) return String(Math.round(n));

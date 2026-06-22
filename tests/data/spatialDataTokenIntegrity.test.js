@@ -29,7 +29,7 @@ describe('landlocked-navy access violation copy', () => {
 
   it('reads cleanly, with no leaked SEVERITY token', () => {
     expect(reason).toBe(
-      'A navy requires coastal or ocean access. This settlement is landlocked — it can have river patrols but not a navy.',
+      'A navy requires coastal or ocean access. This settlement is landlocked and can have river patrols but not a navy.',
     );
     expect(reason).not.toContain('SEVERITY');
   });

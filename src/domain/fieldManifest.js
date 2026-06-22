@@ -64,7 +64,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: null,
     mode: 'snapshot',
     pulseWriter: null,
-    displayRule: 'Generation verdicts with NO live sibling — display-as-generated is honest '
+    displayRule: 'Generation verdicts with NO live sibling. Display-as-generated is honest '
       + 'today. Whichever package gives any of them a pulse writeback must flip its row to '
       + 'live and name the writer.',
     guards: [],
@@ -111,7 +111,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: null,
     mode: 'snapshot',
     pulseWriter: null,
-    displayRule: 'Deliberate snapshot — the food model is population-scale-invariant (audit '
+    displayRule: 'Deliberate snapshot. The food model is population-scale-invariant (audit '
       + 'REFUTED the freshness harm: ratios cancel; live re-derivation would be byte-identical). '
       + 'If refugee influxes should strain per-capita food, that is a model-design decision.',
     guards: [],

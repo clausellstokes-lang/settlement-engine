@@ -232,7 +232,7 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
     archetype: 'food_anchor_lost',
     severity: sev,
     triggeredAt: { sourceEventType: event.type, sourceEventTargetId: idOf(inst) },
-    causes: [{ source: 'event', eventId: event.id, detail: `${inst.name} is out of action — the settlement's food supply lost an anchor.` }],
+    causes: [{ source: 'event', eventId: event.id, detail: `${inst.name} is out of action. The settlement's food supply lost an anchor.` }],
   });
 }
 

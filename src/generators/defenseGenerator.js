@@ -655,9 +655,9 @@ export function buildThreatAssessment(r) {
       mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
         + (hasCharter
           ? 'Charter hall coordinates specialist monster response.'
-          : 'No specialist monster hunters on retainer — the garrison handles everything.');
+          : 'No specialist monster hunters on retainer. The garrison handles everything.');
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin — simultaneous incursions will break coverage. '
+      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.');
@@ -668,17 +668,17 @@ export function buildThreatAssessment(r) {
     } else if (hasGarrison) {
       mon = 'Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
     } else {
-      mon = 'embattled region with no organized defense and no perimeter. Survival depends on terrain, luck, and the ability to flee. This settlement is in extreme danger.';
+      mon = 'An embattled region with no organized defense and no perimeter. Survival rests on terrain, luck, and a fast road out. This settlement is in extreme danger.';
     }
   } else if (threat === 'frontier') {
     if (hasWalls && hasGarrison) {
-      mon = 'Active frontier. Walls and garrison provide credible deterrence — most creature threats will not press a defended perimeter. '
+      mon = 'Active frontier. Walls and garrison provide credible deterrence. Most creature threats will not press a defended perimeter. '
         + (hasCharter
           ? 'Charter hall handles anything above the garrison usual remit. '
           : '')
         + 'Adequate for the threat level.';
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and militia are standard frontier resilience — effective against most creature threats, strained by simultaneous incursions. '
+      mon = 'Palisade and militia are standard frontier resilience: effective against most creature threats, strained by simultaneous incursions. '
         + (hasCharter
           ? 'Charter hall provides specialist backup. '
           : '')
@@ -686,13 +686,13 @@ export function buildThreatAssessment(r) {
     } else if (hasGarrison || hasMilitia) {
       mon = 'Active frontier with '
         + (hasGarrison ? 'a garrison' : 'a militia')
-        + ' but no perimeter. Defense is reactive — attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
+        + ' but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
     } else {
       mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
     }
   } else {
     if (hasWalls && hasGarrison) {
-      mon = 'Safe heartland — the existing defenses are substantially more than the threat level requires.';
+      mon = 'Safe heartland. The existing defenses are substantially more than the threat level requires.';
     } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
       mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
     } else {
@@ -716,7 +716,7 @@ export function buildThreatAssessment(r) {
   if (hasWalls && hasGarrison) {
     mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
   } else if (hasWalls && hasMilitia) {
-    mil = 'Walls with citizen militia — credible deterrence against raiders, inadequate against any professional force with siege capability.';
+    mil = 'Walls with citizen militia: credible deterrence against raiders, inadequate against any professional force with siege capability.';
   } else if (hasWalls) {
     mil = 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
   } else if (hasGarrison) {
@@ -751,7 +751,7 @@ export function buildThreatAssessment(r) {
   } else if (f.hasPrison) {
     intA += 'Detention without systematic prosecution.';
   } else {
-    intA += 'No legal infrastructure — order relies on force alone.';
+    intA += 'No legal infrastructure. Order relies on force alone.';
   }
   result.push({
     icon: '',
@@ -784,12 +784,12 @@ export function buildThreatAssessment(r) {
   });
 
   const disA = (f.hasGranary
-    ? 'Granary provides food buffer — the community can absorb a bad harvest without immediate hardship.'
+    ? 'Granary provides food buffer. The community can absorb a bad harvest without immediate hardship.'
     : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
     + (f.hasHospital
       ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
       : f.hasChurch
-        ? ' Parish clergy provide basic wound care — better than nothing, worse than a hospital.'
+        ? ' Parish clergy provide basic wound care: better than nothing, worse than a hospital.'
         : ' No medical infrastructure. Plague spreads until it burns out.');
   result.push({
     icon: '',

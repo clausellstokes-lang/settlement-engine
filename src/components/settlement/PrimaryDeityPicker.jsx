@@ -93,7 +93,7 @@ export default function PrimaryDeityPicker() {
           </select>
           {currentSnap && (
             <div style={{ fontSize: FS.micro, color: SECOND, marginTop: 6, lineHeight: 1.4 }}>
-              {currentSnap.name} — {currentSnap.alignmentAxis} · {currentSnap.temperamentAxis} · {currentSnap.rankAxis}
+              {currentSnap.name}: {currentSnap.alignmentAxis} · {currentSnap.temperamentAxis} · {currentSnap.rankAxis}
               {currentSnap.lawAxis && currentSnap.lawAxis !== 'neutral' ? ` · ${currentSnap.lawAxis}` : ''}
               {currentSnap.domain ? ` · ${currentSnap.domain}` : ''}
             </div>

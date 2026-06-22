@@ -214,7 +214,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── Food security label ───────────────────────────────────────────────────
   let label, color, bg;
   if (stressFamine) {
-    label = 'Deficit — Active Famine';
+    label = 'Deficit: Active Famine';
     color = '#8b1a1a'; bg = '#fdf4f4';
   } else if (deficitPct > 40) {
     label = 'Deficit';
@@ -249,9 +249,9 @@ export function generateFoodSecurity(tier, institutions, config) {
   } else if (deficitPct > 40) {
     if (_terrainStructural) {
       // Mountain/desert: severe deficit is normal — penalty not hard cap, imports cover it
-      prosperityMod = { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports — structural dependency, not crisis' };
+      prosperityMod = { type: 'penalty', value: -1, reason: 'The terrain forces heavy food imports. A standing dependency, not a crisis' };
     } else if (_magicFoodMitigated) {
-      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports — prosperity capped at Moderate' };
+      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports. Prosperity capped at Moderate' };
     } else {
       prosperityMod = { type: 'cap', value: 1, reason: 'Severe structural food deficit caps prosperity at Poor' };
     }
@@ -280,15 +280,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   const storageNote = storageMonths >= 8 ? `${storageMonths} months strategic reserve`
                     : storageMonths >= 4 ? `${storageMonths} months buffer`
                     : storageMonths >= 2 ? 'seasonal buffer only'
-                    : 'minimal storage — vulnerable to disruption';
+                    : 'minimal storage. Vulnerable to disruption';
 
   const magicNote = magicSupplement > 0.2 ? 'Significant magical food supplement'
                   : magicSupplement > 0.1 ? 'Modest magical food supplement'
                   : magicSupplement > 0 ? 'Trace magical food contribution'
                   : null;
 
-  const importNote = importPct >= 40 ? `${importPct}% import-dependent — trade disruption = immediate crisis`
-                   : importPct >= 20 ? `${importPct}% imported — meaningful external dependency`
+  const importNote = importPct >= 40 ? `${importPct}% import-dependent. Trade disruption means immediate crisis`
+                   : importPct >= 20 ? `${importPct}% imported. Meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
                    : null;
 

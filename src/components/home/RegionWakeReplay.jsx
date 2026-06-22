@@ -20,7 +20,7 @@
 
 import { useMemo, useState } from 'react';
 import { Swords, Flame, Sparkles, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
-import { FS, swatch } from '../theme.js';
+import { FS, PARCH, INK_DEEP, INK, GOLD, GOLD_B, MUTED, BORDER, sans, serif_, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -29,16 +29,9 @@ import {
   REPLAY_STEP_COUNT,
 } from '../../domain/display/regionWakeReplay.js';
 
-const PARCH = swatch['#FBF5E6'];
-const INK_DEEP = swatch['#1B1408'];
-const INK = swatch['#2C2210'];
-const GOLD = swatch['#C9A24C'];
-const MUTED = swatch['#9C8068'];
-const BORDER = swatch['#E8D9B0'];
+// No semantic violet/crimson token exists; keep these as swatch lookups.
 const VIOLET = swatch['#7B4FCF'];
 const CRIMSON = swatch['#8B1A1A'];
-const sans = '"Nunito", system-ui, sans-serif';
-const serif = '"Crimson Text", Georgia, serif';
 
 function StepDot({ active, done }) {
   return (
@@ -57,7 +50,7 @@ function StepDot({ active, done }) {
 function ArcLine({ children }) {
   return (
     <li style={{
-      fontFamily: serif, fontSize: FS['13.5'], color: swatch['#3A2F18'],
+      fontFamily: serif_, fontSize: FS['13.5'], color: swatch['#3A2F18'],
       lineHeight: 1.5, padding: '3px 0',
     }}>
       {children}
@@ -86,7 +79,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
 
   return (
     <section
-      aria-label="Watch a region wake up — read-only replay"
+      aria-label="Watch a region wake up (read-only replay)"
       data-testid="region-wake-replay"
       style={{
         maxWidth: 480, margin: '0 auto 56px',
@@ -106,15 +99,15 @@ export default function RegionWakeReplay({ onUpgrade }) {
       }}>
         <div style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: MUTED,
+          textTransform: 'uppercase', color: GOLD_B,
         }}>
           {t('replay.eyebrow')}
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
-          <div style={{ fontFamily: serif, fontSize: FS['16'], fontWeight: 600 }}>
+          <div style={{ fontFamily: serif_, fontSize: FS['16'], fontWeight: 600 }}>
             {t('replay.title')}
           </div>
-          <div style={{ fontSize: FS.micro, color: MUTED, fontFamily: sans, letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: FS.micro, color: GOLD_B, fontFamily: sans, letterSpacing: '0.05em' }}>
             {t('replay.stepLabel', { step: step + 1, total: REPLAY_STEP_COUNT })}
           </div>
         </div>
@@ -122,7 +115,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
           {Array.from({ length: REPLAY_STEP_COUNT }, (_, i) => (
             <StepDot key={i} active={i === step} done={i < step} />
           ))}
-          <span style={{ marginLeft: 'auto', fontSize: FS.micro, color: MUTED }}>
+          <span style={{ marginLeft: 'auto', fontSize: FS.micro, color: GOLD_B }}>
             {view.monthLabel}
           </span>
         </div>
@@ -137,7 +130,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
             background: PARCH, border: `1px solid ${BORDER}`,
             borderLeft: `3px solid ${GOLD}`, borderRadius: 5,
           }}>
-            <div style={{ fontFamily: serif, fontSize: FS['14'], fontWeight: 600, color: INK }}>
+            <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK }}>
               {view.headlines[0].headline}
             </div>
             {view.headlines[0].summary && (
@@ -149,7 +142,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
         ) : (
           <div style={{
             padding: '18px 10px', marginBottom: 10, textAlign: 'center',
-            color: MUTED, fontFamily: serif, fontStyle: 'italic', fontSize: FS['14'],
+            color: MUTED, fontFamily: serif_, fontStyle: 'italic', fontSize: FS['14'],
           }}>
             {t('replay.empty')}
           </div>
@@ -210,7 +203,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
           </Button>
         ) : (
           <Button
-            variant="primary"
+            variant="secondary"
             size="sm"
             onClick={() => setStep(s => Math.min(last, s + 1))}
             trailingIcon={<ChevronRight size={14} />}
@@ -226,12 +219,12 @@ export default function RegionWakeReplay({ onUpgrade }) {
         padding: '10px 16px 14px', borderTop: `1px dashed ${BORDER}`,
         background: swatch.white, textAlign: 'center',
       }}>
-        <div style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic', fontFamily: serif }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic', fontFamily: serif_ }}>
           {t('replay.footer')}
         </div>
         {typeof onUpgrade === 'function' && (
           <Button
-            variant="gold"
+            variant="primary"
             size="sm"
             onClick={onUpgrade}
             style={{ marginTop: 8, minHeight: 44 }}

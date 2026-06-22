@@ -69,8 +69,10 @@ describe('RealmDashboard — live summary (premium)', () => {
     expect(screen.getByText('State of the Realm')).toBeTruthy();
     // In-world date from the calendar.
     expect(screen.getByText(/Autumn, Yr 3/)).toBeTruthy();
-    // The siege lights "Active wars".
-    expect(screen.getByText('1 siege')).toBeTruthy();
+    // The four war facts now roll up into ONE focal Conflict stat: the tension
+    // band is the headline and the live siege surfaces in its component digest.
+    expect(screen.getByText('Strained')).toBeTruthy();
+    expect(screen.getByText(/1 siege/)).toBeTruthy();
     // The dominant faith reads off the pantheon ledger.
     expect(screen.getByText('Vol')).toBeTruthy();
     // The war-weariest power surfaces from warExhaustionStandings.

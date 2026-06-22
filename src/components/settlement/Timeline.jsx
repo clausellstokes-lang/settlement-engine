@@ -50,7 +50,7 @@ export default function Timeline() {
           fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
           lineHeight: 1.5, marginBottom: SP.sm,
         }}>
-          On the world-map clock — events resolve together at each World Pulse, and
+          On the world-map clock. Events resolve together at each World Pulse, and
           undo lives at the map level (“Undo last advance”).
         </div>
       )}

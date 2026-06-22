@@ -25,17 +25,8 @@
  */
 
 import { useMemo } from 'react';
-import { FS, VIOLET, swatch } from '../theme.js';
+import { FS, GOLD_TXT, INK, BODY, BORDER, PARCH, VIOLET_DEEP, R, sans, serif_ } from '../theme.js';
 import { useStore } from '../../store';
-
-const GOLD = swatch['#C9A24C'];
-const INK = swatch['#1B1408'];
-const BODY = swatch['#3A2F18'];
-const MUTED = swatch['#9C8068'];
-const BORDER = swatch['#E8D9B0'];
-const PARCH = swatch['#FBF5E6'];
-const serif = '"Crimson Text", Georgia, serif';
-const sans = '"Nunito", system-ui, sans-serif';
 
 export default function QuickInspector() {
   const hoveredId = useStore(s => s.hoveredSettlementId);
@@ -53,7 +44,9 @@ export default function QuickInspector() {
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const tier = s.tier || save.tier || ', ';
+  // En-dash placeholder for a missing tier — an intentional-absence mark, not the
+  // stray ', ' that rendered as a punctuation bug (P11).
+  const tier = s.tier || save.tier || '–';
   const pop = (s.population || 0).toLocaleString();
   const pressure = s.pressureSentence || '';
   const topHook = (() => {
@@ -79,40 +72,34 @@ export default function QuickInspector() {
         padding: 10,
         background: PARCH,
         border: `1px solid ${BORDER}`,
-        borderLeft: `3px solid ${GOLD}`,
-        borderRadius: 5,
+        borderLeft: `3px solid ${GOLD_TXT}`,
+        // R.md normalizes the floating-overlay radius across the cluster (the raw
+        // px 5 was the lone non-token radius among the map overlays) (P5).
+        borderRadius: R.md,
         boxShadow: '0 4px 14px rgba(0,0,0,0.20)',
         fontFamily: sans,
         pointerEvents: 'none',  // never blocks clicks on the map underneath
       }}
     >
+      {/* The settlement NAME owns the top of the card. The old 'peek' eyebrow
+          leaked an interaction-mode word into a high-emphasis slot (P1/P4); the
+          card is already distinct from the click-to-open PlacementDetailCard by
+          its gold left-border + corner position, so the mode label is dropped. */}
       <div style={{
-        display: 'flex', alignItems: 'baseline',
-        gap: 6, justifyContent: 'space-between',
+        fontFamily: serif_, fontWeight: 700, fontSize: FS['14'],
+        color: INK, minWidth: 0, overflow: 'hidden',
+        textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       }}>
-        <div style={{
-          fontFamily: serif, fontWeight: 700, fontSize: FS['14'],
-          color: INK, minWidth: 0, overflow: 'hidden',
-          textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1,
-        }}>
-          {name}
-        </div>
-        <div style={{
-          fontSize: FS.micro, fontWeight: 800, color: GOLD,
-          letterSpacing: '0.08em', textTransform: 'uppercase',
-          flexShrink: 0,
-        }}>
-          peek
-        </div>
+        {name}
       </div>
       <div style={{
-        fontSize: FS.xxs, color: MUTED, marginTop: 1,
+        fontSize: FS.xs, color: BODY, marginTop: 1,
       }}>
-        {String(tier).toUpperCase()} · {pop} pop
+        {String(tier)} · {pop} pop
       </div>
       {pressure && (
         <div style={{
-          fontFamily: serif, fontSize: FS['11.5'],
+          fontFamily: serif_, fontSize: FS.sm,
           color: BODY, lineHeight: 1.5,
           marginTop: 6,
           display: '-webkit-box',
@@ -124,12 +111,12 @@ export default function QuickInspector() {
       )}
       {topHook && (
         <div style={{
-          fontSize: FS.xs, color: VIOLET, marginTop: 6,
+          fontSize: FS.xs, color: VIOLET_DEEP, marginTop: 6,
           display: 'flex', gap: 5, alignItems: 'baseline',
         }}>
           <span style={{
-            fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.08em',
-            textTransform: 'uppercase', color: VIOLET,
+            fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em',
+            textTransform: 'uppercase', color: VIOLET_DEEP,
           }}>
             Hook
           </span>

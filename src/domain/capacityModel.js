@@ -589,7 +589,7 @@ function deriveCraft(s, ctx) {
 
   const exports = canonExports(s);
   if (exports.length >= 2) {
-    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports — sustained output demand.`);
+    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports: sustained output demand.`);
   }
 
   return {
@@ -809,7 +809,7 @@ export function summarizeCapacities(settlement) {
   const out = [];
   for (const name of CAPACITY_NAMES) {
     const p = state.capacities[name];
-    out.push(`${p.label} — ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
+    out.push(`${p.label}: ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
   }
   return out;
 }

@@ -7,14 +7,15 @@
  * used by this section).
  */
 import {
-  User, Shield, Check, X, Edit3, Mail, Bot,
+  User, Check, X, Edit3, Bot,
 } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import { RoleBadge } from '../auth/authUI.jsx';
+import { GOLD, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, DANGER_BORDER } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 /**
@@ -45,34 +46,14 @@ function avatarBackground(url) {
   return `center / cover no-repeat url("${escaped}")`;
 }
 
-function RoleBadge({ role }) {
-  if (role === 'user') return null;
-  const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
-  };
-  const c = cfg[role] || cfg.admin;
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '3px 10px', borderRadius: R.md,
-      background: c.bg, color: c.color,
-      fontSize: FS.xs, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.04em',
-    }}>
-      <Shield size={11} /> {c.label}
-    </span>
-  );
-}
-
 export default function AccountProfileSection({
   auth,
   avatarInput, setAvatarInput,
-  emailNotifications, setEmailNotifications,
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
   nameSaving, handleSaveName,
+  nameError,
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
@@ -124,7 +105,7 @@ export default function AccountProfileSection({
                   Icon={X}
                   label="Cancel editing"
                   onClick={() => setEditingName(false)}
-                  tone="danger"
+                  tone="ghost"
                   size="lg"
                 />
               </>
@@ -138,12 +119,17 @@ export default function AccountProfileSection({
                   label="Edit name"
                   onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
                   tone="ghost"
-                  size="md"
+                  size="lg"
                 />
               </>
             )}
           </div>
-          <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user.email}</div>
+          {nameError && (
+            <div role="alert" style={{ marginBottom: SP.xs, padding: `${SP.xs}px ${SP.sm}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.sm, fontSize: FS.xs, color: swatch.danger }}>
+              {nameError}
+            </div>
+          )}
+          <div style={{ fontSize: FS.sm, color: BODY }}>{auth.user.email}</div>
           <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
             <RoleBadge role={auth.role} />
             <FounderBadge size="md" />
@@ -153,7 +139,7 @@ export default function AccountProfileSection({
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
         {profileError && (
-          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
             {profileError}
           </div>
         )}
@@ -168,18 +154,10 @@ export default function AccountProfileSection({
             style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
           />
         </label>
-        <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
-          <input
-            id="account-email-notifications"
-            aria-label="Email notifications"
-            type="checkbox"
-            checked={emailNotifications}
-            onChange={e => setEmailNotifications(e.target.checked)}
-          />
-          <Mail size={14} color={GOLD} /> Email notifications
-        </label>
+        {/* Email-notifications toggle is the single source of truth in
+            Preferences now; it was duplicated here against the same handler. */}
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> Narration model</span>
           <select
             id="account-model-preference"
             value={modelPreference}

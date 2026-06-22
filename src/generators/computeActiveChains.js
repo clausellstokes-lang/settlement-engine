@@ -321,8 +321,8 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
-          'Local food security is maintained but surplus flour cannot be exported — ' +
-          'the mill toll captures any excess. Loss of mill access would break this chain.'
+          'Local food security is maintained but surplus flour cannot be exported. ' +
+          'The mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
 
       activeChains.push({
@@ -460,7 +460,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // Downgrade status unless already impaired/entrepot
       if (chain.status === 'running' || chain.status === 'operational') {
         chain.status = 'vulnerable';
-        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')} — no local source`;
+        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')}: no local source`;
         chain.upstreamMissing = missingUpstream;
       }
     } else if (impairedUpstream.length > 0) {

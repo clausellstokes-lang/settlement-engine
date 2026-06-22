@@ -268,7 +268,7 @@ export const EVENT_REGISTRY = {
     label: 'Add NPC',
     description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
     requiresTarget: true,
-    targetPrompt: 'NPC name (or "role @ institution" — e.g. "High Priestess @ Temple")',
+    targetPrompt: 'NPC name (or "role @ institution", e.g. "High Priestess @ Temple")',
     stateDeltas(event) {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
@@ -411,7 +411,7 @@ export const EVENT_REGISTRY = {
     },
     narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
-      return `${labelOf(event.targetId)} — the settlement's leader — is gone${cause}.`;
+      return `${labelOf(event.targetId)} (the settlement's leader) is gone${cause}.`;
     },
   },
 
@@ -434,7 +434,7 @@ export const EVENT_REGISTRY = {
 
   IMPOSE_CORRUPTION: {
     label: 'Impose corruption',
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization — so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
+    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes covertly corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     requiresTarget: true,
     targetPrompt: 'Clean NPC to turn (pick the organization below)',
     stateDeltas(event) {
@@ -447,7 +447,7 @@ export const EVENT_REGISTRY = {
     },
     narrate(event) {
       const org = event.payload?.criminalInstitution;
-      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''} — corruption takes root in the shadows.`;
+      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''}. Corruption takes root in the shadows.`;
     },
   },
 
@@ -493,7 +493,7 @@ export const EVENT_REGISTRY = {
 
   RAID_OR_MONSTER_ATTACK: {
     label: 'Raid or monster attack',
-    description: 'External force strikes — bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
+    description: 'External force strikes: bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     requiresTarget: false,
     targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
     stateDeltas(event) {
@@ -601,7 +601,7 @@ export const EVENT_REGISTRY = {
 
   APPLY_STRESSOR: {
     label: 'Apply stressor',
-    description: 'An active crisis grips the settlement — pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
+    description: 'An active crisis grips the settlement. Pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
     requiresTarget: true,
     targetPrompt: 'Stressor (from the catalog)',
     stateDeltas(event) {
@@ -624,7 +624,7 @@ export const EVENT_REGISTRY = {
 
   CHANGE_RULING_POWER: {
     label: 'Change ruling power',
-    description: "Hand the government to a different authoritative power — coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
+    description: "Hand the government to a different authoritative power: coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
     requiresTarget: true,
     targetPrompt: 'Faction that takes power',
     stateDeltas(event) {
@@ -653,7 +653,7 @@ export const EVENT_REGISTRY = {
 
   RESOLVE_STRESSOR: {
     label: 'Remove stressor',
-    description: 'An active crisis ends — pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
+    description: 'An active crisis ends. Pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
     requiresTarget: true,
     targetPrompt: 'Stressor currently gripping the settlement',
     stateDeltas(event, settlement) {
@@ -687,7 +687,7 @@ export const EVENT_REGISTRY = {
 
   ADD_TRADE_GOOD: {
     label: 'Add trade good',
-    description: 'A new good enters the settlement\'s trade profile — exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
+    description: 'A new good enters the settlement\'s trade profile: exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
     requiresTarget: true,
     targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
     stateDeltas(event) {
@@ -708,7 +708,7 @@ export const EVENT_REGISTRY = {
 
   REMOVE_TRADE_GOOD: {
     label: 'Remove trade good',
-    description: 'A good drops out of the settlement\'s trade profile — the market moved on, the supplier dried up, or the route no longer carries it.',
+    description: 'A good drops out of the settlement\'s trade profile: the market moved on, the supplier dried up, or the route no longer carries it.',
     requiresTarget: true,
     targetPrompt: 'Trade good to remove',
     stateDeltas() {
@@ -723,7 +723,7 @@ export const EVENT_REGISTRY = {
 
   ADD_RESOURCE: {
     label: 'Add resource',
-    description: 'A new resource node is discovered or opened nearby — a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
+    description: 'A new resource node is discovered or opened nearby: a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
     requiresTarget: true,
     targetPrompt: 'Resource (from the catalog, or a custom name)',
     stateDeltas() {
@@ -751,7 +751,7 @@ export const EVENT_REGISTRY = {
     narrate(event) {
       const snap = event.payload?.snapshot;
       if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
-        return 'The settlement turns away from its patron god — no deity now holds primacy.';
+        return 'The settlement turns away from its patron god. No deity now holds primacy.';
       }
       const name = snap.name || 'a new god';
       return `${name} is proclaimed the settlement's primary deity.`;
@@ -760,7 +760,7 @@ export const EVENT_REGISTRY = {
 
   REMOVE_RESOURCE: {
     label: 'Remove resource',
-    description: 'A resource node is lost outright — claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
+    description: 'A resource node is lost outright: claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
     requiresTarget: true,
     targetPrompt: 'Nearby resource to remove',
     stateDeltas() {
@@ -768,7 +768,7 @@ export const EVENT_REGISTRY = {
       return { resilience: -10, resourcePressure: +18 };
     },
     narrate(event) {
-      return `${labelOf(event.targetId)} is gone — no longer worked, no longer counted on.`;
+      return `${labelOf(event.targetId)} is gone. No longer worked, no longer counted on.`;
     },
   },
 

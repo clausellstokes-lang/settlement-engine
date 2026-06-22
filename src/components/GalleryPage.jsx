@@ -6,33 +6,44 @@
  */
 
 import { useState } from 'react';
+import { Sparkles } from 'lucide-react';
+import { t as tr } from '../copy/index.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
 import Button from './primitives/Button.jsx';
-import { SP, PAGE_MAX } from './theme.js';
+import PageHeader from './primitives/PageHeader.jsx';
+import Page from './primitives/Page.jsx';
+import Segmented from './primitives/Segmented.jsx';
+import { SP } from './theme.js';
 
-function GalleryTabs({ tab, setTab }) {
-  const tabs = [{ id: 'settlements', label: 'Settlements' }, { id: 'maps', label: 'Maps' }];
+/**
+ * One shared page frame + identity header for BOTH tabs. The title/subtitle
+ * and the cross-sell "Forge your own" CTA used to live inside GalleryList, so
+ * the Maps tab had no header and the two tabs ran at different widths. Lifting
+ * them here gives both tabs a single width/identity frame (P12) and a single
+ * page-level header (P6). The forge CTA is SECONDARY here: the gallery's primary
+ * job is browse/open a dossier, not divert to the generator (P8). The generator
+ * owns the loud primary on its own surface.
+ */
+function GalleryHeader({ onNavigate }) {
   return (
-    <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.md}px ${SP.lg}px 0`, display: 'flex', gap: SP.xs }}>
-      {tabs.map(t => {
-        const active = tab === t.id;
-        return (
-          <Button
-            key={t.id}
-            variant={active ? 'gold' : 'ghost'}
-            size="md"
-            onClick={() => setTab(t.id)}
-            aria-pressed={active}
-          >
-            {t.label}
-          </Button>
-        );
-      })}
-    </div>
+    <PageHeader
+      eyebrow={tr('gallery.eyebrow')}
+      title={tr('gallery.pageTitle')}
+      subtitle={tr('gallery.pageSubtitle')}
+      actions={
+        <Button
+          variant="secondary"
+          icon={<Sparkles size={14} />}
+          onClick={() => onNavigate?.('generate')}
+        >
+          {tr('gallery.forgeYourOwn')}
+        </Button>
+      }
+    />
   );
 }
 
@@ -81,7 +92,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
       <FeatureErrorBoundary
         label="GalleryPage.detail"
         kind="react.render.gallery"
-        fallbackTitle="This gallery dossier couldn't be displayed."
+        fallbackTitle="This gallery dossier could not be displayed."
         resetKeys={[activeSlug]}
       >
         <GalleryDetail
@@ -101,14 +112,26 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
           voteBusy={!!voteBusyId}
           reportBusy={!!reportBusyId}
           auth={auth}
+          onNavigate={onNavigate}
         />
       </FeatureErrorBoundary>
     );
   }
 
   return (
-    <>
-      <GalleryTabs tab={tab} setTab={setTab} />
+    <Page>
+      <GalleryHeader onNavigate={onNavigate} />
+      {/* The two tabs are a view switch (Settlements / Maps), not a header
+          action, so they sit below the page header. Segmented reads the
+          selected state in two channels (fill + weight) per a11y (P7). */}
+      <div style={{ marginBottom: SP.lg }}>
+        <Segmented
+          options={[{ id: 'settlements', label: 'Settlements' }, { id: 'maps', label: 'Maps' }]}
+          value={tab}
+          onChange={setTab}
+          ariaLabel="Gallery view"
+        />
+      </div>
       {/* Resilience: the browsing list + the maps grid render server-projected
           community payloads. A throw in either degrades to a recoverable
           fallback in place of the panel, not a full-app white screen. resetKey
@@ -116,13 +139,11 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
       <FeatureErrorBoundary
         label="GalleryPage.list"
         kind="react.render.gallery"
-        fallbackTitle="The gallery couldn't be displayed."
+        fallbackTitle="The gallery could not be displayed."
         resetKeys={[tab]}
       >
       {tab === 'maps' ? (
-        <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
-          <GalleryMaps onNavigate={onNavigate} />
-        </div>
+        <GalleryMaps onNavigate={onNavigate} />
       ) : (
         <GalleryList
           items={items}
@@ -149,6 +170,6 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
         />
       )}
       </FeatureErrorBoundary>
-    </>
+    </Page>
   );
 }

@@ -71,6 +71,7 @@ export const EVENTS = Object.freeze({
   WELCOME_CREDIT_GRANTED:         'welcome_credit_granted',
   WELCOME_CREDIT_SPENT:           'welcome_credit_spent',
   ANON_CAP_UNLOCK_SHOWN:          'anon_cap_unlock_shown',
+  ANON_CAP_UNLOCK_CLICKED:        'anon_cap_unlock_clicked',
   LOCKED_DESTINATION_SHOWN:       'locked_destination_shown',
   DOSSIER_GROUP_TAB_CLICKED:      'dossier_group_tab_clicked',
   SIMULATION_DRAWER_OPENED:       'simulation_drawer_opened',

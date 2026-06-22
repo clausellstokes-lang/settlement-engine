@@ -13,7 +13,7 @@
  * ticket creation goes through AccountTickets. A direct email fallback remains.
  */
 import { Headphones } from 'lucide-react';
-import { GOLD, SECOND, sans, SP, FS } from '../theme.js';
+import { GOLD_TXT, MUTED, SECOND, sans, SP, FS } from '../theme.js';
 import Section from './AccountSection.jsx';
 import AccountFAQ from './AccountFAQ.jsx';
 import AccountTickets from './AccountTickets.jsx';
@@ -24,13 +24,13 @@ export default function AccountSupportSection({ auth: _auth } = {}) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
         {/* FAQ FIRST — self-resolve before opening a ticket. */}
         <div>
-          <div style={{ fontSize: FS.md, fontWeight: 700, color: SECOND, fontFamily: sans, marginBottom: SP.sm }}>
+          <div style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.sm }}>
             Frequently asked questions
           </div>
           <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginBottom: SP.md }}>
             Most questions are answered below. If none of these solve it, open a ticket
-            and we&apos;ll follow up here and by email. You can also email us directly at{' '}
-            <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD, fontWeight: 600 }}>
+            and we will follow up here and by email. You can also email us directly at{' '}
+            <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD_TXT, fontWeight: 600 }}>
               clausellstokes@aol.com
             </a>.
           </div>

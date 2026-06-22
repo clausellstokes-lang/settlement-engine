@@ -17,35 +17,19 @@
  */
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../store/index.js';
+import { t } from '../copy/index.js';
 import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 
+// Structural metadata only. Titles and bodies route through the copy
+// registry (onboarding.firstRun.*) so tone changes happen there, mirroring
+// the sibling PostGenCoach. `id` and `highlight` are wiring, not user copy.
 const STEP_CONTENT = [
-  {
-    id: 'welcome',
-    title: "Let's build your first settlement",
-    body: 'Pick a size below (Thorp is small, Metropolis is huge), then click Generate. You can always regenerate or tweak the sliders.',
-    highlight: 'tier-selector',
-  },
-  {
-    id: 'ready',
-    title: 'Ready to forge your world',
-    body: 'Hit the Generate button below. Every click produces a new settlement shaped by your config. Economy, factions, NPCs, crises.',
-    highlight: 'generate-button',
-  },
-  {
-    id: 'explore',
-    title: 'Here it is. Explore the tabs',
-    body: 'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
-    highlight: 'output-tabs',
-  },
-  {
-    id: 'done',
-    title: "You're all set",
-    body: 'Save this to your library, export a PDF, or start a new settlement. Explore the other tabs in the top nav to find the Compendium, World Map, and deeper guides.',
-    highlight: null,
-  },
+  { id: 'welcome', titleKey: 'onboarding.firstRun.step0Title', bodyKey: 'onboarding.firstRun.step0Body', highlight: 'tier-selector' },
+  { id: 'ready',   titleKey: 'onboarding.firstRun.step1Title', bodyKey: 'onboarding.firstRun.step1Body', highlight: 'generate-button' },
+  { id: 'explore', titleKey: 'onboarding.firstRun.step2Title', bodyKey: 'onboarding.firstRun.step2Body', highlight: 'output-tabs' },
+  { id: 'done',    titleKey: 'onboarding.firstRun.step3Title', bodyKey: 'onboarding.firstRun.step3Body', highlight: null },
 ];
 
 export default function OnboardingCoach() {
@@ -119,7 +103,7 @@ export default function OnboardingCoach() {
             color: GOLD,
             marginBottom: 2,
           }}>
-            Step {onboardingStep + 1} of {STEP_CONTENT.length}
+            {t('onboarding.firstRun.stepCounter', { current: onboardingStep + 1, total: STEP_CONTENT.length })}
           </div>
           <div style={{
             fontSize: FS.lg,
@@ -128,14 +112,14 @@ export default function OnboardingCoach() {
             color: INK,
             marginBottom: 4,
           }}>
-            {content.title}
+            {t(content.titleKey)}
           </div>
           <div style={{
             fontSize: FS.sm,
             color: SECOND,
             lineHeight: 1.5,
           }}>
-            {content.body}
+            {t(content.bodyKey)}
           </div>
 
           {isFinalStep && (
@@ -145,14 +129,14 @@ export default function OnboardingCoach() {
               onClick={completeOnboarding}
               style={{ marginTop: SP.md }}
             >
-              Finish tour
+              {t('onboarding.firstRun.finish')}
             </Button>
           )}
         </div>
 
         <IconButton
           Icon={X}
-          label="Dismiss onboarding"
+          label={t('onboarding.firstRun.dismiss')}
           tone="ghost"
           size="lg"
           onClick={completeOnboarding}

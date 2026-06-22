@@ -34,6 +34,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
+import Button from '../primitives/Button.jsx';
 import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
@@ -100,6 +101,15 @@ export default function PipelineReveal({ onComplete }) {
     return () => clearInterval(id);
   }, [steps.length, onComplete]);
 
+  // Esc dismisses immediately — the power-user fast-path the docstring promised
+  // but never implemented (a repeat-regenerating GM shouldn't sit through the
+  // ~2s reveal every time). A visible "Skip" affordance offers the same.
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onComplete?.(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onComplete]);
+
   if (!steps.length) return null;
 
   return (
@@ -157,6 +167,14 @@ export default function PipelineReveal({ onComplete }) {
             background: GOLD, transition: 'width 0.3s',
           }} />
         </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => onComplete?.()}
+          style={{ marginTop: SP.lg, color: GOLD, fontFamily: sans, fontSize: FS.xs, letterSpacing: '0.04em' }}
+        >
+          Skip ▸ <span style={{ opacity: 0.6 }}>(Esc)</span>
+        </Button>
       </div>
     </div>
   );

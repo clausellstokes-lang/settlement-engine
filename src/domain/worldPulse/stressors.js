@@ -268,10 +268,15 @@ export const STRESSOR_CATALOG = Object.freeze({
   },
 });
 
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
+// clamp01 + effectiveStressorSeverity now live in the stressorSeverity leaf so
+// foodStockpile can read severity without importing back UP into stressors (which
+// created the stressors → stressorGates → foodStockpile → stressors ESM cycle).
+// Re-exported here so existing importers (flows.js) keep working, AND imported
+// as a LOCAL binding because stressors.js's own internal callers (residual/spread/
+// contest math at lines ~444/521/980) reference it — a bare `export … from` would
+// NOT create the local binding they need.
+import { clamp01, effectiveStressorSeverity } from './stressorSeverity.js';
+export { effectiveStressorSeverity };
 
 // ── Spread attenuation ──────────────────────────────────────────────────────
 // A spread target experiences the shared stressor at the SOURCE's effective
@@ -299,12 +304,6 @@ function normalizeSeverityMap(map) {
  * stamped at spread time and never re-aged, so the record's CURRENT severity
  * caps them — a spread never bites harder than the crisis does at its origin.
  */
-export function effectiveStressorSeverity(stressor, saveId) {
-  const recorded = clamp01(stressor?.severity ?? 0);
-  const entry = stressor?.severityBySettlement?.[String(saveId)];
-  return Number.isFinite(entry) ? Math.min(recorded, clamp01(entry)) : recorded;
-}
-
 function idFor(stressor) {
   return stressor.id || [
     'world_stressor',

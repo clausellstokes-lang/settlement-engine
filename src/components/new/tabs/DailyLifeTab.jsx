@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FS, swatch, CARD } from '../../theme.js';
+import { Sparkles, RotateCcw, Loader2, AlertTriangle } from 'lucide-react';
+import { FS, swatch, CARD, BODY } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
@@ -13,6 +14,8 @@ const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B53
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
+// Lead anchor — full card chrome, 700-weight value. Reserved for the two or
+// three facts that should win the squint test (Settlement / Economy / Safety).
 function AnchorFact({ label, value, accent }) {
   return (
     <div style={{
@@ -24,6 +27,39 @@ function AnchorFact({ label, value, accent }) {
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
       <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || ', '}</div>
+    </div>
+  );
+}
+
+// Secondary fact — no card chrome, normal weight, label and value inline so the
+// optional details recede behind the lead anchors. One channel quieter on size,
+// weight, and background all at once.
+function MetaFact({ label, value, accent }) {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 4, fontSize: FS['11.5'], lineHeight: 1.4 }}>
+      <span style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</span>
+      <span style={{ fontWeight: 400, color: BODY }}>{value || ', '}</span>
+    </span>
+  );
+}
+
+// Active-stress chip — the one secondary signal that must stay loud. Emphasis
+// in two channels: the danger color plus a warning icon and explicit label.
+function StressFact({ value }) {
+  const danger = swatch['#8B1A1A'];
+  return (
+    <div style={{
+      flex: '1 1 100px', minWidth: 0,
+      background: `${danger}0d`,
+      border: `1px solid ${danger}30`,
+      borderLeft: `3px solid ${danger}`,
+      borderRadius: 5, padding: '5px 9px',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 1 }}>
+        <AlertTriangle size={11} color={danger} aria-hidden="true" />
+        <span style={{ fontSize: FS['8.5'], fontWeight: 700, color: danger, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Active stress</span>
+      </div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value}</div>
     </div>
   );
 }
@@ -108,9 +144,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const hasContent = !!displayNarrative;
 
   const tierLabel     = ctx.tierLabel;
-  const prospColor    = ctx.prospBand === 'prosperous' ? '#1a5a28' : ctx.prospBand === 'comfortable' ? '#a0762a' : ctx.prospBand === 'subsistence' ? '#8a4010' : '#8b1a1a';
+  const prospColor    = ctx.prospBand === 'prosperous' ? swatch['#1A5A28'] : ctx.prospBand === 'comfortable' ? swatch['#A0762A'] : ctx.prospBand === 'subsistence' ? '#8a4010' : swatch['#8B1A1A'];
   const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
-  const safetyColor   = ctx.safetyScore >= 70 ? '#1a5a28' : ctx.safetyScore >= 50 ? '#a0762a' : ctx.safetyScore >= 30 ? '#8a4010' : '#8b1a1a';
+  const safetyColor   = ctx.safetyScore >= 70 ? swatch['#1A5A28'] : ctx.safetyScore >= 50 ? swatch['#A0762A'] : ctx.safetyScore >= 30 ? '#8a4010' : swatch['#8B1A1A'];
   const foodLabel     =
     ctx.foodDeficit > 35 ? 'Severe' :
     ctx.foodDeficit > 20 ? 'Serious' :
@@ -119,58 +155,69 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     ctx.foodSurplus > 10 ? 'Surplus' : 'Adequate';
   const foodColor     =
     ctx.foodDeficit > 35 ? '#5a0a0a' :
-    ctx.foodDeficit > 20 ? '#8b1a1a' :
+    ctx.foodDeficit > 20 ? swatch['#8B1A1A'] :
     ctx.foodDeficit > 10 ? '#8a4010' :
-    ctx.foodDeficit > 0  ? '#a0762a' : '#1a5a28';
+    ctx.foodDeficit > 0  ? swatch['#A0762A'] : swatch['#1A5A28'];
 
   // Button label logic — first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
+    if (!dailyLifeEnabled) return 'Save settlement to draw Daily Life into prose';
     if (loading) {
       return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
     }
     if (hasContent) {
       return isConfigured
-        ? `↺ Regenerate Daily Life (${getCost('dailyLife')} credits)`
-        : '↺ Regenerate Daily Life: Narrative refinement';
+        ? `Regenerate Daily Life (${getCost('dailyLife')} credits)`
+        : 'Regenerate Daily Life: Narrative refinement';
     }
     return isConfigured
-      ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
-      : '✦ Generate Daily Life: Narrative refinement';
+      ? `Generate Daily Life (${getCost('dailyLife')} credits)`
+      : 'Generate Daily Life: Narrative refinement';
   })();
+
+  // The action icon mirrors the label: a fresh pass uses Sparkles, a repeat
+  // pass uses RotateCcw. When busy, Button supplies its own spinner.
+  const buttonIcon = loading
+    ? null
+    : hasContent
+      ? <RotateCcw size={16} aria-hidden="true" />
+      : <Sparkles size={16} aria-hidden="true" />;
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
       <TabIntro tabKey="dailyLife" />
 
       {/* ── ANCHOR FACTS ─────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 14 }}>
+      {/* Lead anchors win the squint test: the three facts that frame the town's
+          state. Active stress, when present, is the fourth loud signal (danger
+          color + warning icon). Optional detail recedes into the meta strip. */}
+      <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 10 }}>
         <AnchorFact label="Settlement"  value={tierLabel}                        accent={GOLD} />
         <AnchorFact label="Economy"  value={ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1)} accent={prospColor} />
         <AnchorFact label="Safety"      value={safetyBand}                        accent={safetyColor} />
-        <AnchorFact label="Food"        value={foodLabel}                          accent={foodColor} />
-        {ctx.govFaction && <AnchorFact label="Governed by" value={ctx.govFaction} accent='#2a3a7a' />}
+        {ctx.stressTypes.length > 0 && (
+          <StressFact value={ctx.stressTypes.map(t => STRESS_LABELS[t] || t).join(', ')} />
+        )}
+      </div>
+
+      {/* Secondary detail — lighter inline strip, normal weight, no card chrome. */}
+      <div style={{ display: 'flex', gap: '6px 16px', flexWrap: 'wrap', marginBottom: 14, paddingLeft: 2 }}>
+        <MetaFact label="Food" value={foodLabel} accent={foodColor} />
+        {ctx.govFaction && <MetaFact label="Governed by" value={ctx.govFaction} accent={swatch['#2A3A7A']} />}
         {ctx.terrain && ctx.terrain !== 'auto' && (
-          <AnchorFact label="Terrain" value={ctx.terrain.charAt(0).toUpperCase() + ctx.terrain.slice(1)} accent='#3a5a2a' />
+          <MetaFact label="Terrain" value={ctx.terrain.charAt(0).toUpperCase() + ctx.terrain.slice(1)} accent={swatch['#3A5A2A']} />
         )}
         {ctx.culture && ctx.culture !== 'random' && (
-          <AnchorFact label="Culture" value={ctx.culture.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#3a3a6a' />
+          <MetaFact label="Culture" value={ctx.culture.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent={swatch['#3A3A6A']} />
         )}
         {ctx.tradeRoute && (
-          <AnchorFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#5a3a1a' />
+          <MetaFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent={swatch['#5A3A1A']} />
         )}
         {ctx.defenseReadinessLabel && (
-          <AnchorFact label="Defense" value={ctx.defenseReadinessLabel} accent='#1a3a6a' />
+          <MetaFact label="Defense" value={ctx.defenseReadinessLabel} accent={swatch['#1A3A6A']} />
         )}
-        <AnchorFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?'#6b5340':ctx.magicBand==='high'?'#5a2a8a':ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
-        {ctx.stressTypes.length > 0 && (
-          <AnchorFact
-            label="Active stress"
-            value={ctx.stressTypes.map(t => STRESS_LABELS[t] || t).join(', ')}
-            accent='#8b1a1a'
-          />
-        )}
+        <MetaFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?swatch['#6B5340']:ctx.magicBand==='high'?swatch['#5A2A8A']:ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
       </div>
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
@@ -189,14 +236,15 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
             fontFamily: sans,
           }}
         >
-          <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
-          {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+          <strong style={{ color: swatch['#7A5A1A'] }}>Save this settlement</strong>
+          {' '}to draw Daily Life into prose. Five paragraphs grounded in the town's own stressors, trade, and cast. The anchor facts above stay either way.
         </div>
       ) : (
         <Button
           variant="primary"
           size="lg"
           fullWidth
+          icon={buttonIcon}
           onClick={generate}
           busy={loading}
           title={hasContent
@@ -234,7 +282,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
               display: 'flex', alignItems: 'center', gap: 8,
               boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
-              <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
+              <Loader2 size={14} aria-hidden="true" style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }} />
               {storeAiProgress || 'Regenerating…'}
             </div>
           )}
@@ -271,9 +319,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
-          <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement. Dawn, the market, the tavern,
-            the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
+          <div style={{ fontSize: FS['11.5'], color: BODY, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
+            Draw out ordinary life in this settlement: dawn, the market, the tavern, the watch.
+            Five paragraphs of prose, grounded in the town's own stressors and trade.
           </div>
         </div>
       )}

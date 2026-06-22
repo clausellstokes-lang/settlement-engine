@@ -433,12 +433,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         severity: OVERRIDE_SEVERITY,
         headline: `${name} recalls its army`,
         summary: ctx.homeBesieged
-          ? `${name} is itself besieged — its army abroad is recalled to defend the home walls.`
-          : `A vassal of ${name} is under siege — ${name} recalls its army to relieve it.`,
+          ? `${name} is itself besieged. Its army abroad is recalled to defend the home walls.`
+          : `A vassal of ${name} is under siege. ${name} recalls its army to relieve it.`,
         reasons: [
           ctx.homeBesieged
             ? `${name} is besieged at home while its army is committed against ${deployment.targetId}.`
-            : `${name} has an army abroad while a vassal is besieged — an emergency recall.`,
+            : `${name} has an army abroad while a vassal is besieged (an emergency recall).`,
           'Hard override: deterministic, bypasses the softmax sample (probability 1).',
         ],
       }));

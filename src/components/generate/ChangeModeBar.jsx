@@ -7,8 +7,14 @@
  */
 
 import { ChevronLeft } from 'lucide-react';
-import { INK, MUTED, SECOND, BORDER, CARD_HDR, serif_, SP, R, FS } from '../theme.js';
+import { MUTED, SECOND, BORDER, CARD_HDR, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import Segmented from '../primitives/Segmented.jsx';
+
+const MODE_OPTIONS = [
+  { id: 'basic', label: 'Basic' },
+  { id: 'advanced', label: 'Advanced' },
+];
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -33,9 +39,13 @@ export function ChangeModeBar({ mode, onChangeMode }) {
         Change mode
       </Button>
       <span style={{ color: MUTED }}>·</span>
-      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
-      </span>
+      <Segmented
+        options={MODE_OPTIONS}
+        value={mode === 'advanced' ? 'advanced' : 'basic'}
+        onChange={onChangeMode}
+        size="sm"
+        ariaLabel="Generation mode"
+      />
     </div>
   );
 }

@@ -200,7 +200,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   institution: {
     ifIgnored: [
-      'The institution becomes impaired — services it provides degrade.',
+      'The institution becomes impaired. Services it provides degrade.',
       'Dependent factions / chains lose their anchor.',
       'A rival institution captures the vacated role.',
     ],
@@ -212,7 +212,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   npc: {
     ifIgnored: [
-      'The NPC takes drastic action — defection, betrayal, departure, or death.',
+      'The NPC takes drastic action: defection, betrayal, departure, or death.',
       'Their faction or institution loses leadership and capacity.',
       'A power vacuum opens; opportunistic actors rush in.',
     ],
@@ -224,14 +224,14 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   external: {
     ifIgnored: [
-      'The external pressure compounds — more refugees, more raids, deeper plague.',
+      'The external pressure compounds: more refugees, more raids, deeper plague.',
       'Local resources are consumed defending or absorbing the impact.',
       'Public order strains as the threat lingers.',
     ],
     possibleResolutions: [
       'Confront the external force directly (combat, diplomacy, magic).',
       'Hire intermediaries to absorb the threat.',
-      'Adapt — reorganize the settlement around the new reality.',
+      'Adapt. Reorganize the settlement around the new reality.',
     ],
   },
   pressure: {
@@ -248,7 +248,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   other: {
     ifIgnored: [
-      'The hook fades — but leaves consequences the DM can pick up later.',
+      'The hook fades, but leaves consequences the DM can pick up later.',
     ],
     possibleResolutions: [
       'Direct intervention by the players.',
@@ -379,7 +379,7 @@ const CLOCK_TEMPLATES = Object.freeze({
       'Allies are forced to pick sides.',
       'Quiet inducements / threats circulate.',
       'A symbolic act of defiance occurs.',
-      'Open break — the principals stop speaking publicly.',
+      'Open break. The principals stop speaking publicly.',
     ],
   },
 });

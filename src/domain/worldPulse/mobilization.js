@@ -206,9 +206,9 @@ export function rampReadiness(item, worldState) {
  */
 export function shouldCool(item) {
   const reasons = [];
-  if (economicCapacityOf(item) < COOL_ECONOMY_FLOOR) reasons.push('economic strain — the treasury cannot sustain a war economy');
-  if (legitimacyOf(item) < COOL_LEGITIMACY_FLOOR) reasons.push('low legitimacy — the home front will not hold a war footing');
-  if (foodMonthsOf(item) < COOL_FOOD_MONTHS_FLOOR) reasons.push('food shortage — a mobilized army cannot be fed');
+  if (economicCapacityOf(item) < COOL_ECONOMY_FLOOR) reasons.push('economic strain: the treasury cannot sustain a war economy');
+  if (legitimacyOf(item) < COOL_LEGITIMACY_FLOOR) reasons.push('low legitimacy: the home front will not hold a war footing');
+  if (foodMonthsOf(item) < COOL_FOOD_MONTHS_FLOOR) reasons.push('food shortage: a mobilized army cannot be fed');
   return { cool: reasons.length > 0, reasons };
 }
 
@@ -272,7 +272,7 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     };
   }
 
-  const cool = forcePeace ? { cool: true, reasons: ['player intervention — stand down'] } : shouldCool(item);
+  const cool = forcePeace ? { cool: true, reasons: ['player intervention: stand down'] } : shouldCool(item);
   const idx = RAMP_INDEX[prev.state];
 
   // ── A non-ramp state ('deployed'/'war_exhaustion'/'demobilizing') with no army:
@@ -290,7 +290,7 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     const transitioned = prev.state !== 'demobilizing';
     return {
       next: { state: 'demobilizing', progress: clamp01(nextProgress), sinceTick: transitioned ? tick : prev.sinceTick, covert: false },
-      transitioned, cooled: true, reasons: ['demobilizing — winding the war economy down'],
+      transitioned, cooled: true, reasons: ['demobilizing: winding the war economy down'],
     };
   }
 
@@ -316,7 +316,7 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     const nextProgress = Math.max(0, prev.progress - COOL_BASE_RATE);
     return {
       next: { state: 'peace', progress: nextProgress, sinceTick: prev.sinceTick, covert: false },
-      transitioned: false, cooled: nextProgress < prev.progress, reasons: ['no threat — drifting back to a civilian footing'],
+      transitioned: false, cooled: nextProgress < prev.progress, reasons: ['no threat, so drifting back to a civilian footing'],
     };
   }
 
@@ -332,7 +332,7 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     const transitioned = nextState !== prev.state;
     return {
       next: { state: /** @type {PostureState} */ (nextState), progress: nextProgress, sinceTick: transitioned ? tick : prev.sinceTick, covert: prev.covert && nextIdx >= RAMP_INDEX.war_preparation },
-      transitioned, cooled: true, reasons: ['the threat eased — winding the war footing down'],
+      transitioned, cooled: true, reasons: ['the threat eased, so winding the war footing down'],
     };
   }
 

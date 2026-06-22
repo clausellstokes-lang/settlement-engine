@@ -20,15 +20,16 @@
  * costs nothing.
  */
 
-import { Suspense, lazy, useMemo } from 'react';
+import { Suspense, lazy, useMemo, useEffect } from 'react';
 import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { hasPantheon } from './PantheonPanel.jsx';
-import { BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_ALT, FS, R, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
+import CampaignEmptyState from './CampaignEmptyState.jsx';
 
 const RealmDashboard = lazy(() => import('./RealmDashboard.jsx'));
 const LiveWarStatus  = lazy(() => import('./LiveWarStatus.jsx'));
@@ -54,6 +55,10 @@ function SectionTab({ active, label, Icon, onClick }) {
       aria-pressed={active}
       active={active}
       title={label}
+      // The rail's primary navigation earns the real 44px target from the size
+      // scale (lg) rather than an inline minHeight patch, so the height survives
+      // wrapping to a second flex row and matches the size-token discipline (P7).
+      size="lg"
     >
       <Icon size={13} />{label}
     </IconButton>
@@ -70,10 +75,15 @@ function SectionTab({ active, label, Icon, onClick }) {
  * @param {boolean} props.canManageCampaigns
  * @param {string} props.tier
  * @param {() => void} [props.onUpgrade]
+ * @param {() => void} [props.onCreateCampaign]  create a campaign (no campaigns exist)
+ * @param {() => void} [props.onSelectCampaign]  select a campaign (some exist, none active)
+ * @param {boolean} [props.hasCampaigns]  whether any selectable campaign exists
  */
 export default function RealmInspector({
   open, section, onSection, onClose,
   campaign, canManageCampaigns, tier, onUpgrade,
+  onCreateCampaign, onSelectCampaign, hasCampaigns = false,
+  advancing = false,
 }) {
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
@@ -84,12 +94,24 @@ export default function RealmInspector({
   const sections = REALM_INSPECTOR_SECTIONS.filter(s => s.id !== 'pantheon' || showPantheon);
   const activeSection = sections.some(s => s.id === section) ? section : 'dashboard';
 
+  // When the displayed section falls back (e.g. the Pantheon tab self-hid while
+  // the user was parked on it), reconcile the CONTAINER's stored selection so it
+  // can't silently disagree with what the rail actually renders (P10/P2).
+  useEffect(() => {
+    if (section !== activeSection) onSection?.(activeSection);
+  }, [section, activeSection, onSection]);
+
   if (!open) return null;
+
+  // One shared empty-state handler bundle — every section's no-campaign state
+  // gets the SAME actionable CTA recipe (P4 cohesion) instead of four divergent
+  // dead-end strings.
+  const emptyHandlers = { onCreateCampaign, onSelectCampaign, hasCampaigns };
 
   return (
     <aside
       data-testid="realm-inspector"
-      aria-label="Realm Inspector"
+      aria-labelledby="realm-inspector-title"
       style={{
         position: 'absolute', top: SP.sm, right: SP.sm, bottom: SP.sm,
         zIndex: 40,
@@ -102,64 +124,77 @@ export default function RealmInspector({
         overflow: 'hidden',
       }}
     >
-      <header style={{
-        display: 'flex', alignItems: 'center', gap: SP.sm,
+      {/* One tinted chrome block: title row and tab row share a single CARD
+          tint, separated internally by gap, and exactly one rule divides the
+          whole chrome from the scrolling body below (no false-floor stack). */}
+      <div style={{
+        display: 'grid', gap: SP.sm,
         padding: `${SP.sm}px ${SP.md}px`,
         borderBottom: `1px solid ${BORDER}`,
         background: CARD,
       }}>
-        <span style={{ flex: 1, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
-          Realm Inspector
-        </span>
-        <IconButton onClick={onClose} title="Close inspector">
-          <X size={14} />
-        </IconButton>
-      </header>
+        <header style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
+          {/* Quiet eyebrow, not a heading: the wrapper title competed with the
+              section's own heading ("State of the Realm") for the single focal
+              point (P4). Demoting it to a frame label lets the section heading
+              be the one dominant entry point; the tab row already names the
+              section, so this is scent, not a competing title. */}
+          <h2 id="realm-inspector-title" style={{ flex: 1, margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Realm Inspector
+          </h2>
+          <IconButton onClick={onClose} title="Close inspector">
+            <X size={14} />
+          </IconButton>
+        </header>
 
-      <div style={{
-        display: 'flex', gap: 6, flexWrap: 'wrap',
-        padding: `${SP.sm}px ${SP.md}px`,
-        borderBottom: `1px solid ${BORDER2}`,
-        background: CARD,
-      }}>
-        {sections.map(s => (
-          <SectionTab
-            key={s.id}
-            active={activeSection === s.id}
-            label={s.label}
-            Icon={s.Icon}
-            onClick={() => onSection(s.id)}
-          />
-        ))}
+        {/* Kept as IconButton (size lg) tabs, NOT the Segmented primitive:
+            Segmented tops out at size 'md' (~31px) and cannot meet the 44px
+            touch target this dock guarantees, so we keep the lg tabs and only
+            add the shared ARIA group wrapper. */}
+        <div role="group" aria-label="Realm Inspector sections" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {sections.map(s => (
+            <SectionTab
+              key={s.id}
+              active={activeSection === s.id}
+              label={s.label}
+              Icon={s.Icon}
+              onClick={() => onSection(s.id)}
+            />
+          ))}
+        </div>
       </div>
 
       <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.md }}>
-        <Suspense fallback={<div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading…</div>}>
+        <Suspense fallback={<div style={{ color: BODY, fontFamily: sans, fontSize: FS.sm }}>Loading…</div>}>
           {activeSection === 'dashboard' && (
             <RealmDashboard
               campaign={campaign}
               canManageCampaigns={canManageCampaigns}
               tier={tier}
               onUpgrade={onUpgrade}
+              nameById={nameById}
+              {...emptyHandlers}
             />
           )}
           {activeSection === 'war' && (
             campaign
               ? <WarSection campaign={campaign} nameById={nameById} />
-              : <Empty text="Select a campaign to see its war & diplomacy." />
+              : <CampaignEmptyState lead="War & diplomacy appears once a campaign is live." {...emptyHandlers} />
           )}
-          {activeSection === 'pantheon' && showPantheon && (
-            <PantheonSection campaign={campaign} />
+          {activeSection === 'pantheon' && (
+            campaign
+              ? <PantheonSection campaign={campaign} />
+              : <CampaignEmptyState lead="The pantheon appears once a campaign is live." {...emptyHandlers} />
           )}
           {activeSection === 'pulse' && (
             campaign
-              ? <WorldPulsePanel campaign={campaign} />
-              : <Empty text="Select a campaign and advance the realm to see pulse results." />
+              ? <WorldPulsePanel campaign={campaign} advancing={advancing} />
+              : <CampaignEmptyState lead="Pulse results appear after you advance a live campaign's realm." {...emptyHandlers} />
           )}
           {activeSection === 'chronicle' && (
             campaign
               ? <ChronicleSection campaign={campaign} nameById={nameById} />
-              : <Empty text="Select a campaign to read its chronicle." />
+              : <CampaignEmptyState lead="The chronicle fills as a live campaign's realm advances." {...emptyHandlers} />
           )}
         </Suspense>
       </div>
@@ -211,13 +246,18 @@ function PeacetimeNote({ campaign }) {
   return <Empty text="The realm is at peace. No sieges, deployments, or trade wars are live." />;
 }
 
+// A calm empty/peacetime note. No dashed box — the section body padding already
+// separates it, and a frame around one calm sentence is unearned chrome (P5).
+// BODY (not MUTED) because this is the section's only sentence — load-bearing
+// info, not chrome — so it must clear 4.5:1 (P7).
 function Empty({ text }) {
   return (
     <div style={{
-      padding: SP.md, border: `1px dashed ${BORDER2}`, borderRadius: R.md,
-      color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
+      padding: SP.sm,
+      color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
     }}>
       {text}
     </div>
   );
 }
+

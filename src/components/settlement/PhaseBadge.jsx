@@ -108,7 +108,7 @@ export default function PhaseBadge() {
         )}
         {phase === 'canon' && clockBound && (
           <span
-            title="On the world-map clock — reset is at the map level (undo a World Pulse). The settlement can't be individually reset to draft."
+            title="On the world-map clock. Reset is at the map level (undo a World Pulse). The settlement can't be individually reset to draft."
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 4,
               padding: '3px 8px',

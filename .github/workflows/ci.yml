@@ -85,10 +85,12 @@ jobs:
 
       # Production build — confirms Vite/Rollup chunking is healthy, the
       # bundle still produces, and (via the vite.config onwarn guard) that
-      # no named import is missing/unresolved. NOTE: Vercel currently
-      # deploys on push to master independently of this workflow — see
-      # docs/DEPLOY.md ("Gating production on CI") to make this check a
-      # required gate before a production deploy.
+      # no named import is missing/unresolved. This job's conclusion ("Validate,
+      # test, build") is a REQUIRED check for the Vercel deploy gate: the
+      # fail-closed ignoreCommand (scripts/vercel-ignore-build.mjs, wired in
+      # vercel.json) blocks any production/preview deploy unless this job — plus
+      # the e2e and deno-tests jobs — are green on the deploying commit. See
+      # docs/DEPLOY.md ("Gating production on CI") for the operator token setup.
       - name: Build
         run: npm run build
 

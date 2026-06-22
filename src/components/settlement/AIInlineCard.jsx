@@ -37,8 +37,17 @@ import { COPY } from '../../copy/strings.js';
  */
 export default function AIInlineCard({ settlement, onPolish, creditCost = '1' }) {
   const aiSettlement = useStore(s => s.aiSettlement);
+  const aiDailyLife  = useStore(s => s.aiDailyLife);
+  const aiLoading    = useStore(s => s.aiLoading);
+  const aiError      = useStore(s => s.aiError);
   const [dismissed, setDismissed] = useState(false);
-  const narrated = !!aiSettlement;
+  // Unify the "narrated" predicate with the header badge + Revert-to-Raw gate,
+  // which both treat ANY narrative layer (settlement narrative OR daily-life
+  // prose) as narrated. The card previously keyed on aiSettlement only, so a
+  // daily-life-only save showed BOTH "Revert to Raw" and this polish CTA — two
+  // contradictory primaries about the same narrative layer (P8). One source of
+  // truth: hide polish whenever any narrative layer exists.
+  const narrated = !!(aiSettlement || aiDailyLife);
   if (!settlement) return null;
   if (narrated) return null;
   if (dismissed) return null;
@@ -62,7 +71,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: swatch.inkMag,
       }}>
-        Polish this draft with AI. Costs {creditCost} credit{creditCost === '1' ? '' : 's'},
+        Run the Narrative Layer on this dossier. Costs {creditCost} credit{creditCost === '1' ? '' : 's'},
         streams section by section. Partial failures keep your raw draft intact, and you can
         revert to raw any time.
       </p>
@@ -70,11 +79,23 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         type="button"
         variant="primary"
         size="md"
+        busy={aiLoading}
+        disabled={aiLoading}
         icon={<Sparkles size={12} aria-hidden="true" />}
         onClick={onPolish}
       >
-        {COPY.ai.polishCta}
+        {aiLoading ? 'Running…' : (aiError ? 'Retry' : 'Run the Narrative Layer')}
       </Button>
+      {/* Co-located status + recovery (P10): the polish CTA reflects its own
+          busy state, and a failure surfaces inline beneath the button the GM
+          pressed — not far down in the dossier's session notices. aiError is a
+          shared field across AI actions (same imprecision OutputContainer lives
+          with), so it can occasionally echo another AI action's error. */}
+      {aiError && !aiLoading && (
+        <p role="alert" style={{ margin: '8px 0 0', fontSize: FS.xs, lineHeight: 1.45, color: swatch.danger, fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          {aiError}
+        </p>
+      )}
     </Card>
   );
 }

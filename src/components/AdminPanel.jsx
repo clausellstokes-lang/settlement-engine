@@ -21,9 +21,18 @@ import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
-import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
+import Stat from './primitives/Stat.jsx';
+import { GOLD_TXT, INK, BODY, MUTED, BORDER, BORDER2, BORDER_STRONG, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, VIOLET_DEEP, RED, GREEN, VIOLET_BG, RED_BG } from './theme.js';
 
-function Section({ title, icon: Icon, children, actions }) {
+// `readonly` mutes the header glyph: the icon hue is the cheap channel that
+// teaches the action-vs-reference boundary (P5 "the boundary teaches as it
+// groups") — the operator's high-frequency action tools keep the saturated
+// VIOLET_DEEP header glyph; the read-only analytics/reference sections get a
+// quiet MUTED glyph so a squint separates "tools I act in" from "dashboards I
+// read", giving the page a hierarchy instead of seven co-equal cards (P4).
+function Section({ title, icon: Icon, children, actions, readonly = false }) {
   return (
     <div style={{
       border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden',
@@ -34,10 +43,10 @@ function Section({ title, icon: Icon, children, actions }) {
         padding: `${SP.md}px ${SP.lg}px`,
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
-        {Icon && <Icon size={16} color="#7c3aed" />}
-        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
+        {Icon && <Icon size={16} color={readonly ? MUTED : VIOLET_DEEP} />}
+        <h2 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
           {title}
-        </span>
+        </h2>
         {actions}
       </div>
       <div style={{ padding: `${SP.lg}px` }}>
@@ -52,15 +61,23 @@ function UserRow({ user, onUpdate }) {
   const [editing, setEditing] = useState(null); // 'credits' | 'tier' | 'role' | null
   const [editValue, setEditValue] = useState('');
   const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(null);
 
   const startEdit = (field, currentValue) => {
     setEditing(field);
     setEditValue(String(currentValue || ''));
+    setSaveError(null);
+  };
+
+  const cancelEdit = () => {
+    setEditing(null);
+    setSaveError(null);
   };
 
   const saveEdit = async () => {
     if (!editing) return;
     setSaving(true);
+    setSaveError(null);
     try {
       const body = editing === 'credits'
         ? {
@@ -83,55 +100,79 @@ function UserRow({ user, onUpdate }) {
       onUpdate();
       setEditing(null);
     } catch (e) {
+      // P10/P2: surface the failure inline and KEEP edit mode open so the
+      // value can be retried — never close-as-if-saved on a silent throw.
       console.error('Failed to update user:', e);
+      setSaveError(e?.message || 'Save failed. Try again.');
     } finally {
       setSaving(false);
     }
   };
 
+  // Role-row tint routed through the semantic surface tokens (P11): the raw
+  // violet/red rgba literals are the same hues the VIOLET_BG / RED_BG tokens
+  // already own, so the row tint now shares one source of truth with the
+  // RoleBadge it sits beside.
   const roleBg = {
-    developer: 'rgba(124,58,237,0.1)',
-    admin: 'rgba(220,38,38,0.1)',
+    developer: VIOLET_BG,
+    admin: RED_BG,
     user: 'transparent',
   };
 
+  // Shared style for the inline-edit trigger buttons: a 44px hit area meeting
+  // the usability target (these triggers commit consequential, server-audited
+  // role/tier/credit mutations, so a mis-tap is high-stakes; Fitts / WCAG
+  // 2.5.8) without padding that would shift the text.
+  const editTriggerStyle = {
+    minHeight: 44, padding: '2px 0', border: 'none', background: 'none',
+    display: 'inline-flex', alignItems: 'center',
+  };
+
   return (
-    <div style={{
+    // Ledger row, not a card (P5): a single hairline divider carries the
+    // grouping — no rounded corners + flush divider box-soup.
+    <div role="row" style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
       padding: `${SP.sm + 2}px ${SP.md}px`,
       background: roleBg[user.role] || 'transparent',
-      borderRadius: R.md, fontSize: FS.sm, fontFamily: sans,
+      fontSize: FS.sm, fontFamily: sans,
       borderBottom: `1px solid ${BORDER2}`,
     }}>
-      {/* Email */}
-      <div style={{ flex: 2, minWidth: 0 }}>
+      {/* Identity (row focal point) */}
+      <div role="cell" style={{ flex: 2, minWidth: 0 }}>
         <div style={{ fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {user.display_name || user.email || user.id.slice(0, 8)}
         </div>
         <div style={{ fontSize: FS.xxs, color: MUTED, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {user.email || user.id}
         </div>
+        {saveError && (
+          <div role="alert" style={{ fontSize: FS.xs, color: RED, marginTop: 2 }}>
+            {saveError}
+          </div>
+        )}
       </div>
 
       {/* Role */}
-      <div style={{ flex: 1, minWidth: 70 }}>
+      <div role="cell" style={{ flex: 1, minWidth: 70 }}>
         {editing === 'role' ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <select value={editValue} onChange={e => setEditValue(e.target.value)}
-              style={{ fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}` }}>
+            <select aria-label="Role" value={editValue} onChange={e => setEditValue(e.target.value)}
+              style={{ fontSize: FS.xs, padding: '4px 4px', borderRadius: R.sm, border: `1px solid ${BORDER_STRONG}` }}>
               <option value="user">User</option>
               <option value="admin">Admin</option>
               <option value="developer">Developer</option>
             </select>
-            <IconButton Icon={Check} label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
+            <IconButton Icon={Check} label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
           <Button variant="ghost" size="sm" onClick={() => startEdit('role', user.role)}
+            title="Access level. Developer sees this panel and all tooling. Admin moderates and edits users. User has none of these powers."
             style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.xxs, fontWeight: 700,
-              color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
+              ...editTriggerStyle,
+              fontSize: FS.xs, fontWeight: 700,
+              color: user.role === 'developer' ? VIOLET_DEEP : user.role === 'admin' ? RED : MUTED,
               textTransform: 'uppercase',
             }}>
             {user.role || 'user'}
@@ -140,23 +181,24 @@ function UserRow({ user, onUpdate }) {
       </div>
 
       {/* Tier */}
-      <div style={{ flex: 1, minWidth: 60 }}>
+      <div role="cell" style={{ flex: 1, minWidth: 60 }}>
         {editing === 'tier' ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <select value={editValue} onChange={e => setEditValue(e.target.value)}
-              style={{ fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}` }}>
+            <select aria-label="Tier" value={editValue} onChange={e => setEditValue(e.target.value)}
+              style={{ fontSize: FS.xs, padding: '4px 4px', borderRadius: R.sm, border: `1px solid ${BORDER_STRONG}` }}>
               <option value="free">Free</option>
               <option value="premium">Premium</option>
             </select>
-            <IconButton Icon={Check} label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
+            <IconButton Icon={Check} label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
           <Button variant="ghost" size="sm" onClick={() => startEdit('tier', user.tier || 'free')}
+            title="Billing plan. Premium reaches metropolis size and the larger feature set. Free is the starter plan."
             style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.xxs, fontWeight: 600,
-              color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
+              ...editTriggerStyle,
+              fontSize: FS.xs, fontWeight: 600,
+              color: user.tier === 'premium' ? GREEN : GOLD_TXT,
               textTransform: 'uppercase',
             }}>
             {user.tier || 'free'}
@@ -165,23 +207,27 @@ function UserRow({ user, onUpdate }) {
       </div>
 
       {/* Credits */}
-      <div style={{ flex: 1, minWidth: 60, textAlign: 'right' }}>
+      <div role="cell" style={{ flex: 1, minWidth: 60, textAlign: 'right' }}>
         {editing === 'credits' ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, justifyContent: 'flex-end' }}>
             <input type="number" aria-label="Credits" value={editValue} onChange={e => setEditValue(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && saveEdit()}
-              style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
+              style={{ width: 60, fontSize: FS.xs, padding: '4px 4px', borderRadius: R.sm, border: `1px solid ${BORDER_STRONG}`, textAlign: 'right' }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
               autoFocus />
-            <IconButton Icon={Check} label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
+            <IconButton Icon={Check} label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="xl" />
+            <IconButton Icon={X} label="Cancel" onClick={cancelEdit} tone="ghost" size="xl" />
           </div>
         ) : (
+          // De-emphasized vs the identity column (P4): credits is an editable
+          // attribute, not the row's hero — quieter than the name, and routed
+          // to the AA violet token rather than violet-as-text.
           <Button variant="ghost" size="sm" onClick={() => startEdit('credits', user.credits)}
             icon={<Zap size={11} />}
+            title="Generation credits remaining. Each run spends one. Zero means this user cannot generate until granted more."
             style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'],
+              ...editTriggerStyle, justifyContent: 'flex-end',
+              fontSize: FS.xs, fontWeight: 600, color: VIOLET_DEEP,
             }}>
             {user.credits ?? 0}
           </Button>
@@ -192,11 +238,11 @@ function UserRow({ user, onUpdate }) {
 }
 
 export default function AdminPanel({ onBack }) {
-  const _auth = useStore(s => s.auth);
   const isElevated = useStore(s => s.isElevated());
 
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
+  const [usersError, setUsersError] = useState(null);
   // `searchQuery` is the live, per-keystroke input value (controlled). The
   // search REQUEST is keyed off `debouncedQuery`, which lags behind by
   // SEARCH_DEBOUNCE_MS — so the audited list_users edge call (one edge
@@ -214,6 +260,7 @@ export default function AdminPanel({ onBack }) {
   const fetchUsers = useCallback(async (searchTerm = debouncedQuery) => {
     if (!supabase) return;
     setUsersLoading(true);
+    setUsersError(null);
     try {
       // Route through the audited `list_users` admin-actions edge function rather
       // than a direct client `profiles.select('*')`: the edge enforces role
@@ -236,7 +283,10 @@ export default function AdminPanel({ onBack }) {
       const totalCredits = list.reduce((sum, u) => sum + (u.credits || 0), 0);
       setStats({ total, premiumCount, totalCredits });
     } catch (e) {
+      // P10: a failed load must read as an error with a path forward, not get
+      // mislabelled as an empty result ('No users found').
       console.error('Failed to fetch users:', e);
+      setUsersError(e?.message || 'Failed to load users.');
     } finally {
       setUsersLoading(false);
     }
@@ -296,97 +346,118 @@ export default function AdminPanel({ onBack }) {
   }
 
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'column', gap: SP.lg,
-      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px 0`,
-    }}>
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-        {onBack && (
+    // Differential spacing (P5): the page-identity header + KPI stats form one
+    // tight orientation cluster (SP.md); the management Section stack sits
+    // farther out (SP.xl, applied on the wrapper below) so a squint separates
+    // "what is this page" from "the tools". Width/rhythm come from the shared
+    // Page primitive (default cap === PAGE_MAX), not a bespoke literal.
+    <Page pad={`${SP.lg}px 0`} style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
+      {/* Page identity — the canonical PageHeader idiom: small-caps gold
+          eyebrow over a serif title with the Back action in the corner slot. */}
+      <PageHeader
+        eyebrow="Operator console"
+        title="Admin"
+        subtitle="Manage users, credits, and system settings."
+        actions={onBack && (
           <Button variant="gold" size="md" onClick={onBack} icon={<ChevronLeft size={14} />}>
             Back
           </Button>
         )}
-        <div>
-          <h1 style={{ margin: 0, fontSize: FS.xxl, fontFamily: serif_, color: INK }}>Admin Panel</h1>
-          <div style={{ fontSize: FS.sm, color: MUTED }}>Manage users, credits, and system settings</div>
-        </div>
-      </div>
+      />
 
-      {/* Stats cards */}
+      {/* Stats — the three KPI figures as ledger Stats (muted uppercase label
+          over a serif value). Category is carried per-card by the leading glyph
+          (P7 second channel); Total Users keeps the saturated GOLD_TXT value as
+          the operator's first-scan figure (P4 one focal value). */}
       {stats && (
-        <div style={{ display: 'flex', gap: SP.md }}>
-          {[
-            { label: 'Total Users', value: stats.total, icon: Users, color: GOLD },
-            { label: 'Premium', value: stats.premiumCount, icon: Crown, color: '#2a7a2a' },
-            { label: 'Credits Pool', value: stats.totalCredits, icon: Zap, color: '#7c3aed' },
-          ].map(({ label, value, icon: Icon, color }) => (
-            <div key={label} style={{
-              flex: 1, padding: SP.lg, background: CARD,
-              border: `1px solid ${BORDER}`, borderRadius: R.lg,
-              textAlign: 'center',
-            }}>
-              <Icon size={18} color={color} style={{ marginBottom: SP.xs }} />
-              <div style={{ fontSize: FS.xxl, fontWeight: 700, color, fontFamily: sans }}>{value}</div>
-              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
-            </div>
-          ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: SP.md }}>
+          <Stat label="Total Users" value={stats.total} icon={Users} tone={GOLD_TXT} />
+          <Stat label="Premium" value={stats.premiumCount} icon={Crown} />
+          <Stat label="Credits Pool" value={stats.totalCredits} icon={Zap} />
         </div>
       )}
 
+      {/* Management Sections — held off from the header/KPI cluster (P5
+          differential spacing) and spaced wider from one another than the
+          page-identity group above. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
       {/* User management */}
       <Section title="User Management" icon={Users} actions={
         <Button variant="ghost" size="sm" onClick={flushSearch} icon={<RefreshCw size={12} />}>
           Refresh
         </Button>
       }>
-        {/* Search */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: SP.sm,
-          padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
-        }}>
-          <Search size={14} color={MUTED} />
-          <input
-            type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && flushSearch()}
-            style={{
-              flex: 1, border: 'none', outline: 'none',
-              fontSize: FS.sm, fontFamily: sans, background: 'transparent',
-            }}
-          />
+        {/* Search — flattened tinted input row (no border-in-border with the
+            Section frame, P5), paired with a visible submit so the search
+            action isn't a hidden Enter-only affordance (P8/P9). */}
+        <div style={{ display: 'flex', alignItems: 'stretch', gap: SP.sm, marginBottom: SP.md }}>
+          <div style={{
+            flex: 1, display: 'flex', alignItems: 'center', gap: SP.sm,
+            padding: `${SP.sm}px ${SP.md}px`,
+            background: swatch.white, borderRadius: R.md,
+          }}>
+            <Search size={14} color={MUTED} />
+            <input
+              type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && flushSearch()}
+              style={{
+                flex: 1, border: 'none',
+                fontSize: FS.sm, fontFamily: sans, background: 'transparent',
+              }}
+            />
+          </div>
+          <Button variant="secondary" size="sm" onClick={flushSearch} icon={<Search size={12} />}>
+            Search
+          </Button>
         </div>
 
+        {/* Affordance instruction front-loaded above the rows it governs
+            (P1/P6): the eye meets "you can edit these" before the editable
+            values, not in a trailing footer slot. BODY (ink-600), not MUTED —
+            this is instructional content, and MUTED (chrome-only) fails AA 4.5:1
+            as body copy on the light surface. */}
+        <div style={{ fontSize: FS.xs, color: BODY, marginBottom: SP.sm }}>
+          Click any value to edit it inline. Changes are saved immediately.
+        </div>
+
+        {/* User table — a flex-div grid given table semantics so a screen
+            reader announces it as a table with column headers and cells. */}
+        <div role="table" aria-label="User management table">
         {/* Column headers */}
-        <div style={{
+        <div role="row" style={{
           display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
-          fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+          fontSize: FS.xs, fontWeight: 700, color: MUTED,
           textTransform: 'uppercase', letterSpacing: '0.06em',
           borderBottom: `1px solid ${BORDER}`, marginBottom: SP.xs,
         }}>
-          <span style={{ flex: 2 }}>User</span>
-          <span style={{ flex: 1 }}>Role</span>
-          <span style={{ flex: 1 }}>Tier</span>
-          <span style={{ flex: 1, textAlign: 'right' }}>Credits</span>
+          <span role="columnheader" style={{ flex: 2 }}>User</span>
+          <span role="columnheader" style={{ flex: 1 }}>Role</span>
+          <span role="columnheader" style={{ flex: 1 }}>Tier</span>
+          <span role="columnheader" style={{ flex: 1, textAlign: 'right' }}>Credits</span>
         </div>
 
         {/* User list */}
         {usersLoading ? (
           <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>Loading users...</div>
+        ) : usersError ? (
+          <div style={{ textAlign: 'center', padding: SP.xl, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm }}>
+            <p role="alert" style={{ margin: 0, color: RED, fontSize: FS.sm }}>{usersError}</p>
+            <Button variant="secondary" size="sm" onClick={flushSearch} icon={<RefreshCw size={12} />}>
+              Retry
+            </Button>
+          </div>
         ) : users.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>No users found</div>
+          // Instructional empty-state copy → BODY (AA 4.5:1), not MUTED chrome.
+          <div style={{ textAlign: 'center', padding: SP.xl, color: BODY, fontSize: FS.sm }}>No users found</div>
         ) : (
-          <div style={{ maxHeight: 400, overflowY: 'auto' }}>
+          <div role="rowgroup" style={{ maxHeight: 400, overflowY: 'auto' }}>
             {users.map(user => (
               <UserRow key={user.id} user={user} onUpdate={fetchUsers} />
             ))}
           </div>
         )}
-
-        <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.sm, textAlign: 'center' }}>
-          Click any value to edit it inline. Changes are saved immediately.
         </div>
       </Section>
 
@@ -400,25 +471,35 @@ export default function AdminPanel({ onBack }) {
         <GalleryModerationPanel />
       </Section>
 
-      <Section title="Usage Trends" icon={TrendingUp}>
-        <AdminTrendsPanel />
-      </Section>
-
-      <Section title="Analytics" icon={BarChart3}>
-        <AdminAnalyticsPanel />
-      </Section>
-
-      {/* F1 — simulation tuning: war/occupation/trade/faith balance + the
-          player-safe visibility audit, read from the live campaigns' worldState. */}
-      <Section title="Sim Tuning" icon={Swords}>
-        <AdminSimTuningPanel />
-      </Section>
-
       {/* A5: support-ticket queue — claim / assign / transition / reply /
-          internal-note / link-FAQ, all audited + role-gated server-side. */}
+          internal-note / link-FAQ, all audited + role-gated server-side. The
+          second high-frequency action surface, so it sits with the action tools
+          above the read-only Insights cluster (P4 3-tier hierarchy). */}
       <Section title="Support Queue" icon={Ticket}>
         <SupportQueuePanel />
       </Section>
-    </div>
+
+      {/* Insights — the read-only dashboards demoted into one cluster set
+          farther out (SP.xxl) from the action tools above, with muted header
+          glyphs (P4/P5): a squint now separates "tools I act in" from
+          "dashboards I read", so the page reads as a hierarchy instead of seven
+          co-equal cards. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
+        <Section title="Usage Trends" icon={TrendingUp} readonly>
+          <AdminTrendsPanel />
+        </Section>
+
+        <Section title="Analytics" icon={BarChart3} readonly>
+          <AdminAnalyticsPanel />
+        </Section>
+
+        {/* F1 — simulation tuning: war/occupation/trade/faith balance + the
+            player-safe visibility audit, read from the live campaigns' worldState. */}
+        <Section title="Sim Tuning" icon={Swords} readonly>
+          <AdminSimTuningPanel />
+        </Section>
+      </div>
+      </div>
+    </Page>
   );
 }

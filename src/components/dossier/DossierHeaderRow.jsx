@@ -1,23 +1,31 @@
 import { FS, swatch } from '../theme.js';
-import { RefreshCw } from 'lucide-react';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
+import { AlertTriangle } from 'lucide-react';
 import EditableInline from '../primitives/EditableInline.jsx';
-import Button from '../primitives/Button.jsx';
+import { threatDisplay } from '../map/settlementThreat.js';
+
+// Persistent at-the-table header facts (tier / population / trade route) read
+// mid-session on the dark identity bar. '#D8C8A8' is a light warm parchment ink
+// that clears 4.5:1 comfortably on the near-black header — well above the thin
+// margin mutedBrown ('#9c8068') held — while weight still distinguishes the tier
+// from the supporting facts. (P7 forbids muted/chrome tones in persistent state.)
+const HEADER_FACT = swatch['#D8C8A8'];
 
 // Dossier header bar — extracted verbatim from OutputContainer's render.
 // Presentational only: every value/handler arrives via props; the parent
 // keeps all state and effects. `narrativeButtons` is the already-evaluated
 // narrative-button slot the parent decides whether to render.
+//
+// Reroll lives in the NPCs / History tab bodies (next to the content it
+// rerolls), NOT in this header — a header control that appeared on only 2 of
+// ~20 sub-tabs read as a layout glitch and duplicated the in-tab Reroll button.
 export default function DossierHeaderRow({
   readOnly,
   queueEdit,
   settlement,
   saveId,
   stressObj,
-  selectedTab,
-  onRegenerate,
-  REROLLABLE,
   narrativeButtons,
   // UX overhaul Phase 6 — the dossier header is the ONE place a settlement is
   // renamed. In the live editor that goes through queueEdit('rename-settlement');
@@ -53,24 +61,20 @@ export default function DossierHeaderRow({
                 ) : settlement.name}
               </div>
               <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
-                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown, textTransform: 'capitalize', fontWeight: 600 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
-                <span style={{ fontSize: FS.sm, color: swatch.inkMag3 }}>{'\u00b7'}</span>
-                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
-                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'}</span>}
+                <span style={{ fontSize: FS.sm, color: HEADER_FACT, textTransform: 'capitalize', fontWeight: 700 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
+                <span aria-hidden="true" style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{'\u00b7'}</span>
+                <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
+                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
+                {/* The threat WORD comes from the shared threatDisplay helper so
+                    a given monsterThreat reads identically here and in the
+                    SettlementPalette pill (P2) — the old inline map showed the
+                    SAME value as a different word on each surface. Colors stay
+                    parchment-toned for the dark header bar; only the label is
+                    unified. AlertTriangle on 'plagued' is the two-channel cue. */}
+                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' && <AlertTriangle size={11} aria-hidden="true" />}{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
                 {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
               </div>
             </div>
-            {REROLLABLE[selectedTab] && onRegenerate && (
-              <Button
-                variant="gold"
-                size="md"
-                icon={<RefreshCw size={12} />}
-                onClick={() => onRegenerate(selectedTab)}
-              >
-                {REROLLABLE[selectedTab]}
-              </Button>
-            )}
             {/* ── AI Narrative Layer button group ──────────────────────────────────
                 When `narrativeLayerStrip` flag is on, the
                 narrative buttons move out of the header into a labeled strip

@@ -44,7 +44,7 @@ describe('TableView', () => {
     expect(screen.getByText('Maren')).toBeTruthy();
     expect(screen.getByText('NPC')).toBeTruthy();
     expect(screen.getByText('The Salt Debt')).toBeTruthy();
-    expect(screen.getByText('HOOK')).toBeTruthy();
+    expect(screen.getByText('Hook')).toBeTruthy();
   });
 
   it('falls back gracefully when there are no entries', () => {

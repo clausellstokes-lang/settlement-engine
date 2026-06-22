@@ -28,6 +28,7 @@ export function useLibraryBulkSelect({ saves, addToCampaign, canonizeSavedSettle
   const [selectMode, setSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState(() => new Set());
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [exportError, setExportError] = useState('');
 
   const toggleSelect = useCallback((id) => {
     setSelectedIds(prev => {
@@ -37,8 +38,8 @@ export function useLibraryBulkSelect({ saves, addToCampaign, canonizeSavedSettle
     });
   }, []);
 
-  const clear = useCallback(() => { setSelectedIds(new Set()); setSelectMode(false); setDeleteConfirm(false); }, []);
-  const toggleMode = useCallback(() => { setSelectMode(m => !m); setSelectedIds(new Set()); }, []);
+  const clear = useCallback(() => { setSelectedIds(new Set()); setSelectMode(false); setDeleteConfirm(false); setExportError(''); }, []);
+  const toggleMode = useCallback(() => { setSelectMode(m => !m); setSelectedIds(new Set()); setExportError(''); }, []);
 
   const addToCampaignBulk = useCallback((campaignId) => {
     for (const id of selectedIds) addToCampaign(campaignId, id);
@@ -57,6 +58,7 @@ export function useLibraryBulkSelect({ saves, addToCampaign, canonizeSavedSettle
     const picked = saves.filter(s => selectedIds.has(s.id));
     if (!picked.length) { clear(); return; }
     try {
+      setExportError('');
       const blob = new Blob([JSON.stringify(picked, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -67,7 +69,12 @@ export function useLibraryBulkSelect({ saves, addToCampaign, canonizeSavedSettle
       a.remove();
       URL.revokeObjectURL(url);
     } catch (e) {
+      // P10: a failed export must not look identical to a success. Surface a
+      // recoverable error and KEEP the selection so the user can retry — do not
+      // clear() on the failure path.
       console.error('[useLibraryBulkSelect] export failed:', e);
+      setExportError('That export could not be created. Try again, or export settlements individually.');
+      return;
     }
     clear();
   }, [saves, selectedIds, clear]);
@@ -79,7 +86,7 @@ export function useLibraryBulkSelect({ saves, addToCampaign, canonizeSavedSettle
 
   return {
     selectMode, selectedIds, deleteConfirm,
-    setDeleteConfirm,
+    setDeleteConfirm, exportError, setExportError,
     toggleSelect, toggleMode, clear,
     addToCampaignBulk, canonizeBulk, exportBulk, confirmDelete,
   };

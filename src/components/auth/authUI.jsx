@@ -6,12 +6,18 @@
  * controls from one source. No logic lives here — just inputs, buttons,
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
-import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon } from 'lucide-react';
+import { useState } from 'react';
+import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
-  GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
-  SP, R, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
+  GOLD, GOLD_TXT, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, PARCH, sans, serif_,
+  SP, R, FS, ELEV, swatch, VIOLET, VIOLET_DEEP, VIOLET_BG, RED, RED_BG,
+  GREEN_DEEP, DANGER_BORDER, SUCCESS_BORDER, layout,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
+import Page from '../primitives/Page.jsx';
+import Pill from '../primitives/Pill.jsx';
+import { t } from '../../copy/index.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -74,7 +80,7 @@ export function FooterLink({ href, onClick, children }) {
       href={href}
       onClick={onClick}
       style={{
-        color: GOLD, fontWeight: 600, textDecoration: 'none', fontFamily: sans,
+        color: GOLD_TXT, fontWeight: 600, textDecoration: 'none', fontFamily: sans,
       }}
     >
       {children}
@@ -86,7 +92,7 @@ export function OrDivider({ label = 'or with email' }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
-      fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+      fontSize: FS.xs, fontWeight: 700, color: MUTED,
       textTransform: 'uppercase', letterSpacing: '0.08em',
     }} aria-hidden="true">
       <span style={{ flex: 1, height: 1, background: BORDER }} />
@@ -97,22 +103,61 @@ export function OrDivider({ label = 'or with email' }) {
 }
 
 export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
-  return (
+  // Password fields get an in-field show/hide toggle so the user can verify
+  // what they typed. The toggle is a labelled IconButton (aria-pressed +
+  // aria-label routed through the copy registry) at the 44px usability
+  // target, so it satisfies the password show/hide a11y contract without
+  // changing the Input prop API its call sites depend on.
+  const [reveal, setReveal] = useState(false);
+  const isPassword = type === 'password';
+  const effectiveType = isPassword && reveal ? 'text' : type;
+
+  const field = (
     <input
-      type={type}
+      type={effectiveType}
       placeholder={placeholder}
       aria-label={placeholder}
       value={value}
       onChange={e => onChange(e.target.value)}
       onKeyDown={onKeyDown}
       style={{
-        width: '100%', padding: `${SP.md}px ${SP.lg - 2}px`,
-        border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        width: '100%',
+        // Leave room for the trailing toggle on password fields so the text
+        // never runs under it.
+        padding: isPassword
+          ? `${SP.md}px ${SP.huge}px ${SP.md}px ${SP.lg - 2}px`
+          : `${SP.md}px ${SP.lg - 2}px`,
+        // BORDER_STRONG (3.44:1 on white), not the decorative parchment-200
+        // BORDER (1.40:1): the field outline is the input's only affordance
+        // cue, so it must clear the WCAG 1.4.11 3:1 UI-boundary floor — the
+        // same remediation the Button `secondary` variant already adopted.
+        border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
       }}
     />
+  );
+
+  if (!isPassword) return field;
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {field}
+      <div style={{
+        position: 'absolute', top: '50%', right: SP.xs,
+        transform: 'translateY(-50%)',
+      }}>
+        <IconButton
+          Icon={reveal ? EyeOff : Eye}
+          label={reveal ? t('auth.password.hide') : t('auth.password.show')}
+          tone="ghost"
+          size="xl"
+          pressed={reveal}
+          onClick={() => setReveal(r => !r)}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -163,9 +208,9 @@ export function Button({ onClick, children, variant = 'primary', disabled, style
 
 export function Alert({ type, children }) {
   const colors = {
-    error:   { bg: '#fdf4f4', border: '#e8b0b0', text: '#8b1a1a', Icon: AlertCircle },
-    success: { bg: '#f0faf2', border: '#a8d8b0', text: '#1a4a20', Icon: CheckCircle },
-    info:    { bg: '#fef9ee', border: GOLD, text: SECOND, Icon: Mail },
+    error:   { bg: swatch.dangerBg, border: DANGER_BORDER, text: swatch.danger, Icon: AlertCircle },
+    success: { bg: swatch.successBg, border: SUCCESS_BORDER, text: GREEN_DEEP, Icon: CheckCircle },
+    info:    { bg: swatch['#FEF9EE'], border: GOLD, text: SECOND, Icon: Mail },
   };
   const c = colors[type] || colors.info;
   // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
@@ -192,20 +237,14 @@ export function Alert({ type, children }) {
 export function RoleBadge({ role }) {
   if (role === 'user') return null;
   const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer', Icon: Shield },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin', Icon: Shield },
+    developer: { color: VIOLET_DEEP, bg: VIOLET_BG, label: 'Developer', Icon: Shield },
+    admin:     { color: RED, bg: RED_BG, label: 'Admin', Icon: Shield },
   };
   const c = cfg[role] || cfg.admin;
   return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '2px 8px', borderRadius: R.md,
-      background: c.bg, color: c.color,
-      fontSize: FS.xxs, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.04em',
-    }}>
-      <c.Icon size={10} /> {c.label}
-    </span>
+    <Pill bg={c.bg} color={c.color} icon={<c.Icon size={11} aria-hidden="true" />}>
+      {c.label}
+    </Pill>
   );
 }
 
@@ -217,57 +256,74 @@ export function RoleBadge({ role }) {
  */
 export function AuthPageShell({ title, subtitle, children, footer }) {
   return (
-    <div style={{
-      maxWidth: FORM_MAX, margin: '0 auto',
-      padding: `${SP.xxl}px 0`,
-      display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-    }}>
+    // Route the shell through the shared Page primitive at form width instead
+    // of hand-rolling maxWidth + margin, so the auth routes share the one
+    // layout cap every other top-level surface uses (P12).
+    <Page
+      max={layout.form}
+      pad={`${SP.xxl}px 0`}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+    >
+      {/* Scrim panel: the dedicated auth routes render over App's per-view
+          PAINTED background (.page-bg). The card below gives the form its own
+          readable CARD surface, but the brand lockup and footer would otherwise
+          sit directly on the painting, where gold-on-painting and the
+          secondary-grey footer text can fail AA. A subtle parchment scrim with
+          a hairline border lifts both onto a guaranteed-readable surface so all
+          text clears 4.5:1 over any painting. */}
       <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
-        marginBottom: SP.lg,
-      }}>
-        <MapIcon size={22} color={GOLD} />
-        <span style={{
-          fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-          letterSpacing: '0.02em', textTransform: 'lowercase',
-        }}>
-          SettlementForge
-        </span>
-      </div>
-
-      <div style={{
-        background: CARD, borderRadius: R.xl,
+        background: PARCH, borderRadius: R.xl,
         border: `1px solid ${BORDER}`,
-        boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
-        overflow: 'hidden',
+        boxShadow: ELEV['3'],
+        padding: `${SP.xl}px`,
+        display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.lg,
       }}>
         <div style={{
-          padding: `${SP.lg}px ${SP.xl}px`,
-          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-          color: GOLD,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
         }}>
-          <h1 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
-            {title}
-          </h1>
-          {subtitle && (
-            <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: MUTED, lineHeight: 1.4 }}>
-              {subtitle}
-            </p>
-          )}
+          <MapIcon size={22} color={GOLD} />
+          <span style={{
+            fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
+            letterSpacing: '0.02em', textTransform: 'lowercase',
+          }}>
+            SettlementForge
+          </span>
         </div>
-        <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
-          {children}
-        </div>
-      </div>
 
-      {footer && (
         <div style={{
-          marginTop: SP.lg, textAlign: 'center',
-          fontSize: FS.sm, color: SECOND, fontFamily: sans, lineHeight: 1.6,
+          background: CARD, borderRadius: R.xl,
+          border: `1px solid ${BORDER}`,
+          boxShadow: ELEV['2'],
+          overflow: 'hidden',
         }}>
-          {footer}
+          <div style={{
+            padding: `${SP.lg}px ${SP.xl}px`,
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            color: GOLD,
+          }}>
+            <h1 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
+              {title}
+            </h1>
+            {subtitle && (
+              <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: MUTED, lineHeight: 1.4 }}>
+                {subtitle}
+              </p>
+            )}
+          </div>
+          <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
+            {children}
+          </div>
         </div>
-      )}
-    </div>
+
+        {footer && (
+          <div style={{
+            textAlign: 'center',
+            fontSize: FS.sm, color: SECOND, fontFamily: sans, lineHeight: 1.6,
+          }}>
+            {footer}
+          </div>
+        )}
+      </div>
+    </Page>
   );
 }

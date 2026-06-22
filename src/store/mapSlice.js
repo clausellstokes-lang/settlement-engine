@@ -177,6 +177,7 @@ export const createMapSlice = (set, get) => ({
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
   selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
   selectedAnnotationId: null,  // clicked label/marker/forest
+  selectedAnnotationKind: null,  // 'label' | 'marker' | 'forest' — which layer the id lives in
   // Quick-inspector hover state. Distinct from
   // `selectedSettlementId` because selection is a deliberate click;
   // hover is a "peek" that doesn't commit. The QuickInspector
@@ -239,7 +240,15 @@ export const createMapSlice = (set, get) => ({
 
   clearHoveredSettlementId: () => set(state => { state.hoveredSettlementId = null; }),
 
-  setSelectedAnnotationId: (id) => set(state => { state.selectedAnnotationId = id; }),
+  // The calling layer (LabelsLayer / MarkersLayer / ForestsLayer) knows which
+  // kind it owns, so it passes `kind` alongside the id. That lets the Annotate
+  // toolbar's Delete fire the SINGLE correct deletion instead of firing both
+  // deleteLabel + deleteMarker blindly. HitLayer clears with no kind on a
+  // background click, nulling both.
+  setSelectedAnnotationId: (id, kind = null) => set(state => {
+    state.selectedAnnotationId = id;
+    state.selectedAnnotationKind = id ? kind : null;
+  }),
 
   setDraggingOver: (dragging) => set(state => { state.isDraggingOver = dragging; }),
 
@@ -501,6 +510,7 @@ export const createMapSlice = (set, get) => ({
     state.mapState = freshMapState();
     state.selectedBurgId = null;
     state.selectedAnnotationId = null;
+    state.selectedAnnotationKind = null;
     // Also clear settlement selection/hover — a campaign deselect left these
     // pointing at the now-gone settlement.
     state.selectedSettlementId = null;

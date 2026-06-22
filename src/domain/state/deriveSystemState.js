@@ -108,7 +108,7 @@ function deriveResilience(s) {
   // function. Removed so deriveSystemState is a pure function of `s` alone.)
   const exportCount = deriveExportPosture(s).count;
   if (exportCount === 0) {
-    risks.push('No exports — economic isolation');
+    risks.push('No exports. Economic isolation.');
   } else if (exportCount >= 5) {
     value += 5;
     drivers.push(`Diversified exports (${exportCount})`);
@@ -160,7 +160,7 @@ function deriveVolatility(s) {
     risks.push(`${factions.length} active factions competing`);
   } else if (factions.length <= 2) {
     value -= 5;
-    drivers.push('Few factions — concentrated power');
+    drivers.push('Few factions (concentrated power)');
   }
 
   // Hostile/rival faction relationships
@@ -247,7 +247,7 @@ function deriveExternalThreat(s) {
     risks.push('Region is plagued by monsters');
   } else if (monsterThreat === 'frontier') {
     value += 15;
-    risks.push('Frontier conditions — monsters present');
+    risks.push('Frontier conditions. Monsters present.');
   } else if (monsterThreat === 'safe' || monsterThreat === 'civilized') {
     value -= 5;
     drivers.push('Monster activity minimal');
@@ -287,7 +287,7 @@ function deriveExternalThreat(s) {
   }
   if (armyDeployed) {
     value += 6;
-    risks.push('Standing army deployed abroad — home garrison thinned');
+    risks.push('Standing army deployed abroad. Home garrison thinned.');
   }
 
   return finalize(value, drivers, risks);

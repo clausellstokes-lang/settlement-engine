@@ -60,7 +60,7 @@ export default function AssignDeityFromMap({ campaign }) {
       </div>
 
       {members.length === 0 ? (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
           Add canon settlements to this campaign to assign a primary deity.
         </div>
       ) : (
@@ -77,7 +77,7 @@ export default function AssignDeityFromMap({ campaign }) {
                 if (m) hydrateFromSave(m.save);
               }}
               style={{
-                width: '100%', padding: '5px 8px', border: `1px solid ${BORDER}`, borderRadius: 4,
+                width: '100%', padding: '8px 10px', minHeight: 36, border: `1px solid ${BORDER}`, borderRadius: R.sm,
                 fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD,
               }}
             >
@@ -92,7 +92,7 @@ export default function AssignDeityFromMap({ campaign }) {
             // The existing picker — dispatches SET_PRIMARY_DEITY (undo-clean).
             <PrimaryDeityPicker />
           ) : (
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
+            <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
               Pick a settlement above to assign or change its primary deity.
             </div>
           )}
@@ -114,7 +114,7 @@ export default function AssignDeityFromMap({ campaign }) {
             <span
               key={label}
               aria-disabled="true"
-              title="Read-only Realm — war/diplomacy steering is a documented follow-up"
+              title="Read-only Realm. War and diplomacy steering is a documented follow-up"
               style={{
                 padding: '3px 8px', border: `1px solid ${BORDER2}`, borderRadius: R.sm,
                 background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
@@ -126,8 +126,8 @@ export default function AssignDeityFromMap({ campaign }) {
           ))}
         </div>
         <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
-          The Realm is read-only first. These interventions route through the event
-          registry + undo stack in a later pass.
+          The Realm is read-only first. War and diplomacy steering arrives in a
+          later pass, fully undoable.
         </p>
       </div>
     </div>

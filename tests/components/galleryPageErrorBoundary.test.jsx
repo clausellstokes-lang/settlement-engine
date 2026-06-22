@@ -71,7 +71,7 @@ describe('GalleryPage — feature error boundary wiring', () => {
     render(<GalleryPage onNavigate={() => {}} />);
     const alert = screen.getByRole('alert');
     expect(alert).toBeTruthy();
-    expect(alert.textContent).toContain('The gallery couldn');
+    expect(alert.textContent).toContain('The gallery could not');
   });
 
   test('a throwing detail panel degrades to the recoverable fallback', () => {
@@ -79,6 +79,6 @@ describe('GalleryPage — feature error boundary wiring', () => {
     render(<GalleryPage onNavigate={() => {}} />);
     const alert = screen.getByRole('alert');
     expect(alert).toBeTruthy();
-    expect(alert.textContent).toContain('gallery dossier couldn');
+    expect(alert.textContent).toContain('gallery dossier could not');
   });
 });

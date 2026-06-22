@@ -266,23 +266,35 @@ test.describe('Tier 3.7 Flow B (live) — full auth + Stripe + AI integration', 
     await page.goto('/');
   });
 
-  test('signin → pricing modal → AI narrative completes', async ({ page }) => {
-    // This is the contract for the live test. Real implementations
-    // would:
-    //   1. Sign in via magic-link or password using env-provided creds
-    //   2. Generate a settlement
-    //   3. Open the pricing modal (or run an AI feature when credits
-    //      are insufficient)
-    //   4. Stripe test mode: open checkout, complete with test card
-    //   5. Verify credits granted via the webhook (poll DB or UI)
-    //   6. Run the AI narrative feature
-    //   7. Verify NDJSON streams + thesis renders + credit decremented
-    //
-    // The infrastructure for this lives in the user's CI secrets
-    // store — Stripe webhook URLs, test API keys, a dedicated test
-    // Supabase project. The skeleton stays here so the test file
-    // documents the contract; flipping LIVE_AUTH=1 in a future
-    // CI lane runs it for real.
-    test.fail();
-  });
+  // The live BROWSER journey (signin → Stripe test-card checkout → webhook →
+  // AI narrative) needs a dedicated test Supabase project + Stripe test keys +
+  // webhook tunnel, which only exist in the operator's CI secrets store. Until
+  // those are provisioned this is an explicit, honest TODO — NOT a `test.fail()`
+  // placeholder, which "passes" by failing vacuously and reads as coverage that
+  // doesn't exist.
+  //
+  // The COMPOSED money path it would exercise (checkout grant → AI spend →
+  // failure refund → re-spend → monthly allowance, idempotent at every grant)
+  // already has EXECUTING coverage in CI at the RPC-composition layer:
+  // tests/security/moneyPathJourney.pglite.test.js runs the real PL/pgSQL bodies
+  // end-to-end. This live spec adds the browser+Stripe surface on top of that.
+  test.fixme(
+    'signin → Stripe test-card → webhook → AI narrative — implement once CI secrets are provisioned ' +
+      '(composed RPC coverage: tests/security/moneyPathJourney.pglite.test.js)',
+    async ({ page }) => {
+      const email = process.env.TEST_EMAIL;
+      const password = process.env.TEST_PASSWORD;
+      expect(email && password, 'TEST_EMAIL + TEST_PASSWORD must be set for the live flow').toBeTruthy();
+
+      // 1. Sign in via the proven password flow (same selectors as the anon suite above).
+      await openAuthModal(page);
+      await page.getByRole('button', { name: /^More sign-in options$/i }).click();
+      await page.getByRole('button', { name: /Use a password instead/i }).click();
+      await page.getByPlaceholder(/Email address/i).fill(email);
+      await page.getByPlaceholder(/^Password$/i).fill(password);
+      // 2. Generate → 3. open pricing modal / run AI → 4. Stripe test card →
+      // 5. webhook grant → 6. run AI narrative → 7. assert NDJSON + decrement.
+      // (Driven against the test project; left to the operator wiring the secrets.)
+    },
+  );
 });

@@ -26,7 +26,7 @@
  */
 
 import { bandFor, displayBandLabel } from '../../domain/qualitativeBands.js';
-import { FS } from '../theme.js';
+import { BODY, FS } from '../theme.js';
 
 const BAND_COLORS = Object.freeze({
   surplus:   { bg: 'rgba(26,74,32,0.14)',  fg: '#1a4a20', bdr: 'rgba(26,74,32,0.4)' },
@@ -36,7 +36,9 @@ const BAND_COLORS = Object.freeze({
   collapsed: { bg: 'rgba(139,26,26,0.16)', fg: '#8b1a1a', bdr: 'rgba(139,26,26,0.5)' },
 });
 
-const NEUTRAL = { bg: '#faf6ee', fg: '#9c8068', bdr: '#d2bd96' };
+// fg was #9c8068 (muted-500, 3.57:1 — fails AA for this small bold text); BODY
+// (ink-600) is the WCAG-passing neutral text token.
+const NEUTRAL = { bg: '#faf6ee', fg: BODY, bdr: '#d2bd96' };
 
 const SIZE = Object.freeze({
   sm: { fontSize: FS.micro,  padX: 5, padY: 1, gap: 3, glyph: 7 },

@@ -3,7 +3,7 @@ import { Check, CheckCheck, CircleSlash, FastForward, Network, RadioTower, Refre
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
+import { BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import RegionalCausalChainViewer from './RegionalCausalChainViewer.jsx';
 
 function labelForType(type) {
@@ -54,8 +54,12 @@ export default function RegionalGraphSummary({
   const recentEvents = graph.eventLog.slice().reverse().slice(0, 3);
 
   return (
+    // No leading borderTop false-floor (P5): the folder interior is one grouped
+    // region, so a full-width hairline above the cards read as a page-end and
+    // chopped the folder into stacked panels. Vertical spacing (marginTop) + the
+    // cream background now mark the boundary between the strip above and this band.
     <div style={{
-      borderTop: `1px solid ${BORDER}`,
+      marginTop: SP.sm,
       padding: '9px 12px',
       background: CARD,
     }}>
@@ -64,7 +68,7 @@ export default function RegionalGraphSummary({
         <span style={{ fontSize: FS.xs, color: INK, fontWeight: 800, fontFamily: sans }}>
           Regional graph
         </span>
-        <span style={{ fontSize: FS.xxs, color: SECOND, fontFamily: sans }}>
+        <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>
           {confirmed.length} confirmed · {suggested.length} suggested · {availableImpacts.length}/{queuedImpacts.length} ready · {appliedImpacts.length} applied · {resolvedImpacts.length} resolved
         </span>
         {availableImpacts.length > 1 && (
@@ -110,7 +114,7 @@ export default function RegionalGraphSummary({
           </>
         )}
         <Button
-          variant="gold"
+          variant="secondary"
           size="sm"
           icon={<RefreshCw size={11} />}
           onClick={() => onDiscover?.(campaign.id)}
@@ -122,7 +126,11 @@ export default function RegionalGraphSummary({
       </div>
 
       {topSuggestions.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginTop: 8 }}>
+        // Flattened to tint-only rows (no per-row border) so the folder keeps two
+        // earned elevations — the folder border + the settlement-card borders —
+        // not three nested ones (P5 anti-box-soup). The tint + the SP.sm column
+        // gap carry the row-from-row grouping the borders used to do.
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: 8 }}>
           {topSuggestions.map(channel => (
             <div
               key={channel.id}
@@ -131,7 +139,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                border: `1px solid ${BORDER}`,
                 borderRadius: 5,
                 background: swatch['#F8F4EE'],
               }}
@@ -140,7 +147,7 @@ export default function RegionalGraphSummary({
                 <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 700, fontFamily: sans }}>
                   {labelForType(channel.type)} · {goodsLabel(channel)}
                 </div>
-                <div style={{ fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+                <div style={{ fontSize: FS.micro, color: BODY, fontFamily: sans }}>
                   {Math.round((channel.confidence || 0) * 100)}% confidence · strength {Math.round((channel.strength || 0) * 100)}%
                 </div>
               </div>
@@ -157,7 +164,7 @@ export default function RegionalGraphSummary({
       )}
 
       {topImpacts.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginTop: 8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: 8 }}>
           {topImpacts.map(impact => {
             const available = isRegionalImpactAvailable(impact);
             return (
@@ -168,7 +175,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                border: `1px solid ${BORDER}`,
                 borderRadius: 5,
                 background: GOLD_BG,
               }}
@@ -176,9 +182,9 @@ export default function RegionalGraphSummary({
               <Sparkles size={12} color={GOLD} />
               <div style={{ minWidth: 0, flex: 1 }}>
                 <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 700, fontFamily: sans }}>
-                  {nodeNames.get(String(impact.targetSettlementId)) || impact.targetSettlementId} · {impact.kind.replace(/_/g, ' ')}
+                  {nodeNames.get(String(impact.targetSettlementId)) || impact.targetSettlementId} · {labelForType(impact.kind)}
                 </div>
-                <div style={{ fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+                <div style={{ fontSize: FS.micro, color: BODY, fontFamily: sans }}>
                   {impactGoodsLabel(impact)} · severity {Math.round((impact.severity || 0) * 100)}%
                 </div>
               </div>

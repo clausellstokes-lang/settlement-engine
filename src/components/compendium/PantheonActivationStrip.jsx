@@ -115,7 +115,7 @@ export default function PantheonActivationStrip() {
 
       <Milestone
         on={authored}
-        label={`Authored — ${authoredCount} deit${authoredCount === 1 ? 'y' : 'ies'}`}
+        label={`Authored: ${authoredCount} deit${authoredCount === 1 ? 'y' : 'ies'}`}
         detail="Your homebrew pantheon exists in the catalog."
       />
       <Milestone
@@ -133,7 +133,7 @@ export default function PantheonActivationStrip() {
 
       {!live && (
         <div style={{ fontSize: FS.micro, color: MUT, fontStyle: 'italic', marginTop: 4, lineHeight: 1.4 }}>
-          Until all three are set the pantheon is dormant — byte-identical to a deity-free world.
+          Until all three are set the pantheon is dormant, byte-identical to a deity-free world.
         </div>
       )}
     </div>

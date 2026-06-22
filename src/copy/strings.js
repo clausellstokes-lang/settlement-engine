@@ -114,7 +114,7 @@ export const COPY = {
       },
       anon_cap_hit: {
         headline: 'You’ve explored hamlet, village, town.',
-        body:     'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+        body:     'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
@@ -126,11 +126,11 @@ export const COPY = {
       },
       regen_burst: {
         headline: 'You’re pushing the engine.',
-        body:     'Locks, drift, chronicle: Cartographer surfaces the worldbuilder-tier controls.',
+        body:     'Locks, drift, chronicle: Cartographer hands you the worldbuilder controls.',
       },
       map_clicked: {
         headline: 'World Map unlocks with Cartographer.',
-        body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
+        body:     'Place settlements, draw routes, trace where the supply chains strain. Your campaign becomes a map.',
       },
       // ── The Realm hub locked-state teaser ──────────────────────────────
       // Fired from the Realm Dashboard when an anon/free user opens the
@@ -145,11 +145,11 @@ export const COPY = {
       // to the canonical "What the Realm unlocks" surface.
       first_advance_attempt: {
         headline: 'Advance Time runs the region forward.',
-        body:     'Push the world a month and the whole region responds — wars, faiths, trade, population — each change derived, not rolled. Cartographer unlocks the living simulation.',
+        body:     'Push the world a month and the whole region responds. Wars, faiths, trade, population: each change derived, not rolled. Cartographer unlocks the living simulation.',
       },
       war_layer_curiosity: {
         headline: 'The war layer ends its own wars.',
-        body:     'Sieges form, coalitions gather, settlements fall — and war-exhaustion drives the realm back to peace. Cartographer turns it on; it stays off by default until you do.',
+        body:     'Sieges form, coalitions gather, settlements fall, and war-exhaustion drives the realm back to peace. Cartographer turns it on. It stays off by default until you do.',
       },
       pantheon_preview: {
         headline: 'The pantheon is alive.',
@@ -161,11 +161,11 @@ export const COPY = {
       },
       welcome_credit: {
         headline: 'Try the Narrative Layer once, on us.',
-        body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
+        body:     'One credit on every signup. The Narrative Layer turns this town’s data into prose your players can hear.',
       },
       founder_eligible: {
         headline: 'You’ve earned this offer.',
-        body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
+        body:     'Five settlements, neighbours linked, dossiers exported. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
       },
     },
   },
@@ -192,6 +192,26 @@ export const COPY = {
       narrated: 'Narrative refinement layer is present.',
       raw:      'Raw simulation output. No narrative layer.',
       locked:   'Locked. Preserved through regeneration.',
+    },
+  },
+
+  // The lifecycle spine: Draft, Saved, Canon, In the Realm, Shared.
+  // Labels name each step; hints carry the next-step scent. Read by
+  // primitives/LifecycleSpine. Voice stays plain and diegetic.
+  lifecycle: {
+    labels: {
+      draft:     'Draft',
+      saved:     'Saved',
+      canon:     'Canon',
+      simulated: 'In the Realm',
+      shared:    'Shared',
+    },
+    hints: {
+      draft:     'Forged and editable.',
+      saved:     'Kept in your library.',
+      canon:     'Part of your campaign world.',
+      simulated: 'Living in the Realm.',
+      shared:    'Published to the gallery.',
     },
   },
 };

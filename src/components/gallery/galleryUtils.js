@@ -52,6 +52,26 @@ export function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
 
+/**
+ * Map the gallery stability vocabulary (stable/strained/unstable/crisis/
+ * collapsing) onto BandPill's five color tiers + an uppercase label. Stability
+ * is the one living-world anomaly a GM scans for, so it renders through the
+ * canonical multi-channel BandPill (color + glyph + label) instead of as a flat
+ * grey tag. Returns null for unknown/empty so callers can omit the pill.
+ */
+const STABILITY_BAND = Object.freeze({
+  stable:     { band: 'surplus',   label: 'Stable' },
+  strained:   { band: 'strained',  label: 'Strained' },
+  unstable:   { band: 'critical',  label: 'Unstable' },
+  crisis:     { band: 'critical',  label: 'Crisis' },
+  collapsing: { band: 'collapsed', label: 'Collapsing' },
+});
+
+export function stabilityBand(stability) {
+  const key = String(stability || '').trim().toLowerCase();
+  return STABILITY_BAND[key] || null;
+}
+
 export function formatDate(value) {
   if (!value) return '';
   const date = new Date(value);
@@ -93,7 +113,7 @@ export function galleryUrlFor(slug) {
 export async function shareGalleryDossier({ slug, name } = {}) {
   if (!slug) return { ok: false, method: null };
   const url = galleryUrlFor(slug);
-  const title = name ? `${name} — SettlementForge` : 'SettlementForge dossier';
+  const title = name ? `${name} (SettlementForge)` : 'SettlementForge dossier';
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
     try {
       await navigator.share({ title, text: title, url });

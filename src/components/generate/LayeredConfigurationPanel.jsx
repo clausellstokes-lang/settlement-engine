@@ -22,8 +22,7 @@
  * reintroduces no size gate. The anon HomeHero instant path never reaches here.
  */
 
-import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useEffect } from 'react';
 import { track, EVENTS } from '../../lib/analytics.js';
 import ConfigurationPanel from '../ConfigurationPanel.jsx';
 import InstitutionalGrid from '../InstitutionalGrid.jsx';
@@ -31,72 +30,56 @@ import ServicesTogglePanel from '../ServicesTogglePanel.jsx';
 import TradeDynamicsPanel from '../TradeDynamicsPanel.jsx';
 import CharacterPresetCard from './CharacterPresetCard.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
-import Button from '../primitives/Button.jsx';
-import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, FS, SP, R } from '../theme.js';
+import Disclosure from '../primitives/Disclosure.jsx';
+import { INK, MUTED, SECOND, serif_, FS, SP } from '../theme.js';
 
 // Deep-constraints sections — each keeps its wizard STEP ID so funnel analytics
 // (wizard_step_viewed) still fire when the section is opened.
+// `collapsedHint` names what each section SHAPES (information scent) rather than
+// the bare "Optional" — a paying GM scanning the panel needs to see that this is
+// the expert depth, not fine print (P1 progressive-disclosure-WITH-scent).
 const DEEP_SECTIONS = [
-  { id: 'institutions', label: 'Institutions', hint: 'Force or exclude specific institutions as hard constraints.', Panel: InstitutionalGrid },
-  { id: 'services', label: 'Available Services', hint: 'Guarantee or prevent services; missing institutions are added to satisfy a forced service.', Panel: ServicesTogglePanel },
-  { id: 'trade', label: 'Trade Dynamics', hint: 'Control exported and imported goods; feeds supply chains and cross-settlement trade.', Panel: TradeDynamicsPanel },
+  { id: 'institutions', label: 'Institutions', hint: 'Force or exclude specific institutions as hard constraints.', collapsedHint: 'Force or forbid', Panel: InstitutionalGrid },
+  { id: 'services', label: 'Available Services', hint: 'Guarantee or forbid a service. Force one in, and the simulator adds whatever institution it takes to provide it.', collapsedHint: 'Guarantee or forbid', Panel: ServicesTogglePanel },
+  { id: 'trade', label: 'Trade Dynamics', hint: 'Control which goods leave and which arrive. This feeds supply chains and trade between settlements.', collapsedHint: 'Exports & imports', Panel: TradeDynamicsPanel },
 ];
 
 /**
- * One collapsible Deep-constraints section. Fires wizard_step_viewed the first
- * time it opens (per mount) so the funnel still sees the step.
- * @param {{ id: string, label: string, hint: string, Panel: React.ComponentType }} props
+ * One collapsible Deep-constraints section, built on the canonical Disclosure
+ * primitive. Disclosure's onFirstOpen fires exactly once on first open (per
+ * mount), which preserves the existing single-fire funnel analytics
+ * (wizard_step_viewed) without a hand-rolled `fired` ref. The descriptive hint
+ * renders inside the disclosure, above the absorbed wizard Panel.
+ * @param {{ id: string, label: string, hint: string, collapsedHint: string, Panel: React.ComponentType }} props
  */
-function DeepSection({ id, label, hint, Panel }) {
-  const [open, setOpen] = useState(false);
-  const fired = useRef(false);
-  const onToggle = () => {
-    setOpen(o => {
-      const next = !o;
-      if (next && !fired.current) {
-        fired.current = true;
-        try {
-          track(EVENTS.WIZARD_STEP_VIEWED, { step_id: id, mode: 'layered', direction: 'expand' });
-        } catch { /* analytics must never affect the panel */ }
-      }
-      return next;
-    });
+function DeepSection({ id, label, hint, collapsedHint, Panel }) {
+  const onFirstOpen = () => {
+    try {
+      track(EVENTS.WIZARD_STEP_VIEWED, { step_id: id, mode: 'layered', direction: 'expand' });
+    } catch { /* analytics must never affect the panel */ }
   };
-  const Chevron = open ? ChevronDown : ChevronRight;
   return (
-    <section data-section-id={id} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', marginTop: SP.sm }}>
-      <Button
-        variant="ghost"
-        size="md"
-        fullWidth
-        aria-expanded={open}
-        onClick={onToggle}
-        icon={<Chevron size={16} color={MUTED} />}
-        style={{
-          display: 'flex', alignItems: 'center', gap: SP.sm, justifyContent: 'flex-start',
-          padding: `${SP.md}px ${SP.lg}px`, background: open ? CARD_HDR : CARD,
-          border: 'none', borderBottom: open ? `1px solid ${BORDER2}` : 'none', textAlign: 'left', borderRadius: 0,
-        }}
-      >
-        <span style={{ flex: 1, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>{label}</span>
-        <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>{open ? 'Hide' : 'Optional'}</span>
-      </Button>
-      {open && (
-        <div>
-          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>{hint}</div>
-          <Panel />
-        </div>
-      )}
-    </section>
+    <div data-section-id={id} style={{ marginTop: SP.sm }}>
+      <Disclosure title={label} hint={collapsedHint} onFirstOpen={onFirstOpen}>
+        <div style={{ marginBottom: SP.sm, fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>{hint}</div>
+        <Panel />
+      </Disclosure>
+    </div>
   );
 }
 
 /**
- * @param {{ showPlaceInRegion?: boolean }} [props]
- *   showPlaceInRegion — render the premium "Place in Region" close-out card
- *   (campaign/region + optional deity at birth). Defaults true.
+ * @param {{ mode?: 'basic'|'advanced', showPlaceInRegion?: boolean }} [props]
+ *   mode — 'basic' renders Character + Foundations only (the simulator rolls
+ *     priorities, resources, stress, institutions, services, and trade from
+ *     working defaults). 'advanced' (default) additionally exposes Fine-tune,
+ *     the Deep-constraints sections, and Place in Region. This is the load-
+ *     bearing difference between the two Create modes.
+ *   showPlaceInRegion — render the premium "Place in Region" close-out card;
+ *     only shown in advanced mode.
  */
-export default function LayeredConfigurationPanel({ showPlaceInRegion = true } = {}) {
+export default function LayeredConfigurationPanel({ mode = 'advanced', showPlaceInRegion = true } = {}) {
+  const advanced = mode === 'advanced';
   // The Foundations/Fine-tune block is always mounted — report its step id once
   // on mount so the funnel's `config` step still registers without the linear wizard.
   useEffect(() => {
@@ -110,29 +93,42 @@ export default function LayeredConfigurationPanel({ showPlaceInRegion = true } =
       {/* Tier-1: Character preset (promoted out of SliderPanel). */}
       <CharacterPresetCard />
 
-      {/* Foundations (always-on) + Fine-tune (collapsible) live inside the
-          ConfigurationPanel, now layered. Header marks it as the foundation. */}
-      <div data-section-id="config" style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', marginBottom: SP.sm }}>
-        <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
-          <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>Foundations</span>
-          <span style={{ fontSize: FS.xs, color: MUTED, marginLeft: SP.sm }}>size, route, culture — the essentials</span>
+      {/* Foundations (always-on) + Fine-tune (collapsible). The outer bordered
+          wrapper was removed: ConfigurationPanel already renders its OWN bordered
+          card, so wrapping it produced card-in-card box-soup. The "Foundations"
+          label now sits as a borderless group header above that single card —
+          the dominant entry point (P4), grouping carried by spacing (P5). */}
+      <div data-section-id="config" style={{ marginBottom: SP.sm }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+          <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>1 · Foundations</span>
+          <span style={{ fontSize: FS.xs, color: MUTED }}>size, route, culture: the essentials</span>
         </div>
-        <div style={{ padding: `${SP.lg}px 0 0`, background: CARD }}>
-          <ConfigurationPanel />
+        <div>
+          <ConfigurationPanel showFineTune={advanced} />
         </div>
       </div>
 
-      {/* Deep constraints — collapsibles absorbing Institutions / Services / Trade. */}
-      <div style={{ marginTop: SP.xs }}>
-        <div style={{ fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', margin: `${SP.sm}px 0 ${SP.xs}px ${SP.xs}px` }}>
-          Deep constraints
+      {/* Deep constraints (Advanced only) — collapsibles absorbing
+          Institutions / Services / Trade. Basic mode randomises these. */}
+      {advanced && (
+        <div style={{ marginTop: SP.md }}>
+          {/* Keyword-first header with real information scent (P1): front-load
+              WHAT this group controls at a visible tier, not a muted micro-cap
+              that reads as fine print. This is the expert accelerator — sell that
+              the depth exists, never bury it. */}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+            <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>
+              2 · Institutions, services &amp; trade
+            </span>
+            <span style={{ fontSize: FS.xs, color: MUTED }}>force or forbid specifics</span>
+          </div>
+          {DEEP_SECTIONS.map(s => <DeepSection key={s.id} {...s} />)}
         </div>
-        {DEEP_SECTIONS.map(s => <DeepSection key={s.id} {...s} />)}
-      </div>
+      )}
 
-      {/* Premium "Place in Region" close-out — assign to a campaign/region + an
-          optional deity at birth. Self-gates to a teaser for non-premium. */}
-      {showPlaceInRegion && (
+      {/* Premium "Place in Region" close-out (Advanced only) — assign to a
+          campaign/region + an optional deity at birth. Self-gates for non-premium. */}
+      {advanced && showPlaceInRegion && (
         <div style={{ marginTop: SP.md }}>
           <PlaceInRegionCard />
         </div>

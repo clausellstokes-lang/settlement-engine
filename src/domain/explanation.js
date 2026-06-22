@@ -235,7 +235,7 @@ export function explainInstitution(settlement, institutionId) {
     ifRemoved.consequences.push(`${p.name} loses an institutional lever; ${p.archetype} power weakens.`);
   }
   if (ifRemoved.consequences.length === 0) {
-    ifRemoved.consequences.push(`No direct structural consequence detected — ${inst.name} may serve indirect roles in trade or daily life.`);
+    ifRemoved.consequences.push(`No direct structural consequence detected. ${inst.name} may serve indirect roles in trade or daily life.`);
   }
 
   const profile = {
@@ -896,7 +896,7 @@ export function explainDistrict(settlement, districtId) {
 
   return envelope({
     type: 'district', id: district.id, label: district.name,
-    causalReason: `${district.name} is a ${district.category} district — ${district.wealth}, ${district.safety}.`,
+    causalReason: `${district.name} is a ${district.category} district: ${district.wealth}, ${district.safety}.`,
     causes,
     downstreamEffects,
     ifRemoved: {

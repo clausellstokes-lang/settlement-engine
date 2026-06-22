@@ -1,4 +1,7 @@
-import { ensureRelationshipState, getRelationshipSettlements, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
+// Import the relationship-state core from the LEAF (not relationshipEvolution) so
+// this module no longer points back up into relationshipEvolution — that mutual
+// import was the last remaining ESM cycle.
+import { ensureRelationshipState, getRelationshipSettlements, relationshipKeyFromEdge, relationshipRoles } from './relationshipState.js';
 
 const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 const POSITIVE_TYPES = new Set(['allied', 'trade_partner', 'patron', 'client']);

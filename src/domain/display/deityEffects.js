@@ -59,14 +59,14 @@ export const DEITY_AXIS_EFFECTS = Object.freeze({
       // sign −1 ⇒ drives the ONSET side ("corrupts the faithful").
       direction: DEITY_CORRUPTION_TUNING.axisSign.evil,
       magnitude: DEITY_CORRUPTION_TUNING.span,
-      effect: "Evil — corrupts the faithful even without a thieves' guild",
+      effect: "Evil, and corrupts the faithful even without a thieves' guild",
     }),
     good: Object.freeze({
       system: 'corruption',
       // sign +1 ⇒ drives the EXPOSURE side ("purges the corrupt").
       direction: DEITY_CORRUPTION_TUNING.axisSign.good,
       magnitude: DEITY_CORRUPTION_TUNING.span,
-      effect: 'Good — purges corruption, installing incorruptible successors',
+      effect: 'Good, and purges corruption, installing incorruptible successors',
     }),
   }),
   temperament: Object.freeze({
@@ -74,30 +74,30 @@ export const DEITY_AXIS_EFFECTS = Object.freeze({
       system: 'aggression',
       direction: DEITY_TEMPER_SIGN.warlike,
       magnitude: AGGRESSION_TUNING.W_DEITY,
-      effect: "Warlike — raises the realm's aggression",
+      effect: "Warlike, and raises the realm's aggression",
     }),
     peacelike: Object.freeze({
       system: 'aggression',
       direction: DEITY_TEMPER_SIGN.peacelike,
       magnitude: AGGRESSION_TUNING.W_DEITY,
-      effect: "Peacelike — tempers the realm's aggression",
+      effect: "Peacelike, and tempers the realm's aggression",
     }),
   }),
   rank: Object.freeze({
     major: Object.freeze({
       system: 'religious_authority',
       authorityLift: DEITY_RANK_AUTHORITY.major,
-      effect: 'Major — anchors religious authority',
+      effect: 'Major, and anchors religious authority',
     }),
     minor: Object.freeze({
       system: 'religious_authority',
       authorityLift: DEITY_RANK_AUTHORITY.minor,
-      effect: 'Minor — lends modest religious authority',
+      effect: 'Minor, and lends modest religious authority',
     }),
     cult: Object.freeze({
       system: 'religious_authority',
       authorityLift: DEITY_RANK_AUTHORITY.cult,
-      effect: 'Cult — a fringe following with little authority',
+      effect: 'Cult: a fringe following with little authority',
     }),
   }),
   // The 4th axis. Couples to law_order (a DISTINCT lever from the good/evil
@@ -109,13 +109,13 @@ export const DEITY_AXIS_EFFECTS = Object.freeze({
       system: 'law_order',
       direction: DEITY_LAW_TUNING.axisSign.lawful,
       lawOrderLift: DEITY_LAW_TUNING.axisSign.lawful * DEITY_LAW_TUNING.lawOrderSwing,
-      effect: 'Lawful — strengthens law & order',
+      effect: 'Lawful, and strengthens law and order',
     }),
     chaotic: Object.freeze({
       system: 'law_order',
       direction: DEITY_LAW_TUNING.axisSign.chaotic,
       lawOrderLift: DEITY_LAW_TUNING.axisSign.chaotic * DEITY_LAW_TUNING.lawOrderSwing,
-      effect: 'Chaotic — erodes order, tolerates corruption',
+      effect: 'Chaotic, and erodes order, tolerating corruption',
     }),
   }),
 });
@@ -179,7 +179,7 @@ export function describeDeityEffects(deitySnapshot) {
   // A warlike/evil major orthodoxy tightens harder ("openly opposed").
   if (rank === 'major') {
     out.push(deityIsRegulatory(deitySnapshot)
-      ? 'Tightens magic legality — magic is openly opposed'
+      ? 'Tightens magic legality: the art is openly opposed'
       : 'Tightens magic legality');
   }
 

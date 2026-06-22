@@ -26,7 +26,7 @@
 import { Component } from 'react';
 import { reportError } from '../lib/errorReporter.js';
 import Button from './primitives/Button.jsx';
-import { FS, swatch } from './theme.js';
+import { FS, SP, R, sans, swatch } from './theme.js';
 
 /** Shallow per-element comparison of two resetKeys arrays. */
 function keysChanged(a, b) {
@@ -88,21 +88,21 @@ export default class FeatureErrorBoundary extends Component {
         <div
           role="alert"
           style={{
-            margin: 12,
-            padding: 16,
+            margin: SP.md,
+            padding: SP.lg,
             border: `1px solid ${swatch.danger}`,
-            borderRadius: 8,
+            borderRadius: R.lg,
             background: swatch.dangerBg,
             color: swatch.danger,
             fontSize: FS.sm,
-            fontFamily: 'Nunito, sans-serif',
+            fontFamily: sans,
           }}
         >
-          <div style={{ fontWeight: 700, marginBottom: 6 }}>{title}</div>
-          <div style={{ marginBottom: 10, color: swatch.mutedBrown }}>
+          <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
+          <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
             The rest of the app is still working. You can try again or navigate away.
           </div>
-          <Button variant="danger" size="sm" onClick={this.handleRetry}>
+          <Button variant="danger" size="sm" onClick={this.handleRetry} style={{ minHeight: 44 }}>
             Try again
           </Button>
         </div>

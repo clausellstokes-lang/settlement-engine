@@ -5,7 +5,7 @@
  *
  *   - GENERATION — the existing 12 Insights (the static dossier the free tier
  *     produces): how one coherent settlement is DERIVED from constraints.
- *   - SIMULATION — the premium living-world substrate (15 causal vars, 9
+ *   - SIMULATION — the premium living-world substrate (16 causal vars, 9
  *     pressures, settlementStrength, the contributor "why" trace) that advancing
  *     time runs: how the REGION moves.
  *
@@ -13,40 +13,85 @@
  * the HowToUse originals) so this tab has no cross-import on the parent.
  */
 
-import { GOLD, INK, SECOND as SEC, BORDER as BOR, CARD, serif_, FS } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, BORDER as BOR, PARCH, SP, serif_, FS } from '../theme.js';
+import { displayLabelsFor } from '../../domain/qualitativeBands.js';
+import Button from '../primitives/Button.jsx';
 
-const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
+const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: SP.xl });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
+const SECTION_GAP = SP.xxl + SP.sm; // 32 (space-7) — major section breaks (P5)
 
-function Insight({ title, children }) {
+// P11: the band names the guide prints are sourced from the SAME module that
+// labels the live BandPill (domain/qualitativeBands), so the guide can never
+// drift from the dossier. The hand-typed list said "strong / strained /
+// critical / collapsed" — two of those (strong, critical) are never shown to a
+// GM and it leaked the engine-internal canonical strings. These are the
+// user-facing substrate display labels in band order.
+const SUBSTRATE_BANDS = (() => {
+  const m = displayLabelsFor('substrate') || {};
+  return ['surplus', 'adequate', 'strained', 'critical', 'collapsed']
+    .map(k => m[k]).filter(Boolean);
+})();
+
+// Flattened to a left-accented prose block (P5 anti-box-soup): grouping rides on
+// the gold left rule + left padding + between-block spacing, not a full nested
+// box inside the already-bordered shell card. Title color rides GOLD_TXT, not
+// GOLD-as-text, so it clears AA on the light card (P7). `lead` promotes the one
+// load-bearing mechanic to a larger serif INK focal entry above the scan flow (P4).
+function Insight({ title, children, lead = false }) {
   return (
-    <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`, borderRadius: 7,
-      padding: '10px 12px', background: CARD, marginBottom: 14, ...NO_BREAK }}>
-      <div style={{ fontSize: FS.xs, fontWeight: 800, color: GOLD, textTransform: 'uppercase',
-        letterSpacing: '0.06em', marginBottom: 5 }}>{title}</div>
+    <div style={{ borderLeft: `3px solid ${GOLD}`, paddingLeft: 14, marginBottom: SP.lg, ...NO_BREAK }}>
+      {lead
+        ? <h3 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK, margin: '0 0 5px' }}>{title}</h3>
+        : <h3 style={{ fontSize: FS.xs, fontWeight: 800, color: GOLD_TXT, textTransform: 'uppercase',
+            letterSpacing: '0.06em', margin: '0 0 5px' }}>{title}</h3>}
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: 0 }}>{children}</p>
     </div>
   );
 }
 
+// Lightweight sub-head subordinate to the SectionHead — chunks a long card flow
+// into ~7-item scan clusters (P6) while staying clearly below the SectionHead's
+// level (P4 <=3 levels): smaller, BODY weight, no serif display treatment.
+function ClusterHead({ children }) {
+  return (
+    <h3 style={{ ...NO_BREAK, fontSize: FS.xs, fontWeight: 700, color: BODY, textTransform: 'uppercase',
+      letterSpacing: '0.08em', margin: `0 0 ${SP.sm}px` }}>{children}</h3>
+  );
+}
+
 // Splits the engine into its two layers: GENERATION (the static dossier) and
 // SIMULATION (what advancing time runs).
-function SectionHead({ children, sub }) {
+// P4/P11: the Generation/Simulation split is this tab's TOP hierarchy level. It
+// needs one more rank than the flatter tabs (Section > Card > Cluster), but it
+// earns that rank from an uppercase gold eyebrow + the serif display weight —
+// NOT from a bespoke FS['18'] that made these the single loudest headings in the
+// whole guide and broke the reader's size→rank mapping when tabbing across
+// (every other tab's primary heading is FS.lg). So this heading now matches
+// FS.lg and out-ranks the cards via the eyebrow channel instead of size alone.
+function SectionHead({ eyebrow, children, sub }) {
   return (
-    <div style={{ ...NO_BREAK, margin: '2px 0 12px' }}>
-      <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>{children}</div>
+    <div style={{ ...NO_BREAK, margin: `2px 0 ${SP.md}px` }}>
+      {eyebrow && (
+        <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em',
+          textTransform: 'uppercase', color: GOLD_TXT, margin: '0 0 3px' }}>{eyebrow}</div>
+      )}
+      <h2 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>{children}</h2>
       {sub && <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '4px 0 0' }}>{sub}</p>}
     </div>
   );
 }
 
-export default function UnderTheHoodTab() {
+export default function UnderTheHoodTab({ onNavigate }) {
   return <>
-    <SectionHead sub="The static dossier the generator produces is derived, not rolled. These twelve mechanics explain how one coherent settlement falls out of your constraints.">
-      Generation — how one town is derived
+    <SectionHead eyebrow="Layer 1 · The static dossier"
+      sub="The static dossier the generator produces is derived, not rolled. These twelve mechanics explain how one coherent settlement falls out of your constraints.">
+      Generation: how one town is derived
     </SectionHead>
-    <div style={COLS()}>
-    <Insight title="Constraint-Driven, Not Random">
+
+    {/* P4: the load-bearing mechanic leads as a single dominant focal entry,
+        full width above the cluster flow, before the scan list begins. */}
+    <Insight title="Constraint-Driven, Not Random" lead>
       The distinction matters. A random generator picks from tables. This engine resolves constraints.
       Your slider values, trade route, terrain, stress conditions, forced/excluded institutions, and
       neighbour relationship are all constraints. The engine finds the most internally coherent
@@ -54,6 +99,10 @@ export default function UnderTheHoodTab() {
       a systematically different settlement rather than a random variation. The outputs feel inevitable
       rather than arbitrary because they are: given those constraints, this is what the town is.
     </Insight>
+
+    {/* P6: the 11 remaining mechanics chunked into ~3-4-item scan clusters. */}
+    <ClusterHead>Constraints → derivation</ClusterHead>
+    <div style={COLS()}>
     <Insight title="Sliders as Probability Weights">
       The sliders don't guarantee institutions. They shift their probability. Military ≥80 makes a
       Garrison very likely but not certain. It also raises the probability of walls, fortifications,
@@ -80,6 +129,10 @@ export default function UnderTheHoodTab() {
       (who is hoarding, who is profiteering), faction tensions (which bloc controls the grain), and
       safety profile. The DM Summary names the compound condition explicitly.
     </Insight>
+    </div>
+
+    <ClusterHead>Power, factions &amp; neighbours</ClusterHead>
+    <div style={COLS()}>
     <Insight title="Faction Power Reflects Institutional Base and Settlement Performance">
       Faction raw power comes from institutional presence and slider priorities. But effective power
       is modified by public legitimacy. The governing authority's performance multiplier ranges from
@@ -102,18 +155,22 @@ export default function UnderTheHoodTab() {
       the settlement's current conditions, not from generic role templates. A Guild Master in a
       legitimacy-crisis city with corrupted criminal capture gets a fundamentally different position
       than one in a prosperous, well-governed settlement. The top NPCs by power relevance also carry
-      a rank indicator. Dominant or subordinate within their faction type. Producing different
-      templates for the most powerful government NPC versus a secondary civic official. The goal field
+      a rank indicator, dominant or subordinate within their faction type, which produces different
+      templates for the most powerful government NPC than for a secondary civic official. The goal field
       on those NPCs reflects the settlement's specific pressures rather than a generic role description.
     </Insight>
+    </div>
+
+    <ClusterHead>History, supply chains &amp; the AI brief</ClusterHead>
+    <div style={COLS()}>
     <Insight title="History and Present Are Structurally Connected">
       Historical events connect to current conditions through a temporal plausibility filter. A famine
       500 years ago does not explain today's food shortage. Only recent events (within roughly 30-80
       years depending on event type) can explain current economic or safety conditions. Political
       crises within the last 80 years can explain current legitimacy deficits. Religious events 60-300
       years ago can explain current institutional prominence or decline. Where a historical event and
-      the current state are in meaningful tension. A prior political disruption whose pressure hasn't
-      resolved, a recovery the settlement has moved through. A legacy annotation surfaces it using
+      the current state stand in meaningful tension, a prior political disruption whose pressure hasn't
+      resolved or a recovery the settlement has moved through, a legacy annotation surfaces it using
       the event's own name and lasting effects. The annotation tells the DM the structural relationship;
       the DM supplies the world-specific meaning.
     </Insight>
@@ -134,22 +191,26 @@ export default function UnderTheHoodTab() {
     </Insight>
     </div>
 
-    {/* ── SIMULATION — the premium living-world substrate ──────────────────── */}
-    <div style={{ borderTop: `1px solid ${BOR}`, margin: '18px 0 14px' }} />
-    <SectionHead sub="When you advance time, the dossier stops being a snapshot. These are the live systems the simulation runs — the depth worldbuilders pay for, surfaced at the Engine altitude in the dossier.">
-      Simulation — how the region moves
-    </SectionHead>
+    {/* ── SIMULATION — the premium living-world substrate ──────────────────────
+        P5: the Generation→Simulation layer break reads from a clearly looser gap
+        (space-7 top margin), not a full-width 1px rule that reads as page-end. */}
+    <div style={{ marginTop: SECTION_GAP }}>
+      <SectionHead eyebrow="Layer 2 · The living region"
+        sub="When you advance time, the dossier stops being a snapshot. These are the live systems the simulation runs. They are the depth worldbuilders pay for, surfaced at the Engine altitude in the dossier.">
+        Simulation: how the region moves
+      </SectionHead>
+    </div>
     <div style={COLS()}>
-    <Insight title="Fifteen Causal Variables — the Substrate">
-      Beneath every settlement sit fifteen live causal variables — economic capacity, defense readiness,
-      religious authority, criminal opportunity, and the rest — each with a score, a band
-      (strong / strained / critical / collapsed), and a list of named <em>contributors</em>. They are the
+    <Insight title="Sixteen Causal Variables: the Substrate">
+      Beneath every settlement sit sixteen live causal variables (economic capacity, defense readiness,
+      religious authority, criminal opportunity, and the rest), each with a score, a band
+      ({SUBSTRATE_BANDS.join(' / ')}), and a list of named <em>contributors</em>. They are the
       shared substrate every other system reads from. Advance time and they shift together: a war drains
       economic capacity, which lowers settlement strength, which feeds the drive back to peace. You can
       open the full grid at the Engine altitude in any dossier.
     </Insight>
     <Insight title="Nine Pressure Axes">
-      Above the variables sit nine pressure axes (0..1) — the directional strain on the settlement:
+      Above the variables sit nine pressure axes (0..1): the directional strain on the settlement,
       where it is being squeezed and why. Each axis carries its own <em>reasons</em>, so "high external
       threat" is never a bare number; it names the deployment, the rival, or the famine driving it.
       Pressures are how the engine turns a static state into a settlement that is about to <em>do</em> something.
@@ -157,17 +218,63 @@ export default function UnderTheHoodTab() {
     <Insight title="Settlement Strength &amp; War Homeostasis">
       Settlement strength is the single dial that decides whether a settlement can keep fighting. War
       drains it (war_drain), sustained war scars it (war_exhaustion), and a drained, war-weary settlement
-      sues for peace. That loop — war → economic drain → exhaustion → peace — is why the war layer ENDS
-      ITS OWN WARS. There is no "and then peace breaks out" script; peace is the equilibrium the
+      sues for peace. That loop (war → economic drain → exhaustion → peace) is why the war layer ends
+      its own wars. There is no "and then peace breaks out" script; peace is the equilibrium the
       homeostasis returns to.
     </Insight>
-    <Insight title="Every Change Carries a Why-Trace">
-      The simulation never just changes a number. Each tick produces a before→after diff over the causal
-      variables, and every delta carries the same human-readable contributor reasons the dossier shows.
-      "Economic capacity fell from strong to strained — blockade at the salt road, garrison deployed
-      abroad." The chronicle that writes itself is derived from these traces, so it can only ever say what
-      the simulation actually did. That is the difference between a living world and a random event table.
-    </Insight>
+    {/* P3: the surface's whole thesis is causal CHANGE over time, yet it showed
+        zero deltas — it only described them in prose. This card's claim ("every
+        change carries a why-trace") is made recallable by SHOWING one: a static,
+        clearly-labelled example before→after row reusing the dossier's own band
+        vocabulary + a two-channel down-arrow, placed as the focal entry of the
+        card. Hard-coded illustrative data, framed "Example", so it never implies
+        live state or goes stale. */}
+    <div style={{ borderLeft: `3px solid ${GOLD}`, paddingLeft: 14, marginBottom: SP.lg, ...NO_BREAK }}>
+      <h3 style={{ fontSize: FS.xs, fontWeight: 800, color: GOLD_TXT, textTransform: 'uppercase',
+        letterSpacing: '0.06em', margin: '0 0 8px' }}>Every Change Carries a Why-Trace</h3>
+      <WhyTraceExemplar />
+      <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '10px 0 0' }}>
+        The simulation never just changes a number. Each tick produces a before→after diff over the causal
+        variables, and every delta carries the same human-readable contributor reasons the dossier shows.
+        The chronicle that writes itself is derived from these traces, so it can only ever say what
+        the simulation actually did. That is the difference between a living world and a random event table.
+      </p>
+    </div>
+    </div>
+
+    {/* P9: the Simulation section sells advancing time, but the tab dead-ended.
+        Close it on the one place that runs — secondary so QuickTab's Generate
+        stays the guide's single dominant primary (P8). */}
+    <div style={{ marginTop: SECTION_GAP }}>
+      <Button variant="secondary" size="lg" onClick={() => onNavigate?.('realm')}>
+        See it in the Realm
+      </Button>
     </div>
   </>;
+}
+
+// P3/P7: a static, illustrative before→after delta for one substrate variable —
+// the band vocabulary is the dossier's own display labels, the change is carried
+// in two channels (color + a down arrow + the word order), and it is explicitly
+// framed as an example so it never reads as live data.
+function WhyTraceExemplar() {
+  const [before, after] = ['Steady', 'Contested'];
+  return (
+    <div style={{ background: PARCH, border: `1px solid ${BOR}`, borderRadius: 6, padding: '10px 12px' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, color: BODY, textTransform: 'uppercase',
+          letterSpacing: '0.06em' }}>Example ·</span>
+        <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Economic capacity</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: FS.sm }}>
+          <span style={{ color: BODY }}>{before}</span>
+          {/* arrow is the non-color channel for "fell" */}
+          <span aria-hidden="true" style={{ color: BODY }}>↓</span>
+          <span style={{ fontWeight: 700, color: INK }}>{after}</span>
+        </span>
+      </div>
+      <div style={{ fontSize: FS['12.5'], color: SEC, lineHeight: 1.5, marginTop: 4 }}>
+        Blockade at the salt road. Garrison deployed abroad.
+      </div>
+    </div>
+  );
 }

@@ -8,10 +8,12 @@ import {
   normalizeSimulationRules,
 } from '../../domain/worldPulse/index.js';
 import {
-  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, RED, SP, sans,
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import PageHeader from '../primitives/PageHeader.jsx';
+import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -49,19 +51,24 @@ const TOGGLES = [
 ];
 
 // ── UX Phase 4 — the THREE living-world system gates ─────────────────────────
-// These default to FALSE (see DEFAULT_SIMULATION_RULES) and — until this dialog
-// shipped — had NO UI toggle ANYWHERE, leaving the premium war/strategy/religion
-// engine unreachable. Each carries a one-line "what it does" + the byte-identical-
-// when-off promise. They render in a separate "advanced" group below the 12 core
-// toggles, and (unlike the core toggles, which are on-unless-explicitly-false) are
-// shown as OFF unless explicitly true — matching their false default.
+// These default to FALSE (see DEFAULT_SIMULATION_RULES) and, until this dialog
+// shipped, had NO UI toggle ANYWHERE, leaving the premium war/strategy/religion
+// engine unreachable. Each carries a one-line "what it does" plus the byte-
+// identical-when-off promise. They render in a separate "advanced" group below the
+// 12 core toggles, and (unlike the core toggles, which are on-unless-explicitly-
+// false) are shown as OFF unless explicitly true, matching their false default.
+//
+// Tier note: the dialog only renders for canManageCampaigns (paying) users, so the
+// tier gate lives UPSTREAM (RealmDashboard handles the free/anon locked state and
+// any pricing-moment prompts). These are in-app subsystem opt-ins, never a tier
+// wall, so there is no flat denial to soften here.
 const ADVANCED_GATES = [
   ['warLayerEnabled', 'War layer',
     'Armies march, sieges form, conquests change rulers. Off = no war fronts (byte-identical to today).'],
   ['settlementStrategyEnabled', 'Settlement strategy',
     'Settlements choose to defend, deploy, or sue for peace. Off = no strategy candidates.'],
   ['religionDynamicsEnabled', 'Religion dynamics',
-    'Deities contest converts and gain seats — only once a settlement carries a primary deity. Off (or deity-free) = no faith drift.'],
+    'Deities contest converts and gain seats, but only once a settlement carries a primary deity. Off or deity-free equals no faith drift.'],
 ];
 
 function human(value) {
@@ -122,7 +129,7 @@ function Toggle({ checked, label, onChange }) {
       padding: '6px 8px',
       border: `1px solid ${BORDER2}`,
       borderRadius: R.md,
-      background: checked ? 'rgba(201,162,76,0.12)' : CARD,
+      background: checked ? GOLD_BG : CARD,
       color: INK,
       fontFamily: sans,
       fontSize: FS.xs,
@@ -153,7 +160,7 @@ function GateToggle({ checked, label, description, onChange }) {
       padding: '10px 12px',
       border: `1px solid ${checked ? GOLD : BORDER2}`,
       borderRadius: R.md,
-      background: checked ? 'rgba(201,162,76,0.12)' : CARD,
+      background: checked ? GOLD_BG : CARD,
       cursor: 'pointer',
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -165,6 +172,19 @@ function GateToggle({ checked, label, description, onChange }) {
           onChange={event => onChange(event.target.checked)}
         />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>{label}</span>
+        {/* Second channel beyond border/fill hue (P7): an explicit On/Off word so
+            the enabled state never reads on color alone. */}
+        <span style={{
+          marginLeft: 'auto',
+          color: checked ? GOLD : MUTED,
+          fontFamily: sans,
+          fontSize: FS.xxs,
+          fontWeight: 950,
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+        }}>
+          {checked ? 'On' : 'Off'}
+        </span>
       </span>
       <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
         {description}
@@ -208,6 +228,12 @@ export default function SimulationRulesDialog({ open, campaign, onClose }) {
 function SimulationRulesDialogContent({ campaign, onClose }) {
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
   const previewWorldPulse = useStore(s => s.previewCampaignWorldPulse);
+  // Trap focus inside the modal, close on Escape, and restore focus to the
+  // trigger on unmount (a11y: the dialog previously closed only on outside
+  // mousedown — no Escape, no focus containment). This content only mounts while
+  // the dialog is open, so the hook's `open` flag is always true here.
+  const dialogRef = useDialogFocusTrap(true, onClose);
+  const titleId = useId();
   const [draft, setDraft] = useState(() => normalizeSimulationRules(campaign?.worldState?.simulationRules));
   const [busy, setBusy] = useState(false);
   const [previewBusy, setPreviewBusy] = useState(false);
@@ -282,9 +308,11 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
       }}
     >
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Simulation rules"
+        aria-labelledby={titleId}
+        tabIndex={-1}
         style={{
           width: 'min(100%, 640px)',
           maxHeight: 'min(92vh, 760px)',
@@ -318,20 +346,32 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             <Settings2 size={17} />
           </div>
           <div style={{ minWidth: 0, flex: 1 }}>
-            <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
-              Simulation Rules
-            </h2>
-            <div style={{ marginTop: 4, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750 }}>
-              {[campaign?.name || 'Campaign', activePreset?.label || 'Custom'].join(' - ')}
-            </div>
+            {/* PageHeader carries the title/subtitle in the shared header idiom
+                (serif title, italic subtitle); the gold Settings2 chip and the
+                IconButton close stay in this header row. */}
+            <PageHeader
+              size="sm"
+              as="h2"
+              id={titleId}
+              title="Simulation rules"
+              subtitle={(
+                <span>
+                  {campaign?.name || 'Campaign'}
+                  <span style={{ margin: '0 0.4em', color: MUTED }}>·</span>
+                  {activePreset?.label || 'Custom'}
+                </span>
+              )}
+              actions={(
+                <IconButton
+                  Icon={X}
+                  label="Close simulation rules"
+                  onClick={onClose}
+                  tone="ghost"
+                  size="lg"
+                />
+              )}
+            />
           </div>
-          <IconButton
-            Icon={X}
-            label="Close simulation rules"
-            onClick={onClose}
-            tone="ghost"
-            size="lg"
-          />
         </header>
 
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>
@@ -374,7 +414,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       textAlign: 'left',
                       border: `1px solid ${selected ? GOLD : BORDER2}`,
                       borderRadius: R.md,
-                      background: selected ? 'rgba(201,162,76,0.12)' : CARD,
+                      background: selected ? GOLD_BG : CARD,
                       color: INK,
                       cursor: 'pointer',
                     }}
@@ -438,14 +478,14 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             padding: SP.md,
             border: `1px solid ${GOLD}`,
             borderRadius: R.md,
-            background: 'rgba(201,162,76,0.05)',
+            background: GOLD_BG,
           }}>
             <div style={{ display: 'grid', gap: 2 }}>
               <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
                 Living-world systems (advanced)
               </div>
               <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-                Opt-in subsystems, off by default. Each is byte-identical to today while off — turn one on and the realm starts moving.
+                Opt-in subsystems, off by default. Each is byte-identical to today while off. Turn one on and the realm starts moving.
               </div>
             </div>
             <div style={{

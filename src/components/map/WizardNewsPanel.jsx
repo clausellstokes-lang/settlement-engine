@@ -5,7 +5,9 @@ import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/regi
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
-import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
+import Disclosure from '../primitives/Disclosure.jsx';
+import PageHeader from '../primitives/PageHeader.jsx';
+import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, SP, sans, swatch } from '../theme.js';
 
 function percent(value) {
   return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
@@ -165,37 +167,6 @@ function NewsEntry({ entry, compact = false, nameById }) {
   );
 }
 
-function SectionHeader({ icon: Icon, title, count }) {
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8,
-      marginBottom: 10,
-    }}>
-      <Icon size={15} color={GOLD} />
-      <h3 style={{
-        margin: 0,
-        color: INK,
-        fontFamily: sans,
-        fontSize: FS.sm,
-        fontWeight: 900,
-      }}>
-        {title}
-      </h3>
-      <span style={{
-        marginLeft: 'auto',
-        color: MUTED,
-        fontFamily: sans,
-        fontSize: FS.xs,
-        fontWeight: 800,
-      }}>
-        {count}
-      </span>
-    </div>
-  );
-}
-
 export default function WizardNewsPanel({ campaign }) {
   const summary = useMemo(() => summarizeWizardNews(campaign?.wizardNews), [campaign?.wizardNews]);
   const majorGroups = useMemo(() => groupsFor(summary.major), [summary.major]);
@@ -287,45 +258,27 @@ export default function WizardNewsPanel({ campaign }) {
         }}>
           <Newspaper size={18} color={GOLD} />
         </div>
-        <div style={{ minWidth: 0 }}>
-          <h2 style={{
-            margin: 0,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.lg,
-            lineHeight: 1.2,
-            fontWeight: 900,
-            overflowWrap: 'anywhere',
-          }}>
-            Wizard News
-          </h2>
-          <div style={{
-            display: 'flex',
-            gap: 7,
-            flexWrap: 'wrap',
-            marginTop: 4,
-            color: SECOND,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            fontWeight: 700,
-          }}>
-            <span>{campaign.name}</span>
-            <span>Tick {summary.feed.currentTick}</span>
-            <span>{total} update{total === 1 ? '' : 's'}</span>
-          </div>
+        <div style={{ flex: 1, minWidth: 0, marginBottom: -SP.xl }}>
+          <PageHeader
+            as="h2"
+            size="sm"
+            title="Wizard News"
+            subtitle={`${campaign.name} · Tick ${summary.feed.currentTick} · ${total} update${total === 1 ? '' : 's'}`}
+            actions={(
+              <Button
+                variant="gold"
+                size="sm"
+                icon={<Sparkles size={13} />}
+                busy={chronicleBusy}
+                onClick={generateChronicle}
+                disabled={chronicleBusy || total === 0}
+                title="Turn this tick's news into a two-credit campaign chronicle"
+              >
+                {chronicleBusy ? 'Writing' : 'Chronicle'}
+              </Button>
+            )}
+          />
         </div>
-        <Button
-          variant="gold"
-          size="sm"
-          icon={<Sparkles size={13} />}
-          busy={chronicleBusy}
-          onClick={generateChronicle}
-          disabled={chronicleBusy || total === 0}
-          title="Turn this tick's grounded news into a two-credit campaign chronicle"
-          style={{ marginLeft: 'auto' }}
-        >
-          {chronicleBusy ? 'Writing' : 'Chronicle'}
-        </Button>
       </header>
 
       {(chronicles.length > 0 || chronicleError) && (
@@ -361,18 +314,22 @@ export default function WizardNewsPanel({ campaign }) {
         gap: 16,
         alignItems: 'start',
       }}>
-        <div style={{ minWidth: 0 }}>
-          <SectionHeader
-            icon={AlertTriangle}
-            title="Most Significant News"
-            count={summary.major.length}
-          />
+        <section style={{ minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+            <AlertTriangle size={15} color={GOLD} />
+            <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+              Most Significant News
+            </h3>
+            <span style={{ marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              {summary.major.length}
+            </span>
+          </div>
           {majorGroups.length === 0 ? (
             <div style={{
               border: `1px dashed ${BORDER}`,
               borderRadius: 8,
               padding: 16,
-              color: MUTED,
+              color: BODY,
               fontFamily: sans,
               fontSize: FS.sm,
               background: CARD_ALT,
@@ -382,44 +339,38 @@ export default function WizardNewsPanel({ campaign }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {majorGroups.map(group => (
-                <details key={group.tick} open style={{
-                  border: `1px solid ${BORDER2}`,
-                  borderRadius: 8,
-                  background: CARD,
-                  overflow: 'hidden',
-                }}>
-                  <summary style={{
-                    cursor: 'pointer',
-                    padding: '8px 10px',
-                    color: SECOND,
-                    fontFamily: sans,
-                    fontSize: FS.xs,
-                    fontWeight: 900,
-                    background: CARD_ALT,
-                  }}>
-                    Tick {group.tick} · {group.entries.length} major update{group.entries.length === 1 ? '' : 's'}
-                  </summary>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
+                <Disclosure
+                  key={group.tick}
+                  compact
+                  title={`Tick ${group.tick}`}
+                  count={group.entries.length}
+                  defaultOpen
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} nameById={nameById} />)}
                   </div>
-                </details>
+                </Disclosure>
               ))}
             </div>
           )}
-        </div>
+        </section>
 
-        <div style={{ minWidth: 0 }}>
-          <SectionHeader
-            icon={RadioTower}
-            title="Realm Notables"
-            count={summary.notables.length}
-          />
+        <section style={{ minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+            <RadioTower size={15} color={GOLD} />
+            <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+              Realm Notables
+            </h3>
+            <span style={{ marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              {summary.notables.length}
+            </span>
+          </div>
           {notableGroups.length === 0 ? (
             <div style={{
               border: `1px dashed ${BORDER}`,
               borderRadius: 8,
               padding: 16,
-              color: MUTED,
+              color: BODY,
               fontFamily: sans,
               fontSize: FS.sm,
               background: CARD_ALT,
@@ -429,31 +380,21 @@ export default function WizardNewsPanel({ campaign }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {notableGroups.map((group, index) => (
-                <details key={group.tick} open={index === 0} style={{
-                  border: `1px solid ${BORDER2}`,
-                  borderRadius: 8,
-                  background: CARD,
-                  overflow: 'hidden',
-                }}>
-                  <summary style={{
-                    cursor: 'pointer',
-                    padding: '8px 10px',
-                    color: SECOND,
-                    fontFamily: sans,
-                    fontSize: FS.xs,
-                    fontWeight: 900,
-                    background: CARD_ALT,
-                  }}>
-                    Tick {group.tick} · {group.entries.length} notable update{group.entries.length === 1 ? '' : 's'}
-                  </summary>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
+                <Disclosure
+                  key={group.tick}
+                  compact
+                  title={`Tick ${group.tick}`}
+                  count={group.entries.length}
+                  defaultOpen={index === 0}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} compact nameById={nameById} />)}
                   </div>
-                </details>
+                </Disclosure>
               ))}
             </div>
           )}
-        </div>
+        </section>
       </div>
     </section>
   );

@@ -1,5 +1,16 @@
-import { FS, swatch } from '../theme.js';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { FS, swatch, GOLD_TXT } from '../theme.js';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import IconButton from '../primitives/IconButton.jsx';
+
+// One-line affordance glosses for tab labels a first-time DM can't guess from
+// the word alone. Surfaced via the native title= tooltip, so the visible label
+// (pinned by tests) is untouched. Only the genuinely opaque labels carry a
+// gloss; self-evident tabs (Power, Economics, NPCs) get none. (Checklist 2.)
+const TAB_GLOSS = {
+  substrate: 'The sixteen causal variables the simulation runs on. The deepest diagnostic view.',
+  dm_compass: 'The narrated layer: hooks, red flags, and the twist drawn from this settlement.',
+  viability: 'Whether the settlement can sustain itself, and where it falls short.',
+};
 
 // Dossier tab strip — extracted verbatim from OutputContainer's render.
 // Presentational only: scroll, the scroll-container ref, the resolved `tabs`
@@ -16,7 +27,12 @@ export default function DossierTabStrip({
 }) {
   return (
         <div data-onboard-highlight={onboardingActive && onboardingStep === 2 ? 'true' : undefined} style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
-          <button type="button" onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
+          {/* The gradient-fade edge stays on this absolute wrapper; the
+              interactive control is the IconButton inside it, so the
+              aria-label, focus ring, and 44px target come from the primitive. */}
+          <span style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', display: 'flex', alignItems: 'center', paddingLeft: 2 }}>
+            <IconButton Icon={ChevronLeft} label="Scroll tabs left" tone="ghost" size="xl" onClick={() => scroll(-1)} />
+          </span>
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
           <div
             ref={scrollRef}
@@ -52,8 +68,15 @@ export default function DossierTabStrip({
               // purple tint so the AI surface reads as distinct from the
               // simulation tabs.
               const purple = id === 'dm_compass';
-              const accent = purple ? '#7a3aa8' : '#a0762a';
-              const idle   = purple ? '#7a5a92' : swatch.inkMag3;
+              // Two color channels per active tab: `indicator` paints the 2px
+              // bottom underline + icon (non-text, needs ≥3:1); `textColor` paints
+              // the LABEL (text, needs ≥4.5:1). Gold-as-text ('#a0762a') only
+              // clears 3.98:1 on the active cream bg, so the gold branch swaps to
+              // GOLD_TXT (gold-800, 7.25:1) for the label while keeping '#a0762a'
+              // for the underline/icon. The purple branch's '#7a3aa8' already
+              // clears 4.5:1 as text, so it serves both roles.
+              const indicator = purple ? '#7a3aa8' : '#a0762a';
+              const textColor = active ? (purple ? '#7a3aa8' : GOLD_TXT) : (purple ? '#7a5a92' : swatch.inkMag3);
               const bg = active
                 ? (purple ? '#f7f0fa' : '#fffbf5')
                 : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
@@ -63,17 +86,34 @@ export default function DossierTabStrip({
                   key={id}
                   onClick={() => setActiveTab(id)}
                   id={'sf-tab-' + id}
+                  title={TAB_GLOSS[id]}
                   role="tab"
                   aria-selected={active}
+                  aria-controls={'sf-panel-' + id}
                   // Roving tabIndex: only the selected tab is tabbable; the rest are
                   // reached via the arrow-key handler on the tablist.
                   tabIndex={active ? 0 : -1}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: FS.xxs, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
-                ><Icon size={14} />{label}</button>
+                  // Active state reads as a clean underline tab (bottom accent +
+                  // bg tint + weight), not a boxed cell: no top/left/right borders
+                  // on top of the strip's own bottom border.
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3, padding: '10px 12px 8px', minHeight: 44, flexShrink: 0, background: bg, border: 'none', borderBottom: '2px solid ' + (active ? indicator : 'transparent'), cursor: 'pointer', color: textColor, fontSize: FS.xs, fontWeight: active ? 800 : 600, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 3, color: active ? indicator : textColor }}>
+                    {/* Second, non-color channel marking the AI/narrated surface:
+                        the same ✦ glyph the narrative layer uses, so the
+                        AI-vs-simulation distinction survives the squint test and
+                        color-blind reads. */}
+                    {purple && <Sparkles size={11} aria-hidden="true" />}
+                    <Icon size={14} />
+                  </span>
+                  {label}
+                </button>
               );
             })}
           </div>
-          <button type="button" onClick={() => scroll(1)} aria-label="Scroll tabs right" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
+          <span style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 2 }}>
+            <IconButton Icon={ChevronRight} label="Scroll tabs right" tone="ghost" size="xl" onClick={() => scroll(1)} />
+          </span>
         </div>
   );
 }

@@ -1,22 +1,23 @@
 import { useState, useMemo } from 'react';
 import ControlsStrip from './ControlsStrip.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, sans, FS, swatch, CARD_ALT, CARD_HDR } from './theme.js';
+import Button from './primitives/Button.jsx';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
 import {SERVICE_TIER_DATA} from '../generators/servicesGenerator';
 import {TIER_ORDER} from '../generators/helpers';
 
 const CAT_COLORS = {
-  agricultural:  { bg:'#f0faf2', text:'#1a5a28', label:'Agricultural' },
-  raw_materials: { bg:'#faf4e8', text:'#7a5010', label:'Raw Material'  },
-  manufactured:  { bg:'#f0f4ff', text:'#1a2a8a', label:'Manufactured'  },
+  agricultural:  { bg:'#f0faf2', text:swatch['#1A5A28'], label:'Agricultural' },
+  raw_materials: { bg:swatch['#F7F0E4'], text:swatch['#7A5010'], label:'Raw Material'  },
+  manufactured:  { bg:swatch.infoBg, text:'#1a2a8a', label:'Manufactured'  },
   luxury:        { bg:'#faf0ff', text:'#6a1a8a', label:'Luxury'         },
   services:      { bg:'#f0f8ff', text:'#1a5a8a', label:'Service'        },
   food_processed:{ bg:'#fff4e8', text:'#8a4010', label:'Processed'      },
 };
 
 function catColor(cat) {
-  return CAT_COLORS[String(cat||'').toLowerCase()] || { bg:'#f7f0e4', text:SECOND, label:'' };
+  return CAT_COLORS[String(cat||'').toLowerCase()] || { bg:swatch['#F7F0E4'], text:SECOND, label:'' };
 }
 
 function getGoodsForTier(tier) {
@@ -45,18 +46,18 @@ function GoodCard({ good, state, onCycle }) {
   const isExcluded  = forceExclude;
   const _isAllowed   = !isForced && !isExcluded;
 
-  const bg         = isForced ? '#efe8d0' : '#faf6ef';
+  const bg         = isForced ? swatch['#F0E8D8'] : CARD_ALT;
   const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;
-  const labelText  = isForced ? ' Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
+  const labelText  = isForced ? 'Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
   const labelColor = isForced ? GOLD : MUTED;
 
   return (
-    <div onClick={onCycle} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onCycle(); } }} style={{
+    <div className="trade-good-row" onClick={onCycle} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onCycle(); } }} style={{
       display:'flex', alignItems:'flex-start', gap:8,
       padding:'6px 12px 6px 10px',
-      background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',
+      background:bg, borderLeft, borderBottom:`1px solid ${swatch['#F0E8D8']}`,
       cursor:'pointer', userSelect:'none', WebkitTapHighlightColor:'transparent',
-       transition:'background 0.1s',
+      transition:'background 0.1s',
     }}>
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
@@ -73,13 +74,18 @@ function GoodCard({ good, state, onCycle }) {
 
 function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
   return (
-    <button type="button" onClick={onToggle} style={{
-      width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
-      background: isOpen ? '#f0ead8' : '#faf4e8',
-      border:'none', borderTop:'1px solid #e0d0b0',
-      cursor:'pointer', textAlign:'left', fontFamily:sans,
-      WebkitTapHighlightColor:'transparent',
-    }}>
+    <Button
+      variant="ghost"
+      onClick={onToggle}
+      fullWidth
+      aria-expanded={isOpen}
+      style={{
+        justifyContent:'flex-start', gap:8, padding:'7px 12px',
+        background: isOpen ? swatch['#F0EAD8'] : CARD_HDR,
+        border:'none', borderTop:`1px solid ${swatch['#E0D0B0']}`,
+        borderRadius:0, textAlign:'left', fontFamily:sans, fontWeight:400,
+      }}
+    >
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
         {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
@@ -90,7 +96,7 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
         <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
-    </button>
+    </Button>
   );
 }
 
@@ -158,7 +164,10 @@ function GoodsPanel() {
   const allowedCount  = goods.filter(g => { const s=getState(g); return !s.force&&!s.forceExclude; }).length;
 
   return (
-    <div style={{border:`1px solid ${BORDER}`, borderRadius:0, borderTop:'none'}}>
+    <div>
+      {/* role=button good rows have no default ring; give keyboard focus a
+          perceivable outline without forcing a 44px target (dense-scan rationale). */}
+      <style>{`.trade-good-row:focus-visible{outline:2px solid ${GOLD};outline-offset:-2px;}`}</style>
       <ControlsStrip
         search={search}
         setSearch={setSearch}
@@ -198,16 +207,12 @@ function GoodsPanel() {
   );
 }
 
+// TradeDynamicsPanel mounts inside LayeredConfigurationPanel's Deep-constraints
+// Disclosure, which already supplies the "Trade Dynamics" title, collapse
+// affordance, and the wizard_step_viewed funnel fire. The component's own outer
+// collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
+// its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
+// there is exactly one disclosure layer. GoodsPanel renders directly.
 export default function TradeDynamicsPanel() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
-      <button type="button" onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:swatch['#F5EDE0'], border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
-        <span style={{fontSize:FS.lg}}></span>
-        <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize: FS['16'], fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
-        <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
-      </button>
-      {open && <GoodsPanel />}
-    </div>
-  );
+  return <GoodsPanel />;
 }

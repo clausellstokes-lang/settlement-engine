@@ -110,6 +110,24 @@ const errorKindFromError = (e) => {
   return 'server';
 };
 
+/**
+ * Map a thrown generation error to GM-facing domain language for the aiError
+ * surface. Transport/engine internals (fetch/RPC/parse) must never reach the
+ * trust surface verbatim — the raw message is logged via telemetry, not shown.
+ * (P10 plain-language / P11 no engine-jargon leak.) `fallback` lets each action
+ * name its own generic case ('narrative', 'daily life', 'progression').
+ */
+const friendlyAiError = (e, fallback) => {
+  const kind = errorKindFromError(e);
+  if (kind === 'credits') {
+    // The specific need/have message is set on its own pre-flight path; a
+    // credits failure that surfaces here is still domain-readable.
+    return 'Not enough credits for this action.';
+  }
+  if (kind === 'network') return "Couldn't reach the simulator — check your connection and try again.";
+  return `The ${fallback} couldn't be generated. Try again.`;
+};
+
 /** Derive the canon phase enum for a save entry, analytics-only. */
 const canonPhaseOf = (entry) => (isCanonSave(entry) ? 'canon' : 'draft');
 
@@ -500,7 +518,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist narrative to save:', persistErr);
-        set(state => { state.aiError = 'Narrative generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Narrative generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: after a successful generation, append an entry logging this
@@ -515,7 +533,7 @@ export const createAiSlice = (set, get) => ({
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Narrative generation failed';
+        state.aiError = friendlyAiError(e, 'narrative layer');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -649,11 +667,11 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist daily-life to save:', persistErr);
-        set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Daily life generated but save failed. It may not persist across sessions.'; });
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Daily life generation failed';
+        state.aiError = friendlyAiError(e, 'daily life');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -827,7 +845,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist progression to save:', persistErr);
-        set(state => { state.aiError = 'Progression generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Progression generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: record the progression with its human-readable trigger so
@@ -842,7 +860,7 @@ export const createAiSlice = (set, get) => ({
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Progression failed';
+        state.aiError = friendlyAiError(e, 'progression');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -1111,7 +1129,7 @@ export const createAiSlice = (set, get) => ({
       get().updateSavedSettlement(saveId, { aiData });
     } catch (e) {
       console.error('Failed to persist revert-to-raw:', e);
-      set(state => { state.aiError = 'Reverted in view but save failed — it may persist on reload.'; });
+      set(state => { state.aiError = 'Reverted in view but save failed. It may persist on reload.'; });
     }
   },
 });

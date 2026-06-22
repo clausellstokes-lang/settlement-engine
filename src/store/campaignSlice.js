@@ -163,7 +163,7 @@ export const createCampaignSlice = (set, get) => {
     // Covers BOTH campaign saves and (since persistSaveUpdate was unified) the
     // canon settlement path — applied-locally-but-not-persisted, surfaced via the banner.
     state.campaignSyncError = 'Some changes could not be saved to the cloud. '
-      + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
+      + 'They are applied locally but may not persist. Check your connection, then reload to confirm.';
   }));
 
   return {
@@ -431,7 +431,7 @@ export const createCampaignSlice = (set, get) => {
     const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
     const activeNow = (st.savedSettlements || []).length;
     if (Number.isFinite(max) && activeNow + 1 > max) {
-      throw new Error('Your library is full — free up a slot or upgrade to import more settlements.');
+      throw new Error('Your library is full. Free up a slot or upgrade to import more settlements.');
     }
     const { fetchDossierForImport } = await import('../lib/gallery.js');
     const dossier = await fetchDossierForImport(slug);

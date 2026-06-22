@@ -10,6 +10,7 @@
  * The merge/normalize/classify/sort/relative-timing all live in the pure,
  * tested domain/dossier/chronicleFeed helper; this is presentation only.
  */
+import { Swords } from 'lucide-react';
 import { Section, Empty } from '../Primitives';
 import { FS, swatch, MUTED } from '../../theme.js';
 
@@ -20,13 +21,13 @@ const SRC_EDIT_BG = swatch['#F5ECD8'];
 const ROW_BORDER = swatch['#C8D0E8'];
 
 function chip(color, bg) {
-  return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800 };
+  return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800, textTransform: 'uppercase' };
 }
 
 export default function ChronicleTab({ entries = [] }) {
   if (!entries.length) {
     return (
-      <Empty message="No chronicle yet — manual changes, party actions, and world-pulse events will appear here as the settlement's living history, timed from canonization." />
+      <Empty message="No chronicle yet. Your changes, the party's actions, and the world's own turns will gather here as the settlement's living history, timed from canonization." />
     );
   }
   return (
@@ -45,10 +46,10 @@ export default function ChronicleTab({ entries = [] }) {
                     {String(event.title || 'Event').replace(/_/g, ' ')}
                   </span>
                   {event.partyCaused
-                    ? <span title="Caused by the party" style={chip(PARTY, PARTY_BG)}>⚔ PARTY</span>
+                    ? <span title="Caused by the party" style={{ ...chip(PARTY, PARTY_BG), display: 'inline-flex', alignItems: 'center', gap: 3 }}><Swords size={10} aria-hidden="true" />Party</span>
                     : event.source === 'manual'
-                      ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>EDIT</span>
-                      : <span title="The world engine produced this" style={chip(swatch.info, swatch['#F4F6FD'])}>WORLD</span>}
+                      ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>Edit</span>
+                      : <span title="Driven by the wider world" style={chip(swatch.info, swatch['#F4F6FD'])}>World</span>}
                 </div>
                 {event.summary && <p style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
               </div>

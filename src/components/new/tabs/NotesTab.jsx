@@ -112,7 +112,7 @@ export default function NotesTab({ saveId, notes, section }) {
               style={textareaStyle}
             />
             <p style={{ margin: '8px 0 0', fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
-              Woven into AI narration as established campaign flavor — settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+              Woven into the narration as established campaign lore. Settlement facts still win where they conflict. It may therefore surface in the refined prose, including shared narration if you publish it; otherwise it stays private to you. You confirm it before each narration run, and DM Notes are never included.
             </p>
           </section>
         )}

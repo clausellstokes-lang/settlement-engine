@@ -148,7 +148,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // public grows uneasy, and the arcane substrate itself is destabilized.
   magical_instability: {
     label: 'Magical instability',
-    description: 'Magic in the settlement is misbehaving — surging wild, failing, or fallen silent.',
+    description: 'Magic in the settlement is misbehaving: surging wild, failing, or fallen silent.',
     affectedSystems: ['magical_stability', 'healing_capacity', 'public_legitimacy'],
     defaultExpiresAtTicks: 7,
     defaultStatus: 'worsening',
@@ -359,7 +359,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // (it eases as the posture cools back to peace), so it does not become a scar.
   war_mobilization: {
     label: 'War mobilization',
-    description: 'The settlement is shifting onto a war footing — its economy is reorganizing for the coming campaign.',
+    description: 'The settlement is shifting onto a war footing. Its economy is reorganizing for the coming campaign.',
     affectedSystems: ['economic_capacity'],
     defaultExpiresAtTicks: 7,
     defaultStatus: 'worsening',
@@ -434,7 +434,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // no-war settlement never carries it ⇒ byte-identical when OFF.
   trade_embargo: {
     label: 'Trade embargo',
-    description: 'A critical supplier has cut off the flow — the dependent economy reels.',
+    description: 'A critical supplier has cut off the flow. The dependent economy reels.',
     affectedSystems: ['trade_connectivity', 'food_security', 'public_legitimacy'],
     defaultExpiresAtTicks: 8,
     defaultStatus: 'worsening',
@@ -866,7 +866,7 @@ export function summarizeActiveConditions(settlement) {
   for (const c of all) {
     byArchetype[c.archetype] = (byArchetype[c.archetype] || 0) + 1;
     if (bySeverityBand[c.severityBand] !== undefined) bySeverityBand[c.severityBand] += 1;
-    summaryLines.push(`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
+    summaryLines.push(`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
   }
 
   return {

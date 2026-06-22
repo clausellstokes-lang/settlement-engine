@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Trash2 } from 'lucide-react';
 
 import {
   addGalleryComment,
@@ -23,6 +23,7 @@ import {
   serif_,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import DeleteConfirmation from '../DeleteConfirmation.jsx';
 import { formatDate } from './galleryUtils.js';
 
 export default function GalleryComments({ dossier, auth, onCountChange }) {
@@ -30,6 +31,10 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
   const [commentText, setCommentText] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  // Which comment's inline delete-confirmation is open. A one-click danger
+  // button on an irreversible action is the exact case DeleteConfirmation guards
+  // everywhere else in the app (P10 / P11 cross-surface consistency).
+  const [confirmingId, setConfirmingId] = useState(null);
   const dossierId = dossier?.id || null;
 
   const applyRows = useCallback((rows) => {
@@ -72,6 +77,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
     setError(null);
     try {
       await deleteGalleryComment(commentId);
+      setConfirmingId(null);
       await reload();
     } catch (err) {
       setError(err?.message || 'Comment could not be deleted.');
@@ -141,7 +147,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
       )}
       <div style={{ display: 'grid', gap: 8 }}>
         {comments.length === 0 ? (
-          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No comments yet.
           </div>
         ) : comments.map(comment => (
@@ -150,24 +156,34 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
               <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
                 {comment.authorLabel}
               </span>
-              <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+              {/* Date is read-content (a reader parses it), so BODY (AA), not the
+                  chrome-only MUTED; de-emphasized by weight, not a sub-AA hue. */}
+              <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 600 }}>
                 {formatDate(comment.createdAt)}
               </span>
-              {comment.canDelete && (
+              {comment.canDelete && confirmingId !== comment.id && (
                 <Button
-                  variant="danger"
+                  variant="ghost"
                   size="sm"
-                  onClick={() => remove(comment.id)}
+                  onClick={() => setConfirmingId(comment.id)}
                   disabled={busy}
-                  style={{ marginLeft: 'auto' }}
-                >
-                  Delete
-                </Button>
+                  aria-label={`Delete comment by ${comment.authorLabel}`}
+                  icon={<Trash2 size={13} />}
+                  style={{ marginLeft: 'auto', color: RED, minHeight: 44, minWidth: 44 }}
+                />
               )}
             </div>
             <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
               {comment.body}
             </p>
+            {comment.canDelete && confirmingId === comment.id && (
+              <DeleteConfirmation
+                entityName="this comment"
+                details="This permanently removes the comment from the public discussion."
+                onConfirm={() => remove(comment.id)}
+                onCancel={() => setConfirmingId(null)}
+              />
+            )}
           </article>
         ))}
       </div>

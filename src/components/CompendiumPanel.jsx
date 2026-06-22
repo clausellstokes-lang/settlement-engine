@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe } from 'lucide-react';
-import Button from './primitives/Button.jsx';
+import { GOLD, INK, BODY, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe, X } from 'lucide-react';
+import IconButton from './primitives/IconButton.jsx';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
+import Segmented from './primitives/Segmented.jsx';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, LivingWorldTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
@@ -19,6 +22,12 @@ const TABS = [
   { id:'neighbour',   label:'Neighbour System',        Icon: Link2 },
   { id:'institutions',label:'Institutions',            Icon: Building2 },
 ];
+
+// Tabs whose content actually consumes the per-tab filter. The prose tabs
+// (economy/arcane/living) are short curated reference and take no search prop,
+// so the filter row is hidden on them rather than rendering a control that
+// silently no-ops — the cardinal correct-mapping failure.
+const SEARCHABLE_TABS = new Set(['tiers', 'power', 'stress', 'neighbour', 'institutions']);
 
 // Anchor → tab map. HelpPopover and external deep-links
 // land at URL hashes like `#trade-routes` or `#magic`. The hash maps
@@ -71,7 +80,7 @@ const TAB_META = Object.freeze({
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
 });
 
-export default function CompendiumPanel({ config, standalone=false }) {
+export default function CompendiumPanel({ standalone=false }) {
   const [mode, setMode] = useState('catalog'); // 'catalog' | 'custom'
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
@@ -146,7 +155,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
       case 'living':       return <LivingWorldTab/>;
       case 'stress':       return <StressTab search={q}/>;
       case 'neighbour':    return <NeighbourTab search={q}/>;
-      case 'institutions': return <InstitutionsTab config={config} search={search}/>;
+      case 'institutions': return <InstitutionsTab search={search}/>;
       default:             return null;
     }
   };
@@ -175,44 +184,64 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // fill the frame so they flow into more columns, while the prose/row
   // tabs keep a comfortable reading measure so lines don't sprawl.
   const gridTab = activeTab === 'power' || activeTab === 'institutions';
+  // Both mounts route through the shared prose cap so neither can drift back to a
+  // bespoke column width (P12); the embedded panel no longer hard-codes 760.
   const contentColumn = standalone
     ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }
-    : { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
+    : { maxWidth: PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' };
 
-  return (
+  const panel = (
     <div style={standalone
       ? { maxWidth: PAGE_MAX, margin:'0 auto', width:'100%', background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl, boxShadow:ELEV[1], overflow:'hidden' }
       : { borderRadius:8, overflow:'hidden' }}>
-      {/* Mode toggle */}
-      <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
-        <Button onClick={()=>setMode('catalog')} variant={mode==='catalog'?'gold':'ghost'} size="sm" icon={<Building2 size={13}/>} aria-pressed={mode==='catalog'} style={{ flex:1 }}>
-          Built-in Catalog
-        </Button>
-        <Button onClick={()=>setMode('custom')} variant={mode==='custom'?'ai':'ghost'} size="sm" icon={<Sparkles size={13}/>} aria-pressed={mode==='custom'} style={{ flex:1 }}>
-          My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:swatch['#7C3AED'], borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
-        </Button>
+      {/* Chrome (mode toggle → global search → tab strip) shares ONE parchment
+          ground and is separated by spacing, with a single divider only at the
+          content boundary (the tab strip's bottom rule). The toggle and the
+          global-search band no longer carry their own full-width rules, so the
+          surface presents one floor above content instead of three stacked
+          ones (P5). Switching mode clears the per-region filter so a stale,
+          invisible-origin term can't bleed across regions (P8). */}
+      <div style={{ display:'flex', background:PARCH, padding:'6px 14px' }}>
+        <Segmented
+          ariaLabel="Compendium mode"
+          size="sm"
+          value={mode}
+          onChange={(id)=>{ setMode(id); setSearch(''); }}
+          options={[
+            { id:'catalog', label:'Built-in catalog', icon:Building2 },
+            { id:'custom', icon:Sparkles, label:(
+              <>My custom content {customContentCount > 0 && <span style={{ marginLeft:4, fontSize:FS.xs, fontWeight:700, background:swatch['#7C3AED12'], color:swatch['#7C3AED'], borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}</>
+            ) },
+          ]}
+        />
       </div>
 
       {mode === 'catalog' ? (
         <>
-          {/* Global type-ahead search across every section. */}
+          {/* Global type-ahead search across every section — the single
+              dominant search affordance for this surface. Its own bordered input
+              box marks the affordance, so the band needs no full-width rule. */}
           <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
-          {/* Tab bar + search */}
+          {/* Tab navigation + an inline per-tab filter, the one control region
+              that owns the divider to content. Selecting a tab clears the filter
+              so the next tab doesn't silently inherit a term typed for the
+              previous one (P8). */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
-            <div style={{ display:'flex', overflowX:'auto', gap:0 }}>
+            <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} type="button" aria-pressed={activeTab===id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>{ setActiveTab(id); setSearch(''); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'13px 14px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:BODY, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>
-            <div style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 14px', borderTop:`1px solid ${BOR}` }}>
-              <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
-              <input aria-label="Search catalog" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
-              {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
-            </div>
+            {SEARCHABLE_TABS.has(activeTab) && (
+              <div style={{ ...contentColumn, display:'flex', alignItems:'center', gap:6, padding:'2px 14px 6px', minHeight:42 }}>
+                <Search size={11} style={{ color:MUT, flexShrink:0 }}/>
+                <input aria-label="Filter this tab" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Filter this tab…" style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.xs, color:INK, outline:'none' }}/>
+                {search && <IconButton Icon={X} label="Clear filter" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
+              </div>
+            )}
           </div>
-          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
+          <div role="tabpanel" id={`compendium-panel-${activeTab}`} aria-labelledby={`compendium-tab-${activeTab}`} style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <div style={contentColumn}>
               {renderTab()}
             </div>
@@ -221,10 +250,10 @@ export default function CompendiumPanel({ config, standalone=false }) {
       ) : (
         <>
           {/* Custom content search */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}` }}>
+          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}`, minHeight:36 }}>
             <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
             <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
-            {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
+            {search && <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <CustomContentManager search={search.toLowerCase()}/>
@@ -232,5 +261,23 @@ export default function CompendiumPanel({ config, standalone=false }) {
         </>
       )}
     </div>
+  );
+
+  if (!standalone) return panel;
+
+  // Standalone page identity: the canonical Page frame + PageHeader
+  // (eyebrow / serif title / italic subtitle), matching the
+  // Library/Gallery/Pricing pattern. Embedded panels keep their host heading
+  // and skip this. Fixes the 5-second test — the surface's purpose was
+  // previously carried only by document.title.
+  return (
+    <Page>
+      <PageHeader
+        eyebrow="Rules and data reference"
+        title="Compendium"
+        subtitle="How the simulator builds and runs a settlement: the rules behind every dossier."
+      />
+      {panel}
+    </Page>
   );
 }

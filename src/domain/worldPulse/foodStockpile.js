@@ -41,7 +41,7 @@
  */
 
 import { foodLedger } from '../foodLedger.js';
-import { effectiveStressorSeverity } from './stressors.js';
+import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));

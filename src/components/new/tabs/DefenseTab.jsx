@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS, swatch, MUTED, BODY } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
@@ -38,7 +38,7 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
 
   // Score color helper
   const scoreColor = n => n>=65?'#1a5a28':n>=40?'#a0762a':n>=20?'#8a4010':'#8b1a1a';
-  const scoreBadge = n => n>=65?'STRONG':n>=40?'ADEQUATE':n>=20?'WEAK':'CRITICAL';
+  const scoreBadge = n => n>=65?'Strong':n>=40?'Adequate':n>=20?'Weak':'Critical';
 
   // Threat assessment with expandable rows
   const threats = buildThreatAssessment(r);
@@ -165,7 +165,7 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat — higher is better.</div>
+        <div style={{fontSize:FS.xxs,color:BODY,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat. Higher is better.</div>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({icon,label,color,assess},i)=>{
             const sc = threatScores[label]||0;
@@ -173,7 +173,7 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
             return (
-              <div key={i} role="button" tabIndex={0} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
+              <div key={i} role="button" tabIndex={0} aria-expanded={isExp} aria-controls={`threat-panel-${i}`} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
                 onClick={()=>setExpandedThreat(isExp?null:i)}
                 onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
                 <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
@@ -185,9 +185,9 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
                   <span style={{fontSize:FS.micro,fontWeight:800,color:badgeColor,background:`${badgeColor}15`,borderRadius:3,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
                   <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
                 </div>
-                {isExp&&<div style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
+                {isExp&&<div id={`threat-panel-${i}`} style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
                   <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
-                  {fundingNotes[label]&&<p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
+                  {fundingNotes[label]&&<p style={{fontSize:FS.xxs,color:BODY,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
                 </div>}
               </div>
             );
@@ -207,7 +207,7 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
                               : intScore>=40 ? 'Adequate Public Order'
                               : intScore>=20 ? 'Weak Public Order'
                               : 'Critical: Order Failing';
-            const orderBadge  = intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL';
+            const orderBadge  = intScore>=65?'Strong':intScore>=40?'Adequate':intScore>=20?'Weak':'Critical';
             return (
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,borderRadius:6,padding:'10px 14px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
@@ -220,7 +220,7 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
                         ratio{' '}<span style={{fontWeight:700,color:orderColor}}>{ratio.toFixed(2)}×</span>
                       </span>}
                     </div>
-                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
+                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:BODY,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
                   </div>
                   {sp.safetyDesc&&<div style={{flex:1,minWidth:160}}>
                     <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>

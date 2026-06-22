@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
 import Badge from './Badge.jsx';
@@ -6,15 +6,27 @@ import Badge from './Badge.jsx';
 export default function Disclosure({
   title,
   count = null,
+  hint = null,
   defaultOpen = false,
   children,
   actions = null,
   compact = false,
+  onFirstOpen,
   style,
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const fired = useRef(defaultOpen);
   const panelId = useId();
   const Icon = open ? ChevronDown : ChevronRight;
+
+  // Fire onFirstOpen once, the first time the section is revealed. Lets a
+  // call site lazily teach a deep control (analytics step, coach) without a
+  // separate effect. Pre-armed when defaultOpen so it doesn't fire on mount.
+  const toggle = () => setOpen((value) => {
+    const next = !value;
+    if (next && !fired.current && onFirstOpen) { fired.current = true; onFirstOpen(); }
+    return next;
+  });
 
   return (
     <section
@@ -28,7 +40,7 @@ export default function Disclosure({
     >
       <button
         type="button"
-        onClick={() => setOpen(value => !value)}
+        onClick={toggle}
         aria-expanded={open}
         aria-controls={panelId}
         style={{
@@ -58,6 +70,14 @@ export default function Disclosure({
           {title}
         </span>
         {count != null && <Badge tone="muted">{count}</Badge>}
+        {hint && !open && (
+          <span style={{
+            fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
+            color: MUTED, letterSpacing: 0, textTransform: 'none',
+          }}>
+            {hint}
+          </span>
+        )}
         {actions && <span style={{ color: SECOND }}>{actions}</span>}
       </button>
       {open && (

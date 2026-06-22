@@ -234,7 +234,7 @@ function siegeGate(snapshot, pressure) {
     hostile,
     warContext && { mult: 1.3, reason: 'War is already on the march in the region.' },
     !hostile && !warContext
-      && { mult: 0.4, reason: 'No declared enemy — only an unnamed host could press a siege here.' },
+      && { mult: 0.4, reason: 'No declared enemy stands here; only an unnamed host could press a siege.' },
     ['frontier', 'plagued'].includes(threat)
       && { mult: 1.2, reason: 'A frontier settlement makes a tempting target.' },
     causalScore(entry, 'defense_readiness') >= 70
@@ -271,7 +271,7 @@ function occupationGate(snapshot, pressure) {
   // No plausible occupier — nobody is at the gates, nobody hostile nearby.
   if (!besieged && !atWar && !hostile) return null;
   return gateResult([
-    besieged && { mult: 1.8, reason: 'Sieges end in occupations — the army is already at the walls.' },
+    besieged && { mult: 1.8, reason: 'Sieges end in occupations, and the army is already at the walls.' },
     !besieged && hostile && { mult: 1.2, reason: 'A hostile neighbour stands ready to march in.' },
     !besieged && atWar && { mult: 1.2, reason: 'The war footing puts an army within reach of the gates.' },
     causalScore(entry, 'defense_readiness') >= 70
@@ -288,7 +288,7 @@ function politicalFractureGate(snapshot, pressure) {
   const coupEcho = echoStrengthAt(snapshot, sid, 'coup_detat');
   return gateResult([
     legitimacy < 30
-      ? { mult: 1.6, reason: 'Legitimacy is in open crisis — every ruling claim is contestable.' }
+      ? { mult: 1.6, reason: 'Legitimacy is in open crisis; every ruling claim is contestable.' }
       : legitimacy < 45 && { mult: 1.3, reason: 'The rulers are merely tolerated, and barely that.' },
     here.has('succession_void') && { mult: 1.4, reason: 'An empty seat invites rival claims to law itself.' },
     coupEcho > 0.15 && { mult: 1.3, reason: 'The recent coup left the constitution in splinters.' },
@@ -316,7 +316,7 @@ function indebtednessGate(snapshot, pressure) {
   ], [
     // The spiral's first act is a boom: borrowed coin buys real prosperity
     // before the creditors call it back. (The drag arrives with severity.)
-    'Cheap credit flows in first — the spiral begins as a boom.',
+    'Cheap credit flows in first, so the spiral begins as a boom.',
   ]);
 }
 
@@ -337,7 +337,7 @@ function betrayalGate(snapshot, pressure, context = {}) {
     // (without this, persistent legitimacy pressure churns a betrayal every
     // other tick: born, purged, reborn, forever).
     echoStrengthAt(snapshot, sid, 'betrayal') > 0.3
-      && { mult: 0.45, reason: 'The purges are fresh — surviving conspirators lie low.' },
+      && { mult: 0.45, reason: 'The purges are fresh, so surviving conspirators lie low.' },
   ]);
 }
 
@@ -362,8 +362,8 @@ function diseaseOutbreakGate(snapshot, pressure) {
   const healers = healingLedger(entry.settlement).healerCount;
   const here = activeTypesAt(snapshot, sid);
   return gateResult([
-    healing < 35 && { mult: 1.5, reason: 'Healing capacity has collapsed — nothing stands between a fever and a plague.' },
-    healers === 0 && { mult: 1.4, reason: 'No healing institutions at all — the sick have nowhere to go.' },
+    healing < 35 && { mult: 1.5, reason: 'Healing capacity has collapsed; nothing stands between a fever and a plague.' },
+    healers === 0 && { mult: 1.4, reason: 'No healing institutions at all, so the sick have nowhere to go.' },
     here.has('mass_migration') && { mult: 1.4, reason: 'Crowded refugee camps are kindling for contagion.' },
     here.has('famine') && { mult: 1.3, reason: 'The hungry sicken first.' },
     tradeLinkCount(snapshot, sid) >= 3 && { mult: 1.15, reason: 'Contagion travels the trade roads.' },
@@ -398,12 +398,12 @@ function monsterRaiderGate(snapshot, pressure) {
   const warNearby = WAR_TYPES.some(t => near.has(t));
   return gateResult([
     threat === 'plagued'
-      ? { mult: 1.7, reason: 'These lands are plagued — the wilds press in constantly.' }
+      ? { mult: 1.7, reason: 'These lands are plagued, and the wilds press in from every side.' }
       : threat === 'frontier'
         ? { mult: 1.35, reason: 'Frontier country: the wilds are never far.' }
         : threat === 'heartland'
           && { mult: 0.5, reason: 'Settled heartland keeps the wilds at a distance.' },
-    warNearby && { mult: 1.3, reason: 'War next door — raiders follow armies like crows.' },
+    warNearby && { mult: 1.3, reason: 'War next door, and raiders follow armies like crows.' },
     causalScore(entry, 'defense_readiness') >= 70
       && { mult: 0.7, reason: 'A hard target; raiders prefer easier prey.' },
     institutionClassValue(entry.settlement, 'defense') >= 1
@@ -420,7 +420,7 @@ function insurgencyGate(snapshot, pressure) {
   if (legitimacy >= 75) return null;
   const occupied = activeTypesAt(snapshot, sid).has('occupation');
   return gateResult([
-    occupied && { mult: 2.0, reason: 'Occupation breeds resistance — every garrison post is a recruiting poster.' },
+    occupied && { mult: 2.0, reason: 'Occupation breeds resistance; every garrison post is a recruiting poster.' },
     legitimacy < 30 && { mult: 1.5, reason: 'The regime has lost the people entirely.' },
   ]);
 }
@@ -455,7 +455,7 @@ function rebellionGate(snapshot, pressure) {
       ? { mult: 1.7, reason: 'The rulers have lost the streets.' }
       : legitimacy < 45 && { mult: 1.3, reason: 'Public patience with the rulers is spent.' },
     (here.has('famine') || here.has('indebtedness'))
-      && { mult: 1.3, reason: 'Bread and debt — the oldest fuel of uprisings.' },
+      && { mult: 1.3, reason: 'Bread and debt: the oldest fuel of uprisings.' },
     here.has('wartime') && { mult: 1.25, reason: 'War taxes grind the commons toward revolt.' },
   ]);
 }
@@ -474,7 +474,7 @@ function wartimeGate(snapshot, pressure) {
     warNearby && { mult: 1.3, reason: 'The war next door demands a footing of its own.' },
     raiders && { mult: 1.2, reason: 'Raider pressure pushes the militia toward full mobilization.' },
     !hostile && !warNearby && !raiders
-      && { mult: 0.3, reason: 'No enemy in sight — mobilization would be against shadows.' },
+      && { mult: 0.3, reason: 'No enemy in sight; mobilization would be against shadows.' },
   ]);
 }
 
@@ -523,7 +523,7 @@ function criminalCorridorGate(snapshot, pressure) {
     && (String(c?.from) === sid || String(c?.to) === sid));
   return gateResult([
     links === 0 && !corridorChannel
-      && { mult: 0.35, reason: 'A corridor needs traffic — there is none here to hide in.' },
+      && { mult: 0.35, reason: 'A corridor needs traffic, and there is none here to hide in.' },
     causalScore(entry, 'criminal_opportunity') >= 60
       && { mult: 1.4, reason: 'The underworld already owns the night here.' },
     activeTypesAt(snapshot, sid).has('infiltration')
@@ -546,7 +546,7 @@ function magicalInstabilityGate(snapshot, pressure) {
   // Dead ground and wild surges cannot share a sky.
   if (activeTypesAt(snapshot, sid).has('magic_deadzone')) return null;
   return gateResult([
-    arcane >= 1 && { mult: 1.3, reason: 'Concentrated arcane practice — experiments go wrong at scale.' },
+    arcane >= 1 && { mult: 1.3, reason: 'Concentrated arcane practice, where experiments go wrong at scale.' },
     causalScore(entry, 'magical_stability') < 40
       && { mult: 1.4, reason: 'The weave here is already frayed.' },
   ]);
@@ -568,7 +568,7 @@ function magicDeadzoneGate(snapshot, pressure) {
     signals.length >= 2
       && { mult: 1.3, reason: `Magic is load-bearing here: ${signals.slice(0, 2).join('; ')}.` },
     institutionClassValue(entry.settlement, 'arcane') >= 1
-      && { mult: 0.8, reason: 'Standing wards resist the silence — for now.' },
+      && { mult: 0.8, reason: 'Standing wards resist the silence, for now.' },
   ], [
     `Why it matters here: ${signals[0]}.`,
   ]);
@@ -599,7 +599,7 @@ function coupSpawnGate(snapshot, pressure) {
   return {
     probabilityMult: bandMult * authorityMult,
     reasons: [
-      `Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}) — the seat is exposed.`,
+      `Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}). The seat is exposed.`,
       `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`,
       `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
     ],

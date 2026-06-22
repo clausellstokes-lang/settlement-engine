@@ -8,13 +8,49 @@
  * importing is premium (it creates a campaign).
  */
 import { useState, useEffect, useCallback } from 'react';
+import { ChevronLeft } from 'lucide-react';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
-  sans, serif_, SP, R, FS, swatch,
+  INK, INK_DEEP, BODY, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, PROSE_MAX,
+  GREEN, GREEN_BG, RED, RED_BG,
+  sans, serif_, SP, R, FS,
 } from '../theme.js';
+
+// Mirror the settlements tab's StatusMessage so the two sibling tabs render the
+// same tones/tokens (P10 parity) instead of inline hex fallbacks.
+function MapsNotice({ tone = 'info', children }) {
+  const cfg = tone === 'ok'
+    ? { border: GREEN, bg: GREEN_BG, color: GREEN }
+    : { border: RED, bg: RED_BG, color: RED };
+  return (
+    <div
+      role={tone === 'ok' ? 'status' : 'alert'}
+      aria-live={tone === 'ok' ? 'polite' : 'assertive'}
+      style={{ margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, fontWeight: 850, background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// Skeleton tile grid matching the real maps grid, so first-paint reads as
+// loading (not broken) — parity with the settlements tab (P10).
+function MapsSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-label="Loading shared maps"
+      style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}
+    >
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} aria-hidden="true" style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, minHeight: 220, boxShadow: '0 4px 14px rgba(27,20,8,0.08)' }} />
+      ))}
+    </div>
+  );
+}
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
@@ -55,7 +91,9 @@ export default function GalleryMaps({ onNavigate }) {
   }, []);
 
   const handleImport = useCallback(async (slug, kind) => {
-    if (!isPremium) { setNotice({ kind: 'err', text: 'Importing maps is a premium feature.' }); return; }
+    // P9: a tier cap is a preview, not a dead-end. Reframe the denial as an
+    // upgrade next-step with a route to pricing rather than a terminal toast.
+    if (!isPremium) { setNotice({ kind: 'upgrade', text: 'Importing maps is a premium feature.' }); return; }
     setImportingSlug(slug); setNotice(null);
     try {
       const id = kind === 'map_with_campaign'
@@ -74,12 +112,18 @@ export default function GalleryMaps({ onNavigate }) {
   return (
     <div style={{ fontFamily: sans }}>
       {notice && (
-        <div style={{
-          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md, fontSize: FS.sm,
-          background: notice.kind === 'ok' ? (swatch.successBg || GOLD_BG) : (swatch.dangerBg || '#fbeaea'),
-          color: notice.kind === 'ok' ? INK : (swatch.danger || '#9b1c1c'),
-          border: `1px solid ${BORDER}`,
-        }}>{notice.text}</div>
+        notice.kind === 'upgrade' ? (
+          <MapsNotice tone="err">
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+              {notice.text}
+              <Button variant="primary" size="sm" onClick={() => onNavigate?.('pricing')}>
+                See plans
+              </Button>
+            </span>
+          </MapsNotice>
+        ) : (
+          <MapsNotice tone={notice.kind === 'ok' ? 'ok' : 'err'}>{notice.text}</MapsNotice>
+        )
       )}
 
       {/* ── Read-only preview (view a map + its settlements before importing) ── */}
@@ -89,16 +133,16 @@ export default function GalleryMaps({ onNavigate }) {
         const memberList = Array.isArray(d.members) ? d.members : [];
         return (
           <div>
-            <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} style={{ marginBottom: SP.md }}>← Back to maps</Button>
-            {detailLoading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading preview…</p>}
-            {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This map is no longer available.</p>}
+            <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} icon={<ChevronLeft size={14} />} style={{ marginBottom: SP.md }}>Back to maps</Button>
+            {detailLoading && <p style={{ color: BODY, fontSize: FS.sm }}>Loading preview…</p>}
+            {!detailLoading && !d.slug && <p style={{ color: BODY, fontSize: FS.sm }}>This map is no longer available.</p>}
             {!detailLoading && d.slug && (
-              <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden' }}>
+              <div style={{ maxWidth: PROSE_MAX, border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden' }}>
                 <div style={{ background: CARD_ALT, maxHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {img ? (
                     <img src={img} alt={d.name || 'Map'} style={{ maxWidth: '100%', maxHeight: 420, display: 'block' }} />
                   ) : (
-                    <div style={{ padding: SP.xl, color: MUTED, fontSize: FS.sm, background: PARCH, width: '100%', textAlign: 'center' }}>Generated terrain (renders on import)</div>
+                    <div style={{ padding: SP.xl, color: BODY, fontSize: FS.sm, background: PARCH, width: '100%', textAlign: 'center' }}>Generated terrain (renders on import)</div>
                   )}
                 </div>
                 <div style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
@@ -116,7 +160,7 @@ export default function GalleryMaps({ onNavigate }) {
                       </div>
                     </div>
                   )}
-                  <Button variant="gold" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
+                  <Button variant="primary" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
                     title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
                     style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
                     {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
@@ -128,14 +172,16 @@ export default function GalleryMaps({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared maps…</p>}
-      {!viewingSlug && error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
+      {!viewingSlug && loading && <MapsSkeleton />}
+      {!viewingSlug && error && (
+        <MapsNotice tone="err">Could not load maps: {error}</MapsNotice>
+      )}
       {!viewingSlug && !loading && !error && items.length === 0 && (
-        <p style={{ color: MUTED, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
+        <p style={{ color: BODY, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
       )}
 
-      {!viewingSlug && (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: SP.md }}>
+      {!viewingSlug && !loading && (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))', gap: SP.md }}>
         {items.map((m) => (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
@@ -143,21 +189,21 @@ export default function GalleryMaps({ onNavigate }) {
                 <img src={m.thumb_url} alt={m.name || 'Shared map'} loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               ) : (
-                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: FS.xs, background: PARCH }}>
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: BODY, fontSize: FS.xs, background: PARCH }}>
                   Generated terrain
                 </div>
               )}
-              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 5px' }}>
+              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '2px 6px' }}>
                 {m.kind === 'map_with_campaign' ? 'Map + Campaign' : 'Blank map'}
               </span>
             </div>
             <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.xs, flex: 1 }}>
-              <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name || 'Untitled map'}</div>
+              <div title={m.name || 'Untitled map'} style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name || 'Untitled map'}</div>
               {m.description && <div style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.4, maxHeight: 54, overflow: 'hidden' }}>{m.description}</div>}
               {Array.isArray(m.tags) && m.tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs, marginTop: 2 }}>
                   {m.tags.slice(0, 4).map((t) => (
-                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, borderRadius: R.sm, padding: '1px 5px' }}>{t}</span>
+                    <span key={t} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, borderRadius: R.sm, padding: '2px 6px' }}>{t}</span>
                   ))}
                 </div>
               )}
@@ -170,7 +216,7 @@ export default function GalleryMaps({ onNavigate }) {
                   title="Preview this map (and its settlements) before importing"
                 >View</Button>
                 <Button
-                  variant="gold"
+                  variant="primary"
                   size="sm"
                   onClick={() => handleImport(m.slug, m.kind)}
                   busy={importingSlug === m.slug}

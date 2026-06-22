@@ -24,7 +24,7 @@ import { canonBreakdown } from './canonStatus.js';
 const TRUST_KEYS = Object.freeze({
   procedural:    { label: 'Built from procedural simulation.' },
   ai_off:        { label: 'AI not used on this dossier.' },
-  ai_polished:   { label: 'AI used for narrative polish — facts unchanged.' },
+  ai_polished:   { label: 'AI used for narrative polish. Facts unchanged.' },
   user_canon:    { label: 'User canon preserved across rerolls.' },
   event_history: { label: 'Event history applied to current state.' },
 });
@@ -72,7 +72,7 @@ export function deriveProvenanceSummary(settlement) {
   if (!hasAiPolish) {
     summary.push('AI not used unless you choose Narrative Overlay.');
   } else {
-    summary.push('AI used for narrative polish — simulated facts unchanged.');
+    summary.push('AI used for narrative polish. Simulated facts unchanged.');
   }
   if (hasUserCanon) {
     summary.push('Your canon (locked or user-added) is preserved across rerolls.');

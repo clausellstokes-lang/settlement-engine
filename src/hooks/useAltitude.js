@@ -16,7 +16,7 @@
  * components consume.
  *
  *   const { level, setLevel, is } = useAltitude();
- *   if (is.expert) { ...render the 15-var grid... }
+ *   if (is.expert) { ...render the 16-var grid... }
  */
 
 import { useStore } from '../store/index.js';

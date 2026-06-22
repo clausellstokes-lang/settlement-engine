@@ -84,7 +84,7 @@ function explain(key, before, after, change) {
   const bandBefore = bandFor(before);
   const bandAfter  = bandFor(after);
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '. Pressure increased.'}`;
   }
-  return `${label} ${dir} ${mag}${better ? '' : ' — pressure increased'}`;
+  return `${label} ${dir} ${mag}${better ? '' : '. Pressure increased.'}`;
 }

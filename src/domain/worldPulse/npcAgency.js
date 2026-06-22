@@ -854,7 +854,7 @@ function npcGoalCulmination(state, tick) {
     probability: 0.9,
     applyMode: 'auto',
     headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while — and now seizes it.`,
+    summary: `${state.name} has worked toward "${goal}" for a long while, and now seizes it.`,
     reasons: [
       `${state.name}'s long-term goal progress reached its culmination.`,
       `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,

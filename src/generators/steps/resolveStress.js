@@ -114,7 +114,7 @@ registerStep('resolveStress', {
         step:       'resolveStress',
         result:     'resolved_by_event',
         causes: [{ source: 'event', effect: 'suppressed',
-                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}" — the re-rolled stressor stays resolved.` }],
+                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}". The re-rolled stressor stays resolved.` }],
       });
     }
     entries = entries.filter(st => !isResolved(st));

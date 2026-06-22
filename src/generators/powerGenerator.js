@@ -233,7 +233,7 @@ const STRESS_FLAVOR = {
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
-    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly — ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
+    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly. ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
   },
   (rel) =>
     `${rel.npc1Name}'s relationship with ${rel.npc2Name} is more complicated than their public roles suggest. ${rel.tension}`,
@@ -372,7 +372,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (!ctx.isViable && ctx.viabilityIssues?.length > 0)
     narratives.push(
-      `${ctx.name} has a structural problem it hasn't solved — ${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'} — that will eventually force a decision.`
+      `${ctx.name} has a structural problem it hasn't solved: ${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'}. It will eventually force a decision.`
     );
   if (ctx.hasNeighborConflict && ctx.neighbor)
     narratives.push(
@@ -380,7 +380,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus — ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus: ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor')
     narratives.push(
@@ -388,7 +388,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.commodity && ctx.isCrossroads)
     narratives.push(
-      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue — a fact not lost on ${ctx.topFaction || 'the guilds'}.`
+      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue, a fact not lost on ${ctx.topFaction || 'the guilds'}.`
     );
   if (ctx.commodity && ctx.isPort)
     narratives.push(
@@ -404,7 +404,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'economic_disparity')
     narratives.push(
-      `The wealth gap in ${ctx.name} has become a fact of daily life — ${ctx.topFaction || 'the merchant class'} controls the surplus and ${ctx.govFaction || 'the council'} cannot or will not force redistribution. Resentment is structural now, not episodic.`
+      `The wealth gap in ${ctx.name} has become a fact of daily life: ${ctx.topFaction || 'the merchant class'} controls the surplus and ${ctx.govFaction || 'the council'} cannot or will not force redistribution. Resentment is structural now, not episodic.`
     );
   if (ctx.topTension === 'religious_tension')
     narratives.push(
@@ -412,7 +412,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'guild_conflict')
     narratives.push(
-      `The guild dispute in ${ctx.name} is not about craft standards — it is about who controls access to the market. ${ctx.topFaction || 'The dominant guild'} has held the advantage long enough that the challengers have stopped playing by guild rules.`
+      `The guild dispute in ${ctx.name} is not about craft standards. It is about who controls access to the market. ${ctx.topFaction || 'The dominant guild'} has held the advantage long enough that the challengers have stopped playing by guild rules.`
     );
   if (ctx.topTension === 'external_threat' && ctx.neighbor)
     narratives.push(
@@ -420,7 +420,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'external_threat' && !ctx.neighbor)
     narratives.push(
-      `The threat approaching ${ctx.name} is not yet visible to most residents. ${ctx.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
+      `The threat approaching ${ctx.name} is not yet visible to most residents. ${ctx.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it (and how) is the real crisis.`
     );
   if (ctx.topTension === 'resource_scarcity' && ctx.commodity)
     narratives.push(
@@ -428,7 +428,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
     narratives.push(
-      `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${ctx.govFaction || 'The council'} controls the allocation.`
+      `Something essential in ${ctx.name} is running short: food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${ctx.govFaction || 'The council'} controls the allocation.`
     );
   if (ctx.topTension === 'crime_wave')
     narratives.push(
@@ -436,7 +436,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'magical_controversy')
     narratives.push(
-      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${ctx.govFaction || 'The council'} is being pressured to regulate — by people who disagree about what regulation means.`
+      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${ctx.govFaction || 'The council'} is being pressured to regulate, by people who disagree about what regulation means.`
     );
   if (ctx.topTension === 'generational_divide')
     narratives.push(
@@ -448,7 +448,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(
-      `A land dispute in ${ctx.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${ctx.govFaction || 'The council'} has delayed ruling because there is no outcome that does not cost them something.`
+      `A land dispute in ${ctx.name} that was dormant is now active. Someone filed a claim, or found a document, or simply started pressing. ${ctx.govFaction || 'The council'} has delayed ruling because there is no outcome that does not cost them something.`
     );
   if (ctx.topTension === 'population_friction')
     narratives.push(
@@ -459,7 +459,7 @@ export const genSuccessionNarr = (ctx) => {
       `${ctx.name} has not had a strong authority since ${ctx.topNPCName || 'the last leader'} left or died. The pretense of normal governance is maintained. Every decision of consequence is being deferred or made informally by ${ctx.topFaction || 'the faction with the most to gain'}.`
     );
   narratives.push(
-    `The most important thing happening in ${ctx.name} right now is happening below the surface — ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
+    `The most important thing happening in ${ctx.name} right now is happening below the surface: ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
   );
   return narratives;
 };
@@ -624,25 +624,25 @@ const inferFactionCategory = (factionName) => {
 };
 
 export const generatePowerStructure = (tier, economicState, tradeRoute, config, institutions = []) => {
-  var oa;
+  var governingFaction;
   const instNames = (institutions || []).map((N) => (N.name || '').toLowerCase()),
     priorities = getPriorities(config),
     instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
-    p = /** @type {Array<any>} */ ([]),
-    b = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
-    k = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
-    f = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
-    C = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
-    T =
+    factions = /** @type {Array<any>} */ ([]),
+    baseSeats = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
+    economyPower = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
+    militaryPower = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
+    religionPower = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
+    criminalPower =
       instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58)
         ? Math.round(12 * priorityToMultiplier(instFlags.criminalEffective))
         : 0,
-    M =
+    craftGuildPower =
       tier !== 'thorp' && tier !== 'hamlet'
         ? Math.round(17 * priorityToMultiplier(instFlags.economyOutput * 0.75 + 10))
         : 0,
-    A =
+    magicPower =
       instFlags.magicInfluence > 28 && (tier === 'city' || tier === 'metropolis')
         ? Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))
         : instFlags.magicInfluence > 55 &&
@@ -653,7 +653,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             })
           ? Math.round(9 * priorityToMultiplier(instFlags.magicInfluence))
           : 0,
-    S = (institutions || []).some((N) => {
+    hasNobility = (institutions || []).some((N) => {
       var ye = (N.name || '').toLowerCase();
       return (
         ye.includes('lord') ||
@@ -663,17 +663,17 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         ye.includes('feudal')
       );
     }),
-    y = priorities.economy > 70 && !S,
-    v = (institutions || []).some(function (N) {
+    mercantileLean = priorities.economy > 70 && !hasNobility,
+    hasRoyalSeat = (institutions || []).some(function (N) {
       return (N.name || '').toLowerCase().includes('royal seat');
     }),
-    j = Math.round(22 * priorityToMultiplier(instFlags.militaryEffective * 0.65 + instFlags.economyOutput * 0.1)),
-    z = S ? (v ? 1.9 : 1.7) : 1,
-    $ = y ? 0.55 : 1,
-    Y = tier === 'town' ? (S ? 1.15 : 0.85) : 1,
-    J = tier === 'thorp' ? 0 : Math.round(tier === 'hamlet' || tier === 'village' ? j * z * $ * 0.75 : j * z * $ * Y),
-    D = institutions.map((N) => (N.name || '').toLowerCase()),
-    W = {
+    nobleBaseSeats = Math.round(22 * priorityToMultiplier(instFlags.militaryEffective * 0.65 + instFlags.economyOutput * 0.1)),
+    nobilityMultiplier = hasNobility ? (hasRoyalSeat ? 1.9 : 1.7) : 1,
+    mercantileMultiplier = mercantileLean ? 0.55 : 1,
+    townNobleMultiplier = tier === 'town' ? (hasNobility ? 1.15 : 0.85) : 1,
+    nobleInfluence = tier === 'thorp' ? 0 : Math.round(tier === 'hamlet' || tier === 'village' ? nobleBaseSeats * nobilityMultiplier * mercantileMultiplier * 0.75 : nobleBaseSeats * nobilityMultiplier * mercantileMultiplier * townNobleMultiplier),
+    instNamesLower = institutions.map((N) => (N.name || '').toLowerCase()),
+    governanceLabelMap = {
       'head-of-household consensus': tier === 'hamlet' ? 'Elder Consensus' : 'Household Council',
       'informal elder consensus': tier === 'hamlet' ? 'Free Elder Council' : 'Elder Council',
       'village reeve': 'Elected Reeve',
@@ -689,33 +689,33 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'city-state government': 'City-State Council',
       'royal seat': 'Royal Authority',
     };
-  let U = null;
-  for (const [N, ye] of Object.entries(W))
-    if (D.some((he) => he.includes(N))) {
-      U = ye;
+  let governanceForm = null;
+  for (const [N, ye] of Object.entries(governanceLabelMap))
+    if (instNamesLower.some((he) => he.includes(N))) {
+      governanceForm = ye;
       break;
     }
-  const re = {
+  const axisPriorities = {
       military: priorities.military,
       religion: priorities.religion,
       economy: priorities.economy,
       criminal: priorities.criminal,
       magic: priorities.magic,
     },
-    ie = Object.entries(re).reduce((N, ye) => (N[1] > ye[1] ? N : ye))[0],
-    q = re[ie];
-  let P,
-    I = null;
-  if (U) {
+    dominantAxis = Object.entries(axisPriorities).reduce((N, ye) => (N[1] > ye[1] ? N : ye))[0],
+    dominantPriority = axisPriorities[dominantAxis];
+  let powerStructure,
+    structureModifier = null;
+  if (governanceForm) {
     const N =
-        q > 65
+        dominantPriority > 65
           ? {
               military: 'military-dominated',
               religion: 'theocratic-aligned',
               economy: 'commerce-driven',
               criminal: 'corruption-riddled',
               magic: 'arcane-advised',
-            }[ie]
+            }[dominantAxis]
           : null,
       ye =
         [
@@ -726,156 +726,156 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           'Household Council',
           'Elder Council',
           'Elected Reeve',
-        ].includes(U) ||
-        (U === 'Merchant oligarchy' && ie === 'economy') ||
-        (U === 'Merchant Guild Council' && ie === 'economy') ||
-        (U === 'Guild Council' && ie === 'economy') ||
-        (U === 'Democratic assembly' && ie === 'religion');
-    if (U && (U === 'Town Council' || U === 'City Council' || U === 'Grand Council')) {
+        ].includes(governanceForm) ||
+        (governanceForm === 'Merchant oligarchy' && dominantAxis === 'economy') ||
+        (governanceForm === 'Merchant Guild Council' && dominantAxis === 'economy') ||
+        (governanceForm === 'Guild Council' && dominantAxis === 'economy') ||
+        (governanceForm === 'Democratic assembly' && dominantAxis === 'religion');
+    if (governanceForm && (governanceForm === 'Town Council' || governanceForm === 'City Council' || governanceForm === 'Grand Council')) {
       const he = N
         ? {
             military:
-              U === 'Grand Council'
+              governanceForm === 'Grand Council'
                 ? 'Grand Military Council'
-                : U === 'City Council'
+                : governanceForm === 'City Council'
                   ? 'Military City Council'
                   : 'Military Council',
             religion:
-              U === 'Grand Council'
+              governanceForm === 'Grand Council'
                 ? 'High Theocratic Council'
-                : U === 'City Council'
+                : governanceForm === 'City Council'
                   ? 'Ecclesiastical Council'
                   : 'Church Council',
             economy:
-              U === 'Grand Council'
+              governanceForm === 'Grand Council'
                 ? 'Grand Merchant Senate'
-                : U === 'City Council'
+                : governanceForm === 'City Council'
                   ? 'Merchant City Council'
                   : 'Merchant Council',
             criminal:
-              U === 'Grand Council'
+              governanceForm === 'Grand Council'
                 ? 'Shadow Senate'
-                : U === 'City Council'
+                : governanceForm === 'City Council'
                   ? 'Corrupt City Council'
-                  : q > 72
+                  : dominantPriority > 72
                     ? 'Corrupt Council'
                     : 'Town Council',
-            magic: U === 'Grand Council' ? 'Arcane Senate' : 'Arcane Council',
-          }[ie]
+            magic: governanceForm === 'Grand Council' ? 'Arcane Senate' : 'Arcane Council',
+          }[dominantAxis]
         : null;
-      P = (U === 'Town Council' || U === 'City Council' || U === 'Grand Council') && he ? he : U;
-    } else P = U;
-    I = N && !ye ? N : null;
+      powerStructure = (governanceForm === 'Town Council' || governanceForm === 'City Council' || governanceForm === 'Grand Council') && he ? he : governanceForm;
+    } else powerStructure = governanceForm;
+    structureModifier = N && !ye ? N : null;
   } else
     ['thorp', 'hamlet', 'village'].includes(tier)
-      ? (P =
-          (q > 65 &&
+      ? (powerStructure =
+          (dominantPriority > 65 &&
             {
               military: "Headman's Authority",
               religion: 'Priestly Guidance',
               economy: 'Household Council',
               criminal: 'Elder Council',
               magic: 'Elder Council',
-            }[ie]) ||
+            }[dominantAxis]) ||
           'Elder Council')
       : tier === 'town'
-        ? (P =
-            q > 65
+        ? (powerStructure =
+            dominantPriority > 65
               ? {
                   military: 'Military Council',
                   religion: 'Church Council',
                   economy: 'Merchant Council',
                   criminal: 'Corrupt Council',
                   magic: 'Arcane Council',
-                }[ie] || 'Town Council'
-              : (q > 55 &&
+                }[dominantAxis] || 'Town Council'
+              : (dominantPriority > 55 &&
                   {
                     military: 'Military Council',
                     religion: 'Church Council',
                     economy: 'Merchant Council',
                     criminal: 'Corrupt Council',
                     magic: 'Arcane Council',
-                  }[ie]) ||
+                  }[dominantAxis]) ||
                 'Town Mayor')
-        : (P =
+        : (powerStructure =
             tier === 'metropolis'
-              ? q > 65
+              ? dominantPriority > 65
                 ? {
                     military: 'Grand Military Council',
                     religion: 'High Theocratic Council',
                     economy: 'Grand Merchant Senate',
                     criminal: 'Shadow Senate',
                     magic: 'Arcane Senate',
-                  }[ie] || 'Grand Council'
-                : (q > 55 &&
+                  }[dominantAxis] || 'Grand Council'
+                : (dominantPriority > 55 &&
                     {
                       military: 'Grand Council',
                       religion: 'Grand Council',
                       economy: 'Grand Council',
                       criminal: 'Grand Council',
                       magic: 'Grand Council',
-                    }[ie]) ||
+                    }[dominantAxis]) ||
                   'Grand Council'
-              : (P =
+              : (powerStructure =
                   tier === 'city' || tier === 'metropolis'
-                    ? q > 65
+                    ? dominantPriority > 65
                       ? {
                           military: 'Military City Council',
                           religion: 'Ecclesiastical Council',
                           economy: 'Merchant City Council',
                           criminal: 'Corrupt City Council',
                           magic: 'Arcane Council',
-                        }[ie] || 'City Council'
-                      : (q > 50 &&
+                        }[dominantAxis] || 'City Council'
+                      : (dominantPriority > 50 &&
                           {
                             military: 'City Council',
                             religion: 'City Council',
                             economy: 'City Council',
                             criminal: 'City Council',
                             magic: 'City Council',
-                          }[ie]) ||
+                          }[dominantAxis]) ||
                         'City Council'
-                    : q > 65
+                    : dominantPriority > 65
                       ? {
                           military: 'Military Council',
                           religion: 'Church Council',
                           economy: 'Merchant Council',
                           criminal: 'Town Council',
                           magic: 'Arcane Council',
-                        }[ie] || 'Town Council'
-                      : (q > 55 &&
+                        }[dominantAxis] || 'Town Council'
+                      : (dominantPriority > 55 &&
                           {
                             military: 'Military Council',
                             religion: 'Church Council',
                             economy: 'Merchant Council',
                             criminal: 'Town Council',
                             magic: 'Arcane Council',
-                          }[ie]) ||
+                          }[dominantAxis]) ||
                         'Town Council'));
-  let H = null;
-  U ||
-    (['thorp', 'hamlet', 'village'].includes(tier) && q > 65
-      ? (H =
+  let governanceDescriptor = null;
+  governanceForm ||
+    (['thorp', 'hamlet', 'village'].includes(tier) && dominantPriority > 65
+      ? (governanceDescriptor =
           {
             military: 'defended',
             religion: 'church-guided',
             economy: 'merchant-led',
             criminal: 'compromised',
             magic: 'mage-advised',
-          }[ie] || null)
+          }[dominantAxis] || null)
       : tier === 'town' &&
-        q > 55 &&
-        q <= 65 &&
-        (H =
+        dominantPriority > 55 &&
+        dominantPriority <= 65 &&
+        (governanceDescriptor =
           {
             military: 'garrison-backed',
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
             magic: 'arcane-advised',
-          }[ie] || null));
-  const Z = (typeof I < 'u' ? I : null) || H,
-    ne = {
+          }[dominantAxis] || null));
+  const resolvedModifier = (typeof structureModifier < 'u' ? structureModifier : null) || governanceDescriptor,
+    governanceDescriptions = {
       'Household Council':
         'Settlement governed by heads of household; decisions by informal consensus among property owners.',
       'Elder Council': 'Respected elders guide the community; authority is moral and traditional rather than formal.',
@@ -953,8 +953,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
-    E = ne[U] || ee[P] || ee['Mixed Council'],
-    _ = q > 80 ? 18 : q > 65 ? 12 : q > 50 ? 6 : 0,
+    E = governanceDescriptions[governanceForm] || ee[powerStructure] || ee['Mixed Council'],
+    _ = dominantPriority > 80 ? 18 : dominantPriority > 65 ? 12 : dominantPriority > 50 ? 6 : 0,
     O = [
       'Theocratic Council',
       'Military Council',
@@ -963,21 +963,21 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'Merchant oligarchy',
       'Corrupt Oligarchy',
       'City-State Council',
-    ].includes(P)
-      ? b + 8
-      : ['Feudal Stewardship', 'Feudal Appointee', 'Elder Council', 'Household Council', 'Elected Reeve'].includes(P)
-        ? b - 4
-        : b + 2;
+    ].includes(powerStructure)
+      ? baseSeats + 8
+      : ['Feudal Stewardship', 'Feudal Appointee', 'Elder Council', 'Household Council', 'Elected Reeve'].includes(powerStructure)
+        ? baseSeats - 4
+        : baseSeats + 2;
   if (
-    (p.push({
-      faction: P,
-      modifier: Z || null,
+    (factions.push({
+      faction: powerStructure,
+      modifier: resolvedModifier || null,
       power: O + _,
       desc: E,
       isGoverning: !0,
     }),
-    k > 5 &&
-      !(tier === 'thorp' && k < 12) &&
+    economyPower > 5 &&
+      !(tier === 'thorp' && economyPower < 12) &&
       (!['thorp', 'hamlet', 'village'].includes(tier) ||
         (institutions || []).some(function (N) {
           var ye = (N.name || '').toLowerCase();
@@ -985,9 +985,9 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         })))
   ) {
     const N =
-        P &&
-        (P.includes('Merchant oligarchy') || P.includes('Merchant Guild Council') || P.includes('Merchant Council')),
-      he = Math.round(k * (N ? 1.25 : 1)),
+        powerStructure &&
+        (powerStructure.includes('Merchant oligarchy') || powerStructure.includes('Merchant Guild Council') || powerStructure.includes('Merchant Council')),
+      he = Math.round(economyPower * (N ? 1.25 : 1)),
       De = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'port',
       Mi = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'crossroads',
       cr =
@@ -1014,27 +1014,27 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           ? 'Merchant Guilds (dominant)'
           : 'Merchant Guilds',
       tr = he,
-      ft = (O || b) + (_ || 0),
+      ft = (O || baseSeats) + (_ || 0),
       Fr = bt.includes('dominant') ? Math.round(ft * 0.88) : 9999;
-    p.push({
+    factions.push({
       faction: bt,
       power: Math.min(tr, Fr),
       desc: cr,
     });
   }
-  if (J > (tier === 'town' && !S ? 10 : 5)) {
+  if (nobleInfluence > (tier === 'town' && !hasNobility ? 10 : 5)) {
     const N =
-        P &&
-        (P.includes('Feudal') ||
-          P.includes('Noble') ||
-          P.includes('Royal Authority') ||
-          P.includes('Household Council')),
+        powerStructure &&
+        (powerStructure.includes('Feudal') ||
+          powerStructure.includes('Noble') ||
+          powerStructure.includes('Royal Authority') ||
+          powerStructure.includes('Household Council')),
       ye =
-        P &&
-        (P.includes('Merchant oligarchy') ||
-          P.includes('Democratic assembly') ||
-          P.includes('Guild Council') ||
-          P.includes('Merchant Guild Council')),
+        powerStructure &&
+        (powerStructure.includes('Merchant oligarchy') ||
+          powerStructure.includes('Democratic assembly') ||
+          powerStructure.includes('Guild Council') ||
+          powerStructure.includes('Merchant Guild Council')),
       he =
         tier === 'hamlet' || tier === 'village'
           ? 'Manor Household'
@@ -1044,12 +1044,12 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? 'Noble Houses'
               : 'Noble Families',
       De =
-        S && N
+        hasNobility && N
           ? priorityToCategory(priorities.military) === 'very_high'
             ? 'Hereditary landowners who are the governing authority here; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.'
-            : J > 20
+            : nobleInfluence > 20
               ? 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'
-              : J > 10
+              : nobleInfluence > 10
                 ? 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.'
                 : 'Noble families with residual feudal claims; the formal obligations are real, but other factions set the practical agenda day to day.'
           : ye
@@ -1058,33 +1058,33 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               : 'Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance.'
             : tier === 'hamlet' || tier === 'village'
               ? "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other factions hold more practical influence day to day."
-              : S && P && P.includes('Royal Authority')
-                ? J > 25
-                  ? "The great noble houses are the crown's military and fiscal foundation — and they know it. Royal policy is negotiated with them as much as decreed over them."
-                  : J > 15
+              : hasNobility && powerStructure && powerStructure.includes('Royal Authority')
+                ? nobleInfluence > 25
+                  ? "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them."
+                  : nobleInfluence > 15
                     ? 'Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to court.'
                     : 'Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.'
                 : priorityToCategory(priorities.military) === 'very_high'
                   ? "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return."
-                  : J > 20
+                  : nobleInfluence > 20
                     ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
-                    : J > 10
+                    : nobleInfluence > 10
                       ? tier === 'metropolis'
                         ? 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.'
                         : tier === 'city'
                           ? 'Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.'
                           : 'Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage'
                       : 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
-    p.push({
+    factions.push({
       faction: he,
-      power: J,
+      power: nobleInfluence,
       desc: De,
     });
   }
-  if (f > 5 && (tier !== 'thorp' || priorities.military > 60)) {
+  if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
     const N =
         priorityToCategory(priorities.military) === 'very_high'
-          ? f > 25
+          ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
               ? 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.'
               : "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight."
@@ -1097,22 +1097,22 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
-                : f > 18
+                : militaryPower > 18
                   ? 'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.'
                   : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.',
       he =
-        P && (P.toLowerCase().includes('military council') || P.toLowerCase().includes('martial'))
+        powerStructure && (powerStructure.toLowerCase().includes('military council') || powerStructure.toLowerCase().includes('martial'))
           ? N +
-            ' Operationally distinct from the command council — these are the soldiers and watchmen, not the officers who govern.'
+            ' Operationally distinct from the command council. These are the soldiers and watchmen, not the officers who govern.'
           : N,
-      De = P && P.includes('Merchant oligarchy') ? Math.round(k * 0.85) : 9999;
-    p.push({
+      De = powerStructure && powerStructure.includes('Merchant oligarchy') ? Math.round(economyPower * 0.85) : 9999;
+    factions.push({
       faction: 'Military/Guard',
-      power: Math.min(f, De),
+      power: Math.min(militaryPower, De),
       desc: he,
     });
   }
-  const X = D.some(
+  const hasReligiousInstitution = instNamesLower.some(
       (N) =>
         !N.startsWith('access to') &&
         (N.includes('parish church') ||
@@ -1124,104 +1124,104 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           N.includes('priest (resident)') ||
           N.includes('graveyard'))
     ),
-    K = ['village', 'town', 'city', 'metropolis'].includes(tier) || X;
-  if (C > 5 && K) {
+    religionEligible = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInstitution;
+  if (religionPower > 5 && religionEligible) {
     const ye =
       priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
-        : P && P.includes('Theocratic Council')
+        : powerStructure && powerStructure.includes('Theocratic Council')
           ? 'Religious law governs directly; clergy are administrators as much as priests, and doctrine shapes civic ordinance.'
-          : P && P.includes('Church Council')
+          : powerStructure && powerStructure.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
-            : C > 24
-              ? D.some((he) => he.includes('cathedral') || he.includes('monastery'))
+            : religionPower > 24
+              ? instNamesLower.some((he) => he.includes('cathedral') || he.includes('monastery'))
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
-              : C > 17
+              : religionPower > 17
                 ? ['city', 'metropolis'].includes(tier)
-                  ? 'Major church institutions hold structural influence — land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
+                  ? 'Major church institutions hold structural influence: land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
                   : ['hamlet', 'village'].includes(tier)
                     ? 'The parish priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'
-                : C > 10
+                : religionPower > 10
                   ? ['hamlet', 'village', 'thorp'].includes(tier)
                     ? 'The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected.'
                     : 'Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust.'
                   : 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
-    p.push({
+    factions.push({
       faction: 'Religious Authorities',
-      power: C,
+      power: religionPower,
       desc: ye,
     });
   }
   if (
-    (M > 5 &&
+    (craftGuildPower > 5 &&
       priorities.economy > 22 &&
-      p.push({
+      factions.push({
         faction: 'Craft Guilds',
-        power: M,
+        power: craftGuildPower,
         desc:
-          M > 16
+          craftGuildPower > 16
             ? ['city', 'metropolis'].includes(tier)
               ? 'Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.'
               : 'Craft masters controlling production standards and apprenticeships; present in every civic dispute over prices and supply.'
-            : M > 10
+            : craftGuildPower > 10
               ? 'Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.'
               : 'Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.',
       }),
-    T > 5)
+    criminalPower > 5)
   ) {
     const N =
-      T > 22
+      criminalPower > 22
         ? 'Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.'
-        : T > 16
+        : criminalPower > 16
           ? 'Criminal organisations have captured significant influence; corruption is systemic, not exceptional.'
-          : T > 10
+          : criminalPower > 10
             ? 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.'
             : ['hamlet', 'village', 'thorp'].includes(tier)
               ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
               : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
-    p.push({
+    factions.push({
       faction: "Thieves' Guild",
-      power: T,
+      power: criminalPower,
       desc: N,
     });
   }
-  const de =
-    P && P.includes('Arcane Council')
-      ? Math.max(A, Math.max(12, Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))))
-      : A;
-  de > 5 &&
-    p.push({
+  const arcanePower =
+    powerStructure && powerStructure.includes('Arcane Council')
+      ? Math.max(magicPower, Math.max(12, Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))))
+      : magicPower;
+  arcanePower > 5 &&
+    factions.push({
       faction: 'Arcane Orders',
-      power: de,
+      power: arcanePower,
       desc:
-        de > 22
-          ? 'Arcane institutions hold substantial political leverage here — contracts, security, and infrastructure all depend on magical services only they provide.'
-          : de > 16
+        arcanePower > 22
+          ? 'Arcane institutions hold substantial political leverage here: contracts, security, and infrastructure all depend on magical services only they provide.'
+          : arcanePower > 16
             ? 'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.'
-            : de > 10
+            : arcanePower > 10
               ? 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.'
-              : 'Magical practitioners are consulted but not formally empowered — their influence is advisory, transactional, and quietly resented.',
+              : 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.',
     });
-  const fe = (config == null ? void 0 : config.stressType) || null,
-    ge = (config == null ? void 0 : config.stressTypes) || (fe ? [fe] : []),
-    ke = (N) => ge.includes(N);
-  (ke('under_siege') &&
-    (p.forEach((N) => {
+  const stressType = (config == null ? void 0 : config.stressType) || null,
+    stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
+    hasStress = (N) => stressTypes.includes(N);
+  (hasStress('under_siege') &&
+    (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
         (N.power = Math.round(N.power * 2)),
         N.isGoverning && (N.power = Math.round(N.power * 1.5)),
         (N.faction.toLowerCase().includes('merchant') || N.faction.toLowerCase().includes('guild')) &&
           (N.power = Math.round(N.power * 0.5)));
     }),
-    p.push({
+    factions.push({
       faction: 'War Council',
       power: 25,
       desc: 'Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance.',
     })),
-    ke('occupied') &&
-      (p.forEach((N) => {
+    hasStress('occupied') &&
+      (factions.forEach((N) => {
         (N.isGoverning && ((N.modifiers = [...(N.modifiers || []), 'occupied']), (N.power = Math.round(N.power * 0.6))),
           (N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
             (N.power = Math.round(N.power * 0.3)),
@@ -1237,75 +1237,75 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               (N.desc || '') +
               ' Under occupation, several noble families have made private accommodations with the new authority. Others have not, and are watched.')));
       }),
-      p.push({
+      factions.push({
         faction: 'Occupation Authority',
         power: 20,
         desc: 'External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how many soldiers they have here, which varies.',
       }),
-      p.push({
+      factions.push({
         faction: 'Resistance Network',
         power: 8,
         desc: 'Distributed cells operating through existing social structures; no formal hierarchy. Currently cautious.',
       })),
-    ke('politically_fractured') &&
-      (p.forEach((N) => {
+    hasStress('politically_fractured') &&
+      (factions.forEach((N) => {
         (N.isGoverning &&
           ((N.power = Math.round(N.power * 0.4)), (N.modifiers = [...(N.modifiers || []), 'contested'])),
           (N.faction === 'Noble Families' || N.faction === 'Noble Houses' || N.faction === 'Landed Gentry') &&
             (N.power = Math.round(N.power * 1.4)));
       }),
-      p.push({
-        faction: P && P.includes('Royal Authority') ? 'Loyalist Noble Bloc' : 'Rival Faction B',
+      factions.push({
+        faction: powerStructure && powerStructure.includes('Royal Authority') ? 'Loyalist Noble Bloc' : 'Rival Faction B',
         power: 20,
         desc:
-          P && P.includes('Royal Authority')
+          powerStructure && powerStructure.includes('Royal Authority')
             ? 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.'
             : 'Claims legitimate authority through different means; controls a distinct district or institution.',
       }),
-      p.push({
-        faction: P && P.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
+      factions.push({
+        faction: powerStructure && powerStructure.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
         power: 15,
         desc:
-          P && P.includes('Royal Authority')
+          powerStructure && powerStructure.includes('Royal Authority')
             ? 'Noble houses that want a renegotiation of feudal obligations; not openly rebellious, but not cooperative.'
-            : 'Would support stability — if a price can be agreed. Currently being courted by both sides.',
+            : 'Would support stability if a price can be agreed. Currently being courted by both sides.',
       })),
-    ke('indebted') &&
-      (p.push({
+    hasStress('indebted') &&
+      (factions.push({
         faction:
-          P && P.includes('Royal Authority') && S ? 'Crown Creditors (Noble Coalition)' : "Creditor's Representative",
-        power: P && P.includes('Royal Authority') && S ? 22 : 18,
+          powerStructure && powerStructure.includes('Royal Authority') && hasNobility ? 'Crown Creditors (Noble Coalition)' : "Creditor's Representative",
+        power: powerStructure && powerStructure.includes('Royal Authority') && hasNobility ? 22 : 18,
         desc:
-          P && P.includes('Royal Authority') && S
+          powerStructure && powerStructure.includes('Royal Authority') && hasNobility
             ? "A coalition of noble houses that hold the crown's debt. They are owed money, military obligations, and political appointments. They are in no hurry to be repaid."
             : 'Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.',
       }),
-      p.forEach((N) => {
+      factions.forEach((N) => {
         ((N.faction.toLowerCase().includes('merchant') || N.faction.toLowerCase().includes('guild')) &&
           (N.power = Math.round(N.power * 1.3)),
-          P &&
-            P.includes('Royal Authority') &&
+          powerStructure &&
+            powerStructure.includes('Royal Authority') &&
             (N.faction === 'Noble Families' || N.faction === 'Noble Houses') &&
             ((N.power = Math.round(N.power * 1.5)),
             (N.desc = (N.desc || '') + ' Several of these houses hold crown debt and are positioning accordingly.')));
       })),
-    ke('recently_betrayed') &&
-      (p.push({
+    hasStress('recently_betrayed') &&
+      (factions.push({
         faction: 'Investigation Faction',
         power: 12,
         desc: 'Informal coalition demanding answers; politically inconvenient to governance; growing.',
       }),
-      p.forEach((N) => {
+      factions.forEach((N) => {
         N.isGoverning && (N.power = Math.round(N.power * 0.7));
       })),
-    ke('infiltrated') &&
-      p.push({
+    hasStress('infiltrated') &&
+      factions.push({
         faction: 'Unknown Faction (hidden)',
         power: 15,
         desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.',
       }),
-    ke('succession_void') &&
-      (p.forEach((N) => {
+    hasStress('succession_void') &&
+      (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
           (N.faction === 'Noble Families' ||
             N.faction === 'Noble Houses' ||
@@ -1314,64 +1314,64 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             ((N.power = Math.round(N.power * 1.8)),
             (N.desc =
               (N.desc || '') +
-              ' The succession crisis has transformed latent noble power into active leverage — every claimant needs their backing.')));
+              ' The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing.')));
       }),
-      p.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Senior Line)' : 'Claimant Bloc A',
-        power: P && P.includes('Royal Authority') ? 22 : 18,
+      factions.push({
+        faction: powerStructure && powerStructure.includes('Royal Authority') ? 'Noble Claimant (Senior Line)' : 'Claimant Bloc A',
+        power: powerStructure && powerStructure.includes('Royal Authority') ? 22 : 18,
         desc:
-          P && P.includes('Royal Authority')
+          powerStructure && powerStructure.includes('Royal Authority')
             ? 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.'
             : 'Hereditary or institutional claim; has legal arguments; lacks popular support.',
       }),
-      p.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Reform Faction)' : 'Claimant Bloc B',
-        power: P && P.includes('Royal Authority') ? 17 : 15,
+      factions.push({
+        faction: powerStructure && powerStructure.includes('Royal Authority') ? 'Noble Claimant (Reform Faction)' : 'Claimant Bloc B',
+        power: powerStructure && powerStructure.includes('Royal Authority') ? 17 : 15,
         desc:
-          P && P.includes('Royal Authority')
+          powerStructure && powerStructure.includes('Royal Authority')
             ? 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.'
             : 'Popular support; questionable legitimacy; moving fast.',
       })),
-    ke('famine') &&
-      (p.push({
+    hasStress('famine') &&
+      (factions.push({
         faction: 'Grain Holders',
         power: 20,
         desc: 'Whoever controls the remaining food reserves holds more real power than any formal authority.',
       }),
-      p.forEach((N) => {
+      factions.forEach((N) => {
         N.faction.toLowerCase().includes('religious') && (N.power = Math.round(N.power * 1.4));
       })),
-    ke('plague_onset') &&
-      (p.push({
+    hasStress('plague_onset') &&
+      (factions.push({
         faction: 'Quarantine Council',
         power: 15,
         desc: 'Healers, clerics, and pragmatists with emergency health powers. Unpopular. Probably right.',
       }),
-      p.forEach((N) => {
+      factions.forEach((N) => {
         (N.faction.toLowerCase().includes('religious') && (N.power = Math.round(N.power * 1.5)),
           (N.faction.toLowerCase().includes('merchant') || N.faction.toLowerCase().includes('trade')) &&
             (N.power = Math.round(N.power * 0.7)));
       })),
-    ke('monster_pressure') &&
-      (p.forEach((N) => {
+    hasStress('monster_pressure') &&
+      (factions.forEach((N) => {
         (N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
           (N.power = Math.round(N.power * 1.6));
       }),
-      p.push({
+      factions.push({
         faction: 'Monster Hunters / Adventurers',
         power: 10,
         desc: 'Outside professionals brought in or passing through; temporarily powerful because they are useful.',
       })),
-    ke('insurgency') &&
+    hasStress('insurgency') &&
       (function () {
         const N = typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {},
           ye = (N.criminalEffective || 0) > (N.militaryEffective || 0) && (N.economyOutput || 50) < 48;
         ((
-          p.find(function (De) {
+          factions.find(function (De) {
             return De.isGoverning;
           }) || {}
         ).faction,
-          p.forEach(function (De) {
+          factions.forEach(function (De) {
             (De.isGoverning &&
               ((De.power = Math.round(De.power * 0.72)),
               (De.modifiers = [...(De.modifiers || []), 'contested legitimacy'])),
@@ -1384,34 +1384,34 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                   ' Currently under pressure from both sides to publicly endorse the legitimate authority.')));
           }));
         const he = ye
-          ? P && P.includes('Royal Authority')
+          ? powerStructure && powerStructure.includes('Royal Authority')
             ? "Commons' Reform Assembly"
-            : P && P.includes('Merchant')
+            : powerStructure && powerStructure.includes('Merchant')
               ? "Journeymen's League"
               : "People's Council"
-          : P && P.includes('Royal Authority')
+          : powerStructure && powerStructure.includes('Royal Authority')
             ? 'Loyalist Noble Opposition'
-            : P && P.includes('Feudal')
+            : powerStructure && powerStructure.includes('Feudal')
               ? "Reform Stewards' Coalition"
               : 'Reformist Faction';
-        p.push({
+        factions.push({
           faction: he,
           power: ye ? 18 : 22,
           desc: ye
-            ? "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet — which makes negotiation impossible."
+            ? "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible."
             : 'Elite faction that has concluded the current governing arrangement is no longer viable. Pursuing institutional change through strategic non-cooperation, coalition-building, and selective pressure.',
         });
       })(),
-    ke('mass_migration') &&
+    hasStress('mass_migration') &&
       (function () {
         ((typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {}).economyOutput ||
           50) >= 50
-          ? (p.push({
+          ? (factions.push({
               faction: "Newcomers' Settlement",
               power: 12,
-              desc: 'The incoming population has begun self-organising — informal leadership, mutual aid networks, collective negotiation with landlords and employers. Not yet a formal political force, but cohesive enough to matter.',
+              desc: 'The incoming population has begun self-organising: informal leadership, mutual aid networks, collective negotiation with landlords and employers. Not yet a formal political force, but cohesive enough to matter.',
             }),
-            p.forEach(function (he) {
+            factions.forEach(function (he) {
               ((he.faction.toLowerCase().includes('religious') ||
                 he.faction.toLowerCase().includes('church') ||
                 he.faction.toLowerCase().includes('monastery')) &&
@@ -1425,12 +1425,12 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                     (he.desc || '') +
                     ' The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.')));
             }))
-          : (p.push({
+          : (factions.push({
               faction: 'Departure Committee',
               power: 8,
               desc: "Informal group coordinating group departures, selling assets, and managing the logistics of relocation. Their existence is a public statement about the settlement's prospects.",
             }),
-            p.forEach(function (he) {
+            factions.forEach(function (he) {
               he.isGoverning &&
                 ((he.power = Math.round(he.power * 0.85)),
                 (he.desc =
@@ -1438,23 +1438,23 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                   ' Managing the emigration crisis while maintaining the appearance that it is not a crisis.'));
             }));
       })(),
-    ke('wartime') &&
+    hasStress('wartime') &&
       (function () {
         (
-          p.find(function (he) {
+          factions.find(function (he) {
             return he.isGoverning;
           }) || {}
         ).faction;
         const N = typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {},
           ye = (N.militaryEffective || 50) >= 55 && (N.economyOutput || 50) >= 45;
-        (p.forEach(function (he) {
+        (factions.forEach(function (he) {
           ((he.faction.toLowerCase().includes('military') ||
             he.faction.toLowerCase().includes('guard') ||
             he.faction.toLowerCase().includes('garrison')) &&
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              ' Wartime has transformed this faction from a civic institution into a primary power centre — crown authority flows through military channels now.')),
+              ' Wartime has transformed this faction from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -1469,32 +1469,32 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
                 (he.desc || '') +
-                " The pastoral burden of wartime — soldiers praying before departure, families grieving — has made the institution indispensable in a way it wasn't before.")));
+                " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before.")));
         }),
-          p.push({
+          factions.push({
             faction: 'War Council',
             power: ye ? 20 : 25,
             desc: ye
-              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly — the war is going well enough that its authority isn't contested."
+              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly. The war is going well enough that its authority isn't contested."
               : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
           }),
           ye ||
-            p.push({
+            factions.push({
               faction: 'Peace Faction',
               power: 10,
-              desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors — pragmatists. Growing.',
+              desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors but pragmatists. Growing.',
             }));
       })(),
-    ke('religious_conversion') &&
+    hasStress('religious_conversion') &&
       (function () {
         const N =
             (
-              p.find(function (he) {
+              factions.find(function (he) {
                 return he.isGoverning;
               }) || {}
             ).faction || null,
           ye = N ? N.length % 3 : Math.floor(_rng() * 3);
-        (p.forEach(function (he) {
+        (factions.forEach(function (he) {
           ((he.faction.toLowerCase().includes('religious') ||
             he.faction.toLowerCase().includes('church') ||
             he.faction.toLowerCase().includes('clergy') ||
@@ -1506,7 +1506,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               (ye === 0
                 ? ' Losing congregation to the new faith faster than leadership acknowledges publicly.'
                 : ye === 1
-                  ? ' One of two competing factions claiming the legitimate succession — legal standing of their records is contested.'
+                  ? ' One of two competing factions claiming the legitimate succession. Legal standing of their records is contested.'
                   : ' Formally compliant with the conversion order. Actual compliance among the congregation is harder to assess.'))),
             he.isGoverning &&
               ((he.power = Math.round(he.power * 0.88)),
@@ -1517,42 +1517,42 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               (he.power = Math.round(he.power * 1.25)));
         }),
           ye === 0
-            ? p.push({
+            ? factions.push({
                 faction: 'New Faith Community',
                 power: 14,
-                desc: 'Growing movement without formal institutions — meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident.',
+                desc: 'Growing movement without formal institutions: meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident.',
               })
             : ye === 1
-              ? p.push({
+              ? factions.push({
                   faction: 'Reform Congregation',
                   power: 16,
                   desc: 'The breakaway faction in the religious schism. Claims doctrinal legitimacy and holds parallel services. Legal standing of its records and sacraments is disputed by the established institution.',
                 })
-              : (p.push({
+              : (factions.push({
                   faction: 'Conversion Enforcement Office',
                   power: 18,
                   desc: 'External or crown-appointed body with authority to verify compliance with the conversion order. Uses informants. Its definition of compliance is stricter than the governing faction anticipated.',
                 }),
-                p.push({
+                factions.push({
                   faction: 'Underground Old Faith',
                   power: 7,
-                  desc: "Not officially a faction — officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other factions in ways nobody discusses.",
+                  desc: "Not officially a faction. Officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other factions in ways nobody discusses.",
                 })));
       })(),
-    ke('slave_revolt') &&
+    hasStress('slave_revolt') &&
       (function () {
         ((
-          p.find(function (N) {
+          factions.find(function (N) {
             return N.isGoverning;
           }) || {}
         ).faction,
-          p.forEach(function (N) {
+          factions.forEach(function (N) {
             (N.isGoverning &&
               ((N.power = Math.round(N.power * 0.65)),
               (N.modifiers = [...(N.modifiers || []), 'authority contested']),
               (N.desc =
                 (N.desc || '') +
-                ' Managing an active slave revolt — the public posture is control, the private reality is containment at best.')),
+                ' Managing an active slave revolt. The public posture is control, the private reality is containment at best.')),
               (N.faction.toLowerCase().includes('military') ||
                 N.faction.toLowerCase().includes('guard') ||
                 N.faction.toLowerCase().includes('garrison')) &&
@@ -1571,24 +1571,24 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                   (N.desc || '') +
                   ' Under pressure from both sides to publicly declare the revolt either just or sacrilegious. Has so far avoided a direct statement.')));
           }),
-          p.push({
+          factions.push({
             faction: 'Revolt Leadership',
             power: 18,
-            desc: 'Organised leadership of the enslaved population — distributed, resilient, and holding territory. Has demands. Has not yet committed to whether those demands are negotiable.',
+            desc: 'Organised leadership of the enslaved population: distributed, resilient, and holding territory. Has demands. Has not yet committed to whether those demands are negotiable.',
           }),
-          p.push({
+          factions.push({
             faction: 'Abolitionist Network',
             power: 7,
-            desc: 'Free citizens, clergy, and outside agitators who have been supporting the revolt covertly — shelter, information, supplies. Their involvement is not yet public.',
+            desc: 'Free citizens, clergy, and outside agitators who have been supporting the revolt covertly: shelter, information, supplies. Their involvement is not yet public.',
           }));
       })());
-  const dt = p.reduce((N, ye) => N + ye.power, 0);
-  (p.forEach((N) => {
+  const dt = factions.reduce((N, ye) => N + ye.power, 0);
+  (factions.forEach((N) => {
     N.power = Math.round((N.power / dt) * 100);
   }),
-    p.sort((N, ye) => (N.isGoverning ? -1 : ye.isGoverning ? 1 : ye.power - N.power)),
+    factions.sort((N, ye) => (N.isGoverning ? -1 : ye.isGoverning ? 1 : ye.power - N.power)),
     (function () {
-      var N = p.map(function (qt) {
+      var N = factions.map(function (qt) {
           return qt.faction;
         }),
         ye = function (qt) {
@@ -1596,10 +1596,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             return Ct.toLowerCase().includes(qt.toLowerCase());
           });
         },
-        he = p[0] ? p[0].faction : null;
-      p[1] && p[1].faction;
-      var De = p[0] ? p[0].power : 0,
-        Mi = p[1] ? p[1].power : 0,
+        he = factions[0] ? factions[0].faction : null;
+      factions[1] && factions[1].faction;
+      var De = factions[0] ? factions[0].power : 0,
+        Mi = factions[1] ? factions[1].power : 0,
         cr = De - Mi,
         bt = ye('Merchant'),
         tr = ye('Craft Guild'),
@@ -1610,12 +1610,12 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         Rn = ye('Feudal Stewardship') || ye('Feudal Appointee'),
         vr = ye('Religious Authorities'),
         ei = ye('Arcane Orders');
-      p.forEach(function (qt, Ct) {
+      factions.forEach(function (qt, Ct) {
         var at = qt.power,
           Mt = qt.faction,
           wt = Mt.toLowerCase(),
-          Gr = Ct > 0 ? p[Ct - 1] : null,
-          ti = Ct < p.length - 1 ? p[Ct + 1] : null,
+          Gr = Ct > 0 ? factions[Ct - 1] : null,
+          ti = Ct < factions.length - 1 ? factions[Ct + 1] : null,
           _r = Gr ? Gr.power - at : 0,
           _e = ti ? at - ti.power : 99,
           ve = '';
@@ -1626,33 +1626,33 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? (ve = he
                   ? 'The gap between them and ' +
                     (he && he.toLowerCase().includes('council') ? 'the governing council' : he) +
-                    ' is narrow — a single shift in patronage, scandal, or armed muscle could swap their positions.'
+                    ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
                   : 'The dominant order is genuinely contested; a single shift in circumstance could reorder everything.')
               : cr <= 14
                 ? (ve = he
                     ? 'They operate in the shadow of ' +
                       (he && he.toLowerCase().includes('council') ? 'the governing council' : he) +
-                      ' but not comfortably — they are watching for leverage, not deferring.'
+                      ' but not comfortably. They are watching for leverage, not deferring.'
                     : 'Close enough to the top to resist, far enough behind to be cautious.')
                 : (ve = he
                     ? 'Behind ' +
                       (he && he.toLowerCase().includes('council') ? 'the governing council' : he) +
-                      ' by enough margin that direct challenge is not viable — they route their influence through procedure, not confrontation.'
+                      ' by enough margin that direct challenge is not viable. They route their influence through procedure, not confrontation.'
                     : 'The hierarchy is settled for now; their energy goes into consolidating second place, not chasing first.')),
           Ct === 2 &&
             (_r <= 5 && _e <= 5
               ? (ve =
-                  'Genuinely three-way territory — no faction has decisively broken from the pack; every council vote is negotiated.')
+                  'Genuinely three-way territory. No faction has decisively broken from the pack; every council vote is negotiated.')
               : _r <= 10
                 ? (ve =
                     'Close enough to the two above that their support is worth buying; they play ' +
                     (Gr ? Gr.faction : 'the second faction') +
                     ' and ' +
-                    (p[0] ? p[0].faction : 'the top faction') +
+                    (factions[0] ? factions[0].faction : 'the top faction') +
                     ' against each other when they can.')
                 : (ve =
-                    'A reliable third presence — too significant to exclude from negotiations, not strong enough to set their own terms.')),
-          Ct === p.length - 1 &&
+                    'A reliable third presence: too significant to exclude from negotiations, not strong enough to set their own terms.')),
+          Ct === factions.length - 1 &&
             at < 7 &&
             _r >= 5 &&
             (ve =
@@ -1660,13 +1660,13 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           bt && tr)
         ) {
           if (wt.includes('merchant')) {
-            var Se = p.find(function (Ue) {
+            var Se = factions.find(function (Ue) {
               return Ue.faction.includes('Craft Guild');
             });
             if (Se) {
               var me =
                 Se.power > at
-                  ? 'The craft guilds currently outweigh them in raw political numbers — an uncomfortable inversion the merchants are working to correct.'
+                  ? 'The craft guilds currently outweigh them in raw political numbers, an uncomfortable inversion the merchants are working to correct.'
                   : Se.power > at - 8
                     ? 'The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.'
                     : 'The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.';
@@ -1674,58 +1674,58 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             }
           }
           if (wt.includes('craft guild')) {
-            var He = p.find(function (Ue) {
+            var He = factions.find(function (Ue) {
               return Ue.faction.includes('Merchant');
             });
             if (He) {
               var be =
                 He.power > at + 8
-                  ? 'The merchants consistently outvote them on pricing and labour standards — craft masters have learned to attach riders to deals rather than fight directly.'
+                  ? 'The merchants consistently outvote them on pricing and labour standards. Craft masters have learned to attach riders to deals rather than fight directly.'
                   : He.power > at
                     ? 'Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.'
-                    : 'Ahead of the merchant guilds in current influence — an unusual position they intend to hold.';
+                    : 'Ahead of the merchant guilds in current influence, an unusual position they intend to hold.';
               ve = ve ? ve + ' ' + be : be;
             }
           }
         }
         if (ft && Fr) {
           if (wt.includes('thieves')) {
-            var Zt = p.find(function (Ue) {
+            var Zt = factions.find(function (Ue) {
               return Ue.faction.toLowerCase().includes('military') || Ue.faction.toLowerCase().includes('guard');
             });
             if (Zt) {
               var Xt =
                 Zt.power > at + 10
-                  ? 'The garrison outweighs them institutionally — they survive by corrupting the lower ranks and making enforcement selectively unprofitable.'
+                  ? 'The garrison outweighs them institutionally. They survive by corrupting the lower ranks and making enforcement selectively unprofitable.'
                   : Zt.power < at - 10
                     ? 'They currently outflank the military in real leverage; there are officers on payroll and commanders who know better than to ask questions.'
-                    : 'Running roughly even with the military in actual influence — the garrison can arrest individuals, the guild can make the investigation expensive.';
+                    : 'Running roughly even with the military in actual influence. The garrison can arrest individuals, the guild can make the investigation expensive.';
               ve = ve ? ve + ' ' + Xt : Xt;
             }
           }
           if (wt.includes('military') || wt.includes('guard')) {
-            var Xe = p.find(function (Ue) {
+            var Xe = factions.find(function (Ue) {
               return Ue.faction.toLowerCase().includes('thieves');
             });
             if (Xe) {
               var et =
                 Xe.power > at + 10
-                  ? 'The guild has more real leverage than they do — selective enforcement is the only tool that still works, and everyone knows it.'
+                  ? 'The guild has more real leverage than they do. Selective enforcement is the only tool that still works, and everyone knows it.'
                   : Xe.power < at - 10
-                    ? 'They outmatch the guild institutionally, which keeps the criminal operation suppressed rather than eliminated — there is a difference.'
+                    ? 'They outmatch the guild institutionally, which keeps the criminal operation suppressed rather than eliminated. There is a difference.'
                     : 'Running a slow institutional war with the guild: arrests happen, networks rebuild, deals are struck and quietly violated.';
               ve = ve ? ve + ' ' + et : et;
             }
           }
         }
         if (bt && ft && wt.includes('merchant')) {
-          var Rt = p.find(function (Ue) {
+          var Rt = factions.find(function (Ue) {
             return Ue.faction.toLowerCase().includes('thieves');
           });
           if (Rt && Rt.power > 10) {
             var Ri =
               Rt.power > at
-                ? 'The criminal network has more operational reach than the merchant guilds right now — some merchants are paying protection; others have become silent partners.'
+                ? 'The criminal network has more operational reach than the merchant guilds right now. Some merchants are paying protection; others have become silent partners.'
                 : "They tolerate the guild's cut because fighting it costs more than paying it; the arrangement is not advertised.";
             ve = ve ? ve + ' ' + Ri : Ri;
           }
@@ -1739,21 +1739,21 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             wt.includes('great famil') ||
             wt.includes('noble house'))
         ) {
-          var ca = p.find(function (Ue) {
+          var ca = factions.find(function (Ue) {
             return Ue.faction.includes('Merchant');
           });
           if (ca) {
             var qs =
               ca.power > at + 12
-                ? 'The merchant guilds now hold more functional leverage — the noble families retain title, hereditary land, and social precedence, but the money has moved.'
+                ? 'The merchant guilds now hold more functional leverage. The noble families retain title, hereditary land, and social precedence, but the money has moved.'
                 : ca.power > at
                   ? 'The merchants are closing the gap; the noble families are using every legal and social mechanism to slow a transition that looks increasingly inevitable.'
-                  : 'Still ahead of merchant interests in real influence — for now. They know the gap is narrowing and are arranging marriages accordingly.';
+                  : 'Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.';
             ve = ve ? ve + ' ' + qs : qs;
           }
         }
         if (Rn && la && (wt.includes('manor household') || wt.includes('landed gentry'))) {
-          var Pa = p.find(function (Ue) {
+          var Pa = factions.find(function (Ue) {
             return (
               (Ue.faction.includes('Feudal Stewardship') || Ue.faction.includes('Feudal Appointee')) &&
               Ue.faction !== qt.faction
@@ -1764,7 +1764,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               _i =
                 Pa.power > at + 10
                   ? da === 0
-                    ? "The steward administers in the lord's name — the household is the source of that authority, not a rival to it, but the practical question of who signs what has become genuinely complicated."
+                    ? "The steward administers in the lord's name. The household is the source of that authority, not a rival to it, but the practical question of who signs what has become genuinely complicated."
                     : 'The steward holds the day-to-day authority; the household provides the legitimacy. In practice the line between them blurs whenever a petitioner finds one more receptive than the other.'
                   : Pa.power < at - 10
                     ? da === 0
@@ -1780,49 +1780,49 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         }
         if (vr && ei) {
           if (wt.includes('religious')) {
-            var qa = p.find(function (Ue) {
+            var qa = factions.find(function (Ue) {
               return Ue.faction.toLowerCase().includes('arcane');
             });
             if (qa) {
               var ri =
                 qa.power > at
                   ? 'The arcane orders currently hold more practical influence, which the clergy finds spiritually troubling and politically unacceptable.'
-                  : "The arcane orders are present but operate in the clergy's shadow — questions of what is sanctioned magic and what is heresy remain deliberately unresolved.";
+                  : "The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.";
               ve = ve ? ve + ' ' + ri : ri;
             }
           }
           if (wt.includes('arcane')) {
-            var ii = p.find(function (Ue) {
+            var ii = factions.find(function (Ue) {
               return Ue.faction.toLowerCase().includes('religious');
             });
             if (ii) {
               var Li =
                 ii.power > at
-                  ? 'The clergy hold more civic influence — the arcane orders operate by navigating rather than challenging religious authority.'
+                  ? 'The clergy hold more civic influence. The arcane orders operate by navigating rather than challenging religious authority.'
                   : 'Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations that they prefer to avoid.';
               ve = ve ? ve + ' ' + Li : Li;
             }
           }
         }
         if (vr && ft && wt.includes('religious')) {
-          var Dr = p.find(function (Ue) {
+          var Dr = factions.find(function (Ue) {
             return Ue.faction.toLowerCase().includes('thieves');
           });
           if (Dr && Dr.power > 10) {
             var Tt =
               Dr.power > at
-                ? "The criminal network currently outweighs them — the clergy's moral authority is loud and largely unheeded."
+                ? "The criminal network currently outweighs them. The clergy's moral authority is loud and largely unheeded."
                 : 'They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.';
             ve = ve ? ve + ' ' + Tt : Tt;
           }
         }
         if (Fr && vr && (wt.includes('military') || wt.includes('guard'))) {
-          var _n = p.find(function (Ue) {
+          var _n = factions.find(function (Ue) {
             return Ue.faction.toLowerCase().includes('religious');
           });
           if (_n && Math.abs(_n.power - at) < 10) {
             var Ln =
-              'They and the religious authorities operate parallel systems of social control — the garrison handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.';
+              'They and the religious authorities operate parallel systems of social control: the garrison handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.';
             ve = ve ? ve + ' ' + Ln : Ln;
           }
         }
@@ -1834,7 +1834,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   (stressFlags.stateCrime
     ? (Me = 'Enforced Order (authoritarian)')
     : stressFlags.crimeIsGovt
-      ? (Me = 'Unstable — criminal governance')
+      ? (Me = 'Unstable (criminal governance)')
       : stressFlags.crusaderSynthesis
         ? (Me = 'Rigid (militant theocracy)')
         : stressFlags.merchantArmy
@@ -1856,29 +1856,29 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                     : instFlags.militaryEffective > 68
                       ? (Me = 'Ordered (strong military presence)')
                       : (Me = 'Stable'),
-    ke('under_siege')
-      ? (Me = 'Critical (active siege — survival priority)')
-      : ke('occupied')
-        ? (Me = 'Suppressed (under occupation — resistance simmers)')
-        : ke('politically_fractured')
-          ? (Me = 'Fractured — no stable governing authority')
-          : ke('recently_betrayed')
-            ? (Me = 'Shaken — institutional trust collapsed')
-            : ke('famine')
-              ? (Me = 'Desperate — hunger is eroding order')
-              : ke('plague_onset')
-                ? (Me = 'Anxious — disease is overriding normal authority')
-                : ke('succession_void')
-                  ? (Me = 'Volatile — power is available to whoever moves first')
-                  : ke('infiltrated')
+    hasStress('under_siege')
+      ? (Me = 'Critical (active siege, survival priority)')
+      : hasStress('occupied')
+        ? (Me = 'Suppressed (under occupation, resistance simmers)')
+        : hasStress('politically_fractured')
+          ? (Me = 'Fractured (no stable governing authority)')
+          : hasStress('recently_betrayed')
+            ? (Me = 'Shaken (institutional trust collapsed)')
+            : hasStress('famine')
+              ? (Me = 'Desperate (hunger is eroding order)')
+              : hasStress('plague_onset')
+                ? (Me = 'Anxious (disease is overriding normal authority)')
+                : hasStress('succession_void')
+                  ? (Me = 'Volatile (power is available to whoever moves first)')
+                  : hasStress('infiltrated')
                     // Intentional no-op: 'infiltrated' stressor doesn't override
                     // the public-tone label set by prior cases. Wrapped as an
                     // explicit identity to keep the ternary chain consistent.
                     // eslint-disable-next-line no-self-assign
                     ? (Me = Me)
-                    : ke('indebted')
-                      ? Me.includes('Unstable') || (Me = 'Strained — debt obligations constrain every decision')
-                      : ke('monster_pressure') &&
+                    : hasStress('indebted')
+                      ? Me.includes('Unstable') || (Me = 'Strained (debt obligations constrain every decision)')
+                      : hasStress('monster_pressure') &&
                         (Me.toLowerCase().includes('tense') ||
                           (Me = 'Tense (monster pressure from surrounding region)')),
     // Canonical threat vocabulary is heartland/frontier/plagued — the old
@@ -1903,7 +1903,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         'ordered',
       ].some((N) => Me.toLowerCase().includes(N))
         ? Me + '; monster threat active'
-        : 'Tense — regional monster threat'));
+        : 'Tense (regional monster threat)'));
   let We;
   const At = instNames.some(function (N) {
       return (
@@ -1949,10 +1949,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         N.includes('shrine')
       );
     }),
-    Hr = P && P.includes('Royal Authority'),
+    Hr = powerStructure && powerStructure.includes('Royal Authority'),
     Jr =
-      S ||
-      p.some(function (N) {
+      hasNobility ||
+      factions.some(function (N) {
         return (
           N.faction === 'Noble Families' ||
           N.faction === 'Noble Houses' ||
@@ -2009,7 +2009,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                             : "A noble family is contesting a merchant's right to operate in their traditional market territory. The council is hearing the case and wishes it were not.")
                       : instFlags.militaryEffective > 68
                         ? (We = At
-                            ? 'The military commanders are pushing for expanded authority over civilian courts — and the council is losing ground.'
+                            ? 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.'
                             : Le
                               ? 'The village militia captain is pushing for authority over disputes that the reeve used to handle.'
                               : "The strongest armed household has started making decisions on everyone's behalf without asking.")
@@ -2037,7 +2037,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                                     : br
                                       ? 'A dispute over field rotation and grazing rights has divided the village for most of this season.'
                                       : 'A dispute over grazing rights and water access has been running for two seasons. It has stopped being about grazing rights and water access.');
-  const na = ge.length
+  const na = stressTypes.length
       ? [
           'under_siege',
           'occupied',
@@ -2054,9 +2054,9 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           'wartime',
           'religious_conversion',
           'slave_revolt',
-        ].find((N) => ge.includes(N)) || ge[0]
-      : fe,
-    Ie = ((oa = p.find((N) => N.isGoverning)) == null ? void 0 : oa.faction) || null,
+        ].find((N) => stressTypes.includes(N)) || stressTypes[0]
+      : stressType,
+    Ie = ((governingFaction = factions.find((N) => N.isGoverning)) == null ? void 0 : governingFaction.faction) || null,
     Na = instNames.some(function (N) {
       return N.includes('garrison');
     })
@@ -2078,7 +2078,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               : 'The guard',
     sa = {
       under_siege:
-        'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy — it is about survival.',
+        'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
       famine:
         At || Le || br
           ? 'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.'
@@ -2097,7 +2097,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           : "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt agreement.",
       recently_betrayed:
         Hr && Jr
-          ? 'A noble house passed intelligence to a rival power. The crown knows. The house denies it. The crown cannot yet afford to act — it needs their levies.'
+          ? 'A noble house passed intelligence to a rival power. The crown knows. The house denies it. The crown cannot yet afford to act. It needs their levies.'
           : Le
             ? (function () {
                 var N = [
@@ -2136,24 +2136,24 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       insurgency: (function () {
         return (instFlags.criminalEffective || 0) > (instFlags.militaryEffective || 0) &&
           (instFlags.economyOutput || 50) < 48
-          ? "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night — but hasn't moved, because moving publicly would confirm what it officially denies."
+          ? "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night, but hasn't moved, because moving publicly would confirm what it officially denies."
           : 'The challenge to the governing faction is institutional, not popular. Key officials are slow-walking orders. Revenue is being collected but held rather than forwarded. ' +
               Ie +
               ' is conducting meetings with people who should not be meeting privately. The governing faction has noticed and is considering whether to act before the coalition is complete.';
       })(),
       wartime: (function () {
         return (instFlags.militaryEffective || 50) >= 55 && (instFlags.economyOutput || 50) >= 45
-          ? 'The war is present here as money and absence. The garrison has doubled in size and is well-supplied — the crown is paying for this one. Contracts for grain, leather, and ironwork are flowing to anyone with the capacity to fill them. The men who left to fight have not returned, which is a grief that runs beneath the commerce. ' +
+          ? 'The war is present here as money and absence. The garrison has doubled in size and is well-supplied. The crown is paying for this one. Contracts for grain, leather, and ironwork are flowing to anyone with the capacity to fill them. The men who left to fight have not returned, which is a grief that runs beneath the commerce. ' +
               Ie +
               ' is navigating the difference between what it can extract for the war effort and what the settlement can actually spare.'
-          : 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers — the farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
+          : 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers. The farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
       })(),
       religious_conversion: (function () {
         const N = Ie ? Ie.length % 3 : 0;
         return N === 0
           ? 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old institution has the building, the records, the accumulated donations, and a congregation that is quietly redistributing itself. Neither party is ready to force a confrontation. Both are watching the numbers.'
           : N === 1
-            ? 'The schism is now formal. Two priests, two congregations, two sets of records — births, deaths, marriages — that may or may not be recognised depending on which authority the other party acknowledges. ' +
+            ? 'The schism is now formal. Two priests, two congregations, two sets of records (births, deaths, marriages) that may or may not be recognised depending on which authority the other party acknowledges. ' +
               (Ie || 'The governing authority') +
               ' has not declared which succession is legitimate, which means every legal document dependent on religious sanction is in a grey zone.'
             : 'The conversion order came from ' +
@@ -2165,7 +2165,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           ? 'The settlement is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community. ' +
               Ie +
               ' is being asked to do something about it and cannot agree what that something is.'
-          : 'Three families left this week. Two more last week. The departure is quiet and orderly — which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
+          : 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
       })(),
       slave_revolt: (function () {
         return (
@@ -2180,7 +2180,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       })(),
     };
   // Tag each faction with a category for power-economy correlation
-  p.forEach((f) => {
+  factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');
   });
   if (We) We = getTierConstraints(We, instNames, tier, Ie);
@@ -2213,10 +2213,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   const publicLegitimacy = computePublicLegitimacy(economicState, _provDefLabel, tier);
 
   // Apply multipliers before relationship computation (relationships use final powers)
-  applyLegitimacyMultipliers(p, publicLegitimacy, tier);
+  applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
 
   const safetyRatio = instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
-  const criminalCaptureState = computeCriminalCaptureState(p, safetyRatio, instFlags.inst || {});
+  const criminalCaptureState = computeCriminalCaptureState(factions, safetyRatio, instFlags.inst || {});
   // Birth seeds the play-time ladder: a settlement born at
   // equilibrium+ stamps the rung onto the GOVERNING faction entry, which
   // ensureFactionStates reads (faction.captureState) when it mints the
@@ -2226,12 +2226,12 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   // 'adversarial' is not seeded — it asserts enforcement is WINNING, i.e.
   // no faction is on a capture arc.
   if (['equilibrium', 'corrupted', 'capture'].includes(criminalCaptureState)) {
-    const govEntry = p.find((N) => N.isGoverning);
+    const govEntry = factions.find((N) => N.isGoverning);
     if (govEntry && !govEntry.captureState) govEntry.captureState = criminalCaptureState;
   }
   const stressTypesArr = config?.stressTypes || (config?.stressType ? [config.stressType] : []);
   const factionRelationships = computeFactionRelationships(
-    p,
+    factions,
     tier,
     {
       ...instFlags.inst,
@@ -2243,17 +2243,17 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   );
 
   return {
-    factions: p,
+    factions: factions,
     // Canonical "who governs" name. Sim consumers (factionProfile legitimacy
     // inheritance, ruling_authority governing-faction power, hook escalation,
     // simulation spine, world-event legitimacy deltas) key off this field;
     // it must always name the faction entry that carries isGoverning.
-    governingName: (p.find((N) => N.isGoverning) || {}).faction || null,
+    governingName: (factions.find((N) => N.isGoverning) || {}).faction || null,
     // The government TYPE, persisted explicitly. At generation it equals
     // governingName (the governing entry's name doubles as the government
     // type); a transfer of power (domain/rulingPower.js) keeps both in step
     // while previousGovernments records what the seat used to be.
-    government: (p.find((N) => N.isGoverning) || {}).faction || null,
+    government: (factions.find((N) => N.isGoverning) || {}).faction || null,
     stability: Me,
     recentConflict: We,
     publicLegitimacy,

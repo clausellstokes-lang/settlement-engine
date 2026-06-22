@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { FS, MUTED, swatch } from '../../theme.js';
+import { FS, MUTED, BODY, swatch } from '../../theme.js';
 import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
+import { relColor } from '../../settlements/relationshipColors.js';
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   const [typeFilter,setTypeFilter]=useState('all');
@@ -129,13 +130,12 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Inter-Settlement NPC Contacts */}
       {(()=>{const npcContacts=interSettlementRels.filter(x=>!x.type);return npcContacts.length>0&&<Section title={`Cross-Settlement Contacts (${npcContacts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:BODY,margin:'0 0 10px',fontStyle:'italic'}}>
           Named NPCs with documented ties to figures in linked settlements. Links are removed when neighbours are delinked.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {npcContacts.map((isr,i)=>{
-            const relColors={trade_partner:'#1a5a28',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8a5010',cold_war:'#8a3010',hostile:'#8b1a1a',neutral:'#6b5340'};
-            const c=relColors[isr.relType]||'#6b5340';
+            const c=relColor(isr.relType);
             return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
@@ -158,14 +158,13 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Cross-Settlement Engagements */}
       {crossConflicts.length>0&&<Section title={`Cross-Settlement Engagements (${crossConflicts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:BODY,margin:'0 0 10px',fontStyle:'italic'}}>
           Conflicts and faction engagements between this settlement and its neighbours. Removed when the link is broken.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {crossConflicts.map((c,i)=>{
             const isFaction = c.type==='faction_engagement';
-            const relColors={trade_partner:'#a0762a',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8b1a1a',cold_war:'#5a1a1a',hostile:'#8b0000',neutral:'#6b5340'};
-            const col = relColors[c.relType]||'#6b5340';
+            const col = relColor(c.relType);
             return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,borderRadius:7,padding:'10px 14px',background:`${col}06`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction
@@ -191,7 +190,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       {/* Emergent conditions banner */}
       {!neighboursOnly&&<>
       {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',borderRadius:7,padding:'10px 14px',marginBottom:16}}>
-        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
+        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4,textTransform:'uppercase'}}>◆ Emergent conditions active</div>
         <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
         </p>
@@ -199,7 +198,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* NPC Relationships */}
       {rels.length>0&&<Section title={`NPC Relationships (${rels.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:BODY,margin:'0 0 10px',fontStyle:'italic'}}>
           Internal relationships within {settlementName}. Cross-settlement NPC ties appear in each neighbour card above.
         </p>
         {/* Type filter */}
@@ -244,7 +243,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       </Section>}
 
       {/* Faction Groups */}
-      {factionGroups.length>0&&<Section title={`Factions (${factionGroups.length})`}>
+      {factionGroups.length>0&&<Section title={`Factions (${factionGroups.length})`} collapsible defaultOpen>
         {factionGroups.map((fac,i)=>{
           const catColors={economy:'#a0762a',government:'#2a3a7a',military:'#8b1a1a',religious:'#1a4a2a',magic:'#3a1a7a',criminal:'#4a1a4a',other:'#5a4a2a'};
           const c=catColors[fac.dominantCategory]||'#6b5340';
@@ -262,7 +261,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       </Section>}
 
       {/* Active Conflicts */}
-      {conflicts.length>0&&<Section title={`Active Conflicts (${conflicts.length})`}>
+      {conflicts.length>0&&<Section title={`Active Conflicts (${conflicts.length})`} collapsible defaultOpen>
         {conflicts.map((c,i)=><ConflictCard key={i} conflict={c}/>)}
       </Section>}
 

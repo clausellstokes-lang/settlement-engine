@@ -70,7 +70,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
               <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
             </div>
             <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
@@ -171,11 +171,15 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           <span
             role="button"
             tabIndex={0}
+            aria-pressed={isPinned}
+            aria-label={isPinned
+              ? 'Pinned. This figure holds steady when you reforge or advance time.'
+              : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned. This NPC will not be rewritten by regenerate/progress.'
-              : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
+              ? 'Pinned. This figure holds steady when you reforge or advance time.'
+              : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
@@ -219,7 +223,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           )}
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
-              Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
+              Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
           {npc.goal?.short && (

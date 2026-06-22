@@ -43,7 +43,7 @@ export const PARTY_IMPACT_KINDS = Object.freeze({
   resolve_stressor:    { targets: ['stressorId'],               defaultMagnitude: 1.0,  label: 'Resolve a crisis', note: 'The party ended an active stressor (broke the siege, cured the plague).' },
   ease_stressor:       { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Ease a crisis',    note: 'The party blunted but did not end a stressor.' },
   worsen_stressor:     { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Worsen a crisis',  note: 'The party (or their failure) deepened a stressor.' },
-  name_attacker:       { targets: ['stressorId'],               defaultMagnitude: 0.3,  label: 'Name the attacker', note: 'The DM identifies the force behind a war-shaped stressor — another settlement, or a force with no settlement at all (a goblin warband, a mercenary company).' },
+  name_attacker:       { targets: ['stressorId'],               defaultMagnitude: 0.3,  label: 'Name the attacker', note: 'The DM identifies the force behind a war-shaped stressor: another settlement, or a force with no settlement at all (a goblin warband, a mercenary company).' },
   broker_relationship: { targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Broker peace',     note: 'The party de-escalated a relationship between two settlements.' },
   inflame_relationship:{ targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Inflame a feud',   note: 'The party escalated a relationship between two settlements.' },
   clear_condition:     { targets: ['settlementId', 'condition'],defaultMagnitude: 1.0,  label: 'Resolve a condition', note: 'The party removed an active condition from a settlement.' },

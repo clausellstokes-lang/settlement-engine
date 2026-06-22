@@ -31,9 +31,9 @@ export const CONTENT_GROUP_KEYS = Object.freeze(CONTENT_GROUPS.map((g) => g.key)
 // its supply is disrupted (wired into stressors + viability): a broken
 // CRITICAL chain (food, timber) is a crisis; a luxury one is a minor dip.
 export const CRITICALITY = Object.freeze([
-  { key: 'critical',      label: 'Critical — food, water, timber' },
+  { key: 'critical',      label: 'Critical: food, water, timber' },
   { key: 'important',     label: 'Important' },
-  { key: 'discretionary', label: 'Discretionary — luxury / comfort' },
+  { key: 'discretionary', label: 'Discretionary: luxury / comfort' },
 ]);
 export const CRITICALITY_KEYS = Object.freeze(CRITICALITY.map((c) => c.key));
 
@@ -51,13 +51,13 @@ export const ECONOMIC_WEIGHT_KEYS = Object.freeze(ECONOMIC_WEIGHT.map((w) => w.k
 // forces, fortifications raise the wall rating, arcane wards add magical defense.
 export const DEFENSE_ROLES = Object.freeze([
   { key: 'none',          label: 'Does not contribute to defense' },
-  { key: 'fortification', label: 'Fortification — walls, towers' },
-  { key: 'garrison',      label: 'Garrison — standing troops' },
-  { key: 'militia',       label: 'Militia — muster of locals' },
-  { key: 'watch',         label: 'Watch — patrol & policing' },
+  { key: 'fortification', label: 'Fortification: walls, towers' },
+  { key: 'garrison',      label: 'Garrison: standing troops' },
+  { key: 'militia',       label: 'Militia: muster of locals' },
+  { key: 'watch',         label: 'Watch: patrol & policing' },
   { key: 'arcane_ward',   label: 'Arcane wards' },
-  { key: 'logistics',     label: 'Logistics — supply & siege endurance' },
-  { key: 'intelligence',  label: 'Intelligence — scouting & spies' },
+  { key: 'logistics',     label: 'Logistics: supply & siege endurance' },
+  { key: 'intelligence',  label: 'Intelligence: scouting & spies' },
 ]);
 export const DEFENSE_ROLE_KEYS = Object.freeze(DEFENSE_ROLES.map((d) => d.key));
 
@@ -82,8 +82,8 @@ export const POWER_AUTHORITY_KEYS = Object.freeze(POWER_AUTHORITIES.map((a) => a
 // Distinct from CRITICALITY (how essential a good is); this is supply vs demand.
 export const FOOD_IMPACT = Object.freeze([
   { key: 'none',     label: 'No food impact' },
-  { key: 'produces', label: 'Produces food — raises supply' },
-  { key: 'consumes', label: 'Consumes food — raises demand' },
+  { key: 'produces', label: 'Produces food. Raises supply' },
+  { key: 'consumes', label: 'Consumes food. Raises demand' },
 ]);
 export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
 
@@ -170,9 +170,9 @@ export const DEITY_TEMPER_KEYS = Object.freeze(DEITY_TEMPER.map((t) => t.key));
 // Rank/scale — major / minor / cult. Scales how strongly the deity lifts
 // religious_authority (a major pantheon-head outweighs a fringe cult).
 export const DEITY_TIER = Object.freeze([
-  { key: 'major', label: 'Major — a pillar of the pantheon' },
-  { key: 'minor', label: 'Minor — a lesser god' },
-  { key: 'cult',  label: 'Cult — a fringe or secret following' },
+  { key: 'major', label: 'Major: a pillar of the pantheon' },
+  { key: 'minor', label: 'Minor: a lesser god' },
+  { key: 'cult',  label: 'Cult: a fringe or secret following' },
 ]);
 export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
 
@@ -183,8 +183,8 @@ export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
 // exposure directly. `neutral` is the back-compat default: a 3-axis deity
 // authored before this axis existed is tolerated as lawAxis === 'neutral' (no law_order term).
 export const DEITY_LAW = Object.freeze([
-  { key: 'lawful',  label: 'Lawful — upholds order and oaths' },
-  { key: 'chaotic', label: 'Chaotic — erodes order, tolerates corruption' },
+  { key: 'lawful',  label: 'Lawful: upholds order and oaths' },
+  { key: 'chaotic', label: 'Chaotic: erodes order, tolerates corruption' },
   { key: 'neutral', label: 'Neutral' },
 ]);
 export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));

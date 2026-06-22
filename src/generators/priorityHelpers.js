@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js';
+import {clamp} from './mathHelpers.js';
 
 export const getPriorities = (config = {}) => ({
   economy:  config.priorityEconomy  ?? 50,
@@ -221,7 +221,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
       ? { buffered: true,  strength: 'moderate',
           note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline — isolated settlement cannot import raw materials.' };
+          note: 'No trade pipeline. An isolated settlement cannot import raw materials.' };
   }
 
   if (effectiveEconomy < 40) {

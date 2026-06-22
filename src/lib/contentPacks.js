@@ -114,7 +114,7 @@ export function parseContentPack(raw) {
   }
   if (!obj || typeof obj !== 'object') return { ok: false, error: 'Not a content pack.' };
   if (obj.format !== CONTENT_PACK_FORMAT) {
-    return { ok: false, error: 'Unrecognized file — not a SettlementForge content pack.' };
+    return { ok: false, error: 'Unrecognized file. Not a SettlementForge content pack.' };
   }
   if (!obj.content || typeof obj.content !== 'object') {
     return { ok: false, error: 'Pack has no content.' };

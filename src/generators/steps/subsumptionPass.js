@@ -132,7 +132,7 @@ function applySubsumption(institutions, ctx = null, trace = {}) {
         causes: [
           { source: instId(greaterName || 'unknown'),
             effect: 'absorbed',
-            reason: `"${inst.name}" was absorbed into "${greaterName}" — the larger institution provides equivalent function.` },
+            reason: `"${inst.name}" was absorbed into "${greaterName}". The larger institution provides equivalent function.` },
         ],
       });
     }

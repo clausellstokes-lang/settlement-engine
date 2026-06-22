@@ -208,9 +208,9 @@ function inferSensoryIdentity(quarter) {
   const parts = [];
   if (quarter.desc) parts.push(String(quarter.desc));
   if (Array.isArray(quarter.landmarks) && quarter.landmarks.length) {
-    parts.push(`landmarks: ${quarter.landmarks.join(', ')}`);
+    parts.push(`Landmarks: ${quarter.landmarks.join(', ')}`);
   }
-  return parts.join(' — ') || 'No specific sensory notes recorded.';
+  return parts.join('. ') || 'No specific sensory notes recorded.';
 }
 
 function inferCurrentTension(category, conditions, threats) {
@@ -242,13 +242,13 @@ function inferHook(category, quarter, conditions, threats) {
       return `A consortium quietly pools coin to fund armed riders that will reopen the road.`;
     }
     if (category === 'criminal' && cond.archetype === 'food_anchor_lost') {
-      return `Smugglers offer grain at twice the price — and the watch is looking elsewhere.`;
+      return `Smugglers offer grain at twice the price, and the watch is looking elsewhere.`;
     }
   }
   for (const t of threats) {
     if (t.severity < 0.6) continue;
     if (category === 'military' && t.type === 'siege') {
-      return `An old veteran offers private training to those who can pay — fearing the walls will not hold.`;
+      return `An old veteran offers private training to those who can pay, fearing the walls will not hold.`;
     }
     if (category === 'arcane' && t.type === 'arcane_instability') {
       return `Apprentices whisper of unauthorized experiments running through the night.`;

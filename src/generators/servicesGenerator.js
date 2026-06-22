@@ -168,7 +168,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         },
         {
           name: 'Disappear quietly',
-          desc: 'Those who know the right people can arrange to vanish from the official register — for a price.',
+          desc: 'Those who know the right people can arrange to vanish from the official register. For a price.',
         },
         {
           name: 'Intelligence on officials',
@@ -210,11 +210,11 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
           },
           {
             name: 'Unlicensed enchantment',
-            desc: 'Practitioners working outside guild oversight — cheaper, less traceable, and legally inadvisable.',
+            desc: 'Practitioners working outside guild oversight: cheaper, less traceable, and legally inadvisable.',
           },
           {
             name: 'Magical forgery',
-            desc: 'Identification papers, writs, and seals with genuine magical authentication — fraudulently applied.',
+            desc: 'Identification papers, writs, and seals with genuine magical authentication, fraudulently applied.',
           },
         ].forEach((A) => {
           l.criminal.some((S) => S.name === A.name) ||
@@ -248,7 +248,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         [
           {
             name: 'Unofficial arbitration',
-            desc: 'Commercial disputes resolved outside the courts — faster, cheaper, and more reliably enforced.',
+            desc: 'Commercial disputes resolved outside the courts: faster, cheaper, and more reliably enforced.',
           },
           {
             name: 'Gray market goods',
@@ -283,7 +283,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       T.has('Survival crime') &&
         M(
           'Fence (word of mouth)',
-          'No questions asked — stolen goods move through back channels for a fraction of value.',
+          'No questions asked. Stolen goods move through back channels for a fraction of value.',
           '(covert)'
         ),
       T.has('Street gang activity') &&
@@ -294,7 +294,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         ),
         M(
           'Muscle for hire',
-          'Rough up a target, intimidate a debtor, move a problem — informal, no contract.',
+          'Rough up a target, intimidate a debtor, move a problem. Informal, no contract.',
           '(street gang)'
         )),
       T.has('Smuggling') &&
@@ -306,7 +306,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       T.has('Magical crime') &&
         M(
           'Arcane services (illicit)',
-          'Magical practitioners outside guild oversight — identity work, scrying, targeted effects. Available if you know where to ask.',
+          'Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.',
           '(arcane underground)'
         ),
       T.has('Lawlessness') &&
@@ -321,7 +321,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
           '(informal)'
         )),
       T.has('Organized guild crime') &&
-        M('Fence (stolen goods)', 'Move recovered goods, no questions — expect 30-50% of value.', '(thieves guild)'),
+        M('Fence (stolen goods)', 'Move recovered goods, no questions. Expect 30-50% of value.', '(thieves guild)'),
       T.has('Background crime') &&
         M(
           'Fence (word of mouth)',

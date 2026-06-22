@@ -16,19 +16,26 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
-import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
+import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
 
 // Category → swatch. Kept as a variable map (not inline literals) so the
 // pills can be colour-coded without tripping the raw-color lint rule.
+// The pill renders the category as label TEXT, so each value must clear AA as
+// text: Tier/Economy use the darker gold-as-text token, not #a0762a (AA fail).
+// Keys mirror the live tab labels — 'Religion & the Pantheon' (the tab was
+// renamed from the stale 'Magic & Religion'), plus 'Living World' for the
+// newly-indexed simulation tab — so a result chip always names a findable tab.
 const CAT_COLOR = Object.freeze({
-  'Tier': '#a0762a',
+  'Tier': swatch['#7A5A1A'],
   'Trade Route': '#6b5340',
   'Monster Threat': '#8b1a1a',
-  'Economy': '#a0762a',
+  'Economy': swatch['#7A5A1A'],
   'Archetype': '#4a1a6a',
-  'Magic & Religion': '#3a1a7a',
+  'Religion & the Pantheon': '#3a1a7a',
+  'Living World': '#1a3a7a',
+  'Institution': '#6b5340',
   'Stress': '#8b1a1a',
   'Neighbour System': '#1a3a7a',
   'Neighbour Relationship': '#1a5a28',
@@ -90,7 +97,9 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         position: 'relative',
         padding: '8px 14px',
         background: PARCH,
-        borderBottom: `1px solid ${BOR}`,
+        // No full-width rule: the bordered input box below marks the affordance,
+        // so the chrome keeps a single divider only at the tab-strip/content
+        // boundary instead of stacking three (P5).
       }}
     >
       <div style={{
@@ -109,6 +118,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           role="combobox"
           aria-expanded={showDropdown}
           aria-controls="compendium-search-results"
+          aria-activedescendant={showDropdown ? `compendium-opt-${active}` : undefined}
           autoComplete="off"
           style={{
             flex: 1, border: 'none', background: 'transparent',
@@ -139,9 +149,11 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           }}
         >
           {results.map((r, i) => {
-            const color = CAT_COLOR[r.category] || GOLD;
+            // Fallback is the gold-as-text token, not GOLD (GOLD fails AA as
+            // text); every known category is mapped above, so this is defensive.
+            const color = CAT_COLOR[r.category] || swatch['#7A5A1A'];
             return (
-              <div key={r.id} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
+              <div key={r.id} id={`compendium-opt-${i}`} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
@@ -158,7 +170,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     {r.term}
                   </span>
                   <span style={{
-                    fontSize: FS.micro, fontWeight: 700, color,
+                    fontSize: FS.xs, fontWeight: 700, color,
                     background: `${color}18`, borderRadius: 8, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',
@@ -177,9 +189,14 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
           zIndex: 50, padding: '10px 12px', background: CARD,
           border: `1px solid ${BOR}`, borderRadius: 6,
-          fontSize: FS.sm, color: MUT, fontFamily: sans,
+          fontSize: FS.sm, color: BODY, fontFamily: sans,
+          display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         }}>
-          No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, route, or stress name.
+          <span style={{ flex: 1, minWidth: 180 }}>
+            No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, institution, neighbour, route, or stress name.
+          </span>
+          {/* Recovery CTA at the point of failure, not just the X up in the input. */}
+          <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
         </div>
       )}
     </div>

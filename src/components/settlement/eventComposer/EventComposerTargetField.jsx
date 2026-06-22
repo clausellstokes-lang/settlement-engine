@@ -86,7 +86,7 @@ export function EventComposerTargetField({
         </select>
         {rulingPowerOptions.length === 0 && (
           <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            No other faction holds power here — add a faction first.
+            No other faction holds power here. Add a faction first.
           </span>
         )}
       </Field>
@@ -181,7 +181,7 @@ export function EventComposerTargetField({
         </Field>
         <Field
           label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
-          hint="Same faction — the two swap standing"
+          hint="Same faction. The two swap standing"
         >
           <select
             value={swapWithNpcId}

@@ -23,7 +23,7 @@ import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
-  INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, RED, GREEN,
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, GOLD, GOLD_BG,
   sans, serif_, SP, R, FS, swatch,
 } from '../theme.js';
 
@@ -31,11 +31,33 @@ const STATUSES = [
   'new', 'triage', 'assigned', 'in_progress', 'waiting_on_user',
   'resolved', 'closed', 'reopened',
 ];
+// Display labels for the operator <select>. The VALUE stays the raw slug (the
+// wire value for set_ticket_status); only the visible text is prettified.
+const STATUS_LABELS = {
+  new: 'New',
+  triage: 'Triage',
+  assigned: 'Assigned',
+  in_progress: 'In progress',
+  waiting_on_user: 'Waiting on user',
+  resolved: 'Resolved',
+  closed: 'Closed',
+  reopened: 'Reopened',
+};
 // FAQ slugs an agent can attach (mirrors AccountFAQ's Q_KEYS).
 const FAQ_SLUGS = [
   'creditGrant', 'cancelAnytime', 'refundWindow', 'founderLifetime',
   'galleryPrivacy', 'aiOrSim',
 ];
+// Display labels for the FAQ <select>. The VALUE stays the raw slug (the wire
+// value for link_ticket_faq); only the visible text is prettified.
+const FAQ_LABELS = {
+  creditGrant: 'Credit grant',
+  cancelAnytime: 'Cancel anytime',
+  refundWindow: 'Refund window',
+  founderLifetime: 'Founder lifetime',
+  galleryPrivacy: 'Gallery privacy',
+  aiOrSim: 'AI or simulation',
+};
 
 /** Invoke an admin-actions edge action. Returns the data payload or throws. */
 async function callAdmin(body) {
@@ -108,9 +130,13 @@ export default function SupportQueuePanel() {
   const id = active?.id;
 
   return (
-    <section aria-label="Support ticket queue" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg,
-    }}>
+    // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
+    // <Section>, which already owns the card frame + the "Support Queue" <h2>
+    // and its body padding — a self-framed card here would be a doubled
+    // boundary + doubled padding. The active-ticket detail panel below keeps
+    // its own frame.
+    <section aria-label="Support ticket queue">
+
       <TextInputDialog
         open={!!prompt}
         title={prompt?.title || ''}
@@ -128,7 +154,7 @@ export default function SupportQueuePanel() {
           <select id="queue-status-filter" value={filter} onChange={(e) => setFilter(e.target.value)}
             style={{ marginLeft: SP.xs, fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
             <option value="">All</option>
-            {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+            {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}
           </select>
         </label>
         <Button variant="gold" size="sm" onClick={load} disabled={loading} icon={<RefreshCw size={12} />}>
@@ -141,22 +167,34 @@ export default function SupportQueuePanel() {
 
       {/* Queue list */}
       {tickets.length > 0 && (
-        <div style={{ maxHeight: 240, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+        <div role="table" aria-label="Ticket queue"
+          style={{ maxHeight: 240, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+          <div role="row" style={{
+            display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
+            background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
+            fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+          }}>
+            <span role="columnheader" style={{ minWidth: 72, textAlign: 'left' }}>Number</span>
+            <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Subject</span>
+            <span role="columnheader" style={{ flex: 1, textAlign: 'left' }}>Email (masked)</span>
+            <span role="columnheader" style={{ textAlign: 'left' }}>Priority</span>
+            <span role="columnheader" style={{ textAlign: 'left' }}>Status</span>
+          </div>
           {tickets.map((t) => (
-            <Button key={t.id} variant="ghost" size="sm" fullWidth onClick={() => openTicket(t)}
+            <Button key={t.id} variant="ghost" size="sm" fullWidth role="row" onClick={() => openTicket(t)}
               style={{
                 gap: SP.sm, justifyContent: 'flex-start', whiteSpace: 'normal',
                 padding: `${SP.sm}px ${SP.md}px`, background: t.id === id ? CARD_HDR : 'transparent',
                 borderRadius: 0, borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm,
                 fontWeight: 400, color: INK,
               }}>
-              <span style={{ fontSize: FS.xxs, color: MUTED, minWidth: 72, textAlign: 'left' }}>{t.ticket_number}</span>
-              <span style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span role="cell" style={{ fontSize: FS.xxs, color: MUTED, minWidth: 72, textAlign: 'left' }}>{t.ticket_number}</span>
+              <span role="cell" style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {t.subject}
               </span>
-              <span style={{ flex: 1, color: MUTED, textAlign: 'left', fontSize: FS.xxs }}>{t.email_masked || '—'}</span>
-              <span style={{ color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs }}>{t.priority}</span>
-              <span style={{ color: t.status === 'new' ? swatch['#8C6F32'] : MUTED, textTransform: 'uppercase', fontSize: FS.xxs, fontWeight: 700 }}>{t.status}</span>
+              <span role="cell" style={{ flex: 1, color: MUTED, textAlign: 'left', fontSize: FS.xxs }}>{t.email_masked || '–'}</span>
+              <span role="cell" style={{ color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs }}>{t.priority}</span>
+              <span role="cell" style={{ color: t.status === 'new' ? swatch['#8C6F32'] : MUTED, textTransform: 'uppercase', fontSize: FS.xxs, fontWeight: 700 }}>{t.status}</span>
             </Button>
           ))}
         </div>
@@ -187,7 +225,7 @@ export default function SupportQueuePanel() {
                   `Status set to ${e.target.value}.`,
                 )}
                 style={{ fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
-                {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}
               </select>
             </label>
 
@@ -202,7 +240,7 @@ export default function SupportQueuePanel() {
 
             <Button variant="ghost" size="sm" disabled={busy} icon={<StickyNote size={12} />}
               onClick={() => ask(
-                { title: 'Add internal note', body: 'The ticket owner can NEVER read this note.', label: 'Internal note', confirmLabel: 'Add note' },
+                { title: 'Add internal note', body: 'The ticket owner can never read this note.', label: 'Internal note', confirmLabel: 'Add note' },
                 (body) => runAction(
                   { action: 'post_ticket_reply', ticketId: id, body, visibility: 'internal' },
                   'Internal note added.',
@@ -217,8 +255,8 @@ export default function SupportQueuePanel() {
                   'FAQ article linked.',
                 ); }}
                 style={{ fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
-                <option value="">—</option>
-                {FAQ_SLUGS.map((s) => <option key={s} value={s}>{s}</option>)}
+                <option value="">–</option>
+                {FAQ_SLUGS.map((s) => <option key={s} value={s}>{FAQ_LABELS[s] || s}</option>)}
               </select>
             </label>
           </div>
@@ -234,12 +272,12 @@ export default function SupportQueuePanel() {
               return (
                 <div key={ev.id} style={{
                   padding: `${SP.sm}px ${SP.md}px`,
-                  background: internal ? '#FFF7E6' : CARD_HDR,
-                  border: `1px solid ${internal ? '#E8C766' : BORDER2}`, borderRadius: R.md,
+                  background: internal ? GOLD_BG : CARD_HDR,
+                  border: `1px solid ${internal ? GOLD : BORDER2}`, borderRadius: R.md,
                 }}>
                   <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginBottom: 2 }}>
                     {ev.author_role || 'user'}
-                    {internal ? ' · INTERNAL (owner can never see this)' : ''}
+                    {internal ? ' · Internal note. The ticket owner can never read this.' : ''}
                     {ev.kind === 'status_change' ? ' · update' : ''}
                   </div>
                   <div style={{ fontSize: FS.sm, color: INK, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{ev.body}</div>
@@ -251,7 +289,7 @@ export default function SupportQueuePanel() {
       )}
 
       {!active && !loading && tickets.length === 0 && (
-        <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+        <p style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
           Load the queue to triage tickets. Claim a ticket, transition its status, reply to the user,
           add internal notes, or link an FAQ article.
         </p>

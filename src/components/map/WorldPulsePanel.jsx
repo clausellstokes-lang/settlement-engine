@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
-import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, DANGER_BORDER, FS, GOLD, GOLD_BG, INK, MUTED, RED, RED_BG, SECOND, SP, R, sans, serif_ } from '../theme.js';
 import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
@@ -21,7 +21,7 @@ import {
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
 import LiveWarStatus from './LiveWarStatus.jsx';
 
-export default function WorldPulsePanel({ campaign }) {
+export default function WorldPulsePanel({ campaign, advancing = false }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
@@ -33,6 +33,14 @@ export default function WorldPulsePanel({ campaign }) {
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
   if (!campaign) return null;
+
+  // While the realm is advancing, the section it routes to (P10) shows a
+  // simulation-stage skeleton instead of sitting on the PREVIOUS tick's numbers —
+  // so progress reads in two channels (the toolbar label flip + this in-place
+  // status) and the GM never mistakes stale results for the new ones.
+  if (advancing) {
+    return <AdvancingSkeleton />;
+  }
 
   const worldState = campaign.worldState || {};
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
@@ -85,7 +93,7 @@ export default function WorldPulsePanel({ campaign }) {
         flexDirection: 'column',
         background: CARD,
         border: `1px solid ${BORDER}`,
-        borderRadius: 8,
+        borderRadius: R.lg,
         overflow: 'hidden',
       }}>
         <header style={{
@@ -99,7 +107,7 @@ export default function WorldPulsePanel({ campaign }) {
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: 8,
+            borderRadius: R.lg,
             border: `1px solid ${BORDER2}`,
             background: CARD,
             display: 'flex',
@@ -110,7 +118,7 @@ export default function WorldPulsePanel({ campaign }) {
             <Activity size={18} color={GOLD} />
           </div>
           <div style={{ minWidth: 0 }}>
-            <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
+            <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['22'], lineHeight: 1.14, fontWeight: 700 }}>
               World Pulse
             </h2>
             <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
@@ -119,15 +127,15 @@ export default function WorldPulsePanel({ campaign }) {
             </div>
           </div>
         </header>
-        <div style={{ padding: 16 }}>
+        <div style={{ padding: SP.lg }}>
           {actionError && (
-            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+            <div style={{ border: `1px solid ${DANGER_BORDER}`, borderRadius: R.lg, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: RED_BG }}>
               {actionError}
             </div>
           )}
           <OutcomeCard
             title="Canonize the campaign world first"
-            summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions as canon."
+            summary="The realm advances only after you lock the map, the placements, and the campaign assumptions as canon."
             severity={0.45}
             details={['required before advancement']}
             actions={(
@@ -174,7 +182,7 @@ export default function WorldPulsePanel({ campaign }) {
           <Activity size={18} color={GOLD} />
         </div>
         <div style={{ minWidth: 0 }}>
-          <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
+          <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['22'], lineHeight: 1.14, fontWeight: 700 }}>
             World Pulse
           </h2>
           <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
@@ -192,10 +200,10 @@ export default function WorldPulsePanel({ campaign }) {
         flex: 1,
         minHeight: 0,
         overflowY: 'auto',
-        padding: 16,
+        padding: SP.lg,
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 330px), 1fr))',
-        gap: 16,
+        gap: SP.lg,
         alignItems: 'start',
       }}>
         {/* §S3 — LIVE war/trade/faith status from the post-pulse worldState +
@@ -204,12 +212,12 @@ export default function WorldPulsePanel({ campaign }) {
 
         <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
-            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+            <div style={{ border: `1px solid ${DANGER_BORDER}`, borderRadius: R.lg, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: RED_BG }}>
               {actionError}
             </div>
           )}
           {pending.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pending proposals.
             </div>
           ) : (
@@ -252,8 +260,8 @@ export default function WorldPulsePanel({ campaign }) {
 
         <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-              No active stressors. The realm is quiet — for now.
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              No active stressors. The realm is quiet, for now.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -304,7 +312,7 @@ export default function WorldPulsePanel({ campaign }) {
               {echoes.map(stressor => (
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
-                  title={`${stressor.label || human(stressor.type)} — in living memory`}
+                  title={`${stressor.label || human(stressor.type)}, in living memory`}
                   summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
                   severity={stressor.memoryStrength ?? 0}
                   details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
@@ -317,7 +325,7 @@ export default function WorldPulsePanel({ campaign }) {
 
         <Section title="Latest Pulse" count={latestPulse ? selected : 0}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : (
@@ -356,11 +364,11 @@ export default function WorldPulsePanel({ campaign }) {
 
         <Section title="Impact Digest" count={impactDigest.length}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : impactDigest.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No regional impacts recorded for this pulse.
             </div>
           ) : (
@@ -383,7 +391,7 @@ export default function WorldPulsePanel({ campaign }) {
 
         <Section title="Roll Explanations" count={rolls.length}>
           {rolls.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No rolls recorded.
             </div>
           ) : (
@@ -398,7 +406,7 @@ export default function WorldPulsePanel({ campaign }) {
                     gap: 8,
                     padding: 10,
                     border: `1px solid ${passed ? GOLD : BORDER}`,
-                    borderRadius: 8,
+                    borderRadius: R.lg,
                     background: passed ? GOLD_BG : CARD,
                   }}>
                     <Clock3 size={15} color={passed ? GOLD : MUTED} style={{ marginTop: 2 }} />
@@ -421,6 +429,29 @@ export default function WorldPulsePanel({ campaign }) {
             </div>
           )}
         </Section>
+      </div>
+    </section>
+  );
+}
+
+// While advanceCampaignWorld runs, the Pulse section shows this instead of the
+// prior tick (P10). A pulsing spinner + a named stage line + ghost rows read as
+// "the engine is computing depth", not a bare spinner, and self-clear when the
+// real digest replaces them.
+function AdvancingSkeleton() {
+  return (
+    <section data-testid="world-pulse-advancing" aria-busy="true" style={{ display: 'grid', gap: SP.md }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+        <Activity size={15} color={GOLD} className="sf-spin" aria-hidden />
+        Advancing the realm…
+      </div>
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+        Simulating wars, faiths, trade, and migration for this tick.
+      </div>
+      <div style={{ display: 'grid', gap: SP.sm }}>
+        {[0, 1, 2].map(i => (
+          <div key={i} style={{ height: 44, borderRadius: R.md, background: CARD_ALT, border: `1px solid ${BORDER2}`, opacity: 1 - i * 0.22 }} />
+        ))}
       </div>
     </section>
   );

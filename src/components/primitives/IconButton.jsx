@@ -26,6 +26,9 @@ const SIZES = {
   sm: { box: 24, icon: 11, pad: 4 },
   md: { box: 28, icon: 13, pad: 6 },
   lg: { box: 36, icon: 16, pad: 8 },
+  // xl — the ~44px usability target (Fitts's Law) for consequential controls
+  // like "remove a saved neighbour link" that sit above the 24px WCAG floor.
+  xl: { box: 44, icon: 18, pad: 10 },
 };
 
 /**

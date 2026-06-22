@@ -179,7 +179,7 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
       try {
         const setOnboardingNudge = useStore.getState().setOnboardingNudge;
         if (typeof setOnboardingNudge === 'function') {
-          setOnboardingNudge(`Saved as ${payload.name} — view it in Settlements.`);
+          setOnboardingNudge(`Saved as ${payload.name}. View it in Settlements.`);
         }
       } catch { /* nudge slice might not be initialized in tests */ }
       return result;

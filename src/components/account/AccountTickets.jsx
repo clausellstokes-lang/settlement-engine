@@ -18,12 +18,13 @@
  * thread payload simply doesn't contain them.
  */
 import { useCallback, useState } from 'react';
-import { Ticket, Plus, ChevronLeft, RefreshCw, Send } from 'lucide-react';
+import { Ticket, Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
+import Pill from '../primitives/Pill.jsx';
 import {
-  GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, RED,
-  sans, FS, SP, R, swatch,
+  GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED,
+  sans, FS, SP, R, swatch, DANGER_BORDER,
 } from '../theme.js';
 
 const CATEGORIES = ['general', 'billing', 'bug', 'account', 'gallery', 'feature', 'other'];
@@ -45,14 +46,21 @@ async function callAccount(body) {
 
 function StatusPill({ status }) {
   const open = !['resolved', 'closed'].includes(status);
+  // Two-channel + AA: open carries GOLD_TXT (gold-800, 7.25:1 on parchment —
+  // brand GOLD failed at 2.20:1) with a dot glyph; closed uses BODY (ink-600,
+  // AA-passing) on a deeper neutral with a check glyph. So the state reads in
+  // colour + icon + text, never colour alone (P7).
   return (
-    <span style={{
-      fontSize: FS.xxs, fontWeight: 700, padding: '1px 7px', borderRadius: R.sm,
-      background: open ? swatch['#FBF5E6'] : '#e8e8e8',
-      color: open ? GOLD : MUTED, textTransform: 'uppercase', letterSpacing: '0.04em',
-    }}>
+    <Pill
+      bg={open ? swatch['#FBF5E6'] : swatch['#E0D0B0']}
+      color={open ? GOLD_TXT : BODY}
+      icon={open
+        ? <CircleDot size={11} aria-hidden="true" />
+        : <CheckCircle2 size={11} aria-hidden="true" />}
+      style={{ borderRadius: R.sm }}
+    >
       {STATUS_LABEL[status] || status}
-    </span>
+    </Pill>
   );
 }
 
@@ -147,7 +155,7 @@ export default function AccountTickets() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <Ticket size={15} color={GOLD} />
+        <Ticket size={15} color={GOLD_TXT} />
         <span style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans, flex: 1 }}>
           My tickets
         </span>
@@ -173,7 +181,7 @@ export default function AccountTickets() {
       {error && (
         <div role="alert" style={{
           padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg,
-          border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: RED,
+          border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: RED,
         }}>
           {error}
         </div>
@@ -182,10 +190,10 @@ export default function AccountTickets() {
       {/* ── LIST ─────────────────────────────────────────────────────── */}
       {view === 'list' && (
         loading ? (
-          <div style={{ textAlign: 'center', padding: SP.lg, color: MUTED, fontSize: FS.sm }}>Loading…</div>
+          <div style={{ textAlign: 'center', padding: SP.lg, color: BODY, fontSize: FS.sm }}>Loading…</div>
         ) : tickets.length === 0 ? (
           <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>
-            No tickets yet. If the FAQ above didn&apos;t answer your question, open a new ticket.
+            No tickets yet. If the FAQ above did not answer your question, open a new ticket.
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
@@ -197,7 +205,7 @@ export default function AccountTickets() {
                   borderRadius: R.md, background: swatch.white, whiteSpace: 'normal',
                 }}>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>{t.ticket_number}</span>
+                  <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
                   <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {t.subject}
                   </span>
@@ -213,14 +221,14 @@ export default function AccountTickets() {
       {view === 'create' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           <div style={{ display: 'flex', gap: SP.sm }}>
-            <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
               Category
               <select id="ticket-category" value={category} onChange={(e) => setCategory(e.target.value)}
                 style={{ ...inputStyle, marginTop: 2 }}>
                 {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </label>
-            <label htmlFor="ticket-priority" style={{ flex: 1, fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <label htmlFor="ticket-priority" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
               Priority
               <select id="ticket-priority" value={priority} onChange={(e) => setPriority(e.target.value)}
                 style={{ ...inputStyle, marginTop: 2 }}>
@@ -248,7 +256,7 @@ export default function AccountTickets() {
       {view === 'thread' && active && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{active.ticket_number}</span>
+            <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{active.ticket_number}</span>
             <span style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans, flex: 1 }}>
               {active.subject}
             </span>
@@ -263,9 +271,9 @@ export default function AccountTickets() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, maxHeight: 320, overflowY: 'auto' }}>
             {loading ? (
-              <div style={{ textAlign: 'center', padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>
+              <div style={{ textAlign: 'center', padding: SP.md, color: BODY, fontSize: FS.sm }}>Loading…</div>
             ) : events.length === 0 ? (
-              <div style={{ fontSize: FS.sm, color: MUTED }}>No replies yet.</div>
+              <div style={{ fontSize: FS.sm, color: BODY }}>No replies yet.</div>
             ) : events.map((ev) => {
               const fromAgent = ev.author_role && ev.author_role !== 'user';
               return (
@@ -276,7 +284,7 @@ export default function AccountTickets() {
                   alignSelf: fromAgent ? 'flex-start' : 'flex-end',
                   maxWidth: '85%',
                 }}>
-                  <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginBottom: 2 }}>
+                  <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, marginBottom: 2 }}>
                     {fromAgent ? 'Support' : 'You'}
                     {ev.kind === 'status_change' ? ' · update' : ''}
                   </div>

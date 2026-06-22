@@ -185,7 +185,7 @@ export function counterfactual(settlement, ref) {
     if (nextSettlement === settlement) {
       warnings.push({
         severity: 'mismatch',
-        message: `No counterfactual path for ${ref.type}:${action} yet — settlement unchanged.`,
+        message: `No counterfactual path for ${ref.type}:${action} yet. Settlement unchanged.`,
       });
     }
   }

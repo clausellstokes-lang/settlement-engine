@@ -642,7 +642,7 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
       targetSaveId: String(rec.occupierId),
       severity: 0.5,
       headline: `${occupiedName} bends the knee to ${occupierName}`,
-      summary: `${occupierName}'s occupation of ${occupiedName} has stabilized into formal vassalage — the occupied settlement now serves as a client state.`,
+      summary: `${occupierName}'s occupation of ${occupiedName} has stabilized into formal vassalage. The occupied settlement now serves as a client state.`,
       reasons: [`Occupation stabilized to vassalized (resistance ${num(rec.resistance).toFixed(2)}).`],
       relationshipPatch: { proposedRelationshipType: 'vassal', trajectory: 'transitioning' },
       proposalPayload: {
@@ -762,7 +762,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         targetSaveId: occupiedId,
         severity: 0.3,
         headline: `${occupiedName} throws off ${occupierName}`,
-        summary: `The occupation of ${occupiedName} collapsed under resistance — ${occupierName} could never hold it, and the settlement reclaims its own authority.`,
+        summary: `The occupation of ${occupiedName} collapsed under resistance. ${occupierName} could never hold it, and the settlement reclaims its own authority.`,
         reasons: [`Occupation suitability collapsed (resistance ${nextResistance.toFixed(2)}).`],
         tick: t,
         sourceEventTargetId: String(rec.occupierId),

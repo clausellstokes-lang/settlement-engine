@@ -124,15 +124,17 @@ export const FLAGS = Object.freeze({
     default: true,
     description: '380px phone-optimized session-running view of a settlement.',
   },
-  // ── Pricing copy A/B experiment ────────────────────────────────────────────
-  // The current concrete "unlimited saves" pitch vs. the simulation-led copy
-  // ("Generate a town in seconds, then run the region for years."). Ship the
-  // simulation-led variant behind this flag against the current copy; the
-  // storage/saves line stays a SECONDARY bullet either way. Size is FREE, so the
-  // simulation-led variant must NOT pitch size/metropolis/capital as premium.
+  // ── Pricing copy ────────────────────────────────────────────────────────────
+  // The simulation-led copy ("Generate a town in seconds, then run the region for
+  // years.") vs. the old "unlimited saves" pitch. PROMOTED default-ON: the live
+  // conversion surface must sell the actual moat (the war/trade/pantheon living
+  // simulation), not "unlimited saves" — a feature countless free tools offer.
+  // The storage/saves line stays a SECONDARY bullet. Size is FREE, so this variant
+  // must NOT pitch size/metropolis/capital as premium. Set false to A/B back to the
+  // old copy.
   pricingSimulationCopy: {
-    default: false,
-    description: 'Simulation-led premium pricing copy variant (A/B). OFF = current "unlimited saves / full size" copy; ON = "generate a town, then run the region" — names the simulation, never size.',
+    default: true,
+    description: 'Simulation-led premium pricing copy. ON (default) = "generate a town, then run the region" — names the simulation, never size. OFF = the old "unlimited saves / full size" copy.',
   },
 });
 

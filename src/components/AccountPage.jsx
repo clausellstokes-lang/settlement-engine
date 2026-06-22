@@ -14,13 +14,17 @@ import {
   User, Shield, ChevronRight,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
+import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
 import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
-import { INK, MUTED, SECOND, BORDER, sans, FS, SP, R } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, sans, FS, SP, layout } from './theme.js';
+import { space } from '../design/tokens.js';
 import Button from './primitives/Button.jsx';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
@@ -34,7 +38,6 @@ export default function AccountPage({ onNavigateAdmin }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
-  const _isDeveloper = useStore(s => s.isDeveloper());
   const savedSettlements = useStore(s => s.savedSettlements);
   const campaigns = useStore(s => s.campaigns);
   const maxSaves = useStore(s => s.maxSaves());
@@ -49,6 +52,7 @@ export default function AccountPage({ onNavigateAdmin }) {
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
+  const [nameError, setNameError] = useState(null);
   const profileSourceKey = [
     auth.avatarUrl || '',
     auth.emailNotifications !== false ? 'email:on' : 'email:off',
@@ -90,6 +94,7 @@ export default function AccountPage({ onNavigateAdmin }) {
   const handleSaveName = async () => {
     if (!nameInput.trim()) return;
     setNameSaving(true);
+    setNameError(null);
     try {
       await authService.updateDisplayName(nameInput.trim());
       setEditingName(false);
@@ -109,9 +114,39 @@ export default function AccountPage({ onNavigateAdmin }) {
         );
       }
     } catch (e) {
-      console.error('Failed to update name:', e);
+      // Surface the failure in the editor instead of swallowing to console —
+      // every sibling mutation on this page reports its errors, so a silent
+      // rename would let the user believe a save succeeded when it did not.
+      setNameError(e?.message || 'Could not update your display name. Please try again.');
     } finally {
       setNameSaving(false);
+    }
+  };
+
+  // Email notifications persist immediately, mirroring every other Preferences
+  // row (setProductPref). Wiring it to the profile-save handler instead would
+  // make the section's "Preferences save automatically" note false for this one
+  // toggle — the change would be silently discarded on navigation.
+  const handleEmailNotificationsChange = async (next) => {
+    setEmailNotifications(next);
+    try {
+      const profile = await authService.updateProfilePreferences({ emailNotifications: next });
+      const result = await authService.getSession();
+      const merged = result || { ...auth, ...profile };
+      useStore.getState().setAuth(
+        merged.user || auth.user,
+        merged.session || auth.session,
+        merged.tier || auth.tier,
+        merged.role || auth.role,
+        merged.displayName || auth.displayName,
+        merged.isFounder ?? auth.isFounder,
+        profile?.avatarUrl ?? merged.avatarUrl ?? auth.avatarUrl,
+        profile?.emailNotifications ?? merged.emailNotifications ?? next,
+        profile?.modelPreference ?? merged.modelPreference ?? auth.modelPreference,
+      );
+    } catch {
+      // Roll the toggle back so the control never lies about persisted state.
+      setEmailNotifications(!next);
     }
   };
 
@@ -196,27 +231,33 @@ export default function AccountPage({ onNavigateAdmin }) {
   }
 
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'column', gap: SP.lg,
-      maxWidth: 680, margin: '0 auto', padding: `${SP.lg}px 0`,
-    }}>
+    <Page max={layout.page}>
+      {/* ── Page header — the page's one dominant focal point ────── */}
+      <PageHeader eyebrow="Your account" title="Account" subtitle={auth.user.email} />
+
+      <div style={{
+        // space-7 (32) between sections — a clear step above the intra-section
+        // SP.xl/SP.lg (20/16) gaps, so SPACING carries the page-level grouping
+        // and the section chrome can recede to a hairline rule (P5). At SP.xxl
+        // (24) the between/within differential was too small to read as grouping.
+        display: 'flex', flexDirection: 'column', gap: space['space-7'],
+      }}>
       {/* ── Profile section ────────────────────────────────────── */}
       <AccountProfileSection
         auth={auth}
         avatarInput={avatarInput} setAvatarInput={setAvatarInput}
-        emailNotifications={emailNotifications} setEmailNotifications={setEmailNotifications}
         modelPreference={modelPreference} setModelPreference={setModelPreference}
         editingName={editingName} setEditingName={setEditingName}
         nameInput={nameInput} setNameInput={setNameInput}
         nameSaving={nameSaving} handleSaveName={handleSaveName}
+        nameError={nameError}
         profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
         handleSaveProfilePreferences={handleSaveProfilePreferences}
       />
 
-      {/* ── Login & Security ────────────────────────────────────── */}
-      <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
-
-      {/* ── Subscription & Credits (Billing) ────────────────────── */}
+      {/* ── Subscription & Credits (Billing) — the headline state ─
+          leads the stack directly under identity as the one feature
+          section, so the at-a-glance tier/credits/saves aren't buried. */}
       <AccountSubscriptionSection
         auth={auth}
         isElevated={isElevated}
@@ -229,7 +270,11 @@ export default function AccountPage({ onNavigateAdmin }) {
         purchaseError={purchaseError}
         purchasing={purchasing}
         handlePurchase={handlePurchase}
+        onNavigatePricing={() => navigate('pricing')}
       />
+
+      {/* ── Login & Security ────────────────────────────────────── */}
+      <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
 
       {/* ── Data & Privacy (export, deletion, consent, visibility) ── */}
       <AccountDataPrivacySection
@@ -243,39 +288,37 @@ export default function AccountPage({ onNavigateAdmin }) {
       {/* ── Product Preferences ─────────────────────────────────── */}
       <AccountPreferencesSection
         emailNotifications={emailNotifications}
-        setEmailNotifications={setEmailNotifications}
+        setEmailNotifications={handleEmailNotificationsChange}
       />
 
       {/* ── Customer Support (FAQ-first, then tickets) ──────────── */}
       <AccountSupportSection auth={auth} />
 
-      {/* ── Developer / Admin Panel link ────────────────────────── */}
+      {/* ── Developer / Admin Panel link ──────────────────────────
+          A subordinate utility-nav affordance: a quiet ghost row, not a
+          loud bordered tile — it must not out-shout the account content
+          or the Subscription primary CTA. */}
       {isElevated && onNavigateAdmin && (
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="md"
+          fullWidth
           onClick={onNavigateAdmin}
-          style={{
-            display: 'flex', alignItems: 'center', gap: SP.md,
-            padding: `${SP.lg}px ${SP.xl}px`,
-            background: 'rgba(124,58,237,0.06)',
-            border: '2px solid rgba(124,58,237,0.2)',
-            borderRadius: R.xl, cursor: 'pointer',
-            fontFamily: sans, textAlign: 'left',
-          }}
+          icon={<Shield size={16} color={SECOND} />}
+          trailingIcon={<ChevronRight size={16} color={MUTED} style={{ marginLeft: 'auto' }} />}
+          style={{ justifyContent: 'flex-start', fontFamily: sans, textAlign: 'left' }}
         >
-          <Shield size={24} color="#7c3aed" />
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>Developer Admin Panel</div>
-            <div style={{ fontSize: FS.sm, color: SECOND }}>Manage users, credits, roles, and system configuration</div>
-          </div>
-          <ChevronRight size={20} color={MUTED} />
-        </button>
+          <span style={{ flex: 1, textAlign: 'left' }}>
+            <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 700, color: INK }}>Developer Admin Panel</span>
+            <span style={{ display: 'block', fontSize: FS.xs, fontWeight: 400, color: SECOND }}>Manage users, credits, roles, and system configuration</span>
+          </span>
+        </Button>
       )}
-
-      {/* Sign out */}
-      <Button variant="danger" size="lg" fullWidth onClick={authSignOut}>
-        Sign Out
-      </Button>
-    </div>
+      {/* Sign-out lives on the header account chip and in Login & Security
+          ("sign out everywhere"); a redundant page-bottom button here sat one
+          mis-click below Support, so it was removed to keep a single, clearly
+          placed sign-out affordance. */}
+      </div>
+    </Page>
   );
 }

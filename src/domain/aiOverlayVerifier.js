@@ -143,7 +143,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
         key: k,
         label: oName,
         newLabel: rName,
-        detail: `Entity "${oName}" renamed to "${rName}" — proper-noun changes are forbidden.`,
+        detail: `Entity "${oName}" renamed to "${rName}". Proper-noun changes are forbidden.`,
       });
     }
   }

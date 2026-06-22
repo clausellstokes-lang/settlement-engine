@@ -213,10 +213,10 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   }
   if (materielImports > 0) {
     push('materiel', 'economicState.primaryImports', 'imports', Math.min(materielImports, 4) * 3,
-      `${materielImports} imported military-materiel line(s) — access without control.`);
+      `${materielImports} imported military-materiel line(s): access without control.`);
   }
   if (materielHits === 0 && materielImports === 0) {
-    push('materiel', 'economicState', 'none', 0, 'No specialized war materiel — fights with what tools the town has.');
+    push('materiel', 'economicState', 'none', 0, 'No specialized war materiel. It fights with what tools the town has.');
   }
 
   // ── logistics: food reserves + supply resilience ───────────────────────────

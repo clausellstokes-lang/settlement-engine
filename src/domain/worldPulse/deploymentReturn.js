@@ -363,7 +363,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       outcomes.push(failedReturnOutcome({
         kind: 'splinter', homeId, homeName, sourceId, ratio, pSuccess: 0, roll: 0, tick,
         headline: `${homeName}'s broken host comes home`,
-        summary: `${homeName}'s army returned a shadow of the force that marched out — deserters scatter and the survivors are restive, a wound on the home order.`,
+        summary: `${homeName}'s army returned a shadow of the force that marched out. Deserters scatter and the survivors are restive, a wound on the home order.`,
       }));
     }
   }

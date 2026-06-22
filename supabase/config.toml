@@ -375,10 +375,18 @@ deno_version = 2
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 
-# Functions that must NOT have the platform JWT gate. Stripe posts a signature,
-# not a Supabase JWT — with verify_jwt on (the default), the platform rejects the
-# webhook before signature verification and payments never credit. Pinning it here
-# means the flag can't be forgotten on `supabase functions deploy`.
+# ── verify_jwt is pinned EXPLICITLY for EVERY function ───────────────────────
+# config.toml is the source of truth for `supabase functions deploy`, so pinning
+# each function's intent here makes deploys deterministic — the platform JWT gate
+# can never be silently flipped by a forgotten/remembered `--no-verify-jwt` flag.
+# A function whose intent is "do my own auth" (signature, shared secret, or a
+# per-request anon path) MUST be verify_jwt = false, or the platform rejects it
+# before its own auth runs. Enforced by tests/edgeFunctions/verifyJwtPins.test.js
+# (every function dir must have an explicit pin here).
+
+# ── verify_jwt = false: functions that authenticate themselves ───────────────
+# Stripe posts a signature, not a Supabase JWT — with the gate on, the platform
+# rejects the webhook before signature verification and payments never credit.
 [functions.stripe-webhook]
 verify_jwt = false
 
@@ -386,6 +394,47 @@ verify_jwt = false
 # session id, not auth.
 [functions.verify-single-dossier]
 verify_jwt = false
+
+# Public analytics sink — anonymous traffic IS the point. The function stitches an
+# optional JWT when present but must accept anon (no-JWT) posts; the gate would
+# reject the whole anon funnel.
+[functions.ingest-events]
+verify_jwt = false
+
+# Cron-invoked export (pg_net) authenticated by the x-export-secret shared secret,
+# not a JWT — fail-closed on a wrong/missing secret inside the function. The gate
+# would reject the cron call (no user JWT) and the export would never run.
+[functions.analytics-export]
+verify_jwt = false
+
+# Per-template self-auth: authenticated templates read the recipient from
+# auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
+# recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
+# would block the anonymous cap_warning email (anon users have no user JWT).
+[functions.send-email]
+verify_jwt = false
+
+# ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
+# Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
+# on any of these would expose an authenticated/money/admin endpoint to unauth
+# traffic. Each also re-checks auth (and role, where relevant) inside the handler.
+[functions.create-checkout]
+verify_jwt = true
+
+[functions.create-customer-portal]
+verify_jwt = true
+
+[functions.generate-narrative]
+verify_jwt = true
+
+[functions.generate-chronicle]
+verify_jwt = true
+
+[functions.account-actions]
+verify_jwt = true
+
+[functions.admin-actions]
+verify_jwt = true
 
 [analytics]
 enabled = true

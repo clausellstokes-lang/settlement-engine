@@ -605,6 +605,11 @@ export async function handleAdminActions(
       }
 
       case "update_user_credits": {
+        // HIGHEST role only — defense-in-depth parity with grant_credits and the
+        // account ban/disable cases. The service_set_credits RPC re-checks
+        // privilege at the DB, but a setting-real-money action must also fail
+        // closed at the edge so a `support`-role caller never reaches the RPC.
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId || credits === undefined) {
           return json({ error: "Missing userId or credits" }, 400);
         }

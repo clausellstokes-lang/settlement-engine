@@ -20,6 +20,7 @@ import { useStore } from '../../store/index.js';
 import { navigate, navigatePath } from '../../hooks/useRoute.js';
 import { GOLD, SECOND, MUTED, FS, SP } from '../theme.js';
 import { AuthPageShell, Button, Alert } from './authUI.jsx';
+import { t } from '../../copy/index.js';
 
 export default function VerifyEmailPage() {
   const authTier = useStore(s => s.auth.tier);
@@ -36,34 +37,37 @@ export default function VerifyEmailPage() {
   }, [confirmed]);
 
   return (
-    <AuthPageShell title="Verify your email">
+    <AuthPageShell title={t('auth.verify.title')}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         {authLoading ? (
           <>
             <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
-            <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-              Confirming your email…
+            <p
+              role="status"
+              aria-live="polite"
+              style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}
+            >
+              {t('auth.verify.confirming')}
             </p>
           </>
         ) : confirmed ? (
           <>
             <CheckCircle size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <Alert type="success">
-              Your email is confirmed. Taking you to your settlements…
+              {t('auth.verify.confirmed')}
             </Alert>
             <Button onClick={() => navigatePath('/create', { replace: true })}>
-              Continue
+              {t('auth.verify.continue')}
             </Button>
           </>
         ) : (
           <>
             <AlertCircle size={40} color={MUTED} style={{ margin: '0 auto' }} />
             <Alert type="error">
-              This confirmation link is invalid or has expired. Try signing in,
-              if your account isn't active yet, request a fresh link.
+              {t('auth.verify.expired')}
             </Alert>
             <Button variant="ghost" onClick={() => navigate('signin')}>
-              Go to Sign In
+              {t('auth.verify.goSignIn')}
             </Button>
           </>
         )}

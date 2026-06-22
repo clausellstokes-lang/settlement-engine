@@ -44,7 +44,7 @@ export default function DeityEffectPreview({ draft }) {
       </div>
       {effects.length === 0 ? (
         <div style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', lineHeight: 1.5 }}>
-          A fully-neutral, unranked god does nothing to the living world — set an
+          A fully-neutral, unranked god does nothing to the living world. Set an
           alignment, temperament, or rank to give it teeth.
         </div>
       ) : (
@@ -56,7 +56,7 @@ export default function DeityEffectPreview({ draft }) {
       )}
       <div style={{ fontSize: FS.micro, color: MUT, fontStyle: 'italic', marginTop: 6, lineHeight: 1.4 }}>
         Dormant until you assign this deity as a settlement&rsquo;s primary god and enable
-        Religion dynamics — only then does it touch the substrate.
+        Religion dynamics. Only then does it touch the substrate.
       </div>
     </div>
   );

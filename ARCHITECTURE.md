@@ -108,16 +108,18 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (61) — schema + RLS policies + credit ledger + version
+- **migrations/** (62) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
   regional NPC/propagation reports + map-backdrop storage + admin
   least-privilege/audit-log/deletion/support + the **account-status SECURITY
-  migrations** (057/059/060 enforce account-status writes/RLS) — all via
-  SECURITY DEFINER RPCs with sanitized public reads. RLS is the security spine.
-  Apply every file in `supabase/migrations/` in lexical order; never skip the
-  057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
+  migrations** (057/059/060 enforce account-status writes/RLS) + **062**
+  (close authz gaps: RLS on the two analytics tables, drop the un-audited
+  privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) —
+  all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
+  spine. Apply every file in `supabase/migrations/` in lexical order; never skip
+  the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
 - **functions/** (11 Deno edge functions; `_shared/` is a helper dir, not a
   deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
@@ -194,8 +196,11 @@ separate (`npm run test:e2e`), not in the default gate.
 - **PDF parity**: the on-screen dossier and the PDF render from related but
   separate code (`pdf/lib/viewModel.js`); changing one can drift the other
   (`PDF_PARITY_AUDIT.md`).
-- **Deploy**: pushing `master` deploys live (Vercel). See `docs/DEPLOY.md` for
-  gating that on CI.
+- **Deploy**: pushing `master` triggers a Vercel build, but it is **gated on CI** —
+  `vercel.json`'s `ignoreCommand` runs `scripts/vercel-ignore-build.mjs`, a
+  fail-closed check that blocks the deploy unless the `check`/`e2e`/`deno-tests`
+  jobs are green on the commit (operator sets a read-only `GITHUB_CI_STATUS_TOKEN`;
+  without it the gate blocks rather than ships). See `docs/DEPLOY.md`.
 - **Bus factor is one.** Plan-file vocabulary (`P1xx`, "Pillars A–H") and a
   single authorial voice run throughout. This file exists to lower the cost of a
   second contributor.

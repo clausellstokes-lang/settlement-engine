@@ -256,6 +256,6 @@ export function summarizeRegional(settlement) {
   const g = deriveRegionalGraph(settlement);
   if (g.links.length === 0) return ['No structured regional neighbours.'];
   return g.links.map(l =>
-    `${l.toName} — ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
+    `${l.toName}: ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
   );
 }

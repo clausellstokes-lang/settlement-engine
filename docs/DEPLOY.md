@@ -139,9 +139,12 @@ still needs:
 
 **SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
 writes and RLS (a disabled/banned account must not be able to write), **058**
-scopes `system_config` public reads, and **061** locks profile moderation
-columns. These are not optional hardening — skipping them leaves the
-trust-boundary open. `db push` applies them with everything else; if you ever
+scopes `system_config` public reads, **061** locks profile moderation
+columns, and **062** closes three authz gaps (enables RLS on the two analytics
+tables, drops the un-audited privileged `profiles`-UPDATE bypass so every
+privileged write goes through the audited RPCs, and column-locks owner
+support-ticket edits). These are not optional hardening — skipping them leaves
+the trust-boundary open. `db push` applies them with everything else; if you ever
 hand-apply, never stop before this set has landed.
 
 `db push` applies every pending migration on top of the current schema; they must
@@ -169,26 +172,31 @@ npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 Deploy each function:
 
 ```bash
-npx supabase functions deploy stripe-webhook --no-verify-jwt   # Stripe posts a signature, NOT a JWT (also pinned in config.toml)
+npx supabase functions deploy stripe-webhook          # Stripe posts a signature, not a JWT
 npx supabase functions deploy create-checkout
-npx supabase functions deploy create-customer-portal           # "Manage subscription" billing portal
-npx supabase functions deploy verify-single-dossier --no-verify-jwt
+npx supabase functions deploy create-customer-portal  # "Manage subscription" billing portal
+npx supabase functions deploy verify-single-dossier   # anonymous, Stripe session id
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
-npx supabase functions deploy account-actions     # self-serve account export/deletion requests
-npx supabase functions deploy send-email
-npx supabase functions deploy ingest-events       # analytics event sink (verify_jwt default — client sends anon JWT)
-npx supabase functions deploy analytics-export    # admin analytics/trends read API
+npx supabase functions deploy account-actions         # self-serve account export/deletion requests
+npx supabase functions deploy send-email              # per-template self-auth; anon cap_warning path
+npx supabase functions deploy ingest-events           # public analytics event sink (anon traffic)
+npx supabase functions deploy analytics-export        # cron export, x-export-secret shared secret
 ```
 
-(Only `stripe-webhook` and `verify-single-dossier` set `verify_jwt = false` in
-`config.toml`; everything else keeps JWT verification on, so they deploy with no
-flag. Deploy **every** function directory under `supabase/functions/` — the only
-non-deployable one is `_shared/` (a helper bundle, not a function). There are 11
-functions total; on a first cutover deploy all of them, and after adding a new
-function confirm the list with `ls -d supabase/functions/*/ | grep -v _shared`
-rather than trusting this block. <!-- @enforced-by tests/docs/docCounts.test.js -->)
+**No `--no-verify-jwt` flags needed.** `verify_jwt` is pinned EXPLICITLY for every
+function in `config.toml` (the deploy source of truth), so the platform JWT gate
+can't be flipped by a forgotten/stray flag. Five functions that authenticate
+themselves are pinned `false` (`stripe-webhook`, `verify-single-dossier`,
+`ingest-events`, `analytics-export`, `send-email`); the rest are pinned `true`.
+The pins are enforced by `tests/edgeFunctions/verifyJwtPins.test.js` (every
+function must have an explicit pin). Deploy **every** function directory under
+`supabase/functions/` — the only non-deployable one is `_shared/` (a helper
+bundle, not a function). There are 11 functions total; on a first cutover deploy
+all of them, and after adding a new function confirm the list with
+`ls -d supabase/functions/*/ | grep -v _shared` rather than trusting this block.
+<!-- @enforced-by tests/docs/docCounts.test.js -->
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:

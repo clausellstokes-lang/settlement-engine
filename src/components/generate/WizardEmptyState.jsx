@@ -9,10 +9,23 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
+import { SECOND, BORDER, CARD, SP, R, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
+import PageHeader from '../primitives/PageHeader.jsx';
+
+// Below-hero proof cards lazy-load; reserve their space with a height-matched
+// skeleton so the acquisition surface reads as "loading", not a blank gap that
+// pops in and shifts layout on cold connections (P9: skeletons over null).
+function ProofSkeleton({ height }) {
+  return (
+    <div aria-hidden="true" style={{
+      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      opacity: 0.6,
+    }} />
+  );
+}
 
 // Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -29,55 +42,50 @@ const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
-  isMobile,
-  wizardMode,
   setWizardMode,
   authTier,
   onSignIn,
   onNavigate,
 }) {
+  // ONE landing frame. The whole Create-landing stack (hero + proof cards + the
+  // signed-in heading + mode picker) shares LANDING_MAX so the column has a
+  // single edge, rather than HomeHero/WelcomeBack/mode-picker each nesting a
+  // bespoke width inside a wider parent.
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: LANDING_MAX, margin: '0 auto', padding: `${SP.xl}px 0` }}>
       {showHomeHero && (
         <>
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          <Suspense fallback={null}>
+          <Suspense fallback={<ProofSkeleton height={360} />}>
             <HomeSampleDossier />
           </Suspense>
-          <Suspense fallback={null}>
+          <Suspense fallback={<ProofSkeleton height={280} />}>
             <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
           </Suspense>
         </>
       )}
       {!showHomeHero && (
-        <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
-          <h2 style={{
-            fontFamily: serif_,
-            fontSize: isMobile ? FS.xxl : 32,
-            fontWeight: 700,
-            color: INK,
-            margin: 0,
-            marginBottom: SP.sm,
-          }}>
-            Create a Settlement
-          </h2>
-          <p style={{
-            fontFamily: sans,
-            fontSize: FS.md,
-            color: MUTED,
-            margin: 0,
-          }}>
-            Choose a generation mode to get started.
-          </p>
-        </div>
+        <PageHeader
+          eyebrow="Forge a settlement"
+          title="Create a settlement"
+          subtitle="Choose a generation mode to get started."
+          size="lg"
+        />
       )}
+      {/* The hero is the single focal point for the signed-in landing: it owns
+          the "Roll now" intent. The mode picker is a SUBORDINATE "want full
+          control?" affordance, so it renders in the quiet (non-large) variant —
+          smaller compact cards, no background image, no hover-lift — rather than
+          two large cards competing with the hero CTA for the squint-test winner. */}
       {showModePicker && (
-        <>
-          <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, width: '100%', margin: '0 auto' }}>
+          <div className="sf-readable-strip" style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
             Want full control? Use one of the modes below.
           </div>
-          <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
-        </>
+          {/* This branch only renders when no mode is selected, so no card is
+              active — ModeSelector reads `mode` as undefined. */}
+          <ModeSelector mode={undefined} onModeChange={setWizardMode} />
+        </div>
       )}
       {/* Anonymous visitors get instant generation (the hero) only; Basic and
           Advanced are gated to signed-in users. Surface the (free) path so the

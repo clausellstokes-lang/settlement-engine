@@ -22,6 +22,13 @@ function statusColor(status) {
   return GOLD;
 }
 
+function statusLabel(status) {
+  if (status === 'applied') return 'applied';
+  if (status === 'resolved') return 'resolved';
+  if (status === 'ignored') return 'ignored';
+  return 'queued';
+}
+
 export default function RegionalImpactInbox({ saveId, onApplied }) {
   const campaigns = useStore(s => s.campaigns);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
@@ -113,12 +120,17 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   background: impact.status === 'applied' ? swatch.successBg : GOLD_BG,
                 }}
               >
-                <div style={{ width: 7, height: 7, borderRadius: '50%', background: color, flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: color }} />
+                  <span style={{ fontSize: FS.xxs, fontWeight: 700, color, fontFamily: sans, textTransform: 'lowercase' }}>
+                    {statusLabel(impact.status)}
+                  </span>
+                </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: FS.xs, color: BODY, fontWeight: 800, fontFamily: sans }}>
                     {kindLabel(impact.kind)}
                   </div>
-                  <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, lineHeight: 1.35 }}>
+                  <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, lineHeight: 1.35 }}>
                     {sourceName} · {goodsLabel(impact)} · {Math.round((impact.severity || 0) * 100)}%
                   </div>
                 </div>

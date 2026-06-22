@@ -4,7 +4,7 @@
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
 import {Search, X} from 'lucide-react';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch } from './theme.js';
+import { GOLD_TXT, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 
@@ -24,7 +24,7 @@ export default function ControlsStrip({
   extraStats = null,  // any extra JSX to render in stats row
 }) {
   const ForcedPill = forcedCount > 0
-    ? <span style={{ color: GOLD, fontWeight: 700 }}>{forcedCount} forced</span>
+    ? <span style={{ color: GOLD_TXT, fontWeight: 700 }}>{forcedCount} forced</span>
     : null;
   const ExcludedPill = excludedCount > 0
     ? <span style={{ color: swatch['#C04040'] }}>{excludedCount} excluded</span>
@@ -84,12 +84,12 @@ export default function ControlsStrip({
         {extraStats}
         {tier === 'all' && (
           <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.info, background: swatch['#E8ECFF'], borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
-            ALL TIERS
+            All tiers
           </span>
         )}
         {showLegend && (
           <span style={{ fontSize: FS.xxs, color: SECOND, marginLeft: 'auto' }}>
-            Click: <strong>○ Allow</strong> → <strong style={{ color: GOLD }}>◆ Force</strong> → <strong style={{ color: swatch['#C04040'] }}>✕ Exclude</strong>
+            Click: <strong>○ Allow</strong> → <strong style={{ color: GOLD_TXT }}>◆ Force</strong> → <strong style={{ color: swatch['#C04040'] }}>✕ Exclude</strong>
           </span>
         )}
       </div>

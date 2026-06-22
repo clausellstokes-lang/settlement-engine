@@ -81,7 +81,7 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
 
     return (
       <Button
-        variant="gold"
+        variant="primary"
         size="lg"
         icon={<Save size={15} />}
         onClick={handleSignupSave}
@@ -94,8 +94,13 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
+      {/* ONE canonical Save idiom: brand `primary` gold at rest, regardless of
+          auth state (the signup-save door above is also `primary`). Green is
+          reserved for the CONFIRMED state — the button flips to `success` only
+          once the save lands, so green reads as "done", not as the resting
+          action's color (P11). */}
       <Button
-        variant="success"
+        variant={saved ? 'success' : 'primary'}
         size="lg"
         icon={<Save size={15} />}
         onClick={handleSave}

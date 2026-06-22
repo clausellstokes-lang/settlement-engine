@@ -37,13 +37,18 @@ const VARIANT_ICON = {
 const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
 
 /**
+ * Conditionally mounted by the parent ({open && <ExportSheet …/>}), so it
+ * remounts on each open and re-derives its phase-aware variant + AI-source
+ * defaults from the live store every time — no stale first-mount state.
+ *
  * @param {Object} props
- * @param {boolean} props.open
  * @param {() => void} props.onClose
  * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet'|'campaign_state', useAi?: boolean) => Promise<void>} props.onExport
  * @param {boolean} [props.exporting]
+ * @param {string|null} [props.error]   export failure message — surfaced inside
+ *   the sheet with a retry affordance, so status + recovery sit with the action.
  */
-export default function ExportSheet({ open, onClose, onExport, exporting }) {
+export default function ExportSheet({ onClose, onExport, exporting, error }) {
   const phase    = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
@@ -54,8 +59,6 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
   const aiSettlement = useStore(s => s.aiSettlement);
   const hasAi = !!aiSettlement;
   const [useAi, setUseAi] = useState(hasAi);
-
-  if (!open) return null;
 
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
@@ -101,7 +104,7 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
           <div style={{ padding: '0 12px 4px' }}>
             <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
             <div style={{ display: 'flex', gap: 6 }}>
-              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
+              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'Narrated' }].map(opt => (
                 <Button
                   key={opt.label}
                   variant={useAi === opt.ai ? 'gold' : 'secondary'}
@@ -116,9 +119,18 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
             </div>
             <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
               {useAi
-                ? 'Exports the AI-narrated dossier — canonical facts are preserved.'
-                : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
+                ? 'Exports the narrated dossier. Canonical facts are preserved.'
+                : 'Exports the raw simulation. Your narrative stays out of this file.'}
             </div>
+          </div>
+        )}
+
+        {/* Export failure — surfaced co-located with the retry control below,
+            rather than a page-body banner stranded behind a closed overlay. The
+            'path forward' prose is owned by the voice workstream. */}
+        {error && (
+          <div role="alert" style={{ margin: '0 12px 8px', padding: '8px 10px', background: swatch.dangerBg, border: `1px solid ${swatch['#C88A8A']}`, borderRadius: 6, fontSize: FS.xs, color: swatch.danger, lineHeight: 1.45 }}>
+            {error}
           </div>
         )}
 
@@ -133,7 +145,7 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
             disabled={exporting}
             busy={exporting}
           >
-            {exporting ? 'Building PDF…' : <>Export {PDF_VARIANTS[picked].label}</>}
+            {exporting ? 'Building PDF…' : (error ? <>Retry export</> : <>Export {PDF_VARIANTS[picked].label}</>)}
           </Button>
         </footer>
       </div>

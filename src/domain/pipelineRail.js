@@ -64,7 +64,7 @@ export function expandPipelineStep(settlement, stepName) {
   } else {
     summary.push(`${decisions.length} decision(s) at step "${stepName}".`);
     for (const d of decisions.slice(0, 4)) {
-      summary.push(`${d.targetType}: ${d.targetId} — ${d.result || 'recorded'}`);
+      summary.push(`${d.targetType}: ${d.targetId}. ${d.result || 'recorded'}`);
     }
   }
 

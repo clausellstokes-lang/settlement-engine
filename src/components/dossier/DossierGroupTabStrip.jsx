@@ -1,4 +1,4 @@
-import { swatch } from '../theme.js';
+import { PARCH_100 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 // Thematic group tab strip (Summary / Systems / World / Notes).
@@ -33,9 +33,15 @@ export default function DossierGroupTabStrip({
                 });
               }
             }}
+            // Master section-nav row. It reads as DOMINANT over the sub-tab
+            // strip below via a deeper parchment tint + heavier md buttons, and
+            // carries NO bottom border of its own so the master row and the
+            // within-group sub-tab row group as one nav block — a single hairline
+            // (the sub-strip's own bottom border) separates the combined nav from
+            // the content column, instead of two near-identical stacked bands.
             style={{
-              display: 'flex', gap: 2, padding: 4,
-              background: swatch['#F7F0E4'], borderBottom: '1px solid #e0d0b0',
+              display: 'flex', gap: 4, padding: 6,
+              background: PARCH_100,
             }}
           >
             {visibleGroupEntries.map(([gid, group]) => {
@@ -48,8 +54,14 @@ export default function DossierGroupTabStrip({
                   aria-selected={active}
                   tabIndex={active ? 0 : -1}
                   onClick={() => handleGroupClick(gid)}
-                  variant={active ? 'gold' : 'ghost'}
-                  size="sm"
+                  // Active group reads in two channels: solid gold fill + GOLD_TXT
+                  // (variant 'gold') vs an outlined 'secondary' for inactive — so
+                  // selection survives the squint test beyond accent color. md
+                  // size gives the four top-level section targets a comfortable
+                  // (~44px-class) hit area and the heavier weight the master row
+                  // wants over the sub-tab strip.
+                  variant={active ? 'gold' : 'secondary'}
+                  size="md"
                   style={{ flex: 1 }}
                 >{group.label}</Button>
               );

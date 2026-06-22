@@ -249,7 +249,7 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
           issues.push({
             severity: SEVERITY.IMPLAUSIBLE,
             category: 'Resource Access',
-            title: `${inst.name} — no viable resource supply`,
+            title: `${inst.name}: no viable resource supply`,
             description: `${inst.name} requires ${resource} to function but the settlement has no local production, no nearby deposits, and no trade access to import it.`,
             impact: 'Institution cannot function without a supply source.',
             suggestedFixes: [
@@ -437,7 +437,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
-    stressNotes.push('Plague: agricultural workforce decimated by illness — fields understaffed.');
+    stressNotes.push('Plague: agricultural workforce decimated by illness. Fields are understaffed.');
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
@@ -605,7 +605,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       category: 'Food Production',
       title: 'Agricultural Surplus',
       description: `Settlement produces ${Math.round((surplus / adjustedNeed) * 100)}% more food than needed.`,
-      impact: 'Export opportunity — could generate significant trade income.',
+      impact: 'Export opportunity. Could generate significant trade income.',
       suggestedFixes: [
         'Add merchants to export surplus grain',
         'Add granary for long-term storage',
@@ -623,7 +623,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       severity: SEVERITY.CRITICAL,
       category: 'Food Storage',
       title: 'No Grain Storage Facility',
-      description: `Settlement of ${population.toLocaleString('en-US')} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
+      description: `Settlement of ${population.toLocaleString('en-US')} lacks a granary. It cannot buffer harvests or maintain strategic food reserves.`,
       impact: 'Vulnerable to seasonal shortages and siege starvation without grain reserves.',
       suggestedFixes: ['Add Town granary, City granaries, or State granary complex'],
     });
@@ -718,7 +718,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       suggestions.push({
         category: 'Economic Diversity',
         title: 'Trade-dependent craft economy',
-        description: `Craft guilds operate on imported materials — sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
+        description: `Craft guilds operate on imported materials, sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
       });
     } else {
       warnings.push({
@@ -732,7 +732,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         suggestedFixes: water.buffered
           ? ['Develop local resource base to reduce trade dependency']
           : [
-              'Add craft guilds — smiths, weavers, tanners, etc.',
+              'Add craft guilds: smiths, weavers, tanners, etc.',
               'Improve trade access and economy for trade-sustained crafts',
             ],
       });
@@ -749,7 +749,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Economic Isolation',
-        title: 'Structural Isolation — Economic Impact',
+        title: 'Structural Isolation: Economic Impact',
         description: `A ${tierLabel} in isolation cannot source specialist goods, process surpluses, or pay for skilled labour. Economy is permanently stunted regardless of slider values.`,
         impact: 'Income sources, trade goods, and services are all compromised. Prosperity capped at Poor.',
         suggestedFixes: ['Add a trade route', 'Add teleportation infrastructure (high magic)'],
@@ -782,7 +782,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Military slider is high but the settlement has no walls, garrison, or barracks.',
         impact: 'Military investment without physical infrastructure produces limited security.',
         suggestedFixes: ['Add Town Walls or Garrison'],
-        priorityNote: `Military priority is ${pri.military} — defence institutions are expected.`,
+        priorityNote: `Military priority is ${pri.military}. Defence institutions are expected.`,
       });
     }
   }
@@ -806,7 +806,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Religion slider is high but no religious institution is present.',
         impact: 'Religious fervour without institutional anchoring produces instability.',
         suggestedFixes: ['Add Parish Church, Temple, or Monastery'],
-        priorityNote: `Religion priority is ${pri.religion} — a religious centre is expected.`,
+        priorityNote: `Religion priority is ${pri.religion}. A religious centre is expected.`,
       });
     }
   }
@@ -827,9 +827,9 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         category: 'Magical Priorities',
         title: 'High Magic Priority Without Arcane Institutions',
         description: 'Magic slider is high but no arcane institution is present.',
-        impact: 'Magical potential is unrealised — adventurers will find no magical services.',
+        impact: 'Magical potential is unrealised. Adventurers will find no magical services.',
         suggestedFixes: ["Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"],
-        priorityNote: `Magic priority is ${pri.magic} — an arcane institution is expected.`,
+        priorityNote: `Magic priority is ${pri.magic}. An arcane institution is expected.`,
       });
     }
   }
@@ -844,11 +844,11 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Criminal Activity',
-        title: 'High Crime Priority — No Criminal or Guard Institutions',
+        title: 'High Crime Priority: No Criminal or Guard Institutions',
         description: 'Criminal slider is high but neither criminal organisations nor guard infrastructure are present.',
         impact: 'High crime without institutions creates ungoverned chaos rather than structured underworld.',
         suggestedFixes: ["Add Thieves' Guild, Black Market, or City Watch"],
-        priorityNote: `Criminal priority is ${pri.criminal} — some underworld structure is expected.`,
+        priorityNote: `Criminal priority is ${pri.criminal}. Some underworld structure is expected.`,
       });
     }
   }
@@ -1028,13 +1028,13 @@ const computeEconomicViability = (config = {}, _tier = 'town', institutions = []
   if (primaryStress === 'under_siege')
     return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
   if (primaryStress === 'famine')
-    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
+    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population.';
   if (primaryStress === 'occupied')
     return `Revenue flows outward to the occupying authority via ${route === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
   if (primaryStress === 'indebted')
     return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
   if (primaryStress === 'plague_onset')
-    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis — as it is, each problem is making the other worse.";
+    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis. As it is, each problem is making the other worse.";
   if (primaryStress === 'politically_fractured')
     return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
 
@@ -1044,29 +1044,29 @@ const computeEconomicViability = (config = {}, _tier = 'town', institutions = []
     if (isTownPlus && !hasMagicTrade)
       return 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.';
     if (isTownPlus && hasMagicTrade)
-      return 'Trade flows through magical channels — teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
+      return 'Trade flows through magical channels: teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
     if (stress.stateCrime)
-      return 'Internal production is suppressed by institutional extraction — what little surplus exists flows upward rather than into communal welfare.';
+      return 'Internal production is suppressed by institutional extraction. What little surplus exists flows upward rather than into communal welfare.';
     if (econCat === 'very_high' || econCat === 'high')
-      return 'Despite isolation, internal production is well-organised — skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
+      return 'Despite isolation, internal production is well-organised: skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
     if (econCat === 'low' || econCat === 'very_low')
       return 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.';
     return 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
   }
 
   if (stress.theocraticEconomy)
-    return 'The church controls most economic activity — land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
+    return 'The church controls most economic activity: land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
   if (stress.merchantCriminalBlur)
     return 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.';
   if (stress.stateCrime)
-    return 'The official economy appears functional. The reality is that institutional extraction — confiscations, forced sales, and selective taxation — suppresses productive activity.';
+    return 'The official economy appears functional. The reality is that institutional extraction (confiscations, forced sales, and selective taxation) suppresses productive activity.';
   if (econCat === 'very_high')
-    return 'Commerce is the lifeblood of this settlement — markets are active at all hours and guild influence reaches every trade.';
+    return 'Commerce is the lifeblood of this settlement. Markets are active at all hours and guild influence reaches every trade.';
   if (econCat === 'high')
     return 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.';
   if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
   if (econCat === 'very_low')
-    return 'The economy is barely functional — barter replaces coin and few outsiders bother to trade here.';
+    return 'The economy is barely functional. Barter replaces coin and few outsiders bother to trade here.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
     return 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.';
   return 'Trade proceeds at an ordinary pace for a settlement of this size.';
@@ -1471,14 +1471,6 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
 
 // ─────────────────────────────────────────────────────────
 
-// generateEconomicState
-
-// ─────────────────────────────────────────────────────────
-
-// generateEconomicState
-
-// ── Stage 2: Income sources (k = incomeSources array) ─────────────────────
-
 // ── Finished goods demand-gap computation ────────────────────────────────────
 // Computes the gap between what military/religious/maritime/luxury/alchemical
 // institutions consume and what local supply chains produce.
@@ -1581,11 +1573,11 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
 }
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
-  // Parameter aliases (original minified names)
-
-  var ne;
-  const instNames = institutions.map((ee) => ee.name),
-    hasInst = (...ee) => ee.some((E) => instNames.some((_) => _.toLowerCase().includes(E))),
+  // `tradeBonuses` is hoisted because it is assigned far below (the trade-income
+  // streams stage) inside an expression; declared here to keep that assignment legal.
+  var tradeBonuses;
+  const instNames = institutions.map((inst) => inst.name),
+    hasInst = (...needles) => needles.some((needle) => instNames.some((name) => name.toLowerCase().includes(needle))),
     ecoPriorities = getPriorities(config),
     ecoInstFlags = getInstFlags(config, institutions),
     ecoStressFlags = getStressFlags(config, institutions),
@@ -1604,157 +1596,185 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: 30,
         desc: 'Rural hinterland rents remain significant without large market infrastructure.',
       });
-  const f = tradeRoute === 'isolated';
-  const C = f && hasTeleportationInfra(institutions, config);
-  const T = f && !C;
-  const M = C ? 0.4 : 1;
+  // Trade-state flags for an isolated settlement (no external trade route):
+  //   isIsolated   — tradeRoute is 'isolated'
+  //   magicalTrade — isolated BUT has teleportation infrastructure, so a magical
+  //                  trade channel substitutes for physical routes
+  //   trueIsolated — isolated with NO magical channel (gates out market/guild/toll income)
+  //   magicalTradeMultiplier — magical trade runs at 40% of physical-route volume
+  const isIsolated = tradeRoute === 'isolated';
+  const magicalTrade = isIsolated && hasTeleportationInfra(institutions, config);
+  const trueIsolated = isIsolated && !magicalTrade;
+  const magicalTradeMultiplier = magicalTrade ? 0.4 : 1;
   // Subsistence gate: isolated thorp/hamlet/village produce for themselves only
   const SUBSISTENCE_TIERS_ECO = ['thorp', 'hamlet', 'village'];
-  const isSubsistenceOnly = f && SUBSISTENCE_TIERS_ECO.includes(tier) && !C;
-  if (
-    (!T && hasInst('district market', 'multiple market')
-      ? incomeBuild.push({
-          source: C ? 'Magical Trade Revenue' : 'Market Taxes',
-          percentage: Math.round(45 * M),
-          desc: 'District-level duties on specialized goods; primary civic revenue at metropolis scale.',
-        })
-      : !T && hasInst('daily market')
-        ? incomeBuild.push({
-            source: C ? 'Magical Trade Revenue' : 'Market Taxes',
-            percentage: Math.round(35 * M),
-            desc: C
-              ? 'Trade flowing through teleportation channels generates modest fees and arcane duties.'
-              : 'Daily market tolls, stall fees, and weights-and-measures inspections.',
-          })
-        : !T &&
-          hasInst('market square', 'weekly market', 'annual fair') &&
-          incomeBuild.push({
-            source: C ? 'Magical Trade Revenue' : 'Market Taxes',
-            percentage: Math.round(22 * M),
-            desc: C
-              ? 'Magical trade conduits generate modest fees and arcane duties on transported goods.'
-              : 'Market day stall fees and toll collection on goods entering the market.',
-          }),
-    !T && hasInst('craft guilds (100', 'merchant guilds (50')
-      ? incomeBuild.push({
-          source: 'Guild Licensing',
-          percentage: 28,
-          desc: 'Charter fees, quality inspection levies, and licensing of all trades and crafts.',
-        })
-      : !T &&
-        hasInst('guild') &&
-        incomeBuild.push({
-          source: 'Guild Fees',
-          percentage: 18,
-          desc: 'Annual licensing fees and fines levied by guild oversight.',
-        }),
-    // Port Duties keys on port institutions the catalog actually generates:
-    // 'Docks/port facilities', "Harbour master's office", 'Shipyard'.
-    // 'docks/port' (not bare 'dock') so 'Airship docking' never reads as a
-    // harbour; 'shipyard' must not match 'River boatyard'.
-    hasInst('docks/port', 'harbour master', 'shipyard') && tradeRoute === 'port'
-      ? incomeBuild.push({
-          source: 'Port Duties',
-          percentage: 35,
-          desc: 'Import and export taxes, anchorage fees, and customs inspection on all cargo.',
-        })
-      : hasInst('docks/port', 'port facilit') &&
-        tradeRoute === 'river' &&
-        incomeBuild.push({
-          source: 'River Tolls',
-          percentage: 20,
-          desc: 'Tolls on river traffic, dock fees, and ferry rights.',
-        }),
-    hasInst('banking district', 'stock exchange')
-      ? incomeBuild.push({
-          source: 'Financial Services',
-          percentage: 22,
-          desc: 'Civic taxes on banking operations, letters of credit, and financial transaction fees.',
-        })
-      : hasInst('banking house', 'money changer') &&
-        incomeBuild.push({
-          source: 'Banking Fees',
-          percentage: 14,
-          desc: 'Interest income, currency exchange commissions, and safe deposit charges.',
-        }),
-    getTradeRouteFeatures(tier))
-  ) {
-    const ee = tier === 'metropolis' ? 18 : tier === 'city' ? 14 : 10;
+  const isSubsistenceOnly = isIsolated && SUBSISTENCE_TIERS_ECO.includes(tier) && !magicalTrade;
+  // Market taxes — at most one source, by the largest market present (the source
+  // label + percentage scale ×magicalTradeMultiplier when trade is magical).
+  if (!trueIsolated && hasInst('district market', 'multiple market')) {
+    incomeBuild.push({
+      source: magicalTrade ? 'Magical Trade Revenue' : 'Market Taxes',
+      percentage: Math.round(45 * magicalTradeMultiplier),
+      desc: 'District-level duties on specialized goods; primary civic revenue at metropolis scale.',
+    });
+  } else if (!trueIsolated && hasInst('daily market')) {
+    incomeBuild.push({
+      source: magicalTrade ? 'Magical Trade Revenue' : 'Market Taxes',
+      percentage: Math.round(35 * magicalTradeMultiplier),
+      desc: magicalTrade
+        ? 'Trade flowing through teleportation channels generates modest fees and arcane duties.'
+        : 'Daily market tolls, stall fees, and weights-and-measures inspections.',
+    });
+  } else if (!trueIsolated && hasInst('market square', 'weekly market', 'annual fair')) {
+    incomeBuild.push({
+      source: magicalTrade ? 'Magical Trade Revenue' : 'Market Taxes',
+      percentage: Math.round(22 * magicalTradeMultiplier),
+      desc: magicalTrade
+        ? 'Magical trade conduits generate modest fees and arcane duties on transported goods.'
+        : 'Market day stall fees and toll collection on goods entering the market.',
+    });
+  }
+
+  // Guild revenue — licensing for chartered guilds, else basic fees.
+  if (!trueIsolated && hasInst('craft guilds (100', 'merchant guilds (50')) {
+    incomeBuild.push({
+      source: 'Guild Licensing',
+      percentage: 28,
+      desc: 'Charter fees, quality inspection levies, and licensing of all trades and crafts.',
+    });
+  } else if (!trueIsolated && hasInst('guild')) {
+    incomeBuild.push({
+      source: 'Guild Fees',
+      percentage: 18,
+      desc: 'Annual licensing fees and fines levied by guild oversight.',
+    });
+  }
+
+  // Port/river duties. Port Duties keys on port institutions the catalog actually
+  // generates: 'Docks/port facilities', "Harbour master's office", 'Shipyard'.
+  // 'docks/port' (not bare 'dock') so 'Airship docking' never reads as a harbour;
+  // 'shipyard' must not match 'River boatyard'.
+  if (hasInst('docks/port', 'harbour master', 'shipyard') && tradeRoute === 'port') {
+    incomeBuild.push({
+      source: 'Port Duties',
+      percentage: 35,
+      desc: 'Import and export taxes, anchorage fees, and customs inspection on all cargo.',
+    });
+  } else if (hasInst('docks/port', 'port facilit') && tradeRoute === 'river') {
+    incomeBuild.push({
+      source: 'River Tolls',
+      percentage: 20,
+      desc: 'Tolls on river traffic, dock fees, and ferry rights.',
+    });
+  }
+
+  // Banking revenue.
+  if (hasInst('banking district', 'stock exchange')) {
+    incomeBuild.push({
+      source: 'Financial Services',
+      percentage: 22,
+      desc: 'Civic taxes on banking operations, letters of credit, and financial transaction fees.',
+    });
+  } else if (hasInst('banking house', 'money changer')) {
+    incomeBuild.push({
+      source: 'Banking Fees',
+      percentage: 14,
+      desc: 'Interest income, currency exchange commissions, and safe deposit charges.',
+    });
+  }
+
+  // Property rents — civic-owned buildings, for tiers with trade-route features.
+  if (getTradeRouteFeatures(tier)) {
+    const propertyRentPct = tier === 'metropolis' ? 18 : tier === 'city' ? 14 : 10;
     incomeBuild.push({
       source: 'Property Rents',
-      percentage: ee,
+      percentage: propertyRentPct,
       desc: 'Ground rents on civic-owned buildings, stalls, and residential plots within the walls.',
     });
   }
-  if (
-    (hasInst('courthouse', 'multiple court', 'city hall') &&
-      incomeBuild.push({
-        source: 'Court Fees & Fines',
-        percentage: 10,
-        desc: 'Filing fees, fines levied on offenders, and fees for notarial and legal certification services.',
-      }),
-    !T && tradeRoute === 'crossroads'
-      ? incomeBuild.push({
-          source: 'Toll Revenue',
-          percentage: 20,
-          desc: 'Passage tolls on all roads and bridges serving the crossroads position.',
-        })
-      : !T &&
-        tradeRoute === 'road' &&
-        hasInst('gate', 'town wall', 'city wall') &&
-        incomeBuild.push({
-          source: 'Gate Tolls',
-          percentage: 10,
-          desc: 'Entry and exit tolls collected at the town gates from merchants and travellers.',
-        }),
-    hasInst('garrison', 'multiple garrison', 'professional guard') && ecoPriorities.military > 55)
-  ) {
-    const ee = ecoStressFlags.stateCrime
-      ? {
-          source: 'Military Extraction',
-          percentage: 20,
-          desc: 'Forced contributions and confiscations collected by the garrison — not formally a tax.',
-        }
-      : {
-          source: 'Military Levy',
-          percentage: 12,
-          desc: 'Emergency and standing levies on the population to fund garrison upkeep.',
-        };
-    incomeBuild.push(ee);
+  // Court fees — any judicial institution.
+  if (hasInst('courthouse', 'multiple court', 'city hall')) {
+    incomeBuild.push({
+      source: 'Court Fees & Fines',
+      percentage: 10,
+      desc: 'Filing fees, fines levied on offenders, and fees for notarial and legal certification services.',
+    });
   }
-  const A = institutions.some(function (ee) {
-    var E = (ee.name || '').toLowerCase();
+
+  // Road/bridge tolls — by trade-route position.
+  if (!trueIsolated && tradeRoute === 'crossroads') {
+    incomeBuild.push({
+      source: 'Toll Revenue',
+      percentage: 20,
+      desc: 'Passage tolls on all roads and bridges serving the crossroads position.',
+    });
+  } else if (!trueIsolated && tradeRoute === 'road' && hasInst('gate', 'town wall', 'city wall')) {
+    incomeBuild.push({
+      source: 'Gate Tolls',
+      percentage: 10,
+      desc: 'Entry and exit tolls collected at the town gates from merchants and travellers.',
+    });
+  }
+
+  // Garrison levy — a military-priority settlement with a garrison; an extractive
+  // (state-crime) regime confiscates rather than taxes.
+  if (hasInst('garrison', 'multiple garrison', 'professional guard') && ecoPriorities.military > 55) {
+    incomeBuild.push(
+      ecoStressFlags.stateCrime
+        ? {
+            source: 'Military Extraction',
+            percentage: 20,
+            desc: 'Forced contributions and confiscations collected by the garrison, not formally a tax.',
+          }
+        : {
+            source: 'Military Levy',
+            percentage: 12,
+            desc: 'Emergency and standing levies on the population to fund garrison upkeep.',
+          }
+    );
+  }
+  const hasReligiousInstitution = institutions.some((inst) => {
+    const instName = (inst.name || '').toLowerCase();
     return (
-      (E.includes('parish church') ||
-        E.includes('cathedral') ||
-        E.includes('monastery') ||
-        E.includes('friary') ||
-        E.includes('temple') ||
-        E.includes('graveyard')) &&
-      !E.startsWith('access to')
+      (instName.includes('parish church') ||
+        instName.includes('cathedral') ||
+        instName.includes('monastery') ||
+        instName.includes('friary') ||
+        instName.includes('temple') ||
+        instName.includes('graveyard')) &&
+      !instName.startsWith('access to')
     );
   });
-  ecoInstFlags.religionInfluence > 55 &&
-    A &&
-    (ecoStressFlags.theocraticEconomy
-      ? incomeBuild.push({
-          source: 'Church Tithes & Rents',
-          percentage: Math.round(ecoInstFlags.religionInfluence / 4),
-          desc: 'Mandatory tithes plus rent income from church-owned land dominating the local economy.',
-        })
-      : incomeBuild.push({
-          source: 'Church Tithes',
-          percentage: Math.round(ecoInstFlags.religionInfluence / 5),
-          desc: 'Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.',
-        }),
-    ecoInstFlags.religionInfluence > 68 &&
-      A &&
-      (tradeRoute === 'crossroads' || tradeRoute === 'road') &&
+  // Church income — a theocratic economy adds church rents on top of tithes.
+  if (ecoInstFlags.religionInfluence > 55 && hasReligiousInstitution) {
+    if (ecoStressFlags.theocraticEconomy) {
       incomeBuild.push({
-        source: 'Pilgrim Trade',
-        percentage: Math.round(ecoInstFlags.religionInfluence / 9),
-        desc: 'Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.',
-      })); // ── Three-tier magic economy ──────────────────────────────────────────────
+        source: 'Church Tithes & Rents',
+        percentage: Math.round(ecoInstFlags.religionInfluence / 4),
+        desc: 'Mandatory tithes plus rent income from church-owned land dominating the local economy.',
+      });
+    } else {
+      incomeBuild.push({
+        source: 'Church Tithes',
+        percentage: Math.round(ecoInstFlags.religionInfluence / 5),
+        desc: 'Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.',
+      });
+    }
+  }
+  // Pilgrim trade — a strongly religious settlement on a travelled route.
+  if (
+    ecoInstFlags.religionInfluence > 68 &&
+    hasReligiousInstitution &&
+    (tradeRoute === 'crossroads' || tradeRoute === 'road')
+  ) {
+    incomeBuild.push({
+      source: 'Pilgrim Trade',
+      percentage: Math.round(ecoInstFlags.religionInfluence / 9),
+      desc: 'Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.',
+    });
+  }
+
+  // ── Three-tier magic economy ──────────────────────────────────────────────
   // Tier thresholds scale with settlement size — small settlements need higher
   // magic density to support commercial arcane activity
   const magPri = ecoInstFlags.magicInfluence; // priorityMagic value (0-100)
@@ -1796,7 +1816,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc:
           magPri < 60
             ? 'Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services.'
-            : 'A busy market for spell services — identification, augury, message sending, and contract-grade enchanting brings steady coin.',
+            : 'A busy market for spell services: identification, augury, message sending, and contract-grade enchanting brings steady coin.',
       });
     }
 
@@ -1823,12 +1843,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     }
   }
   const v = generateTradeIncomeStreams(tier, institutions, tradeRoute, goodsToggles, { ...config });
-  ((ne = v.incomeBonuses) == null || ne.forEach((ee) => incomeBuild.push(ee)),
+  ((tradeBonuses = v.incomeBonuses) == null || tradeBonuses.forEach((bonus) => incomeBuild.push(bonus)),
     ecoStressFlags.merchantArmy &&
       incomeBuild.push({
         source: 'Security Contracts',
         percentage: 12,
-        desc: 'Guild-funded private security surcharges — effectively a privatised protection tax on trade.',
+        desc: 'Guild-funded private security surcharges, effectively a privatised protection tax on trade.',
       }),
     safetyProfile.blackMarketCapture > 10 &&
       (() => {
@@ -1854,7 +1874,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                 : bmc >= 20
                   ? 'Shadow Economy (untaxed)'
                   : 'Black Market Revenue';
-        const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels — ${
+        const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels: ${
           hasGuild
             ? 'guild-organised fencing, extortion, and black market trade'
             : hasSmuggling
@@ -1909,7 +1929,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Grain Sales',
           percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
           desc: X('grain_field', 'fertile_flood')
-            ? 'Surplus from local harvest sold to nearby settlements and passing merchants — steady income tied to the growing season.'
+            ? 'Surplus from local harvest sold to nearby settlements and passing merchants. Steady income tied to the growing season.'
             : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
         }),
       (ee.some(function (K) {
@@ -1926,7 +1946,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
           desc: X('grazing_land')
             ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-            : 'Wool bought from pastoral regions and processed locally — value-add trade dependent on consistent supply.',
+            : 'Wool bought from pastoral regions and processed locally. Value-add trade dependent on consistent supply.',
         }),
       (X('iron_deposit', 'coal_deposit', 'precious_metal') ||
         ((ee.some(function (K) {
@@ -1942,7 +1962,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Iron & Metalwork',
           percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
           desc: X('iron_deposit', 'coal_deposit', 'precious_metal')
-            ? 'Local ore feeds the smithy directly — metalwork income is not trade-route dependent.'
+            ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
             : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
         }),
       X('managed_forest', 'forest_access', 'timber_rights') &&
@@ -1953,7 +1973,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
           desc: X('managed_forest', 'shipbuilding_timber', 'hunting_ground')
             ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-            : 'Timber sourced from more distant forests and resold or processed locally — trade route dependent.',
+            : 'Timber sourced from more distant forests and resold or processed locally. Trade route dependent.',
         }),
       (ee.some(function (K) {
         return K.includes('fish') || K.includes('herring') || K.includes('cod') || K.includes('salt');
@@ -1980,7 +2000,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Stone Quarrying',
           percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
           desc: X('stone_quarry', 'gemstone')
-            ? 'Local quarry provides dressed stone to regional builders — reliable income with low transport overhead.'
+            ? 'Local quarry provides dressed stone to regional builders. Reliable income with low transport overhead.'
             : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
         }),
       goodsToggles && Object.keys(goodsToggles).length > 0)
@@ -2088,10 +2108,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     if (E >= 2 && X >= 60 && (O('mercenary') || O('garrison') || O('barracks') || O('professional guard'))) {
       const fe =
         X >= 80
-          ? 'Military services — standing army leasing, siege engineering, garrison contracts'
+          ? 'Military services: standing army leasing, siege engineering, garrison contracts'
           : O('mercenary')
-            ? 'Mercenary services — trained companies available for hire'
-            : 'Military services — garrison contracts and armed escort';
+            ? 'Mercenary services: trained companies available for hire'
+            : 'Military services: garrison contracts and armed escort';
       re.some(function (ge) {
         return ge.toLowerCase().includes('military') || ge.toLowerCase().includes('mercenary');
       }) || re.push(fe);
@@ -2110,18 +2130,18 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           dt = F.includes('occupied') || K > 65,
           Gt =
             ke && dt
-              ? 'Slave trade — transit market for human trafficking; imported labour and exported captives'
+              ? 'Slave trade: transit market for human trafficking; imported labour and exported captives'
               : ke
-                ? 'Slave labour — purchased workforce for agricultural estates, mines, and domestic service'
+                ? 'Slave labour: purchased workforce for agricultural estates, mines, and domestic service'
                 : dt
-                  ? 'Captive trade — war captives and debtors sold through established trafficking networks'
-                  : 'Slave trade — human trafficking and forced labour; legally tolerated or actively regulated';
+                  ? 'Captive trade: war captives and debtors sold through established trafficking networks'
+                  : 'Slave trade: human trafficking and forced labour; legally tolerated or actively regulated';
         (re.push(Gt),
           ke &&
             !q.some(function (Me) {
               return Me.toLowerCase().includes('slave');
             }) &&
-            q.push('Enslaved labour — purchased from regional trafficking networks'));
+            q.push('Enslaved labour: purchased from regional trafficking networks'));
       }
     }
   }
@@ -2153,11 +2173,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       return;
     const ge = isUnderStress || isEffectivelyIsolated ? 'critical' : 'vulnerable',
       ke = isUnderStress
-        ? 'Supply route severed — operating at minimal capacity or shut down.'
+        ? 'Supply route severed. Operating at minimal capacity or shut down.'
         : isEffectivelyIsolated
-          ? 'No trade access — running on existing stockpiles only.'
+          ? 'No trade access. Running on existing stockpiles only.'
           : _hasMagicTradeForDeps && isIsolatedRoute
-            ? 'Supplied via magical trade infrastructure — teleportation imports replace road access.'
+            ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
     H.push({
       institution: de,
@@ -2468,16 +2488,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           hasMarketInst = hasInst('market', 'trading', 'merchant', 'guild');
         return tier === 'metropolis' || tier === 'city'
           ? incomeSourceCount >= 9
-            ? 'Highly diversified — multiple major revenue streams'
+            ? 'Highly diversified: multiple major revenue streams'
             : incomeSourceCount >= 6
-              ? 'Diversified — broad institutional economic base'
-              : 'Concentrated — fewer revenue streams than scale suggests'
+              ? 'Diversified: broad institutional economic base'
+              : 'Concentrated: fewer revenue streams than scale suggests'
           : tier === 'town'
             ? hasMarketInst && incomeSourceCount >= 6
               ? 'Diversified market economy'
               : incomeSourceCount >= 4
                 ? 'Specialized production and trade'
-                : 'Limited — narrow economic base for this scale'
+                : 'Limited: narrow economic base for this scale'
             : tier === 'village'
               ? hasMarketInst
                 ? 'Mixed subsistence and market'
@@ -2486,7 +2506,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                   : 'Subsistence with minor surplus'
               : exportCount >= 3
                 ? 'Subsistence with surplus'
-                : 'Subsistence — survival economy';
+                : 'Subsistence: survival economy';
       })(),
     }
   );
@@ -2585,7 +2605,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
         description: `${vulnerable.length} institution${vulnerable.length > 1 ? 's' : ''} depend on imported materials (${vulnerable
           .slice(0, 3)
           .map((d) => d.resource)
-          .join(', ')}). Standard for this trade route — vulnerability if supply is disrupted.`,
+          .join(', ')}). Standard for this trade route, with vulnerability if supply is disrupted.`,
       });
   }
 

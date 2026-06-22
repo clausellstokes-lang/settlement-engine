@@ -159,7 +159,7 @@ export default function GalleryModerationPanel() {
                 padding: SP.md,
                 border: `1px solid ${report.status === 'open' ? RED : BORDER}`,
                 borderRadius: R.md,
-                background: report.status === 'open' ? '#fffaf7' : CARD,
+                background: report.status === 'open' ? CARD_ALT : CARD,
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm }}>

@@ -132,7 +132,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   government: {
     dominant: [
       'Tax collection slows; the watch loses paid authority.',
-      'A succession contender steps forward — possibly a rival faction.',
+      'A succession contender steps forward, possibly a rival faction.',
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
@@ -147,7 +147,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   religious: {
     dominant: [
       'Temple relief authority weakens; food queues lengthen.',
-      'A sectarian successor emerges — possibly with a harder line.',
+      'A sectarian successor emerges, possibly with a harder line.',
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
@@ -217,7 +217,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
   occupation: {
     dominant: [
-      'The homeland recalls or replaces — the replacement is an unknown quantity.',
+      'The homeland recalls or replaces. The replacement is an unknown quantity.',
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],

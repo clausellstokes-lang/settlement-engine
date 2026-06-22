@@ -20,14 +20,15 @@ import { track, EVENTS } from '../lib/analytics.js';
 // panels (Institutions/Services/Trade) are absorbed into its Deep-constraints
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
+import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { INK, MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
-import { ModeSelector } from './generate/ModeSelector.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
@@ -280,7 +281,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         showHomeHero={showHomeHero}
         showModePicker={showModePicker}
         isMobile={isMobile}
-        wizardMode={wizardMode}
         setWizardMode={setWizardMode}
         authTier={authTier}
         onSignIn={onSignIn}
@@ -297,14 +297,15 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // hero generates instantly; the mode picker is signed-in only).
   if (!settlement) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
+      // Cap the config stage to the shared page width — mirrors the dossier
+      // branch (PAGE_MAX, below) so the input view is framed, not full-bleed (P12).
+      <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
-        {authTier === 'anon' && (
-          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'], border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
-            Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
-          </div>
-        )}
+        {/* The anon-in-panel "Free mode generates Thorp/Hamlet/Village" banner
+            was removed: anon users never pick a mode, so this config-panel branch
+            is unreachable for them (dead code), and its tier list contradicted
+            the hero's ('hamlet/village/town') and the real cap ('town'). */}
 
         <WizardLoadedBanners
           loadedFromSave={loadedFromSave}
@@ -313,35 +314,56 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           clearNeighbour={clearNeighbour}
         />
 
-        {/* Helper banner — the one progressive surface */}
-        <div style={{
-          padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
-          border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
-          borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
-        }}>
-          <strong style={{ fontFamily: serif_ }}>Create a Settlement</strong>
-          {', '}Pick a character and the foundations, then Generate. Open Fine-tune or
-          Deep constraints for full control over institutions, services, and trade.
-        </div>
+        {/* Instructional intro — the canonical PageHeader idiom (eyebrow + serif
+            title + italic subtitle), shared with the standalone surfaces. The
+            only saturated-gold mass on this page is the Generate button (P4
+            one-focal-point); the small-size header carries the section label
+            without out-shouting it. Mode-specific guidance rides the subtitle. */}
+        <PageHeader
+          size="sm"
+          eyebrow={t('generate.introEyebrow')}
+          title={t('generate.introTitle')}
+          subtitle={wizardMode === 'advanced'
+            ? t('generate.introSubtitleAdvanced')
+            : t('generate.introSubtitleBasic')}
+        />
 
         <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
-          <LayeredConfigurationPanel />
+          <LayeredConfigurationPanel mode={wizardMode === 'advanced' ? 'advanced' : 'basic'} />
         </div>
 
+        {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
+            review step; Advanced, where the user set real constraints, gets a
+            "Ready to generate" summary so Generate reads as a confirmation. */}
+        {wizardMode === 'advanced' && <WizardCloseout />}
+
+        {/* First-generation failures land HERE too. The store re-throws before it
+            ever sets `settlement`, so on a failed first roll the pre-generate
+            branch re-renders — without this block the error had no DOM home and
+            the click was a silent dead-end (P10). The Generate button below is the
+            retry affordance. */}
+        {generateError && (
+          <div role="alert" style={{
+            padding: `${SP.sm}px ${SP.md}px`,
+            background: swatch.dangerBg,
+            border: `1px solid ${DANGER_BORDER}`,
+            borderRadius: R.md,
+            color: swatch.danger,
+            fontFamily: sans,
+            fontSize: FS.sm,
+          }}>
+            {generateError}
+          </div>
+        )}
+
+        {/* The single primary CTA on the pre-generate region — styled entirely by
+            the Button primitive (no re-skinning gradient/shadow/raw font), so it
+            reads as the one focal point (P4) with the canonical primary look. */}
         <Button
           variant="primary"
           fullWidth
           onClick={handleGenerate}
           data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
-          style={{
-            padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
-            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: swatch.white, border: 'none', borderRadius: R.lg + 2,
-            fontFamily: serif_,
-            fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
-            boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
-            transition: 'opacity 0.15s, transform 0.1s',
-          }}
         >
           Generate Draft
         </Button>
@@ -360,47 +382,31 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-      {/* Generate button — Regenerate when a settlement already exists. */}
+      {/* Regenerate — a SUBORDINATE control. The dossier below is the post-reveal
+          hero (P1/P9); re-rolling discards the current draft, so it must not
+          out-shout the content the reveal just earned. It's a quiet right-aligned
+          secondary, not a full-width gold band. Save (below the dossier) is the
+          single primary post-generate action. */}
       {settlement && (
-        <div>
-          <Button
-            variant="primary"
-            fullWidth
-            onClick={handleGenerate}
-            style={{
-              padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
-              background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-              color: swatch.white, border: 'none', borderRadius: R.lg + 2,
-              fontFamily: serif_,
-              fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
-              boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
-              transition: 'opacity 0.15s, transform 0.1s',
-            }}
-            onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
-            onFocus={e => e.currentTarget.style.opacity = '0.92'}
-            onMouseOut={e => e.currentTarget.style.opacity = '1'}
-            onBlur={e => e.currentTarget.style.opacity = '1'}
-          >
-            {settlement ? 'Regenerate Draft' : 'Generate Draft'}
-          </Button>
-          {!settlement && (
-            <p className="sf-readable-strip" style={{
-              display: 'block',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
-              fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
-              lineHeight: 1.5,
-            }}>
-              {t('generate.subline')}
-            </p>
-          )}
+        <>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleGenerate}
+              aria-label="Regenerate draft"
+              title="Roll a fresh draft from the same configuration. The current draft is discarded."
+            >
+              {/* The ↻ glyph is decorative; the aria-label carries the accessible name. */}
+              <span aria-hidden="true">↻ </span>Regenerate draft
+            </Button>
+          </div>
           {generateError && (
-            <div style={{
+            <div role="alert" style={{
               marginTop: SP.sm,
               padding: `${SP.sm}px ${SP.md}px`,
               background: swatch.dangerBg,
-              border: '1px solid #e8b0b0',
+              border: `1px solid ${DANGER_BORDER}`,
               borderRadius: R.md,
               color: swatch.danger,
               fontFamily: sans,
@@ -409,7 +415,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               {generateError}
             </div>
           )}
-        </div>
+        </>
       )}
 
       {/* Pipeline reveal overlay. Renders only when the flag is on,
@@ -435,7 +441,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             handleNewSettlement={handleNewSettlement}
           />
 
-          <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
+          <Suspense fallback={
+            // Minimal dossier skeleton (a couple of header/stat bars at page
+            // width) so the rare cold-load reads as the dossier assembling, not
+            // a bare "loading" line (P9/P10).
+            <div aria-hidden="true" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.md, padding: `${SP.lg}px 0` }}>
+              <div style={{ height: 28, width: '40%', borderRadius: R.md, background: MUTED, opacity: 0.35 }} />
+              <div style={{ height: 14, width: '60%', borderRadius: R.sm, background: MUTED, opacity: 0.25 }} />
+              <div style={{ display: 'flex', gap: SP.md, marginTop: SP.sm }}>
+                {[0,1,2].map(i => <div key={i} style={{ flex: 1, height: 64, borderRadius: R.md, background: MUTED, opacity: 0.2 }} />)}
+              </div>
+            </div>
+          }>
             {/* Cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
                 toolbar above stays full-width. */}
@@ -455,79 +472,58 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           </div>
 
           {/* Post-generate "what's next" guide. Closes out the
-              post-generate flow (mirrors WizardCloseout's pre-generate
-              close-out) with a state-aware next-step checklist. Self-gates
-              on the flag; guidance only, so it never competes with the
-              canonical Save / Export / New controls above. */}
+              post-generate flow with a state-aware next-step checklist.
+              Self-gates on the flag; guidance only, so it never competes with
+              the canonical Save / Export / New controls above. */}
           <WizardNextSteps />
-
-          <ConfirmDialog
-            open={!!pendingExit}
-            tone="warning"
-            title="Leave this settlement?"
-            body="This settlement hasn't been saved yet. It's randomly generated, so the exact result won't come back, though your configuration is kept so you can regenerate."
-            confirmLabel={pendingExit === 'new' ? 'Discard and start new' : 'Discard and go back'}
-            onConfirm={() => doExit(pendingExit)}
-            onCancel={() => setPendingExit(null)}
-          />
         </>
       )}
 
-      {/* When settlement exists but user navigated back — show re-view option + mode picker */}
+      {/* When settlement exists but user navigated back — re-view + start-new.
+          The full Basic/Advanced picker lives on the Create landing; offering a
+          second copy of it here was a redundant entry point, so "Start a new
+          settlement" simply returns there (Regenerate above still re-rolls the
+          same config). */}
       {settlement && !showOutput && (
-        <>
-          <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: swatch.successBg,
-            border: '1px solid #4a8a60', borderRadius: R.lg,
-            display: 'flex', alignItems: 'center', gap: SP.md,
-          }}>
-            <div style={{ flex: 1 }}>
-              <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>
-                Last generated: {settlement.name || 'Untitled'}
-              </span>
-              <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: SP.sm }}>
-                {settlement.tier}
-              </span>
-            </div>
-            <Button
-              variant="success"
-              size="sm"
-              onClick={() => setShowOutput(true)}
-            >
+        // "You navigated back" is not a success EVENT, so it loses the green
+        // bordered card (a fourth distinct border treatment for a non-success
+        // state). A borderless spacing-grouped row carries it instead — name+tier
+        // text on the left, the two nav controls on the right (P5). "View" is the
+        // lead action (primary); "Start new" is the subordinate reset.
+        <div style={{
+          padding: `${SP.sm}px ${SP.xs}px`,
+          display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap',
+        }}>
+          <div style={{ flex: 1, minWidth: 160 }}>
+            <span style={{ fontSize: FS.md, fontWeight: 700, color: INK }}>
+              Last generated: {settlement.name || 'Untitled'}
+            </span>
+            <span style={{ fontSize: FS.sm, color: MUTED, marginLeft: SP.sm }}>
+              {settlement.tier}
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: SP.sm }}>
+            <Button variant="secondary" size="sm" onClick={handleNewSettlement}>
+              Start a new settlement
+            </Button>
+            <Button variant="primary" size="sm" onClick={() => setShowOutput(true)}>
               View Settlement
             </Button>
           </div>
-
-          {/* Mode picker — let the user start fresh in either generation mode.
-              Picking a mode here clears the current settlement so the wizard
-              re-enters its empty state in the chosen mode. The Regenerate
-              button above stays available for "same config, new roll". */}
-          <div style={{
-            padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`,
-            background: CARD,
-            border: `1px solid ${BORDER}`,
-            borderRadius: R.lg,
-          }}>
-            <div style={{ textAlign: 'center', marginBottom: SP.md }}>
-              <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
-                Or start a new settlement
-              </div>
-              <div style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED }}>
-                Pick a mode to begin a fresh generation. Your last settlement remains saved above.
-              </div>
-            </div>
-            <ModeSelector
-              mode={wizardMode}
-              onModeChange={(newMode) => {
-                if (clearSettlement) clearSettlement();
-                setWizardMode(newMode);
-                setWizardStep(0);
-                setShowOutput(false);
-              }}
-            />
-          </div>
-        </>
+        </div>
       )}
+
+      {/* Leave-confirm — rendered once at the top level so it works whether the
+          dossier is showing or the user has navigated back. */}
+      <ConfirmDialog
+        open={!!pendingExit}
+        tone="warning"
+        title="Leave this settlement?"
+        body="This settlement is not saved yet. It is randomly generated, so the exact result will not come back. Your configuration stays, so you can roll it again."
+        confirmLabel={pendingExit === 'new' ? 'Discard and start new' : 'Discard and go back'}
+        onConfirm={() => doExit(pendingExit)}
+        onCancel={() => setPendingExit(null)}
+      />
     </div>
   );
 }

@@ -139,7 +139,7 @@ describe('upstream notes/weaknesses come from the data graph only', () => {
     expect(smelting, 'smelting chain should be active').toBeTruthy();
     // No local iron chain → data graph flags iron as the missing import.
     expect(smelting.upstreamMissing).toEqual(['iron']);
-    expect(smelting.upstreamNote).toBe('Needs imported iron — no local source');
+    expect(smelting.upstreamNote).toBe('Needs imported iron: no local source');
     // The old hardcoded map would have stamped "fuel or timber disrupted".
     expect(smelting.upstreamNote).not.toMatch(/timber/);
   });

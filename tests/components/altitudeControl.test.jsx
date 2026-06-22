@@ -21,10 +21,24 @@ describe('AltitudeControl — the 3-segment progressive-disclosure control', () 
     expect(radios.map(r => r.textContent)).toEqual(['Overview', 'Detail', 'Engine']);
   });
 
-  test('the default rung (guided / Overview) is checked', () => {
+  test('the default rung (standard / Detail) is checked', () => {
     const { getByText } = render(<AltitudeControl />);
+    expect(getByText('Detail').getAttribute('aria-checked')).toBe('true');
+    expect(getByText('Overview').getAttribute('aria-checked')).toBe('false');
+  });
+
+  test('controlled mode: value/onChange drive it locally without touching the store', () => {
+    const calls = [];
+    useStore.getState().setDetailLevel('standard');
+    const { getByText } = render(
+      <AltitudeControl value="guided" onChange={(l) => calls.push(l)} />,
+    );
+    // Reflects the controlled value, not the store.
     expect(getByText('Overview').getAttribute('aria-checked')).toBe('true');
-    expect(getByText('Detail').getAttribute('aria-checked')).toBe('false');
+    fireEvent.click(getByText('Engine'));
+    // Routes to onChange, leaves the global pref untouched.
+    expect(calls).toEqual(['expert']);
+    expect(useStore.getState().userPrefs.detailLevel).toBe('standard');
   });
 
   test('clicking a segment writes the pref (and re-checks)', () => {

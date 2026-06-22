@@ -47,10 +47,16 @@ export const ROUTES = Object.freeze([
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery' },
-  { view: 'compare',               path: '/compare',               title: 'Compare SettlementForge' },
-  { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'SettlementForge vs ChatGPT' },
-  { view: 'compare-worldographer', path: '/compare/worldographer', title: 'SettlementForge vs Worldographer' },
-  { view: 'compare-kanka',         path: '/compare/kanka',         title: 'SettlementForge vs Kanka' },
+  // The dedicated competitor pages were deleted; App's redirect effect bounces
+  // every `compare*` view to /how-to?tab=compare (the competitor-agnostic "How
+  // We Compare" tab). The path entries stay so old/SEO links still resolve
+  // instead of 404ing, but the titles are retired to the destination ('About')
+  // so the one-frame pre-redirect document.title matches where the GM lands —
+  // no flash of a named-competitor title for a page that no longer exists.
+  { view: 'compare',               path: '/compare',               title: 'About' },
+  { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'About' },
+  { view: 'compare-worldographer', path: '/compare/worldographer', title: 'About' },
+  { view: 'compare-kanka',         path: '/compare/kanka',         title: 'About' },
   { view: 'signin',                path: '/signin',                title: 'Sign In' },
   { view: 'register',              path: '/register',              title: 'Create Your Account' },
   { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password' },

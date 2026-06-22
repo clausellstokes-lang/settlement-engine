@@ -7,7 +7,7 @@
  * handler arrives via props; state and handlers stay in the parent.
  */
 
-import { ArrowLeft, Zap } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
@@ -26,8 +26,12 @@ export function WizardOutputToolbar({
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
       position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
     }}>
+      {/* Back is a subordinate nav/reset that discards the just-earned draft — it
+          must not out-shout the dossier or Save (P8). Demoted to the same
+          secondary outline as "New" so Save (below) stays the single primary of
+          the post-generate region; the ArrowLeft icon keeps the affordance. */}
       <Button
-        variant="gold"
+        variant="secondary"
         size="md"
         icon={<ArrowLeft size={14} />}
         onClick={handleBack}
@@ -57,11 +61,13 @@ export function WizardOutputToolbar({
           pointing at the same outcome was confusing and meant
           users frequently clicked the worse one. */}
       <div style={{ display: 'flex', gap: SP.xs }}>
+        {/* "New" is a reset (start over), not the high-value action — a quiet
+            outline. Save (below the dossier) is the one primary. */}
         <Button
-          variant="primary"
+          variant="secondary"
           size="md"
-          icon={<Zap size={14} />}
           onClick={handleNewSettlement}
+          title="Start a new settlement from the Create landing"
         >
           New
         </Button>

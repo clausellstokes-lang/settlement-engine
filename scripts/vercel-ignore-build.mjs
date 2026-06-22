@@ -44,7 +44,12 @@
 
 import { pathToFileURL } from 'node:url';
 
-const REQUIRED_CHECKS = [
+// Exported so a test can assert these still match the `name:` of every job in
+// .github/workflows/ci.yml — a renamed CI job would otherwise leave the gate
+// requiring a check that never reports, blocking every deploy forever (the gate
+// is fail-closed, so the failure is safe but total). The drift guard lives in
+// tests/build/ciGateHardening.test.js.
+export const REQUIRED_CHECKS = [
   'Validate, test, build', // the `check` job (job name shown in the Checks API)
   'Chromium end-to-end', // the `e2e` job
   'Edge function execution tests (Deno)', // the `deno-tests` job

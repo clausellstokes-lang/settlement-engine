@@ -23,7 +23,7 @@
 import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
+import { INK, sans, serif_, FS, SP, R, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
@@ -50,7 +50,7 @@ function markDismissed() {
   }
 }
 
-export default function WelcomeCreditCard({ saveId = null }) {
+export default function WelcomeCreditCard({ saveId = null, onVisibilityChange }) {
   const tier = useStore(s => s.auth.tier);
   const userId = useStore(s => s.auth.user?.id);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
@@ -59,6 +59,16 @@ export default function WelcomeCreditCard({ saveId = null }) {
 
   const [dismissed, setDismissed] = useState(() => readDismissed());
   const [welcomeUnspent, setWelcomeUnspent] = useState(false);
+
+  // Report visibility upward so the dossier shell can suppress its OTHER violet
+  // narrative pitch (the DossierActionBand eyebrow/copy/buttons) while this card
+  // is showing — only one Narrate pitch should compete for the focal point in
+  // the chrome stack at a time. Mirrors the card's own early-return predicate.
+  const isVisible = !dismissed && welcomeUnspent && !!settlement;
+  useEffect(() => {
+    onVisibilityChange?.(isVisible);
+    return () => onVisibilityChange?.(false);
+  }, [isVisible, onVisibilityChange]);
 
   // Ask the server whether the welcome credit is still available. We do
   // this once per mount + on user id change. The fetch is small and only
@@ -113,54 +123,54 @@ export default function WelcomeCreditCard({ saveId = null }) {
     setDismissed(true);
   };
 
+  // A tinted left-accent callout, not a second floating card. No full border,
+  // no drop shadow, and no internal header/body divider: the eyebrow + heading +
+  // prose group is held together by tight spacing, and looser spacing sets the
+  // cost+CTA row apart — so it reads as a callout within the dossier card rather
+  // than a card stacked on top of it. (Mirrors the DossierActionBand idiom.)
   return (
     <div style={{
-      maxWidth: 480, margin: `${SP.md}px auto`,
-      background: swatch.white, border: `1px solid ${BORDER}`,
-      borderRadius: R.lg, overflow: 'hidden',
-      boxShadow: '0 6px 20px rgba(27,20,8,0.08)',
+      margin: `${SP.md}px ${SP.lg}px`,
+      padding: SP.md,
+      background: `linear-gradient(135deg, ${VIOLET_BG}88, ${VIOLET_BG}33)`,
+      borderLeft: `3px solid ${VIOLET}`,
+      borderRadius: R.md,
       fontFamily: sans,
     }}>
-      <div style={{
-        padding: SP.md,
-        background: `linear-gradient(135deg, ${VIOLET_BG}88, ${VIOLET_BG}44)`,
-        borderBottom: `1px solid ${VIOLET}30`,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: '50%',
+          background: VIOLET_BG, color: VIOLET,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: FS.xl,
+        }}>✦</div>
+        <div style={{ flex: 1 }}>
           <div style={{
-            width: 36, height: 36, borderRadius: '50%',
-            background: VIOLET_BG, color: VIOLET,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: FS.xl,
-          }}>✦</div>
-          <div style={{ flex: 1 }}>
-            <div style={{
-              fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: VIOLET,
-            }}>
-              Welcome credit · on us
-            </div>
-            <div style={{
-              fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
-              color: INK, marginTop: 2,
-            }}>
-              Try the Narrative Layer once.
-            </div>
+            fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+            textTransform: 'uppercase', color: VIOLET,
+          }}>
+            Welcome credit · on us
+          </div>
+          <div style={{
+            fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
+            color: INK, marginTop: 2,
+          }}>
+            Try the Narrative Layer once.
           </div>
         </div>
-        <p style={{
-          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
-          lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
-        }}>
-          It’ll turn this town’s data into prose your players can hear,
-          the difference between a sheet and a session.
-        </p>
       </div>
+      <p style={{
+        margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
+        lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
+      }}>
+        It turns this town's facts into prose your players can hear,
+        the difference between a sheet and a session.
+      </p>
       <div style={{
-        padding: SP.md, display: 'flex',
+        marginTop: SP.lg, display: 'flex',
         alignItems: 'center', gap: SP.sm,
       }}>
-        <div style={{ flex: 1, fontSize: FS.xs, color: MUTED }}>
+        <div style={{ flex: 1, fontSize: FS.xs, color: BODY }}>
           <div>Cost: <s>3 credits</s></div>
           <div style={{ fontWeight: 700, color: VIOLET }}>This one: free</div>
         </div>

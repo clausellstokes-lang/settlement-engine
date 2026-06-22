@@ -104,7 +104,7 @@ function detectStressorUnconsumed(settlement) {
       out.push({
         severity: 'info',
         type: 'stressor_unconsumed',
-        message: `Stressor "${key}" has no matching active condition — it may be applied only as cosmetic state.`,
+        message: `Stressor "${key}" has no matching active condition. It may be applied only as cosmetic state.`,
         references: [],
       });
     }

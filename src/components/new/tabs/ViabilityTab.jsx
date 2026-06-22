@@ -9,7 +9,7 @@ import {isMobile} from '../tabConstants';
 import {NarrativeNote} from '../NarrativeNote';
 
 export function ViabilityTab({settlement:s, narrativeNote}) {
-  if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
+  if (!s?.economicViability) return <Empty message="No coherence reading on file for this settlement."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
   const _mobile = isMobile();
@@ -84,14 +84,14 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:6}}>
               <span style={{fontSize: FS['22'],fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
-                {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : ' MARGINAL COHERENCE'}
+                {viable===false ? '✗ Not coherent' : viable===true ? '✓ Coherent' : ' Marginal coherence'}
               </span>
             </div>
             {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
             <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
-              This tab checks whether your settlement makes logical sense. Not whether it&apos;s economically optimised.
-              A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
-              pieces fit together plausibly.
+              A coherent settlement holds together logically, even if some resources go untapped and some
+              needs go unmet. The question is not whether the place runs efficiently. The question is
+              whether the pieces fit.
             </p>
           </div>
           {/* Quick metric pills */}
@@ -113,10 +113,9 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
             ✦ Magic Dependency Detected
           </div>
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
-            This settlement's resilience relies on active magical infrastructure. One or more supply
-            chains are magically sustained, or stress conditions are being offset by arcane, divine,
-            or druidic intervention. Loss of magical practitioners. Through conflict, plague, or
-            political disruption. Would immediately expose critical vulnerabilities.
+            This settlement leans on working magic to stay standing. A supply chain runs on it, or a
+            stress condition is held off by arcane, divine, or druidic hands. Lose the practitioners to
+            conflict, plague, or a political purge, and the buried weaknesses surface at once.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
             <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,

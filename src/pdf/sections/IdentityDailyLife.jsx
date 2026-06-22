@@ -32,8 +32,8 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
   const founded = foundingLabel(id.founding);
   const idRows = [
     { label: 'Name',          value: id.name },
-    { label: 'Tier',          value: id.tier || '—' },
-    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '—' },
+    { label: 'Tier',          value: id.tier || '–' },
+    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '–' },
     id.dominantRace   ? { label: 'Dominant Race', value: humanize(id.dominantRace) } : null,
     id.terrain        ? { label: 'Terrain',       value: humanize(id.terrain) } : null,
     id.layout         ? { label: 'Layout',        value: humanize(id.layout) } : null,

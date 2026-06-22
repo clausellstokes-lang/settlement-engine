@@ -4,10 +4,14 @@
  * tests/ui/pricingPageVariant.test.jsx — UX Phase 9 pricing A/B seam.
  *
  * The canonical "What the Realm unlocks" surface (PricingPage) must render BOTH
- * copy variants, selected by the `pricingSimulationCopy` flag:
- *   - flag OFF → the current copy (subtitle "Pay once for credits…").
- *   - flag ON  → the simulation-led copy ("…run the region for years.") + the
- *     simulation-led Cartographer feature list, naming NO size as premium.
+ * copy variants, selected by the `pricingSimulationCopy` flag (ON by default —
+ * the simulation-led copy is the shipped conversion surface):
+ *   - flag ON (default) → the simulation-led variant Cartographer feature list,
+ *     naming NO size as premium.
+ *   - flag OFF → the default tier feature framing (unlimited saves wording).
+ * Both states now lead with one simulation-led subtitle (the About<->Pricing
+ * one-story reconciliation); the flag toggles only the tier feature framing.
+ * Each case pins the flag explicitly rather than leaning on the default.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -38,10 +42,15 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 describe('PricingPage — A/B copy variant', () => {
-  it('flag OFF renders the current pricing subtitle', async () => {
+  it('flag OFF renders the default tier framing under the unified subtitle', async () => {
+    setFlagOverride('pricingSimulationCopy', false); // explicit — the default is now ON
     const PricingPage = (await import('../../src/components/PricingPage.jsx')).default;
     const { container } = render(<PricingPage onNavigate={() => {}} />);
-    expect(container.textContent).toContain('Pay once for credits');
+    const text = container.textContent.toLowerCase();
+    // Both flag states now lead with the one simulation-led subtitle.
+    expect(text).toContain('run the region for years');
+    // Flag OFF keeps the default tier feature framing (unlimited saves wording).
+    expect(text).toContain('unlimited saves');
   });
 
   it('flag ON renders the simulation-led subtitle + features', async () => {

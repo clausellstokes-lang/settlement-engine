@@ -178,7 +178,7 @@ describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
 // edits can't silently rip out the t() call without the test catching it.
 describe('Tier 7.14 migration coverage', () => {
   it('exposes all account card labels', () => {
-    expect(t('account.setDisplayName')).toBe('Set Display Name');
+    expect(t('account.setDisplayName')).toBe('Set display name');
     expect(t('account.subscriptionHeading')).toBe('Subscription & Credits');
     expect(t('account.cardCurrentTier')).toBe('Current Tier');
     expect(t('account.cardCredits')).toBe('Narrative Credits');

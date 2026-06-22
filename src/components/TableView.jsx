@@ -21,11 +21,12 @@
  * unconditionally when present.
  */
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { X } from 'lucide-react';
-import { FS, ELEV, swatch } from './theme.js';
+import { FS, ELEV, swatch, sans, serif_ } from './theme.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
 import IconButton from './primitives/IconButton.jsx';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 const GOLD = swatch['#8C6F32'];
 const GOLD_ACCENT = swatch['#C9A24C'];
@@ -41,20 +42,18 @@ const VIOLET = swatch['#7B4FCF'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 
-const serif = '"Crimson Text", Georgia, serif';
-const sans = '"Nunito", system-ui, sans-serif';
-
 const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: VIOLET, RED };
-const KIND_LABEL = { NPC: 'NPC', HOOK: 'HOOK', TWIST: 'TWIST', RED: 'RED' };
+// Two-channel category tags: accent color + a readable label. 'RED' is the
+// composer's key for the one thing to hold back at the table, so the label
+// reads as plain language rather than the opaque key.
+const KIND_LABEL = { NPC: 'NPC', HOOK: 'Hook', TWIST: 'Twist', RED: 'Hold back' };
 
 export default function TableView({ settlement, onClose }) {
-  // Esc closes — mirrors HelpPopover. Registered unconditionally because the
-  // caller only mounts TableView when it should be open.
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  // Full role=dialog takeover: trap focus inside the panel, move focus in on
+  // mount, restore it to the trigger on close, and dismiss on Escape — the
+  // same contract every other modal honors. Escape is owned by the hook; a
+  // second standalone keydown listener would fire onClose twice.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const stressors = Array.isArray(settlement?.stressors) ? settlement.stressors : [];
@@ -80,6 +79,8 @@ export default function TableView({ settlement, onClose }) {
       {/* Handlers only stopPropagation to keep clicks/keys inside the panel from closing the backdrop; the panel is not itself interactive. */}
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.stopPropagation()}
         style={{
@@ -104,7 +105,7 @@ export default function TableView({ settlement, onClose }) {
           <div style={{ flex: 1, minWidth: 0 }}>
             <h1 style={{
               margin: 0,
-              fontFamily: serif, fontWeight: 600, fontSize: FS.xxl,
+              fontFamily: serif_, fontWeight: 600, fontSize: FS.xxl,
               color: GOLD_ACCENT, lineHeight: 1.12,
               overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
             }}>
@@ -146,7 +147,7 @@ export default function TableView({ settlement, onClose }) {
               border: `1px solid ${BORDER}`,
               borderLeft: `3px solid ${GOLD}`,
               borderRadius: 6,
-              fontFamily: serif, fontSize: FS.lg, fontStyle: 'italic',
+              fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic',
               color: INK_DEEP, lineHeight: 1.5,
             }}>
               {pressure}
@@ -160,8 +161,8 @@ export default function TableView({ settlement, onClose }) {
                 <span key={i} style={{
                   fontSize: FS.micro, fontWeight: 800,
                   letterSpacing: '0.04em', textTransform: 'uppercase',
-                  color: RED, background: 'rgba(162,52,52,0.08)',
-                  border: '1px solid rgba(162,52,52,0.25)',
+                  color: RED, background: swatch['#FDF0F0'],
+                  border: `1px solid ${swatch['#C88A8A']}`,
                   borderRadius: 4, padding: '3px 8px',
                 }}>
                   {s.label || s.type}
@@ -177,15 +178,15 @@ export default function TableView({ settlement, onClose }) {
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: AMBER, marginBottom: 8,
             }}>
-              🕯 Tonight at the table
+              Tonight at the table
             </div>
 
             {entries.length === 0 ? (
               <div style={{
-                fontSize: FS.sm, color: MUTED, fontStyle: 'italic', lineHeight: 1.5,
+                fontSize: FS.sm, color: BODY, fontStyle: 'italic', lineHeight: 1.5,
               }}>
                 No table-night entries derived yet. Generate a richer settlement
-                or run the narrative layer.
+                or generate the AI write-up.
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -204,7 +205,7 @@ export default function TableView({ settlement, onClose }) {
                         alignItems: 'baseline', gap: 8, marginBottom: 3,
                       }}>
                         <span style={{
-                          fontFamily: serif, fontWeight: 700, fontSize: FS.md,
+                          fontFamily: serif_, fontWeight: 700, fontSize: FS.md,
                           color: INK, minWidth: 0,
                         }}>
                           {row.title}
@@ -212,6 +213,7 @@ export default function TableView({ settlement, onClose }) {
                         <span style={{
                           fontSize: FS.nano, fontWeight: 800,
                           color: accent, letterSpacing: '0.08em', flexShrink: 0,
+                          textTransform: 'uppercase',
                         }}>
                           {KIND_LABEL[row.kind] || row.kind}
                         </span>

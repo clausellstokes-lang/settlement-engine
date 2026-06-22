@@ -28,7 +28,7 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch } from './theme.js';
+import { FS, swatch, sans, serif_ } from './theme.js';
 import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
@@ -85,8 +85,8 @@ function StepRow({ entry, isLast, traces }) {
         style={{
           display: 'block', width: '100%', textAlign: 'left',
           background: 'transparent', border: 'none', cursor: 'pointer',
-          padding: 0, color: INK,
-          fontFamily: 'Nunito, system-ui, sans-serif',
+          padding: '4px 0', minHeight: 44, color: INK,
+          fontFamily: sans,
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
@@ -104,7 +104,7 @@ function StepRow({ entry, isLast, traces }) {
           <div style={{
             fontSize: FS.xs, fontStyle: 'italic',
             color: MUTED, marginTop: 6,
-            fontFamily: 'Crimson Text, Georgia, serif',
+            fontFamily: serif_,
             lineHeight: 1.55,
           }}>
             {meta.description}
@@ -138,7 +138,7 @@ function StepRow({ entry, isLast, traces }) {
                           <div style={{
                             fontSize: FS['10.5'], fontStyle: 'italic',
                             color: MUTED, marginTop: 1,
-                            fontFamily: 'Crimson Text, Georgia, serif',
+                            fontFamily: serif_,
                           }}>
                             {c.reason}
                           </div>
@@ -190,7 +190,7 @@ function SimulationSpine({ settlement }) {
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
         borderRadius: 4,
-        fontFamily: 'Nunito, system-ui, sans-serif',
+        fontFamily: sans,
       }}
     >
       <div style={{
@@ -211,7 +211,7 @@ function SimulationSpine({ settlement }) {
             </dt>
             <dd style={{
               margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.5,
-              fontFamily: 'Crimson Text, Georgia, serif',
+              fontFamily: serif_,
             }}>
               {body}
             </dd>
@@ -239,13 +239,13 @@ export default function PipelineRail({ compact = false }) {
         border: `1px solid ${RAIL_BORDER}`,
         borderRadius: 8,
         padding: compact ? '12px 14px' : '16px 18px',
-        fontFamily: 'Nunito, system-ui, sans-serif',
+        fontFamily: sans,
       }}
     >
       <header style={{ marginBottom: 12 }}>
         <h3 style={{
           margin: 0,
-          fontFamily: 'Crimson Text, Georgia, serif',
+          fontFamily: serif_,
           fontSize: FS['18'], fontWeight: 600, color: INK,
         }}>
           {t('pipeline.title')}
@@ -253,7 +253,7 @@ export default function PipelineRail({ compact = false }) {
         <p style={{
           margin: '4px 0 0',
           fontSize: FS.sm, fontStyle: 'italic', color: BODY,
-          fontFamily: 'Crimson Text, Georgia, serif',
+          fontFamily: serif_,
           lineHeight: 1.5,
         }}>
           {t('pipeline.subtitle')}

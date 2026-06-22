@@ -118,8 +118,8 @@ registerStep('stressConfirmPass', {
           source: suppressors.length ? instSource(suppressors[0]) : 'institutionRoster',
           effect: `kept with p=${keepProbability.toFixed(2)}, roll failed`,
           reason: suppressors.length
-            ? `${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`
-            : `The settlement's institutions reduce the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`,
+            ? `${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll). The re-weighted roll dropped it.`
+            : `The settlement's institutions reduce the odds of "${type}" (×${ratio.toFixed(2)} vs the roster-blind roll). The re-weighted roll dropped it.`,
         },
       ],
       downstreamEffects: [

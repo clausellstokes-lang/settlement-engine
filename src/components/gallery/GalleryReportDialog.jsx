@@ -118,7 +118,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
             }}>
               <Flag size={16} color={GOLD} />
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
-                Report Settlement
+                Report settlement
               </h2>
               <IconButton
                 Icon={X}
@@ -138,7 +138,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                   value={reason}
                   onChange={event => setReason(event.target.value)}
                   style={{
-                    minHeight: 38,
+                    minHeight: 44,
                     border: `1px solid ${BORDER}`,
                     borderRadius: R.md,
                     background: CARD_ALT,

@@ -71,7 +71,7 @@ export function buildVersionTimeline(save) {
     entries.push({
       id: 'canonized',
       ts: cs.canonizedAt,
-      label: 'Canonized. Events from here forward are campaign log',
+      label: 'Canonized. Every event from here forward joins the campaign log',
       kind: 'canonize',
       revertable: false,
     });

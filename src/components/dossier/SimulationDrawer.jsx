@@ -139,8 +139,8 @@ export default function SimulationDrawer() {
                   marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
-                  Seventeen pure-functional steps, deterministic per seed.
-                  Tap a step to see what it decided and why.
+                  Seventeen steps built this settlement, each one fixed by the
+                  same seed. Tap a step to see what it decided and why.
                 </div>
               </div>
               <IconButton

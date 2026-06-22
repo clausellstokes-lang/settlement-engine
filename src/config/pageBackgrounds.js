@@ -43,6 +43,24 @@ export const MODE_BACKGROUNDS = Object.freeze({
   custom:   'city',
 });
 
+/**
+ * Disciplined backgrounds (P5 / P12). A painting earns its place on the
+ * heroes, the Realm map, auth, and the celebratory single-dossier landing,
+ * where it sets the scene. The working, reference, and reading surfaces read
+ * better on clean parchment, so a long dossier or a settings form is never
+ * scanned through texture. These views drop the painting and sit on the flat
+ * cream field; everything else keeps its scene.
+ */
+export const CLEAN_VIEWS = Object.freeze(new Set([
+  'settlements',  // Library
+  'compendium',
+  'gallery',
+  'pricing',
+  'account',
+  'admin',
+  'howto',        // About
+]));
+
 const DEFAULT_BG = 'create';
 
 /** A CSS `url(...)` value for a background basename. */
@@ -53,14 +71,18 @@ export function backgroundImageUrl(name) {
 /**
  * Resolve the full-page background for the current view + generation state.
  * @param {{ view?: string, wizardMode?: string|null, settlement?: any }} args
- * @returns {{ url: string, isFlow: boolean }}
+ * @returns {{ url: string, isFlow: boolean, clean: boolean }}
  */
 export function resolveViewBackground({ view, wizardMode = null, settlement = null } = {}) {
   // Generation flow: once a mode is picked, its settlement scene backs the
   // wizard config and the dossier output (both live in the 'generate' view).
   if (view === 'generate' && (wizardMode || settlement)) {
     const name = MODE_BACKGROUNDS[wizardMode] || MODE_BACKGROUNDS.basic;
-    return { url: backgroundImageUrl(name), isFlow: true };
+    return { url: backgroundImageUrl(name), isFlow: true, clean: false };
   }
-  return { url: backgroundImageUrl(PAGE_BACKGROUNDS[view] || DEFAULT_BG), isFlow: false };
+  // Clean working/reading surfaces drop the painting for legibility.
+  if (CLEAN_VIEWS.has(view)) {
+    return { url: backgroundImageUrl(PAGE_BACKGROUNDS[view] || DEFAULT_BG), isFlow: false, clean: true };
+  }
+  return { url: backgroundImageUrl(PAGE_BACKGROUNDS[view] || DEFAULT_BG), isFlow: false, clean: false };
 }

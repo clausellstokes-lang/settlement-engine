@@ -203,7 +203,7 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
     name: fell ? `The Capture of ${transition.name}` : `The Liberation of ${transition.name}`,
     type: 'corruption_scandal',
     description: fell
-      ? `${transition.name} fell under criminal control during the campaign — its formal authority became a front for the underworld.`
+      ? `${transition.name} fell under criminal control during the campaign. Its formal authority became a front for the underworld.`
       : `${transition.name} broke from criminal control during the campaign, though the arrangements it operated under are remembered.`,
     severity: fell ? 'major' : 'moderate',
     lastingEffects: fell

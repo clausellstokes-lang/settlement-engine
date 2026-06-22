@@ -10,10 +10,8 @@
     /                            — Homepage (anonymous hero)
     /?view=pricing               — Pricing
     /?view=gallery               — Public dossier gallery
-    /?view=compare               — Comparison landing
-    /?view=compare-chatgpt       — vs ChatGPT
-    /?view=compare-worldographer — vs Worldographer
-    /?view=compare-kanka         — vs Kanka
+    /?view=howto&tab=compare     — How We Compare (the former /compare* pages,
+                                   now a tab in the About guide)
     /?view=compendium&tab=...    — Compendium tabs (seven sections)
     /?view=howto                 — How-to-use guide
 
@@ -43,24 +41,12 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Comparisons (Tier 8.6) -->
+  <!-- Comparisons (Tier 8.6) — the dedicated competitor pages were folded into
+       the About guide's "How We Compare" tab; the old /?view=compare* URLs all
+       redirect there. We advertise only the live destination so Google never
+       indexes three redirect duplicates with no canonical. -->
   <url>
-    <loc>https://settlementforge.com/?view=compare</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compare-chatgpt</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compare-worldographer</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compare-kanka</loc>
+    <loc>https://settlementforge.com/?view=howto&amp;tab=compare</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

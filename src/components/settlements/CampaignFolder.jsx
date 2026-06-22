@@ -6,7 +6,7 @@ import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, Fo
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD, INK, MUTED, SECOND, BORDER, sans, serif_, FS, swatch } from '../theme.js';
+import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, sans, serif_, FS, SP, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -17,7 +17,7 @@ import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
+export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, onCreateCampaign, onNavigate, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
   const worldState = campaign?.worldState || null;
   const regionalGraph = campaign?.regionalGraph || campaign?.worldState?.regionalGraph || null;
   const nameFor = (id) => {
@@ -27,6 +27,25 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // Campaign PDF export is async (lazy-loaded jsPDF). Without a handler that
+  // awaits + catches, a throw (malformed save, jsPDF fault) became a silent
+  // unhandled rejection — the user clicked "PDF" and nothing happened. Track
+  // busy + error so the click always has visible feedback.
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState(null);
+  const handleExportPdf = async (e) => {
+    e.stopPropagation();
+    if (pdfBusy) return;
+    setPdfError(null);
+    setPdfBusy(true);
+    try {
+      await generateCampaignPDF(campaign, settlements);
+    } catch (err) {
+      setPdfError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
+    } finally {
+      setPdfBusy(false);
+    }
+  };
   const collapsed = campaign.collapsed;
   const retainedInactive = !isCampaignActive(campaign);
   const active = !retainedInactive && canManageCampaigns;
@@ -43,7 +62,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       }}>
         <FolderOpen size={14}/>
         <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
-        <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:BODY }}>
           {retainedInactive
             ? `Retained inactive${retainedUntil ? ` until ${retainedUntil}` : ''}`
             : 'Available again with Premium'}
@@ -61,25 +80,30 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       {/* Campaign header */}
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <IconButton Icon={collapsed ? ChevronRight : ChevronDown} label={collapsed ? 'Expand campaign' : 'Collapse campaign'} onClick={() => toggleCollapsed(campaign.id)} tone="ghost" size="md"/>
-        <FolderOpen size={14} color={GOLD}/>
+        <FolderOpen size={14} color={GOLD_TXT}/>
         {editing ? (
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
             <input value={editDraft} onChange={e => setEditDraft(e.target.value)} aria-label="Campaign name"
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline rename field appears on user action; focus lets them type the new name immediately
-              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
+              style={{ flex:1, padding:'2px 6px', border:`1px solid ${BORDER_STRONG}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
             <IconButton Icon={Check} label="Save name" onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} tone="ghost" size="sm"/>
             <IconButton Icon={X} label="Cancel rename" onClick={() => setEditing(false)} tone="danger" size="sm"/>
           </div>
         ) : (
           <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
-        <span style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
-        {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
+        <span style={{ fontSize:FS.xs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
+        {campaign.mapState && <MapIcon size={11} color={GOLD_TXT} title="Map saved" aria-label="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
+            {/* Advance Time is a per-CAMPAIGN action, not the page's first-click
+                task — demoted from solid primary to secondary (outline) so the
+                page header's "New Settlement" stays the only solid primary on the
+                list region (P4/P8 one-primary-per-region). The Zeigarnik pull back
+                to advancing time already lives in the RealmStrip news/crisis pips. */}
             <Button
-              variant="gold"
+              variant="secondary"
               size="sm"
               icon={<Clock size={10}/>}
               onClick={(e) => { e.stopPropagation(); onAdvanceTime?.(campaign.id); }}
@@ -90,19 +114,29 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               Advance Time
             </Button>
             <Button
-              variant="danger"
+              variant="ghost"
               size="sm"
               icon={<FileText size={10}/>}
-              onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
-              disabled={settlements.length === 0}
+              onClick={handleExportPdf}
+              disabled={settlements.length === 0 || pdfBusy}
               title="Export Campaign PDF">
-              PDF
+              {pdfBusy ? 'Exporting…' : 'PDF'}
             </Button>
-            <IconButton Icon={Edit3} label="Rename campaign" onClick={() => { setEditing(true); setEditDraft(campaign.name); }} tone="ghost" size="sm"/>
-            <IconButton Icon={X} label="Delete campaign" onClick={() => setConfirmDelete(!confirmDelete)} tone="danger" size="sm" pressed={confirmDelete}/>
+            <IconButton Icon={Edit3} label="Rename campaign" onClick={() => { setEditing(true); setEditDraft(campaign.name); }} tone="ghost" size="md"/>
+            <IconButton Icon={X} label="Delete campaign" onClick={() => setConfirmDelete(!confirmDelete)} tone="danger" size="md" pressed={confirmDelete}/>
           </div>
         )}
       </div>
+
+      {/* Campaign PDF export error — inline alert so a failed export is never silent */}
+      {pdfError && (
+        <div
+          role="alert"
+          style={{ padding:'6px 12px', fontSize:FS.xs, color:RED, background:RED_BG, fontFamily:sans }}
+        >
+          {pdfError}
+        </div>
+      )}
 
       {/* State-of-the-realm strip — self-hides when the world is dormant
           (not canonized). Byte-identical for a non-simulated campaign. */}
@@ -133,11 +167,13 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         />
       )}
 
-      {/* Nested settlements */}
+      {/* Nested settlements — the cards reflow in a grid (P12 + GalleryList
+          consistency) while the header / RealmStrip / RegionalGraphSummary above
+          keep full folder width. Single-card-empty falls back to a flat block. */}
       {!collapsed && (
-        <div style={{ padding:'6px 8px 8px', display:'flex', flexDirection:'column', gap:4 }}>
+        <div style={{ padding:`${SP.md}px 8px 8px`, display: settlements.length === 0 ? 'flex' : 'grid', flexDirection:'column', gridTemplateColumns: settlements.length === 0 ? undefined : 'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap:SP.sm }}>
           {settlements.length === 0 ? (
-            <div style={{ padding:'10px 8px', fontSize:FS.xs, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
+            <div style={{ padding:'10px 8px', fontSize:FS.xs, color:BODY, textAlign:'center', fontStyle:'italic', maxWidth:'60ch', marginLeft:'auto', marginRight:'auto' }}>
               No settlements in this campaign yet. Use the arrow button to move settlements here.
             </div>
           ) : settlements.map(s => (
@@ -152,6 +188,9 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               reactivatingId={reactivatingId}
               onCanonize={onCanonize}
               onAdvanceTime={onAdvanceTime}
+              onCreateCampaign={onCreateCampaign}
+              onNavigate={onNavigate}
+              canManageCampaigns={canManageCampaigns}
               worldState={worldState}
               regionalGraph={regionalGraph}
               nameFor={nameFor}

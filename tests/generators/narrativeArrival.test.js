@@ -94,7 +94,7 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
       { type: 'external_threat', description: 'Raiders probe the outlying farms' },
     ], 100);
     expect(out).toBe(
-      'The Sack of the Granary is still present in living memory — The supply of grain is under pressure.',
+      'The Sack of the Granary is still present in living memory. The supply of grain is under pressure.',
     );
     expect(out).not.toContain('[object Object]');
   });
@@ -102,13 +102,13 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
   test('an EMPTY tensions array reaches the fallback clause (arrays are truthy)', () => {
     const out = generateSiegeCapability(recentEvents, [], 100);
     expect(out).toBe(
-      'The Sack of the Granary is still present in living memory — its effects shape current decisions.',
+      'The Sack of the Granary is still present in living memory. Its effects shape current decisions.',
     );
   });
 
   test('plain-string tensions (legacy) pass through the join', () => {
     const out = generateSiegeCapability(recentEvents, ['old debts to the crown'], 100);
-    expect(out).toContain('— old debts to the crown.');
+    expect(out).toContain('. Old debts to the crown.');
   });
 
   test('no recent events → array pass-through (caller nulls non-strings)', () => {

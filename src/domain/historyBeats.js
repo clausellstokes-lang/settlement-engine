@@ -137,8 +137,8 @@ function deriveDefiningCrisis(settlement) {
   if (severityScore(top.severity) < SEVERITY_RANK.major) return null;
 
   const text = top.description
-    ? `${top.name} (${top.yearsAgo ?? '—'} years ago): ${top.description}`
-    : `${top.name} (${top.yearsAgo ?? '—'} years ago).`;
+    ? `${top.name} (${top.yearsAgo ?? '–'} years ago): ${top.description}`
+    : `${top.name} (${top.yearsAgo ?? '–'} years ago).`;
 
   return {
     key: 'definingCrisis',

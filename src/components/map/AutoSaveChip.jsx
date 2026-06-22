@@ -29,7 +29,7 @@ import { useStore } from '../../store';
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
 const VIOLET = swatch['#7B4FCF'];
-const MUTED = swatch['#9C8068'];
+const TEXT = swatch['#3A2F18'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 function formatRelative(savedAt) {
@@ -103,12 +103,16 @@ export default function AutoSaveChip({ saving = false }) {
       aria-live="polite"
       title={saved ? `Last saved at ${new Date(saved).toLocaleString()}` : 'Not yet saved'}
       style={{
+        // Borderless tinted pill (P5 anti-box-soup): sitting beside the
+        // bordered Save button, a second ring would read as a redundant frame.
+        // The colored dot + label already carry state in two channels (P7).
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '3px 9px',
         background: `${dotColor}10`,
-        border: `1px solid ${dotColor}45`,
         borderRadius: 12,
-        fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
+        // All states use a WCAG-passing ink (the idle "Saved …" state is the
+        // most-shown, and muted failed 4.5:1 on the near-parchment tint).
+        fontSize: FS.xs, color: TEXT,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}

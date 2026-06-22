@@ -24,10 +24,10 @@ export default function HealthPip({ pip }) {
     <span
       data-testid="health-pip"
       data-band={pip.band}
-      title={`Health: ${pip.band} (worst of resilience / volatility / threat / resource pressure)`}
+      title={`Health: ${pip.band}. Worst of resilience, volatility, threat, and resource pressure, on a four-band scale from Critical up to Stable.`}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        fontSize: FS.micro, fontWeight: 700, fontFamily: sans, color: pip.color,
+        fontSize: FS.xs, fontWeight: 700, fontFamily: sans, color: pip.color,
       }}
     >
       <span

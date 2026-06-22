@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 
 export function ResourcesTab({settlement:r, narrativeNote}) {
   const res = r?.resourceAnalysis;
-  if (!res) return <Empty message="No resource data available."/>;
+  if (!res) return <Empty message="No resource survey on file for this settlement."/>;
   const _mobile = isMobile();
   const _config = r?.config || {};
 
@@ -62,7 +62,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           {unexploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:6,padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>UNEXPLOITED</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>Unexploited</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
                 <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),borderRadius:3,padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
@@ -92,7 +92,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           {partExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',borderRadius:6,padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>PARTIAL</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>Partial</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
                 <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),borderRadius:3,padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
@@ -109,7 +109,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           {fullExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch.successBg,border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',borderRadius:6,padding:'8px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>✓ FULLY EXPLOITED</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>✓ Fully exploited</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
                 <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),borderRadius:3,padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
@@ -128,7 +128,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}> DEPLETED. Consumed locally, export potential reduced</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted. Consumed locally, export potential reduced</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
@@ -136,7 +136,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ ABUNDANT. Full export potential</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ Abundant. Full export potential</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
@@ -144,7 +144,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
               </div>
             </div>}
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>COMMODITIES AVAILABLE</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',borderRadius:4,padding:'2px 9px',textTransform:'capitalize'}}>{r2.replace(/_/g,' ')}</span>)}
               </div>

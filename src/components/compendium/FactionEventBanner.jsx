@@ -36,7 +36,7 @@ export default function FactionEventBanner() {
       <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5 }}>
         A custom faction is <strong>not</strong> rolled into a fresh generation. It arrives in an
         existing settlement or region through an in-world event (a coup, an arrival, a schism) you
-        author in the Event Composer &mdash; so the faction lands with consequences, not out of thin air.
+        author in the Event Composer. The faction then lands with consequences, not out of thin air.
       </div>
       <div style={{ marginTop: 6 }}>
         <Button variant="secondary" size="sm" onClick={() => navigate('settlements')} style={{ padding: '2px 8px', fontSize: FS.xxs }}>

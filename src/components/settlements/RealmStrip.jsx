@@ -16,11 +16,10 @@
  * store, no rng, no wall clock.
  */
 
-import { Clock, Shield, Sparkles, Newspaper } from 'lucide-react';
+import { Clock, Shield, ShieldOff, Sparkles, Newspaper } from 'lucide-react';
 import { liveSieges } from '../../domain/display/warStatus.js';
-import { GOLD, MUTED, BORDER, FS, sans, swatch } from '../theme.js';
+import { GOLD_TXT, MUTED, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
 
-const VIOLET = swatch['#7C3AED'];
 const SIEGE_RED = swatch['#8B1A1A'];
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
@@ -105,32 +104,36 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       data-testid="realm-strip"
       style={{
         display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
-        padding: '6px 12px', background: swatch['#FBF5E6'], borderBottom: `1px solid ${BORDER}`,
-        fontFamily: sans, fontSize: FS.xxs, color: MUTED,
+        padding: '6px 12px',
+        fontFamily: sans, fontSize: FS.xs, color: BODY,
       }}
     >
-      <Seg icon={<Clock size={11} color={GOLD} />} title="In-world clock">
-        <strong style={{ color: GOLD }}>{clock}</strong>
-        <span style={{ color: MUTED }}> · tick {tick}</span>
+      <Seg icon={<Clock size={11} color={GOLD_TXT} aria-hidden="true" />} title="In-world clock. One advance step is one month.">
+        <strong style={{ color: GOLD_TXT, fontSize: FS.sm }}>{clock}</strong>
+        <span style={{ color: BODY }}> · month {tick}</span>
       </Seg>
 
-      <Seg icon={<Shield size={11} color={siegeCount > 0 ? SIEGE_RED : MUTED} />} title="Active sieges in the realm">
-        <span style={{ color: siegeCount > 0 ? SIEGE_RED : MUTED, fontWeight: 700 }}>
+      <Seg
+        icon={siegeCount > 0
+          ? <Shield size={11} color={SIEGE_RED} aria-hidden="true" />
+          : <ShieldOff size={11} color={MUTED} aria-hidden="true" />}
+        title="Active sieges in the realm">
+        <span style={{ color: siegeCount > 0 ? SIEGE_RED : BODY, fontWeight: siegeCount > 0 ? 700 : 400 }}>
           {siegeCount} {siegeCount === 1 ? 'siege' : 'sieges'}
         </span>
       </Seg>
 
       {faith && (
-        <Seg icon={<Sparkles size={11} color={VIOLET} />} title={`Dominant faith: ${faith.name} (${faith.tier})`}>
-          <span style={{ color: VIOLET, fontWeight: 700 }}>{faith.name}</span>
-          <span style={{ color: MUTED }}> · {faith.tier}</span>
+        <Seg icon={<Sparkles size={11} color={VIOLET_DEEP} aria-hidden="true" />} title={`Dominant faith: ${faith.name} (${faith.tier})`}>
+          <span style={{ color: VIOLET_DEEP, fontWeight: 700 }}>{faith.name}</span>
+          <span style={{ color: BODY }}> · {faith.tier}</span>
         </Seg>
       )}
 
       {newsAge != null && (
-        <Seg icon={<Newspaper size={11} color={GOLD} />} title="Wizard News recency">
-          <span style={{ color: MUTED }}>
-            {newsAge === 0 ? 'News this tick' : `News ${newsAge} tick${newsAge === 1 ? '' : 's'} ago`}
+        <Seg icon={<Newspaper size={11} color={GOLD_TXT} aria-hidden="true" />} title="Wizard News recency">
+          <span style={{ color: BODY }}>
+            {newsAge === 0 ? 'News this month' : `News ${newsAge} month${newsAge === 1 ? '' : 's'} ago`}
           </span>
         </Seg>
       )}

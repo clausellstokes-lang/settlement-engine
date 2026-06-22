@@ -25,13 +25,14 @@ import { useEffect, useState } from 'react';
 import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
+import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
-const MUTED = swatch['#6B5340'];
-const BODY  = swatch['#4A3B22'];
+// Retoned for the dark-ink coach card: light parchment tones that clear AA on INK.
+const MUTED = swatch['#C8B098']; // muted parchment for the "Step X of Y" eyebrow + dots
+const BODY  = PARCH;             // light parchment body text on ink
 
 function readDismissed() {
   if (typeof window === 'undefined') return false;
@@ -93,11 +94,11 @@ export default function PostGenCoach() {
         position: 'fixed',
         bottom: 24, right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
-        background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
-        border: `1.5px solid ${GOLD}`,
+        background: INK,
+        border: `1px solid ${GOLD}`,
         borderRadius: R.xl,
         boxShadow: '0 12px 32px rgba(27,20,8,0.25)',
-        fontFamily: sans, color: INK,
+        fontFamily: sans, color: PARCH,
         overflow: 'hidden',
         animation: 'pgc-slide-in 0.3s ease-out',
       }}
@@ -113,8 +114,8 @@ export default function PostGenCoach() {
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm + 2}px ${SP.md}px`,
-        background: 'rgba(27,20,8,0.06)',
-        borderBottom: `1px solid rgba(140,111,50,0.25)`,
+        background: 'rgba(201,162,76,0.10)',
+        borderBottom: `1px solid rgba(201,162,76,0.25)`,
       }}>
         <span style={{
           width: 22, height: 22, borderRadius: '50%',
@@ -125,7 +126,7 @@ export default function PostGenCoach() {
         </span>
         <span style={{
           fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
-          textTransform: 'uppercase', color: GOLD_DEEP,
+          textTransform: 'uppercase', color: GOLD,
           flex: 1,
         }}>
           {t('onboarding.coach.welcomeTitle')}
@@ -134,8 +135,8 @@ export default function PostGenCoach() {
           Icon={X}
           label="Dismiss coach"
           onClick={close}
-          tone="ghost"
-          size="md"
+          tone="default"
+          size="xl"
         />
       </div>
 
@@ -150,7 +151,7 @@ export default function PostGenCoach() {
         </div>
         <h3 id="postgen-coach-title" style={{
           margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
-          color: INK,
+          color: PARCH,
         }}>
           {t(stepDef.titleKey)}
         </h3>
@@ -195,6 +196,7 @@ export default function PostGenCoach() {
             variant="ghost"
             size="sm"
             onClick={close}
+            style={{ color: MUTED }}
           >
             {t('onboarding.coach.dismiss')}
           </Button>

@@ -262,10 +262,10 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio <= 0.5) {
       type = 'subordinate';
-      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}. Command authority is unambiguous — soldiers enforce rather than govern.`;
+      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}. Command authority is unambiguous. Soldiers enforce rather than govern.`;
     } else if (ratio <= 0.85) {
       type = 'symbiotic';
-      narrative = `${gov.faction} commands, ${mil.faction} executes. A functional partnership — each depends on the other remaining effective.`;
+      narrative = `${gov.faction} commands, ${mil.faction} executes. A functional partnership: each depends on the other remaining effective.`;
     } else if (ratio <= 1.2) {
       type = 'tense';
       narrative = `${mil.faction} and ${gov.faction} hold roughly equal power. The commander's cooperation is sought, not commanded. Political decisions increasingly require military endorsement.`;
@@ -321,7 +321,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${rel.faction} and ${gov.faction} are functionally the same institution. Religious legitimacy is the foundation of civic authority here.`;
     } else if (ratio >= 1.1) {
       type = 'tense';
-      narrative = `${rel.faction} holds more effective influence than ${gov.faction} in significant domains — welfare, marriage, inheritance, moral authority. Jurisdiction disputes are ongoing.`;
+      narrative = `${rel.faction} holds more effective influence than ${gov.faction} in significant domains: welfare, marriage, inheritance, moral authority. Jurisdiction disputes are ongoing.`;
     } else if (ratio >= 0.5) {
       type = 'dependent';
       narrative = `${gov.faction} provides the sword; ${rel.faction} provides the moral framework that makes taxation feel just and authority feel ordained. Each legitimises the other.`;
@@ -346,13 +346,13 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${gov.faction} is a front. ${crim.faction} makes the actual decisions on taxation, law enforcement priority, and appointments. The fiction of legitimate governance is maintained because it is useful.`;
     } else if (crimCapture === 'corrupted') {
       type = 'corrupted';
-      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable — profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
+      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable: profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
     } else if (crimCapture === 'equilibrium') {
       type = 'tense';
       narrative = `${gov.faction} tolerates ${crim.faction} because suppression costs more than it saves. ${crim.faction} avoids open provocation because it needs the governance structure to remain functional enough to extract from.`;
     } else {
       type = 'competitive';
-      narrative = `${gov.faction} actively suppresses ${crim.faction}. Enforcement is genuine but incomplete — ${crim.faction} retreats and reorganises rather than disappearing.`;
+      narrative = `${gov.faction} actively suppresses ${crim.faction}. Enforcement is genuine but incomplete. ${crim.faction} retreats and reorganises rather than disappearing.`;
     }
 
     direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
@@ -397,7 +397,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
     } else if (crimCapture === 'equilibrium') {
       type = 'tense';
-      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace — it is managed coexistence.`;
+      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace, but managed coexistence.`;
     } else {
       type = 'competitive';
       narrative = `${mil.faction} actively hunts ${crim.faction}. Arrests are real, enforcement is genuine. ${crim.faction} uses superior local knowledge and social embeddedness to absorb pressure and reconstitute.`;
@@ -418,7 +418,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${merc.faction} and ${rel.faction} compete for the same population's loyalty and resources. Church tithes and merchant contracts both claim priority on household income. Church land exemptions and usury restrictions shape commercial strategy in ways merchants resent.`;
     } else if (merP > relP * 1.5) {
       type = 'competitive';
-      narrative = `${merc.faction}'s capital has outpaced ${rel.faction}'s institutional influence. Merchants fund churches, endow hospitals, and purchase indulgences — but on their terms.`;
+      narrative = `${merc.faction}'s capital has outpaced ${rel.faction}'s institutional influence. Merchants fund churches, endow hospitals, and purchase indulgences, but on their terms.`;
     } else {
       type = 'dependent';
       narrative = `${rel.faction} and ${merc.faction} sustain each other: church institutions provide charity that keeps social stability, merchants provide endowments that fund them. Neither is comfortable with the other's power.`;
@@ -439,7 +439,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     narrative = ratio >= 0.9
       ? `${noble.faction} hold hereditary rights ${gov.faction} cannot simply revoke. Council decisions touching land tenure, inheritance, or military levies require noble cooperation, not just noble compliance.`
       : ratio >= 0.5
-      ? `${noble.faction} operate within ${gov.faction}'s framework but retain enough independent claim — land rights, judicial privilege, military obligation — to negotiate rather than merely obey.`
+      ? `${noble.faction} operate within ${gov.faction}'s framework but retain enough independent claim (land rights, judicial privilege, military obligation) to negotiate rather than merely obey.`
       : `${noble.faction} are present in civic life but declining; merchant capital and institutional governance have eroded the leverage that hereditary title once guaranteed.`;
 
     addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });

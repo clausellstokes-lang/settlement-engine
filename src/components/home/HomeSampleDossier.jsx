@@ -19,28 +19,26 @@
  */
 
 import { useEffect } from 'react';
-import { FS, swatch } from '../theme.js';
+import {
+  FS, swatch,
+  PARCH, INK_DEEP, INK, GOLD, GOLD_B, GOLD_TXT, MUTED, BORDER,
+  GREEN, GREEN_DEEP, VIOLET, VIOLET_DEEP, AMBER, AMBER_DEEP,
+  sans, serif_,
+} from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { SAMPLE_DOSSIER } from '../../data/sampleDossier.js';
 
-const PARCH = swatch['#FBF5E6'];
-const INK_DEEP = swatch['#1B1408'];
-const INK = swatch['#2C2210'];
-const GOLD = swatch['#C9A24C'];
-const MUTED = swatch['#9C8068'];
-const BORDER = swatch['#E8D9B0'];
-const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
-const AMBER = swatch['#D08020'];
-const sans = '"Nunito", system-ui, sans-serif';
-const serif = '"Crimson Text", Georgia, serif';
-
+// Callout backgrounds keep their bespoke painted tints (the semantic
+// success/warning surfaces read too cool for this proof card), so the
+// exact hexes route through swatch[...] for lint compliance. `accent` paints
+// the bright left border; `text` is the legible *_DEEP token that carries the
+// eyebrow (the fill-strength accent fails AA 4.5:1 as small text on the tint).
 const CALLOUTS = [
-  { key: 'newDm',         accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'worldbuilder',  accent: VIOLET, bg: '#EBE2FA' },
-  { key: 'fridaysSession',accent: AMBER,  bg: '#FBEAD0', italic: true },
+  { key: 'newDm',         accent: GREEN,  text: GREEN_DEEP,  bg: swatch['#E2EEDB'] },
+  { key: 'worldbuilder',  accent: VIOLET, text: VIOLET_DEEP, bg: swatch['#EBE2FA'] },
+  { key: 'fridaysSession',accent: AMBER,  text: AMBER_DEEP,  bg: swatch['#FBEAD0'], italic: true },
 ];
 
 export default function HomeSampleDossier() {
@@ -85,13 +83,13 @@ export default function HomeSampleDossier() {
         color: GOLD,
       }}>
         <div style={{
-          fontFamily: serif, fontSize: FS['16'], fontWeight: 600,
+          fontFamily: serif_, fontSize: FS['16'], fontWeight: 600,
         }}>
           {name}
           <span style={{
             marginLeft: 8,
             fontSize: FS.micro,
-            color: MUTED,
+            color: GOLD_B,
             fontFamily: sans,
             letterSpacing: '0.06em',
           }}>
@@ -104,7 +102,7 @@ export default function HomeSampleDossier() {
         padding: 14,
         display: 'flex', flexDirection: 'column', gap: 10,
       }}>
-        {CALLOUTS.map(({ key, accent, bg, italic }) => {
+        {CALLOUTS.map(({ key, accent, text, bg, italic }) => {
           const eyebrow = t(`sampleDossier.callouts.${key}.eyebrow`);
           const body = t(`sampleDossier.callouts.${key}.body`);
           return (
@@ -121,14 +119,14 @@ export default function HomeSampleDossier() {
               <div style={{
                 fontSize: FS.micro, fontWeight: 800,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: accent,
+                color: text,
               }}>
                 {eyebrow}
               </div>
               <div style={{
                 marginTop: 4, fontSize: FS['11.5'],
                 color: swatch['#3A2F18'], lineHeight: 1.5,
-                fontFamily: italic ? serif : sans,
+                fontFamily: italic ? serif_ : sans,
                 fontStyle: italic ? 'italic' : 'normal',
               }}>
                 {body}
@@ -146,7 +144,7 @@ export default function HomeSampleDossier() {
         background: PARCH,
       }}>
         {t('sampleDossier.footer')}{' '}
-        <span style={{ fontFamily: serif, fontStyle: 'normal', color: GOLD, fontWeight: 600 }}>
+        <span style={{ fontFamily: serif_, fontStyle: 'normal', color: GOLD_TXT, fontWeight: 600 }}>
           {SAMPLE_DOSSIER.npcs.length} NPCs · {SAMPLE_DOSSIER.plotHooks.length} hooks · {SAMPLE_DOSSIER.factions.length} factions
         </span>
       </footer>

@@ -23,10 +23,17 @@
  */
 
 import { ARCHETYPES, REL_TYPES } from './catalogData.js';
+// Pull institution names straight from the DATA layer, not generators/lookups —
+// domain may import data/ (a lower layer both sit above), but a domain→generators
+// import is a forbidden layering edge (see domainGeneratorsBoundary.test.js). This
+// is the same table the Institutions tab ultimately renders, so it stays drift-free.
+import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 
 // Valid destination tabs — must mirror the TABS ids in CompendiumPanel.
+// 'living' is the Living World tab; without it the module's own "search the
+// whole Compendium" promise excluded the most engine-deep tab.
 export const COMPENDIUM_TABS = Object.freeze([
-  'tiers', 'economy', 'power', 'arcane', 'stress', 'neighbour', 'institutions',
+  'tiers', 'economy', 'power', 'arcane', 'living', 'stress', 'neighbour', 'institutions',
 ]);
 
 // kebab-case slug for stable entry ids and anchor fallbacks.
@@ -83,6 +90,10 @@ const ECONOMY_ENTRIES = [
   id: `econ-${slug(term)}`, term, category: 'Economy', tab: 'economy', anchor: 'economy', keywords: kw,
 }));
 
+// Category names the live tab label ('Religion & the Pantheon'); the legacy
+// `#magic` anchor is kept for deep-link stability. Only the human-facing
+// category string changed when the tab was renamed off the stale 'Magic &
+// Religion'.
 const ARCANE_ENTRIES = [
   ['Magic as Economic Buffer', 'high magic buffer deficits substitute production'],
   ['Magic Suppression', 'heresy religion magic goods suppressed'],
@@ -90,7 +101,22 @@ const ARCANE_ENTRIES = [
   ['Religion & Governance', 'theocracy religious fraud church'],
   ['Magic & Faith Unified', 'mage theocracy arcane clergy governs'],
 ].map(([term, kw]) => ({
-  id: `arcane-${slug(term)}`, term, category: 'Magic & Religion', tab: 'arcane', anchor: 'magic', keywords: kw,
+  id: `arcane-${slug(term)}`, term, category: 'Religion & the Pantheon', tab: 'arcane', anchor: 'magic', keywords: kw,
+}));
+
+// Living World — the static→living-world bridge. Mirrors LIVING_WORLD_GROUPS in
+// CatalogTabs with high-frequency simulation synonyms so the highest-signal
+// terms (world pulse, advance time, war, siege, pressures, legitimacy, unrest)
+// route to the tab instead of dead-ending on "No matches". The anchor
+// `living-world` already exists on the tab and ANCHOR_TO_TAB maps it.
+const LIVING_WORLD_ENTRIES = [
+  ['Causal Substrate', 'sixteen canonical variables legitimacy food security unrest religious authority advance time tick re-derived prior state'],
+  ['Pressures & Strength', 'nine pressures military economic social religious settlement strength defend yield signal strategy'],
+  ['World Pulse', 'per-tick advance tick advance time stressors fire populations trade drift institutions born die proposals dm off by default'],
+  ['War Layer', 'armies march sieges conquest rulers war exhaustion self-ending peace dormant'],
+  ['Religion & Pantheon', 'assigned deities contest converts seats corruption aggression magic legality dormant primary deity religion dynamics'],
+].map(([term, kw]) => ({
+  id: `living-${slug(term)}`, term, category: 'Living World', tab: 'living', anchor: 'living-world', keywords: kw,
 }));
 
 const STRESS_ENTRIES = [
@@ -131,6 +157,36 @@ const REL_ENTRIES = REL_TYPES.map((r) => ({
   keywords: r.effect,
 }));
 
+// Institution entries derived from the SAME data table the Institutions tab
+// ultimately renders (zero-drift). Walk tiers → categories → institutions,
+// dedupe by name, and cap so the largest catalog can't flood the index or
+// unbalance ranking — enough to route the reader to the tab, not a second copy
+// of every entry. Best-effort: a malformed table yields no rows rather than
+// throwing (the index stays a navigation aid).
+const INSTITUTION_CAP = 80;
+const INSTITUTION_ENTRIES = (() => {
+  const seen = new Set();
+  const out = [];
+  for (const tierCat of Object.values(institutionalCatalog || {})) {
+    for (const [category, insts] of Object.entries(tierCat || {})) {
+      for (const [name, def] of Object.entries(insts || {})) {
+        if (!name || seen.has(name)) continue;
+        seen.add(name);
+        out.push({
+          id: `inst-${slug(name)}`,
+          term: name,
+          category: 'Institution',
+          tab: 'institutions',
+          anchor: 'institutions',
+          keywords: `${category} ${def?.desc || ''} ${(def?.tags || []).join(' ')}`.trim(),
+        });
+        if (out.length >= INSTITUTION_CAP) return out;
+      }
+    }
+  }
+  return out;
+})();
+
 /**
  * The flat, frozen index. Order here is the stable tiebreak order when
  * two entries score equally (after term-length).
@@ -142,9 +198,11 @@ export const COMPENDIUM_INDEX = Object.freeze([
   ...ECONOMY_ENTRIES,
   ...ARCHETYPE_ENTRIES,
   ...ARCANE_ENTRIES,
+  ...LIVING_WORLD_ENTRIES,
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
+  ...INSTITUTION_ENTRIES,
 ].map(Object.freeze));
 
 // ── Scoring ────────────────────────────────────────────────────────────────

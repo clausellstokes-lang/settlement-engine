@@ -21,7 +21,7 @@ import { ArrowRight, Eye } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import Button from './primitives/Button.jsx';
 import { TIER_LABELS } from './new/design.js';
-import { INK, BORDER, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { INK, BORDER, sans, serif_, SP, R, FS, swatch, PARCH, PARCH_100 } from './theme.js';
 import { t } from '../copy/index.js';
 
 const MUTED = swatch['#6B5340'];
@@ -59,7 +59,7 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
       {showHeader && <header style={{
         marginBottom: SP.lg,
         padding: `${SP.md}px ${SP.lg}px`,
-        background: 'linear-gradient(135deg, #FBF5E6 0%, #F4EAD0 100%)',
+        background: `linear-gradient(135deg, ${PARCH} 0%, ${PARCH_100} 100%)`,
         border: `1px solid ${BORDER}`,
         borderRadius: R.xl,
         display: 'flex', alignItems: 'center', gap: SP.lg,

@@ -75,7 +75,7 @@ registerStep('isolationPass', {
         result:     'subsistence_stripped',
         causes: [
           { source: 'subsistenceMode', effect: 'removed',
-            reason: `Settlement is in subsistence mode — "${name}" requires external supply chains that don't reach here.` },
+            reason: `Settlement is in subsistence mode. "${name}" requires external supply chains that don't reach here.` },
         ],
       });
     }
@@ -93,7 +93,7 @@ registerStep('isolationPass', {
       result:     'requires_teleportation_circle',
       causes: [
         { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-          reason: `"${name}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+          reason: `"${name}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
       ],
     });
   }

@@ -84,7 +84,7 @@ const OutputNode = ({ label, isExport }) => (
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>Export</span>}
   </div>
 );
 
@@ -134,7 +134,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         background: st.bg, borderLeft: `3px solid ${st.border}`, borderRadius: 4 }}>
         <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || '️'}</span>
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
+        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>Export</span>}
         {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch.infoBg, border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
         <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
@@ -315,7 +315,7 @@ function Legend() {
     { dot: '◐', color: '#8a5010', label: 'Vulnerable. Upstream imported' },
     { dot: '○', color: '#8b1a1a', label: 'Impaired. Institution missing' },
     { text: '', label: 'Import fills gap' },
-    { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
+    { text: '↗ Export', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: swatch.inkMag3 }}>

@@ -152,7 +152,7 @@ export default function WarFaithMapOverlay() {
       {model.occupations.map(o => (
         <g key={o.id} className="sf-occupation" transform={`translate(${o.x} ${o.y})`}>
           <circle r={13} fill={COLOR_OCCUPATION} fillOpacity={0.16} stroke={COLOR_OCCUPATION} strokeOpacity={0.4} strokeWidth={1} strokeDasharray="3 2">
-            <title>Occupied — under an occupation authority</title>
+            <title>Occupied: under an occupation authority</title>
           </circle>
         </g>
       ))}
@@ -173,7 +173,7 @@ export default function WarFaithMapOverlay() {
               strokeLinecap="round"
               strokeDasharray={m.covert ? '2 2' : undefined}
             >
-              <title>{m.covert ? `Mobilizing (covert) — ${m.phrase}` : `Mobilizing — ${m.phrase}`}</title>
+              <title>{m.covert ? `Mobilizing (covert): ${m.phrase}` : `Mobilizing: ${m.phrase}`}</title>
             </path>
           </g>
         </g>
@@ -195,7 +195,7 @@ export default function WarFaithMapOverlay() {
       {model.sieges.map(s => (
         <g key={s.id} className="sf-siege-ring" transform={`translate(${s.x} ${s.y})`}>
           <circle r={10} fill="none" stroke={COLOR_WAR} strokeOpacity={s.gm ? 0.6 : 0.85} strokeWidth={2} strokeDasharray={s.gm ? '4 3' : '5 3'}>
-            <title>{`Under siege — coalition of ${s.coalition}`}</title>
+            <title>{`Under siege: coalition of ${s.coalition}`}</title>
           </circle>
           {/* Coalition badge — the count of besiegers (a coalition of 1 still shows). */}
           <g className="sf-coalition-badge" transform="translate(9 -9)">

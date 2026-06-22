@@ -27,11 +27,11 @@ const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) 
 const POSTURE_PHRASE = Object.freeze({
   peace: 'at peace',
   alert: 'on alert',
-  war_preparation: 'gearing for war — economy shifting to a war footing',
-  mobilized: 'fully mobilized — war economy, ready to march',
+  war_preparation: 'gearing for war, the economy shifting to a war footing',
+  mobilized: 'fully mobilized, a war economy ready to march',
   deployed: 'army in the field',
-  war_exhaustion: 'war-weary — its army is spent',
-  demobilizing: 'standing down — winding the war economy back down',
+  war_exhaustion: 'war-weary, its army spent',
+  demobilizing: 'standing down, the war economy unwinding',
 });
 
 // The linear ramp rungs (peace=0 … mobilized=3) → how many rungs to the top.
@@ -122,11 +122,11 @@ export function settlementMobilization({ settlementId, worldState, includeCovert
 // enum jargon. This is the "siege implausible: defender far stronger, needs a
 // coalition" surfacing the proposal §16 asks for.
 const FEASIBILITY_PHRASE = Object.freeze({
-  plausible: 'a real contest — the outcome is uncertain',
-  auto_fail: 'hopeless — the defender is far too strong to assault',
-  harassment: 'too weak to take the town — at most it could raid the approaches',
-  require_coalition: 'not alone — it would take a coalition to threaten the defender',
-  require_betrayal: 'only from within — an opening would need the defender to fracture (a coup or revolt)',
+  plausible: 'a real contest, the outcome uncertain',
+  auto_fail: 'hopeless; the defender is far too strong to assault',
+  harassment: 'too weak to take the town; it could only raid the approaches',
+  require_coalition: 'not alone; it would take a coalition to threaten the defender',
+  require_betrayal: 'only from within: the defender would have to fracture first (a coup or revolt)',
   require_magic: 'only with decisive magical force could the attack succeed',
 });
 
