@@ -20,6 +20,7 @@ import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
+import { settlementWarStatus } from '../domain/display/warStatus.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import Button from './primitives/Button.jsx';
@@ -44,12 +45,16 @@ function isCampaignCanonized(campaignState) {
 }
 
 function suggestedTagsFor(settlement = {}) {
+  // Read the attributes the engine actually persists (config.terrainType, the
+  // governing faction name, powerStructure.stability) — the old paths
+  // (config.terrain, governmentType, viability.stability) were never written, so
+  // every suggested-tag list silently dropped them.
   return [
     settlement.tier,
-    settlement.config?.terrain,
+    settlement.config?.terrainType || settlement.config?.terrainOverride,
     settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
-    settlement.powerStructure?.governmentType,
-    settlement.viability?.stability,
+    settlement.config?.culture,
+    settlement.powerStructure?.government || settlement.powerStructure?.governingName,
     settlement.config?.nearbyResources?.[0],
   ].filter(Boolean).slice(0, 6);
 }
@@ -127,6 +132,26 @@ export default function ShareToGallery({
       settlements,
     });
   }, [owningCampaign, allSaves]);
+  // Gallery facet snapshot (migration 063). Read from the REAL settlement
+  // attributes (not the owner tags): culture + prosperity + patron deity from
+  // the persisted data, and the live at-war flag from the owning campaign's war
+  // ledger. Captured here so the gallery row can filter on them without
+  // recomputing live campaign state. Empty/absent ⇒ omitted (the column nulls).
+  const facets = useMemo(() => {
+    const warStatus = owningCampaign
+      ? settlementWarStatus({
+          settlementId: saveId,
+          worldState: owningCampaign.worldState,
+          regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+        })
+      : null;
+    return {
+      facetCulture: settlement?.config?.culture || '',
+      facetProsperity: settlement?.economicState?.prosperity || '',
+      facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
+      facetAtWar: warStatus?.atWar === true,
+    };
+  }, [owningCampaign, saveId, settlement]);
   const metadata = useMemo(() => ({
     description,
     imageUrl,
@@ -136,7 +161,8 @@ export default function ShareToGallery({
     shareDm,
     importable,
     realmArcSummary,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, realmArcSummary]);
+    ...facets,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);

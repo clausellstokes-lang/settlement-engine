@@ -63,6 +63,7 @@ export default function GalleryList({
   openDossier,
   toggleArrayFilter,
   toggleBoolFilter,
+  setPopulationBand,
   clearFilters,
   voteOn,
   onNavigate,
@@ -82,6 +83,7 @@ export default function GalleryList({
           filters={filters}
           onToggleArray={toggleArrayFilter}
           onToggleBool={toggleBoolFilter}
+          onSetPopulationBand={setPopulationBand}
           onClear={clearFilters}
           isSignedIn={isSignedIn}
         />

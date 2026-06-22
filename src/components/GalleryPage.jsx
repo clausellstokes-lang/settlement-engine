@@ -76,6 +76,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     backToList,
     toggleArrayFilter,
     toggleBoolFilter,
+    setPopulationBand,
     clearFilters,
     voteOn,
     reportOn,
@@ -163,6 +164,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
           openDossier={openDossier}
           toggleArrayFilter={toggleArrayFilter}
           toggleBoolFilter={toggleBoolFilter}
+          setPopulationBand={setPopulationBand}
           clearFilters={clearFilters}
           voteOn={voteOn}
           onNavigate={onNavigate}

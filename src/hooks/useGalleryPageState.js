@@ -14,12 +14,21 @@ import { saves as savesService } from '../lib/saves.js';
 export const EMPTY_GALLERY_FILTERS = Object.freeze({
   tier: [],
   terrain: [],
-  governmentType: [],
   magicLevel: [],
-  stability: [],
+  // Migration 063: bounded-vocab IN-list facets sourced from real attributes.
+  // governmentType + stability were retired (free-text values with no stable
+  // vocabulary to match).
+  culture: [],
+  prosperity: [],
   hasImage: false,
   hasComments: false,
   curatedOnly: false,
+  // Boolean facets: a patron deity is present / the settlement is at war.
+  hasDeity: false,
+  atWar: false,
+  // Population range (preset bands write these). 0 ⇒ unbounded on that side.
+  populationMin: 0,
+  populationMax: 0,
   // §5 — "My Settlements": client-only filter that swaps the feed for the
   // owner-scoped list_my_gallery_dossiers RPC (ignored by the public feed's
   // server-side filter normalizer, which allowlists keys).
@@ -183,6 +192,19 @@ export function useGalleryPageState(routeSlug = null) {
     setFilters(current => ({ ...current, [key]: value }));
   }, []);
 
+  // Population band: writes both numeric bounds at once (0 ⇒ unbounded on that
+  // side). Selecting the active band again clears it. `band` is { min, max }.
+  const setPopulationBand = useCallback((band) => {
+    setFilters(current => {
+      const min = band?.min || 0;
+      const max = band?.max || 0;
+      const isActive = (current.populationMin || 0) === min && (current.populationMax || 0) === max;
+      return isActive || (!min && !max)
+        ? { ...current, populationMin: 0, populationMax: 0 }
+        : { ...current, populationMin: min, populationMax: max };
+    });
+  }, []);
+
   const clearFilters = useCallback(() => {
     setFilters({ ...EMPTY_GALLERY_FILTERS });
   }, []);
@@ -287,6 +309,7 @@ export function useGalleryPageState(routeSlug = null) {
     backToList,
     toggleArrayFilter,
     toggleBoolFilter,
+    setPopulationBand,
     clearFilters,
     voteOn,
     reportOn,

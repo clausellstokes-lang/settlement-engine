@@ -123,6 +123,48 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
     });
   });
 
+  it('forwards the new bounded-vocab + boolean + range facets to the RPC', async () => {
+    await fetchPublicGallery({
+      page: 0,
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        atWar: true,
+        hasDeity: true,
+        populationMin: 401,
+        populationMax: 5000,
+        // Retired facets must NOT be forwarded (no stable vocabulary to match).
+        governmentType: ['monarchy'],
+        stability: ['stable'],
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', expect.objectContaining({
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        atWar: true,
+        hasDeity: true,
+        populationMin: 401,
+        populationMax: 5000,
+      },
+    }));
+  });
+
+  it('surfaces the new facet columns on the sanitized tile', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{
+        id: '9', public_slug: 's9', name: 'Frosthold', tier: 'city',
+        culture: 'norse', prosperity: 'Wealthy', primary_deity: 'Verra', at_war: true,
+        total_count: 1,
+      }],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0]).toMatchObject({
+      culture: 'norse', prosperity: 'Wealthy', primaryDeity: 'Verra', atWar: true,
+    });
+  });
+
   it('can be told to include curated tiles via excludeCurated=false', async () => {
     await fetchPublicGallery({ page: 0, excludeCurated: false });
     expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', expect.objectContaining({

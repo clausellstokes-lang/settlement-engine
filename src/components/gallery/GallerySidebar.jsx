@@ -15,10 +15,12 @@ import {
 } from '../theme.js';
 import {
   activeFilterCount,
-  GOVERNMENT_OPTIONS,
+  activePopulationBand,
+  CULTURE_OPTIONS,
   human,
   MAGIC_OPTIONS,
-  STABILITY_OPTIONS,
+  POPULATION_BANDS,
+  PROSPERITY_OPTIONS,
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
 } from './galleryUtils.js';
@@ -87,6 +89,30 @@ function FilterChips({ options, value = [], onToggle }) {
   );
 }
 
+// Single-select chips for the population band (one band picks both numeric
+// bounds; re-clicking the active band clears it).
+function BandChips({ bands, activeKey, onPick }) {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
+      {bands.map(band => {
+        const isOn = activeKey === band.key;
+        return (
+          <Button
+            key={band.key}
+            variant={isOn ? 'gold' : 'secondary'}
+            size="sm"
+            onClick={() => onPick(band)}
+            aria-pressed={isOn}
+            icon={isOn ? <Check size={12} /> : undefined}
+          >
+            {band.label}
+          </Button>
+        );
+      })}
+    </div>
+  );
+}
+
 function ToggleRow({ checked, label, onChange }) {
   const inputId = useId();
   return (
@@ -106,7 +132,7 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
-export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
+export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onSetPopulationBand, onClear, isSignedIn }) {
   return (
     <aside className="gallery-sidebar-panel" style={{
       display: 'grid',
@@ -145,17 +171,22 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
       <SidebarSection title="Terrain" count={filters.terrain?.length || 0}>
         <FilterChips options={TERRAIN_OPTIONS} value={filters.terrain} onToggle={option => onToggleArray('terrain', option)} />
       </SidebarSection>
-      <SidebarSection title="Government" count={filters.governmentType?.length || 0}>
-        <FilterChips options={GOVERNMENT_OPTIONS} value={filters.governmentType} onToggle={option => onToggleArray('governmentType', option)} />
-      </SidebarSection>
       <SidebarSection title="Magic" count={filters.magicLevel?.length || 0}>
         <FilterChips options={MAGIC_OPTIONS} value={filters.magicLevel} onToggle={option => onToggleArray('magicLevel', option)} />
       </SidebarSection>
-      <SidebarSection title="Stability" count={filters.stability?.length || 0}>
-        <FilterChips options={STABILITY_OPTIONS} value={filters.stability} onToggle={option => onToggleArray('stability', option)} />
+      <SidebarSection title="Culture" count={filters.culture?.length || 0}>
+        <FilterChips options={CULTURE_OPTIONS} value={filters.culture} onToggle={option => onToggleArray('culture', option)} />
+      </SidebarSection>
+      <SidebarSection title="Prosperity" count={filters.prosperity?.length || 0}>
+        <FilterChips options={PROSPERITY_OPTIONS} value={filters.prosperity} onToggle={option => onToggleArray('prosperity', option)} />
+      </SidebarSection>
+      <SidebarSection title="Population" count={activePopulationBand(filters) ? 1 : 0}>
+        <BandChips bands={POPULATION_BANDS} activeKey={activePopulationBand(filters)} onPick={onSetPopulationBand} />
       </SidebarSection>
       <SidebarSection title="Surface" style={{ marginTop: SP.xs }}>
         <div style={{ display: 'grid', gap: SP.sm }}>
+          <ToggleRow checked={filters.atWar} label="At war" onChange={value => onToggleBool('atWar', value)} />
+          <ToggleRow checked={filters.hasDeity} label="Has patron deity" onChange={value => onToggleBool('hasDeity', value)} />
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
           <ToggleRow checked={filters.curatedOnly} label="Curated only" onChange={value => onToggleBool('curatedOnly', value)} />

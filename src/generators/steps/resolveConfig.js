@@ -12,7 +12,10 @@ import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTie
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 
-const TERRAIN_WEIGHTS = [
+// Exported so the gallery-facet alignment test can pin TERRAIN_OPTIONS against
+// the vocabulary the generator actually rolls (the values persisted to
+// config.terrainType). See tests/components/gallery/facetAlignment.test.js.
+export const TERRAIN_WEIGHTS = [
   ['plains', 22], ['hills', 18], ['forest', 13],
   ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
 ];
@@ -27,7 +30,10 @@ const TERRAIN_ROUTE_POOLS = {
   desert:    ['crossroads','road','road','isolated','road'],
 };
 
-const CULTURES = [
+// The canonical 11-culture catalog. Exported so the gallery-facet alignment
+// test can pin CULTURE_OPTIONS against the values the generator persists to
+// config.culture. See tests/components/gallery/facetAlignment.test.js.
+export const CULTURES = [
   'germanic','latin','celtic','arabic','norse','slavic',
   'east_asian','mesoamerican','south_asian','steppe','greek',
 ];
