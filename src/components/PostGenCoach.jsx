@@ -185,6 +185,15 @@ export default function PostGenCoach() {
               Back
             </Button>
           )}
+          {/* Always-present escape hatch: exit the tour from any step. */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={close}
+            style={{ color: MUTED }}
+          >
+            {t('onboarding.coach.skipTour')}
+          </Button>
           <span style={{ flex: 1 }} />
           <Button
             variant="ghost"

@@ -22,7 +22,7 @@ const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
 // flag + signed-in + savedCount===0; renders nothing otherwise.
 const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
 // Phone-optimized "at the table" view. Mounted only when
-// flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
+// userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
 // Click-to-edit settlement name in the header.
@@ -122,7 +122,7 @@ const TABS = [
   { id: 'daily_life', label: 'Daily Life' },
   { id: 'npcs',       label: 'NPCs' },
   { id: 'dm_notes',   label: 'DM Notes' },
-  { id: 'ai_notes',   label: 'AI Notes' },
+  { id: 'ai_notes',   label: 'Narrative Notes' },
   { id: 'chronicle',  label: 'Chronicle' },
 ];
 
@@ -625,9 +625,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           <SummaryTabV2
             settlement={s}
             hideIdentity={!hideHeader}
-            onOpenTableView={flag('tableView')
-              ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
-              : undefined}
+            onOpenTableView={() => useStore.getState().setUserPref?.('tableViewOpen', true)}
           />
         </>
       );
@@ -896,9 +894,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         </div>
       </div>
       {/* Table View overlay. Rendered as a sibling of the dossier
-          card so it takes over the full viewport. Gated on flag + the
+          card so it takes over the full viewport. Gated on the
           tableViewOpen pref so the lazy chunk only loads when actually opened. */}
-      {flag('tableView') && tableViewOpen && (
+      {tableViewOpen && (
         <Suspense fallback={null}>
           <TableView
             settlement={activeSettlement}

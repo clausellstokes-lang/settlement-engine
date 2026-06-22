@@ -62,13 +62,13 @@ const ANCHOR_TO_TAB = Object.freeze({
 // SettlementForge title. Standalone mode (the public route) wires
 // this; embedded mode leaves the page title alone.
 const TAB_META = Object.freeze({
-  tiers:        { title: 'Settlement tiers & trade routes: SettlementForge Compendium',
+  tiers:        { title: 'Settlement tiers and trade routes: SettlementForge Compendium',
                   desc: 'Reference for thorp through metropolis tiers, trade route effects (road / crossroads / port / river / mountain pass / isolated), and monster threat levels in SettlementForge.' },
   economy:      { title: 'Economy reference: SettlementForge Compendium',
                   desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
-  power:        { title: 'Power & faction archetypes: SettlementForge Compendium',
+  power:        { title: 'Power and faction archetypes: SettlementForge Compendium',
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
-  arcane:       { title: 'Religion & the Pantheon reference: SettlementForge Compendium',
+  arcane:       { title: 'Religion and the Pantheon reference: SettlementForge Compendium',
                   desc: 'The deity axes (alignment, temperament, rank) and their living-world effects, dormant-until-assigned, the conversion contest, magic legality, and theocratic governance in SettlementForge.' },
   living:       { title: 'The Living World reference: SettlementForge Compendium',
                   desc: 'The simulation substrate behind the generator: causal variables, pressures and settlement strength, the World Pulse, the self-ending war layer, and the pantheon.' },

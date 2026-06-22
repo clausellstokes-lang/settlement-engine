@@ -203,7 +203,7 @@ export default function AccountMenu({
           />
           <MenuRow
             icon={<CreditCard size={15} />}
-            label="Manage subscription & credits"
+            label="Manage subscription and credits"
             onClick={() => { setOpen(false); onManageSubscription?.(); }}
           />
           {onSignOut && (

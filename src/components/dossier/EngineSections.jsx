@@ -83,7 +83,7 @@ export function EconomicsGranarySection({ settlement }) {
     : null;
 
   return (
-    <SectionShell title="Economic capacity & granary" accent={GOLD} testid="economics-granary-section">
+    <SectionShell title="Economic capacity and granary" accent={GOLD} testid="economics-granary-section">
       {model.cap && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.sm }}>
           <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK, flex: 1 }}>Economic capacity</span>
@@ -216,7 +216,7 @@ export function PowerSuccessionSection({ settlement }) {
   }
 
   return (
-    <SectionShell title="Rule & succession" accent={GOLD} testid="power-succession-section">
+    <SectionShell title="Rule and succession" accent={GOLD} testid="power-succession-section">
       {incumbentName && (
         <div style={{ fontSize: FS.sm, color: BODY, marginBottom: SP.xs }}>
           <strong>Ruler:</strong> {incumbentName}

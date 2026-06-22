@@ -244,7 +244,7 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
-      {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b">
+      {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions and conflicts" collapsible defaultOpen accent="#b8860b">
         {hist.currentTensions?.map((t,i)=>(
           <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
@@ -299,7 +299,7 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
       </div>}
 
       {/* ── RESOURCE CONTEXT (terrain strengths) ─────────────────────────── */}
-      {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
+      {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography and resources" collapsible defaultOpen={false} accent="#1a5a28">
         <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
           {ra.terrain&&<div style={{flex:'1 1 100px'}}>
             <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Terrain</div>

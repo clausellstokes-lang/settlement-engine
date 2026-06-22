@@ -17,6 +17,13 @@ import {
   GOLD_TXT, GREEN, GREEN_BG, INK, PARCH, RED, RED_BG, VIOLET, VIOLET_BG, VIOLET_DEEP,
   swatch,
 } from '../../src/components/theme.js';
+// Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
+// warning / ai tones previously coloured their LABEL with the -500 fill hue
+// (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
+// use the darker text steps (GOLD_TXT, AMBER_DEEP, VIOLET_DEEP). Pinned so a
+// future edit can't drop the label back onto its fill hue. GOLD_BG is a
+// translucent rgba over varying surfaces, so the gold tone is checked against its
+// opaque soft-gold reference (GOLD_SOFT), the worst-case lightest backing.
 import { BAND_COLOR } from '../../src/domain/state/bands.js';
 
 // ── WCAG relative-luminance contrast ─────────────────────────────────────────
@@ -74,6 +81,23 @@ describe('Button variant text legibility (WCAG AA 4.5:1)', () => {
   test('pricing gold badges use ink-on-gold, not the failing white-on-gold', () => {
     expect(ratio(INK, GOLD)).toBeGreaterThanOrEqual(AA_TEXT);   // 7.6:1
     expect(ratio('#FFFFFF', GOLD)).toBeLessThan(AA_TEXT);       // why white is wrong here
+  });
+});
+
+describe('Badge tinted-tone text legibility (WCAG AA 4.5:1)', () => {
+  const pairs = [
+    ['gold',    GOLD_TXT,    GOLD_SOFT], // gold-800 on opaque soft-gold (GOLD_BG backing)
+    ['warning', AMBER_DEEP,  AMBER_BG],  // amber-700 on amber-100
+    ['ai',      VIOLET_DEEP, VIOLET_BG], // violet-700 on violet-100
+  ];
+  for (const [name, fg, bg] of pairs) {
+    test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
+      expect(ratio(fg, bg)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  test('the retired fill-hue labels would fail as text (documents the split)', () => {
+    expect(ratio(GOLD, GOLD_SOFT)).toBeLessThan(AA_TEXT);
+    expect(ratio(VIOLET, VIOLET_BG)).toBeLessThan(AA_TEXT);
   });
 });
 

@@ -218,7 +218,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 2 ── Pressures & Strength ──────────────────────────────────────────── */}
       <WorkshopCard
         id="pressures-strength"
-        title="Pressures & Strength"
+        title="Pressures and Strength"
         hint="The live granary, its war-cost-aware strength, and its standing in the wider realm. The full 16-variable substrate grid lives in the dossier above (Systems -> Substrate)."
         editMode={showWrite}
       >
@@ -245,7 +245,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 3 ── Faith & Pantheon ──────────────────────────────────────────────── */}
       <WorkshopCard
         id="faith-pantheon"
-        title="Faith & Pantheon"
+        title="Faith and Pantheon"
         headline={headlines['faith-pantheon']}
         hint="What this settlement's patron deity does to the substrate, and the controls to assign one and awaken the religion layer."
         editMode={showWrite}
@@ -275,7 +275,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 4 ── Power & Succession ────────────────────────────────────────────── */}
       <WorkshopCard
         id="power-succession"
-        title="Power & Succession"
+        title="Power and Succession"
         headline={headlines['power-succession']}
         hint="The ruler, the coup-risk forecast, the contenders, and the lineage of governments that came before."
         editMode={showWrite}
@@ -316,7 +316,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 6 ── Timeline & Chronicle ──────────────────────────────────────────── */}
       <WorkshopCard
         id="timeline-chronicle"
-        title="Timeline & Chronicle"
+        title="Timeline and Chronicle"
         headline={headlines['timeline-chronicle']}
         hint="The canon event log: every committed change, in order."
         editMode={showWrite}
@@ -333,7 +333,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
       {/* 7 ── Provenance & Links ────────────────────────────────────────────── */}
       <WorkshopCard
         id="provenance-links"
-        title="Provenance & Links"
+        title="Provenance and Links"
         hint="The seed, timestamps, and campaign link behind this dossier."
         editMode={showWrite}
       >

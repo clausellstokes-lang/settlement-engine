@@ -42,7 +42,7 @@ const AssignDeityFromMap  = lazy(() => import('./AssignDeityFromMap.jsx'));
 /** The inspector sections, in display order. `pantheon` self-hides when dormant. */
 export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard', label: 'Dashboard', Icon: LayoutDashboard },
-  { id: 'war',       label: 'War & Diplomacy', Icon: Swords },
+  { id: 'war',       label: 'War and Diplomacy', Icon: Swords },
   { id: 'pantheon',  label: 'Pantheon', Icon: Sparkles },
   { id: 'pulse',     label: 'Pulse Results', Icon: Zap },
   { id: 'chronicle', label: 'Chronicle', Icon: Newspaper },
@@ -179,7 +179,7 @@ export default function RealmInspector({
           {activeSection === 'war' && (
             campaign
               ? <WarSection campaign={campaign} nameById={nameById} />
-              : <CampaignEmptyState lead="War & diplomacy appears once a campaign is live." {...emptyHandlers} />
+              : <CampaignEmptyState lead="War and diplomacy appears once a campaign is live." {...emptyHandlers} />
           )}
           {activeSection === 'pantheon' && (
             campaign

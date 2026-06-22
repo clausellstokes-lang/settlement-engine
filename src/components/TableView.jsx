@@ -15,9 +15,9 @@
  *   props.settlement — the settlement to run (raw or AI-refined; caller picks)
  *   props.onClose    — () => dismiss the overlay
  *
- * Esc and backdrop-click both close. Self-gating (flag + the tableViewOpen
- * pref) is the caller's job — OutputContainer only mounts this when
- * flag('tableView') && userPrefs.tableViewOpen, so this component renders
+ * Esc and backdrop-click both close. Self-gating (the tableViewOpen
+ * pref) is the caller's job. OutputContainer only mounts this when
+ * userPrefs.tableViewOpen, so this component renders
  * unconditionally when present.
  */
 

@@ -2657,7 +2657,7 @@ export const NAMING_DATA = {
   },
   mesoamerican: {
     name: "Mesoamerican",
-    description: "Aztec, Maya and Zapotec influenced - Postclassic period city-states and trade networks",
+    description: "Aztec, Maya and Zapotec influenced. Postclassic period city-states and trade networks",
     settlementPrefixes: [
       "Teoti",
       "Xochi",

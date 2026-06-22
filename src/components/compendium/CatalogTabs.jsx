@@ -80,7 +80,7 @@ export function EconomyTab() {
         tier; the remaining cards are the quieter supporting set (P4). */}
     <Card title="Prosperity Tiers" accent={GOLD} lead>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
-    <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
+    <Card title="Exports and Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
     <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
     <Card title="Viability Score" accent='#8b1a1a'>Economic stress analysis showing which factors are supporting prosperity and which are fragile.</Card>
   </>;
@@ -187,12 +187,12 @@ export function ArcaneTab() {
     <Card title="Dormant until assigned" accent={DEITY_ACCENT} lead>A deity only acts once it is a settlement&rsquo;s primary god (the embed-on-assign bridge) AND the campaign&rsquo;s Religion-dynamics rule is on. No assignment, no effect.</Card>
     <Card title="Contesting converts" accent='#1a4a2a'>With religion dynamics on, neighbouring faiths contest each tick. Alignment-direction match, warlike posture, and rank weight the pull. A winning faith gains seats; a losing one cedes them.</Card>
     <Card title="Tiers (major / minor / cult)" accent='#3a1a7a'>Rank scales how hard a god anchors religious authority and whether it regulates magic. A major pantheon-head outweighs a fringe cult.</Card>
-    <Card title="Ascendancy & Twilight arcs" accent='#5a2a8a'>A faith that keeps winning rises through an <em>Ascendancy</em> arc (more seats, firmer orthodoxy); one that keeps losing slides into a <em>Twilight</em> arc toward irrelevance.</Card>
+    <Card title="Ascendancy and Twilight arcs" accent='#5a2a8a'>A faith that keeps winning rises through an <em>Ascendancy</em> arc (more seats, firmer orthodoxy); one that keeps losing slides into a <em>Twilight</em> arc toward irrelevance.</Card>
 
-    <SectionHeading accent={swatch.magic}>Magic &amp; faith interplay (generation)</SectionHeading>
+    <SectionHeading accent={swatch.magic}>Magic and faith interplay (generation)</SectionHeading>
     <Card title="Magic Suppression" accent='#5a2a8a'>Sliders run 0 to 100. Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
     <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic buffers deficits. Arcane institutions can substitute for missing production.</Card>
-    <Card title="Magic &amp; Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+    <Card title="Magic and Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
   </>;
 }
 
@@ -202,13 +202,13 @@ export function ArcaneTab() {
 const LIVING_WORLD_GROUPS = [
   ['Causal Substrate', '#1a3a7a',
     'Sixteen canonical variables (legitimacy, food security, unrest, religious authority, …) the engine carries per settlement. Generation seeds them; each advance re-derives them from prior state, never wall-clock.'],
-  ['Pressures & Strength', '#a0762a',
-    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. settlementStrength rolls them into one defend/yield signal that drives strategy.'],
+  ['Pressures and Strength', '#a0762a',
+    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. They roll up into a single defend-or-yield signal that drives strategy.'],
   ['World Pulse', '#1a5a28',
     'The per-tick advance: stressors fire, populations and trade drift, institutions are born and die, proposals queue for the DM. Off-by-default toggles keep a peacetime save byte-identical.'],
   ['War Layer', '#8b1a1a',
     'Armies march, sieges form, conquests change rulers; warExhaustion rises until a self-ending peace. Entirely dormant unless the War-layer rule is enabled.'],
-  ['Religion & Pantheon', DEITY_ACCENT,
+  ['Religion and Pantheon', DEITY_ACCENT,
     'Assigned deities contest converts, gain seats, and steer corruption / aggression / magic legality through their axes. Dormant until a primary deity is assigned and Religion dynamics are on.'],
 ];
 

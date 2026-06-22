@@ -163,7 +163,7 @@ describe('RealmInspector — overlay structure', () => {
     );
     // The Pantheon tab button is absent when the ledger is empty.
     expect(screen.queryByRole('button', { name: 'Pantheon' })).toBeNull();
-    // …but War & Diplomacy and Chronicle remain.
-    expect(screen.getByRole('button', { name: 'War & Diplomacy' })).toBeTruthy();
+    // …but War and Diplomacy and Chronicle remain.
+    expect(screen.getByRole('button', { name: 'War and Diplomacy' })).toBeTruthy();
   });
 });

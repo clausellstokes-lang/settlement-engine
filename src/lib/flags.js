@@ -108,10 +108,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: '"?" affordance on every config control opens Compendium snippet.',
   },
-  tableView: {
-    default: true,
-    description: '380px phone-optimized session-running view of a settlement.',
-  },
   // ── Pricing copy ────────────────────────────────────────────────────────────
   // The simulation-led copy ("Generate a town in seconds, then run the region for
   // years.") vs. the old "unlimited saves" pitch. PROMOTED default-ON: the live

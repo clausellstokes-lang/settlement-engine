@@ -78,7 +78,7 @@ export const COPY = {
     // Cost is interpolated by the consuming component so the hint stays
     // honest when the pricing config flips schedules. See aiInlineHint().
     inlineHintFn: (cost) => `${cost} credit${cost === 1 ? '' : 's'} · streams section by section · partial failures keep your raw draft intact`,
-    polishCta:    'Polish with AI',
+    polishCta:    'Narrate',
     progressCta:  'Apply event and progress narrative',
   },
 
