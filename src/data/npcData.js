@@ -57,6 +57,29 @@ export const SPEECH_PATTERNS = [
   'Uses long pauses as punctuation and sits comfortably in silence',
 ];
 
+/**
+ * TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable weights deciding which of an
+ * NPC's two corruption-relevant personality slots survive generation:
+ *   • `dominant` (a steady TEMPERAMENT) makes an NPC harder for the world-pulse
+ *     sim to turn.
+ *   • `flaw` (greed, ambition, a vice) is the weakness organized crime leverages
+ *     to turn an NPC. No flaw ⇒ nothing to leverage ⇒ the sim can never turn them.
+ *
+ * The four buckets are independent presence outcomes (weights sum to 1.0). A
+ * solid majority keep a flaw (both + flawOnly = 70%) so the background sim still
+ * has people to turn; only 10% have neither slot. The roll is drawn from the
+ * seeded PRNG so generation stays reproducible. This governs ONLY trait
+ * presence — it does NOT touch the manual "Impose corruption" DM override, which
+ * works on any NPC with no flaw check.
+ * @type {Readonly<{both:number, flawOnly:number, temperamentOnly:number, neither:number}>}
+ */
+export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
+  both: 0.40,
+  flawOnly: 0.30,
+  temperamentOnly: 0.20,
+  neither: 0.10,
+});
+
 export const NPC_RELIGION_DATA = {
   positive: [
     'honest',

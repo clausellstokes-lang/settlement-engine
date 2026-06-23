@@ -1,7 +1,7 @@
 import { stablePart } from './worldState.js';
 import { relationshipRoles } from './relationshipEvolution.js';
 import {
-  readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
+  readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor,
@@ -660,6 +660,13 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       if (!s) return;
       const local = rng.fork(`corr:${id}:${tick}`);
       const flaw = npcCorruptibleFlaw(npc);
+      // Per-NPC steadiness for the onset hazard: 0 for a no-flaw NPC (the `&& flaw`
+      // guard below is the hard skip), 1 for flaw-only, and the temperament factor
+      // (< 1) for flaw + steady temperament — a real, strictly-lower-but-positive
+      // chance. Reads the AUTHORED personality only — NO rng draw, NO extra fork,
+      // so the deterministic stream position is unchanged (a post-sum multiplier
+      // moves the threshold, not the draw), exactly like deityDisfavor.
+      const steadiness = corruptibility(npc);
 
       const priorExposures = s.timesExposed || 0;
 
@@ -675,7 +682,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
         // where criminal infrastructure exists (RELAXED for an evil deity).
         // A prior exposure (organic or DM) makes re-corruption progressively
         // harder. An evil deity's onset disfavor rides here.
-        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset })) {
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness })) {
           npcStates[id] = {
             ...s,
             corruption: true,

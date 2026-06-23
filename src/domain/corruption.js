@@ -57,14 +57,41 @@ export function corruptionVectorForFlaw(flaw) {
   return FLAW_VECTOR[String(flaw || '').toLowerCase()] || 'greed';
 }
 
-/** The NPC's corruptible flaw (lowercased) if any, else null. Reads the common
- *  shapes: npc.personality.flaw, npc.flaw, npc.personality.dominant. */
+/** The NPC's corruptible flaw (lowercased) if any, else null. Reads ONLY the
+ *  real flaw slots: npc.personality.flaw, npc.flaw. It deliberately does NOT fall
+ *  back to npc.personality.dominant — that slot is the steady TEMPERAMENT, not a
+ *  flaw. Since trait generation now makes flaw genuinely optional, a temperament
+ *  must never masquerade as a corruptible flaw, or a temperament-only NPC would be
+ *  (mis)read as corruptible and turned by the sim, breaking the no-flaw rule.
+ *  @param {any} npc @returns {string|null} */
 export function npcCorruptibleFlaw(npc) {
-  const candidates = [npc?.personality?.flaw, npc?.flaw, npc?.personality?.dominant];
+  const candidates = [npc?.personality?.flaw, npc?.flaw];
   for (const c of candidates) {
     if (isCorruptibleFlaw(c)) return String(c).toLowerCase();
   }
   return null;
+}
+
+/** True when the NPC carries a steady TEMPERAMENT (the personality.dominant
+ *  slot). A temperament makes the NPC harder for the world-pulse sim to turn (it
+ *  does NOT, on its own, make them corruptible — that requires a flaw).
+ *  @param {any} npc @returns {boolean} */
+export function npcHasTemperament(npc) {
+  return Boolean(npc?.personality?.dominant);
+}
+
+/** Pure per-NPC susceptibility of the BACKGROUND world-pulse turning loop,
+ *  expressed as the steadiness multiplier the onset hazard is scaled by:
+ *    • NO corruptible flaw           ⇒ 0   (the sim can NEVER turn them)
+ *    • flaw, no temperament          ⇒ 1   (full baseline onset chance)
+ *    • flaw + steady temperament     ⇒ CORRUPTION_TUNING.temperamentSteadiness
+ *                                       (a real, strictly-lower-but-positive chance)
+ *  This governs ONLY the background sim. The manual "Impose corruption" DM
+ *  override (mutate.js imposeCorruption) does NOT consult this — it turns any NPC.
+ *  @param {any} npc @returns {number} a factor in [0, 1] */
+export function corruptibility(npc) {
+  if (!npcCorruptibleFlaw(npc)) return 0;
+  return npcHasTemperament(npc) ? CORRUPTION_TUNING.temperamentSteadiness : 1;
 }
 
 // ── Damped probability model (tunable in one place) ─────────────────────────
@@ -82,6 +109,12 @@ export const CORRUPTION_TUNING = Object.freeze({
   // Once a corrupt NPC has eroded to 'notable', each further exposure rolls this
   // (very low) chance to be outed entirely + replaced by a fresh NPC.
   outReplaceAtNotable: 0.08,
+  // Steadiness multiplier on the ONSET hazard when an NPC has a temperament
+  // (personality.dominant). A steady disposition resists organized crime's pull:
+  // 0.5 ⇒ a flaw+temperament NPC turns at HALF the rate of a flaw-only NPC. It is
+  // a post-sum threshold shift (never an rng draw), so the deterministic stream is
+  // unperturbed — exactly like the deity-disfavor multiplier. ∈ (0, 1]; 1 disables.
+  temperamentSteadiness: 0.5,
 });
 
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
@@ -274,16 +307,23 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * represses onset. Defaults to 1.0 ⇒ deity-free / dormant is byte-identical (the
  * sum and clamp are unchanged). NEVER mutates the frozen TUNING.
  *
- * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number}} [args]
+ * `steadiness` is a bounded (0, 1] multiplier applied AFTER the sum and BEFORE
+ * the final clamp — alongside deityDisfavor — modelling a steady TEMPERAMENT
+ * resisting the pull: a flaw+temperament NPC turns at `steadiness`× a flaw-only
+ * NPC's rate. Defaults to 1.0 ⇒ no temperament / dormant is byte-identical.
+ *
+ * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number}} [args]
  * @returns {number}
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1 } = {}) {
   const t = CORRUPTION_TUNING.onset;
   let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
   // A burned official is warier + more watched: each prior exposure makes
   // re-corruption progressively harder (diminishing, never zero).
   p /= 1 + t.exposurePenalty * Math.max(0, priorExposures);
   p *= deityDisfavorMult(deityDisfavor);
+  // A steady temperament resists the pull (post-sum threshold shift, not a draw).
+  p *= clamp(steadiness, 0, 1);
   return clamp(p, t.min, t.max);
 }
 

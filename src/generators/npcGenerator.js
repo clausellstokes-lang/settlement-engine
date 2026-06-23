@@ -30,6 +30,7 @@ import {
   NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
   NPC_PRESENTATION_MODES,
+  TRAIT_PRESENCE_DISTRIBUTION,
 } from '../data/npcData.js';
 
 // pickFromArray — uses seeded PRNG when available
@@ -228,13 +229,43 @@ const filterByGuild = (institutions, culture, tier, config = {}) => {
 // NPC_TITLE_DATA
 
 // generateReligionType
-const generateReligionType = () => ({
-  dominant: pickFromArray(NPC_RELIGION_DATA.positive),
-  flaw: pickFromArray(NPC_RELIGION_DATA.negative),
-  modifier: pickFromArray(NPC_RELIGION_DATA.neutral),
-  tell: pickFromArray(MANNERISMS),
-  speech: pickFromArray(SPEECH_PATTERNS),
-});
+// Draws BOTH raw trait candidates first (preserving rng draw order, so the
+// existing downstream stream is unperturbed when a trait is kept), then a SINGLE
+// seeded roll decides which of {dominant=temperament, flaw} survive — making the
+// two corruption-relevant slots INDEPENDENTLY optional per
+// TRAIT_PRESENCE_DISTRIBUTION. A surviving trait keeps its drawn candidate; a
+// dropped one becomes null (absent). Consumers tolerate absence: npcCorruptibleFlaw
+// returns null with no flaw, and the personality string builders use .filter(Boolean).
+export const generateReligionType = () => {
+  const dominantCand = pickFromArray(NPC_RELIGION_DATA.positive);
+  const flawCand = pickFromArray(NPC_RELIGION_DATA.negative);
+  const modifier = pickFromArray(NPC_RELIGION_DATA.neutral);
+  const tell = pickFromArray(MANNERISMS);
+  const speech = pickFromArray(SPEECH_PATTERNS);
+
+  // ONE seeded roll AFTER both pickFromArray calls — walk the cumulative bands of
+  // TRAIT_PRESENCE_DISTRIBUTION to pick a presence bucket. Drawing the roll last
+  // means kept-trait NPCs leave the downstream rng position byte-identical.
+  const d = TRAIT_PRESENCE_DISTRIBUTION;
+  const r = _rng();
+  let dominant;
+  let flaw;
+  if (r < d.both) {
+    dominant = dominantCand;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly) {
+    dominant = null;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly + d.temperamentOnly) {
+    dominant = dominantCand;
+    flaw = null;
+  } else {
+    dominant = null;
+    flaw = null;
+  }
+
+  return { dominant, flaw, modifier, tell, speech };
+};
 
 // generateNPCAppearance
 const generateNPCAppearance = (r = 'other') => ({
