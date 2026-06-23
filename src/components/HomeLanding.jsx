@@ -19,7 +19,7 @@ const PILLARS = [
   { t: 'Simulate', d: 'Drop your canon towns into the Realm and advance time. Wars ignite and resolve, faiths rise, and the chronicle writes itself.' },
 ];
 
-export default function HomeLanding({ isMobile, onNavigate, onSignIn }) {
+export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }) {
   // Full-bleed hero: cancel the <main> padding so the band spans edge to edge.
   const padH = isMobile ? SP.md : SP.xxl;
   const padTop = isMobile ? SP.md : SP.lg;
@@ -46,12 +46,26 @@ export default function HomeLanding({ isMobile, onNavigate, onSignIn }) {
             <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>Forge your first settlement</Button>
             {/* Secondary CTA on the dark scrim: lift the border opacity on mobile
                 so the outline reads against the photographic hero; desktop keeps
-                its lighter 0.4 border byte-identical. */}
-            <Button variant="secondary" size="lg" onClick={onSignIn} style={{ background: 'rgba(251,245,230,0.1)', color: PARCH_100, borderColor: isMobile ? 'rgba(232,217,176,0.7)' : 'rgba(232,217,176,0.4)' }}>Sign in</Button>
+                its lighter 0.4 border byte-identical. Members (signedIn) get a
+                premium prompt to Pricing instead of Sign in. */}
+            <Button variant="secondary" size="lg" onClick={() => (signedIn ? onNavigate('pricing') : onSignIn())} style={{ background: 'rgba(251,245,230,0.1)', color: PARCH_100, borderColor: isMobile ? 'rgba(232,217,176,0.7)' : 'rgba(232,217,176,0.4)' }}>
+              {signedIn ? 'Explore Premium' : 'Sign in'}
+            </Button>
           </div>
-          <div style={{ fontFamily: sans, fontSize: FS.xs, color: 'rgba(244,234,208,0.55)', marginTop: SP.md }}>
-            Free. No account needed to forge your first town.
-          </div>
+          {/* Sub-CTA line, same font + size for both states: anon gets the free-to-
+              try reassurance; members get a learn-more link into the About page's
+              Living World tab (the Realm / Cartographer story). */}
+          {signedIn ? (
+            <div style={{ marginTop: SP.md, display: 'flex', justifyContent: 'center' }}>
+              <Button variant="ghost" size="sm" onClick={() => onNavigate('howto', { search: '?tab=living' })} style={{ fontFamily: sans, fontSize: FS.xs, color: 'rgba(244,234,208,0.72)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                Learn more about the simulator and the Realm map for Cartographers
+              </Button>
+            </div>
+          ) : (
+            <div style={{ fontFamily: sans, fontSize: FS.xs, color: 'rgba(244,234,208,0.55)', marginTop: SP.md }}>
+              Free. No account needed to forge your first town.
+            </div>
+          )}
         </div>
       </div>
 

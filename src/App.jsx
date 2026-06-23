@@ -135,10 +135,11 @@ export default function App() {
 
   // Logged-out front door. A visitor who is NOT signed in — and has no saved
   // session to restore — is routed from the bare root to the marketing landing;
-  // a signed-in member (or one whose saved session is still restoring) falls
-  // through to the app (/create), and is moved off the landing if they sign in
-  // while sitting on it. Deep links elsewhere are respected; only the root and
-  // /home are gated. Replaces the old once-per-device first-visit flag.
+  // a signed-in member (or one whose saved session is still restoring) is routed
+  // from the bare root to the app (/create). Deep links elsewhere are respected;
+  // only the bare root is gated now — an explicit /home visit is honoured so a
+  // member can revisit the Welcome page from the nav, where it shows the member
+  // CTAs (Explore Premium + learn-more). Replaces the old once-per-device flag.
   useEffect(() => {
     // No stored auth token at all ⇒ definitely logged out ⇒ route immediately,
     // with no wait and no landing-then-app flash. Otherwise wait for the saved
@@ -149,8 +150,8 @@ export default function App() {
       const atRoot = path === '/' || path === '';
       if (authTier === 'anon') {
         if (atRoot) replacePath('/home');            // logged out → the landing
-      } else if (view === 'home') {
-        replacePath('/create');                      // member on the landing → the app
+      } else if (atRoot) {
+        replacePath('/create');                      // member at the bare root → the app
       }
     } catch { /* private mode → fall through to the default */ }
   }, [authLoading, authTier, view]);
@@ -331,7 +332,11 @@ export default function App() {
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
   // The Welcome tab fronts the logged-out landing; signed-in members go straight to
   // Create, so it is dropped from their nav (the landing is logged-out-only).
-  const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
+  // Welcome stays in the nav for everyone, members included; the page adapts its
+  // CTAs by auth state (Sign in / free-to-try vs Explore Premium / learn-more)
+  // rather than being hidden. Members still LAND on Create from the bare root —
+  // the front-door effect gates only `/`, not an explicit /home visit.
+  const visibleNav = NAV;
 
   // Dedicated auth surfaces (/signin · /register · /reset-password ·
   // /verify-email · /confirm-email) render full-bleed: the persistent top nav
@@ -590,7 +595,7 @@ export default function App() {
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {/* Home is the marketing landing. First-visit gating routes new
                 visitors here; returning visitors land on /create. */}
-            {view === 'home'        && <HomeLanding isMobile={isMobile} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
+            {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
