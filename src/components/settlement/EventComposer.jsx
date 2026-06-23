@@ -58,6 +58,15 @@ export default function EventComposer() {
   // post-commit staleness notice moves to ChangeQueuePanel's commit seam
   // (SettlementDetail.onQueueCommitted) — nothing mutates on this click.
   const queueChange = useStore(s => s.queueChange);
+  // Scope (Phase 4a — STANDALONE only): the change-queue stages ONLY for
+  // non-clock-bound settlements. A clock-bound canon campaign member surrenders
+  // its timeline to the world pulse — applyEvent there redirects the event into
+  // the pulse queue, so staging it on the (hidden) change-queue would let a
+  // staged event silently redirect. For those, Apply commits IMMEDIATELY through
+  // applyEvent (which performs the world-pulse redirect), exactly as before the
+  // change-queue existed. The campaign queue path is Phase 4b.
+  const applyEvent = useStore(s => s.applyEvent);
+  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
   const [description, setDesc]  = useState('');
@@ -107,6 +116,9 @@ export default function EventComposer() {
   // #6 — the active campaign's OTHER settlements (so a trade route can open with
   // any campaign member, not only a pre-linked neighbour); see campaignPeerOptions.
   const activeSaveId = useStore(s => s.activeSaveId);
+  // True when this settlement is bound to a canonized campaign clock: Apply then
+  // commits immediately (world-pulse redirect) instead of staging on the queue.
+  const clockBound = !!(activeSaveId != null && typeof isSettlementClockBound === 'function' && isSettlementClockBound(activeSaveId));
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
   const campaignSettlementOptions = useMemo(
@@ -272,7 +284,10 @@ export default function EventComposer() {
         try { return spec?.narrate?.(builtEvent, settlement) || spec?.label || evType; }
         catch { return spec?.label || evType; }
       })();
-      queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: builtEvent } });
+      // Clock-bound campaign member: apply immediately (applyEvent redirects to
+      // the world-pulse queue). Standalone: stage on the change-queue.
+      if (clockBound) applyEvent(builtEvent);
+      else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: builtEvent } });
       if (pendingPreview?.event) dismissPreview();
     }
     setTarget('');
@@ -702,7 +717,10 @@ export default function EventComposer() {
                   try { return spec?.narrate?.(ev, settlement) || spec?.label || ev?.type; }
                   catch { return spec?.label || ev?.type; }
                 })();
-                queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: ev } });
+                // Clock-bound: apply each immediately (world-pulse redirect);
+                // standalone: stage on the change-queue.
+                if (clockBound) applyEvent(ev);
+                else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: ev } });
               }
             }
             dismissBatchPreview();

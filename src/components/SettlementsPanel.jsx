@@ -4,11 +4,9 @@ import {FolderPlus, Plus} from 'lucide-react';
 import { track, EVENTS } from '../lib/analytics.js';
 import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
-import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
 import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
-import { registerLinkExecutor } from '../store/changeQueueSlice.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -16,15 +14,11 @@ import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, isSaveActive } from '../lib/saveAccess.js';
 import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
 import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
-import {
-  relationshipDefinition,
-  relationshipLinkMetadata,
-} from '../domain/relationships/canonicalRelationship.js';
-import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackLink.js';
+import { useChangeQueueCascade } from './settlementDetail/useChangeQueueCascade.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
-import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
+import { migrateConfig, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
 import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
@@ -161,8 +155,20 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   ]);
 
   const [saves, _setSavesLocal] = useState([]);
+  // Live mirror of `saves` for the change-queue flush. During a flush the
+  // cascade executors mutate local saves SYNCHRONOUSLY across several React
+  // state updates; the end-of-batch commit must read the LATEST snapshot, not
+  // the closure's render-time `saves`. The ref is kept in lockstep by setSaves.
+  const savesRef = useRef([]);
+  // True while a change-queue flush is replaying cascades. When set, the
+  // cross-save cascades (applyRename / handleLink / removeNeighbour) mutate
+  // local saves/detail but DEFER their cloud write — the flush owns the single
+  // end-of-batch persistBatch. Affected row ids accumulate in flushAffectedRef.
+  const flushDeferRef = useRef(false);
+  const flushAffectedRef = useRef(new Set());
   // Wrapper: update local state + Zustand store so WorldMap palette stays in sync
   const setSaves = useCallback((newSaves) => {
+    savesRef.current = newSaves;
     _setSavesLocal(newSaves);
     setSavedSettlements(newSaves);
   }, [setSavedSettlements]);
@@ -305,6 +311,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     else navigate('settlements');
   }, [detail]);
 
+  // Atomic multi-row commit. Returns true on success, false on a rolled-back
+  // failure, so the change-queue flush can detect a failed dual-row link commit
+  // (which restores BOTH rows here) and keep the queue retryable. The legacy
+  // immediate-apply callers ignore the return and rely on the persistenceError
+  // banner, unchanged.
   const persistBatch = async (updatedSaves, modifiedIds, options = {}) => {
     const previousSaves = saves;
     try {
@@ -317,6 +328,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         deletes: options.deletes || [],
         creates: options.creates || [],
       });
+      return true;
     } catch (e) {
       console.error('Persist failed:', e);
       setSaves(previousSaves);
@@ -324,70 +336,35 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       const previousDetail = previousSaves.find(entry => String(entry.id) === String(openId));
       if (openId) setDetail(previousDetail ? { ...previousDetail, saveData: previousDetail } : null);
       setPersistenceError('That change could not be saved. The library was restored to its previous state.');
+      return false;
     }
   };
 
-  // ── Rename ──────────────────────────────────────────────────────────────
-  const applyRename = (type, id, oldName, newName) => {
-    if (!newName.trim() || newName.trim() === oldName) return;
-    // Campaign-clock identity lock (defense in depth): NPC + faction names freeze
-    // once the owning settlement is canonized. The detail view hides the rename
-    // affordance, but guard the persisting mutation itself so no future caller
-    // can rename a canon settlement's NPCs/factions. Settlement-name renames and
-    // the draft phase are unaffected.
-    if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
-    const trimmed = newName.trim();
-    const saveId = detail?.saveData?.id;
+  // ── Change-queue scope (Phase 4a — STANDALONE only) ───────────────────────
+  // The change-queue stages-then-commits ONLY for non-clock-bound settlements.
+  // A clock-bound canon campaign member surrenders its independent timeline to
+  // the world pulse (applyEvent redirects to queueSettlementEvent), so a staged
+  // change there would silently redirect; the queue is inactive and link / rename
+  // apply immediately (their existing world-pulse-era behaviour). The campaign
+  // queue path (069 RPC + Advance-Time deferral) is Phase 4b.
+  const queueChange = useStore(s => s.queueChange);
+  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
+  const openDetailId = detail?.saveData?.id ?? null;
+  const queueActiveForOpenDetail = !!(
+    openDetailId != null
+    && typeof isSettlementClockBound === 'function'
+    && !isSettlementClockBound(openDetailId)
+  );
 
-    // Consolidated settlement-name rename (UX overhaul Phase 6): the dossier
-    // header's single inline edit is the ONE place a settlement is renamed.
-    // Settlement renames are NOT canon-locked; they cascade into neighbours'
-    // interSettlementRelationships.partnerSettlement.
-    if (type === 'settlement') {
-      const oldNm = detail?.settlement?.name || oldName;
-      const next = saves.map(s => {
-        if (s.id === saveId) return { ...s, name: trimmed, settlement: { ...s.settlement, name: trimmed } };
-        const isr = s.settlement?.interSettlementRelationships || [];
-        if (!isr.some(r => r.partnerSettlement === oldNm)) return s;
-        return { ...s, settlement: { ...s.settlement, interSettlementRelationships:
-          isr.map(r => r.partnerSettlement === oldNm ? { ...r, partnerSettlement: trimmed } : r) } };
-      });
-      setSaves(next);
-      persistBatch(next, next.filter((s, i) => s !== saves[i]).map(s => s.id));
-      const upd = next.find(s => s.id === saveId);
-      if (upd) setDetail(d => ({ ...d, ...upd, name: trimmed, settlement: upd.settlement, saveData: upd }));
-      return;
-    }
-
-    let updatedSaves = saves.map(s => {
-      if (s.id !== saveId) {
-        const needsUpdate = (s.settlement?.interSettlementRelationships||[]).some(r => r.partnerSettlement === detail.settlement.name && (r.partnerName === oldName || r.npcName === oldName || r.partnerFactionName === oldName || r.factionName === oldName));
-        if (!needsUpdate) return s;
-        return { ...s, settlement: { ...s.settlement, interSettlementRelationships: (s.settlement.interSettlementRelationships||[]).map(r => {
-          if (r.partnerSettlement !== detail.settlement.name) return r;
-          return { ...r, partnerName: r.partnerName === oldName ? trimmed : r.partnerName, partnerFactionName: r.partnerFactionName === oldName ? trimmed : r.partnerFactionName, npcName: r.npcName === oldName ? trimmed : r.npcName, factionName: r.factionName === oldName ? trimmed : r.factionName };
-        }) } };
-      }
-      const sett = s.settlement;
-      const updatedNpcs = type === 'npc' ? (sett.npcs||[]).map(n => n.id === id ? {...n, name:trimmed} : n) : sett.npcs;
-      const updatedFactions = type === 'faction' ? (sett.factions||[]).map(f => f.name === oldName ? {...f, name:trimmed} : f) : sett.factions;
-      const updatedRels = (sett.relationships||[]).map(r => ({ ...r, npc1Name: r.npc1Name === oldName ? trimmed : r.npc1Name, npc2Name: r.npc2Name === oldName ? trimmed : r.npc2Name }));
-      const updatedISR = (sett.interSettlementRelationships||[]).map(r => ({ ...r, npcName: r.npcName === oldName ? trimmed : r.npcName, partnerName: r.partnerName === oldName ? trimmed : r.partnerName, factionName: r.factionName === oldName ? trimmed : r.factionName, partnerFactionName: r.partnerFactionName === oldName ? trimmed : r.partnerFactionName }));
-      return { ...s, settlement: { ...sett, npcs: updatedNpcs, factions: updatedFactions, relationships: updatedRels, interSettlementRelationships: updatedISR } };
-    });
-    setSaves(updatedSaves);
-    const modifiedIds = updatedSaves.filter((s, i) => s !== saves[i]).map(s => s.id);
-    persistBatch(updatedSaves, modifiedIds);
-    const updatedDetailSave = updatedSaves.find(s => s.id === saveId);
-    if (updatedDetailSave) setDetail(d => ({ ...d, ...updatedDetailSave, saveData: updatedDetailSave }));
-
-    // Cosmetic-tier change: cascade the rename into every touched
-    // save's ai_data blob too. applyCosmeticRename no-ops when a save has
-    // no narrative, so this is cheap for unnarrated saves.
-    for (const mid of modifiedIds) {
-      applyCosmeticRename({ saveId: mid, oldName, newName: trimmed });
-    }
-  };
+  // ── Cross-save cascade (rename / link / unlink) + change-queue replay seam ──
+  // Extracted to a co-located hook to keep this surface under the size ratchet.
+  // It owns the immediate-apply AND deferred-flush modes for all three cascades
+  // and registers the flush's replay executor + atomic batch commit.
+  const { applyRename, handleLink, removeNeighbour } = useChangeQueueCascade({
+    saves, setSaves, savesRef, detail, setDetail, setLinking, setNetworkVersion,
+    persistBatch, applyCosmeticRename, queueChange, queueActiveForOpenDetail,
+    flushDeferRef, flushAffectedRef,
+  });
 
   // ── Delete ──────────────────────────────────────────────────────────────
   const deleteConfirmed = (id) => {
@@ -461,105 +438,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     onNavigate?.(ADVANCE_TIME_NAV_TARGET.view);
   }, [advanceCampaignWorld, setActiveCampaign, requestMapWorkspace, onNavigate]);
 
-  // ── Link ────────────────────────────────────────────────────────────────
-  const handleLink = (linkedSave, relType) => {
-    const definition = relationshipDefinition(
-      relType || 'neutral',
-      detail.saveData.id,
-      linkedSave.id,
-    );
-    const resolvedRelType = definition.relationshipType;
-    const linkId = `link_${detail.saveData.id}_${linkedSave.id}`;
-    const entryForCurrent = {
-      id:linkedSave.id, linkId, name:linkedSave.name, neighbourName:linkedSave.name,
-      neighbourTier:linkedSave.tier, tier:linkedSave.tier,
-      ...relationshipLinkMetadata(definition, definition.sourceRole),
-      description:`Manually linked as ${definition.sourceRole.replace(/_/g,' ')}.`, bidirectional:true,
-    };
-    const entryForPartner = {
-      id:detail.saveData.id, linkId, name:detail.settlement.name,
-      neighbourName:detail.settlement.name,
-      neighbourTier:detail.settlement.tier||detail.saveData.tier, tier:detail.saveData.tier,
-      ...relationshipLinkMetadata(definition, definition.targetRole),
-      description:`${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g,' ')}.`, bidirectional:true,
-    };
-    const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
-    const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
-    const network = [...(detail.settlement.neighbourNetwork||[]), entryForCurrent];
-    const ownISR = [...(detail.settlement.interSettlementRelationships||[]), ...npcForA, ...conflictForA];
-    let updatedSaves = saves.map(s => {
-      if (s.id === detail?.saveData?.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
-      if (s.id === linkedSave.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForPartner, ...(s.settlement?.neighbourNetwork||[]).filter(n => n.id !== detail.saveData.id)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r => r.linkId !== linkId), ...npcForB, ...conflictForB] } };
-      return s;
-    });
-    setSaves(updatedSaves);
-    setDetail(d => ({ ...d, settlement: { ...d.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } }));
-    setNetworkVersion(v => v + 1); setLinking(false);
-    persistBatch(updatedSaves, [detail.saveData.id, linkedSave.id]);
-  };
-
-  const removeNeighbour = (idx) => {
-    const removedEntry = detail.settlement.neighbourNetwork[idx];
-    const linkId = removedEntry?.linkId;
-    const network = detail.settlement.neighbourNetwork.filter((_, i) => i !== idx);
-    const ownISR = (detail.settlement.interSettlementRelationships||[]).filter(r => !linkId || r.linkId !== linkId);
-    let updatedSaves = saves.map(s => {
-      if (s.id !== detail?.saveData?.id) return s;
-      return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
-    });
-    if (linkId || removedEntry?.id) {
-      const partnerId = removedEntry?.id;
-      const partnerSave = partnerId ? findSaveById(updatedSaves, partnerId) : null;
-      if (partnerSave) {
-        updatedSaves = updatedSaves.map(s => {
-          if (s.id !== partnerId) return s;
-          return { ...s, settlement: { ...s.settlement, neighbourNetwork: (s.settlement?.neighbourNetwork||[]).filter(n => linkId ? n.linkId !== linkId : n.id !== detail?.saveData?.id), interSettlementRelationships: (s.settlement?.interSettlementRelationships||[]).filter(r => !linkId || r.linkId !== linkId) } };
-        });
-      }
-    }
-    setSaves(updatedSaves);
-    setDetail(d => ({ ...d, settlement: { ...d.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } }));
-    setNetworkVersion(v => v + 1);
-    const modifiedIds = [detail.saveData.id];
-    if (removedEntry?.id) modifiedIds.push(removedEntry.id);
-    persistBatch(updatedSaves, modifiedIds);
-  };
-
-  // ── Change-queue cascade executor ──────────────────────────────────────────
-  // The change-queue flush (store/changeQueueSlice.flushQueue) replays each
-  // staged order through its existing executor. Event + rename(settlement-name +
-  // canon record) orders run inside the store, but the CROSS-SAVE cascades —
-  // the neighbour/ai_data rename cascade and the neighbour link/unlink writes —
-  // own React `detail`/`saves` state here and cannot run in the store. We
-  // register a thin replay executor that runs the right cascade per order; it is
-  // re-registered on every render so it always closes over the CURRENT
-  // detail/saves (never a stale snapshot). The cascades persist their own
-  // multi-row writes via persistBatch (the atomicity owner for cross-row), so
-  // the flush's single-row dossier persist does not conflict.
-  //
-  // SCOPE NOTE (flagged deviation): only the rename cascade is wired through the
-  // queue here. Link / unlink remain immediate-apply (their existing behaviour),
-  // because deferring a multi-row link commit safely needs the R4 index-drift
-  // fix + dual-row staging, which is the highest-risk slice of this change. The
-  // executor refuses link/unlink orders so the flush surfaces a clear error
-  // rather than silently corrupting a partner row.
-  useEffect(() => {
-    registerLinkExecutor(async (order) => {
-      try {
-        if (order?.type === 'rename') {
-          const { renameType, targetId, oldName, newName } = order.payload || {};
-          applyRename(renameType, targetId, oldName, newName);
-          return { ok: true, settlement: useStore.getState().settlement };
-        }
-        // Link/unlink are not deferred yet — see SCOPE NOTE above.
-        return { ok: false };
-      } catch (e) {
-        console.warn('[changeQueue] cascade executor failed:', e);
-        return { ok: false };
-      }
-    });
-    return () => registerLinkExecutor(null);
-  });
 
   // (The direct-edit path — onEditSettlement, feeding the Roster & Tune
   // correction editor — was removed with that editor: every settlement

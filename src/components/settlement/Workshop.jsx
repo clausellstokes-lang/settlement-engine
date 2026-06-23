@@ -200,9 +200,10 @@ function GroupCard({ id, title, blurb, children }) {
  *   canEdit?: boolean,
  *   changeExtras?: React.ReactNode,
  *   onQueueCommitted?: (settlement: any) => void,
+ *   queueActive?: boolean,
  * }} props
  */
-export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null, onQueueCommitted = null }) {
+export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null, onQueueCommitted = null, queueActive = true }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
@@ -339,7 +340,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
               {/* The change-queue: staged orders sit here, between the read of
                   current state and the composer that mutates it. Hidden when the
                   queue is empty. Committing soft-refreshes the dossier above. */}
-              <ChangeQueuePanel saveId={saveId} onCommitted={onQueueCommitted} />
+              <ChangeQueuePanel saveId={saveId} active={queueActive} onCommitted={onQueueCommitted} />
               <CoherencePanel />
               <EventComposer />
               <PendingIntentions />

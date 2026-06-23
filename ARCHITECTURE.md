@@ -31,7 +31,7 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
              Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
-store/       Zustand slices (14) — the single client state container.
+store/       Zustand slices (15) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —

@@ -82,11 +82,12 @@ export default function SettlementDetail({
   saves,
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
-  // applyRename is no longer consumed directly here: the rename now STAGES on the
-  // change-queue and its cascade is replayed at commit by the executor
-  // SettlementsPanel registers (registerLinkExecutor). The prop is still passed
-  // by the parent, so it is accepted-but-ignored rather than removed.
-  handleLink, removeNeighbour,
+  // applyRename is the IMMEDIATE rename cascade. For a STANDALONE settlement the
+  // rename STAGES on the change-queue (replayed at commit by the executor
+  // SettlementsPanel registers); for a CLOCK-BOUND campaign member the queue is
+  // inactive (Phase 4a scope), so the rename applies immediately through this
+  // prop, preserving the pre-queue behaviour.
+  handleLink, removeNeighbour, applyRename,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
 
@@ -242,14 +243,20 @@ export default function SettlementDetail({
     const trimmed = String(newName || '').trim();
     if (!trimmed || trimmed === oldName) { setEditingName(null); setEditDraft(''); return; }
     if (saveId) {
-      const label = type === 'settlement'
-        ? `Rename settlement to ${trimmed}`
-        : `Rename ${oldName || 'this'} to ${trimmed}`;
-      queueChange(saveId, {
-        type: 'rename',
-        humanLabel: label,
-        payload: { renameType: type, targetId: id, oldName, newName: trimmed },
-      });
+      // Clock-bound campaign member (Phase 4a scope): the change-queue is
+      // inactive, so the rename applies immediately through the parent cascade.
+      if (simulated) {
+        applyRename?.(type, id, oldName, trimmed);
+      } else {
+        const label = type === 'settlement'
+          ? `Rename settlement to ${trimmed}`
+          : `Rename ${oldName || 'this'} to ${trimmed}`;
+        queueChange(saveId, {
+          type: 'rename',
+          humanLabel: label,
+          payload: { renameType: type, targetId: id, oldName, newName: trimmed },
+        });
+      }
     }
     setEditingName(null);
     setEditDraft('');
@@ -666,6 +673,7 @@ export default function SettlementDetail({
         editMode={editMode}
         canEdit={canEdit}
         onQueueCommitted={handleQueueCommitted}
+        queueActive={!simulated}
         changeExtras={editMode && (
           // ── Relationship cluster ── Link Neighbour, the existing Neighbour
           // Network list, and the cascading Network Effects, grouped tight

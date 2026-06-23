@@ -1299,6 +1299,29 @@ export const createSettlementSlice = (set, get) => ({
   // @param {string|number} id - the saved settlement id to rename.
   // @param {string} newName - the proposed new name (trimmed by the action).
   // @returns {boolean} true when a canon flavor entry was recorded.
+  /**
+   * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
+   * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
+   * result, so an event order replayed AFTER a link/unlink in the same commit
+   * builds on the link's network (and vice-versa). Without this the store
+   * (event mirror) and the panel (link mirror) diverge on neighbourNetwork —
+   * which a handful of events (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE /
+   * OPENED_TRADE_ROUTE) also mutate. No-op unless a flush is in progress.
+   * @param {{ neighbourNetwork?: any[], interSettlementRelationships?: any[] }} neighbourFields
+   */
+  syncActiveNeighbourFields: (neighbourFields) => {
+    if (!get().flushSuppressPersist) return;
+    set(state => {
+      if (!state.settlement || !neighbourFields) return;
+      if (Array.isArray(neighbourFields.neighbourNetwork)) {
+        state.settlement.neighbourNetwork = neighbourFields.neighbourNetwork;
+      }
+      if (Array.isArray(neighbourFields.interSettlementRelationships)) {
+        state.settlement.interSettlementRelationships = neighbourFields.interSettlementRelationships;
+      }
+    });
+  },
+
   renameSettlement: (id, newName) => {
     const trimmed = String(newName || '').trim();
     if (!trimmed) return false;

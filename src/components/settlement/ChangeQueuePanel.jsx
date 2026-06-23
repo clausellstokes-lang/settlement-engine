@@ -12,8 +12,16 @@
  * onCommitted callback (re-derive + key-bump, never a reload). On a failed
  * commit the queue is left intact and a retryable error is surfaced inline.
  *
+ * SCOPE (Phase 4a — STANDALONE only): the queue is shown ONLY for non-clock-
+ * bound settlements. A clock-bound canon campaign member surrenders its timeline
+ * to the world pulse, so its changes apply immediately and the queue never
+ * mounts (the `active` prop is false there). This keeps the "Save N pending
+ * changes" contract honest: it appears only where it genuinely stages-then-
+ * commits to the dossier.
+ *
  * @param {{
  *   saveId: string,
+ *   active?: boolean,
  *   onCommitted?: (settlement: any) => void,
  * }} props
  */
@@ -25,7 +33,7 @@ import { INK, MUTED, BODY, BORDER, CARD, GOLD_TXT, sans, FS, SP, R, swatch } fro
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
-export default function ChangeQueuePanel({ saveId, onCommitted }) {
+export default function ChangeQueuePanel({ saveId, active = true, onCommitted }) {
   // Subscribe to THIS save's slice of the queue map so the panel re-renders on
   // add/cancel without reacting to a foreign settlement's queue.
   const orders = useStore(s => (s.changeQueues || {})[String(saveId)] || []);
@@ -35,9 +43,10 @@ export default function ChangeQueuePanel({ saveId, onCommitted }) {
 
   const [error, setError] = useState('');
 
-  // Empty state: render nothing. The queue is a draft surface; when there is no
-  // draft, the composer below is the whole story.
-  if (orders.length === 0) return null;
+  // Out of scope (clock-bound campaign member) or empty: render nothing. The
+  // queue is a standalone-only draft surface; when there is no draft, the
+  // composer below is the whole story.
+  if (!active || orders.length === 0) return null;
 
   const count = orders.length;
 

@@ -37,6 +37,7 @@ import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import {
   createChangeQueueSlice,
   registerLinkExecutor,
+  registerBatchCommit,
 } from '../../src/store/changeQueueSlice.js';
 
 const stubSlice = (set, get) => ({
@@ -142,6 +143,7 @@ describe('changeQueueSlice — flush', () => {
     store = makeStore();
     bootCanon(store);
     registerLinkExecutor(null);
+    registerBatchCommit(null);
     saves.update.mockReset().mockResolvedValue(true);
   });
 
@@ -202,9 +204,11 @@ describe('changeQueueSlice — flush', () => {
   });
 
   test('post-canon, a committed link order records a chronicle entry', async () => {
-        // The link executor stands in for SettlementsPanel's cascade: it succeeds
-    // and reports the (unchanged-for-this-test) settlement back.
-    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement }));
+    // The link executor stands in for SettlementsPanel's cascade: it succeeds,
+    // reports the (unchanged-for-this-test) settlement + the two affected rows.
+    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement, affectedIds: ['save_1', 'save_2'] }));
+    // A cascade queue requires the atomic batch-commit; stub it as succeeding.
+    registerBatchCommit(async () => true);
     store.getState().queueChange('save_1', {
       type: 'link', humanLabel: 'Link Mossbridge',
       payload: { linkedSaveId: 'save_2', relType: 'ally', partnerName: 'Mossbridge', linkId: 'link_1_2' },
@@ -227,5 +231,118 @@ describe('changeQueueSlice — flush', () => {
     });
     expect(recorded).toBe(false);
     expect(store.getState().eventLog).toHaveLength(0);
+  });
+});
+
+// ── Phase 4a.2: dual-row atomic commit (link / unlink / rename cascade) ────────
+//
+// A link/unlink writes TWO settlement rows (this settlement + the partner) and a
+// rename's cascade can touch neighbour rows. The flush must commit the WHOLE
+// affected-row set in ONE atomic write (the registered batch-commit), and a
+// failed write must leave the queue intact + restore the pre-flush settlement so
+// NEITHER row is partially applied.
+describe('changeQueueSlice — dual-row atomic cascade commit', () => {
+  let store;
+  beforeEach(() => {
+    store = makeStore();
+    bootCanon(store);
+    registerLinkExecutor(null);
+    registerBatchCommit(null);
+    saves.update.mockReset().mockResolvedValue(true);
+  });
+
+  test('a link commit routes through the ATOMIC batch-commit (one write set, both rows), not the single-row persist', async () => {
+    const batchCommit = vi.fn().mockResolvedValue(true);
+    // The cascade executor reports BOTH affected rows; the flush must hand
+    // exactly that set to the single end-of-batch atomic commit.
+    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement, affectedIds: ['save_1', 'save_2'] }));
+    registerBatchCommit(batchCommit);
+    store.getState().queueChange('save_1', {
+      type: 'link', humanLabel: 'Link Mossbridge',
+      payload: { partnerSaveId: 'save_2', relType: 'ally', linkId: 'link_save_1_save_2', partnerName: 'Mossbridge' },
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(true);
+    // ONE atomic batch-commit, carrying BOTH rows…
+    expect(batchCommit).toHaveBeenCalledTimes(1);
+    const idsCommitted = batchCommit.mock.calls[0][0];
+    expect(new Set(idsCommitted.map(String))).toEqual(new Set(['save_1', 'save_2']));
+    // …and NOT the single-row persistSaveUpdate fast path.
+    expect(saves.update).not.toHaveBeenCalled();
+    // Queue cleared on success.
+    expect(store.getState().listQueuedChanges('save_1')).toHaveLength(0);
+  });
+
+  test('a FAILED link commit KEEPS the queue and restores the pre-flush settlement (no partial apply to either row)', async () => {
+    const preName = store.getState().settlement.name;
+    // The batch-commit fails (it is the atomicity owner: it rolls BOTH rows back
+    // locally and returns false). The flush must then restore the store + keep
+    // the queue, so the retry runs from a clean base.
+    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement, affectedIds: ['save_1', 'save_2'] }));
+    registerBatchCommit(async () => false);
+    store.getState().queueChange('save_1', {
+      type: 'link', humanLabel: 'Link Mossbridge',
+      payload: { partnerSaveId: 'save_2', relType: 'ally', linkId: 'link_save_1_save_2', partnerName: 'Mossbridge' },
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(false);
+    expect(res.error).toBeTruthy();
+    // The queue survives the failure (retryable) and the settlement is restored.
+    expect(store.getState().listQueuedChanges('save_1')).toHaveLength(1);
+    expect(store.getState().settlement.name).toBe(preName);
+    // The flavor chronicle line written during replay was rolled back too.
+    expect(store.getState().eventLog.find(e => e.type === 'LINK_NEIGHBOUR')).toBeFalsy();
+    expect(store.getState().flushSuppressPersist).toBe(false);
+  });
+
+  test('without a registered batch-commit a cascade queue REFUSES rather than half-writing', async () => {
+    // The executor is present but the atomic commit is not — committing a link
+    // here would corrupt the partner row, so the flush must refuse + keep queue.
+    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement, affectedIds: ['save_1', 'save_2'] }));
+    registerBatchCommit(null);
+    store.getState().queueChange('save_1', {
+      type: 'unlink', humanLabel: 'Unlink Mossbridge',
+      payload: { linkId: 'link_save_1_save_2', partnerId: 'save_2', partnerName: 'Mossbridge' },
+    });
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(false);
+    expect(store.getState().listQueuedChanges('save_1')).toHaveLength(1);
+    expect(saves.update).not.toHaveBeenCalled();
+  });
+
+  test('syncActiveNeighbourFields reconciles the store network ONLY during a flush (so event + link orders converge)', () => {
+    // Off-flush: a stray reconcile must not silently rewrite the live network.
+    store.getState().syncActiveNeighbourFields({ neighbourNetwork: [{ id: 'x' }] });
+    expect(store.getState().settlement.neighbourNetwork).toHaveLength(0);
+    // During a flush the panel cascade pushes its neighbour result into the
+    // store so a later event order builds on the link's network.
+    store.setState({ flushSuppressPersist: true });
+    store.getState().syncActiveNeighbourFields({
+      neighbourNetwork: [{ id: 'save_2', linkId: 'link_save_1_save_2' }],
+      interSettlementRelationships: [{ linkId: 'link_save_1_save_2', npcName: 'Envoy' }],
+    });
+    expect(store.getState().settlement.neighbourNetwork).toHaveLength(1);
+    expect(store.getState().settlement.interSettlementRelationships).toHaveLength(1);
+    store.setState({ flushSuppressPersist: false });
+  });
+
+  test('a rename commit is exactly ONE cloud write (the cascade batch-commit owns it; no second per-row persist)', async () => {
+    const batchCommit = vi.fn().mockResolvedValue(true);
+    registerLinkExecutor(async () => ({ ok: true, settlement: store.getState().settlement, affectedIds: ['save_1'] }));
+    registerBatchCommit(batchCommit);
+    store.getState().queueChange('save_1', {
+      type: 'rename', humanLabel: 'Rename settlement to Ashford',
+      payload: { renameType: 'settlement', targetId: 'save_1', oldName: 'Stoneford', newName: 'Ashford' },
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(true);
+    // The rename's store-side renameSettlement runs with flushSuppressPersist set,
+    // so it does NOT fire its own persistSaveUpdate; the flush's single
+    // end-of-batch batch-commit is the ONE write.
+    expect(batchCommit).toHaveBeenCalledTimes(1);
+    expect(saves.update).not.toHaveBeenCalled();
   });
 });

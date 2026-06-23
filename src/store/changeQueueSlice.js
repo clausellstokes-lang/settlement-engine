@@ -22,14 +22,23 @@
  *     is restored from a pre-flush snapshot, so "Save N changes" is immediately
  *     retryable from a clean base (never on top of a half-applied state).
  *
- * Atomic persist (spec §2.4 Option A — the standalone scope's honest
- * atomicity): a standalone event/rename commit touches exactly ONE row, and
- * `persistSaveUpdate` (one savesService.update) is itself atomic. Link/unlink
- * touch a partner row too and are owned by SettlementsPanel's persistBatch
- * (multi-row mutateBatch + local rollback) — the flush delegates those to a
- * registered executor (see registerLinkExecutor). The campaign-member case
- * (069 persist_world_pulse_advance) is the NEXT phase; this slice keeps a clean
- * seam and a flagged deviation rather than half-wiring it.
+ * Atomic persist (spec §2.4): the flush owns exactly ONE end-of-batch write.
+ *   • A pure event / settlement-name queue touches exactly ONE row, so it uses
+ *     `persistSaveUpdate` (one savesService.update) — itself atomic (Option A).
+ *   • A queue that touches a PARTNER row (link / unlink, or a rename whose
+ *     cascade rewrites neighbour rows) replays each cascade through a registered
+ *     executor that mutates LOCAL React state but DEFERS its cloud write,
+ *     returning the rows it touched. The flush unions those ids and commits the
+ *     WHOLE set in ONE `persistBatch` (savesService.mutateBatch — the atomic
+ *     multi-row primitive that rolls back local saves/detail on throw), so a
+ *     failed link commit restores BOTH settlements (no partial apply to either).
+ *
+ * Scope (Phase 4a — STANDALONE only): the change-queue is wired ONLY for
+ * non-clock-bound settlements. A clock-bound canon campaign member keeps its
+ * existing immediate / world-pulse behaviour (applyEvent short-circuits to the
+ * pulse queue); the campaign-member case (069 persist_world_pulse_advance) is
+ * the NEXT phase. The queue UI is not shown there, so a staged change can never
+ * silently redirect into the pulse.
  */
 
 import { cloneJson, persistSaveUpdate, pickleCampaignState } from './settlementSliceHelpers.js';
@@ -46,27 +55,66 @@ import { cloneJson, persistSaveUpdate, pickleCampaignState } from './settlementS
  */
 
 /**
- * Module-scoped registry for the link/unlink replay executor. Link cascades
- * own React `detail`/`saves` state inside SettlementsPanel and CANNOT run in the
- * store; the panel registers a thin async executor the flush calls per order.
- * Kept off the store object so it is never serialized and never re-rendered on.
- * @type {null | ((order: PendingOrder) => Promise<{ ok: boolean, settlement?: any }>)}
+ * @typedef {Object} CascadeResult
+ * @property {boolean} ok
+ * @property {any} [settlement]      the live store settlement after the cascade
+ * @property {Array<string|number>} [affectedIds]  every save row this order
+ *           touched LOCALLY (this settlement + any link/rename partner). The
+ *           flush unions these across all orders and persists the whole set in
+ *           ONE atomic write at the end (dual-row atomicity — spec §2.4).
+ */
+
+/**
+ * Module-scoped registry for the link/unlink/rename replay CASCADE executor.
+ * These cascades own React `detail`/`saves` state inside SettlementsPanel and
+ * CANNOT run in the store; the panel registers a thin async executor the flush
+ * calls per order. During a flush the executor mutates local React state but
+ * DEFERS its cloud write (it returns the affected row ids instead), so the
+ * flush's single end-of-batch commit is the only write. Kept off the store
+ * object so it is never serialized and never re-rendered on.
+ * @type {null | ((order: PendingOrder) => Promise<CascadeResult>)}
  */
 let _linkExecutor = null;
 
 /**
- * Register (or clear) the link/unlink replay executor. Called by
+ * Module-scoped registry for the end-of-batch BATCH COMMIT. The cascade
+ * executor only mutates LOCAL state during a flush; this is the single atomic
+ * multi-row cloud write the flush calls once, after every order has replayed,
+ * with the UNION of all affected row ids. The panel implements it with
+ * persistBatch (savesService.mutateBatch) — the existing atomic primitive that
+ * rolls back local saves/detail on throw, so a failed commit leaves NEITHER
+ * settlement partially written.
+ * @type {null | ((affectedIds: Array<string|number>) => Promise<boolean>)}
+ */
+let _batchCommit = null;
+
+/**
+ * Register (or clear) the link/unlink/rename replay cascade executor. Called by
  * SettlementsPanel on mount; passing null on unmount clears it so a stale
  * closure over a torn-down component is never invoked.
- * @param {null | ((order: PendingOrder) => Promise<{ ok: boolean, settlement?: any }>)} fn
+ * @param {null | ((order: PendingOrder) => Promise<CascadeResult>)} fn
  */
 export function registerLinkExecutor(fn) {
   _linkExecutor = typeof fn === 'function' ? fn : null;
 }
 
-/** Test seam: read the current executor. */
+/**
+ * Register (or clear) the end-of-batch atomic multi-row commit. Called by
+ * SettlementsPanel alongside registerLinkExecutor.
+ * @param {null | ((affectedIds: Array<string|number>) => Promise<boolean>)} fn
+ */
+export function registerBatchCommit(fn) {
+  _batchCommit = typeof fn === 'function' ? fn : null;
+}
+
+/** Test seam: read the current cascade executor. */
 export function _getLinkExecutor() {
   return _linkExecutor;
+}
+
+/** Test seam: read the current batch-commit. */
+export function _getBatchCommit() {
+  return _batchCommit;
 }
 
 export function createChangeQueueSlice(set, get) {
@@ -151,10 +199,12 @@ export function createChangeQueueSlice(set, get) {
      *      soft-refresh. On failure: restore the pre-flush snapshot, LEAVE the
      *      queue intact, and surface a retryable error.
      *
-     * Link/unlink orders are delegated to the registered link executor (their
-     * cascade owns SettlementsPanel React state + its own persistBatch); their
-     * partner-row persistence is handled there, not by this flush's single-row
-     * persist.
+     * Link/unlink/rename orders delegate their cross-save cascade to the
+     * registered executor (it owns SettlementsPanel React state). The executor
+     * mutates local state but DEFERS its cloud write, returning the rows it
+     * touched; the flush unions those and commits the whole set in ONE atomic
+     * persistBatch via the registered batch-commit, so a failed link commit
+     * restores BOTH settlements (no partial apply).
      *
      * @param {string|number} saveId
      * @returns {Promise<{ ok: boolean, settlement?: any, committed?: number, error?: string }>}
@@ -179,9 +229,27 @@ export function createChangeQueueSlice(set, get) {
       const preSystemState = get().systemState ? cloneJson(get().systemState) : null;
       const preEditedAt = get().editedAt || null;
 
+      // Does the queue touch a PARTNER row (link / unlink / a rename whose
+      // cascade rewrites neighbour rows)? Those orders' cascades run in the
+      // panel and defer their cloud write; the flush then commits the whole
+      // affected-row set in ONE atomic persistBatch (spec §2.4 — dual-row
+      // atomicity). A pure event/settlement-name queue stays on the single-row
+      // persistSaveUpdate fast path.
+      const hasCascade = queue.some(o => o.type === 'link' || o.type === 'unlink' || o.type === 'rename');
+      if (hasCascade && (!_linkExecutor || !_batchCommit)) {
+        // The cross-save cascade + atomic commit are owned by SettlementsPanel.
+        // Without them we cannot commit a link/unlink/rename safely, so refuse
+        // rather than half-write. The queue is left intact and retryable.
+        return { ok: false, error: 'These changes could not be saved. They are still queued — try again.' };
+      }
+
       set(state => { state.changeQueueFlushing = true; state.flushSuppressPersist = true; });
 
       let linkSettlement = null;
+      // The UNION of every save row the cascades touched LOCALLY (this
+      // settlement + every link/rename partner). Persisted atomically at the end.
+      const affectedIds = new Set();
+      if (activeSaveId != null) affectedIds.add(activeSaveId);
       try {
         // (3) Replay each order in insertion order against live state.
         for (const order of queue) {
@@ -199,20 +267,24 @@ export function createChangeQueueSlice(set, get) {
               get().renameSettlement(targetId, newName);
             }
             // The cross-save cascade (neighbours / ai_data) is owned by
-            // SettlementsPanel.applyRename, replayed via the link executor seam
-            // when present (it shares the same persistBatch path).
+            // SettlementsPanel.applyRename, replayed via the cascade executor
+            // seam when present. It mutates local state but DEFERS its cloud
+            // write; the affected rows ride along into the end-of-batch commit.
             if (_linkExecutor) {
               const r = await _linkExecutor(order);
               if (r && r.ok === false) throw new Error('Rename cascade failed.');
               if (r && r.settlement) linkSettlement = r.settlement;
+              for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
             }
           } else if (order.type === 'link' || order.type === 'unlink') {
-            if (!_linkExecutor) {
-              throw new Error('Neighbour links cannot be committed in this context.');
-            }
+            // The cascade executor mutates local saves/detail for BOTH this
+            // settlement and the partner, deferring its cloud write. Its
+            // affected ids feed the single atomic end-of-batch persistBatch so a
+            // failure restores BOTH rows (no partial apply to either settlement).
             const r = await _linkExecutor(order);
             if (r && r.ok === false) throw new Error('Neighbour link failed.');
             if (r && r.settlement) linkSettlement = r.settlement;
+            for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
             // Canon flavor record (spec §2.5): generalize the rename precedent so
             // every committed order leaves a chronicle line. No-op off canon.
             const partnerName = order.payload?.partnerName || 'a neighbour';
@@ -232,26 +304,42 @@ export function createChangeQueueSlice(set, get) {
           }
         }
 
-        // (4) ONE atomic persist of the final settlement (Option A — single
-        // row). Link/unlink already persisted their multi-row cascade inside the
-        // executor (persistBatch), so we only commit the dossier row here.
+        // (4) ONE atomic persist of the WHOLE affected-row set.
+        //
+        // Two commit shapes, both single-write:
+        //   • cascade queue (link / unlink / rename) → the registered
+        //     batchCommit runs ONE persistBatch over the union of affected rows
+        //     (this settlement + every partner), so a failure rolls back EVERY
+        //     row (no partial apply to either settlement). The local saves/detail
+        //     mirror was already mutated by the deferred cascades; the store's
+        //     own dossier row is refreshed into that mirror first so the batch
+        //     carries the event-applied settlement too.
+        //   • pure event / settlement-name queue → the single-row
+        //     persistSaveUpdate fast path (Option A — one row, itself atomic).
         const after = get();
         const nextSettlement = linkSettlement || after.settlement;
-        let persistedOk = true;
-        if (activeSaveId && after.settlement) {
-          const savePartial = {
+        // Refresh the local saves mirror with the store's committed dossier row
+        // so the end-of-batch write (either path) carries the event deltas too.
+        if (activeSaveId && after.settlement && typeof after.updateSavedSettlement === 'function') {
+          after.updateSavedSettlement(activeSaveId, {
             settlement: cloneJson(after.settlement),
             campaignState: pickleCampaignState(after),
-          };
-          if (typeof after.updateSavedSettlement === 'function') {
-            after.updateSavedSettlement(activeSaveId, savePartial);
-          }
+          });
+        }
+
+        let persistedOk = true;
+        if (hasCascade) {
+          // ONE atomic multi-row commit. _batchCommit (persistBatch) throws on a
+          // failed write, restoring local saves/detail for ALL rows; it returns
+          // false (or throws) on failure.
+          persistedOk = await _batchCommit(Array.from(affectedIds));
+        } else if (activeSaveId && after.settlement) {
           // R8: AWAIT the persist and read its boolean — persistSaveUpdate never
           // throws, so a fire-and-forget here would clear the queue while the
           // cloud write silently failed.
           persistedOk = await persistSaveUpdate(activeSaveId, {
-            settlement: savePartial.settlement,
-            campaignState: savePartial.campaignState,
+            settlement: cloneJson(after.settlement),
+            campaignState: pickleCampaignState(after),
           });
         }
 
