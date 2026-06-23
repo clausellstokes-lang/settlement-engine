@@ -2,14 +2,11 @@ import React from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {sans, Section, Empty, TabIntro} from '../Primitives';
 
-import {isMobile} from '../tabConstants';
-
 import {NarrativeNote} from '../NarrativeNote';
 
 export function ResourcesTab({settlement:r, narrativeNote}) {
   const res = r?.resourceAnalysis;
   if (!res) return <Empty message="No resource survey on file for this settlement."/>;
-  const _mobile = isMobile();
   const _config = r?.config || {};
 
   // Imports: object {critical:[], recommended:[], reasons:{}}

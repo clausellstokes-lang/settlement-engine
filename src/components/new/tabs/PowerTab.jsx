@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
-import { isMobile } from '../tabConstants';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
-  const _mobile = isMobile();
 
   if (!r) return <div style={{padding:32,textAlign:'center',color:MUTED}}>No power structure data.</div>;
 

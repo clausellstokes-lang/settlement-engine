@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS, BODY} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
@@ -85,8 +85,10 @@ function StatusTag({ label, value, accent, alert = true, tier }) {
 
 export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) {
   const [instOpen, setInstOpen] = useState(false);
+  // Hooks run before any early return so the dossier's mobile stacking stays
+  // reactive even when a tab momentarily renders without a settlement.
+  const mobile = useIsMobileTab();
   if (!r) return null;
-  const mobile = isMobile();
 
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};

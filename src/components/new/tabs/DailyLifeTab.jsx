@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { FS, swatch, CARD, BODY } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -81,7 +81,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId: _saveId = n
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
   const [loadMsg, setLoadMsg]       = useState('');
-  const mobile = isMobile();
+  const mobile = useIsMobileTab();
 
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);

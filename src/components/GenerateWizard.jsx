@@ -124,16 +124,19 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // hiding the very control the user jumped to (the Overview/DM Summary/Plot
   // Hooks tabs, card headers). `scroll-padding-top` on the real scroller (the
   // document element — `main` is no longer a scroll container) reserves the
-  // chrome's height so those scrolls stop just below it. Mobile stacks the
-  // header and toolbar at top:0, so a single header's worth of clearance is
-  // enough there. Scoped to the visible-dossier window and fully reverted on
-  // teardown so other views keep the default scroll behaviour.
+  // chrome's height so those scrolls stop just below it. On mobile the slim app
+  // header (CHROME.headerMobile) and the WizardOutputToolbar (CHROME.toolbarHeight)
+  // now STACK — the toolbar pins at the header's height rather than tucking under
+  // it — so a focus/anchor scroll must clear BOTH bars, not just the header.
+  // Scoped to the visible-dossier window and fully reverted on teardown so other
+  // views keep the default scroll behaviour.
   const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
   useEffect(() => {
     if (!dossierVisible || typeof document === 'undefined') return undefined;
     const root = document.documentElement;
     const prev = root.style.scrollPaddingTop;
-    root.style.scrollPaddingTop = isMobile ? `${CHROME.scrollPadMobile}px` : `${CHROME.scrollPadDesktop}px`;
+    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
+    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
     return () => { root.style.scrollPaddingTop = prev; };
   }, [dossierVisible, isMobile]);
 

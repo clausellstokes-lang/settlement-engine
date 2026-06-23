@@ -15,6 +15,7 @@ import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Pill from '../primitives/Pill.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { RoleBadge } from '../auth/authUI.jsx';
 import { GOLD, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, TINT_GOLD, DANGER_BORDER } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -62,6 +63,13 @@ export default function AccountProfileSection({
   // anything else (empty, javascript:, data:, malformed) falls back to the
   // initial-letter gradient.
   const avatarBg = avatarBackground(avatarInput);
+  // Rename is one of the two writes allowed on mobile (rename + save), so the
+  // inline editor must stay comfortable on a phone. Below 640 the input + the
+  // two 44px-floored icon buttons are crammed into a no-wrap row beside the
+  // avatar; let that row wrap so the input keeps a usable width and the controls
+  // drop to a second line when they can't sit beside it. Desktop stays a single
+  // no-wrap row byte-identical.
+  const isMobile = useIsMobile();
   return (
     <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
@@ -77,7 +85,7 @@ export default function AccountProfileSection({
 
         <div style={{ flex: 1 }}>
           {/* Display name */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs, flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
             {editingName ? (
               <>
                 <input
@@ -86,7 +94,12 @@ export default function AccountProfileSection({
                   onChange={e => setNameInput(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleSaveName()}
                   style={{
-                    flex: 1, padding: `${SP.xs}px ${SP.sm}px`,
+                    // Mobile: a min-width floor keeps the input legible and lets the
+                    // 44px Save/Cancel buttons wrap below it when they can't fit
+                    // alongside. Desktop keeps the plain flex:1 single-row layout.
+                    flex: isMobile ? '1 1 160px' : 1,
+                    minWidth: isMobile ? 160 : undefined,
+                    padding: `${SP.xs}px ${SP.sm}px`,
                     border: `1px solid ${GOLD}`, borderRadius: R.sm,
                     fontSize: FS.lg, fontFamily: serif_, fontWeight: 600,
                     outline: 'none',

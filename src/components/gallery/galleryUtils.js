@@ -21,6 +21,13 @@ export const REPORT_REASON_OPTIONS = [
   ['other', 'Other'],
 ];
 
+// Gallery layout reflow. The 860 breakpoint here is INTENTIONAL and distinct
+// from the app's 640 mobile flag (useIsMobile): 860 is the width at which the
+// two-column sidebar+grid layout no longer fits side by side, so the grids
+// collapse to one column there. The 640 flag governs the mobile CHROME swaps
+// (filters into a BottomSheet, owner authoring behind a desktop gate), which is
+// a separate concern from when the columns stop fitting. Both points coexist by
+// design; 860 is formally the gallery's reflow point.
 export const GALLERY_RESPONSIVE_CSS = `
   .gallery-main-layout {
     grid-template-columns: 260px minmax(0, 1fr);

@@ -9,6 +9,7 @@
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap, shareMap, unshareMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
@@ -57,6 +58,10 @@ function MapsSkeleton() {
 }
 
 export default function GalleryMaps({ onNavigate }) {
+  // Mobile is a read + import surface for maps: the dense owner inline-editor
+  // (name/description/tags/importable/unpublish) is gated to desktop. View and
+  // Import stay live on mobile.
+  const isMobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const campaigns = useStore(s => s.campaigns);
   const renameCampaign = useStore(s => s.renameCampaign);
@@ -425,8 +430,11 @@ export default function GalleryMaps({ onNavigate }) {
               <div style={{ flex: 1 }} />
 
               {/* Owner inline editor — description, tags, and an optional rename.
-                  Mirrors the tile tokens; keyed entirely on the owned campaign. */}
-              {isEditing && owned && (
+                  Mirrors the tile tokens; keyed entirely on the owned campaign.
+                  Desktop only: this is a full authoring form that does not belong
+                  in a ~220px tile on a phone, so mobile shows a "manage on
+                  desktop" note in its place (below) and never opens it. */}
+              {!isMobile && isEditing && owned && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.sm, marginTop: SP.xs, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
                   {editError && (
                     <div role="alert" style={{ fontSize: FS.xs, color: RED, fontFamily: sans, fontWeight: 850 }}>{editError}</div>
@@ -490,20 +498,34 @@ export default function GalleryMaps({ onNavigate }) {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs }}>
+              {/* On mobile the buttons floor at 44px, so let the row wrap rather
+                  than crowd View + Import + the desktop note onto one tight line.
+                  Desktop keeps its single nowrap row (byte-identical). */}
+              <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs, ...(isMobile ? { flexWrap: 'wrap', alignItems: 'center' } : null) }}>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewingSlug(m.slug)}
                   title="Preview this map (and its settlements) before importing"
                 >View</Button>
-                {canEdit && !isEditing && (
+                {canEdit && !isMobile && !isEditing && (
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => openEditor(m.slug, m.importable === true)}
                     title="Edit this map's gallery details"
                   >Edit</Button>
+                )}
+                {/* Mobile owners keep View + Import; managing the listing
+                    (rename/description/tags/importable/unpublish) is a desktop
+                    task. A calm inline note stands in for the Edit button. */}
+                {canEdit && isMobile && (
+                  <span
+                    title="Edit this map's gallery listing on a larger screen."
+                    style={{ alignSelf: 'center', fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700 }}
+                  >
+                    Manage on desktop
+                  </span>
                 )}
                 {/* Import is offered only when the owner opted in (migration 072);
                     otherwise the map is view-only. No dead-end button (P9) — the

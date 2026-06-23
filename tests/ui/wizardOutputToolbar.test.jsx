@@ -23,6 +23,7 @@ import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { CHROME } from '../../src/components/theme.js';
 
 afterEach(cleanup);
 
@@ -78,11 +79,17 @@ describe('WizardOutputToolbar layering + controls', () => {
     expect(Number(bar.style.zIndex)).toBeLessThan(50);
   });
 
-  test('mobile sticks to the top of the scroll region', () => {
+  test('mobile pins BELOW the slim app header so the two stack (not under it)', () => {
+    // Mobile fix (Phase 5): the bar used to pin at top:0, which let it slide
+    // UNDER the sticky mobile header (top:0, z:50) and hide the dossier name and
+    // Back/Regenerate while scrolling. It now pins at the header's height so the
+    // header and toolbar stack cleanly, with the bar still below the header in
+    // z-order so the header wins any overlap.
     const { container } = renderToolbar({ isMobile: true });
     const bar = container.firstChild;
     expect(bar.style.position).toBe('sticky');
-    expect(parseInt(bar.style.top, 10)).toBe(0);
+    expect(parseInt(bar.style.top, 10)).toBe(CHROME.headerMobile);
+    expect(Number(bar.style.zIndex)).toBeLessThan(50);
   });
 
   test('caps its OWN width to the dossier column and centres it, without a wrapper', () => {
@@ -137,16 +144,23 @@ describe('Create-view sticky chrome: occlusion root-cause guards', () => {
     expect(wizardSrc).toMatch(/document\.documentElement[\s\S]{0,200}scrollPaddingTop/);
     // Desktop clearance must reach past the pinned toolbar's bottom (~124px) —
     // not a header-only offset that re-hides the tab strip behind the toolbar.
-    // The offset is now driven by the CHROME chrome-height tokens
-    // (scrollPadMobile / scrollPadDesktop) rather than inline literals, so match
-    // the tokenized assignment and resolve the desktop value from theme.js.
+    // Mobile now STACKS the slim header and the toolbar (the toolbar pins at the
+    // header's height, no longer at top:0), so the mobile clearance is the sum
+    // of both chrome heights rather than a single header's worth. Both offsets
+    // are driven by CHROME tokens, not inline literals.
     const padMatch = wizardSrc.match(
-      /scrollPaddingTop\s*=\s*isMobile\s*\?\s*`\$\{CHROME\.scrollPadMobile\}px`\s*:\s*`\$\{CHROME\.scrollPadDesktop\}px`/,
+      /scrollPaddingTop\s*=\s*isMobile\s*\?\s*`\$\{mobilePad\}px`\s*:\s*`\$\{CHROME\.scrollPadDesktop\}px`/,
     );
     expect(padMatch, 'expected a mobile/desktop scrollPaddingTop assignment').toBeTruthy();
+    expect(
+      wizardSrc,
+      'expected the mobile clearance to sum the header + toolbar chrome',
+    ).toMatch(/const mobilePad\s*=\s*CHROME\.headerMobile\s*\+\s*CHROME\.toolbarHeight/);
     const themeSrc = readFileSync(fromTest('../../src/components/theme.js'), 'utf8');
     const desktopPad = themeSrc.match(/scrollPadDesktop\s*:\s*(\d+)/);
     expect(desktopPad, 'expected CHROME.scrollPadDesktop in theme.js').toBeTruthy();
     expect(Number(desktopPad[1])).toBeGreaterThanOrEqual(120);
+    // Mobile stacked clearance must clear both bars.
+    expect(CHROME.headerMobile + CHROME.toolbarHeight).toBeGreaterThanOrEqual(120);
   });
 });

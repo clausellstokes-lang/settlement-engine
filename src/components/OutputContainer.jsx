@@ -36,6 +36,8 @@ import DossierHeaderRow from './dossier/DossierHeaderRow.jsx';
 import DossierNarrativeBanner from './dossier/DossierNarrativeBanner.jsx';
 import DossierTabStrip from './dossier/DossierTabStrip.jsx';
 import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
 
@@ -287,6 +289,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const [localAiError, setLocalAiError]     = useState(null);
   const [aiProgress, setAiProgress] = useState('');
   const scrollRef = useRef(null);
+  // Mobile swaps the desktop ‹ › scroll-arrow sub-tab strip for MobileTabStrip.
+  const mobile = useIsMobile();
   // NOTE: do not early-return here. React Hooks must always be called
   // in the same order on every render; an early return before subsequent
   // useMemo/useCallback hooks (line 124 etc.) would create a hooks-order
@@ -807,16 +811,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             ONE tab (Substrate). Substrate now renders unconditionally and owns a
             LOCAL depth control; the engine sections render at a sensible default
             depth (see DEFAULT_DETAIL_LEVEL). */}
-        {/* Tab strip */}
-        <DossierTabStrip
-          onboardingActive={onboardingActive}
-          onboardingStep={onboardingStep}
-          scroll={scroll}
-          scrollRef={scrollRef}
-          tabs={tabs}
-          selectedTab={selectedTab}
-          setActiveTab={setActiveTab}
-        />
+        {/* Tab strip. Desktop = scroll-arrow strip (byte-identical); mobile = MobileTabStrip, idPrefix="sf" to keep the sf-tab-/sf-panel- ids the content panel's aria-labelledby needs. */}
+        {mobile ? (
+          <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" />
+        ) : (
+          <DossierTabStrip onboardingActive={onboardingActive} onboardingStep={onboardingStep} scroll={scroll} scrollRef={scrollRef} tabs={tabs} selectedTab={selectedTab} setActiveTab={setActiveTab} />
+        )}
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
         <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
           {/* ── Banners above tab content ────────────────────────────────────────

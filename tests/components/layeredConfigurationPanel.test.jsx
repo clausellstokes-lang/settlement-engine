@@ -26,14 +26,20 @@ vi.mock('../../src/components/InstitutionalGrid.jsx', () => ({ default: () => <d
 vi.mock('../../src/components/ServicesTogglePanel.jsx', () => ({ default: () => <div data-testid="services-panel" /> }));
 vi.mock('../../src/components/TradeDynamicsPanel.jsx', () => ({ default: () => <div data-testid="trade-panel" /> }));
 // CharacterPresetCard + PlaceInRegionCard read the store; render real wrappers
-// over a store mock so the cards mount.
-vi.mock('../../src/components/generate/CharacterPresetCard.jsx', () => ({ default: () => <div data-testid="character-preset-card" /> }));
+// over a store mock so the cards mount. CharacterPresetCard echoes its `advanced`
+// prop so the mobile-defer (Advanced chips/sliders -> Basic chip-only) is assertable.
+vi.mock('../../src/components/generate/CharacterPresetCard.jsx', () => ({ default: ({ advanced }) => <div data-testid="character-preset-card" data-advanced={String(advanced)} /> }));
 vi.mock('../../src/components/generate/PlaceInRegionCard.jsx', () => ({ default: () => <div data-testid="place-in-region-card" /> }));
+
+// useIsMobile is a controllable mock: __mobileFlag drives the reactive flag so a
+// single suite can exercise both the desktop (default false) and mobile branches.
+let __mobileFlag = false;
+vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => __mobileFlag }));
 
 import LayeredConfigurationPanel from '../../src/components/generate/LayeredConfigurationPanel.jsx';
 
 describe('LayeredConfigurationPanel — Create reorg', () => {
-  beforeEach(() => trackMock.mockClear());
+  beforeEach(() => { trackMock.mockClear(); __mobileFlag = false; });
   afterEach(cleanup);
 
   it('renders Foundations always, the Character card top-level, and Place in Region', () => {
@@ -97,5 +103,46 @@ describe('LayeredConfigurationPanel — Create reorg', () => {
     expect(screen.queryByText('Available Services')).toBeNull();
     expect(screen.queryByText('Trade Dynamics')).toBeNull();
     expect(screen.queryByTestId('place-in-region-card')).toBeNull();
+  });
+
+  // ── Mobile pass (Phase 5) ────────────────────────────────────────────────
+  // On a phone, Advanced is a desktop authoring console: the hard-constraint
+  // editors (Institutions / Services / Trade), the Fine-tune dials, the Advanced
+  // slider/Custom character surface, and Place in Region all defer to desktop.
+  // The Basic authoring path stays fully usable (Character chips + Foundations +
+  // name + Generate). Desktop must stay byte-identical — the assertions above run
+  // with the flag off and are untouched.
+  describe('mobile defers the Advanced console (keeps Basic authoring)', () => {
+    beforeEach(() => { __mobileFlag = true; });
+
+    it('gates Deep constraints behind a calm desktop notice and drops the raw editors', () => {
+      render(<LayeredConfigurationPanel mode="advanced" />);
+      // The "best on desktop" gate stands in for the constraint console.
+      expect(screen.getByTestId('deep-constraints-mobile-gate')).toBeTruthy();
+      expect(screen.getByText(/best set on desktop/i)).toBeTruthy();
+      // The raw constraint editors and their disclosure headers are gone.
+      expect(screen.queryByText('Institutions')).toBeNull();
+      expect(screen.queryByText('Available Services')).toBeNull();
+      expect(screen.queryByText('Trade Dynamics')).toBeNull();
+      expect(screen.queryByTestId('place-in-region-card')).toBeNull();
+    });
+
+    it('keeps the Basic authoring path: Character chips + Foundations without Fine-tune', () => {
+      render(<LayeredConfigurationPanel mode="advanced" />);
+      // Character + Foundations still mount so the phone can author + generate.
+      expect(screen.getByTestId('character-preset-card')).toBeTruthy();
+      expect(screen.getByTestId('configuration-panel')).toBeTruthy();
+      // Advanced slider/Custom character surface and the Fine-tune dials defer:
+      // both fall back to the Basic (non-advanced) shape on mobile.
+      expect(screen.getByTestId('character-preset-card').getAttribute('data-advanced')).toBe('false');
+      expect(screen.getByTestId('configuration-panel').getAttribute('data-fine-tune')).toBe('false');
+    });
+
+    it('Basic mode on mobile is unchanged — no gate, since there is nothing deferred', () => {
+      render(<LayeredConfigurationPanel mode="basic" />);
+      expect(screen.queryByTestId('deep-constraints-mobile-gate')).toBeNull();
+      expect(screen.getByTestId('character-preset-card').getAttribute('data-advanced')).toBe('false');
+      expect(screen.getByTestId('configuration-panel').getAttribute('data-fine-tune')).toBe('false');
+    });
   });
 });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { isMobile } from './tabConstants';
+import { useIsMobileTab } from './tabConstants';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { exactGoodId } from '../../domain/region/goodsCatalog.js';
 
@@ -243,7 +243,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
 
 // ── Main component ────────────────────────────────────────────────────────────
 export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
-  const mobile = isMobile();
+  const mobile = useIsMobileTab();
   const eco    = ecoProp || settlement?.economicState;
   const chains = (eco?.activeChains || []).filter(c =>
     // Show: running, operational, vulnerable (impaired only if has any institution)

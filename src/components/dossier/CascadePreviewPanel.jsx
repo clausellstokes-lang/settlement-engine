@@ -114,6 +114,9 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
       >
         <header style={{
           padding: SP.lg,
+          // Top-pinned fixed panel: fold in the device safe-area inset so the
+          // header clears a notch on mobile. Resolves to 0 on desktop.
+          paddingTop: `calc(${SP.lg}px + env(safe-area-inset-top, 0px))`,
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'baseline', gap: SP.sm,
         }}>

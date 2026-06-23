@@ -23,6 +23,8 @@ import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { SP, CARD, BORDER, R, CHROME } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { nameMapFromSaves } from './map/WorldPulseData.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
@@ -38,8 +40,19 @@ import { WorldMapStage } from './map/WorldMapStage.jsx';
 import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
 
 const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
+// Mobile-only: the defer-to-desktop wall + read-only dashboard. Lazy so the
+// desktop build never pulls it, and the mobile build only loads it when the
+// gate actually renders.
+const RealmMobileGate = lazy(() => import('./map/RealmMobileGate.jsx'));
 
 export default function WorldMap({ onNavigate } = {}) {
+  // Reactive mobile flag (width < 640). On phones the Realm defers to desktop:
+  // the desktop map-editing workspace below is replaced by an honest gate plus a
+  // read-only dashboard (see the mobile branch in the render). Read here so it is
+  // available to the render; every hook still runs unconditionally above the
+  // branch, so desktop rendering is byte-identical.
+  const isMobile = useIsMobile();
+
   // ── Refs & local state ────────────────────────────────────────────────
   const iframeRef = useRef(null);
   const mapContainerRef = useRef(null);
@@ -205,6 +218,12 @@ export default function WorldMap({ onNavigate } = {}) {
     }
     return pool;
   }, [saves, activeCampaign, canonOnlyFilter]);
+
+  // Settlement-id → name map for the mobile read-only Realm Dashboard (the desktop
+  // RealmInspector derives the same map internally; the mobile dashboard renders
+  // standalone, so it needs the map passed in). Memoized on saves so it is stable
+  // across unrelated re-renders.
+  const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
 
   // ── Hydrate saved settlements into the store (if not already loaded) ──
   useEffect(() => {
@@ -724,6 +743,25 @@ export default function WorldMap({ onNavigate } = {}) {
     return () => window.removeEventListener('keydown', onKey);
 
   }, [setMapMode, handleFit, handleSaveMapToCampaign]);
+
+  // ── Mobile render (defer-to-desktop) ───────────────────────────────────
+  // On phones the whole map-editing workspace is replaced by the gate + read-only
+  // dashboard (see RealmMobileGate). The branch sits AFTER every hook above, so it
+  // does not change hook order and the desktop tree below stays byte-identical.
+  if (isMobile) {
+    return (
+      <Suspense fallback={null}>
+        <RealmMobileGate
+          campaign={activeCampaign}
+          canManageCampaigns={canManageCampaigns}
+          tier={authTier}
+          onUpgrade={handleUpgrade}
+          nameById={nameById}
+          {...campaignActivation}
+        />
+      </Suspense>
+    );
+  }
 
   // ── Render ─────────────────────────────────────────────────────────────
   // Use viewport height minus header/padding so the map fills the screen.

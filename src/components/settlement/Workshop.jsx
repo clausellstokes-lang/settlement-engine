@@ -39,6 +39,8 @@ import { useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { useSettlementLiveWorld } from '../../hooks/useSettlementLiveWorld.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 
 // Read surfaces (Phase 2). These are the free→premium teaser.
 import ReadSystemStateBar from './ReadSystemStateBar.jsx';
@@ -207,6 +209,12 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
+  // Mobile is a read-and-light-act surface. The heavy authoring in Card 2 (the
+  // dense EventComposer, the deity-assign write, the living-world layer toggles,
+  // and the link/rename affordances) is deferred to desktop per the locked
+  // read-mostly matrix. Card 1's read surfaces and the change-queue VIEW/commit
+  // stay live on mobile. Desktop is unchanged (this flag is false off mobile).
+  const isMobile = useIsMobile();
 
   if (!settlement) return null;
 
@@ -215,6 +223,10 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
   // the store is hydrated to THIS settlement. In view mode the cards show their
   // read surface only.
   const showWrite = editMode && canEdit;
+  // Heavy authoring also requires a desktop-class viewport. On mobile the write
+  // cards fall back to a calm "best on desktop" gate; the change-queue is the one
+  // write affordance kept live (view the staged orders and commit them together).
+  const showAuthoring = showWrite && !isMobile;
 
   // Keyword-first headline facts for the collapsed cards (P6 scannability).
   const rulerName = settlement.powerStructure?.governingName || null;
@@ -335,7 +347,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           defaultOpen={showWrite}
           editMode={showWrite}
         >
-          {showWrite ? (
+          {showAuthoring ? (
             <>
               {/* The change-queue: staged orders sit here, between the read of
                   current state and the composer that mutates it. Hidden when the
@@ -344,6 +356,20 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
               <CoherencePanel />
               <EventComposer />
               <PendingIntentions />
+            </>
+          ) : showWrite ? (
+            // Mobile, editing: keep the change-queue VIEW/commit live (a GM can
+            // still review staged orders and save them together at the table) but
+            // defer the dense event-composer authoring to desktop. The queue
+            // hides itself when nothing is staged, so an empty queue shows only
+            // the gate.
+            <>
+              <ChangeQueuePanel saveId={saveId} active={queueActive} onCommitted={onQueueCommitted} />
+              <DesktopOnlyGate
+                variant="gate"
+                title="Author changes on a larger screen"
+                message="The event composer is a dense form best worked on desktop. Open this settlement on a larger screen to apply in-world events. Any changes you have already staged stay listed above and can be saved from here."
+              />
             </>
           ) : (
             <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
@@ -364,8 +390,14 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           hint="Name this settlement's patron. Its effect on the substrate is read in the dossier's War & Faith tab; awaken the living religion layer below."
           editMode={showWrite}
         >
-          {showWrite ? (
+          {showAuthoring ? (
             <PrimaryDeityPicker />
+          ) : showWrite ? (
+            <DesktopOnlyGate
+              variant="gate"
+              title="Assign a deity on a larger screen"
+              message="Naming a patron deity is an authoring step best done on desktop. Open this settlement on a larger screen to assign one."
+            />
           ) : (
             <PremiumWriteHint onUpgrade={onUpgrade} />
           )}
@@ -382,19 +414,37 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           hint="Opt-in subsystems for the wider realm, off by default and byte-identical to today while off. Turn one on and the realm starts moving."
           editMode={showWrite}
         >
-          <div style={{ display: 'grid', gap: SP.xs }}>
-            <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
-            <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
-            <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
-          </div>
+          {isMobile && showWrite ? (
+            <DesktopOnlyGate
+              variant="gate"
+              title="Turn on living-world layers from desktop"
+              message="The opt-in world subsystems reshape how the wider realm moves. Toggle them on from a larger screen, then return here to read what they surface."
+            />
+          ) : (
+            <div style={{ display: 'grid', gap: SP.xs }}>
+              <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
+              <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
+              <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
+            </div>
+          )}
         </WorkshopCard>
 
         {/* 9 ── Link a neighbour / Edit names ────────────────────────────────────
             These own SettlementDetail state (the linking picker, the neighbour
             network, the rename drafts), so SettlementDetail passes their existing
             JSX down unchanged. They sit inside Card 2 so the change surface reads
-            as one coherent group, with no behaviour change. */}
-        {changeExtras}
+            as one coherent group, with no behaviour change. On mobile they are
+            heavy authoring (cross-settlement links, the network panel, the
+            NPC/faction rename editors), so they defer to desktop. */}
+        {isMobile && changeExtras ? (
+          <DesktopOnlyGate
+            variant="gate"
+            title="Link and rename from desktop"
+            message="Linking a neighbour, reading the network effects, and renaming the people and factions are authoring steps best done on a larger screen. Open this settlement on desktop to work them."
+          />
+        ) : (
+          changeExtras
+        )}
       </GroupCard>
     </div>
   );

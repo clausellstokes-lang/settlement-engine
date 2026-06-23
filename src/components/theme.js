@@ -124,10 +124,10 @@ export const SP = L.SP;
 //   toolbarHeight — the WizardOutputToolbar that pins under the header while a
 //                   dossier is on screen (~64px tall).
 //   bottomNav     — the 5-tab mobile bottom nav row (44px tap floor + borders).
-//   scrollPadDesktop / scrollPadMobile — scroll-padding-top reserved on the
-//                   document scroller so anchored/focus scrolls clear the
-//                   stacked chrome. Desktop stacks header(60)+toolbar(64);
-//                   mobile stacks them at top:0 so one header's worth suffices.
+//   scrollPadDesktop — scroll-padding-top reserved on the document scroller so
+//                   anchored/focus scrolls clear the stacked chrome. Desktop
+//                   stacks header(60)+toolbar(64); mobile derives its own
+//                   clearance inline from headerMobile + toolbarHeight.
 //   mapShellOffset — viewport height the Realm map shell subtracts for the
 //                   desktop header + main padding + breathing room.
 //   mapShellMin    — the map shell's minimum height floor.
@@ -143,7 +143,6 @@ export const CHROME = Object.freeze({
   toolbarHeight:   64,
   bottomNav:       57,
   scrollPadDesktop: 124,
-  scrollPadMobile:  64,
   mapShellOffset:  120,
   mapShellMin:     500,
   fabLift:         70,

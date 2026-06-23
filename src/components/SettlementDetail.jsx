@@ -11,6 +11,7 @@ const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
@@ -90,6 +91,12 @@ export default function SettlementDetail({
   handleLink, removeNeighbour, applyRename,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
+  // Mobile is a read-and-light-act surface. The header keeps Export (the
+  // at-the-table read action) primary; Share to Gallery (a publish/authoring
+  // action) is deferred to desktop so the three peer buttons don't stack tall on
+  // narrow. The Edit toggle stays — it is the gate that opens inline rename, the
+  // one heavier write the matrix keeps on mobile. Desktop is unchanged.
+  const isMobile = useIsMobile();
 
   // Read-only echo of the strongest network-effect signal — the genuinely
   // change-focused, anomaly-first fact the cascade produces. The full editable
@@ -487,7 +494,7 @@ export default function SettlementDetail({
                 ? 'Edit (Premium)'
                 : (editMode ? 'Stop Editing' : 'Edit Dossier')}
             </Button>
-            {saveId && (
+            {saveId && !isMobile && (
               <Button
                 variant="secondary"
                 size="md"
@@ -537,7 +544,7 @@ export default function SettlementDetail({
           expandable details form, so the header button toggles this panel
           rather than living inline in the dense button row. Owners only;
           ShareToGallery self-gates on auth + canonized state. */}
-      {saveId && shareOpen && (
+      {saveId && shareOpen && !isMobile && (
         // 16px (on-scale) standalone separation — this block sits in a gap-less
         // region between siblings, so it owns its own bottom margin rather than
         // an off-scale 14 (P5 spacing-scale discipline).
@@ -573,8 +580,11 @@ export default function SettlementDetail({
             dossier on the left, the phase-aware NextActionRail sticky on the
             right. The row reflows to a single column on narrow (flexWrap), where
             the rail drops BELOW the dossier so the read stays single-column
-            legible. The rail is an owner-only affordance, gated on saveId (this
-            saved view is owner-by-construction; never a public route). */}
+            legible. On mobile the sticky `top` clears the fixed chrome header
+            (CHROME.headerMobile) so the pinned rail never tucks underneath it;
+            desktop keeps the bare breathing gap. The rail is an owner-only
+            affordance, gated on saveId (this saved view is owner-by-construction;
+            never a public route). */}
       {detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
         <div style={{flex:'1 1 520px',minWidth:0}}>
           <FeatureErrorBoundary
@@ -602,7 +612,7 @@ export default function SettlementDetail({
           </FeatureErrorBoundary>
         </div>
         {saveId && (
-          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:CHROME.stickyTop,alignSelf:'flex-start'}}>
+          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:isMobile?CHROME.headerMobile+CHROME.stickyTop:CHROME.stickyTop,alignSelf:'flex-start'}}>
             <NextActionRail
               settlement={detail.settlement}
               save={detail.saveData || detail}

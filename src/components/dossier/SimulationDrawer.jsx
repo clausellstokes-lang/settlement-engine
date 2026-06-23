@@ -119,6 +119,10 @@ export default function SimulationDrawer({ variant = 'inline' }) {
           >
             <header style={{
               padding: '14px 18px',
+              // Top-pinned fixed panel: fold in the device safe-area inset so the
+              // header clears a notch on mobile. Resolves to 0 on desktop, so the
+              // desktop drawer is unchanged.
+              paddingTop: 'calc(14px + env(safe-area-inset-top, 0px))',
               background: PARCH,
               borderBottom: `1px solid ${BORDER}`,
               display: 'flex', alignItems: 'center',

@@ -3,7 +3,7 @@ import { FS, swatch, MUTED, BODY } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
@@ -17,7 +17,7 @@ import { truncateAtWord } from '../../../lib/text.js';
 export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
-  const _mobile = isMobile();
+  const mobile = useIsMobileTab();
   // UX overhaul Phase 2 — resolve the owning campaign's live war status so the
   // frozen defenseProfile can be reframed into a war-front readout. Self-gates to
   // nothing (null status) for a non-campaign / at-peace settlement.
@@ -176,9 +176,15 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
               <div key={i} role="button" tabIndex={0} aria-expanded={isExp} aria-controls={`threat-panel-${i}`} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
                 onClick={()=>setExpandedThreat(isExp?null:i)}
                 onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
-                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
+                {/* On mobile the row wraps and the label flexes instead of holding
+                    a fixed 130px slot, so the icon + label + 72px gauge + badge no
+                    longer overrun a 375px viewport. Desktop keeps the fixed-width
+                    single-line layout byte-for-byte. */}
+                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',...(mobile?{flexWrap:'wrap'}:null)}}>
                   <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
-                  <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
+                  <span style={mobile
+                    ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
+                    : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
                   <div style={{width:72,height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color,borderRadius:3}}/>
                   </div>

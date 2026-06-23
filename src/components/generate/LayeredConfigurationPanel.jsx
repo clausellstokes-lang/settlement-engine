@@ -31,6 +31,8 @@ import TradeDynamicsPanel from '../TradeDynamicsPanel.jsx';
 import CharacterPresetCard from './CharacterPresetCard.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
+import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, SECOND, serif_, FS, SP } from '../theme.js';
 
 // Deep-constraints sections — each keeps its wizard STEP ID so funnel analytics
@@ -80,6 +82,16 @@ function DeepSection({ id, label, hint, collapsedHint, Panel }) {
  */
 export default function LayeredConfigurationPanel({ mode = 'advanced', showPlaceInRegion = true } = {}) {
   const advanced = mode === 'advanced';
+  // Mobile pass (Phase 5): Advanced is a desktop authoring console — the
+  // Deep-constraints editors (Institutions / Services / Trade) and Fine-tune are
+  // dense, sub-44px, nested-scroll surfaces with no room on a phone. Per the
+  // confirmed MIX rule we keep the BASIC authoring path on mobile (Character
+  // chips + Foundations + name + Generate, which already collapse to one column)
+  // and defer the hard constraints behind a calm "best on desktop" gate. The flag
+  // is read reactively so the surface adapts on rotation; desktop is untouched
+  // (advancedOnDesktop === advanced when not mobile), so its render is unchanged.
+  const mobile = useIsMobile();
+  const advancedOnDesktop = advanced && !mobile;
   // The Foundations/Fine-tune block is always mounted — report its step id once
   // on mount so the funnel's `config` step still registers without the linear wizard.
   useEffect(() => {
@@ -92,8 +104,11 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
     <div data-testid="layered-configuration-panel" style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Tier-1: Character preset. In Advanced this card also hosts the five
           always-on priority sliders (archetype chips + Random/Custom + sliders
-          reconciled into one control); Basic shows archetype chips only. */}
-      <CharacterPresetCard advanced={advanced} />
+          reconciled into one control); Basic shows archetype chips only. On
+          mobile the Advanced slider/Custom surface defers to desktop, so the card
+          renders its Basic chip-only form (the priorities still roll from
+          defaults) — keeping the phone path to the Basic authoring shape. */}
+      <CharacterPresetCard advanced={advancedOnDesktop} />
 
       {/* Foundations (always-on) + Fine-tune (collapsible). The outer bordered
           wrapper was removed: ConfigurationPanel already renders its OWN bordered
@@ -106,13 +121,17 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
           <span style={{ fontSize: FS.xs, color: MUTED }}>size, route, culture: the essentials</span>
         </div>
         <div>
-          <ConfigurationPanel showFineTune={advanced} />
+          {/* Fine-tune (sliders, nearby-resource cycling, stress) is Advanced-only
+              and, on mobile, a dense sub-44px / nested-scroll surface — so it
+              defers to desktop. The phone keeps the Foundations select grids,
+              which already collapse to one column. */}
+          <ConfigurationPanel showFineTune={advancedOnDesktop} />
         </div>
       </div>
 
       {/* Deep constraints (Advanced only) — collapsibles absorbing
           Institutions / Services / Trade. Basic mode randomises these. */}
-      {advanced && (
+      {advancedOnDesktop && (
         <div style={{ marginTop: SP.md }}>
           {/* Keyword-first header with real information scent (P1): front-load
               WHAT this group controls at a visible tier, not a muted micro-cap
@@ -128,9 +147,25 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
         </div>
       )}
 
+      {/* Mobile + Advanced: the hard-constraint editors (Institutions, Services,
+          Trade) and the Fine-tune dials are raw authoring tools with no readable
+          preview to teaser, so they get the plain "best on desktop" gate. Basic
+          authoring stays fully usable on the phone above: pick a character, set
+          the foundations, name it, and Generate. The constraints roll from
+          working defaults until refined on a larger screen. */}
+      {advanced && mobile && (
+        <div style={{ marginTop: SP.md }} data-testid="deep-constraints-mobile-gate">
+          <DesktopOnlyGate
+            title="Hard constraints are best set on desktop"
+            message="Forcing or forbidding specific institutions, services, and trade goods needs the full constraint console, which has room to work on a larger screen. On your phone you can pick a character, set the foundations, and generate a draft. The simulator rolls these constraints from working defaults until you refine them on desktop."
+          />
+        </div>
+      )}
+
       {/* Premium "Place in Region" close-out (Advanced only) — assign to a
-          campaign/region + an optional deity at birth. Self-gates for non-premium. */}
-      {advanced && showPlaceInRegion && (
+          campaign/region + an optional deity at birth. Self-gates for non-premium.
+          Deferred to desktop on mobile alongside the rest of the Advanced console. */}
+      {advancedOnDesktop && showPlaceInRegion && (
         <div style={{ marginTop: SP.md }}>
           <PlaceInRegionCard />
         </div>

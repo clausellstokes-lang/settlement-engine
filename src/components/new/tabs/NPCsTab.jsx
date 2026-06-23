@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
-import {isMobile} from '../tabConstants';
 
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
@@ -14,7 +13,6 @@ import IconButton from '../../primitives/IconButton.jsx';
 export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
-  const _mobile = isMobile();
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
   if (!npcs?.length) return <Empty message="No figures of note recorded here yet."/>;

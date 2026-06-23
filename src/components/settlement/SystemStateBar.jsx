@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
@@ -36,6 +37,10 @@ export default function SystemStateBar() {
  */
 export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
   const [openKey, setOpenKey] = useState(null);
+  // The four dimension tiles sit two-up on desktop. At mobile width that pair of
+  // columns crushes each band label and number into an unreadable sliver, so the
+  // grid stacks to a single column below the breakpoint. Desktop is unchanged.
+  const isMobile = useIsMobile();
   if (!systemState) return null;
   return (
     <div
@@ -53,7 +58,7 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
       }}>
         {title}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: SP.sm }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: SP.sm }}>
         {DIM_ORDER.map(key => {
           const dim = systemState[key];
           if (!dim) return null;

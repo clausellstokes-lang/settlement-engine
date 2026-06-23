@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
   DANGER_BORDER, SUCCESS_BORDER, TINT_GOLD,
@@ -60,6 +61,17 @@ function OkBanner({ children }) {
 }
 
 export default function AccountSecuritySection({ auth, onSignOut }) {
+  // Mobile reflow: the description-plus-right-pinned-action rows (2FA, sign-out
+  // everywhere) and the linked-accounts rows have no wrap fallback, so a narrow
+  // phone squeezes the copy against the button. `actionRow` stacks the action
+  // below the text on mobile; desktop keeps the single centred row byte-identical.
+  const isMobile = useIsMobile();
+  const actionRow = {
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    alignItems: isMobile ? 'flex-start' : 'center',
+    gap: SP.md,
+  };
   // ── Change password ───────────────────────────────────────────────────────
   const [pwOpen, setPwOpen] = useState(false);
   const [currentPw, setCurrentPw] = useState('');
@@ -246,8 +258,8 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 const linked = (identities || []).find(i => i.provider === provider);
                 const busy = identityBusy === provider;
                 return (
-                  <div key={provider} style={{ display: 'flex', alignItems: 'center', gap: SP.md, padding: `${SP.xs}px 0` }}>
-                    <span style={{ flex: 1, fontSize: FS.sm, color: INK, fontWeight: 600 }}>{label}</span>
+                  <div key={provider} style={{ display: 'flex', alignItems: 'center', gap: SP.md, padding: `${SP.xs}px 0`, flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
+                    <span style={{ flex: isMobile ? '1 1 100%' : 1, fontSize: FS.sm, color: INK, fontWeight: 600 }}>{label}</span>
                     {linked ? (
                       <>
                         <span style={{ fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>
@@ -282,7 +294,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
 
         {/* ── Two-factor (coming soon) ──────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+          <div style={actionRow}>
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, fontWeight: 700, color: INK }}>
                 Two-factor authentication
@@ -300,7 +312,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
 
         {/* ── Sign out everywhere ───────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+          <div style={actionRow}>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sign out everywhere</div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>

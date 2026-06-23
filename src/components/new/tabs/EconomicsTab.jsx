@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, BODY, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
@@ -190,7 +190,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
 export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const s = settlement;
-  const mobile = isMobile();
+  const mobile = useIsMobileTab();
   const eco = economicState || s?.economicState;
   const via = s?.economicViability;
   if (!eco) return <Empty message="No economic record on file for this settlement."/>;

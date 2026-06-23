@@ -16,6 +16,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
@@ -46,6 +47,13 @@ export default function CompendiumGlobalSearch({ onSelect }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const ref = useRef(null);
+  const isMobile = useIsMobile();
+  // On mobile the on-screen keyboard claims roughly the lower half of the
+  // viewport, so a fixed 320px result panel can open behind it with its lower
+  // rows unreachable. Clamp the panel to a keyboard-safe slice of the viewport
+  // (never taller than the original 320px) so the list scrolls within what's
+  // visible above the keyboard. Desktop keeps the exact 320px cap.
+  const dropdownMaxHeight = isMobile ? 'min(320px, 45vh)' : 320;
 
   const q = query.trim();
   const results = useMemo(() => (q ? searchCompendium(q, { limit: 8 }) : []), [q]);
@@ -145,7 +153,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
             zIndex: 50, listStyle: 'none', margin: 0, padding: 4,
             background: CARD, border: `1px solid ${BOR}`, borderRadius: 6,
             boxShadow: '0 12px 28px rgba(0,0,0,0.18)',
-            maxHeight: 320, overflowY: 'auto',
+            maxHeight: dropdownMaxHeight, overflowY: 'auto',
           }}
         >
           {results.map((r, i) => {
