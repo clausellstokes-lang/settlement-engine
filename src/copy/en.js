@@ -258,7 +258,7 @@ export const en = Object.freeze({
       // Non-fatal: the account exists, but the answers did not save on the first
       // try. We point the user at the account-page section that now exists for
       // setting them later (see security.account below).
-      saveDeferred: 'Your account is ready. You can set your security questions later under Login and security on your account page.',
+      saveDeferred: 'Your account is ready. You can set your security questions later in the Account recovery questions section of your account page.',
       // Account-page section: a signed-in user sets or replaces their two
       // recovery questions here. Formal register, no contractions.
       account: {

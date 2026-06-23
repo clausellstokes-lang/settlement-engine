@@ -74,6 +74,21 @@ export const CAPACITY_NAMES = Object.freeze([
   'magical',
 ]);
 
+// The five capacity lenses the product treats as outsider- and DM-facing:
+// food/defense/governance/healing/magic. labor, craft, transport, and
+// religious_welfare are internal substrate — a shortage in them is real for
+// the simulation but is not narrated as visible prose. aiGrounding.js holds
+// the same five-lens list for the AI payload; this constant lets non-AI
+// derivations (e.g. Outsider impressions) honour the same boundary so an
+// internal-only shortage never leaks into visible text.
+export const VISIBLE_CAPACITY_LENSES = Object.freeze([
+  'food_production',
+  'defense',
+  'administrative',
+  'healing',
+  'magical',
+]);
+
 export const CAPACITY_BANDS = Object.freeze([
   'surplus', 'adequate', 'strained', 'critical', 'collapsed',
   // Out-of-band: supply AND demand are both zero — the capacity does not

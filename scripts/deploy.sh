@@ -5,8 +5,11 @@
 # This script provisions the complete backend:
 #   1. Supabase project creation + migration
 #   2. Edge function deployment
-#   3. Stripe product/price creation
-#   4. Environment variable configuration
+#   3. Stripe webhook + price-ID secret wiring
+#      (Stripe products/prices are provisioned OUT OF BAND in the dashboard;
+#       this script wires the resulting price IDs into function secrets, it
+#       does not create any Stripe products or prices.)
+#   4. Environment variable + secret configuration
 #
 # Prerequisites:
 #   - Supabase CLI (npx supabase)
@@ -178,7 +181,7 @@ ok "All $DEPLOYED_COUNT functions verified present"
 
 # ── Step 6: Stripe setup ───────────────────────────────────────────────────
 
-info "Step 6: Stripe product and price setup"
+info "Step 6: Stripe price-ID secret wiring (products provisioned out of band)"
 echo ""
 echo "  Get your Stripe secret key from:"
 echo "  https://dashboard.stripe.com/apikeys"
@@ -308,11 +311,63 @@ ENVEOF
 
 ok ".env written"
 
+# ── Completeness gate ──────────────────────────────────────────────────────
+#
+# Before certifying the environment, verify every secret the live app needs is
+# actually wired. The success banner must never claim "complete" over a
+# half-provisioned project. Two classes are required:
+#   - The six current-catalogue Stripe price IDs (checkout fails without them).
+#   - RESEND_API_KEY + RESEND_FROM_EMAIL — the logged-out password-recovery path
+#     (auth-recovery → send-email) mails the reset link through Resend; without
+#     them account recovery silently soft-fails.
+# This check reads the values collected above (fail-closed: a blank value counts
+# as missing) rather than re-querying the project, so it stays idempotent.
+# Each entry is "<value>:<secret-name>"; a blank value flags that secret as
+# missing. A for-loop (not chained `[[ -z ]] &&` shorthand) keeps this safe under
+# `set -e`, where a non-empty match would otherwise exit 1 and abort the script.
+MISSING_REQUIRED=()
+for required in \
+  "$PRICE_CREDITS_25:STRIPE_PRICE_CREDITS_25" \
+  "$PRICE_CREDITS_60:STRIPE_PRICE_CREDITS_60" \
+  "$PRICE_CREDITS_150:STRIPE_PRICE_CREDITS_150" \
+  "$PRICE_PREMIUM:STRIPE_PRICE_PREMIUM" \
+  "$PRICE_FOUNDER_LIFETIME:STRIPE_PRICE_FOUNDER_LIFETIME" \
+  "$PRICE_SINGLE_DOSSIER:STRIPE_PRICE_SINGLE_DOSSIER" \
+  "$RESEND_KEY:RESEND_API_KEY" \
+  "$RESEND_FROM:RESEND_FROM_EMAIL"; do
+  if [[ -z "${required%%:*}" ]]; then
+    MISSING_REQUIRED+=("${required##*:}")
+  fi
+done
+
+if [[ ${#MISSING_REQUIRED[@]} -gt 0 ]]; then
+  echo ""
+  echo "═══════════════════════════════════════════════════════════════"
+  echo -e "  ${RED}Deployment INCOMPLETE${NC}"
+  echo "═══════════════════════════════════════════════════════════════"
+  echo ""
+  echo "  Infrastructure is wired, but these required secrets were not"
+  echo "  supplied — set them with 'supabase secrets set' before going live"
+  echo "  (see docs/DEPLOY.md):"
+  echo ""
+  echo "    missing: ${MISSING_REQUIRED[*]}"
+  echo ""
+  echo "  Stripe checkout fails without the price IDs; password recovery"
+  echo "  soft-fails without the Resend secrets."
+  echo ""
+  echo "  Supabase URL:    $SUPABASE_URL"
+  echo "  Project ref:     $PROJECT_REF"
+  echo "  Edge functions:  $DEPLOYED_COUNT deployed"
+  echo "  Webhook:         $WEBHOOK_URL"
+  echo ""
+  exit 1
+fi
+
 # ── Done ───────────────────────────────────────────────────────────────────
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo -e "  ${GREEN}Deployment complete!${NC}"
+echo -e "  ${GREEN}Deployment complete${NC}"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 echo "  Supabase URL:    $SUPABASE_URL"

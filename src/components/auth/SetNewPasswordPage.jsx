@@ -9,11 +9,15 @@
  * form (new + confirm) → authUpdatePassword (updateUser({ password })) → on
  * success the user is fully authed and we route into the app.
  *
+ * Authorization rests on the PASSWORD_RECOVERY event alone (latched at client
+ * creation in supabase.js so a pre-mount firing is not lost). A URL marker such
+ * as 'type=recovery' is forgeable and is never trusted.
+ *
  * Two states:
- *   - recovery session active → the completion form.
- *   - no recovery session (someone opened the page directly) → a calm fallback
- *     that points them at the email-link reset request, so the page is never a
- *     dead end.
+ *   - recovery event observed → the completion form.
+ *   - no recovery event (someone opened the page directly, or forged a marker)
+ *     → a calm fallback that points them at the email-link reset request, so the
+ *     page is never a dead end.
  *
  * The recovery session IS the proof of identity (it came from a link mailed to
  * the account's own address on a correct security answer), so there is no
@@ -29,28 +33,12 @@ import { Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
-import { supabase, isConfigured } from '../../lib/supabase.js';
+import { supabase, isConfigured, hasActiveRecoveryFlow, consumeRecoveryFlow } from '../../lib/supabase.js';
 import { GOLD, SECOND, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
 import {
   AuthPageShell, FooterLink, Input, Button as AuthCTAButton, Alert, Button,
 } from './authUI.jsx';
-
-/**
- * True when the current URL carries Supabase's recovery marker. The recovery
- * link lands with 'type=recovery' in the hash (implicit flow) or the query
- * string (PKCE). Either is a genuine recovery signal; a bare session is not.
- *
- * @returns {boolean}
- */
-function urlMarksRecovery() {
-  if (typeof window === 'undefined') return false;
-  const hash = (window.location.hash || '').replace(/^#/, '');
-  const search = (window.location.search || '').replace(/^\?/, '');
-  const hashType = new URLSearchParams(hash).get('type');
-  const searchType = new URLSearchParams(search).get('type');
-  return hashType === 'recovery' || searchType === 'recovery';
-}
 
 export default function SetNewPasswordPage() {
   const authUpdatePassword = useStore(s => s.authUpdatePassword);
@@ -67,39 +55,44 @@ export default function SetNewPasswordPage() {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Authorize ONLY on a genuine recovery signal — never on a bare session. An
-  // ordinary logged-in (or stolen) session reaching this page must NOT be able
-  // to rotate the password without the current-password re-auth that the
-  // Account security panel requires. Two recovery signals exist:
-  //   • the PASSWORD_RECOVERY auth event (the canonical signal), and
-  //   • the 'type=recovery' marker the recovery link carries in the URL
-  //     (hash for the implicit flow, query for PKCE), which detectSessionInUrl
-  //     consumes. We read it on mount to cover the race where the event fired
-  //     before we subscribed; the marker persists in the hash long enough to
-  //     observe. A SIGNED_IN event or a getSession() session is NOT accepted.
+  // Authorize ONLY on a genuine PASSWORD_RECOVERY signal — never on a bare
+  // session. An ordinary logged-in (or stolen) session reaching this page must
+  // NOT be able to rotate the password without the current-password re-auth the
+  // Account security panel requires. A URL marker like 'type=recovery' is
+  // forgeable (any user can append it), so it is NOT an authorization source.
+  // The only accepted signals are:
+  //   • a live PASSWORD_RECOVERY event on this subscription, or
+  //   • hasActiveRecoveryFlow() — the same event already latched at client
+  //     creation, which covers the race where detectSessionInUrl fired the
+  //     event before this page mounted and subscribed.
+  // A SIGNED_IN event or a getSession() session is NOT accepted.
   useEffect(() => {
     // Mock / unconfigured: no real recovery token to parse (phase already
     // initialized to 'ready'); nothing to subscribe to.
     if (!isConfigured || !supabase) return undefined;
 
     let active = true;
-    const settle = (isRecovery) => {
-      if (!active) return;
-      setPhase(isRecovery ? 'ready' : 'no-session');
+    let authorized = false;
+    const authorize = () => {
+      authorized = true;
+      consumeRecoveryFlow(); // one-shot: don't let the flag authorize a later session
+      if (active) setPhase('ready');
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-      if (event === 'PASSWORD_RECOVERY') settle(true);
+      if (event === 'PASSWORD_RECOVERY') authorize();
     });
 
-    // The recovery link carries 'type=recovery' in the URL. detectSessionInUrl
-    // may strip it once parsed, so we snapshot it synchronously on mount.
-    if (urlMarksRecovery()) settle(true);
+    // The event may have already fired (and latched) during detectSessionInUrl's
+    // async hash parse, before we subscribed. Honour that latch synchronously.
+    if (hasActiveRecoveryFlow()) authorize();
     else {
       // Give the event a brief moment to arrive (it may fire just after mount),
-      // then conclude no-session. We never fall back to accepting a plain
-      // session — only the PASSWORD_RECOVERY event above can still flip us.
-      setTimeout(() => settle(false), 1200);
+      // then conclude no-session. LATCH: once authorized, this can never
+      // downgrade — a late no-session conclusion must not undo a real recovery.
+      setTimeout(() => {
+        if (active && !authorized) setPhase('no-session');
+      }, 1200);
     }
 
     return () => { active = false; subscription.unsubscribe(); };

@@ -539,7 +539,13 @@ export default function WorldMap({ onNavigate } = {}) {
     try {
       const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
       if (result && result.ok !== false) {
-        showToast('success', `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);
+        // result.cloudPending means the advance is real locally but did not finish
+        // reaching the cloud. The store already raised the retryable campaignSyncError
+        // banner, so show an honest cloud-pending notice rather than a 'Realm
+        // advanced' success (which would contradict the banner) or a bare 'could not
+        // advance' (which invites a re-advance and double-ticks the world). A reload
+        // or the same retried sync reconciles the cloud to the local advance.
+        showToast(result.cloudPending ? 'error' : 'success', result.cloudPending ? 'The realm advanced here, but the change has not finished saving to the cloud. Reload to confirm once your connection recovers.' : `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);
       } else {
         // Plain-language error (raw reason → console only, P10/P11); the
         // not-canon case adds a CTA re-focusing the Pulse canonize control.

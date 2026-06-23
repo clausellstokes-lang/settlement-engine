@@ -377,7 +377,17 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       }
     }
 
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    // Surface the persistence outcome on the (advanced) result so callers can tell
+    // an advance that fully reached the cloud from one that is applied locally but
+    // cloud-pending. The advance is real locally either way; on a failed persist
+    // the persist tail already raised the retryable campaignSyncError banner, so
+    // the caller must NOT show a plain 'Realm advanced' success — it would
+    // contradict the banner and invite a re-advance (double tick). Only tag a
+    // genuine advance (ok !== false); the not-canonized guard result is untouched.
+    if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+      result.cloudPending = true;
+    }
     // Replay party-caused queued events through the party-impact pipeline — the
     // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
     // party branch (faction/NPC world state, condition resolution, Wizard News).
@@ -429,7 +439,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     if (result && campaignPersist) {
       track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
     }
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    {
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      // Same cloud-pending contract as advanceCampaignWorld: a failed persist
+      // already raised the retryable banner, so flag the result rather than let a
+      // caller read an unqualified success over a cloud-pending write.
+      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+        result.cloudPending = true;
+      }
+    }
     return result;
   },
 
@@ -464,7 +482,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         ...extractPartyImpact(action, result),
       });
     }
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    {
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+        result.cloudPending = true;
+      }
+    }
     return result;
   },
 

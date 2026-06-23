@@ -232,3 +232,14 @@ describe('Tier 7.14 migration coverage', () => {
     expect(t('auth.localMode')).toContain('local mode');
   });
 });
+
+describe('deferred security-questions copy points at the real section', () => {
+  it('references the actual enrollment section name, not "Login and security"', () => {
+    const deferred = t('auth.security.saveDeferred');
+    const sectionHeading = en.auth.security.account.heading;
+    // The durable enrollment UI is its own sibling section, not inside
+    // Login & Security. The deferred-save copy must name it accurately.
+    expect(deferred).toContain(sectionHeading);
+    expect(deferred.toLowerCase()).not.toContain('login and security');
+  });
+});

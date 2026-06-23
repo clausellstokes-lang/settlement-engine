@@ -28,7 +28,12 @@ vi.mock('../../src/store/index.js', () => {
 
 // Unconfigured: phase starts 'ready' so the form renders synchronously and the
 // password update is a harmless no-op (mockUpdatePassword).
-vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false, supabase: null }));
+vi.mock('../../src/lib/supabase.js', () => ({
+  isConfigured: false,
+  supabase: null,
+  hasActiveRecoveryFlow: () => false,
+  consumeRecoveryFlow: () => {},
+}));
 vi.mock('../../src/hooks/useRoute.js', () => ({ navigate }));
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); });
@@ -76,13 +81,20 @@ describe('SetNewPasswordPage', () => {
 
 // ── Configured mode: authorization gating ──────────────────────────────────
 // With Supabase configured, the page must authorize the reset form ONLY on a
-// genuine recovery signal (the PASSWORD_RECOVERY event or a 'type=recovery'
-// URL marker), never on a bare logged-in session. Otherwise an ordinary or
-// stolen session reaching /set-new-password could rotate the password with no
-// current-password re-auth.
+// genuine PASSWORD_RECOVERY signal — the live event OR the same event already
+// latched at client creation (hasActiveRecoveryFlow). A forged 'type=recovery'
+// URL marker is NOT a signal: any ordinary or stolen session could append it,
+// and accepting it would let that session rotate the password with no
+// current-password re-auth. And once authorized, the late fallback timer must
+// never downgrade a genuine recovery back to no-session (latch).
 describe('SetNewPasswordPage — configured authorization gating', () => {
-  /** Mount the page with a freshly mocked supabase + a controlled URL. */
-  async function renderConfigured({ url = '#', emitRecovery = false } = {}) {
+  /**
+   * Mount the page with a freshly mocked supabase + a controlled URL.
+   * @param {{ url?: string, emitRecovery?: boolean, recoveryFlow?: boolean }} [opts]
+   *   recoveryFlow models the module flag latched at client creation
+   *   (hasActiveRecoveryFlow() === true before the page mounts).
+   */
+  async function renderConfigured({ url = '#', emitRecovery = false, recoveryFlow = false } = {}) {
     vi.resetModules();
     const hashIndex = url.indexOf('#');
     const searchIndex = url.indexOf('?');
@@ -103,13 +115,19 @@ describe('SetNewPasswordPage — configured authorization gating', () => {
         getSession: vi.fn().mockResolvedValue({ data: { session: { user: { id: 'u1' } } } }),
       },
     };
+    const consumeRecoveryFlow = vi.fn();
     vi.doMock('../../src/store/index.js', () => {
       function useStore(selector) { return selector(storeState); }
       useStore.subscribe = () => () => {};
       useStore.getState = () => storeState;
       return { useStore };
     });
-    vi.doMock('../../src/lib/supabase.js', () => ({ isConfigured: true, supabase: supabaseMock }));
+    vi.doMock('../../src/lib/supabase.js', () => ({
+      isConfigured: true,
+      supabase: supabaseMock,
+      hasActiveRecoveryFlow: () => recoveryFlow,
+      consumeRecoveryFlow,
+    }));
     vi.doMock('../../src/hooks/useRoute.js', () => ({ navigate }));
 
     const Page = (await import('../../src/components/auth/SetNewPasswordPage.jsx')).default;
@@ -117,12 +135,12 @@ describe('SetNewPasswordPage — configured authorization gating', () => {
     if (emitRecovery && recoveryCb) {
       await act(async () => { recoveryCb('PASSWORD_RECOVERY', null); });
     }
-    return { supabaseMock };
+    return { supabaseMock, emit: (evt) => recoveryCb && recoveryCb(evt, null), consumeRecoveryFlow };
   }
 
   afterEach(() => { window.history.replaceState({}, '', '/'); vi.resetModules(); });
 
-  it('does NOT authorize an ordinary session with no recovery marker', async () => {
+  it('does NOT authorize an ordinary session with no recovery signal', async () => {
     await renderConfigured({ url: '#' });
     // No recovery signal: settle to no-session, never the form.
     await act(async () => { await new Promise(r => setTimeout(r, 1300)); });
@@ -130,13 +148,32 @@ describe('SetNewPasswordPage — configured authorization gating', () => {
     expect(screen.getByRole('button', { name: /send a reset link/i })).toBeTruthy();
   });
 
-  it('authorizes on a type=recovery URL marker', async () => {
+  it('does NOT authorize on a FORGED type=recovery URL marker with no event', async () => {
+    // An ordinary session appends '?type=recovery' (or '#...type=recovery').
+    // The forgeable marker must NOT authorize — only the event/flag may.
     await renderConfigured({ url: '#access_token=abc&type=recovery' });
+    await act(async () => { await new Promise(r => setTimeout(r, 1300)); });
+    expect(screen.queryByRole('button', { name: /set new password/i })).toBeNull();
+    expect(screen.getByRole('button', { name: /send a reset link/i })).toBeTruthy();
+  });
+
+  it('authorizes on the live PASSWORD_RECOVERY event', async () => {
+    await renderConfigured({ url: '#', emitRecovery: true });
     expect(await screen.findByRole('button', { name: /set new password/i })).toBeTruthy();
   });
 
-  it('authorizes on the PASSWORD_RECOVERY event', async () => {
+  it('authorizes on a pre-latched recovery flow (event fired before mount)', async () => {
+    await renderConfigured({ url: '#', recoveryFlow: true });
+    expect(await screen.findByRole('button', { name: /set new password/i })).toBeTruthy();
+  });
+
+  it('latches: a late no-session timer never downgrades a genuine recovery', async () => {
+    // Authorize via the event, then let the 1.2s fallback timer fire with no
+    // session present. The form must remain authorized (no downgrade).
     await renderConfigured({ url: '#', emitRecovery: true });
     expect(await screen.findByRole('button', { name: /set new password/i })).toBeTruthy();
+    await act(async () => { await new Promise(r => setTimeout(r, 1300)); });
+    expect(screen.getByRole('button', { name: /set new password/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /send a reset link/i })).toBeNull();
   });
 });

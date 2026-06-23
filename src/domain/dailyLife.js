@@ -40,7 +40,7 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
-import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
+import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
@@ -272,7 +272,11 @@ function deriveOutsiderImpressions(s, ctx) {
   const dominantFaction = ctx.profiles
     .slice()
     .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
-  const strainedCaps = CAPACITY_NAMES
+  // Only the five visible/DM-facing lenses count toward outsider-visible
+  // prose. An internal labor/craft/transport shortage is real for the
+  // simulation but must not surface here, matching the five-lens policy the
+  // AI payload enforces (see aiGrounding.js).
+  const strainedCaps = VISIBLE_CAPACITY_LENSES
     .filter(n => ['strained', 'critical', 'collapsed'].includes(ctx.capacities.bands[n]));
 
   const parts = [];
@@ -455,6 +459,12 @@ export function summarizeDailyLife(settlement) {
 export function supportedDailyLifeSlots() {
   return [...DAILY_LIFE_SLOTS];
 }
+
+// Exposed for unit tests that need to drive one deriver against a
+// controlled context (e.g. proving the five-lens visible-capacity boundary
+// holds for outsider-facing prose). Production callers go through
+// deriveDailyLifeSlot / deriveDailyLife.
+export const __test__ = Object.freeze({ deriveOutsiderImpressions });
 
 // ── compareDailyLife ────────────────────────────────────────────────────
 //

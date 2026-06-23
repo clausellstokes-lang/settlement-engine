@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (68) — schema + RLS policies + credit ledger + version
+- **migrations/** (69) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -121,7 +121,10 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) +
   **067/068** (recovery-verify lockout with a time-bounded self-healing predicate
   so a failed-answer streak throttles via escalating backoff instead of permanently
-  locking the account) —
+  locking the account) + **069** (an atomic `persist_world_pulse_advance`
+  SECURITY DEFINER RPC that writes a world-pulse advance's entire settlement +
+  campaign write-set in one owner-checked transaction; shipped server-side, not
+  yet wired into the client persist path) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
