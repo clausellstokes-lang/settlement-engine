@@ -16,8 +16,8 @@
  *     so reported "No exports" while Economics listed economicState
  *     .primaryExports (§1d).
  *
- * M0.1 proves the spine end-to-end on those two field-families; later
- * milestones extend the same model (viability, score labels, timeline, AI
+ * The first milestone proves the spine end-to-end on those two field-families;
+ * later work extends the same model (viability, score labels, timeline, AI
  * grounding, public-safe projection).
  *
  * Pure; no store / React / time dependencies.
@@ -27,10 +27,10 @@ import { cleanNum } from './placeholders.js';
 import { deriveMagicProfile } from '../magicProfile.js';
 
 const EXPORT_STATUS_LABEL = Object.freeze({
-  none:             'No exports — economic isolation',
+  none:             'No exports (economic isolation)',
   limited:          'Limited export access',
   vulnerable:       'Exports exist but trade routes are vulnerable',
-  entrepot:         'Entrepôt — re-exports transit goods',
+  entrepot:         'Entrepôt (re-exports transit goods)',
   import_dependent: 'Import-dependent',
   established:      'Active exports',
 });
@@ -142,7 +142,7 @@ export function deriveExportPosture(settlement) {
 }
 
 /**
- * The canonical display model. M0.1 surfaces foodBalance + exportPosture.
+ * The canonical display model. Surfaces foodBalance + exportPosture.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); food + exports are canonical simulation facts and always read
  * from the base settlement, never an AI clone.
@@ -200,8 +200,8 @@ export function deriveViability(settlement) {
           : `feeds itself through ${through} and stored reserves`;
       } else {
         foodClause = magicFed
-          ? 'survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it'
-          : 'survives on local production and stored reserves — no meaningful import channel reaches it';
+          ? 'survives on local production, magical provision, and stored reserves (no meaningful import channel reaches it)'
+          : 'survives on local production and stored reserves (no meaningful import channel reaches it)';
       }
     }
     return {
@@ -225,7 +225,7 @@ export function deriveViability(settlement) {
 }
 
 /**
- * Blockade relief (Wave 8 — blockadeBypass gains its reader). The stockpile
+ * Blockade relief — blockadeBypass gains its reader. The stockpile
  * bookkeeping (economicState.foodSecurity.stockpile, written every pulse by
  * advanceFoodStockpile) records whether a blockade currently grips the
  * settlement and which magical channel, if any, runs it. This is the display
@@ -243,9 +243,9 @@ export function deriveBlockadeRelief(settlement) {
   let display = null;
   if (blockaded) {
     display = bypass === 'teleport'
-      ? "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput."
+      ? 'Supplies arrive by teleportation circle despite the siege, as much as the circle can carry.'
       : bypass === 'airship'
-        ? 'Airships run the blockade — imports continue, impaired by siege countermeasures.'
+        ? 'Airships run the blockade. Imports continue, impaired by siege countermeasures.'
         : 'The blockade is biting: no magical channel runs it, and the import share of need goes unmet.';
   }
   return { available: true, blockaded, bypass, display };
@@ -259,7 +259,7 @@ const MAGIC_ROLE_LABEL = Object.freeze({
 });
 
 /**
- * Magic posture (Wave 7 — MagicProfile surfaced). One read of the Tier 4.8
+ * Magic posture — MagicProfile surfaced. One read of the magic
  * profile for every display surface: the availability/legality/cost/risk
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
@@ -282,14 +282,14 @@ export function deriveMagicPosture(settlement) {
     roles: { ...m.roles },
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : `Availability ${m.availability} — ${m.legality}, ${m.cost} services, ${m.risk} risk`,
+      : `Availability ${m.availability}: ${m.legality}, ${m.cost} services, ${m.risk} risk`,
     roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }
 
 /**
- * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
- * adds viability; Wave 7 adds the magic posture; Wave 8 adds blockade relief.
+ * The canonical display model. Surfaces foodBalance + exportPosture,
+ * viability, the magic posture, and blockade relief.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); these are canonical simulation facts and always read from the
  * base settlement, never an AI clone.

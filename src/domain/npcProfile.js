@@ -1,7 +1,7 @@
 /**
  * domain/npcProfile.js — Structured NPC profiles + removal consequences.
  *
- * Tier 4.5 of the roadmap. Today's NPC entries are already rich:
+ * Today's NPC entries are already rich:
  *
  *   { id, name, role, category, factionAffiliation,
  *     structuralPosition, structuralRank, influence, power,
@@ -20,12 +20,12 @@
  * without anyone migrating the generator.
  *
  * No imports from src/lib — domain tsconfig include stays
- * self-contained, same constraint Phases 9-12 honored.
+ * self-contained, the same constraint the sibling derivations honor.
  */
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
-// the faction archetype vocabulary established in Phase 9. We map them
+// the faction archetype vocabulary. We map them
 // to the canonical archetypes so the leverage / vulnerability / removal
 // templates can be shared across both surfaces.
 
@@ -55,7 +55,7 @@ function archetypeFromCategory(category) {
 }
 
 // ── Per-archetype leverage / vulnerability templates ─────────────────────
-// Similar shape to the faction-archetype templates from Phase 9. The
+// Similar shape to the faction-archetype templates. The
 // templates here are NPC-specific: what an individual at the top of
 // this archetype controls, and what hangs over their head. Each entry
 // is a fresh clone on every call so consumers can mutate safely.
@@ -108,7 +108,7 @@ function templateForArchetype(archetype) {
 }
 
 // ── Consequence-if-removed templates ─────────────────────────────────────
-// The headline Tier 4.5 feature: each NPC carries a structured forecast
+// The headline feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
 // Severity scales with `structuralRank` ('dominant' / 'secondary' /
 // 'minor'); the consequence palette comes from the archetype.
@@ -132,7 +132,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   government: {
     dominant: [
       'Tax collection slows; the watch loses paid authority.',
-      'A succession contender steps forward — possibly a rival faction.',
+      'A succession contender steps forward, possibly a rival faction.',
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
@@ -147,7 +147,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   religious: {
     dominant: [
       'Temple relief authority weakens; food queues lengthen.',
-      'A sectarian successor emerges — possibly with a harder line.',
+      'A sectarian successor emerges, possibly with a harder line.',
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
@@ -217,7 +217,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
   occupation: {
     dominant: [
-      'The homeland recalls or replaces — the replacement is an unknown quantity.',
+      'The homeland recalls or replaces. The replacement is an unknown quantity.',
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
@@ -299,7 +299,7 @@ function inferInstitutionLink(npc, settlement) {
 }
 
 // ── Relationship-triangle inference ─────────────────────────────────────
-// For Tier 4.5 V1, we surface a single primary relationship: the
+// For V1, we surface a single primary relationship: the
 // strongest ally or rival the NPC has, sourced from
 // settlement.relationships. Triangles (three-way structures) are a
 // follow-up — the data is there, but the surface needs careful UX.
@@ -389,7 +389,7 @@ export function deriveNpcProfile(npc, settlement) {
     timesExposed:     npc.timesExposed || 0,
     ousted:           npc.ousted === true,
 
-    // Tier 4.5 structured fields — leverage / vulnerability from template,
+    // structured fields — leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],
     vulnerabilities: (() => {
@@ -405,7 +405,7 @@ export function deriveNpcProfile(npc, settlement) {
     offerToPlayers:    Array.isArray(npc.plotHooks) ? npc.plotHooks.slice(0, 2) : [],
     wantsFromPlayers:  firstNonEmpty(npc.goal?.short),
 
-    // The headline Tier 4.5 contribution: structured forecast of what
+    // The headline contribution: structured forecast of what
     // happens if this NPC is removed from play.
     consequenceIfRemoved: {
       severity: rank,
@@ -432,12 +432,16 @@ export function deriveAllNpcProfiles(settlement) {
  * faction-roster surfaces.
  */
 export function npcArchetypeBreakdown(settlement) {
-  const out = {
-    government: 0, military: 0, religious: 0, merchant: 0,
-    craft: 0, criminal: 0, arcane: 0, occupation: 0, other: 0,
-  };
+  // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
+  // of the archetype vocabulary every profile resolves into — archetypeFromCategory
+  // falls back to 'other', itself a template key). Building the buckets dynamically
+  // means a newly-added archetype can never be silently undercounted by a stale literal.
+  /** @type {Record<string, number>} */
+  const out = {};
+  for (const archetype of Object.keys(NPC_TEMPLATES)) out[archetype] = 0;
   for (const p of deriveAllNpcProfiles(settlement)) {
-    if (out[p.archetype] !== undefined) out[p.archetype] += 1;
+    if (out[p.archetype] === undefined) out[p.archetype] = 0; // defensive: any unforeseen value still counts
+    out[p.archetype] += 1;
   }
   return out;
 }

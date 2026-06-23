@@ -12,6 +12,7 @@
  * props / the live store-fed campaign.
  */
 
+import { Swords, Flag, ArrowLeftRight } from 'lucide-react';
 import { Section } from './WorldPulsePrimitives.jsx';
 import { human } from './WorldPulseData.js';
 import {
@@ -27,17 +28,25 @@ function nameFor(nameById, id) {
   return nameById.get(String(id)) || String(id);
 }
 
+// Tone drives BOTH channels: the left-accent color AND a leading kind glyph, so
+// severity never reads on color alone (1.4.1 use-of-color). danger→siege swords,
+// trade→exchange arrows, default→deployment flag.
+const TONE_ICON = { danger: Swords, trade: ArrowLeftRight, neutral: Flag };
+
 function StatusRow({ tone = 'neutral', title, detail }) {
-  const accent = tone === 'danger' ? RED : tone === 'trade' ? '#0f766e' : GOLD;
+  const accent = tone === 'danger' ? RED : tone === 'trade' ? swatch['#0F766E'] : GOLD;
+  const KindIcon = TONE_ICON[tone] || Flag;
   return (
     <div style={{
-      display: 'grid', gap: 2,
+      display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '2px 8px',
+      alignItems: 'start',
       padding: '8px 10px',
       border: `1px solid ${BORDER2}`,
       borderLeft: `3px solid ${accent}`,
       borderRadius: 6,
       background: CARD,
     }}>
+      <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{title}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
     </div>
@@ -57,7 +66,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
   const count = sieges.length + deployments.length + tradeWars.length + standings.length;
 
   return (
-    <Section title="War, Trade & Faith" count={count}>
+    <Section title="War, Trade and Faith" count={count}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {sieges.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -71,7 +80,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                   key={`siege-${siege.targetId}`}
                   tone="danger"
                   title={isCoalition
-                    ? `The War of ${targetName} — a coalition besieges the walls`
+                    ? `The War of ${targetName}, a coalition besieging the walls`
                     : `${attackers[0] || 'An army'} lays siege to ${targetName}`}
                   detail={isCoalition
                     ? `Coalition: ${attackers.join(', ')} (${siege.frontCount} fronts).`
@@ -89,7 +98,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
               <StatusRow
                 key={`deploy-${dep.homeId}`}
                 title={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
-                detail={`Deployed since tick ${dep.sinceTick} — home garrison thinned, war chest bleeding.`}
+                detail={`Deployed since tick ${dep.sinceTick}; home garrison thinned, war chest bleeding.`}
               />
             ))}
           </div>
@@ -120,8 +129,8 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                     display: 'inline-flex', alignItems: 'center', gap: 5,
                     padding: '3px 8px', borderRadius: 6,
                     border: `1px solid ${BORDER2}`,
-                    background: aggressor ? swatch.dangerBg || '#fbeaea' : CARD_ALT,
-                    color: aggressor ? RED : MUTED,
+                    background: aggressor ? swatch.dangerBg : CARD_ALT,
+                    color: aggressor ? RED : BODY,
                     fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
                   }}>
                     {nameFor(nameById, s.id)}: {s.wins}W / {s.losses}L

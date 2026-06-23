@@ -1,8 +1,35 @@
-export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis', 'capital'];
-export const TERRAIN_OPTIONS = ['forest', 'plains', 'hills', 'mountains', 'coast', 'river', 'desert', 'swamp', 'tundra', 'underground'];
-export const GOVERNMENT_OPTIONS = ['monarchy', 'council', 'elder council', 'oligarchy', 'guild', 'theocracy', 'military', 'assembly', 'criminal'];
-export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high', 'wild', 'forbidden'];
-export const STABILITY_OPTIONS = ['stable', 'strained', 'unstable', 'crisis', 'collapsing'];
+// Facet vocabularies aligned to what the engine ACTUALLY persists (migration 063).
+// 'capital' is dropped — the generator never emits it (TIER_ORDER stops at
+// metropolis).
+export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+// config.terrainType vocabulary (resolveConfig + getTerrainType). The old list
+// used display synonyms (coast/river/mountains) that never matched the stored
+// values; these are the real ones.
+export const TERRAIN_OPTIONS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+// getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
+export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high'];
+// resolveConfig's canonical 11-culture catalog.
+export const CULTURE_OPTIONS = ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek'];
+// economicState.prosperity vocabulary (generateEconomicNarrative LABELS).
+export const PROSPERITY_OPTIONS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+
+// Population bands → { populationMin, populationMax } the RPC filters on. Mirrors
+// the canonical POPULATION_RANGES tiers, collapsed to four readable bands.
+export const POPULATION_BANDS = Object.freeze([
+  { key: 'tiny',  label: 'Tiny (under 400)',       min: 0,     max: 400 },
+  { key: 'small', label: 'Small (400 – 5,000)',    min: 401,   max: 5000 },
+  { key: 'mid',   label: 'Mid (5,000 – 25,000)',   min: 5001,  max: 25000 },
+  { key: 'large', label: 'Large (25,000+)',        min: 25001, max: 0 },
+]);
+
+/** The active population band key for a filters object, or null when unbounded. */
+export function activePopulationBand(filters = {}) {
+  const min = Number(filters.populationMin) || 0;
+  const max = Number(filters.populationMax) || 0;
+  if (!min && !max) return null;
+  const match = POPULATION_BANDS.find(b => b.min === min && b.max === max);
+  return match ? match.key : 'custom';
+}
 
 export const REPORT_REASON_OPTIONS = [
   ['unsafe_content', 'Unsafe content'],
@@ -52,6 +79,26 @@ export function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
 
+/**
+ * Map the gallery stability vocabulary (stable/strained/unstable/crisis/
+ * collapsing) onto BandPill's five color tiers + an uppercase label. Stability
+ * is the one living-world anomaly a GM scans for, so it renders through the
+ * canonical multi-channel BandPill (color + glyph + label) instead of as a flat
+ * grey tag. Returns null for unknown/empty so callers can omit the pill.
+ */
+const STABILITY_BAND = Object.freeze({
+  stable:     { band: 'surplus',   label: 'Stable' },
+  strained:   { band: 'strained',  label: 'Strained' },
+  unstable:   { band: 'critical',  label: 'Unstable' },
+  crisis:     { band: 'critical',  label: 'Crisis' },
+  collapsing: { band: 'collapsed', label: 'Collapsing' },
+});
+
+export function stabilityBand(stability) {
+  const key = String(stability || '').trim().toLowerCase();
+  return STABILITY_BAND[key] || null;
+}
+
 export function formatDate(value) {
   if (!value) return '';
   const date = new Date(value);
@@ -71,10 +118,15 @@ export function fallbackInitial(name) {
 }
 
 export function activeFilterCount(filters = {}) {
-  return Object.values(filters).reduce((sum, value) => {
-    if (Array.isArray(value)) return sum + value.length;
-    return sum + (value ? 1 : 0);
-  }, 0);
+  let sum = 0;
+  for (const [key, value] of Object.entries(filters)) {
+    // The two population bounds are one logical filter (a band picks both).
+    if (key === 'populationMax') continue;
+    if (key === 'populationMin') { sum += (Number(value) || Number(filters.populationMax)) ? 1 : 0; continue; }
+    if (Array.isArray(value)) { sum += value.length; continue; }
+    sum += value ? 1 : 0;
+  }
+  return sum;
 }
 
 /** Public URL for a gallery dossier slug (matches ShareToGallery's link form). */
@@ -85,7 +137,7 @@ export function galleryUrlFor(slug) {
 }
 
 /**
- * Share a gallery dossier (§7): Web Share API when available, else copy the
+ * Share a gallery dossier: Web Share API when available, else copy the
  * public URL to clipboard. Never throws — returns { ok, method } so callers can
  * show success/failure feedback. A cancelled native share sheet is { ok:false,
  * cancelled:true } (not an error to surface).
@@ -93,7 +145,7 @@ export function galleryUrlFor(slug) {
 export async function shareGalleryDossier({ slug, name } = {}) {
   if (!slug) return { ok: false, method: null };
   const url = galleryUrlFor(slug);
-  const title = name ? `${name} — SettlementForge` : 'SettlementForge dossier';
+  const title = name ? `${name} (SettlementForge)` : 'SettlementForge dossier';
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
     try {
       await navigator.share({ title, text: title, url });

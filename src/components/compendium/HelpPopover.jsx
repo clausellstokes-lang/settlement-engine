@@ -1,5 +1,5 @@
 /**
- * HelpPopover.jsx — P126 / CP-1 inline Compendium help.
+ * HelpPopover.jsx — inline Compendium help.
  *
  * Drop a `<HelpPopover topic="trade-route" />` next to any config
  * label and the user gets a "?" affordance that opens a small popover
@@ -20,7 +20,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { HelpCircle } from 'lucide-react';
-import { FS, ELEV, PARCH_100, INK, GOLD, swatch } from '../theme.js';
+import { FS, ELEV, PARCH_100, INK, GOLD, GOLD_DEEP, swatch, sans, serif_ } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -55,6 +55,11 @@ const COMPENDIUM_HINTS = Object.freeze({
     title: 'Settlement Tier',
     body: 'Thorp through Metropolis. Each tier sets the institution count, NPC count, district count, and what kinds of stressors are likely. Bigger ≠ better; a thorp can carry one perfect hook better than a metropolis.',
     anchor: 'tiers',
+  },
+  'settlement-age': {
+    title: 'Settlement Age',
+    body: 'How long the place has stood. Auto lets the simulator pick a plausible age for the tier. A newly founded settlement reads raw and provisional, with thin institutions and unsettled factions. An old one carries layered history, entrenched power, and inherited grudges. Custom years sets the founding date exactly.',
+    anchor: 'living-world',
   },
 });
 
@@ -97,6 +102,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
     <span ref={ref} style={{ position: 'relative', display: 'inline-block' }}>
       <IconButton
         Icon={HelpCircle}
+        glyph="?"
         label={`${label}: ${content?.title || topic}`}
         onClick={handleToggle}
         tone="default"
@@ -116,12 +122,12 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             padding: 12,
             background: INK,
             color: PARCH_100,
-            border: '1px solid #8C6F32',
+            border: `1px solid ${GOLD_DEEP}`,
             borderRadius: 6,
             boxShadow: ELEV[3],
             fontSize: FS.xs,
             lineHeight: 1.55,
-            fontFamily: '"Nunito", system-ui, sans-serif',
+            fontFamily: sans,
           }}
         >
           <div style={{
@@ -129,14 +135,14 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             top: -6, left: '50%', transform: 'translateX(-50%) rotate(45deg)',
             width: 10, height: 10,
             background: INK,
-            borderLeft: '1px solid #8C6F32',
-            borderTop: '1px solid #8C6F32',
+            borderLeft: `1px solid ${GOLD_DEEP}`,
+            borderTop: `1px solid ${GOLD_DEEP}`,
           }} />
           {content ? (
             <>
               <div style={{
                 color: GOLD,
-                fontFamily: '"Crimson Text", Georgia, serif',
+                fontFamily: serif_,
                 fontWeight: 600, fontSize: FS.md, marginBottom: 4,
               }}>
                 {content.title}

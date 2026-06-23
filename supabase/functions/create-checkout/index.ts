@@ -37,6 +37,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+// Structured error logging for the money path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -88,14 +90,49 @@ function getCorsHeaders(req?: Request) {
   const origin = req?.headers?.get('Origin') || '';
   const match = allowed.includes(origin) || !origin;
   return {
-    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
+    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
+    // matched origin, else pin to the first allowed host (a missing Origin is
+    // treated as same-origin, not as a wildcard grant).
+    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     ...(match ? { 'Vary': 'Origin' } : {}),
   };
 }
 
-serve(async (req) => {
+/** Default user-scoped client (anon key + the caller's Authorization header). */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (bypasses RLS for the profile read/write). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Exported (not just inlined into serve) so the money gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected stubs and asserts the
+// credits/product are derived server-side from PRICE_MAP/CREDIT_AMOUNTS and the
+// user_id put into session.metadata comes from the verified JWT, never the
+// request body. `deps` is the optional injection seam; production passes nothing.
+export async function handleCreateCheckout(
+  req: Request,
+  deps: {
+    stripeClient?: typeof stripe;
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const stripeApi = deps.stripeClient ?? stripe;
+  const userClient = deps.userClient ?? defaultUserClient;
+  const adminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
 
   if (req.method === 'OPTIONS') {
@@ -107,6 +144,10 @@ serve(async (req) => {
   // keeps the function logs readable. Real users are never blocked.
   const guard = botGuard(req, 'create-checkout');
   if (guard.reject) return guard.reject;
+
+  // Hoisted above the try so the catch can attribute a failure to the acting user
+  // (when one was resolved) in the structured error log.
+  let user: { id: string; email?: string | null } | null = null;
 
   try {
     // Parse request body first so we know whether the product requires auth.
@@ -128,17 +169,12 @@ serve(async (req) => {
     }
 
     const authHeader = req.headers.get('Authorization');
-    let user: { id: string; email?: string | null } | null = null;
 
     if (authHeader) {
       // If auth is provided (even for an anonymous-allowed product), try
       // to resolve the user so the purchase binds to the account when
       // possible. Failures fall through to anonymous handling.
-      const supabase = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_ANON_KEY')!,
-        { global: { headers: { Authorization: authHeader } } },
-      );
+      const supabase = userClient(authHeader);
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
@@ -156,10 +192,7 @@ serve(async (req) => {
     let stripeCustomerId: string | null = null;
 
     if (user) {
-      const admin = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-      );
+      const admin = adminClient();
       const { data: profile } = await admin
         .from('profiles')
         .select('stripe_customer_id')
@@ -171,7 +204,7 @@ serve(async (req) => {
         : null;
 
       if (!stripeCustomerId) {
-        const customer = await stripe.customers.create({
+        const customer = await stripeApi.customers.create({
           email: user.email || undefined,
           metadata: { supabase_user_id: user.id },
         });
@@ -206,7 +239,7 @@ serve(async (req) => {
     } else if (user?.email) {
       sessionParams.customer_email = user.email;
     }
-    const session = await stripe.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    const session = await stripeApi.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     return new Response(
       JSON.stringify({ url: session.url }),
@@ -214,9 +247,16 @@ serve(async (req) => {
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    // One structured line per checkout failure so the money path is greppable.
+    logError('create-checkout', user?.id ?? null, message);
     return new Response(
       JSON.stringify({ error: message }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flagged
+// the direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleCreateCheckout(req));

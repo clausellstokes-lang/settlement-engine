@@ -209,3 +209,45 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
     expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(true);
   });
 });
+
+// Pin: the tier change honors majorChangesRequireProposal, consistent with
+// resource_depletion in the same module. Under the conservative default (flag
+// on) it stays a DM proposal; a campaign that opts out of proposal gating (flag
+// off, e.g. dramatic_campaign) gets it auto-applied. Deterministic — the
+// candidate's applyMode is fixed by the flag, no RNG involved.
+describe('evaluateTierResourceDynamics — tier change honors majorChangesRequireProposal', () => {
+  function promotionWorldState(majorChangesRequireProposal) {
+    return {
+      tick: 8,
+      simulationRules: { majorChangesRequireProposal },
+      settlementTickStates: { a: { tierDrift: { direction: 'promotion', toTier: 'city', streak: 4 } } },
+      proposals: [],
+    };
+  }
+
+  function promotionSnapshot() {
+    return { settlements: [item('a', settlement('Ashford', { tier: 'town', population: 4700 }), 0)] };
+  }
+
+  function tierCandidateFor(majorChangesRequireProposal) {
+    const result = evaluateTierResourceDynamics(
+      promotionWorldState(majorChangesRequireProposal),
+      promotionSnapshot(),
+      undefined,
+      { tick: 9 },
+    );
+    return result.candidates.find(candidate => candidate.candidateType === 'tier_promotion');
+  }
+
+  it('proposes the tier change when majorChangesRequireProposal is true (the default)', () => {
+    const candidate = tierCandidateFor(true);
+    expect(candidate).toBeTruthy();
+    expect(candidate.applyMode).toBe('proposal');
+  });
+
+  it('auto-applies the tier change when majorChangesRequireProposal is false', () => {
+    const candidate = tierCandidateFor(false);
+    expect(candidate).toBeTruthy();
+    expect(candidate.applyMode).toBe('auto');
+  });
+});

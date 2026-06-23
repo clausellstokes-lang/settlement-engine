@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
+import { FS, swatch, MUTED, BODY, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -39,6 +39,11 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
+  // Guard: a single malformed income entry (no string `source`) must not throw
+  // and white-screen the whole tab — in the live generate flow this section is
+  // rendered without an error boundary around it. Filter to entries we can
+  // safely .toLowerCase() before the .some/.find matching below.
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string');
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -76,14 +81,15 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
       <div style={{display:'flex',flexDirection:'column',gap:6}}>
         {filtered.map((chain, i) => {
           const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
-          const hasIncome = incomeSources.some(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          );
-          const incomeEntry = hasIncome ? incomeSources.find(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          ) : null;
+          // A chain may lack a label; default to '' so .split(' ')[0] is always
+          // a defined string before .toLowerCase() (matches a malformed entry).
+          const chainKeyword = String(chain.label || '').split(' ')[0].toLowerCase();
+          const matchesIncome = (inc) =>
+            inc.source.toLowerCase().includes(chainKeyword) ||
+            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'));
+          const incomeEntry = chainKeyword
+            ? (safeIncome.find(matchesIncome) || null)
+            : (chain.needKey === 'trade_entrepot' ? (safeIncome.find(matchesIncome) || null) : null);
 
           return (
             <div key={i} style={{
@@ -119,7 +125,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {chain.dependency && (
                 <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
-                  {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
+                  {chain.dependency.affectedServices.length > 0 && <span style={{color:BODY}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
 
@@ -187,7 +193,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const mobile = isMobile();
   const eco = economicState || s?.economicState;
   const via = s?.economicViability;
-  if (!eco) return <Empty message="No economic data available."/>;
+  if (!eco) return <Empty message="No economic record on file for this settlement."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
   const fb = via?.metrics?.foodBalance;
@@ -215,6 +221,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const foodDeficit = fb?.deficit > 0;
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
   const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
+  // Single safe denominator for the two "trade covers % of gap" readouts so a
+  // falsy/zero rawDeficit can never render NaN% and the bar caption + narrative
+  // always agree on the same number.
+  const foodGap = Math.max(1, fb?.rawDeficit || 0);
 
   return (
     <div style={{...sans}}>
@@ -251,7 +261,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
-            {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
+            {sub&&<div style={{fontSize:FS.xxs,color:BODY,lineHeight:1.3}}>{sub}</div>}
           </div>
         ))}
       </div>
@@ -272,10 +282,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
               </div>
               <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ CRIMINAL</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ Criminal</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:FS.xxs,color:BODY,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
               </div>
             </div>
             );
@@ -296,7 +306,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                   : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
+              :<p style={{fontSize:FS.sm,color:BODY,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
           </div>
           {/* Imports */}
@@ -323,7 +333,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                   {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}> Settlement necessity</span>}
                 </div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
+              :<p style={{fontSize:FS.sm,color:BODY,fontStyle:'italic',margin:0}}>No recorded imports.</p>
             }
           </div>
         </div>
@@ -340,7 +350,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}
               </div>
             ))}
-            <div style={{fontSize:FS.micro,color:MUTED,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
+            <div style={{fontSize:FS.micro,color:BODY,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
           </div>;
         })()}
         {/* Local production */}
@@ -373,14 +383,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:MUTED,marginTop:3}}>
             <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
             {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/foodGap*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
+              ? `Production covers ${Math.round(fb.dailyProduction/Math.max(1,fb.dailyNeed)*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/foodGap*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
               : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
@@ -564,7 +574,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             </div>}
 
             {/* Note directing to Defense for power structure */}
-            <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
+            <div style={{fontSize:FS.xs,color:BODY,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
               Criminal power structures, enforcement dynamics, and public order detail → Defense tab
             </div>
 

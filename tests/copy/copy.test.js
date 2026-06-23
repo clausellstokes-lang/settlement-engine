@@ -178,7 +178,7 @@ describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
 // edits can't silently rip out the t() call without the test catching it.
 describe('Tier 7.14 migration coverage', () => {
   it('exposes all account card labels', () => {
-    expect(t('account.setDisplayName')).toBe('Set Display Name');
+    expect(t('account.setDisplayName')).toBe('Set display name');
     expect(t('account.subscriptionHeading')).toBe('Subscription & Credits');
     expect(t('account.cardCurrentTier')).toBe('Current Tier');
     expect(t('account.cardCredits')).toBe('Narrative Credits');
@@ -216,19 +216,30 @@ describe('Tier 7.14 migration coverage', () => {
     // Buttons:
     expect(t('auth.button.working')).toBe('Working...');
     expect(t('auth.button.sendLink')).toBe('Send sign-in link');
+    expect(t('auth.button.emailLink')).toBe('Email me a sign-in link');
     expect(t('auth.button.createAcct')).toBe('Create account');
     expect(t('auth.button.signIn')).toBe('Sign in');
-    expect(t('auth.button.moreOpen')).toBe('More sign-in options');
-    expect(t('auth.button.moreClose')).toBe('Hide more options');
-    expect(t('auth.button.usePassword')).toBe('Use a password instead');
-    expect(t('auth.button.useMagic')).toContain('magic link');
     // Placeholders:
     expect(t('auth.placeholder.email')).toBe('Email address');
     expect(t('auth.placeholder.password')).toBe('Password');
+    expect(t('auth.placeholder.confirmPassword')).toBe('Confirm password');
+    // Password-mismatch guard (sign-up confirm field):
+    expect(t('auth.error.passwordMismatch')).toBe('Those passwords do not match.');
     // Subtitles + checkbox:
     expect(t('auth.signinSubtitle')).toContain('Sign in to keep your work');
     expect(t('auth.signupSubtitle', { tier: 'Wanderer' })).toContain('Wanderer');
     expect(t('auth.rememberMe')).toBe('Remember me on this device');
     expect(t('auth.localMode')).toContain('local mode');
+  });
+});
+
+describe('deferred security-questions copy points at the real section', () => {
+  it('references the actual enrollment section name, not "Login and security"', () => {
+    const deferred = t('auth.security.saveDeferred');
+    const sectionHeading = en.auth.security.account.heading;
+    // The durable enrollment UI is its own sibling section, not inside
+    // Login & Security. The deferred-save copy must name it accurately.
+    expect(deferred).toContain(sectionHeading);
+    expect(deferred.toLowerCase()).not.toContain('login and security');
   });
 });

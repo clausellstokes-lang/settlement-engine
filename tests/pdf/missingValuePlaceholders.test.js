@@ -4,18 +4,18 @@
  * Pins for the missing-value placeholder sweep.
  *
  * History: StatStrip once rendered the literal string ', ' when a stat value
- * was missing, and a dozen-plus call sites ALSO passed `x || ', '` themselves —
+ * was missing, and a dozen-plus call sites ALSO passed `x || ', '` themselves –
  * so a missing READINESS/SAFETY printed a bare comma-space in the dossier.
  * The fix is two-sided and these tests pin both sides:
  *   1. Value-rendering primitives (StatStrip, StatTile, ScoreCard,
- *      ScoreWithBreakdown) fall back to an em-dash — and still render a
+ *      ScoreWithBreakdown) fall back to an em-dash – and still render a
  *      genuine zero rather than swallowing it as falsy.
- *   2. Sections no longer inject ', ' — a sparse settlement renders no
+ *   2. Sections no longer inject ', ' – a sparse settlement renders no
  *      comma-space text node anywhere in the swept chapters.
  *
  * Approach: PDF components are plain hook-free functions returning element
  * trees (react-pdf hosts are string types: 'TEXT', 'VIEW', 'PAGE'). We
- * execute function components recursively and collect the text leaves —
+ * execute function components recursively and collect the text leaves –
  * no PDF bytes, same trade-off as sections.smoke.test.js.
  */
 
@@ -25,7 +25,6 @@ import { StatStrip } from '../../src/pdf/primitives/Dense.jsx';
 import { StatTile } from '../../src/pdf/primitives/StatTile.jsx';
 import { ScoreCard, ScoreWithBreakdown } from '../../src/pdf/primitives/Visuals.jsx';
 import { Cover } from '../../src/pdf/sections/Cover.jsx';
-import { SummaryPage } from '../../src/pdf/sections/SummaryPage.jsx';
 import { Overview } from '../../src/pdf/sections/Overview.jsx';
 import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
@@ -34,7 +33,7 @@ import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.
 import { AIAppendix } from '../../src/pdf/sections/AIAppendix.jsx';
 
 // Recursively flatten an element tree to its text leaves. Function-type
-// components are executed (they are plain functions in src/pdf — no hooks);
+// components are executed (they are plain functions in src/pdf – no hooks);
 // host elements ('TEXT', 'VIEW', fragments) are walked via props.children.
 function collectText(node, out = []) {
   if (node == null || typeof node === 'boolean') return out;
@@ -62,32 +61,32 @@ describe('primitive missing-value fallbacks (em-dash, zero-preserving)', () => {
         { label: 'SCORE', value: 0 },
       ],
     }));
-    expect(texts.filter(t => t === '—')).toHaveLength(2);
+    expect(texts.filter(t => t === '–')).toHaveLength(2);
     expect(texts).toContain('0');
     expect(texts).not.toContain(', ');
   });
 
   test('StatTile renders em-dash for a missing value and keeps zero', () => {
-    expect(collectText(StatTile({ label: 'POP', value: undefined }))).toContain('—');
+    expect(collectText(StatTile({ label: 'POP', value: undefined }))).toContain('–');
     expect(collectText(StatTile({ label: 'POP', value: 0 }))).toContain('0');
     expect(collectText(StatTile({ label: 'POP', value: undefined }))).not.toContain(', ');
   });
 
   test('ScoreCard renders em-dash for a null score and keeps zero', () => {
-    expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).toContain('—');
+    expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).toContain('–');
     expect(collectText(ScoreCard({ label: 'THREAT', score: 0 }))).toContain('0');
     expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).not.toContain(', ');
   });
 
   test('ScoreWithBreakdown renders em-dash for a missing score and keeps zero', () => {
-    expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).toContain('—');
+    expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).toContain('–');
     expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY', score: 0 }))).toContain('0');
     expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).not.toContain(', ');
   });
 });
 
-describe("section sweep — no literal ', ' text node on sparse data", () => {
-  // Deliberately threadbare, same shape sections.smoke.test.js uses —
+describe("section sweep – no literal ', ' text node on sparse data", () => {
+  // Deliberately threadbare, same shape sections.smoke.test.js uses –
   // every derived stat (prosperity, readiness, governance, …) is missing,
   // which is exactly the state that used to print comma-spaces.
   const SPARSE = { name: 'Sparse', tier: 'thorp', population: 30 };
@@ -99,7 +98,6 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
 
   const SECTIONS = [
     ['Cover', Cover],
-    ['SummaryPage', SummaryPage],
     ['Overview', Overview],
     ['DefenseSecurity', DefenseSecurity],
     ['PowerStructure', PowerStructure],
@@ -112,9 +110,8 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
     expect(texts).not.toContain(', ');
   });
 
-  test('missing stat-strip values surface as em-dash (DefenseSecurity, SummaryPage)', () => {
-    expect(collectText(DefenseSecurity({ settlement: SPARSE, vm: sparseVm }))).toContain('—');
-    expect(collectText(SummaryPage({ settlement: SPARSE, vm: sparseVm }))).toContain('—');
+  test('missing stat-strip values surface as em-dash (DefenseSecurity)', () => {
+    expect(collectText(DefenseSecurity({ settlement: SPARSE, vm: sparseVm }))).toContain('–');
   });
 
   test('ViabilityAssessment formatVal: null and shapeless-object metrics render em-dash', () => {
@@ -123,7 +120,7 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
       viability: { ...sparseVm.viability, metrics: { waterAccess: null, oddity: {} } },
     };
     const texts = collectText(ViabilityAssessment({ settlement: SPARSE, vm }));
-    expect(texts.filter(t => t === '—').length).toBeGreaterThanOrEqual(2);
+    expect(texts.filter(t => t === '–').length).toBeGreaterThanOrEqual(2);
     expect(texts).not.toContain(', ');
   });
 
@@ -137,7 +134,7 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
       },
     };
     const texts = collectText(AIAppendix({ settlement: SPARSE, narrativeMode: true, vm }));
-    expect(texts.filter(t => t === '—')).toHaveLength(2);
+    expect(texts.filter(t => t === '–')).toHaveLength(2);
     expect(texts).toContain('Mira Veld');
     expect(texts).toContain('Harbor Guild');
     expect(texts).not.toContain(', ');

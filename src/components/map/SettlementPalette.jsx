@@ -7,14 +7,18 @@
  */
 
 import { useMemo, useState } from 'react';
-import { MapPin, Search, GripVertical } from 'lucide-react';
+import { MapPin, Search, GripVertical, FolderOpen, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import { GOLD, GOLD_BG, INK, BODY, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
+import { threatDisplay } from './settlementThreat.js';
 
-export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
+export default function SettlementPalette({
+  saves = [], placements = {}, activeCampaign, onNavigate,
+  onCreateCampaign, onSelectCampaign, hasCampaigns = false,
+}) {
   const [query, setQuery] = useState('');
-  const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
-  // P136 / M-6 — hover on a palette card sets the QuickInspector
+  // Hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
   const setHover = useStore(s => s.setHoveredSettlementId);
   const clearHover = useStore(s => s.clearHoveredSettlementId);
@@ -39,10 +43,12 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      {/* Header */}
+      {/* Header — the CARD_HDR tint carries the chrome grouping; the internal
+          hairline is dropped so the column isn't a stack of false-floor rules
+          (P5). One outer frame (the Stage's SidebarShell) is the only elevation. */}
       <div style={{
         padding: `${SP.sm}px ${SP.md}px`,
-        background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
+        background: CARD_HDR,
       }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: SECOND,
@@ -74,24 +80,75 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
         </div>
       </div>
 
+      {/* No-campaign prompt — placement needs an active campaign. This is an
+          ACTIONABLE empty state, so it carries a real first-click here instead
+          of pointing at the toolbar (P1/P8/P10): a primary "Create a campaign"
+          when none exist, a "Select a campaign" when some do. The gold TINT +
+          icon carry the call-out in two channels without a third nested frame —
+          matching the borderless "No settlements yet" state below (P5). */}
+      {!activeCampaign && (
+        <div style={{
+          margin: SP.sm,
+          display: 'grid', gap: SP.sm, justifyItems: 'center', textAlign: 'center',
+          padding: SP.md,
+          borderRadius: R.md, background: GOLD_BG,
+        }}>
+          <FolderOpen size={20} color={GOLD} />
+          <div style={{ fontSize: FS.sm, fontWeight: 800, color: INK, fontFamily: sans, lineHeight: 1.4 }}>
+            Start a campaign to place settlements
+          </div>
+          <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
+            A campaign holds your map and its living world. Only canon settlements drop onto the map.
+          </div>
+          {hasCampaigns && typeof onSelectCampaign === 'function' ? (
+            <Button variant="primary" size="sm" icon={<FolderOpen size={13} />} onClick={onSelectCampaign}>
+              Select a campaign
+            </Button>
+          ) : typeof onCreateCampaign === 'function' ? (
+            <Button variant="primary" size="sm" icon={<PlusCircle size={13} />} onClick={onCreateCampaign}>
+              Create a campaign
+            </Button>
+          ) : null}
+        </div>
+      )}
+
       {/* List */}
       <div style={{ flex: 1, overflowY: 'auto', padding: SP.sm }}>
         {!filtered.length ? (
-          <div style={{
-            padding: SP.md, textAlign: 'center',
-            fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
-          }}>
-            {saves.length === 0
-              ? 'No settlements yet. Generate one on the Create tab.'
-              : 'No matches.'}
-          </div>
+          saves.length === 0 ? (
+            <div style={{
+              display: 'grid', gap: SP.sm, justifyItems: 'center', textAlign: 'center',
+              padding: SP.md,
+            }}>
+              <MapPin size={20} color={MUTED} />
+              <div style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, lineHeight: 1.5 }}>
+                No settlements yet. Generate one on the Create tab.
+              </div>
+              {typeof onNavigate === 'function' && (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  icon={<PlusCircle size={13} />}
+                  onClick={() => onNavigate('create')}
+                >
+                  Generate a settlement
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div style={{
+              padding: SP.md, textAlign: 'center',
+              fontSize: FS.xs, color: BODY, fontStyle: 'italic',
+            }}>
+              No matches.
+            </div>
+          )
         ) : (
           filtered.map(save => (
             <SettlementCard
               key={save.id}
               save={save}
               placed={placedSettlements.has(String(save.id))}
-              onClick={() => setSelectedBurgId(null)}
               onHover={(hovering) => {
                 if (hovering) setHover?.(save.id);
                 else clearHover?.();
@@ -101,11 +158,12 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
         )}
       </div>
 
-      {/* Footer hint */}
+      {/* Footer hint — separated by top padding only, not a borderTop rule: a
+          bottom hairline read as a page-end that suppressed awareness of the
+          scroll region above it (P5 false-floor). */}
       <div style={{
-        padding: `${SP.xs}px ${SP.md}px`,
-        borderTop: `1px solid ${BORDER2}`,
-        fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+        padding: `${SP.sm}px ${SP.md}px ${SP.xs}px`,
+        fontSize: FS.xs, color: BODY, fontStyle: 'italic',
         textAlign: 'center',
       }}>
         Drag a card onto the map to place it.
@@ -114,28 +172,25 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
   );
 }
 
-// P136 / M-2 — Enriched palette. The card surfaces tier + pop + threat
+// Enriched palette. The card surfaces tier + pop + threat
 // + stress so a worldbuilder choosing where to place a settlement sees
 // the relevant facts without opening the dossier.
 //
-// Threat pill colors mirror the dossier header chip palette.
-const THREAT_LABEL = {
-  frontier: 'Frontier',
-  embattled: 'Embattled',
-  plagued: 'Plagued',
-};
-const THREAT_COLOR = {
-  frontier: '#C9A24C',
-  embattled: '#C87060',
-  plagued: '#A23434',
-};
+// Threat label + colors come from the shared threatDisplay helper, the SAME
+// source DossierHeaderRow reads, so a settlement can never read as one threat
+// here and another in its dossier (P2).
 
 function SettlementCard({ save, placed, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
-  const tier = save.tier || settlement.tier || ', ';
+  // En-dash placeholder for a missing tier — the app's standard "intentional
+  // absence" mark — rather than the stray ', ' that read as a render bug (P11).
+  const tier = save.tier || settlement.tier || '–';
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
+  // 'frontier' is the calm baseline both surfaces suppress; threatDisplay
+  // returns its tones but the pill below self-gates on threat !== 'frontier'.
+  const threatTone = threatDisplay(threat);
   // Stress can be an array (stressors[]) or a single object — both
   // shapes surface a label.
   const stressLabel = (() => {
@@ -164,11 +219,16 @@ function SettlementCard({ save, placed, onHover }) {
   }
 
   return (
+    // Not role="button": placement is a mouse drag with no keyboard equivalent
+    // here, so announcing a button would be a false affordance (WCAG 2.1.1). The
+    // card stays focusable so keyboard users still get the hover-peek (onFocus),
+    // and the label describes what focus does rather than promising a gesture.
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- draggable peek source: drag is a mouse gesture with no keyboard placement path on this surface, so no button role is claimed
     <div
       draggable
-      role="button"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- focusable so keyboard users still trigger the onFocus hover-peek; not announced as interactive
       tabIndex={0}
-      aria-label={`Drag ${name} onto the map`}
+      aria-label={`${name}. Drag onto the map to place it.`}
       onDragStart={handleDragStart}
       style={{
         display: 'flex', alignItems: 'flex-start', gap: SP.xs,
@@ -205,7 +265,7 @@ function SettlementCard({ save, placed, onHover }) {
             <MapPin size={11} color={GOLD} title="Placed on map" />
           )}
         </div>
-        <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 1 }}>
+        <div style={{ fontSize: FS.xs, color: BODY, marginTop: 1 }}>
           {tier} · {pop.toLocaleString()}
         </div>
         {(threat || stressLabel) && (
@@ -213,26 +273,32 @@ function SettlementCard({ save, placed, onHover }) {
             display: 'flex', alignItems: 'center', gap: 4,
             marginTop: 3, flexWrap: 'wrap',
           }}>
-            {threat && threat !== 'frontier' && (
+            {threatTone && threat !== 'frontier' && (
               <span style={{
-                fontSize: FS.xxs, fontWeight: 800,
-                color: THREAT_COLOR[threat] || THREAT_COLOR.frontier,
-                background: `${THREAT_COLOR[threat] || THREAT_COLOR.frontier}1A`,
-                border: `1px solid ${THREAT_COLOR[threat] || THREAT_COLOR.frontier}55`,
+                // Fill/border use the lighter hue; the LABEL uses the audited
+                // -text step so the word clears 4.5:1 on the card (P7) — the
+                // embattled pill previously rendered its text at 3.43:1.
+                fontSize: FS.xs, fontWeight: 800,
+                color: threatTone.text,
+                background: `${threatTone.fill}1A`,
+                border: `1px solid ${threatTone.fill}55`,
                 borderRadius: 3, padding: '1px 5px',
                 textTransform: 'uppercase', letterSpacing: '0.04em',
               }}>
-                {THREAT_LABEL[threat] || threat}
+                {threatTone.label}
               </span>
             )}
             {stressLabel && (
               <span
                 title={`Active stressor: ${stressLabel}`}
                 style={{
-                  fontSize: FS.xxs, fontWeight: 700,
+                  // Fill/border are derived from the same amber stress swatch the
+                  // label uses, with 1A/55 alpha suffixes — the same recipe the
+                  // threat pill above builds from threatTone.fill (no raw rgba).
+                  fontSize: FS.xs, fontWeight: 700,
                   color: swatch['#8A5A20'],
-                  background: 'rgba(196,128,60,0.10)',
-                  border: '1px solid rgba(196,128,60,0.30)',
+                  background: `${swatch['#8A5A20']}1A`,
+                  border: `1px solid ${swatch['#8A5A20']}55`,
                   borderRadius: 3, padding: '1px 5px',
                   maxWidth: 110, overflow: 'hidden',
                   textOverflow: 'ellipsis', whiteSpace: 'nowrap',

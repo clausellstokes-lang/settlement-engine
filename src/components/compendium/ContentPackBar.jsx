@@ -1,5 +1,5 @@
 /**
- * ContentPackBar — export / import of custom-content packs (UX Phase 8, premium).
+ * ContentPackBar — export / import of custom-content packs (premium).
  *
  * Export: serializes the authored content lanes to a downloadable JSON pack
  * (buildContentPack). Import: reads an uploaded file, parses + re-validates +
@@ -107,7 +107,7 @@ export default function ContentPackBar() {
       />
       <Button
         variant="ghost" size="sm" icon={<Share2 size={12} />} disabled
-        title="Coming soon — share an authored pack to the public Gallery."
+        title="Coming soon. Share an authored pack to the public Gallery."
       >
         Share to Gallery (soon)
       </Button>

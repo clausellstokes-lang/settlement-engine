@@ -18,6 +18,7 @@
 import { customContentService } from '../lib/customContent.js';
 import { migrateCustomContent } from '../domain/customContentMigrations.js';
 import { validateDeity } from '../domain/customContentSchema.js';
+import { customDeps } from '../lib/dependencyEngine.js';
 
 const LOCAL_KEY = 'sf_custom_content';
 const LOCAL_KEY_PREFIX = 'sf_custom_content:';
@@ -157,6 +158,10 @@ export const createCustomContentSlice = (set, get) => {
       updatedAt: new Date().toISOString(),
     };
     set(state => {
+      // Guard an unknown category (typo / cloud row with an unexpected bucket /
+      // a UI bucket added before EMPTY): without this the bucket is undefined and
+      // .unshift throws INSIDE the producer, aborting the action. Mirror EMPTY.
+      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
       state.customContent[category].unshift(entry);
       localWrite(state.customContent, ownerIdFromState(state));
     });
@@ -206,6 +211,8 @@ export const createCustomContentSlice = (set, get) => {
       }
     }
     set(state => {
+      // Guard an unknown category so .findIndex doesn't throw on undefined.
+      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
       const list = state.customContent[category];
       const idx = list.findIndex(x => x.id === id);
       if (idx !== -1) {
@@ -246,6 +253,8 @@ export const createCustomContentSlice = (set, get) => {
   /** Delete a custom item. */
   deleteCustomItem: (category, id) => {
     set(state => {
+      // Guard an unknown category so .filter doesn't throw on undefined.
+      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
       state.customContent[category] = state.customContent[category].filter(x => x.id !== id);
       localWrite(state.customContent, ownerIdFromState(state));
     });
@@ -303,6 +312,12 @@ export const createCustomContentSlice = (set, get) => {
         state.customContentLoading = false;
         state.customContentSyncedAt = new Date().toISOString();
       });
+      // Force the generator's custom-content registry to re-read. The registry
+      // caches by a (count : latest-updatedAt) key, which can't detect a cloud
+      // sync that swaps items WITHOUT changing the count or bumping the latest
+      // updatedAt — the next generation would otherwise use a stale registry.
+      // A wholesale cloud replace is exactly that edge, so invalidate explicitly.
+      customDeps.invalidate();
       // Mirror to local for offline read-only access on this device
       localWrite(get().customContent, ownerId);
     } catch (err) {
@@ -322,6 +337,8 @@ export const createCustomContentSlice = (set, get) => {
               state.customContentLoading = false;
               state.customContentError = null;
             });
+            // Same wholesale-replace stale-key concern as the cloud path above.
+            customDeps.invalidate();
             restored = true;
           }
         }

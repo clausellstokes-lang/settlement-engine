@@ -26,7 +26,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     key: 'gods_abandonment',
     label: "God's Abandonment",
     types: ['famine', 'disease_outbreak', 'religious_conversion_fracture'],
-    summary: 'Hunger, plague, and a fracturing faith feed one another — flagellants in the streets, scapegoats named from pulpits, and prophets nobody ordained.',
+    summary: 'Hunger, plague, and a fracturing faith feed one another. Flagellants walk the streets, scapegoats are named from pulpits, and prophets nobody ordained gather the desperate.',
     hooks: [
       'A flagellant movement marches between the afflicted settlements.',
       'A minority faction is being blamed from the pulpits.',
@@ -37,7 +37,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     key: 'the_wasting',
     label: 'The Wasting',
     types: ['famine', 'disease_outbreak'],
-    summary: 'The hungry sicken faster and the sick cannot work the fields — each crisis lengthens the other.',
+    summary: 'The hungry sicken faster and the sick cannot work the fields. Each crisis lengthens the other.',
     hooks: [
       'Healers are rationing care by who can still work.',
       'Grain wagons need armed escorts past the quarantine lines.',
@@ -47,7 +47,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     key: 'starving_city',
     label: 'The Starving City',
     types: ['siege', 'famine'],
-    summary: 'The blockade holds and the granaries empty — surrender pressure mounts with every meal that does not come.',
+    summary: 'The blockade holds and the granaries empty. Surrender pressure mounts with every meal that does not come.',
     hooks: [
       'A surrender faction is counting the remaining stores aloud.',
       'Smugglers name their price for a way through the lines.',
@@ -214,7 +214,7 @@ export function synthesizeCompoundSignatures({ worldState, tick = 0, now = null 
   return entries;
 }
 
-// ── Pantheon realm arcs (R4) ────────────────────────────────────────────────
+// ── Pantheon realm arcs ─────────────────────────────────────────────────────
 // A deity crossing INTO 'major' is the campaign-epic payoff — "The Ascendancy of
 // X". A deity falling TO 'cult' (or losing its last seat — extinction) is "The
 // Twilight of X". A minor↔minor drift is not realm news. These are synthesized
@@ -270,7 +270,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         significance: 'major',
         score: 86,
         headline: `The Ascendancy of ${name}`,
-        summary: `${name} has risen to a major power in the realm's pantheon — temples multiply, rivals bend the knee, and the faithful walk the roads in numbers.`,
+        summary: `${name} has risen to a major power in the realm's pantheon. Temples multiply, rivals bend the knee, and the faithful walk the roads in numbers.`,
         kind: 'pantheon',
         impactKind: 'pantheon_ascendancy',
         channelType: null,
@@ -293,7 +293,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         significance: 'major',
         score: 84,
         headline: `The Twilight of ${name}`,
-        summary: `${name} has fallen to a cult — abandoned altars, scattered clergy, and a faith remembered more than practised.`,
+        summary: `${name} has fallen to a cult: abandoned altars, scattered clergy, and a faith remembered more than practised.`,
         kind: 'pantheon',
         impactKind: 'pantheon_twilight',
         channelType: null,
@@ -333,8 +333,8 @@ function stablePantheonPart(deityId) {
  * @param {(string|null)} [args.now]
  * @param {any} [args.regionalGraph]  the live regional graph — its confirmed
  *   war_front channels name the besieging COALITION for war-shaped stressors, so
- *   "The War" counts instigators + supporters, not just the besieged victim
- *   (§S4). Absent ⇒ war-shaped stressors fall back to victim-count (legacy).
+ *   "The War" counts instigators + supporters, not just the besieged victim.
+ *   Absent ⇒ war-shaped stressors fall back to victim-count (legacy).
  * @returns {Array<Object>} Wizard-News-shaped realm entries (may be empty)
  */
 export function synthesizeRealmEvents({ worldState, tick = 0, now = null, regionalGraph = null } = {}) {
@@ -347,7 +347,7 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
     for (const id of s.affectedSettlementIds || []) set.add(String(id));
     byType.set(s.type, set);
   }
-  // §S4 fix — count the COALITION for war-shaped types. The membership the realm
+  // Count the COALITION for war-shaped types. The membership the realm
   // threshold tests is the union of the besieged victims AND the war_front
   // besiegers into them (instigators + supporters). This is what makes a
   // 4-vs-1 coalition siege promote to "The War" — the old victim-only count

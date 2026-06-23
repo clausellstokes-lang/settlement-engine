@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/pantheon.js — Feature D / R4: the per-DEITY faith ledger.
+ * domain/worldPulse/pantheon.js — the per-DEITY faith ledger.
  *
  * This is the SAME ratcheted-disposition shape `dispositionLedger.js` instantiates
  * for settlements, instantiated here for DEITIES. An entry accumulates a deity's
@@ -7,8 +7,8 @@
  *
  *     worldState.pantheon[deityId] = { wins, losses, seats, tier, tierHeld }
  *
- *  - wins/losses — ratcheted from R2's deity-contest outcomes (a deity that wins a
- *    conversion banks a win; the displaced deity a loss). Reuses the F4 fold idiom:
+ *  - wins/losses — ratcheted from the deity-contest outcomes (a deity that wins a
+ *    conversion banks a win; the displaced deity a loss). Reuses the shared fold idiom:
  *    immutable, bounded, commutative (sorted by deityId so apply order can't change
  *    the result).
  *  - seats — `seatsControlled`: the count of settlements whose embedded
@@ -78,6 +78,14 @@ const COUNT_MAX = 9999;
 /** @type {Record<string, number>} */
 const TIER_RANK = Object.freeze({ cult: 0, minor: 1, major: 2 });
 const TIER_FOR_RANK = Object.freeze(['cult', 'minor', 'major']);
+
+// Deity rank → base 0..1 strength (major god > minor god > cult). The canonical
+// source the religion contest reads as its `deityRankStrength` base; lives here on
+// the zero-import tuning leaf so both the engine and the presentation layer read
+// ONE constant (a re-tune flows to both) without the display importing the contest
+// engine. Keyed identically for `tier` (pantheon ledger) and `rankAxis` (deity
+// snapshot) — the label sets match.
+const DEITY_RANK_STRENGTH = Object.freeze({ major: 0.95, minor: 0.6, cult: 0.35 });
 
 /**
  * The numeric rank of a tier label (cult 0 / minor 1 / major 2). Unknown labels
@@ -392,5 +400,5 @@ export function advancePantheon({ pantheon = {}, snapshot, faithDeltas = [] }) {
 
 export const PANTHEON_TUNING = Object.freeze({
   MINOR_PROMOTE, MINOR_DEMOTE, MAJOR_PROMOTE, MAJOR_DEMOTE,
-  TIER_HOLD_TICKS, MAX_TIER_CHANGES_PER_TICK, TIER_RANK, TIER_FOR_RANK,
+  TIER_HOLD_TICKS, MAX_TIER_CHANGES_PER_TICK, TIER_RANK, TIER_FOR_RANK, DEITY_RANK_STRENGTH,
 });

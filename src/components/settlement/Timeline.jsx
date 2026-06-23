@@ -8,7 +8,7 @@
  * Hidden in draft mode (no log to show).
  */
 
-import { Clock, Undo2, ChevronRight } from 'lucide-react';
+import { Undo2 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -36,7 +36,6 @@ export default function Timeline() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
-        <Clock size={12} />
         Campaign Timeline
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {eventLog.length === 0
@@ -50,7 +49,7 @@ export default function Timeline() {
           fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
           lineHeight: 1.5, marginBottom: SP.sm,
         }}>
-          On the world-map clock — events resolve together at each World Pulse, and
+          On the world-map clock. Events resolve together at each World Pulse, and
           undo lives at the map level (“Undo last advance”).
         </div>
       )}
@@ -123,7 +122,7 @@ function Entry({ entry, isLatest, onUndo }) {
       {entry.factionResponses?.length > 0 && (
         <div style={{ marginTop: 4, fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5 }}>
           {entry.factionResponses.map((r, i) => (
-            <div key={i}><ChevronRight size={9} /> <strong style={{ color: GOLD }}>{r.factionName}</strong>: {r.response}</div>
+            <div key={i}><strong style={{ color: GOLD }}>{r.factionName}</strong>: {r.response}</div>
           ))}
         </div>
       )}

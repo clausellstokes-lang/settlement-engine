@@ -1,8 +1,8 @@
 /**
  * primitives/EditableText — click-to-edit prose primitive.
  *
- * Tier 5.4 of the roadmap. Premium users can hand-write any
- * registered prose field (NPC secret, plot hook, history beat, etc.)
+ * Premium users can hand-write any registered prose field
+ * (NPC secret, plot hook, history beat, etc.)
  * in place. The primitive is purely presentational — it owns the
  * draft state and the keyboard/blur handling, but the parent owns
  * persistence (onSave) and revert (onRevert) and decides which

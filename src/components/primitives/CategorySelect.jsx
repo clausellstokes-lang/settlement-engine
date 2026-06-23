@@ -1,5 +1,5 @@
 /**
- * CategorySelect.jsx — the shared category dropdown for custom content (§14).
+ * CategorySelect.jsx — the shared category dropdown for custom content.
  *
  * Built-in categories for the type + dynamic "– Custom" categories (any value a
  * user typed that isn't built-in, shared across all types) + a "+ New category…"

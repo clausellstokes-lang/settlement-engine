@@ -57,6 +57,22 @@ export function findActiveCampaign(campaigns, campaignId) {
   return isCampaignActive(campaign) ? campaign : null;
 }
 
+/**
+ * Pick which campaign the Realm should auto-resume on entry: the one the user
+ * last opened if it still resolves to an active campaign, else the
+ * most-recently-updated active campaign (the campaign list arrives ordered
+ * updated_at-desc), else null. `activeCampaigns` is the already-filtered list of
+ * the user's selectable campaigns. A stale or cross-user lastActiveCampaignId
+ * (not in the list) safely falls through to the most-recent campaign.
+ */
+export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
+  if (!Array.isArray(activeCampaigns) || activeCampaigns.length === 0) return null;
+  if (lastActiveCampaignId && activeCampaigns.some(c => c?.id === lastActiveCampaignId)) {
+    return lastActiveCampaignId;
+  }
+  return activeCampaigns[0]?.id || null;
+}
+
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];
@@ -150,25 +166,139 @@ export function persistSaveUpdate(saveId, partial) {
   });
 }
 
+/**
+ * Persist a batch of per-save updates, COLLECTING each result. Returns an
+ * explicit outcome so the caller can decide whether the campaign snapshot is
+ * safe to commit as advanced. `failed` counts the settlement writes that did
+ * not land; `ok` is true only when every write succeeded (an empty batch is
+ * vacuously ok). persistSaveUpdate never throws and already reports each failure
+ * via campaignSyncError, so this only aggregates — it does not re-surface.
+ * @param {Array<{saveId:string,settlement?:any,campaignState?:any,versionHistory?:any}>} updates
+ * @returns {Promise<{ ok: boolean, total: number, failed: number }>}
+ */
 export async function persistSaveUpdates(updates = []) {
+  let failed = 0;
   for (const update of updates) {
-    await persistSaveUpdate(update.saveId, {
+    const okOne = await persistSaveUpdate(update.saveId, {
       settlement: update.settlement,
       campaignState: update.campaignState,
       versionHistory: update.versionHistory,
     });
+    if (okOne === false) failed += 1;
   }
+  return { ok: failed === 0, total: updates.length, failed };
 }
 
 /**
  * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
  * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
- * sync the campaign snapshot. Both awaits run only when the mutator produced
- * state. Failures inside persistSaveUpdates surface via campaignSyncError (see
- * persistSaveUpdate). Centralizing the pattern keeps the three call sites honest.
+ * sync the campaign snapshot — but ONLY when every settlement write landed. Both
+ * awaits run only when the mutator produced state.
+ *
+ * If any settlement update fails, we must NOT push the campaign snapshot to the
+ * cloud as 'advanced': doing so would advance the campaign tick/world graph while
+ * a member settlement stayed behind, so a reload would reconstruct a HYBRID
+ * timeline. Instead we leave the campaign cloud-pending (the local cache already
+ * holds the advance via cacheCampaignState) and surface a retryable failure via
+ * campaignSyncError. The cloud campaign row keeps its prior, consistent snapshot,
+ * so a reload reconciles to a coherent pre-advance state rather than a hybrid.
+ *
+ * The INVERSE case — every settlement write lands but the campaign upsert itself
+ * rejects — is guarded the same way. syncCampaignSnapshot → syncCampaignChanges
+ * re-throws on a rejected upsert; if we let that propagate it escapes the (also
+ * unwrapped) await in advanceCampaignWorld, WorldMap catches it and shows "could
+ * not advance" — but Phase 2 ALREADY committed and cached the advance locally. The
+ * user, told it failed, clicks advance again → a SECOND local tick (a double
+ * advance). So we swallow the rejection and surface the honest cloud-pending banner
+ * instead, exactly like the forward case: the advance is real locally, only the
+ * cloud campaign row is behind.
+ *
+ * The retry is idempotent: the atomic RPC is id-keyed (last-write-wins on the
+ * campaign row + each settlement partial), and the optional stale-tick guard turns
+ * a duplicate re-apply of an already-landed tick into a no-op rather than a
+ * double-advance, so re-applying the same advance is safe.
+ *
+ * CLOUD PATH (migration 069): the whole write-set goes through ONE
+ * persist_world_pulse_advance call — every affected settlement AND the campaign
+ * snapshot in a single DB transaction. A FORWARD partial (settlement A lands, B
+ * fails) can no longer leave the cloud hybrid: any failure rolls the entire advance
+ * back. HARD DEPENDENCY: 069 must be applied. There is deliberately NO serial-write
+ * fallback in cloud mode — re-introducing N upserts would re-open the non-atomic
+ * hole. An RPC-missing/error result degrades to the SAME honest cloud-pending state
+ * the serial path used: the advance is real locally (already cached), only the
+ * cloud is behind, and a retry/reload reconciles.
+ *
+ * LOCAL PATH (campaigns not configured): there is no cross-row hybrid risk — a
+ * single localStorage write covers the whole campaign list and each settlement is
+ * its own keyed entry — so the original serial helpers are retained there.
+ *
+ * BACKWARD WRITES (undo): the forward stale-tick guard advances only when the
+ * stored tick is strictly BEHIND the passed expectedTick. An undo restores a PRIOR
+ * (LOWER) tick, so passing that lower tick as the guard's expectedTick would make
+ * the (higher) cloud tick fail the guard — the RPC would return stale_tick (read
+ * as success) and the cloud would NEVER revert, resurrecting the undone advance on
+ * reload. An undo is therefore a deliberate LAST-WRITE-WINS write: callers pass
+ * `backward: true`, which sends p_expected_tick = NULL so 069 skips the guard and
+ * applies the reverted snapshot unconditionally. The FORWARD advance path leaves
+ * `backward` falsy and keeps the guard (preventing a double-advance).
  */
-export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
-  if (!(result && campaignPersist)) return;
-  await persistSaveUpdates(persistUpdates);
-  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false }) {
+  if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };
+
+  // ── Cloud: one atomic RPC for the entire advance write-set. ────────────────
+  if (typeof campaignService.persistWorldPulseAdvance === 'function') {
+    const campaign = (campaignPersist.snapshot || []).find(c => c?.id === campaignId);
+    if (!campaign) {
+      // The advanced campaign isn't in the snapshot — nothing coherent to persist.
+      // Treat as cloud-pending rather than silently dropping the advance.
+      try { _reportPersistFailure?.(new Error('campaign missing from snapshot; left cloud-pending')); }
+      catch { /* reporting must never throw */ }
+      return { ok: false, savesFailed: 0, campaignSynced: false };
+    }
+    // The stale-apply guard advances only if the stored tick is strictly behind
+    // this one; pass the post-advance tick so a duplicate re-apply is a no-op.
+    // A BACKWARD (undo) write must NOT be blocked by that forward guard — it
+    // restores a LOWER tick the (higher) cloud would always fail. So undo passes
+    // expectedTick = null (last-write-wins): 069 skips the guard and applies the
+    // reverted snapshot unconditionally, while a forward advance keeps the guard.
+    const tick = Number(campaign?.worldState?.tick);
+    const expectedTick = backward ? null : (Number.isFinite(tick) ? tick : null);
+    try {
+      await campaignService.persistWorldPulseAdvance({
+        campaignId,
+        campaign,
+        settlementUpdates: Array.isArray(persistUpdates) ? persistUpdates : [],
+        expectedTick,
+      });
+      // A stale_tick no-op (applied:false) means the cloud already holds this tick
+      // (a prior retry landed) — the cloud is coherent, so this is success, not a
+      // pending failure. Any genuine failure throws and is handled below.
+    } catch (e) {
+      // Any failure — a member not owned, a rejected write, or 069 not applied —
+      // rolls the WHOLE advance back in the DB (atomic). Surface the honest
+      // cloud-pending banner and let an id-keyed retry/reload reconcile. Do NOT
+      // re-throw: a throw escapes the unwrapped await in advanceCampaignWorld and
+      // invites a double advance (see the inverse-case note above).
+      console.warn('[campaignSlice] atomic world-pulse persist failed; left cloud-pending', e);
+      try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+      return { ok: false, savesFailed: 0, campaignSynced: false };
+    }
+    return { ok: true, savesFailed: 0, campaignSynced: true };
+  }
+
+  // ── Local: serial helpers (no cross-row hybrid risk in a single store). ────
+  const saveOutcome = await persistSaveUpdates(persistUpdates);
+  if (!saveOutcome.ok) {
+    try { _reportPersistFailure?.(new Error('settlement save failed; campaign left cloud-pending')); }
+    catch { /* reporting must never throw */ }
+    return { ok: false, savesFailed: saveOutcome.failed, campaignSynced: false };
+  }
+  try {
+    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+  } catch (e) {
+    console.warn('[campaignSlice] campaign snapshot sync failed; left cloud-pending', e);
+    try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+    return { ok: false, savesFailed: 0, campaignSynced: false };
+  }
+  return { ok: true, savesFailed: 0, campaignSynced: true };
 }

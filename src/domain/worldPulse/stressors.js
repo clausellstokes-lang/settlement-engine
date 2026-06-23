@@ -268,15 +268,20 @@ export const STRESSOR_CATALOG = Object.freeze({
   },
 });
 
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
+// clamp01 + effectiveStressorSeverity now live in the stressorSeverity leaf so
+// foodStockpile can read severity without importing back UP into stressors (which
+// created the stressors → stressorGates → foodStockpile → stressors ESM cycle).
+// Re-exported here so existing importers (flows.js) keep working, AND imported
+// as a LOCAL binding because stressors.js's own internal callers (residual/spread/
+// contest math at lines ~444/521/980) reference it — a bare `export … from` would
+// NOT create the local binding they need.
+import { clamp01, effectiveStressorSeverity } from './stressorSeverity.js';
+export { effectiveStressorSeverity };
 
-// ── Spread attenuation (H8) ────────────────────────────────────────────────
+// ── Spread attenuation ──────────────────────────────────────────────────────
 // A spread target experiences the shared stressor at the SOURCE's effective
-// severity × 0.72 (the original design intent — R1 only made the old cosmetic
-// number honest; R3 makes it real), floored so spreads stay meaningful.
+// severity × 0.72 (the original design intent, now applied for real rather than
+// as a cosmetic number), floored so spreads stay meaningful.
 // The per-settlement map is stamped at spread time; origin settlements are
 // absent from it (= full severity), and aging/resolution ignore it — the
 // record's lifecycle stays origin-driven.
@@ -299,12 +304,6 @@ function normalizeSeverityMap(map) {
  * stamped at spread time and never re-aged, so the record's CURRENT severity
  * caps them — a spread never bites harder than the crisis does at its origin.
  */
-export function effectiveStressorSeverity(stressor, saveId) {
-  const recorded = clamp01(stressor?.severity ?? 0);
-  const entry = stressor?.severityBySettlement?.[String(saveId)];
-  return Number.isFinite(entry) ? Math.min(recorded, clamp01(entry)) : recorded;
-}
-
 function idFor(stressor) {
   return stressor.id || [
     'world_stressor',
@@ -441,7 +440,7 @@ function residualOutcome(stressor, tick) {
   const targetIds = stressor.affectedSettlementIds || [];
   const defaults = catalogFor(stressor.type);
   return targetIds.map(targetSaveId => {
-    // Truthful aftermath (T3): the residual scar matches what THIS settlement
+    // Truthful aftermath: the residual scar matches what THIS settlement
     // actually experienced — a spread target's attenuated severity (the
     // severityBySettlement stamp), not the record's origin severity.
     const experienced = effectiveStressorSeverity(stressor, targetSaveId);
@@ -594,7 +593,7 @@ function wanderStep(stressor, wander, snapshot, rng, tick, now) {
 }
 
 // Echoes fade on a ~6-tick half-life; below this floor they graduate out of
-// the world state entirely (Phase 5 hands graduates to the chronicle/history).
+// the world state entirely (graduates are handed to the chronicle/history).
 const ECHO_HALF_LIFE_TICKS = 6;
 const ECHO_DECAY_FACTOR = Math.pow(0.5, 1 / ECHO_HALF_LIFE_TICKS);
 const ECHO_GRADUATION_FLOOR = 0.1;
@@ -988,7 +987,7 @@ function spreadTargetsFor(snapshot, stressor) {
     }
   }
   const out = [...targets.entries()].map(([targetSaveId, sourceSeverity]) => ({ targetSaveId, sourceSeverity }));
-  // Feature D (R2): a religious conversion flows to the WEAKEST orthodoxies first
+  // A religious conversion flows to the WEAKEST orthodoxies first
   // (most convertible), codepoint tie-break — so the downstream `.slice(0,3)` cap
   // is deterministic AND legible (conversions chase the thinnest faith, not Map
   // insertion order). Scoped to `religious_conversion_fracture` so every other
@@ -1084,7 +1083,7 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       for (const { targetSaveId, sourceSeverity } of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
         const targetKey = `${stressor.type}:${targetSaveId}`;
         if (existingKeys.has(targetKey)) continue;
-        // True per-target attenuation (H8, landed in R3): the spread target
+        // True per-target attenuation: the spread target
         // joins the ONE shared record, but experiences it at the source's
         // effective severity × 0.72 (floored), stamped into the record's
         // severityBySettlement map. The record's own severity — and its whole

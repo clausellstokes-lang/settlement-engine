@@ -105,10 +105,10 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   // Sort the ascendant majors by seats (most-followed first), codepoint tie-break.
   majors.sort((a, b) => (b.seats - a.seats) || codepoint(a.deityId, b.deityId));
   for (const major of majors) {
-    lines.push(`The Ascendancy of ${deityName(items, major.deityId)} — ${major.seats} settlement${major.seats === 1 ? '' : 's'} hold the faith.`);
+    lines.push(`The Ascendancy of ${deityName(items, major.deityId)} (${major.seats} settlement${major.seats === 1 ? ' holds' : 's hold'} the faith).`);
   }
   for (const cult of cults) {
-    lines.push(`The Twilight of ${deityName(items, cult.deityId)} — its altars stand abandoned.`);
+    lines.push(`The Twilight of ${deityName(items, cult.deityId)} (its altars stand abandoned).`);
   }
 
   // ── War arcs: a named war for each live siege coalition. ───────────────────
@@ -118,10 +118,10 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
     if (siege.coalition.length >= 2) {
       const attackers = siege.coalition.map(id => nameFor(nameById, id));
       const named = attackers.length > 2 ? `${attackers.slice(0, 2).join(', ')} +${attackers.length - 2}` : attackers.join(' and ');
-      lines.push(`The War of ${targetName} — a coalition of ${named} besiege the walls.`);
+      lines.push(`The War of ${targetName}, where a coalition of ${named} besiege the walls.`);
     } else {
       const attacker = nameFor(nameById, siege.coalition[0] || '');
-      lines.push(`The War of ${targetName} — ${attacker} lays siege.`);
+      lines.push(`The War of ${targetName}, where ${attacker} lays siege.`);
     }
   }
 
@@ -130,7 +130,7 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   for (const war of tradeWars) {
     const buyerName = nameFor(nameById, war.buyerId);
     const winnerName = nameFor(nameById, war.winnerId);
-    lines.push(`The ${war.commodityLabel} Trade War — ${winnerName} seizes ${buyerName}'s market.`);
+    lines.push(`The ${war.commodityLabel} Trade War, where ${winnerName} seizes ${buyerName}'s market.`);
   }
 
   return lines.slice(0, MAX_ARCS);

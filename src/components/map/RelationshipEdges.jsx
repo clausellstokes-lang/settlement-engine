@@ -14,25 +14,11 @@
 
 import { useMemo } from 'react';
 import { useStore } from '../../store';
-
-const STYLE = {
-  trade_partner: { color: '#0f766e', width: 2,   dash: null,    priority: 2 },
-  allied:        { color: '#2563eb', width: 2.2, dash: null,    priority: 3 },
-  patron:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: true  },
-  client:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: false },
-  vassal:        { color: '#6d28d9', width: 2.3, dash: '8 3',   priority: 3, arrow: true  },
-  rival:         { color: '#ea580c', width: 1.8, dash: '2 3',   priority: 1 },
-  cold_war:      { color: '#b91c1c', width: 1.8, dash: '1 3',   priority: 1 },
-  hostile:       { color: '#991b1b', width: 3,   dash: null,    priority: 4 },
-};
-
-// §S3 — pulse-minted war/faith channels rendered as directed map edges. war_front
-// is the red siege front-line (besieger → besieged); religious_authority is the
-// purple faith overlay (a deity projecting authority along an allied/trade edge).
-const WAR_FAITH_STYLE = {
-  war_front:           { color: '#b91c1c', width: 3,   dash: null,  priority: 5, arrow: true },
-  religious_authority: { color: '#9333ea', width: 2.2, dash: '5 3', priority: 4, arrow: true },
-};
+// Single source of truth shared with LayersPanel / MapLegend / RoutesToolbar so
+// the drawn line, the legend, and the filter chips never disagree. WAR_FAITH_STYLE
+// is the SAME export the legend reads, so the siege/faith front the map draws and
+// the key that explains it can never use different colors (P11).
+import { REL_EDGE_STYLE as STYLE, WAR_FAITH_STYLE } from './relationshipEdgeStyle.js';
 
 export default function RelationshipEdges() {
   const savedSettlements = useStore(s => s.savedSettlements);

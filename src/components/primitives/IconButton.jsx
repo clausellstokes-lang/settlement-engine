@@ -14,6 +14,8 @@
  * style themselves out of accessibility (no "ghost on ghost" combos).
  */
 
+import { useIconsOn } from './IconsContext.js';
+
 const TONES = {
   default:  { bg: '#fff',                       fg: '#1c1409', border: '#d2bd96', hover: '#fffbf5' },
   primary:  { bg: '#a0762a',                    fg: '#ffffff', border: '#a0762a', hover: '#8c651e' },
@@ -26,6 +28,9 @@ const SIZES = {
   sm: { box: 24, icon: 11, pad: 4 },
   md: { box: 28, icon: 13, pad: 6 },
   lg: { box: 36, icon: 16, pad: 8 },
+  // xl — the ~44px usability target (Fitts's Law) for consequential controls
+  // like "remove a saved neighbour link" that sit above the 24px WCAG floor.
+  xl: { box: 44, icon: 18, pad: 10 },
 };
 
 /**
@@ -40,11 +45,16 @@ const SIZES = {
  * @param {string} [props.type='button']
  */
 export default function IconButton({
-  Icon, label, onClick,
+  Icon, label, onClick, glyph = null,
   tone = 'default', size = 'md',
   disabled, pressed, type = 'button',
   ...rest
 }) {
+  // Icons-off (everywhere but the Realm map): an icon-only control still needs a
+  // visible mark, so off-map it renders a unicode `glyph` text fallback when one
+  // is given (close = x, scroll = chevrons), else keeps the icon so nothing goes
+  // invisible. Inside the map's IconsContext.Provider the lucide icon renders.
+  const iconsOn = useIconsOn();
   if (!label) {
     // Throw in development so missing labels surface immediately. In
     // production we still render but with a fallback to keep the app up.
@@ -76,7 +86,11 @@ export default function IconButton({
       }}
       {...rest}
     >
-      <Icon size={s.icon} aria-hidden="true" />
+      {iconsOn
+        ? <Icon size={s.icon} aria-hidden="true" />
+        : (glyph != null
+            ? <span aria-hidden="true" style={{ fontSize: s.icon + 3, lineHeight: 1, fontWeight: 700 }}>{glyph}</span>
+            : <Icon size={s.icon} aria-hidden="true" />)}
     </button>
   );
 }

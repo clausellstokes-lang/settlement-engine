@@ -83,7 +83,7 @@ export function EconomicsGranarySection({ settlement }) {
     : null;
 
   return (
-    <SectionShell title="Economic capacity & granary" accent={GOLD} testid="economics-granary-section">
+    <SectionShell title="Economic capacity and granary" accent={GOLD} testid="economics-granary-section">
       {model.cap && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.sm }}>
           <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK, flex: 1 }}>Economic capacity</span>
@@ -170,8 +170,8 @@ export function DefenseWarFrontSection({ settlement, warStatus = null, nameFor =
             <p style={{ margin: '0 0 4px' }}>
               <strong style={{ color: RED }}>War front:</strong>{' '}
               {warStatus.besiegedBy.length >= 2
-                ? `Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}) — the garrison is thinning under sustained assault.`
-                : `Besieged by ${nameFor(warStatus.besiegedBy[0])} — the garrison holds the walls.`}
+                ? `Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assault.`
+                : `Besieged by ${nameFor(warStatus.besiegedBy[0])}. The garrison holds the walls.`}
             </p>
           )}
           {warStatus.besiegingTargets?.length > 0 && (
@@ -210,13 +210,13 @@ export function PowerSuccessionSection({ settlement }) {
   // A coarse coup-risk read from the gated/ungated incumbent case (no rng).
   let riskLabel = 'Stable', riskColor = GREEN;
   if (contenders.challengers.length) {
-    if (!contenders.incumbent.gated) { riskLabel = 'Critical — the seat could fall'; riskColor = RED; }
+    if (!contenders.incumbent.gated) { riskLabel = 'Critical. The seat could fall'; riskColor = RED; }
     else if (contenders.incumbent.amplifiedWeight < contenders.challengers[0].weight) { riskLabel = 'Contested'; riskColor = AMBER; }
     else { riskLabel = 'Holding'; riskColor = GOLD; }
   }
 
   return (
-    <SectionShell title="Rule & succession" accent={GOLD} testid="power-succession-section">
+    <SectionShell title="Rule and succession" accent={GOLD} testid="power-succession-section">
       {incumbentName && (
         <div style={{ fontSize: FS.sm, color: BODY, marginBottom: SP.xs }}>
           <strong>Ruler:</strong> {incumbentName}
@@ -247,7 +247,7 @@ export function PowerSuccessionSection({ settlement }) {
           {previous.slice(-4).map((g, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY }}>
               {g.label || g.government || 'Prior government'}
-              {g.cause ? <span style={{ color: MUTED }}> — {g.cause}</span> : null}
+              {g.cause ? <span style={{ color: MUTED }}>, {g.cause}</span> : null}
             </div>
           ))}
         </div>

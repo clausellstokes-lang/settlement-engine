@@ -1,7 +1,7 @@
 /**
  * domain/threatProfile.js — Structured threat modeling.
  *
- * Tier 4.6 of the roadmap. Today the generator implies threats
+ * Today the generator implies threats
  * across several surfaces without ever materializing them as
  * canonical entities:
  *
@@ -11,11 +11,11 @@
  *   - `stressors[]`: free-form, but commonly include siege/raid/plague/
  *     refugee/war tags
  *   - `neighbours[]` with relationshipType: 'hostile' | 'cold_war'
- *   - `activeConditions[]`: the canonical Phase 16 conditions, several
+ *   - `activeConditions[]`: the canonical conditions, several
  *     of which are themselves threat-shaped (plague, siege_lifted's
  *     aftermath, food_anchor_lost's ongoing pressure)
  *
- * Phase 20 walks every surface and emits canonical ThreatProfile
+ * walks every surface and emits canonical ThreatProfile
  * entries with the roadmap-required fields:
  *
  *   {
@@ -28,16 +28,16 @@
  *   }
  *
  * Pure read-only derivation. No imports from src/lib. Composes
- * Phase 16 (activeConditions) so threats keyed off a canonical
+ * active conditions so threats keyed off a canonical
  * condition share its provenance.
  *
  * Architectural payoff:
- *   - Phase 17 substrate variables (defense_readiness, social_trust,
+ *   - Substrate variables (defense_readiness, social_trust,
  *     food_security, etc.) can quote threat profiles as contributors.
- *   - Phase 19's explainEntity gains a 'threat' explainer.
- *   - Tier 4.11 (player intervention events) gets a stable target
+ *   - explainEntity gains a 'threat' explainer.
+ *   - Player intervention events get a stable target
  *     vocabulary: events like 'removed_threat' reference threat ids.
- *   - Tier 6.1 (AI grounded-in-trace) — AI can ground "the settlement
+ *   - For AI grounded-in-trace, the AI can ground "the settlement
  *     fears X" claims in real threat-profile state.
  */
 
@@ -193,7 +193,15 @@ const THREAT_TYPE_TEMPLATES = Object.freeze({
 
 const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 
-/** 0..1 score → 4-band severity. Matches Phase 16 conditions. */
+// NOTE: severityBand (4-band) and currentStage (5-stage) measure DIFFERENT
+// axes of the same threat — band is "how bad" (matching conditions'
+// 4-band cut points) while stage is "how far along the progression." Their
+// boundaries are intentionally offset (e.g. critical≥0.75 vs imminent≥0.6),
+// so a high-band threat can read as 'active' rather than 'imminent'. This is by
+// design, not an off-by error; do not "align" them — consumers that quote both
+// rely on the two scales being independent.
+
+/** 0..1 score → 4-band severity. Matches conditions. */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.75) return 'critical';
@@ -216,7 +224,10 @@ export function severityToStage(severity) {
 
 /** @type {ReadonlyArray<{pattern: RegExp, type: string}>} */
 const TYPE_PATTERNS = Object.freeze([
-  { pattern: /siege|invasion|war/i,                 type: 'siege' },
+  // war is word-bounded (\bwar\b) so it no longer fires on substrings like
+  // 'seaward' / 'warden' / 'warehouse', which the old bare /war/ minted as
+  // phantom siege threats. siege/invasion/warfare stay as their own whole tokens.
+  { pattern: /siege|invasion|warfare|\bwar\b/i,     type: 'siege' },
   { pattern: /bandit|highwayman|raider/i,           type: 'bandit_raids' },
   { pattern: /plague|pestilence|epidemic|disease/i, type: 'plague' },
   { pattern: /famine|hunger|food.*deficit/i,        type: 'famine' },
@@ -224,9 +235,12 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /cult|conspiracy|hidden/i,             type: 'cult' },
   { pattern: /corruption|graft|bribe/i,             type: 'corruption' },
   { pattern: /riot|unrest|protest|sedition/i,       type: 'unrest' },
+  // The specific arcane / wild-magic pattern MUST precede the generic monster
+  // 'wild' pattern below — 'wild magic' contains 'wild', so the old ordering
+  // misclassified arcane instability as monster_pressure. Specific-before-generic.
+  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /monster|beast|wilderness|wild/i,      type: 'monster_pressure' },
   { pattern: /dragon|undead|fey|abyss/i,            type: 'monster_pressure' },
-  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /rival|neighbour|neighbor|hostile/i,   type: 'rival_neighbor' },
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);
@@ -379,7 +393,7 @@ export function collectThreatSources(settlement) {
     }
   }
 
-  // 7. Active conditions — Phase 16 — that are themselves threats
+  // 7. Active conditions — — that are themselves threats
   for (const cond of deriveAllActiveConditions(settlement)) {
     let inferredType;
     switch (cond.archetype) {
@@ -479,11 +493,54 @@ export function deriveThreatProfile(source, _settlement) {
   };
 }
 
-/** Derive every threat across all surfaces. Returns []. */
+/**
+ * Collapse threats by (type, target), keeping the highest-severity instance.
+ * This is the PRESSURE view: it answers "how many DISTINCT KINDS of pressure
+ * (per target) press the settlement?", deliberately folding away both
+ * cross-surface duplicates (e.g. config.monsterThreat AND a matching stressor)
+ * AND legitimately-distinct same-type instances (e.g. two hostile neighbours).
+ *
+ * It exists ONLY for consumers that SUM threat contributions — most importantly
+ * capacityModel's demand math, where charging the same kind of pressure once per
+ * surface/neighbour would double-count it and tip capacity bands on phantom load.
+ * It is NOT the enumeration view: deriveAllThreatProfiles below stays un-collapsed
+ * so explanation / contradictions / map / AI-grounding see every distinct threat.
+ *
+ * Determinism: iterates input order (collectThreatSources is deterministic) and
+ * keeps the first max-severity instance, so the per-(type,target) survivor and
+ * the summed demand it drives are byte-stable across runs.
+ *
+ * @param {any[]} profiles
+ * @returns {any[]} one profile per (type, target), max severity wins.
+ */
+export function dedupeThreatsByPressure(profiles) {
+  const byKey = new Map();
+  for (const p of profiles) {
+    if (!p) continue;
+    const key = `${p.type || 'other'}|${p.target || 'settlement'}`;
+    const prior = byKey.get(key);
+    if (!prior || (p.severity || 0) > (prior.severity || 0)) byKey.set(key, p);
+  }
+  return Array.from(byKey.values());
+}
+
+/**
+ * Derive every threat across all surfaces, un-collapsed: each distinct threat
+ * survives enumeration so consumers can address them individually (e.g. two
+ * hostile neighbours both surface in explanations / contradictions / map /
+ * AI-grounding). Note: the same underlying pressure expressed on more than one
+ * surface CAN therefore appear more than once here — that is intentional for
+ * enumeration. Summation consumers must collapse first via
+ * dedupeThreatsByPressure (capacityModel does this in its demand math) so they
+ * do not double-count a single pressure.
+ *
+ * @param {any} settlement
+ * @returns {any[]} every derived ThreatProfile, un-collapsed.
+ */
 export function deriveAllThreatProfiles(settlement) {
   if (!settlement) return [];
   const sources = collectThreatSources(settlement);
-  return sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean);
+  return /** @type {any[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
@@ -504,7 +561,7 @@ export function threatBreakdown(settlement) {
 
 /**
  * Flat list of system variables pressured by the active threats.
- * Useful for the Phase 17 substrate to cross-reference. Deduplicated.
+ * Useful for the substrate to cross-reference. Deduplicated.
  */
 export function pressuresOnSubstrate(settlement) {
   const out = new Set();
@@ -519,7 +576,7 @@ export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
   return profiles.map(t =>
-    `${t.label} — ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
+    `${t.label}: ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
   );
 }
 

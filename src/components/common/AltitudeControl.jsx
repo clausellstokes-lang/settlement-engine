@@ -1,31 +1,34 @@
 /**
- * AltitudeControl — the 3-segment progressive-disclosure control (UX overhaul
- * Phase 1, plan §3.2). Overview / Detail / Engine ↔ guided / standard / expert,
- * bound to the persisted `userPrefs.detailLevel` via useAltitude().
+ * AltitudeControl — the 3-segment progressive-disclosure control.
+ * Overview / Detail / Engine ↔ guided / standard / expert.
  *
- * Pure presentational + the store binding. Mounted NOWHERE yet — it is wired
- * into the dossier/realm/PDF surfaces in later phases. A single axis replaces the
- * scattered legacy flags so a new DM lands at Overview and a power user stays at
- * Engine.
+ * Two modes:
+ *   - Uncontrolled (default): binds to the persisted `userPrefs.detailLevel`
+ *     via useAltitude(). For one global reading-depth pref.
+ *   - Controlled: pass `value` + `onChange` to scope it to a single surface
+ *     (e.g. the Substrate tab's local depth), so a minor density preference
+ *     lives ON the content it modulates rather than as a global mode switch.
  */
 
 import { useAltitude } from '../../hooks/useAltitude.js';
 import Button from '../primitives/Button.jsx';
-import { GOLD, GOLD_BG, INK, MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, GOLD_BG, INK, BODY, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 
 // The three rungs, in ascending depth. `label` is the user-facing word; `hint`
 // is the tooltip; `level` is the pref value the segment writes.
 const SEGMENTS = [
-  { level: 'guided', label: 'Overview', hint: 'A clean glance — the friendly summary.' },
+  { level: 'guided', label: 'Overview', hint: 'A clean glance. The friendly summary.' },
   { level: 'standard', label: 'Detail', hint: 'Band readouts with plain-language "why".' },
   { level: 'expert', label: 'Engine', hint: 'The full causal grid, pressures, and strength.' },
 ];
 
 /**
- * @param {{ size?: 'sm'|'md', ariaLabel?: string }} [props]
+ * @param {{ size?: 'sm'|'md', ariaLabel?: string, value?: 'guided'|'standard'|'expert', onChange?: (level: string) => void }} [props]
  */
-export default function AltitudeControl({ size = 'md', ariaLabel = 'Detail level' } = {}) {
-  const { level, setLevel } = useAltitude();
+export default function AltitudeControl({ size = 'md', ariaLabel = 'Detail level', value, onChange } = {}) {
+  const store = useAltitude();
+  const level = value != null ? value : store.level;
+  const setLevel = onChange != null ? onChange : store.setLevel;
   const pad = size === 'sm' ? '3px 8px' : `${SP.xs}px ${SP.sm}px`;
   const fontSize = size === 'sm' ? FS.xs : FS.sm;
 
@@ -62,7 +65,9 @@ export default function AltitudeControl({ size = 'md', ariaLabel = 'Detail level
               padding: pad,
               fontSize,
               fontWeight: active ? 800 : 600,
-              color: active ? INK : MUTED,
+              // Inactive segments were MUTED (~3.4:1, fails AA); BODY keeps the
+              // un-selected options legible.
+              color: active ? INK : BODY,
               background: active ? GOLD_BG : 'transparent',
               border: 'none',
               borderLeft: i === 0 ? 'none' : `1px solid ${BORDER}`,

@@ -21,10 +21,10 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
+import { UserPlus, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -119,7 +119,7 @@ export default function SuccessorPrompt() {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="succession-title" style={titleStyle}>
-            <Crown size={16} aria-hidden="true" color={GOLD} /> A leader is gone.
+            A leader is gone.
           </h2>
           <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={dismiss} />
         </header>
@@ -145,6 +145,7 @@ export default function SuccessorPrompt() {
                   <button
                     key={npc.id || npc.name}
                     type="button"
+                    aria-label={`Appoint ${npc.name} as successor`}
                     onClick={() => pickSuccessor(npc)}
                     style={successorBtnStyle}
                   >
@@ -157,7 +158,6 @@ export default function SuccessorPrompt() {
                         {npc.importance ? ` · ${npc.importance}` : ''}
                       </div>
                     </div>
-                    <ArrowRight size={14} aria-hidden="true" color={GOLD} />
                   </button>
                 ))}
               </div>

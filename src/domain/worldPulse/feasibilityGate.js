@@ -183,7 +183,7 @@ export function classifyFeasibility({
 
   // The plausible band: a real contest. Hand it to RNG (open-topped above the floor).
   if (ratio >= PLAUSIBLE_FLOOR) {
-    reasons.push('Within the plausible band — the contest is decided by the siege roll.');
+    reasons.push('Within the plausible band: the contest is decided by the siege roll.');
     return { verdict: 'plausible', ratio, reasons };
   }
 
@@ -196,11 +196,11 @@ export function classifyFeasibility({
   const magic = magicEdge(attackerFacets, defenderFacets) >= MAGIC_EDGE_POINTS;
 
   if (collapse) {
-    reasons.push('Defender is internally fractured (coup / rebellion / legitimacy crisis) — the gates may open from within.');
+    reasons.push('Defender is internally fractured (coup / rebellion / legitimacy crisis); the gates may open from within.');
     return { verdict: 'require_betrayal', ratio, reasons };
   }
   if (magic) {
-    reasons.push('Attacker holds a decisive war-magic advantage — arcane force could tip an otherwise-hopeless siege.');
+    reasons.push('Attacker holds a decisive war-magic advantage; arcane force could tip an otherwise-hopeless siege.');
     return { verdict: 'require_magic', ratio, reasons };
   }
 
@@ -210,25 +210,25 @@ export function classifyFeasibility({
   // coalition sum clears the floor the matchup is already `plausible` above.
   if (ratio >= HARASSMENT_FLOOR) {
     if (coalitionSize <= 1) {
-      reasons.push('Too weak to break the town alone, but a coalition could — the solo siege is blocked.');
+      reasons.push('Too weak to break the town alone, but a coalition could, so the solo siege is blocked.');
       return { verdict: 'require_coalition', ratio, reasons };
     }
     // A multi-besieger coalition that still falls short here drops to harassment.
-    reasons.push('Even the coalition falls short of a plausible storm — it can only harass.');
+    reasons.push('Even the coalition falls short of a plausible storm; it can only harass.');
     return { verdict: 'harassment', ratio, reasons };
   }
 
   // Below the harassment floor. A weak attacker can still RAID (a low-severity
   // pressure), unless it is utterly hopeless, in which case the siege auto-fails.
   if (ratio >= AUTO_FAIL_CEILING) {
-    reasons.push('Far too weak to siege — the most it can do is harass the approaches.');
+    reasons.push('Far too weak to siege; the most it can do is harass the approaches.');
     return { verdict: 'harassment', ratio, reasons };
   }
   if (ratio >= HOPELESS_CEILING) {
-    reasons.push('Hopelessly outmatched — a siege deterministically fails (it may still harass).');
+    reasons.push('Hopelessly outmatched; a siege deterministically fails, though it may still harass.');
     return { verdict: 'harassment', ratio, reasons };
   }
-  reasons.push('Utterly outmatched (e.g. a thorpe vs a fortified city) — the siege cannot succeed.');
+  reasons.push('Utterly outmatched, a thorpe against a fortified city; the siege cannot succeed.');
   return { verdict: 'auto_fail', ratio, reasons };
 }
 

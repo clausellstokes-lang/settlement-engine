@@ -125,7 +125,7 @@ export function extractFullContext(s) {
     stresses: stresses.map(st => st?.label || st?.type).filter(Boolean),
 
     // Economy
-    prosperity:   via.summary?.split('—')[0]?.trim() || null,
+    prosperity:   via.summary?.split(/[—:]/)[0]?.trim() || null,
     econScore:    Math.round(eco.compound?.economyOutput ?? scores.economic ?? 50),
     chains:       chains.map(c => `${c.label || c.chainId} (${c.status || 'ok'})`).slice(0, 8),
     // incomeSources live on economicState (economicGenerator's return), NOT

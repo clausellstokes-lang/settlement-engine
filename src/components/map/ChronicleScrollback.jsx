@@ -92,7 +92,7 @@ function DiffRow({ diff }) {
       <span style={{ color: MUTED }}>
         {diff.bandBefore} → {diff.bandAfter}
       </span>
-      {diff.explanation && <span style={{ color: SECOND }}> — {diff.explanation}</span>}
+      {diff.explanation && <span style={{ color: SECOND }}> ({diff.explanation})</span>}
     </li>
   );
 }
@@ -137,7 +137,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
     return (
       <div data-testid="chronicle-scrollback-empty" style={{
         padding: SP.md, border: `1px dashed ${BORDER2}`, borderRadius: R.md,
-        color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
+        color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
       }}>
         No chronicle yet. Advance the realm to record its history; the timeline will
         fill tick by tick.
@@ -183,14 +183,13 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
 
       {/* A compact tick rail so a DM can jump across the whole history. */}
       {timeline.length > 1 && (
-        <div role="tablist" aria-label="Timeline ticks" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+        <div role="group" aria-label="Timeline ticks" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
           {timeline.map((t, i) => (
             <Button
               key={t.tick}
               variant="ghost"
               size="sm"
-              role="tab"
-              aria-selected={i === safeIndex}
+              aria-pressed={i === safeIndex}
               aria-label={`Tick ${t.tick}`}
               onClick={() => setIndex(i)}
               style={{
@@ -198,7 +197,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
                 border: `1px solid ${i === safeIndex ? GOLD : BORDER2}`,
                 borderRadius: R.sm,
                 background: i === safeIndex ? GOLD : CARD,
-                color: i === safeIndex ? '#fffbf5' : SECOND,
+                color: i === safeIndex ? INK : SECOND,
                 fontSize: FS.micro, fontWeight: 850,
               }}
             >
@@ -255,8 +254,8 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       )}
 
       {selected.headlines.length === 0 && selected.chronicles.length === 0 && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, padding: SP.sm }}>
-          A quiet tick — no material changes were recorded.
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, padding: SP.sm }}>
+          A quiet tick. No material changes were recorded.
         </div>
       )}
     </div>

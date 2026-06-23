@@ -13,7 +13,7 @@
 import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
-import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R } from '../theme.js';
+import { INK, MUTED, BODY, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -46,7 +46,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
 
   const s = settlement.settlement || settlement;
   const name  = s.name || settlement.name || 'Untitled';
-  const tier  = s.tier || settlement.tier || ', ';
+  const tier  = s.tier || settlement.tier || '–';
   const pop   = s.population || 0;
   const culture = s.culture || s.cultureName || '';
   const terrain = s.terrain || '';
@@ -104,7 +104,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
         <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, marginBottom: 2 }}>
           {name}
         </div>
-        <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
+        <div style={{ fontSize: FS.xxs, color: BODY, letterSpacing: '0.04em', marginBottom: SP.sm }}>
           {tier}{pop ? ` · ${pop.toLocaleString()} pop` : ''}
         </div>
 

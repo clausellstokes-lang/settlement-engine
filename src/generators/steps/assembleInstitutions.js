@@ -19,7 +19,7 @@ import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 
-// ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
+// ── Trace helpers ────────────────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
 // PipelineRail / AI overlay / future faction-profile readers can answer
 // "why does this institution exist on this settlement?"
@@ -48,7 +48,7 @@ function chanceCause(baseChance, resourceMult) {
 }
 
 /** Downstream effect inferred from institution tags. Light heuristic;
- *  the real version of this lives in Tier 2.4's unified causal state. */
+ *  the real version of this lives in the unified causal state. */
 function tagsToDownstream(tags) {
   if (!Array.isArray(tags) || tags.length === 0) return [];
   const effects = [];
@@ -192,7 +192,7 @@ export function collapseUpgradeChains(institutions) {
 
 registerStep('assembleInstitutions', {
   deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
-  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: ['institutions', 'catalogForTier'],
   phase: 'institutions',
 }, (ctx, rng) => {
@@ -401,10 +401,16 @@ registerStep('assembleInstitutions', {
   // real `category` so they land in the right dossier section. Iterated in a
   // stable name order so the rng rolls are deterministic; when the user has no
   // custom institutions this loop is a no-op and consumes no rng (zero change to
-  // existing generation).
+  // existing generation). The order MUST be codepoint-stable, NOT localeCompare:
+  // the loop below consumes rng per item, so a locale-/ICU-dependent sort would
+  // make the SAME seed pick a DIFFERENT set of custom institutions across
+  // machines — a direct 'same seed => same settlement' violation.
   const customInstitutions = (customDeps.registry().listCustom?.('institutions') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort((a, b) => {
+      const an = String(a.name), bn = String(b.name);
+      return an < bn ? -1 : an > bn ? 1 : 0;
+    });
   for (const entry of customInstitutions) {
     const item = entry.raw || {};
     const name = entry.name;
@@ -453,7 +459,7 @@ registerStep('assembleInstitutions', {
     }
   }
 
-  // Wave 8 — stamp catalog identity on every catalog-derived institution.
+  // Stamp catalog identity on every catalog-derived institution.
   // Pure name→id lookup: consumes no rng, changes no other field, so
   // same-seed output is byte-identical except the new catalogId fields
   // (pinned by tests/joins/institutionIdentity.test.js). Custom/DM
@@ -465,7 +471,7 @@ registerStep('assembleInstitutions', {
     if (catalogId) inst.catalogId = catalogId;
   }
 
-  // Structural validation moved to structuralValidationPass (Wave 4b): it
+  // Structural validation moved to structuralValidationPass: it
   // must run AFTER the last roster mutation (subsumption / cascade /
   // isolation / factionCorrelation) or the coherence receipt describes a
   // roster that no longer exists.

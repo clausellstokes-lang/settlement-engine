@@ -1,6 +1,6 @@
 /**
  * domain/events/partyEventLinkage.js — bridge party-caused settlement events
- * into the world-pulse engine (§8 M3b Phase 2).
+ * into the world-pulse engine.
  *
  * A settlement-level "Make Changes" event marked "caused by the party" should
  * not just be attributed — when it has a world-scale analog it should also

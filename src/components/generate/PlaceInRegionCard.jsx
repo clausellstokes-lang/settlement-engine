@@ -1,6 +1,6 @@
 /**
  * PlaceInRegionCard — the premium "Place in Region" close-out for the Create
- * flow (UX overhaul Phase 6, plan §4.3). A worldbuilder's birth-time intent:
+ * flow. A worldbuilder's birth-time intent:
  * assign the settlement-to-be to a campaign/region and (optionally) name a patron
  * deity at birth.
  *
@@ -16,10 +16,9 @@
  */
 
 import { useMemo } from 'react';
-import { MapPin, Lock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
-import { INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, R, PROSE_MAX } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export default function PlaceInRegionCard() {
@@ -44,9 +43,10 @@ export default function PlaceInRegionCard() {
   };
   const heading = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-      <MapPin size={15} color={GOLD} />
       <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>Place in Region</span>
-      <span style={{ fontSize: FS.xs, color: MUTED }}>premium</span>
+      {/* Subordinate qualifier pushed to the far right so the title is the
+          unambiguous single focal point of the header. */}
+      <span style={{ marginLeft: 'auto', fontSize: FS.xs, color: BODY }}>premium</span>
     </div>
   );
 
@@ -56,11 +56,10 @@ export default function PlaceInRegionCard() {
       <div data-testid="place-in-region-card" style={wrap}>
         {heading}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>
-          <Lock size={13} color={MUTED} />
           <span style={{ flex: 1 }}>
             Assign this settlement to a campaign and a patron deity at birth, then advance the region for years.
           </span>
-          <Button variant="ghost" size="sm" onClick={() => setPurchaseModalOpen?.(true)} style={{ color: GOLD, fontWeight: 800 }}>
+          <Button variant="gold" size="sm" onClick={() => setPurchaseModalOpen?.(true)}>
             Upgrade
           </Button>
         </div>
@@ -74,7 +73,7 @@ export default function PlaceInRegionCard() {
   return (
     <div data-testid="place-in-region-card" style={wrap}>
       {heading}
-      <p style={{ fontSize: FS.xs, color: SECOND, margin: `0 0 ${SP.sm}px`, lineHeight: 1.4 }}>
+      <p style={{ fontSize: FS.xs, color: SECOND, margin: `0 0 ${SP.sm}px`, lineHeight: 1.4, maxWidth: PROSE_MAX }}>
         Optional. Choose where this settlement is born and who its people pray to. You can change both later.
       </p>
 
@@ -91,7 +90,7 @@ export default function PlaceInRegionCard() {
             {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
           {campaigns.length === 0 && (
-            <span style={{ fontSize: FS.xxs, color: MUTED }}>No campaigns yet — create one in the Realm, then return here.</span>
+            <span style={{ fontSize: FS.xs, color: BODY }}>No campaigns yet. Create one in the Realm, then return here.</span>
           )}
         </label>
 
@@ -107,13 +106,17 @@ export default function PlaceInRegionCard() {
             {deities.map(d => <option key={d.refId} value={d.refId}>{d.name}</option>)}
           </select>
           {deities.length === 0 && (
-            <span style={{ fontSize: FS.xxs, color: MUTED }}>Author a deity in the Compendium to assign one at birth.</span>
+            <span style={{ fontSize: FS.xs, color: BODY }}>Author a deity in the Compendium to assign one at birth.</span>
           )}
         </label>
       </div>
 
+      {/* Footer summary of the chosen-state outcome — the card's highest-signal
+          content once an assignment is made. Flattened to a single top rule (no
+          nested border-box) and raised above the field labels so the "what will
+          happen" fact is not the quietest element on screen. */}
       {(targetId || deityRef) && (
-        <div style={{ marginTop: SP.sm, padding: `${SP.xs}px ${SP.sm}px`, background: swatch['#F5EDE0'], border: `1px solid ${BORDER}`, borderRadius: R.sm, fontSize: FS.xxs, color: BODY, lineHeight: 1.4 }}>
+        <div style={{ marginTop: SP.md, paddingTop: SP.sm, borderTop: `1px solid ${BORDER}`, fontSize: FS.sm, color: BODY, lineHeight: 1.4, maxWidth: PROSE_MAX }}>
           On save, this settlement will be offered to{' '}
           {targetId ? <strong>{campaigns.find(c => c.id === targetId)?.name || 'the chosen campaign'}</strong> : 'no campaign'}
           {deityRef ? <> with <strong>{deities.find(d => d.refId === deityRef)?.name || 'its patron deity'}</strong> as its patron.</> : '.'}

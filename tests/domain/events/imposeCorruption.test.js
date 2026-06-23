@@ -69,4 +69,45 @@ describe('IMPOSE_CORRUPTION', () => {
     const next = impose(s, 'Nobody In Particular');
     expect(next.npcs.every(n => !n.corrupt)).toBe(true);
   });
+
+  it('scope "individual" (default) does NOT mark the home institution', () => {
+    const next = impose(settlement(), 'Honest Mira', { scope: 'individual' });
+    const watch = next.institutions.find(i => i.name === 'City Watch');
+    expect((watch.impairments || []).some(im => im.type === 'corruption')).toBe(false);
+  });
+
+  it('scope "individual_institution" covertly compromises the NPC home institution', () => {
+    // Mira homes in the City Watch; the bigger scope marks it with a COVERT
+    // corruption impairment (not a public legitimacy hit).
+    const next = impose(settlement(), 'Honest Mira', { scope: 'individual_institution' });
+    const watch = next.institutions.find(i => i.name === 'City Watch');
+    const mark = (watch.impairments || []).find(im => im.type === 'corruption');
+    expect(mark).toBeTruthy();
+    expect(mark.covert).toBe(true);
+    expect(mark.type).not.toBe('legitimacy'); // covert, not a public scandal
+    // The NPC is still turned exactly as the individual scope would.
+    expect(next.npcs.find(n => n.name === 'Honest Mira').corrupt).toBe(true);
+  });
+
+  it('the covert institution-scope mark never leaks to the revealed exposure channel', async () => {
+    // The covert mark feeds the sim through compromisedSecurityInstitutions: it
+    // must read as covert, never revealed, or it would raise the exposure
+    // visibility of the very NPC it was meant to conceal (the inverse of intent).
+    const { compromisedSecurityInstitutions, patronageSecurityDrag } = await import('../../../src/domain/corruption.js');
+    const next = impose(settlement(), 'Honest Mira', { scope: 'individual_institution' });
+    const { covert, revealed } = compromisedSecurityInstitutions(next);
+    expect(covert).toContain('City Watch');
+    expect(revealed).toHaveLength(0);
+    expect(patronageSecurityDrag(next).revealed).toHaveLength(0);
+  });
+});
+
+describe('IMPOSE_CORRUPTION stateDeltas — scope drives a distinct, larger dial', () => {
+  it('the institution scope moves a strictly larger resilience hit than the individual scope', async () => {
+    const { EVENT_REGISTRY } = await import('../../../src/domain/events/registry.js');
+    const ind = EVENT_REGISTRY.IMPOSE_CORRUPTION.stateDeltas({ payload: { scope: 'individual', severity: 0.5 } });
+    const inst = EVENT_REGISTRY.IMPOSE_CORRUPTION.stateDeltas({ payload: { scope: 'individual_institution', severity: 0.5 } });
+    expect(inst.resilience).toBeLessThan(ind.resilience); // more negative = bigger hit
+    expect(Math.abs(inst.resilience)).toBeGreaterThan(Math.abs(ind.resilience));
+  });
 });

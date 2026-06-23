@@ -258,12 +258,16 @@ test.describe('regional causality campaign UI', () => {
     await campaignSelect.selectOption(campaignValue);
 
     // P4/P5 IA move: the standalone "Show Wizard News" view is gone — the news
-    // feed now lives in the Chronicle tab of the Realm Inspector, opened from
-    // the toolbar "News" button.
-    await page.getByTitle('Show the Chronicle in the Realm Inspector').click();
+    // feed now lives in the Chronicle tab of the Realm Inspector. A later
+    // consolidation folded the dedicated "News"/Chronicle toolbar opener into
+    // the single "Inspector" toggle (WorldMapToolbar.jsx: "the toolbar Pulse /
+    // News / Pantheon openers were removed"), with Pulse / War / Pantheon /
+    // Chronicle now living as its tabs (RealmInspector.jsx). So we open the
+    // inspector, then switch to its Chronicle tab.
+    await page.getByTitle('Toggle the Realm Inspector').click();
+    await page.getByRole('button', { name: 'Chronicle' }).click();
 
-    // The Realm Inspector opens at the Chronicle section, which renders the
-    // WizardNewsPanel with the seeded entries.
+    // The Chronicle section renders the WizardNewsPanel with the seeded entries.
     await expect(page.getByText('Most Significant News')).toBeVisible();
     await expect(page.getByText('Millcross faces import shortage')).toBeVisible();
     await expect(page.getByText('Realm Notables')).toBeVisible();

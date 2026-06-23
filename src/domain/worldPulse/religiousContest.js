@@ -1,11 +1,11 @@
 /**
- * domain/worldPulse/religiousContest.js — Feature D core (deity contest +
- * conversion spread + religious_authority mint), R2.
+ * domain/worldPulse/religiousContest.js — the religion core (deity contest +
+ * conversion spread + religious_authority mint).
  *
  * "C's primary faith" is a CONTESTABLE PRIZE. C's embedded deity (the incumbent)
  * holds it; neighbouring deities that reach C along a religious_authority carrier
  * channel contest to convert it. The contest math, the incumbency amplifier, the
- * determinism, and the tie-break all live in the shared F3 primitive
+ * determinism, and the tie-break all live in the shared primitive
  * `contestOverThirdParty`; this module is a thin caller that enumerates contests
  * deterministically and supplies a single blended 0..1 `scoreFor` per contender.
  *
@@ -23,8 +23,8 @@
  * a parallel spread.
  *
  * DOUBLE GATE — byte-identical when dormant. Religion ACTS only when BOTH hold:
- *   (a) rules.religionDynamicsEnabled (the R2 opt-in flag, default false), AND
- *   (b) isSubsystemActive(snapshot,'religion') (F2 — true iff ≥1 settlement carries
+ *   (a) rules.religionDynamicsEnabled (the opt-in flag, default false), AND
+ *   (b) isSubsystemActive(snapshot,'religion') (true iff ≥1 settlement carries
  *       an embedded config.primaryDeitySnapshot).
  * If EITHER is false ⇒ pure no-op returning empties (no mints, no contests, no
  * conversions) ⇒ byte-identical legacy. A no-deity campaign is unchanged even with
@@ -46,6 +46,7 @@ import { mintDirectedChannel, stablePart } from '../region/graph.js';
 import { clamp01 } from '../region/contestMath.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { normalizeStressor } from './stressors.js';
+import { PANTHEON_TUNING } from './pantheon.js';
 
 const CHANNEL_TYPE = 'religious_authority';
 // The relationship labels that carry a faith — a deity's influence travels with
@@ -62,8 +63,10 @@ const FAITH_CARRIER_CHANNELS = Object.freeze([
 ]);
 // A neighbour deity needs a minimally-real carrier strength to even contest.
 const MIN_CARRIER = 0.15;
-// Deity rank → base 0..1 strength (major god > minor god > cult).
-const DEITY_RANK_STRENGTH = Object.freeze({ major: 0.95, minor: 0.6, cult: 0.35 });
+// Deity rank → base 0..1 strength (major god > minor god > cult). Sourced from the
+// zero-import pantheon tuning leaf so the engine and the presentation layer read ONE
+// constant; re-exported here for back-compat with the engine's public surface.
+export const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -237,7 +240,7 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
  */
 export function evaluateReligiousContest({ snapshot, worldState = null, rng, tick = 0, now = null, rules = {} }) {
   void worldState;
-  // ── DOUBLE GATE: byte-identical no-op unless BOTH the opt-in flag AND the F2
+  // ── DOUBLE GATE: byte-identical no-op unless BOTH the opt-in flag AND the
   //    activation gate hold. Either false ⇒ empties (no mint, no contest). ─────
   if (!rules?.religionDynamicsEnabled) return { outcomes: [], graphChannels: [] };
   if (!isSubsystemActive(snapshot, 'religion')) return { outcomes: [], graphChannels: [] };
@@ -367,7 +370,7 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
       targetSaveId: convertId,
       severity: clamp01(0.45 + (1 - cOrthodoxy) * 0.25),
       headline: `${nameFor(convertId)} converts to the faith of ${winnerSnapshot.name || nameFor(winnerHomeId)}`,
-      summary: `${nameFor(winnerHomeId)}'s creed — ${winnerSnapshot.name || 'a foreign faith'} — has displaced the old orthodoxy in ${nameFor(convertId)}.`,
+      summary: `${nameFor(winnerHomeId)}'s creed (${winnerSnapshot.name || 'a foreign faith'}) has displaced the old orthodoxy in ${nameFor(convertId)}.`,
       reasons: [
         `${winnerSnapshot.name || nameFor(winnerHomeId)} (${winnerSnapshot.rankAxis || 'minor'}) won the faith contest over ${nameFor(convertId)}.`,
         `${nameFor(convertId)}'s orthodoxy ${cOrthodoxy.toFixed(2)} could not hold its flock.`,

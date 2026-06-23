@@ -6,8 +6,7 @@
  * its own surface, not a mode listed here.
  */
 
-import { Zap, Settings } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER2, CARD, serif_, SP, R, FS } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER2, CARD, serif_, SP, R, FS, ELEV } from '../theme.js';
 import { backgroundImageUrl, MODE_BACKGROUNDS } from '../../config/pageBackgrounds.js';
 
 export function ModeSelector({ mode, onModeChange, large = false }) {
@@ -22,8 +21,8 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
   // not a mode listed here. Anonymous users see the hero only — these mode
   // cards are gated to signed-in users (Basic/Advanced require a free sign-in).
   const modes = [
-    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen. Set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
-    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
+    { id: 'basic',    label: 'Basic Generate',    desc: 'Character + foundations. The rest is rolled.', longDesc: 'Pick a character and set the foundations: size, culture, terrain. The simulator rolls priorities, institutions, services, and trade for you. The fastest way to a usable settlement; refine it afterward.' },
+    { id: 'advanced', label: 'Advanced Generate', desc: 'Every dial: institutions, services, trade.',   longDesc: 'Everything in Basic, plus the Fine-tune sliders and hard constraints on institutions, services, and trade. Full control over the probability space, for when you have a specific settlement in mind.' },
   ];
 
   return (
@@ -34,7 +33,18 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
       flexWrap: 'wrap',
       padding: large ? `${SP.xxl}px 0` : `${SP.sm}px 0`,
     }}>
-      {modes.map(({ id, label, desc, Icon, longDesc }) => {
+      {/* Keyboard focus must be perceivable in its own right, not only via the
+          JS onFocus handler that mirrors hover. This encodes focus in two
+          channels — a solid outline AND a gold ring — independent of pointer
+          state, so it survives even if the hover-mirroring handlers are skipped. */}
+      <style>{`
+        .sf-mode-card:focus-visible {
+          outline: 2px solid ${GOLD};
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px ${GOLD_BG};
+        }
+      `}</style>
+      {modes.map(({ id, label, desc, longDesc }) => {
         const active = mode === id;
         return (
           <button
@@ -43,10 +53,11 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
             aria-pressed={active}
             aria-label={label}
             onClick={() => onModeChange(id)}
-            className={large ? `mode-card-bg${active ? ' is-active' : ''}` : undefined}
+            className={`sf-mode-card${large ? ` mode-card-bg${active ? ' is-active' : ''}` : ''}`}
             style={{
-              flex: large ? '1 1 280px' : '1 1 200px',
+              flex: large ? '1 1 280px' : '1 1 150px',
               maxWidth: large ? 360 : 260,
+              minHeight: 44,
               padding: large ? `${SP.xxl}px ${SP.xl}px` : `${SP.xl - 2}px ${SP.lg}px`,
               ...(large
                 ? { '--card-bg': backgroundImageUrl(MODE_BACKGROUNDS[id]) }
@@ -56,34 +67,33 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
               cursor: 'pointer',
               textAlign: 'center',
               transition: 'all 0.2s',
-              boxShadow: large ? '0 4px 16px rgba(28,20,9,0.08)' : 'none',
+              boxShadow: large ? ELEV[1] : 'none',
             }}
             onMouseOver={e => {
               if (!large) return;
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
+              e.currentTarget.style.boxShadow = ELEV[2];
               e.currentTarget.style.borderColor = GOLD;
             }}
             onFocus={e => {
               if (!large) return;
               e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
+              e.currentTarget.style.boxShadow = ELEV[2];
               e.currentTarget.style.borderColor = GOLD;
             }}
             onMouseOut={e => {
               if (!large) return;
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
+              e.currentTarget.style.boxShadow = ELEV[1];
               e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
             }}
             onBlur={e => {
               if (!large) return;
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
+              e.currentTarget.style.boxShadow = ELEV[1];
               e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
             }}
           >
-            <Icon size={large ? 40 : 24} color={active ? GOLD : (large ? GOLD : MUTED)} style={{ marginBottom: large ? SP.md : 6 }} />
             <div style={{
               fontSize: large ? FS.xxl : FS.lg,
               fontWeight: 700,

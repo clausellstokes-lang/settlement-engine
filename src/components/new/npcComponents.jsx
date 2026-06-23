@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
-import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
@@ -70,7 +69,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
               <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
             </div>
             <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
@@ -107,7 +106,7 @@ export function ConflictCard({conflict:c}) {
 
 // Inline NPC card — replaces the removed NPCCard export
 function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
-  // Tier 5.4 — manual prose editing. editMode is the global toggle on
+  // Manual prose editing. editMode is the global toggle on
   // the dossier header. The save/revert handlers look up the NPC's
   // index by id at edit time so the action targets the right entity
   // even if the npcs array has been re-sorted upstream.
@@ -171,11 +170,15 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           <span
             role="button"
             tabIndex={0}
+            aria-pressed={isPinned}
+            aria-label={isPinned
+              ? 'Pinned. This figure holds steady when you reforge or advance time.'
+              : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned. This NPC will not be rewritten by regenerate/progress.'
-              : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
+              ? 'Pinned. This figure holds steady when you reforge or advance time.'
+              : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
@@ -187,7 +190,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               transition:'all 0.15s',
             }}
           >
-            <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
+            <span aria-hidden="true" style={{fontSize:FS.xs,fontWeight:isPinned?800:600,lineHeight:1}}>{isPinned ? '●' : '○'}</span>
           </span>
         )}
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
@@ -219,7 +222,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           )}
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
-              Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
+              Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
           {npc.goal?.short && (

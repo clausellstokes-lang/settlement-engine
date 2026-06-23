@@ -24,12 +24,16 @@ export function TabIntro({ tabKey }) {
   // pseudo-string — keeps adoption safe.
   if (!line || line === `tabs.${tabKey}`) return null;
   return (
+    // Quiet supporting caption, NOT a heading: demoted from FS.xl (near the
+    // settlement-name size) to FS.sm muted so the scan hits the settlement
+    // identity + state first and the tone line reads as a subordinate caption,
+    // not the layer-cake's top headline. Shared by every tab. (P4 / P6.)
     <p style={{
-      margin: '0 0 14px 0',
+      margin: '0 0 12px 0',
       fontFamily: 'Crimson Text, Georgia, serif',
-      fontSize: FS.xl,
+      fontSize: FS.sm,
       fontStyle: 'italic',
-      color: BODY,       // ink-600 — WCAG-passing body
+      color: BODY,       // ink-600 — keeps AA on the readable caption
       lineHeight: 1.5,
     }}>
       {line}

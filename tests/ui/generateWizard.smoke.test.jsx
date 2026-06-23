@@ -3,8 +3,8 @@
  *
  * tests/ui/generateWizard.smoke.test.jsx — Decomposition lock-in.
  *
- * GenerateWizard.jsx had four in-file sub-components extracted into
- * src/components/generate/* (ChangeModeBar, ModeSelector, StepIndicator,
+ * GenerateWizard.jsx had in-file sub-components extracted into
+ * src/components/generate/* (ChangeModeBar, ModeSelector,
  * SaveToLibraryButton). This is a behavior-preserving move, so the
  * regression net is simply: the wizard still mounts and renders without
  * throwing, wiring the extracted imports together correctly. If a

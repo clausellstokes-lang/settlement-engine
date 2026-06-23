@@ -1,10 +1,9 @@
 /**
  * domain/counterfactual.js — "What if removed?" causal projection.
  *
- * Tier 4.17 of the roadmap. This is the pure composition tier:
- * everything Phases 17, 18, 19, 21, 22 produced — substrate diffs,
- * event pipeline, explanation envelopes, capacity supply/demand,
- * daily-life slots — can now answer:
+ * This is the pure composition layer: everything the structured
+ * derivations produced — substrate diffs, event pipeline, explanation
+ * envelopes, capacity supply/demand, daily-life slots — can now answer:
  *
  *   counterfactual(settlement, { type, id, action }) ->
  *     CounterfactualResult {
@@ -26,22 +25,22 @@
  *   replace     — remove and substitute (future iteration)
  *
  * Supported entity types in V1:
- *   institution   — uses Phase 18 event pipeline
+ *   institution   — uses event pipeline
  *                   (REMOVE_INSTITUTION / DAMAGE_INSTITUTION / ADD_INSTITUTION)
- *   npc           — KILL_NPC via Phase 18
+ *   npc           — KILL_NPC via the event pipeline
  *   faction       — manual clone-and-modify (no event archetype yet)
  *   chain         — manual clone-and-modify of chain status
  *
  * Pure function. The input settlement is never mutated.
  *
  * Compounding payoff:
- *   - This is the "ifRemoved" Phase 19 envelope, but ACTUALLY RUN.
+ *   - This is the "ifRemoved" envelope, but ACTUALLY RUN.
  *     The pure projection lets the UI show real numeric deltas with
  *     real prose, not authored guesses.
- *   - Tier 5.1 (causal delta summaries after regeneration) is the
+ *   - Causal delta summaries after regeneration are the
  *     same shape as a counterfactual diff — both consume the same
  *     helpers.
- *   - Tier 6.1 (AI grounded-in-trace) — the counterfactual result is
+ *   - For AI grounded-in-trace, the counterfactual result is
  *     a complete grounding envelope the AI can describe with prose.
  */
 
@@ -168,7 +167,7 @@ export function counterfactual(settlement, ref) {
   const beforeCapacities  = deriveAllCapacities(settlement);
   const beforeDailyLife   = deriveDailyLife(settlement);
 
-  // 2. Run the projection — either through Phase 18 event pipeline
+  // 2. Run the projection — either through event pipeline
   // (institutions / npcs) or via manual clone-and-modify (factions /
   // chains).
   let nextSettlement;
@@ -186,7 +185,7 @@ export function counterfactual(settlement, ref) {
     if (nextSettlement === settlement) {
       warnings.push({
         severity: 'mismatch',
-        message: `No counterfactual path for ${ref.type}:${action} yet — settlement unchanged.`,
+        message: `No counterfactual path for ${ref.type}:${action} yet. Settlement unchanged.`,
       });
     }
   }
@@ -264,12 +263,12 @@ export function counterfactualCandidates(settlement) {
     out.push({ type: 'institution', id, label: inst.name || id });
   }
 
-  // Factions (Phase 9 ids)
+  // Factions (ids)
   for (const p of deriveAllFactionProfiles(settlement)) {
     out.push({ type: 'faction', id: p.id, label: p.name });
   }
 
-  // Chains (Phase 10 ids)
+  // Chains (ids)
   for (const c of deriveAllSupplyChainStates(settlement)) {
     out.push({ type: 'chain', id: c.id, label: c.name });
   }

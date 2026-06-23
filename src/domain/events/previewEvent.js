@@ -7,7 +7,7 @@
  * Vulnerable, Merchant Guild gains leverage." User clicks Confirm →
  * applyEvent commits exactly what the preview promised.
  *
- * Phase 18 (Tier 2.2): this is now a thin wrapper around
+ * This is now a thin wrapper around
  * `runEventPipeline`. The pipeline is the single canonical flow shared
  * by previewEvent + applyEvent — the drift between "preview promised"
  * and "apply delivered" is eliminated by construction. The preview
@@ -46,7 +46,7 @@ export function previewEvent({ settlement, systemState, event }) {
     narrativeSummary: result.narrativeSummary,
     affectedSteps: [],
     warnings: result.warnings,
-    // Phase 18 additions — substrate + faction-delta access. These
+    // additions — substrate + faction-delta access. These
     // don't carry timestamps so they're safe to expose on the legacy
     // pure-preview shape.
     causalStateDeltas: result.causalStateDeltas,

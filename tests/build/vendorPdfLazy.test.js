@@ -13,8 +13,18 @@
  *      instead of static `import` so the lazy chain stays intact.
  *
  * This test verifies all three by reading the built dist/ output and
- * grepping the bundle graph. It runs only when dist/ exists (i.e.
- * after `npm run build`); in CI we run it after the build step.
+ * grepping the bundle graph.
+ *
+ * VACUITY HAZARD (review #1): the dist/ suite below is `runIf(distExists)`.
+ * In the normal gate `npm run test` runs BEFORE `npm run build`, so dist/ is
+ * absent and those three chunk-isolation assertions silently NO-OP — the
+ * contract counts green having verified nothing. The fix is twofold:
+ *   1. CI runs this file again AFTER the build with VERIFY_DIST=1 set (see the
+ *      "Verify vendor-pdf lazy chunk (post-build)" step in ci.yml).
+ *   2. When VERIFY_DIST=1, a missing dist/ is a HARD FAILURE here (the guard
+ *      `describe` below), so a post-build run can never be vacuously skipped.
+ * Without the flag (the pre-build unit pass) the dist/ suite skips quietly as
+ * before — the source-level contract still runs and carries the floor.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -24,6 +34,15 @@ import { resolve, join } from 'node:path';
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
 const distExists = existsSync(distDir) && existsSync(assetsDir);
+// Set by the CI post-build step. When true, dist/ MUST exist — a skipped dist/
+// suite in the post-build context is a green-on-nothing bug, not a no-op.
+const requireDist = process.env.VERIFY_DIST === '1';
+
+describe.runIf(requireDist)('Tier 9.7 — vendor-pdf dist verification is not vacuously skipped', () => {
+  it('dist/ + dist/assets exist when VERIFY_DIST=1 (post-build run must verify, not skip)', () => {
+    expect(distExists, 'VERIFY_DIST=1 but dist/assets is absent — run `npm run build` first; a skipped post-build chunk contract is green-on-nothing').toBe(true);
+  });
+});
 
 describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   // ── Chunk isolation ─────────────────────────────────────────────────────

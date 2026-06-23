@@ -1,22 +1,22 @@
 /**
  * domain/dailyLife.js — Daily-life prose grounded in structural state.
  *
- * Tier 4.19 of the roadmap. The most consumed output a dossier
- * produces is the "what is life like here?" prose. Until Phase 22,
- * this had to be hand-authored or AI-invented. Phase 22 derives it
- * directly from the substrate that earlier phases built:
+ * The most consumed output a dossier
+ * produces is the "what is life like here?" prose. This used to be
+ * hand-authored or AI-invented; this module derives it
+ * directly from the substrate that earlier stages built:
  *
- *   - Phase 9  faction profiles (archetype + power)
- *   - Phase 10 supply chain states (food + trade)
- *   - Phase 11 escalation clocks (recent / completed)
- *   - Phase 12 history beats (recentDisruption + unresolvedWound)
- *   - Phase 13 NPC profiles (dominant figures)
- *   - Phase 16 active conditions (current pressures)
- *   - Phase 17 substrate (14 system variables)
- *   - Phase 20 threats (typed pressures, visibility)
- *   - Phase 21 capacity model (supply vs demand for 9 capacities)
+ *   - faction profiles (archetype + power)
+ *   - supply chain states (food + trade)
+ *   - escalation clocks (recent / completed)
+ *   - history beats (recentDisruption + unresolvedWound)
+ *   - NPC profiles (dominant figures)
+ *   - active conditions (current pressures)
+ *   - substrate (14 system variables)
+ *   - threats (typed pressures, visibility)
+ *   - capacity model (supply vs demand for 9 capacities)
  *
- * The 8 canonical daily-life slots — the same shape as Phase 12
+ * The 8 canonical daily-life slots — the same shape as the
  * history beats so consumers render them the same way:
  *
  *   food_culture           What people eat / who controls grain
@@ -30,7 +30,7 @@
  *
  * Pure read-only derivation. Returns structured prose with `references`
  * arrays so the UI can let the user click through to the explainEntity
- * envelope for any cited subsystem (Phase 19).
+ * envelope for any cited subsystem.
  *
  * No imports from src/lib. No mutation. No AI — this is the pre-AI
  * substrate the AI overlay later grounds in.
@@ -40,7 +40,7 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
-import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
+import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
@@ -77,7 +77,7 @@ const SLOT_LABELS = Object.freeze({
 //   { key, label, text, source, references }
 //
 // references[] is an array of structured pointers (id + type + label)
-// that consumers can hand to Phase 19's explainEntity. The deriver
+// that consumers can hand to 's explainEntity. The deriver
 // always produces a slot — even when data is thin, it falls back to
 // a generic but truthful line.
 
@@ -128,7 +128,7 @@ function deriveFoodCulture(s, ctx) {
   return slot('food_culture', text, 'capacity.food_production + supply chains', refs);
 }
 
-// Owner decision (W6#4): labor/craft/transport are noise lenses — this
+// Labor/craft/transport are noise lenses — this
 // slot no longer reads or cites them. Dawn work re-anchors on the
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
@@ -142,7 +142,7 @@ function deriveDawnWork(s, ctx) {
 
   let text;
   if (food.band === 'critical' || food.band === 'collapsed') {
-    text = 'Dawn work is the search for food — foragers leave before light, and the granary queue forms before the ovens are warm.';
+    text = 'Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens are warm.';
   } else if (defense.band === 'critical' || defense.band === 'collapsed') {
     text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
   } else if (dominantCraftPower >= 25) {
@@ -183,8 +183,8 @@ function deriveGatheringPlaces(s, _ctx) {
   }
 
   const text = places.length
-    ? `By midday people are gathered at ${places.join(', ')} — talking, trading, and watching.`
-    : 'People gather where they can — the well, the bridge, the open square.';
+    ? `By midday people are gathered at ${places.join(', ')}, talking, trading, and watching.`
+    : 'People gather where they can: the well, the bridge, the open square.';
 
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
@@ -213,7 +213,7 @@ function threatWarning(threat) {
     case 'siege':               return 'staying close when the bells ring three times';
     case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
     case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off — bread is short';
+    case 'famine':              return 'wandering off (bread is short)';
     case 'corruption':          return 'talking to officials they don\'t know';
     case 'unrest':              return 'crowds that gather quickly';
     case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
@@ -272,7 +272,11 @@ function deriveOutsiderImpressions(s, ctx) {
   const dominantFaction = ctx.profiles
     .slice()
     .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
-  const strainedCaps = CAPACITY_NAMES
+  // Only the five visible/DM-facing lenses count toward outsider-visible
+  // prose. An internal labor/craft/transport shortage is real for the
+  // simulation but must not surface here, matching the five-lens policy the
+  // AI payload enforces (see aiGrounding.js).
+  const strainedCaps = VISIBLE_CAPACITY_LENSES
     .filter(n => ['strained', 'critical', 'collapsed'].includes(ctx.capacities.bands[n]));
 
   const parts = [];
@@ -285,12 +289,12 @@ function deriveOutsiderImpressions(s, ctx) {
     refs.push({ id: top.id, label: top.label, type: 'threat' });
   }
   if (strainedCaps.length >= 3) {
-    parts.push('several civic services run short — visitors notice missing watch, slow service, or shuttered shops');
+    parts.push('several civic services run short: visitors notice missing watch, slow service, or shuttered shops');
   }
 
   const text = parts.length
     ? `Outsiders notice ${parts.join('; ')}.`
-    : 'The settlement reads to outsiders as ordinary — quiet streets, predictable bells, faces that don\'t yet know yours.';
+    : 'The settlement reads to outsiders as ordinary: quiet streets, predictable bells, faces that don\'t yet know yours.';
 
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
@@ -356,7 +360,7 @@ function deriveRecentChanges(s, ctx) {
 
   const text = changes.length
     ? `Recent changes: ${changes.join('; ')}.`
-    : 'The last few seasons have run their usual course — no notable shifts in the rhythm of the place.';
+    : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);
 }
@@ -413,7 +417,7 @@ function buildContext(settlement) {
 export function deriveDailyLifeSlot(key, settlement) {
   if (!key || !DERIVERS[key]) return null;
   if (!settlement) {
-    return slot(key, '—', 'no settlement', []);
+    return slot(key, '–', 'no settlement', []);
   }
   const ctx = buildContext(settlement);
   return DERIVERS[key](settlement, ctx);
@@ -430,7 +434,7 @@ export function deriveDailyLifeSlot(key, settlement) {
 export function deriveDailyLife(settlement) {
   if (!settlement) {
     const empty = {};
-    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '—', 'no settlement', []);
+    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '–', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
@@ -456,12 +460,18 @@ export function supportedDailyLifeSlots() {
   return [...DAILY_LIFE_SLOTS];
 }
 
+// Exposed for unit tests that need to drive one deriver against a
+// controlled context (e.g. proving the five-lens visible-capacity boundary
+// holds for outsider-facing prose). Production callers go through
+// deriveDailyLifeSlot / deriveDailyLife.
+export const __test__ = Object.freeze({ deriveOutsiderImpressions });
+
 // ── compareDailyLife ────────────────────────────────────────────────────
 //
 // Diff two daily-life envelopes. Returns one entry per slot whose
-// text changed. Useful for the Phase 23 counterfactual tool — "after
+// text changed. Useful for the counterfactual tool — "after
 // removing the granary, food_culture changed from X to Y" — and for
-// Tier 5.1 (causal delta summaries after regeneration).
+// causal delta summaries after regeneration.
 
 /**
  * @typedef {Object} DailyLifeDelta

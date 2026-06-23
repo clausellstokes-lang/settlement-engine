@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
+import { useIconsOn } from './IconsContext.js';
 
 const VISIBLE_CAP = 5;
 
@@ -24,6 +25,7 @@ const VISIBLE_CAP = 5;
  * @property {string}   id
  * @property {string}   label
  * @property {string=}  hint               one-line context shown below
+ * @property {string=}  tag                small text tag (e.g. a required tier) shown beside the label
  * @property {boolean=} primary            at most one per rail; visually dominant
  * @property {React.ComponentType<{size?:number}>=} Icon
  * @property {boolean=} disabled
@@ -38,6 +40,7 @@ const VISIBLE_CAP = 5;
  */
 export default function ActionRail({ title = 'Next best action', items = [] }) {
   const [showMore, setShowMore] = useState(false);
+  const iconsOn = useIconsOn();
   if (!items.length) return null;
 
   // Dedupe: only the first primary actually renders as primary.
@@ -71,7 +74,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
               color: swatch.inkMag3, cursor: 'pointer',
             }}
           >
-            {showMore ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+            {iconsOn && (showMore ? <ChevronUp size={11} /> : <ChevronDown size={11} />)}
             {showMore ? 'Show fewer' : `Show ${overflow} more`}
           </button>
         )}
@@ -82,6 +85,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
 
 function ActionRow({ item }) {
   const Icon = item.Icon;
+  const iconsOn = useIconsOn();
   const tone = item.primary ? primaryTone : secondaryTone;
   return (
     <button
@@ -106,13 +110,29 @@ function ActionRow({ item }) {
         width: '100%',
       }}
     >
-      {Icon && (
+      {iconsOn && Icon && (
         <span style={{ display: 'flex', flexShrink: 0, marginTop: 1 }}>
           <Icon size={13} aria-hidden="true" />
         </span>
       )}
       <span style={{ flex: 1, minWidth: 0 }}>
-        <span style={{ display: 'block' }}>{item.label}</span>
+        <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
+          <span>{item.label}</span>
+          {item.tag && (
+            <span
+              style={{
+                flexShrink: 0,
+                fontSize: FS.xxs, fontWeight: 700,
+                letterSpacing: '0.02em',
+                padding: '1px 5px', borderRadius: 3,
+                background: item.primary ? 'rgba(255,251,245,0.18)' : '#f3ecdc',
+                border: `1px solid ${item.primary ? 'rgba(255,251,245,0.45)' : tone.border}`,
+              }}
+            >
+              {item.tag}
+            </span>
+          )}
+        </span>
         {item.hint && (
           <span
             id={`${item.id}-hint`}

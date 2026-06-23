@@ -31,6 +31,17 @@ const MIG049 = resolve(dir, '049_custom_content_deities.sql');
 const MIG056 = resolve(dir, '056_deity_law_axis.sql');
 const allExist = [MIG004, MIG017, MIG049, MIG056].every(existsSync);
 
+// Hard-fail (not a silent vacuous skip) when a target migration moves/renames:
+// the runIf(allExist) suites below would otherwise go GREEN with 0 tests run.
+describe('pglite targets exist (guards against silent vacuous skip)', () => {
+  it('every required migration is present (a moved migration must fail loudly)', () => {
+    const targets = { '004': MIG004, '017': MIG017, '049': MIG049, '056': MIG056 };
+    const missing = Object.entries(targets).filter(([, p]) => !existsSync(p)).map(([k]) => k);
+    expect(missing, `missing migrations: ${missing.join(', ')}`).toEqual([]);
+    expect(allExist).toBe(true);
+  });
+});
+
 const UID = '11111111-1111-1111-1111-111111111111';
 
 /** Extract just the two ALTER TABLE ... custom_content ... CHECK statements from

@@ -33,7 +33,7 @@ import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
-import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, DANGER_BORDER, LANDING_MAX, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -41,37 +41,39 @@ import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } f
 const ANON_SIZES = ['hamlet', 'village', 'town'];
 const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
+// Size toggle on the Button primitive (variant=gold for the selected item,
+// matching CharacterPresetCard so "gold-filled = selected" is one learned idiom
+// across the Create flow). The active state now carries THREE channels —
+// soft-gold fill + gold border + a heavier ink label — not the old color-only
+// 10%-wash-vs-border distinction; aria-pressed covers the screen-reader channel.
+// The primitive's centered/nowrap defaults are overridden here to keep the
+// two-line label+hint left-aligned layout the size cards need.
 function SizeButton({ value, label, hint, active, onClick, compact = false }) {
   return (
-    <button
-      type="button"
+    <Button
+      variant={active ? 'gold' : 'secondary'}
       data-settlement-size={value}
       onClick={() => onClick(value)}
       aria-pressed={active}
       style={{
         flex: '1 1 0', minWidth: compact ? 92 : 120,
+        flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center',
+        gap: 2, textAlign: 'left', whiteSpace: 'normal', fontWeight: 400,
         padding: compact ? `${SP.sm}px ${SP.sm}px` : `${SP.md}px ${SP.md}px`,
-        textAlign: 'left',
-        background: active ? 'rgba(201,162,76,0.10)' : '#fff',
-        border: `1.5px solid ${active ? GOLD : BORDER}`,
-        borderRadius: R.lg,
-        cursor: 'pointer',
-        transition: 'border-color 0.15s, background 0.15s',
-        fontFamily: sans,
       }}
     >
-      <div style={{
-        fontFamily: serif_, fontSize: compact ? FS.md : FS.lg, fontWeight: 600, color: INK,
-        marginBottom: 2,
+      <span style={{
+        fontFamily: serif_, fontSize: compact ? FS.md : FS.lg,
+        fontWeight: active ? 700 : 600, color: INK,
       }}>
         {label}
-      </div>
+      </span>
       {hint && (
-        <div style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.35 }}>
+        <span style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.35, fontFamily: sans }}>
           {hint}
-        </div>
+        </span>
       )}
-    </button>
+    </Button>
   );
 }
 
@@ -79,9 +81,10 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
+  const setEntryPath = useStore(s => s.setEntryPath);
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
-  // P115 / X-9 — the WelcomeBackCard "Open" CTA selects a saved
+  // The WelcomeBackCard "Open" CTA selects a saved
   // settlement; SettlementsPanel reads selectedSettlementId on mount and
   // opens the matching save in detail view.
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
@@ -94,10 +97,14 @@ export default function HomeHero({ onSignIn, onNavigate }) {
 
   const [pickedSize, setPickedSize] = useState(defaultSize);
   const [generating, setGenerating] = useState(false);
+  // First-click failures must not be silent (P10). The catch below stores a
+  // plain-language message; a retry strip renders beneath the CTA pointing back
+  // at handleBegin — this is the most fragile point in the funnel.
+  const [beginError, setBeginError] = useState(null);
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
-  // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
+  // Fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
   // via sessionStorage so a re-render doesn't double-count. For the
   // signed-in variant this fires too — it's still a homepage view,
@@ -109,11 +116,16 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const handleBegin = async () => {
     if (isAnon && atCap) return;
     if (generating) return;
+    setBeginError(null);
     setGenerating(true);
     try {
       // Signed-in users go to 'basic' (renamed from 'quick'); anon
       // also uses 'basic' so the post-hero state shows them the same
       // single-step flow if they navigate back to the wizard.
+      // Instant path: Back / New Draft return to the Create landing, not the
+      // Basic config panel (wizardMode is still set to 'basic' so Regenerate has
+      // a config to re-roll, but entryPath is the source of truth for exit).
+      setEntryPath('instant');
       setWizardMode('basic');
       updateConfig({ settType: pickedSize });
       generate();
@@ -122,12 +134,13 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         // generateSettlement now (so wizard "Regenerate Draft" and the
         // sample fork count too, not just this first-gen button). Here
         // we only fire the anon-attribution analytics event.
-        // Tier 8.8 — anon attribution. Permanent flag once set; drives
+        // Anon attribution. Permanent flag once set; drives
         // signup_after_anon and paid_after_anon reporting downstream.
         Funnel.anonGenerationCompleted({ tier: pickedSize });
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
+      setBeginError('Something went wrong forging your settlement. Try again.');
     } finally {
       setGenerating(false);
     }
@@ -135,7 +148,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
 
   return (
     <>
-      {/* P115 / X-9 — Welcome-back card. Self-gates inside; renders
+      {/* Welcome-back card. Self-gates inside; renders
           nothing for anons, first-visit signed-in users, or users
           without a saved settlement. */}
       {!isAnon && (
@@ -150,7 +163,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
     <section
       aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back. Instant generator'}
       style={{
-        maxWidth: 720, margin: `${SP.xl}px auto ${SP.xxl}px`,
+        maxWidth: LANDING_MAX, margin: `${SP.xl}px auto ${SP.xxl}px`,
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
         border: `1px solid ${BORDER}`,
@@ -167,7 +180,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       */}
       {isAnon ? (
         flag('heroV2') ? (
-          // P117 / H-1 — Two-voice hero rewrite. Anti-AI line as H1
+          // Two-voice hero rewrite. Anti-AI line as H1
           // (worldbuilder hook); italic deck translates for the new DM
           // ("the pieces explain each other"). Eyebrow + footer-signin +
           // anti-AI quote block all removed — the H1 IS the anti-AI line.
@@ -191,9 +204,9 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         ) : (
           <>
             <div style={{
-              fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
+              fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em',
               textTransform: 'uppercase', color: GOLD_DEEP,
-              marginBottom: SP.sm,
+              marginBottom: SP.xs,
             }}>
               {t('hero.eyebrow')}
             </div>
@@ -223,14 +236,12 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           </>
         )
       ) : (
+        // No eyebrow on the signed-in hero. WelcomeBackCard (when it mounts
+        // directly above) carries an eyebrow+serif-title pair; a matching
+        // eyebrow here would make two stacked cards read as co-equal focal
+        // points. Dropping it lets the hero H1 (FS['28']) be the unambiguous
+        // squint-test winner of the stack.
         <>
-          <div style={{
-            fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: GOLD_DEEP,
-            marginBottom: SP.sm,
-          }}>
-            Instant Generation
-          </div>
           <h1 style={{
             margin: 0, fontFamily: serif_, fontWeight: 600,
             fontSize: FS['28'], color: INK, lineHeight: 1.2,
@@ -242,7 +253,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             fontFamily: serif_, fontStyle: 'italic',
             fontSize: FS.md, color: BODY, lineHeight: 1.55,
           }}>
-            Pick a size. Roll a settlement. Full ladder unlocked.
+            Pick a size. Roll a settlement. Every size from thorp to metropolis.
           </p>
         </>
       )}
@@ -251,10 +262,14 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           Anon sees 3 buttons (hamlet/village/town); signed-in sees 6
           (thorp through capital). Same primitive, more buttons.
       */}
-      <div style={{
-        display: 'flex', gap: SP.sm, marginTop: SP.xl,
-        justifyContent: 'center', flexWrap: 'wrap',
-      }}>
+      <div
+        role="group"
+        aria-label="Settlement size"
+        style={{
+          display: 'flex', gap: SP.sm, marginTop: SP.xxl,
+          justifyContent: 'center', flexWrap: 'wrap',
+        }}
+      >
         {sizes.map(size => (
           <SizeButton
             key={size}
@@ -268,59 +283,103 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         ))}
       </div>
 
+      {/* ── Anon size-ceiling upsell bar ──────────────────────────────────
+          A quiet gold-left-border strip between the size pills and the forge
+          CTA, shown to anonymous visitors who have not yet hit the daily cap.
+          It states the anon size ceiling and offers a right-aligned ghost
+          Sign in, staying subordinate to the primary forge button below (no
+          competing fill). Reuses the GOLD/BORDER `wrap` treatment from
+          PlaceInRegionCard. Copy comes from the existing registry. */}
+      {isAnon && !atCap && (
+        <div
+          style={{
+            display: 'flex', alignItems: 'center', gap: SP.md,
+            maxWidth: 520, margin: `${SP.lg}px auto 0`,
+            padding: `${SP.sm}px ${SP.md}px`,
+            border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
+            borderRadius: R.lg, background: CARD,
+            textAlign: 'left',
+          }}
+        >
+          <span style={{
+            flex: 1, fontFamily: sans, fontSize: FS.sm,
+            color: BODY, lineHeight: 1.5,
+          }}>
+            {t('hero.note')}
+          </span>
+          {onSignIn && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={onSignIn}
+              style={{ flexShrink: 0, color: GOLD_TXT, textDecoration: 'underline', minHeight: 44 }}
+            >
+              {t('hero.anonCap.signin')}
+            </Button>
+          )}
+        </div>
+      )}
+
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
-      <div style={{ marginTop: SP.xl }}>
+      <div style={{ marginTop: SP.xxl }}>
         {isAnon && atCap ? (
-          // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
+          // Reframe the anon cap as an unlock, not a wall.
           // Lead with what signin gets you, not with what you've used up.
           // Side-door $2.99 link below catches intermediates who just need
           // Friday's town.
           <>
-          <div style={{
-            padding: SP.lg,
-              background: `linear-gradient(135deg, #FBF5E6, #F4EAD0)`,
-              border: `1px solid ${GOLD}`,
-              borderRadius: R.lg,
-              maxWidth: 460, margin: '0 auto', textAlign: 'center',
-            }}>
+            {/* No inner card: the hero section is already a bordered parchment
+                surface, so a second identically-filled bordered card here was a
+                box-on-an-identical-box (false boundary, zero figure/ground gain).
+                The unlock state is a plain centered block; whitespace
+                (marginTop above) groups it. Hierarchy leads with the UNLOCK
+                VALUE (the loudest line) and demotes the spent-allowance recap to
+                a quiet subhead, so the squint-test winner is the next step, not
+                what's used up. */}
+            <div style={{ maxWidth: 460, margin: '0 auto', textAlign: 'center' }}>
+              <div style={{ fontSize: FS.xs, color: BODY, marginBottom: SP.sm }}>
+                {t('hero.anonCap.spent')}
+              </div>
               <div style={{
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
-                color: INK, marginBottom: 6,
+                color: INK, lineHeight: 1.4,
               }}>
-                You’ve explored <em style={{ color: GOLD_DEEP }}>hamlet, village, town.</em>
-              </div>
-              <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
-                <b>Sign in (free)</b> to unlock thorp through metropolis,
-                save unlimited drafts, and export the PDF.
+                {/* The lead phrase is bolded; the registry template carries a
+                    {signin} placeholder so the surrounding sentence stays in
+                    the copy registry while the bold span renders in JSX. */}
+                {(() => {
+                  const tpl = t('hero.anonCap.unlockTpl');
+                  const signin = t('hero.anonCap.signin');
+                  const [before, after] = tpl.split('{signin}');
+                  return (
+                    <>
+                      {before}<b>{signin}</b>{after}
+                    </>
+                  );
+                })()}
               </div>
               <Button
+                type="button"
                 variant="primary"
                 size="lg"
-                onClick={onSignIn}
+                onClick={() => onSignIn?.()}
                 style={{ marginTop: SP.md }}
               >
                 Create free account →
               </Button>
-              <div style={{
-                marginTop: SP.md, paddingTop: SP.sm,
-                borderTop: `1px dashed ${BORDER}`,
-                fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
-              }}>
-                or just take this one{' '}
-                <button
-                  type="button"
-                  onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}
-                >
-                  buy the dossier for $2.99 ↓
-                </button>
-              </div>
+              {/* The "$2.99 buy this dossier" side-door was removed: it scrolled
+                  to a [data-buy-this-dossier] anchor that exists nowhere (a no-op
+                  money CTA), and the single-dossier purchase is disabled. A dead
+                  revenue control is the worst trust signal to this audience; the
+                  free-account path above is the one honest action here. */}
             </div>
             <AnonTierTeaser onSignIn={onSignIn} />
           </>
         ) : (
           <>
             <Button
+              type="button"
               variant="primary"
               size="lg"
               onClick={handleBegin}
@@ -337,6 +396,19 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                     ? t('hero.cta')
                     : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
             </Button>
+            {/* Plain-language failure strip (P10). Sits in the centered column so
+                it doesn't disturb the hero layout; the CTA above IS the retry. */}
+            {beginError && (
+              <p role="alert" style={{
+                margin: `${SP.sm}px auto 0`, maxWidth: 460,
+                padding: `${SP.xs}px ${SP.md}px`,
+                background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`,
+                borderRadius: R.md, color: swatch.danger,
+                fontSize: FS.sm, lineHeight: 1.5,
+              }}>
+                {beginError}
+              </p>
+            )}
             {isAnon && (
               <p style={{
                 margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
@@ -349,6 +421,9 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 </span>
               </p>
             )}
+            {/* The Basic/Advanced mode picker sits directly below this hero for
+                signed-in GMs, so the expert path is already one tap away — no
+                subordinate "configure instead" link needed here. */}
           </>
         )}
       </div>
@@ -363,31 +438,27 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           {onSignIn && (
             <>
               {' '}
-              <button
-                type="button"
+              {/* Inline link on the Button primitive (ghost) so HomeHero leaves
+                  the raw-button baseline; the gold-text underline + 44px target
+                  are preserved via style overrides. */}
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={onSignIn}
                 style={{
-                  background: 'none', border: 'none', padding: `0 ${SP.xs}px`,
-                  color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
-                  cursor: 'pointer', textDecoration: 'underline',
                   display: 'inline-flex', alignItems: 'center',
-                  minHeight: 44, minWidth: 44,
+                  padding: `0 ${SP.xs}px`, minHeight: 44, minWidth: 44,
+                  color: GOLD_TXT, fontFamily: 'inherit', fontSize: 'inherit',
+                  fontWeight: 'inherit', textDecoration: 'underline',
                 }}
               >
                 Sign in
-              </button>
+              </Button>
               .
             </>
           )}
         </p>
       )}
-
-      {/* Bottom-edge ornament — subtle ink seal */}
-      <div aria-hidden="true" style={{
-        marginTop: SP.xl,
-        height: 1,
-        background: `linear-gradient(to right, transparent, ${BORDER}, transparent)`,
-      }} />
     </section>
     </>
   );

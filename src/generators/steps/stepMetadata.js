@@ -85,7 +85,7 @@ export const STEP_METADATA = Object.freeze({
   },
   stressConfirmPass: {
     label: 'Confirm stressors',
-    description: 'Re-weight emergent stressors against the real roster — walls suppress sieges, granaries suppress famine.',
+    description: 'Re-weight emergent stressors against the real roster: walls suppress sieges, granaries suppress famine.',
     summary: (ctx) => {
       const n = Array.isArray(ctx.stressTypes) ? ctx.stressTypes.length : 0;
       return n ? `${n} stressor${n === 1 ? '' : 's'} confirmed` : 'No stressors survived confirmation';
@@ -126,11 +126,11 @@ export const STEP_METADATA = Object.freeze({
   economyReconcilePass: {
     label: 'Reconcile economy with final roster',
     description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.',
-    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged — economy confirmed',
+    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged. Economy confirmed.',
   },
   structuralValidationPass: {
     label: 'Validate structure',
-    description: 'Check the FINAL roster for tier, dependency, and access contradictions — the coherence receipt.',
+    description: 'Check the FINAL roster for tier, dependency, and access contradictions (the coherence receipt).',
     summary: (ctx) => {
       const v = ctx.structural?.violations?.length || 0;
       return v ? `${v} structural finding${v === 1 ? '' : 's'}` : 'No structural findings';
@@ -154,7 +154,7 @@ export const STEP_METADATA = Object.freeze({
   },
   generateNarratives: {
     label: 'Compose narratives',
-    description: 'Write the prose layer — history, defense, daily-life, and per-faction asides.',
+    description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.',
     summary: () => null,
   },
   assembleSettlement: {

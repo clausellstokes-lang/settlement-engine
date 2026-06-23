@@ -24,11 +24,12 @@ describe('SaveQuotaMeter — no size gate', () => {
     expect(lower).not.toMatch(/size|metropolis|capital\b|bigger|larger|city tier/);
   });
 
-  it('free meter references the save COUNT (N of 3), not a size limit', () => {
+  it('free meter references the save COUNT remaining + tier name, not a size limit', () => {
     render(<SaveQuotaMeter tier="free" used={2} max={3} />);
     const label = screen.getByTestId('quota-label').textContent || '';
-    expect(label).toMatch(/2 of 3 saves/i);
-    expect(label.toLowerCase()).not.toMatch(/size|metropolis|tier/);
+    // Remaining-count framing on the tier name: 1 of 3 saves left on Wanderer.
+    expect(label).toMatch(/1 of 3 saves left on Wanderer/i);
+    expect(label.toLowerCase()).not.toMatch(/size|metropolis/);
     // The meter bar is present (the count gauge) and the premium pitch is shown.
     expect(screen.getByTestId('quota-bar')).toBeTruthy();
     expect((screen.getByTestId('premium-pitch').textContent || '').toLowerCase()).toContain('simulation');

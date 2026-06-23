@@ -1,10 +1,10 @@
 /**
- * domain/display/occupationStatus.js — Phase B3 read-model SELECTOR for the DM UI:
+ * domain/display/occupationStatus.js — read-model SELECTOR for the DM UI:
  * the OCCUPATION layer in heuristic DM language.
  *
- * A `warStatus.js`-style projection of `worldState.occupations` (the B3 stateful
- * ledger keyed by the OCCUPIED settlement) — surfacing, in PLAIN WORDS, what the
- * F1 brief asks for: occupation BURDEN + BENEFIT, WHO RESISTS, and what the
+ * A `warStatus.js`-style projection of `worldState.occupations` (the stateful
+ * ledger keyed by the OCCUPIED settlement) — surfacing, in PLAIN WORDS,
+ * occupation BURDEN + BENEFIT, WHO RESISTS, and what the
  * occupation is worth vs. what it costs:
  *
  *   - the occupation STATE in DM language ("a contested occupation — the occupier
@@ -36,11 +36,11 @@ const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
 // The occupation state ladder → DM phrase (occupied-side framing). Mirrors the
 // engine STATE_LADDER but says nothing about the enum or the hysteresis.
 const STATE_PHRASE = Object.freeze({
-  contested: 'a contested occupation — the occupier has not yet taken hold',
-  unstable: 'an unstable occupation — control is precarious',
-  extractive: 'an extractive occupation — the occupier is bleeding it for what it can',
-  stabilized: 'a stabilized occupation — the occupier holds it firmly',
-  vassalized: 'a client state — the occupied settlement now serves its conqueror',
+  contested: 'a contested occupation; the occupier has not yet taken hold',
+  unstable: 'an unstable occupation; control is precarious',
+  extractive: 'an extractive occupation; the occupier bleeds it for everything it holds',
+  stabilized: 'a stabilized occupation; the occupier holds it firmly',
+  vassalized: 'a client state; the occupied settlement now serves its conqueror',
 });
 
 // Benefit framing: is the occupation net-positive for the occupier yet? A
@@ -59,7 +59,7 @@ export function occupationStatePhrase(state) {
 const RESISTANCE_BANDS = Object.freeze([
   { floor: 0.6, phrase: 'in open revolt' },
   { floor: 0.35, phrase: 'simmering with resistance' },
-  { floor: 0.2, phrase: 'restive — sabotage and noncompliance harry the garrison' },
+  { floor: 0.2, phrase: 'restive: sabotage and noncompliance harry the garrison' },
   { floor: 0, phrase: 'largely quiescent' },
 ]);
 

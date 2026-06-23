@@ -14,30 +14,71 @@
  * through get(), so nothing about call semantics changes. The slice owns the
  * session-scoped `pulseUndoStack` state (NOT persisted; a reload clears it).
  *
- * Imports only leaf helpers (shared persistence, pulse helpers, the
- * region/worldPulse domains, and the fingerprint/analytics libs) and never
- * campaignSlice, so there is no cycle.
+ * Imports only leaf helpers (shared persistence, pulse helpers, the region
+ * domain + light worldPulse schema leaves, and the fingerprint/analytics libs)
+ * and never campaignSlice, so there is no cycle. The HEAVY worldPulse simulation
+ * is NOT a static import — it loads lazily (see below).
+ *
+ * ── Lazy worldPulse simulation ──────────────────────────────────────────────
+ * The full worldPulse domain barrel (../domain/worldPulse/index.js) is ~22.7k
+ * LOC of simulation. Statically importing it here pulled the entire simulation
+ * into store/index.js's static graph, so it landed in the eager entry chunk at
+ * first paint even though a user only touches it when they advance a campaign's
+ * world clock. Mirroring settlementSlice.loadEngine(), the HEAVY simulation
+ * entry points (advance / preview / apply-proposal / party-impact) now load
+ * through a module-level memoized `loadWorldPulse()` dynamic import — each action
+ * that runs the simulation does `const { ... } = await loadWorldPulse()` before
+ * its `set()` producer (Immer producers can't be async), exactly as the engine
+ * loader does. Those actions are already async and already awaited by callers
+ * (SettlementsPanel/WorldMap await advanceCampaignWorld; SimulationRulesDialog
+ * wraps preview in `await Promise.resolve(...)`), so making preview return a
+ * Promise is contract-compatible.
+ *
+ * The LIGHT, schema-shaped helpers (ensureWorldState / canonizeWorldState /
+ * updateProposalStatus / normalizeSimulationRules) stay STATIC, imported from
+ * their leaf modules (worldState.js / simulationRules.js) rather than the barrel.
+ * Those leaves only import simulationRules + ../clock + ../clone (no heavy
+ * transitive deps), so they cost ~nothing on first paint, and keeping them sync
+ * preserves the contract of `getCampaignWorldState` — which aiSlice consumes
+ * SYNCHRONOUSLY (its result is read immediately, not awaited), so it must NOT
+ * become async. Importing them from the leaves (not index.js) is also what lets
+ * the architecture-boundary ratchet assert this slice has no top-level
+ * `worldPulse/index.js` edge.
  */
+// ── Lazy worldPulse simulation loader ───────────────────────────────────────
+// Declared BEFORE the import block (mirroring settlementSlice.loadEngine()) so
+// the module's static `import` statements stay first — keeping `import/first`
+// happy — while the dynamic import() boundary lives in a function body. This is
+// the seam that keeps the ~22.7k-LOC simulation OUT of the first-paint entry
+// chunk: it loads only when an action that runs the simulation is first invoked.
+/** @type {?Promise<typeof import('../domain/worldPulse/index.js')>} */
+let _worldPulsePromise = null;
+/** Memoized dynamic import of the worldPulse simulation barrel. Resolves once
+ *  and is shared by every action that runs the simulation. */
+function loadWorldPulse() {
+  return _worldPulsePromise ??= import('../domain/worldPulse/index.js');
+}
+
 import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
+// LIGHT, sync schema helpers (leaf modules — no heavy transitive deps). Imported
+// from the leaves (not the barrel) so this slice has NO top-level edge to
+// worldPulse/index.js: the heavy simulation only enters via loadWorldPulse().
 import {
-  advanceCampaignWorld as domainAdvanceCampaignWorld,
-  applyPartyImpact as domainApplyPartyImpact,
-  applyWorldPulseProposal as domainApplyWorldPulseProposal,
   canonizeWorldState,
   ensureWorldState,
-  normalizeSimulationRules,
-  previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
-} from '../domain/worldPulse/index.js';
+} from '../domain/worldPulse/worldState.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, syncCampaignSnapshot,
   flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
 import {
   capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
+  restorePulseSnapshot,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
@@ -72,10 +113,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
-  previewCampaignWorldPulse: (campaignId, interval = 'one_month', options = {}) => {
+  previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
+    // Lazy-load the simulation before the (pure, synchronous) preview compute.
+    // The sole caller already awaits this (SimulationRulesDialog wraps it in
+    // `await Promise.resolve(...)`), so returning a Promise is contract-safe.
+    const { previewCampaignWorldPulse: domainPreviewCampaignWorldPulse } = await loadWorldPulse();
     const previewCampaign = cloneJson(campaign);
     if (options.simulationRules) {
       previewCampaign.worldState = {
@@ -166,6 +211,32 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
      *  immediate path's rippleEventThroughWorld party branch). */
     let drainedPartyImpacts = [];
     const now = options.now || new Date().toISOString();
+
+    // Lazy-load the simulation BEFORE Phase 1. This is the ONLY await in the
+    // critical region, and it sits before the first set() — so the two-phase
+    // drain→compute→commit sequence below still runs with NO await between its
+    // set() calls and stays atomic w.r.t. other actions (JS is single-threaded;
+    // once the synchronous Phase 1 begins no other action can observe the
+    // drained-but-not-advanced intermediate state). Memoized, so only the first
+    // advance pays the import; subsequent advances resolve from cache.
+    const { advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
+
+    // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
+    // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
+    // pure function over plain clones, so running it on the draft only made
+    // Immer track a draft it never touches. We split it out below WITHOUT an
+    // await between the two set() calls — JS is single-threaded, so no other
+    // action can observe the intermediate (drained-but-not-advanced) state.
+    // The drain IS committed here before the pure pulse runs, but it is no longer
+    // left committed UNCONDITIONALLY: if the pure pulse throws, the compute block
+    // below rolls the full pre-drain snapshot back (atomic rollback), so a failed
+    // advance neither consumes the queue nor advances a tick. This split also
+    // removes the second full clone of every member save: the simulation now
+    // consumes the SAME plain clones we hand it here. */
+    /** @type {any} */ let preSnapshot = null;
+    /** @type {any} */ let simCampaign = null;
+    /** @type {any} */ let simSaves = null;
+    /** @type {any} */ let authoredEventBySave = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -178,51 +249,95 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       // every member save + the live active view) BEFORE anything mutates, so
       // the advance can be reversed by undoLastPulse. Pushed to the stack only
       // after the pulse is confirmed below.
-      const preSnapshot = capturePulseSnapshot(state, c, now);
+      preSnapshot = capturePulseSnapshot(state, c, now);
       // Campaign-clock C1: drain queued player intentions into the member
       // settlements (and inject any crisis twins into worldState) BEFORE the
       // organic pulse, so every settlement's events resolve simultaneously at
       // this tick and the pulse simulates the post-intervention world. The
       // augmented worldState is written onto the draft campaign so the pulse's
-      // cloneJson(c) carries the injected stressors + the cleared queue.
+      // input clone carries the injected stressors + the cleared queue.
       const drained = drainCampaignQueueIntoState(state, c, worldState, now);
       c.worldState = drained.worldState;
       drainedPartyImpacts = drained.partyImpacts || [];
-      result = domainAdvanceCampaignWorld({
-        campaign: cloneJson(c),
-        saves: cloneJson(campaignSettlements(state, campaignId)),
-        interval,
-        now,
-      });
-      if (!result) return;
-      // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
-      // Cap PER campaign so churn in one campaign can't evict another's history:
-      // drop only this campaign's oldest snapshot when it exceeds the cap.
-      {
-        const next = [...(state.pulseUndoStack || []), preSnapshot];
-        const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
-        if (mineCount > PULSE_UNDO_CAP) {
-          const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
-          if (oldestIdx !== -1) next.splice(oldestIdx, 1);
-        }
-        state.pulseUndoStack = next;
-      }
+      // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)
+      // draft, so their values are draft proxies that Immer revokes the moment
+      // this producer returns. Lift them to plain objects now (mirroring the
+      // cloneJson of simCampaign/simSaves below) so the Phase-2 commit's
+      // layerAuthoredDeltas can safely read event.type after revocation.
+      authoredEventBySave = drained.authoredEventBySave instanceof Map
+        ? new Map([...drained.authoredEventBySave].map(([k, v]) => [k, cloneJson(v)]))
+        : drained.authoredEventBySave;
       // Snapshot the pre-pulse queued-impact ids (primitive Set — safe to read
       // outside set) so we can isolate this pulse's NEW propagation impacts.
       priorQueuedIds = new Set((c.regionalGraph?.queuedImpacts || []).map(i => String(i.id)));
-      persistUpdates = applyWorldPulseResultToState(state, c, result, now, drained.authoredEventBySave);
-      campaignPersist = cacheCampaignState(state);
-      // Collect the affected saves (post-apply) for the research fingerprint,
-      // capped at 5 per pulse so a large constellation doesn't flood capture.
-      const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
-        .map(u => String(u.saveId));
-      const affected = new Set(affectedIds);
-      fingerprintSaves = (state.savedSettlements || [])
-        .filter(save => affected.has(String(save.id)))
-        .slice(0, 5)
-        .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
-      campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
+      // Lift plain (post-drain) simulation inputs out of the draft. These are
+      // the ONLY clones the pure pulse needs — the previous code re-cloned the
+      // member saves a second time inside domainAdvanceCampaignWorld's args.
+      simCampaign = cloneJson(c);
+      simSaves = cloneJson(campaignSettlements(state, campaignId));
     });
+
+    // Pure, heavy compute OUTSIDE the producer (synchronous — no await before
+    // the commit set() below, so the action stays atomic w.r.t. other actions).
+    //
+    // ATOMICITY: Phase 1 ALREADY committed the queue drain (player intentions
+    // consumed off worldState.pendingEvents, member settlements + the live view
+    // advanced). If this pure pulse THROWS, that drain must NOT survive — leaving
+    // it committed with no tick advanced and no undo snapshot is silent data
+    // loss: the queued intentions are gone and the world never moved. So on a
+    // throw we roll the FULL pre-drain snapshot back onto the draft, making the
+    // whole action a no-op and preserving the queue for a retry. preSnapshot was
+    // captured BEFORE the drain (above), so it is a complete pre-drain rewind
+    // point for everything the drain touched.
+    if (simCampaign) {
+      try {
+        result = domainAdvanceCampaignWorld({
+          campaign: simCampaign,
+          saves: simSaves,
+          interval,
+          now,
+        });
+      } catch (e) {
+        console.error('[campaignWorldPulseSlice] world pulse compute threw; rolling back drain', e);
+        set(state => { restorePulseSnapshot(state, preSnapshot); });
+        // Abort Phase 2 + the persist/analytics tail: the drain is reverted and
+        // nothing was advanced, so there is nothing to commit or persist. Re-throw
+        // so the caller learns the advance failed rather than reading a silent null.
+        throw e;
+      }
+    }
+
+    // ── Phase 2: commit the pure result back onto the draft.
+    if (simCampaign && result) {
+      set(state => {
+        const c = findActiveCampaign(state.campaigns, campaignId);
+        if (!c) return;
+        // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
+        // Cap PER campaign so churn in one campaign can't evict another's
+        // history: drop only this campaign's oldest snapshot past the cap.
+        {
+          const next = [...(state.pulseUndoStack || []), preSnapshot];
+          const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
+          if (mineCount > PULSE_UNDO_CAP) {
+            const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
+            if (oldestIdx !== -1) next.splice(oldestIdx, 1);
+          }
+          state.pulseUndoStack = next;
+        }
+        persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
+        campaignPersist = cacheCampaignState(state);
+        // Collect the affected saves (post-apply) for the research fingerprint,
+        // capped at 5 per pulse so a large constellation doesn't flood capture.
+        const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
+          .map(u => String(u.saveId));
+        const affected = new Set(affectedIds);
+        fingerprintSaves = (state.savedSettlements || [])
+          .filter(save => affected.has(String(save.id)))
+          .slice(0, 5)
+          .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
+        campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
+      });
+    }
 
     // Fire-and-forget analytics — additive, after state has settled.
     if (result && result.ok === false && result.reason === 'world_not_canonized') {
@@ -262,12 +377,28 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       }
     }
 
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    // Surface the persistence outcome on the (advanced) result so callers can tell
+    // an advance that fully reached the cloud from one that is applied locally but
+    // cloud-pending. The advance is real locally either way; on a failed persist
+    // the persist tail already raised the retryable campaignSyncError banner, so
+    // the caller must NOT show a plain 'Realm advanced' success — it would
+    // contradict the banner and invite a re-advance (double tick). Only tag a
+    // genuine advance (ok !== false); the not-canonized guard result is untouched.
+    if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+      result.cloudPending = true;
+    }
     // Replay party-caused queued events through the party-impact pipeline — the
     // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
     // party branch (faction/NPC world state, condition resolution, Wizard News).
-    // Best-effort: the world half never blocks the advance, and the pre-pulse
-    // snapshot already covers these for undo (they land after the snapshot).
+    // Best-effort in that each replay is individually try/catch'd so one failure
+    // can't abort the rest or the advance. Unlike the immediate path (which fires
+    // these off unawaited), these ARE awaited sequentially before advance
+    // resolves, so the advance's promise does not settle until every replay has
+    // run — callers that await advanceCampaignWorld see the world fully settled.
+    // The tick itself is already committed above, so a replay failure never
+    // rolls the advance back, and the pre-pulse snapshot already covers these
+    // for undo (they land after the snapshot).
     if (result && result.ok !== false && drainedPartyImpacts.length
         && typeof get().recordPartyImpact === 'function') {
       for (const pi of drainedPartyImpacts) {
@@ -283,6 +414,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     let appliedDecision = /** @type {any} */ (null);
     const now = new Date().toISOString();
+    // Lazy-load the simulation before the (synchronous) Immer producer below —
+    // Immer producers can't be async, so the import is awaited up front.
+    const { applyWorldPulseProposal: domainApplyWorldPulseProposal } = await loadWorldPulse();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -305,7 +439,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     if (result && campaignPersist) {
       track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
     }
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    {
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      // Same cloud-pending contract as advanceCampaignWorld: a failed persist
+      // already raised the retryable banner, so flag the result rather than let a
+      // caller read an unqualified success over a cloud-pending write.
+      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+        result.cloudPending = true;
+      }
+    }
     return result;
   },
 
@@ -318,6 +460,8 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
+    // Lazy-load the simulation before the (synchronous) Immer producer below.
+    const { applyPartyImpact: domainApplyPartyImpact } = await loadWorldPulse();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -338,7 +482,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         ...extractPartyImpact(action, result),
       });
     }
-    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    {
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+        result.cloudPending = true;
+      }
+    }
     return result;
   },
 
@@ -461,7 +610,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       campaignPersist = cacheCampaignState(state);
       didUndo = true;
     });
-    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId });
+    // backward:true — an undo restores a PRIOR (lower) tick, so it MUST bypass the
+    // forward stale-tick guard (last-write-wins). Otherwise the cloud, holding the
+    // higher post-advance tick, rejects the revert as stale_tick (which the client
+    // reads as success) and the undone advance resurrects on reload. The forward
+    // advance path leaves backward falsy, keeping the guard intact.
+    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId, backward: true });
     return didUndo;
   },
 });

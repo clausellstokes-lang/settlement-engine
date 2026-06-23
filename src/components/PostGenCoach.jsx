@@ -1,9 +1,10 @@
 /**
  * PostGenCoach.jsx — Three-step coach shown after a first generation.
  *
- * The pre-generation OnboardingCoach (src/components/OnboardingCoach.jsx)
- * walks the user through "pick a size, hit generate, scroll the tabs".
- * Once they have a settlement, a different conversation starts:
+ * The pre-generation OnboardingCoach was retired (its spotlight-overlay walked
+ * the user through "pick a size, hit generate, scroll the tabs"; first-run
+ * coaching now lives in the Checklist + first-dossier callouts). Once a user has
+ * a settlement, this coach starts a different conversation:
  *
  *   1. Read the dossier — here's what to look at first.
  *   2. Watch how it was simulated — the rail to the right shows it.
@@ -22,16 +23,18 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
+import { GOLD, INK, sans, serif_, SP, R, FS, swatch, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+import { buildNextSteps } from './generate/nextSteps.js';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
-const MUTED = swatch['#6B5340'];
-const BODY  = swatch['#4A3B22'];
+// Retoned for the dark-ink coach card: light parchment tones that clear AA on INK.
+const MUTED = swatch['#C8B098']; // muted parchment for the "Step X of Y" eyebrow + dots
+const BODY  = PARCH;             // light parchment body text on ink
 
 function readDismissed() {
   if (typeof window === 'undefined') return false;
@@ -52,6 +55,13 @@ const STEPS = [
 
 export default function PostGenCoach() {
   const settlement = useStore(s => s.settlement);
+  // The final step folds in the post-generate "what's next" checklist (formerly
+  // the standalone WizardNextSteps card), so the coach reads the same save/auth
+  // state that shapes the save step's framing.
+  const canSave = useStore(s => s.canSave());
+  const authTier = useStore(s => s.auth?.tier);
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const savedSettlements = useStore(s => s.savedSettlements);
 
   // Skip immediately for users who've already seen / dismissed it.
   // Read once on mount so a fresh write during this session doesn't
@@ -71,8 +81,22 @@ export default function PostGenCoach() {
   if (dismissedThisSession) return null;
   if (!settlement) return null;
 
-  const isLast = step === STEPS.length - 1;
-  const stepDef = STEPS[step];
+  // Coach panels: two intro steps (read the dossier, watch the simulation), then
+  // each forward "what's next" move (save, export, refine, place) as its own
+  // step — one idea per panel, instead of a single checklist screen.
+  const signedIn = !!authTier && authTier !== 'anon';
+  const saved = activeSaveId != null
+    || (Array.isArray(savedSettlements)
+        && savedSettlements.some(e => e?.name === settlement.name && e?.tier === settlement.tier));
+  const guide = buildNextSteps({ settlement, canSave, signedIn, saved });
+  const panels = [
+    ...STEPS.slice(0, 2).map(s => ({ title: t(s.titleKey), body: t(s.bodyKey), primary: false })),
+    ...guide.steps.map((s2, i) => ({ title: s2.label, body: s2.hint, primary: i === 0 })),
+  ];
+  const total = panels.length;
+  const safeStep = Math.min(step, total - 1);
+  const cur = panels[safeStep];
+  const isLast = safeStep === total - 1;
 
   function close() {
     setDismissedThisSession(true);
@@ -93,11 +117,11 @@ export default function PostGenCoach() {
         position: 'fixed',
         bottom: 24, right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
-        background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
-        border: `1.5px solid ${GOLD}`,
+        background: INK,
+        border: `1px solid ${GOLD}`,
         borderRadius: R.xl,
         boxShadow: '0 12px 32px rgba(27,20,8,0.25)',
-        fontFamily: sans, color: INK,
+        fontFamily: sans, color: PARCH,
         overflow: 'hidden',
         animation: 'pgc-slide-in 0.3s ease-out',
       }}
@@ -113,29 +137,23 @@ export default function PostGenCoach() {
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm + 2}px ${SP.md}px`,
-        background: 'rgba(27,20,8,0.06)',
-        borderBottom: `1px solid rgba(140,111,50,0.25)`,
+        background: 'rgba(201,162,76,0.10)',
+        borderBottom: `1px solid rgba(201,162,76,0.25)`,
       }}>
         <span style={{
-          width: 22, height: 22, borderRadius: '50%',
-          background: GOLD, color: swatch.white,
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <Sparkles size={12} />
-        </span>
-        <span style={{
           fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
-          textTransform: 'uppercase', color: GOLD_DEEP,
+          textTransform: 'uppercase', color: GOLD,
           flex: 1,
         }}>
           {t('onboarding.coach.welcomeTitle')}
         </span>
         <IconButton
           Icon={X}
+          glyph={'✕'}
           label="Dismiss coach"
           onClick={close}
-          tone="ghost"
-          size="md"
+          tone="default"
+          size="xl"
         />
       </div>
 
@@ -146,29 +164,34 @@ export default function PostGenCoach() {
           letterSpacing: '0.08em', textTransform: 'uppercase',
           marginBottom: 4,
         }}>
-          Step {step + 1} of {STEPS.length}
+          Step {safeStep + 1} of {total}
         </div>
         <h3 id="postgen-coach-title" style={{
           margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
-          color: INK,
+          color: PARCH,
         }}>
-          {t(stepDef.titleKey)}
+          {cur.title}
         </h3>
+        {/* One idea per panel. The first forward move (Save) gets a gold left-rule
+            + weight so it reads as the key next step; the rest are quiet rows. */}
         <p style={{
-          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
+          margin: `${SP.sm}px 0 0`, fontSize: FS.sm,
+          color: cur.primary ? PARCH : BODY,
+          fontWeight: cur.primary ? 600 : 400,
           lineHeight: 1.55,
+          ...(cur.primary ? { paddingLeft: SP.md, borderLeft: `2px solid ${GOLD}` } : null),
         }}>
-          {t(stepDef.bodyKey)}
+          {cur.body}
         </p>
 
         {/* Progress dots */}
-        <div style={{ display: 'flex', gap: 6, marginTop: SP.md }} aria-hidden="true">
-          {STEPS.map((_, i) => (
+        <div style={{ display: 'flex', gap: 6, marginTop: SP.md, flexWrap: 'wrap' }} aria-hidden="true">
+          {panels.map((_, i) => (
             <span
               key={i}
               style={{
                 width: 6, height: 6, borderRadius: '50%',
-                background: i === step ? GOLD : 'rgba(140,111,50,0.30)',
+                background: i === safeStep ? GOLD : 'rgba(140,111,50,0.30)',
                 transition: 'background 0.15s',
               }}
             />
@@ -191,10 +214,12 @@ export default function PostGenCoach() {
             </Button>
           )}
           <span style={{ flex: 1 }} />
+          {/* Always-present escape hatch: exit the coach from any step. */}
           <Button
             variant="ghost"
             size="sm"
             onClick={close}
+            style={{ color: MUTED }}
           >
             {t('onboarding.coach.dismiss')}
           </Button>

@@ -1,6 +1,6 @@
 /**
- * DeityEffectPreview — the "This god will…" panel on the deity authoring form
- * (UX Phase 8). It renders the EXACT couplings the engine applies, read live
+ * DeityEffectPreview — the "This god will…" panel on the deity authoring form.
+ * It renders the EXACT couplings the engine applies, read live
  * from the shared single source `describeDeityEffects` (src/domain/display/
  * deityEffects.js) — never hand-copied numbers. As the author sets the three
  * axes (alignment · temperament · rank), the preview updates because the draft
@@ -13,7 +13,6 @@
  * settlement (the embed-on-assign bridge).
  */
 
-import { Sun } from 'lucide-react';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { SECOND as SEC, MUTED as MUT, BORDER as BOR, FS, swatch } from '../theme.js';
 
@@ -37,14 +36,13 @@ export default function DeityEffectPreview({ draft }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-        <Sun size={13} color={DEITY_ACCENT} />
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           This god will…
         </span>
       </div>
       {effects.length === 0 ? (
         <div style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', lineHeight: 1.5 }}>
-          A fully-neutral, unranked god does nothing to the living world — set an
+          A fully-neutral, unranked god does nothing to the living world. Set an
           alignment, temperament, or rank to give it teeth.
         </div>
       ) : (
@@ -56,7 +54,7 @@ export default function DeityEffectPreview({ draft }) {
       )}
       <div style={{ fontSize: FS.micro, color: MUT, fontStyle: 'italic', marginTop: 6, lineHeight: 1.4 }}>
         Dormant until you assign this deity as a settlement&rsquo;s primary god and enable
-        Religion dynamics — only then does it touch the substrate.
+        Religion dynamics. Only then does it touch the substrate.
       </div>
     </div>
   );

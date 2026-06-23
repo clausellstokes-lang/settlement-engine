@@ -573,6 +573,66 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
   };
 };
 
+// ─── STRESS_TO_TENSION ────────────────────────────────────────────────────────
+// Catalog stress type → current-tension (HISTORICAL_EVENTS_DATA `type`) mapping.
+// Every value MUST be a real event type or the stress-driven tension is silently
+// dropped at selection time. Hoisted to module scope so the dev assertion below
+// can validate it once against the live event table. Exported for the contract
+// test that guards against the silent-drop regression.
+export const STRESS_TO_TENSION = {
+  under_siege: 'occupation_legacy',
+  famine: 'resource_scarcity',
+  occupied: 'occupation_legacy',
+  politically_fractured: 'leadership_vacuum',
+  indebted: 'outside_debt',
+  recently_betrayed: 'corruption_scandal',
+  infiltrated: 'infiltration_fear',
+  plague_onset: 'resource_scarcity',
+  succession_void: 'succession_crisis',
+  monster_pressure: 'external_threat',
+  // These three stresses have no bespoke history-event template, so they remap
+  // to the closest existing HISTORICAL_EVENTS_DATA type. Previously they pointed
+  // at non-existent types (legitimacy_crisis / demographic_pressure) and were
+  // silently dropped, leaving the crisis with no stress-driven tension hook.
+  insurgency: 'leadership_vacuum',
+  mass_migration: 'population_friction',
+  wartime: 'external_threat',
+  religious_conversion: 'leadership_vacuum',
+  slave_revolt: 'leadership_vacuum',
+};
+
+// Neighbor-relationship → current-tension mapping. Same contract as
+// STRESS_TO_TENSION: every value here must resolve to a real event type.
+// Exported for the same contract test.
+export const NEIGHBOR_REL_TENSION = {
+  hostile: 'external_threat',
+  // 'trade_dispute' is not a real history-event type — a trade-partner friction
+  // remaps to the closest existing one (economic_disparity) so it resolves
+  // instead of vanishing.
+  trade_partner: 'economic_disparity',
+};
+
+// Dev-only contract check: surface any STRESS_TO_TENSION / NEIGHBOR_REL_TENSION
+// value that does not resolve to a real HISTORICAL_EVENTS_DATA type, so the
+// silent-drop regression that motivated this fix cannot return unnoticed. One
+// warning per process; stays quiet under vitest (NODE_ENV === 'test') and in
+// production, matching the rngContext.js dev-warning idiom.
+const _isTestEnv = /** @type {any} */ (globalThis)?.process?.env?.NODE_ENV === 'test';
+if (!_isTestEnv) {
+  const knownTypes = new Set(HISTORICAL_EVENTS_DATA.map(e => e.type));
+  const missing = [
+    ...Object.values(STRESS_TO_TENSION),
+    ...Object.values(NEIGHBOR_REL_TENSION),
+  ].filter(t => !knownTypes.has(t));
+  if (missing.length) {
+    console.warn(
+      '[historyGenerator] tension type(s) not in HISTORICAL_EVENTS_DATA — the '
+      + 'mapped stress/neighbor tension will be silently dropped: '
+      + [...new Set(missing)].join(', '),
+    );
+  }
+}
+
 // ─── buildHistoricalEvent ─────────────────────────────────────────────────────
 /**
  * Select and personalise a set of current tensions for this settlement.
@@ -614,8 +674,13 @@ const buildHistoricalEvent = (
   const secFaction = (factions.find(f => !f.isGoverning) || factions[1])?.faction || 'the merchant class';
   const altFaction = factions[1]?.faction || 'the merchant class';
   const crimeFaction =
-    factions.find(f => f.faction?.toLowerCase().includes('thieves') || f.faction?.toLowerCase().includes('criminal'))
-      ?.faction || null;
+    factions.find(
+      f =>
+        f.category === 'criminal' ||
+        f.faction?.toLowerCase().includes('thieves') ||
+        f.faction?.toLowerCase().includes('organized crime') ||
+        f.faction?.toLowerCase().includes('criminal'),
+    )?.faction || null;
   const milFaction =
     factions.find(
       f =>
@@ -627,32 +692,15 @@ const buildHistoricalEvent = (
     factions.find(f => f.faction?.toLowerCase().includes('religious') || f.faction?.toLowerCase().includes('church'))
       ?.faction || null;
 
-  // Stress → tension type mapping
-  const STRESS_TO_TENSION = {
-    under_siege: 'occupation_legacy',
-    famine: 'resource_scarcity',
-    occupied: 'occupation_legacy',
-    politically_fractured: 'leadership_vacuum',
-    indebted: 'outside_debt',
-    recently_betrayed: 'corruption_scandal',
-    infiltrated: 'infiltration_fear',
-    plague_onset: 'resource_scarcity',
-    succession_void: 'succession_crisis',
-    monster_pressure: 'external_threat',
-    insurgency: 'legitimacy_crisis',
-    mass_migration: 'demographic_pressure',
-    wartime: 'external_threat',
-    religious_conversion: 'legitimacy_crisis',
-    slave_revolt: 'legitimacy_crisis',
-  };
+  // Stress → tension type mapping (module-level STRESS_TO_TENSION; dev-validated).
 
-  // Neighbor relationship → tension
+  // Neighbor relationship → tension (module-level NEIGHBOR_REL_TENSION map).
   const neighborRel = (config.neighborRelationship?.relationshipType || '').toLowerCase();
   const neighborTension =
     neighborRel.includes('hostile') || neighborRel.includes('rival') || neighborRel.includes('cold_war')
-      ? 'external_threat'
+      ? NEIGHBOR_REL_TENSION.hostile
       : neighborRel.includes('trade_partner')
-        ? 'trade_dispute'
+        ? NEIGHBOR_REL_TENSION.trade_partner
         : null;
 
   // How many tensions to generate
@@ -673,7 +721,7 @@ const buildHistoricalEvent = (
         const commodity = economicState?.tradeCommodity || 'key goods';
         selected.push({
           ...tmpl,
-          description: `The supply of ${commodity} — the settlement's economic backbone — is under pressure. ${economicViability.issues[0].message}`,
+          description: `The supply of ${commodity} (the settlement's economic backbone) is under pressure. ${economicViability.issues[0].message}`,
           specificIssue: economicViability.issues[0].message,
         });
         usedTypes.add('resource_scarcity');
@@ -715,9 +763,13 @@ const buildHistoricalEvent = (
       if (tmpl) {
         selected.push({
           ...tmpl,
+          // Reword for a small settlement with no real authority to overwhelm.
+          // Search strings must match the crime_wave template verbatim
+          // ('overwhelmed the authorities' / 'vigilantes began to form') or the
+          // replace is a silent no-op and the generic wording leaks through.
           description: tmpl.description
-            .replace('overwhelms authorities', 'circulates openly')
-            .replace('vigilantes are forming', 'and there is no authority to stop it'),
+            .replace('overwhelmed the authorities', 'circulated openly')
+            .replace('vigilantes began to form', 'there was no authority to stop it'),
         });
         usedTypes.add('crime_wave');
       }
@@ -737,8 +789,10 @@ const buildHistoricalEvent = (
   }
 
   // Fill remaining slots with random tensions
-  // Suppress magical events in no-magic worlds
-  const magicFilter = config?.magicExists === false ? e => e.type !== 'magical' : () => true;
+  // Suppress magical events in no-magic worlds. The event type is
+  // 'magical_controversy' (see HISTORICAL_EVENTS_DATA) — the old 'magical' token
+  // matched nothing, so arcane events leaked into no-magic campaigns.
+  const magicFilter = config?.magicExists === false ? e => e.type !== 'magical_controversy' : () => true;
   const pool = HISTORICAL_EVENTS_DATA.filter(e => !usedTypes.has(e.type) && magicFilter(e));
   while (selected.length < targetCount && pool.length > 0) {
     let candidate = pick(pool);
@@ -965,7 +1019,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         "Compact signatories' families still hold preferential market positions",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales — and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
@@ -978,13 +1032,13 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     resourceEvents.push({
       name: 'The Great Construction',
       description:
-        "A period of ambitious stone construction transformed the settlement's character — walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+        "A period of ambitious stone construction transformed the settlement's character: walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
       lastingEffects: [
         "Quarrymen's guild retains unusual civic influence",
         "Architectural legacy of the construction period defines the settlement's visual character",
       ],
       plotHooks: [
-        'Something was sealed inside the walls during construction — deliberately',
+        'Something was sealed inside the walls during construction. Deliberately.',
         "The quarry foreman's descendants claim unpaid wages from the original commission",
       ],
       severity: ['major'],
@@ -1003,7 +1057,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         'Arcane regulatory body established with unusual local authority',
       ],
       plotHooks: [
-        'The incident was caused by deliberate misuse of the node — someone covered it up',
+        'The incident was caused by deliberate misuse of the node. Someone covered it up.',
         'The transformation affected a family lineage in ways that are only now becoming apparent',
       ],
       severity: ['major', 'catastrophic'],

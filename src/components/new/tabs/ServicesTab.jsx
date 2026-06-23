@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans, TabIntro } from '../Primitives';
@@ -7,6 +6,7 @@ import {Ts, J0} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import {ServiceItem} from '../serviceComponents';
+import {compromisedSecurityInstitutions} from '../../../domain/corruption.js';
 import {NarrativeNote} from '../NarrativeNote';
 
 export function ServicesTab({ services, settlement, narrativeNote}) {
@@ -17,11 +17,33 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
   if (!hasServices) return (
-    <div style={{padding:32,textAlign:'center',color:MUTED,fontSize:FS.md}}>Generate a settlement to see available services.</div>
+    <div style={{padding:32,textAlign:'center',color:MUTED,fontSize:FS.md}}>No services on offer here yet.</div>
   );
 
   // Chain impairment
   const {tradeDeps, impaired, degraded, vulnerable, depReasons} = computeChainSets(settlement);
+  // Compromised institutions — surfaced as an explicit 'Compromised' marker on
+  // the service row. An institution is compromised when it carries a
+  // 'corruption' impairment (revealed by a scandal or marked in-chain by an
+  // institution-scope Impose Corruption) or when a corrupt NPC is homed inside
+  // a security institution (covert). compromisedSecurityInstitutions already
+  // distinguishes covert vs revealed; we fold in any 'corruption'-impaired
+  // institution so non-security captures show too. Two-channel: this drives a
+  // text label and a colour, never colour alone.
+  const compromised = (() => {
+    const map = new Map(); // lowercased name → 'covert' | 'revealed'
+    const { covert, revealed } = compromisedSecurityInstitutions(settlement);
+    covert.forEach(n => map.set(String(n).toLowerCase(), 'covert'));
+    revealed.forEach(n => map.set(String(n).toLowerCase(), 'revealed'));
+    (settlement?.institutions || []).forEach(inst => {
+      const imp = (inst.impairments || []).find(i => i?.type === 'corruption');
+      if (!imp) return;
+      const key = String(inst.name || '').toLowerCase();
+      // A covert in-chain mark reads 'covert'; a public scandal reads 'revealed'.
+      map.set(key, imp.covert ? 'covert' : 'revealed');
+    });
+    return map;
+  })();
   const chainDepthMap = computeChainDepthMap(settlement);
   // Build service → chain depth lookup from active chains
   const serviceChainDepth = new Map();
@@ -103,7 +125,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
+          {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton glyph={'✕'} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
 
         {searchResults !== null && (
@@ -117,8 +139,8 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
-                      <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
-                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.icon} {Ts[r.cat]?.label}</span>
+                      <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} compromised={compromised} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
+                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'inline-flex',alignItems:'center',gap:4,marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
                   ))}
                 </div>
@@ -135,14 +157,14 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
             <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
               {catOrder.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 const cs = catStats[cat] || {total:0,imp:0,deg:0,vul:0};
                 const hasImp = cs.imp > 0;
                 const hasDeg = cs.deg > 0 && !hasImp;
                 const borderColor = hasImp?'#e8a0a0':hasDeg?'#e0b050':'#c8d8a0';
                 const bg = hasImp?'#fdf4f4':hasDeg?'#fdf8e8':'#f4faf0';
                 return (
-                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
+                  <div key={cat} role="button" tabIndex={0} aria-label={`Show ${meta.label} services`} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
                     onClick={()=>{
                       setOpenCats(prev=>({...prev,[cat]:true}));
                       setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
@@ -155,7 +177,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                       }
                     }}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.md}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                       <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
@@ -166,11 +187,10 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 );
               })}
               {missing.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.md}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                     </div>
                     <div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:swatch['#7A5010']}}> not available</div>
@@ -193,7 +213,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           {catOrder.map(cat => {
             const list = services[cat];
             if (!list?.length) return null;
-            const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+            const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
             const cs = catStats[cat];
             const isCriminal = cat === 'criminal';
             const open = isOpen(cat);
@@ -219,7 +239,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  <span style={{fontSize: FS['14']}}>{meta.icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',borderRadius:3,padding:'1px 5px',marginLeft:2}}> {cs.imp} impaired</span>}
@@ -242,7 +261,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                       return na.localeCompare(nb);
                     }).map((svc,i)=>(
                       <ServiceItem key={i} svc={svc} accent={meta.accent} isCriminal={isCriminal}
-                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} compromised={compromised} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
                     ))}
                   </div>
                 </div>}

@@ -1,6 +1,6 @@
 /**
  * PantheonActivationStrip — teaches the dormant-until-assigned + premium model
- * for authored deities (UX Phase 8). It shows the three activation milestones a
+ * for authored deities. It shows the three activation milestones a
  * homebrew pantheon passes through before it touches the simulation:
  *
  *   1. AUTHORED      — at least one deity exists in customContent.deities.
@@ -10,13 +10,23 @@
  *                      worldState simulation rules.
  *
  * Until all three hold, the pantheon is INERT — byte-identical to a deity-free
- * world. The strip deep-links the two actionable steps: "assign a deity" routes
- * to the Realm (where PrimaryDeityPicker lives) and "enable religion dynamics"
- * routes to the Realm's SimulationRulesDialog. Pure read of store state; the
- * deep-links are plain `navigate` calls.
+ * world. The strip deep-links the two actionable steps into their named
+ * destinations rather than the bare Realm hub:
+ *
+ *   - "Assign a deity" requests the Realm Inspector's Pantheon section (where
+ *     AssignDeityFromMap lives) via the one-shot `requestMapWorkspace('pantheon')`
+ *     signal, then navigates to the Realm. While no deity is embedded in the
+ *     active campaign world the Pantheon tab self-hides and the Inspector falls
+ *     back to its Dashboard, so the GM still lands inside the Realm with context.
+ *   - "Enable dynamics" requests the Realm's Simulation Rules dialog (the only
+ *     surface carrying the religion-dynamics toggle) via the one-shot
+ *     `requestSimulationRules()` signal, then navigates to the Realm.
+ *
+ * Both signals are consumed once on the Realm's mount; if a selector is absent
+ * (a stubbed store in tests) the CTA degrades to a plain `navigate('realm')`.
  */
 
-import { Sun, Check, Circle, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { INK, SECOND as SEC, MUTED as MUT, BORDER as BOR, CARD, FS, swatch } from '../theme.js';
@@ -54,10 +64,11 @@ export function computePantheonActivation(state) {
 }
 
 function Milestone({ on, label, detail, action }) {
-  const Icon = on ? Check : Circle;
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '6px 0' }}>
-      <Icon size={14} color={on ? OK : MUT} style={{ marginTop: 2, flexShrink: 0 }} />
+      <span aria-hidden="true" style={{ marginTop: 1, flexShrink: 0, fontSize: FS.sm, fontWeight: 800, lineHeight: 1.4, color: on ? OK : MUT }}>
+        {on ? '✓' : '○'}
+      </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: on ? INK : MUT }}>{label}</div>
         <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.45 }}>{detail}</div>
@@ -72,6 +83,8 @@ export default function PantheonActivationStrip() {
   const settlement = useStore((s) => s.settlement);
   const savedSettlements = useStore((s) => s.savedSettlements);
   const campaigns = useStore((s) => s.campaigns);
+  const requestMapWorkspace = useStore((s) => s.requestMapWorkspace);
+  const requestSimulationRules = useStore((s) => s.requestSimulationRules);
 
   const { authoredCount, authored, assigned, dynamicsOn } = computePantheonActivation({
     customContent, settlement, savedSettlements, campaigns,
@@ -81,11 +94,23 @@ export default function PantheonActivationStrip() {
   if (!authored) return null;
 
   const live = authored && assigned && dynamicsOn;
-  const linkBtn = (label, view) => (
+
+  // Deep-link into the Pantheon section (AssignDeityFromMap), then the Realm.
+  const goAssignDeity = () => {
+    requestMapWorkspace?.('pantheon');
+    navigate('realm');
+  };
+  // Deep-link into the Simulation Rules dialog (the religion-dynamics toggle), then the Realm.
+  const goEnableDynamics = () => {
+    requestSimulationRules?.(true);
+    navigate('realm');
+  };
+
+  const linkBtn = (label, onClick) => (
     <Button
       variant="secondary" size="sm"
       icon={<ArrowRight size={11} />}
-      onClick={() => navigate(view)}
+      onClick={onClick}
       style={{ flexShrink: 0, padding: '2px 8px', fontSize: FS.xxs }}
     >
       {label}
@@ -101,7 +126,6 @@ export default function PantheonActivationStrip() {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <Sun size={14} color={DEITY_ACCENT} />
         <span style={{ fontSize: FS.xs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em', flex: 1 }}>
           Pantheon activation
         </span>
@@ -115,25 +139,25 @@ export default function PantheonActivationStrip() {
 
       <Milestone
         on={authored}
-        label={`Authored — ${authoredCount} deit${authoredCount === 1 ? 'y' : 'ies'}`}
+        label={`Authored: ${authoredCount} deit${authoredCount === 1 ? 'y' : 'ies'}`}
         detail="Your homebrew pantheon exists in the catalog."
       />
       <Milestone
         on={assigned}
         label="Assigned to a settlement"
         detail="A deity must be a settlement's primary god before it embeds and acts."
-        action={linkBtn('Assign a deity', 'realm')}
+        action={linkBtn('Assign a deity', goAssignDeity)}
       />
       <Milestone
         on={dynamicsOn}
         label="Religion dynamics enabled"
         detail="Turn on the campaign rule so deities contest converts and gain seats."
-        action={linkBtn('Enable dynamics', 'realm')}
+        action={linkBtn('Enable dynamics', goEnableDynamics)}
       />
 
       {!live && (
         <div style={{ fontSize: FS.micro, color: MUT, fontStyle: 'italic', marginTop: 4, lineHeight: 1.4 }}>
-          Until all three are set the pantheon is dormant — byte-identical to a deity-free world.
+          Until all three are set the pantheon is dormant, byte-identical to a deity-free world.
         </div>
       )}
     </div>

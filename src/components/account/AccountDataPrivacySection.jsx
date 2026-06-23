@@ -16,15 +16,14 @@
  *     by the durable productPrefs store (setProductPref).
  */
 import { useState } from 'react';
-import {
-  Database, Download, Trash2, AlertTriangle, Eye,
-} from 'lucide-react';
+import { Download, AlertTriangle } from 'lucide-react';
 import { downloadAccountExport, requestAccountDeletion } from '../../lib/accountData.js';
 import { useStore } from '../../store/index.js';
 import PrivacySettings from '../PrivacySettings.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  DANGER_BORDER, SUCCESS_BORDER,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
 
@@ -55,6 +54,7 @@ export default function AccountDataPrivacySection({
   campaignCount = 0,
   onDeleteAllSettlements,
   onDeleteAllCampaigns,
+  onSignOut,
 }) {
   const galleryPublicDefault = useStore(s => s.productPrefs?.galleryPublicDefault);
   const shareDefault = useStore(s => s.productPrefs?.shareDefault);
@@ -108,10 +108,14 @@ export default function AccountDataPrivacySection({
     setDeleteBusy(true);
     setDeleteError(null);
     try {
+      // File the soft-delete request BEFORE signing out, so it is durably
+      // recorded even if ending the session tears down the auth context.
       await requestAccountDeletion(auth.user);
       setDeleteQueued(true);
       setDeleteOpen(false);
       setDeletePhrase('');
+      // Honor the banner's promise: end the session so the user is signed out.
+      if (typeof onSignOut === 'function') await onSignOut();
     } catch (e) {
       setDeleteError(e?.message || 'Could not submit your request. Please contact support.');
     } finally {
@@ -120,13 +124,13 @@ export default function AccountDataPrivacySection({
   };
 
   return (
-    <Section title="Data &amp; Privacy" icon={Database}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
+    <Section title="Data and privacy">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
 
         {/* ── Export ────────────────────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Download size={14} color={GOLD} /> Export my data
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Export my data
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Download all your saved settlements and campaigns as a single JSON file.
@@ -137,9 +141,9 @@ export default function AccountDataPrivacySection({
         </div>
 
         {/* ── Visibility defaults ───────────────────────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
-            <Eye size={14} color={GOLD} /> Sharing &amp; visibility defaults
+        <div>
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
+            Sharing and visibility defaults
           </div>
           <VisibilityToggle
             id="pref-gallery-public"
@@ -170,21 +174,25 @@ export default function AccountDataPrivacySection({
           </label>
         </div>
 
-        {/* ── Privacy & analytics consent (existing component) ──────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
-          <PrivacySettings />
+        {/* ── Privacy & analytics consent (existing component) ──────────────
+            Embedded `bare` so it flattens to a borderless sub-group: the
+            parent Section border is the only boundary, and PrivacySettings'
+            inline title sits level with the sibling sub-group headers instead
+            of drawing a second concentric card (P5). */}
+        <div>
+          <PrivacySettings bare />
         </div>
 
         {/* ── Bulk content deletion ─────────────────────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Trash2 size={14} color={swatch.danger} /> Delete content
+        <div>
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Delete content
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
-            Permanently remove all your saved content. This can't be undone.
+            Permanently remove all your saved content. This cannot be undone.
           </p>
           {confirmWipe ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.md, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.md, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md }}>
               <div style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>
                 Delete all {confirmWipe}? This permanently removes
                 {confirmWipe === 'settlements' ? ` ${settlementCount} settlement${settlementCount === 1 ? '' : 's'}` : ` ${campaignCount} campaign${campaignCount === 1 ? '' : 's'}`}.
@@ -207,32 +215,34 @@ export default function AccountDataPrivacySection({
         </div>
 
         {/* ── Account deletion (soft-delete request) ────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: swatch.danger }}>
-            <AlertTriangle size={14} color={swatch.danger} /> Delete my account
+        <div>
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.danger }}>
+            Delete my account
           </div>
           {deleteQueued ? (
-            <div style={{ marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
-              Your deletion request has been received. Your account is scheduled for removal and you'll be signed out shortly. Contact support if this was a mistake.
+            <div style={{ marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+              Your deletion request has been received. Your account is scheduled for removal and we are signing you out now. Contact support if this was a mistake.
             </div>
           ) : !deleteOpen ? (
             <>
               <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
-                This requests permanent deletion of your account and all associated data. There's a short grace
+                This requests permanent deletion of your account and all associated data. There is a short grace
                 window during which you can contact support to cancel.
               </p>
-              <Button variant="danger" size="md" icon={<AlertTriangle size={14} />} onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
+              <Button variant="ghost" size="md" icon={<AlertTriangle size={14} />} onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
                 Request account deletion
               </Button>
             </>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm, padding: SP.md, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm, padding: SP.md, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md }}>
               {deleteError && <div role="alert" style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>{deleteError}</div>}
               <span id="delete-confirm-label" style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.danger }}>
                 Type {DELETE_PHRASE} to confirm
               </span>
               <input
                 id="delete-confirm-phrase"
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- land keyboard focus in the typed-phrase confirm when the panel opens
+                autoFocus
                 aria-labelledby="delete-confirm-label"
                 value={deletePhrase}
                 onChange={e => setDeletePhrase(e.target.value)}
@@ -255,7 +265,7 @@ export default function AccountDataPrivacySection({
           )}
         </div>
 
-        <div style={{ fontSize: FS.xs, color: MUTED }}>
+        <div style={{ fontSize: FS.xs, color: BODY }}>
           Deleting your account erases your data per our privacy policy.
         </div>
       </div>

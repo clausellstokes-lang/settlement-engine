@@ -2,8 +2,8 @@
  * domain/worldPulse/dispositionLedger.js — the ONE ratcheted disposition ledger.
  *
  * A single shape + ratchet, instantiated TWICE:
- *  - worldState.dispositionStats — per settlement (Feature C: aggressiveness memory)
- *  - worldState.pantheon         — per deity     (Feature D / R4: faith fortunes)
+ *  - worldState.dispositionStats — per settlement (aggressiveness memory)
+ *  - worldState.pantheon         — per deity     (faith fortunes)
  *
  * An entry accumulates a signed win/loss `score`; `readDispositionMultiplier` turns
  * it into a centered-on-1.0 multiplier — EXACTLY 1.0 when the entry is absent or

@@ -2,26 +2,30 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {filterCatalogForMagic} from '../domain/magicFilter.js';
 import ControlsStrip from './ControlsStrip.jsx';
 import Button from './primitives/Button.jsx';
-import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS, swatch, MUTED } from './theme.js';
+import { GOLD as gold, INK as ink, MUTED as muted, BODY as body, BORDER as border, CARD_HDR, sans, FS, swatch, MUTED } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
 // Direct catalog imports keep the generator pipeline out of this
 // component's synchronous import graph.
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
+import { displayInstitutionName } from '../domain/display/institutionDisplay.js';
 import { truncateAtWord } from '../lib/text.js';
 
+// Category accent colours route through the exact-value swatch escape hatch.
+// The handful with no exact swatch key map to the nearest existing entry
+// (sub-perceptual near-dupes, consistent with the forked-colour burndown).
 const CAT_COLORS = {
-  Essential:      '#1a4a20',
-  Economy:        '#a0762a',
-  Crafts:         '#8b5a2a',
-  Religious:      '#1a5a28',
-  Government:     '#2a3a7a',
-  Infrastructure: '#3a5a6a',
-  Defense:        '#8b1a1a',
-  Magic:          '#5a2a8a',
-  Adventuring:    '#2a5a8a',
-  Criminal:       '#4a1a4a',
-  Entertainment:  '#5a3a1a',
+  Essential:      swatch['#1A4A2A'],
+  Economy:        swatch['#A0762A'],
+  Crafts:         swatch['#8A5A20'],
+  Religious:      swatch['#1A5A28'],
+  Government:     swatch['#2A3A7A'],
+  Infrastructure: swatch['#2A5A7A'],
+  Defense:        swatch['#8B1A1A'],
+  Magic:          swatch['#5A2A8A'],
+  Adventuring:    swatch['#2A5A8A'],
+  Criminal:       swatch['#4A1A4A'],
+  Entertainment:  swatch['#5A3A1A'],
 };
 
 function getToggleState(toggles, tier, category, name, isOutOfTier = false) {
@@ -68,7 +72,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
           padding: '5px 10px', background: swatch['#F5F0E8'],
-          border: '1px dashed #c8b89a', borderRadius: 5, minHeight: 0,
+          border: `1px dashed ${swatch['#C8B89A']}`, borderRadius: 5, minHeight: 0,
           textAlign: 'left', fontWeight: 400, marginBottom: open ? 4 : 0,
         }}
       >
@@ -79,7 +83,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         </span>
         {forcedCount > 0 && (
           <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
-            background: swatch['#FDF0E8'], border: '1px solid #d8a080',
+            background: swatch['#FDF0E8'], border: `1px solid ${swatch['#E08040']}`,
             borderRadius: 3, padding: '1px 6px' }}>
             {forcedCount} forced in
           </span>
@@ -92,7 +96,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
       {open && !allCollapsed && (
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
           <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
-            background: swatch['#FAF8F4'], borderRadius: 3, border: '1px solid #e8dcc8' }}>
+            background: swatch['#FAF8F4'], borderRadius: 3, border: `1px solid ${swatch['#E8DCC8']}` }}>
             These institutions are excluded by default. Click to force-include. Contradictions will appear in the Viability tab.
           </div>
           {Object.entries(institutions).sort(([a],[b])=>a.localeCompare(b)).map(([name, instDef]) => {
@@ -104,31 +108,33 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 tabIndex={0}
                 onClick={() => handleToggle(name, instDef)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(name, instDef); } }}
+                onFocus={(e) => { e.currentTarget.style.outline = `2px solid ${gold}`; e.currentTarget.style.outlineOffset = '2px'; }}
+                onBlur={(e) => { e.currentTarget.style.outline = 'none'; }}
                 style={{
                   display: 'flex', alignItems: 'flex-start', gap: 8,
                   padding: '5px 8px', borderRadius: 5, cursor: 'pointer',
-                  background: isForced ? '#fdf0e8' : '#faf8f4',
-                  border: `1px ${isForced ? 'solid' : 'dashed'} ${isForced ? '#d8a080' : '#d8cdb8'}`,
+                  background: isForced ? swatch['#FDF0E8'] : swatch['#FAF8F4'],
+                  border: `1px ${isForced ? 'solid' : 'dashed'} ${isForced ? swatch['#E08040'] : swatch['#D8C8A8']}`,
                   opacity: isForced ? 1 : 0.65,
                   transition: 'all 0.15s',
                 }}
               >
                 <div style={{
                   width: 14, height: 14, borderRadius: 3, marginTop: 1, flexShrink: 0,
-                  background: isForced ? '#c05010' : 'transparent',
-                  border: `2px solid ${isForced ? '#c05010' : '#a09080'}`,
+                  background: isForced ? swatch['#C05010'] : 'transparent',
+                  border: `2px solid ${isForced ? swatch['#C05010'] : swatch['#A08060']}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {isForced && <span style={{ fontSize: FS.micro, color: swatch.white, fontWeight: 900 }}>F</span>}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: FS['11.5'], fontWeight: isForced ? 700 : 500,
-                    color: isForced ? '#8a3010' : '#6b5340' }}>
-                    {name}
+                    color: isForced ? swatch['#8A3010'] : swatch['#6B5340'] }}>
+                    {displayInstitutionName(name)}
                     {instDef.nativeTier && (
                       <span style={{ fontSize: FS.micro, fontWeight: 600, marginLeft: 6,
                         color: MUTED, background: swatch['#F0E8D8'],
-                        border: '1px solid #d8c8a8', borderRadius: 3, padding: '0 4px' }}>
+                        border: `1px solid ${swatch['#D8C8A8']}`, borderRadius: 3, padding: '0 4px' }}>
                         {instDef.nativeTier}
                       </span>
                     )}
@@ -141,8 +147,8 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 </div>
                 {isForced && (
                   <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
-                    background: swatch['#FDF0E8'], border: '1px solid #d8a080',
-                    borderRadius: 3, padding: '1px 5px', flexShrink: 0 }}>FORCED</span>
+                    background: swatch['#FDF0E8'], border: `1px solid ${swatch['#E08040']}`,
+                    borderRadius: 3, padding: '1px 5px', flexShrink: 0 }}>Forced</span>
                 )}
               </div>
             );
@@ -177,32 +183,35 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
     else                                 onToggle(tier, category, name, 'allow');
   };
 
-  const borderLeft = reqOverridden     ? '3px solid #8b1a1a'
-    : req && isOutOfTier               ? '3px solid #c05010'
+  const borderLeft = reqOverridden     ? `3px solid ${swatch['#8B1A1A']}`
+    : req && isOutOfTier               ? `3px solid ${swatch['#C05010']}`
     : req                              ? `3px solid ${catColor}`
     : def.required && !reqOverridden   ? `3px solid ${catColor}60`
     : '3px solid transparent';
 
-  const bg = reqOverridden             ? '#fdf0f0'
-    : req && isOutOfTier               ? '#fff0e0'
-    : req                              ? '#efe8d0'
-    : '#faf6ef';
+  const bg = reqOverridden             ? swatch['#FDF0F0']
+    : req && isOutOfTier               ? swatch['#FFF0E0']
+    : req                              ? swatch['#F0E8D8']
+    : swatch['#FAF6EF'];
 
-  const nameColor = reqOverridden ? '#8b1a1a'
-    : req && isOutOfTier         ? '#8a3010'
+  const nameColor = reqOverridden ? swatch['#8B1A1A']
+    : req && isOutOfTier         ? swatch['#8A3010']
     : req                        ? catColor
     : isExcluded                 ? muted
     : ink;
 
-  // Excluded = opacity only, no label. Forced/required still show label.
-  const labelText = reqOverridden                  ? '✕ OVERRIDDEN'
+  // Two channels for every pole of the constraint (P7): excluded carries an
+  // uppercase EXCLUDED text label, not strikethrough + opacity alone, mirroring
+  // the Forced chip so colour is never the sole carrier of state.
+  const labelText = reqOverridden                  ? '✕ Overridden'
     : def.required && !reqOverridden               ? '✦ Required'
-    : req && isOutOfTier                           ? ' Cross-tier'
-    : req                                          ? ' Forced'
+    : req && isOutOfTier                           ? 'Cross-tier'
+    : req                                          ? 'Forced'
+    : isExcluded                                   ? 'Excluded'
     : null;
 
-  const labelColor = reqOverridden ? '#8b1a1a'
-    : req && isOutOfTier         ? '#8a3010'
+  const labelColor = reqOverridden ? swatch['#8B1A1A']
+    : req && isOutOfTier         ? swatch['#8A3010']
     : req                        ? catColor
     : muted;
 
@@ -212,6 +221,8 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e); } }}
+      onFocus={(e) => { e.currentTarget.style.outline = `2px solid ${gold}`; e.currentTarget.style.outlineOffset = '-2px'; }}
+      onBlur={(e) => { e.currentTarget.style.outline = 'none'; }}
       title={
         reqOverridden           ? 'Force-excluded. Click to restore'
         : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier). Click to force include`
@@ -223,7 +234,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
         display: 'flex', alignItems: 'flex-start', gap: 8,
         padding: '6px 12px 6px 10px',
         background: bg, borderLeft,
-        borderBottom: '1px solid #f0e8d8',
+        borderBottom: `1px solid ${swatch['#F0E8D8']}`,
         cursor: 'pointer', userSelect: 'none',
         WebkitTapHighlightColor: 'transparent',
         transition: 'all 0.12s',
@@ -233,7 +244,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
           <span style={{ fontWeight: 600, fontSize: FS.sm, color: nameColor,
                 textDecoration: isExcluded ? 'line-through' : 'none',
-                opacity: isExcluded ? 0.7 : 1 }}>{name}</span>
+                opacity: isExcluded ? 0.7 : 1 }}>{displayInstitutionName(name)}</span>
           {def.p !== undefined && (
             <span style={{ fontSize: FS.xxs, color: muted, background: swatch['#F0EAD8'], borderRadius: 3, padding: '0 4px' }}>
               {Math.round((def.p || 0) * 100)}%
@@ -254,7 +265,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
           )}
         </div>
         {def.desc && (
-          <p style={{ fontSize: FS.xxs, color: muted, margin: '2px 0 0',
+          <p style={{ fontSize: FS.xxs, color: body, margin: '2px 0 0',
             lineHeight: 1.35, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
             textDecoration: isExcluded ? 'line-through' : 'none',
             opacity: isExcluded ? 0.6 : 1 }}>
@@ -299,7 +310,7 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
           padding: '7px 12px', minHeight: 0,
-          background: isCollapsed ? '#faf4e8' : '#f0ead8',
+          background: isCollapsed ? CARD_HDR : swatch['#F0EAD8'],
           borderTop: `1px solid ${border}`,
           border: 'none', borderRadius: 0, fontWeight: 400,
           textAlign: 'left', userSelect: 'none', whiteSpace: 'normal',
@@ -316,30 +327,19 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
             </span>
           )}
           {excludeCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch.danger, borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], borderRadius: 3, padding: '1px 5px' }}>
               {excludeCount} excluded
             </span>
           )}
           {overrideCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], border: '1px solid #e8a0a0', borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], border: `1px solid ${swatch['#C88A8A']}`, borderRadius: 3, padding: '1px 5px' }}>
               {overrideCount} req. overridden
             </span>
           )}
         </div>
-        {forceCount===0 && excludeCount===0 && <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px', marginRight: 4 }}>
-          {Object.keys(institutions).length} allowed
-        </span>}
-        {(forceCount>0 || excludeCount>0) && <>
-          <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px' }}>
-            {Object.keys(institutions).length - forceCount - excludeCount} allowed
-          </span>
-          {forceCount>0 && <span style={{ fontSize: FS.micro, fontWeight: 700, color: gold, background: `${gold}20`, borderRadius: 3, padding: '1px 5px' }}>
-            {forceCount} forced
-          </span>}
-          {excludeCount>0 && <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch.danger, borderRadius: 3, padding: '1px 5px' }}>
-            {excludeCount} excluded
-          </span>}
-        </>}
+        <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px', marginRight: 4 }}>
+          {Object.keys(institutions).length - forceCount - excludeCount} allowed
+        </span>
         <span style={{ fontSize: FS.xxs, color: muted, marginRight: 4 }}>{isCollapsed ? '▼' : '▲'}</span>
       </Button>
 
@@ -361,7 +361,7 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
       )}
 
       {!isCollapsed && !isEnabled && (
-        <div style={{ padding: '6px 12px', fontSize: FS.xs, color: muted, fontStyle: 'italic' }}>
+        <div style={{ padding: '6px 12px', fontSize: FS.xs, color: body, fontStyle: 'italic' }}>
           Category disabled - no institutions from this category will appear.
         </div>
       )}
@@ -433,7 +433,7 @@ export default function InstitutionalGrid() {
   );
 
   if (!catalog || categories.length === 0) {
-    return <div style={{ padding: 16, color: muted, fontSize: FS.sm }}>No catalog for this tier.</div>;
+    return <div style={{ padding: 16, color: body, fontSize: FS.sm }}>No catalog for this tier.</div>;
   }
 
   return (
@@ -486,7 +486,7 @@ export default function InstitutionalGrid() {
       })}
       </div>
       {Object.keys(filteredCatalog).length === 0 && (
-        <div style={{ padding: '20px 0', textAlign: 'center', color: muted, fontSize: FS.sm }}>
+        <div style={{ padding: '20px 0', textAlign: 'center', color: body, fontSize: FS.sm }}>
           No institutions match.
         </div>
       )}

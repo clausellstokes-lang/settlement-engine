@@ -10,7 +10,7 @@
  *   - worldState.deployments      — active armies ({ targetId, sinceTick, role })
  *   - worldState.tradeWarState    — per-prize primary-supplier crown + cooldown
  *   - worldState.dispositionStats — cross-settlement win/loss disposition memory
- *   - worldState.pantheon         — per-deity faith ledger (R4, conditional)
+ *   - worldState.pantheon         — per-deity faith ledger (conditional)
  *   - regionalGraph war_front     — the live siege coalition (besiegers per target)
  *   - regionalGraph trade_dependency goods — the contested commodity
  *
@@ -308,7 +308,7 @@ export function occupiedSettlements(settlementItems) {
   return out.sort((a, b) => codepoint(a.id, b.id));
 }
 
-// ── War-exhaustion scar (Z2a) read-side ──────────────────────────────────────
+// ── War-exhaustion scar read-side ────────────────────────────────────────────
 // The NON-REVERTING per-home war-weariness scar (warDeployment.js): a 0..1 ledger
 // (`worldState.warExhaustion[homeId]`) that ratchets up under sustained war and
 // decays only slowly when the army comes home. EXHAUSTION_CONDITION_FLOOR (0.20)

@@ -38,8 +38,10 @@ const _isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 
 // ─── Math utilities ──────────────────────────────────────────────────────────
 
-/** Clamp a value between lo and hi (defaults: 0–100). */
-export const clamp = (val, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, val));
+/** Clamp a value between lo and hi (defaults: 0–100). Moved to the mathHelpers
+ *  leaf to break the helpers ↔ priorityHelpers ESM cycle; re-exported here so
+ *  every existing `import { clamp } from './helpers.js'` keeps working. */
+export { clamp } from './mathHelpers.js';
 
 /** Convert a 0–100 priority slider to a multiplier centred at 1.0 when priority = 50. */
 export const priorityToMultiplier = (priority = 50) => Math.max(0, (priority ?? 50) / 50);

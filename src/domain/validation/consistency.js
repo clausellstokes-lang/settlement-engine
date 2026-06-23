@@ -7,9 +7,9 @@
  *
  * This is the display-layer sibling of domain/contradictions.js (which
  * surfaces narrative-worthy structural tensions); both share the record shape
- * { id, type, classification, description, references }. M0.1 ships the two
- * rules tied to the food/export spine; M1–M2 wire it into the publish/export
- * gates and add the remaining §1b rules.
+ * { id, type, classification, description, references }. The first cut ships the
+ * two rules tied to the food/export spine; later work wires it into the
+ * publish/export gates and adds the remaining §1b rules.
  *
  * Pure, read-only.
  */

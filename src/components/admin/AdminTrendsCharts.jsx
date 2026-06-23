@@ -254,7 +254,7 @@ export function Heatmap({ rows }) {
                   <td key={ck} title={`${rk} × ${ck}: ${fmtInt(v)}`} style={{
                     padding: SP.xs, textAlign: 'center', minWidth: 36,
                     background: v > 0 ? `rgba(176,141,87,${a.toFixed(3)})` : CARD_ALT,
-                    color: a > 0.55 ? '#fff' : SECOND, border: `1px solid ${CARD}`,
+                    color: a > 0.55 ? swatch.white : SECOND, border: `1px solid ${CARD}`,
                   }}>{v > 0 ? fmtInt(v) : '·'}</td>
                 );
               })}
@@ -285,7 +285,7 @@ export function MiniTable({ rows, columns, max = 60, numeric = [] }) {
             <tr key={i}>
               {cols.map((c) => (
                 <td key={c} style={{ padding: `${SP.xs}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, color: SECOND, textAlign: numeric.includes(c) ? 'right' : 'left', whiteSpace: 'nowrap' }}>
-                  {r[c] == null ? '—' : (numeric.includes(c) ? fmtVal(r[c], true) : String(r[c]))}
+                  {r[c] == null ? '–' : (numeric.includes(c) ? fmtVal(r[c], true) : String(r[c]))}
                 </td>
               ))}
             </tr>

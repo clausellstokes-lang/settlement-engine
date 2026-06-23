@@ -7,6 +7,34 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
+   Copy guard — content-copy deterrent (src/lib/copyGuard.js).
+   When the `copy-guard` class is on <html> the page text cannot be selected,
+   so casual select-and-copy is blocked (the copy/cut/contextmenu events are
+   also blocked in JS). Form controls and [data-allow-copy] regions stay
+   selectable so typing, editing, and legitimate copy (share links, a user's
+   own data) keep working. A deterrent, not real protection — the text stays
+   in the DOM for rendering, search, and screen readers.
+   ───────────────────────────────────────────────────────────────────── */
+html.copy-guard,
+html.copy-guard body {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+html.copy-guard input,
+html.copy-guard textarea,
+html.copy-guard select,
+html.copy-guard [contenteditable="true"],
+html.copy-guard [contenteditable=""],
+html.copy-guard [data-allow-copy] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
    Page background — the painted pastoral fixed under the whole UI.
    The image lives at /public/parchment-bg.jpg (saved by the user).
    Two stacked backgrounds:

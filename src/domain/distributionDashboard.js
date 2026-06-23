@@ -1,7 +1,7 @@
 /**
  * domain/distributionDashboard.js — Aggregate stats over many settlements.
  *
- * Tier 3.10 of the roadmap. Generation is stochastic; the DEV dashboard
+ * Generation is stochastic; the DEV dashboard
  * shows aggregate distributions across N settlements to make tuning
  * sane: institution frequency per tier, prosperity bands, faction
  * archetype frequencies, food-security distribution, crisis frequencies.

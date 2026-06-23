@@ -106,6 +106,15 @@ function campaignFromRow(row) {
       inactiveReason: row.inactive_reason || null,
       inactiveSince: row.inactive_since || null,
       retentionExpiresAt: row.retention_expires_at || null,
+      // Server-owned publish state (migration 045). Read-only on the client:
+      // shareMap/unshareMap own these via SECURITY DEFINER RPCs; the campaign
+      // write path (rowForCampaign) never echoes them back. They let the gallery
+      // match an owned campaign to its anonymized public tile by slug.
+      publicSlug: row.public_slug || null,
+      isPublic: row.is_public === true,
+      shareKind: row.share_kind || 'map',
+      galleryDescription: row.gallery_description || '',
+      galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     };
   }
 
@@ -137,6 +146,11 @@ function campaignFromRow(row) {
     inactiveReason: row.inactive_reason || null,
     inactiveSince: row.inactive_since || null,
     retentionExpiresAt: row.retention_expires_at || null,
+    publicSlug: row.public_slug || null,
+    isPublic: row.is_public === true,
+    shareKind: row.share_kind || 'map',
+    galleryDescription: row.gallery_description || '',
+    galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
   };
 }
 
@@ -157,7 +171,7 @@ function rowForCampaign(campaign, userId) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('saved_maps')
-    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at')
+    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at, public_slug, is_public, share_kind, gallery_description, gallery_tags')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return (data || []).map(campaignFromRow);
@@ -187,6 +201,37 @@ async function supabaseDelete(id) {
   if (error) throw error;
 }
 
+/**
+ * Atomic world-pulse advance write (migration 069). Persists the ENTIRE advance
+ * write-set — every affected member settlement's post-pulse state AND the campaign
+ * snapshot — through one SECURITY DEFINER RPC, so the cloud can never hold a
+ * partial/hybrid advance (settlement A lands, B fails, campaign behind). The RPC
+ * is ownership-checked and locks the campaign row; pass `expectedTick` to enable
+ * the stale-apply guard (advance only if the stored tick is strictly behind).
+ *
+ * HARD DEPENDENCY: migration 069 must be applied. There is intentionally NO serial
+ * fallback in cloud mode — a fallback would re-introduce the non-atomic path. On an
+ * RPC-missing/error result this throws, and the caller degrades to the honest
+ * cloud-pending state (the advance is real locally; a retry/reload reconciles).
+ *
+ * The `snapshot` is the full map_data envelope (mapDataForCampaign shape) so the
+ * RPC writes saved_maps.map_data verbatim and re-derives the same columns
+ * rowForCampaign would — keeping the atomic path byte-identical to the upsert path.
+ *
+ * @param {{ campaignId: string, campaign: any, settlementUpdates?: Array<{saveId:string, settlement?:any, campaignState?:any, versionHistory?:any}>, expectedTick?: number|null }} args
+ * @returns {Promise<{ applied: boolean, settlementsWritten?: number, settlementsRequested?: number, reason?: string }>}
+ */
+async function supabasePersistWorldPulseAdvance({ campaignId, campaign, settlementUpdates = [], expectedTick = null }) {
+  const { data, error } = await supabase.rpc('persist_world_pulse_advance', {
+    p_campaign_id: campaignId,
+    p_campaign_snapshot: mapDataForCampaign(campaign),
+    p_settlement_updates: settlementUpdates,
+    p_expected_tick: expectedTick == null ? null : Number(expectedTick),
+  });
+  if (error) throw error;
+  return data || { applied: false };
+}
+
 async function localList(ownerId = 'anon') {
   return localLoad(ownerId);
 }
@@ -212,6 +257,9 @@ async function localDelete(id, ownerId = 'anon') {
 export const campaigns = {
   list: isConfigured ? supabaseList : localList,
   upsert: isConfigured ? supabaseUpsert : localUpsert,
+  /** Atomic world-pulse advance write (cloud only — null in local mode, where the
+   *  single localStorage write has no cross-row hybrid risk). See the helper. */
+  persistWorldPulseAdvance: isConfigured ? supabasePersistWorldPulseAdvance : null,
   writeAll: isConfigured ? supabaseWriteAll : localWriteAll,
   delete: isConfigured ? supabaseDelete : localDelete,
   cache: localWrite,

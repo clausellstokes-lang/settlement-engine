@@ -1,5 +1,5 @@
 /**
- * VersionsTab.jsx — P109 / E-5 version history.
+ * VersionsTab.jsx — version history.
  *
  * A worldbuilder running a 6-month arc wants to see what changed between
  * session 3 and session 8 — and roll back if a player retconned
@@ -71,7 +71,7 @@ export function buildVersionTimeline(save) {
     entries.push({
       id: 'canonized',
       ts: cs.canonizedAt,
-      label: 'Canonized. Events from here forward are campaign log',
+      label: 'Canonized. Every event from here forward joins the campaign log',
       kind: 'canonize',
       revertable: false,
     });
@@ -166,7 +166,7 @@ export default function VersionsTab({ save }) {
   }
 
   if (!isPaid) {
-    // Locked-state: the critique's X-7 says locked features should render
+    // Locked-state: locked features should render
     // destinations that sell themselves, not modal walls or quiet toasts.
     // We now route this through the shared LockedDestination primitive so
     // every locked surface speaks one voice (and gets the mount-once

@@ -1,12 +1,12 @@
 /**
- * CascadePreviewPanel.jsx — P105 / E-2 side-panel cascade preview.
+ * CascadePreviewPanel.jsx — side-panel cascade preview.
  *
  * Opens when the user clicks "Preview cascade" in PendingChangesBar.
  * Reads the live settlement + pending queue, calls
  * `domain/pendingEdits.previewCascade()`, and renders the structured
  * delta: counts, narrative impact, warnings.
  *
- * The point is "no mystery edits" (E-2's headline). Before commit:
+ * The point is "no mystery edits". Before commit:
  *   - what counts change (institutions, resources, stressors)
  *   - what gets renamed
  *   - what the narrative layer's status becomes
@@ -17,7 +17,6 @@
  */
 
 import { useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
@@ -125,7 +124,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            Icon={X}
+            glyph={'✕'}
             label="Close"
             onClick={onClose}
             tone="ghost"
@@ -166,7 +165,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             body={
               `${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
               `${preview.downstreamCounts.factions ?? 0} factions, ` +
-              `${preview.downstreamCounts.hooks ?? 0} hooks reference this town.`
+              `${preview.downstreamCounts.hooks ?? 0} hooks tie to this town.`
             }
           />
 
@@ -180,8 +179,8 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 title="Narrative"
                 body={
                   preview.narrativeImpact === 'regenerate-needed'
-                    ? 'The narrative layer will need regeneration to stay coherent with these changes.'
-                    : 'A narrative progression pass is suggested to evolve the prose against the renames.'
+                    ? 'The Narrative Layer will need a fresh pass to stay true to these changes.'
+                    : 'A narrative pass will carry the prose forward over the renames.'
                 }
               />
               <div style={{ height: SP.sm }} />
@@ -194,7 +193,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 accent={BLUE}
                 accentBg={BLUE_BG}
                 title="Linked saves"
-                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement. They may see a flag.`}
+                body={`${linkedSaves} ${linkedSaves === 1 ? 'save links' : 'saves link'} to this settlement and may be flagged for review.`}
               />
               <div style={{ height: SP.sm }} />
             </>

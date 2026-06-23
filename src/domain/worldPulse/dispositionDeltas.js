@@ -1,10 +1,10 @@
 /**
- * domain/worldPulse/dispositionDeltas.js — Feature C (C1) write-side collector.
+ * domain/worldPulse/dispositionDeltas.js — the disposition write-side collector.
  *
- * Gathers the id-stable win/loss attributions the A1 war layer and the A2 trade
+ * Gathers the id-stable win/loss attributions the war layer and the trade
  * war emit for the contests they RESOLVED this tick, into a single flat delta
  * list for `applyDispositionDeltas` (which folds them commutatively, sorted by id
- * — order-independent). The resolvers do the H16 attribution at the source: the
+ * — order-independent). The resolvers do the state-first attribution at the source: the
  * occupier is the strongest besieger (codepoint tie-break), the conquered is the
  * target; the trade winner/defeated come from `primarySupplierInto` + the
  * relationshipRoles vassal override — never raw edge orientation. So reversing

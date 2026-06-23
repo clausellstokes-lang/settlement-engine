@@ -1,6 +1,6 @@
 /**
  * AdminAnalyticsPanel.jsx — owner-facing read view over the first-party analytics
- * dashboards (doc §9). Self-contained (mirrors GalleryModerationPanel): calls the
+ * dashboards. Self-contained (mirrors GalleryModerationPanel): calls the
  * admin-actions `get_analytics_dashboard` action, which dispatches to the fixed
  * report_* SECURITY DEFINER functions (migration 038). The privilege gate is
  * server-side in admin-actions; this is read-only.
@@ -10,8 +10,8 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
-import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from '../theme.js';
-import Button from '../primitives/Button.jsx';
+import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
+import Segmented from '../primitives/Segmented.jsx';
 
 const DASHBOARDS = [
   { id: 'funnel', label: 'First-gen funnel' },
@@ -50,32 +50,28 @@ export default function AdminAnalyticsPanel() {
 
   const columns = rows.length ? Object.keys(rows[0]) : [];
 
+  // P5 anti-box-soup: no outer frame/heading here. This panel only ever renders
+  // inside AdminPanel's <Section> (which supplies the card + the "Analytics"
+  // <h2>), so a self-framed card-in-card with a duplicate <h3> title would be a
+  // nested-card false-floor. Render flat content; the parent owns the boundary.
   return (
-    <section aria-label="Analytics dashboards" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg, marginTop: SP.lg,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.sm }}>
-        <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>Analytics</h3>
+    <section aria-label="Analytics dashboards">
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
         {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString()}</span>}
       </div>
 
-      <div role="tablist" aria-label="Dashboard" style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs, margin: `${SP.sm}px 0` }}>
-        {DASHBOARDS.map(d => {
-          const active = d.id === dashboard;
-          return (
-            <Button
-              key={d.id} type="button" role="tab" aria-selected={active}
-              variant={active ? 'gold' : 'ghost'} size="sm"
-              onClick={() => setDashboard(d.id)}
-            >
-              {d.label}
-            </Button>
-          );
-        })}
+      <div style={{ margin: `${SP.sm}px 0` }}>
+        <Segmented
+          options={DASHBOARDS.map(d => ({ id: d.id, label: d.label }))}
+          value={dashboard}
+          onChange={setDashboard}
+          size="sm"
+          ariaLabel="Dashboard"
+        />
       </div>
 
       {loading && <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}
-      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Couldn’t load: {error}. (Needs migrations 036–038 deployed.)</p>}
+      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Could not load: {error}. Confirm the analytics migrations are deployed.</p>}
       {!loading && !error && rows.length === 0 && (
         <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>No data yet for this dashboard.</p>
       )}
@@ -98,7 +94,7 @@ export default function AdminAnalyticsPanel() {
                 <tr key={i}>
                   {columns.map(c => (
                     <td key={c} style={{ padding: `${SP.xs}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, color: SECOND, whiteSpace: 'nowrap' }}>
-                      {row[c] == null ? '—' : (typeof row[c] === 'object' ? JSON.stringify(row[c]) : String(row[c]))}
+                      {row[c] == null ? '–' : (typeof row[c] === 'object' ? JSON.stringify(row[c]) : String(row[c]))}
                     </td>
                   ))}
                 </tr>

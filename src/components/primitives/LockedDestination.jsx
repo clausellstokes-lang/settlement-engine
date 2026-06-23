@@ -1,8 +1,8 @@
 /**
  * LockedDestination.jsx — Reusable "this destination sells itself" card.
  *
- * The critique's X-7 was explicit: locked-tier features shouldn't be
- * modal walls or quiet "upgrade to access" toasts. They should be
+ * Locked-tier features shouldn't be modal walls or quiet "upgrade to
+ * access" toasts. They should be
  * destinations the user lands on that pitch themselves — a preview
  * screenshot of the actual feature + a one-paragraph value pitch + a
  * primary CTA.

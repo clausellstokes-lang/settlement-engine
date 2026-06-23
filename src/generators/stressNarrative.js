@@ -42,28 +42,28 @@ const SUMMARIES = {
     `${name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
 
   occupied: (name) =>
-    `${name} is under the administrative control of an outside power. Locals comply outwardly. Resistance exists, distributed and careful.`,
+    `${name} is under the administrative control of an outside power. Locals comply outwardly, but resistance exists, distributed and careful.`,
 
   politically_fractured: (name) =>
     `${name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
 
   indebted: (name) =>
-    `${name} owes a debt it cannot repay to an external power — a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
+    `${name} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
 
   recently_betrayed: (name) =>
-    `${name} was betrayed from within — recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
+    `${name} was betrayed from within, recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
 
   infiltrated: (name) =>
-    `${name} has been quietly penetrated by an outside interest — enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
+    `${name} has been quietly penetrated by an outside interest: enemy agents, a cult, a merchant intelligence network. The settlement does not know. Its decisions are already being steered.`,
 
   plague_onset: (name) =>
-    `Something is spreading in ${name}. It is not yet a plague — but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
+    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
-    `The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
+    `The last strong leader of ${name} died recently. No one has consolidated authority. Power is there for whoever moves first, and several parties already know it.`,
 
   monster_pressure: () =>
-    "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse — the settlement's defences are adequate for normal times, but these are not normal times.",
+    "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse, the settlement's defences are adequate for normal times, but these are not normal times.",
 
   // insurgency: the old closure branched on `typeof getInstFlags == 'function'`
   // (ALWAYS FALSE under ESM) → only the else-branch ever rendered. data-schema.6:
@@ -73,7 +73,7 @@ const SUMMARIES = {
     return (
       "A powerful faction in " +
       h +
-      " has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous — not street fighting but the systematic withdrawal of cooperation."
+      " has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous. Not street fighting but the systematic withdrawal of cooperation."
     );
   },
 
@@ -105,7 +105,7 @@ const SUMMARIES = {
     const s = name || "the settlement";
     return rng() < 0.45
       ? s +
-          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. The garrison is reinforced and well-supplied. Prices are high and merchants with the right connections are getting richer. The cost will come due — it always does — but for now the war is good for business."
+          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. The garrison is reinforced and well-supplied. Prices are high and merchants with the right connections are getting richer. The cost will come due; it always does. But for now, the war is good for business."
       : s +
           " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
   },

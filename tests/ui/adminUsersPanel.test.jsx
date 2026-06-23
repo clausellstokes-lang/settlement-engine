@@ -189,7 +189,7 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     render(<Panel />);
     await openAlice();
     // Status badge renders.
-    expect(screen.getByText(/DISABLED/)).toBeTruthy();
+    expect(screen.getByText(/Disabled/)).toBeTruthy();
     invoke.mockClear();
     // The button now reads "Enable" and passes enabled:true to re-enable.
     fireEvent.click(screen.getByRole('button', { name: /^enable$/i }));

@@ -22,21 +22,21 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   tierDriftEnabled: true,
   institutionLifecycleEnabled: true,
   majorChangesRequireProposal: true,
-  // Geopolitical war layer (Features A/B) — opt-in, DEFAULT FALSE so every existing
+  // Geopolitical war + trade-war layer — opt-in, DEFAULT FALSE so every existing
   // campaign is byte-identical. Flip to true for NEW campaigns once the convergence
-  // + soak suites are green (see SUBSYSTEM_INTEGRATION_PLAN §7). Because every named
+  // + soak suites are green (see SUBSYSTEM_INTEGRATION_PLAN). Because every named
   // preset spreads DEFAULT_SIMULATION_RULES, all presets inherit it and presetId
   // stays stable (guarded by simulationRulesPreset.stability.test).
   warLayerEnabled: false,
-  // Feature C (C2) — the settlement strategy chooser. Opt-in, DEFAULT FALSE so
+  // The settlement strategy chooser. Opt-in, DEFAULT FALSE so
   // every existing campaign is byte-identical (no strategy candidates emitted).
   // Like warLayerEnabled, every named preset spreads DEFAULT_SIMULATION_RULES so
   // all presets inherit it and presetId stays stable (guarded by
   // simulationRulesPreset.stability.test).
   settlementStrategyEnabled: false,
-  // Feature D (R2) — religion dynamics: the deity contest + conversion spread +
+  // Religion dynamics: the deity contest + conversion spread +
   // religious_authority channel mint. Opt-in, DEFAULT FALSE. This is only ONE of
-  // the TWO gates: even with this true, religion stays a pure no-op until the F2
+  // the TWO gates: even with this true, religion stays a pure no-op until the
   // activation gate fires (≥1 settlement carries config.primaryDeitySnapshot). So
   // a default-true-but-deity-free campaign is byte-identical (the activation gate
   // short-circuits before any fork/mint). Every named preset spreads

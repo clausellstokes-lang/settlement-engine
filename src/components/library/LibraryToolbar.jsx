@@ -1,11 +1,11 @@
 /**
- * LibraryToolbar.jsx — P108 / E-6 campaign-aware library toolbar.
+ * LibraryToolbar.jsx — campaign-aware library toolbar.
  *
  * Drops above the saves list in SettlementsPanel. The DEFAULT face stays
  * uncluttered for a new DM: `Search · Sort · Filters▾ · Select`. All filter chips
  * — including the now-wired orphaned `draftOnly`/`hasPendingEdits` and the new
  * living-world filters (At war / Has deity / In crisis / campaign selector) — live
- * behind the `Filters▾` disclosure (UX overhaul Phase 3, plan §4.2).
+ * behind the `Filters▾` disclosure.
  *
  * Pure controlled component — owns no state EXCEPT the local Filters▾ open/closed
  * toggle. The parent (SettlementsPanel) holds {query, sort, filters} and passes
@@ -21,16 +21,12 @@
 
 import { useState } from 'react';
 import { X, SlidersHorizontal, CheckSquare } from 'lucide-react';
-import { sans, FS, SP, R, swatch } from '../theme.js';
+import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-
-const BORDER = swatch['#E8D9B0'];
-const PARCH = swatch['#FBF5E6'];
-const INK = swatch['#1B1408'];
-const MUTED = swatch['#9C8068'];
+import Segmented from '../primitives/Segmented.jsx';
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -43,7 +39,7 @@ export const SORT_OPTIONS = Object.freeze({
     const order = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 6 };
     return (order[a.tier] ?? 99) - (order[b.tier] ?? 99);
   } },
-  // "Needs attention" — float strained/critical settlements up (UX Phase 3). The
+  // "Needs attention" — float strained/critical settlements up. The
   // severity is the worst 4-dim health band (deriveSystemState via healthPip);
   // higher severity = needs more attention = sorts first. Ties fall back to
   // recency so the order stays stable.
@@ -85,7 +81,7 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
         s.tier,
         s.settlement?.name,
         s.settlement?.config?.tradeRouteAccess,
-        // NPC names — searchable per the critique ("search across saves + NPCs + factions")
+        // NPC names — search spans saves + NPCs + factions, so include them here
         ...(Array.isArray(s.settlement?.npcs)
           ? s.settlement.npcs.map(n => n.name).slice(0, 50)
           : []),
@@ -117,7 +113,7 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
     out = out.filter(s => s.campaignState?.editedAt && s.campaignState?.editedAt !== s.campaignState?.canonizedAt);
   }
 
-  // ── Living-world filters (Phase 3) ──────────────────────────────────────────
+  // ── Living-world filters ────────────────────────────────────────────────────
   // Has deity is settlement-local (the embedded snapshot), so it needs no context.
   if (filters.hasDeity) {
     out = out.filter(s => !!s.settlement?.config?.primaryDeitySnapshot?.name);
@@ -171,29 +167,42 @@ export default function LibraryToolbar({
 }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const toggleFilter = (key) => setFilters({ ...filters, [key]: !filters[key] });
+
+  // Phase segment — a front-line lens over the same canonOnly/draftOnly filter
+  // keys the Filters disclosure used to own. 'all' clears both; 'drafts' sets
+  // draftOnly (clears canonOnly); 'canon' sets canonOnly (clears draftOnly).
+  const phaseValue = filters?.canonOnly ? 'canon' : filters?.draftOnly ? 'drafts' : 'all';
+  const setPhase = (id) => setFilters({
+    ...filters,
+    canonOnly: id === 'canon' || undefined,
+    draftOnly: id === 'drafts' || undefined,
+  });
   // The campaign selector is a value, not a boolean — count it once if set.
+  // canonOnly/draftOnly are surfaced on the front-line All|Drafts|Canon segment,
+  // so they no longer count toward the disclosure's hidden-filter badge.
   const activeFilterCount = Object.entries(filters || {})
-    .filter(([k, v]) => k === 'campaignId' ? !!v : !!v).length;
+    .filter(([k, v]) => k !== 'canonOnly' && k !== 'draftOnly' && !!v).length;
 
   return (
     <div style={{
+      // Tint-only strip (no perimeter border) — matches the demoted, borderless
+      // SaveQuotaMeter so the framing band recedes under blur and the town cards
+      // below survive as the focal layer. The inner inputs carry their own borders.
       padding: SP.sm,
       background: PARCH,
-      border: `1px solid ${BORDER}`,
       borderRadius: R.sm,
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       fontFamily: sans, fontSize: FS.xs, color: INK,
     }}>
       {/* Search */}
       <div style={{
-        flex: 1, minWidth: 180,
+        flex: 1, minWidth: 180, minHeight: 44, boxSizing: 'border-box',
         display: 'flex', alignItems: 'center', gap: SP.xs,
-        padding: '4px 8px',
+        padding: '8px',
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
       }}>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>🔍</span>
         <input
           type="search"
           value={query}
@@ -220,7 +229,8 @@ export default function LibraryToolbar({
       {/* Sort */}
       <label htmlFor="library-sort" style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
-        padding: '4px 8px',
+        minHeight: 44, boxSizing: 'border-box',
+        padding: '8px',
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
@@ -242,6 +252,23 @@ export default function LibraryToolbar({
           ))}
         </select>
       </label>
+
+      {/* Phase segment — front-line All | Drafts | Canon lens. Mutually exclusive,
+          so a Segmented pill group reads the three views at a glance where the old
+          Canon/Draft chips were buried behind Filters▾. Wired to the same
+          canonOnly/draftOnly filter keys; the secondary filters stay in the
+          disclosure below. */}
+      <Segmented
+        size="sm"
+        ariaLabel="Filter settlements by phase"
+        options={[
+          { id: 'all', label: 'All' },
+          { id: 'drafts', label: 'Drafts' },
+          { id: 'canon', label: 'Canon' },
+        ]}
+        value={phaseValue}
+        onChange={setPhase}
+      />
 
       {/* Filters▾ disclosure — keeps the default toolbar uncluttered for a new DM.
           All chips (incl. the now-wired draftOnly / hasPendingEdits + the new
@@ -270,10 +297,11 @@ export default function LibraryToolbar({
         </Button>
       )}
 
-      {/* Result count */}
+      {/* Result count — BODY (ink-600, 9.95:1), not MUTED (3.57:1, fails AA):
+          the visible/total count is a scan fact the GM reads, not chrome (P7). */}
       <span style={{
         marginLeft: 'auto',
-        fontSize: FS.xs, color: MUTED,
+        fontSize: FS.xs, color: BODY,
       }}>
         {visibleCount === totalCount
           ? `${totalCount} settlement${totalCount === 1 ? '' : 's'}`
@@ -291,20 +319,19 @@ export default function LibraryToolbar({
             flexWrap: 'wrap', paddingTop: SP.xs, borderTop: `1px solid ${BORDER}`, marginTop: 2,
           }}
         >
-          {/* Phase */}
-          <Button size="sm" variant={filters?.canonOnly ? 'success' : 'secondary'} aria-pressed={!!filters?.canonOnly} onClick={() => toggleFilter('canonOnly')}>Canon</Button>
-          <Button size="sm" variant={filters?.draftOnly ? 'gold' : 'secondary'} aria-pressed={!!filters?.draftOnly} onClick={() => toggleFilter('draftOnly')}>Draft</Button>
-          <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')}>Pending edits</Button>
+          {/* Phase — All | Drafts | Canon now lives on the front-line Segmented
+              control above; the disclosure keeps the secondary filters only. */}
+          <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
           {/* Structure */}
-          <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')}>🔗 Linked</Button>
+          <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
           {/* Living world */}
-          <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')}>At war</Button>
-          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')}>Has deity</Button>
-          <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')}>In crisis</Button>
+          <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
+          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a primary deity.">Has deity</Button>
+          <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
           {/* Campaign selector */}
           {campaigns.length > 0 && (
-            <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, padding: '4px 8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
+            <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
               <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
               <select
                 id="library-campaign-filter"

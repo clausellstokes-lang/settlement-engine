@@ -13,6 +13,7 @@ import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
 import { computeRelTension } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
+import { roleToCategory, roleTakesMerchantStress, institutionCategoryFlags, isCommerceGuild } from './roleCategory.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -29,6 +30,7 @@ import {
   NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
   NPC_PRESENTATION_MODES,
+  TRAIT_PRESENCE_DISTRIBUTION,
 } from '../data/npcData.js';
 
 // pickFromArray — uses seeded PRNG when available
@@ -36,8 +38,9 @@ const pickFromArray = r => ctxPick(r);
 
 // ─── NPC_ROLES sub-generators ────────────────────────────────
 
-// generateNPCGoal
-const generateNPCGoal = role => {
+// generateNPCPowerLevel — returns the NPC's { level, power } on a 1-10 scale,
+// keyed off the role keyword (was misleadingly named generateNPCGoal).
+const generateNPCPowerLevel = role => {
   const HIGH_POWER = [
     'mayor',
     'lord',
@@ -63,14 +66,14 @@ const generateSingleNPC = (role, namingTier, category, culture, tier, config = {
   const lastName = pickLast(culture, namingTier || culture);
   const religion = generateReligionType();
   const appearance = generateNPCAppearance(category);
-  const goal = generateNPCRelType(role, category, config);
+  const goal = generateNPCGoal(role, category, config);
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeader(category, config, institutions);
   const title1 = generateCharacterTitle(category, config);
   const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
-  const powerLevel = generateNPCGoal(role);
+  const powerLevel = generateNPCPowerLevel(role);
   return {
     id: null,
     name: fullName,
@@ -208,10 +211,10 @@ const pickLast = (r = 'germanic', s = 'mayor') => {
 };
 
 const filterByGuild = (institutions, culture, tier, config = {}) => {
-  const guildInsts = institutions.filter(i => {
-    const n = (i.name || '').toLowerCase();
-    return (i.tags?.includes('guild') || n.includes('guild')) && !n.includes('thieves');
-  });
+  // Commerce-guild detection by catalog metadata: a 'guild' tag is the catalog's
+  // own marker; criminal guilds (Thieves'/Assassins') are excluded via the
+  // criminal detector rather than a single `!n.includes('thieves')` substring.
+  const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
   const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
@@ -226,13 +229,43 @@ const filterByGuild = (institutions, culture, tier, config = {}) => {
 // NPC_TITLE_DATA
 
 // generateReligionType
-const generateReligionType = () => ({
-  dominant: pickFromArray(NPC_RELIGION_DATA.positive),
-  flaw: pickFromArray(NPC_RELIGION_DATA.negative),
-  modifier: pickFromArray(NPC_RELIGION_DATA.neutral),
-  tell: pickFromArray(MANNERISMS),
-  speech: pickFromArray(SPEECH_PATTERNS),
-});
+// Draws BOTH raw trait candidates first (preserving rng draw order, so the
+// existing downstream stream is unperturbed when a trait is kept), then a SINGLE
+// seeded roll decides which of {dominant=temperament, flaw} survive — making the
+// two corruption-relevant slots INDEPENDENTLY optional per
+// TRAIT_PRESENCE_DISTRIBUTION. A surviving trait keeps its drawn candidate; a
+// dropped one becomes null (absent). Consumers tolerate absence: npcCorruptibleFlaw
+// returns null with no flaw, and the personality string builders use .filter(Boolean).
+export const generateReligionType = () => {
+  const dominantCand = pickFromArray(NPC_RELIGION_DATA.positive);
+  const flawCand = pickFromArray(NPC_RELIGION_DATA.negative);
+  const modifier = pickFromArray(NPC_RELIGION_DATA.neutral);
+  const tell = pickFromArray(MANNERISMS);
+  const speech = pickFromArray(SPEECH_PATTERNS);
+
+  // ONE seeded roll AFTER both pickFromArray calls — walk the cumulative bands of
+  // TRAIT_PRESENCE_DISTRIBUTION to pick a presence bucket. Drawing the roll last
+  // means kept-trait NPCs leave the downstream rng position byte-identical.
+  const d = TRAIT_PRESENCE_DISTRIBUTION;
+  const r = _rng();
+  let dominant;
+  let flaw;
+  if (r < d.both) {
+    dominant = dominantCand;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly) {
+    dominant = null;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly + d.temperamentOnly) {
+    dominant = dominantCand;
+    flaw = null;
+  } else {
+    dominant = null;
+    flaw = null;
+  }
+
+  return { dominant, flaw, modifier, tell, speech };
+};
 
 // generateNPCAppearance
 const generateNPCAppearance = (r = 'other') => ({
@@ -242,8 +275,9 @@ const generateNPCAppearance = (r = 'other') => ({
   clothes: pickFromArray(NPC_WANTS[r] || NPC_WANTS.other),
 });
 
-// generateNPCRelType
-const generateNPCRelType = (role, category = 'other', config = {}) => {
+// generateNPCGoal — returns the NPC's goal ({ short, long, driven_by }), keyed
+// off role/category/stress (was misleadingly named generateNPCRelType).
+const generateNPCGoal = (role, category = 'other', config = {}) => {
   const stressType = config.stressType || null;
   const commodity = config.tradeCommodity || config._tradeCommodity || null;
   const topFaction = config._dominantFaction || null;
@@ -254,7 +288,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     under_siege: [
       {
         short: `Secure enough ${commodity || 'food'} reserves to outlast the blockade`,
-        long: 'Survive this — everything else can wait',
+        long: 'Survive this. Everything else can wait',
         driven_by: 'protection',
       },
       {
@@ -271,7 +305,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     famine: [
       {
         short: `Control the ${commodity || 'grain'} supply before a competing faction corners it`,
-        long: "Be the person who kept people fed — or profit from the fact that others weren't",
+        long: "Be the person who kept people fed, or profit from the fact that others weren't",
         driven_by: 'wealth',
       },
       {
@@ -287,7 +321,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     ],
     occupied: [
       {
-        short: 'Navigate the occupation without losing position or principles — ideally both',
+        short: 'Navigate the occupation without losing position or principles. Ideally both',
         long: 'Be remembered as someone who preserved what could be preserved',
         driven_by: 'personal',
       },
@@ -298,7 +332,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
       },
       {
         short: "Satisfy the occupiers' demands while protecting the people they're demanding from",
-        long: 'Find the line between pragmatism and betrayal — and stay on the right side of it',
+        long: 'Find the line between pragmatism and betrayal. Then stay on the right side of it',
         driven_by: 'protection',
       },
     ],
@@ -341,7 +375,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     succession_void: [
       {
         short: `Position themselves before ${topFaction || 'a rival faction'} moves first`,
-        long: 'Secure authority through the right means — not just the fastest',
+        long: 'Secure authority through the right means, not just the fastest',
         driven_by: 'power',
       },
       {
@@ -397,10 +431,12 @@ const generateFactionLeader = (_category = 'other', config = {}, institutions = 
     magic: config.priorityMagic ?? 50,
     criminal: config.priorityCriminal ?? 50,
   };
-  const names = (institutions || []).map(i => (i.name || '').toLowerCase());
-  const hasCriminal = names.some(n => n.includes('thieves') || n.includes('black market') || n.includes('smuggl'));
-  const hasMagic = names.some(n => n.includes('wizard') || n.includes('mage') || n.includes('alchemist'));
-  const hasReligion = names.some(n => n.includes('church') || n.includes('cathedral') || n.includes('monastery'));
+  // Institution presence drives secret-type weighting. Categorize by catalog
+  // metadata (group category + tags, id-first via institutionMatchesKeyword for
+  // unstamped) instead of name substrings: the old `name.includes('thieves'|
+  // 'wizard'|'church')` triple missed whole families ('Street gang', 'Wayside
+  // shrine', 'Teleportation circle', …) and could false-hit on coincidental text.
+  const { hasCriminal, hasMagic, hasReligion } = institutionCategoryFlags(institutions);
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
 
   // Secret type weights driven by institution presence and priorities
@@ -557,7 +593,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
     const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
     return pickRandom2([
       {
-        what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows — and has been deciding for months whether to use it`,
+        what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows. They have been deciding for months whether to use it`,
         stakes: `${otherNpc.name} would move against them immediately if they suspected`,
       },
       {
@@ -565,7 +601,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
         stakes: "The situation they're both ignoring is becoming relevant again",
       },
       {
-        what: `Owes ${otherNpc.name} a debt from before either of them held their current position — one that ${otherNpc.name} has never formally called in`,
+        what: `Owes ${otherNpc.name} a debt from before either of them held their current position. It is one that ${otherNpc.name} has never formally called in`,
         stakes: 'The silence feels like patience rather than forgiveness',
       },
       {
@@ -992,31 +1028,22 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 
     // Stress-modified goals
     if (stressType && enriched.goal) {
-      const isGov =
-        roleLower.includes('mayor') ||
-        roleLower.includes('elder') ||
-        roleLower.includes('reeve') ||
-        roleLower.includes('steward') ||
-        roleLower.includes('governor') ||
-        roleLower.includes('council');
-      const isMil =
-        roleLower.includes('captain') ||
-        roleLower.includes('commander') ||
-        roleLower.includes('constable') ||
-        roleLower.includes('warden') ||
-        roleLower.includes('marshal');
-      const isRel =
-        roleLower.includes('priest') ||
-        roleLower.includes('cleric') ||
-        roleLower.includes('bishop') ||
-        roleLower.includes('abbot') ||
-        roleLower.includes('friar') ||
-        roleLower.includes('monk');
-      const isMerchant =
-        roleLower.includes('merchant') ||
-        roleLower.includes('guild') ||
-        roleLower.includes('factor') ||
-        roleLower.includes('overseer');
+      // Classify the role via the shared role→category map (longest-keyword-first)
+      // instead of four hand-rolled substring lists. The override below is keyed
+      // gov/mil/rel/merchant; map the role's category onto those buckets, keeping
+      // the same gov > mil > rel > merchant priority via the selector's branch
+      // order. The merchant bucket uses roleTakesMerchantStress, NOT a bare
+      // roleCat === 'economy', so guild/overseer crafts roles (e.g. 'Journeyman
+      // Overseer', 'Craft Guild Representative') still get the merchant override
+      // the pre-unification merchant test (merchant|guild|factor|overseer) gave
+      // them — longest-keyword-first would otherwise resolve them to crafts and
+      // silently drop the override. Pure string work — no rng, so draw order is
+      // unchanged.
+      const roleCat = roleToCategory(roleLower);
+      const isGov = roleCat === 'government';
+      const isMil = roleCat === 'military';
+      const isRel = roleCat === 'religious';
+      const isMerchant = roleTakesMerchantStress(roleLower);
 
       const STRESS_GOAL_OVERRIDES = {
         wartime: {
@@ -1031,7 +1058,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Secure a war contract before a rival does — or find a way to profit from the disruption instead of suffering it',
+              'Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it',
           },
         },
         insurgency: {
@@ -1046,7 +1073,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           rel: {
             short:
-              'Avoid being forced to publicly declare support for either the governing faction or the insurgency — and run out of reasons before the pressure does',
+              'Avoid being forced to publicly declare support for either the governing faction or the insurgency. Run out of reasons before the pressure does',
           },
         },
         mass_migration: {
@@ -1057,11 +1084,11 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Either profit from the demographic change or find a way to be insulated from it — either answer requires moving faster than the uncertainty',
+              'Either profit from the demographic change or find a way to be insulated from it. Either answer requires moving faster than the uncertainty',
           },
           mil: {
             short:
-              'Establish which residents are registered, which are transient, and which are neither — before one of the third category becomes a problem',
+              'Establish which residents are registered, which are transient, and which are neither. Do it before one of the third category becomes a problem',
           },
         },
         religious_conversion: {
@@ -1078,7 +1105,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         slave_revolt: {
           gov: {
             short:
-              'End the revolt without either full suppression or formal negotiation — both options set precedents the governing faction cannot afford',
+              'End the revolt without either full suppression or formal negotiation. Both options set precedents the governing faction cannot afford',
             note: "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
           },
           mil: {
@@ -1088,7 +1115,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Recover the economic loss from the market suspension — or redirect capital away from a labour system that may not survive this in its current form',
+              'Recover the economic loss from the market suspension, or redirect capital away from a labour system that may not survive this in its current form',
           },
         },
       };
@@ -1142,7 +1169,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         enriched.secondaryAffiliation = crimeFaction
           ? crimeFaction.faction
           : secretText.includes('thieves')
-            ? "Thieves' Guild"
+            ? "Organized Crime"
             : 'criminal network';
       }
     }

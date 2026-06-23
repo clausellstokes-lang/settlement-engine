@@ -13,6 +13,7 @@ import { describe, expect, it, beforeAll } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
+import { buildDefinedAt, classifyApplyError } from '../../scripts/migration-ordering.mjs';
 
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const allMigrations = existsSync(dir)
@@ -23,6 +24,14 @@ const allMigrations = existsSync(dir)
 const band = allMigrations.filter(f => {
   const n = Number(f.slice(0, 3));
   return n >= 50 && n <= 56;
+});
+
+// Hard-fail (not a silent vacuous skip) if the 050–056 band vanished from disk:
+// the runIf(band.length > 0) suites below would otherwise go GREEN with 0 tests.
+describe('migrations 050–056 band exists (guards against silent vacuous skip)', () => {
+  it('the 050–056 migration band is present on disk (a moved band must fail loudly)', () => {
+    expect(band.length, 'no 050–056 migrations found — sequence coverage dropped').toBeGreaterThan(0);
+  });
 });
 
 describe.runIf(band.length > 0)('migrations 050–056 — sequence integrity', () => {
@@ -47,6 +56,9 @@ describe.runIf(band.length > 0)('migrations 050–056 — apply in sequence (pgl
   let db;
   /** @type {Error|null} */
   let applyError = null;
+  /** @type {Error|null} — set ONLY when a band file references an object a LATER
+   *  band file defines (a true ordering bug), distinct from a parse error. */
+  let orderingError = null;
 
   beforeAll(async () => {
     db = new PGlite();
@@ -75,23 +87,44 @@ describe.runIf(band.length > 0)('migrations 050–056 — apply in sequence (pgl
       );
     `);
 
+    // Pre-scan: map each band-defined object name -> the INDEX of the band file
+    // that defines it. A "does not exist" error for an object defined LATER in
+    // the band (index > the failing file's index) is an ordering bug; one for a
+    // pre-050/non-band object is an environmental gap in this minimal scaffold.
+    const bandSql = band.map((f) => readFileSync(join(dir, f), 'utf-8'));
+    const definedAt = buildDefinedAt(bandSql);
+
     // Apply the 050–056 band IN ORDER into the fresh database. Each migration's
     // full BEHAVIOUR is proven by its own dedicated pglite test with the right
     // schema scaffold; this SEQUENCE test pins that the band is SYNTACTICALLY valid
     // and ordering-coherent. So a genuine SYNTAX error (or an ordering bug — a band
-    // migration referencing a helper a LATER band migration defines) fails the test,
-    // while an ENVIRONMENTAL dependency on prior-chain schema/extensions that pglite
-    // does not model here (a missing pre-050 relation/role, pg_cron/http, etc.) is
-    // tolerated — those are covered by the per-migration tests' fuller scaffolds.
+    // migration referencing an object a LATER band migration defines) fails the
+    // test, while an ENVIRONMENTAL dependency on prior-chain schema/extensions that
+    // pglite does not model here (a missing pre-050 relation/role, pg_cron/http,
+    // etc.) is tolerated — those are covered by the per-migration tests' fuller
+    // scaffolds.
     try {
-      for (const f of band) {
-        const sql = readFileSync(join(dir, f), 'utf-8');
+      for (let i = 0; i < band.length; i += 1) {
+        const f = band[i];
         try {
-          await db.exec(sql);
+          await db.exec(bandSql[i]);
         } catch (e) {
           const msg = String(/** @type {any} */ (e)?.message || e);
-          const isSyntax = /syntax error|unterminated|invalid input syntax|parse error/i.test(msg);
-          if (isSyntax) throw new Error(`${f}: ${msg}`, { cause: e });
+          const verdict = classifyApplyError(msg, i, definedAt);
+          if (verdict.kind === 'syntax') throw new Error(`${f}: ${msg}`, { cause: e });
+
+          // ORDERING BUG: a "does not exist" error whose missing object is DEFINED
+          // by a LATER band file means this file was applied before its in-band
+          // dependency — exactly the failure the comment above promises to catch
+          // and the catch block used to SWALLOW (everything non-syntax was treated
+          // as environmental). Surface it loudly instead of letting it pass green.
+          if (verdict.kind === 'ordering') {
+            orderingError = new Error(
+              `${f} references "${verdict.missing}", which is not defined until ${band[/** @type {number} */ (verdict.definedAtIndex)]} (later in the band) — migration ordering bug`,
+              { cause: e },
+            );
+            throw orderingError;
+          }
           // Environmental dependency (prior-chain table/role/extension absent in
           // this minimal scaffold) — not a sequence bug. Continue the band.
         }
@@ -103,5 +136,11 @@ describe.runIf(band.length > 0)('migrations 050–056 — apply in sequence (pgl
 
   it('every migration in the 050–056 band is syntactically valid SQL (no parse error)', () => {
     expect(applyError, applyError ? applyError.message : 'no error').toBeNull();
+  });
+
+  it('no band migration references an object a LATER band migration defines (ordering)', () => {
+    // The comment above promises this guarantee; assert it explicitly so the
+    // ordering check can't silently rot back into a swallowed environmental error.
+    expect(orderingError, orderingError ? orderingError.message : 'no ordering bug').toBeNull();
   });
 });

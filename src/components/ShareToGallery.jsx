@@ -15,15 +15,16 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
+import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
+import { settlementWarStatus } from '../domain/display/warStatus.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import Button from './primitives/Button.jsx';
-import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, GREEN_BG, SUCCESS_BORDER, RED, INK, BODY, swatch } from './theme.js';
 
 const MUTED = swatch['#6B5340'];
 const _BODY  = swatch['#4A3B22'];
@@ -44,12 +45,16 @@ function isCampaignCanonized(campaignState) {
 }
 
 function suggestedTagsFor(settlement = {}) {
+  // Read the attributes the engine actually persists (config.terrainType, the
+  // governing faction name, powerStructure.stability) — the old paths
+  // (config.terrain, governmentType, viability.stability) were never written, so
+  // every suggested-tag list silently dropped them.
   return [
     settlement.tier,
-    settlement.config?.terrain,
+    settlement.config?.terrainType || settlement.config?.terrainOverride,
     settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
-    settlement.powerStructure?.governmentType,
-    settlement.viability?.stability,
+    settlement.config?.culture,
+    settlement.powerStructure?.government || settlement.powerStructure?.governingName,
     settlement.config?.nearbyResources?.[0],
   ].filter(Boolean).slice(0, 6);
 }
@@ -127,6 +132,26 @@ export default function ShareToGallery({
       settlements,
     });
   }, [owningCampaign, allSaves]);
+  // Gallery facet snapshot (migration 063). Read from the REAL settlement
+  // attributes (not the owner tags): culture + prosperity + patron deity from
+  // the persisted data, and the live at-war flag from the owning campaign's war
+  // ledger. Captured here so the gallery row can filter on them without
+  // recomputing live campaign state. Empty/absent ⇒ omitted (the column nulls).
+  const facets = useMemo(() => {
+    const warStatus = owningCampaign
+      ? settlementWarStatus({
+          settlementId: saveId,
+          worldState: owningCampaign.worldState,
+          regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+        })
+      : null;
+    return {
+      facetCulture: settlement?.config?.culture || '',
+      facetProsperity: settlement?.economicState?.prosperity || '',
+      facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
+      facetAtWar: warStatus?.atWar === true,
+    };
+  }, [owningCampaign, saveId, settlement]);
   const metadata = useMemo(() => ({
     description,
     imageUrl,
@@ -136,7 +161,8 @@ export default function ShareToGallery({
     shareDm,
     importable,
     realmArcSummary,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, realmArcSummary]);
+    ...facets,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -151,12 +177,9 @@ export default function ShareToGallery({
       background: CARD_ALT, color: BODY,
       fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
     }}>
-      {shareNarrated && hasNarrative
-        ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
-        : <Lock size={12} style={{ marginTop: 1, flexShrink: 0, color: MUTED }} />}
       <span>
         {shareNarrated && hasNarrative
-          ? <>The gallery will show your <strong>AI-narrated dossier</strong>. Viewers see the refined prose; DM-private content (secrets, hooks, notes) is still removed.</>
+          ? <>The gallery displays your <strong>narrated dossier</strong>. Viewers read the refined prose. Private DM content (secrets, hooks, notes) remains hidden.</>
           : <>The gallery shows the <strong>raw simulation</strong>. Your AI {aiKinds} prose stays private and is not included in the public dossier.</>}
       </span>
     </div>
@@ -171,7 +194,7 @@ export default function ShareToGallery({
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
-        <Lock size={12} /> Save first to share publicly
+        Save the settlement first to share publicly.
       </div>
     );
   }
@@ -185,7 +208,7 @@ export default function ShareToGallery({
     // contradict across surfaces — public content must be internally consistent.
     const { blocking } = validateDossier(settlement);
     if (blocking.length > 0) {
-      setError(`Can't publish yet — ${blocking.length} consistency issue${blocking.length === 1 ? '' : 's'} to resolve: ${blocking.map(b => b.description).join(' · ')}`);
+      setError(`Cannot publish yet. ${blocking.length} consistency issue${blocking.length === 1 ? '' : 's'} to resolve: ${blocking.map(b => b.description).join(' · ')}`);
       return;
     }
     setBusy(true); setError(null);
@@ -305,7 +328,7 @@ export default function ShareToGallery({
             style={{ marginTop: 2, flexShrink: 0 }}
           />
           <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply.
+            <strong style={{ color: INK }}>Publish the narrated version</strong> instead of the raw simulation. Viewers read your refined prose. Private DM content is removed unless you enable the option below. Save details or re-share to apply.
           </span>
         </label>
       )}
@@ -322,11 +345,8 @@ export default function ShareToGallery({
           onChange={event => setShareDm(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
-          <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
-          <span>
-            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong> — secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
-          </span>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become visible to all readers. Disabled by default; save details or re-share to enable.
         </span>
       </label>
       {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
@@ -343,7 +363,7 @@ export default function ShareToGallery({
           style={{ marginTop: 2, flexShrink: 0 }}
         />
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-          <strong style={{ color: INK }}>Allow others to import this settlement</strong> — let other DMs clone the public-safe version into their own library. DM-private content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
+          <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Disabled by default; save details or re-share to enable.
         </span>
       </label>
       <Field label="Public description">
@@ -421,12 +441,12 @@ export default function ShareToGallery({
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
           padding: '4px 9px', borderRadius: R.md,
-          background: 'rgba(74,122,58,0.10)', color: GREEN,
-          border: '1px solid rgba(74,122,58,0.30)',
+          background: GREEN_BG, color: GREEN,
+          border: `1px solid ${SUCCESS_BORDER}`,
           fontSize: FS.xs, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
-          <Globe size={11} /> Public
+          Public
         </span>
         <Button
           variant="gold"
@@ -458,7 +478,7 @@ export default function ShareToGallery({
             display: 'inline-flex', alignItems: 'center', gap: 4,
             fontSize: FS.xs, color: RED,
           }}>
-            <AlertCircle size={11} /> {error}
+            {error}
           </span>
         )}
         {aiOverlayNote}
@@ -466,8 +486,8 @@ export default function ShareToGallery({
             the public chronicle existed — the gallery projects it at read
             time, so their event log is visible retroactively. */}
         <span style={{ flexBasis: '100%', fontSize: FS.xs, color: INK, opacity: 0.75 }}>
-          Your settlement's event chronicle (event titles and summaries) is publicly
-          visible on the gallery page. Unshare to remove it.
+          Your settlement's event chronicle (event titles and summaries) is visible
+          on the gallery page. Unshare to remove it.
         </span>
         {detailsForm}
       </div>
@@ -504,7 +524,7 @@ export default function ShareToGallery({
           display: 'inline-flex', alignItems: 'center', gap: 4,
           fontSize: FS.xs, color: RED,
         }}>
-          <AlertCircle size={11} /> {error}
+          {error}
         </span>
       )}
       <span style={{

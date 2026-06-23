@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ChevronLeft, Eye, MessageCircle, Share2, Download } from 'lucide-react';
+import { Check, ChevronLeft, Share2, Download, Sparkles } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -8,16 +8,17 @@ import {
   BLUE_BG,
   BODY,
   BORDER,
-  BORDER2,
   CARD,
   CARD_ALT,
   FS,
   GOLD,
+  GOLD_TXT,
   GREEN,
   GREEN_BG,
   INK,
   MUTED,
   PAGE_MAX,
+  PROSE_MAX,
   R,
   RED,
   RED_BG,
@@ -26,9 +27,10 @@ import {
   sans,
   serif_,
 } from '../theme.js';
-import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
+import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier, stabilityBand } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import BandPill from '../primitives/BandPill.jsx';
 import Button from '../primitives/Button.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
@@ -69,13 +71,14 @@ export default function GalleryDetail({
   importBusy,
   imported,
   auth,
+  onNavigate,
 }) {
   const [shared, setShared] = React.useState(false);
   const onShare = async () => {
     const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
     if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
   };
-  // §4 — owner controls. The viewer owns this dossier iff one of their saved
+  // Owner controls. The viewer owns this dossier iff one of their saved
   // settlements is published under this slug (saves carry public_slug). Pure
   // client; the public dossier itself is anonymized.
   const savedSettlements = useStore(s => s.savedSettlements);
@@ -109,6 +112,11 @@ export default function GalleryDetail({
     dossier.settlement?.config?.terrain || dossier.settlement?.terrain,
     dossier.publishedAt ? `shared ${formatDate(dossier.publishedAt)}` : null,
   ].filter(Boolean);
+  // The one living-world fact in the hero: rendered as the single colored/glyphed
+  // BandPill token so the header reads "identity + current state", not a static
+  // stat line buried above the deep dossier body (P1 / P3).
+  const heroStability = stabilityBand(dossier.stability);
+  const importEligible = dossier.importable && auth?.user && !ownedSave;
 
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
@@ -119,11 +127,11 @@ export default function GalleryDetail({
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
       {ownedSave && (
-        <div style={{ border: `1px solid ${GOLD}`, borderRadius: R.lg, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
+        <div style={{ borderLeft: `3px solid ${GOLD}`, borderRadius: R.md, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Your gallery listing
           </div>
-          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
             This is your published settlement. Edit the listing details (image, description, tags, DM-private visibility) or remove it from the gallery. The public dossier always reflects your current saved settlement.
           </p>
           <ShareToGallery
@@ -151,35 +159,40 @@ export default function GalleryDetail({
         <div className="gallery-detail-hero" style={{ display: 'grid', gap: 0 }}>
           <GalleryImage item={dossier} height={310} />
           <div style={{ padding: SP.xl, display: 'grid', gap: SP.md, alignContent: 'center' }}>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {dossier.tags?.map(tag => (
-                <span key={tag} style={{ border: `1px solid ${BORDER2}`, borderRadius: 6, background: CARD_ALT, color: SECOND, padding: '3px 7px', fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'capitalize' }}>
-                  {human(tag)}
-                </span>
-              ))}
-            </div>
             <h1 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['36'], lineHeight: 1.05, fontWeight: 750 }}>
               {dossier.name || dossier.settlement?.name || t('gallery.untitled')}
             </h1>
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, textTransform: 'capitalize' }}>
-              {meta.join(' / ')}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, textTransform: 'capitalize' }}>
+              {heroStability && (
+                <BandPill band={heroStability.band} label={heroStability.label} labelBefore="Stability: " size="md" />
+              )}
+              <span>{meta.join(' · ')}</span>
             </div>
             {dossier.description ? (
               <div
                 className="sf-rich"
-                style={{ margin: 0, color: BODY, fontFamily: serif_, fontSize: FS.lg, lineHeight: 1.55 }}
+                style={{ margin: 0, maxWidth: PROSE_MAX, color: BODY, fontFamily: serif_, fontSize: FS.lg, lineHeight: 1.55 }}
                 dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(dossier.description) }}
               />
             ) : (
-              <p style={{ margin: 0, color: MUTED, fontFamily: serif_, fontSize: FS.md, lineHeight: 1.5, fontStyle: 'italic' }}>
-                No public creator description was added.
+              <p style={{ margin: 0, maxWidth: PROSE_MAX, color: BODY, fontFamily: serif_, fontSize: FS.md, lineHeight: 1.5, fontStyle: 'italic' }}>
+                The creator left no description.
               </p>
+            )}
+            {dossier.tags?.length > 0 && (
+              <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
+                {dossier.tags.map(tag => (
+                  <span key={tag} style={{ borderRadius: R.md, background: CARD_ALT, color: SECOND, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+                    {human(tag)}
+                  </span>
+                ))}
+              </div>
             )}
             {/* §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED
                 scalar string, NOT the raw chronicle; rendered as plain text. */}
             {dossier.realmArcSummary ? (
-              <div style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md, background: CARD_ALT, padding: SP.md }}>
-                <div style={{ color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+              <div style={{ borderLeft: `3px solid ${GOLD}`, borderRadius: R.md, background: CARD_ALT, padding: SP.md, maxWidth: PROSE_MAX }}>
+                <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
                   Realm Chronicle
                 </div>
                 <p style={{ margin: 0, color: BODY, fontFamily: serif_, fontSize: FS.md, lineHeight: 1.55 }}>
@@ -187,26 +200,49 @@ export default function GalleryDetail({
                 </p>
               </div>
             ) : null}
+            {/* Action row, two tiers (P8): one high-emphasis primary leads, the
+                social/utility controls follow as a subordinate ghost cluster.
+                The primary is Import for an eligible importer; otherwise a
+                "forge your own" next-step so the highest-intent page is never a
+                dead-end (P9). Import is server-gated by the import RPC (048); the
+                save-limit trigger enforces the slot cap. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
+              {importEligible ? (
+                <Button
+                  variant={imported ? 'success' : 'primary'}
+                  size="md"
+                  onClick={() => onImport?.(dossier)}
+                  busy={importBusy}
+                  disabled={imported || importBusy}
+                  title={imported ? 'Imported to your library' : 'Clone the public-safe version into your library'}
+                  icon={imported ? <Check size={13} /> : <Download size={13} />}
+                >
+                  {imported ? 'Imported' : 'Import'}
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => onNavigate?.('generate')}
+                  icon={<Sparkles size={13} />}
+                  title="Forge a settlement of your own"
+                >
+                  {t('gallery.forgeYourOwn')}
+                </Button>
+              )}
               <VoteButton
                 count={dossier.netVotes}
                 voted={dossier.voteState?.voted}
                 disabled={voteBusy}
+                isSignedIn={!!auth?.user}
                 onClick={() => onVote(dossier)}
               />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-                <Eye size={13} /> {formatNumber(dossier.viewCount)} views
-              </span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-                <MessageCircle size={13} /> {formatNumber(dossier.commentCount)} comments
-              </span>
               <Button
-                variant="ghost"
+                variant={shared ? 'success' : 'ghost'}
                 size="sm"
                 onClick={onShare}
                 title="Share this dossier"
                 icon={shared ? <Check size={13} /> : <Share2 size={13} />}
-                style={shared ? { color: GREEN } : undefined}
               >
                 {shared ? 'Link copied' : 'Share'}
               </Button>
@@ -216,33 +252,56 @@ export default function GalleryDetail({
                 disabled={reportBusy}
                 onReport={onReport}
               />
-              {/* Import: clone the public-safe dossier into your own library.
-                  Only when the owner opted in (dossier.importable), you're signed
-                  in, and you don't already own this one. Server-gated by the
-                  import RPC (048); the save-limit trigger enforces the slot cap. */}
-              {dossier.importable && auth?.user && !ownedSave && (
-                <Button
-                  variant="gold"
-                  size="sm"
-                  onClick={() => onImport?.(dossier)}
-                  busy={importBusy}
-                  disabled={imported || importBusy}
-                  title={imported ? 'Imported to your library' : 'Clone the public-safe version into your library'}
-                  icon={imported ? <Check size={13} /> : <Download size={13} />}
-                  style={imported ? { color: GREEN } : undefined}
-                >
-                  {imported ? 'Imported' : 'Import'}
-                </Button>
-              )}
+              {/* Read-only ledger: quiet, trailing, one tier below the controls. */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.md, marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+                <span>
+                  {formatNumber(dossier.viewCount)} views
+                </span>
+                <span>
+                  {formatNumber(dossier.commentCount)} comments
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </article>
-      <div className="gallery-detail-body" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
-        <section style={{ minWidth: 0 }}>
+      {/* Differential spacing (P5): one decisive space-7 (32) gap before the
+          dossier body — not two stacked 16s — so the eye reads "identity/social
+          header cluster -> deep dossier" as two chunks from rhythm alone, not a
+          uniform run leaning on the hero's border to do the grouping. */}
+      <div className="gallery-detail-body" style={{ display: 'grid', gap: SP.lg, marginTop: SP.xxxl, alignItems: 'start' }}>
+        <section style={{ minWidth: 0, maxWidth: PROSE_MAX, display: 'grid', gap: SP.xxxl }}>
           <React.Suspense fallback={<p style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading dossier...</p>}>
             <PublicDossierView dossier={dossier} showHeader={false} />
           </React.Suspense>
+          {/* Peak-end (P9): after the reader has consumed the full dossier, the
+              scroll ends on the SAME single next-step the hero offered (import if
+              eligible, else forge), not a comments box. The hero CTA has scrolled
+              far above on a long dossier. */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {importEligible ? (
+              <Button
+                variant={imported ? 'success' : 'primary'}
+                size="md"
+                onClick={() => onImport?.(dossier)}
+                busy={importBusy}
+                disabled={imported || importBusy}
+                icon={imported ? <Check size={13} /> : <Download size={13} />}
+              >
+                {imported ? 'Imported' : 'Import'}
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => onNavigate?.('generate')}
+                icon={<Sparkles size={13} />}
+                title="Forge a settlement of your own"
+              >
+                {t('gallery.forgeYourOwn')}
+              </Button>
+            )}
+          </div>
         </section>
         <aside style={{ display: 'grid', gap: SP.lg }}>
           <GalleryComments dossier={dossier} auth={auth} onCountChange={onCommentCountChange} />

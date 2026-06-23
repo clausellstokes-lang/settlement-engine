@@ -1,7 +1,7 @@
 import { stablePart } from './worldState.js';
 import { relationshipRoles } from './relationshipEvolution.js';
 import {
-  readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
+  readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor,
@@ -182,8 +182,8 @@ export function npcId(saveId, npc, index) {
 }
 
 /**
- * §corruption Phase 1b-ii — mirror tick-evolved corruption from worldState.npcStates
- * back onto a settlement's NPCs, so the dossier reflects corruption acquired (or
+ * Mirror tick-evolved corruption from worldState.npcStates back onto a
+ * settlement's NPCs, so the dossier reflects corruption acquired (or
  * shed) during world-pulse ticks — not just at generation. Pure + deterministic
  * (no rng/Date); returns the same settlement reference when nothing changed.
  */
@@ -234,8 +234,18 @@ function inferRoleArchetype(npc = {}) {
   return 'civic';
 }
 
+/**
+ * @param {Record<string, any>} [npc]
+ * @param {any} [item]
+ * @param {number} [index]
+ */
 function factionIdFor(npc = {}, item, index) {
-  const direct = npc.factionId || npc.faction || npc.affiliation || npc.organizationId || npc.organization;
+  // factionAffiliation is the generator's canonical faction handle (npcGenerator
+  // writes assignedFaction.faction onto it); read it FIRST so an affiliated NPC
+  // seats into its named faction instead of the positional-index fallback below.
+  // stablePart(factionAffiliation) lines up with seatNpcsIntoFactions' stablePart
+  // (faction.name) because both derive from the power faction's `faction` field.
+  const direct = npc.factionId || npc.faction || npc.affiliation || npc.factionAffiliation || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
   const faction = factions[index % Math.max(1, factions.length)];
@@ -262,7 +272,7 @@ function dominantRelationshipContext(snapshot, settlementId) {
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
     if (rel === 'vassal') {
-      // H16: a pulse-driven subjugation may have crowned the authored 'to'
+      // A pulse-driven subjugation may have crowned the authored 'to'
       // side as overlord — resolve roles state-first, never raw orientation,
       // or the conqueror's NPCs plot to break their own vassalage.
       const { juniorId } = relationshipRoles(edge, states[key]);
@@ -371,8 +381,8 @@ export function ensureNpcStates(worldState, snapshot, rng) {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
         let st = npcStates[id];
-        // §corruption Phase 4 — adopt DM/event-driven corruption changes from the
-        // settlement NPC (authoritative between ticks): EXPOSE_CORRUPTION and
+        // Adopt DM/event-driven corruption changes from the settlement NPC
+        // (authoritative between ticks): EXPOSE_CORRUPTION and
         // criminal-institution removal clear npc.corrupt + bump timesExposed, so
         // they must stick here instead of being re-mirrored from stale npcState.
         if (typeof npc.corrupt === 'boolean'
@@ -405,6 +415,20 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         if (!st.contextSignature) {
           const context = contextForNpc(snapshot, { settlementId: item.id });
           st = { ...st, contextSignature: context.signature, contextTier: context.tier };
+        } else {
+          // Keep contextSignature current even when the context shift produces NO
+          // branched goals. evaluateNpcRules only advances the signature through a
+          // goal_rebranch candidate, so a non-branching transition (e.g. a hostile
+          // edge cooling to neutral for a role with no neutral branch) used to
+          // leave the signature permanently stale — re-classifying every tick with
+          // no effect and mis-labelling a LATER branching transition's "from"
+          // context. When the live context still branches we leave the signature
+          // alone so evaluateNpcRules can fire the rebranch; only the no-branch
+          // case is reconciled silently here (no candidate, no news).
+          const context = contextForNpc(snapshot, { settlementId: st.settlementId });
+          if (context.signature !== st.contextSignature && !branchedGoals(st, context)) {
+            st = { ...st, contextSignature: context.signature, contextTier: context.tier };
+          }
         }
         npcStates[id] = st;
         return;
@@ -471,6 +495,91 @@ export function ensureNpcStates(worldState, snapshot, rng) {
   return { ...worldState, npcStates };
 }
 
+// Grace window before a roster-absent NPC state is pruned. Mirrors
+// FACTION_STATE_PRUNE_GRACE_TICKS: long enough to survive a transient roster
+// hiccup (a save that briefly fails to surface its NPCs), short enough that a
+// renamed/removed NPC ghost doesn't haunt the per-tick npcStates loops and the
+// persisted save for a season.
+export const NPC_STATE_PRUNE_GRACE_TICKS = 3;
+
+/**
+ * Prune NPC states whose NPC no longer exists on any live settlement roster.
+ * npcId is name/id-keyed (npcId()), so editing the roster, renaming an NPC, or
+ * removing a settlement strands a permanent ghost: ensureNpcStates never deletes
+ * it, evaluateNpcRules / seatNpcsIntoFactions / rivalryTargetFor still iterate
+ * it, and it serializes forever. Mirrors pruneFactionStates:
+ *  • a grace window (missingSinceTick, NPC_STATE_PRUNE_GRACE_TICKS) so a
+ *    transient absence doesn't amnesia NPC history;
+ *  • pruned ids are stripped from surviving rivalryTargets[] lists.
+ * Note: the ousted-and-replaced cleanup in
+ * advanceCampaignWorld deletes ousted ids immediately (their replacement carries
+ * a new id); this is the general roster-reconciliation pass for every other way
+ * an NPC leaves. Identity no-op when nothing changes. Deterministic — derived
+ * purely from the snapshot.
+ *
+ * @param {any} worldState
+ * @param {any} snapshot
+ * @param {{ tick?: number, graceTicks?: number }} [opts]
+ * @returns {any}
+ */
+export function pruneNpcStates(worldState, snapshot, { tick = 0, graceTicks = NPC_STATE_PRUNE_GRACE_TICKS } = {}) {
+  /** @type {Record<string, any>} */
+  const states = worldState?.npcStates || {};
+  const ids = Object.keys(states);
+  if (!ids.length) return worldState;
+
+  /** @type {Set<string>} */
+  const liveNpcIds = new Set();
+  for (const item of snapshot?.settlements || []) {
+    const npcs = item.settlement?.npcs || [];
+    npcs.forEach((/** @type {any} */ npc, /** @type {number} */ index) => {
+      liveNpcIds.add(npcId(item.id, npc, index));
+    });
+  }
+
+  let changed = false;
+  /** @type {Set<string>} */
+  const prunedIds = new Set();
+  /** @type {Record<string, any>} */
+  const next = {};
+  for (const [id, state] of Object.entries(states)) {
+    if (liveNpcIds.has(id)) {
+      // Back on (or still on) the roster: clear any absence stamp.
+      if (state.missingSinceTick != null) {
+        const { missingSinceTick: _gone, ...rest } = state;
+        next[id] = rest;
+        changed = true;
+      } else {
+        next[id] = state;
+      }
+      continue;
+    }
+    const since = Number.isFinite(state.missingSinceTick) ? state.missingSinceTick : tick;
+    if (tick - since >= graceTicks) {
+      prunedIds.add(id);
+      changed = true;
+      continue;
+    }
+    if (state.missingSinceTick === since) {
+      next[id] = state;
+    } else {
+      next[id] = { ...state, missingSinceTick: since };
+      changed = true;
+    }
+  }
+
+  if (prunedIds.size) {
+    for (const [id, state] of Object.entries(next)) {
+      const targets = state.rivalryTargets || [];
+      const kept = targets.filter((/** @type {any} */ rid) => !prunedIds.has(rid));
+      if (kept.length !== targets.length) next[id] = { ...state, rivalryTargets: kept };
+    }
+  }
+
+  if (!changed) return worldState;
+  return { ...worldState, npcStates: next };
+}
+
 // Per-tick mean-reversion: momentum/heat/leverage decay toward zero on quiet
 // ticks so a long campaign doesn't ratchet every NPC to permanent high-heat.
 // Corruption heat lingers (corrupt NPCs stay hot) but cools for the rest.
@@ -491,7 +600,7 @@ export function relaxNpcStates(worldState) {
 }
 
 /**
- * §corruption Phase 1b — per-tick onset + organic exposure over worldState.npcStates.
+ * Per-tick onset + organic exposure over worldState.npcStates.
  *
  *  • Onset: a clean, eligible NPC (corruptible flaw) in a settlement with a
  *    criminal institution turns corrupt at the climate-scaled `onsetHazard`.
@@ -507,7 +616,7 @@ export function relaxNpcStates(worldState) {
  * forked per (npc, tick) so replays are deterministic. No criminal institution →
  * no onset/exposure pressure (the rule).
  *
- * Feature D (R3): when `religionActive` (the caller's religionDynamicsEnabled +
+ * When `religionActive` (the caller's religionDynamicsEnabled +
  * isSubsystemActive gate) AND a settlement carries an embedded EVIL deity, the
  * onset gate is RELAXED (`hasCriminalInst || hasCorruptingDeity`) so the evil
  * deity can corrupt the faithful even in a crime-free town. A per-NPC,
@@ -527,8 +636,8 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
-    // Feature D (R3): the embedded deity snapshot (only consulted when the
-    // religion layer is ACTIVE — religionDynamicsEnabled + isSubsystemActive).
+    // The embedded deity snapshot (only consulted when the religion layer is
+    // ACTIVE — religionDynamicsEnabled + isSubsystemActive).
     // null ⇒ deityDisfavor stays 1.0 and the gate is unrelaxed ⇒ byte-identical.
     const deity = religionActive ? (item.settlement?.config?.primaryDeitySnapshot || null) : null;
     const corruptingDeity = religionActive && hasCorruptingDeity(item.settlement);
@@ -537,17 +646,17 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // sponsor, not a local guild) would otherwise be permanently immune to
     // discovery in any settlement without a criminal institution, and each
     // betrayal re-ignition would monotonically corrupt one more NPC.
-    // Feature D (R3) RELAXES this gate: an embedded EVIL deity enables onset in
+    // An embedded EVIL deity RELAXES this gate, enabling onset in
     // a crime-free town ("the faithful are corrupted from within"). Additive
     // and 0 when no deity ⇒ a deity-free town is byte-identical.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeity;
-    // §corruption Phase 3 — real thieves-guild strength (if threaded) drags
-    // effective security down (the feedback loop); falls back to the crime proxy.
+    // Real thieves-guild strength (if threaded) drags effective security down
+    // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
     const guildStr = gs != null ? gs : climate.crime;
     const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
-    // §corruption duality — patronage drag (onset side only): a compromised
-    // watch/court shields NEW recruits. Exposure deliberately reads RAW
+    // Patronage drag (onset side only): a compromised watch/court shields NEW
+    // recruits. Exposure deliberately reads RAW
     // security instead: the guild's shielding is already priced into
     // exposureChance's -guildStrength term, and a strong watch keeps catching
     // people even while parts of it are bought.
@@ -561,10 +670,17 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       if (!s) return;
       const local = rng.fork(`corr:${id}:${tick}`);
       const flaw = npcCorruptibleFlaw(npc);
+      // Per-NPC steadiness for the onset hazard: 0 for a no-flaw NPC (the `&& flaw`
+      // guard below is the hard skip), 1 for flaw-only, and the temperament factor
+      // (< 1) for flaw + steady temperament — a real, strictly-lower-but-positive
+      // chance. Reads the AUTHORED personality only — NO rng draw, NO extra fork,
+      // so the deterministic stream position is unchanged (a post-sum multiplier
+      // moves the threshold, not the draw), exactly like deityDisfavor.
+      const steadiness = corruptibility(npc);
 
       const priorExposures = s.timesExposed || 0;
 
-      // Feature D (R3): the per-NPC, bounded, centered-on-1.0 deity-disfavor
+      // The per-NPC, bounded, centered-on-1.0 deity-disfavor
       // multipliers (at most ONE knob ≠ 1.0). Reads the AUTHORED personality
       // only — NO rng draw, NO extra fork, so the deterministic stream position
       // is unchanged (an additive-after-sum term moves the threshold, not the
@@ -573,10 +689,10 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
 
       if (!s.corruption) {
         // Onset — only eligible NPCs, only the corruptible ones turn, and only
-        // where criminal infrastructure exists (RELAXED for an evil deity, R3).
+        // where criminal infrastructure exists (RELAXED for an evil deity).
         // A prior exposure (organic or DM) makes re-corruption progressively
         // harder. An evil deity's onset disfavor rides here.
-        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset })) {
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -707,11 +823,29 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
   };
 }
 
-function rivalryTargetFor(state, states) {
-  const rivals = states
-    .filter(other => other.npcId !== state.npcId && other.settlementId === state.settlementId)
-    .sort((a, b) => (b.dotRank || 1) - (a.dotRank || 1));
-  return rivals.find(other => other.factionId !== state.factionId) || rivals[0] || null;
+// Group npcStates by settlementId ONCE per pass (insertion order preserved, so
+// the stable dotRank sort below is byte-identical to the previous full-list
+// filter). Avoids the per-NPC O(N) rescan that made rivalry lookup O(N^2).
+/** @param {any[]} states @returns {Map<string, any[]>} */
+function npcStatesBySettlement(states) {
+  /** @type {Map<string, any[]>} */
+  const bySettlement = new Map();
+  for (const state of states) {
+    const sid = String(state.settlementId);
+    let list = bySettlement.get(sid);
+    if (!list) { list = []; bySettlement.set(sid, list); }
+    list.push(state);
+  }
+  return bySettlement;
+}
+
+/** @param {any} state @param {Map<string, any[]>} bySettlement */
+function rivalryTargetFor(state, bySettlement) {
+  const peers = bySettlement.get(String(state.settlementId)) || [];
+  const rivals = peers
+    .filter((/** @type {any} */ other) => other.npcId !== state.npcId)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.dotRank || 1) - (a.dotRank || 1));
+  return rivals.find((/** @type {any} */ other) => other.factionId !== state.factionId) || rivals[0] || null;
 }
 
 // Goal culmination — a long-burning ambition finally pays off. Fires when an
@@ -737,7 +871,7 @@ function npcGoalCulmination(state, tick) {
     probability: 0.9,
     applyMode: 'auto',
     headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while — and now seizes it.`,
+    summary: `${state.name} has worked toward "${goal}" for a long while, and now seizes it.`,
     reasons: [
       `${state.name}'s long-term goal progress reached its culmination.`,
       `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,
@@ -807,6 +941,9 @@ function npcGoalRebranch(state, context, tick) {
 export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const states = Object.values(snapshot.worldState.npcStates || {});
+  // Group NPC states by settlement ONCE so rivalry lookup is O(degree) per NPC
+  // instead of an O(N) rescan (the whole pass was O(N^2)).
+  const bySettlement = npcStatesBySettlement(states);
   const out = [];
 
   for (const state of states) {
@@ -841,7 +978,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     if (!best || best.pressure < minimum || state.ambition < 0.42) continue;
 
     const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose'].includes(best.actionFamily)
-      ? rivalryTargetFor(state, states)
+      ? rivalryTargetFor(state, bySettlement)
       : null;
     out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
   }

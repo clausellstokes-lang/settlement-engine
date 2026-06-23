@@ -73,7 +73,7 @@ export default [
       // react's jsx-no-duplicate-props isn't loadable on ESLint 10, so this is
       // the local equivalent. Error: a dropped prop is a real bug.
       'jsx-hygiene/no-duplicate-jsx-props': 'error',
-      // A+ P1.5 — inline object/array selectors in useStore() re-render every change
+      // Inline object/array selectors in useStore() re-render on every change
       // (the Zustand footgun). Count is zero today; ERROR locks it. @enforced-by this rule.
       'jsx-hygiene/no-inline-store-selector': 'error',
       'no-fallthrough': 'error',
@@ -112,18 +112,18 @@ export default [
       'no-useless-escape': 'warn',
       'no-case-declarations': 'warn',
 
-      // ── P120 / V-1 V-2 V-5 — Visual budget guardrails ────────────────
+      // ── Visual budget guardrails ─────────────────────────────────────
       // Three local rules surface design-system drift. They started as
-      // warnings while the codebase carried legacy violations; the P120/
-      // P121 burn-down migrated every raw fontSize, color, and inline
-      // button verb to a token (zero rendered change). Count is now zero,
-      // so they are promoted to ERROR — new drift fails the gate.
+      // warnings while the codebase carried legacy violations; the cleanup
+      // migrated every raw fontSize, color, and inline button verb to a
+      // token (zero rendered change). Count is now zero, so they are
+      // promoted to ERROR — new drift fails the gate.
       // @enforced-by visual-budget/no-raw-fontsize, visual-budget/no-raw-color, visual-budget/no-raw-button-copy
       'visual-budget/no-raw-fontsize':   'error',
       'visual-budget/no-raw-color':      'error',
       'visual-budget/no-raw-button-copy': 'error',
 
-      // ── P146 — Funnel/analytics event-name contract ───────────────────
+      // ── Funnel/analytics event-name contract ──────────────────────────
       // Event names passed to track()/Funnel.track() must be EVENTS.*
       // constants, never raw strings or template literals. The runtime
       // whitelist only warns in DEV and drops in prod; this catches the
@@ -165,20 +165,20 @@ export default [
     },
   },
 
-  // ── A+ P1.2 — Determinism/purity guard widened to the domain kernel ──────────
-  // The domain layer must be a pure function of its inputs (see P0.5, which removed
-  // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
-  // CONSTRUCTION: no Math.random(), no import.meta, and no importing lib config/store
-  // modules (flags/saves/campaigns) from domain. @enforced-by this rule block.
-  // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — the Phase-2
-  // now-threading track (Track A) finished threading the ~20 `now = new Date()`
-  // default-param fallbacks, so this block bans no-arg `new Date()` and `Date.now()`
-  // alongside Math.random()/import.meta. src/domain/clock.js is the sole exemption
+  // ── Determinism/purity guard widened to the domain kernel ───────────────────
+  // The domain layer must be a pure function of its inputs. This locks the
+  // entropy/env/config leak classes by CONSTRUCTION: no Math.random(), no
+  // import.meta, and no importing lib config/store modules (flags/saves/campaigns)
+  // from domain. @enforced-by this rule block.
+  // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — once every
+  // `now = new Date()` default-param fallback was threaded through from callers,
+  // this block could ban no-arg `new Date()` and `Date.now()` alongside
+  // Math.random()/import.meta. src/domain/clock.js is the sole exemption
   // (the documented wall-clock seam, mirroring rngContext/prng for randomness); a
   // source-regex guard (tests/domain/domainWallClock.test.js) backs this up if lint
   // is skipped. Parsing calls (`new Date(someValue)`) are deterministic-given-input
   // and intentionally NOT matched — only the no-arg readers are.
-  // ── A+ P3.1 — bare JSON.parse(JSON.stringify) clone ban (clone seam) ─────────
+  // ── Bare JSON.parse(JSON.stringify) clone ban (clone seam) ──────────────────
   // The hot-path deep clone is centralized in src/domain/clone.js (deepClone),
   // which uses structuredClone with a JSON fallback. Bare JSON.parse(JSON.stringify)
   // on the store/domain hot paths is slower and lossy (drops undefined-valued keys,
@@ -224,7 +224,7 @@ export default [
     },
   },
 
-  // ── A+ P3.1 — bare JSON.parse(JSON.stringify) clone ban (store hot paths) ────
+  // ── Bare JSON.parse(JSON.stringify) clone ban (store hot paths) ─────────────
   // The store layer routes every hot-path deep clone through deepClone() (imported
   // from ../domain/clone.js) — structuredClone with a JSON fallback, faster and
   // lossless vs bare JSON.parse(JSON.stringify) (which drops undefined keys and
@@ -244,8 +244,8 @@ export default [
   // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
   // accessibility gaps accumulated invisibly. These started at WARN for an
-  // incremental cleanup; once the recommended-rule count reached zero (WS3
-  // burn-down across 55 files) they were promoted to ERROR so regressions block
+  // incremental cleanup; once the recommended-rule count reached zero (the
+  // cleanup spanned 55 files) they were promoted to ERROR so regressions block
   // the gate — mirroring how the visual-budget rules were hardened.
   // @enforced-by jsx-a11y/alt-text
   // A handful of
@@ -260,12 +260,12 @@ export default [
     ),
   },
 
-  // ── A+ P1.4 + components-core — component size ratchet (max-lines) ───────────
+  // ── Component size ratchet (max-lines) ──────────────────────────────────────
   // The ten historical god-components (WorldMap 1338, EventComposer 1208,
   // CompendiumPanel 1165, GenerateWizard 1140, SettlementsPanel 1104,
   // OutputContainer 1019, SettlementDetail, WorldPulsePanel, AdminTrendsPanel,
   // AccountPage) have all been decomposed below 600 effective lines via
-  // behavior-preserving extraction (Track C). Every src/components/**/*.jsx file
+  // behavior-preserving extraction. Every src/components/**/*.jsx file
   // is now under 600, so the ratchet is promoted from 'warn' to 'error': a NEW
   // god-component fails the gate the moment it lands.
   // @enforced-by max-lines (this rule)
@@ -277,7 +277,7 @@ export default [
     },
   },
 
-  // ── A+ P1.3 — forked design-token const guard (components) ──────────────────
+  // ── Forked design-token const guard (components) ────────────────────────────
   // no-raw-color only inspects JSX style props; this catches `const X = '#hex'`
   // re-declarations of token values. 43 files are grandfathered in
   // scripts/.forked-color-baseline.json (burn-down worklist); a NEW fork in any
@@ -289,7 +289,7 @@ export default [
     rules: { 'visual-budget/no-forked-color-const': 'error' },
   },
 
-  // ── A+ enforcement.5 — raw <button> guard ───────────────────────────────────
+  // ── Raw <button> guard ──────────────────────────────────────────────────────
   // A real Button/IconButton primitive exists, but raw <button> elements outside
   // primitives/ re-implement focus-ring/disabled/target-size/variants by hand.
   // Files that currently fork are grandfathered in scripts/.raw-button-baseline.json
@@ -297,8 +297,8 @@ export default [
   // baseline cannot grow (pinned to monotone shrink).
   // @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js
   //
-  // A+ design-a11y.5 — icon-only <button> (element child, no text anywhere in the
-  // subtree) must carry an accessible name (aria-label/aria-labelledby/title), or
+  // An icon-only <button> (element child, no text anywhere in the subtree) must
+  // carry an accessible name (aria-label/aria-labelledby/title), or
   // a screen reader announces only "button". The 82 historical offenders were all
   // labeled; this is ERROR with NO baseline — the count is zero and stays zero.
   // @enforced-by jsx-hygiene/icon-button-needs-label + tests/ui/a11y.audit.test.jsx
@@ -312,8 +312,8 @@ export default [
   },
 
   // Narrative template tables that hold render-time rng/pickRandom2 closures
-  // (A+ Track H data-schema.3: moved out of src/data so the data layer stays
-  // pure-import). They are still uniform-signature data tables — every entry is
+  // (moved out of src/data so the data layer stays pure-import). They are still
+  // uniform-signature data tables — every entry is
   // `(r) => …` even when an individual line doesn't read `r` — so the same
   // intentional-shape rationale as the src/data override applies: flagging the
   // unused `r` would be pure noise.
@@ -333,7 +333,7 @@ export default [
     files: ['src/data/**/*.{js,jsx}'],
     rules: {
       'no-unused-vars': 'off',
-      // ── A+ Track H (data-schema.2) — src/data purity ─────────────────────────
+      // ── src/data purity ──────────────────────────────────────────────────────
       // src/data/** must be PURE DATA: no runtime imports of the generators,
       // store, or lib layers (which would re-introduce RNG capture / IO leaks
       // into the data tables). Executable closures live in the generators layer

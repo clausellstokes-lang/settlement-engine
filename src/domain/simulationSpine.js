@@ -1,7 +1,7 @@
 /**
  * domain/simulationSpine.js — Compact causal summary of a settlement.
  *
- * Tier 2.5 of the roadmap. The spine answers seven structured questions
+ * The spine answers seven structured questions
  * about a settlement in single-line answers derived from existing
  * simulation fields. No new generator work needed; this is read-only
  * over current settlement state.
@@ -93,7 +93,7 @@ function deriveRuledBy(s) {
   const formal = firstNonEmpty(power.governanceType, power.governance);
   if (formal) {
     const factionName = firstNonEmpty(power.governingName);
-    if (factionName) return `${formal} — currently ${factionName}.`;
+    if (factionName) return `${formal} (currently ${factionName}).`;
     return `${formal}.`;
   }
 
@@ -117,9 +117,9 @@ function deriveRealPower(s) {
     // Same. The spine entry becomes about legitimacy instead.
     const leg = power.publicLegitimacy?.label;
     if (leg && leg !== 'Endorsed') {
-      return `The governing hand is also the strongest hand — but its legitimacy is ${leg.toLowerCase()}.`;
+      return `The governing hand is also the strongest hand, but its legitimacy is ${leg.toLowerCase()}.`;
     }
-    return 'Authority and power are aligned — for now.';
+    return 'Authority and power are aligned (for now).';
   }
 
   if (top.name) {
@@ -168,7 +168,7 @@ function derivePeopleFear(s) {
     return 'People watch the hooks that the DM hasn’t shown them yet.';
   }
 
-  return 'No widely-shared dread — yet.';
+  return 'No widely-shared dread. Yet.';
 }
 
 function deriveLikelyFuture(s) {

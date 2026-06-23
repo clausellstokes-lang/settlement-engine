@@ -1,5 +1,5 @@
 /**
- * tradeLinks — good-level cross-settlement trade reconciliation (§14 Phase 3b).
+ * tradeLinks — good-level cross-settlement trade reconciliation.
  *
  * At generation a settlement may be created with an imported NEIGHBOUR. This
  * resolves the actual trade between them at the level of individual goods, using

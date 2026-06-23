@@ -42,11 +42,23 @@ export const createConfigSlice = (set, get) => ({
   // Wizard UI state (persisted)
   wizardStep: 0,                   // current step in the wizard
   wizardMode: null,                // null (card picker) | 'basic' (was 'quick') | 'advanced' | 'custom'
+  // How the CURRENT settlement was started: 'instant' (the one-click hero
+  // generate) | 'basic' | 'advanced'. Drives where Back / New Draft return to
+  // (instant -> Create landing; basic/advanced -> that config panel). Not
+  // persisted, mirrors wizardMode.
+  entryPath: null,
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,
   showAdvanced:     false,
   randomSliderMode: true,
+  // Explicit "I picked Custom" intent for the merged Character card. Without it,
+  // a default config (all priorities 50) collides exactly with the `balanced`
+  // archetype, so clicking Custom would light up Balanced instead. The flag lets
+  // the Custom chip win that tie. Set by the Custom chip; cleared by Random or any
+  // archetype pick; a slider drag leaves it untouched (drag already yields Custom
+  // for non-preset combos, and keeps Custom for a deliberate 50s return).
+  customSlidersExplicit: false,
 
   // Loaded-from-save indicator
   loadedFromSave: null,            // { name, tier } or null
@@ -76,6 +88,9 @@ export const createConfigSlice = (set, get) => ({
       state.wizardStep = 0;
     }),
 
+  setEntryPath: (p) =>
+    set(state => { state.entryPath = p; }),
+
   setConfigPanelOpen: (open) =>
     set(state => { state.configPanelOpen = open; }),
 
@@ -90,6 +105,9 @@ export const createConfigSlice = (set, get) => ({
 
   setRandomSliderMode: (val) =>
     set(state => { state.randomSliderMode = val; }),
+
+  setCustomSlidersExplicit: (val) =>
+    set(state => { state.customSlidersExplicit = val; }),
 
   setLoadedFromSave: (val) =>
     set(state => { state.loadedFromSave = val; }),

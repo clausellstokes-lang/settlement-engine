@@ -1,9 +1,8 @@
 /**
  * domain/qualitativeBands.js — Unified band accessor + display labels.
  *
- * Tier 5.4 of the roadmap. The substrate (Phase 17), capacities
- * (Phase 21), conditions (Phase 16), threats (Phase 20), and chain
- * states (Phase 10) all use canonical bands internally. Tier 5.4
+ * The substrate, capacities, conditions, threats, and chain
+ * states all use canonical bands internally. This module
  * exposes a single accessor consumers can use to read the band for
  * any reference, plus a display-label mapping so UI surfaces show
  * "Legitimacy: Contested" instead of "public_legitimacy: 37".
@@ -12,9 +11,8 @@
  *   displayBandLabel(domain, band) -> string
  *   displayValueFor(ref, settlement) -> string  ("Contested" not 37)
  *
- * Pure read-only. Composes Phase 17 causalState, Phase 21 capacities,
- * Phase 10 supply chains, Phase 16 conditions, Phase 20 threats,
- * Phase 29 districts.
+ * Pure read-only. Composes causalState, capacities, supply chains,
+ * conditions, threats, and districts.
  */
 
 import { deriveCausalState, SYSTEM_VARIABLES } from './causalState.js';
@@ -32,7 +30,7 @@ import { deriveAllDistricts } from './districtProfile.js';
 // surfaces.
 
 const DISPLAY_LABELS = Object.freeze({
-  // Phase 17 substrate / Phase 21 capacities share the same 5-band
+  // substrate / capacities share the same 5-band
   // vocabulary. The roadmap example "Legitimacy: Contested" implies
   // a band-name remap for user-facing display; the table below picks
   // labels that read well across substrate variables and capacities.
@@ -50,7 +48,7 @@ const DISPLAY_LABELS = Object.freeze({
     critical:  'Overwhelmed',
     collapsed: 'Collapsed',
   },
-  // Phase 10 supply chain statuses.
+  // supply chain statuses.
   chain: {
     stable:      'Stable',
     strained:    'Strained',
@@ -60,21 +58,21 @@ const DISPLAY_LABELS = Object.freeze({
     substituted: 'Substituted',
     collapsing:  'Collapsing',
   },
-  // Phase 16 condition severity bands.
+  // condition severity bands.
   condition: {
     low:      'Minor',
     medium:   'Notable',
     high:     'Severe',
     critical: 'Critical',
   },
-  // Phase 20 threat severity bands.
+  // threat severity bands.
   threat: {
     low:      'Distant',
     medium:   'Present',
     high:     'Acute',
     critical: 'Imminent',
   },
-  // Phase 29 district wealth.
+  // district wealth.
   district_wealth: {
     destitute:   'Destitute',
     poor:        'Poor',
@@ -83,7 +81,7 @@ const DISPLAY_LABELS = Object.freeze({
     wealthy:     'Wealthy',
     opulent:     'Opulent',
   },
-  // Phase 29 district safety.
+  // district safety.
   district_safety: {
     lawless:    'Lawless',
     unsafe:     'Unsafe',

@@ -1,8 +1,8 @@
 /**
- * SimulationDrawer.jsx — P135 / D-5 slide-out for "how this was simulated".
+ * SimulationDrawer.jsx — slide-out for "how this was simulated".
  *
  * The original Simulation tab lived as the last entry on the dossier
- * tab strip. The critique's D-5 calls this out as noise: most DMs
+ * tab strip, where it read as noise: most DMs
  * never open it, but it dilutes the strip and competes for attention
  * with the dossier-meaningful tabs. Moving it to a drawer:
  *
@@ -22,7 +22,6 @@
 
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { FS, swatch } from '../theme.js';
-import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -42,7 +41,11 @@ const sans = '"Nunito", system-ui, sans-serif';
  * the consumer mounts it; the drawer is portal-style — fixed-position
  * over the page chrome — so it doesn't push content around.
  */
-export default function SimulationDrawer() {
+export default function SimulationDrawer({ variant = 'inline' }) {
+  // 'inline' = the parchment owner-action band (ghost + light border).
+  // 'toolbar' = the dark sticky wizard toolbar, where the trigger joins Back /
+  // Regenerate / New as a matching secondary button.
+  const toolbar = variant === 'toolbar';
   const [open, setOpen] = useState(false);
   const firedRef = useRef(false);
 
@@ -67,12 +70,12 @@ export default function SimulationDrawer() {
   return (
     <>
       <Button
-        variant="ghost"
-        size="sm"
+        variant={toolbar ? 'secondary' : 'ghost'}
+        size={toolbar ? 'md' : 'sm'}
         onClick={() => setOpen(true)}
         title="See the 17-step simulation pipeline that built this settlement"
-        icon={<span style={{ color: GOLD }}>✦</span>}
-        style={{
+        icon={toolbar ? undefined : <span style={{ color: GOLD }}>✦</span>}
+        style={toolbar ? undefined : {
           border: `1px solid ${BORDER}`,
           color: MUTED,
         }}
@@ -139,12 +142,12 @@ export default function SimulationDrawer() {
                   marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
-                  Seventeen pure-functional steps, deterministic per seed.
-                  Tap a step to see what it decided and why.
+                  Seventeen steps built this settlement, each one fixed by the
+                  same seed. Tap a step to see what it decided and why.
                 </div>
               </div>
               <IconButton
-                Icon={X}
+                glyph={'✕'}
                 label="Close"
                 tone="ghost"
                 size="lg"

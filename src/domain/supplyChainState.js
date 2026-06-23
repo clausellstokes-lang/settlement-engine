@@ -1,7 +1,7 @@
 /**
  * domain/supplyChainState.js — Stateful supply-chain derivation.
  *
- * Tier 4.3 of the roadmap. Today's chain object lives on
+ * Today's chain object lives on
  * `settlement.economicState.activeChains[]` with shape:
  *
  *   {
@@ -34,7 +34,7 @@
  * and get the canonical shape.
  *
  * No imports from src/lib — the domain tsconfig include stays
- * self-contained, same constraint Phase 9 honored.
+ * self-contained, same constraint honored.
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -53,10 +53,9 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 //
 // The current generator only emits a subset of these states; the
 // remaining states (`captured`, `collapsing`) become reachable when
-// Tier 4.2 event-driven faction logic and Tier 2.3 active conditions
-// land.
+// event-driven faction logic and active conditions land.
 //
-// Magic-as-supplement is load-bearing (Cohesion Wave 5 #1): a druid-
+// Magic-as-supplement is load-bearing: a druid-
 // propped depleted chain used to canonicalize to 'stable' via the
 // unknown-status fallthrough — fully healthy to sim, AI, and receipts —
 // while the purpose-built 'substituted' status had no producer. Same
@@ -112,7 +111,7 @@ function chainIdFromShape(chain) {
 // ── Beneficiary / victim inference ────────────────────────────────────────
 // Pure heuristic over the chain's need category. The roadmap calls for
 // these as first-class fields; we provide reasonable defaults so the
-// scaffolding is usable today. Custom user content + Tier 4.2 event
+// scaffolding is usable today. Custom user content + event
 // consequences can override per chain in future iterations.
 //
 // Keys mirror the SUPPLY_CHAIN_NEEDS groups in data/supplyChainData.js
@@ -233,6 +232,10 @@ function conditionMatchesChain(condition, chain, haystack) {
   if (!condition || !chain) return false;
   const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
   if (systems.includes(chain.needKey)) return true;
+  // 'merchant_wealth' is a tolerant legacy-only alias (retired as a live tag;
+  // see activeConditions.js merchant_wealth-retirement note). Kept so saved
+  // conditions carrying the old tag still match exportable chains; new economic
+  // bite routes through trade_connectivity.
   if (chain.exportable && systems.some(s => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
   if (chain.entrepot && systems.includes('trade_connectivity')) return true;
   const conditionText = [
@@ -271,7 +274,7 @@ function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
   const maxSeverity = Math.max(...regionalPressures.map(p => p.severity || 0));
   const severeCount = regionalPressures.filter(p => (p.severity || 0) >= 0.55).length;
 
-  // 'blocked' and 'substituted' gained real producers in Wave 5 #1
+  // 'blocked' and 'substituted' gained real producers
   // (unexploited / magically_sustained). Judgment call: a blocked chain
   // is already offline, so pressure cannot make it scarcer — it only
   // compounds into 'collapsing', same as captured/collapsing; a
@@ -302,7 +305,7 @@ function appendRegionalFailureContext(base, regionalPressures) {
 }
 
 // ── Controller inference ──────────────────────────────────────────────────
-// Tier 4.3 wants every chain to declare a controller — usually a
+// Every chain should declare a controller — usually a
 // faction or institution that takes a rent on the chain's output. We
 // derive from the dependency.institution when present (the most
 // reliable signal), falling back to the first processing institution.
@@ -338,7 +341,7 @@ function inferDependencies(chain) {
 // via a substitute. The list of *possible* substitutes lives in the
 // catalog rather than on the chain instance, so we report only what
 // the current shape supports: a one-entry list when a substitute is
-// active, empty otherwise. Tier 4.16 (custom content as causal objects)
+// active, empty otherwise. Custom content as causal objects
 // will expand this; for now it's a faithful read of available data.
 
 function inferSubstitutes(chain) {
@@ -401,17 +404,17 @@ export function deriveSupplyChainState(chain, settlement) {
     substituteActive:       chain.substituteActive,
     resourceDepleted:       chain.resourceDepleted,
     dependency:             chain.dependency,
-    // Wave 5 #1: the magic-substitution and upstream-dependency passes
+    // The magic-substitution and upstream-dependency passes
     // explain WHY a chain is substituted/strained (chainMagicSubstitution.js
     // writes magicNote, computeActiveChains.js writes upstreamNote). The
     // derivation used to drop both, so the canonical surface asserted a
-    // status with no receipt. Wave 8 carries magicRecovery too (the W1
-    // deferred note): the substitution MAGNITUDE rides with its note, so a
+    // status with no receipt. magicRecovery rides along too: the
+    // substitution MAGNITUDE travels with its note, so a
     // 25% prop and a 70% rescue stop being indistinguishable downstream.
     magicNote:              chain.magicNote,
     magicRecovery:          chain.magicRecovery,
     upstreamNote:           chain.upstreamNote,
-    // Phase 19: preserve processingInstitutions so the explanation
+    // : preserve processingInstitutions so the explanation
     // module can match institutions to the chains that use them as
     // processors. Earlier derivation code did not carry it forward.
     processingInstitutions: Array.isArray(chain.processingInstitutions)
@@ -432,7 +435,7 @@ export function deriveAllSupplyChainStates(settlement) {
 
 // ── Diagnostic helpers ────────────────────────────────────────────────────
 // Cheap counters used by the simulation spine, distribution tests, and
-// future Tier 4.10 "if nothing changes" forecasts.
+// future "if nothing changes" forecasts.
 
 /**
  * Count chains by canonical status. Returns { stable, strained,

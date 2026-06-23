@@ -61,7 +61,7 @@ export function extractSettlementContext(s) {
     safetyRatioRaw >= 0.7 ? 32 :
     safetyRatioRaw >= 0.5 ? 18 : 8
   ));
-  const safetyLabelFromProfile = (sp.safetyLabel || '').split('—')[0].trim() || null;
+  const safetyLabelFromProfile = (sp.safetyLabel || '').split(':')[0].trim() || null;
   // safetyProfile.crimeTypes entries are {type, desc} objects — joining them
   // raw printed '[object Object]' into the prompt (same trap aiLayer fixed).
   const crimeTypes  = (sp.crimeTypes || []).map(ct => ct?.type || ct).filter(Boolean);

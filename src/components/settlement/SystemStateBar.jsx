@@ -8,16 +8,15 @@
  */
 
 import { useState } from 'react';
-import { ShieldCheck, AlertTriangle, Skull, Boxes, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const DIM_META = {
-  resilience:       { label: 'Resilience',        Icon: ShieldCheck,    higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
-  volatility:       { label: 'Volatility',        Icon: AlertTriangle,  higherIsBetter: false, desc: 'How close is internal conflict?' },
-  externalThreat:   { label: 'External Threat',   Icon: Skull,          higherIsBetter: false, desc: 'Pressure from outside.' },
-  resourcePressure: { label: 'Resource Pressure', Icon: Boxes,          higherIsBetter: false, desc: 'Are key materials strained?' },
+  resilience:       { label: 'Resilience',        higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
+  volatility:       { label: 'Volatility',        higherIsBetter: false, desc: 'How close is internal conflict?' },
+  externalThreat:   { label: 'External Threat',   higherIsBetter: false, desc: 'Pressure from outside.' },
+  resourcePressure: { label: 'Resource Pressure', higherIsBetter: false, desc: 'Are key materials strained?' },
 };
 
 const DIM_ORDER = ['resilience', 'volatility', 'externalThreat', 'resourcePressure'];
@@ -53,7 +52,6 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
         marginBottom: SP.xs,
       }}>
         {title}
-        <Info size={11} style={{ opacity: 0.6 }} />
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: SP.sm }}>
         {DIM_ORDER.map(key => {
@@ -76,7 +74,6 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
 
 function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
   const meta = DIM_META[dimKey];
-  const Icon = meta.Icon;
   const color = BAND_COLOR[dim.band] || MUTED;
   // For "lower is better" dims (volatility, threat, pressure), render
   // the bar from the right so bigger values look heavier and a "good"
@@ -103,7 +100,6 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <Icon size={12} color={color} />
         <span style={{ fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans }}>
           {meta.label}
         </span>

@@ -69,6 +69,21 @@ describe('searchCompendium', () => {
     expect(frontier).toContain('Frontier');
   });
 
+  it('routes the highest-signal Living World terms to the living tab', () => {
+    // These terms live ONLY on the Living World tab; before it was indexed they
+    // dead-ended on "No matches" despite the content being one click away.
+    for (const q of ['world pulse', 'advance time', 'pressures']) {
+      const top = searchCompendium(q)[0];
+      expect(top, `"${q}" should match`).toBeTruthy();
+      expect(top.tab).toBe('living');
+    }
+  });
+
+  it('indexes institutions so the largest catalog is reachable by name', () => {
+    const insts = searchCompendium('a', { limit: 200 }).filter(r => r.tab === 'institutions');
+    expect(insts.length).toBeGreaterThan(0);
+  });
+
   it('matches on keyword text, not just the term', () => {
     // "siege" is the Siege stress term AND lives in Besieged Holdout's keywords
     const res = searchCompendium('siege');

@@ -26,6 +26,14 @@ import { resolve } from 'node:path';
 const MIG_009 = resolve(process.cwd(), 'supabase', 'migrations', '009_profile_security.sql');
 const present = existsSync(MIG_009);
 
+// Hard-fail (not a silent vacuous skip) if migration 009 moves/renames: the
+// runIf(present) suite below would otherwise go GREEN with 0 tests run.
+describe('pglite target exists (guards against silent vacuous skip)', () => {
+  it('migration 009 is present (a moved migration must fail loudly)', () => {
+    expect(present, '009_profile_security.sql is missing — column-lock RLS coverage dropped').toBe(true);
+  });
+});
+
 /** Extract the column-lock UPDATE policy verbatim from migration 009. */
 function extractUpdatePolicy() {
   const src = readFileSync(MIG_009, 'utf-8');

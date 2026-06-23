@@ -88,8 +88,9 @@ export function useReaderAudience() {
   const tier = useStore(s => s.auth.tier);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
   // Behavior-signal aggregates — read derived counters from the store.
-  // creditsSlice tracks lifetime narrate-spend via spendCredits; we use
-  // a session-resilient counter held in the store. exportCount is the
+  // lifetimeNarrateCount is bumped on the aiSlice AI-generation success paths
+  // (requestNarrative/requestDailyLife/requestProgression), a session-resilient
+  // counter held in the store. exportCount is the
   // sum of `lastExportAt` markers across saved settlements; locks is
   // any save with a non-empty `locks` array; neighbours is any save
   // with neighbourLinks.

@@ -4,8 +4,7 @@
  *
  * Returns the current altitude level (the persisted `userPrefs.detailLevel`) plus
  * a setter, so any surface can decide how much engine depth to render from ONE
- * axis instead of the scattered legacy flags (dossierFiveTabs / summaryMagazineV2
- * / simulationDrawer / tableView). The three rungs:
+ * axis rather than a scatter of per-surface depth flags. The three rungs:
  *
  *   'guided'   → Overview  (a new DM's clean face)
  *   'standard' → Detail    (band pills + plain "why")
@@ -16,7 +15,7 @@
  * components consume.
  *
  *   const { level, setLevel, is } = useAltitude();
- *   if (is.expert) { ...render the 15-var grid... }
+ *   if (is.expert) { ...render the 16-var grid... }
  */
 
 import { useStore } from '../store/index.js';

@@ -78,7 +78,7 @@ export const TRADE_SALIENCE_TUNING = Object.freeze({
   MAX_DAMPEN: 0.4,
   // A CRITICAL-supplier dependency (high salience + hard-to-replace + a real
   // chain gap) earns EXTRA dampening between the dependent and its supplier
-  // (the proposal §6 "the dependent avoids war with its critical supplier").
+  // ("the dependent avoids war with its critical supplier").
   CRITICAL_GATE: 0.62,
   CRITICAL_EXTRA_DAMPEN: 0.18,
 });
@@ -319,7 +319,7 @@ export function pairTradeSalience(snapshot, worldState, aId, bId, ctx = {}) {
     return { salience: 0, critical: false, dependentId: null, supplierId: null, ties };
   }
   // MAX over ties (commutative ⇒ order-independent). The dominant tie names the
-  // dependent (buyer) + its supplier — the §6 coercion/war-avoidance direction.
+  // dependent (buyer) + its supplier — the coercion/war-avoidance direction.
   let dominant = ties[0];
   for (const t of ties) if (t.salience > dominant.salience) dominant = t;
   const critical = ties.some(t => t.critical);
@@ -405,7 +405,7 @@ export function computeTradeSalienceMap(snapshot, worldState, ctx = {}) {
   return { factors, salience };
 }
 
-// ── Secondary-status overlay (B0 compatibility-enforced) ─────────────────────
+// ── Secondary-status overlay (compatibility-enforced) ────────────────────────
 // Trade ties create/reinforce SECONDARY relationship statuses layered OVER the
 // primary `relationshipType` (never replacing it). The status RANK comes from the
 // tie's salience + materiel character:
@@ -413,11 +413,11 @@ export function computeTradeSalienceMap(snapshot, worldState, ctx = {}) {
 //   - military_supplier   : a war-good tie (materiel commodity);
 //   - preferred_supplier  : a valuable-but-not-critical tie;
 //   - trade_partner       : any other confirmed tie.
-// EVERY derived status is run through the B0 isCompatible(primary, secondary)
+// EVERY derived status is run through the isCompatible(primary, secondary)
 // gate: a hostile (battlefield) primary BLOCKS all normal commerce — its trade
 // can only exist as a covert/forced/mediated/temporary exception channel, so a
 // battlefield primary downgrades any normal status to `smuggling` (covert) and
-// drops it unless that exception is coherent. This is the §5 rule: "battlefield
+// drops it unless that exception is coherent. The rule: "battlefield
 // enemies as normal trade is NOT OK".
 const MATERIEL_STATUS_PATTERN = MATERIEL_GOOD_PATTERN;
 
@@ -450,7 +450,7 @@ export function deriveSecondaryStatuses(pair, primary) {
 
     if (battlefield) {
       // A battlefield primary forbids normal commerce — the only coherent tie is
-      // a covert smuggling channel (the §5 exception). Downgrade + flag covert.
+      // a covert smuggling channel (the exception path). Downgrade + flag covert.
       if (isCompatible(primary, 'smuggling', { covert: true })) {
         byStatus.set('smuggling', { status: 'smuggling', covert: true });
       }

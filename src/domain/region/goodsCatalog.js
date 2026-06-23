@@ -7,7 +7,7 @@
  * so channels can compare exports/imports without brittle prose matching.
  *
  * Unknown labels are preserved as custom.<slug> ids. That keeps user content
- * and future packs lossless while still letting the P0 engine reason over
+ * and future packs lossless while still letting the engine reason over
  * known staples.
  */
 

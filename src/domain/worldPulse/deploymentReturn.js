@@ -15,7 +15,7 @@
  *                       untroubled home still SPLINTERS (deserters / rebels / a
  *                       loyalist remnant) — a low-strength return is destabilizing.
  *
- * B2 — STRENGTH-SCALED RESOLUTION. The army now carries a `currentEffectiveStrength`
+ * STRENGTH-SCALED RESOLUTION. The army now carries a `currentEffectiveStrength`
  * (relative to its `maxStartStrength` and to the home situation). The branch is still
  * contextual, but its RESOLUTION is strength-scaled: a deterministic threshold on the
  * army's remaining-strength ratio + a plausibility-banded roll (NOT a coin flip). A
@@ -51,7 +51,7 @@ function clamp(min, max, value) {
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 
-// ── B2 strength-scaled return tunables (calibration is load-bearing). ────────────
+// ── Strength-scaled return tunables (calibration is load-bearing). ───────────────
 // The army's REMAINING-STRENGTH RATIO (currentEffectiveStrength / maxStartStrength,
 // 0..1) is the spine of every return resolution. A high ratio ⇒ a strong host that
 // breaks the siege / liberates / coups; a low ratio ⇒ a spent host that fails,
@@ -82,7 +82,7 @@ function strengthRatioOf(deployment, outcome) {
   const cur = Number(d.currentEffectiveStrength);
   let ratio = Number.isFinite(max) && max > 0 && Number.isFinite(cur)
     ? clamp01(cur / max)
-    : 1.0; // light/pre-B2 record ⇒ full strength (legacy binary limit).
+    : 1.0; // light record ⇒ full strength (legacy binary limit).
   // A withdrawal is a retreat off a stalled siege — the host is demoralized even if
   // its headcount held. Cap its effective return strength a little.
   if (outcome === 'withdrawal') ratio = Math.min(ratio, 0.85);
@@ -211,7 +211,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
     const homeName = item.name || item.settlement?.name || homeId;
     const sourceId = `deployment.${stablePart(homeId)}.${stablePart(record.targetId)}`;
 
-    // ── B2 — the returning army's REMAINING-STRENGTH RATIO + one id-forked roll. Every
+    // ── The returning army's REMAINING-STRENGTH RATIO + one id-forked roll. Every
     // resolution below thresholds on this: a strong host succeeds, a depleted one fails
     // / negotiates / splinters. The roll is forked on the home id (order-independent).
     const ratio = strengthRatioOf(record.deployment, record.outcome);
@@ -291,7 +291,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
 
     if (isVassal(snapshot, homeId)) {
       // A vassal whose army comes home is a coup risk: legitimacy decides whether the
-      // returning host CAN topple the seat — but B2 gates it on STRENGTH FIRST. A
+      // returning host CAN topple the seat — but it is gated on STRENGTH FIRST. A
       // depleted host that marches home is in no shape to coup (it DISBANDS, and a
       // gutted one may splinter); only a host with strength to spare even rolls the
       // legitimacy verdict, and its strength tilts that verdict.
@@ -355,15 +355,15 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       continue;
     }
 
-    // ── Generic clear. A HEALTHY army stands down with no residual (§5 carve-out). But
+    // ── Generic clear. A HEALTHY army stands down with no residual. But
     // a BADLY-DAMAGED army returning to an untroubled home is itself DESTABILIZING — it
     // SPLINTERS: deserters, would-be rebels, a restive loyalist remnant. A low-strength
-    // return is a postwar-instability seed, the §9 "splinters (rebels/deserters)". ────
+    // return is a postwar-instability seed (splinters: rebels/deserters). ────────────
     if (ratio < SPLINTER_RATIO) {
       outcomes.push(failedReturnOutcome({
         kind: 'splinter', homeId, homeName, sourceId, ratio, pSuccess: 0, roll: 0, tick,
         headline: `${homeName}'s broken host comes home`,
-        summary: `${homeName}'s army returned a shadow of the force that marched out — deserters scatter and the survivors are restive, a wound on the home order.`,
+        summary: `${homeName}'s army returned a shadow of the force that marched out. Deserters scatter and the survivors are restive, a wound on the home order.`,
       }));
     }
   }

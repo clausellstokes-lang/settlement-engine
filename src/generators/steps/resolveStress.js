@@ -13,9 +13,9 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 registerStep('resolveStress', {
   deps: ['resolveConfig', 'resolveResources'],
-  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces
   provides: ['stress', 'stressTypes'],
-  mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig (A+ P1.7)
+  mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig
   phase: 'config',
 }, (ctx) => {
   const { tier, effectiveConfig, population } = ctx;
@@ -37,7 +37,7 @@ registerStep('resolveStress', {
   ].filter(Boolean);
   effectiveConfig._population = population;
 
-  // Tier 2.1 — emit one trace per active stressor so downstream consumers
+  // Emit one trace per active stressor so downstream consumers
   // (PipelineRail, AI grounding, the "what's pressuring this town?"
   // viewer) can answer why famine/plague/siege is in play. The intended
   // vs effective distinction matters: a stressor the user requested but
@@ -114,7 +114,7 @@ registerStep('resolveStress', {
         step:       'resolveStress',
         result:     'resolved_by_event',
         causes: [{ source: 'event', effect: 'suppressed',
-                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}" — the re-rolled stressor stays resolved.` }],
+                   reason: `A RESOLVE_STRESSOR event ended "${st.label || st.name || st.type}". The re-rolled stressor stays resolved.` }],
       });
     }
     entries = entries.filter(st => !isResolved(st));

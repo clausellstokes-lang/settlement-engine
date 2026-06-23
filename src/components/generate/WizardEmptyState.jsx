@@ -9,18 +9,31 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
+import { SECOND, BORDER, CARD, INK, BODY, sans, serif_, SP, R, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
+import PageHeader from '../primitives/PageHeader.jsx';
 
-// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
+// Below-hero proof cards lazy-load; reserve their space with a height-matched
+// skeleton so the acquisition surface reads as "loading", not a blank gap that
+// pops in and shifts layout on cold connections (P9: skeletons over null).
+function ProofSkeleton({ height }) {
+  return (
+    <div aria-hidden="true" style={{
+      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      opacity: 0.6,
+    }} />
+  );
+}
+
+// Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
 // flip. Mounted directly below HomeHero so anon visitors see proof of
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 
-// P9 / §4.7 — "Watch a region wake up" read-only replay. Self-gates inside on
+// "Watch a region wake up" read-only replay. Self-gates inside on
 // anon + no-settlement (same as the sample dossier), so it renders nothing once
 // the visitor has the real thing. Mounted below the sample dossier so the
 // teaser ladder reads: proof of the static dossier → proof of the LIVING world.
@@ -29,55 +42,77 @@ const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
-  isMobile,
-  wizardMode,
   setWizardMode,
   authTier,
   onSignIn,
   onNavigate,
 }) {
+  // ONE landing frame. The whole Create-landing stack (hero + proof cards + the
+  // signed-in heading + mode picker) shares LANDING_MAX so the column has a
+  // single edge, rather than HomeHero/WelcomeBack/mode-picker each nesting a
+  // bespoke width inside a wider parent.
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: LANDING_MAX, margin: '0 auto', padding: `${SP.xl}px 0` }}>
       {showHomeHero && (
         <>
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          <Suspense fallback={null}>
+          <Suspense fallback={<ProofSkeleton height={360} />}>
             <HomeSampleDossier />
           </Suspense>
-          <Suspense fallback={null}>
+          <Suspense fallback={<ProofSkeleton height={280} />}>
             <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
           </Suspense>
         </>
       )}
       {!showHomeHero && (
-        <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
+        <PageHeader
+          eyebrow="Forge a settlement"
+          title="Create a settlement"
+          subtitle="Choose a generation mode to get started."
+          size="lg"
+        />
+      )}
+      {/* The hero is the single focal point for the signed-in landing: it owns
+          the "Roll now" intent. The mode picker is a SUBORDINATE "want full
+          control?" affordance, so it renders in the quiet (non-large) variant —
+          smaller compact cards, no background image, no hover-lift — rather than
+          two large cards competing with the hero CTA for the squint-test winner. */}
+      {/* The mode picker reads as ONE parchment card matching the signed-in
+          instant-generator hero above it (same gradient, hairline, radius, and
+          soft shadow), with the two named modes as side-by-side buttons inside.
+          The heading sits a step below the hero's so the "roll now" CTA stays
+          the squint-test winner. */}
+      {showModePicker && (
+        <section
+          aria-label="Generation modes"
+          style={{
+            maxWidth: LANDING_MAX, margin: '0 auto',
+            padding: `${SP.xl}px ${SP.lg}px`,
+            background: 'linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.xl + 2,
+            boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
+            fontFamily: sans,
+            textAlign: 'center',
+          }}
+        >
           <h2 style={{
-            fontFamily: serif_,
-            fontSize: isMobile ? FS.xxl : 32,
-            fontWeight: 700,
-            color: INK,
-            margin: 0,
-            marginBottom: SP.sm,
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: FS.xl, color: INK, lineHeight: 1.2,
           }}>
-            Create a Settlement
+            Want full control?
           </h2>
           <p style={{
-            fontFamily: sans,
-            fontSize: FS.md,
-            color: MUTED,
-            margin: 0,
+            margin: `${SP.xs}px auto 0`, maxWidth: 480,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.sm, color: BODY, lineHeight: 1.55,
           }}>
-            Choose a generation mode to get started.
+            Use one of the modes below.
           </p>
-        </div>
-      )}
-      {showModePicker && (
-        <>
-          <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-            Want full control? Use one of the modes below.
-          </div>
-          <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
-        </>
+          {/* This branch only renders when no mode is selected, so no card is
+              active — ModeSelector reads `mode` as undefined. */}
+          <ModeSelector mode={undefined} onModeChange={setWizardMode} />
+        </section>
       )}
       {/* Anonymous visitors get instant generation (the hero) only; Basic and
           Advanced are gated to signed-in users. Surface the (free) path so the

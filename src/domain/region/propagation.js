@@ -399,7 +399,7 @@ function impactForChannel(channel, localDelta, change) {
   return null;
 }
 
-// R2 medium: a same-id collision keeps the STRONGEST impact, not the first
+// A same-id collision keeps the STRONGEST impact, not the first
 // derived. Two rules can mint one impact id in a single propagation (e.g.
 // population_loss and tier_demotion through one trade_dependency channel both
 // produce import_shortage over the same goods — the id carries no change
@@ -425,7 +425,11 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
   const now = options.now ?? null;
   const current = ensureRegionalGraph(graph || {}, { now });
-  const channels = activeChannelsFrom(graph, localDelta.sourceSettlementId, {
+  // Feed the already-normalized `current` (not the raw `graph`) so the
+  // direct-impact path doesn't re-run a full ensureRegionalGraph inside
+  // activeChannelsFrom — matching the wave path below. Functionally equivalent
+  // (activeChannelsFrom mints no escaping timestamps) but one normalize, not two.
+  const channels = activeChannelsFrom(current, localDelta.sourceSettlementId, {
     includeSuggested: !!options.includeSuggested,
     types: options.types || [...REGIONAL_RULE_TYPES],
   });
@@ -477,7 +481,7 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
 // trade_route (or export_market) channels toward the same target — or a
 // direct impact plus a wave echo — derived several same-kind impacts for one
 // target, and the apply path materializes one condition per impact, so a
-// single shock stacked (post-R1 the condition ids are guaranteed distinct,
+// single shock stacked (the condition ids are now guaranteed distinct,
 // which made the stacking worse, not better). Every impact in one
 // propagation descends from the same source event (one localDelta), so the
 // fold key is (target, kind): the strongest severity wins, goods lists
@@ -655,7 +659,7 @@ function regionalConditionId(impactItem) {
 
 // Pre-fix derivation, kept verbatim: impacts stored in saves before the hash
 // fix carry no conditionId, and their materialized conditions sit under this
-// truncated id — resolve must keep finding them. Exported (R2) for
+// truncated id — resolve must keep finding them. Exported for
 // applied-impact reconciliation; the derivation itself is unchanged.
 export function legacyRegionalConditionId(impactItem) {
   return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}`;
@@ -714,7 +718,7 @@ export function applyRegionalImpact(settlement, impactItem, options = {}) {
   return withActiveCondition(base, condition);
 }
 
-// Event-log diet (H18): keep every typed scalar a change carries (kind,
+// Event-log diet: keep every typed scalar a change carries (kind,
 // source, magnitude, variable, tiers, deltas, ...) but slim the two object
 // embeds — a good is identified by id/label, a chain by id/resource/status.
 // Nothing re-derives from a logged change; this is the DM-facing audit trail.
@@ -772,7 +776,7 @@ export function propagateRegionalEvent(args = {}) {
     }),
   }));
 
-  // H18: the appended record is an audit row, not cold storage — event
+  // The appended record is an audit row, not cold storage — event
   // metadata plus the typed changes list. The full localDelta (embedding two
   // complete before/after settlement projections, ~4.4KB+ per canon event)
   // had zero readers and persisted to localStorage/cloud on every change.

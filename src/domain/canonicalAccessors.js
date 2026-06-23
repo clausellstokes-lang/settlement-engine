@@ -3,7 +3,7 @@
  * aliases for the substrate readers.
  *
  * Two concepts are dual-written across the codebase's history:
- *   - Stressors: Tier 1.2 dual-writes the same array under `stressors` (canonical),
+ *   - Stressors: dual-writes the same array under `stressors` (canonical),
  *     `stress`, and `stresses`; `normalizeSettlement` resolves the top-level aliases
  *     (see settlement.schema.js FIELD_ALIASES), but readers still receive
  *     un-normalized objects (fresh pipeline output, legacy saves, test fixtures).
@@ -11,7 +11,7 @@
  *     `primaryImports`; `exports` / `imports` are legacy aliases. These are NESTED,
  *     so they can't live in the top-level FIELD_ALIASES map — this module is their
  *     canonical resolution point. (Reading the dead `exports` field instead of
- *     `primaryExports` was the capacityModel bug P1.2 fixed; centralizing here
+ *     `primaryExports` was the capacityModel bug this fixed; centralizing here
  *     stops it recurring.)
  *
  * Resolve each ONCE here so no reader re-derives the fallback chain (and risks

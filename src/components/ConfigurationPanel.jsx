@@ -1,91 +1,27 @@
-import { useState, useMemo } from 'react';
-import {ChevronDown, ChevronUp} from 'lucide-react';
+import { useMemo } from 'react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
+import { GOLD, INK, MUTED, BODY, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
-// UX overhaul Phase 6 — the 17 archetypes moved to a shared module so the
-// promoted top-level Character card and this legacy slider dropdown read the
-// SAME data (archetypePatch writes the identical config patch → byte-identical).
-import { ARCHETYPES, ARCHETYPE_GROUPS, archetypePatch } from './generate/characterPresets.js';
+import Disclosure from './primitives/Disclosure.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
-const PRIORITIES=[
-  {key:'priorityEconomy',label:'Economy',accent:'#a0762a'},
-  {key:'priorityMilitary',label:'Military',accent:'#8b1a1a'},
-  {key:'priorityMagic',label:'Magic',accent:'#5a2a8a'},
-  {key:'priorityReligion',label:'Religion',accent:'#1a5a28'},
-  {key:'priorityCriminal',label:'Criminal',accent:'#4a1a4a'},
-];
+// Priority sliders moved to the Character card (PrioritySliders.jsx): archetype
+// chips and the five sliders are the same config values, now reconciled into one
+// card. This Fine-tune disclosure keeps Nearby Resources + Settlement Stress.
 
 function Lbl({children,topic}){
   const base={fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4};
-  // P126 / CP-1: optional inline Compendium help. HelpPopover self-gates
+  // Optional inline Compendium help. HelpPopover self-gates
   // on flag('compendiumInlineHelp') and renders null when off, so the
   // label is byte-identical until the flag is flipped on.
   if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
   return<div style={base}>{children}</div>;
 }
-function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
-function Collapsible({title,status,children}){
-  const[open,setOpen]=useState(false);
-  return<div><Button variant="ghost" size="sm" fullWidth onClick={()=>setOpen(o=>!o)} aria-expanded={open} icon={open?<ChevronUp size={14}/>:<ChevronDown size={14}/>} style={{justifyContent:'flex-start',textAlign:'left',padding:'4px 0',whiteSpace:'normal'}}><span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</Button>{open&&children}</div>;
-}
-
-function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
-  const[applied,setApplied]=useState(null);
-  const apply=e=>{
-    const key=e.target.value;if(!key)return;
-    const patch=archetypePatch(key);if(!patch)return;
-    updateConfig(patch);
-    setApplied(key);e.target.value='';
-  };
-  return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
-    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
-      <Lbl>Priority Sliders</Lbl>
-      <Button variant={randomSliderMode?'primary':'secondary'} size="sm" aria-pressed={randomSliderMode} onClick={()=>setRandomSliderMode(!randomSliderMode)}>{randomSliderMode?'Random':'Set manually'}</Button>
-    </div>
-    {randomSliderMode
-      ? <p style={{fontSize:FS.xs,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
-      : <>
-        <div style={{marginBottom:10}}>
-          <Lbl>Archetype preset</Lbl>
-          <div style={{display:'flex',gap:6}}>
-            <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
-              <option value="">, Choose an archetype</option>
-              {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} - {a.desc}</option>:null;})}</optgroup>)}
-            </select>
-            {applied&&<span style={{fontSize:FS.xs,color:swatch['#4A8A60'],fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
-          </div>
-        </div>
-        <div style={{display:'flex',flexDirection:'column',gap:8}}>
-          {PRIORITIES.map(({key,label,accent})=>{
-            // Hide magic slider entirely when magic doesn't exist in this world
-            if (key === 'priorityMagic' && config.magicExists === false) return null;
-            const val = config[key] ?? 50;
-            return <div key={key} style={{display:'flex',alignItems:'center',gap:8}}>
-              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,width:62,flexShrink:0}}>
-                {label}
-              </span>
-              <input type="range"
-                aria-label={label}
-                min={5} max={95}
-                value={Math.max(5,val)}
-                onChange={e=>updateConfig({[key]:Number(e.target.value)})}
-                style={{flex:1,accentColor:accent,height:4}}/>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:accent,width:46,textAlign:'right',whiteSpace:'nowrap'}}>
-                {val}
-              </span>
-            </div>;
-          })}
-        </div>
-      </>
-    }
-  </div>;
-}
+function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 
 function StressPanel({config,updateConfig}){
   const isRandom=config.selectedStressesRandom!==false;
@@ -100,7 +36,7 @@ function StressPanel({config,updateConfig}){
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
+        <Button variant={isRandom?'gold':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
         {!isRandom&&<><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:allKeys})}>All</Button><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:[]})}>None</Button></>}
       </div>
     </div>
@@ -119,12 +55,16 @@ function NearbyResourcesPanel({config,updateConfig}){
   const tierPct    = DEPLETION_PROB[config.settType] ?? 25;
 
   // Four-state cycle: off (unselected) → allow → abundant → depleted → off
-  // 'off' has no label — just looks bland, like a stress that wasn't selected
+  // 'off' has no label — just looks bland, like a stress that wasn't selected.
+  // Every active state carries a GLYPH so it reads in >=2 channels (glyph +
+  // colour + label), not colour alone — depleted previously had only a leading
+  // space, leaving CVD users unable to tell it from abundant (P7). '▼' = drawn
+  // down / depleted; matches the '✦ abundant' / '○ allow' glyph pattern.
   const _RESOURCE_STATES = ['off','allow','abundant','depleted'];
-  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:' Depleted'};
-  const STATE_COLORS  = {allow:'#9c8068',abundant:'#1a5a28',depleted:'#c05000'};
-  const STATE_BG      = {allow:'transparent',abundant:'#f0faf2',depleted:'#fff7f0'};
-  const STATE_BORDER  = {allow:'#c8b89a',abundant:'#88c880',depleted:'#e08040'};
+  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:'▼ Depleted'};
+  const STATE_COLORS  = {allow:swatch['#9C8068'],abundant:swatch['#1A5A28'],depleted:swatch['#C05000']};
+  const STATE_BG      = {allow:'transparent',abundant:swatch.successBg,depleted:swatch['#FFF7F0']};
+  const STATE_BORDER  = {allow:swatch['#C8B89A'],abundant:swatch['#88C880'],depleted:swatch['#E08040']};
 
   // A resource is 'off' if it's not in the selected list
   // Otherwise use the state map (defaulting to 'allow' if selected but no override)
@@ -182,11 +122,11 @@ function NearbyResourcesPanel({config,updateConfig}){
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
-        <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2,display:'flex',alignItems:'center',gap:8}}>Nearby Resources<span style={{fontSize:FS.xxs,fontWeight:400,color:MUTED}}>constrained by {route} access</span></div>
+        <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2,display:'flex',alignItems:'center',gap:8}}>Nearby Resources<span style={{fontSize:FS.xs,fontWeight:400,color:BODY}}>constrained by {route} access</span></div>
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random compatible subset is selected each Generate.':`${selected.filter(k=>compatible.some(r=>r.key===k)).length} of ${compatible.length} compatible resources selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
+        <Button variant={isRandom?'gold':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
         {!isRandom&&<>
           <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})}>All</Button>
           <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})}>None</Button>
@@ -205,8 +145,8 @@ function NearbyResourcesPanel({config,updateConfig}){
                 <Button key={r.key} variant="ghost" size="sm"
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
-                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',fontWeight:400,border:'1px dashed #c8b8a0',
-                    background:'transparent',color:MUTED,opacity:0.45}}>
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',fontWeight:400,border:`1px dashed ${swatch['#C8B8A0']}`,
+                    background:'transparent',color:BODY}}>
                   {r.name||r.key.replace(/_/g,' ')}
                 </Button>);
             }
@@ -217,7 +157,7 @@ function NearbyResourcesPanel({config,updateConfig}){
                 <Button key={r.key} variant="gold" size="sm" disabled
                   title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
                   style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',opacity:1,
-                    border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
+                    border:`1px solid ${swatch['#C8A84A']}`,background:`rgba(160,118,42,0.08)`,color:swatch['#8A6020'],
                     cursor:'default',userSelect:'none',fontWeight:600}}>
                   {r.name||r.key.replace(/_/g,' ')}
                 </Button>);
@@ -235,8 +175,8 @@ function NearbyResourcesPanel({config,updateConfig}){
               : 'Forced depleted. Local use only, import dependency at town+. Click to remove.';
             // Visual: off=bland/dim, allow=subtle gold, abundant=green, depleted=orange
             const btnStyle = isOff
-              ? {border:'1px solid #d0c0a8',background:'transparent',color:MUTED,
-                 fontWeight:400,opacity:0.55}
+              ? {border:`1px dashed ${swatch['#D0C0A8']}`,background:'transparent',color:BODY,
+                 fontWeight:400}
               : st==='allow'
               ? {border:`1px solid ${GOLD}80`,background:`${GOLD}12`,color:GOLD,fontWeight:600}
               : {border:`1px solid ${STATE_BORDER[st]}`,background:STATE_BG[st],
@@ -246,24 +186,27 @@ function NearbyResourcesPanel({config,updateConfig}){
                 style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',
                   WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>
-                {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
+                {!isOff&&st!=='allow'&&<span style={{fontSize:FS.xs,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
                 {r.name||r.key.replace(/_/g,' ')}
               </Button>);
           })}
         </div>
       </div>)}
-      {/* Legend */}
-      <div style={{marginTop:8,paddingTop:8,borderTop:'1px solid #e8dcc8',display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
+      {/* Legend — teaches the four-state model + the route constraint, so it
+          carries causal content (P2): lifted off the sub-10px floor to FS.xs and
+          the depleted swatch given its ▼ glyph so the legend matches the chips'
+          glyph+colour+label pattern, not colour alone (P7). */}
+      <div style={{marginTop:8,paddingTop:8,borderTop:`1px solid ${swatch['#E8DCC8']}`,display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
         {isRandom
-          ? <span style={{fontSize:FS.xxs,color:SECOND,fontStyle:'italic'}}>
+          ? <span style={{fontSize:FS.xs,color:SECOND,fontStyle:'italic'}}>
               All compatible resources are in the pool. ~{tierPct}% chance of depleted per resource at <strong>{config.settType||'this tier'}</strong>. Toggle Random OFF to control individually.
             </span>
           : <>
-              <span style={{fontSize:FS.xxs,color:SECOND}}>Click each resource to cycle:</span>
-              <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
-              <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>Allow (~{tierPct}% depleted)</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}> Depleted</span>
+              <span style={{fontSize:FS.xs,color:SECOND}}>Click each resource to cycle:</span>
+              <span style={{fontSize:FS.xs,color:MUTED,border:`1px solid ${swatch['#D0C0A8']}`,borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
+              <span style={{fontSize:FS.xs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>○ Allow (~{tierPct}% depleted)</span>
+              <span style={{fontSize:FS.xs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
+              <span style={{fontSize:FS.xs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}>▼ Depleted</span>
             </>
         }
       </div>
@@ -271,11 +214,16 @@ function NearbyResourcesPanel({config,updateConfig}){
   </div>;
 }
 
-export default function ConfigurationPanel(){
+/**
+ * @param {{ showFineTune?: boolean }} [props]
+ *   showFineTune — render the "Fine-tune" block (priority sliders, nearby
+ *   resources, settlement stress). Basic mode passes false so the panel stops at
+ *   the Foundations; Advanced (default) shows it. Untouched values generate from
+ *   working random defaults either way.
+ */
+export default function ConfigurationPanel({ showFineTune = true } = {}){
   const config = useStore(s => s.config);
   const updateConfig = useStore(s => s.updateConfig);
-  const randomSliderMode = useStore(s => s.randomSliderMode);
-  const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
   // §14b — "Use custom content" toggle: only meaningful for users who can author
   // custom content and actually have some. Default ON (undefined === on).
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -291,11 +239,6 @@ export default function ConfigurationPanel(){
 
   return<div style={{background:CARD,border:`1px solid ${BORDER2}`,borderRadius:10}}>
     <div style={{padding:'0 16px 14px'}}>
-      <div style={{marginBottom:12}}>
-        <Lbl>Settlement Name (optional)</Lbl>
-        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
-        {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
-      </div>
       {/* §14b — Use custom content toggle (homebrew data layer). Default ON. */}
       {canUseCustom && customCount > 0 && (() => {
         const on = config.useCustomContent !== false;
@@ -307,9 +250,9 @@ export default function ConfigurationPanel(){
           </label>
         );
       })()}
-      <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="tier">Population</Lbl>
-          <Sel value={blockTownPlus && isTownPlus ? 'village' : config.settType}
+          <Sel ariaLabel="Population" value={blockTownPlus && isTownPlus ? 'village' : config.settType}
             onChange={e=>{
               const v = e.target.value;
               // If blocked tier somehow selected, snap to village
@@ -327,11 +270,12 @@ export default function ConfigurationPanel(){
             <option value="custom">Custom…</option>
           </Sel>
           {blockTownPlus && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
-             Town+ requires a trade route or Magic slider above 0
+            Town+ requires a trade route or Magic slider above 0
           </div>}
         </div>
         <div><Lbl topic="trade-route">Trade Route</Lbl>
           <Sel
+            ariaLabel="Trade Route"
             value={blockIsolated && isIsolated ? 'road' : config.tradeRouteAccess}
             onChange={e=>{
               const v = e.target.value;
@@ -356,8 +300,8 @@ export default function ConfigurationPanel(){
           config.tradeRouteAccess === 'isolated' && (
           <div style={{
             background: swatch.infoBg,
-            border: '1px solid #a0b0e0',
-            borderLeft: '3px solid #3a5ab0',
+            border: `1px solid ${swatch['#A0B0E0']}`,
+            borderLeft: `3px solid ${swatch['#3A5AB0']}`,
             borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
           }}>
             <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
@@ -368,22 +312,22 @@ export default function ConfigurationPanel(){
         )}
 
         <div><Lbl topic="terrain">Terrain</Lbl>
-          <Sel value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
-            <option value="auto">️ Auto (from route)</option>
+          <Sel ariaLabel="Terrain" value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
+            <option value="auto">Auto (from route)</option>
             <option value="plains">Plains / Farmland</option>
             <option value="forest">Forest / Woodland</option>
             <option value="hills">Rolling Hills</option>
             <option value="riverside">River Valley</option>
             <option value="coastal">Coastal</option>
-            <option value="mountain">️ Mountain</option>
-            <option value="desert">️ Desert / Arid</option>
+            <option value="mountain">Mountain</option>
+            <option value="desert">Desert / Arid</option>
           </Sel>
         </div>
       </div>
       {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
-      <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Culture</Lbl>
-          <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
+          <Sel ariaLabel="Culture" value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
             <option value="random_culture"> Random</option>
             <option value="mixed">Mixed</option>
             <option value="germanic">Germanic</option>
@@ -401,7 +345,7 @@ export default function ConfigurationPanel(){
         </div>
         <div>
           <Lbl topic="settlement-age">Age</Lbl>
-          <Sel value={config.settlementAgeMode||'auto'} onChange={e=>updateConfig({settlementAgeMode:e.target.value})}>
+          <Sel ariaLabel="Settlement age" value={config.settlementAgeMode||'auto'} onChange={e=>updateConfig({settlementAgeMode:e.target.value})}>
             <option value="auto">Auto</option>
             <option value="new">Newly founded</option>
             <option value="custom">Custom years</option>
@@ -420,16 +364,17 @@ export default function ConfigurationPanel(){
         </div>
         <div>
           <Lbl topic="monster-threat">Regional Threat</Lbl>
-          <Sel value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
+          <Sel ariaLabel="Regional Threat" value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
             <option value="random_threat"> Random</option>
-            <option value="heartland">️ Safe Heartland</option>
-            <option value="frontier">️ Active Frontier</option>
-            <option value="plagued">️ Embattled Region</option>
+            <option value="heartland">Safe Heartland</option>
+            <option value="frontier">Active Frontier</option>
+            <option value="plagued">Embattled Region</option>
           </Sel>
+          <p style={{fontSize:FS.xs,color:BODY,margin:'6px 0 0',lineHeight:1.4}}>Heartland is quiet. Frontier sees raids and patrols. Embattled means active war or monster pressure.</p>
         </div>
         <div>
           <Lbl topic="magic-level">Magic in the World?</Lbl>
-          <Sel value={config.magicExists===false?'no':'yes'}
+          <Sel ariaLabel="Magic in the World" value={config.magicExists===false?'no':'yes'}
             onChange={e=>{
               const noMagicNow = e.target.value==='no';
               const isTownPlusNow = ['town','city','metropolis'].includes(config.settType);
@@ -444,19 +389,37 @@ export default function ConfigurationPanel(){
             <option value="yes">✦ Yes. Magic exists</option>
             <option value="no">○ No. Historical mode</option>
           </Sel>
+          {/* Make the cross-field consequence VISIBLE (P2): turning magic off at
+              town+ forces a physical trade route — an isolated town+ is reset to
+              Road (the magic toggle's onChange does this silently otherwise). */}
+          {noMagic && isTownPlus && (
+            <div style={{fontSize:FS.xs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
+              Without magic, a town or larger needs a physical trade route, so Isolated is set to Road.
+            </div>
+          )}
         </div>
       </div>
-      {/* ── Fine-tune (UX overhaul Phase 6) ─────────────────────────────────
-            The priority sliders + the Character archetype dropdown + nearby
-            resources + stress collapse into ONE "Fine-tune" disclosure so the
-            Foundations above read as a clean first surface for a new DM, while
-            the depth stays one tap away. The controls are unchanged — this is a
-            layout reshuffle, byte-identical to generation. */}
-      <Collapsible title="Fine-tune — priorities, resources, stress" status="optional">
-        <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
-        <div style={{marginTop:10}}><Collapsible title=" Nearby Resources" status={config.nearbyResourcesRandom!==false?' Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
-        <div style={{marginTop:6}}><Collapsible title=" Settlement Stress" status={config.selectedStressesRandom!==false?' Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
-      </Collapsible>
+      {/* Settlement Name — optional, so it sits BELOW the essentials (Population
+          leads, as the most table-relevant first control). Blank = auto-named. */}
+      <div style={{marginBottom:12}}>
+        <Lbl>Settlement Name (optional)</Lbl>
+        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?swatch['#FFFBF5']:CARD}}/>
+        {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
+      </div>
+      {/* ── Fine-tune ───────────────────────────────────────────────────────
+            Nearby resources + settlement stress behind ONE "Fine-tune"
+            disclosure. Priority sliders moved up to the Character card, where the
+            archetype chips and sliders are reconciled into one control. Flattened
+            to a single level (the resource + stress panels were
+            collapsibles-inside-this-collapsible, 3 deep); each shows its own
+            compact "Random" default until tuned. Basic mode hides this whole
+            block (showFineTune=false) while Advanced shows it. */}
+      {showFineTune && (
+        <Disclosure title="Fine-tune: resources and stress" hint="Optional">
+          <NearbyResourcesPanel config={config} updateConfig={updateConfig}/>
+          <div style={{marginTop:6}}><StressPanel config={config} updateConfig={updateConfig}/></div>
+        </Disclosure>
+      )}
     </div>
   </div>;
 }

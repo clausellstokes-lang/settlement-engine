@@ -7,8 +7,14 @@
  */
 
 import { ChevronLeft } from 'lucide-react';
-import { INK, MUTED, SECOND, BORDER, CARD_HDR, serif_, SP, R, FS } from '../theme.js';
+import { MUTED, SECOND, INK, BORDER, CARD_HDR, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import Segmented from '../primitives/Segmented.jsx';
+
+const MODE_OPTIONS = [
+  { id: 'basic', label: 'Basic' },
+  { id: 'advanced', label: 'Advanced' },
+];
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -23,19 +29,29 @@ export function ChangeModeBar({ mode, onChangeMode }) {
       borderRadius: R.md,
       fontSize: FS.sm, color: SECOND,
     }}>
+      {/* Breadcrumb root: the back affordance is reframed as a clickable
+          "Create" crumb. Its handler is unchanged (onChangeMode(null)); the
+          aria-label keeps the back semantics for screen readers. Icons stay
+          off on this surface, so the crumb carries its meaning in text +
+          weight, not the (suppressed) ChevronLeft glyph. */}
       <Button
         variant="ghost"
         size="md"
         icon={<ChevronLeft size={14} />}
         onClick={() => onChangeMode(null)}
-        style={{ padding: 0 }}
+        aria-label="Create, change generation mode"
+        style={{ padding: 0, color: INK, fontWeight: 600 }}
       >
-        Change mode
+        Create
       </Button>
       <span style={{ color: MUTED }}>·</span>
-      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
-      </span>
+      <Segmented
+        options={MODE_OPTIONS}
+        value={mode === 'advanced' ? 'advanced' : 'basic'}
+        onChange={onChangeMode}
+        size="sm"
+        ariaLabel="Generation mode"
+      />
     </div>
   );
 }

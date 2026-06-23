@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/reinforcement.js — Phase B2 REINFORCEMENT FLOW (pure).
+ * domain/worldPulse/reinforcement.js — the REINFORCEMENT FLOW (pure).
  *
  * A deployed army does not just bleed — its origin can FEED it. Each tick the home
  * settlement sends a PARTIAL, EXPENSIVE replenishment to its army in the field. The
@@ -91,7 +91,7 @@ export function computeReinforcement({ record, origin }) {
 
   // An origin that is itself besieged/occupied keeps its army at home — no flow.
   if (o.threatened) {
-    reasons.push('Origin is itself besieged/occupied — it cannot spare reinforcements.');
+    reasons.push('Origin is itself besieged/occupied. It cannot spare reinforcements.');
     return { flowFraction: 0, flowPoints: 0, restoredStrength: current, drainSeverity: 0, reasons };
   }
 

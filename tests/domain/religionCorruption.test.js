@@ -32,9 +32,12 @@ const PEACELIKE = Object.freeze({ id: 'custom:serel', name: 'Serel', alignmentAx
 // never even rolls. Prosperity/security are middling (not maxed) so the onset
 // hazard sits above its 0.005 floor and the deity's relaxed gate is observable
 // rather than buried under the clamp. The single NPC carries a corruptible,
-// evil-leaning flaw.
-function crimeFreeSnapshot({ deity = null, flaw = 'greedy', dominant = null } = {}) {
-  const personality = { flaw, dominant: dominant || 'pragmatic', modifier: 'ambitious' };
+// evil-leaning flaw and — by default — NO steady temperament, so these tests
+// isolate the DEITY gate without the temperamentSteadiness multiplier (which has
+// its own dedicated coverage in corruptionTraitGate.test.js) confounding the
+// onset signal. The evil-leaning alignment comes from the flaw + modifier slots.
+function crimeFreeSnapshot({ deity = null, flaw = 'greedy', dominant = null, modifier = 'vengeful' } = {}) {
+  const personality = { flaw, dominant, modifier };
   return {
     settlements: [{
       id: 's1',
@@ -79,10 +82,11 @@ describe('OQ18 — evil deity relaxes the corruption onset gate', () => {
   });
 
   it('the SAME crime-free town with an EVIL deity CAN now see onset (corrupted from within)', () => {
-    // A strongly evil-aligned NPC; the deity's onset disfavor lifts the hazard
-    // ABOVE the security floor (bounded, ~1.4×) so onset becomes possible where
-    // the no-deity gate never even rolls.
-    const snap = crimeFreeSnapshot({ deity: EVIL, dominant: 'ruthless' });
+    // A strongly evil-aligned NPC (flaw + modifier → −1 alignment) with NO
+    // temperament, so the deity gate is the only lever in play. The deity's onset
+    // disfavor lifts the hazard ABOVE the security floor (bounded, ~1.4×) so onset
+    // becomes possible where the no-deity gate never even rolls.
+    const snap = crimeFreeSnapshot({ deity: EVIL });
     let ws = seedClean(snap, 'evil-onset');
     const base = createPRNG('evil-deity').fork('corruption');
     let turned = false;
@@ -507,8 +511,12 @@ describe('R3 — full-pulse integration (the triple gate)', () => {
         conflicts: [],
       },
       npcs: [
-        { id: `magistrate_${name}`, name: `Magistrate ${name}`, personality: { flaw: 'greedy', dominant: 'ruthless', modifier: 'vengeful' }, factionAffiliation: 'Merchant League', importance: 'key' },
-        { id: `captain_${name}`, name: `Captain ${name}`, personality: { flaw: 'corrupt', dominant: 'cruel', modifier: 'ambitious' }, factionAffiliation: 'Iron Wardens', importance: 'notable' },
+        // Flaw + evil-leaning modifier, NO steady temperament: these integration
+        // NPCs exercise the deity-relaxed ONSET gate, so they deliberately omit the
+        // temperament that would halve onset (temperamentSteadiness has its own
+        // coverage in corruptionTraitGate.test.js).
+        { id: `magistrate_${name}`, name: `Magistrate ${name}`, personality: { flaw: 'greedy', dominant: null, modifier: 'vengeful' }, factionAffiliation: 'Merchant League', importance: 'key' },
+        { id: `captain_${name}`, name: `Captain ${name}`, personality: { flaw: 'corrupt', dominant: null, modifier: 'ambitious' }, factionAffiliation: 'Iron Wardens', importance: 'notable' },
       ],
       activeConditions: [],
     };

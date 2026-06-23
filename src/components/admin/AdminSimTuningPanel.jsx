@@ -55,21 +55,21 @@ function balanceWarnings(campaign, members) {
   const standings = dispositionStandings(worldState);
 
   // Wars too frequent? more than ~40% of the realm besieged at once.
-  if (sieges / n > 0.4) out.push({ level: 'warn', text: `Wars may be too frequent — ${sieges} live sieges across ${n} settlements.` });
+  if (sieges / n > 0.4) out.push({ level: 'warn', text: `Wars may be too frequent, with ${sieges} live sieges across ${n} settlements.` });
   // Snowball? a single occupier holds many settlements.
   const byOccupier = {};
   for (const o of occupations) byOccupier[o.occupierName] = (byOccupier[o.occupierName] || 0) + 1;
   const topOccupier = Object.entries(byOccupier).sort((a, b) => b[1] - a[1])[0];
-  if (topOccupier && topOccupier[1] >= 3) out.push({ level: 'warn', text: `Possible snowball — ${topOccupier[0]} holds ${topOccupier[1]} occupations (cap relief is ${OCCUPATION_TUNING.OCCUPIER_BENEFIT_CONTAINMENT}).` });
+  if (topOccupier && topOccupier[1] >= 3) out.push({ level: 'warn', text: `Possible snowball. ${topOccupier[0]} holds ${topOccupier[1]} occupations (cap relief is ${OCCUPATION_TUNING.OCCUPIER_BENEFIT_CONTAINMENT}).` });
   // Oscillation? many occupations stuck contested (not converging).
   const contested = occupations.filter(o => /contested|unstable/i.test(o.statePhrase)).length;
-  if (occupations.length >= 3 && contested === occupations.length) out.push({ level: 'warn', text: `Occupations may be oscillating — all ${occupations.length} stuck contested/unstable.` });
+  if (occupations.length >= 3 && contested === occupations.length) out.push({ level: 'warn', text: `Occupations may be oscillating. All ${occupations.length} remain contested or unstable.` });
   // Persistent war-weariness across the realm?
-  if (weary.length / n > 0.6) out.push({ level: 'info', text: `Realm is broadly war-weary — ${weary.length}/${n} carry an exhaustion scar.` });
+  if (weary.length / n > 0.6) out.push({ level: 'info', text: `Realm is broadly war-weary. ${weary.length} of ${n} settlements carry an exhaustion scar.` });
   // Stalemate? everyone net-zero (no decisive outcomes).
-  if (members.length >= 3 && standings.length === 0 && sieges > 0) out.push({ level: 'info', text: 'Active sieges but no disposition standings yet — outcomes may be slow to land.' });
+  if (members.length >= 3 && standings.length === 0 && sieges > 0) out.push({ level: 'info', text: 'Active sieges but no disposition standings yet. Outcomes may be slow to resolve.' });
 
-  if (!out.length) out.push({ level: 'good', text: 'No balance warnings — the realm looks well-tuned.' });
+  if (!out.length) out.push({ level: 'good', text: 'No balance warnings. The realm looks well-tuned.' });
   return out;
 }
 
@@ -94,7 +94,7 @@ export default function AdminSimTuningPanel() {
   const [auditResult, setAuditResult] = useState(/** @type {any} */ (null));
 
   const options = useMemo(
-    () => [{ key: '', label: '— select a campaign —' }, ...(campaigns || []).map(c => ({ key: String(c.id), label: c.name || String(c.id) }))],
+    () => [{ key: '', label: 'Select a campaign' }, ...(campaigns || []).map(c => ({ key: String(c.id), label: c.name || String(c.id) }))],
     [campaigns],
   );
 
@@ -142,7 +142,7 @@ export default function AdminSimTuningPanel() {
       {auditResult && (
         <Card title="Player-safe visibility audit">
           <div style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: auditResult.ok ? GREEN : RED, marginBottom: SP.sm }}>
-            {auditResult.ok ? '✓ PASS — no covert/gm state leaks to a player view' : '✗ FAIL — a covert leak was detected'}
+            {auditResult.ok ? '✓ Pass. No covert or GM state leaks to a player view.' : '✗ Fail. A covert leak was detected.'}
           </div>
           <ul style={{ margin: 0, paddingLeft: 18, fontFamily: sans, fontSize: FS.xs, color: MUTED, lineHeight: 1.7 }}>
             {auditResult.checks.map((c, i) => (
@@ -169,8 +169,8 @@ export default function AdminSimTuningPanel() {
           <Card title="Dormant-subsystem verification">
             <div style={{ fontFamily: sans, fontSize: FS.sm, color: data.dormancy.ok ? GREEN : RED, fontWeight: 800 }}>
               {data.dormancy.warOff
-                ? (data.dormancy.ok ? '✓ War layer OFF and no live war ledger (byte-identical off-state holds).' : '✗ War layer OFF but a war ledger is present — dormancy violated.')
-                : '⚙ War layer ON — war ledgers are expected.'}
+                ? (data.dormancy.ok ? '✓ War layer off and no live war ledger (byte-identical off-state holds).' : '✗ War layer off but a war ledger is present. Dormancy is violated.')
+                : '⚙ War layer on. War ledgers are expected.'}
             </div>
           </Card>
 
@@ -242,15 +242,15 @@ export default function AdminSimTuningPanel() {
               campaign carries no `pantheon` key ⇒ pantheonStandings → [] ⇒ this
               Card renders nothing (byte-identical off-state). */}
           {data.pantheon.length > 0 && (
-            <Card title="Pantheon standings (seats + W–L)">
+            <Card title="Pantheon standings (seats + W/L)">
               <MiniTable
                 rows={data.pantheon.map(p => ({
                   deity: deityDisplayName(p.id),
                   tier: p.tier,
                   seats: p.seats,
-                  'W–L': `${p.wins}–${p.losses}`,
+                  'W/L': `${p.wins}/${p.losses}`,
                 }))}
-                columns={['deity', 'tier', 'seats', 'W–L']}
+                columns={['deity', 'tier', 'seats', 'W/L']}
                 numeric={['seats']}
               />
             </Card>

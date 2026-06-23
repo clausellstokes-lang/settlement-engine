@@ -1,5 +1,5 @@
 /**
- * PipelineReveal.jsx — P100 / X-1 "the wow is the simulation."
+ * PipelineReveal.jsx — "the wow is the simulation."
  *
  * Renders a 2-3 second overlay narrating the pipeline steps the engine
  * just ran. Each user-facing step name is sourced from
@@ -100,6 +100,10 @@ export default function PipelineReveal({ onComplete }) {
     return () => clearInterval(id);
   }, [steps.length, onComplete]);
 
+  // No skip / Esc fast-path: the reveal plays to completion so the first dossier
+  // view is the finished settlement, not a half-played pipeline. It auto-dismisses
+  // when playback finishes (the interval effect above calls onComplete).
+
   if (!steps.length) return null;
 
   return (
@@ -107,7 +111,10 @@ export default function PipelineReveal({ onComplete }) {
       role="status"
       aria-live="polite"
       style={{
-        position: 'fixed', inset: 0, zIndex: 99999,
+        // Sits below the sticky top nav (z-index 50) so the header stays visible
+        // through the reveal — the loading screen is the content area, not a full
+        // viewport takeover.
+        position: 'fixed', inset: 0, zIndex: 45,
         background: INK_DEEP,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontFamily: sans, color: swatch['#C8B098'],

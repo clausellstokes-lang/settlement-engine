@@ -57,7 +57,9 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       />
 
       <ChapterHeadline tone="gold">
-        {relationshipsHeadline({ all: r.neighbours || [] })}
+        {/* relationshipsHeadline reads `neighbours` (external) + `internal`; the old
+            `{ all }` shape left neighbours empty and mislabelled them as internal ties. */}
+        {relationshipsHeadline({ neighbours: r.neighbours, internal: r.internal })}
       </ChapterHeadline>
 
       {!hasAny && (

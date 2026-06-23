@@ -1,12 +1,12 @@
 /**
- * CausalViewTabs — the 15-variable causal readout (UX overhaul Phase 2 spec,
- * BUILT in Phase 1 and mounted NOWHERE yet).
+ * CausalViewTabs — the 16-variable causal readout (UX overhaul Phase 2 spec).
+ * Mounted via Systems -> Substrate (SubstrateTab) and the editor Workshop.
  *
  * Renders the engine's causal substrate for one settlement, driven by the single
  * altitude axis (useAltitude):
  *   - Overview (guided)  → nothing (the clean face; the 4-dim strip lives elsewhere)
  *   - Detail   (standard)→ the pressured variables as band pills + plain "why"
- *   - Engine   (expert)  → the FULL 15-var grid + 9 pressures + settlementStrength
+ *   - Engine   (expert)  → the FULL 16-var grid + 9 pressures + settlementStrength
  *
  * It consumes the pure read-models ONLY (no store writes, no rng):
  *   - deriveCausalState  → scores / bands / contributors[] ("why")
@@ -117,11 +117,11 @@ function strengthPressure(pressures) {
 function homeostasisStory(strength, warPenaltyPresent) {
   const pct = Math.round(strength * 100);
   if (warPenaltyPresent) {
-    return `Strength ${pct}% — war is eroding it; sustained fighting drives this realm toward suing for peace.`;
+    return `Strength ${pct}%. War is eroding it; sustained fighting drives this realm toward suing for peace.`;
   }
-  if (strength >= 0.6) return `Strength ${pct}% — confident enough to project power.`;
-  if (strength >= 0.42) return `Strength ${pct}% — holds its own but cautious.`;
-  return `Strength ${pct}% — too weak to open a war; it defends, it does not deploy.`;
+  if (strength >= 0.6) return `Strength ${pct}%. Confident enough to project power.`;
+  if (strength >= 0.42) return `Strength ${pct}%. Holds its own but cautious.`;
+  return `Strength ${pct}%. Too weak to open a war; it defends, it does not deploy.`;
 }
 
 // ── Sub-views ────────────────────────────────────────────────────────────────
@@ -155,7 +155,7 @@ function VariableRow({ variable, expanded, onToggle }) {
   return (
     <div
       data-variable={variable.variable}
-      style={{ borderBottom: `1px solid ${BORDER}`, padding: `${SP.xs}px 0` }}
+      style={{ borderBottom: `1px solid ${BORDER}` }}
     >
       <Button
         variant="ghost"
@@ -164,8 +164,8 @@ function VariableRow({ variable, expanded, onToggle }) {
         aria-expanded={hasWhy ? expanded : undefined}
         disabled={!hasWhy}
         style={{
-          minHeight: undefined, borderRadius: 0, justifyContent: 'flex-start',
-          background: 'none', border: 'none', padding: 0,
+          minHeight: 44, borderRadius: 0, justifyContent: 'flex-start',
+          background: 'none', border: 'none', padding: `${SP.xs}px 0`,
           width: '100%', display: 'flex', alignItems: 'center', gap: SP.sm,
           cursor: hasWhy ? 'pointer' : 'default', fontFamily: sans,
           fontWeight: 700, opacity: 1, textAlign: 'left',
@@ -246,9 +246,10 @@ function SectionTitle({ children }) {
  *   worldState?: any,
  *   regionalGraph?: any,
  *   forceLevel?: 'guided'|'standard'|'expert',
+ *   flat?: boolean,
  * }} props
  */
-export default function CausalViewTabs({ settlement, settlementId, worldState, regionalGraph, forceLevel }) {
+export default function CausalViewTabs({ settlement, settlementId, worldState, regionalGraph, forceLevel, flat = false }) {
   const { level: prefLevel } = useAltitude();
   const level = forceLevel || prefLevel;
   const [openVar, setOpenVar] = useState(/** @type {string|null} */ (null));
@@ -286,27 +287,41 @@ export default function CausalViewTabs({ settlement, settlementId, worldState, r
     <div
       data-testid="causal-view-tabs"
       data-level={level}
-      style={{
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
-        padding: SP.md, fontFamily: sans,
-      }}
+      data-flat={flat ? '' : undefined}
+      style={
+        flat
+          ? { fontFamily: sans }
+          : {
+              background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+              padding: SP.md, fontFamily: sans,
+            }
+      }
     >
-      <div style={{
-        fontSize: FS.sm, fontWeight: 800, color: INK,
-        display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs,
-        background: CARD_HDR, margin: `-${SP.md}px -${SP.md}px ${SP.sm}px`, padding: `${SP.sm}px ${SP.md}px`,
-        borderBottom: `1px solid ${BORDER}`, borderRadius: `${R.md}px ${R.md}px 0 0`,
-      }}>
-        Causal substrate
-        <span style={{ fontWeight: 600, fontSize: FS.xs, color: MUTED }}>
-          {showFullGrid ? 'all 15 variables' : 'where the pressure is'}
-        </span>
-      </div>
+      {flat ? (
+        // Mounted inside a Workshop card: the card's own header and border carry
+        // the framing, so the substrate reads flat with a plain eyebrow rather
+        // than a second filled header strip (no false floor).
+        <SectionTitle>
+          Causal substrate · {showFullGrid ? 'all 16 variables' : 'where the pressure is'}
+        </SectionTitle>
+      ) : (
+        <div style={{
+          fontSize: FS.sm, fontWeight: 800, color: INK,
+          display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs,
+          background: CARD_HDR, margin: `-${SP.md}px -${SP.md}px ${SP.sm}px`, padding: `${SP.sm}px ${SP.md}px`,
+          borderBottom: `1px solid ${BORDER}`, borderRadius: `${R.md}px ${R.md}px 0 0`,
+        }}>
+          Causal substrate
+          <span style={{ fontWeight: 600, fontSize: FS.xs, color: MUTED }}>
+            {showFullGrid ? 'all 16 variables' : 'where the pressure is'}
+          </span>
+        </div>
+      )}
 
-      {/* The variable grid. At Detail we show only the pressured rows; at Engine, all 15. */}
+      {/* The variable grid. At Detail we show only the pressured rows; at Engine, all 16. */}
       {variableRows.length === 0 ? (
         <div style={{ fontSize: FS.sm, color: BODY, padding: `${SP.xs}px 0` }}>
-          All variables sit within the adequate band — nothing is under pressure.
+          All variables sit within the adequate band. Nothing is under pressure.
         </div>
       ) : (
         <div data-testid="causal-grid">

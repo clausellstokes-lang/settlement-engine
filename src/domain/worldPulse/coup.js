@@ -146,7 +146,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0 }) 
         verdict.reason,
         `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
         ...(locked
-          ? ['The governing faction is locked — the seat cannot change hands without your approval.']
+          ? ['The governing faction is locked. The seat cannot change hands without your approval.']
           : []),
       ],
       powerTransfer: {

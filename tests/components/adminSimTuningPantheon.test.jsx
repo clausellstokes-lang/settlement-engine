@@ -47,8 +47,8 @@ describe('AdminSimTuningPanel — Pantheon standings card', () => {
     // deityDisplayName strips the `deity:` prefix and title-cases the tail.
     expect(container.textContent).toMatch(/Vael/);
     expect(container.textContent).toMatch(/Brakka/);
-    // W–L is rendered as "wins–losses" for the top (descending-seats) deity.
-    expect(container.textContent).toMatch(/4–1/);
+    // W/L is rendered as "wins/losses" for the top (descending-seats) deity.
+    expect(container.textContent).toMatch(/4\/1/);
   });
 
   test('renders no Pantheon standings card when the ledger is dormant (self-gating)', () => {

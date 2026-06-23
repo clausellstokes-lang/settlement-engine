@@ -160,10 +160,10 @@ export const createCampaignSlice = (set, get) => {
   // Route module-scoped persist failures (in campaignSliceShared) into store
   // state so the UI can warn the user instead of silently losing a cloud save.
   initPersistFailureReporter(() => set(state => {
-    // Covers BOTH campaign saves and (since A+ P0.1 unified persistSaveUpdate) the
+    // Covers BOTH campaign saves and (since persistSaveUpdate was unified) the
     // canon settlement path — applied-locally-but-not-persisted, surfaced via the banner.
     state.campaignSyncError = 'Some changes could not be saved to the cloud. '
-      + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
+      + 'They are applied locally but may not persist. Check your connection, then reload to confirm.';
   }));
 
   return {
@@ -172,11 +172,22 @@ export const createCampaignSlice = (set, get) => {
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
+  /** The last campaign the user actually opened. Unlike activeCampaignId (which
+   *  is session-only and resets to null on reload), this IS persisted, so the
+   *  Realm can auto-resume the campaign + map the user last used on a return
+   *  visit. Set by setActiveCampaign on a real selection; never cleared on a
+   *  blank (id=null). */
+  lastActiveCampaignId: null,
   /** One-shot: which WorldMap workspace ('map'|'news'|'pulse') an outside view
    *  wants opened on arrival (e.g. the Settlements "Advance Time" button asks
    *  for 'news'). WorldMap reads & clears it on mount. Session-only — NOT in
    *  persist.partialize, so it never survives a reload. */
   pendingMapWorkspace: null,
+  /** One-shot: an outside view asks the Realm to open the Simulation Rules dialog
+   *  on arrival (e.g. the Pantheon "Enable dynamics" CTA, which steers to the
+   *  religion-dynamics toggle that lives only in that dialog). WorldMap reads and
+   *  clears it on mount. Session-only — NOT in persist.partialize. */
+  pendingSimulationRules: false,
   /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
    *  null when the last persist succeeded (or was cleared by the user). */
   campaignSyncError: null,
@@ -309,6 +320,9 @@ export const createCampaignSlice = (set, get) => {
     if (!newId) throw new Error('Could not create a campaign for the imported map.');
     get().saveCampaignMap(newId, mapState);
     try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map' }); } catch { /* analytics never affects import */ }
+    // Source import counter — atomic server-side bump (migration 065). A counter
+    // failure must never fail the import, so it is fire-and-forget.
+    try { const { bumpMapImport } = await import('../lib/gallery.js'); bumpMapImport(slug).catch(() => {}); } catch { /* never affects import */ }
     return newId;
   },
 
@@ -412,6 +426,9 @@ export const createCampaignSlice = (set, get) => {
     });
     get().saveCampaignMap(campaignId, mapState);
     try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map_with_campaign', member_count: members.length }); } catch { /* analytics never affects import */ }
+    // Source import counter — atomic server-side bump (migration 065). A counter
+    // failure must never fail the import, so it is fire-and-forget.
+    try { const { bumpMapImport } = await import('../lib/gallery.js'); bumpMapImport(slug).catch(() => {}); } catch { /* never affects import */ }
     return campaignId;
   },
 
@@ -431,7 +448,7 @@ export const createCampaignSlice = (set, get) => {
     const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
     const activeNow = (st.savedSettlements || []).length;
     if (Number.isFinite(max) && activeNow + 1 > max) {
-      throw new Error('Your library is full — free up a slot or upgrade to import more settlements.');
+      throw new Error('Your library is full. Free up a slot or upgrade to import more settlements.');
     }
     const { fetchDossierForImport } = await import('../lib/gallery.js');
     const dossier = await fetchDossierForImport(slug);
@@ -452,7 +469,7 @@ export const createCampaignSlice = (set, get) => {
         neighborRelationship: null,
         interSettlementRelationships: [],
         _seed: undefined,
-        // Strip the seed AND the religion embed bridge (Feature D / R1): an
+        // Strip the seed AND the religion embed bridge: an
         // imported settlement must arrive DORMANT — no foreign pantheon. Without
         // this, the preserved config would carry the source's primaryDeityRef +
         // primaryDeitySnapshot and the imported copy would be non-dormant,
@@ -635,6 +652,10 @@ export const createCampaignSlice = (set, get) => {
     set(state => {
       const campaign = findActiveCampaign(state.campaigns, id);
       state.activeCampaignId = id && campaign ? id : null;
+      // Remember the last campaign actually opened so the Realm can resume it on
+      // a later visit. Never cleared on a blank (id=null) selection, so blanking
+      // the map doesn't forget which campaign to resume next time.
+      if (id && campaign) state.lastActiveCampaignId = id;
     }),
 
   /** Ask WorldMap to open on a specific workspace the next time it mounts with
@@ -647,6 +668,18 @@ export const createCampaignSlice = (set, get) => {
     const w = get().pendingMapWorkspace;
     if (w) set(state => { state.pendingMapWorkspace = null; });
     return w;
+  },
+
+  /** Ask the Realm to open the Simulation Rules dialog the next time WorldMap
+   *  mounts. One-shot; pass false to clear. */
+  requestSimulationRules: (want = true) =>
+    set(state => { state.pendingSimulationRules = !!want; }),
+
+  /** Read-and-clear the pending Simulation Rules request (one-shot). Returns it. */
+  consumeSimulationRules: () => {
+    const want = get().pendingSimulationRules;
+    if (want) set(state => { state.pendingSimulationRules = false; });
+    return want;
   },
 
   /**

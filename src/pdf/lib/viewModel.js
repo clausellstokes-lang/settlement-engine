@@ -22,6 +22,7 @@
  */
 
 import { flag } from '../../lib/flags.js';
+import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
@@ -159,7 +160,7 @@ export function buildViewModel({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // UX Phase 7 — the LIVE campaign world for this settlement. Shape:
+  // The LIVE campaign world for this settlement. Shape:
   //   { worldState, regionalGraph, settlements?, nameFor? }
   // Threaded ONLY for premium exports (data-layer gate in SettlementDetail).
   // When absent / dormant, the liveWorld slice resolves to `null` — so a
@@ -181,7 +182,7 @@ export function buildViewModel({
     eventLog,
     phase,
 
-    // UX Phase 7 — live-world slice. Built ONLY from the existing pure
+    // Live-world slice. Built ONLY from the existing pure
     // warStatus / pantheon / realmArc / deityEffects selectors (NO recompute,
     // NO screen↔PDF drift). `null` when dormant ⇒ the Faith & War chapter and
     // the additive enrichments self-gate to nothing ⇒ byte-identical off-state.
@@ -296,7 +297,7 @@ function identitySlice(s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
-  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
   const food = deriveFoodBalance(s);
@@ -460,10 +461,18 @@ function dailySlice(active, aiDailyLife) {
         { time: 'Night',   text: aiDailyLife.night },
       ].filter(p => p.text)
     : [];
+  // Source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // not the raw unclamped metrics.foodBalance — so the daily-life fallback shows the
+  // SAME food number as the identity anchor, the overview/economics chapters, and the
+  // on-screen DailyLifeTab. `available` is false when food was never calculated, which
+  // lets the section omit the verdict instead of printing a false "Surplus of 0 units".
+  const food = deriveFoodBalance(active);
   return {
     hasPassages: passages.length > 0,
     passages,
-    foodBalance: active?.economicViability?.metrics?.foodBalance || null,
+    foodBalance: food.available
+      ? { available: true, deficit: food.deficit, surplus: food.surplus }
+      : null,
     services:    active?.availableServices || {},
     institutions: active?.institutions || [],
     safetyRatio: active?.economicState?.safetyProfile?.safetyRatio,
@@ -873,7 +882,7 @@ function viabilitySlice(active) {
   const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
-  // Magic legality facets (UX Phase 7) — the 10-facet magic profile summarized
+  // Magic legality facets — the 10-facet magic profile summarized
   // for the Viability/Identity chapter, via the SAME summarizeMagic the screen
   // Magic sub-tab reads. Self-gating: a dead-magic world (magicExists === false)
   // yields { exists:false, lines:[] } ⇒ the section renders nothing extra, so a
@@ -980,14 +989,14 @@ function npcsSlice(active) {
     // Engine puts goals under `goal: { short, long }`, NOT `motivation`
     const g = n?.motivation || n?.goal;
     const motivationStr = typeof g === 'string' ? g : (g && typeof g === 'object'
-      ? [g.short, g.long].filter(Boolean).join(' — ')
+      ? [g.short, g.long].filter(Boolean).join('; ')
       : null);
     // Engine puts secrets as singular `secret: { what, stakes }` not array `secrets[]`
     const sec = n?.secrets;
     const secretsArr = Array.isArray(sec) ? sec.slice() : [];
     if (n?.secret && typeof n.secret === 'object' && n.secret.what) {
       secretsArr.push(n.secret.stakes
-        ? `${n.secret.what} — ${n.secret.stakes}`
+        ? `${n.secret.what}. ${n.secret.stakes.charAt(0).toUpperCase()}${n.secret.stakes.slice(1)}`
         : n.secret.what);
     }
     // Drop empty/blank entries so the SECRETS subsection vanishes when no real
@@ -1039,98 +1048,45 @@ function npcsSlice(active) {
   };
 }
 
+// Map the on-screen plot-hook CATEGORY (collectPlotHooks) to the PDF section's
+// SOURCE group key (PlotHooks.jsx groups + labels by `source`). Keeps the two
+// surfaces rendering the SAME hooks from the SAME aggregator.
+const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
+  npc: 'npc',
+  faction: 'conflict',
+  tension: 'tension',
+  economics: 'crisis',
+  safety: 'crime',
+  history: 'history',
+  relationship: 'relationship',
+});
+
+// collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority
+// dot/tag off a BAND string (PRIORITY_TONE in PlotHooks.jsx).
+function hookPriorityBand(n) {
+  if (n >= 8) return 'high';
+  if (n >= 6) return 'medium';
+  return 'low';
+}
+
 function hooksSlice(active) {
   const s = active || {};
-  const hooks = [];
-  for (const npc of (s?.npcs || [])) {
-    for (const h of (npc?.plotHooks || [])) {
-      hooks.push({
-        source: 'npc',
-        sourceName: npc.name || npc.title || 'NPC',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const c of (s?.conflicts || [])) {
-    for (const h of (c?.plotHooks || [])) {
-      hooks.push({
-        source: 'conflict',
-        sourceName: Array.isArray(c.parties) ? c.parties.join(' vs ') : 'Conflict',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const h of (s?.economicState?.safetyProfile?.plotHooks || [])) {
-    hooks.push({
-      source: 'crime',
-      sourceName: 'Underworld',
-      hook: h,
-      priority: priorityOfHook(h),
-      category: categoryOfHook(h),
-    });
-  }
-  for (const h of (s?.economicViability?.plotHooks || [])) {
-    hooks.push({
-      source: 'crisis',
-      sourceName: 'Economic Crisis',
-      hook: h,
-      priority: priorityOfHook(h),
-      category: categoryOfHook(h),
-    });
-  }
-  // Tensions hooks
-  for (const t of (s?.history?.currentTensions || [])) {
-    for (const h of (t?.plotHooks || [])) {
-      hooks.push({
-        source: 'tension',
-        sourceName: t?.label || t?.type || 'Tension',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  // Relationship hooks
-  if (s?.prominentRelationship?.plotHooks) {
-    for (const h of s.prominentRelationship.plotHooks) {
-      hooks.push({
-        source: 'relationship',
-        sourceName: s.prominentRelationship?.otherSettlement || 'Neighbour',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const n of (s?.neighbours || s?.neighbourNetwork || [])) {
-    for (const h of (n?.plotHooks || [])) {
-      hooks.push({
-        source: 'relationship',
-        sourceName: n?.neighbourName || n?.name || 'Neighbour',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  // History event hooks
-  for (const e of (s?.history?.historicalEvents || [])) {
-    for (const h of (e?.plotHooks || [])) {
-      hooks.push({
-        source: 'history',
-        sourceName: e?.type || 'Historical event',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
+  // PARITY: the on-screen Plot Hooks tab and the PDF chapter now BOTH derive from
+  // the shared aggregator (domain/dossier/plotHooks.collectPlotHooks) — same seven
+  // sources, same `PLOT HOOK:`-prefix cleanup, same priority sort. The previous
+  // hand aggregation here used a different source set (neighbour/prominent-
+  // relationship hooks instead of settlement.relationships), no sort, no cleanup,
+  // and a priority that was null for every plain-string hook. We adapt the shared
+  // output to the PDF section's {source, sourceName, hook, priority, category} shape.
+  const all = collectPlotHooks(s).map((h) => ({
+    source: HOOK_CATEGORY_TO_SOURCE[h.category] || 'other',
+    sourceName: h.source,
+    hook: h.text,
+    priority: hookPriorityBand(h.priority),
+    category: h.category,
+  }));
   return {
-    all:      hooks,
+    all,
     tensions: s?.history?.currentTensions || [],
   };
 }
@@ -1255,6 +1211,11 @@ function cleanHooks(arr) {
  */
 function normalizeIncomeSources(arr) {
   if (!Array.isArray(arr) || arr.length === 0) return [];
+  // Intentional divergence from the screen: drop zero-valued sources. A 0%-rounded
+  // (or zero-amount) source has no bar to draw and would only add noise / risk a
+  // degenerate total here, where the bar fill and label MUST agree. The screen may
+  // still list such sources; this is a per-surface formatting choice, not a data
+  // disagreement. (See cross-bundle note re: documenting in display/PARITY_EXEMPT.)
   const items = arr.map(s => ({
     ...s,
     raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,
@@ -1287,18 +1248,6 @@ function cleanRelationships(arr) {
     }
     return false;
   });
-}
-
-function priorityOfHook(h) {
-  if (!h) return null;
-  if (typeof h === 'object') return h.priority || null;
-  return null;
-}
-
-function categoryOfHook(h) {
-  if (!h) return null;
-  if (typeof h === 'object') return h.category || null;
-  return null;
 }
 
 function firstSentence(s) {

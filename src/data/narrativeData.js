@@ -10,86 +10,86 @@
 export const ARRIVAL_SCENES = {
   market: [
     (r) =>
-      `The market at ${r} is audible before it is visible — a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.`,
+      `The market at ${r} is audible before it is visible: a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.`,
     (r) =>
       `${r}'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has worked out most of its problems.`,
   ],
   river: [
     (r) =>
-      "The smell of the river reaches you before the settlement does — clean water, reeds, the particular mud of a working waterfront.",
+      "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
   ],
   smoke: [
     (r) =>
-      `The cookfire smoke of ${r} drifts on the wind in your direction — a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`,
+      `The cookfire smoke of ${r} drifts on the wind in your direction: a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`,
     (r) => `${r} is visible as a smear of smoke on the horizon for a long time before the buildings resolve.`,
   ],
   guild: [
     (r) =>
-      `The sound of a hammer on metal reaches you from ${r}'s smithing quarter — a craftsperson's rhythm, not a soldier's.`,
+      `The sound of a hammer on metal reaches you from ${r}'s smithing quarter. That is a craftsperson's rhythm, not a soldier's.`,
     (r) => `${r} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.`,
   ],
   ordinary: [
     (r) =>
-      `${r} is ordinary in the best sense — a place where people live and work and argue and sleep, which is most of what places are for.`,
+      `${r} is ordinary in the best sense. It is a place where people live and work and argue and sleep, which is most of what places are for.`,
     (r) =>
       `The road into ${r} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.`,
     (r) =>
       `${r} is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things.`,
     (r) =>
-      `A child runs past you on the road into ${r}, chasing something or being chased by something — unclear which. Nobody in the street pays attention.`,
+      `A child runs past you on the road into ${r}, chasing something or being chased by something. Unclear which. Nobody in the street pays attention.`,
     (r) =>
-      `A merchant argues with a carter at the gate of ${r} about the size of a load. The guard is ignoring both of them. This is clearly a daily occurrence.`,
+      `A merchant argues with a carter at the gate of ${r} about the size of a load, and the guard is ignoring both of them. This is clearly a daily occurrence.`,
     (r) =>
-      `${r} smells like bread from the gate — a bakehouse near the entrance, open early, already on the second bake of the day.`,
+      `${r} smells like bread from the gate. A bakehouse near the entrance is open early, already on the second bake of the day.`,
   ],
 };
 
 export const ARRIVAL_ADDONS = {
   port: [
     (r, s) =>
-      `The ${s === "metropolis" ? "great harbour" : "harbour"} of ${r} announces itself before the settlement does — masts above the treeline, the smell of tar and salt, the cries of gulls working the fishing boats.`,
+      `The ${s === "metropolis" ? "great harbour" : "harbour"} of ${r} announces itself before the settlement does: masts above the treeline, the smell of tar and salt, the cries of gulls working the fishing boats.`,
     (r, s) =>
       `${r} appears as a smear of colour above the water: pennants, sail canvas, the white of new-washed walls catching the light from the sea.`,
     (r, s) =>
       `The approach to ${r} is along the quayside road, which means threading through loaded carts and dock workers before the settlement itself comes into view.`,
-    (r, s) => `You smell ${r} before you see it — smoke, fish, the mineral bite of the harbour at low tide.`,
+    (r, s) => `You smell ${r} before you see it: smoke, fish, the mineral bite of the harbour at low tide.`,
   ],
   river: [
     (r, s) =>
       `${r} sits in the bend of the river, its rooftops visible above the willows from a quarter mile out. The mill wheel turns.`,
     (r, s) =>
-      `The river road into ${r} runs alongside the water, and the settlement grows out of the bank on both sides — older buildings on the high ground, newer ones crowding the waterfront.`,
+      `The river road into ${r} runs alongside the water, and the settlement grows out of the bank on both sides. Older buildings sit on the high ground, newer ones crowd the waterfront.`,
     (r, s) =>
-      `You cross the river at the ford half a mile out and the road becomes a proper street almost immediately — ${r} has been expanding toward the water.`,
+      `You cross the river at the ford half a mile out and the road becomes a proper street almost immediately. ${r} has been expanding toward the water.`,
     (r, s) => `The bridge into ${r} is old stone, wide enough for two carts, and there is already a queue to cross it.`,
   ],
   crossroads: [
     (r, s) =>
-      `${r} is visible from the junction itself — the roads converge on a market square that seems to be the settlement's reason for existing.`,
+      `${r} is visible from the junction itself. The roads converge on a market square that seems to be the settlement's reason for existing.`,
     (r, s) =>
       `Four roads, and ${r} at the centre of all of them. Travellers in three directions. The fourth road is yours.`,
     (r, s) =>
       `The waymarker stone at the crossroads half a league out has ${r}'s name carved into it four times, facing each direction. Someone keeps repainting the distances.`,
     (r, s) =>
-      `${r} sprawls along all four roads from the central square — the part you see first depends on which direction you came from.`,
+      `${r} sprawls along all four roads from the central square. The part you see first depends on which direction you came from.`,
   ],
   road: [
     (r, s) =>
       `${r} appears around a bend in the road, its ${s === "city" || s === "metropolis" ? "walls and towers" : "main street"} coming into view all at once.`,
     (r, s) =>
-      `The road widens into ${r}'s main thoroughfare without announcing the transition — you are in the settlement before you realised you arrived.`,
+      `The road widens into ${r}'s main thoroughfare without announcing the transition. You are inside the settlement before you notice you have arrived.`,
     (r, s) =>
-      `A mile marker, then a second, then the outlying farms of ${r} begin — the settlement proper is still a quarter hour ahead.`,
+      `A mile marker, then a second, then the outlying farms of ${r} begin. The settlement proper is still a quarter hour ahead.`,
     (r, s) =>
       `${r} is announced by the smoke of its cookfires and the sound of its market before its buildings are visible.`,
   ],
   isolated: [
     (r, s) =>
-      `${r} appears at the end of a track that stopped pretending to be a road some time ago — it exists here because someone decided to stay, not because the terrain made it easy.`,
+      `${r} appears at the end of a track that stopped pretending to be a road some time ago. It exists here because someone decided to stay, not because the terrain made it easy.`,
     (r, s) =>
-      `The last real road ended two hours back. ${r} is visible now — a cluster of buildings in the middle distance that the surrounding terrain seems indifferent to.`,
+      `The last real road ended two hours back. ${r} is visible now: a cluster of buildings in the middle distance that the surrounding terrain seems indifferent to.`,
     (r, s) =>
       `The track into ${r} is maintained by the people who need it, which means it is exactly wide enough and no wider.`,
     (r, s) =>
@@ -144,7 +144,7 @@ export const TERRAIN_NARRATIVE_HOOKS = {
   mountain: [
     "was founded to exploit rich mineral deposits",
     "grew at a strategic mountain pass",
-    "was established as a defensive stronghold that attracted dependents",
+    "was established as a defensive stronghold that gathered dependents under its walls",
     "began as a mining camp that became permanent when families arrived",
     "was built where two rival mining operations agreed to share infrastructure",
     "grew because the pass could only be crossed safely with local guides",
@@ -152,7 +152,7 @@ export const TERRAIN_NARRATIVE_HOOKS = {
   forest: [
     "grew from a logging camp",
     "was founded by foresters managing the woodland under charter",
-    "developed around a sacred grove that attracted religious settlement",
+    "developed around a sacred grove that drew pilgrims who stayed",
     "began as a hunting lodge settlement for a noble who died without heirs",
     "was established by charcoal-burners whose operation required permanent residence",
     "grew when a travelling herbalist found what they were looking for and refused to leave",

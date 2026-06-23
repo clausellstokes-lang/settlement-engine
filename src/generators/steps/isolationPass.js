@@ -26,9 +26,9 @@ function instId(name) {
 
 registerStep('isolationPass', {
   deps: ['cascadePass'],
-  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place (A+ P1.7)
+  mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place
   phase: 'institutions',
 }, (ctx, rng) => {
   const { institutions, tier, tradeRoute, effectiveConfig, catalogForTier } = ctx;
@@ -75,7 +75,7 @@ registerStep('isolationPass', {
         result:     'subsistence_stripped',
         causes: [
           { source: 'subsistenceMode', effect: 'removed',
-            reason: `Settlement is in subsistence mode — "${name}" requires external supply chains that don't reach here.` },
+            reason: `Settlement is in subsistence mode. "${name}" requires external supply chains that don't reach here.` },
         ],
       });
     }
@@ -93,7 +93,7 @@ registerStep('isolationPass', {
       result:     'requires_teleportation_circle',
       causes: [
         { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-          reason: `"${name}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+          reason: `"${name}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
       ],
     });
   }

@@ -35,12 +35,18 @@ export function bandFor(value) {
   return 'Stable';
 }
 
-/** Display color for a band — used by SystemStateBar and PDF chips. */
+/**
+ * Display color for a band — foreground text on a light tint of the same hue
+ * (LivingWorldSignalRow pips, StateBadge), plus SystemStateBar and PDF chips.
+ * The amber/orange mid-tones (Strained/Vulnerable) are darkened to clear WCAG
+ * AA (4.5:1) for the small pill text: the "needs attention" states a GM scans
+ * for were previously the hardest to read (~3.0–4.0:1).
+ */
 export const BAND_COLOR = {
-  Stable:     '#1a5a28',
-  Strained:   '#a0762a',
-  Vulnerable: '#b15a1f',
-  Critical:   '#8b1a1a',
+  Stable:     '#1a5a28',  // ~5:1 on card
+  Strained:   '#8a5e10',  // was #a0762a (3.98:1) → 5.52:1
+  Vulnerable: '#9a4a16',  // was #b15a1f (4.68:1, borderline at micro size) → 6.05:1
+  Critical:   '#8b1a1a',  // ~7:1 on card
 };
 
 /** A short DM-facing one-liner per band — for tooltips and the PDF. */

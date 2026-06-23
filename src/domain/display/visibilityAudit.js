@@ -1,6 +1,6 @@
 /**
  * domain/display/visibilityAudit.js — the RUNTIME player-safe visibility-audit
- * tool (F1). Proves, against synthetic worst-case fixtures, that NO player-facing
+ * tool. Proves, against synthetic worst-case fixtures, that NO player-facing
  * display read-model surfaces gm/hidden/COVERT state:
  *   - covert MOBILIZATION (a settlement secretly gearing for war), and
  *   - covert SMUGGLING (battlefield-enemy trade — the only tie that can exist).

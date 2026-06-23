@@ -20,7 +20,7 @@ export function StatTile({ value, label, sublabel, tone = 'ink', flex = 1 }) {
       }}
     >
       <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'] }}>{label}</Text>
-      <Text style={{ ...type.numeric, color: fg, marginTop: 4 }}>{value === 0 || value ? value : '—'}</Text>
+      <Text style={{ ...type.numeric, color: fg, marginTop: 4 }}>{value === 0 || value ? value : '–'}</Text>
       {sublabel && (
         <Text style={{ ...type.caption, color: palette.muted, marginTop: 2 }}>{sublabel}</Text>
       )}

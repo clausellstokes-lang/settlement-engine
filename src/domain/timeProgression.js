@@ -1,26 +1,25 @@
 /**
  * domain/timeProgression.js — Tick-by-tick simulation advancement.
  *
- * Tier 4.12 of the roadmap. The composing tier: applies Phase 14
- * faction deltas, advances Phase 11 escalation clocks, returns a
- * structured "what changed" report. Turns the generator into a
- * campaign engine.
+ * The composing layer: applies faction deltas, advances escalation
+ * clocks, returns a structured "what changed" report. Turns the
+ * generator into a campaign engine.
  *
  *   advanceTime(settlement, options) -> { newSettlement, tick, nextTickState }
  *
  * Pure. The input settlement is cloned (deep clone of the bits we
  * mutate); the original is never touched. The tick report is the
- * structured payload Tier 6.1 (AI grounded-in-trace) and the future
+ * structured payload (AI grounded-in-trace) and the future
  * "what changed since last session" UI will consume.
  *
- * Active conditions are passed in by the caller (Tier 2.3 will own
- * the canonical state for these; for V1 we accept an array of
+ * Active conditions are passed in by the caller (the canonical-state
+ * layer will own these; for V1 we accept an array of
  * archetype strings like ['plague', 'trade_route_cut']).
  *
  * Clock state — which stage each known clock has advanced to — is
  * threaded explicitly. The caller gets back `nextTickState` from
- * each call and passes it into the next call. Once Tier 2.3 lands,
- * the clock state will live on the settlement; for V1 it's an
+ * each call and passes it into the next call. Once canonical state
+ * lands, the clock state will live on the settlement; for V1 it's an
  * external concern so this module doesn't need to touch the
  * settlement schema.
  *
@@ -143,7 +142,7 @@ function advanceClocks(settlement, previousState) {
 // legitimacy lives as a score + band + flags. The other fields the
 // deltas reference (wealth, publicTrust, manpower) are reported in
 // the tick but not yet stored as numbers on the faction shape —
-// they're band-only. Tier 4.16 (custom user content) will add
+// they're band-only. (custom user content) will add
 // numeric storage for those bands.
 
 function applyFactionDeltasToSettlement(settlement, allDeltas) {
@@ -202,8 +201,8 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     }
 
     // Wealth / publicTrust / manpower: tracked in tick output (see
-    // composer below) but not yet stored on the faction. Tier 4.16
-    // will add the storage. We DO mirror them onto the faction as
+    // composer below) but not yet stored on the faction; custom user
+    // content will add the storage. We DO mirror them onto the faction as
     // string-suffixed delta lines so consumers reading the live shape
     // can show "wealth pressure" without a separate state surface.
     for (const field of ['wealth', 'publicTrust', 'manpower']) {
@@ -229,7 +228,7 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
  * @param {string[]}     [options.activeConditions]      Archetype keys (e.g. 'plague').
  *                                                       When omitted, reads from
  *                                                       settlement.activeConditions
- *                                                       (Tier 2.3 canonical state).
+ *                                                       (canonical state).
  * @param {Object}       [options.previousTickState]     { clockStages: { [clockId]: int } }
  * @returns {Object} { newSettlement, tick, nextTickState }
  */
@@ -244,7 +243,7 @@ export function advanceTime(settlement, options = {}) {
   //   - explicit options.activeConditions wins (allows callers to
   //     simulate hypothetical "what if plague" without mutating state),
   //   - otherwise read from canonical settlement.activeConditions
-  //     (Phase 16 Tier 2.3).
+  //.
   const sourceArchetypes = Array.isArray(overrideConditions)
     ? overrideConditions
     : activeArchetypes(settlement);
@@ -347,7 +346,7 @@ export function advanceTime(settlement, options = {}) {
  * Run N ticks against a clone and return both the final projected
  * settlement and the accumulated report. Does NOT mutate the input.
  *
- * Useful for "if nothing changes by winter" surfaces and Tier 6.1 AI
+ * Useful for "if nothing changes by winter" surfaces and AI
  * grounding. The cumulative summary lets the AI overlay narrate the
  * full trajectory rather than a single tick.
  *

@@ -37,7 +37,7 @@ export default function CampaignSyncBanner() {
         label="Dismiss cloud-sync warning"
         onClick={clear}
         tone="danger"
-        size="sm"
+        size="xl"
       />
     </div>
   );

@@ -39,6 +39,16 @@ const MIG = {
 const allExist = Object.values(MIG).every(existsSync);
 const sql = (k) => readFileSync(MIG[k], 'utf-8');
 
+// Hard-fail (not a silent vacuous skip) when a target migration moves/renames:
+// the runIf(allExist) suites below would otherwise go GREEN with 0 tests run.
+describe('pglite targets exist (guards against silent vacuous skip)', () => {
+  it('every required migration is present (a moved migration must fail loudly)', () => {
+    const missing = Object.entries(MIG).filter(([, p]) => !existsSync(p)).map(([k]) => k);
+    expect(missing, `missing migrations: ${missing.join(', ')}`).toEqual([]);
+    expect(allExist).toBe(true);
+  });
+});
+
 /** Extract a `create or replace function public.<name>(…) … $$;` block verbatim. */
 function extractFn(src, name) {
   const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));

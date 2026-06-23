@@ -37,12 +37,12 @@ const GOV_ANTITHESIS = {
 // militaryBias: additive militarization bias 0..0.5 — defense/military
 //   institution chances multiply by (1 + militaryBias)
 //
-// VOCABULARY CONTRACT (H13/H14, R3): these four keys are the ONLY dyn.* keys
-// any consumer may read. The original join snapped exactly here — the
-// institution-probability path read dyn.defense/market/craft/criminal/
-// espionage/government, keys this table never defined, so every relationship
-// multiplied by the same 1.0. tests/generators/neighbourRelDynamics.test.js
-// pins reads ⊆ definitions so the join cannot re-snap.
+// VOCABULARY CONTRACT: these four keys are the ONLY dyn.* keys any consumer may
+// read. The original join snapped exactly here — the institution-probability
+// path read dyn.defense/market/craft/criminal/espionage/government, keys this
+// table never defined, so every relationship multiplied by the same 1.0.
+// tests/generators/neighbourRelDynamics.test.js pins reads ⊆ definitions so the
+// join cannot re-snap.
 export const REL_DYNAMICS = {
   neutral: {
     economyMode:      'independent',
@@ -95,8 +95,8 @@ export const REL_DYNAMICS = {
 };
 
 // ── Economy mode → market-institution multiplier ──────────────────────────────
-// The H13 join repair (R3 decision: WIRE the existing table, do not redesign
-// it). institutionProbability's market/economy branch used to read dyn.market —
+// This join repair wires the existing table rather than redesigning it.
+// institutionProbability's market/economy branch used to read dyn.market —
 // a key REL_DYNAMICS never defined — so every relationship multiplied market
 // odds by 1.0. The table's economy magnitudes already live in
 // getNeighbourEconomicBias below; this map routes each mode's existing figure
@@ -285,7 +285,7 @@ export function getNeighbourFactionBias(neighbourProfile) {
     .filter((v, i, a) => a.indexOf(v) === i)
     .filter(t => !dominantFactionTypes.includes(t));
 
-  // H13 join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
+  // Join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
   // keys REL_DYNAMICS never defined — so every relationship rolled the same
   // 0.1/0.05 faction-mirror odds. The table's existing mirror/antithesis
   // magnitudes (govMirrorW/govAntithesisW: "probability weights for mirroring

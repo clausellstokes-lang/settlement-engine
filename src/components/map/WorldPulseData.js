@@ -148,7 +148,7 @@ export function stressorDetails(stressor = {}) {
   const cf = stressor.counterforce;
   if (cf && Number.isFinite(cf.score)) {
     const trend = cf.score > 0.55 ? 'recovering fast' : cf.score < 0.45 ? 'wallowing' : 'holding';
-    details.push(`resilience ${percent(cf.score)} — ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
+    details.push(`resilience ${percent(cf.score)}: ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
   }
   if (stressor.synergy?.companions?.length) {
     details.push(`entangled with ${stressor.synergy.companions.slice(0, 2).map(human).join(', ')}`);
@@ -170,7 +170,7 @@ export function stressorSummary(stressor = {}) {
   if (stressor.originContext?.reason) parts.push(stressor.originContext.reason);
   const hooks = stressor.originContext?.hooks || [];
   if (hooks.length) parts.push(`Hooks: ${hooks.slice(0, 2).join(' • ')}`);
-  return parts.join(' — ');
+  return parts.join('. ');
 }
 
 export function attackerEntity(stressor = {}, nameById = new Map()) {

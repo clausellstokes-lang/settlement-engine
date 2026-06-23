@@ -22,12 +22,12 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
+import { Download, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
 import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
+import { GOLD, INK, BORDER, CARD, CARD_ALT, PARCH, PARCH_100, ELEV, sans, serif_, SP, R, FS, swatch, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 const MUTED = swatch['#6B5340'];
@@ -134,11 +134,10 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
-        <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
         <h1 style={{
-          margin: `${SP.md}px 0 0`, fontFamily: serif_, fontSize: FS.xxl, color: INK,
+          margin: 0, fontFamily: serif_, fontSize: FS.xxl, color: INK,
         }}>
-          We couldn’t verify this dossier
+          We could not verify this dossier
         </h1>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
@@ -154,7 +153,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,
             background: GOLD, color: swatch.white,
-            border: 'none', borderRadius: R.button,
+            border: 'none', borderRadius: R.lg,
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             textDecoration: 'none',
           }}
@@ -184,23 +183,14 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     <div style={{
       maxWidth: 640, margin: `${SP.xxl}px auto`,
       padding: `${SP.xxl}px ${SP.xl}px`,
-      background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
+      background: `linear-gradient(180deg, ${PARCH} 0%, ${PARCH_100} 100%)`,
       border: `1px solid ${BORDER}`,
       borderRadius: R.xl + 2,
       fontFamily: sans, color: INK, textAlign: 'center',
-      boxShadow: '0 8px 28px rgba(27,20,8,0.12)',
+      boxShadow: ELEV[2],
     }}>
-      <div style={{
-        width: 56, height: 56, borderRadius: '50%',
-        background: GREEN, color: swatch.white,
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        margin: '0 auto',
-      }}>
-        <Check size={28} />
-      </div>
-
       <h1 style={{
-        margin: `${SP.lg}px 0 0`, fontFamily: serif_,
+        margin: 0, fontFamily: serif_,
         fontSize: FS['28'], fontWeight: 600, color: INK,
       }}>
         Your dossier is ready
@@ -235,7 +225,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             display: 'inline-flex', alignItems: 'center', gap: 6,
             color: RED, fontSize: FS.sm,
           }}>
-            <AlertCircle size={14} /> {downloadError}
+            {downloadError}
           </div>
         )}
 
@@ -251,7 +241,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       {/* Sign-up upsell */}
       <div style={{
         marginTop: SP.xxl, padding: `${SP.lg}px ${SP.xl}px`,
-        background: 'rgba(255,251,245,0.7)', border: `1px solid ${BORDER}`,
+        background: CARD_ALT, border: `1px solid ${BORDER}`,
         borderRadius: R.xl,
       }}>
         <h2 style={{

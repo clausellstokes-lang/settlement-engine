@@ -28,10 +28,16 @@ export default defineConfig({
   ].filter(Boolean),
   build: {
     outDir: 'dist',
-    // The only chunks above Vite's default 500 kB warning line are deliberate
-    // lazy/manual chunks (engine and vendor-pdf). Keep the warning meaningful
-    // for true runaway bundles without failing every healthy production build.
-    chunkSizeWarningLimit: 2000,
+    // Chunk-size warning ceiling. The old 2000 kB value was so high it silenced
+    // the genuinely-large eager *entry* chunk too — defeating the warning's job
+    // of catching entry-chunk bloat. Lowered to 700 kB so the entry surfaces and
+    // any new growth there is a prompt to investigate (more code-splitting?).
+    // This is a WARN only (it does not fail the build — only the onwarn
+    // MISSING_EXPORT/UNRESOLVED_IMPORT guard below throws), so the deliberate
+    // large *lazy* chunks (vendor-pdf ~619 kB gz, engine ~187 kB gz) will emit a
+    // benign warning rather than going unnoticed. Treat their warnings as
+    // expected; treat a NEW warning (esp. the entry chunk) as a signal to look.
+    chunkSizeWarningLimit: 700,
     // Tighter modulePreload policy. By default Vite preloads every chunk
     // reachable from the entry (including lazy-import targets), so even
     // chunks we deliberately gated behind user action (vendor-pdf, engine)
@@ -74,7 +80,10 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           // ── Vendor chunks (stable, cached across deploys) ─────────
-          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/'))
+          // scheduler is React's own internal dep (react-dom pulls it in and it
+          // loads eagerly with React regardless), so grouping it with vendor-react
+          // is purely tighter cache grouping — it changes no lazy boundary.
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/') || id.includes('node_modules/scheduler'))
             return 'vendor-react';
           if (id.includes('node_modules/zustand') || id.includes('node_modules/immer'))
             return 'vendor-state';
@@ -87,6 +96,11 @@ export default defineConfig({
           // @react-pdf/renderer + jsPDF are huge and only needed when the
           // user clicks "Export PDF" — pull them out of the main bundle so
           // they download lazily on first export, not on first paint.
+          // NOTE: their transitive deps (brotli/restructure/linebreak/
+          // unicode-trie/pako, …) are NOT named here on purpose — Rollup
+          // already keeps them on the lazy side with their importer, so the
+          // lazy boundary holds. They are intentionally left to Rollup rather
+          // than enumerated (the list drifts on every PDF-lib upgrade).
           if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf') || id.includes('node_modules/pdfkit') || id.includes('node_modules/fontkit'))
             return 'vendor-pdf';
 

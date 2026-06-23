@@ -7,7 +7,7 @@
  * pass applies, so a faction can never seat a lesser alongside its greater.
  * Also runs the arcane institution strip for no-magic worlds.
  *
- * Ordering note (Wave 4b): this pass genuinely needs powerStructure (faction
+ * Ordering note: this pass genuinely needs powerStructure (faction
  * powers derive from the economy via generatePower), so it cannot run before
  * generateEconomy. Instead it records whether it changed the roster
  * (_rosterChangedAfterEconomy); economyReconcilePass then re-derives the
@@ -29,9 +29,9 @@ function instId(name) {
 
 registerStep('factionCorrelationPass', {
   deps: ['neighbourFactions', 'generateEconomy'],
-  reads: ['categoryToggles', 'effectiveConfig', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['institutions'],                 // re-correlates roster vs factions in place (A+ P1.7)
+  mutates: ['institutions'],                 // re-correlates roster vs factions in place
   scratch: ['_rosterChangedAfterEconomy'],   // internal flag for downstream steps
   phase: 'power',
 }, (ctx) => {
@@ -54,7 +54,7 @@ registerStep('factionCorrelationPass', {
     );
     if (boostAdditions.length > 0) {
       institutions.push(...boostAdditions);
-      // Tier 2.1 — trace each faction-boost addition. The cause is the
+      // Trace each faction-boost addition. The cause is the
       // dominant faction that pulled the institution into existence.
       // Powers the "why is this institution here?" answer when the
       // root cause is a sociopolitical fit rather than a base roll.
@@ -95,7 +95,7 @@ registerStep('factionCorrelationPass', {
           result:     'requires_teleportation_circle',
           causes: [
             { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-              reason: `"${removedName}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+              reason: `"${removedName}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
           ],
         });
       }

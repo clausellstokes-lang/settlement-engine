@@ -12,7 +12,7 @@
  *
  * Used by eslint.config.js as a local plugin. Dependency-free.
  *
- * no-raw-button (A+ enforcement.5) — disallow the raw `<button>` JSX element
+ * no-raw-button — disallow the raw `<button>` JSX element
  *   outside src/components/primitives/. A real Button/IconButton primitive exists
  *   (focus-ring, disabled state, min target size, token variants), but raw
  *   <button> elements re-implement those by hand and silently drift. Files that
@@ -80,7 +80,7 @@ export default {
       },
     },
 
-    // no-inline-store-selector (A+ P1.5) — disallow an inline object/array selector
+    // no-inline-store-selector — disallow an inline object/array selector
     //   passed directly to useStore: `useStore(s => ({ ... }))` / `useStore(s => [ ... ])`.
     //   These build a NEW reference every render, so the default Object.is equality
     //   never matches and the component re-renders on every store change (the #1

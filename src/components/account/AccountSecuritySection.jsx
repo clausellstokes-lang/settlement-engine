@@ -18,14 +18,16 @@
  */
 import { useEffect, useState } from 'react';
 import {
-  Lock, KeyRound, Link2, Unlink, LogOut, ShieldCheck, Smartphone, Check,
+  KeyRound, Link2, Unlink, Check,
 } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  DANGER_BORDER, SUCCESS_BORDER, TINT_GOLD,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
+import Pill from '../primitives/Pill.jsx';
 
 const PROVIDER_LABELS = { google: 'Google', discord: 'Discord', email: 'Email & password' };
 const LINKABLE = [
@@ -43,7 +45,7 @@ function fieldStyle() {
 
 function ErrorBanner({ children }) {
   return (
-    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
       {children}
     </div>
   );
@@ -51,7 +53,7 @@ function ErrorBanner({ children }) {
 
 function OkBanner({ children }) {
   return (
-    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: `1px solid ${SUCCESS_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
       {children}
     </div>
   );
@@ -175,13 +177,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   const onlyOneIdentity = (identities || []).length <= 1;
 
   return (
-    <Section title="Login &amp; Security" icon={ShieldCheck}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
+    <Section title="Login and security">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
 
         {/* ── Password ──────────────────────────────────────────────────── */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Lock size={14} color={GOLD} /> Password
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Password
           </div>
           {pwDone && <div style={{ marginTop: SP.sm }}><OkBanner>Your password has been updated.</OkBanner></div>}
           {!pwOpen ? (
@@ -227,17 +229,17 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
         </div>
 
         {/* ── Linked accounts ───────────────────────────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-            <Link2 size={14} color={GOLD} /> Linked accounts
+        <div>
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Linked accounts
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
-            Sign in with any connected provider. Keep at least one method connected.
+            Sign in with any connected provider. You must keep at least one method connected.
           </p>
           {identityError && <div style={{ marginBottom: SP.sm }}><ErrorBanner>{identityError}</ErrorBanner></div>}
 
           {identities === null ? (
-            <div style={{ fontSize: FS.sm, color: MUTED }}>Loading…</div>
+            <div style={{ fontSize: FS.sm, color: BODY }}>Loading…</div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
               {LINKABLE.map(({ provider, label }) => {
@@ -248,11 +250,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                     <span style={{ flex: 1, fontSize: FS.sm, color: INK, fontWeight: 600 }}>{label}</span>
                     {linked ? (
                       <>
-                        <span style={{ fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>Connected</span>
+                        <span style={{ fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>
+                          Connected
+                        </span>
                         <Button
-                          variant="ghost" size="sm" busy={busy}
+                          variant="ghost" size="md" busy={busy}
                           disabled={onlyOneIdentity}
-                          title={onlyOneIdentity ? 'Keep at least one sign-in method' : undefined}
+                          title={onlyOneIdentity ? 'You must keep at least one method connected' : undefined}
                           icon={<Unlink size={13} />}
                           onClick={() => handleUnlink(linked)}
                         >
@@ -260,7 +264,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                         </Button>
                       </>
                     ) : (
-                      <Button variant="secondary" size="sm" busy={busy} icon={<Link2 size={13} />} onClick={() => handleLink(provider)}>
+                      <Button variant="secondary" size="md" busy={busy} icon={<Link2 size={13} />} onClick={() => handleLink(provider)}>
                         Link
                       </Button>
                     )}
@@ -268,7 +272,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 );
               })}
               {connectedProviders.has('email') && (
-                <div style={{ fontSize: FS.xs, color: MUTED, marginTop: SP.xs }}>
+                <div style={{ fontSize: FS.xs, color: BODY, marginTop: SP.xs }}>
                   {PROVIDER_LABELS.email} is connected. You can also sign in with a one-time magic link from the sign-in screen.
                 </div>
               )}
@@ -277,43 +281,39 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
         </div>
 
         {/* ── Two-factor (coming soon) ──────────────────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
+        <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-            <Smartphone size={16} color={MUTED} />
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, fontWeight: 700, color: INK }}>
                 Two-factor authentication
-                <span style={{ marginLeft: SP.sm, fontSize: FS.xs, fontWeight: 700, color: GOLD, background: 'rgba(201,162,76,0.12)', padding: '2px 8px', borderRadius: R.md }}>
-                  Coming soon
-                </span>
+                <Pill bg={TINT_GOLD} color={GOLD_TXT}>Coming soon</Pill>
               </div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-                Add an authenticator-app code on top of your password. We'll let you know when it's ready.
+                Add an authenticator-app code on top of your password. We will let you know when it is ready.
               </div>
             </div>
-            <Button variant="ghost" size="sm" disabled aria-label="Two-factor authentication coming soon">
+            <Button variant="ghost" size="md" disabled aria-label="Two-factor authentication coming soon">
               Set up
             </Button>
           </div>
         </div>
 
         {/* ── Sign out everywhere ───────────────────────────────────────── */}
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.md }}>
+        <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-            <LogOut size={16} color={SECOND} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sign out everywhere</div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-                Sign out of every device and browser. Use this if you've lost a device.
+                Sign out of every device and browser. Use this if you have lost a device.
               </div>
             </div>
-            <Button variant="secondary" size="sm" busy={globalBusy} icon={<KeyRound size={13} />} onClick={handleSignOutEverywhere}>
+            <Button variant="secondary" size="md" busy={globalBusy} icon={<KeyRound size={13} />} onClick={handleSignOutEverywhere}>
               Sign out all
             </Button>
           </div>
         </div>
 
-        <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
           Signed in as <span style={{ color: SECOND, fontWeight: 700 }}>{auth.user?.email}</span>.
         </div>
       </div>

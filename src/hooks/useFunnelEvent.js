@@ -1,8 +1,8 @@
 /**
  * useFunnelEvent.js — One-shot funnel-event firing on condition transition.
  *
- * Many critique findings (X-2 pricing moments, X-3 save intent, X-4
- * welcome credit) want to fire an analytics event exactly once per
+ * Many critique findings (pricing moments, save intent, welcome
+ * credit) want to fire an analytics event exactly once per
  * session per condition becoming true. Components doing this by hand
  * tend to either spam events on every render or forget to fire at all.
  *

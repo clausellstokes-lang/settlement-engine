@@ -46,6 +46,14 @@ const TIER_GATE = {
 // output internally for elevated roles.
 const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
 
+// Legitimate NON-ranked settType sentinels the wizard's selector offers
+// alongside the ranked tiers (ConfigurationPanel's <option value="random"> /
+// <option value="custom">). These are not subject to the size paywall: 'random'
+// rolls a tier (then re-gated at generation), and 'custom' is a size the user
+// types. isTierAllowed must let these through, but FAIL CLOSED on everything
+// else (typos, undefined, tampered values) rather than fail open.
+const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
+
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
 
@@ -179,7 +187,7 @@ export const createAuthSlice = (set, get) => ({
           };
         });
 
-        // Tier 8.5 — fire the welcome email once per account. We mark a
+        // Fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
         // SIGNED_IN events (e.g. after a token refresh or a sign-out +
         // sign-in cycle on the same browser). The send is
@@ -197,7 +205,7 @@ export const createAuthSlice = (set, get) => ({
                 notifyWelcome({ displayName: displayName || 'there' });
               }).catch(() => { /* swallow — never block auth */ });
 
-              // Tier 8.8 — fire SIGNUP_COMPLETED + (if applicable)
+              // Fire SIGNUP_COMPLETED + (if applicable)
               // SIGNUP_AFTER_ANON. We piggyback on the same first-
               // signin-per-user flag so this fires once per account.
               import('../lib/analytics.js').then(({ Funnel }) => {
@@ -207,7 +215,7 @@ export const createAuthSlice = (set, get) => ({
           } catch { /* localStorage unavailable; skip */ }
         }
 
-        // P101 / X-3 — Auth intent fulfillment. If the user clicked
+        // Auth intent fulfillment. If the user clicked
         // "Save this town — free account" before signing in, the
         // authIntents registry has a pending SAVE_SETTLEMENT entry. Now
         // that auth is real, dispatch it. The handler is registered at
@@ -253,6 +261,32 @@ export const createAuthSlice = (set, get) => ({
     }
   },
 
+  /**
+   * Persist the two security answers captured at sign-up. Thin pass-through to
+   * the auth service's set_my_security_answers RPC wrapper — the RPC needs a
+   * live session (auth.uid()), so the caller fires this only AFTER a session
+   * exists (i.e. once the post-signup polling auto-login succeeds). The raw
+   * answers are hashed server-side; nothing sensitive lands in the store.
+   *
+   * @param {{ q1: string, a1: string, q2: string, a2: string }} answers
+   */
+  authSetSecurityAnswers: async (answers) => {
+    await authService.setSecurityAnswers(answers);
+  },
+
+  /**
+   * Read which of the caller's two security-question slots are currently set,
+   * so the account page can show "set / not set" status. Thin pass-through to
+   * the auth service's get_my_security_question_ids RPC wrapper — it returns
+   * only the {slot, questionId} pairs (never the answer hash) and needs a live
+   * session. Degrades to an empty array on any failure.
+   *
+   * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+   */
+  authGetSecurityQuestionIds: async () => {
+    return authService.getSecurityQuestionIds();
+  },
+
   /** Sign in with email + password. rememberMe controls session persistence. */
   authSignIn: async (email, password, rememberMe = true) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
@@ -261,7 +295,7 @@ export const createAuthSlice = (set, get) => ({
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
-          tier: result.tier, role: result.role || 'user',
+          tier: resolveTier(result.tier, result.role), role: result.role || 'user',
           displayName: result.displayName || null,
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,
@@ -290,6 +324,54 @@ export const createAuthSlice = (set, get) => ({
   authResetPassword: async (email) => {
     try {
       await authService.resetPassword(email);
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /**
+   * Forgot-password challenge — step 1. Look up an email through the
+   * `auth-recovery` edge function and get ONE random security question. The
+   * raw answer hash never reaches the client; this returns only
+   * { exists, slot, questionId }. A rate-limit / outage throws a coded Error
+   * (e.code, see RECOVERY_RATE_LIMITED) so the UI can back off rather than
+   * treat it as a missing account. Thin pass-through; nothing lands in state.
+   *
+   * @param {string} email
+   * @returns {Promise<{ exists: boolean, slot: number|null, questionId: string|null }>}
+   */
+  authRecoveryLookup: async (email) => {
+    return authService.recoveryLookup(email);
+  },
+
+  /**
+   * Forgot-password challenge — step 2. Submit the answer for the question
+   * chosen in step 1. On a correct answer the edge function mails the reset
+   * link and this resolves { ok: true }; a wrong answer resolves { ok: false }.
+   * A rate-limit / outage throws a coded Error. The answer is sent straight to
+   * the function and never persisted in the store.
+   *
+   * @param {{ email: string, slot: number, answer: string }} args
+   * @returns {Promise<{ ok: boolean }>}
+   */
+  authRecoveryVerify: async ({ email, slot, answer }) => {
+    return authService.recoveryVerify({ email, slot, answer });
+  },
+
+  /**
+   * Set a new password for the CURRENT session. Used by the set-new-password
+   * page once a recovery session is active (the recovery link established it).
+   * Unlike changePassword this has no current-password re-auth gate — the
+   * recovery session IS the proof of identity. The auth-state listener picks up
+   * the now-fully-authed session; we surface failures (e.g. expired link) to
+   * the caller.
+   *
+   * @param {string} newPassword
+   */
+  authUpdatePassword: async (newPassword) => {
+    try {
+      await authService.updatePassword(newPassword);
     } catch (e) {
       set(state => { state.auth.error = e.message; });
       throw e;
@@ -406,8 +488,23 @@ export const createAuthSlice = (set, get) => ({
 
   isTierAllowed: (settlementTier) => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    // FAIL CLOSED for anything that is neither a known ranked tier nor an
+    // explicitly-allowlisted sentinel. A permission gate that returns true for
+    // an unknown value (typo / undefined / tampered settType) is a security
+    // hole: a caller that forgot to guard the sentinels would silently grant
+    // access to an unrecognized tier. So the ONLY non-ranked values that pass
+    // are the legitimate wizard sentinels ('random'/'custom'); every other
+    // unranked value is denied.
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
     const maxTier = get().maxAllowedTier();
-    return TIER_RANK[settlementTier] <= TIER_RANK[maxTier];
+    const maxRank = TIER_RANK[maxTier];
+    // Defense-in-depth: if maxAllowedTier ever resolves to an unranked value,
+    // deny rather than compare against undefined (which would clamp to false
+    // for every input — fail-open's mirror image, but still wrong to rely on).
+    if (maxRank === undefined) return false;
+    return rank <= maxRank;
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */

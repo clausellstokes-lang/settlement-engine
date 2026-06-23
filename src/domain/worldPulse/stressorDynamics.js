@@ -32,6 +32,7 @@ import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
+import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -67,7 +68,7 @@ function edgesTouching(snapshot, settlementId) {
 }
 
 export function relationshipTypeOf(edge) {
-  // H12 shim: legacy saves carry the plural 'trade_partners' the old
+  // Compatibility shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
@@ -462,7 +463,7 @@ export function counterforceAssessment(stressor, snapshot) {
 export const STRESSOR_SYNERGIES = Object.freeze({
   famine: {
     disease_outbreak: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the sick cannot work the fields' },
-    siege: { blocksResolution: true, note: 'the blockade stands — no relief can arrive' },
+    siege: { blocksResolution: true, note: 'the blockade stands. No relief can arrive' },
   },
   siege: {
     wartime: { decayMult: 0.8, resolutionDelta: -0.04, note: 'the wider war keeps the besiegers supplied' },
@@ -473,7 +474,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   disease_outbreak: {
     famine: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the hungry sicken faster' },
     mass_migration: { decayMult: 0.75, note: 'crowded camps spread contagion' },
-    magic_deadzone: { decayMult: 0.8, note: "the healers' magic is gone — only poultices remain" },
+    magic_deadzone: { decayMult: 0.8, note: "the healers' magic is gone. Only poultices remain" },
   },
   mass_migration: {
     famine: { decayMult: 0.8, note: 'hunger keeps people on the roads' },
@@ -496,7 +497,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
     insurgency: { decayMult: 1.25, resolutionDelta: 0.04, note: 'the resistance bleeds the garrison white' },
   },
   religious_conversion_fracture: {
-    occupation: { decayMult: 0.75, resolutionDelta: -0.04, note: "the occupier sponsors the new faith — the schism has a patron" },
+    occupation: { decayMult: 0.75, resolutionDelta: -0.04, note: "the occupier sponsors the new faith. The schism has a patron" },
   },
   infiltration: {
     criminal_corridor: { decayMult: 0.75, note: 'the corridor shelters the network' },
@@ -507,7 +508,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   coup_detat: {
     succession_void: { decayMult: 0.7, resolutionDelta: -0.05, note: 'an empty line of succession invites the knives' },
     political_fracture: { decayMult: 0.75, resolutionDelta: -0.04, note: 'a paralyzed council cannot rally a defense' },
-    rebellion: { decayMult: 0.8, note: 'the streets are already burning — the palace is distracted' },
+    rebellion: { decayMult: 0.8, note: 'the streets are already burning. The palace is distracted' },
   },
   political_fracture: {
     coup_detat: { decayMult: 0.8, note: 'the coup deepens the constitutional void' },
@@ -640,7 +641,12 @@ export function recentHostileMemory(snapshot, settlementId, currentTick) {
   return best;
 }
 
-const WAR_STRESSOR_TYPES = Object.freeze(['siege', 'wartime', 'occupation', 'betrayal']);
+// WAR_STRESSOR_TYPES now lives in a dependency-free leaf module so event
+// mutation can import it without pulling this heavy module's regional-graph
+// chain into its load graph (which created an init-order cycle). Re-exported
+// here (imported above for local use) so this module's existing consumers are
+// unaffected.
+export { WAR_STRESSOR_TYPES };
 
 // Table-facing hooks per spawn variant — the same catalog type is a
 // different adventure depending on who is behind it. Surfaced on the
@@ -648,20 +654,20 @@ const WAR_STRESSOR_TYPES = Object.freeze(['siege', 'wartime', 'occupation', 'bet
 export const VARIANT_HOOKS = Object.freeze({
   foreign_sponsored: [
     'A courier carries coin that traces back across the border.',
-    'Exposing the sponsor would be a casus belli — if anyone dares name them aloud.',
+    'Exposing the sponsor would be a casus belli, if anyone dares name them aloud.',
     'Someone local is living slightly too well for their station.',
   ],
   abandoned_agent: [
     'The handler has gone silent; the last payment never came.',
     'A desperate asset with no patron would trade everything for protection.',
-    'Blackmail material is being sold off piecemeal — by someone with nothing left to lose.',
+    'Blackmail material is being sold off piecemeal, by someone with nothing left to lose.',
   ],
   internal_conspiracy: [
     'Loyalty tests are spreading through the council like a rash.',
     'The conspirators meet somewhere everyone trusts too much to search.',
   ],
   declared_war: [
-    'Their banners are open — but their supply lines are not invulnerable.',
+    'Their banners are open, but their supply lines are not invulnerable.',
     'A truce party waits for any honest broker.',
   ],
   unattributed: [
@@ -673,11 +679,11 @@ export const VARIANT_HOOKS = Object.freeze({
     'Collaborators and patriots eat at the same tables.',
   ],
   palace_coup: [
-    'Invitations to a private dinner are circulating — the guest list is the conspiracy.',
+    'Invitations to a private dinner are circulating. The guest list is the conspiracy.',
     'The seals on three official letters do not match the hands that signed them.',
   ],
   barracks_coup: [
-    'The garrison drilled at midnight without orders — or with orders no one admits giving.',
+    'The garrison drilled at midnight without orders, or with orders no one admits giving.',
     'Officers loyal to the seat are being reassigned to the walls, one by one.',
   ],
   merchant_cabal: [
@@ -690,18 +696,18 @@ export const VARIANT_HOOKS = Object.freeze({
   ],
   arcane_ascendancy: [
     'Wards around the council hall failed twice this tenday. The casters shrug.',
-    'Someone is scrying the seat of power — and wants it known.',
+    'Someone is scrying the seat of power, and wants it known.',
   ],
   council_schism: [
     'A rump session voted itself emergency powers while the chamber stood half empty.',
     'Two officials now claim the same seal, the same office, and the same tax.',
   ],
   popular_revolt: [
-    'The market square empties at the same hour every evening — somewhere, people are meeting.',
+    'The market square empties at the same hour every evening. Somewhere, people are meeting.',
     'A list of grievances was nailed to the courthouse door. Nobody has dared remove it.',
   ],
   servile_uprising: [
-    'Work songs in the fields have changed — the overseers do not understand the new words.',
+    'Work songs in the fields have changed. The overseers do not understand the new words.',
     'Manumission papers, real and forged, are changing hands at night.',
   ],
   tax_revolt: [
@@ -710,10 +716,10 @@ export const VARIANT_HOOKS = Object.freeze({
   ],
   arcane_burnout: [
     'Where the surge burned hottest, candles now gutter and wards lie cold.',
-    'The mages who fled the instability will not return — they say the ground itself is spent.',
+    'The mages who fled the instability will not return. They say the ground itself is spent.',
   ],
   leyline_silence: [
-    'No omen, no surge, no warning — the magic simply stopped answering.',
+    'No omen, no surge, no warning. The magic simply stopped answering.',
     'Hedge wizards are leaving quietly; the ones who stay have started learning herbcraft.',
   ],
 });
@@ -751,7 +757,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
         attackerSettlementId: null,
         attackerLabel: null,
         interpretedAtTick: tick,
-        reason: `The hostility that planted this agent ended ${memory.ticksAgo} tick(s) ago — the handler is gone, the asset remains.`,
+        reason: `The hostility that planted this agent ended ${memory.ticksAgo} tick(s) ago. The handler is gone, the asset remains.`,
       };
     }
     return {
@@ -760,7 +766,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       attackerSettlementId: null,
       attackerLabel: null,
       interpretedAtTick: tick,
-      reason: 'No hostile neighbor, no recent feud — the knife came from inside.',
+      reason: 'No hostile neighbor, no recent feud. The knife came from inside.',
     };
   }
 
@@ -784,7 +790,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       attackerLabel: null,
       sponsorSettlementId: null,
       interpretedAtTick: tick,
-      reason: 'No hostile neighbor claims this — the attacker is unnamed until the DM says otherwise.',
+      reason: 'No hostile neighbor claims this. The attacker is unnamed until the DM says otherwise.',
     };
   }
 
@@ -838,7 +844,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     return {
       ...base,
       variant: 'popular_revolt',
-      reason: 'The streets rose on their own — no faction owns this yet.',
+      reason: 'The streets rose on their own. No faction owns this yet.',
     };
   }
 
@@ -857,7 +863,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       interpretedAtTick: tick,
       reason: burnout
         ? 'The wild surge burned out and left dead ground behind it.'
-        : 'The leylines have simply gone quiet — no one yet knows why.',
+        : 'The leylines have simply gone quiet. No one yet knows why.',
     };
   }
 
@@ -889,8 +895,8 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
           : 'The conspiracy is still choosing its champion.',
         contest.incumbent.gated
           ? `${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`
-          : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers — its case will not even be heard.`,
-        ...(sponsor ? ['Foreign coin moves beneath it — a hostile neighbor is bankrolling the plot.'] : []),
+          : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers. Its case will not even be heard.`,
+        ...(sponsor ? ['Foreign coin moves beneath it. A hostile neighbor is bankrolling the plot.'] : []),
       ].join(' '),
     };
   }

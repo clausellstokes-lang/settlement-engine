@@ -12,6 +12,7 @@ import {
 } from '../../src/domain/entities/status.js';
 import { propagateImpairment } from '../../src/domain/entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance, importanceWeight } from '../../src/domain/entities/npcs.js';
+import { normalizeNpcTraits } from '../../src/domain/dossier/entityLinks.js';
 
 describe('entity status', () => {
   test('default-active when no impairments', () => {
@@ -87,6 +88,56 @@ describe('NPC importance + weight', () => {
     expect(importanceWeight({ importance: 'minor' })).toBe(0);
     expect(importanceWeight({ importance: 'notable' })).toBeLessThan(importanceWeight({ importance: 'key' }));
     expect(importanceWeight({ importance: 'key' })).toBeLessThan(importanceWeight({ importance: 'pillar' }));
+  });
+});
+
+describe('createNpc descriptive traits', () => {
+  test('retains authored flaw / temperament / goal / constraint / secret in the shapes the read card reads', () => {
+    const npc = createNpc({
+      name: 'Mira the Bold', importance: 'key',
+      flaw: 'Reckless under pressure',
+      temperament: 'Hot-tempered',
+      goal: 'Reclaim her family name',
+      constraint: 'Bound by an old debt',
+      secret: 'Secretly funds the smugglers',
+    });
+    // Stored in the exact shapes the NPCInlineCard + normalizer read.
+    expect(npc.flaw).toBe('Reckless under pressure');
+    expect(npc.personality.dominant).toBe('Hot-tempered');
+    expect(npc.goal).toEqual({ short: 'Reclaim her family name' });
+    expect(npc.activeConstraint).toBe('Bound by an old debt');
+    expect(npc.secret).toEqual({ what: 'Secretly funds the smugglers' });
+  });
+
+  test('the read-card normalizer surfaces exactly what was authored', () => {
+    const npc = createNpc({
+      name: 'Mira', importance: 'notable',
+      flaw: 'Reckless', temperament: 'Hot-tempered',
+      goal: 'Reclaim her name', secret: 'Funds the smugglers',
+    });
+    const traits = normalizeNpcTraits(npc);
+    const byLabel = Object.fromEntries(traits.map(t => [t.label, t.value]));
+    expect(byLabel.Flaw).toBe('Reckless');
+    expect(byLabel.Temperament).toBe('Hot-tempered');
+    expect(byLabel.Goal).toBe('Reclaim her name');
+    expect(byLabel.Secret).toBe('Funds the smugglers');
+    // The secret stays GM-only.
+    expect(traits.find(t => t.label === 'Secret').visibility).toBe('gm');
+  });
+
+  test('accepts goals (plural) as an alias and pre-shaped objects, and omits absent traits', () => {
+    const fromPlural = createNpc({ name: 'A', goals: 'Win the seat' });
+    expect(fromPlural.goal).toEqual({ short: 'Win the seat' });
+    const fromObject = createNpc({ name: 'B', goal: { short: 'Already shaped' }, secret: { what: 'kept', stakes: 'high' } });
+    expect(fromObject.goal).toEqual({ short: 'Already shaped' });
+    expect(fromObject.secret).toEqual({ what: 'kept', stakes: 'high' });
+    // No traits authored → none of the optional keys appear (old footprint preserved).
+    const bare = createNpc({ name: 'C' });
+    expect(bare.flaw).toBeUndefined();
+    expect(bare.goal).toBeUndefined();
+    expect(bare.secret).toBeUndefined();
+    expect(bare.activeConstraint).toBeUndefined();
+    expect(bare.personality).toBeUndefined();
   });
 });
 

@@ -91,4 +91,34 @@ describe('EventComposer — second decomposition smoke (TargetField + constants)
     // The NPC option from the stubbed dossier appears in the target dropdown.
     expect(screen.getByRole('option', { name: 'Mira' })).toBeTruthy();
   });
+
+  test('Expose Corruption is hidden when no NPC is corrupt (the action would no-op)', async () => {
+    const EventComposer = (await import('../../src/components/settlement/EventComposer.jsx')).default;
+    render(<EventComposer />);
+    // The stub roster (Mira) has no corrupt NPC, so the event must not be offered.
+    expect(screen.queryByRole('option', { name: 'Expose corruption' })).toBeNull();
+  });
+});
+
+describe('eventComposer helpers — corruptNpcOptions', () => {
+  test('offers only corrupt, not-ousted NPCs and labels them', async () => {
+    const { corruptNpcOptions } = await import('../../src/components/settlement/eventComposer/helpers.js');
+    const settlement = {
+      npcs: [
+        { id: 'a', name: 'Captain Vex', corrupt: true },
+        { id: 'b', name: 'Honest Mira', corrupt: false },
+        { id: 'c', name: 'Former Stooge', corrupt: false, ousted: true },
+        { id: 'd', name: 'Spent Mole', corrupt: true, ousted: true }, // turned but ousted — excluded
+      ],
+    };
+    const opts = corruptNpcOptions(settlement);
+    expect(opts).toEqual([{ id: 'a', name: 'Captain Vex (corrupt)' }]);
+  });
+
+  test('returns an empty list when no NPC is corrupt', async () => {
+    const { corruptNpcOptions } = await import('../../src/components/settlement/eventComposer/helpers.js');
+    expect(corruptNpcOptions({ npcs: [{ id: 'a', name: 'Clean', corrupt: false }] })).toEqual([]);
+    expect(corruptNpcOptions({ npcs: [] })).toEqual([]);
+    expect(corruptNpcOptions(null)).toEqual([]);
+  });
 });

@@ -114,7 +114,7 @@ describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
     expect(m.legality).toBe('regulated');
     expect(m.cost).toBe('costly');
     expect(m.risk).toBeTruthy();
-    expect(m.display).toBe('Availability moderate — regulated, costly services, moderate risk');
+    expect(m.display).toBe('Availability moderate: regulated, costly services, moderate risk');
   });
 
   it('emits the four role lines', () => {
@@ -231,14 +231,14 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
 
   it('genuinely uncovered keeps the no-import-channel clause', () => {
     const r = deriveViability(isolated({}));
-    expect(r.summary).toMatch(/survives on local production and stored reserves — no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/survives on local production and stored reserves \(no meaningful import channel reaches it\)/);
   });
 
   it('uncovered but magic-fed credits magical provision alongside local production', () => {
     // Isolated hamlets can have importCoverage 0 with a druidic offset —
     // magic supplements local production without any import channel.
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
-    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it/);
+    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves \(no meaningful import channel reaches it\)/);
   });
 });
 
@@ -256,7 +256,7 @@ describe('deriveBlockadeRelief (Wave 8 — blockadeBypass gains its reader)', ()
       // The throughput caveat is load-bearing: the bypass carries at most the
       // circle's FOOD_IMPORT_RATES share — a port city still starves on the
       // overflow, and the prose must not promise otherwise.
-      display: "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput.",
+      display: "Supplies arrive by teleportation circle despite the siege, as much as the circle can carry.",
     });
   });
 

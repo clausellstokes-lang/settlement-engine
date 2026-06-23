@@ -97,14 +97,14 @@ export const RERUN_KEYS_FOR_EVENT = {
   IMPAIR_FACTION:         ['powerStructure', 'narrative'],
   RESTORE_FACTION:        ['powerStructure', 'narrative'],
   ADD_FACTION:            ['powerStructure', 'narrative'],
-  // Wave 1 extended events.
+  // Extended events.
   KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
   EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
   IMPOSE_CORRUPTION:      ['npcs', 'powerStructure', 'narrative'],
   REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
-  // Phase 24 / Tier 4.11 — player intervention events
+  // Player intervention events.
   REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
   BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
   SETTLEMENT_DISPUTE:     ['powerStructure', 'narrative'],
@@ -123,7 +123,7 @@ export const RERUN_KEYS_FOR_EVENT = {
   REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
   PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
   DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
-  // Feature D / R1 — assigning a primary deity re-derives the religion substrate
+  // Assigning a primary deity re-derives the religion substrate
   // (the deity term in deriveReligiousAuthority) and refreshes the narrative.
   SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
 };
@@ -268,7 +268,7 @@ export const EVENT_REGISTRY = {
     label: 'Add NPC',
     description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
     requiresTarget: true,
-    targetPrompt: 'NPC name (or "role @ institution" — e.g. "High Priestess @ Temple")',
+    targetPrompt: 'NPC name (or "role @ institution", e.g. "High Priestess @ Temple")',
     stateDeltas(event) {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
@@ -394,7 +394,7 @@ export const EVENT_REGISTRY = {
     },
   },
 
-  // ── Wave 1: extended event surface ──────────────────────────────────────
+  // ── Extended event surface ──────────────────────────────────────────────
   // Five events that cover ~80% of common in-world incidents in canon
   // play. Each is implemented as a thin wrapper over the existing
   // mutation primitives — no new architecture, just authored content.
@@ -411,43 +411,61 @@ export const EVENT_REGISTRY = {
     },
     narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
-      return `${labelOf(event.targetId)} — the settlement's leader — is gone${cause}.`;
+      return `${labelOf(event.targetId)} (the settlement's leader) is gone${cause}.`;
     },
   },
 
   EXPOSE_CORRUPTION: {
     label: 'Expose corruption',
-    description: 'A corrupt NPC is publicly revealed (or a faction/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
+    description: 'A corrupt NPC is publicly revealed. The NPC is cleaned, scarred, and replaced by a successor; both the criminal institution they answered to and their home institution are tarnished by propagation; legitimacy collapses and rivals exploit the vacuum. A faction or institution becomes scandalised only through this chain, never by direct exposure.',
     requiresTarget: true,
-    targetPrompt: 'Corrupt NPC, faction, or institution name',
-    stateDeltas(event) {
+    targetPrompt: 'Corrupt NPC to reveal',
+    /** @param {any} event @param {any} [settlement] */
+    stateDeltas(event, settlement) {
+      // Backstop: the mutation only fires for a corrupt NPC target (mutate.js
+      // exposeCorruption no-ops on anything else). The dials and prose must
+      // never move when the structural change cannot — so when the target is
+      // not a corrupt NPC, the authored deltas are zero, matching the no-op.
+      // The pipeline passes settlement to both preview and apply, so this stays
+      // byte-identical across the two paths.
+      if (!isCorruptNpcTarget(settlement, event.targetId)) return {};
       const sev = Number(event.payload?.severity ?? 0.7);
       return {
         resilience: -Math.round(sev * 8),
         volatility: +Math.round(sev * 14),
       };
     },
-    narrate(event) {
+    /** @param {any} event @param {any} [settlement] */
+    narrate(event, settlement) {
+      // No structural change happened for a non-corrupt-NPC target (see
+      // stateDeltas), so write no scandal prose for it either.
+      if (!isCorruptNpcTarget(settlement, event.targetId)) return '';
       return `Corruption inside ${labelOf(event.targetId)} has been publicly exposed.`;
     },
   },
 
   IMPOSE_CORRUPTION: {
     label: 'Impose corruption',
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization — so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
+    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes covertly corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     requiresTarget: true,
     targetPrompt: 'Clean NPC to turn (pick the organization below)',
+    /** @param {any} event */
     stateDeltas(event) {
       // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
       const sev = Number(event.payload?.severity ?? 0.5);
+      // Scope: turning the individual is the base hit; capturing their whole
+      // institution rots a node of the settlement, so the bigger scope moves a
+      // bigger dial (extra resilience drag) to match its tangible reach.
+      const institutionScope = event.payload?.scope === 'individual_institution';
       return {
-        resilience: -Math.round(sev * 5),
-        volatility: +Math.round(sev * 8),
+        resilience: -Math.round(sev * (institutionScope ? 9 : 5)),
+        volatility: +Math.round(sev * (institutionScope ? 11 : 8)),
       };
     },
+    /** @param {any} event */
     narrate(event) {
       const org = event.payload?.criminalInstitution;
-      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''} — corruption takes root in the shadows.`;
+      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''}. Corruption takes root in the shadows.`;
     },
   },
 
@@ -493,7 +511,7 @@ export const EVENT_REGISTRY = {
 
   RAID_OR_MONSTER_ATTACK: {
     label: 'Raid or monster attack',
-    description: 'External force strikes — bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
+    description: 'External force strikes: bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     requiresTarget: false,
     targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
     stateDeltas(event) {
@@ -510,7 +528,7 @@ export const EVENT_REGISTRY = {
     },
   },
 
-  // ── Phase 24 / Tier 4.11 — Player intervention events ────────────────────
+  // ── Player intervention events ───────────────────────────────────────────
 
   REMOVED_THREAT: {
     label: 'Removed threat',
@@ -601,7 +619,7 @@ export const EVENT_REGISTRY = {
 
   APPLY_STRESSOR: {
     label: 'Apply stressor',
-    description: 'An active crisis grips the settlement — pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
+    description: 'An active crisis grips the settlement. Pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
     requiresTarget: true,
     targetPrompt: 'Stressor (from the catalog)',
     stateDeltas(event) {
@@ -624,7 +642,7 @@ export const EVENT_REGISTRY = {
 
   CHANGE_RULING_POWER: {
     label: 'Change ruling power',
-    description: "Hand the government to a different authoritative power — coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
+    description: "Hand the government to a different authoritative power: coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
     requiresTarget: true,
     targetPrompt: 'Faction that takes power',
     stateDeltas(event) {
@@ -653,7 +671,7 @@ export const EVENT_REGISTRY = {
 
   RESOLVE_STRESSOR: {
     label: 'Remove stressor',
-    description: 'An active crisis ends — pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
+    description: 'An active crisis ends. Pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
     requiresTarget: true,
     targetPrompt: 'Stressor currently gripping the settlement',
     stateDeltas(event, settlement) {
@@ -687,7 +705,7 @@ export const EVENT_REGISTRY = {
 
   ADD_TRADE_GOOD: {
     label: 'Add trade good',
-    description: 'A new good enters the settlement\'s trade profile — exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
+    description: 'A new good enters the settlement\'s trade profile: exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
     requiresTarget: true,
     targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
     stateDeltas(event) {
@@ -708,7 +726,7 @@ export const EVENT_REGISTRY = {
 
   REMOVE_TRADE_GOOD: {
     label: 'Remove trade good',
-    description: 'A good drops out of the settlement\'s trade profile — the market moved on, the supplier dried up, or the route no longer carries it.',
+    description: 'A good drops out of the settlement\'s trade profile: the market moved on, the supplier dried up, or the route no longer carries it.',
     requiresTarget: true,
     targetPrompt: 'Trade good to remove',
     stateDeltas() {
@@ -723,7 +741,7 @@ export const EVENT_REGISTRY = {
 
   ADD_RESOURCE: {
     label: 'Add resource',
-    description: 'A new resource node is discovered or opened nearby — a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
+    description: 'A new resource node is discovered or opened nearby: a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
     requiresTarget: true,
     targetPrompt: 'Resource (from the catalog, or a custom name)',
     stateDeltas() {
@@ -741,17 +759,23 @@ export const EVENT_REGISTRY = {
     label: 'Assign primary deity',
     description: 'A settlement adopts (or sheds) a primary deity. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
     requiresTarget: false,
-    stateDeltas() {
+    stateDeltas(event) {
       // A change of patron god is a legitimacy/ritual event, not an economic
-      // shock — a small steadying nudge. The substrate weight lives in
+      // shock — a small steadying nudge so that, like every other make-change,
+      // it visibly moves a dial. The substrate weight lives in
       // deriveReligiousAuthority (read off the embedded snapshot), not here.
-      return {};
+      const hasDeity = !!(event?.payload?.snapshot || event?.payload?.deityRef || event?.targetId);
+      // Adopting a primary deity steadies legitimacy and dampens unrest;
+      // shedding one (null payload) is the small inverse, the patron-less drift.
+      return hasDeity
+        ? { resilience: +3, volatility: -2 }
+        : { resilience: -3, volatility: +2 };
     },
     /** @param {any} event */
     narrate(event) {
       const snap = event.payload?.snapshot;
       if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
-        return 'The settlement turns away from its patron god — no deity now holds primacy.';
+        return 'The settlement turns away from its patron god. No deity now holds primacy.';
       }
       const name = snap.name || 'a new god';
       return `${name} is proclaimed the settlement's primary deity.`;
@@ -760,7 +784,7 @@ export const EVENT_REGISTRY = {
 
   REMOVE_RESOURCE: {
     label: 'Remove resource',
-    description: 'A resource node is lost outright — claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
+    description: 'A resource node is lost outright: claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
     requiresTarget: true,
     targetPrompt: 'Nearby resource to remove',
     stateDeltas() {
@@ -768,7 +792,7 @@ export const EVENT_REGISTRY = {
       return { resilience: -10, resourcePressure: +18 };
     },
     narrate(event) {
-      return `${labelOf(event.targetId)} is gone — no longer worked, no longer counted on.`;
+      return `${labelOf(event.targetId)} is gone. No longer worked, no longer counted on.`;
     },
   },
 
@@ -831,4 +855,27 @@ function labelOf(targetId) {
   const tail = String(targetId).split('.').pop();
   // Title-case for display
   return tail.replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
+}
+
+/**
+ * Does this target id resolve to a corrupt, not-yet-ousted NPC in the
+ * settlement? Mirrors mutate.js findNpc's id/name/label matching so the
+ * EXPOSE_CORRUPTION authored deltas + narration fire on exactly the targets the
+ * mutation acts on. Without a settlement (e.g. a label-only registry probe) we
+ * cannot tell, so we permit the authored effect rather than suppress it.
+ *
+ * @param {object} [settlement]
+ * @param {string} [targetId]
+ * @returns {boolean}
+ */
+export function isCorruptNpcTarget(settlement, targetId) {
+  if (!settlement) return true; // no settlement to check against — do not suppress
+  const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
+  const t = String(targetId || '').toLowerCase();
+  const label = labelOf(targetId).toLowerCase();
+  const npc = npcs.find(n =>
+    String(n?.id || '').toLowerCase() === t
+    || String(n?.name || '').toLowerCase() === t
+    || String(n?.name || '').toLowerCase() === label);
+  return !!(npc && npc.corrupt === true && !npc.ousted);
 }

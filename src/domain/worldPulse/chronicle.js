@@ -42,7 +42,7 @@ function nameByIdFrom(snapshot) {
  * @param {any} [args.snapshot]     a world snapshot (for settlement names + conditions)
  * @param {any} [args.regionalGraph] the live regional graph — its war_front
  *   channels name a siege's COALITION and its trade_dependency goods name a trade
- *   war's COMMODITY (§S3). Optional: absent ⇒ the coalition/commodity story is
+ *   war's COMMODITY. Optional: absent ⇒ the coalition/commodity story is
  *   simply omitted (a no-war chronicle is unchanged).
  * @param {number} [args.tick]      restrict to a single tick (default: the latest)
  * @param {number} [args.lookback]  how many recent ticks to include when tick is omitted
@@ -73,7 +73,7 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
   const nameById = nameByIdFrom(snapshot);
   const resolveName = (/** @type {any} */ id) => nameById.get(String(id)) || String(id);
 
-  // §S3 — name the COALITION behind each war-shaped stressor from the live
+  // Name the COALITION behind each war-shaped stressor from the live
   // war_front channels (besiegers into the besieged victim). Codepoint-stable,
   // resolved against the snapshot's names. Empty when no graph / no fronts.
   const siegesByVictim = new Map(
@@ -100,12 +100,12 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
         ...(s.originContext?.variant ? { variant: s.originContext.variant } : {}),
         ...(s.originContext?.attackerLabel ? { attacker: s.originContext.attackerLabel } : {}),
         ...(s.originContext?.hooks?.length ? { hooks: s.originContext.hooks.slice(0, 2) } : {}),
-        // §S3 — name the besieging coalition (2+ attackers ⇒ a coalition siege).
+        // Name the besieging coalition (2+ attackers ⇒ a coalition siege).
         ...(coalition.length ? { coalition: coalition.map(resolveName) } : {}),
       };
     });
 
-  // §S3 — the live trade wars, each naming its contested COMMODITY (the story a
+  // The live trade wars, each naming its contested COMMODITY (the story a
   // trade-war chronicle should name). Empty when no prize has flipped.
   const tradeWars = liveTradeWars({ worldState, regionalGraph }).map(w => ({
     commodity: w.commodityLabel,
@@ -130,7 +130,7 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
     realmArcs: entries.filter(e => e.scope === 'realm').map(e => ({ headline: e.headline, settlementIds: e.settlementIds || [] })),
     settlements,
     stressors,
-    // §S3 — the live trade wars (commodity + buyer + new supplier). Omitted when
+    // The live trade wars (commodity + buyer + new supplier). Omitted when
     // empty so a no-trade-war chronicle grounding is unchanged.
     ...(tradeWars.length ? { tradeWars } : {}),
     // A compact instruction the edge prompt can lean on (kept here so the prose

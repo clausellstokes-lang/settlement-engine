@@ -18,7 +18,7 @@ import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relations
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
-// UX Phase 7 — the campaign PDF's Realm Chronicle & Geopolitics section reads the
+// The campaign PDF's Realm Chronicle & Geopolitics section reads the
 // SAME pure selectors the settlement PDF + the on-screen Realm surfaces use, so
 // the three artifacts can never drift. All inert ([]/null) when dormant.
 import {
@@ -27,6 +27,10 @@ import {
 } from '../domain/display/warStatus.js';
 import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../domain/display/realmArcSummary.js';
+// Shared relationship palette (RGB channels for jsPDF). The card chips, the
+// dossier neighbour list, and these PDF lines all read this one module so a
+// named relationship is the same colour on every surface.
+import { REL_RGB } from '../components/settlements/relationshipColors.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 function durationBand(ms) {
@@ -55,17 +59,10 @@ const GOLD  = [160, 118, 42];
 const BROWN = [107, 83,  48];
 const MUTED = [140, 120, 90];
 
-// Relationship line colours (same hues as the web app)
-const REL_COLORS = {
-  trade_partner: [26,  90,  40],
-  allied:        [26,  58,  122],
-  patron:        [74,  26, 106],
-  client:        [106, 58,  26],
-  rival:         [138, 80,  16],
-  cold_war:      [138, 48,  16],
-  hostile:       [139, 26,  26],
-  neutral:       [107, 83,  64],
-};
+// Relationship line colours — sourced from the SHARED relationship palette so the
+// PDF lines match the library card chips and the dossier neighbour list exactly
+// (one source of truth; was previously a hand-kept duplicate of these RGBs).
+const REL_COLORS = REL_RGB;
 
 const REL_DASH = {
   patron:   [1.5, 1.0],
@@ -86,12 +83,31 @@ function rect(d,x,y,w,h,fill,stroke=null) {
 }
 function hline(d,x1,y,x2,clr=TAN,lw=0.2) { sd(d,clr); d.setLineWidth(lw); d.line(x1,y,x2,y); }
 
+// jsPDF's built-in Helvetica is Latin-1 only, so any code point outside that set
+// is otherwise dropped to a space — which silently mangles ordinary English prose
+// that uses smart punctuation (curly quotes, en/em dashes, ellipses). Fold the
+// common typographic forms to their ASCII equivalents FIRST so the text reads
+// correctly instead of gapping. (True non-Latin scripts still can't render in
+// Helvetica — that needs an embedded Unicode font — but smart-quoted Latin text,
+// by far the common case, now survives.) Escapes used so the table stays legible.
+const PUNCT_FOLD = [
+  [/[\u2018\u2019\u201A\u201B]/g, "'"],             // smart single quotes -> '
+  [/[\u201C\u201D\u201E\u201F]/g, '"'],             // smart double quotes -> "
+  [/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-'], // hyphen / en / em / figure dash -> -
+  [/\u2026/g, '...'],                              // ellipsis -> ...
+  [/\u2022/g, '-'],                                // bullet -> -
+  // Alternation (not a char class) so ZWJ/ZWNJ don't trip no-misleading-character-class.
+  [/\u200B|\u200C|\u200D|\u2060|\uFEFF/g, ''],       // zero-width / BOM -> drop
+  [/[\u2007\u2008\u2009\u200A\u202F\u205F]/g, ' '], // figure / thin / narrow-nbsp -> space
+];
 function s(v) {
-  // Negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
-  // and printable Latin-1; everything else gets replaced with space
-  // so PDF-bound strings don't contain unprintable control bytes.
+  // Fold smart punctuation, THEN strip anything still outside Latin-1. The negated
+  // class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII, and printable Latin-1;
+  // everything else becomes a space so PDF-bound strings carry no unprintable bytes.
+  let out = String(v || '');
+  for (const [re, rep] of PUNCT_FOLD) out = out.replace(re, rep);
   // eslint-disable-next-line no-control-regex
-  return String(v||'').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,' ').replace(/\s+/g,' ').trim();
+  return out.replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
@@ -731,7 +747,7 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Realm Chronicle & Geopolitics (UX Phase 7)
+// Realm Chronicle & Geopolitics
 // ─────────────────────────────────────────────────────────────────────────────
 // Reads the live worldState through the shared warStatus / pantheon / realmArc
 // selectors (no recompute, no three-way drift). Renders NOTHING when the realm
@@ -840,7 +856,7 @@ function buildRealmGeopolitics(d, campaignName, settlements, worldState, regiona
     subhead('Pantheon');
     for (const p of pantheon) {
       const tail = p.tier !== 'major' && p.fromMajor > 0 ? `, ${p.fromMajor} from Major` : '';
-      bullet(`${deityDisplayName(p.id)} — ${s(p.tier)}, ${p.seats} seat${p.seats === 1 ? '' : 's'}${tail}.`);
+      bullet(`${deityDisplayName(p.id)} (${s(p.tier)}), ${p.seats} seat${p.seats === 1 ? '' : 's'}${tail}.`);
     }
   }
 
@@ -904,7 +920,7 @@ export function generateCampaignPDF(campaign, allSaves) {
     footer(doc, campaign.name, pageN);
   }
 
-  // Realm Chronicle & Geopolitics — the living-world section (UX Phase 7).
+  // Realm Chronicle & Geopolitics — the living-world section.
   // Self-gates: a dormant / non-simulated campaign carries no worldState ledgers
   // ⇒ buildRealmGeopolitics renders nothing and adds no page.
   if (settlements.length > 0) {

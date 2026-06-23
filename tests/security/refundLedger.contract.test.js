@@ -17,17 +17,53 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
 const ROOT = resolve(process.cwd());
-const MIG_009 = join(ROOT, 'supabase', 'migrations', '009_profile_security.sql');
+const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
+const MIG_009 = join(MIGRATIONS_DIR, '009_profile_security.sql');
 const AUDIT_DOC = join(ROOT, 'docs', 'refund-ledger-audit.md');
 
 const migExists = existsSync(MIG_009);
 
+// Hard-fail (not a silent vacuous skip) when the target migration has moved/been
+// renamed: the `describe.runIf(migExists)` suite below would otherwise go GREEN
+// with 0 tests run — exactly the green-on-nothing failure this contract exists to
+// prevent. Mirrors the guard in creditLedger.pglite.test.js / migrationSequence*.
+describe('refund-ledger contract target exists (guards against silent vacuous skip)', () => {
+  it('migration 009 is present (a moved/renamed migration must fail loudly)', () => {
+    expect(migExists, `missing ${MIG_009} — refund-ledger contract coverage dropped`).toBe(true);
+  });
+});
+
+/** Compute the NET-CURRENT set of roles holding EXECUTE on a public function, by
+ *  replaying every migration's grant/revoke in file order (mirrors the helper in
+ *  creditLedger.pglite.test.js). This is what catches a LATER migration silently
+ *  re-granting refund_credits to `authenticated` — the audit's #1 CRITICAL — which
+ *  a regex over migration 009 alone (where it WAS granted) would never see. */
+function netExecuteGrants(fnName) {
+  const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
+  const re = new RegExp(`(grant|revoke)\\s+execute\\s+on\\s+function\\s+public\\.${fnName}\\b[\\s\\S]*?\\b(?:to|from)\\s+(\\w+)`, 'i');
+  const roles = new Set();
+  for (const f of files) {
+    for (const stmt of readFileSync(join(MIGRATIONS_DIR, f), 'utf-8').split(';')) {
+      const m = stmt.match(re);
+      if (!m) continue;
+      if (/grant/i.test(m[1])) roles.add(m[2].toLowerCase());
+      else roles.delete(m[2].toLowerCase());
+    }
+  }
+  return roles;
+}
+
 describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
-  const sql = readFileSync(MIG_009, 'utf-8');
+  // Guard the read: vitest EXECUTES a describe.runIf(false) callback at collection
+  // (to register the skipped tests), so an unguarded readFileSync here would throw
+  // a raw ENOENT at collection time when 009 is moved — pre-empting the dedicated
+  // "migration 009 is present" guard `it` above, which is the assertion meant to
+  // report the loss loudly. Reading only when migExists keeps that guard the signal.
+  const sql = migExists ? readFileSync(MIG_009, 'utf-8') : '';
 
   it('spend_credits(feature text) RPC exists with the right signature', () => {
     // Allow either order of clauses (language plpgsql / security definer
@@ -122,6 +158,19 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
 
   it('refund_credits credits back via arithmetic, never a stored snapshot', () => {
     expect(refundBody).toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
+  });
+});
+
+describe('Tier 9.9 — net-current EXECUTE grants (the audit\'s #1 CRITICAL)', () => {
+  it('refund_credits is service_role-only across ALL migrations (033 hardening not reverted)', () => {
+    // 009 granted refund_credits to `authenticated` (the bug: any authed user could
+    // refund); 033 revoked authenticated+anon and granted service_role. Asserting
+    // 009's body alone would NOT catch a later re-grant — this replays every
+    // migration so a future re-grant to `authenticated`/`anon` fails immediately.
+    const roles = netExecuteGrants('refund_credits');
+    expect(roles.has('service_role')).toBe(true);
+    expect(roles.has('authenticated')).toBe(false);
+    expect(roles.has('anon')).toBe(false);
   });
 });
 

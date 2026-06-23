@@ -45,7 +45,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState = null,
     eventLog = [],
     phase = 'draft',
-    // UX Phase 7 — the LIVE campaign world ({ worldState, regionalGraph,
+    // The LIVE campaign world ({ worldState, regionalGraph,
     // settlements?, nameFor? }) for the Faith & War chapter. Passed ONLY for
     // premium exports (the caller gates at the data layer). Absent/null for
     // free/anon/non-campaign exports ⇒ the base PDF renders unchanged.
@@ -71,7 +71,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
   const startedAt = Date.now();
 
   // Run the canonical-shape adapter at the export boundary. Saves loaded
-  // from before Phase 6 don't yet carry version stamps; normalizing here
+  // from before version stamps existed don't carry one; normalizing here
   // means every PDF chapter can rely on the canonical contract without
   // each section adding its own defensive guards.
   const normalizedSettlement = normalizeSettlement(settlement);
@@ -106,7 +106,9 @@ export async function generateSettlementPDF(settlement, options = {}) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Defer revocation: some browsers truncate the download if the object URL is
+  // revoked synchronously after click() (the download hasn't claimed the blob yet).
+  setTimeout(() => { try { URL.revokeObjectURL(url); } catch { /* already gone */ } }, 0);
 
   // Export succeeded (download triggered) — emit the success event + structural
   // snapshot. Both are fire-and-forget; a fault here must never surface as an
@@ -119,7 +121,9 @@ export async function generateSettlementPDF(settlement, options = {}) {
       canon_phase: typeof phase === 'string' ? phase : 'draft',
       duration_band: durationBand(Date.now() - startedAt),
     });
-    captureFingerprint('exported', settlement, { settlementUuid: options.settlementUuid });
+    // Fingerprint the NORMALIZED settlement — the exact shape the PDF rendered —
+    // so field-presence analytics match the artifact (not the pre-adapter shape).
+    captureFingerprint('exported', normalizedSettlement, { settlementUuid: options.settlementUuid });
   } catch { /* analytics never breaks export */ }
 }
 

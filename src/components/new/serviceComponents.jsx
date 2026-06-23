@@ -1,12 +1,16 @@
 import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 import { truncateAtWord } from '../../lib/text.js';
+import { displayInstitutionName } from '../../domain/display/institutionDisplay.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null }) {
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, compromised, depReasons, chainDepth=null }) {
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
+  // Compromised marker — an institution captured by corruption (covert in-chain
+  // mark, or revealed by a public scandal). Two-channel: text label + colour.
+  const compromiseState = compromised?.get?.(name.toLowerCase()) || compromised?.get?.(inst.toLowerCase()) || null;
   // §14 — services the user authored (or produced by a custom institution) carry
   // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
   const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
@@ -34,10 +38,11 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
           {isCustom&&<span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
           {statusLabel&&<span style={{fontSize:FS.micro,fontWeight:800,color:statusColor,background:`${statusColor}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
+          {compromiseState&&<span title={compromiseState==='revealed'?'Corruption made public — this institution is compromised':'A corrupt insider quietly compromises this institution'} style={{fontSize:FS.micro,fontWeight:800,color:swatch['#6A2A9A'],background:'rgba(106,42,154,0.12)',border:'1px solid rgba(106,42,154,0.45)',borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{compromiseState==='revealed'?'COMPROMISED':'COMPROMISED (covert)'}</span>}
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
-        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{inst}</p>}
+        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{displayInstitutionName(inst)}</p>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:FS.xxs,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>

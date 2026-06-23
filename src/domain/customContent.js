@@ -1,12 +1,12 @@
 /**
  * domain/customContent.js — Classify user-added content as causal objects.
  *
- * Tier 4.16 of the roadmap. When a user adds "Dragonbone Foundry,"
+ * When a user adds "Dragonbone Foundry,"
  * the simulator needs to know what it IS structurally — category,
  * what it provides, what it requires, what controls it, what risks
  * it raises, what effects it has on substrate / capacities. Without
  * structure, user content is just appended prose; with it, the
- * content flows through every Tier 4 derivation alongside generated
+ * content flows through every derivation alongside generated
  * entities.
  *
  *   classifyCustomEntity(rawEntity, settlement) -> {
@@ -16,9 +16,10 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Pattern-based inference (same Phase 11 / Phase 20
- * pattern). The simulator's rerun is already Phase 18's job — this
- * module produces the structured input Phase 18 consumes.
+ * Pure read-only. Pattern-based inference (the same hook/threat
+ * classifier pattern). The simulator's rerun is already the event
+ * pipeline's job — this module produces the structured input the
+ * pipeline consumes.
  */
 
 // ── Catalogs ─────────────────────────────────────────────────────────────

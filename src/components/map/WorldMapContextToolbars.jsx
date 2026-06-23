@@ -11,11 +11,11 @@ import { MAP_MODES } from '../../store/mapSlice.js';
 
 const AnnotateToolbar = lazy(() => import('./AnnotateToolbar.jsx'));
 const TerrainToolbar  = lazy(() => import('./TerrainToolbar.jsx'));
-// P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
+// Routes mode contextual toolbar. Lazy because
 // terrain/annotate users never need it.
 const RoutesToolbar   = lazy(() => import('./RoutesToolbar.jsx'));
 
-export function WorldMapContextToolbars({ showingCampaignPanel, mapMode, imageMode, bridgeRef }) {
+export function WorldMapContextToolbars({ showingCampaignPanel, mapMode, imageMode, bridgeRef, bridgeReady }) {
   return (
     <>
       {!showingCampaignPanel && mapMode === MAP_MODES.ANNOTATE && (
@@ -23,7 +23,7 @@ export function WorldMapContextToolbars({ showingCampaignPanel, mapMode, imageMo
       )}
       {/* Terrain + Routes toolbars are FMG-only (need pack.cells); suppressed in image mode. */}
       {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.TERRAIN && (
-        <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} /></Suspense>
+        <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} bridgeReady={bridgeReady} /></Suspense>
       )}
       {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.ROUTES && (
         <Suspense fallback={null}><RoutesToolbar /></Suspense>

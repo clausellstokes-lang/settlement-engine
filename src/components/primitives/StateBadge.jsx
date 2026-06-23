@@ -17,6 +17,7 @@ import {
   Sparkles, Box, Lock,
 } from 'lucide-react';
 import { COPY } from '../../copy/strings.js';
+import { useIconsOn } from './IconsContext.js';
 
 const KINDS = {
   draft:         { bg: '#f3ead8',                 fg: '#6a4a1c', border: '#c8a96a',                 Icon: Edit3 },
@@ -36,6 +37,7 @@ const KINDS = {
  * @param {string} [props.suffix]     small extra text appended after the label, e.g. event count
  */
 export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
+  const iconsOn = useIconsOn();
   const k = KINDS[kind];
   if (!k) return null;
   const Icon = k.Icon;
@@ -61,7 +63,7 @@ export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
         whiteSpace: 'nowrap',
       }}
     >
-      <Icon size={dim.ic} aria-hidden="true" /> {label.toUpperCase()}
+      {iconsOn && <Icon size={dim.ic} aria-hidden="true" />}{label.toUpperCase()}
       {suffix != null && (
         <span style={{ opacity: 0.7, marginLeft: 4 }} aria-hidden="true">· {suffix}</span>
       )}

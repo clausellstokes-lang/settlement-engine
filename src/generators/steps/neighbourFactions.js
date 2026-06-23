@@ -23,9 +23,9 @@ function powerLabelFor(power) {
 
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
-  reads: ['neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound (A+ P1.7)
+  mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound
   phase: 'power',
 }, (ctx, rng) => {
   const { neighbourFacBias, neighbourProfile, powerStructure } = ctx;
@@ -51,7 +51,7 @@ registerStep('neighbourFactions', {
           power,
           rawPower:      power,
           powerLabel:    powerLabelFor(power),
-          desc:          `${mirrorLabel} — presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
+          desc:          `${mirrorLabel}. Presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
           source:        'neighbour_mirror',
           neighbourName: neighbourProfile.name,
           isGoverning:   false,
@@ -87,7 +87,7 @@ registerStep('neighbourFactions', {
           power,
           rawPower:      power,
           powerLabel:    powerLabelFor(power),
-          desc:          `${opposeLabel} — formed in reaction to ${neighbourProfile.name}'s influence.`,
+          desc:          `${opposeLabel}. Formed in reaction to ${neighbourProfile.name}'s influence.`,
           source:        'neighbour_opposition',
           neighbourName: neighbourProfile.name,
           isGoverning:   false,

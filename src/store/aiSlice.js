@@ -38,7 +38,7 @@ import {
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
-// Tier 6.5 — every AI overlay commit runs through aiOverlayVerifier. The
+// Every AI overlay commit runs through aiOverlayVerifier. The
 // result is stored on state for UI/PDF surfaces to consume. We never
 // REFUSE to commit on violations (display-only, no blocking): the user
 // paid for the call, and a "your AI output had drift" warning is more
@@ -108,6 +108,24 @@ const errorKindFromError = (e) => {
   if (msg.includes('failed to fetch') || msg.includes('network') || msg.includes('networkerror')
       || msg.includes('load failed') || msg.includes('timeout')) return 'network';
   return 'server';
+};
+
+/**
+ * Map a thrown generation error to GM-facing domain language for the aiError
+ * surface. Transport/engine internals (fetch/RPC/parse) must never reach the
+ * trust surface verbatim — the raw message is logged via telemetry, not shown.
+ * (P10 plain-language / P11 no engine-jargon leak.) `fallback` lets each action
+ * name its own generic case ('narrative', 'daily life', 'progression').
+ */
+const friendlyAiError = (e, fallback) => {
+  const kind = errorKindFromError(e);
+  if (kind === 'credits') {
+    // The specific need/have message is set on its own pre-flight path; a
+    // credits failure that surfaces here is still domain-readable.
+    return 'Not enough credits for this action.';
+  }
+  if (kind === 'network') return "Couldn't reach the simulator — check your connection and try again.";
+  return `The ${fallback} couldn't be generated. Try again.`;
 };
 
 /** Derive the canon phase enum for a save entry, analytics-only. */
@@ -185,7 +203,7 @@ function buildDailyLifeRelationshipMemory(state, saveId) {
 
 /**
  * Build the ai_data blob to persist on a saved settlement.
- * Preserves chronicle/pinnedNpcs across updates (populated in AI-3+/AI-4+).
+ * Preserves chronicle/pinnedNpcs across updates.
  */
 function buildAiDataBlob(existing, patch) {
   const prev = existing || {};
@@ -246,12 +264,12 @@ export const createAiSlice = (set, get) => ({
   showNarrative:    false,  // toggle: true = show AI narrative, false = show raw data
   aiDataVersion:    null,   // timestamp of settlement data the narrative was built from
   aiSourceFingerprint: null, // stable settlement content hash for stale detection
-  aiViolations:     null,   // Tier 6.5 verifier report (null when no overlay committed)
+  aiViolations:     null,   // verifier report (null when no overlay committed)
 
   // ── Actions ────────────────────────────────────────────────────────────────
   setAiSettlement: (aiData) =>
     set(state => {
-      // Tier 6.5: run the canon-preservation verifier against the
+      // Run the canon-preservation verifier against the
       // current raw settlement BEFORE committing. The overlay still
       // commits regardless (display-only guard); the verification
       // report is surfaced on state so UI/PDF can show warnings.
@@ -447,7 +465,7 @@ export const createAiSlice = (set, get) => ({
 
       const sourceFingerprint = settlementFingerprint(settlement);
 
-      // Tier 6.5: verify the final atomic result against the source
+      // Verify the final atomic result against the source
       // settlement so UI surfaces (and the upcoming PDF appendix) can
       // show violation warnings.
       const verificationN = runOverlayVerifier(settlement, result);
@@ -464,6 +482,11 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationN;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal: a successful narrate run is the
+        // "I'm coming back to use this" behaviour useReaderAudience keys on.
+        // Bumped here on the success path (the server-authoritative spend has
+        // just landed) rather than from the never-called spendCredits action.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
@@ -495,7 +518,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist narrative to save:', persistErr);
-        set(state => { state.aiError = 'Narrative generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Narrative generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: after a successful generation, append an entry logging this
@@ -510,7 +533,7 @@ export const createAiSlice = (set, get) => ({
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Narrative generation failed';
+        state.aiError = friendlyAiError(e, 'narrative layer');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -617,6 +640,9 @@ export const createAiSlice = (set, get) => ({
         state.aiRegenerating = false;
         state.aiProgress = '';
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal: see requestNarrative — a paid
+        // daily-life run is the same return-engagement signal.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
@@ -641,11 +667,11 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist daily-life to save:', persistErr);
-        set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Daily life generated but save failed. It may not persist across sessions.'; });
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Daily life generation failed';
+        state.aiError = friendlyAiError(e, 'daily life');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -657,7 +683,7 @@ export const createAiSlice = (set, get) => ({
   },
 
   /**
-   * Progress the AI narrative against a specific structural edit (AI-4b).
+   * Progress the AI narrative against a specific structural edit.
    *
    * Unlike `requestNarrative` (which rewrites from raw), progression evolves
    * the existing refined prose against a `changeType` + `changeLabel` pair
@@ -771,7 +797,7 @@ export const createAiSlice = (set, get) => ({
 
       const sourceFingerprint = settlementFingerprint(settlement);
 
-      // Tier 6.5: verify the evolved narrative against the source
+      // Verify the evolved narrative against the source
       // settlement (progression v1 only refines existing prose).
       const verificationP = runOverlayVerifier(settlement, result);
       logHardViolations(verificationP, 'requestProgression');
@@ -787,6 +813,9 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationP;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal: see requestNarrative — a paid
+        // progression run is the same return-engagement signal.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
@@ -816,7 +845,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist progression to save:', persistErr);
-        set(state => { state.aiError = 'Progression generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Progression generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: record the progression with its human-readable trigger so
@@ -831,7 +860,7 @@ export const createAiSlice = (set, get) => ({
       }
     } catch (e) {
       set(state => {
-        state.aiError = e.message || 'Progression failed';
+        state.aiError = friendlyAiError(e, 'progression');
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -928,7 +957,7 @@ export const createAiSlice = (set, get) => ({
     return dossierNotes;
   },
 
-  // ── Pinned NPCs (AI-4a) ───────────────────────────────────────────────────
+  // ── Pinned NPCs ───────────────────────────────────────────────────────────
   //
   // The DM can pin specific NPCs on a save; pinned ids ride along with every
   // narrative and (future) progression request, and the `npcs` refinement pass
@@ -1015,7 +1044,7 @@ export const createAiSlice = (set, get) => ({
    * both the savedSettlements entry and (if it's the currently viewed save)
    * the in-session aiSettlement/aiDailyLife state.
    *
-   * This is the cosmetic tier of the AI-2 change classifier — mechanical
+   * This is the cosmetic tier of the change classifier — mechanical
    * substitution is semantically safe, no credit spend, no user confirm.
    */
   applyCosmeticRename: async ({ saveId, oldName, newName }) => {
@@ -1100,7 +1129,7 @@ export const createAiSlice = (set, get) => ({
       get().updateSavedSettlement(saveId, { aiData });
     } catch (e) {
       console.error('Failed to persist revert-to-raw:', e);
-      set(state => { state.aiError = 'Reverted in view but save failed — it may persist on reload.'; });
+      set(state => { state.aiError = 'Reverted in view but save failed. It may persist on reload.'; });
     }
   },
 });

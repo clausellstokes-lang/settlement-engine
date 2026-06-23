@@ -9,16 +9,20 @@
  * Workshop reorg (UX overhaul Phase 6) then dropped the `{!editMode && (`
  * read gate entirely (the read surfaces moved into the always-mounted
  * Workshop rail). ChroniclePanel + NetworkEffectsPanel remain EDIT-ONLY
- * chrome, inside the one `{editMode && (<>…</>)}` block. These tests pin
- * that structurally, in the same source-level style as
+ * chrome, inside the one `{editMode && (<div…>…</div>)}` block. The UI/UX
+ * overhaul width-capped that block: the edit chrome is now wrapped in a
+ * centered `maxWidth:PAGE_MAX` column (a `<div>`), where it used to be a
+ * bare `<>` fragment — so the gate markers below track the `<div>` form.
+ * These tests pin that structurally, in the same source-level style as
  * provenanceEditGate.test.js (mounting the full SettlementDetail would
  * require mocking the entire store).
  *
- * Markers (each unique in SettlementDetail.jsx at the relevant range):
- *   • `{editMode && (<>`  — edit-mode chrome gate open (last occurrence —
- *                           there are earlier single-child `{editMode && (`
- *                           blocks, so we anchor on the fragment form)
- *   • `</>)}`             — gate close (first occurrence after the open)
+ * Markers (each unique in SettlementDetail.jsx — verified single-occurrence):
+ *   • `{editMode && (<div` — edit-mode chrome gate open. There are earlier
+ *                            single-child `{editMode && (` blocks (newline
+ *                            after the paren), so anchoring on the `(<div`
+ *                            form selects the width-capped chrome block only.
+ *   • `</div>)}`           — gate close (first occurrence after the open)
  *
  * Also pins the owner rename (2026-06-11): the panel's user-facing copy
  * says "Narrative Chronicles", not bare "Chronicle".
@@ -36,8 +40,8 @@ const PANEL_PATH = join(COMPONENTS_ROOT, 'ChroniclePanel.jsx');
 // per-file filter below.
 const renderSite = () => /<ChroniclePanel\b/g;
 
-const EDIT_GATE_OPEN = '{editMode && (<>';
-const EDIT_GATE_CLOSE = '</>)}';
+const EDIT_GATE_OPEN = '{editMode && (<div';
+const EDIT_GATE_CLOSE = '</div>)}';
 
 function walk(dir) {
   return readdirSync(dir).flatMap(entry => {

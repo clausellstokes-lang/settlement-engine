@@ -1,5 +1,5 @@
 /**
- * sampleSettlements.js — Tier 8.2 seed dashboard fixtures.
+ * sampleSettlements.js — seed dashboard fixtures.
  *
  * Three hand-curated example settlements shown to new accounts (and any
  * account with zero saves). Each is a teaser, not a full dossier — the

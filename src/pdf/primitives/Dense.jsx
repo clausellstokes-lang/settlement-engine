@@ -127,7 +127,7 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
               marginTop: 1,
             }}
           >
-            {s.value === 0 || s.value ? s.value : '—'}
+            {s.value === 0 || s.value ? s.value : '–'}
           </Text>
           {s.sublabel && (
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], marginTop: 1 }}>

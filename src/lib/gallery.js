@@ -33,7 +33,11 @@ export const GALLERY_SORT_OPTIONS = Object.freeze([
   ['name_asc', 'A-Z'],
 ]);
 
-const FILTER_ARRAY_KEYS = Object.freeze(['tier', 'terrain', 'governmentType', 'magicLevel', 'stability']);
+// IN-list facets the public feed accepts. governmentType + stability were
+// dropped: the engine writes a free-text faction name / composite label for
+// each, so no bounded sidebar vocabulary can ever match them (migration 063).
+// culture + prosperity are the new bounded-vocab facets.
+const FILTER_ARRAY_KEYS = Object.freeze(['tier', 'terrain', 'magicLevel', 'culture', 'prosperity']);
 
 /**
  * Publish a settlement to the gallery. Returns the public slug the
@@ -125,12 +129,50 @@ export async function unshareMap(campaignId) {
   try { track(EVENTS.GALLERY_UNPUBLISHED, { kind: 'map' }); } catch { /* never affects unshare */ }
 }
 
-/** Browse public maps (anonymized tiles). */
-export async function fetchGalleryMaps({ page = 0, pageSize = 24 } = {}) {
+/**
+ * Browse public maps (anonymized tiles). Filter/sort/search run SERVER-SIDE
+ * (migration 065) — the tile carries import_count + a REAL member_count, and the
+ * RPC applies the kind/backdrop/tags/has-settlements facets + ilike search +
+ * ORDER BY before pagination. Owner identity is never projected.
+ */
+export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest', search = '', filters = {} } = {}) {
   if (!isConfigured) return { items: [] };
-  const { data, error } = await supabase.rpc('list_gallery_maps', { p_page: page, p_page_size: pageSize });
+  const { data, error } = await supabase.rpc('list_gallery_maps', {
+    p_page: page,
+    p_page_size: pageSize,
+    p_sort_key: sort,
+    p_search_query: search || '',
+    p_filters: normalizeMapFilters(filters),
+  });
   if (error) throw new Error(error.message || 'Could not load shared maps');
   return { items: Array.isArray(data) ? data : [] };
+}
+
+// Forward only the map facets the RPC understands: the non-empty IN-list arrays
+// (kind / backdrop / tags) and the real has-settlements toggle. Mirrors
+// normalizeGalleryFilters so an empty facet never narrows the server query.
+function normalizeMapFilters(filters = {}) {
+  const out = {};
+  for (const key of ['kind', 'backdrop', 'tags']) {
+    const arr = Array.isArray(filters[key]) ? filters[key].filter(Boolean).map(String) : [];
+    if (arr.length) out[key] = arr;
+  }
+  if (filters.hasSettlements) out.hasSettlements = true;
+  return out;
+}
+
+/**
+ * Fire-and-forget import counter for a shared map. Called from the import path
+ * (campaignSlice) after a successful clone; the importer is not the map's owner,
+ * so the bump runs in a SECURITY DEFINER RPC (bump_map_import, migration 065).
+ * A counter failure must never fail the import, so the error is swallowed.
+ */
+export async function bumpMapImport(slug) {
+  if (!isConfigured || !slug) return;
+  const { error } = await supabase.rpc('bump_map_import', { p_slug: slug });
+  if (error && import.meta?.env?.DEV) {
+    console.warn('[gallery] bump_map_import failed:', error.message);
+  }
 }
 
 /** Fetch one public map payload (blank-canvas backdrop in Phase 1). */
@@ -413,12 +455,18 @@ function sanitizeTile(row) {
     imageAlt:     row.gallery_image_alt || '',
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     population:   Number(row.population ?? data.population) || null,
-    terrain:      row.terrain || data?.config?.terrain || data?.geography?.terrain || data?.terrain || '',
+    terrain:      row.terrain || data?.config?.terrainType || data?.config?.terrainOverride || data?.geography?.terrain || data?.terrain || '',
     governmentType: row.government_type || readGovernmentType(data),
     magicLevel:   row.magic_level || data?.config?.magicLevel || data?.magicLevel || '',
     stability:    row.stability || data?.viability?.stability || data?.systemState?.stability || data?.stability || '',
     primaryResource: row.primary_resource || data?.config?.nearbyResources?.[0] || data?.nearbyResources?.[0] || '',
     threatLevel:  row.threat_level || data?.threatProfile?.level || data?.defense?.threatLevel || data?.threatLevel || '',
+    // New facets (migration 063). Server returns stored snapshots; the data
+    // fallbacks keep mocks + pre-migration rows truthful.
+    culture:      row.culture || data?.config?.culture || '',
+    prosperity:   row.prosperity || data?.economicState?.prosperity || '',
+    primaryDeity: row.primary_deity || data?.config?.primaryDeitySnapshot?.name || '',
+    atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
   };
@@ -514,6 +562,10 @@ function sanitizeDossier(row) {
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
+    // Headline living-world state for the dossier hero — the one fact that
+    // signals a simulated settlement, not a generator snapshot. Same derivation
+    // as the list tile so card and dossier agree.
+    stability:    row.stability || row.data?.viability?.stability || row.data?.systemState?.stability || row.data?.stability || '',
     description:  row.gallery_description || '',
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
@@ -576,6 +628,14 @@ function normalizeGalleryFilters(filters = {}) {
   if (filters.hasImage) out.hasImage = true;
   if (filters.hasComments) out.hasComments = true;
   if (filters.curatedOnly) out.curatedOnly = true;
+  if (filters.hasDeity) out.hasDeity = true;
+  if (filters.atWar) out.atWar = true;
+  // Population range — only forward finite, non-negative bounds. The RPC reads
+  // these as `population >= min` / `population <= max`.
+  const min = Number(filters.populationMin);
+  const max = Number(filters.populationMax);
+  if (Number.isFinite(min) && min > 0) out.populationMin = Math.floor(min);
+  if (Number.isFinite(max) && max > 0) out.populationMax = Math.floor(max);
   return out;
 }
 
@@ -620,6 +680,23 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.realmArcSummary !== undefined) {
     const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
     patch.gallery_realm_arc_summary = summary || null;
+  }
+  // Facet snapshots (migration 063). Captured at publish/re-share time from the
+  // REAL settlement attributes — culture/prosperity/deity from the persisted
+  // data, atWar from the owning campaign's LIVE war ledger (which the gallery row
+  // cannot recompute on its own). ShareToGallery derives these; we clamp + null
+  // empties here so a facet column never holds an empty string.
+  if (metadata.facetCulture !== undefined) {
+    patch.gallery_facet_culture = String(metadata.facetCulture || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.facetProsperity !== undefined) {
+    patch.gallery_facet_prosperity = String(metadata.facetProsperity || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.facetDeity !== undefined) {
+    patch.gallery_facet_deity = String(metadata.facetDeity || '').trim().slice(0, 120) || null;
+  }
+  if (metadata.facetAtWar !== undefined) {
+    patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
   return patch;
 }

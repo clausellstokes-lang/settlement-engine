@@ -1,7 +1,7 @@
 /**
  * domain/magicLedger.js — the canonical conserved magic quantity for a settlement.
  *
- * P3.3b Stage 3. Mirrors foodLedger / defenseLedger / governanceLedger. A settlement's magic
+ * Mirrors foodLedger / defenseLedger / governanceLedger. A settlement's magic
  * investment is a granular 0-100 dial: resolveConfig sets config.priorityMagic and DERIVES
  * config.magicLevel = getMagicLevel(priorityMagic) as a band (none/low/medium/high).
  *

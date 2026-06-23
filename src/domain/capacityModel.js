@@ -2,10 +2,10 @@
  * domain/capacityModel.js — Supply-vs-demand modeling for the 9
  * canonical settlement capacities.
  *
- * Tier 4.4 of the roadmap. Phase 17 gave every system variable a
+ * The causal substrate gives every system variable a
  * single score; for capacities specifically, the score is the *result*
  * of two competing pressures — supply (how much capacity exists) and
- * demand (how much is being asked of it). Phase 21 makes that supply
+ * demand (how much is being asked of it). This model makes that supply
  * and demand structurally visible:
  *
  *   deriveCapacityProfile('labor', settlement) -> {
@@ -16,19 +16,19 @@
  *
  * Why this matters:
  *   - Plague raises healing DEMAND but doesn't change supply (no new
- *     healers appear); Phase 17 collapses this into a single drop.
- *     Phase 21 surfaces "plague pushed healing capacity from
+ *     healers appear); the substrate collapses this into a single drop.
+ *     The capacity model surfaces "plague pushed healing capacity from
  *     adequate -> strained because demand rose, not because supply
  *     fell." That's a different story for AI / PDF / UI to tell.
  *   - Refugee influx raises FOOD DEMAND but adds LABOR SUPPLY. The
  *     same event affects two capacities in opposite directions —
  *     impossible to represent with a single substrate score.
  *
- * Coexistence with Phase 17 substrate:
- *   - Phase 17's `causalState` substrate keeps its 14 variables (some
- *     of which overlap conceptually with capacities). The Phase 17
+ * Coexistence with the causal substrate:
+ *   - The `causalState` substrate keeps its 14 variables (some
+ *     of which overlap conceptually with capacities). The substrate
  *     score remains the "headline" the AI/UI displays first; the
- *     Phase 21 capacity profile is the structurally explainable
+ *     capacity profile is the structurally explainable
  *     "why" the substrate quotes when answering "why is healing
  *     strained?"
  *
@@ -44,14 +44,14 @@
  *   magical             — arcane availability
  *
  * Pure read-only derivation. No imports from src/lib. Composes
- * Phase 16 (active conditions) and Phase 20 (structured threats) so
+ * active conditions and structured threats so
  * capacity demand reflects current pressures.
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
-import { deriveAllThreatProfiles } from './threatProfile.js';
+import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
@@ -71,6 +71,21 @@ export const CAPACITY_NAMES = Object.freeze([
   'transport',
   'religious_welfare',
   'craft',
+  'magical',
+]);
+
+// The five capacity lenses the product treats as outsider- and DM-facing:
+// food/defense/governance/healing/magic. labor, craft, transport, and
+// religious_welfare are internal substrate — a shortage in them is real for
+// the simulation but is not narrated as visible prose. aiGrounding.js holds
+// the same five-lens list for the AI payload; this constant lets non-AI
+// derivations (e.g. Outsider impressions) honour the same boundary so an
+// internal-only shortage never leaks into visible text.
+export const VISIBLE_CAPACITY_LENSES = Object.freeze([
+  'food_production',
+  'defense',
+  'administrative',
+  'healing',
   'magical',
 ]);
 
@@ -207,7 +222,7 @@ function deriveHealing(s, ctx) {
 
   // SUPPLY: healing institutions (canonical classifier via healingLedger). When no healer-named
   // institution exists, offered healing SERVICES (wound care, medical care, relief) still provide
-  // informal care (P3.3b Stage 4b) — so they rescue the harsh "absent" penalty rather than reading
+  // informal care — so they rescue the harsh "absent" penalty rather than reading
   // as no healing at all. ~17% of generated settlements offer healing services without a
   // healer-named institution; they were being mis-read as having zero healing.
   const heal = healingLedger(s);
@@ -222,10 +237,16 @@ function deriveHealing(s, ctx) {
     supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions or services.');
   }
 
-  // SUPPLY: magic level
-  const magic = s.config?.magicLevel || 'low';
-  if (magic === 'high' || magic === 'pervasive') {
+  // SUPPLY: magic level (conserved dial via magicLedger, matching deriveMagical).
+  // The prior `s.config?.magicLevel` read used a stale vocabulary: it missed the
+  // canonical 'medium' band (the widest tier) entirely and checked 'pervasive',
+  // which the generator never emits — so medium-magic settlements got zero
+  // magical-healing supply and biased toward strained.
+  const healMagic = magicLedger(s);
+  if (healMagic.present && healMagic.magicLevel === 'high') {
     supply += 10; push(supplyContributors, 'config.magicLevel', 'high', +10, `High magic supports magical healing.`);
+  } else if (healMagic.present && healMagic.magicLevel === 'medium') {
+    supply += 5; push(supplyContributors, 'config.magicLevel', 'medium', +5, `Moderate magic supports some magical healing.`);
   }
 
   // SUPPLY: religious faction power supports relief
@@ -246,7 +267,7 @@ function deriveHealing(s, ctx) {
       demand += m; push(demandContributors, cond.id, 'plague', +m, `${cond.label} overwhelms healing.`);
     }
   }
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'siege' || threat.type === 'monster_pressure') {
       const m = Math.round(threat.severity * 12);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives injury rates up.`);
@@ -265,7 +286,7 @@ function deriveDefense(s, ctx) {
   let supply = 40;
   let demand = 50;
 
-  // SUPPLY: conserved defense ledger (P3.3b Stage 1b). The measured military dimension
+  // SUPPLY: conserved defense ledger. The measured military dimension
   // already folds in walls/garrison/militia/watch/mercenary plus terrain and supply-chain
   // modifiers (defenseGenerator.computeDefenseScores), so it is the single source for
   // institution-derived defense when a profile is present.
@@ -276,7 +297,7 @@ function deriveDefense(s, ctx) {
       `Military readiness ${led.military} contributes ${c >= 0 ? '+' : ''}${c}.`);
   }
 
-  // SUPPLY: walls / garrison institutions (FALLBACK ONLY — P3.3b de-dup). The military
+  // SUPPLY: walls / garrison institutions (FALLBACK ONLY — de-duplicated). The military
   // score above already counts these institutions for generated settlements, so adding
   // them again would double-count; apply only for un-generated/legacy saves with no profile.
   if (!led.present) {
@@ -295,16 +316,18 @@ function deriveDefense(s, ctx) {
     supply += 8; push(supplyContributors, 'faction.military', 'power', +8, `Military faction at power ${milPower}.`);
   }
 
-  // DEMAND: monsterThreat
-  const monster = s.config?.monsterThreat || 'safe';
-  if (monster === 'plagued') {
-    demand += 25; push(demandContributors, 'config.monsterThreat', 'plagued', +25, 'Region overrun with monsters.');
-  } else if (monster === 'frontier') {
-    demand += 15; push(demandContributors, 'config.monsterThreat', 'frontier', +15, 'Frontier monster pressure.');
-  }
-
-  // DEMAND: threats
-  for (const threat of ctx.threats) {
+  // DEMAND: threats. config.monsterThreat is intentionally NOT charged here
+  // directly — collectThreatSources already materializes it as a canonical
+  // monster_pressure threat (severity 0.85 plagued / 0.45 frontier), so the
+  // threat loop below is the single source of truth for monster demand.
+  // Charging both double-counted the same pressure and over-inflated defense
+  // demand for every frontier/plagued settlement.
+  //
+  // ctx.demandThreats is the pressure-deduped view (one row per (type,target),
+  // max severity): two hostile neighbours both ENUMERATE distinctly elsewhere,
+  // but charge defense demand once here so the band tracks the worst pressure
+  // rather than inflating on each duplicate.
+  for (const threat of ctx.demandThreats) {
     if (['siege', 'bandit_raids', 'rival_neighbor', 'monster_pressure'].includes(threat.type)) {
       const m = Math.round(threat.severity * 15);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives defense need.`);
@@ -402,9 +425,18 @@ function deriveFoodProduction(s, ctx) {
     } else if (c.status !== 'stable') {
       supply -= 6; push(supplyContributors, c.id, c.status, -6, `${c.name} is ${c.status}.`);
     }
+    // Surface the ORIGINATING regional condition as a (delta-0) contributor so
+    // conditionTrajectory's source-join sees it. The chain's degraded status
+    // already moved supply above; this row only carries provenance, so a chain
+    // dragged down by a worsening regional condition now reports trajectory
+    // 'worsening' instead of mis-reporting 'stable'.
+    for (const rp of Array.isArray(c.regionalPressures) ? c.regionalPressures : []) {
+      if (!rp || typeof rp.id !== 'string') continue;
+      push(supplyContributors, rp.id, 'regional_pressure', 0, `${rp.label || rp.id} pressures ${c.name}.`);
+    }
   }
 
-  // SUPPLY: conserved food ledger (P3.2). Anchor this capacity to foodGenerator's
+  // SUPPLY: conserved food ledger. Anchor this capacity to foodGenerator's
   // caloric self-sufficiency so the two food lenses point the SAME direction — a
   // deficit town reads as strained food CAPACITY here, not just on the foodSecurity
   // label. Retires the "two food models can disagree" gap; banded to the same
@@ -419,7 +451,7 @@ function deriveFoodProduction(s, ctx) {
     }
   }
 
-  // SUPPLY: trade-route imports (FALLBACK ONLY — P3.3b de-dup). Major-tier routes
+  // SUPPLY: trade-route imports (FALLBACK ONLY — de-duplicated). Major-tier routes
   // (crossroads/port) supplement food, but the SAME config.tradeRouteAccess already
   // drives importCoverageRate inside the ledger's deficitPct (foodGenerator.js: port
   // 0.70, crossroads 0.60, river 0.50, road 0.35). So when a ledger is present, adding
@@ -572,7 +604,7 @@ function deriveCraft(s, ctx) {
 
   const exports = canonExports(s);
   if (exports.length >= 2) {
-    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports — sustained output demand.`);
+    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports: sustained output demand.`);
   }
 
   return {
@@ -585,7 +617,7 @@ function deriveMagical(s, ctx) {
   const supplyContributors = [];
   const demandContributors = [];
 
-  // Dead-magic guard (W5#3): in a magicExists:false world there is no arcane
+  // Dead-magic guard: in a magicExists:false world there is no arcane
   // supply and nothing demands one — mirror magicLedger zeroing the dial
   // (effective priorityMagic 0). Zero both sides so the composer bands this
   // 'absent' instead of pretending a 40/45 near-adequate arcane capacity.
@@ -623,7 +655,7 @@ function deriveMagical(s, ctx) {
   }
 
   // DEMAND: threats requiring magical response + magical conditions
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'arcane_instability' || threat.type === 'cult') {
       const m = Math.round(threat.severity * 14);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} requires arcane response.`);
@@ -650,7 +682,7 @@ const DERIVERS = Object.freeze({
   magical:           deriveMagical,
 });
 
-// Trajectory (W5#5): a capacity's trajectory follows the WORST status among
+// Trajectory: a capacity's trajectory follows the WORST status among
 // the active conditions that actually fed it — derivers push condition-driven
 // contributor rows with source = condition.id, so the join is exact.
 // Precedence worsening > easing > stable: a capacity dragged by a worsening
@@ -693,13 +725,21 @@ function finalizeCapacity(name, supply, demand, supplyContributors, demandContri
 /**
  * Build the context (active conditions, threats, factions, chains)
  * once per settlement so each capacity deriver doesn't re-derive.
+ *
+ * `threats` is the honest, un-collapsed enumeration (every distinct threat).
+ * `demandThreats` is the pressure-deduped view (one row per (type,target), max
+ * severity) — the demand loops sum it so the same underlying pressure surfaced
+ * on multiple surfaces, or two distinct same-type neighbours, is charged once
+ * rather than inflating demand per duplicate.
  */
 function buildContext(settlement) {
+  const threats = deriveAllThreatProfiles(settlement);
   return {
     conditions: deriveAllActiveConditions(settlement),
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
-    threats:    deriveAllThreatProfiles(settlement),
+    threats,
+    demandThreats: dedupeThreatsByPressure(threats),
   };
 }
 
@@ -784,7 +824,7 @@ export function summarizeCapacities(settlement) {
   const out = [];
   for (const name of CAPACITY_NAMES) {
     const p = state.capacities[name];
-    out.push(`${p.label} — ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
+    out.push(`${p.label}: ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
   }
   return out;
 }

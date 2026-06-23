@@ -106,7 +106,12 @@ export function relationshipMemoryWeight(
     maxLookbackTicks = RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS,
   } = {},
 ) {
-  if (!Number.isFinite(eventTick)) return 0.35;
+  // Undated rows (legacy/malformed history with no tick) must NOT carry a fixed
+  // weight forever — that inflated memoryScore / dailyLifeWeight / posture
+  // classification permanently (e.g. nudging rival -> escalating_rivalry via
+  // memoryScore > 0.5). They age out to nothing instead; the apply path stamps
+  // worldState.tick on every fresh row, so the gap is only legacy data.
+  if (!Number.isFinite(eventTick)) return 0;
   const age = Math.max(0, Number(currentTick || 0) - eventTick);
   if (age > maxLookbackTicks) return 0;
   return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
@@ -166,7 +171,7 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // dismissed proposals must score nothing. Application is recorded twice:
   // accepting stamps the proposal row 'applied' (worldState.proposals), and
   // the apply-time writes stamp the outcome id onto every incident/history/
-  // hierarchy row (R3). Either marker admits the outcome; auto outcomes
+  // hierarchy row. Either marker admits the outcome; auto outcomes
   // applied at selection and need no marker.
   const appliedMarkers = new Set();
   for (const proposal of worldState?.proposals || []) {
@@ -353,7 +358,7 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const relState = ensureRelationshipState(edge, states[relationshipKey]);
     const rawSettlements = getRelationshipSettlements(edge);
     if (!rawSettlements.from || !rawSettlements.to) continue;
-    // H16: when a subjugation/patronage crowned the edge's authored 'to' side
+    // When a subjugation/patronage crowned the edge's authored 'to' side
     // the senior party is stamped on the STATE — present senior-first like
     // every other hierarchy edge so direction summaries stay truthful.
     const roles = relationshipRoles(edge, relState);
@@ -447,7 +452,8 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
 
 function directionFor(posture, settlementId) {
   const id = String(settlementId);
-  if (posture.from === id && posture.to === id) return 'self';
+  // (No self-loop branch: buildRelationshipPostures only emits pair edges with
+  // distinct from/to, so from === to === id is unreachable for a normal edge.)
   if (posture.from === id) {
     if (posture.relationshipType === 'vassal') return 'overlord_to_vassal';
     if (posture.relationshipType === 'patron') return 'patron_to_client';

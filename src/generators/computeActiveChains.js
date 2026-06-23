@@ -9,7 +9,7 @@ import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 
-// ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
+// ── Id-first processor matching ──────────────────────────────────────────────
 // chain.processingInstitutions patterns are static data written for the fuzzy
 // 12-char-prefix matcher below. Each pattern is resolved ONCE (memoized) to
 // the SET of catalog ids whose names the fuzzy matcher accepts; thereafter
@@ -65,7 +65,7 @@ export function institutionMatchesProcessor(inst, pattern) {
 }
 
 // ── Keyword (substring) id-set — the tradition / magic-transit twin of the
-// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
+// processor id-set. The tradition + _hasInst gates match by
 // raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
 // they need their own keyword→catalog-id resolution built from that exact rule.
 // Built once per keyword: id-match === name-includes-match for an unrenamed
@@ -95,7 +95,7 @@ export function institutionMatchesKeyword(inst, keyword) {
   return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
 }
 
-// ── Export-gate id-set (A+ generators.6). The export extraction/processing
+// ── Export-gate id-set. The export extraction/processing
 // gates match by whole-name predicates with one bespoke special case: the
 // 'mill' keyword must NOT match "access to external mill" (a non-local access
 // note), only the real processing units. Build the gate's id-set from that
@@ -133,8 +133,12 @@ export function institutionMatchesGate(inst, keyword) {
 }
 
 // Map resource labels → RESOURCE_DATA keys for matching
-// Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
-function resourceLabelToKey(label) {
+// Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words.
+// Exported for the resolution guard test (tests/generators/chainResourceResolution
+// .test.js): the fuzzy matcher is correct for today's closed label set but is
+// rename-fragile, so a test pins that every chain.resource / resourceSubstitute
+// resolves to a real RESOURCE_DATA key.
+export function resourceLabelToKey(label) {
   if (!label) return null;
   const words = label.toLowerCase().split(/\s+/).filter(w => w.length > 3);
   let bestKey = null, bestScore = 0;
@@ -295,7 +299,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // External mill detection: if the settlement has "Access to external mill" but no
       // actual local mill institution, the grain chain functions (food security is real)
       // but surplus cannot be exported — the lord's mill toll captures any excess.
-      // Id-first (A+ generators.6): the local-mill gate reuses the shared
+      // Id-first: the local-mill gate reuses the shared
       // export-gate matcher (its 'mill' predicate already excludes "access to
       // external mill"); external-mill access is a plain keyword match. Both are
       // rename-proof for stamped institutions and id===name-predicate by
@@ -317,8 +321,8 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
-          'Local food security is maintained but surplus flour cannot be exported — ' +
-          'the mill toll captures any excess. Loss of mill access would break this chain.'
+          'Local food security is maintained but surplus flour cannot be exported. ' +
+          'The mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
 
       activeChains.push({
@@ -350,7 +354,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   if (tradeDependencies.length > 0) {
     activeChains.forEach(chain => {
       // Find matching trade dependency for any processing institution in this
-      // chain (A+ generators.7, owner-approved). Id-first: when the dependency
+      // chain (owner-approved). Id-first: when the dependency
       // names a catalog institution, resolve it to its id and ask whether it is
       // in the chain pattern's id-set — the same rename-proof join the chain
       // processors use. The fragile mutual 10-char-prefix substring match
@@ -402,51 +406,36 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (ra !== rb) return ra - rb;
     if (a.activatedByResource !== b.activatedByResource)
       return a.activatedByResource ? -1 : 1;
-    return a.needLabel.localeCompare(b.needLabel);
+    // Codepoint-stable tiebreak, NOT localeCompare: this output feeds the hashed
+    // golden master, so a locale-/ICU-dependent sort would make the SAME seed
+    // emit a DIFFERENT chain order across machines.
+    return a.needLabel < b.needLabel ? -1 : a.needLabel > b.needLabel ? 1 : 0;
   });
 
-  // ── Inter-chain dependency cascade ─────────────────────────────────────────────
+  // ── Inter-chain dependency cascade — SINGLE source of truth ─────────────────────
   // Upstream chain status propagates to downstream chains that depend on them.
-  // brewing ← grain | smelting ← fuel | leather_goods ← livestock/hunting
-  // textile_finishing ← textiles | ceramics_brick ← fuel | weapons_armor ← smelting
+  // The ONLY dependency graph is the data-driven `chain.upstreamChains` declared
+  // in supplyChainData.js. A previous revision ran a SECOND, hardcoded inline
+  // dependency map here whose edges disagreed with the data (e.g. it declared
+  // smelting ← fuel/timber while the data declares smelting ← iron/fuel);
+  // whichever pass ran last won, silently overwriting the other's upstreamNote
+  // and — because it downgraded `running` → `vulnerable` first — suppressing the
+  // data pass's `upstreamMissing` (so `deriveImportsFromChains` dropped the real
+  // missing import). Collapsing to the data graph removes that contradiction by
+  // making chain.upstreamChains the SINGLE SOURCE OF TRUTH: where the old inline
+  // map disagreed with the data, the DATA now wins, so the contradictory
+  // CHAIN_DEPS-only edges (e.g. caravan_trade←animal_husbandry/grain,
+  // smelting←timber) are intentionally NOT carried — each chain's real upstreams
+  // are whatever the data declares. Do not reintroduce a second inline dependency
+  // table here — the single-graph invariant is pinned by chainUpstreamSingleSource.test.js.
+  //
+  // An upstream chain whose own RESOURCE is depleted is treated as weak even
+  // while its status is still 'running' (depletion never sets a status) — this
+  // depleted-upstream signal was the one behaviour only the old CHAIN_DEPS pass
+  // carried, preserved here on the single graph.
   const chainById = Object.fromEntries(activeChains.map(c => [c.chainId, c]));
-
-  const CHAIN_DEPS = {
-    brewing:          ['grain'],
-    food_processing:  ['grain'],
-    animal_husbandry: ['livestock','forage'],
-    smelting:         ['fuel','timber'],
-    weapons_armor:    ['iron','smelting'],
-    ceramics_brick:   ['fuel','reed_marsh'],
-    textile_finishing:['textiles'],
-    leather_goods:    ['leather','livestock','hunting'],
-    bowyer_fletcher:  ['timber'],
-    shipbuilding:     ['timber'],
-    coastal_shipbuilding: ['timber'],
-    beekeeping_wax:   ['forage'],
-    precious_metals_mining: ['fuel'],
-    caravan_trade:    ['animal_husbandry','grain'],
-  };
-
-  Object.entries(CHAIN_DEPS).forEach(([downstreamId, upstreamIds]) => {
-    const downstream = chainById[downstreamId];
-    if (!downstream) return;
-    const impaired = upstreamIds.some(uid => {
-      const up = chainById[uid];
-      return up && (up.status === 'impaired' || up.resourceDepleted);
-    });
-    const vulnerable = !impaired && upstreamIds.some(uid => {
-      const up = chainById[uid];
-      return up && up.status === 'vulnerable';
-    });
-    if (impaired && downstream.status === 'running') {
-      downstream.status = 'vulnerable';
-      downstream.upstreamNote = `Upstream supply chain impaired — ${upstreamIds.join(' or ')} disrupted`;
-    } else if (vulnerable && downstream.status === 'running') {
-      // vulnerable upstream makes downstream slightly at risk — don't change status, just note
-      downstream.upstreamNote = `Dependent on stressed upstream: ${upstreamIds.join(' or ')}`;
-    }
-  });
+  const isUpstreamWeak = (up) =>
+    !!up && (up.status === 'impaired' || up.status === 'vulnerable' || up.resourceDepleted);
 
   // Magic substitution — delegated to chainMagicSubstitution.js
   applyMagicSubstitution(activeChains, traditions, magicPriority, tier);
@@ -454,7 +443,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   // ── Multi-order chain resolution ─────────────────────────────────────────────
   // For each active chain, check if its upstream dependencies are also active.
   // Missing upstream → chain is impaired (must import intermediate goods).
-  // Impaired upstream → chain is vulnerable (inherits upstream weakness).
+  // Impaired/depleted upstream → chain is vulnerable (inherits upstream weakness).
   // This runs after magic substitution so magic recovery already applied.
 
   const activeChainIds = new Set(activeChains.map(c => c.chainId));
@@ -464,17 +453,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (upstream.length === 0) return;
 
     const missingUpstream = upstream.filter(uid => !activeChainIds.has(uid));
-    const impairedUpstream = upstream.filter(uid => {
-      const up = activeChains.find(c => c.chainId === uid);
-      return up && (up.status === 'impaired' || up.status === 'vulnerable');
-    });
+    const impairedUpstream = upstream.filter(uid => isUpstreamWeak(chainById[uid]));
 
     if (missingUpstream.length > 0) {
       // Upstream chain not present → must import intermediate goods
       // Downgrade status unless already impaired/entrepot
       if (chain.status === 'running' || chain.status === 'operational') {
         chain.status = 'vulnerable';
-        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')} — no local source`;
+        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')}: no local source`;
         chain.upstreamMissing = missingUpstream;
       }
     } else if (impairedUpstream.length > 0) {
@@ -494,10 +480,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     const upstream = chain.upstreamChains || [];
     if (upstream.length === 0) return;
     if (chain.status === 'vulnerable' || chain.status === 'impaired') return; // already downgraded
-    const impairedUpstream = upstream.filter(uid => {
-      const up = activeChains.find(c => c.chainId === uid);
-      return up && (up.status === 'impaired' || up.status === 'vulnerable');
-    });
+    const impairedUpstream = upstream.filter(uid => isUpstreamWeak(chainById[uid]));
     if (impairedUpstream.length > 0) {
       chain.status = 'vulnerable';
       chain.upstreamNote = chain.upstreamNote ||
@@ -641,8 +624,8 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   // we match only the institution name as a whole, not substrings of longer names.
   // Id-first for stamped institutions (rename-proof exports), with the bespoke
   // gate name-predicate — including the 'mill' ≠ "access to external mill"
-  // special case — preserved as the fallback for unstamped institutions
-  // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
+  // special case — preserved as the fallback for unstamped institutions.
+  // id-match === name-predicate by construction → golden-stable.
   const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
 
   nearbyResources.forEach(rk => {

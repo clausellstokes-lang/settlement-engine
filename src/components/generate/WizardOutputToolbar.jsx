@@ -7,27 +7,33 @@
  * handler arrives via props; state and handlers stay in the parent.
  */
 
-import { ArrowLeft, Zap } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import SimulationDrawer from '../dossier/SimulationDrawer.jsx';
 
 export function WizardOutputToolbar({
   settlement,
   isMobile,
   handleBack,
+  handleGenerate,
   handleNewSettlement,
 }) {
   return (
     <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.md,
+      display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap',
       padding: `${SP.md}px ${SP.lg}px`,
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
       borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
       position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
     }}>
+      {/* Back is a subordinate nav/reset that discards the just-earned draft — it
+          must not out-shout the dossier or Save (P8). Demoted to the same
+          secondary outline as "New" so Save (below) stays the single primary of
+          the post-generate region; the ArrowLeft icon keeps the affordance. */}
       <Button
-        variant="gold"
+        variant="secondary"
         size="md"
         icon={<ArrowLeft size={14} />}
         onClick={handleBack}
@@ -48,22 +54,37 @@ export function WizardOutputToolbar({
         </div>
       </div>
 
-      {/* Save UX consolidation (code-review fix): there was a
-          second, smaller save button here that called
-          savesService.save directly with no error toast, no
-          "saved" feedback, and no canSave server-side gate.
-          Removed — the SaveToLibraryButton lower in the page
-          is the single canonical save action. Two save buttons
-          pointing at the same outcome was confusing and meant
-          users frequently clicked the worse one. */}
-      <div style={{ display: 'flex', gap: SP.xs }}>
+      {/* Utility cluster — How this was simulated, Regenerate, New, clustered to
+          the right of the identity. (A second inline save button used to live
+          here; it was removed in favour of the single canonical
+          SaveToLibraryButton below the dossier, since two saves pointing at the
+          same outcome confused users.) Save stays the one primary; everything
+          here is a quiet secondary. Wraps below the name on narrow widths. */}
+      <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+        {/* "How this was simulated" — the metadata drawer trigger, hoisted from
+            the dossier action band so the utility controls cluster together. */}
+        <SimulationDrawer variant="toolbar" />
+        {/* Regenerate — re-rolls a fresh draft from the same config (the current
+            draft is discarded). A quiet secondary; Save below stays the primary. */}
         <Button
-          variant="primary"
+          variant="secondary"
           size="md"
-          icon={<Zap size={14} />}
-          onClick={handleNewSettlement}
+          onClick={handleGenerate}
+          aria-label="Regenerate draft"
+          title="Roll a fresh draft from the same configuration. The current draft is discarded."
         >
-          New
+          <span aria-hidden="true">↻ </span>Regenerate draft
+        </Button>
+        {/* "New Draft" restarts in the same path you chose (instant / Basic /
+            Advanced) with a clean slate — a quiet outline. Save (below the
+            dossier) is the one primary. */}
+        <Button
+          variant="secondary"
+          size="md"
+          onClick={handleNewSettlement}
+          title="Start a fresh draft in the same generation path. Your current configuration is cleared."
+        >
+          New Draft
         </Button>
       </div>
     </div>

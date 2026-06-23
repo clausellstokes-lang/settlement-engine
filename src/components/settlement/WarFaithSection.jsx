@@ -211,10 +211,10 @@ export default function WarFaithSection({
           <strong>War-weary:</strong>{' '}
           {exhaustionBand} ({exhaustionRaw.toFixed(2)})
           {detail && exhaustionBand === 'near peace' && (
-            <span style={{ color: MUTED }}> — the scar is healing; this realm leans toward peace.</span>
+            <span style={{ color: MUTED }}>. The scar is healing. This realm leans toward peace.</span>
           )}
           {detail && exhaustionBand === 'exhausted' && (
-            <span style={{ color: MUTED }}> — sustained fighting is pushing it to sue for peace.</span>
+            <span style={{ color: MUTED }}>. Sustained fighting is pushing it to sue for peace.</span>
           )}
         </div>
       )}
@@ -224,7 +224,7 @@ export default function WarFaithSection({
         <div data-testid="mobilization-posture" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
           <strong>Mobilization:</strong> {mobilization.phrase}
           {detail && mobilization.ticksToDeploy > 0 && (
-            <span style={{ color: MUTED }}> — roughly {mobilization.ticksToDeploy} {mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.</span>
+            <span style={{ color: MUTED }}>. Roughly {mobilization.ticksToDeploy} {mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.</span>
           )}
         </div>
       )}
@@ -232,7 +232,7 @@ export default function WarFaithSection({
       {/* ── Deployed army strength + attrition (B0/B2) — heuristic ────────── */}
       {army && (
         <div data-testid="army-strength" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
-          <strong>Army in the field:</strong> marching on {army.targetName} — {army.remainingPhrase}
+          <strong>Army in the field:</strong> marching on {army.targetName}, {army.remainingPhrase}
           {detail && <span style={{ color: MUTED }}>; {army.conditionPhrase}.</span>}
         </div>
       )}
@@ -240,7 +240,7 @@ export default function WarFaithSection({
       {/* ── Occupation: this settlement is OCCUPIED (B3) ──────────────────── */}
       {occupied && (
         <div data-testid="occupation-occupied" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
-          <strong>Occupied:</strong> held by {occupied.occupierName} — {occupied.statePhrase}
+          <strong>Occupied:</strong> held by {occupied.occupierName}, {occupied.statePhrase}
           {detail && <span style={{ color: MUTED }}>; the population is {occupied.resistancePhrase}.</span>}
         </div>
       )}
@@ -249,8 +249,8 @@ export default function WarFaithSection({
       {holdings && (
         <div data-testid="occupation-holder" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
           <strong>Occupier:</strong> holds {holdings.holds.map(h => h.name).join(', ')}
-          {holdings.stretchedThin && <span style={{ color: RED }}> — stretched thin holding them</span>}
-          {!holdings.stretchedThin && holdings.strengthened && <span style={{ color: GREEN }}> — they now pay for themselves</span>}.
+          {holdings.stretchedThin && <span style={{ color: RED }}>, stretched thin holding them</span>}
+          {!holdings.stretchedThin && holdings.strengthened && <span style={{ color: GREEN }}>, they now pay for themselves</span>}.
         </div>
       )}
 
@@ -259,10 +259,10 @@ export default function WarFaithSection({
         <div key={`trade-tie-${i}`} data-testid="trade-pressure" style={{ fontSize: FS.sm, color: INK_BROWN, lineHeight: 1.5, margin: '0 0 5px' }}>
           <strong>Trade pressure:</strong>{' '}
           {tie.role === 'dependent'
-            ? `dependent on ${tie.partnerName} — ${tie.phrase}; losing it would bite hard`
+            ? `dependent on ${tie.partnerName}, ${tie.phrase}; losing it would bite hard`
             : tie.role === 'supplier'
-              ? `holds leverage over ${tie.partnerName} — ${tie.phrase} it relies on`
-              : `${tie.phrase} with ${tie.partnerName} — war between them would be costly`}.
+              ? `holds leverage over ${tie.partnerName}, ${tie.phrase} it relies on`
+              : `${tie.phrase} with ${tie.partnerName}. War between them would be costly`}.
         </div>
       ))}
 

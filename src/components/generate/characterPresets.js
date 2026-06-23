@@ -1,5 +1,5 @@
 /**
- * characterPresets.js — the 17 "Character" archetypes (UX overhaul Phase 6).
+ * characterPresets.js — the 17 "Character" archetypes.
  *
  * Extracted VERBATIM from ConfigurationPanel.jsx's in-file ARCHETYPES /
  * ARCHETYPE_GROUPS so the same data drives both the promoted top-level Character

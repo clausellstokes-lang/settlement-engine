@@ -21,7 +21,7 @@ export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
   ANNOTATE: 'annotate',
-  // P110 / M-4 — Routes mode: relationship-first overlay. Forces
+  // Routes mode: relationship-first overlay. Forces
   // RelationshipEdges + RoadsLayer + ChainEdges to full opacity,
   // hides annotate UI, surfaces a network-stress alert when the
   // supply-chain state has cascading impacts.
@@ -123,7 +123,7 @@ function freshMapState() {
 // The annotate/placement undo stack only needs the MUTABLE sub-slices — NOT the
 // heavy fmgSnapshot geography blob (often ~1MB+), the custom backdrop, layer
 // toggles, or the camera viewport. Snapshotting the whole mapState cloned that
-// blob on every label/marker/forest op (F6), and restoring it wrongly reverted
+// blob on every label/marker/forest op, and restoring it wrongly reverted
 // geography + camera on undo. We snapshot + restore only these keys.
 const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
 
@@ -177,7 +177,8 @@ export const createMapSlice = (set, get) => ({
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
   selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
   selectedAnnotationId: null,  // clicked label/marker/forest
-  // P136 / M-6 — quick-inspector hover state. Distinct from
+  selectedAnnotationKind: null,  // 'label' | 'marker' | 'forest' — which layer the id lives in
+  // Quick-inspector hover state. Distinct from
   // `selectedSettlementId` because selection is a deliberate click;
   // hover is a "peek" that doesn't commit. The QuickInspector
   // component subscribes to this and renders a 3-line card.
@@ -231,7 +232,7 @@ export const createMapSlice = (set, get) => ({
 
   clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
 
-  // P136 / M-6 — hover-peek mutations. Setting hoveredSettlementId
+  // Hover-peek mutations. Setting hoveredSettlementId
   // does not affect selection; the QuickInspector renders a tiny
   // floating card with name + pressure + top hook so the user can
   // peek a placement without committing to opening the full detail.
@@ -239,7 +240,15 @@ export const createMapSlice = (set, get) => ({
 
   clearHoveredSettlementId: () => set(state => { state.hoveredSettlementId = null; }),
 
-  setSelectedAnnotationId: (id) => set(state => { state.selectedAnnotationId = id; }),
+  // The calling layer (LabelsLayer / MarkersLayer / ForestsLayer) knows which
+  // kind it owns, so it passes `kind` alongside the id. That lets the Annotate
+  // toolbar's Delete fire the SINGLE correct deletion instead of firing both
+  // deleteLabel + deleteMarker blindly. HitLayer clears with no kind on a
+  // background click, nulling both.
+  setSelectedAnnotationId: (id, kind = null) => set(state => {
+    state.selectedAnnotationId = id;
+    state.selectedAnnotationKind = id ? kind : null;
+  }),
 
   setDraggingOver: (dragging) => set(state => { state.isDraggingOver = dragging; }),
 
@@ -501,6 +510,7 @@ export const createMapSlice = (set, get) => ({
     state.mapState = freshMapState();
     state.selectedBurgId = null;
     state.selectedAnnotationId = null;
+    state.selectedAnnotationKind = null;
     // Also clear settlement selection/hover — a campaign deselect left these
     // pointing at the now-gone settlement.
     state.selectedSettlementId = null;

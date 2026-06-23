@@ -1,0 +1,206 @@
+{
+  "//": [
+    "Supply-chain manifest for the vendored Fantasy-Map-Generator fork libraries.",
+    "These ~5.7 MB of third-party scripts ship to the SAME ORIGIN as the payment +",
+    "auth app, so a DOM-XSS or tampered build in any of them is reachable from the",
+    "production origin. Before this manifest they were a complete blind spot for the",
+    "gate (validate:map only parsed-checked the fork's own .js, skipping libs/).",
+    "",
+    "What this gives the gate (scripts/validate-map-fork.mjs verifies it):",
+    "  - integrity: each pinned file's sha256 + byteSize must match the bytes on",
+    "    disk, so a silent swap/tamper/upgrade fails CI and forces a conscious",
+    "    re-pin (re-run `node scripts/validate-map-fork.mjs --update-manifest`).",
+    "  - inventory: a named, versioned list of what we actually ship, so an audit",
+    "    against a CVE database has something concrete to diff.",
+    "  - advisory ledger: knownAdvisories records CVEs we are knowingly carrying",
+    "    (jQuery 3.1.1 especially) — visible debt, not a surprise.",
+    "",
+    "ACTION ITEMS (tracked, not yet done — out of scope for the gate wiring):",
+    "  - jquery 3.1.1 carries CVE-2019-11358 (prototype pollution), CVE-2020-11022",
+    "    and CVE-2020-11023 (jQuery.htmlPrefilter / DOM-XSS). Upgrade to >=3.5.0 or",
+    "    drop if the fork no longer needs it.",
+    "  - audit tinymce / dropbox-sdk versions against advisories; drop unused libs.",
+    "Only the identifiable top-level libraries are pinned (the tinymce skin/plugin",
+    "subtree is represented by its entry tinymce.min.js). Paths are relative to",
+    "public/map/libs/."
+  ],
+  "libs": [
+    {
+      "file": "alea.min.js",
+      "name": "alea",
+      "version": "unknown",
+      "byteSize": 1518,
+      "sha256": "4e59c20e94bb798cdc295d8c21e879e9d8879e88acdf1a7918bd899711bfd486",
+      "knownAdvisories": []
+    },
+    {
+      "file": "d3.min.js",
+      "name": "d3",
+      "version": "unknown",
+      "byteSize": 241983,
+      "sha256": "c6c1a88692697c89ba0887683072cc2114e8adedec0d1e69a05b7b09e5318c62",
+      "knownAdvisories": []
+    },
+    {
+      "file": "delaunator.min.js",
+      "name": "delaunator",
+      "version": "unknown",
+      "byteSize": 7787,
+      "sha256": "ddbdb0f66022e73eddfa5a6c283ba07a491a73670913bbfad52ab80572d72546",
+      "knownAdvisories": []
+    },
+    {
+      "file": "dropbox-sdk.min.js",
+      "name": "dropbox-sdk",
+      "version": "unknown",
+      "byteSize": 40598,
+      "sha256": "72c633281ea64a8b845c3a180a2dcfbb92437298eba2cf5f67b049a6a317567c",
+      "knownAdvisories": []
+    },
+    {
+      "file": "flatqueue.js",
+      "name": "flatqueue",
+      "version": "unknown",
+      "byteSize": 1692,
+      "sha256": "c41f52be6777b03c431f7556a03eef3aeb09f9690c5540a6239d34ac58deef8d",
+      "knownAdvisories": []
+    },
+    {
+      "file": "indexedDB.js",
+      "name": "indexedDB-shim",
+      "version": "unknown",
+      "byteSize": 1753,
+      "sha256": "84a8bb238d0875cffa21565d4d24c65d16ef810a93185c6516e104f4dd6a6022",
+      "knownAdvisories": []
+    },
+    {
+      "file": "jquery-3.1.1.min.js",
+      "name": "jquery",
+      "version": "3.1.1",
+      "byteSize": 86709,
+      "sha256": "85556761a8800d14ced8fcd41a6b8b26bf012d44a318866c0d81a62092efd9bf",
+      "knownAdvisories": [
+        "CVE-2019-11358",
+        "CVE-2020-11022",
+        "CVE-2020-11023"
+      ]
+    },
+    {
+      "file": "jquery-ui.min.js",
+      "name": "jquery-ui",
+      "version": "unknown",
+      "byteSize": 108235,
+      "sha256": "e3c94d490e28935f03780cf9fef4912beac4621b5c71b254841f10089ce763aa",
+      "knownAdvisories": [
+        "CVE-2021-41182",
+        "CVE-2021-41183",
+        "CVE-2021-41184",
+        "CVE-2022-31160"
+      ]
+    },
+    {
+      "file": "jquery.ui.touch-punch.min.js",
+      "name": "jquery-ui-touch-punch",
+      "version": "unknown",
+      "byteSize": 1291,
+      "sha256": "000854d782781aff1b16ea5451c1da3d07efadd35ab911ccb7e4b851571a25bd",
+      "knownAdvisories": []
+    },
+    {
+      "file": "jszip.min.js",
+      "name": "jszip",
+      "version": "unknown",
+      "byteSize": 99112,
+      "sha256": "301f962999873267b605154aa43b886dfb3a56549d508018d55ae852613ea7c8",
+      "knownAdvisories": []
+    },
+    {
+      "file": "loopsubdivison.min.js",
+      "name": "loop-subdivision",
+      "version": "unknown",
+      "byteSize": 22387,
+      "sha256": "f4446f9b3b59c1aaad368f6008f43f3af957a8b4fa35239e67bd83dc84624dc8",
+      "knownAdvisories": []
+    },
+    {
+      "file": "mapControls.min.js",
+      "name": "map-controls",
+      "version": "unknown",
+      "byteSize": 10821,
+      "sha256": "7afc1cd58322a6888368ebdcf9dc8c8ca4e1ccef76870b2a64f556ad81319d35",
+      "knownAdvisories": []
+    },
+    {
+      "file": "objexporter.min.js",
+      "name": "three-OBJExporter",
+      "version": "unknown",
+      "byteSize": 3701,
+      "sha256": "3b879583512f74c78bf1534a429ad98be3a42fb320f2915f80b3a8d3dfc272de",
+      "knownAdvisories": []
+    },
+    {
+      "file": "openwidget.min.js",
+      "name": "openwidget",
+      "version": "unknown",
+      "byteSize": 829,
+      "sha256": "8bd9aa6de58245a7af9ee255a2fd483ed19b88043a000fd58771901f8297920c",
+      "knownAdvisories": []
+    },
+    {
+      "file": "orbitControls.min.js",
+      "name": "three-OrbitControls",
+      "version": "unknown",
+      "byteSize": 10860,
+      "sha256": "93ead01096e33e9dd08a672a3ed6075a61c592b0e4498b28b7e3e3a06f174cd9",
+      "knownAdvisories": []
+    },
+    {
+      "file": "polylabel.min.js",
+      "name": "polylabel",
+      "version": "unknown",
+      "byteSize": 3085,
+      "sha256": "940d1f19c29275c2a9d0121cef4ae63c924910ecfa992865f1826e072bbb228e",
+      "knownAdvisories": []
+    },
+    {
+      "file": "rgbquant.min.js",
+      "name": "rgbquant",
+      "version": "unknown",
+      "byteSize": 9834,
+      "sha256": "557e7e62d0e3fa418a751856db4cb62259a82c4111a59ed60b21a09f3b2665a2",
+      "knownAdvisories": []
+    },
+    {
+      "file": "simplify.js",
+      "name": "simplify-js",
+      "version": "unknown",
+      "byteSize": 2623,
+      "sha256": "2580cc237dfdc2121720839b40d3e665c934dea4974e3f0c7af451e209be1ce4",
+      "knownAdvisories": []
+    },
+    {
+      "file": "three.min.js",
+      "name": "three",
+      "version": "unknown",
+      "byteSize": 623573,
+      "sha256": "941d19bade0319f8d4ce1fa82fb4070aa1f10162d206e854e37e2cd60e4b407c",
+      "knownAdvisories": []
+    },
+    {
+      "file": "umami.js",
+      "name": "umami",
+      "version": "unknown",
+      "byteSize": 1055,
+      "sha256": "7ec0d40374c0950451d20b487b7c088c9412c1af23b285853b4ea684c33c4f8d",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/tinymce.min.js",
+      "name": "tinymce",
+      "version": "unknown",
+      "byteSize": 763211,
+      "sha256": "bf155b725496ab2f919fe5953a85be529602faa91bff8f7fb7cd6e0553e7681a",
+      "knownAdvisories": []
+    }
+  ]
+}

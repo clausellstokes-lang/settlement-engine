@@ -14,13 +14,13 @@ import { evaluateReligiousContest } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
-import { addRegionalChannels } from '../region/graph.js';
+import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
-import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
+import { ensureNpcStates, pruneNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import {
   advanceFactionCapture, settlementCaptureState,
@@ -132,7 +132,7 @@ function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.name || 'unknown');
 }
 
-// Phase B1 — the upward pressure to mobilize: a settlement RAMPS its war posture
+// The upward pressure to mobilize: a settlement RAMPS its war posture
 // when it faces a hostile-axis neighbour (rival / cold_war / hostile). Returns a
 // memoized `(id) => boolean` over the pre-tick edges + relationshipStates. Pure,
 // codepoint-stable (the result is a set membership test, order-free).
@@ -209,29 +209,34 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // it; rivals[] keeps pointing at it). Prune states absent from the roster
   // for FACTION_STATE_PRUNE_GRACE_TICKS, preserving live capture arcs.
   worldState = pruneFactionStates(worldState, snapshot, { tick: worldState.tick });
+  // Same ghost hygiene for NPC states: an NPC that leaves the roster (death,
+  // ouster, rename) otherwise strands its state forever. Runs after
+  // ensureNpcStates so freshly-ensured live NPCs are never pruned, and before
+  // the corruption/seating passes.
+  worldState = pruneNpcStates(worldState, snapshot, { tick: worldState.tick });
   // Mean-reversion: relax momentum / heat / resentment toward baseline each
   // tick so quiet periods cool the world down instead of ratcheting it up.
   worldState = relaxNpcStates(worldState);
   worldState = relaxRelationshipStates(worldState);
   worldState = relaxFactionStates(worldState);
-  // §corruption Phase 1b — per-tick onset + organic exposure over npcStates.
+  // Per-tick corruption onset + organic exposure over npcStates.
   // Clean eligible NPCs turn under crime pressure; corrupt NPCs are exposed
   // (demoted / ousted) by security + prosperity. Exposure events name the tied
-  // criminal + home institutions for the impairment pass (1b-ii).
-  // §corruption Phase 3 — thieves-guild strength from LAST tick's captured
-  // factions; it drags effective security down inside this tick's onset /
+  // criminal + home institutions for the institution-impairment pass.
+  // Thieves-guild strength from LAST tick's captured
+  // factions drags effective security down inside this tick's onset /
   // exposure / capture rolls (the feedback loop), bounded so it never runs away.
   let guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
-  // Feature D (R3): the religion layer is ACTIVE for the deity→corruption effects
-  // only when BOTH the opt-in flag AND the F2 activation gate hold (≥1 settlement
-  // carries an embedded config.primaryDeitySnapshot). false ⇒ the corruption /
+  // The religion layer is ACTIVE for the deity→corruption effects only when BOTH
+  // the opt-in flag AND the activation gate hold (≥1 settlement carries an
+  // embedded config.primaryDeitySnapshot). false ⇒ the corruption /
   // capture gates are unrelaxed and deityDisfavor is 1.0 ⇒ byte-identical legacy.
   const religionActive = simulationRules.religionDynamicsEnabled && isSubsystemActive(snapshot, 'religion');
   const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy, religionActive });
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
-  // §corruption Phase 2 — faction capture: corrupt seat-holders pull their
+  // Faction capture: corrupt seat-holders pull their
   // faction up the criminalCaptureState ladder (faster the higher the seat);
   // clean factions recede toward 'none'. Runs after seating so seats are current.
   const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick, guildStrengthBy, religionActive });
@@ -282,7 +287,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // FOOD_IMPORT_RATES), and a campaign-emergent famine cuts production —
     // blockades and crop failures both literally eat the stores.
     const blockade = blockadeFor(worldState.stressors, item.id);
-    // Z1 — a settlement with an active OUTBOUND deployment feeds its army from the
+    // A settlement with an active OUTBOUND deployment feeds its army from the
     // home granary. Read the one-army ledger (keyed by home save id) ONLY when the
     // war layer is on; a no-war campaign passes deployment:null ⇒ byte-identical.
     const deployment = simulationRules.warLayerEnabled
@@ -321,17 +326,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     recordGraduationsIntoHistory(localSettlements, agedStressors.graduated, worldState.tick);
   }
 
-  // §corruption Phase 1b-ii — mirror tick-evolved corruption back onto each
-  // settlement's NPCs (so the dossier reflects corruption gained/shed during
-  // ticks) and apply the scandal impairment from any exposures this tick to the
-  // tied criminal + home institution/faction. Flows through settlementMap →
-  // settlementUpdates → persistence. (Replacement NPC lands in 1b-ii-c.)
+  // Mirror tick-evolved corruption back onto each settlement's NPCs (so the
+  // dossier reflects corruption gained/shed during ticks) and apply the scandal
+  // impairment from any exposures this tick to the tied criminal + home
+  // institution/faction. Flows through settlementMap →
+  // settlementUpdates → persistence. (The replacement NPC is seeded further below.)
   const reformEvents = [];
   for (const sid of [...localSettlements.keys()]) {
     let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
     const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
     if (exps.length) s = applyCorruptionImpairments(s, exps, { now });
-    // §corruption duality — organic reform: a corruption-impaired institution
+    // Organic reform: a corruption-impaired institution
     // whose corrupt insiders are gone gets a security-scaled chance to clean
     // house, lifting the patronage drag and the proximity penalty. Runs
     // BEFORE this tick's impairments would matter (next tick reads them).
@@ -342,7 +347,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         reformEvents.push({ settlementId: String(sid), name: r.name, kind: 'institution_reformed', criminalInstitution: null, homeInstitution: r.name });
       }
     }
-    // §corruption duality — an OUSTING is a public scandal: it enters the
+    // An OUSTING is a public scandal: it enters the
     // causal loop as a corruption_exposed condition (ruling_authority and
     // legitimacy take the hit), not just a status annotation.
     const oustedExps = exps.filter((e) => e.kind === 'ousted');
@@ -354,32 +359,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         causes: oustedExps.map((e) => ({ source: e.npcId, effect: 'corruption_scandal', reason: `${e.name} was publicly ousted for corruption.` })),
       });
     }
-    // §corruption Phase 2 — roll the worst faction capture up to the settlement's
+    // Roll the worst faction capture up to the settlement's
     // criminalCaptureState (which npcStructure + the dossier already read).
     const cap = settlementCaptureState(worldState.factionStates, sid);
     if (s.powerStructure && s.powerStructure.criminalCaptureState !== cap) {
       s = { ...s, powerStructure: { ...s.powerStructure, criminalCaptureState: cap } };
     }
-    // §corruption Phase 3 — floor the criminal faction's power + hard-cap its
+    // Floor the criminal faction's power + hard-cap its
     // legitimacy from the guild's strength, and stamp thievesGuildStrength.
     const gStrength = guildStrengthBy.get(String(sid));
     if (gStrength) s = applyGuildToSettlement(s, gStrength);
-    // §corruption Phase 1b-ii-c — an ousted NPC is replaced by a fresh successor
+    // An ousted NPC is replaced by a fresh successor
     // who inherits their seat in the faction/power.
     const oustedNames = exps.filter((e) => e.kind === 'ousted').map((e) => e.name);
     if (oustedNames.length) s = replaceOustedNpcs(s, oustedNames, rng.fork(`replace:${sid}:${worldState.tick}`));
     localSettlements.set(sid, s);
   }
 
-  // Wave 7 #3 — a faction crossing into/out of full 'capture' is permanent
-  // settlement history (the record historyBeats reads), like a stressor echo
-  // graduating. The Wizard-News side of the same transitions lands below with
-  // the aftermath entries.
+  // A faction crossing into/out of full 'capture' is permanent settlement
+  // history (the record historyBeats reads), like a stressor echo graduating.
+  // The Wizard-News side of the same transitions lands below with the aftermath
+  // entries.
   if (factionCapture.transitions.length) {
     recordCaptureTransitionsIntoHistory(localSettlements, factionCapture.transitions, worldState.tick);
   }
 
-  // §corruption 1b-ii-c — prune the npcStates of ousted-and-replaced NPCs so the
+  // Prune the npcStates of ousted-and-replaced NPCs so the
   // phantom doesn't keep holding a faction seat after its settlement NPC is gone.
   const oustedIds = new Set((corruption.exposures || []).filter((e) => e.kind === 'ousted').map((e) => e.npcId));
   if (oustedIds.size) {
@@ -396,7 +401,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   const postTimeCampaign = { ...campaign, worldState, regionalGraph: snapshot.regionalGraph };
   let postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
-  // Phase B1 — WAR-ECONOMY MOBILIZATION POSTURE. Runs FIRST inside the gated war
+  // WAR-ECONOMY MOBILIZATION POSTURE. Runs FIRST inside the gated war
   // block (so the war layer's deploy gate reads THIS tick's posture): the per-
   // settlement posture state machine ramps peace→…→mobilized, gated on disposition/
   // economy/legitimacy, and cools under strain. A settlement must reach a war-ready
@@ -439,7 +444,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       postTimeSnapshot = buildWorldSnapshot({ campaign: postureCampaign, saves: postTimeSaves, worldState });
     }
   }
-  // Feature A (war/deployment) — GATED behind simulationRules.warLayerEnabled
+  // The war/deployment layer — GATED behind simulationRules.warLayerEnabled
   // (default false ⇒ pure no-op ⇒ byte-identical legacy). Reads the SINGLE pre-tick
   // postTimeSnapshot: resolves coalition sieges (a fallen target → a conquest
   // power_transfer), opens new sieges (a war-ready, confident attacker whose CURRENT-
@@ -460,13 +465,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   let warReturnOutcomes = [];
   let tradeWarOutcomes = [];
-  // Phase B3 — occupation-layer outcomes (occupation_resistance / occupation_burden /
+  // Occupation-layer outcomes (occupation_resistance / occupation_burden /
   // war_spoils / vassalization). Empty unless the war layer is ON and an occupation
   // exists — so the conditional `occupations` ledger never materializes and the apply
   // set is byte-identical on the OFF path / a campaign with no conquests.
   /** @type {any[]} */
   let occupationOutcomes = [];
-  // Feature C (C1) write-side accumulator: the id-stable win/loss deltas from the
+  // Disposition write-side accumulator: the id-stable win/loss deltas from the
   // contests resolved this tick (siege conquests + trade-war flips). Empty unless
   // the war layer is ON and something actually resolved — so the post-apply fold
   // is byte-neutral (applyDispositionDeltas returns the input ledger on []) on the
@@ -474,15 +479,27 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   /** @type {any[]} */
   let pendingDispositionDeltas = [];
   if (simulationRules.warLayerEnabled) {
-    // Persist the updated one-army ledger so it survives to the next tick. The Z2a
+    // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
     worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
     // Land the war_front directed mints on the graph BEFORE candidate generation and
     // the apply pass, then rebuild the snapshot so downstream reads see the new front.
-    if (war.graphChannels.length) {
-      const mintedGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, war.graphChannels, { now });
-      const mintedCampaign = { ...campaign, worldState, regionalGraph: mintedGraph };
+    // ALSO retire any war_front channels whose siege resolved this tick (conquest or
+    // withdrawal): evaluateWarLayer reports them in war.retiredChannels. Dropping them
+    // to 'dormant' is what stops a resolved siege from being re-discovered — and
+    // re-conquered — every subsequent tick. Retirements must apply even when no new
+    // fronts were minted (a siege can resolve on a tick that opens no new front).
+    const retiredChannels = war.retiredChannels || [];
+    if (war.graphChannels.length || retiredChannels.length) {
+      let warGraph = postTimeSnapshot.regionalGraph;
+      if (war.graphChannels.length) {
+        warGraph = addRegionalChannels(warGraph, war.graphChannels, { now });
+      }
+      for (const channelId of retiredChannels) {
+        warGraph = setRegionalChannelStatus(warGraph, channelId, 'dormant', { now });
+      }
+      const mintedCampaign = { ...campaign, worldState, regionalGraph: warGraph };
       postTimeSnapshot = buildWorldSnapshot({ campaign: mintedCampaign, saves: postTimeSaves, worldState });
     }
     // Contextual returns read the POST-mint graph (so "is my home besieged?" is
@@ -495,12 +512,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
     });
 
-    // Feature B (trade war) — A2. The per-commodity primary-supplier contest
-    // composes with A1 inside the SAME gated block: a flip re-points C's primary
+    // The trade-war layer. The per-commodity primary-supplier contest composes
+    // with the war layer inside the SAME gated block: a flip re-points C's primary
     // trade_dependency channel and (confidence-gated) either winds the defeated
-    // incumbent down or escalates to a war_front the A1 layer picks up next tick.
-    // Reads the SAME post-mint snapshot (so A1's fresh fronts are visible) and
-    // persists its per-prize cooldown ledger onto worldState.tradeWarState.
+    // incumbent down or escalates to a war_front the war layer picks up next tick.
+    // Reads the SAME post-mint snapshot (so the war layer's fresh fronts are
+    // visible) and persists its per-prize cooldown ledger onto worldState.tradeWarState.
     const tradeWar = evaluateTradeWar({
       snapshot: postTimeSnapshot,
       worldState,
@@ -516,7 +533,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       const realignedCampaign = { ...campaign, worldState, regionalGraph: realignedGraph };
       postTimeSnapshot = buildWorldSnapshot({ campaign: realignedCampaign, saves: postTimeSaves, worldState });
     }
-    // Phase B3 — the OCCUPATION layer. A successful conquest (war.outcomes, cause:
+    // The OCCUPATION layer. A successful conquest (war.outcomes, cause:
     // 'conquest') seeds a `contested` occupation; a deployment-return liberation
     // (warReturnOutcomes, occupation_lifted/siege_lifted) drops one. The state machine
     // then advances each occupation toward stabilization (hysteresis dwell + single-rung
@@ -546,17 +563,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       const { occupations: _drop, ...rest } = worldState;
       worldState = rest;
     }
-    // C1 write-side: gather this tick's resolved-contest win/loss deltas (H16-
-    // attributed at the resolver). Folded into next-tick dispositionStats below,
+    // Disposition write-side: gather this tick's resolved-contest win/loss deltas
+    // (attributed at the resolver). Folded into next-tick dispositionStats below,
     // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline. The occupation
     // layer contributes its own consolidation-win / liberation-loss deltas (deterministic,
     // id-stable) alongside the war/trade contests.
     pendingDispositionDeltas = [...collectDispositionDeltas(war, tradeWar), ...occupation.dispositionDeltas];
   }
-  // Feature D (R2) — religion dynamics: the deity contest + conversion spread +
+  // Religion dynamics: the deity contest + conversion spread +
   // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
   // block: it acts ONLY when BOTH the opt-in flag religionDynamicsEnabled AND the
-  // F2 activation gate (≥1 settlement carries config.primaryDeitySnapshot) hold.
+  // activation gate (≥1 settlement carries config.primaryDeitySnapshot) hold.
   // Either false ⇒ pure no-op (no mints, no contests, no conversions) ⇒
   // byte-identical legacy. A no-deity campaign is unchanged even with the flag on
   // (the evaluator short-circuits on the activation gate before any fork/mint).
@@ -567,7 +584,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // religious_conversion_fracture stressor for the deity-driven spread) into the
   // deterministic apply set.
   let religiousOutcomes = [];
-  // R4 pantheon write-side accumulator: the per-deity win/loss deltas from this
+  // Pantheon write-side accumulator: the per-deity win/loss deltas from this
   // tick's resolved conversions + the PRE-conversion snapshot seats are aggregated
   // from. Both are captured here (inside the religion block) so the post-apply
   // ratchet below sees PRE-TICK deity assignments (no intra-tick read-after-write).
@@ -625,12 +642,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     interval: tickInterval,
     simulationRules,
   });
-  // Feature C: read LAST-TICK disposition memory into per-settlement multipliers
+  // Read LAST-TICK disposition memory into per-settlement multipliers
   // (centered on 1.0). The next-tick WRITE (ratchet from this tick's resolved
   // contests) lands post-apply below.
-  //   • Layer OFF — the F4 history-only path: empty ledger ⇒ empty map ⇒ every
+  //   • Layer OFF — the history-only path: empty ledger ⇒ empty map ⇒ every
   //     candidate factor is 1.0 ⇒ BYTE-IDENTICAL legacy. We compute NO baseline.
-  //   • Layer ON — the C1 live path: blend computeAggressiveness (govBaseline +
+  //   • Layer ON — the live path: blend computeAggressiveness (govBaseline +
   //     authored NPC personality + ratcheted history) per settlement. A
   //     no-signal settlement is omitted ⇒ still 1.0 (`{}`-equivalent). This map
   //     SUPERSEDES dispositionFactorMap (history is folded in via
@@ -638,11 +655,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const dispositionFactor = simulationRules.warLayerEnabled
     ? computeDispositionFactorMap(postTimeSnapshot, worldState)
     : dispositionFactorMap(worldState.dispositionStats);
-  // Phase B4 — STRATEGIC TRADE → REDUCED HOSTILITY. Compute the per-edge trade-
+  // STRATEGIC TRADE → REDUCED HOSTILITY. Compute the per-edge trade-
   // salience map (a centered-on-1.0 factor that DAMPENS hostile/escalation
   // candidates when a VALUABLE trade tie exists) ONLY under the war layer — off ⇒
   // empty map ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy. The
-  // `salience` rollup feeds the §6 coercion/embargo cross-cutting rule. Reads the
+  // `salience` rollup feeds the coercion/embargo cross-cutting rule. Reads the
   // post-mint snapshot (so this tick's trade realignments are visible) and the
   // pre-tick worldState (tradeWarState recency, relationship primaries).
   const tradeSalienceResult = simulationRules.warLayerEnabled
@@ -657,7 +674,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     dispositionFactor,
     tradeSalienceFactor: tradeSalienceResult.factors,
     tradeSalienceInfo: tradeSalienceResult.salience,
-    // C2: thread a stable fork to the settlement strategy chooser (the ONLY
+    // Thread a stable fork to the settlement strategy chooser (the ONLY
     // candidate rule that samples). Forked from the master pulse rng on a constant
     // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
     // is order-free. The chooser short-circuits before touching it when OFF.
@@ -706,7 +723,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
   let memoryState = applied.worldState;
-  // Feature C (C1) write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
+  // Disposition write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
   // resolved-contest win/loss deltas into NEXT-tick dispositionStats. The deltas
   // were READ from contests that resolved THIS tick; the ledger they produce is
   // first READ at candidate-build NEXT tick — never mid-tick. applyDispositionDeltas
@@ -718,11 +735,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       dispositionStats: applyDispositionDeltas(memoryState.dispositionStats, pendingDispositionDeltas),
     };
   }
-  // Phase B4 — the SECONDARY-STATUS OVERLAY (B0 compatibility-enforced). Trade
+  // The SECONDARY-STATUS OVERLAY (compatibility-enforced). Trade
   // ties create/reinforce LAYERED secondary statuses (critical/preferred/military
   // supplier; smuggling for a battlefield primary) on each edge, OVER the primary
   // `relationshipType` (never replacing it). Derived from the post-apply primaries
-  // + this tick's salience ties, every status run through the B0 isCompatible gate
+  // + this tick's salience ties, every status run through the isCompatible gate
   // so a hostile primary cannot carry normal commerce. ONLY under the war layer ⇒
   // a legacy campaign never gains a `secondaryStatuses` key (byte-neutral under the
   // dormancy oracle). Anti-oscillation: an edge whose status set is unchanged keeps
@@ -753,7 +770,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     if (overlayChanged) memoryState = { ...memoryState, relationshipStates: nextStates };
   }
-  // R4 pantheon — the READ-LAST/WRITE-NEXT pantheon ratchet, post-apply, mirroring
+  // The READ-LAST/WRITE-NEXT pantheon ratchet, post-apply, mirroring
   // the dispositionStats seam directly above. ONLY when religion is active this tick
   // (the CONDITIONAL materialization: a dormant world never gains a pantheon key, so
   // a deity-free campaign stays byte-identical under the dormancy oracle). The
@@ -777,7 +794,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       pantheonTierChanges = advanced.changes;
     }
   }
-  // Wave 7 #2 — the dossier stops lying: project the per-faction live state
+  // The dossier stops lying: project the per-faction live state
   // (capture rung, momentum band, rivals, institution control) onto each
   // settlement's powerStructure.factions. Seam choice: HERE, after
   // applyWorldPulseOutcomes, not inside applyWorldPulse — the projection must
@@ -848,13 +865,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     worldState: memoryState,
     tick: worldState.tick,
     now,
-    // §S4 — the post-apply regional graph carries this tick's war_front mints, so
+    // The post-apply regional graph carries this tick's war_front mints, so
     // a coalition siege names its instigators + supporters and "The War" counts the
     // belligerents, not just the besieged victim. Absent ⇒ legacy victim-count.
     regionalGraph: applied.regionalGraph,
   })
     .filter(isFreshArcEntry);
-  // R4 pantheon realm arcs: a deity crossing into 'major' ("The Ascendancy of X")
+  // Pantheon realm arcs: a deity crossing into 'major' ("The Ascendancy of X")
   // or falling to 'cult' ("The Twilight of X"). Derived from this tick's tier
   // CHANGES (fires once, on the crossing) — empty unless religion is active and a
   // tier actually flipped this tick. Names resolved off the pre-tick snapshot.
@@ -868,7 +885,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     ...aftermathNewsEntries(agedStressors.resolved, worldState.tick, now),
     ...graduationNewsEntries(agedStressors.graduated || [], worldState.tick, now),
   ];
-  // Wave 7 #3 — capture transitions reach the DM: the factionCaptureEvents
+  // Capture transitions reach the DM: the factionCaptureEvents
   // pulseRecord rollup above was consumed by nobody, so a faction falling to
   // (or breaking from) the underworld never surfaced in the Chronicle.
   const settlementNameFor = (id) => {

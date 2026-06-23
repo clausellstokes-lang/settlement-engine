@@ -30,6 +30,7 @@ import {
   settlementWarExhaustion,
   warExhaustionBand,
   dispositionStandings,
+  activeDeployments,
 } from '../../domain/display/warStatus.js';
 import { computeAggressiveness } from '../../domain/worldPulse/disposition.js';
 import { deriveSystemState } from '../../domain/state/deriveSystemState.js';
@@ -38,11 +39,13 @@ import { BAND_COLOR } from '../../domain/state/bands.js';
 // Alignment glyph + color for the faith pip. The deity snapshot carries
 // `alignmentAxis` (good|evil|neutral) — we color the pip by it, matching the
 // dossier's Faith Effects palette intent (good leans green, evil red, neutral
-// gold). NEVER reads a legacy `tier`/`alignment` field.
+// gold). NEVER reads a legacy `tier`/`alignment` field. The neutral hue reuses
+// the already-AA-vetted Strained band step (#8a5e10, 5.52:1 on card cream); the
+// stale #a0762a copy was the same value the bands migrated AWAY from (3.98:1).
 const ALIGNMENT_STYLE = Object.freeze({
-  good:    { color: '#1a5a28', glyph: '☼' },
-  evil:    { color: '#8b1a1a', glyph: '☽' },
-  neutral: { color: '#a0762a', glyph: '✦' },
+  good:    { color: BAND_COLOR.Stable,   glyph: '☼' },   // #1a5a28
+  evil:    { color: BAND_COLOR.Critical, glyph: '☽' },   // #8b1a1a
+  neutral: { color: BAND_COLOR.Strained, glyph: '✦' },   // #8a5e10 (AA-vetted)
 });
 
 /** The bands that mean "this settlement needs a DM's attention". Resilience is
@@ -100,7 +103,7 @@ export function healthPip(settlement) {
   if (!worst) return null;
   return {
     band: worst.band,
-    color: BAND_COLOR[worst.band] || '#a0762a',
+    color: BAND_COLOR[worst.band] || BAND_COLOR.Strained,
     severity: worst.rank,
     label: worst.band,
   };
@@ -142,10 +145,13 @@ export function faithPip(settlement) {
  */
 export function aggressionChip(mult) {
   if (!Number.isFinite(mult) || mult === 1.0) return null;
-  if (mult > 1.18) return { label: 'Belligerent', color: '#8b1a1a' };
-  if (mult > 1.04) return { label: 'Aggressive', color: '#a0762a' };
-  if (mult < 0.82) return { label: 'Pacifist', color: '#1a5a28' };
-  if (mult < 0.96) return { label: 'Cautious', color: '#1a4a2a' };
+  // Hues reuse the AA-vetted band steps: belligerent/aggressive lean the war
+  // reds/aged-gold (the 'Aggressive' gold was a stale 3.98:1 #a0762a copy →
+  // Strained's 5.52:1 step), pacifist/cautious lean the Stable green.
+  if (mult > 1.18) return { label: 'Belligerent', color: BAND_COLOR.Critical };  // #8b1a1a
+  if (mult > 1.04) return { label: 'Aggressive', color: BAND_COLOR.Strained };   // #8a5e10 (AA-vetted)
+  if (mult < 0.82) return { label: 'Pacifist', color: BAND_COLOR.Stable };       // #1a5a28
+  if (mult < 0.96) return { label: 'Cautious', color: BAND_COLOR.Stable };       // #1a5a28
   return null; // inside the even-handed dead-band ⇒ no chip
 }
 
@@ -186,6 +192,23 @@ export function settlementSignals({ settlement, settlementId, worldState = null,
   const war = status
     ? { besiegedBy: status.besiegedBy, besiegingTargets: status.besiegingTargets, occupied }
     : null;
+
+  // ── Change signal (P3: emphasize movement, not static state) ──────────────
+  // A FRESH war out-shouts a long-standing one. The only delta with a real data
+  // source on a Library card is siege ONSET freshness: a deployment targeting
+  // (or launched by) this settlement whose `sinceTick` equals the world's
+  // current tick is brand-new THIS tick. We expose `war.fresh` so the row can
+  // mark a just-declared siege. Per-meter numeric deltas (food -2) have no
+  // prior-tick snapshot in the save model and are deferred to the dossier.
+  const currentTick = Number.isFinite(worldState?.tick) ? worldState.tick : null;
+  let warFresh = false;
+  if (war && currentTick != null && id && worldState) {
+    const onsets = activeDeployments(worldState)
+      .filter(d => d.targetId === id || d.homeId === id)
+      .map(d => d.sinceTick);
+    warFresh = onsets.length > 0 && Math.max(...onsets) >= currentTick;
+  }
+  if (war) war.fresh = warFresh;
 
   const exhaustionRaw = id && worldState
     ? settlementWarExhaustion({ settlementId: id, worldState })

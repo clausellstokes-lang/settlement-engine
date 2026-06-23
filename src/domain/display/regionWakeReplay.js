@@ -1,6 +1,5 @@
 /**
- * domain/display/regionWakeReplay.js — the canned "Watch a region wake up" replay
- * (UX Phase 9, plan §4.7 / §3.3).
+ * domain/display/regionWakeReplay.js — the canned "Watch a region wake up" replay.
  *
  * A READ-ONLY, deterministic, PRE-BAKED four-step sequence that lets a no-account
  * visitor SEE the premium living simulation without running it. The sequence is

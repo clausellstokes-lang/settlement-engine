@@ -12,8 +12,8 @@
  *   structural: the change altered something the narrative reasons ABOUT
  *               (institutions added/removed, stressors, goods, priorities).
  *               Search-and-replace can't fix it — the UI prompts the user
- *               to Regenerate or Revert to Raw. Progress (evolve existing
- *               narrative with the diff) lands in AI-4.
+ *               to Regenerate or Revert to Raw. Progression evolves the
+ *               existing narrative against the diff.
  *
  *   seismic:    fundamental identity change (tier, culture, government).
  *               The narrative's premise no longer holds. Same UX as

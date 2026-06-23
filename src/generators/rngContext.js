@@ -14,14 +14,31 @@
 
 let _activeRng = null;
 
-/** Set the active PRNG (called by pipeline runner before each step). */
+/**
+ * Set the active PRNG (called by pipeline runner before each step) and RETURN
+ * the PRNG that was active before. Save/restore stack: a caller that wraps a
+ * nested generation can capture this and hand it to clearActiveRng() to restore
+ * the outer RNG instead of wiping it to null. Today generation is synchronous,
+ * single-threaded and never nested, so the previous value is always null and the
+ * behaviour is unchanged — this just makes future nested/batch/worker generation
+ * safe from an inner clear silently dropping draws to the Math.random() fallback.
+ * @param {*} rng
+ * @returns {*} the previously-active PRNG (or null)
+ */
 export function setActiveRng(rng) {
+  const prev = _activeRng;
   _activeRng = rng;
+  return prev;
 }
 
-/** Clear the active PRNG (called after pipeline completes). */
-export function clearActiveRng() {
-  _activeRng = null;
+/**
+ * Restore the active PRNG. Pass the value returned by the paired setActiveRng()
+ * to restore the outer RNG; called with no argument it clears to null (the
+ * existing "pipeline finished" behaviour).
+ * @param {*} [prev]
+ */
+export function clearActiveRng(prev = null) {
+  _activeRng = prev;
 }
 
 /** Get the active PRNG or null. */

@@ -8,7 +8,8 @@
  */
 
 import { Suspense, lazy } from 'react';
-import { sans, FS, R, swatch } from '../theme.js';
+import { sans, FS, R, ELEV, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
@@ -23,6 +24,10 @@ export function WorldMapOverlays({
   mapSaveConfirm,
   setMapSaveConfirm,
   performSaveMap,
+  advanceConfirm,
+  advanceBody,
+  performAdvanceRealm,
+  setAdvanceConfirm,
   showSimulationRules,
   activeCampaign,
   setShowSimulationRules,
@@ -31,17 +36,35 @@ export function WorldMapOverlays({
 }) {
   return (
     <>
-      {/* Toast */}
+      {/* Toast — an optional `action` renders a recovery CTA (P10) so an error
+          (e.g. "canonize first") offers a reachable next step, not a dead-end. */}
       {toast && (
         <div style={{
           position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
-          background: toast.kind === 'error' ? '#8a2a2a' : toast.kind === 'info' ? '#3a4a5a' : '#1a5a28',
+          background: toast.kind === 'error' ? swatch['#8A2A2A'] : toast.kind === 'info' ? swatch.info : swatch.success,
           color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-          boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
+          boxShadow: ELEV[2],
           zIndex: 100,
         }}>
-          {toast.text}
+          <span>{toast.text}</span>
+          {toast.action && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toast.action.onClick}
+              style={{
+                flexShrink: 0,
+                background: 'rgba(255,255,255,0.16)', color: swatch.white,
+                border: '1px solid rgba(255,255,255,0.4)', borderRadius: R.sm,
+                padding: '4px 10px', fontSize: FS.xs, fontWeight: 800,
+                minHeight: undefined,
+              }}
+            >
+              {toast.action.label}
+            </Button>
+          )}
         </div>
       )}
 
@@ -53,6 +76,15 @@ export function WorldMapOverlays({
         confirmLabel="Regenerate"
         onConfirm={performRegenerate}
         onCancel={() => setRegenerateConfirm(null)}
+      />
+
+      <ConfirmDialog
+        open={!!advanceConfirm}
+        title="Advance the realm?"
+        body={advanceBody || ''}
+        confirmLabel="Advance Realm"
+        onConfirm={performAdvanceRealm}
+        onCancel={() => setAdvanceConfirm(false)}
       />
 
       <ConfirmDialog

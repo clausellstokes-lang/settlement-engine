@@ -22,15 +22,12 @@
  * isElevated). The real authority is server-side; this gate is UX, not security.
  */
 import { useCallback, useState } from 'react';
-import {
-  Search, RefreshCw, Eye, AlertTriangle, StickyNote, Coins, CreditCard,
-  Ban, Power, Trash2, Link2, FileDown, Mail, ShieldCheck,
-} from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
+import Stat from '../primitives/Stat.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
-  INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, RED, GREEN,
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN,
   sans, serif_, SP, R, FS, swatch,
 } from '../theme.js';
 
@@ -42,17 +39,28 @@ async function callAdmin(body) {
   return data;
 }
 
-function Stat({ label, value }) {
-  return (
-    <div style={{ minWidth: 78 }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans }}>
-        {value == null ? '—' : String(value)}
-      </div>
-      <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        {label}
-      </div>
-    </div>
-  );
+/**
+ * Deliver a diagnostic bundle as a downloaded JSON file. Guards the DOM/Blob
+ * APIs so a non-browser environment (or a stubbed test) doesn't throw. Returns
+ * the filename used so callers can surface it. Mirrors downloadAccountExport.
+ */
+function downloadBundle(bundle, userId, full) {
+  const json = JSON.stringify(bundle ?? {}, null, 2);
+  const stamp = new Date().toISOString().slice(0, 10);
+  const variant = full ? 'full-debug' : 'diagnostic';
+  const filename = `${variant}-${(userId || 'user').slice(0, 8)}-${stamp}.json`;
+  if (typeof document !== 'undefined' && typeof URL !== 'undefined' && typeof URL.createObjectURL === 'function') {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    try { URL.revokeObjectURL(url); } catch { /* ignore */ }
+  }
+  return filename;
 }
 
 export default function AdminUsersPanel() {
@@ -60,6 +68,7 @@ export default function AdminUsersPanel() {
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [selected, setSelected] = useState(null);   // redacted summary
+  const [billing, setBilling] = useState(null);      // review_billing payload
   const [fullEmail, setFullEmail] = useState(null);  // unmasked email after reveal
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -80,7 +89,7 @@ export default function AdminUsersPanel() {
   }, [query]);
 
   const openUser = useCallback(async (id) => {
-    setBusy(true); setError(null); setStatus(null); setFullEmail(null);
+    setBusy(true); setError(null); setStatus(null); setFullEmail(null); setBilling(null);
     try {
       const data = await callAdmin({ action: 'get_user_summary', userId: id });
       setSelected(data?.summary || null);
@@ -91,21 +100,68 @@ export default function AdminUsersPanel() {
     }
   }, []);
 
-  /** Run an action against the selected user, then refresh the summary. */
+  /**
+   * Run an action against the selected user, then refresh the summary. Returns
+   * the action's response payload so a caller can deliver it (e.g. render a
+   * billing summary or download a bundle), or null on failure.
+   */
   const runAction = useCallback(async (body, successMsg) => {
-    if (!selected?.id) return;
+    if (!selected?.id) return null;
     setBusy(true); setError(null); setStatus(null);
     try {
-      await callAdmin(body);
+      const result = await callAdmin(body);
       setStatus(successMsg);
       const data = await callAdmin({ action: 'get_user_summary', userId: selected.id });
       setSelected(data?.summary || null);
+      return result;
     } catch (e) {
       setError(e?.message || 'Action failed');
+      return null;
     } finally {
       setBusy(false);
     }
   }, [selected]);
+
+  /** Review billing — capture the summary payload and render it in the panel. */
+  const reviewBilling = useCallback(async () => {
+    setBilling(null);
+    const result = await runAction({ action: 'review_billing', userId: selected?.id }, 'Billing summary loaded.');
+    if (result?.billing) setBilling(result.billing);
+  }, [runAction, selected]);
+
+  /**
+   * Export the redacted diagnostic bundle — capture the payload and deliver it
+   * as a downloaded JSON file rather than dropping it on the floor.
+   */
+  const exportBundle = useCallback(async () => {
+    const result = await runAction({ action: 'diagnostic_bundle', userId: selected?.id }, null);
+    if (result?.bundle) {
+      const name = downloadBundle(result.bundle, selected?.id, false);
+      setStatus(`Redacted bundle downloaded (${name}).`);
+    }
+  }, [runAction, selected]);
+
+  /**
+   * Create the full debug copy (audited, includes raw PII) — capture the
+   * payload and deliver it: download the JSON file and copy it to the clipboard.
+   */
+  const fullDebugCopy = useCallback(async (reason) => {
+    const result = await runAction(
+      { action: 'diagnostic_bundle', userId: selected?.id, full: true, reason },
+      null,
+    );
+    if (result?.bundle) {
+      const name = downloadBundle(result.bundle, selected?.id, true);
+      let copied = false;
+      const json = JSON.stringify(result.bundle, null, 2);
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        try { await navigator.clipboard.writeText(json); copied = true; } catch { /* clipboard blocked */ }
+      }
+      setStatus(copied
+        ? `Full debug copy downloaded (${name}) and copied to clipboard (audited).`
+        : `Full debug copy downloaded (${name}) (audited).`);
+    }
+  }, [runAction, selected]);
 
   /** Reveal full PII — requires a reason; calls the audited highest-role RPC. */
   const revealFull = useCallback(() => {
@@ -144,9 +200,13 @@ export default function AdminUsersPanel() {
   }, []);
 
   return (
-    <section aria-label="User management" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg,
-    }}>
+    // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
+    // <Section>, which already supplies the card frame + the "User Search &
+    // Actions" <h2> and its body padding — a self-framed card-in-card here
+    // would be a doubled boundary + doubled padding (the nested-card false
+    // floor). The inner reveal-detail panels below keep their own frame.
+    <section aria-label="User management">
+
       {/* In-app text prompt (replaces native window.prompt). */}
       <TextInputDialog
         open={!!prompt}
@@ -164,17 +224,15 @@ export default function AdminUsersPanel() {
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
         background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
       }}>
-        <Search size={14} color={MUTED} />
         <input
           type="text" aria-label="Search users by id, email, or name"
           placeholder="Search by id, email, or display name…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && search()}
-          style={{ flex: 1, border: 'none', outline: 'none', fontSize: FS.sm, fontFamily: sans, background: 'transparent' }}
+          style={{ flex: 1, border: 'none', fontSize: FS.sm, fontFamily: sans, background: 'transparent' }}
         />
-        <Button variant="gold" size="sm" onClick={search} disabled={searching}
-          icon={<RefreshCw size={12} />}>
+        <Button variant="gold" size="sm" onClick={search} disabled={searching}>
           Search
         </Button>
       </div>
@@ -188,22 +246,32 @@ export default function AdminUsersPanel() {
 
       {/* Results list */}
       {results.length > 0 && (
-        <div style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+        <div role="table" aria-label="Search results"
+          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+          <div role="row" style={{
+            display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
+            background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
+            fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+          }}>
+            <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Name</span>
+            <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Email (masked)</span>
+            <span role="columnheader" style={{ flex: 1, textAlign: 'left' }}>Role</span>
+          </div>
           {results.map((u) => (
-            <Button key={u.id} variant="ghost" size="sm" fullWidth onClick={() => openUser(u.id)}
+            <Button key={u.id} variant="ghost" size="sm" fullWidth role="row" onClick={() => openUser(u.id)}
               style={{
                 gap: SP.sm, justifyContent: 'flex-start', whiteSpace: 'normal',
                 padding: `${SP.sm}px ${SP.md}px`, background: u.id === id ? CARD_HDR : 'transparent',
                 borderRadius: 0, borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm,
                 fontWeight: 400, color: INK,
               }}>
-              <span style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span role="cell" style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {u.display_name || u.email_masked || u.id.slice(0, 8)}
               </span>
-              <span style={{ flex: 2, color: MUTED, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {u.email_masked || '—'}
+              <span role="cell" title="Masked email" style={{ flex: 2, color: MUTED, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {u.email_masked || '–'}
               </span>
-              <span style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs, textAlign: 'left' }}>{u.role}</span>
+              <span role="cell" style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs, textAlign: 'left' }}>{u.role}</span>
             </Button>
           ))}
         </div>
@@ -218,32 +286,59 @@ export default function AdminUsersPanel() {
                 {selected.display_name || 'User'}
               </h4>
               <div style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
-                {fullEmail || selected.email_masked || '—'}
+                <span title={fullEmail ? undefined : 'Masked email'}>
+                  {fullEmail || selected.email_masked || '–'}
+                </span>
                 {' · '}{selected.role}{' · '}{selected.tier}
-                {selected.banned && <span style={{ color: RED, fontWeight: 700 }}> · BANNED</span>}
-                {selected.disabled && <span style={{ color: RED, fontWeight: 700 }}> · DISABLED</span>}
+                {selected.banned && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
+                    {' · '}Banned
+                  </span>
+                )}
+                {selected.disabled && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontWeight: 600 }}>
+                    {' · '}Disabled
+                  </span>
+                )}
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}
-              icon={<Eye size={12} />}>
+            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
               Reveal full details
             </Button>
           </div>
 
           {/* Redacted counters */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.lg, padding: `${SP.md}px 0`, borderTop: `1px solid ${BORDER2}`, borderBottom: `1px solid ${BORDER2}`, marginBottom: SP.md }}>
-            <Stat label="Account age" value={selected.account_age_days != null ? `${selected.account_age_days}d` : null} />
-            <Stat label="Credits" value={selected.credits} />
-            <Stat label="Settlements" value={selected.settlements} />
-            <Stat label="Gallery" value={selected.gallery_items} />
-            <Stat label="Campaigns" value={selected.campaigns} />
-            <Stat label="Tickets" value={selected.tickets} />
-            <Stat label="Warnings" value={selected.warnings} />
+            <Stat size="sm" label="Account age" value={selected.account_age_days != null ? `${selected.account_age_days}d` : '–'} />
+            <Stat size="sm" label="Credits" value={selected.credits == null ? '–' : selected.credits} />
+            <Stat size="sm" label="Settlements" value={selected.settlements == null ? '–' : selected.settlements} />
+            <Stat size="sm" label="Gallery" value={selected.gallery_items == null ? '–' : selected.gallery_items} />
+            <Stat size="sm" label="Campaigns" value={selected.campaigns == null ? '–' : selected.campaigns} />
+            <Stat size="sm" label="Tickets" value={selected.tickets == null ? '–' : selected.tickets} />
+            <Stat size="sm" label="Warnings" value={selected.warnings == null ? '–' : selected.warnings} />
           </div>
+
+          {/* Billing summary — rendered after Review billing captures the payload.
+              Redacted by contract: masked Stripe customer id, no raw payment data. */}
+          {billing && (
+            <div aria-label="Billing summary" style={{
+              display: 'flex', flexWrap: 'wrap', gap: SP.lg, alignItems: 'center',
+              padding: SP.md, marginBottom: SP.md,
+              background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
+            }}>
+              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Billing
+              </span>
+              <Stat size="sm" label="Tier" value={billing.tier || '–'} />
+              <Stat size="sm" label="Credits" value={billing.credits == null ? '–' : billing.credits} />
+              <Stat size="sm" label="Founder" value={billing.is_founder ? 'Yes' : 'No'} />
+              <Stat size="sm" label="Stripe customer" value={billing.customer_masked || 'None on file'} />
+            </div>
+          )}
 
           {/* Action set */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Mail size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Send email to user', label: 'Message', confirmLabel: 'Send' },
                 (body) => runAction(
@@ -252,7 +347,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Send email</Button>
 
-            <Button variant="warning" size="sm" disabled={busy} icon={<AlertTriangle size={12} />}
+            <Button variant="warning" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Issue warning', label: 'Warning reason', confirmLabel: 'Issue' },
                 (reason) => runAction(
@@ -261,7 +356,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Issue warning</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<StickyNote size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Add internal note', body: 'The user can never read this note.', label: 'Note', confirmLabel: 'Add' },
                 (note) => runAction(
@@ -270,7 +365,7 @@ export default function AdminUsersPanel() {
                 ),
               )}>Add note</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Coins size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Grant / refund credits', body: 'Positive grants, negative refunds (e.g. 50 or -10).', label: 'Credits delta', confirmLabel: 'Apply' },
                 (raw) => {
@@ -282,48 +377,43 @@ export default function AdminUsersPanel() {
                 },
               )}>Grant / refund</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<CreditCard size={12} />}
-              onClick={() => runAction({ action: 'review_billing', userId: id }, 'Billing summary loaded.')}>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
               Review billing</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Power size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => runAction(
                 { action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action' },
                 selected.disabled ? 'Account enabled.' : 'Account disabled.',
               )}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
 
-            <Button variant="danger" size="sm" disabled={busy} icon={<Ban size={12} />}
+            <Button variant="danger" size="sm" disabled={busy}
               onClick={() => runAction(
                 { action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', metadata: { notify: !selected.banned } },
                 selected.banned ? 'Account unbanned.' : 'Account banned.',
               )}>{selected.banned ? 'Unban' : 'Ban'}</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<FileDown size={12} />}
-              onClick={() => runAction({ action: 'diagnostic_bundle', userId: id }, 'Redacted bundle exported.')}>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
               Export bundle</Button>
 
-            <Button variant="ghost" size="sm" disabled={busy} icon={<ShieldCheck size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
-                { title: 'Create full debug copy', body: 'A full debug copy is audited and includes raw PII.', label: 'Justification', confirmLabel: 'Create' },
-                (reason) => runAction(
-                  { action: 'diagnostic_bundle', userId: id, full: true, reason },
-                  'Full debug copy created (audited).',
-                ),
+                { title: 'Create full debug copy', body: 'A full debug copy is audited and includes raw PII. The copy downloads as a file and is placed on your clipboard.', label: 'Justification', confirmLabel: 'Create' },
+                (reason) => fullDebugCopy(reason),
               )}>Full debug copy</Button>
           </div>
 
           {/* Per-settlement moderation (id-driven; soft-delete-first) */}
           <div style={{ marginTop: SP.md, paddingTop: SP.md, borderTop: `1px solid ${BORDER2}`, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
             <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Content moderation (by settlement id):</span>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Trash2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
-                { title: 'Soft-delete settlement', body: 'Reversible: hides + unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
+                { title: 'Soft-delete settlement', body: 'Reversible: hides and unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
                 (sid) => runAction(
                   { action: 'soft_delete_settlement', settlementId: sid, reason: 'moderation' },
                   'Settlement soft-deleted (reversible).',
                 ),
               )}>Soft-delete settlement</Button>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Trash2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Remove gallery item', body: 'Reversible: unpublishes the public dossier.', label: 'Settlement id', confirmLabel: 'Remove' },
                 (sid) => runAction(
@@ -331,7 +421,7 @@ export default function AdminUsersPanel() {
                   'Removed from gallery (reversible).',
                 ),
               )}>Remove gallery item</Button>
-            <Button variant="ghost" size="sm" disabled={busy} icon={<Link2 size={12} />}
+            <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Revoke share link', body: 'Reversible: clears the share slug (re-sharing mints a new one).', label: 'Settlement id', confirmLabel: 'Revoke' },
                 (sid) => runAction(
@@ -344,7 +434,7 @@ export default function AdminUsersPanel() {
       )}
 
       {!selected && !searching && results.length === 0 && (
-        <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+        <p style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
           Search for a user to inspect their redacted profile and take action.
         </p>
       )}

@@ -1,16 +1,11 @@
 /** @vitest-environment jsdom */
-import { afterEach, beforeEach, describe, expect, test } from 'vitest';
-import { cleanup, render } from '@testing-library/react';
+import { afterEach, describe, expect, test } from 'vitest';
+import { cleanup, render, fireEvent } from '@testing-library/react';
 
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
-import { useStore } from '../../src/store/index.js';
-import { DEFAULT_DETAIL_LEVEL } from '../../src/store/uiSlice.js';
 import { SYSTEM_VARIABLES } from '../../src/domain/causalState.js';
 
 afterEach(cleanup);
-beforeEach(() => {
-  useStore.getState().setDetailLevel(DEFAULT_DETAIL_LEVEL);
-});
 
 const town = {
   id: 's1',
@@ -23,17 +18,30 @@ const town = {
   activeConditions: [{ archetype: 'famine', severity: 0.8, label: 'Famine', affectedSystems: ['food_security'] }],
 };
 
-describe('SubstrateTab — altitude-gated 15-var causal mount', () => {
-  test('Overview (guided) shows the hint, NOT the 15-var grid', () => {
-    useStore.getState().setDetailLevel('guided');
+// Click a segment label ('Overview' | 'Detail' | 'Engine') in the tab's LOCAL
+// AltitudeControl.
+function setLevel(container, label) {
+  const btn = [...container.querySelectorAll('button')]
+    .find(b => (b.textContent || '').trim() === label);
+  if (btn) fireEvent.click(btn);
+}
+
+describe('SubstrateTab — local depth control (no global toggle)', () => {
+  test('defaults to Detail: shows the causal grid, not the Overview hint', () => {
     const { container } = render(<SubstrateTab settlement={town} saveId="s1" />);
+    expect(container.querySelector('[data-testid="causal-view-tabs"]')).toBeTruthy();
+  });
+
+  test('the local Overview segment shows the hint and hides the grid', () => {
+    const { container } = render(<SubstrateTab settlement={town} saveId="s1" />);
+    setLevel(container, 'Overview');
     expect(container.querySelector('[data-testid="causal-view-tabs"]')).toBeNull();
     expect(container.textContent).toMatch(/causal substrate/i);
   });
 
-  test('Engine (expert) shows the full 15-var grid + pressures + strength', () => {
-    useStore.getState().setDetailLevel('expert');
+  test('the local Engine segment shows the full 15-var grid + pressures + strength', () => {
     const { container, getByTestId } = render(<SubstrateTab settlement={town} saveId="s1" />);
+    setLevel(container, 'Engine');
     expect(getByTestId('causal-view-tabs')).toBeTruthy();
     expect(container.querySelectorAll('[data-variable]')).toHaveLength(SYSTEM_VARIABLES.length);
     expect(getByTestId('pressure-section')).toBeTruthy();

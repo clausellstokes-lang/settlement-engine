@@ -22,7 +22,7 @@
  *   3. Spatial layout + available services (+ §14 custom services) — moved
  *      here from generateEconomy so every roster member, including
  *      faction-pulled institutions, is placed and provides services.
- *   4. Supply-chain traces (Tier 4.3) — emitted here so the receipts
+ *   4. Supply-chain traces — emitted here so the receipts
  *      describe the final chains, not the provisional ones.
  */
 
@@ -77,7 +77,7 @@ export function finalizeTradeLists(economicState, customTradeGoods = null) {
 
 registerStep('economyReconcilePass', {
   deps: ['factionCorrelationPass'],
-  reads: ['economicState'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['economicState'], // ctx keys this step consumes that another step produces
   provides: ['economicState', 'spatialLayout', 'availableServices'],
   phase: 'economy',
 }, (ctx, rng) => {
@@ -129,11 +129,16 @@ registerStep('economyReconcilePass', {
   // service is GROUPED by its service TYPE (category → availableServices key) and
   // PRESENTED BY its provider institution (providedBy refId → name), matching how
   // generated services are attributed. Marked custom so the dossier tints it
-  // gold. Stable name order keeps rng deterministic; a no-op consuming zero rng
-  // when the user has no custom services.
+  // gold. The order MUST be codepoint-stable, NOT localeCompare: the loop below
+  // consumes rng per item, so a locale-/ICU-dependent sort would make the SAME
+  // seed pick a DIFFERENT set of custom services across machines. A no-op
+  // consuming zero rng when the user has no custom services.
   const customServices = (customDeps.registry().listCustom?.('services') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort((a, b) => {
+      const an = String(a.name), bn = String(b.name);
+      return an < bn ? -1 : an > bn ? 1 : 0;
+    });
   for (const entry of customServices) {
     const item = entry.raw || {};
     const name = entry.name;

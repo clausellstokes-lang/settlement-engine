@@ -1,8 +1,21 @@
 import { TIER_ORDER } from '../../data/constants.js';
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 import { isBattlefieldPrimary } from './relationshipCompatibility.js';
-
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+// The relationship-state CORE moved to a leaf module to break the
+// relationshipEvolution ↔ relationshipHierarchy ESM cycle. Imported for internal
+// use AND re-exported so existing importers of these from relationshipEvolution.js
+// keep working unchanged.
+import {
+  clamp01, RELATIONSHIP_DEFAULTS,
+  normalizeRelationshipType,
+  relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles,
+  normalizeRelationshipEdge, ensureRelationshipState,
+} from './relationshipState.js';
+export {
+  RELATIONSHIP_TYPE_ALIASES, normalizeRelationshipType,
+  relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles,
+  normalizeRelationshipEdge, ensureRelationshipState,
+} from './relationshipState.js';
 
 const stablePart = (value) =>
   String(value || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
@@ -26,99 +39,6 @@ function hash01(text) {
   h ^= h >>> 16;
   return (h >>> 0) / 4294967296;
 }
-
-const RELATIONSHIP_DEFAULTS = {
-  neutral: {
-    trust: 0.45,
-    resentment: 0.12,
-    dependency: 0.1,
-    leverage: 0.08,
-    fear: 0.08,
-    tradeBalance: 0.5,
-    pactStrength: 0,
-  },
-  trade_partner: {
-    trust: 0.62,
-    resentment: 0.08,
-    dependency: 0.34,
-    leverage: 0.22,
-    fear: 0.08,
-    tradeBalance: 0.62,
-    pactStrength: 0.25,
-  },
-  allied: {
-    trust: 0.78,
-    resentment: 0.04,
-    dependency: 0.34,
-    leverage: 0.16,
-    fear: 0.06,
-    tradeBalance: 0.58,
-    pactStrength: 0.78,
-  },
-  patron: {
-    trust: 0.42,
-    resentment: 0.32,
-    dependency: 0.72,
-    leverage: 0.72,
-    fear: 0.34,
-    tradeBalance: 0.44,
-    pactStrength: 0.52,
-  },
-  client: {
-    trust: 0.38,
-    resentment: 0.38,
-    dependency: 0.78,
-    leverage: 0.18,
-    fear: 0.32,
-    tradeBalance: 0.38,
-    pactStrength: 0.45,
-  },
-  vassal: {
-    trust: 0.34,
-    resentment: 0.48,
-    dependency: 0.82,
-    leverage: 0.82,
-    fear: 0.48,
-    tradeBalance: 0.32,
-    pactStrength: 0.58,
-  },
-  rival: {
-    trust: 0.24,
-    resentment: 0.52,
-    dependency: 0.12,
-    leverage: 0.3,
-    fear: 0.22,
-    tradeBalance: 0.34,
-    pactStrength: 0.05,
-  },
-  cold_war: {
-    trust: 0.12,
-    resentment: 0.68,
-    dependency: 0.08,
-    leverage: 0.42,
-    fear: 0.56,
-    tradeBalance: 0.18,
-    pactStrength: 0,
-  },
-  hostile: {
-    trust: 0.05,
-    resentment: 0.78,
-    dependency: 0.04,
-    leverage: 0.38,
-    fear: 0.72,
-    tradeBalance: 0.08,
-    pactStrength: 0,
-  },
-  criminal_network: {
-    trust: 0.22,
-    resentment: 0.45,
-    dependency: 0.28,
-    leverage: 0.55,
-    fear: 0.44,
-    tradeBalance: 0.24,
-    pactStrength: 0.08,
-  },
-};
 
 export const RELATIONSHIP_RULE_MATRIX = {
   neutral: [
@@ -184,144 +104,6 @@ export const RELATIONSHIP_RULE_MATRIX = {
   ],
 };
 
-export const RELATIONSHIP_TYPE_ALIASES = {
-  trade: "trade_partner",
-  alliance: "allied",
-  ally: "allied",
-  war: "hostile",
-  enemy: "hostile",
-  subject: "vassal",
-  tributary: "vassal",
-  criminal_corridor: "criminal_network",
-};
-
-export const normalizeRelationshipType = (type) =>
-  RELATIONSHIP_TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
-
-const normalizeType = normalizeRelationshipType;
-
-export function relationshipKeyFromEdge(edge) {
-  if (edge?.id) return edge.id;
-  const from = edge?.from || edge?.source || edge?.a || "unknown-a";
-  const to = edge?.to || edge?.target || edge?.b || "unknown-b";
-  return `rel.${from}.${to}`;
-}
-
-export function getRelationshipSettlements(edge) {
-  return {
-    from: edge?.from || edge?.source || edge?.a || edge?.settlementAId,
-    to: edge?.to || edge?.target || edge?.b || edge?.settlementBId,
-  };
-}
-
-/**
- * H16 — directional roles for hierarchical labels. Edges are one-per-pair and
- * for relationships that BEGAN symmetric the from/to orientation is a pure
- * authoring artifact (save iteration order), so a pulse-driven subjugation or
- * patronage stamps the chosen senior side onto the relationship STATE
- * (overlordSaveId / patronSaveId). Readers resolve direction state-first; a
- * DM-authored vassal/patron edge carries no stamp and keeps its strict edge
- * direction (from = overlord/patron).
- */
-export function relationshipRoles(edge, relState) {
-  const { from, to } = getRelationshipSettlements(edge);
-  const fromId = String(from);
-  const toId = String(to);
-  const type = relState?.relationshipType;
-  const stamped = type === "vassal" ? relState?.overlordSaveId : type === "patron" ? relState?.patronSaveId : null;
-  if (stamped != null && (String(stamped) === fromId || String(stamped) === toId)) {
-    const seniorId = String(stamped);
-    const juniorId = seniorId === fromId ? toId : fromId;
-    return { seniorId, juniorId, reversed: seniorId !== fromId };
-  }
-  return { seniorId: fromId, juniorId: toId, reversed: false };
-}
-
-export function normalizeRelationshipEdge(edge = {}) {
-  const relationshipType = normalizeRelationshipType(edge.relationshipType || edge.type || edge.relation || "neutral");
-  if (relationshipType !== "client") {
-    return {
-      ...edge,
-      relationshipType,
-      legacyRelationshipType: edge.legacyRelationshipType || null,
-      normalizedDirection: edge.normalizedDirection || null,
-    };
-  }
-  const { from, to } = getRelationshipSettlements(edge);
-  if (!from || !to) {
-    return {
-      ...edge,
-      relationshipType,
-      legacyRelationshipType: edge.legacyRelationshipType || null,
-      normalizedDirection: edge.normalizedDirection || null,
-    };
-  }
-  return {
-    ...edge,
-    id: relationshipKeyFromEdge(edge),
-    from: String(to),
-    to: String(from),
-    relationshipType: "patron",
-    legacyRelationshipType: "client",
-    normalizedDirection: "client_to_patron",
-  };
-}
-
-export function ensureRelationshipState(edge, existing = {}) {
-  const normalizedEdge = normalizeRelationshipEdge(edge);
-  const rawType = existing.relationshipType || normalizedEdge?.relationshipType || "neutral";
-  const relationshipType = normalizedEdge?.legacyRelationshipType === "client" && normalizeType(rawType) === "client"
-    ? "patron"
-    : normalizeType(rawType);
-  const defaults = RELATIONSHIP_DEFAULTS[relationshipType] || RELATIONSHIP_DEFAULTS.neutral;
-  const recentIncidents = Array.isArray(existing.recentIncidents) ? existing.recentIncidents.slice(-8) : [];
-  const history = Array.isArray(existing.history) ? existing.history.slice(-12) : [];
-
-  return {
-    relationshipType,
-    trust: clamp01(existing.trust ?? defaults.trust),
-    resentment: clamp01(existing.resentment ?? defaults.resentment),
-    dependency: clamp01(existing.dependency ?? defaults.dependency),
-    leverage: clamp01(existing.leverage ?? defaults.leverage),
-    fear: clamp01(existing.fear ?? defaults.fear),
-    tradeBalance: clamp01(existing.tradeBalance ?? defaults.tradeBalance),
-    militaryBurden: clamp01(existing.militaryBurden ?? 0),
-    aidBurden: clamp01(existing.aidBurden ?? 0),
-    obligationFatigue: clamp01(existing.obligationFatigue ?? 0),
-    pactStrength: clamp01(existing.pactStrength ?? defaults.pactStrength ?? 0),
-    recentIncidents,
-    history,
-    hierarchyResolutions: Array.isArray(existing.hierarchyResolutions) ? existing.hierarchyResolutions.slice(-6) : [],
-    trajectory: existing.trajectory || "stable",
-    proposedRelationshipType: existing.proposedRelationshipType || null,
-    lastTransitionTick: Number.isFinite(existing.lastTransitionTick) ? existing.lastTransitionTick : null,
-    updatedAt: existing.updatedAt || null,
-    overlordWeaknessStreak: Math.max(0, Math.floor(Number(existing.overlordWeaknessStreak) || 0)),
-    posture: existing.posture || null,
-    memoryScore: clamp01(existing.memoryScore ?? 0),
-    dailyLifeWeight: clamp01(existing.dailyLifeWeight ?? 0),
-    postureUpdatedAtTick: Number.isFinite(existing.postureUpdatedAtTick) ? existing.postureUpdatedAtTick : null,
-    postureReasons: Array.isArray(existing.postureReasons) ? existing.postureReasons.slice(0, 4) : [],
-    // H16: direction stamps for hierarchy labels born from symmetric edges
-    // (the subjugating/patronizing side may be the authored 'to'). Null on
-    // DM-authored hierarchy edges, which keep strict edge direction.
-    overlordSaveId: existing.overlordSaveId != null ? String(existing.overlordSaveId) : null,
-    vassalSaveId: existing.vassalSaveId != null ? String(existing.vassalSaveId) : null,
-    patronSaveId: existing.patronSaveId != null ? String(existing.patronSaveId) : null,
-    clientSaveId: existing.clientSaveId != null ? String(existing.clientSaveId) : null,
-    relationshipMemory: existing.relationshipMemory && typeof existing.relationshipMemory === "object"
-      ? { ...existing.relationshipMemory }
-      : null,
-    // Phase B4: the LAYERED secondary-status overlay (B0 compatibility-enforced
-    // trade statuses), stamped post-apply ONLY under the war layer. Preserved
-    // across the per-tick ensure/relax passes; absent on a legacy edge (the field
-    // is conditionally spread so it never serializes for a no-overlay edge).
-    ...(Array.isArray(existing.secondaryStatuses) && existing.secondaryStatuses.length
-      ? { secondaryStatuses: existing.secondaryStatuses }
-      : {}),
-  };
-}
-
 export function ensureRelationshipStatesForGraph(graph = { edges: [] }, existingStates = {}) {
   return Object.fromEntries(
     (graph.edges || []).map((edge) => {
@@ -374,7 +156,7 @@ const strongestPressure = (pressureIdx, saveId, types) =>
 
 const mean = (...values) => values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length;
 
-// ── Feature C disposition seam ──────────────────────────────────────────────
+// ── Disposition seam ────────────────────────────────────────────────────────
 // A settlement's centered-on-1.0 aggressiveness multiplier modulates the
 // candidates it drives, SIGNED BY INTENT: aggression boosts escalation and damps
 // de-escalation (and a pacifist does the reverse), so an aggressive settlement
@@ -422,7 +204,7 @@ export function signedDispositionFactor(/** @type {any} */ rawFactor, /** @type 
   return 1.0;
 }
 
-// ── Phase B4 trade-salience seam ─────────────────────────────────────────────
+// ── Trade-salience seam ──────────────────────────────────────────────────────
 // A per-EDGE centered-on-1.0 factor (computed in tradeSalience.js) that DAMPENS
 // hostile/escalation candidates when a VALUABLE trade tie exists between the
 // parties, and symmetrically RAISES de-escalation. The raw factor is < 1.0 for a
@@ -475,7 +257,7 @@ const candidateBase = ({
     /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
     direction,
   );
-  // B4: the trade-salience dampener COMPOSES with the disposition factor on the
+  // The trade-salience dampener COMPOSES with the disposition factor on the
   // SAME severity/probability product (not a parallel candidate path). Keyed on
   // the EDGE (the trade tie belongs to the pair). 1.0 ⇒ no-op ⇒ byte-identical
   // when the war layer is off (the map is empty).
@@ -571,8 +353,8 @@ function populationFor(item) {
   return Math.max(0, Number(item?.settlement?.population) || 0);
 }
 
-// Z2a homeostasis gearing — the DIRECT war-cost penalty subtracted from raw
-// strength. The headline finding (§6): war_drain dropped economic_capacity 18pts but
+// War homeostasis gearing — the DIRECT war-cost penalty subtracted from raw
+// strength. The problem this fixes: war_drain dropped economic_capacity 18pts but
 // settlementStrength moved <1% per front, because economic_capacity has NO wired path
 // into the `economy` PRESSURE the strength term reads (pressureModel's economy is
 // trade/labor/infra/food only). So the homeostasis loop never closed — a besieging
@@ -597,15 +379,15 @@ function warCostPenalty(/** @type {any} */ item) {
   return drain * WAR_DRAIN_STRENGTH_WEIGHT + exhaustion * WAR_EXHAUSTION_STRENGTH_WEIGHT;
 }
 
-// Exported for the war layer (Feature A): the SAME confidence input the
+// Exported for the war layer: the SAME confidence input the
 // subjugation/rival contests read, reused verbatim so a deploy-confidence gate
 // and the relationship gate can never diverge. 0..1.
 export function settlementStrength(/** @type {any} */ item, /** @type {any} */ pressure = {}) {
   const pop = populationFor(item);
   const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
-  // economy (0.12) is the war-layer homeostasis lever (OQ7=A, Phase 0). conflict
+  // economy (0.12) is the war-layer homeostasis lever. conflict
   // stays 0.18 so war's direct effect isn't diluted; the weight came from tier/pop/
-  // trade/legitimacy. Weights sum to 1.0. The war-cost penalty (Z2a) is then
+  // trade/legitimacy. Weights sum to 1.0. The war-cost penalty is then
   // subtracted OUTSIDE the weighted blend — it is a direct, gearing-raising erosion
   // (not a pressure diluted by a small weight), so sustained war meaningfully lowers
   // the aggressor's confidence and the homeostasis loop CLOSES. Byte-identical when
@@ -621,7 +403,71 @@ export function settlementStrength(/** @type {any} */ item, /** @type {any} */ p
   );
 }
 
-function relationshipTypeBetween(snapshot, a, b) {
+// ── Per-tick relationship index ──────────────────────────────────────────────
+// The candidate helpers (protectorBackingScore, relationshipThirdParties,
+// sharedHostileThird, relationshipTypeBetween) each used to RESCAN the full
+// edge list and re-run normalizeRelationshipEdge + ensureRelationshipState on
+// every edge, every call — making the per-tick relationship pass O(E^2)–O(E^3)
+// with thousands of redundant state allocations. buildRelationshipIndex runs
+// ONCE per evaluateRelationshipRules and precomputes:
+//   • records:    one normalized edge + ensured relState per raw edge, in
+//                 edge-list order (so order-dependent tiebreaks are preserved);
+//   • adjacency:  Map<settlementId, record[]> of incident edges, edge-order;
+//   • pairType:   Map<"a|b", relationshipType> — FIRST edge pairing a&b wins
+//                 (matches relationshipTypeBetween's first-match-in-order);
+//   • hostileTo:  Map<settlementId, Set<otherId>> for hostile/cold_war edges.
+// The helpers below read from this index (O(degree) instead of O(E)) and
+// produce byte-identical results to the pre-index scans.
+function buildRelationshipIndex(snapshot) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const rawEdges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
+  /** @type {Array<{key:string, edge:any, relState:any, from:string, to:string}>} */
+  const records = [];
+  /** @type {Map<string, Array<{key:string, edge:any, relState:any, from:string, to:string}>>} */
+  const adjacency = new Map();
+  /** @type {Map<string, string>} */
+  const pairType = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const hostileTo = new Map();
+  const addAdj = (/** @type {string} */ id, /** @type {any} */ rec) => {
+    let list = adjacency.get(id);
+    if (!list) { list = []; adjacency.set(id, list); }
+    list.push(rec);
+  };
+  const addHostile = (/** @type {string} */ id, /** @type {string} */ other) => {
+    let set = hostileTo.get(id);
+    if (!set) { set = new Set(); hostileTo.set(id, set); }
+    set.add(other);
+  };
+  for (const rawEdge of rawEdges) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const key = relationshipKeyFromEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[key]);
+    const s = getRelationshipSettlements(edge);
+    const from = String(s.from);
+    const to = String(s.to);
+    const rec = { key, edge, relState, from, to };
+    records.push(rec);
+    addAdj(from, rec);
+    if (to !== from) addAdj(to, rec);
+    // First-match-in-edge-order pair → type (mirrors relationshipTypeBetween).
+    const pairKeyFwd = `${from}|${to}`;
+    const pairKeyRev = `${to}|${from}`;
+    if (!pairType.has(pairKeyFwd)) pairType.set(pairKeyFwd, relState.relationshipType);
+    if (!pairType.has(pairKeyRev)) pairType.set(pairKeyRev, relState.relationshipType);
+    if (relState.relationshipType === "hostile" || relState.relationshipType === "cold_war") {
+      addHostile(from, to);
+      addHostile(to, from);
+    }
+  }
+  return { records, adjacency, pairType, hostileTo };
+}
+
+function relationshipTypeBetween(ctx, a, b) {
+  const index = ctx?.relIndex;
+  if (index) return index.pairType.get(`${String(a)}|${String(b)}`) || null;
+  // Fallback for callers without a precomputed index (legacy/direct callers).
+  const snapshot = ctx?.snapshot || ctx;
   const states = snapshot?.worldState?.relationshipStates || {};
   for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const edge = normalizeRelationshipEdge(rawEdge);
@@ -635,14 +481,16 @@ function relationshipTypeBetween(snapshot, a, b) {
 }
 
 function protectorBackingScore(ctx, targetId, attackerId) {
-  const states = ctx.snapshot?.worldState?.relationshipStates || {};
+  // Only the target's incident edges can carry a protector — read them from the
+  // per-tick adjacency index (O(degree)) instead of rescanning every edge.
+  const index = ctx.relIndex || buildRelationshipIndex(ctx.snapshot);
+  const selfKey = relationshipKeyFromEdge(ctx.originalEdge || ctx.edge);
+  const targetStr = String(targetId);
   let max = 0;
-  for (const rawEdge of ctx.snapshot?.regionalGraph?.edges || ctx.snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const key = relationshipKeyFromEdge(rawEdge);
-    if (key === relationshipKeyFromEdge(ctx.originalEdge || ctx.edge)) continue;
-    const relState = ensureRelationshipState(edge, states[key]);
-    const s = getRelationshipSettlements(edge);
+  for (const rec of index.adjacency.get(targetStr) || []) {
+    const { key, edge, relState } = rec;
+    if (key === selfKey) continue;
+    const s = { from: rec.from, to: rec.to };
     let protectorId = null;
     let score = 0;
 
@@ -653,7 +501,7 @@ function protectorBackingScore(ctx, targetId, attackerId) {
       protectorId = String(s.from) === String(targetId) ? s.to : s.from;
       score = 0.08 + relState.dependency * 0.16 + relState.trust * 0.12;
     } else if (relState.relationshipType === "patron" || relState.relationshipType === "vassal") {
-      // H16: the protecting senior party resolves state-first, not by raw
+      // The protecting senior party resolves state-first, not by raw
       // edge orientation (a subjugation may have crowned the authored 'to').
       const roles = relationshipRoles(edge, relState);
       if (roles.juniorId === String(targetId)) {
@@ -667,7 +515,7 @@ function protectorBackingScore(ctx, targetId, attackerId) {
     if (!protectorId || String(protectorId) === String(attackerId)) continue;
     const protector = itemFor(ctx.snapshot, protectorId);
     score += settlementStrength(protector) * 0.16;
-    const protectorToAttacker = relationshipTypeBetween(ctx.snapshot, protectorId, attackerId);
+    const protectorToAttacker = relationshipTypeBetween(ctx, protectorId, attackerId);
     if (["allied", "trade_partner", "patron", "vassal"].includes(protectorToAttacker)) score *= 0.48;
     if (["hostile", "cold_war", "rival"].includes(protectorToAttacker)) score *= 1.18;
     max = Math.max(max, clamp01(score));
@@ -690,7 +538,7 @@ function canSubjugateDirection(ctx, { overlordId, vassalId, overlordPressure, va
   return { overlordId: String(overlordId), vassalId: String(vassalId), strength: sourceStrength };
 }
 
-// H16: subjugation is decided by STATE — the stronger side qualifies no matter
+// Subjugation is decided by STATE — the stronger side qualifies no matter
 // which side the save authored at 'from'. Both directions run the original
 // math; if both qualify the stronger side leads, with the settlement id as a
 // stable, orientation-independent tiebreak.
@@ -740,7 +588,7 @@ function patronageEligibilityDirection(ctx, { patronId, clientId, patronPressure
   };
 }
 
-// H16: patronage forms from the STRONGER side regardless of edge orientation;
+// Patronage forms from the STRONGER side regardless of edge orientation;
 // same math both ways, stronger patron wins a double-qualify, id tiebreak.
 function patronageEligibility(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
@@ -763,21 +611,21 @@ function patronageEligibility(ctx) {
   return forward.eligible ? forward : reverse.eligible ? reverse : forward;
 }
 
-function relationshipThirdParties(snapshot, settlementId, types = []) {
+function relationshipThirdParties(ctx, settlementId, types = []) {
   const typeSet = new Set(types);
-  const states = snapshot?.worldState?.relationshipStates || {};
+  const index = ctx?.relIndex || buildRelationshipIndex(ctx?.snapshot || ctx);
+  const sid = String(settlementId);
   const out = [];
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const key = relationshipKeyFromEdge(rawEdge);
-    const relState = ensureRelationshipState(edge, states[key]);
-    if (typeSet.size && !typeSet.has(relState.relationshipType)) continue;
-    const s = getRelationshipSettlements(edge);
+  for (const rec of index.adjacency.get(sid) || []) {
+    if (typeSet.size && !typeSet.has(rec.relState.relationshipType)) continue;
+    // Match the original first/second-assignment semantics: from===sid resolves
+    // the third party to `to`, but a to===sid match (incl. a self-loop) wins and
+    // resolves to `from`.
     let thirdPartyId = null;
-    if (String(s.from) === String(settlementId)) thirdPartyId = String(s.to);
-    if (String(s.to) === String(settlementId)) thirdPartyId = String(s.from);
+    if (rec.from === sid) thirdPartyId = rec.to;
+    if (rec.to === sid) thirdPartyId = rec.from;
     if (!thirdPartyId) continue;
-    out.push({ relationshipKey: key, thirdPartyId, relationshipType: relState.relationshipType, relState });
+    out.push({ relationshipKey: rec.key, thirdPartyId, relationshipType: rec.relState.relationshipType, relState: rec.relState });
   }
   return out;
 }
@@ -802,23 +650,14 @@ function activeRebellionAgainstVassal(snapshot, vassalId) {
   );
 }
 
-function sharedHostileThird(snapshot, a, b) {
-  const states = snapshot?.worldState?.relationshipStates || {};
-  const hostileToA = new Set();
-  const hostileToB = new Set();
-  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const key = relationshipKeyFromEdge(edge);
-    const state = ensureRelationshipState(edge, states[key]);
-    if (!["hostile", "cold_war"].includes(state.relationshipType)) continue;
-    const s = getRelationshipSettlements(edge);
-    if (String(s.from) === String(a)) hostileToA.add(String(s.to));
-    if (String(s.to) === String(a)) hostileToA.add(String(s.from));
-    if (String(s.from) === String(b)) hostileToB.add(String(s.to));
-    if (String(s.to) === String(b)) hostileToB.add(String(s.from));
-  }
-  // Lowest-sorted shared enemy: iterating A's set followed B's edge-list
-  // insertion order, so reversed authoring of the a/b edge could surface a
-  // DIFFERENT common enemy when several exist.
+function sharedHostileThird(ctx, a, b) {
+  // The hostile/cold_war adjacency sets are precomputed once per tick; the
+  // intersection is sorted, so the result is stable regardless of edge-authoring
+  // order (the lowest-sorted common enemy when several exist).
+  const index = ctx?.relIndex || buildRelationshipIndex(ctx?.snapshot || ctx);
+  const hostileToA = index.hostileTo.get(String(a));
+  const hostileToB = index.hostileTo.get(String(b));
+  if (!hostileToA || !hostileToB) return null;
   return [...hostileToA].filter(id => hostileToB.has(id)).sort()[0] || null;
 }
 
@@ -826,7 +665,10 @@ function sharedEnemyAllianceCandidate(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   if (!settlements.from || !settlements.to) return null;
   if (["allied", "hostile", "cold_war", "vassal"].includes(ctx.relState.relationshipType)) return null;
-  const enemyId = sharedHostileThird(ctx.snapshot, settlements.from, settlements.to);
+  // Cheap precheck inside sharedHostileThird: returns null immediately unless
+  // BOTH parties have at least one hostile/cold_war edge in the precomputed
+  // index, so this is no longer an unconditional O(E) scan per edge.
+  const enemyId = sharedHostileThird(ctx, settlements.from, settlements.to);
   if (!enemyId) return null;
   const trustGate = ctx.relState.trust + ctx.relState.pactStrength * 0.4 - ctx.relState.resentment * 0.35;
   if (trustGate < 0.22) return null;
@@ -1028,9 +870,9 @@ function tradePartnerRules(ctx) {
 }
 
 function alliedRules(ctx) {
-  const { edge, relState, sourcePressure, targetPressure, snapshot } = ctx;
+  const { edge, relState, sourcePressure, targetPressure } = ctx;
   const settlements = getRelationshipSettlements(edge);
-  // H16: the alliance burden lands on the side actually carrying the support
+  // The alliance burden lands on the side actually carrying the support
   // cost. Each direction is scored with the original formula (the partner's
   // food/conflict/disease strain plus the supporter's own conflict exposure)
   // and the heavier direction wins; ties break on settlement id, so the
@@ -1077,7 +919,7 @@ function alliedRules(ctx) {
     );
   }
 
-  // H16 triage: the obligation gate reads BOTH allies — whichever side is
+  // Triage: the obligation gate reads BOTH allies — whichever side is
   // under conflict/hostility pressure pulls the OTHER into the obligation,
   // never the authored 'to'. When both qualify, the harder-pressed side is
   // the one mirrored; an exact tie breaks on the sorted pair.
@@ -1106,12 +948,12 @@ function alliedRules(ctx) {
     );
   }
 
-  // H16 triage: EITHER ally may be the one fighting a cold war — the other
+  // Triage: EITHER ally may be the one fighting a cold war — the other
   // side is the supporter, whichever way the save authored the edge. When
   // both allies have cold-war fronts the higher-resentment front is supported
   // first; an exact tie breaks on the sorted pair.
-  const fromColdWar = relationshipThirdParties(snapshot, settlements.from, ["cold_war"])[0];
-  const toColdWar = relationshipThirdParties(snapshot, settlements.to, ["cold_war"])[0];
+  const fromColdWar = relationshipThirdParties(ctx, settlements.from, ["cold_war"])[0];
+  const toColdWar = relationshipThirdParties(ctx, settlements.to, ["cold_war"])[0];
   let supportedColdWar = fromColdWar || toColdWar;
   let supportedAllyId = String(fromColdWar ? settlements.from : settlements.to);
   if (fromColdWar && toColdWar) {
@@ -1123,7 +965,7 @@ function alliedRules(ctx) {
   }
   if (supportedColdWar) {
     const supportingAllyId = String(supportedAllyId === String(settlements.from) ? settlements.to : settlements.from);
-    const supporterToThird = relationshipTypeBetween(snapshot, supportingAllyId, supportedColdWar.thirdPartyId);
+    const supporterToThird = relationshipTypeBetween(ctx, supportingAllyId, supportedColdWar.thirdPartyId);
     const hesitation = ["allied", "trade_partner", "patron", "vassal"].includes(supporterToThird) ? 0.46 : 1;
     candidates.push(
       internalDrift(ctx, "ally_cold_war_support", {
@@ -1197,7 +1039,7 @@ function alliedRules(ctx) {
 
 function patronRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure } = ctx;
-  // H16: a pulse-driven patronage may have crowned the edge's authored 'to'
+  // A pulse-driven patronage may have crowned the edge's authored 'to'
   // side as the patron — roles and the per-side pressures follow the STATE
   // stamp, like vassalRules. A DM-authored patron edge has no stamp and
   // keeps strict edge direction (from = patron).
@@ -1383,7 +1225,7 @@ function clientRules(ctx) {
 
 function vassalRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, tick } = ctx;
-  // H16: a subjugation may have crowned the edge's authored 'to' side as the
+  // A subjugation may have crowned the edge's authored 'to' side as the
   // overlord — roles and the per-side pressures follow the STATE stamp. A
   // DM-authored vassal edge has no stamp and keeps strict edge direction.
   const { seniorId: overlordId, juniorId: vassalId, reversed } = relationshipRoles(edge, relState);
@@ -1431,7 +1273,7 @@ function vassalRules(ctx) {
     }),
   );
 
-  const overlordColdWar = relationshipThirdParties(ctx.snapshot, overlordId, ["cold_war"])[0];
+  const overlordColdWar = relationshipThirdParties(ctx, overlordId, ["cold_war"])[0];
   if (overlordColdWar) {
     candidates.push(
       internalDrift(ctx, "vassal_cold_war_support", {
@@ -1614,7 +1456,7 @@ function rivalRules(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const sourcePower = settlementStrength(itemFor(ctx.snapshot, settlements.from), sourcePressure);
   const targetPower = settlementStrength(itemFor(ctx.snapshot, settlements.to), targetPressure);
-  // H16 triage: the CONFIDENT side of a power play is whichever rival is
+  // Triage: the CONFIDENT side of a power play is whichever rival is
   // stronger by state, never the authored 'from'. The gate requires a real
   // gap, so there is no tie case to fork.
   const confidenceGap = Math.abs(sourcePower - targetPower);
@@ -1762,7 +1604,7 @@ function coldWarRules(ctx) {
   }
 
   if ((exposure > 0.35 || tradeStress > 0.38) && relState.tradeBalance < 0.42) {
-    // H16 triage: the sanction CONDITION lands on the economically weaker
+    // Triage: the sanction CONDITION lands on the economically weaker
     // side by STATE (higher economy/trade strain = more dependent on the
     // exposed supply line); the other side imposes. An exact tie breaks on
     // the sorted pair — never on which side the save authored at 'from'.
@@ -1856,7 +1698,7 @@ function hostileRules(ctx) {
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
   const candidates = [];
 
-  // H16: either side of a war can raid. The aggressor is the stronger side by
+  // Either side of a war can raid. The aggressor is the stronger side by
   // STATE; a genuine strength tie forks on pair identity + tick, so a
   // symmetric war raids in both directions across ticks and never depends on
   // which side the save authored at 'from'.
@@ -1868,7 +1710,7 @@ function hostileRules(ctx) {
     aggressorId = hash01(`raid.${pair[0]}.${pair[1]}.${ctx.tick}`) < 0.5 ? pair[0] : pair[1];
   }
   const victimId = aggressorId === String(settlements.from) ? String(settlements.to) : String(settlements.from);
-  // H16 triage: attrition is read on the AGGRESSOR — the same state-decided
+  // Triage: attrition is read on the AGGRESSOR — the same state-decided
   // side the raid uses — never on the authored 'from'. High economy/defense/
   // legitimacy pressure on the attacking side saps support for the war.
   const aggressorPressure = aggressorId === String(settlements.from) ? sourcePressure : targetPressure;
@@ -1898,7 +1740,7 @@ function hostileRules(ctx) {
     }),
   );
 
-  // H16: the STRONGER side qualifies to subjugate regardless of orientation.
+  // The STRONGER side qualifies to subjugate regardless of orientation.
   const subjugation = powerGap > 0.48 && conflictStress > 0.55 ? subjugationDirection(ctx) : null;
   if (subjugation) {
     const patchValues = {
@@ -1907,7 +1749,7 @@ function hostileRules(ctx) {
       leverage: clamp01(relState.leverage + 0.08),
       trust: clamp01(relState.trust - 0.02),
     };
-    // H15: the vassal cascade must be visible BEFORE the DM accepts — preview
+    // The vassal cascade must be visible BEFORE the DM accepts — preview
     // the third-party realignments against the projected post-apply vassal
     // state and put them in the proposal summary.
     const cascadePreview = previewRelationshipHierarchyCascade({
@@ -1952,7 +1794,7 @@ function hostileRules(ctx) {
     );
   }
 
-  // H16: the dominant side extracts — economic pressure is read per side
+  // The dominant side extracts — economic pressure is read per side
   // (higher pressure = the weaker economy), not by authoring orientation.
   if (relState.leverage > 0.45 && sourcePressure.economy !== targetPressure.economy) {
     const fromDominant = sourcePressure.economy < targetPressure.economy;
@@ -1983,7 +1825,7 @@ function hostileRules(ctx) {
         severity: clamp01(0.34 + attackerAttrition * 0.36),
         probability: clamp01(0.05 + attackerAttrition * 0.18 + relState.trust * 0.08),
         reasons: [
-          `Open hostility is losing practical support as the economy, defenses, legitimacy, or manpower of ${itemFor(ctx.snapshot, aggressorId)?.name || aggressorId} — the aggressing side — slip.`,
+          `Open hostility is losing practical support as the economy, defenses, legitimacy, or manpower of ${itemFor(ctx.snapshot, aggressorId)?.name || aggressorId} (the aggressing side) slip.`,
           `Attacker attrition ${attackerAttrition.toFixed(2)}.`,
         ],
         relationshipPatch: {
@@ -2118,7 +1960,7 @@ function criminalNetworkRules(ctx) {
   return candidates;
 }
 
-// ── Phase B4 §6 — trade dependency → coercion + war-prevention / embargo ──────
+// ── Trade dependency → coercion + war-prevention / embargo ───────────────────
 // A critical-supplier dependency is LEVERAGE. The supplier can COERCE the
 // dependent (a coercion candidate), and the dependent AVOIDS war with its
 // critical supplier (extra hostility dampening is already applied via the
@@ -2265,7 +2107,7 @@ const RULE_EVALUATORS = {
   criminal_network: criminalNetworkRules,
 };
 
-// Exported for the war layer (Feature A): builds the {conflict,trade,legitimacy,
+// Exported for the war layer: builds the {conflict,trade,legitimacy,
 // economy,...} summary settlementStrength reads, so the deploy gate consumes the
 // identical pressure vector the relationship rules do.
 export function buildPressureSummary(/** @type {any} */ pressureIdx, /** @type {any} */ saveId) {
@@ -2285,6 +2127,12 @@ export function buildPressureSummary(/** @type {any} */ pressureIdx, /** @type {
 export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any} */ context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const states = snapshot?.worldState?.relationshipStates || {};
+  // Build the per-tick relationship index ONCE: the candidate helpers
+  // (protectorBackingScore, relationshipThirdParties, sharedHostileThird,
+  // relationshipTypeBetween) read from it via ctx.relIndex instead of each
+  // rescanning the full edge list — collapsing the pass from O(E^2)–O(E^3) to
+  // ~O(E·avgDegree) with one ensureRelationshipState allocation per edge.
+  const relIndex = buildRelationshipIndex(snapshot);
 
   return (snapshot?.regionalGraph?.edges || snapshot?.relationships || []).flatMap((edge) => {
     const key = relationshipKeyFromEdge(edge);
@@ -2302,17 +2150,20 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any}
       targetPressure,
       pressureIdx,
       snapshot,
+      // Precomputed per-tick adjacency / relationship-state / hostile-set index
+      // shared by every candidate helper (see buildRelationshipIndex).
+      relIndex,
       tick,
-      // Feature C: per-settlement aggressiveness multipliers (centered on 1.0).
+      // Per-settlement aggressiveness multipliers (centered on 1.0).
       // Empty/absent ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy.
       dispositionFactor: context.dispositionFactor || EMPTY_DISPOSITION,
-      // Phase B4: per-EDGE trade-salience multipliers (centered on 1.0). A valuable
+      // Per-EDGE trade-salience multipliers (centered on 1.0). A valuable
       // trade tie DAMPENS hostile/escalation candidates on that edge. Empty/absent
       // ⇒ 1.0 in every branch ⇒ byte-identical legacy (off-path map is empty).
       tradeSalienceFactor: context.tradeSalienceFactor || EMPTY_TRADE_SALIENCE,
-      // Phase B4: per-EDGE salience rollup ({ salience, critical, dependentId,
+      // Per-EDGE salience rollup ({ salience, critical, dependentId,
       // supplierId }) for the coercion/embargo cross-cutting rules. Absent/empty ⇒
-      // the §6 leverage rules emit nothing ⇒ byte-identical legacy.
+      // the leverage rules emit nothing ⇒ byte-identical legacy.
       tradeSalienceInfo: /** @type {any} */ (context.tradeSalienceInfo || EMPTY_TRADE_SALIENCE)[key] || null,
     };
     return [
@@ -2350,7 +2201,7 @@ export function applyRelationshipPatch(worldState, outcome, now) {
     patch.relationshipType = outcome.proposalPayload.toType;
     patch.proposedRelationshipType = null;
     patch.lastTransitionTick = worldState.tick;
-    // H16: seniority stamps are only meaningful for the label that minted
+    // Seniority stamps are only meaningful for the label that minted
     // them — a transition away from vassal/patron clears them so a later
     // re-subjugation can never inherit a stale senior side. A patch that
     // explicitly re-stamps (the subjugation itself) wins.

@@ -30,8 +30,13 @@ async function waitForDossier(page) {
   // The pipeline reveal can briefly cover the page after generation. Esc is
   // the supported skip affordance, then the dossier chrome gives us a stable
   // signal that generation has completed and the lazy view has mounted.
+  //
+  // The post-generate toolbar's restart control was renamed "New" -> "New
+  // Draft" in the UX overhaul (WizardOutputToolbar.jsx). The anchored pattern
+  // matches "New Draft" exactly without also catching the neighbouring
+  // "Regenerate draft" button.
   await page.keyboard.press('Escape').catch(() => {});
-  await expect(page.getByRole('button', { name: /^\s*New\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
   await expect(dossierMeta(page)).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
 }
@@ -78,7 +83,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
         sessionStorage.clear();
       } catch { /* private mode etc. */ }
     });
-    await page.goto('/');
+    await page.goto('/create');
   });
 
   test('homepage renders the HomeHero with eyebrow / title / subtitle', async ({ page }) => {
@@ -166,48 +171,42 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await expect(railSignal).toBeVisible({ timeout: 15_000 });
   });
 
-  test('"New" button after generation returns to a fresh state', async ({ page }) => {
+  test('"New Draft" button after generation returns to a fresh state', async ({ page }) => {
     await waitForHero(page);
     await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
-    // The wizard's "New" button (with Zap icon + " New" text). Be
-    // tolerant of leading/trailing whitespace from the icon spacing.
-    const newBtn = page.getByRole('button', { name: /^\s*New\s*$/ }).first();
-    // If the wizard variant doesn't render the inline New button (rare —
-    // it should always render post-generation for the anon path), fall
-    // back to the wizard's chrome "New" entry. Either way, we just want
-    // to confirm a path back to a fresh state exists.
-    if (await newBtn.isVisible().catch(() => false)) {
-      await newBtn.click();
-      // UX overhaul added an unsaved-draft guard: clicking "New" on an
-      // anonymous, unsaved (randomly rolled) draft opens a "Leave this
-      // settlement?" confirm so the result isn't lost silently. Discard it
-      // to actually start fresh; if the guard didn't fire, proceed anyway.
-      const discardNew = page.getByRole('button', { name: /Discard and start new/i });
-      if (await discardNew.isVisible().catch(() => false)) {
-        await discardNew.click();
-      }
-      await page.waitForTimeout(500);
-      // Fresh state: either hero re-mounts OR wizard mode picker shows.
-      await expect.poll(async () => {
-        const heroVisible = await page
-          .getByLabel('Anonymous settlement generator')
-          .isVisible()
-          .catch(() => false);
-        const configVisible = await page
-          .getByText(/Basic Generate|Advanced Generate|General Configuration|New settlement/i)
-          .first()
-          .isVisible()
-          .catch(() => false);
-        return heroVisible || configVisible;
-      }, { timeout: 10_000 }).toBe(true);
-    } else {
-      // No inline New button. The "Back to configuration" button (Back
-      // arrow) should still work as the path home.
-      const backBtn = page.getByRole('button', { name: /Back/i }).first();
-      await expect(backBtn).toBeVisible();
+    // The wizard's restart control, renamed "New" -> "New Draft" in the UX
+    // overhaul (WizardOutputToolbar.jsx). The anchored pattern targets it
+    // without also matching the neighbouring "Regenerate draft" button.
+    // waitForDossier above already asserted this button is visible
+    // post-generation, so the click is unconditional — no `if (isVisible)`
+    // fallback that would let the test pass without ever exercising it.
+    const newBtn = page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first();
+    await newBtn.click();
+    // UX overhaul added an unsaved-draft guard: clicking "New" on an
+    // anonymous, unsaved (randomly rolled) draft opens a "Leave this
+    // settlement?" confirm so the result isn't lost silently. Discard it to
+    // actually start fresh. (This branch IS legitimately conditional — whether
+    // the guard fires depends on draft state — but the final post-condition
+    // below is asserted unconditionally either way.)
+    const discardNew = page.getByRole('button', { name: /Discard and start new/i });
+    if (await discardNew.isVisible().catch(() => false)) {
+      await discardNew.click();
     }
+    // Fresh state: either hero re-mounts OR wizard mode picker shows.
+    await expect.poll(async () => {
+      const heroVisible = await page
+        .getByLabel('Anonymous settlement generator')
+        .isVisible()
+        .catch(() => false);
+      const configVisible = await page
+        .getByText(/Basic Generate|Advanced Generate|General Configuration|New settlement/i)
+        .first()
+        .isVisible()
+        .catch(() => false);
+      return heroVisible || configVisible;
+    }, { timeout: 10_000 }).toBe(true);
   });
 
   test('anonymous user does NOT see the inline Save button (auth-gated)', async ({ page }) => {
@@ -231,25 +230,27 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await expect(page.getByRole('button', { name: /Forge a|Begin a settlement/i })).toHaveCount(0);
   });
 
-  test('returning to the page preserves generated settlement (state persistence)', async ({ page }) => {
+  test('reload discards the in-memory anon settlement and returns to a usable hero', async ({ page }) => {
+    // The store's persist() partialize DELIBERATELY does not persist the
+    // generated settlement (src/store/index.js: "Never persist the massive
+    // generated settlement object"). So this asserts the REAL contract: a
+    // reload drops the anon draft and the app re-mounts to a fresh, usable
+    // hero — not that the settlement survives (it must not).
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
     await sizeButton(hero, 'Village').click();
     await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
-    // Capture the displayed settlement name.
-    const nameBefore = await dossierMeta(page).textContent();
-    expect(nameBefore).toBeTruthy();
+    // The dossier is present pre-reload.
+    await expect(dossierMeta(page)).toBeVisible();
 
-    // Reload the page.
     await page.reload();
-    // After reload, either the dossier rehydrates from store/localStorage
-    // OR the hero re-mounts. We don't strictly require persistence here —
-    // we just verify the app doesn't crash post-reload.
-    await page.waitForLoadState('networkidle');
-    const hasContent = await page.locator('body').textContent();
-    expect(hasContent.length).toBeGreaterThan(50);
+
+    // Unconditional post-condition: the hero re-mounts (settlement was not
+    // persisted) AND the stale dossier meta is gone.
+    await waitForHero(page);
+    await expect(dossierMeta(page)).toHaveCount(0);
   });
 
   test('no console errors during the happy path', async ({ page }) => {

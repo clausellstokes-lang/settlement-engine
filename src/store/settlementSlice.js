@@ -220,7 +220,7 @@ export const createSettlementSlice = (set, get) => ({
   // on regeneration.
   pipelineHistory: [],
 
-  // P100 / X-1 — Transient flag set right after the pipeline runs and
+  // Transient flag set right after the pipeline runs and
   // cleared when the PipelineReveal overlay finishes its playback. The
   // overlay reads `pipelineHistory` to animate; the wizard hides the
   // dossier until this flag drops. Cleared on a fresh generate so the
@@ -228,7 +228,7 @@ export const createSettlementSlice = (set, get) => ({
   pipelineRevealActive: false,
   dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
 
-  // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
+  // Active pricing moment. usePricingMoment opens these via
   // setActivePricingMoment({ headline, body, reason }); the
   // PricingMomentCard subscribes here and renders. Single-active-at-a-time
   // by design (the cooldown library handles dedupe).
@@ -240,15 +240,18 @@ export const createSettlementSlice = (set, get) => ({
     state.activePricingMoment = null;
   }),
 
-  // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
-  // bump anonymous → intermediate after first narrate spend. Bumped
-  // alongside spendCredits in creditsSlice; here we just declare it.
+  // Lifetime narrate count, used by useReaderAudience to
+  // bump anonymous → intermediate after first narrate spend. Bumped on the
+  // AI generation SUCCESS paths in aiSlice (requestNarrative / requestDailyLife
+  // / requestProgression), where the server-authoritative credit spend has
+  // just landed — NOT from the unused spendCredits action. Persisted via the
+  // store's partialize so the audience signal survives reloads.
   lifetimeNarrateCount: 0,
   bumpLifetimeNarrate: () => set(state => {
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
   }),
 
-  // P105 / E-2 — Pending edits queue. Each edit is a frozen object
+  // Pending edits queue. Each edit is a frozen object
   // produced by domain/pendingEdits.buildEdit(). The PendingChangesBar
   // reads this; commitPendingEdits applies the queue to the live
   // settlement; revertPendingEdits drops it.
@@ -345,7 +348,7 @@ export const createSettlementSlice = (set, get) => ({
     // Clear the queue. Failed-commit retry is a future-tier feature;
     // for now, all-or-nothing matches the cascade-preview UX.
     set(s => { s.pendingEditsQueue = []; });
-    // P133 / E-5 — Snapshot the post-commit state so the version
+    // Snapshot the post-commit state so the version
     // timeline records this as a discrete edit checkpoint. The
     // snapshot label summarises what edits were applied; the user
     // can revert to before this batch from VersionsTab.
@@ -415,7 +418,7 @@ export const createSettlementSlice = (set, get) => ({
     }
   },
 
-  // ── P133 / E-5 · Version history mutations ──────────────────────────
+  // ── Version history mutations ───────────────────────────────────────
   //
   // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
   // snapshot of the live settlement (or a specified save) into
@@ -522,7 +525,7 @@ export const createSettlementSlice = (set, get) => ({
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
   pendingChange: null,   // { type, payload } describing the proposed mutation
-  // Tier 5.1: structured delta from the most recent regenerate. UI
+  // Structured delta from the most recent regenerate. UI
   // surfaces it via the RegenerationDeltaCard until dismissed.
   lastRegenerationDelta: null,
 
@@ -573,7 +576,7 @@ export const createSettlementSlice = (set, get) => ({
       }
     }
 
-    // Anonymous daily generation cap (Tier 7.2). Every full-settlement
+    // Anonymous daily generation cap. Every full-settlement
     // generation funnels through this action, so this is the single point
     // of enforcement. A *regeneration* (a settlement is already on screen)
     // now counts the same as a first generation — previously rerolls were
@@ -687,7 +690,7 @@ export const createSettlementSlice = (set, get) => ({
         state.pendingChange = null;
         state.pendingPreview = null;
         state.pipelineHistory = pipelineHistory;
-        // P100 — arm the reveal overlay. PipelineReveal mounts when this
+        // Arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
         // dismissPipelineReveal() to clear it. Gated by the flag at the
         // consumer site (GenerateWizard) so a flag-flip kills the
@@ -779,7 +782,7 @@ export const createSettlementSlice = (set, get) => ({
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
   // Async — same reason as generateSettlement (lazy engine load).
-  // Tier 5.1: every regenerate computes a structured delta against
+  // Every regenerate computes a structured delta against
   // the prior settlement so the UI's RegenerationDeltaCard can show
   // what changed. The delta is lazy-imported to keep its transitive
   // domain modules out of the cold-start chunk.
@@ -788,7 +791,7 @@ export const createSettlementSlice = (set, get) => ({
     const { settlement, config } = state;
     if (!settlement) return;
 
-    // P103 / X-2 — Track session regen-burst. When the user crosses 5
+    // Track session regen-burst. When the user crosses 5
     // regens in a single session, fire regen_burst (worldbuilder hint
     // for locks/drift/chronicle). Counter lives in-memory only since
     // it's a session-scoped behavior signal.
@@ -834,7 +837,7 @@ export const createSettlementSlice = (set, get) => ({
     }
   },
 
-  // Tier 5.1: dismiss the most recent delta summary card.
+  // Dismiss the most recent delta summary card.
   clearLastRegenerationDelta: () =>
     set(state => { state.lastRegenerationDelta = null; }),
 
@@ -1032,17 +1035,26 @@ export const createSettlementSlice = (set, get) => ({
   // ── Saved settlements ──────────────────────────────────────────────────────
 
   /**
-   * Save the current settlement, snapshotting the live lifecycle state
-   * (phase / eventLog / systemState / locks / provenance timestamps) into
-   * the save record's `campaignState` so a subsequent reload restores
-   * exactly what the user is looking at.
+   * TEST-PRIVATE. The `__` prefix marks this action as internal: it is NOT the
+   * production save path and has no UI callers. The canonical save seam is
+   * `savesService.save()` (lib/saves.js), which the real "Save to Library"
+   * buttons (SaveToLibraryButton / WizardOutputToolbar / SettlementsPanel)
+   * call directly and then rehydrate via `setSavedSettlements`.
    *
-   * Without this snapshot, two saves would share whatever was last in
-   * the global slice — exactly the bug the audit flagged. The
-   * `campaign_state` JSONB column on Supabase plus the migration helper
-   * in `lib/saves.js` round-trip these fields.
+   * It snapshots the live lifecycle state (phase / eventLog / systemState /
+   * locks / provenance timestamps) into the save record's `campaignState` so a
+   * reload restores exactly what the user is looking at, exercising the same
+   * `pickleCampaignState` round-trip the canonical path persists to the
+   * `campaign_state` JSONB column. That round-trip is what the store tests
+   * assert against here, which is the only reason this action is retained.
+   *
+   * Because the production buttons bypass this action, its first_save/
+   * third_save pricing moments, 'saved' research fingerprint, and in-action
+   * slot guard DO NOT fire for real users. If you ever route a real button
+   * here, rename it (drop the `__`), drop the duplicate save in the component,
+   * and treat it as the live path.
    */
-  saveSettlement: (settlement) => {
+  __saveSettlementLocal: (settlement) => {
     const state = get();
     if (!state.canSave()) return false;
 
@@ -1068,7 +1080,7 @@ export const createSettlementSlice = (set, get) => ({
       });
     });
 
-    // P103 / X-2 — first_save + third_save pricing moments. Fire-and-
+    // first_save + third_save pricing moments. Fire-and-
     // forget so the save action returns promptly; the moment library
     // enforces 24h-per-moment cooldown so this can't spam.
     if (wasFirstSave || wasThirdSave) {
@@ -1092,6 +1104,65 @@ export const createSettlementSlice = (set, get) => ({
     }).catch(() => {});
 
     return true;
+  },
+
+  /**
+   * Instrumentation hook for the REAL (cloud/localStorage) save path.
+   *
+   * Complements `__saveSettlementLocal` (the test-private optimistic path): the
+   * live "Save to Library" buttons call `savesService.save()` directly and
+   * rehydrate via `setSavedSettlements`, bypassing that action entirely — so its
+   * first_save/third_save pricing moments and 'saved' research fingerprint never
+   * fired for real users. Call this AFTER a successful `savesService.save()` AND
+   * after `savedSettlements` has been refreshed (so the count is correct).
+   *
+   * Because the new save is already in `savedSettlements` when this runs, the
+   * counts are post-increment: `activeCount === 1` is the first save, and
+   * `activeCount === 3 && max === 3` is the third (cap-touching) save.
+   *
+   * Fully fire-and-forget — never throws, never blocks the save.
+   *
+   * @param {object} settlement The settlement object that was just persisted.
+   * @param {string|number} [saveId] The real save's id (from savesService.save);
+   *   used as the fingerprint's settlementUuid/save id. Omit to fire the pricing
+   *   moment without an addressable fingerprint id.
+   * @returns {void}
+   */
+  notePersistedSave: (settlement, saveId) => {
+    try {
+      const state = get();
+      const activeCount = activeSaveCount(state.savedSettlements);
+      const max = state.maxSaves();
+
+      // Post-increment: the new save is already in savedSettlements.
+      const wasFirstSave = activeCount === 1;
+      const wasThirdSave = activeCount === 3 && max === 3;
+
+      // first_save + third_save pricing moments. Fire-and-forget;
+      // the moment library enforces a 24h-per-moment cooldown so firing from
+      // multiple save sites can't spam.
+      if (wasFirstSave || wasThirdSave) {
+        import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+          const reason = wasThirdSave ? 'third_save' : 'first_save';
+          triggerPricingMoment(reason, (content) => {
+            get().setActivePricingMoment(content);
+          }, { tier: state.auth?.tier });
+        }).catch(() => { /* never block a save */ });
+      }
+
+      // Analytics — fire-and-forget structural snapshot at the 'saved' moment.
+      // captureFingerprint skips silently without a stable uuid or consent; it
+      // never throws and never affects the save. With no saveId we still fire
+      // the moment above but omit the addressable fingerprint id.
+      if (saveId != null) {
+        import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+          captureFingerprint('saved', settlement, {
+            save: { ...settlement, id: String(saveId) },
+            settlementUuid: String(saveId),
+          });
+        }).catch(() => {});
+      }
+    } catch { /* instrumentation must never throw */ }
   },
 
   /** Bulk-replace the savedSettlements array (used for hydration from savesService). */
@@ -1203,7 +1274,7 @@ export const createSettlementSlice = (set, get) => ({
       if ('faction' in fac) fac.faction = newName;
     }),
 
-  // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
+  // ── User-edited prose ────────────────────────────────────────────────────
   //
   // Edit-mode toggle: when true, EditableText components in the
   // dossier become clickable. False by default so casual readers see
@@ -1398,7 +1469,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastExportAt = new Date().toISOString();
     });
     if (wasFirstExport) {
-      // P103 / X-2 — first_pdf_export pricing moment.
+      // first_pdf_export pricing moment.
       import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
         triggerPricingMoment('first_pdf_export', (content) => {
           get().setActivePricingMoment(content);
@@ -1479,7 +1550,7 @@ export const createSettlementSlice = (set, get) => ({
       systemState: state.systemState,
       event,
       // The store is the I/O boundary: thread the real apply time so the domain
-      // stays a pure function of (settlement, event, now) (A+ domain.6).
+      // stays a pure function of (settlement, event, now).
       now: new Date().toISOString(),
     });
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
@@ -1567,7 +1638,7 @@ export const createSettlementSlice = (set, get) => ({
 
   /**
    * Assign (or clear) the current settlement's primary deity — the STORE half
-   * of the embed-on-assign bridge (Feature D / R1). This is the ONLY place a
+   * of the embed-on-assign bridge. This is the ONLY place a
    * deity ref is resolved against customContent: we look the authored deity up
    * here (where the store is available), build a self-contained snapshot, and
    * dispatch SET_PRIMARY_DEITY with the snapshot already in the payload. The
@@ -1823,11 +1894,19 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
-    // The refined narrative lives at save.aiData.aiSettlement, not a flat
-    // save.aiSettlement. Reading the wrong path nulled the narrative on every
-    // reload (it ran right after hydrateAiFromSave had loaded it correctly),
-    // while daily life — untouched here — survived. Read aiData first.
-    state.aiSettlement   = save.aiData?.aiSettlement || save.aiSettlement || null;
+    // Reset the FULL AI session from this save's aiData blob, not just
+    // aiSettlement. Previously only aiSettlement was set here, so callers that
+    // open a save via hydrateFromSave alone (e.g. the deity-from-map picker)
+    // carried the previously-open settlement's aiDailyLife / showNarrative /
+    // aiDataVersion / aiSourceFingerprint, leaking another town's daily-life
+    // prose and skewing isNarrativeStale. Mirror hydrateAiFromSave's derivation
+    // so the two entry points agree and a single hydrateFromSave call is safe.
+    const aiBlob = save.aiData || {};
+    state.aiSettlement   = aiBlob.aiSettlement || save.aiSettlement || null;
+    state.aiDailyLife    = aiBlob.aiDailyLife || null;
+    state.aiDataVersion  = aiBlob.narrativeGeneratedAt ? new Date(aiBlob.narrativeGeneratedAt).getTime() : null;
+    state.aiSourceFingerprint = aiBlob.narrativeSourceFingerprint || null;
+    state.showNarrative  = aiBlob.narrativeMode === 'narrated' && !!aiBlob.aiSettlement;
 
     // SystemState: prefer the persisted snapshot; if absent or stale,
     // re-derive from the settlement so the rail/timeline never crashes.

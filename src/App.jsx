@@ -17,19 +17,21 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info } from 'lucide-react';
+import { Map as MapIcon, Zap, Shield } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
-import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { hasStoredAuthToken } from './lib/supabase.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
+import HomeLanding from './components/HomeLanding.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
+import { IconsContext } from './components/primitives/IconsContext.js';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -49,22 +51,21 @@ const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSu
 const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
 const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
 const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
+const SetNewPasswordPage = lazy(() => import('./components/auth/SetNewPasswordPage.jsx'));
 const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
+const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.jsx'));
 
-import OnboardingCoach from './components/OnboardingCoach.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
-// P103 / X-2 — Active pricing-moment card (inline, not modal). Renders
-// when a moment fires; cooldown enforced by the moments library so it
-// can't hammer the user.
+// Active pricing-moment card — inline, not a modal. Renders when a moment
+// fires; cooldown enforced by the moments library so it can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
 // Top-nav destinations. Gallery sits between Compendium and About. (Workshop /
 // "Custom Generate" was removed; the /workshop route redirects to Create.)
-// Pricing stays a header hero link (HERO_LINKS), not a primary destination.
 //
-// UX Phase 4 (the Realm IA move):
+// The Realm IA move:
 //   - `settlements` keeps its view id + /settlements path for back-compat, but the
 //     LABEL is now "Library".
 //   - `realm` is the new destination — the simulation's IA home. It hosts the
@@ -72,20 +73,14 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
-  { id: 'generate',    label: 'Create',     Icon: MapPin },
-  { id: 'settlements', label: 'Library',    Icon: FolderOpen },
-  { id: 'realm',       label: 'Realm',      Icon: MapIcon },
-  { id: 'compendium',  label: 'Compendium', Icon: BookOpen },
-  { id: 'gallery',     label: 'Gallery',    Icon: Images },
-  { id: 'howto',       label: 'About',      Icon: Info },
+  { id: 'home',        label: 'Home' },
+  { id: 'generate',    label: 'Create' },
+  { id: 'settlements', label: 'Library' },
+  { id: 'realm',       label: 'Realm' },
+  { id: 'compendium',  label: 'Compendium' },
+  { id: 'gallery',     label: 'Gallery' },
+  { id: 'howto',       label: 'About' },
 ];
-
-// Secondary header links. "Pricing" was pulled from the top bar — subscription
-// and credit management now lives in the account-chip dropdown for signed-in
-// users (and inline on the Create page once an anonymous visitor hits the cap).
-// Kept as an (empty) array so the hero-link render sites still work and future
-// links can be added back here.
-const HERO_LINKS = [];
 
 function Loading() {
   return (
@@ -107,7 +102,12 @@ export default function App() {
   const setView = navigate;
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
-  const [authModalOpen, setAuthModalOpen] = useState(false);
+  // Auth-modal visibility now lives on the store (uiSlice) so app-wide nudges
+  // with no prop path to App (PricingMomentCard signup moments) can open
+  // sign-in directly. Same boolean setter shape the local useState had, so
+  // every existing call site (onSignIn, header avatar, etc.) is unchanged.
+  const authModalOpen = useStore(s => s.authModalOpen);
+  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
 
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
@@ -118,9 +118,6 @@ export default function App() {
   // Drive the per-view painted background (and the generation-flow override).
   const wizardMode = useStore(s => s.wizardMode);
   const settlement = useStore(s => s.settlement);
-  // The standing "buy credits" header chip is retired — credits are bought at
-  // the moment of need (the insufficient-credits modal). Flip to restore.
-  const showHeaderCredits = false;
   const initAuth = useStore(s => s.initAuth);
   const authSignOut = useStore(s => s.authSignOut);
   const initOnboarding = useStore(s => s.initOnboarding);
@@ -135,6 +132,28 @@ export default function App() {
   const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
+
+  // Logged-out front door. A visitor who is NOT signed in — and has no saved
+  // session to restore — is routed from the bare root to the marketing landing;
+  // a signed-in member (or one whose saved session is still restoring) falls
+  // through to the app (/create), and is moved off the landing if they sign in
+  // while sitting on it. Deep links elsewhere are respected; only the root and
+  // /home are gated. Replaces the old once-per-device first-visit flag.
+  useEffect(() => {
+    // No stored auth token at all ⇒ definitely logged out ⇒ route immediately,
+    // with no wait and no landing-then-app flash. Otherwise wait for the saved
+    // session to restore so a returning member never flashes the landing.
+    if (hasStoredAuthToken() && authLoading) return;
+    try {
+      const path = window.location.pathname;
+      const atRoot = path === '/' || path === '';
+      if (authTier === 'anon') {
+        if (atRoot) replacePath('/home');            // logged out → the landing
+      } else if (view === 'home') {
+        replacePath('/create');                      // member on the landing → the app
+      }
+    } catch { /* private mode → fall through to the default */ }
+  }, [authLoading, authTier, view]);
 
   // Initialize auth session on mount + check post-checkout result + load credits
   useEffect(() => {
@@ -201,7 +220,7 @@ export default function App() {
   // About. The route entries stay (so the URLs still resolve and old links /
   // SEO keep working), but we bounce them to the new surface.
   //
-  // UX Phase 4 — the World Map moved INTO the Realm hub. `/map` (and any
+  // The World Map moved INTO the Realm hub. `/map` (and any
   // `?view=map`, which resolveLocation already aliases to `realm`) redirects to
   // `/realm` so legacy links + bookmarks never 404. The Realm body IS the World
   // Map workspace, so the destination is identical content under the new URL.
@@ -242,16 +261,23 @@ export default function App() {
   // sign-in (tracked via a user-scoped localStorage migration flag).
   useEffect(() => {
     if (authLoading) return;
+    // Cancellation guard: rapid tier transitions / remounts can start a second
+    // migrate→load chain before the first resolves, interleaving migrate and load
+    // so the displayed custom content reflects a stale cloud snapshot (or migrate
+    // runs twice). On cleanup we set ignore=true so a superseded chain bails before
+    // its load call. Matches the cancellation pattern in useGalleryPageState.
+    let ignore = false;
     const canSyncCloud = authTier === 'premium' || isElevated;
     if (canSyncCloud) {
       // First migrate any local items, then load the canonical cloud state
       migrateLocalCustomContentToCloud()
-        .then(() => loadCustomContentFromCloud())
-        .catch(err => console.error('Custom content cloud sync failed:', err));
+        .then(() => { if (!ignore) return loadCustomContentFromCloud(); })
+        .catch(err => { if (!ignore) console.error('Custom content cloud sync failed:', err); });
     } else if (authTier === 'anon') {
       // Sign-out: drop cloud cache, fall back to local (grandfathered) items
       clearCloudCustomContent();
     }
+    return () => { ignore = true; };
   }, [authTier, authUserId, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
 
   // Auto-dismiss onboarding nudge after 8s
@@ -278,7 +304,7 @@ export default function App() {
   // Gate premium-only views
   const handleNavClick = (id) => {
     setView(id);
-    // UX Phase 4 — the Realm nav. Free wanderers clicking Realm see a
+    // The Realm nav. Free wanderers clicking Realm see a
     // Cartographer-upgrade pitch (cooldown 24h; premium auto-skipped). Anon are
     // NOT skipped here at click time — the Realm Dashboard fires the richer
     // `map_realm_teaser` moment on landing for both anon and free, so we only
@@ -300,10 +326,19 @@ export default function App() {
     setView('generate');
   };
 
-  // Filter nav items based on visibility. UX Phase 4 — the Realm is REACHABLE
+  // Filter nav items based on visibility. The Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
-  const visibleNav = NAV;
+  // The Home tab fronts the logged-out landing; signed-in members go straight to
+  // Create, so Home is dropped from their nav (the landing is logged-out-only).
+  const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
+
+  // Dedicated auth surfaces (/signin · /register · /reset-password ·
+  // /verify-email · /confirm-email) render full-bleed: the persistent top nav
+  // and the mobile bottom nav are suppressed so the AuthPanel owns the whole
+  // frame. Each auth page carries its own back/exit affordance, so no
+  // navigation is stranded.
+  const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'set-new-password' || view === 'verify-email' || view === 'confirm-email';
 
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
   // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
@@ -313,7 +348,7 @@ export default function App() {
   const mobileNav = MOBILE_NAV_PRIORITY
     .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)
-    .slice(0, _readFlag('mobileSingleChrome') ? 4 : 5);
+    .slice(0, 5);
 
   const headerStyle = {
     background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
@@ -329,7 +364,7 @@ export default function App() {
     <>
       <CampaignSyncBanner />
       <div
-        className={`parchment-bg page-bg${pageBg.isFlow ? ' is-flow' : ''}`}
+        className={`parchment-bg${pageBg.clean ? '' : ' page-bg'}${pageBg.isFlow ? ' is-flow' : ''}`}
         style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
 
@@ -344,12 +379,7 @@ export default function App() {
           Uses the same ink → ink-deep gradient as the bottom nav so the
           top + bottom chrome read as one unified frame.
         */}
-        {/* P123 / A-2 — When `mobileSingleChrome` is on, drop the mobile
-            top header entirely. The bottom nav becomes the only chrome;
-            the auth chip lives there as a 6th slot (added below in the
-            bottom-nav block). Frees ~52px of vertical real estate on
-            every mobile screen — meaningful on a 640px viewport. */}
-        {isMobile && !_readFlag('mobileSingleChrome') && (
+        {isMobile && !isAuthRoute && (
           <header style={{
             ...headerStyle,
             padding: `${SP.sm}px ${SP.md}px`,
@@ -386,39 +416,8 @@ export default function App() {
           </header>
         )}
 
-        {/* Mobile hero links — Pricing / Gallery / Compare, promoted from the
-            footer so mobile keeps top-level access. Standalone strip (not tied
-            to the mobile header, which the single-chrome flag can drop). */}
-        {isMobile && HERO_LINKS.length > 0 && (
-          <div style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.lg,
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.2)',
-            padding: `${SP.xs}px ${SP.md}px`,
-          }}>
-            {HERO_LINKS.map(({ id, label }) => {
-              const active = id === 'compare' ? view.startsWith('compare') : view === id;
-              return (
-                <Button
-                  key={id}
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setView(id)}
-                  style={{
-                    color: active ? GOLD : MUTED,
-                    fontWeight: active ? 700 : 500,
-                    letterSpacing: '0.06em', textTransform: 'uppercase',
-                  }}
-                >
-                  {label}
-                </Button>
-              );
-            })}
-          </div>
-        )}
-
         {/* ── Desktop header ──────────────────────────────────── */}
-        {!isMobile && (
+        {!isMobile && !isAuthRoute && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
             {/* Brand block — logo + wordmark on top row, italic tagline
                 beneath. The HomeHero (which carries the full positioning
@@ -426,7 +425,6 @@ export default function App() {
                 keeps the "simulator for DMs" framing visible for
                 signed-in users who'd otherwise never see it. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <MapIcon size={24} color={GOLD} />
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
                 <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
                   SettlementForge
@@ -442,75 +440,48 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              {/* Secondary hero links — Pricing / Gallery / Compare, promoted
-                  from the footer. Plain text links, distinct from the boxed
-                  primary nav tabs to their right. */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-                {HERO_LINKS.map(({ id, label }) => {
-                  const active = id === 'compare' ? view.startsWith('compare') : view === id;
-                  return (
-                    <Button
-                      key={id}
-                      variant="ghost"
-                      size="md"
-                      onClick={() => setView(id)}
-                      style={{
-                        color: active ? GOLD : MUTED,
-                        fontWeight: active ? 700 : 500,
-                        letterSpacing: '0.04em', textTransform: 'uppercase',
-                        padding: `${SP.xs}px 0`,
-                      }}
-                    >
-                      {label}
-                    </Button>
-                  );
-                })}
-              </div>
-              {HERO_LINKS.length > 0 && <span style={{ width: 1, height: 20, background: 'rgba(160,118,42,0.3)', margin: `0 ${SP.xs}px` }} />}
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {visibleNav.map(({ id, label }) => {
                   const active = view === id;
-                  const locked = false;
                   return (
                     <button
                       key={id}
                       type="button"
                       onClick={() => handleNavClick(id)}
+                      aria-current={active ? 'page' : undefined}
                       style={{
                         display: 'flex', alignItems: 'center', gap: SP.xs,
                         padding: `${SP.sm}px ${SP.lg}px`,
-                        background: active ? GOLD_BG : 'transparent',
-                        border: `1px solid ${active ? GOLD : 'rgba(160,118,42,0.2)'}`,
-                        borderRadius: R.md, cursor: 'pointer',
-                        color: active ? GOLD : locked ? SECOND : MUTED,
-                        fontSize: FS.sm, fontWeight: active ? 600 : 500,
+                        // Active tab is a wayfinding marker, not a CTA (P8): a
+                        // gold underline + weight (the exact two-channel idiom
+                        // the mobile bottom-nav and the auth segmented tab
+                        // already use), NOT the former filled-gold cartouche.
+                        // That filled pill tied with the gold "Sign In" chip as
+                        // a second equally-loud gold block, leaving the anon
+                        // region with no single focal point. The underline says
+                        // "you are here" without competing as a button — so the
+                        // Sign In chip is the only filled-gold element here.
+                        background: 'transparent',
+                        border: 'none',
+                        borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                        borderRadius: 0, cursor: 'pointer',
+                        color: active ? GOLD : PARCH_100,
+                        fontSize: FS.sm, fontWeight: active ? 700 : 500,
                         fontFamily: sans,
-                        letterSpacing: '0.04em', textTransform: 'uppercase',
+                        // Title-case the links (Create / Library / Realm): the
+                        // labels are already correctly-cased strings; only the
+                        // CSS was upcasing them. Voice + template both want
+                        // title-case here, not the shouted CREATE/LIBRARY.
+                        letterSpacing: '0.04em', textTransform: 'none',
                         transition: 'all 0.2s',
-                        opacity: locked ? 0.6 : 1,
                       }}
                     >
                       {label}
-                      {locked && <span style={{ fontSize: FS.xxs, marginLeft: 2 }}>PRO</span>}
                     </button>
                   );
                 })}
               </nav>
-
-              {/* Credits button — retired from the header (showHeaderCredits=false);
-                  credits are bought at the moment of need. Kept, not deleted. */}
-              {showHeaderCredits && authTier !== 'anon' && (
-                <Button
-                  variant="ai"
-                  onClick={() => setPurchaseModalOpen(true)}
-                  aria-label="Buy credits"
-                  icon={<Zap size={13} />}
-                  style={{ marginLeft: SP.xs }}
-                >
-                  {isElevated ? '\u221E' : creditBalance}
-                </Button>
-              )}
 
               {/* Admin button (developer/admin only) */}
               {isElevated && (
@@ -523,17 +494,57 @@ export default function App() {
                 />
               )}
 
-              {/* UX Phase 4 — persistent tier chip. Anon → "Sign in" (the
+              {/* Persistent credit badge. The credit balance fetched at mount
+                  (and refreshed on auth transitions) now reads at a glance from
+                  the right cluster, not only after opening the account menu.
+                  Additive: the green name-chip identity and the ghost Upgrade
+                  both stay. Two channels (P7): the violet count plus the
+                  "credits" word carry the meaning, so it never relies on the
+                  violet colour alone, and there is no glyph since icons stay off
+                  outside the Realm map. Signed-in only: an anonymous visitor has
+                  no balance to read. Routes to the same subscription-and-credits
+                  surface the account menu links to. */}
+              {authTier !== 'anon' && (
+                <button
+                  type="button"
+                  onClick={() => setView('pricing')}
+                  title="Credits remaining"
+                  aria-label={`${creditBalance} credits remaining`}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: SP.xs,
+                    height: 32, padding: `0 ${SP.md}px`,
+                    borderRadius: 999,
+                    background: TINT_VIOLET,
+                    border: `1px solid ${VIOLET}`,
+                    color: VIOLET,
+                    fontSize: FS.sm, fontFamily: sans,
+                    letterSpacing: '0.02em', cursor: 'pointer',
+                    transition: 'all 0.2s', whiteSpace: 'nowrap',
+                  }}
+                >
+                  <span style={{ fontWeight: 700 }}>{creditBalance}</span>
+                  <span style={{ fontWeight: 500, opacity: 0.85 }}>credits</span>
+                </button>
+              )}
+
+              {/* Persistent tier chip. Anon → "Sign in" (the
                   AccountMenu below). Free → an "Upgrade" chip routing to the
                   canonical premium-value surface. Premium → the account chip
                   (no upgrade chip). */}
+              {/* Persistent upgrade path, demoted to ghost (P4): the richer
+                  upsell already lives on Pricing, the footer, the Realm
+                  locked-state, and the PricingMomentCard, so a mid-emphasis
+                  secondary pill here co-competed with the identity chip and
+                  split the right cluster's focal point. As a ghost text+icon
+                  control it stays discoverable without out-shouting the
+                  AccountMenu chip, which is the region's single focal control. */}
               {authTier === 'free' && (
                 <Button
-                  variant="gold"
+                  variant="ghost"
                   size="md"
                   icon={<Zap size={13} />}
                   onClick={() => setView('pricing')}
-                  style={{ letterSpacing: '0.04em', textTransform: 'uppercase' }}
+                  style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
                 >
                   Upgrade
                 </Button>
@@ -555,21 +566,29 @@ export default function App() {
 
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
-          {/* Onboarding coach (first-run, generate view). Gated to
-              signed-in accounts — anonymous visitors don't get the
-              coaching banner. The `onboardingDiet` flag still suppresses
-              this spotlight-overlay variant when on. */}
-          {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
+          {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
+              along with its forever-off `onboardingDiet` flag-twin: the Checklist
+              + first-dossier callouts carry first-run coaching, and PostGenCoach
+              (mounted below) is the active post-generation coach. The companion
+              onboarding nudge toast survives near the bottom of the tree — it
+              doubles as the SAVE_SETTLEMENT intent toast and was never the coach. */}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
+            {/* Home is the marketing landing. First-visit gating routes new
+                visitors here; returning visitors land on /create. */}
+            {view === 'home'        && <HomeLanding isMobile={isMobile} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
-            {/* UX Phase 4 — the Realm hub. WorldMap is the Realm body (Map + the
+            {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
                 still renders it for the one frame before the redirect effect
                 upgrades the URL to /realm, so there's no blank flash. */}
-            {(view === 'realm' || view === 'map') && <WorldMap onNavigate={setView} />}
+            {/* The Realm map is the ONE icons-on surface (template IconCtx parity):
+                everything else renders icons-off via the default IconsContext. */}
+            {(view === 'realm' || view === 'map') && (
+              <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
+            )}
             {view === 'compendium'  && <CompendiumPanel standalone />}
-            {view === 'howto'       && <HowToUse standalone />}
+            {view === 'howto'       && <HowToUse onNavigate={setView} />}
             {/* Guarded views: render only once authorized. The guard effect
                 redirects unauthorized visitors; until the session resolves we
                 show the loader rather than flash (or crash on) gated content. */}
@@ -586,7 +605,9 @@ export default function App() {
             {view === 'signin'         && <SignInPage />}
             {view === 'register'       && <RegisterPage />}
             {view === 'reset-password' && <ResetPasswordPage />}
+            {view === 'set-new-password' && <SetNewPasswordPage />}
             {view === 'verify-email'   && <VerifyEmailPage />}
+            {view === 'confirm-email'  && <ConfirmEmailPage />}
           </Suspense>
         </main>
 
@@ -602,7 +623,7 @@ export default function App() {
           textAlign: 'center',
           fontFamily: sans,
           fontSize: FS.sm,
-          color: MUTED,
+          color: PARCH_100,
           letterSpacing: '0.04em',
           userSelect: 'none',
           display: 'flex',
@@ -619,41 +640,37 @@ export default function App() {
               { label: t('footer.pricing'),    onClick: () => setView('pricing') },
               { label: t('footer.compendium'), onClick: () => setView('compendium') },
               { label: t('footer.gallery'),    onClick: () => setView('gallery') },
-            ].map(({ label, onClick }, i) => (
-              <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.md }}>
-                {i > 0 && <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={onClick}
-                  style={{
-                    color: MUTED, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
-                    letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
-                  }}
-                >
-                  {label}
-                </Button>
-              </span>
+            ].map(({ label, onClick }) => (
+              <Button
+                key={label}
+                variant="ghost"
+                size="sm"
+                onClick={onClick}
+                style={{
+                  color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
+                  letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
+                }}
+              >
+                {label}
+              </Button>
             ))}
-            <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>
             <a href="mailto:clausellstokes@aol.com" style={{
-              color: MUTED, textDecoration: 'none', display: 'inline-flex',
+              color: PARCH_100, textDecoration: 'none', display: 'inline-flex',
               alignItems: 'center', gap: 4,
               padding: isMobile ? `0 ${SP.sm}px` : 0,
               minHeight: isMobile ? 44 : undefined,
             }}>
-              <Headphones size={11} /> {t('footer.contact')}
+              {t('footer.contact')}
             </a>
           </nav>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
             <span>{t('footer.copyright', { year: 2026 })}</span>
-            <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>
             <span style={{ fontStyle: 'italic' }}>{t('footer.antiAi')}</span>
           </div>
         </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
-        {isMobile && (
+        {isMobile && !isAuthRoute && (
           <div style={{
             position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
             background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
@@ -662,60 +679,36 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {mobileNav.map(({ id, label, Icon }) => {
+            {mobileNav.map(({ id, label }) => {
               const active = view === id;
               return (
                 <button
                   key={id}
                   type="button"
                   onClick={() => handleNavClick(id)}
+                  aria-current={active ? 'page' : undefined}
                   style={{
                     flex: 1, display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
+                    // Clear the 44px touch-target floor (Apple HIG / Material).
+                    // The single-line uppercase label only filled ~32px tall, so
+                    // these primary nav tabs were below the floor on mobile.
+                    minHeight: 44,
                     padding: `${SP.sm + 2}px ${SP.xs}px`,
                     background: active ? GOLD_BG : 'transparent',
                     border: 'none',
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
                     cursor: 'pointer',
-                    color: active ? GOLD : SECOND,
-                    fontSize: FS.micro, fontWeight: active ? 700 : 500,
+                    color: active ? GOLD : PARCH_100,
+                    fontSize: FS.xxs, fontWeight: active ? 700 : 500,
                     fontFamily: sans,
                     letterSpacing: '0.04em', textTransform: 'uppercase',
                   }}
                 >
-                  <Icon size={18} />
                   <span style={{ lineHeight: 1 }}>{label}</span>
                 </button>
               );
             })}
-            {/* P123 / A-2 — Auth chip as 6th bottom-nav slot. Replaces
-                the dropped mobile top header. Icon-only, gold-outline
-                for anon, green-fill for signed-in. */}
-            {_readFlag('mobileSingleChrome') && (
-              <button
-                type="button"
-                onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
-                aria-label={authTier === 'anon' ? 'Sign in' : 'Account'}
-                style={{
-                  flex: 1, display: 'flex', flexDirection: 'column',
-                  alignItems: 'center', justifyContent: 'center', gap: SP.xs,
-                  padding: `${SP.sm + 2}px ${SP.xs}px`,
-                  background: 'transparent',
-                  border: 'none',
-                  borderTop: view === 'account' ? `2px solid ${GOLD}` : '2px solid transparent',
-                  cursor: 'pointer',
-                  color: authTier === 'anon' ? GOLD : '#4A7A3A',
-                  fontSize: FS.micro, fontWeight: 700,
-                  fontFamily: sans,
-                  letterSpacing: '0.04em', textTransform: 'uppercase',
-                }}
-              >
-                <User size={18} />
-                <span style={{ lineHeight: 1 }}>
-                  {authTier === 'anon' ? 'Sign in' : 'Account'}
-                </span>
-              </button>
-            )}
           </div>
         )}
       </div>
@@ -748,13 +741,16 @@ export default function App() {
         );
       })()}
 
-      {/* ── Auth modal ────────────────────────────────────────── */}
-      {authModalOpen && (
+      {/* ── Auth modal ──────────────────────────────────────────
+          Hard-gated to signed-out visitors (P10): the modal is the sign-in
+          door, and a signup/unlock PricingMomentCard can fire setAuthModalOpen
+          for an already-signed-in user. Rather than surface a stale account
+          card that duplicates the AccountMenu's actions (two chromes for one
+          job), an already-authed open is a no-op — AccountMenu + /account are
+          the single account-management entry point. */}
+      {authModalOpen && authTier === 'anon' && (
         <Suspense fallback={null}>
-          <AuthModal
-            onClose={() => setAuthModalOpen(false)}
-            onNavigateAccount={() => { setAuthModalOpen(false); setView('account'); }}
-          />
+          <AuthModal onClose={() => setAuthModalOpen(false)} />
         </Suspense>
       )}
 
@@ -781,11 +777,11 @@ export default function App() {
       )}
 
       {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
-          P118 NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
-          uses it to surface "Saved as {name}" after a signup-save flow.
-          The onboardingDiet flag should NOT suppress those. Only the
-          OnboardingCoach overlay is gated (above). If onboarding tips
-          ever become a problem, route them through a separate channel. */}
+          NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
+          uses it to surface "Saved as {name}" after a signup-save flow, so it
+          must survive even though the OnboardingCoach overlay it once partnered
+          was deleted. If onboarding tips ever become a problem, route them
+          through a separate channel. */}
       {onboardingNudge && (
         <div
           role="button"
@@ -829,7 +825,7 @@ export default function App() {
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
 
-      {/* P103 — Active pricing moment card. Always mounted; renders null
+      {/* Active pricing moment card. Always mounted; renders null
           when no moment is active. Bottom-right fixed-position so it
           doesn't fight the dossier or wizard for vertical space. */}
       <Suspense fallback={null}>

@@ -41,7 +41,15 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
   }, []);
 
   const emit = () => {
-    onChange?.(sanitizeGalleryHtml(ref.current?.innerHTML || '').slice(0, maxLength));
+    const raw = ref.current?.innerHTML || '';
+    // Slicing SANITIZED html at a raw character boundary can cut mid-tag and
+    // store broken/truncated markup (a dropped closing tag, a garbled link).
+    // Sanitize first; only if it exceeds the cap, truncate the SOURCE and
+    // re-sanitize — DOMPurify re-balances any tag the cut left open, so the
+    // stored value is always well-formed.
+    let clean = sanitizeGalleryHtml(raw);
+    if (clean.length > maxLength) clean = sanitizeGalleryHtml(raw.slice(0, maxLength));
+    onChange?.(clean);
   };
 
   // mousedown + preventDefault keeps the selection inside the editable so

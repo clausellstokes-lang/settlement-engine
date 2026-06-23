@@ -11,15 +11,12 @@
  * handler (passed from AccountPage) so there's a single source of truth for the
  * email opt-in; the rest live in productPrefs.
  */
-import { Sliders, Bot, FileText, Map as MapIcon, Bell, Check } from 'lucide-react';
-import { DETAIL_LEVELS } from '../../store/uiSlice.js';
 import { useStore } from '../../store/index.js';
 import {
-  GOLD, INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
+  INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
 
-const DETAIL_LABELS = { guided: 'Overview (guided)', standard: 'Detail (standard)', expert: 'Engine (expert)' };
 const PDF_STYLES = [
   { key: 'classic', label: 'Classic' },
   { key: 'compact', label: 'Compact' },
@@ -33,17 +30,26 @@ function selectStyle() {
   };
 }
 
-function PrefRow({ icon: Icon, label, desc, children }) {
+// PrefRow groups rows by vertical spacing rather than a per-row borderBottom
+// (which drew a false floor on every row, including the last). When `htmlFor`
+// is supplied the visible label is rendered as a <label> spanning the full row,
+// so the click/tap target reaches ~44px and the text is programmatically tied
+// to its control (mirrors VisibilityToggle in AccountDataPrivacySection).
+function PrefRow({ label, desc, htmlFor, children }) {
+  const Wrapper = htmlFor ? 'label' : 'div';
+  const wrapperProps = htmlFor
+    ? { htmlFor, style: { display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.md}px 0`, cursor: 'pointer' } }
+    : { style: { display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.md}px 0` } };
   return (
-    <div style={{ display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}` }}>
+    <Wrapper {...wrapperProps}>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.sm, fontWeight: 700, color: INK }}>
-          {Icon && <Icon size={14} color={GOLD} />} {label}
+        <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+          {label}
         </div>
         {desc && <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>{desc}</div>}
       </div>
       <div style={{ flexShrink: 0 }}>{children}</div>
-    </div>
+    </Wrapper>
   );
 }
 
@@ -52,37 +58,20 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
   const setProductPref = useStore(s => s.setProductPref);
 
   return (
-    <Section title="Product Preferences" icon={Sliders}>
+    <Section title="Product Preferences">
       <p style={{ fontSize: FS.xs, color: BODY, margin: `0 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
-        Defaults for new settlements, campaigns, and exports. These don't change anything you've already made.
+        Defaults for new settlements, campaigns, and exports. These do not change anything you have already made.
       </p>
-
-      {/* Default detail level */}
-      <PrefRow
-        icon={Sliders}
-        label="Default detail level"
-        desc="The altitude a fresh dossier opens at."
-      >
-        <select
-          aria-label="Default detail level"
-          value={prefs.defaultDetailLevel || 'guided'}
-          onChange={e => setProductPref('defaultDetailLevel', e.target.value)}
-          style={selectStyle()}
-        >
-          {DETAIL_LEVELS.map(lvl => (
-            <option key={lvl} value={lvl}>{DETAIL_LABELS[lvl] || lvl}</option>
-          ))}
-        </select>
-      </PrefRow>
 
       {/* AI polish default */}
       <PrefRow
-        icon={Bot}
-        label="AI-polish new generations by default"
-        desc="Pre-check the AI prose-polish option on the generator (uses credits)."
+        label="Narrate new settlements by default (uses credits)"
+        desc="Pre-check the narrated prose pass on the generator."
+        htmlFor="pref-ai-polish"
       >
         <input
-          aria-label="AI-polish by default"
+          id="pref-ai-polish"
+          aria-label="Narrate new settlements by default"
           type="checkbox"
           checked={prefs.aiPolishDefault === true}
           onChange={e => setProductPref('aiPolishDefault', e.target.checked)}
@@ -91,11 +80,12 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
 
       {/* PDF / export style */}
       <PrefRow
-        icon={FileText}
         label="Default PDF / export style"
         desc="The look applied to new PDF and print exports."
+        htmlFor="pref-pdf-style"
       >
         <select
+          id="pref-pdf-style"
           aria-label="Default PDF style"
           value={prefs.pdfStyle || 'classic'}
           onChange={e => setProductPref('pdfStyle', e.target.value)}
@@ -109,11 +99,12 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
 
       {/* Campaign / map preferences */}
       <PrefRow
-        icon={MapIcon}
         label="Auto-save map edits in campaigns"
         desc="Persist world-map changes automatically while running a campaign."
+        htmlFor="pref-campaign-autosave"
       >
         <input
+          id="pref-campaign-autosave"
           aria-label="Auto-save campaign map edits"
           type="checkbox"
           checked={prefs.campaignMapAutosave !== false}
@@ -123,11 +114,12 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
 
       {/* Notification preferences (reuses the profile email flag) */}
       <PrefRow
-        icon={Bell}
         label="Email notifications"
         desc="Product news, lifecycle, and account emails."
+        htmlFor="pref-email-notifications"
       >
         <input
+          id="pref-email-notifications"
           aria-label="Email notifications preference"
           type="checkbox"
           checked={emailNotifications !== false}
@@ -135,8 +127,8 @@ export default function AccountPreferencesSection({ emailNotifications, setEmail
         />
       </PrefRow>
 
-      <div style={{ fontSize: FS.xs, color: SECOND, marginTop: SP.md, display: 'flex', alignItems: 'center', gap: 6 }}>
-        <Check size={13} color={swatch.success} /> Preferences save automatically.
+      <div style={{ fontSize: FS.xs, color: SECOND, marginTop: SP.md }}>
+        Preferences save automatically.
       </div>
     </Section>
   );

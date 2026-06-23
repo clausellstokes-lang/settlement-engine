@@ -1,12 +1,11 @@
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
- * Drop-in replacement for generateSettlement() that uses the pipeline runner.
- * Same signature, same output, but internally runs through registered steps
- * with seeded PRNG for deterministic generation.
+ * Uses the pipeline runner. Same signature and output as the retired monolithic
+ * generateSettlement(), but internally runs through registered steps with a
+ * seeded PRNG for deterministic generation.
  *
- * This is the sole settlement generation entry point.
- * Once validated, the old file can be deleted and this becomes the sole entry point.
+ * Migration is COMPLETE: this is the sole settlement generation entry point.
  */
 
 import { createPRNG, generateSeed } from './prng.js';

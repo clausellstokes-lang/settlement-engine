@@ -19,7 +19,7 @@ afterEach(cleanup);
 /** Click a HowToUse tab by its label, disambiguating the tab BUTTON from any
  *  body text that mentions the same phrase. */
 function clickTab(container, label) {
-  const btn = [...container.querySelectorAll('button[aria-pressed]')]
+  const btn = [...container.querySelectorAll('button[role="tab"]')]
     .find(b => b.textContent.trim() === label);
   if (!btn) throw new Error(`tab button not found: ${label}`);
   fireEvent.click(btn);
@@ -53,7 +53,7 @@ describe('HowToUse — Living World tab + split Under-the-Hood', () => {
     const { container } = render(<HowToUse standalone />);
     expect(container.firstChild).not.toBeNull();
     // The new tab buttons are present.
-    const labels = [...container.querySelectorAll('button[aria-pressed]')].map(b => b.textContent.trim());
+    const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
     expect(labels).toContain('The Living World');
     expect(labels).toContain('Under the Hood');
   });
@@ -75,10 +75,10 @@ describe('HowToUse — Living World tab + split Under-the-Hood', () => {
     const { container } = render(<HowToUse standalone />);
     clickTab(container, 'Under the Hood');
     const text = container.textContent.toLowerCase();
-    expect(text).toContain('generation — how one town is derived');
-    expect(text).toContain('simulation — how the region moves');
+    expect(text).toContain('generation: how one town is derived');
+    expect(text).toContain('simulation: how the region moves');
     // The simulation section names the substrate + the why-trace.
-    expect(text).toContain('fifteen causal variables');
+    expect(text).toContain('sixteen causal variables');
     expect(text).toContain('why-trace');
   });
 });

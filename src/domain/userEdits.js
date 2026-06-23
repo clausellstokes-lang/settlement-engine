@@ -1,7 +1,7 @@
 /**
  * domain/userEdits.js — per-field user authorship.
  *
- * Tier 5.4 of the roadmap. Premium users can hand-write descriptive
+ * Premium users can hand-write descriptive
  * prose for any field in the dossier (NPC secrets, plot hooks,
  * institution descriptions, history beats, etc.). This module is the
  * pure-domain layer underneath the UI:

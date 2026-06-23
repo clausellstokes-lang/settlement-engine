@@ -1,7 +1,7 @@
 /**
  * domain/hookEscalation.js — Structured hooks + escalation-clock derivation.
  *
- * Tier 4.10 of the roadmap. Today's hooks live scattered across:
+ * Today's hooks live scattered across:
  *
  *   settlement.economicViability.plotHooks      — economic pressures
  *   settlement.history.events[].plotHooks       — historical event hooks
@@ -200,7 +200,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   institution: {
     ifIgnored: [
-      'The institution becomes impaired — services it provides degrade.',
+      'The institution becomes impaired. Services it provides degrade.',
       'Dependent factions / chains lose their anchor.',
       'A rival institution captures the vacated role.',
     ],
@@ -212,7 +212,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   npc: {
     ifIgnored: [
-      'The NPC takes drastic action — defection, betrayal, departure, or death.',
+      'The NPC takes drastic action: defection, betrayal, departure, or death.',
       'Their faction or institution loses leadership and capacity.',
       'A power vacuum opens; opportunistic actors rush in.',
     ],
@@ -224,14 +224,14 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   external: {
     ifIgnored: [
-      'The external pressure compounds — more refugees, more raids, deeper plague.',
+      'The external pressure compounds: more refugees, more raids, deeper plague.',
       'Local resources are consumed defending or absorbing the impact.',
       'Public order strains as the threat lingers.',
     ],
     possibleResolutions: [
       'Confront the external force directly (combat, diplomacy, magic).',
       'Hire intermediaries to absorb the threat.',
-      'Adapt — reorganize the settlement around the new reality.',
+      'Adapt. Reorganize the settlement around the new reality.',
     ],
   },
   pressure: {
@@ -248,7 +248,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   other: {
     ifIgnored: [
-      'The hook fades — but leaves consequences the DM can pick up later.',
+      'The hook fades, but leaves consequences the DM can pick up later.',
     ],
     possibleResolutions: [
       'Direct intervention by the players.',
@@ -326,7 +326,7 @@ export function deriveAllStructuredHooks(settlement) {
 //   6. Riot breaks out in the market.
 //
 // We don't try to construct clocks from prose; we derive them from the
-// structured Tier 4.3 + 4.1 foundations. A disrupted food chain spawns
+// structured supply-chain and faction foundations. A disrupted food chain spawns
 // a bread-riot clock; a disrupted trade chain spawns a smuggling-rise
 // clock; a low-legitimacy governing faction spawns a legitimacy-crisis
 // clock. The stages are templated per clock type and the actors are
@@ -379,7 +379,7 @@ const CLOCK_TEMPLATES = Object.freeze({
       'Allies are forced to pick sides.',
       'Quiet inducements / threats circulate.',
       'A symbolic act of defiance occurs.',
-      'Open break — the principals stop speaking publicly.',
+      'Open break. The principals stop speaking publicly.',
     ],
   },
 });

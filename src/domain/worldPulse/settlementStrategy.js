@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/settlementStrategy.js — Feature C (C2): the SETTLEMENT-tier
+ * domain/worldPulse/settlementStrategy.js — the SETTLEMENT-tier
  * strategy chooser. A deliberative "enumerate candidate moves, score each, pick
  * one" agent — the same idiom as npcAgency.evaluateNpcRules (the NPC-tier chooser),
  * lifted to the settlement tier and made RNG-VARIED via a softmax sample (so a
@@ -26,7 +26,7 @@
  *
  * PROBABILITY-1, NO DOUBLE-RANDOMIZE: the chosen move was ALREADY sampled here by
  * the softmax draw. It is emitted at probability 1 so `rollCandidates` treats it as
- * a guaranteed consequence — a second Bernoulli would double-randomize it (OQ16).
+ * a guaranteed consequence — a second Bernoulli would double-randomize it.
  *
  * EXCLUSIVE-TAG DE-CONFLICT: every strategy candidate carries a `strategy:<S>`
  * exclusive tag. The reactive per-edge war candidates (hostileRules raid /
@@ -219,7 +219,7 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
     ruleFamily: 'strategy',
     targetSaveId: String(sId),
     severity,
-    probability: 1, // ALREADY sampled here — no second roll (OQ16).
+    probability: 1, // ALREADY sampled here — no second roll.
     applyMode: proposal ? 'proposal' : 'auto',
     headline,
     summary,
@@ -342,7 +342,7 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
   }
 
   if (move === 'deploy') {
-    // The deploy DECISION; the war layer (A1) owns the actual front mint when its
+    // The deploy DECISION; the war layer owns the actual front mint when its
     // own gate passes. We emit a guaranteed army_deployed-flavored marker so the
     // posture is visible AND it wins the exclusive group over the reactive raid.
     const target = ctx.hostileTargets.find((/** @type {any} */ t) => strengthFor(sId) > strengthFor(t)) || ctx.hostileTargets[0];
@@ -433,12 +433,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         severity: OVERRIDE_SEVERITY,
         headline: `${name} recalls its army`,
         summary: ctx.homeBesieged
-          ? `${name} is itself besieged — its army abroad is recalled to defend the home walls.`
-          : `A vassal of ${name} is under siege — ${name} recalls its army to relieve it.`,
+          ? `${name} is itself besieged. Its army abroad is recalled to defend the home walls.`
+          : `A vassal of ${name} is under siege. ${name} recalls its army to relieve it.`,
         reasons: [
           ctx.homeBesieged
             ? `${name} is besieged at home while its army is committed against ${deployment.targetId}.`
-            : `${name} has an army abroad while a vassal is besieged — an emergency recall.`,
+            : `${name} has an army abroad while a vassal is besieged (an emergency recall).`,
           'Hard override: deterministic, bypasses the softmax sample (probability 1).',
         ],
       }));

@@ -37,20 +37,26 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 
-// CORS: mirror admin-actions — when ALLOWED_ORIGINS is configured restrict to that
-// allowlist and reflect the matching Origin; otherwise "*" (the endpoint is
-// independently protected by JWT auth + role gating + botGuard).
-const ORIGIN_ALLOWLIST = (Deno.env.get("ALLOWED_ORIGINS") || "")
+// CORS: mirror admin-actions and fail CLOSED — when ALLOWED_ORIGINS is configured
+// use it, otherwise fall back to the known production + localhost hosts. NEVER
+// "*" (the endpoint is independently protected by JWT auth + role gating +
+// botGuard, but a missing env var must not silently allow any origin).
+const DEFAULT_ORIGINS = [
+  "https://settlementforge.com",
+  "https://www.settlementforge.com",
+  "https://settlementwork.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+const CONFIGURED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
   .split(",").map((s) => s.trim()).filter(Boolean);
+const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAULT_ORIGINS;
 
 function corsHeadersFor(req: Request): Record<string, string> {
-  let allowOrigin = "*";
-  if (ORIGIN_ALLOWLIST.length) {
-    const requestOrigin = req.headers.get("Origin") || "";
-    allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
-      ? requestOrigin
-      : ORIGIN_ALLOWLIST[0];
-  }
+  const requestOrigin = req.headers.get("Origin") || "";
+  const allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
+    ? requestOrigin
+    : ORIGIN_ALLOWLIST[0];
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Vary": "Origin",
@@ -74,6 +80,23 @@ function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
 }
 
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (the account_is_active gate + RLS-bypassing RPCs). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  );
+}
+
 // Best-effort email send (Resend). Soft-fails to false when unconfigured or on
 // error — a ticket lifecycle email must never block or fail the user action.
 async function sendEmail(to: string | null, subject: string, text: string): Promise<boolean> {
@@ -93,7 +116,22 @@ async function sendEmail(to: string | null, subject: string, text: string): Prom
   }
 }
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the account_is_active gate can be
+// EXECUTION-tested: index.test.ts feeds requests with injected supabase stubs and
+// asserts a banned/disabled actor is REJECTED (403) on the ticket-WRITE paths
+// before any write RPC runs, and that an active actor is allowed through. `deps`
+// is the optional injection seam (userClient verifies the JWT, adminClient runs
+// the gate + service-role RPCs); production passes nothing so behavior is
+// identical to the previous inline handler.
+export async function handleAccountActions(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   const cors = corsHeadersFor(req);
   const jsonHeaders = { ...cors, "Content-Type": "application/json" };
   const json = (body: Record<string, unknown>, status = 200) =>
@@ -114,14 +152,8 @@ serve(async (req) => {
       return json({ error: "Missing authorization" }, 401);
     }
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
     // User-scoped client → verify the caller's identity from their JWT.
-    const userClient = createClient(supabaseUrl, supabaseKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const userClient = makeUserClient(authHeader);
     const {
       data: { user: callingUser },
       error: authError,
@@ -131,13 +163,28 @@ serve(async (req) => {
     }
 
     // Service-role client → RLS-bypassing reads/writes + the processor RPC.
-    const adminClient = createClient(supabaseUrl, serviceKey);
+    const adminClient = makeAdminClient();
 
     const {
       action, graceDays: graceOverride,
       // A5 ticket params (user-facing self-service path).
       subject, message, category, priority, links, ticketId, body, metadata,
     } = await req.json();
+
+    // A+ defense-in-depth (finding #1): a banned/disabled/soft-deleted account may
+    // not write NEW support content (mirrors the account_is_active gate on the AI
+    // edge functions). Fail-CLOSED on null/RPC-error (isActive !== true). Read-only
+    // ticket actions and the account-deletion lifecycle stay reachable.
+    // NOTE: the user-facing reply action handled HERE is "reply_ticket" (switch case
+    // below); "post_ticket_reply" is the admin-actions name and never reaches this
+    // function — gating on it would be dead. Both write paths must fail-closed.
+    const TICKET_WRITE_ACTIONS = new Set(["create_ticket", "reply_ticket"]);
+    if (TICKET_WRITE_ACTIONS.has(action)) {
+      const { data: isActive } = await adminClient.rpc("account_is_active", { p_uid: callingUser.id });
+      if (isActive !== true) {
+        return json({ error: "Account is not active" }, 403);
+      }
+    }
 
     switch (action) {
       // ── A5: create_ticket — the CALLER files their OWN ticket. The user_id is
@@ -311,9 +358,46 @@ serve(async (req) => {
         });
         if (error) return json({ error: error.message }, 500);
 
+        // Layer 2 (review B16 #1): the RPC stamped deleted_at + disabled_at (so the
+        // 057/059 DB+RLS gate already rejects every WRITE from the anonymised shell),
+        // but the user's LIVE JWT/session would otherwise survive until expiry. Ban
+        // each just-processed account at the auth provider (GoTrue native ban) so the
+        // session dies immediately too. The RPC returns the deletion_request ids it
+        // advanced; resolve each to its user_id and ban it. Soft-fails per user — a
+        // GoTrue error never undoes the soft-delete (the DB anonymise/lock stands).
+        let sessionsRevoked = 0;
+        const requestIds = Array.isArray((data as Record<string, unknown> | null)?.ids)
+          ? ((data as Record<string, unknown>).ids as unknown[]).map(String)
+          : [];
+        if (requestIds.length > 0) {
+          const { data: processedRows } = await adminClient
+            .from("deletion_requests")
+            .select("user_id")
+            .in("id", requestIds);
+          const userIds = (processedRows || [])
+            .map((r: Record<string, unknown>) => r.user_id)
+            .filter((id: unknown): id is string => typeof id === "string");
+          for (const uid of userIds) {
+            try {
+              const { error: banErr } = await adminClient.auth.admin.updateUserById(
+                uid,
+                { ban_duration: "876000h" },
+              );
+              if (banErr) {
+                console.warn("[account-actions] GoTrue ban on deletion failed:", banErr.message);
+              } else {
+                sessionsRevoked += 1;
+              }
+            } catch (e) {
+              console.warn("[account-actions] GoTrue ban on deletion threw:", errorMessage(e));
+            }
+          }
+        }
+
         return json({
           success: true,
           result: data,
+          sessionsRevoked,
           processedAt: new Date().toISOString(),
         });
       }
@@ -324,4 +408,9 @@ serve(async (req) => {
   } catch (err) {
     return json({ error: errorMessage(err) }, 500);
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleAccountActions(req));

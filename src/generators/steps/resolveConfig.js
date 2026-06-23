@@ -12,7 +12,10 @@ import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTie
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 
-const TERRAIN_WEIGHTS = [
+// Exported so the gallery-facet alignment test can pin TERRAIN_OPTIONS against
+// the vocabulary the generator actually rolls (the values persisted to
+// config.terrainType). See tests/components/gallery/facetAlignment.test.js.
+export const TERRAIN_WEIGHTS = [
   ['plains', 22], ['hills', 18], ['forest', 13],
   ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
 ];
@@ -27,14 +30,17 @@ const TERRAIN_ROUTE_POOLS = {
   desert:    ['crossroads','road','road','isolated','road'],
 };
 
-const CULTURES = [
+// The canonical 11-culture catalog. Exported so the gallery-facet alignment
+// test can pin CULTURE_OPTIONS against the values the generator persists to
+// config.culture. See tests/components/gallery/facetAlignment.test.js.
+export const CULTURES = [
   'germanic','latin','celtic','arabic','norse','slavic',
   'east_asian','mesoamerican','south_asian','steppe','greek',
 ];
 
 registerStep('resolveConfig', {
   deps: [],
-  reads: [], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: [], // ctx keys this step consumes that another step produces
   provides: [
     'tier', 'population', 'tradeRoute', 'terrainType', 'resolvedTerrain',
     'culture', 'magicLevel', 'threat', 'priorityMagicEffective',
@@ -196,7 +202,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: 'config.terrainOverride=auto',
-        reason: 'Terrain not pinned — weighted-rolled from regional pool.',
+        reason: 'Terrain not pinned. Weighted-rolled from regional pool.',
       }],
       downstreamEffects: [
         { target: 'tradeRoutePool', effect: 'terrain-constrained' },
@@ -275,7 +281,7 @@ registerStep('resolveConfig', {
       result: 'overridden',
       causes: [{
         source: `config.monsterThreat=${config.monsterThreat}`,
-        reason: 'Explicit plagued-tier threat with priorityMilitary below 25 — a settlement under that pressure cannot field less than a skeleton garrison.',
+        reason: 'Explicit plagued-tier threat with priorityMilitary below 25. A settlement under that pressure cannot field less than a skeleton garrison.',
       }],
       downstreamEffects: [
         { target: 'priorityMilitary', effect: 'floored to 25' },
@@ -291,7 +297,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: config.culture ? `config.culture=${config.culture}` : 'config.culture=null',
-        reason: 'Culture not pinned — picked from canonical 11-culture catalog.',
+        reason: 'Culture not pinned. Picked from canonical 11-culture catalog.',
       }],
       downstreamEffects: [
         { target: 'namePool',          effect: 'culture-scoped' },

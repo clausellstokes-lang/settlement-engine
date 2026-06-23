@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-20T01:34:06.608Z",
+  "generatedAt": "2026-06-23T06:21:28.582Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "146a658e9deb4c47",
+  "sourceHash": "ae56beff57d833ee",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -29,6 +29,7 @@
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",
     "src/domain/regionalGraph.js",
+    "src/domain/relationships/canonicalRelationship.js",
     "src/domain/simulationSpine.js",
     "src/domain/supplyChainState.js",
     "src/domain/threatProfile.js",
@@ -38,6 +39,7 @@
     "src/domain/worldPulse/relationshipEvolution.js",
     "src/domain/worldPulse/relationshipHierarchy.js",
     "src/domain/worldPulse/relationshipMemory.js",
+    "src/domain/worldPulse/relationshipState.js",
     "src/lib/entities.js",
     "src/lib/text.js"
   ]

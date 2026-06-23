@@ -1,7 +1,7 @@
 /**
  * domain/historyBeats.js — Structured causal beats over settlement history.
  *
- * Tier 4.7 of the roadmap. Today's history fields are descriptive prose:
+ * Today's history fields are descriptive prose:
  *
  *   settlement.history.age
  *   settlement.history.founding             { age, reason, foundedBy, … }
@@ -137,8 +137,8 @@ function deriveDefiningCrisis(settlement) {
   if (severityScore(top.severity) < SEVERITY_RANK.major) return null;
 
   const text = top.description
-    ? `${top.name} (${top.yearsAgo ?? '—'} years ago): ${top.description}`
-    : `${top.name} (${top.yearsAgo ?? '—'} years ago).`;
+    ? `${top.name} (${top.yearsAgo ?? '–'} years ago): ${top.description}`
+    : `${top.name} (${top.yearsAgo ?? '–'} years ago).`;
 
   return {
     key: 'definingCrisis',

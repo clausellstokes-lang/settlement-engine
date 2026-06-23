@@ -168,7 +168,13 @@ function tierEligibility(item, pressureIdx) {
   return null;
 }
 
-function tierCandidate(item, drift, tick) {
+// rules is the normalized output of normalizeSimulationRules (see
+// evaluateTierResourceDynamics); tierCandidate reads rules.majorChangesRequireProposal,
+// mirroring resourceCandidatesFor in this module. item/drift/tick are left untyped to
+// match that sibling and the file's strict-error baseline; rules carries a narrow
+// inline type for the one flag it consults so it stays strict-clean.
+/** @param {{ majorChangesRequireProposal?: boolean }} rules */
+function tierCandidate(item, drift, tick, rules) {
   const minimum = requiredStreak(drift.direction, drift.toTier);
   if (drift.streak < minimum) return null;
   const chance = clamp01(0.18 + (drift.streak - minimum + 1) * 0.13 + drift.severity * 0.24);
@@ -181,7 +187,11 @@ function tierCandidate(item, drift, tick) {
     targetSaveId: item.id,
     severity: drift.severity,
     probability: chance,
-    applyMode: 'proposal',
+    // Honor majorChangesRequireProposal, consistent with resource_depletion in
+    // this module: a tier change stays a DM proposal under the conservative
+    // default (flag on), and auto-applies only when a campaign opts out of
+    // proposal gating (flag off, e.g. dramatic_campaign).
+    applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto',
     headline: `${item.name || item.id} may ${drift.direction === 'promotion' ? 'rise' : 'fall'} to ${drift.toTier}`,
     summary: `${item.name || item.id} has met ${drift.direction} eligibility for ${drift.streak} advancement(s).`,
     reasons: [
@@ -413,7 +423,7 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
         streak: sameTrack ? (prior.streak || 0) + 1 : 1,
         lastEvaluatedTick: tick,
       };
-      const candidate = tierCandidate(item, tierDrift, tick);
+      const candidate = tierCandidate(item, tierDrift, tick, rules);
       if (candidate && !pendingTierProposals.has(String(item.id))) candidates.push(candidate);
     }
     settlementTickStates[item.id] = {

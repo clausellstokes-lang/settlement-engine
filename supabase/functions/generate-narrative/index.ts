@@ -43,6 +43,8 @@ import {
 } from '../_shared/aiGroundingBundle.js';
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from '../_shared/requestMeta.ts';
+// Structured error logging for the money/AI path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
@@ -1683,7 +1685,9 @@ function getCorsHeaders(req?: Request) {
   const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
   const match = allowed.includes(origin) || isLocalhost || !origin;
   return {
-    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
+    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
+    // matched origin, else pin to the first allowed host.
+    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     ...(match ? { 'Vary': 'Origin' } : {}),
@@ -1928,7 +1932,42 @@ function isEmptyPayload(payload: unknown): boolean {
 
 // ── Main handler ────────────────────────────────────────────────────────────
 
-serve(async (req) => {
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity
+ *  and runs the user-context spend_credits RPC. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (the account_is_active gate + the service-role-only
+ *  refund_credits RPC). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Exported (not just inlined into serve) so the money/AI trust boundary can be
+// EXECUTION-tested: index.test.ts feeds requests with injected supabase stubs and
+// asserts an inactive account is REJECTED (fail-closed, never spends), and that a
+// generation FAILURE refunds via the captured spend_id (refund_credits called with
+// that exact ledger row) and does NOT double-spend. `deps` is the optional
+// injection seam (userClient verifies the JWT + spends, adminClient gates +
+// refunds); production passes nothing so behavior is identical to the previous
+// inline handler.
+export async function handleGenerateNarrative(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
 
   if (req.method === 'OPTIONS') {
@@ -1954,11 +1993,7 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) throw new Error('Missing authorization header');
 
-    const supabaseUser = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
+    const supabaseUser = makeUserClient(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
 
@@ -2012,10 +2047,21 @@ serve(async (req) => {
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
     const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseAdmin = makeAdminClient();
+
+    // ── Trust-boundary gate: reject a banned / disabled / soft-deleted account ──
+    // Defense-in-depth (review B16 finding #1): spend_credits (migration 057) ALSO
+    // rejects a non-active account, so this is a redundant upfront check — but it
+    // keeps a locked account from ever reaching the spend path or the model call.
+    // FAIL CLOSED: gate on `!== true`. The RPC returns true only for a confirmed-
+    // active account; null (RPC error / unexpected shape) or any non-true value is
+    // treated as inactive, so a transient failure can never fail OPEN.
+    const { data: isActive, error: activeErr } =
+      await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
+    if (activeErr) {
+      logError('generate-narrative', user.id, `account_is_active errored: ${activeErr.message}`);
+    }
+    if (isActive !== true) throw new Error('Account is not active');
 
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
     // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
@@ -2086,10 +2132,24 @@ serve(async (req) => {
       dynamicPreservation = preservationBlockFor(settlement);
     } catch (e) {
       if (!isElevated && spendId) {
-        await supabaseAdmin.rpc('refund_credits', {
-          spend_ledger_row: spendId,
-          refund_reason: 'pre-stream setup failed',
-        }).catch(() => {});
+        // The supabase RPC builder is a thenable, not a real Promise (no `.catch`);
+        // await it and inspect `error`. A failed pre-stream refund leaves the user
+        // charged, so it's logged as a structured line for alerting.
+        try {
+          const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+            spend_ledger_row: spendId,
+            refund_reason: 'pre-stream setup failed',
+          });
+          if (refundErr) {
+            logError('generate-narrative', user.id, refundErr.message, {
+              stage: 'pre-stream-refund', spend_id: spendId,
+            });
+          }
+        } catch (refundErr) {
+          logError('generate-narrative', user.id, refundErr, {
+            stage: 'pre-stream-refund', spend_id: spendId,
+          });
+        }
       }
       throw e;
     }
@@ -2135,8 +2195,11 @@ serve(async (req) => {
               // Loud failure. The user got partial value (the spend
               // happened) and the refund didn't land — a support
               // ticket is the right resolution, not a silent racy
-              // direct write that could compound the inconsistency.
-              console.error('[generate-narrative] refund_credits RPC failed:', refundErr.message);
+              // direct write that could compound the inconsistency. The
+              // structured line makes the stuck refund greppable + alertable.
+              logError('generate-narrative', user.id, refundErr.message, {
+                stage: 'refund', spend_id: spendId,
+              });
               send({
                 refund: 'failed',
                 spend_id: spendId,
@@ -2145,7 +2208,9 @@ serve(async (req) => {
               });
             }
           } catch (refundErr) {
-            console.error('[generate-narrative] refund threw:', refundErr);
+            logError('generate-narrative', user.id, refundErr, {
+              stage: 'refund', spend_id: spendId,
+            });
           }
         };
 
@@ -2445,4 +2510,9 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleGenerateNarrative(req));

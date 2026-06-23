@@ -37,7 +37,7 @@ function clamp01(value) {
   return Math.max(0, Math.min(1, n));
 }
 
-// ── Feed curation (Wave 7) ──────────────────────────────────────────────────
+// ── Feed curation ────────────────────────────────────────────────────────────
 // The feed is what the DM reads and what the paid chronicle grounds on; the
 // outcome LEDGER is the autoApplied return (→ pulseHistory.selectedOutcomes
 // upstream). Curation below shapes only the FEED — the ledger keeps everything.
@@ -137,8 +137,8 @@ function newsEntryForOutcome(outcome, tick, status = 'applied') {
 // within the cooldown does not re-emit a feed entry — the probe measured
 // 8-13 entries/tick dominated by NPC posturing and a population_growth
 // metronome, flushing major arcs out of the 240-cap feed. Cooldown reuses the
-// R1 realm-arc idiom: tick-based, because the feed is newest-first (a tail
-// slice would inspect the OLDEST entries once the feed exceeds the window).
+// realm-arc idiom: tick-based, because the feed is newest-first (a tail slice
+// would inspect the OLDEST entries once the feed exceeds the window).
 const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
 
 // State CHANGES always emit. Any discrete transition marker — stressor
@@ -199,7 +199,7 @@ function affectedSaveIdsForOutcome(outcome) {
   return [...ids];
 }
 
-// Z1 occupation-parity multipliers — mirror the GENERATOR's `occupied`-stress
+// Occupation-parity multipliers — mirror the GENERATOR's `occupied`-stress
 // transform (powerGenerator.js ~1223): the conqueror disarms the locals so a
 // PULSE-conquered town looks like a GENERATION-occupied one, not a town that
 // merely swapped a flag. A local military/guard faction is gutted (×0.3 — the
@@ -286,14 +286,14 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   // is gone, or already governs) safely no-ops; the condition below still
   // records the turmoil.
   if (outcome.powerTransfer && String(outcome.targetSaveId) === String(saveId)) {
-    // A CONQUEST (Feature A, war layer) installs a foreign occupation authority —
+    // A CONQUEST (the war layer) installs a foreign occupation authority —
     // a power that does NOT exist among the target's own factions. transferRulingPower
     // can only promote an EXISTING faction, so seed the occupation authority as a
     // new non-governing power first; the transfer then crowns it. Gated on
     // cause === 'conquest' so every pre-existing (coup) transfer is byte-identical.
     if (outcome.powerTransfer.cause === 'conquest') {
       next = installOccupationAuthority(next, outcome.powerTransfer.toPowerName);
-      // Z1 occupation parity: a GENERATION-occupied town carries the
+      // Occupation parity: a GENERATION-occupied town carries the
       // vassal_extraction condition (conditionPromotion maps the 'occupied' stress
       // into it), so a PULSE-conquered town must too — that condition is what the
       // substrate (deriveCausalState), the pressure model, AND population flight all
@@ -323,8 +323,8 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
     });
     if (!result.error) next = result.settlement;
   }
-  // Feature D (R2): a religious conversion RE-EMBEDS the winning neighbour's
-  // EXISTING deity snapshot onto the convert's config.primaryDeitySnapshot so the
+  // A religious conversion RE-EMBEDS the winning neighbour's EXISTING deity
+  // snapshot onto the convert's config.primaryDeitySnapshot so the
   // conversion STICKS (the pulse/derivers read only the snapshot, never the
   // store/customContent). We re-pick the exact snapshot fields (never spread the
   // raw record) — the SAME field set SET_PRIMARY_DEITY embeds — so a re-embed is
@@ -366,18 +366,45 @@ function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ s
  * PRE-TICK record), this is byte-identical to the prior behavior: take the
  * incoming stressor wholesale, preserve createdAt, stamp updatedAt.
  *
- * The COMMUTATIVE branch fires ONLY when the prior record was minted THIS SAME
- * tick (prior.createdAt === now) — i.e. two outcomes collided on the same stressor
- * id within one apply pass (Feature D: same-tick multi-seat religious conversions
- * seeding the same `religious_conversion_fracture` record). There the merge is a
- * FIELD-MERGE that cannot depend on apply order: UNION of affectedSettlementIds,
- * MAX of severity, MAX of per-settlement severityBySettlement, MAX peakSeverity.
- * So reversing the outcome order yields a byte-identical record.
+ * The COMMUTATIVE branch fires when the prior record was minted THIS SAME tick
+ * (prior.createdAt === now) OR the caller flags `forceCommutative` — i.e. two
+ * outcomes collided on the same stressor id within one apply pass. That covers
+ * Feature D's same-tick multi-seat religious conversions seeding one fresh
+ * `religious_conversion_fracture` record (createdAt === now), AND — via the
+ * caller's this-pass write tracking — multiple spread/escalate outcomes of a
+ * PRE-TICK record colliding in one tick: without forceCommutative the second
+ * write would clobber the first as order-dependent last-write-wins,
+ * silently dropping spread targets and reverting escalate↔spread effects. The
+ * merge is a FIELD-MERGE that cannot depend on apply order: UNION of
+ * affectedSettlementIds, MAX of severity, MAX of per-settlement
+ * severityBySettlement, MAX peakSeverity. So reversing the outcome order yields a
+ * byte-identical record.
  */
-function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incoming, /** @type {any} */ now) {
+function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incoming, /** @type {any} */ now, /** @type {boolean} */ forceCommutative = false, /** @type {number} */ tick = NaN) {
+  // Wind-down ceiling: a war stressor that wound down THIS tick (its sponsoring
+  // hostility ended) must not be re-raised by a same-tick escalate/spread of the
+  // same record —
+  // that would defeat the wind-down's purpose of letting the next aging tick end
+  // the war. When the prior carries a this-tick windDown stamp, the wound-down
+  // severity is a hard ceiling for the merged result.
+  const windDownCeiling = prior?.originContext?.windDown?.tick === tick
+    ? clamp01(prior.severity ?? 0)
+    : null;
+  const capSeverity = (/** @type {number} */ s) => (windDownCeiling == null ? s : Math.min(s, windDownCeiling));
   const base = { ...incoming, createdAt: prior?.createdAt || now, updatedAt: now };
-  // Only a SAME-TICK collision (prior born this tick) takes the commutative path.
-  if (!prior || prior.createdAt !== now) return base;
+  // The commutative path fires for a SAME-TICK collision (prior born this tick)
+  // or when the caller has already written this id earlier in the same pass.
+  if (!prior || (prior.createdAt !== now && !forceCommutative)) {
+    if (windDownCeiling == null) return base;
+    // A this-tick wind-down: cap severity AND preserve the prior's windDown
+    // stamp (the incoming escalate/spread snapshot carries no originContext, so
+    // a wholesale take would erase the wind-down record the aging tick relies on).
+    return {
+      ...base,
+      severity: capSeverity(clamp01(incoming.severity ?? 0)),
+      originContext: prior.originContext ?? base.originContext,
+    };
+  }
   const affected = [...new Set([
     ...(prior.affectedSettlementIds || []),
     ...(incoming.affectedSettlementIds || []),
@@ -394,13 +421,17 @@ function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incomi
   /** @type {Record<string, any>} */
   const severityBySettlement = {};
   for (const id of Object.keys(mergedSev).sort()) severityBySettlement[id] = mergedSev[id];
-  const severity = Math.max(prior.severity ?? 0, incoming.severity ?? 0);
+  const severity = capSeverity(Math.max(prior.severity ?? 0, incoming.severity ?? 0));
   return {
     ...base,
     severity,
     peakSeverity: Math.max(prior.peakSeverity ?? 0, incoming.peakSeverity ?? 0, severity),
     affectedSettlementIds: affected,
     severityBySettlement,
+    // Preserve the prior's windDown stamp when capping (incoming carries none).
+    // Only on the wind-down path so the existing same-tick commutative merge
+    // stays byte-identical.
+    ...(windDownCeiling == null ? {} : { originContext: prior.originContext ?? base.originContext }),
   };
 }
 
@@ -445,29 +476,39 @@ function relationshipEdgeForOutcome(graph, outcome) {
 }
 
 /**
- * H16: relationshipChannelBundle and the neighbourNetwork writeback both read
- * raw edge orientation ('edge.from is the patron/overlord'), but a
- * pulse-driven subjugation may have crowned the authored 'to' side via the
- * seniority stamps on relationship state. When relationshipRoles reports the
- * senior side at 'to', hand consumers a transient role-oriented copy of the
- * edge — from/to (and the directional aliases) swapped, stored edge id kept —
- * so channels and dossiers assert the real hierarchy. Symmetric labels and
- * unstamped (DM-authored) hierarchy edges resolve as not-reversed and pass
- * through untouched.
+ * relationshipChannelBundle and the neighbourNetwork writeback both read raw
+ * edge orientation ('edge.from is the patron/overlord'), but a pulse-driven
+ * subjugation may have crowned the authored 'to' side via the seniority stamps
+ * on relationship state. When relationshipRoles reports the senior side at 'to',
+ * hand consumers a transient role-oriented copy of the edge — from/to (and the
+ * directional aliases) swapped, stored edge id kept — so channels and dossiers
+ * assert the real hierarchy. Symmetric labels and unstamped (DM-authored)
+ * hierarchy edges resolve as not-reversed and pass through untouched.
+ *
+ * Every alias pair is oriented from the SINGLE canonical senior/junior
+ * (relationshipRoles already derives these from the from/to pair), never by
+ * swapping each pair against its own raw values. An edge with a partial alias
+ * set (e.g. from/to plus a lone `source`) would otherwise come out
+ * inconsistently oriented — asserting the wrong hierarchy direction downstream.
  */
 function roleOrientedEdge(edge, relState) {
-  if (!edge || !relationshipRoles(edge, relState).reversed) return edge;
+  if (!edge) return edge;
+  const { seniorId, juniorId, reversed } = relationshipRoles(edge, relState);
+  if (!reversed) return edge;
   const oriented = { ...edge };
+  // Only rewrite alias slots the edge actually carries; the senior id goes in
+  // each pair's senior slot and the junior id in its junior slot, so all
+  // populated aliases agree on the same orientation.
   for (const [senior, junior] of [['from', 'to'], ['source', 'target'], ['a', 'b'], ['settlementAId', 'settlementBId']]) {
     if (edge[senior] === undefined && edge[junior] === undefined) continue;
-    oriented[senior] = edge[junior];
-    oriented[junior] = edge[senior];
+    if (edge[senior] !== undefined) oriented[senior] = seniorId;
+    if (edge[junior] !== undefined) oriented[junior] = juniorId;
   }
   return oriented;
 }
 
 /**
- * H11: a pulse relationship label outcome is canonical relationship state
+ * A pulse relationship label outcome is canonical relationship state
  * (DM-approved, or auto per the campaign's rules) — write it through to BOTH
  * settlements' neighbourNetwork links so the dossier, threat profile, PDF,
  * and AI grounding stop asserting the label the pulse already changed.
@@ -526,8 +567,8 @@ function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, to
 }
 
 /**
- * H15 decision: every third-party edge the vassalage hierarchy cascade flips
- * emits Wizard News — the realignment is major campaign politics, not a
+ * Every third-party edge the vassalage hierarchy cascade flips emits Wizard
+ * News — the realignment is major campaign politics, not a
  * silent field rewrite. One entry per flipped edge, naming both settlements
  * and the flip.
  */
@@ -667,6 +708,13 @@ export function applyWorldPulseOutcomes({
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+  // Stressor ids already written by an EARLIER outcome in this same apply
+  // pass. A second outcome touching the same id (escalate after spread,
+  // multi-target spread of one record) must field-MERGE with the first write,
+  // not clobber it — otherwise spread targets vanish and escalate/spread revert
+  // each other order-dependently. The merge is commutative, so the persisted
+  // record reflects every reported event regardless of iteration order.
+  const stressorWrittenThisPass = new Set();
 
   // Time advances BEFORE this tick's propagation queues: the previous pulse's
   // delayed impacts mature now, while impacts the loop below queues stay
@@ -742,8 +790,8 @@ export function applyWorldPulseOutcomes({
       if (outcome.proposalPayload?.kind === 'relationship_label_change') {
         const edge = relationshipEdgeForOutcome(graph, outcome);
         if (edge) {
-          // H16: both consumers below treat edge.from as the senior side —
-          // resolve the JUST-PATCHED state's seniority stamps first.
+          // Both consumers below treat edge.from as the senior side — resolve
+          // the JUST-PATCHED state's seniority stamps first.
           const orientedEdge = roleOrientedEdge(edge, state.relationshipStates?.[outcome.relationshipKey]);
           graph = syncRelationshipChannelBundle(graph, orientedEdge, outcome.proposalPayload.toType, {
             now,
@@ -784,12 +832,12 @@ export function applyWorldPulseOutcomes({
                 tick,
               });
             }
-            // H15: every flipped third-party edge emits Wizard News (one
-            // entry per cascade change, naming both settlements + the flip).
+            // Every flipped third-party edge emits Wizard News (one entry per
+            // cascade change, naming both settlements + the flip).
             const settlementNameById = new Map((snapshot.settlements || [])
               .map(item => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
             const nameFor = id => settlementNameById.get(String(id)) || String(id ?? 'unknown');
-            // T1's cascadeChanges shape and the legacy hierarchy.changes shape
+            // The cascadeChanges shape and the legacy hierarchy.changes shape
             // share fromType/toType/reason but key the edge differently — the
             // union defeats the checker, so normalize through `any` here.
             const cascades = /** @type {any[]} */ (
@@ -849,7 +897,12 @@ export function applyWorldPulseOutcomes({
       // so the FIRST createdAt wins (the crisis was born once) while
       // updatedAt moves with every touch.
       const prior = byId.get(outcome.stressor.id);
-      const merged = mergeStressorUpsert(prior, outcome.stressor, now);
+      // Force the commutative field-merge when an earlier outcome in THIS pass
+      // already wrote this id: a pre-tick record's createdAt !== now, so without
+      // this flag the second collision would last-write-win, dropping the first
+      // write's spread targets / reverting its severity.
+      const merged = mergeStressorUpsert(prior, outcome.stressor, now, stressorWrittenThisPass.has(outcome.stressor.id), tick);
+      stressorWrittenThisPass.add(outcome.stressor.id);
       byId.set(outcome.stressor.id, merged);
       state = { ...state, stressors: [...byId.values()] };
       // A betrayal's birth seeds the traitor its variant implies (one corrupt
@@ -894,8 +947,8 @@ export function applyWorldPulseOutcomes({
       const conditionId = impact.conditionId || legacyRegionalConditionId(impact);
       const conditions = Array.isArray(entry.settlement.activeConditions) ? entry.settlement.activeConditions : [];
       if (conditions.some(condition => condition?.id === conditionId)) continue;
-      // R4: now threads through to updatedAt too, not just resolvedAt —
-      // replay stamps no wall-clock time anywhere on the reconciled row.
+      // `now` threads through to updatedAt too, not just resolvedAt — replay
+      // stamps no wall-clock time anywhere on the reconciled row.
       graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now }, { now });
     }
     if (graph !== beforeReconcile) {

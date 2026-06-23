@@ -10,7 +10,9 @@ commands run with your Supabase + Stripe credentials.
 After pushing to `origin/master`:
 
 1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate data/edge/map
-   → typecheck → lint → ~4,480 tests → build). Watch:
+   → typecheck → lint → the full Vitest suite → build). The test count grows every
+   PR — the live number is whatever the CI run reports, not a figure pinned here.
+   Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
 2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
@@ -24,14 +26,35 @@ If the client app's already up but a new feature is missing, the cause
 is almost always **a) missing migration** or **b) stale edge-function
 bundle**. Check the two manual sections.
 
-## Gating production on CI (recommended)
+## Gating production on CI
 
-Today CI and the Vercel deploy are **independent**: a push to `master`
-triggers the Vercel production build immediately, regardless of whether
-`.github/workflows/ci.yml` passed. The local `pre-push` hook is the only
-thing between a red gate and a live deploy — and hooks can be skipped
-(`--no-verify`). For a product that handles payments, make CI a hard gate.
-Two ways, weakest → strongest:
+**In-repo gate (wired and ARMED): `vercel.json` → `ignoreCommand`.** `vercel.json`
+sets `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`. Vercel runs that
+BEFORE every build and reads its exit code (exit 0 = skip build, exit 1 =
+proceed — Vercel's inverted convention). The script queries the GitHub Checks
+API for the commit being deployed and only PROCEEDS when the required checks
+(`check`, `e2e`, `deno-tests`) are all green.
+
+**The gate is FAIL-CLOSED.** Inside a Vercel git deploy, anything that prevents
+verifying CI — a missing `GITHUB_CI_STATUS_TOKEN`, a network error reaching
+GitHub, a non-2xx response (bad/expired token, rate limit, 404), checks that
+haven't reported yet, or any required check that isn't `success` — BLOCKS the
+deploy (exit 0 = skip) rather than shipping unverified bytes. There is exactly
+one documented escape hatch: setting `VERCEL_ALLOW_UNGATED_DEPLOY=1` makes the
+script proceed UNGATED while emitting a loud warning (intended for a deliberate
+hotfix while the token is being rotated, never as a steady state). Runs that are
+NOT inside a Vercel git deploy (local `vercel build`, `vite preview`, missing git
+metadata) always proceed — the gate only ever governs production/preview deploys.
+
+To make the gate actually verify CI rather than just block, set a read-only
+`GITHUB_CI_STATUS_TOKEN` (a PAT with `repo:status` / checks read) in Vercel →
+Project → Settings → Environment Variables. Without that token every Vercel
+deploy is blocked (unless you set the `VERCEL_ALLOW_UNGATED_DEPLOY=1` opt-out),
+so provisioning the token is a required setup step, not an optional hardening one.
+See the script header in `scripts/vercel-ignore-build.mjs` for the full decision
+table.
+
+For defense in depth, also do one of the two below (weakest → strongest):
 
 1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
    → add a rule for `master`: *Require status checks to pass before
@@ -55,8 +78,11 @@ Two ways, weakest → strongest:
 
    Now CI is the only path to production: no green gate, no deploy.
 
-Until one of these is in place, **always let the `pre-push` hook run** (never
-`--no-verify` to `master`) and watch the Actions tab after pushing.
+The in-repo gate above is the first line of defense, but it lives in the deploy
+step, not in `master`'s history — branch protection (option 1) is what stops a
+red commit from reaching `master` at all. Regardless of which defenses are on,
+**always let the `pre-push` hook run** (never `--no-verify` to `master`) and watch
+the Actions tab after pushing.
 
 ## Client app (Vercel) — automatic
 
@@ -97,15 +123,40 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The current tree runs through `046_gallery_map_with_campaign.sql`.** A production
-DB that predates the analytics / map / gallery work needs the whole **036 → 046**
-set applied, in order:
+**Apply every file in `supabase/migrations/` in lexical order — do not stop at a
+remembered number.** `db push` does this for you (it applies all pending migrations
+on top of the current schema). Migration numbers grow every release, so this guide
+deliberately does NOT pin a "latest" number that would rot and cause an operator to
+under-apply. Highlights of the later set a production DB that predates this work
+still needs:
 
-- `036`–`040` — analytics core, settlement snapshots, rollups, cron, trends
-- `041` — system-mutation capture
-- `042`–`043` — regional NPC reports + regional propagation report
-- `044` — map-backdrop storage (bucket + RLS)
-- `045`–`046` — gallery maps + map-with-campaign share
+- analytics core, settlement snapshots, rollups, cron, trends
+- system-mutation capture; regional NPC reports + regional propagation report
+- map-backdrop storage (bucket + RLS); gallery maps + map-with-campaign share +
+  importable dossiers
+- admin least-privilege, audit log, deletion-request + account-deletion
+  processing, support tickets
+
+**SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
+writes and RLS (a disabled/banned account must not be able to write), **058**
+scopes `system_config` public reads, **061** locks profile moderation
+columns, and **062** closes three authz gaps (enables RLS on the two analytics
+tables, drops the un-audited privileged `profiles`-UPDATE bypass so every
+privileged write goes through the audited RPCs, and column-locks owner
+support-ticket edits). Migration **066** (Auth Phase 2) adds the server-write-only
+`security_answers` bcrypt table — the answer hash is reachable ONLY through the
+SECURITY DEFINER question RPCs and the service-role recovery RPCs, never a client
+SELECT — plus the per-IP/per-email recovery rate limiter. These are not optional
+hardening — skipping them leaves the trust-boundary open. `db push` applies them
+with everything else; if you ever hand-apply, never stop before this set has
+landed.
+
+**Auth Phase 2 — also flip email confirmations in the hosted dashboard.** Migration
+066 expects email-confirm-locked signups. `supabase/config.toml` sets
+`enable_confirmations = true`, but that governs `supabase start` (local) ONLY — you
+MUST also enable email confirmations in the hosted **Supabase → Authentication →
+Sign In / Providers → Email** settings for production, or the signup auto-login
+poll never locks/unlocks as designed.
 
 `db push` applies every pending migration on top of the current schema; they must
 ALL land before deploying the corresponding functions and client. Confirm what is
@@ -132,21 +183,33 @@ npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 Deploy each function:
 
 ```bash
-npx supabase functions deploy stripe-webhook --no-verify-jwt   # Stripe posts a signature, NOT a JWT (also pinned in config.toml)
+npx supabase functions deploy stripe-webhook          # Stripe posts a signature, not a JWT
 npx supabase functions deploy create-checkout
-npx supabase functions deploy create-customer-portal           # "Manage subscription" billing portal
-npx supabase functions deploy verify-single-dossier --no-verify-jwt
+npx supabase functions deploy create-customer-portal  # "Manage subscription" billing portal
+npx supabase functions deploy verify-single-dossier   # anonymous, Stripe session id
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
-npx supabase functions deploy send-email
-npx supabase functions deploy ingest-events       # analytics event sink (verify_jwt default — client sends anon JWT)
-npx supabase functions deploy analytics-export    # admin analytics/trends read API
+npx supabase functions deploy account-actions         # self-serve account export/deletion requests
+npx supabase functions deploy send-email              # per-template self-auth; anon cap_warning path
+npx supabase functions deploy ingest-events           # public analytics event sink (anon traffic)
+npx supabase functions deploy analytics-export        # cron export, x-export-secret shared secret
+npx supabase functions deploy auth-recovery           # logged-out password recovery (Auth Phase 2)
 ```
 
-(Only `stripe-webhook` and `verify-single-dossier` set `verify_jwt = false` in
-`config.toml`; everything else keeps JWT verification on, so they deploy with no
-flag. There are 10 functions total — deploy all of them on a first cutover.)
+**No `--no-verify-jwt` flags needed.** `verify_jwt` is pinned EXPLICITLY for every
+function in `config.toml` (the deploy source of truth), so the platform JWT gate
+can't be flipped by a forgotten/stray flag. Six functions that authenticate
+themselves are pinned `false` (`stripe-webhook`, `verify-single-dossier`,
+`ingest-events`, `analytics-export`, `send-email`, `auth-recovery`); the rest are
+pinned `true`.
+The pins are enforced by `tests/edgeFunctions/verifyJwtPins.test.js` (every
+function must have an explicit pin). Deploy **every** function directory under
+`supabase/functions/` — the only non-deployable one is `_shared/` (a helper
+bundle, not a function). There are 12 functions total; on a first cutover deploy
+all of them, and after adding a new function confirm the list with
+`ls -d supabase/functions/*/ | grep -v _shared` rather than trusting this block.
+<!-- @enforced-by tests/docs/docCounts.test.js -->
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:

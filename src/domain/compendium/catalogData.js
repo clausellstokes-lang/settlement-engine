@@ -6,7 +6,7 @@
  *
  *   1. CompendiumPanel.jsx          — renders them in the Power & Neighbour tabs.
  *   2. domain/compendium/searchIndex.js — builds the global type-ahead
- *      index (P139 / CP-4) so a search for "theocracy" or "cold war"
+ *      index so a search for "theocracy" or "cold war"
  *      lands the reader on the right tab.
  *
  * Pure data only — no React, no side effects — so the domain test suite

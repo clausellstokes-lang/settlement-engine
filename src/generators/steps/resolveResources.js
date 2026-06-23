@@ -29,9 +29,9 @@ const RARE_RESOURCES = { 'ancient_ruins': 0.15, 'magical_node': 0.15 };
 
 registerStep('resolveResources', {
   deps: ['resolveConfig'],
-  reads: ['resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
   provides: ['nearbyResources', 'nearbyResourcesDepleted', 'nearbyResourcesCustom'],
-  mutates: ['effectiveConfig'], // stamps derived resource keys onto effectiveConfig (A+ P1.7)
+  mutates: ['effectiveConfig'], // stamps derived resource keys onto effectiveConfig
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, tradeRoute, resolvedTerrain, effectiveConfig } = ctx;
@@ -136,13 +136,19 @@ registerStep('resolveResources', {
   // Mirrors the custom-institution/service injection: tier-gated, essential ones
   // always appear, the rest roll a modest chance. Custom resources are authored
   // as present, so they join the abundant set (never auto-depleted). Tracked in
-  // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. Stable
-  // name order keeps rng deterministic; a no-op consuming zero rng when the user
-  // has no custom resources.
+  // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. The
+  // order MUST be codepoint-stable, NOT localeCompare: the loop below consumes
+  // rng per item, so a locale-/ICU-dependent sort would make the SAME seed mark
+  // a DIFFERENT set of custom resources present across machines, perturbing
+  // every downstream subsystem that reads nearbyResources. A no-op consuming
+  // zero rng when the user has no custom resources.
   let nearbyResourcesCustom = [];
   const customResources = (customDeps.registry().listCustom?.('resources') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort((a, b) => {
+      const an = String(a.name), bn = String(b.name);
+      return an < bn ? -1 : an > bn ? 1 : 0;
+    });
   for (const entry of customResources) {
     const item = entry.raw || {};
     const name = entry.name;
@@ -225,7 +231,7 @@ registerStep('resolveResources', {
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
   effectiveConfig.nearbyResourcesCustom = nearbyResourcesCustom;
 
-  // Tier 2.1 — emit one trace per nearby resource so downstream
+  // Emit one trace per nearby resource so downstream
   // consumers (assembleInstitutions reads these to bias institution
   // selection) and human readers can answer "why is this a fishing
   // town?" / "why does this town have a mine?"

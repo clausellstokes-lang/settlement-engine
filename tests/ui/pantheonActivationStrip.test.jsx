@@ -10,15 +10,20 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 afterEach(cleanup);
+
+const requestMapWorkspace = vi.fn();
+const requestSimulationRules = vi.fn();
 
 const storeState = {
   customContent: {},
   settlement: null,
   savedSettlements: [],
   campaigns: [],
+  requestMapWorkspace,
+  requestSimulationRules,
 };
 
 vi.mock('../../src/store/index.js', () => {
@@ -27,6 +32,9 @@ vi.mock('../../src/store/index.js', () => {
   useStore.getState = () => storeState;
   return { useStore };
 });
+
+const navigate = vi.fn();
+vi.mock('../../src/hooks/useRoute.js', () => ({ navigate: (...a) => navigate(...a) }));
 
 async function importStrip() {
   return await import('../../src/components/compendium/PantheonActivationStrip.jsx');
@@ -93,5 +101,29 @@ describe('PantheonActivationStrip render', () => {
     storeState.campaigns = [{ worldState: { simulationRules: { religionDynamicsEnabled: true } } }];
     rerender(<PantheonActivationStrip />);
     expect(screen.getByText('Live')).toBeTruthy();
+  });
+
+  test('the milestone CTAs deep-link into their named Realm destinations', async () => {
+    const { default: PantheonActivationStrip } = await importStrip();
+    requestMapWorkspace.mockClear();
+    requestSimulationRules.mockClear();
+    navigate.mockClear();
+
+    // Authored but neither assigned nor dynamics-on → both CTAs render.
+    storeState.customContent = { deities: [{ name: 'Mara' }] };
+    storeState.settlement = null;
+    storeState.savedSettlements = [];
+    storeState.campaigns = [];
+    render(<PantheonActivationStrip />);
+
+    // "Assign a deity" requests the Pantheon workspace, then routes to the Realm.
+    fireEvent.click(screen.getByRole('button', { name: 'Assign a deity' }));
+    expect(requestMapWorkspace).toHaveBeenCalledWith('pantheon');
+    expect(navigate).toHaveBeenLastCalledWith('realm');
+
+    // "Enable dynamics" requests the Simulation Rules dialog, then routes to the Realm.
+    fireEvent.click(screen.getByRole('button', { name: 'Enable dynamics' }));
+    expect(requestSimulationRules).toHaveBeenCalledWith(true);
+    expect(navigate).toHaveBeenLastCalledWith('realm');
   });
 });

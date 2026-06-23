@@ -8,27 +8,30 @@
  */
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
-import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import {
+  canonicalEdgeForLink,
+  canonicalRelationshipLabel as canonicalRelationshipLabelShared,
+} from '../relationships/canonicalRelationship.js';
 import { wallClockNow } from '../clock.js';
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
-// H18: the eventLog is a bounded audit trail, not cold storage. Wizard News is
+// The eventLog is a bounded audit trail, not cold storage. Wizard News is
 // the durable DM-facing record; the log keeps the newest entries (FIFO drop)
 // so campaign JSON stops growing without bound in localStorage/cloud sync.
 export const REGIONAL_EVENT_LOG_LIMIT = 50;
 
 export const REGIONAL_CHANNEL_TYPES = Object.freeze([
-  // P0: logistics/economic
+  // Logistics / economic
   'trade_dependency',
   'export_market',
   'trade_route',
-  // P1: governance/force
+  // Governance / force
   'political_authority',
   'tax_obligation',
   'military_protection',
   'war_front',
-  // P2: social/cross-cutting
+  // Social / cross-cutting
   'service_dependency',
   'religious_authority',
   'criminal_corridor',
@@ -74,18 +77,15 @@ function nowIso() {
   return wallClockNow();
 }
 
-// H12: the paid 'Opened Trade Route' event historically wrote the PLURAL
-// label 'trade_partners', which no other subsystem recognizes (channel
-// bundles minted 0 channels from it, discovery confidence dropped). The
-// producer now writes the canonical 'trade_partner'; this shim heals LEGACY
-// saves wherever link/edge labels enter the regional layer.
-const LEGACY_RELATIONSHIP_LABEL_ALIASES = Object.freeze({
-  trade_partners: 'trade_partner',
-});
-
+// The regional layer's label normalizer now DELEGATES to the single
+// canonical alias table in relationships/canonicalRelationship.js, so the three
+// regional systems can no longer drift. The old local table only healed the
+// legacy plural 'trade_partners'; the shared table covers that plus 'ally',
+// 'overlord', cold-war spellings, etc. Re-exported under the same name so
+// existing importers (worldPulse/stressorDynamics, worldPulse/populationDynamics)
+// are unaffected.
 export function canonicalRelationshipLabel(label) {
-  const raw = String(label || '').trim();
-  return LEGACY_RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
+  return canonicalRelationshipLabelShared(label);
 }
 
 export function stablePart(value) {
@@ -101,8 +101,12 @@ export function edgeIdFor(from, to) {
 }
 
 export function channelIdFor(channel) {
+  // An id-less good object used to stringify to '[object Object]', so two
+  // distinct un-normalized goods sets collapsed onto one channel id and merged
+  // semantically different channels. Coerce each good to a stable scalar key
+  // (id, then label) so malformed/un-normalized goods still mint distinct ids.
   const goods = Array.isArray(channel.goods) && channel.goods.length
-    ? channel.goods.map(g => g.id || g).sort().join('_')
+    ? channel.goods.map(g => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
     : 'general';
   return [
     'channel',
@@ -113,7 +117,7 @@ export function channelIdFor(channel) {
   ].join('.');
 }
 
-// Deterministic timestamps (R4): every normalize* default-stamp path takes a
+// Deterministic timestamps: every normalize* default-stamp path takes a
 // threaded `now` so replay stamps no wall-clock time; nowIso() is the
 // fallback ONLY when no `now` is provided.
 function normalizeNode(node, now = null) {
@@ -208,6 +212,42 @@ function dedupeById(items) {
   return [...map.values()];
 }
 
+/**
+ * True if an evidence list carries a war-layer provenance tag (a source string
+ * prefixed 'war_layer', minted by warDeployment.js via mintDirectedChannel).
+ * Used to de-alias war-layer fronts from relationship-bundle fronts that share
+ * an id (channelIdFor keys only type/from/to/goods).
+ *
+ * EXPORTED for the war layer's READ-SIDE provenance gate: warDeployment.js reads
+ * confirmed war_front channels as live sieges, but channelIdFor keys only
+ * type/from/to — so a hostile-RELATIONSHIP war_front bundle (relationshipChannelBundle
+ * §hostile, source 'relationship_label') mints a confirmed war_front that is NOT a
+ * mobilized siege (no army, never passed the mobilization/feasibility gates). The read
+ * helpers gate on this so only war-layer-minted fronts (source 'war_layer*') are read
+ * as sieges — the same provenance check syncRelationshipChannelBundle already uses to
+ * de-alias the two (isWarLayerMinted).
+ *
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {boolean}
+ */
+export function hasWarLayerEvidence(evidence) {
+  return Array.isArray(evidence)
+    && evidence.some(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'));
+}
+
+/**
+ * The war-layer provenance rows from an evidence list (sources prefixed
+ * 'war_layer'), in original order.
+ *
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {Array<{source?: string}>}
+ */
+function warLayerEvidenceRows(evidence) {
+  return Array.isArray(evidence)
+    ? evidence.filter(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'))
+    : [];
+}
+
 export function ensureRegionalGraph(graph = {}, options = {}) {
   // Deterministic timestamps: ensure mints state (inferred edges below, plus
   // any missing default stamp), so callers that thread options.now get
@@ -218,7 +258,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   const nodes = dedupeById((graph.nodes || []).map(node => normalizeNode(node, now)).filter(Boolean));
   const edges = dedupeById((graph.edges || []).map(edge => normalizeEdge(edge, now)).filter(Boolean));
   const channels = dedupeById((graph.channels || []).map(channel => normalizeChannel(channel, now)).filter(Boolean));
-  // Cap heals legacy saves that accumulated an unbounded log (H18).
+  // Cap heals legacy saves that accumulated an unbounded log.
   const eventLog = Array.isArray(graph.eventLog)
     ? graph.eventLog.slice(-REGIONAL_EVENT_LOG_LIMIT)
     : [];
@@ -324,11 +364,11 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
       const existingEdge = edgesById.get(edgeIdFor(canonical.from, canonical.to))
         || edgesByPair.get(pairKeyFor(canonical.from, canonical.to));
       if (existingEdge) {
-        // H10: the saves' neighbourNetwork is the canonical relationship
+        // The saves' neighbourNetwork is the canonical relationship
         // source — a rebuild refreshes the edge's relationshipType from the
         // live link instead of freezing the first build forever. Pulse-
         // authored label changes stay authoritative between rebuilds because
-        // the pulse writes them back to the links (H11): both sources
+        // the pulse writes them back to the links: both sources
         // converge. Orientation stays as authored (the pulse's own label
         // updates do the same). Identity no-op when the label is unchanged;
         // edges for pairs no longer linked are preserved as-is.
@@ -383,9 +423,11 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
  * never curation: an existing channel keeps its status (suggested, confirmed,
  * dormant, and disabled are all sticky), visibility, confirmedAt, and original
  * discoveredAt, while the candidate refreshes the measurement fields
- * (strength, confidence, goods, evidence, explanation). Only a brand-new
- * channel takes the candidate's status (discovery candidates are born
- * 'suggested').
+ * (strength, confidence, goods, evidence, explanation). Evidence is the one
+ * partial exception: prior 'war_layer*' provenance rows are carried forward so a
+ * relationship bundle that collides ids with a war-layer front cannot erase its
+ * ownership tag. Only a brand-new channel takes the candidate's status (discovery
+ * candidates are born 'suggested').
  */
 export function addRegionalChannels(graph, channels = [], options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
@@ -398,6 +440,18 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
     if (!channel) continue;
     const prev = byId.get(channel.id);
     if (prev) {
+      // War-layer provenance is STICKY: channelIdFor keys only (type,from,to,goods),
+      // so a relationship bundle can collide ids with a war-layer-minted front and
+      // its candidate evidence ('relationship_label') would otherwise erase the
+      // 'war_layer*' tag — defeating the de-aliasing guard in
+      // syncRelationshipChannelBundle the NEXT time the relationship is relabelled.
+      // Carry the prior war-layer evidence rows forward so the front stays
+      // recognisably war-layer-owned across any number of label changes.
+      const priorWarLayerEvidence = warLayerEvidenceRows(prev.evidence);
+      const candidateEvidence = Array.isArray(channel.evidence) ? channel.evidence : [];
+      const mergedEvidence = (priorWarLayerEvidence.length && !hasWarLayerEvidence(candidateEvidence))
+        ? [...priorWarLayerEvidence, ...candidateEvidence]
+        : channel.evidence;
       byId.set(channel.id, {
         ...prev,
         ...channel,
@@ -409,6 +463,7 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
         // provenance must not orphan a relationship-generated channel.
         relationshipType: channel.relationshipType || prev.relationshipType || null,
         relationshipKey: channel.relationshipKey || prev.relationshipKey || null,
+        evidence: mergedEvidence,
         updatedAt: now,
       });
     } else {
@@ -457,7 +512,7 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
   if (!edge?.from || !edge?.to || !relationshipType) return [];
   let from = String(edge.from);
   let to = String(edge.to);
-  // Legacy plural 'trade_partners' still mints the full trade bundle (H12).
+  // Legacy plural 'trade_partners' still mints the full trade bundle.
   let rel = canonicalRelationshipLabel(relationshipType);
   if (rel === 'client') {
     [from, to] = [to, from];
@@ -501,7 +556,10 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
       ...twoWayChannels('resource_competition', from, to, rel, base, 0.56, 0.6),
       ...twoWayChannels('information_flow', from, to, rel, base, 0.44, 0.56, { visibility: 'gm' }),
     );
-  } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
+  } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
+    // A 'smuggling_partner' label used to mint ZERO channels here (no
+    // branch matched), so an authored smuggling relationship transmitted nothing
+    // through the regional layer. It is a criminal-corridor relationship.
     out.push(
       ...twoWayChannels('criminal_corridor', from, to, rel, base, 0.68, 0.72, { visibility: 'gm' }),
       ...twoWayChannels('information_flow', from, to, rel, base, 0.36, 0.52, { visibility: 'hidden' }),
@@ -514,9 +572,9 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
 /**
  * Mint a single DIRECTED regional channel that is NOT implied by a relationship
  * label — the one home for ad-hoc directed mints driven by the simulation rather
- * than diplomacy: a coalition war_front (each attacker → the besieged target,
- * Feature A) and a deity-gated religious_authority edge (faith carrier → convert,
- * Feature D). Returns a normalized channel, or null if the type/endpoints are
+ * than diplomacy: a coalition war_front (each attacker → the besieged target)
+ * and a deity-gated religious_authority edge (faith carrier → convert).
+ * Returns a normalized channel, or null if the type/endpoints are
  * invalid. Deterministic: the id derives from type+from+to and `now` is INJECTED
  * (the pulse passes its tick clock — never wall-time here).
  *
@@ -557,6 +615,23 @@ export function mintDirectedChannel({
   }, /** @type {any} */ (stamp));
 }
 
+// A war-layer-minted directed channel (today: a war_front from mintDirectedChannel
+// with source 'war_layer_deploy') carries a 'war_layer*' evidence source. Its
+// lifecycle is owned by the war layer's mobilization gate + siege-resolution
+// retirement, NOT by relationship labels — so a relationship relabel must never
+// revive it. This matters because channelIdFor keys only (type, from, to, goods):
+// a hostile-relationship war_front bundle mints the SAME id as a war-layer front,
+// so without this guard the dedormancy branch below would silently re-confirm a
+// war-layer front the war layer had retired to 'dormant', re-seeding a phantom
+// siege that bypasses the mobilization gate.
+/**
+ * @param {{evidence?: Array<{source?: string}>}|null|undefined} channel
+ * @returns {boolean}
+ */
+function isWarLayerMinted(channel) {
+  return hasWarLayerEvidence(channel?.evidence);
+}
+
 export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -576,6 +651,10 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
       // overridden, and plain Discover still resurrects nothing
       // (addRegionalChannels keeps every prior status sticky).
       if (channel.status !== 'dormant') return channel;
+      // De-alias war-layer fronts: a dormant front the war layer retired is
+      // owned by the war layer, so the relationship relabel leaves it dormant
+      // (no phantom re-confirm). The war layer alone re-mobilizes it.
+      if (isWarLayerMinted(channel)) return channel;
       return {
         ...channel,
         status: 'confirmed',
@@ -652,7 +731,7 @@ export function appendRegionalEvent(graph, event, options = {}) {
   return ensureRegionalGraph({
     ...current,
     // The append-side cap (newest REGIONAL_EVENT_LOG_LIMIT survive, FIFO drop)
-    // keeps the log bounded even before the next ensure pass (H18).
+    // keeps the log bounded even before the next ensure pass.
     eventLog: [...current.eventLog, { ...event, recordedAt: event.recordedAt || now }]
       .slice(-REGIONAL_EVENT_LOG_LIMIT),
     updatedAt: now,

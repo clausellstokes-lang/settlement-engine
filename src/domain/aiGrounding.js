@@ -1,39 +1,39 @@
 /**
  * domain/aiGrounding.js — AI prompt grounding envelope.
  *
- * Tier 6.1 of the roadmap. The AI overlay must be grounded in the
+ * The AI overlay must be grounded in the
  * simulator's structured facts — never inventing names, facts, or
- * relationships. Phase 46 composes every Tier 2-5 derivation into a
+ * relationships. This module composes every structured derivation into a
  * single envelope the prompt assembler stringifies:
  *
  *   buildAiGroundingPayload(settlement, options) -> {
  *     identity,         id/name/tier/seed/versions
- *     spine,            7-line simulation spine (P7)
+ *     spine,            7-line simulation spine
  *     bands: {
- *       substrate,      P17 — variable → band
- *       capacities,     P21 — capacity → band
+ *       substrate,      variable → band
+ *       capacities,     capacity → band
  *     },
- *     magic,            T4.8 — availability/legality/cost/risk + role bands
- *     factions,         P9 — wants/fears/leverage/vulnerabilities
- *     chains,           P10 — status / controller / beneficiaries / victims
- *     conditions,       P16 — archetype / severity / affected systems
- *     threats,          P20 — severity / current stage / visibility
- *     npcs,             P13 — dominant rank, archetype, removal impact
- *     history,          P12 — 7 canonical beats
- *     hooks,            P11 — top-N by severity
- *     contradictions,   P25 — structural anomalies + justifications
- *     dailyLife,        P22 — 8 slots
- *     districts,        P29 — wealth / safety / tension / hook per district
- *     region,           P30 — typed neighbour graph
+ *     magic,            availability/legality/cost/risk + role bands
+ *     factions,         wants/fears/leverage/vulnerabilities
+ *     chains,           status / controller / beneficiaries / victims
+ *     conditions,       archetype / severity / affected systems
+ *     threats,          severity / current stage / visibility
+ *     npcs,             dominant rank, archetype, removal impact
+ *     history,          7 canonical beats
+ *     hooks,            top-N by severity
+ *     contradictions,   structural anomalies + justifications
+ *     dailyLife,        8 slots
+ *     districts,        wealth / safety / tension / hook per district
+ *     region,           typed neighbour graph
  *     relationshipMemory, background regional posture for Daily Life
  *     constraints: {
  *       forbidden,      what the AI MUST NOT do
- *       lockedEntities, P33 canon-tagged entities preserved
+ *       lockedEntities, canon-tagged entities preserved
  *       userDirection,  optional narrative direction (caller-provided)
  *     }
  *   }
  *
- * Pure read-only. Composes every Phase 7+ derivation; no mutation.
+ * Pure read-only. Composes every structured derivation; no mutation.
  *
  * Architectural fit:
  *   - The edge function `supabase/functions/generate-narrative` consumes
@@ -43,13 +43,13 @@
  *   - `assemblePromptSections(payload)` returns the canonical
  *     ordering for the prompt: system instructions → dossier →
  *     user direction → output format. The order matches the
- *     prompt-injection-safe contract from Tier 6.9.
+ *     prompt-injection-safe contract.
  */
 
 import { deriveSimulationSpine } from './simulationSpine.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveMagicProfile } from './magicProfile.js';
-import { deriveAllCapacities } from './capacityModel.js';
+import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -85,23 +85,19 @@ function collectUserEditsSummary(settlement) {
 
 // ── Canonical capacity lenses ────────────────────────────────────────────
 //
-// Owner decision (W6#4): the AI payload exposes ONLY the five canonical
+// The AI payload exposes ONLY the five canonical
 // capacity lenses — the plan's food/defense/governance/magic/healing.
 // labor/craft/transport are declared noise (and religious_welfare is not
 // one of the five); handing the AI all nine bands invited it to narrate
 // shortfalls in lenses the product treats as internal.
-
-const CANONICAL_CAPACITY_LENSES = Object.freeze([
-  'food_production',
-  'defense',
-  'administrative', // the governance lens
-  'healing',
-  'magical',
-]);
+//
+// The five-lens set is the SHARED VISIBLE_CAPACITY_LENSES from
+// capacityModel.js (the one source of truth), so a future lens change
+// updates a single constant rather than two duplicated lists.
 
 function canonicalCapacityBands(bands) {
   const out = {};
-  for (const name of CANONICAL_CAPACITY_LENSES) {
+  for (const name of VISIBLE_CAPACITY_LENSES) {
     if (bands && bands[name] !== undefined) out[name] = bands[name];
   }
   return out;
@@ -109,12 +105,12 @@ function canonicalCapacityBands(bands) {
 
 // ── Magic grounding facets ───────────────────────────────────────────────
 //
-// Wave 7 (MagicProfile surfaced): the AI narrates spellcasters, healers, and
+// The AI narrates spellcasters, healers, and
 // arcane services constantly — without these facets it invents the magic
 // economy. BANDS ONLY, no contributor prose: the payload carries the same
 // structured facets the dossier renders (display/dossierViewModel.js), so
-// both surfaces ground on the one Tier 4.8 derivation. Dead-magic worlds
-// carry magicExists:false with the profile's honest 'absent' bands (W5#3).
+// both surfaces ground on the one magic-profile derivation. Dead-magic worlds
+// carry magicExists:false with the profile's honest 'absent' bands.
 
 function magicGroundingFacets(settlement) {
   const m = deriveMagicProfile(settlement);
@@ -207,7 +203,7 @@ export function forbiddenChanges(settlement) {
     if (beat) out.push(`MUST PRESERVE history beat (${key}): "${beat.text}"`);
   }
 
-  // Tier 6.6: user-edited prose is canon. Each `MUST PRESERVE
+  // User-edited prose is canon. Each `MUST PRESERVE
   // user-edited field` line names the specific path + label so the AI
   // doesn't paraphrase or override the DM's hand-authored text.
   const edits = walkUserEdits(settlement);
@@ -308,7 +304,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
 
     magic: magicGroundingFacets(settlement),
 
-    // Tier 6.6: user-edited prose lives verbatim in `userEdits` so the
+    // User-edited prose lives verbatim in `userEdits` so the
     // AI sees the values it must preserve. The structured profile
     // sections (npcs, factions, institutions) are derivations that
     // strip prose down to typed fields, so they're not enough.
@@ -339,7 +335,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
 
 // ── Section assembler ────────────────────────────────────────────────────
 //
-// The Tier 6.9 prompt-injection-safe contract requires this ordering:
+// The prompt-injection-safe contract requires this ordering:
 //   1. System instructions  (preserve facts; no invention)
 //   2. Developer instructions (output format / mode)
 //   3. Dossier (canonical facts)
@@ -356,11 +352,11 @@ const DEVELOPER_INSTRUCTIONS = `Voice: confident, unhurried. Specific over gener
 const OUTPUT_FORMAT_REMINDER = `Output MUST preserve every proper noun from the dossier and every numerical / categorical fact. Restructure and polish freely; do not invent.`;
 
 /**
- * Assemble the canonical prompt sections in Tier 6.9 order. Returns a
+ * Assemble the canonical prompt sections in injection-safe order. Returns a
  * { system, developer, dossier, direction, format } object the edge
  * function joins with model-specific separators.
  *
- * Tier 6.9 prompt-injection guard: the user direction is broken out
+ * Prompt-injection guard: the user direction is broken out
  * into its own section AND removed from the dossier payload before
  * stringification. Without this, an adversarial direction like
  * "ignore the facts" would appear at the same authority level as the

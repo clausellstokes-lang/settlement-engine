@@ -1,7 +1,7 @@
 /**
  * domain/factionProfile.js — Structured faction profile derivation.
  *
- * Tier 4.1 of the roadmap. Today's faction objects are flat:
+ * Today's faction objects are flat:
  *   { faction: string, power: number, desc: string }
  *
  * That's enough to display a power bar but not enough to drive event
@@ -78,7 +78,7 @@ export function deriveFactionArchetype(faction) {
 
 // ── Archetype templates ──────────────────────────────────────────────────
 // Default profile data per archetype. These are reasonable starting
-// values that consumers can refine or override later (Tier 4.16 custom
+// values that consumers can refine or override later (custom
 // user content adopts the same shape). The roadmap calls out
 // resource-band values explicitly: low / medium / high.
 
@@ -170,8 +170,8 @@ export function templateForArchetype(archetype) {
 // powerStructure. Per-faction legitimacy doesn't exist as a stored
 // field yet, so we approximate: the governing faction inherits the
 // settlement's public legitimacy score; non-governing factions get a
-// neutral 50 (middle band). When Tier 4.2 (faction relationship
-// updates after events) lands, this derivation will be the place
+// neutral 50 (middle band). When faction relationship
+// updates after events land, this derivation will be the place
 // where event-driven legitimacy adjustments aggregate.
 
 function legitimacyFor(faction, settlement) {
@@ -194,7 +194,7 @@ function legitimacyFor(faction, settlement) {
   const gov = governanceLedger(settlement);
   if (isGoverning && gov.present) return gov.legitimacyScore;
 
-  // Non-governing factions: neutral baseline. Future Tier 4.2 work
+  // Non-governing factions: neutral baseline. Future work
   // will shift this based on whether the faction is sponsoring relief,
   // pursuing scandals, etc.
   return 50;
@@ -244,7 +244,7 @@ export function deriveFactionProfile(faction, settlement) {
     // Preserve everything else off the legacy object so consumers
     // currently reading `faction.desc` etc. keep working.
     ...(typeof faction === 'object' ? { desc: faction.desc } : {}),
-    // Phase 19: preserve controlsInstitutionIds so the explanation
+    // : preserve controlsInstitutionIds so the explanation
     // module can answer "which factions control this institution?"
     // without reaching into the raw faction list separately.
     controlsInstitutionIds: (typeof faction === 'object' && Array.isArray(faction.controlsInstitutionIds))

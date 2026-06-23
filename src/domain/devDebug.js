@@ -1,25 +1,25 @@
 /**
  * domain/devDebug.js — Dev simulation debugger payload.
  *
- * Tier 3.9 of the roadmap. Composes every Phase 2 / Phase 4 / Phase 5
- * derivation into a single dev-mode envelope. The DEV-only debugger
- * UI / overlay consumes this; production builds never need it.
+ * Composes every structured derivation into a single dev-mode envelope.
+ * The DEV-only debugger UI / overlay consumes this; production builds
+ * never need it.
  *
  *   deriveDevDebug(settlement) -> {
  *     identity,
  *     traces:        { total, byStep, byType, recent },
- *     substrate:     CausalState                  (Phase 17)
- *     capacities:    CapacityState                (Phase 21)
- *     factions:      FactionProfile[]             (Phase 9)
- *     supplyChains:  SupplyChainState[]           (Phase 10)
- *     conditions:    ActiveCondition[]            (Phase 16)
- *     threats:       ThreatProfile[]              (Phase 20)
- *     hooks:         StructuredHook[]             (Phase 11)
- *     clocks:        EscalationClock[]            (Phase 11)
- *     districts:     DistrictProfile[]            (Phase 29)
- *     contradictions: Contradiction[]             (Phase 25)
- *     entityCatalog                                (Phase 19)
- *     canonBreakdown                               (Phase 33)
+ *     substrate:     CausalState
+ *     capacities:    CapacityState
+ *     factions:      FactionProfile[]
+ *     supplyChains:  SupplyChainState[]
+ *     conditions:    ActiveCondition[]
+ *     threats:       ThreatProfile[]
+ *     hooks:         StructuredHook[]
+ *     clocks:        EscalationClock[]
+ *     districts:     DistrictProfile[]
+ *     contradictions: Contradiction[]
+ *     entityCatalog
+ *     canonBreakdown
  *   }
  *
  * Pure read-only. No mutation. No side effects.

@@ -242,9 +242,9 @@ function textOf(item) {
 }
 
 function endpointOf(e) {
-  if (!e) return '—';
+  if (!e) return '–';
   if (typeof e === 'string') return e;
-  return e.name || e.label || e.title || '—';
+  return e.name || e.label || e.title || '–';
 }
 
 function relationshipOf(c) {

@@ -88,6 +88,7 @@ export function eventProduces(event) {
 export function eventConsumes(event) {
   const t = event?.type;
   const targetId = event?.targetId;
+  /** @type {any} */
   const p = event?.payload || {};
   const refs = [];
   switch (t) {
@@ -102,11 +103,23 @@ export function eventConsumes(event) {
       if (targetId) refs.push({ kind: 'faction', ref: targetId });
       break;
     case 'EXPOSE_CORRUPTION':
-      // Targets a faction OR an institution — accept either.
-      if (targetId) refs.push({ kind: 'factionOrInstitution', ref: targetId });
+      // The handler tries an NPC (corrupt subject) first, then an institution,
+      // then a faction — accept any of the three so a real target passes and a
+      // phantom one blocks instead of silently no-opping.
+      if (targetId) refs.push({ kind: 'npcOrFactionOrInstitution', ref: targetId });
       break;
     case 'KILL_NPC':
+    case 'KILL_LEADER':
+      // KILL_LEADER routes through killNpcMutation, which hard-requires the NPC.
       if (targetId) refs.push({ kind: 'npc', ref: targetId });
+      break;
+    case 'SETTLEMENT_DISPUTE':
+    case 'BROKERED_ALLIANCE':
+    case 'OPENED_TRADE_ROUTE':
+      // setNeighbourRelationship no-ops unless targetId matches a linked
+      // neighbour (by name/neighbourName/id/linkId) — a hard ref, else the
+      // relationship narration + deltas land with no graph change.
+      if (targetId) refs.push({ kind: 'neighbour', ref: targetId });
       break;
     case 'ASSIGN_NPC_TO_ROLE':
       // The NPC subject is created if missing, so it is NOT a hard ref. The
@@ -134,9 +147,13 @@ export function eventConsumes(event) {
     case 'PROMOTE_NPC':
     case 'DEMOTE_NPC':
       // BOTH sides of the standing swap are hard refs — the mutation silently
-      // no-ops when either is missing while the registry deltas still land.
+      // no-ops when either is missing while the registry deltas still land. The
+      // peer is identified by swapWithNpcId OR swapWithName (swapNpcStanding
+      // accepts either), so mirror that fallback here.
       if (targetId) refs.push({ kind: 'npc', ref: targetId });
-      if (p.swapWithNpcId) refs.push({ kind: 'npc', ref: p.swapWithNpcId });
+      if (p.swapWithNpcId || p.swapWithName) {
+        refs.push({ kind: 'npc', ref: p.swapWithNpcId || p.swapWithName });
+      }
       break;
     case 'RESOLVE_STRESSOR': {
       // The target must resolve against SOMETHING resolveStressor can wind
@@ -307,11 +324,20 @@ function initNamespace(s) {
     resource:    new Set(),
     stressor:    new Set(),
     stressorArchetype: new Set(),
+    neighbour:   new Set(),
   };
   for (const i of s?.institutions || []) { ns.institution.add(lc(i.id)); ns.institution.add(lc(i.name)); }
   const factions = s?.powerStructure?.factions || s?.factions || [];
   for (const f of factions) { ns.faction.add(lc(f.id)); ns.faction.add(lc(f.faction)); ns.faction.add(lc(f.name)); }
   for (const n of s?.npcs || []) { ns.npc.add(lc(n.id)); ns.npc.add(lc(n.name)); }
+  // Mirror setNeighbourRelationship's match: a relationship event resolves its
+  // target against link name / neighbourName / id / linkId.
+  for (const link of s?.neighbourNetwork || []) {
+    ns.neighbour.add(lc(link?.name));
+    ns.neighbour.add(lc(link?.neighbourName));
+    ns.neighbour.add(lc(link?.id));
+    ns.neighbour.add(lc(link?.linkId));
+  }
   for (const k of s?.config?.nearbyResources || []) ns.resource.add(lc(k));
   for (const r of s?.resources || []) { ns.resource.add(lc(r.id || r.key || r.name)); ns.resource.add(lc(r.name)); }
   // RESOLVE_STRESSOR targets — a mirror of resolveStressor's own matching.
@@ -350,6 +376,16 @@ function nsHas(ns, kind, ref) {
   const label = lc(labelFromTarget(ref));
   if (kind === 'factionOrInstitution') {
     return ns.faction.has(r) || ns.institution.has(r) || ns.faction.has(label) || ns.institution.has(label);
+  }
+  if (kind === 'npcOrFactionOrInstitution') {
+    return ns.npc.has(r) || ns.faction.has(r) || ns.institution.has(r)
+      || ns.npc.has(label) || ns.faction.has(label) || ns.institution.has(label);
+  }
+  if (kind === 'neighbour') {
+    // setNeighbourRelationship matches the targetId VERBATIM against the link
+    // fields (no de-slug), so validate the exact lowercased ref only — a
+    // de-slugged near-miss would validate a target the mutation then no-ops on.
+    return ns.neighbour.has(r);
   }
   if (kind === 'stressor') {
     // Exact lowercased entry/stamp match first — the picker path. Free text

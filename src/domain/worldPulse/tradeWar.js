@@ -1,11 +1,11 @@
 /**
- * domain/worldPulse/tradeWar.js — Feature B core (trade war), A2.
+ * domain/worldPulse/tradeWar.js — the trade-war core.
  *
  * "C's primary trade partner for commodity K" is a CONTESTABLE PRIZE. Incumbent
  * A holds it (derived, never stored — the strongest confirmed supplier channel
  * into C for K); challenger B contests to replace A. The contest math, the
  * incumbency amplifier, the determinism, and the tie-break all live in the
- * shared F3 primitive `contestOverThirdParty`; this module is a thin caller that
+ * shared primitive `contestOverThirdParty`; this module is a thin caller that
  * enumerates contests deterministically and supplies a single blended 0..1
  * `scoreFor` per contender.
  *
@@ -14,7 +14,7 @@
  * A flip re-points C's primary trade_dependency channel to the winner, stamps a
  * trade-realignment condition, and (confidence-gated) either WINDS the defeated
  * incumbent DOWN (a peaceful cold_war on A↔B) or lets A ESCALATE — A emits a
- * hostility/war_front the A1 war layer picks up next tick (conquest path stays
+ * hostility/war_front the war layer picks up next tick (conquest path stays
  * open, never automatic).
  *
  * HARD OVERRIDE — vassalage: if C is a vassal of X and the overlord compels the
@@ -23,14 +23,14 @@
  * stamped on C so the existing `vassal_rebellion` escape valve stays reachable —
  * a vassal forced into a ruinous trade can still rebel.
  *
- * ANTI-OSCILLATION: the F3 primitive amplifies the incumbent + raises the hold
- * ceiling (hysteresis). This module ADDS a caller-side cooldown: after a flip,
+ * ANTI-OSCILLATION: the contest primitive amplifies the incumbent + raises the
+ * hold ceiling (hysteresis). This module ADDS a caller-side cooldown: after a flip,
  * `lastFlipTick` per prize is stored in `worldState.tradeWarState`. Within the
  * cooldown window a re-flip is suppressed (the prior winner holds).
  *
- * DETERMINISM CONTRACT (sacred, identical to A1):
+ * DETERMINISM CONTRACT (sacred, identical to the war layer):
  *   - No Date.now / Math.random / argless new Date. RNG is INJECTED; the contest
- *     forks on the FROZEN F3 recipe (`contest:<channelType>:<prizeId>:<tick>`);
+ *     forks on the FROZEN contest recipe (`contest:<channelType>:<prizeId>:<tick>`);
  *     the escalation/wind-down decision forks on a stable per-prize key.
  *   - Every output iteration is over a CODEPOINT-SORTED key list — buyers,
  *     commodities, contenders. Never a Map/Set/Object insertion order.
@@ -60,9 +60,9 @@ import { stablePart } from './worldState.js';
 
 const CHANNEL_TYPE = 'trade_primacy';
 const TRADE_CARRIERS = ['trade_dependency', 'trade_route', 'export_market'];
-// A challenger needs a minimally-complete supply chain to even contest (§3.2).
+// A challenger needs a minimally-complete supply chain to even contest.
 const MIN_CHAIN = 0.2;
-// Anti-thrash: after a flip, suppress re-flips for this many ticks (the §3.5
+// Anti-thrash: after a flip, suppress re-flips for this many ticks (this caller-side
 // cooldown — the primitive's hysteresis is the other half).
 const FLIP_COOLDOWN_TICKS = 6;
 // Escalation gate: only a CONFIDENT defeated incumbent can open a war
@@ -278,9 +278,9 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
   const strengthFor = buildStrengthLookup(snapshot);
   const outcomes = [];
   const graphChannels = [];
-  // Feature C (C1) write-side: id-stable win/loss attributions from the trade
+  // Disposition write-side: id-stable win/loss attributions from the trade
   // contests that FLIPPED this tick. The winner/defeated ids are derived from
-  // primarySupplierInto (channel-strength + codepoint tie-break) and the H16
+  // primarySupplierInto (channel-strength + codepoint tie-break) and the
   // relationshipRoles vassal override, never raw edge orientation — so a
   // reversed-authored save credits the SAME new primary partner. Empty unless a
   // flip lands; folded into next-tick dispositionStats post-apply by the caller.
@@ -372,7 +372,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
           severity: 0.5,
           headline: `${nameFor(forcedOverlord.overlordId)} dictates ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade`,
           summary: `${nameFor(forcedOverlord.overlordId)} compels its vassal ${nameFor(buyerId)} to source ${commodityLabelFor(commodityId)} from the overlord's designate, straining the local economy.`,
-          reasons: [`Overlord ${nameFor(forcedOverlord.overlordId)} compels the trade — the contest is overridden.`],
+          reasons: [`Overlord ${nameFor(forcedOverlord.overlordId)} compels the trade. The contest is overridden.`],
           tick,
           sourceEventTargetId: forcedOverlord.overlordId,
           causes: [{ source: forcedOverlord.overlordId, effect: 'vassal_trade_coercion', reason: `${nameFor(forcedOverlord.overlordId)} forces ${nameFor(buyerId)}'s trade allocation.` }],
@@ -417,7 +417,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // ── FLIP: re-point C's primary trade_dependency channel to the winner. ─
       const winnerId = result.winnerId;
       const defeatedId = result.incumbentId;
-      // C1 ratchet: the new primary partner banked a trade WIN; the displaced
+      // Disposition ratchet: the new primary partner banked a trade WIN; the displaced
       // incumbent a LOSS. (Only on a real flip — a held prize banks nothing.)
       dispositionDeltas.push({ id: String(winnerId), outcome: 'win', magnitude: 1 });
       if (defeatedId && defeatedId !== winnerId) {
@@ -457,7 +457,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         const escalates = defeatedStrength >= ESCALATION_CONFIDENCE
           && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2);
         if (escalates) {
-          // ESCALATE: A opens a war_front toward the winner — the A1 war layer
+          // ESCALATE: A opens a war_front toward the winner — the war layer
           // resolves the siege next tick (conquest stays reachable, not automatic).
           graphChannels.push(mintDirectedChannel({
             type: 'war_front',
@@ -492,8 +492,8 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
             targetSaveId: defeatedId,
             severity: 0.35,
             headline: `${nameFor(defeatedId)} absorbs the loss of ${nameFor(buyerId)}'s market`,
-            summary: `${nameFor(defeatedId)} loses ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} market and adjusts — a sober economic wind-down rather than war.`,
-            reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate — peaceful adjustment.`],
+            summary: `${nameFor(defeatedId)} loses ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} market and adjusts. This is a sober economic wind-down, not war.`,
+            reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`],
             tick,
             sourceEventTargetId: buyerId,
             causes: [{ source: buyerId, effect: 'market_shock', reason: `${nameFor(defeatedId)} lost a primary export market.` }],

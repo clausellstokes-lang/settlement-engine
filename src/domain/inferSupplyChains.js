@@ -1,6 +1,6 @@
 /**
  * domain/inferSupplyChains.js — discover candidate supply chains from custom
- * content (§14 P3). Pure + deterministic.
+ * content. Pure + deterministic.
  *
  * Each custom entity exposes OUTPUTS (what it provides) and INPUTS (what it
  * requires); this matches one entity's outputs against another's inputs across
@@ -15,7 +15,7 @@
  * discovery + verification metadata live under namespaced `.discovered` /
  * `.verification` keys the renderer ignores. The user confirms/corrects/names
  * these in the Supply Chains tab; confirmed ones persist to
- * customContent.supplyChains and (P3b) feed generation.
+ * customContent.supplyChains and feed generation.
  *
  * Determinism: all iteration is over lexicographically sorted ids; no Date,
  * no Math.random, no set-iteration-order reliance. Same inputs → same chains.
@@ -40,6 +40,15 @@ function toList(v) {
 }
 
 const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+/** Codepoint comparator. The file's determinism header promises codepoint-stable
+ *  ordering; localeCompare is locale-dependent and would betray that the moment a
+ *  non-ASCII char leaks into a uid/label, so we sort on raw codepoints instead.
+ *  @param {string} a
+ *  @param {string} b
+ *  @returns {number}
+ */
+const byCodepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
  * @param {Object} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
@@ -90,7 +99,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     addNode(good, 'good', [good.name], requires);
   }
 
-  // §14 — seed prebuilt nodes for any BUILT-IN item a custom item references, so
+  // Seed prebuilt nodes for any BUILT-IN item a custom item references, so
   // a mixed chain assembles end-to-end: a custom good processed by a built-in
   // mill from a built-in resource renders as one connected resource → mill →
   // good path instead of the built-in step collapsing to a trade endpoint. The
@@ -163,11 +172,11 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   const out = new Map(nodes.map((n) => [n.uid, []]));
   const inbound = new Map(nodes.map((n) => [n.uid, 0]));
   for (const e of edges) { out.get(e.from).push(e); inbound.set(e.to, inbound.get(e.to) + 1); }
-  for (const arr of out.values()) arr.sort((x, y) => `${x.commodity}${x.to}`.localeCompare(`${y.commodity}${y.to}`));
+  for (const arr of out.values()) arr.sort((x, y) => byCodepoint(`${x.commodity}${x.to}`, `${y.commodity}${y.to}`));
 
   // Sources: no inbound edge but at least one outbound. Walk to maximal paths.
   const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && out.get(n.uid).length > 0)
-    .sort((a, b) => a.uid.localeCompare(b.uid));
+    .sort((a, b) => byCodepoint(a.uid, b.uid));
   const paths = [];
   const walk = (uid, path, visited) => {
     const outs = out.get(uid) || [];
@@ -239,5 +248,5 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       verification: { state: 'discovered', userName: null, corrections: {} },
     });
   }
-  return discovered.sort((a, b) => a.chainId.localeCompare(b.chainId));
+  return discovered.sort((a, b) => byCodepoint(a.chainId, b.chainId));
 }

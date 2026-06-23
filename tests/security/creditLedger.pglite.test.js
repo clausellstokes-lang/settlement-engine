@@ -61,6 +61,17 @@ const MIG = {
 };
 const allExist = Object.values(MIG).every(existsSync);
 
+// Hard-fail (not a silent vacuous skip) when a target migration has moved/been
+// renamed: the runIf(allExist) suites below would otherwise go GREEN with 0 tests
+// run — exactly the failure mode the execution coverage was written to prevent.
+describe('credit-ledger pglite targets exist (guards against silent vacuous skip)', () => {
+  it('every required migration is present (a moved migration must fail loudly)', () => {
+    const missing = Object.entries(MIG).filter(([, p]) => !existsSync(p)).map(([k]) => k);
+    expect(missing, `missing credit migrations: ${missing.join(', ')}`).toEqual([]);
+    expect(allExist).toBe(true);
+  });
+});
+
 /** Extract a function definition verbatim from a migration file: from
  *  `create or replace function public.<name>` to the first `$$;`. */
 function extractFn(migKey, name) {

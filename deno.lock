@@ -303,13 +303,14 @@
         "npm:acorn-walk@^8.3.5",
         "npm:acorn@^8.16.0",
         "npm:autoprefixer@^10.4.27",
-        "npm:dompurify@^3.4.8",
+        "npm:dompurify@^3.4.11",
+        "npm:esbuild@~0.27.7",
         "npm:eslint-plugin-jsx-a11y@^6.10.2",
         "npm:eslint-plugin-react-hooks@^7.1.1",
-        "npm:eslint-plugin-react@^7.37.5",
         "npm:eslint@^10.4.0",
         "npm:fast-check@^4.8.0",
         "npm:globals@^17.6.0",
+        "npm:html2canvas@^1.4.1",
         "npm:husky@^9.1.7",
         "npm:immer@^11.1.4",
         "npm:jsdom@^29.1.1",
@@ -326,7 +327,10 @@
         "npm:vite@^7.3.5",
         "npm:vitest@^4.1.8",
         "npm:zustand@^5.0.12"
-      ]
+      ],
+      "overrides": {
+        "undici": "^7.28.0"
+      }
     }
   }
 }

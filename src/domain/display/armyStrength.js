@@ -1,12 +1,12 @@
 /**
- * domain/display/armyStrength.js — Phase B0/B2 read-model SELECTOR for the DM UI:
+ * domain/display/armyStrength.js — read-model SELECTOR for the DM UI:
  * "how strong is this settlement's army right now, and how worn-down is it?".
  *
  * A `warStatus.js`-style projection of:
  *   - the LATENT military strength (militaryStrength.deriveMilitaryCapacity) — what
  *     the realm could field if fully mustered, in HEURISTIC bands ("a formidable
  *     host" … "a thin levy"), never the 0..100 capacity number; and
- *   - the LIVE deployed-army state (worldState.deployments[homeId] — the B2 stateful
+ *   - the LIVE deployed-army state (worldState.deployments[homeId] — the stateful
  *     record) — how much of the marched-out army is LEFT after attrition
  *     ("battered — about two-fifths of its strength remains"), the supply/morale
  *     condition in plain words, NEVER the raw currentEffectiveStrength /
@@ -14,7 +14,7 @@
  *
  * HEURISTIC DM LANGUAGE — NO INTERNALS. No capacity number, no attrition fraction,
  * no facet score, no rng. The fractions are bucketed into words. This is the
- * "army strength + attrition in plain words" surface the F1 brief asks for.
+ * "army strength + attrition in plain words" surface.
  *
  * PRESENTATION ONLY. Pure projection: nothing here mutates worldState, forks rng,
  * or reads a wall clock. INERT, NOT CRASH, WHEN ABSENT — a no-war campaign (absent
@@ -36,13 +36,13 @@ const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
 
 // Heuristic bands for the LATENT (theoretical) strength of a host, 0..100 → words.
-// Bands only — never the number. A thorpe levy ≠ a city host (the B0 finding).
+// Bands only — never the number. A thorpe levy ≠ a city host.
 const STRENGTH_BANDS = Object.freeze([
-  { floor: 78, phrase: 'a formidable host — few in the region could match it in the field' },
-  { floor: 60, phrase: 'a strong army — it can take the field with confidence' },
-  { floor: 42, phrase: 'a capable militia — enough to defend its own and raid a neighbour' },
-  { floor: 26, phrase: 'a modest levy — it can hold its walls but not project far' },
-  { floor: 0, phrase: 'a thin levy — barely enough to keep the peace at home' },
+  { floor: 78, phrase: 'a formidable host, few in the region could match it in the field' },
+  { floor: 60, phrase: 'a strong army, ready to take the field with confidence' },
+  { floor: 42, phrase: 'a capable militia, enough to defend its own and raid a neighbour' },
+  { floor: 26, phrase: 'a modest levy, able to hold its walls but not project far' },
+  { floor: 0, phrase: 'a thin levy, barely enough to keep the peace at home' },
 ]);
 
 /**
@@ -63,10 +63,10 @@ export function latentStrength(settlementOrItem) {
 // attrition (currentEffectiveStrength / maxStartStrength), 1..0 → words.
 const REMAINING_BANDS = Object.freeze([
   { floor: 0.85, phrase: 'still near full strength' },
-  { floor: 0.6, phrase: 'bloodied but holding — most of its strength remains' },
-  { floor: 0.4, phrase: 'battered — roughly half its strength is spent' },
-  { floor: 0.2, phrase: 'gutted — only a fraction of the host still stands' },
-  { floor: 0, phrase: 'all but broken — a spent remnant in the field' },
+  { floor: 0.6, phrase: 'bloodied but holding, most of its strength still standing' },
+  { floor: 0.4, phrase: 'battered, roughly half its strength spent' },
+  { floor: 0.2, phrase: 'gutted, only a fraction of the host left to fight' },
+  { floor: 0, phrase: 'all but broken, a spent remnant in the field' },
 ]);
 
 /**
@@ -85,8 +85,8 @@ export function attritionPhrase(remainingFraction) {
 // We MAX the two pains so the sharpest one sets the phrase.
 const CONDITION_BANDS = Object.freeze([
   { floor: 0.66, phrase: 'well supplied and in good heart' },
-  { floor: 0.4, phrase: 'its supply lines are strained and morale is wavering' },
-  { floor: 0, phrase: 'starving and demoralized — close to falling apart' },
+  { floor: 0.4, phrase: 'supply lines strained, morale wavering' },
+  { floor: 0, phrase: 'starving and demoralized, close to falling apart' },
 ]);
 
 /**
@@ -129,7 +129,7 @@ export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) =>
 
   const start = num(rec.maxStartStrength, NaN);
   const current = num(rec.currentEffectiveStrength, NaN);
-  // A LIGHT (pre-B2) record carries no strength fields — treat it as full strength
+  // A LIGHT (legacy) record carries no strength fields — treat it as full strength
   // (the army just marched out; attrition hasn't been modelled). Never throws.
   const remaining = (Number.isFinite(start) && start > 0 && Number.isFinite(current))
     ? clamp01(current / start)

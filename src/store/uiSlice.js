@@ -7,17 +7,17 @@
  * dumped back into whatever overlay they happened to leave open.
  *
  * Keys in use:
- *   tableViewOpen — P142 / D-6. When true, the phone-optimized Table View
+ *   tableViewOpen — when true, the phone-optimized Table View
  *                   overlay is shown over the dossier. Set true by the
  *                   "Open in Table View" button in SummaryTabV2 (routed via
  *                   OutputContainer) and back to false by the close
  *                   affordance inside TableView.
- *   detailLevel   — UX overhaul Phase 1. The single progressive-disclosure
- *                   "altitude" axis ('guided' | 'standard' | 'expert' ↔
- *                   Overview / Detail / Engine) every surface reads to decide
- *                   how much engine depth to show. Defaults to 'guided'.
- *                   UNLIKE the transient keys above this one IS persisted (a
- *                   returning power user should stay at Engine) — see the
+ *   detailLevel   — the reading-depth "altitude" axis ('guided' | 'standard' |
+ *                   'expert' ↔ Overview / Detail / Engine) the dossier engine
+ *                   sections (EngineSections, WarFaithSection) read to decide how
+ *                   much depth to show. Defaults to 'standard'. The global dossier
+ *                   toggle was removed; the Substrate tab now owns a local control.
+ *                   IS persisted (returning power users keep their depth) — see the
  *                   `userPrefs.detailLevel` line in store/index.js partialize.
  *
  * The generic setUserPref(key, value) shape matches the call site the
@@ -32,8 +32,14 @@
 /** The valid altitude rungs, in ascending depth. Frozen so callers can validate. */
 export const DETAIL_LEVELS = Object.freeze(['guided', 'standard', 'expert']);
 
-/** The default altitude rung (a new DM lands at Overview / guided). */
-export const DEFAULT_DETAIL_LEVEL = 'guided';
+/**
+ * The default reading depth for the dossier's engine sections (EngineSections,
+ * WarFaithSection). 'standard' shows band readouts + scores by default. It
+ * replaced 'guided' when the global dossier "Detail" toggle was removed, so the
+ * engine depth those sections used to gate now surfaces without a toggle. The
+ * Substrate tab carries its own LOCAL Overview/Detail/Engine control.
+ */
+export const DEFAULT_DETAIL_LEVEL = 'standard';
 
 /**
  * Durable, user-owned product preferences surfaced on the Account page
@@ -42,7 +48,6 @@ export const DEFAULT_DETAIL_LEVEL = 'guided';
  * their defaults. Each key is a default the relevant surface reads when it has
  * no per-artifact override:
  *
- *   defaultDetailLevel    — mirrors the altitude rung a fresh dossier opens at.
  *   playerViewDefault     — whether new settlements default to player-safe view.
  *   pdfStyle              — preferred PDF/export visual style ('classic'|'compact'|'parchment').
  *   aiPolishDefault       — opt-in default for AI prose polish on generation.
@@ -52,7 +57,6 @@ export const DEFAULT_DETAIL_LEVEL = 'guided';
  *   emailNotifications    — product/lifecycle email opt-in (mirrors the profile flag).
  */
 export const PRODUCT_PREF_DEFAULTS = Object.freeze({
-  defaultDetailLevel: DEFAULT_DETAIL_LEVEL,
   playerViewDefault: false,
   pdfStyle: 'classic',
   aiPolishDefault: false,
@@ -68,6 +72,13 @@ export const createUiSlice = (set, get) => ({
     tableViewOpen: false,
     detailLevel: DEFAULT_DETAIL_LEVEL,
   },
+
+  // Auth modal visibility. Lifted out of App.jsx local state so app-wide
+  // surfaces that have no prop path to App (PricingMomentCard's signup
+  // moments, future nudges) can open sign-in directly — mirroring how
+  // purchaseModalOpen already lives on the store. Transient: deliberately
+  // left out of the persist partialize so a reload lands on a closed modal.
+  authModalOpen: false,
 
   /** Durable product-preference defaults (Account → Product Preferences). */
   productPrefs: { ...PRODUCT_PREF_DEFAULTS },
@@ -93,6 +104,10 @@ export const createUiSlice = (set, get) => ({
     const prefs = get().productPrefs || {};
     return Object.prototype.hasOwnProperty.call(prefs, key) ? prefs[key] : PRODUCT_PREF_DEFAULTS[key];
   },
+
+  /** Open/close the auth (sign-in / create-account) modal. */
+  setAuthModalOpen: (open) =>
+    set(state => { state.authModalOpen = !!open; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>

@@ -9,11 +9,11 @@
  *   1. "Sign In" affordance is visible in chrome / hero for anonymous
  *      users
  *   2. Clicking it opens the AuthModal
- *   3. AuthModal renders email input, primary CTA, both signin/signup
- *      tab states
+ *   3. AuthModal renders email + password inputs, primary CTA, both
+ *      signin/signup tab states
  *   4. Tab toggle switches copy / button label correctly
- *   5. Empty email → submit produces inline validation (no network call)
- *   6. "More options" expands password path
+ *   5. Empty fields → submit produces inline validation (no network call)
+ *   6. Email sign-in link is offered as an alternative below the form
  *   7. Modal closes via the close button
  *   8. Soft-cap exit → "Sign in to continue" CTA also opens AuthModal
  *   9. After a generation, the inline Save / AI affordances are
@@ -84,7 +84,7 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     await page.addInitScript(() => {
       try { localStorage.clear(); sessionStorage.clear(); } catch { /* ignore */ }
     });
-    await page.goto('/');
+    await page.goto('/create');
     await waitForHero(page);
   });
 
@@ -114,74 +114,76 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     const signupTab = page.getByRole('button', { name: /^Create Account$/i }).first();
     await signupTab.click();
     await expect(page.getByText(/Create a free .* account/i)).toBeVisible();
-    // The primary CTA also reads "Create account" in signup view.
-    await expect(page.getByRole('button', { name: /^Create account$/i })).toBeVisible();
+    // The primary CTA also reads "Create account" in signup view. The tab toggle
+    // ("Create Account", capital A) and this CTA ("Create account", lowercase a)
+    // differ ONLY in case, so a case-insensitive regex matches both and trips
+    // strict mode. `exact: true` does a case-SENSITIVE exact match, pinning this
+    // to the CTA alone — keeping the assertion meaningful (the signup CTA copy)
+    // rather than weakening it.
+    await expect(page.getByRole('button', { name: 'Create account', exact: true })).toBeVisible();
   });
 
-  test('AuthModal primary CTA reflects current auth method (magic by default)', async ({ page }) => {
+  test('AuthModal sign-in shows email + password inline with a "Sign in" CTA', async ({ page }) => {
     await openAuthModal(page);
-    // The default auth method is magic-link → CTA reads "Send sign-in link".
-    await expect(page.getByRole('button', { name: /Send sign-in link/i })).toBeVisible();
-  });
-
-  test('"More sign-in options" disclosure reveals the password toggle', async ({ page }) => {
-    await openAuthModal(page);
-    // Disclosure step 1: expand the panel. Its label flips between
-    // "More sign-in options" / "Hide more options", so we use the
-    // collapsed-state label to click, then verify by collapsed→expanded
-    // class swap (the new label appears).
-    const expandBtn = page.getByRole('button', { name: /^More sign-in options$/i });
-    await expect(expandBtn).toBeVisible();
-    await expandBtn.click();
-    // After click: the button's text is now "Hide more options".
-    await expect(page.getByRole('button', { name: /^Hide more options$/i })).toBeVisible();
-    // The "Use a password instead" toggle appears inside the panel.
-    const switchToPwd = page.getByRole('button', { name: /Use a password instead/i });
-    await expect(switchToPwd).toBeVisible();
-    // Step 2: switch to password mode.
-    await switchToPwd.click();
-    // Password input becomes available.
+    // Password is the primary method: both fields render inline (no disclosure),
+    // and the primary CTA reads "Sign in".
+    await expect(page.getByPlaceholder(/Email address/i)).toBeVisible();
     await expect(page.getByPlaceholder(/^Password$/i)).toBeVisible();
-    // Primary CTA changes to "Sign in" (not "Send sign-in link").
     await expect(page.getByRole('button', { name: /^Sign in$/i }).last()).toBeVisible();
   });
 
-  test('password-mode signin reveals "Remember me on this device"', async ({ page }) => {
+  test('the email sign-in link is offered as an alternative below the form', async ({ page }) => {
     await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
-    await expect(page.getByText(/Remember me on this device/i)).toBeVisible();
+    // No "More options" disclosure — the email-link alternative is surfaced
+    // directly as a full-width button under the primary CTA.
+    await expect(page.getByRole('button', { name: /Email me a sign-in link/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /More sign-in options/i })).toHaveCount(0);
   });
 
-  test('submitting an empty email does NOT make a network request', async ({ page }) => {
+  test('sign-up adds a confirm-password field', async ({ page }) => {
+    await openAuthModal(page);
+    await page.getByRole('button', { name: /^Create Account$/i }).first().click();
+    await expect(page.getByPlaceholder(/^Password$/i)).toBeVisible();
+    await expect(page.getByPlaceholder(/Confirm password/i)).toBeVisible();
+  });
+
+  test('sign-in surfaces "Forgot password?" and "Remember me on this device"', async ({ page }) => {
+    await openAuthModal(page);
+    // Both are surfaced directly in sign-in mode (forgot-password is no longer
+    // buried in a disclosure).
+    await expect(page.getByText(/Remember me on this device/i)).toBeVisible();
+    await expect(page.getByRole('button', { name: /Forgot password/i })).toBeVisible();
+  });
+
+  test('submitting empty credentials does NOT make a network request', async ({ page }) => {
     await openAuthModal(page);
     let supabaseCalled = false;
     page.on('request', (req) => {
       if (/supabase|auth/i.test(req.url())) supabaseCalled = true;
     });
-    // Click the magic-link CTA without filling the email.
-    await page.getByRole('button', { name: /Send sign-in link/i }).click();
+    // Click the primary "Sign in" CTA without filling email or password.
+    await page.getByRole('button', { name: /^Sign in$/i }).last().click();
     // Give time for any spurious request to surface.
     await page.waitForTimeout(500);
     expect(supabaseCalled).toBe(false);
   });
 
-  test('modal closes when the user clicks outside / close button', async ({ page }) => {
+  test('clicking the close button dismisses the AuthModal', async ({ page }) => {
     await openAuthModal(page);
-    // Try to find a close affordance. The modal usually has an X or
-    // backdrop click-to-close. We escape-key as a robust fallback.
-    await page.keyboard.press('Escape');
-    // The modal MAY or MAY NOT close on Escape depending on
-    // implementation. Try clicking the backdrop as fallback.
-    const stillOpen = await page.getByText('Sign in to keep your work', { exact: false }).isVisible();
-    if (stillOpen) {
-      // Backdrop click — top-left corner outside the modal box.
-      await page.mouse.click(2, 2);
-    }
-    await page.waitForTimeout(300);
-    // We tolerate either close strategy; the test simply asserts the
-    // backdrop area is interactive. Strict close-on-escape is left to
-    // the unit tests once the modal implementation stabilizes.
+    // The modal renders a labelled close affordance (IconButton with
+    // aria-label "Close" — src/components/AuthModal.jsx). Click it and
+    // assert the modal is GONE. (Escape is intentionally NOT bound on the
+    // modal, so this targets the real close path rather than tolerating
+    // "may or may not close".)
+    const modalHeading = page.getByText('Sign in to keep your work', { exact: false });
+    await expect(modalHeading).toBeVisible();
+    // Scope to the dialog: the modal BACKDROP is also a role="button" labelled
+    // "Close" (click-to-dismiss) that wraps the dialog, so a bare .first() match
+    // hits the backdrop (whose centre is the dialog card → no dismiss). Target
+    // the real X close affordance INSIDE the dialog.
+    await page.getByRole('dialog').getByRole('button', { name: /^Close$/i }).click();
+    // Unconditional post-condition: the modal heading is removed from the DOM.
+    await expect(modalHeading).toHaveCount(0);
   });
 
   test('soft-cap "Sign in to continue" also opens AuthModal', async ({ page }) => {
@@ -201,13 +203,17 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
 
     await waitForDossier(page);
 
-    // The Save-to-library CTA exists below the dossier for unauthenticated
-    // users — clicking it should open the auth modal. If the CTA is not
-    // rendered for anon users, the gate is enforced higher up (also fine).
+    // The save gate has TWO valid shapes, and we assert ONE of them holds
+    // unconditionally (the old test only asserted inside `if (CTA visible)`,
+    // so it passed vacuously when the CTA wasn't found):
+    //   (a) a Save-to-library CTA is shown and clicking it routes to auth, OR
+    //   (b) no Save CTA is shown — and crucially the auth-gated inline Save
+    //       button (title="Save settlement", canSave-only) is also absent, so
+    //       there is no silent-save path for an anonymous user.
     const saveToLibrary = page.getByRole('button', { name: /Save to library|Save settlement|Save\b/i }).first();
     if (await saveToLibrary.isVisible().catch(() => false)) {
       await saveToLibrary.click();
-      // Either auth modal opens OR a sign-in nudge appears inline.
+      // Auth modal opens OR a sign-in nudge appears inline.
       await expect.poll(async () => {
         const authOpened = await page.getByText('Sign in to keep your work', { exact: false })
           .isVisible().catch(() => false);
@@ -215,6 +221,10 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
           .isVisible().catch(() => false);
         return authOpened || nudgeShown;
       }, { timeout: 10_000 }).toBe(true);
+    } else {
+      // No Save CTA at all — verify there is also no canSave-gated inline Save
+      // button an anon user could use to persist silently.
+      await expect(page.locator('button[title="Save settlement"]')).toHaveCount(0);
     }
   });
 
@@ -226,8 +236,6 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     });
 
     await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
     await page.getByPlaceholder(/^Password$/i).fill('test');
     await page.getByPlaceholder(/Email address/i).fill('test@example.com');
 
@@ -255,26 +263,36 @@ test.describe('Tier 3.7 Flow B (live) — full auth + Stripe + AI integration', 
   test.skip(!LIVE_AUTH, 'Skipped without E2E_LIVE_AUTH=1');
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/create');
   });
 
-  test('signin → pricing modal → AI narrative completes', async ({ page }) => {
-    // This is the contract for the live test. Real implementations
-    // would:
-    //   1. Sign in via magic-link or password using env-provided creds
-    //   2. Generate a settlement
-    //   3. Open the pricing modal (or run an AI feature when credits
-    //      are insufficient)
-    //   4. Stripe test mode: open checkout, complete with test card
-    //   5. Verify credits granted via the webhook (poll DB or UI)
-    //   6. Run the AI narrative feature
-    //   7. Verify NDJSON streams + thesis renders + credit decremented
-    //
-    // The infrastructure for this lives in the user's CI secrets
-    // store — Stripe webhook URLs, test API keys, a dedicated test
-    // Supabase project. The skeleton stays here so the test file
-    // documents the contract; flipping LIVE_AUTH=1 in a future
-    // CI lane runs it for real.
-    test.fail();
-  });
+  // The live BROWSER journey (signin → Stripe test-card checkout → webhook →
+  // AI narrative) needs a dedicated test Supabase project + Stripe test keys +
+  // webhook tunnel, which only exist in the operator's CI secrets store. Until
+  // those are provisioned this is an explicit, honest TODO — NOT a `test.fail()`
+  // placeholder, which "passes" by failing vacuously and reads as coverage that
+  // doesn't exist.
+  //
+  // The COMPOSED money path it would exercise (checkout grant → AI spend →
+  // failure refund → re-spend → monthly allowance, idempotent at every grant)
+  // already has EXECUTING coverage in CI at the RPC-composition layer:
+  // tests/security/moneyPathJourney.pglite.test.js runs the real PL/pgSQL bodies
+  // end-to-end. This live spec adds the browser+Stripe surface on top of that.
+  test.fixme(
+    'signin → Stripe test-card → webhook → AI narrative — implement once CI secrets are provisioned ' +
+      '(composed RPC coverage: tests/security/moneyPathJourney.pglite.test.js)',
+    async ({ page }) => {
+      const email = process.env.TEST_EMAIL;
+      const password = process.env.TEST_PASSWORD;
+      expect(email && password, 'TEST_EMAIL + TEST_PASSWORD must be set for the live flow').toBeTruthy();
+
+      // 1. Sign in via the proven password flow (same selectors as the anon suite above).
+      await openAuthModal(page);
+      await page.getByPlaceholder(/Email address/i).fill(email);
+      await page.getByPlaceholder(/^Password$/i).fill(password);
+      // 2. Generate → 3. open pricing modal / run AI → 4. Stripe test card →
+      // 5. webhook grant → 6. run AI narrative → 7. assert NDJSON + decrement.
+      // (Driven against the test project; left to the operator wiring the secrets.)
+    },
+  );
 });

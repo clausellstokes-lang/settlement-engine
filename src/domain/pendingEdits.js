@@ -1,8 +1,8 @@
 /**
  * domain/pendingEdits.js — Queue-based edit primitive with cascade preview.
  *
- * The Editing & Map critique's E-1 / E-2 reframes the dossier as the
- * surface the DM edits, not a read-only view. To make that safe, the
+ * The dossier is the surface the DM edits, not a read-only view.
+ * To make that safe, the
  * engine needs a queue of pending changes plus a cascade-preview that
  * shows what downstream effects each edit triggers before commit.
  *
@@ -213,7 +213,7 @@ export function previewCascade(settlement, queue) {
   // Warnings — surface the things the DM should think about.
   if (structuralCount > 0 && isNarrated) {
     out.warnings.push(
-      'Structural change on a narrated save — the narrative layer will need regeneration to stay coherent.'
+      'Structural change on a narrated save. The narrative layer will need regeneration to stay coherent.'
     );
   }
   if (netInstitutions < 0 && Math.abs(netInstitutions) >= 2) {

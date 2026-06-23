@@ -52,9 +52,11 @@ const lightColors = Object.freeze({
   'ink-600': '#4A3B22',  // tertiary text, BODY COPY (replaces legacy MUTED for body)
 
   // Gold — primary accent, CTAs, brand
-  'gold-500': '#C9A24C',  // primary CTA, brand mark, badges
+  'gold-500': '#C9A24C',  // primary CTA fill, brand mark, badges, gold borders
   'gold-400': '#D9B566',  // CTA hover
-  'gold-700': '#8C6F32',  // active/pressed gold
+  'gold-700': '#8C6F32',  // active/pressed gold, strong gold borders
+  'gold-800': '#6A511F',  // gold TEXT on light / gold-tint surfaces (WCAG AA — gold-500 fails)
+  'gold-100': '#F3E7C6',  // opaque soft-gold fill (tertiary gold button surface)
 
   // Muted — chrome-only secondary text (NEVER body copy — fails WCAG)
   'muted-500': '#9C8068',
@@ -62,7 +64,8 @@ const lightColors = Object.freeze({
   // Violet — AI affordances. The single visual marker that means
   // "this surface is gated / opt-in / spends credits". Never used for
   // anything else, never collapses with gold.
-  'violet-500': '#7B4FCF',
+  'violet-500': '#7B4FCF',  // AI affordance — fills, borders, icons
+  'violet-700': '#6A3FBF',  // AI TEXT on violet-100 (violet-500 as text is 4.35:1, just under AA)
   'violet-100': '#EBE2FA',
 
   // Red — destructive actions and hard errors only
@@ -71,9 +74,11 @@ const lightColors = Object.freeze({
 
   // Green — confirmation, canon-phase badge
   'green-600': '#4A7A3A',
+  'green-700': '#3F6831',  // green TEXT on green-100 tints (green-600 as text is 4.23:1, just under AA)
 
   // Amber — warnings, drift-detected banners, founder lifetime pill
-  'amber-500': '#D08020',
+  'amber-500': '#D08020',  // amber fill / icon / border
+  'amber-700': '#8A5212',  // amber TEXT on amber-100 (WCAG AA — amber-500 on amber-100 is 2.85:1)
   'amber-100': '#FDF4EC',
 });
 
@@ -112,9 +117,27 @@ export const semantic = Object.freeze({
   infoBg:         '#f0f4ff',
   warning:        color['amber-500'],
   warningBg:      color['amber-100'],
+
+  // Status banner hairlines — the danger/success banners across the Account
+  // sections were hand-typing '#e8b0b0' / '#b0d8b0' for their 1px borders.
+  // Tokenized here so the boundary colour themes and contrast-audits centrally
+  // with the fills it pairs with (destructiveBg / successBg).
+  destructiveBorder: '#e8b0b0',
+  successBorder:     '#b0d8b0',
+
+  // Semantic stat-card tint surfaces (Account Subscription ledger). The
+  // tier/credits/saves tiles group by a faint same-hue wash — gold/violet/green
+  // for the value, with a deeper step for the conditional upsell footer. Routed
+  // through tokens so the tints theme and audit centrally instead of as inline
+  // rgba() literals scattered across the section.
+  tintGoldSurface:     'rgba(201,162,76,0.12)',
+  tintVioletSurface:   'rgba(124,58,237,0.06)',
+  tintVioletSurfaceHi: 'rgba(124,58,237,0.10)',
+  tintGreenSurface:    'rgba(42,122,42,0.06)',
+  tintAmberSurfaceHi:  'rgba(208,128,32,0.10)',
 });
 
-// ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
+// ── Exact-value migration swatchbook (colour burn-down) ──────────────────────
 // The burn-down found ~140 distinct raw hex colours inline across the screen
 // UI — a long tail of near-duplicate browns, creams, reds, greens, blues and
 // purples accumulated over many phases. Consolidating them onto the curated
@@ -254,6 +277,8 @@ export const swatch = Object.freeze({
   '#C0CCE8': '#c0cce8',
   '#C49A3C': '#c49a3c',
   '#C54A4A': '#c54a4a',
+  '#C87060': '#c87060', // settlement threat: embattled FILL/border tint (text fails AA — see #A0492F)
+  '#A0492F': '#a0492f', // settlement threat: embattled TEXT (5.84:1 on CARD — the AA-passing step of #C87060)
   '#C88A8A': '#c88a8a',
   '#C8A0F0': '#c8a0f0',
   '#C8B098': '#c8b098',
@@ -325,6 +350,19 @@ export const swatch = Object.freeze({
   '#FAF3E8': '#faf3e8', // pdf primitives/sections (Dense, StatTile, PowerStructure, …)
   '#FBF5E6': '#fbf5e6', // pdf Cover
   '#F5F0FF': '#f5f0ff', // pdf Relationships / ViabilityAssessment
+  // ConfigurationPanel NearbyResources four-state chips (a11y burndown). The
+  // four-state model was carried by inline hex outside the token system; routed
+  // here with zero rendered change. The abundant/depleted fg are paired with
+  // their bg in tests/design/contrast.test.js (>=4.5:1); the chip BORDERS are UI
+  // boundaries (1.4.11, >=3:1 not required for the soft tints but tokenized).
+  '#C8B89A': '#c8b89a', // allow chip border
+  '#88C880': '#88c880', // abundant chip border
+  '#E08040': '#e08040', // depleted chip border
+  '#FFF7F0': '#fff7f0', // depleted chip bg
+  '#C8B8A0': '#c8b8a0', // incompatible-resource dashed border
+  '#C8A84A': '#c8a84a', // random-pool chip border
+  '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
+  '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────
@@ -414,9 +452,13 @@ export const motion = Object.freeze({
 //   form  — genuine single-task forms (sign-in / sign-up / success). These
 //           stay narrow on purpose; a 1200px-wide login form is bad UX.
 export const layout = Object.freeze({
-  page:  1200,
-  prose: 820,
-  form:  460,
+  page:    1200,
+  prose:   820,
+  // The Create landing column (HomeHero + the cards stacked under it:
+  // WelcomeBackCard, the mode picker). One shared cap so those surfaces share a
+  // single column edge instead of nesting four bespoke widths (720/520/560).
+  landing: 720,
+  form:    460,
 });
 
 // ── CSS custom property emission ────────────────────────────────────────────
@@ -461,34 +503,49 @@ export const legacy = Object.freeze({
   CARD_HDR: '#FAF4E8',
 
   // Flat aliases for palette colours that previously had only dashed keys
-  // (color['violet-500'] etc.). Added in the P120 / V-2 colour burn-down so
-  // exact-match call sites can route through a flat name like the rest.
+  // (color['violet-500'] etc.). Added in the colour burn-down so exact-match
+  // call sites can route through a flat name like the rest.
   VIOLET:    color['violet-500'],
+  VIOLET_DEEP: color['violet-700'],   // legible AI text on violet-100
   VIOLET_BG: color['violet-100'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],
+  GREEN_DEEP: color['green-700'],   // legible green text on green-100 tints
   GREEN_BG:  semantic.successBg,
   AMBER:     color['amber-500'],
   AMBER_BG:  semantic.warningBg,
+  AMBER_DEEP: color['amber-700'],   // legible amber text on amber-100
   BLUE:      semantic.info,
   BLUE_BG:   semantic.infoBg,
   GOLD_DEEP: color['gold-700'],
+  GOLD_TXT:  color['gold-800'],      // legible gold text on light / gold-tint surfaces
+  GOLD_SOFT: color['gold-100'],      // opaque soft-gold fill (tertiary gold button)
+  // BORDER_STRONG — interactive-control border (buttons, inputs) at >=3:1 vs
+  // both card (#FFFBF5) and page (#FBF5E6), satisfying WCAG 1.4.11 for UI
+  // boundaries. The lighter BORDER (parchment-200) stays for decorative
+  // dividers/card edges where the surface itself isn't the only affordance cue.
+  BORDER_STRONG: '#A6863C',
   PARCH_100: color['parchment-100'],
 
   sans:   fontFamily.sans,
   serif_: fontFamily.serif,
 
+  // xxxl/huge expose space-7 (32) and space-8 (48) — the between-SECTION rhythm
+  // P5 prescribes. The xs..xxl run (4..24) is the within-cluster scale; xxxl/huge
+  // are the decisive perceptual jumps between major chunks (hero -> body), so the
+  // grouping reads from spacing alone rather than a borrowed border.
   SP: { xs: space['space-1'], sm: space['space-2'], md: space['space-3'],
-        lg: space['space-4'], xl: space['space-5'], xxl: space['space-6'] },
+        lg: space['space-4'], xl: space['space-5'], xxl: space['space-6'],
+        xxxl: space['space-7'], huge: space['space-8'] },
   R:  { sm: radius.sm, md: radius.md, lg: radius.lg, xl: radius.xl },
   // pico/nano/micro extend the scale below xxs for the dense micro-typography
   // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
-  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
-  // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
+  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. These give the
+  // ~400 raw sub-10px sizes exact tokens to migrate to (zero visual change).
   //
   // The half-step and gap/display sizes below were added in the visual-budget
-  // burn-down (P120 close-out) so EVERY raw inline fontSize in the screen UI has
+  // burn-down so EVERY raw inline fontSize in the screen UI has
   // an exact token to route through — keyed by size so the migration is
   // pixel-identical (zero visual change). The curated t-shirt steps above remain
   // the preferred vocabulary for new code; a future pass can consolidate the
@@ -501,14 +558,15 @@ export const legacy = Object.freeze({
   },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
-  // Added in P141/V-4 so components stop inventing bespoke shadows.
+  // Added so components stop inventing bespoke shadows.
   ELEV: elevation,
 
   // Layout — shared page content widths (see `layout` above). Added so every
   // top-level page references one cap instead of inventing its own narrow
   // column. PAGE_MAX for content pages, PROSE_MAX for reading columns inside
   // them, FORM_MAX for genuine forms that should stay narrow.
-  PAGE_MAX:  layout.page,
-  PROSE_MAX: layout.prose,
-  FORM_MAX:  layout.form,
+  PAGE_MAX:    layout.page,
+  PROSE_MAX:   layout.prose,
+  LANDING_MAX: layout.landing,
+  FORM_MAX:    layout.form,
 });

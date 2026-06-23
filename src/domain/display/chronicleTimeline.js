@@ -2,7 +2,7 @@
  * domain/display/chronicleTimeline.js — read-side projection that merges a
  * campaign's `chronicles[]` (AI prose) and `pulseHistory[]` (the per-tick world
  * pulse records) into ONE scrubbable, tick-indexed timeline for the Realm
- * Chronicle scrollback (UX Phase 5, plan §4.5).
+ * Chronicle scrollback.
  *
  * Today the Chronicle surface shows only `chronicles[0]` (the latest prose) and
  * the latest pulse. This selector exposes the FULL history, grouped by tick, so the

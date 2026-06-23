@@ -1,7 +1,7 @@
 /**
  * domain/foodLedger.js — the canonical conserved food quantities for a settlement.
  *
- * P3 foundation. The food physics already exist — foodGenerator computes them and
+ * The conserved-ledger foundation. The food physics already exist — foodGenerator computes them and
  * persists them on `economicState.foodSecurity`. The problem (see docs/P3_CONSERVED_LEDGER.md)
  * is that consumers read them inconsistently: the capacity model keeps a PARALLEL food
  * model, and two substrate derivers read fields foodGenerator never produces

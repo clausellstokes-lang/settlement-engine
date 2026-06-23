@@ -1,8 +1,7 @@
 /**
  * domain/events/eventPipeline.js — Unified event preview/apply/derive flow.
  *
- * Tier 2.2 of the roadmap. Before Phase 18, `previewEvent` and
- * `applyEvent` ran on *different* code paths:
+ * `previewEvent` and `applyEvent` once ran on *different* code paths:
  *
  *   previewEvent: applyStateDeltas(beforeState, spec.stateDeltas(event))
  *   applyEvent:   deriveSystemState(mutateSettlement(settlement, event))
@@ -18,11 +17,11 @@
  *      (this preserves the authored-effect surface that mutate doesn't
  *      structurally model — e.g. "food storage damage raises resource
  *      pressure by +12" lives in the registry, not in the derivation)
- *   5. Re-derive CausalState (14-variable substrate, Phase 17)
+ *   5. Re-derive CausalState (14-variable substrate)
  *   6. Compute deltas at both layers (compareSystemState +
  *      compareCausalState)
- *   7. Compute Phase 14 faction relationship deltas
- *   8. Compute faction responses (Phase 9+)
+ *   7. Compute faction relationship deltas
+ *   8. Compute faction responses
  *   9. Emit the narrative summary
  *
  * Both `previewEvent` and `applyEvent` become thin wrappers around
@@ -101,7 +100,7 @@ export function layerAuthoredDeltas(systemState, event, settlement = null) {
 /**
  * @typedef {Object} EventPipelineResult
  *
- * Every consumer (preview / apply / future Tier 4.17 counterfactual)
+ * Every consumer (preview / apply / future counterfactual)
  * receives the same envelope.
  *
  * @property {Event}        event
@@ -184,7 +183,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(event, beforeSettlement) || {};
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, rawAuthoredDeltas);
 
-  // 5. Re-derive CausalState from the mutated settlement (Phase 17
+  // 5. Re-derive CausalState from the mutated settlement (the 14-variable
   //    substrate). The substrate reads from supply chains, factions,
   //    NPCs, active conditions, and generator output — most of which
   //    mutateSettlement may have changed.
@@ -194,7 +193,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   const systemStateDeltas = compareSystemState(beforeSystemState, afterSystemState);
   const causalStateDeltas = compareCausalState(beforeCausalState, afterCausalState);
 
-  // 7. Phase 14 faction relationship deltas — computed against the
+  // 7. Faction relationship deltas — computed against the
   //    BEFORE settlement because the deltas describe how the event
   //    moves factions, not what the post-event state already reflects.
   let factionRelationshipDeltas = [];
@@ -245,9 +244,9 @@ export function runEventPipeline(settlement, event, options = {}) {
 
 /**
  * High-level summary of an event pipeline result. Useful for the
- * "what just happened" UI surface and Tier 6.1 AI grounding.
+ * "what just happened" UI surface and AI grounding.
  *
- * Two-band separation (W6#2): the display bands
+ * Two-band separation: the display bands
  * (Stable/Strained/Vulnerable/Critical) and the causal-substrate bands
  * (surplus/adequate/strained/critical/collapsed) share words at
  * incompatible thresholds, so concatenating both delta families into

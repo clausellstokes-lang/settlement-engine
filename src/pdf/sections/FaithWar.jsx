@@ -1,6 +1,5 @@
 /**
- * FaithWar — chapter 03D, the PDF's LIVE "Faith & War" read surface
- * (UX overhaul Phase 7, plan §4.4).
+ * FaithWar — chapter 03D, the PDF's LIVE "Faith & War" read surface.
  *
  * The screen↔PDF parity fix: the dossier's WarFaithSection has long rendered a
  * live war/faith block the PDF could not, because the PDF never received the
@@ -67,7 +66,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
   const headline = lw.atWar
-    ? 'This settlement is at war — the live front, the strategy posture, and the patron god.'
+    ? 'This settlement is at war. The live front, the strategy posture, and the patron god.'
     : deity
       ? 'The patron god and the live geopolitical standing of the settlement.'
       : 'The live geopolitical standing of the settlement.';
@@ -140,33 +139,33 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             <Line label="Mobilization." tone="warn">
               {mobilization.phrase}
               {mobilization.ticksToDeploy > 0
-                ? ` — roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`
+                ? `. Roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`
                 : '.'}
             </Line>
           )}
           {army && (
             <Line label="Army in the field." tone="bad">
-              Marching on {army.targetName} — {army.remainingPhrase}; {army.conditionPhrase}.
+              Marching on {army.targetName}. {army.remainingPhrase}; {army.conditionPhrase}.
             </Line>
           )}
           {occupationLive && (
             <Line label="Occupied." tone="bad">
-              Held by {occupationLive.occupierName} — {occupationLive.statePhrase}; the population is {occupationLive.resistancePhrase}.
+              Held by {occupationLive.occupierName}. {occupationLive.statePhrase}; the population is {occupationLive.resistancePhrase}.
             </Line>
           )}
           {holdings && (
             <Line label="Occupier." tone={holdings.stretchedThin ? 'bad' : 'warn'}>
               Holds {holdings.holds.join(', ')}
-              {holdings.stretchedThin ? ' — stretched thin holding them.' : holdings.strengthened ? ' — they now pay for themselves.' : '.'}
+              {holdings.stretchedThin ? '. Stretched thin holding them.' : holdings.strengthened ? '. They now pay for themselves.' : '.'}
             </Line>
           )}
           {tradePressure.map((tie, i) => (
             <Line key={`tp-${i}`} label="Trade pressure." tone="muted">
               {tie.role === 'dependent'
-                ? `Dependent on ${tie.partnerName} — ${tie.phrase}; losing it would bite hard.`
+                ? `Dependent on ${tie.partnerName}. ${cap(tie.phrase)}; losing it would bite hard.`
                 : tie.role === 'supplier'
-                  ? `Holds leverage over ${tie.partnerName} — ${tie.phrase} it relies on.`
-                  : `${cap(tie.phrase)} with ${tie.partnerName} — war between them would be costly.`}
+                  ? `Holds leverage over ${tie.partnerName}. ${cap(tie.phrase)} it relies on.`
+                  : `${cap(tie.phrase)} with ${tie.partnerName}. War between them would be costly.`}
             </Line>
           ))}
         </View>

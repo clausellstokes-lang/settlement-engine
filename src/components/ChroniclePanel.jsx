@@ -65,9 +65,9 @@ function absoluteTime(iso) {
 }
 
 // Chip with label + icon.
-function Chip({ color, Icon, children, filled = false }) {
+function Chip({ color, Icon, children, filled = false, title }) {
   return (
-    <span style={{
+    <span title={title} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '2px 8px', borderRadius: 11, fontSize: FS.xxs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase',
@@ -244,7 +244,12 @@ function EntryCard({ entry, onOpen }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
         <Chip color={meta.color} Icon={meta.Icon}>{meta.label}</Chip>
-        <Chip color={isFull ? '#6a2a9a' : MUTED}>{isFull ? 'Full' : 'Summary'}</Chip>
+        <Chip
+          color={isFull ? '#6a2a9a' : MUTED}
+          title={isFull
+            ? 'Full snapshot retained. Open Read full to re-read the whole narrative.'
+            : 'Thesis kept, the full snapshot rotated out. Summaries hold the through-line, not the full prose.'}
+        >{isFull ? 'Full' : 'Summary'}</Chip>
         <span style={{ fontSize: FS['10.5'], color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
           {relativeTime(entry.createdAt)}
         </span>
@@ -283,7 +288,11 @@ export default function ChroniclePanel({ entries }) {
   const summaryCount = list.length - fullCount;
 
   return (
-    <div style={{ marginBottom: 14, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
+    // No self-margin: this panel is placed in a gap'd flex column (the lifecycle
+    // cluster), so the parent's gap owns the spacing — a baked-in marginBottom
+    // double-counted it and broke the spacing rhythm (P5). The border stays: this
+    // is a genuinely-interactive collapsible (a click target earns it).
+    <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
       <button
         type="button"
         aria-expanded={open}

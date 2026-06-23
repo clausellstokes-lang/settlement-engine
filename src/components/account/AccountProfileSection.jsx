@@ -7,60 +7,72 @@
  * used by this section).
  */
 import {
-  User, Shield, Check, X, Edit3, Mail, Bot,
+  Check, X, Edit3,
 } from 'lucide-react';
-import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
+import { AI_MODEL_OPTIONS, getTierDisplayName } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import Pill from '../primitives/Pill.jsx';
+import { RoleBadge } from '../auth/authUI.jsx';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, TINT_GOLD, DANGER_BORDER } from '../theme.js';
 import Section from './AccountSection.jsx';
 
-function RoleBadge({ role }) {
-  if (role === 'user') return null;
-  const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
-  };
-  const c = cfg[role] || cfg.admin;
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '3px 10px', borderRadius: R.md,
-      background: c.bg, color: c.color,
-      fontSize: FS.xs, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.04em',
-    }}>
-      <Shield size={11} /> {c.label}
-    </span>
-  );
+/**
+ * Build a CSS background-image declaration for an avatar URL, but only for
+ * http(s) URLs we can trust — never javascript:/data:/other schemes — and with
+ * the value CSS-escaped so it cannot break out of the url() literal into
+ * arbitrary CSS. Returns null when the URL is empty or not a safe http(s) URL,
+ * so callers fall back to the initial-letter gradient.
+ * @param {string} url
+ * @returns {string | null}
+ */
+function avatarBackground(url) {
+  if (!url) return null;
+  let parsed;
+  try {
+    // Parse WITHOUT a base so only absolute URLs qualify — a bare string like
+    // `");background:red;//` won't be silently resolved to a same-origin URL.
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+  const escaped = typeof CSS !== 'undefined' && CSS.escape
+    ? CSS.escape(parsed.href)
+    // Fallback for environments without CSS.escape: neutralize the only chars
+    // that can terminate the url("...") literal.
+    : parsed.href.replace(/["\\]/g, '\\$&');
+  return `center / cover no-repeat url("${escaped}")`;
 }
 
 export default function AccountProfileSection({
   auth,
   avatarInput, setAvatarInput,
-  emailNotifications, setEmailNotifications,
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
   nameSaving, handleSaveName,
+  nameError,
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
+  // Only render a real avatar image for a validated, CSS-escaped http(s) URL;
+  // anything else (empty, javascript:, data:, malformed) falls back to the
+  // initial-letter gradient.
+  const avatarBg = avatarBackground(avatarInput);
   return (
-    <Section title="Profile" icon={User}>
+    <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
         {/* Avatar */}
         <div style={{
           width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-          background: avatarInput
-            ? `center / cover no-repeat url("${avatarInput}")`
-            : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+          background: avatarBg || `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
         }}>
-          {!avatarInput && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
+          {!avatarBg && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
         </div>
 
         <div style={{ flex: 1 }}>
@@ -94,7 +106,7 @@ export default function AccountProfileSection({
                   Icon={X}
                   label="Cancel editing"
                   onClick={() => setEditingName(false)}
-                  tone="danger"
+                  tone="ghost"
                   size="lg"
                 />
               </>
@@ -108,13 +120,29 @@ export default function AccountProfileSection({
                   label="Edit name"
                   onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
                   tone="ghost"
-                  size="md"
+                  size="lg"
                 />
               </>
             )}
           </div>
-          <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user.email}</div>
+          {nameError && (
+            <div role="alert" style={{ marginBottom: SP.xs, padding: `${SP.xs}px ${SP.sm}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.sm, fontSize: FS.xs, color: swatch.danger }}>
+              {nameError}
+            </div>
+          )}
+          <div style={{ fontSize: FS.sm, color: BODY }}>{auth.user.email}</div>
           <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
+            {/* Quiet tier chip so a free user sees their plan in the header,
+                not only in the Subscription section. The label is the tier
+                display name only ('Wanderer') — the raw lowercase tier key is a
+                code identifier and stays out of user copy (voice rule). Calm
+                parchment/gold-tint surface, matching the demoted-control house
+                style, so it never reads as a loud control. */}
+            {getTierDisplayName(auth.tier) && (
+              <Pill bg={TINT_GOLD} color={GOLD_TXT}>
+                {getTierDisplayName(auth.tier)}
+              </Pill>
+            )}
             <RoleBadge role={auth.role} />
             <FounderBadge size="md" />
           </div>
@@ -123,7 +151,7 @@ export default function AccountProfileSection({
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
         {profileError && (
-          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
             {profileError}
           </div>
         )}
@@ -138,18 +166,10 @@ export default function AccountProfileSection({
             style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
           />
         </label>
-        <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
-          <input
-            id="account-email-notifications"
-            aria-label="Email notifications"
-            type="checkbox"
-            checked={emailNotifications}
-            onChange={e => setEmailNotifications(e.target.checked)}
-          />
-          <Mail size={14} color={GOLD} /> Email notifications
-        </label>
+        {/* Email-notifications toggle is the single source of truth in
+            Preferences now; it was duplicated here against the same handler. */}
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
+          <span>Narration model</span>
           <select
             id="account-model-preference"
             value={modelPreference}

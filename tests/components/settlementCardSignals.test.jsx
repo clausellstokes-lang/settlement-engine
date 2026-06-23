@@ -107,14 +107,16 @@ describe('SettlementCard — select mode', () => {
 describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
   it('standalone card routes Advance Time to the move-to-campaign popover', () => {
     render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} campaigns={[{ id: 'c1', name: 'Camp One' }]} />);
+    fireEvent.click(screen.getByLabelText('More actions'));
     fireEvent.click(screen.getByText('Advance Time'));
     // The move popover opened (the campaign target is now offered).
-    expect(screen.getByText('Camp One')).toBeTruthy();
+    expect(screen.getByText('Add to Camp One')).toBeTruthy();
   });
 
   it('campaign card deep-links Advance Time via onAdvanceTime', () => {
     const onAdvanceTime = vi.fn();
     render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId="camp-1" onAdvanceTime={onAdvanceTime} />);
+    fireEvent.click(screen.getByLabelText('More actions'));
     fireEvent.click(screen.getByText('Advance Time'));
     expect(onAdvanceTime).toHaveBeenCalledWith('camp-1');
   });

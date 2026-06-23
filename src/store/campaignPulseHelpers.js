@@ -91,8 +91,8 @@ export function campaignClockTick(campaign) {
 export function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
-  // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
-  // decision: SYNC IT): roaming stressors the pulse resolved ORGANICALLY
+  // Crisis-triple sync (a deliberate decision to keep the two sides in step):
+  // roaming stressors the pulse resolved ORGANICALLY
   // wind down their origin settlement's local representations — the stress
   // entry, the promoted condition (eased per the event-resolution
   // semantics), and the stressorEdits suppression — through the same
@@ -195,6 +195,49 @@ export function capturePulseSnapshot(state, campaign, now) {
         }
       : null,
   };
+}
+
+/**
+ * Campaign-clock (Phase C2): restore the campaign + every member save (and the
+ * live active view) from a snapshot produced by capturePulseSnapshot. This is
+ * the exact inverse of the Phase-1 drain: it rewinds savedSettlements, the live
+ * settlement/systemState/eventLog/phase, and the campaign's worldState /
+ * regionalGraph / wizardNews to their pre-drain values.
+ *
+ * advanceCampaignWorld uses it as an atomic-rollback path: if the (uncommitted,
+ * pure) organic pulse THROWS after Phase-1 already committed the drain, the
+ * drained player intentions would otherwise be silently consumed with no tick
+ * advanced and no undo snapshot. Restoring from the pre-drain snapshot makes the
+ * whole action a no-op on failure, so the queued intentions are preserved and
+ * can be retried. Mutates the draft `state` in place; returns nothing.
+ */
+export function restorePulseSnapshot(state, snapshot) {
+  if (!snapshot) return;
+  const c = state.campaigns?.find?.(item => item.id === snapshot.campaignId) || null;
+  if (c) {
+    c.worldState = cloneJson(snapshot.worldState);
+    c.regionalGraph = cloneJson(snapshot.regionalGraph);
+    c.wizardNews = cloneJson(snapshot.wizardNews);
+  }
+  for (const s of snapshot.saves || []) {
+    const idx = (state.savedSettlements || []).findIndex(x => String(x.id) === String(s.id));
+    if (idx === -1) continue;
+    state.savedSettlements[idx] = {
+      ...state.savedSettlements[idx],
+      settlement: cloneJson(s.settlement),
+      campaignState: cloneJson(s.campaignState),
+    };
+  }
+  // Rewind the live active view to whatever was open when the snapshot was taken
+  // (the drain may have rewritten it). Only when the same save is still active —
+  // a different open save (or a closed detail view) must not be clobbered.
+  if (snapshot.active && state.activeSaveId != null
+      && String(state.activeSaveId) === String(snapshot.active.saveId)) {
+    state.settlement = cloneJson(snapshot.active.settlement);
+    state.systemState = cloneJson(snapshot.active.systemState);
+    state.eventLog = cloneJson(snapshot.active.eventLog);
+    state.phase = snapshot.active.phase;
+  }
 }
 
 /**

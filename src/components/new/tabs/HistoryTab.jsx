@@ -25,7 +25,7 @@ function formatRecentDate(value) {
 
 export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
-  if (!r?.history) return <Empty message="No historical data available."/>;
+  if (!r?.history) return <Empty message="No history on file for this settlement."/>;
   const h = r.history;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
   const mobile = isMobile();
@@ -80,7 +80,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
-          {onReroll&&<Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>↺ Reroll</Button>}
+          {onReroll&&<Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>Reroll</Button>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
@@ -100,10 +100,10 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>
+                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Party</span>
                   : event.source==='manual'
-                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,borderRadius:3,padding:'0 5px',fontWeight:800}}>EDIT</span>
-                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],borderRadius:3,padding:'0 5px',fontWeight:800}}>WORLD</span>}
+                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Edit</span>
+                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],borderRadius:3,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>World</span>}
                 {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],borderRadius:3,padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
@@ -120,9 +120,9 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           {/* Axis line */}
           <div style={{position:'absolute',top:'50%',left:0,right:0,height:2,background:swatch['#D0B880'],transform:'translateY(-50%)'}}/>
           {/* "Founded" */}
-          <div style={{position:'absolute',left:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600}}>FOUNDED</div>
+          <div style={{position:'absolute',left:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600,textTransform:'uppercase'}}>Founded</div>
           {/* "Now" */}
-          <div style={{position:'absolute',right:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600}}>NOW</div>
+          <div style={{position:'absolute',right:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600,textTransform:'uppercase'}}>Now</div>
           {/* Event dots + year labels with collision avoidance */}
           {(() => {
             // Sort by position to detect collisions
@@ -179,7 +179,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           })}
           <span style={{display:'flex',alignItems:'center',gap:4,fontSize:FS.xxs,color:swatch.inkMag3}}>
             <div style={{width:10,height:10,borderRadius:'50%',background:MUTED,border:'2px solid #fff',boxShadow:'0 0 0 2px #9c8068',flexShrink:0}}/>
-            Still relevant today ()
+            Still relevant today
           </span>
         </div>
       </div>}
@@ -266,10 +266,10 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 borderRadius:7, overflow:'hidden',
                 background: isAnchored?ec.bg:'#faf8f4',
                 cursor:'pointer',
-              }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
+              }} role="button" tabIndex={0} aria-expanded={isExp} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
                 {/* Anchored banner */}
                 {isAnchored&&<div style={{background:ec.color,padding:'3px 12px',display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}> STILL RELEVANT TODAY</span>
+                  <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em',textTransform:'uppercase'}}>Still relevant today</span>
                 </div>}
                 {/* Event header */}
                 <div style={{padding:'10px 14px'}}>

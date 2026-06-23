@@ -84,7 +84,7 @@ describe('public gallery dossier — Chronicle tab', () => {
 
     // Owner-private surfaces stay off the public page.
     expect(screen.queryByText('DM Notes')).toBeNull();
-    expect(screen.queryByText('AI Notes')).toBeNull();
+    expect(screen.queryByText('Narrative Notes')).toBeNull();
     expect(screen.queryByText('Campaign Context')).toBeNull();
     expect(screen.queryByText('DM Summary')).toBeNull();
   });

@@ -23,11 +23,13 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
-import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
-import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
+import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced, conditionIdFromArchetype } from '../activeConditions.js';
+import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { WAR_STRESSOR_TYPES } from '../worldPulse/warStressorTypes.js';
+import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -115,7 +117,7 @@ export function mutateSettlement({ settlement, event, now = null }) {
       next = addFaction(next, stampedEvent);
       break;
 
-    // Wave 1 extended events. Each is implemented by reusing primitives:
+    // Extended events. Each is implemented by reusing primitives:
     // KILL_LEADER is a KILL_NPC with importance forced to 'pillar';
     // EXPOSE_CORRUPTION applies a legitimacy impairment to the target
     // (faction or institution) and propagates; the population-shifting
@@ -232,7 +234,7 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
     archetype: 'food_anchor_lost',
     severity: sev,
     triggeredAt: { sourceEventType: event.type, sourceEventTargetId: idOf(inst) },
-    causes: [{ source: 'event', eventId: event.id, detail: `${inst.name} is out of action — the settlement's food supply lost an anchor.` }],
+    causes: [{ source: 'event', eventId: event.id, detail: `${inst.name} is out of action. The settlement's food supply lost an anchor.` }],
   });
 }
 
@@ -275,7 +277,7 @@ function removeInstitution(s, event) {
       },
     },
   });
-  // §corruption Phase 4 — closing a criminal institution frees the NPCs tied to it.
+  // Closing a criminal institution frees the NPCs tied to it.
   next = severCorruptionTiesTo(next, inst.name);
   // Losing a food anchor entirely is the canonical food_anchor_lost crisis.
   next = withFoodAnchorLostIfAnchor(next, inst, event, 0.7);
@@ -506,16 +508,23 @@ function depleteResource(s, event) {
 function recoveredResource(s, event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
-  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
-  if (!keys.size) return s;
-  const state = { ...(config.nearbyResourcesState || {}) };
-  for (const k of keys) if (state[k] === 'depleted') state[k] = 'allow';
-  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k));
+  if (!raw) return s;
   // Recorded under the roster-resolved form — the key a regenerated roster
   // holds. Recorded even when nothing was depleted LIVE: in random mode the
   // depletion may exist only in the re-roll, and the recovered record is
   // what forces it out there.
   const key = resolveRosterKey(config, raw);
+  // Clear the LIVE depleted entry with the SAME slug-equivalent tolerance the
+  // record uses (slugEq against the resolved key), not an exact membership test
+  // over {raw, slug, label}. A depleted key stored in a form outside that set
+  // (e.g. a verbatim custom name that only slug-matches) used to survive the
+  // live filter while the record cleared it — the two formats then disagreed.
+  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
+  const state = { ...(config.nearbyResourcesState || {}) };
+  for (const k of Object.keys(state)) {
+    if (state[k] === 'depleted' && (keys.has(k) || slugEq(k, key))) state[k] = 'allow';
+  }
+  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k) && !slugEq(k, key));
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
     nearbyResourcesState: state,
@@ -536,10 +545,24 @@ function removedThreat(s, event) {
   const label = labelFromTarget(event.targetId).toLowerCase();
   let next = { ...s };
   let removed = null;
+  // Match precedence: an EXACT name/type hit wins over a substring hit so the
+  // removal strikes the intended stressor, not the first one whose text merely
+  // CONTAINS the label (substring collisions — 'rats' inside 'pirates'). A
+  // substring fallback still helps free-text targets, but only for labels long
+  // enough (≥4 chars) to be discriminating — a 1–3 char label matched far too
+  // greedily.
+  const exactMatch = (/** @type {any} */ st) => {
+    const name = String(st?.name || '').toLowerCase();
+    const type = String(st?.type || '').toLowerCase();
+    return name === label || type === label;
+  };
+  const looseMatch = (/** @type {any} */ st) =>
+    label.length >= 4 && `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label);
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = Array.isArray(next[key]) ? next[key] : null;
     if (!arr || !label) continue;
-    const idx = arr.findIndex(st => `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label));
+    let idx = arr.findIndex(exactMatch);
+    if (idx < 0) idx = arr.findIndex(looseMatch);
     if (idx >= 0) {
       removed = arr[idx];
       next = { ...next, [key]: arr.filter((_, i) => i !== idx) };
@@ -582,7 +605,7 @@ function startedRiot(s, event) {
 // reciprocal neighbour link is reconciled by the regional graph that already
 // ingests neighbourNetwork. No-op when the named neighbour isn't linked.
 const ALLIANCE_REL = 'allied';
-// H12: the canonical label is the SINGULAR 'trade_partner' — the plural this
+// The canonical label is the SINGULAR 'trade_partner' — the plural this
 // event historically wrote is recognized by no other subsystem (channel
 // bundles minted 0 channels from it). Composer payloads still carry the
 // plural, so normalize at the write chokepoint. (Kept tiny + local: the
@@ -597,7 +620,7 @@ function setNeighbourRelationship(s, event) {
     : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
   const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
   let touched = false;
-  const next = network.map((link) => {
+  const next = network.map((/** @type {any} */ link) => {
     const matches = String(link?.name || '') === String(targetId)
       || String(link?.neighbourName || '') === String(targetId)
       || String(link?.id || '') === String(targetId)
@@ -606,8 +629,32 @@ function setNeighbourRelationship(s, event) {
     touched = true;
     return { ...link, relationshipType: relType, displayRelationshipType: relType, _relationshipEventId: event.id };
   });
-  if (!touched) return s;
-  return { ...s, neighbourNetwork: next };
+  if (touched) return { ...s, neighbourNetwork: next };
+  // #6 — OPENED_TRADE_ROUTE may name a campaign settlement that is NOT yet a
+  // linked neighbour. Rather than no-opping (the historic behaviour for every
+  // relationship event), ADD a fresh neighbourNetwork link to it so a trade
+  // route can be opened with any settlement in the campaign roster, not only
+  // pre-linked neighbours. Other relationship events keep the no-op posture:
+  // a dispute/alliance with an unknown name has no link to act on.
+  // CAVEAT (settlement-local): this writes the HOME settlement's view only.
+  // Reciprocal/regional-graph propagation of the new edge is a campaign-layer
+  // follow-up (deriveRegionalState already ingests neighbourNetwork).
+  if (event.type === 'OPENED_TRADE_ROUTE') {
+    const def = relationshipDefinition('trade_partner', s.id || s.name || 'home', targetId);
+    const newLink = {
+      id: targetId,
+      name: targetId,
+      neighbourName: targetId,
+      relationshipType: relType,
+      displayRelationshipType: relType,
+      relationshipFrom: def.from,
+      relationshipTo: def.to,
+      _relationshipEventId: event.id,
+      _addedByEvent: true,
+    };
+    return { ...s, neighbourNetwork: [...network, newLink] };
+  }
+  return s;
 }
 
 function cutTradeRoute(s, event) {
@@ -650,6 +697,12 @@ function addNpc(s, event) {
     linkedFactionIds:     event.payload?.linkedFactionIds || [],
     influence:            event.payload?.influence,
     legitimacyContribution: event.payload?.legitimacyContribution,
+    // Authored descriptive traits — surfaced verbatim on the NPC read card.
+    flaw:        event.payload?.flaw,
+    temperament: event.payload?.temperament,
+    goal:        event.payload?.goal,
+    constraint:  event.payload?.constraint,
+    secret:      event.payload?.secret,
     _idSeed: event.id, // deterministic, event-scoped id (avoids same-name collisions)
   });
   npc.createdByEventId = event.id; // so undo can drop the NPC this event created
@@ -718,13 +771,26 @@ function assignNpcMutation(s, event) {
   if (institutionId) {
     const targetInst = findInstitution(next, institutionId);
     if (targetInst) {
-      // Walk back any impairments whose causeEventId was a KILL_NPC
-      // for an NPC that linked to this institution. v1 simplification:
-      // remove all staffing impairments and apply the new restorations.
+      // Clear ONLY the staffing wound this assignment actually fills, so an
+      // institution that lost two pillars and gets ONE vacancy filled keeps
+      // the second role's penalty. Discriminator precedence:
+      //   1. payload.fillsVacancyEventId — the exact prior KILL_NPC's id;
+      //   2. the role being filled — the kill stamped the dead NPC's role into
+      //      the staffing impairment description ('… (Captain)'), so a same-role
+      //      fill heals only that role's vacancy;
+      //   3. neither — fall back to the v1 single-vacancy behaviour (clear all
+      //      staffing) so callers that supply no discriminator are unchanged.
+      const fillsEventId = event.payload?.fillsVacancyEventId;
+      const role = String(event.payload?.role || '').trim().toLowerCase();
+      const healsThisVacancy = (/** @type {any} */ imp) => {
+        if (imp.type !== 'staffing') return false;
+        if (fillsEventId) return imp.causeEventId === fillsEventId;
+        if (role) return String(imp.description || '').toLowerCase().includes(`(${role})`);
+        return true; // no discriminator → v1 single-vacancy clear
+      };
       const cleared = {
         ...targetInst,
-        impairments: (targetInst.impairments || [])
-          .filter(i => i.type !== 'staffing'),
+        impairments: (targetInst.impairments || []).filter(i => !healsThisVacancy(i)),
       };
       let withCleared = replaceInstitution(next, targetInst, cleared);
       for (const { impairment } of result.restorations) {
@@ -737,7 +803,7 @@ function assignNpcMutation(s, event) {
   return next;
 }
 
-// ── Wave 1 extended event handlers ─────────────────────────────────────────
+// ── Extended event handlers ─────────────────────────────────────────────────
 
 /**
  * KILL_LEADER — kill the named NPC at pillar importance regardless of
@@ -754,60 +820,23 @@ function killLeaderMutation(s, event) {
 }
 
 /**
- * EXPOSE_CORRUPTION — applies a legitimacy impairment to the target
- * (faction OR institution; we try both). Propagates so a corrupt watch
- * captain hits both the watch institution and the controlling faction.
+ * EXPOSE_CORRUPTION — NPC-only. A corrupt NPC is publicly revealed: cleaned,
+ * scarred, replaced by a successor, and the corruption_exposed scandal is
+ * stamped. The criminal institution they answered to and their home
+ * institution/faction become tarnished ONLY through chain propagation from the
+ * exposed NPC (applyCorruptionImpairments) — never by direct faction or
+ * institution exposure. A non-corrupt or non-NPC target is a no-op.
  */
 function exposeCorruption(s, event) {
-  // §corruption Phase 4 — prefer a corrupt NPC target: clean + scar them and
-  // impair BOTH the tied criminal institution and their home institution/faction
-  // (the same path organic exposure uses). Falls back to faction/institution.
   const npc = findNpc(s, event.targetId);
   if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
-
-  const severity = Number(event.payload?.severity ?? 0.7);
-  const inst    = findInstitution(s, event.targetId);
-  const faction = findFaction(s, event.targetId);
-  const target  = inst || faction;
-  if (!target) return s;
-
-  const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
-    type: 'legitimacy',
-    severity,
-    causeEventId: event.id,
-    description: event.description || `Corruption inside ${target.name} was exposed publicly.`,
-  });
-
-  // The scandal becomes a durable condition: corruption_exposed is read by
-  // ruling_authority (its ONLY condition reaction), administrative capacity,
-  // daily life, districts, and threats — but no event ever produced it, so the
-  // whole consumer tree was dead and the scandal vanished on re-derivation.
-  const scandal = (next) => withActiveCondition(next, {
-    archetype: 'corruption_exposed',
-    severity,
-    triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: event.targetId },
-    causes: [{ source: 'event', eventId: event.id, detail: `Corruption inside ${target.name} was exposed publicly.` }],
-  });
-
-  if (inst) {
-    let next = replaceInstitution(s, inst, withImpairment(inst, impairment));
-    next = propagateImpairment({
-      settlement: next,
-      origin: { entityType: 'institution', entityId: idOf(inst), impairment },
-    });
-    return scandal(next);
-  }
-
-  // Faction case
-  let next = replaceFaction(s, faction, withImpairment(faction, impairment));
-  next = propagateImpairment({
-    settlement: next,
-    origin: { entityType: 'faction', entityId: factionIdOf(faction), impairment },
-  });
-  return scandal(next);
+  // Decision 3: the direct faction/institution expose path is removed. A
+  // faction or institution becomes scandalised solely via propagation from an
+  // exposed NPC, so there is nothing to do for a non-corrupt-NPC target.
+  return s;
 }
 
-// §corruption Phase 4 + 1b-ii-c — DM exposes a specific corrupt NPC: impair the
+// DM exposes a specific corrupt NPC: impair the
 // tied criminal + home institution/faction (shared organic path), then remove the
 // disgraced NPC and install a fresh successor in their seat.
 function exposeCorruptNpc(s, npc, event) {
@@ -831,7 +860,7 @@ function exposeCorruptNpc(s, npc, event) {
   });
 }
 
-// §corruption Phase 4 — removing/destroying a criminal institution severs the
+// Removing/destroying a criminal institution severs the
 // corruption ties of NPCs bound to it: they separate from criminal activity.
 // No-op for a non-criminal institution (no NPC names it as a tie).
 function severCorruptionTiesTo(s, institutionName) {
@@ -848,7 +877,7 @@ function severCorruptionTiesTo(s, institutionName) {
   return changed ? { ...s, npcs: nextNpcs } : s;
 }
 
-// §corruption — IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
+// IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
 // organization in the settlement. We write the EXACT shape the world-pulse corruption loop
 // seeds from — npc.corrupt + corruptionVector + corruptTies.criminalInstitution (npcAgency.js
 // reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
@@ -874,7 +903,31 @@ function imposeCorruption(s, event) {
     corruptionVector: vector,
     corruptTies: { ...(npc.corruptTies || {}), criminalInstitution: orgName },
   };
-  return replaceNpc(s, npc, corrupted);
+  let next = replaceNpc(s, npc, corrupted);
+
+  // Scope: 'individual_institution' captures the NPC's home institution too —
+  // a COVERT 'corruption' impairment, not a public legitimacy hit (that is the
+  // exposure consequence). It marks the institution as compromised in-chain:
+  // compromisedSecurityInstitutions reads a 'corruption'-typed impairment as
+  // 'revealed', so we keep this covert by stamping covert:true and letting the
+  // dossier surface it honestly. The NPC alone already homes the covert drag;
+  // this extends a tangible institutional marker for the bigger scope.
+  if (event.payload?.scope === 'individual_institution') {
+    const homeName = npcHomeInstitution(corrupted);
+    const homeInst = homeName ? findInstitution(next, homeName) : null;
+    if (homeInst) {
+      const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
+        type: 'corruption',
+        severity: 0.3,
+        covert: true,
+        causeEventId: event.id,
+        appliedAt: event.timestamp || event.createdAt || null,
+        description: `${corrupted.name}'s capture quietly compromised ${homeInst.name}.`,
+      });
+      next = replaceInstitution(next, homeInst, withImpairment(homeInst, impairment));
+    }
+  }
+  return next;
 }
 
 /**
@@ -899,6 +952,28 @@ function withoutGenerationTwin(s, archetype) {
     }
   }
   return next;
+}
+
+/**
+ * Stable condition id for an event-promoted condition. When the event names a
+ * target the default id (hash of sourceEventType:targetId) is already distinct
+ * per target. But a TARGET-LESS onset (an unnamed plague / refugee wave) hashes
+ * to a single id per archetype, so a SECOND such onset overwrites the first
+ * (withActiveCondition replaces by id) — the two crises collapse into one even
+ * though the substrate deltas and stacked impairments both accumulated.
+ * Keying the id off the EVENT id when no target is present gives distinct
+ * onsets distinct conditions so consecutive unnamed crises compound. Stays
+ * deterministic (event ids are stable) and replay-safe (same event ⇒ same id).
+ *
+ * @param {string} archetype
+ * @param {Event} event
+ */
+function conditionIdForOnset(archetype, event) {
+  return conditionIdFromArchetype(archetype, {
+    sourceEventId: event.targetId
+      ? `${event.type}:${event.targetId}`
+      : `${event.type}:${event.id}`,
+  });
 }
 
 /**
@@ -928,6 +1003,7 @@ function refugeeWave(s, event) {
   // substrate and AI overlay see the influx, not just the write-only annotation.
   const severity = size === 'large' ? 0.65 : size === 'small' ? 0.35 : 0.5;
   return withActiveCondition(withoutGenerationTwin(next, 'regional_migration_pressure'), {
+    id: conditionIdForOnset('regional_migration_pressure', event),
     archetype: 'regional_migration_pressure',
     severity,
     triggeredAt: { sourceEventType: 'REFUGEE_WAVE', sourceEventTargetId: event.targetId || null },
@@ -979,6 +1055,7 @@ function plague(s, event) {
   // outbreak is durable substrate state — the causal layer, AI overlay, and time
   // progression all read it — not just the write-only _activePlague annotation.
   return withActiveCondition(withoutGenerationTwin(next, 'plague'), {
+    id: conditionIdForOnset('plague', event),
     archetype: 'plague',
     severity,
     triggeredAt: { sourceEventType: 'PLAGUE', sourceEventTargetId: event.targetId || null },
@@ -1032,15 +1109,56 @@ function raidOrMonsterAttack(s, event) {
 
 /**
  * APPLY_STRESSOR — an authored crisis ONSET. A thin wrapper over the crisis
- * lifecycle (domain/crisisLifecycle.js, Wave 8 #4): crisisOnset performs the
+ * lifecycle (domain/crisisLifecycle.js): crisisOnset performs the
  * three settlement writes (container upsert, config.stressorEdits record,
  * condition promotion) and ALSO composes the roaming-twin directive — this
  * mutation path keeps only the settlement half (mutateSettlement has no
  * channel for directives); the store recomputes the directive from the event
  * (crisisLifecycle.twinDirectiveForEvent) at its single consumer chokepoint.
  */
+// Relationship aliases already at (or beyond) hostility — a named instigator
+// in any of these states is NOT re-flipped, so re-authoring a wartime stressor
+// against the same neighbour is a relationship no-op.
+const ALREADY_HOSTILE_RELS = new Set(['hostile', 'cold_war', 'war']);
+
 function applyStressor(s, event) {
-  return crisisOnset({ settlement: s, event }).settlement;
+  const next = /** @type {any} */ (crisisOnset({ settlement: s, event }).settlement);
+  // #1 — SIEGE/OCCUPATION INSTIGATOR → HOSTILE. When a WAR-type stressor
+  // (siege / wartime / occupation / betrayal — WAR_STRESSOR_TYPES) names an
+  // instigating neighbour, sour the HOME settlement's view of that neighbour
+  // to 'hostile'. Optional: with no instigator, only the crisis onset lands.
+  const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+  const instigator = String(event.payload?.instigatorNeighbour || '').trim();
+  if (!instigator || !WAR_STRESSOR_TYPES.includes(stressorType)) return next;
+  // Only flip a neighbour that ISN'T already hostile (or in a hostile-family
+  // alias: cold_war / war). The hostile edge is symmetric in the canonical
+  // vocab, so relationshipDefinition('hostile', ...) is direction-agnostic.
+  const network = Array.isArray(next.neighbourNetwork) ? next.neighbourNetwork : [];
+  let flipped = false;
+  const rewired = network.map((/** @type {any} */ link) => {
+    const matches = String(link?.name || '') === instigator
+      || String(link?.neighbourName || '') === instigator
+      || String(link?.id || '') === instigator
+      || String(link?.linkId || '') === instigator;
+    if (!matches) return link;
+    const current = String(link?.relationshipType || '').toLowerCase();
+    if (ALREADY_HOSTILE_RELS.has(current)) return link; // no-op if already hostile
+    flipped = true;
+    const def = relationshipDefinition('hostile', next.id || next.name || 'home', instigator);
+    return {
+      ...link,
+      relationshipType: def.relationshipType,
+      displayRelationshipType: def.relationshipType,
+      relationshipFrom: def.from,
+      relationshipTo: def.to,
+      _relationshipEventId: event.id,
+    };
+  });
+  if (!flipped) return next;
+  // CAVEAT (settlement-local): this sets the HOME settlement's view only; full
+  // bidirectional / regional-graph war-front propagation is a campaign-layer
+  // follow-up (deriveRegionalState already ingests neighbourNetwork).
+  return { ...next, neighbourNetwork: rewired };
 }
 
 /**
@@ -1083,8 +1201,8 @@ function changeRulingPower(s, event) {
 
 /**
  * RESOLVE_STRESSOR — the inverse of APPLY_STRESSOR: an authored crisis ENDS.
- * A thin wrapper over the crisis lifecycle (domain/crisisLifecycle.js,
- * Wave 8 #4): crisisResolve removes the matching stress entry, winds down
+ * A thin wrapper over the crisis lifecycle (domain/crisisLifecycle.js):
+ * crisisResolve removes the matching stress entry, winds down
  * the conditions the crisis promoted ('easing' + near-term expiry, event
  * provenance on the causes), and records the resolution in
  * config.stressorEdits — see its doc for the full semantics, all of which
@@ -1351,10 +1469,16 @@ function swapNpcStanding(s, event) {
     return s;
   }
 
+  // Swap presence AS WELL AS value: when `from` carries the field, copy it
+  // over; when `from` LACKS it but `onto` has it, DELETE it from next rather
+  // than assigning `undefined` (which downstream readers that distinguish
+  // 'absent' from 'undefined' — inferImportance fallbacks, dotRank adoption —
+  // treat differently). The swap is then symmetric in presence and value.
   const carryStanding = (from, onto) => {
     const next = { ...onto };
     for (const field of NPC_STANDING_FIELDS) {
-      if (field in from || field in onto) next[field] = from[field];
+      if (field in from) next[field] = from[field];
+      else if (field in next) delete next[field];
     }
     return next;
   };
@@ -1376,7 +1500,7 @@ function swapNpcStanding(s, event) {
   return next;
 }
 
-// ── Religion (Feature D / R1) ──────────────────────────────────────────────
+// ── Religion ────────────────────────────────────────────────────────────────
 
 /**
  * SET_PRIMARY_DEITY — assign (or clear) a settlement's primary deity. This is
@@ -1414,7 +1538,7 @@ function setPrimaryDeity(s, event) {
     alignmentAxis: snapshot.alignmentAxis || 'neutral',
     temperamentAxis: snapshot.temperamentAxis || 'neutral',
     rankAxis: snapshot.rankAxis || 'minor',
-    // lawAxis (B5): a legacy 3-axis deity carries none ⇒ default 'neutral' (no
+    // lawAxis: a legacy 3-axis deity carries none ⇒ default 'neutral' (no
     // law_order term, byte-identical to a deity-free settlement on that axis).
     lawAxis: snapshot.lawAxis || 'neutral',
     ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),

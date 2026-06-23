@@ -66,7 +66,7 @@ function pulseDesc(def) {
     .slice(0, 3)
     .map(s => String(s).replace(/_/g, ' '))
     .join(', ');
-  return `Campaign crisis${systems ? ` — pressures ${systems}` : ''}.`;
+  return `Campaign crisis${systems ? `: pressures ${systems}` : ''}.`;
 }
 
 /**

@@ -19,8 +19,9 @@ vi.mock('../../src/lib/analytics.js', () => ({
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
-// Stub the heavy content panels to bare markers.
-vi.mock('../../src/components/ConfigurationPanel.jsx', () => ({ default: () => <div data-testid="configuration-panel">foundations</div> }));
+// Stub the heavy content panels to bare markers. ConfigurationPanel echoes its
+// showFineTune prop so the Basic/Advanced gating is assertable.
+vi.mock('../../src/components/ConfigurationPanel.jsx', () => ({ default: ({ showFineTune }) => <div data-testid="configuration-panel" data-fine-tune={String(showFineTune)}>foundations</div> }));
 vi.mock('../../src/components/InstitutionalGrid.jsx', () => ({ default: () => <div data-testid="institutions-panel" /> }));
 vi.mock('../../src/components/ServicesTogglePanel.jsx', () => ({ default: () => <div data-testid="services-panel" /> }));
 vi.mock('../../src/components/TradeDynamicsPanel.jsx', () => ({ default: () => <div data-testid="trade-panel" /> }));
@@ -68,6 +69,33 @@ describe('LayeredConfigurationPanel — Create reorg', () => {
 
   it('can suppress the Place in Region card', () => {
     render(<LayeredConfigurationPanel showPlaceInRegion={false} />);
+    expect(screen.queryByTestId('place-in-region-card')).toBeNull();
+  });
+
+  it('advanced mode (default) exposes Fine-tune, Deep constraints, and Place in Region', () => {
+    render(<LayeredConfigurationPanel mode="advanced" />);
+    expect(screen.getByTestId('configuration-panel').getAttribute('data-fine-tune')).toBe('true');
+    // Deep-constraints group now leads with a keyword-first scent header (P1),
+    // not the muted "Deep constraints" micro-cap.
+    expect(screen.getByText(/Institutions, services & trade/)).toBeTruthy();
+    expect(screen.getByText('Institutions')).toBeTruthy();
+    expect(screen.getByText('Available Services')).toBeTruthy();
+    expect(screen.getByText('Trade Dynamics')).toBeTruthy();
+    expect(screen.getByTestId('place-in-region-card')).toBeTruthy();
+  });
+
+  it('basic mode stops at Character + Foundations — no Fine-tune, Deep constraints, or Place in Region', () => {
+    render(<LayeredConfigurationPanel mode="basic" />);
+    // Character + Foundations still present.
+    expect(screen.getByTestId('character-preset-card')).toBeTruthy();
+    expect(screen.getByTestId('configuration-panel')).toBeTruthy();
+    // Foundations renders WITHOUT the Fine-tune block.
+    expect(screen.getByTestId('configuration-panel').getAttribute('data-fine-tune')).toBe('false');
+    // No Deep constraints (Institutions/Services/Trade) and no Place in Region.
+    expect(screen.queryByText('Deep constraints')).toBeNull();
+    expect(screen.queryByText('Institutions')).toBeNull();
+    expect(screen.queryByText('Available Services')).toBeNull();
+    expect(screen.queryByText('Trade Dynamics')).toBeNull();
     expect(screen.queryByTestId('place-in-region-card')).toBeNull();
   });
 });

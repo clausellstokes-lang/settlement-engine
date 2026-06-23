@@ -57,14 +57,41 @@ export function corruptionVectorForFlaw(flaw) {
   return FLAW_VECTOR[String(flaw || '').toLowerCase()] || 'greed';
 }
 
-/** The NPC's corruptible flaw (lowercased) if any, else null. Reads the common
- *  shapes: npc.personality.flaw, npc.flaw, npc.personality.dominant. */
+/** The NPC's corruptible flaw (lowercased) if any, else null. Reads ONLY the
+ *  real flaw slots: npc.personality.flaw, npc.flaw. It deliberately does NOT fall
+ *  back to npc.personality.dominant — that slot is the steady TEMPERAMENT, not a
+ *  flaw. Since trait generation now makes flaw genuinely optional, a temperament
+ *  must never masquerade as a corruptible flaw, or a temperament-only NPC would be
+ *  (mis)read as corruptible and turned by the sim, breaking the no-flaw rule.
+ *  @param {any} npc @returns {string|null} */
 export function npcCorruptibleFlaw(npc) {
-  const candidates = [npc?.personality?.flaw, npc?.flaw, npc?.personality?.dominant];
+  const candidates = [npc?.personality?.flaw, npc?.flaw];
   for (const c of candidates) {
     if (isCorruptibleFlaw(c)) return String(c).toLowerCase();
   }
   return null;
+}
+
+/** True when the NPC carries a steady TEMPERAMENT (the personality.dominant
+ *  slot). A temperament makes the NPC harder for the world-pulse sim to turn (it
+ *  does NOT, on its own, make them corruptible — that requires a flaw).
+ *  @param {any} npc @returns {boolean} */
+export function npcHasTemperament(npc) {
+  return Boolean(npc?.personality?.dominant);
+}
+
+/** Pure per-NPC susceptibility of the BACKGROUND world-pulse turning loop,
+ *  expressed as the steadiness multiplier the onset hazard is scaled by:
+ *    • NO corruptible flaw           ⇒ 0   (the sim can NEVER turn them)
+ *    • flaw, no temperament          ⇒ 1   (full baseline onset chance)
+ *    • flaw + steady temperament     ⇒ CORRUPTION_TUNING.temperamentSteadiness
+ *                                       (a real, strictly-lower-but-positive chance)
+ *  This governs ONLY the background sim. The manual "Impose corruption" DM
+ *  override (mutate.js imposeCorruption) does NOT consult this — it turns any NPC.
+ *  @param {any} npc @returns {number} a factor in [0, 1] */
+export function corruptibility(npc) {
+  if (!npcCorruptibleFlaw(npc)) return 0;
+  return npcHasTemperament(npc) ? CORRUPTION_TUNING.temperamentSteadiness : 1;
 }
 
 // ── Damped probability model (tunable in one place) ─────────────────────────
@@ -82,12 +109,18 @@ export const CORRUPTION_TUNING = Object.freeze({
   // Once a corrupt NPC has eroded to 'notable', each further exposure rolls this
   // (very low) chance to be outed entirely + replaced by a fresh NPC.
   outReplaceAtNotable: 0.08,
+  // Steadiness multiplier on the ONSET hazard when an NPC has a temperament
+  // (personality.dominant). A steady disposition resists organized crime's pull:
+  // 0.5 ⇒ a flaw+temperament NPC turns at HALF the rate of a flaw-only NPC. It is
+  // a post-sum threshold shift (never an rng draw), so the deterministic stream is
+  // unperturbed — exactly like the deity-disfavor multiplier. ∈ (0, 1]; 1 disables.
+  temperamentSteadiness: 0.5,
 });
 
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
-// ── Feature D (R3): good/evil deity → corruption pressure ───────────────────
+// ── Good/evil deity → corruption pressure ───────────────────────────────────
 // A bounded, centered-on-1.0 multiplier into the corruption knobs. ONE
 // multiplier (onset OR exposure per NPC, never both stacked) keeps the deity
 // pressure inside corruption's deliberate equilibrium damping — no death
@@ -103,7 +136,7 @@ export const DEITY_CORRUPTION_TUNING = Object.freeze({
 
 /** Lowercased authored personality descriptor strings for an NPC: reads the
  *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
- *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled, OQ13).
+ *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
  * @param {any} npc @returns {string[]} */
 function authoredAlignmentTraits(npc = {}) {
   const p = npc?.personality;
@@ -135,7 +168,7 @@ export function deityAlignmentDirection(deity) {
   return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
 }
 
-// ── Feature D (B5): lawful/chaotic deity → corruption-TOLERANCE ──────────────
+// ── Lawful/chaotic deity → corruption-TOLERANCE ─────────────────────────────
 // The 4th deity axis is a DISTINCT lever from the good/evil knobs above. Good/
 // evil drives the ONSET/EXPOSURE *rate* (npcDeityDisfavor); the law axis instead
 // shifts how much corruption a settlement TOLERATES — a chaotic god means the
@@ -148,7 +181,7 @@ export const DEITY_LAW_TUNING = Object.freeze({
   // The law-axis magnitude as a signed direction: lawful +1 (raises order /
   // lowers tolerance), chaotic −1 (lowers order / raises tolerance), else 0.
   axisSign: Object.freeze({ lawful: 1, chaotic: -1, neutral: 0 }),
-  // The law_order score swing a fully lawful/chaotic patron applies (B5). A
+  // The law_order score swing a fully lawful/chaotic patron applies. A
   // lawful god ADDS this; a chaotic god SUBTRACTS it. Comparable in scale to the
   // government-archetype term in deriveLawOrder (±8), so a patron meaningfully
   // tilts order without overwhelming the institutional signals.
@@ -162,7 +195,7 @@ export const DEITY_LAW_TUNING = Object.freeze({
 
 /** The signed law direction of an embedded deity snapshot: lawful → +1,
  *  chaotic → −1, neutral / absent / legacy-3-axis → 0. A deity authored before
- *  B5 carries no lawAxis ⇒ 0 ⇒ no law_order term (back-compat, byte-identical).
+ *  the law axis existed carries no lawAxis ⇒ 0 ⇒ no law_order term (back-compat, byte-identical).
  * @param {any} deity @returns {-1|0|1} */
 export function deityLawDirection(deity) {
   if (!deity) return 0;
@@ -182,7 +215,7 @@ export function deityCorruptionTolerance(deity) {
 }
 
 /** True iff the settlement carries an embedded EVIL-aligned primary deity. This
- *  is the per-settlement form of the F2 activation gate: the caller still gates
+ *  is the per-settlement form of the activation gate: the caller still gates
  *  on religionDynamicsEnabled + isSubsystemActive, but the per-settlement deity
  *  presence is what relaxes the onset gate for THAT settlement.
  * @param {any} settlement @returns {boolean} */
@@ -268,22 +301,29 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * Independent per-NPC rolls make the settlement's corrupt FRACTION saturate
  * naturally (corrupt NPCs stop rolling), so no explicit logistic is needed here.
  *
- * `deityDisfavor` (Feature D / R3) is a bounded, centered-on-1.0 multiplier
+ * `deityDisfavor` is a bounded, centered-on-1.0 multiplier
  * applied AFTER the existing sum and BEFORE the final clamp — an evil deity's
  * patronage (>1) raises the hazard for its aligned faithful; a good deity (<1)
  * represses onset. Defaults to 1.0 ⇒ deity-free / dormant is byte-identical (the
  * sum and clamp are unchanged). NEVER mutates the frozen TUNING.
  *
- * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number}} [args]
+ * `steadiness` is a bounded (0, 1] multiplier applied AFTER the sum and BEFORE
+ * the final clamp — alongside deityDisfavor — modelling a steady TEMPERAMENT
+ * resisting the pull: a flaw+temperament NPC turns at `steadiness`× a flaw-only
+ * NPC's rate. Defaults to 1.0 ⇒ no temperament / dormant is byte-identical.
+ *
+ * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number}} [args]
  * @returns {number}
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1 } = {}) {
   const t = CORRUPTION_TUNING.onset;
   let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
   // A burned official is warier + more watched: each prior exposure makes
   // re-corruption progressively harder (diminishing, never zero).
   p /= 1 + t.exposurePenalty * Math.max(0, priorExposures);
   p *= deityDisfavorMult(deityDisfavor);
+  // A steady temperament resists the pull (post-sum threshold shift, not a draw).
+  p *= clamp(steadiness, 0, 1);
   return clamp(p, t.min, t.max);
 }
 
@@ -291,7 +331,7 @@ export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, prior
  * Per-tick organic exposure probability for a corrupt NPC. Rises with security +
  * prosperity and the NPC's visibility (standing); falls with guild strength.
  *
- * `deityDisfavor` (Feature D / R3) is the SAME bounded centered-on-1.0
+ * `deityDisfavor` is the SAME bounded centered-on-1.0
  * multiplier as `onsetHazard`, applied AFTER the existing product and BEFORE the
  * clamp. This is the side that runs REGARDLESS of a criminal institution, so a
  * GOOD deity's repression rides HERE: a good deity passes a disfavor > 1 for an
@@ -335,7 +375,7 @@ export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
 
-// ── Faction capture ladder (Phase 2) ────────────────────────────────────────
+// ── Faction capture ladder ──────────────────────────────────────────────────
 // Reuses the engine's existing criminalCaptureState vocabulary. A faction with
 // corrupt seat-holders climbs toward 'capture'; one that's been cleaned recedes
 // toward 'none'. Higher the corrupt member's seat, the faster it climbs.
@@ -371,7 +411,7 @@ export function captureRecoverChance({ security = 0.5, prosperity = 0.5 } = {}) 
   return clamp(p, t.min, t.max);
 }
 
-// ── Thieves-guild power loop (Phase 3) ──────────────────────────────────────
+// ── Thieves-guild power loop ─────────────────────────────────────────────────
 // The guild's strength accrues from the factions it has captured — their POWER
 // and their DIVERSITY — but SATURATES (exp curve) so it can never run away. A
 // stronger guild drags effective security down (the feedback loop) but only by a
@@ -511,12 +551,20 @@ export function compromisedSecurityInstitutions(settlement) {
     .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
 
+  // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
+  // covert. A covert mark (an institution-scope Impose Corruption that quietly
+  // captured a node) is the hidden channel: it must NOT read as a public scandal,
+  // or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
+  // meant to conceal.
   const revealed = new Set();
+  const covert = new Set();
   for (const inst of securityInstitutions) {
-    if ((inst.impairments || []).some((imp) => imp?.type === 'corruption')) revealed.add(inst.name);
+    const corruptionImps = (inst.impairments || []).filter((/** @type {any} */ imp) => imp?.type === 'corruption');
+    if (!corruptionImps.length) continue;
+    if (corruptionImps.some((/** @type {any} */ imp) => imp?.covert !== true)) revealed.add(inst.name);
+    else covert.add(inst.name);
   }
 
-  const covert = new Set();
   for (const npc of settlement?.npcs || []) {
     if (npc?.corrupt !== true || npc?.ousted) continue;
     const home = npcHomeInstitution(npc);

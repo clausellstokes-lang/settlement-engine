@@ -233,7 +233,7 @@ describe('S2 — war/religion causal movement as named drivers/risks', () => {
       { archetype: 'army_deployed', severity: 0.5 },
     ] }));
     expect(war.externalThreat.risks).toContain('Under active wartime pressure');
-    expect(war.externalThreat.risks).toContain('Standing army deployed abroad — home garrison thinned');
+    expect(war.externalThreat.risks).toContain('Standing army deployed abroad. Home garrison thinned.');
     // External threat RISES — these are pressures, not relief.
     expect(war.externalThreat.value).toBeGreaterThan(plain.externalThreat.value);
   });

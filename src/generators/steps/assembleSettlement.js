@@ -16,7 +16,7 @@ import { generateDefenseProfile } from '../defenseGenerator.js';
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
-// Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
+// Canonical-shape adapter. Stamps version fields, mints a
 // stable id, defaults canonical containers. Pure — does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
 // so downstream consumers (save/load, PDF, AI overlay, trace layer)
@@ -34,11 +34,11 @@ import { DEFENSE_CONTRIB } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
-  // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
+  // for the FINAL roster (moved out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
-  reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces
   provides: ['settlement'],
-  mutates: ['powerStructure'], // normalizes the power roster in place (A+ P1.7 contract)
+  mutates: ['powerStructure'], // normalizes the power roster in place
   phase: 'assembly',
 }, (ctx) => {
   const {
@@ -81,7 +81,7 @@ registerStep('assembleSettlement', {
     resourceAnalysis,
     economicViability,
     history,
-    // Tier 1.2 — dual-write the stress array under both the legacy
+    // Dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
     // bypass normalizeSettlement (e.g. UI components that read directly
     // from a freshly-generated settlement) now see the canonical shape

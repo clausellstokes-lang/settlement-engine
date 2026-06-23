@@ -1,6 +1,7 @@
 {
   "buildCommand": "npx vite build",
   "outputDirectory": "dist",
+  "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "rewrites": [
     { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
   ],
@@ -13,7 +14,15 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'self'; worker-src 'self' blob:; form-action 'self'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://plausible.io; frame-src 'self'; worker-src 'self' blob:; form-action 'self'; report-uri /api/csp-report; report-to csp-endpoint" },
+        { "key": "Reporting-Endpoints", "value": "csp-endpoint=\"/api/csp-report\"" }
+      ]
+    },
+    {
+      "//": "Path-scoped CSP for the vendored Fantasy Map Generator fork under /map/* (loaded as a same-origin iframe by src/components/map/WorldMapStage.jsx). FMG is a large third-party app that the strict app-origin policy above would break: public/map/index.html ships ~80 inline on*= handlers (needs 'unsafe-inline'), d3-dsv's CSV parser builds row objects via `new Function` (needs 'unsafe-eval'), public/map/dropbox.html loads the Dropbox SDK from unpkg and talks to api.dropboxapi.com, and FMG embeds watabou.github.io / deorum.vercel.app generators in iframes. These relaxations are SCOPED TO /map/* ONLY — the app origin keeps its locked-down script-src (no 'unsafe-inline'/'unsafe-eval'). This entry is LAST so it wins for /map/* (Vercel applies the last matching header rule for a given key).",
+      "source": "/map/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.dropboxapi.com https://content.dropboxapi.com; frame-src 'self' https://watabou.github.io https://deorum.vercel.app; worker-src 'self' blob:; form-action 'self'; report-uri /api/csp-report; report-to csp-endpoint" }
       ]
     }
   ]

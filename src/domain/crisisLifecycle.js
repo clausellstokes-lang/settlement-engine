@@ -5,7 +5,7 @@
  * A crisis lives as (1) the settlement's stress-container ENTRY (what the
  * dossier and the generation-era stress consumers read), (2) the promoted
  * activeCondition (what the causal substrate reads), and (3) the roaming
- * campaign STRESSOR twin (what the world pulse ages). Wave 8 #4: before this
+ * campaign STRESSOR twin (what the world pulse ages). Before this
  * module the three were kept agreeing by hand-maintained conventions at four
  * chokepoints — the severity drift, the undo-twin gap, and the
  * never-resolving local entry were each found (and individually patched) in

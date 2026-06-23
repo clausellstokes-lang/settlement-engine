@@ -1,7 +1,7 @@
 /**
  * domain/factionRelationshipUpdate.js — Event → faction relationship deltas.
  *
- * Tier 4.2 of the roadmap. The first *active* derivation: it doesn't
+ * The first *active* derivation: it doesn't
  * just describe state, it describes how events would change state.
  *
  *   recalculateFactionRelationships(settlement, event) -> Update[]
@@ -11,18 +11,18 @@
  * legitimacy / wealth / publicTrust / manpower) with a reason citing
  * the event that produced it.
  *
- * Consumers (the event-apply layer, the Tier 4.12 time-progression
+ * Consumers (the event-apply layer, the time-progression
  * narrator, the AI overlay's "what just changed" surface) decide
  * whether to commit, preview, or render the deltas. This module never
  * touches the settlement.
  *
  * Architectural fit:
- *   - Reads the structured profiles from Phase 9 (factionProfile.js) so
+ *   - Reads the structured profiles from factionProfile.js so
  *     archetype matches a single canonical vocabulary.
- *   - Reads the structured chain states from Phase 10 to know which
+ *   - Reads the structured chain states from supplyChainState.js to know which
  *     faction controls the chain affected by a trade-route event.
- *   - The deltas it produces become the input to Tier 4.12 time
- *     progression and to Tier 4.10 escalation-clock advancement.
+ *   - The deltas it produces become the input to time
+ *     progression and to escalation-clock advancement.
  *
  * Pure functions only. No imports from src/lib. No state, no I/O.
  */
@@ -347,7 +347,7 @@ export function recalculateFactionRelationships(settlement, event, options = {})
  * Aggregate updates by faction. Returns
  *   { 'faction.<id>': { name, archetype, deltas: { power, legitimacy, … } } }
  * with summed numeric deltas per field. Useful for the "net change per
- * faction" surface and for Tier 4.12 forecast tooling.
+ * faction" surface and for forecast tooling.
  */
 export function summarizeByFaction(updates) {
   const out = {};

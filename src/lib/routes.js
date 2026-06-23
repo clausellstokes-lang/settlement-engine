@@ -31,6 +31,11 @@ const DEFAULT_VIEW = 'generate';
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
+  // The staged front door for new visitors: a hero over the same generation
+  // flow as /create. Leftmost nav tab. First-time visitors are routed here on a
+  // bare root visit; returning visitors land on /create — the gate lives in
+  // App's init effect, keyed on a localStorage flag.
+  { view: 'home',                  path: '/home',                  title: 'Home' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (App's NAV array).
   { view: 'settlements',           path: '/settlements',           title: 'Your Library' },
@@ -47,14 +52,25 @@ export const ROUTES = Object.freeze([
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery' },
-  { view: 'compare',               path: '/compare',               title: 'Compare SettlementForge' },
-  { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'SettlementForge vs ChatGPT' },
-  { view: 'compare-worldographer', path: '/compare/worldographer', title: 'SettlementForge vs Worldographer' },
-  { view: 'compare-kanka',         path: '/compare/kanka',         title: 'SettlementForge vs Kanka' },
+  // The dedicated competitor pages were deleted; App's redirect effect bounces
+  // every `compare*` view to /how-to?tab=compare (the competitor-agnostic "How
+  // We Compare" tab). The path entries stay so old/SEO links still resolve
+  // instead of 404ing, but the titles are retired to the destination ('About')
+  // so the one-frame pre-redirect document.title matches where the GM lands —
+  // no flash of a named-competitor title for a page that no longer exists.
+  { view: 'compare',               path: '/compare',               title: 'About' },
+  { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'About' },
+  { view: 'compare-worldographer', path: '/compare/worldographer', title: 'About' },
+  { view: 'compare-kanka',         path: '/compare/kanka',         title: 'About' },
   { view: 'signin',                path: '/signin',                title: 'Sign In' },
   { view: 'register',              path: '/register',              title: 'Create Your Account' },
   { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password' },
+  // The recovery-link landing: completes a forgot-password reset. The auth-
+  // recovery edge function redirects its emailed link here; the page detects the
+  // recovery session and shows the set-new-password form.
+  { view: 'set-new-password',      path: '/set-new-password',      title: 'Set a New Password' },
   { view: 'verify-email',          path: '/verify-email',          title: 'Verify Your Email' },
+  { view: 'confirm-email',         path: '/confirm-email',         title: 'Email Confirmed' },
   { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete' },
 ]);
 

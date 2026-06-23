@@ -15,7 +15,6 @@ afterEach(cleanup);
 const setProductPref = vi.fn();
 const storeState = {
   productPrefs: {
-    defaultDetailLevel: 'guided',
     aiPolishDefault: false,
     pdfStyle: 'classic',
     campaignMapAutosave: true,
@@ -36,15 +35,10 @@ beforeEach(async () => {
 });
 
 describe('AccountPreferencesSection — persistence', () => {
-  it('default detail level persists via setProductPref', () => {
+  it('narrate-by-default persists via setProductPref', () => {
     render(<AccountPreferencesSection emailNotifications setEmailNotifications={vi.fn()} />);
-    fireEvent.change(screen.getByLabelText('Default detail level'), { target: { value: 'expert' } });
-    expect(setProductPref).toHaveBeenCalledWith('defaultDetailLevel', 'expert');
-  });
-
-  it('AI-polish default persists via setProductPref', () => {
-    render(<AccountPreferencesSection emailNotifications setEmailNotifications={vi.fn()} />);
-    fireEvent.click(screen.getByLabelText('AI-polish by default'));
+    // Label moved to the house voice ("Narrate ...", never "AI"); the pref key is unchanged.
+    fireEvent.click(screen.getByLabelText('Narrate new settlements by default'));
     expect(setProductPref).toHaveBeenCalledWith('aiPolishDefault', true);
   });
 

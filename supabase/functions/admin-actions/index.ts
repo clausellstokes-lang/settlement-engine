@@ -21,22 +21,31 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 
-// CORS: when ALLOWED_ORIGINS is configured (comma-separated), restrict to that
-// allowlist and reflect the matching request Origin; otherwise fall back to "*"
-// so existing deployments keep working until the operator sets the env var. The
-// endpoint is independently protected by JWT auth + role gating + botGuard, so
-// the allowlist is defense-in-depth, not the primary access control.
-const ORIGIN_ALLOWLIST = (Deno.env.get("ALLOWED_ORIGINS") || "")
+// CORS: fail CLOSED. When ALLOWED_ORIGINS is configured (comma-separated) use it;
+// otherwise fall back to the known production + localhost hosts — NEVER "*" for
+// this admin endpoint. The endpoint is independently protected by JWT auth + role
+// gating + botGuard, so the allowlist is defense-in-depth, but a misconfigured
+// deploy (no env var) must not silently allow any origin to drive admin actions
+// from a victim's authenticated browser context.
+const DEFAULT_ORIGINS = [
+  "https://settlementforge.com",
+  "https://www.settlementforge.com",
+  "https://settlementwork.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+const CONFIGURED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
   .split(",").map((s) => s.trim()).filter(Boolean);
+const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAULT_ORIGINS;
 
 function corsHeadersFor(req: Request): Record<string, string> {
-  let allowOrigin = "*";
-  if (ORIGIN_ALLOWLIST.length) {
-    const requestOrigin = req.headers.get("Origin") || "";
-    allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
-      ? requestOrigin
-      : ORIGIN_ALLOWLIST[0];
-  }
+  const requestOrigin = req.headers.get("Origin") || "";
+  // Echo a matched origin; a missing Origin is treated as same-origin (pin to
+  // the first allowed host). Unmatched origins also pin to the first host so we
+  // never reflect an arbitrary origin.
+  const allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
+    ? requestOrigin
+    : ORIGIN_ALLOWLIST[0];
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Vary": "Origin",
@@ -64,6 +73,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function hasOwn(record: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (bypasses RLS for the role gate + RPC dispatch). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  );
 }
 
 function buildProfilePatch(metadata: Record<string, unknown>) {
@@ -115,7 +141,21 @@ function buildProfilePatch(metadata: Record<string, unknown>) {
   return patch;
 }
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the privilege gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected supabase stubs and asserts a
+// non-privileged caller is REJECTED (403) before any RPC runs, and that a valid
+// admin action routes to the right RPC. `deps` is the optional injection seam
+// (userClient verifies the JWT, adminClient dispatches); production passes nothing
+// so behavior is identical to the previous inline handler.
+export async function handleAdminActions(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   // CORS + JSON helper are per-request so the allowed Origin can reflect the
   // caller (when an allowlist is configured).
   const cors = corsHeadersFor(req);
@@ -141,13 +181,7 @@ serve(async (req) => {
     }
 
     // Create a client with the user's JWT to verify their identity
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-
-    const userClient = createClient(supabaseUrl, supabaseKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const userClient = makeUserClient(authHeader);
 
     // Verify the calling user
     const {
@@ -160,7 +194,7 @@ serve(async (req) => {
     }
 
     // Check that the calling user has an elevated role
-    const adminClient = createClient(supabaseUrl, serviceKey);
+    const adminClient = makeAdminClient();
     const { data: callerProfile } = await adminClient
       .from("profiles")
       .select("role, email")
@@ -269,6 +303,30 @@ serve(async (req) => {
         return res.ok;
       } catch (e) {
         console.warn("[admin-actions] notify failed:", errorMessage(e));
+        return false;
+      }
+    };
+
+    // Layer 2 (review B16 #1): toggle GoTrue's NATIVE ban via the service-role
+    // admin client. A native ban invalidates the user's refresh tokens/sessions at
+    // the auth provider, so a banned/disabled account's LIVE JWT stops working —
+    // something the profiles.banned_at flag alone never did. `'876000h'` (~100y) is
+    // the conventional "permanent" ban_duration; `'none'` clears it on un-ban/enable.
+    // Returns whether the auth call succeeded; the caller treats a false as
+    // soft-fail (the DB flag + RLS/trigger gate already closed the write boundary).
+    const setGoTrueBan = async (target: string, banned: boolean): Promise<boolean> => {
+      try {
+        const { error: banErr } = await adminClient.auth.admin.updateUserById(
+          target,
+          { ban_duration: banned ? "876000h" : "none" },
+        );
+        if (banErr) {
+          console.warn("[admin-actions] GoTrue ban toggle failed:", banErr.message);
+          return false;
+        }
+        return true;
+      } catch (e) {
+        console.warn("[admin-actions] GoTrue ban toggle threw:", errorMessage(e));
         return false;
       }
     };
@@ -547,6 +605,11 @@ serve(async (req) => {
       }
 
       case "update_user_credits": {
+        // HIGHEST role only — defense-in-depth parity with grant_credits and the
+        // account ban/disable cases. The service_set_credits RPC re-checks
+        // privilege at the DB, but a setting-real-money action must also fail
+        // closed at the edge so a `support`-role caller never reaches the RPC.
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId || credits === undefined) {
           return json({ error: "Missing userId or credits" }, 400);
         }
@@ -719,7 +782,15 @@ serve(async (req) => {
           p_disabled: wantDisabled, p_reason: auditReason,
         });
         if (error) return json({ error: error.message }, 500);
-        return json({ success: true, ...(data || {}) });
+        // Layer 2 (review B16 #1): invalidate the user's tokens/sessions at the
+        // auth provider so the live JWT dies too. The DB profiles.disabled_at flag
+        // (above) + the RLS/trigger account-status gate (migrations 057/059) reject
+        // a disabled account's writes even with a valid JWT, but GoTrue's native ban
+        // also kills the SESSION so the locked account can't keep reading either.
+        // Soft-fails: if the admin call errors we still report success — the DB +
+        // RLS layer already closed the write boundary.
+        const authBan = await setGoTrueBan(userId, wantDisabled);
+        return json({ success: true, sessionRevoked: authBan, ...(data || {}) });
       }
 
       // Ban / unban account — reversible soft flag. HIGHEST role only.
@@ -740,7 +811,15 @@ serve(async (req) => {
           p_banned: wantBanned, p_reason: auditReason,
         });
         if (error) return json({ error: error.message }, 500);
-        return json({ success: true, notified, ...(data || {}) });
+        // Layer 2 (review B16 #1): a still-valid JWT no longer grants WRITE access
+        // once banned_at is set — spend_credits / mutate_settlement_batch (057), the
+        // direct-table RLS/trigger gate (059), and the AI edge functions'
+        // account_is_active gate all reject a banned account. This ALSO eagerly
+        // revokes the live session at the auth provider (GoTrue native ban) so the
+        // SESSION dies, not just write access — closing the gap the profiles flag
+        // alone never could. Soft-fails: the DB+RLS layer stands even if it errors.
+        const sessionRevoked = await setGoTrueBan(userId, wantBanned);
+        return json({ success: true, notified, sessionRevoked, ...(data || {}) });
       }
 
       // Soft-delete / restore a settlement — reversible. HIGHEST role only.
@@ -951,4 +1030,9 @@ serve(async (req) => {
   } catch (err) {
     return json({ error: errorMessage(err) }, 500);
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flags a
+// direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleAdminActions(req));

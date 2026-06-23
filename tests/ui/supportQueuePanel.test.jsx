@@ -88,7 +88,7 @@ describe('A5 — SupportQueuePanel (agent queue)', () => {
     expect(screen.getByText('please help')).toBeTruthy();
     // The internal note IS visible to the agent (unlike the owner).
     expect(screen.getByText('suspected duplicate of SF-42')).toBeTruthy();
-    expect(screen.getByText(/owner can never see this/i)).toBeTruthy();
+    expect(screen.getByText(/owner can never read this/i)).toBeTruthy();
   });
 
   test('Claim calls claim_ticket', async () => {

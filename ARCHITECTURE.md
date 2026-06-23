@@ -14,7 +14,7 @@ through a multi-step pipeline that produces an internally-coherent settlement �
 economy, factions, institutions, NPCs, stressors, history — rendered as an
 on-screen dossier and an exportable PDF, with an optional AI prose layer.
 
-Stack: **React 19 + Zustand 5 + Vite 5 (oxc transform / Rollup build)**, JS with
+Stack: **React 19 + Zustand 5 + Vite 7 (oxc transform / Rollup build)**, JS with
 **JSDoc types** (no `.ts` in app code), **Supabase** (auth, Postgres + RLS, edge
 functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 
@@ -36,7 +36,8 @@ components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
              @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
-             existing 118 files burning down; every icon-only button must carry an
+             existing 35 files burning down (scripts/.raw-button-baseline.json);
+             every icon-only button must carry an
              accessible name — @enforced-by jsx-hygiene/icon-button-needs-label) +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
@@ -107,12 +108,37 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (22) — schema + RLS policies + credit ledger + gallery +
-  version history + save-limit + profile-security + auth/credit trust-boundary
-  repair (017) + account/billing models (018) + the community gallery —
-  votes, comments, privacy sanitization, reports, moderation (019-022), all via
-  SECURITY DEFINER RPCs with sanitized public reads. RLS is the security spine.
-- **functions/** (Deno edge):
+- **migrations/** (69) — schema + RLS policies + credit ledger + version
+  history + save-limit + profile-security + auth/credit trust-boundary repair +
+  account/billing models + the community gallery (votes, comments, privacy
+  sanitization, reports, moderation, importable dossiers) + analytics core +
+  regional NPC/propagation reports + map-backdrop storage + admin
+  least-privilege/audit-log/deletion/support + the **account-status SECURITY
+  migrations** (057/059/060 enforce account-status writes/RLS) + **062**
+  (close authz gaps: RLS on the two analytics tables, drop the un-audited
+  privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) +
+  **066** (Auth Phase 2: server-write-only `security_answers` bcrypt table +
+  SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) +
+  **067/068** (recovery-verify lockout with a time-bounded self-healing predicate
+  so a failed-answer streak throttles via escalating backoff instead of permanently
+  locking the account) + **069** (an atomic `persist_world_pulse_advance`
+  SECURITY DEFINER RPC that writes a world-pulse advance's entire settlement +
+  campaign write-set in one owner-checked transaction; now wired into the client
+  persist path — the cloud branch of `flushWorldPulsePersist` routes the whole
+  advance write-set through this single RPC, so a partial failure can no longer
+  carry forward a half-applied advance. The optional `p_expected_tick` stale-apply
+  guard only fires when non-null: forward advances pass the post-advance tick so a
+  duplicate re-apply is a no-op, while an undo passes NULL (last-write-wins) so the
+  lower restored tick reaches the cloud instead of being rejected as stale) —
+  all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
+  spine. Apply every file in `supabase/migrations/` in lexical order; never skip
+  the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
+- **functions/** (12 Deno edge functions; `_shared/` is a helper dir, not a
+  deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
+  - `auth-recovery` — logged-OUT password recovery (Auth Phase 2). No JWT; the
+    caller forgot their password. Per-IP + per-email rate limit (fail-closed) +
+    bot guard → service-role-only recovery RPCs (066): reveal one random security
+    question, verify the answer, email a `recovery` reset link to the account.
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
@@ -155,8 +181,10 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~2,400 tests / ~159 files (unit, property-based, domain/
-  store/lib integration, component/UI smoke, a11y, security, edge-function).
+- **test** — Vitest (unit, property-based, domain/store/lib integration,
+  component/UI smoke, a11y, security, edge-function). The suite grows every PR;
+  the live count is whatever CI runs (`npx vitest list | wc -l` for a local
+  snapshot) — hard numbers here rot, so trust the CI run over this line.
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
 
@@ -176,16 +204,20 @@ separate (`npm run test:e2e`), not in the default gate.
 - **The gate type-checks the full src logic tree** (it was domain-only; the
   punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
   `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
-- **`OutputContainer.jsx`** (the dossier renderer) is written in raw
-  `React.createElement`, not JSX — the densest, highest-stakes view. Edit
-  carefully; it's a candidate for a test-guarded JSX refactor.
+- **`OutputContainer.jsx`** (the dossier renderer) is the densest,
+  highest-stakes view — now written in plain JSX (the old raw
+  `React.createElement` form was refactored out; grep confirms zero
+  `createElement`). Edit carefully; PDF parity (below) rides on it.
 - **`public/map/main.js`** is a ~1.4k-line fork of Azgaar FMG — outside all
   gates, reconciled by hand on upstream releases (`docs/fmg-fork.md`).
 - **PDF parity**: the on-screen dossier and the PDF render from related but
   separate code (`pdf/lib/viewModel.js`); changing one can drift the other
   (`PDF_PARITY_AUDIT.md`).
-- **Deploy**: pushing `master` deploys live (Vercel). See `docs/DEPLOY.md` for
-  gating that on CI.
+- **Deploy**: pushing `master` triggers a Vercel build, but it is **gated on CI** —
+  `vercel.json`'s `ignoreCommand` runs `scripts/vercel-ignore-build.mjs`, a
+  fail-closed check that blocks the deploy unless the `check`/`e2e`/`deno-tests`
+  jobs are green on the commit (operator sets a read-only `GITHUB_CI_STATUS_TOKEN`;
+  without it the gate blocks rather than ships). See `docs/DEPLOY.md`.
 - **Bus factor is one.** Plan-file vocabulary (`P1xx`, "Pillars A–H") and a
   single authorial voice run throughout. This file exists to lower the cost of a
   second contributor.
