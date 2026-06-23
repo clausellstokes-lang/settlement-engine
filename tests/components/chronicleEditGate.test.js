@@ -107,35 +107,42 @@ describe('ChroniclePanel user-facing copy says "Narrative Chronicles"', () => {
 });
 
 describe('NetworkEffectsPanel is exclusively Edit Dossier chrome (owner, 2026-06-12)', () => {
-  // Same two-render-sites history as ChroniclePanel/ProvenanceBlock: the
-  // panel rendered inside the editMode chrome AND in the read-only View.
-  // The read-only site was removed; these pins hold the gate. The panel is
-  // module-local to SettlementDetail.jsx (defined and rendered in one file),
-  // so the render-site scan is scoped to that file.
+  // The edit-IA refinement (two-card Workshop) relocated the relationship
+  // cluster — Link Neighbour + Neighbour Network + NetworkEffectsPanel — INTO
+  // the Workshop's "Change the settlement" card, passed down as the
+  // `changeExtras` slot. That slot is itself edit-gated: `changeExtras={editMode
+  // && ( … )}`. So NetworkEffectsPanel is STILL edit-only chrome, never in the
+  // read view — only the surrounding gate marker moved from the trailing
+  // `{editMode && (<div` chrome block to the `changeExtras={editMode && (` slot.
   const networkSite = () => /<NetworkEffectsPanel\b/g;
+  const CHANGE_GATE_OPEN = 'changeExtras={editMode && (';
 
-  test('exactly one render site, inside the editMode gate', () => {
+  test('exactly one render site, inside the changeExtras edit gate', () => {
     const source = readFileSync(DETAIL_PATH, 'utf8');
 
     const sites = [...source.matchAll(networkSite())];
     expect(sites).toHaveLength(1);
 
-    const editOpen = source.indexOf(EDIT_GATE_OPEN);
-    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
-    expect(editOpen).toBeGreaterThan(-1);
-    expect(editClose).toBeGreaterThan(editOpen);
+    // The changeExtras slot opens with `changeExtras={editMode && (` and closes
+    // with the same `)}` discipline before the Workshop's self-closing `/>`.
+    const gateOpen = source.indexOf(CHANGE_GATE_OPEN);
+    expect(gateOpen).toBeGreaterThan(-1);
+    // The Workshop element self-closes at the first `/>` after the slot opens;
+    // NetworkEffectsPanel must sit before that close (inside the gated slot).
+    const workshopClose = source.indexOf('\n      />', gateOpen);
+    expect(workshopClose).toBeGreaterThan(gateOpen);
 
     const siteIdx = sites[0].index;
-    expect(siteIdx).toBeGreaterThan(editOpen);
-    expect(siteIdx).toBeLessThan(editClose);
+    expect(siteIdx).toBeGreaterThan(gateOpen);
+    expect(siteIdx).toBeLessThan(workshopClose);
   });
 
-  test('nothing after the editMode gate closes renders NetworkEffectsPanel', () => {
+  test('the changeExtras render site is genuinely edit-gated, not in the read view', () => {
     const source = readFileSync(DETAIL_PATH, 'utf8');
-
-    const editOpen = source.indexOf(EDIT_GATE_OPEN);
-    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
-    expect(editClose).toBeGreaterThan(editOpen);
-    expect(source.slice(editClose + EDIT_GATE_CLOSE.length)).not.toMatch(networkSite());
+    // The single render site is reached only through the `editMode && (` guard:
+    // there is no NetworkEffectsPanel occurrence outside a `editMode && (` slot.
+    const gateOpen = source.indexOf(CHANGE_GATE_OPEN);
+    const siteIdx = [...source.matchAll(networkSite())][0].index;
+    expect(siteIdx).toBeGreaterThan(gateOpen);
   });
 });

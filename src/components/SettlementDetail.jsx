@@ -587,24 +587,93 @@ export default function SettlementDetail({
       )}
 
       {/* ── The Workshop ──────────────────────────────────────────────────────
-            The layered right-rail (UX overhaul Phase 6). Replaces the binary
-            editMode long-scroll: each card READS in view mode (the free→premium
-            teaser — the Phase 2 dossier read components) and becomes EDITABLE in
-            edit mode (write controls premium). The 3 subsystem gate toggles live
-            in the Faith/War cards, each byte-identical when off. Mounted at all
-            times so a free user sees the engine read surfaces. */}
+            The two-card edit surface (edit-IA refinement). Card 1 "The
+            settlement" carries the dossier's own attributes (causal state,
+            pressures, power, timeline, provenance); Card 2 "Change the
+            settlement" carries the write surface (event composer, deity assign,
+            the living-world layer toggles, and — passed down here as
+            `changeExtras` because they own this component's state — the
+            Link-neighbour / Edit-names affordances). Each card READS in view
+            mode (the free→premium teaser) and becomes EDITABLE in edit mode.
+            Mounted at all times so a free user sees the engine read surfaces. */}
       <Workshop
         settlement={detail.settlement}
         saveId={detail?.saveData?.id || detail?.id}
         save={detail.saveData || detail}
         editMode={editMode}
         canEdit={canEdit}
+        changeExtras={editMode && (
+          // ── Relationship cluster ── Link Neighbour, the existing Neighbour
+          // Network list, and the cascading Network Effects, grouped tight
+          // (gap:8) as one related set of relationship affordances; followed by
+          // Edit Names. Both KEEP their immediate-apply behaviour and their
+          // SettlementDetail state wiring — only their grouping moves into
+          // Card 2.
+          <div style={{display:'flex',flexDirection:'column',gap:24,marginTop:8}}>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            {/* Neighbour links — the toggle reveals the linking picker; the
+                network list below shows existing links. The disclosure routes
+                through the Button primitive (fullWidth), inheriting the ~44px
+                min target + focus ring + variant tokens. */}
+            <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
+              <Button variant="secondary" fullWidth
+                aria-expanded={linking} aria-pressed={linking}
+                onClick={()=>setLinking(v=>!v)}
+                style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
+                <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
+                <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
+              </Button>
+              {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
+            </div>
+
+            {/* Neighbour Network list — demoted to spacing + tint (border
+                removed): one of three pieces of the single relationship set. */}
+            {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
+              <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
+                Neighbour Network ({network.length})
+              </h3>
+              <div style={{display:'flex',flexDirection:'column',gap:4}}>
+              {network.map((n,i)=>{
+                const c=REL_HEX[n.relationshipType]||SECOND;
+                const rel=n.displayRelationshipType
+                  || REL_LABELS[n.relationshipType]
+                  || (n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
+                return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8}}>
+                  <div style={{width:5,height:5,borderRadius:'50%',background:c,flexShrink:0}}/>
+                  <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
+                  <span style={{fontSize:FS.xs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 5px',borderRadius:3}}>{rel}</span>
+                  <IconButton Icon={X} label={`Remove link to ${n.name}`} tone="danger" size="xl" onClick={()=>setConfirmRemoveNeighbour(i)} />
+                </div>;
+              })}
+              </div>
+            </div>}
+
+            {/* ── Network Effects (cascading modifiers) ─────────────────────── */}
+            {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_HEX} />}
+          </div>
+
+          {/* ── Edit Names — NPC & faction renames (the settlement's OWN name is
+              renamed inline on the dossier header, the single consolidated
+              control). */}
+          <SettlementDetailEditNames
+            settlement={detail.settlement}
+            editNamesOpen={editNamesOpen}
+            setEditNamesOpen={setEditNamesOpen}
+            editingName={editingName}
+            setEditingName={setEditingName}
+            editDraft={editDraft}
+            setEditDraft={setEditDraft}
+            isCanonLocked={isCanonLocked}
+            handleApplyRename={handleApplyRename}
+          />
+          </div>
+        )}
       />
 
-      {/* Edit-mode body — width inherited from the one top-level PAGE_MAX frame
-          (no per-section cap). Grouped by differential spacing: a loose 24px gap
-          BETWEEN logical clusters, tight spacing WITHIN each, so grouping is
-          carried by rhythm rather than a flat wall of equally-bordered cards. */}
+      {/* Edit-mode body — the lifecycle/regional cluster that sits BELOW the
+          Workshop's two cards. The relationship + edit-names affordances moved
+          UP into Card 2 (changeExtras above); what remains here is the
+          successor modal and the lifecycle set (regional impact, chronicle). */}
       {editMode && (<div style={{display:'flex',flexDirection:'column',gap:24}}>
 
       {/* Successor prompt — modal that appears after a pillar-tier
@@ -613,86 +682,6 @@ export default function SettlementDetail({
           is set inside applyEvent() in the slice, so the modal mounts
           here at the dossier level rather than at App-root. */}
       <SuccessorPrompt />
-
-      {/* ── Relationship cluster ── Link Neighbour, the existing Neighbour
-          Network list, and the cascading Network Effects, grouped tight (gap:8)
-          as one related set of relationship affordances. */}
-      <div style={{display:'flex',flexDirection:'column',gap:8}}>
-        {/* Neighbour links — the toggle reveals the linking picker; the network
-            list below shows existing links. The disclosure routes through the
-            Button primitive (fullWidth), so it inherits the ~44px min target +
-            focus ring + variant tokens, matching the sibling Edit Names toggle
-            (P7/P11) instead of a hand-rolled raw button element. The border survives on
-            THIS interactive collapsible — the one item in the cluster that earns
-            it as a click target. */}
-        <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
-          <Button variant="secondary" fullWidth
-            aria-expanded={linking} aria-pressed={linking}
-            onClick={()=>setLinking(v=>!v)}
-            style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
-            <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
-            <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
-          </Button>
-          {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
-        </div>
-
-        {/* Neighbour Network list — demoted to spacing + tint (border removed):
-            it is one of three pieces of the single relationship set, so the gap:8
-            + the tint group it, the colored dots ledger the rows, and the looser
-            between-cluster gap:24 separates it from the lifecycle set (P5
-            anti-box-soup). */}
-        {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
-          <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
-            Neighbour Network ({network.length})
-          </h3>
-          {/* Rows separated by spacing, not per-row hairlines: the single card
-              border + the colored relationship dot already group the list, so
-              the rows read as a clean ledger rather than a spreadsheet grid. */}
-          <div style={{display:'flex',flexDirection:'column',gap:4}}>
-          {network.map((n,i)=>{
-            const c=REL_HEX[n.relationshipType]||SECOND;
-            // Resolve the relationship label through the SAME canonical REL_LABELS
-            // map the Network Effects Sources list uses, so the identical
-            // relationship enum can never print two different strings across the
-            // surface (P11). A per-link displayRelationshipType override still
-            // wins when present (a richer custom label); otherwise REL_LABELS is
-            // the one canonical formatter, falling back to a de-underscored enum.
-            const rel=n.displayRelationshipType
-              || REL_LABELS[n.relationshipType]
-              || (n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
-            // Key by a stable identity (not the array index) so removing a
-            // neighbour can't momentarily render the wrong row / mis-place the X
-            // button's feedback. removeNeighbour still takes the index `i`, which
-            // is the live position into detail.settlement.neighbourNetwork.
-            // Dot (5px) + chip ('1px 5px') geometry matches the Sources rows in
-            // NetworkEffectsPanel so the same concept renders identically (P11).
-            return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8}}>
-              <div style={{width:5,height:5,borderRadius:'50%',background:c,flexShrink:0}}/>
-              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
-              <span style={{fontSize:FS.xs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 5px',borderRadius:3}}>{rel}</span>
-              <IconButton Icon={X} label={`Remove link to ${n.name}`} tone="danger" size="xl" onClick={()=>setConfirmRemoveNeighbour(i)} />
-            </div>;
-          })}
-          </div>
-        </div>}
-
-        {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
-        {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_HEX} />}
-      </div>
-
-      {/* ── Edit Names — NPC & faction renames (the settlement's OWN name is now
-            renamed inline on the dossier header, the single consolidated control). ── */}
-      <SettlementDetailEditNames
-        settlement={detail.settlement}
-        editNamesOpen={editNamesOpen}
-        setEditNamesOpen={setEditNamesOpen}
-        editingName={editingName}
-        setEditingName={setEditingName}
-        editDraft={editDraft}
-        setEditDraft={setEditDraft}
-        isCanonLocked={isCanonLocked}
-        handleApplyRename={handleApplyRename}
-      />
 
       {/* ── Lifecycle / regional cluster ── regional impact, chronicle history,
           and the rarely-wanted dossier-discarding regenerate reset, kept LAST

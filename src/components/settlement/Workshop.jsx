@@ -1,37 +1,38 @@
 /**
- * Workshop — the editor's layered right-rail (UX overhaul Phase 6, plan §4.3).
+ * Workshop — the editor's two-card edit surface (edit-IA refinement).
  *
- * REPLACES the binary `editMode` gate that revealed the entire engine as one
- * long scroll. Instead, the engine is presented as a stack of labeled,
- * collapsible cards that:
- *   - READ in view mode (the free→premium teaser — the dossier read components
- *     built in Phase 2: WarFaithSection, EngineSections, ReadSystemStateBar), and
- *   - become EDITABLE in edit mode (the write controls stay premium — the
- *     existing EventComposer, PrimaryDeityPicker, Timeline, etc.).
+ * REPLACES the flat stack of labelled engine cards with a coherent
+ * two-card information architecture, gated behind "Edit Dossier" upstream:
+ *
+ *   Card 1 — "The settlement" (its own attributes, read-leaning):
+ *       Causal State · Pressures & Strength · Power & Succession ·
+ *       Timeline & Chronicle · Provenance & Links.
+ *
+ *   Card 2 — "Change the settlement" (the write surface):
+ *       Make Changes (the event composer + coherence + pending intentions),
+ *       the Assign-deity write, the Living-world layer toggles, and the
+ *       Link-neighbour / Edit-names affordances (passed in as `changeExtras`,
+ *       since they own SettlementDetail state). Structured cleanly so a future
+ *       change-queue can slot in without re-laying-out the card.
+ *
+ * Each sub-section keeps its OWN collapse, so a GM can still drill one surface
+ * at a time. Both outer cards READ in view mode (the free→premium teaser — the
+ * Phase 2 dossier read components: WarFaithSection, EngineSections,
+ * ReadSystemStateBar) and become EDITABLE in edit mode (write controls premium).
+ *
+ * Faith & Pantheon is no longer its own edit card: the faith READ lives in the
+ * dossier's War & Faith tab (new/tabs/WarFaithTab) and the Pressures card's
+ * WarFaithSection, and the deity-assign WRITE (SET_PRIMARY_DEITY via
+ * PrimaryDeityPicker) relocates into Card 2. The "Awaken religion" gate joins
+ * the War-layer + Settlement-strategy gates as one Living-world layer group.
  *
  * The canonical Substrate/Causal READ (the 16-variable grid) and the
  * What-changed deltas are NOT duplicated here: they live in the tabbed dossier
- * above (Systems -> Substrate; Summary owns WhatChangedPanel). The Workshop keeps
- * the four-dimension health glance + the surfaces the dossier does not carry
- * (granary / war-front / standing) plus all WRITE controls (dossier keystone §4).
- *
- * Card order (plan §4.3):
- *   1. Causal State          — 4-dim health glance (the grid is in the dossier).
- *   2. Pressures & Strength  — live granary + war-front + disposition standing
- *                              (EngineSections), the dossier does not carry these.
- *   3. Faith & Pantheon      — describeDeityEffects axis disclosure + the
- *                              PrimaryDeityPicker (write) + "Awaken religion".
- *   4. Power & Succession    — coup forecast + lineage (PowerSuccessionSection).
- *   5. Make Changes          — EventComposer, PRECEDED by the state it mutates.
- *   6. Timeline & Chronicle.
- *   7. Provenance & Links.
+ * above (Systems -> Substrate; Summary owns WhatChangedPanel).
  *
  * The 3 subsystem gate toggles (warLayerEnabled / settlementStrategyEnabled /
- * religionDynamicsEnabled) appear in the Faith & War cards, in ADDITION to the
- * SimulationRulesDialog, each carrying the byte-identical-when-off promise.
- *
- * Read components self-gate to nothing on a dormant/peaceful/deity-free save, so
- * the read surface a free user sees stays byte-identical to today's dossier.
+ * religionDynamicsEnabled) appear here, in ADDITION to the SimulationRulesDialog,
+ * each carrying the byte-identical-when-off promise.
  */
 
 import { useState } from 'react';
@@ -61,12 +62,17 @@ import Button from '../primitives/Button.jsx';
 
 import { INK, MUTED, BODY, SECOND, BORDER, CARD, CARD_HDR, GOLD_TXT, sans, FS, R, SP, swatch } from '../theme.js';
 
-// ── Collapsible card shell ───────────────────────────────────────────────────
+// ── Collapsible sub-section shell ────────────────────────────────────────────
 
 /**
+ * A single collapsible surface inside an outer grouping card. Carries the same
+ * data-testid / data-mode contract the prior flat cards exposed, so callers and
+ * tests can still address each surface by id.
+ *
  * @param {{
- *   id: string, title: string, hint?: string, defaultOpen?: boolean,
- *   editMode?: boolean, children: React.ReactNode,
+ *   id: string, anchorId?: string, title: string, hint?: string,
+ *   headline?: string, defaultOpen?: boolean, editMode?: boolean,
+ *   children: React.ReactNode,
  * }} props
  */
 function WorkshopCard({ id, anchorId, title, hint, headline, defaultOpen = false, editMode = false, children }) {
@@ -100,9 +106,7 @@ function WorkshopCard({ id, anchorId, title, hint, headline, defaultOpen = false
         <span style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
           <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: INK }}>{title}</span>
           {/* Keyword-first headline fact (P6): a single de-emphasized line so the
-              collapsed rail is scannable without expansion — "who runs this town
-              / why is it tense" reads off the closed card. Hidden once open
-              (the card's own content then carries the detail). */}
+              collapsed rail is scannable without expansion. Hidden once open. */}
           {headline && !open && (
             <span style={{ fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, color: BODY, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {headline}
@@ -128,7 +132,7 @@ function WorkshopCard({ id, anchorId, title, hint, headline, defaultOpen = false
   );
 }
 
-/** A subtle "writing is premium" strip shown where a read card would gain write controls. */
+/** A subtle "writing is premium" strip shown where a read surface would gain write controls. */
 function PremiumWriteHint({ onUpgrade }) {
   return (
     <div style={{
@@ -152,6 +156,38 @@ function PremiumWriteHint({ onUpgrade }) {
   );
 }
 
+/**
+ * GroupCard — the outer grouping shell. Carries a clear title + a quiet
+ * standfirst, and holds the collapsible sub-sections as accessible content.
+ * The heading is a real <h2> so the two-card IA reads in the document outline.
+ *
+ * @param {{
+ *   id: string, title: string, blurb?: string, children: React.ReactNode,
+ * }} props
+ */
+function GroupCard({ id, title, blurb, children }) {
+  return (
+    <section
+      data-testid={`workshop-group-${id}`}
+      data-group={id}
+      aria-label={title}
+      style={{ marginBottom: SP.lg }}
+    >
+      <header style={{ margin: `0 0 ${SP.sm}px` }}>
+        <h2 style={{ margin: 0, fontFamily: sans, fontSize: FS.md, fontWeight: 900, color: INK, letterSpacing: '0.01em' }}>
+          {title}
+        </h2>
+        {blurb && (
+          <p style={{ margin: `${SP.xs}px 0 0`, fontFamily: sans, fontSize: FS.xxs, color: MUTED, lineHeight: 1.5 }}>
+            {blurb}
+          </p>
+        )}
+      </header>
+      {children}
+    </section>
+  );
+}
+
 // ── Workshop ─────────────────────────────────────────────────────────────────
 
 /**
@@ -161,9 +197,10 @@ function PremiumWriteHint({ onUpgrade }) {
  *   save?: any,
  *   editMode?: boolean,
  *   canEdit?: boolean,
+ *   changeExtras?: React.ReactNode,
  * }} props
  */
-export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false }) {
+export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
@@ -176,171 +213,184 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
   // read surface only.
   const showWrite = editMode && canEdit;
 
-  // Keyword-first headline facts for the collapsed cards (P6 scannability). Each
-  // is a single short fact pulled from the already-computed settlement data, so a
-  // GM can read "who runs this town / why is it tense" off the closed rail
-  // without expanding. All null-safe — a missing fact simply omits the line.
+  // Keyword-first headline facts for the collapsed cards (P6 scannability).
   const rulerName = settlement.powerStructure?.governingName || null;
   const pressureLine = (settlement.pressureSentence || '').trim() || null;
-  const deityName = settlement.patronDeity?.name || settlement.powerStructure?.patronDeity || null;
   const eventCount = Array.isArray(settlement.eventLog) ? settlement.eventLog.length : 0;
   const headlines = {
     'causal-state': pressureLine,
     'power-succession': rulerName ? `Ruler: ${rulerName}` : null,
-    'faith-pantheon': deityName ? `Patron: ${deityName}` : null,
     'timeline-chronicle': eventCount > 0 ? `${eventCount} logged change${eventCount === 1 ? '' : 's'}` : null,
   };
 
   return (
     <div data-testid="workshop-rail" style={{ marginBottom: SP.md }}>
-      {/* 1 ── Causal State ──────────────────────────────────────────────────── */}
-      <WorkshopCard
-        id="causal-state"
-        title="Causal State"
-        headline={headlines['causal-state']}
-        hint="The four-dimension health glance, then the sixteen causal variables beneath it. Drill into a variable for the engine's own “why”."
-        // Open by default ONLY in edit mode. In the read-only View the dossier
-        // above is the hero (P1); the Workshop is the collapsed drill-down, so
-        // its first card stays a scent-bearing closed affordance rather than an
-        // upfront mechanics dump.
-        defaultOpen={showWrite}
-        editMode={showWrite}
-      >
-        {/* The canonical Substrate/Causal READ now lives in the tabbed dossier
-            (Systems -> Substrate, SubstrateTab -> settlement/CausalViewTabs), and
-            the What-changed deltas in the Summary (SummaryTabV2 owns
-            WhatChangedPanel). Both were duplicated here in edit mode, so the
-            Workshop card keeps only the four-dimension health glance — the
-            scent-bearing header that introduces the drill-down — and defers the
-            grid + deltas to the dossier above (dossier keystone §4). */}
-        <ReadSystemStateBar settlement={settlement} />
-      </WorkshopCard>
 
-      {/* 2 ── Pressures & Strength ──────────────────────────────────────────── */}
-      <WorkshopCard
-        id="pressures-strength"
-        title="Pressures and Strength"
-        hint="The live granary, its war-cost-aware strength, and its standing in the wider realm. The full 16-variable substrate grid lives in the dossier above (Systems -> Substrate)."
-        editMode={showWrite}
+      {/* ══ Card 1 — The settlement ════════════════════════════════════════════
+          The dossier's own attributes: its causal state, its pressures and
+          strength, its power and succession, its timeline, and its provenance.
+          Read-leaning; the write here is limited to the timeline drill-down. */}
+      <GroupCard
+        id="the-settlement"
+        title="The settlement"
+        blurb="Its own attributes — the causal state, the pressures and strength, the power and succession, the timeline, and the provenance behind this dossier."
       >
-        {/* The Engine-altitude causal grid was removed here too — Systems ->
-            Substrate is the one canonical Substrate read (dossier keystone §4).
-            This card keeps the granary / war-front / standing surfaces the
-            dossier does NOT carry. */}
-        <EconomicsGranarySection settlement={settlement} />
-        <DefenseWarFrontSection
-          settlement={settlement}
-          warStatus={null}
-          nameFor={nameFor}
-        />
-        <WarFaithSection
-          settlement={settlement}
-          settlementId={saveId}
-          worldState={worldState}
-          regionalGraph={regionalGraph}
-          settlements={settlements}
-          nameFor={nameFor}
-        />
-      </WorkshopCard>
+        {/* 1 ── Causal State ─────────────────────────────────────────────────── */}
+        <WorkshopCard
+          id="causal-state"
+          title="Causal State"
+          headline={headlines['causal-state']}
+          hint="The four-dimension health glance. The sixteen causal variables live in the dossier above (Systems -> Substrate)."
+          // Open by default ONLY in edit mode. In the read-only View the dossier
+          // above is the hero; the Workshop is the collapsed drill-down.
+          defaultOpen={showWrite}
+          editMode={showWrite}
+        >
+          <ReadSystemStateBar settlement={settlement} />
+        </WorkshopCard>
 
-      {/* 3 ── Faith & Pantheon ──────────────────────────────────────────────── */}
-      <WorkshopCard
-        id="faith-pantheon"
-        title="Faith and Pantheon"
-        headline={headlines['faith-pantheon']}
-        hint="What this settlement's patron deity does to the substrate, and the controls to assign one and awaken the religion layer."
-        editMode={showWrite}
-      >
-        {/* Read: the axis-effect disclosure (renders nothing deity-free). */}
-        <WarFaithSection
-          settlement={settlement}
-          settlementId={saveId}
-          worldState={worldState}
-          regionalGraph={regionalGraph}
-          settlements={settlements}
-          nameFor={nameFor}
-          forceLevel="standard"
-        />
-        {/* The "Awaken religion" gate (+ byte-identical-when-off promise). */}
-        <div style={{ marginTop: SP.sm, marginBottom: SP.sm }}>
-          <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
-        </div>
-        {/* Write: assign the primary deity. */}
-        {showWrite ? (
-          <PrimaryDeityPicker />
-        ) : (
-          <PremiumWriteHint onUpgrade={onUpgrade} />
-        )}
-      </WorkshopCard>
+        {/* 2 ── Pressures & Strength ─────────────────────────────────────────── */}
+        <WorkshopCard
+          id="pressures-strength"
+          title="Pressures and Strength"
+          hint="The live granary, its war-cost-aware strength, and its standing in the wider realm. The full substrate grid lives in the dossier above (Systems -> Substrate)."
+          editMode={showWrite}
+        >
+          <EconomicsGranarySection settlement={settlement} />
+          <DefenseWarFrontSection
+            settlement={settlement}
+            warStatus={null}
+            nameFor={nameFor}
+          />
+          <WarFaithSection
+            settlement={settlement}
+            settlementId={saveId}
+            worldState={worldState}
+            regionalGraph={regionalGraph}
+            settlements={settlements}
+            nameFor={nameFor}
+          />
+        </WorkshopCard>
 
-      {/* 4 ── Power & Succession ────────────────────────────────────────────── */}
-      <WorkshopCard
-        id="power-succession"
-        title="Power and Succession"
-        headline={headlines['power-succession']}
-        hint="The ruler, the coup-risk forecast, the contenders, and the lineage of governments that came before."
-        editMode={showWrite}
-      >
-        <PowerSuccessionSection settlement={settlement} />
-        <NpcAgencySection npcs={settlement.npcs} />
-        {!showWrite && <PremiumWriteHint onUpgrade={onUpgrade} />}
-      </WorkshopCard>
+        {/* 3 ── Power & Succession ───────────────────────────────────────────── */}
+        <WorkshopCard
+          id="power-succession"
+          title="Power and Succession"
+          headline={headlines['power-succession']}
+          hint="The ruler, the coup-risk forecast, the contenders, and the lineage of governments that came before."
+          editMode={showWrite}
+        >
+          <PowerSuccessionSection settlement={settlement} />
+          <NpcAgencySection npcs={settlement.npcs} />
+          {!showWrite && <PremiumWriteHint onUpgrade={onUpgrade} />}
+        </WorkshopCard>
 
-      {/* 5 ── Make Changes ──────────────────────────────────────────────────── */}
-      <WorkshopCard
-        id="make-changes"
-        anchorId="workshop-make-changes"
-        title="Make Changes"
-        hint="Apply an in-world event. It is preceded above by the state it mutates, so you edit the substrate with eyes open."
-        editMode={showWrite}
+        {/* 4 ── Timeline & Chronicle ─────────────────────────────────────────── */}
+        <WorkshopCard
+          id="timeline-chronicle"
+          title="Timeline and Chronicle"
+          headline={headlines['timeline-chronicle']}
+          hint="The canon event log: every committed change, in order."
+          editMode={showWrite}
+        >
+          {showWrite ? (
+            <Timeline />
+          ) : (
+            <div style={{ fontSize: FS.sm, color: MUTED, lineHeight: 1.5 }}>
+              Once you make changes in edit mode, each appears here as a dated entry in the settlement's history.
+            </div>
+          )}
+        </WorkshopCard>
+
+        {/* 5 ── Provenance & Links ───────────────────────────────────────────── */}
+        <WorkshopCard
+          id="provenance-links"
+          title="Provenance and Links"
+          hint="The seed, timestamps, and campaign link behind this dossier."
+          editMode={showWrite}
+        >
+          <ProvenanceBlock save={save || { id: saveId }} />
+        </WorkshopCard>
+      </GroupCard>
+
+      {/* ══ Card 2 — Change the settlement ═════════════════════════════════════
+          The write surface: the event composer, the deity-assign write, the
+          living-world layer toggles, and the link / rename affordances. Each
+          change applies immediately today; the section is structured so a future
+          change-queue can slot in above the composer without re-laying it out. */}
+      <GroupCard
+        id="change-the-settlement"
+        title="Change the settlement"
+        blurb="The write surface — apply an in-world event, assign a patron deity, link a neighbour, or rename what lives here. Each change lands on the timeline above."
       >
-        {/* The war-layer + strategy gates live with the change tools, since events
-            (declare war, deploy) only matter once the war layer is on. */}
-        <div style={{ display: 'grid', gap: SP.xs, marginBottom: SP.sm }}>
-          <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
-          <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
-        </div>
-        {showWrite ? (
-          <>
-            <CoherencePanel />
-            <EventComposer />
-            <PendingIntentions />
-          </>
-        ) : (
-          <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
-            In edit mode, the event composer applies in-world changes: declare a war, install a ruler,
-            raze an institution. Each one lands on the timeline.
+        {/* 6 ── Make Changes ─────────────────────────────────────────────────── */}
+        <WorkshopCard
+          id="make-changes"
+          anchorId="workshop-make-changes"
+          title="Make Changes"
+          hint="Apply an in-world event. It is preceded above by the state it mutates, so you edit the substrate with eyes open."
+          defaultOpen={showWrite}
+          editMode={showWrite}
+        >
+          {showWrite ? (
+            <>
+              {/* Future change-queue slots here — between the read of current
+                  state and the composer that mutates it. Immediate-apply today. */}
+              <CoherencePanel />
+              <EventComposer />
+              <PendingIntentions />
+            </>
+          ) : (
+            <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+              In edit mode, the event composer applies in-world changes: declare a war, install a ruler,
+              raze an institution. Each one lands on the timeline.
+              <PremiumWriteHint onUpgrade={onUpgrade} />
+            </div>
+          )}
+        </WorkshopCard>
+
+        {/* 7 ── Assign a deity ───────────────────────────────────────────────── */}
+        {/* The faith READ now lives in the dossier's War & Faith tab and the
+            Pressures card above; only the deity-assign WRITE remains, regrouped
+            here under the change surface (SET_PRIMARY_DEITY via PrimaryDeityPicker). */}
+        <WorkshopCard
+          id="assign-deity"
+          title="Assign a Deity"
+          hint="Name this settlement's patron. Its effect on the substrate is read in the dossier's War & Faith tab; awaken the living religion layer below."
+          editMode={showWrite}
+        >
+          {showWrite ? (
+            <PrimaryDeityPicker />
+          ) : (
             <PremiumWriteHint onUpgrade={onUpgrade} />
-          </div>
-        )}
-      </WorkshopCard>
+          )}
+        </WorkshopCard>
 
-      {/* 6 ── Timeline & Chronicle ──────────────────────────────────────────── */}
-      <WorkshopCard
-        id="timeline-chronicle"
-        title="Timeline and Chronicle"
-        headline={headlines['timeline-chronicle']}
-        hint="The canon event log: every committed change, in order."
-        editMode={showWrite}
-      >
-        {showWrite ? (
-          <Timeline />
-        ) : (
-          <div style={{ fontSize: FS.sm, color: MUTED, lineHeight: 1.5 }}>
-            Once you make changes in edit mode, each appears here as a dated entry in the settlement's history.
+        {/* 8 ── Living-world layers ──────────────────────────────────────────── */}
+        {/* The three subsystem gates, now one group: War layer, Settlement
+            strategy, and (moved in from the old Faith card) Awaken religion. Each
+            is opt-in and byte-identical when off. Faith is a layer here, not an
+            edit card. */}
+        <WorkshopCard
+          id="living-world-layers"
+          title="Living-world Layers"
+          hint="Opt-in subsystems for the wider realm, off by default and byte-identical to today while off. Turn one on and the realm starts moving."
+          editMode={showWrite}
+        >
+          <div style={{ display: 'grid', gap: SP.xs }}>
+            <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
+            <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
+            <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
           </div>
-        )}
-      </WorkshopCard>
+        </WorkshopCard>
 
-      {/* 7 ── Provenance & Links ────────────────────────────────────────────── */}
-      <WorkshopCard
-        id="provenance-links"
-        title="Provenance and Links"
-        hint="The seed, timestamps, and campaign link behind this dossier."
-        editMode={showWrite}
-      >
-        <ProvenanceBlock save={save || { id: saveId }} />
-      </WorkshopCard>
+        {/* 9 ── Link a neighbour / Edit names ────────────────────────────────────
+            These own SettlementDetail state (the linking picker, the neighbour
+            network, the rename drafts), so SettlementDetail passes their existing
+            JSX down unchanged. They sit inside Card 2 so the change surface reads
+            as one coherent group, with no behaviour change. */}
+        {changeExtras}
+      </GroupCard>
     </div>
   );
 }
