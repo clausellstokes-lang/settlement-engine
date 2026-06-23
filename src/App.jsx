@@ -23,7 +23,7 @@ import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -411,6 +411,7 @@ export default function App() {
               isAnon={authTier === 'anon'}
               displayName={displayName}
               isElevated={isElevated}
+              creditBalance={authTier !== 'anon' ? creditBalance : null}
               onSignIn={() => setAuthModalOpen(true)}
               onAccount={() => setView('account')}
               onManageSubscription={() => setView('pricing')}
@@ -578,7 +579,7 @@ export default function App() {
             companion `scroll-padding-top` that keeps anchored / focus scrolls
             clear of the pinned chrome lives on the real scroller (the document
             element), set by the view that owns sticky chrome. */}
-        <main style={{ flex: 1, padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        <main style={{ flex: 1, padding: isMobile ? `${SP.md}px ${SP.md}px ${CHROME.mainPadMobile}px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
               along with its forever-off `onboardingDiet` flag-twin: the Checklist
               + first-dossier callouts carry first-run coaching, and PostGenCoach
@@ -633,7 +634,7 @@ export default function App() {
         <footer style={{
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
-          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px ${bottomClearance(CHROME.footerPadMobile)}` : `${SP.lg}px ${SP.xxl}px`,
           textAlign: 'center',
           fontFamily: sans,
           fontSize: FS.sm,
@@ -695,13 +696,20 @@ export default function App() {
                   onClick={() => handleNavClick(id)}
                   aria-current={active ? 'page' : undefined}
                   style={{
-                    flex: 1, display: 'flex', flexDirection: 'column',
+                    // `minWidth: 0` lets a flex child shrink below its content
+                    // width so the longest label ('COMPENDIUM', 10px uppercase)
+                    // can ellipsis-fit at 375px instead of forcing the row wider
+                    // and clipping. Five equal columns share the row evenly.
+                    flex: 1, minWidth: 0,
+                    display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
                     // Clear the 44px touch-target floor (Apple HIG / Material).
                     // The single-line uppercase label only filled ~32px tall, so
                     // these primary nav tabs were below the floor on mobile.
                     minHeight: 44,
-                    padding: `${SP.sm + 2}px ${SP.xs}px`,
+                    // Trim the horizontal padding to 2px so the five labels get
+                    // the most width to fit before any ellipsis kicks in.
+                    padding: `${SP.sm + 2}px 2px`,
                     background: active ? GOLD_BG : 'transparent',
                     border: 'none',
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
@@ -709,10 +717,19 @@ export default function App() {
                     color: active ? GOLD : PARCH_100,
                     fontSize: FS.xxs, fontWeight: active ? 700 : 500,
                     fontFamily: sans,
-                    letterSpacing: '0.04em', textTransform: 'uppercase',
+                    // Tighter tracking than the 0.04em elsewhere: at 10px the
+                    // extra letter-spacing was the difference between fitting and
+                    // clipping the longest label.
+                    letterSpacing: '0.02em', textTransform: 'uppercase',
                   }}
                 >
-                  <span style={{ lineHeight: 1 }}>{label}</span>
+                  {/* maxWidth:100% + overflow ellipsis keeps the longest label
+                      from clipping mid-glyph: it shrinks-to-fit, then truncates
+                      with a guaranteed-readable tail rather than a hard cut. */}
+                  <span style={{
+                    lineHeight: 1, maxWidth: '100%',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>{label}</span>
                 </button>
               );
             })}
@@ -733,7 +750,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? 70 : SP.xxl, right: SP.xl, zIndex: 200,
+            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.xxl, right: SP.xl, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
@@ -797,7 +814,7 @@ export default function App() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') clearOnboardingNudge(); }}
           style={{
             position: 'fixed',
-            bottom: isMobile ? 92 : SP.xxl,
+            bottom: isMobile ? bottomClearance(CHROME.nudgeLift) : SP.xxl,
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 2000,
@@ -832,12 +849,16 @@ export default function App() {
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
 
-      {/* Active pricing moment card. Always mounted; renders null
-          when no moment is active. Bottom-right fixed-position so it
-          doesn't fight the dossier or wizard for vertical space. */}
-      <Suspense fallback={null}>
-        <PricingMomentCard />
-      </Suspense>
+      {/* Active pricing moment card. Renders null when no moment is active.
+          Bottom-right fixed-position so it doesn't fight the dossier or wizard
+          for vertical space. Suppressed on the Pricing view: an upgrade nudge
+          floating over the page that already IS the upgrade surface is
+          redundant chrome (and on mobile it stacked atop the pricing CTAs). */}
+      {view !== 'pricing' && (
+        <Suspense fallback={null}>
+          <PricingMomentCard />
+        </Suspense>
+      )}
     </>
   );
 }

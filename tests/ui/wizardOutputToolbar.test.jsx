@@ -135,11 +135,18 @@ describe('Create-view sticky chrome: occlusion root-cause guards', () => {
     // a scroller) and clears the full chrome stack (header + pinned toolbar).
     const wizardSrc = readFileSync(fromTest('../../src/components/GenerateWizard.jsx'), 'utf8');
     expect(wizardSrc).toMatch(/document\.documentElement[\s\S]{0,200}scrollPaddingTop/);
-    // Desktop clearance must reach past the pinned toolbar's bottom (~124px),
-    // i.e. a three-digit px value — not a header-only offset that re-hides the
-    // tab strip behind the toolbar.
-    const padMatch = wizardSrc.match(/scrollPaddingTop\s*=\s*isMobile\s*\?\s*'(\d+)px'\s*:\s*'(\d+)px'/);
+    // Desktop clearance must reach past the pinned toolbar's bottom (~124px) —
+    // not a header-only offset that re-hides the tab strip behind the toolbar.
+    // The offset is now driven by the CHROME chrome-height tokens
+    // (scrollPadMobile / scrollPadDesktop) rather than inline literals, so match
+    // the tokenized assignment and resolve the desktop value from theme.js.
+    const padMatch = wizardSrc.match(
+      /scrollPaddingTop\s*=\s*isMobile\s*\?\s*`\$\{CHROME\.scrollPadMobile\}px`\s*:\s*`\$\{CHROME\.scrollPadDesktop\}px`/,
+    );
     expect(padMatch, 'expected a mobile/desktop scrollPaddingTop assignment').toBeTruthy();
-    expect(Number(padMatch[2])).toBeGreaterThanOrEqual(120);
+    const themeSrc = readFileSync(fromTest('../../src/components/theme.js'), 'utf8');
+    const desktopPad = themeSrc.match(/scrollPadDesktop\s*:\s*(\d+)/);
+    expect(desktopPad, 'expected CHROME.scrollPadDesktop in theme.js').toBeTruthy();
+    expect(Number(desktopPad[1])).toBeGreaterThanOrEqual(120);
   });
 });

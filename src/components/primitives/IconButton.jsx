@@ -15,6 +15,7 @@
  */
 
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 const TONES = {
   default:  { bg: '#fff',                       fg: '#1c1409', border: '#d2bd96', hover: '#fffbf5' },
@@ -64,6 +65,13 @@ export default function IconButton({
   }
   const t = TONES[tone] || TONES.default;
   const s = SIZES[size] || SIZES.md;
+  // Mobile-only 44px tap floor. Icon-only controls need BOTH dimensions at the
+  // floor, so on mobile we relax the fixed box into min-width/min-height >=44
+  // (the glyph stays centred via inline-flex). Desktop keeps the exact fixed
+  // box from SIZES (sm 24 / md 28 / lg 36 / xl 44) so density is unchanged.
+  // Reads the ONE shared reactive flag (updates on resize + rotate).
+  const isMobile = useIsMobile();
+  const mobileFloor = isMobile ? Math.max(s.box, 44) : null;
   return (
     <button
       type={type}
@@ -74,7 +82,12 @@ export default function IconButton({
       aria-pressed={pressed === undefined ? undefined : !!pressed}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        width:  s.box, height: s.box,
+        // Desktop: fixed box. Mobile: floor to >=44 in both axes (min-* lets the
+        // box grow without forcing desktop sizes up).
+        width:  mobileFloor != null ? undefined : s.box,
+        height: mobileFloor != null ? undefined : s.box,
+        minWidth:  mobileFloor != null ? mobileFloor : undefined,
+        minHeight: mobileFloor != null ? mobileFloor : undefined,
         padding: 0,
         background: pressed ? TONES.active.bg : t.bg,
         color:      pressed ? TONES.active.fg : t.fg,

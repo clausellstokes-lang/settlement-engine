@@ -21,7 +21,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
+import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -133,7 +133,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     if (!dossierVisible || typeof document === 'undefined') return undefined;
     const root = document.documentElement;
     const prev = root.style.scrollPaddingTop;
-    root.style.scrollPaddingTop = isMobile ? '64px' : '124px';
+    root.style.scrollPaddingTop = isMobile ? `${CHROME.scrollPadMobile}px` : `${CHROME.scrollPadDesktop}px`;
     return () => { root.style.scrollPaddingTop = prev; };
   }, [dossierVisible, isMobile]);
 

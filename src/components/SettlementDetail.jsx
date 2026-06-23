@@ -54,7 +54,7 @@ import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailH
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
-import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
+import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
 // PDF consume, so a named relationship looks identical across every surface
 // (was previously a divergent local REL_COLORS copy — the cardinal-sin coherence
@@ -602,7 +602,7 @@ export default function SettlementDetail({
           </FeatureErrorBoundary>
         </div>
         {saveId && (
-          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:12,alignSelf:'flex-start'}}>
+          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:CHROME.stickyTop,alignSelf:'flex-start'}}>
             <NextActionRail
               settlement={detail.settlement}
               save={detail.saveData || detail}

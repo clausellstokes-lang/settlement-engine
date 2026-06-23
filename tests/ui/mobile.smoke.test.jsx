@@ -5,9 +5,10 @@
  *
  * Verifies primary surfaces render at narrow viewport widths without
  * crashing or producing horizontal overflow. jsdom doesn't render to
- * pixels, but it does set `window.innerWidth` which our `isMobile()`
- * helper reads, so we can exercise the mobile branch of every
- * `mobile ? X : Y` ternary in the layout code.
+ * pixels. `isMobile()` now delegates to the shared matchMedia-backed
+ * mobile-flag store (src/hooks/useIsMobile.js), so this test installs a
+ * matchMedia shim that derives `matches` from the simulated viewport
+ * width — exercising the mobile branch of every `mobile ? X : Y` ternary.
  *
  * We do NOT validate exact widths in pixels — jsdom layout is fake
  * (no flexbox, no media queries actually trigger). What we check:
@@ -28,15 +29,49 @@ import { isMobile } from '../../src/components/new/tabConstants.js';
 // jsdom defaults to 1024px. Save the original so we can restore between tests.
 const ORIGINAL_INNER_WIDTH = window.innerWidth;
 
+// isMobile() now reads a matchMedia-backed store. jsdom has no matchMedia, so we
+// install a shim: each created MediaQueryList parses its `max-width: Npx` query
+// and re-evaluates `matches` against the current simulated width whenever the
+// viewport changes, firing its 'change' listeners just like a real resize.
+let currentWidth = ORIGINAL_INNER_WIDTH;
+const liveMqls = new Set();
+
+function evaluate(query) {
+  const m = /max-width:\s*(\d+)px/.exec(query);
+  return m ? currentWidth <= Number(m[1]) : false;
+}
+
+if (typeof window.matchMedia !== 'function') {
+  window.matchMedia = (query) => {
+    const listeners = new Set();
+    const mql = {
+      media: query,
+      matches: evaluate(query),
+      addEventListener: (_e, fn) => listeners.add(fn),
+      removeEventListener: (_e, fn) => listeners.delete(fn),
+      __reevaluate: () => {
+        const next = evaluate(query);
+        if (next !== mql.matches) {
+          mql.matches = next;
+          listeners.forEach((fn) => fn({ matches: next }));
+        }
+      },
+    };
+    liveMqls.add(mql);
+    return mql;
+  };
+}
+
 function setViewportWidth(width) {
-  // jsdom's window is a writable object; mutating innerWidth changes
-  // what code reading window.innerWidth sees. We can't trigger a real
-  // resize event, but our isMobile() helper just reads innerWidth.
+  currentWidth = width;
   Object.defineProperty(window, 'innerWidth', {
     configurable: true,
     writable: true,
     value: width,
   });
+  // Push the new width into any already-created MediaQueryList so the shared
+  // store (which caches one MQL per breakpoint) reflects the change.
+  liveMqls.forEach((mql) => mql.__reevaluate());
 }
 
 beforeAll(() => setViewportWidth(360));     // narrow mobile (iPhone SE)

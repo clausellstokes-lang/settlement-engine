@@ -21,7 +21,7 @@ import { useMapBridge } from '../hooks/useMapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, R } from './theme.js';
+import { SP, CARD, BORDER, R, CHROME } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
@@ -731,8 +731,8 @@ export default function WorldMap({ onNavigate } = {}) {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
-      height: 'calc(100vh - 120px)',   // header (~52px) + main padding (~48px) + breathing room
-      minHeight: 500,
+      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      minHeight: CHROME.mapShellMin,
       // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
       // document — the geographic canvas is the hero (P1) and must fill its width.
       // Capping the shell to layout.page letterboxed the map (the FMG canvas fits

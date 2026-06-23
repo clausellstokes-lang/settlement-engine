@@ -105,6 +105,70 @@ export const serif_ = L.serif_;
 // ── Spacing scale (px) ──────────────────────────────────────────────────────
 export const SP = L.SP;
 
+// ── Chrome metrics (sticky/fixed frame heights + scroll clearance) ───────────
+// Single source of truth for the app's persistent chrome geometry so every
+// sticky bar, fixed FAB, footer, scroll-padding, and floating nudge reads the
+// SAME numbers instead of re-deriving them as scattered magic literals. Before
+// this, the mobile header height (~59), the bottom-nav clearance (88/100), the
+// FAB lift (70), the nudge lift (92), and the dossier scroll-padding (64/124)
+// were each typed by hand at their call site, so any chrome height change had
+// to be chased across App.jsx + four panels and drifted out of sync.
+//
+// Values are the EFFECTIVE pixel heights today (verified against the call
+// sites) so desktop renders byte-identical. Mobile clearances fold in the
+// iOS/Android safe-area inset via `bottomClearance()` so fixed content never
+// tucks under the home indicator OR the bottom nav.
+//
+//   headerMobile  — the mobile sticky top bar: SP.sm*2 padding + a 44px brand
+//                   row, rounded to the ~59px the layout actually paints.
+//   toolbarHeight — the WizardOutputToolbar that pins under the header while a
+//                   dossier is on screen (~64px tall).
+//   bottomNav     — the 5-tab mobile bottom nav row (44px tap floor + borders).
+//   scrollPadDesktop / scrollPadMobile — scroll-padding-top reserved on the
+//                   document scroller so anchored/focus scrolls clear the
+//                   stacked chrome. Desktop stacks header(60)+toolbar(64);
+//                   mobile stacks them at top:0 so one header's worth suffices.
+//   mapShellOffset — viewport height the Realm map shell subtracts for the
+//                   desktop header + main padding + breathing room.
+//   mapShellMin    — the map shell's minimum height floor.
+//   fabLift / nudgeLift — how far fixed bottom-right / bottom-center overlays
+//                   sit above the mobile bottom nav so they never overlap it.
+//   footerPadMobile / mainPadMobile — bottom padding that clears the fixed
+//                   bottom nav for the footer + main scroll content.
+//
+// bottomClearance(base) — returns a CSS calc() that adds the safe-area inset to
+// a base px clearance, so one helper feeds every mobile bottom offset.
+export const CHROME = Object.freeze({
+  headerMobile:    59,
+  toolbarHeight:   64,
+  bottomNav:       57,
+  scrollPadDesktop: 124,
+  scrollPadMobile:  64,
+  mapShellOffset:  120,
+  mapShellMin:     500,
+  fabLift:         70,
+  nudgeLift:       92,
+  footerPadMobile: 88,
+  mainPadMobile:   100,
+  // Desktop sticky-aside top offset — the small breathing gap a sticky side
+  // rail (e.g. SettlementDetail's NextActionRail) pins below the top of the
+  // scroll region. Routed through the chrome group so the one sticky offset
+  // reads from the same place every other clearance does.
+  stickyTop:       12,
+});
+
+/**
+ * bottomClearance — safe-area-aware bottom offset for fixed/sticky mobile
+ * overlays. Adds the device home-indicator inset to a base px clearance so a
+ * FAB, nudge, footer, or scroll control always sits clear of BOTH the bottom
+ * nav and the safe area. On desktop, pass the plain px value instead.
+ *
+ * @param {number} basePx - base clearance in px above the viewport bottom.
+ * @returns {string} a CSS calc() expression, e.g. 'calc(70px + env(safe-area-inset-bottom))'.
+ */
+export const bottomClearance = (basePx) =>
+  `calc(${basePx}px + env(safe-area-inset-bottom))`;
+
 // ── Border-radius scale (px) ────────────────────────────────────────────────
 export const R = L.R;
 

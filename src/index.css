@@ -180,3 +180,12 @@ button {
 @media (prefers-reduced-motion: reduce) {
   @keyframes sf-goldShimmer { 0%, 100% { background-position: 0% 0; } }
 }
+
+/* primitives/BottomSheet — slide-up entrance for the mobile bottom sheet */
+@keyframes sf-sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sf-sheet-up { from { transform: none; } to { transform: none; } }
+}

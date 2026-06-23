@@ -1,8 +1,13 @@
 import { Home, Beer, Sword, Sparkles, ScrollText, Cross, Ship, Scale, Drama, ClipboardList, VenetianMask } from 'lucide-react';
 import { swatch } from '../theme.js';
+import { getIsMobile } from '../../hooks/useIsMobile.js';
 // Shared constants for all tab components
 
-export const isMobile = () => window.innerWidth < 640;
+// Delegate to the ONE shared mobile-flag source so the tabs read the same,
+// reactive-backed value as Buttons/IconButtons instead of a separate
+// `innerWidth` probe that went stale on rotate. Still a plain function for
+// non-React callers; each call returns a fresh read at the 640 breakpoint.
+export const isMobile = () => getIsMobile(640);
 
 // ── BODY token ───────────────────────────────────────────────────────────────
 // The tabs historically used a per-file `const second=swatch['#6B5340']` for body
