@@ -135,27 +135,55 @@ export function stripDerivedConfigKeys(config) {
  *      state, regional propagation, Wizard News).
  * Timestamps reuse this apply's editedAt stamp so propagation stamps no
  * wall-clock time of its own (replay is byte-identical — same args, same graph).
+ *
+ * Phase 4b — the ripple is NOT monolithic. It has a REGIONAL half (cross-
+ * settlement neighbour propagation → the regional graph) and a WORLD-STATE half
+ * (crisis-twin + party-impact, which write `campaign.worldState`, not neighbour
+ * rows). A campaign-member change-queue COMMIT defers the REGIONAL half to the
+ * next Advance (Fork 2: the world-state half stays immediate so a committed
+ * crisis still roams/ages at the campaign tick). `computeRegionalRipple` below
+ * is the regional half factored out so the commit path can COMPUTE the deferred
+ * impacts without enqueuing them into the live graph; `skipRegional` suppresses
+ * the immediate enqueue here so the same change cannot propagate twice (R1).
  */
-function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
-  if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
-    const afterEnvelope = saveEnvelopeFor(
-      activeSaveId,
-      beforeSave,
-      afterState.settlement,
-      afterCampaignState || beforeSave?.campaignState,
-    );
-    const result = propagateRegionalEvent({
-      graph: campaign.regionalGraph,
-      beforeSettlement: beforeEnvelope,
-      afterSettlement: afterEnvelope,
-      event,
-      activeSettlementId: activeSaveId,
-      visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
-      maxDepth: 2,
-      waveDecay: 0.45,
-      now: afterState.editedAt,
-    });
-    if (result.impacts.length > 0) {
+/**
+ * Compute the regional-propagation result for a committed settlement event
+ * WITHOUT writing it to the live campaign graph. Returns the domain
+ * `propagateRegionalEvent` result (`{ graph, impacts, localDelta, ... }`), or
+ * null when there is nothing to propagate (no campaign / no before envelope).
+ * The campaign-commit path stashes `result.impacts` onto
+ * `worldState.deferredImpacts` so the NEXT Advance folds them into
+ * `queuedImpacts` exactly once — the regional ripple deferred as data.
+ * @returns {null | { graph: any, impacts: any[], localDelta: any }}
+ */
+function computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
+  if (!(campaign && beforeEnvelope)) return null;
+  const afterEnvelope = saveEnvelopeFor(
+    activeSaveId,
+    beforeSave,
+    afterState.settlement,
+    afterCampaignState || beforeSave?.campaignState,
+  );
+  return propagateRegionalEvent({
+    graph: campaign.regionalGraph,
+    beforeSettlement: beforeEnvelope,
+    afterSettlement: afterEnvelope,
+    event,
+    activeSettlementId: activeSaveId,
+    visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
+    maxDepth: 2,
+    waveDecay: 0.45,
+    now: afterState.editedAt,
+  });
+}
+
+function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional = false }) {
+  // Regional (cross-settlement) half. Skipped on a campaign-member commit — the
+  // flush computes + DEFERS these impacts instead (Fork 2 / Mechanism B), so the
+  // immediate enqueue never happens and the change cannot double-propagate (R1).
+  if (!skipRegional && campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
+    const result = computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+    if (result && result.impacts.length > 0) {
       afterState.setCampaignRegionalGraph(campaign.id, result.graph);
       // The canon-edit cross-settlement propagation moment — this path fired NO
       // analytics. result is a plain domain return; emit the redacted summary.
@@ -551,6 +579,16 @@ export const createSettlementSlice = (set, get) => ({
   // SKIP their own persistSaveUpdate call — the flush owns the single
   // end-of-batch persist. Always restored to false in the flush's finally.
   flushSuppressPersist: false,
+
+  // Phase 4b — set by the change-queue flush ONLY during a CAMPAIGN-MEMBER
+  // commit replay. While set, applyEvent (a) bypasses the clock-bound short-
+  // circuit so the event applies to THIS settlement now instead of queuing onto
+  // the world pulse, and (b) DEFERS the regional ripple: the cross-settlement
+  // impacts are computed and stashed on `campaign.worldState.deferredImpacts`
+  // for the next Advance to fold in exactly once, rather than enqueued into the
+  // live graph here. The crisis-twin/party-impact world-state half stays
+  // immediate (Fork 2). Always restored to false in the flush's finally.
+  flushApplyLocalOnly: false,
 
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
@@ -1686,7 +1724,14 @@ export const createSettlementSlice = (set, get) => ({
     // they queue as pending intentions and resolve simultaneously with every
     // other member at the next world-pulse advance (drainQueuedEvents). Only in
     // canon; draft edits stay authorial and immediate.
-    if (activeSaveId && state.phase === 'canon'
+    // Phase 4b: during a campaign-member change-queue COMMIT replay the flush
+    // sets `flushApplyLocalOnly`, which BYPASSES this short-circuit so the event
+    // applies to THIS settlement now (the local half of the commit) instead of
+    // re-queuing onto pendingEvents. The regional ripple is likewise skipped
+    // below and deferred by the flush. Off a commit the clock-bound short-circuit
+    // stands: a stray edit on a member still queues to the world pulse.
+    if (!state.flushApplyLocalOnly
+        && activeSaveId && state.phase === 'canon'
         && typeof state.isSettlementClockBound === 'function'
         && state.isSettlementClockBound(activeSaveId)) {
       const queued = state.queueSettlementEvent(activeSaveId, event);
@@ -1793,7 +1838,29 @@ export const createSettlementSlice = (set, get) => ({
     // Propagate the committed event into the campaign world engine — regional
     // graph, crisis-lifecycle twin, party-impact pipeline. See the helper for
     // the per-consumer rationale; all canon-only and best-effort + guarded.
-    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+    //
+    // Phase 4b: under a campaign-member change-queue commit (`flushApplyLocalOnly`)
+    // the REGIONAL half is skipped here and DEFERRED — the flush computes the
+    // impacts once and stashes them on `worldState.deferredImpacts` for the next
+    // Advance to fold in exactly once. The crisis-twin + party-impact world-state
+    // half stays immediate (Fork 2) so a committed crisis still roams/ages at the
+    // campaign tick. The flush reads the regional result off the live store, so
+    // it must run with the post-apply afterState already committed (it is).
+    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional: !!afterState.flushApplyLocalOnly });
+
+    // Phase 4b — campaign-member commit: COMPUTE the deferred regional impacts
+    // (the half rippleEventThroughWorld just skipped) and stash them onto the
+    // campaign's worldState.deferredImpacts. They are NOT enqueued into the live
+    // queuedImpacts here — the next Advance folds the whole deferred bucket in
+    // exactly once (Mechanism B). This is the ONLY place the regional half lands
+    // for a member commit, so the change propagates exactly once.
+    if (afterState.flushApplyLocalOnly && campaign && beforeEnvelope
+        && typeof afterState.stashDeferredRegionalImpacts === 'function') {
+      const result = computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+      if (result && result.impacts.length > 0) {
+        afterState.stashDeferredRegionalImpacts(campaign.id, result.impacts);
+      }
+    }
 
     return logEntry;
   },

@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (73) — schema + RLS policies + credit ledger + version
+- **migrations/** (74) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -135,7 +135,15 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   gallery facet: recreates the `tile_rows`/`list_gallery_dossiers` RPC chain to
   surface and filter on the owner `gallery_importable` opt-in) + **072** (maps-side
   parity: a `saved_maps.gallery_importable` owner opt-in + `import_gallery_map`
-  server-gated clone RPC + an `importable` facet on `list_gallery_maps`) —
+  server-gated clone RPC + an `importable` facet on `list_gallery_maps`) +
+  **073** (restore the account-status guard on the publish-map RPC) + **074**
+  (documentation-only re-affirmation of the **069** `persist_world_pulse_advance`
+  RPC for its second caller — the Phase-4b campaign change-queue member-commit,
+  which reuses 069's `p_expected_tick`=NULL path to persist a local settlement
+  edit whose campaign snapshot carries the new `worldState.deferredImpacts` key,
+  with the cross-settlement regional ripple deferred to the next world-pulse
+  Advance; creates no new object, re-affirms the authenticated-only GRANT, and
+  updates the function COMMENT to name both callers) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

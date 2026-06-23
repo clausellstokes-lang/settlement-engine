@@ -1,10 +1,13 @@
 /** @vitest-environment jsdom */
 /**
- * changeQueuePanelScope.test.jsx — the Phase 4a STANDALONE scope of the
- * "Save N pending changes" surface. The queue must render ONLY for a
- * non-clock-bound settlement: for a clock-bound canon campaign member it is
- * inactive (active=false) and renders nothing, even if orders somehow exist —
- * so a staged change can never silently redirect into the world pulse.
+ * changeQueuePanelScope.test.jsx — the render contract of the "Save N pending
+ * changes" surface. The panel renders ONLY when its caller marks it active; when
+ * inactive it renders nothing, even if orders somehow exist.
+ *
+ * Phase 4b widened WHO is active: the change-queue is now enabled for standalone
+ * settlements AND clock-bound canon campaign members alike (the gate that
+ * computes `active` moved off the clock-bound exclusion). This test pins the
+ * panel's own active/inactive rendering, independent of that gating decision.
  */
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
@@ -25,14 +28,14 @@ import ChangeQueuePanel from '../../src/components/settlement/ChangeQueuePanel.j
 
 afterEach(cleanup);
 
-describe('ChangeQueuePanel — standalone-only scope', () => {
-  it('renders the queue for a standalone settlement (active)', () => {
+describe('ChangeQueuePanel — render contract', () => {
+  it('renders the queue when active (standalone OR campaign member)', () => {
     render(<ChangeQueuePanel saveId="save_1" active />);
     expect(screen.getByTestId('change-queue-panel')).toBeTruthy();
     expect(screen.getByText(/Save 1 pending change/)).toBeTruthy();
   });
 
-  it('renders NOTHING for a clock-bound campaign member (inactive), even with orders queued', () => {
+  it('renders NOTHING when inactive, even with orders queued', () => {
     const { container } = render(<ChangeQueuePanel saveId="save_1" active={false} />);
     expect(screen.queryByTestId('change-queue-panel')).toBeNull();
     expect(container.firstChild).toBeNull();

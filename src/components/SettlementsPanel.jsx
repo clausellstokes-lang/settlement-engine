@@ -340,21 +340,17 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
   };
 
-  // ── Change-queue scope (Phase 4a — STANDALONE only) ───────────────────────
-  // The change-queue stages-then-commits ONLY for non-clock-bound settlements.
-  // A clock-bound canon campaign member surrenders its independent timeline to
-  // the world pulse (applyEvent redirects to queueSettlementEvent), so a staged
-  // change there would silently redirect; the queue is inactive and link / rename
-  // apply immediately (their existing world-pulse-era behaviour). The campaign
-  // queue path (069 RPC + Advance-Time deferral) is Phase 4b.
+  // ── Change-queue scope (Phase 4b — standalone AND campaign members) ────────
+  // The change-queue stages-then-commits for ANY open settlement now. For a
+  // STANDALONE settlement the commit persists the single row immediately (Phase
+  // 4a/4a.2 — byte-unchanged). For a CLOCK-BOUND CANON campaign member the commit
+  // applies the settlement-LOCAL change now, persists atomically via the 069 RPC,
+  // and DEFERS the regional propagation to the next Advance (flushQueue's campaign
+  // branch). Either way the identity-lock + canon guards in queueEdit/applyRename
+  // still reject frozen renames, so enabling the queue here loosens nothing.
   const queueChange = useStore(s => s.queueChange);
-  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
   const openDetailId = detail?.saveData?.id ?? null;
-  const queueActiveForOpenDetail = !!(
-    openDetailId != null
-    && typeof isSettlementClockBound === 'function'
-    && !isSettlementClockBound(openDetailId)
-  );
+  const queueActiveForOpenDetail = !!(openDetailId != null);
 
   // ── Cross-save cascade (rename / link / unlink) + change-queue replay seam ──
   // Extracted to a co-located hook to keep this surface under the size ratchet.

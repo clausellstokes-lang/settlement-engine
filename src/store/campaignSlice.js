@@ -754,6 +754,72 @@ export const createCampaignSlice = (set, get) => {
     return added;
   },
 
+  /**
+   * Phase 4b — stash the DEFERRED regional impacts produced by a campaign-member
+   * change-queue commit. The commit applies the settlement-LOCAL change now but
+   * defers the cross-settlement (regional) propagation to the next Advance: the
+   * impacts are computed at commit and parked on `worldState.deferredImpacts`,
+   * NOT enqueued into the live `regionalGraph.queuedImpacts`. The next
+   * `advanceCampaignWorld` folds the whole `deferredImpacts` bucket into
+   * `queuedImpacts` exactly once and clears it, so the change can never
+   * propagate twice (the double-propagation guard — see R1).
+   *
+   * This is a read-modify-write of ONLY the deferred bucket on the live campaign
+   * (it never rewrites a stale full-world snapshot — see R3), and it does NOT
+   * bump `worldState.tick` (a commit is not an Advance — see R2). Persistence is
+   * the flush's job (the 069 RPC carries this snapshot atomically with the
+   * settlement rows); this action only mutates local state.
+   * @param {string} campaignId
+   * @param {Array<object>} impacts
+   * @returns {number} the deferred-impact count after the stash (0 = no-op)
+   */
+  stashDeferredRegionalImpacts: (campaignId, impacts) => {
+    if (!campaignId || !Array.isArray(impacts) || impacts.length === 0) return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredImpacts) ? worldState.deferredImpacts : [];
+      // De-dupe by impact id so a re-commit of the same staged event (e.g. a
+      // failed-then-retried flush) cannot park two copies of one impact.
+      const byId = new Map(existing.map(i => [String(i.id), i]));
+      for (const impact of impacts) {
+        if (!impact || impact.id == null) continue;
+        byId.set(String(impact.id), cloneJson(impact));
+      }
+      const deferredImpacts = [...byId.values()];
+      count = deferredImpacts.length;
+      c.worldState = { ...worldState, deferredImpacts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
+   * Phase 4b — the Realm cue count: how many DISTINCT member settlements have a
+   * committed-but-not-yet-propagated change waiting for the next Advance.
+   * Counted off the deferred impacts' source settlement (each impact carries the
+   * settlement whose edit produced it). Zero when nothing is pending (the cue
+   * hides), and it clears the moment an Advance folds + drains the bucket.
+   * @param {string} campaignId
+   * @returns {number}
+   */
+  pendingPropagationCount: (campaignId) => {
+    const c = (get().campaigns || []).find(x => String(x.id) === String(campaignId));
+    const deferred = c?.worldState?.deferredImpacts;
+    if (!Array.isArray(deferred) || deferred.length === 0) return 0;
+    const sources = new Set();
+    for (const impact of deferred) {
+      const src = impact?.sourceSettlementId ?? impact?.originSettlementId ?? impact?.source ?? null;
+      sources.add(src != null ? String(src) : `impact:${impact?.id}`);
+    }
+    return sources.size;
+  },
+
   /** Cancel a queued intention before the next tick resolves it. */
   cancelQueuedEvent: (campaignId, queueId) => {
     let removed = false;

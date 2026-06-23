@@ -62,6 +62,7 @@ function loadWorldPulse() {
 import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
+  queueRegionalImpacts,
 } from '../domain/region/index.js';
 // LIGHT, sync schema helpers (leaf modules — no heavy transitive deps). Imported
 // from the leaves (not the barrel) so this slice has NO top-level edge to
@@ -259,6 +260,26 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       const drained = drainCampaignQueueIntoState(state, c, worldState, now);
       c.worldState = drained.worldState;
       drainedPartyImpacts = drained.partyImpacts || [];
+      // Phase 4b — fold any DEFERRED regional impacts (parked by campaign-member
+      // change-queue commits since the last Advance) into the live queuedImpacts
+      // EXACTLY ONCE, then clear the bucket. This is the consume-side of the
+      // double-propagation guard: the commit did NOT enqueue these into the graph
+      // (it only stashed them on worldState.deferredImpacts), so this fold is the
+      // single point at which the deferred regional ripple becomes real. Done
+      // BEFORE priorQueuedIds is captured below so the analytics diff treats them
+      // as this pulse's new propagation; they then age via the normal delayTicks
+      // path (advanceCampaignRegionalImpacts), exactly like an immediate enqueue.
+      // After the fold the bucket is emptied, so a SECOND Advance finds nothing
+      // to fold — structurally impossible to double-apply.
+      {
+        const deferred = Array.isArray(c.worldState.deferredImpacts) ? c.worldState.deferredImpacts : [];
+        if (deferred.length > 0) {
+          c.regionalGraph = queueRegionalImpacts(c.regionalGraph, deferred, { now });
+        }
+        if ('deferredImpacts' in c.worldState) {
+          c.worldState = { ...c.worldState, deferredImpacts: [] };
+        }
+      }
       // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)
       // draft, so their values are draft proxies that Immer revokes the moment
       // this producer returns. Lift them to plain objects now (mirroring the

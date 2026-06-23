@@ -42,6 +42,7 @@
  */
 
 import { cloneJson, persistSaveUpdate, pickleCampaignState } from './settlementSliceHelpers.js';
+import { persistCampaignLocalCommit, cacheCampaignState } from './campaignSliceShared.js';
 
 /**
  * @typedef {'event'|'rename'|'link'|'unlink'} OrderType
@@ -228,6 +229,21 @@ export function createChangeQueueSlice(set, get) {
       const preEventLog = Array.isArray(get().eventLog) ? cloneJson(get().eventLog) : [];
       const preSystemState = get().systemState ? cloneJson(get().systemState) : null;
       const preEditedAt = get().editedAt || null;
+      // Phase 4b — a campaign-member commit STASHES deferred regional impacts onto
+      // the campaign worldState during replay (applyEvent under flushApplyLocalOnly).
+      // Snapshot the pre-flush deferred bucket + regional graph so a FAILED commit
+      // rolls them back too (no half-staged propagation), keeping the retry clean.
+      const preCampaign = (() => {
+        const c = (get().campaigns || []).find(
+          x => (x.settlementIds || []).map(String).includes(key),
+        );
+        if (!c) return null;
+        return {
+          id: c.id,
+          deferredImpacts: cloneJson(c.worldState?.deferredImpacts) || [],
+          regionalGraph: cloneJson(c.regionalGraph) || null,
+        };
+      })();
 
       // Does the queue touch a PARTNER row (link / unlink / a rename whose
       // cascade rewrites neighbour rows)? Those orders' cascades run in the
@@ -243,7 +259,22 @@ export function createChangeQueueSlice(set, get) {
         return { ok: false, error: 'These changes could not be saved. They are still queued — try again.' };
       }
 
-      set(state => { state.changeQueueFlushing = true; state.flushSuppressPersist = true; });
+      // Phase 4b — is this a CAMPAIGN-MEMBER commit (clock-bound + canon)? If so
+      // the replay applies each event to THIS settlement LOCALLY (flushApplyLocalOnly
+      // bypasses applyEvent's clock-bound short-circuit) + DEFERS the regional
+      // propagation (parked on worldState.deferredImpacts for the next Advance),
+      // and the end-of-batch persist routes through the 069 atomic RPC instead of
+      // the single-row persistSaveUpdate. Off a campaign member (standalone) this
+      // is false and the path below is byte-unchanged (Phase 4a/4a.2 preserved).
+      const isClockBound = typeof get().isSettlementClockBound === 'function'
+        && get().isSettlementClockBound(saveId);
+      const isCampaignCommit = !!(isClockBound && get().phase === 'canon');
+
+      set(state => {
+        state.changeQueueFlushing = true;
+        state.flushSuppressPersist = true;
+        if (isCampaignCommit) state.flushApplyLocalOnly = true;
+      });
 
       let linkSettlement = null;
       // The UNION of every save row the cascades touched LOCALLY (this
@@ -328,7 +359,43 @@ export function createChangeQueueSlice(set, get) {
         }
 
         let persistedOk = true;
-        if (hasCascade) {
+        if (isCampaignCommit) {
+          // Phase 4b — atomic campaign-member commit via the 069 RPC. The
+          // write-set is the union of affected settlement rows (this settlement +
+          // any link/unlink/rename partner) PLUS the campaign snapshot carrying
+          // the deferred-impact marker (worldState.deferredImpacts), all in ONE
+          // transaction. expectedTick=null inside the helper so the forward
+          // stale-tick guard never drops a non-advance commit (R2). The local
+          // savedSettlements mirror was already refreshed above, so the row data
+          // we read here is post-apply.
+          const liveCampaign = (after.campaigns || []).find(
+            c => (c.settlementIds || []).map(String).includes(String(saveId)),
+          );
+          if (liveCampaign) {
+            const settlementUpdates = Array.from(affectedIds).map(id => {
+              const save = (after.savedSettlements || []).find(s => String(s.id) === String(id));
+              if (!save) return null;
+              return {
+                saveId: String(id),
+                settlement: cloneJson(save.settlement),
+                campaignState: cloneJson(save.campaignState),
+              };
+            }).filter(Boolean);
+            // Cache the LIVE campaign snapshot (carrying the freshly-stashed
+            // deferred-impact marker) so a reload reconstructs the deferred bucket.
+            // The cloud RPC sends the full snapshot with expectedTick=null
+            // (last-write-wins, R3); the per-row writes are owned by
+            // persistCampaignLocalCommit (cloud: inside the 069 RPC; local: via
+            // persistSaveUpdates) since this branch does NOT run the standalone
+            // single-row persistSaveUpdate.
+            cacheCampaignState(after);
+            const outcome = await persistCampaignLocalCommit({
+              campaign: cloneJson(liveCampaign),
+              settlementUpdates,
+            });
+            persistedOk = outcome.ok !== false;
+          }
+        } else if (hasCascade) {
           // ONE atomic multi-row commit. _batchCommit (persistBatch) throws on a
           // failed write, restoring local saves/detail for ALL rows; it returns
           // false (or throws) on failure.
@@ -359,13 +426,26 @@ export function createChangeQueueSlice(set, get) {
           state.eventLog    = preEventLog;
           state.systemState = preSystemState;
           state.editedAt    = preEditedAt;
+          // Phase 4b — restore the campaign's deferred-impact bucket (+ graph) so
+          // a failed campaign commit leaves NO half-staged propagation behind.
+          if (preCampaign) {
+            const c = (state.campaigns || []).find(x => String(x.id) === String(preCampaign.id));
+            if (c) {
+              if (c.worldState) c.worldState = { ...c.worldState, deferredImpacts: preCampaign.deferredImpacts };
+              if (preCampaign.regionalGraph) c.regionalGraph = preCampaign.regionalGraph;
+            }
+          }
         });
         const msg = e?.message === 'persist_failed'
           ? 'Those changes could not be saved. They are still queued — try again.'
           : (e?.message || 'The commit failed. Your changes are still queued.');
         return { ok: false, error: msg, settlement: preSettlement };
       } finally {
-        set(state => { state.changeQueueFlushing = false; state.flushSuppressPersist = false; });
+        set(state => {
+          state.changeQueueFlushing = false;
+          state.flushSuppressPersist = false;
+          state.flushApplyLocalOnly = false;
+        });
       }
     },
   };
