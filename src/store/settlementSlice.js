@@ -542,6 +542,16 @@ export const createSettlementSlice = (set, get) => ({
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
   pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
 
+  // Change-queue flush seam (R2 — Double-applying mitigation). When the
+  // change-queue commits, it replays each order through the SAME executors
+  // (applyEvent / renameSettlement) that run on a direct apply. Those
+  // executors persist immediately by default, which during a flush would mean
+  // N cloud writes instead of one atomic commit. While this flag is set the
+  // executors mutate local state + the savedSettlements mirror as usual but
+  // SKIP their own persistSaveUpdate call — the flush owns the single
+  // end-of-batch persist. Always restored to false in the flush's finally.
+  flushSuppressPersist: false,
+
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
   // appoint one of the engine-suggested successors. Cleared by the
@@ -1348,7 +1358,56 @@ export const createSettlementSlice = (set, get) => ({
         }
       }
     });
-    if (persist) persistSaveUpdate(id, persist);
+    // R2: a change-queue flush replays renameSettlement and owns the single
+    // atomic commit, so defer this row's cloud write while suppressed.
+    if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
+    return recorded;
+  },
+
+  /**
+   * Record a CANON-only flavor entry on the active settlement's timeline,
+   * generalizing the RENAME_SETTLEMENT precedent (above) so every committed
+   * change-queue order leaves a chronicle line. Used by the change-queue flush
+   * for link / unlink orders, which bypass applyEvent and so would otherwise
+   * record nothing in-world.
+   *
+   * Flavor-only contract (identical to RENAME_SETTLEMENT): NO systemState delta,
+   * NO entity mutation, NO PRNG draw — determinism and the canon coherence flow
+   * are untouched. The entry carries `flavor:true` AND stamps the current
+   * systemState as `beforeState` so undoLastEvent (R3) pops it as a no-op delta
+   * rather than restoring an undefined systemState.
+   *
+   * No-op unless the active settlement is in canon phase. Does NOT persist on
+   * its own — the caller (flush) owns the single atomic commit; the mutated
+   * eventLog rides along in that save's campaignState.
+   *
+   * @param {{ type: string, narrativeSummary: string, targetId?: string|null }} entry
+   * @returns {boolean} true when an entry was appended.
+   */
+  recordCanonFlavorEntry: ({ type, narrativeSummary, targetId = null }) => {
+    if (get().phase !== 'canon') return false;
+    const now = new Date().toISOString();
+    let recorded = false;
+    set(state => {
+      if (state.phase !== 'canon' || !Array.isArray(state.eventLog)) return;
+      state.eventLog.push({
+        id: `flavor.${type}.${Date.now()}.${state.eventLog.length}`,
+        type,
+        targetId,
+        timestamp: now,
+        // Flavor only — a recorded line of in-world history, no afterState delta.
+        narrativeSummary,
+        // R3 undo-safety: a flavor entry carries no real state transition. Stamp
+        // the current systemState as beforeState so undoLastEvent's
+        // `systemState = popped.beforeState` is a no-op, and mark it flavor so a
+        // future undo refinement can skip it entirely.
+        flavor: true,
+        beforeState: state.systemState,
+        afterState: state.systemState,
+      });
+      state.editedAt = now;
+      recorded = true;
+    });
     return recorded;
   },
 
@@ -1697,10 +1756,15 @@ export const createSettlementSlice = (set, get) => ({
       if (typeof afterState.updateSavedSettlement === 'function') {
         afterState.updateSavedSettlement(activeSaveId, savePartial);
       }
-      persistSaveUpdate(activeSaveId, {
-        settlement: savePartial.settlement,
-        campaignState: savePartial.campaignState,
-      });
+      // R2: during a change-queue flush, defer the cloud write to the flush's
+      // single atomic commit. The local mirror above still updates so the
+      // next replayed order threads off fresh state.
+      if (!afterState.flushSuppressPersist) {
+        persistSaveUpdate(activeSaveId, {
+          settlement: savePartial.settlement,
+          campaignState: savePartial.campaignState,
+        });
+      }
     }
 
     // Propagate the committed event into the campaign world engine — regional

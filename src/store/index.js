@@ -1,5 +1,5 @@
 /**
- * store/index.js — Unified Zustand store with 14 slices.
+ * store/index.js — Unified Zustand store with 15 slices.
  *
  * Slices:
  *   auth              – user session, tier (anon / free / premium), permissions
@@ -16,6 +16,7 @@
  *   customContent     – user-authored institutions / resources / trade routes
  *   onboarding        – first-run coaching + nudge state
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
+ *   changeQueue       – per-settlement pending-changes queue (stage → commit)
  *
  * Usage:
  *   import { useStore } from '../store';
@@ -41,6 +42,7 @@ import { createCampaignWorldPulseSlice } from './campaignWorldPulseSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
+import { createChangeQueueSlice }   from './changeQueueSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
 
@@ -86,6 +88,11 @@ export const useStore = create(
           ...createCustomContentSlice(set, get),
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),
+          // Per-settlement pending-changes queue (stage → commit). Transient by
+          // construction — `changeQueues` is intentionally absent from
+          // partialize below, like `settlement` itself: a reload discards the
+          // open settlement and its uncommitted draft together.
+          ...createChangeQueueSlice(set, get),
         })),
         {
           name: 'settlementforge',

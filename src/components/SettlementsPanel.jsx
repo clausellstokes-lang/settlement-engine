@@ -8,6 +8,7 @@ import {generateCrossSettlementConflicts} from '../generators/crossSettlementCon
 import {getAllModifiers} from '../lib/relationshipGraph.js';
 import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
+import { registerLinkExecutor } from '../store/changeQueueSlice.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -523,6 +524,42 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if (removedEntry?.id) modifiedIds.push(removedEntry.id);
     persistBatch(updatedSaves, modifiedIds);
   };
+
+  // ── Change-queue cascade executor ──────────────────────────────────────────
+  // The change-queue flush (store/changeQueueSlice.flushQueue) replays each
+  // staged order through its existing executor. Event + rename(settlement-name +
+  // canon record) orders run inside the store, but the CROSS-SAVE cascades —
+  // the neighbour/ai_data rename cascade and the neighbour link/unlink writes —
+  // own React `detail`/`saves` state here and cannot run in the store. We
+  // register a thin replay executor that runs the right cascade per order; it is
+  // re-registered on every render so it always closes over the CURRENT
+  // detail/saves (never a stale snapshot). The cascades persist their own
+  // multi-row writes via persistBatch (the atomicity owner for cross-row), so
+  // the flush's single-row dossier persist does not conflict.
+  //
+  // SCOPE NOTE (flagged deviation): only the rename cascade is wired through the
+  // queue here. Link / unlink remain immediate-apply (their existing behaviour),
+  // because deferring a multi-row link commit safely needs the R4 index-drift
+  // fix + dual-row staging, which is the highest-risk slice of this change. The
+  // executor refuses link/unlink orders so the flush surfaces a clear error
+  // rather than silently corrupting a partner row.
+  useEffect(() => {
+    registerLinkExecutor(async (order) => {
+      try {
+        if (order?.type === 'rename') {
+          const { renameType, targetId, oldName, newName } = order.payload || {};
+          applyRename(renameType, targetId, oldName, newName);
+          return { ok: true, settlement: useStore.getState().settlement };
+        }
+        // Link/unlink are not deferred yet — see SCOPE NOTE above.
+        return { ok: false };
+      } catch (e) {
+        console.warn('[changeQueue] cascade executor failed:', e);
+        return { ok: false };
+      }
+    });
+    return () => registerLinkExecutor(null);
+  });
 
   // (The direct-edit path — onEditSettlement, feeding the Roster & Tune
   // correction editor — was removed with that editor: every settlement

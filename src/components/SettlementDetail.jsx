@@ -31,6 +31,11 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
+// Fires after a change-queue commit on a NARRATED save: the prose was written
+// against the pre-commit state, so the modal offers regenerate / continue-raw.
+// Moved here from EventComposer (apply no longer commits; the commit is the
+// queue flush), so the notice fires once per commit, not per staged event.
+import StaleNarrativeModal from './StaleNarrativeModal.jsx';
 import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // The Narrated/Raw chip below uses the StateBadge primitive rather than
@@ -77,7 +82,11 @@ export default function SettlementDetail({
   saves,
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
-  handleLink, removeNeighbour, applyRename,
+  // applyRename is no longer consumed directly here: the rename now STAGES on the
+  // change-queue and its cascade is replayed at commit by the executor
+  // SettlementsPanel registers (registerLinkExecutor). The prop is still passed
+  // by the parent, so it is accepted-but-ignored rather than removed.
+  handleLink, removeNeighbour,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
 
@@ -118,6 +127,13 @@ export default function SettlementDetail({
   // rather than firing on a single unguarded click (P10).
   const [confirmRemoveNeighbour, setConfirmRemoveNeighbour] = useState(null);
   const [pdfError, setPdfError] = useState(null);
+  // Change-queue soft-refresh: bumped on every successful commit and appended to
+  // the dossier's resetKeys + the OutputContainer key, so the re-derived
+  // committed state re-renders cleanly WITHOUT a reload (which would lose the
+  // open settlement — the detail view is React state, not persisted store).
+  const [dossierRefreshKey, setDossierRefreshKey] = useState(0);
+  // Post-commit staleness notice (narrated saves only): null | { label }.
+  const [staleNotice, setStaleNotice] = useState(null);
 
   // Pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -141,7 +157,9 @@ export default function SettlementDetail({
   // freeze). Post-canon a rename still applies, but it is recorded as a flavor
   // timeline entry since canon state is recorded — this store action owns that
   // record; the parent applyRename owns the name + neighbour/ai_data cascade.
-  const renameSettlement = useStore(s => s.renameSettlement);
+  // Change-queue staging for renames (apply now stages; commit replays the
+  // settlement-name canon record + cross-save cascade through the flush).
+  const queueChange = useStore(s => s.queueChange);
   // Next-action-rail inputs (reuse existing selectors; no new store fields).
   const canonize = useStore(s => s.canonize);
   const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
@@ -211,21 +229,63 @@ export default function SettlementDetail({
     await revertCurrentToRaw(saveId);
   };
 
-  // Wrapper: call parent applyRename then clear local edit state
+  // Wrapper: STAGE the rename on the change-queue (it commits at "Save N
+  // changes", not on this click), then clear local edit state. The rename's
+  // existing cascade is replayed at flush time through the executor registered
+  // in SettlementsPanel — WHAT it does is unchanged, only WHEN.
   const handleApplyRename = (type, id, oldName, newName) => {
-    // NPC + faction names freeze at canonization — guard even though the
-    // affordance is hidden. The settlement's OWN name is exempt: it is always
-    // renameable, and post-canon the change is recorded as a flavor entry.
+    // NPC + faction names freeze at canonization — guard at enqueue time even
+    // though the affordance is hidden (the flush re-checks too, defense in
+    // depth). The settlement's OWN name is exempt: always renameable, and
+    // post-canon the change records a flavor entry when the queue commits.
     if (isCanonLocked && (type === 'npc' || type === 'faction')) return;
-    if (type === 'settlement' && isCanonLocked && typeof renameSettlement === 'function') {
-      // Record the canon flavor timeline entry (RENAME_SETTLEMENT). The parent
-      // applyRename below still performs the name set + neighbour/ai_data
-      // cascade; both write the same name, so the order is immaterial.
-      renameSettlement(id, newName);
+    const trimmed = String(newName || '').trim();
+    if (!trimmed || trimmed === oldName) { setEditingName(null); setEditDraft(''); return; }
+    if (saveId) {
+      const label = type === 'settlement'
+        ? `Rename settlement to ${trimmed}`
+        : `Rename ${oldName || 'this'} to ${trimmed}`;
+      queueChange(saveId, {
+        type: 'rename',
+        humanLabel: label,
+        payload: { renameType: type, targetId: id, oldName, newName: trimmed },
+      });
     }
-    applyRename(type, id, oldName, newName);
     setEditingName(null);
     setEditDraft('');
+  };
+
+  // Soft-refresh after a change-queue commit. The flush already mutated the
+  // store (settlement / eventLog / systemState) and persisted atomically; here
+  // we re-derive the React `detail` from that committed settlement and bump the
+  // dossier key so every derived selector re-runs against fresh state. NO reload
+  // — the open settlement is preserved (R5: detail.settlement is kept in lockstep
+  // with the store settlement the Workshop read surfaces consume).
+  const handleQueueCommitted = (committedSettlement) => {
+    const live = useStore.getState();
+    const nextSettlement = committedSettlement || live.settlement;
+    if (nextSettlement) {
+      setDetail(d => {
+        if (!d) return d;
+        const nextSaveData = {
+          ...(d.saveData || {}),
+          settlement: nextSettlement,
+          campaignState: {
+            ...(d.saveData?.campaignState || {}),
+            phase: live.phase,
+            eventLog: Array.isArray(live.eventLog) ? [...live.eventLog] : [],
+            systemState: live.systemState || d.saveData?.campaignState?.systemState,
+            editedAt: live.editedAt || d.saveData?.campaignState?.editedAt,
+          },
+          timestamp: live.editedAt || d.saveData?.timestamp,
+        };
+        return { ...d, settlement: nextSettlement, saveData: nextSaveData };
+      });
+    }
+    // Key-bump forces a clean dossier remount against the committed state.
+    setDossierRefreshKey(k => k + 1);
+    // Narrated saves: the prose is now stale relative to the committed change.
+    if (narrated) setStaleNotice({ label: 'your committed changes' });
   };
 
   const handleRegionalImpactApplied = (result) => {
@@ -513,7 +573,7 @@ export default function SettlementDetail({
           <FeatureErrorBoundary
             label="SettlementDetail.output"
             kind="react.render.dossier"
-            resetKeys={[saveId]}
+            resetKeys={[saveId, dossierRefreshKey]}
             fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
           >
             <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
@@ -522,6 +582,9 @@ export default function SettlementDetail({
                   dossier header in edit mode (the single consolidated rename
                   control); the commit routes through applyRename('settlement', …). */}
               <OutputContainer
+                // Key-bump on commit forces a clean remount so all derived
+                // selectors re-run against the soft-refreshed committed state.
+                key={`dossier-${saveId}-${dossierRefreshKey}`}
                 settlement={detail.settlement}
                 readOnly
                 saveId={saveId}
@@ -602,6 +665,7 @@ export default function SettlementDetail({
         save={detail.saveData || detail}
         editMode={editMode}
         canEdit={canEdit}
+        onQueueCommitted={handleQueueCommitted}
         changeExtras={editMode && (
           // ── Relationship cluster ── Link Neighbour, the existing Neighbour
           // Network list, and the cascading Network Effects, grouped tight
@@ -682,6 +746,15 @@ export default function SettlementDetail({
           is set inside applyEvent() in the slice, so the modal mounts
           here at the dossier level rather than at App-root. */}
       <SuccessorPrompt />
+
+      {/* Post-commit staleness notice. Fires once per change-queue commit on a
+          narrated save (the prose predates the committed change), offering
+          regenerate / continue-with-raw. */}
+      <StaleNarrativeModal
+        open={!!staleNotice}
+        changeLabel={staleNotice?.label}
+        onClose={() => setStaleNotice(null)}
+      />
 
       {/* ── Lifecycle / regional cluster ── regional impact, chronicle history,
           and the rarely-wanted dossier-discarding regenerate reset, kept LAST

@@ -52,6 +52,7 @@ import {
 
 // Write controls (premium). Mounted only in edit mode.
 import EventComposer from './EventComposer.jsx';
+import ChangeQueuePanel from './ChangeQueuePanel.jsx';
 import PrimaryDeityPicker from './PrimaryDeityPicker.jsx';
 import Timeline from './Timeline.jsx';
 import PendingIntentions from './PendingIntentions.jsx';
@@ -198,9 +199,10 @@ function GroupCard({ id, title, blurb, children }) {
  *   editMode?: boolean,
  *   canEdit?: boolean,
  *   changeExtras?: React.ReactNode,
+ *   onQueueCommitted?: (settlement: any) => void,
  * }} props
  */
-export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null }) {
+export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null, onQueueCommitted = null }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
@@ -334,8 +336,10 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
         >
           {showWrite ? (
             <>
-              {/* Future change-queue slots here — between the read of current
-                  state and the composer that mutates it. Immediate-apply today. */}
+              {/* The change-queue: staged orders sit here, between the read of
+                  current state and the composer that mutates it. Hidden when the
+                  queue is empty. Committing soft-refreshes the dossier above. */}
+              <ChangeQueuePanel saveId={saveId} onCommitted={onQueueCommitted} />
               <CoherencePanel />
               <EventComposer />
               <PendingIntentions />

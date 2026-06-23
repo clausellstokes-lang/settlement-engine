@@ -1,12 +1,16 @@
 /**
- * EventComposer — Pick an event, optionally preview, then apply.
+ * EventComposer — Pick an event, optionally preview, then stage it.
  *
  * Available in both phases. In draft mode the same engine runs but
- * nothing is logged ("see what would happen"). In canon mode applying
- * adds a timeline entry. The store handlers gate the log persistence;
- * this UI is identical in both modes. Preview is a look-ahead, not a
- * gate — Apply is always offered. On a narrated save, a successful
- * apply raises the StaleNarrativeModal (the prose no longer matches).
+ * nothing is logged ("see what would happen"). In canon mode the staged
+ * event adds a timeline entry when the queue commits. Preview is a
+ * look-ahead, not a gate — Apply is always offered.
+ *
+ * Apply no longer commits immediately: it STAGES the assembled event in the
+ * per-settlement change-queue (ChangeQueuePanel above). The queue's
+ * "Save N changes" replays each order through the same applyEvent path and
+ * persists atomically, then soft-refreshes the dossier. The post-commit
+ * staleness notice fires from that commit seam (SettlementDetail), not here.
  */
 
 import { useState, useMemo } from 'react';
@@ -23,7 +27,6 @@ import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPowe
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
-import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { campaignPeerOptions, PARTY, PARTY_BG } from './eventComposer/helpers.js';
@@ -44,20 +47,17 @@ export default function EventComposer() {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
-  const applyEvent   = useStore(s => s.applyEvent);
-  const applyPendingPreview = useStore(s => s.applyPendingPreview);
   const dismissPreview = useStore(s => s.dismissPreview);
   const pendingPreview = useStore(s => s.pendingPreview);
   const previewBatch   = useStore(s => s.previewEventBatch);
-  const applyBatch     = useStore(s => s.applyEventBatch);
   const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
   const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
-  // Staleness wiring: a committed change on a NARRATED save makes the AI
-  // prose out of date, so a successful apply raises StaleNarrativeModal.
-  // Boolean selector — the narrative blobs are large and we only need "is
-  // there one". Nothing can go stale on a raw (never-narrated) save.
-  const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
-
+  // Change-queue wiring: Apply now STAGES the assembled event (it commits at the
+  // queue's "Save N changes", not on this click). The event is built exactly as
+  // before so the committed event is byte-identical to a direct apply. The
+  // post-commit staleness notice moves to ChangeQueuePanel's commit seam
+  // (SettlementDetail.onQueueCommitted) — nothing mutates on this click.
+  const queueChange = useStore(s => s.queueChange);
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
   const [description, setDesc]  = useState('');
@@ -99,7 +99,6 @@ export default function EventComposer() {
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
   const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
-  const [staleNotice, setStaleNotice] = useState(null);        // post-apply "narrative is now stale" modal: null | { label }
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -262,14 +261,20 @@ export default function EventComposer() {
     // requires typing the settlement name to confirm. Block apply until it matches.
     const evType = pendingPreview?.event?.type || type;
     if (evType === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
-    // Audit fix: prefer committing the pending preview (the exact event
-    // the user previewed) over building a new event. Apply no longer
-    // requires a preview (preview is an optional look-ahead, not a gate),
-    // so applyEvent(buildEvent()) is the normal path whenever the user
-    // applies directly.
-    const entry = pendingPreview?.event
-      ? applyPendingPreview()
-      : applyEvent(buildEvent());
+    // Build the event exactly as a direct apply would: prefer the previewed
+    // event (the exact thing the DM saw) over re-building, preserving the
+    // preview==apply byte-identity invariant. Then STAGE it instead of
+    // committing — the queue's "Save N changes" runs the same applyEvent later.
+    const builtEvent = pendingPreview?.event || buildEvent();
+    if (activeSaveId) {
+      const spec = EVENT_REGISTRY[evType];
+      const humanLabel = (() => {
+        try { return spec?.narrate?.(builtEvent, settlement) || spec?.label || evType; }
+        catch { return spec?.label || evType; }
+      })();
+      queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: builtEvent } });
+      if (pendingPreview?.event) dismissPreview();
+    }
     setTarget('');
     setDesc('');
     setPartyCaused(false);
@@ -278,15 +283,8 @@ export default function EventComposer() {
     setCustomResourceName('');
     setInstigatorNeighbour('');
     setTradeTarget('');
-    // Post-apply staleness notice: the event committed (and stays committed
-    // regardless of what the modal answers) — on a narrated save the AI
-    // prose was written against the previous state, so offer regenerate /
-    // continue-with-raw. Raw saves have nothing to go stale. A clock-bound
-    // settlement only QUEUED the event (entry.queued) — nothing changed yet,
-    // so the narrative isn't stale until the next World Pulse resolves it.
-    if (entry && !entry.queued && narrated) {
-      setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
-    }
+    // The staleness notice moves to COMMIT time (nothing has mutated here yet —
+    // see ChangeQueuePanel's onCommitted seam in SettlementDetail).
   }
 
   return (
@@ -693,23 +691,25 @@ export default function EventComposer() {
           onClear={() => { setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
           onApply={() => {
-            const r = applyBatch(staged);
-            if (r?.ok) {
-              // One staleness notice for the whole batch — the modal fires
-              // once per apply click, never once per staged event. Skip it when
-              // the batch only queued (clock-bound): nothing changed yet.
-              if (narrated && !r.queuedOnly) setStaleNotice({ label: `${staged.length} changes` });
-              setStaged([]);
+            // Batch apply now ENQUEUES one order per staged event (spec §2.2
+            // option a). The flush replays each through applyEvent in order, so
+            // forward references between staged events resolve exactly as the
+            // old applyEventBatch's serial re-run did. Nothing commits here.
+            if (activeSaveId) {
+              for (const ev of staged) {
+                const spec = EVENT_REGISTRY[ev?.type];
+                const humanLabel = (() => {
+                  try { return spec?.narrate?.(ev, settlement) || spec?.label || ev?.type; }
+                  catch { return spec?.label || ev?.type; }
+                })();
+                queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: ev } });
+              }
             }
+            dismissBatchPreview();
+            setStaged([]);
           }}
         />
       )}
-
-      <StaleNarrativeModal
-        open={!!staleNotice}
-        changeLabel={staleNotice?.label}
-        onClose={() => setStaleNotice(null)}
-      />
 
       {/* Roster & Tune was removed (owner decision, 2026-06-11): its four
           sections were redundant — or worse — next to the event catalog.
