@@ -44,10 +44,12 @@
 -- OPERATOR
 --   • Apply via `supabase db push` (or the SQL editor). Additive + idempotent:
 --     CREATE OR REPLACE FUNCTION + guarded GRANT, safe to re-run.
---   • Pairs with the client world-pulse persist tail. The client may continue to
---     use the serial-upsert path (the round-1 guard keeps THAT from producing a
---     campaign-ahead hybrid); call this RPC to additionally close the residual
---     settlement-ahead partial state described above. No data backfill required.
+--   • HARD DEPENDENCY: the client world-pulse persist tail (flushWorldPulsePersist)
+--     now routes the ENTIRE advance write-set through THIS RPC in cloud mode — there
+--     is no serial-upsert fallback (a fallback would re-open the non-atomic hole).
+--     Once the client ships, this migration MUST be applied or every advance
+--     degrades to the honest cloud-pending banner (applied locally, never reaching
+--     the cloud). No data backfill required.
 --   • Rollback: `DROP FUNCTION IF EXISTS public.persist_world_pulse_advance(uuid, jsonb, jsonb, bigint);`
 -- ────────────────────────────────────────────────────────────────────────────
 
@@ -121,7 +123,9 @@ begin
   end if;
 
   -- Optional stale-apply guard: only advance if this tick is strictly ahead of the
-  -- stored one. A duplicate re-apply of an already-landed tick is a no-op.
+  -- stored one. A duplicate re-apply of an already-landed tick is a no-op. The
+  -- envelope mirrors mapDataForCampaign: the campaign lives under map_data.campaign,
+  -- so the tick is at {campaign,worldState,tick} (legacy unwrapped rows fall back).
   if p_expected_tick is not null then
     v_current_tick := coalesce(
       nullif(v_campaign.map_data #>> '{campaign,worldState,tick}', '')::bigint,
@@ -165,15 +169,19 @@ begin
     end if;
   end loop;
 
-  -- 2) The campaign snapshot. Mirrors rowForCampaign: the full envelope lives in
-  --    map_data; the derived columns are refreshed from it when present.
+  -- 2) The campaign snapshot. Mirrors rowForCampaign EXACTLY: the full map_data
+  --    envelope (mapDataForCampaign → { kind, version, campaign }) is stored
+  --    verbatim, and each derived column is refreshed from the SAME paths
+  --    rowForCampaign reads — campaign.name, campaign.mapState.seed/placements,
+  --    campaign.regionalGraph.channels — so the atomic write lands a row
+  --    byte-identical to the serial upsert path.
   if p_campaign_snapshot is not null and jsonb_typeof(p_campaign_snapshot) = 'object' then
     update public.saved_maps m
        set map_data            = p_campaign_snapshot,
-           name                = coalesce(p_campaign_snapshot ->> 'name', m.name),
-           map_seed            = coalesce(p_campaign_snapshot #>> '{mapState,seed}', m.map_seed),
-           burg_settlement_map = coalesce(p_campaign_snapshot #> '{mapState,placements}', m.burg_settlement_map),
-           supply_chain_config = coalesce(p_campaign_snapshot #> '{regionalGraph,channels}', m.supply_chain_config),
+           name                = coalesce(p_campaign_snapshot #>> '{campaign,name}', m.name),
+           map_seed            = coalesce(p_campaign_snapshot #>> '{campaign,mapState,seed}', m.map_seed),
+           burg_settlement_map = coalesce(p_campaign_snapshot #> '{campaign,mapState,placements}', m.burg_settlement_map),
+           supply_chain_config = coalesce(p_campaign_snapshot #> '{campaign,regionalGraph,channels}', m.supply_chain_config),
            updated_at          = now()
      where m.id = p_campaign_id
        and m.user_id = v_uid;

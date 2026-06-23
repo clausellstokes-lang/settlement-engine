@@ -49,7 +49,7 @@
 import { deriveSimulationSpine } from './simulationSpine.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveMagicProfile } from './magicProfile.js';
-import { deriveAllCapacities } from './capacityModel.js';
+import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -90,18 +90,14 @@ function collectUserEditsSummary(settlement) {
 // labor/craft/transport are declared noise (and religious_welfare is not
 // one of the five); handing the AI all nine bands invited it to narrate
 // shortfalls in lenses the product treats as internal.
-
-const CANONICAL_CAPACITY_LENSES = Object.freeze([
-  'food_production',
-  'defense',
-  'administrative', // the governance lens
-  'healing',
-  'magical',
-]);
+//
+// The five-lens set is the SHARED VISIBLE_CAPACITY_LENSES from
+// capacityModel.js (the one source of truth), so a future lens change
+// updates a single constant rather than two duplicated lists.
 
 function canonicalCapacityBands(bands) {
   const out = {};
-  for (const name of CANONICAL_CAPACITY_LENSES) {
+  for (const name of VISIBLE_CAPACITY_LENSES) {
     if (bands && bands[name] !== undefined) out[name] = bands[name];
   }
   return out;

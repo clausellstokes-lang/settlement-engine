@@ -213,26 +213,86 @@ export async function persistSaveUpdates(updates = []) {
  * instead, exactly like the forward case: the advance is real locally, only the
  * cloud campaign row is behind.
  *
- * The retry is idempotent: the campaign upsert is id-keyed and the per-save
- * updates are last-write-wins partials, so re-applying the same advance lands the
- * identical row rather than double-applying.
+ * The retry is idempotent: the atomic RPC is id-keyed (last-write-wins on the
+ * campaign row + each settlement partial), and the optional stale-tick guard turns
+ * a duplicate re-apply of an already-landed tick into a no-op rather than a
+ * double-advance, so re-applying the same advance is safe.
+ *
+ * CLOUD PATH (migration 069): the whole write-set goes through ONE
+ * persist_world_pulse_advance call — every affected settlement AND the campaign
+ * snapshot in a single DB transaction. A FORWARD partial (settlement A lands, B
+ * fails) can no longer leave the cloud hybrid: any failure rolls the entire advance
+ * back. HARD DEPENDENCY: 069 must be applied. There is deliberately NO serial-write
+ * fallback in cloud mode — re-introducing N upserts would re-open the non-atomic
+ * hole. An RPC-missing/error result degrades to the SAME honest cloud-pending state
+ * the serial path used: the advance is real locally (already cached), only the
+ * cloud is behind, and a retry/reload reconciles.
+ *
+ * LOCAL PATH (campaigns not configured): there is no cross-row hybrid risk — a
+ * single localStorage write covers the whole campaign list and each settlement is
+ * its own keyed entry — so the original serial helpers are retained there.
+ *
+ * BACKWARD WRITES (undo): the forward stale-tick guard advances only when the
+ * stored tick is strictly BEHIND the passed expectedTick. An undo restores a PRIOR
+ * (LOWER) tick, so passing that lower tick as the guard's expectedTick would make
+ * the (higher) cloud tick fail the guard — the RPC would return stale_tick (read
+ * as success) and the cloud would NEVER revert, resurrecting the undone advance on
+ * reload. An undo is therefore a deliberate LAST-WRITE-WINS write: callers pass
+ * `backward: true`, which sends p_expected_tick = NULL so 069 skips the guard and
+ * applies the reverted snapshot unconditionally. The FORWARD advance path leaves
+ * `backward` falsy and keeps the guard (preventing a double-advance).
  */
-export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
+export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false }) {
   if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };
+
+  // ── Cloud: one atomic RPC for the entire advance write-set. ────────────────
+  if (typeof campaignService.persistWorldPulseAdvance === 'function') {
+    const campaign = (campaignPersist.snapshot || []).find(c => c?.id === campaignId);
+    if (!campaign) {
+      // The advanced campaign isn't in the snapshot — nothing coherent to persist.
+      // Treat as cloud-pending rather than silently dropping the advance.
+      try { _reportPersistFailure?.(new Error('campaign missing from snapshot; left cloud-pending')); }
+      catch { /* reporting must never throw */ }
+      return { ok: false, savesFailed: 0, campaignSynced: false };
+    }
+    // The stale-apply guard advances only if the stored tick is strictly behind
+    // this one; pass the post-advance tick so a duplicate re-apply is a no-op.
+    // A BACKWARD (undo) write must NOT be blocked by that forward guard — it
+    // restores a LOWER tick the (higher) cloud would always fail. So undo passes
+    // expectedTick = null (last-write-wins): 069 skips the guard and applies the
+    // reverted snapshot unconditionally, while a forward advance keeps the guard.
+    const tick = Number(campaign?.worldState?.tick);
+    const expectedTick = backward ? null : (Number.isFinite(tick) ? tick : null);
+    try {
+      await campaignService.persistWorldPulseAdvance({
+        campaignId,
+        campaign,
+        settlementUpdates: Array.isArray(persistUpdates) ? persistUpdates : [],
+        expectedTick,
+      });
+      // A stale_tick no-op (applied:false) means the cloud already holds this tick
+      // (a prior retry landed) — the cloud is coherent, so this is success, not a
+      // pending failure. Any genuine failure throws and is handled below.
+    } catch (e) {
+      // Any failure — a member not owned, a rejected write, or 069 not applied —
+      // rolls the WHOLE advance back in the DB (atomic). Surface the honest
+      // cloud-pending banner and let an id-keyed retry/reload reconcile. Do NOT
+      // re-throw: a throw escapes the unwrapped await in advanceCampaignWorld and
+      // invites a double advance (see the inverse-case note above).
+      console.warn('[campaignSlice] atomic world-pulse persist failed; left cloud-pending', e);
+      try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+      return { ok: false, savesFailed: 0, campaignSynced: false };
+    }
+    return { ok: true, savesFailed: 0, campaignSynced: true };
+  }
+
+  // ── Local: serial helpers (no cross-row hybrid risk in a single store). ────
   const saveOutcome = await persistSaveUpdates(persistUpdates);
   if (!saveOutcome.ok) {
-    // A settlement write failed. Do NOT commit the campaign snapshot as advanced —
-    // leave it cloud-pending so a retry (or reload) reconciles to a coherent state
-    // rather than a hybrid timeline. persistSaveUpdate already reported the
-    // failure into campaignSyncError; re-assert it in case reporting was disabled.
     try { _reportPersistFailure?.(new Error('settlement save failed; campaign left cloud-pending')); }
     catch { /* reporting must never throw */ }
     return { ok: false, savesFailed: saveOutcome.failed, campaignSynced: false };
   }
-  // Every settlement landed. Push the campaign snapshot — but a rejected campaign
-  // upsert must NOT throw out of here (it would surface a misleading "could not
-  // advance" and invite a double advance, see the inverse-case note above). Report
-  // it as cloud-pending and let an id-keyed retry/reload reconcile.
   try {
     await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
   } catch (e) {

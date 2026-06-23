@@ -81,6 +81,18 @@ const SOURCE_ANCHORS = Object.freeze({
   faction_competition: "applyMode: severity >= 0.74 ? 'proposal' : 'auto'",
   stressor_escalation: "applyMode: severity >= 0.78 ? 'proposal' : 'auto'",
   relationship_evolution: 'applyMode: severity >= 0.72 ? "proposal" : "auto"',
+  // severity-gated, newly-mapped sites (each distinct from the families above).
+  faction_institution_capture: "applyMode: severity >= 0.68 || criminalSuppression ? 'proposal' : 'auto'",
+  faction_rival_power_contest: "applyMode: severity >= 0.7 ? 'proposal' : 'auto'",
+  // A SECOND stressor gate (pressure-born birth), distinct from stressor_escalation.
+  stressor_birth: "const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);",
+  // always-proposal: unconditional 'proposal', no flag / severity / lock.
+  npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
+  faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
+  relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
+  tier_change: "candidateType: `tier_${drift.direction}`,\n    ruleId: `tier_${drift.direction}`,\n    ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    applyMode: 'proposal'",
+  // structural-proposal: auto by default; one branch routes via a proposal-only lever.
+  strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
   // auto: bounded logical consequences. Anchored on the ruleId + applyMode block
   // so a flip AT THE SITE is caught (a bare "applyMode: 'auto'" would match any of
   // the module's other auto outcomes and miss site-local drift).
@@ -118,15 +130,71 @@ describe('change-authority contract — source anchors match the policy', () => 
       }
       if (entry.authority === 'severity-gated') {
         expect(anchorReadsFlag).toBe(false);
-        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"/);
+        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|major/);
+      }
+      if (entry.authority === 'always-proposal') {
+        // No flag, no severity-driven downgrade path in the gate text.
+        expect(anchorReadsFlag).toBe(false);
+        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
+        // An always-proposal anchor must NOT be a bare auto outcome.
+        expect(SOURCE_ANCHORS[changeType]).not.toContain("applyMode: 'auto'");
+      }
+      if (entry.authority === 'structural-proposal') {
+        // Auto by default with a single branch routing to proposal.
+        expect(anchorReadsFlag).toBe(false);
+        expect(SOURCE_ANCHORS[changeType]).toContain("'proposal' : 'auto'");
       }
     });
   }
+});
+
+describe('change-authority contract — newly-mapped sites carry their live authority', () => {
+  // The npc adversarial families are forced to proposal REGARDLESS of severity.
+  // Assert the forcing list is exactly {defect, sabotage, seek_promotion,
+  // undermine_rival} so adding/removing a family (which would flip its authority)
+  // fails here.
+  test('npc adversarial families are forced to proposal independent of severity', () => {
+    const src = sourceFor('npcAgency.js');
+    expect(src).toContain(
+      "severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily)",
+    );
+  });
+
+  // tierResourceDynamics has TWO distinct applyMode gates: the real tier change
+  // (always proposal, no flag) and resource_depletion (flag + severity). Assert
+  // BOTH live so a flip at either site is caught despite sharing a module.
+  test('tierResourceDynamics keeps both the always-proposal tier gate and the flag-gated depletion gate', () => {
+    const src = sourceFor('tierResourceDynamics.js');
+    expect(src).toContain("ruleFamily: 'tier',");
+    expect(src).toContain("applyMode: 'proposal',"); // tierCandidate (always-proposal)
+    expect(src).toContain(
+      "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
+    ); // resource_depletion (flag-gated)
+  });
+
+  // relationshipEvolution has TWO distinct gates too: labelProposal (always
+  // proposal) and the severity-gated internal-drift path. Assert both live.
+  test('relationshipEvolution keeps both the always-proposal label gate and the severity-gated drift gate', () => {
+    const src = sourceFor('relationshipEvolution.js');
+    expect(src).toContain('applyMode: "proposal",'); // labelProposal (always-proposal)
+    expect(src).toContain('applyMode: severity >= 0.72 ? "proposal" : "auto"'); // internal drift (severity-gated)
+  });
+
+  // The strategy split must stay structural: only sue_for_peace passes a proposal.
+  test('strategyCandidate routes to proposal only when a proposal lever is passed', () => {
+    const src = sourceFor('settlementStrategy.js');
+    expect(src).toContain("applyMode: proposal ? 'proposal' : 'auto'");
+  });
 });
 
 describe('change-authority contract — flagged tensions are recorded, not fixed', () => {
   test('the severity-gated-bypass tension stays on the books for a product decision', () => {
     const ids = CHANGE_AUTHORITY_FLAGGED.map(f => f.id);
     expect(ids).toContain('severity-gated-families-bypass-flag');
+  });
+
+  test('the tier-authority-split tension stays on the books for a product decision', () => {
+    const ids = CHANGE_AUTHORITY_FLAGGED.map(f => f.id);
+    expect(ids).toContain('tier-authority-split-in-one-module');
   });
 });

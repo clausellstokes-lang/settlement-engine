@@ -610,7 +610,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       campaignPersist = cacheCampaignState(state);
       didUndo = true;
     });
-    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId });
+    // backward:true — an undo restores a PRIOR (lower) tick, so it MUST bypass the
+    // forward stale-tick guard (last-write-wins). Otherwise the cloud, holding the
+    // higher post-advance tick, rejects the revert as stale_tick (which the client
+    // reads as success) and the undone advance resurrects on reload. The forward
+    // advance path leaves backward falsy, keeping the guard intact.
+    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId, backward: true });
     return didUndo;
   },
 });

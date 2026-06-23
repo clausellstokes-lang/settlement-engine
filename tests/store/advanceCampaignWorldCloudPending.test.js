@@ -12,12 +12,17 @@
  * re-advance (double tick).
  *
  * These pins prove the result now carries the persistence outcome:
- *  - FORWARD: a settlement write failure tags result.cloudPending = true (so the
- *    caller renders the honest cloud-pending notice, not an unqualified success).
- *  - INVERSE: every settlement lands but the campaign upsert rejects → still tags
- *    cloudPending (the swallowed rejection no longer reads as success), and the
- *    advance does NOT throw (no bare 'could not advance' that invites a re-advance).
+ *  - FORWARD: the atomic persist RPC rejecting tags result.cloudPending = true (so
+ *    the caller renders the honest cloud-pending notice, not an unqualified success).
  *  - HAPPY PATH: a fully-persisted advance leaves cloudPending unset.
+ *
+ * Round-3 rewire: the world-pulse persist tail now routes the ENTIRE advance
+ * write-set (every member settlement + the campaign snapshot) through ONE atomic
+ * persist_world_pulse_advance RPC (migration 069), not N serial settlement upserts
+ * plus a separate campaign upsert. So the forward/inverse split collapses into a
+ * single failure mode: the one RPC either commits the whole advance or rolls it
+ * ALL back. These pins assert the RPC is what the persist tail calls, and that its
+ * rejection maps to the same honest cloud-pending banner the serial path raised.
  *
  * The tick still advances LOCALLY in every case (the advance is real; only the
  * cloud is behind) — the contract is "applied locally, retry/reload reconciles".
@@ -42,6 +47,9 @@ vi.mock('../../src/lib/campaigns.js', () => {
       cache: vi.fn((campaigns = [], ownerId = 'anon') => { cached.set(ownerId, clone(campaigns)); }),
       list: vi.fn(() => Promise.resolve([])),
       upsert: vi.fn(campaign => Promise.resolve(campaign?.id)),
+      // Round-3: the atomic world-pulse advance write. The persist tail calls THIS
+      // (one transaction for the whole write-set), not upsert + N save updates.
+      persistWorldPulseAdvance: vi.fn(() => Promise.resolve({ applied: true, settlementsWritten: 1, settlementsRequested: 1 })),
       delete: vi.fn(() => Promise.resolve()),
       isConfigured: true,
     },
@@ -133,17 +141,19 @@ describe('advanceCampaignWorld consumes the persistence outcome (cloud-pending)'
     installLocalStorage();
     localStorage.removeItem('sf_campaigns');
     campaignService.upsert.mockImplementation(c => Promise.resolve(c?.id));
+    campaignService.persistWorldPulseAdvance.mockResolvedValue({ applied: true, settlementsWritten: 1, settlementsRequested: 1 });
     saves.update.mockResolvedValue(undefined);
     primeCampaignSync([]);
   });
 
-  test('FORWARD: a settlement write failure tags result.cloudPending and surfaces the banner (no false success)', async () => {
+  test('FORWARD: the atomic persist RPC rejecting tags result.cloudPending and surfaces the banner (no false success)', async () => {
     const store = makeStore();
     seedCanonized(store);
 
-    // The member settlement write rejects — the persist tail must leave the
-    // campaign cloud-pending and the mutator must tell the caller so.
-    saves.update.mockRejectedValue(new Error('network'));
+    // The single atomic advance write rejects — the persist tail must leave the
+    // campaign cloud-pending and the mutator must tell the caller so. (The DB rolls
+    // the WHOLE write-set back, so no member is ahead of the campaign in the cloud.)
+    campaignService.persistWorldPulseAdvance.mockRejectedValue(new Error('network'));
 
     const result = await store.getState().advanceCampaignWorld(CAMPAIGN_ID, 'one_month', { now: '2026-02-01T00:00:00.000Z' });
 
@@ -155,36 +165,18 @@ describe('advanceCampaignWorld consumes the persistence outcome (cloud-pending)'
     expect(result.cloudPending).toBe(true);
     // The retryable banner was raised — the honest, single source of the failure.
     expect(store.getState().campaignSyncError).toBeTruthy();
-    // The campaign snapshot was NOT pushed to the cloud (guarded by the round-1 fix).
+    // The atomic RPC was the write path — NOT the legacy serial upsert + N saves.
+    expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledTimes(1);
     expect(campaignService.upsert).not.toHaveBeenCalled();
+    expect(saves.update).not.toHaveBeenCalled();
   });
 
-  test('INVERSE: settlements land but the campaign upsert rejects — tags cloudPending, does NOT throw (no double-advance bait)', async () => {
-    const store = makeStore();
-    seedCanonized(store);
-
-    saves.update.mockResolvedValue(undefined);                 // every settlement lands
-    campaignService.upsert.mockRejectedValue(new Error('campaign upsert rejected'));
-
-    // Load-bearing: the advance MUST resolve, not reject. A rejection would reach
-    // WorldMap's "could not advance" toast over an already-committed local tick and
-    // invite a re-advance (double tick).
-    const result = await store.getState().advanceCampaignWorld(CAMPAIGN_ID, 'one_month', { now: '2026-02-01T00:00:00.000Z' });
-
-    expect(result).toBeTruthy();
-    expect(result.ok).not.toBe(false);
-    expect(store.getState().campaigns[0].worldState.tick).toBe(1); // advanced locally
-    expect(result.cloudPending).toBe(true);                        // honest, not success
-    expect(store.getState().campaignSyncError).toBeTruthy();       // retryable banner up
-    expect(campaignService.upsert).toHaveBeenCalled();             // it WAS attempted
-  });
-
-  test('HAPPY PATH: a fully-persisted advance leaves cloudPending unset', async () => {
+  test('HAPPY PATH: a fully-persisted advance leaves cloudPending unset and routes through the atomic RPC', async () => {
     const store = makeStore();
     seedCanonized(store);
 
     saves.update.mockResolvedValue(undefined);
-    campaignService.upsert.mockImplementation(c => Promise.resolve(c?.id));
+    campaignService.persistWorldPulseAdvance.mockResolvedValue({ applied: true, settlementsWritten: 1, settlementsRequested: 1 });
 
     const result = await store.getState().advanceCampaignWorld(CAMPAIGN_ID, 'one_month', { now: '2026-02-01T00:00:00.000Z' });
 
@@ -194,6 +186,16 @@ describe('advanceCampaignWorld consumes the persistence outcome (cloud-pending)'
     // No persistence failure → no cloud-pending tag, no banner.
     expect(result.cloudPending).toBeUndefined();
     expect(store.getState().campaignSyncError).toBeNull();
-    expect(campaignService.upsert).toHaveBeenCalled();
+    // The atomic RPC carried the whole write-set; no serial upsert/save fallback.
+    expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledTimes(1);
+    expect(campaignService.upsert).not.toHaveBeenCalled();
+    expect(saves.update).not.toHaveBeenCalled();
+    // The RPC received the campaign snapshot, the settlement write-set, and the
+    // post-advance tick for the stale-apply guard.
+    const arg = campaignService.persistWorldPulseAdvance.mock.calls[0][0];
+    expect(arg.campaignId).toBe(CAMPAIGN_ID);
+    expect(arg.campaign?.id).toBe(CAMPAIGN_ID);
+    expect(Array.isArray(arg.settlementUpdates)).toBe(true);
+    expect(arg.expectedTick).toBe(1);
   });
 });

@@ -320,6 +320,10 @@ ok ".env written"
 #   - RESEND_API_KEY + RESEND_FROM_EMAIL — the logged-out password-recovery path
 #     (auth-recovery → send-email) mails the reset link through Resend; without
 #     them account recovery silently soft-fails.
+#   - ANTHROPIC_API_KEY — generate-narrative + generate-chronicle call the AI
+#     provider with it; a blank key fails every narrative generation.
+#   - STRIPE_WEBHOOK_SECRET — stripe-webhook verifies the Stripe signature with
+#     it; a blank secret rejects every webhook delivery (no credits granted).
 # This check reads the values collected above (fail-closed: a blank value counts
 # as missing) rather than re-querying the project, so it stays idempotent.
 # Each entry is "<value>:<secret-name>"; a blank value flags that secret as
@@ -334,7 +338,9 @@ for required in \
   "$PRICE_FOUNDER_LIFETIME:STRIPE_PRICE_FOUNDER_LIFETIME" \
   "$PRICE_SINGLE_DOSSIER:STRIPE_PRICE_SINGLE_DOSSIER" \
   "$RESEND_KEY:RESEND_API_KEY" \
-  "$RESEND_FROM:RESEND_FROM_EMAIL"; do
+  "$RESEND_FROM:RESEND_FROM_EMAIL" \
+  "$ANTHROPIC_KEY:ANTHROPIC_API_KEY" \
+  "$WEBHOOK_SECRET:STRIPE_WEBHOOK_SECRET"; do
   if [[ -z "${required%%:*}" ]]; then
     MISSING_REQUIRED+=("${required##*:}")
   fi
@@ -353,7 +359,9 @@ if [[ ${#MISSING_REQUIRED[@]} -gt 0 ]]; then
   echo "    missing: ${MISSING_REQUIRED[*]}"
   echo ""
   echo "  Stripe checkout fails without the price IDs; password recovery"
-  echo "  soft-fails without the Resend secrets."
+  echo "  soft-fails without the Resend secrets; AI narratives fail without"
+  echo "  ANTHROPIC_API_KEY; webhook deliveries reject without"
+  echo "  STRIPE_WEBHOOK_SECRET."
   echo ""
   echo "  Supabase URL:    $SUPABASE_URL"
   echo "  Project ref:     $PROJECT_REF"

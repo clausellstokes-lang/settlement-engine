@@ -1,31 +1,24 @@
 /**
- * flushWorldPulsePersistPartialFailure.test.js — Finding #3 (High).
+ * flushWorldPulsePersistPartialFailure.test.js — Finding #3 (High), round-3 rewire.
  *
- * The world-pulse persist tail (flushWorldPulsePersist, shared by
- * advanceCampaignWorld / applyWorldPulseProposal / recordPartyImpact) used to
- * IGNORE the success/failure of each per-settlement save and push the campaign
- * snapshot to the cloud REGARDLESS. On a PARTIAL failure — some settlement writes
- * reject while the campaign + world graph advance — the cloud campaign row moved
- * ahead of a member settlement, so a reload reconstructed a HYBRID timeline.
+ * persistSaveUpdates still COLLECTS per-update results into { ok, total, failed }
+ * (it is retained as the LOCAL-mode persist helper) — those unit pins remain.
  *
- * These pins prove the fix:
- *  - persistSaveUpdates now COLLECTS per-update results and returns an explicit
- *    outcome { ok, total, failed }.
- *  - flushWorldPulsePersist does NOT push the campaign snapshot (no campaign
- *    upsert) when any settlement write failed, leaves the campaign cloud-pending,
- *    and surfaces a retryable failure via the persist-failure reporter.
- *  - the all-success path still advances normally (campaign snapshot IS synced).
+ * The cloud persist tail (flushWorldPulsePersist) was rewired in round-3: the whole
+ * world-pulse advance write-set (every member settlement + the campaign snapshot)
+ * now goes through ONE atomic persist_world_pulse_advance RPC (migration 069), not
+ * N serial settlement upserts plus a separate campaign upsert. So the old forward
+ * (partial-settlement) and inverse (campaign-upsert) failure modes collapse into a
+ * single failure mode: the one transaction commits the whole advance or rolls it
+ * ALL back — the cloud can never go hybrid.
  *
- * The campaign upsert is the load-bearing assertion: it is the write that, if it
- * lands on a partial failure, produces the hybrid timeline on reload.
- *
- * The INVERSE direction (adversarial-review finding #3) is also pinned here: when
- * every settlement write SUCCEEDS but the campaign upsert itself rejects,
- * flushWorldPulsePersist must NOT re-throw. A throw escapes advanceCampaignWorld
- * (also unwrapped) up to WorldMap, which shows "could not advance" over an
- * already-committed local tick — so the user clicks advance again and the world
- * double-ticks. The guard swallows the rejection and surfaces the same honest,
- * retryable cloud-pending banner instead.
+ * These pins now prove:
+ *  - the cloud path calls the atomic RPC (NOT the serial upsert/save loop);
+ *  - an RPC rejection leaves the campaign cloud-pending, surfaces a retryable
+ *    failure via the persist-failure reporter, and does NOT re-throw (a throw would
+ *    escape advanceCampaignWorld to WorldMap's "could not advance" over an
+ *    already-committed local tick, inviting a double advance);
+ *  - the happy path returns campaignSynced:true with no reported failure.
  */
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
@@ -33,12 +26,13 @@ vi.mock('../../src/lib/saves.js', () => ({
   saves: { update: vi.fn() },
 }));
 
-// Real campaignSync, but a controllable campaign service. syncCampaignSnapshot →
-// syncCampaignChanges → service.upsert is the cloud campaign write we watch.
+// Controllable campaign service. The cloud path now calls persistWorldPulseAdvance
+// (the atomic RPC); upsert is kept on the mock to prove the serial path is NOT used.
 vi.mock('../../src/lib/campaigns.js', () => ({
   isCampaignActive: campaign => (campaign?.accessState || 'active') === 'active',
   campaigns: {
     upsert: vi.fn(campaign => Promise.resolve(campaign?.id)),
+    persistWorldPulseAdvance: vi.fn(() => Promise.resolve({ applied: true, settlementsWritten: 2, settlementsRequested: 2 })),
     cache: vi.fn(),
     isConfigured: true,
   },
@@ -97,13 +91,10 @@ describe('persistSaveUpdates collects per-update outcomes', () => {
   });
 });
 
-describe('flushWorldPulsePersist guards the campaign snapshot on partial failure', () => {
-  test('a PARTIAL settlement failure does NOT push the campaign snapshot and surfaces a retryable failure', async () => {
+describe('flushWorldPulsePersist routes the cloud advance through the atomic RPC', () => {
+  test('the whole write-set goes through persist_world_pulse_advance (NOT the serial upsert/save loop)', async () => {
     const report = vi.fn();
     initPersistFailureReporter(report);
-    saves.update
-      .mockResolvedValueOnce(undefined)             // ashford lands
-      .mockRejectedValueOnce(new Error('network')); // barrow fails
 
     const out = await flushWorldPulsePersist({
       result: { ok: true, tick: 1 },
@@ -112,39 +103,25 @@ describe('flushWorldPulsePersist guards the campaign snapshot on partial failure
       campaignId: CAMPAIGN_ID,
     });
 
-    // The campaign was NOT advanced in the cloud — no hybrid timeline on reload.
+    // ONE atomic call carried the whole advance — no serial settlement updates and
+    // no separate campaign upsert (the two writes that could go hybrid).
+    expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledTimes(1);
+    expect(saves.update).not.toHaveBeenCalled();
     expect(campaignService.upsert).not.toHaveBeenCalled();
-    // Honest, retryable failure surfaced to the UI banner.
-    expect(out.ok).toBe(false);
-    expect(out.campaignSynced).toBe(false);
-    expect(out.savesFailed).toBe(1);
-    expect(report).toHaveBeenCalled();
-  });
-
-  test('the all-success path still advances the campaign (snapshot IS synced)', async () => {
-    const report = vi.fn();
-    initPersistFailureReporter(report);
-    saves.update.mockResolvedValue(undefined);
-
-    const out = await flushWorldPulsePersist({
-      result: { ok: true, tick: 1 },
-      campaignPersist: { snapshot: advancedSnapshot(1) },
-      persistUpdates: updates,
-      campaignId: CAMPAIGN_ID,
-    });
-
-    // Both members saved, so the campaign snapshot was pushed to the cloud.
-    expect(saves.update).toHaveBeenCalledTimes(2);
-    expect(campaignService.upsert).toHaveBeenCalledTimes(1);
+    // The RPC received the campaign snapshot, the settlement write-set, and the tick.
+    const arg = campaignService.persistWorldPulseAdvance.mock.calls[0][0];
+    expect(arg.campaignId).toBe(CAMPAIGN_ID);
+    expect(arg.campaign?.id).toBe(CAMPAIGN_ID);
+    expect(arg.settlementUpdates).toEqual(updates);
+    expect(arg.expectedTick).toBe(1);
     expect(out).toEqual({ ok: true, savesFailed: 0, campaignSynced: true });
     expect(report).not.toHaveBeenCalled();
   });
 
-  test('INVERSE: all settlements succeed but the campaign upsert rejects — does NOT throw, surfaces a retryable failure (double-advance guard)', async () => {
+  test('an atomic-RPC rejection leaves the campaign cloud-pending, reports the failure, and does NOT throw (double-advance guard)', async () => {
     const report = vi.fn();
     initPersistFailureReporter(report);
-    saves.update.mockResolvedValue(undefined);                         // every settlement lands
-    campaignService.upsert.mockRejectedValueOnce(new Error('campaign upsert rejected'));
+    campaignService.persistWorldPulseAdvance.mockRejectedValueOnce(new Error('atomic advance rejected'));
 
     // Load-bearing: this MUST resolve, not reject. A rejection would propagate out
     // of advanceCampaignWorld to WorldMap's "could not advance" toast — over a tick
@@ -157,19 +134,32 @@ describe('flushWorldPulsePersist guards the campaign snapshot on partial failure
       campaignId: CAMPAIGN_ID,
     });
 
-    // Both members saved (the inverse of the forward case) and the campaign upsert
-    // WAS attempted — it just rejected.
-    expect(saves.update).toHaveBeenCalledTimes(2);
-    expect(campaignService.upsert).toHaveBeenCalledTimes(1);
-    // The rejection became an honest cloud-pending banner, not a thrown advance error.
+    // The DB rolled the WHOLE write-set back, so no member is ahead of the campaign.
+    expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledTimes(1);
     expect(out.ok).toBe(false);
     expect(out.campaignSynced).toBe(false);
     expect(out.savesFailed).toBe(0);
     expect(report).toHaveBeenCalled();
   });
 
+  test('a stale_tick no-op (applied:false) is treated as cloud-coherent success, not a pending failure', async () => {
+    const report = vi.fn();
+    initPersistFailureReporter(report);
+    // The guard rejected a duplicate re-apply: the cloud already holds this tick.
+    campaignService.persistWorldPulseAdvance.mockResolvedValueOnce({ applied: false, reason: 'stale_tick' });
+
+    const out = await flushWorldPulsePersist({
+      result: { ok: true, tick: 1 },
+      campaignPersist: { snapshot: advancedSnapshot(1) },
+      persistUpdates: updates,
+      campaignId: CAMPAIGN_ID,
+    });
+
+    expect(out).toEqual({ ok: true, savesFailed: 0, campaignSynced: true });
+    expect(report).not.toHaveBeenCalled();
+  });
+
   test('a no-op (no result/snapshot) neither saves nor syncs', async () => {
-    saves.update.mockResolvedValue(undefined);
     const out = await flushWorldPulsePersist({
       result: null,
       campaignPersist: null,
@@ -177,6 +167,7 @@ describe('flushWorldPulsePersist guards the campaign snapshot on partial failure
       campaignId: CAMPAIGN_ID,
     });
     expect(saves.update).not.toHaveBeenCalled();
+    expect(campaignService.persistWorldPulseAdvance).not.toHaveBeenCalled();
     expect(campaignService.upsert).not.toHaveBeenCalled();
     expect(out.ok).toBe(true);
     expect(out.campaignSynced).toBe(false);

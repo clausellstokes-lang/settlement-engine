@@ -30,8 +30,18 @@
  *  • 'auto-with-lock-escalation' — auto by default, but escalates to 'proposal'
  *    on a SEPARATE authority axis (a player-locked governing faction), not on
  *    majorChangesRequireProposal.
+ *  • 'always-proposal' — UNCONDITIONALLY emits applyMode 'proposal'. No flag, no
+ *    severity, no lock axis can downgrade it. These are moves a DM should always
+ *    get to vet (an adversarial NPC defecting, a government being challenged, a
+ *    diplomatic relabel, a tier boundary crossing). Distinct from severity-gated:
+ *    there is no threshold below which they go auto.
+ *  • 'structural-proposal' — the candidate is auto by default; a SINGLE structural
+ *    branch routes one variant to 'proposal' because that variant carries a
+ *    proposal-only lever (e.g. a sue-for-peace move that pulls a relationship
+ *    label-change). The split is decided by the move/branch, not by the flag or a
+ *    severity threshold.
  *
- * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'} ChangeAuthority
+ * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'always-proposal'|'structural-proposal'} ChangeAuthority
  *
  * @typedef {object} ChangeAuthorityEntry
  * @property {ChangeAuthority} authority   The authority class (see above).
@@ -118,6 +128,69 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'Major relationship transitions escalate to proposal on severity alone, independent of the flag.',
   }),
+  faction_institution_capture: Object.freeze({
+    authority: 'severity-gated',
+    module: 'factionCompetition.js',
+    consultsProposalFlag: false,
+    rationale:
+      'A faction capturing/suppressing an institution escalates to proposal at severity >= 0.68 (or whenever the move is a criminal suppression), independent of the flag. (institutionCandidate)',
+  }),
+  faction_rival_power_contest: Object.freeze({
+    authority: 'severity-gated',
+    module: 'factionCompetition.js',
+    consultsProposalFlag: false,
+    rationale:
+      'A faction contesting a rival’s power basis escalates to proposal at severity >= 0.7, independent of the flag. (rivalryOrExhaustionCandidate)',
+  }),
+  stressor_birth: Object.freeze({
+    authority: 'severity-gated',
+    module: 'stressors.js',
+    consultsProposalFlag: false,
+    rationale:
+      'A SECOND, distinct stressor gate (stressorCandidate, the pressure-born birth path) escalates to proposal when pressure.score >= 0.78 OR the type is occupation/magic_deadzone/siege/coup_detat, independent of the flag. Distinct from stressor_escalation, which is the severity-driven escalation of an EXISTING stressor.',
+  }),
+
+  // ── ALWAYS-PROPOSAL: unconditionally proposal. No flag/severity/lock can
+  //    downgrade. Moves a DM should always get to vet. ───────────────────────
+  npc_adversarial_action: Object.freeze({
+    authority: 'always-proposal',
+    module: 'npcAgency.js',
+    consultsProposalFlag: false,
+    rationale:
+      'The defect / sabotage / seek_promotion / undermine_rival NPC action families are FORCED to proposal regardless of computed severity (the `|| [...].includes(actionFamily)` short-circuit in candidateForAction). These are adversarial moves a DM should always be offered a veto on; they never auto-apply.',
+  }),
+  faction_government_challenge: Object.freeze({
+    authority: 'always-proposal',
+    module: 'factionCompetition.js',
+    consultsProposalFlag: false,
+    rationale:
+      'A government challenge (governmentChallenge) emits a bare applyMode: \'proposal\'. Changing a settlement’s government is a new premise; it is unconditionally offered to the DM.',
+  }),
+  relationship_label_change: Object.freeze({
+    authority: 'always-proposal',
+    module: 'relationshipEvolution.js',
+    consultsProposalFlag: false,
+    rationale:
+      'Every diplomatic relabel built through labelProposal emits a bare applyMode: "proposal". A visible relationship label flip (neutral->rival, allied, vassal rebellion, etc.) is a new premise and is unconditionally offered to the DM. Distinct from relationship_evolution, which is the severity-gated internal-drift path.',
+  }),
+  tier_change: Object.freeze({
+    authority: 'always-proposal',
+    module: 'tierResourceDynamics.js',
+    consultsProposalFlag: false,
+    flagged: true,
+    rationale:
+      'A tier boundary crossing (tierCandidate, candidateType tier_promotion / tier_demotion) emits a bare applyMode: \'proposal\' — UNCONDITIONAL, and it never consults majorChangesRequireProposal. See the FLAGGED tier-authority-split tension: this is the real tier-change path, yet the only flag-consulting entry in this module (tier_drift_collapse) actually anchors a resource_depletion gate, not a tier change.',
+  }),
+
+  // ── STRUCTURAL-PROPOSAL: auto by default; one branch routes to proposal via a
+  //    proposal-only lever. ───────────────────────────────────────────────────
+  strategy_move: Object.freeze({
+    authority: 'structural-proposal',
+    module: 'settlementStrategy.js',
+    consultsProposalFlag: false,
+    rationale:
+      'strategyCandidate emits applyMode: proposal ? \'proposal\' : \'auto\'. Only the sue_for_peace move passes a `proposal` (it pulls a relationship label-change lever, which is itself always-proposal); every other move (deploy / defend / hold / return_home) passes no proposal and stays auto. The split is structural to the move, not flag- or severity-driven.',
+  }),
 
   // ── AUTO: bounded logical consequences of premises gated upstream. ─────────
   conquest: Object.freeze({
@@ -179,5 +252,10 @@ export const CHANGE_AUTHORITY_FLAGGED = Object.freeze([
     id: 'severity-gated-families-bypass-flag',
     summary:
       'pressure_event, faction_competition, stressor_escalation, and relationship_evolution escalate to proposal on severity alone and never consult majorChangesRequireProposal. Setting the flag OFF (e.g. dramatic_campaign) does NOT make these auto, unlike the proposal-gated families. Either these are intentionally "always offer the DM a say at high severity" (in which case the flag’s name overpromises), or they should be migrated onto the flag for a uniform contract. Product decision needed; behavior left unchanged.',
+  }),
+  Object.freeze({
+    id: 'tier-authority-split-in-one-module',
+    summary:
+      'tierResourceDynamics.js has two change paths with INCONSISTENT authority. The real tier boundary crossing (tierCandidate -> tier_promotion / tier_demotion) is UNCONDITIONALLY proposal and ignores majorChangesRequireProposal, while resource_depletion (the gate the older tier_drift_collapse entry actually anchors) consults the flag AND a 0.78 severity threshold. A DM who turns the flag off to get an always-auto campaign still gets every tier change as a proposal. Either tier changes should be migrated onto the flag for consistency with the rest of the proposal-gated families, or the always-proposal stance is intentional (a tier change is too structural to ever auto-apply) and the flag’s scope should be documented as excluding it. Product decision needed; behavior left unchanged.',
   }),
 ]);

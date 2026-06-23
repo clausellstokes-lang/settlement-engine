@@ -123,8 +123,13 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   so a failed-answer streak throttles via escalating backoff instead of permanently
   locking the account) + **069** (an atomic `persist_world_pulse_advance`
   SECURITY DEFINER RPC that writes a world-pulse advance's entire settlement +
-  campaign write-set in one owner-checked transaction; shipped server-side, not
-  yet wired into the client persist path) —
+  campaign write-set in one owner-checked transaction; now wired into the client
+  persist path — the cloud branch of `flushWorldPulsePersist` routes the whole
+  advance write-set through this single RPC, so a partial failure can no longer
+  carry forward a half-applied advance. The optional `p_expected_tick` stale-apply
+  guard only fires when non-null: forward advances pass the post-advance tick so a
+  duplicate re-apply is a no-op, while an undo passes NULL (last-write-wins) so the
+  lower restored tick reaches the cloud instead of being rejected as stale) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
