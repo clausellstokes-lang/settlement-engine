@@ -417,17 +417,29 @@ export const EVENT_REGISTRY = {
 
   EXPOSE_CORRUPTION: {
     label: 'Expose corruption',
-    description: 'A corrupt NPC is publicly revealed (or a faction/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
+    description: 'A corrupt NPC is publicly revealed. The NPC is cleaned, scarred, and replaced by a successor; both the criminal institution they answered to and their home institution are tarnished by propagation; legitimacy collapses and rivals exploit the vacuum. A faction or institution becomes scandalised only through this chain, never by direct exposure.',
     requiresTarget: true,
-    targetPrompt: 'Corrupt NPC, faction, or institution name',
-    stateDeltas(event) {
+    targetPrompt: 'Corrupt NPC to reveal',
+    /** @param {any} event @param {any} [settlement] */
+    stateDeltas(event, settlement) {
+      // Backstop: the mutation only fires for a corrupt NPC target (mutate.js
+      // exposeCorruption no-ops on anything else). The dials and prose must
+      // never move when the structural change cannot — so when the target is
+      // not a corrupt NPC, the authored deltas are zero, matching the no-op.
+      // The pipeline passes settlement to both preview and apply, so this stays
+      // byte-identical across the two paths.
+      if (!isCorruptNpcTarget(settlement, event.targetId)) return {};
       const sev = Number(event.payload?.severity ?? 0.7);
       return {
         resilience: -Math.round(sev * 8),
         volatility: +Math.round(sev * 14),
       };
     },
-    narrate(event) {
+    /** @param {any} event @param {any} [settlement] */
+    narrate(event, settlement) {
+      // No structural change happened for a non-corrupt-NPC target (see
+      // stateDeltas), so write no scandal prose for it either.
+      if (!isCorruptNpcTarget(settlement, event.targetId)) return '';
       return `Corruption inside ${labelOf(event.targetId)} has been publicly exposed.`;
     },
   },
@@ -437,14 +449,20 @@ export const EVENT_REGISTRY = {
     description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes covertly corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     requiresTarget: true,
     targetPrompt: 'Clean NPC to turn (pick the organization below)',
+    /** @param {any} event */
     stateDeltas(event) {
       // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
       const sev = Number(event.payload?.severity ?? 0.5);
+      // Scope: turning the individual is the base hit; capturing their whole
+      // institution rots a node of the settlement, so the bigger scope moves a
+      // bigger dial (extra resilience drag) to match its tangible reach.
+      const institutionScope = event.payload?.scope === 'individual_institution';
       return {
-        resilience: -Math.round(sev * 5),
-        volatility: +Math.round(sev * 8),
+        resilience: -Math.round(sev * (institutionScope ? 9 : 5)),
+        volatility: +Math.round(sev * (institutionScope ? 11 : 8)),
       };
     },
+    /** @param {any} event */
     narrate(event) {
       const org = event.payload?.criminalInstitution;
       return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''}. Corruption takes root in the shadows.`;
@@ -741,11 +759,17 @@ export const EVENT_REGISTRY = {
     label: 'Assign primary deity',
     description: 'A settlement adopts (or sheds) a primary deity. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
     requiresTarget: false,
-    stateDeltas() {
+    stateDeltas(event) {
       // A change of patron god is a legitimacy/ritual event, not an economic
-      // shock — a small steadying nudge. The substrate weight lives in
+      // shock — a small steadying nudge so that, like every other make-change,
+      // it visibly moves a dial. The substrate weight lives in
       // deriveReligiousAuthority (read off the embedded snapshot), not here.
-      return {};
+      const hasDeity = !!(event?.payload?.snapshot || event?.payload?.deityRef || event?.targetId);
+      // Adopting a primary deity steadies legitimacy and dampens unrest;
+      // shedding one (null payload) is the small inverse, the patron-less drift.
+      return hasDeity
+        ? { resilience: +3, volatility: -2 }
+        : { resilience: -3, volatility: +2 };
     },
     /** @param {any} event */
     narrate(event) {
@@ -831,4 +855,27 @@ function labelOf(targetId) {
   const tail = String(targetId).split('.').pop();
   // Title-case for display
   return tail.replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
+}
+
+/**
+ * Does this target id resolve to a corrupt, not-yet-ousted NPC in the
+ * settlement? Mirrors mutate.js findNpc's id/name/label matching so the
+ * EXPOSE_CORRUPTION authored deltas + narration fire on exactly the targets the
+ * mutation acts on. Without a settlement (e.g. a label-only registry probe) we
+ * cannot tell, so we permit the authored effect rather than suppress it.
+ *
+ * @param {object} [settlement]
+ * @param {string} [targetId]
+ * @returns {boolean}
+ */
+export function isCorruptNpcTarget(settlement, targetId) {
+  if (!settlement) return true; // no settlement to check against — do not suppress
+  const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
+  const t = String(targetId || '').toLowerCase();
+  const label = labelOf(targetId).toLowerCase();
+  const npc = npcs.find(n =>
+    String(n?.id || '').toLowerCase() === t
+    || String(n?.name || '').toLowerCase() === t
+    || String(n?.name || '').toLowerCase() === label);
+  return !!(npc && npc.corrupt === true && !npc.ousted);
 }

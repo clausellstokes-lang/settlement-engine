@@ -14,10 +14,11 @@ import { X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
-import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
+import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
+import { WAR_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
@@ -25,14 +26,17 @@ import { institutionHasTag, TAG } from '../../lib/entities.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { buildTargetOptions, labelOfTarget, PARTY, PARTY_BG } from './eventComposer/helpers.js';
+import { campaignPeerOptions, PARTY, PARTY_BG } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
 import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
+import { EventComposerRelationshipExtras } from './eventComposer/EventComposerRelationshipExtras.jsx';
+import { buildEvent as assembleEvent } from './eventComposer/buildEvent.js';
+import { AddNpcTraitFields } from './eventComposer/AddNpcTraitFields.jsx';
 import {
   RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
-  NON_AUTHORABLE_EVENTS, STRESSOR_SEVERITY_VALUES, CUSTOM_RESOURCE_OPTION,
+  NON_AUTHORABLE_EVENTS, CUSTOM_RESOURCE_OPTION,
   inputStyle, selectStyle,
 } from './eventComposer/EventComposerConstants.js';
 
@@ -68,6 +72,13 @@ export default function EventComposer() {
   const [importance, setImportance] = useState('notable');     // ADD_NPC, KILL_NPC
   const [role, setRole]             = useState('');           // ADD_NPC, ASSIGN_NPC_TO_ROLE
   const [institutionId, setInstitutionId] = useState('');     // ADD_NPC, ASSIGN_NPC_TO_ROLE
+  // ADD_NPC descriptive traits — free text, optional. These mirror exactly what
+  // the NPC read card shows (npcComponents NPCInlineCard via normalizeNpcTraits):
+  // flaw, temperament (personality.dominant), goal, constraint, secret. Without
+  // them an authored NPC rendered those rows empty.
+  const [npcFlaw, setNpcFlaw] = useState(''), [npcTemperament, setNpcTemperament] = useState('');
+  const [npcGoals, setNpcGoals] = useState(''), [npcConstraint, setNpcConstraint] = useState('');
+  const [npcSecret, setNpcSecret] = useState('');
   const [quality, setQuality]       = useState('competent');   // ASSIGN_NPC_TO_ROLE
   // Severity + axis are intentionally hidden from the DM — the 0-100 "math"
   // confused more than it clarified. Impair Institution / Impair Faction apply a
@@ -80,6 +91,7 @@ export default function EventComposer() {
   const [destroyConfirm, setDestroyConfirm] = useState('');    // §9c: type-the-name gate for Destroy Settlement
   const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
+  const [corruptScope, setCorruptScope] = useState('individual'); // IMPOSE_CORRUPTION: individual | individual_institution
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
   const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
@@ -91,6 +103,17 @@ export default function EventComposer() {
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
+  const [instigatorNeighbour, setInstigatorNeighbour] = useState(''); // #1 APPLY_STRESSOR: optional war instigator
+  const [tradeTarget, setTradeTarget] = useState('');          // #6 OPENED_TRADE_ROUTE: optional campaign-settlement target
+  // #6 — the active campaign's OTHER settlements (so a trade route can open with
+  // any campaign member, not only a pre-linked neighbour); see campaignPeerOptions.
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const campaigns = useStore(s => s.campaigns);
+  const savedSettlements = useStore(s => s.savedSettlements);
+  const campaignSettlementOptions = useMemo(
+    () => campaignPeerOptions(campaigns, savedSettlements, activeSaveId),
+    [campaigns, savedSettlements, activeSaveId],
+  );
 
   // Catalog sources for the catalog-backed "Add" events. Institutions come
   // from the full institutional catalog + the user's Compendium, minus what's
@@ -178,6 +201,14 @@ export default function EventComposer() {
       .map(i => i.name).filter(Boolean),
     [settlement?.institutions],
   );
+  // EXPOSE_CORRUPTION only acts on a corrupt, not-yet-ousted NPC; the mutation
+  // no-ops otherwise. Offer the action solely when there is such a target, so a
+  // clean pick (or a free-typed name on an empty list) can never move the dials
+  // and narrate with no real state behind it.
+  const hasCorruptNpcs = useMemo(
+    () => (settlement?.npcs || []).some(n => n?.corrupt === true && !n?.ousted),
+    [settlement?.npcs],
+  );
 
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
@@ -187,98 +218,39 @@ export default function EventComposer() {
   const effectiveTarget = type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION
     ? customResourceName
     : target;
-  const canSubmit = (!needsTarget || effectiveTarget.trim().length > 0)
+  // #6 — OPENED_TRADE_ROUTE is satisfied by EITHER a linked neighbour OR a
+  // chosen campaign-settlement target, so the target requirement is met when
+  // either is set.
+  const resolvedTarget = (type === 'OPENED_TRADE_ROUTE' && tradeTarget.trim())
+    ? tradeTarget.trim()
+    : effectiveTarget;
+  const canSubmit = (!needsTarget || resolvedTarget.trim().length > 0)
     && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId);
+  // #1 — the optional instigator dropdown only makes sense for a WAR-type
+  // stressor (siege / wartime / occupation / betrayal). Detect via the picked
+  // catalog key (falling back to the free-typed target).
+  const isWarStressor = type === 'APPLY_STRESSOR'
+    && WAR_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
 
   // Derive a sensible institution list for the institution-pickers.
   const institutionOptions = (settlement.institutions || [])
     .map(i => ({ id: i.id || i.name, name: i.name || i.id }))
     .filter(o => o.id && o.name);
 
+  // buildEvent (the per-type payload assembly) lives in eventComposer/buildEvent.js;
+  // this thin closure threads the form state in so the parent stays under the ratchet.
   function buildEvent() {
-    const payload = {};
-    if (type === 'ADD_INSTITUTION' && addCategory) payload.category = addCategory;
-    if (type === 'DAMAGE_INSTITUTION') payload.severity = severity;
-    if (type === 'ADD_NPC') {
-      payload.importance = importance;
-      if (role) payload.role = role;
-    }
-    if (type === 'KILL_NPC') {
-      // Derive the consequence tier from the NPC itself rather than asking the
-      // DM to re-state what the dossier already knows. Both the state math
-      // (registry KILL_NPC.stateDeltas) and the entity mutation read this, so
-      // a pillar's death isn't silently down-graded to "notable".
-      const npc = (settlement.npcs || []).find(
-        n => String(n.id || n.name) === String(target),
-      );
-      if (npc) payload.importance = npc.importance || inferImportance(npc);
-    }
-    if (type === 'ADD_NPC' && institutionId) {
-      payload.linkedInstitutionIds = [institutionId];
-    }
-    if (type === 'ASSIGN_NPC_TO_ROLE') {
-      payload.quality = quality;
-      if (role)          payload.role = role;
-      if (institutionId) payload.institutionId = institutionId;
-      // Importance + influence come from the role the NPC fills (the
-      // institution's role catalogue), not a separate question.
-      const inst = institutionId
-        ? (settlement.institutions || []).find(i => String(i.id || i.name) === String(institutionId))
-        : null;
-      const roleOpts = inst ? rolesForInstitution(inst) : [];
-      const imp = roleOpts.length ? importanceForRole(role, roleOpts) : null;
-      if (imp) {
-        payload.importance = imp;
-        payload.influence  = influenceForImportance(imp);
-      }
-    }
-    if (type === 'IMPAIR_INSTITUTION' || type === 'IMPAIR_FACTION') {
-      payload.dimension = dimension;
-      payload.severity  = severity;
-    }
-    if (RELATIONSHIP_OPTIONS[type]) {
-      payload.relationshipType = relationshipType || RELATIONSHIP_OPTIONS[type][0];
-    }
-    if (type === 'IMPOSE_CORRUPTION') {
-      const org = criminalOrg || criminalOrgs[0];
-      if (org) payload.criminalInstitution = org;
-    }
-    if (type === 'APPLY_STRESSOR') {
-      payload.stressorType = stressorPick?.key || target.trim();
-      payload.label = stressorPick?.name || labelOfTarget(target);
-      payload.severity = STRESSOR_SEVERITY_VALUES[stressorSeverity] ?? 0.6;
-      if (stressorPick?.isCustom) payload.isCustom = true;
-    }
-    if (type === 'CHANGE_RULING_POWER') {
-      payload.cause = powerCause || 'coup';
-    }
-    if (type === 'RESOLVE_STRESSOR') {
-      payload.stressorType = target.trim();
-      const opt = buildTargetOptions(settlement, 'stressors').find(o => o.id === target);
-      if (opt) payload.label = opt.name;
-    }
-    if (type === 'ADD_TRADE_GOOD') {
-      payload.direction = tradeDirection;
-      payload.entrepot = tradeDirection === 'export' && tradeEntrepot;
-      payload.label = target.trim();
-    }
-    if (type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION) {
-      payload.isCustom = true;
-    }
-    if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
-      payload.swapWithNpcId = swapWithNpcId;
-    }
-    return {
-      id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-      type,
-      targetId: effectiveTarget.trim(),
-      payload,
-      // Party-caused events carry a distinct cause so the timeline/Chronicle and
-      // (in canon campaigns) the world engine can treat them as the table's doing.
-      cause: partyCaused ? 'party_action' : (phase === 'canon' ? 'player_action' : 'authoring'),
-      partyCaused: partyCaused || undefined,
-      description: description.trim() || undefined,
-    };
+    return assembleEvent({
+      type, target, effectiveTarget, settlement, phase,
+      addCategory, severity, dimension,
+      importance, role, institutionId,
+      npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
+      quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
+      stressorPick, stressorSeverity, powerCause,
+      tradeDirection, tradeEntrepot, swapWithNpcId,
+      isWarStressor, instigatorNeighbour, tradeTarget,
+      partyCaused, description,
+    });
   }
 
   function onPreview() {
@@ -304,6 +276,8 @@ export default function EventComposer() {
     setDestroyConfirm('');
     setSwapWithNpcId('');
     setCustomResourceName('');
+    setInstigatorNeighbour('');
+    setTradeTarget('');
     // Post-apply staleness notice: the event committed (and stays committed
     // regardless of what the modal answers) — on a narrated save the AI
     // prose was written against the previous state, so offer regenerate /
@@ -345,7 +319,7 @@ export default function EventComposer() {
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -353,12 +327,18 @@ export default function EventComposer() {
                  Damage Institution (redundant with Impair). All stay in the
                  registry for back-compat + world-engine simulation.
                  §9b/g/h — relationship events only appear when the settlement
-                 has linked neighbours to act on. */
+                 has linked neighbours to act on. #6 — OPENED_TRADE_ROUTE is the
+                 exception: it can target any OTHER campaign settlement, so it
+                 also appears when the active save has campaign peers. */
               .filter(([k]) => !NON_AUTHORABLE_EVENTS.has(k))
-              .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours)
+              .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours
+                || (k === 'OPENED_TRADE_ROUTE' && campaignSettlementOptions.length > 0))
               /* The standing swap needs two NPCs in one faction — hide the
                  promote/demote events when no faction has a pair to swap. */
               .filter(([k]) => !['PROMOTE_NPC', 'DEMOTE_NPC'].includes(k) || hasSwapPairs)
+              /* Expose Corruption acts only on a corrupt NPC — hide it when the
+                 settlement has none, so the action can never be a no-op. */
+              .filter(([k]) => k !== 'EXPOSE_CORRUPTION' || hasCorruptNpcs)
               .map(([k, s]) => (
                 <option key={k} value={k}>{s.label}</option>
               ))}
@@ -403,6 +383,21 @@ export default function EventComposer() {
               </div>
             </Field>
           )
+        )}
+
+        {/* IMPOSE_CORRUPTION — how far the rot reaches: the individual alone, or their institution too */}
+        {type === 'IMPOSE_CORRUPTION' && criminalOrgs.length > 0 && (
+          <Field
+            label="Scope"
+            hint={corruptScope === 'individual_institution'
+              ? 'Their home institution is quietly compromised in-chain as well'
+              : 'Only this individual is turned'}
+          >
+            <select value={corruptScope} onChange={e => setCorruptScope(e.target.value)} style={selectStyle}>
+              <option value="individual">This individual</option>
+              <option value="individual_institution">Individual and their institution</option>
+            </select>
+          </Field>
         )}
 
         {/* ADD_TRADE_GOOD — direction, plus entrepôt handling for exports */}
@@ -463,6 +458,19 @@ export default function EventComposer() {
           </Field>
         )}
 
+        {/* #1 war-stressor instigator + #6 trade-route campaign target — both
+            optional, settlement-local relationship effects. */}
+        <EventComposerRelationshipExtras
+          type={type}
+          settlement={settlement}
+          isWarStressor={isWarStressor}
+          instigatorNeighbour={instigatorNeighbour}
+          setInstigatorNeighbour={setInstigatorNeighbour}
+          tradeTarget={tradeTarget}
+          setTradeTarget={setTradeTarget}
+          campaignSettlementOptions={campaignSettlementOptions}
+        />
+
         {/* §9b/§9g/§9h — relationship type for neighbour-targeted events */}
         {RELATIONSHIP_OPTIONS[type] && (
           <Field label="New relationship" hint="Sets this settlement's relationship with the chosen neighbour">
@@ -488,6 +496,15 @@ export default function EventComposer() {
               <option value="pillar">Pillar</option>
             </select>
           </Field>
+        )}
+
+        {/* ADD_NPC descriptive traits — the same flaw / temperament / goal /
+            constraint / secret the NPC read card shows. All optional. */}
+        {type === 'ADD_NPC' && (
+          <AddNpcTraitFields
+            flaw={npcFlaw} setFlaw={setNpcFlaw} temperament={npcTemperament} setTemperament={setNpcTemperament}
+            goals={npcGoals} setGoals={setNpcGoals} constraint={npcConstraint} setConstraint={setNpcConstraint}
+            secret={npcSecret} setSecret={setNpcSecret} />
         )}
 
         {/* KILL_NPC: importance is pulled from the chosen NPC and shown
@@ -657,7 +674,7 @@ export default function EventComposer() {
         <Button
           variant="gold"
           size="sm"
-          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
+          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); setInstigatorNeighbour(''); setTradeTarget(''); }}
           disabled={!canSubmit}
         >
           + Add to batch

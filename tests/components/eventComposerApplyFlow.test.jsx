@@ -99,6 +99,55 @@ describe('EventComposer — Apply without a preview', () => {
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
+  test('ADD_NPC writes the authored descriptive traits into the applied event payload', () => {
+    state = baseState();
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Mira the Bold' } },
+    );
+    fireEvent.change(screen.getByLabelText('Flaw'),        { target: { value: 'Reckless under pressure' } });
+    fireEvent.change(screen.getByLabelText('Temperament'), { target: { value: 'Hot-tempered' } });
+    fireEvent.change(screen.getByLabelText('Goals'),       { target: { value: 'Reclaim her family name' } });
+    fireEvent.change(screen.getByLabelText('Constraint'),  { target: { value: 'Bound by an old debt' } });
+    fireEvent.change(screen.getByLabelText('Secret'),      { target: { value: 'Funds the smugglers' } });
+
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    const applied = state.applyEvent.mock.calls[0][0];
+    expect(applied.type).toBe('ADD_NPC');
+    expect(applied.targetId).toBe('Mira the Bold');
+    expect(applied.payload).toMatchObject({
+      flaw: 'Reckless under pressure',
+      temperament: 'Hot-tempered',
+      goal: 'Reclaim her family name',
+      constraint: 'Bound by an old debt',
+      secret: 'Funds the smugglers',
+    });
+  });
+
+  test('ADD_NPC omits trait keys from the payload when left blank', () => {
+    state = baseState();
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Plain NPC' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+
+    const applied = state.applyEvent.mock.calls[0][0];
+    expect(applied.payload).not.toHaveProperty('flaw');
+    expect(applied.payload).not.toHaveProperty('temperament');
+    expect(applied.payload).not.toHaveProperty('goal');
+    expect(applied.payload).not.toHaveProperty('constraint');
+    expect(applied.payload).not.toHaveProperty('secret');
+  });
+
   test('DESTROY_SETTLEMENT shows the type-the-name gate without a preview and blocks until it matches', () => {
     state = baseState();
     const { container } = render(<EventComposer />);

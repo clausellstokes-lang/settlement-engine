@@ -511,12 +511,20 @@ export function compromisedSecurityInstitutions(settlement) {
     .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
 
+  // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
+  // covert. A covert mark (an institution-scope Impose Corruption that quietly
+  // captured a node) is the hidden channel: it must NOT read as a public scandal,
+  // or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
+  // meant to conceal.
   const revealed = new Set();
+  const covert = new Set();
   for (const inst of securityInstitutions) {
-    if ((inst.impairments || []).some((imp) => imp?.type === 'corruption')) revealed.add(inst.name);
+    const corruptionImps = (inst.impairments || []).filter((/** @type {any} */ imp) => imp?.type === 'corruption');
+    if (!corruptionImps.length) continue;
+    if (corruptionImps.some((/** @type {any} */ imp) => imp?.covert !== true)) revealed.add(inst.name);
+    else covert.add(inst.name);
   }
 
-  const covert = new Set();
   for (const npc of settlement?.npcs || []) {
     if (npc?.corrupt !== true || npc?.ousted) continue;
     const home = npcHomeInstitution(npc);

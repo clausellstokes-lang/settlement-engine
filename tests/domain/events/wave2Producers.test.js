@@ -34,9 +34,13 @@ const town = (extra = {}) => ({
 });
 
 describe('EXPOSE_CORRUPTION promotes a durable corruption_exposed condition', () => {
-  it('faction/institution path', () => {
+  it('is NPC-only: a direct institution target is a no-op (no scandal minted)', () => {
+    // Decision: a faction or institution becomes scandalised solely through the
+    // chain propagating from an exposed NPC, never by a direct expose. A non-NPC
+    // target must produce no structural state — otherwise the dials would move
+    // and prose would be written with nothing real behind it.
     const next = apply(town(), { type: 'EXPOSE_CORRUPTION', targetId: "Thieves' Guild" });
-    expect(archetypes(next)).toContain('corruption_exposed');
+    expect(archetypes(next)).not.toContain('corruption_exposed');
   });
 
   it('corrupt-NPC path', () => {

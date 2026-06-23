@@ -14,7 +14,7 @@ import { X } from 'lucide-react';
 import CatalogPicker from '../CatalogPicker.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 import { MUTED, FS } from '../../theme.js';
-import { buildTargetOptions } from './helpers.js';
+import { buildTargetOptions, corruptNpcOptions } from './helpers.js';
 import { Field } from './Field.jsx';
 import {
   TARGET_ENTITY_BY_EVENT, CUSTOM_RESOURCE_OPTION,
@@ -204,7 +204,12 @@ export function EventComposerTargetField({
   // (new entities) and route-type events that aren't in the
   // dossier as discrete records.
   const collectionKey = TARGET_ENTITY_BY_EVENT[type];
-  const targetOpts = buildTargetOptions(settlement, collectionKey);
+  // EXPOSE_CORRUPTION reveals a corrupt NPC; the mutation no-ops on any clean
+  // target, so the picker offers only corrupt NPCs (clean picks would move the
+  // dials and write prose with no real state behind them).
+  const targetOpts = type === 'EXPOSE_CORRUPTION'
+    ? corruptNpcOptions(settlement)
+    : buildTargetOptions(settlement, collectionKey);
   if (collectionKey && targetOpts.length > 0) {
     return (
       <Field label="Target" hint={spec?.targetPrompt}>

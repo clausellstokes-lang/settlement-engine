@@ -24,10 +24,12 @@ import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
 import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced, conditionIdFromArchetype } from '../activeConditions.js';
-import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
+import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { WAR_STRESSOR_TYPES } from '../worldPulse/warStressorTypes.js';
+import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -618,7 +620,7 @@ function setNeighbourRelationship(s, event) {
     : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
   const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
   let touched = false;
-  const next = network.map((link) => {
+  const next = network.map((/** @type {any} */ link) => {
     const matches = String(link?.name || '') === String(targetId)
       || String(link?.neighbourName || '') === String(targetId)
       || String(link?.id || '') === String(targetId)
@@ -627,8 +629,32 @@ function setNeighbourRelationship(s, event) {
     touched = true;
     return { ...link, relationshipType: relType, displayRelationshipType: relType, _relationshipEventId: event.id };
   });
-  if (!touched) return s;
-  return { ...s, neighbourNetwork: next };
+  if (touched) return { ...s, neighbourNetwork: next };
+  // #6 — OPENED_TRADE_ROUTE may name a campaign settlement that is NOT yet a
+  // linked neighbour. Rather than no-opping (the historic behaviour for every
+  // relationship event), ADD a fresh neighbourNetwork link to it so a trade
+  // route can be opened with any settlement in the campaign roster, not only
+  // pre-linked neighbours. Other relationship events keep the no-op posture:
+  // a dispute/alliance with an unknown name has no link to act on.
+  // CAVEAT (settlement-local): this writes the HOME settlement's view only.
+  // Reciprocal/regional-graph propagation of the new edge is a campaign-layer
+  // follow-up (deriveRegionalState already ingests neighbourNetwork).
+  if (event.type === 'OPENED_TRADE_ROUTE') {
+    const def = relationshipDefinition('trade_partner', s.id || s.name || 'home', targetId);
+    const newLink = {
+      id: targetId,
+      name: targetId,
+      neighbourName: targetId,
+      relationshipType: relType,
+      displayRelationshipType: relType,
+      relationshipFrom: def.from,
+      relationshipTo: def.to,
+      _relationshipEventId: event.id,
+      _addedByEvent: true,
+    };
+    return { ...s, neighbourNetwork: [...network, newLink] };
+  }
+  return s;
 }
 
 function cutTradeRoute(s, event) {
@@ -671,6 +697,12 @@ function addNpc(s, event) {
     linkedFactionIds:     event.payload?.linkedFactionIds || [],
     influence:            event.payload?.influence,
     legitimacyContribution: event.payload?.legitimacyContribution,
+    // Authored descriptive traits — surfaced verbatim on the NPC read card.
+    flaw:        event.payload?.flaw,
+    temperament: event.payload?.temperament,
+    goal:        event.payload?.goal,
+    constraint:  event.payload?.constraint,
+    secret:      event.payload?.secret,
     _idSeed: event.id, // deterministic, event-scoped id (avoids same-name collisions)
   });
   npc.createdByEventId = event.id; // so undo can drop the NPC this event created
@@ -788,57 +820,20 @@ function killLeaderMutation(s, event) {
 }
 
 /**
- * EXPOSE_CORRUPTION — applies a legitimacy impairment to the target
- * (faction OR institution; we try both). Propagates so a corrupt watch
- * captain hits both the watch institution and the controlling faction.
+ * EXPOSE_CORRUPTION — NPC-only. A corrupt NPC is publicly revealed: cleaned,
+ * scarred, replaced by a successor, and the corruption_exposed scandal is
+ * stamped. The criminal institution they answered to and their home
+ * institution/faction become tarnished ONLY through chain propagation from the
+ * exposed NPC (applyCorruptionImpairments) — never by direct faction or
+ * institution exposure. A non-corrupt or non-NPC target is a no-op.
  */
 function exposeCorruption(s, event) {
-  // Prefer a corrupt NPC target: clean + scar them and
-  // impair BOTH the tied criminal institution and their home institution/faction
-  // (the same path organic exposure uses). Falls back to faction/institution.
   const npc = findNpc(s, event.targetId);
   if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
-
-  const severity = Number(event.payload?.severity ?? 0.7);
-  const inst    = findInstitution(s, event.targetId);
-  const faction = findFaction(s, event.targetId);
-  const target  = inst || faction;
-  if (!target) return s;
-
-  const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
-    type: 'legitimacy',
-    severity,
-    causeEventId: event.id,
-    description: event.description || `Corruption inside ${target.name} was exposed publicly.`,
-  });
-
-  // The scandal becomes a durable condition: corruption_exposed is read by
-  // ruling_authority (its ONLY condition reaction), administrative capacity,
-  // daily life, districts, and threats — but no event ever produced it, so the
-  // whole consumer tree was dead and the scandal vanished on re-derivation.
-  const scandal = (next) => withActiveCondition(next, {
-    archetype: 'corruption_exposed',
-    severity,
-    triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: event.targetId },
-    causes: [{ source: 'event', eventId: event.id, detail: `Corruption inside ${target.name} was exposed publicly.` }],
-  });
-
-  if (inst) {
-    let next = replaceInstitution(s, inst, withImpairment(inst, impairment));
-    next = propagateImpairment({
-      settlement: next,
-      origin: { entityType: 'institution', entityId: idOf(inst), impairment },
-    });
-    return scandal(next);
-  }
-
-  // Faction case
-  let next = replaceFaction(s, faction, withImpairment(faction, impairment));
-  next = propagateImpairment({
-    settlement: next,
-    origin: { entityType: 'faction', entityId: factionIdOf(faction), impairment },
-  });
-  return scandal(next);
+  // Decision 3: the direct faction/institution expose path is removed. A
+  // faction or institution becomes scandalised solely via propagation from an
+  // exposed NPC, so there is nothing to do for a non-corrupt-NPC target.
+  return s;
 }
 
 // DM exposes a specific corrupt NPC: impair the
@@ -908,7 +903,31 @@ function imposeCorruption(s, event) {
     corruptionVector: vector,
     corruptTies: { ...(npc.corruptTies || {}), criminalInstitution: orgName },
   };
-  return replaceNpc(s, npc, corrupted);
+  let next = replaceNpc(s, npc, corrupted);
+
+  // Scope: 'individual_institution' captures the NPC's home institution too —
+  // a COVERT 'corruption' impairment, not a public legitimacy hit (that is the
+  // exposure consequence). It marks the institution as compromised in-chain:
+  // compromisedSecurityInstitutions reads a 'corruption'-typed impairment as
+  // 'revealed', so we keep this covert by stamping covert:true and letting the
+  // dossier surface it honestly. The NPC alone already homes the covert drag;
+  // this extends a tangible institutional marker for the bigger scope.
+  if (event.payload?.scope === 'individual_institution') {
+    const homeName = npcHomeInstitution(corrupted);
+    const homeInst = homeName ? findInstitution(next, homeName) : null;
+    if (homeInst) {
+      const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
+        type: 'corruption',
+        severity: 0.3,
+        covert: true,
+        causeEventId: event.id,
+        appliedAt: event.timestamp || event.createdAt || null,
+        description: `${corrupted.name}'s capture quietly compromised ${homeInst.name}.`,
+      });
+      next = replaceInstitution(next, homeInst, withImpairment(homeInst, impairment));
+    }
+  }
+  return next;
 }
 
 /**
@@ -1097,8 +1116,49 @@ function raidOrMonsterAttack(s, event) {
  * channel for directives); the store recomputes the directive from the event
  * (crisisLifecycle.twinDirectiveForEvent) at its single consumer chokepoint.
  */
+// Relationship aliases already at (or beyond) hostility — a named instigator
+// in any of these states is NOT re-flipped, so re-authoring a wartime stressor
+// against the same neighbour is a relationship no-op.
+const ALREADY_HOSTILE_RELS = new Set(['hostile', 'cold_war', 'war']);
+
 function applyStressor(s, event) {
-  return crisisOnset({ settlement: s, event }).settlement;
+  const next = /** @type {any} */ (crisisOnset({ settlement: s, event }).settlement);
+  // #1 — SIEGE/OCCUPATION INSTIGATOR → HOSTILE. When a WAR-type stressor
+  // (siege / wartime / occupation / betrayal — WAR_STRESSOR_TYPES) names an
+  // instigating neighbour, sour the HOME settlement's view of that neighbour
+  // to 'hostile'. Optional: with no instigator, only the crisis onset lands.
+  const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+  const instigator = String(event.payload?.instigatorNeighbour || '').trim();
+  if (!instigator || !WAR_STRESSOR_TYPES.includes(stressorType)) return next;
+  // Only flip a neighbour that ISN'T already hostile (or in a hostile-family
+  // alias: cold_war / war). The hostile edge is symmetric in the canonical
+  // vocab, so relationshipDefinition('hostile', ...) is direction-agnostic.
+  const network = Array.isArray(next.neighbourNetwork) ? next.neighbourNetwork : [];
+  let flipped = false;
+  const rewired = network.map((/** @type {any} */ link) => {
+    const matches = String(link?.name || '') === instigator
+      || String(link?.neighbourName || '') === instigator
+      || String(link?.id || '') === instigator
+      || String(link?.linkId || '') === instigator;
+    if (!matches) return link;
+    const current = String(link?.relationshipType || '').toLowerCase();
+    if (ALREADY_HOSTILE_RELS.has(current)) return link; // no-op if already hostile
+    flipped = true;
+    const def = relationshipDefinition('hostile', next.id || next.name || 'home', instigator);
+    return {
+      ...link,
+      relationshipType: def.relationshipType,
+      displayRelationshipType: def.relationshipType,
+      relationshipFrom: def.from,
+      relationshipTo: def.to,
+      _relationshipEventId: event.id,
+    };
+  });
+  if (!flipped) return next;
+  // CAVEAT (settlement-local): this sets the HOME settlement's view only; full
+  // bidirectional / regional-graph war-front propagation is a campaign-layer
+  // follow-up (deriveRegionalState already ingests neighbourNetwork).
+  return { ...next, neighbourNetwork: rewired };
 }
 
 /**

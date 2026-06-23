@@ -27,7 +27,7 @@ export const TARGET_ENTITY_BY_EVENT = Object.freeze({
   ASSIGN_NPC_TO_ROLE:   'npcs',
   IMPAIR_FACTION:       'factions',
   RESTORE_FACTION:      'factions',     // recover a faction that is currently impaired
-  EXPOSE_CORRUPTION:    'factions',     // or institutions; pick factions as the dominant case
+  EXPOSE_CORRUPTION:    'npcs',         // NPC-only: a faction/institution is scandalised only via chain propagation
   RESTORE_INSTITUTION:  'institutions', // recover an institution that is currently impaired
   DEPLETE_RESOURCE:     'resources',
   RECOVERED_RESOURCE:   'resources',    // recover a resource the campaign already depleted

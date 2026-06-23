@@ -66,6 +66,35 @@ describe('event registry', () => {
       expect(EVENT_TYPES).toContain(t);
     }
   });
+
+  test('every make-change visibly moves a dial — no event returns an empty stateDeltas', () => {
+    // A make-change that returns {} silently no-ops on the dials, which reads as
+    // a broken event at the table. Every authored type must move at least one.
+    for (const type of EVENT_TYPES) {
+      const deltas = EVENT_REGISTRY[type].stateDeltas({ type, payload: {}, targetId: 'x' }) || {};
+      const moves = Object.values(deltas).some(v => Number(v) !== 0);
+      expect(moves, `${type} returned an empty/zero stateDeltas`).toBe(true);
+    }
+  });
+});
+
+describe('SET_PRIMARY_DEITY dial nudge', () => {
+  const deltasFor = (event) => EVENT_REGISTRY.SET_PRIMARY_DEITY.stateDeltas(event);
+
+  test('adopting a deity is a small steadying nudge (+resilience, -volatility)', () => {
+    const deltas = deltasFor({ type: 'SET_PRIMARY_DEITY', targetId: 'deity.torm', payload: { snapshot: { name: 'Torm' } } });
+    expect(deltas.resilience).toBeGreaterThan(0);
+    expect(deltas.volatility).toBeLessThan(0);
+    // Small, justified — not an economic shock.
+    expect(Math.abs(deltas.resilience)).toBeLessThanOrEqual(5);
+  });
+
+  test('clearing the deity is the small inverse drift', () => {
+    const deltas = deltasFor({ type: 'SET_PRIMARY_DEITY', targetId: '', payload: {} });
+    expect(deltas.resilience).toBeLessThan(0);
+    expect(deltas.volatility).toBeGreaterThan(0);
+    expect(Math.abs(deltas.resilience)).toBeLessThanOrEqual(5);
+  });
 });
 
 describe('ADD_FACTION', () => {
@@ -90,6 +119,52 @@ describe('ADD_FACTION', () => {
     const factions = nextSettlement.powerStructure?.factions || [];
     const councils = factions.filter(f => /^council$/i.test(f.name || ''));
     expect(councils.length).toBe(1);
+  });
+});
+
+describe('ADD_NPC', () => {
+  test('carries authored descriptive traits onto the created NPC in read-card shapes', () => {
+    const before = baseSettlement;
+    const { nextSettlement } = applyEvent({
+      settlement: before,
+      systemState: deriveSystemState(before),
+      event: ev({
+        id: 'evn1', type: 'ADD_NPC', targetId: 'Mira the Bold',
+        payload: {
+          importance: 'key',
+          flaw: 'Reckless under pressure',
+          temperament: 'Hot-tempered',
+          goal: 'Reclaim her family name',
+          constraint: 'Bound by an old debt',
+          secret: 'Funds the smugglers',
+        },
+      }),
+    });
+    const npc = (nextSettlement.npcs || []).find(n => n.name === 'Mira the Bold');
+    expect(npc).toBeTruthy();
+    expect(npc.importance).toBe('key');
+    expect(npc.flaw).toBe('Reckless under pressure');
+    expect(npc.personality.dominant).toBe('Hot-tempered');
+    expect(npc.goal).toEqual({ short: 'Reclaim her family name' });
+    expect(npc.activeConstraint).toBe('Bound by an old debt');
+    expect(npc.secret).toEqual({ what: 'Funds the smugglers' });
+  });
+
+  test('omits descriptive traits when none are authored (tangible importance dial still moves)', () => {
+    const before = baseSettlement;
+    const { nextSettlement } = applyEvent({
+      settlement: before,
+      systemState: deriveSystemState(before),
+      event: ev({ id: 'evn2', type: 'ADD_NPC', targetId: 'Plain NPC', payload: { importance: 'notable' } }),
+    });
+    const npc = (nextSettlement.npcs || []).find(n => n.name === 'Plain NPC');
+    expect(npc).toBeTruthy();
+    expect(npc.flaw).toBeUndefined();
+    expect(npc.goal).toBeUndefined();
+    expect(npc.secret).toBeUndefined();
+    expect(npc.activeConstraint).toBeUndefined();
+    // ADD_NPC's tangible effect is the importance-scaled resilience nudge.
+    expect(EVENT_REGISTRY.ADD_NPC.stateDeltas({ type: 'ADD_NPC', payload: { importance: 'notable' } }).resilience).toBeGreaterThan(0);
   });
 });
 

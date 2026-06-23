@@ -43,6 +43,14 @@
  *  @property {string=} removedByEventId
  *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
+ *  @property {string=} flaw                   character flaw — the organic-corruption vector
+ *  @property {string=} temperament            input alias; stored as personality.dominant
+ *  @property {Object=} personality            {dominant?, ideal?, bond?, ambition?, …} display traits
+ *  @property {(string|Object)=} goal          {short?, long?} or a plain string
+ *  @property {(string|Object)=} goals         input alias for goal
+ *  @property {string=} constraint             input alias; stored as activeConstraint
+ *  @property {string=} activeConstraint       a binding constraint on the NPC
+ *  @property {(string|Object)=} secret        {what?, stakes?} or a plain string
  *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
  *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
  *                                             id (e.g. the originating event id); not persisted
@@ -93,7 +101,7 @@ export function createNpc(input = {}) {
     ? String(input._idSeed)
     : [input.name, input.role, ...(input.linkedFactionIds || []), ...(input.linkedInstitutionIds || [])].join('|');
   const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortHash(idSeed)}`;
-  return {
+  const out = {
     id,
     name: input.name || 'Unnamed',
     role: input.role || '',
@@ -108,6 +116,42 @@ export function createNpc(input = {}) {
     potentialSuccessors:     input.potentialSuccessors || [],
     notes: input.notes || '',
   };
+
+  // Authored descriptive traits. The NPC read card (npcComponents NPCInlineCard,
+  // via entityLinks normalizeNpcTraits) reads these in specific shapes; we accept
+  // lenient plain strings here and store them in exactly those shapes so an
+  // authored NPC shows precisely what the author typed. Each is retained only
+  // when supplied — a created NPC with none of them keeps its old footprint.
+  //   - temperament → personality.dominant (the card's "Temperament" trait chip)
+  //   - flaw        → top-level flaw (the "Flaw" chip)
+  //   - goal        → { short } when a string was passed, else the object as-is
+  //   - constraint  → activeConstraint
+  //   - secret      → { what } when a string was passed, else the object as-is
+  const traits = /** @type {Record<string, any>} */ (out);
+  if (input.temperament != null && input.temperament !== '') {
+    const existing = (input.personality && typeof input.personality === 'object' && !Array.isArray(input.personality))
+      ? input.personality
+      : {};
+    traits.personality = { ...existing, dominant: input.temperament };
+  } else if (input.personality !== undefined) {
+    traits.personality = input.personality;
+  }
+  if (input.flaw != null && input.flaw !== '') traits.flaw = input.flaw;
+  if (input.goal != null && input.goal !== '') {
+    traits.goal = typeof input.goal === 'string' ? { short: input.goal } : input.goal;
+  } else if (input.goals != null && input.goals !== '') {
+    traits.goal = typeof input.goals === 'string' ? { short: input.goals } : input.goals;
+  }
+  if (input.constraint != null && input.constraint !== '') {
+    traits.activeConstraint = input.constraint;
+  } else if (input.activeConstraint != null && input.activeConstraint !== '') {
+    traits.activeConstraint = input.activeConstraint;
+  }
+  if (input.secret != null && input.secret !== '') {
+    traits.secret = typeof input.secret === 'string' ? { what: input.secret } : input.secret;
+  }
+
+  return /** @type {NpcStructural} */ (out);
 }
 
 /**

@@ -32,6 +32,7 @@ import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
+import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -640,7 +641,12 @@ export function recentHostileMemory(snapshot, settlementId, currentTick) {
   return best;
 }
 
-const WAR_STRESSOR_TYPES = Object.freeze(['siege', 'wartime', 'occupation', 'betrayal']);
+// WAR_STRESSOR_TYPES now lives in a dependency-free leaf module so event
+// mutation can import it without pulling this heavy module's regional-graph
+// chain into its load graph (which created an init-order cycle). Re-exported
+// here (imported above for local use) so this module's existing consumers are
+// unaffected.
+export { WAR_STRESSOR_TYPES };
 
 // Table-facing hooks per spawn variant — the same catalog type is a
 // different adventure depending on who is behind it. Surfaced on the
