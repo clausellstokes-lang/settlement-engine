@@ -162,7 +162,7 @@ function seedDraftFromPrebuilt(entry) {
   return draft;
 }
 
-export function CustomContentManager({ search }) {
+export function CustomContentManager({ search, initialCat }) {
   const customContent = useStore(s => s.customContent);
   const addCustomItem = useStore(s => s.addCustomItem);
   const updateCustomItem = useStore(s => s.updateCustomItem);
@@ -173,7 +173,12 @@ export function CustomContentManager({ search }) {
   const customContentError = useStore(s => s.customContentError);
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
 
-  const [activeCat, setActiveCat] = useState('institutions');
+  // A ?cat=<bucket> deep-link (e.g. the picker's "Author a deity" jump) can
+  // pre-select a bucket. Validated against the known categories so a bad param
+  // falls back to the default rather than selecting a non-existent bucket.
+  const [activeCat, setActiveCat] = useState(
+    initialCat && CATEGORY_BY_KEY[initialCat] ? initialCat : 'institutions',
+  );
   const [addingNew, setAddingNew] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);

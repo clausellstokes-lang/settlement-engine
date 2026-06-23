@@ -263,7 +263,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
         />
         {/* The "Awaken religion" gate (+ byte-identical-when-off promise). */}
         <div style={{ marginTop: SP.sm, marginBottom: SP.sm }}>
-          <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={showWrite} />
+          <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
         </div>
         {/* Write: assign the primary deity. */}
         {showWrite ? (
@@ -297,8 +297,8 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
         {/* The war-layer + strategy gates live with the change tools, since events
             (declare war, deploy) only matter once the war layer is on. */}
         <div style={{ display: 'grid', gap: SP.xs, marginBottom: SP.sm }}>
-          <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={showWrite} />
-          <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={showWrite} />
+          <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
+          <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
         </div>
         {showWrite ? (
           <>

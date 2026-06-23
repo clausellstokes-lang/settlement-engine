@@ -38,12 +38,6 @@ import PageHeader from './primitives/PageHeader.jsx';
 
 export default function SettlementsPanel({ onNavigate, routeId }) {
   const updateConfig = useStore(s => s.updateConfig);
-  const setInstitutionToggles = useStore(s => s.setInstitutionToggles);
-  const setCategoryToggles = useStore(s => s.setCategoryToggles);
-  const setGoodsToggles = useStore(s => s.setGoodsToggles);
-  const setServiceToggles = useStore(s => s.setServiceToggles);
-  const setSettlement = useStore(s => s.setSettlement);
-  const setLoadedFromSave = useStore(s => s.setLoadedFromSave);
   const maxSaves = useStore(s => s.maxSaves());
   const canSave = useStore(s => s.canSave());
   const authTier = useStore(s => s.auth.tier);
@@ -81,22 +75,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const advanceCampaignRegionalImpacts = useStore(s => s.advanceCampaignRegionalImpacts);
   const applyAllQueuedRegionalImpacts = useStore(s => s.applyAllQueuedRegionalImpacts);
   const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
-
-  const onLoad = (data) => {
-    if (data && !isSaveActive(data)) return;
-    // Prefer the settlement's RAW pre-resolution config (random sentinels
-    // intact) over the save's stored config: legacy saves only carry the
-    // RESOLVED config, which pinned 'random' settings to their first roll
-    // after "Apply Saved Configuration & Regenerate".
-    const rawConfig = data.settlement?._config || data.config;
-    if (rawConfig) updateConfig(migrateConfig(rawConfig));
-    if (data.institutionToggles) setInstitutionToggles(data.institutionToggles);
-    if (data.categoryToggles) setCategoryToggles(data.categoryToggles);
-    if (data.goodsToggles) setGoodsToggles(data.goodsToggles);
-    if (data.servicesToggles) setServiceToggles(data.servicesToggles);
-    if (data.settlement) { setSettlement(data.settlement); setLoadedFromSave({ name: data.settlement.name, tier: data.settlement.tier }); }
-    onNavigate?.('generate');
-  };
 
   // Which sample is mid-generation (holds the sample.id). Drives the
   // per-card disabled state + transient "Generating…" label so a slow
@@ -638,7 +616,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       linking={linking} setLinking={setLinking}
       editNamesOpen={editNamesOpen} setEditNamesOpen={setEditNamesOpen}
       handleLink={handleLink} removeNeighbour={removeNeighbour}
-      applyRename={applyRename} onLoad={onLoad}
+      applyRename={applyRename}
     />;
   }
 

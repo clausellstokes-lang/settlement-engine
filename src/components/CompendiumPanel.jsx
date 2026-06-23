@@ -92,7 +92,20 @@ const TAB_META = Object.freeze({
 });
 
 export default function CompendiumPanel({ standalone=false }) {
-  const [mode, setMode] = useState('catalog'); // 'catalog' | 'custom'
+  // Honor a ?mode=custom deep-link on mount (e.g. the "Author a deity" jump from
+  // the Primary Deity picker) so the surface opens straight into custom content.
+  // A paired ?cat=<bucket> is threaded into CustomContentManager to pre-select
+  // the right bucket. Defaults to the built-in catalog.
+  const initialMode = (() => {
+    if (typeof window === 'undefined') return 'catalog';
+    const params = new URLSearchParams(window.location.search);
+    return params.get('mode') === 'custom' ? 'custom' : 'catalog';
+  })();
+  const initialCustomCat = (() => {
+    if (typeof window === 'undefined') return null;
+    return new URLSearchParams(window.location.search).get('cat');
+  })();
+  const [mode, setMode] = useState(initialMode); // 'catalog' | 'custom'
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
   //
@@ -265,7 +278,7 @@ export default function CompendiumPanel({ standalone=false }) {
             {search && <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
-            <CustomContentManager search={search.toLowerCase()}/>
+            <CustomContentManager search={search.toLowerCase()} initialCat={initialCustomCat}/>
           </div>
         </>
       )}

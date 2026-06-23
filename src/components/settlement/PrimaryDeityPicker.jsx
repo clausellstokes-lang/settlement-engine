@@ -17,6 +17,7 @@ import { useStore } from '../../store/index.js';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { navigate } from '../../hooks/useRoute.js';
 
 const DEITY_ACCENT = swatch['#7A5A1A'];
 
@@ -72,7 +73,11 @@ export default function PrimaryDeityPicker() {
       {heading}
       {deities.length === 0 ? (
         <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
-          No deities authored yet. Create one in the Compendium’s Custom → Deities tab, then assign it here.
+          No deities authored yet.{' '}
+          <Button variant="ghost" size="sm" onClick={() => navigate('compendium', { search: '?mode=custom&cat=deities' })}>
+            Author a deity
+          </Button>{' '}
+          to assign one here.
         </div>
       ) : (
         <>

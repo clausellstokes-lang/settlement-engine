@@ -78,7 +78,6 @@ export default function SettlementDetail({
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
   handleLink, removeNeighbour, applyRename,
-  onLoad,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
   // Runnable-essentials lead-in: surface the already-computed hot-path facts
@@ -749,17 +748,6 @@ export default function SettlementDetail({
           <ChroniclePanel entries={chronicleEntries} />
         )}
 
-        {/* The Apply-Saved-Config regenerate affordance discards the current
-            dossier for a fresh roll — a destructive write. Demoted to a quiet
-            secondary outline and placed at the foot of edit mode. */}
-        <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
-          <Button variant="secondary" size="sm" icon={<RotateCcw size={12}/>} onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
-            Apply Saved Configuration &amp; Regenerate
-          </Button>
-          <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1}}>
-            Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
-          </span>
-        </div>
       </div>
       </div>)}
 
