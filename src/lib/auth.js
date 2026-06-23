@@ -147,6 +147,29 @@ async function supabaseSetSecurityAnswers({ q1, a1, q2, a2 }) {
   if (error) throw error;
 }
 
+/**
+ * Read which of the caller's two security-question slots are set, via the
+ * SECURITY DEFINER RPC `get_my_security_question_ids` (migration 066). Returns
+ * the stored `{ slot, questionId }` pairs (NEVER the answer hash) so the account
+ * page can show which questions are configured. Needs a live session
+ * (auth.uid()); returns an empty array on any failure so the UI degrades to a
+ * "not set yet" state rather than throwing.
+ *
+ * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+ */
+async function supabaseGetSecurityQuestionIds() {
+  try {
+    const { data, error } = await supabase.rpc('get_my_security_question_ids');
+    if (error || !Array.isArray(data)) return [];
+    return data.map((row) => ({
+      slot: Number(row.slot),
+      questionId: String(row.question_id),
+    }));
+  } catch {
+    return [];
+  }
+}
+
 async function supabaseSignIn(email, password, rememberMe = true) {
   // Route persistence BEFORE sign-in so the token (and every auto-refresh after)
   // is written to the correct store: sessionStorage when "remember me" is off
@@ -665,9 +688,28 @@ async function mockSignUp(email, _password) {
   return result;
 }
 
-/** Mock equivalent — no real security-question store in local dev; succeeds. */
-async function mockSetSecurityAnswers() {
-  // No-op in mock mode (no pgcrypto-backed store to write to).
+/**
+ * Mock equivalent — no pgcrypto-backed store in local dev, so we record only
+ * the (non-secret) question ids on the mock auth blob. The raw answers are
+ * deliberately DISCARDED, never persisted, so local dev mirrors the production
+ * guarantee that answers never sit in client storage.
+ *
+ * @param {{ q1?: string, a1?: string, q2?: string, a2?: string }} [answers]
+ */
+async function mockSetSecurityAnswers({ q1, q2 } = {}) {
+  const saved = mockLoadAuth();
+  if (!saved) return;
+  mockSaveAuth({ ...saved, securityQuestionIds: [
+    { slot: 1, questionId: q1 },
+    { slot: 2, questionId: q2 },
+  ] });
+}
+
+/** Mock equivalent — reads back the question ids recorded by mockSetSecurityAnswers. */
+async function mockGetSecurityQuestionIds() {
+  const saved = mockLoadAuth();
+  const ids = saved?.securityQuestionIds;
+  return Array.isArray(ids) ? ids : [];
 }
 
 async function mockSignIn(email, password, _rememberMe = true) {
@@ -768,6 +810,7 @@ function mockOnAuthChange() {
 export const auth = {
   signUp:             isConfigured ? supabaseSignUp             : mockSignUp,
   setSecurityAnswers: isConfigured ? supabaseSetSecurityAnswers  : mockSetSecurityAnswers,
+  getSecurityQuestionIds: isConfigured ? supabaseGetSecurityQuestionIds : mockGetSecurityQuestionIds,
   signIn:             isConfigured ? supabaseSignIn              : mockSignIn,
   signInWithMagicLink:isConfigured ? supabaseSignInWithMagicLink : mockSignInWithMagicLink,
   signInWithOAuth:    isConfigured ? supabaseSignInWithOAuth     : mockSignInWithOAuth,

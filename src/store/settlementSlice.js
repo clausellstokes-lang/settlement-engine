@@ -1035,26 +1035,26 @@ export const createSettlementSlice = (set, get) => ({
   // ── Saved settlements ──────────────────────────────────────────────────────
 
   /**
-   * Save the current settlement to the LOCAL store, snapshotting the live
-   * lifecycle state (phase / eventLog / systemState / locks / provenance
-   * timestamps) into the save record's `campaignState` so a subsequent reload
-   * restores exactly what the user is looking at.
+   * TEST-PRIVATE. The `__` prefix marks this action as internal: it is NOT the
+   * production save path and has no UI callers. The canonical save seam is
+   * `savesService.save()` (lib/saves.js), which the real "Save to Library"
+   * buttons (SaveToLibraryButton / WizardOutputToolbar / SettlementsPanel)
+   * call directly and then rehydrate via `setSavedSettlements`.
    *
-   * Without this snapshot, two saves would share whatever was last in
-   * the global slice — exactly the bug the audit flagged. The
-   * `campaign_state` JSONB column on Supabase plus the migration helper
-   * in `lib/saves.js` round-trip these fields.
+   * It snapshots the live lifecycle state (phase / eventLog / systemState /
+   * locks / provenance timestamps) into the save record's `campaignState` so a
+   * reload restores exactly what the user is looking at, exercising the same
+   * `pickleCampaignState` round-trip the canonical path persists to the
+   * `campaign_state` JSONB column. That round-trip is what the store tests
+   * assert against here, which is the only reason this action is retained.
    *
-   * IMPORTANT — not the live save path. The real "Save to Library" buttons
-   * (SaveToLibraryButton / WizardOutputToolbar / SettlementsPanel) call
-   * `savesService.save()` directly and rehydrate via setSavedSettlements, so
-   * this action's first_save/third_save pricing moments, 'saved' research
-   * fingerprint, and in-action slot guard DO NOT fire for those users. It is
-   * retained for the optimistic local-save flow and tests; wiring the UI
-   * buttons through it (so those moments fire) is tracked for the UI bundle.
-   * If you route a real button here, drop the duplicate save in the component.
+   * Because the production buttons bypass this action, its first_save/
+   * third_save pricing moments, 'saved' research fingerprint, and in-action
+   * slot guard DO NOT fire for real users. If you ever route a real button
+   * here, rename it (drop the `__`), drop the duplicate save in the component,
+   * and treat it as the live path.
    */
-  saveSettlement: (settlement) => {
+  __saveSettlementLocal: (settlement) => {
     const state = get();
     if (!state.canSave()) return false;
 
@@ -1109,9 +1109,9 @@ export const createSettlementSlice = (set, get) => ({
   /**
    * Instrumentation hook for the REAL (cloud/localStorage) save path.
    *
-   * Complements `saveSettlement` (the local-only optimistic path): the live
-   * "Save to Library" buttons call `savesService.save()` directly and rehydrate
-   * via `setSavedSettlements`, bypassing `saveSettlement` entirely — so its
+   * Complements `__saveSettlementLocal` (the test-private optimistic path): the
+   * live "Save to Library" buttons call `savesService.save()` directly and
+   * rehydrate via `setSavedSettlements`, bypassing that action entirely — so its
    * first_save/third_save pricing moments and 'saved' research fingerprint never
    * fired for real users. Call this AFTER a successful `savesService.save()` AND
    * after `savedSettlements` has been refreshed (so the count is correct).

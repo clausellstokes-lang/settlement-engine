@@ -234,8 +234,18 @@ function inferRoleArchetype(npc = {}) {
   return 'civic';
 }
 
+/**
+ * @param {Record<string, any>} [npc]
+ * @param {any} [item]
+ * @param {number} [index]
+ */
 function factionIdFor(npc = {}, item, index) {
-  const direct = npc.factionId || npc.faction || npc.affiliation || npc.organizationId || npc.organization;
+  // factionAffiliation is the generator's canonical faction handle (npcGenerator
+  // writes assignedFaction.faction onto it); read it FIRST so an affiliated NPC
+  // seats into its named faction instead of the positional-index fallback below.
+  // stablePart(factionAffiliation) lines up with seatNpcsIntoFactions' stablePart
+  // (faction.name) because both derive from the power faction's `faction` field.
+  const direct = npc.factionId || npc.faction || npc.affiliation || npc.factionAffiliation || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
   const faction = factions[index % Math.max(1, factions.length)];

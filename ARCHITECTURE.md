@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (67) — schema + RLS policies + credit ledger + version
+- **migrations/** (68) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -118,7 +118,10 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   (close authz gaps: RLS on the two analytics tables, drop the un-audited
   privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) +
   **066** (Auth Phase 2: server-write-only `security_answers` bcrypt table +
-  SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) —
+  SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) +
+  **067/068** (recovery-verify lockout with a time-bounded self-healing predicate
+  so a failed-answer streak throttles via escalating backoff instead of permanently
+  locking the account) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

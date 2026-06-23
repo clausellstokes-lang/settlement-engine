@@ -166,25 +166,79 @@ export function persistSaveUpdate(saveId, partial) {
   });
 }
 
+/**
+ * Persist a batch of per-save updates, COLLECTING each result. Returns an
+ * explicit outcome so the caller can decide whether the campaign snapshot is
+ * safe to commit as advanced. `failed` counts the settlement writes that did
+ * not land; `ok` is true only when every write succeeded (an empty batch is
+ * vacuously ok). persistSaveUpdate never throws and already reports each failure
+ * via campaignSyncError, so this only aggregates — it does not re-surface.
+ * @param {Array<{saveId:string,settlement?:any,campaignState?:any,versionHistory?:any}>} updates
+ * @returns {Promise<{ ok: boolean, total: number, failed: number }>}
+ */
 export async function persistSaveUpdates(updates = []) {
+  let failed = 0;
   for (const update of updates) {
-    await persistSaveUpdate(update.saveId, {
+    const okOne = await persistSaveUpdate(update.saveId, {
       settlement: update.settlement,
       campaignState: update.campaignState,
       versionHistory: update.versionHistory,
     });
+    if (okOne === false) failed += 1;
   }
+  return { ok: failed === 0, total: updates.length, failed };
 }
 
 /**
  * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
  * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
- * sync the campaign snapshot. Both awaits run only when the mutator produced
- * state. Failures inside persistSaveUpdates surface via campaignSyncError (see
- * persistSaveUpdate). Centralizing the pattern keeps the three call sites honest.
+ * sync the campaign snapshot — but ONLY when every settlement write landed. Both
+ * awaits run only when the mutator produced state.
+ *
+ * If any settlement update fails, we must NOT push the campaign snapshot to the
+ * cloud as 'advanced': doing so would advance the campaign tick/world graph while
+ * a member settlement stayed behind, so a reload would reconstruct a HYBRID
+ * timeline. Instead we leave the campaign cloud-pending (the local cache already
+ * holds the advance via cacheCampaignState) and surface a retryable failure via
+ * campaignSyncError. The cloud campaign row keeps its prior, consistent snapshot,
+ * so a reload reconciles to a coherent pre-advance state rather than a hybrid.
+ *
+ * The INVERSE case — every settlement write lands but the campaign upsert itself
+ * rejects — is guarded the same way. syncCampaignSnapshot → syncCampaignChanges
+ * re-throws on a rejected upsert; if we let that propagate it escapes the (also
+ * unwrapped) await in advanceCampaignWorld, WorldMap catches it and shows "could
+ * not advance" — but Phase 2 ALREADY committed and cached the advance locally. The
+ * user, told it failed, clicks advance again → a SECOND local tick (a double
+ * advance). So we swallow the rejection and surface the honest cloud-pending banner
+ * instead, exactly like the forward case: the advance is real locally, only the
+ * cloud campaign row is behind.
+ *
+ * The retry is idempotent: the campaign upsert is id-keyed and the per-save
+ * updates are last-write-wins partials, so re-applying the same advance lands the
+ * identical row rather than double-applying.
  */
 export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
-  if (!(result && campaignPersist)) return;
-  await persistSaveUpdates(persistUpdates);
-  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+  if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };
+  const saveOutcome = await persistSaveUpdates(persistUpdates);
+  if (!saveOutcome.ok) {
+    // A settlement write failed. Do NOT commit the campaign snapshot as advanced —
+    // leave it cloud-pending so a retry (or reload) reconciles to a coherent state
+    // rather than a hybrid timeline. persistSaveUpdate already reported the
+    // failure into campaignSyncError; re-assert it in case reporting was disabled.
+    try { _reportPersistFailure?.(new Error('settlement save failed; campaign left cloud-pending')); }
+    catch { /* reporting must never throw */ }
+    return { ok: false, savesFailed: saveOutcome.failed, campaignSynced: false };
+  }
+  // Every settlement landed. Push the campaign snapshot — but a rejected campaign
+  // upsert must NOT throw out of here (it would surface a misleading "could not
+  // advance" and invite a double advance, see the inverse-case note above). Report
+  // it as cloud-pending and let an id-keyed retry/reload reconcile.
+  try {
+    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+  } catch (e) {
+    console.warn('[campaignSlice] campaign snapshot sync failed; left cloud-pending', e);
+    try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+    return { ok: false, savesFailed: 0, campaignSynced: false };
+  }
+  return { ok: true, savesFailed: 0, campaignSynced: true };
 }

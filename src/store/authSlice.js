@@ -274,6 +274,19 @@ export const createAuthSlice = (set, get) => ({
     await authService.setSecurityAnswers(answers);
   },
 
+  /**
+   * Read which of the caller's two security-question slots are currently set,
+   * so the account page can show "set / not set" status. Thin pass-through to
+   * the auth service's get_my_security_question_ids RPC wrapper — it returns
+   * only the {slot, questionId} pairs (never the answer hash) and needs a live
+   * session. Degrades to an empty array on any failure.
+   *
+   * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+   */
+  authGetSecurityQuestionIds: async () => {
+    return authService.getSecurityQuestionIds();
+  },
+
   /** Sign in with email + password. rememberMe controls session persistence. */
   authSignIn: async (email, password, rememberMe = true) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });

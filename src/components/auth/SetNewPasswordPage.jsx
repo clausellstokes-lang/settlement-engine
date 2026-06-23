@@ -36,6 +36,22 @@ import {
   AuthPageShell, FooterLink, Input, Button as AuthCTAButton, Alert, Button,
 } from './authUI.jsx';
 
+/**
+ * True when the current URL carries Supabase's recovery marker. The recovery
+ * link lands with 'type=recovery' in the hash (implicit flow) or the query
+ * string (PKCE). Either is a genuine recovery signal; a bare session is not.
+ *
+ * @returns {boolean}
+ */
+function urlMarksRecovery() {
+  if (typeof window === 'undefined') return false;
+  const hash = (window.location.hash || '').replace(/^#/, '');
+  const search = (window.location.search || '').replace(/^\?/, '');
+  const hashType = new URLSearchParams(hash).get('type');
+  const searchType = new URLSearchParams(search).get('type');
+  return hashType === 'recovery' || searchType === 'recovery';
+}
+
 export default function SetNewPasswordPage() {
   const authUpdatePassword = useStore(s => s.authUpdatePassword);
   const onAuthed = () => navigate('settlements');
@@ -51,39 +67,40 @@ export default function SetNewPasswordPage() {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Detect the recovery session. detectSessionInUrl parses the link's token on
-  // load; we both subscribe to the PASSWORD_RECOVERY event (the canonical
-  // signal) AND check getSession() for the case where the event fired before
-  // this component mounted. Either path flips us to 'ready'.
+  // Authorize ONLY on a genuine recovery signal — never on a bare session. An
+  // ordinary logged-in (or stolen) session reaching this page must NOT be able
+  // to rotate the password without the current-password re-auth that the
+  // Account security panel requires. Two recovery signals exist:
+  //   • the PASSWORD_RECOVERY auth event (the canonical signal), and
+  //   • the 'type=recovery' marker the recovery link carries in the URL
+  //     (hash for the implicit flow, query for PKCE), which detectSessionInUrl
+  //     consumes. We read it on mount to cover the race where the event fired
+  //     before we subscribed; the marker persists in the hash long enough to
+  //     observe. A SIGNED_IN event or a getSession() session is NOT accepted.
   useEffect(() => {
     // Mock / unconfigured: no real recovery token to parse (phase already
     // initialized to 'ready'); nothing to subscribe to.
     if (!isConfigured || !supabase) return undefined;
 
     let active = true;
-    const settle = (hasSession) => {
+    const settle = (isRecovery) => {
       if (!active) return;
-      setPhase(hasSession ? 'ready' : 'no-session');
+      setPhase(isRecovery ? 'ready' : 'no-session');
     };
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'PASSWORD_RECOVERY' || (event === 'SIGNED_IN' && session)) {
-        settle(true);
-      }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') settle(true);
     });
 
-    // Catch the case where the event already fired before we subscribed.
-    supabase.auth.getSession().then(({ data }) => {
-      if (data?.session) settle(true);
-      else {
-        // Give the URL-token parse a brief moment, then conclude no-session.
-        // A short delay avoids a flash of the fallback while detectSessionInUrl
-        // is still resolving the recovery token on first paint.
-        setTimeout(() => {
-          supabase.auth.getSession().then(({ data: d }) => settle(Boolean(d?.session)));
-        }, 1200);
-      }
-    });
+    // The recovery link carries 'type=recovery' in the URL. detectSessionInUrl
+    // may strip it once parsed, so we snapshot it synchronously on mount.
+    if (urlMarksRecovery()) settle(true);
+    else {
+      // Give the event a brief moment to arrive (it may fire just after mount),
+      // then conclude no-session. We never fall back to accepting a plain
+      // session — only the PASSWORD_RECOVERY event above can still flip us.
+      setTimeout(() => settle(false), 1200);
+    }
 
     return () => { active = false; subscription.unsubscribe(); };
   }, []);

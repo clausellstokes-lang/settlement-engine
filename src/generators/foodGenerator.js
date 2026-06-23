@@ -93,13 +93,31 @@ export function generateFoodSecurity(tier, institutions, config) {
   const activeChainsCount = activeChains.length;
   const diversityScore    = Math.min(1, activeChainsCount / 3); // 0–1 normalized
 
+  // ── Stress modifiers (computed before storage so reserves reflect siege/
+  //    occupation drain) ──────────────────────────────────────────────────────
+  const stressFamine  = stresses.includes('famine');
+  const stressSiege   = stresses.includes('under_siege');
+  const stressPlague  = stresses.includes('plague_onset');
+  const stressOccupied= stresses.includes('occupied');
+  let productionMult  = 1;
+  let consumptionMult = 1;
+  let effectiveRoute  = route;
+  if (stressFamine)   { productionMult  *= 0.35; }
+  if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
+  if (stressPlague)   { productionMult  *= 0.75; }
+  if (stressOccupied) { consumptionMult *= 1.20; }
+
   // ── Storage buffer (months of food security) ──────────────────────────────
   const baseStorage = hasStateGranary ? (tier === 'metropolis' ? 12 : 8)
                     : hasCityGranary  ? (tier === 'city' ? 7 : 5)
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
                     : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
-  // Mill extends storage — flour lasts longer than grain
-  const storageMonths = Math.round((hasMill ? baseStorage * 1.25 : baseStorage) * 10) / 10;
+  // Mill extends storage — flour lasts longer than grain.
+  const milledStorage = hasMill ? baseStorage * 1.25 : baseStorage;
+  // A fixed reserve drains faster when daily need is elevated. An occupied
+  // settlement's +20% consumption shortens how many months that reserve lasts;
+  // peacetime (consumptionMult === 1) is unchanged.
+  const storageMonths = Math.round((milledStorage / consumptionMult) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -134,19 +152,6 @@ export function generateFoodSecurity(tier, institutions, config) {
   if (hasMill      && hasRes('river_mills'))         agriMod += 0.08;
   agriMod = Math.min(agriMod, 0.5);
   const effectiveAgri = Math.min(terrainAgri + agriMod, 2.0);
-
-  // Stress modifiers
-  const stressFamine  = stresses.includes('famine');
-  const stressSiege   = stresses.includes('under_siege');
-  const stressPlague  = stresses.includes('plague_onset');
-  const stressOccupied= stresses.includes('occupied');
-  let productionMult  = 1;
-  let consumptionMult = 1;
-  let effectiveRoute  = route;
-  if (stressFamine)   { productionMult  *= 0.35; }
-  if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
-  if (stressPlague)   { productionMult  *= 0.75; }
-  if (stressOccupied) { consumptionMult *= 1.20; }
 
   const dailyNeed       = population * PER_CAPITA_NEED * consumptionMult;
   // Seeded crop-fortune variance (±8%): the SAME config yields a slightly

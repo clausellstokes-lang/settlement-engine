@@ -3,7 +3,7 @@
  * keep saved campaigns truthful across reloads.
  *
  * Why these tests exist (audit reconciliation, CRIT category):
- *   1. saveSettlement → hydrateFromSave must round-trip campaign state
+ *   1. __saveSettlementLocal → hydrateFromSave must round-trip campaign state
  *      (phase / eventLog / systemState / canonizedAt / locks) so opening
  *      a saved canon settlement actually shows that settlement's
  *      timeline, not whatever was last in the global slice.
@@ -247,7 +247,7 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   });
 });
 
-describe('settlementSlice — saveSettlement persists campaignState', () => {
+describe('settlementSlice — __saveSettlementLocal (test-private path) persists campaignState', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -261,7 +261,7 @@ describe('settlementSlice — saveSettlement persists campaignState', () => {
       id: 'save-test-1', type: 'IMPAIR_INSTITUTION', targetId: 'institution.temple',
       payload: { dimension: 'legitimacy', severity: 0.5 }, cause: 'player_action',
     });
-    store.getState().saveSettlement(store.getState().settlement);
+    store.getState().__saveSettlementLocal(store.getState().settlement);
 
     const [save] = store.getState().savedSettlements;
     expect(save.campaignState).toBeTruthy();

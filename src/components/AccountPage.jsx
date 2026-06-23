@@ -27,6 +27,7 @@ import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
+import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
 import AccountPreferencesSection from './account/AccountPreferencesSection.jsx';
@@ -274,6 +275,13 @@ export default function AccountPage({ onNavigateAdmin }) {
 
       {/* ── Login & Security ────────────────────────────────────── */}
       <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
+
+      {/* ── Account recovery questions ──────────────────────────────
+          The durable home for security-question enrollment: sign-up's
+          deferred capture is best-effort, so this is where any account
+          (OAuth, confirmed elsewhere, closed-window) sets or replaces its
+          two questions and the forgot-password path it unlocks. */}
+      <AccountRecoveryQuestionsSection />
 
       {/* ── Data & Privacy (export, deletion, consent, visibility) ── */}
       <AccountDataPrivacySection

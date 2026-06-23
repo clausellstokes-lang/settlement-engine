@@ -256,8 +256,28 @@ export const en = Object.freeze({
         distinct:     'Choose two different questions.',
       },
       // Non-fatal: the account exists, but the answers did not save on the first
-      // try. We tell the user they can set them later from their account page.
-      saveDeferred: 'Your account is ready. You can set your security questions later from your account page.',
+      // try. We point the user at the account-page section that now exists for
+      // setting them later (see security.account below).
+      saveDeferred: 'Your account is ready. You can set your security questions later under Login and security on your account page.',
+      // Account-page section: a signed-in user sets or replaces their two
+      // recovery questions here. Formal register, no contractions.
+      account: {
+        heading:     'Account recovery questions',
+        prose:       'Set two questions and answers. If you ever forget your password, we will ask one of them at random to confirm the account is yours.',
+        statusSet:    'Your recovery questions are set.',
+        statusNotSet: 'You have not set any recovery questions yet.',
+        currentLabel: 'Current questions',
+        edit:        'Set recovery questions',
+        replace:     'Replace recovery questions',
+        cancel:      'Cancel',
+        save:        'Save recovery questions',
+        saving:      'Saving',
+        saved:       'Your recovery questions are saved.',
+        saveError:   'We could not save your recovery questions. Please try again.',
+        // Gentle, non-blocking nudge shown on the account page when no questions
+        // are set. Points to this same section.
+        nudge:       'Set up account recovery questions so you can reset your password if you ever forget it.',
+      },
     },
     // Minimal email-confirmation landing page. The confirmation link lands here,
     // NOT in the original signup window — that window polls and signs itself in.

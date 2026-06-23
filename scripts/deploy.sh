@@ -135,37 +135,46 @@ ok "API keys retrieved"
 
 info "Step 5: Deploying edge functions..."
 
-npx supabase functions deploy create-checkout --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: create-checkout"
+# SOURCE-DERIVED function list: enumerate every directory under
+# supabase/functions/ except _shared (a helper bundle, not a deployable
+# function). Deriving the list from the tree means a newly added function is
+# deployed automatically and the set can never silently drift from the repo.
+#
+# No --no-verify-jwt flags: verify_jwt is pinned EXPLICITLY per function in
+# supabase/config.toml (the deploy source of truth per docs/DEPLOY.md), so the
+# platform JWT gate is set from config, never from a stray CLI flag.
+FUNCTIONS=()
+for fn_dir in "$PROJECT_DIR"/supabase/functions/*/; do
+  fn_name="$(basename "$fn_dir")"
+  [[ "$fn_name" == "_shared" ]] && continue
+  FUNCTIONS+=("$fn_name")
+done
 
-npx supabase functions deploy create-customer-portal --project-ref "$PROJECT_REF"
-ok "Deployed: create-customer-portal"
+[[ ${#FUNCTIONS[@]} -eq 0 ]] && fail "No edge functions found under supabase/functions/"
 
-npx supabase functions deploy verify-single-dossier --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: verify-single-dossier"
+DEPLOYED_COUNT=0
+for fn_name in "${FUNCTIONS[@]}"; do
+  npx supabase functions deploy "$fn_name" --project-ref "$PROJECT_REF"
+  ok "Deployed: $fn_name"
+  DEPLOYED_COUNT=$((DEPLOYED_COUNT + 1))
+done
 
-npx supabase functions deploy generate-narrative --project-ref "$PROJECT_REF"
-ok "Deployed: generate-narrative"
-
-npx supabase functions deploy generate-chronicle --project-ref "$PROJECT_REF"
-ok "Deployed: generate-chronicle"
-
-npx supabase functions deploy stripe-webhook --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: stripe-webhook"
-
-npx supabase functions deploy admin-actions --project-ref "$PROJECT_REF"
-ok "Deployed: admin-actions"
-
-npx supabase functions deploy send-email --project-ref "$PROJECT_REF"
-ok "Deployed: send-email"
-
-# Analytics intelligence layer (docs/simulation-intelligence-layer.md). ingest is
-# anonymous (--no-verify-jwt); export is secret-gated (called by cron via pg_net).
-npx supabase functions deploy ingest-events --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: ingest-events"
-
-npx supabase functions deploy analytics-export --project-ref "$PROJECT_REF"
-ok "Deployed: analytics-export"
+# Post-deploy verification: confirm every function we intended to deploy is
+# actually present on the project. Fail loudly if any is missing so a partial
+# deploy can never pass silently. `supabase functions list` prints each
+# function's slug; require every name in FUNCTIONS to appear.
+info "Verifying deployed functions..."
+REMOTE_FUNCTIONS="$(npx supabase functions list --project-ref "$PROJECT_REF" 2>/dev/null || echo "")"
+MISSING=()
+for fn_name in "${FUNCTIONS[@]}"; do
+  if ! echo "$REMOTE_FUNCTIONS" | grep -qw "$fn_name"; then
+    MISSING+=("$fn_name")
+  fi
+done
+if [[ ${#MISSING[@]} -gt 0 ]]; then
+  fail "Post-deploy check failed — missing on project: ${MISSING[*]}"
+fi
+ok "All $DEPLOYED_COUNT functions verified present"
 
 # ── Step 6: Stripe setup ───────────────────────────────────────────────────
 
@@ -178,39 +187,22 @@ read -rsp "  Stripe secret key (sk_...): " STRIPE_SK
 echo ""
 [[ -z "$STRIPE_SK" ]] && fail "Stripe key required"
 
-# Create products and prices via Stripe API
-info "Creating Stripe products..."
-
-# 10 Credits Pack
-CREDITS_10=$(curl -s https://api.stripe.com/v1/prices \
-  -u "$STRIPE_SK:" \
-  -d "unit_amount=299" \
-  -d "currency=usd" \
-  -d "product_data[name]=10 Narrative Credits" \
-  -d "product_data[metadata][product]=credits_10" \
-  | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
-ok "10-credit pack: $CREDITS_10"
-
-# 50 Credits Pack
-CREDITS_50=$(curl -s https://api.stripe.com/v1/prices \
-  -u "$STRIPE_SK:" \
-  -d "unit_amount=999" \
-  -d "currency=usd" \
-  -d "product_data[name]=50 Narrative Credits" \
-  -d "product_data[metadata][product]=credits_50" \
-  | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
-ok "50-credit pack: $CREDITS_50"
-
-# Premium Subscription
-PREMIUM=$(curl -s https://api.stripe.com/v1/prices \
-  -u "$STRIPE_SK:" \
-  -d "unit_amount=499" \
-  -d "currency=usd" \
-  -d "recurring[interval]=month" \
-  -d "product_data[name]=SettlementForge Premium" \
-  -d "product_data[metadata][product]=premium" \
-  | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
-ok "Premium subscription: $PREMIUM"
+# Stripe products/prices are provisioned OUT OF BAND, not by this script. The
+# live catalogue (25/60/150 credit packs, founder lifetime, premium, and the
+# single-dossier SKU — see the PRICE_MAP in create-checkout and the secrets list
+# in docs/DEPLOY.md) is maintained in the Stripe dashboard. This script only
+# wires the resulting price IDs into the Supabase function secrets below.
+#
+# Collect each documented price ID. Leave any blank to skip wiring that key now
+# (you can set it later with `supabase secrets set`). Legacy SKU keys are kept in
+# the price map for refund/replay continuity and are NOT prompted for here.
+info "Collecting Stripe price IDs (provisioned in the Stripe dashboard)..."
+read -rp "  STRIPE_PRICE_CREDITS_25 (price_...): " PRICE_CREDITS_25
+read -rp "  STRIPE_PRICE_CREDITS_60 (price_...): " PRICE_CREDITS_60
+read -rp "  STRIPE_PRICE_CREDITS_150 (price_...): " PRICE_CREDITS_150
+read -rp "  STRIPE_PRICE_PREMIUM (price_...): " PRICE_PREMIUM
+read -rp "  STRIPE_PRICE_FOUNDER_LIFETIME (price_...): " PRICE_FOUNDER_LIFETIME
+read -rp "  STRIPE_PRICE_SINGLE_DOSSIER (price_...): " PRICE_SINGLE_DOSSIER
 
 # ── Step 7: Create Stripe webhook ──────────────────────────────────────────
 
@@ -258,11 +250,25 @@ npx supabase secrets set \
   --project-ref "$PROJECT_REF" \
   STRIPE_SECRET_KEY="$STRIPE_SK" \
   STRIPE_WEBHOOK_SECRET="$WEBHOOK_SECRET" \
-  STRIPE_PRICE_CREDITS_10="$CREDITS_10" \
-  STRIPE_PRICE_CREDITS_50="$CREDITS_50" \
-  STRIPE_PRICE_PREMIUM="$PREMIUM" \
   ANTHROPIC_API_KEY="$ANTHROPIC_KEY" \
   CLIENT_URL="$CLIENT_URL"
+
+# Stripe price-ID secrets (current catalogue per docs/DEPLOY.md). Set only the
+# ones the operator supplied above so re-runs stay idempotent and a blank entry
+# never clobbers an already-configured price ID.
+PRICE_SECRETS=()
+[[ -n "$PRICE_CREDITS_25" ]]       && PRICE_SECRETS+=("STRIPE_PRICE_CREDITS_25=$PRICE_CREDITS_25")
+[[ -n "$PRICE_CREDITS_60" ]]       && PRICE_SECRETS+=("STRIPE_PRICE_CREDITS_60=$PRICE_CREDITS_60")
+[[ -n "$PRICE_CREDITS_150" ]]      && PRICE_SECRETS+=("STRIPE_PRICE_CREDITS_150=$PRICE_CREDITS_150")
+[[ -n "$PRICE_PREMIUM" ]]          && PRICE_SECRETS+=("STRIPE_PRICE_PREMIUM=$PRICE_PREMIUM")
+[[ -n "$PRICE_FOUNDER_LIFETIME" ]] && PRICE_SECRETS+=("STRIPE_PRICE_FOUNDER_LIFETIME=$PRICE_FOUNDER_LIFETIME")
+[[ -n "$PRICE_SINGLE_DOSSIER" ]]   && PRICE_SECRETS+=("STRIPE_PRICE_SINGLE_DOSSIER=$PRICE_SINGLE_DOSSIER")
+if [[ ${#PRICE_SECRETS[@]} -gt 0 ]]; then
+  npx supabase secrets set --project-ref "$PROJECT_REF" "${PRICE_SECRETS[@]}"
+  ok "Stripe price IDs configured (${#PRICE_SECRETS[@]} set)"
+else
+  warn "No Stripe price IDs supplied — set them later per docs/DEPLOY.md before going live"
+fi
 
 if [ -n "$RESEND_KEY" ]; then
   npx supabase secrets set --project-ref "$PROJECT_REF" \
@@ -311,8 +317,8 @@ echo "════════════════════════�
 echo ""
 echo "  Supabase URL:    $SUPABASE_URL"
 echo "  Project ref:     $PROJECT_REF"
-echo "  Edge functions:  5 deployed"
-echo "  Stripe products: 3 created"
+echo "  Edge functions:  $DEPLOYED_COUNT deployed"
+echo "  Stripe prices:   ${#PRICE_SECRETS[@]} wired (catalogue provisioned in Stripe — see docs/DEPLOY.md)"
 echo "  Webhook:         $WEBHOOK_URL"
 echo ""
 echo "  Next steps:"

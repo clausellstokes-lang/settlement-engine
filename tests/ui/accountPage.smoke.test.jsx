@@ -52,6 +52,9 @@ const storeState = {
   maxSaves: () => 3,
   authSignOut: vi.fn(),
   setAuth: vi.fn(),
+  // Recovery-questions section (Finding #4) reads/sets via these actions.
+  authGetSecurityQuestionIds: vi.fn().mockResolvedValue([]),
+  authSetSecurityAnswers: vi.fn().mockResolvedValue(undefined),
   // Phase A2 — new selectors/actions the page (and its new sections) read.
   removeSavedSettlement: vi.fn(),
   clearSavedSettlements: vi.fn(),
