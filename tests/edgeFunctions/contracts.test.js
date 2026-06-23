@@ -909,9 +909,16 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
     expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
   });
 
-  it('declares an allowed-origins list (not "*")', () => {
-    expect(src).toMatch(/settlementforge\.com/);
-    expect(src).toMatch(/localhost/);
+  it('sources the origin allowlist from the shared module (not "*")', () => {
+    // The per-function inline allowlist was consolidated into
+    // supabase/functions/_shared/cors.ts (one list, no drift). create-checkout
+    // now imports getCorsHeaders from there rather than declaring its own hosts.
+    expect(src).toMatch(/from\s+['"]\.\.\/_shared\/cors\.ts['"]/);
+    expect(src).not.toMatch(/Access-Control-Allow-Origin['"]\s*:\s*['"]\*['"]/);
+    const shared = readFileSync(join(FUNCTIONS_DIR, '_shared', 'cors.ts'), 'utf8');
+    expect(shared).toMatch(/settlementforge\.com/);
+    expect(shared).toMatch(/localhost/);
+    expect(shared).toMatch(/settlement-engine\.pages\.dev/);
   });
 });
 

@@ -43,6 +43,8 @@ import {
 } from '../_shared/aiGroundingBundle.js';
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from '../_shared/requestMeta.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
 
@@ -1667,31 +1669,12 @@ ${JSON.stringify(summary, null, 2)}`;
 }
 
 // ── CORS ────────────────────────────────────────────────────────────────────
+// Origin decision is sourced from the shared allowlist (_shared/cors.ts) so
+// the Cloudflare Pages preview origin is accepted and the list never drifts
+// per-function. This endpoint advertises POST/OPTIONS.
 
 function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:5175',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  // Allow any http://localhost:<port> origin in addition to the explicit allowlist
-  const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
-  const match = allowed.includes(origin) || isLocalhost || !origin;
-  return {
-    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
-    // matched origin, else pin to the first allowed host.
-    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { 'Vary': 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 // ── AI fetch with retry + bounded concurrency ────────────────────────────────

@@ -21,8 +21,14 @@
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 afterEach(cleanup);
+
+// Resolve sibling source files relative to this test, not the cwd, so the
+// source-guard reads stay correct whichever directory vitest runs from.
+const fromTest = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 
 // Analytics is fire-and-forget; stub so the SimulationDrawer trigger inside
 // the toolbar mounts quietly without pulling the funnel wiring into the test.
@@ -58,13 +64,16 @@ describe('WizardOutputToolbar layering + controls', () => {
     expect(screen.getByRole('button', { name: /new draft/i })).toBeTruthy();
   });
 
-  test('sticks below the global header (positive offset) under a lower z-index', () => {
+  test('sticks fully clear of the global header (offset >= header height) under a lower z-index', () => {
     const { container } = renderToolbar();
     const bar = container.firstChild;
     expect(bar.style.position).toBe('sticky');
-    // Desktop: a positive top offset so the bar parks beneath the sticky
-    // header (top:0) instead of on top of it.
-    expect(parseInt(bar.style.top, 10)).toBeGreaterThan(0);
+    // Desktop: the bar must pin BELOW the whole sticky header, not merely at a
+    // positive offset. The header is ~59px tall; an offset short of that (the
+    // old top:52) left the bar's top edge tucked under the header. Require the
+    // offset to clear the full header so the pinned toolbar reads as a clean
+    // band, never partly hidden behind the chrome above it.
+    expect(parseInt(bar.style.top, 10)).toBeGreaterThanOrEqual(59);
     // Lower than the header's z-index (50) so the header wins the overlap.
     expect(Number(bar.style.zIndex)).toBeLessThan(50);
   });
@@ -91,5 +100,46 @@ describe('WizardOutputToolbar layering + controls', () => {
     expect(bar.style.marginLeft).toBe('auto');
     expect(bar.style.marginRight).toBe('auto');
     expect(bar.style.width).toBe('100%');
+  });
+});
+
+describe('Create-view sticky chrome: occlusion root-cause guards', () => {
+  // The user's real complaint was occlusion: the dark bar sat in a layer over
+  // the dossier and the chrome hid controls as content scrolled under it. Two
+  // upstream causes — both invisible to a render-only test of the bar in
+  // isolation — drove that, so they are guarded at the source.
+
+  test('App <main> does not establish a scroll container that kills the toolbar sticky', () => {
+    // App's shell is sized with `minHeight: 100vh` (not a fixed height), so the
+    // WINDOW scrolls, not <main>. A stray `overflow-y: auto` on <main> never
+    // engaged as a scroller but still made it the nearest scroll-clipping
+    // ancestor — which silently broke `position: sticky` for the toolbar: it
+    // resolved its offset against a box that never scrolled and so scrolled
+    // away with the page instead of pinning. Guard that <main> never reintroduces
+    // an overflow that traps descendant sticky chrome.
+    const appSrc = readFileSync(fromTest('../../src/App.jsx'), 'utf8');
+    // Capture the <main style={{ ... }}> object up to its closing `}}>` (the
+    // style contains `${...}` template braces, so match non-greedily to `}}>`).
+    const mainTag = appSrc.match(/<main style=\{\{([\s\S]*?)\}\}>/);
+    expect(mainTag, 'expected a <main style={{...}}> in App.jsx').toBeTruthy();
+    const mainStyle = mainTag[1];
+    expect(mainStyle).not.toMatch(/overflow(Y)?\s*:\s*['"](auto|scroll|hidden)['"]/);
+  });
+
+  test('GenerateWizard reserves scroll-padding on the document scroller while the dossier is visible', () => {
+    // With the window as the scroller, anchored/focus scrolls into a dossier
+    // section would land the target flush under the pinned header + toolbar,
+    // hiding the control jumped to. The fix sets `scroll-padding-top` on the
+    // real scroller (the document element) for the visible-dossier window. Guard
+    // that it targets `document.documentElement` (not `main`, which is no longer
+    // a scroller) and clears the full chrome stack (header + pinned toolbar).
+    const wizardSrc = readFileSync(fromTest('../../src/components/GenerateWizard.jsx'), 'utf8');
+    expect(wizardSrc).toMatch(/document\.documentElement[\s\S]{0,200}scrollPaddingTop/);
+    // Desktop clearance must reach past the pinned toolbar's bottom (~124px),
+    // i.e. a three-digit px value — not a header-only offset that re-hides the
+    // tab strip behind the toolbar.
+    const padMatch = wizardSrc.match(/scrollPaddingTop\s*=\s*isMobile\s*\?\s*'(\d+)px'\s*:\s*'(\d+)px'/);
+    expect(padMatch, 'expected a mobile/desktop scrollPaddingTop assignment').toBeTruthy();
+    expect(Number(padMatch[2])).toBeGreaterThanOrEqual(120);
   });
 });

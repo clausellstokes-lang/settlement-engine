@@ -20,6 +20,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -32,30 +34,12 @@ const HOUSE_STYLE = `Voice: a measured court chronicler. Concrete, specific, a l
 // of input size, so an unbounded payload would inflate Anthropic token cost.
 const MAX_BODY_BYTES = 64 * 1024;
 
-// CORS: fail CLOSED. When no CLIENT_URL is configured we restrict to the known
-// production + localhost hosts and NEVER reflect an arbitrary origin or emit '*'
-// for this authenticated endpoint. A missing Origin is treated as same-origin.
-// (Mirrors create-checkout / generate-narrative.)
+// CORS: fail CLOSED via the shared allowlist (_shared/cors.ts). Never reflects
+// an arbitrary origin or emits '*' for this authenticated endpoint; a missing
+// Origin is treated as same-origin. The shared list also accepts the Cloudflare
+// Pages preview origin. This endpoint advertises POST/OPTIONS.
 function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
-  const match = allowed.includes(origin) || isLocalhost || !origin;
-  return {
-    // Never '*': echo the matched origin, else pin to the first allowed host.
-    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 function json(body: unknown, status = 200, headers: Record<string, string> = {}) {

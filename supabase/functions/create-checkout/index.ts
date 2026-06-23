@@ -39,6 +39,8 @@ import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -76,28 +78,13 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // in src/config/pricing.js.
 const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
 
-/** Build CORS headers dynamically from the request origin. */
+/**
+ * Build CORS headers from the shared allowlist (_shared/cors.ts). Fail-closed,
+ * never '*' for this credentialed money endpoint; the shared list also accepts
+ * the Cloudflare Pages preview origin. Advertises POST/OPTIONS.
+ */
 function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  const match = allowed.includes(origin) || !origin;
-  return {
-    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
-    // matched origin, else pin to the first allowed host (a missing Origin is
-    // treated as same-origin, not as a wildcard grant).
-    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { 'Vary': 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 /** Default user-scoped client (anon key + the caller's Authorization header). */

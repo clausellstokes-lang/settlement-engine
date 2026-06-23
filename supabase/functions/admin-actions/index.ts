@@ -20,38 +20,17 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
 
-// CORS: fail CLOSED. When ALLOWED_ORIGINS is configured (comma-separated) use it;
-// otherwise fall back to the known production + localhost hosts — NEVER "*" for
-// this admin endpoint. The endpoint is independently protected by JWT auth + role
-// gating + botGuard, so the allowlist is defense-in-depth, but a misconfigured
-// deploy (no env var) must not silently allow any origin to drive admin actions
-// from a victim's authenticated browser context.
-const DEFAULT_ORIGINS = [
-  "https://settlementforge.com",
-  "https://www.settlementforge.com",
-  "https://settlementwork.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-const CONFIGURED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
-  .split(",").map((s) => s.trim()).filter(Boolean);
-const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAULT_ORIGINS;
-
+// CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
+// this admin endpoint. The endpoint is independently protected by JWT auth +
+// role gating + botGuard, so the allowlist is defense-in-depth, but a
+// misconfigured deploy must not silently allow any origin to drive admin actions
+// from a victim's authenticated browser context. The shared module honors
+// ALLOWED_ORIGINS / CLIENT_URL and accepts the Cloudflare Pages preview origin.
 function corsHeadersFor(req: Request): Record<string, string> {
-  const requestOrigin = req.headers.get("Origin") || "";
-  // Echo a matched origin; a missing Origin is treated as same-origin (pin to
-  // the first allowed host). Unmatched origins also pin to the first host so we
-  // never reflect an arbitrary origin.
-  const allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
-    ? requestOrigin
-    : ORIGIN_ALLOWLIST[0];
-  return {
-    "Access-Control-Allow-Origin": allowOrigin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type",
-  };
+  return sharedCorsHeaders(req);
 }
 
 const ALLOWED_ROLES = ["user", "developer", "admin"];

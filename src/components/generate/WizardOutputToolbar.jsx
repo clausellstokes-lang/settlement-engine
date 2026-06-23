@@ -33,7 +33,14 @@ export function WizardOutputToolbar({
       // it must NOT be wrapped in a height-collapsed parent, or it would lose
       // its sticky containing block and scroll away with the dossier.
       maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
-      position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
+      // Pin below the sticky app header (z:50, ~59px tall). The desktop offset
+      // clears the full header so the toolbar's top edge and shadow are not
+      // tucked under it; on mobile the slim header and this bar both pin to the
+      // top edge. zIndex 40 keeps the bar above the dossier but below the header,
+      // so the header always wins the overlap. This sticky only pins because the
+      // app's <main> no longer establishes a (dead) scroll container — see the
+      // note in App.jsx; the window is the scroller.
+      position: 'sticky', top: isMobile ? 0 : 60, zIndex: 40,
     }}>
       {/* Back is a subordinate nav/reset that discards the just-earned draft — it
           must not out-shout the dossier or Save (P8). Demoted to the same

@@ -565,7 +565,20 @@ export default function App() {
         )}
 
         {/* ── Main content ────────────────────────────────────── */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        {/* `main` must NOT establish its own scroll container. The app shell is
+            sized with `minHeight: 100vh` (not a fixed height), so `flex: 1` never
+            caps `main`'s height — it grows with content and the WINDOW scrolls.
+            A stray `overflow-y: auto` here therefore never engaged as a scroller,
+            but it still made `main` the nearest scroll-clipping ancestor, which
+            silently broke `position: sticky` for descendants (e.g. the Create
+            view's WizardOutputToolbar): the bar resolved its offset against a box
+            that never scrolled and so scrolled away with the page instead of
+            pinning. Dropping `overflow-y: auto` (default `visible`) keeps the
+            window as the sole scroller and lets descendant sticky bars pin. The
+            companion `scroll-padding-top` that keeps anchored / focus scrolls
+            clear of the pinned chrome lives on the real scroller (the document
+            element), set by the view that owns sticky chrome. */}
+        <main style={{ flex: 1, padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
               along with its forever-off `onboardingDiet` flag-twin: the Checklist
               + first-dossier callouts carry first-run coaching, and PostGenCoach

@@ -557,27 +557,13 @@ export default function SettlementDetail({
             PAGE_MAX frame, so no per-cluster cap is needed. */}
       {editMode && (
       <div style={{marginBottom:24,display:'flex',flexDirection:'column',gap:8}}>
-        {/* AI polish prompt — edit-only (it triggers a narrative write). */}
-        <AIInlineCard
-          settlement={detail.settlement}
-          onPolish={() => {
-            // The AI slice's actual handler is `requestNarrative(saveId)` —
-            // there's no `runAiLayer` action. Fixed 2026-04 after the audit
-            // verification revealed the dangling reference. The save id
-            // comes from the currently-open detail save record.
-            const live = useStore.getState();
-            const saveId = detail?.saveData?.id || detail?.id;
-            if (typeof live.requestNarrative === 'function' && saveId) {
-              live.requestNarrative(saveId).catch(e => {
-                console.warn('[AIInlineCard] requestNarrative failed:', e);
-              });
-            }
-            // Fire pricing moment on first AI use (cooldowned per-user).
-            triggerPricingMoment('first_ai_use', () => {
-              live.setPurchaseModalOpen?.(true);
-            }, { tier: live.auth?.tier });
-          }}
-        />
+        {/* AI explainer — edit-only. A plain pointer to the single paid
+            "Generate Narrative" action in the dossier header
+            (DossierNarrativeButtons); it no longer renders its own paid button,
+            so the run-narrative path is unambiguous (one CTA, not two). The
+            paid invocation + first_ai_use pricing moment live on that header
+            action. */}
+        <AIInlineCard settlement={detail.settlement} />
         {/* Revert to Raw — a semi-destructive narrative reset, grouped with and
             subordinate to the polish action it undoes (kept at the quiet ai
             emphasis, never a peer of the polish primary). */}
