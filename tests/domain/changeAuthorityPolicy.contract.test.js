@@ -90,7 +90,7 @@ const SOURCE_ANCHORS = Object.freeze({
   npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
   faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
   relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
-  tier_change: "candidateType: `tier_${drift.direction}`,\n    ruleId: `tier_${drift.direction}`,\n    ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    applyMode: 'proposal'",
+  tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign).\n    applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto',",
   // structural-proposal: auto by default; one branch routes via a proposal-only lever.
   strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
   // auto: bounded logical consequences. Anchored on the ruleId + applyMode block
@@ -160,13 +160,13 @@ describe('change-authority contract — newly-mapped sites carry their live auth
     );
   });
 
-  // tierResourceDynamics has TWO distinct applyMode gates: the real tier change
-  // (always proposal, no flag) and resource_depletion (flag + severity). Assert
-  // BOTH live so a flip at either site is caught despite sharing a module.
-  test('tierResourceDynamics keeps both the always-proposal tier gate and the flag-gated depletion gate', () => {
+  // tierResourceDynamics has TWO distinct applyMode gates, both now flag-gated:
+  // the tier change (flag alone) and resource_depletion (flag + severity).
+  // Assert BOTH live so a flip at either site is caught despite sharing a module.
+  test('tierResourceDynamics keeps both the flag-gated tier gate and the flag-gated depletion gate', () => {
     const src = sourceFor('tierResourceDynamics.js');
     expect(src).toContain("ruleFamily: 'tier',");
-    expect(src).toContain("applyMode: 'proposal',"); // tierCandidate (always-proposal)
+    expect(src).toContain("applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto'"); // tierCandidate (flag-gated)
     expect(src).toContain(
       "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
     ); // resource_depletion (flag-gated)
@@ -193,8 +193,8 @@ describe('change-authority contract — flagged tensions are recorded, not fixed
     expect(ids).toContain('severity-gated-families-bypass-flag');
   });
 
-  test('the tier-authority-split tension stays on the books for a product decision', () => {
+  test('the resolved tier-authority-split tension is no longer on the books', () => {
     const ids = CHANGE_AUTHORITY_FLAGGED.map(f => f.id);
-    expect(ids).toContain('tier-authority-split-in-one-module');
+    expect(ids).not.toContain('tier-authority-split-in-one-module');
   });
 });
