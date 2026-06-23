@@ -73,3 +73,17 @@ sf-bridge.js (SF)    →  reads those globals, opens postMessage bridge
   ↓
 React app (parent)   →  src/lib/mapBridge.js owns the parent side of the RPC
 ```
+
+## Content-Security-Policy for `/map/*`
+
+`vercel.json` applies a **path-scoped, deliberately relaxed CSP to `/map/*`** that is looser than the locked-down app-origin policy. This rationale lives here rather than as an inline comment because Vercel's `headers` schema is strict (`additionalProperties: false`) and rejects a `"//"` comment key inside a `headers` entry — it fails the deploy with `'headers[1]' should NOT have …`.
+
+The vendored FMG fork is a large third-party app that the strict app-origin policy would break, so `/map/*` relaxes specific directives:
+- `public/map/index.html` ships ~80 inline `on*=` handlers → needs `'unsafe-inline'` for `script-src`.
+- d3-dsv's CSV parser builds row objects via `new Function` → needs `'unsafe-eval'`.
+- `public/map/dropbox.html` loads the Dropbox SDK from unpkg and talks to `api.dropboxapi.com`.
+- FMG embeds `watabou.github.io` / `deorum.vercel.app` generators in iframes.
+
+These relaxations are **scoped to `/map/*` only** — the app origin keeps its locked-down `script-src` (no `'unsafe-inline'` / `'unsafe-eval'`). The `/map/*` block is the **last** entry in `vercel.json`'s `headers` array on purpose: Vercel applies the last matching rule for a given header key, so the relaxed `/map/*` CSP wins for those paths while the strict policy governs everything else.
+
+Do not remove or "tidy" the `/map/*` CSP relaxation without re-verifying the embedded map still loads — tightening it will silently break FMG.
