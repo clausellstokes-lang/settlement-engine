@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (69) — schema + RLS policies + credit ledger + version
+- **migrations/** (72) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -129,7 +129,13 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   carry forward a half-applied advance. The optional `p_expected_tick` stale-apply
   guard only fires when non-null: forward advances pass the post-advance tick so a
   duplicate re-apply is a no-op, while an undo passes NULL (last-write-wins) so the
-  lower restored tick reaches the cloud instead of being rejected as stale) —
+  lower restored tick reaches the cloud instead of being rejected as stale) +
+  **070** (nullable `gallery_realm_arc_summary` text column on settlements, the
+  read/write target for the gallery realm-arc share) + **071** (an `importable`
+  gallery facet: recreates the `tile_rows`/`list_gallery_dossiers` RPC chain to
+  surface and filter on the owner `gallery_importable` opt-in) + **072** (maps-side
+  parity: a `saved_maps.gallery_importable` owner opt-in + `import_gallery_map`
+  server-gated clone RPC + an `importable` facet on `list_gallery_maps`) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

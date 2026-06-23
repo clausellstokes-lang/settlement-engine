@@ -19,7 +19,7 @@ import {
   sans, serif_, SP, R, FS,
 } from '../theme.js';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { activeMapFilterCount, deriveTagVocabulary, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
+import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 // Mirror the settlements tab's StatusMessage so the two sibling tabs render the
@@ -81,7 +81,7 @@ export default function GalleryMaps({ onNavigate }) {
   // the draft mirrors the owned campaign's authoritative local copy so the form
   // is correct before any refetch. confirmUnpublishSlug gates unpublish.
   const [editingSlug, setEditingSlug] = useState(null);
-  const [editDraft, setEditDraft] = useState({ name: '', description: '', tags: '' });
+  const [editDraft, setEditDraft] = useState({ name: '', description: '', tags: '', importable: false });
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState(null);
   const [confirmUnpublishSlug, setConfirmUnpublishSlug] = useState(null);
@@ -89,7 +89,7 @@ export default function GalleryMaps({ onNavigate }) {
   // Filter/search/sort state. Narrowing runs SERVER-SIDE now (list_gallery_maps,
   // migration 065): a change refetches with the active facets. Search is debounced
   // so each keystroke doesn't hit the RPC.
-  const [filters, setFilters] = useState({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+  const [filters, setFilters] = useState(emptyMapFilters);
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [sort, setSort] = useState('newest');
@@ -105,7 +105,7 @@ export default function GalleryMaps({ onNavigate }) {
     setFilters(prev => ({ ...prev, [key]: !!value }));
   }, []);
   const clearFilters = useCallback(() => {
-    setFilters({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+    setFilters(emptyMapFilters());
     setSearch('');
   }, []);
 
@@ -177,8 +177,10 @@ export default function GalleryMaps({ onNavigate }) {
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
   // Open the inline editor for an owned tile, seeding the draft from the owned
-  // campaign's authoritative local copy (correct before any server refetch).
-  const openEditor = useCallback((slug) => {
+  // campaign's authoritative local copy (correct before any server refetch). The
+  // import opt-in isn't on the local campaign, so it seeds from the tile's
+  // server-projected `importable` (list_gallery_maps, migration 072).
+  const openEditor = useCallback((slug, seedImportable = false) => {
     const owned = ownedBySlug.get(slug);
     if (!owned) return;
     setEditError(null);
@@ -186,6 +188,7 @@ export default function GalleryMaps({ onNavigate }) {
       name: owned.name || '',
       description: owned.galleryDescription || '',
       tags: Array.isArray(owned.galleryTags) ? owned.galleryTags.join(', ') : '',
+      importable: seedImportable === true,
     });
     setEditingSlug(slug);
   }, [ownedBySlug]);
@@ -210,6 +213,7 @@ export default function GalleryMaps({ onNavigate }) {
         kind: owned.shareKind || 'map',
         description: editDraft.description,
         tags: String(editDraft.tags || '').split(',').map(t => t.trim()).filter(Boolean),
+        importable: editDraft.importable === true,
       });
       await refreshMaps();
       setEditingSlug(null);
@@ -453,6 +457,21 @@ export default function GalleryMaps({ onNavigate }) {
                     />
                     <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>Separate tags with commas.</span>
                   </label>
+                  {/* Owner opt-in: let other DMs import (clone) this map. Off by
+                      default (saved_maps.gallery_importable, migration 072). */}
+                  <label htmlFor={`gallery-edit-importable-${m.slug}`} style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, cursor: 'pointer' }}>
+                    <input
+                      id={`gallery-edit-importable-${m.slug}`}
+                      type="checkbox"
+                      aria-label="Allow others to import this map"
+                      checked={editDraft.importable === true}
+                      onChange={e => setEditDraft(d => ({ ...d, importable: e.target.checked }))}
+                      style={{ marginTop: 2, flexShrink: 0 }}
+                    />
+                    <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700, lineHeight: 1.4 }}>
+                      <strong style={{ color: INK }}>Allow others to import this map</strong>. Other DMs can clone it{owned.shareKind === 'map_with_campaign' ? ' and its public-safe settlements' : ''} into their own library. Off by default.
+                    </span>
+                  </label>
                   <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
                     <Button variant="primary" size="sm" busy={editSaving} onClick={() => handleSaveEdit(m.slug)}>Save</Button>
                     <Button variant="ghost" size="sm" onClick={closeEditor}>Cancel</Button>
@@ -473,7 +492,7 @@ export default function GalleryMaps({ onNavigate }) {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => openEditor(m.slug)}
+                    onClick={() => openEditor(m.slug, m.importable === true)}
                     title="Edit this map's gallery details"
                   >Edit</Button>
                 )}

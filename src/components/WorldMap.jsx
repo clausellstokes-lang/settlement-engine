@@ -29,6 +29,7 @@ import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
 import { useRealmInspector, ADVANCE_ERROR_TEXT } from '../hooks/useRealmInspector.js';
 import { useCampaignActivation } from '../hooks/useCampaignActivation.js';
+import { useMapImageImport } from '../hooks/useMapImageImport.js';
 
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
@@ -654,46 +655,12 @@ export default function WorldMap({ onNavigate } = {}) {
   }, [setInspectorOpen]);
 
   // ── Custom map image (Project 1, premium) ─────────────────────────────
-  // Pick → validate → downscale (≤4096px) → upload to Supabase Storage → set
-  // the campaign's customBackdrop. Premium + active-campaign gated at the call
-  // site (the control only renders for canManageCampaigns + activeCampaignId).
-  const handleImportImage = useCallback(() => {
-    if (!activeCampaignId) { showToast('info', 'Select a campaign before importing a map image.'); return; }
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/png,image/jpeg,image/webp';
-    input.onchange = async () => {
-      const file = input.files && input.files[0];
-      if (!file) return;
-      try {
-        const { validateImageFile, downscaleImageFile, uploadMapBackdrop } = await import('../lib/imageUpload.js');
-        const v = validateImageFile(file);
-        if (!v.ok) { showToast('error', v.error); return; }
-        const ownerId = useStore.getState().auth?.user?.id;
-        if (!ownerId) { showToast('error', 'Sign in to import a map image.'); return; }
-        showToast('info', 'Processing image…');
-        const prevUrl = useStore.getState().mapState.customBackdrop?.imageUrl || null;
-        const { blob, w, h, type } = await downscaleImageFile(file, 4096);
-        const { url } = await uploadMapBackdrop(blob, { ownerId, campaignId: activeCampaignId, contentType: type });
-        setMapBackdrop({ imageUrl: url, w, h });
-        // Best-effort: delete the replaced object so re-imports don't orphan storage.
-        if (prevUrl && prevUrl !== url) {
-          import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(prevUrl)).catch(() => {});
-        }
-        showToast('success', 'Custom map imported.');
-      } catch (err) {
-        showToast('error', err?.message || 'Map import failed.');
-      }
-    };
-    input.click();
-  }, [activeCampaignId, setMapBackdrop, showToast]);
-
-  const handleClearImage = useCallback(() => {
-    const url = useStore.getState().mapState.customBackdrop?.imageUrl;
-    clearMapBackdrop();
-    if (url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(url)).catch(() => {});
-    showToast('info', 'Reverted to generated terrain.');
-  }, [clearMapBackdrop, showToast]);
+  // Pick device file → ConfirmDialog (it disables terrain + overwrites the map)
+  // → upload → setMapBackdrop (one undo step). Extracted to a hook to hold the
+  // size ratchet; the controls render premium/active-campaign gated in the toolbar.
+  const {
+    pendingImportFile, cancelImportImage, handleImportImage, performImportImage, handleClearImage,
+  } = useMapImageImport({ activeCampaignId, setMapBackdrop, clearMapBackdrop, showToast });
 
   // ── Share map to the gallery (Project 2, blank canvas) ────────────────
   const [sharingMap, setSharingMap] = useState(false);
@@ -849,6 +816,7 @@ export default function WorldMap({ onNavigate } = {}) {
         setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
         advanceConfirm={advanceConfirm} advanceBody={advanceScopeBody}
         performAdvanceRealm={performAdvanceRealm} setAdvanceConfirm={setAdvanceConfirm}
+        importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
         setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />
     </div>

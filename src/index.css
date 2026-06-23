@@ -152,6 +152,26 @@ button {
   box-shadow: 0 1px 6px rgba(27, 20, 8, 0.06);
 }
 
+/* Anon-Create proof pair — the sample dossier and the region-wake replay sit
+   side by side on wider screens and stack on narrow ones, so the two demo
+   cards stop doubling the landing's vertical length. Each child keeps its own
+   max-width; the grid centres them within balanced columns. */
+.sf-proof-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  justify-items: center;
+}
+@media (min-width: 768px) {
+  .sf-proof-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.sf-proof-pair > * {
+  width: 100%;
+}
+
 /* §14 — sparkling gold shimmer for custom-content dossier rows (GOLD_TINT) */
 @keyframes sf-goldShimmer {
   0%, 100% { background-position: 0% 0; }

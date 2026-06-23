@@ -176,6 +176,14 @@ export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onTogg
         />
       </SidebarSection>
 
+      <SidebarSection title="Import">
+        <ToggleRow
+          checked={!!filters.importable}
+          label="Importable only"
+          onChange={value => onToggleBool('importable', value)}
+        />
+      </SidebarSection>
+
       {tagVocabulary.length > 0 && (
         <SidebarSection title="Tags" count={filters.tags?.length || 0}>
           <TagChips options={tagVocabulary} value={filters.tags} onToggle={option => onToggleArray('tags', option)} />

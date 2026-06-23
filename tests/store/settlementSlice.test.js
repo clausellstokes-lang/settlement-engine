@@ -507,3 +507,68 @@ describe('settlementSlice — canonizeSavedSettlement (library row)', () => {
     expect(store.getState().phase).toBe('draft'); // active save-2 unaffected
   });
 });
+
+describe('settlementSlice — renameSettlement', () => {
+  let store;
+  const makeSave = (id, phase) => ({
+    id,
+    name: `Save ${id}`,
+    settlement: fixture({ name: 'Oldford' }),
+    campaignState: { phase, eventLog: [] },
+    timestamp: '2026-01-01T00:00:00.000Z',
+  });
+
+  beforeEach(() => {
+    store = makeStore();
+  });
+
+  test('pre-canon: edits the name in place and records NO timeline entry', () => {
+    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'draft')]; });
+    const recorded = store.getState().renameSettlement('save-1', 'Newford');
+    expect(recorded).toBe(false);
+    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
+    expect(save.name).toBe('Newford');
+    expect(save.settlement.name).toBe('Newford');
+    // No flavor entry appended in draft.
+    expect(save.campaignState.eventLog).toEqual([]);
+  });
+
+  test('post-canon: edits the name AND records a flavor RENAME_SETTLEMENT entry', () => {
+    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'canon')]; });
+    const recorded = store.getState().renameSettlement('save-1', 'Newford');
+    expect(recorded).toBe(true);
+    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
+    expect(save.name).toBe('Newford');
+    expect(save.settlement.name).toBe('Newford');
+    // Exactly one recorded flavor entry, naming both old and new identity.
+    expect(save.campaignState.eventLog).toHaveLength(1);
+    const entry = save.campaignState.eventLog[0];
+    expect(entry.type).toBe('RENAME_SETTLEMENT');
+    expect(entry.targetId).toBe('Oldford');
+    expect(entry.narrativeSummary).toBe('Oldford is now known as Newford.');
+    // Flavor only: no afterState / systemState delta on the entry.
+    expect(entry.afterState).toBeUndefined();
+  });
+
+  test('mirrors the rename + canon flavor entry onto the live slice when active', () => {
+    store.setState(s => {
+      s.savedSettlements = [makeSave('save-1', 'canon')];
+      s.activeSaveId = 'save-1';
+      s.settlement = fixture({ name: 'Oldford' });
+      s.phase = 'canon';
+      s.eventLog = [];
+    });
+    store.getState().renameSettlement('save-1', 'Newford');
+    const s = store.getState();
+    expect(s.settlement.name).toBe('Newford');
+    expect(s.eventLog).toHaveLength(1);
+    expect(s.eventLog[0].type).toBe('RENAME_SETTLEMENT');
+  });
+
+  test('is a no-op for an empty name or an unchanged name', () => {
+    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'canon')]; });
+    expect(store.getState().renameSettlement('save-1', '   ')).toBe(false);
+    expect(store.getState().renameSettlement('save-1', 'Oldford')).toBe(false);
+    expect(store.getState().savedSettlements[0].campaignState.eventLog).toEqual([]);
+  });
+});

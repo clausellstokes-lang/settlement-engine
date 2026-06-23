@@ -67,7 +67,7 @@ export default function Timeline() {
             const realIdx = eventLog.length - 1 - i;
             const isLatest = realIdx === eventLog.length - 1;
             return (
-              <Entry key={`${entry.appliedAt}-${i}`} entry={entry} isLatest={isLatest && !clockBound} onUndo={undoLastEvent} />
+              <Entry key={`${entry.appliedAt || entry.timestamp}-${i}`} entry={entry} isLatest={isLatest && !clockBound} onUndo={undoLastEvent} />
             );
           })}
         </div>
@@ -77,7 +77,12 @@ export default function Timeline() {
 }
 
 function Entry({ entry, isLatest, onUndo }) {
-  const ts = new Date(entry.appliedAt);
+  // Canonical applyEvent entries nest the event under `.event` and stamp
+  // `appliedAt`; the library-row flavor entries written by renameSettlement /
+  // destroySavedSettlement use a flat `timestamp` + flat `type` and carry no
+  // `event` object. Fall back across both shapes so neither renders as
+  // "Invalid Date" nor crashes on `entry.event.description`.
+  const ts = new Date(entry.appliedAt || entry.timestamp);
   return (
     <div style={{
       padding: SP.sm,
@@ -88,7 +93,7 @@ function Entry({ entry, isLatest, onUndo }) {
         <span style={{
           fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans, flex: 1,
         }}>
-          {entry.narrativeSummary || entry.event.type}
+          {entry.narrativeSummary || entry.event?.type || entry.type}
         </span>
         <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
           {ts.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
@@ -105,7 +110,7 @@ function Entry({ entry, isLatest, onUndo }) {
           </Button>
         )}
       </div>
-      {entry.event.description && (
+      {entry.event?.description && (
         <div style={{ fontSize: FS.xxs, color: SECOND, fontFamily: sans, fontStyle: 'italic', marginTop: 2 }}>
           {entry.event.description}
         </div>

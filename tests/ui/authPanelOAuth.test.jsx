@@ -53,9 +53,9 @@ vi.mock('../../src/store/index.js', () => {
 // real Supabase env — the buttons still render and still call authOAuth.
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false }));
 
-async function renderPanel() {
+async function renderPanel(initialMode = 'signin') {
   const AuthPanel = (await import('../../src/components/auth/AuthPanel.jsx')).default;
-  return render(<AuthPanel initialMode="signin" onAuthed={vi.fn()} />);
+  return render(<AuthPanel initialMode={initialMode} onAuthed={vi.fn()} />);
 }
 
 describe('AuthPanel — OAuth buttons', () => {
@@ -88,5 +88,25 @@ describe('AuthPanel — OAuth buttons', () => {
     expect(discord.disabled).toBe(false);
     fireEvent.click(discord);
     expect(authOAuth).toHaveBeenCalledWith('discord');
+  });
+});
+
+describe('AuthPanel — OAuth withheld on sign-up', () => {
+  it('omits Google and Discord on sign-up, even with the flags enabled', async () => {
+    await renderPanel('signup');
+    expect(screen.queryByRole('button', { name: /continue with google/i })).toBeNull();
+    expect(screen.queryByRole('button', { name: /continue with discord/i })).toBeNull();
+    expect(document.querySelector('[data-testid="oauth-section"]')).toBeNull();
+  });
+
+  it('keeps OAuth available on sign-in (regression guard for the sign-up withhold)', async () => {
+    await renderPanel('signin');
+    expect(screen.getByRole('button', { name: /continue with google/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /continue with discord/i })).toBeTruthy();
+  });
+
+  it('keeps the email sign-in link available on sign-up', async () => {
+    await renderPanel('signup');
+    expect(screen.getByRole('button', { name: /email/i })).toBeTruthy();
   });
 });

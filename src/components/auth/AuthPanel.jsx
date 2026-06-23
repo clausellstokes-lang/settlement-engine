@@ -117,8 +117,13 @@ export default function AuthPanel({
   const securityComplete =
     Boolean(q1) && Boolean(q2) && q1 !== q2 && a1.trim() !== '' && a2.trim() !== '';
 
-  const showGoogle  = flag('googleOauth');
-  const showDiscord = flag('discordOauth');
+  // OAuth is offered on sign-IN only. On sign-up the extra provider buttons push
+  // the (already taller, security-question-bearing) form past the modal's
+  // ribbon/border, so they're withheld there — the email-link alternative stays
+  // in both views.
+  const oauthAllowed = mode === 'signin';
+  const showGoogle  = oauthAllowed && flag('googleOauth');
+  const showDiscord = oauthAllowed && flag('discordOauth');
 
   const handleOAuth = async (provider) => {
     setError(null);

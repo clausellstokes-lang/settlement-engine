@@ -148,9 +148,15 @@ export default function SettlementDetail({
 
   // Campaign-clock identity lock: NPC + faction names freeze once the settlement
   // is canonized. The store hydrates `phase` from the opened save, so the live
-  // store value tracks this detail view. Renames are a draft-only affordance.
+  // store value tracks this detail view. NPC/faction renames are a draft-only
+  // affordance; the settlement's OWN name stays renameable in every phase.
   const phase = useStore(s => s.phase);
   const isCanonLocked = phase === 'canon';
+  // The settlement's OWN name is never canon-locked (only NPC/faction names
+  // freeze). Post-canon a rename still applies, but it is recorded as a flavor
+  // timeline entry since canon state is recorded — this store action owns that
+  // record; the parent applyRename owns the name + neighbour/ai_data cascade.
+  const renameSettlement = useStore(s => s.renameSettlement);
   // Next-action-rail inputs (reuse existing selectors; no new store fields).
   const canonize = useStore(s => s.canonize);
   const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
@@ -222,8 +228,16 @@ export default function SettlementDetail({
 
   // Wrapper: call parent applyRename then clear local edit state
   const handleApplyRename = (type, id, oldName, newName) => {
-    // Names freeze at canonization — guard even though the affordance is hidden.
+    // NPC + faction names freeze at canonization — guard even though the
+    // affordance is hidden. The settlement's OWN name is exempt: it is always
+    // renameable, and post-canon the change is recorded as a flavor entry.
     if (isCanonLocked && (type === 'npc' || type === 'faction')) return;
+    if (type === 'settlement' && isCanonLocked && typeof renameSettlement === 'function') {
+      // Record the canon flavor timeline entry (RENAME_SETTLEMENT). The parent
+      // applyRename below still performs the name set + neighbour/ai_data
+      // cascade; both write the same name, so the order is immaterial.
+      renameSettlement(id, newName);
+    }
     applyRename(type, id, oldName, newName);
     setEditingName(null);
     setEditDraft('');
@@ -550,7 +564,7 @@ export default function SettlementDetail({
                 settlement={detail.settlement}
                 readOnly
                 saveId={saveId}
-                allowRename={editMode && canEdit && !isCanonLocked}
+                allowRename={editMode && canEdit}
                 onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
               />
             </Suspense>

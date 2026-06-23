@@ -92,6 +92,9 @@ describe('GalleryMaps owner edit affordance', () => {
       kind: 'map',
       description: 'a windswept shore',
       tags: ['coastal', 'trade'],
+      // The owner edit also forwards the import opt-in (migration 072); the tile
+      // seeds it off, and the checkbox wasn't toggled in this case.
+      importable: false,
     });
     // No rename submitted (name unchanged), and a post-action refetch ran.
     expect(renameCampaign).not.toHaveBeenCalled();

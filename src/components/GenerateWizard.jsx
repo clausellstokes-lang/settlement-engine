@@ -294,7 +294,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         showModePicker={showModePicker}
         isMobile={isMobile}
         setWizardMode={setWizardMode}
-        authTier={authTier}
         onSignIn={onSignIn}
         onNavigate={onNavigate}
       />

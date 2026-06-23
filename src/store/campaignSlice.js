@@ -286,9 +286,11 @@ export const createCampaignSlice = (set, get) => {
     const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
     if (!canCreate) throw new Error('Importing maps is a premium feature.');
 
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const shared = await fetchGalleryMap(slug);
-    if (!shared) throw new Error('That shared map is no longer available.');
+    // Server-gated on the owner's gallery_importable opt-in (migration 072):
+    // returns null for a non-importable / missing map, or an anonymous caller.
+    const { fetchMapForImport } = await import('../lib/gallery.js');
+    const shared = await fetchMapForImport(slug);
+    if (!shared) throw new Error("This map isn't available to import.");
     const backdrop = shared.backdrop || {};
 
     const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
@@ -338,9 +340,11 @@ export const createCampaignSlice = (set, get) => {
     const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
     if (!canCreate) throw new Error('Importing campaigns is a premium feature.');
 
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const payload = await fetchGalleryMap(slug);
-    if (!payload) throw new Error('That shared campaign is no longer available.');
+    // Server-gated on the owner's gallery_importable opt-in (migration 072):
+    // returns null for a non-importable / missing share, or an anonymous caller.
+    const { fetchMapForImport } = await import('../lib/gallery.js');
+    const payload = await fetchMapForImport(slug);
+    if (!payload) throw new Error("This campaign isn't available to import.");
     if (payload.kind !== 'map_with_campaign') return get().importGalleryMap(slug); // not a campaign share
 
     const members = Array.isArray(payload.members) ? payload.members : [];

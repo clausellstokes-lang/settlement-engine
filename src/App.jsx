@@ -341,10 +341,13 @@ export default function App() {
   const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'set-new-password' || view === 'verify-email' || view === 'confirm-email';
 
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
-  // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
+  // slicing the desktop NAV order, otherwise inserting/reordering a NAV item
   // silently evicts whatever falls past the slice (this is how About, then Gallery,
   // got dropped). About lives in the account menu on mobile, so it ranks last.
-  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'howto'];
+  // The Realm (World Map) is omitted on mobile: the map workspace is too
+  // constrained for small screens. It stays in the desktop nav, and the /map
+  // and /realm routes still resolve from deep links.
+  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'howto'];
   const mobileNav = MOBILE_NAV_PRIORITY
     .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)

@@ -1274,6 +1274,84 @@ export const createSettlementSlice = (set, get) => ({
       if ('faction' in fac) fac.faction = newName;
     }),
 
+  // ── Settlement (town) rename ───────────────────────────────────────────────
+  //
+  // Unlike NPC/faction names, a settlement's own name is NEVER canon-locked: a
+  // GM may always rename their town. Before canon it is a plain name edit. After
+  // canon the name still changes, but — because canon state is recorded — the
+  // rename is ALSO appended to the timeline as a RENAME_SETTLEMENT flavor entry.
+  // It is flavor only: no systemState delta, no entity mutation, no PRNG draw, so
+  // determinism and the canon save/coherence flow are untouched. The parent
+  // SettlementsPanel.applyRename still owns the neighbour + ai_data cascade; this
+  // action owns the active save's name set plus the canon flavor record, and is
+  // self-contained so it can be exercised in isolation.
+  //
+  // @param {string|number} id - the saved settlement id to rename.
+  // @param {string} newName - the proposed new name (trimmed by the action).
+  // @returns {boolean} true when a canon flavor entry was recorded.
+  renameSettlement: (id, newName) => {
+    const trimmed = String(newName || '').trim();
+    if (!trimmed) return false;
+    const now = new Date().toISOString();
+    let recorded = false;
+    let persist = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      const isActive = String(state.activeSaveId || '') === String(id);
+      const save = idx !== -1 ? state.savedSettlements[idx] : null;
+      const oldName = save?.settlement?.name || save?.name
+        || (isActive ? state.settlement?.name : '') || '';
+      if (trimmed === oldName) return;
+      const currentCampaignState = save?.campaignState
+        || (isActive ? { phase: state.phase, eventLog: state.eventLog } : {});
+      const isCanon = (currentCampaignState.phase || (isActive ? state.phase : 'draft')) === 'canon';
+
+      const eventLog = Array.isArray(currentCampaignState.eventLog)
+        ? [...currentCampaignState.eventLog]
+        : [];
+      if (isCanon) {
+        eventLog.push({
+          id: `rename.${id}.${Date.now()}`,
+          type: 'RENAME_SETTLEMENT',
+          targetId: oldName || null,
+          timestamp: now,
+          // Flavor only: a recorded line of in-world history, no afterState delta.
+          narrativeSummary: oldName
+            ? `${oldName} is now known as ${trimmed}.`
+            : `The settlement is now known as ${trimmed}.`,
+        });
+        recorded = true;
+      }
+
+      if (save) {
+        const nextSettlement = { ...(save.settlement || {}), name: trimmed };
+        const campaignState = isCanon
+          ? { ...currentCampaignState, phase: currentCampaignState.phase || 'canon', eventLog, editedAt: now }
+          : save.campaignState;
+        state.savedSettlements[idx] = {
+          ...save,
+          name: trimmed,
+          settlement: nextSettlement,
+          ...(isCanon ? { campaignState, timestamp: now } : {}),
+        };
+        persist = {
+          settlement: cloneJson(nextSettlement),
+          ...(isCanon ? { campaignState: cloneJson(campaignState), timestamp: now } : {}),
+        };
+      }
+
+      if (isActive && state.settlement) {
+        state.settlement = { ...state.settlement, name: trimmed };
+        if (isCanon) {
+          state.eventLog = eventLog;
+          state.editedAt = now;
+        }
+      }
+    });
+    if (persist) persistSaveUpdate(id, persist);
+    return recorded;
+  },
+
   // ── User-edited prose ────────────────────────────────────────────────────
   //
   // Edit-mode toggle: when true, EditableText components in the

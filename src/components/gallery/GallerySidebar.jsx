@@ -15,11 +15,9 @@ import {
 } from '../theme.js';
 import {
   activeFilterCount,
-  activePopulationBand,
   CULTURE_OPTIONS,
   human,
   MAGIC_OPTIONS,
-  POPULATION_BANDS,
   PROSPERITY_OPTIONS,
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
@@ -89,30 +87,6 @@ function FilterChips({ options, value = [], onToggle }) {
   );
 }
 
-// Single-select chips for the population band (one band picks both numeric
-// bounds; re-clicking the active band clears it).
-function BandChips({ bands, activeKey, onPick }) {
-  return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
-      {bands.map(band => {
-        const isOn = activeKey === band.key;
-        return (
-          <Button
-            key={band.key}
-            variant={isOn ? 'gold' : 'secondary'}
-            size="sm"
-            onClick={() => onPick(band)}
-            aria-pressed={isOn}
-            icon={isOn ? <Check size={12} /> : undefined}
-          >
-            {band.label}
-          </Button>
-        );
-      })}
-    </div>
-  );
-}
-
 function ToggleRow({ checked, label, onChange }) {
   const inputId = useId();
   return (
@@ -132,7 +106,7 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
-export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onSetPopulationBand, onClear, isSignedIn }) {
+export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
   return (
     <aside className="gallery-sidebar-panel" style={{
       display: 'grid',
@@ -180,12 +154,9 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
       <SidebarSection title="Prosperity" count={filters.prosperity?.length || 0}>
         <FilterChips options={PROSPERITY_OPTIONS} value={filters.prosperity} onToggle={option => onToggleArray('prosperity', option)} />
       </SidebarSection>
-      <SidebarSection title="Population" count={activePopulationBand(filters) ? 1 : 0}>
-        <BandChips bands={POPULATION_BANDS} activeKey={activePopulationBand(filters)} onPick={onSetPopulationBand} />
-      </SidebarSection>
       <SidebarSection title="Surface" style={{ marginTop: SP.xs }}>
         <div style={{ display: 'grid', gap: SP.sm }}>
-          <ToggleRow checked={filters.atWar} label="At war" onChange={value => onToggleBool('atWar', value)} />
+          <ToggleRow checked={filters.importable} label="Importable" onChange={value => onToggleBool('importable', value)} />
           <ToggleRow checked={filters.hasDeity} label="Has patron deity" onChange={value => onToggleBool('hasDeity', value)} />
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
