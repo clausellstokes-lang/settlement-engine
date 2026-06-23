@@ -452,7 +452,7 @@ function respondAsWatch(faction, event /* , settlement */) {
  *               own ranks.
  */
 function respondAsThievesGuild(faction, event /* , settlement */) {
-  const name = faction.name || faction.faction || 'Thieves\' Guild';
+  const name = faction.name || faction.faction || 'Organized Crime';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 
   switch (event.type) {

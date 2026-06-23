@@ -6,6 +6,7 @@
  */
 
 import { getInstFlags, getPriorities, getStressFlags, tierAtLeast } from './helpers.js';
+import { CRIMINAL_INST_LABELS } from '../domain/display/institutionDisplay.js';
 
 // ─── generateSafetyProfile ────────────────────────────────────────────────────
 
@@ -214,7 +215,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       `common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous: Criminal Governance';
-    const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
+    const crimeRef = 'Organized crime';
     const garNote  = inst.hasGarrison ? ' The garrison takes orders from criminal leadership.' : '';
     safetyDesc = `There is no meaningful distinction between criminal organizations and civil authority here. ` +
       `${crimeRef} provides order of a sort, its own. Protection must be purchased; those who cannot pay are unprotected.${garNote}`;
@@ -353,7 +354,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     });
   }
   if (stress.crimeIsGovt) {
-    const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
+    const crimeRef = 'Organized crime';
     crimeTypes.push({
       type: 'Criminal governance',
       desc: `${crimeRef} has filled the power vacuum left by absent or failed civil authority. They provide a form of order and extract a price for it.`,
@@ -388,7 +389,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : ' With no reliable court system to fear, operations are conducted openly enough to be an open secret.';
     crimeTypes.push({
       type: 'Organized guild crime',
-      desc: `The thieves' guild is well-funded and structured: protection rackets, sophisticated smuggling operations, and contract services for discerning clients.${courtNote}`,
+      desc: `Organized crime is well-funded and structured: protection rackets, sophisticated smuggling operations, and contract services for discerning clients.${courtNote}`,
     });
   }
   // Survival crime: requires either a criminal institution OR a settlement large enough
@@ -541,23 +542,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
 
   // ── Criminal institutions present (named) ─────────────────────────────────
-  const CRIMINAL_INST_LABELS = {
-    "thieves' guild chapter":      "Thieves' Guild Chapter",
-    "thieves' guild (powerful)":   "Thieves' Guild (Powerful)",
-    "assassins' guild":            "Assassins' Guild",
-    'multiple criminal factions':  'Multiple Criminal Factions',
-    'black market':                'Black Market',
-    'black market bazaar':         'Black Market Bazaar',
-    'smuggling operation':         'Smuggling Operation',
-    'smuggling network':           'Smuggling Network',
-    'street gang':                 'Street Gang',
-    'front businesses':            'Front Businesses',
-    'underground city':            'Underground City',
-    'gambling den':                'Gambling Den',
-    'gambling halls':              'Gambling Halls',
-    'gambling district':           'Gambling District',
-    'red light district':          'Red Light District',
-  };
+  // Relabel map shared with the Overview/Services tabs and PDF dossier.
   const criminalInstitutions = (Array.isArray(institutions) ? institutions : [])
     .map(i => (i.name || '').toLowerCase())
     .filter(n => CRIMINAL_INST_LABELS[n])
@@ -600,7 +585,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push(`A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.`);
   }
   if (stress.crimeIsGovt) {
-    const crimeRef = inst.hasThievesGuild ? 'the guild' : 'whoever controls this block';
+    const crimeRef = inst.hasThievesGuild ? 'the local syndicate' : 'whoever controls this block';
     plotHooks.push(`Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ${crimeRef}.`);
   }
   if (stress.arcaneBlackMarket) {

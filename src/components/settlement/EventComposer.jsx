@@ -379,7 +379,7 @@ export default function EventComposer() {
           ) : (
             <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
               <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
-                This settlement has no criminal organization. Add one (e.g. a Thieves&rsquo; Guild) before imposing corruption.
+                This settlement has no criminal organization. Add one (e.g. Organized Crime) before imposing corruption.
               </div>
             </Field>
           )

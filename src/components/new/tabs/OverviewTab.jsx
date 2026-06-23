@@ -6,6 +6,7 @@ import {isMobile} from '../tabConstants';
 
 import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
+import { displayInstitutionName } from '../../../domain/display/institutionDisplay.js';
 
 // Shared no-value placeholder — an absent value reads as a deliberate
 // 'not computed' state, not garbled ', ' output. Matches DefenseTab's
@@ -399,7 +400,7 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
               return <div key={cat}>
                 <div style={{fontSize:FS.xs,fontWeight:700,color:cc,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{cat} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                  {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
+                  {insts.sort((a,b)=>displayInstitutionName(a.name).localeCompare(displayInstitutionName(b.name))).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;
                     const srcColor={required:'#a0762a',forced:'#2d7a44','auto-resolved':'#2a3a7a'}[inst.source]||'#6b5340';
                     const srcLabel={required:'REQ',forced:'','auto-resolved':'→'}[inst.source];
@@ -408,7 +409,7 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};
                     return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
-                      {inst.name}
+                      {displayInstitutionName(inst.name)}
                       {isCustom
                         ? <span style={{fontSize:FS.xs,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
                         : (srcLabel&&<span style={{fontSize:FS.xs,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}

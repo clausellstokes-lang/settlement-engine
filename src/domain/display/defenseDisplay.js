@@ -22,7 +22,7 @@ const scoreColor = (n) =>
  */
 export function criminalOpNote(name) {
   const n = String(name || '').toLowerCase();
-  if (n.includes("thieves' guild") || n.includes('thieves guild'))
+  if (n.includes("thieves' guild") || n.includes('thieves guild') || n.includes('organized crime'))
     return 'Controls the criminal hierarchy, suppressing random crime in exchange for predictable extraction. Deeply embedded in civic life.';
   if (n.includes('black market'))
     return 'Operates a parallel marketplace for contraband, stolen goods, and unlicensed services, undercutting the licensed merchants.';
@@ -53,7 +53,7 @@ export function criminalOpEcon(name) {
   if (n.includes('gambling'))       return 'unlicensed revenue';
   if (n.includes('front business')) return 'money laundering';
   if (n.includes('fence'))          return 'stolen goods market';
-  if (n.includes('thieves'))        return 'protection + extraction';
+  if (n.includes('thieves') || n.includes('organized crime')) return 'protection + extraction';
   return 'criminal revenue stream';
 }
 
@@ -80,7 +80,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
   const names = (r.institutions || []).map((i) => (i?.name || '').toLowerCase());
-  const hasGuild = names.some((n) => n.includes("thieves' guild") || n.includes('thieves guild'));
+  const hasGuild = names.some((n) => n.includes("thieves' guild") || n.includes('thieves guild') || n.includes('organized crime'));
   const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
   const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
   const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));

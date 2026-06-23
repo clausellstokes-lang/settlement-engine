@@ -661,7 +661,7 @@ export const HISTORY_EVENTS = {
       goalCategories: ["wealth", "personal"],
     },
     {
-      role: "Thieves' Guild Master",
+      role: "Crime Boss",
       title: "guild_master",
       priority: 8,
       minTier: "town",

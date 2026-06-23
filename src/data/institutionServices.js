@@ -181,20 +181,6 @@ export const INSTITUTION_SERVICES = {
     "Public games": { on: true, p: 0.8, desc: "Athletic competitions, races, spectacle" }
   },
 
-  
-  
-  
-  "Thieves Guild": {
-    "Fencing stolen goods": { on: false, p: 0.9, desc: "Move hot merchandise, take cut" },
-    "Burglary services": { on: false, p: 0.7, desc: "Professional break-ins, retrievals" },
-    "Information brokerage": { on: false, p: 0.8, desc: "What thieves see, they sell." },
-    "Guild protection": { on: false, p: 0.6, desc: "Pay dues. They leave you alone." }
-  },
-
-  
-  
-  
-  
   "Assassins Guild": {
     "Contract killing": { on: false, p: 0.9, desc: "Verified, deniable, professional" },
     "Intimidation only": { on: false, p: 0.7, desc: "Scare a target without killing. Cheaper." },

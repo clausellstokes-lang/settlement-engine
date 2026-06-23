@@ -61,7 +61,7 @@ describe('describeDeityEffects — per-axis', () => {
 
   test('evil → corruption onset string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'evil' })).toContain(
-      "Evil, and corrupts the faithful even without a thieves' guild",
+      "Evil, and corrupts the faithful even without organized crime",
     );
   });
 
@@ -107,7 +107,7 @@ describe('describeDeityEffects — per-axis', () => {
   test('a full war-god lists alignment, temperament, rank, and magic in order', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major' });
     expect(out).toEqual([
-      "Evil, and corrupts the faithful even without a thieves' guild",
+      "Evil, and corrupts the faithful even without organized crime",
       "Warlike, and raises the realm's aggression",
       'Major, and anchors religious authority',
       'Tightens magic legality: the art is openly opposed',
@@ -134,7 +134,7 @@ describe('describeDeityEffects — per-axis', () => {
   test('law string is APPENDED last, leaving the first four axes order stable', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', lawAxis: 'chaotic' });
     expect(out).toEqual([
-      "Evil, and corrupts the faithful even without a thieves' guild",
+      "Evil, and corrupts the faithful even without organized crime",
       "Warlike, and raises the realm's aggression",
       'Major, and anchors religious authority',
       'Tightens magic legality: the art is openly opposed',

@@ -352,14 +352,6 @@ const genSettSummary = settlement => {
               : 'the council');
   const topFaction = factions[0]?.faction || 'the dominant faction';
 
-  const crimFaction =
-    factions.find(
-      f =>
-        f.faction?.toLowerCase().includes('thieves') ||
-        f.faction?.toLowerCase().includes('criminal') ||
-        (f.faction?.toLowerCase().includes('guild') && f.faction?.toLowerCase().includes('black')),
-    )?.faction || null;
-
   const milFaction =
     factions.find(
       f =>
@@ -408,7 +400,6 @@ const genSettSummary = settlement => {
     stability: powerStructure.stability || 'Stable',
     govFaction,
     topFaction,
-    crimFaction,
     milFaction,
     relFaction,
     age: history.age || 100,
@@ -801,7 +792,9 @@ const genCoherence = settlement => {
 
   const crimeFaction = factions.find(
     f =>
+      f.category === 'criminal' ||
       f.faction?.toLowerCase().includes('thieve') ||
+      f.faction?.toLowerCase().includes('organized crime') ||
       f.faction?.toLowerCase().includes('criminal') ||
       f.faction?.toLowerCase().includes('underworld'),
   );

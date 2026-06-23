@@ -601,7 +601,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: "Identify which of their officers is on the thieves' guild payroll",
+      short: "Identify which of their officers is on the organized crime payroll",
       long: 'Die in bed rather than in the street, an unusual ambition for the role',
       driven_by: 'personal',
     },
@@ -726,7 +726,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'knowledge',
     },
   ],
-  "Thieves' Guild Master": [
+  "Crime Boss": [
     {
       short: 'Identify which of their lieutenants is planning to branch out independently',
       long: 'Achieve enough legitimate business to step back from direct criminal exposure',
@@ -863,7 +863,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
     },
     {
-      secret: "On the payroll of the thieves' guild as a silent informant",
+      secret: "On the payroll of organized crime as a silent informant",
       stakes: 'Exposure would cost them their post and likely their safety',
     },
     {

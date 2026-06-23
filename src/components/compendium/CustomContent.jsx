@@ -50,7 +50,7 @@ const FIELD_HINTS = {
   criminal:       'Turn on if this operates outside the law.',
   tierMin:        'Smallest settlement size where this can appear (blank = any).',
   tierMax:        'Largest settlement size where this still appears (blank = no limit).',
-  archetype:      'e.g. merchant guild, thieves’ cabal, knightly order.',
+  archetype:      'e.g. merchant guild, organized crime, knightly order.',
   agenda:         'What this faction is trying to achieve.',
   scale:          'How much reach and influence this faction has.',
   methods:        'How it pursues its agenda: bribery, force, diplomacy.',

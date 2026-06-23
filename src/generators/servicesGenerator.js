@@ -321,7 +321,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
           '(informal)'
         )),
       T.has('Organized guild crime') &&
-        M('Fence (stolen goods)', 'Move recovered goods, no questions. Expect 30-50% of value.', '(thieves guild)'),
+        M('Fence (stolen goods)', 'Move recovered goods, no questions. Expect 30-50% of value.', '(organized crime)'),
       T.has('Background crime') &&
         M(
           'Fence (word of mouth)',

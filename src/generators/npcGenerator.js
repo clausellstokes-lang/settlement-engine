@@ -1138,7 +1138,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         enriched.secondaryAffiliation = crimeFaction
           ? crimeFaction.faction
           : secretText.includes('thieves')
-            ? "Thieves' Guild"
+            ? "Organized Crime"
             : 'criminal network';
       }
     }

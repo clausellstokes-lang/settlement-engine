@@ -59,7 +59,7 @@ export const DEITY_AXIS_EFFECTS = Object.freeze({
       // sign −1 ⇒ drives the ONSET side ("corrupts the faithful").
       direction: DEITY_CORRUPTION_TUNING.axisSign.evil,
       magnitude: DEITY_CORRUPTION_TUNING.span,
-      effect: "Evil, and corrupts the faithful even without a thieves' guild",
+      effect: "Evil, and corrupts the faithful even without organized crime",
     }),
     good: Object.freeze({
       system: 'corruption',

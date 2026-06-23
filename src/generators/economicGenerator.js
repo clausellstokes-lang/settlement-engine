@@ -847,7 +847,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         title: 'High Crime Priority: No Criminal or Guard Institutions',
         description: 'Criminal slider is high but neither criminal organisations nor guard infrastructure are present.',
         impact: 'High crime without institutions creates ungoverned chaos rather than structured underworld.',
-        suggestedFixes: ["Add Thieves' Guild, Black Market, or City Watch"],
+        suggestedFixes: ["Add Organized Crime, Black Market, or City Watch"],
         priorityNote: `Criminal priority is ${pri.criminal}. Some underworld structure is expected.`,
       });
     }
@@ -1856,7 +1856,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         const bmc = safetyProfile.blackMarketCapture;
         const crimInsts = safetyProfile.criminalInstitutions || [];
         const hasGuild = crimInsts.some(
-          (i) => i.toLowerCase().includes('guild') || i.toLowerCase().includes('thieves')
+          (i) =>
+            i.toLowerCase().includes('guild') ||
+            i.toLowerCase().includes('thieves') ||
+            i.toLowerCase().includes('organized crime')
         );
         const hasMarket = crimInsts.some(
           (i) => i.toLowerCase().includes('black market') || i.toLowerCase().includes('underground')
@@ -1868,7 +1871,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           hasGuild && hasMarket
             ? 'Criminal Syndicate Revenue'
             : hasGuild
-              ? "Thieves' Guild Revenue"
+              ? 'Organized Crime Revenue'
               : hasSmuggling
                 ? 'Smuggling Network Revenue'
                 : bmc >= 20

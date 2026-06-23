@@ -674,8 +674,13 @@ const buildHistoricalEvent = (
   const secFaction = (factions.find(f => !f.isGoverning) || factions[1])?.faction || 'the merchant class';
   const altFaction = factions[1]?.faction || 'the merchant class';
   const crimeFaction =
-    factions.find(f => f.faction?.toLowerCase().includes('thieves') || f.faction?.toLowerCase().includes('criminal'))
-      ?.faction || null;
+    factions.find(
+      f =>
+        f.category === 'criminal' ||
+        f.faction?.toLowerCase().includes('thieves') ||
+        f.faction?.toLowerCase().includes('organized crime') ||
+        f.faction?.toLowerCase().includes('criminal'),
+    )?.faction || null;
   const milFaction =
     factions.find(
       f =>

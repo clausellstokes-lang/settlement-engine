@@ -551,6 +551,7 @@ const FACTION_CATEGORY_KEYWORDS = {
   criminal: [
     'Thiev',
     'Criminal',
+    'Organized Crime',
     'Smuggl',
     'Underground',
     'Cartel',
@@ -1182,7 +1183,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
               : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
     factions.push({
-      faction: "Thieves' Guild",
+      faction: "Organized Crime",
       power: criminalPower,
       desc: N,
     });
@@ -1375,7 +1376,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             (De.isGoverning &&
               ((De.power = Math.round(De.power * 0.72)),
               (De.modifiers = [...(De.modifiers || []), 'contested legitimacy'])),
-              (De.faction.toLowerCase().includes('thieves') || De.faction.toLowerCase().includes('criminal')) &&
+              (De.category === 'criminal' ||
+                De.faction.toLowerCase().includes('thieves') ||
+                De.faction.toLowerCase().includes('organized crime') ||
+                De.faction.toLowerCase().includes('criminal')) &&
                 (De.power = Math.round(De.power * 1.3)),
               (De.faction.toLowerCase().includes('religious') || De.faction.toLowerCase().includes('church')) &&
                 ((De.power = Math.round(De.power * 1.15)),
@@ -1513,7 +1517,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               (he.desc =
                 (he.desc || '') +
                 ' Under pressure from both religious factions to make a formal declaration of support. Has so far avoided doing so.')),
-            (he.faction.toLowerCase().includes('thieves') || he.faction.toLowerCase().includes('criminal')) &&
+            (he.category === 'criminal' ||
+              he.faction.toLowerCase().includes('thieves') ||
+              he.faction.toLowerCase().includes('organized crime') ||
+              he.faction.toLowerCase().includes('criminal')) &&
               (he.power = Math.round(he.power * 1.25)));
         }),
           ye === 0
@@ -1603,7 +1610,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         cr = De - Mi,
         bt = ye('Merchant'),
         tr = ye('Craft Guild'),
-        ft = ye('Thieves'),
+        ft = ye('Thieves') || ye('Organized Crime') || ye('Criminal'),
         Fr = ye('Military') || ye('Guard'),
         la =
           ye('Manor Household') || ye('Landed Gentry') || ye('Noble Famil') || ye('Great Famil') || ye('Noble House'),
@@ -1689,7 +1696,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           }
         }
         if (ft && Fr) {
-          if (wt.includes('thieves')) {
+          if (wt.includes('thieves') || wt.includes('organized crime') || wt.includes('criminal')) {
             var Zt = factions.find(function (Ue) {
               return Ue.faction.toLowerCase().includes('military') || Ue.faction.toLowerCase().includes('guard');
             });
@@ -1705,7 +1712,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           }
           if (wt.includes('military') || wt.includes('guard')) {
             var Xe = factions.find(function (Ue) {
-              return Ue.faction.toLowerCase().includes('thieves');
+              var nm = Ue.faction.toLowerCase();
+              return nm.includes('thieves') || nm.includes('organized crime') || nm.includes('criminal');
             });
             if (Xe) {
               var et =
@@ -1720,7 +1728,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         }
         if (bt && ft && wt.includes('merchant')) {
           var Rt = factions.find(function (Ue) {
-            return Ue.faction.toLowerCase().includes('thieves');
+            var nm = Ue.faction.toLowerCase();
+            return nm.includes('thieves') || nm.includes('organized crime') || nm.includes('criminal');
           });
           if (Rt && Rt.power > 10) {
             var Ri =
@@ -1806,7 +1815,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         }
         if (vr && ft && wt.includes('religious')) {
           var Dr = factions.find(function (Ue) {
-            return Ue.faction.toLowerCase().includes('thieves');
+            var nm = Ue.faction.toLowerCase();
+            return nm.includes('thieves') || nm.includes('organized crime') || nm.includes('criminal');
           });
           if (Dr && Dr.power > 10) {
             var Tt =

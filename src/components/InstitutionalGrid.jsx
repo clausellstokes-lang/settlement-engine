@@ -8,6 +8,7 @@ import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, se
 // Direct catalog imports keep the generator pipeline out of this
 // component's synchronous import graph.
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
+import { displayInstitutionName } from '../domain/display/institutionDisplay.js';
 import { truncateAtWord } from '../lib/text.js';
 
 // Category accent colours route through the exact-value swatch escape hatch.
@@ -129,7 +130,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: FS['11.5'], fontWeight: isForced ? 700 : 500,
                     color: isForced ? swatch['#8A3010'] : swatch['#6B5340'] }}>
-                    {name}
+                    {displayInstitutionName(name)}
                     {instDef.nativeTier && (
                       <span style={{ fontSize: FS.micro, fontWeight: 600, marginLeft: 6,
                         color: MUTED, background: swatch['#F0E8D8'],
@@ -243,7 +244,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
           <span style={{ fontWeight: 600, fontSize: FS.sm, color: nameColor,
                 textDecoration: isExcluded ? 'line-through' : 'none',
-                opacity: isExcluded ? 0.7 : 1 }}>{name}</span>
+                opacity: isExcluded ? 0.7 : 1 }}>{displayInstitutionName(name)}</span>
           {def.p !== undefined && (
             <span style={{ fontSize: FS.xxs, color: muted, background: swatch['#F0EAD8'], borderRadius: 3, padding: '0 4px' }}>
               {Math.round((def.p || 0) * 100)}%

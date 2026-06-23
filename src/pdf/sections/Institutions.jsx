@@ -18,6 +18,7 @@ import { servicesHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
+import { displayInstitutionName } from '../../domain/display/institutionDisplay.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -199,7 +200,7 @@ function InstitutionCard({ inst, idx }) {
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-            {inst.name}
+            {displayInstitutionName(inst.name)}
           </Text>
           {isCustom && (
             <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>✦</Text>
