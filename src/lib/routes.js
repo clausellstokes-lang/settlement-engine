@@ -65,7 +65,12 @@ export const ROUTES = Object.freeze([
   { view: 'signin',                path: '/signin',                title: 'Sign In' },
   { view: 'register',              path: '/register',              title: 'Create Your Account' },
   { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password' },
+  // The recovery-link landing: completes a forgot-password reset. The auth-
+  // recovery edge function redirects its emailed link here; the page detects the
+  // recovery session and shows the set-new-password form.
+  { view: 'set-new-password',      path: '/set-new-password',      title: 'Set a New Password' },
   { view: 'verify-email',          path: '/verify-email',          title: 'Verify Your Email' },
+  { view: 'confirm-email',         path: '/confirm-email',         title: 'Email Confirmed' },
   { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete' },
 ]);
 

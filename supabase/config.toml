@@ -213,7 +213,11 @@ enable_signup = true
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
 # If enabled, users need to confirm their email address before signing in.
-enable_confirmations = false
+# Auth Phase 2: the account is locked until the email link is clicked; the signup
+# window auto-logs-in by polling signInWithPassword once the link is confirmed.
+# OPERATOR: this flag governs `supabase start` (local) ONLY — you MUST also enable
+# email confirmations in the hosted Supabase Auth settings for production.
+enable_confirmations = true
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
@@ -412,6 +416,13 @@ verify_jwt = false
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
 # would block the anonymous cap_warning email (anon users have no user JWT).
 [functions.send-email]
+verify_jwt = false
+
+# Logged-OUT password recovery (Auth Phase 2): the caller has NO JWT (they forgot
+# their password). The function defends itself with a hard per-IP + per-email rate
+# limit, the botGuard, and JSON-only parsing, and calls the service-role-only
+# recovery RPCs (066). The platform gate would reject the whole anon recovery flow.
+[functions.auth-recovery]
 verify_jwt = false
 
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────

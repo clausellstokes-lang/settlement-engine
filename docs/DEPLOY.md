@@ -143,9 +143,20 @@ scopes `system_config` public reads, **061** locks profile moderation
 columns, and **062** closes three authz gaps (enables RLS on the two analytics
 tables, drops the un-audited privileged `profiles`-UPDATE bypass so every
 privileged write goes through the audited RPCs, and column-locks owner
-support-ticket edits). These are not optional hardening — skipping them leaves
-the trust-boundary open. `db push` applies them with everything else; if you ever
-hand-apply, never stop before this set has landed.
+support-ticket edits). Migration **066** (Auth Phase 2) adds the server-write-only
+`security_answers` bcrypt table — the answer hash is reachable ONLY through the
+SECURITY DEFINER question RPCs and the service-role recovery RPCs, never a client
+SELECT — plus the per-IP/per-email recovery rate limiter. These are not optional
+hardening — skipping them leaves the trust-boundary open. `db push` applies them
+with everything else; if you ever hand-apply, never stop before this set has
+landed.
+
+**Auth Phase 2 — also flip email confirmations in the hosted dashboard.** Migration
+066 expects email-confirm-locked signups. `supabase/config.toml` sets
+`enable_confirmations = true`, but that governs `supabase start` (local) ONLY — you
+MUST also enable email confirmations in the hosted **Supabase → Authentication →
+Sign In / Providers → Email** settings for production, or the signup auto-login
+poll never locks/unlocks as designed.
 
 `db push` applies every pending migration on top of the current schema; they must
 ALL land before deploying the corresponding functions and client. Confirm what is
@@ -183,17 +194,19 @@ npx supabase functions deploy account-actions         # self-serve account expor
 npx supabase functions deploy send-email              # per-template self-auth; anon cap_warning path
 npx supabase functions deploy ingest-events           # public analytics event sink (anon traffic)
 npx supabase functions deploy analytics-export        # cron export, x-export-secret shared secret
+npx supabase functions deploy auth-recovery           # logged-out password recovery (Auth Phase 2)
 ```
 
 **No `--no-verify-jwt` flags needed.** `verify_jwt` is pinned EXPLICITLY for every
 function in `config.toml` (the deploy source of truth), so the platform JWT gate
-can't be flipped by a forgotten/stray flag. Five functions that authenticate
+can't be flipped by a forgotten/stray flag. Six functions that authenticate
 themselves are pinned `false` (`stripe-webhook`, `verify-single-dossier`,
-`ingest-events`, `analytics-export`, `send-email`); the rest are pinned `true`.
+`ingest-events`, `analytics-export`, `send-email`, `auth-recovery`); the rest are
+pinned `true`.
 The pins are enforced by `tests/edgeFunctions/verifyJwtPins.test.js` (every
 function must have an explicit pin). Deploy **every** function directory under
 `supabase/functions/` — the only non-deployable one is `_shared/` (a helper
-bundle, not a function). There are 11 functions total; on a first cutover deploy
+bundle, not a function). There are 12 functions total; on a first cutover deploy
 all of them, and after adding a new function confirm the list with
 `ls -d supabase/functions/*/ | grep -v _shared` rather than trusting this block.
 <!-- @enforced-by tests/docs/docCounts.test.js -->

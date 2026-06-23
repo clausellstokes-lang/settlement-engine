@@ -26,6 +26,9 @@ import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import SecurityQuestionsFields from './SecurityQuestionsFields.jsx';
+import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
+import { useConfirmPolling } from '../../hooks/useConfirmPolling.js';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
   // width:100%, variants primary/success/danger/ghost) — kept under an alias so
@@ -52,9 +55,9 @@ export default function AuthPanel({
 }) {
   const authSignUp = useStore(s => s.authSignUp);
   const authSignIn = useStore(s => s.authSignIn);
-  const authResetPassword = useStore(s => s.authResetPassword);
   const authMagicLink = useStore(s => s.authMagicLink);
   const authOAuth = useStore(s => s.authOAuth);
+  const authSetSecurityAnswers = useStore(s => s.authSetSecurityAnswers);
 
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
@@ -64,6 +67,20 @@ export default function AuthPanel({
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // Security questions (sign-up only). Captured on the form, then STASHED so the
+  // post-confirmation polling auto-login can persist them the moment a session
+  // exists — set_my_security_answers needs auth.uid(), which signUp doesn't
+  // grant while email confirmation is pending. `securityStash` holds the four
+  // values across the form → verify → poll-success transition.
+  const [q1, setQ1] = useState('');
+  const [a1, setA1] = useState('');
+  const [q2, setQ2] = useState('');
+  const [a2, setA2] = useState('');
+  const [securityStash, setSecurityStash] = useState(null);
+  // True once the verify screen's bounded poll exhausts its window without a
+  // confirmation — swaps the calm "we'll sign you in" note for a fall-back hint.
+  const [pollTimedOut, setPollTimedOut] = useState(false);
   // A successful magic-link send swaps the form for a dedicated "check your
   // inbox" close (P9 peak/end) rather than re-rendering the same form under a
   // green strip — a boolean, not the dual-purpose `message` string, gates it.
@@ -77,9 +94,28 @@ export default function AuthPanel({
     setMessage(null);
     setConfirmPassword('');
     setMagicSent(false);
+    // Clear any stashed security-question state so a later return to sign-up
+    // starts clean and a stale stash can't be re-persisted to the wrong session.
+    setQ1(''); setA1(''); setQ2(''); setA2('');
+    setSecurityStash(null);
+    setPollTimedOut(false);
     if (onModeChange) onModeChange(next);
     else setMode(next);
   };
+
+  // First-question setter that drops a colliding second pick: if the user picks
+  // the same question they'd already chosen for slot 2, clear slot 2 so the two
+  // can never be equal (the second <select> also excludes the first pick going
+  // forward; this guards the change-after-the-fact case).
+  const chooseQ1 = (next) => {
+    setQ1(next);
+    if (next && next === q2) setQ2('');
+  };
+
+  // Sign-up security-question validity, surfaced both as the submit guard and to
+  // disable the CTA until satisfied. Both questions chosen, distinct, answered.
+  const securityComplete =
+    Boolean(q1) && Boolean(q2) && q1 !== q2 && a1.trim() !== '' && a2.trim() !== '';
 
   const showGoogle  = flag('googleOauth');
   const showDiscord = flag('discordOauth');
@@ -117,35 +153,58 @@ export default function AuthPanel({
     }
   };
 
+  // Persist the stashed security answers against a now-live session. Best-effort:
+  // the account already exists, so a transient RPC failure must NOT block the
+  // user — we surface a calm "set them later" note and move on. Returns nothing;
+  // it clears the stash on success so it can't double-fire.
+  const persistSecurityAnswers = async (answers) => {
+    if (!answers) return;
+    try {
+      await authSetSecurityAnswers(answers);
+      setSecurityStash(null);
+    } catch {
+      // Non-fatal: the account is valid; they can set questions from Account.
+      setSecurityStash(null);
+      setMessage(t('auth.security.saveDeferred'));
+    }
+  };
+
+  // Fired by the verify-screen poll the instant the confirmation link is clicked
+  // (anywhere) and the silent sign-in succeeds. A session now exists, so this is
+  // the first safe moment to write the security answers, then hand off to onAuthed.
+  const handleConfirmed = async () => {
+    await persistSecurityAnswers(securityStash);
+    onAuthed?.();
+  };
+
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
     if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
     if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
+    // Security questions are mandatory for email/password sign-up.
+    if (!q1 || !q2) { setError(t('auth.security.error.bothRequired')); return; }
+    if (q1 === q2) { setError(t('auth.security.error.distinct')); return; }
+    if (!a1.trim() || !a2.trim()) { setError(t('auth.security.error.bothRequired')); return; }
     setError(null);
     setLoading(true);
+    // Stash the answers BEFORE the network call so the polling auto-login can
+    // persist them even though this signUp returns no session (confirmation
+    // pending). Normalized casing/whitespace happens server-side in the RPC.
+    const answers = { q1, a1: a1.trim(), q2, a2: a2.trim() };
+    setSecurityStash(answers);
     try {
       const { needsVerification } = await authSignUp(email.trim(), password);
       if (needsVerification) {
-        setMode('verify'); // inline "check your inbox" — no route change
+        setPollTimedOut(false);
+        setMode('verify'); // inline "check your inbox" — the poll takes over
       } else {
+        // Auto-confirmed (dev / mock): a session already exists, so persist the
+        // answers immediately rather than waiting on a poll that won't run.
+        await persistSecurityAnswers(answers);
         onAuthed?.();
       }
     } catch (e) {
       setError(e.message || t('auth.error.signUpFailed'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleResetPassword = async () => {
-    if (!email.trim()) { setError(t('auth.error.emailRequired')); return; }
-    setError(null);
-    setLoading(true);
-    try {
-      await authResetPassword(email.trim());
-      setMessage(t('auth.reset.sent'));
-    } catch (e) {
-      setError(e.message || t('auth.error.resetFailed'));
     } finally {
       setLoading(false);
     }
@@ -170,6 +229,24 @@ export default function AuthPanel({
   // close, never a dead-end on an untouchable form).
   const resendMagicLink = () => { setMagicSent(false); handleMagicLink(); };
   const editEmail = () => { setMagicSent(false); setError(null); setMessage(null); };
+
+  // Post-signup auto-login: while the "check your inbox" verify screen shows,
+  // poll signInWithPassword with the just-entered credentials. The instant the
+  // confirmation link is clicked (here or on any device) the poll succeeds →
+  // handleConfirmed persists the stashed answers and runs onAuthed. Bounded:
+  // stops on success / after ~5 min (→ pollTimedOut note) / on unmount. No-ops
+  // in mock mode (no real confirmation gate). See useConfirmPolling.
+  useConfirmPolling({
+    active: mode === 'verify',
+    email: email.trim(),
+    password,
+    onConfirmed: handleConfirmed,
+    onTimeout: () => setPollTimedOut(true),
+    // A genuine failure (wrong password is implausible here since we just set
+    // it, but network faults happen): surface it on the verify screen rather
+    // than poll silently forever.
+    onError: (e) => setError(e.message || t('auth.error.signInFailed')),
+  });
 
   // Password is the primary inline path: sign-up creates an account, anything
   // else signs in. The email sign-in link is an explicit alternative below.
@@ -199,12 +276,19 @@ export default function AuthPanel({
   }
 
   // ── Email verification (post sign-up "check your inbox") ──────────────────
+  // The window now WAITS here: useConfirmPolling silently signs the user in the
+  // moment they click the confirmation link (any device). The note explains the
+  // wait; if the bounded poll exhausts its window we swap in a fall-back hint.
   if (mode === 'verify') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         <Alert type="success">
           {t('auth.verify.sent', { email })}
         </Alert>
+        {error && <Alert type="error">{error}</Alert>}
+        <p role="status" aria-live="polite" style={{ fontSize: FS.sm, color: SECOND, margin: 0, lineHeight: 1.5 }}>
+          {pollTimedOut ? t('auth.verify.pollingTimedOut') : t('auth.verify.polling')}
+        </p>
         <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
           {t('auth.button.backToSignIn')}
         </Button>
@@ -212,24 +296,14 @@ export default function AuthPanel({
     );
   }
 
-  // ── Password reset request ────────────────────────────────────────────────
+  // ── Forgot-password challenge ─────────────────────────────────────────────
+  // The reset mode is now the security-question challenge (email → random
+  // question → reset link), run through the auth-recovery edge function. The
+  // multi-step flow lives in its own component to keep this file lean; "back to
+  // sign in" routes through requestMode so pages navigate and the modal switches
+  // in place, exactly like every other mode transition here.
   if (mode === 'reset') {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
-        <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-          {t('auth.reset.prose')}
-        </p>
-        {error && <Alert type="error">{error}</Alert>}
-        {message && <Alert type="success">{message}</Alert>}
-        <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} />
-        <AuthCTAButton onClick={handleResetPassword} disabled={loading}>
-          {loading ? t('auth.button.working') : 'Send reset link'}
-        </AuthCTAButton>
-        <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
-          {t('auth.button.backToSignIn')}
-        </Button>
-      </div>
-    );
+    return <ForgotPasswordFlow onBackToSignIn={() => requestMode('signin')} />;
   }
 
   // ── Sign-in / Sign-up ─────────────────────────────────────────────────────
@@ -281,11 +355,22 @@ export default function AuthPanel({
         <Input type="password" placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
       )}
 
+      {/* Security questions — sign-up only, AFTER confirm-password. The answers
+          are stashed and persisted server-side (bcrypt-hashed) once a session
+          exists; they never reach the client unhashed beyond this form. */}
+      {mode === 'signup' && (
+        <SecurityQuestionsFields
+          q1={q1} a1={a1} q2={q2} a2={a2}
+          setQ1={chooseQ1} setA1={setA1} setQ2={setQ2} setA2={setA2}
+          onKeyDown={onEnter}
+        />
+      )}
+
       {mode === 'signin' && (
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
 
-      <AuthCTAButton onClick={submit} disabled={loading}>
+      <AuthCTAButton onClick={submit} disabled={loading || (mode === 'signup' && !securityComplete)}>
         {loading
           ? t('auth.button.working')
           : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}

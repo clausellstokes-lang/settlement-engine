@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (65) — schema + RLS policies + credit ledger + version
+- **migrations/** (67) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -116,12 +116,18 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   least-privilege/audit-log/deletion/support + the **account-status SECURITY
   migrations** (057/059/060 enforce account-status writes/RLS) + **062**
   (close authz gaps: RLS on the two analytics tables, drop the un-audited
-  privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) —
+  privileged profiles-UPDATE bypass, column-lock owner support-ticket edits) +
+  **066** (Auth Phase 2: server-write-only `security_answers` bcrypt table +
+  SECURITY DEFINER question/recovery RPCs + per-IP/per-email recovery limiter) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
-- **functions/** (11 Deno edge functions; `_shared/` is a helper dir, not a
+- **functions/** (12 Deno edge functions; `_shared/` is a helper dir, not a
   deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
+  - `auth-recovery` — logged-OUT password recovery (Auth Phase 2). No JWT; the
+    caller forgot their password. Per-IP + per-email rate limit (fail-closed) +
+    bot guard → service-role-only recovery RPCs (066): reveal one random security
+    question, verify the answer, email a `recovery` reset link to the account.
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.

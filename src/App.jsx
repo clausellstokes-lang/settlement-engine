@@ -51,7 +51,9 @@ const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSu
 const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
 const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
 const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
+const SetNewPasswordPage = lazy(() => import('./components/auth/SetNewPasswordPage.jsx'));
 const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
+const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.jsx'));
 
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
@@ -332,10 +334,11 @@ export default function App() {
   const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
 
   // Dedicated auth surfaces (/signin · /register · /reset-password ·
-  // /verify-email) render full-bleed: the persistent top nav and the mobile
-  // bottom nav are suppressed so the AuthPanel owns the whole frame. Each auth
-  // page carries its own back/exit affordance, so no navigation is stranded.
-  const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'verify-email';
+  // /verify-email · /confirm-email) render full-bleed: the persistent top nav
+  // and the mobile bottom nav are suppressed so the AuthPanel owns the whole
+  // frame. Each auth page carries its own back/exit affordance, so no
+  // navigation is stranded.
+  const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'set-new-password' || view === 'verify-email' || view === 'confirm-email';
 
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
   // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
@@ -602,7 +605,9 @@ export default function App() {
             {view === 'signin'         && <SignInPage />}
             {view === 'register'       && <RegisterPage />}
             {view === 'reset-password' && <ResetPasswordPage />}
+            {view === 'set-new-password' && <SetNewPasswordPage />}
             {view === 'verify-email'   && <VerifyEmailPage />}
+            {view === 'confirm-email'  && <ConfirmEmailPage />}
           </Suspense>
         </main>
 

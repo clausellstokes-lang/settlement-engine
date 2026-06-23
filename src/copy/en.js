@@ -182,6 +182,39 @@ export const en = Object.freeze({
       prose: 'Enter your email address and we will send a link to reset your password.',
       sent:  'Check your email for a password reset link.',
     },
+    // Forgot-password challenge flow (the multi-step reset mode). Step 1 looks
+    // the email up; step 2 asks ONE of the account's two security questions at
+    // random; a correct answer mails the reset link. The user chose to reveal
+    // whether an account exists, so `noAccount` is an honest miss. Formal
+    // register, no contractions (auth/security copy).
+    recovery: {
+      lookupProse:   'Enter your email address. If it has an account with a security question set, we will ask you that question to confirm it is you.',
+      lookupCta:     'Continue',
+      noAccount:     'We could not find an account for that email address. Check the spelling, or create a new account.',
+      noQuestion:    'This account does not have a security question set, so it cannot be recovered this way. Try an email sign-in link instead.',
+      questionProse: 'Answer your security question to confirm this account is yours.',
+      answerLabel:   'Your answer',
+      verifyCta:     'Verify answer',
+      sent:          'That matched. Check your email for a link to set a new password.',
+      wrongAnswer:   'That answer did not match. Check it and try again.',
+      tooMany:       'Too many attempts. Wait a few minutes, then try again.',
+      unavailable:   'Account recovery is unavailable right now. Please try again shortly.',
+      startOver:     'Start over with a different email',
+    },
+    // Set-new-password page (the recovery-link landing). When a recovery session
+    // is active the form below completes the reset; otherwise the page falls back
+    // to the request form. Formal register, no contractions (auth/security copy).
+    setNew: {
+      title:        'Set a new password',
+      prose:        'Choose a new password for your account. You are signed in through your recovery link.',
+      requestProse: 'This page completes a password reset. Open it from the link in your reset email, or request a new link below.',
+      newLabel:     'New password',
+      confirmLabel: 'Confirm new password',
+      submit:       'Set new password',
+      success:      'Your password is set. Taking you to your settlements…',
+      failed:       'We could not set your password. The recovery link may have expired. Request a fresh one.',
+      requestLink:  'Send a reset link',
+    },
     // Magic-link "check your inbox" close. {email} is interpolated; the link
     // window is a scannable spec, so a digit is acceptable there.
     magic: {
@@ -200,6 +233,45 @@ export const en = Object.freeze({
       expired:    'This confirmation link is invalid or has expired. Try signing in. If your account is not active yet, request a fresh link.',
       continue:   'Continue',
       goSignIn:   'Go to Sign In',
+      // The post-signup "check your inbox" screen now waits for the confirmation
+      // link and signs the original window in automatically. These lines explain
+      // that wait, calmly, with no countdown drama.
+      polling:    'Keep this window open. The moment you confirm your email, here or on any device, we will sign you in automatically.',
+      pollingTimedOut: 'We are still waiting on your confirmation. Once you have clicked the link, you can sign in directly.',
+    },
+    // Security questions, captured at sign-up (email/password accounts only).
+    // The answers are hashed on the server and never reach the client; these
+    // strings are the form labels and validation messages. Formal register, no
+    // contractions (auth/security copy).
+    security: {
+      heading:     'Security questions',
+      prose:       'Pick two questions and answer them. We will ask one of them at random if you ever need to recover your account.',
+      question1:   'First question',
+      question2:   'Second question',
+      answer1:      'Answer to the first question',
+      answer2:      'Answer to the second question',
+      choosePrompt: 'Choose a question',
+      error: {
+        bothRequired: 'Choose both questions and answer each one.',
+        distinct:     'Choose two different questions.',
+      },
+      // Non-fatal: the account exists, but the answers did not save on the first
+      // try. We tell the user they can set them later from their account page.
+      saveDeferred: 'Your account is ready. You can set your security questions later from your account page.',
+    },
+    // Minimal email-confirmation landing page. The confirmation link lands here,
+    // NOT in the original signup window — that window polls and signs itself in.
+    // This page just confirms the click and invites the user to close the tab.
+    confirm: {
+      title:       'Email confirmed',
+      confirming:  'Confirming…',
+      confirmed:   'Your email is confirmed. You can close this tab. Your original window is signing you in.',
+      // Browsers block scripts from closing tabs the user opened, so the close
+      // button is best-effort and we say so plainly.
+      closeTab:    'Close this tab',
+      closeNote:   'If this tab does not close, you can close it yourself.',
+      failed:      'We could not confirm this link. It may have expired. Return to sign in and request a fresh one.',
+      goSignIn:    'Go to sign in',
     },
     placeholder: {
       email:           'Email address',
@@ -219,6 +291,7 @@ export const en = Object.freeze({
       // still wins; only these literals moved off the handler.
       passwordTooShort: 'Your password must be at least six characters.',
       passwordMismatch: 'Those passwords do not match.',
+      passwordRequired: 'Enter a new password to continue.',
       emailRequired:    'Enter your email address to continue.',
       signInFailed:     'We could not sign you in. Please try again.',
       signUpFailed:     'We could not create your account. Please try again.',

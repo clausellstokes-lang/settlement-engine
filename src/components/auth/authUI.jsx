@@ -163,6 +163,35 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
   );
 }
 
+/**
+ * Select — a styled native <select> matching the Input field's outline so the
+ * security-question pickers read as part of the same form. Native (not a
+ * custom listbox) so keyboard + screen-reader behaviour is the platform's,
+ * which already clears the Accessible Authentication bar. `label` is the
+ * accessible name; the visible prompt is the disabled placeholder option.
+ */
+export function Select({ value, onChange, ariaLabel, children }) {
+  return (
+    <select
+      aria-label={ariaLabel}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      style={{
+        width: '100%',
+        padding: `${SP.md}px ${SP.lg - 2}px`,
+        // Same BORDER_STRONG outline as Input (clears the WCAG 1.4.11 3:1
+        // UI-boundary floor) so the picker and the answer field below it match.
+        border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
+        fontSize: FS['14'], fontFamily: sans,
+        background: swatch.white, color: INK, outline: 'none',
+        boxSizing: 'border-box', cursor: 'pointer',
+      }}
+    >
+      {children}
+    </select>
+  );
+}
+
 export function Checkbox({ checked, onChange, label }) {
   const id = `checkbox-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
