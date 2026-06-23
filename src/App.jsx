@@ -401,8 +401,8 @@ export default function App() {
                 padding: `0 ${SP.xs}px`,
               }}
             >
-              <span style={{ fontSize: FS.lg, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                SettlementForge
+              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em' }}>
+                <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
               </span>
             </Button>
 
@@ -422,25 +422,22 @@ export default function App() {
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && !isAuthRoute && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block — logo + wordmark on top row, italic tagline
-                beneath. The HomeHero (which carries the full positioning
-                block) is gated to anonymous-only; this small tagline
-                keeps the "simulator for DMs" framing visible for
-                signed-in users who'd otherwise never see it. */}
+            {/* Brand block — the wordmark stands alone (the "simulator for DMs"
+                subtitle was retired). "SettlementForge" reads as a single bold
+                serif word with the two capitals (S, F) set a step larger, a
+                quiet two-cap emphasis that keeps the whole word legible. The
+                aria-label restores the plain name for assistive tech, since the
+                per-letter spans would otherwise read as fragments. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
-                <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                  SettlementForge
-                </h1>
-                <span style={{
-                  fontSize: FS.xs, fontWeight: 700,
-                  color: swatch['#E0C080'], fontFamily: sans,
-                  letterSpacing: '0.10em', textTransform: 'uppercase',
-                  marginTop: 3,
-                }}>
-                  A simulator for Dungeon Masters
-                </span>
-              </div>
+              <h1
+                aria-label="SettlementForge"
+                style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+              >
+                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
+                <span aria-hidden="true">ettlement</span>
+                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
+                <span aria-hidden="true">orge</span>
+              </h1>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>

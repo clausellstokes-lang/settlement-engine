@@ -276,6 +276,9 @@ export default function GalleryMaps({ onNavigate }) {
         const d = detail || {};
         const img = d.backdrop?.customBackdrop?.imageUrl || d.mapState?.customBackdrop?.imageUrl || null;
         const memberList = Array.isArray(d.members) ? d.members : [];
+        // get_gallery_map (the preview RPC) doesn't project the import opt-in, so
+        // read it from the tile that opened this preview (list_gallery_maps does).
+        const viewingImportable = (items.find(x => x.slug === viewingSlug) || {}).importable === true;
         return (
           <div>
             <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} icon={<ChevronLeft size={14} />} style={{ marginBottom: SP.md }}>Back to maps</Button>
@@ -305,11 +308,17 @@ export default function GalleryMaps({ onNavigate }) {
                       </div>
                     </div>
                   )}
-                  <Button variant="primary" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
-                    title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
-                    style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
-                    {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
-                  </Button>
+                  {viewingImportable ? (
+                    <Button variant="primary" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
+                      title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
+                      style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
+                      {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
+                    </Button>
+                  ) : (
+                    <div style={{ alignSelf: 'flex-start', marginTop: SP.xs, fontSize: FS.sm, color: BODY, fontFamily: sans, fontWeight: 700 }}>
+                      The owner shared this map as view-only — importing isn't available.
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -496,16 +505,28 @@ export default function GalleryMaps({ onNavigate }) {
                     title="Edit this map's gallery details"
                   >Edit</Button>
                 )}
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => handleImport(m.slug, m.kind)}
-                  busy={importingSlug === m.slug}
-                  title={isPremium ? 'Import this map into a new campaign' : 'Importing maps is a premium feature'}
-                  style={{ flex: 1 }}
-                >
-                  {importingSlug === m.slug ? 'Importing…' : (isPremium ? 'Import' : 'Import (premium)')}
-                </Button>
+                {/* Import is offered only when the owner opted in (migration 072);
+                    otherwise the map is view-only. No dead-end button (P9) — the
+                    slot shows the status, and the View button still previews it. */}
+                {m.importable ? (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => handleImport(m.slug, m.kind)}
+                    busy={importingSlug === m.slug}
+                    title={isPremium ? 'Import this map into a new campaign' : 'Importing maps is a premium feature'}
+                    style={{ flex: 1 }}
+                  >
+                    {importingSlug === m.slug ? 'Importing…' : (isPremium ? 'Import' : 'Import (premium)')}
+                  </Button>
+                ) : (
+                  <span
+                    title="The owner shared this map as view-only — importing isn't available."
+                    style={{ flex: 1, alignSelf: 'center', textAlign: 'center', fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700 }}
+                  >
+                    View-only
+                  </span>
+                )}
               </div>
             </div>
           </div>

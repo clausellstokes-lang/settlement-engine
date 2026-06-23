@@ -49,7 +49,7 @@ import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailH
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
-import { INK, MUTED, BODY, SECOND, BORDER, CARD, AMBER_DEEP, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
+import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
 // PDF consume, so a named relationship looks identical across every surface
 // (was previously a divergent local REL_COLORS copy — the cardinal-sin coherence
@@ -80,21 +80,6 @@ export default function SettlementDetail({
   handleLink, removeNeighbour, applyRename,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
-  // Runnable-essentials lead-in: surface the already-computed hot-path facts
-  // (tier · population · ruler · current pressure) as a single de-emphasized
-  // line under the header so the at-a-glance essentials precede the deep
-  // dossier. This is placement/surfacing of existing engine data, not prose.
-  const s_=detail.settlement;
-  const summaryRuler=s_.powerStructure?.governingName||null;
-  const summaryTier=s_.tier||null;
-  const summaryPop=Number.isFinite(s_.population)?s_.population.toLocaleString():null;
-  const summaryPressure=(s_.pressureSentence||'').trim()||null;
-  const summaryFacts=[
-    summaryTier&&{label:'Tier',value:summaryTier},
-    summaryPop&&{label:'Population',value:summaryPop},
-    summaryRuler&&{label:'Ruler',value:summaryRuler},
-  ].filter(Boolean);
-  const hasSummary=summaryFacts.length>0||!!summaryPressure;
 
   // Read-only echo of the strongest network-effect signal — the genuinely
   // change-focused, anomaly-first fact the cascade produces. The full editable
@@ -461,46 +446,22 @@ export default function SettlementDetail({
         </div>
       </div>
 
-      {/* Runnable-essentials lead-in. Two tiers, change-first (P3): the living
-          pressure + the dominant network anomaly lead on their own line, given a
-          glyph + heavier weight + a single reserved amber accent so movement —
-          not the static roster — is the loud part of the front-load. The static
-          Tier · Population · Ruler facts sit beneath, quieted to muted labels +
-          serif values. Surfacing of existing engine data, not prose. The amber
-          accent is deliberately distinct from the gold Export primary so the two
-          don't collide (P4 colour scarcity). */}
-      {hasSummary && (
-        <div style={{display:'flex',flexDirection:'column',gap:6,margin:'0 0 16px',padding:'0 2px'}}>
-          {(summaryPressure||networkEcho) && (
-            <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px'}}>
-              {summaryPressure && (
-                <span style={{display:'inline-flex',alignItems:'baseline',gap:6,flex:'1 1 240px',minWidth:0}}>
-                  <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:AMBER_DEEP,lineHeight:1.35}}>{summaryPressure}</span>
-                </span>
-              )}
-              {networkEcho && (
-                <span
-                  title={`${networkEcho.label} shifts by ${networkEcho.delta} from ${networkEcho.count} linked settlement${networkEcho.count===1?'':'s'}. A positive figure helps, a negative one hurts. See Network Effects in edit mode for the full breakdown.`}
-                  style={{display:'inline-flex',alignItems:'baseline',gap:5,flexShrink:0}}
-                >
-                  <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>Network</span>
-                  <span style={{fontFamily:sans,fontSize:FS.sm,fontWeight:700,color:INK}}>{networkEcho.label}</span>
-                  <span style={{fontFamily:'monospace',fontSize:FS.sm,fontWeight:700,color:networkEcho.isPos?swatch.success:swatch.danger}}>{networkEcho.delta}</span>
-                  {networkEcho.via && <span style={{fontSize:FS.xxs,color:BODY,fontFamily:sans}}>via {networkEcho.via}</span>}
-                </span>
-              )}
-            </div>
-          )}
-          {summaryFacts.length>0 && (
-            <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px'}}>
-              {summaryFacts.map(f => (
-                <span key={f.label} style={{display:'inline-flex',alignItems:'baseline',gap:5}}>
-                  <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>{f.label}</span>
-                  <span style={{fontFamily:serif_,fontSize:FS.sm,fontWeight:600,color:INK}}>{f.value}</span>
-                </span>
-              ))}
-            </div>
-          )}
+      {/* Network-effect echo. The dossier below already carries tier, population,
+          ruler, and the causal hook, so those redundant copies are gone; the one
+          fact the read-only dossier does NOT surface is the cross-settlement
+          cascade, so the dominant network anomaly stays as a single quiet line.
+          Only rendered when a link actually moves a meter (networkEcho's gate). */}
+      {networkEcho && (
+        <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px',margin:'0 0 16px',padding:'0 2px'}}>
+          <span
+            title={`${networkEcho.label} shifts by ${networkEcho.delta} from ${networkEcho.count} linked settlement${networkEcho.count===1?'':'s'}. A positive figure helps, a negative one hurts. See Network Effects in edit mode for the full breakdown.`}
+            style={{display:'inline-flex',alignItems:'baseline',gap:5,flexShrink:0}}
+          >
+            <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>Network</span>
+            <span style={{fontFamily:sans,fontSize:FS.sm,fontWeight:700,color:INK}}>{networkEcho.label}</span>
+            <span style={{fontFamily:'monospace',fontSize:FS.sm,fontWeight:700,color:networkEcho.isPos?swatch.success:swatch.danger}}>{networkEcho.delta}</span>
+            {networkEcho.via && <span style={{fontSize:FS.xxs,color:BODY,fontFamily:sans}}>via {networkEcho.via}</span>}
+          </span>
         </div>
       )}
 

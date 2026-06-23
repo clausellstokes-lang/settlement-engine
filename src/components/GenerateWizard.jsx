@@ -430,13 +430,24 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           the overlay dismissing on top of it. */}
       {settlement && showOutput && !pipelineRevealActive && (
         <>
-          {/* ── Back navigation toolbar ──────────────────────────── */}
+          {/* ── Back navigation toolbar ──────────────────────────────────
+              Capped to the same PAGE_MAX column the dossier body uses below.
+              Previously the toolbar rendered full <main> width while the
+              dossier was centred at PAGE_MAX, so on wide screens the dark
+              sticky bar overhung the dossier on both sides and read as a bar
+              sitting over the content. The cap is applied to the toolbar's
+              OWN box (via maxWidth) rather than a wrapper div: the toolbar is
+              position:sticky, so a height-collapsed wrapper would become its
+              containing block and rob it of its sticky travel. Kept a direct
+              child of the tall outer column so it stays pinned through the
+              full dossier scroll. */}
           <WizardOutputToolbar
             settlement={settlement}
             isMobile={isMobile}
             handleBack={handleBack}
             handleGenerate={handleGenerate}
             handleNewSettlement={handleNewSettlement}
+            maxWidth={PAGE_MAX}
           />
 
           <Suspense fallback={
@@ -453,7 +464,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           }>
             {/* Cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
-                toolbar above stays full-width. */}
+                toolbar above shares the same PAGE_MAX column. */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               <OutputContainer hideHeader />
             </div>

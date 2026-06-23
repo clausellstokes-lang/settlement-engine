@@ -33,13 +33,18 @@ import { COPY } from '../../copy/strings.js';
  *   the AI slice). The card stays handler-agnostic so callers can route to
  *   different flows (raw narrative, progression, daily life) without
  *   changing this component.
- * @param {string=} [props.creditCost='1']   string so callers can vary copy
  */
-export default function AIInlineCard({ settlement, onPolish, creditCost = '1' }) {
+export default function AIInlineCard({ settlement, onPolish }) {
   const aiSettlement = useStore(s => s.aiSettlement);
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const aiLoading    = useStore(s => s.aiLoading);
   const aiError      = useStore(s => s.aiError);
+  // Authoritative cost: read the live narrative cost through the same store
+  // selector the dossier's primary "Generate Narrative" button uses, so this
+  // card and that button never disagree (they both run the SAME narrative
+  // layer). Respects the user's model preference (fast tiers cost less). The
+  // server enforces this same schedule — see generate-narrative CREDIT_COSTS.
+  const narrativeCost = useStore(s => s.getCost('narrative'));
   const [dismissed, setDismissed] = useState(false);
   // Unify the "narrated" predicate with the header badge + Revert-to-Raw gate,
   // which both treat ANY narrative layer (settlement narrative OR daily-life
@@ -77,7 +82,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: swatch.inkMag,
       }}>
-        Run the Narrative Layer on this dossier. Costs {creditCost} credit{creditCost === '1' ? '' : 's'},
+        Run the Narrative Layer on this dossier. Costs {narrativeCost} credit{narrativeCost === 1 ? '' : 's'},
         streams section by section. Partial failures keep your raw draft intact, and you can
         revert to raw any time.
       </p>

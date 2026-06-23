@@ -18,6 +18,7 @@ export function WizardOutputToolbar({
   handleBack,
   handleGenerate,
   handleNewSettlement,
+  maxWidth,
 }) {
   return (
     <div style={{
@@ -26,6 +27,12 @@ export function WizardOutputToolbar({
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
       borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+      // Cap the toolbar to the dossier's column and centre it, so on wide
+      // screens its edges align to the PAGE_MAX dossier below instead of
+      // overhanging full <main> width. Applied to the toolbar's OWN box —
+      // it must NOT be wrapped in a height-collapsed parent, or it would lose
+      // its sticky containing block and scroll away with the dossier.
+      maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
       position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
     }}>
       {/* Back is a subordinate nav/reset that discards the just-earned draft — it
