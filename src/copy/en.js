@@ -169,12 +169,9 @@ export const en = Object.freeze({
     button: {
       working:        'Working...',
       sendLink:       'Send sign-in link',
+      emailLink:      'Email me a sign-in link',
       createAcct:     'Create account',
       signIn:         'Sign in',
-      moreOpen:       'More sign-in options',
-      moreClose:      'Hide more options',
-      usePassword:    'Use a password instead',
-      useMagic:       'Use a magic link instead (recommended)',
       resend:         'Resend link',
       differentEmail: 'Use a different email',
       backToSignIn:   'Back to sign in',
@@ -205,8 +202,9 @@ export const en = Object.freeze({
       goSignIn:   'Go to Sign In',
     },
     placeholder: {
-      email:    'Email address',
-      password: 'Password',
+      email:           'Email address',
+      password:        'Password',
+      confirmPassword: 'Confirm password',
     },
     rememberMe: 'Remember me on this device',
     localMode:  'Running in local mode. No backend configured.',
@@ -220,6 +218,7 @@ export const en = Object.freeze({
       // The catch sites keep `e.message || t(...)` so an upstream lib message
       // still wins; only these literals moved off the handler.
       passwordTooShort: 'Your password must be at least six characters.',
+      passwordMismatch: 'Those passwords do not match.',
       emailRequired:    'Enter your email address to continue.',
       signInFailed:     'We could not sign you in. Please try again.',
       signUpFailed:     'We could not create your account. Please try again.',

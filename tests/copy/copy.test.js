@@ -216,15 +216,15 @@ describe('Tier 7.14 migration coverage', () => {
     // Buttons:
     expect(t('auth.button.working')).toBe('Working...');
     expect(t('auth.button.sendLink')).toBe('Send sign-in link');
+    expect(t('auth.button.emailLink')).toBe('Email me a sign-in link');
     expect(t('auth.button.createAcct')).toBe('Create account');
     expect(t('auth.button.signIn')).toBe('Sign in');
-    expect(t('auth.button.moreOpen')).toBe('More sign-in options');
-    expect(t('auth.button.moreClose')).toBe('Hide more options');
-    expect(t('auth.button.usePassword')).toBe('Use a password instead');
-    expect(t('auth.button.useMagic')).toContain('magic link');
     // Placeholders:
     expect(t('auth.placeholder.email')).toBe('Email address');
     expect(t('auth.placeholder.password')).toBe('Password');
+    expect(t('auth.placeholder.confirmPassword')).toBe('Confirm password');
+    // Password-mismatch guard (sign-up confirm field):
+    expect(t('auth.error.passwordMismatch')).toBe('Those passwords do not match.');
     // Subtitles + checkbox:
     expect(t('auth.signinSubtitle')).toContain('Sign in to keep your work');
     expect(t('auth.signupSubtitle', { tier: 'Wanderer' })).toContain('Wanderer');

@@ -13,8 +13,10 @@
  *   - omitted (modal)  → switch the internal mode state in place
  *   - provided (pages) → the parent navigates to the sibling route
  *
- * Magic-link is the default method (WCAG 2.2 SC 3.3.8 + better conversion);
- * the legacy password path lives behind the "More options" disclosure.
+ * Password is the primary method: email then password show inline, always.
+ * The email sign-in link and OAuth (Google, Discord) are alternatives, in a
+ * group below the primary CTA. Forgot-password is surfaced directly for
+ * sign-in.
  */
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
@@ -57,12 +59,11 @@ export default function AuthPanel({
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // sign-up only
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [authMethod, setAuthMethod] = useState('magic'); // 'magic' | 'password'
-  const [moreOpen, setMoreOpen] = useState(false);
   // A successful magic-link send swaps the form for a dedicated "check your
   // inbox" close (P9 peak/end) rather than re-rendering the same form under a
   // green strip — a boolean, not the dual-purpose `message` string, gates it.
@@ -74,7 +75,7 @@ export default function AuthPanel({
   const requestMode = (next) => {
     setError(null);
     setMessage(null);
-    setMoreOpen(false);
+    setConfirmPassword('');
     setMagicSent(false);
     if (onModeChange) onModeChange(next);
     else setMode(next);
@@ -119,6 +120,7 @@ export default function AuthPanel({
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
     if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
+    if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
     setError(null);
     setLoading(true);
     try {
@@ -169,9 +171,9 @@ export default function AuthPanel({
   const resendMagicLink = () => { setMagicSent(false); handleMagicLink(); };
   const editEmail = () => { setMagicSent(false); setError(null); setMessage(null); };
 
-  const submit = authMethod === 'magic'
-    ? handleMagicLink
-    : mode === 'signup' ? handleSignUp : handleSignIn;
+  // Password is the primary inline path: sign-up creates an account, anything
+  // else signs in. The email sign-in link is an explicit alternative below.
+  const submit = mode === 'signup' ? handleSignUp : handleSignIn;
   const onEnter = (e) => { if (e.key === 'Enter') submit(); };
 
   // ── Magic-link sent ("check your inbox") ──────────────────────────────────
@@ -271,36 +273,39 @@ export default function AuthPanel({
       {error && <Alert type="error">{error}</Alert>}
       {message && <Alert type="success">{message}</Alert>}
 
+      {/* Primary path: email then password, always inline. Sign-up adds a
+          confirm-password field directly below. */}
       <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
-      {authMethod === 'magic' && (
-        // Plain gloss on the default path: name what happens next so the absent
-        // password field reads as deliberate, not missing.
-        <p style={{ fontSize: FS.xs, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-          No password needed. We email you a sign-in link.
-        </p>
-      )}
-      {authMethod === 'password' && (
-        <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+      <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+      {mode === 'signup' && (
+        <Input type="password" placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
       )}
 
-      {authMethod === 'password' && mode === 'signin' && (
+      {mode === 'signin' && (
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
 
       <AuthCTAButton onClick={submit} disabled={loading}>
         {loading
           ? t('auth.button.working')
-          : authMethod === 'magic'
-            ? t('auth.button.sendLink')
-            : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
+          : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
       </AuthCTAButton>
 
-      {/* ── OAuth alternatives ────────────────────────────────────────────────
-          Placed BELOW the email/password form, never above it: password +
-          magic-link stay the primary path; Google/Discord are alternatives.
-          Each button no-ops gracefully until the provider is enabled in the
+      {/* Forgot-password, surfaced directly for sign-in (no longer buried in a
+          disclosure). Routes to the reset-request mode. */}
+      {mode === 'signin' && (
+        <Button variant="ghost" size="sm" onClick={() => requestMode('reset')}>
+          {t('auth.password.forgot')}
+        </Button>
+      )}
+
+      {/* ── Alternatives ──────────────────────────────────────────────────────
+          Placed BELOW the email/password form, never above it: password stays
+          the primary path. Order: Google, Discord, then the email sign-in link.
+          The OAuth buttons no-op gracefully until the provider is enabled in the
           Supabase dashboard (the wrapper maps "provider not enabled" to a safe
-          message rather than throwing). */}
+          message rather than throwing). The email-link button drives the same
+          "check your inbox" close as the legacy magic path. */}
       {(showGoogle || showDiscord) && (
         <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
@@ -320,47 +325,19 @@ export default function AuthPanel({
               disabled={loading}
             />
           )}
+          <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
+            {t('auth.button.emailLink')}
+          </AuthCTAButton>
         </div>
       )}
-
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setMoreOpen(o => !o)}
-        aria-expanded={moreOpen}
-        aria-controls="auth-more-options"
-        style={{ marginTop: SP.xs }}
-      >
-        {moreOpen ? t('auth.button.moreClose') : t('auth.button.moreOpen')}
-      </Button>
-
-      {moreOpen && (
-        // Revealed sub-options under the CTA — a spaced/indented cluster, not a
-        // framed panel-in-panel (P5 anti-box-soup): the indent + spacing carry
-        // the subordination, no border/tint card needed.
-        <div id="auth-more-options" style={{
-          display: 'flex', flexDirection: 'column', gap: SP.xs,
-          paddingLeft: SP.md,
-          fontSize: FS.xs, color: SECOND,
-        }}>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); }}
-            style={{ justifyContent: 'flex-start' }}
-          >
-            {authMethod === 'magic' ? t('auth.button.usePassword') : t('auth.button.useMagic')}
-          </Button>
-          {authMethod === 'password' && mode === 'signin' && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => requestMode('reset')}
-              style={{ justifyContent: 'flex-start' }}
-            >
-              {t('auth.password.forgot')}
-            </Button>
-          )}
+      {!showGoogle && !showDiscord && (
+        // No OAuth providers enabled: the email sign-in link still needs a home,
+        // so it gets its own full-width alternative under the primary CTA.
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
+          <OrDivider label={t('auth.oauth.divider')} />
+          <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
+            {t('auth.button.emailLink')}
+          </AuthCTAButton>
         </div>
       )}
 

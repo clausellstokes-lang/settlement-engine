@@ -9,11 +9,11 @@
  *   1. "Sign In" affordance is visible in chrome / hero for anonymous
  *      users
  *   2. Clicking it opens the AuthModal
- *   3. AuthModal renders email input, primary CTA, both signin/signup
- *      tab states
+ *   3. AuthModal renders email + password inputs, primary CTA, both
+ *      signin/signup tab states
  *   4. Tab toggle switches copy / button label correctly
- *   5. Empty email → submit produces inline validation (no network call)
- *   6. "More options" expands password path
+ *   5. Empty fields → submit produces inline validation (no network call)
+ *   6. Email sign-in link is offered as an alternative below the form
  *   7. Modal closes via the close button
  *   8. Soft-cap exit → "Sign in to continue" CTA also opens AuthModal
  *   9. After a generation, the inline Save / AI affordances are
@@ -118,49 +118,46 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     await expect(page.getByRole('button', { name: /^Create account$/i })).toBeVisible();
   });
 
-  test('AuthModal primary CTA reflects current auth method (magic by default)', async ({ page }) => {
+  test('AuthModal sign-in shows email + password inline with a "Sign in" CTA', async ({ page }) => {
     await openAuthModal(page);
-    // The default auth method is magic-link → CTA reads "Send sign-in link".
-    await expect(page.getByRole('button', { name: /Send sign-in link/i })).toBeVisible();
-  });
-
-  test('"More sign-in options" disclosure reveals the password toggle', async ({ page }) => {
-    await openAuthModal(page);
-    // Disclosure step 1: expand the panel. Its label flips between
-    // "More sign-in options" / "Hide more options", so we use the
-    // collapsed-state label to click, then verify by collapsed→expanded
-    // class swap (the new label appears).
-    const expandBtn = page.getByRole('button', { name: /^More sign-in options$/i });
-    await expect(expandBtn).toBeVisible();
-    await expandBtn.click();
-    // After click: the button's text is now "Hide more options".
-    await expect(page.getByRole('button', { name: /^Hide more options$/i })).toBeVisible();
-    // The "Use a password instead" toggle appears inside the panel.
-    const switchToPwd = page.getByRole('button', { name: /Use a password instead/i });
-    await expect(switchToPwd).toBeVisible();
-    // Step 2: switch to password mode.
-    await switchToPwd.click();
-    // Password input becomes available.
+    // Password is the primary method: both fields render inline (no disclosure),
+    // and the primary CTA reads "Sign in".
+    await expect(page.getByPlaceholder(/Email address/i)).toBeVisible();
     await expect(page.getByPlaceholder(/^Password$/i)).toBeVisible();
-    // Primary CTA changes to "Sign in" (not "Send sign-in link").
     await expect(page.getByRole('button', { name: /^Sign in$/i }).last()).toBeVisible();
   });
 
-  test('password-mode signin reveals "Remember me on this device"', async ({ page }) => {
+  test('the email sign-in link is offered as an alternative below the form', async ({ page }) => {
     await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
-    await expect(page.getByText(/Remember me on this device/i)).toBeVisible();
+    // No "More options" disclosure — the email-link alternative is surfaced
+    // directly as a full-width button under the primary CTA.
+    await expect(page.getByRole('button', { name: /Email me a sign-in link/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /More sign-in options/i })).toHaveCount(0);
   });
 
-  test('submitting an empty email does NOT make a network request', async ({ page }) => {
+  test('sign-up adds a confirm-password field', async ({ page }) => {
+    await openAuthModal(page);
+    await page.getByRole('button', { name: /^Create Account$/i }).first().click();
+    await expect(page.getByPlaceholder(/^Password$/i)).toBeVisible();
+    await expect(page.getByPlaceholder(/Confirm password/i)).toBeVisible();
+  });
+
+  test('sign-in surfaces "Forgot password?" and "Remember me on this device"', async ({ page }) => {
+    await openAuthModal(page);
+    // Both are surfaced directly in sign-in mode (forgot-password is no longer
+    // buried in a disclosure).
+    await expect(page.getByText(/Remember me on this device/i)).toBeVisible();
+    await expect(page.getByRole('button', { name: /Forgot password/i })).toBeVisible();
+  });
+
+  test('submitting empty credentials does NOT make a network request', async ({ page }) => {
     await openAuthModal(page);
     let supabaseCalled = false;
     page.on('request', (req) => {
       if (/supabase|auth/i.test(req.url())) supabaseCalled = true;
     });
-    // Click the magic-link CTA without filling the email.
-    await page.getByRole('button', { name: /Send sign-in link/i }).click();
+    // Click the primary "Sign in" CTA without filling email or password.
+    await page.getByRole('button', { name: /^Sign in$/i }).last().click();
     // Give time for any spurious request to surface.
     await page.waitForTimeout(500);
     expect(supabaseCalled).toBe(false);
@@ -234,8 +231,6 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     });
 
     await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
     await page.getByPlaceholder(/^Password$/i).fill('test');
     await page.getByPlaceholder(/Email address/i).fill('test@example.com');
 
@@ -288,8 +283,6 @@ test.describe('Tier 3.7 Flow B (live) — full auth + Stripe + AI integration', 
 
       // 1. Sign in via the proven password flow (same selectors as the anon suite above).
       await openAuthModal(page);
-      await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-      await page.getByRole('button', { name: /Use a password instead/i }).click();
       await page.getByPlaceholder(/Email address/i).fill(email);
       await page.getByPlaceholder(/^Password$/i).fill(password);
       // 2. Generate → 3. open pricing modal / run AI → 4. Stripe test card →
