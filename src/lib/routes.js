@@ -35,7 +35,7 @@ export const ROUTES = Object.freeze([
   // flow as /create. Leftmost nav tab. First-time visitors are routed here on a
   // bare root visit; returning visitors land on /create — the gate lives in
   // App's init effect, keyed on a localStorage flag.
-  { view: 'home',                  path: '/home',                  title: 'Home' },
+  { view: 'home',                  path: '/home',                  title: 'Welcome' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (App's NAV array).
   { view: 'settlements',           path: '/settlements',           title: 'Your Library' },

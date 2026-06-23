@@ -8,7 +8,7 @@
  * Icons-off (text-only). Copy is the template's, which is already house voice
  * ("Not a dice roll", "A world that holds together").
  */
-import { GOLD, INK, PARCH_100, CARD, BORDER, BODY, serif_, sans, FS, SP, R } from './theme.js';
+import { INK, PARCH_100, CARD, BORDER, BODY, serif_, sans, FS, SP, R } from './theme.js';
 import Button from './primitives/Button.jsx';
 import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import { backgroundImageUrl } from '../config/pageBackgrounds.js';
@@ -34,9 +34,6 @@ export default function HomeLanding({ isMobile, onNavigate, onSignIn }) {
         backgroundPosition: 'center',
       }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: isMobile ? `${SP.xxl}px ${SP.lg}px` : `${SP.xxl + SP.xl}px ${SP.xl}px`, textAlign: 'center' }}>
-          <div style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: GOLD, marginBottom: SP.md }}>
-            A simulator for Dungeon Masters
-          </div>
           <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS['36'], fontWeight: 600, color: PARCH_100, lineHeight: 1.1, maxWidth: 760, marginInline: 'auto' }}>
             Your players have a thousand choices. Now you have every answer.
           </h1>

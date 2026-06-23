@@ -73,7 +73,7 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
-  { id: 'home',        label: 'Home' },
+  { id: 'home',        label: 'Welcome' },
   { id: 'generate',    label: 'Create' },
   { id: 'settlements', label: 'Library' },
   { id: 'realm',       label: 'Realm' },
@@ -329,8 +329,8 @@ export default function App() {
   // Filter nav items based on visibility. The Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
-  // The Home tab fronts the logged-out landing; signed-in members go straight to
-  // Create, so Home is dropped from their nav (the landing is logged-out-only).
+  // The Welcome tab fronts the logged-out landing; signed-in members go straight to
+  // Create, so it is dropped from their nav (the landing is logged-out-only).
   const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
 
   // Dedicated auth surfaces (/signin · /register · /reset-password ·
@@ -625,10 +625,11 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            P9 — restored navigation links (About / Pricing / Compendium /
-            Gallery / legal). Pricing routes to the canonical premium-value
-            surface (the same target as the header tier chip + the Realm
-            locked-state), so there is ONE "What the Realm unlocks" destination. */}
+            Pricing + Contact only; About / Compendium / Gallery already live in
+            the header nav, so the footer stays lean. Pricing routes to the
+            canonical premium-value surface (the same target as the header tier
+            chip + the Realm locked-state), so there is ONE "What the Realm
+            unlocks" destination. */}
         <footer style={{
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
@@ -648,25 +649,18 @@ export default function App() {
             display: 'flex', justifyContent: 'center', alignItems: 'center',
             gap: SP.md, flexWrap: 'wrap',
           }}>
-            {[
-              { label: t('footer.about'),      onClick: () => setView('howto') },
-              { label: t('footer.pricing'),    onClick: () => setView('pricing') },
-              { label: t('footer.compendium'), onClick: () => setView('compendium') },
-              { label: t('footer.gallery'),    onClick: () => setView('gallery') },
-            ].map(({ label, onClick }) => (
-              <Button
-                key={label}
-                variant="ghost"
-                size="sm"
-                onClick={onClick}
-                style={{
-                  color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
-                  letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
-                }}
-              >
-                {label}
-              </Button>
-            ))}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setView('pricing')}
+              style={{
+                color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
+                letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
+              }}
+            >
+              {t('footer.pricing')}
+            </Button>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
             <a href="mailto:clausellstokes@aol.com" style={{
               color: PARCH_100, textDecoration: 'none', display: 'inline-flex',
               alignItems: 'center', gap: 4,
