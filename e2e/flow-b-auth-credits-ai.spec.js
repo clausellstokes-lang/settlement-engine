@@ -84,7 +84,7 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     await page.addInitScript(() => {
       try { localStorage.clear(); sessionStorage.clear(); } catch { /* ignore */ }
     });
-    await page.goto('/');
+    await page.goto('/create');
     await waitForHero(page);
   });
 
@@ -114,8 +114,13 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     const signupTab = page.getByRole('button', { name: /^Create Account$/i }).first();
     await signupTab.click();
     await expect(page.getByText(/Create a free .* account/i)).toBeVisible();
-    // The primary CTA also reads "Create account" in signup view.
-    await expect(page.getByRole('button', { name: /^Create account$/i })).toBeVisible();
+    // The primary CTA also reads "Create account" in signup view. The tab toggle
+    // ("Create Account", capital A) and this CTA ("Create account", lowercase a)
+    // differ ONLY in case, so a case-insensitive regex matches both and trips
+    // strict mode. `exact: true` does a case-SENSITIVE exact match, pinning this
+    // to the CTA alone — keeping the assertion meaningful (the signup CTA copy)
+    // rather than weakening it.
+    await expect(page.getByRole('button', { name: 'Create account', exact: true })).toBeVisible();
   });
 
   test('AuthModal sign-in shows email + password inline with a "Sign in" CTA', async ({ page }) => {
@@ -258,7 +263,7 @@ test.describe('Tier 3.7 Flow B (live) — full auth + Stripe + AI integration', 
   test.skip(!LIVE_AUTH, 'Skipped without E2E_LIVE_AUTH=1');
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/create');
   });
 
   // The live BROWSER journey (signin → Stripe test-card checkout → webhook →

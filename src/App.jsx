@@ -690,6 +690,10 @@ export default function App() {
                   style={{
                     flex: 1, display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
+                    // Clear the 44px touch-target floor (Apple HIG / Material).
+                    // The single-line uppercase label only filled ~32px tall, so
+                    // these primary nav tabs were below the floor on mobile.
+                    minHeight: 44,
                     padding: `${SP.sm + 2}px ${SP.xs}px`,
                     background: active ? GOLD_BG : 'transparent',
                     border: 'none',

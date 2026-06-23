@@ -30,8 +30,13 @@ async function waitForDossier(page) {
   // The pipeline reveal can briefly cover the page after generation. Esc is
   // the supported skip affordance, then the dossier chrome gives us a stable
   // signal that generation has completed and the lazy view has mounted.
+  //
+  // The post-generate toolbar's restart control was renamed "New" -> "New
+  // Draft" in the UX overhaul (WizardOutputToolbar.jsx). The anchored pattern
+  // matches "New Draft" exactly without also catching the neighbouring
+  // "Regenerate draft" button.
   await page.keyboard.press('Escape').catch(() => {});
-  await expect(page.getByRole('button', { name: /^\s*New\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
   await expect(dossierMeta(page)).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
 }
@@ -78,7 +83,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
         sessionStorage.clear();
       } catch { /* private mode etc. */ }
     });
-    await page.goto('/');
+    await page.goto('/create');
   });
 
   test('homepage renders the HomeHero with eyebrow / title / subtitle', async ({ page }) => {
@@ -166,17 +171,18 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await expect(railSignal).toBeVisible({ timeout: 15_000 });
   });
 
-  test('"New" button after generation returns to a fresh state', async ({ page }) => {
+  test('"New Draft" button after generation returns to a fresh state', async ({ page }) => {
     await waitForHero(page);
     await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
-    // The wizard's "New" button (with Zap icon + " New" text). Be tolerant of
-    // leading/trailing whitespace from the icon spacing. waitForDossier above
-    // already asserted this button is visible post-generation, so the click is
-    // unconditional — no `if (isVisible)` fallback that would let the test pass
-    // without ever exercising "New".
-    const newBtn = page.getByRole('button', { name: /^\s*New\s*$/ }).first();
+    // The wizard's restart control, renamed "New" -> "New Draft" in the UX
+    // overhaul (WizardOutputToolbar.jsx). The anchored pattern targets it
+    // without also matching the neighbouring "Regenerate draft" button.
+    // waitForDossier above already asserted this button is visible
+    // post-generation, so the click is unconditional — no `if (isVisible)`
+    // fallback that would let the test pass without ever exercising it.
+    const newBtn = page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first();
     await newBtn.click();
     // UX overhaul added an unsaved-draft guard: clicking "New" on an
     // anonymous, unsaved (randomly rolled) draft opens a "Leave this

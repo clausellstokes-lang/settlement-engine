@@ -187,7 +187,9 @@ export default function RegionWakeReplay({ onUpgrade }) {
           disabled={step === 0}
           aria-label={t('replay.prev')}
           icon={<ChevronLeft size={14} />}
-          style={{ minHeight: 44 }}
+          // minWidth too: the short "Back" label + chevron only filled ~43px
+          // wide, 1px under the 44px touch-target floor the height already met.
+          style={{ minHeight: 44, minWidth: 44 }}
         >
           {t('replay.prev')}
         </Button>
