@@ -2457,11 +2457,50 @@ export async function handleGenerateNarrative(
             }
           });
 
+          // Phase 3: daily-life beats, folded into the SAME narrative run.
+          // A narrative run now also produces dawn→night daily life under the
+          // single narrative spend (no second spend_credits). The beats stream
+          // as their own `dailyLife.<beat>` per-field messages so the client
+          // routes them into aiDailyLife state, and the final `done` carries a
+          // `dailyLife` object as the authoritative payload.
+          //
+          // Partial-failure policy mirrors the refinement passes above: a beat
+          // that fails is recorded in failedFields (and surfaced as a per-field
+          // error so the UI can note the fallback) but does NOT fail the run and
+          // does NOT trigger a refund. The user already got the thesis + prose,
+          // and re-running narrative would double-charge — so a stranded beat is
+          // a partial result, not a refundable failure.
+          send({ status: 'phase', phase: 'dailyLife', total: Object.keys(DAILY_LIFE_FIELDS).length });
+          const dailyLife: Record<string, string> = {};
+          await runWithConcurrency(Object.entries(DAILY_LIFE_FIELDS), 3, async ([beat, cfg]) => {
+            try {
+              const prompt = buildDailyLifePrompt(
+                cfg.instruction,
+                summary,
+                confirmedAiGuidance,
+                confirmedRelationshipMemoryContext,
+                confirmedChronicleContext,
+              );
+              const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+              dailyLife[beat] = value;
+              succeededFields.push(`dailyLife.${beat}`);
+              send({ field: `dailyLife.${beat}`, value });
+            } catch (e) {
+              failedFields.push(`dailyLife.${beat}`);
+              console.error(`[generate-narrative] daily-life beat '${beat}' failed:`, (e as Error).message);
+              send({ field: `dailyLife.${beat}`, error: (e as Error).message });
+            }
+          });
+
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
           send({
             done: true,
             result: aiClone,
+            // Daily life rides home in the narrative `done` so the client can
+            // persist both halves of the single run. Object may be partial if a
+            // beat failed (see policy above); empty only if every beat failed.
+            dailyLife,
             creditsRemaining: postSpendBalance,
             type,
             partialFailure: failedFields.length > 0,

@@ -46,7 +46,7 @@ export default function DossierNarrativeButtons({
             variant="ai"
             size="md"
             onClick={runNarrativeLayer}
-            title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
+            title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement, and writes daily life dawn to night in the same run. Uses credits."
             icon={<span style={{ fontSize: FS.xs }}>{'\u2726'}</span>}
           >
             {`Generate Narrative${costLabel}`}
@@ -112,7 +112,7 @@ export default function DossierNarrativeButtons({
           onClick={runNarrativeLayer}
           disabled={regenerating}
           busy={regenerating}
-          title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
+          title={`Regenerate the Narrative Layer from the simulator output, daily life included. Spends ${getCost('narrative')} credits.`}
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>

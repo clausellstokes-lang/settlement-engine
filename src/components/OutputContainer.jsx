@@ -188,7 +188,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeSetAi = useStore(s => s.setAiSettlement);
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
-  const requestDailyLife = useStore(s => s.requestDailyLife);
   const getCost = useStore(s => s.getCost);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
@@ -359,12 +358,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     }
   };
 
-  const executeAiAction = async (kind) => {
-    if (kind === 'dailyLife') {
-      if (isConfigured) await requestDailyLife(saveId);
-      else await runLocalAiLayer();
-      return;
-    }
+  // The only paid AI action triggered from here is the narrative run, which
+  // now also writes daily life under its single spend. (Daily life no longer
+  // has a separate generate control.) `kind` is retained for the guidance-
+  // confirm round-trip.
+  const executeAiAction = async (_kind) => {
     if (isConfigured) {
       await requestNarrative(saveId);
       landOnNarrativeSurface();
@@ -647,7 +645,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} hideIdentity={!hideHeader} onNavigateTab={(id) => setActiveTab(id)} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;

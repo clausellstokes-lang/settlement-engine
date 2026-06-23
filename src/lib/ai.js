@@ -9,6 +9,12 @@
  * writes it into a result object at that path. At the end, the server
  * sends a full `aiSettlement` object as the authoritative final state.
  *
+ * The narrative run ALSO folds in daily life: it streams the dawn→night
+ * beats as `dailyLife.<beat>` per-field messages and returns the assembled
+ * `dailyLife` object in the final `done` (and on the return value). Daily
+ * life is generated under the SINGLE narrative spend — no extra charge.
+ * The separate `type: 'dailyLife'` call still works for back-compat callers.
+ *
  * Per-pass errors are reported via `onField(field, null, error)` but
  * are NOT fatal — the server keeps the raw data for any failed pass,
  * so the client's final `result` still has something sensible at that
@@ -97,7 +103,7 @@ async function getAccessTokenSafe() {
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
  * @param {object|null} [opts.priorDailyLife] - progression only: the previous aiDailyLife (reserved for future)
- * @returns {Promise<{ result: object, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }>}
+ * @returns {Promise<{ result: object, dailyLife?: object|null, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }>}
  */
 export async function generateNarrative(type, settlement, settlementId, opts = {}) {
   if (!isConfigured) {
@@ -164,6 +170,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   const decoder = new TextDecoder();
   let buffer = '';
   let result = {};
+  let dailyLife = null;
   let creditsRemaining = null;
   let finalType = type;
   let fatalError = null;
@@ -203,9 +210,18 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       return;
     }
 
-    // Per-field success — progressive UI update (supports dotted paths)
+    // Per-field success — progressive UI update (supports dotted paths).
+    // Daily-life beats stream as `dailyLife.<beat>` during a narrative run;
+    // collect them into a separate `dailyLife` object instead of writing them
+    // into the narrative `result`, then forward to onField for progress UI.
     if (msg.field) {
-      setPath(result, msg.field, msg.value);
+      if (msg.field.startsWith('dailyLife.')) {
+        const beat = msg.field.slice('dailyLife.'.length);
+        if (!dailyLife || typeof dailyLife !== 'object') dailyLife = {};
+        dailyLife[beat] = msg.value;
+      } else {
+        setPath(result, msg.field, msg.value);
+      }
       try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
       return;
     }
@@ -215,6 +231,11 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       sawDone = true;
       if (msg.result && typeof msg.result === 'object') {
         result = msg.result;
+      }
+      // Authoritative daily-life payload from a bundled narrative run. Prefer
+      // the server's final object; fall back to the streamed-beat accumulation.
+      if (msg.dailyLife && typeof msg.dailyLife === 'object') {
+        dailyLife = msg.dailyLife;
       }
       if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
       if (msg.type) finalType = msg.type;
@@ -254,7 +275,12 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   if (!sawDone) {
     throw new Error('AI generation ended without a completion marker (truncated response). Please retry.');
   }
-  return { result, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
+  // Normalize an empty daily-life accumulation to null so callers can use a
+  // simple truthiness check (every beat failing yields {} from the server).
+  if (dailyLife && typeof dailyLife === 'object' && Object.keys(dailyLife).length === 0) {
+    dailyLife = null;
+  }
+  return { result, dailyLife, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
 }
 
 // ── Mock for local dev ──────────────────────────────────────────────────────
@@ -281,19 +307,31 @@ async function mockGenerate(type, settlement, onField) {
       await delay(300);
       try { onField?.('institutions', refinedSettlement.institutions); } catch (_) {}
     }
-    return { result: refinedSettlement, creditsRemaining: 0, type: 'narrative', partialFailure: false, failedFields: [], succeededFields: ['institutions'] };
+    // The narrative run folds in daily life — mock the bundled beats so local
+    // dev mirrors production (one narrative action, narrative + daily life).
+    const mockDaily = mockDailyLifePayload(name);
+    for (const [beat, v] of Object.entries(mockDaily)) {
+      await delay(120);
+      try { onField?.(`dailyLife.${beat}`, v); } catch (_) {}
+    }
+    return { result: refinedSettlement, dailyLife: mockDaily, creditsRemaining: 0, type: 'narrative', partialFailure: false, failedFields: [], succeededFields: ['institutions'] };
   }
 
-  const payload = {
+  const payload = mockDailyLifePayload(name);
+  for (const [k, v] of Object.entries(payload)) {
+    await delay(300);
+    try { onField?.(k, v); } catch (_) {}
+  }
+  return { result: payload, dailyLife: payload, creditsRemaining: 0, type: 'dailyLife' };
+}
+
+/** Deterministic daily-life prose for local dev (no Supabase). */
+function mockDailyLifePayload(name) {
+  return {
     dawn:    `As the first grey light seeps over the horizon, ${name} stirs to life. A rooster crows from behind the smithy, and the night watch shuffles toward the tavern for a warm meal before sleep.`,
     morning: `The market opens with the clatter of stall frames being assembled. A queue forms at the baker's door. Children chase each other through the lanes while their parents begin the day's labors.`,
     midday:  `The sun reaches its zenith and work pauses. Folk gather in the shade of the old oak in the square, sharing bread and gossip. A traveling merchant arrives with news from distant lands.`,
     evening: `As shadows lengthen, the tavern fills with the day's stories. A bard tunes their lute in the corner. The smell of stew drifts from open windows, and lanterns are lit along the main road.`,
     night:   `${name} settles into a watchful quiet. The night patrol makes their rounds, boots crunching on gravel. Behind closed doors, families share evening prayers or whispered schemes.`,
   };
-  for (const [k, v] of Object.entries(payload)) {
-    await delay(300);
-    try { onField?.(k, v); } catch (_) {}
-  }
-  return { result: payload, creditsRemaining: 0, type: 'dailyLife' };
 }

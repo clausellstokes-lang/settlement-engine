@@ -430,13 +430,35 @@ export const createAiSlice = (set, get) => ({
       : [];
 
     try {
-      const { result, creditsRemaining, partialFailure, failedFields } =
+      const { result, dailyLife, creditsRemaining, partialFailure, failedFields } =
         await generateNarrative('narrative', settlement, saveId, {
           pinnedNpcIds,
           aiGuidance,
           modelPreference,
           chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
           onField(fieldName, value, error) {
+            // Daily-life beats stream as `dailyLife.<beat>` because the
+            // narrative run now folds in daily life under the single spend.
+            // Route them into aiDailyLife state (progressive fill-in mirrors
+            // the old standalone daily-life flow); progress shows the
+            // daily-life label set rather than the narrative field counter.
+            if (typeof fieldName === 'string' && fieldName.startsWith('dailyLife.')) {
+              const beat = fieldName.slice('dailyLife.'.length);
+              lastFieldMsg = true;
+              if (error) {
+                set(state => { state.aiProgress = `\u26a0 ${beat} fell back to raw`; });
+                return;
+              }
+              const dlLabel = DAILY_LIFE_FIELD_LABELS[beat] || `Writing ${beat}`;
+              set(state => {
+                if (!isRegenerate) {
+                  state.aiDailyLife = { ...(state.aiDailyLife || {}), [beat]: value };
+                }
+                state.aiProgress = `${dlLabel}\u2026`;
+              });
+              return;
+            }
+
             // Per-pass error: not fatal. Progress counter still advances so
             // the percentage reflects passes *attempted*, not successful.
             if (error) {
@@ -473,6 +495,13 @@ export const createAiSlice = (set, get) => ({
 
       set(state => {
         state.aiSettlement = result;
+        // Daily life is folded into the narrative run — commit the bundled
+        // beats as the authoritative aiDailyLife so the DailyLifeTab shows
+        // prose after a single narrate action. A null means every beat failed
+        // (partial run); keep whatever the progressive stream already set.
+        if (dailyLife && typeof dailyLife === 'object') {
+          state.aiDailyLife = dailyLife;
+        }
         state.aiDataVersion = Date.now();
         state.aiSourceFingerprint = sourceFingerprint;
         state.aiLoading = false;
