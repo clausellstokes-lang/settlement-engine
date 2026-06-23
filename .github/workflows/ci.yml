@@ -173,6 +173,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # `deno task check:edge` resolves a transitive `@types/node` type-reference
+      # carried by the esm.sh npm shims the money-path functions import (e.g.
+      # stripe). This is a Deno-only runner with no node_modules, so provide JUST
+      # that one type package — installed in isolation so we do NOT pull the whole
+      # app dependency tree (a full `npm ci`) merely to type-check 12 edge files.
+      # Verified locally: with only @types/node present, check:edge is green; deno
+      # resolves it from node_modules/. (Adopting package.json via deno's
+      # nodeModulesDir=none was rejected — it bloats deno.lock with the entire
+      # Node tree.)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Provide @types/node for the edge type-check
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/types-node" @types/node@22
+          mkdir -p node_modules
+          cp -R "$RUNNER_TEMP/types-node/node_modules/." node_modules/
+
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
