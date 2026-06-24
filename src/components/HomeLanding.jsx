@@ -25,19 +25,22 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
   const padTop = isMobile ? SP.md : SP.lg;
   return (
     <div>
-      {/* Hero band — engraved town under a dark scrim. */}
-      <div style={{
-        margin: `-${padTop}px -${padH}px 0`,
-        backgroundColor: INK,
-        // The cartographer's-desk parchment (create.jpg, shared with the Create
-        // page) replaces the deleted city image. A RADIAL scrim is darkest behind
-        // the centred headline (where the desk's blank light parchment sits) and
-        // eases toward the edges, so the maps / books / quill stay visible while
-        // the cream text keeps its contrast.
-        backgroundImage: `radial-gradient(ellipse at center, rgba(27,20,8,0.84) 30%, rgba(27,20,8,0.6) 100%), ${backgroundImageUrl('create')}`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}>
+      {/* Hero band — the DARK-HERO variant of the painted-page system. The ink
+          scrim + create.jpg now live in index.css (.hero-dark); JS carries only
+          the --page-bg URL var + the class, so no raw color leaks here
+          (pageBackgrounds.js contract). A RADIAL scrim is darkest behind the
+          centred headline (where the cartographer's-desk parchment sits blank)
+          and eases toward the edges, so the maps / books / quill stay visible
+          while the cream text keeps its contrast. Opposite polarity (dark ink)
+          to the cream `.page-painted` pages, by design — one mechanism, two
+          polarities. */}
+      <div
+        className="hero-dark"
+        style={{
+          margin: `-${padTop}px -${padH}px 0`,
+          '--page-bg': backgroundImageUrl('create'),
+        }}
+      >
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: isMobile ? `${SP.xxl}px ${SP.lg}px` : `${SP.xxl + SP.xl}px ${SP.xl}px`, textAlign: 'center' }}>
           {/* Hero headline steps down on mobile (FS['28']) to reclaim above-the-fold
               height on a phone; desktop stays at FS['36'] byte-identical. */}
