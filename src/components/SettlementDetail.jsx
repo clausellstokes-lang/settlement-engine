@@ -4,6 +4,12 @@ import ShareToGallery from './ShareToGallery.jsx';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+// The settlement-name rename, relocated from the dossier header to the
+// always-visible persistent header card (it must stay reachable in edit mode,
+// where the read dossier is no longer mounted). Reuses the SAME primitive +
+// analytics event the dossier header used, so commit semantics are identical.
+import EditableInline from './primitives/EditableInline.jsx';
+import { EVENTS } from '../lib/analytics.js';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -406,17 +412,18 @@ export default function SettlementDetail({
     openExportSheet: () => { setPdfError(null); setExportSheetOpen(true); },
   });
 
-  // ── Reorderable edit-region blocks ─────────────────────────────────────────
+  // ── Read / edit surface blocks ─────────────────────────────────────────────
   //   The four blocks below are bound as plain element references (their JSX is
-  //   unchanged) so they can render in two orders by `editMode` WITHOUT a flex
-  //   wrapper or CSS `order`: each block keeps its own DOM/flex/sticky/margin
-  //   context intact, so the dossier hero's sticky NextActionRail, its mobile
-  //   reflow, and the FeatureErrorBoundary/Suspense move as one untouched unit.
+  //   unchanged) so the render branch can place ONE surface per mode WITHOUT a
+  //   flex wrapper or CSS `order`: each block keeps its own DOM/flex/sticky/
+  //   margin context intact, so the dossier hero's sticky NextActionRail, its
+  //   mobile reflow, and the FeatureErrorBoundary/Suspense move as one untouched
+  //   unit.
   //
-  //   View (edit OFF): dossier hero → always-mounted Workshop read surfaces.
-  //   Edit (edit ON):  edit chrome → Workshop → edit body → dossier hero — the
-  //   deliberate dossier-first order (documented below) is inverted FOR EDIT
-  //   MODE ONLY, surfacing the authoring surface above the read.
+  //   READ (edit OFF): dossier hero ONLY (plus the free-user Workshop teaser —
+  //     a free user can't enter edit, so it stays reachable for them).
+  //   EDIT (edit ON):  edit chrome → Workshop → edit body, on a cream backdrop;
+  //     the read dossier is NOT mounted here.
   //
   //   The two unrelated bands above (networkEcho, Share-to-Gallery) and the
   //   modal/sheet overlays below (ExportSheet, ConfirmDialogs) are NOT part of
@@ -440,9 +447,11 @@ export default function SettlementDetail({
       >
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
           {/* The dossier inherits the one top-level PAGE_MAX frame; no
-              per-section cap. The settlement name is inline-editable on the
-              dossier header in edit mode (the single consolidated rename
-              control); the commit routes through applyRename('settlement', …). */}
+              per-section cap. The settlement-name rename was relocated to the
+              persistent header card's <h1> (the single consolidated control),
+              since the read dossier is no longer mounted in edit mode — so the
+              dossier header name stays plain text here (allowRename omitted ⇒
+              DossierHeaderRow's nameEditable falls to false). */}
           <OutputContainer
             // Key-bump on commit forces a clean remount so all derived
             // selectors re-run against the soft-refreshed committed state.
@@ -450,8 +459,6 @@ export default function SettlementDetail({
             settlement={detail.settlement}
             readOnly
             saveId={saveId}
-            allowRename={editMode && canEdit}
-            onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
           />
         </Suspense>
       </FeatureErrorBoundary>
@@ -662,7 +669,25 @@ export default function SettlementDetail({
           {/* Level-1 focal point: the settlement identity, on its own line at
               FS.h1/700 so size+weight together clearly out-rank the 12px chrome
               below and the name survives the blur test. */}
-          <h1 style={{fontFamily:serif_,fontSize:FS.h1,fontWeight:700,color:INK,margin:0,lineHeight:1.15,flex:1,minWidth:0}}>{detail.name}</h1>
+          {/* Settlement-name rename — the ONE consolidated control, relocated
+              here from the dossier header because the read dossier is no longer
+              mounted in edit mode. Inline-editable in edit mode for owners
+              (editMode && canEdit, mirroring the prior allowRename gate); plain
+              text otherwise. The commit routes through the same
+              handleApplyRename('settlement', …) cascade (canon-exempt, queue-vs-
+              immediate). Edit Names stays NPC & faction only. */}
+          <h1 style={{fontFamily:serif_,fontSize:FS.h1,fontWeight:700,color:INK,margin:0,lineHeight:1.15,flex:1,minWidth:0}}>
+            {editMode && canEdit ? (
+              <EditableInline
+                value={detail.settlement?.name || detail.name || ''}
+                ariaLabel="Edit settlement name"
+                textStyle={{fontFamily:serif_,fontSize:FS.h1,fontWeight:700,color:INK,lineHeight:1.15}}
+                trackEvent={EVENTS.EDIT_PENDING_QUEUED}
+                provenance={{ kind: 'rename-settlement', entityId: saveId || 'unsaved' }}
+                onCommit={(newName) => handleApplyRename('settlement', saveId, detail.settlement?.name ?? detail.name, newName)}
+              />
+            ) : detail.name}
+          </h1>
         </div>
 
         {/* Row 2 — level-2 status (left) + the action cluster with ONE primary
@@ -801,26 +826,45 @@ export default function SettlementDetail({
         </div>
       )}
 
-      {/* ── Edit-region order swap (P1 content-is-hero / edit-first authoring) ──
+      {/* ── Read / edit surface split (one surface per mode) ────────────────────
             The dossier hero, edit chrome, Workshop, and edit body are bound as
-            element references above and rendered in two orders by `editMode`,
-            with no flex wrapper or CSS `order` so each block keeps its own
-            DOM/flex/sticky/margin context (the hero's sticky NextActionRail, its
-            mobile reflow, and its FeatureErrorBoundary/Suspense move untouched).
+            element references above and placed by `editMode` so each mode shows
+            exactly ONE surface — never the other trailing behind it. Each block
+            keeps its own DOM/flex/sticky/margin context (the hero's sticky
+            NextActionRail, its mobile reflow, and its FeatureErrorBoundary/
+            Suspense move untouched). The Workshop is referenced once per branch,
+            so it is never double-mounted.
 
-            View (edit OFF): the runnable dossier leads the page (the content the
-            GM came for), then the always-mounted Workshop read surfaces; the
-            edit chrome + body evaluate falsy and do not render — byte-for-byte
-            the prior dossier-first order.
+            READ (edit OFF): the runnable dossier hero ONLY — the content the GM
+            came for. The Workshop edit-cards no longer trail at the bottom. The
+            edit chrome + body evaluate falsy and do not render.
+              · Exception (free/anon, !canEdit): a free user CANNOT enter edit
+                mode (the Edit toggle opens the purchase modal instead of
+                flipping editMode), so the free→premium Workshop teaser would be
+                orphaned if dropped entirely. We keep it reachable for them only,
+                on its own cream backdrop so its section labels never fall onto
+                the page painting. Premium read mode is dossier-only.
 
-            Edit (edit ON): the authoring surface (edit chrome → Workshop → edit
-            body) rises ABOVE the dossier hero so the GM lands directly on the
-            controls; this deliberately inverts the dossier-first order for edit
-            mode only. The Workshop is referenced once per branch, never
-            double-mounted. */}
-      {editMode
-        ? <>{editChrome}{workshop}{editBody}{dossierHero}</>
-        : <>{dossierHero}{workshop}</>}
+            EDIT (edit ON): the authoring workbench ONLY (edit chrome → Workshop →
+            edit body), at the top, on a cream backdrop that grows with its
+            content — so the painting resumes only at the panel's bottom edge and
+            the bare workbench labels never sit on the tapestry. The read dossier
+            is no longer mounted here, so the rename relocated to the persistent
+            header card above; the NextActionRail (read-mode guidance) is
+            read-mode-only by design. */}
+      {editMode ? (
+        <div className="sf-readable-surface" style={{padding:16}}>
+          {editChrome}{workshop}{editBody}
+        </div>
+      ) : (
+        <>
+          {dossierHero}
+          {/* Free-user teaser only: see the READ note above. */}
+          {!canEdit && (
+            <div className="sf-readable-surface" style={{padding:16}}>{workshop}</div>
+          )}
+        </>
+      )}
 
       {/* PDF export variant picker — opened by the Export Dossier button in the
           header, available in both view and edit mode. Conditionally mounted so
