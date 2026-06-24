@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, BODY } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
+import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../../lib/entities.js';
 
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
@@ -17,7 +20,7 @@ import { truncateAtWord } from '../../../lib/text.js';
 export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
-  const _mobile = isMobile();
+  const mobile = useIsMobileTab();
   // UX overhaul Phase 2 — resolve the owning campaign's live war status so the
   // frozen defenseProfile can be reframed into a war-front readout. Self-gates to
   // nothing (null status) for a non-campaign / at-peace settlement.
@@ -119,7 +122,14 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,borderRadius:6,padding:'9px 12px',marginBottom:6}}>
       <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
         <div style={{flex:1}}>
-          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
+          {/* Force/fortification name -> in-dossier cross-link to its
+              institution card. Resolved by the SAME id the dossier index
+              assigns each institution (entityIdFor), so it follows a rename;
+              degrades to the plain name when the force is not a catalogued
+              institution (e.g. a synthesized wall) or the Power tab is gated. */}
+          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>
+            <EntityLink id={entityIdFor('institution', i)} type="institution" fallback={i.name} />
+          </div>
           {i.desc&&<div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
         </div>
         {i.source&&i.source!=='generated'&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],borderRadius:3,padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
@@ -176,9 +186,15 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
               <div key={i} role="button" tabIndex={0} aria-expanded={isExp} aria-controls={`threat-panel-${i}`} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
                 onClick={()=>setExpandedThreat(isExp?null:i)}
                 onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
-                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
+                {/* On mobile the row wraps and the label flexes instead of holding
+                    a fixed 130px slot, so the icon + label + 72px gauge + badge no
+                    longer overrun a 375px viewport. Desktop keeps the fixed-width
+                    single-line layout byte-for-byte. */}
+                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',...(mobile?{flexWrap:'wrap'}:null)}}>
                   <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
-                  <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
+                  <span style={mobile
+                    ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
+                    : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
                   <div style={{width:72,height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color,borderRadius:3}}/>
                   </div>
@@ -258,8 +274,13 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
 
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',borderRadius:6,padding:'9px 13px'}}>
+            {/* Criminal faction -> in-dossier cross-link to its Power card. The
+                faction's current name is rendered as the link (resolved by the
+                canonical factionIdFromName id == the index key), so it follows a
+                rename; degrades to plain text when the faction is absent from
+                the index or the Power tab is gated. */}
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>
-              Criminal Faction: Power {crimFaction.power||0}
+              <EntityLink id={factionIdFromName(crimFaction.faction)} type="faction" fallback={crimFaction.faction||'Criminal Faction'} />: Power {crimFaction.power||0}
             </div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (

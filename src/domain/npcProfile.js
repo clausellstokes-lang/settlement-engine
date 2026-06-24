@@ -284,18 +284,43 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
 });
 
-function inferInstitutionLink(npc, settlement) {
+/**
+ * Resolve the settlement institution an NPC is plausibly tied to, by matching
+ * the NPC's `category` against institution names with {@link
+ * CATEGORY_INSTITUTION_HINTS}. Returns the matched institution's DISPLAY NAME
+ * (e.g. "The Iron Garrison") or null when the category has no hint or no
+ * institution name fits. First match wins, so members of one category collapse
+ * to a single institution — a deliberate narrowing, not over-breadth.
+ *
+ * Shared so the Power tab can derive a faction's institutional footprint from
+ * its members and then resolve that name to a rename-safe entity id (the index
+ * keys institutions by slug, not by this `snake_case` form — see
+ * `institutionIdFromName`). The legacy `inferInstitutionLink` wraps this to keep
+ * its `institution.<snake>` contract byte-identical for the NPC profile.
+ *
+ * @param {{category?: string}|null} npc                   The NPC (needs `category`).
+ * @param {{institutions?: Array<{name?: string}>}|null} settlement   Context (needs `institutions[]`).
+ * @returns {string|null}            Matched institution display name, or null.
+ */
+export function inferInstitutionName(npc, settlement) {
   if (!npc || !settlement) return null;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return null;
 
-  const hint = CATEGORY_INSTITUTION_HINTS[npc.category];
+  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (npc.category);
+  const hint = CATEGORY_INSTITUTION_HINTS[category];
   if (!hint) return null;
 
-  const match = institutions.find(inst =>
-    inst && typeof inst.name === 'string' && hint.test(inst.name)
+  const match = institutions.find(
+    /** @param {{name?: string}} inst */
+    inst => !!inst && typeof inst.name === 'string' && hint.test(inst.name)
   );
-  return match ? `institution.${snakeCase(match.name)}` : null;
+  return match && typeof match.name === 'string' ? match.name : null;
+}
+
+function inferInstitutionLink(npc, settlement) {
+  const name = inferInstitutionName(npc, settlement);
+  return name ? `institution.${snakeCase(name)}` : null;
 }
 
 // ── Relationship-triangle inference ─────────────────────────────────────

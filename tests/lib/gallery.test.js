@@ -39,7 +39,9 @@ import {
   updateGalleryMetadata, toggleGalleryVote, fetchGalleryComments,
   addGalleryComment, deleteGalleryComment, reportGalleryDossier,
   fetchGalleryReports, resolveGalleryReport,
+  fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
+import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsUtils.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -123,17 +125,21 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
     });
   });
 
-  it('forwards the new bounded-vocab + boolean + range facets to the RPC', async () => {
+  it('forwards the bounded-vocab + boolean facets (incl. the importable opt-in) to the RPC', async () => {
     await fetchPublicGallery({
       page: 0,
       filters: {
         culture: ['norse'],
         prosperity: ['Wealthy'],
-        atWar: true,
         hasDeity: true,
+        // Owner import opt-in facet (gallery_importable; surfaced by migration 071).
+        importable: true,
+        // Retired facets must NOT be forwarded: governmentType / stability have no
+        // stable vocabulary to match, and atWar + the population range were dropped
+        // as redundant with tier/size and noisy.
+        atWar: true,
         populationMin: 401,
         populationMax: 5000,
-        // Retired facets must NOT be forwarded (no stable vocabulary to match).
         governmentType: ['monarchy'],
         stability: ['stable'],
       },
@@ -142,10 +148,8 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
       filters: {
         culture: ['norse'],
         prosperity: ['Wealthy'],
-        atWar: true,
         hasDeity: true,
-        populationMin: 401,
-        populationMax: 5000,
+        importable: true,
       },
     }));
   });
@@ -436,5 +440,57 @@ describe('gallery.js - metadata, votes, comments', () => {
       next_status: 'resolved',
       resolution_note: 'Handled',
     });
+  });
+});
+
+describe('gallery.js — maps Importable facet (migration 072)', () => {
+  it('forwards the importable opt-in facet to list_gallery_maps, dropping empties', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: [], error: null });
+    await fetchGalleryMaps({
+      page: 0,
+      filters: {
+        kind: ['map_with_campaign'],
+        // Owner import opt-in facet (saved_maps.gallery_importable, migration 072).
+        importable: true,
+        // Empty facets + a falsy toggle must NOT be forwarded — an empty facet
+        // never narrows the server query.
+        backdrop: [],
+        tags: [],
+        hasSettlements: false,
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_maps', expect.objectContaining({
+      p_filters: { kind: ['map_with_campaign'], importable: true },
+    }));
+  });
+
+  it('normalizeMapFilters forwards importable only when truthy', () => {
+    expect(normalizeMapFilters({ importable: true })).toEqual({ importable: true });
+    // Unchecked toggle is omitted entirely (no `importable: false` key).
+    expect(normalizeMapFilters({ importable: false })).toEqual({});
+    expect(normalizeMapFilters({})).toEqual({});
+  });
+
+  it('the maps sidebar default carries the importable key (off), and it counts as a facet', () => {
+    const def = emptyMapFilters();
+    expect(def).toHaveProperty('importable', false);
+    expect(activeMapFilterCount(def)).toBe(0);
+    expect(activeMapFilterCount({ ...def, importable: true })).toBe(1);
+  });
+
+  it('shareMap forwards the owner import opt-in to publish_map', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map', importable: true });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: true,
+    }));
+  });
+
+  it('shareMap leaves the opt-in untouched (p_importable null) when omitted', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map' });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: null,
+    }));
   });
 });

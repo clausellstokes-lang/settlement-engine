@@ -66,22 +66,11 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { botGuard } from "../_shared/requestMeta.ts";
-
-// CORS: fail CLOSED, mirroring account-actions / ingest-events. When
-// ALLOWED_ORIGINS is configured use it, otherwise fall back to the known
-// production + localhost hosts (incl. the dev ports). NEVER "*": this is an
-// unauthenticated endpoint, so a missing env var must not silently allow any
-// origin to drive the recovery flow.
-const DEFAULT_ORIGINS = [
-  "https://settlementforge.com",
-  "https://www.settlementforge.com",
-  "https://settlementwork.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-const CONFIGURED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
-  .split(",").map((s) => s.trim()).filter(Boolean);
-const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAULT_ORIGINS;
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+// Fail CLOSED: this is an unauthenticated endpoint, so a missing env var must
+// not silently allow any origin to drive the recovery flow, and we NEVER emit
+// "*". The shared module also honors ALLOWED_ORIGINS / CLIENT_URL.
+import { getCorsHeaders as sharedCorsHeaders, resolveAllowedOrigin } from "../_shared/cors.ts";
 
 // The set-new-password page path. The recovery email link lands here; the page
 // (a separate workstream) consumes the recovery token from the URL and completes
@@ -89,16 +78,7 @@ const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAUL
 const SET_NEW_PASSWORD_PATH = "/set-new-password";
 
 function corsHeadersFor(req: Request): Record<string, string> {
-  const requestOrigin = req.headers.get("Origin") || "";
-  const allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
-    ? requestOrigin
-    : ORIGIN_ALLOWLIST[0];
-  return {
-    "Access-Control-Allow-Origin": allowOrigin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type",
-  };
+  return sharedCorsHeaders(req);
 }
 
 // Base origin the recovery link redirects to. Prefer an explicit env var; fall
@@ -106,7 +86,10 @@ function corsHeadersFor(req: Request): Record<string, string> {
 // deploy still points the link at the real app rather than at nothing.
 function appBaseUrl(): string {
   const explicit = (Deno.env.get("APP_URL") || Deno.env.get("PUBLIC_SITE_URL") || "").trim();
-  const base = explicit || ORIGIN_ALLOWLIST[0] || "https://settlementforge.com";
+  // resolveAllowedOrigin() with no request returns the first allowed host (the
+  // canonical prod host, or CLIENT_URL/ALLOWED_ORIGINS when configured) — the
+  // same fallback the old inline ORIGIN_ALLOWLIST[0] provided.
+  const base = explicit || resolveAllowedOrigin() || "https://settlementforge.com";
   return base.replace(/\/+$/, "");
 }
 

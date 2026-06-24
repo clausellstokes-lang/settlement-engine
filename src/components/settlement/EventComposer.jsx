@@ -1,12 +1,16 @@
 /**
- * EventComposer — Pick an event, optionally preview, then apply.
+ * EventComposer — Pick an event, optionally preview, then stage it.
  *
  * Available in both phases. In draft mode the same engine runs but
- * nothing is logged ("see what would happen"). In canon mode applying
- * adds a timeline entry. The store handlers gate the log persistence;
- * this UI is identical in both modes. Preview is a look-ahead, not a
- * gate — Apply is always offered. On a narrated save, a successful
- * apply raises the StaleNarrativeModal (the prose no longer matches).
+ * nothing is logged ("see what would happen"). In canon mode the staged
+ * event adds a timeline entry when the queue commits. Preview is a
+ * look-ahead, not a gate — Apply is always offered.
+ *
+ * Apply no longer commits immediately: it STAGES the assembled event in the
+ * per-settlement change-queue (ChangeQueuePanel above). The queue's
+ * "Save N changes" replays each order through the same applyEvent path and
+ * persists atomically, then soft-refreshes the dossier. The post-commit
+ * staleness notice fires from that commit seam (SettlementDetail), not here.
  */
 
 import { useState, useMemo } from 'react';
@@ -18,12 +22,12 @@ import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleC
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
-import { WAR_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
+import { deriveOnsetSeverity } from '../../domain/state/deriveStressorSeverity.js';
+import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
-import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { campaignPeerOptions, PARTY, PARTY_BG } from './eventComposer/helpers.js';
@@ -44,20 +48,26 @@ export default function EventComposer() {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
-  const applyEvent   = useStore(s => s.applyEvent);
-  const applyPendingPreview = useStore(s => s.applyPendingPreview);
   const dismissPreview = useStore(s => s.dismissPreview);
   const pendingPreview = useStore(s => s.pendingPreview);
   const previewBatch   = useStore(s => s.previewEventBatch);
-  const applyBatch     = useStore(s => s.applyEventBatch);
   const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
   const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
-  // Staleness wiring: a committed change on a NARRATED save makes the AI
-  // prose out of date, so a successful apply raises StaleNarrativeModal.
-  // Boolean selector — the narrative blobs are large and we only need "is
-  // there one". Nothing can go stale on a raw (never-narrated) save.
-  const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
-
+  // Change-queue wiring: Apply now STAGES the assembled event (it commits at the
+  // queue's "Save N changes", not on this click). The event is built exactly as
+  // before so the committed event is byte-identical to a direct apply. The
+  // post-commit staleness notice moves to ChangeQueuePanel's commit seam
+  // (SettlementDetail.onQueueCommitted) — nothing mutates on this click.
+  const queueChange = useStore(s => s.queueChange);
+  // Scope (Phase 4a — STANDALONE only): the change-queue stages ONLY for
+  // non-clock-bound settlements. A clock-bound canon campaign member surrenders
+  // its timeline to the world pulse — applyEvent there redirects the event into
+  // the pulse queue, so staging it on the (hidden) change-queue would let a
+  // staged event silently redirect. For those, Apply commits IMMEDIATELY through
+  // applyEvent (which performs the world-pulse redirect), exactly as before the
+  // change-queue existed. The campaign queue path is Phase 4b.
+  const applyEvent = useStore(s => s.applyEvent);
+  const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
   const [description, setDesc]  = useState('');
@@ -93,21 +103,26 @@ export default function EventComposer() {
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
   const [corruptScope, setCorruptScope] = useState('individual'); // IMPOSE_CORRUPTION: individual | individual_institution
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
-  const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
+  // APPLY_STRESSOR severity is no longer DM-picked: the onset's hardness is a
+  // CONSEQUENCE of the settlement's preexisting pressure, derived in the domain
+  // (deriveStressorSeverity) when the composer omits it. No state, no dropdown.
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
   const [tradeDirection, setTradeDirection] = useState('export'); // ADD_TRADE_GOOD: export | import
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
   const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
-  const [staleNotice, setStaleNotice] = useState(null);        // post-apply "narrative is now stale" modal: null | { label }
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
   const [instigatorNeighbour, setInstigatorNeighbour] = useState(''); // #1 APPLY_STRESSOR: optional war instigator
+  const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // #3 APPLY_STRESSOR (infiltrated): souring level
   const [tradeTarget, setTradeTarget] = useState('');          // #6 OPENED_TRADE_ROUTE: optional campaign-settlement target
   // #6 — the active campaign's OTHER settlements (so a trade route can open with
   // any campaign member, not only a pre-linked neighbour); see campaignPeerOptions.
   const activeSaveId = useStore(s => s.activeSaveId);
+  // True when this settlement is bound to a canonized campaign clock: Apply then
+  // commits immediately (world-pulse redirect) instead of staging on the queue.
+  const clockBound = !!(activeSaveId != null && typeof isSettlementClockBound === 'function' && isSettlementClockBound(activeSaveId));
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
   const campaignSettlementOptions = useMemo(
@@ -209,6 +224,14 @@ export default function EventComposer() {
     () => (settlement?.npcs || []).some(n => n?.corrupt === true && !n?.ousted),
     [settlement?.npcs],
   );
+  // APPLY_STRESSOR onset severity is DERIVED from the settlement's preexisting
+  // pressure, not picked at the table. Surface the derived word read-only so the
+  // DM sees the consequence the state produces (the engine reads the number).
+  const derivedOnset = useMemo(() => {
+    const sev = deriveOnsetSeverity(settlement);
+    const word = sev >= 0.7 ? 'critical' : sev >= 0.55 ? 'strained' : 'calm';
+    return { sev, word };
+  }, [settlement]);
 
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
@@ -231,6 +254,10 @@ export default function EventComposer() {
   // catalog key (falling back to the free-typed target).
   const isWarStressor = type === 'APPLY_STRESSOR'
     && WAR_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
+  // #3 — an INFILTRATION stressor likewise takes an optional instigator, but
+  // sours the named neighbour to a lighter, DM-configurable relationship.
+  const isInfiltrationStressor = type === 'APPLY_STRESSOR'
+    && INFILTRATION_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
 
   // Derive a sensible institution list for the institution-pickers.
   const institutionOptions = (settlement.institutions || [])
@@ -246,9 +273,9 @@ export default function EventComposer() {
       importance, role, institutionId,
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
       quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-      stressorPick, stressorSeverity, powerCause,
+      stressorPick, powerCause,
       tradeDirection, tradeEntrepot, swapWithNpcId,
-      isWarStressor, instigatorNeighbour, tradeTarget,
+      isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
       partyCaused, description,
     });
   }
@@ -262,14 +289,23 @@ export default function EventComposer() {
     // requires typing the settlement name to confirm. Block apply until it matches.
     const evType = pendingPreview?.event?.type || type;
     if (evType === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
-    // Audit fix: prefer committing the pending preview (the exact event
-    // the user previewed) over building a new event. Apply no longer
-    // requires a preview (preview is an optional look-ahead, not a gate),
-    // so applyEvent(buildEvent()) is the normal path whenever the user
-    // applies directly.
-    const entry = pendingPreview?.event
-      ? applyPendingPreview()
-      : applyEvent(buildEvent());
+    // Build the event exactly as a direct apply would: prefer the previewed
+    // event (the exact thing the DM saw) over re-building, preserving the
+    // preview==apply byte-identity invariant. Then STAGE it instead of
+    // committing — the queue's "Save N changes" runs the same applyEvent later.
+    const builtEvent = pendingPreview?.event || buildEvent();
+    if (activeSaveId) {
+      const spec = EVENT_REGISTRY[evType];
+      const humanLabel = (() => {
+        try { return spec?.narrate?.(builtEvent, settlement) || spec?.label || evType; }
+        catch { return spec?.label || evType; }
+      })();
+      // Clock-bound campaign member: apply immediately (applyEvent redirects to
+      // the world-pulse queue). Standalone: stage on the change-queue.
+      if (clockBound) applyEvent(builtEvent);
+      else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: builtEvent } });
+      if (pendingPreview?.event) dismissPreview();
+    }
     setTarget('');
     setDesc('');
     setPartyCaused(false);
@@ -277,16 +313,10 @@ export default function EventComposer() {
     setSwapWithNpcId('');
     setCustomResourceName('');
     setInstigatorNeighbour('');
+    setInstigatorRelationship('rival');
     setTradeTarget('');
-    // Post-apply staleness notice: the event committed (and stays committed
-    // regardless of what the modal answers) — on a narrated save the AI
-    // prose was written against the previous state, so offer regenerate /
-    // continue-with-raw. Raw saves have nothing to go stale. A clock-bound
-    // settlement only QUEUED the event (entry.queued) — nothing changed yet,
-    // so the narrative isn't stale until the next World Pulse resolves it.
-    if (entry && !entry.queued && narrated) {
-      setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
-    }
+    // The staleness notice moves to COMMIT time (nothing has mutated here yet —
+    // see ChangeQueuePanel's onCommitted seam in SettlementDetail).
   }
 
   return (
@@ -319,7 +349,7 @@ export default function EventComposer() {
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -334,8 +364,9 @@ export default function EventComposer() {
               .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours
                 || (k === 'OPENED_TRADE_ROUTE' && campaignSettlementOptions.length > 0))
               /* The standing swap needs two NPCs in one faction — hide the
-                 promote/demote events when no faction has a pair to swap. */
-              .filter(([k]) => !['PROMOTE_NPC', 'DEMOTE_NPC'].includes(k) || hasSwapPairs)
+                 single Promote/Demote NPC action when no faction has a pair to
+                 swap. DEMOTE_NPC is hidden via NON_AUTHORABLE_EVENTS (folded in). */
+              .filter(([k]) => k !== 'PROMOTE_NPC' || hasSwapPairs)
               /* Expose Corruption acts only on a corrupt NPC — hide it when the
                  settlement has none, so the action can never be a no-op. */
               .filter(([k]) => k !== 'EXPOSE_CORRUPTION' || hasCorruptNpcs)
@@ -426,18 +457,24 @@ export default function EventComposer() {
           </Field>
         )}
 
-        {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
+        {/* APPLY_STRESSOR — onset severity is DERIVED from the settlement's
+            preexisting pressure, not picked. Read-only so the DM sees the
+            consequence the state produces. */}
         {type === 'APPLY_STRESSOR' && (
-          <Field label="Severity" hint={
-            stressorSeverity === 'severe' ? 'A defining crisis; expect cascades' :
-            stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
-                                            'A serious, active crisis'
-          }>
-            <select value={stressorSeverity} onChange={e => setStressorSeverity(e.target.value)} style={selectStyle}>
-              <option value="minor">Minor</option>
-              <option value="moderate">Moderate</option>
-              <option value="severe">Severe</option>
-            </select>
+          <Field label="Onset severity" hint="Derived from the settlement's current pressure, not picked">
+            <div style={{
+              fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700,
+              padding: '5px 0', textTransform: 'capitalize',
+            }}>
+              {derivedOnset.word}
+              <span style={{ fontWeight: 400, color: MUTED, marginLeft: 6 }}>
+                {derivedOnset.sev >= 0.7
+                  ? 'This settlement is already strained; the crisis lands hard.'
+                  : derivedOnset.sev >= 0.55
+                    ? 'A serious, active crisis on a settlement under pressure.'
+                    : 'A real but survivable onset on a steadier settlement.'}
+              </span>
+            </div>
           </Field>
         )}
 
@@ -464,8 +501,11 @@ export default function EventComposer() {
           type={type}
           settlement={settlement}
           isWarStressor={isWarStressor}
+          isInfiltrationStressor={isInfiltrationStressor}
           instigatorNeighbour={instigatorNeighbour}
           setInstigatorNeighbour={setInstigatorNeighbour}
+          instigatorRelationship={instigatorRelationship}
+          setInstigatorRelationship={setInstigatorRelationship}
           tradeTarget={tradeTarget}
           setTradeTarget={setTradeTarget}
           campaignSettlementOptions={campaignSettlementOptions}
@@ -693,23 +733,28 @@ export default function EventComposer() {
           onClear={() => { setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
           onApply={() => {
-            const r = applyBatch(staged);
-            if (r?.ok) {
-              // One staleness notice for the whole batch — the modal fires
-              // once per apply click, never once per staged event. Skip it when
-              // the batch only queued (clock-bound): nothing changed yet.
-              if (narrated && !r.queuedOnly) setStaleNotice({ label: `${staged.length} changes` });
-              setStaged([]);
+            // Batch apply now ENQUEUES one order per staged event (spec §2.2
+            // option a). The flush replays each through applyEvent in order, so
+            // forward references between staged events resolve exactly as the
+            // old applyEventBatch's serial re-run did. Nothing commits here.
+            if (activeSaveId) {
+              for (const ev of staged) {
+                const spec = EVENT_REGISTRY[ev?.type];
+                const humanLabel = (() => {
+                  try { return spec?.narrate?.(ev, settlement) || spec?.label || ev?.type; }
+                  catch { return spec?.label || ev?.type; }
+                })();
+                // Clock-bound: apply each immediately (world-pulse redirect);
+                // standalone: stage on the change-queue.
+                if (clockBound) applyEvent(ev);
+                else queueChange(activeSaveId, { type: 'event', humanLabel, payload: { event: ev } });
+              }
             }
+            dismissBatchPreview();
+            setStaged([]);
           }}
         />
       )}
-
-      <StaleNarrativeModal
-        open={!!staleNotice}
-        changeLabel={staleNotice?.label}
-        onClose={() => setStaleNotice(null)}
-      />
 
       {/* Roster & Tune was removed (owner decision, 2026-06-11): its four
           sections were redundant — or worse — next to the event catalog.

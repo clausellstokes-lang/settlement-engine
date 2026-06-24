@@ -23,6 +23,7 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { sans, FS, SP, R, swatch } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 const AMBER = swatch['#D08020'];
 const AMBER_BG = swatch['#FBEAD0'];
@@ -34,6 +35,12 @@ export default function PendingChangesBar() {
   const commit = useStore(s => s.commitPendingEdits);
   const revert = useStore(s => s.revertPendingEdits);
   const [previewOpen, setPreviewOpen] = useState(false);
+  // Staging and committing changes is a heavy-authoring write surface; the
+  // locked mobile policy keeps it on desktop (mobile writes = rename + save).
+  // On a narrow viewport we still surface the unsaved-count read so the user
+  // knows a desktop session is mid-edit, but withhold the Commit/Revert/Preview
+  // actions behind a calm note rather than rendering four write buttons inline.
+  const mobile = useIsMobile();
 
   if (!enabled) return null;
   if (!hasPending(queue)) return null;
@@ -99,18 +106,26 @@ export default function PendingChangesBar() {
             · {summary}
           </span>
         )}
-        <Button variant="ghost" size="sm" onClick={onPreview}>
-          Preview cascade →
-        </Button>
-        <Button variant="primary" size="sm" onClick={onCommit}>
-          Commit
-        </Button>
-        <Button variant="ghost" size="sm" onClick={onRevert}>
-          Revert
-        </Button>
+        {mobile ? (
+          <span style={{ flexBasis: '100%', color: swatch['#3A2F18'], fontSize: FS.xxs, lineHeight: 1.5 }}>
+            Reviewing and saving these edits is best on a larger screen. Open this dossier on desktop to preview the cascade and commit.
+          </span>
+        ) : (
+          <>
+            <Button variant="ghost" size="sm" onClick={onPreview}>
+              Preview cascade →
+            </Button>
+            <Button variant="primary" size="sm" onClick={onCommit}>
+              Commit
+            </Button>
+            <Button variant="ghost" size="sm" onClick={onRevert}>
+              Revert
+            </Button>
+          </>
+        )}
       </div>
 
-      {previewOpen && (
+      {!mobile && previewOpen && (
         <CascadePreviewPanel
           onClose={() => setPreviewOpen(false)}
           onCommit={() => { setPreviewOpen(false); onCommit(); }}

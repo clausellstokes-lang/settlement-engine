@@ -9,7 +9,7 @@
 import { inferImportance } from '../../../domain/entities/npcs.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../../domain/roles/roleCatalog.js';
 import { buildTargetOptions, labelOfTarget } from './helpers.js';
-import { RELATIONSHIP_OPTIONS, STRESSOR_SEVERITY_VALUES, CUSTOM_RESOURCE_OPTION } from './EventComposerConstants.js';
+import { RELATIONSHIP_OPTIONS, CUSTOM_RESOURCE_OPTION } from './EventComposerConstants.js';
 
 export function buildEvent(form) {
   const {
@@ -18,9 +18,9 @@ export function buildEvent(form) {
     importance, role, institutionId,
     npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
     quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-    stressorPick, stressorSeverity, powerCause,
+    stressorPick, powerCause,
     tradeDirection, tradeEntrepot, swapWithNpcId,
-    isWarStressor, instigatorNeighbour, tradeTarget,
+    isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
     partyCaused, description,
   } = form;
 
@@ -81,13 +81,19 @@ export function buildEvent(form) {
   if (type === 'APPLY_STRESSOR') {
     payload.stressorType = stressorPick?.key || target.trim();
     payload.label = stressorPick?.name || labelOfTarget(target);
-    payload.severity = STRESSOR_SEVERITY_VALUES[stressorSeverity] ?? 0.6;
+    // Severity is intentionally ABSENT — the domain DERIVES the onset severity
+    // from the settlement's preexisting pressure (deriveStressorSeverity) when
+    // the payload omits it. The DM no longer dials it in.
     if (stressorPick?.isCustom) payload.isCustom = true;
-    // #1 — optional instigating neighbour (only meaningful for a WAR-type
-    // stressor; the handler ignores it otherwise). Sours that neighbour to
-    // hostile on apply.
-    if (isWarStressor && instigatorNeighbour.trim()) {
+    // #1 / #3 — optional instigating neighbour. For a WAR-type stressor it sours
+    // that neighbour to hostile; for an INFILTRATION stressor it sours to the
+    // DM-chosen lighter relationship (rival / cold_war / hostile, default rival).
+    // The handler ignores the instigator on any other stressor type.
+    if ((isWarStressor || isInfiltrationStressor) && instigatorNeighbour.trim()) {
       payload.instigatorNeighbour = instigatorNeighbour.trim();
+      if (isInfiltrationStressor) {
+        payload.instigatorRelationship = instigatorRelationship || 'rival';
+      }
     }
   }
   if (type === 'CHANGE_RULING_POWER') {

@@ -797,10 +797,10 @@ export const EVENT_REGISTRY = {
   },
 
   PROMOTE_NPC: {
-    label: 'Promote NPC',
-    description: 'An NPC rises within their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction. The peer is displaced downward.',
+    label: 'Promote/Demote NPC',
+    description: 'Two NPCs of one faction swap standing (importance, influence, structural rank). One rises, the other steps down. The same swap reads either way, so this single action covers both a promotion and a demotion.',
     requiresTarget: true,
-    targetPrompt: 'NPC who rises',
+    targetPrompt: 'NPC whose standing changes',
     stateDeltas() {
       // A reshuffle inside one faction: friction, not crisis.
       return { volatility: +3 };

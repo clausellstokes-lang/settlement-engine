@@ -43,7 +43,7 @@ import {
 } from './campaignSliceShared.js';
 import {
   campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
-  ensureCampaignWizardNews, campaignClockTick,
+  ensureCampaignWizardNews, campaignClockTick, applyWarFrontSeed,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
@@ -171,6 +171,49 @@ export const createCampaignRegionalSlice = (set, get) => ({
       persistCampaignState(state, campaignId);
     });
     return injected;
+  },
+
+  /**
+   * #2 — SEED a cross-settlement WAR FRONT from a DM-authored siege / occupation
+   * stressor that names an instigating neighbour, in a campaign with the war layer
+   * ON. The named INSTIGATOR deploys its army against the TARGET (this settlement),
+   * minting the exact ledger shape the war layer resolves on the next Advance:
+   *
+   *   1. a LIGHT deployment record on worldState.deployments[instigatorId]
+   *      ({ targetId, sinceTick, role:'siege' }) — the war layer's own
+   *      ensureStatefulRecord enriches it from the live capacity model on first
+   *      contact, so attrition / reinforcement / retirement all run unchanged;
+   *   2. a war_front channel instigator → target with WAR-LAYER provenance
+   *      (source:'war_layer_deploy'), so isLiveWarFront reads it as a real siege
+   *      rather than a phantom relationship front;
+   *   3. warPosture[instigatorId] = { state:'deployed' } so the posture ledger is
+   *      consistent (the army does not look like it sieges from peace).
+   *
+   * GATED on simulationRules.warLayerEnabled — a war-off campaign is a NO-OP
+   * (byte-identical, the dormancy oracle is preserved). IDEMPOTENT + honours the
+   * ENGINE'S ONE-ARMY INVARIANT: if the instigator already fields an army (already
+   * deployed) the seed is skipped entirely, never overwriting the live ledger.
+   *
+   * @param {string} campaignId
+   * @param {{ instigatorId?: string|number, targetId?: string|number, sinceTick?: number, now?: string|null }} [args]
+   * @returns {boolean} true when a fresh front was seeded; false on any no-op.
+   */
+  seedCampaignWarFront: (campaignId, { instigatorId, targetId, sinceTick = 0, now = null } = {}) => {
+    let seeded = false;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const stamp = now || new Date().toISOString();
+      // Delegate the ledger + graph + posture mutation to the SHARED seed primitive
+      // (applyWarFrontSeed in campaignPulseHelpers) — the SAME code the deferred
+      // Advance drain runs, so the immediate and deferred seeds cannot drift. All
+      // of the guards (war-off, one-army invariant, self-target) live in there.
+      seeded = applyWarFrontSeed(c, { instigatorId, targetId, sinceTick, now: stamp });
+      if (!seeded) return;
+      c.updatedAt = stamp;
+      persistCampaignState(state, campaignId);
+    });
+    return seeded;
   },
 
   /**

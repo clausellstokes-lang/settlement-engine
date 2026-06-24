@@ -107,8 +107,17 @@ export async function updateGalleryMetadata(settlementId, metadata = {}) {
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-/** Publish a campaign's map to the gallery. kind: 'map' (blank canvas) | 'map_with_campaign'. */
-export async function shareMap(campaignId, { kind = 'map', description = '', tags = null } = {}) {
+/**
+ * Publish a campaign's map to the gallery. kind: 'map' (blank canvas) |
+ * 'map_with_campaign'. `importable` is the owner opt-in (saved_maps.gallery_importable,
+ * migration 072): pass a boolean to set it, or omit it to leave the prior choice
+ * untouched (publish_map coalesces null → current). The toolbar's plain share omits
+ * it, so a fresh share stays non-importable (column default) until the owner opts in.
+ *
+ * @param {string} campaignId saved_maps row id (must be a synced uuid)
+ * @param {{ kind?: string, description?: string, tags?: string[]|null, importable?: boolean }} [opts]
+ */
+export async function shareMap(campaignId, { kind = 'map', description = '', tags = null, importable } = {}) {
   if (!isConfigured) throw new Error('Supabase not configured');
   if (!UUID_RE.test(String(campaignId || ''))) throw new Error('Save this campaign to the cloud before sharing its map.');
   const { data, error } = await supabase.rpc('publish_map', {
@@ -116,6 +125,7 @@ export async function shareMap(campaignId, { kind = 'map', description = '', tag
     p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
     p_description: description ? String(description).slice(0, 500) : null,
     p_tags: Array.isArray(tags) && tags.length ? tags.slice(0, 12) : null,
+    p_importable: importable === undefined ? null : importable === true,
   });
   if (error) throw new Error(error.message || 'Map share failed');
   try { track(EVENTS.GALLERY_PUBLISHED, { kind }); } catch { /* analytics never affects publish */ }
@@ -149,15 +159,18 @@ export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest
 }
 
 // Forward only the map facets the RPC understands: the non-empty IN-list arrays
-// (kind / backdrop / tags) and the real has-settlements toggle. Mirrors
-// normalizeGalleryFilters so an empty facet never narrows the server query.
-function normalizeMapFilters(filters = {}) {
+// (kind / backdrop / tags) and the boolean toggles (has-settlements, importable).
+// Mirrors normalizeGalleryFilters so an empty facet never narrows the server query.
+export function normalizeMapFilters(filters = {}) {
   const out = {};
   for (const key of ['kind', 'backdrop', 'tags']) {
     const arr = Array.isArray(filters[key]) ? filters[key].filter(Boolean).map(String) : [];
     if (arr.length) out[key] = arr;
   }
   if (filters.hasSettlements) out.hasSettlements = true;
+  // Owner import opt-in facet (saved_maps.gallery_importable, migration 072) —
+  // forwarded only when truthy so an unchecked toggle never narrows the query.
+  if (filters.importable) out.importable = true;
   return out;
 }
 
@@ -175,10 +188,24 @@ export async function bumpMapImport(slug) {
   }
 }
 
-/** Fetch one public map payload (blank-canvas backdrop in Phase 1). */
+/** Fetch one public map payload (blank-canvas backdrop in Phase 1). View path. */
 export async function fetchGalleryMap(slug) {
   if (!isConfigured || !slug) return null;
   const { data, error } = await supabase.rpc('get_gallery_map', { p_slug: slug });
+  if (error) throw new Error(error.message || 'Could not load that map');
+  return data || null;
+}
+
+/**
+ * Fetch a clone-ready map payload for IMPORT. Server-gated on gallery_importable +
+ * is_public + auth (migration 072): returns null when the map isn't importable /
+ * not found / the caller is anonymous. The payload is the SAME projection the
+ * preview shows (never raw map_data / private worldState) — importing exposes
+ * nothing the viewer didn't already see. Mirrors fetchDossierForImport (048).
+ */
+export async function fetchMapForImport(slug) {
+  if (!isConfigured || !slug) return null;
+  const { data, error } = await supabase.rpc('import_gallery_map', { p_slug: slug });
   if (error) throw new Error(error.message || 'Could not load that map');
   return data || null;
 }
@@ -469,6 +496,9 @@ function sanitizeTile(row) {
     atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // Public author name resolved live by owner id (migration 076). Empty when
+    // an owner has no external_name yet (pre-075 / mock rows).
+    author:       row.author_name || '',
   };
 }
 
@@ -572,6 +602,8 @@ function sanitizeDossier(row) {
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // Public author name resolved live by owner id (migration 076).
+    author:       row.author_name || '',
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
   };
 }
@@ -629,13 +661,10 @@ function normalizeGalleryFilters(filters = {}) {
   if (filters.hasComments) out.hasComments = true;
   if (filters.curatedOnly) out.curatedOnly = true;
   if (filters.hasDeity) out.hasDeity = true;
-  if (filters.atWar) out.atWar = true;
-  // Population range — only forward finite, non-negative bounds. The RPC reads
-  // these as `population >= min` / `population <= max`.
-  const min = Number(filters.populationMin);
-  const max = Number(filters.populationMax);
-  if (Number.isFinite(min) && min > 0) out.populationMin = Math.floor(min);
-  if (Number.isFinite(max) && max > 0) out.populationMax = Math.floor(max);
+  // Owner import opt-in facet (gallery_importable, migration 047; surfaced as a
+  // list facet by migration 071). Narrows to dossiers their owner allowed to
+  // clone.
+  if (filters.importable) out.importable = true;
   return out;
 }
 

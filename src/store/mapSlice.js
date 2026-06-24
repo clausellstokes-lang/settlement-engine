@@ -139,6 +139,14 @@ function restoreAnnotations(mapState, snap) {
   for (const k of MAP_UNDO_KEYS) {
     if (snap[k] !== undefined) mapState[k] = deepClone(snap[k]);
   }
+  // Backdrop is only present in snapshots taken by the undoable image-import
+  // path (setMapBackdrop). Normal annotation snapshots omit it, so this branch
+  // never fires for label/marker/forest/placement undos — the backdrop is left
+  // exactly as it was. `null` is a real value (no backdrop), so guard on the
+  // key's presence, not truthiness.
+  if ('customBackdrop' in snap) {
+    mapState.customBackdrop = snap.customBackdrop ? deepClone(snap.customBackdrop) : null;
+  }
 }
 
 // Snapshot the current annotation/placement sub-slices onto the undo stack
@@ -449,10 +457,23 @@ export const createMapSlice = (set, get) => ({
    * Switch the map to a custom image backdrop. Non-destructive: the FMG
    * snapshot is left intact so clearMapBackdrop restores terrain mode. Bumps
    * geometryVersion so derived layers (roads) recompute and skip A*.
+   *
+   * Undoable as a SINGLE step: before applying, this captures the pre-import
+   * annotation sub-slices AND the prior customBackdrop onto the undo stack, so
+   * the map's Undo button reverts the whole import (backdrop + any placements it
+   * overwrote) in one click. The snapshot carries the `customBackdrop` key,
+   * which restoreAnnotations only honors when present — annotation undos are
+   * untouched.
    * @param {{imageUrl:string,w:number,h:number}} backdrop
    */
   setMapBackdrop: (backdrop) => set(state => {
     if (!backdrop || !backdrop.imageUrl) return;
+    const snapshot = snapshotAnnotations(state.mapState);
+    snapshot.customBackdrop = state.mapState.customBackdrop
+      ? deepClone(state.mapState.customBackdrop) : null;
+    state.mapUndoStack.push({ action: 'import map image', snapshot, timestamp: Date.now() });
+    if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
+    state.mapRedoStack = [];
     state.mapState.customBackdrop = {
       imageUrl: backdrop.imageUrl,
       w: Number(backdrop.w) || 0,
@@ -528,24 +549,31 @@ export const createMapSlice = (set, get) => ({
   mapUndo: () => set(state => {
     const entry = state.mapUndoStack.pop();
     if (!entry) return;
-    state.mapRedoStack.push({
-      action: entry.action,
-      snapshot: snapshotAnnotations(state.mapState),
-      timestamp: Date.now(),
-    });
-    // Restore ONLY the annotation/placement sub-slices — geography (fmgSnapshot),
-    // layers, backdrop, and camera are left as they are.
+    // Mirror the entry's shape onto the redo snapshot: an import entry carries
+    // the backdrop, so the redo snapshot must capture the CURRENT backdrop too
+    // (re-applying it as one step). Annotation entries omit the key, so the
+    // backdrop is never touched on a label/marker/forest/placement undo.
+    const redoSnap = snapshotAnnotations(state.mapState);
+    if ('customBackdrop' in entry.snapshot) {
+      redoSnap.customBackdrop = state.mapState.customBackdrop
+        ? deepClone(state.mapState.customBackdrop) : null;
+    }
+    state.mapRedoStack.push({ action: entry.action, snapshot: redoSnap, timestamp: Date.now() });
+    // Restore the annotation/placement sub-slices — and the backdrop only when
+    // the entry carried it. Geography (fmgSnapshot), layers, and camera are
+    // always left as they are.
     restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   mapRedo: () => set(state => {
     const entry = state.mapRedoStack.pop();
     if (!entry) return;
-    state.mapUndoStack.push({
-      action: entry.action,
-      snapshot: snapshotAnnotations(state.mapState),
-      timestamp: Date.now(),
-    });
+    const undoSnap = snapshotAnnotations(state.mapState);
+    if ('customBackdrop' in entry.snapshot) {
+      undoSnap.customBackdrop = state.mapState.customBackdrop
+        ? deepClone(state.mapState.customBackdrop) : null;
+    }
+    state.mapUndoStack.push({ action: entry.action, snapshot: undoSnap, timestamp: Date.now() });
     restoreAnnotations(state.mapState, entry.snapshot);
   }),
 

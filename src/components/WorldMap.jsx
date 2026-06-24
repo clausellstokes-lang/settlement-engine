@@ -21,14 +21,17 @@ import { useMapBridge } from '../hooks/useMapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, R } from './theme.js';
+import { SP, CARD, BORDER, R, CHROME } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { nameMapFromSaves } from './map/WorldPulseData.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
 import { useRealmInspector, ADVANCE_ERROR_TEXT } from '../hooks/useRealmInspector.js';
 import { useCampaignActivation } from '../hooks/useCampaignActivation.js';
+import { useMapImageImport } from '../hooks/useMapImageImport.js';
 
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
@@ -37,8 +40,19 @@ import { WorldMapStage } from './map/WorldMapStage.jsx';
 import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
 
 const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
+// Mobile-only: the defer-to-desktop wall + read-only dashboard. Lazy so the
+// desktop build never pulls it, and the mobile build only loads it when the
+// gate actually renders.
+const RealmMobileGate = lazy(() => import('./map/RealmMobileGate.jsx'));
 
 export default function WorldMap({ onNavigate } = {}) {
+  // Reactive mobile flag (width < 640). On phones the Realm defers to desktop:
+  // the desktop map-editing workspace below is replaced by an honest gate plus a
+  // read-only dashboard (see the mobile branch in the render). Read here so it is
+  // available to the render; every hook still runs unconditionally above the
+  // branch, so desktop rendering is byte-identical.
+  const isMobile = useIsMobile();
+
   // ── Refs & local state ────────────────────────────────────────────────
   const iframeRef = useRef(null);
   const mapContainerRef = useRef(null);
@@ -204,6 +218,12 @@ export default function WorldMap({ onNavigate } = {}) {
     }
     return pool;
   }, [saves, activeCampaign, canonOnlyFilter]);
+
+  // Settlement-id → name map for the mobile read-only Realm Dashboard (the desktop
+  // RealmInspector derives the same map internally; the mobile dashboard renders
+  // standalone, so it needs the map passed in). Memoized on saves so it is stable
+  // across unrelated re-renders.
+  const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
 
   // ── Hydrate saved settlements into the store (if not already loaded) ──
   useEffect(() => {
@@ -654,46 +674,12 @@ export default function WorldMap({ onNavigate } = {}) {
   }, [setInspectorOpen]);
 
   // ── Custom map image (Project 1, premium) ─────────────────────────────
-  // Pick → validate → downscale (≤4096px) → upload to Supabase Storage → set
-  // the campaign's customBackdrop. Premium + active-campaign gated at the call
-  // site (the control only renders for canManageCampaigns + activeCampaignId).
-  const handleImportImage = useCallback(() => {
-    if (!activeCampaignId) { showToast('info', 'Select a campaign before importing a map image.'); return; }
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/png,image/jpeg,image/webp';
-    input.onchange = async () => {
-      const file = input.files && input.files[0];
-      if (!file) return;
-      try {
-        const { validateImageFile, downscaleImageFile, uploadMapBackdrop } = await import('../lib/imageUpload.js');
-        const v = validateImageFile(file);
-        if (!v.ok) { showToast('error', v.error); return; }
-        const ownerId = useStore.getState().auth?.user?.id;
-        if (!ownerId) { showToast('error', 'Sign in to import a map image.'); return; }
-        showToast('info', 'Processing image…');
-        const prevUrl = useStore.getState().mapState.customBackdrop?.imageUrl || null;
-        const { blob, w, h, type } = await downscaleImageFile(file, 4096);
-        const { url } = await uploadMapBackdrop(blob, { ownerId, campaignId: activeCampaignId, contentType: type });
-        setMapBackdrop({ imageUrl: url, w, h });
-        // Best-effort: delete the replaced object so re-imports don't orphan storage.
-        if (prevUrl && prevUrl !== url) {
-          import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(prevUrl)).catch(() => {});
-        }
-        showToast('success', 'Custom map imported.');
-      } catch (err) {
-        showToast('error', err?.message || 'Map import failed.');
-      }
-    };
-    input.click();
-  }, [activeCampaignId, setMapBackdrop, showToast]);
-
-  const handleClearImage = useCallback(() => {
-    const url = useStore.getState().mapState.customBackdrop?.imageUrl;
-    clearMapBackdrop();
-    if (url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(url)).catch(() => {});
-    showToast('info', 'Reverted to generated terrain.');
-  }, [clearMapBackdrop, showToast]);
+  // Pick device file → ConfirmDialog (it disables terrain + overwrites the map)
+  // → upload → setMapBackdrop (one undo step). Extracted to a hook to hold the
+  // size ratchet; the controls render premium/active-campaign gated in the toolbar.
+  const {
+    pendingImportFile, cancelImportImage, handleImportImage, performImportImage, handleClearImage,
+  } = useMapImageImport({ activeCampaignId, setMapBackdrop, clearMapBackdrop, showToast });
 
   // ── Share map to the gallery (Project 2, blank canvas) ────────────────
   const [sharingMap, setSharingMap] = useState(false);
@@ -758,14 +744,33 @@ export default function WorldMap({ onNavigate } = {}) {
 
   }, [setMapMode, handleFit, handleSaveMapToCampaign]);
 
+  // ── Mobile render (defer-to-desktop) ───────────────────────────────────
+  // On phones the whole map-editing workspace is replaced by the gate + read-only
+  // dashboard (see RealmMobileGate). The branch sits AFTER every hook above, so it
+  // does not change hook order and the desktop tree below stays byte-identical.
+  if (isMobile) {
+    return (
+      <Suspense fallback={null}>
+        <RealmMobileGate
+          campaign={activeCampaign}
+          canManageCampaigns={canManageCampaigns}
+          tier={authTier}
+          onUpgrade={handleUpgrade}
+          nameById={nameById}
+          {...campaignActivation}
+        />
+      </Suspense>
+    );
+  }
+
   // ── Render ─────────────────────────────────────────────────────────────
   // Use viewport height minus header/padding so the map fills the screen.
   // The parent <main> has padding and the header is ~52px on desktop.
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
-      height: 'calc(100vh - 120px)',   // header (~52px) + main padding (~48px) + breathing room
-      minHeight: 500,
+      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      minHeight: CHROME.mapShellMin,
       // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
       // document — the geographic canvas is the hero (P1) and must fill its width.
       // Capping the shell to layout.page letterboxed the map (the FMG canvas fits
@@ -849,6 +854,7 @@ export default function WorldMap({ onNavigate } = {}) {
         setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
         advanceConfirm={advanceConfirm} advanceBody={advanceScopeBody}
         performAdvanceRealm={performAdvanceRealm} setAdvanceConfirm={setAdvanceConfirm}
+        importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
         setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />
     </div>

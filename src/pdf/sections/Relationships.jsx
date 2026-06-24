@@ -23,6 +23,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, relColors, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
+import { anchorTarget } from '../primitives/EntityRef.jsx';
 
 const REL_LABELS = {
   rival:            'Rival',
@@ -38,6 +39,7 @@ const REL_LABELS = {
 
 export function Relationships({ settlement, narrativeMode, vm }) {
   const r = vm.relationships;
+  const index = vm.entityIndex; // Phase-D id→card resolver (neighbour anchors)
   const hasAny =
     r.neighbours?.length > 0 ||
     r.interSettlement?.length > 0 ||
@@ -92,7 +94,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
             NEIGHBOUR NETWORK
           </Text>
           {r.neighbours.map((n, i) => (
-            <NeighbourCard key={`n-${i}`} n={n} idx={i} />
+            <NeighbourCard key={`n-${i}`} n={n} idx={i} entityIndex={index} />
           ))}
         </View>
       )}
@@ -252,11 +254,15 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 
 // ── Sub-components ─────────────────────────────────────────────
 
-function NeighbourCard({ n, idx }) {
+function NeighbourCard({ n, idx, entityIndex }) {
   const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
   const color = relColors[n.type] || palette.muted;
+  // Phase-D: this card is the anchor TARGET for any neighbour id reference
+  // (e.g. an Economics trade partner that resolves to this relationship).
+  const anchor = anchorTarget(entityIndex, n.id);
   return (
     <View
+      id={anchor}
       style={{
         marginBottom: 4,
         padding: 5,
@@ -271,7 +277,7 @@ function NeighbourCard({ n, idx }) {
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(n.name || 'Neighbour')}
         </Text>
-        <RelPill type={n.type} />
+        <RelPill type={n.type} directionalLabel={n.directionalLabel} />
       </View>
       {n.description && (
         <EditableText
@@ -327,9 +333,12 @@ function NeighbourCard({ n, idx }) {
   );
 }
 
-function RelPill({ type: relType }) {
+function RelPill({ type: relType, directionalLabel }) {
   if (!relType) return null;
-  const labelStr = REL_LABELS[relType] || cap(relType);
+  // Asymmetric links (overlord/vassal, patron/client) read directionally,
+  // naming the neighbour ("Overlord of X"); the colour still keys off the
+  // canonical base type so the pill tint is unchanged.
+  const labelStr = directionalLabel || REL_LABELS[relType] || cap(relType);
   const color = relColors[relType] || palette.muted;
   return (
     <View

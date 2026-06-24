@@ -1,5 +1,6 @@
 import { Loader2 } from 'lucide-react';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER_STRONG, CARD, ELEV, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
@@ -118,6 +119,11 @@ export default function Button({
 }) {
   const v = VARIANTS[variant] || VARIANTS.secondary;
   const s = SIZES[size] || SIZES.md;
+  // Mobile-only 44px tap floor (at-the-table reachability). Desktop density is
+  // unchanged: the existing SIZES.minHeight (sm 32 / md 40 / lg 44) win there.
+  // Reads the ONE shared reactive flag, so a rotate past 640 re-floors live.
+  const isMobile = useIsMobile();
+  const minHeight = isMobile ? Math.max(s.minHeight, 44) : s.minHeight;
   const inert = disabled || busy;
   // Icons-off everywhere but the Realm map (IconsContext). The busy spinner is
   // a functional status, not decoration, so it always renders; leading/trailing
@@ -137,7 +143,7 @@ export default function Button({
         justifyContent: 'center',
         gap: 6,
         width: fullWidth ? '100%' : undefined,
-        minHeight: s.minHeight,
+        minHeight,
         padding: s.padding,
         border: `1px solid ${v.border}`,
         borderRadius: R.lg,

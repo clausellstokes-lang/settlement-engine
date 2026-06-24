@@ -172,6 +172,7 @@ export default function SupportQueuePanel() {
             fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
           }}>
             <span role="columnheader" style={{ minWidth: 72, textAlign: 'left' }}>Number</span>
+            <span role="columnheader" style={{ minWidth: 84, textAlign: 'left' }}>Account ID</span>
             <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Subject</span>
             <span role="columnheader" style={{ flex: 1, textAlign: 'left' }}>Email (masked)</span>
             <span role="columnheader" style={{ textAlign: 'left' }}>Priority</span>
@@ -186,6 +187,7 @@ export default function SupportQueuePanel() {
                 fontWeight: 400, color: INK,
               }}>
               <span role="cell" style={{ fontSize: FS.xxs, color: MUTED, minWidth: 72, textAlign: 'left' }}>{t.ticket_number}</span>
+              <span role="cell" style={{ fontSize: FS.xxs, color: MUTED, minWidth: 84, textAlign: 'left', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{t.account_number || '–'}</span>
               <span role="cell" style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {t.subject}
               </span>
@@ -202,6 +204,9 @@ export default function SupportQueuePanel() {
         <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.lg, background: swatch.white }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap', marginBottom: SP.md }}>
             <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{active.ticket_number}</span>
+            {active.account_number && (
+              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{active.account_number}</span>
+            )}
             <h4 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, color: INK, flex: 1 }}>{active.subject}</h4>
             <span style={{ fontSize: FS.xs, color: MUTED }}>{active.email_masked}</span>
             <span style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch['#8C6F32'], textTransform: 'uppercase' }}>{active.status}</span>

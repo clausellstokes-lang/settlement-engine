@@ -312,6 +312,58 @@ describe('Tier 3.3 — generate-narrative credit handling', () => {
   });
 });
 
+describe('Tier 3.3 — generate-narrative folds daily life into the single narrative spend', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('spends credits exactly once (single spend_credits call in the whole function)', () => {
+    // MONEY PATH: the narrative run now also produces daily life. There must be
+    // exactly ONE spend_credits call for the whole request — a second spend
+    // would double-charge the bundled run.
+    const spendCalls = src.match(/\.rpc\(\s*['"]spend_credits['"]/g) || [];
+    expect(spendCalls.length).toBe(1);
+  });
+
+  it('the narrative branch runs the daily-life passes (DAILY_LIFE_FIELDS) too', () => {
+    // The narrative path must iterate DAILY_LIFE_FIELDS and build daily-life
+    // prompts so daily life is generated inside the narrative run.
+    const narrativeMarker = src.indexOf('NARRATIVE: thesis + refinement passes');
+    expect(narrativeMarker).toBeGreaterThan(-1);
+    const narrativeBranch = src.slice(narrativeMarker);
+    expect(narrativeBranch).toMatch(/DAILY_LIFE_FIELDS/);
+    expect(narrativeBranch).toMatch(/buildDailyLifePrompt/);
+  });
+
+  it('streams daily-life beats under a dailyLife.<beat> field path', () => {
+    // The client routes `dailyLife.<beat>` messages into aiDailyLife state.
+    expect(src).toMatch(/field:\s*`dailyLife\.\$\{beat\}`/);
+  });
+
+  it('returns daily life on the narrative done payload', () => {
+    // The bundled daily life must ride home in the done event so the client
+    // can persist both halves of the run.
+    const doneIdx = src.lastIndexOf('done: true');
+    expect(doneIdx).toBeGreaterThan(-1);
+    // The done block that closes the narrative run includes a dailyLife key.
+    const tail = src.slice(doneIdx, doneIdx + 600);
+    expect(tail).toMatch(/dailyLife/);
+  });
+
+  it('a daily-life beat failure does NOT refund (partial-result policy)', () => {
+    // The folded daily-life loop must not call refund() on a beat failure —
+    // it records the failed field and continues, matching the refinement
+    // passes. The beat catch handler pushes the failed beat to failedFields
+    // (and logs it) rather than refunding.
+    expect(src).toMatch(/failedFields\.push\(`dailyLife\.\$\{beat\}`\)/);
+    // And the daily-life fold must not refund inline.
+    const foldIdx = src.indexOf('Phase 3: daily-life beats');
+    expect(foldIdx).toBeGreaterThan(-1);
+    const doneIdx = src.indexOf('done: true', foldIdx);
+    const foldBlock = src.slice(foldIdx, doneIdx);
+    expect(foldBlock).not.toMatch(/await refund\(\)/);
+  });
+});
+
 describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
   let src;
   let pricing;
@@ -909,9 +961,16 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
     expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
   });
 
-  it('declares an allowed-origins list (not "*")', () => {
-    expect(src).toMatch(/settlementforge\.com/);
-    expect(src).toMatch(/localhost/);
+  it('sources the origin allowlist from the shared module (not "*")', () => {
+    // The per-function inline allowlist was consolidated into
+    // supabase/functions/_shared/cors.ts (one list, no drift). create-checkout
+    // now imports getCorsHeaders from there rather than declaring its own hosts.
+    expect(src).toMatch(/from\s+['"]\.\.\/_shared\/cors\.ts['"]/);
+    expect(src).not.toMatch(/Access-Control-Allow-Origin['"]\s*:\s*['"]\*['"]/);
+    const shared = readFileSync(join(FUNCTIONS_DIR, '_shared', 'cors.ts'), 'utf8');
+    expect(shared).toMatch(/settlementforge\.com/);
+    expect(shared).toMatch(/localhost/);
+    expect(shared).toMatch(/settlement-engine\.pages\.dev/);
   });
 });
 

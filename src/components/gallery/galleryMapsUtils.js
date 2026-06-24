@@ -8,9 +8,10 @@
 //
 // Tile shape per item (list_gallery_maps): slug, name, kind ('map' |
 // 'map_with_campaign'), description, tags (text[]), backdrop_kind ('image' |
-// 'fmg'), thumb_url, published_at, view_count, import_count, member_count. No
-// owner id (anonymized server-side); member_count is the REAL member settlement
-// count the detail RPC projects (migration 046).
+// 'fmg'), thumb_url, published_at, view_count, import_count, member_count,
+// importable (the owner import opt-in, migration 072). No owner id (anonymized
+// server-side); member_count is the REAL member settlement count the detail RPC
+// projects (migration 046).
 
 // kind facet — 'map' is a blank canvas, 'map_with_campaign' bundles settlements.
 // '&' renders as 'and' per the house voice.
@@ -33,6 +34,14 @@ export const MAP_SORT_OPTIONS = Object.freeze([
   ['most_viewed', 'Most viewed'],
   ['most_imported', 'Most imported'],
 ]);
+
+// The empty maps-filters shape — the single source of truth for "no narrowing"
+// (the GalleryMaps initial state + its Clear reset). `importable` is the owner
+// import opt-in facet (saved_maps.gallery_importable, migration 072). A fresh
+// copy each call so callers can mutate freely without sharing array refs.
+export function emptyMapFilters() {
+  return { kind: [], backdrop: [], tags: [], hasSettlements: false, importable: false };
+}
 
 export function human(value) {
   return String(value || '').replace(/_/g, ' ');
@@ -85,5 +94,6 @@ export function activeMapFilterCount(filters = {}) {
   sum += Array.isArray(filters.backdrop) ? filters.backdrop.length : 0;
   sum += Array.isArray(filters.tags) ? filters.tags.length : 0;
   sum += filters.hasSettlements ? 1 : 0;
+  sum += filters.importable ? 1 : 0;
   return sum;
 }

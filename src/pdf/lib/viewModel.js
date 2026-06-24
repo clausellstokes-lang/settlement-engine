@@ -32,6 +32,9 @@ import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { resolveMilitaryStress } from '../../domain/display/warStatusVocab.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
+import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../lib/entities.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -187,6 +190,16 @@ export function buildViewModel({
     // NO screen↔PDF drift). `null` when dormant ⇒ the Faith & War chapter and
     // the additive enrichments self-gate to nothing ⇒ byte-identical off-state.
     liveWorld:     buildPdfLiveWorld({ settlement: raw, campaign }),
+
+    // Phase-D entity index — the SAME structured-ref/id index the web dossier
+    // uses (buildDossierEntityIndex), built from the canonical `raw` save so
+    // ids/anchors are stable and the entries' `currentName` getters resolve the
+    // live name (rename-safe). Sections thread this into <EntityRef> to render
+    // internal links to a target's card/section; an id that does not resolve
+    // here renders as plain text (broken-link-safe). Always present and purely
+    // additive (derived from existing fields), so a non-narrative export is
+    // byte-identical except for the additive <Link> anchors themselves.
+    entityIndex:   buildDossierEntityIndex(raw),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
     identity:      identitySlice(active),
@@ -484,6 +497,10 @@ function powerSlice(active) {
   const s = active || {};
   const factionList = s?.powerStructure?.factions || s?.factions || [];
   const factions = factionList.map(f => ({
+    // Phase-D anchor identity — the canonical faction id (snake) the index keys
+    // factions by and an NPC's `factionLink` resolves to. The faction card uses
+    // it to set its own anchor target; mentions elsewhere link to it.
+    id:          factionIdFromName(f?.faction || f?.name || f?.label) || null,
     name:        f?.faction || f?.name || '',
     power:       f?.power || 0,
     rawPower:    f?.rawPower ?? null,
@@ -737,6 +754,8 @@ function servicesSlice(active) {
   const s = active || {};
   const institutions = s?.institutions || [];
   const detailed = institutions.map(inst => ({
+    // Phase-D anchor identity — matches the index entry built off this raw inst.
+    id: inst?.id || entityIdFor('institution', inst),
     name: inst?.name || inst?.label || 'Institution',
     category: inst?.category || 'other',
     subCategory: inst?.subCategory || inst?.type || null,
@@ -1019,7 +1038,14 @@ function npcsSlice(active) {
     }
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
+    // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
+    // index entry built off the SAME raw npc); `factionLink` is the canonical
+    // faction id (== a faction card's id) the NPC's stated affiliation resolves
+    // to, so the affiliation chip can link to that faction with no name match.
+    const factionRefName = labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category);
     return {
+      id: n?.id || entityIdFor('npc', n),
+      factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
       name: n?.name || 'Unnamed',
       title: n?.title || n?.role || n?.presentation || null,
       race: npcRace,
@@ -1099,14 +1125,26 @@ function relationshipsSlice(active) {
     crossConflicts:  s?.crossSettlementConflicts || [],
     crossNpcContacts: s?.crossSettlementNPCContacts || [],
     crossFactions:   s?.crossFactions || [],
-    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => ({
-      name: n?.neighbourName || n?.name || 'Neighbour',
-      type: n?.relationshipType || n?.type || null,
-      description: n?.description || null,
-      hooks: n?.plotHooks || [],
-      lastEvent: n?.lastEvent || null,
-      flavour: n?.flavour || n?.flavor || null,
-    })),
+    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => {
+      const name = n?.neighbourName || n?.name || 'Neighbour';
+      return {
+        // Phase-D anchor identity — matches the index's neighbourIdFor (the
+        // entry's own id, or a name-derived `neighbour.<slug>`). The card sets
+        // this as its anchor target; trade partners resolve to it.
+        id: n?.id || `neighbour.${slugifyEntity(name)}`,
+        name,
+        type: n?.relationshipType || n?.type || null,
+        // For the asymmetric pairs (overlord/vassal, patron/client), the
+        // directional label states WHICH SIDE this settlement is, naming the
+        // neighbour ("Overlord of X"); null for symmetric links / legacy rows,
+        // so the card keeps its plain titled label.
+        directionalLabel: directionalRelationshipLabel(n, name),
+        description: n?.description || null,
+        hooks: n?.plotHooks || [],
+        lastEvent: n?.lastEvent || null,
+        flavour: n?.flavour || n?.flavor || null,
+      };
+    }),
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],

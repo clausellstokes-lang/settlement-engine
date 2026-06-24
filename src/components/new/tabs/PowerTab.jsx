@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
-import { isMobile } from '../tabConstants';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
+import { entityAnchor, entityIdFor, localNpcId, institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
+import { inferInstitutionName } from '../../../domain/npcProfile.js';
+import { factionIdFromName } from '../../../lib/entities.js';
+import { useStore } from '../../../store/index.js';
+import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
-  const _mobile = isMobile();
+
+  // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
+  // NPC's affiliation), expand that faction's row and scroll it into view. The
+  // row's own ref scrolls itself once mounted, so it lands even on a freshly
+  // mounted lazy tab. Keyed on focus `ts` so a repeat click re-fires.
+  const focusedEntity = useStore(state => state.focusedEntity);
+  const focusedRowRef = useRef(null);
+  // The live entity index lets sub-faction member names resolve to the canonical
+  // NPC id by name (members carry no stable id), so the link connects instead of
+  // degrading to a slug that misses a real `npc.id`.
+  const { index } = useDossierEntities();
+
+  // Resolve the focused faction's row index (or -1). Computed from `r` directly
+  // so this runs before the early return below and keeps hooks order stable.
+  const focusFactionList = r?.factions || [];
+  const focusIndex = focusedEntity?.id
+    ? focusFactionList.findIndex(f => factionIdFromName(f.faction) === focusedEntity.id)
+    : -1;
+  useEffect(() => {
+    if (focusIndex < 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- expand-on-hyperlink-focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setExpandedFaction(focusIndex);
+    focusedRowRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }, [focusedEntity?.ts, focusIndex]);
 
   if (!r) return <div style={{padding:32,textAlign:'center',color:MUTED}}>No power structure data.</div>;
 
@@ -179,8 +207,42 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const _mods   = (f.modifiers||[]).concat(f.modifier ? [f.modifier] : []);
             const matchedGroups = factionGroups.filter(fg => fg.powerFactionName === f.faction);
 
+            // Institutions this power touches, derived ONLY from its own members:
+            // each member's category implies an institution (the militia under the
+            // City Watch because the Watch's members are `military`), deduped to a
+            // rename-safe index id. This is genuinely THIS power's footprint — an
+            // institution with no member affinity never appears.
+            //
+            // Why resolve through the index by NAME (not the member's own
+            // institutionLink string): the raw NPC never stores that link, and the
+            // `institution.<snake>` form it would carry mismatches the index's
+            // slug keys — so we infer the institution NAME from each member and
+            // hand it to institutionIdFromName, which returns the authoritative id
+            // EntityLink can resolve to a live (renamed) name. Pure + O(members).
+            const associatedInstitutions = (() => {
+              const seen = new Set();
+              const out = [];
+              for (const mem of matchedGroups.flatMap(g => g.members || [])) {
+                // Prefer the live indexed NPC so a renamed/recategorised member
+                // infers off current data; fall back to the member snapshot.
+                const npcId = localNpcId(index, mem.name);
+                const liveNpc = npcId ? index?.resolve?.(npcId)?.raw : null;
+                const instName = inferInstitutionName(liveNpc || mem, s);
+                if (!instName) continue;
+                const instId = institutionIdFromName(index, instName);
+                if (!instId || seen.has(instId)) continue;
+                seen.add(instId);
+                out.push({ id: instId, name: instName });
+              }
+              return out.slice(0, 5);
+            })();
+
             return (
-              <div key={i}>
+              <div
+                key={i}
+                id={entityAnchor('faction', f, f.faction)}
+                ref={i === focusIndex ? focusedRowRef : null}
+              >
                 <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',borderRadius:5,
                   background:isExp?'#f5f0e8':f.legitimacyCrisis?'#fdf4f4':'transparent',
                   cursor:f.desc?'pointer':'default',
@@ -234,12 +296,37 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                     )}
                     {matchedGroups.length > 0 && (
                       <div style={{marginTop:8}}>
-                        <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated:</span>
+                        <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated NPCs</span>
                         {matchedGroups.flatMap(g => g.members||[]).slice(0,5).map((mem,j) => (
                           <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
-                            {mem.name} <span style={{color:MUTED}}>({mem.role})</span>
+                            {/* Sub-faction member → its NPC card. Resolve the
+                                CANONICAL id by name first (members lack a stable
+                                id, so a bare slug would miss an NPC keyed by a
+                                real `npc.id`); fall back to the slug so a member
+                                who genuinely IS the index key still links.
+                                Rename-safe; plain text if no NPC record. */}
+                            <EntityLink id={localNpcId(index, mem.name) ?? entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
+                        {/* Associated Institutions — the SAME pill format as the
+                            NPC list above so the two read as a pair. Derived from
+                            this power's members' institution affinity (see
+                            associatedInstitutions). A quiet "None" when nothing
+                            resolves keeps the pairing deliberate rather than
+                            leaving an empty bordered block; each institution is a
+                            rename-safe EntityLink to its Overview card. */}
+                        <div style={{marginTop:6}}>
+                          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated Institutions</span>
+                          {associatedInstitutions.length === 0 ? (
+                            <span style={{fontSize:FS.xxs,color:MUTED}}>None</span>
+                          ) : (
+                            associatedInstitutions.map((inst) => (
+                              <span key={inst.id} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
+                                <EntityLink id={inst.id} type="institution" fallback={inst.name} style={{color:c,textDecorationColor:`${c}80`}} />
+                              </span>
+                            ))
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -262,7 +349,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 {t.factions?.length > 0 && (
                   <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
                     {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 6px'}}>{f}</span>
+                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 6px'}}>
+                        {/* Structured faction ref → its Power row (rename-safe; plain text if absent). */}
+                        <EntityLink id={factionIdFromName(f)} type="faction" fallback={f} style={{color:swatch['#7A5010'],textDecorationColor:`${swatch['#7A5010']}80`}} />
+                      </span>
                     ))}
                   </div>
                 )}
@@ -282,7 +372,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             return (
               <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,borderRadius:7,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+                  {/* Conflict parties are structured faction refs → their Power
+                      rows (rename-safe; each degrades to plain text if its
+                      faction is absent from the index). The plot-hook prose
+                      below is intentionally NOT linked — structured refs only. */}
+                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>
+                    <EntityLink id={factionIdFromName(c.parties?.[0])} type="faction" fallback={c.parties?.[0] || ''} style={{...serif,color:swatch.inkMag}} />
+                    {c.parties?.[1] ? <> vs <EntityLink id={factionIdFromName(c.parties[1])} type="faction" fallback={c.parties[1]} style={{...serif,color:swatch.inkMag}} /></> : null}
+                  </span>
                   <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,borderRadius:3,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
                 {c.issue  && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}

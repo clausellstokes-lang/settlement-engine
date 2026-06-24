@@ -22,6 +22,7 @@ import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'luc
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED,
   sans, FS, SP, R, swatch, DANGER_BORDER,
@@ -65,6 +66,10 @@ function StatusPill({ status }) {
 }
 
 export default function AccountTickets() {
+  // Mobile reflow: stack the two-up category/priority row, let the ticket reply
+  // box pin its Send button below the textarea, and wrap long ticket subjects
+  // instead of truncating them. All guarded so desktop renders byte-identical.
+  const isMobile = useIsMobile();
   const [view, setView] = useState('list');   // 'list' | 'create' | 'thread'
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -205,7 +210,7 @@ export default function AccountTickets() {
                 }}>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
-                  <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: isMobile ? 'clip' : 'ellipsis', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
                     {t.subject}
                   </span>
                 </span>
@@ -219,7 +224,7 @@ export default function AccountTickets() {
       {/* ── CREATE ───────────────────────────────────────────────────── */}
       {view === 'create' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          <div style={{ display: 'flex', gap: SP.sm }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: SP.sm }}>
             <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
               Category
               <select id="ticket-category" value={category} onChange={(e) => setCategory(e.target.value)}
@@ -293,11 +298,11 @@ export default function AccountTickets() {
             })}
           </div>
 
-          <div style={{ display: 'flex', gap: SP.sm, alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: SP.sm, alignItems: isMobile ? 'stretch' : 'flex-end' }}>
             <textarea aria-label="Your reply" placeholder="Write a reply…"
               value={replyBody} onChange={(e) => setReplyBody(e.target.value)} rows={2}
               style={{ ...inputStyle, resize: 'vertical', flex: 1 }} />
-            <Button variant="gold" size="md" busy={replying}
+            <Button variant="gold" size="md" busy={replying} fullWidth={isMobile}
               onClick={submitReply} disabled={replying || !replyBody.trim()} icon={<Send size={13} />}>
               Reply
             </Button>

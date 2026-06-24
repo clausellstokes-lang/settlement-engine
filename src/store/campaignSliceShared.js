@@ -302,3 +302,70 @@ export async function flushWorldPulsePersist({ result, campaignPersist, persistU
   }
   return { ok: true, savesFailed: 0, campaignSynced: true };
 }
+
+/**
+ * Phase 4b — persist a CAMPAIGN-MEMBER change-queue COMMIT atomically.
+ *
+ * A member commit is NOT a tick advance: it applies the settlement-LOCAL change
+ * now and DEFERS the regional propagation (parked on worldState.deferredImpacts)
+ * to the next Advance. But it still writes a WRITE-SET — the committed settlement
+ * row(s) PLUS the campaign snapshot carrying the deferred-impact marker — that
+ * must land all-or-nothing, exactly the hazard 069 closes. So in cloud mode this
+ * routes the whole write-set through the SAME persist_world_pulse_advance RPC as
+ * an advance, with two deliberate differences from the forward-advance call:
+ *
+ *   • expectedTick = null (R2): a commit must NOT be blocked by the forward
+ *     stale-tick guard (the stored tick already equals current, so a forward
+ *     guard would reject the write as stale and silently DROP the commit). null
+ *     means last-write-wins, the same value undo uses.
+ *   • the campaign snapshot does NOT bump worldState.tick — the caller hands the
+ *     live (un-advanced) campaign, so the next real Advance's forward guard sees
+ *     a truthful, un-inflated tick (R2 second half).
+ *
+ * R3 (commit-vs-advance race): the RPC's `for update` row lock on the campaign
+ * serialises a concurrent advance, and the caller passes a snapshot that is a
+ * read-modify-write of ONLY the deferred-impact marker on the LIVE campaign (it
+ * never carries a stale full-world copy), so a commit landing after an advance
+ * cannot clobber the advanced graph with old data.
+ *
+ * On failure: NO re-throw — returns { ok:false } so the caller surfaces the
+ * honest "saved locally, cloud-pending" state and an id-keyed retry reconciles.
+ *
+ * In LOCAL mode (campaigns not cloud-configured) the cloud RPC is absent, so this
+ * helper OWNS the settlement-row write-set: the campaign-commit caller routes
+ * exclusively through here (it does NOT also run the standalone single-row
+ * persistSaveUpdate), so we must persist each affected `saves` row ourselves via
+ * persistSaveUpdates — otherwise the committed local edit survives only in the
+ * in-memory mirror and is lost on reload. The local campaign cache (cacheCampaignState,
+ * done by the caller) covers the campaign snapshot + deferred-impact marker.
+ *
+ * @param {{ campaign: any, settlementUpdates: Array<{saveId:string,settlement?:any,campaignState?:any,versionHistory?:any}> }} args
+ * @returns {Promise<{ ok: boolean }>}
+ */
+export async function persistCampaignLocalCommit({ campaign, settlementUpdates = [] }) {
+  if (!campaign || !campaign.id) return { ok: true };
+  const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
+  // Cloud: one atomic RPC for the commit write-set (settlement rows + campaign
+  // snapshot), expectedTick = null so the forward guard never drops the commit.
+  if (typeof campaignService.persistWorldPulseAdvance === 'function') {
+    try {
+      await campaignService.persistWorldPulseAdvance({
+        campaignId: campaign.id,
+        campaign,
+        settlementUpdates: updates,
+        expectedTick: null,
+      });
+    } catch (e) {
+      console.warn('[campaignSlice] campaign-commit atomic persist failed; left cloud-pending', e);
+      try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+      return { ok: false };
+    }
+    return { ok: true };
+  }
+  // Local mode: no cloud RPC, and the caller does NOT run its own single-row
+  // persist for campaign commits — so persist every affected settlement row here
+  // (each savesService.update writes its localStorage row) or the edit is lost on
+  // reload. The caller's cacheCampaignState covers the campaign snapshot.
+  const saveOutcome = await persistSaveUpdates(updates);
+  return { ok: saveOutcome.ok };
+}

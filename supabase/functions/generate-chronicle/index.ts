@@ -20,6 +20,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -32,30 +34,12 @@ const HOUSE_STYLE = `Voice: a measured court chronicler. Concrete, specific, a l
 // of input size, so an unbounded payload would inflate Anthropic token cost.
 const MAX_BODY_BYTES = 64 * 1024;
 
-// CORS: fail CLOSED. When no CLIENT_URL is configured we restrict to the known
-// production + localhost hosts and NEVER reflect an arbitrary origin or emit '*'
-// for this authenticated endpoint. A missing Origin is treated as same-origin.
-// (Mirrors create-checkout / generate-narrative.)
+// CORS: fail CLOSED via the shared allowlist (_shared/cors.ts). Never reflects
+// an arbitrary origin or emits '*' for this authenticated endpoint; a missing
+// Origin is treated as same-origin. The shared list also accepts the Cloudflare
+// Pages preview origin. This endpoint advertises POST/OPTIONS.
 function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
-  const match = allowed.includes(origin) || isLocalhost || !origin;
-  return {
-    // Never '*': echo the matched origin, else pin to the first allowed host.
-    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 function json(body: unknown, status = 200, headers: Record<string, string> = {}) {
@@ -164,6 +148,29 @@ serve(async (req) => {
     }
     if (isActive !== true) return json({ error: 'Account is not active' }, 403, cors);
 
+    // ── SAFETY: hard spend cap — FAIL CLOSED (shared kill-switch, migration 079) ──
+    // Checked BEFORE the credit spend so a capped window never debits the user.
+    // BLOCK on the cap RPC erroring or returning non-true `allowed` — an
+    // unbounded provider bill is the catastrophic failure mode.
+    const { data: capResult, error: capErr } = await supabaseAdmin.rpc('check_ai_spend_cap');
+    if (capErr) {
+      logError('generate-chronicle', user.id, `check_ai_spend_cap errored: ${capErr.message}`, { stage: 'spend-cap' });
+    }
+    if ((capResult as { allowed?: boolean } | null)?.allowed !== true) {
+      return json({ error: 'AI generation is temporarily unavailable (daily capacity reached). No credits were charged.' }, 503, cors);
+    }
+
+    // ── SAFETY: per-user/day rate limit — FAIL OPEN (shared limiter, migration 079) ──
+    {
+      const { data: rlResult, error: rlErr } =
+        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+      if (rlErr) {
+        logError('generate-chronicle', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+      } else if ((rlResult as { allowed?: boolean } | null)?.allowed === false) {
+        return json({ error: 'You have reached today\'s AI generation limit. Please try again tomorrow. No credits were charged.' }, 429, cors);
+      }
+    }
+
     // Cap the body before parsing (mirrors ingest-events): the credit charged is
     // fixed at 2 regardless of input size, so an unbounded grounding payload
     // would only inflate Anthropic token cost.
@@ -209,7 +216,40 @@ serve(async (req) => {
       }
     };
 
+    // COGS metering (migration 078). Best-effort: a metering-write failure must
+    // never fail the user's generation, so it's wrapped + logged. Captures real
+    // Anthropic usage when present, else a len/4 floor estimate.
+    const meter = async (input: number, output: number, estimated: boolean, ok: boolean, durationMs: number) => {
+      try {
+        // Haiku price bucket: $1 / $5 per Mtok (mirrors generate-narrative).
+        const costUsd = Number((((input / 1_000_000) * 1) + ((output / 1_000_000) * 5)).toFixed(6));
+        const { error } = await supabaseAdmin.from('ai_usage_events').insert({
+          user_id: user.id,
+          feature: 'chronicle',
+          phase: null,
+          provider: 'anthropic',
+          model: CHRONICLE_MODEL,
+          model_preference: null,
+          input_tokens: input,
+          output_tokens: output,
+          tokens_estimated: estimated,
+          estimated_cost_usd: costUsd,
+          ok,
+          fellback: false,
+          duration_ms: durationMs,
+          spend_id: spendId,
+        });
+        if (error) logError('generate-chronicle', user.id, `ai_usage_events insert failed: ${error.message}`, { stage: 'metering' });
+      } catch (e) {
+        logError('generate-chronicle', user.id, e, { stage: 'metering' });
+      }
+    };
+    const estTokens = (s: string) => Math.max(1, Math.ceil(String(s || '').length / 4));
+
     let prose = '';
+    const promptText = buildPrompt(grounding);
+    const started = Date.now();
+    let metered = false; // ensure we write exactly one ai_usage_events row
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -221,14 +261,23 @@ serve(async (req) => {
         body: JSON.stringify({
           model: CHRONICLE_MODEL,
           max_tokens: 700,
-          messages: [{ role: 'user', content: buildPrompt(grounding) }],
+          messages: [{ role: 'user', content: promptText }],
         }),
       });
       if (!resp.ok) throw new Error(`Anthropic ${resp.status}`);
       const data = await resp.json();
       prose = (data?.content?.[0]?.text || '').trim();
+      const inTok = typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null;
+      const outTok = typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null;
+      const estimated = inTok == null || outTok == null;
+      // The provider call itself succeeded (tokens were spent); meter it as ok
+      // even if the body is empty. The empty-body case is a content failure
+      // handled by the throw below, not a second COGS event.
+      await meter(inTok ?? estTokens(promptText), outTok ?? estTokens(prose), estimated, true, Date.now() - started);
+      metered = true;
       if (!prose) throw new Error('Empty chronicle');
     } catch (e) {
+      if (!metered) await meter(estTokens(promptText), 0, true, false, Date.now() - started);
       await refund('chronicle generation failed');
       return json({ error: (e as Error).message, refunded: true }, 502, cors);
     }

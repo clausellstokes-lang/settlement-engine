@@ -10,9 +10,6 @@ export { getBaseChance } from './institutionProbability.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 
-// RELATION_TYPES re-exported as alias so existing importers don't break.
-export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
-
 /**
  * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).
  * Same construction as domain/region/contestMath.hash01 (kept local so this
@@ -348,6 +345,13 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   const instNames    = institutions.map(i => i.name);
   const expandedSet  = [...expandInstitutionSet(instNames)];
+  // Institutions the DM deliberately overrode above their native tier carry
+  // `outOfTier`. For those, the GATE_FEATURES minTier check is the SAME fact as
+  // the by-design out-of-tier contradiction surfaced below, so firing both would
+  // double-report one override as a violation-to-fix AND an intentional choice.
+  // Skip the redundant minTier warning for deliberate overrides (the by_design
+  // entry covers it). Non-tier prerequisites (the `requires` gate) still apply.
+  const outOfTierNames = new Set(institutions.filter(i => i.outOfTier).map(i => i.name));
 
   const {
     tier           = 'town',
@@ -367,7 +371,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   Object.entries(GATE_FEATURES).forEach(([instName, gate]) => {
     if (!instNames.includes(instName)) return;
 
-    if (gate.minTier && !tierAtLeast(tier, gate.minTier)) {
+    if (gate.minTier && !tierAtLeast(tier, gate.minTier) && !outOfTierNames.has(instName)) {
       violations.push({
         type:        'tier_violation',
         institution: instName,

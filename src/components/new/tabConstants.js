@@ -1,8 +1,23 @@
 import { Home, Beer, Sword, Sparkles, ScrollText, Cross, Ship, Scale, Drama, ClipboardList, VenetianMask } from 'lucide-react';
 import { swatch } from '../theme.js';
+import useIsMobile, { getIsMobile } from '../../hooks/useIsMobile.js';
 // Shared constants for all tab components
 
-export const isMobile = () => window.innerWidth < 640;
+// Reactive mobile flag for the dossier tabs. Earlier this was a plain
+// `getIsMobile()` read taken once at render, so a rotate/resize across the 640
+// breakpoint left the tab stacked the wrong way until the next unrelated
+// re-render. Tabs now consume the shared `useIsMobile` store via this thin
+// re-export, so they re-render the instant the breakpoint flips — the same
+// reactive source Buttons/IconButtons already read.
+//
+// It is a hook: call it unconditionally at the top of a component, before any
+// early return (React rules of hooks). The lint `use`-prefix convention is
+// satisfied by the export name below.
+export const useIsMobileTab = () => useIsMobile(640);
+
+// Non-reactive synchronous read, kept for the rare non-React caller that only
+// needs a one-shot value (no subscription). Prefer `useIsMobileTab` in render.
+export const isMobile = () => getIsMobile(640);
 
 // ── BODY token ───────────────────────────────────────────────────────────────
 // The tabs historically used a per-file `const second=swatch['#6B5340']` for body

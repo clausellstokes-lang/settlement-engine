@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { FS, swatch, CARD, BODY } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -76,30 +76,27 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRequestDailyLife = null }) {
+export function DailyLifeTab({ settlement: r, _aiSettlement, saveId: _saveId = null }) {
   const [narrative, setNarrative]   = useState(null);
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
   const [loadMsg, setLoadMsg]       = useState('');
-  const mobile = isMobile();
+  const mobile = useIsMobileTab();
 
-  const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useStore(s => s.getCost);
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
   const storeAiError = useStore(s => s.aiError);
   const storeAiProgress = useStore(s => s.aiProgress);
-  const _creditBalance = useStore(s => s.creditBalance);
 
   if (!r) return null;
 
-  // Daily-life generation is gated on a saved settlement (same rule
-  // as the narrative layer). Local-dev mock remains ungated.
-  const dailyLifeEnabled = isConfigured ? !!saveId : true;
-
   const ctx = extractSettlementContext(r);
 
+  // Daily life is generated as part of the narrative run (one action, the
+  // narrative price). This tab DISPLAYS that prose; it no longer has its own
+  // paid generate control. Local dev (no Supabase) keeps an offline preview so
+  // the tab isn't blank without a configured backend.
   const loading = isConfigured ? storeAiLoading : localLoading;
   const regenerating = isConfigured ? storeAiRegenerating : false;
   const error = isConfigured ? storeAiError : localError;
@@ -112,14 +109,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     'Reading the mood…',
   ];
 
-  async function generate() {
-    if (isConfigured) {
-      if (onRequestDailyLife) await onRequestDailyLife();
-      else await requestDailyLife(saveId);
-      return;
-    }
-
-    // Local mode: deterministic offline prose (no credits, no browser API key).
+  // Local-dev only: deterministic offline prose preview (no credits, no
+  // backend). In production daily life arrives with the narrative run.
+  async function generateLocalPreview() {
     setLocalLoading(true);
     setLocalError(null);
     setNarrative(null);
@@ -159,22 +151,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     ctx.foodDeficit > 10 ? '#8a4010' :
     ctx.foodDeficit > 0  ? swatch['#A0762A'] : swatch['#1A5A28'];
 
-  // Button label logic — first-time generate vs regenerate. Both spend credits;
-  // we name the action plainly so users know.
-  const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return 'Save settlement to draw Daily Life into prose';
-    if (loading) {
-      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
-    }
-    if (hasContent) {
-      return isConfigured
-        ? `Regenerate Daily Life (${getCost('dailyLife')} credits)`
-        : 'Regenerate Daily Life: Narrative refinement';
-    }
-    return isConfigured
-      ? `Generate Daily Life (${getCost('dailyLife')} credits)`
-      : 'Generate Daily Life: Narrative refinement';
-  })();
+  // Local-dev preview button label. Production has no generate control here —
+  // daily life rides in with the narrative run.
+  const localButtonLabel = loading
+    ? (loadMsg || (hasContent ? 'Refreshing preview…' : 'Drawing daily life…'))
+    : (hasContent ? 'Refresh local preview' : 'Preview daily life (local)');
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
@@ -212,38 +193,39 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         <MetaFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?swatch['#6B5340']:ctx.magicBand==='high'?swatch['#5A2A8A']:ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
       </div>
 
-      {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
-      {/* Unsaved settlements (Create page) get a slim inline hint instead of
-          a disabled teaser button — tab-contextual, so it explains what saving
-          unlocks for "Daily Life" specifically. */}
-      {!dailyLifeEnabled ? (
-        <div
-          style={{
-            padding: '10px 14px', marginBottom: 16,
-            background: 'linear-gradient(135deg, rgba(122,70,26,0.06), rgba(160,118,42,0.04))',
-            border: `1px solid ${BORDER}`,
-            borderLeft: '3px solid #a0762a',
-            borderRadius: 6,
-            fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
-            fontFamily: sans,
-          }}
-        >
-          <strong style={{ color: swatch['#7A5A1A'] }}>Save this settlement</strong>
-          {' '}to draw Daily Life into prose. Five paragraphs grounded in the town's own stressors, trade, and cast. The anchor facts above stay either way.
-        </div>
+      {/* ── DAILY LIFE SOURCE ─────────────────────────────────────────────── */}
+      {/* Daily life is no longer generated here on its own. The narrative run
+          does the full prose polish AND draws out daily life, under a single
+          spend. This tab only displays the result. In local dev (no backend)
+          we offer an offline preview so the tab isn't blank. */}
+      {isConfigured ? (
+        !hasContent && (
+          <div
+            style={{
+              padding: '10px 14px', marginBottom: 16,
+              background: 'linear-gradient(135deg, rgba(122,70,26,0.06), rgba(160,118,42,0.04))',
+              border: `1px solid ${BORDER}`,
+              borderLeft: '3px solid #a0762a',
+              borderRadius: 6,
+              fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
+              fontFamily: sans,
+            }}
+          >
+            <strong style={{ color: swatch['#7A5A1A'] }}>Run the narrative layer</strong>
+            {' '}to draw daily life into prose. The narrative run does the full prose polish and writes daily life with it, dawn to night, grounded in this town's own stressors, trade, and cast. The anchor facts above stay either way.
+          </div>
+        )
       ) : (
         <Button
           variant="primary"
           size="lg"
           fullWidth
-          onClick={generate}
+          onClick={generateLocalPreview}
           busy={loading}
-          title={hasContent
-            ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
-            : `Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
+          title="Local preview only. In the live app, daily life is written as part of the narrative run."
           style={{ marginBottom: 16 }}
         >
-          {buttonLabel}
+          {localButtonLabel}
         </Button>
       )}
 
@@ -311,8 +293,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
             What is daily life like here?
           </div>
           <div style={{ fontSize: FS['11.5'], color: BODY, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Draw out ordinary life in this settlement: dawn, the market, the tavern, the watch.
-            Five paragraphs of prose, grounded in the town's own stressors and trade.
+            Ordinary life in this settlement, dawn to night: the market, the tavern, the watch.
+            Five paragraphs grounded in the town's own stressors and trade, written as part of the narrative run.
           </div>
         </div>
       )}

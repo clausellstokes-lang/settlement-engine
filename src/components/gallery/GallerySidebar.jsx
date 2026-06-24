@@ -1,7 +1,9 @@
 import { Check, X } from 'lucide-react';
 import { useId } from 'react';
 
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { TIER_LABELS } from '../new/design.js';
+import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
 import {
   CARD_ALT,
@@ -15,11 +17,9 @@ import {
 } from '../theme.js';
 import {
   activeFilterCount,
-  activePopulationBand,
   CULTURE_OPTIONS,
   human,
   MAGIC_OPTIONS,
-  POPULATION_BANDS,
   PROSPERITY_OPTIONS,
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
@@ -89,30 +89,6 @@ function FilterChips({ options, value = [], onToggle }) {
   );
 }
 
-// Single-select chips for the population band (one band picks both numeric
-// bounds; re-clicking the active band clears it).
-function BandChips({ bands, activeKey, onPick }) {
-  return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
-      {bands.map(band => {
-        const isOn = activeKey === band.key;
-        return (
-          <Button
-            key={band.key}
-            variant={isOn ? 'gold' : 'secondary'}
-            size="sm"
-            onClick={() => onPick(band)}
-            aria-pressed={isOn}
-            icon={isOn ? <Check size={12} /> : undefined}
-          >
-            {band.label}
-          </Button>
-        );
-      })}
-    </div>
-  );
-}
-
 function ToggleRow({ checked, label, onChange }) {
   const inputId = useId();
   return (
@@ -132,33 +108,14 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
-export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onSetPopulationBand, onClear, isSignedIn }) {
+/**
+ * The filter facet body, shared by the desktop sidebar and the mobile bottom
+ * sheet. The Clear control is rendered by the chrome (desktop header / sheet
+ * footer) so the body holds only the facet sections.
+ */
+function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
   return (
-    <aside className="gallery-sidebar-panel" style={{
-      display: 'grid',
-      gap: SP.lg,
-      alignSelf: 'start',
-      padding: SP.md,
-      borderRadius: R.lg,
-      background: CARD_ALT,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
-          Filters
-        </h2>
-        {activeFilterCount(filters) > 0 && (
-          <Button
-            variant="ghost"
-            size="sm"
-            icon={<X size={12} />}
-            onClick={onClear}
-            aria-label={`Clear all ${activeFilterCount(filters)} active filters`}
-            style={{ marginLeft: 'auto', color: GOLD_TXT }}
-          >
-            Clear
-          </Button>
-        )}
-      </div>
+    <>
       {isSignedIn && (
         <SidebarSection title="Yours">
           <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
@@ -180,12 +137,9 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
       <SidebarSection title="Prosperity" count={filters.prosperity?.length || 0}>
         <FilterChips options={PROSPERITY_OPTIONS} value={filters.prosperity} onToggle={option => onToggleArray('prosperity', option)} />
       </SidebarSection>
-      <SidebarSection title="Population" count={activePopulationBand(filters) ? 1 : 0}>
-        <BandChips bands={POPULATION_BANDS} activeKey={activePopulationBand(filters)} onPick={onSetPopulationBand} />
-      </SidebarSection>
       <SidebarSection title="Surface" style={{ marginTop: SP.xs }}>
         <div style={{ display: 'grid', gap: SP.sm }}>
-          <ToggleRow checked={filters.atWar} label="At war" onChange={value => onToggleBool('atWar', value)} />
+          <ToggleRow checked={filters.importable} label="Importable" onChange={value => onToggleBool('importable', value)} />
           <ToggleRow checked={filters.hasDeity} label="Has patron deity" onChange={value => onToggleBool('hasDeity', value)} />
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
@@ -193,6 +147,82 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
         </div>
       </SidebarSection>
       </>)}
+    </>
+  );
+}
+
+/**
+ * Gallery settlements filter facets. On desktop this is the sticky left
+ * sidebar (byte-identical to before). On mobile (<640) the full ~30-chip wall
+ * would otherwise stack above the results, so the same facet body moves into a
+ * BottomSheet behind a single "Filters (N)" trigger — keeping the results in
+ * the first viewport. The reflow stacking at 860 is unchanged; this is a
+ * separate mobile-only chrome swap.
+ *
+ * @param {object} props
+ * @param {object} props.filters         active facet state
+ * @param {(key:string, value:string) => void} props.onToggleArray  multi-select facet toggle
+ * @param {(key:string, value:boolean) => void} props.onToggleBool  boolean facet toggle
+ * @param {() => void} props.onClear     reset all facets
+ * @param {boolean} props.isSignedIn     gates the "yours" facet
+ */
+export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
+  const isMobile = useIsMobile();
+  const active = activeFilterCount(filters);
+  const bodyProps = { filters, onToggleArray, onToggleBool, isSignedIn };
+
+  if (isMobile) {
+    // Mobile: a single Filters (N) trigger opens the sheet; the facet body and
+    // a Clear control live inside it. Button already floors the trigger at 44px.
+    return (
+      <div style={{ marginBottom: SP.md }}>
+        <BottomSheet title="Filters" triggerLabel="Filters" count={active} fullWidthTrigger>
+          <div style={{ display: 'grid', gap: SP.lg }}>
+            {active > 0 && (
+              <Button
+                variant="ghost"
+                icon={<X size={12} />}
+                onClick={onClear}
+                aria-label={`Clear all ${active} active filters`}
+                style={{ justifySelf: 'start', color: GOLD_TXT }}
+              >
+                Clear
+              </Button>
+            )}
+            <FilterBody {...bodyProps} />
+          </div>
+        </BottomSheet>
+      </div>
+    );
+  }
+
+  return (
+    <aside className="gallery-sidebar-panel" style={{
+      display: 'grid',
+      gap: SP.lg,
+      alignSelf: 'start',
+      padding: SP.md,
+      borderRadius: R.lg,
+      background: CARD_ALT,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
+        <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
+          Filters
+        </h2>
+        {active > 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={<X size={12} />}
+            onClick={onClear}
+            aria-label={`Clear all ${active} active filters`}
+            style={{ marginLeft: 'auto', color: GOLD_TXT }}
+          >
+            Clear
+          </Button>
+        )}
+      </div>
+      <FilterBody {...bodyProps} />
     </aside>
   );
 }

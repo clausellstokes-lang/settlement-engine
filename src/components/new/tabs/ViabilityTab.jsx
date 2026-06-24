@@ -4,15 +4,12 @@ import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 
-import {isMobile} from '../tabConstants';
-
 import {NarrativeNote} from '../NarrativeNote';
 
 export function ViabilityTab({settlement:s, narrativeNote}) {
   if (!s?.economicViability) return <Empty message="No coherence reading on file for this settlement."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
-  const _mobile = isMobile();
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since

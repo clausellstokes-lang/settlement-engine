@@ -8,29 +8,15 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
+// CORS: fail-closed via the shared allowlist; never '*' for this credentialed
+// endpoint. Advertises POST/OPTIONS.
 function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  const match = allowed.includes(origin) || !origin;
-  return {
-    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
-    // matched origin, else pin to the first allowed host.
-    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { 'Vary': 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 function userClient(authHeader: string) {

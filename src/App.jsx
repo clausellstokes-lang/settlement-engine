@@ -23,7 +23,7 @@ import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -73,7 +73,7 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
-  { id: 'home',        label: 'Home' },
+  { id: 'home',        label: 'Welcome' },
   { id: 'generate',    label: 'Create' },
   { id: 'settlements', label: 'Library' },
   { id: 'realm',       label: 'Realm' },
@@ -135,10 +135,11 @@ export default function App() {
 
   // Logged-out front door. A visitor who is NOT signed in — and has no saved
   // session to restore — is routed from the bare root to the marketing landing;
-  // a signed-in member (or one whose saved session is still restoring) falls
-  // through to the app (/create), and is moved off the landing if they sign in
-  // while sitting on it. Deep links elsewhere are respected; only the root and
-  // /home are gated. Replaces the old once-per-device first-visit flag.
+  // a signed-in member (or one whose saved session is still restoring) is routed
+  // from the bare root to the app (/create). Deep links elsewhere are respected;
+  // only the bare root is gated now — an explicit /home visit is honoured so a
+  // member can revisit the Welcome page from the nav, where it shows the member
+  // CTAs (Explore Premium + learn-more). Replaces the old once-per-device flag.
   useEffect(() => {
     // No stored auth token at all ⇒ definitely logged out ⇒ route immediately,
     // with no wait and no landing-then-app flash. Otherwise wait for the saved
@@ -149,8 +150,8 @@ export default function App() {
       const atRoot = path === '/' || path === '';
       if (authTier === 'anon') {
         if (atRoot) replacePath('/home');            // logged out → the landing
-      } else if (view === 'home') {
-        replacePath('/create');                      // member on the landing → the app
+      } else if (atRoot) {
+        replacePath('/create');                      // member at the bare root → the app
       }
     } catch { /* private mode → fall through to the default */ }
   }, [authLoading, authTier, view]);
@@ -329,9 +330,13 @@ export default function App() {
   // Filter nav items based on visibility. The Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
-  // The Home tab fronts the logged-out landing; signed-in members go straight to
-  // Create, so Home is dropped from their nav (the landing is logged-out-only).
-  const visibleNav = authTier === 'anon' ? NAV : NAV.filter(item => item.id !== 'home');
+  // The Welcome tab fronts the logged-out landing; signed-in members go straight to
+  // Create, so it is dropped from their nav (the landing is logged-out-only).
+  // Welcome stays in the nav for everyone, members included; the page adapts its
+  // CTAs by auth state (Sign in / free-to-try vs Explore Premium / learn-more)
+  // rather than being hidden. Members still LAND on Create from the bare root —
+  // the front-door effect gates only `/`, not an explicit /home visit.
+  const visibleNav = NAV;
 
   // Dedicated auth surfaces (/signin · /register · /reset-password ·
   // /verify-email · /confirm-email) render full-bleed: the persistent top nav
@@ -341,10 +346,13 @@ export default function App() {
   const isAuthRoute = view === 'signin' || view === 'register' || view === 'reset-password' || view === 'set-new-password' || view === 'verify-email' || view === 'confirm-email';
 
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
-  // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
+  // slicing the desktop NAV order, otherwise inserting/reordering a NAV item
   // silently evicts whatever falls past the slice (this is how About, then Gallery,
   // got dropped). About lives in the account menu on mobile, so it ranks last.
-  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'howto'];
+  // The Realm (World Map) is omitted on mobile: the map workspace is too
+  // constrained for small screens. It stays in the desktop nav, and the /map
+  // and /realm routes still resolve from deep links.
+  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'howto'];
   const mobileNav = MOBILE_NAV_PRIORITY
     .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)
@@ -398,8 +406,8 @@ export default function App() {
                 padding: `0 ${SP.xs}px`,
               }}
             >
-              <span style={{ fontSize: FS.lg, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                SettlementForge
+              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em' }}>
+                <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
               </span>
             </Button>
 
@@ -408,6 +416,7 @@ export default function App() {
               isAnon={authTier === 'anon'}
               displayName={displayName}
               isElevated={isElevated}
+              creditBalance={authTier !== 'anon' ? creditBalance : null}
               onSignIn={() => setAuthModalOpen(true)}
               onAccount={() => setView('account')}
               onManageSubscription={() => setView('pricing')}
@@ -419,25 +428,22 @@ export default function App() {
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && !isAuthRoute && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block — logo + wordmark on top row, italic tagline
-                beneath. The HomeHero (which carries the full positioning
-                block) is gated to anonymous-only; this small tagline
-                keeps the "simulator for DMs" framing visible for
-                signed-in users who'd otherwise never see it. */}
+            {/* Brand block — the wordmark stands alone (the "simulator for DMs"
+                subtitle was retired). "SettlementForge" reads as a single bold
+                serif word with the two capitals (S, F) set a step larger, a
+                quiet two-cap emphasis that keeps the whole word legible. The
+                aria-label restores the plain name for assistive tech, since the
+                per-letter spans would otherwise read as fragments. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
-                <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                  SettlementForge
-                </h1>
-                <span style={{
-                  fontSize: FS.xs, fontWeight: 700,
-                  color: swatch['#E0C080'], fontFamily: sans,
-                  letterSpacing: '0.10em', textTransform: 'uppercase',
-                  marginTop: 3,
-                }}>
-                  A simulator for Dungeon Masters
-                </span>
-              </div>
+              <h1
+                aria-label="SettlementForge"
+                style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+              >
+                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
+                <span aria-hidden="true">ettlement</span>
+                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
+                <span aria-hidden="true">orge</span>
+              </h1>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
@@ -565,7 +571,20 @@ export default function App() {
         )}
 
         {/* ── Main content ────────────────────────────────────── */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        {/* `main` must NOT establish its own scroll container. The app shell is
+            sized with `minHeight: 100vh` (not a fixed height), so `flex: 1` never
+            caps `main`'s height — it grows with content and the WINDOW scrolls.
+            A stray `overflow-y: auto` here therefore never engaged as a scroller,
+            but it still made `main` the nearest scroll-clipping ancestor, which
+            silently broke `position: sticky` for descendants (e.g. the Create
+            view's WizardOutputToolbar): the bar resolved its offset against a box
+            that never scrolled and so scrolled away with the page instead of
+            pinning. Dropping `overflow-y: auto` (default `visible`) keeps the
+            window as the sole scroller and lets descendant sticky bars pin. The
+            companion `scroll-padding-top` that keeps anchored / focus scrolls
+            clear of the pinned chrome lives on the real scroller (the document
+            element), set by the view that owns sticky chrome. */}
+        <main style={{ flex: 1, padding: isMobile ? `${SP.md}px ${SP.md}px ${CHROME.mainPadMobile}px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
               along with its forever-off `onboardingDiet` flag-twin: the Checklist
               + first-dossier callouts carry first-run coaching, and PostGenCoach
@@ -576,7 +595,7 @@ export default function App() {
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {/* Home is the marketing landing. First-visit gating routes new
                 visitors here; returning visitors land on /create. */}
-            {view === 'home'        && <HomeLanding isMobile={isMobile} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
+            {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
@@ -612,14 +631,15 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            P9 — restored navigation links (About / Pricing / Compendium /
-            Gallery / legal). Pricing routes to the canonical premium-value
-            surface (the same target as the header tier chip + the Realm
-            locked-state), so there is ONE "What the Realm unlocks" destination. */}
+            Pricing + Contact only; About / Compendium / Gallery already live in
+            the header nav, so the footer stays lean. Pricing routes to the
+            canonical premium-value surface (the same target as the header tier
+            chip + the Realm locked-state), so there is ONE "What the Realm
+            unlocks" destination. */}
         <footer style={{
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
-          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px ${bottomClearance(CHROME.footerPadMobile)}` : `${SP.lg}px ${SP.xxl}px`,
           textAlign: 'center',
           fontFamily: sans,
           fontSize: FS.sm,
@@ -635,25 +655,18 @@ export default function App() {
             display: 'flex', justifyContent: 'center', alignItems: 'center',
             gap: SP.md, flexWrap: 'wrap',
           }}>
-            {[
-              { label: t('footer.about'),      onClick: () => setView('howto') },
-              { label: t('footer.pricing'),    onClick: () => setView('pricing') },
-              { label: t('footer.compendium'), onClick: () => setView('compendium') },
-              { label: t('footer.gallery'),    onClick: () => setView('gallery') },
-            ].map(({ label, onClick }) => (
-              <Button
-                key={label}
-                variant="ghost"
-                size="sm"
-                onClick={onClick}
-                style={{
-                  color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
-                  letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
-                }}
-              >
-                {label}
-              </Button>
-            ))}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setView('pricing')}
+              style={{
+                color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
+                letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
+              }}
+            >
+              {t('footer.pricing')}
+            </Button>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
             <a href="mailto:clausellstokes@aol.com" style={{
               color: PARCH_100, textDecoration: 'none', display: 'inline-flex',
               alignItems: 'center', gap: 4,
@@ -688,13 +701,20 @@ export default function App() {
                   onClick={() => handleNavClick(id)}
                   aria-current={active ? 'page' : undefined}
                   style={{
-                    flex: 1, display: 'flex', flexDirection: 'column',
+                    // `minWidth: 0` lets a flex child shrink below its content
+                    // width so the longest label ('COMPENDIUM', 10px uppercase)
+                    // can ellipsis-fit at 375px instead of forcing the row wider
+                    // and clipping. Five equal columns share the row evenly.
+                    flex: 1, minWidth: 0,
+                    display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
                     // Clear the 44px touch-target floor (Apple HIG / Material).
                     // The single-line uppercase label only filled ~32px tall, so
                     // these primary nav tabs were below the floor on mobile.
                     minHeight: 44,
-                    padding: `${SP.sm + 2}px ${SP.xs}px`,
+                    // Trim the horizontal padding to 2px so the five labels get
+                    // the most width to fit before any ellipsis kicks in.
+                    padding: `${SP.sm + 2}px 2px`,
                     background: active ? GOLD_BG : 'transparent',
                     border: 'none',
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
@@ -702,10 +722,19 @@ export default function App() {
                     color: active ? GOLD : PARCH_100,
                     fontSize: FS.xxs, fontWeight: active ? 700 : 500,
                     fontFamily: sans,
-                    letterSpacing: '0.04em', textTransform: 'uppercase',
+                    // Tighter tracking than the 0.04em elsewhere: at 10px the
+                    // extra letter-spacing was the difference between fitting and
+                    // clipping the longest label.
+                    letterSpacing: '0.02em', textTransform: 'uppercase',
                   }}
                 >
-                  <span style={{ lineHeight: 1 }}>{label}</span>
+                  {/* maxWidth:100% + overflow ellipsis keeps the longest label
+                      from clipping mid-glyph: it shrinks-to-fit, then truncates
+                      with a guaranteed-readable tail rather than a hard cut. */}
+                  <span style={{
+                    lineHeight: 1, maxWidth: '100%',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>{label}</span>
                 </button>
               );
             })}
@@ -726,7 +755,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? 70 : SP.xxl, right: SP.xl, zIndex: 200,
+            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.xxl, right: SP.xl, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
@@ -790,7 +819,7 @@ export default function App() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') clearOnboardingNudge(); }}
           style={{
             position: 'fixed',
-            bottom: isMobile ? 92 : SP.xxl,
+            bottom: isMobile ? bottomClearance(CHROME.nudgeLift) : SP.xxl,
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 2000,
@@ -825,12 +854,16 @@ export default function App() {
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
 
-      {/* Active pricing moment card. Always mounted; renders null
-          when no moment is active. Bottom-right fixed-position so it
-          doesn't fight the dossier or wizard for vertical space. */}
-      <Suspense fallback={null}>
-        <PricingMomentCard />
-      </Suspense>
+      {/* Active pricing moment card. Renders null when no moment is active.
+          Bottom-right fixed-position so it doesn't fight the dossier or wizard
+          for vertical space. Suppressed on the Pricing view: an upgrade nudge
+          floating over the page that already IS the upgrade surface is
+          redundant chrome (and on mobile it stacked atop the pricing CTAs). */}
+      {view !== 'pricing' && (
+        <Suspense fallback={null}>
+          <PricingMomentCard />
+        </Suspense>
+      )}
     </>
   );
 }

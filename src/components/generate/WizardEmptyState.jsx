@@ -9,10 +9,9 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { SECOND, BORDER, CARD, INK, BODY, sans, serif_, SP, R, FS, LANDING_MAX } from '../theme.js';
+import { BORDER, CARD, INK, BODY, sans, serif_, SP, R, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
-import Button from '../primitives/Button.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 
 // Below-hero proof cards lazy-load; reserve their space with a height-matched
@@ -43,7 +42,6 @@ export function WizardEmptyState({
   showHomeHero,
   showModePicker,
   setWizardMode,
-  authTier,
   onSignIn,
   onNavigate,
 }) {
@@ -56,12 +54,18 @@ export function WizardEmptyState({
       {showHomeHero && (
         <>
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          <Suspense fallback={<ProofSkeleton height={360} />}>
-            <HomeSampleDossier />
-          </Suspense>
-          <Suspense fallback={<ProofSkeleton height={280} />}>
-            <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
-          </Suspense>
+          {/* The two anon proof cards sit side by side on wider screens and
+              stack on narrow ones (see .sf-proof-pair), so they stop doubling
+              the landing's vertical length: proof of the static dossier beside
+              proof of the living world. */}
+          <div className="sf-proof-pair">
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <HomeSampleDossier />
+            </Suspense>
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
+            </Suspense>
+          </div>
         </>
       )}
       {!showHomeHero && (
@@ -113,18 +117,6 @@ export function WizardEmptyState({
               active — ModeSelector reads `mode` as undefined. */}
           <ModeSelector mode={undefined} onModeChange={setWizardMode} />
         </section>
-      )}
-      {/* Anonymous visitors get instant generation (the hero) only; Basic and
-          Advanced are gated to signed-in users. Surface the (free) path so the
-          gate is discoverable rather than a silently-missing feature. */}
-      {!showModePicker && authTier === 'anon' && (
-        <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-          Want full control?{' '}
-          <Button variant="ghost" size="sm" onClick={onSignIn} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'underline', minHeight: 44 }}>
-            Sign in (free)
-          </Button>
-          {' '}to unlock Basic &amp; Advanced generation.
-        </div>
       )}
     </div>
   );

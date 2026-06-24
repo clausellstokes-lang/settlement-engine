@@ -41,6 +41,7 @@ import { generateFactionResponses } from './factionResponses.js';
 import { clamp01, bandFor } from '../state/bands.js';
 import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { recalculateFactionRelationships } from '../factionRelationshipUpdate.js';
+import { resolveStressorEventSeverity } from './resolveStressorEventSeverity.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
@@ -163,10 +164,18 @@ export function runEventPipeline(settlement, event, options = {}) {
     };
   }
 
+  // 1b. Resolve a DERIVED onset severity for an APPLY_STRESSOR whose DM did not
+  //     pick one: severity is a CONSEQUENCE of the BEFORE settlement's
+  //     preexisting pressure, not a dialed-in number. Stamp it ONCE here so the
+  //     mutation, the authored stateDeltas, the narrative, and (downstream) the
+  //     roaming-twin directive all read the SAME value — the crisis triple can't
+  //     drift. An explicitly-authored severity passes through untouched.
+  const resolvedEvent = resolveStressorEventSeverity(beforeSettlement, event);
+
   // 2. Mutate a cloned settlement — entity-level changes (status flips,
   //    impairments, NPC patches, propagation). mutateSettlement never
   //    mutates the input.
-  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event, now });
+  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event: resolvedEvent, now });
 
   // 3. Re-derive structural SystemState from the mutated settlement
   const afterStructural = deriveSystemState(nextSettlement);
@@ -180,7 +189,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   //    Cast: spec.stateDeltas is typed as 1-arg in the registry typedef
   //    but accepts an optional settlement parameter — every spec we
   //    have today honors it. Cast through Function to express that.
-  const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(event, beforeSettlement) || {};
+  const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(resolvedEvent, beforeSettlement) || {};
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, rawAuthoredDeltas);
 
   // 5. Re-derive CausalState from the mutated settlement (the 14-variable
@@ -199,7 +208,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   let factionRelationshipDeltas = [];
   if (!skipFactionResponses) {
     try {
-      factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, event);
+      factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, resolvedEvent);
     } catch (e) {
       warnings.push({ severity: 'soft', message: `Faction relationship calc failed: ${e?.message || e}` });
     }
@@ -210,7 +219,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   let factionResponses = [];
   if (!skipFactionResponses) {
     try {
-      factionResponses = generateFactionResponses(nextSettlement, event);
+      factionResponses = generateFactionResponses(nextSettlement, resolvedEvent);
     } catch (e) {
       warnings.push({ severity: 'soft', message: `Faction responses failed: ${e?.message || e}` });
     }
@@ -220,11 +229,14 @@ export function runEventPipeline(settlement, event, options = {}) {
   //    resolution since the event names what it intended to do.
   //    Same cast as stateDeltas: narrate accepts an optional settlement.
   const narrativeSummary = typeof spec.narrate === 'function'
-    ? /** @type {Function} */ (spec.narrate)(event, beforeSettlement)
+    ? /** @type {Function} */ (spec.narrate)(resolvedEvent, beforeSettlement)
     : '';
 
   return {
-    event,
+    // The resolved event (derived severity stamped in) is the canonical record:
+    // the store logs THIS event and recomputes the twin directive from it, so
+    // the dossier entry, the state deltas, and the roaming twin all agree.
+    event: resolvedEvent,
     beforeSettlement,
     nextSettlement,
     beforeSystemState,

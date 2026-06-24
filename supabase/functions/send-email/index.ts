@@ -34,12 +34,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { botGuard } from "../_shared/requestMeta.ts";
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+// This previously emitted "*"; the shared helper fails closed (echoes the
+// matched origin, never "*") and accepts the Cloudflare Pages preview origin.
+import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+/** Per-request CORS headers from the shared allowlist (preserves prior Allow-Headers). */
+function corsHeadersFor(req: Request): Record<string, string> {
+  return sharedCorsHeaders(req);
+}
 
 // ── Templates (kept in sync with src/lib/emailTemplates.js) ─────────────────
 const TEMPLATES: Record<string, { subject: string; text: string }> = {
@@ -264,6 +267,7 @@ async function consumeAnonRateLimit(
 }
 
 serve(async (req) => {
+  const corsHeaders = corsHeadersFor(req);
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }

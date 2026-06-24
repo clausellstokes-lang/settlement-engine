@@ -9,6 +9,7 @@
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap, shareMap, unshareMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
@@ -19,7 +20,7 @@ import {
   sans, serif_, SP, R, FS,
 } from '../theme.js';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { activeMapFilterCount, deriveTagVocabulary, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
+import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS, ownedCampaignBySlug } from './galleryMapsUtils.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 // Mirror the settlements tab's StatusMessage so the two sibling tabs render the
@@ -57,6 +58,10 @@ function MapsSkeleton() {
 }
 
 export default function GalleryMaps({ onNavigate }) {
+  // Mobile is a read + import surface for maps: the dense owner inline-editor
+  // (name/description/tags/importable/unpublish) is gated to desktop. View and
+  // Import stay live on mobile.
+  const isMobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const campaigns = useStore(s => s.campaigns);
   const renameCampaign = useStore(s => s.renameCampaign);
@@ -81,7 +86,7 @@ export default function GalleryMaps({ onNavigate }) {
   // the draft mirrors the owned campaign's authoritative local copy so the form
   // is correct before any refetch. confirmUnpublishSlug gates unpublish.
   const [editingSlug, setEditingSlug] = useState(null);
-  const [editDraft, setEditDraft] = useState({ name: '', description: '', tags: '' });
+  const [editDraft, setEditDraft] = useState({ name: '', description: '', tags: '', importable: false });
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState(null);
   const [confirmUnpublishSlug, setConfirmUnpublishSlug] = useState(null);
@@ -89,7 +94,7 @@ export default function GalleryMaps({ onNavigate }) {
   // Filter/search/sort state. Narrowing runs SERVER-SIDE now (list_gallery_maps,
   // migration 065): a change refetches with the active facets. Search is debounced
   // so each keystroke doesn't hit the RPC.
-  const [filters, setFilters] = useState({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+  const [filters, setFilters] = useState(emptyMapFilters);
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [sort, setSort] = useState('newest');
@@ -105,7 +110,7 @@ export default function GalleryMaps({ onNavigate }) {
     setFilters(prev => ({ ...prev, [key]: !!value }));
   }, []);
   const clearFilters = useCallback(() => {
-    setFilters({ kind: [], backdrop: [], tags: [], hasSettlements: false });
+    setFilters(emptyMapFilters());
     setSearch('');
   }, []);
 
@@ -177,8 +182,10 @@ export default function GalleryMaps({ onNavigate }) {
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
   // Open the inline editor for an owned tile, seeding the draft from the owned
-  // campaign's authoritative local copy (correct before any server refetch).
-  const openEditor = useCallback((slug) => {
+  // campaign's authoritative local copy (correct before any server refetch). The
+  // import opt-in isn't on the local campaign, so it seeds from the tile's
+  // server-projected `importable` (list_gallery_maps, migration 072).
+  const openEditor = useCallback((slug, seedImportable = false) => {
     const owned = ownedBySlug.get(slug);
     if (!owned) return;
     setEditError(null);
@@ -186,6 +193,7 @@ export default function GalleryMaps({ onNavigate }) {
       name: owned.name || '',
       description: owned.galleryDescription || '',
       tags: Array.isArray(owned.galleryTags) ? owned.galleryTags.join(', ') : '',
+      importable: seedImportable === true,
     });
     setEditingSlug(slug);
   }, [ownedBySlug]);
@@ -210,6 +218,7 @@ export default function GalleryMaps({ onNavigate }) {
         kind: owned.shareKind || 'map',
         description: editDraft.description,
         tags: String(editDraft.tags || '').split(',').map(t => t.trim()).filter(Boolean),
+        importable: editDraft.importable === true,
       });
       await refreshMaps();
       setEditingSlug(null);
@@ -272,6 +281,9 @@ export default function GalleryMaps({ onNavigate }) {
         const d = detail || {};
         const img = d.backdrop?.customBackdrop?.imageUrl || d.mapState?.customBackdrop?.imageUrl || null;
         const memberList = Array.isArray(d.members) ? d.members : [];
+        // get_gallery_map (the preview RPC) doesn't project the import opt-in, so
+        // read it from the tile that opened this preview (list_gallery_maps does).
+        const viewingImportable = (items.find(x => x.slug === viewingSlug) || {}).importable === true;
         return (
           <div>
             <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} icon={<ChevronLeft size={14} />} style={{ marginBottom: SP.md }}>Back to maps</Button>
@@ -301,11 +313,17 @@ export default function GalleryMaps({ onNavigate }) {
                       </div>
                     </div>
                   )}
-                  <Button variant="primary" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
-                    title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
-                    style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
-                    {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
-                  </Button>
+                  {viewingImportable ? (
+                    <Button variant="primary" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
+                      title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
+                      style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
+                      {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
+                    </Button>
+                  ) : (
+                    <div style={{ alignSelf: 'flex-start', marginTop: SP.xs, fontSize: FS.sm, color: BODY, fontFamily: sans, fontWeight: 700 }}>
+                      The owner shared this map as view-only — importing isn't available.
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -412,8 +430,11 @@ export default function GalleryMaps({ onNavigate }) {
               <div style={{ flex: 1 }} />
 
               {/* Owner inline editor — description, tags, and an optional rename.
-                  Mirrors the tile tokens; keyed entirely on the owned campaign. */}
-              {isEditing && owned && (
+                  Mirrors the tile tokens; keyed entirely on the owned campaign.
+                  Desktop only: this is a full authoring form that does not belong
+                  in a ~220px tile on a phone, so mobile shows a "manage on
+                  desktop" note in its place (below) and never opens it. */}
+              {!isMobile && isEditing && owned && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.sm, marginTop: SP.xs, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
                   {editError && (
                     <div role="alert" style={{ fontSize: FS.xs, color: RED, fontFamily: sans, fontWeight: 850 }}>{editError}</div>
@@ -453,6 +474,21 @@ export default function GalleryMaps({ onNavigate }) {
                     />
                     <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>Separate tags with commas.</span>
                   </label>
+                  {/* Owner opt-in: let other DMs import (clone) this map. Off by
+                      default (saved_maps.gallery_importable, migration 072). */}
+                  <label htmlFor={`gallery-edit-importable-${m.slug}`} style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, cursor: 'pointer' }}>
+                    <input
+                      id={`gallery-edit-importable-${m.slug}`}
+                      type="checkbox"
+                      aria-label="Allow others to import this map"
+                      checked={editDraft.importable === true}
+                      onChange={e => setEditDraft(d => ({ ...d, importable: e.target.checked }))}
+                      style={{ marginTop: 2, flexShrink: 0 }}
+                    />
+                    <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700, lineHeight: 1.4 }}>
+                      <strong style={{ color: INK }}>Allow others to import this map</strong>. Other DMs can clone it{owned.shareKind === 'map_with_campaign' ? ' and its public-safe settlements' : ''} into their own library. Off by default.
+                    </span>
+                  </label>
                   <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
                     <Button variant="primary" size="sm" busy={editSaving} onClick={() => handleSaveEdit(m.slug)}>Save</Button>
                     <Button variant="ghost" size="sm" onClick={closeEditor}>Cancel</Button>
@@ -462,31 +498,57 @@ export default function GalleryMaps({ onNavigate }) {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs }}>
+              {/* On mobile the buttons floor at 44px, so let the row wrap rather
+                  than crowd View + Import + the desktop note onto one tight line.
+                  Desktop keeps its single nowrap row (byte-identical). */}
+              <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs, ...(isMobile ? { flexWrap: 'wrap', alignItems: 'center' } : null) }}>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setViewingSlug(m.slug)}
                   title="Preview this map (and its settlements) before importing"
                 >View</Button>
-                {canEdit && !isEditing && (
+                {canEdit && !isMobile && !isEditing && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => openEditor(m.slug)}
+                    onClick={() => openEditor(m.slug, m.importable === true)}
                     title="Edit this map's gallery details"
                   >Edit</Button>
                 )}
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => handleImport(m.slug, m.kind)}
-                  busy={importingSlug === m.slug}
-                  title={isPremium ? 'Import this map into a new campaign' : 'Importing maps is a premium feature'}
-                  style={{ flex: 1 }}
-                >
-                  {importingSlug === m.slug ? 'Importing…' : (isPremium ? 'Import' : 'Import (premium)')}
-                </Button>
+                {/* Mobile owners keep View + Import; managing the listing
+                    (rename/description/tags/importable/unpublish) is a desktop
+                    task. A calm inline note stands in for the Edit button. */}
+                {canEdit && isMobile && (
+                  <span
+                    title="Edit this map's gallery listing on a larger screen."
+                    style={{ alignSelf: 'center', fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700 }}
+                  >
+                    Manage on desktop
+                  </span>
+                )}
+                {/* Import is offered only when the owner opted in (migration 072);
+                    otherwise the map is view-only. No dead-end button (P9) — the
+                    slot shows the status, and the View button still previews it. */}
+                {m.importable ? (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => handleImport(m.slug, m.kind)}
+                    busy={importingSlug === m.slug}
+                    title={isPremium ? 'Import this map into a new campaign' : 'Importing maps is a premium feature'}
+                    style={{ flex: 1 }}
+                  >
+                    {importingSlug === m.slug ? 'Importing…' : (isPremium ? 'Import' : 'Import (premium)')}
+                  </Button>
+                ) : (
+                  <span
+                    title="The owner shared this map as view-only — importing isn't available."
+                    style={{ flex: 1, alignSelf: 'center', textAlign: 'center', fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 700 }}
+                  >
+                    View-only
+                  </span>
+                )}
               </div>
             </div>
           </div>

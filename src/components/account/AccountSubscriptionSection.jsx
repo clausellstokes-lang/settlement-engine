@@ -26,6 +26,7 @@ import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 // Founder Lifetime tile, audience-gated to worldbuilder behavior.
 // Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -52,6 +53,10 @@ export default function AccountSubscriptionSection({
   // conviction offer is the higher-intent action, so it keeps the primary and
   // the generic CTA drops to secondary — exactly one focal click survives.
   const founderTileShowing = useFounderTileEligible();
+  // Mobile raises the credit-pack tile basis floor so a wrapped tile keeps a
+  // usable width for its multi-line copy (credits / price / per-each) instead of
+  // collapsing toward ~110px. Desktop keeps the 110px basis byte-identical.
+  const isMobile = useIsMobile();
   return (
     <Section title={t('account.subscriptionHeading')} tone="feature">
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
@@ -257,7 +262,7 @@ export default function AccountSubscriptionSection({
                   busy={purchasing === key}
                   aria-label={ariaLabel}
                   style={{
-                    flex: '1 1 110px', flexDirection: 'column', gap: SP.xs,
+                    flex: isMobile ? '1 1 140px' : '1 1 110px', flexDirection: 'column', gap: SP.xs,
                     padding: `${SP.md}px ${SP.sm}px`, position: 'relative',
                     whiteSpace: 'normal',
                   }}

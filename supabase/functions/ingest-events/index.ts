@@ -2,6 +2,8 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { EVENTS, EVENT_CLASS, EVENT_NAME_RE, EDIT_KINDS } from '../_shared/analyticsEventsBundle.js';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 /**
  * ingest-events — first-party analytics sink (docs/simulation-intelligence-layer.md §5).
@@ -23,23 +25,11 @@ const RESEARCH_NAMES = new Set(
 );
 const KNOWN_EDIT_KINDS = new Set(EDIT_KINDS);
 
+// CORS: fail-closed via the shared allowlist (_shared/cors.ts). Previously this
+// emitted '*' on a missing Origin; the shared helper pins to the first allowed
+// host instead and accepts the Cloudflare Pages preview origin. POST/OPTIONS.
 function corsHeaders(req: Request) {
-  const allowed = [
-    Deno.env.get('CLIENT_URL') || '',
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req.headers.get('Origin') || '';
-  const accepted = !origin || allowed.includes(origin);
-  return {
-    'Access-Control-Allow-Origin': accepted ? (origin || '*') : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(accepted ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 function json(payload: unknown, status: number, headers: Record<string, string>) {

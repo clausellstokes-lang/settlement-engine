@@ -28,10 +28,12 @@ import {
   serif_,
 } from '../theme.js';
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier, stabilityBand } from './galleryUtils.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import BandPill from '../primitives/BandPill.jsx';
 import Button from '../primitives/Button.jsx';
+import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
@@ -73,6 +75,10 @@ export default function GalleryDetail({
   auth,
   onNavigate,
 }) {
+  // Mobile is a read + light-act surface for a gallery dossier: the public
+  // view, Import, Vote, Share, and Report stay live, but the owner's
+  // ShareToGallery listing-editor (a full authoring form) defers to desktop.
+  const isMobile = useIsMobile();
   const [shared, setShared] = React.useState(false);
   const onShare = async () => {
     const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
@@ -134,30 +140,43 @@ export default function GalleryDetail({
           <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
             This is your published settlement. Edit the listing details (image, description, tags, DM-private visibility) or remove it from the gallery. The public dossier always reflects your current saved settlement.
           </p>
-          <ShareToGallery
-            saveId={ownedSave.id}
-            isPublic={ownedSave.is_public}
-            publicSlug={ownedSave.public_slug}
-            campaignState={ownedSave.campaignState}
-            settlement={ownedSave.settlement}
-            galleryDescription={ownedSave.gallery_description}
-            galleryImageUrl={ownedSave.gallery_image_url}
-            galleryImageAlt={ownedSave.gallery_image_alt}
-            galleryTags={ownedSave.gallery_tags}
-            galleryShareNarrated={ownedSave.gallery_share_narrated}
-            galleryShareDm={ownedSave.gallery_share_dm}
-            galleryImportable={ownedSave.gallery_importable}
-            // Re-fetch the dossier in place after a save so the public view
-            // reflects the new narrated / DM-visibility choices — WITHOUT a full
-            // page reload (which would land on a fresh gallery URL where saves
-            // aren't hydrated, dropping this very card until you navigate away).
-            onSaved={() => { if (dossier?.slug) onOpen?.(dossier.slug, { replace: true }); }}
-          />
+          {/* The listing editor (image crop, description, tags, visibility) is a
+              full authoring form, so on mobile it defers to desktop. The public
+              dossier below stays fully readable, and Vote/Share/Report stay
+              live, so a mobile owner can still read and act on their listing. */}
+          {isMobile ? (
+            <DesktopOnlyGate
+              title="Edit your listing on a larger screen"
+              message="The listing editor (cover image, description, tags, and visibility) has room to work on desktop. Open this dossier there to change how your settlement appears in the gallery."
+            />
+          ) : (
+            <ShareToGallery
+              saveId={ownedSave.id}
+              isPublic={ownedSave.is_public}
+              publicSlug={ownedSave.public_slug}
+              campaignState={ownedSave.campaignState}
+              settlement={ownedSave.settlement}
+              galleryDescription={ownedSave.gallery_description}
+              galleryImageUrl={ownedSave.gallery_image_url}
+              galleryImageAlt={ownedSave.gallery_image_alt}
+              galleryTags={ownedSave.gallery_tags}
+              galleryShareNarrated={ownedSave.gallery_share_narrated}
+              galleryShareDm={ownedSave.gallery_share_dm}
+              galleryImportable={ownedSave.gallery_importable}
+              // Re-fetch the dossier in place after a save so the public view
+              // reflects the new narrated / DM-visibility choices — WITHOUT a full
+              // page reload (which would land on a fresh gallery URL where saves
+              // aren't hydrated, dropping this very card until you navigate away).
+              onSaved={() => { if (dossier?.slug) onOpen?.(dossier.slug, { replace: true }); }}
+            />
+          )}
         </div>
       )}
       <article style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD }}>
         <div className="gallery-detail-hero" style={{ display: 'grid', gap: 0 }}>
-          <GalleryImage item={dossier} height={310} />
+          {/* On a phone a 310px hero pushes the title below the fold; trim it so
+              the name and meta sit in the first viewport. Desktop keeps 310. */}
+          <GalleryImage item={dossier} height={isMobile ? 200 : 310} />
           <div style={{ padding: SP.xl, display: 'grid', gap: SP.md, alignContent: 'center' }}>
             <h1 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['36'], lineHeight: 1.05, fontWeight: 750 }}>
               {dossier.name || dossier.settlement?.name || t('gallery.untitled')}

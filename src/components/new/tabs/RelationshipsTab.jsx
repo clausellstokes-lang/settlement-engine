@@ -7,10 +7,50 @@ import Button from '../../primitives/Button.jsx';
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
 import { relColor } from '../../settlements/relationshipColors.js';
+import EntityLink from '../../primitives/EntityLink.jsx';
+import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
+import { factionIdFromName } from '../../../lib/entities.js';
+
+/**
+ * Resolve a LOCAL NPC's display name to its stable index id (rename-safe).
+ * Returns null for a name absent from the index (a foreign-settlement
+ * contact), so the caller renders plain text rather than a dead link.
+ *
+ * @param {object|null} index  buildDossierEntityIndex result (or null).
+ * @param {string} name        The NPC's stated name.
+ * @returns {string|null}
+ */
+function localNpcId(index, name) {
+  if (!index || !name) return null;
+  const key = String(name).trim().toLowerCase();
+  if (!key) return null;
+  const hit = (index.npcs || []).find(n => String(n.currentName || '').trim().toLowerCase() === key);
+  return hit ? hit.id : null;
+}
+
+/**
+ * Resolve a LOCAL faction name to its index id (the canonical
+ * factionIdFromName, the same id its Power card focuses on) — but only when
+ * that faction is actually present in the index. A faction belonging to the
+ * partner settlement is absent here and resolves to null -> plain text.
+ *
+ * @param {object|null} index  buildDossierEntityIndex result (or null).
+ * @param {string} name        The faction's stated name.
+ * @returns {string|null}
+ */
+function localFactionId(index, name) {
+  if (!index || !name) return null;
+  const id = factionIdFromName(name);
+  return id && index.resolve?.(id) ? id : null;
+}
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
+  // Dossier entity index — cross-links the LOCAL parties (this settlement's
+  // NPCs / factions) in each row to their cards. Foreign-settlement parties
+  // are absent from the index and degrade to plain text.
+  const { index } = useDossierEntities();
   // Conflicts: from saved links + live-generated for unsaved settlements.
   // NOTE: this hook must come BEFORE any early return so React's hooks-
   // order invariant holds across renders. Previously `useMemo` followed
@@ -136,9 +176,10 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {npcContacts.map((isr,i)=>{
             const c=relColor(isr.relType);
+            const lid=localNpcId(index,isr.npcName);
             return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{lid?<EntityLink id={lid} type="npc" fallback={isr.npcName} style={{fontSize:'inherit',fontWeight:700}}/>:isr.npcName}</span>
                 {isr.npcRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.npcRole})</span>}
                 <span style={{fontSize:FS.xs,color:MUTED,margin:'0 2px'}}>↔</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:c}}>{isr.partnerName}</span>
@@ -165,14 +206,18 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
           {crossConflicts.map((c,i)=>{
             const isFaction = c.type==='faction_engagement';
             const col = relColor(c.relType);
+            // The first party is LOCAL (this settlement) -> link to its card.
+            // The partner side lives in c.partnerSettlement -> plain text.
+            const facId = isFaction ? localFactionId(index,c.factionName) : null;
+            const npcId = isFaction ? null : localNpcId(index,c.npcName);
             return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,borderRadius:7,padding:'10px 14px',background:`${col}06`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction
-                  ? <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.factionName}</span>
+                  ? <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{facId?<EntityLink id={facId} type="faction" fallback={c.factionName} style={{fontSize:'inherit',fontWeight:700}}/>:c.factionName}</span>
                       <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerFactionName}</span>
                       <span style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic'}}>({c.partnerSettlement})</span></>
-                  : <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.npcName}</span>
+                  : <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{npcId?<EntityLink id={npcId} type="npc" fallback={c.npcName} style={{fontSize:'inherit',fontWeight:700}}/>:c.npcName}</span>
                       <span style={{fontSize:FS.xs,color:MUTED}}>({c.npcRole})</span>
                       <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
@@ -227,10 +272,14 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         {/* Relationship cards */}
         {filteredRels.map((rel,i)=><NPCRelCard2 key={`rel_${i}`} rel={rel} style={styleFor(rel.type)}/>)}
         {/* Cross-settlement connections */}
-        {crossConns.map((conn,i)=>(
+        {crossConns.map((conn,i)=>{
+          // primaryNPCName is LOCAL -> link to its card; neighbourNPCName is a
+          // foreign-settlement contact -> plain text.
+          const _lid=localNpcId(index,conn.primaryNPCName);
+          return (
           <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{conn.primaryNPCName}</span>
+              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{_lid?<EntityLink id={_lid} type="npc" fallback={conn.primaryNPCName} style={{fontSize:'inherit',fontWeight:700}}/>:conn.primaryNPCName}</span>
               {conn.primaryNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
               <span style={{fontSize:FS.xs,color:MUTED,margin:'0 4px'}}>↔</span>
               <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.info}}>{conn.neighbourNPCName||'Unknown'}</span>
@@ -239,7 +288,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
             </div>
             {conn.description&&<div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
           </div>
-        ))}
+        );})}
       </Section>}
 
       {/* Faction Groups */}

@@ -11,6 +11,7 @@ import { isCampaignActive } from '../../lib/campaigns.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
@@ -24,6 +25,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     const match = (settlements || []).find(sv => String(sv?.id) === String(id));
     return match?.name || match?.settlement?.name || String(id);
   };
+  const isMobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -76,8 +78,11 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // poke outside the rounded outer border.
   return (
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
-      {/* Campaign header */}
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
+      {/* Campaign header. On mobile the row wraps (flexWrap) so the campaign name
+          isn't crushed by the four trailing controls (Advance Time / PDF /
+          Rename / Delete); the name claims a full-width line and the control
+          cluster reflows below it. Desktop keeps the single non-wrapping row. */}
+      <div style={{ display:'flex', alignItems:'center', gap:8, flexWrap: isMobile ? 'wrap' : undefined, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <IconButton Icon={collapsed ? ChevronRight : ChevronDown} label={collapsed ? 'Expand campaign' : 'Collapse campaign'} onClick={() => toggleCollapsed(campaign.id)} tone="ghost" size="md"/>
         {editing ? (
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
@@ -89,7 +94,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
             <IconButton Icon={X} label="Cancel rename" onClick={() => setEditing(false)} tone="danger" size="sm"/>
           </div>
         ) : (
-          <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
+          <span style={{ flex:1, minWidth: isMobile ? '60%' : undefined, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
         <span style={{ fontSize:FS.xs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
         {campaign.mapState && <span style={{ fontSize:FS.xs, fontWeight:700, color:GOLD_TXT, fontFamily:sans }}>Map saved</span>}

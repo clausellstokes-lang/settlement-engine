@@ -213,6 +213,44 @@ export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   return { from: String(sourceId), to: String(targetId), relationshipType: rawType };
 }
 
+// Asymmetric roles → a directional phrase template. The neighbour name fills the
+// {neighbour} slot so "overlord" reads as "Overlord of Thornmere" and its inverse
+// "Vassal to Ironhold". The symmetric relationships ('allied', 'hostile', ...) carry
+// no direction and are intentionally absent here — they fall through to the plain
+// titled label so nothing about their phrasing changes.
+/** @type {Readonly<Record<string, (n: string) => string>>} */
+const DIRECTIONAL_ROLE_PHRASES = Object.freeze({
+  overlord: n => `Overlord of ${n}`,
+  vassal: n => `Vassal to ${n}`,
+  patron: n => `Patron of ${n}`,
+  client: n => `Client of ${n}`,
+});
+
+/**
+ * Render the directional label for a neighbour link, naming WHICH SIDE this
+ * settlement is for the two asymmetric pairs (overlord/vassal, patron/client).
+ *
+ * The direction is read off the link's per-side role
+ * (`localRelationshipRole`, with `displayRelationshipType` as the legacy
+ * fallback), which the link composer already stamps from the canonical
+ * `sourceRole`/`targetRole`. A symmetric relationship, an unknown role, or a
+ * legacy row with neither field present returns null so the caller keeps its
+ * existing non-directional label (no regression).
+ *
+ * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string }} link
+ *   the neighbourNetwork entry.
+ * @param {string} [neighbourName] the linked settlement's name (fills the slot).
+ * @returns {string|null} e.g. "Overlord of Thornmere", or null when not directional.
+ */
+export function directionalRelationshipLabel(link, neighbourName) {
+  const role = String(link?.localRelationshipRole || link?.displayRelationshipType || '').toLowerCase();
+  const phrase = DIRECTIONAL_ROLE_PHRASES[role];
+  if (!phrase) return null;
+  const name = String(neighbourName || '').trim();
+  if (!name) return null;
+  return phrase(name);
+}
+
 export function localPropagationType(link) {
   const role = link?.localRelationshipRole || link?.displayRelationshipType;
   if (role === 'client') return 'patron';

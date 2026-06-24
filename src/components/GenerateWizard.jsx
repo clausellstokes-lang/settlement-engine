@@ -21,7 +21,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER } from './theme.js';
+import { MUTED, SECOND, sans, serif_, SP, R, FS, swatch, PAGE_MAX, DANGER_BORDER, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -115,6 +115,30 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       prevSettlementRef.current = settlement;
     }
   }, [settlement]);
+
+  // ── Scroll-padding so the pinned chrome never hides a dossier control ──
+  // While the dossier is on screen, two stacked sticky bars pin to the top of
+  // the window scroller: the app header (top:0, ~59px) and the WizardOutputToolbar
+  // (top:60, ~64px tall → bottom ~124px). A focus move or anchored scroll into a
+  // dossier section would otherwise land the target flush under that chrome,
+  // hiding the very control the user jumped to (the Overview/DM Summary/Plot
+  // Hooks tabs, card headers). `scroll-padding-top` on the real scroller (the
+  // document element — `main` is no longer a scroll container) reserves the
+  // chrome's height so those scrolls stop just below it. On mobile the slim app
+  // header (CHROME.headerMobile) and the WizardOutputToolbar (CHROME.toolbarHeight)
+  // now STACK — the toolbar pins at the header's height rather than tucking under
+  // it — so a focus/anchor scroll must clear BOTH bars, not just the header.
+  // Scoped to the visible-dossier window and fully reverted on teardown so other
+  // views keep the default scroll behaviour.
+  const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
+  useEffect(() => {
+    if (!dossierVisible || typeof document === 'undefined') return undefined;
+    const root = document.documentElement;
+    const prev = root.style.scrollPaddingTop;
+    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
+    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    return () => { root.style.scrollPaddingTop = prev; };
+  }, [dossierVisible, isMobile]);
 
   // Analytics: the linear step wizard collapsed into the layered Create panel
   // (UX overhaul Phase 6). LayeredConfigurationPanel now fires wizard_step_viewed
@@ -294,7 +318,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         showModePicker={showModePicker}
         isMobile={isMobile}
         setWizardMode={setWizardMode}
-        authTier={authTier}
         onSignIn={onSignIn}
         onNavigate={onNavigate}
       />
@@ -431,13 +454,24 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           the overlay dismissing on top of it. */}
       {settlement && showOutput && !pipelineRevealActive && (
         <>
-          {/* ── Back navigation toolbar ──────────────────────────── */}
+          {/* ── Back navigation toolbar ──────────────────────────────────
+              Capped to the same PAGE_MAX column the dossier body uses below.
+              Previously the toolbar rendered full <main> width while the
+              dossier was centred at PAGE_MAX, so on wide screens the dark
+              sticky bar overhung the dossier on both sides and read as a bar
+              sitting over the content. The cap is applied to the toolbar's
+              OWN box (via maxWidth) rather than a wrapper div: the toolbar is
+              position:sticky, so a height-collapsed wrapper would become its
+              containing block and rob it of its sticky travel. Kept a direct
+              child of the tall outer column so it stays pinned through the
+              full dossier scroll. */}
           <WizardOutputToolbar
             settlement={settlement}
             isMobile={isMobile}
             handleBack={handleBack}
             handleGenerate={handleGenerate}
             handleNewSettlement={handleNewSettlement}
+            maxWidth={PAGE_MAX}
           />
 
           <Suspense fallback={
@@ -454,7 +488,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           }>
             {/* Cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
-                toolbar above stays full-width. */}
+                toolbar above shares the same PAGE_MAX column. */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               <OutputContainer hideHeader />
             </div>

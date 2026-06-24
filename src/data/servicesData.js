@@ -70,30 +70,6 @@ export const LOCALE_SERVICE_OVERRIDES = {
 // ── Goods by tier ─────────────────────────────────────────────────────────────
 // tier → [{name, category, defaultEnabled, baseChance, desc}]
 
-// ── Commodity category map ────────────────────────────────────────────────────
-export const COMMODITY_CATEGORY_MAP = {
-  fish: "fish",
-  salt: "salt",
-  salt_flat: "salt",
-  iron: "iron",
-  metalwork: "iron",
-  stone: "stone",
-  pottery: "stone",
-  timber: "timber",
-  grain: "grain",
-  flour: "grain",
-  livestock: "grain",
-  dairy: "grain",
-  wool: "grain",
-  furs: "timber",
-  honey: "herbs",
-  medicinal_herbs: "herbs",
-  herbs: "herbs",
-  peat: "fuel",
-  coal: "fuel",
-  luxury: "gems",
-  gems: "gems",
-  processed_textiles: "cloth",
-  maritime_access: null,
-  trade_access: null,
-};
+// (Removed: a dead, unused COMMODITY_CATEGORY_MAP duplicate. The live map is
+//  exported from tradeGoodsData.js and consumed by economicGenerator; this copy
+//  had no importers and no internal use.)

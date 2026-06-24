@@ -6,6 +6,9 @@
  *   - the active-siege count           (liveSieges)
  *   - the dominant-faith pill          (top pantheon tier, by seats)
  *   - the Wizard-News recency          (latest entry tick vs current tick)
+ *   - the pending-propagation cue      (Phase 4b — committed member changes
+ *                                        whose regional ripple is waiting for
+ *                                        the next Advance to take effect)
  *
  * SELF-HIDES WHEN DORMANT: returns NULL when the campaign world is not canonized
  * (no `worldState.canonizedAt`). A dormant campaign folder is byte-identical to
@@ -66,6 +69,26 @@ function deityNameOf(settlements, deityId) {
   return tail.charAt(0).toUpperCase() + tail.slice(1);
 }
 
+/**
+ * Phase 4b — how many DISTINCT member settlements have a committed-but-not-yet-
+ * propagated change waiting for the next Advance. Counted off the deferred
+ * impacts' source settlement (each impact carries the settlement whose edit
+ * produced it), mirroring the store's pendingPropagationCount selector so the
+ * cue and the selector never disagree. Zero ⇒ the cue self-hides.
+ * @param {any} worldState
+ * @returns {number}
+ */
+export function pendingPropagationSettlements(worldState) {
+  const deferred = worldState?.deferredImpacts;
+  if (!Array.isArray(deferred) || deferred.length === 0) return 0;
+  const sources = new Set();
+  for (const impact of deferred) {
+    const src = impact?.sourceSettlementId ?? impact?.originSettlementId ?? impact?.source ?? null;
+    sources.add(src != null ? String(src) : `impact:${impact?.id}`);
+  }
+  return sources.size;
+}
+
 /** The in-world clock label from the worldState calendar + tick. */
 function clockLabel(worldState) {
   const cal = worldState?.calendar || {};
@@ -97,6 +120,9 @@ export default function RealmStrip({ campaign, settlements = [] }) {
     ? Math.max(...news.entries.map(e => Number(e?.tick) || 0))
     : null;
   const newsAge = latestEntryTick != null ? Math.max(0, (Number(news?.currentTick) || tick) - latestEntryTick) : null;
+
+  // Phase 4b — committed member changes whose regional ripple awaits the Advance.
+  const pendingPropagation = pendingPropagationSettlements(worldState);
 
   return (
     <div
@@ -130,6 +156,15 @@ export default function RealmStrip({ campaign, settlements = [] }) {
           <span style={{ color: BODY }}>
             {newsAge === 0 ? 'News this month' : `News ${newsAge} month${newsAge === 1 ? '' : 's'} ago`}
           </span>
+        </Seg>
+      )}
+
+      {pendingPropagation > 0 && (
+        <Seg title="Committed member changes whose regional effects apply on the next Advance.">
+          <span data-testid="pending-propagation-cue" style={{ color: GOLD_TXT, fontWeight: 700 }}>
+            {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} waiting to propagate
+          </span>
+          <span style={{ color: BODY }}> – advance to apply</span>
         </Seg>
       )}
     </div>

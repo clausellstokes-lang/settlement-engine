@@ -8,7 +8,7 @@
  */
 
 import { ArrowLeft } from 'lucide-react';
-import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS, CHROME } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import SimulationDrawer from '../dossier/SimulationDrawer.jsx';
 
@@ -18,6 +18,7 @@ export function WizardOutputToolbar({
   handleBack,
   handleGenerate,
   handleNewSettlement,
+  maxWidth,
 }) {
   return (
     <div style={{
@@ -26,7 +27,23 @@ export function WizardOutputToolbar({
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
       borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-      position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
+      // Cap the toolbar to the dossier's column and centre it, so on wide
+      // screens its edges align to the PAGE_MAX dossier below instead of
+      // overhanging full <main> width. Applied to the toolbar's OWN box —
+      // it must NOT be wrapped in a height-collapsed parent, or it would lose
+      // its sticky containing block and scroll away with the dossier.
+      maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
+      // Pin below the sticky app header (z:50). The desktop offset clears the
+      // full header so the toolbar's top edge and shadow are not tucked under it.
+      // On mobile the header is slim (CHROME.headerMobile) and also sticky at
+      // top:0; pinning this bar at the header's height stacks the two cleanly
+      // instead of letting the toolbar slide UNDER the header (so the dossier
+      // name and Back/Regenerate stay visible while scrolling). zIndex 40 keeps
+      // the bar above the dossier but below the header, so the header always wins
+      // the overlap. This sticky only pins because the app's <main> no longer
+      // establishes a (dead) scroll container — see the note in App.jsx; the
+      // window is the scroller.
+      position: 'sticky', top: isMobile ? CHROME.headerMobile : 60, zIndex: 40,
     }}>
       {/* Back is a subordinate nav/reset that discards the just-earned draft — it
           must not out-shout the dossier or Save (P8). Demoted to the same
@@ -59,8 +76,15 @@ export function WizardOutputToolbar({
           here; it was removed in favour of the single canonical
           SaveToLibraryButton below the dossier, since two saves pointing at the
           same outcome confused users.) Save stays the one primary; everything
-          here is a quiet secondary. Wraps below the name on narrow widths. */}
-      <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          here is a quiet secondary. On desktop it sits to the right of the name;
+          on mobile, where the name takes its own wrapped row, the cluster
+          left-aligns and may grow full-width so the three controls read as a calm
+          row under the name rather than crowding the right edge. */}
+      <div style={{
+        display: 'flex', gap: SP.xs, flexWrap: 'wrap',
+        justifyContent: isMobile ? 'flex-start' : 'flex-end',
+        ...(isMobile ? { flex: '1 1 100%' } : null),
+      }}>
         {/* "How this was simulated" — the metadata drawer trigger, hoisted from
             the dossier action band so the utility controls cluster together. */}
         <SimulationDrawer variant="toolbar" />

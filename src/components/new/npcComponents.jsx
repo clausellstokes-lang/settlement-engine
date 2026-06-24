@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
+import EntityLink from '../primitives/EntityLink.jsx';
 import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
-import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../lib/entities.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -18,8 +20,17 @@ function npcPinKey(npc) {
   return null;
 }
 
+/** Stable id used to focus an NPC. Matches the index entry id (entityIdFor). */
+function npcFocusId(npc) {
+  return npc ? entityIdFor('npc', npc) : null;
+}
+
 export function NPCCategoryGroup({category, label, group, impFilter, search, relationships=[], pinnedIds, onTogglePin}) {
   const [open, setOpen] = useState(true);
+  // A faction group defaults open, but if a hyperlink focuses an NPC that lives
+  // in a group the user manually collapsed, re-open it so the target card is
+  // reachable. Additive: focus only forces open, never forces closed.
+  const focusedEntity = useStore(s => s.focusedEntity);
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
   const filtered = group.filter(npc => {
@@ -32,6 +43,15 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
     }
     return true;
   });
+  // Open this group when a hyperlink focuses an NPC it contains. Keyed on the
+  // focus `ts` so re-clicking the same link re-fires. Runs before the
+  // empty-group early return to keep hooks order stable.
+  const containsFocused = !!focusedEntity?.id
+    && group.some(npc => npcFocusId(npc) === focusedEntity.id);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    if (containsFocused) setOpen(true);
+  }, [focusedEntity?.ts, containsFocused]);
   if (!filtered.length) return null;
   // Sort: high first, then moderate, then low, then by power
   const sorted = [...filtered].sort((a,b) => {
@@ -133,6 +153,23 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
     if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
   };
   const [open, setOpen] = useState(false);
+
+  // Dossier hyperlink focus. When a link navigates to THIS npc, force the card
+  // open and scroll it into view. The card scrolls itself (from its own mount
+  // effect) rather than relying on the navigator's timeout, so it lands even on
+  // a freshly-mounted lazy tab. Focus only forces OPEN — the user's manual
+  // collapse afterward still works. Keyed on focus `ts` so a repeat click of
+  // the same link re-fires.
+  const focusedEntity = useStore(s => s.focusedEntity);
+  const cardRef = useRef(null);
+  const isFocused = !!focusedEntity?.id && focusedEntity.id === npcFocusId(npc);
+  useEffect(() => {
+    if (!isFocused) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setOpen(true);
+    cardRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }, [focusedEntity?.ts, isFocused]);
+
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
@@ -149,7 +186,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
   return (
-    <div id={entityAnchor('npc', npc)} style={{
+    <div ref={cardRef} id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
       border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
       borderLeft:`3px solid ${isPinned ? pinColor : color}`,
@@ -164,7 +201,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
             <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}{npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}</div>
+          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}</div>
         </div>
         {pinAvailable && (
           <span
@@ -195,6 +232,19 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
         )}
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
+      {/* Faction affiliation — an in-dossier cross-link to the faction's Power
+          card. Rendered OUTSIDE the toggle button (a link inside a button is
+          invalid + would swallow the toggle). EntityLink degrades to plain text
+          when the faction is absent from the index or the Power tab is gated. */}
+      {npc.factionAffiliation && (
+        <div style={{padding:'0 12px 6px 12px',fontSize:FS.xs,color:swatch.inkMag3,marginTop:-2}}>
+          <EntityLink
+            id={factionIdFromName(npc.factionAffiliation)}
+            type="faction"
+            fallback={npc.factionAffiliation}
+          />
+        </div>
+      )}
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
           {publicTraits.length > 0 && (

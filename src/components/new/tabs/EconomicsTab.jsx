@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, BODY, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
@@ -10,6 +10,9 @@ import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance } from '../../../domain/display/dossierViewModel.js';
 import { EconomicsGranarySection } from '../../dossier/EngineSections.jsx';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
+import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
+import { institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
@@ -35,9 +38,10 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  * with normal hook scoping.
  *
  * Props are the slices of eco that the section actually consumes — keeps
- * the prop surface narrow and the component cheap to memoize.
+ * the prop surface narrow and the component cheap to memoize. `index` is the
+ * live dossier entity index used to turn 'Via:' institution names into links.
  */
-function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
+function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], index = null }) {
   const [flowFilter, setFlowFilter] = useState('all');
   // Guard: a single malformed income entry (no string `source`) must not throw
   // and white-screen the whole tab — in the live generate flow this section is
@@ -176,7 +180,20 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag2}}>
-                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
+                  <span style={{color:MUTED,marginRight:4}}>Via:</span>
+                  {svc.institutions.map((instName, k) => {
+                    // Each provider name resolves to its institution card by id;
+                    // an unresolved name (gated/absent) degrades to plain text.
+                    const instId = institutionIdFromName(index, instName);
+                    return (
+                      <React.Fragment key={k}>
+                        {k > 0 && ' · '}
+                        {instId
+                          ? <EntityLink id={instId} type="institution" fallback={instName} style={{fontWeight:600}} />
+                          : instName}
+                      </React.Fragment>
+                    );
+                  })}
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>
               </div>
@@ -190,7 +207,11 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
 export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const s = settlement;
-  const mobile = isMobile();
+  const mobile = useIsMobileTab();
+  // Live dossier index — trade partners resolve to neighbour cards, 'Via:'
+  // institution chips to their Power-tab cards. Off-dossier (no provider) the
+  // default no-op context yields a null index and every link degrades to text.
+  const { index } = useDossierEntities();
   const eco = economicState || s?.economicState;
   const via = s?.economicViability;
   if (!eco) return <Empty message="No economic record on file for this settlement."/>;
@@ -343,13 +364,22 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           for(const l of eco.tradeLinks){const b=byPartner[l.partner]=byPartner[l.partner]||{imports:[],exports:[]};(l.direction==='import'?b.imports:b.exports).push(l.good);}
           return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:eco.localProduction?.length>0?12:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>↔ Trade with neighbours</div>
-            {Object.entries(byPartner).map(([partner,g],i)=>(
+            {Object.entries(byPartner).map(([partner,g],i)=>{
+            // Partner names resolve to the SAME neighbour relationship card via
+            // the shared index. A partner that is a world settlement absent from
+            // this dossier returns null and renders as plain text (no dead link).
+            const partnerEntry = index?.resolveTradePartner?.(partner) || null;
+            return (
               <div key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
-                <strong style={{color:swatch.inkMag}}>{partner}</strong>
+                <strong style={{color:swatch.inkMag}}>
+                  {partnerEntry
+                    ? <EntityLink id={partnerEntry.id} type="neighbour" fallback={partner} style={{color:swatch.inkMag}} />
+                    : partner}
+                </strong>
                 {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.join(', ')}</span>}
                 {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}
               </div>
-            ))}
+            );})}
             <div style={{fontSize:FS.micro,color:BODY,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
           </div>;
         })()}
@@ -403,6 +433,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           chains={eco.activeChains}
           institutionalServices={eco.institutionalServices || []}
           incomeSources={eco.incomeSources || []}
+          index={index}
         />
       )}
 

@@ -11,6 +11,8 @@ import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { navigate } from '../hooks/useRoute.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
+import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
+import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import Button from './primitives/Button.jsx';
@@ -36,6 +38,8 @@ import DossierHeaderRow from './dossier/DossierHeaderRow.jsx';
 import DossierNarrativeBanner from './dossier/DossierNarrativeBanner.jsx';
 import DossierTabStrip from './dossier/DossierTabStrip.jsx';
 import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
 
@@ -188,7 +192,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeSetAi = useStore(s => s.setAiSettlement);
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
-  const requestDailyLife = useStore(s => s.requestDailyLife);
   const getCost = useStore(s => s.getCost);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
@@ -288,6 +291,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const [localAiError, setLocalAiError]     = useState(null);
   const [aiProgress, setAiProgress] = useState('');
   const scrollRef = useRef(null);
+  // Mobile swaps the desktop ‹ › scroll-arrow sub-tab strip for MobileTabStrip.
+  const mobile = useIsMobile();
   // NOTE: do not early-return here. React Hooks must always be called
   // in the same order on every render; an early return before subsequent
   // useMemo/useCallback hooks (line 124 etc.) would create a hooks-order
@@ -359,12 +364,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     }
   };
 
-  const executeAiAction = async (kind) => {
-    if (kind === 'dailyLife') {
-      if (isConfigured) await requestDailyLife(saveId);
-      else await runLocalAiLayer();
-      return;
-    }
+  // The only paid AI action triggered from here is the narrative run, which
+  // now also writes daily life under its single spend. (Daily life no longer
+  // has a separate generate control.) `kind` is retained for the guidance-
+  // confirm round-trip.
+  const executeAiAction = async (_kind) => {
     if (isConfigured) {
       await requestNarrative(saveId);
       landOnNarrativeSurface();
@@ -501,6 +505,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab
     : (allTabs[0]?.id || activeTab);
+
+  // Dossier entity hyperlink layer (Phase A): id->entity index + navigator (tab
+  // switch + card focus + scroll), shared via context so any tab/card renders an
+  // <EntityLink> without prop-drilling. Navigation to a gated-out tab no-ops.
+  const dossierEntityValue = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
+
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
@@ -647,7 +657,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} hideIdentity={!hideHeader} onNavigateTab={(id) => setActiveTab(id)} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
@@ -809,16 +819,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             ONE tab (Substrate). Substrate now renders unconditionally and owns a
             LOCAL depth control; the engine sections render at a sensible default
             depth (see DEFAULT_DETAIL_LEVEL). */}
-        {/* Tab strip */}
-        <DossierTabStrip
-          onboardingActive={onboardingActive}
-          onboardingStep={onboardingStep}
-          scroll={scroll}
-          scrollRef={scrollRef}
-          tabs={tabs}
-          selectedTab={selectedTab}
-          setActiveTab={setActiveTab}
-        />
+        {/* Tab strip. Desktop = scroll-arrow strip (byte-identical); mobile = MobileTabStrip, idPrefix="sf" to keep the sf-tab-/sf-panel- ids the content panel's aria-labelledby needs. */}
+        {mobile ? (
+          <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" />
+        ) : (
+          <DossierTabStrip onboardingActive={onboardingActive} onboardingStep={onboardingStep} scroll={scroll} scrollRef={scrollRef} tabs={tabs} selectedTab={selectedTab} setActiveTab={setActiveTab} />
+        )}
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
         <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
           {/* ── Banners above tab content ────────────────────────────────────────
@@ -907,7 +913,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 // Previously two of three bodies rendered flush; each child was
                 // insetting (or not) on its own. (P12 width discipline.)
                 style={{ padding: `0 ${SP.lg}px ${SP.lg}px`, opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
-              >{renderTab()}</div>
+              >
+                <DossierEntityContext.Provider value={dossierEntityValue}>
+                  {renderTab()}
+                </DossierEntityContext.Provider>
+              </div>
             </FeatureErrorBoundary>
           </Suspense>
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS, BODY} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import {useIsMobileTab} from '../tabConstants';
 
 import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
 import { displayInstitutionName } from '../../../domain/display/institutionDisplay.js';
+import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../../lib/entities.js';
+import { useStore } from '../../../store/index.js';
 
 // Shared no-value placeholder — an absent value reads as a deliberate
 // 'not computed' state, not garbled ', ' output. Matches DefenseTab's
@@ -83,10 +87,65 @@ function StatusTag({ label, value, accent, alert = true, tier }) {
   );
 }
 
+/**
+ * The subject of a structural-violation row (institution or group), rendered as
+ * an in-dossier cross-link with the trailing ": " separator the row expects.
+ *
+ * An `institution` name links to that institution's card (by the SAME id the
+ * dossier index assigns, so it is rename-safe); a `group` links to its faction
+ * card via {@link factionIdFromName}. Both degrade to plain text when the id is
+ * absent from the index or the target tab is gated — never a dead link. When
+ * neither is present the row carries no subject.
+ *
+ * @param {object} props
+ * @param {string} [props.institution]  Institution name (preferred subject).
+ * @param {string} [props.group]        Faction/category group name (fallback subject).
+ */
+function ViolationSubject({ institution, group }) {
+  if (institution) {
+    return <>
+      <EntityLink id={entityIdFor('institution', { name: institution })} type="institution" fallback={institution} />
+      {': '}
+    </>;
+  }
+  if (group) {
+    return <>
+      <EntityLink id={factionIdFromName(group)} type="faction" fallback={group} />
+      {': '}
+    </>;
+  }
+  return null;
+}
+
 export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) {
   const [instOpen, setInstOpen] = useState(false);
+  // Hooks run before any early return so the dossier's mobile stacking stays
+  // reactive even when a tab momentarily renders without a settlement.
+  const mobile = useIsMobileTab();
+
+  // Dossier hyperlink SINK for institutions. The Institutions disclosure below
+  // is the only place institutions render as their own enumerated objects, so
+  // an institution link routes here (TYPE_TO_TAB.institution = 'overview'). When
+  // a link focuses an institution this tab owns, force the (default-collapsed)
+  // disclosure OPEN and scroll the matching pill into view. Identity is matched
+  // by the SAME entityIdFor the index keys institutions under — never by name.
+  // Force-open only; a manual collapse afterward still works. Keyed on focus
+  // `ts` so a repeat click re-fires. Computed before the early return to keep
+  // hooks order stable.
+  const focusedEntity = useStore(s => s.focusedEntity);
+  const focusedInstId = focusedEntity?.id || null;
+  const focusedPillRef = useRef(null);
+  const institutionsList = r?.institutions || [];
+  const focusedInstMatches = !!focusedInstId
+    && institutionsList.some(inst => entityIdFor('institution', inst) === focusedInstId);
+  useEffect(() => {
+    if (!focusedInstMatches) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setInstOpen(true);
+    focusedPillRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
+  }, [focusedEntity?.ts, focusedInstMatches]);
+
   if (!r) return null;
-  const mobile = isMobile();
 
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};
@@ -104,6 +163,14 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
   const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
   const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
   const getCatColor = c => catColors2[c] || '#6b5340';
+
+  // Structural violations split: real issues (warnings / errors / critical) stay
+  // in the red "Structural Issues" call-out; deliberate `by_design` out-of-tier
+  // overrides are intentional DM choices, NOT problems, so they get a calm "By
+  // Design" note instead of the alarm styling. (ViabilityTab files them the same
+  // way under "By-Design Contradictions".)
+  const realViolations     = (r.structuralViolations || []).filter(v => v.severity !== 'by_design');
+  const byDesignViolations = (r.structuralViolations || []).filter(v => v.severity === 'by_design');
 
   // ScoreRow and StatusTag are defined at module scope above. Lifting
   // them out of the render function (was here originally) fixed 9
@@ -341,10 +408,14 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
           One grouped region: each note is a spaced row carrying only its
           severity left-border + tint, not a separately-bordered floating card.
           Looser top margin sets it off as a distinct chunk. (P5 / checklist 20.) */}
-      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginTop:20,marginBottom:14,display:'flex',flexDirection:'column',gap:8}}>
-        {r.structuralViolations?.length>0&&<div style={{background:swatch.dangerBg,borderLeft:'3px solid #8b1a1a',padding:'2px 0 2px 12px'}}>
+      {(realViolations.length+byDesignViolations.length+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginTop:20,marginBottom:14,display:'flex',flexDirection:'column',gap:8}}>
+        {realViolations.length>0&&<div style={{background:swatch.dangerBg,borderLeft:'3px solid #8b1a1a',padding:'2px 0 2px 12px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}> Structural Issues</div>
-          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+          {realViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}><ViolationSubject institution={v.institution} group={v.group} /></span>{v.reason}</div>)}
+        </div>}
+        {byDesignViolations.length>0&&<div style={{background:swatch['#FAF8F4'],borderLeft:'3px solid #a0762a',padding:'2px 0 2px 12px'}}>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,marginBottom:4}}> By Design</div>
+          {byDesignViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:BODY,marginBottom:3}}><span style={{fontWeight:700}}><ViolationSubject institution={v.institution} group={v.group} /></span>{v.reason}</div>)}
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],borderLeft:'3px solid #8b3a1a',padding:'2px 0 2px 12px',display:'flex',gap:8}}>
@@ -408,8 +479,28 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
                     const skin = isCustom
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};
-                    return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
-                      {displayInstitutionName(inst.name)}
+                    // Institution name -> in-dossier cross-link. The id is the
+                    // SAME one buildDossierEntityIndex assigns each institution
+                    // (entityIdFor), so the link resolves by id and follows a
+                    // rename; EntityLink degrades to plain text when the
+                    // institution is absent from the index or the Power tab is
+                    // gated out. The displayInstitutionName label is the
+                    // fallback so the catalog-cleaned name still shows.
+                    // SINK target: this pill carries the index's institution
+                    // anchor and, when focused by a link, an additive gold ring
+                    // (the second channel beyond the scroll) so the landed-on
+                    // institution is unmistakable. The ref captures the focused
+                    // pill so the focus effect can scroll exactly to it.
+                    const instId = entityIdFor('institution', inst);
+                    const isInstFocused = !!focusedInstId && instId === focusedInstId;
+                    return <span
+                      key={i}
+                      ref={isInstFocused ? focusedPillRef : null}
+                      id={entityAnchor('institution', inst)}
+                      title={isCustom?'Your custom content':undefined}
+                      style={{...base,...skin,...(isInstFocused?{boxShadow:`0 0 0 2px ${GOLD_DEEP}`}:null)}}
+                    >
+                      <EntityLink id={instId} type="institution" fallback={displayInstitutionName(inst.name)} />
                       {isCustom
                         ? <span style={{fontSize:FS.xs,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
                         : (srcLabel&&<span style={{fontSize:FS.xs,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}

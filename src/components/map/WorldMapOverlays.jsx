@@ -28,6 +28,9 @@ export function WorldMapOverlays({
   advanceBody,
   performAdvanceRealm,
   setAdvanceConfirm,
+  importConfirm,
+  performImportImage,
+  cancelImportImage,
   showSimulationRules,
   activeCampaign,
   setShowSimulationRules,
@@ -85,6 +88,16 @@ export function WorldMapOverlays({
         confirmLabel="Advance Realm"
         onConfirm={performAdvanceRealm}
         onCancel={() => setAdvanceConfirm(false)}
+      />
+
+      <ConfirmDialog
+        open={!!importConfirm}
+        tone="warning"
+        title="Import this image as the map?"
+        body="The image becomes the map's surface. This disables the generated terrain features and charted trails, and overwrites the current map. You can revert with Undo or by reverting to the generated terrain."
+        confirmLabel="Import image"
+        onConfirm={performImportImage}
+        onCancel={cancelImportImage}
       />
 
       <ConfirmDialog

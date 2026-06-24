@@ -19,7 +19,7 @@
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard, LogOut } from 'lucide-react';
-import { GOLD, GOLD_BG, GREEN, GREEN_BG, INK, BORDER, FS, SP, R, ELEV, PARCH_100, swatch } from './theme.js';
+import { GOLD, GOLD_BG, GREEN, GREEN_BG, INK, MUTED, BORDER, FS, SP, R, ELEV, PARCH_100, VIOLET, TINT_VIOLET, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 function MenuRow({ icon, label, onClick, tone = 'default' }) {
@@ -54,6 +54,22 @@ function MenuRow({ icon, label, onClick, tone = 'default' }) {
   );
 }
 
+/**
+ * AccountMenu — header identity chip + dropdown (account / subscription / sign out).
+ *
+ * @param {object} props
+ * @param {boolean} props.isAnon - true for signed-out visitors (renders the Sign In button).
+ * @param {string} [props.displayName] - the signed-in member's display name.
+ * @param {boolean} [props.isElevated] - developer/admin role (purple identity tint).
+ * @param {() => void} props.onSignIn - open the auth modal.
+ * @param {() => void} props.onAccount - navigate to the account page.
+ * @param {() => void} props.onManageSubscription - navigate to subscription/credits.
+ * @param {() => void} [props.onSignOut] - sign out (omitted hides the row).
+ * @param {boolean} [props.compact=false] - mobile/header-bar compact sizing.
+ * @param {number|null} [props.creditBalance=null] - remaining credits. Surfaced
+ *   inside the compact (mobile) dropdown, where the header's desktop-only credit
+ *   badge is absent — without this the balance was unreadable on mobile.
+ */
 export default function AccountMenu({
   isAnon,
   displayName,
@@ -63,6 +79,7 @@ export default function AccountMenu({
   onManageSubscription,
   onSignOut,
   compact = false,
+  creditBalance = null,
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -189,6 +206,11 @@ export default function AccountMenu({
           style={{
             position: 'absolute', top: 'calc(100% + 6px)', right: 0,
             minWidth: 236,
+            // Clamp to the viewport so a right-anchored dropdown near the screen
+            // edge can't overflow off-screen on a narrow phone (236px minWidth
+            // would have pushed past 375 if the chip sat far enough right). The
+            // SP.md*2 pad keeps a small gutter on both sides.
+            maxWidth: `calc(100vw - ${SP.md * 2}px)`,
             background: swatch.white,
             border: `1px solid ${BORDER}`,
             borderRadius: R.md,
@@ -196,6 +218,34 @@ export default function AccountMenu({
             padding: 6, zIndex: 1200,
           }}
         >
+          {/* Mobile-only credit read-out. The desktop header carries a
+              persistent credit badge, but the compact mobile chrome has no room
+              for it — so the balance was unreadable on phones (a read
+              regression). Surfaced here as a non-interactive header row inside
+              the dropdown: two channels (the violet count + the word "credits")
+              so it never leans on colour alone, matching the desktop badge. */}
+          {compact && creditBalance != null && (
+            <div
+              style={{
+                display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+                gap: SP.sm,
+                margin: `2px ${SP.xs}px 4px`,
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: TINT_VIOLET,
+                border: `1px solid ${VIOLET}`,
+                borderRadius: R.sm,
+                fontFamily: 'inherit',
+              }}
+            >
+              <span style={{ fontSize: FS.xs, color: MUTED, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                Credits
+              </span>
+              <span style={{ fontSize: FS.md, color: VIOLET }}>
+                <span style={{ fontWeight: 700 }}>{creditBalance}</span>
+                <span style={{ fontWeight: 500, opacity: 0.85 }}> credits</span>
+              </span>
+            </div>
+          )}
           <MenuRow
             icon={<Settings size={15} />}
             label="Account"

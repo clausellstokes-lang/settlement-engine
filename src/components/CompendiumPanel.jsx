@@ -5,10 +5,15 @@ import IconButton from './primitives/IconButton.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Segmented from './primitives/Segmented.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
+import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import { useStore } from '../store/index.js';
+import { navigate } from '../hooks/useRoute.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, LivingWorldTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
-import { CustomContentManager } from './compendium/CustomContent.jsx';
+import { CustomContentManager, ReadOnlyCustomContentList } from './compendium/CustomContent.jsx';
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
@@ -145,6 +150,9 @@ export default function CompendiumPanel({ standalone=false }) {
   }, [activeTab]);
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
+  // ONE reactive mobile flag for every mobile branch below. Desktop reads this
+  // as false and every desktop branch renders byte-identically to before.
+  const isMobile = useIsMobile();
 
   // Swap document.title + meta description per tab. Only
   // applies in standalone mode (i.e. when the compendium is the page,
@@ -225,7 +233,11 @@ export default function CompendiumPanel({ standalone=false }) {
           surface presents one floor above content instead of three stacked
           ones (P5). Switching mode clears the per-region filter so a stale,
           invisible-origin term can't bleed across regions (P8). */}
-      <div style={{ display:'flex', background:PARCH, padding:'6px 14px' }}>
+      {/* On mobile the two-option pill (Built-in catalog / My custom content +
+          count) can exceed 375px and overflow the panel. The toggle band scrolls
+          horizontally on mobile so the pill stays whole instead of clipping;
+          desktop keeps the plain flex row unchanged. */}
+      <div style={{ display:'flex', background:PARCH, padding:'6px 14px', ...(isMobile ? { overflowX:'auto', WebkitOverflowScrolling:'touch' } : {}) }}>
         <Segmented
           ariaLabel="Compendium mode"
           size="sm"
@@ -251,12 +263,30 @@ export default function CompendiumPanel({ standalone=false }) {
               so the next tab doesn't silently inherit a term typed for the
               previous one (P8). */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
+            {/* The 8-tab strip silently clips off-screen on mobile (plain
+                overflow-x with no active-into-view, no edge fade). On mobile we
+                swap in MobileTabStrip, which keeps the active tab scrolled into
+                view, fades the clipped edges, and follows the WAI-ARIA tabs
+                keyboard pattern. idPrefix="compendium" makes it stamp the same
+                `compendium-tab-<id>` ids the content tabpanel labels itself by,
+                so the aria wiring carries over unchanged. Desktop keeps the
+                byte-identical inline strip. */}
+            {isMobile ? (
+              <MobileTabStrip
+                tabs={TABS}
+                value={activeTab}
+                onChange={(id)=>{ setActiveTab(id); setSearch(''); }}
+                ariaLabel="Compendium sections"
+                idPrefix="compendium"
+              />
+            ) : (
             <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label }) => (
                 <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>{ setActiveTab(id); setSearch(''); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'13px 14px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:BODY, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   {label}
                 </button>))}
             </div>
+            )}
             {SEARCHABLE_TABS.has(activeTab) && (
               <div style={{ ...contentColumn, display:'flex', alignItems:'center', gap:6, padding:'2px 14px 6px', minHeight:42 }}>
                 <input aria-label="Filter this tab" value={search} onChange={e=>setSearch(e.target.value)} placeholder={TAB_FILTER_PLACEHOLDER[activeTab] || 'Filter this tab…'} style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.xs, color:INK, outline:'none' }}/>
@@ -264,10 +294,34 @@ export default function CompendiumPanel({ standalone=false }) {
               </div>
             )}
           </div>
-          <div role="tabpanel" id={`compendium-panel-${activeTab}`} aria-labelledby={`compendium-tab-${activeTab}`} style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
+          <div role="tabpanel" id={`compendium-panel-${activeTab}`} aria-labelledby={`compendium-tab-${activeTab}`} style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone || isMobile ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <div style={contentColumn}>
               {renderTab()}
             </div>
+          </div>
+        </>
+      ) : isMobile ? (
+        <>
+          {/* MOBILE: the "My custom content" manager is heavy desktop-grade
+              authoring (multi-bucket forms, dependency pickers, content-pack
+              import/export, supply-chain verification) — the locked read-mostly
+              matrix keeps that on desktop. On mobile we still let you SEARCH and
+              READ your existing items (the read affordance), then gate authoring
+              behind a calm "best on desktop" panel. The search box stays live so
+              the read-only list below filters. */}
+          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}`, minHeight:36 }}>
+            <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+            {search && <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={()=>setSearch('')} />}
+          </div>
+          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)' }}>
+            <DesktopOnlyGate
+              title="Author custom content on desktop"
+              message="Building institutions, deities, trade goods, and content packs takes the full authoring workspace, which has room to work on a larger screen. Your existing items are listed below to read, and you can open this on desktop to add or edit them."
+              cta={<Button variant="secondary" size="sm" onClick={() => navigate('generate')}>Test custom content in a generation</Button>}
+            />
+            {/* Read-only browse of any items already saved — the mobile read path.
+                Renders nothing when there are no items, so the gate stands alone. */}
+            <ReadOnlyCustomContentList search={search.toLowerCase()} />
           </div>
         </>
       ) : (

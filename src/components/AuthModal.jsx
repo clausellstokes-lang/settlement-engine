@@ -24,11 +24,13 @@ import { t } from '../copy/index.js';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import AuthPanel from './auth/AuthPanel.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 
 export default function AuthModal({ onClose }) {
   // Focus trap owns focus-into-dialog on open, Tab/Shift+Tab wrap, Escape
   // (via onCancel), and focus restore to the trigger on close.
   const dialogRef = useDialogFocusTrap(true, onClose);
+  const isMobile = useIsMobile();
   return (
     // Backdrop: click-to-close only. It is NOT a role=button — a button-role
     // backdrop swallows Enter/Space bubbling from inner controls and would
@@ -59,6 +61,11 @@ export default function AuthModal({ onClose }) {
           border: `1px solid ${BORDER}`,
           boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
           width: '90%', maxWidth: FORM_MAX, overflow: 'hidden',
+          // Mobile: the tall sign-up form (email + 2 passwords + 2 question
+          // pickers + 2 answers + CTA + alternatives) overruns a short iPhone
+          // viewport. Bound the dialog to the visible height and let the body
+          // scroll within it. Desktop keeps its natural-height card untouched.
+          ...(isMobile ? { maxHeight: '90dvh', display: 'flex', flexDirection: 'column' } : null),
         }}
       >
         {/* Header */}
@@ -74,7 +81,13 @@ export default function AuthModal({ onClose }) {
           <IconButton Icon={X} glyph={'×'} label={t('common.close')} onClick={onClose} tone="ghost" size="lg" />
         </div>
 
-        <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
+        <div style={{
+          padding: `${SP.xxl}px ${SP.xl}px`,
+          // Mobile: this body owns the overflow so the header stays pinned while
+          // the form scrolls. flex:1 + minHeight:0 lets it shrink inside the
+          // height-bounded flex-column dialog above. Desktop is byte-identical.
+          ...(isMobile ? { flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch' } : null),
+        }}>
           {/* Shared with the dedicated auth pages. */}
           <AuthPanel initialMode="signin" onAuthed={onClose} />
         </div>

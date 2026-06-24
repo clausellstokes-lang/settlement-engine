@@ -36,33 +36,14 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
-
-// CORS: mirror admin-actions and fail CLOSED — when ALLOWED_ORIGINS is configured
-// use it, otherwise fall back to the known production + localhost hosts. NEVER
-// "*" (the endpoint is independently protected by JWT auth + role gating +
-// botGuard, but a missing env var must not silently allow any origin).
-const DEFAULT_ORIGINS = [
-  "https://settlementforge.com",
-  "https://www.settlementforge.com",
-  "https://settlementwork.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-];
-const CONFIGURED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
-  .split(",").map((s) => s.trim()).filter(Boolean);
-const ORIGIN_ALLOWLIST = CONFIGURED_ORIGINS.length ? CONFIGURED_ORIGINS : DEFAULT_ORIGINS;
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+// Fail CLOSED, never "*": the endpoint is independently protected by JWT auth +
+// role gating + botGuard, but a misconfigured deploy must not silently allow any
+// origin. The shared module honors ALLOWED_ORIGINS / CLIENT_URL.
+import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
 
 function corsHeadersFor(req: Request): Record<string, string> {
-  const requestOrigin = req.headers.get("Origin") || "";
-  const allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
-    ? requestOrigin
-    : ORIGIN_ALLOWLIST[0];
-  return {
-    "Access-Control-Allow-Origin": allowOrigin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Headers":
-      "authorization, x-client-info, apikey, content-type",
-  };
+  return sharedCorsHeaders(req);
 }
 
 // Owner-override email — configurable via OWNER_EMAIL ONLY. Missing var FAILS

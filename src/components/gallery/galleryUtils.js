@@ -13,24 +13,6 @@ export const CULTURE_OPTIONS = ['germanic', 'latin', 'celtic', 'arabic', 'norse'
 // economicState.prosperity vocabulary (generateEconomicNarrative LABELS).
 export const PROSPERITY_OPTIONS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
 
-// Population bands → { populationMin, populationMax } the RPC filters on. Mirrors
-// the canonical POPULATION_RANGES tiers, collapsed to four readable bands.
-export const POPULATION_BANDS = Object.freeze([
-  { key: 'tiny',  label: 'Tiny (under 400)',       min: 0,     max: 400 },
-  { key: 'small', label: 'Small (400 – 5,000)',    min: 401,   max: 5000 },
-  { key: 'mid',   label: 'Mid (5,000 – 25,000)',   min: 5001,  max: 25000 },
-  { key: 'large', label: 'Large (25,000+)',        min: 25001, max: 0 },
-]);
-
-/** The active population band key for a filters object, or null when unbounded. */
-export function activePopulationBand(filters = {}) {
-  const min = Number(filters.populationMin) || 0;
-  const max = Number(filters.populationMax) || 0;
-  if (!min && !max) return null;
-  const match = POPULATION_BANDS.find(b => b.min === min && b.max === max);
-  return match ? match.key : 'custom';
-}
-
 export const REPORT_REASON_OPTIONS = [
   ['unsafe_content', 'Unsafe content'],
   ['private_information', 'Private information'],
@@ -39,6 +21,13 @@ export const REPORT_REASON_OPTIONS = [
   ['other', 'Other'],
 ];
 
+// Gallery layout reflow. The 860 breakpoint here is INTENTIONAL and distinct
+// from the app's 640 mobile flag (useIsMobile): 860 is the width at which the
+// two-column sidebar+grid layout no longer fits side by side, so the grids
+// collapse to one column there. The 640 flag governs the mobile CHROME swaps
+// (filters into a BottomSheet, owner authoring behind a desktop gate), which is
+// a separate concern from when the columns stop fitting. Both points coexist by
+// design; 860 is formally the gallery's reflow point.
 export const GALLERY_RESPONSIVE_CSS = `
   .gallery-main-layout {
     grid-template-columns: 260px minmax(0, 1fr);
@@ -119,10 +108,7 @@ export function fallbackInitial(name) {
 
 export function activeFilterCount(filters = {}) {
   let sum = 0;
-  for (const [key, value] of Object.entries(filters)) {
-    // The two population bounds are one logical filter (a band picks both).
-    if (key === 'populationMax') continue;
-    if (key === 'populationMin') { sum += (Number(value) || Number(filters.populationMax)) ? 1 : 0; continue; }
+  for (const value of Object.values(filters)) {
     if (Array.isArray(value)) { sum += value.length; continue; }
     sum += value ? 1 : 0;
   }

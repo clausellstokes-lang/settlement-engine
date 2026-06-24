@@ -78,6 +78,15 @@ function makeAdminClient(activeResult: boolean | null) {
           error: activeResult === null ? { message: 'rpc blew up' } : null,
         });
       }
+      // Service-role SAFETY preflights added with provider-peer metering: both run
+      // on the admin client BEFORE spend_credits. check_ai_spend_cap FAILS CLOSED
+      // (a null/!allowed result throws 400 before the stream opens), so the refund-
+      // path tests must let it through to reach the spend → fail → refund boundary
+      // they actually exercise. consume_ai_generate_rate_limit fails open, but we
+      // allow it explicitly so the stub doesn't depend on that asymmetry.
+      if (fn === 'check_ai_spend_cap' || fn === 'consume_ai_generate_rate_limit') {
+        return Promise.resolve({ data: { allowed: true }, error: null });
+      }
       return Promise.resolve({ data: null, error: null });
     },
   };

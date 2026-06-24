@@ -9,6 +9,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
@@ -17,6 +18,7 @@ import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Stat from './primitives/Stat.jsx';
@@ -232,6 +234,14 @@ function UserRow({ user, onUpdate }) {
 
 export default function AdminPanel({ onBack }) {
   const isElevated = useStore(s => s.isElevated());
+  // Admin is desktop-only per the read-mostly matrix: a dense, multi-column
+  // operator console (inline-edit ledger, 23-metric chart toggles, wide data
+  // tables) that cannot meaningfully reflow to a 375px viewport, and whose
+  // every action is a consequential server-audited mutation. On mobile we keep
+  // the read-only 3-KPI orientation strip and gate the whole toolset behind an
+  // honest "best on desktop" panel rather than reflow seven panels. Reactive so
+  // a rotate/resize from a tablet width settles to the right surface.
+  const isMobile = useIsMobile();
 
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
@@ -369,9 +379,21 @@ export default function AdminPanel({ onBack }) {
         </div>
       )}
 
-      {/* Management Sections — held off from the header/KPI cluster (P5
+      {/* Mobile: the read-only KPI strip above is the whole admin read surface;
+          the management toolset is gated to desktop. The plain "gate" variant
+          (no teaser) is correct here — the deferred content is raw operator
+          editors and dashboards, not readable prose. */}
+      {isMobile ? (
+        <div style={{ marginTop: SP.sm }}>
+          <DesktopOnlyGate
+            title="Admin works best on desktop"
+            message="The operator console covers user management, gallery reports, the support queue, and the usage dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
+          />
+        </div>
+      ) : (
+      /* Management Sections — held off from the header/KPI cluster (P5
           differential spacing) and spaced wider from one another than the
-          page-identity group above. */}
+          page-identity group above. */
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
       {/* User management */}
       <Section title="User Management" actions={
@@ -491,6 +513,7 @@ export default function AdminPanel({ onBack }) {
         </Section>
       </div>
       </div>
+      )}
     </Page>
   );
 }

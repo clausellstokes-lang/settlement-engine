@@ -27,6 +27,8 @@ import { settlementSignals, needsAttention, healthPip } from '../settlements/liv
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
+import BottomSheet from '../primitives/BottomSheet.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -166,6 +168,7 @@ export default function LibraryToolbar({
   onToggleSelectMode,
 }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const isMobile = useIsMobile();
   const toggleFilter = (key) => setFilters({ ...filters, [key]: !filters[key] });
 
   // Phase segment — a front-line lens over the same canonOnly/draftOnly filter
@@ -182,6 +185,172 @@ export default function LibraryToolbar({
   // so they no longer count toward the disclosure's hidden-filter badge.
   const activeFilterCount = Object.entries(filters || {})
     .filter(([k, v]) => k !== 'canonOnly' && k !== 'draftOnly' && !!v).length;
+
+  // The phase All|Drafts|Canon lens — a front-line control on desktop, folded
+  // into the mobile Filters sheet (so the collapsed mobile toolbar stays Search
+  // + Sort + Filters only).
+  const phaseSegment = (
+    <Segmented
+      size="sm"
+      ariaLabel="Filter settlements by phase"
+      options={[
+        { id: 'all', label: 'All' },
+        { id: 'drafts', label: 'Drafts' },
+        { id: 'canon', label: 'Canon' },
+      ]}
+      value={phaseValue}
+      onChange={setPhase}
+    />
+  );
+
+  // The secondary filter chips + campaign select + clear-all. Shared verbatim
+  // between the desktop inline disclosure and the mobile BottomSheet body, so a
+  // chip can never drift between the two surfaces.
+  const secondaryFilters = (
+    <>
+      <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
+      {/* Structure */}
+      <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
+      {/* Living world */}
+      <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
+      <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a primary deity.">Has deity</Button>
+      <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
+
+      {/* Campaign selector */}
+      {campaigns.length > 0 && (
+        <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
+          <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
+          <select
+            id="library-campaign-filter"
+            value={filters?.campaignId || ''}
+            onChange={(e) => setFilters({ ...filters, campaignId: e.target.value || undefined })}
+            style={{ background: 'transparent', border: 'none', outline: 'none', fontFamily: sans, fontSize: FS.xs, color: INK, fontWeight: 600, cursor: 'pointer' }}
+          >
+            <option value="">All</option>
+            {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+        </label>
+      )}
+
+      {activeFilterCount > 0 && (
+        <Button size="sm" variant="ghost" icon={<X size={12} />} onClick={() => setFilters({})}>Clear filters</Button>
+      )}
+    </>
+  );
+
+  // ── Mobile branch ─────────────────────────────────────────────────────────
+  // The desktop toolbar packs Search · Sort · phase segment · Filters · Select ·
+  // count into one flexWrap row that collapses into a tall ragged stack on a
+  // phone, and the inline Filters disclosure wall-wraps. On mobile we keep only
+  // Search + Sort + a Filters trigger on the collapsed face, move the phase lens
+  // + every secondary filter into a BottomSheet, and stack the Select toggle +
+  // count below. Desktop rendering is untouched (it falls through to the
+  // original return below).
+  if (isMobile) {
+    return (
+      <div style={{
+        padding: SP.sm,
+        background: PARCH,
+        borderRadius: R.sm,
+        display: 'flex', flexDirection: 'column', gap: SP.sm,
+        fontFamily: sans, fontSize: FS.xs, color: INK,
+      }}>
+        {/* Search — full width on its own line so the input isn't squeezed. */}
+        <div style={{
+          minHeight: 44, boxSizing: 'border-box',
+          display: 'flex', alignItems: 'center', gap: SP.xs,
+          padding: '8px',
+          background: swatch.white,
+          border: `1px solid ${BORDER}`,
+          borderRadius: R.sm,
+        }}>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search settlements, NPCs, and factions"
+            placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
+            style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
+          />
+          {query && (
+            <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+          )}
+        </div>
+
+        {/* Sort + Filters trigger — one tidy row that wraps gracefully. */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+          <label htmlFor="library-sort-mobile" style={{
+            flex: 1, minWidth: 140,
+            display: 'inline-flex', alignItems: 'center', gap: SP.xs,
+            minHeight: 44, boxSizing: 'border-box',
+            padding: '8px',
+            background: swatch.white,
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.sm,
+            cursor: 'pointer',
+          }}>
+            <span style={{ color: MUTED, fontWeight: 700 }}>Sort:</span>
+            <select
+              id="library-sort-mobile"
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', fontFamily: sans, fontSize: FS.sm, color: INK, fontWeight: 600, cursor: 'pointer' }}
+            >
+              {Object.entries(SORT_OPTIONS).map(([key, opt]) => (
+                <option key={key} value={key}>{opt.label}</option>
+              ))}
+            </select>
+          </label>
+
+          {/* Filters sheet — the phase lens + every secondary filter live here so
+              the collapsed toolbar stays calm. The count badge surfaces active
+              secondary filters; the phase lens is shown but not counted (matches
+              the desktop badge rule). */}
+          <BottomSheet
+            title="Filter settlements"
+            triggerLabel="Filters"
+            count={activeFilterCount}
+            triggerVariant={activeFilterCount > 0 ? 'gold' : 'secondary'}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, fontFamily: sans, fontSize: FS.sm, color: INK }}>
+              <div>
+                <div style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>Phase</div>
+                {phaseSegment}
+              </div>
+              <div
+                id="library-filter-panel"
+                data-testid="library-filter-panel"
+                style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}
+              >
+                {secondaryFilters}
+              </div>
+            </div>
+          </BottomSheet>
+        </div>
+
+        {/* Select toggle + result count — the count is a scan fact (BODY, AA). */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+          {onToggleSelectMode && (
+            <Button
+              size="sm"
+              variant={selectMode ? 'gold' : 'secondary'}
+              aria-pressed={selectMode}
+              onClick={() => onToggleSelectMode()}
+              icon={<CheckSquare size={12} />}
+            >
+              Select
+            </Button>
+          )}
+          <span style={{ marginLeft: 'auto', fontSize: FS.xs, color: BODY }}>
+            {visibleCount === totalCount
+              ? `${totalCount} settlement${totalCount === 1 ? '' : 's'}`
+              : `${visibleCount} of ${totalCount}`}
+            {activeFilterCount > 0 && ` · ${activeFilterCount} filter${activeFilterCount === 1 ? '' : 's'}`}
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{

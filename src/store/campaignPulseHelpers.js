@@ -7,10 +7,13 @@
  * (future) campaign sub-slices import from here. Never imports the slice → no cycle.
  */
 import {
+  addRegionalChannels,
   appendWizardNewsEntries,
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
   ensureWizardNewsFeed,
+  mintDirectedChannel,
+  stablePart,
 } from '../domain/region/index.js';
 import {
   ensureWorldState,
@@ -19,12 +22,75 @@ import {
   resolveStressorById,
   upsertProposal,
 } from '../domain/worldPulse/index.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { cloneJson, campaignSettlements } from './campaignSliceShared.js';
+
+/**
+ * #2 / #2.2 — apply a cross-settlement WAR-FRONT seed directly onto a (draft)
+ * campaign `c`, mutating c.worldState.deployments + c.worldState.warPosture and
+ * c.regionalGraph in place. This is the SHARED seed primitive behind BOTH the
+ * immediate-ripple action (campaignRegionalSlice.seedCampaignWarFront, which
+ * wraps this in its own set()) and the deferred drain (advanceCampaignWorld's
+ * Phase-1 producer, which must mutate THE SAME draft it then clones for the pure
+ * pulse — so it CANNOT call the set()-based action without losing the seed to a
+ * nested-producer write). Reuses the war layer's own ledger shape verbatim:
+ *
+ *   1. a LIGHT deployment record on worldState.deployments[instigatorId]
+ *      ({ targetId, sinceTick, role:'siege' }) — enriched by the war layer's
+ *      ensureStatefulRecord on first contact;
+ *   2. a war_front channel instigator → target with WAR-LAYER provenance
+ *      (source:'war_layer_deploy') so isLiveWarFront reads it as a real siege;
+ *   3. warPosture[instigatorId] = { state:'deployed', … } so the posture ledger
+ *      is consistent.
+ *
+ * GATED on simulationRules.warLayerEnabled (war-off → no-op, dormancy oracle
+ * preserved). Honours the ENGINE'S ONE-ARMY INVARIANT: if the instigator already
+ * fields an army the seed is skipped entirely (never overwrites the live ledger).
+ * Self-target / empty ids → no-op. Idempotent.
+ *
+ * @param {object} c        the draft campaign (mutated in place)
+ * @param {{ instigatorId?: string|number, targetId?: string|number, sinceTick?: number, now?: string|null }} args
+ * @returns {boolean} true when a fresh front was seeded; false on any no-op.
+ */
+export function applyWarFrontSeed(c, { instigatorId, targetId, sinceTick = 0, now = null } = {}) {
+  if (!c) return false;
+  const instId = String(instigatorId || '');
+  const tgtId = String(targetId || '');
+  if (!instId || !tgtId || instId === tgtId) return false;
+  const rules = normalizeSimulationRules(c.worldState?.simulationRules);
+  if (!rules.warLayerEnabled) return false;
+  const worldState = ensureWorldState(c.worldState, c);
+  const deployments = { ...(worldState.deployments || {}) };
+  // ONE-ARMY INVARIANT: never overwrite a live deployment.
+  if (deployments[instId]) return false;
+  const stamp = now || new Date().toISOString();
+  const tick = Math.max(0, Math.floor(Number(sinceTick) || 0));
+  // 1. LIGHT deployment record — enriched by the war layer on first contact.
+  deployments[instId] = { targetId: tgtId, sinceTick: tick, role: 'siege' };
+  // 3. posture ledger consistency: the army is in the field.
+  const warPosture = { ...(worldState.warPosture || {}) };
+  warPosture[instId] = { state: 'deployed', progress: 1, sinceTick: tick, covert: false };
+  c.worldState = { ...worldState, deployments, warPosture };
+  // 2. war_front channel WITH war-layer provenance, onto the campaign graph.
+  const channel = mintDirectedChannel({
+    type: 'war_front',
+    from: instId,
+    to: tgtId,
+    strength: 0.6,
+    confidence: 0.8,
+    explanation: `${instId} marches on ${tgtId}.`,
+    relationshipKey: `war_front.${stablePart(instId)}.${stablePart(tgtId)}`,
+    source: 'war_layer_deploy',
+    now: stamp,
+  });
+  c.regionalGraph = addRegionalChannels(ensureRegionalGraph(c.regionalGraph), [channel], { now: stamp });
+  return true;
+}
 
 export function campaignStateForRegionalImpact(state, save, systemState, now) {
   const isActive = state.activeSaveId && String(state.activeSaveId) === String(save.id);

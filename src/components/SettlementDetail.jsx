@@ -11,6 +11,7 @@ const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
@@ -31,6 +32,11 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
+// Fires after a change-queue commit on a NARRATED save: the prose was written
+// against the pre-commit state, so the modal offers regenerate / continue-raw.
+// Moved here from EventComposer (apply no longer commits; the commit is the
+// queue flush), so the notice fires once per commit, not per staged event.
+import StaleNarrativeModal from './StaleNarrativeModal.jsx';
 import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // The Narrated/Raw chip below uses the StateBadge primitive rather than
@@ -49,7 +55,8 @@ import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailH
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
-import { INK, MUTED, BODY, SECOND, BORDER, CARD, AMBER_DEEP, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
+import { directionalRelationshipLabel } from '../domain/relationships/canonicalRelationship.js';
+import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
 // PDF consume, so a named relationship looks identical across every surface
 // (was previously a divergent local REL_COLORS copy — the cardinal-sin coherence
@@ -77,24 +84,20 @@ export default function SettlementDetail({
   saves,
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
+  // applyRename is the IMMEDIATE rename cascade. For a STANDALONE settlement the
+  // rename STAGES on the change-queue (replayed at commit by the executor
+  // SettlementsPanel registers); for a CLOCK-BOUND campaign member the queue is
+  // inactive (Phase 4a scope), so the rename applies immediately through this
+  // prop, preserving the pre-queue behaviour.
   handleLink, removeNeighbour, applyRename,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
-  // Runnable-essentials lead-in: surface the already-computed hot-path facts
-  // (tier · population · ruler · current pressure) as a single de-emphasized
-  // line under the header so the at-a-glance essentials precede the deep
-  // dossier. This is placement/surfacing of existing engine data, not prose.
-  const s_=detail.settlement;
-  const summaryRuler=s_.powerStructure?.governingName||null;
-  const summaryTier=s_.tier||null;
-  const summaryPop=Number.isFinite(s_.population)?s_.population.toLocaleString():null;
-  const summaryPressure=(s_.pressureSentence||'').trim()||null;
-  const summaryFacts=[
-    summaryTier&&{label:'Tier',value:summaryTier},
-    summaryPop&&{label:'Population',value:summaryPop},
-    summaryRuler&&{label:'Ruler',value:summaryRuler},
-  ].filter(Boolean);
-  const hasSummary=summaryFacts.length>0||!!summaryPressure;
+  // Mobile is a read-and-light-act surface. The header keeps Export (the
+  // at-the-table read action) primary; Share to Gallery (a publish/authoring
+  // action) is deferred to desktop so the three peer buttons don't stack tall on
+  // narrow. The Edit toggle stays — it is the gate that opens inline rename, the
+  // one heavier write the matrix keeps on mobile. Desktop is unchanged.
+  const isMobile = useIsMobile();
 
   // Read-only echo of the strongest network-effect signal — the genuinely
   // change-focused, anomaly-first fact the cascade produces. The full editable
@@ -133,6 +136,13 @@ export default function SettlementDetail({
   // rather than firing on a single unguarded click (P10).
   const [confirmRemoveNeighbour, setConfirmRemoveNeighbour] = useState(null);
   const [pdfError, setPdfError] = useState(null);
+  // Change-queue soft-refresh: bumped on every successful commit and appended to
+  // the dossier's resetKeys + the OutputContainer key, so the re-derived
+  // committed state re-renders cleanly WITHOUT a reload (which would lose the
+  // open settlement — the detail view is React state, not persisted store).
+  const [dossierRefreshKey, setDossierRefreshKey] = useState(0);
+  // Post-commit staleness notice (narrated saves only): null | { label }.
+  const [staleNotice, setStaleNotice] = useState(null);
 
   // Pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -148,9 +158,17 @@ export default function SettlementDetail({
 
   // Campaign-clock identity lock: NPC + faction names freeze once the settlement
   // is canonized. The store hydrates `phase` from the opened save, so the live
-  // store value tracks this detail view. Renames are a draft-only affordance.
+  // store value tracks this detail view. NPC/faction renames are a draft-only
+  // affordance; the settlement's OWN name stays renameable in every phase.
   const phase = useStore(s => s.phase);
   const isCanonLocked = phase === 'canon';
+  // The settlement's OWN name is never canon-locked (only NPC/faction names
+  // freeze). Post-canon a rename still applies, but it is recorded as a flavor
+  // timeline entry since canon state is recorded — this store action owns that
+  // record; the parent applyRename owns the name + neighbour/ai_data cascade.
+  // Change-queue staging for renames (apply now stages; commit replays the
+  // settlement-name canon record + cross-save cascade through the flush).
+  const queueChange = useStore(s => s.queueChange);
   // Next-action-rail inputs (reuse existing selectors; no new store fields).
   const canonize = useStore(s => s.canonize);
   const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
@@ -220,13 +238,69 @@ export default function SettlementDetail({
     await revertCurrentToRaw(saveId);
   };
 
-  // Wrapper: call parent applyRename then clear local edit state
+  // Wrapper: STAGE the rename on the change-queue (it commits at "Save N
+  // changes", not on this click), then clear local edit state. The rename's
+  // existing cascade is replayed at flush time through the executor registered
+  // in SettlementsPanel — WHAT it does is unchanged, only WHEN.
   const handleApplyRename = (type, id, oldName, newName) => {
-    // Names freeze at canonization — guard even though the affordance is hidden.
+    // NPC + faction names freeze at canonization — guard at enqueue time even
+    // though the affordance is hidden (the flush re-checks too, defense in
+    // depth). The settlement's OWN name is exempt: always renameable, and
+    // post-canon the change records a flavor entry when the queue commits.
     if (isCanonLocked && (type === 'npc' || type === 'faction')) return;
-    applyRename(type, id, oldName, newName);
+    const trimmed = String(newName || '').trim();
+    if (!trimmed || trimmed === oldName) { setEditingName(null); setEditDraft(''); return; }
+    if (saveId) {
+      // Clock-bound campaign member (Phase 4a scope): the change-queue is
+      // inactive, so the rename applies immediately through the parent cascade.
+      if (simulated) {
+        applyRename?.(type, id, oldName, trimmed);
+      } else {
+        const label = type === 'settlement'
+          ? `Rename settlement to ${trimmed}`
+          : `Rename ${oldName || 'this'} to ${trimmed}`;
+        queueChange(saveId, {
+          type: 'rename',
+          humanLabel: label,
+          payload: { renameType: type, targetId: id, oldName, newName: trimmed },
+        });
+      }
+    }
     setEditingName(null);
     setEditDraft('');
+  };
+
+  // Soft-refresh after a change-queue commit. The flush already mutated the
+  // store (settlement / eventLog / systemState) and persisted atomically; here
+  // we re-derive the React `detail` from that committed settlement and bump the
+  // dossier key so every derived selector re-runs against fresh state. NO reload
+  // — the open settlement is preserved (R5: detail.settlement is kept in lockstep
+  // with the store settlement the Workshop read surfaces consume).
+  const handleQueueCommitted = (committedSettlement) => {
+    const live = useStore.getState();
+    const nextSettlement = committedSettlement || live.settlement;
+    if (nextSettlement) {
+      setDetail(d => {
+        if (!d) return d;
+        const nextSaveData = {
+          ...(d.saveData || {}),
+          settlement: nextSettlement,
+          campaignState: {
+            ...(d.saveData?.campaignState || {}),
+            phase: live.phase,
+            eventLog: Array.isArray(live.eventLog) ? [...live.eventLog] : [],
+            systemState: live.systemState || d.saveData?.campaignState?.systemState,
+            editedAt: live.editedAt || d.saveData?.campaignState?.editedAt,
+          },
+          timestamp: live.editedAt || d.saveData?.timestamp,
+        };
+        return { ...d, settlement: nextSettlement, saveData: nextSaveData };
+      });
+    }
+    // Key-bump forces a clean dossier remount against the committed state.
+    setDossierRefreshKey(k => k + 1);
+    // Narrated saves: the prose is now stale relative to the committed change.
+    if (narrated) setStaleNotice({ label: 'your committed changes' });
   };
 
   const handleRegionalImpactApplied = (result) => {
@@ -332,6 +406,237 @@ export default function SettlementDetail({
     openExportSheet: () => { setPdfError(null); setExportSheetOpen(true); },
   });
 
+  // ── Reorderable edit-region blocks ─────────────────────────────────────────
+  //   The four blocks below are bound as plain element references (their JSX is
+  //   unchanged) so they can render in two orders by `editMode` WITHOUT a flex
+  //   wrapper or CSS `order`: each block keeps its own DOM/flex/sticky/margin
+  //   context intact, so the dossier hero's sticky NextActionRail, its mobile
+  //   reflow, and the FeatureErrorBoundary/Suspense move as one untouched unit.
+  //
+  //   View (edit OFF): dossier hero → always-mounted Workshop read surfaces.
+  //   Edit (edit ON):  edit chrome → Workshop → edit body → dossier hero — the
+  //   deliberate dossier-first order (documented below) is inverted FOR EDIT
+  //   MODE ONLY, surfacing the authoring surface above the read.
+  //
+  //   The two unrelated bands above (networkEcho, Share-to-Gallery) and the
+  //   modal/sheet overlays below (ExportSheet, ConfirmDialogs) are NOT part of
+  //   this region and stay put. The Workshop is referenced exactly once per
+  //   branch, so it is never double-mounted.
+
+  /**
+   * Dossier hero (P1 content-is-hero) — the runnable dossier on the left and the
+   * phase-aware NextActionRail sticky aside on the right; reflows to a single
+   * column on narrow (flexWrap). Guarded on `detail.settlement` so a null
+   * settlement renders nothing.
+   * @type {import('react').ReactNode}
+   */
+  const dossierHero = detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
+    <div style={{flex:'1 1 520px',minWidth:0}}>
+      <FeatureErrorBoundary
+        label="SettlementDetail.output"
+        kind="react.render.dossier"
+        resetKeys={[saveId, dossierRefreshKey]}
+        fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
+      >
+        <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
+          {/* The dossier inherits the one top-level PAGE_MAX frame; no
+              per-section cap. The settlement name is inline-editable on the
+              dossier header in edit mode (the single consolidated rename
+              control); the commit routes through applyRename('settlement', …). */}
+          <OutputContainer
+            // Key-bump on commit forces a clean remount so all derived
+            // selectors re-run against the soft-refreshed committed state.
+            key={`dossier-${saveId}-${dossierRefreshKey}`}
+            settlement={detail.settlement}
+            readOnly
+            saveId={saveId}
+            allowRename={editMode && canEdit}
+            onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
+          />
+        </Suspense>
+      </FeatureErrorBoundary>
+    </div>
+    {saveId && (
+      <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:isMobile?CHROME.headerMobile+CHROME.stickyTop:CHROME.stickyTop,alignSelf:'flex-start'}}>
+        <NextActionRail
+          settlement={detail.settlement}
+          save={detail.saveData || detail}
+          simulated={simulated}
+          handlers={railHandlers}
+        />
+      </aside>
+    )}
+  </div>;
+
+  /**
+   * Edit-mode chrome — the AI-polish card plus the subordinate Revert-to-Raw
+   * control. Only renders in edit mode.
+   * @type {import('react').ReactNode}
+   */
+  const editChrome = editMode && (
+    <div style={{marginBottom:24,display:'flex',flexDirection:'column',gap:8}}>
+      {/* AI explainer — edit-only. A plain pointer to the single paid
+          "Generate Narrative" action in the dossier header
+          (DossierNarrativeButtons); it no longer renders its own paid button,
+          so the run-narrative path is unambiguous (one CTA, not two). The
+          paid invocation + first_ai_use pricing moment live on that header
+          action. */}
+      <AIInlineCard settlement={detail.settlement} />
+      {/* Revert to Raw — a semi-destructive narrative reset, grouped with and
+          subordinate to the polish action it undoes (kept at the quiet ai
+          emphasis, never a peer of the polish primary). */}
+      {narrated && (
+        <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+          <Button
+            variant="ai"
+            size="sm"
+            icon={<RotateCcw size={12}/>}
+            onClick={handleRevertToRaw}
+            title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
+          >
+            Revert to Raw
+          </Button>
+          <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1}}>
+            Clears the narrative layer and returns this save to raw simulator output. Chronicle history is preserved.
+          </span>
+        </div>
+      )}
+    </div>
+  );
+
+  /**
+   * The Workshop — the two-card edit surface, mounted at all times so a free
+   * user sees the engine read surfaces (Card 1 reads; Card 2 is the free→premium
+   * teaser; both become editable in edit mode). `changeExtras` (the
+   * Link-neighbour / Edit-names affordances, which own this component's state)
+   * are passed only in edit mode. Referenced once per render branch so it is
+   * never double-mounted.
+   * @type {import('react').ReactNode}
+   */
+  const workshop = (
+    <Workshop
+      settlement={detail.settlement}
+      saveId={detail?.saveData?.id || detail?.id}
+      save={detail.saveData || detail}
+      editMode={editMode}
+      canEdit={canEdit}
+      onQueueCommitted={handleQueueCommitted}
+      queueActive={!simulated}
+      changeExtras={editMode && (
+        // ── Relationship cluster ── Link Neighbour, the existing Neighbour
+        // Network list, and the cascading Network Effects, grouped tight
+        // (gap:8) as one related set of relationship affordances; followed by
+        // Edit Names. Both KEEP their immediate-apply behaviour and their
+        // SettlementDetail state wiring — only their grouping moves into
+        // Card 2.
+        <div style={{display:'flex',flexDirection:'column',gap:24,marginTop:8}}>
+        <div style={{display:'flex',flexDirection:'column',gap:8}}>
+          {/* Neighbour links — the toggle reveals the linking picker; the
+              network list below shows existing links. The disclosure routes
+              through the Button primitive (fullWidth), inheriting the ~44px
+              min target + focus ring + variant tokens. */}
+          <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
+            <Button variant="secondary" fullWidth
+              aria-expanded={linking} aria-pressed={linking}
+              onClick={()=>setLinking(v=>!v)}
+              style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
+              <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
+              <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
+            </Button>
+            {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
+          </div>
+
+          {/* Neighbour Network list — demoted to spacing + tint (border
+              removed): one of three pieces of the single relationship set. */}
+          {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
+            <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
+              Neighbour Network ({network.length})
+            </h3>
+            <div style={{display:'flex',flexDirection:'column',gap:4}}>
+            {network.map((n,i)=>{
+              const c=REL_HEX[n.relationshipType]||SECOND;
+              // Asymmetric links (overlord/vassal, patron/client) state WHICH SIDE
+              // this settlement is, naming the neighbour ("Overlord of X"); symmetric
+              // links and legacy rows fall through to the existing label.
+              const rel=directionalRelationshipLabel(n, n.name)
+                || n.displayRelationshipType
+                || REL_LABELS[n.relationshipType]
+                || (n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
+              return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8}}>
+                <div style={{width:5,height:5,borderRadius:'50%',background:c,flexShrink:0}}/>
+                <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
+                <span style={{fontSize:FS.xs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 5px',borderRadius:3}}>{rel}</span>
+                <IconButton Icon={X} label={`Remove link to ${n.name}`} tone="danger" size="xl" onClick={()=>setConfirmRemoveNeighbour(i)} />
+              </div>;
+            })}
+            </div>
+          </div>}
+
+          {/* ── Network Effects (cascading modifiers) ─────────────────────── */}
+          {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_HEX} />}
+        </div>
+
+        {/* ── Edit Names — NPC & faction renames (the settlement's OWN name is
+            renamed inline on the dossier header, the single consolidated
+            control). */}
+        <SettlementDetailEditNames
+          settlement={detail.settlement}
+          editNamesOpen={editNamesOpen}
+          setEditNamesOpen={setEditNamesOpen}
+          editingName={editingName}
+          setEditingName={setEditingName}
+          editDraft={editDraft}
+          setEditDraft={setEditDraft}
+          isCanonLocked={isCanonLocked}
+          handleApplyRename={handleApplyRename}
+        />
+        </div>
+      )}
+    />
+  );
+
+  /**
+   * Edit-mode body — the successor modal and the lifecycle/regional cluster
+   * (regional impact, chronicle) that sit below the Workshop. Only renders in
+   * edit mode.
+   * @type {import('react').ReactNode}
+   */
+  const editBody = editMode && (<div style={{display:'flex',flexDirection:'column',gap:24}}>
+
+    {/* Successor prompt — modal that appears after a pillar-tier
+        KILL_NPC commits. Reads `pendingSuccession` off the slice;
+        self-hides when the user dismisses or applies. The pendingState
+        is set inside applyEvent() in the slice, so the modal mounts
+        here at the dossier level rather than at App-root. */}
+    <SuccessorPrompt />
+
+    {/* Post-commit staleness notice. Fires once per change-queue commit on a
+        narrated save (the prose predates the committed change), offering
+        regenerate / continue-with-raw. */}
+    <StaleNarrativeModal
+      open={!!staleNotice}
+      changeLabel={staleNotice?.label}
+      onClose={() => setStaleNotice(null)}
+    />
+
+    {/* ── Lifecycle / regional cluster ── regional impact, chronicle history,
+        and the rarely-wanted dossier-discarding regenerate reset, kept LAST
+        and demoted (secondary outline) so a destructive reset is never the
+        first or loudest control a GM meets on entering edit mode. */}
+    <div style={{display:'flex',flexDirection:'column',gap:8}}>
+      <RegionalImpactInbox
+        saveId={detail?.saveData?.id || detail?.id}
+        onApplied={handleRegionalImpactApplied}
+      />
+
+      {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
+      {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
+        <ChroniclePanel entries={chronicleEntries} />
+      )}
+
+    </div>
+    </div>);
+
     return<div style={{maxWidth:PAGE_MAX,margin:'0 auto',width:'100%'}}>
       {/* Single top-level frame: the whole detail surface — header, summary,
           dossier hero, Workshop rail, and the edit-mode clusters — shares ONE
@@ -421,7 +726,7 @@ export default function SettlementDetail({
                 ? 'Edit (Premium)'
                 : (editMode ? 'Stop Editing' : 'Edit Dossier')}
             </Button>
-            {saveId && (
+            {saveId && !isMobile && (
               <Button
                 variant="secondary"
                 size="md"
@@ -447,46 +752,22 @@ export default function SettlementDetail({
         </div>
       </div>
 
-      {/* Runnable-essentials lead-in. Two tiers, change-first (P3): the living
-          pressure + the dominant network anomaly lead on their own line, given a
-          glyph + heavier weight + a single reserved amber accent so movement —
-          not the static roster — is the loud part of the front-load. The static
-          Tier · Population · Ruler facts sit beneath, quieted to muted labels +
-          serif values. Surfacing of existing engine data, not prose. The amber
-          accent is deliberately distinct from the gold Export primary so the two
-          don't collide (P4 colour scarcity). */}
-      {hasSummary && (
-        <div style={{display:'flex',flexDirection:'column',gap:6,margin:'0 0 16px',padding:'0 2px'}}>
-          {(summaryPressure||networkEcho) && (
-            <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px'}}>
-              {summaryPressure && (
-                <span style={{display:'inline-flex',alignItems:'baseline',gap:6,flex:'1 1 240px',minWidth:0}}>
-                  <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:AMBER_DEEP,lineHeight:1.35}}>{summaryPressure}</span>
-                </span>
-              )}
-              {networkEcho && (
-                <span
-                  title={`${networkEcho.label} shifts by ${networkEcho.delta} from ${networkEcho.count} linked settlement${networkEcho.count===1?'':'s'}. A positive figure helps, a negative one hurts. See Network Effects in edit mode for the full breakdown.`}
-                  style={{display:'inline-flex',alignItems:'baseline',gap:5,flexShrink:0}}
-                >
-                  <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>Network</span>
-                  <span style={{fontFamily:sans,fontSize:FS.sm,fontWeight:700,color:INK}}>{networkEcho.label}</span>
-                  <span style={{fontFamily:'monospace',fontSize:FS.sm,fontWeight:700,color:networkEcho.isPos?swatch.success:swatch.danger}}>{networkEcho.delta}</span>
-                  {networkEcho.via && <span style={{fontSize:FS.xxs,color:BODY,fontFamily:sans}}>via {networkEcho.via}</span>}
-                </span>
-              )}
-            </div>
-          )}
-          {summaryFacts.length>0 && (
-            <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px'}}>
-              {summaryFacts.map(f => (
-                <span key={f.label} style={{display:'inline-flex',alignItems:'baseline',gap:5}}>
-                  <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>{f.label}</span>
-                  <span style={{fontFamily:serif_,fontSize:FS.sm,fontWeight:600,color:INK}}>{f.value}</span>
-                </span>
-              ))}
-            </div>
-          )}
+      {/* Network-effect echo. The dossier below already carries tier, population,
+          ruler, and the causal hook, so those redundant copies are gone; the one
+          fact the read-only dossier does NOT surface is the cross-settlement
+          cascade, so the dominant network anomaly stays as a single quiet line.
+          Only rendered when a link actually moves a meter (networkEcho's gate). */}
+      {networkEcho && (
+        <div style={{display:'flex',flexWrap:'wrap',alignItems:'baseline',gap:'4px 16px',margin:'0 0 16px',padding:'0 2px'}}>
+          <span
+            title={`${networkEcho.label} shifts by ${networkEcho.delta} from ${networkEcho.count} linked settlement${networkEcho.count===1?'':'s'}. A positive figure helps, a negative one hurts. See Network Effects in edit mode for the full breakdown.`}
+            style={{display:'inline-flex',alignItems:'baseline',gap:5,flexShrink:0}}
+          >
+            <span style={{fontSize:FS.xxs,color:SECOND,textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans}}>Network</span>
+            <span style={{fontFamily:sans,fontSize:FS.sm,fontWeight:700,color:INK}}>{networkEcho.label}</span>
+            <span style={{fontFamily:'monospace',fontSize:FS.sm,fontWeight:700,color:networkEcho.isPos?swatch.success:swatch.danger}}>{networkEcho.delta}</span>
+            {networkEcho.via && <span style={{fontSize:FS.xxs,color:BODY,fontFamily:sans}}>via {networkEcho.via}</span>}
+          </span>
         </div>
       )}
 
@@ -495,7 +776,7 @@ export default function SettlementDetail({
           expandable details form, so the header button toggles this panel
           rather than living inline in the dense button row. Owners only;
           ShareToGallery self-gates on auth + canonized state. */}
-      {saveId && shareOpen && (
+      {saveId && shareOpen && !isMobile && (
         // 16px (on-scale) standalone separation — this block sits in a gap-less
         // region between siblings, so it owns its own bottom margin rather than
         // an off-scale 14 (P5 spacing-scale discipline).
@@ -520,236 +801,26 @@ export default function SettlementDetail({
         </div>
       )}
 
-      {/* ── The dossier hero (P1 content-is-hero) ─────────────────────────────
-            The runnable dossier — overview, plot hooks, DM compass, NPCs,
-            factions — leads the page directly under the runnable-essentials
-            summary, BEFORE the Workshop rail and edit chrome. It is the content
-            the GM came for; the engine-mechanics Workshop and the edit clusters
-            below are the progressive-disclosure drill-down.
+      {/* ── Edit-region order swap (P1 content-is-hero / edit-first authoring) ──
+            The dossier hero, edit chrome, Workshop, and edit body are bound as
+            element references above and rendered in two orders by `editMode`,
+            with no flex wrapper or CSS `order` so each block keeps its own
+            DOM/flex/sticky/margin context (the hero's sticky NextActionRail, its
+            mobile reflow, and its FeatureErrorBoundary/Suspense move untouched).
 
-            Two-column at desktop width (dossier keystone §2): the runnable
-            dossier on the left, the phase-aware NextActionRail sticky on the
-            right. The row reflows to a single column on narrow (flexWrap), where
-            the rail drops BELOW the dossier so the read stays single-column
-            legible. The rail is an owner-only affordance, gated on saveId (this
-            saved view is owner-by-construction; never a public route). */}
-      {detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
-        <div style={{flex:'1 1 520px',minWidth:0}}>
-          <FeatureErrorBoundary
-            label="SettlementDetail.output"
-            kind="react.render.dossier"
-            resetKeys={[saveId]}
-            fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
-          >
-            <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-              {/* The dossier inherits the one top-level PAGE_MAX frame; no
-                  per-section cap. The settlement name is inline-editable on the
-                  dossier header in edit mode (the single consolidated rename
-                  control); the commit routes through applyRename('settlement', …). */}
-              <OutputContainer
-                settlement={detail.settlement}
-                readOnly
-                saveId={saveId}
-                allowRename={editMode && canEdit && !isCanonLocked}
-                onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
-              />
-            </Suspense>
-          </FeatureErrorBoundary>
-        </div>
-        {saveId && (
-          <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:12,alignSelf:'flex-start'}}>
-            <NextActionRail
-              settlement={detail.settlement}
-              save={detail.saveData || detail}
-              simulated={simulated}
-              handlers={railHandlers}
-            />
-          </aside>
-        )}
-      </div>}
+            View (edit OFF): the runnable dossier leads the page (the content the
+            GM came for), then the always-mounted Workshop read surfaces; the
+            edit chrome + body evaluate falsy and do not render — byte-for-byte
+            the prior dossier-first order.
 
-      {/* Edit-mode chrome — hidden in the read-only View, revealed by "Edit
-          Dossier". State snapshot, AI polish, event composer, next-action rail,
-          provenance, settlement editor, name editing, neighbour links, network
-          effects, and the chronicle live behind this gate so View opens to a
-          clean dossier. */}
-      {/* ── Narrative cluster ─────────────────────────────────────────────────
-            The edit session's single forward move: the AI-polish card (the lone
-            high-emphasis "enrich this dossier" action), with Revert-to-Raw as a
-            quiet trailing control of the SAME group — the semi-destructive reset
-            reads as an undo of the polish, not a co-equal peer CTA. Spacing-grouped
-            (tight gap within the cluster); width is owned by the one top-level
-            PAGE_MAX frame, so no per-cluster cap is needed. */}
-      {editMode && (
-      <div style={{marginBottom:24,display:'flex',flexDirection:'column',gap:8}}>
-        {/* AI polish prompt — edit-only (it triggers a narrative write). */}
-        <AIInlineCard
-          settlement={detail.settlement}
-          onPolish={() => {
-            // The AI slice's actual handler is `requestNarrative(saveId)` —
-            // there's no `runAiLayer` action. Fixed 2026-04 after the audit
-            // verification revealed the dangling reference. The save id
-            // comes from the currently-open detail save record.
-            const live = useStore.getState();
-            const saveId = detail?.saveData?.id || detail?.id;
-            if (typeof live.requestNarrative === 'function' && saveId) {
-              live.requestNarrative(saveId).catch(e => {
-                console.warn('[AIInlineCard] requestNarrative failed:', e);
-              });
-            }
-            // Fire pricing moment on first AI use (cooldowned per-user).
-            triggerPricingMoment('first_ai_use', () => {
-              live.setPurchaseModalOpen?.(true);
-            }, { tier: live.auth?.tier });
-          }}
-        />
-        {/* Revert to Raw — a semi-destructive narrative reset, grouped with and
-            subordinate to the polish action it undoes (kept at the quiet ai
-            emphasis, never a peer of the polish primary). */}
-        {narrated && (
-          <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-            <Button
-              variant="ai"
-              size="sm"
-              icon={<RotateCcw size={12}/>}
-              onClick={handleRevertToRaw}
-              title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
-            >
-              Revert to Raw
-            </Button>
-            <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1}}>
-              Clears the narrative layer and returns this save to raw simulator output. Chronicle history is preserved.
-            </span>
-          </div>
-        )}
-      </div>
-      )}
-
-      {/* ── The Workshop ──────────────────────────────────────────────────────
-            The layered right-rail (UX overhaul Phase 6). Replaces the binary
-            editMode long-scroll: each card READS in view mode (the free→premium
-            teaser — the Phase 2 dossier read components) and becomes EDITABLE in
-            edit mode (write controls premium). The 3 subsystem gate toggles live
-            in the Faith/War cards, each byte-identical when off. Mounted at all
-            times so a free user sees the engine read surfaces. */}
-      <Workshop
-        settlement={detail.settlement}
-        saveId={detail?.saveData?.id || detail?.id}
-        save={detail.saveData || detail}
-        editMode={editMode}
-        canEdit={canEdit}
-      />
-
-      {/* Edit-mode body — width inherited from the one top-level PAGE_MAX frame
-          (no per-section cap). Grouped by differential spacing: a loose 24px gap
-          BETWEEN logical clusters, tight spacing WITHIN each, so grouping is
-          carried by rhythm rather than a flat wall of equally-bordered cards. */}
-      {editMode && (<div style={{display:'flex',flexDirection:'column',gap:24}}>
-
-      {/* Successor prompt — modal that appears after a pillar-tier
-          KILL_NPC commits. Reads `pendingSuccession` off the slice;
-          self-hides when the user dismisses or applies. The pendingState
-          is set inside applyEvent() in the slice, so the modal mounts
-          here at the dossier level rather than at App-root. */}
-      <SuccessorPrompt />
-
-      {/* ── Relationship cluster ── Link Neighbour, the existing Neighbour
-          Network list, and the cascading Network Effects, grouped tight (gap:8)
-          as one related set of relationship affordances. */}
-      <div style={{display:'flex',flexDirection:'column',gap:8}}>
-        {/* Neighbour links — the toggle reveals the linking picker; the network
-            list below shows existing links. The disclosure routes through the
-            Button primitive (fullWidth), so it inherits the ~44px min target +
-            focus ring + variant tokens, matching the sibling Edit Names toggle
-            (P7/P11) instead of a hand-rolled raw button element. The border survives on
-            THIS interactive collapsible — the one item in the cluster that earns
-            it as a click target. */}
-        <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
-          <Button variant="secondary" fullWidth
-            aria-expanded={linking} aria-pressed={linking}
-            onClick={()=>setLinking(v=>!v)}
-            style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
-            <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
-            <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
-          </Button>
-          {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
-        </div>
-
-        {/* Neighbour Network list — demoted to spacing + tint (border removed):
-            it is one of three pieces of the single relationship set, so the gap:8
-            + the tint group it, the colored dots ledger the rows, and the looser
-            between-cluster gap:24 separates it from the lifecycle set (P5
-            anti-box-soup). */}
-        {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
-          <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
-            Neighbour Network ({network.length})
-          </h3>
-          {/* Rows separated by spacing, not per-row hairlines: the single card
-              border + the colored relationship dot already group the list, so
-              the rows read as a clean ledger rather than a spreadsheet grid. */}
-          <div style={{display:'flex',flexDirection:'column',gap:4}}>
-          {network.map((n,i)=>{
-            const c=REL_HEX[n.relationshipType]||SECOND;
-            // Resolve the relationship label through the SAME canonical REL_LABELS
-            // map the Network Effects Sources list uses, so the identical
-            // relationship enum can never print two different strings across the
-            // surface (P11). A per-link displayRelationshipType override still
-            // wins when present (a richer custom label); otherwise REL_LABELS is
-            // the one canonical formatter, falling back to a de-underscored enum.
-            const rel=n.displayRelationshipType
-              || REL_LABELS[n.relationshipType]
-              || (n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
-            // Key by a stable identity (not the array index) so removing a
-            // neighbour can't momentarily render the wrong row / mis-place the X
-            // button's feedback. removeNeighbour still takes the index `i`, which
-            // is the live position into detail.settlement.neighbourNetwork.
-            // Dot (5px) + chip ('1px 5px') geometry matches the Sources rows in
-            // NetworkEffectsPanel so the same concept renders identically (P11).
-            return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8}}>
-              <div style={{width:5,height:5,borderRadius:'50%',background:c,flexShrink:0}}/>
-              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
-              <span style={{fontSize:FS.xs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 5px',borderRadius:3}}>{rel}</span>
-              <IconButton Icon={X} label={`Remove link to ${n.name}`} tone="danger" size="xl" onClick={()=>setConfirmRemoveNeighbour(i)} />
-            </div>;
-          })}
-          </div>
-        </div>}
-
-        {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
-        {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_HEX} />}
-      </div>
-
-      {/* ── Edit Names — NPC & faction renames (the settlement's OWN name is now
-            renamed inline on the dossier header, the single consolidated control). ── */}
-      <SettlementDetailEditNames
-        settlement={detail.settlement}
-        editNamesOpen={editNamesOpen}
-        setEditNamesOpen={setEditNamesOpen}
-        editingName={editingName}
-        setEditingName={setEditingName}
-        editDraft={editDraft}
-        setEditDraft={setEditDraft}
-        isCanonLocked={isCanonLocked}
-        handleApplyRename={handleApplyRename}
-      />
-
-      {/* ── Lifecycle / regional cluster ── regional impact, chronicle history,
-          and the rarely-wanted dossier-discarding regenerate reset, kept LAST
-          and demoted (secondary outline) so a destructive reset is never the
-          first or loudest control a GM meets on entering edit mode. */}
-      <div style={{display:'flex',flexDirection:'column',gap:8}}>
-        <RegionalImpactInbox
-          saveId={detail?.saveData?.id || detail?.id}
-          onApplied={handleRegionalImpactApplied}
-        />
-
-        {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
-        {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
-          <ChroniclePanel entries={chronicleEntries} />
-        )}
-
-      </div>
-      </div>)}
+            Edit (edit ON): the authoring surface (edit chrome → Workshop → edit
+            body) rises ABOVE the dossier hero so the GM lands directly on the
+            controls; this deliberately inverts the dossier-first order for edit
+            mode only. The Workshop is referenced once per branch, never
+            double-mounted. */}
+      {editMode
+        ? <>{editChrome}{workshop}{editBody}{dossierHero}</>
+        : <>{dossierHero}{workshop}</>}
 
       {/* PDF export variant picker — opened by the Export Dossier button in the
           header, available in both view and edit mode. Conditionally mounted so

@@ -21,10 +21,12 @@ import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/re
 
 afterEach(cleanup);
 
-// Two public maps in the gallery; the user owns only the first.
+// Two public maps in the gallery; the user owns only the first. The owned map is
+// NOT importable (owner hasn't opted in → editor seeds importable:false); the
+// foreign map IS importable (migration 072 facet → its tile offers Import).
 const GALLERY_ITEMS = [
-  { slug: 'owned-slug', name: 'Coastal Realm', kind: 'map', description: 'old desc', tags: ['old'], backdrop_kind: 'fmg', published_at: '2026-01-02T00:00:00Z', view_count: 3 },
-  { slug: 'foreign-slug', name: 'Someone Else', kind: 'map', description: 'theirs', tags: [], backdrop_kind: 'fmg', published_at: '2026-01-01T00:00:00Z', view_count: 9 },
+  { slug: 'owned-slug', name: 'Coastal Realm', kind: 'map', description: 'old desc', tags: ['old'], backdrop_kind: 'fmg', published_at: '2026-01-02T00:00:00Z', view_count: 3, importable: false },
+  { slug: 'foreign-slug', name: 'Someone Else', kind: 'map', description: 'theirs', tags: [], backdrop_kind: 'fmg', published_at: '2026-01-01T00:00:00Z', view_count: 9, importable: true },
 ];
 
 const shareMap = vi.fn().mockResolvedValue('owned-slug');
@@ -92,9 +94,22 @@ describe('GalleryMaps owner edit affordance', () => {
       kind: 'map',
       description: 'a windswept shore',
       tags: ['coastal', 'trade'],
+      // The owner edit also forwards the import opt-in (migration 072); the tile
+      // seeds it off, and the checkbox wasn't toggled in this case.
+      importable: false,
     });
     // No rename submitted (name unchanged), and a post-action refetch ran.
     expect(renameCampaign).not.toHaveBeenCalled();
     expect(fetchGalleryMaps).toHaveBeenCalled();
+  });
+
+  test('Import is gated on the owner opt-in (migration 072): importable tile offers Import, non-importable shows view-only', async () => {
+    render(<GalleryMaps />);
+    await waitFor(() => expect(screen.getByText('Someone Else')).toBeTruthy());
+    // The importable foreign map offers an Import action (premium user).
+    expect(screen.getByRole('button', { name: 'Import' })).toBeTruthy();
+    // The non-importable owned map shows a view-only status in the import slot,
+    // never an enabled Import — no dead-end button.
+    expect(screen.getByText('View-only')).toBeTruthy();
   });
 });

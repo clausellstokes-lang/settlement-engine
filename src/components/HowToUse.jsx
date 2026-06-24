@@ -3,6 +3,8 @@ import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, BORDER as BOR, CARD, PARCH, R
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import { t } from '../copy/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
@@ -101,6 +103,9 @@ function Row({ label, children, lw=120 }) {
 }
 
 function QuickTab() {
+  // Mobile trims the nested-bullet indent so the inset note keeps its reading
+  // measure on a narrow column; desktop holds the 32px indent byte-identical.
+  const isMobile = useIsMobile();
   // How-To inversion: newcomers open this tab to learn what
   // to *do*, not to read the design philosophy first: we lead with the
   // 60-second action steps and demote the constraint-driven concept essay
@@ -169,7 +174,7 @@ function QuickTab() {
       <Step n={1}>On the Create tab, pick a <strong>mode</strong>: <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
       <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Anonymous generation reaches town size. A free account reaches any size, from hamlet to metropolis.</Step>
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong>. Forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
-      <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
+      <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft: isMobile ? SP.lg : 32 }}>
         <div style={{ width:6, height:6, borderRadius:'50%', background:swatch['#B8860B'], flexShrink:0, marginTop:7 }}/>
         <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>If you need a specific service like <em>Remove Curse</em> or <em>Healing</em>, find the institution that provides it in the <strong>Compendium</strong>, then use Advanced Generate to force it onto your settlement.</p>
       </div>
@@ -594,6 +599,13 @@ export default function HowToUse({ onNavigate = navigate } = {}) {
     } catch { return 'quick'; }
   });
 
+  // Below 640 the 8-tab guide strip overflowed with no scroll cue, so the
+  // trailing tabs (Reference / Compare / FAQ) looked absent. Mobile swaps in the
+  // MobileTabStrip primitive — same tabs/value/onChange API, plus an edge fade
+  // and scroll-into-view on the active tab. Desktop keeps the custom roving
+  // tablist below byte-identical.
+  const isMobile = useIsMobile();
+
   // Roving arrow-key navigation across the tablist (POUR keyboard operability).
   const onTabKeyDown = (e) => {
     const i = TABS.findIndex(t => t.id === activeTab);
@@ -625,35 +637,48 @@ export default function HowToUse({ onNavigate = navigate } = {}) {
       />
       <div style={{ background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl,
         boxShadow:ELEV[1], overflow:'hidden' }}>
-        {/* Tab bar */}
-        <div className="tab-strip" role="tablist" aria-label="Guide sections"
-          style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
-          overflowX:'auto' }}>
-          {TABS.map(({ id, label }) => {
-            const selected = activeTab === id;
-            return (
-              <button key={id} type="button" role="tab" id={`howto-tab-${id}`}
-                aria-selected={selected} aria-controls={`howto-panel-${id}`}
-                tabIndex={selected ? 0 : -1}
-                onClick={() => setActiveTab(id)} onKeyDown={onTabKeyDown}
-                style={{ display:'flex', alignItems:'center', padding:'12px 18px',
-                  // P7/Fitts: lift to the ~44px at-the-table tap target (the 12px
-                  // vertical padding nearly got there; minHeight does the rest
-                  // without changing the visual rhythm). Buttons stay raw for the
-                  // roving-tabindex tablist semantics.
-                  minHeight:44,
-                  background: selected ? CARD : 'transparent',
-                  border:'none', borderBottom: selected ? `2px solid ${GOLD}` : '2px solid transparent',
-                  // P7: inactive labels ride BODY (MUT failed AA on parchment); the
-                  // active tab still wins via >=2 channels — weight 700 + underline + INK.
-                  cursor:'pointer', color: selected ? INK : BODY, fontFamily:sans,
-                  fontSize:FS.sm, fontWeight:selected?700:500, whiteSpace:'nowrap',
-                  WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-                <span>{label}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Tab bar — mobile uses the MobileTabStrip primitive (edge fade +
+            active-tab scroll-into-view); the idPrefix="howto" keeps the tab ids
+            (howto-tab-*) and aria-controls (howto-panel-*) identical to the
+            desktop strip so the panel's aria-labelledby wiring is unchanged. */}
+        {isMobile ? (
+          <MobileTabStrip
+            tabs={TABS}
+            value={activeTab}
+            onChange={setActiveTab}
+            ariaLabel="Guide sections"
+            idPrefix="howto"
+          />
+        ) : (
+          <div className="tab-strip" role="tablist" aria-label="Guide sections"
+            style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
+            overflowX:'auto' }}>
+            {TABS.map(({ id, label }) => {
+              const selected = activeTab === id;
+              return (
+                <button key={id} type="button" role="tab" id={`howto-tab-${id}`}
+                  aria-selected={selected} aria-controls={`howto-panel-${id}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActiveTab(id)} onKeyDown={onTabKeyDown}
+                  style={{ display:'flex', alignItems:'center', padding:'12px 18px',
+                    // P7/Fitts: lift to the ~44px at-the-table tap target (the 12px
+                    // vertical padding nearly got there; minHeight does the rest
+                    // without changing the visual rhythm). Buttons stay raw for the
+                    // roving-tabindex tablist semantics.
+                    minHeight:44,
+                    background: selected ? CARD : 'transparent',
+                    border:'none', borderBottom: selected ? `2px solid ${GOLD}` : '2px solid transparent',
+                    // P7: inactive labels ride BODY (MUT failed AA on parchment); the
+                    // active tab still wins via >=2 channels — weight 700 + underline + INK.
+                    cursor:'pointer', color: selected ? INK : BODY, fontFamily:sans,
+                    fontSize:FS.sm, fontWeight:selected?700:500, whiteSpace:'nowrap',
+                    WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
+                  <span>{label}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
         {/* Content — the card is layout.page wide. P12: a single centered inner
             frame caps every tab at one width and centers it, so switching tabs
             no longer jumps the column from 820 to ~1150 and back. Prose tabs

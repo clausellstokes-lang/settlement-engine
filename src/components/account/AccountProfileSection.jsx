@@ -15,6 +15,7 @@ import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Pill from '../primitives/Pill.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { RoleBadge } from '../auth/authUI.jsx';
 import { GOLD, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch, TINT_GOLD, DANGER_BORDER } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -55,6 +56,15 @@ export default function AccountProfileSection({
   nameInput, setNameInput,
   nameSaving, handleSaveName,
   nameError,
+  editingExternalName, setEditingExternalName,
+  externalNameInput, setExternalNameInput,
+  externalNameSaving, handleSaveExternalName,
+  externalNameError,
+  firstNameInput, setFirstNameInput,
+  lastNameInput, setLastNameInput,
+  preferredNameInput, setPreferredNameInput,
+  namesSaving, namesSaved, namesError,
+  handleSaveProfileNames,
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
@@ -62,6 +72,13 @@ export default function AccountProfileSection({
   // anything else (empty, javascript:, data:, malformed) falls back to the
   // initial-letter gradient.
   const avatarBg = avatarBackground(avatarInput);
+  // Rename is one of the two writes allowed on mobile (rename + save), so the
+  // inline editor must stay comfortable on a phone. Below 640 the input + the
+  // two 44px-floored icon buttons are crammed into a no-wrap row beside the
+  // avatar; let that row wrap so the input keeps a usable width and the controls
+  // drop to a second line when they can't sit beside it. Desktop stays a single
+  // no-wrap row byte-identical.
+  const isMobile = useIsMobile();
   return (
     <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
@@ -77,7 +94,7 @@ export default function AccountProfileSection({
 
         <div style={{ flex: 1 }}>
           {/* Display name */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs, flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
             {editingName ? (
               <>
                 <input
@@ -86,7 +103,12 @@ export default function AccountProfileSection({
                   onChange={e => setNameInput(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleSaveName()}
                   style={{
-                    flex: 1, padding: `${SP.xs}px ${SP.sm}px`,
+                    // Mobile: a min-width floor keeps the input legible and lets the
+                    // 44px Save/Cancel buttons wrap below it when they can't fit
+                    // alongside. Desktop keeps the plain flex:1 single-row layout.
+                    flex: isMobile ? '1 1 160px' : 1,
+                    minWidth: isMobile ? 160 : undefined,
+                    padding: `${SP.xs}px ${SP.sm}px`,
                     border: `1px solid ${GOLD}`, borderRadius: R.sm,
                     fontSize: FS.lg, fontFamily: serif_, fontWeight: 600,
                     outline: 'none',
@@ -149,6 +171,103 @@ export default function AccountProfileSection({
         </div>
       </div>
 
+      {/* ── Account identity (migration 075) ─────────────────────────────────
+          The public author name (external_name) is owner-editable and shown on
+          every settlement and map this account shares. The Account ID
+          (account_number) is the immutable, private handle to quote on a support
+          ticket — never editable here. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg, paddingTop: SP.lg, borderTop: `1px solid ${BORDER}` }}>
+        {/* Public author name — inline editor mirroring the display-name row. */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
+          <span style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+            Author name
+          </span>
+          <span style={{ fontSize: FS.xs, color: SECOND }}>
+            Shown on every settlement and map you share. Letters, numbers, and underscores.
+          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: isMobile ? 'wrap' : 'nowrap', marginTop: SP.xs }}>
+            {editingExternalName ? (
+              <>
+                <input
+                  aria-label="Public author name"
+                  value={externalNameInput}
+                  onChange={e => setExternalNameInput(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && handleSaveExternalName()}
+                  maxLength={24}
+                  style={{
+                    flex: isMobile ? '1 1 160px' : 1,
+                    minWidth: isMobile ? 160 : undefined,
+                    padding: `${SP.xs}px ${SP.sm}px`,
+                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
+                    fontSize: FS.md, fontFamily: sans, fontWeight: 600,
+                    color: INK, outline: 'none',
+                  }}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline author-name editor when it opens
+                  autoFocus
+                />
+                <IconButton
+                  Icon={Check}
+                  label="Save author name"
+                  onClick={handleSaveExternalName}
+                  disabled={externalNameSaving}
+                  tone="ghost"
+                  size="lg"
+                />
+                <IconButton
+                  Icon={X}
+                  label="Cancel editing author name"
+                  onClick={() => setEditingExternalName(false)}
+                  tone="ghost"
+                  size="lg"
+                />
+              </>
+            ) : (
+              <>
+                <span style={{ fontSize: FS.md, fontWeight: 600, color: INK, fontFamily: sans }}>
+                  {auth.externalName || 'Not set yet'}
+                </span>
+                <IconButton
+                  Icon={Edit3}
+                  label="Edit author name"
+                  onClick={() => { setExternalNameInput(auth.externalName || ''); setEditingExternalName(true); }}
+                  tone="ghost"
+                  size="lg"
+                />
+              </>
+            )}
+          </div>
+          {externalNameError && (
+            <div role="alert" style={{ padding: `${SP.xs}px ${SP.sm}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.sm, fontSize: FS.xs, color: swatch.danger }}>
+              {externalNameError}
+            </div>
+          )}
+        </div>
+
+        {/* Account ID — immutable, private, read-only. */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
+          <span style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+            Account ID
+          </span>
+          <span style={{ fontSize: FS.xs, color: SECOND }}>
+            Quote this on a support ticket so we know it is you.
+          </span>
+          {auth.accountNumber ? (
+            <span style={{
+              alignSelf: 'flex-start', marginTop: SP.xs,
+              padding: `${SP.xs}px ${SP.sm}px`,
+              background: TINT_GOLD, color: GOLD_TXT,
+              border: `1px solid ${BORDER}`, borderRadius: R.sm,
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+              fontSize: FS.sm, fontWeight: 700, letterSpacing: '0.04em',
+            }}>
+              {auth.accountNumber}
+            </span>
+          ) : (
+            <span style={{ marginTop: SP.xs, fontSize: FS.sm, color: SECOND }}>Assigned shortly.</span>
+          )}
+        </div>
+      </div>
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
         {profileError && (
           <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
@@ -190,6 +309,61 @@ export default function AccountProfileSection({
           style={{ alignSelf: 'flex-start' }}
         >
           {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}
+        </Button>
+      </div>
+
+      {/* ── Private name (migration 075) ─────────────────────────────────────
+          First / last / preferred. Internal-only — never shown publicly; the
+          gallery author name above is the public identity. Owner-writable. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg, paddingTop: SP.lg, borderTop: `1px solid ${BORDER}` }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND }}>Your name (private)</span>
+        {namesError && (
+          <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+            {namesError}
+          </div>
+        )}
+        <div style={{ display: 'flex', gap: SP.md, flexWrap: 'wrap' }}>
+          <label htmlFor="account-first-name" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND, flex: '1 1 160px' }}>
+            First name
+            <input
+              id="account-first-name"
+              aria-label="First name"
+              value={firstNameInput}
+              onChange={e => setFirstNameInput(e.target.value)}
+              style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+            />
+          </label>
+          <label htmlFor="account-last-name" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND, flex: '1 1 160px' }}>
+            Last name
+            <input
+              id="account-last-name"
+              aria-label="Last name"
+              value={lastNameInput}
+              onChange={e => setLastNameInput(e.target.value)}
+              style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+            />
+          </label>
+          <label htmlFor="account-preferred-name" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND, flex: '1 1 160px' }}>
+            Preferred name
+            <input
+              id="account-preferred-name"
+              aria-label="Preferred name"
+              value={preferredNameInput}
+              onChange={e => setPreferredNameInput(e.target.value)}
+              style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+            />
+          </label>
+        </div>
+        <Button
+          variant="primary"
+          size="md"
+          onClick={handleSaveProfileNames}
+          busy={namesSaving}
+          icon={<Check size={14} />}
+          aria-label="Save private name"
+          style={{ alignSelf: 'flex-start' }}
+        >
+          {namesSaving ? 'Saving...' : namesSaved ? 'Saved' : 'Save private name'}
         </Button>
       </div>
     </Section>

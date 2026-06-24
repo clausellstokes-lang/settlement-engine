@@ -49,9 +49,18 @@ describe('#1 war-stressor instigator → hostile', () => {
     expect(next.neighbourNetwork.find((n) => n.name === 'Stonehaven')._relationshipEventId).toBeUndefined();
   });
 
-  it('is a no-op when the neighbour is in a hostile-family alias (cold_war)', () => {
+  it('ESCALATES a cold_war neighbour to hostile (cold_war is below hostile on the adversarial axis)', () => {
+    // A war stressor targets the top of the axis (hostile). cold_war ranks below
+    // it, so a siege escalates the edge the rest of the way to open hostility —
+    // the no-downgrade guard only blocks SOFTENING, never escalation.
     const next = mutateSettlement({ settlement: base('cold_war'), event: war('Stonehaven') });
-    expect(relOf(next, 'Stonehaven')).toBe('cold_war'); // not downgraded/overwritten
+    expect(relOf(next, 'Stonehaven')).toBe('hostile');
+  });
+
+  it('is a no-op when the neighbour is ALREADY hostile (the top of the axis)', () => {
+    const next = mutateSettlement({ settlement: base('hostile'), event: war('Stonehaven') });
+    expect(relOf(next, 'Stonehaven')).toBe('hostile'); // unchanged, no re-stamp
+    expect(next.neighbourNetwork.find((n) => n.name === 'Stonehaven')._relationshipEventId).toBeUndefined();
   });
 
   it('does NOT flip for a non-war stressor even with an instigator named', () => {

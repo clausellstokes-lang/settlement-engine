@@ -89,8 +89,18 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         public_slug text,
         published_at timestamptz default now(),
         view_count int default 0,
-        import_count int default 0
+        import_count int default 0,
+        gallery_importable boolean default false
       );
+      -- Migration 076 added a LEFT JOIN onto profiles.external_name to resolve
+      -- the map AUTHOR by owner id. This test exercises member_count, not the
+      -- author, but the JOIN must resolve, so create a minimal profiles table +
+      -- seed the owner's external_name.
+      create table public.profiles (
+        id uuid primary key,
+        external_name text
+      );
+      insert into public.profiles (id, external_name) values ('${OWNER}', 'QuietCartographer418');
     `);
     // get_gallery_map (046) calls these settlement sanitizers; stub them as
     // identity/passthrough so we can run the member projection without loading the
@@ -122,17 +132,22 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
       },
     });
 
+    // gallery_importable (migration 072) is ORTHOGONAL to member_count: a blank
+    // map can be importable, and a campaign with members need not be. Set it so
+    // the importable facet's result set {campaign-optout, shared} is distinct from
+    // the hasSettlements set {shared} — proving the two facets gate independently.
     await db.query(
       `insert into public.saved_maps
-         (user_id, name, share_kind, gallery_share_campaign, map_data, is_public, public_slug)
+         (user_id, name, share_kind, gallery_share_campaign, map_data, is_public, public_slug, gallery_importable)
        values
          -- BLANK share of a 5-settlement campaign: envelope carries settlementIds
-         -- but the owner published a kind='map' (no opt-in).
-         ($1, 'Blank of a Campaign', 'map', false, $2::jsonb, true, 'blank-optout'),
+         -- but the owner published a kind='map' (no opt-in). Not importable.
+         ($1, 'Blank of a Campaign', 'map', false, $2::jsonb, true, 'blank-optout', false),
          -- map_with_campaign but the opt-in is OFF (publish without sharing members).
-         ($1, 'Campaign, opt-out',   'map_with_campaign', false, $2::jsonb, true, 'campaign-optout'),
-         -- The fully shared case: kind + opt-in ON -> members exposed.
-         ($1, 'Shared Campaign',     'map_with_campaign', true,  $2::jsonb, true, 'shared')`,
+         -- Importable, yet exposes ZERO members.
+         ($1, 'Campaign, opt-out',   'map_with_campaign', false, $2::jsonb, true, 'campaign-optout', true),
+         -- The fully shared case: kind + opt-in ON -> members exposed. Importable.
+         ($1, 'Shared Campaign',     'map_with_campaign', true,  $2::jsonb, true, 'shared', true)`,
       [OWNER, campaign],
     );
   });
@@ -171,5 +186,21 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     )).rows.map((r) => r.slug).sort();
     // Only the fully shared row survives; both opt-out rows are filtered out.
     expect(filtered).toEqual(['shared']);
+  });
+
+  it('projects the importable flag and the facet narrows to opted-in maps (migration 072)', async () => {
+    // The tile carries the owner opt-in flag …
+    const tiles = (await db.query(`select slug, importable from public.list_gallery_maps(0, 24)`)).rows;
+    const flagBySlug = Object.fromEntries(tiles.map((r) => [r.slug, r.importable]));
+    expect(flagBySlug['blank-optout']).toBe(false);
+    expect(flagBySlug['campaign-optout']).toBe(true);
+    expect(flagBySlug['shared']).toBe(true);
+
+    // … and the facet narrows to exactly the opted-in maps — independent of
+    // member_count (a blank/opt-out map can still be importable).
+    const filtered = (await db.query(
+      `select slug from public.list_gallery_maps(0, 24, 'newest', '', '{"importable": true}'::jsonb)`,
+    )).rows.map((r) => r.slug).sort();
+    expect(filtered).toEqual(['campaign-optout', 'shared']);
   });
 });

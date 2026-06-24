@@ -19,6 +19,7 @@
  * sign-in.
  */
 import { useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store/index.js';
 import { GOLD, GOLD_TXT, GOLD_BG, MUTED, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
@@ -58,6 +59,11 @@ export default function AuthPanel({
   const authMagicLink = useStore(s => s.authMagicLink);
   const authOAuth = useStore(s => s.authOAuth);
   const authSetSecurityAnswers = useStore(s => s.authSetSecurityAnswers);
+
+  // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
+  // the Button primitive without breaking the seamless borderless segments), so
+  // the primitive's mobile 44px tap floor does not reach it — we apply it here.
+  const isMobile = useIsMobile();
 
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
@@ -117,8 +123,13 @@ export default function AuthPanel({
   const securityComplete =
     Boolean(q1) && Boolean(q2) && q1 !== q2 && a1.trim() !== '' && a2.trim() !== '';
 
-  const showGoogle  = flag('googleOauth');
-  const showDiscord = flag('discordOauth');
+  // OAuth is offered on sign-IN only. On sign-up the extra provider buttons push
+  // the (already taller, security-question-bearing) form past the modal's
+  // ribbon/border, so they're withheld there — the email-link alternative stays
+  // in both views.
+  const oauthAllowed = mode === 'signin';
+  const showGoogle  = oauthAllowed && flag('googleOauth');
+  const showDiscord = oauthAllowed && flag('discordOauth');
 
   const handleOAuth = async (provider) => {
     setError(null);
@@ -321,6 +332,9 @@ export default function AuthPanel({
               aria-pressed={mode === id}
               style={{
                 flex: 1, padding: `${SP.sm}px 0`,
+                // Mobile-only 44px tap floor — the primitive's floor can't reach
+                // this raw segment, so it is applied inline. Desktop unchanged.
+                ...(isMobile ? { minHeight: 44 } : null),
                 background: mode === id ? GOLD_BG : 'transparent',
                 border: 'none', cursor: 'pointer',
                 // Active state in two non-color channels (weight + a gold
@@ -415,9 +429,11 @@ export default function AuthPanel({
           </AuthCTAButton>
         </div>
       )}
-      {!showGoogle && !showDiscord && (
-        // No OAuth providers enabled: the email sign-in link still needs a home,
-        // so it gets its own full-width alternative under the primary CTA.
+      {mode === 'signin' && !showGoogle && !showDiscord && (
+        // Sign-in only, no OAuth providers enabled: the email sign-in link still
+        // needs a home, so it gets its own full-width alternative under the primary
+        // CTA. Sign-up does NOT offer the magic link — account creation is
+        // password-only (mirrors OAuth being withheld from sign-up).
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>

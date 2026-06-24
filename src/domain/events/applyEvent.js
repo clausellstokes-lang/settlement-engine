@@ -43,7 +43,11 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
   const undo = captureEventUndoSnapshot(settlement, event);
 
   const logEntry = /** @type {EventLogEntry} */ ({
-    event,
+    // The pipeline may have RESOLVED the event (a derived APPLY_STRESSOR onset
+    // severity stamped in when the DM picked none). Log the resolved event so the
+    // timeline, the undo scrub, and the store's roaming-twin directive all read
+    // the same severity the mutation and state-deltas used.
+    event: result.event ?? event,
     appliedAt,
     beforeState,
     afterState: result.afterSystemState,

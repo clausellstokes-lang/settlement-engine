@@ -1,6 +1,8 @@
 import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 import { truncateAtWord } from '../../lib/text.js';
 import { displayInstitutionName } from '../../domain/display/institutionDisplay.js';
+import EntityLink from '../primitives/EntityLink.jsx';
+import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
@@ -42,7 +44,14 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
-        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{displayInstitutionName(inst)}</p>}
+        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>
+          {/* Provider institution -> in-dossier cross-link. Resolved by the
+              SAME id the dossier index assigns each institution (entityIdFor),
+              so it follows a rename; degrades to the displayInstitutionName
+              plain text when the institution is absent from the index or the
+              Power tab is gated out. */}
+          <EntityLink id={entityIdFor('institution', { name: inst })} type="institution" fallback={displayInstitutionName(inst)} />
+        </p>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:FS.xxs,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>

@@ -7,6 +7,7 @@
 // tokens only; no raw hex or font sizes.
 import { useId } from 'react';
 
+import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   CARD_ALT,
   FS,
@@ -17,6 +18,7 @@ import {
   SP,
   sans,
 } from '../theme.js';
+import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
 import {
   activeMapFilterCount,
@@ -132,8 +134,84 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
+// The map facet body, shared by the desktop sidebar and the mobile sheet. The
+// Clear control is rendered by the chrome so the body holds only the facets.
+function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool }) {
+  return (
+    <>
+      <SidebarSection title="Kind" count={filters.kind?.length || 0}>
+        <PairChips options={KIND_OPTIONS} value={filters.kind} onToggle={option => onToggleArray('kind', option)} />
+      </SidebarSection>
+
+      <SidebarSection title="Backdrop" count={filters.backdrop?.length || 0}>
+        <PairChips options={BACKDROP_OPTIONS} value={filters.backdrop} onToggle={option => onToggleArray('backdrop', option)} />
+      </SidebarSection>
+
+      <SidebarSection title="Settlements">
+        <ToggleRow
+          checked={!!filters.hasSettlements}
+          label="Has settlements"
+          onChange={value => onToggleBool('hasSettlements', value)}
+        />
+      </SidebarSection>
+
+      <SidebarSection title="Import">
+        <ToggleRow
+          checked={!!filters.importable}
+          label="Importable only"
+          onChange={value => onToggleBool('importable', value)}
+        />
+      </SidebarSection>
+
+      {tagVocabulary.length > 0 && (
+        <SidebarSection title="Tags" count={filters.tags?.length || 0}>
+          <TagChips options={tagVocabulary} value={filters.tags} onToggle={option => onToggleArray('tags', option)} />
+        </SidebarSection>
+      )}
+    </>
+  );
+}
+
+/**
+ * Gallery maps filter facets. Desktop: the sticky sidebar (byte-identical).
+ * Mobile (<640): the facet wall moves into a BottomSheet behind a single
+ * "Filters (N)" trigger, mirroring the settlements tab, so the map grid is not
+ * pushed below a tall chip wall.
+ *
+ * @param {object} props
+ * @param {object} props.filters         active map facet state
+ * @param {string[]} [props.tagVocabulary]  dynamic tag options
+ * @param {(key:string, value:string) => void} props.onToggleArray
+ * @param {(key:string, value:boolean) => void} props.onToggleBool
+ * @param {() => void} props.onClear
+ */
 export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onToggleArray, onToggleBool, onClear }) {
+  const isMobile = useIsMobile();
   const activeCount = activeMapFilterCount(filters);
+  const bodyProps = { filters, tagVocabulary, onToggleArray, onToggleBool };
+
+  if (isMobile) {
+    return (
+      <div style={{ marginBottom: SP.md }}>
+        <BottomSheet title="Filters" triggerLabel="Filters" count={activeCount} fullWidthTrigger>
+          <div style={{ display: 'grid', gap: SP.lg }}>
+            {activeCount > 0 && (
+              <Button
+                variant="ghost"
+                onClick={onClear}
+                aria-label={`Clear all ${activeCount} active filters`}
+                style={{ justifySelf: 'start', color: GOLD_TXT }}
+              >
+                Clear
+              </Button>
+            )}
+            <MapFilterBody {...bodyProps} />
+          </div>
+        </BottomSheet>
+      </div>
+    );
+  }
+
   return (
     <aside className="gallery-sidebar-panel" style={{
       display: 'grid',
@@ -160,27 +238,7 @@ export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onTogg
         )}
       </div>
 
-      <SidebarSection title="Kind" count={filters.kind?.length || 0}>
-        <PairChips options={KIND_OPTIONS} value={filters.kind} onToggle={option => onToggleArray('kind', option)} />
-      </SidebarSection>
-
-      <SidebarSection title="Backdrop" count={filters.backdrop?.length || 0}>
-        <PairChips options={BACKDROP_OPTIONS} value={filters.backdrop} onToggle={option => onToggleArray('backdrop', option)} />
-      </SidebarSection>
-
-      <SidebarSection title="Settlements">
-        <ToggleRow
-          checked={!!filters.hasSettlements}
-          label="Has settlements"
-          onChange={value => onToggleBool('hasSettlements', value)}
-        />
-      </SidebarSection>
-
-      {tagVocabulary.length > 0 && (
-        <SidebarSection title="Tags" count={filters.tags?.length || 0}>
-          <TagChips options={tagVocabulary} value={filters.tags} onToggle={option => onToggleArray('tags', option)} />
-        </SidebarSection>
-      )}
+      <MapFilterBody {...bodyProps} />
     </aside>
   );
 }

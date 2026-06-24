@@ -4,6 +4,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -69,26 +71,11 @@ async function withinRateLimit(req: Request): Promise<boolean> {
   }
 }
 
+// CORS: fail-closed via the shared allowlist (_shared/cors.ts). Never '*'; the
+// shared list also accepts the Cloudflare Pages preview origin. Advertises
+// POST/OPTIONS.
 function corsHeaders(req: Request) {
-  const configured = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    configured,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req.headers.get('Origin') || '';
-  const accepted = !origin || allowed.includes(origin);
-  return {
-    // Fail closed: never emit '*'. Echo the matched origin, else pin to the
-    // first allowed host (a missing Origin is treated as same-origin).
-    'Access-Control-Allow-Origin': accepted ? (origin || allowed[0]) : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(accepted ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 // Exported (not just inlined into serve) so the trust boundary can be

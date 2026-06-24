@@ -64,6 +64,8 @@ import {
   twinDirectiveForEvent,
 } from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
+import { WAR_STRESSOR_TYPES } from '../domain/worldPulse/warStressorTypes.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
@@ -135,27 +137,93 @@ export function stripDerivedConfigKeys(config) {
  *      state, regional propagation, Wizard News).
  * Timestamps reuse this apply's editedAt stamp so propagation stamps no
  * wall-clock time of its own (replay is byte-identical — same args, same graph).
+ *
+ * Phase 4b — the ripple is NOT monolithic. It has a REGIONAL half (cross-
+ * settlement neighbour propagation → the regional graph) and a WORLD-STATE half
+ * (crisis-twin + party-impact, which write `campaign.worldState`, not neighbour
+ * rows). A campaign-member change-queue COMMIT defers the REGIONAL half to the
+ * next Advance (Fork 2: the world-state half stays immediate so a committed
+ * crisis still roams/ages at the campaign tick). `computeRegionalRipple` below
+ * is the regional half factored out so the commit path can COMPUTE the deferred
+ * impacts without enqueuing them into the live graph; `skipRegional` suppresses
+ * the immediate enqueue here so the same change cannot propagate twice (R1).
  */
-function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
-  if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
-    const afterEnvelope = saveEnvelopeFor(
-      activeSaveId,
-      beforeSave,
-      afterState.settlement,
-      afterCampaignState || beforeSave?.campaignState,
-    );
-    const result = propagateRegionalEvent({
-      graph: campaign.regionalGraph,
-      beforeSettlement: beforeEnvelope,
-      afterSettlement: afterEnvelope,
-      event,
-      activeSettlementId: activeSaveId,
-      visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
-      maxDepth: 2,
-      waveDecay: 0.45,
-      now: afterState.editedAt,
-    });
-    if (result.impacts.length > 0) {
+/**
+ * Compute the regional-propagation result for a committed settlement event
+ * WITHOUT writing it to the live campaign graph. Returns the domain
+ * `propagateRegionalEvent` result (`{ graph, impacts, localDelta, ... }`), or
+ * null when there is nothing to propagate (no campaign / no before envelope).
+ * The campaign-commit path stashes `result.impacts` onto
+ * `worldState.deferredImpacts` so the NEXT Advance folds them into
+ * `queuedImpacts` exactly once — the regional ripple deferred as data.
+ * @returns {null | { graph: any, impacts: any[], localDelta: any }}
+ */
+function computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
+  if (!(campaign && beforeEnvelope)) return null;
+  const afterEnvelope = saveEnvelopeFor(
+    activeSaveId,
+    beforeSave,
+    afterState.settlement,
+    afterCampaignState || beforeSave?.campaignState,
+  );
+  return propagateRegionalEvent({
+    graph: campaign.regionalGraph,
+    beforeSettlement: beforeEnvelope,
+    afterSettlement: afterEnvelope,
+    event,
+    activeSettlementId: activeSaveId,
+    visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
+    maxDepth: 2,
+    waveDecay: 0.45,
+    now: afterState.editedAt,
+  });
+}
+
+/**
+ * #2 — Resolve a DM-authored siege / occupation stressor to a CROSS-SETTLEMENT
+ * war-front seed intent, SHARED by the immediate-ripple path and the deferred
+ * change-queue stash path so the two cannot drift. Reads the gate (war-type
+ * stressor + warLayerEnabled) and resolves the named instigator NAME/ID to a
+ * partner SAVE id off the home settlement's live neighbourNetwork, confirming
+ * that save is a MEMBER of this campaign. A war-off campaign, a non-war
+ * stressor, or a non-member / unknown instigator all resolve to null (the
+ * caller falls back to the settlement-local-only flip already applied in
+ * mutate). Pure read — no store writes — so both callers stay byte-stable.
+ *
+ * @param {{ afterState: any, campaign: any, event: any, activeSaveId: string|number }} args
+ * @returns {{ instigatorId: string, targetId: string, sinceTick: number } | null}
+ */
+function resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId }) {
+  if (!(campaign
+      && event?.type === 'APPLY_STRESSOR'
+      && event?.payload?.instigatorNeighbour)) return null;
+  const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+  const rules = normalizeSimulationRules(campaign.worldState?.simulationRules);
+  if (!rules.warLayerEnabled || !WAR_STRESSOR_TYPES.includes(stressorType)) return null;
+  const instigatorRef = String(event.payload.instigatorNeighbour).trim();
+  // Resolve the instigator NAME/ID to a partner SAVE id off the home
+  // settlement's neighbourNetwork (each link carries the partner save `id`),
+  // then confirm that save is a MEMBER of this campaign.
+  const network = afterState.settlement?.neighbourNetwork || [];
+  const link = network.find(n =>
+    String(n?.name || '') === instigatorRef
+    || String(n?.neighbourName || '') === instigatorRef
+    || String(n?.id || '') === instigatorRef
+    || String(n?.linkId || '') === instigatorRef);
+  const instigatorId = link?.id != null ? String(link.id) : null;
+  const memberIds = (campaign.settlementIds || []).map(String);
+  if (!instigatorId || !memberIds.includes(instigatorId)) return null;
+  const sinceTick = Math.max(0, Math.floor(Number(campaign.worldState?.tick) || 0));
+  return { instigatorId, targetId: String(activeSaveId), sinceTick };
+}
+
+function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional = false }) {
+  // Regional (cross-settlement) half. Skipped on a campaign-member commit — the
+  // flush computes + DEFERS these impacts instead (Fork 2 / Mechanism B), so the
+  // immediate enqueue never happens and the change cannot double-propagate (R1).
+  if (!skipRegional && campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
+    const result = computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+    if (result && result.impacts.length > 0) {
       afterState.setCampaignRegionalGraph(campaign.id, result.graph);
       // The canon-edit cross-settlement propagation moment — this path fired NO
       // analytics. result is a plain domain return; emit the redacted summary.
@@ -191,6 +259,29 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
         });
       }
     } catch { /* the world half is best-effort */ }
+  }
+
+  // #2 — SIEGE/OCCUPATION INSTIGATOR → cross-settlement war deployment. On the
+  // IMMEDIATE ripple path (a clock-bound member commit; NOT the deferred 4b flush,
+  // which sets skipRegional), a DM-authored WAR-type stressor that names an
+  // instigating neighbour seeds a war_front instigator → THIS settlement, which the
+  // war layer resolves on the next Advance. GATED on the campaign's warLayerEnabled;
+  // standalone (campaign null) never reaches here, so it stays settlement-local.
+  // Best-effort + guarded: a seed failure must never undo the committed event.
+  if (!skipRegional
+      && campaign
+      && typeof afterState.seedCampaignWarFront === 'function') {
+    try {
+      const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId });
+      if (seed) {
+        afterState.seedCampaignWarFront(campaign.id, {
+          instigatorId: seed.instigatorId,
+          targetId: seed.targetId,
+          sinceTick: seed.sinceTick,
+          now: afterState.editedAt,
+        });
+      }
+    } catch { /* the war-front seed is best-effort; the committed event stands */ }
   }
 
   if (event?.partyCaused && campaign) {
@@ -541,6 +632,26 @@ export const createSettlementSlice = (set, get) => ({
   eventLog:        [],       // EventLogEntry[] — populated only in canon mode
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
   pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
+
+  // Change-queue flush seam (R2 — Double-applying mitigation). When the
+  // change-queue commits, it replays each order through the SAME executors
+  // (applyEvent / renameSettlement) that run on a direct apply. Those
+  // executors persist immediately by default, which during a flush would mean
+  // N cloud writes instead of one atomic commit. While this flag is set the
+  // executors mutate local state + the savedSettlements mirror as usual but
+  // SKIP their own persistSaveUpdate call — the flush owns the single
+  // end-of-batch persist. Always restored to false in the flush's finally.
+  flushSuppressPersist: false,
+
+  // Phase 4b — set by the change-queue flush ONLY during a CAMPAIGN-MEMBER
+  // commit replay. While set, applyEvent (a) bypasses the clock-bound short-
+  // circuit so the event applies to THIS settlement now instead of queuing onto
+  // the world pulse, and (b) DEFERS the regional ripple: the cross-settlement
+  // impacts are computed and stashed on `campaign.worldState.deferredImpacts`
+  // for the next Advance to fold in exactly once, rather than enqueued into the
+  // live graph here. The crisis-twin/party-impact world-state half stays
+  // immediate (Fork 2). Always restored to false in the flush's finally.
+  flushApplyLocalOnly: false,
 
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
@@ -1274,6 +1385,156 @@ export const createSettlementSlice = (set, get) => ({
       if ('faction' in fac) fac.faction = newName;
     }),
 
+  // ── Settlement (town) rename ───────────────────────────────────────────────
+  //
+  // Unlike NPC/faction names, a settlement's own name is NEVER canon-locked: a
+  // GM may always rename their town. Before canon it is a plain name edit. After
+  // canon the name still changes, but — because canon state is recorded — the
+  // rename is ALSO appended to the timeline as a RENAME_SETTLEMENT flavor entry.
+  // It is flavor only: no systemState delta, no entity mutation, no PRNG draw, so
+  // determinism and the canon save/coherence flow are untouched. The parent
+  // SettlementsPanel.applyRename still owns the neighbour + ai_data cascade; this
+  // action owns the active save's name set plus the canon flavor record, and is
+  // self-contained so it can be exercised in isolation.
+  //
+  // @param {string|number} id - the saved settlement id to rename.
+  // @param {string} newName - the proposed new name (trimmed by the action).
+  // @returns {boolean} true when a canon flavor entry was recorded.
+  /**
+   * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
+   * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
+   * result, so an event order replayed AFTER a link/unlink in the same commit
+   * builds on the link's network (and vice-versa). Without this the store
+   * (event mirror) and the panel (link mirror) diverge on neighbourNetwork —
+   * which a handful of events (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE /
+   * OPENED_TRADE_ROUTE) also mutate. No-op unless a flush is in progress.
+   * @param {{ neighbourNetwork?: any[], interSettlementRelationships?: any[] }} neighbourFields
+   */
+  syncActiveNeighbourFields: (neighbourFields) => {
+    if (!get().flushSuppressPersist) return;
+    set(state => {
+      if (!state.settlement || !neighbourFields) return;
+      if (Array.isArray(neighbourFields.neighbourNetwork)) {
+        state.settlement.neighbourNetwork = neighbourFields.neighbourNetwork;
+      }
+      if (Array.isArray(neighbourFields.interSettlementRelationships)) {
+        state.settlement.interSettlementRelationships = neighbourFields.interSettlementRelationships;
+      }
+    });
+  },
+
+  renameSettlement: (id, newName) => {
+    const trimmed = String(newName || '').trim();
+    if (!trimmed) return false;
+    const now = new Date().toISOString();
+    let recorded = false;
+    let persist = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      const isActive = String(state.activeSaveId || '') === String(id);
+      const save = idx !== -1 ? state.savedSettlements[idx] : null;
+      const oldName = save?.settlement?.name || save?.name
+        || (isActive ? state.settlement?.name : '') || '';
+      if (trimmed === oldName) return;
+      const currentCampaignState = save?.campaignState
+        || (isActive ? { phase: state.phase, eventLog: state.eventLog } : {});
+      const isCanon = (currentCampaignState.phase || (isActive ? state.phase : 'draft')) === 'canon';
+
+      const eventLog = Array.isArray(currentCampaignState.eventLog)
+        ? [...currentCampaignState.eventLog]
+        : [];
+      if (isCanon) {
+        eventLog.push({
+          id: `rename.${id}.${Date.now()}`,
+          type: 'RENAME_SETTLEMENT',
+          targetId: oldName || null,
+          timestamp: now,
+          // Flavor only: a recorded line of in-world history, no afterState delta.
+          narrativeSummary: oldName
+            ? `${oldName} is now known as ${trimmed}.`
+            : `The settlement is now known as ${trimmed}.`,
+        });
+        recorded = true;
+      }
+
+      if (save) {
+        const nextSettlement = { ...(save.settlement || {}), name: trimmed };
+        const campaignState = isCanon
+          ? { ...currentCampaignState, phase: currentCampaignState.phase || 'canon', eventLog, editedAt: now }
+          : save.campaignState;
+        state.savedSettlements[idx] = {
+          ...save,
+          name: trimmed,
+          settlement: nextSettlement,
+          ...(isCanon ? { campaignState, timestamp: now } : {}),
+        };
+        persist = {
+          settlement: cloneJson(nextSettlement),
+          ...(isCanon ? { campaignState: cloneJson(campaignState), timestamp: now } : {}),
+        };
+      }
+
+      if (isActive && state.settlement) {
+        state.settlement = { ...state.settlement, name: trimmed };
+        if (isCanon) {
+          state.eventLog = eventLog;
+          state.editedAt = now;
+        }
+      }
+    });
+    // R2: a change-queue flush replays renameSettlement and owns the single
+    // atomic commit, so defer this row's cloud write while suppressed.
+    if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
+    return recorded;
+  },
+
+  /**
+   * Record a CANON-only flavor entry on the active settlement's timeline,
+   * generalizing the RENAME_SETTLEMENT precedent (above) so every committed
+   * change-queue order leaves a chronicle line. Used by the change-queue flush
+   * for link / unlink orders, which bypass applyEvent and so would otherwise
+   * record nothing in-world.
+   *
+   * Flavor-only contract (identical to RENAME_SETTLEMENT): NO systemState delta,
+   * NO entity mutation, NO PRNG draw — determinism and the canon coherence flow
+   * are untouched. The entry carries `flavor:true` AND stamps the current
+   * systemState as `beforeState` so undoLastEvent (R3) pops it as a no-op delta
+   * rather than restoring an undefined systemState.
+   *
+   * No-op unless the active settlement is in canon phase. Does NOT persist on
+   * its own — the caller (flush) owns the single atomic commit; the mutated
+   * eventLog rides along in that save's campaignState.
+   *
+   * @param {{ type: string, narrativeSummary: string, targetId?: string|null }} entry
+   * @returns {boolean} true when an entry was appended.
+   */
+  recordCanonFlavorEntry: ({ type, narrativeSummary, targetId = null }) => {
+    if (get().phase !== 'canon') return false;
+    const now = new Date().toISOString();
+    let recorded = false;
+    set(state => {
+      if (state.phase !== 'canon' || !Array.isArray(state.eventLog)) return;
+      state.eventLog.push({
+        id: `flavor.${type}.${Date.now()}.${state.eventLog.length}`,
+        type,
+        targetId,
+        timestamp: now,
+        // Flavor only — a recorded line of in-world history, no afterState delta.
+        narrativeSummary,
+        // R3 undo-safety: a flavor entry carries no real state transition. Stamp
+        // the current systemState as beforeState so undoLastEvent's
+        // `systemState = popped.beforeState` is a no-op, and mark it flavor so a
+        // future undo refinement can skip it entirely.
+        flavor: true,
+        beforeState: state.systemState,
+        afterState: state.systemState,
+      });
+      state.editedAt = now;
+      recorded = true;
+    });
+    return recorded;
+  },
+
   // ── User-edited prose ────────────────────────────────────────────────────
   //
   // Edit-mode toggle: when true, EditableText components in the
@@ -1526,7 +1787,14 @@ export const createSettlementSlice = (set, get) => ({
     // they queue as pending intentions and resolve simultaneously with every
     // other member at the next world-pulse advance (drainQueuedEvents). Only in
     // canon; draft edits stay authorial and immediate.
-    if (activeSaveId && state.phase === 'canon'
+    // Phase 4b: during a campaign-member change-queue COMMIT replay the flush
+    // sets `flushApplyLocalOnly`, which BYPASSES this short-circuit so the event
+    // applies to THIS settlement now (the local half of the commit) instead of
+    // re-queuing onto pendingEvents. The regional ripple is likewise skipped
+    // below and deferred by the flush. Off a commit the clock-bound short-circuit
+    // stands: a stray edit on a member still queues to the world pulse.
+    if (!state.flushApplyLocalOnly
+        && activeSaveId && state.phase === 'canon'
         && typeof state.isSettlementClockBound === 'function'
         && state.isSettlementClockBound(activeSaveId)) {
       const queued = state.queueSettlementEvent(activeSaveId, event);
@@ -1553,10 +1821,16 @@ export const createSettlementSlice = (set, get) => ({
       // stays a pure function of (settlement, event, now).
       now: new Date().toISOString(),
     });
+    // The pipeline may have RESOLVED the event (a derived APPLY_STRESSOR onset
+    // severity stamped in when the DM picked none). Every downstream consumer —
+    // reconciliation, the system-state re-layer, the crisis-twin snapshot, the
+    // world ripple, successor detection — reads the COMMITTED event so the
+    // roaming twin's severity matches the dossier entry and the state deltas.
+    const committedEvent = logEntry.event ?? event;
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
       source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
-      changeType: event?.type,
-      changeLabel: event?.targetId || event?.payload?.label || event?.id,
+      changeType: committedEvent?.type,
+      changeLabel: committedEvent?.targetId || committedEvent?.payload?.label || committedEvent?.id,
       now: logEntry.appliedAt,
     });
     // Re-derive SystemState from the RECONCILED settlement (so reconciliation's
@@ -1566,7 +1840,7 @@ export const createSettlementSlice = (set, get) => ({
     // only, silently discarding the authored-effect surface (e.g. CUT_TRADE_ROUTE's
     // resilience/resourcePressure/externalThreat deltas), so the persisted afterState
     // disagreed with the preview the DM was shown. Pinned by the preview==apply invariant.
-    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), event, state.settlement);
+    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), committedEvent, state.settlement);
     logEntry = {
       ...logEntry,
       afterState: nextSystemState,
@@ -1583,14 +1857,14 @@ export const createSettlementSlice = (set, get) => ({
         ...logEntry,
         undo: {
           ...(logEntry.undo || {}),
-          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, event, activeSaveId),
+          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, committedEvent, activeSaveId),
         },
       };
     }
 
     // Successor detection (pure; see computePendingSuccession): a dead
     // pillar-tier NPC surfaces a ranked, dismissible successor prompt for the DM.
-    const pendingSuccession = computePendingSuccession(state.settlement, event);
+    const pendingSuccession = computePendingSuccession(state.settlement, committedEvent);
 
     set(s => {
       s.settlement     = nextSettlement;
@@ -1619,16 +1893,65 @@ export const createSettlementSlice = (set, get) => ({
       if (typeof afterState.updateSavedSettlement === 'function') {
         afterState.updateSavedSettlement(activeSaveId, savePartial);
       }
-      persistSaveUpdate(activeSaveId, {
-        settlement: savePartial.settlement,
-        campaignState: savePartial.campaignState,
-      });
+      // R2: during a change-queue flush, defer the cloud write to the flush's
+      // single atomic commit. The local mirror above still updates so the
+      // next replayed order threads off fresh state.
+      if (!afterState.flushSuppressPersist) {
+        persistSaveUpdate(activeSaveId, {
+          settlement: savePartial.settlement,
+          campaignState: savePartial.campaignState,
+        });
+      }
     }
 
     // Propagate the committed event into the campaign world engine — regional
     // graph, crisis-lifecycle twin, party-impact pipeline. See the helper for
     // the per-consumer rationale; all canon-only and best-effort + guarded.
-    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+    //
+    // Phase 4b: under a campaign-member change-queue commit (`flushApplyLocalOnly`)
+    // the REGIONAL half is skipped here and DEFERRED — the flush computes the
+    // impacts once and stashes them on `worldState.deferredImpacts` for the next
+    // Advance to fold in exactly once. The crisis-twin + party-impact world-state
+    // half stays immediate (Fork 2) so a committed crisis still roams/ages at the
+    // campaign tick. The flush reads the regional result off the live store, so
+    // it must run with the post-apply afterState already committed (it is).
+    rippleEventThroughWorld({ afterState, campaign, event: committedEvent, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional: !!afterState.flushApplyLocalOnly });
+
+    // Phase 4b — campaign-member commit: COMPUTE the deferred regional impacts
+    // (the half rippleEventThroughWorld just skipped) and stash them onto the
+    // campaign's worldState.deferredImpacts. They are NOT enqueued into the live
+    // queuedImpacts here — the next Advance folds the whole deferred bucket in
+    // exactly once (Mechanism B). This is the ONLY place the regional half lands
+    // for a member commit, so the change propagates exactly once.
+    if (afterState.flushApplyLocalOnly && campaign && beforeEnvelope
+        && typeof afterState.stashDeferredRegionalImpacts === 'function') {
+      const result = computeRegionalRipple({ afterState, campaign, event: committedEvent, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+      if (result && result.impacts.length > 0) {
+        afterState.stashDeferredRegionalImpacts(campaign.id, result.impacts);
+      }
+    }
+
+    // Phase 4b — campaign-member commit: the #2 war-front seed half. The immediate
+    // ripple path seeds eagerly via seedCampaignWarFront, but under flushApplyLocalOnly
+    // rippleEventThroughWorld ran with skipRegional, so the seed was NOT fired. Resolve
+    // the seed intent HERE (the home settlement's neighbourNetwork is live during the
+    // flush replay) and STASH it onto worldState.deferredWarFronts. It is NOT seeded
+    // live — the next Advance drains the bucket and calls seedCampaignWarFront exactly
+    // once, BEFORE the war layer, so the seeded siege is read + retired by that Advance.
+    if (afterState.flushApplyLocalOnly && campaign
+        && typeof afterState.stashDeferredWarFront === 'function') {
+      try {
+        const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event: committedEvent, activeSaveId });
+        if (seed) {
+          afterState.stashDeferredWarFront(campaign.id, {
+            instigatorId: seed.instigatorId,
+            targetId: seed.targetId,
+            stressorType: 'siege',
+            sinceTick: seed.sinceTick,
+          });
+        }
+      } catch { /* the deferred war-front stash is best-effort; the committed event stands */ }
+    }
 
     return logEntry;
   },

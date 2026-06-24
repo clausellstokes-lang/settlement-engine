@@ -286,9 +286,11 @@ export const createCampaignSlice = (set, get) => {
     const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
     if (!canCreate) throw new Error('Importing maps is a premium feature.');
 
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const shared = await fetchGalleryMap(slug);
-    if (!shared) throw new Error('That shared map is no longer available.');
+    // Server-gated on the owner's gallery_importable opt-in (migration 072):
+    // returns null for a non-importable / missing map, or an anonymous caller.
+    const { fetchMapForImport } = await import('../lib/gallery.js');
+    const shared = await fetchMapForImport(slug);
+    if (!shared) throw new Error("This map isn't available to import.");
     const backdrop = shared.backdrop || {};
 
     const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
@@ -338,9 +340,11 @@ export const createCampaignSlice = (set, get) => {
     const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
     if (!canCreate) throw new Error('Importing campaigns is a premium feature.');
 
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const payload = await fetchGalleryMap(slug);
-    if (!payload) throw new Error('That shared campaign is no longer available.');
+    // Server-gated on the owner's gallery_importable opt-in (migration 072):
+    // returns null for a non-importable / missing share, or an anonymous caller.
+    const { fetchMapForImport } = await import('../lib/gallery.js');
+    const payload = await fetchMapForImport(slug);
+    if (!payload) throw new Error("This campaign isn't available to import.");
     if (payload.kind !== 'map_with_campaign') return get().importGalleryMap(slug); // not a campaign share
 
     const members = Array.isArray(payload.members) ? payload.members : [];
@@ -748,6 +752,119 @@ export const createCampaignSlice = (set, get) => {
       persistCampaignState(state, c.id);
     });
     return added;
+  },
+
+  /**
+   * Phase 4b — stash the DEFERRED regional impacts produced by a campaign-member
+   * change-queue commit. The commit applies the settlement-LOCAL change now but
+   * defers the cross-settlement (regional) propagation to the next Advance: the
+   * impacts are computed at commit and parked on `worldState.deferredImpacts`,
+   * NOT enqueued into the live `regionalGraph.queuedImpacts`. The next
+   * `advanceCampaignWorld` folds the whole `deferredImpacts` bucket into
+   * `queuedImpacts` exactly once and clears it, so the change can never
+   * propagate twice (the double-propagation guard — see R1).
+   *
+   * This is a read-modify-write of ONLY the deferred bucket on the live campaign
+   * (it never rewrites a stale full-world snapshot — see R3), and it does NOT
+   * bump `worldState.tick` (a commit is not an Advance — see R2). Persistence is
+   * the flush's job (the 069 RPC carries this snapshot atomically with the
+   * settlement rows); this action only mutates local state.
+   * @param {string} campaignId
+   * @param {Array<object>} impacts
+   * @returns {number} the deferred-impact count after the stash (0 = no-op)
+   */
+  stashDeferredRegionalImpacts: (campaignId, impacts) => {
+    if (!campaignId || !Array.isArray(impacts) || impacts.length === 0) return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredImpacts) ? worldState.deferredImpacts : [];
+      // De-dupe by impact id so a re-commit of the same staged event (e.g. a
+      // failed-then-retried flush) cannot park two copies of one impact.
+      const byId = new Map(existing.map(i => [String(i.id), i]));
+      for (const impact of impacts) {
+        if (!impact || impact.id == null) continue;
+        byId.set(String(impact.id), cloneJson(impact));
+      }
+      const deferredImpacts = [...byId.values()];
+      count = deferredImpacts.length;
+      c.worldState = { ...worldState, deferredImpacts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
+   * Phase 4b (#2.2) — STASH a deferred WAR-FRONT seed intent parked by a
+   * clock-bound campaign-member change-queue commit (a DM-authored siege /
+   * occupation stressor naming a member instigator). The IMMEDIATE ripple path
+   * seeds eagerly via seedCampaignWarFront, but a member commit runs with
+   * skipRegional, so the seed is deferred: this records the resolved intent on
+   * worldState.deferredWarFronts, which advanceCampaignWorld drains EXACTLY ONCE
+   * (BEFORE evaluateWarLayer) into a real seedCampaignWarFront call. A parallel
+   * bucket to deferredImpacts on purpose — a war-front seed is a deployment +
+   * graph write, NOT a queued regional impact, so it must not flow through
+   * queueRegionalImpacts. De-duped by `${instigatorId}->${targetId}` so a
+   * failed-then-retried flush parks ONE entry. Does NOT bump the tick and does
+   * NOT persist (the 069 RPC carries this worldState snapshot atomically with
+   * the settlement rows, mirroring the deferredImpacts stash).
+   * @param {string} campaignId
+   * @param {{ instigatorId: string, targetId: string, stressorType?: string, sinceTick?: number }} entry
+   * @returns {number} the deferred-war-front count after the stash (0 = no-op)
+   */
+  stashDeferredWarFront: (campaignId, entry) => {
+    if (!campaignId || !entry || !entry.instigatorId || !entry.targetId) return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredWarFronts) ? worldState.deferredWarFronts : [];
+      // De-dupe by instigator→target so a re-commit of the same staged siege
+      // (e.g. a failed-then-retried flush) cannot park two copies of one front.
+      const byKey = new Map(existing.map(f => [`${String(f.instigatorId)}->${String(f.targetId)}`, f]));
+      const normalized = {
+        instigatorId: String(entry.instigatorId),
+        targetId: String(entry.targetId),
+        stressorType: String(entry.stressorType || 'siege'),
+        sinceTick: Math.max(0, Math.floor(Number(entry.sinceTick) || 0)),
+      };
+      byKey.set(`${normalized.instigatorId}->${normalized.targetId}`, normalized);
+      const deferredWarFronts = [...byKey.values()];
+      count = deferredWarFronts.length;
+      c.worldState = { ...worldState, deferredWarFronts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
+   * Phase 4b — the Realm cue count: how many DISTINCT member settlements have a
+   * committed-but-not-yet-propagated change waiting for the next Advance.
+   * Counted off the deferred impacts' source settlement (each impact carries the
+   * settlement whose edit produced it). Zero when nothing is pending (the cue
+   * hides), and it clears the moment an Advance folds + drains the bucket.
+   * @param {string} campaignId
+   * @returns {number}
+   */
+  pendingPropagationCount: (campaignId) => {
+    const c = (get().campaigns || []).find(x => String(x.id) === String(campaignId));
+    const deferred = c?.worldState?.deferredImpacts;
+    if (!Array.isArray(deferred) || deferred.length === 0) return 0;
+    const sources = new Set();
+    for (const impact of deferred) {
+      const src = impact?.sourceSettlementId ?? impact?.originSettlementId ?? impact?.source ?? null;
+      sources.add(src != null ? String(src) : `impact:${impact?.id}`);
+    }
+    return sources.size;
   },
 
   /** Cancel a queued intention before the next tick resolves it. */

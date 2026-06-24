@@ -129,6 +129,13 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
             <span style={{ color: BODY, fontWeight: 700 }}>{secondaryMeta.join(' · ')}</span>
           )}
         </div>
+        {/* Author resolved live by owner id (migration 076) — a rename reflects
+            here automatically. Hidden when an owner has no external_name yet. */}
+        {item.author && (
+          <div style={{ fontFamily: sans, fontSize: FS.xs, color: BODY, textTransform: 'none' }}>
+            by {item.author}
+          </div>
+        )}
         {item.description && (
           <div
             className="sf-rich"
