@@ -3,7 +3,8 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
-import { entityAnchor, entityIdFor, localNpcId } from '../../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor, localNpcId, institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
+import { inferInstitutionName } from '../../../domain/npcProfile.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { useStore } from '../../../store/index.js';
 import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
@@ -206,6 +207,36 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const _mods   = (f.modifiers||[]).concat(f.modifier ? [f.modifier] : []);
             const matchedGroups = factionGroups.filter(fg => fg.powerFactionName === f.faction);
 
+            // Institutions this power touches, derived ONLY from its own members:
+            // each member's category implies an institution (the militia under the
+            // City Watch because the Watch's members are `military`), deduped to a
+            // rename-safe index id. This is genuinely THIS power's footprint — an
+            // institution with no member affinity never appears.
+            //
+            // Why resolve through the index by NAME (not the member's own
+            // institutionLink string): the raw NPC never stores that link, and the
+            // `institution.<snake>` form it would carry mismatches the index's
+            // slug keys — so we infer the institution NAME from each member and
+            // hand it to institutionIdFromName, which returns the authoritative id
+            // EntityLink can resolve to a live (renamed) name. Pure + O(members).
+            const associatedInstitutions = (() => {
+              const seen = new Set();
+              const out = [];
+              for (const mem of matchedGroups.flatMap(g => g.members || [])) {
+                // Prefer the live indexed NPC so a renamed/recategorised member
+                // infers off current data; fall back to the member snapshot.
+                const npcId = localNpcId(index, mem.name);
+                const liveNpc = npcId ? index?.resolve?.(npcId)?.raw : null;
+                const instName = inferInstitutionName(liveNpc || mem, s);
+                if (!instName) continue;
+                const instId = institutionIdFromName(index, instName);
+                if (!instId || seen.has(instId)) continue;
+                seen.add(instId);
+                out.push({ id: instId, name: instName });
+              }
+              return out.slice(0, 5);
+            })();
+
             return (
               <div
                 key={i}
@@ -265,7 +296,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                     )}
                     {matchedGroups.length > 0 && (
                       <div style={{marginTop:8}}>
-                        <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated:</span>
+                        <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated NPCs</span>
                         {matchedGroups.flatMap(g => g.members||[]).slice(0,5).map((mem,j) => (
                           <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
                             {/* Sub-faction member → its NPC card. Resolve the
@@ -277,6 +308,25 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                             <EntityLink id={localNpcId(index, mem.name) ?? entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
+                        {/* Associated Institutions — the SAME pill format as the
+                            NPC list above so the two read as a pair. Derived from
+                            this power's members' institution affinity (see
+                            associatedInstitutions). A quiet "None" when nothing
+                            resolves keeps the pairing deliberate rather than
+                            leaving an empty bordered block; each institution is a
+                            rename-safe EntityLink to its Overview card. */}
+                        <div style={{marginTop:6}}>
+                          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated Institutions</span>
+                          {associatedInstitutions.length === 0 ? (
+                            <span style={{fontSize:FS.xxs,color:MUTED}}>None</span>
+                          ) : (
+                            associatedInstitutions.map((inst) => (
+                              <span key={inst.id} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
+                                <EntityLink id={inst.id} type="institution" fallback={inst.name} style={{color:c,textDecorationColor:`${c}80`}} />
+                              </span>
+                            ))
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>

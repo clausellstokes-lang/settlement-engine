@@ -12,31 +12,7 @@ import { EconomicsGranarySection } from '../../dossier/EngineSections.jsx';
 import Button from '../../primitives/Button.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
-import { slugifyEntity } from '../../../domain/dossier/entityLinks.js';
-
-/**
- * Resolve an institution display name to its stable index id, matching against
- * the index's STRUCTURED institution entries (by slugified current name) — never
- * by regex-scanning prose. Returns the entry's id (rename-safe: EntityLink
- * re-resolves the current name at render) or null when no institution matches,
- * in which case the caller degrades to plain text rather than a dead link.
- *
- * `svc.institutions[]` carries lowercased display names (see
- * deriveInstitutionalServices); slugify normalizes case + punctuation so the
- * match holds regardless.
- *
- * @param {object|null} index   buildDossierEntityIndex result (or null off-dossier).
- * @param {string} name         Institution display name to resolve.
- * @returns {string|null}       Stable institution id, or null.
- */
-function institutionIdFromName(index, name) {
-  if (!index?.institutions?.length || !name) return null;
-  const key = slugifyEntity(name);
-  const hit = index.institutions.find(inst =>
-    slugifyEntity(inst.currentName) === key
-    || slugifyEntity(inst.raw?.name) === key);
-  return hit ? hit.id : null;
-}
+import { institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids

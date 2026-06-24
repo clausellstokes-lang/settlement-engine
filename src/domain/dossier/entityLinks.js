@@ -90,6 +90,34 @@ export function localNpcId(index, name) {
   return hit ? hit.id : null;
 }
 
+/**
+ * Resolve an institution display name to its stable index id, matching against
+ * the index's STRUCTURED institution entries (by slugified current name) — never
+ * by regex-scanning prose. Returns the entry's id (rename-safe: EntityLink
+ * re-resolves the current name at render) or null when no institution matches,
+ * in which case the caller degrades to plain text rather than a dead link.
+ *
+ * Shared by every tab that holds a bare institution name and wants a link:
+ * EconomicsTab's `Via:` providers, PowerTab's per-faction institutional
+ * footprint. Slugify normalizes case + punctuation so the match holds
+ * regardless of the source's casing.
+ *
+ * @param {{institutions?: Array<{id: string, currentName?: string, raw?: {name?: string}}>}|null} index
+ *   buildDossierEntityIndex result (or null off-dossier).
+ * @param {string} name         Institution display name to resolve.
+ * @returns {string|null}       Stable institution id, or null.
+ */
+export function institutionIdFromName(index, name) {
+  if (!index?.institutions?.length || !name) return null;
+  const key = slugifyEntity(name);
+  const hit = index.institutions.find(
+    /** @param {{id: string, currentName?: string, raw?: {name?: string}}} inst */
+    inst =>
+      slugifyEntity(inst.currentName) === key
+      || slugifyEntity(inst.raw?.name) === key);
+  return hit ? hit.id : null;
+}
+
 function normalizeList(value) {
   if (!value) return [];
   if (Array.isArray(value)) return value.filter(Boolean).map(String);
