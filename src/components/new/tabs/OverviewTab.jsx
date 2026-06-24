@@ -107,6 +107,14 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
   const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
   const getCatColor = c => catColors2[c] || '#6b5340';
 
+  // Structural violations split: real issues (warnings / errors / critical) stay
+  // in the red "Structural Issues" call-out; deliberate `by_design` out-of-tier
+  // overrides are intentional DM choices, NOT problems, so they get a calm "By
+  // Design" note instead of the alarm styling. (ViabilityTab files them the same
+  // way under "By-Design Contradictions".)
+  const realViolations     = (r.structuralViolations || []).filter(v => v.severity !== 'by_design');
+  const byDesignViolations = (r.structuralViolations || []).filter(v => v.severity === 'by_design');
+
   // ScoreRow and StatusTag are defined at module scope above. Lifting
   // them out of the render function (was here originally) fixed 9
   // react-hooks/static-components errors and gives React Compiler the
@@ -343,10 +351,14 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
           One grouped region: each note is a spaced row carrying only its
           severity left-border + tint, not a separately-bordered floating card.
           Looser top margin sets it off as a distinct chunk. (P5 / checklist 20.) */}
-      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginTop:20,marginBottom:14,display:'flex',flexDirection:'column',gap:8}}>
-        {r.structuralViolations?.length>0&&<div style={{background:swatch.dangerBg,borderLeft:'3px solid #8b1a1a',padding:'2px 0 2px 12px'}}>
+      {(realViolations.length+byDesignViolations.length+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginTop:20,marginBottom:14,display:'flex',flexDirection:'column',gap:8}}>
+        {realViolations.length>0&&<div style={{background:swatch.dangerBg,borderLeft:'3px solid #8b1a1a',padding:'2px 0 2px 12px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}> Structural Issues</div>
-          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+          {realViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+        </div>}
+        {byDesignViolations.length>0&&<div style={{background:swatch['#FAF8F4'],borderLeft:'3px solid #a0762a',padding:'2px 0 2px 12px'}}>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,marginBottom:4}}> By Design</div>
+          {byDesignViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:BODY,marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],borderLeft:'3px solid #8b3a1a',padding:'2px 0 2px 12px',display:'flex',gap:8}}>

@@ -355,7 +355,12 @@ registerStep('assembleInstitutions', {
   // Out-of-tier forced institutions
   const fullCatalogAllTiers = (() => {
     const all = {};
-    ['thorp','hamlet','village','town','city'].forEach(t => {
+    // Include 'metropolis' so metropolis-native forced institutions resolve here
+    // (and carry nativeTier 'metropolis') instead of being silently dropped. The
+    // `if (!all[cat][name])` first-wins keeps every lower-tier institution's
+    // existing nativeTier, so this is purely additive — only previously-missing
+    // metropolis-only entries are added.
+    ['thorp','hamlet','village','town','city','metropolis'].forEach(t => {
       const tc = institutionalCatalog[t] || {};
       Object.entries(tc).forEach(([cat, insts]) => {
         if (!all[cat]) all[cat] = {};
