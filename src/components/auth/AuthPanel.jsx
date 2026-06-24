@@ -429,9 +429,11 @@ export default function AuthPanel({
           </AuthCTAButton>
         </div>
       )}
-      {!showGoogle && !showDiscord && (
-        // No OAuth providers enabled: the email sign-in link still needs a home,
-        // so it gets its own full-width alternative under the primary CTA.
+      {mode === 'signin' && !showGoogle && !showDiscord && (
+        // Sign-in only, no OAuth providers enabled: the email sign-in link still
+        // needs a home, so it gets its own full-width alternative under the primary
+        // CTA. Sign-up does NOT offer the magic link — account creation is
+        // password-only (mirrors OAuth being withheld from sign-up).
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
