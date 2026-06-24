@@ -17,6 +17,11 @@
 -- Depends on: 075 (account_number), 055 (the net-current list_ticket_pool).
 -- ────────────────────────────────────────────────────────────────────────────
 
+-- The return table gains account_number, so the existing function must be
+-- DROPPED first: CREATE OR REPLACE cannot change a function's return type
+-- (42P13). list_ticket_pool is an API leaf (no DB dependents); the grants below
+-- are re-established after the recreate.
+drop function if exists public.list_ticket_pool(text, int);
 create or replace function public.list_ticket_pool(p_status text default null, p_limit int default 100)
 returns table (
   id uuid,

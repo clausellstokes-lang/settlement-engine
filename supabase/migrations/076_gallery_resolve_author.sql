@@ -29,6 +29,11 @@
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- ── list_gallery_dossiers — fork 071, add author_name (joined by owner_id) ───
+-- The return table gains author_name, so the existing function must be DROPPED
+-- first: CREATE OR REPLACE cannot change a function's return type (42P13). The
+-- function is an API leaf (no DB dependents), so a plain DROP IF EXISTS is safe;
+-- the grants below are re-established after the recreate.
+drop function if exists public.list_gallery_dossiers(integer, integer, text, text, jsonb, boolean);
 create or replace function public.list_gallery_dossiers(
   page_number integer default 0,
   page_size integer default 24,
@@ -186,6 +191,7 @@ revoke execute on function public.list_gallery_dossiers(integer, integer, text, 
 grant execute on function public.list_gallery_dossiers(integer, integer, text, text, jsonb, boolean) to authenticated, anon;
 
 -- ── list_gallery_more_by_creator — fork 071, add author_name ─────────────────
+drop function if exists public.list_gallery_more_by_creator(text, integer);
 create or replace function public.list_gallery_more_by_creator(source_slug text, limit_count integer default 6)
 returns table (
   id uuid,
@@ -244,6 +250,7 @@ revoke execute on function public.list_gallery_more_by_creator(text, integer) fr
 grant execute on function public.list_gallery_more_by_creator(text, integer) to authenticated, anon;
 
 -- ── list_my_gallery_dossiers — fork 071, add author_name (own, still by id) ──
+drop function if exists public.list_my_gallery_dossiers();
 create or replace function public.list_my_gallery_dossiers()
 returns table (
   id uuid,
@@ -299,6 +306,7 @@ comment on function public.list_my_gallery_dossiers() is
   'Gallery "My Settlements": the caller''s own published dossiers as tiles (same shape as list_gallery_dossiers, plus author_name resolved by id). Auth-only — owner-scoped via auth.uid().';
 
 -- ── get_gallery_dossier — fork 071, add author_name ──────────────────────────
+drop function if exists public.get_gallery_dossier(text);
 create or replace function public.get_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
@@ -387,6 +395,7 @@ comment on function public.get_gallery_dossier(text) is
   'Public gallery detail read. Returns safe columns plus settlement data (DM/sanitized/narrated variants), the gallery_importable flag, the allowlist-projected chronicle, and author_name resolved LIVE by owner id (076 — a rename reflects here automatically).';
 
 -- ── list_gallery_maps — fork 072, add author_name (joined by saved_maps.user_id)
+drop function if exists public.list_gallery_maps(int, int, text, text, jsonb);
 create or replace function public.list_gallery_maps(
   p_page         int   default 0,
   p_page_size    int   default 24,
@@ -462,6 +471,7 @@ grant execute on function public.list_gallery_maps(int, int, text, text, jsonb) 
 -- 019 emitted a CASE label ('Creator' for the dossier owner, 'A DM' otherwise).
 -- Resolve the REAL external_name by id instead, falling back to those generic
 -- labels when a commenter has no name yet (defence-in-depth; 075 backfills all).
+drop function if exists public.list_gallery_comments(uuid);
 create or replace function public.list_gallery_comments(target_settlement_id uuid)
 returns table (
   id uuid,
