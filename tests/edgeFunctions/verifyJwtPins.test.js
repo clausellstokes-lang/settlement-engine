@@ -41,7 +41,7 @@ const functionDirs = readdirSync(join(ROOT, 'supabase/functions'), { withFileTyp
 // secret / per-request anon path) and the platform gate would block it.
 const SELF_AUTH_FALSE = new Set([
   'stripe-webhook', 'verify-single-dossier', 'ingest-events', 'analytics-export', 'send-email',
-  'auth-recovery',
+  'auth-recovery', 'log-client-error',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

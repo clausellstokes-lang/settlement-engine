@@ -405,6 +405,13 @@ verify_jwt = false
 [functions.ingest-events]
 verify_jwt = false
 
+# Anonymous client-error sink (errorReporter.js). A crash report has no JWT
+# (sendBeacon cannot set headers; the crash may precede auth), so it self-defends
+# with the botGuard, payload length-bounding, a hashed IP, and a per-IP rate
+# limit. The platform gate would reject every anon report.
+[functions.log-client-error]
+verify_jwt = false
+
 # Cron-invoked export (pg_net) authenticated by the x-export-secret shared secret,
 # not a JWT — fail-closed on a wrong/missing secret inside the function. The gate
 # would reject the cron call (no user JWT) and the export would never run.

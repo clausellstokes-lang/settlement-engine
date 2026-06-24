@@ -7,7 +7,11 @@
  * handlers, links restricted to http(s)/mailto and forced to open safely.
  * Called on store (the editor's onChange) AND on render (defense-in-depth).
  *
- * Requires a DOM: runs in the browser at runtime; tests opt into jsdom.
+ * Requires a DOM for full rich-text sanitization: runs in the browser at
+ * runtime; tests opt into jsdom. In a DOM-less context (no functional DOMPurify)
+ * it FAILS SAFE — stripping to inert text rather than throwing or, worse,
+ * returning unsanitized HTML — so a caller that sanitizes-on-write can never
+ * persist live markup just because it ran without a DOM.
  *
  * Isolation: we sanitize through a PRIVATE DOMPurify instance bound to this
  * module, NOT the process-wide singleton. The link-rewriting hook (target/rel)
@@ -68,9 +72,19 @@ function forceSafeLinks(fragment) {
   } catch { /* fragment without querySelectorAll — hook path already covered it */ }
 }
 
+// Fail-safe fallback when no functional DOMPurify is available (DOM-less env).
+// Drop tag bodies AND any stray angle brackets so nothing can survive as an HTML
+// element — the result is inert text, safe even through dangerouslySetInnerHTML.
+function stripToInertText(html) {
+  return String(html).replace(/<[^>]*>/g, '').replace(/[<>]/g, '');
+}
+
 export function sanitizeGalleryHtml(html) {
   if (!html || typeof html !== 'string') return '';
   const purify = getPurify();
+  if (!purify || typeof purify.sanitize !== 'function') {
+    return stripToInertText(html);
+  }
   const opts = {
     ALLOWED_TAGS,
     ALLOWED_ATTR,

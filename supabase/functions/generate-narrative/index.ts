@@ -1418,12 +1418,12 @@ THESIS (inherit this voice; reference its themes subtly; do not repeat it):
 ${thesis}
 """
 
+SETTLEMENT CONTEXT (for grounding only — do not repeat):
+${JSON.stringify(summary, null, 2)}
+${CACHE_BREAKPOINT}
 TASK:
 ${instruction}
 ${guidanceBlock(aiGuidance)}
-
-SETTLEMENT CONTEXT (for grounding only — do not repeat):
-${JSON.stringify(summary, null, 2)}
 
 ITEMS TO REFINE:
 ${JSON.stringify(payload, null, 2)}${priorBlock}
@@ -1757,15 +1757,17 @@ function buildDailyLifePrompt(
   relationshipMemoryContext: Record<string, unknown> | null = null,
   chronicleContext: Record<string, unknown> | null = null,
 ): string {
-  return `You are a worldbuilding narrator for tabletop RPGs. ${instruction}
-${guidanceBlock(aiGuidance)}
+  return `You are a worldbuilding narrator for tabletop RPGs.
 ${relationshipMemoryBlock(relationshipMemoryContext)}
 ${chronicleBlock(chronicleContext)}
 
-Return ONLY the paragraph. No preamble, no markdown, no heading.
-
 Settlement context:
-${JSON.stringify(summary, null, 2)}`;
+${JSON.stringify(summary, null, 2)}
+${CACHE_BREAKPOINT}
+${instruction}
+${guidanceBlock(aiGuidance)}
+
+Return ONLY the paragraph. No preamble, no markdown, no heading.`;
 }
 
 // ── CORS ────────────────────────────────────────────────────────────────────
@@ -1870,6 +1872,46 @@ type CompletionResult = {
   usage: NormalizedUsage;
 };
 
+// ── Prompt caching ───────────────────────────────────────────────────────────
+// A single narrative run fires 15 calls (1 thesis + 14 refinement passes) and a
+// dailyLife run fires 5, EACH re-sending the same multi-thousand-token grounding
+// summary + thesis as fresh input. Builders place a CACHE_BREAKPOINT between that
+// per-run STABLE prefix (byte-identical across a run's passes) and the per-pass
+// VARYING tail. callAnthropic turns the prefix into a cache_control:ephemeral
+// content block so passes 2..N read it at ~0.1x input price; callOpenAI strips the
+// marker (the Responses API caches identical prefixes automatically). The marker
+// is ALWAYS removed before send, so the model receives the exact same text it
+// would without caching — the blocks concatenate to the original prompt.
+export const CACHE_BREAKPOINT = '<<CACHE>>';
+
+type AnthropicTextBlock = { type: 'text'; text: string; cache_control?: { type: 'ephemeral' } };
+
+/**
+ * Build the Anthropic user-message content from a prompt that MAY carry a
+ * CACHE_BREAKPOINT. With the marker: two text blocks, the leading (stable) one
+ * flagged cache_control. Without it: the bare string. In BOTH cases the text the
+ * model sees equals the prompt with the marker stripped (no content is added or
+ * dropped). Exported for unit testing.
+ */
+export function buildAnthropicUserContent(prompt: string): string | AnthropicTextBlock[] {
+  const idx = prompt.indexOf(CACHE_BREAKPOINT);
+  if (idx === -1) return prompt;
+  const prefix = prompt.slice(0, idx);
+  const rest = prompt.slice(idx + CACHE_BREAKPOINT.length);
+  // A degenerate empty prefix can't cache and isn't a valid block — fall back.
+  if (!prefix) return rest;
+  return [
+    { type: 'text', text: prefix, cache_control: { type: 'ephemeral' } },
+    { type: 'text', text: rest },
+  ];
+}
+
+/** Remove the cache breakpoint for providers that cache prefixes automatically
+ *  (OpenAI) or don't support cache_control — yields the original prompt text. */
+export function stripCacheBreakpoint(prompt: string): string {
+  return prompt.split(CACHE_BREAKPOINT).join('');
+}
+
 /**
  * Anthropic Messages API impl. Captures real `usage.input_tokens` /
  * `usage.output_tokens` when present; otherwise estimates from char length.
@@ -1890,7 +1932,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
     body: JSON.stringify({
       model,
       max_tokens: maxTokens,
-      messages: [{ role: 'user', content: prompt }],
+      messages: [{ role: 'user', content: buildAnthropicUserContent(prompt) }],
     }),
   });
 
@@ -1924,7 +1966,7 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
     },
     body: JSON.stringify({
       model,
-      input: prompt,
+      input: stripCacheBreakpoint(prompt),
       max_output_tokens: maxTokens,
     }),
   });
@@ -1961,9 +2003,14 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
  * @param output Output text, for the estimate floor.
  */
 function normalizeProviderUsage(usage: any, prompt: string, output: string): NormalizedUsage {
+  // Count cache reads/writes as input VOLUME so prompt caching can't undercount
+  // the spend cap (a cached read still costs ~0.1x, a write ~1.25x; we fold both
+  // at full input price — conservative, so the cap trips no later than reality).
+  const cacheRead = typeof usage?.cache_read_input_tokens === 'number' ? usage.cache_read_input_tokens : 0;
+  const cacheWrite = typeof usage?.cache_creation_input_tokens === 'number' ? usage.cache_creation_input_tokens : 0;
   const inRaw = usage?.input_tokens ?? usage?.prompt_tokens;
   const outRaw = usage?.output_tokens ?? usage?.completion_tokens;
-  const inNum = typeof inRaw === 'number' && Number.isFinite(inRaw) ? inRaw : null;
+  const inNum = typeof inRaw === 'number' && Number.isFinite(inRaw) ? inRaw + cacheRead + cacheWrite : null;
   const outNum = typeof outRaw === 'number' && Number.isFinite(outRaw) ? outRaw : null;
   if (inNum != null && outNum != null) {
     return { inputTokens: inNum, outputTokens: outNum, estimated: false };
@@ -2289,10 +2336,13 @@ export async function handleGenerateNarrative(
 
     // ── SAFETY 1: hard spend cap — FAIL CLOSED (kill-switch) ──
     // Checked BEFORE spend_credits so a capped-out window never debits the user
-    // (nothing to refund). Elevated operators bypass the cap so an admin can
-    // still operate during a degraded window. An unbounded provider bill is the
-    // catastrophic failure mode, so we BLOCK on the cap RPC erroring or
-    // returning a non-true `allowed` — the opposite default from the limiter.
+    // (nothing to refund). This is a GLOBAL cap (check_ai_spend_cap sums spend
+    // across all users and takes no uid) and applies to EVERYONE, including
+    // elevated operators — an unbounded provider bill is the catastrophic failure
+    // mode, so even an admin cannot bypass it. (Elevation is also not yet known at
+    // this point; it is resolved from the spend_credits result below.) We BLOCK on
+    // the cap RPC erroring or returning a non-true `allowed` — the opposite default
+    // from the per-user limiter, which fails OPEN.
     const { data: capResult, error: capErr } =
       await supabaseAdmin.rpc('check_ai_spend_cap');
     if (capErr) {

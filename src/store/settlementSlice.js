@@ -1778,9 +1778,24 @@ export const createSettlementSlice = (set, get) => ({
    * is for callers (like draft-mode rapid-fire edits) that don't go
    * through the preview flow.
    */
-  applyEvent: (event) => {
+  applyEvent: (event, opts = {}) => {
     const state = get();
     if (!state.settlement) return null;
+    // Re-entry guard (change-queue commit safety). A flush replay holds the
+    // local-only / suppress-persist / defer-regional invariants via global flags
+    // (flushApplyLocalOnly, flushSuppressPersist) for the duration of its commit.
+    // An EXTERNAL applyEvent landing in one of the flush's async await windows
+    // would read those globals and misapply — skipping the clock-bound queue, the
+    // regional ripple, and the per-event persist. Only the flush's OWN replay
+    // (opts.fromFlush) may apply an event mid-commit; reject everything else. The
+    // UI already disables event entry during a commit, so this is the belt-and-
+    // suspenders floor that makes the global-flag reads below provably safe (they
+    // are now reachable only off-flush, where the flags are false, or via the
+    // flush's own fromFlush replay, where they are correctly set).
+    if (state.changeQueueFlushing && !opts.fromFlush) {
+      console.warn('[applyEvent] ignored — a change-queue commit is in progress');
+      return null;
+    }
     const activeSaveId = state.activeSaveId || null;
     // Campaign-clock (Phase C1): a settlement bound to a CANONIZED campaign
     // world surrenders its independent timeline. Its events don't resolve now —

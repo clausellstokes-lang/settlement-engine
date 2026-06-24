@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (79) — schema + RLS policies + credit ledger + version
+- **migrations/** (81) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -147,7 +147,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
-- **functions/** (12 Deno edge functions; `_shared/` is a helper dir, not a
+- **functions/** (13 Deno edge functions; `_shared/` is a helper dir, not a
   deployable function) — <!-- @enforced-by tests/docs/docCounts.test.js -->
   - `auth-recovery` — logged-OUT password recovery (Auth Phase 2). No JWT; the
     caller forgot their password. Per-IP + per-email rate limit (fail-closed) +

@@ -150,7 +150,7 @@ export function deriveExportPosture(settlement) {
 /**
  * Viability verdict (§1f). Reconciles the generator's verdict with the food
  * balance + trade dependencies so the wording never claims "self-sufficient"
- * while the dossier shows a food deficit. buildConflict() (economicGenerator)
+ * while the dossier shows a food deficit. buildViabilitySummary() (economicGenerator)
  * only checks dependency warnings for its "self-sufficient" branch — it
  * ignores a food deficit — which is the contradiction this corrects.
  */
