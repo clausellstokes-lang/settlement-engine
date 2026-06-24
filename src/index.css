@@ -102,6 +102,13 @@ button {
     linear-gradient(rgba(247, 240, 228, 0.49), rgba(247, 240, 228, 0.56)),
     var(--page-bg, none);
 }
+/* Mobile: a fixed + cover background is broken on iOS Safari (sized to the
+   document, not the viewport → renders blank), so the painted .page-bg views
+   (Create/generate, Realm map, auth, dossier-success, the mode flow) lose
+   their image. Fall to scroll, matching the .page-painted mobile rule below. */
+@media (max-width: 768px) {
+  .page-bg { background-attachment: scroll; }
+}
 
 /* Scaled-down settlement scene behind a Create-page mode card. The image
    URL comes from the --card-bg custom property; the overlay is heavier than
