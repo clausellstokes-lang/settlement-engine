@@ -95,8 +95,8 @@ const processorAvailableAtTier = (processor, tier) =>
 // chains' own processor ordering — canonical processors lead each chain list).
 const MAX_CHAIN_SUGGESTIONS = 3;
 
-// buildConflict
-const buildConflict = (isViable, issues, warnings, plotHooks) => {
+// buildViabilitySummary
+const buildViabilitySummary = (isViable, issues, warnings, plotHooks) => {
   const criticalCount = issues.filter((i) => i.severity === SEVERITY.CRITICAL).length;
   const implausibleCount = issues.filter((i) => i.severity === SEVERITY.IMPLAUSIBLE).length;
   const dependencyCount = [...issues, ...warnings].filter((i) => i.severity === SEVERITY.DEPENDENCY).length;
@@ -108,8 +108,8 @@ const buildConflict = (isViable, issues, warnings, plotHooks) => {
   return '✓ VIABLE: Settlement is economically self-sufficient and historically plausible.';
 };
 
-// computeFactionPowers
-const computeFactionPowers = (institutions, terrain, nearbyResources, config = {}) => {
+// assessResourceChains
+const assessResourceChains = (institutions, terrain, nearbyResources, config = {}) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
@@ -264,8 +264,8 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
   return { issues, warnings, suggestions };
 };
 
-// generateStabilityScore
-const generateStabilityScore = (population, terrain, institutions, config, foodBalance) => {
+// deriveFoodSecurityHooks
+const deriveFoodSecurityHooks = (population, terrain, institutions, config, foodBalance) => {
   const issues = [];
   const warnings = [];
   const hooks = [];
@@ -349,8 +349,8 @@ const generateStabilityScore = (population, terrain, institutions, config, foodB
   return { issues, warnings, plotHooks: hooks };
 };
 
-// buildFactionList
-const buildFactionList = (population, terrain, institutions, config) => {
+// assessFoodViability
+const assessFoodViability = (population, terrain, institutions, config) => {
   const issues = [];
   const warnings = [];
   const plotHooks = [];
@@ -872,8 +872,8 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   return { issues, warnings, suggestions };
 };
 
-// buildPowerNarrative
-const buildPowerNarrative = (institutions, terrain, config) => {
+// assessWaterDependencies
+const assessWaterDependencies = (institutions, terrain, config) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
@@ -1572,17 +1572,21 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
   }
 }
 
-export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
-  // `tradeBonuses` is hoisted because it is assigned far below (the trade-income
-  // streams stage) inside an expression; declared here to keep that assignment legal.
-  var tradeBonuses;
-  const instNames = institutions.map((inst) => inst.name),
-    hasInst = (...needles) => needles.some((needle) => instNames.some((name) => name.toLowerCase().includes(needle))),
-    ecoPriorities = getPriorities(config),
-    ecoInstFlags = getInstFlags(config, institutions),
-    ecoStressFlags = getStressFlags(config, institutions),
-    safetyProfile = generateSafetyProfile(config, tier, institutions),
-    incomeBuild = [];
+// ── generateEconomicState sub-stages ─────────────────────────────────────────
+// The helpers below are the decomposed stages of `generateEconomicState`. They
+// preserve the original evaluation order, RNG draw order, and array-mutation
+// side effects exactly — each is a verbatim lift of the corresponding block,
+// taking the locals it reads as parameters and mutating the same arrays.
+
+// Stage 1: civic income sources — taxes, levies, and institutional fees keyed off
+// tier, present institutions, trade-route state, and priority/stress flags.
+// Pushes every applicable source into `incomeBuild` in original order. The
+// trade-state flags are computed mid-stage (after the agricultural-rents push,
+// before market taxes) so they are derived here and returned for the caller.
+function buildCivicIncomeSources(
+  incomeBuild,
+  { tier, institutions, tradeRoute, config, hasInst, ecoPriorities, ecoInstFlags, ecoStressFlags }
+) {
   ['thorp', 'hamlet', 'village'].includes(tier)
     ? incomeBuild.push({
         source: 'Agricultural Rents',
@@ -1842,7 +1846,17 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       }
     }
   }
-  const v = generateTradeIncomeStreams(tier, institutions, tradeRoute, goodsToggles, { ...config });
+  return { isSubsistenceOnly };
+}
+
+// Stage 2: trade-derived and criminal income — folds the trade-income-stream
+// bonuses into `incomeBuild`, then layers a merchant-army security surcharge, a
+// unified criminal-economy entry (when black-market capture is significant), and
+// a subsistence fallback if nothing else produced any income. Mutates
+// `incomeBuild` in original order.
+function appendTradeAndCriminalIncome(incomeBuild, { v, ecoStressFlags, safetyProfile }) {
+  // `tradeBonuses` is assigned then immediately consumed inside this expression.
+  var tradeBonuses;
   ((tradeBonuses = v.incomeBonuses) == null || tradeBonuses.forEach((bonus) => incomeBuild.push(bonus)),
     ecoStressFlags.merchantArmy &&
       incomeBuild.push({
@@ -1892,7 +1906,443 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: 100,
         desc: 'Barter and in-kind exchange; no significant monetary income. Survival is the economy.',
       }));
-  if (!isSubsistenceOnly) {
+}
+
+// Stage 3b: income normalization — weights each source by the economy-output
+// multiplier, normalizes to percentages summing toward 100, and patches any
+// rounding residual onto the largest source.
+// NOTE: incomeMultiplier is applied uniformly to every entry, so it cancels
+// out in the (weight / incomeTotalWeight) ratio and does NOT affect the
+// normalized `percentage`. It only scales the `weight` field that ships in
+// `incomeSources`; left intact to preserve that output value byte-for-byte.
+function normalizeIncomeSources(incomeBuild, ecoInstFlags) {
+  const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
+  const incomeWeighted = incomeBuild.map((ee) => ({ ...ee, weight: ee.percentage * incomeMultiplier }));
+  const incomeTotalWeight = incomeWeighted.reduce((sum, e) => sum + e.weight, 0) || 1;
+  const incomeNormalized = incomeWeighted.map((ee) => ({
+    ...ee,
+    percentage: Math.round((ee.weight / incomeTotalWeight) * 100),
+    priorityNote: null,
+  }));
+  // (legacy alias block removed)
+  const D = incomeNormalized.reduce((ee, E) => ee + E.percentage, 0);
+  if (incomeNormalized.length > 0 && D !== 100) {
+    const ee = incomeNormalized.reduce((E, _, O) => (_.percentage > incomeNormalized[E].percentage ? O : E), 0);
+    incomeNormalized[ee].percentage += 100 - D;
+  }
+  return incomeNormalized;
+}
+
+// Stage 4a: necessity imports — starts from the trade-stream necessity list and
+// adds siege/famine/plague staples that the settlement must source externally.
+function buildNecessityImports(v, W) {
+  let U = [...(v.necessityImports || [])];
+  ((W.includes('under_siege') || W.includes('famine')) &&
+    (U.includes('Grain') || U.push('Grain'), U.includes('Salt') || U.push('Salt')),
+    W.includes('under_siege') && (U.includes('Iron') || U.push('Iron (weapons)')),
+    W.includes('plague_onset') && (U.includes('Medicinal herbs') || U.push('Medicinal herbs')));
+  return U;
+}
+
+// Stage 4b: initial export/import trade lists — derives the heuristic export
+// list (`re`, siege/occupation/transit-aware), the deduped import list (`q`),
+// and the entrepot/transit passthroughs (`P`, `I`); then applies goods-toggle
+// force/disallow overrides to `re` and `v.localProduction`.
+function buildInitialTradeLists({ v, config, tradeRoute, goodsToggles, U, W }) {
+  const re = W.includes('under_siege')
+      ? config.tradeRouteAccess === 'port'
+        ? v.exports.slice(0, 3).map((ee) => `${ee} (naval route only)`)
+        : []
+      : W.includes('occupied')
+        ? v.exports.slice(0, 5).map((ee) => `${ee} (taxed by occupation)`)
+        : [
+            ...(['crossroads', 'port', 'river'].includes(tradeRoute)
+              ? (v.transit || []).map((ee) => `${ee} (transit)`)
+              : []),
+          ],
+    ie = v.imports.slice(0, 8),
+    q = [...U.map((ee) => ee).filter((ee) => !ie.some((E) => E.toLowerCase().includes(ee.toLowerCase()))), ...ie].slice(
+      0,
+      10
+    );
+  const P = v.isEntrepot;
+  const I = v.transit;
+  if (goodsToggles && Object.keys(goodsToggles).length > 0) {
+    const ee = /_good_(.+)$/;
+    Object.entries(goodsToggles).forEach(function (E) {
+      const _ = E[0],
+        O = E[1],
+        F = _.match(ee);
+      if (!F) return;
+      const X = F[1];
+      if (O.force)
+        (re.some(function (K) {
+          return K.toLowerCase().includes(X.toLowerCase());
+        }) || re.push(X),
+          v.localProduction &&
+            !v.localProduction.some(function (K) {
+              return K.toLowerCase().includes(X.toLowerCase());
+            }) &&
+            v.localProduction.push(X));
+      else if (O.allow === !1) {
+        for (let K = re.length - 1; K >= 0; K--) re[K].toLowerCase().includes(X.toLowerCase()) && re.splice(K, 1);
+        if (v.localProduction)
+          for (let K = v.localProduction.length - 1; K >= 0; K--)
+            v.localProduction[K].toLowerCase().includes(X.toLowerCase()) && v.localProduction.splice(K, 1);
+      }
+    });
+  }
+  return { re, q, P, I };
+}
+
+// Stage 6: trade-dependency derivation — for each institution with a catalogued
+// resource need that isn't satisfied locally, push a dependency record (with
+// siege/isolation-aware severity and impact text) into `H`.
+function deriveTradeDependencies(H, { config, institutions, tradeRoute }) {
+  const nearbyResourcesArr = config.nearbyResources || [];
+  const hasResource = (V) => nearbyResourcesArr.some((de) => V.some((fe) => de.includes(fe)));
+  const stressArr = config.stressTypes || [];
+  const intendedStressArr = config.intendedStressTypes || [];
+  const isUnderStress =
+    stressArr.includes('under_siege') ||
+    intendedStressArr.includes('under_siege') ||
+    (institutions || []).some(function (V) {
+      const de = (V.name || '').toLowerCase();
+      return de.includes('war council') || de.includes('siege') || de.includes('rationing');
+    });
+  const isIsolatedRoute = tradeRoute === 'isolated';
+  // Teleportation infrastructure counts as trade access — don't treat as stockpile-only
+  const _hasMagicTradeForDeps = hasTeleportationInfra(institutions || [], config);
+  const isEffectivelyIsolated = isIsolatedRoute && !_hasMagicTradeForDeps;
+  (institutions || []).forEach(function (V) {
+    const de = V.name || '',
+      fe = TRADE_DEPENDENCY_NEEDS[de];
+    if (
+      !fe ||
+      hasResource(fe.resources) ||
+      H.some(function (dt) {
+        return dt.institution === de && dt.resource === fe.label;
+      })
+    )
+      return;
+    const ge = isUnderStress || isEffectivelyIsolated ? 'critical' : 'vulnerable',
+      ke = isUnderStress
+        ? 'Supply route severed. Operating at minimal capacity or shut down.'
+        : isEffectivelyIsolated
+          ? 'No trade access. Running on existing stockpiles only.'
+          : _hasMagicTradeForDeps && isIsolatedRoute
+            ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
+            : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
+    H.push({
+      institution: de,
+      category: V.category || '',
+      resource: fe.label,
+      detail: fe.detail,
+      severity: ge,
+      impact: ke,
+      affectedServices: fe.svcs || [],
+    });
+  });
+}
+
+// Stage 7: chain-derived trade artifacts — runs the supply-chain pipeline to
+// derive chain exports/imports/local-production, layers depleted-resource imports
+// and finished-goods demand gaps, then overrides the heuristic `re`/`q` lists
+// (and folds in service exports). Returns the chain artifacts the caller needs
+// for later stages and final assembly.
+function deriveChainTradeArtifacts({ tier, tradeRoute, institutions, config, goodsToggles, H, U, re, q }) {
+  const depletedResources = config.nearbyResourcesDepleted || [];
+  const activeChainsList = computeActiveChains(
+    institutions || [],
+    config.nearbyResources || [],
+    tier,
+    tradeRoute,
+    H,
+    depletedResources,
+    // Effective magic dial: a dead-magic world is 0 regardless of the slider
+    // (mirrors magicLedger) — gates druid/divine/arcane/alchemy substitution.
+    config.magicExists === false ? 0 : (config.priorityMagic ?? 50)
+  );
+  const chainStresses = (config.stressTypes || []).concat(config.intendedStressTypes || []);
+  const chainExports = deriveExportsFromChains(
+    activeChainsList,
+    config.nearbyResources || [],
+    tier,
+    tradeRoute,
+    chainStresses,
+    goodsToggles,
+    depletedResources,
+    institutions || []
+  );
+  const _hasMagicTrade = hasTeleportationInfra(institutions || [], config);
+  const chainImports = deriveImportsFromChains(
+    activeChainsList,
+    config.nearbyResources || [],
+    tier,
+    tradeRoute,
+    U,
+    _hasMagicTrade
+  );
+  const chainLocalProd = deriveLocalProductionFromChains(activeChainsList, config.nearbyResources || []);
+  const instServices = deriveInstitutionalServices(institutions || []);
+  const serviceExports = deriveServiceExports(instServices);
+
+  // Depleted resources at town+ scale: settlement needs to import what it can no longer
+  // produce in sufficient quantity — local exhaustion triggers trade dependency
+  const TIER_DEPLETED_IMPORT_THRESHOLD = ['town', 'city', 'metropolis'];
+  if (depletedResources.length > 0 && TIER_DEPLETED_IMPORT_THRESHOLD.includes(tier)) {
+    const DEPLETED_IMPORT_MAP = {
+      grain_fields: 'Bulk grain (local fields depleted)',
+      iron_deposits: 'Iron ore (local mines exhausted)',
+      managed_forest: 'Timber (local forests cleared)',
+      grazing_land: 'Livestock and dairy (pastures depleted)',
+      river_fish: 'Salted fish (local waters over-fished)',
+      fishing_grounds: 'Salted fish (fishing grounds exhausted)',
+      coal_deposits: 'Coal and fuel (local seams exhausted)',
+      stone_quarry: 'Dressed stone (local quarry depleted)',
+      clay_pits: 'Clay and ceramics materials (pits exhausted)',
+    };
+    depletedResources.forEach((res) => {
+      const importLabel = DEPLETED_IMPORT_MAP[res];
+      if (importLabel) chainImports.push(importLabel);
+    });
+  }
+
+  // ── Finished goods demand-gap imports/exports ─────────────────────────────
+  // Computes supply/demand gaps for finished goods (arms, ritual supplies, etc.)
+  // and pushes results into chainImports / chainExports before final assembly.
+  computeFinishedGoodsDemand(tier, tradeRoute, institutions, config.nearbyResources || [], chainExports, chainImports);
+
+  // Override heuristic arrays with chain-derived values (clean mutation — before return)
+  re.length = 0;
+  chainExports.forEach((e) => re.push(e));
+  serviceExports.forEach((e) => {
+    if (!re.includes(e)) re.push(e);
+  });
+  q.length = 0;
+  chainImports.forEach((i) => q.push(i));
+
+  return { activeChainsList, chainLocalProd, instServices };
+}
+
+// Stage 8: neighbour economic bias — reshape the export list `re` per the
+// configured relationship mode (suppress caps variety, complement removes
+// competing goods, dependent ensures a patron-needed good, compete is a no-op).
+function applyNeighbourEconBias(re, { config, isSubsistenceIsolated }) {
+  // ── Neighbour economic bias post-processing ──────────────────────────────
+  // Apply competition/complementarity effects based on relationship type.
+  // 'compete' mode: boost chance of same exports as neighbour (we fight for same market)
+  // 'complement' mode: de-emphasise goods the neighbour already exports (we specialize elsewhere)
+  // 'suppress' mode: hostile trade embargo reduces export variety
+  // 'dependent' mode: prioritize goods the neighbour needs (patron/client)
+  const _econBias = config._neighbourEconBias || {};
+  const _econMode = config._neighbourEconMode || 'independent';
+  if (Object.keys(_econBias).length > 0 && !isSubsistenceIsolated) {
+    // Apply weights: filter or reorder exports based on bias
+    if (_econMode === 'suppress') {
+      // Hostile: cap exports to a max of 4 items (trade embargo simulation)
+      if (re.length > 4) re.splice(4);
+    } else if (_econMode === 'complement') {
+      // Trade partner/allied: remove exports that compete with neighbour's exports
+      const biasKeys = Object.keys(_econBias);
+      for (let _bi = re.length - 1; _bi >= 0; _bi--) {
+        const good = re[_bi].toLowerCase();
+        for (const bk of biasKeys) {
+          if (_econBias[bk] < 0.8 && good.includes(bk.toLowerCase())) {
+            re.splice(_bi, 1);
+            break;
+          }
+        }
+      }
+    } else if (_econMode === 'compete') {
+      // Rival/cold war: no removal — rivals compete in same space (handled at inst level)
+    } else if (_econMode === 'dependent') {
+      // Patron/client: ensure we export something the patron needs
+      for (const [bk, weight] of Object.entries(_econBias)) {
+        if (weight > 1.3 && !re.some((g) => g.toLowerCase().includes(bk.toLowerCase()))) {
+          // Add patron-needed good if we don't already export it
+          if (re.length < 8) re.push(bk.charAt(0).toUpperCase() + bk.slice(1));
+        }
+      }
+    }
+  }
+}
+
+// Stage 9: trade-goods subsumption — collapse the import, export, and local-
+// production lists each to one entry per canonical good, then drop exports the
+// settlement simultaneously imports (transit re-exports excepted). Mutates the
+// `re`/`q` arrays and `v.localProduction` in place.
+function subsumeAllTradeGoods({ re, q, v }) {
+  // ── Trade-goods subsumption ──────────────────────────────────────────────
+  // Several label vocabularies feed re/q (chain outputs, tier structural
+  // imports, necessity imports, depleted-resource labels, demand-gap labels)
+  // and dedupe only on exact strings — so "Grain" and "Bulk grain and
+  // foodstuffs" coexist. Collapse each list to one entry per canonical good,
+  // then drop exports the settlement simultaneously imports (transit
+  // re-exports excepted). Runs after every writer above; economyReconcilePass
+  // re-applies it after later passes append imports (factionCorrelationPass's
+  // applySubsumption is INSTITUTION subsumption, not this).
+  const _subImports = subsumeTradeGoods(q);
+  q.length = 0;
+  _subImports.forEach((g) => q.push(g));
+  const _subExports = reconcileTradeLists(subsumeTradeGoods(re), q);
+  re.length = 0;
+  _subExports.forEach((g) => re.push(g));
+  if (v.localProduction) {
+    const _subLocal = subsumeTradeGoods(v.localProduction);
+    v.localProduction.length = 0;
+    _subLocal.forEach((g) => v.localProduction.push(g));
+  }
+}
+
+// Stage 10: base prosperity model — combines route/tier/economy/magic/threat/
+// military/defensibility/institutional-depth/income-diversity signals into a base
+// prosperity index, applies the food-security floor/cap/bonus and the clean-
+// subsistence floor, and resolves the prosperity label (forcing 'Subsistence' for
+// isolated thorp/hamlet). Returns the food-security profile and the label.
+function computeBaseProsperity({ tier, institutions, tradeRoute, config, instNames, incomeNormalized }) {
+  // ── Base prosperity model ───────────────────────────────────────────────
+  // Inputs: route (channel), tier (capacity), economy slider (investment),
+  //         magic (tier-scaled production), threat (drag), military (dual effect),
+  //         defensibility (security premium on trade routes)
+  const _PLABELS = ['Subsistence', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+
+  // 1. Route base — how much commerce can flow at all
+  const _routeBase =
+    tradeRoute === 'crossroads' || tradeRoute === 'port'
+      ? 3 // Comfortable
+      : tradeRoute === 'isolated'
+        ? ['thorp', 'hamlet'].includes(tier)
+          ? 0
+          : hasTeleportationInfra(institutions, config) && config.magicExists !== false
+            ? 2
+            : 1
+        : 2; // road/river → Moderate
+
+  // 2. Tier development bonus — division of labour, institutional multiplication
+  const _tierBonus = { thorp: 0, hamlet: 0, village: 0, town: 1, city: 1, metropolis: 2 }[tier] || 0;
+
+  // 3. Economy slider — institutional investment in commerce (±1.25 range)
+  const _priEcon = config.priorityEconomy ?? 50;
+  const _ecoBonus = (_priEcon - 50) / 40;
+
+  // 4. Magic bonus — tier-scaled productive output (only meaningful at town+, only when active)
+  const _priMagic = config.priorityMagic ?? 0;
+  const _magicActive = config.magicExists !== false && _priMagic > 25;
+  const _magicTierScale = { thorp: 0, hamlet: 0, village: 0.3, town: 0.6, city: 1.0, metropolis: 1.4 }[tier] || 0;
+  const _magicBonus = _magicActive ? Math.max(0, (_priMagic - 25) / 75) * _magicTierScale : 0;
+
+  // 5. Threat penalty — disrupted trade, insecure fields, rerouted merchants
+  const _monsterThreat = config.monsterThreat || 'frontier';
+  const _threatPenalty = _monsterThreat === 'plagued' ? -1 : _monsterThreat === 'frontier' ? -0.5 : 0;
+
+  // 6. Military effects — heavy spending diverts capital; but security enables trade
+  const _priMil = config.priorityMilitary ?? 50;
+  const _milDrain = _priMil > 75 ? -0.3 : 0; // garrison costs crowd out investment
+  const _hasWalls = instNames.some(
+    (n) =>
+      n.toLowerCase().includes('wall') || n.toLowerCase().includes('palisade') || n.toLowerCase().includes('citadel')
+  );
+  const _hasGarrison = instNames.some(
+    (n) => n.toLowerCase().includes('garrison') || n.toLowerCase().includes('barracks')
+  );
+  const _defPremium = _hasWalls && _hasGarrison && (tradeRoute === 'crossroads' || tradeRoute === 'port') ? 0.3 : 0;
+
+  // Food security modifier — computed here so it can cap/floor base prosperity
+  const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
+  const _foodMod = _foodSec.prosperityMod;
+
+  // 7. Institutional depth — count of Economy+Crafts institutions weighted vs tier expectation
+  // A city with 12 economy institutions is richer than one with 4, regardless of slider.
+  // Expectations calibrated to actual generator output averages per tier.
+  const _econInstCount = institutions.filter((i) => i.category === 'Economy' || i.category === 'Crafts').length;
+  const _tierExpectedEco = { thorp: 3, hamlet: 8, village: 13, town: 22, city: 13, metropolis: 14 }[tier] || 8;
+  // Bonus: +1 if well above expectation, -1 if well below. Bounded ±1 to avoid dominating.
+  const _depthBonus = _econInstCount >= _tierExpectedEco * 1.3 ? 1 : _econInstCount >= _tierExpectedEco * 0.75 ? 0 : -1;
+
+  // 8. Income diversity bonus — many distinct income sources = genuinely complex economy
+  const _incomeCount = incomeNormalized?.length || 0;
+  const _diversityBonus = _incomeCount >= 7 ? 0.5 : _incomeCount >= 5 ? 0.25 : 0;
+
+  // Combine — cap at Prosperous (4); Wealthy only through narrative modifier (strong econOut)
+  let _baseIdx = Math.min(
+    4,
+    Math.max(
+      0,
+      Math.round(
+        _routeBase +
+          _tierBonus +
+          _ecoBonus +
+          _magicBonus +
+          _threatPenalty +
+          _milDrain +
+          _defPremium +
+          _depthBonus +
+          _diversityBonus
+      )
+    )
+  );
+  // Apply food security floor/cap/bonus to base index BEFORE narrative modifiers
+  if (_foodMod) {
+    if (_foodMod.type === 'cap') _baseIdx = Math.min(_baseIdx, _foodMod.value);
+    if (_foodMod.type === 'penalty') _baseIdx = Math.max(0, _baseIdx + _foodMod.value);
+    if (_foodMod.type === 'bonus') _baseIdx = Math.min(4, _baseIdx + Math.round(_foodMod.value));
+  }
+  // Thorp/hamlet prosperity floor: subsistence communities with required institutions
+  // functioning normally should never label below Poor — they're not in crisis, they're
+  // just small. Struggling is reserved for active stress/famine on top of structural poverty.
+  const _hasRequiredEco = institutions.some((i) => {
+    const n = (i.name || '').toLowerCase();
+    return [
+      'subsistence farming',
+      'access to external mill',
+      'farmland',
+      'town granary',
+      'weekly market',
+      'city granari',
+      'market square',
+      'district markets',
+      'state granary',
+      'inns and taverns (district)',
+    ].some((k) => n.includes(k));
+  });
+  if (
+    ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].includes(tier) &&
+    _hasRequiredEco &&
+    !(config.stressTypes || []).length
+  ) {
+    _baseIdx = Math.max(_baseIdx, 1); // floor at Poor for clean subsistence settlements
+  }
+
+  let Z = _PLABELS[_baseIdx];
+  tradeRoute === 'isolated' && ['thorp', 'hamlet'].includes(tier) && (Z = 'Subsistence');
+  return { foodSec: _foodSec, prosperityLabel: Z };
+}
+
+export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
+  const instNames = institutions.map((inst) => inst.name),
+    hasInst = (...needles) => needles.some((needle) => instNames.some((name) => name.toLowerCase().includes(needle))),
+    ecoPriorities = getPriorities(config),
+    ecoInstFlags = getInstFlags(config, institutions),
+    ecoStressFlags = getStressFlags(config, institutions),
+    safetyProfile = generateSafetyProfile(config, tier, institutions),
+    incomeBuild = [];
+  // Stage 1 — civic income sources; returns the subsistence-gate flag used below.
+  const { isSubsistenceOnly } = buildCivicIncomeSources(incomeBuild, {
+    tier,
+    institutions,
+    tradeRoute,
+    config,
+    hasInst,
+    ecoPriorities,
+    ecoInstFlags,
+    ecoStressFlags,
+  });
+  const v = generateTradeIncomeStreams(tier, institutions, tradeRoute, goodsToggles, { ...config });
+  // Stage 2 — trade-derived bonuses + criminal economy + subsistence fallback.
+  appendTradeAndCriminalIncome(incomeBuild, { v, ecoStressFlags, safetyProfile });
+  // Stage 3a — resource-trade income, applied only when trade routes exist.
+  const appendResourceTradeIncome = () => {
     // Resource trade income — only when trade routes exist
     const ee = (v.localProduction || []).map(function (K) {
         return (typeof K == 'string' ? K : K.name || '').toLowerCase();
@@ -2025,76 +2475,18 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           });
       });
     }
-  } // ── Stage 3: Income normalization ───────────────────────────────────────────
-  // NOTE: incomeMultiplier is applied uniformly to every entry, so it cancels
-  // out in the (weight / incomeTotalWeight) ratio below and does NOT affect the
-  // normalized `percentage`. It only scales the `weight` field that ships in
-  // `incomeSources`; left intact to preserve that output value byte-for-byte.
-  const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
-  const incomeWeighted = incomeBuild.map((ee) => ({ ...ee, weight: ee.percentage * incomeMultiplier }));
-  const incomeTotalWeight = incomeWeighted.reduce((sum, e) => sum + e.weight, 0) || 1;
-  const incomeNormalized = incomeWeighted.map((ee) => ({
-    ...ee,
-    percentage: Math.round((ee.weight / incomeTotalWeight) * 100),
-    priorityNote: null,
-  }));
-  // (legacy alias block removed)
-  const D = incomeNormalized.reduce((ee, E) => ee + E.percentage, 0);
-  if (incomeNormalized.length > 0 && D !== 100) {
-    const ee = incomeNormalized.reduce((E, _, O) => (_.percentage > incomeNormalized[E].percentage ? O : E), 0);
-    incomeNormalized[ee].percentage += 100 - D;
-  }
+  };
+  if (!isSubsistenceOnly) appendResourceTradeIncome();
+  // ── Stage 3: Income normalization ───────────────────────────────────────────
+  const incomeNormalized = normalizeIncomeSources(incomeBuild, ecoInstFlags);
   const W = config.stressTypes || [];
-  let U = [...(v.necessityImports || [])];
-  ((W.includes('under_siege') || W.includes('famine')) &&
-    (U.includes('Grain') || U.push('Grain'), U.includes('Salt') || U.push('Salt')),
-    W.includes('under_siege') && (U.includes('Iron') || U.push('Iron (weapons)')),
-    W.includes('plague_onset') && (U.includes('Medicinal herbs') || U.push('Medicinal herbs')));
-  const re = W.includes('under_siege')
-      ? config.tradeRouteAccess === 'port'
-        ? v.exports.slice(0, 3).map((ee) => `${ee} (naval route only)`)
-        : []
-      : W.includes('occupied')
-        ? v.exports.slice(0, 5).map((ee) => `${ee} (taxed by occupation)`)
-        : [
-            ...(['crossroads', 'port', 'river'].includes(tradeRoute)
-              ? (v.transit || []).map((ee) => `${ee} (transit)`)
-              : []),
-          ],
-    ie = v.imports.slice(0, 8),
-    q = [...U.map((ee) => ee).filter((ee) => !ie.some((E) => E.toLowerCase().includes(ee.toLowerCase()))), ...ie].slice(
-      0,
-      10
-    );
-  const P = v.isEntrepot;
-  const I = v.transit;
-  if (goodsToggles && Object.keys(goodsToggles).length > 0) {
-    const ee = /_good_(.+)$/;
-    Object.entries(goodsToggles).forEach(function (E) {
-      const _ = E[0],
-        O = E[1],
-        F = _.match(ee);
-      if (!F) return;
-      const X = F[1];
-      if (O.force)
-        (re.some(function (K) {
-          return K.toLowerCase().includes(X.toLowerCase());
-        }) || re.push(X),
-          v.localProduction &&
-            !v.localProduction.some(function (K) {
-              return K.toLowerCase().includes(X.toLowerCase());
-            }) &&
-            v.localProduction.push(X));
-      else if (O.allow === !1) {
-        for (let K = re.length - 1; K >= 0; K--) re[K].toLowerCase().includes(X.toLowerCase()) && re.splice(K, 1);
-        if (v.localProduction)
-          for (let K = v.localProduction.length - 1; K >= 0; K--)
-            v.localProduction[K].toLowerCase().includes(X.toLowerCase()) && v.localProduction.splice(K, 1);
-      }
-    });
-  }
+  // Stage 4 — necessity imports, then the initial export/import trade lists.
+  const U = buildNecessityImports(v, W);
+  const { re, q, P, I } = buildInitialTradeLists({ v, config, tradeRoute, goodsToggles, U, W });
   const H = [];
-  {
+  // Stage 5 — military-services and (chance-gated) slave-trade exports; the only
+  // RNG draw in this function lives here. Mutates the `re`/`q` trade lists.
+  const appendMilitaryAndIllicitExports = () => {
     const E = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].indexOf(tier),
       _ = (institutions || []).map(function (fe) {
         return (fe.name || '').toLowerCase();
@@ -2147,121 +2539,28 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             q.push('Enslaved labour: purchased from regional trafficking networks'));
       }
     }
-  }
-  const nearbyResourcesArr = config.nearbyResources || [];
-  const hasResource = (V) => nearbyResourcesArr.some((de) => V.some((fe) => de.includes(fe)));
-  const stressArr = config.stressTypes || [];
-  const intendedStressArr = config.intendedStressTypes || [];
-  const isUnderStress =
-    stressArr.includes('under_siege') ||
-    intendedStressArr.includes('under_siege') ||
-    (institutions || []).some(function (V) {
-      const de = (V.name || '').toLowerCase();
-      return de.includes('war council') || de.includes('siege') || de.includes('rationing');
-    });
-  const isIsolatedRoute = tradeRoute === 'isolated';
-  // Teleportation infrastructure counts as trade access — don't treat as stockpile-only
-  const _hasMagicTradeForDeps = hasTeleportationInfra(institutions || [], config);
-  const isEffectivelyIsolated = isIsolatedRoute && !_hasMagicTradeForDeps;
-  (institutions || []).forEach(function (V) {
-    const de = V.name || '',
-      fe = TRADE_DEPENDENCY_NEEDS[de];
-    if (
-      !fe ||
-      hasResource(fe.resources) ||
-      H.some(function (dt) {
-        return dt.institution === de && dt.resource === fe.label;
-      })
-    )
-      return;
-    const ge = isUnderStress || isEffectivelyIsolated ? 'critical' : 'vulnerable',
-      ke = isUnderStress
-        ? 'Supply route severed. Operating at minimal capacity or shut down.'
-        : isEffectivelyIsolated
-          ? 'No trade access. Running on existing stockpiles only.'
-          : _hasMagicTradeForDeps && isIsolatedRoute
-            ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
-            : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
-    H.push({
-      institution: de,
-      category: V.category || '',
-      resource: fe.label,
-      detail: fe.detail,
-      severity: ge,
-      impact: ke,
-      affectedServices: fe.svcs || [],
-    });
-  }); // ── Stage 4: Chain derivation — compute before return object ─────────────────
-  const depletedResources = config.nearbyResourcesDepleted || [];
-  const activeChainsList = computeActiveChains(
-    institutions || [],
-    config.nearbyResources || [],
+  };
+  appendMilitaryAndIllicitExports();
+  // Stage 6 — trade-dependency derivation: flag each catalogued-need institution
+  // whose resource is not locally available, with severity/impact keyed to siege
+  // and isolation state. Pushes records into `H`.
+  deriveTradeDependencies(H, { config, institutions, tradeRoute });
+  // ── Stage 7: Chain derivation — compute before return object ─────────────────
+  // Builds the active supply chains and their export/import/local-production
+  // projections (plus depleted-resource and finished-goods demand-gap entries),
+  // then overrides the heuristic `re`/`q` trade lists with the chain-derived
+  // values. Returns the chain artifacts needed for assembly.
+  const { activeChainsList, chainLocalProd, instServices } = deriveChainTradeArtifacts({
     tier,
     tradeRoute,
-    H,
-    depletedResources,
-    // Effective magic dial: a dead-magic world is 0 regardless of the slider
-    // (mirrors magicLedger) — gates druid/divine/arcane/alchemy substitution.
-    config.magicExists === false ? 0 : (config.priorityMagic ?? 50)
-  );
-  const chainStresses = (config.stressTypes || []).concat(config.intendedStressTypes || []);
-  const chainExports = deriveExportsFromChains(
-    activeChainsList,
-    config.nearbyResources || [],
-    tier,
-    tradeRoute,
-    chainStresses,
+    institutions,
+    config,
     goodsToggles,
-    depletedResources,
-    institutions || []
-  );
-  const _hasMagicTrade = hasTeleportationInfra(institutions || [], config);
-  const chainImports = deriveImportsFromChains(
-    activeChainsList,
-    config.nearbyResources || [],
-    tier,
-    tradeRoute,
+    H,
     U,
-    _hasMagicTrade
-  );
-  const chainLocalProd = deriveLocalProductionFromChains(activeChainsList, config.nearbyResources || []);
-  const instServices = deriveInstitutionalServices(institutions || []);
-  const serviceExports = deriveServiceExports(instServices);
-
-  // Depleted resources at town+ scale: settlement needs to import what it can no longer
-  // produce in sufficient quantity — local exhaustion triggers trade dependency
-  const TIER_DEPLETED_IMPORT_THRESHOLD = ['town', 'city', 'metropolis'];
-  if (depletedResources.length > 0 && TIER_DEPLETED_IMPORT_THRESHOLD.includes(tier)) {
-    const DEPLETED_IMPORT_MAP = {
-      grain_fields: 'Bulk grain (local fields depleted)',
-      iron_deposits: 'Iron ore (local mines exhausted)',
-      managed_forest: 'Timber (local forests cleared)',
-      grazing_land: 'Livestock and dairy (pastures depleted)',
-      river_fish: 'Salted fish (local waters over-fished)',
-      fishing_grounds: 'Salted fish (fishing grounds exhausted)',
-      coal_deposits: 'Coal and fuel (local seams exhausted)',
-      stone_quarry: 'Dressed stone (local quarry depleted)',
-      clay_pits: 'Clay and ceramics materials (pits exhausted)',
-    };
-    depletedResources.forEach((res) => {
-      const importLabel = DEPLETED_IMPORT_MAP[res];
-      if (importLabel) chainImports.push(importLabel);
-    });
-  }
-
-  // ── Finished goods demand-gap imports/exports ─────────────────────────────
-  // Computes supply/demand gaps for finished goods (arms, ritual supplies, etc.)
-  // and pushes results into chainImports / chainExports before final assembly.
-  computeFinishedGoodsDemand(tier, tradeRoute, institutions, config.nearbyResources || [], chainExports, chainImports);
-
-  // Override heuristic arrays with chain-derived values (clean mutation — before return)
-  re.length = 0;
-  chainExports.forEach((e) => re.push(e));
-  serviceExports.forEach((e) => {
-    if (!re.includes(e)) re.push(e);
+    re,
+    q,
   });
-  q.length = 0;
-  chainImports.forEach((i) => q.push(i));
 
   // ── Isolated thorp/hamlet: subsistence economy — no imports or exports ────
   // These settlements have no trade route and cannot participate in external trade.
@@ -2284,64 +2583,13 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   }
   const activeChains = activeChainsList;
 
-  // ── Neighbour economic bias post-processing ──────────────────────────────
-  // Apply competition/complementarity effects based on relationship type.
-  // 'compete' mode: boost chance of same exports as neighbour (we fight for same market)
-  // 'complement' mode: de-emphasise goods the neighbour already exports (we specialize elsewhere)
-  // 'suppress' mode: hostile trade embargo reduces export variety
-  // 'dependent' mode: prioritize goods the neighbour needs (patron/client)
-  const _econBias = config._neighbourEconBias || {};
-  const _econMode = config._neighbourEconMode || 'independent';
-  if (Object.keys(_econBias).length > 0 && !_isSubsistenceIsolated) {
-    // Apply weights: filter or reorder exports based on bias
-    if (_econMode === 'suppress') {
-      // Hostile: cap exports to a max of 4 items (trade embargo simulation)
-      if (re.length > 4) re.splice(4);
-    } else if (_econMode === 'complement') {
-      // Trade partner/allied: remove exports that compete with neighbour's exports
-      const biasKeys = Object.keys(_econBias);
-      for (let _bi = re.length - 1; _bi >= 0; _bi--) {
-        const good = re[_bi].toLowerCase();
-        for (const bk of biasKeys) {
-          if (_econBias[bk] < 0.8 && good.includes(bk.toLowerCase())) {
-            re.splice(_bi, 1);
-            break;
-          }
-        }
-      }
-    } else if (_econMode === 'compete') {
-      // Rival/cold war: no removal — rivals compete in same space (handled at inst level)
-    } else if (_econMode === 'dependent') {
-      // Patron/client: ensure we export something the patron needs
-      for (const [bk, weight] of Object.entries(_econBias)) {
-        if (weight > 1.3 && !re.some((g) => g.toLowerCase().includes(bk.toLowerCase()))) {
-          // Add patron-needed good if we don't already export it
-          if (re.length < 8) re.push(bk.charAt(0).toUpperCase() + bk.slice(1));
-        }
-      }
-    }
-  }
+  // Stage 8 — neighbour economic bias: reshape the export list per the
+  // relationship mode (suppress/complement/compete/dependent).
+  applyNeighbourEconBias(re, { config, isSubsistenceIsolated: _isSubsistenceIsolated });
 
-  // ── Trade-goods subsumption ──────────────────────────────────────────────
-  // Several label vocabularies feed re/q (chain outputs, tier structural
-  // imports, necessity imports, depleted-resource labels, demand-gap labels)
-  // and dedupe only on exact strings — so "Grain" and "Bulk grain and
-  // foodstuffs" coexist. Collapse each list to one entry per canonical good,
-  // then drop exports the settlement simultaneously imports (transit
-  // re-exports excepted). Runs after every writer above; economyReconcilePass
-  // re-applies it after later passes append imports (factionCorrelationPass's
-  // applySubsumption is INSTITUTION subsumption, not this).
-  const _subImports = subsumeTradeGoods(q);
-  q.length = 0;
-  _subImports.forEach((g) => q.push(g));
-  const _subExports = reconcileTradeLists(subsumeTradeGoods(re), q);
-  re.length = 0;
-  _subExports.forEach((g) => re.push(g));
-  if (v.localProduction) {
-    const _subLocal = subsumeTradeGoods(v.localProduction);
-    v.localProduction.length = 0;
-    _subLocal.forEach((g) => v.localProduction.push(g));
-  }
+  // Stage 9 — trade-goods subsumption: collapse near-duplicate goods to one
+  // canonical entry per list and drop self-imported exports.
+  subsumeAllTradeGoods({ re, q, v });
 
   // Sort income sources by percentage desc, then by source — must be LAST.
   // The tiebreak is codepoint-stable, NOT localeCompare: this output feeds the
@@ -2350,122 +2598,17 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   incomeNormalized.sort(
     (a, b) => b.percentage - a.percentage || (a.source < b.source ? -1 : a.source > b.source ? 1 : 0)
   );
-  // ── Base prosperity model ───────────────────────────────────────────────
-  // Inputs: route (channel), tier (capacity), economy slider (investment),
-  //         magic (tier-scaled production), threat (drag), military (dual effect),
-  //         defensibility (security premium on trade routes)
-  const _PLABELS = ['Subsistence', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
-
-  // 1. Route base — how much commerce can flow at all
-  const _routeBase =
-    tradeRoute === 'crossroads' || tradeRoute === 'port'
-      ? 3 // Comfortable
-      : tradeRoute === 'isolated'
-        ? ['thorp', 'hamlet'].includes(tier)
-          ? 0
-          : hasTeleportationInfra(institutions, config) && config.magicExists !== false
-            ? 2
-            : 1
-        : 2; // road/river → Moderate
-
-  // 2. Tier development bonus — division of labour, institutional multiplication
-  const _tierBonus = { thorp: 0, hamlet: 0, village: 0, town: 1, city: 1, metropolis: 2 }[tier] || 0;
-
-  // 3. Economy slider — institutional investment in commerce (±1.25 range)
-  const _priEcon = config.priorityEconomy ?? 50;
-  const _ecoBonus = (_priEcon - 50) / 40;
-
-  // 4. Magic bonus — tier-scaled productive output (only meaningful at town+, only when active)
-  const _priMagic = config.priorityMagic ?? 0;
-  const _magicActive = config.magicExists !== false && _priMagic > 25;
-  const _magicTierScale = { thorp: 0, hamlet: 0, village: 0.3, town: 0.6, city: 1.0, metropolis: 1.4 }[tier] || 0;
-  const _magicBonus = _magicActive ? Math.max(0, (_priMagic - 25) / 75) * _magicTierScale : 0;
-
-  // 5. Threat penalty — disrupted trade, insecure fields, rerouted merchants
-  const _monsterThreat = config.monsterThreat || 'frontier';
-  const _threatPenalty = _monsterThreat === 'plagued' ? -1 : _monsterThreat === 'frontier' ? -0.5 : 0;
-
-  // 6. Military effects — heavy spending diverts capital; but security enables trade
-  const _priMil = config.priorityMilitary ?? 50;
-  const _milDrain = _priMil > 75 ? -0.3 : 0; // garrison costs crowd out investment
-  const _hasWalls = instNames.some(
-    (n) =>
-      n.toLowerCase().includes('wall') || n.toLowerCase().includes('palisade') || n.toLowerCase().includes('citadel')
-  );
-  const _hasGarrison = instNames.some(
-    (n) => n.toLowerCase().includes('garrison') || n.toLowerCase().includes('barracks')
-  );
-  const _defPremium = _hasWalls && _hasGarrison && (tradeRoute === 'crossroads' || tradeRoute === 'port') ? 0.3 : 0;
-
-  // Food security modifier — computed here so it can cap/floor base prosperity
-  const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
-  const _foodMod = _foodSec.prosperityMod;
-
-  // 7. Institutional depth — count of Economy+Crafts institutions weighted vs tier expectation
-  // A city with 12 economy institutions is richer than one with 4, regardless of slider.
-  // Expectations calibrated to actual generator output averages per tier.
-  const _econInstCount = institutions.filter((i) => i.category === 'Economy' || i.category === 'Crafts').length;
-  const _tierExpectedEco = { thorp: 3, hamlet: 8, village: 13, town: 22, city: 13, metropolis: 14 }[tier] || 8;
-  // Bonus: +1 if well above expectation, -1 if well below. Bounded ±1 to avoid dominating.
-  const _depthBonus = _econInstCount >= _tierExpectedEco * 1.3 ? 1 : _econInstCount >= _tierExpectedEco * 0.75 ? 0 : -1;
-
-  // 8. Income diversity bonus — many distinct income sources = genuinely complex economy
-  const _incomeCount = incomeNormalized?.length || 0;
-  const _diversityBonus = _incomeCount >= 7 ? 0.5 : _incomeCount >= 5 ? 0.25 : 0;
-
-  // Combine — cap at Prosperous (4); Wealthy only through narrative modifier (strong econOut)
-  let _baseIdx = Math.min(
-    4,
-    Math.max(
-      0,
-      Math.round(
-        _routeBase +
-          _tierBonus +
-          _ecoBonus +
-          _magicBonus +
-          _threatPenalty +
-          _milDrain +
-          _defPremium +
-          _depthBonus +
-          _diversityBonus
-      )
-    )
-  );
-  // Apply food security floor/cap/bonus to base index BEFORE narrative modifiers
-  if (_foodMod) {
-    if (_foodMod.type === 'cap') _baseIdx = Math.min(_baseIdx, _foodMod.value);
-    if (_foodMod.type === 'penalty') _baseIdx = Math.max(0, _baseIdx + _foodMod.value);
-    if (_foodMod.type === 'bonus') _baseIdx = Math.min(4, _baseIdx + Math.round(_foodMod.value));
-  }
-  // Thorp/hamlet prosperity floor: subsistence communities with required institutions
-  // functioning normally should never label below Poor — they're not in crisis, they're
-  // just small. Struggling is reserved for active stress/famine on top of structural poverty.
-  const _hasRequiredEco = institutions.some((i) => {
-    const n = (i.name || '').toLowerCase();
-    return [
-      'subsistence farming',
-      'access to external mill',
-      'farmland',
-      'town granary',
-      'weekly market',
-      'city granari',
-      'market square',
-      'district markets',
-      'state granary',
-      'inns and taverns (district)',
-    ].some((k) => n.includes(k));
+  // Stage 10 — base prosperity model; returns the food-security profile and the
+  // resolved prosperity label.
+  const { foodSec: _foodSec, prosperityLabel: Z } = computeBaseProsperity({
+    tier,
+    institutions,
+    tradeRoute,
+    config,
+    instNames,
+    incomeNormalized,
   });
-  if (
-    ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].includes(tier) &&
-    _hasRequiredEco &&
-    !(config.stressTypes || []).length
-  ) {
-    _baseIdx = Math.max(_baseIdx, 1); // floor at Poor for clean subsistence settlements
-  }
-
-  let Z = _PLABELS[_baseIdx];
   return (
-    tradeRoute === 'isolated' && ['thorp', 'hamlet'].includes(tier) && (Z = 'Subsistence'),
     {
       tier: tier,
       prosperity: generateEconomicNarrative(Z, config, institutions),
@@ -2544,27 +2687,27 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   const terrain = terrainType ? TERRAIN_DATA[terrainType] : null;
 
   // Food/supply viability
-  const foodAnalysis = buildFactionList(population, terrain, insts, cfg);
+  const foodAnalysis = assessFoodViability(population, terrain, insts, cfg);
   issues.push(...foodAnalysis.issues);
   warnings.push(...foodAnalysis.warnings);
   plotHooks.push(...foodAnalysis.plotHooks);
 
   // Resource chain analysis
   if (terrain && nearbyResources.length > 0) {
-    const resourceAnalysis = computeFactionPowers(insts, terrain, nearbyResources, cfg);
+    const resourceAnalysis = assessResourceChains(insts, terrain, nearbyResources, cfg);
     issues.push(...resourceAnalysis.issues);
     warnings.push(...resourceAnalysis.warnings);
     suggestions.push(...(resourceAnalysis.suggestions || []));
   }
 
   // Water/infrastructure dependencies
-  const waterAnalysis = buildPowerNarrative(insts, terrain, cfg);
+  const waterAnalysis = assessWaterDependencies(insts, terrain, cfg);
   issues.push(...waterAnalysis.issues);
   warnings.push(...waterAnalysis.warnings);
   suggestions.push(...(waterAnalysis.suggestions || []));
 
   // Food balance plot hooks
-  const stabilityAnalysis = generateStabilityScore(population, terrain, insts, cfg, foodAnalysis.foodBalance);
+  const stabilityAnalysis = deriveFoodSecurityHooks(population, terrain, insts, cfg, foodAnalysis.foodBalance);
   issues.push(...stabilityAnalysis.issues);
   warnings.push(...stabilityAnalysis.warnings);
   plotHooks.push(...stabilityAnalysis.plotHooks);
@@ -2626,7 +2769,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
     dependencies: sortBySeverity(dependencyWarnings), // supply chain notes (informational)
     suggestions,
     plotHooks,
-    summary: buildConflict(isViable, issues, structuralWarnings, plotHooks),
+    summary: buildViabilitySummary(isViable, issues, structuralWarnings, plotHooks),
     metrics: {
       foodBalance: foodAnalysis.foodBalance,
       tradeAccess: cfg?.tradeRouteAccess || 'unknown',

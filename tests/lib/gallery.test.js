@@ -366,6 +366,20 @@ describe('gallery.js - metadata, votes, comments', () => {
     }));
   });
 
+  it('sanitizes the description ON WRITE so no live HTML is persisted', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', {
+      description: '<script>alert(1)</script>Safe hook<img src=x onerror=alert(2)>',
+    });
+    const patch = update.mock.calls[0][0];
+    // Stored value carries no script/img/event-handler markup regardless of the
+    // render path — sanitize-on-write closes the stored-XSS gap at the source.
+    expect(patch.gallery_description).not.toMatch(/<script|<img|onerror/i);
+    expect(patch.gallery_description).toContain('Safe hook');
+  });
+
   it('toggleGalleryVote calls the vote RPC and normalizes the result', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: [{ net_votes: 5, voted: true }], error: null });
     await expect(toggleGalleryVote('s1')).resolves.toEqual({ netVotes: 5, voted: true });

@@ -19,7 +19,7 @@
 import { getActiveRng } from './rngContext.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 
-// ── Constants (match buildFactionList in economicGenerator) ────────────────
+// ── Constants (match assessFoodViability in economicGenerator) ─────────────
 const PER_CAPITA_NEED        = 2;    // lbs/day per person
 const FARMER_PRODUCTION      = 6;    // lbs/day per farming worker
 const AGRICULTURAL_WORKFORCE = 0.4;  // fraction of population that farms
@@ -142,7 +142,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // magicSupplement: 0 → 0.35 fraction of food pressure relieved by magic
 
   // ── Physics-based caloric calculation ────────────────────────────────────
-  // Use the same constants as buildFactionList for consistency
+  // Use the same constants as assessFoodViability for consistency
   const terrainAgri    = TERRAIN_AGRI[terrain] ?? 1.0;
   let agriMod = 0;
   if ((hasSubsistence || hasFarmland) && hasRes('grain_fields','fertile_floodplain')) agriMod += 0.25;

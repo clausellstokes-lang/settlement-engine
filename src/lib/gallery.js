@@ -15,6 +15,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
 
@@ -669,9 +670,13 @@ function normalizeGalleryFilters(filters = {}) {
 }
 
 function galleryMetadataPatch(metadata = {}) {
-  // Descriptions are now sanitized rich-text HTML (§4c), so allow more room
-  // than the old plaintext cap; the server/render re-sanitize keeps it safe.
-  const description = String(metadata.description || '').trim().slice(0, 4000);
+  // Descriptions are sanitized rich-text HTML (§4c). Sanitize ON WRITE here (not
+  // only at render): there is no server/DB-side scrub of gallery_description, so
+  // sanitizing the stored value is what makes it XSS-safe regardless of which
+  // consumer renders it — a future unsanitized render path can't resurrect stored
+  // script. Cap the raw input generously before sanitizing, then hard-bound the
+  // sanitized result to the column budget.
+  const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
   const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
   const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
   const tags = Array.isArray(metadata.tags)

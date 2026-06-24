@@ -290,7 +290,10 @@ export function createChangeQueueSlice(set, get) {
         for (const order of queue) {
           if (order.type === 'event') {
             const event = order.payload?.event;
-            if (event) get().applyEvent(event);
+            // fromFlush marks this as the commit's OWN replay so applyEvent's
+            // re-entry guard lets it through (external applyEvent calls landing in
+            // this flush's await windows are rejected).
+            if (event) get().applyEvent(event, { fromFlush: true });
           } else if (order.type === 'rename') {
             const { renameType, targetId, newName } = order.payload || {};
             // Canon-lock re-check at flush time (defense in depth — the enqueue

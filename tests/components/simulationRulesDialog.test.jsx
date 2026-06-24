@@ -73,10 +73,10 @@ describe('SimulationRulesDialog', () => {
       onClose={() => {}}
     />);
 
-    // The advanced gates now live behind the "Engine gates" progressive-disclosure
-    // group — expand it before asserting on the gate controls.
-    fireEvent.click(screen.getByText('Engine gates (advanced)'));
-
+    // Discoverability: the Engine group auto-opens while the living-world gates are
+    // still off, so the war/religion toggles are visible the moment the dialog opens
+    // — no click-to-expand needed (the "buyers never found the gates" fix).
+    expect(screen.getByRole('button', { name: /Engine gates \(advanced\)/ }).getAttribute('aria-expanded')).toBe('true');
     expect(screen.getByText('Living-world systems (advanced)')).toBeTruthy();
     const warGate = screen.getByRole('checkbox', { name: 'War layer' });
     const strategyGate = screen.getByRole('checkbox', { name: 'Settlement strategy' });
@@ -99,9 +99,8 @@ describe('SimulationRulesDialog', () => {
       onClose={onClose}
     />);
 
-    // Expand the "Engine gates" disclosure to reach the advanced gate toggles.
-    fireEvent.click(screen.getByText('Engine gates (advanced)'));
-
+    // The Engine group is open by default while the gates are off, so the toggles
+    // are directly reachable — no expand click needed.
     fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'Settlement strategy' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'Religion dynamics' }));

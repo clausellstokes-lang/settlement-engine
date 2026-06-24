@@ -284,12 +284,12 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewResult, setPreviewResult] = useState(null);
   const [error, setError] = useState(null);
-  // Progressive disclosure: the presets (Overview) stay open; the fine-grained
-  // toggles (Detail) and the advanced living-world gates (Engine) collapse into
-  // disclosure groups so the dialog reads as three altitudes, not one flat scroll.
-  // Default the deeper groups closed; all field wiring is untouched when expanded.
+  // Progressive disclosure: presets stay open; the Detail toggles and the Engine
+  // living-world gates collapse into groups. Detail defaults closed. The Engine
+  // group holds the ADVERTISED war/religion gates (off by default, previously
+  // buried here), so default it OPEN while they're still off — surfaced on first open.
   const [detailOpen, setDetailOpen] = useState(false);
-  const [engineOpen, setEngineOpen] = useState(false);
+  const [engineOpen, setEngineOpen] = useState(() => !draft.warLayerEnabled && !draft.religionDynamicsEnabled);
 
   const presets = Object.values(SIMULATION_RULE_PRESETS);
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;

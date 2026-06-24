@@ -195,18 +195,19 @@ npx supabase functions deploy send-email              # per-template self-auth; 
 npx supabase functions deploy ingest-events           # public analytics event sink (anon traffic)
 npx supabase functions deploy analytics-export        # cron export, x-export-secret shared secret
 npx supabase functions deploy auth-recovery           # logged-out password recovery (Auth Phase 2)
+npx supabase functions deploy log-client-error        # public client-error sink (anon traffic, bot-guarded)
 ```
 
 **No `--no-verify-jwt` flags needed.** `verify_jwt` is pinned EXPLICITLY for every
 function in `config.toml` (the deploy source of truth), so the platform JWT gate
-can't be flipped by a forgotten/stray flag. Six functions that authenticate
+can't be flipped by a forgotten/stray flag. Seven functions that authenticate
 themselves are pinned `false` (`stripe-webhook`, `verify-single-dossier`,
-`ingest-events`, `analytics-export`, `send-email`, `auth-recovery`); the rest are
-pinned `true`.
+`ingest-events`, `analytics-export`, `send-email`, `auth-recovery`,
+`log-client-error`); the rest are pinned `true`.
 The pins are enforced by `tests/edgeFunctions/verifyJwtPins.test.js` (every
 function must have an explicit pin). Deploy **every** function directory under
 `supabase/functions/` — the only non-deployable one is `_shared/` (a helper
-bundle, not a function). There are 12 functions total; on a first cutover deploy
+bundle, not a function). There are 13 functions total; on a first cutover deploy
 all of them, and after adding a new function confirm the list with
 `ls -d supabase/functions/*/ | grep -v _shared` rather than trusting this block.
 <!-- @enforced-by tests/docs/docCounts.test.js -->
