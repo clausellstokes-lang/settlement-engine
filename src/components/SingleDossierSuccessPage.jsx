@@ -148,7 +148,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           so the purchase can be recovered safely.
         </p>
         <a
-          href="mailto:clausellstokes@aol.com?subject=Single%20dossier%20recovery"
+          href="mailto:settlementforge@gmail.com?subject=Single%20dossier%20recovery"
           style={{
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,

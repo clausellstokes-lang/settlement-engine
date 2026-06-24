@@ -677,7 +677,7 @@ export default function App() {
               {t('footer.pricing')}
             </Button>
             <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <a href="mailto:clausellstokes@aol.com" style={{
+            <a href="mailto:settlementforge@gmail.com" style={{
               color: PARCH_100, textDecoration: 'none', display: 'inline-flex',
               alignItems: 'center', gap: 4,
               padding: isMobile ? `0 ${SP.sm}px` : 0,

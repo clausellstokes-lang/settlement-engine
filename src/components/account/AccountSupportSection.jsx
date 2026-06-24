@@ -29,8 +29,8 @@ export default function AccountSupportSection({ auth: _auth } = {}) {
           <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginBottom: SP.md }}>
             Most questions are answered below. If none of these solve it, open a ticket
             and we will follow up here and by email. You can also email us directly at{' '}
-            <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD_TXT, fontWeight: 600 }}>
-              clausellstokes@aol.com
+            <a href="mailto:settlementforge@gmail.com" style={{ color: GOLD_TXT, fontWeight: 600 }}>
+              settlementforge@gmail.com
             </a>.
           </div>
           <AccountFAQ />
