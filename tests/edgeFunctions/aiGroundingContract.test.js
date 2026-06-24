@@ -472,7 +472,10 @@ describe('Tier 6 — AI model strategy is explicit', () => {
   });
 
   it('chooses the model from the requested phase on the selected profile', () => {
-    expect(EDGE).toMatch(/const profile = MODEL_PROFILES\[modelPreference\]/);
+    // The provider dispatch resolves the profile from the preference and the
+    // model from the requested phase (moved into dispatch() by the provider-
+    // abstraction refactor; callModel now layers a peer fallback on top).
+    expect(EDGE).toMatch(/MODEL_PROFILES\[preference\]\s*\|\|\s*MODEL_PROFILES\[DEFAULT_MODEL_PREFERENCE\]/);
     expect(EDGE).toMatch(/const model = profile\[phase\]/);
   });
 });

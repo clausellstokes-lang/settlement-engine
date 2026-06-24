@@ -96,7 +96,6 @@ async function getAccessTokenSafe() {
  * @param {(status: object) => void} [opts.onStatus] - called for status/phase events
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
- * @param {string} [opts.modelPreference] - User model preference key.
  * @param {object|null} [opts.relationshipMemoryContext] - dailyLife only: compact campaign relationship posture digest.
  * @param {object|null} [opts.chronicleContext] - narrative + dailyLife: compact weighted Chronicle digest (recent + party-caused events).
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
@@ -125,9 +124,11 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   if (typeof opts.aiGuidance === 'string' && opts.aiGuidance.trim()) {
     body.aiGuidance = opts.aiGuidance.trim();
   }
-  if (typeof opts.modelPreference === 'string' && opts.modelPreference.trim()) {
-    body.modelPreference = opts.modelPreference.trim();
-  }
+  // NOTE: model preference is NO LONGER sent from the client. The edge function
+  // resolves it server-side (forced override → profiles.model_preference →
+  // global default), so a crafted request can't pick a model the user never
+  // saved. The account-page <select> still persists profiles.model_preference;
+  // that saved value is the authoritative input the server reads.
   if (type === 'dailyLife' && opts.relationshipMemoryContext && typeof opts.relationshipMemoryContext === 'object') {
     body.relationshipMemoryContext = opts.relationshipMemoryContext;
   }

@@ -80,11 +80,16 @@ type AiUsageRecord = {
   maxTokens: number;
   inputChars: number;
   outputChars: number;
-  inputTokensEstimate: number;
-  outputTokensEstimate: number;
+  /** Real provider-reported tokens when available, else the len/4 floor. */
+  inputTokens: number;
+  outputTokens: number;
+  /** true when inputTokens/outputTokens are the len/4 estimate, not provider-reported. */
+  tokensEstimated: boolean;
   estimatedCostUsd: number;
   durationMs: number;
   ok: boolean;
+  /** true when a same-tier peer provider served this call after a provider-down fallback. */
+  fellBack: boolean;
 };
 
 const MODEL_PROFILES: Record<string, ModelProfile> = {
@@ -170,7 +175,7 @@ const CREDIT_COSTS: Record<string, number> = {
 
 const ESTIMATED_AI_PRICES_PER_MTOK: Record<Provider, Record<string, { input: number; output: number }>> = {
   anthropic: {
-    opus: { input: 15, output: 75 },
+    opus: { input: 5, output: 25 },
     haiku: { input: 1, output: 5 },
     default: { input: 3, output: 15 },
   },
@@ -201,36 +206,81 @@ function estimateUsd(provider: Provider, model: string, inputTokens: number, out
 }
 
 function aggregateAiUsage(records: AiUsageRecord[]) {
-  const byPhase: Record<string, { calls: number; estimatedCostUsd: number; durationMs: number; inputTokensEstimate: number; outputTokensEstimate: number }> = {};
+  const byPhase: Record<string, { calls: number; estimatedCostUsd: number; durationMs: number; inputTokens: number; outputTokens: number }> = {};
   for (const record of records) {
     if (!byPhase[record.phase]) {
       byPhase[record.phase] = {
         calls: 0,
         estimatedCostUsd: 0,
         durationMs: 0,
-        inputTokensEstimate: 0,
-        outputTokensEstimate: 0,
+        inputTokens: 0,
+        outputTokens: 0,
       };
     }
     const bucket = byPhase[record.phase];
     bucket.calls += 1;
     bucket.estimatedCostUsd += record.estimatedCostUsd;
     bucket.durationMs += record.durationMs;
-    bucket.inputTokensEstimate += record.inputTokensEstimate;
-    bucket.outputTokensEstimate += record.outputTokensEstimate;
+    bucket.inputTokens += record.inputTokens;
+    bucket.outputTokens += record.outputTokens;
   }
   return {
     calls: records.length,
     failedCalls: records.filter(record => !record.ok).length,
+    fallbackCalls: records.filter(record => record.fellBack).length,
     estimatedProviderCostUsd: Number(records.reduce((sum, record) => sum + record.estimatedCostUsd, 0).toFixed(6)),
-    inputTokensEstimate: records.reduce((sum, record) => sum + record.inputTokensEstimate, 0),
-    outputTokensEstimate: records.reduce((sum, record) => sum + record.outputTokensEstimate, 0),
+    inputTokens: records.reduce((sum, record) => sum + record.inputTokens, 0),
+    outputTokens: records.reduce((sum, record) => sum + record.outputTokens, 0),
     durationMs: records.reduce((sum, record) => sum + record.durationMs, 0),
     byPhase: Object.fromEntries(Object.entries(byPhase).map(([phase, value]) => [phase, {
       ...value,
       estimatedCostUsd: Number(value.estimatedCostUsd.toFixed(6)),
     }])),
   };
+}
+
+/**
+ * Persist the per-call COGS rows into ai_usage_events via the SERVICE-ROLE
+ * admin client. Best-effort: a metering write failure must NEVER fail the
+ * user's generation (log-and-continue). This replaces the old console-only
+ * `ai_usage` log line. Writes one row per provider call so margin can be joined
+ * back to the spend row.
+ * @param admin Service-role Supabase client (writes bypass RLS).
+ * @param userId Owning user.
+ * @param spendId The credit_ledger spend row that paid for this run (or null).
+ * @param records The per-call telemetry accumulated during the stream.
+ */
+async function persistAiUsageEvents(
+  admin: any,
+  userId: string,
+  spendId: string | null,
+  records: AiUsageRecord[],
+): Promise<void> {
+  if (!records.length) return;
+  try {
+    const rows = records.map((r) => ({
+      user_id: userId,
+      feature: r.featureType,
+      phase: r.phase,
+      provider: r.provider,
+      model: r.model,
+      model_preference: r.modelPreference,
+      input_tokens: r.inputTokens,
+      output_tokens: r.outputTokens,
+      tokens_estimated: r.tokensEstimated,
+      estimated_cost_usd: r.estimatedCostUsd,
+      ok: r.ok,
+      fellback: r.fellBack,
+      duration_ms: r.durationMs,
+      spend_id: spendId,
+    }));
+    const { error } = await admin.from('ai_usage_events').insert(rows);
+    if (error) {
+      logError('generate-narrative', userId, `ai_usage_events insert failed: ${error.message}`, { stage: 'metering' });
+    }
+  } catch (e) {
+    logError('generate-narrative', userId, e, { stage: 'metering' });
+  }
 }
 
 function normalizeModelPreference(value: unknown): ModelPreference {
@@ -242,6 +292,56 @@ function normalizeModelPreference(value: unknown): ModelPreference {
 function spendFeatureFor(type: string, modelPreference: ModelPreference): string {
   const profile = MODEL_PROFILES[normalizeModelPreference(modelPreference)] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   return profile.costTier === 'fast' ? `${type}_fast` : type;
+}
+
+/**
+ * Resolve the AUTHORITATIVE model preference server-side. The client request
+ * body is NOT trusted for selection — a crafted request could otherwise pick
+ * any model regardless of the saved preference. Resolution order:
+ *   1. forced_override (system_config ai_model_preference) — operator kill-switch
+ *   2. profiles.model_preference (read from the DB, not the body)
+ *   3. global_default (system_config)
+ *   4. DEFAULT_MODEL_PREFERENCE
+ * Every step is run through normalizeModelPreference so an invalid/dropped key
+ * degrades safely to the default rather than throwing.
+ * @param admin Service-role client (reads bypass RLS for the config + profile).
+ * @param userId The authenticated user's id.
+ */
+async function resolveModelPreference(admin: any, userId: string): Promise<ModelPreference> {
+  let globalDefault: string | null = null;
+  let forcedOverride: string | null = null;
+  let userPref: string | null = null;
+
+  try {
+    const { data: cfg } = await admin
+      .from('system_config')
+      .select('value')
+      .eq('key', 'ai_model_preference')
+      .maybeSingle();
+    const v = cfg?.value;
+    if (v && typeof v === 'object') {
+      globalDefault = typeof v.global_default === 'string' ? v.global_default : null;
+      forcedOverride = typeof v.forced_override === 'string' ? v.forced_override : null;
+    }
+  } catch (_) { /* config read failure → fall through to defaults */ }
+
+  // A forced override short-circuits everything (kill-switch / deprecation).
+  if (forcedOverride && normalizeModelPreference(forcedOverride) === forcedOverride) {
+    return forcedOverride;
+  }
+
+  try {
+    const { data: profile } = await admin
+      .from('profiles')
+      .select('model_preference')
+      .eq('id', userId)
+      .maybeSingle();
+    userPref = typeof profile?.model_preference === 'string' ? profile.model_preference : null;
+  } catch (_) { /* profile read failure → fall through */ }
+
+  if (userPref && userPref in MODEL_PROFILES) return userPref;
+  if (globalDefault && globalDefault in MODEL_PROFILES) return globalDefault;
+  return DEFAULT_MODEL_PREFERENCE;
 }
 
 // Fence tokens delimiting the DM's campaign context inside prompts. The
@@ -1750,9 +1850,35 @@ async function runWithConcurrency<T>(items: T[], limit: number, worker: (item: T
   await Promise.all(runners);
 }
 
-// ── Anthropic call ──────────────────────────────────────────────────────────
+// ── Provider abstraction ──────────────────────────────────────────────────
+//
+// The complete()-style boundary: each provider impl returns a NORMALIZED
+// { text, usage } where usage carries REAL provider-reported token counts when
+// present (estimated:false) and falls back to a len/4 floor only when the
+// provider omits them (estimated:true). Anthropic and OpenAI are EQUAL
+// first-class peers here — neither is "primary"; selection happens in callModel.
 
-async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<string> {
+type NormalizedUsage = {
+  inputTokens: number;
+  outputTokens: number;
+  /** true when the counts are our len/4 floor, false when provider-reported. */
+  estimated: boolean;
+};
+
+type CompletionResult = {
+  text: string;
+  usage: NormalizedUsage;
+};
+
+/**
+ * Anthropic Messages API impl. Captures real `usage.input_tokens` /
+ * `usage.output_tokens` when present; otherwise estimates from char length.
+ * @param prompt The full prompt to send as a single user message.
+ * @param maxTokens Provider max_tokens budget.
+ * @param model Resolved Anthropic model id.
+ * @returns Normalized { text, usage }.
+ */
+async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<CompletionResult> {
   if (!ANTHROPIC_API_KEY) throw new Error('Anthropic API key is not configured');
   const res = await fetchAiWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -1774,10 +1900,21 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
   }
 
   const json = await res.json();
-  return (json.content?.[0]?.text || '').trim();
+  const text = (json.content?.[0]?.text || '').trim();
+  return { text, usage: normalizeProviderUsage(json?.usage, prompt, text) };
 }
 
-async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<string> {
+/**
+ * OpenAI Responses API impl. The Responses API reports usage as
+ * `usage.input_tokens` / `usage.output_tokens` (same field names as Anthropic,
+ * different envelope), so normalizeProviderUsage handles both. Falls back to
+ * estimate when usage is absent.
+ * @param prompt The full prompt to send as the `input`.
+ * @param maxTokens Provider max_output_tokens budget.
+ * @param model Resolved OpenAI model id.
+ * @returns Normalized { text, usage }.
+ */
+async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<CompletionResult> {
   if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
   const res = await fetchAiWithRetry('https://api.openai.com/v1/responses', {
     method: 'POST',
@@ -1799,17 +1936,95 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
 
   const json = await res.json();
   const outputText = typeof json.output_text === 'string' ? json.output_text : '';
-  if (outputText.trim()) return outputText.trim();
-  const content = Array.isArray(json.output)
-    ? json.output.flatMap((item: any) => Array.isArray(item?.content) ? item.content : [])
-    : [];
-  return content
-    .map((item: any) => item?.text || '')
-    .filter(Boolean)
-    .join('\n')
-    .trim();
+  let text = outputText.trim();
+  if (!text) {
+    const content = Array.isArray(json.output)
+      ? json.output.flatMap((item: any) => Array.isArray(item?.content) ? item.content : [])
+      : [];
+    text = content
+      .map((item: any) => item?.text || '')
+      .filter(Boolean)
+      .join('\n')
+      .trim();
+  }
+  return { text, usage: normalizeProviderUsage(json?.usage, prompt, text) };
 }
 
+/**
+ * Normalize a provider `usage` object into { inputTokens, outputTokens,
+ * estimated }. Anthropic and OpenAI Responses both use input_tokens /
+ * output_tokens; OpenAI Chat-style sometimes uses prompt_tokens /
+ * completion_tokens, so accept both spellings. When no usable counts are
+ * present, fall back to the len/4 estimate and flag estimated:true.
+ * @param usage Raw provider usage object (may be undefined).
+ * @param prompt Prompt text, for the estimate floor.
+ * @param output Output text, for the estimate floor.
+ */
+function normalizeProviderUsage(usage: any, prompt: string, output: string): NormalizedUsage {
+  const inRaw = usage?.input_tokens ?? usage?.prompt_tokens;
+  const outRaw = usage?.output_tokens ?? usage?.completion_tokens;
+  const inNum = typeof inRaw === 'number' && Number.isFinite(inRaw) ? inRaw : null;
+  const outNum = typeof outRaw === 'number' && Number.isFinite(outRaw) ? outRaw : null;
+  if (inNum != null && outNum != null) {
+    return { inputTokens: inNum, outputTokens: outNum, estimated: false };
+  }
+  return {
+    inputTokens: inNum ?? estimateTokens(prompt),
+    outputTokens: outNum ?? estimateTokens(output),
+    estimated: true,
+  };
+}
+
+/** Same-tier peer for provider-down fallback (deliberately a PEER swap, not a
+ *  Claude-primary fallback). Maps a preference to its cross-provider sibling at
+ *  the matching cost tier. Returns null when there's no sensible peer. */
+const PEER_FALLBACK_PREFERENCE: Record<string, string> = {
+  anthropic_claude_opus_4_8: 'openai_gpt_5_2',
+  anthropic_claude_sonnet_4_6: 'openai_gpt_5_2',
+  anthropic_claude_haiku_4_5: 'openai_gpt_5_mini',
+  openai_gpt_5_2: 'anthropic_claude_opus_4_8',
+  openai_gpt_5_mini: 'anthropic_claude_haiku_4_5',
+  openai_gpt_5_nano: 'anthropic_claude_haiku_4_5',
+  openai_gpt_4_1: 'anthropic_claude_opus_4_8',
+  openai_gpt_4_1_mini: 'anthropic_claude_haiku_4_5',
+};
+
+/** Classify an error as "provider down" (network/timeout/5xx/unconfigured) vs.
+ *  a content/usage error. Only provider-down errors justify a peer fallback —
+ *  we don't want to silently double-bill a bad-prompt error onto the peer. */
+function isProviderDownError(e: unknown): boolean {
+  const name = (e as any)?.name || '';
+  const msg = (e as Error)?.message || '';
+  if (name === 'AbortError' || name === 'TimeoutError') return true;
+  if (/not configured/i.test(msg)) return true;
+  // fetchAiWithRetry surfaces non-ok statuses as "AI API error: <status> …".
+  const m = msg.match(/AI API error:\s*(\d{3})/);
+  if (m) {
+    const status = Number(m[1]);
+    return status >= 500 || status === 429;
+  }
+  // Bare network failures (DNS, connection reset) throw TypeError from fetch.
+  if (name === 'TypeError') return true;
+  return false;
+}
+
+/** Dispatch a single completion to the provider for `preference`+`phase`. */
+function dispatch(preference: ModelPreference, phase: ModelPhase, prompt: string, maxTokens: number): Promise<CompletionResult> {
+  const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+  const model = profile[phase];
+  return profile.provider === 'openai'
+    ? callOpenAI(prompt, maxTokens, model)
+    : callAnthropic(prompt, maxTokens, model);
+}
+
+/**
+ * The normalizing routing wrapper. SELECTS the provider from the resolved
+ * preference (a deliberate peer choice), dispatches, and records a usage row.
+ * On a PROVIDER-DOWN error (not a content error) it retries ONCE on the
+ * same-tier peer provider so a single provider outage doesn't fail the user;
+ * the fallback is flagged in the usage record. Returns the prose text.
+ * @param usageTelemetry Optional sink the caller drains into ai_usage_events.
+ */
 async function callModel(
   prompt: string,
   maxTokens: number,
@@ -1818,36 +2033,53 @@ async function callModel(
   featureType: string,
   usageTelemetry?: AiUsageRecord[],
 ): Promise<string> {
-  const profile = MODEL_PROFILES[modelPreference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
-  const model = profile[phase];
-  const started = Date.now();
-  let output = '';
-  let ok = false;
+  const record = (preference: ModelPreference, started: number, result: CompletionResult | null, ok: boolean, fellBack: boolean) => {
+    if (!usageTelemetry) return;
+    const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+    const model = profile[phase];
+    const usage = result?.usage ?? { inputTokens: estimateTokens(prompt), outputTokens: 0, estimated: true };
+    usageTelemetry.push({
+      featureType,
+      phase,
+      provider: profile.provider,
+      model,
+      modelPreference: preference,
+      maxTokens,
+      inputChars: prompt.length,
+      outputChars: result?.text.length ?? 0,
+      inputTokens: usage.inputTokens,
+      outputTokens: usage.outputTokens,
+      tokensEstimated: usage.estimated,
+      estimatedCostUsd: estimateUsd(profile.provider, model, usage.inputTokens, usage.outputTokens),
+      durationMs: Date.now() - started,
+      ok,
+      fellBack,
+    });
+  };
+
+  // ── Primary: the SELECTED preference (peer, not a default) ──
+  const startedPrimary = Date.now();
   try {
-    output = profile.provider === 'openai'
-      ? await callOpenAI(prompt, maxTokens, model)
-      : await callAnthropic(prompt, maxTokens, model);
-    ok = true;
-    return output;
-  } finally {
-    if (usageTelemetry) {
-      const inputTokensEstimate = estimateTokens(prompt);
-      const outputTokensEstimate = estimateTokens(output);
-      usageTelemetry.push({
-        featureType,
-        phase,
-        provider: profile.provider,
-        model,
-        modelPreference,
-        maxTokens,
-        inputChars: prompt.length,
-        outputChars: output.length,
-        inputTokensEstimate,
-        outputTokensEstimate,
-        estimatedCostUsd: estimateUsd(profile.provider, model, inputTokensEstimate, outputTokensEstimate),
-        durationMs: Date.now() - started,
-        ok,
-      });
+    const result = await dispatch(modelPreference, phase, prompt, maxTokens);
+    record(modelPreference, startedPrimary, result, true, false);
+    return result.text;
+  } catch (primaryErr) {
+    record(modelPreference, startedPrimary, null, false, false);
+
+    // ── Safety-net peer fallback: ONLY on a provider-down class error ──
+    const peer = PEER_FALLBACK_PREFERENCE[modelPreference];
+    if (!peer || !isProviderDownError(primaryErr)) throw primaryErr;
+
+    const startedPeer = Date.now();
+    try {
+      const result = await dispatch(peer, phase, prompt, maxTokens);
+      record(peer, startedPeer, result, true, true);
+      return result.text;
+    } catch (peerErr) {
+      record(peer, startedPeer, null, false, true);
+      // Surface the ORIGINAL error: the user's selected provider is what
+      // failed; the peer was a best-effort rescue.
+      throw primaryErr;
     }
   }
 }
@@ -2018,7 +2250,11 @@ export async function handleGenerateNarrative(
       ? pinnedNpcIds.filter((x: unknown) => x != null).map((x: unknown) => String(x))
       : [];
 
-    const selectedModelPreference = normalizeModelPreference(modelPreference);
+    // NOTE: `modelPreference` from the request body is NO LONGER trusted for
+    // selection — it's resolved server-side below from the DB + system_config.
+    // We touch it only to avoid an unused-binding lint and to keep the wire
+    // contract back-compatible (the client may still send it; we ignore it).
+    void modelPreference;
     const confirmedAiGuidance = typeof aiGuidance === 'string' ? stripGuidanceFences(aiGuidance).trim().slice(0, 4000) : '';
     const confirmedRelationshipMemoryContext = type === 'dailyLife'
       ? sanitizeRelationshipMemoryContext(relationshipMemoryContext)
@@ -2027,10 +2263,15 @@ export async function handleGenerateNarrative(
     const confirmedChronicleContext = (type === 'narrative' || type === 'dailyLife')
       ? sanitizeChronicleContext(chronicleContext)
       : null;
-    const spendFeature = spendFeatureFor(type, selectedModelPreference);
-    const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
     const supabaseAdmin = makeAdminClient();
+
+    // ── Server-authoritative model selection ──
+    // Resolve the preference from forced-override → profiles.model_preference →
+    // global default → built-in default. The client body is never trusted here.
+    const selectedModelPreference = await resolveModelPreference(supabaseAdmin, user.id);
+    const spendFeature = spendFeatureFor(type, selectedModelPreference);
+    const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
     // ── Trust-boundary gate: reject a banned / disabled / soft-deleted account ──
     // Defense-in-depth (review B16 finding #1): spend_credits (migration 057) ALSO
@@ -2045,6 +2286,41 @@ export async function handleGenerateNarrative(
       logError('generate-narrative', user.id, `account_is_active errored: ${activeErr.message}`);
     }
     if (isActive !== true) throw new Error('Account is not active');
+
+    // ── SAFETY 1: hard spend cap — FAIL CLOSED (kill-switch) ──
+    // Checked BEFORE spend_credits so a capped-out window never debits the user
+    // (nothing to refund). Elevated operators bypass the cap so an admin can
+    // still operate during a degraded window. An unbounded provider bill is the
+    // catastrophic failure mode, so we BLOCK on the cap RPC erroring or
+    // returning a non-true `allowed` — the opposite default from the limiter.
+    const { data: capResult, error: capErr } =
+      await supabaseAdmin.rpc('check_ai_spend_cap');
+    if (capErr) {
+      logError('generate-narrative', user.id, `check_ai_spend_cap errored: ${capErr.message}`, { stage: 'spend-cap' });
+    }
+    const capAllowed = (capResult as { allowed?: boolean } | null)?.allowed === true;
+    if (!capAllowed) {
+      // Graceful degrade: a clean "temporarily unavailable", not a crash. No
+      // credits were charged (this is before the spend), so nothing to refund.
+      throw new Error('AI generation is temporarily unavailable (daily capacity reached). No credits were charged — please try again later.');
+    }
+
+    // ── SAFETY 2: per-user/day rate limit — FAIL OPEN ──
+    // One abusive account can't drain the shared provider pool. A limiter
+    // OUTAGE must never block a legitimate paying user (same rationale as
+    // migration 035), so an RPC error is treated as allowed. The default limit
+    // (60/day) is far above a heavy DM's real usage; elevation isn't known yet
+    // (it comes from the spend result below) so the limit applies uniformly.
+    {
+      const { data: rlResult, error: rlErr } =
+        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+      if (rlErr) {
+        // FAIL OPEN: log and proceed. Do not block on a limiter outage.
+        logError('generate-narrative', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+      } else if ((rlResult as { allowed?: boolean } | null)?.allowed === false) {
+        throw new Error('You have reached today\'s AI generation limit. Please try again tomorrow. No credits were charged.');
+      }
+    }
 
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
     // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
@@ -2518,6 +2794,15 @@ export async function handleGenerateNarrative(
           console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
           send({ error: msg, refunded: !isElevated, aiUsage });
           controller.close();
+        } finally {
+          // COGS metering: persist EVERY provider call (success or failure) into
+          // ai_usage_events via the service-role admin client. This runs once
+          // per generation regardless of which terminal branch fired, and is
+          // best-effort (persistAiUsageEvents swallows + logs its own errors) so
+          // a metering write can never fail the user's already-streamed result.
+          // Elevated runs still record COGS (the spend was free, but the tokens
+          // weren't) — spendId is null for those, which is correct.
+          await persistAiUsageEvents(supabaseAdmin, user.id, spendId, usageTelemetry);
         }
       },
     });

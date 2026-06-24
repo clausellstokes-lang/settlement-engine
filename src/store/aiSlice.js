@@ -434,7 +434,6 @@ export const createAiSlice = (set, get) => ({
         await generateNarrative('narrative', settlement, saveId, {
           pinnedNpcIds,
           aiGuidance,
-          modelPreference,
           chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
           onField(fieldName, value, error) {
             // Daily-life beats stream as `dailyLife.<beat>` because the
@@ -640,7 +639,6 @@ export const createAiSlice = (set, get) => ({
     try {
       const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
         aiGuidance,
-        modelPreference,
         relationshipMemoryContext,
         chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
         onField(fieldName, value, error) {
@@ -805,7 +803,6 @@ export const createAiSlice = (set, get) => ({
           changeType,
           changeLabel,
           aiGuidance,
-          modelPreference,
           priorNarrative: aiSettlement,
           priorDailyLife: aiDailyLife,
           onField(fieldName, value, error) {
