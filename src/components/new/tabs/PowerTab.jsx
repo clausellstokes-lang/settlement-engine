@@ -3,9 +3,10 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
-import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor, localNpcId } from '../../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { useStore } from '../../../store/index.js';
+import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
@@ -17,6 +18,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   // mounted lazy tab. Keyed on focus `ts` so a repeat click re-fires.
   const focusedEntity = useStore(state => state.focusedEntity);
   const focusedRowRef = useRef(null);
+  // The live entity index lets sub-faction member names resolve to the canonical
+  // NPC id by name (members carry no stable id), so the link connects instead of
+  // degrading to a slug that misses a real `npc.id`.
+  const { index } = useDossierEntities();
 
   // Resolve the focused faction's row index (or -1). Computed from `r` directly
   // so this runs before the early return below and keeps hooks order stable.
@@ -263,8 +268,13 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                         <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated:</span>
                         {matchedGroups.flatMap(g => g.members||[]).slice(0,5).map((mem,j) => (
                           <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
-                            {/* Sub-faction member → its NPC card (rename-safe; plain text if no NPC record). */}
-                            <EntityLink id={entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
+                            {/* Sub-faction member → its NPC card. Resolve the
+                                CANONICAL id by name first (members lack a stable
+                                id, so a bare slug would miss an NPC keyed by a
+                                real `npc.id`); fall back to the slug so a member
+                                who genuinely IS the index key still links.
+                                Rename-safe; plain text if no NPC record. */}
+                            <EntityLink id={localNpcId(index, mem.name) ?? entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
                       </div>

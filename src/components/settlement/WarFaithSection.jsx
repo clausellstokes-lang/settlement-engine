@@ -27,7 +27,7 @@
  * Pure read-models only — no store writes, no rng.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import {
   settlementWarStatus,
   settlementWarExhaustion,
@@ -43,7 +43,8 @@ import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPuls
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { factionIdFromName } from '../../lib/entities.js';
-import { slugifyEntity } from '../../domain/dossier/entityLinks.js';
+import { slugifyEntity, entityAnchor } from '../../domain/dossier/entityLinks.js';
+import { useStore } from '../../store/index.js';
 import { useAltitude } from '../../hooks/useAltitude.js';
 import Button from '../primitives/Button.jsx';
 import EntityLink from '../primitives/EntityLink.jsx';
@@ -176,6 +177,22 @@ export default function WarFaithSection({
     aggressiveness, posture, deity, faithEffects,
   } = model;
 
+  // Dossier hyperlink SINK for the patron deity. The deity renders ONLY here, so
+  // a 'Primary faith:' link from elsewhere routes to this section (TYPE_TO_TAB.
+  // deity = 'war_faith'). This block declares the matching anchor and, on focus,
+  // scrolls itself into view. Identity is the `deity.<slug(name)>` id the index
+  // mints; the anchor is entityAnchor('deity', { name }) — the SAME string the
+  // index stores. Keyed on focus `ts` so a repeat click re-fires. The faith line
+  // is always visible when a deity exists, so a scroll (no force-open) suffices.
+  const deityFocusId = deity?.name ? `deity.${slugifyEntity(deity.name)}` : null;
+  const focusedEntity = useStore(s => s.focusedEntity);
+  const sectionRef = useRef(null);
+  const isDeityFocused = !!focusedEntity?.id && !!deityFocusId && focusedEntity.id === deityFocusId;
+  useEffect(() => {
+    if (!isDeityFocused) return;
+    sectionRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }, [focusedEntity?.ts, isDeityFocused]);
+
   // ── Self-gating ─────────────────────────────────────────────────────────────
   // Nothing live AND no deity ⇒ render nothing (byte-identical off-state). A
   // settlement-local "even-handed" aggressiveness is NOT, by itself, a reason to
@@ -186,6 +203,8 @@ export default function WarFaithSection({
 
   return (
     <div
+      ref={sectionRef}
+      id={deity ? entityAnchor('deity', { name: deity.name }) : undefined}
       data-testid="war-faith-section"
       data-level={level}
       style={{
@@ -334,15 +353,12 @@ export default function WarFaithSection({
       {deity && (
         <>
           <Line strong="Primary faith:">
-            {/* The patron deity is an in-dossier entity — link it to its indexed
-                card (keyed `deity.<slug(name)>`, matching buildDossierEntityIndex).
-                Rename-safe by id; degrades to plain text when unindexed. */}
-            <EntityLink
-              id={`deity.${slugifyEntity(deity.name)}`}
-              type="deity"
-              fallback={deity.name}
-              style={{ fontSize: 'inherit', fontWeight: 700, color: INK_BROWN, textDecorationColor: `${INK_BROWN}80` }}
-            />
+            {/* This section IS the deity's sink (the outer div carries the
+                deity anchor), so the patron's own name is PLAIN TEXT — a
+                self-link that scrolls to the section it already sits in is
+                pointless. Cross-references to the deity from other surfaces
+                resolve here via the anchor above. */}
+            <span style={{ fontWeight: 700, color: INK_BROWN }}>{deity.name}</span>
             {deity.rankAxis ? ` (${deity.rankAxis})` : ''}
             {/* B5 — surface the 4th (law) axis tag; legacy 3-axis / law-neutral says nothing. */}
             {deity.lawAxis && deity.lawAxis !== 'neutral' ? ` · ${deity.lawAxis}` : ''}

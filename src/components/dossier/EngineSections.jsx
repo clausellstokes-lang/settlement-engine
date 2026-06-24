@@ -16,8 +16,9 @@ import { deriveCausalState } from '../../domain/causalState.js';
 import { coupContenders } from '../../domain/rulingPower.js';
 import { useAltitude } from '../../hooks/useAltitude.js';
 import EntityLink from '../primitives/EntityLink.jsx';
-import { entityIdFor } from '../../domain/dossier/entityLinks.js';
+import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { useDossierEntities } from './DossierEntityContext.jsx';
 import {
   FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, R, swatch,
 } from '../theme.js';
@@ -279,6 +280,11 @@ function npcHasAgency(npc) {
  * @param {{ npcs?: any[] }} props
  */
 export function NpcAgencySection({ npcs }) {
+  // The live index resolves an agent's / rival's name to its canonical NPC id.
+  // Rivals (and the agent objects here) may lack a stable `.id`, so a bare slug
+  // would miss an NPC keyed by a real `npc.id`; a name lookup connects the link
+  // instead of degrading it. Rename-safe (matches on live currentName).
+  const { index } = useDossierEntities();
   const agents = useMemo(() => {
     const list = Array.isArray(npcs) ? npcs : [];
     return list
@@ -297,9 +303,11 @@ export function NpcAgencySection({ npcs }) {
           const rivals = Array.isArray(npc.rivalries) ? npc.rivalries : Array.isArray(npc.rivals) ? npc.rivals : [];
           return (
             <div key={i} data-npc-agent style={{ borderBottom: i < agents.length - 1 ? `1px solid ${BORDER}` : 'none', paddingBottom: SP.xs }}>
-              {/* The agent's own name → its NPC card (rename-safe). */}
+              {/* The agent's own name → its NPC card. Resolve the canonical id
+                  by name (the agent object may lack a stable id), falling back
+                  to the slug. Rename-safe. */}
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
-                <EntityLink id={entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: INK }} />
+                <EntityLink id={localNpcId(index, npc.name) ?? entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: INK }} />
                 {npc.title ? <span style={{ color: MUTED, fontWeight: 400 }}> · {npc.title}</span> : null}
               </div>
               {goal && <div style={{ fontSize: FS.xs, color: BODY }}><span style={{ color: GOLD, fontWeight: 700 }}>Goal:</span> {goal}</div>}
@@ -313,7 +321,7 @@ export function NpcAgencySection({ npcs }) {
                     .filter(r => r && r.name)
                     .map((r, ri, arr) => (
                       <span key={ri}>
-                        <EntityLink id={entityIdFor('npc', r, r.name)} type="npc" fallback={r.name} style={{ color: BODY }} />
+                        <EntityLink id={localNpcId(index, r.name) ?? entityIdFor('npc', r, r.name)} type="npc" fallback={r.name} style={{ color: BODY }} />
                         {ri < arr.length - 1 ? ', ' : null}
                       </span>
                     ))}

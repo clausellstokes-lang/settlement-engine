@@ -6,7 +6,13 @@
  * and currentName is resolved LIVE so a rename is reflected without rebuilding.
  */
 import { describe, it, expect } from 'vitest';
-import { buildDossierEntityIndex } from '../../../src/domain/dossier/entityLinks.js';
+import {
+  buildDossierEntityIndex,
+  entityAnchor,
+  entityIdFor,
+  neighbourIdFor,
+  localNpcId,
+} from '../../../src/domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../../src/lib/entities.js';
 
 function sampleSettlement() {
@@ -62,7 +68,10 @@ describe('buildDossierEntityIndex', () => {
     expect(inst).toBeTruthy();
     expect(inst.type).toBe('institution');
     expect(inst.currentName).toBe('Town Watch');
-    expect(inst.tab).toBe('power');
+    // Institutions are enumerated only on the Overview tab's Institutions
+    // disclosure (their sink), so the link routes there — not the Power tab,
+    // which renders no institution as its own object.
+    expect(inst.tab).toBe('overview');
 
     const settlement = index.resolve('settlement.ashford');
     expect(settlement).toBeTruthy();
@@ -94,7 +103,10 @@ describe('buildDossierEntityIndex', () => {
     expect(byPersistedId).toBeTruthy();
     expect(byPersistedId.type).toBe('neighbour');
     expect(byPersistedId.currentName).toBe('Greymoor');
-    expect(byPersistedId.tab).toBe('neighbours');
+    // Neighbours route to the superset 'relationships' tab (the NeighbourLinkCard
+    // sink renders there and the tab is registered on a broader condition than
+    // the narrower 'neighbours' tab), so the link never no-ops.
+    expect(byPersistedId.tab).toBe('relationships');
 
     // An entry with no id gets a stable, name-derived id.
     const derived = index.resolve('neighbour.dunhollow');
@@ -191,5 +203,81 @@ describe('buildDossierEntityIndex', () => {
     s.powerStructure.factions[0].name = undefined;
     s.powerStructure.factions[0].faction = 'The Iron Guild';
     expect(faction.currentName).toBe('The Iron Guild');
+  });
+});
+
+/**
+ * Sink wiring — every cross-link must land on a real DOM target. These pin the
+ * contract the destination cards rely on: the anchor string a SINK card declares
+ * (entityAnchor(...)) is byte-identical to the index entry's stored anchor, and
+ * the identity a link carries (entry.id) is what the card's focus effect matches.
+ * (OverviewTab institutions, NeighbourLinkCard, WarFaithSection deity.)
+ */
+describe('dossier sink anchors + ids', () => {
+  it('institution: link routes to overview and the index anchor == the sink pill anchor', () => {
+    const s = sampleSettlement();
+    const index = buildDossierEntityIndex(s);
+    const inst = s.institutions[0];
+    const entry = index.resolve('institution.town_watch');
+    expect(entry.tab).toBe('overview');
+    // The OverviewTab pill declares id={entityAnchor('institution', inst)}; it
+    // must equal the index entry's anchor so getElementById + the href resolve.
+    expect(entityAnchor('institution', inst)).toBe(entry.anchor);
+    // And the link's id (what EntityLink carries + the focus effect matches)
+    // equals the index id.
+    expect(entityIdFor('institution', inst)).toBe(entry.id);
+  });
+
+  it('neighbour: link targets its card via the shared neighbourIdFor anchor', () => {
+    const s = sampleSettlement();
+    const index = buildDossierEntityIndex(s);
+    const link = s.neighbourNetwork[0]; // { id: 'link_a_b', neighbourName: 'Greymoor' }
+    const entry = index.resolve('link_a_b');
+    expect(entry.tab).toBe('relationships');
+    // NeighbourLinkCard computes its anchor from neighbourIdFor(link) — the SAME
+    // id the index keys the entry by — so the card is the link's scroll target.
+    const cardId = neighbourIdFor(link);
+    expect(cardId).toBe('link_a_b');
+    expect(entityAnchor('neighbour', { id: cardId, name: link.neighbourName })).toBe(entry.anchor);
+
+    // An id-less neighbour still gets a stable name-derived anchor that matches.
+    const dun = s.neighbourNetwork[1];
+    const dunEntry = index.resolve('neighbour.dunhollow');
+    const dunId = neighbourIdFor(dun);
+    expect(dunId).toBe('neighbour.dunhollow');
+    expect(entityAnchor('neighbour', { id: dunId, name: dun.neighbourName })).toBe(dunEntry.anchor);
+  });
+
+  it('deity: the sink anchor (entityAnchor by name) matches the index entry anchor + id', () => {
+    const s = {
+      ...sampleSettlement(),
+      config: { ...sampleSettlement().config, primaryDeitySnapshot: { name: 'Saint Vael', rankAxis: 'major' } },
+    };
+    const index = buildDossierEntityIndex(s);
+    const entry = index.deities[0];
+    expect(entry).toBeTruthy();
+    expect(entry.type).toBe('deity');
+    expect(entry.tab).toBe('war_faith');
+    // WarFaithSection's outer div declares id={entityAnchor('deity', { name })};
+    // it must equal the stored anchor (a true `dossier-deity-<slug>`, not the
+    // old borrowed `dossier-settlement-<slug>`).
+    expect(entry.anchor).toBe('dossier-deity-saint-vael');
+    expect(entityAnchor('deity', { name: 'Saint Vael' })).toBe(entry.anchor);
+    // And the id WarFaithSection's EntityLink/focus matches is the deity.<slug> id.
+    expect(entry.id).toBe('deity.saint-vael');
+    expect(index.resolve('deity.saint-vael')).toBeTruthy();
+  });
+
+  it('localNpcId resolves a bare name (no stable id) to the canonical NPC id', () => {
+    const s = sampleSettlement();
+    const index = buildDossierEntityIndex(s);
+    // A sub-faction member / rival carries only a name; the canonical id is the
+    // real npc.id, not the slug a {name}-only entityIdFor would mint.
+    expect(localNpcId(index, 'Mara Voss')).toBe('npc_1');
+    // Case-insensitive, trims; a renamed NPC still resolves via live currentName.
+    s.npcs[0].name = 'Mara the Reeve';
+    expect(localNpcId(index, '  mara the reeve ')).toBe('npc_1');
+    // A foreign contact (absent from the index) degrades to null → plain text.
+    expect(localNpcId(index, 'Nobody')).toBeNull();
   });
 });

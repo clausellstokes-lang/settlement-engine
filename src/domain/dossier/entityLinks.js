@@ -9,6 +9,11 @@ const KIND_PREFIX = Object.freeze({
   service: 'service',
   relationship: 'relationship',
   neighbour: 'neighbour',
+  // Deities are addressable entities (the patron-faith snapshot). Declared
+  // explicitly so a `deity` anchor reads `dossier-deity-<slug>` rather than
+  // falling through to slugifyEntity('deity') — keeps the sink anchor legible
+  // and self-documenting.
+  deity: 'deity',
   event: 'event',
   hook: 'hook',
   condition: 'condition',
@@ -58,6 +63,31 @@ export function entityLink(kind, entity, fallback = '') {
     anchor,
     href: `#${anchor}`,
   };
+}
+
+/**
+ * Resolve a LOCAL NPC's display name to its canonical index id (rename-safe).
+ * Matches against the live `currentName` of each indexed npc, so a renamed NPC
+ * still maps to its card and a slug-derived guess from an object lacking the
+ * NPC's stable `.id` doesn't silently miss. Returns null for a name absent from
+ * the index (a foreign-settlement contact) — the caller then renders plain text.
+ *
+ * Shared by every site that holds a bare NPC name (or a partial object without
+ * the stable id): NeighbourLinkCard's npcConnections, PowerTab sub-faction
+ * members, EngineSections rivals.
+ *
+ * @param {object|null} index  buildDossierEntityIndex result (or null).
+ * @param {string} name        The NPC's stated name.
+ * @returns {string|null}
+ */
+export function localNpcId(index, name) {
+  if (!index || !name) return null;
+  const key = String(name).trim().toLowerCase();
+  if (!key) return null;
+  const hit = (index.npcs || []).find(
+    n => String(n.currentName || '').trim().toLowerCase() === key,
+  );
+  return hit ? hit.id : null;
 }
 
 function normalizeList(value) {
@@ -128,21 +158,32 @@ export function normalizeNpcTraits(npc = {}) {
 
 /**
  * Which dossier tab owns each entity type. `navigateToEntity` reads this to
- * decide which tab to switch to before scrolling. Institutions surface across
- * several tabs today; 'power' is the closest single home for Phase A (a later
- * phase can route them per-context).
+ * decide which tab to switch to before scrolling.
+ *
+ * Institutions are enumerated as their own objects ONLY in the Overview tab's
+ * Institutions disclosure (the Power tab renders none; Services/Defense/
+ * Economics only mention them as 'Via:' providers), so institution links land
+ * on 'overview' where the sink lives.
+ *
+ * Neighbours route to 'relationships' rather than 'neighbours': the
+ * NeighbourLinkCard sink renders on BOTH the full Relationships tab and the
+ * neighbours-only tab, but 'relationships' is registered on a superset
+ * condition (relationships/factions/conflicts OR a neighbour network) whereas
+ * 'neighbours' is gated more narrowly. Routing to the superset tab means a
+ * neighbour link never no-ops on a settlement that registered only the full
+ * tab.
  * @type {Readonly<Record<string,string>>}
  */
 export const TYPE_TO_TAB = Object.freeze({
   npc: 'npcs',
   faction: 'power',
-  institution: 'power',
+  institution: 'overview',
   deity: 'war_faith',
   settlement: 'overview',
   // Phase C additions — the tab each newly-indexed type calls home. Neighbours
-  // (and the trade partners that resolve to them) live on the Neighbours tab;
-  // historical events on History; resources/services on their own tabs.
-  neighbour: 'neighbours',
+  // (and the trade partners that resolve to them) live on the Relationships
+  // tab; historical events on History; resources/services on their own tabs.
+  neighbour: 'relationships',
   event: 'history',
   resource: 'resources',
   service: 'services',
@@ -200,7 +241,7 @@ function decorateEntry(type, base, raw) {
  * @param {Record<string, any>} entry
  * @returns {string|null}
  */
-function neighbourIdFor(entry) {
+export function neighbourIdFor(entry) {
   if (!entry || typeof entry !== 'object') return null;
   if (typeof entry.id === 'string' && entry.id) return entry.id;
   const name = entry.neighbourName || entry.name || entry.label;
@@ -346,7 +387,23 @@ export function buildDossierEntityIndex(settlement = {}) {
     || settlement.config?.primaryDeitySnapshot?.deity;
   if (deityName) {
     const rawDeity = settlement.config?.primaryDeitySnapshot || settlement.primaryDeity || { name: deityName };
-    deities.push(decorateEntry('deity', { ...entityLink('settlement', { id: `deity.${slugifyEntity(deityName)}`, name: deityName }) }, rawDeity));
+    // Mint a TRUE deity entry (kind 'deity'): identity is the `deity.<slug>` id
+    // WarFaithSection's EntityLink carries, and the anchor is `dossier-deity-
+    // <slug>` — the SAME string the WarFaithSection sink declares via
+    // entityAnchor('deity', …). (Earlier this borrowed kind 'settlement', which
+    // produced a `dossier-settlement-<slug>` anchor with no matching sink.)
+    const deityId = `deity.${slugifyEntity(deityName)}`;
+    const base = {
+      ...entityLink('deity', { name: deityName }),
+      // Identity is the `deity.<slug>` id WarFaithSection's EntityLink carries;
+      // the anchor (built from the name above) stays `dossier-deity-<slug(name)>`,
+      // the SAME string the WarFaithSection sink declares via
+      // entityAnchor('deity', { name }). Setting `id` from a `{name}`-derived
+      // link (not an `{id}`-derived one) keeps anchor and id independent: the
+      // anchor never doubles the `deity-` prefix.
+      id: deityId,
+    };
+    deities.push(decorateEntry('deity', base, rawDeity));
   }
 
   // The settlement itself is addressable (overview tab).

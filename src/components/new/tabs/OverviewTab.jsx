@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS, BODY} from '../tabConstants';
@@ -8,8 +8,9 @@ import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { displayInstitutionName } from '../../../domain/display/institutionDisplay.js';
-import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../../lib/entities.js';
+import { useStore } from '../../../store/index.js';
 
 // Shared no-value placeholder — an absent value reads as a deliberate
 // 'not computed' state, not garbled ', ' output. Matches DefenseTab's
@@ -121,6 +122,29 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
   // Hooks run before any early return so the dossier's mobile stacking stays
   // reactive even when a tab momentarily renders without a settlement.
   const mobile = useIsMobileTab();
+
+  // Dossier hyperlink SINK for institutions. The Institutions disclosure below
+  // is the only place institutions render as their own enumerated objects, so
+  // an institution link routes here (TYPE_TO_TAB.institution = 'overview'). When
+  // a link focuses an institution this tab owns, force the (default-collapsed)
+  // disclosure OPEN and scroll the matching pill into view. Identity is matched
+  // by the SAME entityIdFor the index keys institutions under — never by name.
+  // Force-open only; a manual collapse afterward still works. Keyed on focus
+  // `ts` so a repeat click re-fires. Computed before the early return to keep
+  // hooks order stable.
+  const focusedEntity = useStore(s => s.focusedEntity);
+  const focusedInstId = focusedEntity?.id || null;
+  const focusedPillRef = useRef(null);
+  const institutionsList = r?.institutions || [];
+  const focusedInstMatches = !!focusedInstId
+    && institutionsList.some(inst => entityIdFor('institution', inst) === focusedInstId);
+  useEffect(() => {
+    if (!focusedInstMatches) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setInstOpen(true);
+    focusedPillRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
+  }, [focusedEntity?.ts, focusedInstMatches]);
+
   if (!r) return null;
 
   const eco = r.economicState || {};
@@ -462,8 +486,21 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
                     // institution is absent from the index or the Power tab is
                     // gated out. The displayInstitutionName label is the
                     // fallback so the catalog-cleaned name still shows.
-                    return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
-                      <EntityLink id={entityIdFor('institution', inst)} type="institution" fallback={displayInstitutionName(inst.name)} />
+                    // SINK target: this pill carries the index's institution
+                    // anchor and, when focused by a link, an additive gold ring
+                    // (the second channel beyond the scroll) so the landed-on
+                    // institution is unmistakable. The ref captures the focused
+                    // pill so the focus effect can scroll exactly to it.
+                    const instId = entityIdFor('institution', inst);
+                    const isInstFocused = !!focusedInstId && instId === focusedInstId;
+                    return <span
+                      key={i}
+                      ref={isInstFocused ? focusedPillRef : null}
+                      id={entityAnchor('institution', inst)}
+                      title={isCustom?'Your custom content':undefined}
+                      style={{...base,...skin,...(isInstFocused?{boxShadow:`0 0 0 2px ${GOLD_DEEP}`}:null)}}
+                    >
+                      <EntityLink id={instId} type="institution" fallback={displayInstitutionName(inst.name)} />
                       {isCustom
                         ? <span style={{fontSize:FS.xs,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
                         : (srcLabel&&<span style={{fontSize:FS.xs,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}

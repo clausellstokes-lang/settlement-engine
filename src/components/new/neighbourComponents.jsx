@@ -1,26 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
-
-/**
- * Resolve a LOCAL NPC's display name to its stable index id (rename-safe).
- * Matches against the live `currentName` of each indexed npc so a renamed NPC
- * still maps to its card. Returns null for a name absent from the index (a
- * foreign-settlement contact) — the caller then renders plain text.
- *
- * @param {object|null} index  buildDossierEntityIndex result (or null).
- * @param {string} name        The NPC's stated name.
- * @returns {string|null}
- */
-function localNpcId(index, name) {
-  if (!index || !name) return null;
-  const key = String(name).trim().toLowerCase();
-  if (!key) return null;
-  const hit = (index.npcs || []).find(n => String(n.currentName || '').trim().toLowerCase() === key);
-  return hit ? hit.id : null;
-}
+import { useStore } from '../../store/index.js';
+import { entityAnchor, neighbourIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 
 export function NeighbourLinkCard({link,settlement,styleFor}) {
   const [open,setOpen]=useState(false);
@@ -32,8 +16,27 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
   const relType=link.relationshipType||link.relationshipLabel||'neutral';
   const st=styleFor(relType.toLowerCase().replace(/\s+/g,'_'));
   const label=(relType||'linked').replace(/_/g,' ');
+
+  // Dossier hyperlink SINK. A trade-partner / relationship link resolves to
+  // this card's neighbour id and navigates here; this card declares the
+  // matching anchor and, on focus, force-opens + scrolls itself into view. The
+  // id is computed with the SAME neighbourIdFor the index keys neighbour
+  // entries by (id → else `neighbour.<slug(name)>`), so identity matches by id,
+  // never by name. Focus only forces OPEN — a manual collapse afterward still
+  // works. Keyed on focus `ts` so a repeat click of the same link re-fires.
+  const neighbourId = neighbourIdFor(link);
+  const focusedEntity = useStore(s => s.focusedEntity);
+  const cardRef = useRef(null);
+  const isFocused = !!focusedEntity?.id && !!neighbourId && focusedEntity.id === neighbourId;
+  useEffect(() => {
+    if (!isFocused) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setOpen(true);
+    cardRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }, [focusedEntity?.ts, isFocused]);
+
   return (
-    <div style={{border:`1px solid ${st.border}`,borderLeft:`3px solid ${st.color}`,borderRadius:8,overflow:'hidden'}}>
+    <div ref={cardRef} id={entityAnchor('neighbour', { id: neighbourId, name: link.neighbourName||link.name })} style={{border:`1px solid ${st.border}`,borderLeft:`3px solid ${st.color}`,borderRadius:8,overflow:'hidden',boxShadow:isFocused?`0 0 0 2px ${st.color}55`:'none'}}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:open?st.bg:'#faf8f4',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1}}>
           <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
