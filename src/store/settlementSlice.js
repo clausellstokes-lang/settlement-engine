@@ -1821,10 +1821,16 @@ export const createSettlementSlice = (set, get) => ({
       // stays a pure function of (settlement, event, now).
       now: new Date().toISOString(),
     });
+    // The pipeline may have RESOLVED the event (a derived APPLY_STRESSOR onset
+    // severity stamped in when the DM picked none). Every downstream consumer —
+    // reconciliation, the system-state re-layer, the crisis-twin snapshot, the
+    // world ripple, successor detection — reads the COMMITTED event so the
+    // roaming twin's severity matches the dossier entry and the state deltas.
+    const committedEvent = logEntry.event ?? event;
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
       source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
-      changeType: event?.type,
-      changeLabel: event?.targetId || event?.payload?.label || event?.id,
+      changeType: committedEvent?.type,
+      changeLabel: committedEvent?.targetId || committedEvent?.payload?.label || committedEvent?.id,
       now: logEntry.appliedAt,
     });
     // Re-derive SystemState from the RECONCILED settlement (so reconciliation's
@@ -1834,7 +1840,7 @@ export const createSettlementSlice = (set, get) => ({
     // only, silently discarding the authored-effect surface (e.g. CUT_TRADE_ROUTE's
     // resilience/resourcePressure/externalThreat deltas), so the persisted afterState
     // disagreed with the preview the DM was shown. Pinned by the preview==apply invariant.
-    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), event, state.settlement);
+    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), committedEvent, state.settlement);
     logEntry = {
       ...logEntry,
       afterState: nextSystemState,
@@ -1851,14 +1857,14 @@ export const createSettlementSlice = (set, get) => ({
         ...logEntry,
         undo: {
           ...(logEntry.undo || {}),
-          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, event, activeSaveId),
+          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, committedEvent, activeSaveId),
         },
       };
     }
 
     // Successor detection (pure; see computePendingSuccession): a dead
     // pillar-tier NPC surfaces a ranked, dismissible successor prompt for the DM.
-    const pendingSuccession = computePendingSuccession(state.settlement, event);
+    const pendingSuccession = computePendingSuccession(state.settlement, committedEvent);
 
     set(s => {
       s.settlement     = nextSettlement;
@@ -1909,7 +1915,7 @@ export const createSettlementSlice = (set, get) => ({
     // half stays immediate (Fork 2) so a committed crisis still roams/ages at the
     // campaign tick. The flush reads the regional result off the live store, so
     // it must run with the post-apply afterState already committed (it is).
-    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional: !!afterState.flushApplyLocalOnly });
+    rippleEventThroughWorld({ afterState, campaign, event: committedEvent, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional: !!afterState.flushApplyLocalOnly });
 
     // Phase 4b — campaign-member commit: COMPUTE the deferred regional impacts
     // (the half rippleEventThroughWorld just skipped) and stash them onto the
@@ -1919,7 +1925,7 @@ export const createSettlementSlice = (set, get) => ({
     // for a member commit, so the change propagates exactly once.
     if (afterState.flushApplyLocalOnly && campaign && beforeEnvelope
         && typeof afterState.stashDeferredRegionalImpacts === 'function') {
-      const result = computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+      const result = computeRegionalRipple({ afterState, campaign, event: committedEvent, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
       if (result && result.impacts.length > 0) {
         afterState.stashDeferredRegionalImpacts(campaign.id, result.impacts);
       }
@@ -1935,7 +1941,7 @@ export const createSettlementSlice = (set, get) => ({
     if (afterState.flushApplyLocalOnly && campaign
         && typeof afterState.stashDeferredWarFront === 'function') {
       try {
-        const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId });
+        const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event: committedEvent, activeSaveId });
         if (seed) {
           afterState.stashDeferredWarFront(campaign.id, {
             instigatorId: seed.instigatorId,

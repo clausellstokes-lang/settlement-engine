@@ -22,6 +22,7 @@ import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleC
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
+import { deriveOnsetSeverity } from '../../domain/state/deriveStressorSeverity.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
@@ -102,7 +103,9 @@ export default function EventComposer() {
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
   const [corruptScope, setCorruptScope] = useState('individual'); // IMPOSE_CORRUPTION: individual | individual_institution
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
-  const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
+  // APPLY_STRESSOR severity is no longer DM-picked: the onset's hardness is a
+  // CONSEQUENCE of the settlement's preexisting pressure, derived in the domain
+  // (deriveStressorSeverity) when the composer omits it. No state, no dropdown.
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
   const [tradeDirection, setTradeDirection] = useState('export'); // ADD_TRADE_GOOD: export | import
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
@@ -221,6 +224,14 @@ export default function EventComposer() {
     () => (settlement?.npcs || []).some(n => n?.corrupt === true && !n?.ousted),
     [settlement?.npcs],
   );
+  // APPLY_STRESSOR onset severity is DERIVED from the settlement's preexisting
+  // pressure, not picked at the table. Surface the derived word read-only so the
+  // DM sees the consequence the state produces (the engine reads the number).
+  const derivedOnset = useMemo(() => {
+    const sev = deriveOnsetSeverity(settlement);
+    const word = sev >= 0.7 ? 'critical' : sev >= 0.55 ? 'strained' : 'calm';
+    return { sev, word };
+  }, [settlement]);
 
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
@@ -262,7 +273,7 @@ export default function EventComposer() {
       importance, role, institutionId,
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
       quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-      stressorPick, stressorSeverity, powerCause,
+      stressorPick, powerCause,
       tradeDirection, tradeEntrepot, swapWithNpcId,
       isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
       partyCaused, description,
@@ -338,7 +349,7 @@ export default function EventComposer() {
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -353,8 +364,9 @@ export default function EventComposer() {
               .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours
                 || (k === 'OPENED_TRADE_ROUTE' && campaignSettlementOptions.length > 0))
               /* The standing swap needs two NPCs in one faction — hide the
-                 promote/demote events when no faction has a pair to swap. */
-              .filter(([k]) => !['PROMOTE_NPC', 'DEMOTE_NPC'].includes(k) || hasSwapPairs)
+                 single Promote/Demote NPC action when no faction has a pair to
+                 swap. DEMOTE_NPC is hidden via NON_AUTHORABLE_EVENTS (folded in). */
+              .filter(([k]) => k !== 'PROMOTE_NPC' || hasSwapPairs)
               /* Expose Corruption acts only on a corrupt NPC — hide it when the
                  settlement has none, so the action can never be a no-op. */
               .filter(([k]) => k !== 'EXPOSE_CORRUPTION' || hasCorruptNpcs)
@@ -445,18 +457,24 @@ export default function EventComposer() {
           </Field>
         )}
 
-        {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
+        {/* APPLY_STRESSOR — onset severity is DERIVED from the settlement's
+            preexisting pressure, not picked. Read-only so the DM sees the
+            consequence the state produces. */}
         {type === 'APPLY_STRESSOR' && (
-          <Field label="Severity" hint={
-            stressorSeverity === 'severe' ? 'A defining crisis; expect cascades' :
-            stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
-                                            'A serious, active crisis'
-          }>
-            <select value={stressorSeverity} onChange={e => setStressorSeverity(e.target.value)} style={selectStyle}>
-              <option value="minor">Minor</option>
-              <option value="moderate">Moderate</option>
-              <option value="severe">Severe</option>
-            </select>
+          <Field label="Onset severity" hint="Derived from the settlement's current pressure, not picked">
+            <div style={{
+              fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700,
+              padding: '5px 0', textTransform: 'capitalize',
+            }}>
+              {derivedOnset.word}
+              <span style={{ fontWeight: 400, color: MUTED, marginLeft: 6 }}>
+                {derivedOnset.sev >= 0.7
+                  ? 'This settlement is already strained; the crisis lands hard.'
+                  : derivedOnset.sev >= 0.55
+                    ? 'A serious, active crisis on a settlement under pressure.'
+                    : 'A real but survivable onset on a steadier settlement.'}
+              </span>
+            </div>
           </Field>
         )}
 

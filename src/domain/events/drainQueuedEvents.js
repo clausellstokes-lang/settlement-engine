@@ -92,13 +92,18 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
         // A single malformed queued event must not abort the whole tick.
         continue;
       }
+      // The pipeline may have RESOLVED the event (a derived APPLY_STRESSOR onset
+      // severity, stamped against the drain-time settlement — the state the
+      // consequence derives from at the moment it resolves). Read the committed
+      // event so the twin directive's severity matches the logged entry.
+      const committedEvent = /** @type {any} */ (out.logEntry?.event ?? event);
       const nextSettlement = reconcileSettlementChange(out.nextSettlement, settlement, {
         source: 'canon_event',
-        changeType: event?.type,
-        changeLabel: event?.targetId || event?.payload?.label || event?.id,
+        changeType: committedEvent?.type,
+        changeLabel: committedEvent?.targetId || committedEvent?.payload?.label || committedEvent?.id,
         now,
       });
-      const nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), event, settlement);
+      const nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), committedEvent, settlement);
       newEntries.push({
         ...out.logEntry,
         afterState: nextSystemState,
@@ -108,21 +113,21 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
 
       // Crisis twin: identical forward directive applyEvent's ripple uses. The
       // slice applies these to worldState.stressors before the pulse runs.
-      const directive = twinDirectiveForEvent(event);
+      const directive = twinDirectiveForEvent(committedEvent);
       if (directive) twinDirectives.push({ ...directive, originSettlementId: saveId });
 
       // Party-caused events bridge to the party-impact pipeline the same way
       // rippleEventThroughWorld does for immediate events — the slice replays
       // these through recordPartyImpact after the drain so faction/NPC world
       // state, condition resolution, and Wizard News fire at the tick too.
-      if (event?.partyCaused) {
-        const action = mapEventToPartyImpact(event, saveId);
+      if (committedEvent?.partyCaused) {
+        const action = mapEventToPartyImpact(committedEvent, saveId);
         if (action) partyImpacts.push({ action, originSettlementId: saveId });
       }
 
       settlement = nextSettlement;
       systemState = nextSystemState;
-      authoredEvent = event;
+      authoredEvent = committedEvent;
       drainedCount += 1;
     }
 

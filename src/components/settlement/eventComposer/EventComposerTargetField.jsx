@@ -158,14 +158,16 @@ export function EventComposerTargetField({
       </Field>
     );
   }
-  // PROMOTE_NPC / DEMOTE_NPC — pick the NPC (grouped by faction), then
-  // the same-faction counterpart they swap standing with.
-  if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
+  // PROMOTE_NPC (the merged "Promote/Demote NPC") — pick the NPC who rises
+  // (grouped by faction), then the same-faction counterpart who steps down. The
+  // swap is symmetric, so one unambiguous pair reads correctly either way.
+  // DEMOTE_NPC no longer reaches the composer (folded into PROMOTE_NPC).
+  if (type === 'PROMOTE_NPC') {
     const pickedGroup = npcSwapGroups.find(g => g.npcs.some(n => n.id === target));
     const counterparts = pickedGroup ? pickedGroup.npcs.filter(n => n.id !== target) : [];
     return (
       <>
-        <Field label="NPC" hint={spec?.targetPrompt}>
+        <Field label="NPC who rises" hint={spec?.targetPrompt}>
           <select
             value={target}
             onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
@@ -180,7 +182,7 @@ export function EventComposerTargetField({
           </select>
         </Field>
         <Field
-          label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
+          label="Steps down"
           hint="Same faction. The two swap standing"
         >
           <select

@@ -67,6 +67,11 @@ export const RELATIONSHIP_LABELS = Object.freeze({
 //     one-off events — a stressor IS the ongoing condition these represented.
 //   - DAMAGE_INSTITUTION duplicated IMPAIR_INSTITUTION once the severity slider
 //     was hidden, so Impair Institution is the single "weaken it" action.
+//   - DEMOTE_NPC folds into PROMOTE_NPC (relabeled "Promote/Demote NPC"): the two
+//     already share ONE mutation handler (the standing swap is symmetric — a
+//     promote of A IS a demote of B), so one authorable action covers both. The
+//     type stays in the registry/mutate/batch/undo so old DEMOTE_NPC event logs
+//     still apply + undo.
 export const NON_AUTHORABLE_EVENTS = new Set([
   'KILL_LEADER',
   'CUT_TRADE_ROUTE',          // §9b — replaced by Settlement Dispute (neighbour + relationship)
@@ -76,11 +81,8 @@ export const NON_AUTHORABLE_EVENTS = new Set([
   'RAID_OR_MONSTER_ATTACK',
   'REMOVED_THREAT',
   'STARTED_RIOT',
+  'DEMOTE_NPC',               // folded into PROMOTE_NPC ("Promote/Demote NPC")
 ]);
-
-// APPLY_STRESSOR severity words → engine severity. Words at the table,
-// numbers in the engine (same posture as the hidden impair sliders).
-export const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
 
 // ADD_RESOURCE — sentinel select value for "name a custom resource"; the real
 // target comes from the companion text input while this is picked.
