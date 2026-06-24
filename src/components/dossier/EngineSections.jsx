@@ -15,6 +15,9 @@ import { deriveBlockadeRelief } from '../../domain/display/dossierViewModel.js';
 import { deriveCausalState } from '../../domain/causalState.js';
 import { coupContenders } from '../../domain/rulingPower.js';
 import { useAltitude } from '../../hooks/useAltitude.js';
+import EntityLink from '../primitives/EntityLink.jsx';
+import { entityIdFor } from '../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../lib/entities.js';
 import {
   FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, R, swatch,
 } from '../theme.js';
@@ -219,7 +222,11 @@ export function PowerSuccessionSection({ settlement }) {
     <SectionShell title="Rule and succession" accent={GOLD} testid="power-succession-section">
       {incumbentName && (
         <div style={{ fontSize: FS.sm, color: BODY, marginBottom: SP.xs }}>
-          <strong>Ruler:</strong> {incumbentName}
+          {/* The incumbent here is a governing FACTION (coupContenders reads
+              f.faction/f.name), so link it to its Power row by faction id —
+              rename-safe, and plain text when the name isn't a known faction
+              (e.g. a bare government-type label like "Town Council"). */}
+          <strong>Ruler:</strong> <EntityLink id={factionIdFromName(incumbentName)} type="faction" fallback={incumbentName} style={{ color: BODY }} />
           {Number.isFinite(contenders.incumbent?.govMultiplier) && level !== 'guided' && (
             <span style={{ color: MUTED }}> · legitimacy ×{contenders.incumbent.govMultiplier}</span>
           )}
@@ -234,7 +241,8 @@ export function PowerSuccessionSection({ settlement }) {
           <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Contenders</div>
           {contenders.challengers.map((c, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY, display: 'flex', gap: SP.sm }}>
-              <span style={{ flex: 1 }}>{c.name}</span>
+              {/* Each contender is a rival FACTION → its Power row (rename-safe). */}
+              <span style={{ flex: 1 }}><EntityLink id={factionIdFromName(c.name)} type="faction" fallback={c.name} style={{ color: BODY }} /></span>
               <span style={{ color: MUTED }}>{c.archetype}</span>
               <span style={{ fontWeight: 700, color: INK }}>w {c.weight}</span>
             </div>
@@ -289,10 +297,28 @@ export function NpcAgencySection({ npcs }) {
           const rivals = Array.isArray(npc.rivalries) ? npc.rivalries : Array.isArray(npc.rivals) ? npc.rivals : [];
           return (
             <div key={i} data-npc-agent style={{ borderBottom: i < agents.length - 1 ? `1px solid ${BORDER}` : 'none', paddingBottom: SP.xs }}>
-              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{npc.name}{npc.title ? <span style={{ color: MUTED, fontWeight: 400 }}> · {npc.title}</span> : null}</div>
+              {/* The agent's own name → its NPC card (rename-safe). */}
+              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+                <EntityLink id={entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: INK }} />
+                {npc.title ? <span style={{ color: MUTED, fontWeight: 400 }}> · {npc.title}</span> : null}
+              </div>
               {goal && <div style={{ fontSize: FS.xs, color: BODY }}><span style={{ color: GOLD, fontWeight: 700 }}>Goal:</span> {goal}</div>}
               {npc.ambition && <div style={{ fontSize: FS.xs, color: BODY }}><span style={{ color: GOLD, fontWeight: 700 }}>Ambition:</span> {npc.ambition}</div>}
-              {rivals.length > 0 && <div style={{ fontSize: FS.xs, color: BODY }}><span style={{ color: RED, fontWeight: 700 }}>Rivals:</span> {rivals.map(r => (typeof r === 'string' ? r : r?.name)).filter(Boolean).join(', ')}</div>}
+              {rivals.length > 0 && (
+                <div style={{ fontSize: FS.xs, color: BODY }}>
+                  <span style={{ color: RED, fontWeight: 700 }}>Rivals:</span>{' '}
+                  {/* Each rival → its NPC card (string or {name}); plain text if no NPC record. */}
+                  {rivals
+                    .map(r => (typeof r === 'string' ? { name: r } : r))
+                    .filter(r => r && r.name)
+                    .map((r, ri, arr) => (
+                      <span key={ri}>
+                        <EntityLink id={entityIdFor('npc', r, r.name)} type="npc" fallback={r.name} style={{ color: BODY }} />
+                        {ri < arr.length - 1 ? ', ' : null}
+                      </span>
+                    ))}
+                </div>
+              )}
               {npc.consequenceIfRemoved && <div style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>If removed: {npc.consequenceIfRemoved}</div>}
             </div>
           );

@@ -6,6 +6,9 @@ import {useIsMobileTab} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
+import {entityAnchor, eventIdFor} from '../../../domain/dossier/entityLinks.js';
+import {factionIdFromName} from '../../../lib/entities.js';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -205,9 +208,15 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </div>
                 {/* Description */}
                 <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
-                {/* Factions */}
+                {/* Factions — each named faction is an in-dossier cross-link to
+                    its Power card (structured ref: the faction name resolves to a
+                    faction id via factionIdFromName, the SAME id the index keys
+                    factions by). EntityLink degrades to the plain name when the
+                    faction is absent from the index or the Power tab is gated. */}
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
-                  {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px'}}>{f}</span>)}
+                  {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px'}}>
+                    <EntityLink id={factionIdFromName(f)} type="faction" fallback={String(f)} style={{color:swatch['#7A5010'],fontSize:FS.xxs}} />
+                  </span>)}
                 </div>}
                 {/* Plot hooks — inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
@@ -261,7 +270,11 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             const yrsColor = recencyColor(evt.yearsAgo||0);
             const yrsLabel = recencyLabel(evt.yearsAgo||0);
             return (
-              <div key={i} style={{
+              // This card is a link TARGET: its id matches the event's index
+              // entry (eventIdFor → entityAnchor) so an event cross-reference
+              // elsewhere in the dossier scrolls here. The event title itself
+              // stays plain text — an event linking to itself is meaningless.
+              <div key={i} id={entityAnchor('event', {id: eventIdFor(evt, i)})} style={{
                 border:`1px solid ${isAnchored?ec.color+'60':ec.border}`,
                 borderLeft:`3px solid ${ec.color}`,
                 borderRadius:7, overflow:'hidden',

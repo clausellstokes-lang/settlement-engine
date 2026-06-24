@@ -8,6 +8,8 @@ const KIND_PREFIX = Object.freeze({
   resource: 'resource',
   service: 'service',
   relationship: 'relationship',
+  neighbour: 'neighbour',
+  event: 'event',
   hook: 'hook',
   condition: 'condition',
 });
@@ -137,6 +139,13 @@ export const TYPE_TO_TAB = Object.freeze({
   institution: 'power',
   deity: 'war_faith',
   settlement: 'overview',
+  // Phase C additions — the tab each newly-indexed type calls home. Neighbours
+  // (and the trade partners that resolve to them) live on the Neighbours tab;
+  // historical events on History; resources/services on their own tabs.
+  neighbour: 'neighbours',
+  event: 'history',
+  resource: 'resources',
+  service: 'services',
 });
 
 /**
@@ -149,6 +158,11 @@ export const TYPE_TO_TAB = Object.freeze({
 function readCurrentName(type, raw, fallback) {
   if (!raw || typeof raw !== 'object') return fallback;
   if (type === 'faction') return raw.faction || raw.name || raw.label || fallback;
+  // A neighbour entry's display name is its neighbourName (the partner
+  // settlement), falling back to the generic name/label.
+  if (type === 'neighbour') return raw.neighbourName || raw.name || raw.label || fallback;
+  // Historical events title off name/title/type.
+  if (type === 'event') return raw.name || raw.title || raw.label || raw.type || fallback;
   return raw.name || raw.label || fallback;
 }
 
@@ -178,6 +192,41 @@ function decorateEntry(type, base, raw) {
 }
 
 /**
+ * Stable id for a neighbour-network entry. Prefers the entry's own persisted id
+ * (the `link_*` / `generated_*` / `live_*` ids the link/save/render paths mint),
+ * falling back to a name-derived `neighbour.<snake>` so an entry that predates
+ * those ids still resolves. Mirrors the id RelationshipsTab keys its cards by.
+ *
+ * @param {Record<string, any>} entry
+ * @returns {string|null}
+ */
+function neighbourIdFor(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  if (typeof entry.id === 'string' && entry.id) return entry.id;
+  const name = entry.neighbourName || entry.name || entry.label;
+  return name ? `neighbour.${slugifyEntity(name)}` : null;
+}
+
+/**
+ * Stable id for a historical / timeline event. Events already carry an `id` in
+ * most generated saves; legacy events without one get a deterministic
+ * `event.<snake(name)>` so cross-references and the chronicle TOC resolve.
+ * Falls back to the supplied list index only when even the name is missing
+ * (last-resort, still stable within a single settlement render).
+ *
+ * @param {Record<string, any>} event
+ * @param {number} index
+ * @returns {string|null}
+ */
+export function eventIdFor(event, index) {
+  if (!event || typeof event !== 'object') return null;
+  if (typeof event.id === 'string' && event.id) return event.id;
+  const name = event.name || event.title || event.label;
+  if (name) return `event.${slugifyEntity(name)}`;
+  return `event.index-${index}`;
+}
+
+/**
  * Build a navigable index of the dossier's structured entities.
  *
  * Returns the original per-kind arrays (npcs / factions / institutions /
@@ -190,12 +239,20 @@ function decorateEntry(type, base, raw) {
  * name-matching. (The anchor still uses the hyphen slug for the DOM id; identity
  * and anchor are intentionally distinct strings.)
  *
+ * Phase C extends the index to be EXHAUSTIVE: neighbours (relationship cards),
+ * historical events (link targets), and resources are now resolvable, and trade
+ * partners reuse the neighbour entries via {@link resolveTradePartner}. All ids
+ * are derived from existing fields (no generator change), so generator output
+ * stays byte-identical and links follow entities by id (rename-safe).
+ *
  * @param {Record<string, any>} [settlement]
  * @returns {{
  *   npcs: object[], factions: object[], institutions: object[], resources: object[],
+ *   neighbours: object[], events: object[],
  *   deities: object[], settlement: (object|null),
  *   byId: Map<string, object>,
  *   resolve: (id: string) => (object|null),
+ *   resolveTradePartner: (nameOrId: string) => (object|null),
  * }}
  */
 export function buildDossierEntityIndex(settlement = {}) {
@@ -223,7 +280,62 @@ export function buildDossierEntityIndex(settlement = {}) {
     const entity = typeof resource === 'string'
       ? { id: resource, name: resource.replace(/_/g, ' ') }
       : resource;
-    return { ...entityLink('resource', entity), raw: resource };
+    return decorateEntry('resource', { ...entityLink('resource', entity) }, entity);
+  });
+
+  // NEIGHBOURS — the unified neighbourNetwork plus the live generator
+  // `neighborRelationship` entry RelationshipsTab synthesizes for unsaved
+  // settlements (same `live_<name>` id it mints), so a trade partner / actor
+  // ref resolves to the relationship card whether the settlement is saved or
+  // freshly generated. Dedup by neighbour name keeps the persisted entry
+  // authoritative over the synthesized live one.
+  /** @type {object[]} */
+  const neighbourEntries = [];
+  const seenNeighbourNames = new Set();
+  const pushNeighbour = (entry) => {
+    if (!entry || typeof entry !== 'object') return;
+    const id = neighbourIdFor(entry);
+    if (!id) return;
+    const nameKey = String(entry.neighbourName || entry.name || '').toLowerCase();
+    if (nameKey && seenNeighbourNames.has(nameKey)) return;
+    if (nameKey) seenNeighbourNames.add(nameKey);
+    const base = {
+      ...entityLink('neighbour', { id, name: entry.neighbourName || entry.name }),
+      label: entry.neighbourName || entry.name || 'Neighbour',
+    };
+    base.id = id;
+    neighbourEntries.push(decorateEntry('neighbour', base, entry));
+  };
+  for (const entry of settlement.neighbourNetwork || []) pushNeighbour(entry);
+  const liveNeighbour = settlement.neighborRelationship;
+  if (liveNeighbour?.name) {
+    pushNeighbour({
+      id: `live_${liveNeighbour.name}`,
+      name: liveNeighbour.name,
+      neighbourName: liveNeighbour.name,
+      relationshipType: liveNeighbour.relationshipType || 'neutral',
+    });
+  }
+
+  // EVENTS — historical + timeline beats, indexed as link TARGETS (actor
+  // cross-refs, the chronicle TOC). Keyed by the event's own id or a
+  // name-derived `event.<snake>`; first id wins on collision.
+  /** @type {object[]} */
+  const eventEntries = [];
+  const rawEvents = [
+    ...(settlement.history?.historicalEvents || []),
+    ...(settlement.history?.eventsTimeline || []),
+  ];
+  rawEvents.forEach((event, i) => {
+    if (!event || typeof event !== 'object') return;
+    const id = eventIdFor(event, i);
+    if (!id) return;
+    const base = {
+      ...entityLink('event', { id, name: event.name || event.title || event.type || 'Event' }),
+      label: event.name || event.title || event.type || 'Event',
+    };
+    base.id = id;
+    eventEntries.push(decorateEntry('event', base, event));
   });
 
   // Optional deity (war/faith snapshot). No dedicated typedef today, so it is
@@ -243,7 +355,15 @@ export function buildDossierEntityIndex(settlement = {}) {
     settlementEntries.push(decorateEntry('settlement', { ...entityLink('settlement', settlement) }, settlement));
   }
 
-  const all = [...npcs, ...factions, ...institutions, ...deities, ...settlementEntries];
+  // byId order = resolution precedence on id collision (first wins). Named
+  // entities (npcs/factions/institutions) come before resources/neighbours/
+  // events so a richer card always wins a shared slug; deities + settlement
+  // last as catch-alls.
+  const all = [
+    ...npcs, ...factions, ...institutions,
+    ...resources, ...neighbourEntries, ...eventEntries,
+    ...deities, ...settlementEntries,
+  ];
   const byId = new Map();
   for (const entry of all) {
     if (entry.id && !byId.has(entry.id)) byId.set(entry.id, entry);
@@ -254,9 +374,34 @@ export function buildDossierEntityIndex(settlement = {}) {
     factions,
     institutions,
     resources,
+    neighbours: neighbourEntries,
+    events: eventEntries,
     deities,
     settlement: settlementEntries[0] || null,
     byId,
+    /**
+     * Resolve a stable id to its decorated entry, or null (broken-link guard).
+     * @param {string} id
+     * @returns {(object|null)}
+     */
     resolve: (id) => (id && byId.get(id)) || null,
+    /**
+     * Resolve a trade partner (a neighbour NAME or id stored in economicState)
+     * to its neighbour entry — Phase B trade-partner links reuse the SAME
+     * relationship card rather than minting a separate type. Returns null when
+     * no neighbour matches (degrade to plain text). Rename-safe: the returned
+     * entry's currentName is still the live getter.
+     * @param {string} nameOrId
+     * @returns {(object|null)}
+     */
+    resolveTradePartner: (nameOrId) => {
+      if (!nameOrId) return null;
+      const direct = byId.get(nameOrId);
+      if (direct && direct.type === 'neighbour') return direct;
+      const key = slugifyEntity(nameOrId);
+      return neighbourEntries.find(n =>
+        slugifyEntity(n.currentName) === key
+        || slugifyEntity(n.raw?.neighbourName || n.raw?.name) === key) || null;
+    },
   };
 }

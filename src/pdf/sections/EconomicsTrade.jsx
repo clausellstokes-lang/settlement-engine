@@ -23,11 +23,23 @@ import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
+import { EntityRef } from '../primitives/EntityRef.jsx';
 import { flag } from '../../lib/flags.js';
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
   const e = vm.economics;
+  const index = vm.entityIndex; // Phase-D id→card resolver (trade partners→neighbours)
+
+  // A trade-partner name links to its neighbour relationship card when it
+  // resolves in-doc (resolveTradePartner matches by id or name→slug), else
+  // plain text. Structured-only and rename-safe (currentName at render).
+  const partnerNode = (partner, style) => {
+    const entry = index?.resolveTradePartner?.(partner);
+    return entry
+      ? <EntityRef id={entry.id} index={index} type="neighbour" fallback={partner} style={style} />
+      : <Text style={style}>{partner}</Text>;
+  };
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -141,7 +153,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
             }, {}),
           ).map(([partner, g], i) => (
             <Text key={`tl-${i}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second, marginBottom: 1 }}>
-              <Text style={{ ...type.body_em, color: palette.ink }}>{partner}</Text>
+              {partnerNode(partner, { ...type.body_em, color: palette.ink })}
               {g.imports.length > 0 ? `   ← ${g.imports.map(label).join(', ')}` : ''}
               {g.exports.length > 0 ? `   → ${g.exports.map(label).join(', ')}` : ''}
             </Text>

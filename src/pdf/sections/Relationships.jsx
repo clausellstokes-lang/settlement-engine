@@ -23,6 +23,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, relColors, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
+import { anchorTarget } from '../primitives/EntityRef.jsx';
 
 const REL_LABELS = {
   rival:            'Rival',
@@ -38,6 +39,7 @@ const REL_LABELS = {
 
 export function Relationships({ settlement, narrativeMode, vm }) {
   const r = vm.relationships;
+  const index = vm.entityIndex; // Phase-D id→card resolver (neighbour anchors)
   const hasAny =
     r.neighbours?.length > 0 ||
     r.interSettlement?.length > 0 ||
@@ -92,7 +94,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
             NEIGHBOUR NETWORK
           </Text>
           {r.neighbours.map((n, i) => (
-            <NeighbourCard key={`n-${i}`} n={n} idx={i} />
+            <NeighbourCard key={`n-${i}`} n={n} idx={i} entityIndex={index} />
           ))}
         </View>
       )}
@@ -252,11 +254,15 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 
 // ── Sub-components ─────────────────────────────────────────────
 
-function NeighbourCard({ n, idx }) {
+function NeighbourCard({ n, idx, entityIndex }) {
   const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
   const color = relColors[n.type] || palette.muted;
+  // Phase-D: this card is the anchor TARGET for any neighbour id reference
+  // (e.g. an Economics trade partner that resolves to this relationship).
+  const anchor = anchorTarget(entityIndex, n.id);
   return (
     <View
+      id={anchor}
       style={{
         marginBottom: 4,
         padding: 5,

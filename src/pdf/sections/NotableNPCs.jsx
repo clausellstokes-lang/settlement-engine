@@ -21,6 +21,7 @@ import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
+import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -53,6 +54,7 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
 
 export function NotableNPCs({ settlement, narrativeMode, vm }) {
   const all = vm.npcs.sorted; // already sorted desc by power
+  const index = vm.entityIndex; // Phase-D: id→card resolver (anchors + links)
   // Relative tiering: top 3 (or any with power ≥ 80) → major; next 4 → notable.
   const majorMin = 3;
   const notableMin = 4;
@@ -96,7 +98,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
             MAJOR FIGURES
           </Text>
           {major.map((npc, i) => (
-            <FullCard key={`maj-${i}`} npc={npc} />
+            <FullCard key={`maj-${i}`} npc={npc} index={index} />
           ))}
         </View>
       )}
@@ -107,7 +109,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE FIGURES
           </Text>
-          <CompactGrid items={notable} />
+          <CompactGrid items={notable} index={index} />
         </View>
       )}
 
@@ -117,18 +119,23 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             OTHER NAMES OF NOTE
           </Text>
-          <OtherNamesGrid items={other} />
+          <OtherNamesGrid items={other} index={index} />
         </View>
       )}
     </PageChrome>
   );
 }
 
-function FullCard({ npc }) {
+function FullCard({ npc, index }) {
   const name = stripZwnj(npc.name || 'Unnamed');
   const title = stripZwnj(npc.title || '');
+  // Phase-D: this card is the anchor TARGET for any npc.id reference.
+  const anchor = anchorTarget(index, npc.id);
+  // The faction affiliation links to the faction card when it resolves in-doc.
+  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
   return (
     <View
+      id={anchor}
       style={{
         marginBottom: 8,
         padding: 8,
@@ -151,7 +158,13 @@ function FullCard({ npc }) {
           )}
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-          {npc.factionLabel && <Pill tone="cool">{npc.factionLabel}</Pill>}
+          {npc.factionLabel && (
+            <Pill tone="cool">
+              {factionLinks
+                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
+                : npc.factionLabel}
+            </Pill>
+          )}
           <View style={{ width: 4 }} />
           <Pill tone="gold">PWR {npc.power}</Pill>
         </View>
@@ -257,7 +270,7 @@ function FullCard({ npc }) {
  * OtherNamesGrid — 2-col tight list for the long-tail "also exists" tier.
  * Each row is a single line: name · title · faction · PWR.
  */
-function OtherNamesGrid({ items }) {
+function OtherNamesGrid({ items, index }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -267,10 +280,10 @@ function OtherNamesGrid({ items }) {
       {rows.map((pair, ri) => (
         <View key={`og-${ri}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
           <View style={{ flex: 1, marginRight: 6 }}>
-            {pair[0] && <OtherNameRow npc={pair[0]} />}
+            {pair[0] && <OtherNameRow npc={pair[0]} index={index} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <OtherNameRow npc={pair[1]} />}
+            {pair[1] && <OtherNameRow npc={pair[1]} index={index} />}
           </View>
         </View>
       ))}
@@ -278,9 +291,11 @@ function OtherNamesGrid({ items }) {
   );
 }
 
-function OtherNameRow({ npc }) {
+function OtherNameRow({ npc, index }) {
+  const anchor = anchorTarget(index, npc.id);
   return (
     <View
+      id={anchor}
       style={{
         flexDirection: 'row',
         alignItems: 'baseline',
@@ -315,7 +330,7 @@ function OtherNameRow({ npc }) {
  * vertical footprint so the chapter fits more characters per page without
  * crowding the Major Figures cards.
  */
-function CompactGrid({ items }) {
+function CompactGrid({ items, index }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -325,10 +340,10 @@ function CompactGrid({ items }) {
       {rows.map((pair, ri) => (
         <View key={`cg-${ri}`} style={{ flexDirection: 'row', marginBottom: 4 }}>
           <View style={{ flex: 1, marginRight: 5 }}>
-            {pair[0] && <CompactCard npc={pair[0]} />}
+            {pair[0] && <CompactCard npc={pair[0]} index={index} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <CompactCard npc={pair[1]} />}
+            {pair[1] && <CompactCard npc={pair[1]} index={index} />}
           </View>
         </View>
       ))}
@@ -336,11 +351,14 @@ function CompactGrid({ items }) {
   );
 }
 
-function CompactCard({ npc }) {
+function CompactCard({ npc, index }) {
   const name = stripZwnj(npc.name || 'Unnamed');
   const title = stripZwnj(npc.title || '');
+  const anchor = anchorTarget(index, npc.id);
+  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
   return (
     <View
+      id={anchor}
       style={{
         padding: 6,
         border: `0.4pt solid ${palette.border}`,
@@ -363,7 +381,13 @@ function CompactCard({ npc }) {
               {title}
             </Text>
           )}
-          {npc.factionLabel && <Tag tone="cool">{npc.factionLabel}</Tag>}
+          {npc.factionLabel && (
+            <Tag tone="cool">
+              {factionLinks
+                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
+                : npc.factionLabel}
+            </Tag>
+          )}
         </View>
       )}
       {npc.motivation && (

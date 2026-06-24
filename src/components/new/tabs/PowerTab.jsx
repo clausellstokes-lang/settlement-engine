@@ -3,9 +3,10 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
-import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { useStore } from '../../../store/index.js';
+import EntityLink from '../../primitives/EntityLink.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -262,7 +263,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                         <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated:</span>
                         {matchedGroups.flatMap(g => g.members||[]).slice(0,5).map((mem,j) => (
                           <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
-                            {mem.name} <span style={{color:MUTED}}>({mem.role})</span>
+                            {/* Sub-faction member → its NPC card (rename-safe; plain text if no NPC record). */}
+                            <EntityLink id={entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
                       </div>
@@ -287,7 +289,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 {t.factions?.length > 0 && (
                   <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
                     {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 6px'}}>{f}</span>
+                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 6px'}}>
+                        {/* Structured faction ref → its Power row (rename-safe; plain text if absent). */}
+                        <EntityLink id={factionIdFromName(f)} type="faction" fallback={f} style={{color:swatch['#7A5010'],textDecorationColor:`${swatch['#7A5010']}80`}} />
+                      </span>
                     ))}
                   </div>
                 )}
@@ -307,7 +312,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             return (
               <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,borderRadius:7,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+                  {/* Conflict parties are structured faction refs → their Power
+                      rows (rename-safe; each degrades to plain text if its
+                      faction is absent from the index). The plot-hook prose
+                      below is intentionally NOT linked — structured refs only. */}
+                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>
+                    <EntityLink id={factionIdFromName(c.parties?.[0])} type="faction" fallback={c.parties?.[0] || ''} style={{...serif,color:swatch.inkMag}} />
+                    {c.parties?.[1] ? <> vs <EntityLink id={factionIdFromName(c.parties[1])} type="faction" fallback={c.parties[1]} style={{...serif,color:swatch.inkMag}} /></> : null}
+                  </span>
                   <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,borderRadius:3,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
                 {c.issue  && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}

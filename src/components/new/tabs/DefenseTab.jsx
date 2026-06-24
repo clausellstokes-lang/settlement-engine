@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, BODY } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
+import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../../lib/entities.js';
 
 import {useIsMobileTab} from '../tabConstants';
 
@@ -119,7 +122,14 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,borderRadius:6,padding:'9px 12px',marginBottom:6}}>
       <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
         <div style={{flex:1}}>
-          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
+          {/* Force/fortification name -> in-dossier cross-link to its
+              institution card. Resolved by the SAME id the dossier index
+              assigns each institution (entityIdFor), so it follows a rename;
+              degrades to the plain name when the force is not a catalogued
+              institution (e.g. a synthesized wall) or the Power tab is gated. */}
+          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>
+            <EntityLink id={entityIdFor('institution', i)} type="institution" fallback={i.name} />
+          </div>
           {i.desc&&<div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
         </div>
         {i.source&&i.source!=='generated'&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],borderRadius:3,padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
@@ -264,8 +274,13 @@ export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
 
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',borderRadius:6,padding:'9px 13px'}}>
+            {/* Criminal faction -> in-dossier cross-link to its Power card. The
+                faction's current name is rendered as the link (resolved by the
+                canonical factionIdFromName id == the index key), so it follows a
+                rename; degrades to plain text when the faction is absent from
+                the index or the Power tab is gated. */}
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>
-              Criminal Faction: Power {crimFaction.power||0}
+              <EntityLink id={factionIdFromName(crimFaction.faction)} type="faction" fallback={crimFaction.faction||'Criminal Faction'} />: Power {crimFaction.power||0}
             </div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (

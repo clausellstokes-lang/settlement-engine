@@ -6,7 +6,10 @@ import {useIsMobileTab} from '../tabConstants';
 
 import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
+import EntityLink from '../../primitives/EntityLink.jsx';
 import { displayInstitutionName } from '../../../domain/display/institutionDisplay.js';
+import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../../lib/entities.js';
 
 // Shared no-value placeholder — an absent value reads as a deliberate
 // 'not computed' state, not garbled ', ' output. Matches DefenseTab's
@@ -81,6 +84,36 @@ function StatusTag({ label, value, accent, alert = true, tier }) {
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || NO_VALUE}</div>
     </div>
   );
+}
+
+/**
+ * The subject of a structural-violation row (institution or group), rendered as
+ * an in-dossier cross-link with the trailing ": " separator the row expects.
+ *
+ * An `institution` name links to that institution's card (by the SAME id the
+ * dossier index assigns, so it is rename-safe); a `group` links to its faction
+ * card via {@link factionIdFromName}. Both degrade to plain text when the id is
+ * absent from the index or the target tab is gated — never a dead link. When
+ * neither is present the row carries no subject.
+ *
+ * @param {object} props
+ * @param {string} [props.institution]  Institution name (preferred subject).
+ * @param {string} [props.group]        Faction/category group name (fallback subject).
+ */
+function ViolationSubject({ institution, group }) {
+  if (institution) {
+    return <>
+      <EntityLink id={entityIdFor('institution', { name: institution })} type="institution" fallback={institution} />
+      {': '}
+    </>;
+  }
+  if (group) {
+    return <>
+      <EntityLink id={factionIdFromName(group)} type="faction" fallback={group} />
+      {': '}
+    </>;
+  }
+  return null;
 }
 
 export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) {
@@ -354,11 +387,11 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
       {(realViolations.length+byDesignViolations.length+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginTop:20,marginBottom:14,display:'flex',flexDirection:'column',gap:8}}>
         {realViolations.length>0&&<div style={{background:swatch.dangerBg,borderLeft:'3px solid #8b1a1a',padding:'2px 0 2px 12px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}> Structural Issues</div>
-          {realViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+          {realViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}><ViolationSubject institution={v.institution} group={v.group} /></span>{v.reason}</div>)}
         </div>}
         {byDesignViolations.length>0&&<div style={{background:swatch['#FAF8F4'],borderLeft:'3px solid #a0762a',padding:'2px 0 2px 12px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,marginBottom:4}}> By Design</div>
-          {byDesignViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:BODY,marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+          {byDesignViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:BODY,marginBottom:3}}><span style={{fontWeight:700}}><ViolationSubject institution={v.institution} group={v.group} /></span>{v.reason}</div>)}
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],borderLeft:'3px solid #8b3a1a',padding:'2px 0 2px 12px',display:'flex',gap:8}}>
@@ -422,8 +455,15 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
                     const skin = isCustom
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};
+                    // Institution name -> in-dossier cross-link. The id is the
+                    // SAME one buildDossierEntityIndex assigns each institution
+                    // (entityIdFor), so the link resolves by id and follows a
+                    // rename; EntityLink degrades to plain text when the
+                    // institution is absent from the index or the Power tab is
+                    // gated out. The displayInstitutionName label is the
+                    // fallback so the catalog-cleaned name still shows.
                     return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
-                      {displayInstitutionName(inst.name)}
+                      <EntityLink id={entityIdFor('institution', inst)} type="institution" fallback={displayInstitutionName(inst.name)} />
                       {isCustom
                         ? <span style={{fontSize:FS.xs,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
                         : (srcLabel&&<span style={{fontSize:FS.xs,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}

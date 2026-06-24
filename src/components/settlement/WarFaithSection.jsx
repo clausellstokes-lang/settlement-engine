@@ -42,8 +42,11 @@ import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
+import { factionIdFromName } from '../../lib/entities.js';
+import { slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { useAltitude } from '../../hooks/useAltitude.js';
 import Button from '../primitives/Button.jsx';
+import EntityLink from '../primitives/EntityLink.jsx';
 import {
   MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, sans, FS, swatch,
 } from '../theme.js';
@@ -59,19 +62,37 @@ function aggressionPosture(mult) {
   return { label: 'Even-handed', color: MUTED };
 }
 
-/** The named inputs that move aggressiveness, for the Detail disclosure. */
+/**
+ * The named inputs that move aggressiveness, for the Detail disclosure. The
+ * GOVERNMENT input is intentionally NOT included here — it is an in-dossier
+ * entity (a local faction) and is rendered separately as an {@link EntityLink}
+ * by the caller. These remaining inputs are descriptive phrases, not entities.
+ * @param {object} settlement
+ * @returns {string[]}
+ */
 function aggressionInputs(settlement) {
   const inputs = [];
-  const gov = governingFactionOf(settlement);
-  if (gov?.archetype || gov?.faction) {
-    inputs.push(`Government: ${gov.faction || gov.archetype}`);
-  }
   const temper = settlement?.config?.primaryDeitySnapshot?.temperamentAxis;
   if (temper === 'warlike') inputs.push('Warlike patron deity (+aggression)');
   else if (temper === 'peacelike') inputs.push('Peacelike patron deity (−aggression)');
   inputs.push('Cross-settlement win/loss history');
   inputs.push('Authored NPC temperament');
   return inputs;
+}
+
+/**
+ * The local governing faction's display name, or null. Drives the Government
+ * EntityLink in the posture-inputs disclosure: a faction is an in-dossier
+ * entity, so its name links to the Power-tab card by its canonical id
+ * ({@link factionIdFromName} — the SAME id the index keys factions under), not
+ * by name-matching. Rename-safe by construction; degrades to plain text when
+ * the faction is absent from the index.
+ * @param {object} settlement
+ * @returns {string|null}
+ */
+function governingFactionName(settlement) {
+  const gov = governingFactionOf(settlement);
+  return gov?.faction || gov?.archetype || null;
 }
 
 function Line({ children, strong }) {
@@ -198,12 +219,32 @@ export default function WarFaithSection({
         <span style={{ color: MUTED }}> (aggression ×{aggressiveness.toFixed(2)})</span>
       </div>
 
-      {detail && (
-        <div style={{ fontSize: FS.xxs, color: MUTED, lineHeight: 1.5, margin: '0 0 6px', paddingLeft: 2 }}>
-          Driven by: {aggressionInputs(settlement).join(' · ')}.
-          {' '}<span style={{ opacity: 0.8 }}>(deity term weight {AGGRESSION_TUNING.W_DEITY})</span>
-        </div>
-      )}
+      {detail && (() => {
+        const govName = governingFactionName(settlement);
+        const inputs = aggressionInputs(settlement);
+        return (
+          <div style={{ fontSize: FS.xxs, color: MUTED, lineHeight: 1.5, margin: '0 0 6px', paddingLeft: 2 }}>
+            Driven by:{' '}
+            {govName && (
+              <>
+                Government:{' '}
+                {/* The local governing faction is an in-dossier entity — link it
+                    to its Power card by canonical id. Degrades to plain text
+                    when the faction is not in the index / the tab is gated. */}
+                <EntityLink
+                  id={factionIdFromName(govName)}
+                  type="faction"
+                  fallback={govName}
+                  style={{ fontSize: 'inherit', fontWeight: 700 }}
+                />
+                {inputs.length > 0 ? ' · ' : ''}
+              </>
+            )}
+            {inputs.join(' · ')}.
+            {' '}<span style={{ opacity: 0.8 }}>(deity term weight {AGGRESSION_TUNING.W_DEITY})</span>
+          </div>
+        );
+      })()}
 
       {/* ── War-exhaustion scar ──────────────────────────────────────────── */}
       {exhaustionRaw > 0 && (
@@ -293,7 +334,16 @@ export default function WarFaithSection({
       {deity && (
         <>
           <Line strong="Primary faith:">
-            {deity.name}{deity.rankAxis ? ` (${deity.rankAxis})` : ''}
+            {/* The patron deity is an in-dossier entity — link it to its indexed
+                card (keyed `deity.<slug(name)>`, matching buildDossierEntityIndex).
+                Rename-safe by id; degrades to plain text when unindexed. */}
+            <EntityLink
+              id={`deity.${slugifyEntity(deity.name)}`}
+              type="deity"
+              fallback={deity.name}
+              style={{ fontSize: 'inherit', fontWeight: 700, color: INK_BROWN, textDecorationColor: `${INK_BROWN}80` }}
+            />
+            {deity.rankAxis ? ` (${deity.rankAxis})` : ''}
             {/* B5 — surface the 4th (law) axis tag; legacy 3-axis / law-neutral says nothing. */}
             {deity.lawAxis && deity.lawAxis !== 'neutral' ? ` · ${deity.lawAxis}` : ''}
             {deity.domain ? ` · ${deity.domain}` : ''}.
