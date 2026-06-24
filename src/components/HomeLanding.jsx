@@ -51,7 +51,10 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
             <span style={{ display: 'block', marginTop: SP.xs }}>Now you have every answer.</span>
           </h1>
           <p style={{ margin: `${SP.lg}px auto ${SP.xl}px`, maxWidth: 620, fontFamily: serif_, fontSize: FS.xxl, fontStyle: 'italic', color: 'rgba(244,234,208,0.85)', lineHeight: 1.6, textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
-            SettlementForge generates living towns: economies, people, tensions, and history. Then it simulates how they change. Not a dice roll. A world that holds together.
+            SettlementForge generates living towns: economies, people, tensions, and history.
+            {/* The simulation turn starts on its own line so "Then ..." reads as a
+                clean second beat instead of orphaning off the end of the first. */}
+            <span style={{ display: 'block' }}>Then it simulates how they change. Not a dice roll. A world that holds together.</span>
           </p>
           <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>Forge your first settlement</Button>
