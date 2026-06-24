@@ -127,6 +127,22 @@ export default function AccountDataPrivacySection({
     <Section title="Data and privacy">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
 
+        {/* ── Import (coming soon) ──────────────────────────────────────────
+            A disabled placeholder for the future bring-your-own-data import,
+            mirroring the 2FA "coming soon" stub in Security. Presentation only;
+            it ships inert until the import pipeline lands. */}
+        <div>
+          <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
+            Import my data
+          </div>
+          <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+            Bring settlements and campaigns in from an export file. This is on the way.
+          </p>
+          <Button variant="secondary" size="md" disabled title="Coming soon">
+            Coming soon
+          </Button>
+        </div>
+
         {/* ── Export ────────────────────────────────────────────────────── */}
         <div>
           <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>

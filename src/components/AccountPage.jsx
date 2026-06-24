@@ -1,18 +1,19 @@
 /**
- * AccountPage.jsx — Full-page account management.
+ * AccountPage.jsx — Full-page account management, organized as a left-sidebar
+ * ("bracket") settings layout: a rail of sections on the left (AccountNav), the
+ * active section's panel on the right. Loads to Profile first.
  *
- * Sections:
- *   - Profile (display name, email, role badge)
- *   - Subscription tier & credits
- *   - Saved maps / campaigns
- *   - Purchase credits (inline, replaces PurchaseModal for this view)
- *   - Customer support contact form
- *   - Developer admin link (if role is developer/admin)
+ * Sections (rail order): Profile · Security · Subscription · Support · Data ·
+ * Preferences. AccountPage stays the state owner — every profile/name/billing/
+ * purchase useState + handler lives here and is passed to the same section
+ * components as before; the rail only switches which panel is mounted. Security
+ * groups the sign-in/security panel with the account-recovery questions.
+ *
+ * The page intentionally has NO standalone bottom sign-out: sign-out lives on
+ * the header account chip and in Security ("sign out everywhere"). Delete-account
+ * stays inside Data, not a top-level destructive zone.
  */
-import { useState } from 'react';
-import {
-  Shield, ChevronRight,
-} from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
@@ -20,11 +21,12 @@ import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
-import { INK, MUTED, SECOND, sans, FS, layout } from './theme.js';
+import { MUTED, sans, FS, layout } from './theme.js';
 import { space } from '../design/tokens.js';
-import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
+import AccountNav from './account/AccountNav.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
@@ -48,6 +50,23 @@ export default function AccountPage({ onNavigateAdmin }) {
   const deleteCampaign = useStore(s => s.deleteCampaign);
   const activeSaves = activeSaveCount(savedSettlements);
   const inactiveSaves = inactiveRetentionCount(savedSettlements);
+  const isMobile = useIsMobile();
+
+  // Left-nav section selection. Profile loads first. Panels are mounted on
+  // demand — switching away resets a section's in-progress form (a self-
+  // contained settings task), which is the expected settings-nav behavior; the
+  // section loaders (Security/Recovery/Tickets) are idempotent reads, so a
+  // re-entry re-runs them harmlessly. URL-hash deep-linking (#security) is a
+  // noted deferral — a refresh always lands on Profile.
+  const [section, setSection] = useState('profile');
+  const panelRef = useRef(null);
+  // Move focus into the panel on section change so keyboard/SR users land in
+  // the freshly-revealed content rather than being stranded on the rail.
+  const firstPanelPaint = useRef(true);
+  useEffect(() => {
+    if (firstPanelPaint.current) { firstPanelPaint.current = false; return; }
+    panelRef.current?.focus?.();
+  }, [section]);
 
   // Display name editing
   const [editingName, setEditingName] = useState(false);
@@ -309,111 +328,129 @@ export default function AccountPage({ onNavigateAdmin }) {
     );
   }
 
+  // Accessible name for the content panel, tracking the active section so the
+  // <section> landmark announces which settings group is shown.
+  const PANEL_LABELS = {
+    profile: 'Profile',
+    security: 'Security',
+    subscription: 'Subscription',
+    support: 'Customer Support',
+    data: 'Data and privacy',
+    preferences: 'Preferences',
+  };
+
+  // The active section's panel. Each section renders verbatim with its exact
+  // prior props — the reorg only chooses which one is mounted, never re-threads
+  // a wire (the highest-risk failure of a settings reorg).
+  const panel = (
+    <>
+      {section === 'profile' && (
+        <AccountProfileSection
+          auth={auth}
+          avatarInput={avatarInput} setAvatarInput={setAvatarInput}
+          modelPreference={modelPreference} setModelPreference={setModelPreference}
+          editingName={editingName} setEditingName={setEditingName}
+          nameInput={nameInput} setNameInput={setNameInput}
+          nameSaving={nameSaving} handleSaveName={handleSaveName}
+          nameError={nameError}
+          editingExternalName={editingExternalName} setEditingExternalName={setEditingExternalName}
+          externalNameInput={externalNameInput} setExternalNameInput={setExternalNameInput}
+          externalNameSaving={externalNameSaving} handleSaveExternalName={handleSaveExternalName}
+          externalNameError={externalNameError}
+          firstNameInput={firstNameInput} setFirstNameInput={setFirstNameInput}
+          lastNameInput={lastNameInput} setLastNameInput={setLastNameInput}
+          preferredNameInput={preferredNameInput} setPreferredNameInput={setPreferredNameInput}
+          namesSaving={namesSaving} namesSaved={namesSaved} namesError={namesError}
+          handleSaveProfileNames={handleSaveProfileNames}
+          profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
+          handleSaveProfilePreferences={handleSaveProfilePreferences}
+        />
+      )}
+
+      {/* Security groups the sign-in/security panel with the account-recovery
+          questions, rendered stacked (recovery below sign-in/security, matching
+          the prior order) so both "sign-in methods / account recovery" controls
+          live under one nav item. */}
+      {section === 'security' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: space['space-7'] }}>
+          <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
+          <AccountRecoveryQuestionsSection />
+        </div>
+      )}
+
+      {/* Subscription & Credits (Billing) — the one feature/conversion surface;
+          keeps its bordered card. */}
+      {section === 'subscription' && (
+        <AccountSubscriptionSection
+          auth={auth}
+          isElevated={isElevated}
+          creditBalance={creditBalance}
+          activeSaves={activeSaves}
+          inactiveSaves={inactiveSaves}
+          maxSaves={maxSaves}
+          portalBusy={portalBusy}
+          handleManageBilling={handleManageBilling}
+          purchaseError={purchaseError}
+          purchasing={purchasing}
+          handlePurchase={handlePurchase}
+          onNavigatePricing={() => navigate('pricing')}
+        />
+      )}
+
+      {/* Customer Support (FAQ-first, then tickets). */}
+      {section === 'support' && <AccountSupportSection auth={auth} />}
+
+      {/* Data & Privacy (export, deletion, consent, visibility). */}
+      {section === 'data' && (
+        <AccountDataPrivacySection
+          auth={auth}
+          settlementCount={(savedSettlements || []).length}
+          campaignCount={(campaigns || []).length}
+          onDeleteAllSettlements={handleDeleteAllSettlements}
+          onDeleteAllCampaigns={handleDeleteAllCampaigns}
+          onSignOut={authSignOut}
+        />
+      )}
+
+      {/* Product Preferences — durable defaults + email-notifications toggle. */}
+      {section === 'preferences' && (
+        <AccountPreferencesSection
+          emailNotifications={emailNotifications}
+          setEmailNotifications={handleEmailNotificationsChange}
+        />
+      )}
+    </>
+  );
+
   return (
     <Page max={layout.page}>
       {/* ── Page header — the page's one dominant focal point ────── */}
       <PageHeader eyebrow="Your account" title="Account" subtitle={auth.user.email} />
 
-      <div style={{
-        // space-7 (32) between sections — a clear step above the intra-section
-        // SP.xl/SP.lg (20/16) gaps, so SPACING carries the page-level grouping
-        // and the section chrome can recede to a hairline rule (P5). At SP.xxl
-        // (24) the between/within differential was too small to read as grouping.
-        display: 'flex', flexDirection: 'column', gap: space['space-7'],
-      }}>
-      {/* ── Profile section ────────────────────────────────────── */}
-      <AccountProfileSection
-        auth={auth}
-        avatarInput={avatarInput} setAvatarInput={setAvatarInput}
-        modelPreference={modelPreference} setModelPreference={setModelPreference}
-        editingName={editingName} setEditingName={setEditingName}
-        nameInput={nameInput} setNameInput={setNameInput}
-        nameSaving={nameSaving} handleSaveName={handleSaveName}
-        nameError={nameError}
-        editingExternalName={editingExternalName} setEditingExternalName={setEditingExternalName}
-        externalNameInput={externalNameInput} setExternalNameInput={setExternalNameInput}
-        externalNameSaving={externalNameSaving} handleSaveExternalName={handleSaveExternalName}
-        externalNameError={externalNameError}
-        firstNameInput={firstNameInput} setFirstNameInput={setFirstNameInput}
-        lastNameInput={lastNameInput} setLastNameInput={setLastNameInput}
-        preferredNameInput={preferredNameInput} setPreferredNameInput={setPreferredNameInput}
-        namesSaving={namesSaving} namesSaved={namesSaved} namesError={namesError}
-        handleSaveProfileNames={handleSaveProfileNames}
-        profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
-        handleSaveProfilePreferences={handleSaveProfilePreferences}
-      />
-
-      {/* ── Subscription & Credits (Billing) — the headline state ─
-          leads the stack directly under identity as the one feature
-          section, so the at-a-glance tier/credits/saves aren't buried. */}
-      <AccountSubscriptionSection
-        auth={auth}
-        isElevated={isElevated}
-        creditBalance={creditBalance}
-        activeSaves={activeSaves}
-        inactiveSaves={inactiveSaves}
-        maxSaves={maxSaves}
-        portalBusy={portalBusy}
-        handleManageBilling={handleManageBilling}
-        purchaseError={purchaseError}
-        purchasing={purchasing}
-        handlePurchase={handlePurchase}
-        onNavigatePricing={() => navigate('pricing')}
-      />
-
-      {/* ── Login & Security ────────────────────────────────────── */}
-      <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
-
-      {/* ── Account recovery questions ──────────────────────────────
-          The durable home for security-question enrollment: sign-up's
-          deferred capture is best-effort, so this is where any account
-          (OAuth, confirmed elsewhere, closed-window) sets or replaces its
-          two questions and the forgot-password path it unlocks. */}
-      <AccountRecoveryQuestionsSection />
-
-      {/* ── Data & Privacy (export, deletion, consent, visibility) ── */}
-      <AccountDataPrivacySection
-        auth={auth}
-        settlementCount={(savedSettlements || []).length}
-        campaignCount={(campaigns || []).length}
-        onDeleteAllSettlements={handleDeleteAllSettlements}
-        onDeleteAllCampaigns={handleDeleteAllCampaigns}
-        onSignOut={authSignOut}
-      />
-
-      {/* ── Product Preferences ─────────────────────────────────── */}
-      <AccountPreferencesSection
-        emailNotifications={emailNotifications}
-        setEmailNotifications={handleEmailNotificationsChange}
-      />
-
-      {/* ── Customer Support (FAQ-first, then tickets) ──────────── */}
-      <AccountSupportSection auth={auth} />
-
-      {/* ── Developer / Admin Panel link ──────────────────────────
-          A subordinate utility-nav affordance: a quiet ghost row, not a
-          loud bordered tile — it must not out-shout the account content
-          or the Subscription primary CTA. */}
-      {isElevated && onNavigateAdmin && (
-        <Button
-          variant="ghost"
-          size="md"
-          fullWidth
-          onClick={onNavigateAdmin}
-          icon={<Shield size={16} color={SECOND} />}
-          trailingIcon={<ChevronRight size={16} color={MUTED} style={{ marginLeft: 'auto' }} />}
-          style={{ justifyContent: 'flex-start', fontFamily: sans, textAlign: 'left' }}
+      {/* Left-sidebar settings layout: a 220px rail of section rows + the active
+          panel. On mobile the rail reflows to a top tab strip (AccountNav
+          branches internally), so the layout collapses to a single column with
+          the chooser pinned above the panel. */}
+      <div style={isMobile
+        ? { display: 'flex', flexDirection: 'column', gap: space['space-7'] }
+        : { display: 'grid', gridTemplateColumns: '220px 1fr', gap: space['space-7'], alignItems: 'start' }}
+      >
+        <AccountNav
+          section={section}
+          setSection={setSection}
+          isElevated={isElevated}
+          onNavigateAdmin={onNavigateAdmin}
+        />
+        {/* Content panel. tabIndex={-1} + aria-label make it a focusable,
+            named landmark; focus moves here on section change (see effect). */}
+        <section
+          ref={panelRef}
+          tabIndex={-1}
+          aria-label={PANEL_LABELS[section] || 'Account'}
+          style={{ outline: 'none', minWidth: 0 }}
         >
-          <span style={{ flex: 1, textAlign: 'left' }}>
-            <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 700, color: INK }}>Developer Admin Panel</span>
-            <span style={{ display: 'block', fontSize: FS.xs, fontWeight: 400, color: SECOND }}>Manage users, credits, roles, and system configuration</span>
-          </span>
-        </Button>
-      )}
-      {/* Sign-out lives on the header account chip and in Login & Security
-          ("sign out everywhere"); a redundant page-bottom button here sat one
-          mis-click below Support, so it was removed to keep a single, clearly
-          placed sign-out affordance. */}
+          {panel}
+        </section>
       </div>
     </Page>
   );
