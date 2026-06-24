@@ -271,7 +271,7 @@ function NeighbourCard({ n, idx }) {
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(n.name || 'Neighbour')}
         </Text>
-        <RelPill type={n.type} />
+        <RelPill type={n.type} directionalLabel={n.directionalLabel} />
       </View>
       {n.description && (
         <EditableText
@@ -327,9 +327,12 @@ function NeighbourCard({ n, idx }) {
   );
 }
 
-function RelPill({ type: relType }) {
+function RelPill({ type: relType, directionalLabel }) {
   if (!relType) return null;
-  const labelStr = REL_LABELS[relType] || cap(relType);
+  // Asymmetric links (overlord/vassal, patron/client) read directionally,
+  // naming the neighbour ("Overlord of X"); the colour still keys off the
+  // canonical base type so the pill tint is unchanged.
+  const labelStr = directionalLabel || REL_LABELS[relType] || cap(relType);
   const color = relColors[relType] || palette.muted;
   return (
     <View

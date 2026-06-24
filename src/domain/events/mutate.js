@@ -28,7 +28,7 @@ import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npc
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
-import { WAR_STRESSOR_TYPES } from '../worldPulse/warStressorTypes.js';
+import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
 
 /** @typedef {import('../types.js').Event} Event */
@@ -1116,23 +1116,51 @@ function raidOrMonsterAttack(s, event) {
  * channel for directives); the store recomputes the directive from the event
  * (crisisLifecycle.twinDirectiveForEvent) at its single consumer chokepoint.
  */
-// Relationship aliases already at (or beyond) hostility — a named instigator
-// in any of these states is NOT re-flipped, so re-authoring a wartime stressor
-// against the same neighbour is a relationship no-op.
-const ALREADY_HOSTILE_RELS = new Set(['hostile', 'cold_war', 'war']);
+// The ADVERSARIAL AXIS — escalating tiers of antagonism. An instigator flip only
+// ever ESCALATES along this axis: a neighbour already AT or BEYOND the target
+// relationship is left untouched, so re-authoring a stressor never softens an
+// edge (a hostile neighbour is never downgraded to rival by a later infiltration).
+// 'war' is a legacy alias that reads at the hostile tier. Unknown labels (allied,
+// trade_partner, neutral, ...) rank at 0 and are always escalatable.
+/** @type {Readonly<Record<string, number>>} */
+const ADVERSARIAL_RANK = Object.freeze({ rival: 1, cold_war: 2, war: 3, hostile: 3 });
+const adversarialRank = (/** @type {string} */ rel) => ADVERSARIAL_RANK[String(rel || '').toLowerCase()] || 0;
+
+/**
+ * Resolve the target relationship an instigator flip should set. War stressors
+ * (siege / wartime / occupation / betrayal) always sour to 'hostile' — unchanged.
+ * An infiltration sours to the DM-chosen, lighter relationship
+ * (rival / cold_war / hostile, default 'rival'), validated against the allowed set.
+ * Any other stressor type has no instigator effect (returns null).
+ *
+ * @param {string} stressorType  lower-cased stressor key.
+ * @param {{ instigatorRelationship?: string }} payload  the event payload.
+ * @returns {string|null} the canonical target relationship, or null when none.
+ */
+function instigatorTargetRelationship(stressorType, payload) {
+  if (WAR_STRESSOR_TYPES.includes(stressorType)) return 'hostile';
+  if (INFILTRATION_STRESSOR_TYPES.includes(stressorType)) {
+    const picked = String(payload?.instigatorRelationship || '').toLowerCase();
+    return INFILTRATION_TARGET_RELATIONSHIPS.includes(picked) ? picked : 'rival';
+  }
+  return null;
+}
 
 function applyStressor(s, event) {
   const next = /** @type {any} */ (crisisOnset({ settlement: s, event }).settlement);
-  // #1 — SIEGE/OCCUPATION INSTIGATOR → HOSTILE. When a WAR-type stressor
-  // (siege / wartime / occupation / betrayal — WAR_STRESSOR_TYPES) names an
-  // instigating neighbour, sour the HOME settlement's view of that neighbour
-  // to 'hostile'. Optional: with no instigator, only the crisis onset lands.
+  // #1 / #3 — INSTIGATOR-SOURED RELATIONSHIP. A WAR-type stressor
+  // (siege / wartime / occupation / betrayal) sours the named neighbour to
+  // 'hostile'; an INFILTRATION stressor sours it to a lighter, DM-configurable
+  // relationship (rival / cold_war / hostile). Optional: with no instigator (or a
+  // non-instigator stressor type) only the crisis onset lands.
   const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
   const instigator = String(event.payload?.instigatorNeighbour || '').trim();
-  if (!instigator || !WAR_STRESSOR_TYPES.includes(stressorType)) return next;
-  // Only flip a neighbour that ISN'T already hostile (or in a hostile-family
-  // alias: cold_war / war). The hostile edge is symmetric in the canonical
-  // vocab, so relationshipDefinition('hostile', ...) is direction-agnostic.
+  const targetRel = instigatorTargetRelationship(stressorType, event.payload);
+  if (!instigator || !targetRel) return next;
+  // Only ESCALATE: flip a neighbour whose current relationship is LESS adversarial
+  // than the target. rival / cold_war / hostile are all symmetric in the canonical
+  // vocab, so relationshipDefinition(targetRel, ...) is direction-agnostic.
+  const targetRank = adversarialRank(targetRel);
   const network = Array.isArray(next.neighbourNetwork) ? next.neighbourNetwork : [];
   let flipped = false;
   const rewired = network.map((/** @type {any} */ link) => {
@@ -1142,9 +1170,9 @@ function applyStressor(s, event) {
       || String(link?.linkId || '') === instigator;
     if (!matches) return link;
     const current = String(link?.relationshipType || '').toLowerCase();
-    if (ALREADY_HOSTILE_RELS.has(current)) return link; // no-op if already hostile
+    if (adversarialRank(current) >= targetRank) return link; // no-op / no-downgrade
     flipped = true;
-    const def = relationshipDefinition('hostile', next.id || next.name || 'home', instigator);
+    const def = relationshipDefinition(targetRel, next.id || next.name || 'home', instigator);
     return {
       ...link,
       relationshipType: def.relationshipType,

@@ -55,6 +55,7 @@ import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailH
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
 // disagree with the full panel's headline fact.
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
+import { directionalRelationshipLabel } from '../domain/relationships/canonicalRelationship.js';
 import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
 // PDF consume, so a named relationship looks identical across every surface
@@ -717,7 +718,11 @@ export default function SettlementDetail({
               <div style={{display:'flex',flexDirection:'column',gap:4}}>
               {network.map((n,i)=>{
                 const c=REL_HEX[n.relationshipType]||SECOND;
-                const rel=n.displayRelationshipType
+                // Asymmetric links (overlord/vassal, patron/client) state WHICH SIDE
+                // this settlement is, naming the neighbour ("Overlord of X"); symmetric
+                // links and legacy rows fall through to the existing label.
+                const rel=directionalRelationshipLabel(n, n.name)
+                  || n.displayRelationshipType
                   || REL_LABELS[n.relationshipType]
                   || (n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
                 return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8}}>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RELATIONSHIP_SELECTIONS } from '../../domain/relationships/canonicalRelationship.js';
+import { RELATIONSHIP_SELECTIONS, relationshipDefinition, directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 import { INK, BODY, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
 import Button from '../primitives/Button.jsx';
 
@@ -59,6 +59,17 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
           ))}
         </select>
       </div>
+      {/* Directional preview: for the asymmetric pairs (overlord/vassal,
+          patron/client) state WHICH SIDE this settlement is, naming the
+          neighbour, off the canonical sourceRole. Symmetric picks show nothing
+          (the label already reads correctly without a direction). */}
+      {(() => {
+        const def = relationshipDefinition(relType, currentSave?.saveData?.id || 'home', selected.id);
+        const phrase = directionalRelationshipLabel({ localRelationshipRole: def.sourceRole }, selected.name);
+        return phrase
+          ? <div style={{fontSize:FS.xs,color:SECOND}}>This settlement will be: <span style={{fontWeight:700,color:INK}}>{phrase}</span></div>
+          : null;
+      })()}
       <div style={{display:'flex',gap:8}}>
         <Button variant="primary" size="sm" onClick={()=>onLink(selected,relType)}>Confirm</Button>
         <Button variant="secondary" size="sm" onClick={()=>setSelected(null)}>Cancel</Button>

@@ -22,7 +22,7 @@ import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleC
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
-import { WAR_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
+import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
@@ -112,6 +112,7 @@ export default function EventComposer() {
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
   const [instigatorNeighbour, setInstigatorNeighbour] = useState(''); // #1 APPLY_STRESSOR: optional war instigator
+  const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // #3 APPLY_STRESSOR (infiltrated): souring level
   const [tradeTarget, setTradeTarget] = useState('');          // #6 OPENED_TRADE_ROUTE: optional campaign-settlement target
   // #6 — the active campaign's OTHER settlements (so a trade route can open with
   // any campaign member, not only a pre-linked neighbour); see campaignPeerOptions.
@@ -242,6 +243,10 @@ export default function EventComposer() {
   // catalog key (falling back to the free-typed target).
   const isWarStressor = type === 'APPLY_STRESSOR'
     && WAR_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
+  // #3 — an INFILTRATION stressor likewise takes an optional instigator, but
+  // sours the named neighbour to a lighter, DM-configurable relationship.
+  const isInfiltrationStressor = type === 'APPLY_STRESSOR'
+    && INFILTRATION_STRESSOR_TYPES.includes(String(stressorPick?.key || target || '').toLowerCase());
 
   // Derive a sensible institution list for the institution-pickers.
   const institutionOptions = (settlement.institutions || [])
@@ -259,7 +264,7 @@ export default function EventComposer() {
       quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
       stressorPick, stressorSeverity, powerCause,
       tradeDirection, tradeEntrepot, swapWithNpcId,
-      isWarStressor, instigatorNeighbour, tradeTarget,
+      isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
       partyCaused, description,
     });
   }
@@ -297,6 +302,7 @@ export default function EventComposer() {
     setSwapWithNpcId('');
     setCustomResourceName('');
     setInstigatorNeighbour('');
+    setInstigatorRelationship('rival');
     setTradeTarget('');
     // The staleness notice moves to COMMIT time (nothing has mutated here yet —
     // see ChangeQueuePanel's onCommitted seam in SettlementDetail).
@@ -477,8 +483,11 @@ export default function EventComposer() {
           type={type}
           settlement={settlement}
           isWarStressor={isWarStressor}
+          isInfiltrationStressor={isInfiltrationStressor}
           instigatorNeighbour={instigatorNeighbour}
           setInstigatorNeighbour={setInstigatorNeighbour}
+          instigatorRelationship={instigatorRelationship}
+          setInstigatorRelationship={setInstigatorRelationship}
           tradeTarget={tradeTarget}
           setTradeTarget={setTradeTarget}
           campaignSettlementOptions={campaignSettlementOptions}

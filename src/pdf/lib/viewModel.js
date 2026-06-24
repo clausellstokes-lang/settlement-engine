@@ -32,6 +32,7 @@ import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { resolveMilitaryStress } from '../../domain/display/warStatusVocab.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
+import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -1099,14 +1100,22 @@ function relationshipsSlice(active) {
     crossConflicts:  s?.crossSettlementConflicts || [],
     crossNpcContacts: s?.crossSettlementNPCContacts || [],
     crossFactions:   s?.crossFactions || [],
-    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => ({
-      name: n?.neighbourName || n?.name || 'Neighbour',
-      type: n?.relationshipType || n?.type || null,
-      description: n?.description || null,
-      hooks: n?.plotHooks || [],
-      lastEvent: n?.lastEvent || null,
-      flavour: n?.flavour || n?.flavor || null,
-    })),
+    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => {
+      const name = n?.neighbourName || n?.name || 'Neighbour';
+      return {
+        name,
+        type: n?.relationshipType || n?.type || null,
+        // For the asymmetric pairs (overlord/vassal, patron/client), the
+        // directional label states WHICH SIDE this settlement is, naming the
+        // neighbour ("Overlord of X"); null for symmetric links / legacy rows,
+        // so the card keeps its plain titled label.
+        directionalLabel: directionalRelationshipLabel(n, name),
+        description: n?.description || null,
+        hooks: n?.plotHooks || [],
+        lastEvent: n?.lastEvent || null,
+        flavour: n?.flavour || n?.flavor || null,
+      };
+    }),
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],

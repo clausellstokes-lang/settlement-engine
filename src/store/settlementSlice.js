@@ -64,6 +64,8 @@ import {
   twinDirectiveForEvent,
 } from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
+import { WAR_STRESSOR_TYPES } from '../domain/worldPulse/warStressorTypes.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
@@ -219,6 +221,49 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
         });
       }
     } catch { /* the world half is best-effort */ }
+  }
+
+  // #2 — SIEGE/OCCUPATION INSTIGATOR → cross-settlement war deployment. On the
+  // IMMEDIATE ripple path (a clock-bound member commit; NOT the deferred 4b flush,
+  // which sets skipRegional), a DM-authored WAR-type stressor that names an
+  // instigating neighbour seeds a war_front instigator → THIS settlement, which the
+  // war layer resolves on the next Advance. GATED on the campaign's warLayerEnabled;
+  // standalone (campaign null) never reaches here, so it stays settlement-local.
+  // Best-effort + guarded: a seed failure must never undo the committed event.
+  if (!skipRegional
+      && campaign
+      && event?.type === 'APPLY_STRESSOR'
+      && event?.payload?.instigatorNeighbour
+      && typeof afterState.seedCampaignWarFront === 'function') {
+    try {
+      const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+      const rules = normalizeSimulationRules(campaign.worldState?.simulationRules);
+      if (rules.warLayerEnabled && WAR_STRESSOR_TYPES.includes(stressorType)) {
+        const instigatorRef = String(event.payload.instigatorNeighbour).trim();
+        // Resolve the instigator NAME/ID to a partner SAVE id off the home
+        // settlement's neighbourNetwork (each link carries the partner save `id`),
+        // then confirm that save is a MEMBER of this campaign. A non-member or
+        // unknown instigator falls back to today's settlement-local-only flip
+        // (already applied in mutate) — no cross-settlement deployment.
+        const network = afterState.settlement?.neighbourNetwork || [];
+        const link = network.find(n =>
+          String(n?.name || '') === instigatorRef
+          || String(n?.neighbourName || '') === instigatorRef
+          || String(n?.id || '') === instigatorRef
+          || String(n?.linkId || '') === instigatorRef);
+        const instigatorId = link?.id != null ? String(link.id) : null;
+        const memberIds = (campaign.settlementIds || []).map(String);
+        if (instigatorId && memberIds.includes(instigatorId)) {
+          const sinceTick = Math.max(0, Math.floor(Number(campaign.worldState?.tick) || 0));
+          afterState.seedCampaignWarFront(campaign.id, {
+            instigatorId,
+            targetId: String(activeSaveId),
+            sinceTick,
+            now: afterState.editedAt,
+          });
+        }
+      }
+    } catch { /* the war-front seed is best-effort; the committed event stands */ }
   }
 
   if (event?.partyCaused && campaign) {

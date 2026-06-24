@@ -20,7 +20,7 @@ export function buildEvent(form) {
     quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
     stressorPick, stressorSeverity, powerCause,
     tradeDirection, tradeEntrepot, swapWithNpcId,
-    isWarStressor, instigatorNeighbour, tradeTarget,
+    isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
     partyCaused, description,
   } = form;
 
@@ -83,11 +83,15 @@ export function buildEvent(form) {
     payload.label = stressorPick?.name || labelOfTarget(target);
     payload.severity = STRESSOR_SEVERITY_VALUES[stressorSeverity] ?? 0.6;
     if (stressorPick?.isCustom) payload.isCustom = true;
-    // #1 — optional instigating neighbour (only meaningful for a WAR-type
-    // stressor; the handler ignores it otherwise). Sours that neighbour to
-    // hostile on apply.
-    if (isWarStressor && instigatorNeighbour.trim()) {
+    // #1 / #3 — optional instigating neighbour. For a WAR-type stressor it sours
+    // that neighbour to hostile; for an INFILTRATION stressor it sours to the
+    // DM-chosen lighter relationship (rival / cold_war / hostile, default rival).
+    // The handler ignores the instigator on any other stressor type.
+    if ((isWarStressor || isInfiltrationStressor) && instigatorNeighbour.trim()) {
       payload.instigatorNeighbour = instigatorNeighbour.trim();
+      if (isInfiltrationStressor) {
+        payload.instigatorRelationship = instigatorRelationship || 'rival';
+      }
     }
   }
   if (type === 'CHANGE_RULING_POWER') {

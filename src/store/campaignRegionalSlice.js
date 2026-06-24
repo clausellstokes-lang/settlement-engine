@@ -14,6 +14,7 @@
  * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
  */
 import {
+  addRegionalChannels,
   advanceRegionalImpacts,
   advanceWizardNewsFeed,
   applyRegionalImpact,
@@ -22,6 +23,7 @@ import {
   deriveRegionalGraphFromSaves,
   ensureRegionalGraph,
   isRegionalImpactAvailable,
+  mintDirectedChannel,
   queueRegionalImpacts,
   setRegionalChannelStatus as domainSetRegionalChannelStatus,
   setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
@@ -30,10 +32,12 @@ import {
 import {
   ensureWorldState,
   normalizeStressor,
+  normalizeSimulationRules,
   proposalIdFor,
   resolveStressorById,
   upsertProposal,
 } from '../domain/worldPulse/index.js';
+import { stablePart } from '../domain/worldPulse/worldState.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
@@ -171,6 +175,75 @@ export const createCampaignRegionalSlice = (set, get) => ({
       persistCampaignState(state, campaignId);
     });
     return injected;
+  },
+
+  /**
+   * #2 — SEED a cross-settlement WAR FRONT from a DM-authored siege / occupation
+   * stressor that names an instigating neighbour, in a campaign with the war layer
+   * ON. The named INSTIGATOR deploys its army against the TARGET (this settlement),
+   * minting the exact ledger shape the war layer resolves on the next Advance:
+   *
+   *   1. a LIGHT deployment record on worldState.deployments[instigatorId]
+   *      ({ targetId, sinceTick, role:'siege' }) — the war layer's own
+   *      ensureStatefulRecord enriches it from the live capacity model on first
+   *      contact, so attrition / reinforcement / retirement all run unchanged;
+   *   2. a war_front channel instigator → target with WAR-LAYER provenance
+   *      (source:'war_layer_deploy'), so isLiveWarFront reads it as a real siege
+   *      rather than a phantom relationship front;
+   *   3. warPosture[instigatorId] = { state:'deployed' } so the posture ledger is
+   *      consistent (the army does not look like it sieges from peace).
+   *
+   * GATED on simulationRules.warLayerEnabled — a war-off campaign is a NO-OP
+   * (byte-identical, the dormancy oracle is preserved). IDEMPOTENT + honours the
+   * ENGINE'S ONE-ARMY INVARIANT: if the instigator already fields an army (already
+   * deployed) the seed is skipped entirely, never overwriting the live ledger.
+   *
+   * @param {string} campaignId
+   * @param {{ instigatorId?: string|number, targetId?: string|number, sinceTick?: number, now?: string|null }} [args]
+   * @returns {boolean} true when a fresh front was seeded; false on any no-op.
+   */
+  seedCampaignWarFront: (campaignId, { instigatorId, targetId, sinceTick = 0, now = null } = {}) => {
+    let seeded = false;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const instId = String(instigatorId || '');
+      const tgtId = String(targetId || '');
+      if (!instId || !tgtId || instId === tgtId) return;
+      // War layer OFF → no-op (no deployment ledger to seed onto).
+      const rules = normalizeSimulationRules(c.worldState?.simulationRules);
+      if (!rules.warLayerEnabled) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const deployments = { ...(worldState.deployments || {}) };
+      // ONE-ARMY INVARIANT: never overwrite a live deployment. If the instigator
+      // already fields an army (against anyone), leave the engine's ledger alone.
+      if (deployments[instId]) return;
+      const stamp = now || new Date().toISOString();
+      const tick = Math.max(0, Math.floor(Number(sinceTick) || 0));
+      // 1. LIGHT deployment record — enriched by the war layer on first contact.
+      deployments[instId] = { targetId: tgtId, sinceTick: tick, role: 'siege' };
+      // 3. posture ledger consistency: the army is in the field.
+      const warPosture = { ...(worldState.warPosture || {}) };
+      warPosture[instId] = { state: 'deployed', progress: 1, sinceTick: tick, covert: false };
+      c.worldState = { ...worldState, deployments, warPosture };
+      // 2. war_front channel WITH war-layer provenance, onto the campaign graph.
+      const channel = mintDirectedChannel({
+        type: 'war_front',
+        from: instId,
+        to: tgtId,
+        strength: 0.6,
+        confidence: 0.8,
+        explanation: `${instId} marches on ${tgtId}.`,
+        relationshipKey: `war_front.${stablePart(instId)}.${stablePart(tgtId)}`,
+        source: 'war_layer_deploy',
+        now: stamp,
+      });
+      c.regionalGraph = addRegionalChannels(ensureRegionalGraph(c.regionalGraph), [channel], { now: stamp });
+      c.updatedAt = stamp;
+      seeded = true;
+      persistCampaignState(state, campaignId);
+    });
+    return seeded;
   },
 
   /**
