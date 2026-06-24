@@ -58,6 +58,10 @@ const storeState = {
   isFounder: () => false,
   requestNarrative: vi.fn(() => Promise.resolve()),
   markExported: vi.fn(),
+  // Edit-mode-only surfaces (AIInlineCard) read these; stub so the edit branch
+  // mounts in the order tests below.
+  getCost: () => 1,
+  credits: 0,
 };
 
 vi.mock('../../src/store/index.js', () => {
@@ -118,6 +122,59 @@ function stickyRail(container) {
     (el) => el.style.position === 'sticky',
   );
 }
+
+afterEach(() => {
+  // Reset the edit-mode toggle the order tests flip, so it never leaks into the
+  // sticky-clearance cases (which assume the default read-only view).
+  storeState.editMode = false;
+});
+
+describe('SettlementDetail — edit-region order swap by editMode', () => {
+  // The dossier hero owns the sticky <aside>; the Workshop renders the first
+  // GroupCard <section data-testid="workshop-group-…">. Their relative document
+  // order is the observable contract: dossier-first in view, dossier-last in
+  // edit. compareDocumentPosition gives a wrapper-agnostic order check.
+  function firstWorkshopSection(container) {
+    return container.querySelector('section[data-testid^="workshop-group-"]');
+  }
+
+  test('view mode (editMode off): dossier hero precedes the Workshop', async () => {
+    installMatchMedia(false);
+    storeState.editMode = false;
+    const { container } = await renderDetail();
+    const rail = stickyRail(container);
+    const workshop = firstWorkshopSection(container);
+    expect(rail).toBeTruthy();
+    expect(workshop).toBeTruthy();
+    // DOCUMENT_POSITION_FOLLOWING (4) set on the rail→workshop comparison means
+    // the workshop comes AFTER the dossier rail — i.e. dossier-first.
+    expect(rail.compareDocumentPosition(workshop) & Node.DOCUMENT_POSITION_FOLLOWING)
+      .toBeTruthy();
+  });
+
+  test('edit mode (editMode on): the Workshop (edit surface) precedes the dossier hero', async () => {
+    installMatchMedia(false);
+    storeState.editMode = true;
+    const { container } = await renderDetail();
+    const rail = stickyRail(container);
+    const workshop = firstWorkshopSection(container);
+    expect(rail).toBeTruthy();
+    expect(workshop).toBeTruthy();
+    // DOCUMENT_POSITION_PRECEDING (2) means the workshop comes BEFORE the
+    // dossier rail — the edit surface has risen above the dossier hero.
+    expect(rail.compareDocumentPosition(workshop) & Node.DOCUMENT_POSITION_PRECEDING)
+      .toBeTruthy();
+  });
+
+  test('both modes mount without throwing', async () => {
+    installMatchMedia(false);
+    storeState.editMode = false;
+    expect((await renderDetail()).container).toBeTruthy();
+    cleanup();
+    storeState.editMode = true;
+    expect((await renderDetail()).container).toBeTruthy();
+  });
+});
 
 describe('SettlementDetail — NextActionRail sticky-top clearance', () => {
   test('desktop: sticky top stays the bare breathing gap (CHROME.stickyTop)', async () => {

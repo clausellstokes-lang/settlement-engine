@@ -40,8 +40,14 @@ const PANEL_PATH = join(COMPONENTS_ROOT, 'ChroniclePanel.jsx');
 // per-file filter below.
 const renderSite = () => /<ChroniclePanel\b/g;
 
-const EDIT_GATE_OPEN = '{editMode && (<div';
-const EDIT_GATE_CLOSE = '</div>)}';
+// The edit-above-dossier reorg (2026-06-23) extracted the edit blocks to const
+// element refs rendered in an `editMode ? <>…</> : <>…</>` ternary, so the edit
+// body is now `const editBody = editMode && (<div…)` (closing `</div>);`) rather
+// than an inline `{editMode && (<div…)}` block. ChroniclePanel still lives inside
+// editBody — `editMode &&`-guarded and excluded from the view-mode (false) branch,
+// so it remains exclusively edit-mode chrome.
+const EDIT_GATE_OPEN = 'const editBody = editMode && (<div';
+const EDIT_GATE_CLOSE = '</div>);';
 
 function walk(dir) {
   return readdirSync(dir).flatMap(entry => {
