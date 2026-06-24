@@ -10,9 +10,6 @@ export { getBaseChance } from './institutionProbability.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 
-// RELATION_TYPES re-exported as alias so existing importers don't break.
-export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
-
 /**
  * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).
  * Same construction as domain/region/contestMath.hash01 (kept local so this
