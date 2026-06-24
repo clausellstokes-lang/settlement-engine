@@ -372,7 +372,17 @@ export default function App() {
     <>
       <CampaignSyncBanner />
       <div
-        className={`parchment-bg${pageBg.clean ? '' : ' page-bg'}${pageBg.isFlow ? ' is-flow' : ''}`}
+        // Painted clean views (settlements/gallery/compendium/pricing/account/
+        // admin/howto) get `.page-painted scrim-<profile>`: a flat-cream header
+        // band fading into the per-image painting (see index.css + the
+        // scrimProfile from pageBackgrounds.js). `clean` stays for back-compat;
+        // `paintedBelowHeader` is the new truth (false for home's dark hero).
+        className={[
+          'parchment-bg',
+          pageBg.clean ? '' : 'page-bg',
+          pageBg.isFlow ? 'is-flow' : '',
+          pageBg.paintedBelowHeader ? `page-painted scrim-${pageBg.scrimProfile}` : '',
+        ].filter(Boolean).join(' ')}
         style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
 

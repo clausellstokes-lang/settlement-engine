@@ -121,6 +121,90 @@ button {
     var(--card-bg, none);
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+   Painted clean-view pages (config/pageBackgrounds.js → CLEAN_VIEWS).
+   ONE mechanism: a clean cream HEADER BAND fades into the per-image
+   painting, which fills the content region (page margins + card gaps).
+   App.jsx puts `.page-painted` + a scrim-profile class on the wrapper and
+   sets --page-bg. ALL scrim COLOR lives here (CSS allows raw rgba; the
+   visual-budget lint only governs hex in JS style props), so no raw color
+   leaks into JS. --header-zone is the solid-cream depth before the fade.
+
+   The fade is deliberately SOFT (--fade-span) so the fixed --header-zone
+   constant tolerates per-page header-height variance: a header a little
+   taller/shorter than the constant only shifts where cream is 100% vs the
+   floor — it never produces a hard seam or exposes the painting under the
+   bare PageHeader text. That softness is the core fragility mitigation.
+   ───────────────────────────────────────────────────────────────────── */
+.page-painted {
+  --header-zone: clamp(180px, 22vh, 260px);   /* solid-cream depth        */
+  --fade-span: 120px;                         /* soft easing distance     */
+  /* Per-image content scrim (overridden by the profile classes below).
+     The two cream stops are the floor/ceiling opacity over the painting in
+     the CONTENT region. The vertical fade interpolates from solid cream at
+     the header zone down to these stops. */
+  --scrim-top: 1;                             /* solid cream at page top   */
+  --scrim-fade-end: 0.62;                     /* cream at end of the fade  */
+  --scrim-floor: 0.56;                        /* cream over content body   */
+  background-color: #f7f0e4;
+  background-image:
+    /* (1) vertical fade: opaque cream over the header zone, easing down. */
+    linear-gradient(
+      to bottom,
+      rgba(247, 240, 228, var(--scrim-top))      0,
+      rgba(247, 240, 228, var(--scrim-top))      var(--header-zone),
+      rgba(247, 240, 228, var(--scrim-fade-end)) calc(var(--header-zone) + var(--fade-span)),
+      rgba(247, 240, 228, var(--scrim-floor))    calc(var(--header-zone) + var(--fade-span)),
+      rgba(247, 240, 228, var(--scrim-floor))    100%
+    ),
+    /* (2) the painting. */
+    var(--page-bg, none);
+  background-size: cover, cover;
+  background-position: center top, center top;
+  background-attachment: scroll, fixed;       /* fade scrolls; art is fixed */
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* PER-IMAGE SCRIM PROFILES — tune how much painting shows in the content
+   region for each art-direction class. The header zone stays solid (=1) on
+   every profile, so bare PageHeader text keeps the flat-cream AA baseline. */
+
+/* BUSY edge-to-edge, no calm region → strongest scrim (gallery, settlements):
+   a card-gap never frames clutter; the painting reads as a quiet texture. */
+.page-painted.scrim-busy { --scrim-fade-end: 0.74; --scrim-floor: 0.70; }
+
+/* UNIFORMLY DARK → cream scrim reads naturally, can show more (compendium). */
+.page-painted.scrim-dark { --scrim-fade-end: 0.60; --scrim-floor: 0.54; }
+
+/* LIGHT calm region → cream-on-light is the failure mode; keep the header
+   band solid and hold the content cream high so any non-card prose stays AA
+   (pricing, account/admin, about). */
+.page-painted.scrim-calm { --scrim-fade-end: 0.68; --scrim-floor: 0.62; }
+
+/* Mobile: the painting is mostly hidden behind stacked full-width cards, and
+   a fixed bg can jank on iOS — fall to scroll + a hair more cream. */
+@media (max-width: 768px) {
+  .page-painted {
+    background-attachment: scroll, scroll;
+    --scrim-floor: calc(0.04 + var(--scrim-floor));
+  }
+}
+
+/* ── Dark-hero variant — folds HomeLanding's inline ink scrim into the same
+   system (OPPOSITE polarity: dark ink, not cream). The hero band sets
+   --page-bg=create.jpg and adds `.hero-dark`; the radial keeps the centred
+   headline dark (where the desk's blank parchment sits) while the desk edges
+   stay visible. No raw color in JS — the ink scrim lives here. */
+.hero-dark {
+  background-color: #1b1408;                  /* INK, as a flat fallback   */
+  background-image:
+    radial-gradient(ellipse at center,
+      rgba(27, 20, 8, 0.84) 30%, rgba(27, 20, 8, 0.60) 100%),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
