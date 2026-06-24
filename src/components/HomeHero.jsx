@@ -33,7 +33,7 @@ import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
-import { GOLD, GOLD_TXT, INK, BODY, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, DANGER_BORDER, LANDING_MAX, swatch } from './theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, DANGER_BORDER, LANDING_MAX, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -283,43 +283,6 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         ))}
       </div>
 
-      {/* ── Anon size-ceiling upsell bar ──────────────────────────────────
-          A quiet gold-left-border strip between the size pills and the forge
-          CTA, shown to anonymous visitors who have not yet hit the daily cap.
-          It states the anon size ceiling and offers a right-aligned ghost
-          Sign in, staying subordinate to the primary forge button below (no
-          competing fill). Reuses the GOLD/BORDER `wrap` treatment from
-          PlaceInRegionCard. Copy comes from the existing registry. */}
-      {isAnon && !atCap && (
-        <div
-          style={{
-            display: 'flex', alignItems: 'center', gap: SP.md,
-            maxWidth: 520, margin: `${SP.lg}px auto 0`,
-            padding: `${SP.sm}px ${SP.md}px`,
-            border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
-            borderRadius: R.lg, background: CARD,
-            textAlign: 'left',
-          }}
-        >
-          <span style={{
-            flex: 1, fontFamily: sans, fontSize: FS.sm,
-            color: BODY, lineHeight: 1.5,
-          }}>
-            {t('hero.note')}
-          </span>
-          {onSignIn && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={onSignIn}
-              style={{ flexShrink: 0, color: GOLD_TXT, textDecoration: 'underline', minHeight: 44 }}
-            >
-              {t('hero.anonCap.signin')}
-            </Button>
-          )}
-        </div>
-      )}
 
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xxl }}>
@@ -459,6 +422,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           )}
         </p>
       )}
+
     </section>
     </>
   );
