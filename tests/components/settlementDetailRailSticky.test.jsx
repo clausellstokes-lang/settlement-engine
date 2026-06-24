@@ -129,21 +129,27 @@ afterEach(() => {
   storeState.editMode = false;
 });
 
-describe('SettlementDetail — edit-region order swap by editMode', () => {
+describe('SettlementDetail — read / edit surface split by editMode', () => {
+  // The contract changed from an order-swap to a one-surface-per-mode split:
+  //   • READ (editMode off): the dossier hero renders (its sticky <aside> rail
+  //     present). For a free/anon user (canEdit false, the store mock's tier)
+  //     the Workshop teaser ALSO renders — a free user can't enter edit mode, so
+  //     it must stay reachable. Dossier still precedes the teaser Workshop.
+  //   • EDIT (editMode on): ONLY the authoring workbench renders. The dossier
+  //     hero (and thus the sticky rail) is NOT mounted; the Workshop IS present.
   // The dossier hero owns the sticky <aside>; the Workshop renders the first
-  // GroupCard <section data-testid="workshop-group-…">. Their relative document
-  // order is the observable contract: dossier-first in view, dossier-last in
-  // edit. compareDocumentPosition gives a wrapper-agnostic order check.
+  // GroupCard <section data-testid="workshop-group-…">.
   function firstWorkshopSection(container) {
     return container.querySelector('section[data-testid^="workshop-group-"]');
   }
 
-  test('view mode (editMode off): dossier hero precedes the Workshop', async () => {
+  test('read mode (editMode off, free user): dossier hero renders and precedes the Workshop teaser', async () => {
     installMatchMedia(false);
     storeState.editMode = false;
     const { container } = await renderDetail();
     const rail = stickyRail(container);
     const workshop = firstWorkshopSection(container);
+    // Free/anon (canEdit false): dossier + reachable Workshop teaser both mount.
     expect(rail).toBeTruthy();
     expect(workshop).toBeTruthy();
     // DOCUMENT_POSITION_FOLLOWING (4) set on the rail→workshop comparison means
@@ -152,18 +158,20 @@ describe('SettlementDetail — edit-region order swap by editMode', () => {
       .toBeTruthy();
   });
 
-  test('edit mode (editMode on): the Workshop (edit surface) precedes the dossier hero', async () => {
+  test('edit mode (editMode on): only the workbench renders — Workshop present, dossier rail absent', async () => {
     installMatchMedia(false);
     storeState.editMode = true;
+    // canEdit must be true for an owner to actually be in edit mode.
+    storeState.auth = { tier: 'premium', user: { id: 'u1' } };
     const { container } = await renderDetail();
     const rail = stickyRail(container);
     const workshop = firstWorkshopSection(container);
-    expect(rail).toBeTruthy();
+    // The read dossier (and its sticky rail) no longer trails the workbench.
+    expect(rail).toBeFalsy();
+    // The authoring Workshop is the surface that renders in edit mode.
     expect(workshop).toBeTruthy();
-    // DOCUMENT_POSITION_PRECEDING (2) means the workshop comes BEFORE the
-    // dossier rail — the edit surface has risen above the dossier hero.
-    expect(rail.compareDocumentPosition(workshop) & Node.DOCUMENT_POSITION_PRECEDING)
-      .toBeTruthy();
+    // Restore the default anon tier for the remaining cases.
+    storeState.auth = { tier: 'anon', user: null };
   });
 
   test('both modes mount without throwing', async () => {
