@@ -105,8 +105,13 @@ describe('AuthPanel — OAuth withheld on sign-up', () => {
     expect(screen.getByRole('button', { name: /continue with discord/i })).toBeTruthy();
   });
 
-  it('keeps the email sign-in link available on sign-up', async () => {
+  it('withholds the email sign-in link on sign-up (account creation is password-only)', async () => {
     await renderPanel('signup');
+    expect(screen.queryByRole('button', { name: /email/i })).toBeNull();
+  });
+
+  it('keeps the email sign-in link available on sign-in', async () => {
+    await renderPanel('signin');
     expect(screen.getByRole('button', { name: /email/i })).toBeTruthy();
   });
 });
