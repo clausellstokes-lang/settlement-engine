@@ -79,7 +79,7 @@ import {
 } from './campaignSliceShared.js';
 import {
   capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
-  restorePulseSnapshot,
+  restorePulseSnapshot, applyWarFrontSeed,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
@@ -278,6 +278,42 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         }
         if ('deferredImpacts' in c.worldState) {
           c.worldState = { ...c.worldState, deferredImpacts: [] };
+        }
+      }
+      // #2.2 — DRAIN any deferred WAR-FRONT seeds (parked by campaign-member
+      // change-queue commits of a siege/occupation stressor since the last
+      // Advance) into real seedCampaignWarFront calls EXACTLY ONCE, then clear
+      // the bucket. This is the consume-side of the war-front deferral: the
+      // commit did NOT seed live (it ran with skipRegional), it only stashed the
+      // intent on worldState.deferredWarFronts. Done HERE — in the Phase-1
+      // producer, mutating this draft's worldState.deployments + regionalGraph
+      // BEFORE the post-drain clone (cloneJson below) and BEFORE evaluateWarLayer
+      // reads them — so the seeded siege is processed/retired by THIS SAME
+      // Advance, identical to the immediate path one tick earlier. The bucket is
+      // cleared FIRST (before the loop) so even a throw mid-loop cannot leave
+      // entries for a second drain (and the Phase-1 rollback restores the full
+      // pre-drain snapshot anyway). A SECOND Advance finds [] → seeds nothing.
+      // seedCampaignWarFront's own guards (war-off no-op, one-army invariant,
+      // self-target no-op) make a duplicate-or-stale entry a structural no-op.
+      {
+        const fronts = Array.isArray(c.worldState.deferredWarFronts) ? c.worldState.deferredWarFronts : [];
+        if ('deferredWarFronts' in c.worldState) {
+          c.worldState = { ...c.worldState, deferredWarFronts: [] };
+        }
+        for (const f of fronts) {
+          // Mutate THIS draft `c` directly via the shared seed primitive (NOT the
+          // set()-based seedCampaignWarFront action — a nested set inside this
+          // producer would write a separate update that this producer's draft
+          // would clobber). applyWarFrontSeed is the SAME code the immediate
+          // action runs, so the seeded ledger is byte-identical; it lands on the
+          // draft cloned for the pure pulse below (simCampaign), and is read by
+          // evaluateWarLayer THIS Advance.
+          applyWarFrontSeed(c, {
+            instigatorId: f.instigatorId,
+            targetId: f.targetId,
+            sinceTick: f.sinceTick,
+            now,
+          });
         }
       }
       // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)

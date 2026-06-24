@@ -179,6 +179,44 @@ function computeRegionalRipple({ afterState, campaign, event, beforeEnvelope, be
   });
 }
 
+/**
+ * #2 — Resolve a DM-authored siege / occupation stressor to a CROSS-SETTLEMENT
+ * war-front seed intent, SHARED by the immediate-ripple path and the deferred
+ * change-queue stash path so the two cannot drift. Reads the gate (war-type
+ * stressor + warLayerEnabled) and resolves the named instigator NAME/ID to a
+ * partner SAVE id off the home settlement's live neighbourNetwork, confirming
+ * that save is a MEMBER of this campaign. A war-off campaign, a non-war
+ * stressor, or a non-member / unknown instigator all resolve to null (the
+ * caller falls back to the settlement-local-only flip already applied in
+ * mutate). Pure read — no store writes — so both callers stay byte-stable.
+ *
+ * @param {{ afterState: any, campaign: any, event: any, activeSaveId: string|number }} args
+ * @returns {{ instigatorId: string, targetId: string, sinceTick: number } | null}
+ */
+function resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId }) {
+  if (!(campaign
+      && event?.type === 'APPLY_STRESSOR'
+      && event?.payload?.instigatorNeighbour)) return null;
+  const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+  const rules = normalizeSimulationRules(campaign.worldState?.simulationRules);
+  if (!rules.warLayerEnabled || !WAR_STRESSOR_TYPES.includes(stressorType)) return null;
+  const instigatorRef = String(event.payload.instigatorNeighbour).trim();
+  // Resolve the instigator NAME/ID to a partner SAVE id off the home
+  // settlement's neighbourNetwork (each link carries the partner save `id`),
+  // then confirm that save is a MEMBER of this campaign.
+  const network = afterState.settlement?.neighbourNetwork || [];
+  const link = network.find(n =>
+    String(n?.name || '') === instigatorRef
+    || String(n?.neighbourName || '') === instigatorRef
+    || String(n?.id || '') === instigatorRef
+    || String(n?.linkId || '') === instigatorRef);
+  const instigatorId = link?.id != null ? String(link.id) : null;
+  const memberIds = (campaign.settlementIds || []).map(String);
+  if (!instigatorId || !memberIds.includes(instigatorId)) return null;
+  const sinceTick = Math.max(0, Math.floor(Number(campaign.worldState?.tick) || 0));
+  return { instigatorId, targetId: String(activeSaveId), sinceTick };
+}
+
 function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState, skipRegional = false }) {
   // Regional (cross-settlement) half. Skipped on a campaign-member commit — the
   // flush computes + DEFERS these impacts instead (Fork 2 / Mechanism B), so the
@@ -232,36 +270,16 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
   // Best-effort + guarded: a seed failure must never undo the committed event.
   if (!skipRegional
       && campaign
-      && event?.type === 'APPLY_STRESSOR'
-      && event?.payload?.instigatorNeighbour
       && typeof afterState.seedCampaignWarFront === 'function') {
     try {
-      const stressorType = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
-      const rules = normalizeSimulationRules(campaign.worldState?.simulationRules);
-      if (rules.warLayerEnabled && WAR_STRESSOR_TYPES.includes(stressorType)) {
-        const instigatorRef = String(event.payload.instigatorNeighbour).trim();
-        // Resolve the instigator NAME/ID to a partner SAVE id off the home
-        // settlement's neighbourNetwork (each link carries the partner save `id`),
-        // then confirm that save is a MEMBER of this campaign. A non-member or
-        // unknown instigator falls back to today's settlement-local-only flip
-        // (already applied in mutate) — no cross-settlement deployment.
-        const network = afterState.settlement?.neighbourNetwork || [];
-        const link = network.find(n =>
-          String(n?.name || '') === instigatorRef
-          || String(n?.neighbourName || '') === instigatorRef
-          || String(n?.id || '') === instigatorRef
-          || String(n?.linkId || '') === instigatorRef);
-        const instigatorId = link?.id != null ? String(link.id) : null;
-        const memberIds = (campaign.settlementIds || []).map(String);
-        if (instigatorId && memberIds.includes(instigatorId)) {
-          const sinceTick = Math.max(0, Math.floor(Number(campaign.worldState?.tick) || 0));
-          afterState.seedCampaignWarFront(campaign.id, {
-            instigatorId,
-            targetId: String(activeSaveId),
-            sinceTick,
-            now: afterState.editedAt,
-          });
-        }
+      const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId });
+      if (seed) {
+        afterState.seedCampaignWarFront(campaign.id, {
+          instigatorId: seed.instigatorId,
+          targetId: seed.targetId,
+          sinceTick: seed.sinceTick,
+          now: afterState.editedAt,
+        });
       }
     } catch { /* the war-front seed is best-effort; the committed event stands */ }
   }
@@ -1905,6 +1923,28 @@ export const createSettlementSlice = (set, get) => ({
       if (result && result.impacts.length > 0) {
         afterState.stashDeferredRegionalImpacts(campaign.id, result.impacts);
       }
+    }
+
+    // Phase 4b — campaign-member commit: the #2 war-front seed half. The immediate
+    // ripple path seeds eagerly via seedCampaignWarFront, but under flushApplyLocalOnly
+    // rippleEventThroughWorld ran with skipRegional, so the seed was NOT fired. Resolve
+    // the seed intent HERE (the home settlement's neighbourNetwork is live during the
+    // flush replay) and STASH it onto worldState.deferredWarFronts. It is NOT seeded
+    // live — the next Advance drains the bucket and calls seedCampaignWarFront exactly
+    // once, BEFORE the war layer, so the seeded siege is read + retired by that Advance.
+    if (afterState.flushApplyLocalOnly && campaign
+        && typeof afterState.stashDeferredWarFront === 'function') {
+      try {
+        const seed = resolveCampaignWarFrontSeed({ afterState, campaign, event, activeSaveId });
+        if (seed) {
+          afterState.stashDeferredWarFront(campaign.id, {
+            instigatorId: seed.instigatorId,
+            targetId: seed.targetId,
+            stressorType: 'siege',
+            sinceTick: seed.sinceTick,
+          });
+        }
+      } catch { /* the deferred war-front stash is best-effort; the committed event stands */ }
     }
 
     return logEntry;

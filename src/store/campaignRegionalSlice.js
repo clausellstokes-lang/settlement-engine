@@ -14,7 +14,6 @@
  * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
  */
 import {
-  addRegionalChannels,
   advanceRegionalImpacts,
   advanceWizardNewsFeed,
   applyRegionalImpact,
@@ -23,7 +22,6 @@ import {
   deriveRegionalGraphFromSaves,
   ensureRegionalGraph,
   isRegionalImpactAvailable,
-  mintDirectedChannel,
   queueRegionalImpacts,
   setRegionalChannelStatus as domainSetRegionalChannelStatus,
   setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
@@ -32,12 +30,10 @@ import {
 import {
   ensureWorldState,
   normalizeStressor,
-  normalizeSimulationRules,
   proposalIdFor,
   resolveStressorById,
   upsertProposal,
 } from '../domain/worldPulse/index.js';
-import { stablePart } from '../domain/worldPulse/worldState.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
@@ -47,7 +43,7 @@ import {
 } from './campaignSliceShared.js';
 import {
   campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
-  ensureCampaignWizardNews, campaignClockTick,
+  ensureCampaignWizardNews, campaignClockTick, applyWarFrontSeed,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
@@ -207,40 +203,14 @@ export const createCampaignRegionalSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const instId = String(instigatorId || '');
-      const tgtId = String(targetId || '');
-      if (!instId || !tgtId || instId === tgtId) return;
-      // War layer OFF → no-op (no deployment ledger to seed onto).
-      const rules = normalizeSimulationRules(c.worldState?.simulationRules);
-      if (!rules.warLayerEnabled) return;
-      const worldState = ensureWorldState(c.worldState, c);
-      const deployments = { ...(worldState.deployments || {}) };
-      // ONE-ARMY INVARIANT: never overwrite a live deployment. If the instigator
-      // already fields an army (against anyone), leave the engine's ledger alone.
-      if (deployments[instId]) return;
       const stamp = now || new Date().toISOString();
-      const tick = Math.max(0, Math.floor(Number(sinceTick) || 0));
-      // 1. LIGHT deployment record — enriched by the war layer on first contact.
-      deployments[instId] = { targetId: tgtId, sinceTick: tick, role: 'siege' };
-      // 3. posture ledger consistency: the army is in the field.
-      const warPosture = { ...(worldState.warPosture || {}) };
-      warPosture[instId] = { state: 'deployed', progress: 1, sinceTick: tick, covert: false };
-      c.worldState = { ...worldState, deployments, warPosture };
-      // 2. war_front channel WITH war-layer provenance, onto the campaign graph.
-      const channel = mintDirectedChannel({
-        type: 'war_front',
-        from: instId,
-        to: tgtId,
-        strength: 0.6,
-        confidence: 0.8,
-        explanation: `${instId} marches on ${tgtId}.`,
-        relationshipKey: `war_front.${stablePart(instId)}.${stablePart(tgtId)}`,
-        source: 'war_layer_deploy',
-        now: stamp,
-      });
-      c.regionalGraph = addRegionalChannels(ensureRegionalGraph(c.regionalGraph), [channel], { now: stamp });
+      // Delegate the ledger + graph + posture mutation to the SHARED seed primitive
+      // (applyWarFrontSeed in campaignPulseHelpers) — the SAME code the deferred
+      // Advance drain runs, so the immediate and deferred seeds cannot drift. All
+      // of the guards (war-off, one-army invariant, self-target) live in there.
+      seeded = applyWarFrontSeed(c, { instigatorId, targetId, sinceTick, now: stamp });
+      if (!seeded) return;
       c.updatedAt = stamp;
-      seeded = true;
       persistCampaignState(state, campaignId);
     });
     return seeded;

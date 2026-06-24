@@ -241,6 +241,10 @@ export function createChangeQueueSlice(set, get) {
         return {
           id: c.id,
           deferredImpacts: cloneJson(c.worldState?.deferredImpacts) || [],
+          // #2.2 — also snapshot the deferred WAR-FRONT bucket so a FAILED commit
+          // leaves no half-staged war-front intent behind (the stash mutates
+          // worldState.deferredWarFronts during the flush replay).
+          deferredWarFronts: cloneJson(c.worldState?.deferredWarFronts) || [],
           regionalGraph: cloneJson(c.regionalGraph) || null,
         };
       })();
@@ -431,7 +435,13 @@ export function createChangeQueueSlice(set, get) {
           if (preCampaign) {
             const c = (state.campaigns || []).find(x => String(x.id) === String(preCampaign.id));
             if (c) {
-              if (c.worldState) c.worldState = { ...c.worldState, deferredImpacts: preCampaign.deferredImpacts };
+              if (c.worldState) {
+                c.worldState = {
+                  ...c.worldState,
+                  deferredImpacts: preCampaign.deferredImpacts,
+                  deferredWarFronts: preCampaign.deferredWarFronts,
+                };
+              }
               if (preCampaign.regionalGraph) c.regionalGraph = preCampaign.regionalGraph;
             }
           }

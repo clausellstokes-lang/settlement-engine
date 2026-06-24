@@ -800,6 +800,53 @@ export const createCampaignSlice = (set, get) => {
   },
 
   /**
+   * Phase 4b (#2.2) — STASH a deferred WAR-FRONT seed intent parked by a
+   * clock-bound campaign-member change-queue commit (a DM-authored siege /
+   * occupation stressor naming a member instigator). The IMMEDIATE ripple path
+   * seeds eagerly via seedCampaignWarFront, but a member commit runs with
+   * skipRegional, so the seed is deferred: this records the resolved intent on
+   * worldState.deferredWarFronts, which advanceCampaignWorld drains EXACTLY ONCE
+   * (BEFORE evaluateWarLayer) into a real seedCampaignWarFront call. A parallel
+   * bucket to deferredImpacts on purpose — a war-front seed is a deployment +
+   * graph write, NOT a queued regional impact, so it must not flow through
+   * queueRegionalImpacts. De-duped by `${instigatorId}->${targetId}` so a
+   * failed-then-retried flush parks ONE entry. Does NOT bump the tick and does
+   * NOT persist (the 069 RPC carries this worldState snapshot atomically with
+   * the settlement rows, mirroring the deferredImpacts stash).
+   * @param {string} campaignId
+   * @param {{ instigatorId: string, targetId: string, stressorType?: string, sinceTick?: number }} entry
+   * @returns {number} the deferred-war-front count after the stash (0 = no-op)
+   */
+  stashDeferredWarFront: (campaignId, entry) => {
+    if (!campaignId || !entry || !entry.instigatorId || !entry.targetId) return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredWarFronts) ? worldState.deferredWarFronts : [];
+      // De-dupe by instigator→target so a re-commit of the same staged siege
+      // (e.g. a failed-then-retried flush) cannot park two copies of one front.
+      const byKey = new Map(existing.map(f => [`${String(f.instigatorId)}->${String(f.targetId)}`, f]));
+      const normalized = {
+        instigatorId: String(entry.instigatorId),
+        targetId: String(entry.targetId),
+        stressorType: String(entry.stressorType || 'siege'),
+        sinceTick: Math.max(0, Math.floor(Number(entry.sinceTick) || 0)),
+      };
+      byKey.set(`${normalized.instigatorId}->${normalized.targetId}`, normalized);
+      const deferredWarFronts = [...byKey.values()];
+      count = deferredWarFronts.length;
+      c.worldState = { ...worldState, deferredWarFronts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
    * Phase 4b — the Realm cue count: how many DISTINCT member settlements have a
    * committed-but-not-yet-propagated change waiting for the next Advance.
    * Counted off the deferred impacts' source settlement (each impact carries the
