@@ -29,17 +29,25 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
       <div style={{
         margin: `-${padTop}px -${padH}px 0`,
         backgroundColor: INK,
-        backgroundImage: `linear-gradient(rgba(27,20,8,0.58), rgba(27,20,8,0.74)), ${backgroundImageUrl('city')}`,
+        // The cartographer's-desk parchment (create.jpg, shared with the Create
+        // page) replaces the deleted city image. A RADIAL scrim is darkest behind
+        // the centred headline (where the desk's blank light parchment sits) and
+        // eases toward the edges, so the maps / books / quill stay visible while
+        // the cream text keeps its contrast.
+        backgroundImage: `radial-gradient(ellipse at center, rgba(27,20,8,0.84) 30%, rgba(27,20,8,0.6) 100%), ${backgroundImageUrl('create')}`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: isMobile ? `${SP.xxl}px ${SP.lg}px` : `${SP.xxl + SP.xl}px ${SP.xl}px`, textAlign: 'center' }}>
           {/* Hero headline steps down on mobile (FS['28']) to reclaim above-the-fold
               height on a phone; desktop stays at FS['36'] byte-identical. */}
-          <h1 style={{ margin: 0, fontFamily: serif_, fontSize: isMobile ? FS['28'] : FS['36'], fontWeight: 600, color: PARCH_100, lineHeight: 1.1, maxWidth: 760, marginInline: 'auto' }}>
-            Your players have a thousand choices. Now you have every answer.
+          <h1 style={{ margin: 0, fontFamily: serif_, fontSize: isMobile ? FS['28'] : FS['36'], fontWeight: 600, color: PARCH_100, lineHeight: 1.1, maxWidth: 760, marginInline: 'auto', textShadow: '0 2px 10px rgba(0,0,0,0.55)' }}>
+            Your players have a thousand choices.
+            {/* The payoff sentence sits on its own line, set a hair apart, so it
+                reads as a clean turn rather than wrapping mid-phrase. */}
+            <span style={{ display: 'block', marginTop: SP.xs }}>Now you have every answer.</span>
           </h1>
-          <p style={{ margin: `${SP.lg}px auto ${SP.xl}px`, maxWidth: 620, fontFamily: serif_, fontSize: FS.xxl, fontStyle: 'italic', color: 'rgba(244,234,208,0.85)', lineHeight: 1.6 }}>
+          <p style={{ margin: `${SP.lg}px auto ${SP.xl}px`, maxWidth: 620, fontFamily: serif_, fontSize: FS.xxl, fontStyle: 'italic', color: 'rgba(244,234,208,0.85)', lineHeight: 1.6, textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
             SettlementForge generates living towns: economies, people, tensions, and history. Then it simulates how they change. Not a dice roll. A world that holds together.
           </p>
           <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap' }}>
