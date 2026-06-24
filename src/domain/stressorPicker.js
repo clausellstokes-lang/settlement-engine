@@ -124,5 +124,11 @@ export function buildStressorPickerItems(existingStresses = [], customStressors 
     });
   }
 
-  return items.sort((a, b) => a.name.localeCompare(b.name));
+  // Group by category (Settlement -> Campaign -> Custom) then alphabetical within
+  // each, so related stressors sit together in the picker and are easier to scan,
+  // without needing visible group headers.
+  const CATEGORY_ORDER = { Settlement: 0, Campaign: 1, Custom: 2 };
+  return items.sort((a, b) =>
+    (CATEGORY_ORDER[a.category] ?? 99) - (CATEGORY_ORDER[b.category] ?? 99)
+    || a.name.localeCompare(b.name));
 }
