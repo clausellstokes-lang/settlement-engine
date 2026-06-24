@@ -1,12 +1,17 @@
 import { CARD_ALT, FS, GOLD, PARCH, serif_ } from '../theme.js';
 import { fallbackInitial } from './galleryUtils.js';
+import { tierBackdrop } from '../../lib/tierBackdrop.js';
 
 export default function GalleryImage({ item, height = 170, fallbackHeight }) {
-  if (item?.imageUrl) {
+  // A user-uploaded image always wins; otherwise fall back to the tier's default
+  // backdrop so an un-imaged share still reads as the kind of place it is. The
+  // gradient-initial below is the last resort (no image AND an unknown tier).
+  const src = item?.imageUrl || tierBackdrop(item?.tier);
+  if (src) {
     return (
       <img
-        src={item.imageUrl}
-        alt={item.imageAlt || item.name || 'Settlement image'}
+        src={src}
+        alt={item?.imageAlt || item?.name || 'Settlement image'}
         loading="lazy"
         style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: CARD_ALT }}
       />

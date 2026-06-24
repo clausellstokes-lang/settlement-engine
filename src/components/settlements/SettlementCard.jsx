@@ -4,6 +4,7 @@ import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, MoreVertical, Trash2}
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 import { GOLD, GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, CARD, FS, SP, swatch } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
+import { tierBackdrop } from '../../lib/tierBackdrop.js';
 import { canonPhaseOf } from './helpers.js';
 import { settlementSignals, healthPip } from './livingWorldSignals.js';
 import { relColor } from './relationshipColors.js';
@@ -127,6 +128,19 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               style={{ width:16, height:16, flexShrink:0, cursor: active ? 'pointer' : 'not-allowed', accentColor: GOLD }}
             />
           </label>
+        )}
+        {/* Tier backdrop thumbnail — a small "what kind of place" cue. Modest by
+            design so it supports rather than competes with the name (the card's
+            one focal point). alt="" because the tier already reads as text beside
+            the name, so the image is decorative for screen readers; omitted for an
+            unknown tier so the dense row stays clean. */}
+        {tierBackdrop(s.tier) && (
+          <img
+            src={tierBackdrop(s.tier)}
+            alt=""
+            loading="lazy"
+            style={{ width:72, height:48, objectFit:'cover', borderRadius:6, flexShrink:0, border:`1px solid ${BORDER}`, opacity: active ? 1 : 0.6 }}
+          />
         )}
         <div style={{ flex:1, minWidth:0 }}>
           {/* Identity tier — name + tier suffix + health, tight. The name is a

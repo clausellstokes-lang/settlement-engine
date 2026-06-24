@@ -13,7 +13,7 @@
  * All copy lives in en.js (valueLadder / aboutLiving). Pure presentational.
  */
 
-import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, PROSE_MAX, SP, serif_, FS, swatch } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
 import { t, tx } from '../../copy/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import Button from '../primitives/Button.jsx';
@@ -137,6 +137,19 @@ export default function LivingWorldTab() {
           {t('aboutLiving.thesisSub')}
         </p>
       </div>
+
+      {/* Settlement Progression — the six tiers as foundational world context,
+          before the value-ladder pitch. The infographic is self-contained (its
+          title and per-tier descriptions are baked into the art); the alt carries
+          the same progression for screen readers, so no visible caption is needed. */}
+      <figure style={{ margin: `0 0 ${SP.xl}px`, maxWidth: 1000 }}>
+        <img
+          src="/backgrounds/settlement-progression.jpg"
+          alt="Settlement Progression across the six tiers. A thorpe is a few huts and farmsteads with no formal defenses; a hamlet adds basic services and a local trade and farming focus; a village has densely clustered homes, a church or chapel, a market, and some defenses; a town is walled with diverse districts, markets and guilds, and a regional trade hub; a city has strong fortifications, many districts, extensive services, and major trade and industry; a metropolis has grand fortifications, advanced infrastructure, international trade, and complex governance. Each settlement grows through population, security, infrastructure, governance, and economy."
+          loading="lazy"
+          style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
+        />
+      </figure>
 
       {/* The value ladder — anon tries / free saves + full-size / premium simulates */}
       <ValueLadder />
