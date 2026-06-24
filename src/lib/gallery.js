@@ -496,6 +496,9 @@ function sanitizeTile(row) {
     atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // Public author name resolved live by owner id (migration 076). Empty when
+    // an owner has no external_name yet (pre-075 / mock rows).
+    author:       row.author_name || '',
   };
 }
 
@@ -599,6 +602,8 @@ function sanitizeDossier(row) {
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // Public author name resolved live by owner id (migration 076).
+    author:       row.author_name || '',
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
   };
 }

@@ -58,6 +58,15 @@ function buildProfileResult(user, data = {}) {
     avatarUrl: data.avatar_url || null,
     emailNotifications: data.email_notifications !== false,
     modelPreference: normalizeModelPreference(data.model_preference),
+    // Account identity (migration 075). account_number is immutable + private;
+    // external_name is the public gallery author name; the name parts are
+    // private. All are display-only here — writes route through the dedicated
+    // RPCs (update_external_name / update_profile_names), never this read path.
+    accountNumber: data.account_number || null,
+    externalName: data.external_name || null,
+    firstName: data.first_name || null,
+    lastName: data.last_name || null,
+    preferredName: data.preferred_name || null,
   };
 }
 
@@ -68,7 +77,7 @@ function buildProfileResult(user, data = {}) {
  */
 async function fetchProfileAuth(user) {
   if (!user) {
-    return { tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE };
+    return { tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, accountNumber: null, externalName: null, firstName: null, lastName: null, preferredName: null };
   }
   if (!supabase) {
     return buildProfileResult(user, {});
@@ -76,7 +85,7 @@ async function fetchProfileAuth(user) {
   try {
     const { data, error } = await supabase
       .from('profiles')
-      .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email')
+      .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name')
       .eq('id', user.id)
       .single();
     if (!error && data) {
@@ -99,6 +108,11 @@ function authPayload(user, session, profile, extra = {}) {
     avatarUrl: profile.avatarUrl,
     emailNotifications: profile.emailNotifications,
     modelPreference: profile.modelPreference,
+    accountNumber: profile.accountNumber,
+    externalName: profile.externalName,
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    preferredName: profile.preferredName,
     ...extra,
   };
 }
@@ -624,6 +638,57 @@ async function supabaseUpdateProfilePreferences(prefs = {}) {
   return fetchProfileAuth(user);
 }
 
+/**
+ * Update the user's PUBLIC gallery author name (external_name).
+ *
+ * Routes through the `update_external_name(text)` RPC (migration 075), the
+ * single safe path: it is SECURITY DEFINER and enforces charset/length, the
+ * reserved-word guard, and case-insensitive uniqueness server-side (the unique
+ * index is the race backstop). There is intentionally NO direct-table fallback
+ * here — unlike display_name, external_name has server-authoritative validation
+ * that a plain `.update()` would bypass.
+ *
+ * @param {string} externalName  Proposed public author name (3-24 chars, [A-Za-z0-9_]).
+ * @returns {Promise<string>} The trimmed name as persisted.
+ * @throws {Error} With a friendly message when taken/reserved/invalid.
+ */
+async function supabaseUpdateExternalName(externalName) {
+  const { data, error } = await supabase.rpc('update_external_name', {
+    new_name: externalName,
+  });
+  if (error) throw new Error(error.message || 'Could not update your author name.');
+  return data;
+}
+
+/**
+ * Update the PRIVATE name parts (first / last / preferred).
+ *
+ * Routes through the `update_profile_names(text, text, text)` RPC (migration
+ * 075). These fields are owner-writable (not RLS-pinned), but the RPC trims and
+ * null-empties uniformly so the client write surface stays consistent.
+ *
+ * @param {{ firstName?: string, lastName?: string, preferredName?: string }} names
+ * @returns {Promise<void>}
+ */
+async function supabaseUpdateProfileNames(names = {}) {
+  const { error } = await supabase.rpc('update_profile_names', {
+    p_first: names.firstName ?? null,
+    p_last: names.lastName ?? null,
+    p_preferred: names.preferredName ?? null,
+  });
+  if (error) throw new Error(error.message || 'Could not update your profile names.');
+}
+
+/** Mock: echo back the trimmed name (no server-side uniqueness in mock mode). */
+async function mockUpdateExternalName(externalName) {
+  return String(externalName || '').trim();
+}
+
+/** Mock: no-op. */
+async function mockUpdateProfileNames() {
+  // No-op in mock mode.
+}
+
 function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
@@ -830,6 +895,8 @@ export const auth = {
   signOutEverywhere:  isConfigured ? supabaseSignOutEverywhere   : mockSignOutEverywhere,
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
+  updateExternalName: isConfigured ? supabaseUpdateExternalName   : mockUpdateExternalName,
+  updateProfileNames: isConfigured ? supabaseUpdateProfileNames   : mockUpdateProfileNames,
   onAuthChange:       isConfigured ? supabaseOnAuthChange        : mockOnAuthChange,
   isConfigured,
 };

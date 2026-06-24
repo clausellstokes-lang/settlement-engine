@@ -64,6 +64,22 @@ const ELEVATED_ROLES = ['developer', 'admin'];
 function resolveTier(tier, role) {
   return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
 }
+
+/**
+ * Pull the account-identity fields (migration 075) off a getSession/signIn
+ * result into the shape the auth state stores. Null-safe — a result lacking
+ * these (mock mode, partial server rollout) yields all-null.
+ * @param {object} [result]
+ */
+function identityFrom(result = {}) {
+  return {
+    accountNumber: result.accountNumber || null,
+    externalName: result.externalName || null,
+    firstName: result.firstName || null,
+    lastName: result.lastName || null,
+    preferredName: result.preferredName || null,
+  };
+}
 let authUnsubscribe = null;
 
 export const createAuthSlice = (set, get) => ({
@@ -78,13 +94,26 @@ export const createAuthSlice = (set, get) => ({
     avatarUrl: null,      // optional profile avatar URL
     emailNotifications: true,
     modelPreference: DEFAULT_MODEL_PREFERENCE,
+    // Account identity (migration 075). accountNumber is immutable + private;
+    // externalName is the public gallery author name; the name parts are private.
+    accountNumber: null,
+    externalName: null,
+    firstName: null,
+    lastName: null,
+    preferredName: null,
     loading: true,        // true while checking initial session
     error: null,          // last auth error message
   },
 
   // ── Core setters ──────────────────────────────────────────────────────────
-  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE) =>
+  // `identity` is an APPEND-ONLY trailing object (not a positional arg) so the
+  // existing nine-arg callers stay byte-compatible while new identity fields
+  // (account_number / external_name / name parts) can be threaded through where
+  // a caller has them. Omitted → preserved from the current auth state so a
+  // partial setAuth never blanks an already-loaded identity.
+  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE, identity = undefined) =>
     set(state => {
+      const prev = state.auth || {};
       state.auth = {
         user, session,
         tier: resolveTier(tier, role),
@@ -94,13 +123,18 @@ export const createAuthSlice = (set, get) => ({
         avatarUrl: avatarUrl || null,
         emailNotifications: emailNotifications !== false,
         modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
+        accountNumber: identity?.accountNumber ?? prev.accountNumber ?? null,
+        externalName: identity?.externalName ?? prev.externalName ?? null,
+        firstName: identity?.firstName ?? prev.firstName ?? null,
+        lastName: identity?.lastName ?? prev.lastName ?? null,
+        preferredName: identity?.preferredName ?? prev.preferredName ?? null,
         loading: false, error: null,
       };
     }),
 
   clearAuth: () => {
     set(state => {
-      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
+      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, accountNumber: null, externalName: null, firstName: null, lastName: null, preferredName: null, loading: false, error: null };
     });
     try {
       get().clearCampaigns?.();
@@ -146,6 +180,7 @@ export const createAuthSlice = (set, get) => ({
             avatarUrl: result.avatarUrl || null,
             emailNotifications: result.emailNotifications !== false,
             modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+            ...identityFrom(result),
             loading: false, error: null,
           };
         });
@@ -248,6 +283,7 @@ export const createAuthSlice = (set, get) => ({
             avatarUrl: result.avatarUrl || null,
             emailNotifications: result.emailNotifications !== false,
             modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+            ...identityFrom(result),
             loading: false, error: null,
           };
         });
@@ -301,6 +337,7 @@ export const createAuthSlice = (set, get) => ({
           avatarUrl: result.avatarUrl || null,
           emailNotifications: result.emailNotifications !== false,
           modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+          ...identityFrom(result),
           loading: false, error: null,
         };
       });

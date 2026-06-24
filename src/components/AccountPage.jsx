@@ -54,6 +54,22 @@ export default function AccountPage({ onNavigateAdmin }) {
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
   const [nameError, setNameError] = useState(null);
+
+  // Public author name (external_name) editing — mirrors the display-name editor
+  // but writes through the validating update_external_name RPC (migration 075).
+  const [editingExternalName, setEditingExternalName] = useState(false);
+  const [externalNameInput, setExternalNameInput] = useState(auth.externalName || '');
+  const [externalNameSaving, setExternalNameSaving] = useState(false);
+  const [externalNameError, setExternalNameError] = useState(null);
+
+  // Private name parts (first/last/preferred). Saved together via the
+  // update_profile_names RPC; these are owner-writable (not RLS-pinned).
+  const [firstNameInput, setFirstNameInput] = useState(auth.firstName || '');
+  const [lastNameInput, setLastNameInput] = useState(auth.lastName || '');
+  const [preferredNameInput, setPreferredNameInput] = useState(auth.preferredName || '');
+  const [namesSaving, setNamesSaving] = useState(false);
+  const [namesSaved, setNamesSaved] = useState(false);
+  const [namesError, setNamesError] = useState(null);
   const profileSourceKey = [
     auth.avatarUrl || '',
     auth.emailNotifications !== false ? 'email:on' : 'email:off',
@@ -121,6 +137,69 @@ export default function AccountPage({ onNavigateAdmin }) {
       setNameError(e?.message || 'Could not update your display name. Please try again.');
     } finally {
       setNameSaving(false);
+    }
+  };
+
+  /**
+   * Save the public gallery author name (external_name). Routes through the
+   * validating update_external_name RPC (uniqueness + reserved-word + charset
+   * are enforced server-side); the friendly error is surfaced inline, mirroring
+   * handleSaveName. On success the session is refetched so the new name flows
+   * back into auth state (and thus every gallery surface that resolves it).
+   */
+  const handleSaveExternalName = async () => {
+    const trimmed = externalNameInput.trim();
+    if (!trimmed) return;
+    setExternalNameSaving(true);
+    setExternalNameError(null);
+    try {
+      const saved = await authService.updateExternalName(trimmed);
+      setEditingExternalName(false);
+      const result = await authService.getSession();
+      if (result) {
+        useStore.getState().setAuth(
+          result.user, result.session, result.tier, result.role,
+          result.displayName, result.isFounder, result.avatarUrl,
+          result.emailNotifications, result.modelPreference,
+          { ...result, externalName: saved ?? result.externalName },
+        );
+      }
+    } catch (e) {
+      setExternalNameError(e?.message || 'Could not update your author name. Please try again.');
+    } finally {
+      setExternalNameSaving(false);
+    }
+  };
+
+  /**
+   * Save the private name parts (first/last/preferred) via update_profile_names.
+   * These are owner-writable and surfaced only on the account page.
+   */
+  const handleSaveProfileNames = async () => {
+    setNamesSaving(true);
+    setNamesSaved(false);
+    setNamesError(null);
+    try {
+      await authService.updateProfileNames({
+        firstName: firstNameInput.trim(),
+        lastName: lastNameInput.trim(),
+        preferredName: preferredNameInput.trim(),
+      });
+      const result = await authService.getSession();
+      if (result) {
+        useStore.getState().setAuth(
+          result.user, result.session, result.tier, result.role,
+          result.displayName, result.isFounder, result.avatarUrl,
+          result.emailNotifications, result.modelPreference,
+          result,
+        );
+      }
+      setNamesSaved(true);
+      setTimeout(() => setNamesSaved(false), 1800);
+    } catch (e) {
+      setNamesError(e?.message || 'Could not update your profile names. Please try again.');
+    } finally {
+      setNamesSaving(false);
     }
   };
 
@@ -251,6 +330,15 @@ export default function AccountPage({ onNavigateAdmin }) {
         nameInput={nameInput} setNameInput={setNameInput}
         nameSaving={nameSaving} handleSaveName={handleSaveName}
         nameError={nameError}
+        editingExternalName={editingExternalName} setEditingExternalName={setEditingExternalName}
+        externalNameInput={externalNameInput} setExternalNameInput={setExternalNameInput}
+        externalNameSaving={externalNameSaving} handleSaveExternalName={handleSaveExternalName}
+        externalNameError={externalNameError}
+        firstNameInput={firstNameInput} setFirstNameInput={setFirstNameInput}
+        lastNameInput={lastNameInput} setLastNameInput={setLastNameInput}
+        preferredNameInput={preferredNameInput} setPreferredNameInput={setPreferredNameInput}
+        namesSaving={namesSaving} namesSaved={namesSaved} namesError={namesError}
+        handleSaveProfileNames={handleSaveProfileNames}
         profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
         handleSaveProfilePreferences={handleSaveProfilePreferences}
       />

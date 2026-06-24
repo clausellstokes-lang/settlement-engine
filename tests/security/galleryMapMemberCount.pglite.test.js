@@ -92,6 +92,15 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         import_count int default 0,
         gallery_importable boolean default false
       );
+      -- Migration 076 added a LEFT JOIN onto profiles.external_name to resolve
+      -- the map AUTHOR by owner id. This test exercises member_count, not the
+      -- author, but the JOIN must resolve, so create a minimal profiles table +
+      -- seed the owner's external_name.
+      create table public.profiles (
+        id uuid primary key,
+        external_name text
+      );
+      insert into public.profiles (id, external_name) values ('${OWNER}', 'QuietCartographer418');
     `);
     // get_gallery_map (046) calls these settlement sanitizers; stub them as
     // identity/passthrough so we can run the member projection without loading the
