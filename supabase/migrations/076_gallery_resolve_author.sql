@@ -239,7 +239,11 @@ as $$
     r.threat_level, r.culture, r.prosperity, r.primary_deity, r.at_war,
     r.net_votes, r.comment_count,
     ap.external_name as author_name
-  from public._gallery_public_tile_rows() r, source
+  -- CROSS JOIN (not a comma-join) so `r` stays in scope for the LEFT JOIN's ON
+  -- clause: `FROM r, source LEFT JOIN ...` parses as `FROM r, (source LEFT JOIN
+  -- ...)`, putting r out of scope (42P01). Explicit joins bind left-to-right.
+  from public._gallery_public_tile_rows() r
+  cross join source
   left join public.profiles ap on ap.id = r.owner_id
   where r.owner_id = source.user_id and r.id <> source.id
   order by r.published_at desc
