@@ -50,6 +50,8 @@ const storeState = {
   savedSettlements: [],
   campaigns: [],
   maxSaves: () => 3,
+  canSave: () => true,
+  importAccountData: vi.fn().mockResolvedValue({ ok: true }),
   authSignOut: vi.fn(),
   setAuth: vi.fn(),
   // Recovery-questions section (Finding #4) reads/sets via these actions.
@@ -151,14 +153,17 @@ describe('AccountPage — decomposition smoke', () => {
     expect(within(document.body).getByRole('heading', { name: 'Account recovery questions' })).toBeTruthy();
   });
 
-  test('Data primary action (Download JSON) is wired and the Import placeholder is inert', async () => {
+  test('Data primary action (Download JSON) is wired and the Import control is live', async () => {
     const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
     render(<AccountPage onNavigateAdmin={() => {}} />);
     const nav = document.querySelector('nav[aria-label="Account settings"]');
     fireEvent.click(within(nav).getByRole('button', { name: 'Data' }));
     expect(within(document.body).getByRole('button', { name: /Download JSON/i })).toBeTruthy();
-    // Future import slot ships as a disabled "Coming soon" stub.
-    expect(within(document.body).getByRole('button', { name: /Coming soon/i }).disabled).toBe(true);
+    // The "Coming soon" stub has been replaced by the live import flow: a
+    // file-input trigger (canSave:true in the mock → the control is enabled).
+    const importInput = document.getElementById('account-import-file');
+    expect(importInput).toBeTruthy();
+    expect(importInput.disabled).toBe(false);
   });
 
   test('the elevated-only Developer Admin row appears only when elevated', async () => {

@@ -48,6 +48,8 @@ export default function AccountPage({ onNavigateAdmin }) {
   const removeSavedSettlement = useStore(s => s.removeSavedSettlement);
   const clearSavedSettlements = useStore(s => s.clearSavedSettlements);
   const deleteCampaign = useStore(s => s.deleteCampaign);
+  const importAccountData = useStore(s => s.importAccountData);
+  const canSave = useStore(s => s.canSave());
   const activeSaves = activeSaveCount(savedSettlements);
   const inactiveSaves = inactiveRetentionCount(savedSettlements);
   const isMobile = useIsMobile();
@@ -409,6 +411,9 @@ export default function AccountPage({ onNavigateAdmin }) {
           onDeleteAllSettlements={handleDeleteAllSettlements}
           onDeleteAllCampaigns={handleDeleteAllCampaigns}
           onSignOut={authSignOut}
+          onImport={importAccountData}
+          canSave={canSave}
+          maxSaves={maxSaves}
         />
       )}
 

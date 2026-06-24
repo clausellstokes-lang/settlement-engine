@@ -43,6 +43,7 @@ import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { createChangeQueueSlice }   from './changeQueueSlice.js';
+import { createAccountImportSlice }  from './accountImportSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
 
@@ -93,6 +94,9 @@ export const useStore = create(
           // partialize below, like `settlement` itself: a reload discards the
           // open settlement and its uncommitted draft together.
           ...createChangeQueueSlice(set, get),
+          // "Import my data" — batches hardened, ownership-remapped export
+          // records into the library via the server-authoritative add-save seam.
+          ...createAccountImportSlice(set, get),
         })),
         {
           name: 'settlementforge',

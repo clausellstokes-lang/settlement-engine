@@ -79,7 +79,7 @@ saves when the shape changes.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 15 slices, with `immer + persist +
+One Zustand store composed from 16 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.
