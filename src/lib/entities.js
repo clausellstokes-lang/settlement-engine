@@ -123,6 +123,27 @@ export function idOf(entity, prefix = 'entity') {
   return null;
 }
 
+/**
+ * Canonical stable id for a faction, derived from its display name.
+ *
+ * The crucial invariant for the dossier hyperlink layer: an NPC's
+ * `factionLink` (npcProfile.js#deriveNpcProfile) and a faction's own derived
+ * id (factionProfile.js) MUST produce the identical string so a name-stated
+ * NPC affiliation resolves to its faction card by stable id with NO
+ * name-matching at render. Both of those sites build `faction.<snake>` from
+ * the SAME `snakeCase` shape this module uses, so routing all three through
+ * this one helper keeps them in lockstep.
+ *
+ * Returns null for an empty/missing name so callers can guard a broken link.
+ *
+ * @param {string} [name]   The faction display name (e.g. "Iron Guild").
+ * @returns {string|null}   'faction.<snake_name>' or null.
+ */
+export function factionIdFromName(name) {
+  if (!name) return null;
+  return `faction.${snakeCase(name)}`;
+}
+
 // ── Institution tag resolution (keyword backfill) ───────────────────────────
 // The migration target is "mechanics query institution tags, not names." But
 // `tagsOf` only reads an entity's DECLARED tags — and catalog tags are coarse

@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
+import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../../lib/entities.js';
+import { useStore } from '../../../store/index.js';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
+
+  // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
+  // NPC's affiliation), expand that faction's row and scroll it into view. The
+  // row's own ref scrolls itself once mounted, so it lands even on a freshly
+  // mounted lazy tab. Keyed on focus `ts` so a repeat click re-fires.
+  const focusedEntity = useStore(state => state.focusedEntity);
+  const focusedRowRef = useRef(null);
+
+  // Resolve the focused faction's row index (or -1). Computed from `r` directly
+  // so this runs before the early return below and keeps hooks order stable.
+  const focusFactionList = r?.factions || [];
+  const focusIndex = focusedEntity?.id
+    ? focusFactionList.findIndex(f => factionIdFromName(f.faction) === focusedEntity.id)
+    : -1;
+  useEffect(() => {
+    if (focusIndex < 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- expand-on-hyperlink-focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
+    setExpandedFaction(focusIndex);
+    focusedRowRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }, [focusedEntity?.ts, focusIndex]);
 
   if (!r) return <div style={{padding:32,textAlign:'center',color:MUTED}}>No power structure data.</div>;
 
@@ -178,7 +201,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const matchedGroups = factionGroups.filter(fg => fg.powerFactionName === f.faction);
 
             return (
-              <div key={i}>
+              <div
+                key={i}
+                id={entityAnchor('faction', f, f.faction)}
+                ref={i === focusIndex ? focusedRowRef : null}
+              >
                 <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',borderRadius:5,
                   background:isExp?'#f5f0e8':f.legitimacyCrisis?'#fdf4f4':'transparent',
                   cursor:f.desc?'pointer':'default',

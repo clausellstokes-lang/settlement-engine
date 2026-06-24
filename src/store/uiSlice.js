@@ -83,6 +83,21 @@ export const createUiSlice = (set, get) => ({
   /** Durable product-preference defaults (Account → Product Preferences). */
   productPrefs: { ...PRODUCT_PREF_DEFAULTS },
 
+  /**
+   * The dossier entity the hyperlink layer last navigated to, or null.
+   *
+   * Shape: `{ id, ts }`. `id` is the stable entity id (e.g. 'faction.iron_guild');
+   * `ts` is a fresh timestamp on every focus so each tab's "open the matching
+   * card" effect re-fires even when the SAME link is clicked twice (a bare id
+   * would not change, so the effect would not run).
+   *
+   * Lives on the store (not a card-local prop) because the selected entity must
+   * survive the cross-tab remount: clicking an NPC's faction switches to the
+   * Power tab, which mounts fresh and reads this to know which faction to open.
+   * Transient: left out of the persist partialize so a reload lands unfocused.
+   */
+  focusedEntity: null,
+
   // ── Actions ──────────────────────────────────────────────────────────────
 
   /**
@@ -104,6 +119,21 @@ export const createUiSlice = (set, get) => ({
     const prefs = get().productPrefs || {};
     return Object.prototype.hasOwnProperty.call(prefs, key) ? prefs[key] : PRODUCT_PREF_DEFAULTS[key];
   },
+
+  /**
+   * Mark a dossier entity as the navigation target. Stamps a fresh `ts` so the
+   * per-tab open-the-card effects re-fire on repeat clicks of the same link.
+   * @param {string} id   Stable entity id (e.g. 'faction.iron_guild', 'npc_3').
+   */
+  focusEntity: (id) =>
+    set(state => {
+      if (!id) return;
+      state.focusedEntity = { id, ts: Date.now() };
+    }),
+
+  /** Clear the focused entity (e.g. on dossier teardown). */
+  clearFocusedEntity: () =>
+    set(state => { state.focusedEntity = null; }),
 
   /** Open/close the auth (sign-in / create-account) modal. */
   setAuthModalOpen: (open) =>

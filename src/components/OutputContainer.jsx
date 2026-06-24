@@ -11,6 +11,8 @@ import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { navigate } from '../hooks/useRoute.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
+import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
+import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import Button from './primitives/Button.jsx';
@@ -503,6 +505,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab
     : (allTabs[0]?.id || activeTab);
+
+  // Dossier entity hyperlink layer (Phase A): id->entity index + navigator (tab
+  // switch + card focus + scroll), shared via context so any tab/card renders an
+  // <EntityLink> without prop-drilling. Navigation to a gated-out tab no-ops.
+  const dossierEntityValue = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
+
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
@@ -905,7 +913,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 // Previously two of three bodies rendered flush; each child was
                 // insetting (or not) on its own. (P12 width discipline.)
                 style={{ padding: `0 ${SP.lg}px ${SP.lg}px`, opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
-              >{renderTab()}</div>
+              >
+                <DossierEntityContext.Provider value={dossierEntityValue}>
+                  {renderTab()}
+                </DossierEntityContext.Provider>
+              </div>
             </FeatureErrorBoundary>
           </Suspense>
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
