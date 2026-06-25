@@ -145,6 +145,21 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge g
   assertEquals(stub.rpc.length, 0); // no service_set_credits dispatched
 });
 
+Deno.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge gate, defense-in-depth)', async () => {
+  // support passes the general elevated-role gate but is NOT "highest". The edge
+  // gate must reject the role/tier/is_founder write path BEFORE the
+  // service_update_profile_metadata RPC — defense-in-depth parity with
+  // grant_credits / update_user_credits, not a reliance on the DB RPC alone.
+  const stub = makeAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'update_user_metadata', userId: 'target1', metadata: { role: 'admin' } },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0); // no service_update_profile_metadata dispatched
+});
+
 Deno.test('an unknown action from a privileged caller is rejected 400 with no mutating RPC', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(

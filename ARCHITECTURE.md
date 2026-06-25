@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (84) — schema + RLS policies + credit ledger + version
+- **migrations/** (86) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -149,7 +149,18 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   `jsonb_array_length` of the write-set, so a repeated saveId tripped a false
   "not owned" abort; 084 recreates the net-current body comparing owned rows against
   the count of DISTINCT referenced ids instead — every other line, the signature, and
-  the GRANT are 069 verbatim) —
+  the GRANT are 069 verbatim) +
+  **085** (refund_credits service-role gate fix: 033 locked the GRANT to
+  `service_role`, but 009's body opened with an `auth.uid() is null` raise +
+  owner check, so the AI-failure refund — called from the edge via the
+  service-role client — threw every time, charging the user without refunding;
+  085 recreates 009's net-current body, skipping the auth.uid()/ownership raises
+  ONLY when the caller is `service_role`, preserving the authenticated-user
+  checks exactly) +
+  **086** (atomic AI-spend reservation: the global daily/monthly USD cap was
+  checked read-only before the model calls while COGS landed only after, so
+  concurrent generations could collectively overrun the cap; 086 adds a
+  reservation RPC reconciled to actuals) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

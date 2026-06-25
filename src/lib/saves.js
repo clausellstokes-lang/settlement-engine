@@ -27,7 +27,7 @@ function newSaveId() {
 // ── Local storage helpers ───────────────────────────────────────────────────
 
 function localLoad() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch { return []; }
+  try { const v = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
 }
 
 function localWrite(saves) {

@@ -357,6 +357,12 @@ export const createAiSlice = (set, get) => ({
     const { settlement, aiLoading, creditBalance, aiSettlement } = get();
     if (!settlement || aiLoading) return;
 
+    // Snapshot which save is on screen now. The global narrative view is only
+    // committed on success if THIS save is still the active one — the user may
+    // switch settlements (hydrateFromSave flips activeSaveId) during the long
+    // generate call, and one settlement's prose must not bleed onto another.
+    const requestedActiveSaveId = get().activeSaveId;
+
     // AI narrative is gated behind saved settlements so ai_data has a durable home.
     if (!saveId) {
       set(state => { state.aiError = 'Save this settlement first to generate an AI narrative.'; });
@@ -492,23 +498,36 @@ export const createAiSlice = (set, get) => ({
       const verificationN = runOverlayVerifier(settlement, result);
       logHardViolations(verificationN, 'requestNarrative');
 
+      // The user may have switched settlements while this long call was in
+      // flight (hydrateFromSave flips activeSaveId). Only write the global
+      // narrative view if THIS save is still the one on screen — otherwise
+      // one settlement's prose bleeds onto another. Credit balance, loading
+      // flags, and the engagement counter are settlement-agnostic, so they
+      // commit regardless. A null activeSaveId (no detail view tracking)
+      // matches its start value, so the write proceeds as before.
+      const currentActiveSaveId = get().activeSaveId;
+      const stillActive = currentActiveSaveId === saveId
+        || currentActiveSaveId === requestedActiveSaveId;
+
       set(state => {
-        state.aiSettlement = result;
-        // Daily life is folded into the narrative run — commit the bundled
-        // beats as the authoritative aiDailyLife so the DailyLifeTab shows
-        // prose after a single narrate action. A null means every beat failed
-        // (partial run); keep whatever the progressive stream already set.
-        if (dailyLife && typeof dailyLife === 'object') {
-          state.aiDailyLife = dailyLife;
+        if (stillActive) {
+          state.aiSettlement = result;
+          // Daily life is folded into the narrative run — commit the bundled
+          // beats as the authoritative aiDailyLife so the DailyLifeTab shows
+          // prose after a single narrate action. A null means every beat failed
+          // (partial run); keep whatever the progressive stream already set.
+          if (dailyLife && typeof dailyLife === 'object') {
+            state.aiDailyLife = dailyLife;
+          }
+          state.aiDataVersion = Date.now();
+          state.aiSourceFingerprint = sourceFingerprint;
+          state.showNarrative = true;
+          state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
+          state.aiViolations = verificationN;
         }
-        state.aiDataVersion = Date.now();
-        state.aiSourceFingerprint = sourceFingerprint;
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
-        state.showNarrative = true;
-        state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
-        state.aiViolations = verificationN;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
         // Reader-audience signal: a successful narrate run is the
         // "I'm coming back to use this" behaviour useReaderAudience keys on.
@@ -535,9 +554,16 @@ export const createAiSlice = (set, get) => ({
       // Generation succeeded — don't let a persist error lose what the user just paid for.
       try {
         const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+        // Persist the daily-life bundle this run produced. Prefer the locally
+        // bundled `dailyLife` over `get().aiDailyLife`: if the user switched
+        // settlements mid-generation, global state now holds the OTHER save's
+        // prose, which must not bleed onto this save's ai_data.
+        const persistedDailyLife = (dailyLife && typeof dailyLife === 'object')
+          ? dailyLife
+          : (stillActive ? get().aiDailyLife : (existingEntry?.aiData?.aiDailyLife || null));
         const aiData = buildAiDataBlob(existingEntry?.aiData, {
           aiSettlement:         result,
-          aiDailyLife:          get().aiDailyLife,
+          aiDailyLife:          persistedDailyLife,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: new Date().toISOString(),
           narrativeSourceFingerprint: sourceFingerprint,
@@ -584,6 +610,11 @@ export const createAiSlice = (set, get) => ({
   requestDailyLife: async (saveId) => {
     const { settlement, aiLoading, creditBalance, aiDailyLife } = get();
     if (!settlement || aiLoading) return;
+
+    // See requestNarrative: snapshot the on-screen save so the global view is
+    // only written on success if the user hasn't switched settlements during
+    // the long generate call.
+    const requestedActiveSaveId = get().activeSaveId;
 
     // Daily life is gated behind saved settlements for the same reason as narrative.
     if (!saveId) {
@@ -661,8 +692,18 @@ export const createAiSlice = (set, get) => ({
           });
         },
       });
+      // Only write the global daily-life view if THIS save is still on
+      // screen — the user may have switched settlements mid-generation
+      // (activeSaveId flipped via hydrateFromSave). Credit balance, loading
+      // flags, and the engagement counter commit regardless.
+      const currentActiveSaveId = get().activeSaveId;
+      const stillActive = currentActiveSaveId === saveId
+        || currentActiveSaveId === requestedActiveSaveId;
+
       set(state => {
-        state.aiDailyLife = result;
+        if (stillActive) {
+          state.aiDailyLife = result;
+        }
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -734,6 +775,11 @@ export const createAiSlice = (set, get) => ({
   requestProgression: async (saveId, { changeType, changeLabel }) => {
     const { settlement, aiLoading, creditBalance, aiSettlement, aiDailyLife } = get();
     if (!settlement || aiLoading) return;
+
+    // See requestNarrative: snapshot the on-screen save so the global view is
+    // only written on success if the user hasn't switched settlements during
+    // the long generate call.
+    const requestedActiveSaveId = get().activeSaveId;
 
     if (!saveId) {
       set(state => { state.aiError = 'Save this settlement first to progress the AI narrative.'; });
@@ -828,16 +874,26 @@ export const createAiSlice = (set, get) => ({
       const verificationP = runOverlayVerifier(settlement, result);
       logHardViolations(verificationP, 'requestProgression');
 
+      // Only write the global narrative view if THIS save is still on screen —
+      // the user may have switched settlements mid-generation (activeSaveId
+      // flipped via hydrateFromSave). Credit balance, loading flags, and the
+      // engagement counter commit regardless.
+      const currentActiveSaveId = get().activeSaveId;
+      const stillActive = currentActiveSaveId === saveId
+        || currentActiveSaveId === requestedActiveSaveId;
+
       set(state => {
-        state.aiSettlement = result;
-        state.aiDataVersion = Date.now();
-        state.aiSourceFingerprint = sourceFingerprint;
+        if (stillActive) {
+          state.aiSettlement = result;
+          state.aiDataVersion = Date.now();
+          state.aiSourceFingerprint = sourceFingerprint;
+          state.showNarrative = true;
+          state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
+          state.aiViolations = verificationP;
+        }
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
-        state.showNarrative = true;
-        state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
-        state.aiViolations = verificationP;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
         // Reader-audience signal: see requestNarrative — a paid
         // progression run is the same return-engagement signal.
@@ -860,9 +916,15 @@ export const createAiSlice = (set, get) => ({
       // unchanged — progression v1 doesn't touch it.
       try {
         const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+        // Carry through the daily life captured when this run began, not the
+        // live `get().aiDailyLife`: if the user switched settlements
+        // mid-generation, global state now holds the OTHER save's prose.
+        const persistedDailyLife = stillActive
+          ? get().aiDailyLife
+          : (aiDailyLife ?? existingEntry?.aiData?.aiDailyLife ?? null);
         const aiData = buildAiDataBlob(existingEntry?.aiData, {
           aiSettlement:         result,
-          aiDailyLife:          get().aiDailyLife,
+          aiDailyLife:          persistedDailyLife,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: new Date().toISOString(),
           narrativeSourceFingerprint: sourceFingerprint,

@@ -80,9 +80,13 @@ registerStep('resolveConfig', {
   const servicesToggles    = config._servicesToggles     || {};
 
   // Resolve tier
-  const tier = config.settType === 'custom'  ? popToTier(config.population)
-             : config.settType === 'random'  ? rng.pick(TIER_ORDER)
-             : (config.settType || 'village');
+  const rawTier = config.settType === 'custom'  ? popToTier(config.population)
+                : config.settType === 'random'  ? rng.pick(TIER_ORDER)
+                : (config.settType || 'village');
+  // Guard the direct-settType path: an unknown settType (anything outside the
+  // six canonical tiers) would otherwise make POPULATION_RANGES[tier] undefined
+  // and throw on popRange.min/.max below. Fall back to 'village'.
+  const tier = POPULATION_RANGES[rawTier] ? rawTier : 'village';
 
   // Population
   const popRange = POPULATION_RANGES[tier];

@@ -1057,10 +1057,10 @@ const _FINISHED_GOODS_KEYWORDS = [
 ];
 
 export function finishedGoodsCategoryOf(label) {
-  if (!label) return null;
-  const s = String(label).toLowerCase();
+  const s = String(label).trim().toLowerCase();
+  if (s.length < 3) return null;
   for (const [cat, l] of _FINISHED_GOODS_CATEGORY_INDEX) {
-    if (s.includes(l) || l.includes(s)) return cat;
+    if (s.includes(l)) return cat;
   }
   for (const [cat, re] of _FINISHED_GOODS_KEYWORDS) {
     if (re.test(s)) return cat;

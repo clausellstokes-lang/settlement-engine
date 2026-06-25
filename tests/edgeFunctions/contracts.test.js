@@ -431,6 +431,34 @@ describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', (
     // would no longer hold.
     expect(serverNarrative).not.toBe(legacyNarrative);
   });
+
+  // The fast-model schedule (Haiku/mini peers) is a SECOND money path: the
+  // server CREDIT_COSTS *_fast keys must mirror the client FAST_AI_COSTS table.
+  // The standard-cost tests above pin NEW_AI_COSTS only; without these, the
+  // fast costs could silently drift cross-side and over/under-charge.
+  it('narrative_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?narrative_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'narrative');
+    expect(srv, 'server narrative_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS narrative not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('dailyLife_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?dailyLife_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'dailyLife');
+    expect(srv, 'server dailyLife_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS dailyLife not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('progression_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?progression_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'progression');
+    expect(srv, 'server progression_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS progression not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
 });
 
 describe('Tier 3.3 — generate-narrative AI invariants', () => {

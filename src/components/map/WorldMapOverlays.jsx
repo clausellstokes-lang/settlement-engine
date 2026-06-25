@@ -123,12 +123,6 @@ export function WorldMapOverlays({
 
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
-
-      {/* Spinner animation */}
-      <style>{`
-        .sf-spin { animation: sf-spin 1.2s linear infinite; }
-        @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
     </>
   );
 }

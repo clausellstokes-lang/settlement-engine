@@ -702,7 +702,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
     }
     {
-      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      // backward:true — applying a proposal mutates the world but does NOT advance
+      // the tick, so the snapshot tick EQUALS the cloud's. Under the forward guard
+      // (advance only when strictly behind) that ties → stale_tick (read as success)
+      // and the applied proposal is silently dropped on reload. So this is a
+      // last-write-wins write, exactly like undo (expectedTick = null).
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward: true });
       // Same cloud-pending contract as advanceCampaignWorld: a failed persist
       // already raised the retryable banner, so flag the result rather than let a
       // caller read an unqualified success over a cloud-pending write.
@@ -745,7 +750,11 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       });
     }
     {
-      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+      // backward:true — a party impact is a discrete injection, NOT a time advance
+      // (the snapshot tick equals the cloud's), so the forward guard would tie and
+      // return stale_tick (read as success), dropping the impact's settlement deltas
+      // on reload. Last-write-wins like undo (expectedTick = null) so the write lands.
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward: true });
       if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
         result.cloudPending = true;
       }

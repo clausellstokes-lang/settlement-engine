@@ -137,6 +137,19 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   ASSIGN_NPC_TO_ROLE:  ENTITY_GRAPH_KEYS,
   RESTORE_INSTITUTION: ENTITY_GRAPH_KEYS,
   RESTORE_FACTION:     ENTITY_GRAPH_KEYS,
+  // ADD_INSTITUTION / ADD_FACTION / ADD_NPC: withoutEventCreations drops the
+  // record an ADD CREATED (it carries createdByEventId), but the idempotent
+  // un-remove branch (addInstitution/addFaction re-activating an existing
+  // entity to status 'active' + impairments:[]) writes NO createdByEventId, so
+  // provenance alone cannot restore the entity's prior removed/impaired state —
+  // it stays resurrected. Snapshotting the entity graph restores the exact
+  // pre-event subtree in BOTH cases (created → entity gone again; un-removed →
+  // back to its removed/impaired state). restoreSnapshottedRecords runs AFTER
+  // withoutEventCreations in scrubUndoneEvent, so the pre-event copy is the
+  // final word and the two paths converge.
+  ADD_INSTITUTION:     ENTITY_GRAPH_KEYS,
+  ADD_FACTION:         ENTITY_GRAPH_KEYS,
+  ADD_NPC:             ENTITY_GRAPH_KEYS,
   // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/
   // stresses containers with a plain array splice — no provenance stamp and no
   // stressorEdits record, so without the pre-event copy the stressor is lost

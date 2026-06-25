@@ -79,11 +79,23 @@ function makeAdminClient(activeResult: boolean | null) {
         });
       }
       // Service-role SAFETY preflights added with provider-peer metering: both run
-      // on the admin client BEFORE spend_credits. check_ai_spend_cap FAILS CLOSED
+      // on the admin client BEFORE spend_credits. The spend cap FAILS CLOSED
       // (a null/!allowed result throws 400 before the stream opens), so the refund-
       // path tests must let it through to reach the spend → fail → refund boundary
       // they actually exercise. consume_ai_generate_rate_limit fails open, but we
       // allow it explicitly so the stub doesn't depend on that asymmetry.
+      //
+      // reserve_ai_spend (migration 086) replaced the read-only check_ai_spend_cap:
+      // it RESERVES an estimated cost before the model calls and returns a
+      // reservation_id the handler RELEASES in its finally once the real COGS row
+      // lands. We allow it (with an id so the release path runs) and no-op the
+      // release. (The legacy name is kept for any caller still on the read-only RPC.)
+      if (fn === 'reserve_ai_spend') {
+        return Promise.resolve({ data: { allowed: true, reservation_id: 'res_stub' }, error: null });
+      }
+      if (fn === 'release_ai_spend_reservation') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'check_ai_spend_cap' || fn === 'consume_ai_generate_rate_limit') {
         return Promise.resolve({ data: { allowed: true }, error: null });
       }

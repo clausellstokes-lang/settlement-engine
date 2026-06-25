@@ -448,6 +448,12 @@ export async function handleAdminActions(
       }
 
       case "update_user_metadata": {
+        // HIGHEST role only — defense-in-depth parity with grant_credits and the
+        // account ban/disable cases. service_update_profile_metadata re-checks
+        // privilege at the DB (and gates role/tier/is_founder writes), but this
+        // user-management write must also fail closed at the edge so a
+        // `support`-role caller never reaches the RPC.
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId || !metadata) {
           return json({ error: "Missing userId or metadata" }, 400);
         }

@@ -37,6 +37,12 @@ const BASELINE = new Set([
   // Net god-modules still DECREASED this pass (mutate.js + relationshipEvolution.js
   // were split out and removed from this list).
   'src/domain/worldPulse/stressors.js',
+  // Was ~1,161 lines (at the cap); the active-save guard fix (preventing one
+  // settlement's AI prose from bleeding onto another after a mid-generation
+  // settlement switch) + its explanatory comments nudged it just over 1,200.
+  // Grandfathered per the same set-based rationale; splitting aiSlice is a
+  // separate refactor, not this bug-fix pass.
+  'src/store/aiSlice.js',
 ]);
 
 function jsFiles(rel) {

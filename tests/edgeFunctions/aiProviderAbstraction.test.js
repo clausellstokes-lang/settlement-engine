@@ -145,12 +145,19 @@ describe('generate-narrative — single spend + safety ordering contracts', () =
     expect(matches.length).toBe(1);
   });
 
-  it('checks the spend cap BEFORE spending credits (capped window never debits)', () => {
-    const capIdx = src.indexOf("rpc('check_ai_spend_cap')");
+  it('RESERVES the spend cap BEFORE spending credits (capped window never debits)', () => {
+    // Migration 086: the read-only check_ai_spend_cap was replaced by the
+    // race-safe reserve_ai_spend (counts committed COGS + outstanding
+    // reservations atomically). Still checked BEFORE the spend so a capped-out
+    // window never debits the user, and the reservation is released afterward.
+    const capIdx = src.indexOf("rpc('reserve_ai_spend'");
     const spendIdx = src.indexOf("rpc('spend_credits'");
+    const releaseIdx = src.indexOf("rpc('release_ai_spend_reservation'");
     expect(capIdx).toBeGreaterThan(-1);
     expect(spendIdx).toBeGreaterThan(-1);
     expect(capIdx).toBeLessThan(spendIdx);
+    // The reservation is reconciled (released) only after the spend / stream.
+    expect(releaseIdx).toBeGreaterThan(spendIdx);
   });
 
   it('cap check FAILS CLOSED — blocks on non-true allowed', () => {

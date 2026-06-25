@@ -63,6 +63,23 @@ const SCHEMA_VERSION = 2;
  * track() itself never throws.
  */
 
+/**
+ * Scheme guard for an imported backdrop image URL. Gallery rows are untrusted
+ * shared input and the URL is later rendered as an SVG <image href> (see
+ * MapOverlay.jsx), so only http(s) URLs may be stored — never javascript:/data:
+ * or other schemes. Mirrors gallery.js's isSafePublicImageUrl (kept local to
+ * avoid widening that module's surface for one consumer).
+ */
+function isSafeBackdropUrl(value) {
+  if (!value) return false;
+  try {
+    const { protocol } = new URL(value);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function localLoad(ownerId = 'anon') {
   return campaignService.loadCached(ownerId).map(migrateCampaign);
 }
@@ -306,6 +323,14 @@ export const createCampaignSlice = (set, get) => {
           imageUrl = up.url;
         }
       } catch { /* fall back to referencing the shared public URL */ }
+      // The re-upload returns a trusted https storage URL; if it failed we keep
+      // the original shared URL ONLY when it's a safe http(s) scheme. A
+      // javascript:/data:/other-scheme URL from this untrusted gallery row must
+      // never be stored — MapOverlay renders it as an SVG <image href> with no
+      // scheme validation — so the import fails rather than persist it.
+      if (!isSafeBackdropUrl(imageUrl)) {
+        throw new Error('That shared map has no importable backdrop.');
+      }
       mapState.customBackdrop = {
         imageUrl,
         w: Number(backdrop.customBackdrop.w) || 0,
@@ -407,7 +432,14 @@ export const createCampaignSlice = (set, get) => {
           imageUrl = up.url;
         }
       } catch { /* fall back to the shared public URL */ }
-      mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+      // Only store an http(s) backdrop URL. The re-upload yields a trusted https
+      // storage URL; if it failed and the original shared URL is an unsafe
+      // scheme (javascript:/data:/other), drop the backdrop — the campaign still
+      // imports with its remapped placements, just without the untrusted image
+      // that MapOverlay would render as an SVG <image href>.
+      if (isSafeBackdropUrl(imageUrl)) {
+        mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+      }
     } else if (sharedMap.fmgSnapshot) {
       mapState.fmgSnapshot = sharedMap.fmgSnapshot;
       mapState.seed = sharedMap.seed ?? null;

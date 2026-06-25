@@ -66,7 +66,14 @@ function writeStored(value) {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value));
       _memoryStore = null; // keep the two stores coherent on success
       return;
-    } catch { /* fall through */ }
+    } catch {
+      // The write failed (quota/disabled) but an EARLIER write may have left a
+      // stale value in sessionStorage. readStored prefers a present
+      // sessionStorage value over _memoryStore, so that stale value would
+      // shadow the correct in-memory fallback below. Drop it first to keep the
+      // two stores coherent.
+      try { sessionStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    }
   }
   _memoryStore = value;
 }
@@ -121,8 +128,10 @@ export function unregisterHandler(type) {
 
 /** Consume + dispatch the pending intent. Called by AuthModal's success
  *  handler. Returns the handler's return value (or null on no-op). The
- *  intent is cleared once a handler exists, whether that handler succeeded
- *  or threw — failed handled intents do NOT linger across sessions. */
+ *  intent is cleared ONLY after the handler resolves successfully — a handler
+ *  that throws OR returns a falsy result (the SAVE_SETTLEMENT handler returns
+ *  null on save failure rather than throwing) leaves the intent stashed so the
+ *  user can retry instead of silently losing their dossier. */
 export async function consume(ctx) {
   const pending = readPending();
   if (!pending) return null;
@@ -136,14 +145,18 @@ export async function consume(ctx) {
     return null;
   }
 
-  clearPending();
   try {
-    return await handler(pending.payload, ctx || {});
+    const result = await handler(pending.payload, ctx || {});
+    // A falsy result signals the handler could not complete (e.g. the save
+    // failed). Keep the intent stashed in that case so it survives for a retry.
+    if (result) clearPending();
+    return result;
   } catch (e) {
     if (typeof console !== 'undefined') {
 
       console.warn(`[authIntents] handler "${pending.type}" threw:`, e);
     }
+    // Leave the intent stashed — a throw is a failure, not a consumed success.
     return null;
   }
 }

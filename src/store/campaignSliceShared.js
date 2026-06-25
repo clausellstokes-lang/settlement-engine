@@ -241,6 +241,14 @@ export async function persistSaveUpdates(updates = []) {
  * `backward: true`, which sends p_expected_tick = NULL so 069 skips the guard and
  * applies the reverted snapshot unconditionally. The FORWARD advance path leaves
  * `backward` falsy and keeps the guard (preventing a double-advance).
+ *
+ * NON-ADVANCING WRITES (apply proposal / record party impact): these mutate the
+ * world + member settlements but DO NOT bump worldState.tick — the snapshot's tick
+ * EQUALS the cloud's current tick. Under the forward guard "strictly behind" rule
+ * that ties, so the RPC returns stale_tick (read as success) and the write is
+ * silently DROPPED — the applied proposal + settlement deltas vanish on reload. Like
+ * undo, they are deliberate LAST-WRITE-WINS writes: callers pass `backward: true`
+ * (same expectedTick = NULL effect) so the guard is skipped and the write lands.
  */
 export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false }) {
   if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };

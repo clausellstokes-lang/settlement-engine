@@ -219,6 +219,33 @@ function estimateUsd(provider: Provider, model: string, inputTokens: number, out
   return Number((((inputTokens / 1_000_000) * prices.input) + ((outputTokens / 1_000_000) * prices.output)).toFixed(6));
 }
 
+// Conservative UP-FRONT token budgets per generation type, used ONLY to size the
+// pre-run spend RESERVATION (migration 086). A run is multi-call (thesis +
+// refinement, plus several dailyLife beats), so we over-estimate on purpose: the
+// reservation is reconciled to the REAL COGS once persistAiUsageEvents writes the
+// ai_usage_events rows and the reservation is released. Over-estimating only
+// makes the cap admit FEWER concurrent runs (fail toward protection); the real
+// committed spend is always the source of truth for the actual ceiling.
+const RESERVATION_TOKEN_BUDGET: Record<string, { input: number; output: number }> = {
+  narrative:   { input: 40_000, output: 16_000 },
+  dailyLife:   { input: 32_000, output: 12_000 },
+  progression: { input: 60_000, output: 16_000 },
+};
+
+/**
+ * Estimate the worst-case provider COGS (USD) for a whole generation run, to
+ * RESERVE against the global spend cap before any model call. Prices the
+ * type's conservative token budget at the resolved profile's standard-tier
+ * rate. Never throws — an unknown type falls back to the narrative budget.
+ * @param preference The authoritative resolved model preference.
+ * @param type The generation type ('narrative' | 'dailyLife' | 'progression').
+ */
+function estimateRunCostUsd(preference: ModelPreference, type: string): number {
+  const profile = MODEL_PROFILES[preference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+  const budget = RESERVATION_TOKEN_BUDGET[type] || RESERVATION_TOKEN_BUDGET.narrative;
+  return estimateUsd(profile.provider, profile.thesis, budget.input, budget.output);
+}
+
 function aggregateAiUsage(records: AiUsageRecord[]) {
   const byPhase: Record<string, { calls: number; estimatedCostUsd: number; durationMs: number; inputTokens: number; outputTokens: number }> = {};
   for (const record of records) {
@@ -833,19 +860,27 @@ export async function handleGenerateNarrative(
     }
     if (isActive !== true) throw new Error('Account is not active');
 
-    // ── SAFETY 1: hard spend cap — FAIL CLOSED (kill-switch) ──
+    // ── SAFETY 1: hard spend cap — FAIL CLOSED (kill-switch), RACE-SAFE ──
     // Checked BEFORE spend_credits so a capped-out window never debits the user
-    // (nothing to refund). This is a GLOBAL cap (check_ai_spend_cap sums spend
-    // across all users and takes no uid) and applies to EVERYONE, including
-    // elevated operators — an unbounded provider bill is the catastrophic failure
-    // mode, so even an admin cannot bypass it. (Elevation is also not yet known at
-    // this point; it is resolved from the spend_credits result below.) We BLOCK on
-    // the cap RPC erroring or returning a non-true `allowed` — the opposite default
-    // from the per-user limiter, which fails OPEN.
+    // (nothing to refund). This is a GLOBAL cap (reserve_ai_spend sums spend
+    // across all users and takes no per-user budget) and applies to EVERYONE,
+    // including elevated operators — an unbounded provider bill is the
+    // catastrophic failure mode, so even an admin cannot bypass it.
+    //
+    // We RESERVE (not just read) an estimated cost against the cap: the COGS row
+    // is only written in the stream's `finally`, so N concurrent runs that all
+    // read the same stale committed total would otherwise all see headroom and
+    // collectively blow past the cap (migration 086). reserve_ai_spend instead
+    // counts committed COGS + OUTSTANDING reservations atomically, so two
+    // concurrent runs can't both pass when the second would cross the cap. The
+    // reservation is RELEASED in the stream's `finally` once the real COGS row
+    // lands. We BLOCK on the RPC erroring or returning a non-true `allowed` —
+    // the opposite default from the per-user limiter, which fails OPEN.
+    const spendEstimate = estimateRunCostUsd(selectedModelPreference, type);
     const { data: capResult, error: capErr } =
-      await supabaseAdmin.rpc('check_ai_spend_cap');
+      await supabaseAdmin.rpc('reserve_ai_spend', { p_user: user.id, p_estimate: spendEstimate });
     if (capErr) {
-      logError('generate-narrative', user.id, `check_ai_spend_cap errored: ${capErr.message}`, { stage: 'spend-cap' });
+      logError('generate-narrative', user.id, `reserve_ai_spend errored: ${capErr.message}`, { stage: 'spend-cap' });
     }
     const capAllowed = (capResult as { allowed?: boolean } | null)?.allowed === true;
     if (!capAllowed) {
@@ -853,6 +888,10 @@ export async function handleGenerateNarrative(
       // credits were charged (this is before the spend), so nothing to refund.
       throw new Error('AI generation is temporarily unavailable (daily capacity reached). No credits were charged — please try again later.');
     }
+    // The reservation id to settle in the `finally` once the real COGS lands.
+    // Null when the operator kill-switch is off (no reservation held).
+    const reservationId =
+      (capResult as { reservation_id?: string | null } | null)?.reservation_id ?? null;
 
     // ── SAFETY 2: per-user/day rate limit — FAIL OPEN ──
     // One abusive account can't drain the shared provider pool. A limiter
@@ -1363,6 +1402,22 @@ export async function handleGenerateNarrative(
           // Elevated runs still record COGS (the spend was free, but the tokens
           // weren't) — spendId is null for those, which is correct.
           await persistAiUsageEvents(supabaseAdmin, user.id, spendId, usageTelemetry);
+
+          // RECONCILE the pre-run reservation (migration 086): now that the real
+          // COGS row(s) above are the committed source of truth, the estimated
+          // reservation's headroom hold is redundant, so RELEASE it. Best-effort
+          // and AFTER the persist — the release_ai_spend_reservation RPC is
+          // idempotent + null-safe (a missing / already-expired / null id is a
+          // no-op), so a failure here can never fail the user's streamed result.
+          // A leaked reservation (release miss) self-heals via expires_at +
+          // cleanup_ai_spend_reservations; it only briefly under-counts headroom.
+          if (reservationId) {
+            const { error: relErr } =
+              await supabaseAdmin.rpc('release_ai_spend_reservation', { p_id: reservationId });
+            if (relErr) {
+              logError('generate-narrative', user.id, `release_ai_spend_reservation errored: ${relErr.message}`, { stage: 'spend-cap' });
+            }
+          }
         }
       },
     });
