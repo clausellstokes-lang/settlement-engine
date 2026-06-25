@@ -24,6 +24,7 @@ import {
   CHANGE_AUTHORITY_POLICY,
   CHANGE_AUTHORITY_FLAGGED,
 } from '../../src/domain/worldPulse/changeAuthorityPolicy.js';
+import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { deriveFlowCandidates } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
@@ -184,6 +185,56 @@ describe('change-authority contract — newly-mapped sites carry their live auth
   test('strategyCandidate routes to proposal only when a proposal lever is passed', () => {
     const src = sourceFor('settlementStrategy.js');
     expect(src).toContain("applyMode: proposal ? 'proposal' : 'auto'");
+  });
+});
+
+describe('change-authority contract — campaignAltering markers (Advance-scaling Stage 2)', () => {
+  // The EXACT set of policy change-types whose outcomes are STRUCTURAL majors.
+  // Adding/removing a campaign-altering change-type must update BOTH this set and
+  // deriveDecisionTier deliberately — that is the point of the guard.
+  const CAMPAIGN_ALTERING = Object.freeze([
+    'conquest',
+    'occupation_vassalized',
+    'coup_succeeded',
+    'faction_government_challenge',
+  ]);
+
+  test('exactly the structural-major change-types carry campaignAltering: true', () => {
+    const marked = Object.entries(CHANGE_AUTHORITY_POLICY)
+      .filter(([, entry]) => entry.campaignAltering === true)
+      .map(([changeType]) => changeType)
+      .sort();
+    expect(marked).toEqual([...CAMPAIGN_ALTERING].sort());
+  });
+
+  test('no campaignAltering marker is keyed off severity or applyMode', () => {
+    // Authority class is NOT the signal: campaign-altering entries span auto,
+    // auto-with-lock-escalation, and always-proposal. The flag is structural.
+    const authorities = new Set(
+      CAMPAIGN_ALTERING.map(t => CHANGE_AUTHORITY_POLICY[t].authority),
+    );
+    expect(authorities.size).toBeGreaterThan(1);
+  });
+
+  // deriveDecisionTier is the runtime classifier; the policy flag is its written
+  // contract. A representative outcome for each campaign-altering change-type must
+  // classify 'major', and a high-severity famine must classify 'minor'.
+  const REPRESENTATIVE_MAJOR_OUTCOME = Object.freeze({
+    conquest: { candidateType: 'conquest', type: 'power_transfer', powerTransfer: { cause: 'conquest' }, severity: 0.62 },
+    occupation_vassalized: { candidateType: 'occupation_vassalized', type: 'relationship', severity: 0.5 },
+    coup_succeeded: { candidateType: 'coup_succeeded', type: 'power_transfer', powerTransfer: { cause: 'coup' }, severity: 0.7 },
+    faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
+  });
+
+  for (const changeType of CAMPAIGN_ALTERING) {
+    test(`deriveDecisionTier classifies a ${changeType} outcome as 'major'`, () => {
+      expect(deriveDecisionTier(REPRESENTATIVE_MAJOR_OUTCOME[changeType])).toBe('major');
+    });
+  }
+
+  test("a high-severity famine outcome classifies 'minor' (severity is NOT the signal)", () => {
+    const famine = { candidateType: 'flow_migration', type: 'stressor', severity: 0.95 };
+    expect(deriveDecisionTier(famine)).toBe('minor');
   });
 });
 

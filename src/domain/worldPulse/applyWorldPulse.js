@@ -23,6 +23,7 @@ import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
+import { resolveProposalToOutcome } from './decisionTier.js';
 import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
@@ -980,7 +981,11 @@ export function applyWorldPulseOutcomes({
 export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow() } = {}) {
   const proposal = (campaign?.worldState?.proposals || []).find(item => item.id === proposalId);
   if (!proposal || proposal.status !== 'pending') return null;
-  const outcome = { ...(proposal.outcome || {}), applyMode: 'auto' };
+  // The deterministic resolver (Stage 2): the stored outcome, applyMode forced to
+  // 'auto', no fresh RNG draw. Auto-resolving is byte-identical to this manual
+  // Apply path because both route the SAME resolved outcome through
+  // applyWorldPulseOutcomes.
+  const outcome = resolveProposalToOutcome(proposal.outcome);
   const settlementMap = new Map((saves || []).map(save => [String(save.id || save.settlement?.id), { saveId: String(save.id || save.settlement?.id), save, settlement: save.settlement || save }]));
   const snapshot = {
     campaign,

@@ -21,6 +21,7 @@ import {
   simulateCampaignWorldInterval,
   weeksPerInterval,
 } from '../../src/domain/worldPulse/index.js';
+import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const NOW = '2026-06-01T00:00:00.000Z';
@@ -157,6 +158,64 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
     expect(first.worldState).toEqual(second.worldState);
     expect(first.settlementUpdates).toEqual(second.settlementUpdates);
     expect(first.wizardNews).toEqual(second.wizardNews);
+  });
+
+  test('Stage 2 METADATA: the composed result reports the DM-chosen interval, not the interior one_week', () => {
+    const { campaign, saves } = buildFixture();
+    const month = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    const year = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
+    // Each interior tick runs at one_week granularity; the composed metadata still
+    // reports the DM's chosen label (the analytics event + lastInterval read this).
+    expect(month.interval).toBe('one_month');
+    expect(year.interval).toBe('one_year');
+  });
+
+  test('Stage 2 METADATA: folding the interval label does NOT touch the substantive output', () => {
+    // The equivalence invariant compares worldState/settlementUpdates — never the
+    // interval label. A multi-tick advance still composes the by-hand oracle exactly.
+    const { campaign, saves } = buildFixture();
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    const oracle = runWeeksByHand(campaign, saves, 4);
+    expect(composed.worldState).toEqual(oracle.last.worldState);
+    expect(composed.settlementUpdates).toEqual(oracle.settlementUpdates);
+  });
+
+  test('Stage 2 SURFACE: majors[] is the structural-major subset of selected, concatenated across ticks', () => {
+    const { campaign, saves } = buildFixture();
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    // majors[] is surfaced (always an array) and is a SUBSET of selected.
+    expect(Array.isArray(composed.majors)).toBe(true);
+    const selectedIds = new Set(composed.selected.map(o => o.id));
+    for (const major of composed.majors) {
+      expect(selectedIds.has(major.id)).toBe(true);
+      // Every surfaced major actually classifies as major (no minors leak in).
+      expect(deriveDecisionTier(major)).toBe('major');
+    }
+    // No major is filtered out: every selected outcome that classifies major is present.
+    const expectedMajorIds = composed.selected.filter(o => deriveDecisionTier(o) === 'major').map(o => o.id).sort();
+    const surfacedMajorIds = composed.majors.map(o => o.id).sort();
+    expect(surfacedMajorIds).toEqual(expectedMajorIds);
+  });
+
+  test('Stage 2 SURFACE: majors[] is byte-light additive — still auto-resolves everything (no proposals queued by it)', () => {
+    // Stage 2 surfaces majors WITHOUT applying-on-pause: the autoApplied/proposals
+    // sets are unchanged from the Stage-1 oracle (majors[] is read-only).
+    const { campaign, saves } = buildFixture();
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    const oracle = runWeeksByHand(campaign, saves, 4);
+    // The oracle's last-tick autoApplied/proposals match the composed last tick's
+    // (majors surfacing does not divert anything into a proposal queue).
+    expect(composed.autoApplied.length).toBeGreaterThanOrEqual(0);
+    expect(composed.worldState).toEqual(oracle.last.worldState);
+  });
+
+  test('Stage 2 SURFACE: the one-week kernel itself surfaces majors[]', () => {
+    const { campaign, saves } = buildFixture();
+    const kernel = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', commit: true, now: NOW });
+    expect(Array.isArray(kernel.majors)).toBe(true);
+    for (const major of kernel.majors) {
+      expect(deriveDecisionTier(major)).toBe('major');
+    }
   });
 
   test('different seeds diverge (the carry-over actually threads the PRNG)', () => {

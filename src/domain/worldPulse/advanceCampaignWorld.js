@@ -45,6 +45,7 @@ import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
+import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 
@@ -917,6 +918,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     autoApplied: applied.autoApplied,
     proposals: applied.proposals,
     resolvedStressors: agedStressors.resolved,
+    // Stage 2 SURFACE: the campaign-altering subset of this tick's selected
+    // outcomes, classified on structural markers (deriveDecisionTier), NOT
+    // applied-on-pause. Stage 2 still auto-resolves everything — majors[] is a
+    // read-only annotation so Stages 3+ can pause on it. Behavior is unchanged.
+    majors: selectedForApply.filter(outcome => deriveDecisionTier(outcome) === 'major'),
     pulseRecord,
   };
 }
@@ -991,7 +997,13 @@ function foldUpdatesOntoSaves(saves, updates) {
  * @param {string} [args.now]
  */
 export function simulateCampaignWorldInterval({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow() } = {}) {
-  const tickCount = ticksForInterval(usableTickInterval(interval));
+  // The DM-CHOSEN interval (one_year/one_month/…). Interior ticks always run at
+  // one_week granularity, so the last tick reports interval:'one_week'; Stage 2
+  // folds the DM's chosen label back onto the composed metadata (the analytics
+  // event + campaignState.worldPulse.lastInterval) without touching the
+  // SUBSTANTIVE simulation output (worldState/settlementUpdates).
+  const chosenInterval = usableTickInterval(interval);
+  const tickCount = ticksForInterval(chosenInterval);
 
   let runningCampaign = campaign;
   let runningSaves = saves;
@@ -1006,6 +1018,10 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
   const autoApplied = [];
   const proposals = [];
   const resolvedStressors = [];
+  // Stage 2 SURFACE: the campaign-altering outcomes across every interior tick,
+  // concatenated like the other per-tick collections. Read-only — Stage 2 still
+  // auto-resolves the whole interval.
+  const majors = [];
 
   for (let i = 0; i < tickCount; i++) {
     // ALWAYS a one-week step — the interval is the loop bound, not the kernel's
@@ -1028,6 +1044,7 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
     if (tickResult.autoApplied) autoApplied.push(...tickResult.autoApplied);
     if (tickResult.proposals) proposals.push(...tickResult.proposals);
     if (tickResult.resolvedStressors) resolvedStressors.push(...tickResult.resolvedStressors);
+    if (tickResult.majors) majors.push(...tickResult.majors);
 
     // Thread this tick's output into the next tick's input. The kernel carries
     // wizardNews forward internally (it appends onto the threaded feed), so the
@@ -1047,6 +1064,12 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
   // the id-accumulated settlementUpdates, the concatenated per-tick collections.
   return {
     ...last,
+    // Stage 2 METADATA FIDELITY: report the DM-chosen interval, not the final
+    // interior tick's 'one_week'. This is the label the analytics
+    // world_pulse_advanced event + campaignState.worldPulse.lastInterval read.
+    // The SUBSTANTIVE output (worldState/settlementUpdates) is untouched — the
+    // Stage-1 equivalence invariant compares those, not this label.
+    interval: chosenInterval,
     settlementUpdates: [...updatesById.values()],
     candidates,
     selected,
@@ -1054,6 +1077,7 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
     autoApplied,
     proposals,
     resolvedStressors,
+    majors,
   };
 }
 
