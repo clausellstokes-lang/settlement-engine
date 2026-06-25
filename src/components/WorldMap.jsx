@@ -29,7 +29,8 @@ import { isCampaignActive } from '../lib/campaigns.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
-import { useRealmInspector, ADVANCE_ERROR_TEXT } from '../hooks/useRealmInspector.js';
+import { useRealmInspector } from '../hooks/useRealmInspector.js';
+import { useAdvanceSession } from '../hooks/useAdvanceSession.js';
 import { useCampaignActivation } from '../hooks/useCampaignActivation.js';
 import { useMapImageImport } from '../hooks/useMapImageImport.js';
 
@@ -38,6 +39,7 @@ import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
 import { WorldMapContextToolbars } from './map/WorldMapContextToolbars.jsx';
 import { WorldMapStage } from './map/WorldMapStage.jsx';
 import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
+import { AdvanceAutoResolveToggle } from './map/AdvanceAutoResolveToggle.jsx';
 
 const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
 // Mobile-only: the defer-to-desktop wall + read-only dashboard. Lazy so the
@@ -68,7 +70,6 @@ export default function WorldMap({ onNavigate } = {}) {
   const [mapTemplates, setMapTemplates] = useState([]);
   const [currentTemplate, setCurrentTemplate] = useState('');
   const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
-  const [worldPulseBusy, setWorldPulseBusy] = useState(false);
   const [regenerateConfirm, setRegenerateConfirm] = useState(null);
   // Confirm shown when saving a canonized map — placed settlements can't move.
   const [mapSaveConfirm, setMapSaveConfirm] = useState(false);
@@ -125,14 +126,19 @@ export default function WorldMap({ onNavigate } = {}) {
   const saveCampaignMap   = useStore(s => s.saveCampaignMap);
   const clearCampaignMap  = useStore(s => s.clearCampaignMap);
   const getCampaignMapState = useStore(s => s.getCampaignMapState);
-  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
+  // Advance-scaling Stage 4 surface (Stage 1-3 store values). The autoresolve toggle
+  // value + setter ride the confirm dialog; the advance/resume/undo handlers + the
+  // session object live in useAdvanceSession below. All inert with the multi-tick
+  // flag OFF (the single-tick path never pauses), so this is byte-neutral on the
+  // legacy path.
+  const advanceAutoResolve = useStore(s => s.advanceAutoResolve);
+  const setAdvanceAutoResolve = useStore(s => s.setAdvanceAutoResolve);
   const updateCampaignSimulationRules = useStore(s => s.updateCampaignSimulationRules);
   const pendingMapWorkspace = useStore(s => s.pendingMapWorkspace);
   const consumeMapWorkspace = useStore(s => s.consumeMapWorkspace);
   const pendingSimulationRules = useStore(s => s.pendingSimulationRules);
   const consumeSimulationRules = useStore(s => s.consumeSimulationRules);
   // Campaign-clock (Phase C2/C3): multi-step undo of the last World Pulse.
-  const undoLastPulse = useStore(s => s.undoLastPulse);
   const canUndoPulse = useStore(s =>
     !!activeCampaignId && (s.pulseUndoStack || []).some(e => e.campaignId === activeCampaignId));
 
@@ -199,6 +205,22 @@ export default function WorldMap({ onNavigate } = {}) {
     canManageCampaigns, pendingMapWorkspace, activeCampaign, activeCampaignId, consumeMapWorkspace,
     updateCampaignSimulationRules, onNavigate, showToast, pendingSimulationRules, consumeSimulationRules,
   });
+
+  // Advance-scaling Stage 4 — the multi-tick advance session (progress/paused) + its
+  // advance / resume / undo handlers live in a dedicated hook so this component
+  // stays under the size ratchet. worldPulseBusy is the legacy "not idle" alias; the
+  // flag-OFF path only ever toggles idle↔running, so the busy semantics are unchanged.
+  const {
+    advanceSession, worldPulseBusy, multiTickOn,
+    performAdvanceRealm, handleResumeAdvance, handleUndoRealm,
+  } = useAdvanceSession({ activeCampaignId, worldPulseInterval, openInspectorAt, showToast });
+
+  // Advance-scaling Stage 4: the paused-advance cursor for the active campaign, read
+  // off worldState so it stays reactive AND survives a reload (it persists on the
+  // campaign). Drives the toolbar "Advance paused" resume chip. Only ever non-null on
+  // the multi-tick path; the legacy advance never parks a cursor. (Derived AFTER the
+  // useAdvanceSession destructure that provides multiTickOn.)
+  const pausedAdvance = multiTickOn ? (activeCampaign?.worldState?.pausedAdvance || null) : null;
 
   // Auto-save the working map into the active campaign so it
   // persists per account and across devices without a manual click. Extracted
@@ -551,54 +573,6 @@ export default function WorldMap({ onNavigate } = {}) {
     setAdvanceConfirm(true);
   }, [activeCampaignId, worldPulseBusy]);
 
-  const performAdvanceRealm = useCallback(async () => {
-    if (!activeCampaignId || worldPulseBusy) return;
-    setAdvanceConfirm(false);
-    // Open Pulse BEFORE the await so it shows the "Advancing…" skeleton (driven by
-    // worldPulseBusy) for the whole run, not the prior tick's numbers (P10).
-    setWorldPulseBusy(true); openInspectorAt('pulse');
-    try {
-      const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
-      if (result && result.ok !== false) {
-        // result.cloudPending means the advance is real locally but did not finish
-        // reaching the cloud. The store already raised the retryable campaignSyncError
-        // banner, so show an honest cloud-pending notice rather than a 'Realm
-        // advanced' success (which would contradict the banner) or a bare 'could not
-        // advance' (which invites a re-advance and double-ticks the world). A reload
-        // or the same retried sync reconciles the cloud to the local advance.
-        showToast(result.cloudPending ? 'error' : 'success', result.cloudPending ? 'The realm advanced here, but the change has not finished saving to the cloud. Reload to confirm once your connection recovers.' : `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);
-      } else {
-        // Plain-language error (raw reason → console only, P10/P11); the
-        // not-canon case adds a CTA re-focusing the Pulse canonize control.
-        if (result?.reason) console.warn('[WorldMap] advance realm reason:', result.reason);
-        showToast('error', ADVANCE_ERROR_TEXT[result?.reason] || 'The realm could not advance. Try again in a moment.',
-          result?.reason === 'world_not_canonized' ? { label: 'Canonize the world', onClick: () => openInspectorAt('pulse') } : null);
-      }
-    } catch (err) {
-      console.warn('[WorldMap] advance realm failed', err);
-      showToast('error', 'The realm could not advance. Try again in a moment.');
-    } finally {
-      setWorldPulseBusy(false);
-    }
-  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval, openInspectorAt, showToast]);
-
-  // Campaign-clock: reverse the most recent World Pulse for this campaign,
-  // restoring the pre-pulse world + every member settlement. Multi-step — the
-  // button stays available while snapshots remain (capped, session-scoped).
-  const handleUndoRealm = useCallback(async () => {
-    if (!activeCampaignId || worldPulseBusy) return;
-    setWorldPulseBusy(true);
-    try {
-      const ok = await undoLastPulse(activeCampaignId);
-      showToast(ok ? 'success' : 'info', ok ? 'Reverted the last realm advance' : 'Nothing to undo');
-    } catch (err) {
-      console.warn('[WorldMap] undo advance failed', err);
-      showToast('error', `Undo failed: ${err.message || err}`);
-    } finally {
-      setWorldPulseBusy(false);
-    }
-  }, [activeCampaignId, undoLastPulse, worldPulseBusy, showToast]);
-
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
     const bridge = bridgeRef.current;
@@ -813,6 +787,7 @@ export default function WorldMap({ onNavigate } = {}) {
         handleSaveMapToCampaign={handleSaveMapToCampaign} handleClearMapFromCampaign={handleClearMapFromCampaign} savingMap={savingMap}
         setShowSimulationRules={setShowSimulationRules} showSimulationRules={showSimulationRules}
         worldPulseInterval={worldPulseInterval} setWorldPulseInterval={setWorldPulseInterval} handleAdvanceRealm={handleAdvanceRealm} worldPulseBusy={worldPulseBusy}
+        multiTickOn={multiTickOn} advanceSession={advanceSession} pausedAdvance={pausedAdvance} onResumeAdvance={handleResumeAdvance}
         canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm} setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
         handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
@@ -861,7 +836,7 @@ export default function WorldMap({ onNavigate } = {}) {
               campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
               tier={authTier} onUpgrade={handleUpgrade}
               inspectorSize={inspectorSize} onSetSize={setInspectorSize}
-              {...campaignActivation} advancing={worldPulseBusy} />
+              {...campaignActivation} advancing={advanceSession.phase === 'running'} />
           </Suspense>
         )}
       </div>
@@ -872,6 +847,12 @@ export default function WorldMap({ onNavigate } = {}) {
         setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
         advanceConfirm={advanceConfirm} advanceBody={advanceScopeBody}
         performAdvanceRealm={performAdvanceRealm} setAdvanceConfirm={setAdvanceConfirm}
+        // Advance-scaling Stage 4: the autoresolve toggle rides the confirm dialog's
+        // extra slot, but ONLY when the multi-tick flag is on — so the flag-OFF
+        // confirm dialog is byte-unchanged (no extra node at all).
+        advanceExtra={multiTickOn ? (
+          <AdvanceAutoResolveToggle value={advanceAutoResolve} onChange={setAdvanceAutoResolve} />
+        ) : null}
         importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
         setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />

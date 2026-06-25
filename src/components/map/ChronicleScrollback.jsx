@@ -17,16 +17,75 @@
  */
 
 import { useMemo, useState } from 'react';
-import { BookOpen, ChevronLeft, ChevronRight, MapPin, Sparkles } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, MapPin, ScrollText, Sparkles } from 'lucide-react';
 
+import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
 import {
   chronicleTimeline,
   hasTimeline,
   tickCausalDiff,
 } from '../../domain/display/chronicleTimeline.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, R, SECOND, SP, sans } from '../theme.js';
+import { buildChronicleGrounding } from '../../domain/worldPulse/chronicle.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, R, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+
+// Advance-scaling Stage 4: interval → its real one-week tick count, so the
+// end-of-advance chronicle summary can gather the whole interval's beats (not just
+// the final tick). Mirrors the domain's weeksPerInterval.
+const INTERVAL_WEEKS = { one_week: 1, one_month: 4, one_season: 12, one_year: 48 };
+
+const INTERVAL_LABEL = { one_week: 'week', one_month: 'month', one_season: 'season', one_year: 'year' };
+
+/**
+ * Advance-scaling Stage 4: a calm end-of-advance summary — "what unfolded over the
+ * {interval}". Reuses the deterministic wizardNews/chronicle beats via
+ * buildChronicleGrounding over the interval's tick window, then lists the major
+ * headlines. Self-gates to null when the latest advance was a single tick or
+ * surfaced no major beats, so a quiet advance adds nothing.
+ */
+function IntervalChronicleSummary({ campaign, nameFor }) {
+  const summary = useMemo(() => {
+    const ws = campaign?.worldState;
+    const history = Array.isArray(ws?.pulseHistory) ? ws.pulseHistory : [];
+    const latest = history[history.length - 1] || null;
+    if (!latest) return null;
+    const interval = latest.interval || 'one_month';
+    const weeks = INTERVAL_WEEKS[interval] || 1;
+    // Only worth a summary when the advance spanned more than one tick.
+    if (weeks <= 1) return null;
+    const grounding = buildChronicleGrounding({
+      wizardNews: campaign?.wizardNews,
+      worldState: ws,
+      snapshot: { settlements: (campaign?.settlementIds || []).map(id => ({ id, name: nameFor(id) })) },
+      regionalGraph: campaign?.regionalGraph || null,
+      lookback: weeks,
+    });
+    const majors = Array.isArray(grounding?.majorHeadlines) ? grounding.majorHeadlines : [];
+    if (majors.length === 0) return null;
+    return { label: INTERVAL_LABEL[interval] || 'interval', majors };
+  }, [campaign, nameFor]);
+
+  if (!summary) return null;
+  return (
+    <article
+      data-testid="interval-chronicle-summary"
+      style={{
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
+        background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 6,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <ScrollText size={13} /> What unfolded over the {summary.label}
+      </div>
+      <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+        {summary.majors.slice(0, 6).map((headline, i) => (
+          <li key={i} style={{ marginBottom: 3 }}>{headline}</li>
+        ))}
+      </ul>
+    </article>
+  );
+}
 
 function human(v) {
   return String(v || '').replace(/_/g, ' ');
@@ -147,6 +206,11 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
 
   return (
     <div data-testid="chronicle-scrollback" style={{ display: 'grid', gap: SP.sm }}>
+      {/* Advance-scaling Stage 4: end-of-advance summary of the whole interval,
+          above the per-tick scrubber. Flag-gated + self-gating (single-tick or
+          quiet advances render nothing), so the flag-OFF Chronicle is unchanged. */}
+      {flag('advanceMultiTick') && <IntervalChronicleSummary campaign={campaign} nameFor={resolveName} />}
+
       {/* ── Tick scrubber ─────────────────────────────────────────────────── */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,

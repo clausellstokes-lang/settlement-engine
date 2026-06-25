@@ -129,6 +129,10 @@ export function ConfirmDialog({
   open,
   title,
   body,
+  // Optional extra content rendered ABOVE the action row — e.g. a toggle row or a
+  // short scope list. Kept null by default so every existing call site renders
+  // byte-identically (no extra DOM node when unused).
+  extra = null,
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
   tone = 'danger',
@@ -137,6 +141,7 @@ export function ConfirmDialog({
 }) {
   return (
     <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
+      {extra}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
         <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm}>{confirmLabel}</Button>
