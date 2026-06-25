@@ -22,6 +22,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
+import { ProseText } from '../primitives/ProseText.jsx';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -30,7 +31,7 @@ import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
  * displayed correctly but was invisible to pdftotext, leaving DMs with
  * "blank" sections when they grep'd the file.
  */
-function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3 }) {
+function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3, index = null }) {
   if (value == null || value === '') return null;
   return (
     <View style={{ flexDirection: 'row', marginBottom, alignItems: 'flex-start' }}>
@@ -46,7 +47,10 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
         {String(l || '').toUpperCase()}
       </Text>
       <Text style={{ ...type.body, fontSize: pt['9.5'], flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
-        {String(value)}
+        {/* When an entity index is supplied, the value may carry ⟦entity:…⟧
+            tokens (NPC goal prose) — render through ProseText so they become
+            inline EntityRef links; otherwise it's plain text. */}
+        {index ? <ProseText text={String(value)} index={index} /> : String(value)}
       </Text>
     </View>
   );
@@ -199,7 +203,7 @@ function FullCard({ npc, index }) {
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="APPEARANCE"  value={npc.appearance}  multiline />
-        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline />
+        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
       </View>
 
       {/* Secrets */}

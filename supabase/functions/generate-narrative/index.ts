@@ -32,6 +32,10 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { shouldRefundOnFailure } from './refundPolicy.ts';
+// Deterministic entity-link post-processor: wraps known entity names found in
+// refined free-form prose with id-bearing tokens the client tokenizer parses.
+// Ids are byte-identical to the client dossier index (parity-tested).
+import { wrapEntityRefsInProse } from './entityRefWrapper.ts';
 // Tier 6.8 — bundled aiGrounding contract. Pre-built by
 // `scripts/build-edge-shared.mjs`. Freshness enforced by
 // tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
@@ -2675,6 +2679,10 @@ export async function handleGenerateNarrative(
               }
             }));
 
+            // Entity-link layer (same deterministic pass as the narrative
+            // branch) over the evolved prose before it streams home.
+            wrapEntityRefsInProse(aiClone);
+
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
             send({
@@ -2817,6 +2825,13 @@ export async function handleGenerateNarrative(
               send({ field: `dailyLife.${beat}`, error: (e as Error).message });
             }
           });
+
+          // Deterministic entity-link layer: wrap known entity names in the
+          // refined free-form prose (thesis, tab notes, NPC bios) with id-bearing
+          // tokens. Pure post-processing over the merged clone — structured
+          // mentions and non-prose fields are untouched, and a re-generation
+          // overwrites rather than accumulates.
+          wrapEntityRefsInProse(aiClone);
 
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
