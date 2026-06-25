@@ -32,6 +32,13 @@ const WORKSPACE_TO_SECTION = Object.freeze({
   map: 'dashboard', pulse: 'pulse', news: 'chronicle', pantheon: 'pantheon',
 });
 
+// The Inspector's three size states (plan §1). 'default' is today's 420px dock;
+// 'min' is a slim top-right peek-bar; 'expanded' widens to cover the map for
+// focused reading. Persisted to sessionStorage so the GM's last choice survives
+// a section change or a quick close/reopen within the same tab session.
+const INSPECTOR_SIZES = Object.freeze(['min', 'default', 'expanded']);
+const SIZE_STORAGE_KEY = 'realmInspectorSize';
+
 /**
  * @param {Object} args
  * @param {boolean} args.canManageCampaigns  premium/elevated → live controls
@@ -59,6 +66,42 @@ export function useRealmInspector({
 }) {
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [inspectorSection, setInspectorSection] = useState('dashboard');
+  // The dock's three-state size (plan §1). Starts at 'default' (today's 420px)
+  // and is restored from sessionStorage once on mount below.
+  const [inspectorSize, setInspectorSizeState] = useState('default');
+
+  // Persist the size whenever it changes. sessionStorage may be blocked (private
+  // mode, embedded contexts), so every access is guarded — a failed write must
+  // never break the toggle.
+  const setInspectorSize = useCallback((next) => {
+    if (!INSPECTOR_SIZES.includes(next)) return;
+    setInspectorSizeState(next);
+    try {
+      window.sessionStorage?.setItem(SIZE_STORAGE_KEY, next);
+    } catch {
+      // storage blocked — keep the in-memory state, drop the persistence.
+    }
+  }, []);
+
+  // Restore the persisted size once on mount, validating it against the known
+  // set. Ref-guarded so a later storage change can't re-trigger this and stomp a
+  // live selection.
+  const sizeRestoredRef = useRef(false);
+  useEffect(() => {
+    if (sizeRestoredRef.current) return;
+    sizeRestoredRef.current = true;
+    try {
+      const stored = window.sessionStorage?.getItem(SIZE_STORAGE_KEY);
+      if (stored && INSPECTOR_SIZES.includes(stored)) {
+        // One-shot sync of a persisted preference into local UI state — the ref
+        // guard makes it fire exactly once.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setInspectorSizeState(stored);
+      }
+    } catch {
+      // storage blocked — fall back to the 'default' initial state.
+    }
+  }, []);
   // The Simulation Rules dialog (which carries the religion-dynamics toggle) is an
   // overlay over the map; its open state lives here alongside the Inspector's so the
   // one-shot deep-link consumption below can drive it the way the workspace request
@@ -136,6 +179,8 @@ export function useRealmInspector({
     setInspectorOpen,
     inspectorSection,
     setInspectorSection,
+    inspectorSize,
+    setInspectorSize,
     openInspectorAt,
     handleApplyPreset,
     handleUpgrade,

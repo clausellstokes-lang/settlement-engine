@@ -193,6 +193,7 @@ export default function WorldMap({ onNavigate } = {}) {
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
   const {
     inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
+    inspectorSize, setInspectorSize,
     openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
   } = useRealmInspector({
     canManageCampaigns, pendingMapWorkspace, activeCampaign, activeCampaignId, consumeMapWorkspace,
@@ -670,8 +671,13 @@ export default function WorldMap({ onNavigate } = {}) {
   // Stable toggle for the Realm Inspector. Memoized so the memoized
   // WorldMapToolbar isn't re-rendered by an inline arrow on every parent render.
   const handleToggleInspector = useCallback(() => {
-    setInspectorOpen(v => !v);
-  }, [setInspectorOpen]);
+    setInspectorOpen(v => {
+      // Opening from the toolbar always lands at the 'default' size so a prior
+      // 'min'/'expanded' choice never surprises the GM on reopen (plan §2).
+      if (!v) setInspectorSize('default');
+      return !v;
+    });
+  }, [setInspectorOpen, setInspectorSize]);
 
   // ── Custom map image (Project 1, premium) ─────────────────────────────
   // Pick device file → ConfirmDialog (it disables terrain + overwrites the map)
@@ -843,6 +849,7 @@ export default function WorldMap({ onNavigate } = {}) {
               onSection={setInspectorSection} onClose={() => setInspectorOpen(false)}
               campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
               tier={authTier} onUpgrade={handleUpgrade}
+              inspectorSize={inspectorSize} onSetSize={setInspectorSize}
               {...campaignActivation} advancing={worldPulseBusy} />
           </Suspense>
         )}
