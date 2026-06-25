@@ -839,13 +839,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               The partial-failure notice was lifted out of the thesis block so it
               surfaces on every tab (it's a session-level concern, not an
               identity-banner concern). */}
+          {/* Provider opens above the banner, not just around the tab body: the
+              banner's thesis/per-tab-note prose renders EntityLinks that must read
+              the same index. Outside it they hit the default {index:null} context
+              and degrade to plain text. */}
+          <DossierEntityContext.Provider value={dossierEntityValue}>
           <DossierNarrativeBanner
-            showNarrative={showNarrative}
-            aiSettlement={aiSettlement}
-            publicDossier={publicDossier}
-            rawSettlement={rawSettlement}
-            selectedTab={selectedTab}
-            aiRegenerating={aiRegenerating}
+            showNarrative={showNarrative} aiSettlement={aiSettlement} publicDossier={publicDossier}
+            rawSettlement={rawSettlement} selectedTab={selectedTab} aiRegenerating={aiRegenerating}
           />
           {/* Session-level notices cluster — see DossierSessionNotices; it
               self-gates to nothing when no notice is present so it never paints an
@@ -914,12 +915,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 // insetting (or not) on its own. (P12 width discipline.)
                 style={{ padding: `0 ${SP.lg}px ${SP.lg}px`, opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
               >
-                <DossierEntityContext.Provider value={dossierEntityValue}>
-                  {renderTab()}
-                </DossierEntityContext.Provider>
+                {renderTab()}
               </div>
             </FeatureErrorBoundary>
           </Suspense>
+          </DossierEntityContext.Provider>
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>

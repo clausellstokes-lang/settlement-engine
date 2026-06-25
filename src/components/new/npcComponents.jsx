@@ -4,6 +4,7 @@ import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import EntityLink from '../primitives/EntityLink.jsx';
+import ProseParagraph from '../ProseParagraph.jsx';
 import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
@@ -277,7 +278,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           )}
           {npc.goal?.short && (
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span>{npc.goal.short}
+              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={npc.goal.short} />
             </p>
           )}
           {npc.structuralPosition && (

@@ -1,4 +1,5 @@
 import { FS, swatch } from '../theme.js';
+import ProseParagraph from '../ProseParagraph.jsx';
 
 // ── Banner above tab content ──────────────────────────────────────────────
 // Thesis (identity-level prose) / per-tab note (lens) banner. Extracted
@@ -53,9 +54,13 @@ export default function DossierNarrativeBanner({
                   </div>
                   {showThesis
                     ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) => (
-                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{para.trim()}</p>
+                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+                          <ProseParagraph text={para.trim()} />
+                        </p>
                       ))
-                    : <p style={{ margin: 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{note}</p>}
+                    : <p style={{ margin: 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+                        <ProseParagraph text={note} />
+                      </p>}
                 </div>
               </div>
             </div>
