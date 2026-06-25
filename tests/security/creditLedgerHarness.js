@@ -3,7 +3,7 @@
  *
  * Loads the ACTUAL, NET-CURRENT PL/pgSQL function bodies (get_credit_balance +
  * allocations from 018, spend_credits + system_grant_credits from 024,
- * refund_credits + admin_grant_credits from 009) into an in-process Postgres
+ * refund_credits from 087 (net-current), admin_grant_credits from 009) into an in-process Postgres
  * (pglite) over a minimal schema mirror. auth.uid()/auth.role()/privileged are
  * GUC stubs; _audit_action is a no-op.
  *
@@ -21,6 +21,7 @@ export const MIG = {
   '009': resolve(dir, '009_profile_security.sql'),
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
+  '087': resolve(dir, '087_review_money_hardening.sql'),
 };
 export const allMigrationsExist = Object.values(MIG).every(existsSync);
 
@@ -91,7 +92,13 @@ export async function makeCreditLedgerDb() {
   // pglite can't resolve the <<grant_fn>> block label as a qualifier for a
   // function PARAMETER; re-qualify by the function name (behaviorally identical).
   await db.exec(extractFn('024', 'system_grant_credits').replace(/\bgrant_fn\.source\b/g, 'system_grant_credits.source'));
-  await db.exec(extractFn('009', 'refund_credits'));
+  // refund_credits net-current = 087 (085 added service-role awareness; 087 added
+  // the FOR UPDATE serialization + the unique-index backstop). Loading it here is
+  // what makes the journey + unit suites exercise the ACTUAL production function,
+  // not the stale 009 body.
+  await db.exec(extractFn('087', 'refund_credits'));
+  await db.exec(`create unique index if not exists ux_credit_ledger_one_refund_per_spend
+    on public.credit_ledger ((metadata->>'refund_of')) where source = 'refund';`);
   await db.exec(extractFn('009', 'admin_grant_credits'));
   return db;
 }

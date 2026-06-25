@@ -229,6 +229,16 @@ export function createChangeQueueSlice(set, get) {
       const preEventLog = Array.isArray(get().eventLog) ? cloneJson(get().eventLog) : [];
       const preSystemState = get().systemState ? cloneJson(get().systemState) : null;
       const preEditedAt = get().editedAt || null;
+      // Also snapshot the savedSettlements MIRROR row for the open settlement —
+      // the flush refreshes it mid-commit (updateSavedSettlement at step 4), so a
+      // FAILED commit must roll it back too. Without this the mirror keeps the
+      // half-applied, never-persisted settlement while the live store is restored,
+      // diverging the two and feeding stale data into the next batch read.
+      const preSavedSettlement = (() => {
+        if (activeSaveId == null) return undefined;
+        const row = (get().savedSettlements || []).find(s => String(s.id) === String(activeSaveId));
+        return row ? cloneJson(row) : undefined;
+      })();
       // Phase 4b — a campaign-member commit STASHES deferred regional impacts onto
       // the campaign worldState during replay (applyEvent under flushApplyLocalOnly).
       // Snapshot the pre-flush deferred bucket + regional graph so a FAILED commit
@@ -433,6 +443,15 @@ export function createChangeQueueSlice(set, get) {
           state.eventLog    = preEventLog;
           state.systemState = preSystemState;
           state.editedAt    = preEditedAt;
+          // Roll the savedSettlements mirror row back in lockstep with the store
+          // so a failed flush never leaves the half-applied settlement behind in
+          // the mirror (atomic rollback — the retry reads a clean base).
+          if (preSavedSettlement !== undefined) {
+            const idx = (state.savedSettlements || []).findIndex(
+              s => String(s.id) === String(activeSaveId),
+            );
+            if (idx !== -1) state.savedSettlements[idx] = preSavedSettlement;
+          }
           // Phase 4b — restore the campaign's deferred-impact bucket (+ graph) so
           // a failed campaign commit leaves NO half-staged propagation behind.
           if (preCampaign) {

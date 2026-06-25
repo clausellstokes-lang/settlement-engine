@@ -357,8 +357,8 @@ export const createSettlementSlice = (set, get) => ({
 
   // Lifetime narrate count, used by useReaderAudience to
   // bump anonymous → intermediate after first narrate spend. Bumped on the
-  // AI generation SUCCESS paths in aiSlice (requestNarrative / requestDailyLife
-  // / requestProgression), where the server-authoritative credit spend has
+  // AI generation SUCCESS paths in aiSlice (requestNarrative /
+  // requestProgression), where the server-authoritative credit spend has
   // just landed — NOT from the unused spendCredits action. Persisted via the
   // store's partialize so the audience signal survives reloads.
   lifetimeNarrateCount: 0,

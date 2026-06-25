@@ -144,6 +144,23 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     expect(await balanceOf(UID)).toBe(10);
   });
 
+  it('the unique-index backstop blocks a duplicate refund even if it bypasses the function (087)', async () => {
+    await webhookPurchase(10, 'cs_idx');
+    const s = await aiSpend('narrative'); // balance 7
+    await aiRefund(s.spend_id);           // legitimate refund → balance 10
+    expect(await balanceOf(UID)).toBe(10);
+    // A direct INSERT that bypasses refund_credits' check-then-insert guard (the
+    // concurrent-redelivery race) must still be rejected by the partial unique
+    // index ux_credit_ledger_one_refund_per_spend — one refund grant per spend.
+    await expect(
+      db.query(
+        `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+         values ('${UID}', 'grant', 3, 'refund', jsonb_build_object('refund_of', '${s.spend_id}'))`,
+      ),
+    ).rejects.toThrow(/duplicate key|unique|ux_credit_ledger_one_refund_per_spend/i);
+    expect(await balanceOf(UID)).toBe(10); // balance unchanged — no double-credit
+  });
+
   it('an overspend mid-journey is rejected and leaves the ledger untouched', async () => {
     await webhookPurchase(4, 'cs_small'); // 4 credits
     const ok = await aiSpend('narrative'); // cost 3 → 1

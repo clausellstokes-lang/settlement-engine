@@ -209,6 +209,89 @@ describe('generate-narrative — single spend + safety ordering contracts', () =
   });
 });
 
+// ── Provider-fetch wall-clock safety (review narrative-edge #1) ─────────────
+// A hung provider socket must not run to the edge wall-clock AFTER the user was
+// already debited. Every provider fetch carries an AbortController bounded by a
+// per-attempt timeout AND an overall deadline kept below the platform limit; on
+// abort the fetch rejects (Timeout/Abort), which the per-pass caller already
+// treats as provider-down (peer fallback / refund). These guard against a
+// regression that silently drops the timeout and reintroduces the hang.
+describe('generate-narrative — provider fetches are abort-bounded', () => {
+  it('every provider call routes through fetchAiWithRetry (no raw, unbounded fetch)', () => {
+    // The only fetch() calls in the file must be inside fetchAiWithRetry. A new
+    // provider impl that calls fetch() directly would skip the AbortController.
+    const directInProvider = /async function call(?:Anthropic|OpenAI)[\s\S]*?\n}/g;
+    const anthropic = src.match(/async function callAnthropic[\s\S]*?\n}/)?.[0] || '';
+    const openai = src.match(/async function callOpenAI[\s\S]*?\n}/)?.[0] || '';
+    void directInProvider;
+    expect(anthropic).toContain('fetchAiWithRetry(');
+    expect(openai).toContain('fetchAiWithRetry(');
+    expect(anthropic).not.toMatch(/await\s+fetch\(/);
+    expect(openai).not.toMatch(/await\s+fetch\(/);
+  });
+
+  it('fetchAiWithRetry binds an AbortController per attempt AND an overall deadline', () => {
+    const fn = src.slice(
+      src.indexOf('async function fetchAiWithRetry'),
+      src.indexOf('async function runWithConcurrency'),
+    );
+    // A per-attempt timeout signal is threaded into the fetch init.
+    expect(fn).toMatch(/signal:\s*t\.signal/);
+    // The overall wall-clock deadline bounds the whole call across retries.
+    expect(fn).toContain('TOTAL_BUDGET_MS');
+    expect(fn).toMatch(/deadline\s*=\s*Date\.now\(\)\s*\+\s*TOTAL_BUDGET_MS/);
+    // On a spent budget it throws a TimeoutError (provider-down → fallback/refund).
+    expect(fn).toMatch(/throw new DOMException\([^)]*'TimeoutError'\)/);
+  });
+
+  it('withTimeout aborts a hung fetch via the AbortController (real runtime)', async () => {
+    // Extract + run the genuine withTimeout helper against a fetch that never
+    // settles, proving the signal actually fires the abort.
+    const withTimeout = extractDecl(src, 'function withTimeout', '\n}');
+    const js = ts.transpileModule(
+      `${withTimeout}\nexport { withTimeout };`,
+      { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } },
+    ).outputText;
+    const exports = {};
+    new Function('exports', js)(exports);
+    const { signal, cancel } = exports.withTimeout(20);
+    const aborted = new Promise((resolve) => {
+      signal.addEventListener('abort', () => resolve(signal.reason), { once: true });
+    });
+    const reason = await aborted;
+    cancel();
+    expect(signal.aborted).toBe(true);
+    expect(reason?.name).toBe('TimeoutError');
+  });
+});
+
+// ── 086 reservation reconciliation order (review narrative-edge #2) ─────────
+// The stream `finally` MUST persist COGS BEFORE releasing the reservation. The
+// reverse order opens an over-ADMIT window (reservation gone before COGS
+// committed); the current order only ever over-counts briefly (fails safe).
+describe('generate-narrative — persist-before-release is deliberate + documented', () => {
+  it('persists ai_usage_events BEFORE releasing the reservation in the finally', () => {
+    const persistIdx = src.indexOf('persistAiUsageEvents(supabaseAdmin, user.id, spendId, usageTelemetry)');
+    const releaseIdx = src.indexOf("rpc('release_ai_spend_reservation', { p_id: reservationId })");
+    expect(persistIdx).toBeGreaterThan(-1);
+    expect(releaseIdx).toBeGreaterThan(-1);
+    expect(persistIdx).toBeLessThan(releaseIdx);
+  });
+
+  it('documents WHY the order is intentional (over-count fails safe; reorder = over-admit)', () => {
+    // The double-count window is acknowledged as a deliberate fail-safe choice,
+    // so a future refactor doesn't "tidy" the order and open an over-admit hole.
+    const finallyBlock = src.slice(
+      src.indexOf('RECONCILE the pre-run reservation'),
+      src.indexOf("rpc('release_ai_spend_reservation', { p_id: reservationId })"),
+    );
+    expect(finallyBlock).toMatch(/persist BEFORE release/i);
+    expect(finallyBlock).toMatch(/fails SAFE|over-?count|TWICE/i);
+    expect(finallyBlock).toMatch(/over-?ADMIT/i);
+    expect(finallyBlock).toMatch(/do not reorder/i);
+  });
+});
+
 describe('generate-chronicle — secondary seam shares the safety layer', () => {
   it('RESERVES the shared spend cap (race-safe, fail-closed) before spending', () => {
     // Migration 086: chronicle, like generate-narrative, now holds the global USD
@@ -239,5 +322,14 @@ describe('generate-chronicle — secondary seam shares the safety layer', () => 
 
   it('meters its Anthropic call into ai_usage_events', () => {
     expect(chronicleSrc).toContain("from('ai_usage_events').insert");
+  });
+
+  it('bounds the Anthropic call with an AbortController + timeout (no hung-socket worker pin)', () => {
+    // A hung provider socket must not pin the worker (holding the spend +
+    // reservation open) until the platform timeout. Abort routes into the model
+    // try/catch so the existing refund + releaseReservation paths run.
+    expect(chronicleSrc).toContain('new AbortController()');
+    expect(chronicleSrc).toMatch(/setTimeout\(\(\)\s*=>\s*\w+\.abort\(\)/);
+    expect(chronicleSrc).toContain('signal:');
   });
 });

@@ -77,6 +77,46 @@ function ranRpc(rpc: Array<{ fn: string }>, fn: string): boolean {
   return rpc.some((c) => c.fn === fn);
 }
 
+/**
+ * Admin stub that makes ONLY the correct-answer-specific work slow: generateLink
+ * sleeps `linkLatencyMs` before resolving, while every RPC (the limiter, lockout
+ * check, verify, note, clear) resolves instantly. This isolates the variable cost a
+ * correct answer pays that a wrong answer does not — the reset-link mint + email —
+ * so the timing test can prove that cost does NOT leak into the response latency.
+ *
+ * Under the buggy serial floor (post-verify work AWAITED in front of the floor) a
+ * generateLink slower than VERIFY_FLOOR_MS pushes the correct response well past the
+ * floor, so a correct answer is observable as a strictly slower response than a wrong
+ * one. With the work DETACHED behind the constant floor the correct response returns
+ * at the floor regardless of generateLink latency, matching the wrong path.
+ */
+function makeSlowLinkAdminClient(
+  results: Record<string, RpcResult>,
+  linkLatencyMs: number,
+) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      const r = results[fn] ?? { data: null };
+      return Promise.resolve({ data: r.data ?? null, error: r.error ?? null });
+    },
+    auth: {
+      admin: {
+        generateLink: async () => {
+          await new Promise((r) => setTimeout(r, linkLatencyMs));
+          return {
+            data: { properties: { action_link: 'https://app/set-new-password#token=x' } },
+            error: null,
+          };
+        },
+      },
+    },
+  };
+  return { rpc, adminClient: () => client };
+}
+
 // ── fail-closed on the limiter ───────────────────────────────────────────────
 Deno.test('verify FAILS CLOSED (429) when the limiter denies — no bcrypt compare', async () => {
   const admin = makeAdminClient({ consume_recovery_rate_limit: DENY });
@@ -202,4 +242,75 @@ Deno.test('verify consumes a TIGHTER per-email cap than lookup', async () => {
 
   // The per-email cap on verify must be strictly lower than on lookup.
   assertEquals(verifyArgs.p_email_limit < lookupArgs.p_email_limit, true);
+});
+
+// ── the correct-answer path is NOT separable from the wrong path by latency ──
+// MEDIUM (timing side-channel): the correct path mints a reset link + sends an email
+// before responding. If that variable-cost work is AWAITED in front of the floor, a
+// correct answer returns strictly later than a wrong answer (whose work is a cheap
+// counter bump), so the floor stops equalizing and a correct answer leaks via latency.
+// We make generateLink take 2× the floor and assert the correct response still returns
+// at ~the floor (well under the link latency), indistinguishable from the wrong path.
+Deno.test({
+  name: 'a CORRECT answer does NOT return later than a WRONG answer (no timing oracle)',
+  // The correct path now DETACHES its slow link-mint work to run past the response
+  // (production keeps it alive via EdgeRuntime.waitUntil; here it is a plain detached
+  // promise). That background setTimeout is still pending when the response resolves —
+  // exactly the property under test — so the op/resource sanitizers must be off for
+  // this case; they would otherwise flag the intentional outliving work.
+  sanitizeOps: false,
+  sanitizeResources: false,
+  fn: async () => {
+  // 2× the 800 ms VERIFY_FLOOR_MS: large enough that an AWAITED link mint would
+  // dominate the floor and make the correct path observably slower.
+  const LINK_LATENCY_MS = 1600;
+
+  // Correct answer, with a deliberately slow link mint.
+  const correct = makeSlowLinkAdminClient({
+    consume_recovery_rate_limit: ALLOW,
+    recovery_is_locked: { data: false },
+    verify_recovery_answer: { data: true },
+  }, LINK_LATENCY_MS);
+  const tC0 = Date.now();
+  const rC = await handleAuthRecovery(
+    req({ action: 'verify', email: 'u@x.com', slot: 1, answer: 'rover' }),
+    { adminClient: correct.adminClient },
+  );
+  const correctMs = Date.now() - tC0;
+  assertEquals(rC.status, 200);
+  assertEquals((await rC.json()).ok, true);
+
+  // Wrong answer (cheap counter bump, no link mint).
+  const wrong = makeSlowLinkAdminClient({
+    consume_recovery_rate_limit: ALLOW,
+    recovery_is_locked: { data: false },
+    verify_recovery_answer: { data: false },
+    note_recovery_verify_failure: { data: { locked: false, fails: 1 } },
+  }, LINK_LATENCY_MS);
+  const tW0 = Date.now();
+  const rW = await handleAuthRecovery(
+    req({ action: 'verify', email: 'u@x.com', slot: 1, answer: 'wrong' }),
+    { adminClient: wrong.adminClient },
+  );
+  const wrongMs = Date.now() - tW0;
+  assertEquals(rW.status, 200);
+  assertEquals((await rW.json()).ok, false);
+
+  // The core failure-path assertion: the correct response must NOT have waited on the
+  // slow link mint — it returns at the floor, well under LINK_LATENCY_MS. The buggy
+  // serial floor awaits the mint, so correctMs ≳ LINK_LATENCY_MS and this fails.
+  assertEquals(
+    correctMs < LINK_LATENCY_MS,
+    true,
+    `correct path leaked timing: ${correctMs}ms ≥ link latency ${LINK_LATENCY_MS}ms`,
+  );
+  // And the two paths are not separable: correct is not meaningfully slower than wrong.
+  // A generous tolerance keeps this robust to CI scheduling jitter while still failing
+  // hard on the ~800 ms gap the awaited link mint would introduce.
+  assertEquals(
+    Math.abs(correctMs - wrongMs) < 400,
+    true,
+    `correct (${correctMs}ms) and wrong (${wrongMs}ms) are separable by latency`,
+  );
+  },
 });

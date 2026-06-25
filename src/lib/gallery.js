@@ -478,7 +478,12 @@ function sanitizeTile(row) {
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
     curated:      row.is_curated ?? false,
-    description:  row.gallery_description || '',
+    // gallery_description is sanitized rich-text HTML, but there is no server/DB
+    // scrub — RLS lets an owner write raw HTML via a direct table update, and
+    // sanitizing-on-write only guards values this client wrote. Sanitize on READ
+    // too, at the normalizer chokepoint, so the data object is HTML-safe for ANY
+    // consumer (card, dossier, PDF, json export) regardless of the stored value.
+    description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
@@ -597,7 +602,11 @@ function sanitizeDossier(row) {
     // signals a simulated settlement, not a generator snapshot. Same derivation
     // as the list tile so card and dossier agree.
     stability:    row.stability || row.data?.viability?.stability || row.data?.systemState?.stability || row.data?.stability || '',
-    description:  row.gallery_description || '',
+    // Sanitize gallery_description on READ (not just on write): there is no
+    // server/DB scrub and RLS lets an owner write raw HTML directly, so this
+    // normalizer is the chokepoint that makes the description HTML-safe for any
+    // consumer downstream. Mirrors sanitizeTile.
+    description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],

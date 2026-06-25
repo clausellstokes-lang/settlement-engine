@@ -109,10 +109,10 @@ async function findUserIdForStripeCustomer(
   if (customerId) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('id, is_founder')
+      .select('id, is_founder, stripe_subscription_id')
       .eq('stripe_customer_id', customerId)
       .maybeSingle();
-    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null };
   }
 
   let email = fallbackEmail || null;
@@ -129,7 +129,7 @@ async function findUserIdForStripeCustomer(
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('id, is_founder')
+    .select('id, is_founder, stripe_subscription_id')
     .ilike('email', email)
     .maybeSingle();
   if (!profile?.id) return null;
@@ -140,7 +140,7 @@ async function findUserIdForStripeCustomer(
       .eq('id', profile.id);
     if (error) throw new Error(`Stripe customer binding failed: ${error.message}`);
   }
-  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null };
 }
 
 async function grantMonthlyAllowanceIfNeeded(
@@ -153,6 +153,23 @@ async function grantMonthlyAllowanceIfNeeded(
   const profile = await findUserIdForStripeCustomer(supabase, customerId, invoice.customer_email || null);
   if (!profile?.userId) {
     throw new Error(`Monthly allowance invoice ${invoice.id} has no matching profile`);
+  }
+
+  // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
+  // users who pre-date the column. We deliberately do NOT overwrite an existing
+  // recorded id from an invoice: Stripe reorders/redelivers, so a late OLD-sub
+  // invoice must not clobber the current sub back to a cancelled one and re-arm a
+  // stale customer.subscription.deleted. The authoritative "current sub" write is
+  // the checkout premium branch (on subscribe/re-subscribe); invoices only fill
+  // the gap once, when nothing is recorded yet.
+  const renewalSubId = typeof invoice.subscription === 'string'
+    ? invoice.subscription
+    : invoice.subscription?.id || null;
+  if (renewalSubId && !profile.stripeSubscriptionId) {
+    const { error: subErr } = await supabase.from('profiles')
+      .update({ stripe_subscription_id: renewalSubId })
+      .eq('id', profile.userId);
+    if (subErr) throw new Error(`Recording subscription id failed: ${subErr.message}`);
   }
 
   const { data: existing } = await supabase
@@ -259,6 +276,9 @@ export async function handleStripeWebhook(
         const { error: profileError } = await supabase.from('profiles').update({
           tier: 'premium',
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+          // Record THIS subscription so a later stale/redelivered .deleted for an
+          // OLD subscription can't downgrade this re-subscribed user (087).
+          stripe_subscription_id: typeof session.subscription === 'string' ? session.subscription : session.subscription?.id || null,
           premium_downgraded_at: null,
           premium_retention_expires_at: null,
         }).eq('id', userId);
@@ -336,6 +356,18 @@ export async function handleStripeWebhook(
           console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);
           break;
         }
+        // STALE-DELETE GUARD (087): Stripe redelivers + reorders webhooks. A
+        // .deleted for an OLD subscription must NOT downgrade a user who has since
+        // re-subscribed and is currently premium. Only downgrade when the deleted
+        // subscription is the user's CURRENTLY-RECORDED one. When we have no
+        // recorded id (legacy premium predating the column), fall back to the
+        // prior customer-match behavior so a genuine cancellation still downgrades;
+        // the next renewal back-fills the id and closes the gap.
+        const recordedSub = profile.stripeSubscriptionId;
+        if (recordedSub && recordedSub !== subscription.id) {
+          console.log(`Ignoring stale subscription.deleted ${subscription.id} for user ${profile.userId}; current subscription is ${recordedSub}`);
+          break;
+        }
         const { error: downgradeError } = await supabase.rpc('handle_premium_downgrade', {
           target_user: profile.userId,
         });
@@ -348,6 +380,13 @@ export async function handleStripeWebhook(
         if (authDowngradeError) {
           throw new Error(`Auth downgrade failed: ${authDowngradeError.message}`);
         }
+        // Clear the recorded subscription now that it's gone, so a future
+        // re-subscribe records a fresh id and this one can't match again. Fail
+        // loud like every other write in this handler.
+        const { error: clearErr } = await supabase.from('profiles')
+          .update({ stripe_subscription_id: null })
+          .eq('id', profile.userId);
+        if (clearErr) throw new Error(`Clearing subscription id failed: ${clearErr.message}`);
         console.log(`User ${profile.userId} downgraded to free with retention window`);
       }
       break;

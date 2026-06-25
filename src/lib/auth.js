@@ -705,9 +705,20 @@ function supabaseOnAuthChange(callback) {
           profile.avatarUrl,
           profile.emailNotifications,
           profile.modelPreference,
+          // Account identity (migration 075) as an APPEND-ONLY trailing object so
+          // a token refresh re-seeds it from the fresh profile instead of blanking
+          // it. Without this, every TOKEN_REFRESHED rebuilds auth without the
+          // identity fields until a full profile reload.
+          {
+            accountNumber: profile.accountNumber,
+            externalName: profile.externalName,
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            preferredName: profile.preferredName,
+          },
         );
       } else {
-        callback(event, null, null, 'anon', 'user', null, false, null, true, DEFAULT_MODEL_PREFERENCE);
+        callback(event, null, null, 'anon', 'user', null, false, null, true, DEFAULT_MODEL_PREFERENCE, null);
       }
     }
   );

@@ -94,6 +94,12 @@ declare
   v_month_spend  numeric;
   v_allowed      boolean;
 begin
+  -- Pin the daily/monthly cap windows to UTC regardless of the session timezone.
+  -- The admission + reporting sums below all use date_trunc('day'|'month', now());
+  -- without this they would truncate in the SESSION tz, silently shifting the cap
+  -- window off the documented UTC boundary. SET LOCAL scopes this to the call.
+  set local time zone 'UTC';
+
   -- A negative / null / non-numeric estimate must never CREDIT headroom; clamp
   -- to zero so a bad caller can't widen the cap, only consume against it.
   v_estimate := greatest(coalesce(p_estimate, 0), 0);

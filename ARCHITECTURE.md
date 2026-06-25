@@ -26,7 +26,7 @@ functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 data/        Pure content tables — the moat. ~18k lines: institutionalCatalog,
              namingData, supplyChainData, npcData, historyData, … No logic.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 14-step pipeline; the rest are domain generators
+             steps/ holds the 19-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
@@ -67,9 +67,9 @@ generateEconomy → generatePower → neighbourFactions → factionCorrelationPa
 generatePopulation → generateNarratives → assembleSettlement`.
 
 Determinism matters: same seed ⇒ same settlement. This is what makes the
-property-based and snapshot tests possible. A **Strangler-Fig** migration is in
-flight — legacy `generateSettlement.js` is being replaced by
-`generateSettlementPipeline.js`; both still exist.
+property-based and snapshot tests possible. The **Strangler-Fig** migration is
+COMPLETE — the legacy monolithic `generateSettlement.js` has been removed;
+`generateSettlementPipeline.js` (the registered-step pipeline) is the sole path.
 
 `structuralValidator.js` validates engine output shape; `settlement.schema.js`
 (domain) is the canonical schema and `settlementMigrations.js` upgrades old
@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (86) — schema + RLS policies + credit ledger + version
+- **migrations/** (87) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +

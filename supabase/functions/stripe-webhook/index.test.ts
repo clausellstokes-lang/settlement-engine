@@ -251,3 +251,61 @@ Deno.test('a replayed credit-pack checkout (same session id) does NOT double-gra
   const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
   assertEquals(grants.length, 1);   // the redelivery is a no-op (idempotent on session id)
 });
+
+// ── customer.subscription.deleted: stale-delete guard (migration 087) ────────
+// Stripe redelivers + reorders webhooks. A .deleted for an OLD subscription must
+// not downgrade a user who has since re-subscribed and is currently premium.
+function makeSubDeletedStub(recordedSubId: string | null) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const profileUpdates: Array<Record<string, unknown>> = [];
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => ({
+      select: () => {
+        const builder = {
+          eq: () => builder,
+          ilike: () => builder,
+          maybeSingle: () => table === 'profiles'
+            ? Promise.resolve({ data: { id: 'sub_user', is_founder: false, stripe_subscription_id: recordedSubId }, error: null })
+            : Promise.resolve({ data: null, error: null }),
+        };
+        return builder;
+      },
+      update: (vals: Record<string, unknown>) => ({ eq: () => { profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
+    }),
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+  };
+  return { rpc, profileUpdates, adminClient: () => client };
+}
+
+const subscriptionDeletedEvent = (subId: string) =>
+  JSON.stringify({
+    id: `evt_del_${subId}`,
+    type: 'customer.subscription.deleted',
+    data: { object: { id: subId, customer: 'cus_sub' } },
+  });
+
+Deno.test('a STALE subscription.deleted (old sub) does NOT downgrade a re-subscribed user', async () => {
+  const stub = makeSubDeletedStub('sub_NEW');            // user's CURRENT subscription
+  const body = subscriptionDeletedEvent('sub_OLD');      // redelivered delete of the OLD one
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // NOT downgraded
+});
+
+Deno.test('a MATCHING subscription.deleted downgrades and clears the recorded subscription', async () => {
+  const stub = makeSubDeletedStub('sub_X');
+  const body = subscriptionDeletedEvent('sub_X');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);   // downgraded
+  assertEquals(stub.profileUpdates.some((u) => u.stripe_subscription_id === null), true);  // cleared
+});
+
+Deno.test('a legacy premium user with NO recorded subscription still downgrades on delete (fallback)', async () => {
+  const stub = makeSubDeletedStub(null);                 // pre-column premium user
+  const body = subscriptionDeletedEvent('sub_legacy');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);   // fallback downgrade
+});

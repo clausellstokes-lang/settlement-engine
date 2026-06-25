@@ -27,11 +27,30 @@ const UPDATE = process.argv.includes('--update');
 
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
 // we parse stdout regardless, so don't let execSync throw on that.
+//
+// But a non-zero exit means two very different things: tsc RAN and found type
+// errors (normal — parse them), or tsc FAILED TO RUN (bad config, missing
+// binary, OOM). The catch folds stdout+stderr into one string either way, and a
+// failed-to-run tsc emits no parseable `error TSxxxx` lines — so the count comes
+// out empty, reads as "no regressions", and greens the gate on a broken
+// typecheck. We must tell the two apart and fail CLOSED on execution failure.
+// The TSCMD override exists so the failure path is testable without breaking tsc.
+const TSCMD = process.env.DOMAIN_STRICT_TSC_CMD || 'npx tsc --noEmit -p tsconfig.domain-strict.json';
 let out;
+let tscRan = true; // exit 0 ⇒ tsc ran clean
 try {
-  out = execSync('npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  out = execSync(TSCMD, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 } catch (e) {
   out = `${e.stdout || ''}${e.stderr || ''}`;
+  // tsc ran iff its output carries at least one recognizable diagnostic line.
+  // No `error TS` line on a non-zero exit ⇒ tsc never produced a typecheck.
+  tscRan = /error TS\d+:/.test(out);
+}
+
+if (!tscRan) {
+  console.error('[domain-strict] tsc failed to run (no parseable diagnostics) — failing closed; this is NOT a clean typecheck.');
+  console.error(out.trim().slice(0, 2000) || '(no output captured)');
+  process.exit(2);
 }
 
 // Count errors per src/domain file (ignore import-followed errors outside the

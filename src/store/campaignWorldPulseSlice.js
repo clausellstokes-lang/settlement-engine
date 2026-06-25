@@ -453,12 +453,20 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               preIntervalHistoryLen: result.preIntervalHistoryLen,
               pendingMajors: cloneJson(result.pendingMajors) || [],
               // The PRE-tick snapshot — the exact inputs the paused tick was computed
-              // from. Resume re-runs the tick from these (seed replay).
+              // from. Resume re-runs the tick from these (seed replay). These fields
+              // are ALREADY plain deep clones: they thread references off simCampaign/
+              // simSaves (cloneJson'd before the pure compute) through the kernel, which
+              // never aliases store state, and `result` is a plain object we own. So we
+              // park the references directly — a second cloneJson per field would deep-
+              // copy the WHOLE pre-tick world (worldState+graph+news+every save) AGAIN
+              // on EVERY pause of a multi-pause interval, doubling the retained + later
+              // serialized cursor for no gain. Bytes fed to the resume kernel are
+              // identical either way, so resume determinism is untouched.
               preSnapshot: {
-                worldState: cloneJson(result.preWorldState),
-                regionalGraph: cloneJson(result.preRegionalGraph),
-                wizardNews: cloneJson(result.preWizardNews),
-                saves: cloneJson(result.preSaves) || [],
+                worldState: result.preWorldState,
+                regionalGraph: result.preRegionalGraph,
+                wizardNews: result.preWizardNews,
+                saves: result.preSaves || [],
               },
             },
           };
@@ -541,7 +549,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // The tick itself is already committed above, so a replay failure never
     // rolls the advance back, and the pre-pulse snapshot already covers these
     // for undo (they land after the snapshot).
-    if (result && result.ok !== false && drainedPartyImpacts.length
+    //
+    // GUARD: skip the replay when the underlying advance did NOT reach the cloud
+    // (result.cloudPending — the atomic advance write rejected or conflicted with a
+    // concurrent same-tick advance). recordPartyImpact persists as a BACKWARD /
+    // last-write-wins write (expectedTick = null), so it FORCE-writes its settlement
+    // deltas to the cloud out of band — bypassing the very forward guard the advance
+    // just lost to. That would push a party-impact world built atop an unpersisted /
+    // conflicted advance over the (different, winning) cloud timeline, manufacturing
+    // the hybrid state the advance's cloud-pending discipline exists to prevent. The
+    // impacts stay drained on the LOCAL world (the tick is real locally) and replay
+    // on the retry/reload that reconciles the advance, so nothing is lost.
+    if (result && result.ok !== false && !result.cloudPending && drainedPartyImpacts.length
         && typeof get().recordPartyImpact === 'function') {
       for (const pi of drainedPartyImpacts) {
         try { await get().recordPartyImpact(campaignId, pi.action); } catch { /* best-effort */ }
@@ -648,11 +667,16 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               // through every re-pause so the whole interval collapses to one record.
               preIntervalHistoryLen: result.preIntervalHistoryLen,
               pendingMajors: cloneJson(result.pendingMajors) || [],
+              // Park the PRE-tick references directly (NOT a second cloneJson): they are
+              // already plain deep clones off simCampaign/simSaves threaded through the
+              // kernel, and re-cloning the whole pre-tick world on every re-pause of a
+              // multi-pause interval doubles the retained + serialized cursor for no
+              // gain. Resume feeds identical bytes either way (determinism preserved).
               preSnapshot: {
-                worldState: cloneJson(result.preWorldState),
-                regionalGraph: cloneJson(result.preRegionalGraph),
-                wizardNews: cloneJson(result.preWizardNews),
-                saves: cloneJson(result.preSaves) || [],
+                worldState: result.preWorldState,
+                regionalGraph: result.preRegionalGraph,
+                wizardNews: result.preWizardNews,
+                saves: result.preSaves || [],
               },
             },
           };

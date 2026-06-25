@@ -71,13 +71,16 @@ function resolveTier(tier, role) {
  * these (mock mode, partial server rollout) yields all-null.
  * @param {object} [result]
  */
-function identityFrom(result = {}) {
+function identityFrom(result) {
+  // Null-safe: the no-session branch (lib/auth.js) passes a literal `null`
+  // identity, and a default param only covers `undefined` — so coalesce here.
+  const r = result || {};
   return {
-    accountNumber: result.accountNumber || null,
-    externalName: result.externalName || null,
-    firstName: result.firstName || null,
-    lastName: result.lastName || null,
-    preferredName: result.preferredName || null,
+    accountNumber: r.accountNumber || null,
+    externalName: r.externalName || null,
+    firstName: r.firstName || null,
+    lastName: r.lastName || null,
+    preferredName: r.preferredName || null,
   };
 }
 let authUnsubscribe = null;
@@ -199,7 +202,7 @@ export const createAuthSlice = (set, get) => ({
       authUnsubscribe();
       authUnsubscribe = null;
     }
-    authUnsubscribe = authService.onAuthChange((event, user, session, tier, role, displayName, isFounder, avatarUrl, emailNotifications, modelPreference) => {
+    authUnsubscribe = authService.onAuthChange((event, user, session, tier, role, displayName, isFounder, avatarUrl, emailNotifications, modelPreference, identity) => {
       if (event === 'SIGNED_OUT') {
         get().clearAuth();
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
@@ -218,6 +221,12 @@ export const createAuthSlice = (set, get) => ({
             avatarUrl: avatarUrl || null,
             emailNotifications: emailNotifications !== false,
             modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
+            // Re-seed account identity from the fresh profile the auth-change
+            // path supplies. A token refresh rebuilds auth from scratch; without
+            // this, accountNumber/externalName/name parts blank out until a full
+            // profile reload. identityFrom is null-safe for callers (mock mode)
+            // that omit the trailing identity object.
+            ...identityFrom(identity),
             loading: false, error: null,
           };
         });

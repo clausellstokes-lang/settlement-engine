@@ -48,6 +48,10 @@ export function useGalleryPageState(routeSlug = null) {
   const [listError, setListError] = useState(null);
   const [sort, setSort] = useState('relevant');
   const [search, setSearch] = useState('');
+  // `search` mirrors the input for immediate display; `debouncedSearch` is what
+  // the fetch query keys on, so typing a word fires one request rather than one
+  // per character. Clearing to empty propagates immediately (see effect below).
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [filters, setFilters] = useState(() => ({ ...EMPTY_GALLERY_FILTERS }));
   const [activeSlug, setActiveSlug] = useState(routeSlug || null);
   const [dossier, setDossier] = useState(null);
@@ -60,7 +64,19 @@ export function useGalleryPageState(routeSlug = null) {
   const [actionError, setActionError] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
-  const galleryQuery = useMemo(() => ({ sort, search, filters }), [sort, search, filters]);
+  // Debounce search → query propagation so a fetch fires once typing settles,
+  // not on every keystroke. An empty search (clear / backspace-to-empty) skips
+  // the delay so resetting the feed feels instant.
+  useEffect(() => {
+    if (search === '') { setDebouncedSearch(''); return undefined; }
+    const id = setTimeout(() => setDebouncedSearch(search), 250);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  const galleryQuery = useMemo(
+    () => ({ sort, search: debouncedSearch, filters }),
+    [sort, debouncedSearch, filters],
+  );
 
   // Generation token: bumped on every query change so an in-flight loadMore
   // (which isn't bound to this effect's lifecycle) can detect a stale query and

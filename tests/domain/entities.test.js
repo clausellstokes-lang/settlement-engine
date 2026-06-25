@@ -254,4 +254,66 @@ describe('propagateImpairment', () => {
     const temple = next.institutions.find(i => i.id === 'inst.temple');
     expect(temple.impairments || []).toHaveLength(0);
   });
+
+  // npc→faction dimension follows the importance-tier contract:
+  // pillar/key shape direction (LEADERSHIP), notable/minor are
+  // rank-and-file (MEMBERSHIP). The bug stamped LEADERSHIP for every tier.
+  function npcFactionSettlement(importance) {
+    return {
+      institutions: [],
+      factions: [{ id: 'faction.guild', name: 'Guild' }],
+      npcs: [{ id: 'npc.x', name: 'X', importance, linkedFactionIds: ['faction.guild'] }],
+    };
+  }
+
+  test('notable npc impairs faction membership, not leadership', () => {
+    const next = propagateImpairment({
+      settlement: npcFactionSettlement('notable'),
+      origin: {
+        entityType: 'npc', entityId: 'npc.x',
+        impairment: { type: 'capacity', severity: 0.9, causeEventId: 'e1', description: 'Gone' },
+      },
+    });
+    const guild = next.factions.find(f => f.id === 'faction.guild');
+    expect(guild.impairments.length).toBeGreaterThan(0);
+    expect(guild.impairments[0].type).toBe('membership');
+  });
+
+  test('pillar npc impairs faction leadership', () => {
+    const next = propagateImpairment({
+      settlement: npcFactionSettlement('pillar'),
+      origin: {
+        entityType: 'npc', entityId: 'npc.x',
+        impairment: { type: 'capacity', severity: 0.9, causeEventId: 'e1', description: 'Gone' },
+      },
+    });
+    const guild = next.factions.find(f => f.id === 'faction.guild');
+    expect(guild.impairments[0].type).toBe('leadership');
+  });
+
+  // powerStructure-shaped settlements: the propagation description must
+  // resolve the faction display NAME, not leak the raw id.
+  test('description resolves faction name for powerStructure-shaped settlements', () => {
+    const settlementPS = {
+      institutions: [{ id: 'inst.granary', name: 'Granary' }],
+      powerStructure: {
+        factions: [{ id: 'faction.merchants', name: 'Merchant Guild', controlsInstitutionIds: ['inst.granary'] }],
+      },
+      npcs: [],
+    };
+    // Origin on the faction so the propagation target's description names
+    // the source faction (the entity entityName() must resolve).
+    const next = propagateImpairment({
+      settlement: settlementPS,
+      origin: {
+        entityType: 'faction', entityId: 'faction.merchants',
+        impairment: { type: 'leadership', severity: 0.9, causeEventId: 'e1', description: 'Coup' },
+      },
+    });
+    const granary = next.institutions.find(i => i.id === 'inst.granary');
+    expect(granary.impairments.length).toBeGreaterThan(0);
+    const desc = granary.impairments[0].description;
+    expect(desc).toContain('Merchant Guild');
+    expect(desc).not.toContain('faction.merchants');
+  });
 });

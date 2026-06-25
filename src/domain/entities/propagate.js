@@ -109,7 +109,14 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
         if (visited.has(visitKey)) continue;
         visited.add(visitKey);
 
-        const propagatedDim = mapDimension(node.entityType, link.targetType, node.dimension);
+        // The npc→faction dimension depends on the NPC's importance tier
+        // (leadership for pillar/key, membership for notable/minor — see the
+        // contract in findLinkedEntities). Resolve the source NPC so
+        // mapDimension can honor that branch.
+        const sourceNpc = node.entityType === 'npc'
+          ? (working.npcs || []).find(n => npcId(n) === node.entityId)
+          : null;
+        const propagatedDim = mapDimension(node.entityType, link.targetType, node.dimension, sourceNpc);
         if (!propagatedDim) continue;
 
         // Severity also scales by relationship strength: a faction that
@@ -200,11 +207,17 @@ function findLinkedEntities(settlement, node) {
 }
 
 /** Cross-type dimension mapping. */
-function mapDimension(fromType, toType, dim) {
+function mapDimension(fromType, toType, dim, sourceNpc) {
   if (fromType === 'institution' && toType === 'faction') return INSTITUTION_TO_FACTION_DIM[dim] || null;
   if (fromType === 'faction'     && toType === 'institution') return FACTION_TO_INSTITUTION_DIM[dim] || null;
   if (fromType === 'npc' && toType === 'institution') return 'staffing';
-  if (fromType === 'npc' && toType === 'faction')      return 'leadership';
+  if (fromType === 'npc' && toType === 'faction') {
+    // Per the contract: leadership or membership by importance tier. A
+    // pillar/key figure shapes the faction's direction (LEADERSHIP); a
+    // notable/minor one is rank-and-file (MEMBERSHIP). Reuse the tier
+    // boundary already encoded in importanceWeight so the two stay aligned.
+    return importanceWeight(sourceNpc) >= 0.7 ? 'leadership' : 'membership';
+  }
   return null;
 }
 
@@ -277,7 +290,7 @@ const npcId     = (n) => n?.id || n?.name || '';
 /** Normalize the two faction-storage shapes the codebase ships with. */
 const factionsList = (s) => s?.powerStructure?.factions || s?.factions || [];
 function entityName(s, type, id) {
-  const list = type === 'institution' ? s.institutions : type === 'faction' ? s.factions : s.npcs;
+  const list = type === 'institution' ? s.institutions : type === 'faction' ? factionsList(s) : s.npcs;
   const e = (list || []).find(x => (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
   return e?.name || id;
 }

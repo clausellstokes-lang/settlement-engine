@@ -73,6 +73,14 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
+// Chronicle is a fixed flat cost, NOT part of the model-tiered narrative
+// schedules: the season-chronicle pass always runs on Haiku and charges the
+// same 2 credits regardless of the user's model preference. This is the single
+// client-side source of truth, pinned in lockstep with three server copies by
+// pricing.test.js — the generate-chronicle CHRONICLE_COST constant and the
+// spend_credits SQL CASE 'chronicle' branch (migration 057). Drift fails the gate.
+export const CHRONICLE_CREDIT_COST = 2;
+
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
 
 export const AI_MODEL_OPTIONS = Object.freeze([
@@ -275,6 +283,10 @@ export function getActiveAiCosts() {
 
 /** Cost in credits for a specific AI feature. */
 export function getAiCost(feature) {
+  // Chronicle is a flat, model-independent cost — it lives outside the tiered
+  // narrative schedules but still resolves through the same selector so UI code
+  // never reaches for a raw constant.
+  if (feature === 'chronicle') return CHRONICLE_CREDIT_COST;
   return getActiveAiCosts()[feature] ?? 0;
 }
 

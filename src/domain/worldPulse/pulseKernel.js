@@ -20,7 +20,7 @@ import { evaluateTradeWar } from './tradeWar.js';
 import { evaluateReligiousContest } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
-import { evaluateOccupations } from './occupation.js';
+import { evaluateOccupations, freshConquestsFrom } from './occupation.js';
 import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
@@ -128,6 +128,23 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
 export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(), deferMajors = false, dismissMajorIds = null } = {}) {
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
+  // RESUME dismissal set, computed ONCE up front (before the war/occupation block).
+  // A dismissed major is excluded from the apply pass below — but a CONQUEST major
+  // also has OUT-OF-BAND ledger effects (evaluateOccupations seeds an occupation into
+  // worldState.occupations from the conquest power_transfer), so suppressing it from
+  // the apply set alone would leave a phantom occupation. We thread this set into the
+  // occupation layer so a dismissed conquest never seeds an occupation in the first
+  // place. EMPTY/null ⇒ no exclusion ⇒ byte-identical to the autoresolve-ON tick (the
+  // equivalence invariant). Inert on the deferMajors / non-resume path.
+  //
+  // SEMANTICS of a dismissed conquest: the OCCUPATION + its disposition deltas are
+  // rolled back, but the war-layer resolution (the besieging army's deployment clears,
+  // the war_front resolves) is INTENTIONALLY kept — a dismissed conquest means "the
+  // takeover didn't stick; the armies disperse", NOT "the siege rewinds and continues".
+  // So: no phantom occupation / orphaned ledger (the bug), and no auto-continued siege.
+  const activeDismissals = !deferMajors && dismissMajorIds && typeof dismissMajorIds.has === 'function' && dismissMajorIds.size > 0
+    ? dismissMajorIds
+    : null;
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -475,12 +492,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // presence) + the live deployments + the pre-tick snapshot (usefulness/resistance).
     // Deterministic (no rng — the state machine is pure). The occupations ledger is
     // read-last/write-next and CONDITIONAL: absent until the first conquest.
+    // A DM-DISMISSED conquest must not seed an occupation: drop any conquest
+    // power_transfer the DM dismissed from the conquest set the occupation layer
+    // reads, so freshConquestsFrom never seeds a phantom `contested` occupation for a
+    // target the DM declined to let fall. The dismissed conquest is ALSO excluded from
+    // the apply set below — the two filters together leave NO occupation/ledger residue
+    // for a dismissed conquest. Byte-neutral when there are no dismissals (the array is
+    // returned unchanged by reference).
+    const occupationWarOutcomes = activeDismissals
+      ? war.outcomes.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
+      : war.outcomes;
     const occupation = evaluateOccupations({
       snapshot: postTimeSnapshot,
       worldState,
       graph: postTimeSnapshot.regionalGraph,
       deployments: war.deployments,
-      warOutcomes: war.outcomes,
+      warOutcomes: occupationWarOutcomes,
       returnOutcomes: warReturnOutcomes,
       tick: worldState.tick,
       rules: simulationRules,
@@ -502,6 +529,33 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // layer contributes its own consolidation-win / liberation-loss deltas (deterministic,
     // id-stable) alongside the war/trade contests.
     pendingDispositionDeltas = [...collectDispositionDeltas(war, tradeWar), ...occupation.dispositionDeltas];
+    // A DM-DISMISSED conquest must leave NO disposition ledger residue either: the war
+    // layer banks a conqueror WIN + a conquered LOSS for each conquest it resolved (the
+    // out-of-band ratchet), so a dismissed conquest would otherwise still tilt next-tick
+    // confidence for a power transfer that never landed. Strip exactly one matching
+    // {occupierId: win} + {occupiedId: loss} pair per dismissed conquest, attributed
+    // EXACTLY as the war resolver does (occupier→win, conquered→loss). Inert without
+    // dismissals (the array is returned by reference).
+    if (activeDismissals) {
+      const dismissedConquests = freshConquestsFrom(war.outcomes.filter(
+        o => deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id)),
+      ));
+      if (dismissedConquests.length) {
+        const removals = [];
+        for (const { occupiedId, occupierId } of dismissedConquests) {
+          removals.push({ id: String(occupierId), outcome: 'win' });
+          removals.push({ id: String(occupiedId), outcome: 'loss' });
+        }
+        // Remove ONE delta per removal entry (so two simultaneous conquests by the same
+        // occupier still drop two wins). Mutating a local index keeps order-independence.
+        pendingDispositionDeltas = pendingDispositionDeltas.filter((delta) => {
+          const i = removals.findIndex(r => r.id === String(delta?.id) && r.outcome === delta?.outcome);
+          if (i === -1) return true;
+          removals.splice(i, 1);
+          return false;
+        });
+      }
+    }
   }
   // Religion dynamics: the deity contest + conversion spread +
   // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
@@ -649,12 +703,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const deferredMajors = deferMajors ? selectedForApply.filter(o => deriveDecisionTier(o) === 'major') : [];
   // RESUME re-run filter: when the DM dismissed specific majors, drop them from the
   // apply set on the re-run (deferMajors OFF). Empty/null ⇒ no exclusion ⇒
-  // byte-identical to the autoresolve-ON tick.
-  const hasDismissals = !deferMajors && dismissMajorIds && typeof dismissMajorIds.has === 'function' && dismissMajorIds.size > 0;
+  // byte-identical to the autoresolve-ON tick. `activeDismissals` (computed up front)
+  // is the SAME set the occupation layer was filtered against above, so a dismissed
+  // conquest is excluded from BOTH the occupation seed AND the apply set — no residue.
   const outcomesToApply = deferMajors
     ? selectedForApply.filter(o => deriveDecisionTier(o) !== 'major')
-    : (hasDismissals
-        ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && dismissMajorIds.has(String(o.id))))
+    : (activeDismissals
+        ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
         : selectedForApply);
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);

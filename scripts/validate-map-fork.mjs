@@ -51,8 +51,38 @@ async function hashLib(file) {
   return { sha256: createHash('sha256').update(buf).digest('hex'), byteSize: buf.length };
 }
 
+// Recursively enumerate every shippable script under libs/, as forward-slash
+// paths relative to libsRoot (matching the manifest's `file` convention). The
+// manifest pins .js (the executable supply-chain surface), so the on-disk set
+// we hold it to is the .js files — a new lib drops in as a .js file and must be
+// consciously pinned, never shipped un-verified.
+async function enumerateShippable(dir = libsRoot, prefix = '') {
+  const found = [];
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) {
+      found.push(...(await enumerateShippable(join(dir, entry.name), rel)));
+    } else if (extname(entry.name) === '.js') {
+      found.push(rel);
+    }
+  }
+  return found;
+}
+
 if (manifest?.libs) {
   if (updateManifest) {
+    // Re-hash every pinned file, AND fold in any shippable file on disk that
+    // isn't pinned yet — so a single --update-manifest re-pins the WHOLE set the
+    // exact-set verify below will hold us to (no hand-editing 90+ tinymce blobs).
+    const byFile = new Map(manifest.libs.map((lib) => [lib.file, lib]));
+    for (const file of await enumerateShippable()) {
+      if (!byFile.has(file)) {
+        const entry = { file, name: file, version: 'unknown', byteSize: 0, sha256: '', knownAdvisories: [] };
+        manifest.libs.push(entry);
+        byFile.set(file, entry);
+      }
+    }
+    manifest.libs.sort((a, b) => a.file.localeCompare(b.file));
     for (const lib of manifest.libs) {
       try {
         const { sha256, byteSize } = await hashLib(lib.file);
@@ -65,14 +95,28 @@ if (manifest?.libs) {
     await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
     console.log(`Updated VENDOR-MANIFEST.json (${manifest.libs.length} libs re-pinned).`);
   } else {
+    // Exact-set contract (like the other ratchets): the on-disk shippable set and
+    // the pinned set must be identical. A new .js file on disk that nobody pinned
+    // would otherwise ship to the payment+auth origin completely unverified — the
+    // original blind spot. A pinned entry with no file on disk is dead pin debt.
+    const onDisk = new Set(await enumerateShippable());
+    const pinned = new Set(manifest.libs.map((lib) => lib.file));
+    for (const file of onDisk) {
+      if (!pinned.has(file)) {
+        failures.push(
+          `vendored lib ${file} ships under public/map/libs/ but is NOT pinned in ` +
+            `VENDOR-MANIFEST.json — it would reach production un-verified. Audit the ` +
+            `bytes for advisories, add a manifest entry, then re-pin: ` +
+            `node scripts/validate-map-fork.mjs --update-manifest`,
+        );
+      }
+    }
     for (const lib of manifest.libs) {
-      let actual;
-      try {
-        actual = await hashLib(lib.file);
-      } catch (err) {
-        failures.push(`vendored lib pinned in manifest is missing: ${lib.file} (${err.message})`);
+      if (!onDisk.has(lib.file)) {
+        failures.push(`vendored lib pinned in manifest is missing on disk: ${lib.file}`);
         continue;
       }
+      const actual = await hashLib(lib.file);
       if (actual.sha256 !== lib.sha256 || actual.byteSize !== lib.byteSize) {
         failures.push(
           `vendored lib ${lib.file} does not match VENDOR-MANIFEST.json — ` +

@@ -353,6 +353,24 @@ function killNpcMutation(s, event) {
       },
     },
   });
+
+  // Re-assert the DIRECT impairments after propagation. Propagation walks the
+  // dead NPC's own linked institutions/factions as its first hop, so it lands a
+  // second, damped staffing/leadership hit on the very entities we just wounded
+  // directly above. Because withImpairment is idempotent per (type, cause), that
+  // damped hit REPLACES the full direct severity — silently weakening a pillar's
+  // death from 1.0 down to the propagated 0.6. Re-stamping the direct impairment
+  // last restores its full severity, so each linked entity carries it EXACTLY
+  // once at the correct strength while propagation's further-hop reach (to OTHER
+  // neighbours of those entities) is preserved.
+  for (const { instId, impairment } of result.institutionImpairments) {
+    const inst = findInstitution(next, instId);
+    if (inst) next = replaceInstitution(next, inst, withImpairment(inst, /** @type {import('../entities/status.js').Impairment} */ (impairment)));
+  }
+  for (const { factionId: fid, impairment } of result.factionImpairments) {
+    const faction = findFaction(next, fid);
+    if (faction) next = replaceFaction(next, faction, withImpairment(faction, /** @type {import('../entities/status.js').Impairment} */ (impairment)));
+  }
   return next;
 }
 

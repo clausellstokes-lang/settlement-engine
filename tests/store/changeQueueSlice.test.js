@@ -191,6 +191,28 @@ describe('changeQueueSlice — flush', () => {
     expect(store.getState().flushSuppressPersist).toBe(false);
   });
 
+  test('a failed persist restores the savedSettlements MIRROR row in lockstep (no half-applied divergence)', async () => {
+    saves.update.mockRejectedValueOnce(new Error('cloud down')); // persistSaveUpdate resolves false
+    // Snapshot the pre-flush mirror row for the open settlement.
+    const mirrorBefore = store.getState().savedSettlements.find(s => s.id === 'save_1');
+    const preInstitutions = mirrorBefore.settlement.institutions.length;
+    store.getState().queueChange('save_1', {
+      type: 'event', humanLabel: 'Add tavern',
+      payload: { event: { id: 'e1', type: 'ADD_INSTITUTION', targetId: 'tavern', payload: { label: 'Tavern', category: 'civic' } } },
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(false);
+    // The mid-commit updateSavedSettlement wrote the half-applied (never-persisted)
+    // settlement into the mirror; the rollback must put it back to the pre-flush row,
+    // so the mirror cannot keep state the live store no longer has.
+    const mirrorAfter = store.getState().savedSettlements.find(s => s.id === 'save_1');
+    expect(mirrorAfter.settlement.institutions.length).toBe(preInstitutions);
+    // And it agrees with the restored live store (no divergence between the two).
+    expect(mirrorAfter.settlement.institutions.length)
+      .toBe(store.getState().settlement.institutions.length);
+  });
+
   test('a successful flush returns the committed settlement for the soft-refresh', async () => {
         store.getState().queueChange('save_1', {
       type: 'event', humanLabel: 'Add tavern',

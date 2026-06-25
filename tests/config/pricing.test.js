@@ -11,12 +11,15 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import {
   TIERS,
   SINGLE_DOSSIER,
   getActivePacks,
   getActiveAiCosts,
   getAiCost,
+  getAiCostForModel,
   getVisibleTiers,
   singleDossierEnabled,
   findPackByKey,
@@ -24,6 +27,7 @@ import {
   DEFAULT_MODEL_PREFERENCE,
   normalizeModelPreference,
   isFastModelPreference,
+  CHRONICLE_CREDIT_COST,
   _internal,
 } from '../../src/config/pricing.js';
 
@@ -47,6 +51,44 @@ describe('AI cost server contract', () => {
 
   it('new schedule matches the server-enforced new costs', () => {
     expect(_internal.NEW_AI_COSTS).toEqual(CONTRACT_AI_COSTS_NEW);
+  });
+});
+
+// ── Chronicle cost — single source of truth ────────────────────────────────
+// The chronicle credit cost (2) used to live in THREE unpinned copies:
+//   - supabase/functions/generate-chronicle/index.ts  CHRONICLE_COST
+//   - the spend_credits SQL CASE 'chronicle' branch    (migration 057, net-current)
+//   - src/config/pricing.js (which had no chronicle entry at all)
+// None read each other and none were tested, so any one could drift silently
+// and over-/under-charge. These tests pin all three to pricing.js's
+// CHRONICLE_CREDIT_COST by reading the actual server text — drift fails the gate.
+describe('chronicle cost server contract', () => {
+  it('pricing.js exposes a flat chronicle cost of 2 through every selector', () => {
+    expect(CHRONICLE_CREDIT_COST).toBe(2);
+    expect(getAiCost('chronicle')).toBe(2);
+    // Flat regardless of model preference (chronicle always runs on Haiku).
+    expect(getAiCostForModel('chronicle', 'anthropic_claude_opus_4_8')).toBe(2);
+    expect(getAiCostForModel('chronicle', 'anthropic_claude_haiku_4_5')).toBe(2);
+  });
+
+  it('matches the generate-chronicle edge function CHRONICLE_COST constant', () => {
+    const src = readFileSync(
+      resolve(process.cwd(), 'supabase', 'functions', 'generate-chronicle', 'index.ts'),
+      'utf-8',
+    );
+    const m = src.match(/const\s+CHRONICLE_COST\s*=\s*(\d+)/);
+    expect(m, 'CHRONICLE_COST constant not found in generate-chronicle/index.ts').toBeTruthy();
+    expect(Number(m[1])).toBe(CHRONICLE_CREDIT_COST);
+  });
+
+  it('matches the spend_credits SQL CASE \'chronicle\' branch (migration 057, net-current)', () => {
+    const sql = readFileSync(
+      resolve(process.cwd(), 'supabase', 'migrations', '057_enforce_account_status_writes.sql'),
+      'utf-8',
+    );
+    const m = sql.match(/when\s+'chronicle'\s+then\s+(\d+)/i);
+    expect(m, "spend_credits CASE 'chronicle' branch not found in migration 057").toBeTruthy();
+    expect(Number(m[1])).toBe(CHRONICLE_CREDIT_COST);
   });
 });
 

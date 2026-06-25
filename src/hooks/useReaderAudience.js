@@ -89,7 +89,7 @@ export function useReaderAudience() {
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
   // Behavior-signal aggregates — read derived counters from the store.
   // lifetimeNarrateCount is bumped on the aiSlice AI-generation success paths
-  // (requestNarrative/requestDailyLife/requestProgression), a session-resilient
+  // (requestNarrative/requestProgression), a session-resilient
   // counter held in the store. exportCount is the
   // sum of `lastExportAt` markers across saved settlements; locks is
   // any save with a non-empty `locks` array; neighbours is any save

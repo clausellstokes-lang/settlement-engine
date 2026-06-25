@@ -25,7 +25,13 @@ import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
-const CHRONICLE_COST = 2; // credits; mirror in src/config/pricing.js when wired
+const CHRONICLE_COST = 2; // credits; pinned to src/config/pricing.js CHRONICLE_CREDIT_COST + spend_credits CASE 'chronicle' by tests/config/pricing.test.js
+// Overall deadline for the Anthropic call. Without it a hung upstream connection
+// would pin the worker until the platform timeout, holding the credit spend +
+// the global-cap reservation open the whole time. On abort the fetch rejects
+// inside the model try/catch below, so the existing refund + releaseReservation
+// paths run (mirrors generate-narrative's per-call timeout).
+const ANTHROPIC_TIMEOUT_MS = 60_000;
 
 const HOUSE_STYLE = `Voice: a measured court chronicler. Concrete, specific, a little wry. No "nestled", no "bustling", no "tapestry of". Name the settlements. Do NOT invent events, NPCs, or facts — narrate ONLY what the grounding provides.`;
 
@@ -279,19 +285,38 @@ serve(async (req) => {
       // catch below refunds the spend + releases the reservation (rather than
       // charging the user and leaking the reservation via the outer 500 catch).
       promptText = buildPrompt(grounding);
-      const resp = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'x-api-key': ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: CHRONICLE_MODEL,
-          max_tokens: 700,
-          messages: [{ role: 'user', content: promptText }],
-        }),
-      });
+      // Bound the upstream call: abort after the deadline so a hung connection
+      // can't pin the worker (and hold the spend + reservation) until the
+      // platform timeout. An abort throws here and routes to the catch below,
+      // which refunds + releases — same as any other model failure.
+      const ac = new AbortController();
+      const timer = setTimeout(() => ac.abort(), ANTHROPIC_TIMEOUT_MS);
+      let resp: Response;
+      try {
+        resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          signal: ac.signal,
+          headers: {
+            'x-api-key': ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: CHRONICLE_MODEL,
+            max_tokens: 700,
+            messages: [{ role: 'user', content: promptText }],
+          }),
+        });
+      } catch (fetchErr) {
+        // Normalize the AbortError into a legible message before re-throwing into
+        // the outer model catch (which meters the failure, refunds, releases).
+        if (fetchErr instanceof Error && fetchErr.name === 'AbortError') {
+          throw new Error(`Anthropic request timed out after ${ANTHROPIC_TIMEOUT_MS}ms`);
+        }
+        throw fetchErr;
+      } finally {
+        clearTimeout(timer);
+      }
       if (!resp.ok) throw new Error(`Anthropic ${resp.status}`);
       const data = await resp.json();
       prose = (data?.content?.[0]?.text || '').trim();

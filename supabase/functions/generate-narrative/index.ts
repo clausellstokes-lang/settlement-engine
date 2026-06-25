@@ -1422,6 +1422,17 @@ export async function handleGenerateNarrative(
           // no-op), so a failure here can never fail the user's streamed result.
           // A leaked reservation (release miss) self-heals via expires_at +
           // cleanup_ai_spend_reservations; it only briefly under-counts headroom.
+          //
+          // ORDER IS DELIBERATE — persist BEFORE release, never the reverse.
+          // Between these two calls a concurrent reserve_ai_spend momentarily
+          // counts this run TWICE: the committed COGS rows (just persisted) PLUS
+          // the still-held reservation. That double-count over-counts headroom,
+          // so the only risk is the cap admitting FEWER concurrent runs in that
+          // sliver — it fails SAFE (over-block, never over-admit). Releasing
+          // first would invert the window: the reservation would be gone before
+          // the COGS landed, briefly UNDER-counting the cap and opening an
+          // over-ADMIT window (an unbounded-bill hazard). So we eat the harmless
+          // brief over-count and keep persist-before-release. Do not reorder.
           if (reservationId) {
             const { error: relErr } =
               await supabaseAdmin.rpc('release_ai_spend_reservation', { p_id: reservationId });
