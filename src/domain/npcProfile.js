@@ -279,9 +279,18 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
   government: /council|hall|government|courthouse|reeve|mayor|chamber|seat/i,
   religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
   economy:    /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
-  craft:      /smithy|forge|workshop|carpenter|tannery|brewery/i,
+  craft:      /smithy|forge|workshop|carpenter|tannery|brewery|guild|hall/i,
   criminal:   /tavern|den|gang|black\s+market/i,
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
+});
+
+// The npcGenerator emits magic/crafts/noble (not arcane/craft/government); without
+// these the hint lookup falls through and the Power tab shows "None". Mapped per the
+// CATEGORY_TO_ARCHETYPE intent: crafts→craft, magic→arcane, noble→government.
+const CATEGORY_HINT_ALIASES = Object.freeze({
+  crafts: 'craft',
+  magic:  'arcane',
+  noble:  'government',
 });
 
 /**
@@ -307,7 +316,8 @@ export function inferInstitutionName(npc, settlement) {
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return null;
 
-  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (npc.category);
+  const rawCategory = typeof npc.category === 'string' ? npc.category.toLowerCase() : npc.category;
+  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (CATEGORY_HINT_ALIASES[rawCategory] || rawCategory);
   const hint = CATEGORY_INSTITUTION_HINTS[category];
   if (!hint) return null;
 
