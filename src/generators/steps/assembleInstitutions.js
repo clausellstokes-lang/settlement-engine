@@ -393,9 +393,18 @@ registerStep('assembleInstitutions', {
       }
     }
     if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = instName;
+    // outOfTier means the institution is ABOVE the settlement's scale (genuine
+    // override — "infrastructure beyond its normal scale"). A metropolis naturally
+    // contains lower-tier institutions, so a forced inst whose native tier is at or
+    // below the settlement tier is NOT out-of-tier. Compare on TIER_ORDER; an
+    // unknown native tier (indexOf === -1) is treated conservatively as NOT above.
+    const nativeTier = inst.nativeTier || 'unknown';
+    const nativeRank = TIER_ORDER.indexOf(nativeTier);
+    const settlementRank = TIER_ORDER.indexOf(tier);
+    const aboveTier = nativeRank > settlementRank;
     institutions.push({
       category, name: instName, ...inst, source: 'forced',
-      outOfTier: true, nativeTier: inst.nativeTier || 'unknown',
+      outOfTier: aboveTier, nativeTier,
     });
   });
 

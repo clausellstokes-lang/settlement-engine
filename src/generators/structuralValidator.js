@@ -9,6 +9,7 @@ export { getBaseChance } from './institutionProbability.js';
 
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
+import { TIER_ORDER } from '../data/constants.js';
 
 /**
  * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).
@@ -716,7 +717,14 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     // ── Out-of-tier contradictions (by-design) ─────────────────────────────────
   // These are not errors — they're DM choices. Surface them in Viability as
   // "By Design Contradictions" so the DM knows the tension exists.
-  const outOfTierInsts = (institutions || []).filter(i => i.outOfTier);
+  // Defense-in-depth: an override is only a contradiction when the institution's
+  // native tier is genuinely ABOVE the settlement's scale. A lower- or equal-tier
+  // institution carrying outOfTier (e.g. from a stale draft/edit path) is a
+  // metropolis naturally containing smaller infrastructure — not a contradiction.
+  // Unknown native tier (indexOf === -1) is treated conservatively as NOT above.
+  const settlementRank = TIER_ORDER.indexOf(tier);
+  const outOfTierInsts = (institutions || []).filter(i =>
+    i.outOfTier && TIER_ORDER.indexOf(i.nativeTier) > settlementRank);
   outOfTierInsts.forEach(inst => {
     violations.push({
       type:        'out_of_tier',

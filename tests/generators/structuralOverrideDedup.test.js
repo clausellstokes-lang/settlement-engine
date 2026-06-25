@@ -33,4 +33,23 @@ describe('structuralValidator — out-of-tier override dedup', () => {
     expect(tierViolations).toHaveLength(1);
     expect(tierViolations[0].severity).toBe('warning');
   });
+
+  it('a below-tier institution forced into a metropolis yields ZERO out_of_tier by_design entries', () => {
+    // A metropolis naturally contains lower-tier institutions — forcing a town-tier
+    // institution into one is NOT "infrastructure beyond its normal scale".
+    const belowTier = { name: 'Bakery', category: 'commercial', outOfTier: true, nativeTier: 'town' };
+    const { violations } = checkStructuralValidity([belowTier], { tier: 'metropolis' });
+
+    const byDesign = violations.filter(v => v.type === 'out_of_tier' && v.institution === 'Bakery');
+    expect(byDesign).toHaveLength(0);
+  });
+
+  it('an above-tier institution forced into a town STILL yields one out_of_tier by_design entry', () => {
+    const aboveTier = { name: 'Grand cathedral', category: 'religious', outOfTier: true, nativeTier: 'metropolis' };
+    const { violations } = checkStructuralValidity([aboveTier], { tier: 'town' });
+
+    const byDesign = violations.filter(v => v.type === 'out_of_tier' && v.institution === 'Grand cathedral');
+    expect(byDesign).toHaveLength(1);
+    expect(byDesign[0].severity).toBe('by_design');
+  });
 });

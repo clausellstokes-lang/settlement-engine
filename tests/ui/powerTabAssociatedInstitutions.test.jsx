@@ -134,3 +134,82 @@ describe('PowerTab — Associated NPCs + Associated Institutions', () => {
     expect(within(dockers.closest('div')).queryByText('The Iron Garrison')).toBeNull();
   });
 });
+
+// The npcGenerator emits magic/crafts/noble — NOT the arcane/craft/government
+// keys the hint map used to be keyed by. Before the alias normalization these
+// members fell through to "None"; these cases lock the resolution in place.
+function makeAliasSettlement() {
+  return {
+    id: 'settlement.brighthollow',
+    name: 'Brighthollow',
+    // Order matters: first match wins, and the government hint already carries a
+    // `hall` token, so the High Council must precede the Guild Hall for the noble
+    // member to resolve to the council rather than collide with the craft hall.
+    institutions: [
+      { name: 'The Sapphire Sanctum' },   // arcane hint (sanctum) — magic member
+      { name: 'The High Council' },       // government hint (council) — noble member
+      { name: 'The Tanners Guild Hall' }, // craft hint (now widened: guild|hall) — crafts member
+    ],
+    npcs: [
+      { id: 'npc_m', name: 'Sela Wyrd',  role: 'Archmage',  category: 'magic'  },
+      { id: 'npc_c', name: 'Bram Tann',  role: 'Master',    category: 'crafts' },
+      { id: 'npc_n', name: 'Lady Orne',  role: 'Patron',    category: 'noble'  },
+    ],
+    factions: [
+      {
+        name: 'The Arcane Circle',
+        powerFactionName: 'The Conclave',
+        members: [{ id: 'npc_m', name: 'Sela Wyrd', role: 'Archmage', category: 'magic' }],
+      },
+      {
+        name: 'The Tanners',
+        powerFactionName: 'The Guildry',
+        members: [{ id: 'npc_c', name: 'Bram Tann', role: 'Master', category: 'crafts' }],
+      },
+      {
+        name: 'The Peerage',
+        powerFactionName: 'The Court',
+        members: [{ id: 'npc_n', name: 'Lady Orne', role: 'Patron', category: 'noble' }],
+      },
+    ],
+    powerStructure: {
+      factions: [
+        { faction: 'The Conclave', power: 40, desc: 'The mages who hold the sanctum.' },
+        { faction: 'The Guildry',  power: 35, desc: 'The crafters who run the hall.' },
+        { faction: 'The Court',    power: 25, desc: 'The nobles who rule the seat.' },
+      ],
+    },
+  };
+}
+
+describe('PowerTab — generator category aliases (magic/crafts/noble)', () => {
+  it('resolves a magic member to the arcane institution', () => {
+    renderPowerTab(makeAliasSettlement());
+    act(() => { useStore.getState().focusEntity(factionIdFromName('The Conclave')); });
+
+    const links = screen.getAllByRole('button', { name: 'Go to The Sapphire Sanctum' });
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('data-entity-type')).toBe('institution');
+    expect(screen.queryByText('None')).toBeNull();
+  });
+
+  it('resolves a crafts member to a Guild Hall via the widened craft hint', () => {
+    renderPowerTab(makeAliasSettlement());
+    act(() => { useStore.getState().focusEntity(factionIdFromName('The Guildry')); });
+
+    const links = screen.getAllByRole('button', { name: 'Go to The Tanners Guild Hall' });
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('data-entity-type')).toBe('institution');
+    expect(screen.queryByText('None')).toBeNull();
+  });
+
+  it('resolves a noble member to the government institution', () => {
+    renderPowerTab(makeAliasSettlement());
+    act(() => { useStore.getState().focusEntity(factionIdFromName('The Court')); });
+
+    const links = screen.getAllByRole('button', { name: 'Go to The High Council' });
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute('data-entity-type')).toBe('institution');
+    expect(screen.queryByText('None')).toBeNull();
+  });
+});
