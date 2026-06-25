@@ -117,8 +117,12 @@ function deriveResilience(s) {
     risks.push('Single-export dependency');
   }
 
-  // Impaired/degraded institutions
-  const impaired = countByStatus(s.institutions, ['impaired', 'critical']);
+  // Impaired/degraded institutions. A COVERT mark (an institution-scope Impose
+  // Corruption that quietly captured a node) bumps the institution's status to
+  // 'impaired' via withImpairment, but it is hidden by design — surfacing it as a
+  // visible "impaired institution" risk here would leak the covert capture into
+  // public derived state. Exclude institutions whose impairment is solely covert.
+  const impaired = countByStatus(s.institutions, ['impaired', 'critical'], { excludeCovertOnly: true });
   if (impaired > 0) {
     value -= Math.min(15, impaired * 4);
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
@@ -370,10 +374,29 @@ function readWarReligionMovement(s) {
 
 function econOf(s) { return s?.economicState || {}; }
 
-function countByStatus(items, statuses) {
+function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
   if (!Array.isArray(items)) return 0;
   const set = new Set(statuses);
-  return items.filter(i => set.has(String(i?.status || '').toLowerCase())).length;
+  return items.filter(i => {
+    if (!set.has(String(i?.status || '').toLowerCase())) return false;
+    // A covert mark bumps status to 'impaired' but must not read as visibly
+    // impaired: skip an item whose status is driven SOLELY by covert impairments.
+    if (excludeCovertOnly && isCovertOnlyImpairment(i)) return false;
+    return true;
+  }).length;
+}
+
+/**
+ * True when an entity carries impairment(s) and every one of them is covert —
+ * i.e. its 'impaired' status is entirely a hidden mark with no public cause.
+ * @param {any} entity
+ * @returns {boolean}
+ */
+function isCovertOnlyImpairment(entity) {
+  /** @type {any[]} */
+  const imps = Array.isArray(entity?.impairments) ? entity.impairments : [];
+  if (!imps.length) return false;
+  return imps.every(imp => imp?.covert === true);
 }
 
 /**

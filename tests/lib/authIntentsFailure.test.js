@@ -75,6 +75,55 @@ describe('consume() — failed handler does not discard the stash (L15)', () => 
   });
 });
 
+describe('consume() — idempotent against concurrent SIGNED_IN re-fire', () => {
+  it('does not dispatch the same stash twice when consume re-fires mid-flight', async () => {
+    setPending(INTENTS.SAVE_SETTLEMENT, PAYLOAD);
+
+    let calls = 0;
+    let release;
+    const gate = new Promise((resolve) => { release = resolve; });
+    // A slow handler models a real network save still in flight when a second
+    // SIGNED_IN (token refresh / second tab) fires consume() again.
+    registerHandler(INTENTS.SAVE_SETTLEMENT, async () => {
+      calls += 1;
+      await gate;
+      return { id: 'save_1' };
+    });
+
+    const first = consume({});
+    // Second consume of the SAME stash while the first is still awaiting must
+    // be a no-op — otherwise the save fires twice (duplicate dossier).
+    const second = await consume({});
+    expect(second).toBeNull();
+    expect(calls).toBe(1);
+
+    release();
+    await first;
+    expect(calls).toBe(1);
+    expect(readPending()).toBeNull();
+  });
+
+  it('allows a re-stashed intent to dispatch again after a failed save', async () => {
+    setPending(INTENTS.SAVE_SETTLEMENT, PAYLOAD);
+    let calls = 0;
+    registerHandler(INTENTS.SAVE_SETTLEMENT, async () => {
+      calls += 1;
+      return calls === 1 ? null : { id: 'save_ok' };
+    });
+
+    // First dispatch fails (returns null) — stash survives per the L15 contract.
+    expect(await consume({})).toBeNull();
+    expect(readPending()).not.toBeNull();
+
+    // The user retries: re-stash gives a fresh id, so the guard never suppresses
+    // the legitimate second dispatch.
+    setPending(INTENTS.SAVE_SETTLEMENT, PAYLOAD);
+    expect(await consume({})).toEqual({ id: 'save_ok' });
+    expect(calls).toBe(2);
+    expect(readPending()).toBeNull();
+  });
+});
+
 describe('writeStored fallback — a failed write does not leave a stale shadow (L14)', () => {
   it('does not let a stale sessionStorage value shadow the in-memory fallback', () => {
     // First intent writes cleanly to sessionStorage.

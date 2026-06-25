@@ -125,8 +125,17 @@ export function useGalleryPageState(routeSlug = null) {
     return () => { cancelled = true; };
   }, [savedSettlementsLoaded, setSavedSettlements]);
 
+  // The slug whose dossier is currently open or in-flight. The route-sync
+  // effect reads this to avoid re-fetching a dossier openDossier just opened:
+  // a card click calls openDossier (one fetch) AND navigate(), and that
+  // navigate bumps routeSlug → re-runs the effect, which would otherwise fire a
+  // second identical fetch. Kept in a ref so it's current synchronously,
+  // without re-triggering the effect.
+  const openSlugRef = useRef(routeSlug || null);
+
   const openDossier = useCallback(async (slug, options = {}) => {
     if (!slug) return;
+    openSlugRef.current = slug;
     setActiveSlug(slug);
     setDossierLoading(true);
     setDossierError(null);
@@ -147,6 +156,9 @@ export function useGalleryPageState(routeSlug = null) {
 
   useEffect(() => {
     if (routeSlug) {
+      // Already open (or loading) for this slug — e.g. openDossier just
+      // navigate()'d here. Don't fire a duplicate fetch for what's on screen.
+      if (openSlugRef.current === routeSlug) return;
       void Promise.resolve().then(() => openDossier(routeSlug, { replace: true }));
       return;
     }
@@ -154,11 +166,13 @@ export function useGalleryPageState(routeSlug = null) {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
     if (slug) {
+      if (openSlugRef.current === slug) return;
       void Promise.resolve().then(() => openDossier(slug, { replace: true }));
       return;
     }
     // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
     // close the open dossier so the view matches the URL.
+    openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
     setDossierError(null);
@@ -186,6 +200,7 @@ export function useGalleryPageState(routeSlug = null) {
   }, [galleryQuery, page, total]);
 
   const backToList = useCallback(() => {
+    openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
     setDossierError(null);

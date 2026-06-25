@@ -155,6 +155,15 @@ async function grantMonthlyAllowanceIfNeeded(
     throw new Error(`Monthly allowance invoice ${invoice.id} has no matching profile`);
   }
 
+  // Only SUBSCRIPTION invoices carry the monthly allowance. A non-subscription
+  // invoice (manual / one-off) must NOT grant 30 credits or back-fill a sub id.
+  // (Stripe always sets billing_reason; an absent value ⇒ proceed for back-compat.)
+  if (invoice.billing_reason
+    && invoice.billing_reason !== 'subscription_create'
+    && invoice.billing_reason !== 'subscription_cycle') {
+    return;
+  }
+
   // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
   // users who pre-date the column. We deliberately do NOT overwrite an existing
   // recorded id from an invoice: Stripe reorders/redelivers, so a late OLD-sub
@@ -168,7 +177,8 @@ async function grantMonthlyAllowanceIfNeeded(
   if (renewalSubId && !profile.stripeSubscriptionId) {
     const { error: subErr } = await supabase.from('profiles')
       .update({ stripe_subscription_id: renewalSubId })
-      .eq('id', profile.userId);
+      .eq('id', profile.userId)
+      .is('stripe_subscription_id', null);   // atomic back-fill: write only if still unset
     if (subErr) throw new Error(`Recording subscription id failed: ${subErr.message}`);
   }
 

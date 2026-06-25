@@ -79,8 +79,17 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
   const damping = opts.damping ?? DEFAULT_DAMPING;
   const maxHops = opts.maxHops ?? MAX_HOPS;
 
-  // Visited set to guard against cycles. Key = `${entityType}:${entityId}`.
-  const visited = new Set([`${origin.entityType}:${origin.entityId}`]);
+  // Visited set to guard against cycles. Keyed by the impairment DIMENSION an
+  // edge would land — `${entityType}:${entityId}:${dimension}` — not the bare
+  // entity. A single entity can be genuinely impaired along distinct cause
+  // paths (a faction whose two controlled institutions both burn loses wealth
+  // twice over); a bare-entity key silently dropped the second path and
+  // under-counted multi-path damage. The dimension in the key still closes
+  // every cycle: re-reaching a node on the SAME dimension re-walks the same
+  // edge, so we stop there (and compound severity rather than restamp). The
+  // origin is seeded under its own dimension so propagation never loops back
+  // onto it on that channel — preserving KILL_NPC's exact-once landing.
+  const visited = new Set([`${origin.entityType}:${origin.entityId}:${origin.impairment.type}`]);
 
   // BFS frontier: entities to expand from. Each entry carries the
   // attenuated severity its outgoing edges should use.
@@ -105,10 +114,6 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
       // Find linked entities and apply impairments.
       const links = findLinkedEntities(working, node);
       for (const link of links) {
-        const visitKey = `${link.targetType}:${link.targetId}`;
-        if (visited.has(visitKey)) continue;
-        visited.add(visitKey);
-
         // The npc→faction dimension depends on the NPC's importance tier
         // (leadership for pillar/key, membership for notable/minor — see the
         // contract in findLinkedEntities). Resolve the source NPC so
@@ -126,9 +131,24 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
         const linkSeverity = clamp01(propagatedSeverity * linkStrength);
         if (linkSeverity < 0.05) continue;
 
+        // Cycle guard, keyed by the landing dimension. A second path that
+        // reaches the same entity on the SAME dimension would re-walk an edge
+        // we've already taken — so we don't expand it again (that closes the
+        // cycle). But we DO compound its severity into the existing impairment:
+        // two burned institutions hurt their shared controller more than one,
+        // and the bare-entity key used to drop that second hit entirely.
+        const visitKey = `${link.targetType}:${link.targetId}:${propagatedDim}`;
+        const alreadyVisited = visited.has(visitKey);
+
+        const priorSeverity = currentSeverity(working, link.targetType, link.targetId, propagatedDim, origin.impairment.causeEventId);
+        // Compound on the house rule (1 − ∏(1 − sᵢ)): paths combine without
+        // ever exceeding total impairment. First hit: priorSeverity is 0, so
+        // this is the plain linkSeverity.
+        const mergedSeverity = clamp01(1 - (1 - priorSeverity) * (1 - linkSeverity));
+
         const impairment = {
           type: propagatedDim,
-          severity: linkSeverity,
+          severity: mergedSeverity,
           causeEventId: origin.impairment.causeEventId,
           description: `Propagated from ${node.entityType} "${entityName(working, node.entityType, node.entityId)}" (${node.dimension} → ${propagatedDim}, hop ${node.hops + 1})`,
           // Inherit the origin's timestamp so propagation stays deterministic when
@@ -137,12 +157,17 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
           appliedAt: origin.impairment.appliedAt,
         };
 
+        // withImpairment replaces same type+cause, so re-applying with the
+        // compounded severity upgrades the existing impairment in place.
         working = applyImpairmentToEntity(working, link.targetType, link.targetId, impairment);
+
+        if (alreadyVisited) continue;  // edge already expanded — compound only, don't re-walk
+        visited.add(visitKey);
 
         next.push({
           entityType: link.targetType,
           entityId:   link.targetId,
-          severity:   linkSeverity,
+          severity:   mergedSeverity,
           hops:       node.hops + 1,
           dimension:  propagatedDim,
         });
@@ -188,12 +213,12 @@ function findLinkedEntities(settlement, node) {
     }
   } else if (node.entityType === 'faction') {
     for (const i of settlement.institutions || []) {
-      const fac = factions.find(f => factionId(f) === node.entityId);
+      const fac = factions.find((/** @type {any} */ f) => factionId(f) === node.entityId);
       const strength = fac ? factionInstitutionStrength(fac, instId(i)) : 0;
       if (strength > 0) out.push({ targetType: 'institution', targetId: instId(i), strength });
     }
   } else if (node.entityType === 'npc') {
-    const npc = (settlement.npcs || []).find(n => npcId(n) === node.entityId);
+    const npc = (settlement.npcs || []).find((/** @type {any} */ n) => npcId(n) === node.entityId);
     if (npc) {
       for (const linkedId of npc.linkedInstitutionIds || []) {
         out.push({ targetType: 'institution', targetId: linkedId, strength: importanceWeight(npc) });
@@ -241,6 +266,7 @@ function factionInstitutionStrength(faction, instId) {
   return 0;
 }
 
+/** @param {any} npc */
 function importanceWeight(npc) {
   switch (npc?.importance) {
     case 'pillar': return 1.0;
@@ -295,3 +321,25 @@ function entityName(s, type, id) {
   return e?.name || id;
 }
 function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+/**
+ * Read the severity of an existing propagated impairment on a target so a
+ * second cause path can compound onto it. Matches both type and cause so we
+ * only ever fold paths from the SAME originating event together (distinct
+ * events stack independently via withImpairment, as before).
+ * @param {any} settlement
+ * @param {string} type
+ * @param {string} id
+ * @param {string} dimension
+ * @param {string} causeEventId
+ * @returns {number}
+ */
+function currentSeverity(settlement, type, id, dimension, causeEventId) {
+  const list = type === 'institution' ? settlement.institutions
+    : type === 'faction' ? factionsList(settlement)
+    : settlement.npcs;
+  const entity = (list || []).find((/** @type {any} */ x) =>
+    (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
+  const match = (entity?.impairments || []).find((/** @type {any} */ i) => i.type === dimension && i.causeEventId === causeEventId);
+  return match?.severity ?? 0;
+}

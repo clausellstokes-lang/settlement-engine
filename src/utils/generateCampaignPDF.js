@@ -100,15 +100,49 @@ const PUNCT_FOLD = [
   [/\u200B|\u200C|\u200D|\u2060|\uFEFF/g, ''],       // zero-width / BOM -> drop
   [/[\u2007\u2008\u2009\u200A\u202F\u205F]/g, ' '], // figure / thin / narrow-nbsp -> space
 ];
+
+// Cyrillic (Russian core) -> ASCII transliteration. Helvetica can't render the
+// glyphs, so without this a Cyrillic name would strip to a single placeholder.
+// A best-effort romanisation keeps the name READABLE instead. Order matters:
+// multi-letter digraphs aren't needed here since we map per code point.
+const CYRILLIC_FOLD = {
+  \u0430:'a',\u0431:'b',\u0432:'v',\u0433:'g',\u0434:'d',\u0435:'e',\u0451:'e',\u0436:'zh',\u0437:'z',\u0438:'i',\u0439:'i',\u043A:'k',
+  \u043B:'l',\u043C:'m',\u043D:'n',\u043E:'o',\u043F:'p',\u0440:'r',\u0441:'s',\u0442:'t',\u0443:'u',\u0444:'f',\u0445:'kh',\u0446:'ts',
+  \u0447:'ch',\u0448:'sh',\u0449:'shch',\u044A:'',\u044B:'y',\u044C:'',\u044D:'e',\u044E:'yu',\u044F:'ya',
+};
+function transliterateCyrillic(str) {
+  let out = '';
+  for (const ch of str) {
+    const lower = ch.toLowerCase();
+    const mapped = CYRILLIC_FOLD[lower];
+    if (mapped === undefined) { out += ch; continue; }
+    // Preserve case: uppercase source -> capitalise the romanisation.
+    out += ch === lower ? mapped
+      : mapped.charAt(0).toUpperCase() + mapped.slice(1);
+  }
+  return out;
+}
+
 function s(v) {
-  // Fold smart punctuation, THEN strip anything still outside Latin-1. The negated
-  // class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII, and printable Latin-1;
-  // everything else becomes a space so PDF-bound strings carry no unprintable bytes.
+  // Fold smart punctuation, romanise Cyrillic, THEN handle anything still outside
+  // Latin-1. The negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
+  // and printable Latin-1; everything else (CJK, Arabic, etc. \u2014 Helvetica can't
+  // render them) is replaced PER RUN by a visible '?' placeholder rather than a
+  // space. A space collapses to nothing under the trim below, which silently
+  // BLANKED a fully-CJK/Cyrillic name to an empty string; the placeholder keeps
+  // an unrenderable name visible as a marker the DM can recognise.
   let out = String(v || '');
   for (const [re, rep] of PUNCT_FOLD) out = out.replace(re, rep);
-  // eslint-disable-next-line no-control-regex
-  return out.replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g, ' ').replace(/\s+/g, ' ').trim();
+  out = transliterateCyrillic(out);
+  return out
+    // eslint-disable-next-line no-control-regex
+    .replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]+/g, '?')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
+// Test-only alias for the PDF string sanitiser (Latin-1 fold + Cyrillic
+// romanisation + unrenderable-run placeholder). Not used by app code.
+export const __sanitizeForPdf = s;
 function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
   return d.splitTextToSize(s(text),maxW);
@@ -142,16 +176,6 @@ function footer(d, campaignName, pageN, totalPagesHint) {
   const right = `Page ${pageN}` + (totalPagesHint ? ` of ${totalPagesHint}` : '');
   const w = d.getStringUnitWidth(right) * 7 / d.internal.scaleFactor;
   d.text(right, PW - MR - w, PH - 5);
-}
-
-// Ensure there's room for `h` more millimetres, else paginate.
-function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
-  if (y + h < BOT) return { y, pageN };
-  footer(d, campaignName, pageN);
-  d.addPage();
-  pageN++;
-  const newY = newTopHandler ? newTopHandler(d, pageN) : MT;
-  return { y: newY, pageN };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -201,13 +201,24 @@ function impairInstitution(s, event) {
 function restoreInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
-  // If the user supplied a specific cause event id, remove only those
-  // impairments. Otherwise clear all impairments — full reset.
-  const causeId = event.payload?.causeEventId;
+  // Restore is scoped to ONE prior impairment. With an explicit causeEventId we
+  // undo exactly that event; without one we undo the MOST RECENT impairment (the
+  // last-applied cause) — never a blanket clear, which would wipe impairments
+  // from UNRELATED in-timeline events the restore was never meant to touch.
+  const causeId = event.payload?.causeEventId ?? latestImpairmentCause(inst);
   const restored = causeId
     ? withoutEventImpairments(inst, causeId)
-    : { ...inst, impairments: [], status: 'active' };
+    : { ...inst, status: 'active' };
   return replaceInstitution(s, inst, restored);
+}
+
+// The causeEventId of the most recently applied impairment (impairments append
+// in order, so the last entry is newest). Null when the entity carries none.
+/** @param {any} entity */
+function latestImpairmentCause(entity) {
+  const imps = Array.isArray(entity?.impairments) ? entity.impairments : [];
+  if (!imps.length) return null;
+  return imps[imps.length - 1]?.causeEventId ?? null;
 }
 
 // ── Faction mutations ──────────────────────────────────────────────────────
@@ -240,10 +251,12 @@ function impairFaction(s, event) {
 function restoreFaction(s, event) {
   const faction = findFaction(s, event.targetId);
   if (!faction) return s;
-  const causeId = event.payload?.causeEventId;
+  // Same single-impairment scope as restoreInstitution: explicit cause, else the
+  // most recent one — never a blanket clear of unrelated in-timeline impairments.
+  const causeId = event.payload?.causeEventId ?? latestImpairmentCause(faction);
   const restored = causeId
     ? withoutEventImpairments(faction, causeId)
-    : { ...faction, impairments: [], status: 'active' };
+    : { ...faction, status: 'active' };
   return replaceFaction(s, faction, restored);
 }
 

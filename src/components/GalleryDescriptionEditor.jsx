@@ -42,13 +42,13 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
 
   const emit = () => {
     const raw = ref.current?.innerHTML || '';
-    // Slicing SANITIZED html at a raw character boundary can cut mid-tag and
-    // store broken/truncated markup (a dropped closing tag, a garbled link).
-    // Sanitize first; only if it exceeds the cap, truncate the SOURCE and
-    // re-sanitize — DOMPurify re-balances any tag the cut left open, so the
-    // stored value is always well-formed.
+    // Sanitize first, then enforce the cap against the SANITIZED string — the
+    // length we measure (clean.length) and the string we slice must be the same
+    // one, or the cap is off by however much the raw markup differs from the
+    // sanitized output. Re-sanitize the slice so DOMPurify re-balances any tag
+    // the cut left open, keeping the stored value well-formed.
     let clean = sanitizeGalleryHtml(raw);
-    if (clean.length > maxLength) clean = sanitizeGalleryHtml(raw.slice(0, maxLength));
+    if (clean.length > maxLength) clean = sanitizeGalleryHtml(clean.slice(0, maxLength));
     onChange?.(clean);
   };
 

@@ -138,6 +138,26 @@ function summarizeFoodSituation(s: Record<string, any>): string {
   return `food self-sufficient (trade access: ${access})`;
 }
 
+/**
+ * Recursively run every string in a value through stripGuidanceFences. The
+ * summary is interpolated into prompts via JSON.stringify, so the DM's fenced
+ * campaign context is stripped at the top level — but the dossier strings the
+ * summary carries (settlement name, faction descriptions, NPC goals/secrets,
+ * institution descriptions, …) are equally user-controlled and could otherwise
+ * smuggle a live fence token into the prompt and close the campaign-context
+ * fence to break out into instructions. Strip them to the same fixpoint.
+ */
+function stripFencesDeep<T>(value: T): T {
+  if (typeof value === 'string') return stripGuidanceFences(value) as unknown as T;
+  if (Array.isArray(value)) return value.map((v) => stripFencesDeep(v)) as unknown as T;
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value as Record<string, unknown>)) out[k] = stripFencesDeep(v);
+    return out as unknown as T;
+  }
+  return value;
+}
+
 function summarizeSettlement(settlement: Record<string, unknown>): Record<string, unknown> {
   const s = settlement as Record<string, any>;
   const ps = s.powerStructure || {};
@@ -145,7 +165,7 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
   const governing = factions.find((f: any) => f?.isGoverning);
   const stressArr = Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [];
 
-  return {
+  return stripFencesDeep({
     name: s.name,
     tier: s.tier,
     population: s.population,
@@ -210,7 +230,7 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
       s.settlementReason?.primary || null
     ),
     prominentRelationship: s.prominentRelationship?.phrasing,
-  };
+  });
 }
 
 /**

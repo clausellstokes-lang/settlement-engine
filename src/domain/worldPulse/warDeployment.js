@@ -679,7 +679,7 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean }} args.rules
- * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}>, warExhaustion: Record<string, number> }}
+ * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number> }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
@@ -720,7 +720,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // (occupier = strongest besieger, codepoint tie-break; conquered = the target),
   // so a reversed-authored save credits the SAME winner. Folded into the next-tick
   // dispositionStats ledger post-apply by the caller. Empty when nothing resolves.
-  /** @type {Array<{id:string, outcome:'win'|'loss', magnitude?:number}>} */
+  // sourceConquestId is additive provenance on a conquest delta (the resume-dismiss strip
+  // matches on it); downstream applyDispositionDeltas reads only {id, outcome, magnitude}.
+  /** @type {Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>} */
   const dispositionDeltas = [];
   // Copy the ledger; never mutate worldState's record in place.
   const deployments = { ...existing };
@@ -975,8 +977,15 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     });
 
     // Disposition ratchet: the conqueror banked a war WIN; the conquered settlement a LOSS.
-    dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1 });
-    dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1 });
+    // Tag each delta with the SOURCE conquest's outcome id so a DM-dismissed conquest can
+    // remove EXACTLY its own win/loss pair (the resume-dismiss residue strip), rather than
+    // matching on {id, outcome} alone — which is order-fragile when an occupier banks two
+    // conquests at once or already carried an unrelated win this tick. sourceConquestId is
+    // additive metadata: applyDispositionDeltas reads only {id, outcome, magnitude}, so a
+    // committed (un-dismissed) delta carries it harmlessly.
+    const conquestId = `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
+    dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1, sourceConquestId: conquestId });
+    dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1, sourceConquestId: conquestId });
 
     // ALL besiegers' armies return home — the siege is over (won). Clear their
     // deployments; deploymentReturn turns each return into a contextual outcome.

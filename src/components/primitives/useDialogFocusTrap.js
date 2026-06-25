@@ -40,7 +40,17 @@ export function useDialogFocusTrap(open, onCancel) {
     restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
     const node = dialogRef.current;
     const focusables = () => node ? Array.from(node.querySelectorAll(FOCUSABLE)) : [];
-    (focusables()[0] || node)?.focus?.();
+    // Honour an explicit autofocus first: a dialog input that opted into
+    // autoFocus (e.g. a rename field) should keep focus rather than have it
+    // yanked to the header close button. React's autoFocus prop does not emit
+    // an [autofocus] attribute, so check the live document.activeElement too —
+    // when it already sits inside the dialog, leave it be. Only when nothing
+    // claimed focus do we fall back to the first focusable, then the node.
+    const list = focusables();
+    const declared = node?.querySelector?.('[autofocus]');
+    const live = typeof document !== 'undefined' ? document.activeElement : null;
+    const alreadyInside = node && live && live !== node && node.contains?.(live) && list.includes(live);
+    (declared || (alreadyInside ? live : null) || list[0] || node)?.focus?.();
 
     // Claim the top of the stack: this trap is now the topmost open dialog.
     const token = {};

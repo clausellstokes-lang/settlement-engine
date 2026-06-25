@@ -412,6 +412,12 @@ function getCorsHeaders(req?: Request) {
 const PER_ATTEMPT_TIMEOUT_MS = 30_000; // single provider fetch
 const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall-clock)
 
+// Reject an oversized body up front (mirrors generate-chronicle / ingest-events).
+// The settlement payload is client-supplied and the credit charged is fixed
+// regardless of input size, so an unbounded body would only inflate the provider
+// token bill. Read req.text() with this cap before JSON.parse.
+const MAX_BODY_BYTES = 64 * 1024;
+
 function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   const ctrl = new AbortController();
   const id = setTimeout(() => ctrl.abort(new DOMException(`provider fetch timed out after ${ms}ms`, 'TimeoutError')), ms);
@@ -795,7 +801,22 @@ export async function handleGenerateNarrative(
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
 
-    // Parse request
+    // Parse request — cap the body BEFORE parsing (mirrors generate-chronicle):
+    // the credit charged is fixed regardless of input size, so an unbounded
+    // settlement payload would only inflate the provider token bill.
+    const rawBody = await req.text().catch(() => '');
+    if (rawBody.length > MAX_BODY_BYTES) {
+      return new Response(
+        JSON.stringify({ error: 'Request body too large' }),
+        { status: 413, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
+    let parsedBody: any;
+    try {
+      parsedBody = rawBody ? JSON.parse(rawBody) : null;
+    } catch {
+      throw new Error('Invalid JSON in request body');
+    }
     const {
       type,
       settlement,
@@ -810,7 +831,7 @@ export async function handleGenerateNarrative(
       changeLabel,
       priorNarrative,
       priorDailyLife,
-    } = await req.json();
+    } = parsedBody ?? {};
     if (!type || !['narrative', 'dailyLife', 'progression'].includes(type)) {
       throw new Error('Invalid type. Must be "narrative", "dailyLife", or "progression"');
     }

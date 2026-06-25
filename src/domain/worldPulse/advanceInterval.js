@@ -77,9 +77,9 @@ function collapseIntervalHistory(worldState, appendedRecords) {
 
 /**
  * Fold one tick's settlementUpdates onto the saves that feed the NEXT tick:
- * id-matched replace (last-write-wins), pure (returns a new array). Mirrors the
- * store-side foldSettlementUpdatesOntoSaves so the orchestrator can thread tick
- * outputs into tick inputs without importing the store layer.
+ * id-matched replace (last-write-wins), pure (returns a new array). Lets the
+ * orchestrator thread tick outputs into tick inputs without importing the store
+ * layer.
  * @param {any[]} saves
  * @param {any[]} [updates]
  * @returns {any[]}

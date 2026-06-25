@@ -71,9 +71,27 @@ function buildProfileResult(user, data = {}) {
 }
 
 /**
+ * PostgREST returns this code from `.single()` when the filter matched no row.
+ * It is the ONLY error that legitimately means "this user has no profile yet"
+ * — every other error (RLS denial, network blip, 5xx) is a TRANSIENT query
+ * failure, and treating those as "no row" would silently rebuild the session
+ * at free/user and downgrade a premium/admin user mid-flight.
+ */
+const PROFILE_NO_ROW = 'PGRST116';
+
+/**
  * Fetch profile-backed auth grants from the profiles table, the source of
- * truth for every privileged gate. On failure, fall back to safe non-
- * privileged defaults rather than trusting user-writable metadata.
+ * truth for every privileged gate.
+ *
+ * Failure handling distinguishes two cases:
+ *   - NO ROW (PGRST116): the user genuinely has no profile, so safe
+ *     non-privileged defaults are the correct grant — never trust the
+ *     user-writable metadata for tier/role.
+ *   - TRANSIENT failure (any other error / thrown exception): we must NOT
+ *     downgrade. Returning defaults here would drop a premium/admin user to
+ *     free/user on a momentary blip (and every token refresh re-runs this).
+ *     Instead we throw, so the caller preserves the last-known session rather
+ *     than overwriting it with a downgrade.
  */
 async function fetchProfileAuth(user) {
   if (!user) {
@@ -82,18 +100,23 @@ async function fetchProfileAuth(user) {
   if (!supabase) {
     return buildProfileResult(user, {});
   }
-  try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name')
-      .eq('id', user.id)
-      .single();
-    if (!error && data) {
-      return buildProfileResult(user, data);
-    }
-  } catch {
-    // Safe defaults below.
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name')
+    .eq('id', user.id)
+    .single();
+  if (error && error.code !== PROFILE_NO_ROW) {
+    // Transient query failure — do not downgrade. Surface it so the caller
+    // keeps the existing session/tier instead of rebuilding at free/user.
+    /** @type {Error & { code?: string }} */
+    const err = new Error('Profile lookup failed.');
+    err.code = 'profile_lookup_failed';
+    throw err;
   }
+  if (!error && data) {
+    return buildProfileResult(user, data);
+  }
+  // PROFILE_NO_ROW (or a null row with no error): genuinely no profile yet.
   return buildProfileResult(user, {});
 }
 
@@ -319,7 +342,10 @@ async function supabaseSignInWithMagicLink(email) {
       // Restrict to our own origin so a stolen link can't redirect
       // a user into an attacker-controlled callback.
       emailRedirectTo: `${window.location.origin}`,
-      shouldCreateUser: true,  // sign up + sign in are unified
+      // Sign-IN surface: never mint a new account here. Creating a user on this
+      // path would forge a passwordless account that can never use a password.
+      // Only the explicit sign-UP flow creates users.
+      shouldCreateUser: false,
     },
   });
   if (error) throw error;
@@ -693,7 +719,15 @@ function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
       if (session?.user) {
-        const profile = await fetchProfileAuth(session.user);
+        let profile;
+        try {
+          profile = await fetchProfileAuth(session.user);
+        } catch {
+          // Transient profile-lookup failure on a refresh/sign-in event. Do NOT
+          // rebuild auth from downgraded defaults — skip this event so the store
+          // keeps its last-known tier/role until a later event succeeds.
+          return;
+        }
         callback(
           event,
           session.user,

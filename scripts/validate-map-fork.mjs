@@ -69,7 +69,22 @@ async function enumerateShippable(dir = libsRoot, prefix = '') {
   return found;
 }
 
-if (manifest?.libs) {
+// A missing/empty `libs` array must FAIL the validation, not silently skip the
+// whole supply-chain block. The old `if (manifest?.libs)` gate failed OPEN: a
+// manifest with no `libs` (or a truncated/empty one) sailed past with zero
+// integrity checks while ~5.7 MB of vendored blobs ship to the payment+auth
+// origin un-verified. `--update-manifest` is exempt — that mode BUILDS the set.
+// (A wholly unreadable manifest already pushed its own failure above; only add
+// the "no libs" failure when the manifest parsed but the array is missing/empty.)
+if (!updateManifest && manifest && (!Array.isArray(manifest.libs) || manifest.libs.length === 0)) {
+  failures.push(
+    'VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the ' +
+      'supply-chain check vacuous. Re-pin the vendored libs: ' +
+      'node scripts/validate-map-fork.mjs --update-manifest',
+  );
+}
+
+if (Array.isArray(manifest?.libs)) {
   if (updateManifest) {
     // Re-hash every pinned file, AND fold in any shippable file on disk that
     // isn't pinned yet — so a single --update-manifest re-pins the WHOLE set the

@@ -62,8 +62,15 @@ const AUTH_TOKEN_LS_KEY = (() => {
  * the hang in the first place — this is belt-and-suspenders for any future
  * regression (supabase-js upgrade, stale tab, etc.).
  */
+// Clock-skew grace on the persisted token's expiry. A token that lapsed within
+// this window is still served from the fallback: the edge function tolerates a
+// few seconds of skew, and rejecting a just-expired token here would surface a
+// spurious "not signed in" while a refresh is one round-trip away.
+const TOKEN_EXPIRY_SKEW_MS = 30000; // 30s
+
 async function getAccessTokenSafe() {
-  // Read the persisted token from a given store, validating expiry.
+  // Read the persisted token from a given store, validating expiry (with a
+  // small skew grace so a just-expired token isn't rejected outright).
   const readFrom = (store) => {
     if (!AUTH_TOKEN_LS_KEY || !store) return null;
     try {
@@ -73,7 +80,7 @@ async function getAccessTokenSafe() {
       const token = parsed?.access_token;
       const expAt = parsed?.expires_at; // seconds since epoch
       if (!token) return null;
-      if (typeof expAt === 'number' && expAt * 1000 < Date.now()) return null;
+      if (typeof expAt === 'number' && expAt * 1000 + TOKEN_EXPIRY_SKEW_MS < Date.now()) return null;
       return token;
     } catch { return null; }
   };
@@ -95,7 +102,23 @@ async function getAccessTokenSafe() {
     const token = result?.data?.session?.access_token;
     if (token) return token;
   } catch (_) { /* fall through to LS */ }
-  return readLS();
+
+  const cached = readLS();
+  if (cached) return cached;
+
+  // Nothing usable in either store — the persisted token may have lapsed past
+  // the skew grace. Try one bounded refresh before giving up so an expired-but-
+  // refreshable session doesn't surface a spurious "not signed in". The race
+  // keeps this from re-introducing the cross-tab-lock hang it guards against.
+  try {
+    const refreshed = await Promise.race([
+      supabase.auth.refreshSession(),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('refresh_timeout')), 2000)),
+    ]);
+    const token = refreshed?.data?.session?.access_token;
+    if (token) return token;
+  } catch (_) { /* fall through */ }
+  return null;
 }
 
 /**
@@ -216,6 +239,13 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   }
 
   // Streaming path: read NDJSON lines, dispatch to onField, collect final result.
+  // A 2xx with no body (e.g. a proxy stripped it) would otherwise throw an
+  // unmapped TypeError off `res.body.getReader()` and leak both watchdog timers.
+  // Clear them and surface the same retryable error a truncated stream gets.
+  if (!res.body) {
+    clearWatchdogs();
+    throw new Error('AI generation returned an empty response (no stream). Please retry.');
+  }
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
@@ -283,8 +313,14 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     // Final success line — the server's `result` is authoritative
     if (msg.done) {
       sawDone = true;
+      // A `done` with a missing or non-object `result` is a malformed completion:
+      // treating it as success would silently persist an empty {} over what
+      // should have been a real narrative (and charge a credit for nothing).
+      // Flag it fatal so the caller retries instead of saving the blank.
       if (msg.result && typeof msg.result === 'object') {
         result = msg.result;
+      } else {
+        fatalError = new Error('AI generation completed without a result (malformed response). Please retry.');
       }
       // Authoritative daily-life payload from a bundled narrative run. Prefer
       // the server's final object; fall back to the streamed-beat accumulation.

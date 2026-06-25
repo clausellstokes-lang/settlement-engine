@@ -20,7 +20,7 @@ import { evaluateTradeWar } from './tradeWar.js';
 import { evaluateReligiousContest } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
-import { evaluateOccupations, freshConquestsFrom } from './occupation.js';
+import { evaluateOccupations } from './occupation.js';
 import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
@@ -371,19 +371,33 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
       wantsWarFor,
     });
-    // Persist the NEXT-tick posture ledger (deep-cloned via ensureWorldState's
-    // conditional clone on the next read). Only materialize the key when non-empty —
-    // a dormant campaign keeps NO warPosture key (byte-neutral under the oracle).
-    worldState = Object.keys(mobilization.warPosture).length
-      ? { ...worldState, warPosture: mobilization.warPosture }
-      : (() => { const { warPosture: _drop, ...rest } = worldState; return rest; })();
     const effects = mobilizationEffects({
       snapshot: postTimeSnapshot,
       events: mobilization.events,
       tick: worldState.tick,
       now,
+      // RESUME dismissal: a DM-dismissed war_mobilization major must commit NOTHING —
+      // not its footing condition, not its neighbour signal channels, AND not its
+      // warPosture ledger entry (dropped below from effects.dismissedIds). Parity with
+      // the conquest-dismiss path. Inert (null) on the non-resume / no-dismissal path.
+      dismissedOutcomeIds: activeDismissals,
     });
     mobilizationOutcomes = effects.outcomes;
+    // Drop the warPosture ledger key for any settlement whose war_mobilization the DM
+    // dismissed: the posture ramp is a SIDE EFFECT of the dismissed major, so leaving it
+    // committed would strand a war footing for a mobilization that never landed. Mirrors
+    // the conquest-dismiss occupation-seed suppression. Byte-neutral without dismissals.
+    let nextWarPosture = mobilization.warPosture;
+    if (effects.dismissedIds.length) {
+      nextWarPosture = { ...mobilization.warPosture };
+      for (const id of effects.dismissedIds) delete nextWarPosture[id];
+    }
+    // Persist the NEXT-tick posture ledger (deep-cloned via ensureWorldState's
+    // conditional clone on the next read). Only materialize the key when non-empty —
+    // a dormant campaign keeps NO warPosture key (byte-neutral under the oracle).
+    worldState = Object.keys(nextWarPosture).length
+      ? { ...worldState, warPosture: nextWarPosture }
+      : (() => { const { warPosture: _drop, ...rest } = worldState; return rest; })();
     // Rebuild the snapshot so the war layer's deploy gate + the reaction rule read the
     // persisted posture AND the freshly-minted mobilization signals.
     const postureCampaign = { ...campaign, worldState, regionalGraph: postTimeSnapshot.regionalGraph };
@@ -511,6 +525,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       returnOutcomes: warReturnOutcomes,
       tick: worldState.tick,
       rules: simulationRules,
+      // RESUME dismissal: a DM-dismissed occupation_vassalized must NOT strand the
+      // occupation at the terminal `vassalized` rung — the state machine rolls the
+      // promotion back so the vassal edge (filtered from the apply set below) and the
+      // ledger stay consistent. Parity with the conquest-dismiss occupation suppression.
+      dismissedOutcomeIds: activeDismissals,
     });
     occupationOutcomes = occupation.outcomes;
     // Only materialize the occupations key when the ledger is non-empty — a war with no
@@ -532,28 +551,23 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // A DM-DISMISSED conquest must leave NO disposition ledger residue either: the war
     // layer banks a conqueror WIN + a conquered LOSS for each conquest it resolved (the
     // out-of-band ratchet), so a dismissed conquest would otherwise still tilt next-tick
-    // confidence for a power transfer that never landed. Strip exactly one matching
-    // {occupierId: win} + {occupiedId: loss} pair per dismissed conquest, attributed
-    // EXACTLY as the war resolver does (occupier→win, conquered→loss). Inert without
-    // dismissals (the array is returned by reference).
+    // confidence for a power transfer that never landed. Each conquest delta is TAGGED
+    // with its source conquest's outcome id at the resolver (warDeployment), so we strip
+    // EXACTLY the deltas of the dismissed conquests by that id — robust against order and
+    // against an occupier banking two conquests at once OR carrying an unrelated win this
+    // tick (which the old {id, outcome} match could mis-strip). Inert without dismissals.
     if (activeDismissals) {
-      const dismissedConquests = freshConquestsFrom(war.outcomes.filter(
-        o => deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id)),
-      ));
-      if (dismissedConquests.length) {
-        const removals = [];
-        for (const { occupiedId, occupierId } of dismissedConquests) {
-          removals.push({ id: String(occupierId), outcome: 'win' });
-          removals.push({ id: String(occupiedId), outcome: 'loss' });
-        }
-        // Remove ONE delta per removal entry (so two simultaneous conquests by the same
-        // occupier still drop two wins). Mutating a local index keeps order-independence.
-        pendingDispositionDeltas = pendingDispositionDeltas.filter((delta) => {
-          const i = removals.findIndex(r => r.id === String(delta?.id) && r.outcome === delta?.outcome);
-          if (i === -1) return true;
-          removals.splice(i, 1);
-          return false;
-        });
+      const dismissedConquestIds = new Set(
+        war.outcomes
+          .filter(o => o?.candidateType === 'conquest'
+            && deriveDecisionTier(o) === 'major'
+            && activeDismissals.has(String(o.id)))
+          .map(o => String(o.id)),
+      );
+      if (dismissedConquestIds.size) {
+        pendingDispositionDeltas = pendingDispositionDeltas.filter(
+          (delta) => !(delta?.sourceConquestId && dismissedConquestIds.has(String(delta.sourceConquestId))),
+        );
       }
     }
   }

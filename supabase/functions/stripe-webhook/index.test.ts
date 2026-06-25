@@ -151,11 +151,11 @@ function makeInvoiceStub() {
   return { rpc, granted, adminClient: () => client };
 }
 
-const invoiceEvent = (type: string, invoiceId: string) =>
+const invoiceEvent = (type: string, invoiceId: string, billingReason = 'subscription_cycle') =>
   JSON.stringify({
     id: `evt_${invoiceId}_${type}`,
     type,
-    data: { object: { id: invoiceId, customer: 'cus_sub', customer_email: 'sub@x.com', period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
+    data: { object: { id: invoiceId, customer: 'cus_sub', customer_email: 'sub@x.com', billing_reason: billingReason, period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
   });
 
 Deno.test('a signed invoice.paid grants exactly 30 monthly credits with a computed expiry', async () => {
@@ -169,6 +169,15 @@ Deno.test('a signed invoice.paid grants exactly 30 monthly credits with a comput
   assertEquals(args.amount, 30);
   assertEquals(args.source, 'monthly_allowance');
   assertEquals(typeof args.expires_at, 'string');   // expiry derived from the period end
+});
+
+Deno.test('a NON-subscription invoice (billing_reason=manual) does NOT grant the monthly allowance', async () => {
+  const stub = makeInvoiceStub();
+  const body = invoiceEvent('invoice.paid', 'in_manual', 'manual');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  // Only subscription_create / subscription_cycle invoices carry the allowance.
+  assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), false);
 });
 
 Deno.test('a replayed invoice.paid (same invoice id) does NOT double-grant', async () => {

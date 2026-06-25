@@ -112,7 +112,42 @@ ${GROUNDING_FENCE_CLOSE}
 Return ONLY the chronicle prose. No preamble, no headings, no markdown.`;
 }
 
-serve(async (req) => {
+/** Default user-scoped client (anon key + the caller's JWT) — verifies identity
+ *  and runs the user-context spend_credits RPC. */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (the account_is_active gate, the cap reservation,
+ *  the rate limiter, and the service-role-only refund_credits RPC). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Exported (not just inlined into serve) so the money/AI trust boundary can be
+// EXECUTION-tested: index.test.ts feeds requests with injected supabase stubs and
+// asserts an inactive account is REJECTED (fail-closed, never spends), that a
+// reservation taken before a pre-stream throw is RELEASED, and that a model
+// FAILURE refunds via the captured spend_id (refund_credits called with that exact
+// ledger row) without double-spending. `deps` is the optional injection seam
+// (userClient verifies the JWT + spends, adminClient gates + reserves + refunds);
+// production passes nothing so behavior is identical to the previous inline handler.
+export async function handleGenerateChronicle(
+  req: Request,
+  deps: {
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const makeUserClient = deps.userClient ?? defaultUserClient;
+  const makeAdminClient = deps.adminClient ?? defaultAdminClient;
   const cors = getCorsHeaders(req);
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405, cors);
@@ -129,17 +164,10 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) return json({ error: 'Missing authorization' }, 401, cors);
 
-    const supabaseUser = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
+    const supabaseUser = makeUserClient(authHeader);
     // Service-role client for the refund path: refund_credits is granted only to
     // service_role (migration 033), so users can't self-refund successful spends.
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
 
@@ -165,6 +193,20 @@ serve(async (req) => {
     // concurrent runs could both pass, overshooting the cap (the race 086 closes
     // with an advisory lock). The reservation is released on every post-reserve exit.
 
+    // Cap the body, parse, and validate the grounding shape BEFORE consuming a
+    // rate-limit unit (mirrors ingest-events' up-front cap). A malformed or
+    // oversized body is rejected for free — burning a per-user/day rate-limit unit
+    // on a 413/400 would let a bad client exhaust a legitimate user's daily quota
+    // without ever reaching a real generation. The credit charged is fixed at 2
+    // regardless of input size, so an unbounded grounding payload would also only
+    // inflate Anthropic token cost.
+    const raw = await req.text().catch(() => '');
+    if (raw.length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, cors);
+    let body: any = null;
+    try { body = raw ? JSON.parse(raw) : null; } catch { return json({ error: 'invalid_json' }, 400, cors); }
+    const grounding = body?.grounding;
+    if (!grounding || typeof grounding !== 'object') return json({ error: 'Missing grounding payload' }, 400, cors);
+
     // ── SAFETY: per-user/day rate limit — FAIL OPEN (shared limiter, migration 079) ──
     {
       const { data: rlResult, error: rlErr } =
@@ -175,16 +217,6 @@ serve(async (req) => {
         return json({ error: 'You have reached today\'s AI generation limit. Please try again tomorrow. No credits were charged.' }, 429, cors);
       }
     }
-
-    // Cap the body before parsing (mirrors ingest-events): the credit charged is
-    // fixed at 2 regardless of input size, so an unbounded grounding payload
-    // would only inflate Anthropic token cost.
-    const raw = await req.text().catch(() => '');
-    if (raw.length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, cors);
-    let body: any = null;
-    try { body = raw ? JSON.parse(raw) : null; } catch { return json({ error: 'invalid_json' }, 400, cors); }
-    const grounding = body?.grounding;
-    if (!grounding || typeof grounding !== 'object') return json({ error: 'Missing grounding payload' }, 400, cors);
 
     // Race-safe global-cap RESERVATION (migration 086), taken before the spend +
     // model call. FAIL CLOSED on RPC error / non-true `allowed`. The estimate is a
@@ -340,12 +372,13 @@ serve(async (req) => {
     return json({ chronicle: prose, creditsRemaining: balanceAfter }, 200, cors);
   } catch (e) {
     // Release a reservation taken before this throw (086). supabaseAdmin is
-    // try-scoped and unreachable here, so use a fresh service-role client. Every
-    // in-try release path RETURNS, so reaching this catch means none of them ran —
-    // no double-release. Best-effort: a release failure must not mask the error.
+    // try-scoped and unreachable here, so use a fresh service-role client (via the
+    // injected seam). Every in-try release path RETURNS, so reaching this catch
+    // means none of them ran — no double-release. Best-effort: a release failure
+    // must not mask the error.
     if (reservationId) {
       try {
-        const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+        const admin = makeAdminClient();
         await admin.rpc('release_ai_spend_reservation', { p_id: reservationId });
       } catch (relErr) {
         logError('generate-chronicle', null, `reservation release on outer error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
@@ -353,4 +386,6 @@ serve(async (req) => {
     }
     return json({ error: (e as Error).message }, 500, cors);
   }
-});
+}
+
+serve((req) => handleGenerateChronicle(req));

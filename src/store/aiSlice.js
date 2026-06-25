@@ -556,6 +556,12 @@ export const createAiSlice = (set, get) => ({
       try {
         await get()._appendChronicleEntry(saveId, {
           reason: isRegenerate ? 'regenerate' : 'initial',
+          // Thread THIS run's prose so a mid-generation settlement switch can't
+          // snapshot the now-active settlement's narrative under this save. The
+          // run's OWN bundled daily life — never the live view, which may now
+          // belong to another save.
+          aiSettlement: result,
+          aiDailyLife:  (dailyLife && typeof dailyLife === 'object') ? dailyLife : null,
         });
       } catch (chronErr) {
         console.error('Chronicle append failed:', chronErr);
@@ -767,6 +773,11 @@ export const createAiSlice = (set, get) => ({
         await get()._appendChronicleEntry(saveId, {
           reason: 'progression',
           triggeredBy: typeof changeLabel === 'string' && changeLabel ? changeLabel : null,
+          // Thread THIS run's prose; progression carries daily life through
+          // unchanged (the bundle captured when the run began), never the live
+          // view, which a mid-call settlement switch may have replaced.
+          aiSettlement: result,
+          aiDailyLife:  aiDailyLife ?? null,
         });
       } catch (chronErr) {
         console.error('Chronicle append (progression) failed:', chronErr);
@@ -788,10 +799,17 @@ export const createAiSlice = (set, get) => ({
   /**
    * Internal: append a chronicle entry to the saved settlement's ai_data.
    *
-   * Called on narrative generation success (initial/regenerate) and on
-   * revert-to-raw. Snapshots the CURRENT `aiSettlement` / `aiDailyLife`
-   * from store state — so callers should invoke this BEFORE clearing those
-   * fields (e.g. before the revert nulls them).
+   * Called on narrative generation success (initial/regenerate/progression)
+   * and on revert-to-raw.
+   *
+   * Source prose: a generation run produces the prose for THIS saveId, but the
+   * user may switch settlements mid-call (hydrateFromSave flips activeSaveId),
+   * leaving the live `aiSettlement`/`aiDailyLife` holding the OTHER save's view.
+   * So the long-running callers thread the run's OWN result through
+   * `opts.aiSettlement`/`opts.aiDailyLife`; only revert (which snapshots the
+   * still-live view synchronously, before nulling it) falls back to store state.
+   * When no source is threaded, the live view is only trusted if it belongs to
+   * this save (`activeSaveId === saveId`) so a non-active write can't bleed.
    *
    * Chronicle cap is tier-based:
    *   • elevated (dev/admin) → unlimited full entries
@@ -813,8 +831,15 @@ export const createAiSlice = (set, get) => ({
    * @param {'initial'|'regenerate'|'progression'|'revert'} opts.reason
    * @param {string|null} [opts.triggeredBy]
    * @param {'full'|'summary'} [opts.mode='full']
+   * @param {object|null} [opts.aiSettlement] - this run's own refined prose; threaded
+   *   by long-running callers so a mid-call settlement switch can't snapshot the
+   *   wrong save. Omit to fall back to the active-save live view.
+   * @param {object|null} [opts.aiDailyLife]  - this run's own daily-life bundle.
    */
-  _appendChronicleEntry: async (saveId, { reason, triggeredBy = null, mode = 'full' }) => {
+  _appendChronicleEntry: async (
+    saveId,
+    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife } = {},
+  ) => {
     if (!saveId) return;
     const state = get();
     const entry = state.savedSettlements.find(s => s.id === saveId);
@@ -829,10 +854,23 @@ export const createAiSlice = (set, get) => ({
                 : state.isPremium?.()  ? CHRONICLE_LIMITS.premium
                 : CHRONICLE_LIMITS.free;
 
+    // Prefer the run's OWN prose (threaded by the caller). Only fall back to the
+    // live store view when this save is the one on screen — otherwise a
+    // mid-generation switch would snapshot another settlement's prose under this
+    // save's chronicle.
+    const sourceProvided = aiSettlement !== undefined || aiDailyLife !== undefined;
+    const liveIsThisSave = state.activeSaveId == null || state.activeSaveId === saveId;
+    const snapshotSettlement = sourceProvided
+      ? (aiSettlement ?? null)
+      : (liveIsThisSave ? state.aiSettlement : null);
+    const snapshotDailyLife = sourceProvided
+      ? (aiDailyLife ?? null)
+      : (liveIsThisSave ? state.aiDailyLife : null);
+
     const newEntry = createChronicleEntry({
       reason,
-      aiSettlement: state.aiSettlement,
-      aiDailyLife:  state.aiDailyLife,
+      aiSettlement: snapshotSettlement,
+      aiDailyLife:  snapshotDailyLife,
       triggeredBy,
       mode,
     });
@@ -972,8 +1010,13 @@ export const createAiSlice = (set, get) => ({
     if (nextAiData === entry.aiData) return;
 
     // Update the session view first if this is the active save — keeps the
-    // UI responsive even if the persist round-trip takes a moment.
-    if (state.aiSettlement || state.aiDailyLife) {
+    // UI responsive even if the persist round-trip takes a moment. Guard on the
+    // rename TARGETING the active save: `aiSettlement || aiDailyLife` alone is
+    // too broad — renaming a NON-active save while another save's narrative is
+    // on screen would otherwise overwrite the on-screen prose with this save's.
+    const targetsActiveSave = state.activeSaveId === saveId
+      && (state.aiSettlement || state.aiDailyLife);
+    if (targetsActiveSave) {
       set(s => {
         if (nextAiData.aiSettlement) s.aiSettlement = nextAiData.aiSettlement;
         if (nextAiData.aiDailyLife)  s.aiDailyLife  = nextAiData.aiDailyLife;

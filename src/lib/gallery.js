@@ -467,6 +467,23 @@ function readGovernmentType(data) {
     || '';
 }
 
+// gallery_tags has no server/DB scrub either (RLS lets an owner write the array
+// directly), so the read normalizers re-apply the same clamp the write path uses
+// (lower-case, strip to [a-z0-9 -], drop empties, cap the count) plus a per-tag
+// length bound — defense in depth, so a drifted/malicious row can never smuggle
+// markup or an unbounded blob through this field. Mirrors the share-metadata
+// write clamp.
+const TAG_LENGTH_LIMIT = 40;
+const TAG_COUNT_LIMIT = 12;
+
+function sanitizeGalleryTags(tags) {
+  if (!Array.isArray(tags)) return [];
+  return tags
+    .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, '').slice(0, TAG_LENGTH_LIMIT))
+    .filter(Boolean)
+    .slice(0, TAG_COUNT_LIMIT);
+}
+
 function sanitizeTile(row) {
   const data = row.data || {};
   return {
@@ -486,7 +503,7 @@ function sanitizeTile(row) {
     description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags),
     population:   Number(row.population ?? data.population) || null,
     terrain:      row.terrain || data?.config?.terrainType || data?.config?.terrainOverride || data?.geography?.terrain || data?.terrain || '',
     governmentType: row.government_type || readGovernmentType(data),
@@ -609,7 +626,7 @@ function sanitizeDossier(row) {
     description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags),
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
     // Public author name resolved live by owner id (migration 076).

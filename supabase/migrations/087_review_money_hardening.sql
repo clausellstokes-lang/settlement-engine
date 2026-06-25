@@ -25,6 +25,44 @@
 -- ── 1. Current-subscription column ──────────────────────────────────────────
 alter table public.profiles add column if not exists stripe_subscription_id text;
 
+-- ── 1b. Pin the new column IMMUTABLE in the end-user self-UPDATE policy ──────
+-- CRITICAL: the stale-delete guard (stripe-webhook) trusts profiles
+-- .stripe_subscription_id. Without pinning it here, an end user could
+-- `update profiles set stripe_subscription_id = '<bogus>'` via their own RLS
+-- UPDATE right (075's policy only pins the OTHER billing/identity columns), then
+-- cancel — the webhook would see recorded != deleted and SKIP the downgrade,
+-- keeping premium for free. Recreate 075's net-current self-UPDATE policy VERBATIM
+-- with stripe_subscription_id added to the immutable pin list. It stays writable
+-- ONLY via the service-role webhook (which bypasses RLS). Net-current = 075.
+drop policy if exists "Users update own profile (safe preferences only)" on public.profiles;
+create policy "Users update own profile (safe preferences only)"
+  on public.profiles
+  for update
+  using (auth.uid() = id and public.account_is_active(auth.uid()))
+  with check (
+    auth.uid() = id
+    and public.account_is_active(auth.uid())
+    and role                   is not distinct from (select role                   from public.profiles where id = auth.uid())
+    and tier                   is not distinct from (select tier                   from public.profiles where id = auth.uid())
+    and credits                is not distinct from (select credits                from public.profiles where id = auth.uid())
+    and is_founder             is not distinct from (select is_founder             from public.profiles where id = auth.uid())
+    and stripe_customer_id     is not distinct from (select stripe_customer_id     from public.profiles where id = auth.uid())
+    and stripe_subscription_id is not distinct from (select stripe_subscription_id from public.profiles where id = auth.uid())
+    and email                  is not distinct from (select email                  from public.profiles where id = auth.uid())
+    and banned_at              is not distinct from (select banned_at              from public.profiles where id = auth.uid())
+    and disabled_at            is not distinct from (select disabled_at            from public.profiles where id = auth.uid())
+    and deleted_at             is not distinct from (select deleted_at             from public.profiles where id = auth.uid())
+    and account_number         is not distinct from (select account_number         from public.profiles where id = auth.uid())
+  );
+
+-- ── 1c. account_is_active: also grant to service_role (explicit, fail-closed) ─
+-- The edge functions call account_is_active via the service_role admin client.
+-- 057 granted it to `authenticated` only; service_role works today via Supabase's
+-- default privileges, but make the grant EXPLICIT so a privilege-default change
+-- can never silently brick the pre-spend account gate (the whole point is fail-
+-- closed). Idempotent.
+grant execute on function public.account_is_active(uuid) to service_role;
+
 -- ── 2. refund_credits: serialize idempotency (net-current body = 085) ───────
 -- Forked VERBATIM from 085's net-current body; the ONLY changes are the FOR
 -- UPDATE on the spend-row read and the unique index below. Auth gates, the
@@ -114,6 +152,39 @@ revoke execute on function public.refund_credits(uuid, text) from public;
 revoke execute on function public.refund_credits(uuid, text) from anon;
 revoke execute on function public.refund_credits(uuid, text) from authenticated;
 grant  execute on function public.refund_credits(uuid, text) to service_role;
+
+-- PRE-DEDUP (deploy safety): the unique index below ABORTS the whole migration if
+-- the live ledger already holds a duplicate refund for any spend (producible by the
+-- pre-085 refund path racing). Remediate first so `db push` can't brick on it:
+-- for each over-refunded spend, keep the EARLIEST refund grant, delete the extras,
+-- and reverse the phantom over-credit from the legacy profiles.credits counter
+-- (the get_credit_balance ledger sum self-corrects once the extra rows are gone).
+do $$
+declare
+  v_removed integer := 0;
+  v_dup record;
+begin
+  for v_dup in
+    select user_id, amount, (metadata->>'refund_of') as refund_of,
+           array_agg(id order by created_at, id) as ids
+      from public.credit_ledger
+     where source = 'refund' and metadata ? 'refund_of'
+     group by user_id, amount, (metadata->>'refund_of')
+    having count(*) > 1
+  loop
+    -- delete every refund grant for this spend EXCEPT the earliest (ids[1])
+    delete from public.credit_ledger
+     where id = any(v_dup.ids[2:array_length(v_dup.ids, 1)]);
+    -- reverse the phantom credits the extra refunds added to the legacy counter
+    update public.profiles
+       set credits = greatest(0, credits - v_dup.amount * (array_length(v_dup.ids, 1) - 1))
+     where id = v_dup.user_id;
+    v_removed := v_removed + (array_length(v_dup.ids, 1) - 1);
+  end loop;
+  if v_removed > 0 then
+    raise notice 'ux_credit_ledger_one_refund_per_spend pre-dedup: removed % duplicate refund grant(s)', v_removed;
+  end if;
+end $$;
 
 -- DB-level backstop, independent of the function: at most one refund grant per
 -- spend. A concurrent / out-of-band duplicate insert fails on this unique index

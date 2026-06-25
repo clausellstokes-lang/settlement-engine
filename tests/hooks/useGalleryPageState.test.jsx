@@ -41,6 +41,7 @@ import { useGalleryPageState } from '../../src/hooks/useGalleryPageState.js';
 beforeEach(() => {
   vi.useFakeTimers();
   mocks.gallery.fetchPublicGallery.mockResolvedValue({ items: [], total: 0, hasMore: false });
+  mocks.gallery.fetchPublicDossier.mockResolvedValue({ id: 'd-1', slug: 'fen-hollow' });
 });
 
 afterEach(() => {
@@ -85,5 +86,46 @@ describe('useGalleryPageState — search debounce', () => {
     expect(mocks.gallery.fetchPublicGallery.mock.calls.length).toBe(afterTypeCount + 1);
     const lastCall = mocks.gallery.fetchPublicGallery.mock.calls.at(-1)[0];
     expect(lastCall.search).toBe('');
+  });
+});
+
+describe('useGalleryPageState — card click does not double-fetch the dossier', () => {
+  test('openDossier + the route-sync rerender fetch the dossier exactly once', async () => {
+    // A card click calls openDossier(slug) (fetch #1) and navigate(); the real
+    // router then re-renders Gallery with routeSlug=slug, re-running the
+    // route-sync effect. Without an already-open guard that effect fires a
+    // second identical fetchPublicDossier. Model that rerender here.
+    const { result, rerender } = renderHook(
+      ({ slug }) => useGalleryPageState(slug),
+      { initialProps: { slug: null } },
+    );
+
+    await act(async () => { await result.current.openDossier('fen-hollow'); });
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(1);
+
+    // navigate() landed us on /gallery/fen-hollow → routeSlug now mirrors it.
+    rerender({ slug: 'fen-hollow' });
+    await act(async () => { await Promise.resolve(); await Promise.resolve(); });
+
+    // Still one fetch — the open dossier was reused, not re-fetched.
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(1);
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledWith('fen-hollow');
+  });
+
+  test('a different routeSlug after open still fetches the new dossier', async () => {
+    const { result, rerender } = renderHook(
+      ({ slug }) => useGalleryPageState(slug),
+      { initialProps: { slug: null } },
+    );
+
+    await act(async () => { await result.current.openDossier('fen-hollow'); });
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(1);
+
+    // Deep-link / route change to a genuinely different slug must re-fetch.
+    rerender({ slug: 'salt-marsh' });
+    await act(async () => { await Promise.resolve(); await Promise.resolve(); });
+
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(2);
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenLastCalledWith('salt-marsh');
   });
 });

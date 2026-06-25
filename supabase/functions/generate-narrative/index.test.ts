@@ -239,3 +239,32 @@ Deno.test('a request with NO authorization header is rejected (400) before any s
   assertEquals(res.status, 400);
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
+
+// Finding (1): an oversized body is rejected with 413 BEFORE parse + spend,
+// mirroring generate-chronicle's 64KB cap. Without the cap, an unbounded
+// settlement payload inflates the provider token bill at a fixed credit price.
+Deno.test('an OVER-CAP body (>64KB) is rejected (413) before any spend', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  const huge = { type: 'narrative', settlement: { ...SETTLEMENT, blob: 'x'.repeat(70 * 1024) } };
+  const res = await handleGenerateNarrative(
+    req(huge, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // never reached the spend
+});
+
+// A body just under the cap still parses + flows normally (cap is a ceiling,
+// not a regression on legitimate requests). No model key set, so the thesis
+// fails in-stream → 200 streaming response, but the body parsed fine.
+Deno.test('an UNDER-CAP body parses normally (cap does not block legitimate requests)', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 9, elevated: false });
+  const admin = makeAdminClient(true);
+  const res = await handleGenerateNarrative(
+    req({ type: 'narrative', settlement: SETTLEMENT }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);   // streaming response opened → body parsed
+  await drain(res);
+});
