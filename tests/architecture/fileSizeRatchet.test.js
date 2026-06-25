@@ -33,6 +33,12 @@ const BASELINE = new Set([
   'src/generators/narrativeGenerator.js',
   'src/domain/settlement.schema.js',
   'src/domain/causalState.js',
+  // Advance-scaling Stage 3 (the keystone): the autoresolve-OFF pause/resume state
+  // machine + the pre-tick cursor it returns pushed the orchestrator past the cap.
+  // Splitting it is deferred — the byte-identity invariant (ON == OFF-recommended)
+  // lives in this single pure file and a split risks that equivalence; grandfathered
+  // here pending a Stage-4 decomposition.
+  'src/domain/worldPulse/advanceCampaignWorld.js',
 ]);
 
 function jsFiles(rel) {
