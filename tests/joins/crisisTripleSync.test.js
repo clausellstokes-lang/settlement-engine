@@ -67,6 +67,13 @@ vi.mock('../../src/lib/campaigns.js', () => {
   };
 });
 
+// Multi-tick is GA (default-on in flags.js). The PULSE-born organic-resolution test
+// here is tuned against the LEGACY single-tick severity/age decay; mock the flag OFF
+// so its assertions stay byte-exact.
+vi.mock('../../src/lib/flags.js', () => ({
+  flag: vi.fn(name => (name === 'advanceMultiTick' ? false : false)),
+}));
+
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';

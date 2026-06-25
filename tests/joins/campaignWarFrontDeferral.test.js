@@ -56,6 +56,13 @@ vi.mock('../../src/lib/campaigns.js', () => {
   };
 });
 
+// Multi-tick is GA (default-on in flags.js). This file pins the LEGACY single-tick
+// war-front deferral integration (drain + enrich over ONE coarse tick); mock the
+// flag OFF so its assertions stay byte-exact.
+vi.mock('../../src/lib/flags.js', () => ({
+  flag: vi.fn(name => (name === 'advanceMultiTick' ? false : false)),
+}));
+
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';

@@ -56,6 +56,14 @@ vi.mock('../../src/lib/campaigns.js', () => {
   };
 });
 
+// Multi-tick is GA (default-on in flags.js). This file pins the cloud-pending /
+// atomic-RPC PERSIST SEAM, which is tick-agnostic, but its tick literals
+// (tick===1, expectedTick===1) are single-tick; mock the flag OFF so they stay
+// byte-exact.
+vi.mock('../../src/lib/flags.js', () => ({
+  flag: vi.fn(name => (name === 'advanceMultiTick' ? false : false)),
+}));
+
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
