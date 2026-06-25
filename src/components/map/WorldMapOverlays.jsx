@@ -26,6 +26,9 @@ export function WorldMapOverlays({
   performSaveMap,
   advanceConfirm,
   advanceBody,
+  // Advance-scaling Stage 4: extra content for the Advance confirm dialog (the
+  // autoresolve toggle). null on the flag-OFF path, so the dialog is unchanged.
+  advanceExtra = null,
   performAdvanceRealm,
   setAdvanceConfirm,
   importConfirm,
@@ -85,6 +88,7 @@ export function WorldMapOverlays({
         open={!!advanceConfirm}
         title="Advance the realm?"
         body={advanceBody || ''}
+        extra={advanceExtra}
         confirmLabel="Advance Realm"
         onConfirm={performAdvanceRealm}
         onCancel={() => setAdvanceConfirm(false)}

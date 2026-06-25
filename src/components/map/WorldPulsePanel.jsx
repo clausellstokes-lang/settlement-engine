@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
-import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
+import { Activity, BookMarked, CheckCircle2, Clock3, PauseCircle, PlayCircle, XCircle } from 'lucide-react';
 
+import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, DANGER_BORDER, FS, GOLD, GOLD_BG, INK, MUTED, RED, RED_BG, SECOND, SP, R, sans, serif_ } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, AMBER, AMBER_BG, AMBER_DEEP, DANGER_BORDER, FS, GOLD, GOLD_BG, INK, MUTED, RED, RED_BG, SECOND, SP, R, sans, serif_ } from '../theme.js';
 import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
@@ -26,9 +27,14 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
   const recordPartyImpact = useStore(s => s.recordPartyImpact);
+  // Advance-scaling Stage 4: resume the paused interval with the DM's verdicts.
+  const resolveIntervalMajors = useStore(s => s.resolveIntervalMajors);
   const [namingStressorId, setNamingStressorId] = useState(null);
   const [busyProposalId, setBusyProposalId] = useState(null);
   const [canonBusy, setCanonBusy] = useState(false);
+  const [resumeBusy, setResumeBusy] = useState(false);
+  // Per-major DM verdict ({ [id]: 'dismissed' }); absent ⇒ recommended on resume.
+  const [majorDecisions, setMajorDecisions] = useState({});
   const [actionError, setActionError] = useState(null);
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
@@ -81,6 +87,42 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       setActionError(`Canonize failed: ${err?.message || err}`);
     } finally {
       setCanonBusy(false);
+    }
+  };
+
+  // Advance-scaling Stage 4: the paused-advance cursor for this campaign, read off
+  // worldState so it survives a reload. Flag-gated: the legacy single-tick advance
+  // never parks a cursor, so this is always null with the flag off (no banner).
+  const pausedAdvance = flag('advanceMultiTick') ? (worldState.pausedAdvance || null) : null;
+
+  const toggleMajor = (id) => {
+    setMajorDecisions(prev => {
+      const next = { ...prev };
+      if (next[id] === 'dismissed') delete next[id];
+      else next[id] = 'dismissed';
+      return next;
+    });
+  };
+
+  // Continue the paused interval with the DM's verdicts. A major toggled off is
+  // dismissed; every other batched major resolves to its recommended outcome. The
+  // store re-derives the paused tick deterministically and continues the remaining
+  // ticks (re-parking a fresh pause if the next tick surfaces majors).
+  const runContinueAdvance = async () => {
+    if (resumeBusy || !resolveIntervalMajors) return;
+    setResumeBusy(true);
+    setActionError(null);
+    try {
+      const decisions = {};
+      for (const [id, verdict] of Object.entries(majorDecisions)) {
+        decisions[id] = { decision: verdict };
+      }
+      await resolveIntervalMajors(campaign.id, decisions);
+      setMajorDecisions({});
+    } catch (err) {
+      setActionError(`Could not continue advancing: ${err?.message || err}`);
+    } finally {
+      setResumeBusy(false);
     }
   };
 
@@ -206,6 +248,23 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         gap: SP.lg,
         alignItems: 'start',
       }}>
+        {/* Advance-scaling Stage 4 PAUSED banner — an amber decision surface,
+            visually distinct from the loading skeleton, presenting this pause's
+            batched majors as Apply/Dismiss cards with a Continue CTA. Spans the
+            full grid so it sits above the sections, not in a column. */}
+        {pausedAdvance && (
+          <div style={{ gridColumn: '1 / -1' }}>
+            <PausedAdvanceBanner
+              pausedAdvance={pausedAdvance}
+              decisions={majorDecisions}
+              onToggle={toggleMajor}
+              onContinue={runContinueAdvance}
+              busy={resumeBusy}
+              nameById={nameById}
+            />
+          </div>
+        )}
+
         {/* §S3 — LIVE war/trade/faith status from the post-pulse worldState +
             regional graph. Self-gates: a no-war campaign renders nothing. */}
         <LiveWarStatus campaign={campaign} nameById={nameById} />
@@ -429,6 +488,98 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           )}
         </Section>
+      </div>
+    </section>
+  );
+}
+
+// Advance-scaling Stage 4: the PAUSED banner. An amber, steady (non-animated)
+// decision surface — deliberately unlike the AdvancingSkeleton's pulsing spinner —
+// so a paused interval reads as waiting BY DESIGN for the DM, not stuck loading.
+// Presents the batched majors as Apply/Dismiss decision cards (reusing OutcomeCard)
+// and a Continue CTA that names how many ticks remain.
+//
+// a11y: role=region + aria-label states "waiting for your decisions" so the wait is
+// announced as intentional. Each major's verdict is a real toggle button carrying
+// aria-pressed; the amber framing is never the only signal (the heading text +
+// per-card "Will apply / Dismissed" label carry it too).
+function PausedAdvanceBanner({ pausedAdvance, decisions, onToggle, onContinue, busy, nameById }) {
+  const majors = Array.isArray(pausedAdvance?.pendingMajors) ? pausedAdvance.pendingMajors : [];
+  const total = pausedAdvance?.ticksTotal || 0;
+  const done = pausedAdvance?.ticksDone || 0;
+  const remaining = Math.max(0, total - done);
+  const interval = human(pausedAdvance?.interval || '');
+  return (
+    <section
+      data-testid="advance-paused-banner"
+      aria-label="Advance paused, waiting for your decisions on the major forks"
+      style={{
+        border: `1px solid ${AMBER}`,
+        borderLeft: `4px solid ${AMBER}`,
+        borderRadius: R.lg,
+        background: AMBER_BG,
+        padding: SP.lg,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: SP.md,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+        <PauseCircle size={20} color={AMBER_DEEP} style={{ flexShrink: 0, marginTop: 1 }} aria-hidden />
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <h3 style={{ margin: 0, color: AMBER_DEEP, fontFamily: serif_, fontSize: FS.lg, fontWeight: 800, lineHeight: 1.2 }}>
+            Advance paused at a major fork
+          </h3>
+          <p style={{ margin: '4px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+            {majors.length === 1 ? 'One change' : `${majors.length} changes`} could reshape the {interval || 'interval'}.
+            Keep the ones you want, dismiss the rest, then continue. {remaining} of {total} steps remain.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {majors.map((major, i) => {
+          const id = major.id || `major-${i}`;
+          const dismissed = decisions[id] === 'dismissed';
+          return (
+            <div key={id} style={{ opacity: dismissed ? 0.6 : 1 }}>
+              <OutcomeCard
+                title={major.headline || human(major.candidateType)}
+                summary={major.summary}
+                severity={major.severity}
+                reasons={major.reasons}
+                involved={involvedEntities(major, nameById)}
+                tone="major"
+                actions={(
+                  <SmallButton
+                    tone={dismissed ? 'good' : 'danger'}
+                    title={dismissed ? 'Keep this change' : 'Dismiss this change'}
+                    onClick={() => onToggle(id)}
+                    disabled={busy}
+                  >
+                    {dismissed
+                      ? <><CheckCircle2 size={13} /> Keep</>
+                      : <><XCircle size={13} /> Dismiss</>}
+                  </SmallButton>
+                )}
+              />
+              <div style={{ marginTop: 4, color: dismissed ? RED : AMBER_DEEP, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                {dismissed ? 'Dismissed, will not apply' : 'Will apply on continue'}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <SmallButton
+          tone="good"
+          title="Apply your decisions and continue advancing the realm"
+          onClick={onContinue}
+          disabled={busy}
+        >
+          <PlayCircle size={14} /> {busy ? 'Continuing' : `Continue advancing (${remaining} of ${total} remaining)`}
+        </SmallButton>
       </div>
     </section>
   );

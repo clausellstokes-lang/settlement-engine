@@ -23,10 +23,10 @@ import { memo, Suspense, lazy, useState, useRef, useEffect } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
   SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
-  PanelRight, MoreHorizontal,
+  PanelRight, MoreHorizontal, PauseCircle, PlayCircle,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, PARCH_100, sans, FS, SP, R } from '../theme.js';
+import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_BG, AMBER_DEEP, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, PARCH_100, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
@@ -123,6 +123,74 @@ function MoreMenu({ children }) {
   );
 }
 
+/** Advance-scaling Stage 4: a determinate progress bar + "Advancing N of Y" label.
+ *  Determinate (not a spinner) so the GM can read how much of the interval is left.
+ *  role=progressbar with aria-valuenow/min/max + a spoken aria-label so the progress
+ *  is conveyed to assistive tech, not just the gold fill (no color-only signal). */
+function AdvanceProgress({ done, total }) {
+  const safeTotal = Math.max(1, total || 0);
+  const safeDone = Math.max(0, Math.min(safeTotal, done || 0));
+  const pct = Math.round((safeDone / safeTotal) * 100);
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minWidth: 120 }}>
+      <span style={{ fontSize: FS.xs, fontWeight: 800, color: INK, whiteSpace: 'nowrap' }}>
+        Advancing {safeDone} of {safeTotal}
+      </span>
+      <span
+        role="progressbar"
+        aria-valuenow={safeDone}
+        aria-valuemin={0}
+        aria-valuemax={safeTotal}
+        aria-label={`Advancing the realm, ${safeDone} of ${safeTotal} steps`}
+        style={{
+          position: 'relative', flex: 1, minWidth: 64, height: 6,
+          borderRadius: 3, background: CARD_ALT, border: `1px solid ${BORDER}`,
+          overflow: 'hidden',
+        }}
+      >
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0, width: `${pct}%`,
+            background: GOLD, transition: 'width 160ms ease',
+          }}
+        />
+      </span>
+    </span>
+  );
+}
+
+/** Advance-scaling Stage 4: the persistent "Advance paused" resume chip. Amber so it
+ *  reads as a waiting-by-design state distinct from the gold Advance CTA and the
+ *  loading skeleton. The remaining-tick count names how much is left; the chip is a
+ *  real button (keyboard + SR operable), aria-label carries the full sentence. */
+function ResumeChip({ pausedAdvance, onResume, disabled }) {
+  const total = pausedAdvance?.ticksTotal || 0;
+  const done = pausedAdvance?.ticksDone || 0;
+  const remaining = Math.max(0, total - done);
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={onResume}
+      disabled={disabled}
+      aria-label={`Advance paused. Resume advancing, ${remaining} of ${total} steps remaining.`}
+      title="The advance paused at a major fork. Resume to apply the recommended outcomes and continue the interval."
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: SP.xs,
+        minHeight: 40, padding: '5px 11px',
+        border: `1px solid ${AMBER}`, borderRadius: R.sm,
+        background: AMBER_BG, color: AMBER_DEEP,
+        fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <PauseCircle size={14} /> Advance paused
+      <PlayCircle size={13} /> Resume{remaining > 0 ? ` (${remaining} of ${total})` : ''}
+    </Button>
+  );
+}
+
 function WorldMapToolbarImpl({
   canManageCampaigns,
   activeCampaign,
@@ -138,6 +206,13 @@ function WorldMapToolbarImpl({
   setWorldPulseInterval,
   handleAdvanceRealm,
   worldPulseBusy,
+  // Advance-scaling Stage 4 (multi-tick). All default to an inert shape so the
+  // flag-OFF render is byte-identical: multiTickOn false ⇒ neither the progress bar
+  // nor the resume chip ever renders.
+  multiTickOn = false,
+  advanceSession = { phase: 'idle', ticksDone: 0, ticksTotal: 0 },
+  pausedAdvance = null,
+  onResumeAdvance,
   canUndoPulse,
   handleUndoRealm,
   setShowLayersPanel,
@@ -283,6 +358,18 @@ function WorldMapToolbarImpl({
                 >
                   <Undo2 size={13} /> Undo Advance
                 </IconButton>
+              )}
+              {/* Advance-scaling Stage 4: a determinate progress bar while a
+                  multi-tick advance is running (reads N of Y from the session).
+                  Flag-gated AND running-gated, so the flag-OFF bar never renders. */}
+              {multiTickOn && advanceSession.phase === 'running' && advanceSession.ticksTotal > 1 && (
+                <AdvanceProgress done={advanceSession.ticksDone} total={advanceSession.ticksTotal} />
+              )}
+              {/* Persistent resume chip — present whenever a paused-advance cursor
+                  sits on the campaign (including a reload-into-paused state), so
+                  the partial advance is always recoverable. */}
+              {multiTickOn && pausedAdvance && advanceSession.phase !== 'running' && typeof onResumeAdvance === 'function' && (
+                <ResumeChip pausedAdvance={pausedAdvance} onResume={() => onResumeAdvance({})} disabled={worldPulseBusy} />
               )}
             </div>
           </>
