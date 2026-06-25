@@ -622,11 +622,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
             <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}`, borderRadius:7 }} />
           ))}
         </div>
-      ) : saves.length === 0 ? (
-        // Show sample dossiers instead of a bare empty state.
-        // Eliminates the "you have nothing — go figure it out" first run.
+      ) : (saves.length === 0 && campaigns.length === 0) ? (
+        // Show sample dossiers instead of a bare empty state — but ONLY when
+        // there are no campaigns either. A campaign-first user (campaigns made
+        // before any settlement is saved) falls through to the campaign folders
+        // below instead of seeing a "you have nothing" sample.
         <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} /></div>
-      ) : filteredSaves.length === 0 ? (
+      ) : (filteredSaves.length === 0 && saves.length > 0) ? (
         // The library has saves, but none survive the active search/filters.
         // Offer a recovery CTA rather than a silent dead-end (no inert list).
         // Flat PARCH placeholder surface — distinct from the CARD-filled real
