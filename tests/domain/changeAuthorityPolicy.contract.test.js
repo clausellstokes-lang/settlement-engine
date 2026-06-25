@@ -173,12 +173,13 @@ describe('change-authority contract — newly-mapped sites carry their live auth
     ); // resource_depletion (flag-gated)
   });
 
-  // relationshipEvolution has TWO distinct gates too: labelProposal (always
-  // proposal) and the severity-gated internal-drift path. Assert both live.
-  test('relationshipEvolution keeps both the always-proposal label gate and the severity-gated drift gate', () => {
-    const src = sourceFor('relationshipEvolution.js');
-    expect(src).toContain('applyMode: "proposal",'); // labelProposal (always-proposal)
-    expect(src).toContain('applyMode: severity >= 0.72 ? "proposal" : "auto"'); // internal drift (severity-gated)
+  // The relationship rules have TWO distinct gates too: labelProposal (always
+  // proposal) and the severity-gated internal-drift path. Both were extracted out
+  // of relationshipEvolution.js in the god-module split — labelProposal into the
+  // helper leaf, the drift gate into the cooperative rules module. Assert both live.
+  test('the relationship rules keep both the always-proposal label gate and the severity-gated drift gate', () => {
+    expect(sourceFor('relationshipRuleHelpers.js')).toContain('applyMode: "proposal",'); // labelProposal (always-proposal)
+    expect(sourceFor('relationshipRulesCore.js')).toContain('applyMode: severity >= 0.72 ? "proposal" : "auto"'); // internal drift (severity-gated)
   });
 
   // The strategy split must stay structural: only sue_for_peace passes a proposal.

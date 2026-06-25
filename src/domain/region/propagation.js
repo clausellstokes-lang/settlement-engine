@@ -34,11 +34,13 @@ const REGIONAL_RULE_TYPES = new Set([
   'resource_competition',
 ]);
 
+/** @param {any} value */
 function clamp01(value) {
   const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any} value */
 function idPart(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -49,6 +51,7 @@ function idPart(value) {
 
 // Same 6-char base36 digest idiom as activeConditions.js (conditionIdFromArchetype) —
 // deterministic, input-only, so re-derivations of the same id always agree.
+/** @param {any} value */
 function shortHash(value) {
   const s = String(value);
   let h = 0;
@@ -56,15 +59,18 @@ function shortHash(value) {
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
+/** @param {any[]} [goods] */
 function maxGoodCriticality(goods = []) {
   if (!goods.length) return 0.4;
   return Math.max(...goods.map(g => goodCriticality(g)));
 }
 
+/** @param {any} localDelta */
 function eventType(localDelta) {
   return localDelta?.cause?.event?.type || null;
 }
 
+/** @param {any} localDelta @param {number} [fallback] */
 function eventSeverity(localDelta, fallback = 0.5) {
   const severity = localDelta?.cause?.event?.payload?.severity;
   if (typeof severity === 'number' && Number.isFinite(severity)) {
@@ -73,14 +79,15 @@ function eventSeverity(localDelta, fallback = 0.5) {
   return fallback;
 }
 
+/** @param {any} channel @param {any} change */
 function matchingGoods(channel, change) {
   if (!Array.isArray(channel.goods) || !channel.goods.length) return [];
   if (change.good?.id) {
-    return channel.goods.filter(g => g.id === change.good.id);
+    return channel.goods.filter((/** @type {any} */ g) => g.id === change.good.id);
   }
   if (change.chain?.resource) {
     const resource = String(change.chain.resource).toLowerCase();
-    return channel.goods.filter(g =>
+    return channel.goods.filter((/** @type {any} */ g) =>
       resource.includes(String(g.label || g.id).toLowerCase())
       || String(g.label || g.id).toLowerCase().includes(resource)
     );
@@ -88,8 +95,9 @@ function matchingGoods(channel, change) {
   return [];
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} kind @param {any} goods */
 function impactId(channel, localDelta, kind, goods) {
-  const goodsPart = goods?.length ? goods.map(g => g.id).sort().join('_') : 'general';
+  const goodsPart = goods?.length ? goods.map((/** @type {any} */ g) => g.id).sort().join('_') : 'general';
   return [
     'regional_impact',
     idPart(localDelta.cause?.event?.id || localDelta.id),
@@ -99,6 +107,7 @@ function impactId(channel, localDelta, kind, goods) {
   ].join('.');
 }
 
+/** @param {any} channel @param {any} change @param {any[]} [goods] @param {number} [multiplier] */
 function severityFor(channel, change, goods = [], multiplier = 1) {
   const channelStrength = clamp01(channel.strength ?? 0.5);
   const changeMagnitude = clamp01(change.magnitude ?? 0.4);
@@ -106,6 +115,7 @@ function severityFor(channel, change, goods = [], multiplier = 1) {
   return clamp01((0.25 + channelStrength * 0.45 + goodWeight * 0.2) * changeMagnitude * multiplier);
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change @param {any} kind @param {any} goods @param {any} [detail] */
 function impact(channel, localDelta, change, kind, goods, detail = {}) {
   const severity = detail.severity ?? severityFor(channel, change, goods, detail.severityMultiplier ?? 1);
   if (severity < 0.08) return null;
@@ -119,7 +129,7 @@ function impact(channel, localDelta, change, kind, goods, detail = {}) {
     targetSettlementId: channel.to,
     channelId: channel.id,
     channelType: channel.type,
-    goods: goods.map(g => ({ ...g })),
+    goods: goods.map((/** @type {any} */ g) => ({ ...g })),
     severity,
     confidence: channel.confidence,
     status: 'queued',
@@ -140,8 +150,9 @@ function impact(channel, localDelta, change, kind, goods, detail = {}) {
   };
 }
 
+/** @param {any} kind @param {any} channel @param {any} localDelta @param {any} goods */
 function explainImpact(kind, channel, localDelta, goods) {
-  const goodText = goods?.length ? goods.map(g => g.label).join(', ') : 'trade access';
+  const goodText = goods?.length ? goods.map((/** @type {any} */ g) => g.label).join(', ') : 'trade access';
   if (kind === 'import_shortage') {
     return `${localDelta.sourceSettlementName || channel.from} can no longer reliably supply ${goodText}.`;
   }
@@ -181,8 +192,9 @@ function explainImpact(kind, channel, localDelta, goods) {
   return `Regional impact through ${channel.type}.`;
 }
 
+/** @param {any} channel @param {any} sourceImpact @param {any} depth @param {any} kind @param {any} goods */
 function waveImpactId(channel, sourceImpact, depth, kind, goods) {
-  const goodsPart = goods?.length ? goods.map(g => g.id).sort().join('_') : 'general';
+  const goodsPart = goods?.length ? goods.map((/** @type {any} */ g) => g.id).sort().join('_') : 'general';
   return [
     'regional_wave',
     idPart(sourceImpact.id),
@@ -193,15 +205,17 @@ function waveImpactId(channel, sourceImpact, depth, kind, goods) {
   ].join('.');
 }
 
+/** @param {any} channel @param {any} sourceImpact */
 function goodsForWave(channel, sourceImpact) {
   const channelGoods = Array.isArray(channel.goods) ? channel.goods : [];
   const sourceGoods = Array.isArray(sourceImpact.goods) ? sourceImpact.goods : [];
-  if (!channelGoods.length) return sourceGoods.map(g => ({ ...g }));
-  if (!sourceGoods.length) return channelGoods.map(g => ({ ...g }));
-  const sourceIds = new Set(sourceGoods.map(g => g.id));
-  return channelGoods.filter(g => sourceIds.has(g.id)).map(g => ({ ...g }));
+  if (!channelGoods.length) return sourceGoods.map((/** @type {any} */ g) => ({ ...g }));
+  if (!sourceGoods.length) return channelGoods.map((/** @type {any} */ g) => ({ ...g }));
+  const sourceIds = new Set(sourceGoods.map((/** @type {any} */ g) => g.id));
+  return channelGoods.filter((/** @type {any} */ g) => sourceIds.has(g.id)).map((/** @type {any} */ g) => ({ ...g }));
 }
 
+/** @param {any} channel @param {any} sourceImpact */
 function waveKindForChannel(channel, sourceImpact) {
   if (channel.type === 'trade_dependency') {
     if (['route_disruption', 'export_market_loss'].includes(sourceImpact.kind)) return 'route_disruption';
@@ -221,6 +235,7 @@ function waveKindForChannel(channel, sourceImpact) {
   return sourceImpact.kind;
 }
 
+/** @param {any} channel @param {any} sourceImpact @param {any} depth @param {any} decay */
 function waveImpactForChannel(channel, sourceImpact, depth, decay) {
   const path = Array.isArray(sourceImpact.pathSettlementIds)
     ? sourceImpact.pathSettlementIds.map(String)
@@ -267,6 +282,7 @@ function waveImpactForChannel(channel, sourceImpact, depth, decay) {
   };
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleTradeDependency(channel, localDelta, change) {
   const goods = matchingGoods(channel, change);
   if (change.kind === 'export_lost' || change.kind === 'local_production_lost' || change.kind === 'chain_degraded' || change.kind === 'depleted_good_gained') {
@@ -282,6 +298,7 @@ function ruleTradeDependency(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleExportMarket(channel, localDelta, change) {
   if (!['route_cut', 'causal_shift', 'population_loss', 'tier_demotion'].includes(change.kind)) return null;
   if (change.kind === 'causal_shift' && !['trade_connectivity', 'resourcePressure', 'resilience'].includes(change.variable)) {
@@ -291,11 +308,13 @@ function ruleExportMarket(channel, localDelta, change) {
   return impact(channel, localDelta, change, 'export_market_loss', goods);
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleTradeRoute(channel, localDelta, change) {
   if (change.kind !== 'route_cut' && change.kind !== 'tier_demotion' && change.kind !== 'population_loss') return null;
   return impact(channel, localDelta, change, 'route_disruption', []);
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function rulePoliticalAuthority(channel, localDelta, change) {
   if (change.kind === 'authority_shock' || change.kind === 'legitimacy_shock' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'authority_instability', []);
@@ -306,6 +325,7 @@ function rulePoliticalAuthority(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleTaxObligation(channel, localDelta, change) {
   if (change.kind === 'route_cut' || change.kind === 'export_lost' || change.kind === 'chain_degraded' || change.kind === 'population_loss' || change.kind === 'tier_demotion' || change.kind === 'depleted_good_gained') {
     return impact(channel, localDelta, change, 'tax_revenue_disruption', channel.goods || []);
@@ -316,6 +336,7 @@ function ruleTaxObligation(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleMilitaryProtection(channel, localDelta, change) {
   if (change.kind === 'security_shock' || change.kind === 'authority_shock' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'protection_gap', []);
@@ -326,6 +347,7 @@ function ruleMilitaryProtection(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleWarFront(channel, localDelta, change) {
   if (change.kind === 'security_shock' || change.kind === 'route_cut' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'conflict_pressure', []);
@@ -336,6 +358,7 @@ function ruleWarFront(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleServiceDependency(channel, localDelta, change) {
   if (change.kind === 'health_shock' || change.kind === 'authority_shock' || change.kind === 'tier_demotion' || change.kind === 'population_loss') {
     return impact(channel, localDelta, change, 'service_disruption', channel.goods || []);
@@ -343,6 +366,7 @@ function ruleServiceDependency(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleReligiousAuthority(channel, localDelta, change) {
   if (change.kind === 'health_shock' || change.kind === 'legitimacy_shock') {
     return impact(channel, localDelta, change, 'religious_pressure', []);
@@ -350,6 +374,7 @@ function ruleReligiousAuthority(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleCriminalCorridor(channel, localDelta, change) {
   if (change.kind === 'legitimacy_shock' || change.kind === 'security_shock') {
     return impact(channel, localDelta, change, 'criminal_pressure', []);
@@ -360,6 +385,7 @@ function ruleCriminalCorridor(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleMigrationPressure(channel, localDelta, change) {
   if (change.kind === 'migration_wave' || change.kind === 'health_shock' || change.kind === 'security_shock' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'migration_pressure', []);
@@ -367,6 +393,7 @@ function ruleMigrationPressure(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleInformationFlow(channel, localDelta, change) {
   if (['authority_shock', 'legitimacy_shock', 'health_shock', 'security_shock', 'migration_wave', 'population_loss', 'population_growth', 'tier_promotion', 'tier_demotion'].includes(change.kind)) {
     return impact(channel, localDelta, change, 'information_shock', []);
@@ -374,6 +401,7 @@ function ruleInformationFlow(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function ruleResourceCompetition(channel, localDelta, change) {
   if (change.kind === 'depleted_good_gained' || change.kind === 'local_production_lost' || change.kind === 'chain_degraded') {
     return impact(channel, localDelta, change, 'conflict_pressure', change.good ? [change.good] : []);
@@ -381,6 +409,7 @@ function ruleResourceCompetition(channel, localDelta, change) {
   return null;
 }
 
+/** @param {any} channel @param {any} localDelta @param {any} change */
 function impactForChannel(channel, localDelta, change) {
   if (!REGIONAL_RULE_TYPES.has(channel.type)) return null;
   if (channel.type === 'trade_dependency') return ruleTradeDependency(channel, localDelta, change);
@@ -406,6 +435,7 @@ function impactForChannel(channel, localDelta, change) {
 // kind), and the fixed channel x change iteration order let the weaker
 // derivation shadow the stronger one. Returns the surviving impact plus the
 // one it displaced (if any) so the wave loop can keep its frontier honest.
+/** @param {any[]} out @param {Map<any, any>} byId @param {any} next */
 function admitStrongest(out, byId, next) {
   const existing = byId.get(next.id);
   if (!existing) {
@@ -421,6 +451,7 @@ function admitStrongest(out, byId, next) {
   return { kept: next, displaced: existing };
 }
 
+/** @param {any} localDelta @param {any} graph @param {any} [options] */
 export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
   const now = options.now ?? null;
@@ -433,7 +464,7 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
     includeSuggested: !!options.includeSuggested,
     types: options.types || [...REGIONAL_RULE_TYPES],
   });
-  const out = [];
+  const out = /** @type {any[]} */ ([]);
   const byId = new Map();
   for (const channel of channels) {
     for (const change of localDelta.changes || []) {
@@ -445,7 +476,7 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   const waveDecay = clamp01(options.waveDecay ?? 0.45);
   let frontier = out;
   for (let depth = 1; depth <= maxDepth && frontier.length; depth += 1) {
-    const nextFrontier = [];
+    const nextFrontier = /** @type {any[]} */ ([]);
     for (const sourceImpact of frontier) {
       const waveChannels = activeChannelsFrom(current, sourceImpact.targetSettlementId, {
         includeSuggested: !!options.includeSuggested,
@@ -489,6 +520,7 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
 // still sees every causal path. DIFFERENT kinds from one event (an
 // import_shortage and a route_disruption) are distinct consequences and both
 // queue. Identity no-op when nothing folds.
+/** @param {any[]} [impacts] */
 export function foldSameShockImpacts(impacts = []) {
   const groups = new Map();
   for (const impactItem of impacts) {
@@ -498,7 +530,7 @@ export function foldSameShockImpacts(impacts = []) {
     else groups.set(key, [impactItem]);
   }
   if (groups.size === impacts.length) return impacts;
-  const out = [];
+  const out = /** @type {any[]} */ ([]);
   for (const group of groups.values()) {
     if (group.length === 1) {
       out.push(group[0]);
@@ -508,23 +540,23 @@ export function foldSameShockImpacts(impacts = []) {
     for (const candidate of group) {
       if ((candidate.severity || 0) > (winner.severity || 0)) winner = candidate;
     }
-    const folded = group.filter(item => item !== winner);
-    const goods = (winner.goods || []).map(g => ({ ...g }));
+    const folded = group.filter((/** @type {any} */ item) => item !== winner);
+    const goods = (winner.goods || []).map((/** @type {any} */ g) => ({ ...g }));
     for (const item of folded) {
       for (const good of item.goods || []) {
-        if (!goods.some(g => g.id === good.id)) goods.push({ ...good });
+        if (!goods.some((/** @type {any} */ g) => g.id === good.id)) goods.push({ ...good });
       }
     }
     const foldedChannels = [
       ...(winner.foldedChannels || []),
-      ...folded.map(item => ({
+      ...folded.map((/** @type {any} */ item) => ({
         impactId: item.id,
         channelId: item.channelId,
         channelType: item.channelType,
         severity: item.severity,
       })),
     ];
-    const channelText = [...new Set(folded.map(item => String(item.channelType || 'unknown').replace(/_/g, ' ')))].join(', ');
+    const channelText = [...new Set(folded.map((/** @type {any} */ item) => String(item.channelType || 'unknown').replace(/_/g, ' ')))].join(', ');
     out.push({
       ...winner,
       goods,
@@ -535,6 +567,7 @@ export function foldSameShockImpacts(impacts = []) {
   return out;
 }
 
+/** @param {any[]} [impacts] */
 export function aggregateImpactBundles(impacts = []) {
   const groups = new Map();
   for (const impactItem of impacts) {
@@ -554,19 +587,20 @@ export function aggregateImpactBundles(impacts = []) {
     bundle.impacts.push(impactItem);
     bundle.severity = Math.max(bundle.severity, impactItem.severity);
     for (const good of impactItem.goods || []) {
-      if (!bundle.goods.some(g => g.id === good.id)) bundle.goods.push(good);
+      if (!bundle.goods.some((/** @type {any} */ g) => g.id === good.id)) bundle.goods.push(good);
     }
   }
 
-  return [...groups.values()].map(bundle => ({
+  return [...groups.values()].map((/** @type {any} */ bundle) => ({
     ...bundle,
     severity: clamp01(bundle.severity + Math.min(0.2, (bundle.impacts.length - 1) * 0.05)),
     explanation: explainBundle(bundle),
   }));
 }
 
+/** @param {any} bundle */
 function explainBundle(bundle) {
-  const goods = bundle.goods.length ? bundle.goods.map(g => g.label).join(', ') : 'trade access';
+  const goods = bundle.goods.length ? bundle.goods.map((/** @type {any} */ g) => g.label).join(', ') : 'trade access';
   if (bundle.kind === 'import_shortage') return `Import pressure around ${goods}.`;
   if (bundle.kind === 'export_market_loss') return `Export-market pressure around ${goods}.`;
   if (bundle.kind === 'route_disruption') return 'Regional trade-route disruption.';
@@ -582,12 +616,14 @@ function explainBundle(bundle) {
   return `${bundle.kind.replace(/_/g, ' ')}.`;
 }
 
+/** @param {any} options */
 export function defaultFocusPolicy({ targetSettlementId, activeSettlementId, visibleSettlementIds = [] }) {
   if (activeSettlementId && String(targetSettlementId) === String(activeSettlementId)) return 'full';
   if (visibleSettlementIds.map(String).includes(String(targetSettlementId))) return 'partial';
   return 'queue';
 }
 
+/** @param {any} impactItem */
 function archetypeForImpact(impactItem) {
   if (impactItem.kind === 'import_shortage') return 'regional_import_shortage';
   if (impactItem.kind === 'export_market_loss') return 'regional_export_market_loss';
@@ -604,6 +640,7 @@ function archetypeForImpact(impactItem) {
   return 'regional_pressure';
 }
 
+/** @param {any} impactItem */
 function affectedSystemsForImpact(impactItem) {
   const goodCritical = maxGoodCriticality(impactItem.goods || []);
   if (impactItem.kind === 'import_shortage') {
@@ -653,6 +690,7 @@ function affectedSystemsForImpact(impactItem) {
 // the second apply replaced the first's condition and resolving either
 // stripped the other's effect. The minted conditionId keeps the readable
 // prefix but appends a hash of the FULL impact id.
+/** @param {any} impactItem */
 function regionalConditionId(impactItem) {
   return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}_${shortHash(impactItem.id)}`;
 }
@@ -661,12 +699,14 @@ function regionalConditionId(impactItem) {
 // fix carry no conditionId, and their materialized conditions sit under this
 // truncated id — resolve must keep finding them. Exported for
 // applied-impact reconciliation; the derivation itself is unchanged.
+/** @param {any} impactItem */
 export function legacyRegionalConditionId(impactItem) {
   return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}`;
 }
 
+/** @param {any} impactItem @param {any} [options] */
 export function conditionFromRegionalImpact(impactItem, options = {}) {
-  const goods = impactItem.goods?.length ? impactItem.goods.map(g => g.label).join(', ') : null;
+  const goods = impactItem.goods?.length ? impactItem.goods.map((/** @type {any} */ g) => g.label).join(', ') : null;
   const label =
     impactItem.kind === 'import_shortage' ? `Regional import shortage${goods ? `: ${goods}` : ''}` :
     impactItem.kind === 'export_market_loss' ? `Export market weakened${goods ? `: ${goods}` : ''}` :
@@ -706,6 +746,7 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
   };
 }
 
+/** @param {any} settlement @param {any} impactItem @param {any} [options] */
 export function applyRegionalImpact(settlement, impactItem, options = {}) {
   if (!settlement || !impactItem) return settlement;
   const condition = conditionFromRegionalImpact(impactItem, options);
@@ -722,6 +763,7 @@ export function applyRegionalImpact(settlement, impactItem, options = {}) {
 // source, magnitude, variable, tiers, deltas, ...) but slim the two object
 // embeds — a good is identified by id/label, a chain by id/resource/status.
 // Nothing re-derives from a logged change; this is the DM-facing audit trail.
+/** @param {any} change */
 function slimChange(change) {
   const { good, chain, ...rest } = change || {};
   return {
@@ -734,11 +776,11 @@ function slimChange(change) {
 /**
  * Pure regional propagation for one before/after local event.
  *
- * @param {Object} [args]
- * @param {Object} [args.graph]
- * @param {Object} [args.beforeSettlement]
- * @param {Object} [args.afterSettlement]
- * @param {Object|null} [args.event]
+ * @param {object} [args]
+ * @param {any} [args.graph]
+ * @param {any} [args.beforeSettlement]
+ * @param {any} [args.afterSettlement]
+ * @param {any} [args.event]
  * @param {string|null} [args.activeSettlementId]
  * @param {string[]} [args.visibleSettlementIds]
  * @param {boolean} [args.includeSuggested]

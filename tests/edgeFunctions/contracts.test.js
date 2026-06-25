@@ -36,7 +36,17 @@ const FUNCTIONS_DIR = join(ROOT, 'supabase', 'functions');
 const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
 
 function readFunction(name) {
-  return readFileSync(join(FUNCTIONS_DIR, name, 'index.ts'), 'utf8');
+  const main = readFileSync(join(FUNCTIONS_DIR, name, 'index.ts'), 'utf8');
+  // generate-narrative's prompt/cache/json layers were split into sibling modules;
+  // concat them so these source-contract assertions find symbols wherever they now
+  // live (the handler/money-path logic stays in index.ts).
+  if (name === 'generate-narrative') {
+    const extra = ['prompts.ts', 'promptCache.ts', 'jsonUtils.ts']
+      .map((f) => readFileSync(join(FUNCTIONS_DIR, name, f), 'utf8'))
+      .join('\n');
+    return `${main}\n${extra}`;
+  }
+  return main;
 }
 
 function readMigrations() {

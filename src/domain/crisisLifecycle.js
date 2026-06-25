@@ -50,15 +50,15 @@ export const CRISIS_EVENT_TYPES = Object.freeze(['APPLY_STRESSOR', 'RESOLVE_STRE
 
 /** The authored stressor type a crisis event names (payload first, targetId
  *  fallback — the composer's contract). Empty string when the event names none. */
-function authoredCrisisType(event) {
+function authoredCrisisType(/** @type {any} */ event) {
   return String(event?.payload?.stressorType || event?.targetId || '').trim();
 }
 
 // Display label for a slug-ish target id ('under_siege' -> 'under siege') —
 // mutate.js's labelFromTarget, duplicated tiny + local to keep this module
 // import-cycle-free (mutate.js imports THIS module).
-function labelFromTarget(targetId) {
-  const tail = String(targetId || '').split('.').pop();
+function labelFromTarget(/** @type {any} */ targetId) {
+  const tail = /** @type {any} */ (String(targetId || '').split('.').pop());
   return tail.replace(/_/g, ' ');
 }
 
@@ -73,7 +73,7 @@ const STRESSOR_SYSTEM_ALIASES = Object.freeze({
 
 // Case-insensitive stressor-type comparison — the same tolerance the
 // container upserts and the wind-down's matchesEntry use.
-const stressTypeEq = (a, b) => String(a || '').toLowerCase() === String(b || '').toLowerCase();
+const stressTypeEq = (/** @type {any} */ a, /** @type {any} */ b) => String(a || '').toLowerCase() === String(b || '').toLowerCase();
 
 // Content identity for a bare-object stress entry — type, falling back to
 // display name for legacy untyped entries; an entry with neither falls back
@@ -81,7 +81,7 @@ const stressTypeEq = (a, b) => String(a || '').toLowerCase() === String(b || '')
 // the SAME object under stress + stressors, but a JSON save/load round-trip
 // breaks the aliasing — two content-identical twins that reference dedupe
 // (Set) counted as distinct entries.
-const stressEntryIdentity = (st) => String(st?.type || st?.name || '').toLowerCase() || st;
+const stressEntryIdentity = (/** @type {any} */ st) => String(st?.type || st?.name || '').toLowerCase() || st;
 
 /**
  * Normalized view of config.stressorEdits — the EDITOR-authored stressor
@@ -104,7 +104,7 @@ const stressEntryIdentity = (st) => String(st?.type || st?.name || '').toLowerCa
  * The transitions keep the two lists mutually agreeing (an onset clears the
  * type's resolved record; a resolve strikes the type's added entry).
  */
-function stressorEditsOf(config) {
+function stressorEditsOf(/** @type {any} */ config) {
   const se = config?.stressorEdits || {};
   return {
     added: Array.isArray(se.added) ? se.added : [],
@@ -118,7 +118,7 @@ function stressorEditsOf(config) {
  * (stressorEdits is genuine user input, deliberately NOT in
  * settlementSlice's DERIVED_CONFIG_KEYS strip.)
  */
-function withStressorEdits(s, stressorEdits) {
+function withStressorEdits(/** @type {any} */ s, /** @type {any} */ stressorEdits) {
   const next = { ...s, config: { ...(s.config || {}), stressorEdits } };
   if (s._config && typeof s._config === 'object') {
     next._config = { ...s._config, stressorEdits };
@@ -147,7 +147,7 @@ function withStressorEdits(s, stressorEdits) {
  * world-pulse twin in canon campaigns — the settlement half stays
  * campaign-agnostic.
  *
- * @param {{ settlement: Object, event: import('./types.js').Event }} args
+ * @param {{ settlement: any, event: any }} args
  * @returns {{ settlement: Object, twinDirective: Object|null }}
  */
 export function crisisOnset({ settlement: s, event }) {
@@ -178,7 +178,7 @@ export function crisisOnset({ settlement: s, event }) {
   // that never recorded one — matching a TYPED entry by label would let a
   // custom stressor labeled 'Famine' overwrite the famine entry's type and
   // detach it from every type-keyed consumer (pulse twin, picker filter).
-  const existingIdx = list.findIndex(st =>
+  const existingIdx = list.findIndex((/** @type {any} */ st) =>
     String(st?.type || '').toLowerCase() === type.toLowerCase()
     || (!st?.type && String(st?.name || '').toLowerCase() === label.toLowerCase()));
   const entry = {
@@ -197,7 +197,7 @@ export function crisisOnset({ settlement: s, event }) {
   // keeping the old local entry made the representations disagree.
   const merged = existingIdx === -1
     ? [...list, entry]
-    : list.map((st, i) => (i === existingIdx ? { ...st, ...entry } : st));
+    : list.map((/** @type {any} */ st, /** @type {any} */ i) => (i === existingIdx ? { ...st, ...entry } : st));
   let next = { ...s };
   for (const k of writeKeys) next[k] = merged;
 
@@ -210,12 +210,12 @@ export function crisisOnset({ settlement: s, event }) {
   // upsert refreshes the entry); clearing the type's `resolved` suppression
   // lets a re-authored crisis return after a RESOLVE_STRESSOR.
   const edits = stressorEditsOf(s.config);
-  const recordIdx = edits.added.findIndex(e => stressTypeEq(e?.type, type));
+  const recordIdx = edits.added.findIndex((/** @type {any} */ e) => stressTypeEq(e?.type, type));
   next = withStressorEdits(next, {
     added: recordIdx === -1
       ? [...edits.added, entry]
-      : edits.added.map((e, i) => (i === recordIdx ? entry : e)),
-    resolved: edits.resolved.filter(t => !stressTypeEq(t, type)),
+      : edits.added.map((/** @type {any} */ e, /** @type {any} */ i) => (i === recordIdx ? entry : e)),
+    resolved: edits.resolved.filter((/** @type {any} */ t) => !stressTypeEq(t, type)),
   });
 
   const archetype = archetypeForStressor(entry);
@@ -234,8 +234,8 @@ export function crisisOnset({ settlement: s, event }) {
       twinDirective: twinDirectiveForEvent(event),
     };
   }
-  const catalogSystems = (STRESSOR_CATALOG[type]?.affectedSystems || [])
-    .map(sys => STRESSOR_SYSTEM_ALIASES[sys] || sys);
+  const catalogSystems = (/** @type {any} */ (STRESSOR_CATALOG)[type]?.affectedSystems || [])
+    .map((/** @type {any} */ sys) => /** @type {any} */ (STRESSOR_SYSTEM_ALIASES)[sys] || sys);
   return {
     settlement: withActiveCondition(next, {
       archetype: 'custom_crisis',
@@ -257,7 +257,7 @@ export function crisisOnset({ settlement: s, event }) {
  * implementation, two names, so callers say what they mean and the two
  * transitions can never drift apart.
  */
-export function crisisEscalate(args) {
+export function crisisEscalate(/** @type {any} */ args) {
   return crisisOnset(args);
 }
 
@@ -282,14 +282,14 @@ export function crisisEscalate(args) {
  * pulse type + its generation aliases for organic resolutions). `origin`
  * names who ended it: { kind: 'event', eventId } or { kind: 'world_pulse' }.
  */
-function windDownCrisis(s, { types, label: labelOverride, origin }) {
-  const candidates = (types || []).map(t => String(t || '').trim()).filter(Boolean);
+function windDownCrisis(/** @type {any} */ s, /** @type {any} */ { types, label: labelOverride, origin }) {
+  const candidates = (types || []).map((/** @type {any} */ t) => String(t || '').trim()).filter(Boolean);
   if (!candidates.length) return { settlement: s, removed: null, wound: false };
-  const lower = (v) => String(v || '').toLowerCase();
+  const lower = (/** @type {any} */ v) => String(v || '').toLowerCase();
   const candSet = new Set(candidates.map(lower));
   // Type OR display-name match, case-insensitive — the picker passes the
   // entry's type when it has one, its name for legacy untyped entries.
-  const matchesEntry = (st) => candSet.has(lower(st?.type)) || candSet.has(lower(st?.name));
+  const matchesEntry = (/** @type {any} */ st) => candSet.has(lower(st?.type)) || candSet.has(lower(st?.name));
   // EVERY array container is cleared, not just the first: crisisOnset
   // writes the merged array to each key that held the bare object
   // (stress + stressors), and a JSON round-trip breaks their aliasing — the
@@ -307,7 +307,7 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
     const idx = list.findIndex(matchesEntry);
     if (idx === -1) continue;
     removed = removed || list[idx];
-    next = { ...next, [containerKey]: list.filter((_, i) => i !== idx) };
+    next = { ...next, [containerKey]: list.filter((/** @type {any} */ _, /** @type {any} */ i) => i !== idx) };
   }
   if (!removed) {
     // Pipeline settlements carry a SINGLE stressor as a bare object,
@@ -335,7 +335,7 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
   // the wind-down sets status 'easing' with a short remaining duration (the
   // documented fallback) instead of deleting evolved state outright.
   const archetype = archetypeForStressor(removed)
-    || candidates.map(t => archetypeForStressor({ type: t })).find(Boolean)
+    || candidates.map((/** @type {any} */ t) => archetypeForStressor({ type: t })).find(Boolean)
     || null;
   // A local resolution never winds down a CAMPAIGN-owned condition: one
   // whose ORIGIN cause is a regional channel or the world pulse belongs to
@@ -346,17 +346,17 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
   // the FIRST cause: onsets write their provenance first; later causes are
   // appended receipts. Event- and generation-born conditions (and bare
   // legacy ones with no causes) are local and stay resolvable.
-  const locallyOwned = (c) => {
+  const locallyOwned = (/** @type {any} */ c) => {
     const condOrigin = String(c?.causes?.[0]?.source ?? '');
     return condOrigin === '' || condOrigin === 'event' || condOrigin === 'generation';
   };
-  const matchesCrisis = (c) => {
+  const matchesCrisis = (/** @type {any} */ c) => {
     if (!c || !locallyOwned(c)) return false;
     const stamped = candSet.has(lower(c.triggeredAt?.sourceEventTargetId));
     return stamped || (archetype != null && c.archetype === archetype);
   };
   let wound = false;
-  const conditions = (next.activeConditions || []).map((c) => {
+  const conditions = (next.activeConditions || []).map((/** @type {any} */ c) => {
     if (!matchesCrisis(c)) return c;
     wound = true;
     const elapsed = Number(c.duration?.elapsedTicks) || 0;
@@ -396,8 +396,8 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
       .map(t => String(t || '').trim()).filter(Boolean)
       .filter((t, i, arr) => arr.findIndex(o => stressTypeEq(o, t)) === i);
     const edits = stressorEditsOf(next.config);
-    const added = edits.added.filter(e => !resolvedTypes.some(t => stressTypeEq(e?.type, t)));
-    const missing = resolvedTypes.filter(t => !edits.resolved.some(r => stressTypeEq(r, t)));
+    const added = edits.added.filter((/** @type {any} */ e) => !resolvedTypes.some(t => stressTypeEq(e?.type, t)));
+    const missing = resolvedTypes.filter(t => !edits.resolved.some((/** @type {any} */ r) => stressTypeEq(r, t)));
     if (added.length !== edits.added.length || missing.length) {
       next = withStressorEdits(next, {
         added,
@@ -418,7 +418,7 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
  * target, the composer's picker offers the live stressors), and resolving an
  * unregistered roaming type is itself a campaign no-op.
  *
- * @param {{ settlement: Object, event: import('./types.js').Event }} args
+ * @param {{ settlement: any, event: any }} args
  * @returns {{ settlement: Object, twinDirective: Object|null }}
  */
 export function crisisResolve({ settlement, event }) {
@@ -449,15 +449,15 @@ export function crisisResolve({ settlement, event }) {
  * record follows (status easing + the world_pulse receipt survive
  * regeneration).
  *
- * @param {Object} settlement   the origin settlement
- * @param {Object} twin         the resolved roaming stressor record
+ * @param {any} settlement   the origin settlement
+ * @param {any} twin         the resolved roaming stressor record
  * @returns {Object} new settlement (same reference when nothing matched)
  */
 export function resolveCrisisLocally(settlement, twin) {
   const roamingType = String(twin?.type || '').trim();
   if (!settlement || !roamingType) return settlement;
   const genKeys = Object.keys(GEN_TO_PULSE_TYPE)
-    .filter(genKey => GEN_TO_PULSE_TYPE[genKey] === roamingType);
+    .filter(genKey => /** @type {any} */ (GEN_TO_PULSE_TYPE)[genKey] === roamingType);
   const { settlement: next, removed, wound } = windDownCrisis(settlement, {
     types: [roamingType, ...genKeys],
     label: twin?.label,
@@ -480,7 +480,7 @@ export function resolveCrisisLocally(settlement, twin) {
  * stressor with no roaming analog injects under its own key
  * (normalizeStressor tolerates unknown types).
  */
-export function twinDirectiveForEvent(event) {
+export function twinDirectiveForEvent(/** @type {any} */ event) {
   const type = authoredCrisisType(event);
   if (!type) return null;
   if (event.type === 'APPLY_STRESSOR') {
@@ -512,7 +512,7 @@ export function twinDirectiveForEvent(event) {
  * scrub is events/undoEvent.js — this composes only the campaign half.
  * Returns null for non-crisis log entries.
  *
- * @param {import('./types.js').EventLogEntry} logEntry  the popped entry
+ * @param {any} logEntry  the popped entry
  * @returns {{ action: 'withdraw'|'restore', type: string, twin: Object|null }|null}
  */
 export function crisisWithdraw(logEntry) {
@@ -533,8 +533,8 @@ export function crisisWithdraw(logEntry) {
  * the restore. Returns the raw stored record (cloned), or null when no
  * active twin exists yet.
  *
- * @param {Array} worldStressors  campaign.worldState.stressors
- * @param {import('./types.js').Event} event
+ * @param {any[]} worldStressors  campaign.worldState.stressors
+ * @param {any} event
  * @param {string|number} settlementId
  * @returns {Object|null}
  */

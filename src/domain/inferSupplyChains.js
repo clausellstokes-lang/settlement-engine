@@ -22,24 +22,24 @@
  */
 import { buildRegistry } from '../lib/customRegistry.js';
 
-const norm = (s) => String(s || '').trim().toLowerCase();
-const stem = (s) => norm(s).split(/[\s(]/)[0];
+const norm = (/** @type {any} */ s) => String(s || '').trim().toLowerCase();
+const stem = (/** @type {any} */ s) => norm(s).split(/[\s(]/)[0];
 
 /** Bidirectional stem-overlap match — the same rule the chain renderer + the
  *  generator's dependency matcher use, so inference and rendering never disagree. */
-function tokenMatch(a, b) {
+function tokenMatch(/** @type {any} */ a, /** @type {any} */ b) {
   const as = stem(a), bs = stem(b);
   if (!as || !bs) return false;
   return norm(a).includes(bs) || norm(b).includes(as);
 }
 
-function toList(v) {
+function toList(/** @type {any} */ v) {
   if (Array.isArray(v)) return v.filter(Boolean);
   if (typeof v === 'string' && v.trim()) return v.split(',').map((s) => s.trim()).filter(Boolean);
   return [];
 }
 
-const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const slug = (/** @type {any} */ s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 /** Codepoint comparator. The file's determinism header promises codepoint-stable
  *  ordering; localeCompare is locale-dependent and would betray that the moment a
@@ -51,7 +51,7 @@ const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').re
 const byCodepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
- * @param {Object} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
+ * @param {any} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
  * @param {Object} [opts]
  * @param {(refId:string)=>(string|null)} [opts.resolve]  dependency-refId → entity name (defaults to a registry built from customContent)
  * @param {{primaryExports?:string[], primaryImports?:string[], name?:string}} [opts.neighbour]
@@ -62,18 +62,19 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   try { registry = buildRegistry(customContent || {}); } catch { registry = null; }
   let resolve = opts.resolve;
   if (!resolve) {
-    resolve = (refId) => {
+    resolve = (/** @type {any} */ refId) => {
       const e = registry && registry.resolve ? registry.resolve(refId) : null;
       if (e && e.name) return e.name;
       return (typeof refId === 'string' && !refId.includes(':')) ? refId : null;
     };
   }
-  const resolveNames = (refs) => toList(refs).map((r) => resolve(r)).filter(Boolean);
+  const resolveNames = (/** @type {any} */ refs) => toList(refs).map((/** @type {any} */ r) => resolve(r)).filter(Boolean);
 
   const cc = customContent || {};
+  /** @type {any[]} */
   const nodes = [];
   const byName = new Map();
-  const addNode = (item, kind, provides, requires) => {
+  const addNode = (/** @type {any} */ item, /** @type {any} */ kind, /** @type {any} */ provides, /** @type {any} */ requires) => {
     const name = item && item.name && String(item.name).trim();
     if (!name) return;
     const node = {
@@ -105,8 +106,9 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   // good path instead of the built-in step collapsing to a trade endpoint. The
   // seeded node provides its own name; the processor pass below gives a built-in
   // processing institution its inputs.
+  /** @type {Record<string, string>} */
   const PREBUILT_KIND = { institutions: 'institution', services: 'service', resources: 'resource', tradeGoods: 'good' };
-  const ensureNode = (name, kind) => {
+  const ensureNode = (/** @type {any} */ name, /** @type {any} */ kind) => {
     const key = norm(name);
     if (!name || byName.has(key)) return byName.get(key) || null;
     const node = { uid: `seed-${kind}-${slug(name)}`, name, kind, provides: [key], requires: [] };
@@ -114,10 +116,10 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     byName.set(key, node);
     return node;
   };
-  const seedRef = (refId) => {
+  const seedRef = (/** @type {any} */ refId) => {
     if (typeof refId !== 'string' || !refId.startsWith('prebuilt:') || !registry?.resolve) return;
     const e = registry.resolve(refId);
-    if (e && e.name) ensureNode(e.name, PREBUILT_KIND[e.category] || 'good');
+    if (e && e.name) ensureNode(e.name, PREBUILT_KIND[/** @type {any} */ (e.category)] || 'good');
   };
   for (const inst of toList(cc.institutions)) { toList(inst.produces).forEach(seedRef); toList(inst.requires).forEach(seedRef); }
   for (const svc of toList(cc.services)) { toList(svc.requires).forEach(seedRef); toList(svc.providedBy).forEach(seedRef); }
@@ -153,6 +155,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
 
   // Edges: A.provides token matches B.requires token.
   const seenEdge = new Set();
+  /** @type {any[]} */
   const edges = [];
   for (const a of nodes) {
     for (const b of nodes) {
@@ -169,18 +172,19 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   }
 
   const byUid = new Map(nodes.map((n) => [n.uid, n]));
-  const out = new Map(nodes.map((n) => [n.uid, []]));
+  const out = new Map(nodes.map((n) => /** @type {[any, any[]]} */ ([n.uid, []])));
   const inbound = new Map(nodes.map((n) => [n.uid, 0]));
-  for (const e of edges) { out.get(e.from).push(e); inbound.set(e.to, inbound.get(e.to) + 1); }
+  for (const e of edges) { /** @type {any} */ (out.get(e.from)).push(e); inbound.set(e.to, /** @type {any} */ (inbound.get(e.to)) + 1); }
   for (const arr of out.values()) arr.sort((x, y) => byCodepoint(`${x.commodity}${x.to}`, `${y.commodity}${y.to}`));
 
   // Sources: no inbound edge but at least one outbound. Walk to maximal paths.
-  const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && out.get(n.uid).length > 0)
+  const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && /** @type {any} */ (out.get(n.uid)).length > 0)
     .sort((a, b) => byCodepoint(a.uid, b.uid));
+  /** @type {any[]} */
   const paths = [];
-  const walk = (uid, path, visited) => {
+  const walk = (/** @type {any} */ uid, /** @type {any} */ path, /** @type {any} */ visited) => {
     const outs = out.get(uid) || [];
-    const next = outs.filter((e) => !visited.has(e.to));
+    const next = outs.filter((/** @type {any} */ e) => !visited.has(e.to));
     if (!next.length || path.length >= 6) { if (path.length) paths.push(path); return; }
     for (const e of next) walk(e.to, [...path, e], new Set([...visited, e.to]));
   };
@@ -194,7 +198,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   const seenChain = new Set();
   const discovered = [];
   for (const path of paths) {
-    const uids = [path[0].from, ...path.map((e) => e.to)];
+    const uids = [path[0].from, ...path.map((/** @type {any} */ e) => e.to)];
     const chainNodes = uids.map((u) => byUid.get(u)).filter(Boolean);
     if (chainNodes.length < 2) continue;
     const chainId = `discovered.${slug(uids.join('-'))}`;
@@ -209,13 +213,13 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
 
     const reqTokens = [...new Set(chainNodes.flatMap((n) => n.requires))];
     const imports = reqTokens.filter((t) => !allProvided.some((p) => tokenMatch(p, t)));
-    const exports = sink.provides.filter((p) => !chainNodes.some((n) => n.requires.some((r) => tokenMatch(p, r))));
+    const exports = sink.provides.filter((/** @type {any} */ p) => !chainNodes.some((n) => n.requires.some((/** @type {any} */ r) => tokenMatch(p, r))));
 
-    const importObjs = imports.map((l) => {
+    const importObjs = imports.map((/** @type {any} */ l) => {
       const c = nExports.find((x) => tokenMatch(x, l)) || null;
       return { label: l, source: c ? 'neighbour' : 'trade', counterpart: c };
     });
-    const exportObjs = exports.map((l) => {
+    const exportObjs = exports.map((/** @type {any} */ l) => {
       const c = nImports.find((x) => tokenMatch(x, l)) || null;
       return { label: l, source: c ? 'neighbour' : 'trade', counterpart: c };
     });
@@ -242,7 +246,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
           uid: n.uid, name: n.name, kind: n.kind,
           role: n.uid === source.uid ? 'source' : n.uid === sink.uid ? 'sink' : 'processor',
         })),
-        edges: path.map((e) => ({ from: e.from, to: e.to, commodity: e.commodity })),
+        edges: path.map((/** @type {any} */ e) => ({ from: e.from, to: e.to, commodity: e.commodity })),
         tradeEndpoints: { imports: importObjs, exports: exportObjs },
       },
       verification: { state: 'discovered', userName: null, corrections: {} },

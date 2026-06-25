@@ -106,6 +106,23 @@ import {
 // priorityMilitary, magicExists-zeroed priorityMagic, resolved route/threat/
 // culture) are NOT stripped here — their raw values are unrecoverable from
 // the snapshot and are restored via the _config path instead.
+/**
+ * The keys pipeline steps write onto the RESOLVED `settlement.config` as purely
+ * derived output (never user input). This union is the single source of truth and
+ * a compiler-checked contract: it types the array below, so a typo or a key that
+ * drifts between the two becomes a type error (the full typecheck covers src/store).
+ * When a pipeline step begins writing a NEW derived key onto config, add it to this
+ * union — the array then forces you to list it too, by construction.
+ * @typedef {(
+ *   'stressType' | 'stressTypes' | 'intendedStressTypes'
+ *   | '_magicTradeOnly' | '_neighbourEconBias' | '_neighbourEconMode' | '_isolationInfraType'
+ *   | '_population'
+ *   | 'tier' | 'magicLevel' | 'terrainType'
+ *   | 'neighborRelationship'
+ * )} DerivedConfigKey
+ */
+
+/** @type {readonly DerivedConfigKey[]} */
 export const DERIVED_CONFIG_KEYS = Object.freeze([
   'stressType', 'stressTypes', 'intendedStressTypes',
   '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
@@ -114,6 +131,13 @@ export const DERIVED_CONFIG_KEYS = Object.freeze([
   'neighborRelationship',
 ]);
 
+/**
+ * Strip the derived-config keys from a resolved config so it can re-enter the
+ * pipeline as raw user input, without stale or falsely-forced derived values.
+ * @template {Record<string, any>} T
+ * @param {T} config
+ * @returns {Omit<T, DerivedConfigKey> | T}
+ */
 export function stripDerivedConfigKeys(config) {
   if (!config || typeof config !== 'object') return config;
   const out = { ...config };

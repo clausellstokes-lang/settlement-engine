@@ -164,9 +164,11 @@ describe('validateRelationship', () => {
 describe('B4 consumers — the overlay is enforced, not parallel', () => {
   it('only the sanctioned B4 consumers import relationshipCompatibility', () => {
     // B0 mounted it nowhere. B4 ENFORCES the overlay: tradeSalience.js derives the
-    // compatibility-gated secondary statuses, relationshipEvolution.js reads the
-    // battlefield-primary check for the coercion/embargo rules. Any OTHER importer
-    // is an unsanctioned coupling (or a new parallel ruleset) and should be flagged.
+    // compatibility-gated secondary statuses, relationshipRulesAdversarial.js reads the
+    // battlefield-primary check for the coercion/embargo rules (the rule evaluators
+    // were extracted out of relationshipEvolution.js in the god-module split). Any
+    // OTHER importer is an unsanctioned coupling (or a new parallel ruleset) and
+    // should be flagged.
     const hits = execSync(
       "grep -rln \"relationshipCompatibility\" src tests || true",
       { cwd: process.cwd(), encoding: 'utf8' },
@@ -176,7 +178,7 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       'tests/domain/relationshipCompatibility.test.js',
       // B4 consumers (this phase):
       'src/domain/worldPulse/tradeSalience.js',
-      'src/domain/worldPulse/relationshipEvolution.js',
+      'src/domain/worldPulse/relationshipRulesAdversarial.js',
       'tests/domain/tradeSalience.test.js',
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));

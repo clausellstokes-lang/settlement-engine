@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T00:07:35.297Z",
+  "generatedAt": "2026-06-25T15:11:23.525Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "d402b3be6cc39635",
+  "sourceHash": "cb5ddee308253fea",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -39,6 +39,9 @@
     "src/domain/worldPulse/relationshipEvolution.js",
     "src/domain/worldPulse/relationshipHierarchy.js",
     "src/domain/worldPulse/relationshipMemory.js",
+    "src/domain/worldPulse/relationshipRuleHelpers.js",
+    "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "src/domain/worldPulse/relationshipRulesCore.js",
     "src/domain/worldPulse/relationshipState.js",
     "src/lib/entities.js",
     "src/lib/text.js"

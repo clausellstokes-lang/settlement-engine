@@ -68,15 +68,18 @@ const LAW_PREFS_BY_ARCHETYPE = Object.freeze({
   outsider: ['extraterritorial_rights', 'patron_treaties', 'trade_immunity'],
 });
 
+/** @param {any} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any} rng @param {any} arr */
 function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
+/** @param {any} saveId @param {any} faction @param {any} index */
 function factionId(saveId, faction, index) {
   const name = faction?.id || faction?.faction || faction?.name || faction?.label || `faction_${index}`;
   return `${saveId}:${stablePart(name)}`;
@@ -86,15 +89,17 @@ function inferFactionArchetype(faction = {}) {
   // Delegates to the shared canonical detector so world-pulse classifies a faction
   // the same way factionProfile / factionResponses / factionRoles do. (The legacy
   // matcher here ignored faction.category; the canonical detector honors it.)
-  return CANONICAL_TO_COMPETITION[factionArchetype(faction)] || 'civic';
+  return (/** @type {any} */ (CANONICAL_TO_COMPETITION))[factionArchetype(faction)] || 'civic';
 }
 
+/** @param {any} faction @param {any} index */
 function factionPower(faction = {}, index = 0) {
   const raw = faction.power ?? faction.influence ?? faction.score ?? faction.weight;
   if (Number.isFinite(raw)) return raw > 1 ? clamp01(raw / 100) : clamp01(raw);
   return Math.max(0.18, 0.72 - index * 0.16);
 }
 
+/** @param {any} item */
 function settlementFactions(item) {
   return item.settlement?.powerStructure?.factions
     || item.settlement?.factions
@@ -102,46 +107,49 @@ function settlementFactions(item) {
     || [];
 }
 
+/** @param {any} item */
 function institutionsFor(item) {
   const fromServices = item.settlement?.services || item.settlement?.institutions || item.settlement?.infrastructure || [];
   return (Array.isArray(fromServices) ? fromServices : [])
-    .map((entry, index) => ({
+    .map((/** @type {any} */ entry, /** @type {any} */ index) => ({
       id: stablePart(entry.id || entry.name || entry.label || `institution_${index}`),
       name: entry.name || entry.label || entry.id || `Institution ${index + 1}`,
     }))
     .slice(0, 12);
 }
 
+/** @param {any} item */
 function topFactionEntries(item) {
   return settlementFactions(item)
-    .map((faction, index) => ({
+    .map((/** @type {any} */ faction, /** @type {any} */ index) => ({
       faction,
       index,
       id: factionId(item.id, faction, index),
       power: factionPower(faction, index),
       archetype: inferFactionArchetype(faction),
     }))
-    .sort((a, b) => b.power - a.power)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.power - a.power)
     .slice(0, 3);
 }
 
+/** @param {any} worldState @param {any} snapshot @param {any} rng */
 export function ensureFactionStates(worldState, snapshot, rng) {
   const factionStates = { ...(worldState.factionStates || {}) };
   for (const item of snapshot.settlements) {
     const entries = settlementFactions(item);
-    entries.forEach((faction, index) => {
+    entries.forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
       const id = factionId(item.id, faction, index);
       if (factionStates[id]) return;
       const local = rng.fork(`faction:${id}`);
       const archetype = inferFactionArchetype(faction);
-      const powerBases = FACTION_POWER_BASES[archetype] || FACTION_POWER_BASES.civic;
-      const lawPreferences = LAW_PREFS_BY_ARCHETYPE[archetype] || LAW_PREFS_BY_ARCHETYPE.civic;
+      const powerBases = (/** @type {any} */ (FACTION_POWER_BASES))[archetype] || FACTION_POWER_BASES.civic;
+      const lawPreferences = (/** @type {any} */ (LAW_PREFS_BY_ARCHETYPE))[archetype] || LAW_PREFS_BY_ARCHETYPE.civic;
       factionStates[id] = {
         factionId: id,
         settlementId: item.id,
         name: faction.faction || faction.name || faction.label || `Faction ${index + 1}`,
         archetype,
-        governmentPreference: faction.governmentPreference || GOVERNMENT_BY_ARCHETYPE[archetype] || pick(local, GOVERNMENT_PREFERENCES),
+        governmentPreference: faction.governmentPreference || (/** @type {any} */ (GOVERNMENT_BY_ARCHETYPE))[archetype] || pick(local, GOVERNMENT_PREFERENCES),
         powerBases: [...powerBases],
         controlledInstitutions: [],
         suppressedInstitutions: [],
@@ -208,6 +216,7 @@ export const FACTION_STATE_PRUNE_GRACE_TICKS = 3;
  * refills an emptied list from the live roster on the next pulse). Identity
  * no-op when nothing changes. Deterministic — derived purely from the snapshot.
  */
+/** @param {any} worldState @param {any} snapshot @param {any} [options] */
 export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks = FACTION_STATE_PRUNE_GRACE_TICKS } = {}) {
   const states = worldState?.factionStates || {};
   const ids = Object.keys(states);
@@ -217,13 +226,14 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
   const liveSettlementIds = new Set();
   for (const item of snapshot?.settlements || []) {
     liveSettlementIds.add(String(item.id));
-    settlementFactions(item).forEach((faction, index) => {
+    settlementFactions(item).forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
       liveFactionIds.add(factionId(item.id, faction, index));
     });
   }
 
   let changed = false;
   const prunedIds = new Set();
+  /** @type {any} */
   const next = {};
   for (const [fid, state] of Object.entries(states)) {
     if (liveFactionIds.has(fid)) {
@@ -258,7 +268,7 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
   if (prunedIds.size) {
     for (const [fid, state] of Object.entries(next)) {
       const rivals = state.rivals || [];
-      const kept = rivals.filter(rid => !prunedIds.has(rid));
+      const kept = rivals.filter((/** @type {any} */ rid) => !prunedIds.has(rid));
       if (kept.length !== rivals.length) next[fid] = { ...state, rivals: kept };
     }
   }
@@ -269,6 +279,7 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
 
 // Per-tick mean-reversion for faction momentum (exhaustion already self-limits
 // upward; this relaxes the build-up of momentum on quiet ticks).
+/** @param {any} worldState */
 export function relaxFactionStates(worldState) {
   const factionStates = { ...(worldState?.factionStates || {}) };
   for (const [id, s] of Object.entries(factionStates)) {
@@ -281,6 +292,7 @@ export function relaxFactionStates(worldState) {
 // faction's internalSeats reflect who actually holds its leader / lieutenant /
 // agent roles (wired from NPC dotRank + factionSeat). Highest dotRank wins each
 // seat. Also records memberNpcIds so faction power can read its roster.
+/** @param {any} worldState */
 export function seatNpcsIntoFactions(worldState) {
   const npcStates = worldState?.npcStates || {};
   const factionStates = { ...(worldState?.factionStates || {}) };
@@ -302,11 +314,12 @@ export function seatNpcsIntoFactions(worldState) {
         || `${faction.settlementId}:${stablePart(npc.factionId)}` === fid
         || npc.factionId === fid,
     );
+    /** @type {any} */
     const seats = { leader_champion: null, lieutenant_operator: null, agent_protege: null };
     for (const seat of Object.keys(seats)) {
       const best = members
-        .filter(m => m.factionSeat === seat)
-        .sort((a, b) => (b.dotRank || 0) - (a.dotRank || 0))[0];
+        .filter((/** @type {any} */ m) => m.factionSeat === seat)
+        .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.dotRank || 0) - (a.dotRank || 0))[0];
       if (best) seats[seat] = { npcId: best.npcId, name: best.name, dotRank: best.dotRank };
     }
     factionStates[fid] = { ...faction, internalSeats: seats, memberNpcIds: members.map(m => m.npcId) };
@@ -325,11 +338,13 @@ const MOMENTUM_BANDS = Object.freeze([
   { min: -Infinity, band: 'quiet' },
 ]);
 
+/** @param {any} momentum */
 export function factionMomentumBand(momentum) {
   const m = Number.isFinite(momentum) ? momentum : 0;
-  return MOMENTUM_BANDS.find(b => m >= b.min).band;
+  return (/** @type {any} */ (MOMENTUM_BANDS.find(b => m >= b.min))).band;
 }
 
+/** @param {any} a @param {any} b */
 function sameStringList(a, b) {
   const left = Array.isArray(a) ? a : [];
   const right = Array.isArray(b) ? b : [];
@@ -360,12 +375,13 @@ function sameStringList(a, b) {
  * the field — a fresh campaign's first pulse must not dirty every roster
  * with 'none'/'quiet'/[] noise.
  */
+/** @param {any} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
 export function projectFactionStatesOntoSettlement(settlement, factionStates, settlementId, { tick = 0 } = {}) {
   const factions = settlement?.powerStructure?.factions;
   if (!Array.isArray(factions) || !factions.length) return settlement;
   const states = factionStates || {};
   let touched = false;
-  const next = factions.map((faction, index) => {
+  const next = factions.map((/** @type {any} */ faction, /** @type {any} */ index) => {
     const state = states[factionId(settlementId, faction, index)];
     if (!state) return faction;
     const patch = {};
@@ -380,7 +396,7 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
       if (faction.momentumBand !== band) patch.momentumBand = band;
     }
 
-    const rivals = (state.rivals || []).map(rid => states[rid]?.name).filter(Boolean);
+    const rivals = (state.rivals || []).map((/** @type {any} */ rid) => states[rid]?.name).filter(Boolean);
     if (faction.rivals != null || rivals.length) {
       if (!sameStringList(faction.rivals, rivals)) patch.rivals = rivals;
     }
@@ -406,17 +422,19 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
   };
 }
 
+/** @param {any} pressureIdx @param {any} settlementId @param {any} kind */
 function pressure(pressureIdx, settlementId, kind) {
   return pressureIdx.get?.(settlementId, kind)?.score || 0;
 }
 
+/** @param {any} score */
 function legitimacyBand(score) {
   if (score >= 0.66) return 'crisis';
   if (score >= 0.44) return 'contested';
   return 'stable';
 }
 
-function candidateBase({ item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
+function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
   return {
     id: `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`,
     type: 'faction',
@@ -445,6 +463,7 @@ function candidateBase({ item, entry, state, tick, candidateType, ruleId, severi
   };
 }
 
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
 function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
   const band = legitimacyBand(legitimacy);
   if (band === 'stable') return null;
@@ -496,6 +515,7 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
   });
 }
 
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} trade @param {any} crime */
 function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime) {
   const institutions = institutionsFor(item);
   if (!institutions.length) return null;
@@ -541,6 +561,7 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
   });
 }
 
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} food @param {any} disease @param {any} trade */
 function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
   const pressureScore = Math.max(food, disease, trade);
   if (pressureScore < 0.32) return null;
@@ -582,6 +603,7 @@ function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
   });
 }
 
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
 function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict) {
   if ((state.exhaustion || 0) > 0.62) {
     const severity = clamp01(0.28 + state.exhaustion * 0.44);
@@ -641,6 +663,7 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conf
   });
 }
 
+/** @param {any} snapshot @param {any} pressureIdx @param {any} [options] */
 export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const out = [];
@@ -672,10 +695,12 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   return out;
 }
 
+/** @param {any} snapshot @param {any} pressureIdx @param {any} [options] */
 export function deriveFactionCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateFactionRules(snapshot, pressureIdx, options);
 }
 
+/** @param {any} worldState @param {any} outcome */
 export function applyFactionPatch(worldState, outcome) {
   if (!outcome?.factionId) return worldState;
   const factionStates = { ...(worldState.factionStates || {}) };

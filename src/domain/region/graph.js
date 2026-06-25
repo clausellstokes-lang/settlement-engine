@@ -84,11 +84,11 @@ function nowIso() {
 // 'overlord', cold-war spellings, etc. Re-exported under the same name so
 // existing importers (worldPulse/stressorDynamics, worldPulse/populationDynamics)
 // are unaffected.
-export function canonicalRelationshipLabel(label) {
+export function canonicalRelationshipLabel(/** @type {any} */ label) {
   return canonicalRelationshipLabelShared(label);
 }
 
-export function stablePart(value) {
+export function stablePart(/** @type {any} */ value) {
   return String(value || 'unknown')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
@@ -96,17 +96,17 @@ export function stablePart(value) {
     .slice(0, 80) || 'unknown';
 }
 
-export function edgeIdFor(from, to) {
+export function edgeIdFor(/** @type {any} */ from, /** @type {any} */ to) {
   return `edge.${stablePart(from)}.${stablePart(to)}`;
 }
 
-export function channelIdFor(channel) {
+export function channelIdFor(/** @type {any} */ channel) {
   // An id-less good object used to stringify to '[object Object]', so two
   // distinct un-normalized goods sets collapsed onto one channel id and merged
   // semantically different channels. Coerce each good to a stable scalar key
   // (id, then label) so malformed/un-normalized goods still mint distinct ids.
   const goods = Array.isArray(channel.goods) && channel.goods.length
-    ? channel.goods.map(g => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
+    ? channel.goods.map((/** @type {any} */ g) => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
     : 'general';
   return [
     'channel',
@@ -120,7 +120,7 @@ export function channelIdFor(channel) {
 // Deterministic timestamps: every normalize* default-stamp path takes a
 // threaded `now` so replay stamps no wall-clock time; nowIso() is the
 // fallback ONLY when no `now` is provided.
-function normalizeNode(node, now = null) {
+function normalizeNode(/** @type {any} */ node, now = null) {
   if (!node?.id) return null;
   return {
     id: String(node.id),
@@ -131,7 +131,7 @@ function normalizeNode(node, now = null) {
   };
 }
 
-function normalizeEdge(edge, now = null) {
+function normalizeEdge(/** @type {any} */ edge, now = null) {
   if (!edge?.from || !edge?.to) return null;
   return {
     id: edge.id || edgeIdFor(edge.from, edge.to),
@@ -145,7 +145,7 @@ function normalizeEdge(edge, now = null) {
   };
 }
 
-function normalizeImpact(impact, now = null) {
+function normalizeImpact(/** @type {any} */ impact, now = null) {
   if (!impact?.id) return null;
   const status = REGIONAL_IMPACT_STATUSES.includes(impact.status)
     ? impact.status
@@ -166,7 +166,7 @@ function normalizeImpact(impact, now = null) {
   };
 }
 
-export function normalizeChannel(channel, now = null) {
+export function normalizeChannel(/** @type {any} */ channel, now = null) {
   if (!channel?.from || !channel?.to || !channel?.type) return null;
   if (!REGIONAL_CHANNEL_TYPES.includes(channel.type)) return null;
   const status = REGIONAL_CHANNEL_STATUSES.includes(channel.status)
@@ -185,7 +185,7 @@ export function normalizeChannel(channel, now = null) {
     visibility,
     strength: clamp01(channel.strength ?? channel.severity ?? 0.5),
     confidence: clamp01(channel.confidence ?? 0.5),
-    goods: Array.isArray(channel.goods) ? channel.goods.map(g => ({ ...g })) : [],
+    goods: Array.isArray(channel.goods) ? channel.goods.map((/** @type {any} */ g) => ({ ...g })) : [],
     evidence: Array.isArray(channel.evidence) ? [...channel.evidence] : [],
     explanation: channel.explanation || '',
     relationshipType: channel.relationshipType || null,
@@ -198,12 +198,12 @@ export function normalizeChannel(channel, now = null) {
   return normalized;
 }
 
-function clamp01(value) {
+function clamp01(/** @type {any} */ value) {
   const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
-function dedupeById(items) {
+function dedupeById(/** @type {any} */ items) {
   const map = new Map();
   for (const item of items || []) {
     if (!item?.id) continue;
@@ -248,21 +248,21 @@ function warLayerEvidenceRows(evidence) {
     : [];
 }
 
-export function ensureRegionalGraph(graph = {}, options = {}) {
+export function ensureRegionalGraph(/** @type {any} */ graph = {}, /** @type {any} */ options = {}) {
   // Deterministic timestamps: ensure mints state (inferred edges below, plus
   // any missing default stamp), so callers that thread options.now get
   // byte-identical replays — without it, the channel_inferred edge minted for
   // an edgeless pair was the one record in a pulse apply still reading the
   // wall clock.
   const now = options.now || null;
-  const nodes = dedupeById((graph.nodes || []).map(node => normalizeNode(node, now)).filter(Boolean));
-  const edges = dedupeById((graph.edges || []).map(edge => normalizeEdge(edge, now)).filter(Boolean));
-  const channels = dedupeById((graph.channels || []).map(channel => normalizeChannel(channel, now)).filter(Boolean));
+  const nodes = dedupeById((graph.nodes || []).map((/** @type {any} */ node) => normalizeNode(node, now)).filter(Boolean));
+  const edges = dedupeById((graph.edges || []).map((/** @type {any} */ edge) => normalizeEdge(edge, now)).filter(Boolean));
+  const channels = dedupeById((graph.channels || []).map((/** @type {any} */ channel) => normalizeChannel(channel, now)).filter(Boolean));
   // Cap heals legacy saves that accumulated an unbounded log.
   const eventLog = Array.isArray(graph.eventLog)
     ? graph.eventLog.slice(-REGIONAL_EVENT_LOG_LIMIT)
     : [];
-  const queuedImpacts = dedupeById((graph.queuedImpacts || []).map(impact => normalizeImpact(impact, now)).filter(Boolean));
+  const queuedImpacts = dedupeById((graph.queuedImpacts || []).map((/** @type {any} */ impact) => normalizeImpact(impact, now)).filter(Boolean));
 
   const edgeByPair = new Map(edges.map(e => [`${e.from}->${e.to}`, e]));
   for (const channel of channels) {
@@ -287,7 +287,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   };
 }
 
-function nodeFromSave(save, now = null) {
+function nodeFromSave(/** @type {any} */ save, now = null) {
   const state = deriveRegionalState(save);
   if (!state.id) return null;
   return normalizeNode({
@@ -299,7 +299,7 @@ function nodeFromSave(save, now = null) {
   });
 }
 
-function neighbourLinksFor(save) {
+function neighbourLinksFor(/** @type {any} */ save) {
   const settlement = settlementFromSave(save);
   return settlement?.neighbourNetwork
       || settlement?.neighborNetwork
@@ -307,22 +307,22 @@ function neighbourLinksFor(save) {
       || [];
 }
 
-function findTargetSave(link, saves) {
+function findTargetSave(/** @type {any} */ link, /** @type {any} */ saves) {
   const targetId = link?.id || link?.targetId || link?.settlementId;
   if (targetId) {
-    const match = saves.find(s => String(s.id || s.settlement?.id) === String(targetId));
+    const match = saves.find((/** @type {any} */ s) => String(s.id || s.settlement?.id) === String(targetId));
     if (match) return match;
   }
   const name = link?.neighbourName || link?.name;
   if (!name) return null;
-  return saves.find(s => s.name === name || s.settlement?.name === name) || null;
+  return saves.find((/** @type {any} */ s) => s.name === name || s.settlement?.name === name) || null;
 }
 
 /**
  * Build a regional graph scaffold from saved settlements and their current
  * neighbourNetwork links. This does not auto-confirm any causal channel.
  */
-export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, options = {}) {
+export function deriveRegionalGraphFromSaves(/** @type {any[]} */ saves = [], /** @type {any} */ existingGraph = null, /** @type {any} */ options = {}) {
   // Deterministic timestamps: callers thread options.now so a rebuild replay
   // stamps no wall-clock time (wall clock ONLY when not provided).
   const now = options.now || null;
@@ -331,7 +331,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgesById = new Map(edges.map(e => [e.id, e]));
-  const pairKeyFor = (a, b) => [String(a), String(b)].sort().join('::');
+  const pairKeyFor = (/** @type {any} */ a, /** @type {any} */ b) => [String(a), String(b)].sort().join('::');
   const edgesByPair = new Map();
   for (const e of edges) {
     const key = pairKeyFor(e.from, e.to);
@@ -377,7 +377,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
             ...existingEdge,
             relationshipType: liveType,
             evidence: [
-              ...(existingEdge.evidence || []).filter(item => item?.source !== 'neighbourNetwork'),
+              ...(existingEdge.evidence || []).filter((/** @type {any} */ item) => item?.source !== 'neighbourNetwork'),
               { source: 'neighbourNetwork', reason: `Linked as ${liveType}.` },
             ],
             updatedAt: now || nowIso(),
@@ -429,7 +429,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
  * ownership tag. Only a brand-new channel takes the candidate's status (discovery
  * candidates are born 'suggested').
  */
-export function addRegionalChannels(graph, channels = [], options = {}) {
+export function addRegionalChannels(/** @type {any} */ graph, /** @type {any[]} */ channels = [], /** @type {any} */ options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
   // no wall-clock time); the wall clock is the fallback ONLY when absent.
   const now = options.now || nowIso();
@@ -473,7 +473,7 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
   return ensureRegionalGraph({ ...current, channels: [...byId.values()], updatedAt: now }, { now });
 }
 
-function relationshipEvidence(relationshipType, options = {}) {
+function relationshipEvidence(/** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
   return [{
     source: 'relationship_label',
     reason: options.reason || `Relationship became ${String(relationshipType || 'linked').replace(/_/g, ' ')}.`,
@@ -481,7 +481,7 @@ function relationshipEvidence(relationshipType, options = {}) {
   }];
 }
 
-function relationshipChannel(raw, relationshipType, options = {}) {
+function relationshipChannel(/** @type {any} */ raw, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
   const now = options.now || nowIso();
   return normalizeChannel({
     status: options.status || 'confirmed',
@@ -496,7 +496,7 @@ function relationshipChannel(raw, relationshipType, options = {}) {
   });
 }
 
-function twoWayChannels(type, from, to, relationshipType, options, strength, confidence, extra = {}) {
+function twoWayChannels(/** @type {any} */ type, /** @type {any} */ from, /** @type {any} */ to, /** @type {any} */ relationshipType, /** @type {any} */ options, /** @type {any} */ strength, /** @type {any} */ confidence, /** @type {any} */ extra = {}) {
   return [
     relationshipChannel({ type, from, to, strength, confidence, ...extra }, relationshipType, options),
     relationshipChannel({ type, from: to, to: from, strength, confidence, ...extra }, relationshipType, options),
@@ -508,7 +508,7 @@ function twoWayChannels(type, from, to, relationshipType, options, strength, con
  * edge-significant for hierarchical labels: edge.from is the patron/overlord,
  * edge.to is the client/vassal.
  */
-export function relationshipChannelBundle(edge, relationshipType, options = {}) {
+export function relationshipChannelBundle(/** @type {any} */ edge, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
   if (!edge?.from || !edge?.to || !relationshipType) return [];
   let from = String(edge.from);
   let to = String(edge.to);
@@ -632,15 +632,15 @@ function isWarLayerMinted(channel) {
   return hasWarLayerEvidence(channel?.evidence);
 }
 
-export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
+export function syncRelationshipChannelBundle(/** @type {any} */ graph, /** @type {any} */ edge, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
   const bundle = relationshipChannelBundle(edge, relationshipType, options);
-  const nextIds = new Set(bundle.map(channel => channel.id));
+  const nextIds = new Set(bundle.map((/** @type {any} */ channel) => channel.id));
   const from = String(edge?.from || '');
   const to = String(edge?.to || '');
   const relationshipKey = options.relationshipKey || edge?.id || `${from}->${to}`;
-  const samePair = channel =>
+  const samePair = (/** @type {any} */ channel) =>
     (String(channel.from) === from && String(channel.to) === to)
     || (String(channel.from) === to && String(channel.to) === from);
   const channels = current.channels.map(channel => {
@@ -667,7 +667,7 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
       };
     }
     const relationshipGenerated = channel.relationshipKey === relationshipKey
-      || (samePair(channel) && (channel.evidence || []).some(item => item.source === 'relationship_label'));
+      || (samePair(channel) && (channel.evidence || []).some((/** @type {any} */ item) => item.source === 'relationship_label'));
     // DM 'disabled' survives label changes outright — were it parked as
     // dormant here, a later re-establishment would re-confirm it.
     if (!relationshipGenerated || channel.status === 'disabled') return channel;
@@ -684,7 +684,7 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
   return addRegionalChannels({ ...current, channels, updatedAt: now }, bundle, { now });
 }
 
-export function setRegionalChannelStatus(graph, channelId, status, options = {}) {
+export function setRegionalChannelStatus(/** @type {any} */ graph, /** @type {any} */ channelId, /** @type {any} */ status, /** @type {any} */ options = {}) {
   if (!REGIONAL_CHANNEL_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -700,7 +700,7 @@ export function setRegionalChannelStatus(graph, channelId, status, options = {})
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
-export function setRegionalChannelVisibility(graph, channelId, visibility, options = {}) {
+export function setRegionalChannelVisibility(/** @type {any} */ graph, /** @type {any} */ channelId, /** @type {any} */ visibility, /** @type {any} */ options = {}) {
   if (!REGIONAL_CHANNEL_VISIBILITIES.includes(visibility)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -711,7 +711,7 @@ export function setRegionalChannelVisibility(graph, channelId, visibility, optio
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
-export function activeChannelsFrom(graph, settlementId, options = {}) {
+export function activeChannelsFrom(/** @type {any} */ graph, /** @type {any} */ settlementId, /** @type {any} */ options = {}) {
   const { includeSuggested = false, types = null, visibility = null, excludeHidden = false } = options;
   const typeSet = Array.isArray(types) ? new Set(types) : null;
   const visibilitySet = Array.isArray(visibility) ? new Set(visibility) : null;
@@ -725,7 +725,7 @@ export function activeChannelsFrom(graph, settlementId, options = {}) {
   });
 }
 
-export function appendRegionalEvent(graph, event, options = {}) {
+export function appendRegionalEvent(/** @type {any} */ graph, /** @type {any} */ event, /** @type {any} */ options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
   return ensureRegionalGraph({
@@ -738,7 +738,7 @@ export function appendRegionalEvent(graph, event, options = {}) {
   }, { now });
 }
 
-export function queueRegionalImpacts(graph, impacts = [], options = {}) {
+export function queueRegionalImpacts(/** @type {any} */ graph, /** @type {any[]} */ impacts = [], /** @type {any} */ options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
   const byId = new Map(current.queuedImpacts.map(i => [i.id, i]));
@@ -775,7 +775,7 @@ export function queueRegionalImpacts(graph, impacts = [], options = {}) {
   }, { now });
 }
 
-export function setRegionalImpactStatus(graph, impactId, status, patch = {}, options = {}) {
+export function setRegionalImpactStatus(/** @type {any} */ graph, /** @type {any} */ impactId, /** @type {any} */ status, /** @type {any} */ patch = {}, /** @type {any} */ options = {}) {
   if (!REGIONAL_IMPACT_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -795,11 +795,11 @@ export function setRegionalImpactStatus(graph, impactId, status, patch = {}, opt
   return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
 }
 
-export function isRegionalImpactAvailable(impact) {
+export function isRegionalImpactAvailable(/** @type {any} */ impact) {
   return impact?.status === 'queued' && (impact.delayTicks || 0) <= 0;
 }
 
-export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
+export function advanceRegionalImpacts(/** @type {any} */ graph, /** @type {any} */ ticks = 1, /** @type {any} */ options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
   const amount = Math.max(1, Math.floor(Number.isFinite(ticks) ? ticks : 1));
@@ -824,7 +824,7 @@ export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
   return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
 }
 
-export function buildRegionalIndexes(graph) {
+export function buildRegionalIndexes(/** @type {any} */ graph) {
   const current = ensureRegionalGraph(graph || {});
   const outgoingBySettlement = new Map();
   const incomingBySettlement = new Map();

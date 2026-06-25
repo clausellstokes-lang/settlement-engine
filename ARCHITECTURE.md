@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (83) — schema + RLS policies + credit ledger + version
+- **migrations/** (84) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -143,7 +143,13 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   edit whose campaign snapshot carries the new `worldState.deferredImpacts` key,
   with the cross-settlement regional ripple deferred to the next world-pulse
   Advance; creates no new object, re-affirms the authenticated-only GRANT, and
-  updates the function COMMENT to name both callers) —
+  updates the function COMMENT to name both callers) +
+  **084** (duplicate-saveId hardening for **069**'s `persist_world_pulse_advance`:
+  its ownership pre-check compared owned settlement rows against the raw
+  `jsonb_array_length` of the write-set, so a repeated saveId tripped a false
+  "not owned" abort; 084 recreates the net-current body comparing owned rows against
+  the count of DISTINCT referenced ids instead — every other line, the signature, and
+  the GRANT are 069 verbatim) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

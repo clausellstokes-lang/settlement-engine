@@ -494,6 +494,7 @@ const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];
  * Map a 0..1 severity score to a band. Anything <0 returns 'low',
  * >1 returns 'critical'. Boundaries: ≥0.75 critical, ≥0.5 high, ≥0.25
  * medium, else low.
+ * @param {any} severity
  */
 export function severityBand(severity) {
   const s = typeof severity === 'number' ? severity : 0;
@@ -503,7 +504,10 @@ export function severityBand(severity) {
   return 'low';
 }
 
-/** Returns the default severity for a band — symmetric to severityBand. */
+/**
+ * Returns the default severity for a band — symmetric to severityBand.
+ * @param {any} band
+ */
 export function defaultSeverityForBand(band) {
   switch (band) {
     case 'critical': return 0.85;
@@ -519,16 +523,22 @@ export function defaultSeverityForBand(band) {
 // condition twice produces the same id) — falls back to a hash of the
 // archetype + label on first construction.
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {any} s */
 function shortHash(s) {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
+/**
+ * @param {any} archetype
+ * @param {any} [opts]
+ */
 export function conditionIdFromArchetype(archetype, opts = {}) {
   const arche = snakeCase(archetype || 'unknown');
   if (opts.sourceEventId) {
@@ -551,8 +561,8 @@ export function conditionIdFromArchetype(archetype, opts = {}) {
 // shapes, and inserts a stable id. Idempotent.
 
 /**
- * @param {Object} condition  Partial or already-canonical condition.
- * @returns {Object | null}    Canonical-shape condition, or null on bad input.
+ * @param {any} condition  Partial or already-canonical condition.
+ * @returns {any}    Canonical-shape condition, or null on bad input.
  */
 export function deriveActiveCondition(condition) {
   if (!condition || typeof condition !== 'object') return null;
@@ -561,7 +571,7 @@ export function deriveActiveCondition(condition) {
     ? condition.archetype
     : 'unknown';
 
-  const tmpl = CONDITION_ARCHETYPE_TEMPLATES[archetype] || null;
+  const tmpl = (/** @type {any} */ (CONDITION_ARCHETYPE_TEMPLATES))[archetype] || null;
 
   const severity = typeof condition.severity === 'number'
     ? Math.max(0, Math.min(1, condition.severity))
@@ -613,23 +623,33 @@ export function deriveActiveCondition(condition) {
   };
 }
 
-/** Derive every condition on a settlement. Returns []. for missing data. */
+/**
+ * Derive every condition on a settlement. Returns []. for missing data.
+ * @param {any} settlement
+ */
 export function deriveAllActiveConditions(settlement) {
   if (!settlement) return [];
   const arr = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
   return arr.map(deriveActiveCondition).filter(Boolean);
 }
 
-/** Flat archetype keys from canonical conditions. Used by advanceTime. */
+/**
+ * Flat archetype keys from canonical conditions. Used by advanceTime.
+ * @param {any} settlement
+ */
 export function activeArchetypes(settlement) {
-  return deriveAllActiveConditions(settlement).map(c => c.archetype);
+  return deriveAllActiveConditions(settlement).map((/** @type {any} */ c) => c.archetype);
 }
 
-/** Lookup by id OR by archetype. Returns the first match or null. */
+/**
+ * Lookup by id OR by archetype. Returns the first match or null.
+ * @param {any} settlement
+ * @param {any} idOrArchetype
+ */
 export function findActiveCondition(settlement, idOrArchetype) {
   if (!idOrArchetype) return null;
   const all = deriveAllActiveConditions(settlement);
-  return all.find(c => c.id === idOrArchetype || c.archetype === idOrArchetype) || null;
+  return all.find((/** @type {any} */ c) => c.id === idOrArchetype || c.archetype === idOrArchetype) || null;
 }
 
 // ── Pure with* helpers ───────────────────────────────────────────────────
@@ -640,6 +660,8 @@ export function findActiveCondition(settlement, idOrArchetype) {
 /**
  * Add (or overwrite) an active condition. If a condition with the same
  * id already exists it is replaced. Returns a new settlement.
+ * @param {any} settlement
+ * @param {any} partial
  */
 export function withActiveCondition(settlement, partial) {
   if (!settlement) return settlement;
@@ -647,15 +669,19 @@ export function withActiveCondition(settlement, partial) {
   if (!canonical) return settlement;
 
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  const filtered = existing.filter(c => c?.id !== canonical.id);
+  const filtered = existing.filter((/** @type {any} */ c) => c?.id !== canonical.id);
   return { ...settlement, activeConditions: [...filtered, canonical] };
 }
 
-/** Remove a condition by id. No-op if not found. Returns a new settlement. */
+/**
+ * Remove a condition by id. No-op if not found. Returns a new settlement.
+ * @param {any} settlement
+ * @param {any} conditionId
+ */
 export function withoutActiveCondition(settlement, conditionId) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  const next = existing.filter(c => c?.id !== conditionId);
+  const next = existing.filter((/** @type {any} */ c) => c?.id !== conditionId);
   if (next.length === existing.length) return settlement;
   return { ...settlement, activeConditions: next };
 }
@@ -684,10 +710,11 @@ export function withoutActiveCondition(settlement, conditionId) {
  * ('world_pulse' / entity ids), and regional (channel ids) conditions are
  * deliberately excluded: generation re-derives its own, and world/regional
  * conditions belong to the campaign layer (worldPulse/reconcile.js).
+ * @param {any} condition
  */
 export function isEventSourcedCondition(condition) {
   return Array.isArray(condition?.causes)
-    && condition.causes.some(c => c?.source === 'event');
+    && condition.causes.some((/** @type {any} */ c) => c?.source === 'event');
 }
 
 /**
@@ -697,6 +724,7 @@ export function isEventSourcedCondition(condition) {
  * the input settlement untouched when there is nothing to record and no
  * stale record to update, so no-op events and plain settlements stay
  * byte-identical.
+ * @param {any} settlement
  */
 export function withEventConditionsSynced(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
@@ -709,7 +737,7 @@ export function withEventConditionsSynced(settlement) {
   // Both record copies hold canonical-shape conditions written by this same
   // projection (stable key order), so a JSON comparison is a reliable
   // already-in-sync check.
-  const synced = (rec) => JSON.stringify(rec) === JSON.stringify(projected);
+  const synced = (/** @type {any} */ rec) => JSON.stringify(rec) === JSON.stringify(projected);
   if ((config ? synced(config.eventConditions) : !projected.length)
     && (raw ? synced(raw.eventConditions) : true)) {
     return settlement;
@@ -731,9 +759,9 @@ export function withEventConditionsSynced(settlement) {
  * flat-then-cliff. The severityBand is recomputed to match the nudged
  * severity.
  *
- * @param {Object} settlement
- * @param {string} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
- * @returns {Object} new settlement
+ * @param {any} settlement
+ * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
+ * @returns {any} new settlement
  */
 const INTERVAL_TICK_INCREMENTS = Object.freeze({
   one_week:   0.25,
@@ -768,14 +796,19 @@ const EASING_SEVERITY_FLOOR = 0.05;
 // a condition's life.
 const EXPIRY_EASING_WINDOW_TICKS = 2;
 
+/**
+ * @param {any} settlement
+ * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
+ * @returns {any} new settlement
+ */
 export function withTickedConditionDurations(settlement, interval) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
   if (existing.length === 0) return settlement;
 
-  const increment = INTERVAL_TICK_INCREMENTS[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
+  const increment = (/** @type {any} */ (INTERVAL_TICK_INCREMENTS))[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
 
-  const next = existing.map(c => {
+  const next = existing.map((/** @type {any} */ c) => {
     const canonical = deriveActiveCondition(c);
     if (!canonical) return c;
     const elapsedTicks = canonical.duration.elapsedTicks + increment;
@@ -784,7 +817,7 @@ export function withTickedConditionDurations(settlement, interval) {
     const windingDown = typeof cap === 'number'
       && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
     const driftStatus = windingDown ? 'easing' : c.status;
-    const driftPerTick = SEVERITY_DRIFT_PER_TICK[driftStatus] ?? 0;
+    const driftPerTick = (/** @type {any} */ (SEVERITY_DRIFT_PER_TICK))[driftStatus] ?? 0;
     let severity = canonical.severity;
     if (driftPerTick > 0) {
       severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
@@ -815,7 +848,8 @@ export function withTickedConditionDurations(settlement, interval) {
  * Conditions with `expiresAtTicks: null` persist indefinitely. Returns
  * `{ settlement, expired }`.
  *
- * @returns {{settlement: Object, expired: Array<Object>}}
+ * @param {any} settlement
+ * @returns {{settlement: any, expired: Array<any>}}
  */
 export function withExpiredConditionsRemoved(settlement) {
   if (!settlement) return { settlement, expired: [] };
@@ -856,10 +890,13 @@ export function withExpiredConditionsRemoved(settlement) {
  *     bySeverityBand: { low: 0, medium: 1, high: 1, critical: 0 },
  *     summaryLines: [...],
  *   }
+ * @param {any} settlement
  */
 export function summarizeActiveConditions(settlement) {
   const all = deriveAllActiveConditions(settlement);
+  /** @type {Record<string, number>} */
   const byArchetype = {};
+  /** @type {Record<string, number>} */
   const bySeverityBand = { low: 0, medium: 0, high: 0, critical: 0 };
   const summaryLines = [];
 
@@ -882,9 +919,12 @@ export function supportedConditionArchetypes() {
   return Object.keys(CONDITION_ARCHETYPE_TEMPLATES);
 }
 
-/** Catalog access — exposes the per-archetype defaults for UI/help text. */
+/**
+ * Catalog access — exposes the per-archetype defaults for UI/help text.
+ * @param {any} archetype
+ */
 export function conditionArchetypeTemplate(archetype) {
-  return CONDITION_ARCHETYPE_TEMPLATES[archetype] || null;
+  return (/** @type {any} */ (CONDITION_ARCHETYPE_TEMPLATES))[archetype] || null;
 }
 
 /** Canonical severity band list. */

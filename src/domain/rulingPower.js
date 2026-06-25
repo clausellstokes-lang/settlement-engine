@@ -39,19 +39,23 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 
 const A = FACTION_ARCHETYPES;
 
+/** @param {any} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any} value @param {number} [fallback] */
 function num(value, fallback = 0) {
   return Number.isFinite(value) ? value : fallback;
 }
 
+/** @param {any} value */
 function round2(value) {
   return Math.round(value * 100) / 100;
 }
 
+/** @param {any} faction */
 function nameOf(faction) {
   return String(faction?.faction || faction?.name || '').trim();
 }
@@ -66,6 +70,7 @@ function nameOf(faction) {
 const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
 const LARGE_TIERS = new Set(['city', 'metropolis']);
 
+/** @param {any} tier */
 function tierBand(tier) {
   const t = String(tier || '').toLowerCase();
   if (SMALL_TIERS.has(t)) return 'small';
@@ -120,17 +125,20 @@ const GOVERNMENT_DESCS = Object.freeze({
  * The government-type label an authoritative power of the given archetype
  * prefers at the given settlement tier.
  */
-export function governmentLabelFor(archetype, tier) {
-  const prefs = GOVERNMENT_PREFERENCES[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
+export function governmentLabelFor(/** @type {any} */ archetype, /** @type {any} */ tier) {
+  const prefs = (/** @type {any} */ (GOVERNMENT_PREFERENCES))[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
   return prefs[tierBand(tier)];
 }
 
-/** The faction entry currently carrying the governing seat. */
+/**
+ * The faction entry currently carrying the governing seat.
+ * @param {any} settlement
+ */
 export function governingFactionOf(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  return factions.find(f => f?.isGoverning)
-    || factions.find(f => nameOf(f) && nameOf(f) === String(ps.governingName || ''))
+  return factions.find((/** @type {any} */ f) => f?.isGoverning)
+    || factions.find((/** @type {any} */ f) => nameOf(f) && nameOf(f) === String(ps.governingName || ''))
     || null;
 }
 
@@ -156,6 +164,7 @@ export const COUP_COERCION = Object.freeze({
 
 const MIN_CONTENDER_POWER = 5;
 
+/** @param {any} a @param {any} b */
 function byWeightDescThenName(a, b) {
   if (b.weight !== a.weight) return b.weight - a.weight;
   if (b.power !== a.power) return b.power - a.power;
@@ -173,7 +182,7 @@ function byWeightDescThenName(a, b) {
  * amplified weight must match or beat the weakest challenger; a thinner
  * field always admits the incumbent (the pool is the top 3 by definition).
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {{ governing: Object|null,
  *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
  *            incumbent: { name:string|null, power:number, govMultiplier:number,
@@ -186,20 +195,20 @@ export function coupContenders(settlement) {
   const govMultiplier = num(ps.publicLegitimacy?.govMultiplier, 1);
 
   const challengers = factions
-    .filter(f => f && f !== governing)
-    .map(f => {
-      const archetype = factionArchetype(f);
+    .filter((/** @type {any} */ f) => f && f !== governing)
+    .map((/** @type {any} */ f) => {
+      const archetype = /** @type {any} */ (factionArchetype(f));
       const power = num(f.power);
       return {
         name: nameOf(f),
         archetype,
         power,
-        weight: round2(power * (COUP_COERCION[archetype] ?? COUP_COERCION[A.OTHER])),
+        weight: round2(power * ((/** @type {any} */ (COUP_COERCION))[archetype] ?? COUP_COERCION[A.OTHER])),
       };
     })
     // Criminal factions never vie for power openly — the capture ladder is
     // their path. Powerless factions can't field a coup at all.
-    .filter(c => c.archetype !== A.CRIMINAL && c.power >= MIN_CONTENDER_POWER && c.name)
+    .filter((/** @type {any} */ c) => c.archetype !== A.CRIMINAL && c.power >= MIN_CONTENDER_POWER && c.name)
     .sort(byWeightDescThenName)
     .slice(0, 3);
 
@@ -235,7 +244,7 @@ export function coupContenders(settlement) {
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
- *            challengers:Array, incumbent:Object, reason:string }}
+ *            challengers:Array<any>, incumbent:Object, reason:string }}
  */
 export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null }) {
   const { challengers, incumbent } = coupContenders(settlement);
@@ -257,7 +266,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // A hotter coup (higher severity) erodes the incumbent's edge; the
     // ruling-authority score nudges ±0.125 across its full range.
     const severityDrag = 1.15 - 0.4 * clamp01(severity);
-    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (rulingAuthorityScore - 50) / 400 : 0;
+    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {any} */ (rulingAuthorityScore) - 50) / 400 : 0;
     pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj));
   }
 
@@ -293,6 +302,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
 // and timeProgression's private reBand — the two existing writers. Keep all
 // three in step if the bands ever move.
 
+/** @param {any} prev @param {any} score */
 function rebandLegitimacy(prev, score) {
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
   let band;
@@ -340,13 +350,14 @@ const STABILITY_BY_CAUSE = Object.freeze({
 
 const MAX_PREVIOUS_GOVERNMENTS = 6;
 
+/** @param {any} archetype @param {any} tier @param {any} factions @param {any} governing */
 function resolveGovernmentLabel(archetype, tier, factions, governing) {
   const preferred = governmentLabelFor(archetype, tier);
   const taken = new Set(
-    factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean),
+    factions.filter((/** @type {any} */ f) => f !== governing).map((/** @type {any} */ f) => nameOf(f).toLowerCase()).filter(Boolean),
   );
   if (!taken.has(preferred.toLowerCase())) return preferred;
-  const alt = ALT_GOVERNMENT_LABELS[archetype];
+  const alt = (/** @type {any} */ (ALT_GOVERNMENT_LABELS))[archetype];
   if (alt && !taken.has(alt.toLowerCase())) return alt;
   return `${preferred} Ascendant`;
 }
@@ -365,7 +376,7 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * when the transfer can't apply (no governing seat, unknown faction,
  * faction already governs).
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @param {string} newPowerName    faction name (powerStructure.factions entry)
  * @param {Object} [opts]
  * @param {'coup'|'election'|'succession'|'conquest'|'appointment'} [opts.cause]
@@ -374,7 +385,7 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
-  const cause = RULING_POWER_CAUSES.includes(opts.cause) ? opts.cause : 'coup';
+  const cause = RULING_POWER_CAUSES.includes(/** @type {any} */ (opts.cause)) ? /** @type {any} */ (opts.cause) : 'coup';
   const tick = Number.isFinite(opts.tick) ? opts.tick : null;
   const losers = Array.isArray(opts.losers) ? opts.losers : [];
 
@@ -384,7 +395,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   if (!governing) return { settlement, transfer: null, error: 'no_governing_faction' };
 
   const target = String(newPowerName || '').trim().toLowerCase();
-  const winner = factions.find(f => f !== governing && nameOf(f).toLowerCase() === target);
+  const winner = factions.find((/** @type {any} */ f) => f !== governing && nameOf(f).toLowerCase() === target);
   if (!winner) {
     return {
       settlement, transfer: null,
@@ -392,17 +403,17 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     };
   }
 
-  const archetype = factionArchetype(winner);
+  const archetype = /** @type {any} */ (factionArchetype(winner));
   const fromGovernment = nameOf(governing);
   const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing);
 
-  const nextFactions = factions.map(f => {
+  const nextFactions = factions.map((/** @type {any} */ f) => {
     if (f === governing) {
       return {
         ...f,
         faction: toGovernment,
         ...(f.name != null ? { name: toGovernment } : {}),
-        desc: GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER],
+        desc: (/** @type {any} */ (GOVERNMENT_DESCS))[archetype] || GOVERNMENT_DESCS[A.OTHER],
         isGoverning: true,
         modifiers: [...(f.modifiers || []), cause === 'coup' ? 'seized_power' : cause],
         legitimacyCrisis: false,
@@ -421,7 +432,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
 
   const oldLegitimacy = ps.publicLegitimacy || null;
   const oldScore = num(oldLegitimacy?.score, 50);
-  const seed = LEGITIMACY_SEEDS[cause];
+  const seed = (/** @type {any} */ (LEGITIMACY_SEEDS))[cause];
   const newScore = Math.max(seed.min, Math.min(seed.max, seed.base + (50 - oldScore) * seed.oldPull));
   const publicLegitimacy = rebandLegitimacy(oldLegitimacy, newScore);
 
@@ -432,10 +443,10 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   const winnerName = nameOf(winner);
   const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()}. The seat answers to them now.`;
   let pairedWithWinner = false;
-  const renamedRelationships = (ps.factionRelationships || []).map(rel => {
+  const renamedRelationships = (ps.factionRelationships || []).map((/** @type {any} */ rel) => {
     if (!Array.isArray(rel?.pair)) return rel;
     const pair = rel.pair.includes(fromGovernment)
-      ? rel.pair.map(n => (n === fromGovernment ? toGovernment : n))
+      ? rel.pair.map((/** @type {any} */ n) => (n === fromGovernment ? toGovernment : n))
       : rel.pair;
     const next = pair === rel.pair ? rel : { ...rel, pair };
     if (pair.includes(toGovernment) && pair.includes(winnerName)) {
@@ -444,9 +455,9 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     }
     return next;
   });
-  const extraRelationships = [];
-  const havePair = (a, b) => renamedRelationships.concat(extraRelationships)
-    .some(rel => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
+  const extraRelationships = /** @type {any[]} */ ([]);
+  const havePair = (/** @type {any} */ a, /** @type {any} */ b) => renamedRelationships.concat(extraRelationships)
+    .some((/** @type {any} */ rel) => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
   if (!pairedWithWinner && toGovernment !== winnerName) {
     extraRelationships.push({
       pair: [toGovernment, winnerName],
@@ -492,7 +503,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         previousGovernments,
         publicLegitimacy,
         factionRelationships: [...renamedRelationships, ...extraRelationships],
-        stability: STABILITY_BY_CAUSE[cause],
+        stability: (/** @type {any} */ (STABILITY_BY_CAUSE))[cause],
         recentConflict: cause === 'coup'
           ? `${nameOf(winner)} overthrew the ${fromGovernment.toLowerCase()} and reshaped the government as a ${toGovernment.toLowerCase()}.`
           : `Power passed to ${nameOf(winner)} by ${cause}; the government now sits as a ${toGovernment.toLowerCase()}.`,

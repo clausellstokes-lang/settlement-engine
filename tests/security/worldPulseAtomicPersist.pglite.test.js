@@ -25,12 +25,16 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG = resolve(process.cwd(), 'supabase/migrations/069_world_pulse_atomic_persist.sql');
+// Extract from 084 — the NET-CURRENT body of persist_world_pulse_advance (084
+// forked 069's body to harden the ownership check against a duplicate saveId; the
+// signature + every other line is identical). Testing the net-current def keeps
+// this suite honest about what actually ships.
+const MIG = resolve(process.cwd(), 'supabase/migrations/084_world_pulse_persist_dedupe_ownership.sql');
 const exists = existsSync(MIG);
 
-describe('069 pglite target exists (guards against silent vacuous skip)', () => {
-  it('migration 069 is present on disk', () => {
-    expect(exists, 'supabase/migrations/069_world_pulse_atomic_persist.sql must exist').toBe(true);
+describe('084 pglite target exists (guards against silent vacuous skip)', () => {
+  it('migration 084 (net-current persist_world_pulse_advance) is present on disk', () => {
+    expect(exists, 'supabase/migrations/084_world_pulse_persist_dedupe_ownership.sql must exist').toBe(true);
   });
 });
 
@@ -38,7 +42,7 @@ describe('069 pglite target exists (guards against silent vacuous skip)', () => 
 function extractFn(name) {
   const src = readFileSync(MIG, 'utf8');
   const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
-  if (!m) throw new Error(`could not extract ${name} from 069`);
+  if (!m) throw new Error(`could not extract ${name} from 084`);
   return m[0];
 }
 
@@ -201,6 +205,35 @@ describe.runIf(exists)('world-pulse atomic persist — execution against 069 (pg
     expect(camp.map_seed).toBe('seed-9');
     expect(camp.placement).toBe(ASH);
     expect(camp.tick).toBe('1');
+  });
+
+  it('a DUPLICATE saveId in the write-set still applies (084: owned compared against DISTINCT ids, not raw array length)', async () => {
+    // The same OWNED settlement appears twice. Under 069 the ownership check compared
+    // owned ROWS (1) against jsonb_array_length (2) and aborted with a FALSE "one or
+    // more settlements are not owned by the current user"; 084 compares against the
+    // count of DISTINCT referenced ids (1 == 1), so the legitimate advance applies.
+    // The repeated entry re-applies idempotently (last-write-wins on the same row).
+    const dupUpdates = JSON.stringify([
+      { saveId: ASH, settlement: { name: 'Ashford', pop: 2000 } },
+      { saveId: ASH, settlement: { name: 'Ashford', pop: 2500 } },
+    ]);
+    const res = await asUser(ALICE, `select public.persist_world_pulse_advance(
+      '${CAMPAIGN}'::uuid, '${envelope(1)}'::jsonb, '${dupUpdates}'::jsonb, null) as r`);
+    expect(res.rows[0].r.applied).toBe(true);   // 069 would have aborted here
+    expect((await ashData()).p).toBe('2500');   // last-write-wins on the repeated row
+
+    // A duplicate that mixes in a FOREIGN id still aborts — the de-dupe must not
+    // weaken the cross-owner guard (distinct referenced {ASH, FOREIGN} = 2, owned = 1).
+    const dupForeign = JSON.stringify([
+      { saveId: ASH, settlement: { name: 'Ashford', pop: 3000 } },
+      { saveId: ASH, settlement: { name: 'Ashford', pop: 3100 } },
+      { saveId: FOREIGN, settlement: { name: 'Seized Keep' } },
+    ]);
+    await expect(
+      asUser(ALICE, `select public.persist_world_pulse_advance(
+        '${CAMPAIGN}'::uuid, '${envelope(2)}'::jsonb, '${dupForeign}'::jsonb, null)`),
+    ).rejects.toThrow();
+    expect((await ashData()).p).toBe('2500');   // rolled back — still the prior value
   });
 
   it('an absent campaignState/versionHistory key keeps the settlement row value', async () => {

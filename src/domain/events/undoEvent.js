@@ -154,13 +154,14 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
 // pre-event _config copy — one snapshot restores both.
 const MIRRORED_RECORD_KEYS = Object.freeze(['resourceEdits', 'customTradeGoods', 'stressorEdits']);
 
-const clone = (v) => deepClone(v);
+const clone = (/** @type {any} */ v) => deepClone(v);
 
 /** { keys: every key audited, values: only the keys present (cloned) } —
  *  presence matters: a key the event GREW must be deleted on undo, not
  *  emptied, so an undone settlement stays byte-identical to one that never
  *  saw the event. */
-function snapshotKeys(source, keys) {
+function snapshotKeys(/** @type {any} */ source, /** @type {any} */ keys) {
+  /** @type {any} */
   const values = {};
   if (source && typeof source === 'object') {
     for (const k of keys) {
@@ -176,24 +177,26 @@ function snapshotKeys(source, keys) {
  * are provenance-scrubable (the common case) — only the resource/trade-good
  * family needs a snapshot.
  *
- * @param {Object} settlement  the BEFORE settlement
- * @param {import('../types.js').Event} event
- * @returns {Object|null}
+ * @param {any} settlement  the BEFORE settlement
+ * @param {any} event
+ * @returns {any}
  */
 export function captureEventUndoSnapshot(settlement, event) {
   if (!settlement) return null;
-  const configKeys = SNAPSHOT_CONFIG_KEYS[event?.type];
-  const settlementKeys = SNAPSHOT_SETTLEMENT_KEYS[event?.type];
+  const configKeys = /** @type {any} */ (SNAPSHOT_CONFIG_KEYS)[event?.type];
+  const settlementKeys = /** @type {any} */ (SNAPSHOT_SETTLEMENT_KEYS)[event?.type];
   if (!configKeys && !settlementKeys) return null;
+  /** @type {any} */
   const snapshot = {};
   if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
-  const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event?.type];
+  const economicKeys = /** @type {any} */ (SNAPSHOT_ECONOMIC_KEYS)[event?.type];
   if (economicKeys) snapshot.economicState = snapshotKeys(settlement.economicState, economicKeys);
   if (settlementKeys) snapshot.settlement = snapshotKeys(settlement, settlementKeys);
   return snapshot;
 }
 
-function restoreKeys(target, snap) {
+function restoreKeys(/** @type {any} */ target, /** @type {any} */ snap) {
+  /** @type {any} */
   const next = { ...(target || {}) };
   for (const k of snap?.keys || []) {
     if (snap.values && k in snap.values) next[k] = clone(snap.values[k]);
@@ -202,21 +205,21 @@ function restoreKeys(target, snap) {
   return next;
 }
 
-function restoreSnapshottedRecords(s, snapshot) {
+function restoreSnapshottedRecords(/** @type {any} */ s, /** @type {any} */ snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return s;
   let next = s;
   if (snapshot.config) {
     next = { ...next, config: restoreKeys(next.config, snapshot.config) };
     if (next._config && typeof next._config === 'object') {
-      const mirrored = (snapshot.config.keys || []).filter(k => MIRRORED_RECORD_KEYS.includes(k));
+      const mirrored = (snapshot.config.keys || []).filter((/** @type {any} */ k) => MIRRORED_RECORD_KEYS.includes(k));
       if (mirrored.length) {
         next = {
           ...next,
           _config: restoreKeys(next._config, {
             keys: mirrored,
             values: Object.fromEntries(mirrored
-              .filter(k => snapshot.config.values && k in snapshot.config.values)
-              .map(k => [k, snapshot.config.values[k]])),
+              .filter((/** @type {any} */ k) => snapshot.config.values && k in snapshot.config.values)
+              .map((/** @type {any} */ k) => [k, snapshot.config.values[k]])),
           }),
         };
       }
@@ -248,13 +251,13 @@ function restoreSnapshottedRecords(s, snapshot) {
  * back at the template default, and the next tick's pre-expiry window
  * re-eases it — the drift self-corrects.
  */
-function unEase(condition, strippedCauses) {
-  const restored = deriveActiveCondition({
+function unEase(/** @type {any} */ condition, /** @type {any} */ strippedCauses) {
+  const restored = /** @type {any} */ (deriveActiveCondition({
     ...condition,
     status: undefined,
     duration: { ...(condition.duration || {}), expiresAtTicks: undefined },
     causes: strippedCauses,
-  });
+  }));
   // Never IMMORTALIZE via undo: a template-less archetype derives a null
   // cap — keep the wind-down's clamped cap instead.
   if (restored.duration.expiresAtTicks === null
@@ -279,7 +282,7 @@ function unEase(condition, strippedCauses) {
  * condition, so undoing the second cannot restore the first's copy — the
  * crisis drops entirely. Same class as re-authoring a stressor then undoing.
  */
-function withoutEventConditions(s, eventId) {
+function withoutEventConditions(/** @type {any} */ s, /** @type {any} */ eventId) {
   const list = Array.isArray(s.activeConditions) ? s.activeConditions : [];
   if (!list.length) return s;
   let changed = false;
@@ -290,7 +293,7 @@ function withoutEventConditions(s, eventId) {
       changed = true;
       continue;
     }
-    const stripped = causes.filter((cause, i) =>
+    const stripped = causes.filter((/** @type {any} */ cause, /** @type {any} */ i) =>
       i === 0 || cause?.source !== 'event' || cause?.eventId !== eventId);
     if (stripped.length === causes.length) {
       kept.push(c);
@@ -312,12 +315,12 @@ function withoutEventConditions(s, eventId) {
  * stressorEdits.added record brings the authored entry back on the next
  * regeneration.
  */
-function withoutEventStressEntries(s, eventId) {
+function withoutEventStressEntries(/** @type {any} */ s, /** @type {any} */ eventId) {
   let next = s;
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
-    const filtered = arr.filter(st => st?.addedByEventId !== eventId);
+    const filtered = arr.filter((/** @type {any} */ st) => st?.addedByEventId !== eventId);
     if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
   }
   return next;
@@ -332,13 +335,13 @@ function withoutEventStressEntries(s, eventId) {
  * overwritten annotation is unrecoverable — same overwrite class as the
  * condition limitation above).
  */
-function scrubConfigAnnotations(config, eventId) {
+function scrubConfigAnnotations(/** @type {any} */ config, /** @type {any} */ eventId) {
   if (!config || typeof config !== 'object') return config;
   let next = config;
   for (const key of ['_cutRoutes', '_refugeeWaves', '_raidHistory']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
-    const filtered = arr.filter(e => e?.atEventId !== eventId);
+    const filtered = arr.filter((/** @type {any} */ e) => e?.atEventId !== eventId);
     if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
   }
   if (next._activePlague?.atEventId === eventId) {
@@ -348,7 +351,7 @@ function scrubConfigAnnotations(config, eventId) {
   return next;
 }
 
-function withoutEventAnnotations(s, eventId) {
+function withoutEventAnnotations(/** @type {any} */ s, /** @type {any} */ eventId) {
   let next = s;
   const config = scrubConfigAnnotations(s.config, eventId);
   if (config !== s.config) next = { ...next, config };
@@ -362,7 +365,7 @@ function withoutEventAnnotations(s, eventId) {
  * config flag, so the revival is exact. Status restores to 'active' —
  * destruction is the only settlement-level status writer.
  */
-function withoutEventDestruction(s, eventId) {
+function withoutEventDestruction(/** @type {any} */ s, /** @type {any} */ eventId) {
   if (s.destroyedByEventId !== eventId) return s;
   const { destroyedAt: _a, destroyedByEventId: _b, destroyedCause: _c, destroyedReason: _d, ...rest } = s;
   let next = { ...rest, status: 'active' };
@@ -380,20 +383,20 @@ function withoutEventDestruction(s, eventId) {
  * survived its own undo. Re-add of a pre-existing entity (the idempotent
  * un-remove branch) carries no createdByEventId, so it is left intact.
  */
-function withoutEventCreations(s, eventId) {
+function withoutEventCreations(/** @type {any} */ s, /** @type {any} */ eventId) {
   let next = s;
-  const dropCreated = (arr) => arr.filter(e => e?.createdByEventId !== eventId);
-  if (Array.isArray(next.npcs) && next.npcs.some(n => n?.createdByEventId === eventId)) {
+  const dropCreated = (/** @type {any} */ arr) => arr.filter((/** @type {any} */ e) => e?.createdByEventId !== eventId);
+  if (Array.isArray(next.npcs) && next.npcs.some((/** @type {any} */ n) => n?.createdByEventId === eventId)) {
     next = { ...next, npcs: dropCreated(next.npcs) };
   }
-  if (Array.isArray(next.institutions) && next.institutions.some(i => i?.createdByEventId === eventId)) {
+  if (Array.isArray(next.institutions) && next.institutions.some((/** @type {any} */ i) => i?.createdByEventId === eventId)) {
     next = { ...next, institutions: dropCreated(next.institutions) };
   }
   const psFactions = next.powerStructure?.factions;
-  if (Array.isArray(psFactions) && psFactions.some(f => f?.createdByEventId === eventId)) {
+  if (Array.isArray(psFactions) && psFactions.some((/** @type {any} */ f) => f?.createdByEventId === eventId)) {
     next = { ...next, powerStructure: { ...next.powerStructure, factions: dropCreated(psFactions) } };
   }
-  if (Array.isArray(next.factions) && next.factions.some(f => f?.createdByEventId === eventId)) {
+  if (Array.isArray(next.factions) && next.factions.some((/** @type {any} */ f) => f?.createdByEventId === eventId)) {
     next = { ...next, factions: dropCreated(next.factions) };
   }
   return next;

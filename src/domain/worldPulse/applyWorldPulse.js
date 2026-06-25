@@ -29,11 +29,11 @@ import { transferRulingPower } from '../rulingPower.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
 import { deepClone } from '../clone.js';
 
-function clone(value) {
+function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
 }
 
-function clamp01(value) {
+function clamp01(/** @type {any} */ value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
@@ -91,7 +91,7 @@ const APPLIED_HEADLINE_REWRITES = [
   [/\bmay undermine rival\b/, 'undermines rival'],
 ];
 
-function appliedHeadlineFor(outcome) {
+function appliedHeadlineFor(/** @type {any} */ outcome) {
   if (outcome.appliedHeadline) return outcome.appliedHeadline;
   const headline = outcome.headline || '';
   for (const [pattern, replacement] of APPLIED_HEADLINE_REWRITES) {
@@ -100,7 +100,7 @@ function appliedHeadlineFor(outcome) {
   return headline;
 }
 
-function newsEntryForOutcome(outcome, tick, status = 'applied') {
+function newsEntryForOutcome(/** @type {any} */ outcome, /** @type {any} */ tick, status = 'applied') {
   const scope = (outcome.affectedSettlementIds || []).length >= 3 ? 'realm' : outcome.relationshipKey ? 'regional' : 'settlement';
   let major = outcome.applyMode === 'proposal' || outcome.severity >= 0.72 || (outcome.affectedSettlementIds || []).length >= 3;
   // Significance honesty: NPC micro-posturing (npc_* candidateTypes at
@@ -148,7 +148,7 @@ const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
 // migration (propagation) — exempts the outcome from suppression. Drift-only
 // is what remains: pure npc/faction posturing patches and single-settlement
 // population drift.
-function isDriftOnlyOutcome(outcome) {
+function isDriftOnlyOutcome(/** @type {any} */ outcome) {
   // Party-sourced outcomes are deliberate DM action, never drift: every
   // outcome partyImpact.js builds is stamped partySourced, and a repeated
   // bolster/undermine/empower is the table acting twice — both must land in
@@ -163,15 +163,15 @@ function isDriftOnlyOutcome(outcome) {
   return (outcome.populationDeltas || []).length <= 1;
 }
 
-function curationReasonsKey(reasons) {
+function curationReasonsKey(/** @type {any} */ reasons) {
   return JSON.stringify([...new Set((reasons || []).filter(Boolean).map(String))]);
 }
 
-function curationSettlementsKey(settlementIds) {
+function curationSettlementsKey(/** @type {any} */ settlementIds) {
   return JSON.stringify([...new Set((settlementIds || []).map(String))].sort());
 }
 
-function isMetronomeRepeat(entry, priorEntries, tick) {
+function isMetronomeRepeat(/** @type {any} */ entry, /** @type {any} */ priorEntries, /** @type {any} */ tick) {
   const idsKey = curationSettlementsKey(entry.settlementIds);
   const reasonsKey = curationReasonsKey(entry.reasons);
   // The headline is part of the repeat key: without it the suppression is
@@ -180,7 +180,7 @@ function isMetronomeRepeat(entry, priorEntries, tick) {
   // faction_exhaustion carry a constant reasons string). Different actors
   // always differ in the headline; the population/resource/faction-SELF
   // metronomes keep constant headlines, so intended suppression survives.
-  return priorEntries.some(prior =>
+  return priorEntries.some((/** @type {any} */ prior) =>
     prior.kind === 'applied'
     && tick - (prior.tick ?? -Infinity) < DRIFT_REEMIT_COOLDOWN_TICKS
     && prior.impactKind === entry.impactKind
@@ -189,7 +189,7 @@ function isMetronomeRepeat(entry, priorEntries, tick) {
     && curationReasonsKey(prior.reasons) === reasonsKey);
 }
 
-function affectedSaveIdsForOutcome(outcome) {
+function affectedSaveIdsForOutcome(/** @type {any} */ outcome) {
   const ids = new Set();
   for (const delta of outcome.populationDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
@@ -266,7 +266,7 @@ function installOccupationAuthority(/** @type {any} */ settlement, /** @type {an
   };
 }
 
-function applyOutcomeToSettlement(settlement, outcome, saveId) {
+function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {any} */ saveId) {
   if (!settlement || !outcome) return settlement;
   let next = settlement;
   if (outcome.populationDeltas?.length) {
@@ -436,7 +436,7 @@ function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incomi
   };
 }
 
-function settlementChanged(beforeSettlement, afterSettlement) {
+function settlementChanged(/** @type {any} */ beforeSettlement, /** @type {any} */ afterSettlement) {
   if (beforeSettlement === afterSettlement) return false;
   try {
     return JSON.stringify(beforeSettlement) !== JSON.stringify(afterSettlement);
@@ -445,7 +445,7 @@ function settlementChanged(beforeSettlement, afterSettlement) {
   }
 }
 
-function saveLike(entry, settlement) {
+function saveLike(/** @type {any} */ entry, /** @type {any} */ settlement) {
   return {
     id: String(entry.saveId),
     name: entry.save?.name || settlement?.name || String(entry.saveId),
@@ -453,12 +453,12 @@ function saveLike(entry, settlement) {
   };
 }
 
-function applyRelationshipLabelToGraph(graph, outcome, now) {
+function applyRelationshipLabelToGraph(/** @type {any} */ graph, /** @type {any} */ outcome, /** @type {any} */ now) {
   if (outcome.proposalPayload?.kind !== 'relationship_label_change') return graph;
   const { relationshipKey, toType } = outcome.proposalPayload;
   return {
     ...graph,
-    edges: (graph.edges || []).map(edge => {
+    edges: (graph.edges || []).map((/** @type {any} */ edge) => {
       if (relationshipKeyFromEdge(edge) !== relationshipKey) return edge;
       return {
         ...edge,
@@ -470,10 +470,10 @@ function applyRelationshipLabelToGraph(graph, outcome, now) {
   };
 }
 
-function relationshipEdgeForOutcome(graph, outcome) {
+function relationshipEdgeForOutcome(/** @type {any} */ graph, /** @type {any} */ outcome) {
   const key = outcome.proposalPayload?.relationshipKey || outcome.relationshipKey;
   if (!key) return null;
-  return (graph.edges || []).find(edge => relationshipKeyFromEdge(edge) === key) || null;
+  return (graph.edges || []).find((/** @type {any} */ edge) => relationshipKeyFromEdge(edge) === key) || null;
 }
 
 /**
@@ -492,7 +492,7 @@ function relationshipEdgeForOutcome(graph, outcome) {
  * set (e.g. from/to plus a lone `source`) would otherwise come out
  * inconsistently oriented — asserting the wrong hierarchy direction downstream.
  */
-function roleOrientedEdge(edge, relState) {
+function roleOrientedEdge(/** @type {any} */ edge, /** @type {any} */ relState) {
   if (!edge) return edge;
   const { seniorId, juniorId, reversed } = relationshipRoles(edge, relState);
   if (!reversed) return edge;
@@ -518,7 +518,7 @@ function roleOrientedEdge(edge, relState) {
  * pulse; a pair with an un-saved end leaves neighbourNetwork untouched (we
  * cannot reconcile the reciprocal link of a settlement we are not carrying).
  */
-function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, toType, tick }) {
+function writeRelationshipLabelToNeighbourNetworks(/** @type {any} */ { settlementUpdates, edge, toType, tick }) {
   if (!edge?.from || !edge?.to || !toType) return;
   const fromId = String(edge.from);
   const toId = String(edge.to);
@@ -537,7 +537,7 @@ function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, to
     const otherName = otherEntry.save?.name || otherEntry.settlement?.name || null;
     const role = rolesForCanonicalEdge(labelled, selfId).sourceRole;
     let touched = false;
-    const next = network.map(link => {
+    const next = network.map((/** @type {any} */ link) => {
       const matches = String(link?.id || '') === otherId
         || String(link?.targetId || '') === otherId
         || String(link?.settlementId || '') === otherId
@@ -573,7 +573,7 @@ function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, to
  * silent field rewrite. One entry per flipped edge, naming both settlements
  * and the flip.
  */
-function cascadeNewsEntry({ cascade, edge, nameFor, outcome, tick }) {
+function cascadeNewsEntry(/** @type {any} */ { cascade, edge, nameFor, outcome, tick }) {
   const edgeKey = cascade.edgeKey || cascade.relationshipKey;
   const fromName = nameFor(edge?.from);
   const toName = nameFor(edge?.to);
@@ -613,7 +613,7 @@ const IMPORTANCE_RANK = Object.freeze({ pillar: 3, key: 2, notable: 1 });
  * name as tiebreak. Covert by design: no news entry — the DM finds the
  * corrupt flag in the dossier, the table finds it the hard way.
  */
-function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext }) {
+function seedBetrayalTraitor(/** @type {any} */ { state, settlementUpdates, saveId, originContext }) {
   const sid = String(saveId || '');
   const entry = settlementUpdates.get(sid);
   const npcs = entry?.settlement?.npcs;
@@ -626,7 +626,7 @@ function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext }
   // traitor, and default-locale collation can reorder accented names across
   // machines, breaking replay determinism.
   eligible.sort((a, b) => {
-    const rank = (IMPORTANCE_RANK[b.npc.importance] || 0) - (IMPORTANCE_RANK[a.npc.importance] || 0);
+    const rank = ((/** @type {any} */ (IMPORTANCE_RANK))[b.npc.importance] || 0) - ((/** @type {any} */ (IMPORTANCE_RANK))[a.npc.importance] || 0);
     if (rank) return rank;
     const an = String(a.npc.name || '');
     const bn = String(b.npc.name || '');
@@ -702,7 +702,7 @@ export function applyWorldPulseOutcomes({
   if (advanceNewsTick) {
     feed = {
       ...feed,
-      currentTick: Number.isFinite(tick) ? Math.max(0, Math.floor(tick)) : feed.currentTick + 1,
+      currentTick: Number.isFinite(tick) ? Math.max(0, Math.floor(/** @type {number} */ (tick))) : feed.currentTick + 1,
     };
   }
   const settlementUpdates = new Map(settlementMap ? [...settlementMap.entries()] : []);
@@ -772,7 +772,7 @@ export function applyWorldPulseOutcomes({
             },
           },
           activeSettlementId: outcome.targetSaveId || saveId,
-          visibleSettlementIds: snapshot.settlements.map(item => item.id),
+          visibleSettlementIds: snapshot.settlements.map((/** @type {any} */ item) => item.id),
           maxDepth: propagationDepth,
           now,
         });
@@ -836,8 +836,8 @@ export function applyWorldPulseOutcomes({
             // Every flipped third-party edge emits Wizard News (one entry per
             // cascade change, naming both settlements + the flip).
             const settlementNameById = new Map((snapshot.settlements || [])
-              .map(item => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
-            const nameFor = id => settlementNameById.get(String(id)) || String(id ?? 'unknown');
+              .map((/** @type {any} */ item) => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
+            const nameFor = (/** @type {any} */ id) => settlementNameById.get(String(id)) || String(id ?? 'unknown');
             // The cascadeChanges shape and the legacy hierarchy.changes shape
             // share fromType/toType/reason but key the edge differently — the
             // union defeats the checker, so normalize through `any` here.
@@ -893,7 +893,7 @@ export function applyWorldPulseOutcomes({
     if (outcome.type === 'npc') state = applyNpcPatch(state, outcome);
     if (outcome.type === 'faction') state = applyFactionPatch(state, outcome);
     if (outcome.type === 'stressor' && outcome.stressor) {
-      const byId = new Map((state.stressors || []).map(stressor => [stressor.id, stressor]));
+      const byId = new Map((state.stressors || []).map((/** @type {any} */ stressor) => [stressor.id, stressor]));
       // Birth time is sacred: escalation/spread re-upserts the same record,
       // so the FIRST createdAt wins (the crisis was born once) while
       // updatedAt moves with every touch.
@@ -947,7 +947,7 @@ export function applyWorldPulseOutcomes({
       if (!entry?.settlement) continue;
       const conditionId = impact.conditionId || legacyRegionalConditionId(impact);
       const conditions = Array.isArray(entry.settlement.activeConditions) ? entry.settlement.activeConditions : [];
-      if (conditions.some(condition => condition?.id === conditionId)) continue;
+      if (conditions.some((/** @type {any} */ condition) => condition?.id === conditionId)) continue;
       // `now` threads through to updatedAt too, not just resolvedAt — replay
       // stamps no wall-clock time anywhere on the reconciled row.
       graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now }, { now });
@@ -979,7 +979,7 @@ export function applyWorldPulseOutcomes({
  * @param {string} [args.now]
  */
 export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow() } = {}) {
-  const proposal = (campaign?.worldState?.proposals || []).find(item => item.id === proposalId);
+  const proposal = (campaign?.worldState?.proposals || []).find((/** @type {any} */ item) => item.id === proposalId);
   if (!proposal || proposal.status !== 'pending') return null;
   // The deterministic resolver (Stage 2): the stored outcome, applyMode forced to
   // 'auto', no fresh RNG draw. Auto-resolving is byte-identical to this manual

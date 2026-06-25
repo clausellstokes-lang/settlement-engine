@@ -30,22 +30,28 @@ const NPC_PAIR_CATS = {
   hostile: ['military'], vassal: ['military', 'economy'], neutral: ['economy'],
 };
 const CONTACT_DESC = {
-  trade_partner: (a, ar, b, br, bs) => `${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
-  allied:        (a, ar, b, br, bs) => `${a} (${ar}) coordinates with ${b} (${br}) of ${bs} on matters of mutual defense and policy.`,
-  patron:        (a, ar, b, br, bs) => `${a} (${ar}) reports to ${b} (${br}) of ${bs}, who exercises oversight authority.`,
-  client:        (a, ar, b, br, bs) => `${a} (${ar}) supplies goods and services to ${b} (${br}) in ${bs}.`,
-  rival:         (a, ar, b, br, bs) => `${a} (${ar}) and ${b} (${br}) of ${bs} are known adversaries competing for the same interests.`,
-  cold_war:      (a, ar, b, br, bs) => `${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
-  hostile:       (a, ar, b, br, bs) => `${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
-  vassal:        (a, ar, b, br, bs) => `${a} (${ar}) coordinates obligations and protection with ${b} (${br}) of ${bs}.`,
-  neutral:       (a, ar, b, br, bs) => `${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
+  trade_partner: (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
+  allied:        (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) coordinates with ${b} (${br}) of ${bs} on matters of mutual defense and policy.`,
+  patron:        (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) reports to ${b} (${br}) of ${bs}, who exercises oversight authority.`,
+  client:        (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) supplies goods and services to ${b} (${br}) in ${bs}.`,
+  rival:         (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) and ${b} (${br}) of ${bs} are known adversaries competing for the same interests.`,
+  cold_war:      (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
+  hostile:       (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
+  vassal:        (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) coordinates obligations and protection with ${b} (${br}) of ${bs}.`,
+  neutral:       (/** @type {any} */ a, /** @type {any} */ ar, /** @type {any} */ b, /** @type {any} */ br, /** @type {any} */ bs) => `${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
 };
 
+/**
+ * @param {any} settlementA
+ * @param {any} settlementB
+ * @param {any} relType
+ * @param {any} linkId
+ */
 export function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
-  const cats = NPC_PAIR_CATS[relType] || ['economy'];
-  const descFn = CONTACT_DESC[relType] || CONTACT_DESC.neutral;
-  let npcsA = (settlementA.npcs || []).filter(n => cats.includes((n.category || '').toLowerCase()));
-  let npcsB = (settlementB.npcs || []).filter(n => cats.includes((n.category || '').toLowerCase()));
+  const cats = NPC_PAIR_CATS[/** @type {keyof typeof NPC_PAIR_CATS} */ (relType)] || ['economy'];
+  const descFn = CONTACT_DESC[/** @type {keyof typeof CONTACT_DESC} */ (relType)] || CONTACT_DESC.neutral;
+  let npcsA = (settlementA.npcs || []).filter((/** @type {any} */ n) => cats.includes((n.category || '').toLowerCase()));
+  let npcsB = (settlementB.npcs || []).filter((/** @type {any} */ n) => cats.includes((n.category || '').toLowerCase()));
   if (!npcsA.length) npcsA = (settlementA.npcs || []).slice(0, 3);
   if (!npcsB.length) npcsB = (settlementB.npcs || []).slice(0, 3);
   if (!npcsA.length || !npcsB.length) return { forA: [], forB: [] };
@@ -54,7 +60,7 @@ export function buildInterSettlementNPCs(settlementA, settlementB, relType, link
   const usedB = new Set();
   for (let i = 0; i < maxPairs; i++) {
     const a = npcsA[i];
-    const b = npcsB.find(n => !usedB.has(n.id) && n.category === a.category) || npcsB.find(n => !usedB.has(n.id));
+    const b = npcsB.find((/** @type {any} */ n) => !usedB.has(n.id) && n.category === a.category) || npcsB.find((/** @type {any} */ n) => !usedB.has(n.id));
     if (!b) break; usedB.add(b.id); pairs.push({ a, b });
   }
   const forA = pairs.map(({ a, b }) => ({ linkId, npcId: a.id, npcName: a.name, npcRole: a.role, partnerName: b.name, partnerRole: b.role, partnerSettlement: settlementB.name, relType, description: descFn(a.name, a.role, b.name, b.role, settlementB.name) }));
@@ -62,8 +68,12 @@ export function buildInterSettlementNPCs(settlementA, settlementB, relType, link
   return { forA, forB };
 }
 
+/**
+ * @param {any} saves
+ * @param {any} name
+ */
 export function findSaveByName(saves, name) {
-  return saves.find(s => s.name === name || s.settlement?.name === name) || null;
+  return saves.find((/** @type {any} */ s) => s.name === name || s.settlement?.name === name) || null;
 }
 
 /**
@@ -84,6 +94,9 @@ export function findSaveByName(saves, name) {
  *
  * Pure + idempotent: re-running drops any prior entry for the same partner /
  * linkId before re-adding, so repeated saves do not duplicate links.
+ *
+ * @param {any} entry
+ * @param {any} existingSaves
  */
 export function buildNeighbourBackLink(entry, existingSaves) {
   const settlement = entry?.settlement;
@@ -97,7 +110,7 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   const relType = nr.relationshipType || 'neutral';
   const linkId = `link_${saveId}_${partnerSave.id}`;
-  const edge = canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave);
+  const edge = /** @type {any} */ (canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave));
   const roles = rolesForCanonicalEdge(edge, saveId, partnerSave.id);
   const definition = { relationshipType: edge.relationshipType, from: edge.from, to: edge.to };
 
@@ -121,13 +134,13 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   const ownSettlement = {
     ...settlement,
-    neighbourNetwork: [entryForOwn, ...(settlement.neighbourNetwork || []).filter(n => n.name !== partnerSave.name && n.linkId !== linkId)],
-    interSettlementRelationships: [...(settlement.interSettlementRelationships || []).filter(r => r.linkId !== linkId), ...npcForOwn, ...conflictForOwn],
+    neighbourNetwork: [entryForOwn, ...(settlement.neighbourNetwork || []).filter((/** @type {any} */ n) => n.name !== partnerSave.name && n.linkId !== linkId)],
+    interSettlementRelationships: [...(settlement.interSettlementRelationships || []).filter((/** @type {any} */ r) => r.linkId !== linkId), ...npcForOwn, ...conflictForOwn],
   };
   const partnerSettlement = {
     ...partnerSave.settlement,
-    neighbourNetwork: [entryForPartner, ...(partnerSave.settlement.neighbourNetwork || []).filter(n => n.id !== saveId && n.linkId !== linkId)],
-    interSettlementRelationships: [...(partnerSave.settlement.interSettlementRelationships || []).filter(r => r.linkId !== linkId), ...npcForPartner, ...conflictForPartner],
+    neighbourNetwork: [entryForPartner, ...(partnerSave.settlement.neighbourNetwork || []).filter((/** @type {any} */ n) => n.id !== saveId && n.linkId !== linkId)],
+    interSettlementRelationships: [...(partnerSave.settlement.interSettlementRelationships || []).filter((/** @type {any} */ r) => r.linkId !== linkId), ...npcForPartner, ...conflictForPartner],
   };
 
   return {

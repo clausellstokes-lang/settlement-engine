@@ -307,6 +307,13 @@ export async function handleStripeWebhook(
         // the grant idempotent against Stripe's at-least-once redelivery.
         await grantCreditsForSessionOnce(supabase, userId!, credits, 'purchase', session.id);
         console.log(`Added ${credits} credits to user ${userId}`);
+      } else {
+        // A completed checkout whose product matches none of the above AND carries
+        // no credits. create-checkout validates product keys server-side, so this is
+        // unreachable in normal operation — fail LOUD rather than silently ack a paid
+        // session we did not fulfil, so a metadata misconfiguration surfaces in
+        // Stripe's webhook dashboard + retries instead of being swallowed.
+        throw new Error(`Unhandled checkout product: ${product || '(missing)'} (session=${session.id})`);
       }
       break;
     }

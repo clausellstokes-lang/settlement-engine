@@ -40,10 +40,14 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
-const EDGE = readFileSync(
-  join(ROOT, 'supabase', 'functions', 'generate-narrative', 'index.ts'),
-  'utf8',
-);
+// generate-narrative's prompt/cache/json layers were split into sibling modules;
+// concat index.ts + those so these static source assertions find each symbol
+// (summarizeSettlement, PRESERVATION_RULES, REFINEMENT_PASSES, isEmptyPayload, …)
+// wherever it now lives.
+const GEN_NARR_DIR = join(ROOT, 'supabase', 'functions', 'generate-narrative');
+const EDGE = ['index.ts', 'prompts.ts', 'promptCache.ts', 'jsonUtils.ts']
+  .map((f) => readFileSync(join(GEN_NARR_DIR, f), 'utf8'))
+  .join('\n');
 
 // ─────────────────────────────────────────────────────────────────────
 // Tier 6.2 — settlement-summary parity

@@ -310,7 +310,6 @@
         "npm:eslint@^10.4.0",
         "npm:fast-check@^4.8.0",
         "npm:globals@^17.6.0",
-        "npm:html2canvas@^1.4.1",
         "npm:husky@^9.1.7",
         "npm:immer@^11.1.4",
         "npm:jsdom@^29.1.1",

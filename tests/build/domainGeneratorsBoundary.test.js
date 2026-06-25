@@ -44,7 +44,7 @@ const domainDir = resolve(repoRoot, 'src/domain');
  * Baseline captured at HEAD 8e10816 (verified by grep over src/domain/**):
  *   1. coherence/checkDraftEdit.js      → generators/structuralValidator.js
  *   2. display/defenseDisplay.js        → generators/defenseGenerator.js
- *   3. events/mutate.js                 → generators/prng.js
+ *   3. events/mutateEntities.js         → generators/prng.js (moved from mutate.js in the god-module split)
  *   4. relationships/neighbourBackLink.js → generators/crossSettlementConflicts.js
  *   5. worldPulse/pulseKernel.js        → generators/prng.js
  *   6. worldPulse/institutionLifecycle.js → generators/computeActiveChains.js
@@ -52,7 +52,7 @@ const domainDir = resolve(repoRoot, 'src/domain');
 const BASELINE_EDGES = Object.freeze({
   'src/domain/coherence/checkDraftEdit.js': ['../../generators/structuralValidator.js'],
   'src/domain/display/defenseDisplay.js': ['../../generators/defenseGenerator.js'],
-  'src/domain/events/mutate.js': ['../../generators/prng.js'],
+  'src/domain/events/mutateEntities.js': ['../../generators/prng.js'],
   'src/domain/relationships/neighbourBackLink.js': ['../../generators/crossSettlementConflicts.js'],
   'src/domain/worldPulse/pulseKernel.js': ['../../generators/prng.js'],
   'src/domain/worldPulse/institutionLifecycle.js': ['../../generators/computeActiveChains.js'],

@@ -5,10 +5,12 @@
 // the pulseHelpers ← pulseKernel ← advanceInterval ← barrel chain).
 import { deepClone } from '../clone.js';
 
+/** @param {any} value */
 function clone(value) {
   return value == null ? value : deepClone(value);
 }
 
+/** @param {any} [patch] */
 function compactNpcPatch(patch = null) {
   if (!patch) return null;
   return {
@@ -22,6 +24,7 @@ function compactNpcPatch(patch = null) {
   };
 }
 
+/** @param {any} [outcome] */
 function compactOutcomeForHistory(outcome = {}) {
   return {
     id: outcome.id,
@@ -61,6 +64,7 @@ function compactOutcomeForHistory(outcome = {}) {
   };
 }
 
+/** @param {any[]} [entries] */
 function compactImpactDigest(entries = []) {
   return entries
     .filter(Boolean)
@@ -85,13 +89,17 @@ function compactImpactDigest(entries = []) {
     .slice(0, 18);
 }
 
+/** @param {any} save */
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.name || 'unknown');
 }
 
 const VALID_INTERVALS = new Set(['one_week', 'one_month', 'one_season', 'one_year']);
 
-/** @returns {import('../settlement.schema.js').TickInterval} */
+/**
+ * @param {any} interval
+ * @returns {import('../settlement.schema.js').TickInterval}
+ */
 function usableTickInterval(interval) {
   return VALID_INTERVALS.has(interval) ? interval : 'one_month';
 }

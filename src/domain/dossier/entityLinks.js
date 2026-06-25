@@ -19,7 +19,7 @@ const KIND_PREFIX = Object.freeze({
   condition: 'condition',
 });
 
-export function slugifyEntity(value) {
+export function slugifyEntity(/** @type {any} */ value) {
   return String(value || 'unknown')
     .toLowerCase()
     .trim()
@@ -28,8 +28,8 @@ export function slugifyEntity(value) {
     .slice(0, 80) || 'unknown';
 }
 
-export function entityAnchor(kind, entity, fallback = '') {
-  const prefix = KIND_PREFIX[kind] || slugifyEntity(kind);
+export function entityAnchor(/** @type {any} */ kind, /** @type {any} */ entity, fallback = '') {
+  const prefix = (/** @type {any} */ (KIND_PREFIX))[kind] || slugifyEntity(kind);
   const raw = entity?.id || entity?.refId || entity?.name || entity?.label || fallback;
   return `dossier-${prefix}-${slugifyEntity(raw)}`;
 }
@@ -53,7 +53,7 @@ export function entityIdFor(kind, entity, fallback = '') {
   return entity?.id || entity?.refId || slugifyEntity(label);
 }
 
-export function entityLink(kind, entity, fallback = '') {
+export function entityLink(/** @type {any} */ kind, /** @type {any} */ entity, fallback = '') {
   const label = entity?.name || entity?.label || fallback || String(entity?.id || kind || 'item');
   const anchor = entityAnchor(kind, entity, label);
   return {
@@ -84,8 +84,8 @@ export function localNpcId(index, name) {
   if (!index || !name) return null;
   const key = String(name).trim().toLowerCase();
   if (!key) return null;
-  const hit = (index.npcs || []).find(
-    n => String(n.currentName || '').trim().toLowerCase() === key,
+  const hit = ((/** @type {any} */ (index)).npcs || []).find(
+    (/** @type {any} */ n) => String(n.currentName || '').trim().toLowerCase() === key,
   );
   return hit ? hit.id : null;
 }
@@ -118,13 +118,13 @@ export function institutionIdFromName(index, name) {
   return hit ? hit.id : null;
 }
 
-function normalizeList(value) {
+function normalizeList(/** @type {any} */ value) {
   if (!value) return [];
   if (Array.isArray(value)) return value.filter(Boolean).map(String);
   return [String(value)].filter(Boolean);
 }
 
-function pushTrait(out, key, label, value, visibility = 'public') {
+function pushTrait(/** @type {any} */ out, /** @type {any} */ key, /** @type {any} */ label, /** @type {any} */ value, visibility = 'public') {
   const values = normalizeList(value);
   for (const item of values) {
     const trimmed = item.trim();
@@ -133,7 +133,7 @@ function pushTrait(out, key, label, value, visibility = 'public') {
   }
 }
 
-function firstText(...values) {
+function firstText(/** @type {any[]} */ ...values) {
   for (const value of values) {
     if (!value) continue;
     if (typeof value === 'string') return value;
@@ -150,7 +150,8 @@ function firstText(...values) {
   return null;
 }
 
-export function normalizeNpcTraits(npc = {}) {
+export function normalizeNpcTraits(/** @type {any} */ npc = {}) {
+  /** @type {any[]} */
   const traits = [];
   const personality = npc.personality;
 
@@ -325,10 +326,10 @@ export function eventIdFor(event, index) {
  * }}
  */
 export function buildDossierEntityIndex(settlement = {}) {
-  const npcs = (settlement.npcs || []).map(npc =>
+  const npcs = (settlement.npcs || []).map((/** @type {any} */ npc) =>
     decorateEntry('npc', { ...entityLink('npc', npc), traits: normalizeNpcTraits(npc) }, npc));
 
-  const factions = (settlement.powerStructure?.factions || settlement.factions || []).map(faction => {
+  const factions = (settlement.powerStructure?.factions || settlement.factions || []).map((/** @type {any} */ faction) => {
     const base = {
       ...entityLink('faction', faction, faction.faction),
       label: faction.faction || faction.name || faction.label || 'Faction',
@@ -339,7 +340,7 @@ export function buildDossierEntityIndex(settlement = {}) {
     return decorateEntry('faction', base, faction);
   });
 
-  const institutions = (settlement.institutions || []).map(inst =>
+  const institutions = (settlement.institutions || []).map((/** @type {any} */ inst) =>
     decorateEntry('institution', { ...entityLink('institution', inst) }, inst));
 
   const resources = [
@@ -361,7 +362,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   /** @type {object[]} */
   const neighbourEntries = [];
   const seenNeighbourNames = new Set();
-  const pushNeighbour = (entry) => {
+  const pushNeighbour = (/** @type {any} */ entry) => {
     if (!entry || typeof entry !== 'object') return;
     const id = neighbourIdFor(entry);
     if (!id) return;
@@ -484,7 +485,7 @@ export function buildDossierEntityIndex(settlement = {}) {
       const direct = byId.get(nameOrId);
       if (direct && direct.type === 'neighbour') return direct;
       const key = slugifyEntity(nameOrId);
-      return neighbourEntries.find(n =>
+      return neighbourEntries.find((/** @type {any} */ n) =>
         slugifyEntity(n.currentName) === key
         || slugifyEntity(n.raw?.neighbourName || n.raw?.name) === key) || null;
     },

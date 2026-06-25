@@ -91,8 +91,6 @@ export default defineConfig({
             return 'vendor-icons';
           if (id.includes('node_modules/@supabase'))
             return 'vendor-supabase';
-          if (id.includes('node_modules/html2canvas'))
-            return 'vendor-html2canvas';
           // @react-pdf/renderer + jsPDF are huge and only needed when the
           // user clicks "Export PDF" — pull them out of the main bundle so
           // they download lazily on first export, not on first paint.

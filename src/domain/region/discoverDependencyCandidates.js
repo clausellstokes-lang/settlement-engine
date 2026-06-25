@@ -24,31 +24,42 @@ const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'neutral',
 ]);
 
+/**
+ * @param {any} sourceSave
+ * @param {any} targetSave
+ */
 function relationBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  const link = links.find(n =>
+  const link = links.find((/** @type {any} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
   return link?.relationshipType || link?.type || null;
 }
 
+/**
+ * @param {any} sourceSave
+ * @param {any} targetSave
+ */
 function linkBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  return links.find(n =>
+  return links.find((/** @type {any} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   ) || null;
 }
 
+/**
+ * @param {any} options
+ */
 function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation }) {
   return candidate({
     type,
@@ -63,11 +74,27 @@ function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence =
   });
 }
 
+/**
+ * @param {any} out
+ * @param {any} type
+ * @param {any} a
+ * @param {any} b
+ * @param {any} rel
+ * @param {any} strength
+ * @param {any} confidence
+ * @param {any} [explanation]
+ */
 function addTwoWay(out, type, a, b, rel, strength, confidence, explanation) {
   out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation }));
   out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation }));
 }
 
+/**
+ * @param {any} out
+ * @param {any} patron
+ * @param {any} client
+ * @param {any} rel
+ */
 function addPatronageChannels(out, patron, client, rel, strength = 0.62, confidence = 0.7) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -98,6 +125,12 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
   }));
 }
 
+/**
+ * @param {any} out
+ * @param {any} overlord
+ * @param {any} vassal
+ * @param {any} rel
+ */
 function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -129,7 +162,14 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
   addTwoWay(out, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
+/**
+ * @param {any} sourceSave
+ * @param {any} targetSave
+ * @param {any} source
+ * @param {any} target
+ */
 function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
+  /** @type {any[]} */
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
   const targetRel = relationBetween(targetSave, sourceSave);
@@ -167,13 +207,19 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   return out.filter(Boolean);
 }
 
+/**
+ * @param {any} goods
+ */
 function channelStrengthForGoods(goods, base = 0.5) {
   if (!goods.length) return base;
-  const maxCriticality = Math.max(...goods.map(g => goodCriticality(g)));
+  const maxCriticality = Math.max(...goods.map((/** @type {any} */ g) => goodCriticality(g)));
   const countLift = Math.min(0.2, Math.max(0, goods.length - 1) * 0.05);
   return Math.max(0.1, Math.min(1, base + maxCriticality * 0.35 + countLift));
 }
 
+/**
+ * @param {any} rel
+ */
 function relationshipConfidence(rel) {
   if (!rel) return 0.55;
   if (rel === 'trade_partner') return 0.9;
@@ -186,6 +232,9 @@ function relationshipConfidence(rel) {
   return 0.5;
 }
 
+/**
+ * @param {any} raw
+ */
 function candidate(raw) {
   return normalizeChannel({
     status: 'suggested',
@@ -218,11 +267,14 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
  * carries an institutions array yet has neither a healing institution nor an
  * offered healing service.
  */
+/**
+ * @param {any} save
+ */
 function healingCapacityOf(save) {
   const settlement = settlementFromSave(save) || {};
   const ledger = healingLedger(settlement);
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const anchor = institutions.find(i => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
+  const anchor = institutions.find((/** @type {any} */ i) => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
   return {
     healerCount: ledger.healerCount,
     anchorName: anchor ? String(anchor.name) : null,
@@ -231,6 +283,9 @@ function healingCapacityOf(save) {
   };
 }
 
+/**
+ * @param {any} tier
+ */
 function tierRankOf(tier) {
   const rank = TIER_ORDER.indexOf(tier);
   return rank >= 0 ? rank : null;
@@ -247,9 +302,14 @@ function tierRankOf(tier) {
  * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
  */
+/**
+ * @param {any} sourceSave
+ * @param {any} targetSave
+ * @param {any} [options]
+ */
 export function discoverDependencyCandidates(sourceSave, targetSave, options = {}) {
-  const source = deriveRegionalState(sourceSave);
-  const target = deriveRegionalState(targetSave);
+  const source = /** @type {any} */ (deriveRegionalState(sourceSave));
+  const target = /** @type {any} */ (deriveRegionalState(targetSave));
   if (!source.id || !target.id || source.id === target.id) return [];
 
   const rel = relationBetween(sourceSave, targetSave) || relationBetween(targetSave, sourceSave);
@@ -414,6 +474,10 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   return candidates;
 }
 
+/**
+ * @param {any[]} [saves]
+ * @param {any} [options]
+ */
 export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
   const out = [];
   const seen = new Set();
@@ -429,6 +493,11 @@ export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
   return out;
 }
 
+/**
+ * @param {any[]} [saves]
+ * @param {any} [existingGraph]
+ * @param {any} [options]
+ */
 export function deriveGraphWithDiscoveredCandidates(saves = [], existingGraph = null, options = {}) {
   const graph = deriveRegionalGraphFromSaves(saves, existingGraph, options);
   const candidates = discoverCampaignDependencyCandidates(saves, options);
