@@ -105,6 +105,13 @@ function freshMapState() {
     // the same <g>-space as the backdrop <image> — so every existing overlay
     // layer renders them unchanged (the <g> transform handles display scaling).
     customBackdrop: null,
+    // Render-INERT gallery thumbnail of the FMG terrain, captured on share so the
+    // maps-gallery tile can show the map image (generated-terrain maps have no
+    // customBackdrop → no thumb otherwise). Shape { imageUrl, w, h } | null.
+    // NOTHING reads this for display and it is NOT in MAP_UNDO_KEYS, so it never
+    // touches the undo stack or flips the editor into image-mode the way
+    // customBackdrop.imageUrl does.
+    galleryThumb: null,
     // Settlement burgs placed on the map: burgId -> { settlementId, x, y, cellId, placedAt }
     placements: {},
     // User-added text labels
@@ -486,6 +493,18 @@ export const createMapSlice = (set, get) => ({
     state.geometryVersion = (state.geometryVersion || 0) + 1;
   }),
 
+  /**
+   * Record the render-inert gallery thumbnail captured on share. Does NOT touch
+   * the undo stack, customBackdrop, viewport, or geometryVersion — it is pure
+   * metadata carried in mapState so publish_map / list_gallery_maps can surface
+   * a tile image for generated-terrain maps. { imageUrl, w, h } | null.
+   */
+  setGalleryThumb: (thumb) => set(state => {
+    state.mapState.galleryThumb = thumb && thumb.imageUrl
+      ? { imageUrl: thumb.imageUrl, w: Number(thumb.w) || 0, h: Number(thumb.h) || 0 }
+      : null;
+  }),
+
   /** Drop back to FMG terrain mode (keeps any existing fmgSnapshot). */
   clearMapBackdrop: () => set(state => {
     state.mapState.customBackdrop = null;
@@ -523,6 +542,7 @@ export const createMapSlice = (set, get) => ({
       markers:  next.markers  || [],
       forests:  next.forests  || [],
       customBackdrop: next.customBackdrop || null, // older campaigns → null (FMG mode)
+      galleryThumb: next.galleryThumb || null,     // render-inert share thumbnail
     };
   }),
 

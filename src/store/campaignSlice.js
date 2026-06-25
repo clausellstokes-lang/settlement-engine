@@ -590,6 +590,7 @@ export const createCampaignSlice = (set, get) => {
         fmgSnapshot: clean.fmgSnapshot || null,
         seed:        clean.seed ?? null,
         customBackdrop: clean.customBackdrop || null, // persist custom image maps
+        galleryThumb: clean.galleryThumb || null,     // render-inert share thumbnail (tile image)
         placements:  clean.placements || {},
         labels:      clean.labels || [],
         markers:     clean.markers || [],

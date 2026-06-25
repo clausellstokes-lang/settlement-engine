@@ -25,6 +25,8 @@
 //   settlementEngine:setViewport         { cx, cy, scale, duration }
 //   settlementEngine:fitMap
 //   settlementEngine:saveSnapshot
+//   settlementEngine:exportThumb         { maxW }  → small JPEG data URL of the
+//                                          rendered terrain (gallery thumbnail)
 //   settlementEngine:loadSnapshot        { snapshot }
 //   settlementEngine:resetMap            { seed }
 //   settlementEngine:activateTool        { tool, options }
@@ -873,6 +875,38 @@
         reply(rid, { type: 'fmg:snapshotReply', snapshot });
       } catch (err) {
         replyError(rid, 'fmg:snapshotReply', err);
+      }
+    },
+
+    // Rasterize the rendered FMG terrain to a small JPEG data URL so the maps
+    // gallery tile can show the map image (generated-terrain shares have no
+    // customBackdrop, so no thumb otherwise). Reuses FMG's own getMapURL export
+    // (self-contained SVG blob: inlined fonts/styles, same-origin → no canvas
+    // taint), then downscales via canvas like FMG's PNG path. Best-effort: any
+    // failure replies with an error and the share falls back to the placeholder.
+    async 'settlementEngine:exportThumb'(data, rid) {
+      try {
+        const maxW = Number(data?.maxW) || 480;
+        const url = await getMapURL('png', { fullMap: true, noScaleBar: true });
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const ratio = img.height / img.width;
+            const w = Math.min(maxW, img.width);
+            const h = Math.round(w * ratio);
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            c.getContext('2d').drawImage(img, 0, 0, w, h);
+            const dataUrl = c.toDataURL('image/jpeg', 0.82);
+            reply(rid, { type: 'fmg:exportThumbReply', dataUrl, w, h });
+          } catch (err) {
+            replyError(rid, 'fmg:exportThumbReply', err);
+          }
+        };
+        img.onerror = () => replyError(rid, 'fmg:exportThumbReply', 'rasterize failed');
+        img.src = url;
+      } catch (err) {
+        replyError(rid, 'fmg:exportThumbReply', err);
       }
     },
 
