@@ -92,6 +92,34 @@ export function applyWarFrontSeed(c, { instigatorId, targetId, sinceTick = 0, no
   return true;
 }
 
+/**
+ * Advance-scaling Stage 1: fold one tick's `settlementUpdates` onto the saves
+ * array that feeds the NEXT tick, so a multi-tick interval threads each tick's
+ * post-pulse settlements forward. ID-matched replace (last-write-wins): a save
+ * whose id appears in `updates` is rebuilt with that update's settlement;
+ * untouched saves keep their reference. Pure — returns a NEW array, never
+ * mutates the inputs. Saves without a matching update pass through unchanged, so
+ * a single-tick interval (one update set) yields the same saves the kernel
+ * already produced.
+ *
+ * @param {any[]} saves   the saves handed to the tick that produced `updates`
+ * @param {Array<{ saveId: string|number, settlement: any }>} updates
+ * @returns {any[]} the saves to hand the next tick
+ */
+export function foldSettlementUpdatesOntoSaves(saves = [], updates = []) {
+  if (!Array.isArray(updates) || updates.length === 0) return Array.isArray(saves) ? saves : [];
+  const bySaveId = new Map();
+  for (const update of updates) {
+    if (!update) continue;
+    bySaveId.set(String(update.saveId), update.settlement);
+  }
+  return (Array.isArray(saves) ? saves : []).map(save => {
+    const id = String(save?.id ?? save?.settlement?.id ?? save?.name ?? 'unknown');
+    if (!bySaveId.has(id)) return save;
+    return { ...save, settlement: bySaveId.get(id) };
+  });
+}
+
 export function campaignStateForRegionalImpact(state, save, systemState, now) {
   const isActive = state.activeSaveId && String(state.activeSaveId) === String(save.id);
   const current = save.campaignState || {};

@@ -112,6 +112,16 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Content-copy deterrent: block copy/cut/right-click and disable text selection site-wide (exempting form fields, [data-allow-copy], and elevated users) to nudge readers toward the PDF export and premium. A deterrent, not security — text stays in the DOM for rendering, SEO, and screen readers.',
   },
+  // ── Simulation ──────────────────────────────────────────────────────────────
+  // Advance-scaling Stage 1: when ON, an Advance runs N REAL one-week ticks
+  // (week=1, month=4, season=12, year=48) instead of a single coarse-interval
+  // step. OFF (default) keeps the byte-identical single-tick path. Dark-shipped
+  // until the pause / major-classification stages land.
+  advanceMultiTick: {
+    default: false,
+    description: 'Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. OFF = the legacy single-tick advance.',
+  },
+
   // ── Pricing copy ────────────────────────────────────────────────────────────
   // The simulation-led copy ("Generate a town in seconds, then run the region for
   // years.") vs. the old "unlimited saves" pitch. PROMOTED default-ON: the live
