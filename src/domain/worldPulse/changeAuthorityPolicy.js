@@ -49,6 +49,13 @@
  * @property {boolean} consultsProposalFlag Whether the gate reads majorChangesRequireProposal.
  * @property {string} rationale            Why this authority is correct under the philosophy.
  * @property {boolean} [flagged]           True if this entry is a FLAGGED inconsistency for human review.
+ * @property {boolean} [campaignAltering]  True if an outcome of this change-type is a
+ *   STRUCTURAL major (war start, conquest, coup/succession, government change,
+ *   vassalage) — a campaign-altering move the DM should get a say on once pausing
+ *   lands (Advance-scaling Stage 2+). Classified on the outcome's shape, NOT its
+ *   severity or applyMode (a conquest is applyMode:'auto' today; a famine can be
+ *   higher-severity than a conquest). deriveDecisionTier in decisionTier.js keys
+ *   off the same structural markers this flag records. Defaults to false/absent.
  */
 
 /**
@@ -170,6 +177,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     authority: 'always-proposal',
     module: 'factionCompetition.js',
     consultsProposalFlag: false,
+    campaignAltering: true,
     rationale:
       'A government challenge (governmentChallenge) emits a bare applyMode: \'proposal\'. Changing a settlement’s government is a new premise; it is unconditionally offered to the DM.',
   }),
@@ -195,6 +203,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     authority: 'auto',
     module: 'warDeployment.js',
     consultsProposalFlag: false,
+    campaignAltering: true,
     rationale:
       'Conquest is the resolution of a siege that already broke. The siege is the gated premise; the occupation that follows is its bounded consequence.',
   }),
@@ -209,6 +218,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     authority: 'auto',
     module: 'occupation.js',
     consultsProposalFlag: false,
+    campaignAltering: true,
     rationale:
       'Vassalization is the terminal state of an occupation that has run its course; it is implied by the conquest, not a new premise.',
   }),
@@ -232,6 +242,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     authority: 'auto-with-lock-escalation',
     module: 'coup.js',
     consultsProposalFlag: false,
+    campaignAltering: true,
     rationale:
       'A successful coup is the resolution of a coup stressor the DM already saw building; it auto-applies UNLESS the player has locked the governing faction, on which separate axis it escalates to proposal.',
   }),
