@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, X } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
@@ -78,12 +78,15 @@ function SectionTab({ active, label, Icon, onClick }) {
  * @param {() => void} [props.onCreateCampaign]  create a campaign (no campaigns exist)
  * @param {() => void} [props.onSelectCampaign]  select a campaign (some exist, none active)
  * @param {boolean} [props.hasCampaigns]  whether any selectable campaign exists
+ * @param {'min'|'default'|'expanded'} [props.inspectorSize]  the dock's size state
+ * @param {(size: 'min'|'default'|'expanded') => void} [props.onSetSize]
  */
 export default function RealmInspector({
   open, section, onSection, onClose,
   campaign, canManageCampaigns, tier, onUpgrade,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
   advancing = false,
+  inspectorSize = 'default', onSetSize,
 }) {
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
@@ -101,6 +104,20 @@ export default function RealmInspector({
     if (section !== activeSection) onSection?.(activeSection);
   }, [section, activeSection, onSection]);
 
+  // Esc restores the expanded dock to 'default' (plan §5). It fires ONLY while
+  // expanded so it never competes with other Esc-dismissable overlays, and it
+  // does NOT trap focus — the inspector overlays the map but isn't modal.
+  const expanded = inspectorSize === 'expanded';
+  const minimized = inspectorSize === 'min';
+  useEffect(() => {
+    if (!expanded) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') onSetSize?.('default');
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [expanded, onSetSize]);
+
   if (!open) return null;
 
   // One shared empty-state handler bundle — every section's no-campaign state
@@ -108,14 +125,31 @@ export default function RealmInspector({
   // dead-end strings.
   const emptyHandlers = { onCreateCampaign, onSelectCampaign, hasCampaigns };
 
+  // Per-state container geometry (plan §3). The overlay is absolutely positioned
+  // INSIDE the map-body container, which sits BELOW the toolbar card — so even
+  // the expanded edge-to-edge width cannot reach the toolbar's Advance / Save /
+  // More cluster. 'expanded' is symmetric (left+right SP.sm → calc(100% - 16px))
+  // so it reads as "covers the map" without an off-centre lean. 'min' is a slim
+  // top-right peek-bar: auto height, docked at the top, body hidden.
+  const sizeStyle = expanded
+    ? { top: SP.sm, left: SP.sm, right: SP.sm, bottom: SP.sm, width: 'auto' }
+    : minimized
+      ? { top: SP.sm, right: SP.sm, width: 'min(280px, calc(100% - 24px))' }
+      : { top: SP.sm, right: SP.sm, bottom: SP.sm, width: 'min(420px, calc(100% - 24px))' };
+
   return (
     <aside
       data-testid="realm-inspector"
       aria-labelledby="realm-inspector-title"
+      // The expanded state is exposed on the expand/restore disclosure control
+      // below (the WAI-ARIA pattern: aria-expanded belongs on the trigger, not
+      // the implicit `complementary` landmark, which doesn't support it).
+      // data-expanded keeps the state queryable for styling/tests.
+      data-expanded={expanded}
       style={{
-        position: 'absolute', top: SP.sm, right: SP.sm, bottom: SP.sm,
+        position: 'absolute',
         zIndex: 40,
-        width: 'min(420px, calc(100% - 24px))',
+        ...sizeStyle,
         display: 'flex', flexDirection: 'column',
         border: `1px solid ${BORDER}`,
         borderRadius: R.lg,
@@ -124,6 +158,45 @@ export default function RealmInspector({
         overflow: 'hidden',
       }}
     >
+      {/* The header's window-chrome trio (minimize / expand-restore / close) is
+          factored into ChromeControls below so the full header and the peek-bar
+          render the same controls (P11 cross-surface consistency). */}
+      {minimized ? (
+        // 'min' peek-bar: a slim top-right strip. Title + icon-only section pills
+        // + the chrome trio in a single row; the scrolling body is NOT rendered,
+        // so the minimized dock costs nothing and uncovers the map.
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: SP.sm,
+          padding: `${SP.xs}px ${SP.sm}px`,
+          background: CARD,
+        }}>
+          <h2 id="realm-inspector-title" style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+            Realm
+          </h2>
+          <div role="group" aria-label="Realm Inspector sections" style={{ display: 'flex', gap: 4, flex: 1, minWidth: 0, overflow: 'hidden' }}>
+            {sections.map(s => (
+              <IconButton
+                key={s.id}
+                onClick={() => onSection(s.id)}
+                aria-pressed={activeSection === s.id}
+                active={activeSection === s.id}
+                title={s.label}
+                size="md"
+              >
+                <s.Icon size={14} />
+              </IconButton>
+            ))}
+          </div>
+          <ChromeControls
+            expanded={expanded}
+            onRestore={() => onSetSize?.('default')}
+            onExpandToggle={() => onSetSize?.(expanded ? 'default' : 'expanded')}
+            onClose={onClose}
+            minimized
+          />
+        </div>
+      ) : (
+      <>
       {/* One tinted chrome block: title row and tab row share a single CARD
           tint, separated internally by gap, and exactly one rule divides the
           whole chrome from the scrolling body below (no false-floor stack). */}
@@ -142,9 +215,13 @@ export default function RealmInspector({
           <h2 id="realm-inspector-title" style={{ flex: 1, margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Realm Inspector
           </h2>
-          <IconButton onClick={onClose} title="Close inspector">
-            <X size={14} />
-          </IconButton>
+          <ChromeControls
+            expanded={expanded}
+            onRestore={() => onSetSize?.('default')}
+            onExpandToggle={() => onSetSize?.(expanded ? 'default' : 'expanded')}
+            onMinimize={() => onSetSize?.('min')}
+            onClose={onClose}
+          />
         </header>
 
         {/* Kept as IconButton (size lg) tabs, NOT the Segmented primitive:
@@ -198,7 +275,44 @@ export default function RealmInspector({
           )}
         </Suspense>
       </div>
+      </>
+      )}
     </aside>
+  );
+}
+
+// The window-chrome control trio (plan §4): minimize, expand/restore, close.
+// Reuses the existing IconButton + lucide icons so it inherits the toolbar's
+// pressed/hover treatment. `onMinimize` is omitted in the peek-bar (already
+// minimized); each control carries an aria-label for the non-text icon.
+function ChromeControls({ expanded, minimized = false, onMinimize, onRestore, onExpandToggle, onClose }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
+      {minimized ? (
+        <IconButton onClick={onRestore} title="Restore inspector" aria-label="Restore inspector">
+          <Maximize2 size={14} />
+        </IconButton>
+      ) : (
+        <>
+          {onMinimize && (
+            <IconButton onClick={onMinimize} title="Minimize inspector" aria-label="Minimize inspector">
+              <Minus size={14} />
+            </IconButton>
+          )}
+          <IconButton
+            onClick={onExpandToggle}
+            title={expanded ? 'Restore inspector' : 'Expand inspector'}
+            aria-label={expanded ? 'Restore inspector' : 'Expand inspector'}
+            aria-expanded={expanded}
+          >
+            {expanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+          </IconButton>
+        </>
+      )}
+      <IconButton onClick={onClose} title="Close inspector" aria-label="Close inspector">
+        <X size={14} />
+      </IconButton>
+    </div>
   );
 }
 
