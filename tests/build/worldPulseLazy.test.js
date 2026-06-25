@@ -94,11 +94,12 @@ describe('first-paint — worldPulse simulation is lazy in campaignWorldPulseSli
   });
 
   it('every action that runs the simulation awaits loadWorldPulse() before its set()', () => {
-    // The four heavy actions must each destructure the loaded module via await.
-    // (advance awaits before Phase 1; the rest await before their set() producer,
-    // since Immer producers can't be async.) Count the awaited loads.
+    // The five heavy actions must each destructure the loaded module via await.
+    // (advance + resolveIntervalMajors await before their producer; the rest await
+    // before their set() producer, since Immer producers can't be async.) Count the
+    // awaited loads. resolveIntervalMajors (Stage 3 resume) is the 5th.
     const awaitedLoads = (sliceCode.match(/await\s+loadWorldPulse\(\)/g) || []).length;
-    expect(awaitedLoads).toBe(4);
+    expect(awaitedLoads).toBe(5);
     // And there must be NO leftover reference to a top-level heavy binding — every
     // domain* heavy fn must be obtained from a loadWorldPulse() destructure.
     for (const fn of ['advanceCampaignWorld', 'applyPartyImpact', 'applyWorldPulseProposal', 'previewCampaignWorldPulse']) {

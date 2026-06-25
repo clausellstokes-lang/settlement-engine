@@ -137,9 +137,16 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
   if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
   if ('occupations' in shallowRaw) delete shallowRaw.occupations;
+  // Advance-scaling Stage 3 — pausedAdvance is CONDITIONALLY MATERIALIZED, the same
+  // discipline as pantheon/warPosture/occupations: a campaign with NO advance in
+  // flight carries NO pausedAdvance key at all (so a dormant campaign serializes
+  // byte-identically to today under the dormancy oracle). Stripped from the shallow
+  // spread; re-added below ONLY when present and non-empty.
+  if ('pausedAdvance' in shallowRaw) delete shallowRaw.pausedAdvance;
   const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
   const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
   const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
+  const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
   return {
     ...base,
     ...shallowRaw,
@@ -192,6 +199,15 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // DEEP-cloned when present so a pre-tick snapshot never aliases live occupation state
     // across ticks (read-last/write-next).
     ...(clonedOccupations !== undefined ? { occupations: clonedOccupations } : {}),
+    // pausedAdvance — CONDITIONAL materialization, identical discipline to pantheon/
+    // warPosture/occupations: the paused-Advance cursor ({ interval, ticksTotal,
+    // ticksDone, atTick, resumeTick, pendingMajors, preSnapshot, autoResolve,
+    // startedAt }). ABSENT when no advance is paused (a campaign with no advance in
+    // flight carries NO pausedAdvance key ⇒ byte-identical under the dormancy
+    // oracle), DEEP-cloned when present so a rehydrated cursor never aliases live
+    // state. CLEARING the pause writes pausedAdvance:null/absent ⇒ this returns
+    // undefined ⇒ the key is omitted (back to byte-neutral).
+    ...(clonedPausedAdvance !== undefined ? { pausedAdvance: clonedPausedAdvance } : {}),
   };
 }
 

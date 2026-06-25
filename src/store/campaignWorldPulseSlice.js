@@ -115,6 +115,16 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
+  // Advance-scaling Stage 3: the autoresolve toggle. Default OFF — when the
+  // multi-tick flag is ON, an Advance PAUSES at the first tick that surfaces
+  // campaign-altering MAJORS so the DM gets a say (autoresolve ON runs straight to
+  // the end, resolving every major to recommended). With the multi-tick flag OFF
+  // this value is inert (the single-tick path never pauses), so it changes nothing
+  // in prod. UI-scoped; not persisted across reloads (a present pausedAdvance on the
+  // campaign worldState rehydrates an in-flight pause instead).
+  advanceAutoResolve: false,
+  setAdvanceAutoResolve: (value) => set(state => { state.advanceAutoResolve = !!value; }),
+
   previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
@@ -230,6 +240,11 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // one and persist + analytics fire once regardless of tick count.
     const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
     const useMultiTick = flag('advanceMultiTick');
+    // Advance-scaling Stage 3: autoresolve rides ONLY the multi-tick path. OFF ⇒ the
+    // interval orchestrator PAUSES at the first tick that surfaces majors. A caller
+    // can override per-advance via options.autoResolve; otherwise the store toggle
+    // governs. The single-tick path ignores it entirely (it never pauses).
+    const autoResolve = options.autoResolve != null ? !!options.autoResolve : !!get().advanceAutoResolve;
 
     // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
     // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
@@ -367,6 +382,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               interval,
               commit: true,
               now,
+              autoResolve,
             })
           : domainAdvanceCampaignWorld({
               campaign: simCampaign,
@@ -402,6 +418,42 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
           state.pulseUndoStack = next;
         }
         persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
+        // Advance-scaling Stage 3 PAUSE: a paused interval committed its minors
+        // (applyWorldPulseResultToState above wrote the minors-only pause-tick
+        // worldState). Park the resume cursor on c.worldState.pausedAdvance so the
+        // partial interval (ticks committed) + the cursor land in the SAME atomic
+        // persist (069 forward-guard accepts it — tick advanced monotonically). The
+        // cursor carries the PRE-tick inputs (preSnapshot) the resume re-derives from,
+        // so a reload rehydrates it and resolveIntervalMajors continues deterministically.
+        // ensureWorldState materializes pausedAdvance ONLY when present + non-empty, so
+        // a non-paused (complete) advance clears it to byte-neutral (absent) below.
+        if (result.status === 'paused') {
+          c.worldState = {
+            ...c.worldState,
+            pausedAdvance: {
+              interval: result.interval,
+              ticksTotal: result.ticksTotal,
+              ticksDone: result.ticksDone,
+              atTick: result.atTick,
+              resumeTick: result.resumeTick,
+              autoResolve: false,
+              startedAt: now,
+              pendingMajors: cloneJson(result.pendingMajors) || [],
+              // The PRE-tick snapshot — the exact inputs the paused tick was computed
+              // from. Resume re-runs the tick from these (seed replay).
+              preSnapshot: {
+                worldState: cloneJson(result.preWorldState),
+                regionalGraph: cloneJson(result.preRegionalGraph),
+                wizardNews: cloneJson(result.preWizardNews),
+                saves: cloneJson(result.preSaves) || [],
+              },
+            },
+          };
+        } else if (c.worldState && 'pausedAdvance' in c.worldState) {
+          // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
+          const { pausedAdvance: _drop, ...rest } = c.worldState;
+          c.worldState = rest;
+        }
         campaignPersist = cacheCampaignState(state);
         // Collect the affected saves (post-apply) for the research fingerprint,
         // capped at 5 per pulse so a large constellation doesn't flood capture.
@@ -483,6 +535,126 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       }
     }
     return result;
+  },
+
+  /**
+   * Advance-scaling Stage 3 RESUME — apply the DM's verdicts on a paused interval's
+   * batched majors and continue the remaining ticks. Reads the resume cursor from
+   * c.worldState.pausedAdvance (parked by a paused advanceCampaignWorld, and
+   * rehydrated verbatim on reload), re-enters the interval orchestrator's resume
+   * path (which re-derives the paused tick from its PRE-tick inputs with the
+   * decisions folded in — recommended ⇒ byte-identical to autoresolve-ON, dismissed
+   * ⇒ excluded), commits the resumed segment, and either CLEARS pausedAdvance (the
+   * interval finished) or parks a FRESH cursor (the next tick surfaced majors).
+   *
+   * `decisions` is the DM's per-major verdict keyed by outcome id ({ [id]: { decision:
+   * 'recommended'|'dismissed' } }); an empty map resolves every pending major to
+   * recommended. Persists atomically like advanceCampaignWorld (069 forward guard).
+   *
+   * @param {string} campaignId
+   * @param {Record<string, {decision?: string}>} [decisions]
+   * @param {{ now?: string }} [options]
+   */
+  resolveIntervalMajors: async (campaignId, decisions = {}, options = {}) => {
+    let result = /** @type {any} */ (null);
+    let persistUpdates = [];
+    let campaignPersist = /** @type {any} */ (null);
+    const now = options.now || new Date().toISOString();
+    const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval } = await loadWorldPulse();
+
+    // Compute the resumed interval OUTSIDE any producer, from plain clones lifted in
+    // a read-only set(). The orchestrator's resume is PURE over the cursor's pre-tick
+    // inputs, so the live campaign/saves are only the commit target — the cursor
+    // drives determinism.
+    /** @type {any} */ let simCampaign = null;
+    /** @type {any} */ let simSaves = null;
+    /** @type {any} */ let cursor = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      cursor = worldState.pausedAdvance ? cloneJson(worldState.pausedAdvance) : null;
+      if (!cursor) { result = { ok: false, reason: 'no_paused_advance' }; return; }
+      simCampaign = cloneJson(c);
+      simSaves = cloneJson(campaignSettlements(state, campaignId));
+    });
+
+    if (!simCampaign || !cursor) return result;
+
+    const pre = cursor.preSnapshot || {};
+    result = domainSimulateCampaignWorldInterval({
+      campaign: simCampaign,
+      saves: simSaves,
+      commit: true,
+      now,
+      autoResolve: false,
+      resume: {
+        interval: cursor.interval,
+        ticksTotal: cursor.ticksTotal,
+        resumeTick: cursor.resumeTick,
+        pendingMajors: cursor.pendingMajors || [],
+        preWorldState: pre.worldState,
+        preRegionalGraph: pre.regionalGraph,
+        preWizardNews: pre.wizardNews,
+        preSaves: pre.saves,
+        decisions: decisions || {},
+      },
+    });
+
+    if (result && result.status) {
+      set(state => {
+        const c = findActiveCampaign(state.campaigns, campaignId);
+        if (!c) return;
+        persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+        // Park a FRESH cursor if the resumed segment paused again; else CLEAR the
+        // cursor back to byte-neutral (the interval finished).
+        if (result.status === 'paused') {
+          c.worldState = {
+            ...c.worldState,
+            pausedAdvance: {
+              interval: result.interval,
+              ticksTotal: result.ticksTotal,
+              ticksDone: result.ticksDone,
+              atTick: result.atTick,
+              resumeTick: result.resumeTick,
+              autoResolve: false,
+              startedAt: now,
+              pendingMajors: cloneJson(result.pendingMajors) || [],
+              preSnapshot: {
+                worldState: cloneJson(result.preWorldState),
+                regionalGraph: cloneJson(result.preRegionalGraph),
+                wizardNews: cloneJson(result.preWizardNews),
+                saves: cloneJson(result.preSaves) || [],
+              },
+            },
+          };
+        } else if (c.worldState && 'pausedAdvance' in c.worldState) {
+          const { pausedAdvance: _drop, ...rest } = c.worldState;
+          c.worldState = rest;
+        }
+        campaignPersist = cacheCampaignState(state);
+      });
+    }
+
+    if (result && result.status && campaignPersist) {
+      track(EVENTS.WORLD_PULSE_ADVANCED, {
+        ...extractPulseSummary(result, result.interval),
+        events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
+      });
+    }
+
+    const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
+      result.cloudPending = true;
+    }
+    return result;
+  },
+
+  /** Advance-scaling Stage 3: is there a paused advance awaiting major decisions
+   *  for this campaign? Drives the resume affordance + rehydrates after a reload. */
+  getPausedAdvance: (campaignId) => {
+    const c = findActiveCampaign(get().campaigns, campaignId);
+    return ensureWorldState(c?.worldState, c).pausedAdvance || null;
   },
 
   applyWorldPulseProposal: async (campaignId, proposalId) => {

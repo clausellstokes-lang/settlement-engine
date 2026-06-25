@@ -128,6 +128,35 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(ensureWorldState({}, CAMPAIGN)).not.toHaveProperty('pantheon');
   });
 
+  // INVARIANT 3b (Advance-scaling Stage 3): pausedAdvance is a CONDITIONAL ledger —
+  // it round-trips a paused cursor untouched (deep-cloned), and CLEARS to byte-neutral
+  // (absent) when null/empty, so a dormant campaign serializes identically to today.
+  test('pausedAdvance round-trips when present and is ABSENT (byte-neutral) when cleared', () => {
+    const cursor = {
+      interval: 'one_year', ticksTotal: 48, ticksDone: 5, atTick: 5, resumeTick: 4,
+      autoResolve: false, startedAt: '2026-06-01T00:00:00.000Z',
+      pendingMajors: [{ id: 'world_outcome.gov.x.5', candidateType: 'faction_government_challenge' }],
+      preSnapshot: { worldState: { tick: 4 }, saves: [{ id: 'a' }] },
+    };
+    const out = ensureWorldState({ tick: 5, pausedAdvance: cursor }, CAMPAIGN);
+    expect(out.pausedAdvance).toEqual(cursor);
+    // Deep-cloned: mutating the result never bleeds into the input cursor.
+    expect(out.pausedAdvance).not.toBe(cursor);
+    out.pausedAdvance.ticksDone = 99;
+    expect(cursor.ticksDone).toBe(5);
+
+    // DORMANCY / byte-neutral: a campaign with NO paused advance carries NO key.
+    expect(ensureWorldState({}, CAMPAIGN)).not.toHaveProperty('pausedAdvance');
+    // Clearing the pause (null) ⇒ the key is OMITTED, not carried as null.
+    expect(ensureWorldState({ tick: 5, pausedAdvance: null }, CAMPAIGN)).not.toHaveProperty('pausedAdvance');
+    // An empty-object pause likewise normalizes to absent (treated as no pause).
+    expect(ensureWorldState({ tick: 5, pausedAdvance: {} }, CAMPAIGN)).not.toHaveProperty('pausedAdvance');
+
+    // Idempotent across the round-trip: re-normalizing keeps the cursor stable.
+    const once = ensureWorldState({ tick: 5, pausedAdvance: cursor }, CAMPAIGN);
+    expect(ensureWorldState(once, CAMPAIGN)).toEqual(once);
+  });
+
   // INVARIANT 4: TOP-LEVEL non-aliasing for the KNOWN collections. cloneArray/
   // cloneObject are SHALLOW, so mutating the returned known collections (push/assign
   // at the top level) must NOT reach back into the input raw. Deep (nested-object)

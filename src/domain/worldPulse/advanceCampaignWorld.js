@@ -192,8 +192,24 @@ function usableTickInterval(interval) {
  * @param {string} [args.interval]
  * @param {boolean} [args.commit]
  * @param {string} [args.now]
+ * @param {boolean} [args.deferMajors] Advance-scaling Stage 3 PAUSE: when true,
+ *   this tick applies its MINORS only (auto-resolved as usual) and WITHHOLDS the
+ *   structural MAJORS from the settlement/world apply pass — they are surfaced on
+ *   `deferredMajors` for the orchestrator to either auto-resolve (autoresolve ON)
+ *   or park for a DM decision (autoresolve OFF). The pulseRecord still records the
+ *   FULL selected set (majors included as an annotation), so the committed
+ *   pulseHistory is byte-identical to the autoresolve-ON path; only the MUTATION of
+ *   the majors is deferred to `applyDeferredMajorDecisions`. Default false ⇒ the
+ *   legacy single-pass behavior, byte-identical to today.
+ * @param {ReadonlySet<string>|null} [args.dismissMajorIds] Advance-scaling Stage 3
+ *   RESUME: the ids of structural majors the DM DISMISSED. On the resume re-run of
+ *   a paused tick (deferMajors OFF, full single-pass apply), these are EXCLUDED from
+ *   the apply set — so a dismissed war/coup/government-change never lands, while
+ *   every other major auto-resolves to recommended. EMPTY/null ⇒ no exclusion, so a
+ *   resume that dismissed nothing re-runs BYTE-IDENTICALLY to the autoresolve-ON
+ *   tick (the equivalence invariant). Inert on the non-resume path.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow() } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(), deferMajors = false, dismissMajorIds = null } = {}) {
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
@@ -707,6 +723,24 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   }));
   const selectedForApply = [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...selected];
 
+  // Advance-scaling Stage 3 PAUSE BOUNDARY: partition the selected set into the
+  // structural MAJORS (the campaign-altering subset the DM should get a say on)
+  // and everything else (the MINORS, auto-resolved as usual). When deferMajors is
+  // ON, only the minors are routed through this tick's apply pass; the majors are
+  // returned on `deferredMajors` for the orchestrator to resolve (autoresolve ON)
+  // or park (autoresolve OFF). When OFF, the partition is inert — the full set
+  // applies in one pass, byte-identical to today.
+  const deferredMajors = deferMajors ? selectedForApply.filter(o => deriveDecisionTier(o) === 'major') : [];
+  // RESUME re-run filter: when the DM dismissed specific majors, drop them from the
+  // apply set on the re-run (deferMajors OFF). Empty/null ⇒ no exclusion ⇒
+  // byte-identical to the autoresolve-ON tick.
+  const hasDismissals = !deferMajors && dismissMajorIds && typeof dismissMajorIds.has === 'function' && dismissMajorIds.size > 0;
+  const outcomesToApply = deferMajors
+    ? selectedForApply.filter(o => deriveDecisionTier(o) !== 'major')
+    : (hasDismissals
+        ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && dismissMajorIds.has(String(o.id))))
+        : selectedForApply);
+
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
     snapshot: postTimeSnapshot,
@@ -714,7 +748,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     regionalGraph: postTimeSnapshot.regionalGraph,
     wizardNews: campaign?.wizardNews,
     settlementMap,
-    outcomes: selectedForApply,
+    outcomes: outcomesToApply,
     tick: worldState.tick,
     now,
     simulationRules,
@@ -923,6 +957,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // applied-on-pause. Stage 2 still auto-resolves everything — majors[] is a
     // read-only annotation so Stages 3+ can pause on it. Behavior is unchanged.
     majors: selectedForApply.filter(outcome => deriveDecisionTier(outcome) === 'major'),
+    // Advance-scaling Stage 3 PAUSE: the structural majors WITHHELD from this
+    // tick's apply pass (only populated when deferMajors is on). The orchestrator
+    // batches these onto `pendingMajors` and RE-DERIVES them on resume by re-running
+    // this tick from its pre-tick inputs (seed replay) — so resolving them to
+    // recommended is byte-identical to the single-pass autoresolve-ON apply. Empty
+    // on the legacy path.
+    deferredMajors,
     pulseRecord,
   };
 }
@@ -973,21 +1014,40 @@ function foldUpdatesOntoSaves(saves, updates) {
 }
 
 /**
- * Advance-scaling Stage 1 orchestrator (autoresolve-ON ONLY; no pausing, no
- * major-classification — Stages 2-3). Runs the EXISTING one-week kernel
- * `tickCount` times and composes the per-tick outputs into ONE result with the
- * SAME shape the kernel returns, so the caller (store + apply layer) is
- * unchanged. The kernel is pure and re-seeds per tick, so this is deterministic
- * with no seed plumbing — `simulateCampaignWorldInterval(year)` composes EXACTLY
- * the same end state as 48 sequential one_week kernel calls.
+ * Advance-scaling Stage 1/3 orchestrator. Runs the one-week kernel `tickCount`
+ * times and composes the per-tick outputs into ONE result with the SAME shape the
+ * kernel returns. The kernel is pure and re-seeds per tick, so this is
+ * deterministic with no seed plumbing — `simulateCampaignWorldInterval(year)`
+ * composes EXACTLY the same end state as 48 sequential one_week kernel calls.
+ *
+ * AUTORESOLVE (Stage 3):
+ *   • autoResolve ON (default) — every tick auto-resolves its majors (the Stage
+ *     1/2 path, byte-identical to today: one apply pass per tick, no pause).
+ *   • autoResolve OFF — each tick runs with deferMajors, applying its MINORS and
+ *     WITHHOLDING its structural majors. The FIRST tick that surfaces majors PAUSES
+ *     at that tick boundary: the minors are committed (for the DM to read), the
+ *     majors are batched onto `pendingMajors`, and the orchestrator returns
+ *     { status:'paused', … }. The cursor also carries the PRE-tick world (preWorldState
+ *     / preRegionalGraph / preWizardNews / preSaves) — the exact inputs that tick was
+ *     computed from — so RESUME can RE-DERIVE the full tick deterministically.
+ *
+ * RESUME — a present `resume` cursor means the caller is continuing a paused
+ * advance. The orchestrator RE-RUNS the paused tick from its PRE-tick inputs with
+ * the DM's verdicts folded in: every recommended major auto-resolves (deferMajors
+ * OFF ⇒ the single-pass apply), every dismissed major is excluded via
+ * dismissMajorIds. Because the kernel is pure and re-seeds per tick, re-running the
+ * paused tick from the SAME pre-tick state with NO dismissals is BYTE-IDENTICAL to
+ * the autoresolve-ON tick — so the equivalence invariant holds by construction
+ * (seed replay), and the minors-only commit the pause showed is superseded by the
+ * authoritative full tick. Ticks ticksDone..N-1 then continue from there. Resume is
+ * STATELESS: the cursor IS the state, so a reload that rehydrates it re-derives the
+ * identical remaining ticks.
  *
  * State carry-over between ticks: the next campaign threads the prior tick's
  * worldState / regionalGraph / wizardNews; the next saves fold the prior tick's
- * settlementUpdates (id-matched). settlementUpdates accumulate id-keyed
- * (last-write-wins) so the composed update set is each settlement's FINAL state;
- * wizardNews is taken from the LAST tick (the kernel already appends cumulatively
- * across the threaded feed); candidates / selected / rollExplanations /
- * autoApplied / proposals / resolvedStressors concatenate across ticks.
+ * settlementUpdates (id-matched, last-write-wins). wizardNews is the LAST tick's;
+ * candidates / selected / rollExplanations / autoApplied / proposals /
+ * resolvedStressors / majors concatenate across ticks.
  *
  * @param {Object} [args]
  * @param {any} [args.campaign]
@@ -995,15 +1055,31 @@ function foldUpdatesOntoSaves(saves, updates) {
  * @param {string} [args.interval]   DM-facing duration (one_week|one_month|one_season|one_year)
  * @param {boolean} [args.commit]
  * @param {string} [args.now]
+ * @param {boolean} [args.autoResolve] Stage 3: default true (auto-resolve majors,
+ *   run to the end). false ⇒ pause on the first tick that surfaces majors.
+ * @param {{
+ *   interval?: string,
+ *   ticksTotal?: number,
+ *   resumeTick?: number,
+ *   preWorldState?: any,
+ *   preRegionalGraph?: any,
+ *   preWizardNews?: any,
+ *   preSaves?: any[],
+ *   pendingMajors?: any[],
+ *   decisions?: Record<string, { decision?: string }>,
+ * }|null} [args.resume] Stage 3 RESUME cursor (from a prior pause). When set, the
+ *   orchestrator re-runs `resumeTick` from the pre-tick inputs (with decisions
+ *   folded in), then continues.
  */
-export function simulateCampaignWorldInterval({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow() } = {}) {
+export function simulateCampaignWorldInterval({
+  campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(),
+  autoResolve = true, resume = null,
+} = {}) {
   // The DM-CHOSEN interval (one_year/one_month/…). Interior ticks always run at
-  // one_week granularity, so the last tick reports interval:'one_week'; Stage 2
-  // folds the DM's chosen label back onto the composed metadata (the analytics
-  // event + campaignState.worldPulse.lastInterval) without touching the
-  // SUBSTANTIVE simulation output (worldState/settlementUpdates).
-  const chosenInterval = usableTickInterval(interval);
-  const tickCount = ticksForInterval(chosenInterval);
+  // one_week granularity; the composed metadata folds the DM's chosen label back.
+  const resuming = !!resume;
+  const chosenInterval = usableTickInterval(resuming ? resume.interval : interval);
+  const tickCount = resuming ? (Number(resume.ticksTotal) || ticksForInterval(chosenInterval)) : ticksForInterval(chosenInterval);
 
   let runningCampaign = campaign;
   let runningSaves = saves;
@@ -1018,21 +1094,45 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
   const autoApplied = [];
   const proposals = [];
   const resolvedStressors = [];
-  // Stage 2 SURFACE: the campaign-altering outcomes across every interior tick,
-  // concatenated like the other per-tick collections. Read-only — Stage 2 still
-  // auto-resolves the whole interval.
   const majors = [];
+  // RESUME re-run filter: the ids of the majors the DM DISMISSED on the paused
+  // tick. Empty ⇒ every major auto-resolves to recommended ⇒ the paused tick
+  // re-runs byte-identically to the autoresolve-ON tick.
+  let dismissMajorIds = null;
+  // The tick to re-run on resume (the paused tick) — its pre-inputs come from the
+  // cursor. A fresh advance starts at 0.
+  let startTick = 0;
 
-  for (let i = 0; i < tickCount; i++) {
-    // ALWAYS a one-week step — the interval is the loop bound, not the kernel's
-    // granularity. commit rides only the FINAL tick: intermediate ticks are
-    // interior steps of one Advance, so only the last pulse records committed:true.
+  if (resuming) {
+    // RE-DERIVE the paused tick from its PRE-tick inputs. This supersedes the
+    // minors-only commit shown during the pause with the authoritative FULL tick.
+    runningCampaign = {
+      ...runningCampaign,
+      worldState: resume.preWorldState,
+      regionalGraph: resume.preRegionalGraph,
+      wizardNews: resume.preWizardNews,
+    };
+    runningSaves = Array.isArray(resume.preSaves) ? resume.preSaves : runningSaves;
+    startTick = Math.max(0, Math.min(tickCount - 1, Number(resume.resumeTick) || 0));
+    const dismissed = (resume.pendingMajors || [])
+      .filter((/** @type {any} */ m) => (resume.decisions || {})[String(m?.id)]?.decision === 'dismissed')
+      .map((/** @type {any} */ m) => String(m.id));
+    dismissMajorIds = dismissed.length ? new Set(dismissed) : null;
+  }
+
+  for (let i = startTick; i < tickCount; i++) {
+    // The tick under the resume cursor re-runs as a FULL single-pass apply (with the
+    // DM's dismissals filtered out); every other tick under autoresolve OFF defers
+    // its majors so the loop can pause on the first that surfaces them.
+    const isResumeTick = resuming && i === startTick;
     const tickResult = simulateCampaignWorldPulse({
       campaign: runningCampaign,
       saves: runningSaves,
       interval: 'one_week',
       commit: commit && i === tickCount - 1,
       now,
+      deferMajors: !autoResolve && !isResumeTick,
+      dismissMajorIds: isResumeTick ? dismissMajorIds : null,
     });
 
     for (const update of tickResult.settlementUpdates || []) {
@@ -1046,9 +1146,38 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
     if (tickResult.resolvedStressors) resolvedStressors.push(...tickResult.resolvedStressors);
     if (tickResult.majors) majors.push(...tickResult.majors);
 
-    // Thread this tick's output into the next tick's input. The kernel carries
-    // wizardNews forward internally (it appends onto the threaded feed), so the
-    // next campaign hands it the running feed.
+    // PAUSE BOUNDARY (autoresolve OFF): this tick committed its minors and surfaced
+    // majors. STOP at the tick boundary — after the minor-commit, before tick i+1's
+    // compute. The cursor carries the PRE-tick inputs so resume can re-derive the
+    // full tick deterministically. ticksDone = i+1 (minors committed); remainingTicks
+    // = tickCount - i - 1. The resume tick itself never pauses (it re-runs full).
+    if (!autoResolve && !isResumeTick
+        && Array.isArray(tickResult.deferredMajors) && tickResult.deferredMajors.length) {
+      const ticksDone = i + 1;
+      return {
+        ...tickResult,
+        status: 'paused',
+        atTick: tickResult.tick,
+        interval: chosenInterval,
+        ticksTotal: tickCount,
+        ticksDone,
+        remainingTicks: tickCount - ticksDone,
+        resumeTick: i,
+        // The withheld majors, batched (NO cap), awaiting the DM's verdict.
+        pendingMajors: tickResult.deferredMajors,
+        // PRE-tick inputs — the exact state this tick was computed from. Resume
+        // re-derives the full tick from these (seed replay), so a reload that
+        // rehydrates them resumes to identical ticks with NO double-advance.
+        preWorldState: runningCampaign.worldState,
+        preRegionalGraph: runningCampaign.regionalGraph,
+        preWizardNews: runningCampaign.wizardNews,
+        preSaves: runningSaves,
+        settlementUpdates: [...updatesById.values()],
+        candidates, selected, rollExplanations, autoApplied, proposals, resolvedStressors, majors,
+      };
+    }
+
+    // Thread this tick's output into the next tick's input.
     runningCampaign = {
       ...runningCampaign,
       worldState: tickResult.worldState,
@@ -1059,16 +1188,11 @@ export function simulateCampaignWorldInterval({ campaign, saves = [], interval =
     last = tickResult;
   }
 
-  // tickCount is ≥1, so `last` is always the final tick's result. Compose one
-  // result with the kernel's shape: terminal world fields from the last tick,
-  // the id-accumulated settlementUpdates, the concatenated per-tick collections.
+  // Ran to the end with no pause (autoResolve ON, or OFF with no majors surfaced).
+  // tickCount ≥ 1, so `last` is the final tick (or the resume prologue's result).
   return {
     ...last,
-    // Stage 2 METADATA FIDELITY: report the DM-chosen interval, not the final
-    // interior tick's 'one_week'. This is the label the analytics
-    // world_pulse_advanced event + campaignState.worldPulse.lastInterval read.
-    // The SUBSTANTIVE output (worldState/settlementUpdates) is untouched — the
-    // Stage-1 equivalence invariant compares those, not this label.
+    status: 'complete',
     interval: chosenInterval,
     settlementUpdates: [...updatesById.values()],
     candidates,

@@ -134,7 +134,9 @@ describe('advanceMultiTick flag gate', () => {
     const store = makeStore();
     seedStore(store);
 
-    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
+    // Stage 3: autoResolve ON preserves the Stage-1 run-to-end behavior (the store
+    // default is OFF, which would pause on the first major tick).
+    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
 
     // one_month = 4 real one-week ticks → terminal tick 4.
     expect(result.tick).toBe(4);
@@ -152,7 +154,7 @@ describe('advanceMultiTick flag gate', () => {
     const store = makeStore();
     seedStore(store);
 
-    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
     expect(store.getState().campaigns[0].worldState.tick).toBe(4);
 
     const undone = await store.getState().undoLastPulse('camp-1');
