@@ -104,6 +104,14 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
   SETTLEMENT_DISPUTE:  Object.freeze(['neighbourNetwork']),
   OPENED_TRADE_ROUTE:  Object.freeze(['neighbourNetwork']),
+  // APPLY_STRESSOR ALSO rewrites neighbourNetwork: a war/infiltration stressor
+  // sours the named instigator's relationshipType (mutateWorld.js applyStressor).
+  // Same un-restorable class as the relationship events above — the
+  // _relationshipEventId stamp is read nowhere — so the soured edge survived its
+  // own undo. Snapshotting neighbourNetwork makes undo a true inverse. (Its
+  // separate config.stressorEdits snapshot lives in SNAPSHOT_CONFIG_KEYS;
+  // captureEventUndoSnapshot reads both maps, so the two coexist.)
+  APPLY_STRESSOR:      Object.freeze(['neighbourNetwork']),
   // EXPOSE_CORRUPTION irreversibly swaps in a successor NPC and impairs the tied
   // institution/faction with SYNTHETIC causeEventIds the impairment-strip can't
   // reach — snapshot the affected subtrees so undo restores them exactly.

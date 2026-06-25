@@ -210,13 +210,22 @@ describe('generate-narrative — single spend + safety ordering contracts', () =
 });
 
 describe('generate-chronicle — secondary seam shares the safety layer', () => {
-  it('checks the shared spend cap (fail-closed) before spending', () => {
-    const capIdx = chronicleSrc.indexOf("rpc('check_ai_spend_cap')");
+  it('RESERVES the shared spend cap (race-safe, fail-closed) before spending', () => {
+    // Migration 086: chronicle, like generate-narrative, now holds the global USD
+    // cap via the race-safe reserve_ai_spend reservation (advisory-locked admission)
+    // instead of the read-only check_ai_spend_cap two concurrent runs could both
+    // pass. Reserved BEFORE the spend so a capped-out window never debits, and
+    // released on every post-reserve exit (spend-reject, model-fail, success).
+    const capIdx = chronicleSrc.indexOf("rpc('reserve_ai_spend'");
     const spendIdx = chronicleSrc.indexOf("rpc('spend_credits'");
+    const releaseIdx = chronicleSrc.indexOf("rpc('release_ai_spend_reservation'");
     expect(capIdx).toBeGreaterThan(-1);
     expect(spendIdx).toBeGreaterThan(-1);
     expect(capIdx).toBeLessThan(spendIdx);
+    expect(releaseIdx).toBeGreaterThan(-1);
     expect(chronicleSrc).toMatch(/allowed[^)]*!==\s*true/);
+    // The old read-only cap RPC (concurrently-passable) must be gone.
+    expect(chronicleSrc).not.toContain("rpc('check_ai_spend_cap')");
   });
 
   it('checks the shared per-user rate limit', () => {

@@ -188,6 +188,31 @@ Deno.test('a thesis FAILURE refunds via the captured spend_id and does NOT doubl
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 });
 
+Deno.test('a PRE-STREAM throw (insufficient credits) RELEASES the 086 reservation — no global-cap headroom leak', async () => {
+  // The reservation is taken (reserve_ai_spend) BEFORE spend_credits. spend fails
+  // (insufficient_funds → ok:false) and the handler throws BEFORE the stream opens,
+  // so the in-stream `finally` release never runs. Without the outer-catch release
+  // the reservation leaks its global-cap headroom for the full TTL — a reachable
+  // DoS (a zero-credit account can flood reserve→insufficient and saturate the cap).
+  const user = makeUserClient(
+    { id: 'broke1', email: 'b@x.com' },
+    { ok: false, reason: 'insufficient_funds', balance: 0 },
+  );
+  const admin = makeAdminClient(true);   // active → reaches reserve (res_stub) → spend → fail
+  const res = await handleGenerateNarrative(
+    req({ type: 'narrative', settlement: SETTLEMENT }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);                                  // pre-stream throw → outer catch
+  assertEquals((await res.json()).error.startsWith('Insufficient credits'), true);
+
+  // The reservation was taken exactly once and RELEASED on the throw path.
+  assertEquals(admin.rpc.filter((c) => c.fn === 'reserve_ai_spend').length, 1);
+  const releases = admin.rpc.filter((c) => c.fn === 'release_ai_spend_reservation');
+  assertEquals(releases.length, 1);
+  assertEquals((releases[0].args as { p_id: string }).p_id, 'res_stub');
+});
+
 Deno.test('an ELEVATED account that fails does NOT refund (it was never charged)', async () => {
   const user = makeUserClient(
     { id: 'dev1', email: 'dev@x.com' },

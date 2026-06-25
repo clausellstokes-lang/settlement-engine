@@ -776,6 +776,16 @@ export async function handleGenerateNarrative(
     'X-Content-Type-Options': 'nosniff',
   };
 
+  // Hoisted above the try so the outer catch can RELEASE a reservation taken
+  // below (086) on a pre-stream throw. The in-stream `finally` release only runs
+  // once the streaming Response is returned; a throw between reserve_ai_spend and
+  // that return (rate-limit reject, insufficient credits, pre-stream setup error)
+  // would otherwise leak the reservation's global-cap headroom for its full TTL —
+  // a reachable DoS (a zero-credit account can flood reserve→insufficient_funds
+  // and saturate the shared cap). Reaching the catch means the stream never
+  // started, so releasing there cannot double-release.
+  let reservationId: string | null = null;
+
   try {
     // Authenticate
     const authHeader = req.headers.get('Authorization');
@@ -888,9 +898,10 @@ export async function handleGenerateNarrative(
       // credits were charged (this is before the spend), so nothing to refund.
       throw new Error('AI generation is temporarily unavailable (daily capacity reached). No credits were charged — please try again later.');
     }
-    // The reservation id to settle in the `finally` once the real COGS lands.
-    // Null when the operator kill-switch is off (no reservation held).
-    const reservationId =
+    // The reservation id to settle in the `finally` once the real COGS lands, or
+    // in the outer catch on a pre-stream throw. Null when the operator kill-switch
+    // is off (no reservation held). Assigns the hoisted handler-scope binding.
+    reservationId =
       (capResult as { reservation_id?: string | null } | null)?.reservation_id ?? null;
 
     // ── SAFETY 2: per-user/day rate limit — FAIL OPEN ──
@@ -1427,6 +1438,18 @@ export async function handleGenerateNarrative(
     const message = err instanceof Error ? err.message : 'Unknown error';
     const stack = err instanceof Error ? err.stack : undefined;
     console.error('[generate-narrative] error:', message, stack);
+    // Release a reservation taken before this throw (086). Reaching this catch
+    // means the streaming Response was never returned, so the in-stream `finally`
+    // release will never fire and the headroom would leak for the full TTL.
+    // Idempotent + null-safe + best-effort: a release failure must not change the
+    // user-facing error. No double-release (the stream never started).
+    if (reservationId) {
+      try {
+        await makeAdminClient().rpc('release_ai_spend_reservation', { p_id: reservationId });
+      } catch (relErr) {
+        logError('generate-narrative', null, `reservation release on pre-stream error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
+      }
+    }
     return new Response(
       JSON.stringify({ error: message }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },

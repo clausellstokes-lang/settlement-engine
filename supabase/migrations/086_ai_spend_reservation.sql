@@ -117,9 +117,22 @@ begin
     );
   end if;
 
-  -- ATOMIC admission: the WHERE compares (committed + outstanding + estimate)
-  -- against BOTH caps in the same statement that inserts the reservation. If it
-  -- would cross either cap, the SELECT yields no row and nothing is inserted.
+  -- SERIALIZE admission against the GLOBAL cap. The INSERT...SELECT...WHERE below
+  -- is NOT atomic on its own under READ COMMITTED: two concurrent calls each read a
+  -- snapshot that excludes the other's uncommitted reservation row, so both can see
+  -- the same headroom and both insert, overshooting the cap (the exact race this
+  -- migration exists to close). A transaction-scoped advisory lock on the cap key
+  -- forces concurrent reservers to serialize — the second blocks until the first
+  -- COMMITs and then sees its reservation in the sums below. Released automatically
+  -- at transaction end. Taken AFTER the disabled-cap early-return above, so an
+  -- operator who turned the cap OFF never serializes on it.
+  perform pg_advisory_xact_lock(hashtext('ai_spend_cap')::bigint);
+
+  -- Admission (serialized by the advisory lock above): the WHERE compares
+  -- (committed + outstanding + estimate) against BOTH caps in the same statement
+  -- that inserts the reservation. If it would cross either cap, the SELECT yields
+  -- no row and nothing is inserted. The lock guarantees the outstanding-reservation
+  -- sum a concurrent caller reads already includes any just-committed reservation.
   insert into public.ai_spend_reservations (user_id, estimate_usd)
   select p_user, v_estimate
   where (

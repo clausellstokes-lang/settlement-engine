@@ -111,6 +111,20 @@ const REINFORCEMENT_COST_FLOOR = 0.0; // the module already floors; this is a do
 const AGE_DRAIN_PER_TICK = 0.02;
 const AGE_DRAIN_CAP = 0.35;
 
+// ── HARD SIEGE-DURATION CEILING (the absolute homeostasis backstop). ──────────────
+// The exhaustion/withdrawal arc normally ends a war: a stalled siege drops out of the
+// plausible band (capacity collapses under the scar) and the besieger withdraws. But a
+// `plausible` siege whose roll never lands a fall and whose attacker exhaustion has
+// already SATURATED at 1.0 (so the scar can ratchet no further) has no remaining force
+// pushing it out of the plausible band — it can grind INDEFINITELY. This ceiling is the
+// deterministic floor under that: once a single siege has run SIEGE_MAX_AGE ticks
+// (deploymentAge, incremented once per tick), it auto-resolves. The direction is a PURE
+// function of the contested capacities (NO rng, seed/identity-stable): if the besieging
+// coalition still holds a current-capacity edge the town finally FALLS; otherwise the
+// exhausted besiegers LIFT the siege and withdraw. Either way the siege cannot outlive
+// the ceiling, so a saturated stalemate terminates instead of running forever.
+export const SIEGE_MAX_AGE = 60;
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
@@ -513,10 +527,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any }} args
- * @returns {{ falls: boolean, harass: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number }} args
+ * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
  */
-function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick }) {
+function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -561,6 +575,7 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
     return {
       falls: false,
       harass: verdictAllowsHarassment(verdict),
+      forcedLift: false,
       verdict,
       ratio,
       pFall: 0,
@@ -569,6 +584,33 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
       defenderCurrent,
       band,
       reasons,
+    };
+  }
+
+  // ── HARD SIEGE-DURATION CEILING (deterministic, NO rng). A siege-permitting matchup
+  // that has ground on for SIEGE_MAX_AGE ticks auto-resolves rather than grinding
+  // forever — the backstop for a `plausible` siege whose roll never falls and whose
+  // attacker exhaustion has saturated (so nothing else pushes it out of the band). The
+  // direction is a pure function of the contested capacities: a coalition still holding
+  // a current-capacity edge finally STORMS the walls; an exhausted one that no longer
+  // out-classes the defender LIFTS the siege (forcedLift → the caller withdraws it). ──
+  if (siegeAge >= SIEGE_MAX_AGE) {
+    const falls = coalitionCurrent > defenderCurrent;
+    return {
+      falls,
+      harass: false,
+      forcedLift: !falls,
+      verdict,
+      ratio,
+      pFall: falls ? 1 : 0,
+      roll: 0,
+      coalitionCurrent,
+      defenderCurrent,
+      band: falls ? 'costly_success' : 'withdrawal',
+      reasons: [
+        ...reasons,
+        `Siege ran the hard ${SIEGE_MAX_AGE}-tick ceiling; auto-resolved ${falls ? 'as a storm' : 'as a withdrawal'} (capacity ${coalitionCurrent.toFixed(1)} vs ${defenderCurrent.toFixed(1)}).`,
+      ],
     };
   }
 
@@ -592,6 +634,7 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
   return {
     falls,
     harass: false,
+    forcedLift: false,
     verdict,
     ratio,
     pFall,
@@ -758,7 +801,21 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     if (!besiegers.length) continue;
 
     const defenderItem = snapshot?.byId?.get?.(targetId);
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick });
+    // The siege's age is the LONGEST-committed besieger's deploymentAge (the
+    // committed armies were aged in step 0). This feeds the hard siege-duration
+    // ceiling so a saturated stalemate auto-resolves deterministically.
+    let siegeAge = 0;
+    for (const id of besiegers) {
+      const rec = deployments[id];
+      // String-coerce like the besieger-collection compare at L798: targetId is a
+      // string but a deployment record's targetId is any-typed, so a strict ===
+      // would skip a numeric-id record and under-read the siege age (defeating the
+      // ceiling). Only deployment-based besiegers of THIS target carry a deploymentAge.
+      if (rec?.targetId != null && String(rec.targetId) === targetId) {
+        siegeAge = Math.max(siegeAge, Number(rec.deploymentAge) || 0);
+      }
+    }
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
@@ -793,10 +850,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // defender) — does NOT freeze forever. The besieger gives up: every committed
       // attacker on this target withdraws its army home (a resolved deployment →
       // deploymentReturn). This is what makes a stalled war END instead of locking the
-      // realm into a perpetual siege. Only fires when the verdict forbids a siege roll
-      // (auto_fail / harassment / require_coalition); a `plausible` siege that merely
+      // realm into a perpetual siege. Fires when the verdict forbids a siege roll
+      // (auto_fail / harassment / require_coalition) OR when the hard siege-duration
+      // ceiling forced a lift (verdict.forcedLift — a saturated stalemate that ran the
+      // ceiling without out-classing the defender); a `plausible` siege that merely
       // HELD this tick keeps grinding (drain accrues, step 5). ──────────────────────
-      if (!verdictPermitsSiege(/** @type {any} */ (verdict.verdict))) {
+      if (verdict.forcedLift || !verdictPermitsSiege(/** @type {any} */ (verdict.verdict))) {
         const withdrawn = besiegers.filter(id => deployments[id]?.targetId === targetId);
         if (withdrawn.length) {
           for (const attackerId of withdrawn) {

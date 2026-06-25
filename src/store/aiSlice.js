@@ -456,7 +456,8 @@ export const createAiSlice = (set, get) => ({
               }
               const dlLabel = DAILY_LIFE_FIELD_LABELS[beat] || `Writing ${beat}`;
               set(state => {
-                if (!isRegenerate) {
+                if (!isRegenerate
+                  && (get().activeSaveId === saveId || get().activeSaveId === requestedActiveSaveId)) {
                   state.aiDailyLife = { ...(state.aiDailyLife || {}), [beat]: value };
                 }
                 state.aiProgress = `${dlLabel}\u2026`;
@@ -481,7 +482,11 @@ export const createAiSlice = (set, get) => ({
             set(state => {
               // During regenerate, don't overwrite the old aiSettlement — the
               // final result will swap in atomically on success.
-              if (!isRegenerate) {
+              // Guard the global streamed write on the active save: a mid-stream
+              // settlement switch must not bleed this run's partial prose into the
+              // now-open settlement (the final commit is already activeSaveId-guarded).
+              const onScreen = get().activeSaveId === saveId || get().activeSaveId === requestedActiveSaveId;
+              if (!isRegenerate && onScreen) {
                 if (!state.aiSettlement) state.aiSettlement = {};
                 setNestedPath(state.aiSettlement, fieldName, value);
               }
@@ -685,7 +690,12 @@ export const createAiSlice = (set, get) => ({
           lastFieldMsg = true;
           const label = DAILY_LIFE_FIELD_LABELS[fieldName] || `Writing ${fieldName}`;
           set(state => {
-            if (!isRegenerate) {
+            // Guard the GLOBAL streamed write on the active save: if the user
+            // switched settlements mid-stream, this run's partial prose must not
+            // bleed into the now-open settlement's view. The progress line is
+            // cosmetic and clears on completion, so it is left unguarded.
+            const onScreen = get().activeSaveId === saveId || get().activeSaveId === requestedActiveSaveId;
+            if (!isRegenerate && onScreen) {
               state.aiDailyLife = { ...(state.aiDailyLife || {}), [fieldName]: value };
             }
             state.aiProgress = `${label}\u2026 (${fieldsDone}/${totalFields})`;
@@ -724,12 +734,20 @@ export const createAiSlice = (set, get) => ({
       // if either narrative OR daily life exists.
       try {
         const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+        // If the user switched settlements mid-generation (stillActive false), the
+        // GLOBAL aiSettlement / aiSourceFingerprint now hold the OTHER save's values
+        // — persisting get().aiSettlement here would overwrite THIS save's narrative
+        // with a foreign one (or null it). Fall back to this save's already-persisted
+        // values, mirroring requestNarrative/requestProgression. aiDailyLife=result is
+        // this run's own output, so it is always safe to persist.
         const aiData = buildAiDataBlob(existingEntry?.aiData, {
-          aiSettlement:         get().aiSettlement,
+          aiSettlement:         stillActive ? get().aiSettlement : (existingEntry?.aiData?.aiSettlement ?? null),
           aiDailyLife:          result,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: existingEntry?.aiData?.narrativeGeneratedAt || new Date().toISOString(),
-          narrativeSourceFingerprint: get().aiSourceFingerprint || settlementFingerprint(settlement),
+          narrativeSourceFingerprint: stillActive
+            ? (get().aiSourceFingerprint || settlementFingerprint(settlement))
+            : (existingEntry?.aiData?.narrativeSourceFingerprint || settlementFingerprint(settlement)),
         });
         await savesService.update(saveId, { aiData });
         get().updateSavedSettlement(saveId, { aiData });

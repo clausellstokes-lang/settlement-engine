@@ -249,11 +249,14 @@ export function verdictPermitsSiege(verdict) {
  * Whether a verdict means the attacker can still HARASS (a low-severity pressure,
  * not a siege). The harassment verdict, and a solo require_coalition (the attacker
  * shows up but can't commit to a full siege), both surface as harassment pressure.
+ * `require_coalition` is only ever emitted for a SOLO attacker (the classifier gates
+ * it on coalitionSize <= 1), so it is always the solo "shows up but can't storm"
+ * case the doc describes.
  * @param {FeasibilityVerdict} verdict
  * @returns {boolean}
  */
 export function verdictAllowsHarassment(verdict) {
-  return verdict === 'harassment';
+  return verdict === 'harassment' || verdict === 'require_coalition';
 }
 
 export const FEASIBILITY_TUNING = Object.freeze({

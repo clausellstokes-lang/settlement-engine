@@ -29,6 +29,16 @@ vi.mock('../../src/lib/saves.js', () => ({
   saves: { update: vi.fn(() => Promise.resolve()), isConfigured: true },
 }));
 
+// FAITHFUL 069 guard model: track the cloud's STORED tick as mutable state (not a
+// constant) so a LEGITIMATE forward advance (cloud behind, expectedTick ahead) APPLIES
+// and bumps the stored tick, while a stale re-advance (expectedTick not ahead of stored)
+// is rejected. A null expectedTick is last-write-wins (the undo path), applying
+// unconditionally and snapping the stored tick to the campaign's reverted value.
+// vi.hoisted so the (hoisted) vi.mock factory below can close over it; a reset hook
+// lets beforeEach / a test start from a known cloud tick.
+const cloudGuard = vi.hoisted(() => ({ tick: 0 }));
+function __resetCloudStoredTick(tick = 0) { cloudGuard.tick = tick; }
+
 vi.mock('../../src/lib/campaigns.js', () => {
   const cached = new Map();
   const clone = value => JSON.parse(JSON.stringify(value));
@@ -41,13 +51,15 @@ vi.mock('../../src/lib/campaigns.js', () => {
       upsert: vi.fn(campaign => Promise.resolve(campaign?.id)),
       // The atomic advance write. The store mirrors 069's stale-tick guard so we
       // can assert the FORWARD guard stays intact while UNDO bypasses it.
-      persistWorldPulseAdvance: vi.fn(({ expectedTick }) => {
-        const STORED_AFTER_ADVANCE = 1; // the cloud tick after the forward advance
+      persistWorldPulseAdvance: vi.fn(({ campaign, expectedTick }) => {
         // 069's guard: a non-null expectedTick applies only if stored < expectedTick.
-        // A null expectedTick is last-write-wins (the undo path).
-        if (expectedTick != null && STORED_AFTER_ADVANCE >= expectedTick) {
-          return Promise.resolve({ applied: false, reason: 'stale_tick', currentTick: STORED_AFTER_ADVANCE, expectedTick });
+        if (expectedTick != null && cloudGuard.tick >= expectedTick) {
+          return Promise.resolve({ applied: false, reason: 'stale_tick', currentTick: cloudGuard.tick, expectedTick });
         }
+        // Applied — the cloud snaps to the write's tick (forward: expectedTick; undo
+        // last-write-wins: the reverted campaign's tick).
+        const writtenTick = expectedTick != null ? expectedTick : Number(campaign?.worldState?.tick);
+        if (Number.isFinite(writtenTick)) cloudGuard.tick = writtenTick;
         return Promise.resolve({ applied: true, settlementsWritten: 1, settlementsRequested: 1 });
       }),
       delete: vi.fn(() => Promise.resolve()),
@@ -148,6 +160,7 @@ describe('undoLastPulse reaches the cloud in CLOUD mode (round-4 regression)', (
     installLocalStorage();
     localStorage.removeItem('sf_campaigns');
     campaignService.persistWorldPulseAdvance.mockClear();
+    __resetCloudStoredTick(0); // fresh cloud — no advance has landed yet
     primeCampaignSync([]);
   });
 
@@ -187,6 +200,8 @@ describe('undoLastPulse reaches the cloud in CLOUD mode (round-4 regression)', (
   });
 
   test('(b) the FORWARD guard is still intact: a stale double-advance (expected tick not ahead of stored) is rejected as stale_tick', async () => {
+    // Precondition: the cloud already holds tick 1 (a prior advance landed).
+    __resetCloudStoredTick(1);
     // A forward advance whose expected tick is NOT ahead of the already-stored cloud
     // tick (1) must be rejected by the guard — proving the fix did not loosen the
     // forward path into unconditional last-write-wins.

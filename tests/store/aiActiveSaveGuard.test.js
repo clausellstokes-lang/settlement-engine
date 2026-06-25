@@ -151,6 +151,30 @@ describe('aiSlice — active-save guard on AI generation success', () => {
     expect(st.creditBalance).toBe(90);
   });
 
+  test('requestDailyLife does NOT corrupt the original save persisted narrative on a mid-generation switch', async () => {
+    const store = makeStore();
+    // Save A already has a narrative persisted in its ai_data.
+    store.setState((s) => {
+      const a = s.savedSettlements.find((x) => x.id === 'save.a');
+      a.aiData = { aiSettlement: { thesis: 'A-prior-thesis' }, narrativeMode: 'narrated' };
+    });
+
+    const pending = store.getState().requestDailyLife('save.a');
+    switchToSaveB(store);   // global aiSettlement → null (B's empty view)
+    gateResolve();
+    await pending;
+
+    // The daily-life run persists to A. Its aiSettlement must be A's OWN prior
+    // narrative (from A's ai_data), NOT the now-foreign global (null) — i.e. no
+    // cross-save corruption / loss of A's paid prose. (Fails before the A3 fix:
+    // it persisted get().aiSettlement === null.)
+    const persistedToA = savesUpdate.mock.calls.find((c) => c[0] === 'save.a');
+    expect(persistedToA).toBeTruthy();
+    expect(persistedToA[1].aiData.aiSettlement).toMatchObject({ thesis: 'A-prior-thesis' });
+    // The new daily-life prose still lands on A.
+    expect(persistedToA[1].aiData.aiDailyLife).toMatchObject({ dawn: 'A-dawn' });
+  });
+
   test('requestProgression does not overwrite the now-open settlement view', async () => {
     const store = makeStore();
     // Progression requires an existing narrative on the active save.

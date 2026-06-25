@@ -109,6 +109,16 @@ describe.runIf(haveMigration)('ai spend reservation — real SQL (pglite)', () =
   });
 
   describe('reserve_ai_spend — race-safe admission', () => {
+    it('serializes admission with an advisory lock on the cap key (guards against silent removal)', () => {
+      // The INSERT...SELECT...WHERE is NOT atomic under READ COMMITTED on its own:
+      // concurrent reservers each read a snapshot excluding the other's uncommitted
+      // row and can both pass. A transaction-scoped advisory lock on the cap key is
+      // what serializes them. True concurrency can't be exercised in single-connection
+      // pglite, so this asserts the lock is PRESENT so a refactor can't silently drop it.
+      const body = extractFn(readFileSync(MIG_086, 'utf-8'), 'reserve_ai_spend');
+      expect(body).toMatch(/pg_advisory_xact_lock\s*\(\s*hashtext\('ai_spend_cap'\)/);
+    });
+
     it('SENTINEL: a single reservation under the cap is allowed (not vacuously false)', async () => {
       const r = await reserve(UID, 10);
       expect(r.allowed).toBe(true);

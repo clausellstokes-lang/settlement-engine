@@ -442,6 +442,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               resumeTick: result.resumeTick,
               autoResolve: false,
               startedAt: now,
+              // Determinism: thread the ORIGINAL advance `now` onto the cursor so a
+              // RESUME (which re-derives the paused tick through the kernel, stamping
+              // now into regional-graph/wizard-news records) replays with the SAME
+              // wall-clock the pause was computed from — not a fresh one. resolveInterval-
+              // Majors reuses this instead of regenerating new Date(). Survives a reload.
+              now,
               // Stage 5 ring policy: thread the original pre-interval history length
               // through every re-pause so the whole interval collapses to one record.
               preIntervalHistoryLen: result.preIntervalHistoryLen,
@@ -566,7 +572,6 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
-    const now = options.now || new Date().toISOString();
     const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval } = await loadWorldPulse();
 
     // Compute the resumed interval OUTSIDE any producer, from plain clones lifted in
@@ -588,6 +593,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
 
     if (!simCampaign || !cursor) return result;
 
+    // Determinism: replay with the advance's ORIGINAL `now` (parked on the cursor),
+    // NOT a fresh wall-clock — the resume re-derives the paused tick through the
+    // kernel, which stamps `now` into regional-graph/wizard-news records, so a fresh
+    // now would make a seed-replay-identical resume diverge. An explicit options.now
+    // still wins (tests/callers that pin a clock); the cursor's now is the default,
+    // and only a legacy cursor lacking it falls back to wall-clock.
+    const now = options.now || cursor.now || new Date().toISOString();
     const pre = cursor.preSnapshot || {};
     result = domainSimulateCampaignWorldInterval({
       campaign: simCampaign,
@@ -629,6 +641,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               resumeTick: result.resumeTick,
               autoResolve: false,
               startedAt: now,
+              // Determinism: a re-pause within a resume re-threads the SAME original
+              // `now` so every segment of the interval replays from one wall-clock.
+              now,
               // Stage 5 ring policy: thread the original pre-interval history length
               // through every re-pause so the whole interval collapses to one record.
               preIntervalHistoryLen: result.preIntervalHistoryLen,

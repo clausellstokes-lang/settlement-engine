@@ -79,8 +79,23 @@ registerStep('resolveConfig', {
   const goodsToggles       = config._goodsToggles       || {};
   const servicesToggles    = config._servicesToggles     || {};
 
+  // Validate the custom-path population up front. config.population arrives
+  // straight from user input and used to be taken verbatim — undefined, NaN,
+  // 0, a negative number, or a non-numeric string would flow into the tier
+  // pick AND the resolved population, poisoning every population-scaled
+  // calculation downstream. Coerce to a finite, positive integer; when it's
+  // missing or junk, fall back to the village default (mid of its range, the
+  // same tier the unknown-settType guard lands on).
+  const VILLAGE_DEFAULT_POP = Math.round(
+    (POPULATION_RANGES.village.min + POPULATION_RANGES.village.max) / 2,
+  );
+  const rawCustomPop = Number(config.population);
+  const customPopulation = Number.isFinite(rawCustomPop) && rawCustomPop >= 1
+    ? Math.floor(rawCustomPop)
+    : VILLAGE_DEFAULT_POP;
+
   // Resolve tier
-  const rawTier = config.settType === 'custom'  ? popToTier(config.population)
+  const rawTier = config.settType === 'custom'  ? popToTier(customPopulation)
                 : config.settType === 'random'  ? rng.pick(TIER_ORDER)
                 : (config.settType || 'village');
   // Guard the direct-settType path: an unknown settType (anything outside the
@@ -91,7 +106,7 @@ registerStep('resolveConfig', {
   // Population
   const popRange = POPULATION_RANGES[tier];
   const population = config.settType === 'custom'
-    ? config.population
+    ? customPopulation
     : rng.randInt(popRange.min, popRange.max);
 
   // Derive noMagic from the already-resolved effective priority so the two can't

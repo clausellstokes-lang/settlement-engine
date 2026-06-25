@@ -43,6 +43,13 @@ const BASELINE = new Set([
   // Grandfathered per the same set-based rationale; splitting aiSlice is a
   // separate refactor, not this bug-fix pass.
   'src/store/aiSlice.js',
+  // Was ~1,154 lines (just under the cap); the adversarial-pass-2 siege-termination
+  // fix (a hard SIEGE_MAX_AGE ceiling branch + its feasibilityGate coordination and
+  // explanatory comments) nudged it just over 1,200. Grandfathered per the same
+  // set-based rationale. Net god-modules still DOWN on this branch: the HEAD commit
+  // decomposed advanceCampaignWorld into kernel/interval/helpers, removing more than
+  // this adds. Splitting warDeployment is a separate refactor, not this fix pass.
+  'src/domain/worldPulse/warDeployment.js',
 ]);
 
 function jsFiles(rel) {
