@@ -19,7 +19,7 @@ const PILLARS = [
   { t: 'Simulate', d: 'Drop your canon towns into the Realm and advance time. Wars ignite and resolve, faiths rise, and the chronicle writes itself.' },
 ];
 
-export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }) {
+export default function HomeLanding({ isMobile, signedIn, isPremium = false, onNavigate, onSignIn }) {
   // Full-bleed hero: cancel the <main> padding so the band spans edge to edge.
   const padH = isMobile ? SP.md : SP.xxl;
   const padTop = isMobile ? SP.md : SP.lg;
@@ -57,14 +57,19 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
             <span style={{ display: 'block' }}>Then it simulates how they change. Not a dice roll. A world that holds together.</span>
           </p>
           <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>Forge your first settlement</Button>
+            <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>{signedIn ? 'Forge your next settlement' : 'Forge your first settlement'}</Button>
             {/* Secondary CTA on the dark scrim: lift the border opacity on mobile
                 so the outline reads against the photographic hero; desktop keeps
                 its lighter 0.4 border byte-identical. Members (signedIn) get a
                 premium prompt to Pricing instead of Sign in. */}
-            <Button variant="secondary" size="lg" onClick={() => (signedIn ? onNavigate('pricing') : onSignIn())} style={{ background: 'rgba(251,245,230,0.1)', color: PARCH_100, borderColor: isMobile ? 'rgba(232,217,176,0.7)' : 'rgba(232,217,176,0.4)' }}>
-              {signedIn ? 'Explore Premium' : 'Sign in'}
-            </Button>
+            {/* Secondary CTA: hidden for premium/elevated accounts (no upsell to
+                someone who already has it). Anon gets Sign in; a signed-in free
+                user gets the Explore Premium prompt to Pricing. */}
+            {!isPremium && (
+              <Button variant="secondary" size="lg" onClick={() => (signedIn ? onNavigate('pricing') : onSignIn())} style={{ background: 'rgba(251,245,230,0.1)', color: PARCH_100, borderColor: isMobile ? 'rgba(232,217,176,0.7)' : 'rgba(232,217,176,0.4)' }}>
+                {signedIn ? 'Explore Premium' : 'Sign in'}
+              </Button>
+            )}
           </div>
           {/* Sub-CTA line, same font + size for both states: anon gets the free-to-
               try reassurance; members get a learn-more link into the About page's

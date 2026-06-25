@@ -600,7 +600,7 @@ export default function App() {
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {/* Home is the marketing landing. First-visit gating routes new
                 visitors here; returning visitors land on /create. */}
-            {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
+            {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} isPremium={authTier === 'premium' || isElevated} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the
                 Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
