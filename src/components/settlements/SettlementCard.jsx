@@ -142,7 +142,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             style={{ width:72, height:48, objectFit:'cover', borderRadius:6, flexShrink:0, border:`1px solid ${BORDER}`, opacity: active ? 1 : 0.6 }}
           />
         )}
-        <div style={{ flex:1, minWidth:0 }}>
+        {/* minWidth floor (not 0): the 72px tier thumbnail + the flexShrink:0
+            action cluster are the only other items on this row, so without a
+            floor this column collapses toward 0 and the name ellipsis-clips to
+            a single character. 140px comfortably holds a typical name and still
+            truncates gracefully when one is genuinely too long. */}
+        <div style={{ flex:1, minWidth:140 }}>
           {/* Identity tier — name + tier suffix + health, tight. The name is a
               real heading so screen-reader users can navigate card-by-card;
               FS.xl + weight 700 + INK makes it the ONE dominant focal point per
