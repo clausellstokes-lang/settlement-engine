@@ -921,6 +921,142 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   };
 }
 
+// Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
+// the DM picks is a DURATION, not a single coarse step — `simulateCampaignWorldPulse`
+// is already a correct, pure one-week kernel (bumps tick +1, re-seeds its PRNG
+// per tick), so N weeks is N kernel calls, ALWAYS at one_week granularity. This
+// single-source table is the ONLY place interval → week-count lives.
+export const weeksPerInterval = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 12,
+  one_year: 48,
+});
+
+/**
+ * Map a DM-facing interval onto its real one-week tick count (≥1).
+ * @param {string} interval
+ * @returns {number}
+ */
+export function ticksForInterval(interval) {
+  return /** @type {Record<string, number>} */ (weeksPerInterval)[interval] ?? weeksPerInterval.one_month;
+}
+
+/**
+ * Fold one tick's settlementUpdates onto the saves that feed the NEXT tick:
+ * id-matched replace (last-write-wins), pure (returns a new array). Mirrors the
+ * store-side foldSettlementUpdatesOntoSaves so the orchestrator can thread tick
+ * outputs into tick inputs without importing the store layer.
+ * @param {any[]} saves
+ * @param {any[]} [updates]
+ * @returns {any[]}
+ */
+function foldUpdatesOntoSaves(saves, updates) {
+  if (!Array.isArray(updates) || updates.length === 0) return saves;
+  /** @type {Map<string, any>} */
+  const bySaveId = new Map();
+  for (const update of updates) {
+    if (!update) continue;
+    bySaveId.set(String(update.saveId), update.settlement);
+  }
+  return saves.map((/** @type {any} */ save) => {
+    const id = saveId(save);
+    if (!bySaveId.has(id)) return save;
+    return { ...save, settlement: bySaveId.get(id) };
+  });
+}
+
+/**
+ * Advance-scaling Stage 1 orchestrator (autoresolve-ON ONLY; no pausing, no
+ * major-classification — Stages 2-3). Runs the EXISTING one-week kernel
+ * `tickCount` times and composes the per-tick outputs into ONE result with the
+ * SAME shape the kernel returns, so the caller (store + apply layer) is
+ * unchanged. The kernel is pure and re-seeds per tick, so this is deterministic
+ * with no seed plumbing — `simulateCampaignWorldInterval(year)` composes EXACTLY
+ * the same end state as 48 sequential one_week kernel calls.
+ *
+ * State carry-over between ticks: the next campaign threads the prior tick's
+ * worldState / regionalGraph / wizardNews; the next saves fold the prior tick's
+ * settlementUpdates (id-matched). settlementUpdates accumulate id-keyed
+ * (last-write-wins) so the composed update set is each settlement's FINAL state;
+ * wizardNews is taken from the LAST tick (the kernel already appends cumulatively
+ * across the threaded feed); candidates / selected / rollExplanations /
+ * autoApplied / proposals / resolvedStressors concatenate across ticks.
+ *
+ * @param {Object} [args]
+ * @param {any} [args.campaign]
+ * @param {any[]} [args.saves]
+ * @param {string} [args.interval]   DM-facing duration (one_week|one_month|one_season|one_year)
+ * @param {boolean} [args.commit]
+ * @param {string} [args.now]
+ */
+export function simulateCampaignWorldInterval({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow() } = {}) {
+  const tickCount = ticksForInterval(usableTickInterval(interval));
+
+  let runningCampaign = campaign;
+  let runningSaves = saves;
+  /** @type {any} */
+  let last = null;
+  // id-keyed accumulator (last-write-wins) for the composed settlementUpdates.
+  /** @type {Map<string, any>} */
+  const updatesById = new Map();
+  const candidates = [];
+  const selected = [];
+  const rollExplanations = [];
+  const autoApplied = [];
+  const proposals = [];
+  const resolvedStressors = [];
+
+  for (let i = 0; i < tickCount; i++) {
+    // ALWAYS a one-week step — the interval is the loop bound, not the kernel's
+    // granularity. commit rides only the FINAL tick: intermediate ticks are
+    // interior steps of one Advance, so only the last pulse records committed:true.
+    const tickResult = simulateCampaignWorldPulse({
+      campaign: runningCampaign,
+      saves: runningSaves,
+      interval: 'one_week',
+      commit: commit && i === tickCount - 1,
+      now,
+    });
+
+    for (const update of tickResult.settlementUpdates || []) {
+      updatesById.set(String(update.saveId), update);
+    }
+    if (tickResult.candidates) candidates.push(...tickResult.candidates);
+    if (tickResult.selected) selected.push(...tickResult.selected);
+    if (tickResult.rollExplanations) rollExplanations.push(...tickResult.rollExplanations);
+    if (tickResult.autoApplied) autoApplied.push(...tickResult.autoApplied);
+    if (tickResult.proposals) proposals.push(...tickResult.proposals);
+    if (tickResult.resolvedStressors) resolvedStressors.push(...tickResult.resolvedStressors);
+
+    // Thread this tick's output into the next tick's input. The kernel carries
+    // wizardNews forward internally (it appends onto the threaded feed), so the
+    // next campaign hands it the running feed.
+    runningCampaign = {
+      ...runningCampaign,
+      worldState: tickResult.worldState,
+      regionalGraph: tickResult.regionalGraph,
+      wizardNews: tickResult.wizardNews,
+    };
+    runningSaves = foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates);
+    last = tickResult;
+  }
+
+  // tickCount is ≥1, so `last` is always the final tick's result. Compose one
+  // result with the kernel's shape: terminal world fields from the last tick,
+  // the id-accumulated settlementUpdates, the concatenated per-tick collections.
+  return {
+    ...last,
+    settlementUpdates: [...updatesById.values()],
+    candidates,
+    selected,
+    rollExplanations,
+    autoApplied,
+    proposals,
+    resolvedStressors,
+  };
+}
+
 export function previewCampaignWorldPulse(args = {}) {
   return simulateCampaignWorldPulse({ ...args, commit: false });
 }

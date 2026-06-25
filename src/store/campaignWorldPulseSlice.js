@@ -82,6 +82,7 @@ import {
   restorePulseSnapshot, applyWarFrontSeed,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { flag } from '../lib/flags.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
 import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
@@ -220,7 +221,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // once the synchronous Phase 1 begins no other action can observe the
     // drained-but-not-advanced intermediate state). Memoized, so only the first
     // advance pays the import; subsequent advances resolve from cache.
-    const { advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
+    // Advance-scaling Stage 1: a flag selects the advance path. OFF (default) →
+    // the existing single-tick `advanceCampaignWorld` (UNCHANGED — the flag-OFF
+    // store path is byte-identical to today). ON → `simulateCampaignWorldInterval`,
+    // which runs N real one-week ticks for the chosen interval and composes ONE
+    // result of the same shape. Either way the snapshot/drain/commit/persist/
+    // analytics scaffolding below runs ONCE per Advance, so undo grows by exactly
+    // one and persist + analytics fire once regardless of tick count.
+    const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
+    const useMultiTick = flag('advanceMultiTick');
 
     // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
     // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
@@ -348,12 +357,23 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // point for everything the drain touched.
     if (simCampaign) {
       try {
-        result = domainAdvanceCampaignWorld({
-          campaign: simCampaign,
-          saves: simSaves,
-          interval,
-          now,
-        });
+        // Flag-gated path select (commit:true rides the interval orchestrator's
+        // final tick; the single-tick path commits as before). The composed
+        // result has the SAME shape, so Phase 2 + persist + analytics are identical.
+        result = useMultiTick
+          ? domainSimulateCampaignWorldInterval({
+              campaign: simCampaign,
+              saves: simSaves,
+              interval,
+              commit: true,
+              now,
+            })
+          : domainAdvanceCampaignWorld({
+              campaign: simCampaign,
+              saves: simSaves,
+              interval,
+              now,
+            });
       } catch (e) {
         console.error('[campaignWorldPulseSlice] world pulse compute threw; rolling back drain', e);
         set(state => { restorePulseSnapshot(state, preSnapshot); });
