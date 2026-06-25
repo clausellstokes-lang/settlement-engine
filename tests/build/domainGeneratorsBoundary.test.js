@@ -46,7 +46,7 @@ const domainDir = resolve(repoRoot, 'src/domain');
  *   2. display/defenseDisplay.js        → generators/defenseGenerator.js
  *   3. events/mutate.js                 → generators/prng.js
  *   4. relationships/neighbourBackLink.js → generators/crossSettlementConflicts.js
- *   5. worldPulse/advanceCampaignWorld.js → generators/prng.js
+ *   5. worldPulse/pulseKernel.js        → generators/prng.js
  *   6. worldPulse/institutionLifecycle.js → generators/computeActiveChains.js
  */
 const BASELINE_EDGES = Object.freeze({
@@ -54,7 +54,7 @@ const BASELINE_EDGES = Object.freeze({
   'src/domain/display/defenseDisplay.js': ['../../generators/defenseGenerator.js'],
   'src/domain/events/mutate.js': ['../../generators/prng.js'],
   'src/domain/relationships/neighbourBackLink.js': ['../../generators/crossSettlementConflicts.js'],
-  'src/domain/worldPulse/advanceCampaignWorld.js': ['../../generators/prng.js'],
+  'src/domain/worldPulse/pulseKernel.js': ['../../generators/prng.js'],
   'src/domain/worldPulse/institutionLifecycle.js': ['../../generators/computeActiveChains.js'],
 });
 
