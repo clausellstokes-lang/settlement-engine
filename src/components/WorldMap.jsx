@@ -693,6 +693,17 @@ export default function WorldMap({ onNavigate } = {}) {
     if (!activeCampaignId) { showToast('info', 'Select a campaign to share its map.'); return; }
     setSharingMap(true);
     try {
+      // Capture a render-inert gallery thumbnail of the terrain (see mapThumb.js)
+      // BEFORE the persist+upsert, so it rides along in the same map_data that
+      // publish_map reads. Best-effort (null → keeps the placeholder); skips
+      // custom-image maps; stored in galleryThumb, never customBackdrop.
+      const { captureMapThumb } = await import('../lib/mapThumb.js');
+      const thumb = await captureMapThumb({
+        bridge: bridgeRef.current, ownerId: useStore.getState().auth?.user?.id,
+        campaignId: activeCampaignId,
+        skip: !!useStore.getState().mapState.customBackdrop?.imageUrl });
+      if (thumb) useStore.getState().setGalleryThumb(thumb);
+
       // Persist the latest map AND await its cloud upsert before publishing —
       // publish_map only flips gallery flags and reads whatever map_data is
       // already in the saved_maps row, so the row must exist + carry the current

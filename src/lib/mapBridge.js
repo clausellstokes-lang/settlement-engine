@@ -275,6 +275,11 @@ export function createMapBridge(getIframe, opts = {}) {
 
     // ── Map snapshot (campaign save/load) ─────────────────────────────────
     saveSnapshot: () => call('settlementEngine:saveSnapshot', {}, { timeout: 15000 }),
+
+    // Rasterize the rendered terrain to a small JPEG data URL for the gallery
+    // tile. Resolves { dataUrl, w, h }. Best-effort on the caller's side.
+    exportThumb: (maxW = 480) =>
+      call('settlementEngine:exportThumb', { maxW }, { timeout: 20000 }),
     loadSnapshot: (snapshot) =>
       call('settlementEngine:loadSnapshot', { snapshot }, { timeout: 30000 }),
     resetMap: (seed) => call('settlementEngine:resetMap', { seed }, { timeout: 30000 }),
