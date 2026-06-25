@@ -134,14 +134,19 @@ describe('campaignSlice tick clock sync', () => {
     const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-06-01T00:00:00.000Z' });
     const campaign = store.getState().campaigns[0];
 
-    expect(result.tick).toBe(1);
-    expect(campaign.worldState.tick).toBe(1);
+    // Multi-tick is GA: a one_month advance is 4 real one-week ticks, so the
+    // terminal world tick is 4 (the famine is a minor, so the interval runs to
+    // completion without pausing). The resync target is the full-interval tick.
+    expect(result.tick).toBe(4);
+    expect(campaign.worldState.tick).toBe(4);
     // The press skewed the clocks; the pulse heals it (no permanent drift).
     expect(campaign.wizardNews.currentTick).toBe(campaign.worldState.tick);
-    // Everything this pulse appended groups under the live tick — the feed had
-    // only the manual 'ready' entry (tick 1) before the pulse, so all entries
-    // sit on the tick the chronicle will ground on.
+    // Every entry the interval produced is stamped within the advanced window
+    // [0..4] (interior beats keep their own tick; the manual 'ready' entry sits
+    // at tick 1), and the feed leads with a beat on the terminal tick 4 — the tick
+    // the chronicle grounds on. None drifts past the resynced world clock.
     expect(campaign.wizardNews.entries.length).toBeGreaterThan(0);
-    expect(campaign.wizardNews.entries.every(entry => entry.tick === 1)).toBe(true);
+    expect(campaign.wizardNews.entries.every(entry => entry.tick >= 0 && entry.tick <= 4)).toBe(true);
+    expect(campaign.wizardNews.entries.some(entry => entry.tick === 4)).toBe(true);
   });
 });

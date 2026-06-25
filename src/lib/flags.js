@@ -113,13 +113,14 @@ export const FLAGS = Object.freeze({
     description: 'Content-copy deterrent: block copy/cut/right-click and disable text selection site-wide (exempting form fields, [data-allow-copy], and elevated users) to nudge readers toward the PDF export and premium. A deterrent, not security — text stays in the DOM for rendering, SEO, and screen readers.',
   },
   // ── Simulation ──────────────────────────────────────────────────────────────
-  // Advance-scaling Stage 1: when ON, an Advance runs N REAL one-week ticks
+  // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks
   // (week=1, month=4, season=12, year=48) instead of a single coarse-interval
-  // step. OFF (default) keeps the byte-identical single-tick path. Dark-shipped
-  // until the pause / major-classification stages land.
+  // step. PROMOTED default-on after the pause / major-classification stages
+  // landed; flag retained as a soak killswitch (set false via env or
+  // localStorage to fall back to the byte-identical single-tick path).
   advanceMultiTick: {
-    default: false,
-    description: 'Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. OFF = the legacy single-tick advance.',
+    default: true,
+    description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. Set false to fall back to the legacy single-tick advance.',
   },
 
   // ── Pricing copy ────────────────────────────────────────────────────────────

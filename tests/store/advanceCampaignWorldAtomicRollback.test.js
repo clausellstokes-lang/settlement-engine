@@ -60,6 +60,16 @@ vi.mock('../../src/domain/worldPulse/index.js', async (importActual) => {
   };
 });
 
+// Multi-tick is GA (default-on in flags.js). This file mocks the SINGLE-TICK domain
+// export `advanceCampaignWorld` to throw; the multi-tick path routes through
+// `simulateCampaignWorldInterval` instead, so the synthetic throw would never fire.
+// Pin the flag OFF so the mocked single-tick throw path stays live and the
+// atomic-rollback assertions stay byte-exact. (The rollback guarantee itself wraps
+// both paths in the store try/catch, so the invariant holds on the ON path too.)
+vi.mock('../../src/lib/flags.js', () => ({
+  flag: vi.fn(name => (name === 'advanceMultiTick' ? false : false)),
+}));
+
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
