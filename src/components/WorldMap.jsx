@@ -141,6 +141,18 @@ export default function WorldMap({ onNavigate } = {}) {
   // Campaign-clock (Phase C2/C3): multi-step undo of the last World Pulse.
   const canUndoPulse = useStore(s =>
     !!activeCampaignId && (s.pulseUndoStack || []).some(e => e.campaignId === activeCampaignId));
+  // Advance-scaling Stage 5: the interval of the MOST RECENT undoable advance for
+  // this campaign (the top-of-stack snapshot tagged at advance time). Lets the Undo
+  // affordance name what it reverts when the multi-tick flag is on. Single-tick /
+  // flag-off advances leave this null and the copy stays unchanged.
+  const lastAdvanceInterval = useStore((s) => {
+    if (!activeCampaignId) return null;
+    const stack = s.pulseUndoStack || [];
+    for (let i = stack.length - 1; i >= 0; i--) {
+      if (stack[i].campaignId === activeCampaignId) return stack[i].interval || null;
+    }
+    return null;
+  });
 
   const activeCampaign = useMemo(
     () => activeCampaigns.find(c => c.id === activeCampaignId) || null,
@@ -788,7 +800,7 @@ export default function WorldMap({ onNavigate } = {}) {
         setShowSimulationRules={setShowSimulationRules} showSimulationRules={showSimulationRules}
         worldPulseInterval={worldPulseInterval} setWorldPulseInterval={setWorldPulseInterval} handleAdvanceRealm={handleAdvanceRealm} worldPulseBusy={worldPulseBusy}
         multiTickOn={multiTickOn} advanceSession={advanceSession} pausedAdvance={pausedAdvance} onResumeAdvance={handleResumeAdvance}
-        canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm} setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
+        canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm} lastAdvanceInterval={multiTickOn ? lastAdvanceInterval : null} setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
         handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
         inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} unreviewedCount={unreviewedPulseCount}

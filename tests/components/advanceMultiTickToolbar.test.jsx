@@ -108,6 +108,54 @@ describe('WorldMapToolbar — Stage 4 multi-tick affordances', () => {
     expect(onResumeAdvance).toHaveBeenCalledWith({});
   });
 
+  test('(a) flag ON + multi-tick last advance: undo copy names the interval', () => {
+    render(
+      <WorldMapToolbar
+        {...BASE}
+        canUndoPulse
+        multiTickOn
+        lastAdvanceInterval="one_year"
+      />,
+    );
+    // The visible label folds in the interval, and the title (the full affordance
+    // copy) leads with it while preserving the session-only caveat.
+    const btn = screen.getByText(/Undo Advance \(1 year\)/);
+    expect(btn).toBeTruthy();
+    const title = btn.closest('button').getAttribute('title') || btn.getAttribute('title')
+      || btn.parentElement.getAttribute('title');
+    expect(title).toMatch(/Undo the last realm advance \(1 year\)\./);
+    // The session-only caveat is preserved verbatim.
+    expect(title).toMatch(/available for the current session only/);
+  });
+
+  test('(a) flag ON + single-tick (one_week) last advance: undo copy UNCHANGED', () => {
+    render(
+      <WorldMapToolbar
+        {...BASE}
+        canUndoPulse
+        multiTickOn
+        lastAdvanceInterval="one_week"
+      />,
+    );
+    // one_week is a single tick — no interval suffix; copy is byte-identical.
+    expect(screen.getByText('Undo Advance')).toBeTruthy();
+    expect(screen.queryByText(/Undo Advance \(/)).toBeNull();
+  });
+
+  test('(a) flag OFF: undo copy UNCHANGED even with an interval available', () => {
+    // WorldMap nulls lastAdvanceInterval off-flag; here the prop defaults to null
+    // so the copy stays the plain "Undo Advance".
+    render(
+      <WorldMapToolbar
+        {...BASE}
+        canUndoPulse
+        multiTickOn={false}
+      />,
+    );
+    expect(screen.getByText('Undo Advance')).toBeTruthy();
+    expect(screen.queryByText(/Undo Advance \(/)).toBeNull();
+  });
+
   test('(e) FLAG-OFF: neither the progress bar nor the resume chip renders', () => {
     render(
       <WorldMapToolbar

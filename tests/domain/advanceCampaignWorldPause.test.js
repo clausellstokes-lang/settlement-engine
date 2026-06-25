@@ -103,6 +103,9 @@ function cursorFrom(paused, decisions = {}) {
     preRegionalGraph: paused.preRegionalGraph,
     preWizardNews: paused.preWizardNews,
     preSaves: paused.preSaves,
+    // Stage 5 ring policy: carry the original pre-interval length through resume so
+    // the whole interval collapses to ONE composed record (mirrors the store cursor).
+    preIntervalHistoryLen: paused.preIntervalHistoryLen,
     decisions,
   };
 }

@@ -990,6 +990,33 @@ export function ticksForInterval(interval) {
 }
 
 /**
+ * Advance-scaling Stage 5 — history-ring policy (locked decision #2).
+ *
+ * Collapse a multi-tick interval's pulseHistory to ONE composed record. The
+ * carry-over threads each tick's appended record forward, so a finished N-tick
+ * interval lands `[...preInterval, rec_0 … rec_{N-1}]`. We keep the pre-interval
+ * records plus ONLY the final tick's record (rec_{N-1}, the authoritative composed
+ * end-of-interval beat) and drop the interior beats — they already live in the
+ * chronicle / IntervalChronicleSummary, so nothing is lost for the DM.
+ *
+ * Pure: returns a new worldState (or the input untouched when there is nothing to
+ * collapse). The degenerate one_week case (one record appended) slices to a no-op.
+ *
+ * @param {any} worldState  the final tick's composed worldState
+ * @param {number} preIntervalHistoryLen  history length before the interval ran
+ * @returns {any}
+ */
+function collapseIntervalHistory(worldState, preIntervalHistoryLen) {
+  const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
+  const base = Math.max(0, preIntervalHistoryLen);
+  // Fewer than two interval records means there is nothing interior to collapse
+  // (a single committed tick already wrote exactly one record).
+  if (history.length - base <= 1) return worldState;
+  const composed = [...history.slice(0, base), history[history.length - 1]];
+  return { ...worldState, pulseHistory: composed };
+}
+
+/**
  * Fold one tick's settlementUpdates onto the saves that feed the NEXT tick:
  * id-matched replace (last-write-wins), pure (returns a new array). Mirrors the
  * store-side foldSettlementUpdatesOntoSaves so the orchestrator can thread tick
@@ -1065,6 +1092,7 @@ function foldUpdatesOntoSaves(saves, updates) {
  *   preRegionalGraph?: any,
  *   preWizardNews?: any,
  *   preSaves?: any[],
+ *   preIntervalHistoryLen?: number,
  *   pendingMajors?: any[],
  *   decisions?: Record<string, { decision?: string }>,
  * }|null} [args.resume] Stage 3 RESUME cursor (from a prior pause). When set, the
@@ -1102,6 +1130,27 @@ export function simulateCampaignWorldInterval({
   // The tick to re-run on resume (the paused tick) — its pre-inputs come from the
   // cursor. A fresh advance starts at 0.
   let startTick = 0;
+
+  // Advance-scaling Stage 5 — history-ring policy (locked decision #2): the
+  // composed interval writes EXACTLY ONE pulseHistory record (the final tick's),
+  // not N. The one-week kernel appends a record every tick; the carry-over threads
+  // each onto the next, so a naive 48-tick year would deposit 48 records and burn
+  // 48/80 of the ring for one advance. We snapshot the PRE-interval history length
+  // here, then on the composed `complete` return collapse the interior beats —
+  // keeping the pre-interval records + the single final composed record. The
+  // per-tick beats are not lost: they live in the chronicle / IntervalChronicleSummary.
+  //
+  // RESUME subtlety: a paused interval already committed the records of its first
+  // segment into worldState, so `resume.preWorldState` is NOT the pre-INTERVAL state
+  // — collapsing against it would keep one record PER segment. The original tick-0
+  // length rides the cursor (preIntervalHistoryLen, parked at pause time) so the
+  // whole multi-segment interval still collapses to ONE record. Fallback to the
+  // pre-paused-tick length only if a legacy cursor lacks the field.
+  const preIntervalHistoryLen = resuming
+    ? (Number.isFinite(resume.preIntervalHistoryLen)
+        ? resume.preIntervalHistoryLen
+        : ensureWorldState(resume.preWorldState, campaign).pulseHistory.length)
+    : ensureWorldState(campaign?.worldState, campaign).pulseHistory.length;
 
   if (resuming) {
     // RE-DERIVE the paused tick from its PRE-tick inputs. This supersedes the
@@ -1163,6 +1212,11 @@ export function simulateCampaignWorldInterval({
         ticksDone,
         remainingTicks: tickCount - ticksDone,
         resumeTick: i,
+        // Stage 5 ring policy: carry the ORIGINAL pre-interval history length so the
+        // eventual `complete` return collapses the WHOLE interval (every segment)
+        // down to one composed record, not one per resume segment. Survives a
+        // serialized reload of the cursor.
+        preIntervalHistoryLen,
         // The withheld majors, batched (NO cap), awaiting the DM's verdict.
         pendingMajors: tickResult.deferredMajors,
         // PRE-tick inputs — the exact state this tick was computed from. Resume
@@ -1190,8 +1244,17 @@ export function simulateCampaignWorldInterval({
 
   // Ran to the end with no pause (autoResolve ON, or OFF with no majors surfaced).
   // tickCount ≥ 1, so `last` is the final tick (or the resume prologue's result).
+  //
+  // Stage 5 history-ring collapse: keep the pre-interval records + ONLY the final
+  // tick's composed record, dropping the interior per-tick beats the carry-over
+  // accumulated. One advance ⇒ one ring entry (decision #2). The degenerate
+  // one_week case (tickCount=1) appended exactly one record already, so its slice
+  // is a no-op. The slice is on the FINAL composed worldState only — every interior
+  // computation still threaded its full history forward, so determinism is untouched.
+  const composedWorldState = collapseIntervalHistory(last.worldState, preIntervalHistoryLen);
   return {
     ...last,
+    worldState: composedWorldState,
     status: 'complete',
     interval: chosenInterval,
     settlementUpdates: [...updatesById.values()],
