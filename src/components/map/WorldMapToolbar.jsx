@@ -33,6 +33,27 @@ import { IconButton } from './IconButton.jsx';
 
 const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
 
+/** Advance-scaling Stage 5 — the human interval label the Undo affordance folds in
+ *  when the last advance was a MULTI-TICK interval (month/season/year). one_week is
+ *  deliberately absent: a single-tick advance reverts as before, so its copy stays
+ *  unchanged. Calm voice: parenthetical, lowercase, no flourish. */
+const MULTI_TICK_INTERVAL_LABELS = Object.freeze({
+  one_month: '1 month',
+  one_season: '1 season',
+  one_year: '1 year',
+});
+
+/** The base Undo title (the session-only caveat is preserved verbatim). When a
+ *  multi-tick interval is named, the lead sentence gains the interval so the GM
+ *  reads what one undo reverts; otherwise the copy is byte-identical to before. */
+function undoTitleFor(interval) {
+  const label = MULTI_TICK_INTERVAL_LABELS[interval];
+  const lead = label
+    ? `Undo the last realm advance (${label}).`
+    : 'Undo the last realm advance.';
+  return `${lead} Restores the pre-pulse world and every settlement. This undo is available for the current session only. The advance cannot be undone after the page reloads.`;
+}
+
 /** A spacing-only group separator. Replaces the 1px hairline dividers — grouping
  *  is now carried by whitespace (P5), and `flex:1` spacers push the clock and
  *  utility clusters to a stable right edge. */
@@ -215,6 +236,11 @@ function WorldMapToolbarImpl({
   onResumeAdvance,
   canUndoPulse,
   handleUndoRealm,
+  // Advance-scaling Stage 5: the DM-chosen interval of the most recent undoable
+  // advance. Null on the flag-OFF path AND on a single-tick (one_week) advance, so
+  // the undo copy stays byte-unchanged in both cases; only a multi-tick interval
+  // names what one undo reverts.
+  lastAdvanceInterval = null,
   setShowLayersPanel,
   showLayersPanel,
   setTourOpen,
@@ -353,10 +379,14 @@ function WorldMapToolbarImpl({
               {canUndoPulse && (
                 <IconButton
                   onClick={handleUndoRealm}
-                  title="Undo the last realm advance. Restores the pre-pulse world and every settlement. This undo is available for the current session only. The advance cannot be undone after the page reloads."
+                  title={undoTitleFor(lastAdvanceInterval)}
                   disabled={worldPulseBusy}
                 >
-                  <Undo2 size={13} /> Undo Advance
+                  {/* The visible label folds in a multi-tick interval ("Undo
+                      Advance (1 year)") so the affordance names what one undo
+                      reverts; a single-tick / flag-off advance keeps "Undo Advance"
+                      byte-unchanged. */}
+                  <Undo2 size={13} /> Undo Advance{MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval] ? ` (${MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval]})` : ''}
                 </IconButton>
               )}
               {/* Advance-scaling Stage 4: a determinate progress bar while a

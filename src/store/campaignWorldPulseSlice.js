@@ -275,6 +275,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       // the advance can be reversed by undoLastPulse. Pushed to the stack only
       // after the pulse is confirmed below.
       preSnapshot = capturePulseSnapshot(state, c, now);
+      // Advance-scaling Stage 5: tag the snapshot with the DM-CHOSEN interval so
+      // the session-only Undo affordance can name what it reverts ("Undo the last
+      // advance (1 year)"). Session-scoped like the stack itself; never persisted.
+      preSnapshot.interval = interval;
       // Campaign-clock C1: drain queued player intentions into the member
       // settlements (and inject any crisis twins into worldState) BEFORE the
       // organic pulse, so every settlement's events resolve simultaneously at
@@ -438,6 +442,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               resumeTick: result.resumeTick,
               autoResolve: false,
               startedAt: now,
+              // Stage 5 ring policy: thread the original pre-interval history length
+              // through every re-pause so the whole interval collapses to one record.
+              preIntervalHistoryLen: result.preIntervalHistoryLen,
               pendingMajors: cloneJson(result.pendingMajors) || [],
               // The PRE-tick snapshot — the exact inputs the paused tick was computed
               // from. Resume re-runs the tick from these (seed replay).
@@ -598,6 +605,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         preWizardNews: pre.wizardNews,
         preSaves: pre.saves,
         decisions: decisions || {},
+        // Stage 5 ring policy: the original pre-interval length, so the whole
+        // multi-segment interval collapses to ONE composed record on finish.
+        preIntervalHistoryLen: cursor.preIntervalHistoryLen,
       },
     });
 
@@ -619,6 +629,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
               resumeTick: result.resumeTick,
               autoResolve: false,
               startedAt: now,
+              // Stage 5 ring policy: thread the original pre-interval history length
+              // through every re-pause so the whole interval collapses to one record.
+              preIntervalHistoryLen: result.preIntervalHistoryLen,
               pendingMajors: cloneJson(result.pendingMajors) || [],
               preSnapshot: {
                 worldState: cloneJson(result.preWorldState),

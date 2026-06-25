@@ -142,11 +142,32 @@ describe('advanceMultiTick flag gate', () => {
     expect(result.tick).toBe(4);
     expect(store.getState().campaigns[0].worldState.tick).toBe(4);
     // Scaffolding ran ONCE despite 4 ticks: undo grows by exactly one.
-    expect(store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1')).toHaveLength(1);
+    const mineUndo = store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1');
+    expect(mineUndo).toHaveLength(1);
     // Analytics advance event fires ONCE per interval, not per tick.
     expect(advanceEventCount()).toBe(1);
-    // pulseHistory carries the terminal pulse record (commit rode the final tick).
-    expect(store.getState().campaigns[0].worldState.pulseHistory.length).toBeGreaterThan(0);
+    // Stage 5 RING POLICY: the ring grows by EXACTLY ONE composed record for the
+    // whole 4-tick interval — NOT 4 per-tick records (which would burn 4/80).
+    expect(store.getState().campaigns[0].worldState.pulseHistory.length).toBe(1);
+    // Stage 5: the undo snapshot is tagged with the DM-chosen interval so the
+    // Undo affordance can name what it reverts.
+    expect(mineUndo[0].interval).toBe('one_month');
+  });
+
+  test('FLAG ON: a 48-tick one_year advance writes EXACTLY ONE ring record (not 48)', async () => {
+    setMultiTick(true);
+    const store = makeStore();
+    seedStore(store);
+
+    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
+
+    expect(result.tick).toBe(48);
+    expect(store.getState().campaigns[0].worldState.tick).toBe(48);
+    // The ring must NOT consume 48/80 for one advance.
+    expect(store.getState().campaigns[0].worldState.pulseHistory.length).toBe(1);
+    // PULSE_UNDO_CAP not blown: one undo entry for the whole interval.
+    expect(store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1')).toHaveLength(1);
+    expect(advanceEventCount()).toBe(1);
   });
 
   test('FLAG ON: a single undo reverts the WHOLE interval back to tick 0', async () => {

@@ -89,7 +89,16 @@ function buildFixture(seed = 'interval-seed') {
 // Replicate the orchestrator's carry-over by hand: run the one-week kernel
 // `weeks` times, threading worldState/regionalGraph/wizardNews + folded saves
 // forward. Returns the composed end state, mirroring the orchestrator contract.
+//
+// Stage 5 history-ring policy: the orchestrator collapses the interval's
+// per-tick pulseHistory beats down to ONE composed record (the final tick's), so
+// this oracle applies the same collapse to its threaded worldState before the
+// equivalence comparison — the substantive simulation output is identical; only
+// the history-ring bookkeeping is composed (decision #2).
 function runWeeksByHand(campaign, saves, weeks) {
+  const preHistoryLen = Array.isArray(campaign.worldState?.pulseHistory)
+    ? campaign.worldState.pulseHistory.length
+    : 0;
   let c = campaign;
   let s = saves;
   let last = null;
@@ -111,6 +120,17 @@ function runWeeksByHand(campaign, saves, weeks) {
         })
       : s;
     last = r;
+  }
+  // Collapse to the composed ring policy (pre-interval records + the final record).
+  const history = last.worldState.pulseHistory || [];
+  if (history.length - preHistoryLen > 1) {
+    last = {
+      ...last,
+      worldState: {
+        ...last.worldState,
+        pulseHistory: [...history.slice(0, preHistoryLen), history[history.length - 1]],
+      },
+    };
   }
   return { last, settlementUpdates: [...updatesById.values()] };
 }
@@ -148,6 +168,35 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
     // Terminal world artifacts (regionalGraph, wizardNews) come from the last tick.
     expect(composed.regionalGraph).toEqual(oracle.last.regionalGraph);
     expect(composed.wizardNews).toEqual(oracle.last.wizardNews);
+  });
+
+  test('Stage 5 RING POLICY: a 48-tick one_year advance writes EXACTLY ONE pulseHistory record', () => {
+    const { campaign, saves } = buildFixture();
+    // Fresh world has an empty ring; a 48-tick year must grow it by exactly 1
+    // (the final composed record), NOT 48 (which would burn 48/80 of the ring).
+    const before = (campaign.worldState.pulseHistory || []).length;
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
+    expect(composed.worldState.tick).toBe(48);
+    expect(composed.worldState.pulseHistory.length).toBe(before + 1);
+    // The retained record is the FINAL tick's composed beat (the terminal tick),
+    // not an interior one.
+    const kept = composed.worldState.pulseHistory[composed.worldState.pulseHistory.length - 1];
+    expect(kept.tick).toBe(48);
+    expect(kept.committed).toBe(true);
+  });
+
+  test('Stage 5 RING POLICY: one_month grows the ring by exactly 1, not 4', () => {
+    const { campaign, saves } = buildFixture();
+    const before = (campaign.worldState.pulseHistory || []).length;
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    expect(composed.worldState.pulseHistory.length).toBe(before + 1);
+  });
+
+  test('Stage 5 RING POLICY: the degenerate one_week case still writes exactly one record (no over-collapse)', () => {
+    const { campaign, saves } = buildFixture();
+    const before = (campaign.worldState.pulseHistory || []).length;
+    const composed = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_week', commit: true, now: NOW });
+    expect(composed.worldState.pulseHistory.length).toBe(before + 1);
   });
 
   test('DETERMINISM: same seed twice → byte-identical composed output', () => {
