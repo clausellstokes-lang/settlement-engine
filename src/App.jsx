@@ -133,13 +133,12 @@ export default function App() {
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
 
-  // Logged-out front door. A visitor who is NOT signed in — and has no saved
-  // session to restore — is routed from the bare root to the marketing landing;
-  // a signed-in member (or one whose saved session is still restoring) is routed
-  // from the bare root to the app (/create). Deep links elsewhere are respected;
-  // only the bare root is gated now — an explicit /home visit is honoured so a
-  // member can revisit the Welcome page from the nav, where it shows the member
-  // CTAs (Explore Premium + learn-more). Replaces the old once-per-device flag.
+  // Bare-root front door. The bare root (settlementforge.com) canonicalizes to
+  // /home — the Welcome page — for EVERYONE: logged-out visitors get the
+  // marketing CTAs, signed-in members get the member CTAs (Explore Premium +
+  // learn-more) on the same Welcome page. Deep links elsewhere are respected;
+  // only the bare root is rewritten. The guard still waits for a saved session
+  // to restore so a returning member never flashes a mismatched view first.
   useEffect(() => {
     // No stored auth token at all ⇒ definitely logged out ⇒ route immediately,
     // with no wait and no landing-then-app flash. Otherwise wait for the saved
@@ -148,11 +147,7 @@ export default function App() {
     try {
       const path = window.location.pathname;
       const atRoot = path === '/' || path === '';
-      if (authTier === 'anon') {
-        if (atRoot) replacePath('/home');            // logged out → the landing
-      } else if (atRoot) {
-        replacePath('/create');                      // member at the bare root → the app
-      }
+      if (atRoot) replacePath('/home');              // bare root → the Welcome page (all visitors)
     } catch { /* private mode → fall through to the default */ }
   }, [authLoading, authTier, view]);
 
