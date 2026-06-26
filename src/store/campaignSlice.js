@@ -900,6 +900,56 @@ export const createCampaignSlice = (set, get) => {
   },
 
   /**
+   * Phase 4b — STASH a deferred PARTY-IMPACT action produced by a clock-bound
+   * campaign-member change-queue commit of a party-caused event. The IMMEDIATE
+   * ripple path fires recordPartyImpact eagerly, but recordPartyImpact does its
+   * OWN out-of-band backward (last-write-wins) cloud write — which on a member
+   * flush would escape the flush's single atomic commit AND its rollback (a
+   * persisted, never-reverted side effect on a failed flush). So a member commit
+   * runs with skipRegional and DEFERS the impact here: the resolved action is
+   * parked on worldState.deferredPartyImpacts, which advanceCampaignWorld drains
+   * EXACTLY ONCE through the SAME recordPartyImpact replay it uses for queued
+   * party-caused events (gated by !cloudPending, so it never force-writes atop an
+   * unpersisted advance). A parallel bucket to deferredImpacts / deferredWarFronts
+   * on purpose — a party impact is a world-injection replay, not a queued regional
+   * impact or war-front seed. De-duped by a structural key so a failed-then-retried
+   * flush parks ONE entry. Does NOT bump the tick and does NOT persist (the 069 RPC
+   * carries this worldState snapshot atomically with the settlement rows).
+   * @param {string} campaignId
+   * @param {object} action  the mapEventToPartyImpact result
+   * @returns {number} the deferred-party-impact count after the stash (0 = no-op)
+   */
+  stashDeferredPartyImpact: (campaignId, action) => {
+    if (!campaignId || !action || typeof action !== 'object') return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredPartyImpacts) ? worldState.deferredPartyImpacts : [];
+      // De-dupe by a structural key (kind + the action's target ids) so a
+      // re-commit of the same staged party event (a failed-then-retried flush)
+      // cannot park two copies of one impact. Falls back to the full JSON when no
+      // discriminating ids are present.
+      const keyOf = (a) => [
+        a?.kind, a?.targetId, a?.npcId, a?.factionId, a?.relationshipId, a?.conditionId, a?.stressorType,
+      ].some(v => v != null)
+        ? [a?.kind, a?.targetId, a?.npcId, a?.factionId, a?.relationshipId, a?.conditionId, a?.stressorType].map(v => String(v ?? '')).join('|')
+        : JSON.stringify(a);
+      const byKey = new Map(existing.map(a => [keyOf(a), a]));
+      byKey.set(keyOf(action), cloneJson(action));
+      const deferredPartyImpacts = [...byKey.values()];
+      count = deferredPartyImpacts.length;
+      c.worldState = { ...worldState, deferredPartyImpacts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
    * Phase 4b — the Realm cue count: how many DISTINCT member settlements have a
    * committed-but-not-yet-propagated change waiting for the next Advance.
    * Counted off the deferred impacts' source settlement (each impact carries the

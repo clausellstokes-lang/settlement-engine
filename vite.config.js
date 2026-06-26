@@ -188,6 +188,66 @@ export default defineConfig({
     // JS syntax."
     server: { deps: { inline: [/@testing-library\//] } },
     transformMode: { web: [/\.[jt]sx$/] },
+    // Two-project split (vitest 4 test.projects, NOT the removed workspace
+    // file) to tame flaky pglite-WASM contention.
+    //
+    // Each of the 28 tests/security pglite.test.js files spins up an
+    // in-process WASM Postgres (PGlite). Run under full file-parallelism
+    // they contend for memory/CPU and intermittently fail, and vitest's
+    // forks pool can exit 0 even with those failures, so the flake quietly
+    // muddies our single most-important gate signal.
+    //
+    // Fix: isolate the pglite suites into their own project that runs one
+    // file at a time (fileParallelism:false), so the WASM instances are
+    // created and torn down serially. Everything else stays in a second
+    // project at vitest's default full parallelism so the fast unit suites
+    // are unaffected.
+    //
+    // Both projects `extends: true` to inherit every root `test` setting
+    // above (environment: node, the jsdom pragma opt-in, testTimeout,
+    // transformMode web, server.deps inline, and the exclude globs incl.
+    // the .claude worktrees). Coverage stays root-level (it is not a
+    // per-project option). Projects only override include plus pool, so
+    // there is no config drift between them and the root.
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'pglite',
+          // Match the in-process WASM-Postgres security suites only.
+          include: ['tests/security/**/*.pglite.test.js'],
+          // One WASM Postgres at a time: with fileParallelism:false vitest 4
+          // runs these files serially (it forces maxWorkers to 1), so no two
+          // pglite instances are ever live at once, removing the memory/CPU
+          // contention that produced the intermittent (exit-0) failures.
+          // forks pool keeps each file in its own child process for clean
+          // WASM teardown. (poolOptions was removed in vitest 4; the pool
+          // knobs are top-level now, and fileParallelism alone serializes.)
+          pool: 'forks',
+          fileParallelism: false,
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          // Everything EXCEPT the pglite suites, at full parallelism
+          // (vitest's default pool/concurrency, left untouched here).
+          // Mirrors vitest's default include extension set so no suite is
+          // silently dropped, then subtracts the pglite files via exclude.
+          include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+          exclude: [
+            'tests/security/**/*.pglite.test.js',
+            'e2e/**',
+            'node_modules/**',
+            'dist/**',
+            '.git/**',
+            'supabase/functions/**',
+            '**/.claude/**',
+          ],
+        },
+      },
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

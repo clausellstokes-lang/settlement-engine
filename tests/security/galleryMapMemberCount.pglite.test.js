@@ -45,6 +45,13 @@ const OWNER = '11111111-1111-1111-1111-111111111111';
 const BACKDROP_FN = netCurrentFn('_gallery_map_backdrop');
 const GET_FN = netCurrentFn('get_gallery_map');
 const LIST_FN = netCurrentFn('list_gallery_maps');
+// 088 added the server-side defense-in-depth scanner + wired it into publish_map.
+const SAFE_FN = netCurrentFn('_gallery_world_snapshot_is_safe');
+const PUBLISH_FN = netCurrentFn('publish_map');
+
+// A second account — its settlements must NEVER be projected by another owner's
+// shared campaign (the 046 IDOR guard get_gallery_map carries).
+const OTHER = '22222222-2222-2222-2222-222222222222';
 
 let db;
 
@@ -59,6 +66,13 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     // ...and it must NOT walk the bare top-level settlementIds fallback (046 reads
     // only map_data->'campaign'->'settlementIds').
     expect(LIST_FN).not.toMatch(/m\.map_data->'settlementIds'/);
+    // 088: the server-side snapshot scanner + the publish_map that calls it.
+    expect(SAFE_FN, 'no _gallery_world_snapshot_is_safe found').toBeTruthy();
+    expect(PUBLISH_FN, 'no publish_map found').toBeTruthy();
+    // get_gallery_map must keep the 046 member-ownership IDOR guard.
+    expect(GET_FN).toMatch(/s\.user_id\s*=\s*row\.user_id/i);
+    // get_gallery_map must gate the world panel on the gallery_share_world opt-in.
+    expect(GET_FN).toMatch(/case\s+when\s+row\.gallery_share_world/i);
   });
 
   beforeAll(async () => {
@@ -128,15 +142,37 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
       create or replace function public._gallery_chronicle_json(p jsonb)
         returns jsonb language sql immutable as $$ select coalesce(p, '[]'::jsonb) $$;
     `);
+    // publish_map (088) is SECURITY DEFINER and calls account_is_active + a slug
+    // minter; stub both. account_is_active returns true (the account-gate path is
+    // covered elsewhere — here we exercise the snapshot rejection). The slug minter
+    // is deterministic so the rejection raises BEFORE any row mutation, which is the
+    // whole point — a forbidden snapshot must never reach storage.
+    await db.exec(`
+      create or replace function public.account_is_active(p uuid)
+        returns boolean language sql immutable as $$ select true $$;
+      create or replace function public._make_public_slug()
+        returns text language sql volatile as $$ select 'slug-' || gen_random_uuid()::text $$;
+    `);
+    // auth.uid() — pglite has no auth schema; stub it to the OWNER so publish_map's
+    // ownership + auth gates resolve to the seeded owner.
+    await db.exec(`
+      create schema if not exists auth;
+      create or replace function auth.uid()
+        returns uuid language sql stable as $$ select '${OWNER}'::uuid $$;
+    `);
     await db.exec(BACKDROP_FN);
+    await db.exec(SAFE_FN);
     await db.exec(GET_FN);
     await db.exec(LIST_FN);
+    await db.exec(PUBLISH_FN);
 
-    // Two owned, active settlements referenced by the campaign envelope.
+    // Two owned, active settlements referenced by the campaign envelope, plus ONE
+    // owned by a DIFFERENT account (the IDOR probe — its dossier must never project).
     await db.exec(`
       insert into public.settlements (id, user_id, name, tier) values
         ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', '${OWNER}', 'Port', 't1'),
-        ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '${OWNER}', 'Vale', 't2');
+        ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', '${OWNER}', 'Vale', 't2'),
+        ('cccccccc-cccc-cccc-cccc-cccccccccccc', '${OTHER}', 'Foreign Hold', 't3');
     `);
 
     const campaign = JSON.stringify({
@@ -146,6 +182,20 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
           'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
         ],
         mapState: { seed: 42 },
+      },
+    });
+
+    // IDOR probe: a shared campaign whose owner-controlled settlementIds list TWO
+    // of their own settlements PLUS a settlement owned by OTHER. get_gallery_map is
+    // SECURITY DEFINER (bypasses RLS), so without the 046 ownership filter the
+    // foreign 'Foreign Hold' dossier + slug would leak. The owner can list any UUID.
+    const idorCampaign = JSON.stringify({
+      campaign: {
+        settlementIds: [
+          'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+          'cccccccc-cccc-cccc-cccc-cccccccccccc', // NOT owned by OWNER
+        ],
+        mapState: { seed: 7 },
       },
     });
 
@@ -167,6 +217,12 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
          ($1, 'Shared Campaign',     'map_with_campaign', true,  $2::jsonb, true, 'shared', true)`,
       [OWNER, campaign],
     );
+
+    // The IDOR + world-gate rows are seeded inside their own tests (below) so the
+    // pre-existing facet/parity assertions keep their pristine 3-row fixture set.
+    // Stash the IDOR campaign envelope for that test.
+    db.__idorCampaign = idorCampaign;
+    db.__campaign = campaign;
   });
 
   const memberCountFor = async (slug) => {
@@ -219,5 +275,94 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
       `select slug from public.list_gallery_maps(0, 24, 'newest', '', '{"importable": true}'::jsonb)`,
     )).rows.map((r) => r.slug).sort();
     expect(filtered).toEqual(['campaign-optout', 'shared']);
+  });
+
+  // ── 088: IDOR — a member owned by a DIFFERENT user must NOT be projected ──────
+  it('get_gallery_map does NOT project a member settlement owned by another user (046 IDOR guard)', async () => {
+    // A fully shared campaign whose owner-controlled settlementIds list one OWNED
+    // settlement plus a settlement owned by OTHER (the IDOR probe).
+    await db.query(
+      `insert into public.saved_maps
+         (user_id, name, share_kind, gallery_share_campaign, map_data, is_public, public_slug, gallery_importable)
+       values ($1, 'IDOR Probe', 'map_with_campaign', true, $2::jsonb, true, 'idor', false)`,
+      [OWNER, db.__idorCampaign],
+    );
+    const detail = (await db.query(`select public.get_gallery_map('idor') as out`)).rows[0].out;
+    const names = (detail.members || []).map((m) => m.name).sort();
+    // Only the OWNER's settlement survives; the foreign 'Foreign Hold' is filtered.
+    expect(names).toEqual(['Port']);
+    // And neither its old_id nor its slug leaks anywhere in the projection.
+    const blob = JSON.stringify(detail);
+    expect(blob).not.toContain('cccccccc-cccc-cccc-cccc-cccccccccccc');
+    expect(blob).not.toContain('Foreign Hold');
+    // member_count parity: the tile must agree the count is 1, not 2.
+    expect(await memberCountFor('idor')).toBe(1);
+  });
+
+  // ── 088: the gallery_share_world gate — world panel ONLY on the opt-in ────────
+  it('get_gallery_map projects the world panel ONLY when gallery_share_world is true', async () => {
+    // Two shared campaigns identical but for the gallery_share_world opt-in + a
+    // stored (already-sanitized) world snapshot/sections artifact.
+    const worldSnapshot = JSON.stringify({ schemaVersion: 1, worldClock: { tick: 3 } });
+    await db.query(
+      `insert into public.saved_maps
+         (user_id, name, share_kind, gallery_share_campaign, gallery_share_world,
+          gallery_world_snapshot, gallery_world_sections, map_data, is_public, public_slug)
+       values
+         ($1, 'World On',  'map_with_campaign', true, true,  $3::jsonb, '[{"title":"Wars"}]'::jsonb, $2::jsonb, true, 'world-on'),
+         ($1, 'World Off', 'map_with_campaign', true, false, $3::jsonb, '[{"title":"Wars"}]'::jsonb, $2::jsonb, true, 'world-off')`,
+      [OWNER, db.__campaign, worldSnapshot],
+    );
+    const on = (await db.query(`select public.get_gallery_map('world-on') as out`)).rows[0].out;
+    const off = (await db.query(`select public.get_gallery_map('world-off') as out`)).rows[0].out;
+    // Opt-in ON: the stored, pre-sanitized snapshot + sections panel is projected.
+    expect(on.world).not.toBeNull();
+    expect(on.world.snapshot).toEqual({ schemaVersion: 1, worldClock: { tick: 3 } });
+    expect(on.world.sections).toEqual([{ title: 'Wars' }]);
+    // Opt-in OFF: the panel is null even though the snapshot is STORED on the row
+    // and members still project (the gate is the only thing withholding it).
+    expect(off.world).toBeNull();
+    expect((off.members || []).length).toBe(2);
+  });
+
+  // ── 088: publish_map REJECTS a snapshot carrying a HARD-DENY key ──────────────
+  it('publish_map REJECTS a world snapshot containing a HARD-DENY key (server-side scan)', async () => {
+    // Seed a map the OWNER can publish.
+    await db.exec(`
+      insert into public.saved_maps (id, user_id, name, map_data, share_kind)
+      values ('dddddddd-dddd-dddd-dddd-dddddddddddd', '${OWNER}',
+              'To Publish', '{"campaign":{"settlementIds":[]}}'::jsonb, 'map');
+    `);
+    const callPublish = (snapshot) =>
+      db.query(
+        `select public.publish_map(
+           'dddddddd-dddd-dddd-dddd-dddddddddddd'::uuid,
+           'map_with_campaign', 'a description', null, null,
+           null, null, true, null, $1::jsonb, null, null)`,
+        [JSON.stringify(snapshot)],
+      );
+
+    // A snapshot with a forbidden key nested deep inside an allowed section.
+    await expect(
+      callPublish({ schemaVersion: 1, dashboard: { rngSeed: 12345 } }),
+    ).rejects.toThrow(/forbidden private key/i);
+
+    // A top-level HARD-DENY key (npcStates) is rejected too.
+    await expect(
+      callPublish({ schemaVersion: 1, npcStates: { n1: { secret: 'x' } } }),
+    ).rejects.toThrow(/forbidden private key/i);
+
+    // A snapshot missing schemaVersion = 1 is rejected as malformed.
+    await expect(
+      callPublish({ worldClock: { tick: 1 } }),
+    ).rejects.toThrow(/schemaVersion/i);
+
+    // A clean, versioned snapshot publishes successfully and is stored verbatim.
+    await callPublish({ schemaVersion: 1, worldClock: { tick: 1 } });
+    const stored = (await db.query(
+      `select gallery_world_snapshot as s from public.saved_maps
+        where id = 'dddddddd-dddd-dddd-dddd-dddddddddddd'`,
+    )).rows[0].s;
+    expect(stored).toEqual({ schemaVersion: 1, worldClock: { tick: 1 } });
   });
 });

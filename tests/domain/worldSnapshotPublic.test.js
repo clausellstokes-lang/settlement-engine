@@ -61,6 +61,7 @@ function poisonWorldState() {
         tick: 7,
         selectedOutcomes: [{
           id: 'o1', headline: 'Warhawk marches on Forge', summary: 'An army sets out.',
+          applyMode: 'auto',
           targetSaveId: 'forge', rollExplanation: 'd20=18 + 4 = 22 vs DC 12', candidateId: 'cand:secret',
           populationDeltas: { forge: -200 },
         }],
@@ -270,6 +271,120 @@ describe('serializeWorldSnapshotPublic — section gating', () => {
     for (const denied of WORLD_SNAPSHOT_HARD_DENY) expect(keys.has(denied)).toBe(false);
     expect(keys.has('covert')).toBe(false);
     expect(allStrings(out).join('\n')).not.toContain('SECRET-SEED');
+  });
+});
+
+describe('serializeWorldSnapshotPublic: chronicle player-visibility gate (finding 1)', () => {
+  // A pulse whose selectedOutcomes carries BOTH a surfaced auto-applied outcome and
+  // an un-surfaced PROPOSAL (the DM-private plot + NPC goal). Only the auto one may
+  // reach the public chronicle.
+  function ws() {
+    return {
+      schemaVersion: 1,
+      pulseHistory: [{
+        tick: 3,
+        selectedOutcomes: [
+          {
+            id: 'auto1', applyMode: 'auto',
+            headline: 'The harvest fails in Forgeholt', summary: 'Granaries run low.',
+            targetSaveId: 'forge',
+          },
+          {
+            id: 'prop1', applyMode: 'proposal',
+            headline: 'Aldric plots to seize the throne',
+            summary: 'A DM-private proposal the players have never seen: the bastard heir moves against the duke.',
+            targetSaveId: 'warhawk', populationDeltas: { warhawk: -50 },
+          },
+        ],
+      }],
+    };
+  }
+
+  test('a proposal (un-surfaced, DM-private) outcome is dropped; only auto-applied surfaces', () => {
+    const out = serializeWorldSnapshotPublic(ws(), {}, MEMBERS, { chronicle: true });
+    expect(out.chronicle).toHaveLength(1);
+    const entry = out.chronicle[0];
+    expect(entry.headlines).toHaveLength(1);
+    expect(entry.headlines[0].headline).toBe('The harvest fails in Forgeholt');
+    // The proposal's private plot, NPC goal, and its affected id never leak.
+    const strings = allStrings(out).join('\n');
+    expect(strings).not.toContain('seize the throne');
+    expect(strings).not.toContain('bastard heir');
+    expect(strings).not.toContain('DM-private proposal');
+    // The proposal's populationDeltas key (warhawk) is not folded into affected ids
+    // from this outcome (only the auto outcome's target survives).
+    expect(entry.affectedSettlementIds).toEqual(['forge']);
+  });
+
+  test('an outcome with no applyMode is treated as not-surfaced and dropped', () => {
+    const bare = {
+      schemaVersion: 1,
+      pulseHistory: [{ tick: 1, selectedOutcomes: [{ id: 'x', headline: 'Ambiguous', summary: '' }] }],
+    };
+    const out = serializeWorldSnapshotPublic(bare, {}, MEMBERS, { chronicle: true });
+    // The tick slot still exists (the headline gate runs per-outcome) but carries no headlines.
+    expect(out.chronicle[0].headlines).toEqual([]);
+  });
+});
+
+describe('serializeWorldSnapshotPublic: trade-war name resolution (finding 2)', () => {
+  // A prizeId that is the SLUG form (lowercased / non-alnum → underscore) while the
+  // real ids carry capitals + punctuation. Splitting the slug would render slug
+  // names; reading the persisted buyerId/commodityId renders real names.
+  const SLUG_MEMBERS = [
+    { id: 'Warhawk-7', settlement: { name: 'Warhawk Keep' } },
+    { id: 'Forge.Holt', settlement: { name: 'Forgeholt' } },
+  ];
+  function ws() {
+    return {
+      schemaVersion: 1,
+      tradeWarState: {
+        // prizeId is the slug; buyerId/commodityId are the real ids the ledger now persists.
+        warhawk_7: { winnerId: 'Forge.Holt', incumbentId: 'old', buyerId: 'Warhawk-7', commodityId: 'iron', lastFlipTick: 4 },
+      },
+    };
+  }
+
+  test('buyer name resolves from the persisted real id, not the slugged prizeId', () => {
+    const out = serializeWorldSnapshotPublic(ws(), {}, SLUG_MEMBERS, { warNetwork: true });
+    expect(out.warNetwork.tradeWars).toHaveLength(1);
+    const tw = out.warNetwork.tradeWars[0];
+    expect(tw.buyerId).toBe('Warhawk-7');
+    expect(tw.buyerName).toBe('Warhawk Keep');     // NOT the slug 'warhawk_7'
+    expect(tw.winnerName).toBe('Forgeholt');
+    // The slug must not be the rendered buyer name.
+    expect(tw.buyerName).not.toBe('warhawk_7');
+  });
+});
+
+describe('serializeWorldSnapshotPublic: affected ids exclude powerTransfer names (finding 3)', () => {
+  // powerTransfer.losers carries display NAMES, not save ids. They must not pollute
+  // affectedSettlementIds / Names.
+  function ws() {
+    return {
+      schemaVersion: 1,
+      pulseHistory: [{
+        tick: 2,
+        selectedOutcomes: [{
+          id: 'pt1', applyMode: 'auto',
+          headline: 'A power transfer', summary: 'The crown changes hands.',
+          targetSaveId: 'forge',
+          populationDeltas: { warhawk: -10 },
+          // These are DISPLAY NAMES, not ids, so they must be ignored.
+          powerTransfer: { losers: ['Shadowvale', 'The Free City of Brindle'] },
+        }],
+      }],
+    };
+  }
+
+  test('powerTransfer.losers display names never enter affected ids/names', () => {
+    const out = serializeWorldSnapshotPublic(ws(), {}, MEMBERS, { chronicle: true });
+    const entry = out.chronicle[0];
+    // Only genuine ids: targetSaveId + populationDeltas keys.
+    expect(entry.affectedSettlementIds).toEqual(['forge', 'warhawk']);
+    expect(entry.affectedSettlementIds).not.toContain('Shadowvale');
+    expect(entry.affectedSettlementIds).not.toContain('The Free City of Brindle');
+    expect(entry.affectedSettlementNames).not.toContain('The Free City of Brindle');
   });
 });
 

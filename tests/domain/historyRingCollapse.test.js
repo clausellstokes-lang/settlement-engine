@@ -105,9 +105,9 @@ describe('Stage 5 ring policy — saturated-ring collapse (data-integrity regres
     expect(campaign.worldState.pulseHistory.length).toBe(MAX_HISTORY);
   });
 
-  test('a one_month advance on a saturated ring collapses to EXACTLY ONE interval record', () => {
+  test('a one_month advance on a saturated ring collapses to EXACTLY ONE interval record', async () => {
     const { campaign, saves } = buildSaturatedFixture();
-    const composed = simulateCampaignWorldInterval({
+    const composed = await simulateCampaignWorldInterval({
       campaign, saves, interval: 'one_month', commit: true, now: NOW,
     });
 
@@ -128,10 +128,10 @@ describe('Stage 5 ring policy — saturated-ring collapse (data-integrity regres
     expect(history[history.length - 1]).toBe(intervalRecords[0]);
   });
 
-  test('the surviving pre-interval records are NOT over-evicted (kept verbatim, FIFO-trimmed)', () => {
+  test('the surviving pre-interval records are NOT over-evicted (kept verbatim, FIFO-trimmed)', async () => {
     const { campaign, saves } = buildSaturatedFixture();
     const before = campaign.worldState.pulseHistory;
-    const composed = simulateCampaignWorldInterval({
+    const composed = await simulateCampaignWorldInterval({
       campaign, saves, interval: 'one_month', commit: true, now: NOW,
     });
 
@@ -147,9 +147,9 @@ describe('Stage 5 ring policy — saturated-ring collapse (data-integrity regres
     expect(survivors.map(r => r.id)).toEqual(expectedIds);
   });
 
-  test('a one_year advance on a saturated ring still leaves exactly one interval record', () => {
+  test('a one_year advance on a saturated ring still leaves exactly one interval record', async () => {
     const { campaign, saves } = buildSaturatedFixture();
-    const composed = simulateCampaignWorldInterval({
+    const composed = await simulateCampaignWorldInterval({
       campaign, saves, interval: 'one_year', commit: true, now: NOW,
     });
     const history = composed.worldState.pulseHistory;

@@ -233,6 +233,13 @@ export default function GalleryMaps({ onNavigate }) {
           reframes as an upgrade next-step rather than a dead-end. */}
       {viewingSlug && (() => {
         const viewingImportable = (items.find(x => x.slug === viewingSlug) || {}).importable === true;
+        // Eligibility is the owner opt-in AND a premium viewer (importing creates
+        // a campaign, a premium action). A non-premium viewer sees the calm
+        // "Import (premium)" upgrade framing rather than a dead-end enabled button,
+        // mirroring the settlement gallery. View-only takes precedence in the note.
+        const importNotice = !viewingImportable
+          ? "The owner shared this map as view-only, so importing isn't available."
+          : (!isPremium ? 'Importing maps is a premium feature.' : null);
         return (
           <MapGalleryDetail
             detail={detail}
@@ -242,8 +249,9 @@ export default function GalleryMaps({ onNavigate }) {
             onImport={(d) => handleImport(d.slug, d.kind)}
             importBusy={importingSlug === detail?.slug}
             imported={false}
-            importEligible={viewingImportable}
-            importNotice={viewingImportable ? null : "The owner shared this map as view-only, so importing isn't available."}
+            importEligible={viewingImportable && isPremium}
+            importNotice={importNotice}
+            onUpgrade={!viewingImportable || isPremium ? undefined : () => onNavigate?.('pricing')}
           />
         );
       })()}

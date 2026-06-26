@@ -21,7 +21,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { shareMap, unshareMap, updateMapGalleryMetadata } from '../../lib/gallery.js';
+import { shareMap, unshareMap, updateMapGalleryMetadata, fetchCampaignGalleryFields } from '../../lib/gallery.js';
 import { serializeWorldSnapshotPublic } from '../../domain/display/worldSnapshotPublic.js';
 import { buildRealmArcSummary } from '../../domain/display/realmArcSummary.js';
 import { captureMapThumb, captureCampaignThumb } from '../../lib/mapThumb.js';
@@ -192,6 +192,41 @@ export default function MapShareEditor({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- imageUrl is read as a one-time guard, not a trigger; re-seeding is keyed by kind + campaignId.
   }, [kind, bridge, ownerId, campaignId]);
 
+  // Seed the edit-after-publish draft from the PERSISTED gallery fields when the
+  // campaign is already public. The campaign-load SELECT deliberately omits the 088
+  // gallery columns (cover, alt, importable, world sections), so without this seed
+  // the draft mounts empty and "Save gallery details" would null the saved cover +
+  // re-enable every section. A dedicated owner-scoped fetch fills the draft; it
+  // fails gracefully (returns null pre-088), so the editor keeps its defaults then.
+  // Runs once per published campaign id.
+  const seededFieldsRef = useRef(null);
+  useEffect(() => {
+    let cancelled = false;
+    if (!isPublic || !campaignId || seededFieldsRef.current === campaignId) return undefined;
+    seededFieldsRef.current = campaignId;
+    fetchCampaignGalleryFields(campaignId)
+      .then(fields => {
+        if (cancelled || !fields) return;
+        // Seed the cover only when one is persisted, so the map-capture seed (which
+        // runs only when imageUrl is empty) still fires for a share saved without a
+        // cover. This also marks the cover-seed guard satisfied, preventing a
+        // capture from racing the persisted cover.
+        if (fields.imageUrl) {
+          setImageUrl(fields.imageUrl);
+          seedKeyRef.current = `${kind}:${campaignId}`;
+        }
+        if (fields.imageAlt) setImageAlt(fields.imageAlt);
+        setImportable(fields.importable);
+        // null ⇒ seed unknown (keep ALL sections on); an array is an explicit choice.
+        if (Array.isArray(fields.worldSections)) {
+          setEnabledSections(new Set(fields.worldSections));
+        }
+      })
+      .catch(() => { /* non-fatal: keep the default draft */ });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- seeds once per published campaign id; kind is read only to mark the cover-seed guard, not to re-trigger.
+  }, [isPublic, campaignId]);
+
   const shareCampaign = kind === 'map_with_campaign' && canShareCampaign;
 
   // The realm-arc digest + facets are DERIVED from the live ledgers, never owner
@@ -293,6 +328,7 @@ export default function MapShareEditor({
         imageUrl: opts.imageUrl,
         imageAlt: opts.imageAlt,
         tags: opts.tags,
+        importable: opts.importable,
         realmArcSummary: opts.realmArcSummary,
         shareWorld: opts.shareWorld,
         worldSections: opts.worldSections,

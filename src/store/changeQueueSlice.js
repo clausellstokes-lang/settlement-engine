@@ -262,6 +262,13 @@ export function createChangeQueueSlice(set, get) {
           // leaves no half-staged war-front intent behind (the stash mutates
           // worldState.deferredWarFronts during the flush replay).
           deferredWarFronts: cloneJson(c.worldState?.deferredWarFronts) || [],
+          // Also snapshot the deferred PARTY-IMPACT bucket: a party-caused event
+          // replayed during the flush stashes its impact on
+          // worldState.deferredPartyImpacts (instead of the immediate, un-revertable
+          // backward recordPartyImpact write), so a FAILED commit must roll this
+          // bucket back too — else a rolled-back flush leaves a phantom party impact
+          // the live settlement no longer reflects, which the next Advance would replay.
+          deferredPartyImpacts: cloneJson(c.worldState?.deferredPartyImpacts) || [],
           // The regional half is DEFERRED on a member commit, but the CRISIS-TWIN
           // half stays IMMEDIATE (rippleEventThroughWorld runs with skipRegional,
           // not skip-all): a committed inject/resolve event mutates
@@ -479,6 +486,9 @@ export function createChangeQueueSlice(set, get) {
                   ...c.worldState,
                   deferredImpacts: preCampaign.deferredImpacts,
                   deferredWarFronts: preCampaign.deferredWarFronts,
+                  // Roll the deferred PARTY-IMPACT bucket back too so a failed flush
+                  // leaves no phantom party impact for the next Advance to replay.
+                  deferredPartyImpacts: preCampaign.deferredPartyImpacts,
                   // Roll the IMMEDIATE crisis-twin half back too: the inject/resolve
                   // directive mutated stressors (and a resolve queued proposals)
                   // during replay, so a failed commit must restore both buckets.

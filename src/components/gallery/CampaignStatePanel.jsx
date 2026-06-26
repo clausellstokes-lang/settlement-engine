@@ -6,6 +6,7 @@
  * gallery_world_snapshot artifact, NEVER a live worldState read) and the owner's
  * enabled `sections` array, this renders ONLY the enabled sections in the Realm
  * Inspector display idiom, but stripped to a static viewer:
+ *   - worldClock → the read-only in-world date (year / month / season) + tick
  *   - dashboard → the realm-arc summary + the simulation-rule scent line
  *   - chronicle → a newest-first headline timeline
  *   - pantheon  → deities grouped by tier with seats + win/loss
@@ -20,7 +21,7 @@
  * Pure presentational. No store, no rng, no wall clock, no mutation.
  */
 
-import { Activity, BookOpen, Globe2, MapPin, Sparkles, Swords } from 'lucide-react';
+import { Activity, BookOpen, CalendarClock, Globe2, MapPin, Sparkles, Swords } from 'lucide-react';
 
 import {
   BODY,
@@ -38,7 +39,7 @@ import {
   sans,
 } from '../theme.js';
 
-const SECTION_KEYS = Object.freeze(['dashboard', 'chronicle', 'pantheon', 'warNetwork']);
+const SECTION_KEYS = Object.freeze(['worldClock', 'dashboard', 'chronicle', 'pantheon', 'warNetwork']);
 
 const TIER_ORDER = ['major', 'minor', 'cult'];
 const TIER_LABEL = { major: 'Major Powers', minor: 'Minor Faiths', cult: 'Cults and Remnants' };
@@ -66,6 +67,40 @@ function Chip({ children, title }) {
     >
       {children}
     </span>
+  );
+}
+
+/** @param {any} value @returns {string} */
+function titleCase(value) {
+  const text = human(value).trim();
+  return text ? text.charAt(0).toUpperCase() + text.slice(1) : '';
+}
+
+/**
+ * World clock section — the read-only in-world date and tick. Derived from the
+ * sanitized snapshot.worldClock ({ tick, calendar: { year, month, season,
+ * elapsedMonths } }). Self-gates to null when the snapshot carries no clock, so
+ * a share that enables only this section still renders something rather than an
+ * empty living-world panel.
+ */
+function WorldClockSection({ worldClock }) {
+  const clock = worldClock && typeof worldClock === 'object' ? worldClock : null;
+  if (!clock) return null;
+  const calendar = clock.calendar && typeof clock.calendar === 'object' ? clock.calendar : {};
+  const tick = Math.max(0, Math.floor(Number(clock.tick) || 0));
+  const year = Math.max(1, Math.floor(Number(calendar.year) || 1));
+  const month = Math.max(1, Math.floor(Number(calendar.month) || 1));
+  const season = titleCase(calendar.season) || 'Spring';
+  return (
+    <section style={{ display: 'grid', gap: SP.sm }}>
+      <SectionHead Icon={CalendarClock}>World Clock</SectionHead>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
+        <Chip title="In-world year">Year {year}</Chip>
+        <Chip title="In-world month">Month {month}</Chip>
+        <Chip title="In-world season">{season}</Chip>
+        <Chip title="Simulation tick">Tick {tick}</Chip>
+      </div>
+    </section>
   );
 }
 
@@ -243,11 +278,17 @@ function WarNetworkSection({ warNetwork }) {
   );
 }
 
+// Each renderer invokes its section as a plain function (not <Section/>) so a
+// dormant section returns null straight through, and the empty-shell guard below
+// can actually drop it. Returning an element would always be truthy and defeat
+// the self-gate the panel promises (an enabled-but-dataless section then showed
+// just the "living world" header with nothing under it).
 const SECTION_RENDERERS = {
-  dashboard: (snapshot) => <DashboardSection dashboard={snapshot?.dashboard} />,
-  chronicle: (snapshot) => <ChronicleSection chronicle={snapshot?.chronicle} />,
-  pantheon: (snapshot) => <PantheonSection pantheon={snapshot?.pantheon} />,
-  warNetwork: (snapshot) => <WarNetworkSection warNetwork={snapshot?.warNetwork} />,
+  worldClock: (snapshot) => WorldClockSection({ worldClock: snapshot?.worldClock }),
+  dashboard: (snapshot) => DashboardSection({ dashboard: snapshot?.dashboard }),
+  chronicle: (snapshot) => ChronicleSection({ chronicle: snapshot?.chronicle }),
+  pantheon: (snapshot) => PantheonSection({ pantheon: snapshot?.pantheon }),
+  warNetwork: (snapshot) => WarNetworkSection({ warNetwork: snapshot?.warNetwork }),
 };
 
 /**
@@ -256,8 +297,9 @@ const SECTION_RENDERERS = {
  *   world snapshot (worldSnapshotPublic shape: worldClock, chronicle, pantheon,
  *   warNetwork, dashboard). Null when the owner did not share the living world.
  * @param {string[]} [props.sections]  the owner's enabled section keys (a subset
- *   of dashboard / chronicle / pantheon / warNetwork). Only these render, in the
- *   canonical Inspector order, and only when the snapshot carries their data.
+ *   of worldClock / dashboard / chronicle / pantheon / warNetwork). Only these
+ *   render, in the canonical Inspector order, and only when the snapshot carries
+ *   their data.
  */
 export default function CampaignStatePanel({ snapshot, sections }) {
   // Render nothing when the owner did not share the living world (parent shows

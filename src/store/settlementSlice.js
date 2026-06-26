@@ -308,7 +308,16 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
     } catch { /* the war-front seed is best-effort; the committed event stands */ }
   }
 
-  if (event?.partyCaused && campaign) {
+  // Party impact (a party-caused event with a world-scale analog). Gated by
+  // skipRegional like the regional + war-front halves above: on the IMMEDIATE
+  // ripple path this fires recordPartyImpact now, which does its OWN out-of-band
+  // backward cloud write (flushWorldPulsePersist). During a campaign-member
+  // change-queue flush (flushApplyLocalOnly ⇒ skipRegional) that write would
+  // escape the flush's single atomic commit AND its rollback, so we SKIP it here
+  // and DEFER the impact onto worldState.deferredPartyImpacts (see applyEvent),
+  // exactly as the regional + war-front halves are deferred. The next Advance
+  // drains the bucket through the same recordPartyImpact replay path.
+  if (!skipRegional && event?.partyCaused && campaign) {
     try {
       const action = mapEventToPartyImpact(event, activeSaveId);
       const record = afterState.recordPartyImpact;
@@ -1990,6 +1999,24 @@ export const createSettlementSlice = (set, get) => ({
           });
         }
       } catch { /* the deferred war-front stash is best-effort; the committed event stands */ }
+    }
+
+    // Phase 4b — campaign-member commit: the PARTY-IMPACT half. The immediate
+    // ripple path fires recordPartyImpact eagerly (its own backward, out-of-band
+    // cloud write), but under flushApplyLocalOnly rippleEventThroughWorld ran with
+    // skipRegional, so the party impact was NOT recorded. Resolve the impact action
+    // HERE and STASH it onto worldState.deferredPartyImpacts. It is NOT recorded
+    // live — that backward write would escape the flush's single atomic commit and
+    // its rollback (an un-revertable cloud write on a member flush). The next Advance
+    // drains the bucket through the same recordPartyImpact replay it uses for queued
+    // party-caused events, so the impact lands in the same atomic advance + is rolled
+    // back with the flush on failure.
+    if (afterState.flushApplyLocalOnly && committedEvent?.partyCaused && campaign
+        && typeof afterState.stashDeferredPartyImpact === 'function') {
+      try {
+        const action = mapEventToPartyImpact(committedEvent, activeSaveId);
+        if (action) afterState.stashDeferredPartyImpact(campaign.id, action);
+      } catch { /* the deferred party-impact stash is best-effort; the committed event stands */ }
     }
 
     return logEntry;

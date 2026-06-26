@@ -10,6 +10,30 @@ import { wallClockNow } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
 
+// Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
+// (a one_year advance is 48 synchronous one-week ticks) does not freeze the UI:
+// the await hands control back to the event loop, letting the toolbar progress
+// paint between batches. Purely a scheduling seam — it sits BETWEEN ticks and
+// touches no per-tick compute, so determinism + the golden / pause-resume
+// byte-equivalence are unaffected (the same ticks run in the same order).
+const YIELD_EVERY_TICKS = 8;
+
+/**
+ * Yield to the event loop so pending paints/tasks can run between tick batches.
+ * Prefers the platform scheduler.yield() (lower-priority continuation) when
+ * present, falling back to a resolved microtask. Awaiting either is a no-op for
+ * the simulation's output — it only defers WHEN the next tick runs, not WHAT it
+ * computes.
+ * @returns {Promise<void>}
+ */
+function yieldToEventLoop() {
+  const scheduler = /** @type {any} */ (globalThis).scheduler;
+  if (scheduler && typeof scheduler.yield === 'function') {
+    return Promise.resolve(scheduler.yield());
+  }
+  return Promise.resolve();
+}
+
 // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
 // the DM picks is a DURATION, not a single coarse step — `simulateCampaignWorldPulse`
 // is already a correct, pure one-week kernel (bumps tick +1, re-seeds its PRNG
@@ -157,8 +181,18 @@ function foldUpdatesOntoSaves(saves, updates) {
  * }|null} [args.resume] Stage 3 RESUME cursor (from a prior pause). When set, the
  *   orchestrator re-runs `resumeTick` from the pre-tick inputs (with decisions
  *   folded in), then continues.
+ *
+ * ASYNC: the orchestrator is async + yields to the event loop every
+ * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 48
+ * one-week kernel passes for a one_year) does not block the main thread and the
+ * toolbar progress can paint. The yields sit strictly BETWEEN ticks, so the
+ * per-tick compute, the tick ORDER, and the composed output are byte-identical
+ * to the prior synchronous version: only WHEN the next tick runs changes, never
+ * WHAT it produces. Callers must `await` the result.
+ *
+ * @returns {Promise<any>}
  */
-export function simulateCampaignWorldInterval({
+export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(),
   autoResolve = true, resume = null,
 } = {}) {
@@ -300,6 +334,15 @@ export function simulateCampaignWorldInterval({
     };
     runningSaves = foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates);
     last = tickResult;
+
+    // Yield between tick batches (not after the final tick) so the toolbar
+    // progress can paint on a long advance. Strictly a scheduling pause: the
+    // next tick's inputs (runningCampaign / runningSaves) are already threaded
+    // above, so the deferred tick computes byte-identically to the synchronous
+    // version — only its timing changes.
+    if (i < tickCount - 1 && (i + 1) % YIELD_EVERY_TICKS === 0) {
+      await yieldToEventLoop();
+    }
   }
 
   // Ran to the end with no pause (autoResolve ON, or OFF with no majors surfaced).

@@ -38,11 +38,15 @@ const fetchGalleryMaps = vi.fn().mockResolvedValue({ items: GALLERY_ITEMS });
 const fetchGalleryMap = vi.fn().mockResolvedValue(null);
 
 const updateMapGalleryMetadata = vi.fn().mockResolvedValue(undefined);
+// The editor seeds its edit-after-publish draft from this dedicated fetch on mount;
+// null ⇒ no persisted seed available, so the draft keeps its defaults.
+const fetchCampaignGalleryFields = vi.fn().mockResolvedValue(null);
 
 vi.mock('../../../src/lib/gallery.js', () => ({
   shareMap: (...a) => shareMap(...a),
   unshareMap: (...a) => unshareMap(...a),
   updateMapGalleryMetadata: (...a) => updateMapGalleryMetadata(...a),
+  fetchCampaignGalleryFields: (...a) => fetchCampaignGalleryFields(...a),
   fetchGalleryMaps: (...a) => fetchGalleryMaps(...a),
   fetchGalleryMap: (...a) => fetchGalleryMap(...a),
 }));

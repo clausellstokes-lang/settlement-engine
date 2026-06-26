@@ -383,6 +383,23 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
           });
         }
       }
+      // Phase 4b — DRAIN any deferred PARTY-IMPACT actions (parked by campaign-member
+      // change-queue commits of a party-caused event since the last Advance) onto
+      // drainedPartyImpacts, then clear the bucket. These replay through the SAME
+      // post-pulse recordPartyImpact path as the queue-surfaced party impacts below
+      // (gated by !cloudPending), so a deferred party impact lands in this Advance's
+      // flow rather than escaping the original flush's atomic commit. Cleared FIRST
+      // (the Phase-1 rollback restores the full pre-drain snapshot on a throw) so a
+      // SECOND Advance finds [] and replays nothing — structurally no double-apply.
+      {
+        const pending = Array.isArray(c.worldState.deferredPartyImpacts) ? c.worldState.deferredPartyImpacts : [];
+        if (pending.length > 0) {
+          drainedPartyImpacts = [...drainedPartyImpacts, ...pending.map(action => ({ action: cloneJson(action) }))];
+        }
+        if ('deferredPartyImpacts' in c.worldState) {
+          c.worldState = { ...c.worldState, deferredPartyImpacts: [] };
+        }
+      }
       // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)
       // draft, so their values are draft proxies that Immer revokes the moment
       // this producer returns. Lift them to plain objects now (mirroring the
@@ -401,8 +418,16 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       simSaves = cloneJson(campaignSettlements(state, campaignId));
     });
 
-    // Pure, heavy compute OUTSIDE the producer (synchronous — no await before
-    // the commit set() below, so the action stays atomic w.r.t. other actions).
+    // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited:
+    // the interval orchestrator yields to the event loop between tick batches so
+    // a long advance (up to 48 one-week kernel passes) does not freeze the UI.
+    // That yield is the ONLY await between the drain set() and the commit set()
+    // below; the per-campaign advanceInFlight guard (set synchronously before the
+    // first await) already serializes advance/resume on THIS campaign across the
+    // yield, so no second advance can observe the drained-but-not-committed state.
+    // The compute is a pure function over the plain clones lifted above (it never
+    // reads the live draft), so the yield only changes WHEN the commit lands, not
+    // WHAT it commits — determinism + the composed result are unchanged.
     //
     // ATOMICITY: Phase 1 ALREADY committed the queue drain (player intentions
     // consumed off worldState.pendingEvents, member settlements + the live view
@@ -419,7 +444,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // final tick; the single-tick path commits as before). The composed
         // result has the SAME shape, so Phase 2 + persist + analytics are identical.
         result = useMultiTick
-          ? domainSimulateCampaignWorldInterval({
+          ? await domainSimulateCampaignWorldInterval({
               campaign: simCampaign,
               saves: simSaves,
               interval,
@@ -682,7 +707,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // and only a legacy cursor lacking it falls back to wall-clock.
     const now = options.now || cursor.now || new Date().toISOString();
     const pre = cursor.preSnapshot || {};
-    result = domainSimulateCampaignWorldInterval({
+    // Awaited: the orchestrator yields between tick batches so a long resumed
+    // segment does not freeze the UI. The advanceInFlight guard (set above)
+    // serializes resume/advance on this campaign across the yield, and the resume
+    // is pure over the cursor's pre-tick inputs, so the yield changes only WHEN
+    // the commit lands, not WHAT it computes (seed-replay determinism preserved).
+    result = await domainSimulateCampaignWorldInterval({
       campaign: simCampaign,
       saves: simSaves,
       commit: true,

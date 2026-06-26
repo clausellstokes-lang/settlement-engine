@@ -252,9 +252,18 @@ function publicTradeWars(worldState, regionalGraph, nameById) {
   for (const prizeId of Object.keys(state).sort(codepoint)) {
     const entry = state[prizeId] && typeof state[prizeId] === 'object' ? state[prizeId] : {};
     if (entry.lastFlipTick == null) continue; // never contested → not a trade war
+    // Prefer the REAL ids the ledger now persists (buyerId/commodityId). The prizeId
+    // key is the SLUG form (stablePart-lowercased, non-alnum to underscore), so
+    // splitting it on ':' recovers slugs, not the real ids nameById is keyed by,
+    // which rendered names as slugs. Fall back to the slug-split only for a legacy
+    // ledger entry written before the ids were persisted.
     const idx = String(prizeId).indexOf(':');
-    const buyerId = idx >= 0 ? String(prizeId).slice(0, idx) : String(prizeId);
-    const commodityId = idx >= 0 ? String(prizeId).slice(idx + 1) : '';
+    const buyerId = entry.buyerId != null
+      ? String(entry.buyerId)
+      : (idx >= 0 ? String(prizeId).slice(0, idx) : String(prizeId));
+    const commodityId = entry.commodityId != null
+      ? String(entry.commodityId)
+      : (idx >= 0 ? String(prizeId).slice(idx + 1) : '');
     const winnerId = entry.winnerId != null ? String(entry.winnerId) : '';
     out.push({
       prizeId: String(prizeId),
@@ -340,6 +349,14 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
     if (!slot) { slot = { tick, headlines: [], affected: new Set() }; byTick.set(tick, slot); }
     const outcomes = Array.isArray(pulse?.selectedOutcomes) ? pulse.selectedOutcomes : [];
     for (const o of outcomes) {
+      // PLAYER-VISIBILITY GATE: a pulse's selectedOutcomes carries BOTH auto-applied
+      // outcomes AND proposal outcomes (the un-surfaced plot the DM has not yet
+      // approved, plus the NPC goals/scheming those proposals carry). Only an
+      // auto-applied outcome was actually surfaced to players, so the public
+      // chronicle surfaces ONLY applyMode === 'auto'; a proposal (DM-private) is
+      // dropped. Mirrors relationshipMemory's rule that an un-applied proposal is
+      // not a real, surfaced incident.
+      if (o?.applyMode !== 'auto') continue;
       // Headline + summary ONLY — never the outcome object (which carries
       // rollExplanations, candidateId, raw deltas). Strings are coerced + bounded.
       slot.headlines.push({
@@ -370,7 +387,11 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
 
 /**
  * The settlement ids one pulse outcome touched — direct target + population-delta
- * keys + power-transfer losers. Deduped, string-typed.
+ * keys. Deduped, string-typed. Deliberately does NOT source ids from
+ * `powerTransfer.losers`: those entries are display NAMES, not save ids, so folding
+ * them in poisoned affectedSettlementIds (and the name lookup, which then failed and
+ * echoed the raw name as an "id"). Only `targetSaveId` + `populationDeltas` keys are
+ * genuine save ids.
  * @param {any} outcome
  * @returns {string[]}
  */
@@ -380,8 +401,6 @@ function collectAffectedIds(outcome) {
   if (outcome?.targetSaveId != null) ids.add(String(outcome.targetSaveId));
   const popDeltas = outcome?.populationDeltas;
   if (popDeltas && typeof popDeltas === 'object') for (const key of Object.keys(popDeltas)) ids.add(String(key));
-  const losers = outcome?.powerTransfer?.losers;
-  if (Array.isArray(losers)) for (const l of losers) if (l != null) ids.add(String(l));
   return [...ids];
 }
 

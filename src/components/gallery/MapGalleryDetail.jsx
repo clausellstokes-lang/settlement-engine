@@ -72,9 +72,12 @@ function KindPill({ kind }) {
  * @param {(detail: any) => void} [props.onImport]  import this map (label keys on kind).
  * @param {boolean} [props.importBusy]  the import is in flight.
  * @param {boolean} [props.imported]  the import has completed.
- * @param {boolean} [props.importEligible]  the owner opted in AND the viewer may import.
+ * @param {boolean} [props.importEligible]  the owner opted in AND the viewer may
+ *   import (premium). False for a non-premium viewer, who gets importNotice.
  * @param {string | null} [props.importNotice]  a calm note shown in place of the
  *   import button when it is not eligible (e.g. view-only, or premium-gated).
+ * @param {(() => void) | undefined} [props.onUpgrade]  when set, the notice gains a
+ *   calm "See plans" next-step (the premium-gate path), never a dead-end.
  */
 export default function MapGalleryDetail({
   detail,
@@ -86,6 +89,7 @@ export default function MapGalleryDetail({
   imported,
   importEligible,
   importNotice,
+  onUpgrade,
 }) {
   const [shared, setShared] = useState(false);
   const onShare = async () => {
@@ -195,8 +199,13 @@ export default function MapGalleryDetail({
                   {imported ? 'Imported' : importLabel}
                 </Button>
               ) : importNotice ? (
-                <span style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', color: BODY, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>
                   {importNotice}
+                  {onUpgrade ? (
+                    <Button variant="primary" size="sm" onClick={onUpgrade}>
+                      See plans
+                    </Button>
+                  ) : null}
                 </span>
               ) : null}
               <Button

@@ -31,6 +31,7 @@ const unshareMap = vi.fn().mockResolvedValue(undefined);
 const fetchGalleryMaps = vi.fn().mockResolvedValue({ items: GALLERY_ITEMS });
 const fetchGalleryMap = vi.fn().mockResolvedValue(null);
 const updateMapGalleryMetadata = vi.fn().mockResolvedValue(undefined);
+const fetchCampaignGalleryFields = vi.fn().mockResolvedValue(null);
 
 vi.mock('../../../src/lib/gallery.js', () => ({
   shareMap: (...a) => shareMap(...a),
@@ -38,6 +39,7 @@ vi.mock('../../../src/lib/gallery.js', () => ({
   fetchGalleryMaps: (...a) => fetchGalleryMaps(...a),
   fetchGalleryMap: (...a) => fetchGalleryMap(...a),
   updateMapGalleryMetadata: (...a) => updateMapGalleryMetadata(...a),
+  fetchCampaignGalleryFields: (...a) => fetchCampaignGalleryFields(...a),
   GALLERY_SORT_OPTIONS: [['relevant', 'Most relevant'], ['top_voted', 'Top voted']],
 }));
 

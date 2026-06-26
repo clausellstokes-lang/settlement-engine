@@ -436,10 +436,14 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       }
 
       // ── Persist the prize state; stamp lastFlipTick only on a real flip. ────
+      // buyerId + commodityId are the REAL ids (not the slugged prizeId key) so a
+      // public reader can resolve display names without un-slugging the key.
       const priorEntry = tradeWarState[prizeId] || {};
       tradeWarState[prizeId] = {
         winnerId: result.winnerId,
         incumbentId: result.incumbentId,
+        buyerId: String(buyerId),
+        commodityId: String(commodityId),
         lastFlipTick: result.changed ? tick : (Number.isFinite(priorEntry.lastFlipTick) ? priorEntry.lastFlipTick : null),
         updatedTick: tick,
       };
