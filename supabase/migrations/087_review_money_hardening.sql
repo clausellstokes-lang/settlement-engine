@@ -53,6 +53,12 @@ create policy "Users update own profile (safe preferences only)"
     and disabled_at            is not distinct from (select disabled_at            from public.profiles where id = auth.uid())
     and deleted_at             is not distinct from (select deleted_at             from public.profiles where id = auth.uid())
     and account_number         is not distinct from (select account_number         from public.profiles where id = auth.uid())
+    -- external_name has server-authoritative validation (reserved-name/charset/
+    -- case-insensitive uniqueness) that lives ONLY in update_external_name(text)
+    -- (075, SECURITY DEFINER). Pinning it here forces all writes through that
+    -- validated RPC — a direct self-UPDATE can no longer set a reserved/duplicate/
+    -- malformed public author name. The client already edits it only via the RPC.
+    and external_name          is not distinct from (select external_name          from public.profiles where id = auth.uid())
   );
 
 -- ── 1c. account_is_active: also grant to service_role (explicit, fail-closed) ─
@@ -164,21 +170,29 @@ declare
   v_removed integer := 0;
   v_dup record;
 begin
+  -- Group by EXACTLY the unique-index key (metadata->>'refund_of') so the dedup
+  -- can never leave a residual duplicate the index would then reject (grouping by
+  -- (user_id, amount, refund_of) could miss a same-spend pair with a drifted amount).
   for v_dup in
-    select user_id, amount, (metadata->>'refund_of') as refund_of,
+    select (metadata->>'refund_of') as refund_of,
            array_agg(id order by created_at, id) as ids
       from public.credit_ledger
      where source = 'refund' and metadata ? 'refund_of'
-     group by user_id, amount, (metadata->>'refund_of')
+     group by (metadata->>'refund_of')
     having count(*) > 1
   loop
-    -- delete every refund grant for this spend EXCEPT the earliest (ids[1])
-    delete from public.credit_ledger
-     where id = any(v_dup.ids[2:array_length(v_dup.ids, 1)]);
-    -- reverse the phantom credits the extra refunds added to the legacy counter
-    update public.profiles
-       set credits = greatest(0, credits - v_dup.amount * (array_length(v_dup.ids, 1) - 1))
-     where id = v_dup.user_id;
+    -- Delete every refund grant for this spend EXCEPT the earliest (ids[1]), and
+    -- reverse the SUMMED deleted amount from each affected user's legacy counter
+    -- (robust even if the duplicate grants drifted in amount).
+    with extras as (
+      delete from public.credit_ledger
+       where id = any(v_dup.ids[2:array_length(v_dup.ids, 1)])
+       returning user_id, amount
+    )
+    update public.profiles p
+       set credits = greatest(0, p.credits - agg.total)
+      from (select user_id, sum(amount) as total from extras group by user_id) agg
+     where p.id = agg.user_id;
     v_removed := v_removed + (array_length(v_dup.ids, 1) - 1);
   end loop;
   if v_removed > 0 then
@@ -218,11 +232,14 @@ begin
   -- When the caller doesn't override, read the operator-tunable config row.
   if p_window_seconds is null or p_user_limit is null then
     select value into v_cfg from public.system_config where key = 'ai_user_rate_limit';
+    -- Defensive cast: a malformed (non-integer) config value must FALL BACK to the
+    -- default, not RAISE — a raise propagates to the edge caller, which fails OPEN
+    -- on RPC error and would silently DISABLE the per-user rate limiter.
     if p_window_seconds is null then
-      p_window_seconds := coalesce((v_cfg ->> 'window_seconds')::integer, 86400);
+      p_window_seconds := coalesce((case when (v_cfg ->> 'window_seconds') ~ '^[0-9]+$' then (v_cfg ->> 'window_seconds')::integer end), 86400);
     end if;
     if p_user_limit is null then
-      p_user_limit := coalesce((v_cfg ->> 'per_user_limit')::integer, 60);
+      p_user_limit := coalesce((case when (v_cfg ->> 'per_user_limit') ~ '^[0-9]+$' then (v_cfg ->> 'per_user_limit')::integer end), 60);
     end if;
   end if;
 

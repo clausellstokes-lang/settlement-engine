@@ -198,6 +198,62 @@ describe('EventComposer — Apply stages onto the change-queue', () => {
   });
 });
 
+describe('EventComposer — switching event type clears stale role / institution', () => {
+  test('role typed for ASSIGN_NPC_TO_ROLE does not leak into a later ADD_NPC payload', () => {
+    state = baseState();
+    const { container } = render(<EventComposer />);
+
+    // ASSIGN_NPC_TO_ROLE with no institution shows a free-text Role input.
+    pickEventType(container, 'ASSIGN_NPC_TO_ROLE');
+    fireEvent.change(screen.getByLabelText('Role'), { target: { value: 'Watch Captain' } });
+
+    // Switch to a type that also consumes `role` (ADD_NPC writes payload.role).
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Mira the Bold' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+
+    // Pre-fix the stale 'Watch Captain' role rode along in the ADD_NPC payload.
+    const applied = lastStagedEvent();
+    expect(applied.type).toBe('ADD_NPC');
+    expect(applied.payload).not.toHaveProperty('role');
+  });
+
+  test('institution chosen for ASSIGN_NPC_TO_ROLE does not leak into a later ADD_NPC link', () => {
+    state = baseState({
+      settlement: {
+        name: 'Greenhollow',
+        institutions: [{ id: 'temple-1', name: 'Temple of the Dawn' }],
+        npcs: [],
+        powerStructure: { factions: [] },
+        config: {},
+      },
+    });
+    const { container } = render(<EventComposer />);
+
+    // Pick the institution under ASSIGN_NPC_TO_ROLE (the Institution select
+    // renders once the settlement has an institution to link). The Field wraps
+    // its control in a <label> whose accessible name is label + hint.
+    pickEventType(container, 'ASSIGN_NPC_TO_ROLE');
+    fireEvent.change(screen.getByRole('combobox', { name: /link this NPC to an institution/ }), { target: { value: 'temple-1' } });
+
+    // Switch to ADD_NPC (which writes payload.linkedInstitutionIds from institutionId).
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Mira the Bold' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+
+    // Pre-fix the stale 'temple-1' link rode along as linkedInstitutionIds.
+    const applied = lastStagedEvent();
+    expect(applied.type).toBe('ADD_NPC');
+    expect(applied.payload).not.toHaveProperty('linkedInstitutionIds');
+  });
+});
+
 describe('EventComposer — no staleness modal in the composer', () => {
   function stageAddNpc(container, name = 'Mira the Bold') {
     pickEventType(container, 'ADD_NPC');

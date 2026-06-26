@@ -145,6 +145,34 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const activeDismissals = !deferMajors && dismissMajorIds && typeof dismissMajorIds.has === 'function' && dismissMajorIds.size > 0
     ? dismissMajorIds
     : null;
+  // PAUSE-path residue suppression (deferMajors=true). A paused tick WITHHOLDS every
+  // major from the apply pass (the deferredMajors partition below) but the war /
+  // mobilization / occupation layers still ran and banked their OUT-OF-BAND ledger
+  // residue — an occupation seeded from a withheld conquest, a warPosture ramp from a
+  // withheld mobilization, a vassalized promotion from a withheld vassalization, the
+  // conquest disposition ratchet. Left committed, a PAUSED world is internally
+  // inconsistent: the occupation is written while the conquest major it came from is
+  // parked for a DM decision. So the SAME residue the dismiss path suppresses for a
+  // withheld major must be suppressed here for EVERY deferred major. The dismiss path
+  // keys its suppression by an explicit id set; the defer path withholds ALL majors, so
+  // we derive the equivalent id set from the in-block major outcomes via this predicate.
+  // The two never co-fire (activeDismissals is null when deferMajors is on, and this is
+  // null when off), and BOTH are inert when there is nothing to withhold — so a paused
+  // world with no majors, and a resume that dismissed nothing, stay byte-identical to
+  // the single-pass autoresolve-ON tick (the equivalence invariant).
+  const suppressDeferredMajorResidue = deferMajors;
+  // The effective suppression id set for a list of outcomes: the explicitly-dismissed
+  // majors on the resume path, or EVERY major on the pause path. Returns null when
+  // nothing is suppressed (so the sub-evaluators short-circuit to byte-identical).
+  const residueSuppressionIds = (/** @type {any[]} */ outcomes) => {
+    if (activeDismissals) return activeDismissals;
+    if (!suppressDeferredMajorResidue) return null;
+    const ids = new Set();
+    for (const o of outcomes || []) {
+      if (deriveDecisionTier(o) === 'major' && o?.id != null) ids.add(String(o.id));
+    }
+    return ids.size > 0 ? ids : null;
+  };
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -371,27 +399,48 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
       wantsWarFor,
     });
+    // RESUME dismissal: a DM-dismissed war_mobilization major must commit NOTHING — not
+    // its footing condition, not its neighbour signal channels, AND not its warPosture
+    // ledger entry (dropped below from effects.dismissedIds). On the dismiss path the
+    // whole outcome is gone (the DM declined it), so mobilizationEffects drops it
+    // wholesale via dismissedOutcomeIds.
     const effects = mobilizationEffects({
       snapshot: postTimeSnapshot,
       events: mobilization.events,
       tick: worldState.tick,
       now,
-      // RESUME dismissal: a DM-dismissed war_mobilization major must commit NOTHING —
-      // not its footing condition, not its neighbour signal channels, AND not its
-      // warPosture ledger entry (dropped below from effects.dismissedIds). Parity with
-      // the conquest-dismiss path. Inert (null) on the non-resume / no-dismissal path.
       dismissedOutcomeIds: activeDismissals,
     });
     mobilizationOutcomes = effects.outcomes;
+    // PAUSE-path residue suppression: a DEFERRED war_mobilization major is still SURFACED
+    // (it must reach deferredMajors so the DM can decide it on resume) and its footing
+    // condition is withheld from the apply pass by the deferMajors partition below — but
+    // its OUT-OF-BAND residue (the warPosture ramp + the neighbour signal channels) must
+    // NOT commit, else the paused world ramps a war footing whose mobilization is parked.
+    // So unlike the dismiss path (which drops the whole outcome), the defer path KEEPS the
+    // footing outcome and strips only the ledger/graph residue, keyed by the settlement id
+    // of each deferred footing major (war_mobilization is always a major).
+    const deferredMobilizerIds = suppressDeferredMajorResidue
+      ? new Set(effects.outcomes.filter(o => deriveDecisionTier(o) === 'major' && o?.targetSaveId != null).map(o => String(o.targetSaveId)))
+      : null;
     // Drop the warPosture ledger key for any settlement whose war_mobilization the DM
-    // dismissed: the posture ramp is a SIDE EFFECT of the dismissed major, so leaving it
-    // committed would strand a war footing for a mobilization that never landed. Mirrors
-    // the conquest-dismiss occupation-seed suppression. Byte-neutral without dismissals.
+    // dismissed (effects.dismissedIds) or whose footing major this paused tick deferred:
+    // the posture ramp is a SIDE EFFECT of a major that did not (or has not yet) landed.
+    // Mirrors the conquest-dismiss occupation-seed suppression. Byte-neutral otherwise.
     let nextWarPosture = mobilization.warPosture;
-    if (effects.dismissedIds.length) {
+    if (effects.dismissedIds.length || deferredMobilizerIds?.size) {
       nextWarPosture = { ...mobilization.warPosture };
       for (const id of effects.dismissedIds) delete nextWarPosture[id];
+      if (deferredMobilizerIds) for (const id of deferredMobilizerIds) delete nextWarPosture[id];
     }
+    // On the pause path, also drop the deferred mobilizers' VISIBLE signal channels (the
+    // information_flow mints from war_layer_mobilization) from the graph residue — they
+    // are the public face of a war footing the DM has not yet ratified. The dismiss path
+    // never minted them (the outcome was dropped); the defer path minted them here, so we
+    // filter them out before they land on the snapshot.
+    const postureGraphChannels = deferredMobilizerIds?.size
+      ? effects.graphChannels.filter(c => !(c?.type === 'information_flow' && deferredMobilizerIds.has(String(c?.from))))
+      : effects.graphChannels;
     // Persist the NEXT-tick posture ledger (deep-cloned via ensureWorldState's
     // conditional clone on the next read). Only materialize the key when non-empty —
     // a dormant campaign keeps NO warPosture key (byte-neutral under the oracle).
@@ -401,8 +450,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // Rebuild the snapshot so the war layer's deploy gate + the reaction rule read the
     // persisted posture AND the freshly-minted mobilization signals.
     const postureCampaign = { ...campaign, worldState, regionalGraph: postTimeSnapshot.regionalGraph };
-    if (effects.graphChannels.length) {
-      const signalGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, effects.graphChannels, { now });
+    if (postureGraphChannels.length) {
+      const signalGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, postureGraphChannels, { now });
       postTimeSnapshot = buildWorldSnapshot({ campaign: { ...postureCampaign, regionalGraph: signalGraph }, saves: postTimeSaves, worldState });
     } else {
       postTimeSnapshot = buildWorldSnapshot({ campaign: postureCampaign, saves: postTimeSaves, worldState });
@@ -511,12 +560,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // reads, so freshConquestsFrom never seeds a phantom `contested` occupation for a
     // target the DM declined to let fall. The dismissed conquest is ALSO excluded from
     // the apply set below — the two filters together leave NO occupation/ledger residue
-    // for a dismissed conquest. Byte-neutral when there are no dismissals (the array is
-    // returned unchanged by reference).
-    const occupationWarOutcomes = activeDismissals
-      ? war.outcomes.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
+    // for a dismissed conquest. On the PAUSE path the SAME seed suppression applies to
+    // EVERY deferred conquest major (a paused world must not seed an occupation from a
+    // conquest parked for a DM decision). Byte-neutral when nothing is suppressed (the
+    // array is returned unchanged by reference).
+    const conquestSuppressedIds = residueSuppressionIds(war.outcomes);
+    const occupationWarOutcomes = conquestSuppressedIds
+      ? war.outcomes.filter(o => !(deriveDecisionTier(o) === 'major' && conquestSuppressedIds.has(String(o.id))))
       : war.outcomes;
-    const occupation = evaluateOccupations({
+    const occupationArgs = {
       snapshot: postTimeSnapshot,
       worldState,
       graph: postTimeSnapshot.regionalGraph,
@@ -525,12 +577,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       returnOutcomes: warReturnOutcomes,
       tick: worldState.tick,
       rules: simulationRules,
-      // RESUME dismissal: a DM-dismissed occupation_vassalized must NOT strand the
-      // occupation at the terminal `vassalized` rung — the state machine rolls the
-      // promotion back so the vassal edge (filtered from the apply set below) and the
-      // ledger stay consistent. Parity with the conquest-dismiss occupation suppression.
-      dismissedOutcomeIds: activeDismissals,
-    });
+    };
+    // RESUME dismissal: a DM-dismissed occupation_vassalized must NOT strand the
+    // occupation at the terminal `vassalized` rung — the state machine rolls the
+    // promotion back so the vassal edge (filtered from the apply set below) and the
+    // ledger + disposition stay consistent (no rung advance ⇒ no advance-win delta, and
+    // the arrival one-shot never fires ⇒ the outcome is dropped). Parity with the
+    // conquest-dismiss occupation suppression.
+    let occupation = evaluateOccupations({ ...occupationArgs, dismissedOutcomeIds: activeDismissals });
+    // PAUSE-path residue suppression: a DEFERRED occupation_vassalized major must NOT
+    // promote the ledger to the terminal `vassalized` rung either (else the paused world
+    // holds a vassalized occupation whose vassal edge — withheld from the apply pass — never
+    // landed, AND banks the advance-win disposition residue). We RE-RUN the occupation
+    // layer with the same in-evaluator rollback the dismiss path uses, threading the
+    // would-be vassalization ids (discovered from the full first pass) as the rollback set —
+    // so the LEDGER + the advance-win delta are both held back, byte-identically to the
+    // dismiss path. But unlike dismiss, the major must still be SURFACED to the DM, so we
+    // RE-INJECT the first pass's vassalization outcome(s): they reach deferredMajors and
+    // are withheld from the apply pass by the deferMajors partition below. Inert (null)
+    // when no vassalization would mint ⇒ byte-identical to the single-pass tick.
+    const deferredVassalIds = suppressDeferredMajorResidue ? residueSuppressionIds(occupation.outcomes) : null;
+    if (deferredVassalIds) {
+      const surfacedVassalizations = occupation.outcomes.filter(
+        o => o?.candidateType === 'occupation_vassalized' && deriveDecisionTier(o) === 'major',
+      );
+      const rolledBack = evaluateOccupations({ ...occupationArgs, dismissedOutcomeIds: deferredVassalIds });
+      occupation = {
+        ...rolledBack,
+        // Surface the withheld vassalization majors (rolledBack omits them); their ledger
+        // rung + advance-win delta come from the rolled-back run, their apply is deferred.
+        outcomes: [...rolledBack.outcomes, ...surfacedVassalizations],
+      };
+    }
     occupationOutcomes = occupation.outcomes;
     // Only materialize the occupations key when the ledger is non-empty — a war with no
     // surviving occupation stays absent (byte-neutral under the dormancy oracle).
@@ -555,13 +633,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // with its source conquest's outcome id at the resolver (warDeployment), so we strip
     // EXACTLY the deltas of the dismissed conquests by that id — robust against order and
     // against an occupier banking two conquests at once OR carrying an unrelated win this
-    // tick (which the old {id, outcome} match could mis-strip). Inert without dismissals.
-    if (activeDismissals) {
+    // tick (which the old {id, outcome} match could mis-strip). On the PAUSE path the SAME
+    // strip applies to EVERY deferred conquest major (the ratchet is the out-of-band side
+    // effect of a withheld conquest). Reuses the conquest suppression set computed for the
+    // occupation seed above. Inert when nothing is suppressed.
+    if (conquestSuppressedIds) {
       const dismissedConquestIds = new Set(
         war.outcomes
           .filter(o => o?.candidateType === 'conquest'
             && deriveDecisionTier(o) === 'major'
-            && activeDismissals.has(String(o.id)))
+            && conquestSuppressedIds.has(String(o.id)))
           .map(o => String(o.id)),
       );
       if (dismissedConquestIds.size) {

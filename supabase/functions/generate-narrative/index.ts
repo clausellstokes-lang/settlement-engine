@@ -805,7 +805,9 @@ export async function handleGenerateNarrative(
     // the credit charged is fixed regardless of input size, so an unbounded
     // settlement payload would only inflate the provider token bill.
     const rawBody = await req.text().catch(() => '');
-    if (rawBody.length > MAX_BODY_BYTES) {
+    // Measure BYTES, not UTF-16 code units — a multi-byte payload (rawBody.length
+    // counts code units) would otherwise slip past the intended byte ceiling.
+    if (new TextEncoder().encode(rawBody).length > MAX_BODY_BYTES) {
       return new Response(
         JSON.stringify({ error: 'Request body too large' }),
         { status: 413, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },

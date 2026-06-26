@@ -86,6 +86,14 @@
       ]
     },
     {
+      "file": "jquery-ui.css",
+      "name": "jquery-ui.css",
+      "version": "unknown",
+      "byteSize": 11228,
+      "sha256": "0aa36b4aeff16b0c819ddba027aa3dc4db2a7d7dab53a3db0a4168d3a8e33c45",
+      "knownAdvisories": []
+    },
+    {
       "file": "jquery-ui.min.js",
       "name": "jquery-ui",
       "version": "unknown",
@@ -787,6 +795,22 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/content/dark/content.min.css",
+      "name": "tinymce/skins/content/dark/content.min.css",
+      "version": "unknown",
+      "byteSize": 1216,
+      "sha256": "309da6774e54298a4410ce8b46cf9fad1fdfdc8932b4eae252009183ff99c2e6",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/content/default/content.css",
+      "name": "tinymce/skins/content/default/content.css",
+      "version": "unknown",
+      "byteSize": 1149,
+      "sha256": "245f475b07f8bd8b85aaae5bd67077a237bf85e53185736bb1bc2092aca2b33a",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/content/default/content.js",
       "name": "tinymce/skins/content/default/content.js",
       "version": "unknown",
@@ -803,11 +827,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/content/document/content.min.css",
+      "name": "tinymce/skins/content/document/content.min.css",
+      "version": "unknown",
+      "byteSize": 1248,
+      "sha256": "54e93abcfee4eb6acf8bacfad0d967e31d95977d2dcf74b09485608e0f486d9f",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/content/tinymce-5-dark/content.js",
       "name": "tinymce/skins/content/tinymce-5-dark/content.js",
       "version": "unknown",
       "byteSize": 1329,
       "sha256": "45dfe12d5b0cb744e14722622198f86a95258087b926127be84162c4af393ba6",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/content/tinymce-5-dark/content.min.css",
+      "name": "tinymce/skins/content/tinymce-5-dark/content.min.css",
+      "version": "unknown",
+      "byteSize": 1219,
+      "sha256": "b038b03a15de40771e6565b5541b24832c37b8328256ce6c7b1dfeb10f02eab7",
       "knownAdvisories": []
     },
     {
@@ -819,11 +859,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/content/tinymce-5/content.min.css",
+      "name": "tinymce/skins/content/tinymce-5/content.min.css",
+      "version": "unknown",
+      "byteSize": 1149,
+      "sha256": "245f475b07f8bd8b85aaae5bd67077a237bf85e53185736bb1bc2092aca2b33a",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/content/writer/content.js",
       "name": "tinymce/skins/content/writer/content.js",
       "version": "unknown",
       "byteSize": 1272,
       "sha256": "0f67d136a385b94f1433d0c99e038310c0dd3dc27d147459a1f9b63bff9de3eb",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/content/writer/content.min.css",
+      "name": "tinymce/skins/content/writer/content.min.css",
+      "version": "unknown",
+      "byteSize": 1170,
+      "sha256": "2c73e4adbf51fe1bd75f24e16c46f851e9d789a85fcf5a5ff509fbb46b915b7d",
       "knownAdvisories": []
     },
     {
@@ -835,11 +891,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/oxide-dark/content.inline.min.css",
+      "name": "tinymce/skins/ui/oxide-dark/content.inline.min.css",
+      "version": "unknown",
+      "byteSize": 23693,
+      "sha256": "5b9a9aa428cf5184136394a2c37ba1cc9e367ef7a1dcc7cb58939c94cf921fa5",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/oxide-dark/content.js",
       "name": "tinymce/skins/ui/oxide-dark/content.js",
       "version": "unknown",
       "byteSize": 23482,
       "sha256": "ed16c82536c2d4941bcec70decd9ecc8344c226a1174c148d293eaba01ef858d",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/oxide-dark/content.min.css",
+      "name": "tinymce/skins/ui/oxide-dark/content.min.css",
+      "version": "unknown",
+      "byteSize": 23363,
+      "sha256": "2bb536d1b5de47f0da18889fd1395f1c7eb4ad14164c4c907c374e82674d5720",
       "knownAdvisories": []
     },
     {
@@ -851,11 +923,43 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/oxide-dark/skin.min.css",
+      "name": "tinymce/skins/ui/oxide-dark/skin.min.css",
+      "version": "unknown",
+      "byteSize": 91068,
+      "sha256": "623af75baa266376bd09db568bb75eba57e19c5617960f6e1047c1530ed4b8e1",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/oxide-dark/skin.shadowdom.js",
       "name": "tinymce/skins/ui/oxide-dark/skin.shadowdom.js",
       "version": "unknown",
       "byteSize": 605,
       "sha256": "e0e909eeee70d728757c52b16bf015ea1d164d35f467b44200284a9227bcc0e9",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/oxide-dark/skin.shadowdom.min.css",
+      "name": "tinymce/skins/ui/oxide-dark/skin.shadowdom.min.css",
+      "version": "unknown",
+      "byteSize": 508,
+      "sha256": "d8a9f2d384edd57a6e04e52cd58bb3f5c4a566da539b08c1eaeb7f918a42c262",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/oxide/content.css",
+      "name": "tinymce/skins/ui/oxide/content.css",
+      "version": "unknown",
+      "byteSize": 23752,
+      "sha256": "8d9a2b97e6d4ac1f3778c33aa1ce3f59fc6f53f09c26c9808e7ba6a1459957e7",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/oxide/content.inline.css",
+      "name": "tinymce/skins/ui/oxide/content.inline.css",
+      "version": "unknown",
+      "byteSize": 23693,
+      "sha256": "5b9a9aa428cf5184136394a2c37ba1cc9e367ef7a1dcc7cb58939c94cf921fa5",
       "knownAdvisories": []
     },
     {
@@ -875,11 +979,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/oxide/skin.css",
+      "name": "tinymce/skins/ui/oxide/skin.css",
+      "version": "unknown",
+      "byteSize": 91089,
+      "sha256": "c84f3ed865642ac094e0a04473abc2d3f19c4fc0d65f18cd69986dc8df405cd8",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/oxide/skin.js",
       "name": "tinymce/skins/ui/oxide/skin.js",
       "version": "unknown",
       "byteSize": 91215,
       "sha256": "6283bdf59d31202e04bdc4faf9d46973ddc91e3ee0085a41cfd3aad6a15aca13",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/oxide/skin.shadowdom.css",
+      "name": "tinymce/skins/ui/oxide/skin.shadowdom.css",
+      "version": "unknown",
+      "byteSize": 508,
+      "sha256": "d8a9f2d384edd57a6e04e52cd58bb3f5c4a566da539b08c1eaeb7f918a42c262",
       "knownAdvisories": []
     },
     {
@@ -899,11 +1019,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/tinymce-5-dark/content.inline.min.css",
+      "name": "tinymce/skins/ui/tinymce-5-dark/content.inline.min.css",
+      "version": "unknown",
+      "byteSize": 23693,
+      "sha256": "5b9a9aa428cf5184136394a2c37ba1cc9e367ef7a1dcc7cb58939c94cf921fa5",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/tinymce-5-dark/content.js",
       "name": "tinymce/skins/ui/tinymce-5-dark/content.js",
       "version": "unknown",
       "byteSize": 23492,
       "sha256": "d2064e5aa507fa7956ca226c0d457ebc6156ae5b355081e32114979d06c65977",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/tinymce-5-dark/content.min.css",
+      "name": "tinymce/skins/ui/tinymce-5-dark/content.min.css",
+      "version": "unknown",
+      "byteSize": 23363,
+      "sha256": "2bb536d1b5de47f0da18889fd1395f1c7eb4ad14164c4c907c374e82674d5720",
       "knownAdvisories": []
     },
     {
@@ -915,11 +1051,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/tinymce-5-dark/skin.min.css",
+      "name": "tinymce/skins/ui/tinymce-5-dark/skin.min.css",
+      "version": "unknown",
+      "byteSize": 93665,
+      "sha256": "6ce142192ef809cbf3dce47948bc7964b1fb7f42811279fec316d084d496f93d",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.js",
       "name": "tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.js",
       "version": "unknown",
       "byteSize": 615,
       "sha256": "becae22f794ee0e7d0ca150486d70fd2fb58e8a492c883b7631d53854bd8c98a",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.min.css",
+      "name": "tinymce/skins/ui/tinymce-5-dark/skin.shadowdom.min.css",
+      "version": "unknown",
+      "byteSize": 508,
+      "sha256": "d8a9f2d384edd57a6e04e52cd58bb3f5c4a566da539b08c1eaeb7f918a42c262",
       "knownAdvisories": []
     },
     {
@@ -931,11 +1083,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/tinymce-5/content.inline.min.css",
+      "name": "tinymce/skins/ui/tinymce-5/content.inline.min.css",
+      "version": "unknown",
+      "byteSize": 23693,
+      "sha256": "5b9a9aa428cf5184136394a2c37ba1cc9e367ef7a1dcc7cb58939c94cf921fa5",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/tinymce-5/content.js",
       "name": "tinymce/skins/ui/tinymce-5/content.js",
       "version": "unknown",
       "byteSize": 23876,
       "sha256": "f515f73f617e62f5ec7f217c639a5179a70b727d07b81ea33aeac936ca99790f",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/tinymce-5/content.min.css",
+      "name": "tinymce/skins/ui/tinymce-5/content.min.css",
+      "version": "unknown",
+      "byteSize": 23752,
+      "sha256": "8d9a2b97e6d4ac1f3778c33aa1ce3f59fc6f53f09c26c9808e7ba6a1459957e7",
       "knownAdvisories": []
     },
     {
@@ -947,11 +1115,27 @@
       "knownAdvisories": []
     },
     {
+      "file": "tinymce/skins/ui/tinymce-5/skin.min.css",
+      "name": "tinymce/skins/ui/tinymce-5/skin.min.css",
+      "version": "unknown",
+      "byteSize": 93800,
+      "sha256": "f63edd20b0b07c544e8a15dd94afc2de12720e643e5ead28f3e78483c75b7488",
+      "knownAdvisories": []
+    },
+    {
       "file": "tinymce/skins/ui/tinymce-5/skin.shadowdom.js",
       "name": "tinymce/skins/ui/tinymce-5/skin.shadowdom.js",
       "version": "unknown",
       "byteSize": 610,
       "sha256": "b5524b3045148af07b00deda8efc2e9ba9d8a500b6b38a5abcd603689d79ad11",
+      "knownAdvisories": []
+    },
+    {
+      "file": "tinymce/skins/ui/tinymce-5/skin.shadowdom.min.css",
+      "name": "tinymce/skins/ui/tinymce-5/skin.shadowdom.min.css",
+      "version": "unknown",
+      "byteSize": 508,
+      "sha256": "d8a9f2d384edd57a6e04e52cd58bb3f5c4a566da539b08c1eaeb7f918a42c262",
       "knownAdvisories": []
     },
     {

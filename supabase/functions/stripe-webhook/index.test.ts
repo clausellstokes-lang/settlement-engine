@@ -264,10 +264,11 @@ Deno.test('a replayed credit-pack checkout (same session id) does NOT double-gra
 // ── customer.subscription.deleted: stale-delete guard (migration 087) ────────
 // Stripe redelivers + reorders webhooks. A .deleted for an OLD subscription must
 // not downgrade a user who has since re-subscribed and is currently premium.
-function makeSubDeletedStub(recordedSubId: string | null) {
+function makeSubDeletedStub(recordedSubId: string | null, tier = 'premium') {
   const rpc: Array<{ fn: string; args: unknown }> = [];
   const profileUpdates: Array<Record<string, unknown>> = [];
-  const client = {
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
     auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
     from: (table: string) => ({
       select: () => {
@@ -275,12 +276,17 @@ function makeSubDeletedStub(recordedSubId: string | null) {
           eq: () => builder,
           ilike: () => builder,
           maybeSingle: () => table === 'profiles'
-            ? Promise.resolve({ data: { id: 'sub_user', is_founder: false, stripe_subscription_id: recordedSubId }, error: null })
+            ? Promise.resolve({ data: { id: 'sub_user', is_founder: false, stripe_subscription_id: recordedSubId, tier }, error: null })
             : Promise.resolve({ data: null, error: null }),
         };
         return builder;
       },
-      update: (vals: Record<string, unknown>) => ({ eq: () => { profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
+      // chainable + awaitable so the clear's .update().eq().eq() then-await works
+      update: (vals: Record<string, unknown>) => {
+        profileUpdates.push(vals);
+        const b: any = { eq: () => b, then: (res: (v: unknown) => unknown) => Promise.resolve({ error: null }).then(res) };
+        return b;
+      },
     }),
     rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
   };
@@ -317,4 +323,12 @@ Deno.test('a legacy premium user with NO recorded subscription still downgrades 
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(res.status, 200);
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);   // fallback downgrade
+});
+
+Deno.test('a REDELIVERED delete on an already-free user is a no-op (no retention re-stamp)', async () => {
+  const stub = makeSubDeletedStub(null, 'free');         // already downgraded
+  const body = subscriptionDeletedEvent('sub_old');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // idempotent — not re-downgraded
 });

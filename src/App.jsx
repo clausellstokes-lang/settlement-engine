@@ -637,8 +637,10 @@ export default function App() {
           >
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
-            {/* Home is the marketing landing. First-visit gating routes new
-                visitors here; returning visitors land on /create. */}
+            {/* Home is the Welcome landing. A bare root visit ('/')
+                canonicalizes here for everyone — logged-out and signed-in
+                alike (the front-door effect above); the page adapts its CTAs by
+                auth state. Deep links elsewhere are respected. */}
             {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} isPremium={authTier === 'premium' || isElevated} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the

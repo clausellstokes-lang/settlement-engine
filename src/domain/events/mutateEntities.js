@@ -18,7 +18,7 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
-import { withActiveCondition } from '../activeConditions.js';
+import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 import {
   idOf, factionIdOf, eventTime,
@@ -88,6 +88,29 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
   });
 }
 
+// The inverse of withFoodAnchorLostIfAnchor: when a food-anchor institution is
+// restored or re-opened, the settlement-level food_anchor_lost crisis it raised
+// must not outlive it. We drop ONLY the conditions this exact institution
+// triggered (matched by triggeredAt.sourceEventTargetId === the institution's
+// id), so a food_anchor_lost crisis raised by a DIFFERENT anchor's loss survives.
+// No-op for a non-anchor institution (it never raised one).
+/**
+ * @param {any} next
+ * @param {any} inst
+ */
+function withoutFoodAnchorLostFor(next, inst) {
+  if (!isFoodAnchorInstitution(inst)) return next;
+  const anchorId = idOf(inst);
+  let out = next;
+  for (const c of deriveAllActiveConditions(out)) {
+    if (c.archetype === 'food_anchor_lost'
+      && c.triggeredAt?.sourceEventTargetId === anchorId) {
+      out = withoutActiveCondition(out, c.id);
+    }
+  }
+  return out;
+}
+
 /**
  * @param {any} s
  * @param {any} event
@@ -153,8 +176,20 @@ function addInstitution(s, event) {
   // we don't duplicate — we just clear any prior REMOVED status.
   const existing = list.find((/** @type {any} */ i) => i.name?.toLowerCase() === name.toLowerCase());
   if (existing) {
-    const restored = { ...existing, status: 'active', impairments: [] };
-    return replaceInstitution(s, existing, restored);
+    // Re-open is scoped like restoreInstitution: clear ONLY the removal — the
+    // REMOVED/DESTROYED status and any impairments whose cause was that removal
+    // (removedByEventId) — never a blanket clear that would wipe UNRELATED
+    // impairments from other in-timeline events.
+    const removalCause = existing.removedByEventId || existing.destroyedByEventId || null;
+    const { removedByEventId: _r, destroyedByEventId: _d, ...rest } = existing;
+    const restored = {
+      ...(removalCause ? withoutEventImpairments(rest, removalCause) : rest),
+      status: 'active',
+    };
+    let next = replaceInstitution(s, existing, restored);
+    // A re-opened food anchor ends the food crisis its closure raised.
+    next = withoutFoodAnchorLostFor(next, existing);
+    return next;
   }
   const newInst = {
     id: `institution.${slugify(name)}`,
@@ -209,7 +244,11 @@ function restoreInstitution(s, event) {
   const restored = causeId
     ? withoutEventImpairments(inst, causeId)
     : { ...inst, status: 'active' };
-  return replaceInstitution(s, inst, restored);
+  let next = replaceInstitution(s, inst, restored);
+  // A restored food anchor is functional again — wind down the settlement-level
+  // food crisis its loss raised (the inverse of damage/impair/remove raising it).
+  next = withoutFoodAnchorLostFor(next, inst);
+  return next;
 }
 
 // The causeEventId of the most recently applied impairment (impairments append
@@ -280,7 +319,17 @@ function addFaction(s, event) {
     (/** @type {any} */ f) => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
   );
   if (existing) {
-    return replaceFaction(s, existing, { ...existing, status: 'active', impairments: [] });
+    // Re-add is scoped like restoreFaction: clear ONLY the removal — the
+    // REMOVED/DESTROYED status and any impairments whose cause was that removal
+    // (removedByEventId) — never a blanket clear that wipes UNRELATED impairments
+    // from other in-timeline events (a riot, a levy) the re-add never touched.
+    const removalCause = existing.removedByEventId || existing.destroyedByEventId || null;
+    const { removedByEventId: _r, destroyedByEventId: _d, ...rest } = existing;
+    const restored = {
+      ...(removalCause ? withoutEventImpairments(rest, removalCause) : rest),
+      status: 'active',
+    };
+    return replaceFaction(s, existing, restored);
   }
   const newFaction = {
     id: `faction.${slugify(name)}`,

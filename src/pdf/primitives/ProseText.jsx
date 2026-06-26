@@ -15,6 +15,7 @@
 import { Text } from '@react-pdf/renderer';
 import { EntityRef } from './EntityRef.jsx';
 import { tokenizeProse } from '../../lib/entityRefTokenizer.js';
+import { safe } from '../lib/format.js';
 
 /**
  * @param {object} props
@@ -36,7 +37,7 @@ export function ProseText({ text, index, linkStyle }) {
             style={linkStyle}
           />
         ) : (
-          <Text key={i}>{seg.value}</Text>
+          <Text key={i}>{safe(seg.value)}</Text>
         ),
       )}
     </>

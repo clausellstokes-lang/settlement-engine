@@ -230,6 +230,13 @@ async function supabaseGetSession() {
   const { data: { session }, error } = await supabase.auth.getSession();
   if (error) throw error;
   if (!session) return null;
+  // A transient profile-lookup failure PROPAGATES (fetchProfileAuth throws on a
+  // non-PGRST116 error). We deliberately do NOT swallow it into a fallback profile:
+  // the only tier source available here is the user-WRITABLE user_metadata (trusting
+  // it would let a user self-promote to premium) or buildProfileResult(user,{}) which
+  // is a FREE/user DOWNGRADE — both wrong. Rejecting lets initAuth treat it as the
+  // retryable transient state it is (a later onAuthChange / retry restores the real
+  // tier) instead of persisting a wrong tier. No false grant, no silent downgrade.
   const profile = await fetchProfileAuth(session.user);
   return authPayload(session.user, session, profile);
 }
@@ -335,6 +342,32 @@ async function supabaseRecoveryVerify({ email, slot, answer }) {
  * we constrain the redirect to our own origin to satisfy the
  * Supabase redirect-allowlist requirement.
  */
+
+/**
+ * Recognise the "no such account" error class GoTrue returns when
+ * `shouldCreateUser:false` is set and the email has no account (or OTP signups
+ * are disabled). Across versions this surfaces as the `otp_disabled` code, a
+ * 422 "Signups not allowed for otp" message, or a "user not found" message.
+ *
+ * This is the enumeration-oracle case: letting it throw while a real account
+ * resolves success would tell an attacker which emails are registered. We treat
+ * the whole class as success-shaped so the caller can't distinguish the two.
+ *
+ * @param {{ code?: string, status?: number, message?: string } | null} error
+ */
+function isMagicLinkNoAccountError(error) {
+  if (!error) return false;
+  const code = String(error.code || '').toLowerCase();
+  const msg = String(error.message || '').toLowerCase();
+  return (
+    code === 'otp_disabled' ||
+    code === 'user_not_found' ||
+    msg.includes('signups not allowed') ||
+    msg.includes('user not found') ||
+    msg.includes('not allowed for otp')
+  );
+}
+
 async function supabaseSignInWithMagicLink(email) {
   const { error } = await supabase.auth.signInWithOtp({
     email,
@@ -348,7 +381,10 @@ async function supabaseSignInWithMagicLink(email) {
       shouldCreateUser: false,
     },
   });
-  if (error) throw error;
+  // Suppress the no-account error class so existence stays hidden: a missing
+  // account resolves with the SAME success shape as a real send. Other failures
+  // (rate limit, network, config) still throw — they aren't existence oracles.
+  if (error && !isMagicLinkNoAccountError(error)) throw error;
   // No session yet — completion happens when the user clicks the link
   // and Supabase's onAuthStateChange fires.
   return { sentTo: email };

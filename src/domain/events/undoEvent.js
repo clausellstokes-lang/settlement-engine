@@ -91,6 +91,11 @@ const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
 // scrubbable provenance trail. Factions live on powerStructure.factions but
 // replaceFaction falls back to the legacy s.factions, so both are snapshotted.
 const ENTITY_GRAPH_KEYS = Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']);
+// RESTORE_INSTITUTION / ADD_INSTITUTION also DELETE the settlement-level
+// food_anchor_lost activeCondition when the (re)activated institution is the food
+// anchor — so undo must restore the pre-event activeConditions too, else the famine
+// condition the anchor's loss raised stays gone after the institution is re-removed.
+const ENTITY_GRAPH_PLUS_CONDITIONS = Object.freeze([...ENTITY_GRAPH_KEYS, 'activeConditions']);
 // Roster-only events that mutate NPC records in place (no impairment
 // propagation, no condition) — only the npcs subtree needs the pre-event copy.
 const NPC_ROSTER_KEYS = Object.freeze(['npcs']);
@@ -143,7 +148,7 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   //    so undo (which only strips impairments tagged with ITS own id) cannot put
   //    the cleared impairment back — the pre-event copy is the only way back.
   ASSIGN_NPC_TO_ROLE:  ENTITY_GRAPH_KEYS,
-  RESTORE_INSTITUTION: ENTITY_GRAPH_KEYS,
+  RESTORE_INSTITUTION: ENTITY_GRAPH_PLUS_CONDITIONS,
   RESTORE_FACTION:     ENTITY_GRAPH_KEYS,
   // ADD_INSTITUTION / ADD_FACTION / ADD_NPC: withoutEventCreations drops the
   // record an ADD CREATED (it carries createdByEventId), but the idempotent
@@ -155,7 +160,7 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   // back to its removed/impaired state). restoreSnapshottedRecords runs AFTER
   // withoutEventCreations in scrubUndoneEvent, so the pre-event copy is the
   // final word and the two paths converge.
-  ADD_INSTITUTION:     ENTITY_GRAPH_KEYS,
+  ADD_INSTITUTION:     ENTITY_GRAPH_PLUS_CONDITIONS,
   ADD_FACTION:         ENTITY_GRAPH_KEYS,
   ADD_NPC:             ENTITY_GRAPH_KEYS,
   // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/

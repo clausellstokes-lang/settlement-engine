@@ -1,26 +1,30 @@
 /**
  * migration-ordering.mjs — pure helpers for SQL-migration ordering analysis.
  *
- * Extracted so the sequence test (tests/security/migrationSequence050to056.
- * pglite.test.js) and a focused unit test can BOTH exercise the same logic.
+ * Extracted so the sequence test (tests/security/migrationSequenceAll.pglite.
+ * test.js) and a focused unit test can BOTH exercise the same logic.
  * The sequence test's catch block used to swallow every non-syntax pglite error
  * as "environmental", which silently masked the very ordering bug its comment
- * promised to catch (a band migration referencing an object a LATER band
- * migration defines). These helpers classify that error precisely.
+ * promised to catch (a migration referencing an object a LATER migration
+ * defines). These helpers classify that error precisely.
  *
  * Pure string analysis — no I/O, no DB — so the classifier is unit-testable
  * against forged error messages and forged band SQL.
  */
 
 /**
- * Names of the public objects (functions + tables) a migration DEFINES,
- * lower-cased and unqualified.
+ * Names of the public objects a migration DEFINES, lower-cased and unqualified.
+ * Recognises every CREATE-able object kind whose absence shows up as a "does not
+ * exist" error a later band file could depend on: function, table, type, view,
+ * materialized view, sequence, and domain. (The old regex saw only function +
+ * table, so an ordering bug routed through a type/view/sequence/domain defined
+ * later in the band was mis-classified as merely environmental and swallowed.)
  * @param {string} sql
  * @returns {string[]}
  */
 export function definedObjects(sql) {
   const names = [];
-  const re = /create\s+(?:or\s+replace\s+)?(?:function|table)(?:\s+if\s+not\s+exists)?\s+(?:public\.)?([a-z_][a-z0-9_]*)/gi;
+  const re = /create\s+(?:or\s+replace\s+)?(?:function|materialized\s+view|table|type|view|sequence|domain)(?:\s+if\s+not\s+exists)?\s+(?:public\.)?([a-z_][a-z0-9_]*)/gi;
   let m;
   while ((m = re.exec(sql)) !== null) names.push(m[1].toLowerCase());
   return names;

@@ -712,10 +712,14 @@ function galleryMetadataPatch(metadata = {}) {
     gallery_description: description || null,
     gallery_image_url: isSafePublicImageUrl(imageUrl) ? imageUrl : null,
     gallery_image_alt: imageAlt || null,
+    // Mirror the read-path clamp exactly (sanitizeGalleryTags): lower-case,
+    // strip to [a-z0-9 -], bound each tag to TAG_LENGTH_LIMIT, drop empties,
+    // cap the count. Writing the same shape we'd accept on read keeps a stored
+    // row from carrying an unbounded blob the read normalizer would later trim.
     gallery_tags: tags
-      .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, ''))
+      .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, '').slice(0, TAG_LENGTH_LIMIT))
       .filter(Boolean)
-      .slice(0, 12),
+      .slice(0, TAG_COUNT_LIMIT),
     gallery_updated_at: new Date().toISOString(),
   };
   // Owners can opt to publish the AI-narrated dossier instead of the raw

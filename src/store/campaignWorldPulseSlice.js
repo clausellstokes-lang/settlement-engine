@@ -115,6 +115,21 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
+  // In-flight guard: campaignIds with an advanceCampaignWorld currently running.
+  // advanceCampaignWorld is async (it awaits the lazy simulation import, then the
+  // cloud flush + party-impact replays), so a double-click would otherwise enter
+  // the action TWICE — running two real ticks (cloud increment + world drift) off
+  // one user intent. We mark the campaignId here SYNCHRONOUSLY at the very top of
+  // the action (before the first await) and clear it in a finally, so a second
+  // concurrent call sees its campaign already in flight and no-ops. Session-scoped
+  // like pulseUndoStack (an array, not a Set, so it stays Immer-/persist-friendly);
+  // a reload clears it. Mirrors aiLoading / changeQueueFlushing.
+  advanceInFlight: [],
+  /** Is an advanceCampaignWorld currently running for this campaign? Drives the
+   *  disabled state of the Advance button so a second click can't fire mid-tick. */
+  isAdvanceInFlight: (campaignId) =>
+    (get().advanceInFlight || []).some(id => String(id) === String(campaignId)),
+
   // Advance-scaling Stage 3: the autoresolve toggle. Default OFF — when the
   // multi-tick flag is ON, an Advance PAUSES at the first tick that surfaces
   // campaign-altering MAJORS so the DM gets a say (autoresolve ON runs straight to
@@ -206,6 +221,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   advanceCampaignWorld: async (campaignId, interval = 'one_month', options = {}) => {
+    // In-flight guard (set SYNCHRONOUSLY, before the first await below): a
+    // double-click would otherwise re-enter this async action and run a SECOND
+    // real tick off one intent. If this campaign is already advancing, no-op with
+    // a typed result so the caller can tell it apart from a real advance (vs a
+    // not-canonized block) and skip the post-advance nav. Cleared in finally.
+    if (get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_in_flight' };
+    }
+    set(state => {
+      state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
+    });
+    try {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -567,6 +594,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       }
     }
     return result;
+    } finally {
+      // Clear the in-flight mark for this campaign — runs on every exit path
+      // (success, the not-canonized guard, AND the Phase-1 rollback re-throw), so
+      // a failed advance never wedges the campaign permanently disabled.
+      set(state => {
+        state.advanceInFlight = (state.advanceInFlight || []).filter(id => String(id) !== String(campaignId));
+      });
+    }
   },
 
   /**

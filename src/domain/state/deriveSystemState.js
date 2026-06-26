@@ -30,6 +30,7 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { prosperityRank } from '../../data/constants.js';
+import { isCovertOnlyImpairment } from '../entities/status.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -384,19 +385,6 @@ function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
     if (excludeCovertOnly && isCovertOnlyImpairment(i)) return false;
     return true;
   }).length;
-}
-
-/**
- * True when an entity carries impairment(s) and every one of them is covert —
- * i.e. its 'impaired' status is entirely a hidden mark with no public cause.
- * @param {any} entity
- * @returns {boolean}
- */
-function isCovertOnlyImpairment(entity) {
-  /** @type {any[]} */
-  const imps = Array.isArray(entity?.impairments) ? entity.impairments : [];
-  if (!imps.length) return false;
-  return imps.every(imp => imp?.covert === true);
 }
 
 /**

@@ -4,7 +4,7 @@
  *
  * addInstitution/addFaction are idempotent by name: re-adding an entity that
  * already exists does NOT duplicate it — it re-activates the existing record
- * (status 'active', impairments cleared). That un-remove branch writes NO
+ * (status 'active', only REMOVAL-caused impairments cleared). That un-remove branch writes NO
  * createdByEventId, so undoEvent's withoutEventCreations (which only drops
  * records stamped with the popped event's id) cannot reach it. Without a
  * pre-event snapshot, undoing the ADD left the entity permanently resurrected
@@ -61,9 +61,11 @@ describe('undo of an idempotent ADD restores the pre-add removed state', () => {
     expect(restored.removedByEventId).toBe('e-remove');
   });
 
-  it('an impaired-then-readded FACTION returns to its impaired state on undo of the ADD', () => {
-    // A faction carrying an impairment, re-added by name → un-remove branch
-    // clears the impairment. Undoing the ADD must bring the impairment back.
+  it('an impaired-then-readded FACTION keeps its unrelated impairment; undo restores the pre-add state', () => {
+    // A faction carrying an UNRELATED (non-removal) impairment, re-added by name.
+    // The idempotent re-add now only clears REMOVAL-caused impairments, so the
+    // prior unrelated damage is KEPT (no blanket wipe). Undo still restores the
+    // exact pre-add faction.
     const impaired = {
       name: 'Oakmere',
       institutions: [],
@@ -82,7 +84,7 @@ describe('undo of an idempotent ADD restores the pre-add removed state', () => {
     const { after, undone } = applyThenUndo(impaired, addEvent);
 
     const reAdded = after.powerStructure.factions.find(f => f.id === 'faction.garrison');
-    expect(reAdded.impairments).toEqual([]);          // un-remove cleared it
+    expect(reAdded.impairments).toEqual([{ type: 'public_support', severity: 0.6, causeEventId: 'e-prior' }]);  // re-add KEEPS the unrelated impairment
     expect(reAdded.createdByEventId).toBeUndefined();  // idempotent branch stamps nothing
     expect(after.powerStructure.factions.length).toBe(1);
 

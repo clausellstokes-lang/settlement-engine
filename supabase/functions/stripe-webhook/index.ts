@@ -109,10 +109,10 @@ async function findUserIdForStripeCustomer(
   if (customerId) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('id, is_founder, stripe_subscription_id')
+      .select('id, is_founder, stripe_subscription_id, tier')
       .eq('stripe_customer_id', customerId)
       .maybeSingle();
-    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null };
+    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null, tier: (profile.tier as string | null) ?? null };
   }
 
   let email = fallbackEmail || null;
@@ -129,7 +129,7 @@ async function findUserIdForStripeCustomer(
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('id, is_founder, stripe_subscription_id')
+    .select('id, is_founder, stripe_subscription_id, tier')
     .ilike('email', email)
     .maybeSingle();
   if (!profile?.id) return null;
@@ -140,7 +140,7 @@ async function findUserIdForStripeCustomer(
       .eq('id', profile.id);
     if (error) throw new Error(`Stripe customer binding failed: ${error.message}`);
   }
-  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null };
+  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null, tier: (profile.tier as string | null) ?? null };
 }
 
 async function grantMonthlyAllowanceIfNeeded(
@@ -366,6 +366,13 @@ export async function handleStripeWebhook(
           console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);
           break;
         }
+        // IDEMPOTENT (087): a redelivered .deleted on an already-downgraded user
+        // must not re-run handle_premium_downgrade (which would re-stamp the
+        // retention window each time). Only a currently-premium user downgrades.
+        if (profile.tier !== 'premium') {
+          console.log(`User ${profile.userId} is already not premium; ignoring subscription.deleted ${subscription.id}`);
+          break;
+        }
         // STALE-DELETE GUARD (087): Stripe redelivers + reorders webhooks. A
         // .deleted for an OLD subscription must NOT downgrade a user who has since
         // re-subscribed and is currently premium. Only downgrade when the deleted
@@ -395,7 +402,8 @@ export async function handleStripeWebhook(
         // loud like every other write in this handler.
         const { error: clearErr } = await supabase.from('profiles')
           .update({ stripe_subscription_id: null })
-          .eq('id', profile.userId);
+          .eq('id', profile.userId)
+          .eq('stripe_subscription_id', subscription.id);   // only if it still matches the deleted sub (race-safe)
         if (clearErr) throw new Error(`Clearing subscription id failed: ${clearErr.message}`);
         console.log(`User ${profile.userId} downgraded to free with retention window`);
       }

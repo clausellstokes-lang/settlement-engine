@@ -162,6 +162,24 @@ describe('(2) bare root is owned by the front door, order-independent', () => {
     expect(targets).not.toContain('/create');
   });
 
+  test("a returning signed-in visitor at '/' also lands on /home, not /create", () => {
+    // The stale comments (routes.js home entry, App's home-render note) claimed
+    // returning visitors land on /create via a localStorage gate. There is no
+    // such gate: the front door rewrites '/' to /home for EVERYONE, signed-in
+    // members included. With a restored session (token present, auth resolved),
+    // the effect still fires once authLoading clears.
+    window.history.replaceState(null, '', '/');
+    H.route = { view: 'generate', params: {}, legacy: false, notFound: false };
+    H.hasToken = true;
+    H.storeState = makeState({ auth: { tier: 'premium', displayName: 'Returning Member', role: null, user: { id: 'u1' }, loading: false } });
+
+    render(<App />);
+
+    const targets = replacePath.mock.calls.map((c) => c[0]);
+    expect(targets).toContain('/home');
+    expect(targets).not.toContain('/create');
+  });
+
   test('legacy / notFound paths still upgrade to their canonical path', () => {
     // The canonical-upgrade effect must still fire for non-root legacy URLs.
     window.history.replaceState(null, '', '/settlements?view=settlements');

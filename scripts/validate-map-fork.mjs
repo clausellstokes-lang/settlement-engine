@@ -51,18 +51,24 @@ async function hashLib(file) {
   return { sha256: createHash('sha256').update(buf).digest('hex'), byteSize: buf.length };
 }
 
-// Recursively enumerate every shippable script under libs/, as forward-slash
+// Recursively enumerate every shippable asset under libs/, as forward-slash
 // paths relative to libsRoot (matching the manifest's `file` convention). The
-// manifest pins .js (the executable supply-chain surface), so the on-disk set
-// we hold it to is the .js files — a new lib drops in as a .js file and must be
-// consciously pinned, never shipped un-verified.
+// manifest pins the browser-loaded supply-chain surface — not just .js: a .mjs
+// module, a .wasm binary, or a .css stylesheet all reach the payment+auth origin
+// and can each carry a payload (CSS exfiltrates via url()/@import). So the
+// on-disk set we hold the manifest to spans every shippable extension — a new
+// asset of any of these kinds must be consciously pinned, never shipped
+// un-verified. node_modules is skipped (same as walk() above): a stray install
+// tree under libs/ is build debris, not a vendored shippable.
+const SHIPPABLE_EXTS = new Set(['.js', '.mjs', '.wasm', '.css']);
 async function enumerateShippable(dir = libsRoot, prefix = '') {
   const found = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
     if (entry.isDirectory()) {
+      if (entry.name === 'node_modules') continue;
       found.push(...(await enumerateShippable(join(dir, entry.name), rel)));
-    } else if (extname(entry.name) === '.js') {
+    } else if (SHIPPABLE_EXTS.has(extname(entry.name))) {
       found.push(rel);
     }
   }

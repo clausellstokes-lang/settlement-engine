@@ -131,6 +131,40 @@ describe('narrative run folds in daily life (single spend)', () => {
     expect(errors).toContainEqual(['dailyLife.morning', 'provider 529']);
   });
 
+  test('a __proto__ daily-life beat is rejected and does not corrupt the dailyLife prototype', async () => {
+    setFetchLines([
+      { field: 'thesis', value: 'Thesis.' },
+      // Crafted beat name targeting the prototype chain — untrusted server input.
+      // Pre-fix this assigns dailyLife['__proto__'] = {...}, re-pointing the
+      // returned object's prototype so `injected` leaks as an inherited prop
+      // (and Object.getPrototypeOf is no longer Object.prototype).
+      { field: 'dailyLife.__proto__', value: { injected: true } },
+      { field: 'dailyLife.dawn', value: 'Dawn.' },
+      {
+        done: true,
+        result: { thesis: 'Thesis.' },
+        creditsRemaining: 7,
+        type: 'narrative',
+      },
+    ]);
+
+    const fields = [];
+    const out = await generateNarrative('narrative', settlement, 's1', {
+      onField: (f, v) => fields.push([f, v]),
+    });
+
+    // The crafted beat did not re-point the prototype: dailyLife stays a plain
+    // object and no inherited `injected` property leaks through.
+    expect(Object.getPrototypeOf(out.dailyLife)).toBe(Object.prototype);
+    expect(out.dailyLife.injected).toBeUndefined();
+    // Object.prototype itself is untouched for good measure.
+    expect(({}).injected).toBeUndefined();
+    // The legitimate beat still landed; the crafted one was dropped.
+    expect(out.dailyLife).toEqual({ dawn: 'Dawn.' });
+    // The crafted beat is still forwarded to the progress UI.
+    expect(fields).toContainEqual(['dailyLife.__proto__', { injected: true }]);
+  });
+
   test('every beat failing yields a null dailyLife (server sends {})', async () => {
     setFetchLines([
       { field: 'thesis', value: 'Thesis.' },

@@ -218,6 +218,65 @@ Deno.test('an OVERSIZED body is rejected (413) WITHOUT burning a rate-limit unit
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
 
+// Finding (1, byte cap): a multi-byte body whose UTF-16 code-unit count is UNDER
+// the cap but whose BYTE count is OVER it must be rejected (413). Before the fix
+// the cap measured raw.length (code units), so a ~24k 3-byte-char payload
+// (~24k code units, ~72KB bytes) slipped past the 64KB byte ceiling and inflated
+// the Anthropic token bill. '実' is 3 bytes / 1 code unit in UTF-8.
+Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  const body = JSON.stringify({ grounding: { blob: '実'.repeat(24_000) } });
+  // Sanity: the OLD code-unit cap would have ADMITTED this body; the byte cap rejects it.
+  assertEquals(body.length <= 64 * 1024, true);
+  assertEquals(new TextEncoder().encode(body).length > 64 * 1024, true);
+  const res = await handleGenerateChronicle(
+    req(body, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  // Nothing downstream of the parse ran.
+  assertEquals(admin.rpc.some((c) => c.fn === 'reserve_ai_spend'), false);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+});
+
+// Finding (2): the reservation is taken BEFORE the rate-limit consume, and a
+// rate-limit REJECT releases the reservation (mirrors generate-narrative). Before
+// the fix the limiter ran first; with the reorder a rate-limited request must not
+// leave a global-cap reservation hanging for its TTL.
+Deno.test('a rate-limit REJECT releases the reservation taken before it (no headroom leak)', async () => {
+  const user = makeUserClient({ id: 'limited1', email: 'l@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  // Custom admin stub: active gate + reserve allowed, but the rate limit REJECTS.
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const adminClient: any = {
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'account_is_active') return Promise.resolve({ data: true, error: null });
+      if (fn === 'reserve_ai_spend') return Promise.resolve({ data: { allowed: true, reservation_id: 'res_stub' }, error: null });
+      if (fn === 'release_ai_spend_reservation') return Promise.resolve({ data: true, error: null });
+      if (fn === 'consume_ai_generate_rate_limit') return Promise.resolve({ data: { allowed: false }, error: null });
+      return Promise.resolve({ data: null, error: null });
+    },
+    from: (_t: string) => ({ insert: (_r: unknown) => Promise.resolve({ error: null }) }),
+  };
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: () => adminClient },
+  );
+  assertEquals(res.status, 429);
+  // Reserve ran BEFORE the rate-limit consume.
+  const reserveIdx = rpc.findIndex((c) => c.fn === 'reserve_ai_spend');
+  const rlIdx = rpc.findIndex((c) => c.fn === 'consume_ai_generate_rate_limit');
+  assertEquals(reserveIdx >= 0 && rlIdx >= 0 && reserveIdx < rlIdx, true);
+  // The reservation was RELEASED on the rate-limit reject (no headroom leak).
+  const releases = rpc.filter((c) => c.fn === 'release_ai_spend_reservation');
+  assertEquals(releases.length, 1);
+  assertEquals((releases[0].args as { p_id: string }).p_id, 'res_stub');
+  // The rate-limit reject is a pre-spend exit: never charged.
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+});
+
 Deno.test('a request with NO authorization header is rejected (401) before any spend', async () => {
   const user = makeUserClient({ id: 'u1' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);

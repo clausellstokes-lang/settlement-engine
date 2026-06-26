@@ -361,26 +361,31 @@ function buildMap(d, campaignName, settlements, pageN) {
   let y = MT;
   y = secBar(d, y, 'Relationship Map', INK);
 
-  // Build nodes & edges
+  // Build nodes & edges. Node ids and neighbour ids can disagree in JS type
+  // (numeric save id vs stringified neighbour id), so key every id on String —
+  // a raw `===` lookup would silently drop edges on a type mismatch.
   const nodes = settlements.map(s => ({
-    id: s.id,
+    id: String(s.id),
     label: s.name || s.settlement?.name || 'Unnamed',
     tier: s.settlement?.tier || '',
   }));
+  const nodeIds = new Set(nodes.map(nn => nn.id));
 
   const seenEdges = new Set();
   const edges = [];
   for (const save of settlements) {
+    const from = String(save.id);
     const net = save.settlement?.neighbourNetwork || [];
     for (const n of net) {
-      if (!n.id) continue;
-      if (!nodes.find(nn => nn.id === n.id)) continue;
-      const key = [save.id, n.id].sort().join('::');
+      if (n.id == null) continue;
+      const to = String(n.id);
+      if (!nodeIds.has(to)) continue;
+      const key = [from, to].sort().join('::');
       if (seenEdges.has(key)) continue;
       seenEdges.add(key);
       edges.push({
-        from: save.id,
-        to: n.id,
+        from,
+        to,
         type: n.relationshipType || 'neutral',
       });
     }
@@ -890,12 +895,45 @@ function buildRealmGeopolitics(d, campaignName, settlements, worldState, regiona
 // ─────────────────────────────────────────────────────────────────────────────
 // Main entry point
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Resolve a campaign's member saves from the full save list.
+ *
+ * Save ids and campaign.settlementIds can disagree in JS type (a numeric save
+ * id vs a stringified settlementId, or vice versa) depending on the storage
+ * round-trip, so we key both sides on String — a raw `Set.has(save.id)` would
+ * silently drop members on a type mismatch. We also walk settlementIds (not
+ * allSaves) so members list in campaign order, and de-dupe in case the same
+ * save id appears twice in settlementIds.
+ *
+ * @param {object} campaign         The campaign ({ settlementIds }).
+ * @param {Array<object>} allSaves  Every available save ({ id, … }).
+ * @returns {Array<object>}         Member saves, in settlementIds order.
+ */
+function resolveMembers(campaign, allSaves) {
+  const byId = new Map();
+  for (const save of allSaves || []) {
+    if (save && save.id != null) byId.set(String(save.id), save);
+  }
+  const out = [];
+  const seen = new Set();
+  for (const sid of campaign?.settlementIds || []) {
+    const key = String(sid);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const save = byId.get(key);
+    if (save) out.push(save);
+  }
+  return out;
+}
+// Test-only alias. Not used by app code.
+export const __resolveMembers = resolveMembers;
+
 export function generateCampaignPDF(campaign, allSaves) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
   const startedAt = Date.now();
-  const ids = new Set(campaign.settlementIds || []);
-  const settlements = (allSaves || []).filter(s => ids.has(s.id));
+  const settlements = resolveMembers(campaign, allSaves);
 
   if (settlements.length === 0) {
     // Still emit a cover page so the user sees something.

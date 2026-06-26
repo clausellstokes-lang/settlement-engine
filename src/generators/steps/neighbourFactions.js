@@ -8,6 +8,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { getMirrorFactionLabel, getOpposeFactionLabel } from '../neighbourGenerator.js';
+import { renormalizeFactionPower } from '../powerGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 
 // Mirror applyLegitimacyMultipliers' label bands (factionDynamics.js) — injected
@@ -111,9 +112,20 @@ registerStep('neighbourFactions', {
     }
   }
 
-  // Re-sort by effective power so injected factions take their real rank rather
-  // than always trailing the list (matches applyLegitimacyMultipliers' final order).
+  // Injected factions carry RAW-scale power (rng.randInt(10,30)/(8,26)) into a
+  // roster generatePower already normalized to percentage points summing ~100,
+  // breaking the power-share invariant. Renormalize the whole roster back to
+  // integer points summing exactly 100, then refresh each injected faction's
+  // band label to match its new percentage power (rawPower keeps the raw value).
   if (powerStructure.factions.length > initialCount) {
+    renormalizeFactionPower(powerStructure.factions);
+    for (const f of powerStructure.factions) {
+      if (f.source === 'neighbour_mirror' || f.source === 'neighbour_opposition') {
+        f.powerLabel = powerLabelFor(f.power);
+      }
+    }
+    // Re-sort by effective power so injected factions take their real rank rather
+    // than always trailing the list (matches applyLegitimacyMultipliers' final order).
     powerStructure.factions.sort((a, b) => (b.power || 0) - (a.power || 0));
   }
 

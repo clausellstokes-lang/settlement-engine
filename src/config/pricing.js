@@ -79,6 +79,7 @@ const FAST_AI_COSTS = Object.freeze({
 // client-side source of truth, pinned in lockstep with three server copies by
 // pricing.test.js — the generate-chronicle CHRONICLE_COST constant and the
 // spend_credits SQL CASE 'chronicle' branch (migration 057). Drift fails the gate.
+// @enforced-by tests/config/pricing.test.js
 export const CHRONICLE_CREDIT_COST = 2;
 
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';

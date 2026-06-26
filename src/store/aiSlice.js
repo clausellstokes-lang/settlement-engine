@@ -1047,6 +1047,13 @@ export const createAiSlice = (set, get) => ({
       return;
     }
 
+    // Snapshot the on-screen save at entry. We only blank the GLOBAL narrative
+    // view if THIS save is the one on screen — reverting a non-active save must
+    // not wipe another settlement's prose from the display. The captured value
+    // lets a null-tracking (no detail view) entry still clear as before. The
+    // persisted raw aiData write to the target always happens.
+    const requestedActiveSaveId = get().activeSaveId;
+
     // Chronicle FIRST: snapshot the narrative we're about to discard as a
     // summary-mode entry. We call this BEFORE nulling state so the snapshot
     // reads the still-live aiSettlement/aiDailyLife. Summary-at-birth matches
@@ -1072,13 +1079,20 @@ export const createAiSlice = (set, get) => ({
       narrativeSourceFingerprint: null,
     });
     set(state => {
-      state.aiSettlement     = null;
-      state.aiDailyLife      = null;
-      state.aiDataVersion    = null;
-      state.aiSourceFingerprint = null;
-      state.showNarrative    = false;
-      state.aiPartialFailure = null;
-      state.aiError          = null;
+      // Only blank the on-screen view if the reverted save is still the one
+      // displayed. A null activeSaveId (no detail-view tracking) matches its
+      // entry value, so the clear proceeds as before.
+      const stillActive = state.activeSaveId === saveId
+        || (requestedActiveSaveId == null && state.activeSaveId == null);
+      if (stillActive) {
+        state.aiSettlement     = null;
+        state.aiDailyLife      = null;
+        state.aiDataVersion    = null;
+        state.aiSourceFingerprint = null;
+        state.showNarrative    = false;
+        state.aiPartialFailure = null;
+        state.aiError          = null;
+      }
     });
     try {
       await savesService.update(saveId, { aiData });

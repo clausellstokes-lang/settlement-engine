@@ -206,6 +206,12 @@ export default function WorldMap({ onNavigate } = {}) {
     setToast({ kind, text, action });
     toastTimerRef.current = setTimeout(() => setToast(null), action ? 6000 : 2600);
   }, []);
+  // Clear any in-flight toast timer on unmount so the trailing setToast(null)
+  // never fires after the component is gone (a "setState on unmounted" warning,
+  // and a dangling timer). Empty deps — runs the teardown only at unmount.
+  useEffect(() => () => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+  }, []);
 
   // UX Phase 4 — the Realm Inspector state + handlers live in a dedicated hook so
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
@@ -721,7 +727,15 @@ export default function WorldMap({ onNavigate } = {}) {
   useEffect(() => {
     const onKey = (e) => {
       const tag = (e.target?.tagName || '').toUpperCase();
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      // Don't hijack typing/selection: text fields, contenteditable, AND
+      // <select> (arrow/letter keys drive its option list — 'a'/'t' must not
+      // switch map mode while a dropdown is focused).
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return;
+      // A modal/focus-trap is open (every house dialog renders
+      // [role="dialog"][aria-modal="true"], including the confirm dialogs this
+      // surface raises). The keymap is a map-canvas affordance; it must stay
+      // quiet while a dialog owns focus, so its keys don't bleed through.
+      if (typeof document !== 'undefined' && document.querySelector('[role="dialog"][aria-modal="true"]')) return;
       if (e.metaKey || e.ctrlKey || e.altKey) {
         // ⌘S = save, ⌘Z handled by store actions (if registered)
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {

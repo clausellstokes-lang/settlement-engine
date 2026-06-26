@@ -201,28 +201,24 @@ export async function handleGenerateChronicle(
     // regardless of input size, so an unbounded grounding payload would also only
     // inflate Anthropic token cost.
     const raw = await req.text().catch(() => '');
-    if (raw.length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, cors);
+    // Measure BYTES, not UTF-16 code units — a multi-byte payload (raw.length
+    // counts code units) would otherwise slip past the intended byte ceiling.
+    if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, cors);
     let body: any = null;
     try { body = raw ? JSON.parse(raw) : null; } catch { return json({ error: 'invalid_json' }, 400, cors); }
     const grounding = body?.grounding;
     if (!grounding || typeof grounding !== 'object') return json({ error: 'Missing grounding payload' }, 400, cors);
-
-    // ── SAFETY: per-user/day rate limit — FAIL OPEN (shared limiter, migration 079) ──
-    {
-      const { data: rlResult, error: rlErr } =
-        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
-      if (rlErr) {
-        logError('generate-chronicle', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
-      } else if ((rlResult as { allowed?: boolean } | null)?.allowed === false) {
-        return json({ error: 'You have reached today\'s AI generation limit. Please try again tomorrow. No credits were charged.' }, 429, cors);
-      }
-    }
 
     // Race-safe global-cap RESERVATION (migration 086), taken before the spend +
     // model call. FAIL CLOSED on RPC error / non-true `allowed`. The estimate is a
     // conservative Haiku worst-case ($1/$5 per Mtok, ~700 out + grounding in).
     // Released on EVERY exit below so a reject between here and the model can't leak
     // global-cap headroom for the reservation's TTL.
+    //
+    // RESERVE BEFORE the rate-limit consume (mirrors generate-narrative): the cap
+    // is the catastrophic ceiling and must be claimed first; the per-user/day limit
+    // is then consumed, releasing this reservation if the limit rejects so a
+    // rate-limited request never leaves a reservation hanging for its TTL.
     const CHRONICLE_SPEND_ESTIMATE_USD = 0.02;
     const { data: capResult, error: capErr } =
       await supabaseAdmin.rpc('reserve_ai_spend', { p_user: user.id, p_estimate: CHRONICLE_SPEND_ESTIMATE_USD });
@@ -238,6 +234,20 @@ export async function handleGenerateChronicle(
       try { await supabaseAdmin.rpc('release_ai_spend_reservation', { p_id: reservationId }); }
       catch (e) { logError('generate-chronicle', user.id, `release_ai_spend_reservation failed: ${e instanceof Error ? e.message : String(e)}`, { stage: 'spend-cap' }); }
     };
+
+    // ── SAFETY: per-user/day rate limit — FAIL OPEN (shared limiter, migration 079) ──
+    // Consumed AFTER the reservation; a limit reject RELEASES the reservation first
+    // so the global-cap headroom isn't held for the reservation's TTL.
+    {
+      const { data: rlResult, error: rlErr } =
+        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+      if (rlErr) {
+        logError('generate-chronicle', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+      } else if ((rlResult as { allowed?: boolean } | null)?.allowed === false) {
+        await releaseReservation();
+        return json({ error: 'You have reached today\'s AI generation limit. Please try again tomorrow. No credits were charged.' }, 429, cors);
+      }
+    }
 
     // Atomic, RLS-enforced credit spend (same path as generate-narrative).
     const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {

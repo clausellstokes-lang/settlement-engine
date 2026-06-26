@@ -255,6 +255,32 @@ Deno.test('an OVER-CAP body (>64KB) is rejected (413) before any spend', async (
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // never reached the spend
 });
 
+// Finding (1, byte cap): a multi-byte payload whose UTF-16 code-unit count is
+// UNDER the cap but whose BYTE count is OVER it must be rejected (413). Before
+// the fix the cap measured rawBody.length (code units), so a payload of ~24k
+// 3-byte chars (~24k code units, ~72KB bytes) slipped past the 64KB byte ceiling
+// and inflated the provider token bill. '実' is 3 bytes / 1 code unit in UTF-8.
+Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  // 24_000 '実' = 24_000 code units (< 65_536) but 72_000 bytes (> 65_536).
+  const blob = '実'.repeat(24_000);
+  const body = JSON.stringify({ type: 'narrative', settlement: { ...SETTLEMENT, blob } });
+  // Sanity: the OLD code-unit cap would have ADMITTED this body; the byte cap rejects it.
+  assertEquals(body.length <= 64 * 1024, true);
+  assertEquals(new TextEncoder().encode(body).length > 64 * 1024, true);
+  const res = await handleGenerateNarrative(
+    new Request('https://edge/generate-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer jwt' },
+      body,
+    }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // never reached the spend
+});
+
 // A body just under the cap still parses + flows normally (cap is a ceiling,
 // not a regression on legitimate requests). No model key set, so the thesis
 // fails in-stream → 200 streaming response, but the body parsed fine.
