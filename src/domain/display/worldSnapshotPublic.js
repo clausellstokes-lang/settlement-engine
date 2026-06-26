@@ -381,10 +381,15 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
     }
     const digest = Array.isArray(pulse?.impactDigest) ? pulse.impactDigest : [];
     for (const d of digest) {
-      // Same player-visibility gate as the outcome loop above: a digest entry that
-      // belongs to an un-approved proposal must not leak its affected ids. Only an
-      // auto-applied entry, or one whose id is in the applied-proposal set, surfaces.
-      if (d?.applyMode !== 'auto' && !appliedIds.has(d?.id)) continue;
+      // Player-visibility gate for the digest. Unlike selectedOutcomes (which keep
+      // applyMode='proposal' even after approval, so the outcome loop reconciles via
+      // appliedIds), a digest entry IS a news row whose `kind` tracks surfaced state:
+      // newsEntryForOutcome stamps kind='applied' for auto + APPROVED outcomes and
+      // kind='queued' for an un-approved proposal (applyWorldPulse.js:125). So gate on
+      // the real field — keep 'applied' (the player-visible feed), drop 'queued' so a
+      // pending proposal's affected ids never leak. (The prior applyMode/bare-id gate
+      // matched NO real entry — digests carry no applyMode + a compound id.)
+      if (d?.kind !== 'applied') continue;
       const ids = Array.isArray(d?.settlementIds) ? d.settlementIds : [];
       ids.forEach((/** @type {any} */ x) => slot.affected.add(String(x)));
     }

@@ -125,6 +125,13 @@ export default function EventComposer() {
   const clockBound = !!(activeSaveId != null && typeof isSettlementClockBound === 'function' && isSettlementClockBound(activeSaveId));
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
+  // A clock-bound member's Apply lands on the world pulse; while that campaign's
+  // advance is in flight the store no-ops the write (the advance replaces worldState
+  // wholesale and would clobber it). Surface that here so the form DISABLES submit
+  // and shows why, instead of silently swallowing a GM action with no recovery.
+  const isAdvanceInFlight = useStore(s => s.isAdvanceInFlight);
+  const boundCampaign = useMemo(() => (clockBound ? campaigns.find(c => (c.settlementIds || []).some(id => String(id) === String(activeSaveId))) : null), [clockBound, campaigns, activeSaveId]);
+  const advanceBusy = !!(boundCampaign && typeof isAdvanceInFlight === 'function' && isAdvanceInFlight(boundCampaign.id));
   const campaignSettlementOptions = useMemo(
     () => campaignPeerOptions(campaigns, savedSettlements, activeSaveId),
     [campaigns, savedSettlements, activeSaveId],
@@ -248,7 +255,11 @@ export default function EventComposer() {
     ? tradeTarget.trim()
     : effectiveTarget;
   const canSubmit = (!needsTarget || resolvedTarget.trim().length > 0)
-    && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId);
+    && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId)
+    // Block submit while this member's campaign is advancing — the store would no-op
+    // the apply, and the composer lives on a different surface from the Advance button
+    // so the two can be open at once.
+    && !advanceBusy;
   // #1 — the optional instigator dropdown only makes sense for a WAR-type
   // stressor (siege / wartime / occupation / betrayal). Detect via the picked
   // catalog key (falling back to the free-typed target).
@@ -663,6 +674,12 @@ export default function EventComposer() {
           Caused by the party
         </label>
       </div>
+
+      {advanceBusy && (
+        <p style={{ margin: `${SP.sm}px 0 0`, fontSize: FS.xs, color: MUTED }}>
+          The realm is advancing. Give it a moment, then apply this change.
+        </p>
+      )}
 
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
         <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit}>

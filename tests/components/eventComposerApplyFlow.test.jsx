@@ -295,3 +295,20 @@ describe('EventComposer — no staleness modal in the composer', () => {
     expect(screen.queryByText('Staged changes (2)')).toBeNull();
   });
 });
+
+describe('EventComposer — advance-in-flight guard', () => {
+  test('a clock-bound member cannot apply while its campaign is advancing', () => {
+    // The store no-ops a member world-write during an advance (it would be clobbered
+    // by the wholesale worldState replace), so the composer must DISABLE submit and
+    // say why rather than let a GM action be silently swallowed.
+    state = baseState({
+      isSettlementClockBound: (id) => id === 'save-1',
+      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
+      isAdvanceInFlight: (cid) => cid === 'camp-1',
+      applyEvent: vi.fn(),
+    });
+    render(<EventComposer />);
+    expect(screen.getByText(/realm is advancing/i)).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(true);
+  });
+});

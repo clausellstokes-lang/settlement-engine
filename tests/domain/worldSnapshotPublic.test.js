@@ -65,7 +65,7 @@ function poisonWorldState() {
           targetSaveId: 'forge', rollExplanation: 'd20=18 + 4 = 22 vs DC 12', candidateId: 'cand:secret',
           populationDeltas: { forge: -200 },
         }],
-        impactDigest: [{ applyMode: 'auto', settlementIds: ['warhawk', 'forge'] }],
+        impactDigest: [{ kind: 'applied', settlementIds: ['warhawk', 'forge'] }],
       },
     ],
   };
@@ -368,10 +368,11 @@ describe('serializeWorldSnapshotPublic: DM-approved proposals surface in the chr
           },
         ],
         impactDigest: [
-          // A digest entry for the APPROVED proposal surfaces its ids...
-          { id: 'approved1', applyMode: 'proposal', settlementIds: ['forge'] },
-          // ...but a PENDING proposal's digest entry must NOT leak its ids.
-          { id: 'pending1', applyMode: 'proposal', settlementIds: ['warhawk', 'secret'] },
+          // An APPROVED proposal's digest news row carries kind='applied' (newsEntry-
+          // ForOutcome stamps 'applied' on approval), so it surfaces its ids...
+          { id: 'wizard_news.7.world_pulse.applied.approved1', kind: 'applied', settlementIds: ['forge'] },
+          // ...but a PENDING proposal's row is kind='queued' and must NOT leak its ids.
+          { id: 'wizard_news.7.world_pulse.proposal.pending1', kind: 'queued', settlementIds: ['warhawk', 'secret'] },
         ],
       }],
     };

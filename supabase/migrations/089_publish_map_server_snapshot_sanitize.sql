@@ -108,7 +108,7 @@ $$;
 revoke execute on function public._gallery_world_snapshot_is_safe(jsonb) from public;
 
 comment on function public._gallery_world_snapshot_is_safe(jsonb) is
-  'Defense-in-depth (088): true ONLY when a stored gallery world snapshot carries NONE of the HARD-DENY / covert keys at any depth. The hard-deny compare is case-insensitive and the covert regex mirrors the UNION of WORLD_SNAPSHOT_HARD_DENY + COVERT_KEY_RE (src/domain/display/worldSnapshotPublic.js) and PRIVATE_KEY_RE (src/domain/display/publicSafe.js), anchored to whole-key matches. publish_map calls this to REJECT a client-supplied p_world_snapshot server-side, so the worldState privacy contract no longer rests on the client alone.';
+  'Defense-in-depth (088): true ONLY when a stored gallery world snapshot carries NONE of the HARD-DENY / covert keys at any depth. The hard-deny compare is case-insensitive; the covert regex covers the client COVERT_KEY_RE (src/domain/display/worldSnapshotPublic.js) tokens anchored to WHOLE-key matches (so a benign key merely containing a covert token, e.g. "seedTick", passes) plus the PRIVATE_KEY_RE (src/domain/display/publicSafe.js) tokens by contains-semantics. The whole-key anchoring of the covert side is a deliberate, safe asymmetry vs the client contains-scan, not a literal mirror. publish_map calls this to REJECT a client-supplied p_world_snapshot server-side, so the worldState privacy contract no longer rests on the client alone.';
 
 -- ── (2) publish_map — recreated net-current (forked from 088) ───────────────────────────
 -- KEEPS every 073 guard verbatim: 059 auth + account_is_active gates, 046
