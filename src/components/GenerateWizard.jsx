@@ -488,8 +488,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           }>
             {/* Cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
-                toolbar above shares the same PAGE_MAX column. */}
-            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+                toolbar above shares the same PAGE_MAX column. marginTop:-SP.lg
+                cancels ONLY this element's share of the parent column's gap:16
+                (longhand after the margin shorthand, so left/right auto-centering
+                is preserved), pulling the dossier flush under the header band
+                without collapsing the error-alert / save-row gaps. */}
+            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', marginTop: -SP.lg }}>
               <OutputContainer hideHeader />
             </div>
           </Suspense>

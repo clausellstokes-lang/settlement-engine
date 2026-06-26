@@ -6,7 +6,7 @@ import {ChevronDown, ChevronRight, Edit3, Check, X, FileText, Clock} from 'lucid
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, sans, serif_, FS, SP, PROSE_MAX, swatch } from '../theme.js';
+import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, CARD, sans, serif_, FS, SP, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
@@ -40,6 +40,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // busy + error so the click always has visible feedback.
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState(null);
+  // How far one Advance Time step carries the campaign world. Mirrors the World
+  // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
+  // the same default the hardcoded handler used before this picker existed.
+  const [advanceInterval, setAdvanceInterval] = useState('one_month');
   const handleExportPdf = async (e) => {
     e.stopPropagation();
     if (pdfBusy) return;
@@ -105,6 +109,23 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         {campaign.mapState && <span style={{ fontSize:FS.xs, fontWeight:700, color:GOLD_TXT, fontFamily:sans }}>Map saved</span>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
+            {/* Interval picker for the advance — Week/Month/Season/Year, mirroring
+                the World Map toolbar so the DM can choose how far one step carries
+                the campaign world. Disabled in lockstep with the button; stops
+                propagation so opening the dropdown never toggles the folder. */}
+            <select
+              aria-label="Advance interval"
+              value={advanceInterval}
+              onChange={(e) => setAdvanceInterval(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
+              title="How far one Advance Time step carries the campaign world"
+              style={{ fontSize:FS.xs, fontFamily:sans, color:INK, background:CARD, border:`1px solid ${BORDER}`, borderRadius:5, padding:'4px 6px', cursor: advanceInFlight ? 'default' : 'pointer' }}>
+              <option value="one_week">Week</option>
+              <option value="one_month">Month</option>
+              <option value="one_season">Season</option>
+              <option value="one_year">Year</option>
+            </select>
             {/* Advance Time is a per-CAMPAIGN action, not the page's first-click
                 task — demoted from solid primary to secondary (outline) so the
                 page header's "New Settlement" stays the only solid primary on the
@@ -114,7 +135,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               variant="secondary"
               size="sm"
               icon={<Clock size={10}/>}
-              onClick={(e) => { e.stopPropagation(); if (!advanceInFlight) onAdvanceTime?.(campaign.id); }}
+              onClick={(e) => { e.stopPropagation(); if (!advanceInFlight) onAdvanceTime?.(campaign.id, advanceInterval); }}
               disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
               title={!worldCanonized
                 ? 'Canonize this campaign world on the World Map before advancing time'

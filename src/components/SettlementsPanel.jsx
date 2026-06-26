@@ -424,8 +424,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // disabled when the world isn't canonized, so the {ok:false} branch is just a
   // defensive guard). The 'news' workspace is requested via a one-shot store
   // signal WorldMap consumes on mount.
-  const handleAdvanceCampaignTime = useCallback(async (campaignId) => {
-    const result = await advanceCampaignWorld(campaignId, 'one_month');
+  const handleAdvanceCampaignTime = useCallback(async (campaignId, interval = 'one_month') => {
+    const result = await advanceCampaignWorld(campaignId, interval);
     if (result && result.ok === false) return; // not canonized / nothing to do
     setActiveCampaign(campaignId);
     // Forward-compatible nav: the Realm hub (Phase 4) repoints ADVANCE_TIME_NAV_TARGET
