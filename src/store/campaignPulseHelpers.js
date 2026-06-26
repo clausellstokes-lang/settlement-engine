@@ -111,14 +111,61 @@ export function campaignStateForRegionalImpact(state, save, systemState, now) {
   };
 }
 
+// Cap the per-save world-pulse chronicle so an endlessly-advanced campaign can't
+// bloat each member save. Keeps the newest; mirrors the dossier feed's own 40-row
+// default with a little headroom.
+const WORLD_PULSE_EVENTS_CAP = 60;
+
+/**
+ * The world-pulse news entries that NAME this settlement, mapped to the dossier
+ * Chronicle feed's shape (title from headline; `at` from the threaded advance
+ * timestamp). Lets a member's Library Chronicle tab record what the autonomous
+ * advance did to IT that tick. result.wizardNews is the cumulative post-advance
+ * feed, so this returns the settlement's full surfaced history; the caller dedupes
+ * by id and appends only the genuinely-new rows. Pending proposals (kind 'queued')
+ * are excluded — the Chronicle is what HAPPENED, not what a DM might still approve;
+ * realm-wide arcs that name no specific member stay in the Realm scrollback.
+ * @param {any} result the pulse result (carries the post-advance wizardNews feed)
+ * @param {string|number} saveId the member settlement id
+ * @param {number} now the threaded advance timestamp
+ * @returns {Array<{id:string,title:string,summary:string,at:number,kind:string}>}
+ */
+function worldPulseChronicleEventsForSave(result, saveId, now) {
+  const entries = Array.isArray(result?.wizardNews?.entries) ? result.wizardNews.entries : [];
+  const id = String(saveId);
+  const out = [];
+  for (const e of entries) {
+    if (!e?.id || String(e.kind) === 'queued') continue;
+    const ids = Array.isArray(e.settlementIds) ? e.settlementIds.map(String) : [];
+    if (!ids.includes(id)) continue;
+    out.push({
+      id: String(e.id),
+      title: e.headline || 'World pulse',
+      summary: e.summary || '',
+      at: now,
+      kind: e.kind || 'applied',
+    });
+  }
+  return out;
+}
+
 export function campaignStateForWorldPulse(state, save, systemState, now, result) {
   const base = campaignStateForRegionalImpact(state, save, systemState, now);
+  // Per-settlement chronicle (the autonomous world now writes to each member's own
+  // dossier feed, not only the realm scrollback). Append the not-yet-recorded rows
+  // that name this save, stamping them with this advance's timestamp; earlier rows
+  // keep their original `at`. Capped to bound the persisted save.
+  const prior = Array.isArray(save.campaignState?.worldPulse?.events) ? save.campaignState.worldPulse.events : [];
+  const priorIds = new Set(prior.map(e => e && e.id));
+  const fresh = worldPulseChronicleEventsForSave(result, save.id, now).filter(e => !priorIds.has(e.id));
+  const events = (fresh.length ? [...prior, ...fresh] : prior).slice(-WORLD_PULSE_EVENTS_CAP);
   return {
     ...base,
     worldPulse: {
       lastTick: result?.tick ?? null,
       lastInterval: result?.interval || null,
       updatedAt: now,
+      events,
     },
   };
 }

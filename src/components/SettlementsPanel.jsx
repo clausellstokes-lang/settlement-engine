@@ -697,13 +697,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               <h2 style={{ margin:'0 0 6px', paddingLeft:4, fontSize:FS.xs, fontWeight:700, color:SECOND, textTransform:'uppercase', letterSpacing:'0.06em', fontFamily:sans }}>
                 {campaigns.length > 0 ? 'Unassigned' : 'Settlements'} ({unassignedSaves.length})
               </h2>
-              {/* Card grid reflow (P12 + cross-surface consistency with
-                  GalleryList): cards reflow to 2-3 columns on a wide monitor and
-                  collapse to one readable column on a tablet, instead of a single
-                  full-1200 column with View/Delete stranded ~1100px from the name.
-                  A grid also breaks the equal-weight single-file card-wall (P5);
-                  the semantic left rail stays the per-card scan anchor. */}
-              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap:SP.sm }}>
+              {/* Single readable column, capped at PROSE_MAX ~820px (P12). The
+                  prior 2-up grid (minmax 360px) squeezed each card so narrow that
+                  the settlement NAME ellipsis-clipped to 1-2 chars once the tier
+                  label + health pip shared its row — the recurring "S." / "C..."
+                  bug. A capped full-width card gives the name ample room so it
+                  always shows, while the cap keeps the action cluster from being
+                  stranded far from the name on a wide monitor. Library only; the
+                  Gallery keeps its multi-column grid. */}
+              <div style={{ display:'grid', gridTemplateColumns:'1fr', maxWidth:PROSE_MAX, gap:SP.sm }}>
                 {unassignedSaves.map(s => (
                   <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
                     onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}

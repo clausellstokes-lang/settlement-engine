@@ -323,8 +323,14 @@ export default function GalleryMaps({ onNavigate }) {
           return (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
-              {m.backdrop_kind === 'image' && m.thumb_url ? (
-                <img src={m.thumb_url} alt={m.name || 'Shared map'} loading="lazy"
+              {/* Show a real picture whenever the row carries one — the auto thumb
+                  (image-backdrop OR the captured terrain galleryThumb, via 083/088's
+                  thumb_url) OR the owner cover (image_url, the terrain snapshot the
+                  share editor auto-seeds). The prior gate required backdrop_kind===
+                  'image', which hid EVERY generated-terrain map on the placeholder
+                  even when a snapshot existed. */}
+              {(m.thumb_url || m.image_url) ? (
+                <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared map'} loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               ) : (
                 <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: BODY, fontSize: FS.xs, background: PARCH }}>
