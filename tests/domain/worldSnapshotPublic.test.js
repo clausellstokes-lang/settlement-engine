@@ -65,7 +65,7 @@ function poisonWorldState() {
           targetSaveId: 'forge', rollExplanation: 'd20=18 + 4 = 22 vs DC 12', candidateId: 'cand:secret',
           populationDeltas: { forge: -200 },
         }],
-        impactDigest: [{ settlementIds: ['warhawk', 'forge'] }],
+        impactDigest: [{ applyMode: 'auto', settlementIds: ['warhawk', 'forge'] }],
       },
     ],
   };
@@ -324,6 +324,91 @@ describe('serializeWorldSnapshotPublic: chronicle player-visibility gate (findin
     const out = serializeWorldSnapshotPublic(bare, {}, MEMBERS, { chronicle: true });
     // The tick slot still exists (the headline gate runs per-outcome) but carries no headlines.
     expect(out.chronicle[0].headlines).toEqual([]);
+  });
+});
+
+describe('serializeWorldSnapshotPublic: DM-approved proposals surface in the chronicle (regression)', () => {
+  // REGRESSION: applyWorldPulseProposal flips the PROPOSAL ROW to status='applied'
+  // but never rewrites the original selectedOutcomes entry, which keeps
+  // applyMode='proposal' forever. An applyMode-only gate therefore PERMANENTLY HIDES
+  // the realm's most significant approved events (government changes, conquests,
+  // diplomatic relabels). The applied-proposal id set must re-admit them; a still
+  // pending/dismissed proposal must stay hidden; a digest proposal must not leak.
+  function ws() {
+    return {
+      schemaVersion: 1,
+      // The applied + pending + dismissed proposal ROWS (the source of truth the
+      // outcome entries are never rewritten to match).
+      proposals: [
+        { id: 'prop-applied', status: 'applied', outcome: { id: 'approved1' } },
+        { id: 'prop-pending', status: 'pending', outcome: { id: 'pending1' } },
+        { id: 'prop-dismissed', status: 'dismissed', outcome: { id: 'dismissed1' } },
+      ],
+      pulseHistory: [{
+        tick: 5,
+        selectedOutcomes: [
+          {
+            // DM-APPROVED proposal — its row is status='applied' but the entry still
+            // reads applyMode='proposal'. MUST surface.
+            id: 'approved1', applyMode: 'proposal',
+            headline: 'The crown of Forgeholt changes hands', summary: 'A new government takes the seat.',
+            targetSaveId: 'forge',
+          },
+          {
+            // Still pending — DM has not approved it. MUST stay hidden.
+            id: 'pending1', applyMode: 'proposal',
+            headline: 'A pending plot the players have not seen', summary: 'Unrevealed scheming.',
+            targetSaveId: 'warhawk', populationDeltas: { warhawk: -50 },
+          },
+          {
+            // Dismissed — never surfaced. MUST stay hidden.
+            id: 'dismissed1', applyMode: 'proposal',
+            headline: 'A dismissed proposal', summary: 'Cut from the canon.',
+            targetSaveId: 'secret',
+          },
+        ],
+        impactDigest: [
+          // A digest entry for the APPROVED proposal surfaces its ids...
+          { id: 'approved1', applyMode: 'proposal', settlementIds: ['forge'] },
+          // ...but a PENDING proposal's digest entry must NOT leak its ids.
+          { id: 'pending1', applyMode: 'proposal', settlementIds: ['warhawk', 'secret'] },
+        ],
+      }],
+    };
+  }
+
+  test('an approved proposal (row status=applied) surfaces; pending/dismissed do not', () => {
+    const out = serializeWorldSnapshotPublic(ws(), {}, MEMBERS, { chronicle: true });
+    expect(out.chronicle).toHaveLength(1);
+    const entry = out.chronicle[0];
+    const headlines = entry.headlines.map((/** @type {any} */ h) => h.headline);
+    expect(headlines).toEqual(['The crown of Forgeholt changes hands']);
+    const strings = allStrings(out).join('\n');
+    expect(strings).not.toContain('pending plot');
+    expect(strings).not.toContain('dismissed proposal');
+  });
+
+  test('the approved-proposal digest surfaces ids; a pending-proposal digest does not leak', () => {
+    const out = serializeWorldSnapshotPublic(ws(), {}, MEMBERS, { chronicle: true });
+    const entry = out.chronicle[0];
+    // 'forge' from the approved outcome target + its approved digest entry; the
+    // pending digest's 'warhawk'/'secret' must be absent.
+    expect(entry.affectedSettlementIds).toEqual(['forge']);
+    expect(entry.affectedSettlementIds).not.toContain('warhawk');
+    expect(entry.affectedSettlementIds).not.toContain('secret');
+  });
+});
+
+describe('serializeWorldSnapshotPublic: deferredPartyImpacts is HARD-DENIED', () => {
+  test('deferredPartyImpacts is in the frozen HARD-DENY array and never serializes', () => {
+    expect(WORLD_SNAPSHOT_HARD_DENY).toContain('deferredPartyImpacts');
+    const ws = {
+      schemaVersion: 1,
+      deferredPartyImpacts: [{ id: 'dpi1', secret: 'queued party fallout', covert: true }],
+    };
+    const out = serializeWorldSnapshotPublic(ws, {}, MEMBERS, ALL_SECTIONS);
+    expect(allKeys(out).has('deferredPartyImpacts')).toBe(false);
+    expect(allStrings(out).join('\n')).not.toContain('queued party fallout');
   });
 });
 

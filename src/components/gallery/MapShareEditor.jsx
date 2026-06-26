@@ -152,7 +152,14 @@ export default function MapShareEditor({
   const [tagsInput, setTagsInput] = useState(
     ((campaign?.galleryTags?.length ? campaign.galleryTags : suggestedTagsForCampaign(campaign || {}, memberList)) || []).join(', '),
   );
-  const [importable, setImportable] = useState(Boolean(galleryImportable));
+  // Import opt-in: PRESERVE-ON-OMIT. Initialized to undefined (not a concrete
+  // false), so a Save fired before the async gallery-field seed lands omits
+  // gallery_importable from the metadata bag and the patch keeps the prior value.
+  // The async seed (fetchCampaignGalleryFields) and the owner's own toggle replace
+  // it with a real boolean; until then the prop is only the checkbox's display
+  // fallback, never a write. The campaign-load SELECT omits the 088 gallery
+  // columns, so the prop cannot be trusted as the persisted truth on first mount.
+  const [importable, setImportable] = useState(undefined);
   // The five living-world sections an owner may reveal. Default ALL ON; a saved
   // share seeds from the persisted enabled-keys (an empty list still means "none
   // on", so only a null/absent seed falls back to every key).
@@ -323,16 +330,29 @@ export default function MapShareEditor({
     setBusy(true); setError(null); setSavedDetails(false);
     try {
       const opts = buildShareOpts();
+      // World-snapshot PRESERVE-ON-OMIT: a persisted campaign share whose member
+      // settlements have not hydrated on this surface forces kind back to 'map'
+      // (canShareCampaign is false with an empty member list), so buildShareOpts
+      // would emit shareWorld:false / worldSections:[] / worldSnapshot:null. A save
+      // from that stale mount must NOT null the living world, so omit the world trio
+      // from the bag in that case and galleryMapMetadataPatch keeps the prior value.
+      const persistedCampaignShare = campaign?.shareKind === 'map_with_campaign';
+      const worldUnloaded = persistedCampaignShare && !shareCampaign;
       await updateMapGalleryMetadata(campaignId, {
         description: opts.description,
         imageUrl: opts.imageUrl,
         imageAlt: opts.imageAlt,
         tags: opts.tags,
-        importable: opts.importable,
+        // Import opt-in PRESERVE-ON-OMIT: undefined until the async seed lands, so
+        // a save before the seed resolves omits gallery_importable entirely and the
+        // patch keeps the persisted choice rather than flipping it to false.
+        ...(opts.importable === undefined ? {} : { importable: opts.importable }),
         realmArcSummary: opts.realmArcSummary,
-        shareWorld: opts.shareWorld,
-        worldSections: opts.worldSections,
-        worldSnapshot: opts.worldSnapshot,
+        ...(worldUnloaded ? {} : {
+          shareWorld: opts.shareWorld,
+          worldSections: opts.worldSections,
+          worldSnapshot: opts.worldSnapshot,
+        }),
         ...(facets ? facets : {}),
       });
       try { updateSavedCampaign?.(campaignId, cachePatch()); } catch { /* non-fatal */ }
@@ -383,7 +403,9 @@ export default function MapShareEditor({
           id="map-share-importable"
           type="checkbox"
           aria-label="Allow others to import this map"
-          checked={importable}
+          // Controlled: while the seed is in flight (importable === undefined) fall
+          // back to the tile facet prop for DISPLAY only, never for the write.
+          checked={importable === undefined ? galleryImportable === true : importable}
           onChange={event => setImportable(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />

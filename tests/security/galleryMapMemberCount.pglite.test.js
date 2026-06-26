@@ -365,4 +365,52 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     )).rows[0].s;
     expect(stored).toEqual({ schemaVersion: 1, worldClock: { tick: 1 } });
   });
+
+  // ── 090: ties on published_at order DETERMINISTICALLY ─────────────────────────
+  // list_gallery_maps' ORDER BY falls through every sort mode to `published_at
+  // desc`. Without a total tiebreaker, rows sharing a published_at (multi-row
+  // inserts stamp now() = the transaction start time identically) came back in an
+  // arbitrary, call-to-call-unstable order — the root of a rare pglite-suite flake.
+  // 090 appends `public_slug desc` (unique via 045's partial index, non-null via the
+  // WHERE) so the order is TOTAL. DOCUMENTED CONTRACT: tied rows return in
+  // DESCENDING public_slug order, and the same input yields the same order every call.
+  it('rows with an identical published_at return in a stable, documented order (090)', async () => {
+    // Two rows with the SAME published_at and distinct slugs. A future timestamp
+    // floats them above the now()-stamped fixtures so they sit adjacent at the top,
+    // but we filter by slug below so the assertion never depends on that placement.
+    await db.query(
+      `insert into public.saved_maps
+         (user_id, name, share_kind, map_data, is_public, public_slug, published_at)
+       values
+         ($1, 'Tie A', 'map', '{}'::jsonb, true, 'tie-aaa', timestamptz '2099-01-01T00:00:00Z'),
+         ($1, 'Tie Z', 'map', '{}'::jsonb, true, 'tie-zzz', timestamptz '2099-01-01T00:00:00Z')`,
+      [OWNER],
+    );
+
+    const tieOrder = async (sortKey) => {
+      const rows = (await db.query(
+        `select slug from public.list_gallery_maps(0, 24, $1)`,
+        [sortKey],
+      )).rows.map((r) => r.slug);
+      // Preserve list order, keep only the two probe rows.
+      return rows.filter((s) => s === 'tie-aaa' || s === 'tie-zzz');
+    };
+
+    // public_slug desc -> 'tie-zzz' sorts before 'tie-aaa'. Holds for every sort
+    // mode, since all three fall through to published_at desc, then the tiebreaker.
+    for (const sortKey of ['newest', 'most_viewed', 'most_imported']) {
+      expect(await tieOrder(sortKey)).toEqual(['tie-zzz', 'tie-aaa']);
+    }
+
+    // Stable across repeated calls in the same session (the flake was order
+    // drifting between two list calls the test compared).
+    const first = await tieOrder('newest');
+    for (let i = 0; i < 5; i++) {
+      expect(await tieOrder('newest')).toEqual(first);
+    }
+
+    // The net-current body MUST carry the total tiebreaker — guard against a future
+    // recreate dropping it (the exact regression 090 fixes).
+    expect(LIST_FN).toMatch(/published_at\s+desc\s*,[\s\S]*public_slug\s+desc/i);
+  });
 });

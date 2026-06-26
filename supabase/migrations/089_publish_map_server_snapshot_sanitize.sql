@@ -27,9 +27,13 @@
 --
 -- The forbidden set is the exact HARD-DENY list (npcStates, factionStates,
 -- relationshipStates, pendingEvents, proposals, stressors, pausedAdvance,
--- settlementTickStates, rngSeed, deferredImpacts, deferredWarFronts) plus the covert
--- prose channels (covert / seed / rollExplanation / diceDetail / preSnapshot /
--- preWorldState / preRegionalGraph / preSaves) that the client final-scrub drops.
+-- settlementTickStates, rngSeed, deferredImpacts, deferredWarFronts,
+-- deferredPartyImpacts) plus the covert prose channels (the union of the client
+-- COVERT_KEY_RE in worldSnapshotPublic.js and PRIVATE_KEY_RE in publicSafe.js) that
+-- the client final-scrub drops. The hard-deny compare is case-insensitive (lower on
+-- both sides) so a mixed/upper-cased key like NpcStates cannot bypass it, and the
+-- covert regex is anchored to whole-key matches so a benign key that merely CONTAINS
+-- a token (e.g. "Seedhaven", "seedTick") is not false-rejected.
 create or replace function public._gallery_world_snapshot_is_safe(value jsonb)
 returns boolean
 language plpgsql
@@ -43,7 +47,7 @@ declare
   hard_deny constant text[] := array[
     'npcStates','factionStates','relationshipStates','pendingEvents','proposals',
     'stressors','pausedAdvance','settlementTickStates','rngSeed','deferredImpacts',
-    'deferredWarFronts'
+    'deferredWarFronts','deferredPartyImpacts'
   ];
 begin
   if value is null then
@@ -52,12 +56,31 @@ begin
 
   if jsonb_typeof(value) = 'object' then
     for key, child in select * from jsonb_each(value) loop
-      -- Reject an exact HARD-DENY key …
-      if key = any(hard_deny) then
+      -- Reject an exact HARD-DENY key, CASE-INSENSITIVELY (lower on both sides) so a
+      -- mixed/upper-cased forbidden key like NpcStates cannot slip past the literal
+      -- camelCase list.
+      if lower(key) = any (select lower(x) from unnest(hard_deny) as t(x)) then
         return false;
       end if;
-      -- … and the covert / seed / prose channels the client final-scrub drops.
-      if key ~* '(covert|rngSeed|seed|rollExplanation|diceDetail|preSnapshot|preWorldState|preRegionalGraph|preSaves)' then
+      -- … and the covert / seed / prose channels the client final-scrub drops. This
+      -- mirrors the UNION of the client COVERT_KEY_RE (worldSnapshotPublic.js) and
+      -- PRIVATE_KEY_RE (publicSafe.js). It is ANCHORED to whole-key matches (^...$) so
+      -- a benign key that merely CONTAINS a token is not false-rejected: the seed /
+      -- covert / pre-prefix tokens match only as whole keys (so "Seedhaven" and
+      -- "seedTick" pass), while the private substring tokens keep their .* contains
+      -- semantics. The dm / gm tokens honour a Postgres ERE start-of-word boundary
+      -- (\m) so they match dmNotes / gmGuidance without over-matching admin / isAdmin.
+      if key ~* ('^('
+        -- covert / seed / dice / pre-prefix channels (COVERT_KEY_RE) — whole-key only.
+        || 'covert|rngSeed|seed|rollExplanations?|diceDetail|explanation'
+        || '|preSnapshot|preWorldState|preRegionalGraph|preSaves'
+        -- DM-private channels (PRIVATE_KEY_RE) — contains-semantics via .* around the
+        -- token, with \m word boundaries for the dm / gm prefixes.
+        || '|.*secret.*|.*private.*|.*\mdm.*|.*\mgm.*|.*guidance.*|.*note.*'
+        || '|.*plotHook.*|.*plot_hooks.*|.*hook.*|.*compass.*|.*chronicle.*'
+        || '|.*pinnedNpc.*|.*aiData.*|.*aiSettlement.*|.*aiDailyLife.*'
+        || '|.*narrativeNotes.*|.*identityMarkers.*|.*frictionPoints.*|.*connectionsMap.*'
+        || ')$') then
         return false;
       end if;
       if not public._gallery_world_snapshot_is_safe(child) then
@@ -85,7 +108,7 @@ $$;
 revoke execute on function public._gallery_world_snapshot_is_safe(jsonb) from public;
 
 comment on function public._gallery_world_snapshot_is_safe(jsonb) is
-  'Defense-in-depth (088): true ONLY when a stored gallery world snapshot carries NONE of the HARD-DENY / covert keys at any depth. Mirrors WORLD_SNAPSHOT_HARD_DENY + COVERT_KEY_RE in src/domain/display/worldSnapshotPublic.js. publish_map calls this to REJECT a client-supplied p_world_snapshot server-side, so the worldState privacy contract no longer rests on the client alone.';
+  'Defense-in-depth (088): true ONLY when a stored gallery world snapshot carries NONE of the HARD-DENY / covert keys at any depth. The hard-deny compare is case-insensitive and the covert regex mirrors the UNION of WORLD_SNAPSHOT_HARD_DENY + COVERT_KEY_RE (src/domain/display/worldSnapshotPublic.js) and PRIVATE_KEY_RE (src/domain/display/publicSafe.js), anchored to whole-key matches. publish_map calls this to REJECT a client-supplied p_world_snapshot server-side, so the worldState privacy contract no longer rests on the client alone.';
 
 -- ── (2) publish_map — recreated net-current (forked from 088) ───────────────────────────
 -- KEEPS every 073 guard verbatim: 059 auth + account_is_active gates, 046

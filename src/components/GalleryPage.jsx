@@ -12,6 +12,7 @@ import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
+import MapGalleryDetail from './gallery/MapGalleryDetail.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -63,6 +64,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     filters,
     activeSlug,
     dossier,
+    mapDetail,
     dossierLoading,
     dossierError,
     voteBusyId,
@@ -82,6 +84,32 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     importDossier,
     setDossierCommentCount,
   } = useGalleryPageState(routeSlug);
+
+  if (activeSlug && mapDetail) {
+    // The ?slug resolved to a shared MAP, not a settlement dossier. A published
+    // map's "Copy link" emits the same /gallery?slug= shape, so the deep-link
+    // surfaces the map detail here instead of a dead-end. This is a read-only
+    // landing: import keys on the owner opt-in flag (not projected by the deep
+    // link) plus a premium viewer, so the import path lives on the Maps tab.
+    // Back returns to the gallery list, matching the settlement detail.
+    return (
+      <FeatureErrorBoundary
+        label="GalleryPage.mapDetail"
+        kind="react.render.gallery"
+        fallbackTitle="This shared map could not be displayed."
+        resetKeys={[activeSlug]}
+      >
+        <MapGalleryDetail
+          detail={mapDetail}
+          loading={dossierLoading}
+          error={dossierError}
+          onBack={backToList}
+          importEligible={false}
+          importNotice="Open the Maps tab to import this map into your library."
+        />
+      </FeatureErrorBoundary>
+    );
+  }
 
   if (activeSlug) {
     // Resilience: a public dossier is third-party, server-projected data — a

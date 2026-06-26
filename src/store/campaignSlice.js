@@ -789,6 +789,18 @@ export const createCampaignSlice = (set, get) => {
       x => isCampaignActive(x) && (x.settlementIds || []).map(String).includes(sid),
     );
     if (!campaign || !campaign.worldState?.canonizedAt) return null;
+    // Advance-window write guard (mirrors the changeQueueFlushing floor in
+    // applyEvent). A world-pulse advance drains the queue in Phase 1, awaits the
+    // pure interval compute, then in Phase 2 REPLACES this campaign's worldState
+    // wholesale from a clone captured BEFORE the await. A pendingEvents append that
+    // lands in that await window would be overwritten by the Phase-2 commit (a
+    // lost write). So no-op while an advance is in flight for this campaign; the
+    // intention is simply re-issued after the advance settles. Defense in depth:
+    // applyEvent's clock-bound branch already blocks the same case (and its
+    // fall-through), but a direct caller of queueSettlementEvent relies on this.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaign.id)) {
+      return null;
+    }
     const now = new Date().toISOString();
     let added = null;
     set(state => {

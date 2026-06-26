@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
+  fetchGalleryMap,
   fetchPublicDossier,
   fetchPublicGallery,
   fetchMyGallery,
@@ -55,6 +56,13 @@ export function useGalleryPageState(routeSlug = null) {
   const [filters, setFilters] = useState(() => ({ ...EMPTY_GALLERY_FILTERS }));
   const [activeSlug, setActiveSlug] = useState(routeSlug || null);
   const [dossier, setDossier] = useState(null);
+  // A ?slug that resolves to a shared MAP rather than a settlement dossier.
+  // Map "Copy link" emits /gallery?slug=<mapSlug>, but that slug only resolves
+  // through the settlement dossier fetch, which returns null for a map. The
+  // openDossier resolver falls back to fetchGalleryMap so the link surfaces the
+  // map detail instead of a dead-end. Held separately from `dossier` so the page
+  // can route to MapGalleryDetail; settlement slugs leave this null.
+  const [mapDetail, setMapDetail] = useState(null);
   const [dossierLoading, setDossierLoading] = useState(false);
   const [dossierError, setDossierError] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
@@ -144,11 +152,28 @@ export function useGalleryPageState(routeSlug = null) {
     if (!options.replace) navigate('gallery', { params: { slug } });
     try {
       const next = await fetchPublicDossier(slug);
-      setDossier(next);
-      if (!next) setDossierError('This settlement is not available.');
+      if (next) {
+        setDossier(next);
+        setMapDetail(null);
+        return;
+      }
+      // Kind-aware fallback: the slug isn't a settlement dossier. A published map's
+      // "Copy link" emits the same /gallery?slug=<slug> shape, so try the map
+      // projection before declaring the link dead. A hit routes the page to
+      // MapGalleryDetail (see GalleryPage); a miss keeps the settlement message.
+      const map = await fetchGalleryMap(slug);
+      if (map) {
+        setMapDetail(map);
+        setDossier(null);
+        return;
+      }
+      setDossier(null);
+      setMapDetail(null);
+      setDossierError('This settlement is not available.');
     } catch (err) {
       setDossierError(err?.message || 'This settlement could not be opened.');
       setDossier(null);
+      setMapDetail(null);
     } finally {
       setDossierLoading(false);
     }
@@ -175,6 +200,7 @@ export function useGalleryPageState(routeSlug = null) {
     openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
+    setMapDetail(null);
     setDossierError(null);
   }, [routeSlug, openDossier]);
 
@@ -203,6 +229,7 @@ export function useGalleryPageState(routeSlug = null) {
     openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
+    setMapDetail(null);
     setDossierError(null);
     setActionError(null);
     setActionNotice(null);
@@ -313,6 +340,7 @@ export function useGalleryPageState(routeSlug = null) {
     filters,
     activeSlug,
     dossier,
+    mapDetail,
     dossierLoading,
     dossierError,
     voteBusyId,

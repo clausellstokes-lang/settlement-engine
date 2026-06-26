@@ -58,6 +58,7 @@ export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
   'rngSeed',
   'deferredImpacts',
   'deferredWarFronts',
+  'deferredPartyImpacts',
 ]);
 
 /** simulationRules keys safe to surface publicly (coarse world-shape toggles the
@@ -341,6 +342,18 @@ function humanize(value) {
  */
 function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
   const pulses = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
+  // DM-APPROVED proposals: applyWorldPulseProposal flips the PROPOSAL ROW to
+  // status === 'applied' but never rewrites the original selectedOutcomes entry,
+  // which keeps applyMode === 'proposal' forever. So an outcome that is now a real,
+  // surfaced incident (government changes, conquests-via-label, diplomatic relabels —
+  // the realm's most significant events) would be permanently hidden by an
+  // applyMode-only gate. Recover the surfaced ids from the applied proposal rows.
+  // Mirrors relationshipMemory.js's appliedMarkers rule.
+  const appliedIds = new Set(
+    (worldState?.proposals || [])
+      .filter((/** @type {any} */ p) => p?.status === 'applied' && p?.outcome?.id)
+      .map((/** @type {any} */ p) => p.outcome.id),
+  );
   /** @type {Map<number, { tick: number, headlines: Array<{ headline: string, summary: string }>, affected: Set<string> }>} */
   const byTick = new Map();
   for (const pulse of pulses) {
@@ -353,10 +366,11 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
       // outcomes AND proposal outcomes (the un-surfaced plot the DM has not yet
       // approved, plus the NPC goals/scheming those proposals carry). Only an
       // auto-applied outcome was actually surfaced to players, so the public
-      // chronicle surfaces ONLY applyMode === 'auto'; a proposal (DM-private) is
-      // dropped. Mirrors relationshipMemory's rule that an un-applied proposal is
-      // not a real, surfaced incident.
-      if (o?.applyMode !== 'auto') continue;
+      // chronicle surfaces ONLY applyMode === 'auto' OR a proposal the DM has since
+      // APPROVED (its id is in the applied-proposal set); an un-approved proposal
+      // (DM-private) is dropped. Mirrors relationshipMemory's rule that an un-applied
+      // proposal is not a real, surfaced incident.
+      if (o?.applyMode !== 'auto' && !appliedIds.has(o?.id)) continue;
       // Headline + summary ONLY — never the outcome object (which carries
       // rollExplanations, candidateId, raw deltas). Strings are coerced + bounded.
       slot.headlines.push({
@@ -367,6 +381,10 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
     }
     const digest = Array.isArray(pulse?.impactDigest) ? pulse.impactDigest : [];
     for (const d of digest) {
+      // Same player-visibility gate as the outcome loop above: a digest entry that
+      // belongs to an un-approved proposal must not leak its affected ids. Only an
+      // auto-applied entry, or one whose id is in the applied-proposal set, surfaces.
+      if (d?.applyMode !== 'auto' && !appliedIds.has(d?.id)) continue;
       const ids = Array.isArray(d?.settlementIds) ? d.settlementIds : [];
       ids.forEach((/** @type {any} */ x) => slot.affected.add(String(x)));
     }

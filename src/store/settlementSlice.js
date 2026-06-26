@@ -1845,6 +1845,33 @@ export const createSettlementSlice = (set, get) => ({
         && activeSaveId && state.phase === 'canon'
         && typeof state.isSettlementClockBound === 'function'
         && state.isSettlementClockBound(activeSaveId)) {
+      // Advance-window write guard (mirrors the changeQueueFlushing floor above).
+      // A world-pulse advance is async: it drains the queue and commits Phase 1,
+      // then awaits the pure interval compute, then in Phase 2 REPLACES the
+      // campaign's worldState wholesale from a clone taken BEFORE the await. A
+      // queueSettlementEvent that lands in that await window would append to the
+      // live worldState.pendingEvents only for Phase 2 to overwrite it (a lost
+      // write: the member event is dropped yet appears to have queued). So while
+      // an advance is in flight for THIS settlement's campaign, no-op the queue
+      // and do NOT fall through to the immediate apply (that would wrongly resolve
+      // a clock-bound member's event off-pulse). The UI already disables both the
+      // Advance button and member event entry during a commit/advance, so this is
+      // the belt-and-suspenders floor. The intention is simply re-issued after the
+      // advance settles, exactly like the changeQueueFlushing case.
+      // Resolve the bound campaign with the SAME String-normalized membership scan
+      // isSettlementClockBound / queueSettlementEvent use (not the exact-match
+      // getCampaignForSettlement), so a number/string id mix still matches and the
+      // fall-through to immediate apply stays blocked.
+      const sid = String(activeSaveId);
+      const boundCampaign = (state.campaigns || []).find(
+        c => (c.settlementIds || []).map(String).includes(sid),
+      ) || null;
+      if (boundCampaign
+          && typeof state.isAdvanceInFlight === 'function'
+          && state.isAdvanceInFlight(boundCampaign.id)) {
+        console.warn('[applyEvent] ignored: a world-pulse advance is in progress for this campaign');
+        return null;
+      }
       const queued = state.queueSettlementEvent(activeSaveId, event);
       if (queued) {
         set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
