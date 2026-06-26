@@ -33,7 +33,8 @@
  * no future Playwright job can be green-on-nothing.
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 /**
  * @typedef {{ ok: boolean, reason: string, byProject: Record<string, number> }} ListVerdict
@@ -129,9 +130,20 @@ function listSpecs(playwrightArgs) {
 }
 
 // ── CLI ───────────────────────────────────────────────────────────────────────
-// Only run the CLI when invoked directly, not when imported by a test.
-const invokedDirectly =
-  process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
+// Only run the CLI when invoked directly, not when imported by a test. Compare
+// against the symlink-RESOLVED, properly-encoded file URL of argv[1]:
+// import.meta.url is already realpath-resolved and percent-encoded, so a raw
+// `file://${argv[1]}` mismatches under a symlinked invocation (or any path with
+// spaces) — the CLI would then silently no-op. pathToFileURL(realpath(...))
+// normalizes both sides the same way.
+const invokedDirectly = (() => {
+  if (!process.argv[1]) return false;
+  try {
+    return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
+  } catch {
+    return false;
+  }
+})();
 
 if (invokedDirectly) {
   const argv = process.argv.slice(2);

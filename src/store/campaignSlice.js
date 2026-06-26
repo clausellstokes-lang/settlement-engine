@@ -63,6 +63,23 @@ const SCHEMA_VERSION = 2;
  * track() itself never throws.
  */
 
+/**
+ * Scheme guard for an imported backdrop image URL. Gallery rows are untrusted
+ * shared input and the URL is later rendered as an SVG <image href> (see
+ * MapOverlay.jsx), so only http(s) URLs may be stored — never javascript:/data:
+ * or other schemes. Mirrors gallery.js's isSafePublicImageUrl (kept local to
+ * avoid widening that module's surface for one consumer).
+ */
+function isSafeBackdropUrl(value) {
+  if (!value) return false;
+  try {
+    const { protocol } = new URL(value);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function localLoad(ownerId = 'anon') {
   return campaignService.loadCached(ownerId).map(migrateCampaign);
 }
@@ -306,6 +323,14 @@ export const createCampaignSlice = (set, get) => {
           imageUrl = up.url;
         }
       } catch { /* fall back to referencing the shared public URL */ }
+      // The re-upload returns a trusted https storage URL; if it failed we keep
+      // the original shared URL ONLY when it's a safe http(s) scheme. A
+      // javascript:/data:/other-scheme URL from this untrusted gallery row must
+      // never be stored — MapOverlay renders it as an SVG <image href> with no
+      // scheme validation — so the import fails rather than persist it.
+      if (!isSafeBackdropUrl(imageUrl)) {
+        throw new Error('That shared map has no importable backdrop.');
+      }
       mapState.customBackdrop = {
         imageUrl,
         w: Number(backdrop.customBackdrop.w) || 0,
@@ -407,7 +432,14 @@ export const createCampaignSlice = (set, get) => {
           imageUrl = up.url;
         }
       } catch { /* fall back to the shared public URL */ }
-      mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+      // Only store an http(s) backdrop URL. The re-upload yields a trusted https
+      // storage URL; if it failed and the original shared URL is an unsafe
+      // scheme (javascript:/data:/other), drop the backdrop — the campaign still
+      // imports with its remapped placements, just without the untrusted image
+      // that MapOverlay would render as an SVG <image href>.
+      if (isSafeBackdropUrl(imageUrl)) {
+        mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+      }
     } else if (sharedMap.fmgSnapshot) {
       mapState.fmgSnapshot = sharedMap.fmgSnapshot;
       mapState.seed = sharedMap.seed ?? null;
@@ -512,6 +544,26 @@ export const createCampaignSlice = (set, get) => {
       c.name = String(name || '').trim() || c.name;
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, id);
+    }),
+
+  /**
+   * Patch a cached campaign row IN PLACE (mirrors settlementSlice's
+   * updateSavedSettlement). The maps editor re-renders off the cached campaign
+   * after a publish/edit without a refetch — e.g. stamping the gallery share
+   * kind/description or the just-captured thumbnail back onto the row so the
+   * tile reflects the edit immediately. Only patches an ACTIVE campaign; a
+   * missing/destroyed id is a no-op. Persists so the patch survives a reload.
+   * @param {string} campaignId
+   * @param {object} patch shallow keys to assign onto the campaign row
+   */
+  updateSavedCampaign: (campaignId, patch) =>
+    set(state => {
+      if (!patch || typeof patch !== 'object') return;
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      Object.assign(c, patch);
+      c.updatedAt = new Date().toISOString();
+      persistCampaignState(state, campaignId);
     }),
 
   deleteCampaign: (id) =>
@@ -737,6 +789,18 @@ export const createCampaignSlice = (set, get) => {
       x => isCampaignActive(x) && (x.settlementIds || []).map(String).includes(sid),
     );
     if (!campaign || !campaign.worldState?.canonizedAt) return null;
+    // Advance-window write guard (mirrors the changeQueueFlushing floor in
+    // applyEvent). A world-pulse advance drains the queue in Phase 1, awaits the
+    // pure interval compute, then in Phase 2 REPLACES this campaign's worldState
+    // wholesale from a clone captured BEFORE the await. A pendingEvents append that
+    // lands in that await window would be overwritten by the Phase-2 commit (a
+    // lost write). So no-op while an advance is in flight for this campaign; the
+    // intention is simply re-issued after the advance settles. Defense in depth:
+    // applyEvent's clock-bound branch already blocks the same case (and its
+    // fall-through), but a direct caller of queueSettlementEvent relies on this.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaign.id)) {
+      return null;
+    }
     const now = new Date().toISOString();
     let added = null;
     set(state => {
@@ -840,6 +904,56 @@ export const createCampaignSlice = (set, get) => {
       const deferredWarFronts = [...byKey.values()];
       count = deferredWarFronts.length;
       c.worldState = { ...worldState, deferredWarFronts };
+      c.updatedAt = now;
+      // Local mirror only; the flush's 069 write persists this snapshot
+      // atomically with the settlement rows, so we do NOT persist here.
+    });
+    return count;
+  },
+
+  /**
+   * Phase 4b — STASH a deferred PARTY-IMPACT action produced by a clock-bound
+   * campaign-member change-queue commit of a party-caused event. The IMMEDIATE
+   * ripple path fires recordPartyImpact eagerly, but recordPartyImpact does its
+   * OWN out-of-band backward (last-write-wins) cloud write — which on a member
+   * flush would escape the flush's single atomic commit AND its rollback (a
+   * persisted, never-reverted side effect on a failed flush). So a member commit
+   * runs with skipRegional and DEFERS the impact here: the resolved action is
+   * parked on worldState.deferredPartyImpacts, which advanceCampaignWorld drains
+   * EXACTLY ONCE through the SAME recordPartyImpact replay it uses for queued
+   * party-caused events (gated by !cloudPending, so it never force-writes atop an
+   * unpersisted advance). A parallel bucket to deferredImpacts / deferredWarFronts
+   * on purpose — a party impact is a world-injection replay, not a queued regional
+   * impact or war-front seed. De-duped by a structural key so a failed-then-retried
+   * flush parks ONE entry. Does NOT bump the tick and does NOT persist (the 069 RPC
+   * carries this worldState snapshot atomically with the settlement rows).
+   * @param {string} campaignId
+   * @param {object} action  the mapEventToPartyImpact result
+   * @returns {number} the deferred-party-impact count after the stash (0 = no-op)
+   */
+  stashDeferredPartyImpact: (campaignId, action) => {
+    if (!campaignId || !action || typeof action !== 'object') return 0;
+    const now = new Date().toISOString();
+    let count = 0;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      const existing = Array.isArray(worldState.deferredPartyImpacts) ? worldState.deferredPartyImpacts : [];
+      // De-dupe by a structural key (kind + the action's target ids) so a
+      // re-commit of the same staged party event (a failed-then-retried flush)
+      // cannot park two copies of one impact. Falls back to the full JSON when no
+      // discriminating ids are present.
+      const keyOf = (a) => [
+        a?.kind, a?.targetId, a?.npcId, a?.factionId, a?.relationshipId, a?.conditionId, a?.stressorType,
+      ].some(v => v != null)
+        ? [a?.kind, a?.targetId, a?.npcId, a?.factionId, a?.relationshipId, a?.conditionId, a?.stressorType].map(v => String(v ?? '')).join('|')
+        : JSON.stringify(a);
+      const byKey = new Map(existing.map(a => [keyOf(a), a]));
+      byKey.set(keyOf(action), cloneJson(action));
+      const deferredPartyImpacts = [...byKey.values()];
+      count = deferredPartyImpacts.length;
+      c.worldState = { ...worldState, deferredPartyImpacts };
       c.updatedAt = now;
       // Local mirror only; the flush's 069 write persists this snapshot
       // atomically with the settlement rows, so we do NOT persist here.

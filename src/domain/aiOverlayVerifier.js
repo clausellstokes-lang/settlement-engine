@@ -63,7 +63,7 @@ export const VIOLATION_KINDS = Object.freeze([
  * The same identity function MUST be used for both sides so we don't
  * spuriously flag rename-as-id-change.
  */
-function entityKey(e) {
+function entityKey(/** @type {any} */ e) {
   if (!e || typeof e !== 'object') return null;
   if (e.id != null) return `id:${String(e.id)}`;
   if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
@@ -71,11 +71,11 @@ function entityKey(e) {
   return null;
 }
 
-function displayName(e) {
+function displayName(/** @type {any} */ e) {
   return (e && typeof e === 'object' && (e.name || e.faction)) || null;
 }
 
-function asArray(maybe) {
+function asArray(/** @type {any} */ maybe) {
   return Array.isArray(maybe) ? maybe : [];
 }
 
@@ -91,7 +91,7 @@ function asArray(maybe) {
  * what we want to flag. Without ids we fall back to name and can't
  * detect rename (a rename looks like remove + add).
  */
-function compareEntityArrays(field, originalArr, refinedArr) {
+function compareEntityArrays(/** @type {any} */ field, /** @type {any} */ originalArr, /** @type {any} */ refinedArr) {
   const violations = [];
   const oMap = new Map();
   for (const e of asArray(originalArr)) {
@@ -156,7 +156,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
  * user-authored entities. (Drafts can become canon — that's a normal
  * promotion. The forbidden direction is locked/user → anything else.)
  */
-function compareCanonTags(field, originalArr, refinedArr) {
+function compareCanonTags(/** @type {any} */ field, /** @type {any} */ originalArr, /** @type {any} */ refinedArr) {
   const violations = [];
   const oMap = new Map();
   for (const e of asArray(originalArr)) {
@@ -206,7 +206,7 @@ const ROOT_FACT_KEYS = Object.freeze([
   'id', 'name', 'tier', 'population', '_seed', 'schemaVersion', 'simulationVersion',
 ]);
 
-function compareRootFacts(original, refined) {
+function compareRootFacts(/** @type {any} */ original, /** @type {any} */ refined) {
   const violations = [];
   for (const key of ROOT_FACT_KEYS) {
     const o = original?.[key];
@@ -236,10 +236,10 @@ function compareRootFacts(original, refined) {
  * — if the AI drops or rewrites one of those to the point that a beat
  * no longer derives, this catches it.
  */
-function compareHistoryBeats(original, refined) {
+function compareHistoryBeats(/** @type {any} */ original, /** @type {any} */ refined) {
   const violations = [];
-  const oBeats = deriveHistoryBeats(original);
-  const rBeats = deriveHistoryBeats(refined);
+  const oBeats = /** @type {any} */ (deriveHistoryBeats(original));
+  const rBeats = /** @type {any} */ (deriveHistoryBeats(refined));
   for (const key of Object.keys(oBeats)) {
     if (oBeats[key] && !rBeats[key]) {
       violations.push({
@@ -262,8 +262,8 @@ function compareHistoryBeats(original, refined) {
  * output. User-edited prose is canon — the AI must pass it through
  * verbatim.
  */
-function compareUserFields(original, refined) {
-  const violations = [];
+function compareUserFields(/** @type {any} */ original, /** @type {any} */ refined) {
+  const /** @type {any[]} */ violations = [];
   const edits = walkUserEdits(original);
   if (edits.length === 0) return violations;
 
@@ -305,9 +305,9 @@ const ENTITY_ARRAY_PATH_BY_KIND = {
   currentTension: ['history', 'currentTensions'],
 };
 
-function locateEntity(settlement, kind, entityIndex) {
+function locateEntity(/** @type {any} */ settlement, /** @type {any} */ kind, /** @type {any} */ entityIndex) {
   if (kind === 'settlement') return settlement;
-  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
+  const segs = /** @type {any} */ (ENTITY_ARRAY_PATH_BY_KIND)[kind];
   if (!segs) return null;
   let ref = settlement;
   for (const seg of segs) {
@@ -318,7 +318,7 @@ function locateEntity(settlement, kind, entityIndex) {
   return ref[entityIndex] || null;
 }
 
-function readUserExpectedValue(settlement, kind, entityIndex, path) {
+function readUserExpectedValue(/** @type {any} */ settlement, /** @type {any} */ kind, /** @type {any} */ entityIndex, /** @type {any} */ path) {
   const entity = locateEntity(settlement, kind, entityIndex);
   if (!entity) return undefined;
   const keys = path.split('.');
@@ -332,6 +332,9 @@ function readUserExpectedValue(settlement, kind, entityIndex, path) {
 
 /**
  * Build a violations summary by kind for at-a-glance reporting.
+ */
+/**
+ * @param {any[]} violations
  */
 function summariseViolations(violations) {
   return {
@@ -348,8 +351,8 @@ function summariseViolations(violations) {
 /**
  * Run every check and return a violations report.
  *
- * @param {Object|null} original  The settlement BEFORE the AI overlay.
- * @param {Object|null} refined   The settlement AFTER the AI overlay.
+ * @param {any} original  The settlement BEFORE the AI overlay.
+ * @param {any} refined   The settlement AFTER the AI overlay.
  * @returns {{
  *   ok: boolean,
  *   violations: Array<{
@@ -418,7 +421,7 @@ export function verifyAiOverlay(original, refined) {
 /**
  * Flat one-line strings suitable for logging / DM-facing toast.
  */
-export function summarizeViolations(violations) {
+export function summarizeViolations(/** @type {any} */ violations) {
   return asArray(violations).map(v => `[${v.kind}] ${v.field}: ${v.detail}`);
 }
 
@@ -429,7 +432,7 @@ export function summarizeViolations(violations) {
  * the hardest violations (invented + renamed) while letting the user
  * decide what to do about softer ones (removed_history_beat).
  */
-export function filterViolations(violations, allowedKinds) {
+export function filterViolations(/** @type {any} */ violations, /** @type {any} */ allowedKinds) {
   const allowed = new Set(allowedKinds);
   return asArray(violations).filter(v => allowed.has(v.kind));
 }

@@ -97,6 +97,26 @@ function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
 }
 
+// Keep a best-effort background promise alive past the response WITHOUT letting it
+// extend the response latency. Used by the correct-answer verify path so the reset
+// email send (the one variable-cost step a correct answer does that a wrong answer
+// does not) cannot become a timing oracle: the response returns at the constant
+// VERIFY_FLOOR_MS while delivery completes in the background. Prefers the Supabase
+// Edge `EdgeRuntime.waitUntil` (which the runtime keeps awake until the promise
+// settles); falls back to a plain detached promise where that API is absent (e.g.
+// the test runtime). Either way the promise is never awaited on the response path,
+// and a rejection is swallowed so an unhandled rejection can't surface.
+function runDetached(work: Promise<unknown>): void {
+  const guarded = Promise.resolve(work).catch((e) => {
+    console.warn("[auth-recovery] detached recovery work failed:", errorMessage(e));
+  });
+  // deno-lint-ignore no-explicit-any
+  const edge = (globalThis as any).EdgeRuntime;
+  if (edge && typeof edge.waitUntil === "function") {
+    edge.waitUntil(guarded);
+  }
+}
+
 /** Service-role client — the recovery RPCs (066) are granted to service_role ONLY. */
 function defaultAdminClient() {
   return createClient(
@@ -296,6 +316,15 @@ export async function handleAuthRecovery(
       case "verify": {
         // Pad every verify OUTCOME below to VERIFY_FLOOR_MS so locked/wrong/
         // correct return at the same minimum latency — no timing oracle.
+        //
+        // floorVerify is a STRICT floor: it always waits to exactly the floor from
+        // verifyStart and NEVER to the duration of any post-verify work. The correct
+        // path's extra work (clear lockout + mint link + send email) must therefore be
+        // DETACHED (see runDetached below) rather than awaited in front of the floor —
+        // otherwise the email round-trip would push the correct path past the floor and
+        // a correct answer would be observable by its higher response latency (the very
+        // side-channel this floor exists to close). The wrong path runs only a cheap
+        // best-effort counter bump, so its elapsed-at-floor matches the correct path's.
         const verifyStart = Date.now();
         const floorVerify = async () => {
           const dt = Date.now() - verifyStart;
@@ -350,72 +379,86 @@ export async function handleAuthRecovery(
         // deny generically. The increment is best-effort — a logged failure here
         // must not flip a wrong answer into a misleading success.
         if (ok !== true) {
-          const { error: noteErr } = await admin.rpc("note_recovery_verify_failure", {
-            p_email: email,
-          });
-          if (noteErr) {
-            console.error("[auth-recovery] note_recovery_verify_failure error:", noteErr.message);
-          }
+          // DETACHED (like the correct-answer side-effects) so the wrong path does
+          // no awaited post-verify network work either — both branches return at
+          // exactly the constant floor with NO residual timing asymmetry (an awaited
+          // note here would make a CORRECT answer measurably faster than a wrong one).
+          runDetached((async () => {
+            const { error: noteErr } = await admin.rpc("note_recovery_verify_failure", {
+              p_email: email,
+            });
+            if (noteErr) {
+              console.error("[auth-recovery] note_recovery_verify_failure error:", noteErr.message);
+            }
+          })());
           await floorVerify();
           return json({ ok: false });
         }
 
-        // Correct answer → clear the cumulative lockout counter so a legit user who
-        // mistyped a few times before getting it right starts clean next time.
-        // Best-effort: a failure here doesn't change the successful recovery.
-        const { error: clearErr } = await admin.rpc("clear_recovery_lockout_by_email", {
-          p_email: email,
-        });
-        if (clearErr) {
-          console.error("[auth-recovery] clear_recovery_lockout_by_email error:", clearErr.message);
-        }
-
-        // Correct answer → mint a 'recovery' link redirecting to the set-new-
-        // password page and email it to the ACCOUNT's address. The link's
-        // recipient is the account email (the RPC matched on it); a correct-
-        // answer caller can never redirect the reset to an arbitrary inbox.
-        const redirectTo = `${appBaseUrl()}${SET_NEW_PASSWORD_PATH}`;
-        let actionLink: string | null = null;
-        try {
-          const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({
-            type: "recovery",
-            email,
-            options: { redirectTo },
+        // Correct answer → the recovery side-effects (clear the cumulative lockout
+        // counter, mint a 'recovery' link, email it to the ACCOUNT's address). Bundled
+        // into ONE promise and DETACHED via runDetached so it runs in the background
+        // while the response returns at the constant floor — the email round-trip (the
+        // only variable-cost step a correct answer does that a wrong answer does not)
+        // therefore cannot push the correct path past the floor and become a timing
+        // oracle. The whole bundle is best-effort: each step soft-fails (logs, never
+        // throws past the generic { ok: true }) so neither a lockout-clear blip nor a
+        // mailer/provider hiccup becomes an oracle for "answer correct?" or "email
+        // configured?". The link's recipient is the account email (the RPC matched on
+        // it); a correct-answer caller can never redirect the reset to an arbitrary inbox.
+        const recoveryWork = (async () => {
+          const { error: clearErr } = await admin.rpc("clear_recovery_lockout_by_email", {
+            p_email: email,
           });
-          if (linkErr) {
-            console.error("[auth-recovery] generateLink error:", linkErr.message);
-          } else {
-            actionLink = linkData?.properties?.action_link ?? null;
+          if (clearErr) {
+            console.error("[auth-recovery] clear_recovery_lockout_by_email error:", clearErr.message);
           }
-        } catch (e) {
-          console.error("[auth-recovery] generateLink threw:", errorMessage(e));
-        }
 
-        // Send the reset email. SOFT-fail: a mailer/provider failure must not
-        // change the generic { ok: true } a correct-answer caller sees (no oracle
-        // for "email configured?"). The misconfiguration is logged for the
-        // operator. We only send when we actually minted a link.
-        if (actionLink) {
-          await sendEmail(
-            email,
-            "Reset your SettlementForge password",
-            [
-              "You (or someone who answered your security question) asked to reset",
-              "your SettlementForge password.",
-              "",
-              "Open this link to choose a new password. It expires shortly:",
-              "",
-              `  ${actionLink}`,
-              "",
-              "If this wasn't you, ignore this email — your password is unchanged.",
-              "",
-              "— SettlementForge",
-            ].join("\n"),
-          );
-        }
+          const redirectTo = `${appBaseUrl()}${SET_NEW_PASSWORD_PATH}`;
+          let actionLink: string | null = null;
+          try {
+            const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({
+              type: "recovery",
+              email,
+              options: { redirectTo },
+            });
+            if (linkErr) {
+              console.error("[auth-recovery] generateLink error:", linkErr.message);
+            } else {
+              actionLink = linkData?.properties?.action_link ?? null;
+            }
+          } catch (e) {
+            console.error("[auth-recovery] generateLink threw:", errorMessage(e));
+          }
 
-        // Generic success regardless of mail/link outcome — the answer was
-        // correct, which is the only thing the response reveals.
+          // We only send when we actually minted a link.
+          if (actionLink) {
+            await sendEmail(
+              email,
+              "Reset your SettlementForge password",
+              [
+                "You (or someone who answered your security question) asked to reset",
+                "your SettlementForge password.",
+                "",
+                "Open this link to choose a new password. It expires shortly:",
+                "",
+                `  ${actionLink}`,
+                "",
+                "If this wasn't you, ignore this email — your password is unchanged.",
+                "",
+                "— SettlementForge",
+              ].join("\n"),
+            );
+          }
+        })();
+        // Detach: the response must not wait on the email round-trip (see runDetached).
+        runDetached(recoveryWork);
+
+        // Generic success regardless of mail/link outcome — the answer was correct,
+        // which is the only thing the response reveals. The response returns at the
+        // SAME constant floor as the wrong/locked paths; the detached work above
+        // completes in the background, so it never extends — and so never leaks — the
+        // correct-answer latency.
         await floorVerify();
         return json({ ok: true });
       }

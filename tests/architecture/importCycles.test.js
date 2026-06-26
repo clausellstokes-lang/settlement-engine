@@ -24,8 +24,8 @@
  * stay empty. Any cycle at all — including a regression of any of the three — fails
  * this test.
  */
-import { describe, it, expect } from 'vitest';
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { describe, it, expect, afterEach } from 'vitest';
+import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, posix } from 'node:path';
 
@@ -59,14 +59,25 @@ function resolveImport(fromFile, spec) {
 
 function buildGraph(files) {
   const graph = new Map();
-  // Matches both `import … from './x'` and re-exports `export … from './x'`.
-  const re = /(?:import|export)[^;]*?from\s*['"](\.[^'"]+)['"]/g;
+  // Capture every relative-specifier edge — not just `… from './x'`. The
+  // original regex required a `from` clause, so it MISSED two cycle-carrying
+  // forms entirely: bare side-effect imports (`import './x';`, which still run
+  // the module at init and can close a TDZ cycle) and dynamic imports
+  // (`import('./x')`, eager enough to cycle when awaited at module scope). Three
+  // alternations, each pinning the leading `.` so node_modules specifiers stay
+  // out of the graph:
+  //   1. `import|export … from './x'`   — the static binding/re-export form
+  //   2. `import './x'`                 — side-effect-only import (no `from`)
+  //   3. `import('./x')`                — dynamic import
+  const re =
+    /(?:import|export)[^;'"]*?from\s*['"](\.[^'"]+)['"]|import\s*['"](\.[^'"]+)['"]|import\s*\(\s*['"](\.[^'"]+)['"]\s*\)/g;
   for (const f of files) {
     const src = readFileSync(join(ROOT, f), 'utf8');
     const deps = new Set();
     let m;
     while ((m = re.exec(src))) {
-      const d = resolveImport(f, m[1]);
+      const spec = m[1] ?? m[2] ?? m[3];
+      const d = resolveImport(f, spec);
       if (d !== f) deps.add(d); // a file can't meaningfully cycle with itself
     }
     graph.set(f, deps);
@@ -111,5 +122,47 @@ describe('no NEW ESM import cycles in src/', () => {
     const live = new Set(cycles);
     const stale = [...ALLOWED_CYCLES].filter((c) => !live.has(c));
     expect(stale, `ALLOWED_CYCLES lists cycles that are already fixed — delete them: ${stale.join(', ')}`).toEqual([]);
+  });
+});
+
+// Reproducing guard for the regex-coverage fix: the original import regex
+// REQUIRED a `from` clause, so a cycle closed by a bare side-effect import
+// (`import './x'`) or a dynamic import (`import('./x')`) was invisible to the
+// detector — a cycle could regress under those forms and this guard would stay
+// green. We write throwaway fixture modules into a temp dir under src/ (so the
+// REAL listSourceFiles → buildGraph → findCycles pipeline picks them up), assert
+// each form's cycle is detected, and remove them in afterEach. A `from`-only
+// regex passes the static-import case below but FAILS both of the others.
+describe('cycle detection sees side-effect and dynamic imports (regex coverage)', () => {
+  const FIXDIR = '__cycle_fixtures__';
+  const dirAbs = join(ROOT, 'src', FIXDIR);
+
+  const writeFixture = (name, body) => {
+    mkdirSync(dirAbs, { recursive: true });
+    writeFileSync(join(dirAbs, name), body);
+  };
+  // Detect a cycle confined to our fixture dir (avoids coupling to src/'s real graph).
+  const fixtureCycleDetected = () =>
+    findCycles(buildGraph(listSourceFiles())).some((c) => c.includes(`src/${FIXDIR}/`));
+
+  afterEach(() => rmSync(dirAbs, { recursive: true, force: true }));
+
+  it('catches a cycle closed by a STATIC `from` import (baseline — always worked)', () => {
+    writeFixture('a.js', "import { b } from './b.js';\nexport const a = () => b;\n");
+    writeFixture('b.js', "import { a } from './a.js';\nexport const b = () => a;\n");
+    expect(fixtureCycleDetected()).toBe(true);
+  });
+
+  it('catches a cycle closed by a bare SIDE-EFFECT import (no `from`)', () => {
+    // a ↔ b, but b reaches back via `import './a.js'` with no binding.
+    writeFixture('a.js', "import './b.js';\nexport const a = 1;\n");
+    writeFixture('b.js', "import './a.js';\nexport const b = 2;\n");
+    expect(fixtureCycleDetected()).toBe(true);
+  });
+
+  it('catches a cycle closed by a DYNAMIC import()', () => {
+    writeFixture('a.js', "export const a = () => import('./b.js');\n");
+    writeFixture('b.js', "export const b = () => import('./a.js');\n");
+    expect(fixtureCycleDetected()).toBe(true);
   });
 });

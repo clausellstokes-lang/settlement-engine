@@ -380,6 +380,31 @@ describe('gallery.js - metadata, votes, comments', () => {
     expect(patch.gallery_description).toContain('Safe hook');
   });
 
+  it('clamps gallery_tags ON WRITE to mirror the read-path bounds', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    // A raw owner write that the read normalizer would later trim: a per-tag
+    // over-long blob, mixed case, markup, and far more than the count cap. The
+    // write must store the same shape the read path enforces, not an unbounded
+    // value the column carries until something reads it.
+    const tags = [
+      'A'.repeat(200),                                   // → length-capped to 40
+      'CoastalPort',                                     // → lower-cased
+      '<img src=x>',                                     // → markup stripped
+      ...Array.from({ length: 30 }, (_, i) => `t${i}`),  // → count-capped to 12
+    ];
+    await updateGalleryMetadata('s1', { tags });
+    const patch = update.mock.calls[0][0];
+    expect(patch.gallery_tags.length).toBeLessThanOrEqual(12);
+    for (const tag of patch.gallery_tags) {
+      expect(tag.length).toBeLessThanOrEqual(40);
+      expect(tag).toBe(tag.toLowerCase());
+      expect(tag).not.toMatch(/[<>]/);
+    }
+    expect(patch.gallery_tags).toContain('coastalport');
+  });
+
   it('toggleGalleryVote calls the vote RPC and normalizes the result', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: [{ net_votes: 5, voted: true }], error: null });
     await expect(toggleGalleryVote('s1')).resolves.toEqual({ netVotes: 5, voted: true });

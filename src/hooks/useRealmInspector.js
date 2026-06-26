@@ -22,6 +22,9 @@ export const ADVANCE_ERROR_TEXT = Object.freeze({
   world_not_canonized: 'The realm advances only after you canonize this campaign world.',
   no_settlements: 'Add at least one settlement to this campaign before advancing.',
   busy: 'The realm is already advancing. Give it a moment.',
+  // Typed no-op reasons from the store guards (campaignWorldPulseSlice):
+  advance_in_flight: 'The realm is already advancing. Give it a moment.',
+  advance_paused: 'This realm has a paused advance. Resume it (or undo it) before advancing again.',
 });
 
 // The old campaign-workspace tabs map onto Inspector sections. The

@@ -254,4 +254,121 @@ describe('propagateImpairment', () => {
     const temple = next.institutions.find(i => i.id === 'inst.temple');
     expect(temple.impairments || []).toHaveLength(0);
   });
+
+  // npc→faction dimension follows the importance-tier contract:
+  // pillar/key shape direction (LEADERSHIP), notable/minor are
+  // rank-and-file (MEMBERSHIP). The bug stamped LEADERSHIP for every tier.
+  function npcFactionSettlement(importance) {
+    return {
+      institutions: [],
+      factions: [{ id: 'faction.guild', name: 'Guild' }],
+      npcs: [{ id: 'npc.x', name: 'X', importance, linkedFactionIds: ['faction.guild'] }],
+    };
+  }
+
+  test('notable npc impairs faction membership, not leadership', () => {
+    const next = propagateImpairment({
+      settlement: npcFactionSettlement('notable'),
+      origin: {
+        entityType: 'npc', entityId: 'npc.x',
+        impairment: { type: 'capacity', severity: 0.9, causeEventId: 'e1', description: 'Gone' },
+      },
+    });
+    const guild = next.factions.find(f => f.id === 'faction.guild');
+    expect(guild.impairments.length).toBeGreaterThan(0);
+    expect(guild.impairments[0].type).toBe('membership');
+  });
+
+  test('pillar npc impairs faction leadership', () => {
+    const next = propagateImpairment({
+      settlement: npcFactionSettlement('pillar'),
+      origin: {
+        entityType: 'npc', entityId: 'npc.x',
+        impairment: { type: 'capacity', severity: 0.9, causeEventId: 'e1', description: 'Gone' },
+      },
+    });
+    const guild = next.factions.find(f => f.id === 'faction.guild');
+    expect(guild.impairments[0].type).toBe('leadership');
+  });
+
+  // Multi-path under-count: a target reachable along two distinct cause
+  // paths must accumulate both, not silently drop the second. inst.A burns
+  // → factions F1 and F2 (both control A) → both control inst.C, so C is hit
+  // twice over. The bare-entity visited key dropped the second path; C ended
+  // up no more impaired than a single-path hit. The fix compounds the paths.
+  test('a target reached along two distinct paths accumulates both (no dropped second path)', () => {
+    function diamond() {
+      return {
+        institutions: [
+          { id: 'inst.A', name: 'A' },
+          { id: 'inst.C', name: 'C' },
+        ],
+        factions: [
+          { id: 'F1', name: 'F1', controlsInstitutionIds: ['inst.A', 'inst.C'] },
+          { id: 'F2', name: 'F2', controlsInstitutionIds: ['inst.A', 'inst.C'] },
+        ],
+        npcs: [],
+      };
+    }
+    const twoPath = propagateImpairment({
+      settlement: diamond(),
+      origin: {
+        entityType: 'institution', entityId: 'inst.A',
+        impairment: { type: 'capacity', severity: 1.0, causeEventId: 'e1', description: 'Burned' },
+      },
+    });
+
+    // Single-path baseline: same topology but only F1 reaches C.
+    const oneFaction = diamond();
+    oneFaction.factions = [
+      { id: 'F1', name: 'F1', controlsInstitutionIds: ['inst.A', 'inst.C'] },
+      { id: 'F2', name: 'F2', controlsInstitutionIds: ['inst.A'] }, // no longer controls C
+    ];
+    const onePath = propagateImpairment({
+      settlement: oneFaction,
+      origin: {
+        entityType: 'institution', entityId: 'inst.A',
+        impairment: { type: 'capacity', severity: 1.0, causeEventId: 'e1', description: 'Burned' },
+      },
+    });
+
+    const cTwo = twoPath.institutions.find(i => i.id === 'inst.C');
+    const cOne = onePath.institutions.find(i => i.id === 'inst.C');
+    const sevTwo = cTwo.impairments.find(x => x.type === 'wealth')?.severity ?? 0;
+    const sevOne = cOne.impairments.find(x => x.type === 'wealth')?.severity ?? 0;
+
+    // The second path is genuinely felt: two converging causes hurt C strictly
+    // more than one. Pre-fix, the second path was dropped and these were equal.
+    expect(sevTwo).toBeGreaterThan(sevOne);
+    // Still one impairment per dimension+cause (compounded in place, not duplicated)
+    // and severity stays bounded at 1.
+    expect(cTwo.impairments.filter(x => x.type === 'wealth')).toHaveLength(1);
+    expect(sevTwo).toBeLessThanOrEqual(1);
+  });
+
+  // powerStructure-shaped settlements: the propagation description must
+  // resolve the faction display NAME, not leak the raw id.
+  test('description resolves faction name for powerStructure-shaped settlements', () => {
+    const settlementPS = {
+      institutions: [{ id: 'inst.granary', name: 'Granary' }],
+      powerStructure: {
+        factions: [{ id: 'faction.merchants', name: 'Merchant Guild', controlsInstitutionIds: ['inst.granary'] }],
+      },
+      npcs: [],
+    };
+    // Origin on the faction so the propagation target's description names
+    // the source faction (the entity entityName() must resolve).
+    const next = propagateImpairment({
+      settlement: settlementPS,
+      origin: {
+        entityType: 'faction', entityId: 'faction.merchants',
+        impairment: { type: 'leadership', severity: 0.9, causeEventId: 'e1', description: 'Coup' },
+      },
+    });
+    const granary = next.institutions.find(i => i.id === 'inst.granary');
+    expect(granary.impairments.length).toBeGreaterThan(0);
+    const desc = granary.impairments[0].description;
+    expect(desc).toContain('Merchant Guild');
+    expect(desc).not.toContain('faction.merchants');
+  });
 });

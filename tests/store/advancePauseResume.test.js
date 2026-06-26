@@ -223,4 +223,96 @@ describe('advance pause/resume store path (Stage 3)', () => {
     expect(r.status).toBe('complete');
     expect('pausedAdvance' in store.getState().campaigns[0].worldState).toBe(false);
   });
+
+  test('parked-pause guard: a fresh Advance over an OUTSTANDING pause no-ops without clobbering the cursor', async () => {
+    const store = makeStore();
+    seedStore(store);
+    // First Advance pauses and parks a cursor.
+    await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    const paused = store.getState().campaigns[0].worldState;
+    expect(paused.pausedAdvance).toBeTruthy();
+    const cursorBefore = JSON.parse(JSON.stringify(paused.pausedAdvance));
+    const tickBefore = paused.tick;
+    const undoLenBefore = store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1').length;
+
+    // A fresh Advance while the pause is outstanding must NOT drain/advance/clobber —
+    // it returns the typed no-op so the caller resumes or undoes the pause explicitly.
+    const r = await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    expect(r).toEqual({ ok: false, reason: 'advance_paused' });
+
+    const after = store.getState().campaigns[0].worldState;
+    // Cursor is intact (not overwritten by a new interval, not dropped).
+    expect(after.pausedAdvance).toEqual(cursorBefore);
+    // The clock did not advance past the paused state.
+    expect(after.tick).toBe(tickBefore);
+    // No second undo snapshot was pushed.
+    expect(store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1')).toHaveLength(undoLenBefore);
+
+    // And the pause still resumes cleanly to the SAME end the unguarded interval reaches.
+    let guard = 0; let rr;
+    do {
+      if (guard++ > 60) throw new Error('did not converge');
+      rr = await store.getState().resolveIntervalMajors('camp-1', {}, { now: NOW });
+    } while (rr && rr.status === 'paused');
+    expect(store.getState().campaigns[0].worldState.tick).toBe(48);
+  });
+
+  test('parked-pause guard fires after a RELOAD-into-paused (cursor rehydrated, undo stack gone)', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    const persistedCampaign = JSON.parse(JSON.stringify(store.getState().campaigns[0]));
+    const persistedSaves = JSON.parse(JSON.stringify(store.getState().savedSettlements));
+
+    // Reload: session-scoped undo stack + advanceInFlight are gone; only the cursor
+    // on worldState rehydrates the pause. The guard must STILL block a fresh Advance.
+    const reloaded = makeStore();
+    reloaded.setState(state => {
+      state.savedSettlements = persistedSaves;
+      state.campaigns = [persistedCampaign];
+    });
+    const cursorBefore = JSON.parse(JSON.stringify(reloaded.getState().campaigns[0].worldState.pausedAdvance));
+
+    const r = await reloaded.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    expect(r).toEqual({ ok: false, reason: 'advance_paused' });
+    expect(reloaded.getState().campaigns[0].worldState.pausedAdvance).toEqual(cursorBefore);
+  });
+
+  test('resolveIntervalMajors re-entrancy guard: two CONCURRENT resumes run the segment ONCE', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    expect(store.getState().campaigns[0].worldState.pausedAdvance).toBeTruthy();
+    const tickAtPause = store.getState().campaigns[0].worldState.tick;
+
+    // Fire two resumes WITHOUT awaiting the first — the second re-enters while the
+    // first is suspended on its awaits. Pre-guard both run the SAME cursor's segment,
+    // double-committing the resumed batch. Exactly one is the typed no-op.
+    const p1 = store.getState().resolveIntervalMajors('camp-1', {}, { now: NOW });
+    const p2 = store.getState().resolveIntervalMajors('camp-1', {}, { now: NOW });
+    const [r1, r2] = await Promise.all([p1, p2]);
+
+    const reasons = [r1, r2].map(r => r && r.reason);
+    expect(reasons.filter(x => x === 'advance_in_flight')).toHaveLength(1);
+
+    // The flag is cleared on settle — the campaign can resume again to completion.
+    expect(store.getState().isAdvanceInFlight('camp-1')).toBe(false);
+    const tickAfterOne = store.getState().campaigns[0].worldState.tick;
+    expect(tickAfterOne).toBeGreaterThan(tickAtPause); // exactly one segment landed
+
+    let guard = 0; let rr = (r1 && r1.status === 'paused') || (r2 && r2.status === 'paused') ? { status: 'paused' } : null;
+    while (rr && rr.status === 'paused') {
+      if (guard++ > 60) throw new Error('did not converge');
+      rr = await store.getState().resolveIntervalMajors('camp-1', {}, { now: NOW });
+    }
+    expect(store.getState().campaigns[0].worldState.tick).toBe(48);
+
+    // EQUIVALENCE: the single-resume-per-call path reaches the same world.
+    const direct = makeStore();
+    seedStore(direct);
+    await direct.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    let g2 = 0; let dr;
+    do { if (g2++ > 60) throw new Error('loop'); dr = await direct.getState().resolveIntervalMajors('camp-1', {}, { now: NOW }); } while (dr && dr.status === 'paused');
+    expect(store.getState().campaigns[0].worldState.worldState).toEqual(direct.getState().campaigns[0].worldState.worldState);
+  });
 });

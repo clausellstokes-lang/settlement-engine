@@ -75,18 +75,35 @@ export function neighboursOf(snapshot, fromId) {
  *   - mobilizers: codepoint-sorted facts { id, state, covert, severity } the reaction
  *     rule reads.
  *
+ * RESUME DISMISSAL (parity with the conquest-dismiss path): a `war_mobilization`
+ * major the DM dismissed must commit NOTHING — not its footing condition, not its
+ * neighbour signals (and the caller drops its warPosture ledger entry too). The
+ * dismissal set is keyed by the outcome id (`world_outcome.war_mobilization.<id>.<tick>`),
+ * the SAME id minted below; a settlement whose footing outcome id is dismissed is
+ * skipped entirely (no outcome, no signal channels) and reported back on
+ * `dismissedIds` so the caller can drop its posture-ledger key. EMPTY/null ⇒ no
+ * exclusion ⇒ byte-identical to the autoresolve-ON tick (the equivalence invariant).
+ *
  * @param {Object} args
  * @param {any} args.snapshot
  * @param {Array<{ id: string, prev: string, next: string, transitioned: boolean, cooled: boolean, covert: boolean, severity: number, reasons: string[] }>} args.events
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @returns {{ outcomes: any[], graphChannels: any[], mobilizers: Array<{ id: string, state: string, covert: boolean, severity: number }> }}
+ * @param {ReadonlySet<string>|null} [args.dismissedOutcomeIds]  outcome ids the DM dismissed.
+ * @returns {{ outcomes: any[], graphChannels: any[], mobilizers: Array<{ id: string, state: string, covert: boolean, severity: number }>, dismissedIds: string[] }}
  */
-export function mobilizationEffects({ snapshot, events, tick, now = null }) {
+export function mobilizationEffects({ snapshot, events, tick, now = null, dismissedOutcomeIds = null }) {
   const outcomes = [];
   const graphChannels = [];
   /** @type {Array<{ id: string, state: string, covert: boolean, severity: number }>} */
   const mobilizers = [];
+  // The settlement ids whose war_mobilization major the DM dismissed (skipped here):
+  // the caller drops their warPosture ledger key so the dismissal leaves no residue.
+  /** @type {string[]} */
+  const dismissedIds = [];
+  const isDismissed = dismissedOutcomeIds && typeof dismissedOutcomeIds.has === 'function' && dismissedOutcomeIds.size > 0
+    ? (/** @type {string} */ outcomeId) => dismissedOutcomeIds.has(outcomeId)
+    : null;
 
   const settlementNameFor = (/** @type {any} */ id) => {
     const item = snapshot?.byId?.get?.(String(id));
@@ -98,12 +115,20 @@ export function mobilizationEffects({ snapshot, events, tick, now = null }) {
     const onFooting = FOOTING_STATES.has(ev.next);
     if (!onFooting) continue;
     const id = ev.id;
+    const outcomeId = `world_outcome.war_mobilization.${stablePart(id)}.${tick}`;
+    // A DM-DISMISSED war_mobilization commits nothing: no footing condition, no
+    // mobilizer fact, no neighbour signal channels — and the caller drops its
+    // warPosture ledger key (reported via dismissedIds). Parity with conquest-dismiss.
+    if (isDismissed && isDismissed(outcomeId)) {
+      dismissedIds.push(id);
+      continue;
+    }
     const name = settlementNameFor(id);
     const severity = clamp01(ev.severity);
 
     // ── 1. The war-economy footing condition (economic_capacity sink). ─────────────
     outcomes.push({
-      id: `world_outcome.war_mobilization.${stablePart(id)}.${tick}`,
+      id: outcomeId,
       type: 'condition',
       candidateType: 'war_mobilization',
       ruleId: 'war_layer_war_mobilization',
@@ -146,5 +171,5 @@ export function mobilizationEffects({ snapshot, events, tick, now = null }) {
     }
   }
 
-  return { outcomes, graphChannels, mobilizers };
+  return { outcomes, graphChannels, mobilizers, dismissedIds };
 }

@@ -119,6 +119,56 @@ describe('useConfirmPolling concurrency latch', () => {
     expect(onError).not.toHaveBeenCalled();
   });
 
+  test('a rate-limit (429) keeps polling silently and recovers — never fires onError', async () => {
+    // Supabase's auth endpoint pushes back on our 4s cadence with a 429. That is
+    // transient backpressure, not a failure: the OLD code treated any non-
+    // "unconfirmed" error as terminal, so a single 429 fired onError and stranded
+    // the user mid-wait. The fix swallows it and lets the next tick retry — and
+    // once the limit clears, the poll still confirms.
+    let calls = 0;
+    signInImpl = () => {
+      calls += 1;
+      if (calls <= 2) {
+        const err = new Error('Request rate limit reached');
+        err.status = 429;
+        return Promise.reject(err);
+      }
+      return Promise.resolve(); // limit cleared → confirmation succeeds
+    };
+    const onConfirmed = vi.fn();
+    const onError = vi.fn();
+    renderHook(() =>
+      useConfirmPolling({ active: true, email: 'a@x.com', password: 'pw', onConfirmed, onError }),
+    );
+
+    await flush();                                // attempt 1 → 429, swallowed
+    await vi.advanceTimersByTimeAsync(POLL_MS);    // attempt 2 → 429, swallowed
+    await flush();
+    expect(onError).not.toHaveBeenCalled();        // the 429 never strands the user
+    await vi.advanceTimersByTimeAsync(POLL_MS);    // attempt 3 → success
+    await flush();
+
+    expect(onError).not.toHaveBeenCalled();
+    expect(onConfirmed).toHaveBeenCalledTimes(1);
+  });
+
+  test('a "too many requests" message (no status field) is also swallowed', async () => {
+    // Some transports surface the rate limit only as a message string.
+    signInImpl = () => Promise.reject(new Error('Too Many Requests'));
+    const onConfirmed = vi.fn();
+    const onError = vi.fn();
+    renderHook(() =>
+      useConfirmPolling({ active: true, email: 'a@x.com', password: 'pw', onConfirmed, onError }),
+    );
+
+    await flush();
+    await vi.advanceTimersByTimeAsync(POLL_MS * 3);
+    await flush();
+
+    expect(onError).not.toHaveBeenCalled();
+    expect(onConfirmed).not.toHaveBeenCalled();
+  });
+
   test('a real (non-unconfirmed) error fires onError exactly once and stops', async () => {
     signInImpl = () => Promise.reject(new Error('Invalid login credentials'));
     const onError = vi.fn();

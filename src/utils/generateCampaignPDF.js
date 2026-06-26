@@ -100,15 +100,49 @@ const PUNCT_FOLD = [
   [/\u200B|\u200C|\u200D|\u2060|\uFEFF/g, ''],       // zero-width / BOM -> drop
   [/[\u2007\u2008\u2009\u200A\u202F\u205F]/g, ' '], // figure / thin / narrow-nbsp -> space
 ];
+
+// Cyrillic (Russian core) -> ASCII transliteration. Helvetica can't render the
+// glyphs, so without this a Cyrillic name would strip to a single placeholder.
+// A best-effort romanisation keeps the name READABLE instead. Order matters:
+// multi-letter digraphs aren't needed here since we map per code point.
+const CYRILLIC_FOLD = {
+  \u0430:'a',\u0431:'b',\u0432:'v',\u0433:'g',\u0434:'d',\u0435:'e',\u0451:'e',\u0436:'zh',\u0437:'z',\u0438:'i',\u0439:'i',\u043A:'k',
+  \u043B:'l',\u043C:'m',\u043D:'n',\u043E:'o',\u043F:'p',\u0440:'r',\u0441:'s',\u0442:'t',\u0443:'u',\u0444:'f',\u0445:'kh',\u0446:'ts',
+  \u0447:'ch',\u0448:'sh',\u0449:'shch',\u044A:'',\u044B:'y',\u044C:'',\u044D:'e',\u044E:'yu',\u044F:'ya',
+};
+function transliterateCyrillic(str) {
+  let out = '';
+  for (const ch of str) {
+    const lower = ch.toLowerCase();
+    const mapped = CYRILLIC_FOLD[lower];
+    if (mapped === undefined) { out += ch; continue; }
+    // Preserve case: uppercase source -> capitalise the romanisation.
+    out += ch === lower ? mapped
+      : mapped.charAt(0).toUpperCase() + mapped.slice(1);
+  }
+  return out;
+}
+
 function s(v) {
-  // Fold smart punctuation, THEN strip anything still outside Latin-1. The negated
-  // class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII, and printable Latin-1;
-  // everything else becomes a space so PDF-bound strings carry no unprintable bytes.
+  // Fold smart punctuation, romanise Cyrillic, THEN handle anything still outside
+  // Latin-1. The negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
+  // and printable Latin-1; everything else (CJK, Arabic, etc. \u2014 Helvetica can't
+  // render them) is replaced PER RUN by a visible '?' placeholder rather than a
+  // space. A space collapses to nothing under the trim below, which silently
+  // BLANKED a fully-CJK/Cyrillic name to an empty string; the placeholder keeps
+  // an unrenderable name visible as a marker the DM can recognise.
   let out = String(v || '');
   for (const [re, rep] of PUNCT_FOLD) out = out.replace(re, rep);
-  // eslint-disable-next-line no-control-regex
-  return out.replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g, ' ').replace(/\s+/g, ' ').trim();
+  out = transliterateCyrillic(out);
+  return out
+    // eslint-disable-next-line no-control-regex
+    .replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]+/g, '?')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
+// Test-only alias for the PDF string sanitiser (Latin-1 fold + Cyrillic
+// romanisation + unrenderable-run placeholder). Not used by app code.
+export const __sanitizeForPdf = s;
 function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
   return d.splitTextToSize(s(text),maxW);
@@ -142,16 +176,6 @@ function footer(d, campaignName, pageN, totalPagesHint) {
   const right = `Page ${pageN}` + (totalPagesHint ? ` of ${totalPagesHint}` : '');
   const w = d.getStringUnitWidth(right) * 7 / d.internal.scaleFactor;
   d.text(right, PW - MR - w, PH - 5);
-}
-
-// Ensure there's room for `h` more millimetres, else paginate.
-function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
-  if (y + h < BOT) return { y, pageN };
-  footer(d, campaignName, pageN);
-  d.addPage();
-  pageN++;
-  const newY = newTopHandler ? newTopHandler(d, pageN) : MT;
-  return { y: newY, pageN };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -211,12 +235,12 @@ function buildCover(d, campaign, settlements) {
   let totalPop = 0;
   let totalNPCs = 0;
   const cultures = new Set();
-  for (const s of settlements) {
-    const tier = s.settlement?.tier || 'unknown';
+  for (const save of settlements) {
+    const tier = save.settlement?.tier || 'unknown';
     tierCounts[tier] = (tierCounts[tier] || 0) + 1;
-    totalPop += Number(s.settlement?.population) || 0;
-    totalNPCs += (s.settlement?.npcs || []).length;
-    if (s.settlement?.culture) cultures.add(s.settlement.culture);
+    totalPop += Number(save.settlement?.population) || 0;
+    totalNPCs += (save.settlement?.npcs || []).length;
+    if (save.settlement?.culture) cultures.add(save.settlement.culture);
   }
 
   // Two-column stat grid
@@ -337,26 +361,31 @@ function buildMap(d, campaignName, settlements, pageN) {
   let y = MT;
   y = secBar(d, y, 'Relationship Map', INK);
 
-  // Build nodes & edges
-  const nodes = settlements.map(s => ({
-    id: s.id,
-    label: s.name || s.settlement?.name || 'Unnamed',
-    tier: s.settlement?.tier || '',
+  // Build nodes & edges. Node ids and neighbour ids can disagree in JS type
+  // (numeric save id vs stringified neighbour id), so key every id on String —
+  // a raw `===` lookup would silently drop edges on a type mismatch.
+  const nodes = settlements.map(save => ({
+    id: String(save.id),
+    label: save.name || save.settlement?.name || 'Unnamed',
+    tier: save.settlement?.tier || '',
   }));
+  const nodeIds = new Set(nodes.map(nn => nn.id));
 
   const seenEdges = new Set();
   const edges = [];
   for (const save of settlements) {
+    const from = String(save.id);
     const net = save.settlement?.neighbourNetwork || [];
     for (const n of net) {
-      if (!n.id) continue;
-      if (!nodes.find(nn => nn.id === n.id)) continue;
-      const key = [save.id, n.id].sort().join('::');
+      if (n.id == null) continue;
+      const to = String(n.id);
+      if (!nodeIds.has(to)) continue;
+      const key = [from, to].sort().join('::');
       if (seenEdges.has(key)) continue;
       seenEdges.add(key);
       edges.push({
-        from: save.id,
-        to: n.id,
+        from,
+        to,
         type: n.relationshipType || 'neutral',
       });
     }
@@ -690,8 +719,8 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
     return { y: MT, pageN };
   }
 
-  const withEffects = settlements.filter(s => {
-    const m = allModifiers.get(s.id);
+  const withEffects = settlements.filter(save => {
+    const m = allModifiers.get(save.id);
     return m && m.sources && m.sources.length > 0;
   });
   if (withEffects.length === 0) return { y: MT, pageN };
@@ -866,12 +895,45 @@ function buildRealmGeopolitics(d, campaignName, settlements, worldState, regiona
 // ─────────────────────────────────────────────────────────────────────────────
 // Main entry point
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Resolve a campaign's member saves from the full save list.
+ *
+ * Save ids and campaign.settlementIds can disagree in JS type (a numeric save
+ * id vs a stringified settlementId, or vice versa) depending on the storage
+ * round-trip, so we key both sides on String — a raw `Set.has(save.id)` would
+ * silently drop members on a type mismatch. We also walk settlementIds (not
+ * allSaves) so members list in campaign order, and de-dupe in case the same
+ * save id appears twice in settlementIds.
+ *
+ * @param {object} campaign         The campaign ({ settlementIds }).
+ * @param {Array<object>} allSaves  Every available save ({ id, … }).
+ * @returns {Array<object>}         Member saves, in settlementIds order.
+ */
+function resolveMembers(campaign, allSaves) {
+  const byId = new Map();
+  for (const save of allSaves || []) {
+    if (save && save.id != null) byId.set(String(save.id), save);
+  }
+  const out = [];
+  const seen = new Set();
+  for (const sid of campaign?.settlementIds || []) {
+    const key = String(sid);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const save = byId.get(key);
+    if (save) out.push(save);
+  }
+  return out;
+}
+// Test-only alias. Not used by app code.
+export const __resolveMembers = resolveMembers;
+
 export function generateCampaignPDF(campaign, allSaves) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
   const startedAt = Date.now();
-  const ids = new Set(campaign.settlementIds || []);
-  const settlements = (allSaves || []).filter(s => ids.has(s.id));
+  const settlements = resolveMembers(campaign, allSaves);
 
   if (settlements.length === 0) {
     // Still emit a cover page so the user sees something.

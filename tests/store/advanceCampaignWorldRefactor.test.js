@@ -172,13 +172,22 @@ describe('advanceCampaignWorld two-phase refactor (findings #2/#3)', () => {
     const store = makeStore();
     seedCanonized(store);
 
-    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
-    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    // autoResolve:true so each advance runs its interval to COMPLETION instead of
+    // parking a pause — otherwise the cycle-3 parked-pause guard correctly blocks the
+    // 2nd advance (a paused advance must be resolved before advancing again; that flow
+    // is covered in advancePauseResume.test.js). Here we test the pure advance/undo
+    // tick walk: each advance adds one interval's worth of ticks + one undo snapshot,
+    // and multi-step undo walks back interval by interval. We capture the per-advance
+    // increment rather than hardcoding it (one_month spans several ticks).
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
+    const perAdvance = store.getState().campaigns[0].worldState.tick;
+    expect(perAdvance).toBeGreaterThan(0);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z', autoResolve: true });
 
-    expect(store.getState().campaigns[0].worldState.tick).toBe(2);
-    // Two snapshots retained — multi-step undo walks back tick by tick.
+    expect(store.getState().campaigns[0].worldState.tick).toBe(perAdvance * 2);
+    // Two snapshots retained — multi-step undo walks back one interval at a time.
     await store.getState().undoLastPulse('camp-1');
-    expect(store.getState().campaigns[0].worldState.tick).toBe(1);
+    expect(store.getState().campaigns[0].worldState.tick).toBe(perAdvance);
     await store.getState().undoLastPulse('camp-1');
     expect(store.getState().campaigns[0].worldState.tick).toBe(0);
   });

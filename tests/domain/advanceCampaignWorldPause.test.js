@@ -113,15 +113,15 @@ function cursorFrom(paused, decisions = {}) {
 // Drive an autoresolve-OFF advance to completion by resolving every pause to
 // RECOMMENDED (decisions = {}), exactly as the store would: re-enter with the
 // cursor until status === 'complete'. Returns the final composed result.
-function runOffToCompletionRecommended(campaign, saves, interval) {
-  let result = simulateCampaignWorldInterval({ campaign, saves, interval, commit: true, now: NOW, autoResolve: false });
+async function runOffToCompletionRecommended(campaign, saves, interval) {
+  let result = await simulateCampaignWorldInterval({ campaign, saves, interval, commit: true, now: NOW, autoResolve: false });
   let guard = 0;
   while (result.status === 'paused') {
     if (guard++ > 200) throw new Error('pause loop did not converge');
     // The resume re-runs the paused tick from its PRE-tick inputs (carried on the
     // cursor), so the campaign/saves passed here are irrelevant to the re-run — the
     // store passes the live campaign; the cursor pre-inputs drive determinism.
-    result = simulateCampaignWorldInterval({
+    result = await simulateCampaignWorldInterval({
       campaign, saves, commit: true, now: NOW, autoResolve: false,
       resume: cursorFrom(result),
     });
@@ -130,15 +130,15 @@ function runOffToCompletionRecommended(campaign, saves, interval) {
 }
 
 describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
-  test('the fixture actually produces structural majors (anti-vacuity)', () => {
+  test('the fixture actually produces structural majors (anti-vacuity)', async () => {
     const { campaign, saves } = buildFixture();
-    const on = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
+    const on = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
     expect(on.majors.length).toBeGreaterThan(0);
   });
 
-  test('PAUSE returns at a tick boundary after committing minors, with majors batched + correct cursor', () => {
+  test('PAUSE returns at a tick boundary after committing minors, with majors batched + correct cursor', async () => {
     const { campaign, saves } = buildFixture();
-    const paused = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
+    const paused = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
     expect(paused.status).toBe('paused');
     // The cursor is a clean tick boundary: the pause tick committed its minors
     // (ticksDone), and the remaining ticks add up to the total.
@@ -157,9 +157,9 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
     expect(paused.resumeTick).toBe(paused.ticksDone - 1);
   });
 
-  test('THE EQUIVALENCE: autoresolve-ON == autoresolve-OFF resolved-to-recommended (byte-identical)', () => {
-    const on = (() => { const { campaign, saves } = buildFixture(); return simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW }); })();
-    const off = (() => { const { campaign, saves } = buildFixture(); return runOffToCompletionRecommended(campaign, saves, 'one_year'); })();
+  test('THE EQUIVALENCE: autoresolve-ON == autoresolve-OFF resolved-to-recommended (byte-identical)', async () => {
+    const on = await (async () => { const { campaign, saves } = buildFixture(); return await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW }); })();
+    const off = await (async () => { const { campaign, saves } = buildFixture(); return await runOffToCompletionRecommended(campaign, saves, 'one_year'); })();
 
     expect(off.status).toBe('complete');
     expect(on.worldState.tick).toBe(48);
@@ -170,59 +170,59 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
     expect(sortBySave(off.settlementUpdates)).toEqual(sortBySave(on.settlementUpdates));
   });
 
-  test('RESUME via the cursor continues the remaining ticks and lands the same final state', () => {
+  test('RESUME via the cursor continues the remaining ticks and lands the same final state', async () => {
     const { campaign, saves } = buildFixture();
-    const off = runOffToCompletionRecommended(campaign, saves, 'one_season');
-    const on = simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_season', commit: true, now: NOW });
+    const off = await runOffToCompletionRecommended(campaign, saves, 'one_season');
+    const on = await simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_season', commit: true, now: NOW });
     expect(off.status).toBe('complete');
     expect(off.worldState.tick).toBe(12);
     expect(off.worldState).toEqual(on.worldState);
   });
 
-  test('RELOAD-mid-pause: rehydrate the cursor from a serialized pause → identical ticks (seed replay, no double-advance)', () => {
+  test('RELOAD-mid-pause: rehydrate the cursor from a serialized pause → identical ticks (seed replay, no double-advance)', async () => {
     const { campaign, saves } = buildFixture();
-    const paused = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
+    const paused = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
     expect(paused.status).toBe('paused');
 
     // Simulate a reload: round-trip the cursor + committed state through JSON, as a
     // persisted campaign would. The resume must re-derive identical ticks.
     const persistedCursor = JSON.parse(JSON.stringify(cursorFrom(paused)));
 
-    let result = simulateCampaignWorldInterval({
+    let result = await simulateCampaignWorldInterval({
       campaign, saves, commit: true, now: NOW, autoResolve: false, resume: persistedCursor,
     });
     let guard = 0;
     while (result.status === 'paused') {
       if (guard++ > 200) throw new Error('loop');
-      result = simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: JSON.parse(JSON.stringify(cursorFrom(result))) });
+      result = await simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: JSON.parse(JSON.stringify(cursorFrom(result))) });
     }
 
     // No double-advance: the rehydrated resume completes at tick 48 (the same end
     // the ON path reaches), proving the cursor picked up at the pause tick, not 0.
     expect(result.worldState.tick).toBe(48);
     // And it matches a never-reloaded ON run to the same end (full byte-identity).
-    const on = simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_year', commit: true, now: NOW });
+    const on = await simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_year', commit: true, now: NOW });
     expect(result.worldState).toEqual(on.worldState);
   });
 
-  test('a DISMISSED major is NOT applied (the DM verdict is honored, diverges from recommended)', () => {
+  test('a DISMISSED major is NOT applied (the DM verdict is honored, diverges from recommended)', async () => {
     const { campaign, saves } = buildFixture();
-    const paused = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
+    const paused = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW, autoResolve: false });
 
     // Resume resolving every pending major to RECOMMENDED.
-    const recommended = simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: cursorFrom(paused) });
+    const recommended = await simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: cursorFrom(paused) });
     // Resume DISMISSING every pending major.
     const dismissAll = Object.fromEntries(paused.pendingMajors.map(m => [String(m.id), { decision: 'dismissed' }]));
-    const dismissed = simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: cursorFrom(paused, dismissAll) });
+    const dismissed = await simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: cursorFrom(paused, dismissAll) });
 
     // Both are valid runs, but the worldState differs — the dismissal actually
     // routed (the pause tick's majors never landed under dismissal).
     expect(JSON.stringify(dismissed.worldState)).not.toBe(JSON.stringify(recommended.worldState));
   });
 
-  test('autoResolve ON is the default and runs to completion (no pause field leaks majors)', () => {
+  test('autoResolve ON is the default and runs to completion (no pause field leaks majors)', async () => {
     const { campaign, saves } = buildFixture();
-    const r = simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+    const r = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
     expect(r.status).toBe('complete');
     expect(r.worldState.tick).toBe(4);
     // Stage 1/2 invariant: the ON path carries no pause cursor.

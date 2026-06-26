@@ -144,6 +144,43 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     expect(await balanceOf(UID)).toBe(10);
   });
 
+  it('the unique-index backstop blocks a duplicate refund even if it bypasses the function (087)', async () => {
+    await webhookPurchase(10, 'cs_idx');
+    const s = await aiSpend('narrative'); // balance 7
+    await aiRefund(s.spend_id);           // legitimate refund → balance 10
+    expect(await balanceOf(UID)).toBe(10);
+    // A direct INSERT that bypasses refund_credits' check-then-insert guard (the
+    // concurrent-redelivery race) must still be rejected by the partial unique
+    // index ux_credit_ledger_one_refund_per_spend — one refund grant per spend.
+    await expect(
+      db.query(
+        `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+         values ('${UID}', 'grant', 3, 'refund', jsonb_build_object('refund_of', '${s.spend_id}'))`,
+      ),
+    ).rejects.toThrow(/duplicate key|unique|ux_credit_ledger_one_refund_per_spend/i);
+    expect(await balanceOf(UID)).toBe(10); // balance unchanged — no double-credit
+  });
+
+  it('refunding an ELEVATED spend is a no-op — never mints phantom credits (087)', async () => {
+    // An elevated (dev/admin) spend records metadata.elevated=true and DELIBERATELY
+    // skips the profiles.credits debit. Refunding it must NOT bump credits (that
+    // would mint phantom credits for a debit that never happened).
+    await webhookPurchase(10, 'cs_elev');
+    expect(await balanceOf(UID)).toBe(10);
+    // Insert a 'spend' row flagged elevated (mirrors spend_credits' elevated path
+    // which writes the row but skips the cache debit), then refund it.
+    const spendId = (await scalar(
+      `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+       values ('${UID}', 'spend', 3, 'narrative', jsonb_build_object('elevated', true))
+       returning id`,
+    )).id;
+    const before = await balanceOf(UID);
+    await aiRefund(spendId);                       // 087: elevated → no-op
+    expect(await balanceOf(UID)).toBe(before);     // balance UNCHANGED (no phantom mint)
+    // No refund grant was written for the elevated spend.
+    expect((await scalar(`select count(*)::int n from public.credit_ledger where source='refund' and metadata->>'refund_of'='${spendId}'`)).n).toBe(0);
+  });
+
   it('an overspend mid-journey is rejected and leaves the ledger untouched', async () => {
     await webhookPurchase(4, 'cs_small'); // 4 credits
     const ok = await aiSpend('narrative'); // cost 3 → 1

@@ -36,6 +36,17 @@ describe('t()', () => {
     expect(warn).toHaveBeenCalled();
   });
 
+  it('warns (does NOT throw) on a missing key, even in DEV', () => {
+    // The header documents the actual contract: a missing key WARNS in DEV and
+    // returns the key string everywhere — it never throws (a throw would let one
+    // typo take down the page). This pins doc and code together so neither drifts.
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    expect(import.meta.env.DEV).toBe(true); // vitest runs in DEV
+    expect(() => t('totally.missing.key')).not.toThrow();
+    expect(t('totally.missing.key')).toBe('totally.missing.key');
+    expect(warn).toHaveBeenCalled();
+  });
+
   it('handles multiple variables in one string', () => {
     expect(t('ai.insufficient', { cost: 12, balance: 4 }))
       .toBe('You need 12 credits for this. You have 4.');

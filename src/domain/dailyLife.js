@@ -81,21 +81,24 @@ const SLOT_LABELS = Object.freeze({
 // always produces a slot — even when data is thin, it falls back to
 // a generic but truthful line.
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {any} settlement @param {any} pattern */
 function institutionByPattern(settlement, pattern) {
   const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  return inst.filter(i => pattern.test(String(i?.name || '')));
+  return inst.filter((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveFoodCulture(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
-  const foodChains = ctx.chains.filter(c => c.needKey === 'food_security');
-  const stableFood = foodChains.find(c => c.status === 'stable');
-  const disruptedFood = foodChains.find(c => c.status !== 'stable');
+  const foodChains = ctx.chains.filter((/** @type {any} */ c) => c.needKey === 'food_security');
+  const stableFood = foodChains.find((/** @type {any} */ c) => c.status === 'stable');
+  const disruptedFood = foodChains.find((/** @type {any} */ c) => c.status !== 'stable');
 
   let text;
   switch (food.band) {
@@ -133,12 +136,13 @@ function deriveFoodCulture(s, ctx) {
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
 // craft band used to gate now keys off faction power alone.
+/** @param {any} s @param {any} ctx */
 function deriveDawnWork(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
   const defense = ctx.capacities.capacities.defense;
-  const dominantCraftPower = ctx.profiles.find(p => p.archetype === 'craft')?.power || 0;
-  const dominantMerchantPower = ctx.profiles.find(p => p.archetype === 'merchant')?.power || 0;
+  const dominantCraftPower = ctx.profiles.find((/** @type {any} */ p) => p.archetype === 'craft')?.power || 0;
+  const dominantMerchantPower = ctx.profiles.find((/** @type {any} */ p) => p.archetype === 'merchant')?.power || 0;
 
   let text;
   if (food.band === 'critical' || food.band === 'collapsed') {
@@ -159,6 +163,7 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
+/** @param {any} s @param {any} _ctx */
 function deriveGatheringPlaces(s, _ctx) {
   const refs = [];
   const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
@@ -189,10 +194,11 @@ function deriveGatheringPlaces(s, _ctx) {
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveChildWarnings(s, ctx) {
   const refs = [];
   // Top threats by severity
-  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity).slice(0, 3);
+  const top = [...ctx.threats].sort((/** @type {any} */ a, /** @type {any} */ b) => b.severity - a.severity).slice(0, 3);
 
   let text;
   if (top.length === 0) {
@@ -206,6 +212,7 @@ function deriveChildWarnings(s, ctx) {
   return slot('child_warnings', text, 'top threats by severity', refs);
 }
 
+/** @param {any} threat */
 function threatWarning(threat) {
   switch (threat.type) {
     case 'monster_pressure':    return 'the road past sundown';
@@ -223,6 +230,7 @@ function threatWarning(threat) {
   }
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveCommonerResentments(s, ctx) {
   const refs = [];
   const causalState = ctx.causal;
@@ -253,7 +261,7 @@ function deriveCommonerResentments(s, ctx) {
   }
 
   // Corruption condition or threat
-  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
+  const corruption = ctx.conditions.find((/** @type {any} */ c) => c.archetype === 'corruption_exposed');
   if (corruption) {
     resentments.push('the officials who keep their posts while honest folk pay the fines');
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
@@ -266,12 +274,13 @@ function deriveCommonerResentments(s, ctx) {
   return slot('commoner_resentments', text, 'criminal_opportunity + food_production + public_legitimacy + corruption', refs);
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveOutsiderImpressions(s, ctx) {
   const refs = [];
-  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity)[0];
+  const top = [...ctx.threats].sort((/** @type {any} */ a, /** @type {any} */ b) => b.severity - a.severity)[0];
   const dominantFaction = ctx.profiles
     .slice()
-    .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.power || 0) - (a.power || 0))[0];
   // Only the five visible/DM-facing lenses count toward outsider-visible
   // prose. An internal labor/craft/transport shortage is real for the
   // simulation but must not surface here, matching the five-lens policy the
@@ -299,12 +308,13 @@ function deriveOutsiderImpressions(s, ctx) {
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveUnspokenTopics(s, ctx) {
   const refs = [];
   const topics = [];
 
   // Hidden / rumored threats
-  const hidden = ctx.threats.filter(t => t.visibility === 'hidden' || t.visibility === 'rumored');
+  const hidden = ctx.threats.filter((/** @type {any} */ t) => t.visibility === 'hidden' || t.visibility === 'rumored');
   for (const t of hidden.slice(0, 2)) {
     topics.push(t.label.toLowerCase());
     refs.push({ id: t.id, label: t.label, type: 'threat' });
@@ -318,7 +328,7 @@ function deriveUnspokenTopics(s, ctx) {
   }
 
   // Recently exposed corruption
-  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
+  const corruption = ctx.conditions.find((/** @type {any} */ c) => c.archetype === 'corruption_exposed');
   if (corruption) {
     topics.push('the names spoken half-whispered in market stalls');
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
@@ -331,6 +341,7 @@ function deriveUnspokenTopics(s, ctx) {
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
 }
 
+/** @param {any} s @param {any} ctx */
 function deriveRecentChanges(s, ctx) {
   const refs = [];
   const changes = [];
@@ -343,7 +354,7 @@ function deriveRecentChanges(s, ctx) {
   }
 
   // Newly-active conditions (elapsedTicks < 2)
-  const newConditions = ctx.conditions.filter(c => (c.duration?.elapsedTicks ?? 0) < 2);
+  const newConditions = ctx.conditions.filter((/** @type {any} */ c) => (c.duration?.elapsedTicks ?? 0) < 2);
   for (const c of newConditions.slice(0, 2)) {
     changes.push(`${c.label.toLowerCase()} is the new shape of things`);
     refs.push({ id: c.id, label: c.label, type: 'condition' });
@@ -351,7 +362,7 @@ function deriveRecentChanges(s, ctx) {
 
   // High-severity, near-realized threats
   const acute = ctx.threats
-    .filter(t => t.currentStage === 'imminent' || t.currentStage === 'realized')
+    .filter((/** @type {any} */ t) => t.currentStage === 'imminent' || t.currentStage === 'realized')
     .slice(0, 2);
   for (const t of acute) {
     changes.push(`${t.label.toLowerCase()} has come to a head`);
@@ -367,10 +378,11 @@ function deriveRecentChanges(s, ctx) {
 
 // ── Slot helper ──────────────────────────────────────────────────────────
 
+/** @param {any} key @param {any} text @param {any} source @param {any} references */
 function slot(key, text, source, references) {
   return {
     key,
-    label: SLOT_LABELS[key] || key,
+    label: (/** @type {any} */ (SLOT_LABELS))[key] || key,
     text,
     source,
     references,
@@ -394,6 +406,7 @@ const DERIVERS = Object.freeze({
  * Build the substrate context once per call so each slot deriver
  * doesn't re-derive.
  */
+/** @param {any} settlement */
 function buildContext(settlement) {
   return {
     profiles:   deriveAllFactionProfiles(settlement),
@@ -415,17 +428,18 @@ function buildContext(settlement) {
  * @returns {Object | null}    DailyLifeSlot, or null for unknown key.
  */
 export function deriveDailyLifeSlot(key, settlement) {
-  if (!key || !DERIVERS[key]) return null;
+  if (!key || !(/** @type {any} */ (DERIVERS))[key]) return null;
   if (!settlement) {
     return slot(key, '–', 'no settlement', []);
   }
   const ctx = buildContext(settlement);
-  return DERIVERS[key](settlement, ctx);
+  return (/** @type {any} */ (DERIVERS))[key](settlement, ctx);
 }
 
 /**
  * Derive every canonical daily-life slot. Builds context once.
  *
+ * @param {any} settlement
  * @returns {Object} {
  *   slots: { [key]: DailyLifeSlot },
  *   summary: string[],
@@ -433,15 +447,15 @@ export function deriveDailyLifeSlot(key, settlement) {
  */
 export function deriveDailyLife(settlement) {
   if (!settlement) {
-    const empty = {};
+    const empty = /** @type {any} */ ({});
     for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '–', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
-  const slots = {};
+  const slots = /** @type {any} */ ({});
   const summary = [];
   for (const key of DAILY_LIFE_SLOTS) {
-    const s = DERIVERS[key](settlement, ctx);
+    const s = (/** @type {any} */ (DERIVERS))[key](settlement, ctx);
     slots[key] = s;
     summary.push(`${s.label}: ${s.text}`);
   }
@@ -450,9 +464,9 @@ export function deriveDailyLife(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Flat array of `${label}: ${text}` lines. */
+/** Flat array of `${label}: ${text}` lines. @param {any} settlement */
 export function summarizeDailyLife(settlement) {
-  return deriveDailyLife(settlement).summary;
+  return (/** @type {any} */ (deriveDailyLife(settlement))).summary;
 }
 
 /** Catalog accessor. */
@@ -495,13 +509,13 @@ export function compareDailyLife(before, after) {
   if (!before || !after) return [];
   const out = [];
   for (const key of DAILY_LIFE_SLOTS) {
-    const b = before.slots?.[key];
-    const a = after.slots?.[key];
+    const b = (/** @type {any} */ (before)).slots?.[key];
+    const a = (/** @type {any} */ (after)).slots?.[key];
     if (!b || !a) continue;
     if (b.text === a.text) continue;
     out.push({
       key,
-      label: SLOT_LABELS[key] || key,
+      label: (/** @type {any} */ (SLOT_LABELS))[key] || key,
       before: b.text,
       after: a.text,
       beforeReferences: b.references || [],

@@ -40,14 +40,14 @@ import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
 
-const clamp01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
-const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
+const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
 
 // Codepoint tiebreak, NOT localeCompare: these sorts decide WHICH institution
 // is built or closed, and default-locale collation can reorder names across
 // machines, breaking replay determinism (the seedBetrayalTraitor rule in
 // applyWorldPulse.js).
-const byCodepoint = (a, b) => {
+const byCodepoint = (/** @type {any} */ a, /** @type {any} */ b) => {
   const x = String(a);
   const y = String(b);
   return x < y ? -1 : x > y ? 1 : 0;
@@ -110,7 +110,7 @@ export const INSTITUTION_LIFECYCLE_TUNING = Object.freeze({
 // is display-only (project memory) — sim health comes from causal.scores.
 const ECONOMY_SCORE_KEYS = Object.freeze(['trade_connectivity', 'labor_capacity', 'infrastructure_condition', 'food_security']);
 
-export function economyHealthScore(scores = {}) {
+export function economyHealthScore(/** @type {any} */ scores = {}) {
   let total = 0;
   for (const key of ECONOMY_SCORE_KEYS) {
     const value = Number(scores?.[key]);
@@ -120,7 +120,7 @@ export function economyHealthScore(scores = {}) {
 }
 
 /** 'prosperous' | 'declining' | null (the dead band between thresholds). */
-export function classifyEconomyDirection(health) {
+export function classifyEconomyDirection(/** @type {any} */ health) {
   const t = INSTITUTION_LIFECYCLE_TUNING.thresholds;
   if (health >= t.prosperous) return 'prosperous';
   if (health <= t.declining) return 'declining';
@@ -128,20 +128,20 @@ export function classifyEconomyDirection(health) {
 }
 
 // ── Roster helpers ───────────────────────────────────────────────────────────
-function activeInstitutions(settlement) {
+function activeInstitutions(/** @type {any} */ settlement) {
   return (settlement?.institutions || []).filter(
-    inst => inst && inst.status !== 'removed' && inst.status !== 'destroyed' && !inst._worldPulseInactive,
+    (/** @type {any} */ inst) => inst && inst.status !== 'removed' && inst.status !== 'destroyed' && !inst._worldPulseInactive,
   );
 }
 
-function resourceList(settlement) {
+function resourceList(/** @type {any} */ settlement) {
   return [
     ...(settlement?.config?.nearbyResources || []),
     ...(settlement?.nearbyResources || []),
   ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
-function depletedResources(settlement) {
+function depletedResources(/** @type {any} */ settlement) {
   const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
   const states = settlement?.config?.nearbyResourcesState || {};
   for (const [key, state] of Object.entries(states)) {
@@ -151,17 +151,17 @@ function depletedResources(settlement) {
   return [...depleted];
 }
 
-function settlementTier(settlement) {
+function settlementTier(/** @type {any} */ settlement) {
   return TIER_ORDER.includes(settlement?.tier) ? settlement.tier : 'village';
 }
 
-function tradeAccess(settlement) {
+function tradeAccess(/** @type {any} */ settlement) {
   return settlement?.economicState?.tradeAccess || settlement?.config?.tradeRouteAccess || 'road';
 }
 
 /** Fresh chain derivation — stored economicState.activeChains is generation-
  *  time stale, so the lifecycle recomputes from the live roster every tick. */
-export function deriveLifecycleChains(settlement) {
+export function deriveLifecycleChains(/** @type {any} */ settlement) {
   const tier = settlementTier(settlement);
   const insts = activeInstitutions(settlement);
   return computeActiveChains(
@@ -179,12 +179,12 @@ export function deriveLifecycleChains(settlement) {
 // the corruption loop, and arcane chains follow magic priority, not economics.
 const EXCLUDED_NEED_KEYS = new Set(['criminal_economy', 'arcane_magical']);
 
-function tierRankOf(tier) {
+function tierRankOf(/** @type {any} */ tier) {
   const idx = TIER_ORDER.indexOf(tier);
   return idx >= 0 ? idx : TIER_ORDER.indexOf('village');
 }
 
-function chainCatalogEntries(innerChainId) {
+function chainCatalogEntries(/** @type {any} */ innerChainId) {
   const matches = [];
   for (const [needKey, need] of Object.entries(SUPPLY_CHAIN_NEEDS)) {
     if (EXCLUDED_NEED_KEYS.has(needKey)) continue;
@@ -195,12 +195,12 @@ function chainCatalogEntries(innerChainId) {
   return matches;
 }
 
-function resourceFeedsChain(localResources, depletedSet, needKey, innerChainId) {
+function resourceFeedsChain(/** @type {any} */ localResources, /** @type {any} */ depletedSet, /** @type {any} */ needKey, /** @type {any} */ innerChainId) {
   const composite = `${needKey}.${innerChainId}`;
-  return localResources.some(rk => !depletedSet.has(rk) && (RESOURCE_TO_CHAINS[rk] || []).includes(composite));
+  return localResources.some((/** @type {any} */ rk) => !depletedSet.has(rk) && (/** @type {any} */ (RESOURCE_TO_CHAINS)[rk] || []).includes(composite));
 }
 
-function namesOverlap(a, b) {
+function namesOverlap(/** @type {any} */ a, /** @type {any} */ b) {
   const x = String(a || '').toLowerCase();
   const y = String(b || '').toLowerCase();
   if (!x || !y) return false;
@@ -209,7 +209,7 @@ function namesOverlap(a, b) {
 
 /** The cheap generation gates a candidate entry must pass before the pulse
  *  may erect it: tier-legal, no unverifiable constraints, no roster collision. */
-function passesBuildGates(entry, settlement, existingNames) {
+function passesBuildGates(/** @type {any} */ entry, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   if (!entry) return null;
   const tier = settlementTier(settlement);
   if (entry.nativeTier && !tierAtLeast(tier, entry.nativeTier)) return null;
@@ -238,7 +238,7 @@ function passesBuildGates(entry, settlement, existingNames) {
 }
 
 /** A catalog entry the settlement could actually erect, by exact name. */
-function buildableCatalogEntry(name, settlement, existingNames) {
+function buildableCatalogEntry(/** @type {any} */ name, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   return passesBuildGates(catalogEntryByName(name), settlement, existingNames);
 }
 
@@ -251,7 +251,7 @@ function buildableCatalogEntry(name, settlement, existingNames) {
  * then emit the resolved EXACT catalog name (every economic join is
  * name-keyed, so only real catalog names may ever reach a build patch).
  */
-function buildableEntryForProcessor(pattern, settlement, existingNames) {
+function buildableEntryForProcessor(/** @type {any} */ pattern, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   const exact = buildableCatalogEntry(pattern, settlement, existingNames);
   if (exact) return exact;
   const p = String(pattern || '').toLowerCase();
@@ -291,17 +291,17 @@ function buildableEntryForProcessor(pattern, settlement, existingNames) {
  * Returns [{name, category, spec, nativeTier, kind, affinity, reason, context}]
  * sorted best-first, deduped by institution name. Pure + deterministic.
  */
-export function detectInstitutionGaps(settlement, precomputedChains = null) {
+export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null) {
   if (!settlement) return [];
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const existingNames = existingInstitutionNames(settlement);
   const localResources = resourceList(settlement);
   const depletedSet = new Set(depletedResources(settlement));
   const tier = settlementTier(settlement);
-  const affinityOf = INSTITUTION_LIFECYCLE_TUNING.gapAffinity;
+  const affinityOf = /** @type {any} */ (INSTITUTION_LIFECYCLE_TUNING.gapAffinity);
   const found = new Map();
 
-  const addGap = (entry, kind, reason, context) => {
+  const addGap = (/** @type {any} */ entry, /** @type {any} */ kind, /** @type {any} */ reason, /** @type {any} */ context) => {
     if (!entry || found.has(entry.name)) return;
     found.set(entry.name, {
       name: entry.name,
@@ -315,16 +315,16 @@ export function detectInstitutionGaps(settlement, precomputedChains = null) {
     });
   };
 
-  const activeInnerIds = new Set(chains.map(c => c.chainId));
+  const activeInnerIds = new Set(chains.map((/** @type {any} */ c) => c.chainId));
 
   // extraction — a non-depleted resource feeding ≥1 active chain, with none of
   // its high-boost institutions present (RESOURCE_DATA.instBoosts is the
   // resource→institution affinity table the generator itself uses).
   for (const rk of localResources) {
     if (depletedSet.has(rk)) continue;
-    const data = RESOURCE_DATA[rk];
+    const data = /** @type {any} */ (RESOURCE_DATA)[rk];
     if (!data?.instBoosts) continue;
-    const fedChains = (RESOURCE_TO_CHAINS[rk] || []).filter(composite => {
+    const fedChains = (/** @type {any} */ (RESOURCE_TO_CHAINS)[rk] || []).filter((/** @type {any} */ composite) => {
       const inner = composite.split('.').slice(1).join('.');
       return activeInnerIds.has(inner) && !EXCLUDED_NEED_KEYS.has(composite.split('.')[0]);
     });
@@ -384,7 +384,7 @@ export function detectInstitutionGaps(settlement, precomputedChains = null) {
     for (const catalogChain of need.chains || []) {
       if (activeInnerIds.has(catalogChain.id)) continue;
       if (tierRankOf(tier) < tierRankOf(catalogChain.minTier || 'thorp')) continue;
-      const upstreamActive = (catalogChain.upstreamChains || []).some(id => activeInnerIds.has(id));
+      const upstreamActive = (/** @type {any} */ (catalogChain).upstreamChains || []).some((/** @type {any} */ id) => activeInnerIds.has(id));
       const resourceFed = !!catalogChain.resource
         && resourceFeedsChain(localResources, depletedSet, needKey, catalogChain.id);
       if (!upstreamActive && !resourceFed) continue;
@@ -405,7 +405,7 @@ export function detectInstitutionGaps(settlement, precomputedChains = null) {
   return [...found.values()].sort((a, b) => b.affinity - a.affinity || byCodepoint(a.name, b.name));
 }
 
-function lowerTierEntriesMatching(fragment, tier) {
+function lowerTierEntriesMatching(/** @type {any} */ fragment, /** @type {any} */ tier) {
   const needle = fragment.toLowerCase();
   const maxRank = tierRankOf(tier);
   const out = [];
@@ -418,7 +418,7 @@ function lowerTierEntriesMatching(fragment, tier) {
 }
 
 // ── Contribution + closure eligibility ──────────────────────────────────────
-function tokenOverlap(a, b) {
+function tokenOverlap(/** @type {any} */ a, /** @type {any} */ b) {
   const tokens = String(a || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(/\s+/).filter(t => t.length >= 4);
   const haystack = String(b || '').toLowerCase();
   return tokens.some(t => haystack.includes(t));
@@ -440,7 +440,7 @@ const NOT_FOOD_RE = /saw|lumber|timber/;
  * highest, then live chain processors, then food anchors. Drives the closure
  * shield: the smithy a smithed-goods economy rests on closes last.
  */
-export function institutionContribution(settlement, inst, precomputedChains = null) {
+export function institutionContribution(/** @type {any} */ settlement, /** @type {any} */ inst, /** @type {any} */ precomputedChains = null) {
   if (!settlement || !inst) return 0;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const weights = INSTITUTION_LIFECYCLE_TUNING.contribution;
@@ -452,33 +452,33 @@ export function institutionContribution(settlement, inst, precomputedChains = nu
   // exportAnchor weight over a label spelling.
   const exportIds = new Set(exportsList.map(exactGoodId).filter(Boolean));
   let score = 0;
-  const memberOf = chains.filter(chain =>
-    (chain.processingInstitutions || []).some(p => institutionMatchesProcessor(inst, p)));
+  const memberOf = chains.filter((/** @type {any} */ chain) =>
+    (chain.processingInstitutions || []).some((/** @type {any} */ p) => institutionMatchesProcessor(inst, p)));
   if (memberOf.length) {
     score += weights.chainProcessor;
-    const anchorsExports = memberOf.some(chain =>
-      (chain.outputs || []).some(o => { const id = exactGoodId(o); return id != null && exportIds.has(id); }) ||
+    const anchorsExports = memberOf.some((/** @type {any} */ chain) =>
+      (chain.outputs || []).some((/** @type {any} */ o) => { const id = exactGoodId(o); return id != null && exportIds.has(id); }) ||
       (exportsText && tokenOverlap(`${(chain.outputs || []).join(' ')} ${chain.label || ''} ${chain.resource || ''}`, exportsText)));
     if (anchorsExports) score += weights.exportAnchor;
-    if (memberOf.some(chain => chain.needKey === 'food_security')) score += weights.foodAnchor;
+    if (memberOf.some((/** @type {any} */ chain) => chain.needKey === 'food_security')) score += weights.foodAnchor;
   }
   if (!memberOf.length && exportsText && tokenOverlap(inst.name, exportsText)) {
     score += weights.exportAnchor;
   }
   const nameLower = String(inst.name || '').toLowerCase();
-  if (FOOD_ANCHOR_RE.test(nameLower) && !NOT_FOOD_RE.test(nameLower) && !memberOf.some(c => c.needKey === 'food_security')) {
+  if (FOOD_ANCHOR_RE.test(nameLower) && !NOT_FOOD_RE.test(nameLower) && !memberOf.some((/** @type {any} */ c) => c.needKey === 'food_security')) {
     score += weights.foodAnchor;
   }
   return clamp01(score);
 }
 
 /** 0..1 — compounded impairment load (impaired institutions close first). */
-export function institutionImpairmentLoad(inst) {
+export function institutionImpairmentLoad(/** @type {any} */ inst) {
   let load = 0;
   if (inst?.status === 'impaired' || inst?.status === 'critical') load = 0.3;
   const impairments = Array.isArray(inst?.impairments) ? inst.impairments : [];
   if (impairments.length) {
-    const compounded = 1 - impairments.reduce((acc, imp) => acc * (1 - clamp01(Number(imp?.severity) || 0)), 1);
+    const compounded = 1 - impairments.reduce((/** @type {any} */ acc, /** @type {any} */ imp) => acc * (1 - clamp01(Number(imp?.severity) || 0)), 1);
     load = Math.max(load, compounded);
   }
   return clamp01(load);
@@ -493,7 +493,7 @@ export function institutionImpairmentLoad(inst) {
  * rosters): catalogEntryByName alone returns the LOWEST tier's spec, and
  * e.g. 'Weekly market' is optional at village but required at town.
  */
-export function isClosableInstitution(inst, settlement = null) {
+export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} */ settlement = null) {
   if (!inst || !inst.name) return false;
   if (inst.status === 'removed' || inst.status === 'destroyed' || inst._worldPulseInactive) return false;
   if (inst.required || inst.requiredForTier) return false;
@@ -548,7 +548,7 @@ const LIFECYCLE_CLOSE_FATES = new Set(['shuttered', 'bankrupt', 'closed_for_want
 // flapping across the thresholds churn the same institution with no added
 // damping. The history cap (24) means only RECENT events damp — amnesty for
 // ancient history is the right shape for an equilibrium, not a ratchet.
-function priorLifecycleCounts(settlement) {
+function priorLifecycleCounts(/** @type {any} */ settlement) {
   let builds = 0;
   let closes = 0;
   for (const entry of settlement?.institutionHistory || []) {
@@ -558,7 +558,7 @@ function priorLifecycleCounts(settlement) {
   return { builds, closes };
 }
 
-function closureFateForInstitution(inst) {
+function closureFateForInstitution(/** @type {any} */ inst) {
   const text = `${inst?.name || ''} ${(inst?.tags || []).join(' ')} ${inst?.category || ''}`.toLowerCase();
   if (/market|shop|tavern|inn|bath|theater|theatre|gambl|festival/.test(text)) return 'shuttered';
   if (/guild|craft|smith|mill|works|yard|forge|tannery|weaver/.test(text)) return 'bankrupt';
@@ -573,7 +573,7 @@ function closureFateForInstitution(inst) {
  * flow through rollCandidates (volatility + budgets) like tier/resource drift.
  * Pure + deterministic: no rng here; the probability rides on the candidate.
  */
-export function evaluateInstitutionLifecycle(worldState, snapshot, pressureIdx, context = {}) {
+export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** @type {any} */ snapshot, /** @type {any} */ pressureIdx, /** @type {any} */ context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
   if (!rules.institutionLifecycleEnabled) return { worldState, candidates: [] };
@@ -668,16 +668,16 @@ export function evaluateInstitutionLifecycle(worldState, snapshot, pressureIdx, 
       if (drift.streak < t.requiredStreak) continue;
       if (drift.lastCandidateTick != null && tick - drift.lastCandidateTick < t.cooldownTicks) continue;
       const chains = deriveLifecycleChains(settlement);
-      const closable = activeInstitutions(settlement).filter(inst => isClosableInstitution(inst, settlement));
+      const closable = activeInstitutions(settlement).filter((/** @type {any} */ inst) => isClosableInstitution(inst, settlement));
       if (!closable.length) continue;
       // Most vulnerable first: contributing least and impaired most.
       const ranked = closable
-        .map(inst => {
+        .map((/** @type {any} */ inst) => {
           const contribution = institutionContribution(settlement, inst, chains);
           const impairment = institutionImpairmentLoad(inst);
           return { inst, contribution, impairment, vulnerability: (1 - contribution) * 0.6 + impairment * 0.4 };
         })
-        .sort((a, b) => b.vulnerability - a.vulnerability || byCodepoint(a.inst.name, b.inst.name));
+        .sort((/** @type {any} */ a, /** @type {any} */ b) => b.vulnerability - a.vulnerability || byCodepoint(a.inst.name, b.inst.name));
       const target = ranked[0];
       const distress = 1 - health;
       const probability = closeChance({
@@ -729,7 +729,7 @@ export function evaluateInstitutionLifecycle(worldState, snapshot, pressureIdx, 
 }
 
 // ── Outcome application ──────────────────────────────────────────────────────
-function appendInstitutionHistory(settlement, entry) {
+function appendInstitutionHistory(/** @type {any} */ settlement, /** @type {any} */ entry) {
   return [
     ...(Array.isArray(settlement.institutionHistory) ? settlement.institutionHistory.slice(-23) : []),
     entry,
@@ -742,12 +742,12 @@ function appendInstitutionHistory(settlement, entry) {
  * re-apply this from the stored outcome alone, possibly ticks later, so every
  * guard re-checks against the CURRENT settlement.
  */
-export function applyInstitutionLifecycleOutcome(settlement, outcome) {
+export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, /** @type {any} */ outcome) {
   const patch = outcome?.institutionPatch;
   if (!settlement || !patch?.name) return settlement;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   const needle = String(patch.name).toLowerCase();
-  const index = institutions.findIndex(inst => String(inst?.name || '').toLowerCase() === needle);
+  const index = institutions.findIndex((/** @type {any} */ inst) => String(inst?.name || '').toLowerCase() === needle);
 
   if (patch.action === 'build') {
     if (index >= 0) {
@@ -758,7 +758,7 @@ export function applyInstitutionLifecycleOutcome(settlement, outcome) {
       // belong to the reform loop (advanceInstitutionReform), and a close →
       // reopen cycle must not launder them for free.
       const keptImpairments = (Array.isArray(existing.impairments) ? existing.impairments : [])
-        .filter(imp => imp?.type === 'corruption' || String(imp?.causeEventId || '').startsWith('corruption:'));
+        .filter((/** @type {any} */ imp) => imp?.type === 'corruption' || String(imp?.causeEventId || '').startsWith('corruption:'));
       const restored = {
         ...existing,
         status: 'active',

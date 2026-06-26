@@ -14,9 +14,9 @@
  * are left as the literal `{name}` so the bug surfaces visibly rather
  * than silently rendering "undefined".
  *
- * Missing keys throw in DEV (so we catch typos in the only place we'll
- * notice them) and return the key string in PROD (so a typo can't take
- * down the page).
+ * Missing keys warn in DEV (a loud console.warn so we catch typos where
+ * we'll notice them) and return the key string in every environment (so a
+ * typo renders the harmless key text rather than taking down the page).
  */
 
 import { en } from './en.js';

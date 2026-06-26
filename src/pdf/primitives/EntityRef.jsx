@@ -30,6 +30,7 @@
  */
 import { Link, Text } from '@react-pdf/renderer';
 import { palette } from '../theme.js';
+import { safe } from '../lib/format.js';
 
 // Gold-accent link styling — mirrors EntityLink's on-screen treatment (the
 // `palette.gold` accent, bold weight) so a printed cross-reference reads as the
@@ -62,11 +63,11 @@ export function EntityRef({ id, index, type: _type, fallback = '', style }) {
 
   // Broken / unresolved id -> plain text, never a dead anchor.
   if (!entry) {
-    const text = fallback || '';
+    const text = safe(fallback);
     return text ? <Text style={style}>{text}</Text> : null;
   }
 
-  const label = entry.currentName || fallback || entry.label || '';
+  const label = safe(entry.currentName || fallback || entry.label || '');
   return (
     <Link src={`#${entry.anchor}`} style={{ ...LINK_STYLE, ...style }}>
       {label}

@@ -1,6 +1,7 @@
 import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
+import { CHRONICLE_CREDIT_COST } from '../../config/pricing.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
 import { useStore } from '../../store/index.js';
@@ -272,7 +273,7 @@ export default function WizardNewsPanel({ campaign }) {
                 busy={chronicleBusy}
                 onClick={generateChronicle}
                 disabled={chronicleBusy || total === 0}
-                title="Turn this tick's news into a two-credit campaign chronicle"
+                title={`Turn this tick's news into a ${CHRONICLE_CREDIT_COST}-credit campaign chronicle`}
               >
                 {chronicleBusy ? 'Writing' : 'Chronicle'}
               </Button>

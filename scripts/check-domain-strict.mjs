@@ -22,16 +22,39 @@ import path from 'node:path';
 import url from 'node:url';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
-const BASELINE = path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
+// DOMAIN_STRICT_BASELINE overrides the baseline path so the ratchet semantics
+// (esp. the --update lower-only contract) are testable against a temp file
+// without clobbering the committed baseline — same testability rationale as the
+// DOMAIN_STRICT_TSC_CMD override below.
+const BASELINE = process.env.DOMAIN_STRICT_BASELINE || path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
 const UPDATE = process.argv.includes('--update');
 
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
 // we parse stdout regardless, so don't let execSync throw on that.
+//
+// But a non-zero exit means two very different things: tsc RAN and found type
+// errors (normal — parse them), or tsc FAILED TO RUN (bad config, missing
+// binary, OOM). The catch folds stdout+stderr into one string either way, and a
+// failed-to-run tsc emits no parseable `error TSxxxx` lines — so the count comes
+// out empty, reads as "no regressions", and greens the gate on a broken
+// typecheck. We must tell the two apart and fail CLOSED on execution failure.
+// The TSCMD override exists so the failure path is testable without breaking tsc.
+const TSCMD = process.env.DOMAIN_STRICT_TSC_CMD || 'npx tsc --noEmit -p tsconfig.domain-strict.json';
 let out;
+let tscRan = true; // exit 0 ⇒ tsc ran clean
 try {
-  out = execSync('npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  out = execSync(TSCMD, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 } catch (e) {
   out = `${e.stdout || ''}${e.stderr || ''}`;
+  // tsc ran iff its output carries at least one recognizable diagnostic line.
+  // No `error TS` line on a non-zero exit ⇒ tsc never produced a typecheck.
+  tscRan = /error TS\d+:/.test(out);
+}
+
+if (!tscRan) {
+  console.error('[domain-strict] tsc failed to run (no parseable diagnostics) — failing closed; this is NOT a clean typecheck.');
+  console.error(out.trim().slice(0, 2000) || '(no output captured)');
+  process.exit(2);
 }
 
 // Count errors per src/domain file (ignore import-followed errors outside the
@@ -46,6 +69,22 @@ for (const line of out.split('\n')) {
 const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
 if (UPDATE) {
+  // A ratchet only TIGHTENS. `--update` re-baselines after a burn-down, so the
+  // new ceiling may only stay equal or drop — never RISE. Writing a higher total
+  // here would silently widen the allowance (the exact thing the gate forbids on
+  // a normal run), turning the re-baseline into a debt-laundering backdoor. So
+  // refuse to raise: if a baseline exists, the new total must be ≤ the old one.
+  if (fs.existsSync(BASELINE)) {
+    const prev = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
+    if (typeof prev.total === 'number' && total > prev.total) {
+      console.error(
+        `[domain-strict] refusing to RAISE the ceiling: new total ${total} > baseline ${prev.total}. ` +
+          `--update may only LOWER the ratchet (the debt can shrink, never grow). ` +
+          `Fix or annotate the +${total - prev.total} new strict error(s) instead of widening the baseline.`,
+      );
+      process.exit(1);
+    }
+  }
   const sorted = Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
   fs.writeFileSync(BASELINE, `${JSON.stringify({ total, files: sorted }, null, 2)}\n`);
   console.log(`[domain-strict] baseline updated: ${total} errors across ${Object.keys(counts).length} files.`);

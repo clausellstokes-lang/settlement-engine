@@ -49,9 +49,10 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
   nobility:   'government',
 });
 
+/** @param {any} category */
 function archetypeFromCategory(category) {
   if (!category) return 'other';
-  return CATEGORY_TO_ARCHETYPE[String(category).toLowerCase()] || 'other';
+  return CATEGORY_TO_ARCHETYPE[/** @type {keyof typeof CATEGORY_TO_ARCHETYPE} */ (String(category).toLowerCase())] || 'other';
 }
 
 // ── Per-archetype leverage / vulnerability templates ─────────────────────
@@ -99,8 +100,9 @@ const NPC_TEMPLATES = Object.freeze({
   },
 });
 
+/** @param {any} archetype */
 function templateForArchetype(archetype) {
-  const t = NPC_TEMPLATES[archetype] || NPC_TEMPLATES.other;
+  const t = NPC_TEMPLATES[/** @type {keyof typeof NPC_TEMPLATES} */ (archetype)] || NPC_TEMPLATES.other;
   return {
     leverage:        [...t.leverage],
     vulnerabilities: [...t.vulnerabilities],
@@ -241,15 +243,20 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
 });
 
+/**
+ * @param {any} archetype
+ * @param {any} rank
+ */
 function consequencesForRemoval(archetype, rank) {
-  const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
+  const archetypeMap = REMOVAL_CONSEQUENCES[/** @type {keyof typeof REMOVAL_CONSEQUENCES} */ (archetype)] || REMOVAL_CONSEQUENCES.other;
   const normalizedRank = (rank || 'minor').toLowerCase();
-  const consequences = archetypeMap[normalizedRank] || archetypeMap.minor || [];
+  const consequences = /** @type {any} */ (archetypeMap)[normalizedRank] || archetypeMap.minor || [];
   return [...consequences];
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
+/** @param {...any} candidates */
 function firstNonEmpty(...candidates) {
   for (const c of candidates) {
     if (typeof c === 'string' && c.trim()) return c.trim();
@@ -257,6 +264,7 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
@@ -264,6 +272,7 @@ function snakeCase(s) {
     .toLowerCase();
 }
 
+/** @param {any} name */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -317,7 +326,7 @@ export function inferInstitutionName(npc, settlement) {
   if (institutions.length === 0) return null;
 
   const rawCategory = typeof npc.category === 'string' ? npc.category.toLowerCase() : npc.category;
-  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (CATEGORY_HINT_ALIASES[rawCategory] || rawCategory);
+  const category = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory);
   const hint = CATEGORY_INSTITUTION_HINTS[category];
   if (!hint) return null;
 
@@ -328,6 +337,47 @@ export function inferInstitutionName(npc, settlement) {
   return match && typeof match.name === 'string' ? match.name : null;
 }
 
+/**
+ * All settlement institutions whose name fits a DOMAIN category's hint — the
+ * power-tab counterpart to {@link inferInstitutionName}. inferInstitutionName
+ * answers "which institution is THIS npc tied to" (first match, one result);
+ * this answers "which institutions does a power of this CATEGORY touch" (every
+ * match). A power row uses it so it shows its institutional footprint even when
+ * it has no sub-faction members to infer from — e.g. the Religious Authorities
+ * power surfaces the temple/shrine without a single clergy member on file.
+ *
+ * Returns DISPLAY NAMES (the caller resolves rename-safe ids via the entity
+ * index, exactly as the member path does). Same hints + aliases as the npc
+ * path, so the two stay consistent.
+ *
+ * @param {string} category  a faction/power domain (military/religious/economy/…)
+ * @param {any} settlement
+ * @returns {string[]} matching institution display names (deduped, source order)
+ */
+export function institutionsForCategory(category, settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0) return [];
+  const rawCategory = typeof category === 'string' ? category.toLowerCase() : category;
+  const resolved = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (
+    CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory
+  );
+  const hint = CATEGORY_INSTITUTION_HINTS[resolved];
+  if (!hint) return [];
+  const seen = new Set();
+  const out = [];
+  for (const inst of institutions) {
+    if (!inst || typeof inst.name !== 'string' || !hint.test(inst.name)) continue;
+    if (seen.has(inst.name)) continue;
+    seen.add(inst.name);
+    out.push(inst.name);
+  }
+  return out;
+}
+
+/**
+ * @param {any} npc
+ * @param {any} settlement
+ */
 function inferInstitutionLink(npc, settlement) {
   const name = inferInstitutionName(npc, settlement);
   return name ? `institution.${snakeCase(name)}` : null;
@@ -339,17 +389,21 @@ function inferInstitutionLink(npc, settlement) {
 // settlement.relationships. Triangles (three-way structures) are a
 // follow-up — the data is there, but the surface needs careful UX.
 
+/**
+ * @param {any} npc
+ * @param {any} settlement
+ */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
   // Find any relationship involving this NPC.
-  const candidates = rels.filter(r => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  const candidates = rels.filter(/** @param {any} r */ r => r.npc1Id === npc.id || r.npc2Id === npc.id);
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
   // these are the more campaign-actionable connections.
-  const withTension = candidates.find(r => typeof r.tension === 'string' && r.tension);
+  const withTension = candidates.find(/** @param {any} r */ r => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
 
   const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
@@ -375,8 +429,8 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {Object} npc       The legacy NPC entry.
- * @param {Object} [settlement] Optional context for institution-link +
+ * @param {any} npc       The legacy NPC entry.
+ * @param {any} [settlement] Optional context for institution-link +
  *                              relationship-triangle derivation.
  * @returns {Object|null}
  */
@@ -453,11 +507,14 @@ export function deriveNpcProfile(npc, settlement) {
   };
 }
 
-/** Enrich every NPC on a settlement. Returns []. for missing data. */
+/**
+ * Enrich every NPC on a settlement. Returns []. for missing data.
+ * @param {any} settlement
+ */
 export function deriveAllNpcProfiles(settlement) {
   if (!settlement) return [];
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  return npcs.map(n => deriveNpcProfile(n, settlement)).filter(Boolean);
+  return npcs.map(/** @param {any} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
@@ -465,6 +522,7 @@ export function deriveAllNpcProfiles(settlement) {
 /**
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
+ * @param {any} settlement
  */
 export function npcArchetypeBreakdown(settlement) {
   // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
@@ -485,10 +543,11 @@ export function npcArchetypeBreakdown(settlement) {
  * Forecast the cumulative impact of removing all 'dominant'-rank NPCs.
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
+ * @param {any} settlement
  */
 export function dominantNpcRemovalImpact(settlement) {
   const dominant = deriveAllNpcProfiles(settlement)
-    .filter(p => p.rank === 'dominant');
+    .filter(/** @param {any} p */ p => p.rank === 'dominant');
   const out = [];
   for (const p of dominant) {
     for (const c of p.consequenceIfRemoved.consequences) {

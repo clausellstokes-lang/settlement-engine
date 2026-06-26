@@ -79,11 +79,23 @@ function makeAdminClient(activeResult: boolean | null) {
         });
       }
       // Service-role SAFETY preflights added with provider-peer metering: both run
-      // on the admin client BEFORE spend_credits. check_ai_spend_cap FAILS CLOSED
+      // on the admin client BEFORE spend_credits. The spend cap FAILS CLOSED
       // (a null/!allowed result throws 400 before the stream opens), so the refund-
       // path tests must let it through to reach the spend → fail → refund boundary
       // they actually exercise. consume_ai_generate_rate_limit fails open, but we
       // allow it explicitly so the stub doesn't depend on that asymmetry.
+      //
+      // reserve_ai_spend (migration 086) replaced the read-only check_ai_spend_cap:
+      // it RESERVES an estimated cost before the model calls and returns a
+      // reservation_id the handler RELEASES in its finally once the real COGS row
+      // lands. We allow it (with an id so the release path runs) and no-op the
+      // release. (The legacy name is kept for any caller still on the read-only RPC.)
+      if (fn === 'reserve_ai_spend') {
+        return Promise.resolve({ data: { allowed: true, reservation_id: 'res_stub' }, error: null });
+      }
+      if (fn === 'release_ai_spend_reservation') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'check_ai_spend_cap' || fn === 'consume_ai_generate_rate_limit') {
         return Promise.resolve({ data: { allowed: true }, error: null });
       }
@@ -176,6 +188,31 @@ Deno.test('a thesis FAILURE refunds via the captured spend_id and does NOT doubl
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 });
 
+Deno.test('a PRE-STREAM throw (insufficient credits) RELEASES the 086 reservation — no global-cap headroom leak', async () => {
+  // The reservation is taken (reserve_ai_spend) BEFORE spend_credits. spend fails
+  // (insufficient_funds → ok:false) and the handler throws BEFORE the stream opens,
+  // so the in-stream `finally` release never runs. Without the outer-catch release
+  // the reservation leaks its global-cap headroom for the full TTL — a reachable
+  // DoS (a zero-credit account can flood reserve→insufficient and saturate the cap).
+  const user = makeUserClient(
+    { id: 'broke1', email: 'b@x.com' },
+    { ok: false, reason: 'insufficient_funds', balance: 0 },
+  );
+  const admin = makeAdminClient(true);   // active → reaches reserve (res_stub) → spend → fail
+  const res = await handleGenerateNarrative(
+    req({ type: 'narrative', settlement: SETTLEMENT }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);                                  // pre-stream throw → outer catch
+  assertEquals((await res.json()).error.startsWith('Insufficient credits'), true);
+
+  // The reservation was taken exactly once and RELEASED on the throw path.
+  assertEquals(admin.rpc.filter((c) => c.fn === 'reserve_ai_spend').length, 1);
+  const releases = admin.rpc.filter((c) => c.fn === 'release_ai_spend_reservation');
+  assertEquals(releases.length, 1);
+  assertEquals((releases[0].args as { p_id: string }).p_id, 'res_stub');
+});
+
 Deno.test('an ELEVATED account that fails does NOT refund (it was never charged)', async () => {
   const user = makeUserClient(
     { id: 'dev1', email: 'dev@x.com' },
@@ -201,4 +238,59 @@ Deno.test('a request with NO authorization header is rejected (400) before any s
   );
   assertEquals(res.status, 400);
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+});
+
+// Finding (1): an oversized body is rejected with 413 BEFORE parse + spend,
+// mirroring generate-chronicle's 64KB cap. Without the cap, an unbounded
+// settlement payload inflates the provider token bill at a fixed credit price.
+Deno.test('an OVER-CAP body (>64KB) is rejected (413) before any spend', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  const huge = { type: 'narrative', settlement: { ...SETTLEMENT, blob: 'x'.repeat(70 * 1024) } };
+  const res = await handleGenerateNarrative(
+    req(huge, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // never reached the spend
+});
+
+// Finding (1, byte cap): a multi-byte payload whose UTF-16 code-unit count is
+// UNDER the cap but whose BYTE count is OVER it must be rejected (413). Before
+// the fix the cap measured rawBody.length (code units), so a payload of ~24k
+// 3-byte chars (~24k code units, ~72KB bytes) slipped past the 64KB byte ceiling
+// and inflated the provider token bill. '実' is 3 bytes / 1 code unit in UTF-8.
+Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  // 24_000 '実' = 24_000 code units (< 65_536) but 72_000 bytes (> 65_536).
+  const blob = '実'.repeat(24_000);
+  const body = JSON.stringify({ type: 'narrative', settlement: { ...SETTLEMENT, blob } });
+  // Sanity: the OLD code-unit cap would have ADMITTED this body; the byte cap rejects it.
+  assertEquals(body.length <= 64 * 1024, true);
+  assertEquals(new TextEncoder().encode(body).length > 64 * 1024, true);
+  const res = await handleGenerateNarrative(
+    new Request('https://edge/generate-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer jwt' },
+      body,
+    }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);   // never reached the spend
+});
+
+// A body just under the cap still parses + flows normally (cap is a ceiling,
+// not a regression on legitimate requests). No model key set, so the thesis
+// fails in-stream → 200 streaming response, but the body parsed fine.
+Deno.test('an UNDER-CAP body parses normally (cap does not block legitimate requests)', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 9, elevated: false });
+  const admin = makeAdminClient(true);
+  const res = await handleGenerateNarrative(
+    req({ type: 'narrative', settlement: SETTLEMENT }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);   // streaming response opened → body parsed
+  await drain(res);
 });

@@ -115,18 +115,76 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
  * untouched (publish_map coalesces null → current). The toolbar's plain share omits
  * it, so a fresh share stays non-importable (column default) until the owner opts in.
  *
+ * The share-editor opts (image, world snapshot, realm-arc summary, facets) are
+ * the SAME fields galleryMapMetadataPatch sanitizes; here they ride the
+ * publish_map RPC params so a single publish call both flips is_public and
+ * captures the metadata snapshot. The world snapshot is built + sanitized by the
+ * CALLER (serializeWorldSnapshotPublic) and passed through as-is. Each optional
+ * field coalesces null → current server-side, so an omitted opt leaves the prior
+ * value untouched (same posture as p_importable).
+ *
  * @param {string} campaignId saved_maps row id (must be a synced uuid)
- * @param {{ kind?: string, description?: string, tags?: string[]|null, importable?: boolean }} [opts]
+ * @param {{
+ *   kind?: string,
+ *   description?: string,
+ *   tags?: string[]|null,
+ *   importable?: boolean,
+ *   imageUrl?: string,
+ *   imageAlt?: string,
+ *   shareWorld?: boolean,
+ *   worldSections?: string[],
+ *   worldSnapshot?: object|null,
+ *   realmArcSummary?: string,
+ *   facets?: object|null,
+ * }} [opts]
  */
-export async function shareMap(campaignId, { kind = 'map', description = '', tags = null, importable } = {}) {
+export async function shareMap(campaignId, {
+  kind = 'map',
+  description = '',
+  tags = null,
+  importable,
+  imageUrl,
+  imageAlt,
+  shareWorld,
+  worldSections,
+  worldSnapshot,
+  realmArcSummary,
+  facets,
+} = {}) {
   if (!isConfigured) throw new Error('Supabase not configured');
   if (!UUID_RE.test(String(campaignId || ''))) throw new Error('Save this campaign to the cloud before sharing its map.');
+  // Sanitize the text/url fields the same way the direct-update patch does, so
+  // the publish path and the edit-after-publish path store identical shapes
+  // (defense in depth — there is no server/DB scrub of these columns).
+  const safeImageUrl = imageUrl === undefined ? undefined : (() => {
+    const trimmed = String(imageUrl || '').trim().slice(0, 1000);
+    return isSafePublicImageUrl(trimmed) ? trimmed : null;
+  })();
+  const safeSections = worldSections === undefined ? undefined : [...new Set(
+    (Array.isArray(worldSections) ? worldSections : [])
+      .map(key => String(key || '').trim())
+      .filter(key => WORLD_SECTION_KEYS.includes(key)),
+  )];
+  const safeSnapshot = worldSnapshot === undefined
+    ? undefined
+    : ((worldSnapshot && typeof worldSnapshot === 'object' && !Array.isArray(worldSnapshot)) ? worldSnapshot : null);
   const { data, error } = await supabase.rpc('publish_map', {
     target_id: campaignId,
     p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
-    p_description: description ? String(description).slice(0, 500) : null,
-    p_tags: Array.isArray(tags) && tags.length ? tags.slice(0, 12) : null,
+    // Sanitize rich-text on write to the SAME budget as galleryMapMetadataPatch /
+    // the settlement path (there is no server/DB scrub of gallery_description): cap
+    // raw generously, sanitize, then trim to 4000 VISIBLE chars. The old raw 500-
+    // char slice both under-budgeted and shipped unsanitized HTML on first publish.
+    p_description: (sanitizeGalleryHtml(String(description || '').slice(0, 8000)).trim().slice(0, 4000)) || null,
+    p_tags: (() => { const clamped = clampTags(tags); return clamped.length ? clamped : null; })(),
     p_importable: importable === undefined ? null : importable === true,
+    p_image_url: safeImageUrl === undefined ? null : safeImageUrl,
+    p_image_alt: imageAlt === undefined ? null : (String(imageAlt || '').trim().slice(0, 220) || null),
+    p_share_world: shareWorld === undefined ? null : shareWorld === true,
+    p_world_sections: safeSections === undefined ? null : safeSections,
+    p_world_snapshot: safeSnapshot === undefined ? null : safeSnapshot,
+    p_realm_arc_summary: realmArcSummary === undefined ? null : (sanitizeRealmArcSummary(String(realmArcSummary || '')) || null),
+    p_facets: (facets && typeof facets === 'object' && !Array.isArray(facets)) ? facets : null,
   });
   if (error) throw new Error(error.message || 'Map share failed');
   try { track(EVENTS.GALLERY_PUBLISHED, { kind }); } catch { /* analytics never affects publish */ }
@@ -467,6 +525,40 @@ function readGovernmentType(data) {
     || '';
 }
 
+// gallery_tags has no server/DB scrub either (RLS lets an owner write the array
+// directly), so the read normalizers re-apply the same clamp the write path uses
+// (lower-case, strip to [a-z0-9 -], drop empties, cap the count) plus a per-tag
+// length bound — defense in depth, so a drifted/malicious row can never smuggle
+// markup or an unbounded blob through this field. Mirrors the share-metadata
+// write clamp.
+const TAG_LENGTH_LIMIT = 40;
+const TAG_COUNT_LIMIT = 12;
+
+/**
+ * The single tag clamp shared by every gallery path (publish, edit, read) so they
+ * can never diverge: lower-case, strip to [a-z0-9 -], bound each tag to
+ * TAG_LENGTH_LIMIT, drop empties, cap the count. Accepts an array or a
+ * comma-separated string (the editor's raw input shape).
+ *
+ * @param {string[]|string} tags raw tags (array or comma-separated string)
+ * @returns {string[]} the clamped tag list
+ */
+function clampTags(tags) {
+  const list = Array.isArray(tags) ? tags : String(tags || '').split(',');
+  return list
+    .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, '').slice(0, TAG_LENGTH_LIMIT))
+    .filter(Boolean)
+    .slice(0, TAG_COUNT_LIMIT);
+}
+
+// READ-path clamp: array-only. A non-array stored value is a drifted/malicious
+// row, not editor input, so it yields [] rather than being comma-split (the
+// write-path behaviour of clampTags). Both share the same per-tag clamp.
+function sanitizeGalleryTags(tags) {
+  if (!Array.isArray(tags)) return [];
+  return clampTags(tags);
+}
+
 function sanitizeTile(row) {
   const data = row.data || {};
   return {
@@ -478,10 +570,15 @@ function sanitizeTile(row) {
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
     curated:      row.is_curated ?? false,
-    description:  row.gallery_description || '',
+    // gallery_description is sanitized rich-text HTML, but there is no server/DB
+    // scrub — RLS lets an owner write raw HTML via a direct table update, and
+    // sanitizing-on-write only guards values this client wrote. Sanitize on READ
+    // too, at the normalizer chokepoint, so the data object is HTML-safe for ANY
+    // consumer (card, dossier, PDF, json export) regardless of the stored value.
+    description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags),
     population:   Number(row.population ?? data.population) || null,
     terrain:      row.terrain || data?.config?.terrainType || data?.config?.terrainOverride || data?.geography?.terrain || data?.terrain || '',
     governmentType: row.government_type || readGovernmentType(data),
@@ -597,10 +694,14 @@ function sanitizeDossier(row) {
     // signals a simulated settlement, not a generator snapshot. Same derivation
     // as the list tile so card and dossier agree.
     stability:    row.stability || row.data?.viability?.stability || row.data?.systemState?.stability || row.data?.stability || '',
-    description:  row.gallery_description || '',
+    // Sanitize gallery_description on READ (not just on write): there is no
+    // server/DB scrub and RLS lets an owner write raw HTML directly, so this
+    // normalizer is the chokepoint that makes the description HTML-safe for any
+    // consumer downstream. Mirrors sanitizeTile.
+    description:  sanitizeGalleryHtml(row.gallery_description || ''),
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags),
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
     // Public author name resolved live by owner id (migration 076).
@@ -679,17 +780,16 @@ function galleryMetadataPatch(metadata = {}) {
   const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
   const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
   const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
-  const tags = Array.isArray(metadata.tags)
-    ? metadata.tags
-    : String(metadata.tags || '').split(',');
   const patch = {
     gallery_description: description || null,
     gallery_image_url: isSafePublicImageUrl(imageUrl) ? imageUrl : null,
     gallery_image_alt: imageAlt || null,
-    gallery_tags: tags
-      .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, ''))
-      .filter(Boolean)
-      .slice(0, 12),
+    // The single shared tag clamp (clampTags) the read + publish paths use too,
+    // so the three can never diverge: lower-case, strip to [a-z0-9 -], bound each
+    // tag, drop empties, cap the count. Writing the same shape we'd accept on read
+    // keeps a stored row from carrying an unbounded blob the read normalizer would
+    // later trim.
+    gallery_tags: clampTags(metadata.tags),
     gallery_updated_at: new Date().toISOString(),
   };
   // Owners can opt to publish the AI-narrated dossier instead of the raw
@@ -732,6 +832,214 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.facetAtWar !== undefined) {
     patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
+  return patch;
+}
+
+// ── Map gallery metadata write (campaigns / saved_maps) ──────────────────────
+// The maps share editor edits the saved_maps row's gallery_* columns directly
+// (RLS scopes the update to the owner), exactly as the settlement editor edits
+// settlements. saved_maps carries the SAME defense-in-depth posture as
+// settlements: there is no server/DB scrub of gallery_description / gallery_tags
+// / gallery_realm_arc_summary, so the write path must sanitize the stored value
+// (sanitizing-on-write is what keeps a future unsanitized render path from
+// resurrecting stored markup). Mirrors galleryMetadataPatch field-for-field;
+// the only map-specific additions are the world-snapshot trio (share toggle,
+// section allowlist, pass-through jsonb snapshot).
+
+// Allowlist of world-snapshot section keys an owner may choose to reveal. The
+// snapshot itself is built + sanitized by the caller (the editor, via
+// serializeWorldSnapshotPublic); this list bounds WHICH sections the public
+// preview is permitted to render, so a drifted/malicious row can never smuggle
+// an unknown section key. Mirrors the bounded-vocab posture of FILTER_ARRAY_KEYS.
+// The five realm-share reveal sections. These keys MUST match exactly the option
+// keys serializeWorldSnapshotPublic (src/domain/display/worldSnapshotPublic.js)
+// gates each section on, and the Realm Inspector sections the editor toggles map
+// to. A section the editor enables only reaches the public snapshot if BOTH this
+// input allowlist and the serializer honour the same key — kept in lockstep.
+const WORLD_SECTION_KEYS = Object.freeze([
+  'worldClock',
+  'chronicle',
+  'pantheon',
+  'warNetwork',
+  'dashboard',
+]);
+
+/**
+ * Build the saved_maps gallery-metadata patch from an editor metadata bag.
+ * Mirrors galleryMetadataPatch (settlements) but targets the saved_maps
+ * gallery_* columns, plus the map-only world-snapshot trio. Every text field is
+ * sanitized + bounded on write (no server/DB scrub exists for these columns).
+ *
+ * @param {{
+ *   description?: string,
+ *   imageUrl?: string,
+ *   imageAlt?: string,
+ *   tags?: string[]|string,
+ *   importable?: boolean,
+ *   realmArcSummary?: string,
+ *   memberBand?: string,
+ *   dominantCulture?: string,
+ *   tierSpread?: string,
+ *   atWar?: boolean,
+ *   shareWorld?: boolean,
+ *   worldSections?: string[],
+ *   worldSnapshot?: object|null,
+ * }} [metadata]
+ * @returns {Object} the saved_maps update patch
+ */
+function galleryMapMetadataPatch(metadata = {}) {
+  // Sanitize ON WRITE (cap the raw input generously before sanitizing, then
+  // hard-bound the sanitized result to the column budget) — identical posture
+  // to galleryMetadataPatch's gallery_description.
+  const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
+  const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
+  const patch = {
+    gallery_description: description || null,
+    gallery_image_alt: imageAlt || null,
+    // The single shared tag clamp (clampTags) the settlement write + read paths
+    // use too: lower-case, strip to [a-z0-9 -], bound each tag, drop empties, cap
+    // the count.
+    gallery_tags: clampTags(metadata.tags),
+    gallery_updated_at: new Date().toISOString(),
+  };
+  // Cover PRESERVE-ON-OMIT: only set gallery_image_url when a non-empty value is
+  // provided, so a mis-seed (the edit-after-publish draft mounting before the
+  // prior cover is fetched) can never null an existing cover. An empty/whitespace
+  // value leaves the column untouched; a non-empty value is sanitized + bounded.
+  const rawImageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
+  if (rawImageUrl) {
+    patch.gallery_image_url = isSafePublicImageUrl(rawImageUrl) ? rawImageUrl : null;
+  }
+  // Owner opt-in: let other DMs import (clone) this public map. Written only when
+  // provided so an omitted value leaves the prior choice untouched; mirrors the
+  // settlement path's gallery_importable.
+  if (metadata.importable !== undefined) {
+    patch.gallery_importable = metadata.importable === true;
+  }
+  // §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED
+  // scalar, re-clamped to plain bounded text so the map row can never carry
+  // markup or an unbounded blob. Mirrors the settlement path.
+  if (metadata.realmArcSummary !== undefined) {
+    const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
+    patch.gallery_realm_arc_summary = summary || null;
+  }
+  // CAMPAIGN facet snapshots — the saved_maps facet columns are campaign-shaped
+  // (migration 088: member_band / dominant_culture / tier_spread / at_war), NOT the
+  // settlement-shaped culture/prosperity/deity (those live on the settlements table).
+  // The editor's campaignFacets() emits exactly these keys; clamp + null empties so a
+  // facet column never holds an empty string.
+  if (metadata.memberBand !== undefined) {
+    patch.gallery_facet_member_band = String(metadata.memberBand || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.dominantCulture !== undefined) {
+    patch.gallery_facet_dominant_culture = String(metadata.dominantCulture || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.tierSpread !== undefined) {
+    patch.gallery_facet_tier_spread = String(metadata.tierSpread || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.atWar !== undefined) {
+    patch.gallery_facet_at_war = metadata.atWar === true;
+  }
+  // Owner opt-in: reveal the living-world snapshot alongside the shared map.
+  if (metadata.shareWorld !== undefined) {
+    patch.gallery_share_world = metadata.shareWorld === true;
+  }
+  // Which world-snapshot sections the public preview may render. Clamp to the
+  // bounded allowlist (drop unknown keys, dedupe, dropping empties) so a
+  // drifted row can never name an un-vetted section.
+  if (metadata.worldSections !== undefined) {
+    const sections = Array.isArray(metadata.worldSections) ? metadata.worldSections : [];
+    patch.gallery_world_sections = [...new Set(
+      sections
+        .map(key => String(key || '').trim())
+        .filter(key => WORLD_SECTION_KEYS.includes(key)),
+    )];
+  }
+  // The world snapshot itself — a PUBLIC-SAFE jsonb projection the CALLER built
+  // (serializeWorldSnapshotPublic) and already sanitized. lib/gallery does not
+  // re-shape it; we only pass it through (or null it out when absent). Reject a
+  // non-object so the column never holds a scalar/array smuggled in its place.
+  if (metadata.worldSnapshot !== undefined) {
+    const snap = metadata.worldSnapshot;
+    patch.gallery_world_snapshot = (snap && typeof snap === 'object' && !Array.isArray(snap)) ? snap : null;
+  }
+  return patch;
+}
+
+/**
+ * Fetch ONLY the saved_maps gallery_* columns for the owner, so the share editor
+ * can seed its edit-after-publish draft (cover, alt, importable, world sections)
+ * with the values already persisted — without those, "Save gallery details" would
+ * overwrite the saved cover with an empty draft and re-enable every world section.
+ *
+ * This is a DEDICATED fetch, deliberately kept OUT of the campaign-load SELECT
+ * (lib/campaigns.js): that path runs for every user on every page and must stay
+ * independent of whether migration 088 (these columns) is applied. Here we own the
+ * dependency, so the fetch must FAIL GRACEFULLY: if the columns do not exist yet
+ * (pre-088) the query errors, and we return null rather than throwing — the editor
+ * simply falls back to its defaults, exactly as before this seed existed.
+ *
+ * @param {string} campaignId saved_maps row id (the campaign id)
+ * @returns {Promise<{
+ *   imageUrl: string,
+ *   imageAlt: string,
+ *   importable: boolean,
+ *   worldSections: string[]|null,
+ *   shareWorld: boolean,
+ *   description: string,
+ *   tags: string[],
+ * }|null>} the seeded gallery fields, or null when unavailable (pre-088 / not found)
+ */
+export async function fetchCampaignGalleryFields(campaignId) {
+  if (!isConfigured || !campaignId) return null;
+  if (!UUID_RE.test(String(campaignId))) return null;
+  let result;
+  try {
+    result = await supabase
+      .from('saved_maps')
+      .select('gallery_image_url, gallery_image_alt, gallery_importable, gallery_world_sections, gallery_share_world, gallery_description, gallery_tags')
+      .eq('id', campaignId)
+      .maybeSingle();
+  } catch {
+    // A thrown query (e.g. the columns do not exist pre-088) must never break the
+    // editor — fall back to defaults.
+    return null;
+  }
+  const { data, error } = result || {};
+  // Pre-088 the columns are absent and the select errors; treat any error as
+  // "no seed available" so the editor keeps its default draft.
+  if (error || !data) return null;
+  return {
+    imageUrl: data.gallery_image_url || '',
+    imageAlt: data.gallery_image_alt || '',
+    importable: data.gallery_importable === true,
+    // null/absent ⇒ "seed unknown" so the editor keeps ALL sections on; an array
+    // (even empty) is an explicit owner choice the editor must honour.
+    worldSections: Array.isArray(data.gallery_world_sections) ? data.gallery_world_sections : null,
+    shareWorld: data.gallery_share_world === true,
+    description: sanitizeGalleryHtml(data.gallery_description || ''),
+    tags: sanitizeGalleryTags(data.gallery_tags),
+  };
+}
+
+/**
+ * Edit-after-publish for a shared map's gallery metadata. Direct owner-scoped
+ * update of the saved_maps gallery_* columns (RLS gates it to the owner),
+ * paralleling updateGalleryMetadata for settlements. Returns the applied patch.
+ *
+ * @param {string} campaignId saved_maps row id
+ * @param {Object} [metadata] editor metadata bag (see galleryMapMetadataPatch)
+ * @returns {Promise<Object>} the applied patch
+ */
+export async function updateMapGalleryMetadata(campaignId, metadata = {}) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!campaignId) throw new Error('Missing campaign id');
+  const patch = galleryMapMetadataPatch(metadata);
+  const { error } = await supabase
+    .from('saved_maps')
+    .update(patch)
+    .eq('id', campaignId);
+  if (error) throw new Error(error.message || 'Map gallery metadata update failed');
   return patch;
 }
 

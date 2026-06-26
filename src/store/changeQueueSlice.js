@@ -222,6 +222,13 @@ export function createChangeQueueSlice(set, get) {
       if (activeSaveId != null && String(activeSaveId) !== key) {
         return { ok: false, error: 'Open this settlement before committing its changes.' };
       }
+      // Fail-safe: with NO active save there is no row to persist into, so the
+      // single-row write below is skipped — and clearing the queue on a "success"
+      // that never wrote anything is silent data loss. Refuse instead, leaving the
+      // queue intact so it commits once a settlement is open (no-op, not discard).
+      if (activeSaveId == null) {
+        return { ok: false, error: 'Open this settlement before committing its changes.' };
+      }
 
       // (1) Pre-flush snapshot for rollback (R2/R8). Deep-cloned so a later
       // mutate cannot reach back into it.
@@ -229,6 +236,16 @@ export function createChangeQueueSlice(set, get) {
       const preEventLog = Array.isArray(get().eventLog) ? cloneJson(get().eventLog) : [];
       const preSystemState = get().systemState ? cloneJson(get().systemState) : null;
       const preEditedAt = get().editedAt || null;
+      // Also snapshot the savedSettlements MIRROR row for the open settlement —
+      // the flush refreshes it mid-commit (updateSavedSettlement at step 4), so a
+      // FAILED commit must roll it back too. Without this the mirror keeps the
+      // half-applied, never-persisted settlement while the live store is restored,
+      // diverging the two and feeding stale data into the next batch read.
+      const preSavedSettlement = (() => {
+        if (activeSaveId == null) return undefined;
+        const row = (get().savedSettlements || []).find(s => String(s.id) === String(activeSaveId));
+        return row ? cloneJson(row) : undefined;
+      })();
       // Phase 4b — a campaign-member commit STASHES deferred regional impacts onto
       // the campaign worldState during replay (applyEvent under flushApplyLocalOnly).
       // Snapshot the pre-flush deferred bucket + regional graph so a FAILED commit
@@ -245,6 +262,23 @@ export function createChangeQueueSlice(set, get) {
           // leaves no half-staged war-front intent behind (the stash mutates
           // worldState.deferredWarFronts during the flush replay).
           deferredWarFronts: cloneJson(c.worldState?.deferredWarFronts) || [],
+          // Also snapshot the deferred PARTY-IMPACT bucket: a party-caused event
+          // replayed during the flush stashes its impact on
+          // worldState.deferredPartyImpacts (instead of the immediate, un-revertable
+          // backward recordPartyImpact write), so a FAILED commit must roll this
+          // bucket back too — else a rolled-back flush leaves a phantom party impact
+          // the live settlement no longer reflects, which the next Advance would replay.
+          deferredPartyImpacts: cloneJson(c.worldState?.deferredPartyImpacts) || [],
+          // The regional half is DEFERRED on a member commit, but the CRISIS-TWIN
+          // half stays IMMEDIATE (rippleEventThroughWorld runs with skipRegional,
+          // not skip-all): a committed inject/resolve event mutates
+          // worldState.stressors right now, and a resolve also queues residual
+          // worldState.proposals. Snapshot BOTH so a FAILED commit rolls the
+          // condition/crisis state back in lockstep with the regional buckets —
+          // else a rolled-back commit leaves a phantom stressor (or proposal) the
+          // live settlement no longer reflects.
+          stressors: cloneJson(c.worldState?.stressors) || [],
+          proposals: cloneJson(c.worldState?.proposals) || [],
           regionalGraph: cloneJson(c.regionalGraph) || null,
         };
       })();
@@ -433,6 +467,15 @@ export function createChangeQueueSlice(set, get) {
           state.eventLog    = preEventLog;
           state.systemState = preSystemState;
           state.editedAt    = preEditedAt;
+          // Roll the savedSettlements mirror row back in lockstep with the store
+          // so a failed flush never leaves the half-applied settlement behind in
+          // the mirror (atomic rollback — the retry reads a clean base).
+          if (preSavedSettlement !== undefined) {
+            const idx = (state.savedSettlements || []).findIndex(
+              s => String(s.id) === String(activeSaveId),
+            );
+            if (idx !== -1) state.savedSettlements[idx] = preSavedSettlement;
+          }
           // Phase 4b — restore the campaign's deferred-impact bucket (+ graph) so
           // a failed campaign commit leaves NO half-staged propagation behind.
           if (preCampaign) {
@@ -443,6 +486,14 @@ export function createChangeQueueSlice(set, get) {
                   ...c.worldState,
                   deferredImpacts: preCampaign.deferredImpacts,
                   deferredWarFronts: preCampaign.deferredWarFronts,
+                  // Roll the deferred PARTY-IMPACT bucket back too so a failed flush
+                  // leaves no phantom party impact for the next Advance to replay.
+                  deferredPartyImpacts: preCampaign.deferredPartyImpacts,
+                  // Roll the IMMEDIATE crisis-twin half back too: the inject/resolve
+                  // directive mutated stressors (and a resolve queued proposals)
+                  // during replay, so a failed commit must restore both buckets.
+                  stressors: preCampaign.stressors,
+                  proposals: preCampaign.proposals,
                 };
               }
               if (preCampaign.regionalGraph) c.regionalGraph = preCampaign.regionalGraph;

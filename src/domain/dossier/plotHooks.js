@@ -32,7 +32,7 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   relationship: { color: '#5a3a1a', label: 'Relationships' },
 });
 
-function textForHook(hook) {
+function textForHook(/** @type {any} */ hook) {
   if (typeof hook === 'string') return hook;
   if (!hook) return '';
   if (typeof hook.hook === 'string') return hook.hook;
@@ -40,11 +40,11 @@ function textForHook(hook) {
   return String(hook);
 }
 
-function cleanHook(text) {
+function cleanHook(/** @type {any} */ text) {
   return String(text || '').replace(/^\s*PLOT HOOK:\s*/i, '').trim();
 }
 
-function push(out, hook) {
+function push(/** @type {any} */ out, /** @type {any} */ hook) {
   const text = cleanHook(hook.text);
   if (!text) return;
   out.push({
@@ -56,11 +56,12 @@ function push(out, hook) {
   });
 }
 
-export function collectPlotHooks(settlement = {}) {
+export function collectPlotHooks(/** @type {any} */ settlement = {}) {
+  /** @type {any[]} */
   const hooks = [];
 
-  (settlement.npcs || []).forEach((npc) => {
-    (npc.plotHooks || []).forEach((hook) => push(hooks, {
+  (settlement.npcs || []).forEach((/** @type {any} */ npc) => {
+    (npc.plotHooks || []).forEach((/** @type {any} */ hook) => push(hooks, {
       text: textForHook(hook),
       source: npc.name || 'NPC',
       role: npc.role || npc.title || '',
@@ -75,9 +76,9 @@ export function collectPlotHooks(settlement = {}) {
     }));
   });
 
-  (settlement.conflicts || []).forEach((conflict) => {
+  (settlement.conflicts || []).forEach((/** @type {any} */ conflict) => {
     const intensity = conflict.intensity || 'moderate';
-    (conflict.plotHooks || []).forEach((hook) => push(hooks, {
+    (conflict.plotHooks || []).forEach((/** @type {any} */ hook) => push(hooks, {
       text: textForHook(hook),
       source: (conflict.parties || []).join(' vs ') || 'Conflict',
       role: conflict.issue || '',
@@ -85,13 +86,13 @@ export function collectPlotHooks(settlement = {}) {
       category: 'faction',
       priority: intensity === 'high' ? 9 : intensity === 'low' ? 5 : 7,
       accent: intensity === 'high',
-      links: (conflict.parties || []).filter(Boolean).map(party => ({ kind: 'faction', label: party, id: party })),
+      links: (conflict.parties || []).filter(Boolean).map((/** @type {any} */ party) => ({ kind: 'faction', label: party, id: party })),
     }));
   });
 
-  (settlement.history?.currentTensions || []).forEach((tension) => {
-    const label = TENSION_LABELS[tension.type] || tension.type || 'Tension';
-    (tension.plotHooks || []).forEach((hook) => push(hooks, {
+  (settlement.history?.currentTensions || []).forEach((/** @type {any} */ tension) => {
+    const label = /** @type {any} */ (TENSION_LABELS)[tension.type] || tension.type || 'Tension';
+    (tension.plotHooks || []).forEach((/** @type {any} */ hook) => push(hooks, {
       text: textForHook(hook),
       source: label,
       // Full description — tension prose runs ~95 chars and the role renders
@@ -102,7 +103,7 @@ export function collectPlotHooks(settlement = {}) {
     }));
   });
 
-  (settlement.relationships || []).forEach((rel) => {
+  (settlement.relationships || []).forEach((/** @type {any} */ rel) => {
     if (!rel.tension) return;
     push(hooks, {
       text: rel.tension,
@@ -119,7 +120,7 @@ export function collectPlotHooks(settlement = {}) {
     });
   });
 
-  (settlement.economicViability?.plotHooks || []).forEach((hook) => {
+  (settlement.economicViability?.plotHooks || []).forEach((/** @type {any} */ hook) => {
     const h = typeof hook === 'object' && hook ? hook : { hook };
     push(hooks, {
       text: textForHook(h),
@@ -132,7 +133,7 @@ export function collectPlotHooks(settlement = {}) {
     });
   });
 
-  (settlement.economicState?.safetyProfile?.plotHooks || []).forEach((hook) => push(hooks, {
+  (settlement.economicState?.safetyProfile?.plotHooks || []).forEach((/** @type {any} */ hook) => push(hooks, {
     text: textForHook(hook),
     source: 'Safety & Crime',
     role: '',
@@ -140,9 +141,9 @@ export function collectPlotHooks(settlement = {}) {
     priority: 8,
   }));
 
-  (settlement.history?.historicalEvents || []).forEach((event) => {
-    const label = EVENT_LABELS[event.type] || EVENT_LABELS.political;
-    (event.plotHooks || []).forEach((hook) => push(hooks, {
+  (settlement.history?.historicalEvents || []).forEach((/** @type {any} */ event) => {
+    const label = /** @type {any} */ (EVENT_LABELS)[event.type] || EVENT_LABELS.political;
+    (event.plotHooks || []).forEach((/** @type {any} */ hook) => push(hooks, {
       text: textForHook(hook),
       source: `${label} Event`,
       role: event.yearsAgo ? `${event.yearsAgo}y ago` : '',
@@ -156,8 +157,8 @@ export function collectPlotHooks(settlement = {}) {
   return hooks.sort((a, b) => b.priority - a.priority || a.category.localeCompare(b.category));
 }
 
-export function countPlotHookCategories(hooks = []) {
-  return hooks.reduce((acc, hook) => {
+export function countPlotHookCategories(/** @type {any[]} */ hooks = []) {
+  return hooks.reduce((/** @type {any} */ acc, /** @type {any} */ hook) => {
     acc[hook.category] = (acc[hook.category] || 0) + 1;
     return acc;
   }, {});

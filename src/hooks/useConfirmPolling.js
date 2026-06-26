@@ -19,9 +19,11 @@
  * Security: the password lives only in the calling component's state for the
  * lifetime of this screen; it is never logged, persisted, or sent anywhere but
  * Supabase's own signInWithPassword. The "email not confirmed" error is the
- * expected steady state and is intentionally swallowed — every OTHER error is
- * surfaced via onError so a genuinely wrong password or a network fault isn't
- * hidden behind a silent forever-poll.
+ * expected steady state and is intentionally swallowed; a rate-limit (429 /
+ * "too many requests") is treated the same way — it is transient and self-heals
+ * on the next tick — so neither aborts the wait. Every OTHER error is surfaced
+ * via onError so a genuinely wrong password or a network fault isn't hidden
+ * behind a silent forever-poll.
  */
 import { useEffect, useRef } from 'react';
 import { useStore } from '../store/index.js';
@@ -33,11 +35,20 @@ import { isConfigured } from '../lib/supabase.js';
 const POLL_INTERVAL_MS = 4000;
 const MAX_DURATION_MS = 5 * 60 * 1000;
 
-// Supabase's pending-confirmation error. We swallow ONLY this one — it is the
-// expected steady state while we wait — and surface everything else.
+// Errors that are NOT a reason to stop waiting. Supabase's pending-confirmation
+// error is the expected steady state; a rate-limit (429 / "too many requests")
+// is transient — the auth endpoint is briefly pushing back on our cadence, and
+// the next tick recovers — so we swallow it and keep polling rather than
+// stranding the user on a false failure. Everything else still surfaces.
 function isUnconfirmedError(err) {
   const msg = String(err?.message || '').toLowerCase();
   return msg.includes('not confirmed') || msg.includes('email not confirmed');
+}
+
+function isRateLimitError(err) {
+  if (err?.status === 429 || err?.code === 429 || err?.statusCode === 429) return true;
+  const msg = String(err?.message || '').toLowerCase();
+  return msg.includes('too many requests') || msg.includes('rate limit') || msg.includes('429');
 }
 
 /**
@@ -103,8 +114,10 @@ export function useConfirmPolling({ active, email, password, onConfirmed, onTime
         clearInterval(timer);
         onConfirmedRef.current?.();
       } catch (err) {
-        // The expected "still waiting" state — keep polling silently.
-        if (isUnconfirmedError(err)) return;
+        // The expected "still waiting" state — keep polling silently. A
+        // rate-limit is transient backpressure, not a failure; swallow it too
+        // and let the next tick retry rather than aborting the wait.
+        if (isUnconfirmedError(err) || isRateLimitError(err)) return;
         // A real failure (wrong password, network). Stop and report; a silent
         // forever-poll on a genuine error would strand the user. Latch first so a
         // sibling attempt can't also report.

@@ -624,6 +624,42 @@ const inferFactionCategory = (factionName) => {
   return 'other'; // changed: 'other' not 'government' — prevents governing dump
 };
 
+// renormalizeFactionPower — rescale every faction's `power` to integer
+// percentage points summing to exactly 100, using largest-remainder rounding
+// so the rounded points always total 100 (never 99 or 101). Mutates in place
+// and preserves rank order. Reused by the neighbourFactions step, which injects
+// raw-scale powers into the already-percentage-normalized roster and must
+// restore the power-share invariant. No-op for an empty/zero-power roster.
+const renormalizeFactionPower = (factions) => {
+  if (!factions || !factions.length) return factions;
+  const total = factions.reduce((sum, f) => sum + (f.power || 0), 0);
+  if (total <= 0) return factions;
+  // Floor each share, track remainders, then distribute the leftover points to
+  // the largest remainders (ties broken by current order) so the sum is 100.
+  const shares = factions.map((f, i) => {
+    const exact = ((f.power || 0) / total) * 100;
+    const floor = Math.floor(exact);
+    return { i, floor, remainder: exact - floor };
+  });
+  let allotted = shares.reduce((sum, s) => sum + s.floor, 0);
+  let leftover = 100 - allotted;
+  shares
+    .slice()
+    .sort((a, b) => b.remainder - a.remainder || a.i - b.i)
+    .forEach((s) => {
+      if (leftover > 0) {
+        s.floor += 1;
+        leftover -= 1;
+      }
+    });
+  shares.forEach((s) => {
+    factions[s.i].power = s.floor;
+  });
+  return factions;
+};
+
+export { renormalizeFactionPower };
+
 // normalizeAndAnnotateFactions — renormalise faction powers to percentages,
 // sort governing-first then by descending power, and append inter-faction
 // rivalry/relationship colour to each faction's description in place.

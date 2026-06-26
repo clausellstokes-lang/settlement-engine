@@ -34,7 +34,7 @@ import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
-function clamp01(value) {
+function clamp01(/** @type {any} */ value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
@@ -53,30 +53,30 @@ const INSTITUTION_CLASSES = Object.freeze({
   finance: /(bank|counting|mint|exchange|guildhall)/i,
 });
 
-export function institutionClassValue(settlement, className) {
-  const re = INSTITUTION_CLASSES[className];
+export function institutionClassValue(/** @type {any} */ settlement, /** @type {any} */ className) {
+  const re = INSTITUTION_CLASSES[/** @type {keyof typeof INSTITUTION_CLASSES} */ (className)];
   if (!re) return 0;
   const count = (settlement?.institutions || [])
-    .filter(inst => re.test(String(inst?.name || ''))).length;
+    .filter((/** @type {any} */ inst) => re.test(String(inst?.name || ''))).length;
   return Math.min(1, count / 2);
 }
 
-function edgesTouching(snapshot, settlementId) {
+function edgesTouching(/** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const id = String(settlementId);
   const edges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
-  return edges.filter(e => String(e?.from) === id || String(e?.to) === id);
+  return edges.filter((/** @type {any} */ e) => String(e?.from) === id || String(e?.to) === id);
 }
 
-export function relationshipTypeOf(edge) {
+export function relationshipTypeOf(/** @type {any} */ edge) {
   // Compatibility shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
-function incomingChannels(snapshot, settlementId, channelType) {
+function incomingChannels(/** @type {any} */ snapshot, /** @type {any} */ settlementId, /** @type {any} */ channelType) {
   const id = String(settlementId);
   const channels = snapshot?.regionalGraph?.channels || snapshot?.channels || [];
-  return channels.filter(c =>
+  return channels.filter((/** @type {any} */ c) =>
     String(c?.to) === id
     && String(c?.type) === channelType
     && String(c?.status || 'confirmed') === 'confirmed');
@@ -86,7 +86,7 @@ function incomingChannels(snapshot, settlementId, channelType) {
 // A source is { kind, key?, weight, floor?, invert? } evaluated to 0..1 for
 // one settlement (a snapshot.byId entry: { settlement, causal, ... }).
 
-function sourceValue(source, entry, snapshot, settlementId) {
+function sourceValue(/** @type {any} */ source, /** @type {any} */ entry, /** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const settlement = entry?.settlement;
   switch (source.kind) {
     case 'causal': {
@@ -115,12 +115,12 @@ function sourceValue(source, entry, snapshot, settlementId) {
       if (source.key === 'military_protection') {
         const hasChannel = incomingChannels(snapshot, settlementId, 'military_protection').length > 0;
         const hasAlly = edgesTouching(snapshot, settlementId)
-          .some(e => relationshipTypeOf(e) === 'allied');
+          .some((/** @type {any} */ e) => relationshipTypeOf(e) === 'allied');
         return hasChannel || hasAlly ? 1 : 0;
       }
       if (source.key === 'trade_partner') {
         const count = edgesTouching(snapshot, settlementId)
-          .filter(e => ['trade_partner', 'allied'].includes(relationshipTypeOf(e))).length;
+          .filter((/** @type {any} */ e) => ['trade_partner', 'allied'].includes(relationshipTypeOf(e))).length;
         return Math.min(1, count / 2);
       }
       if (source.key === 'arcane_relief') {
@@ -128,7 +128,7 @@ function sourceValue(source, entry, snapshot, settlementId) {
         // incoming information channel from a neighbour whose own arcane
         // institutions still function. One capable neighbour = full credit.
         const capable = incomingChannels(snapshot, settlementId, 'information_flow')
-          .some(channel => {
+          .some((/** @type {any} */ channel) => {
             const neighbor = snapshot?.byId?.get?.(String(channel?.from))?.settlement;
             return institutionClassValue(neighbor, 'arcane') > 0;
           });
@@ -380,8 +380,8 @@ const SOURCE_LABELS = Object.freeze({
   'ally:arcane_relief': 'external arcane relief',
 });
 
-function sourceLabel(source) {
-  const direct = SOURCE_LABELS[`${source.kind}:${source.key}`];
+function sourceLabel(/** @type {any} */ source) {
+  const direct = SOURCE_LABELS[/** @type {keyof typeof SOURCE_LABELS} */ (`${source.kind}:${source.key}`)];
   if (direct) return direct;
   if (source.kind === 'institution') return `${source.key} institutions`;
   return String(source.key || source.kind).replace(/_/g, ' ');
@@ -399,12 +399,12 @@ function sourceLabel(source) {
  *          null when the type has no counterforce profile (unknown types).
  */
 export function counterforceAssessment(stressor, snapshot) {
-  const profile = STRESSOR_COUNTERFORCES[stressor?.type];
+  const profile = STRESSOR_COUNTERFORCES[/** @type {keyof typeof STRESSOR_COUNTERFORCES} */ (stressor?.type)];
   if (!profile) return null;
   const effects = { ...DEFAULT_EFFECTS, ...profile };
   const entries = (stressor.affectedSettlementIds || [])
-    .map(id => ({ id: String(id), entry: snapshot?.byId?.get?.(String(id)) }))
-    .filter(item => item.entry);
+    .map((/** @type {any} */ id) => ({ id: String(id), entry: snapshot?.byId?.get?.(String(id)) }))
+    .filter((/** @type {any} */ item) => item.entry);
   if (!entries.length) return null;
 
   let scoreSum = 0;
@@ -413,7 +413,7 @@ export function counterforceAssessment(stressor, snapshot) {
   for (const { id, entry } of entries) {
     let weighted = 0;
     let weightTotal = 0;
-    profile.sources.forEach((source, idx) => {
+    profile.sources.forEach((/** @type {any} */ source, /** @type {any} */ idx) => {
       const value = sourceValue(source, entry, snapshot, id);
       weighted += value * source.weight;
       weightTotal += source.weight;
@@ -428,7 +428,7 @@ export function counterforceAssessment(stressor, snapshot) {
     : rawScore;
   // Per-source breakdown (averaged across the footprint): names the
   // strengths behind the score — the resolution receipt reads this.
-  const sourceBreakdown = profile.sources.map((source, idx) => ({
+  const sourceBreakdown = profile.sources.map((/** @type {any} */ source, /** @type {any} */ idx) => ({
     kind: source.kind,
     key: source.key || null,
     label: sourceLabel(source),
@@ -520,15 +520,15 @@ export const STRESSOR_SYNERGIES = Object.freeze({
 
 const ACTIVE_SYNERGY_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
-function isActiveCompanion(other) {
+function isActiveCompanion(/** @type {any} */ other) {
   const stage = other?.lifecycleStage
     || (other?.status && other.status !== 'active' ? other.status : 'active');
   return ACTIVE_SYNERGY_STAGES.has(stage);
 }
 
-function shareSettlement(a, b) {
+function shareSettlement(/** @type {any} */ a, /** @type {any} */ b) {
   const mine = new Set((a?.affectedSettlementIds || []).map(String));
-  return (b?.affectedSettlementIds || []).some(id => mine.has(String(id)));
+  return (b?.affectedSettlementIds || []).some((/** @type {any} */ id) => mine.has(String(id)));
 }
 
 /**
@@ -542,7 +542,7 @@ function shareSettlement(a, b) {
  *            blocksResolution: boolean, companions: string[] } | null}
  */
 export function synergyAssessment(stressor, allStressors = []) {
-  const table = STRESSOR_SYNERGIES[stressor?.type];
+  const table = STRESSOR_SYNERGIES[/** @type {keyof typeof STRESSOR_SYNERGIES} */ (stressor?.type)];
   if (!table) return null;
   let decayMult = 1;
   let resolutionDelta = 0;
@@ -551,7 +551,7 @@ export function synergyAssessment(stressor, allStressors = []) {
 
   for (const other of allStressors) {
     if (!other || other === stressor || other.id === stressor.id) continue;
-    const entry = table[other.type];
+    const entry = /** @type {any} */ (table)[other.type];
     if (!entry) continue;
     if (!shareSettlement(stressor, other)) continue;
     const isEcho = other.status === 'residual' || other.lifecycleStage === 'residual';
@@ -597,7 +597,7 @@ export function synergyAssessment(stressor, allStressors = []) {
 const HOSTILE_RANK = Object.freeze({ hostile: 3, cold_war: 2, rival: 1 });
 const MEMORY_LOOKBACK_TICKS = 12;
 
-export function hostileNeighborsOf(snapshot, settlementId) {
+export function hostileNeighborsOf(/** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const id = String(settlementId);
   const out = [];
   for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
@@ -605,7 +605,7 @@ export function hostileNeighborsOf(snapshot, settlementId) {
     const to = String(edge?.to ?? '');
     if (from !== id && to !== id) continue;
     const type = relationshipTypeOf(edge);
-    const rank = HOSTILE_RANK[type];
+    const rank = HOSTILE_RANK[/** @type {keyof typeof HOSTILE_RANK} */ (type)];
     if (!rank) continue;
     out.push({ otherId: from === id ? to : from, type, rank });
   }
@@ -620,7 +620,7 @@ export function hostileNeighborsOf(snapshot, settlementId) {
  * histories for a recent hostile -> something-else label transition touching
  * this settlement. Returns the most recent within the lookback, or null.
  */
-export function recentHostileMemory(snapshot, settlementId, currentTick) {
+export function recentHostileMemory(/** @type {any} */ snapshot, /** @type {any} */ settlementId, /** @type {any} */ currentTick) {
   const id = String(settlementId);
   const states = snapshot?.worldState?.relationshipStates || {};
   let best = null;
@@ -729,13 +729,13 @@ export const VARIANT_HOOKS = Object.freeze({
  * Returns an originContext to stamp on the newborn stressor, or null when
  * the type has no context-sensitive variants.
  */
-export function interpretStressorOrigin(type, settlementId, snapshot, tick = 0) {
+export function interpretStressorOrigin(/** @type {any} */ type, /** @type {any} */ settlementId, /** @type {any} */ snapshot, tick = 0) {
   const ctx = interpretOriginContext(type, settlementId, snapshot, tick);
   if (!ctx) return null;
-  return { ...ctx, hooks: VARIANT_HOOKS[ctx.variant] || [] };
+  return { ...ctx, hooks: VARIANT_HOOKS[/** @type {keyof typeof VARIANT_HOOKS} */ (ctx.variant)] || [] };
 }
 
-function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
+function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ settlementId, /** @type {any} */ snapshot, tick = 0) {
   if (type === 'betrayal') {
     const hostiles = hostileNeighborsOf(snapshot, settlementId);
     if (hostiles.length) {
@@ -795,7 +795,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
   }
 
   if (type === 'insurgency') {
-    const occupied = (snapshot?.worldState?.stressors || []).some(s =>
+    const occupied = (snapshot?.worldState?.stressors || []).some((/** @type {any} */ s) =>
       s?.type === 'occupation'
       && !['resolved', 'dormant', 'residual'].includes(s.status)
       && (s.affectedSettlementIds || []).map(String).includes(String(settlementId)));
@@ -818,7 +818,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     const id = String(settlementId);
     const entry = snapshot?.byId?.get?.(id);
     const stressorsNow = snapshot?.worldState?.stressors || [];
-    const activeHere = t => stressorsNow.some(s =>
+    const activeHere = (/** @type {any} */ t) => stressorsNow.some((/** @type {any} */ s) =>
       s?.type === t
       && !['resolved', 'dormant', 'residual'].includes(s.status)
       && (s.affectedSettlementIds || []).map(String).includes(id));
@@ -850,7 +850,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
 
   if (type === 'magic_deadzone') {
     const id = String(settlementId);
-    const burnout = (snapshot?.worldState?.stressors || []).some(s =>
+    const burnout = (snapshot?.worldState?.stressors || []).some((/** @type {any} */ s) =>
       s?.type === 'magical_instability'
       && s?.status === 'residual'
       && (s.memoryStrength ?? 0) > 0.15
@@ -871,7 +871,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     const entry = snapshot?.byId?.get?.(String(settlementId));
     const contest = coupContenders(entry?.settlement);
     const leading = contest.challengers[0] || null;
-    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[leading.archetype]) || 'palace_coup';
+    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[/** @type {keyof typeof COUP_VARIANT_BY_ARCHETYPE} */ (leading.archetype)]) || 'palace_coup';
     // A hostile neighbor bankrolling the plot is sponsorship, not a separate
     // variant — the conspiracy's CHARACTER comes from who leads it.
     const hostiles = hostileNeighborsOf(snapshot, settlementId);
@@ -923,12 +923,12 @@ const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
  *
  * @returns {{ worldState: any, woundDown: any[] }}
  */
-export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = null, toType = null } = {}) {
+export function windDownSponsoredStressors(/** @type {any} */ worldState, /** @type {any} */ edge, /** @type {any} */ { tick = 0, now = null, toType = null } = {}) {
   const a = String(edge?.from ?? '');
   const b = String(edge?.to ?? '');
   if (!a || !b) return { worldState, woundDown: [] };
-  const woundDown = [];
-  const stressors = (worldState?.stressors || []).map(stressor => {
+  const woundDown = /** @type {any[]} */ ([]);
+  const stressors = (worldState?.stressors || []).map((/** @type {any} */ stressor) => {
     if (!WAR_STRESSOR_TYPES.includes(stressor?.type)) return stressor;
     if (['resolved', 'dormant', 'residual'].includes(stressor?.status)) return stressor;
     const ctx = stressor?.originContext || {};
@@ -959,7 +959,7 @@ export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = n
  * back onto the relationship edge, feeding relationshipMemory (which finally
  * gets a second mechanical producer).
  */
-export function recordWarResolutionIncidents(worldState, regionalGraph, resolvedStressors = [], tick = 0) {
+export function recordWarResolutionIncidents(/** @type {any} */ worldState, /** @type {any} */ regionalGraph, /** @type {any[]} */ resolvedStressors = [], tick = 0) {
   let states = worldState?.relationshipStates || {};
   let changed = false;
   for (const stressor of resolvedStressors) {

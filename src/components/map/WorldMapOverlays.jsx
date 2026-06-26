@@ -29,6 +29,12 @@ export function WorldMapOverlays({
   // Advance-scaling Stage 4: extra content for the Advance confirm dialog (the
   // autoresolve toggle). null on the flag-OFF path, so the dialog is unchanged.
   advanceExtra = null,
+  // #5: when the realm isn't canonized yet, the Advance dialog carries an inline
+  // Canonize CTA (removed the instant worldCanonized flips true) so the GM never
+  // has to leave the dialog, fail an advance, and hunt for the canonize control.
+  worldCanonized = true,
+  onCanonizeWorld,
+  canonizeBusy = false,
   performAdvanceRealm,
   setAdvanceConfirm,
   importConfirm,
@@ -88,8 +94,35 @@ export function WorldMapOverlays({
         open={!!advanceConfirm}
         title="Advance the realm?"
         body={advanceBody || ''}
-        extra={advanceExtra}
+        extra={
+          (!worldCanonized || advanceExtra) ? (
+            <>
+              {!worldCanonized && (
+                <div style={{
+                  background: swatch['#FAF8F4'], border: `1px solid ${swatch.stressAmber}55`,
+                  borderLeft: `3px solid ${swatch.stressAmber}`, borderRadius: R.sm,
+                  padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
+                }}>
+                  <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
+                    This realm isn't canonized yet — its history can't advance until it is.
+                    Canonize now to lock the world and begin its timeline.
+                  </div>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={onCanonizeWorld}
+                    disabled={canonizeBusy}
+                  >
+                    {canonizeBusy ? 'Canonizing…' : 'Canonize the world'}
+                  </Button>
+                </div>
+              )}
+              {advanceExtra}
+            </>
+          ) : null
+        }
         confirmLabel="Advance Realm"
+        confirmDisabled={!worldCanonized}
         onConfirm={performAdvanceRealm}
         onCancel={() => setAdvanceConfirm(false)}
       />
@@ -123,12 +156,6 @@ export function WorldMapOverlays({
 
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
-
-      {/* Spinner animation */}
-      <style>{`
-        .sf-spin { animation: sf-spin 1.2s linear infinite; }
-        @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
     </>
   );
 }

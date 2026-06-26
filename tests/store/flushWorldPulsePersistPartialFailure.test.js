@@ -142,10 +142,14 @@ describe('flushWorldPulsePersist routes the cloud advance through the atomic RPC
     expect(report).toHaveBeenCalled();
   });
 
-  test('a stale_tick no-op (applied:false) is treated as cloud-coherent success, not a pending failure', async () => {
+  test('a FORWARD-advance stale_tick no-op (applied:false) surfaces a conflict, not a silent success', async () => {
     const report = vi.fn();
     initPersistFailureReporter(report);
-    // The guard rejected a duplicate re-apply: the cloud already holds this tick.
+    // A forward advance (backward falsy) whose guard returns applied:false means the
+    // cloud already advanced to/past this tick — a CONCURRENT same-tick advance won the
+    // race. THIS write did NOT land, so it must be surfaced as a conflict (cloud-pending
+    // + reported failure) so the caller can warn + reload, NOT reported as success that
+    // silently drops this tab's locally-advanced world on reload.
     campaignService.persistWorldPulseAdvance.mockResolvedValueOnce({ applied: false, reason: 'stale_tick' });
 
     const out = await flushWorldPulsePersist({
@@ -153,6 +157,29 @@ describe('flushWorldPulsePersist routes the cloud advance through the atomic RPC
       campaignPersist: { snapshot: advancedSnapshot(1) },
       persistUpdates: updates,
       campaignId: CAMPAIGN_ID,
+    });
+
+    expect(out.ok).toBe(false);
+    expect(out.conflict).toBe(true);
+    expect(out.campaignSynced).toBe(false);
+    expect(report).toHaveBeenCalled();
+  });
+
+  test('a BACKWARD/non-advancing stale_tick no-op (applied:false) is still cloud-coherent success (last-write-wins preserved)', async () => {
+    const report = vi.fn();
+    initPersistFailureReporter(report);
+    // The undo / apply-proposal / record-party-impact path passes backward:true
+    // (expectedTick=null, so the guard is skipped); an applied:false there can only
+    // mean an id-keyed retry already landed coherently — success, no conflict. This
+    // proves the conflict surfacing does NOT regress the last-write-wins path.
+    campaignService.persistWorldPulseAdvance.mockResolvedValueOnce({ applied: false, reason: 'stale_tick' });
+
+    const out = await flushWorldPulsePersist({
+      result: { ok: true, tick: 1 },
+      campaignPersist: { snapshot: advancedSnapshot(1) },
+      persistUpdates: updates,
+      campaignId: CAMPAIGN_ID,
+      backward: true,
     });
 
     expect(out).toEqual({ ok: true, savesFailed: 0, campaignSynced: true });

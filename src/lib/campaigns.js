@@ -115,6 +115,11 @@ function campaignFromRow(row) {
       shareKind: row.share_kind || 'map',
       galleryDescription: row.gallery_description || '',
       galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+      // NOTE: the 088 gallery columns (image_url/alt/importable/world_sections) are
+      // intentionally NOT selected here — the campaign-load path runs for every user
+      // on every page and must not depend on 088 being applied. The share editor
+      // seeds those from defaults on edit (a minor pre-fill gap); revisit once 088 is
+      // universally live. See [[share-to-gallery-redesign]].
     };
   }
 

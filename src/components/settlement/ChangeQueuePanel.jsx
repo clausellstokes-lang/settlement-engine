@@ -33,10 +33,18 @@ import { INK, MUTED, BODY, BORDER, CARD, GOLD_TXT, sans, FS, SP, R, swatch } fro
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
+// Stable empty-array identity for the selector below. A fresh `[]` literal in the
+// selector returns a NEW reference on every call; useStore (useSyncExternalStore)
+// compares snapshots with Object.is, so a new array each render reads as a changed
+// store and re-renders forever — "Maximum update depth exceeded" (React #185) the
+// instant this panel mounts on a save with no staged orders (the common case). One
+// frozen module-scoped array keeps the empty snapshot referentially stable.
+const EMPTY_ORDERS = Object.freeze([]);
+
 export default function ChangeQueuePanel({ saveId, active = true, onCommitted }) {
   // Subscribe to THIS save's slice of the queue map so the panel re-renders on
   // add/cancel without reacting to a foreign settlement's queue.
-  const orders = useStore(s => (s.changeQueues || {})[String(saveId)] || []);
+  const orders = useStore(s => (s.changeQueues || {})[String(saveId)] || EMPTY_ORDERS);
   const flushing = useStore(s => s.changeQueueFlushing);
   const cancelQueuedChange = useStore(s => s.cancelQueuedChange);
   const flushQueue = useStore(s => s.flushQueue);

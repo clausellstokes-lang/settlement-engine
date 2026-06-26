@@ -56,15 +56,21 @@ function nowIso() {
   return wallClockNow();
 }
 
+/**
+ * @param {any} value
+ * @param {number} [fallback]
+ */
 function finiteNumber(value, fallback = 0) {
   return Number.isFinite(value) ? value : fallback;
 }
 
+/** @param {any} value */
 function clamp01(value) {
   const n = finiteNumber(value, 0);
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any} value */
 function human(value) {
   if (!value) return '';
   return String(value)
@@ -72,37 +78,48 @@ function human(value) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
+/** @param {any} kind */
 function impactLabel(kind) {
-  return IMPACT_LABELS[kind] || human(kind) || 'Regional pressure';
+  return /** @type {any} */ (IMPACT_LABELS)[kind] || human(kind) || 'Regional pressure';
 }
 
+/** @param {any} transition */
 function transitionLabel(transition) {
-  return TRANSITION_LABELS[transition] || human(transition) || 'Update';
+  return /** @type {any} */ (TRANSITION_LABELS)[transition] || human(transition) || 'Update';
 }
 
+/** @param {any} graph */
 function nodeNameMap(graph) {
-  return new Map((graph.nodes || []).map(node => [String(node.id), node.name || String(node.id)]));
+  return new Map((graph.nodes || []).map((/** @type {any} */ node) => [String(node.id), node.name || String(node.id)]));
 }
 
+/** @param {any} graph */
 function channelMap(graph) {
-  return new Map((graph.channels || []).map(channel => [String(channel.id), channel]));
+  return new Map((graph.channels || []).map((/** @type {any} */ channel) => [String(channel.id), channel]));
 }
 
+/**
+ * @param {any} graph
+ * @param {any} impactId
+ */
 function eventForImpact(graph, impactId) {
   if (!impactId) return null;
-  return (graph.eventLog || []).find(event =>
+  return (graph.eventLog || []).find((/** @type {any} */ event) =>
     Array.isArray(event.impactIds) && event.impactIds.map(String).includes(String(impactId))
   ) || null;
 }
 
+/** @param {any[]} goods */
 function maxCriticality(goods = []) {
   return (goods || []).reduce((max, good) => Math.max(max, goodCriticality(good)), 0);
 }
 
+/** @param {any[]} values */
 function compactIds(values = []) {
   return [...new Set((values || []).filter(Boolean).map(String))];
 }
 
+/** @param {any} impact */
 function pathSettlementIds(impact) {
   return compactIds([
     impact.sourceSettlementId,
@@ -111,6 +128,10 @@ function pathSettlementIds(impact) {
   ]);
 }
 
+/**
+ * @param {any} impact
+ * @param {any} [transition]
+ */
 function scoreImpact(impact, transition = 'queued') {
   const severity = clamp01(impact.severity);
   const pathCount = pathSettlementIds(impact).length;
@@ -171,6 +192,10 @@ function scoreImpact(impact, transition = 'queued') {
   return { score, reasons };
 }
 
+/**
+ * @param {any} impact
+ * @param {any} [transition]
+ */
 function significanceForImpact(impact, transition = 'queued') {
   const severity = clamp01(impact.severity);
   const pathCount = pathSettlementIds(impact).length;
@@ -189,12 +214,18 @@ function significanceForImpact(impact, transition = 'queued') {
   };
 }
 
+/** @param {any} impact */
 function scopeForImpact(impact) {
   if (pathSettlementIds(impact).length >= 3 || (impact.waveDepth || 0) > 0) return 'realm';
   if (impact.sourceSettlementId && impact.targetSettlementId && String(impact.sourceSettlementId) !== String(impact.targetSettlementId)) return 'regional';
   return 'settlement';
 }
 
+/**
+ * @param {any} impact
+ * @param {any} transition
+ * @param {any} names
+ */
 function headlineForImpact(impact, transition, names) {
   const label = impactLabel(impact.kind);
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'Unknown settlement';
@@ -210,12 +241,19 @@ function headlineForImpact(impact, transition, names) {
   return `${target} faces ${label.toLowerCase()}`;
 }
 
+/**
+ * @param {any} impact
+ * @param {any} transition
+ * @param {any} names
+ * @param {any} channels
+ * @param {any} event
+ */
 function summaryForImpact(impact, transition, names, channels, event) {
   const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId || 'A regional source';
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'the target';
   const channel = channels.get(String(impact.channelId));
   const channelType = human(impact.channelType || channel?.type || 'regional channel').toLowerCase();
-  const goods = (impact.goods || []).map(g => g.label || g.id).filter(Boolean).slice(0, 3).join(', ');
+  const goods = (impact.goods || []).map((/** @type {any} */ g) => g.label || g.id).filter(Boolean).slice(0, 3).join(', ');
   const eventType = event?.sourceEvent?.type ? human(event.sourceEvent.type).toLowerCase() : null;
   const explanation = impact.explanation || `${source} is pressuring ${target} through a ${channelType}.`;
   const prefix = `${transitionLabel(transition)} via ${channelType}`;
@@ -224,18 +262,26 @@ function summaryForImpact(impact, transition, names, channels, event) {
   return `${prefix}${goodsPart}${eventPart}: ${explanation}`;
 }
 
+/**
+ * @param {any} impact
+ * @param {any} transition
+ */
 function tagList(impact, transition) {
   return compactIds([
     transition,
     impact.kind,
     impact.channelType,
-    ...(impact.goods || []).map(g => g.id || g.label),
+    ...(impact.goods || []).map((/** @type {any} */ g) => g.id || g.label),
     (impact.waveDepth || 0) > 0 ? 'cascade' : null,
   ]);
 }
 
 // Deterministic timestamps: callers thread options.now so replay stamps no
 // wall-clock time; the wall clock is the fallback ONLY when not provided.
+/**
+ * @param {any} entry
+ * @param {any} [options]
+ */
 function normalizeEntry(entry, options = {}) {
   if (!entry?.id) return null;
   const severity = clamp01(entry.severity);
@@ -267,17 +313,22 @@ function normalizeEntry(entry, options = {}) {
   };
 }
 
+/** @param {any} entries */
 function sortEntries(entries) {
-  return entries.slice().sort((a, b) => {
+  return entries.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => {
     if (b.tick !== a.tick) return b.tick - a.tick;
     if (b.score !== a.score) return b.score - a.score;
     return String(b.createdAt).localeCompare(String(a.createdAt));
   });
 }
 
+/**
+ * @param {any} [feed]
+ * @param {any} [options]
+ */
 export function ensureWizardNewsFeed(feed = {}, options = {}) {
   const entries = Array.isArray(feed?.entries)
-    ? feed.entries.map(entry => normalizeEntry(entry, options)).filter(Boolean)
+    ? feed.entries.map((/** @type {any} */ entry) => normalizeEntry(entry, options)).filter(Boolean)
     : [];
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
@@ -287,6 +338,11 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
   };
 }
 
+/**
+ * @param {any} [feed]
+ * @param {any} [ticks]
+ * @param {any} [options]
+ */
 export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
   const amount = Math.max(1, Math.floor(finiteNumber(ticks, 1)));
@@ -297,6 +353,10 @@ export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   };
 }
 
+/**
+ * @param {any} impact
+ * @param {any} [options]
+ */
 export function createWizardNewsEntryFromImpact(impact, options = {}) {
   if (!impact?.id) return null;
   const graph = ensureRegionalGraph(options.graph || {});
@@ -330,6 +390,11 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
   });
 }
 
+/**
+ * @param {any} [beforeGraph]
+ * @param {any} [afterGraph]
+ * @param {any} [options]
+ */
 export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGraph = {}, options = {}) {
   const before = ensureRegionalGraph(beforeGraph || {});
   const after = ensureRegionalGraph(afterGraph || {});
@@ -367,9 +432,14 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
   return sortEntries(entries);
 }
 
+/**
+ * @param {any} [feed]
+ * @param {any[]} [entries]
+ * @param {any} [options]
+ */
 export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
-  const byId = new Map(current.entries.map(entry => [entry.id, entry]));
+  const byId = new Map(current.entries.map((/** @type {any} */ entry) => [entry.id, entry]));
   for (const raw of entries || []) {
     const entry = normalizeEntry(raw, options);
     if (!entry) continue;
@@ -382,10 +452,11 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   };
 }
 
+/** @param {any} [feed] */
 export function summarizeWizardNews(feed = {}) {
   const current = ensureWizardNewsFeed(feed);
-  const major = current.entries.filter(entry => entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR);
-  const notables = current.entries.filter(entry => entry.significance !== WIZARD_NEWS_SIGNIFICANCE.MAJOR);
+  const major = current.entries.filter((/** @type {any} */ entry) => entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR);
+  const notables = current.entries.filter((/** @type {any} */ entry) => entry.significance !== WIZARD_NEWS_SIGNIFICANCE.MAJOR);
   const byTick = [];
   const groups = new Map();
 

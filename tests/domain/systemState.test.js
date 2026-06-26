@@ -140,6 +140,77 @@ describe('deriveSystemState', () => {
     });
     expect(tapped.resourcePressure.value).toBeGreaterThan(flush.resourcePressure.value);
   });
+
+  // A covert IMPOSE_CORRUPTION mark bumps the institution's status to 'impaired'
+  // (withImpairment side effect), but it is hidden by design. Surfacing it as a
+  // visible "impaired institution" resilience risk leaks the covert capture into
+  // public derived state — the inverse of its intent.
+  test('a covert-only institution impairment does not leak as a visible impaired-institution risk', () => {
+    const covertOnly = deriveSystemState({
+      institutions: [
+        {
+          id: 'i1', name: 'City Watch', status: 'impaired',
+          impairments: [{ type: 'corruption', severity: 0.3, covert: true, causeEventId: 'e1' }],
+        },
+      ],
+    });
+    expect(covertOnly.resilience.risks.some(r => /impaired institution/.test(r))).toBe(false);
+
+    // A PUBLIC (non-covert) impairment must still surface as before.
+    const publicImpair = deriveSystemState({
+      institutions: [
+        {
+          id: 'i1', name: 'City Watch', status: 'impaired',
+          impairments: [{ type: 'capacity', severity: 0.5, causeEventId: 'e1' }],
+        },
+      ],
+    });
+    expect(publicImpair.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
+    // The hidden mark also costs no resilience value the public hit does.
+    expect(covertOnly.resilience.value).toBeGreaterThan(publicImpair.resilience.value);
+  });
+
+  // A mixed institution (one covert mark + one public impairment) is genuinely,
+  // publicly impaired — it must still count.
+  test('an institution with a covert AND a public impairment still counts as impaired', () => {
+    const mixed = deriveSystemState({
+      institutions: [
+        {
+          id: 'i1', name: 'City Watch', status: 'impaired',
+          impairments: [
+            { type: 'corruption', severity: 0.3, covert: true, causeEventId: 'e1' },
+            { type: 'capacity', severity: 0.5, causeEventId: 'e2' },
+          ],
+        },
+      ],
+    });
+    expect(mixed.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
+  });
+
+  // The resilience impaired-institution count reads the REAL entity status
+  // vocabulary (status.js: active|impaired|removed|destroyed|vacant). The old code
+  // also matched a 'critical' status the entity model never emits ('critical' is a
+  // capacity/severity BAND elsewhere, never a status) — a dead branch. This pins
+  // the reconciliation: a stray status:'critical' is NOT counted as impaired, while
+  // a real status:'impaired' is.
+  test('resilience counts only the real impaired status, not the never-emitted critical', () => {
+    const stray = deriveSystemState({
+      institutions: [
+        // A non-vocabulary status with a degrading impairment. effectiveStatus would
+        // call it impaired, but countByStatus reads the literal status field, so a
+        // mislabeled 'critical' must contribute NO impaired-institution risk.
+        { id: 'i1', name: 'Mislabeled', status: 'critical', impairments: [] },
+      ],
+    });
+    expect(stray.resilience.risks.some(r => /impaired institution/.test(r))).toBe(false);
+
+    const real = deriveSystemState({
+      institutions: [
+        { id: 'i1', name: 'City Watch', status: 'impaired', impairments: [{ type: 'capacity', severity: 0.5, causeEventId: 'e1' }] },
+      ],
+    });
+    expect(real.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
+  });
 });
 
 describe('compareSystemState', () => {

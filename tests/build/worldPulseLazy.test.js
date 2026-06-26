@@ -84,11 +84,10 @@ describe('first-paint — worldPulse simulation is lazy in campaignWorldPulseSli
     expect(sliceCode).toMatch(/from\s+['"][^'"]*\/worldPulse\/simulationRules\.js['"]/);
   });
 
-  it('getCampaignWorldState stays SYNCHRONOUS (aiSlice reads its result sync)', () => {
-    // aiSlice.buildDailyLifeRelationshipMemory does
-    //   const worldState = state.getCampaignWorldState?.(id) || campaign.worldState
-    // and uses worldState IMMEDIATELY (not awaited). If this became async it would
-    // return a Promise and silently break that consumer — so guard it here.
+  it('getCampaignWorldState stays SYNCHRONOUS (sync consumers read its result inline)', () => {
+    // Store consumers call state.getCampaignWorldState?.(id) and use the result
+    // IMMEDIATELY (not awaited). If it became async it would return a Promise and
+    // silently break those consumers — so guard the sync contract here.
     expect(sliceCode).toMatch(/getCampaignWorldState:\s*\(campaignId\)\s*=>/);
     expect(sliceCode).not.toMatch(/getCampaignWorldState:\s*async/);
   });
@@ -122,7 +121,6 @@ describe('first-paint — worldPulse barrel static-importer burndown (src/store)
   // Baseline at HEAD 8e10816 AFTER this lane's fix. Drive this to [] by lazying
   // / inverting each one; this slice is intentionally ABSENT.
   const ALLOWED_STATIC_BARREL_IMPORTERS = Object.freeze([
-    'src/store/aiSlice.js',
     'src/store/campaignSlice.js',
     'src/store/campaignRegionalSlice.js',
     'src/store/campaignPulseHelpers.js',

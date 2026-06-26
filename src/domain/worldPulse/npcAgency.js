@@ -172,11 +172,17 @@ const GOALS = [
   'survive_crisis',
 ];
 
+/** @param {any} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/**
+ * @param {any} saveId
+ * @param {any} npc
+ * @param {any} index
+ */
 export function npcId(saveId, npc, index) {
   return `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || `npc_${index}`)}`;
 }
@@ -186,6 +192,11 @@ export function npcId(saveId, npc, index) {
  * settlement's NPCs, so the dossier reflects corruption acquired (or
  * shed) during world-pulse ticks — not just at generation. Pure + deterministic
  * (no rng/Date); returns the same settlement reference when nothing changed.
+ */
+/**
+ * @param {any} settlement
+ * @param {any} npcStates
+ * @param {any} settlementId
  */
 export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlementId) {
   const npcs = settlement?.npcs;
@@ -205,10 +216,15 @@ export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlement
   return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }
 
+/**
+ * @param {any} rng
+ * @param {any} arr
+ */
 function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
+/** @param {any} npc */
 function notability(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
@@ -219,6 +235,7 @@ function notability(npc = {}) {
   return 0.38;
 }
 
+/** @param {any} npc */
 function dotRankFor(npc = {}) {
   const score = notability(npc);
   if (score >= 0.82) return 3;
@@ -226,6 +243,7 @@ function dotRankFor(npc = {}) {
   return 1;
 }
 
+/** @param {any} npc */
 function inferRoleArchetype(npc = {}) {
   const text = `${npc.name || ''} ${npc.label || ''} ${npc.role || ''} ${npc.title || ''} ${npc.description || ''}`.toLowerCase();
   for (const [role, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
@@ -248,20 +266,33 @@ function factionIdFor(npc = {}, item, index) {
   const direct = npc.factionId || npc.faction || npc.affiliation || npc.factionAffiliation || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
-  const faction = factions[index % Math.max(1, factions.length)];
+  const faction = factions[(/** @type {any} */ (index)) % Math.max(1, factions.length)];
   return faction ? stablePart(faction.id || faction.name || faction.label) : 'unaffiliated';
 }
 
+/**
+ * @param {any} pressureIdx
+ * @param {any} settlementId
+ * @param {any[]} [kinds]
+ */
 function pressureScore(pressureIdx, settlementId, kinds = []) {
   return kinds
-    .map(kind => pressureIdx.get?.(settlementId, kind)?.score || 0)
-    .reduce((max, score) => Math.max(max, score), 0);
+    .map((/** @type {any} */ kind) => pressureIdx.get?.(settlementId, kind)?.score || 0)
+    .reduce((/** @type {any} */ max, /** @type {any} */ score) => Math.max(max, score), 0);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} state
+ */
 function settlementForState(snapshot, state) {
-  return (snapshot?.settlements || []).find(item => String(item.id) === String(state.settlementId)) || null;
+  return (snapshot?.settlements || []).find((/** @type {any} */ item) => String(item.id) === String(state.settlementId)) || null;
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} settlementId
+ */
 function dominantRelationshipContext(snapshot, settlementId) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sid = String(settlementId);
@@ -292,13 +323,18 @@ function dominantRelationshipContext(snapshot, settlementId) {
 const CRISIS_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'rebellion']);
 const CRISIS_SYSTEMS = ['food_security', 'healing_capacity', 'defense_readiness'];
 
+/** @param {any} c */
 function isCrisisCondition(c) {
   if (!c) return false;
   if (CRISIS_ARCHETYPES.has(c.archetype)) return true;
   return c.archetype === 'custom_crisis'
-    && (c.affectedSystems || []).some(s => CRISIS_SYSTEMS.includes(s));
+    && (c.affectedSystems || []).some((/** @type {any} */ s) => CRISIS_SYSTEMS.includes(s));
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} state
+ */
 function contextForNpc(snapshot, state) {
   const item = settlementForState(snapshot, state);
   const tier = item?.settlement?.tier || 'village';
@@ -307,7 +343,7 @@ function contextForNpc(snapshot, state) {
   // archetype is dropped rather than falling back to label, so a cosmetic
   // label edit can never re-trigger a goal rebranch.
   const conditions = active
-    .map(c => (typeof c?.archetype === 'string' ? c.archetype : ''))
+    .map((/** @type {any} */ c) => (typeof c?.archetype === 'string' ? c.archetype : ''))
     .filter(Boolean)
     .sort()
     .slice(0, 3);
@@ -321,6 +357,10 @@ function contextForNpc(snapshot, state) {
   };
 }
 
+/**
+ * @param {any} previousTier
+ * @param {any} nextTier
+ */
 function tierDirection(previousTier, nextTier) {
   const order = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const prev = order.indexOf(previousTier);
@@ -329,6 +369,10 @@ function tierDirection(previousTier, nextTier) {
   return next > prev ? 'promotion' : 'demotion';
 }
 
+/**
+ * @param {any} state
+ * @param {any} context
+ */
 function branchedGoals(state, context) {
   const dir = tierDirection(state.contextTier, context.tier);
   if (context.relationship === 'vassal') {
@@ -363,12 +407,18 @@ function branchedGoals(state, context) {
   return null;
 }
 
+/** @param {any} dotRank */
 function roleSeatFor(dotRank) {
   if (dotRank >= 3) return 'leader_champion';
   if (dotRank === 2) return 'lieutenant_operator';
   return 'agent_protege';
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} snapshot
+ * @param {any} rng
+ */
 export function ensureNpcStates(worldState, snapshot, rng) {
   const npcStates = { ...(worldState.npcStates || {}) };
   for (const item of snapshot.settlements) {
@@ -377,7 +427,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
     // prosperity), used as the fallback rule for legacy saves whose NPCs predate
     // generation-time corruption (no npc.corrupt set).
     const climate = readCorruptionClimate(item.settlement);
-    npcs.forEach((npc, index) => {
+    npcs.forEach((/** @type {any} */ npc, /** @type {any} */ index) => {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
         let st = npcStates[id];
@@ -453,7 +503,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         corruptVector = null;
       }
       const roleArchetype = inferRoleArchetype(npc);
-      const roleDef = NPC_ROLE_ARCHETYPES[roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
+      const roleDef = (/** @type {any} */ (NPC_ROLE_ARCHETYPES))[roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
       const dotRank = dotRankFor(npc);
       npcStates[id] = {
         npcId: id,
@@ -585,6 +635,7 @@ export function pruneNpcStates(worldState, snapshot, { tick = 0, graceTicks = NP
 // Corruption heat lingers (corrupt NPCs stay hot) but cools for the rest.
 const NPC_RELAX = Object.freeze({ momentum: 0.82, ambitionHeat: 0.85, leverage: 0.9, corruptionHeat: 0.92 });
 
+/** @param {any} worldState */
 export function relaxNpcStates(worldState) {
   const npcStates = { ...(worldState.npcStates || {}) };
   for (const [id, s] of Object.entries(npcStates)) {
@@ -624,7 +675,7 @@ export function relaxNpcStates(worldState) {
  * → onset, good → exposure) by the NPC's AUTHORED alignment. `religionActive`
  * false (default) ⇒ deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
  *
- * @param {object} worldState
+ * @param {any} worldState
  * @param {any} snapshot
  * @param {{ fork: (k:string)=>{ random: ()=>number } }} rng
  * @param {{ tick?: number, guildStrengthBy?: Map<string, number>|null, religionActive?: boolean }} [opts]
@@ -664,7 +715,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     const onsetSecurity = clamp01(effSecurity * (1 - patronage.drag));
     const exposureSecurity = climate.security;
     const npcs = item.settlement?.npcs || [];
-    npcs.forEach((npc, index) => {
+    npcs.forEach((/** @type {any} */ npc, /** @type {any} */ index) => {
       const id = npcId(item.id, npc, index);
       const s = npcStates[id];
       if (!s) return;
@@ -749,8 +800,36 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   return { worldState: { ...worldState, npcStates }, exposures };
 }
 
+// Actions that move AGAINST a specific rival — these read as a dangling verb
+// ("X may expose", "X may suppress") unless the headline names WHO. Each maps to a
+// transitive phrasing that takes the subject's name and still trips the past-tense
+// transform in applyWorldPulse (… may expose Y → exposes Y). Everything else keeps
+// the intransitive "may <action>" form. Membership ALSO gates the rival consequence
+// below, so seek_promotion (which carries a rivalTarget only for rivalry tracking)
+// neither names a subject nor sets one back.
+const TARGETED_ACTION_PHRASING = Object.freeze({
+  expose:          (/** @type {string} */ name) => `expose ${name}`,
+  suppress:        (/** @type {string} */ name) => `suppress ${name}`,
+  sabotage:        (/** @type {string} */ name) => `sabotage ${name}`,
+  undermine_rival: (/** @type {string} */ name) => `undermine ${name}`,
+});
+
+/**
+ * @param {any} state
+ * @param {any} actionFamily
+ * @param {any} pressure
+ * @param {any} tick
+ * @param {any} [rivalTarget]
+ */
 function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
-  const action = NPC_ACTION_FAMILIES[actionFamily];
+  const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
+  // A move-against-a-named-rival action with a resolved subject. Drives both the
+  // subject in the headline/summary and the setback applied to that subject.
+  const targetPhrasing = /** @type {((n: string) => string) | undefined} */ (
+    (/** @type {any} */ (TARGETED_ACTION_PHRASING))[actionFamily]
+  );
+  const subject = (targetPhrasing && rivalTarget?.name) ? rivalTarget : null;
+  const actionPhrase = (subject && targetPhrasing) ? targetPhrasing(subject.name) : actionFamily.replace(/_/g, ' ');
   const severity = clamp01(
     pressure * 0.5
     + state.ambition * 0.24
@@ -773,8 +852,8 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     severity,
     probability: Math.min(0.48, 0.06 + severity * 0.36 + state.ambition * 0.08),
     applyMode: proposal ? 'proposal' : 'auto',
-    headline: `${state.name} may ${actionFamily.replace(/_/g, ' ')}`,
-    summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionFamily.replace(/_/g, ' ')}.`,
+    headline: `${state.name} may ${actionPhrase}`,
+    summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
       `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
       `Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`,
@@ -796,6 +875,23 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
       lastActedTick: tick,
       lastAction: actionFamily,
     },
+    // Consequence to the subject of a move-against action (#6): being exposed,
+    // suppressed, undermined, or sabotaged is a setback. We dampen the subject's
+    // momentum + leverage (both feed action severity → a lower probability the next
+    // tick, so their OWN next move lands weaker) and cool their ambition heat —
+    // computed from the subject's snapshot, mirroring how the actor's npcPatch is.
+    // applyNpcPatch applies this to rivalNpcId. Null for non-targeted actions and
+    // for seek_promotion (a self-advancement that doesn't strike at the rival).
+    rivalNpcId: subject?.npcId || null,
+    rivalPatch: subject
+      ? {
+          momentum: clamp01((subject.momentum || 0) - 0.12),
+          leverage: clamp01((subject.leverage || 0) - 0.08),
+          ambitionHeat: clamp01((subject.ambitionHeat || 0) - 0.06),
+          lastTargetedTick: tick,
+          lastTargetedBy: state.npcId,
+        }
+      : null,
     proposalPayload: proposal
       ? {
           kind: 'npc_action',
@@ -855,6 +951,10 @@ function rivalryTargetFor(state, bySettlement) {
 // rank; the condition shifts the local power balance and propagates regionally.
 const GOAL_CULMINATION_THRESHOLD = 0.8;
 
+/**
+ * @param {any} state
+ * @param {any} tick
+ */
 function npcGoalCulmination(state, tick) {
   const nextRank = Math.min(3, (state.dotRank || 1) + 1);
   const goal = String(state.longGoal || 'expand_influence').replace(/_/g, ' ');
@@ -899,6 +999,11 @@ function npcGoalCulmination(state, tick) {
   };
 }
 
+/**
+ * @param {any} state
+ * @param {any} context
+ * @param {any} tick
+ */
 function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
@@ -938,6 +1043,11 @@ function npcGoalRebranch(state, context, tick) {
   };
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressureIdx
+ * @param {any} [options]
+ */
 export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const states = Object.values(snapshot.worldState.npcStates || {});
@@ -964,20 +1074,20 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     const cooldown = state.lastActedTick != null && tick - state.lastActedTick < 2;
     if (cooldown) continue;
 
-    const roleDef = NPC_ROLE_ARCHETYPES[state.roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
-    const actionScores = roleDef.preferredActions.map((actionFamily) => {
-      const action = NPC_ACTION_FAMILIES[actionFamily];
+    const roleDef = (/** @type {any} */ (NPC_ROLE_ARCHETYPES))[state.roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
+    const actionScores = roleDef.preferredActions.map((/** @type {any} */ actionFamily) => {
+      const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
       const pressure = pressureScore(pressureIdx, state.settlementId, action.pressureKinds);
       const ambitionBoost = actionFamily === 'seek_promotion' ? state.ambition * 0.16 + (state.ambitionHeat || 0) * 0.2 : 0;
       const corruptionBoost = state.corruption && ['exploit', 'sabotage', 'hoard', 'undermine_rival'].includes(actionFamily) ? 0.12 : 0;
       return { actionFamily, pressure: clamp01(pressure + ambitionBoost + corruptionBoost) };
     });
 
-    const best = actionScores.sort((a, b) => b.pressure - a.pressure)[0];
+    const best = actionScores.sort((/** @type {any} */ a, /** @type {any} */ b) => b.pressure - a.pressure)[0];
     const minimum = state.dotRank >= 3 ? 0.34 : 0.42;
     if (!best || best.pressure < minimum || state.ambition < 0.42) continue;
 
-    const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose'].includes(best.actionFamily)
+    const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose', 'suppress'].includes(best.actionFamily)
       ? rivalryTargetFor(state, bySettlement)
       : null;
     out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
@@ -986,10 +1096,19 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   return out;
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressureIdx
+ * @param {any} [options]
+ */
 export function deriveNpcCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateNpcRules(snapshot, pressureIdx, options);
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} outcome
+ */
 export function applyNpcPatch(worldState, outcome) {
   if (!outcome?.npcId) return worldState;
   const npcStates = { ...(worldState.npcStates || {}) };
@@ -1023,5 +1142,12 @@ export function applyNpcPatch(worldState, outcome) {
     rivalryTargets: patch.rivalryTargets || current.rivalryTargets || [],
     goalHistory,
   };
+  // #6: a move-against action sets its subject back. Apply the rival consequence
+  // to the targeted NPC's state (guarded — null/absent for non-targeted actions,
+  // so every existing outcome is byte-unchanged). Skip if the rival has no state
+  // row yet (nothing to dampen).
+  if (outcome.rivalNpcId && outcome.rivalPatch && npcStates[outcome.rivalNpcId]) {
+    npcStates[outcome.rivalNpcId] = { ...npcStates[outcome.rivalNpcId], ...outcome.rivalPatch };
+  }
   return { ...worldState, npcStates };
 }

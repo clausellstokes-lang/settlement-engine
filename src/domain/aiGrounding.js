@@ -69,9 +69,10 @@ import { walkUserEdits } from './userEdits.js';
 // payload. The structured profile sections strip prose down to typed
 // fields, so the AI wouldn't see the actual edited text without this
 // dedicated section.
+/** @param {any} settlement */
 function collectUserEditsSummary(settlement) {
   if (!settlement) return [];
-  return walkUserEdits(settlement).map(({ kind, entityIndex, entity, path, record }) => ({
+  return walkUserEdits(settlement).map((/** @type {any} */ { kind, entityIndex, entity, path, record }) => ({
     kind,
     entityIndex,
     label: kind === 'settlement'
@@ -95,7 +96,9 @@ function collectUserEditsSummary(settlement) {
 // capacityModel.js (the one source of truth), so a future lens change
 // updates a single constant rather than two duplicated lists.
 
+/** @param {any} bands */
 function canonicalCapacityBands(bands) {
+  /** @type {Record<string, any>} */
   const out = {};
   for (const name of VISIBLE_CAPACITY_LENSES) {
     if (bands && bands[name] !== undefined) out[name] = bands[name];
@@ -112,8 +115,9 @@ function canonicalCapacityBands(bands) {
 // both surfaces ground on the one magic-profile derivation. Dead-magic worlds
 // carry magicExists:false with the profile's honest 'absent' bands.
 
+/** @param {any} settlement */
 function magicGroundingFacets(settlement) {
-  const m = deriveMagicProfile(settlement);
+  const m = /** @type {any} */ (deriveMagicProfile(settlement));
   if (!m) return null;
   return {
     magicExists: m.magicExists !== false,
@@ -143,10 +147,13 @@ const DEFAULT_OPTIONS = Object.freeze({
 // locked, anything committed via an event (those are timeline-anchored).
 // We walk the settlement's tagged entity arrays and collect references.
 
+/** @param {any} settlement */
 function collectLockedEntities(settlement) {
+  /** @type {any[]} */
   const out = [];
   if (!settlement) return out;
 
+  /** @type {(arr: any, type: any, idKey?: string, nameKey?: string, _tagSettlement?: any) => void} */
   const collect = (arr, type, idKey = 'id', nameKey = 'name', _tagSettlement) => {
     if (!Array.isArray(arr)) return;
     for (const entity of arr) {
@@ -187,6 +194,7 @@ const STATIC_FORBIDDEN = Object.freeze([
   'Removing or replacing any entity tagged as user-authored.',
 ]);
 
+/** @param {any} settlement */
 export function forbiddenChanges(settlement) {
   const out = [...STATIC_FORBIDDEN];
   if (!settlement) return out;
@@ -225,11 +233,12 @@ export function forbiddenChanges(settlement) {
 
 const HOOK_SEVERITY_ORDER = { critical: 4, high: 3, medium: 2, low: 1 };
 
+/** @param {any} settlement @param {any} n */
 function topHooksBySeverity(settlement, n) {
   const all = deriveAllStructuredHooks(settlement);
-  const sorted = [...all].sort((a, b) => {
-    const aw = HOOK_SEVERITY_ORDER[a.severity] || 0;
-    const bw = HOOK_SEVERITY_ORDER[b.severity] || 0;
+  const sorted = [...all].sort((/** @type {any} */ a, /** @type {any} */ b) => {
+    const aw = /** @type {Record<string, number>} */ (HOOK_SEVERITY_ORDER)[a.severity] || 0;
+    const bw = /** @type {Record<string, number>} */ (HOOK_SEVERITY_ORDER)[b.severity] || 0;
     return bw - aw;
   });
   return sorted.slice(0, Math.max(0, n));
@@ -240,12 +249,8 @@ function topHooksBySeverity(settlement, n) {
 /**
  * Build the structured grounding envelope.
  *
- * @param {Object} settlement
- * @param {Object} [options]
- * @param {number} [options.topHooks=5]
- * @param {boolean} [options.dominantNpcsOnly=true]
- * @param {boolean} [options.includeContradictions=true]
- * @param {string|null} [options.userDirection=null]
+ * @param {any} settlement
+ * @param {any} [options]
  * @returns {Object} AiGroundingPayload
  */
 export function buildAiGroundingPayload(settlement, options = {}) {
@@ -278,8 +283,8 @@ export function buildAiGroundingPayload(settlement, options = {}) {
     };
   }
 
-  const causal = deriveCausalState(settlement);
-  const capacities = deriveAllCapacities(settlement);
+  const causal = /** @type {any} */ (deriveCausalState(settlement));
+  const capacities = /** @type {any} */ (deriveAllCapacities(settlement));
   const allNpcs = deriveAllNpcProfiles(settlement);
   const lockedEntities = collectLockedEntities(settlement);
 
@@ -315,7 +320,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
     conditions:      deriveAllActiveConditions(settlement),
     threats:         deriveAllThreatProfiles(settlement),
     npcs:            opts.dominantNpcsOnly
-                       ? allNpcs.filter(n => n.rank === 'dominant')
+                       ? allNpcs.filter((/** @type {any} */ n) => n.rank === 'dominant')
                        : allNpcs,
     history:         deriveHistoryBeats(settlement),
     hooks:           topHooksBySeverity(settlement, opts.topHooks),
@@ -362,6 +367,9 @@ const OUTPUT_FORMAT_REMINDER = `Output MUST preserve every proper noun from the 
  * "ignore the facts" would appear at the same authority level as the
  * canonical facts (because it'd live inside `constraints.userDirection`
  * in the serialized dossier JSON).
+ *
+ * @param {any} payload
+ * @param {any} [options]
  */
 export function assemblePromptSections(payload, options = {}) {
   // Build a dossier-safe copy of the payload that omits the user
@@ -390,6 +398,8 @@ export function assemblePromptSections(payload, options = {}) {
 /**
  * Flat array of payload-summary lines for debug / "what went into the
  * prompt?" surfaces.
+ *
+ * @param {any} payload
  */
 export function summarizeGroundingPayload(payload) {
   if (!payload) return [];

@@ -1101,6 +1101,17 @@
 
   // ── Message listener ────────────────────────────────────────────────────
   window.addEventListener('message', async (event) => {
+    // Origin check: this bridge is served from our own origin (/map/index.html)
+    // and embedded by the parent app. Any command claiming another origin is a
+    // third-party trying to drive the bridge. Drop it.
+    if (event.origin !== window.location.origin) return;
+
+    // Source check: the bridge only ever takes commands from its embedder.
+    // Reject anything not posted by window.parent (sibling iframes, popups,
+    // a stray window holding a ref). Mirrors the parent-side check in
+    // src/lib/mapBridge.js.
+    if (event.source !== window.parent) return;
+
     const data = event?.data;
     if (!data || typeof data !== 'object') return;
     const { type, _rid } = data;

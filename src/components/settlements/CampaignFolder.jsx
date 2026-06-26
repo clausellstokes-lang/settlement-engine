@@ -8,6 +8,7 @@ const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
 import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, sans, serif_, FS, SP, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
+import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
@@ -26,6 +27,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     return match?.name || match?.settlement?.name || String(id);
   };
   const isMobile = useIsMobile();
+  // Disable Advance while a tick is already running for THIS campaign — the store
+  // also no-ops a re-entrant advance, but greying the button stops the double-click
+  // from queuing a second intent + gives the DM visible feedback the tick is busy.
+  const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -109,12 +114,14 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               variant="secondary"
               size="sm"
               icon={<Clock size={10}/>}
-              onClick={(e) => { e.stopPropagation(); onAdvanceTime?.(campaign.id); }}
-              disabled={settlements.length === 0 || !worldCanonized}
-              title={worldCanonized
-                ? 'Advance the campaign world and open Wizard News on the map'
-                : 'Canonize this campaign world on the World Map before advancing time'}>
-              Advance Time
+              onClick={(e) => { e.stopPropagation(); if (!advanceInFlight) onAdvanceTime?.(campaign.id); }}
+              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
+              title={!worldCanonized
+                ? 'Canonize this campaign world on the World Map before advancing time'
+                : advanceInFlight
+                  ? 'Advancing the world…'
+                  : 'Advance the campaign world and open Wizard News on the map'}>
+              {advanceInFlight ? 'Advancing…' : 'Advance Time'}
             </Button>
             <Button
               variant="ghost"

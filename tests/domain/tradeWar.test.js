@@ -211,6 +211,23 @@ describe('trade war — per-commodity order-independence', () => {
     expect(tw.tradeWarState['buyer:grain'].winnerId).toMatch(/grain/);
     expect(tw.tradeWarState['buyer:iron'].winnerId).toMatch(/ore/);
   });
+
+  test('the prize ledger persists the REAL buyer + commodity ids (not just the slugged key)', () => {
+    // The public realm-share resolves trade-war display names from these persisted
+    // ids; without them a public reader can only un-slug the prizeId key, which
+    // renders names as slugs. Assert the real ids are stored on every prize entry.
+    const { saves, channels, edges, settlementIds } = grainContestFixture();
+    const campaign = tradeCampaign({}, { settlementIds, edges, channels });
+    const snap = snapshotFor(campaign, saves);
+    const tw = evaluateTradeWar({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('persist-ids'), tick: 7, now: NOW, rules: { warLayerEnabled: true } });
+
+    const entries = Object.values(tw.tradeWarState);
+    expect(entries.length).toBeGreaterThan(0);
+    for (const entry of entries) {
+      expect(entry.buyerId).toBe('buyer');
+      expect(entry.commodityId).toBe('grain');
+    }
+  });
 });
 
 describe('trade war — anti-oscillation cooldown soak', () => {

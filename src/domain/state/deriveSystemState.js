@@ -30,6 +30,7 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { prosperityRank } from '../../data/constants.js';
+import { isCovertOnlyImpairment } from '../entities/status.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -117,8 +118,17 @@ function deriveResilience(s) {
     risks.push('Single-export dependency');
   }
 
-  // Impaired/degraded institutions
-  const impaired = countByStatus(s.institutions, ['impaired', 'critical']);
+  // Impaired/degraded institutions. A COVERT mark (an institution-scope Impose
+  // Corruption that quietly captured a node) bumps the institution's status to
+  // 'impaired' via withImpairment, but it is hidden by design — surfacing it as a
+  // visible "impaired institution" risk here would leak the covert capture into
+  // public derived state. Exclude institutions whose impairment is solely covert.
+  // 'impaired' is the ONLY degraded status the entity model emits (see
+  // status.js EntityStatus: active|impaired|removed|destroyed|vacant). The old
+  // list also counted 'critical', which no institution ever carries — a dead
+  // branch ('critical' is a capacity/severity BAND elsewhere, never a status),
+  // so it matched nothing and only misled the reader. Reconciled to the real status.
+  const impaired = countByStatus(s.institutions, ['impaired'], { excludeCovertOnly: true });
   if (impaired > 0) {
     value -= Math.min(15, impaired * 4);
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
@@ -370,10 +380,16 @@ function readWarReligionMovement(s) {
 
 function econOf(s) { return s?.economicState || {}; }
 
-function countByStatus(items, statuses) {
+function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
   if (!Array.isArray(items)) return 0;
   const set = new Set(statuses);
-  return items.filter(i => set.has(String(i?.status || '').toLowerCase())).length;
+  return items.filter(i => {
+    if (!set.has(String(i?.status || '').toLowerCase())) return false;
+    // A covert mark bumps status to 'impaired' but must not read as visibly
+    // impaired: skip an item whose status is driven SOLELY by covert impairments.
+    if (excludeCovertOnly && isCovertOnlyImpairment(i)) return false;
+    return true;
+  }).length;
 }
 
 /**

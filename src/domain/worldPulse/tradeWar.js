@@ -229,6 +229,28 @@ function deriveIncumbent(supplierStrengths) {
 }
 
 /**
+ * The set of prize keys that a LIVE (buyer, imported-commodity) pair could
+ * crown this tick — `${stablePart(buyer)}:${stablePart(commodity)}` for every
+ * buyer present in the snapshot and every commodity it still imports, built
+ * with the SAME key construction the persist step uses. Used to prune the
+ * cooldown ledger so a buyer that left the snapshot, or a commodity C no longer
+ * imports, can't leave a stale `tradeWarState` entry growing unbounded — the
+ * pruneFactionStates/pruneNpcStates hygiene the war/occupation layers already
+ * have. Derived purely from the pre-tick snapshot (deterministic).
+ * @param {any} snapshot @param {string[]} buyers @returns {Set<string>}
+ */
+function liveTradeWarPrizeKeys(snapshot, buyers) {
+  const keys = new Set();
+  for (const buyerId of buyers) {
+    if (!snapshot?.byId?.has?.(String(buyerId))) continue;
+    for (const commodityId of importedCommodities(snapshot, buyerId)) {
+      keys.add(`${stablePart(buyerId)}:${stablePart(commodityId)}`);
+    }
+  }
+  return keys;
+}
+
+/**
  * A probability-1 condition outcome (the §A1 stressor-condition shape).
  * @param {{ id: string, archetype: string, targetSaveId: any, severity: number, headline: string,
  *   summary: string, reasons: string[], tick: number, sourceEventTargetId: any, causes: any[] }} args
@@ -301,6 +323,16 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
   // ── Enumerate contests deterministically: every buyer C (codepoint), every
   //    imported commodity K (codepoint). ──────────────────────────────────────
   const buyers = (snapshot?.settlements || []).map((/** @type {any} */ item) => String(item.id)).sort(codepoint);
+
+  // ── Prune stale prize entries before the contest loop: a buyer that left the
+  //    snapshot, or a commodity C no longer imports, can never be re-crowned, so
+  //    its cooldown-ledger entry would otherwise grow unbounded (the prune pass
+  //    warPosture/occupations already have). Drop any entry whose key isn't a
+  //    live (buyer ∈ byId, imported-commodity) prize this tick.
+  const livePrizeKeys = liveTradeWarPrizeKeys(snapshot, buyers);
+  for (const prizeKey of Object.keys(tradeWarState)) {
+    if (!livePrizeKeys.has(prizeKey)) delete tradeWarState[prizeKey];
+  }
 
   for (const buyerId of buyers) {
     for (const commodityId of importedCommodities(snapshot, buyerId)) {
@@ -404,10 +436,14 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       }
 
       // ── Persist the prize state; stamp lastFlipTick only on a real flip. ────
+      // buyerId + commodityId are the REAL ids (not the slugged prizeId key) so a
+      // public reader can resolve display names without un-slugging the key.
       const priorEntry = tradeWarState[prizeId] || {};
       tradeWarState[prizeId] = {
         winnerId: result.winnerId,
         incumbentId: result.incumbentId,
+        buyerId: String(buyerId),
+        commodityId: String(commodityId),
         lastFlipTick: result.changed ? tick : (Number.isFinite(priorEntry.lastFlipTick) ? priorEntry.lastFlipTick : null),
         updatedTick: tick,
       };

@@ -106,6 +106,23 @@ import {
 // priorityMilitary, magicExists-zeroed priorityMagic, resolved route/threat/
 // culture) are NOT stripped here — their raw values are unrecoverable from
 // the snapshot and are restored via the _config path instead.
+/**
+ * The keys pipeline steps write onto the RESOLVED `settlement.config` as purely
+ * derived output (never user input). This union is the single source of truth and
+ * a compiler-checked contract: it types the array below, so a typo or a key that
+ * drifts between the two becomes a type error (the full typecheck covers src/store).
+ * When a pipeline step begins writing a NEW derived key onto config, add it to this
+ * union — the array then forces you to list it too, by construction.
+ * @typedef {(
+ *   'stressType' | 'stressTypes' | 'intendedStressTypes'
+ *   | '_magicTradeOnly' | '_neighbourEconBias' | '_neighbourEconMode' | '_isolationInfraType'
+ *   | '_population'
+ *   | 'tier' | 'magicLevel' | 'terrainType'
+ *   | 'neighborRelationship'
+ * )} DerivedConfigKey
+ */
+
+/** @type {readonly DerivedConfigKey[]} */
 export const DERIVED_CONFIG_KEYS = Object.freeze([
   'stressType', 'stressTypes', 'intendedStressTypes',
   '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
@@ -114,6 +131,13 @@ export const DERIVED_CONFIG_KEYS = Object.freeze([
   'neighborRelationship',
 ]);
 
+/**
+ * Strip the derived-config keys from a resolved config so it can re-enter the
+ * pipeline as raw user input, without stale or falsely-forced derived values.
+ * @template {Record<string, any>} T
+ * @param {T} config
+ * @returns {Omit<T, DerivedConfigKey> | T}
+ */
 export function stripDerivedConfigKeys(config) {
   if (!config || typeof config !== 'object') return config;
   const out = { ...config };
@@ -284,7 +308,16 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
     } catch { /* the war-front seed is best-effort; the committed event stands */ }
   }
 
-  if (event?.partyCaused && campaign) {
+  // Party impact (a party-caused event with a world-scale analog). Gated by
+  // skipRegional like the regional + war-front halves above: on the IMMEDIATE
+  // ripple path this fires recordPartyImpact now, which does its OWN out-of-band
+  // backward cloud write (flushWorldPulsePersist). During a campaign-member
+  // change-queue flush (flushApplyLocalOnly ⇒ skipRegional) that write would
+  // escape the flush's single atomic commit AND its rollback, so we SKIP it here
+  // and DEFER the impact onto worldState.deferredPartyImpacts (see applyEvent),
+  // exactly as the regional + war-front halves are deferred. The next Advance
+  // drains the bucket through the same recordPartyImpact replay path.
+  if (!skipRegional && event?.partyCaused && campaign) {
     try {
       const action = mapEventToPartyImpact(event, activeSaveId);
       const record = afterState.recordPartyImpact;
@@ -333,8 +366,8 @@ export const createSettlementSlice = (set, get) => ({
 
   // Lifetime narrate count, used by useReaderAudience to
   // bump anonymous → intermediate after first narrate spend. Bumped on the
-  // AI generation SUCCESS paths in aiSlice (requestNarrative / requestDailyLife
-  // / requestProgression), where the server-authoritative credit spend has
+  // AI generation SUCCESS paths in aiSlice (requestNarrative /
+  // requestProgression), where the server-authoritative credit spend has
   // just landed — NOT from the unused spendCredits action. Persisted via the
   // store's partialize so the audience signal survives reloads.
   lifetimeNarrateCount: 0,
@@ -1812,6 +1845,33 @@ export const createSettlementSlice = (set, get) => ({
         && activeSaveId && state.phase === 'canon'
         && typeof state.isSettlementClockBound === 'function'
         && state.isSettlementClockBound(activeSaveId)) {
+      // Advance-window write guard (mirrors the changeQueueFlushing floor above).
+      // A world-pulse advance is async: it drains the queue and commits Phase 1,
+      // then awaits the pure interval compute, then in Phase 2 REPLACES the
+      // campaign's worldState wholesale from a clone taken BEFORE the await. A
+      // queueSettlementEvent that lands in that await window would append to the
+      // live worldState.pendingEvents only for Phase 2 to overwrite it (a lost
+      // write: the member event is dropped yet appears to have queued). So while
+      // an advance is in flight for THIS settlement's campaign, no-op the queue
+      // and do NOT fall through to the immediate apply (that would wrongly resolve
+      // a clock-bound member's event off-pulse). The UI already disables both the
+      // Advance button and member event entry during a commit/advance, so this is
+      // the belt-and-suspenders floor. The intention is simply re-issued after the
+      // advance settles, exactly like the changeQueueFlushing case.
+      // Resolve the bound campaign with the SAME String-normalized membership scan
+      // isSettlementClockBound / queueSettlementEvent use (not the exact-match
+      // getCampaignForSettlement), so a number/string id mix still matches and the
+      // fall-through to immediate apply stays blocked.
+      const sid = String(activeSaveId);
+      const boundCampaign = (state.campaigns || []).find(
+        c => (c.settlementIds || []).map(String).includes(sid),
+      ) || null;
+      if (boundCampaign
+          && typeof state.isAdvanceInFlight === 'function'
+          && state.isAdvanceInFlight(boundCampaign.id)) {
+        console.warn('[applyEvent] ignored: a world-pulse advance is in progress for this campaign');
+        return null;
+      }
       const queued = state.queueSettlementEvent(activeSaveId, event);
       if (queued) {
         set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
@@ -1966,6 +2026,24 @@ export const createSettlementSlice = (set, get) => ({
           });
         }
       } catch { /* the deferred war-front stash is best-effort; the committed event stands */ }
+    }
+
+    // Phase 4b — campaign-member commit: the PARTY-IMPACT half. The immediate
+    // ripple path fires recordPartyImpact eagerly (its own backward, out-of-band
+    // cloud write), but under flushApplyLocalOnly rippleEventThroughWorld ran with
+    // skipRegional, so the party impact was NOT recorded. Resolve the impact action
+    // HERE and STASH it onto worldState.deferredPartyImpacts. It is NOT recorded
+    // live — that backward write would escape the flush's single atomic commit and
+    // its rollback (an un-revertable cloud write on a member flush). The next Advance
+    // drains the bucket through the same recordPartyImpact replay it uses for queued
+    // party-caused events, so the impact lands in the same atomic advance + is rolled
+    // back with the flush on failure.
+    if (afterState.flushApplyLocalOnly && committedEvent?.partyCaused && campaign
+        && typeof afterState.stashDeferredPartyImpact === 'function') {
+      try {
+        const action = mapEventToPartyImpact(committedEvent, activeSaveId);
+        if (action) afterState.stashDeferredPartyImpact(campaign.id, action);
+      } catch { /* the deferred party-impact stash is best-effort; the committed event stands */ }
     }
 
     return logEntry;

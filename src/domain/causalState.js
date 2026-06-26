@@ -173,7 +173,7 @@ export const CAUSAL_BANDS = Object.freeze([
  * the substrate is default-optimistic; surfaces only flag pressure
  * when there's evidence for it.
  */
-export function causalBand(score) {
+export function causalBand(/** @type {any} */ score) {
   const s = typeof score === 'number' ? Math.max(0, Math.min(100, score)) : 50;
   if (s >= 75) return 'surplus';
   if (s >= 50) return 'adequate';
@@ -183,7 +183,7 @@ export function causalBand(score) {
 }
 
 /** Round-trip: band → numeric center. */
-export function defaultScoreForCausalBand(band) {
+export function defaultScoreForCausalBand(/** @type {any} */ band) {
   switch (band) {
     case 'surplus':    return 85;
     case 'adequate':   return 62;
@@ -204,13 +204,13 @@ export function defaultScoreForCausalBand(band) {
  * @property {string} reason   — Human-readable explanation.
  */
 
-function push(contributors, source, effect, delta, reason) {
+function push(/** @type {any[]} */ contributors, /** @type {any} */ source, /** @type {any} */ effect, /** @type {any} */ delta, /** @type {any} */ reason) {
   contributors.push({ source, effect, delta, reason });
 }
 
 // ── Population helper ────────────────────────────────────────────────────
 
-function populationOf(settlement) {
+function populationOf(/** @type {any} */ settlement) {
   const pop = settlement?.population;
   if (typeof pop === 'number') return pop;
   if (pop && typeof pop === 'object' && typeof pop.total === 'number') return pop.total;
@@ -228,13 +228,14 @@ function populationOf(settlement) {
 // structured push() calls so the contributors list is the trace of
 // exactly how the score got to its final value.
 
-function deriveFoodSecurity(s) {
+function deriveFoodSecurity(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Supply chain stability for the food_security need
   const chains = deriveAllSupplyChainStates(s);
-  const foodChains = chains.filter(c => c.needKey === 'food_security');
+  const foodChains = chains.filter((/** @type {any} */ c) => c.needKey === 'food_security');
   for (const c of foodChains) {
     if (c.status === 'stable') {
       score += 8; push(contributors, c.id, 'stable', +8, `${c.name} runs normally.`);
@@ -276,8 +277,9 @@ function deriveFoodSecurity(s) {
   return { score, contributors };
 }
 
-function deriveLaborCapacity(s) {
+function deriveLaborCapacity(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Population scaling
@@ -298,8 +300,9 @@ function deriveLaborCapacity(s) {
   return { score, contributors };
 }
 
-function derivePublicLegitimacy(s) {
+function derivePublicLegitimacy(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Read the conserved legitimacy quantity via the governance ledger. This lens IS
@@ -338,8 +341,9 @@ function derivePublicLegitimacy(s) {
   return { score, contributors };
 }
 
-function deriveRulingAuthority(s) {
+function deriveRulingAuthority(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Combination of governing legitimacy + governing faction power. Legitimacy via the
@@ -369,9 +373,9 @@ function deriveRulingAuthority(s) {
   const governingName = s.powerStructure?.governingName || '';
   if (governingName && profiles.length) {
     const lower = governingName.toLowerCase();
-    let govFaction = profiles.find(p => p.name && p.name.toLowerCase() === lower);
+    let govFaction = profiles.find((/** @type {any} */ p) => p.name && p.name.toLowerCase() === lower);
     if (!govFaction) {
-      govFaction = profiles.find(p => {
+      govFaction = profiles.find((/** @type {any} */ p) => {
         if (!p.name) return false;
         const pn = p.name.toLowerCase();
         // Whole-word startsWith: governingName begins with the faction name
@@ -402,8 +406,9 @@ function deriveRulingAuthority(s) {
   return { score, contributors };
 }
 
-function deriveFactionPower(s) {
+function deriveFactionPower(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Healthy faction system = balance with a clear governing center.
@@ -412,7 +417,7 @@ function deriveFactionPower(s) {
   if (profiles.length === 0) {
     return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
   }
-  const powers = profiles.map(p => p.power || 0);
+  const powers = profiles.map((/** @type {any} */ p) => p.power || 0);
   const total = powers.reduce((a, b) => a + b, 0);
   const top = Math.max(...powers);
   const dominantShare = total > 0 ? top / total : 0;
@@ -438,8 +443,9 @@ function deriveFactionPower(s) {
   return { score, contributors };
 }
 
-function deriveTradeConnectivity(s) {
+function deriveTradeConnectivity(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Trade access from generator config. Canonical semantics map EVERY emitted
@@ -460,7 +466,7 @@ function deriveTradeConnectivity(s) {
   // (supplyChainData.js) — the old 'trade' filter matched nothing, so
   // trade chains never fed connectivity at all.
   const chains = deriveAllSupplyChainStates(s);
-  const tradeChains = chains.filter(c => c.needKey === 'trade_entrepot');
+  const tradeChains = chains.filter((/** @type {any} */ c) => c.needKey === 'trade_entrepot');
   for (const c of tradeChains) {
     if (c.status === 'stable') { score += 5; push(contributors, c.id, 'stable', +5, `${c.name} runs normally.`); }
     else if (c.status !== 'stable') {
@@ -605,7 +611,7 @@ function deriveLawOrder(s) {
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
   // teeth. Classified by name like healingLedger's healer pattern.
   const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
-  const lawCount = institutions.filter(i => LAW_ORDER_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const lawCount = institutions.filter((/** @type {any} */ i) => LAW_ORDER_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
   } else if (lawCount === 1) {
@@ -627,7 +633,7 @@ function deriveLawOrder(s) {
     }
   }
   const profiles = cachedFactionProfiles(s);
-  const criminal = profiles.find(p => p.archetype === 'criminal');
+  const criminal = profiles.find((/** @type {any} */ p) => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number' && criminal.power > 30) {
     const c = Math.round((criminal.power - 30) * 0.35);
     if (c !== 0) {
@@ -674,8 +680,9 @@ function deriveLawOrder(s) {
   return { score, contributors };
 }
 
-function deriveHealingCapacity(s) {
+function deriveHealingCapacity(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
@@ -704,8 +711,9 @@ function deriveHealingCapacity(s) {
   return { score, contributors };
 }
 
-function deriveDefenseReadiness(s) {
+function deriveDefenseReadiness(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   const def = s.defenseProfile || {};
@@ -736,8 +744,9 @@ function deriveDefenseReadiness(s) {
   return { score, contributors };
 }
 
-function deriveCriminalOpportunity(s) {
+function deriveCriminalOpportunity(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Direct: blackMarketCapture if available
@@ -751,7 +760,7 @@ function deriveCriminalOpportunity(s) {
 
   // Faction power: criminal factions
   const profiles = cachedFactionProfiles(s);
-  const criminal = profiles.find(p => p.archetype === 'criminal');
+  const criminal = profiles.find((/** @type {any} */ p) => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number') {
     const c = Math.round((criminal.power - 20) * 0.4);
     if (c !== 0) {
@@ -784,7 +793,7 @@ function deriveReligiousAuthority(s) {
   const contributors = [];
 
   const profiles = cachedFactionProfiles(s);
-  const religious = profiles.find(p => p.archetype === 'religious');
+  const religious = profiles.find((/** @type {any} */ p) => p.archetype === 'religious');
   if (religious && typeof religious.power === 'number') {
     const c = Math.round((religious.power - 20) * 0.6);
     score += c;
@@ -824,10 +833,11 @@ function deriveReligiousAuthority(s) {
   return { score, contributors };
 }
 
-function deriveHousingPressure(s) {
+function deriveHousingPressure(/** @type {any} */ s) {
   // INVERTED: high score = LOW pressure (consistent with the other vars
   // where higher = better). Variable name kept for roadmap parity.
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   const pop = populationOf(s);
@@ -835,7 +845,7 @@ function deriveHousingPressure(s) {
   const stressors = canonStressors(s);
   // 'migration' added: /migrant/ does not substring-match 'mass_migration',
   // so the generation stress type never registered as housing pressure.
-  const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
+  const refugeeStress = stressors.find((/** @type {any} */ st) => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
   if (refugeeStress) {
     score -= 18;
     push(contributors, 'stressors.refugee', 'influx', -18, 'Refugee influx strains available housing.');
@@ -860,8 +870,9 @@ function deriveHousingPressure(s) {
   return { score, contributors };
 }
 
-function deriveInfrastructureCondition(s) {
+function deriveInfrastructureCondition(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Anchor infrastructure to the persisted defense scores via the conserved defense ledger:
@@ -884,8 +895,9 @@ function deriveInfrastructureCondition(s) {
   return { score, contributors };
 }
 
-function deriveMagicalStability(s) {
+function deriveMagicalStability(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Read via the conserved magic ledger (canonical band vocabulary). Behaviour-preserving:
@@ -898,7 +910,7 @@ function deriveMagicalStability(s) {
 
   // Arcane factions present?
   const profiles = cachedFactionProfiles(s);
-  const arcane = profiles.find(p => p.archetype === 'arcane');
+  const arcane = profiles.find((/** @type {any} */ p) => p.archetype === 'arcane');
   if (arcane) {
     score += 5;
     push(contributors, arcane.id, 'arcane_present', +5, `${arcane.name} provides arcane oversight.`);
@@ -919,8 +931,9 @@ function deriveMagicalStability(s) {
   return { score, contributors };
 }
 
-function deriveSocialTrust(s) {
+function deriveSocialTrust(/** @type {any} */ s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   // Strongly downstream of public legitimacy. Read via the conserved governance
@@ -944,7 +957,7 @@ function deriveSocialTrust(s) {
   }
 
   // Dominant-NPC removal stress
-  const dominantNpcs = deriveAllNpcProfiles(s).filter(p => p.rank === 'dominant');
+  const dominantNpcs = deriveAllNpcProfiles(s).filter((/** @type {any} */ p) => p.rank === 'dominant');
   if (dominantNpcs.length === 0) {
     score -= 4;
     push(contributors, 'npcs', 'no_dominant', -4, 'No dominant figures anchor public confidence.');
@@ -974,7 +987,7 @@ const DERIVERS = Object.freeze({
   law_order:               deriveLawOrder,
 });
 
-function finalizeVariable(name, raw, contributors) {
+function finalizeVariable(/** @type {any} */ name, /** @type {any} */ raw, /** @type {any} */ contributors) {
   const score = Math.max(0, Math.min(100, Math.round(raw)));
   // Band off the polarity-ADJUSTED score. criminal_opportunity is the lone
   // lower-is-better variable: a high score means rampant crime, which must read
@@ -996,21 +1009,21 @@ function finalizeVariable(name, raw, contributors) {
  * about food security).
  *
  * @param {string} variable   One of SYSTEM_VARIABLES.
- * @param {Object} settlement
- * @returns {Object | null}    SystemVariable, or null for unknown variable.
+ * @param {any} settlement
+ * @returns {any}    SystemVariable, or null for unknown variable.
  */
 export function deriveSystemVariable(variable, settlement) {
-  if (!variable || !DERIVERS[variable]) return null;
+  if (!variable || !(/** @type {any} */ (DERIVERS)[variable])) return null;
   if (!settlement) return finalizeVariable(variable, 50, []);
-  const { score, contributors } = DERIVERS[variable](settlement);
+  const { score, contributors } = /** @type {any} */ (DERIVERS)[variable](settlement);
   return finalizeVariable(variable, score, contributors);
 }
 
 /**
  * Derive the full causal substrate.
  *
- * @param {Object} settlement
- * @returns {Object} {
+ * @param {any} settlement
+ * @returns {any} {
  *   variables: { [name]: SystemVariable },
  *   bands:     { [name]: CausalBand },
  *   scores:    { [name]: number },
@@ -1019,17 +1032,21 @@ export function deriveSystemVariable(variable, settlement) {
  * }
  */
 export function deriveCausalState(settlement) {
+  /** @type {any} */
   const variables = {};
   for (const name of SYSTEM_VARIABLES) {
     if (!settlement) {
       variables[name] = finalizeVariable(name, 50, []);
     } else {
-      const { score, contributors } = DERIVERS[name](settlement);
+      const { score, contributors } = /** @type {any} */ (DERIVERS)[name](settlement);
       variables[name] = finalizeVariable(name, score, contributors);
     }
   }
+  /** @type {any} */
   const bands = {};
+  /** @type {any} */
   const scores = {};
+  /** @type {any} */
   const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [] };
   for (const name of SYSTEM_VARIABLES) {
     const v = variables[name];
@@ -1043,13 +1060,13 @@ export function deriveCausalState(settlement) {
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
 /** Convenience accessor — band for one variable. */
-export function bandForVariable(settlement, variable) {
+export function bandForVariable(/** @type {any} */ settlement, /** @type {any} */ variable) {
   const v = deriveSystemVariable(variable, settlement);
   return v ? v.band : null;
 }
 
 /** Returns all variables currently at strained/critical/collapsed bands. */
-export function pressuresOn(settlement) {
+export function pressuresOn(/** @type {any} */ settlement) {
   const state = deriveCausalState(settlement);
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
 }
@@ -1070,13 +1087,13 @@ const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
  * Human-readable summary of what's wrong (or right) with the settlement
  * right now. Returns an array of single-line strings.
  */
-export function summarizeCausalState(settlement) {
+export function summarizeCausalState(/** @type {any} */ settlement) {
   const state = deriveCausalState(settlement);
   const out = [];
   // Pull lower_is_better variables out of the raw-band lines so the band word
   // never reads inverted; emit them with problem-term phrasing afterwards.
-  const inverted = (name) => variablePolarity(name) === 'lower_is_better';
-  const higherOnly = (band) => state.summary[band].filter((n) => !inverted(n));
+  const inverted = (/** @type {any} */ name) => variablePolarity(name) === 'lower_is_better';
+  const higherOnly = (/** @type {any} */ band) => state.summary[band].filter((/** @type {any} */ n) => !inverted(n));
   if (higherOnly('collapsed').length) {
     out.push(`Collapsed: ${higherOnly('collapsed').join(', ')}.`);
   }
@@ -1090,7 +1107,7 @@ export function summarizeCausalState(settlement) {
   for (const band of ['collapsed', 'critical', 'strained']) {
     const problems = state.summary[band].filter(inverted);
     if (problems.length) {
-      out.push(`${LOWER_IS_BETTER_PROBLEM_TERM[band]}: ${problems.join(', ')}.`);
+      out.push(`${/** @type {any} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band]}: ${problems.join(', ')}.`);
     }
   }
   if (higherOnly('surplus').length) {
@@ -1123,7 +1140,7 @@ const LOWER_IS_BETTER = new Set([
   'criminal_opportunity',
 ]);
 
-export function variablePolarity(variable) {
+export function variablePolarity(/** @type {any} */ variable) {
   if (HIGHER_IS_BETTER.has(variable)) return 'higher_is_better';
   if (LOWER_IS_BETTER.has(variable))  return 'lower_is_better';
   return 'higher_is_better';
@@ -1155,8 +1172,8 @@ const VARIABLE_LABEL = Object.freeze({
   law_order:               'Law & order',
 });
 
-function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {
-  const label = VARIABLE_LABEL[variable] || variable;
+function explainCausalDelta(/** @type {any} */ variable, /** @type {any} */ before, /** @type {any} */ after, /** @type {any} */ change, /** @type {any} */ bandBefore, /** @type {any} */ bandAfter) {
+  const label = /** @type {any} */ (VARIABLE_LABEL)[variable] || variable;
   const polar = variablePolarity(variable);
   const dir = change > 0 ? 'rose' : 'fell';
   const mag = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
@@ -1176,7 +1193,7 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
  *   { variable, before, after, change, bandBefore, bandAfter,
  *     polarity, explanation }
  */
-export function compareCausalState(before, after) {
+export function compareCausalState(/** @type {any} */ before, /** @type {any} */ after) {
   if (!before || !after) return [];
   const out = [];
   for (const name of SYSTEM_VARIABLES) {

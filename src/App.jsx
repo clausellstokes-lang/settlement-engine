@@ -27,6 +27,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sa
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
+import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import HomeLanding from './components/HomeLanding.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 import Button from './components/primitives/Button.jsx';
@@ -231,13 +232,20 @@ export default function App() {
   }, [view]);
 
   // ── Canonical-URL upgrade ─────────────────────────────────────────────────
-  // Silently rewrite legacy ?view= links, unknown paths, and the bare root to
-  // their canonical path (replaceState, no scroll). Non-view query params
-  // (gallery slug, flag overrides) are preserved. Converges in one extra
-  // render: once the URL is canonical, legacy/notFound clear and it no-ops.
+  // Silently rewrite legacy ?view= links and unknown paths to their canonical
+  // path (replaceState, no scroll). Non-view query params (gallery slug, flag
+  // overrides) are preserved. Converges in one extra render: once the URL is
+  // canonical, legacy/notFound clear and it no-ops.
+  //
+  // The bare root ('/') is DELIBERATELY left to the front-door effect above,
+  // which owns it (and rewrites it to /home, not the default /create). Earlier
+  // this effect also claimed '/', so which rewrite won depended on effect
+  // DECLARATION ORDER — front-door first → /home, this first → a /create flash.
+  // Excluding '/' here makes the front door the single, order-independent owner
+  // of the bare root.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (!legacy && !notFound && window.location.pathname !== '/') return;
+    if (!legacy && !notFound) return;
     const sp = new URLSearchParams(window.location.search);
     sp.delete('view');
     const preserved = sp.toString();
@@ -596,10 +604,43 @@ export default function App() {
               (mounted below) is the active post-generation coach. The companion
               onboarding nudge toast survives near the bottom of the tree — it
               doubles as the SAVE_SETTLEMENT intent toast and was never the coach. */}
+          {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
+              from inside Suspense. Without a boundary here that throw escapes to
+              the root and white-screens the whole app. Wrap the routed Suspense
+              so a failed view degrades to a recoverable card — reload pulls the
+              fresh chunk, and the resetKeys={[view]} clears the error the moment
+              the user navigates elsewhere. The boundary sits OUTSIDE Suspense so
+              it also catches a synchronous render throw from the resolved view. */}
+          <FeatureErrorBoundary
+            label="App.route"
+            kind="react.render.route"
+            resetKeys={[view]}
+            fallback={(error, retry) => (
+              <div
+                role="alert"
+                style={{ margin: SP.md, padding: SP.lg, border: `1px solid ${swatch.danger}`, borderRadius: R.lg, background: swatch.dangerBg, color: swatch.danger, fontSize: FS.sm, fontFamily: sans }}
+              >
+                <div style={{ fontWeight: 700, marginBottom: SP.xs }}>This page couldn&rsquo;t be loaded.</div>
+                <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
+                  This can happen after an update. Reload to pull the latest, or try again.
+                </div>
+                <div style={{ display: 'flex', gap: SP.sm }}>
+                  <Button variant="danger" size="sm" onClick={() => window.location.reload()} style={{ minHeight: 44 }}>
+                    Reload
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={retry} style={{ minHeight: 44 }}>
+                    Try again
+                  </Button>
+                </div>
+              </div>
+            )}
+          >
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
-            {/* Home is the marketing landing. First-visit gating routes new
-                visitors here; returning visitors land on /create. */}
+            {/* Home is the Welcome landing. A bare root visit ('/')
+                canonicalizes here for everyone — logged-out and signed-in
+                alike (the front-door effect above); the page adapts its CTAs by
+                auth state. Deep links elsewhere are respected. */}
             {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} isPremium={authTier === 'premium' || isElevated} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {/* The Realm hub. WorldMap is the Realm body (Map + the
@@ -633,6 +674,7 @@ export default function App() {
             {view === 'verify-email'   && <VerifyEmailPage />}
             {view === 'confirm-email'  && <ConfirmEmailPage />}
           </Suspense>
+          </FeatureErrorBoundary>
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
@@ -821,7 +863,10 @@ export default function App() {
           role="button"
           tabIndex={0}
           onClick={clearOnboardingNudge}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') clearOnboardingNudge(); }}
+          // preventDefault on the activation keys: a role="button" element is
+          // not a native button, so Space would otherwise scroll the page (and
+          // Enter could submit an ancestor form) in addition to dismissing.
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearOnboardingNudge(); } }}
           style={{
             position: 'fixed',
             bottom: isMobile ? bottomClearance(CHROME.nudgeLift) : SP.xxl,

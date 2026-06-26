@@ -295,18 +295,22 @@ export function flush({ beacon = false } = {}) {
     // record), don't POST a record-free envelope — nothing to deliver this pass.
     if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
 
-    // Snapshot what we're sending so a concurrent enqueue isn't lost on success.
-    // droppedCount is captured too: the envelope reports the CURRENT _droppedCount,
-    // so on drain we subtract exactly that (not reset to 0) — a concurrent
-    // enqueue+cap between send and drain bumps _droppedCount for the NEXT envelope.
-    const sentCounts = {
-      e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length,
+    // Snapshot the actual record REFERENCES being sent so a concurrent enqueue
+    // isn't lost on success. We drain by IDENTITY, not count: an enqueue during the
+    // in-flight fetch — or a front-shifting capQueue()/purgeRevoked() between send
+    // and drain — would make a count-based splice(0, n) remove the WRONG records and
+    // silently drop newly-enqueued events. droppedCount is captured too: the envelope
+    // reports the CURRENT _droppedCount, so on drain we subtract exactly that (not
+    // reset to 0) — a concurrent enqueue+cap between send and drain bumps
+    // _droppedCount for the NEXT envelope.
+    const sent = {
+      events: _events.slice(), edits: _edits.slice(), snapshots: _snapshots.slice(), pulseEffects: _pulseEffects.slice(),
       dropped: _droppedCount,
     };
 
     if (beacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
       const ok = navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
-      if (ok) { drain(sentCounts); }
+      if (ok) { drain(sent); }
       return;
     }
     if (typeof fetch === 'undefined') return;
@@ -314,7 +318,7 @@ export function flush({ beacon = false } = {}) {
     fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true })
       .then(res => {
         _inFlight = false;
-        if (res && res.ok) { _attempt = 0; drain(sentCounts); }
+        if (res && res.ok) { _attempt = 0; drain(sent); }
         else { scheduleRetry(); }
       })
       .catch(() => { _inFlight = false; scheduleRetry(); });
@@ -325,10 +329,22 @@ function drain(sent) {
   // A successful delivery supersedes any queued backoff retry — cancel it so it
   // can't double-fire a redundant flush after we've already shipped.
   if (_retryTimer) { try { clearTimeout(_retryTimer); } catch { /* ignore */ } _retryTimer = null; }
-  _events.splice(0, sent.e);
-  _edits.splice(0, sent.d);
-  _snapshots.splice(0, sent.s);
-  _pulseEffects.splice(0, sent.p || 0);
+  // Remove exactly the records that were sent, by IDENTITY. A count-based
+  // splice(0, n) from the front would drop the wrong records when the lane was
+  // front-shifted (capQueue drop-oldest / purgeRevoked filter) or appended-to
+  // (a concurrent enqueue) during the in-flight fetch. Identity keeps any record
+  // enqueued after the snapshot for the next envelope. Sets give O(n) drain.
+  const without = (live, shipped) => {
+    if (!shipped.length) return;
+    const gone = new Set(shipped);
+    const keep = live.filter(r => !gone.has(r));
+    live.length = 0;
+    for (const r of keep) live.push(r);
+  };
+  without(_events, sent.events);
+  without(_edits, sent.edits);
+  without(_snapshots, sent.snapshots);
+  without(_pulseEffects, sent.pulseEffects);
   // Subtract only the droppedCount that was actually reported in the sent envelope,
   // preserving any drops that occurred AFTER the snapshot (concurrent enqueue+cap)
   // so the next envelope still carries them. Clamp at 0 for safety.

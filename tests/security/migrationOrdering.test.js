@@ -2,8 +2,8 @@
  * migrationOrdering.test.js — proves the migration-ordering classifier actually
  * CATCHES an out-of-order band, against a SYNTHETIC scenario.
  *
- * Why this exists: migrationSequence050to056.pglite.test.js asserts the REAL
- * 050–056 band has no ordering bug — but that real band is correctly ordered, so
+ * Why this exists: migrationSequenceAll.pglite.test.js asserts the REAL
+ * migration chain has no ordering bug — but that real chain is correctly ordered, so
  * that assertion would pass even if the detection logic were broken (it would
  * "find no bug" because it can't find any bug at all). That is test theater for
  * the DETECTION path. This file forges a band where migration A references a
@@ -79,7 +79,7 @@ describe('migration-ordering — forged out-of-order band is caught (anti-theate
 
   /** Replays the sequence test's apply loop over a forged band and returns the
    *  first ordering verdict it produces (null if none). Mirrors the production
-   *  loop in migrationSequence050to056.pglite.test.js exactly. */
+   *  loop in migrationSequenceAll.pglite.test.js exactly. */
   async function firstOrderingVerdict(bandSql) {
     const db = new PGlite();
     const definedAt = buildDefinedAt(bandSql);

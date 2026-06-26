@@ -172,8 +172,13 @@ export function runPipeline(initialContext, rng, options = {}) {
       }
     }
     // Set the global PRNG context so sub-generators (chance/pick/randInt)
-    // automatically use the seeded PRNG instead of Math.random()
-    setActiveRng(stepRng);
+    // automatically use the seeded PRNG instead of Math.random(). Capture the
+    // prior RNG and restore it in the finally (the rngContext save/restore
+    // pattern the regen pipelines use) — a bare clearActiveRng() wipes to null,
+    // which would silently drop an OUTER seeded run's remaining draws to the
+    // Math.random() fallback if generation is ever nested/batched. Today the
+    // prev is always null (synchronous, non-nested), so this is output-preserving.
+    const prevRng = setActiveRng(stepRng);
     try {
       const patch = step.fn(ctx, stepRng);
       if (patch && typeof patch === 'object') {
@@ -191,7 +196,7 @@ export function runPipeline(initialContext, rng, options = {}) {
       }
       if (onStep) onStep(name, ctx, patch);
     } finally {
-      clearActiveRng();
+      clearActiveRng(prevRng);
     }
   }
 

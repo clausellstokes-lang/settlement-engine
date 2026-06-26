@@ -82,10 +82,11 @@ const CANONICAL_STATUSES = new Set([
  * canonical values pass through. Unknown values default to 'stable'
  * (the most-conservative reading — keeps the engine running).
  */
+/** @param {any} legacyStatus */
 export function canonicalSupplyChainStatus(legacyStatus) {
   if (typeof legacyStatus !== 'string') return 'stable';
   if (CANONICAL_STATUSES.has(legacyStatus)) return legacyStatus;
-  return LEGACY_TO_CANONICAL[legacyStatus] || 'stable';
+  return (/** @type {any} */ (LEGACY_TO_CANONICAL))[legacyStatus] || 'stable';
 }
 
 // ── Chain id helper ──────────────────────────────────────────────────────
@@ -93,6 +94,7 @@ export function canonicalSupplyChainStatus(legacyStatus) {
 // composite id construction in computeActiveChains.js. Consumers
 // querying traces by id from either path see the same shape.
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
@@ -100,6 +102,7 @@ function snakeCase(s) {
     .toLowerCase();
 }
 
+/** @param {any} chain */
 function chainIdFromShape(chain) {
   if (!chain) return null;
   if (typeof chain.id === 'string' && chain.id.startsWith('chain.')) return chain.id;
@@ -179,18 +182,21 @@ export const NEED_HEURISTICS = Object.freeze({
   },
 });
 
+/** @param {any} chain */
 function inferBeneficiaries(chain) {
-  const h = NEED_HEURISTICS[chain.needKey];
+  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
   return h ? [...h.beneficiaries] : ['settlement residents'];
 }
 
+/** @param {any} chain */
 function inferVictims(chain) {
-  const h = NEED_HEURISTICS[chain.needKey];
+  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
   return h ? [...h.victims] : ['settlement residents'];
 }
 
+/** @param {any} chain */
 function inferFailureConsequence(chain) {
-  const h = NEED_HEURISTICS[chain.needKey];
+  const h = (/** @type {any} */ (NEED_HEURISTICS))[chain.needKey];
   if (!h) return 'The settlement adapts; specifics depend on context.';
   // If we already have a strained or scarce status, soften the language.
   return h.failureConsequence;
@@ -212,6 +218,7 @@ const REGIONAL_CHAIN_ARCHETYPES = new Set([
   'regional_tax_revenue_disruption',
 ]);
 
+/** @param {any} chain */
 function searchableChainText(chain) {
   return [
     chain?.name,
@@ -228,6 +235,11 @@ function searchableChainText(chain) {
     .toLowerCase();
 }
 
+/**
+ * @param {any} condition
+ * @param {any} chain
+ * @param {any} haystack
+ */
 function conditionMatchesChain(condition, chain, haystack) {
   if (!condition || !chain) return false;
   const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
@@ -236,29 +248,33 @@ function conditionMatchesChain(condition, chain, haystack) {
   // see activeConditions.js merchant_wealth-retirement note). Kept so saved
   // conditions carrying the old tag still match exportable chains; new economic
   // bite routes through trade_connectivity.
-  if (chain.exportable && systems.some(s => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
+  if (chain.exportable && systems.some((/** @type {any} */ s) => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
   if (chain.entrepot && systems.includes('trade_connectivity')) return true;
   const conditionText = [
     condition.label,
     condition.description,
-    ...(Array.isArray(condition.causes) ? condition.causes.map(c => c.reason || c.effect || c.source) : []),
+    ...(Array.isArray(condition.causes) ? condition.causes.map((/** @type {any} */ c) => c.reason || c.effect || c.source) : []),
   ]
     .filter(Boolean)
     .join(' ')
     .toLowerCase();
   return haystack
     .split(/[^a-z0-9]+/)
-    .filter(token => token.length >= 4)
-    .some(token => conditionText.includes(token));
+    .filter((/** @type {any} */ token) => token.length >= 4)
+    .some((/** @type {any} */ token) => conditionText.includes(token));
 }
 
+/**
+ * @param {any} chain
+ * @param {any} settlement
+ */
 function inferRegionalPressures(chain, settlement) {
   if (!settlement) return [];
   const haystack = searchableChainText(chain);
   return deriveAllActiveConditions(settlement)
-    .filter(condition => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
-    .filter(condition => conditionMatchesChain(condition, chain, haystack))
-    .map(condition => ({
+    .filter((/** @type {any} */ condition) => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
+    .filter((/** @type {any} */ condition) => conditionMatchesChain(condition, chain, haystack))
+    .map((/** @type {any} */ condition) => ({
       id: condition.id,
       archetype: condition.archetype,
       label: condition.label,
@@ -266,13 +282,17 @@ function inferRegionalPressures(chain, settlement) {
       status: condition.status,
       affectedSystems: Array.isArray(condition.affectedSystems) ? [...condition.affectedSystems] : [],
     }))
-    .sort((a, b) => (b.severity || 0) - (a.severity || 0));
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.severity || 0) - (a.severity || 0));
 }
 
+/**
+ * @param {any} baseStatus
+ * @param {any} regionalPressures
+ */
 function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
   if (!regionalPressures.length) return baseStatus;
-  const maxSeverity = Math.max(...regionalPressures.map(p => p.severity || 0));
-  const severeCount = regionalPressures.filter(p => (p.severity || 0) >= 0.55).length;
+  const maxSeverity = Math.max(...regionalPressures.map((/** @type {any} */ p) => p.severity || 0));
+  const severeCount = regionalPressures.filter((/** @type {any} */ p) => (p.severity || 0) >= 0.55).length;
 
   // 'blocked' and 'substituted' gained real producers
   // (unexploited / magically_sustained). Judgment call: a blocked chain
@@ -298,9 +318,13 @@ function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
   return baseStatus;
 }
 
+/**
+ * @param {any} base
+ * @param {any} regionalPressures
+ */
 function appendRegionalFailureContext(base, regionalPressures) {
   if (!regionalPressures.length) return base;
-  const labels = regionalPressures.slice(0, 2).map(p => p.label).join('; ');
+  const labels = regionalPressures.slice(0, 2).map((/** @type {any} */ p) => p.label).join('; ');
   return `${base} Regional pressure: ${labels}.`;
 }
 
@@ -311,6 +335,7 @@ function appendRegionalFailureContext(base, regionalPressures) {
 // reliable signal), falling back to the first processing institution.
 // If neither is present, the controller is 'unattributed'.
 
+/** @param {any} chain */
 function inferController(chain) {
   if (chain?.dependency?.institution) return chain.dependency.institution;
   const first = Array.isArray(chain?.processingInstitutions) ? chain.processingInstitutions[0] : null;
@@ -324,6 +349,7 @@ function inferController(chain) {
 // resulting list is a flat strings array suitable for "what does this
 // chain need?" displays.
 
+/** @param {any} chain */
 function inferDependencies(chain) {
   const out = [];
   if (chain?.resource) out.push(`resource: ${chain.resource}`);
@@ -344,6 +370,7 @@ function inferDependencies(chain) {
 // active, empty otherwise. Custom content as causal objects
 // will expand this; for now it's a faithful read of available data.
 
+/** @param {any} chain */
 function inferSubstitutes(chain) {
   if (chain?.substituteActive) return ['active magical / alternative substitute in use'];
   return [];
@@ -357,9 +384,9 @@ function inferSubstitutes(chain) {
  * Pure; idempotent; lossless on legacy fields. Returns null for
  * nullish input.
  *
- * @param {Object} chain      Active chain entry from
+ * @param {any} chain      Active chain entry from
  *                            settlement.economicState.activeChains[].
- * @param {Object} [settlement] Optional context — reserved for
+ * @param {any} [settlement] Optional context — reserved for
  *                            controller-by-faction-archetype derivation
  *                            in future iterations.
  * @returns {Object|null}
@@ -424,13 +451,14 @@ export function deriveSupplyChainState(chain, settlement) {
 }
 
 /** Enrich every active chain on a settlement. Returns []. for missing data. */
+/** @param {any} settlement */
 export function deriveAllSupplyChainStates(settlement) {
   if (!settlement) return [];
   const chains = settlement.economicState?.activeChains
               || settlement.economy?.activeChains
               || settlement.supplyChains
               || [];
-  return chains.map(c => deriveSupplyChainState(c, settlement)).filter(Boolean);
+  return chains.map((/** @type {any} */ c) => deriveSupplyChainState(c, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ────────────────────────────────────────────────────
@@ -441,18 +469,22 @@ export function deriveAllSupplyChainStates(settlement) {
  * Count chains by canonical status. Returns { stable, strained,
  * scarce, blocked, captured, substituted, collapsing } with zeros.
  */
+/** @param {any} settlement */
 export function supplyChainStatusBreakdown(settlement) {
   const out = {
     stable: 0, strained: 0, scarce: 0, blocked: 0,
     captured: 0, substituted: 0, collapsing: 0,
   };
   for (const c of deriveAllSupplyChainStates(settlement)) {
-    if (out[c.status] !== undefined) out[c.status] += 1;
+    if ((/** @type {any} */ (out))[c.status] !== undefined) (/** @type {any} */ (out))[c.status] += 1;
   }
   return out;
 }
 
-/** True when any chain is in a non-stable state. */
+/**
+ * True when any chain is in a non-stable state.
+ * @param {any} settlement
+ */
 export function hasDisruptedChains(settlement) {
   for (const c of deriveAllSupplyChainStates(settlement)) {
     if (c.status !== 'stable') return true;

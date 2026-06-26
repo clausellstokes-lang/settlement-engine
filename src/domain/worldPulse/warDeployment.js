@@ -111,6 +111,20 @@ const REINFORCEMENT_COST_FLOOR = 0.0; // the module already floors; this is a do
 const AGE_DRAIN_PER_TICK = 0.02;
 const AGE_DRAIN_CAP = 0.35;
 
+// ── HARD SIEGE-DURATION CEILING (the absolute homeostasis backstop). ──────────────
+// The exhaustion/withdrawal arc normally ends a war: a stalled siege drops out of the
+// plausible band (capacity collapses under the scar) and the besieger withdraws. But a
+// `plausible` siege whose roll never lands a fall and whose attacker exhaustion has
+// already SATURATED at 1.0 (so the scar can ratchet no further) has no remaining force
+// pushing it out of the plausible band — it can grind INDEFINITELY. This ceiling is the
+// deterministic floor under that: once a single siege has run SIEGE_MAX_AGE ticks
+// (deploymentAge, incremented once per tick), it auto-resolves. The direction is a PURE
+// function of the contested capacities (NO rng, seed/identity-stable): if the besieging
+// coalition still holds a current-capacity edge the town finally FALLS; otherwise the
+// exhausted besiegers LIFT the siege and withdraw. Either way the siege cannot outlive
+// the ceiling, so a saturated stalemate terminates instead of running forever.
+export const SIEGE_MAX_AGE = 60;
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
@@ -513,10 +527,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any }} args
- * @returns {{ falls: boolean, harass: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number }} args
+ * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
  */
-function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick }) {
+function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -561,6 +575,7 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
     return {
       falls: false,
       harass: verdictAllowsHarassment(verdict),
+      forcedLift: false,
       verdict,
       ratio,
       pFall: 0,
@@ -569,6 +584,33 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
       defenderCurrent,
       band,
       reasons,
+    };
+  }
+
+  // ── HARD SIEGE-DURATION CEILING (deterministic, NO rng). A siege-permitting matchup
+  // that has ground on for SIEGE_MAX_AGE ticks auto-resolves rather than grinding
+  // forever — the backstop for a `plausible` siege whose roll never falls and whose
+  // attacker exhaustion has saturated (so nothing else pushes it out of the band). The
+  // direction is a pure function of the contested capacities: a coalition still holding
+  // a current-capacity edge finally STORMS the walls; an exhausted one that no longer
+  // out-classes the defender LIFTS the siege (forcedLift → the caller withdraws it). ──
+  if (siegeAge >= SIEGE_MAX_AGE) {
+    const falls = coalitionCurrent > defenderCurrent;
+    return {
+      falls,
+      harass: false,
+      forcedLift: !falls,
+      verdict,
+      ratio,
+      pFall: falls ? 1 : 0,
+      roll: 0,
+      coalitionCurrent,
+      defenderCurrent,
+      band: falls ? 'costly_success' : 'withdrawal',
+      reasons: [
+        ...reasons,
+        `Siege ran the hard ${SIEGE_MAX_AGE}-tick ceiling; auto-resolved ${falls ? 'as a storm' : 'as a withdrawal'} (capacity ${coalitionCurrent.toFixed(1)} vs ${defenderCurrent.toFixed(1)}).`,
+      ],
     };
   }
 
@@ -592,6 +634,7 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
   return {
     falls,
     harass: false,
+    forcedLift: false,
     verdict,
     ratio,
     pFall,
@@ -636,7 +679,7 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean }} args.rules
- * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}>, warExhaustion: Record<string, number> }}
+ * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number> }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
@@ -677,7 +720,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // (occupier = strongest besieger, codepoint tie-break; conquered = the target),
   // so a reversed-authored save credits the SAME winner. Folded into the next-tick
   // dispositionStats ledger post-apply by the caller. Empty when nothing resolves.
-  /** @type {Array<{id:string, outcome:'win'|'loss', magnitude?:number}>} */
+  // sourceConquestId is additive provenance on a conquest delta (the resume-dismiss strip
+  // matches on it); downstream applyDispositionDeltas reads only {id, outcome, magnitude}.
+  /** @type {Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>} */
   const dispositionDeltas = [];
   // Copy the ledger; never mutate worldState's record in place.
   const deployments = { ...existing };
@@ -758,7 +803,21 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     if (!besiegers.length) continue;
 
     const defenderItem = snapshot?.byId?.get?.(targetId);
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick });
+    // The siege's age is the LONGEST-committed besieger's deploymentAge (the
+    // committed armies were aged in step 0). This feeds the hard siege-duration
+    // ceiling so a saturated stalemate auto-resolves deterministically.
+    let siegeAge = 0;
+    for (const id of besiegers) {
+      const rec = deployments[id];
+      // String-coerce like the besieger-collection compare at L798: targetId is a
+      // string but a deployment record's targetId is any-typed, so a strict ===
+      // would skip a numeric-id record and under-read the siege age (defeating the
+      // ceiling). Only deployment-based besiegers of THIS target carry a deploymentAge.
+      if (rec?.targetId != null && String(rec.targetId) === targetId) {
+        siegeAge = Math.max(siegeAge, Number(rec.deploymentAge) || 0);
+      }
+    }
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
@@ -793,10 +852,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // defender) — does NOT freeze forever. The besieger gives up: every committed
       // attacker on this target withdraws its army home (a resolved deployment →
       // deploymentReturn). This is what makes a stalled war END instead of locking the
-      // realm into a perpetual siege. Only fires when the verdict forbids a siege roll
-      // (auto_fail / harassment / require_coalition); a `plausible` siege that merely
+      // realm into a perpetual siege. Fires when the verdict forbids a siege roll
+      // (auto_fail / harassment / require_coalition) OR when the hard siege-duration
+      // ceiling forced a lift (verdict.forcedLift — a saturated stalemate that ran the
+      // ceiling without out-classing the defender); a `plausible` siege that merely
       // HELD this tick keeps grinding (drain accrues, step 5). ──────────────────────
-      if (!verdictPermitsSiege(/** @type {any} */ (verdict.verdict))) {
+      if (verdict.forcedLift || !verdictPermitsSiege(/** @type {any} */ (verdict.verdict))) {
         const withdrawn = besiegers.filter(id => deployments[id]?.targetId === targetId);
         if (withdrawn.length) {
           for (const attackerId of withdrawn) {
@@ -916,8 +977,15 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     });
 
     // Disposition ratchet: the conqueror banked a war WIN; the conquered settlement a LOSS.
-    dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1 });
-    dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1 });
+    // Tag each delta with the SOURCE conquest's outcome id so a DM-dismissed conquest can
+    // remove EXACTLY its own win/loss pair (the resume-dismiss residue strip), rather than
+    // matching on {id, outcome} alone — which is order-fragile when an occupier banks two
+    // conquests at once or already carried an unrelated win this tick. sourceConquestId is
+    // additive metadata: applyDispositionDeltas reads only {id, outcome, magnitude}, so a
+    // committed (un-dismissed) delta carries it harmlessly.
+    const conquestId = `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
+    dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1, sourceConquestId: conquestId });
+    dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1, sourceConquestId: conquestId });
 
     // ALL besiegers' armies return home — the siege is over (won). Clear their
     // deployments; deploymentReturn turns each return into a contextual outcome.
@@ -1006,6 +1074,35 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       source: 'war_layer_deploy',
       now,
     }));
+
+    // ── SIEGE INITIATION as a deferrable MAJOR. Opening a NEW siege is a
+    // campaign-altering move (a strategy_deploy, listed in decisionTier's
+    // CAMPAIGN_ALTERING_CANDIDATE_TYPES) the DM should get a say on once pausing lands —
+    // exactly like the conquest that may END it. So surface the deploy as its own major
+    // outcome. It is a SETTLEMENT-STATE no-op (no condition / power_transfer): the home
+    // bleed is the war_drain/army_deployed conditions in step 5 and the front is the
+    // graph mint above; this outcome only ANNOUNCES the march and gives the pause/dismiss
+    // path a handle to suppress its out-of-band residue (the deployment seed + the
+    // war_front channel). targetSaveId is the BESIEGER (the actor mobilizing the army) and
+    // sourceEventTargetId the BESIEGED — the pulseKernel residue strip reads both off this
+    // outcome to drop the new deployment + its front when the siege is deferred/dismissed.
+    const fromName = settlementNameFor(fromId);
+    const chosenName = settlementNameFor(chosenTarget);
+    outcomes.push({
+      id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
+      type: 'strategy_deploy',
+      candidateType: 'strategy_deploy',
+      ruleId: 'war_layer_strategy_deploy',
+      ruleFamily: 'stressor',
+      applyMode: 'auto',
+      probability: 1,
+      targetSaveId: fromId,
+      severity: clamp01(0.5 + fromStrength * 0.2),
+      headline: `${fromName} marches on ${chosenName}`,
+      summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
+      reasons: [`${fromName} is war-ready and ${chosenName} is a feasible target.`],
+      sourceEventTargetId: chosenTarget,
+    });
   }
 
   // ── Step 5: re-upsert the home conditions each tick for every active deployer.

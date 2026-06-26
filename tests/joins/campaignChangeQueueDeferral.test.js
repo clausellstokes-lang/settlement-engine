@@ -343,6 +343,45 @@ describe('Phase 4b — LOCAL/anon mode persists the committed settlement row', (
   });
 });
 
+describe('Phase 4b — a FAILED member commit rolls back the IMMEDIATE crisis-twin state', () => {
+  // The regional half is DEFERRED on a member commit, but the crisis-twin half
+  // (inject/resolve directive) stays IMMEDIATE: an APPLY_STRESSOR event adds a
+  // roaming twin to worldState.stressors during replay. A failed commit must
+  // restore that bucket alongside the deferred/regional ones — else the rolled-back
+  // settlement no longer reflects a stressor the campaign still carries.
+  const applyStressorEvent = (id = 'ev-stressor') => ({
+    id,
+    type: 'APPLY_STRESSOR',
+    targetId: 'supplier',
+    payload: { stressorType: 'famine', label: 'Blighted harvest', severity: 0.7 },
+    cause: 'player_action',
+  });
+
+  test('a failed persist restores worldState.stressors (no phantom crisis twin left behind)', async () => {
+    const store = seedCampaign(makeStore());
+    const stressorsBefore = (worldOf(store).stressors || []).length;
+
+    store.getState().queueChange('supplier', {
+      type: 'event', humanLabel: 'Authoring a famine', payload: { event: applyStressorEvent() },
+    });
+
+    // The atomic campaign-member commit RPC FAILS, so the flush must roll the
+    // pre-flush campaign world-state back.
+    persistWorldPulseAdvance.mockRejectedValueOnce(new Error('cloud down'));
+
+    const res = await store.getState().flushQueue('supplier');
+    expect(res.ok).toBe(false);
+
+    // The crisis-twin the inject directive registered during replay is GONE —
+    // the bucket is back to its pre-flush size (no half-staged stressor).
+    expect((worldOf(store).stressors || []).length).toBe(stressorsBefore);
+    // The deferred buckets are clean too (the whole commit rolled back together).
+    expect(worldOf(store).deferredImpacts || []).toHaveLength(0);
+    // And the queue survives, so the commit is retryable from a clean base.
+    expect(store.getState().listQueuedChanges('supplier')).toHaveLength(1);
+  });
+});
+
 describe('Phase 4b — the Realm cue counts settlements with pending propagation', () => {
   test('pendingPropagationCount + pendingPropagationSettlements count DISTINCT source settlements, and clear after advance', async () => {
     const store = seedCampaign(makeStore());

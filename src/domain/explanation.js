@@ -86,10 +86,11 @@ const ID_PREFIX_TO_TYPE = Object.freeze({
   'district.':    'district',
 });
 
+/** @param {any} id */
 function inferTypeFromId(id) {
   if (typeof id !== 'string') return null;
   for (const prefix of Object.keys(ID_PREFIX_TO_TYPE)) {
-    if (id.startsWith(prefix)) return ID_PREFIX_TO_TYPE[prefix];
+    if (id.startsWith(prefix)) return (/** @type {any} */ (ID_PREFIX_TO_TYPE))[prefix];
   }
   // Bare system-variable name (e.g. 'food_security') maps to system_variable.
   if (SYSTEM_VARIABLES.includes(id)) return 'system_variable';
@@ -100,6 +101,11 @@ function inferTypeFromId(id) {
 
 // ── Envelope helpers ─────────────────────────────────────────────────────
 
+/**
+ * @param {any} type
+ * @param {any} id
+ * @returns {any}
+ */
 function emptyEnvelope(type, id) {
   return {
     entityType: type || null,
@@ -115,6 +121,10 @@ function emptyEnvelope(type, id) {
   };
 }
 
+/**
+ * @param {any} options
+ * @returns {any}
+ */
 function envelope({
   type, id, label,
   causalReason = null,
@@ -146,7 +156,7 @@ function envelope({
 // traces and surface them.
 
 /**
- * @param {Array<Object>} traces
+ * @param {Array<any>} traces
  * @returns {Array<{source: string, effect: string, reason: string, step?: string, delta?: number}>}
  */
 function tracesAsCauses(traces) {
@@ -166,7 +176,7 @@ function tracesAsCauses(traces) {
 }
 
 /**
- * @param {Array<Object>} traces
+ * @param {Array<any>} traces
  * @returns {Array<{target: string, effect: string, reason: string, step?: string}>}
  */
 function tracesAsDownstream(traces) {
@@ -192,10 +202,14 @@ function tracesAsDownstream(traces) {
  * as a processor, finds factions that control it, and surfaces the
  * structural ifRemoved consequences.
  */
+/**
+ * @param {any} settlement
+ * @param {any} institutionId
+ */
 export function explainInstitution(settlement, institutionId) {
   if (!settlement || !institutionId) return null;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const inst = institutions.find(i => i?.id === institutionId || `institution.${snakeCase(i?.name || '')}` === institutionId);
+  const inst = institutions.find((/** @type {any} */ i) => i?.id === institutionId || `institution.${snakeCase(i?.name || '')}` === institutionId);
   if (!inst) return emptyEnvelope('institution', institutionId);
 
   const label = inst.name || institutionId;
@@ -205,7 +219,7 @@ export function explainInstitution(settlement, institutionId) {
 
   // Find chains that use this institution as a processor.
   const chainsUsing = deriveAllSupplyChainStates(settlement)
-    .filter(c => Array.isArray(c.processingInstitutions) && c.processingInstitutions.includes(inst.name));
+    .filter((/** @type {any} */ c) => Array.isArray(c.processingInstitutions) && c.processingInstitutions.includes(inst.name));
   for (const c of chainsUsing) {
     downstreamEffects.push({
       target: c.id,
@@ -216,7 +230,7 @@ export function explainInstitution(settlement, institutionId) {
 
   // Find factions that control this institution.
   const profiles = deriveAllFactionProfiles(settlement);
-  const controllers = profiles.filter(p => Array.isArray(p.controlsInstitutionIds)
+  const controllers = profiles.filter((/** @type {any} */ p) => Array.isArray(p.controlsInstitutionIds)
     && p.controlsInstitutionIds.includes(institutionId));
   for (const p of controllers) {
     causes.push({
@@ -227,7 +241,7 @@ export function explainInstitution(settlement, institutionId) {
   }
 
   // ifRemoved: chains lose a processor; controlling factions lose leverage.
-  const ifRemoved = { consequences: [] };
+  const ifRemoved = /** @type {any} */ ({ consequences: [] });
   for (const c of chainsUsing) {
     ifRemoved.consequences.push(`${c.name} loses a processor and may become ${nextWorseStatus(c.status)}.`);
   }
@@ -247,8 +261,8 @@ export function explainInstitution(settlement, institutionId) {
   };
 
   const references = [
-    ...chainsUsing.map(c => ({ id: c.id, label: c.name, type: 'chain' })),
-    ...controllers.map(p => ({ id: p.id, label: p.name, type: 'faction' })),
+    ...chainsUsing.map((/** @type {any} */ c) => ({ id: c.id, label: c.name, type: 'chain' })),
+    ...controllers.map((/** @type {any} */ p) => ({ id: p.id, label: p.name, type: 'faction' })),
   ];
 
   return envelope({
@@ -266,16 +280,20 @@ export function explainInstitution(settlement, institutionId) {
 }
 
 /** Explain a faction — wants/fears/leverage + dependencies + ifRemoved. */
+/**
+ * @param {any} settlement
+ * @param {any} factionId
+ */
 export function explainFaction(settlement, factionId) {
   if (!settlement || !factionId) return null;
   const factions = settlement.powerStructure?.factions || [];
-  const found = factions.find(f => {
+  const found = factions.find((/** @type {any} */ f) => {
     const slug = snakeCase(f?.faction || f?.name || '');
     return f?.id === factionId || `faction.${slug}` === factionId;
   });
   if (!found) return emptyEnvelope('faction', factionId);
 
-  const profile = deriveFactionProfile(found, settlement);
+  const profile = /** @type {any} */ (deriveFactionProfile(found, settlement));
   if (!profile) return emptyEnvelope('faction', factionId);
 
   const traces = tracesFor(settlement, profile.id);
@@ -305,7 +323,7 @@ export function explainFaction(settlement, factionId) {
   };
 
   // ifRemoved: power vacuum + rival lift
-  const ifRemoved = { consequences: [] };
+  const ifRemoved = /** @type {any} */ ({ consequences: [] });
   ifRemoved.consequences.push(
     `${profile.name} (${profile.archetype}) leaves a ${profile.archetype}-shaped power vacuum.`
   );
@@ -315,13 +333,13 @@ export function explainFaction(settlement, factionId) {
     );
   }
   // Identify a plausible rival
-  const others = deriveAllFactionProfiles(settlement).filter(p => p.id !== profile.id);
-  const rival = others.sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  const others = deriveAllFactionProfiles(settlement).filter((/** @type {any} */ p) => p.id !== profile.id);
+  const rival = others.sort((/** @type {any} */ a, /** @type {any} */ b) => (b.power || 0) - (a.power || 0))[0];
   if (rival) {
     ifRemoved.consequences.push(`Most likely beneficiary: ${rival.name} (${rival.archetype}).`);
   }
 
-  const references = controlled.map(id => ({ id, label: id, type: 'institution' }));
+  const references = controlled.map((/** @type {any} */ id) => ({ id, label: id, type: 'institution' }));
 
   return envelope({
     type: 'faction', id: profile.id, label: profile.name,
@@ -338,13 +356,17 @@ export function explainFaction(settlement, factionId) {
 }
 
 /** Explain an NPC — profile + consequenceIfRemoved + faction link. */
+/**
+ * @param {any} settlement
+ * @param {any} npcId
+ */
 export function explainNpc(settlement, npcId) {
   if (!settlement || !npcId) return null;
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  const found = npcs.find(n => n?.id === npcId);
+  const found = npcs.find((/** @type {any} */ n) => n?.id === npcId);
   if (!found) return emptyEnvelope('npc', npcId);
 
-  const profile = deriveNpcProfile(found, settlement);
+  const profile = /** @type {any} */ (deriveNpcProfile(found, settlement));
   if (!profile) return emptyEnvelope('npc', npcId);
 
   const traces = tracesFor(settlement, profile.id);
@@ -402,10 +424,14 @@ export function explainNpc(settlement, npcId) {
 }
 
 /** Explain a supply chain — controller/dependencies/failureConsequences. */
+/**
+ * @param {any} settlement
+ * @param {any} chainId
+ */
 export function explainSupplyChain(settlement, chainId) {
   if (!settlement || !chainId) return null;
   const all = deriveAllSupplyChainStates(settlement);
-  const chain = all.find(c => c.id === chainId);
+  const chain = all.find((/** @type {any} */ c) => c.id === chainId);
   if (!chain) return emptyEnvelope('chain', chainId);
 
   const traces = tracesFor(settlement, chain.id);
@@ -450,7 +476,7 @@ export function explainSupplyChain(settlement, chainId) {
     outputs: chain.outputs || [],
   };
 
-  const references = (chain.dependencies || []).map(d => ({ id: d, label: d, type: 'unknown' }));
+  const references = (chain.dependencies || []).map((/** @type {any} */ d) => ({ id: d, label: d, type: 'unknown' }));
 
   return envelope({
     type: 'chain', id: chain.id, label: chain.name,
@@ -465,12 +491,17 @@ export function explainSupplyChain(settlement, chainId) {
 }
 
 /** Explain a hook — origin/severity/ifIgnored/possibleResolutions. */
+/**
+ * @param {any} settlement
+ * @param {any} hookId
+ */
 export function explainHook(settlement, hookId) {
   if (!settlement || !hookId) return null;
   const all = deriveAllStructuredHooks(settlement);
-  const hook = all.find(h => h.id === hookId);
+  const hook = all.find((/** @type {any} */ h) => h.id === hookId);
   if (!hook) return emptyEnvelope('hook', hookId);
 
+  /** @type {any[]} */
   const causes = [];
   if (hook.source) {
     causes.push({ source: hook.source, effect: 'surfaces', reason: `Hook surfaced from ${hook.source}.` });
@@ -511,11 +542,16 @@ export function explainHook(settlement, hookId) {
 }
 
 /** Explain an active condition — archetype/severity/affectedSystems. */
+/**
+ * @param {any} settlement
+ * @param {any} conditionId
+ */
 export function explainCondition(settlement, conditionId) {
   if (!settlement || !conditionId) return null;
   const cond = findActiveCondition(settlement, conditionId);
   if (!cond) return emptyEnvelope('condition', conditionId);
 
+  /** @type {any[]} */
   const causes = [];
   if (cond.triggeredAt?.sourceEventType) {
     causes.push({
@@ -532,7 +568,7 @@ export function explainCondition(settlement, conditionId) {
     });
   }
 
-  const downstreamEffects = (cond.affectedSystems || []).map(sys => ({
+  const downstreamEffects = (cond.affectedSystems || []).map((/** @type {any} */ sys) => ({
     target: sys,
     effect: 'pressures',
     reason: `${cond.label} pressures ${sys}.`,
@@ -560,16 +596,20 @@ export function explainCondition(settlement, conditionId) {
     downstreamEffects,
     ifRemoved,
     profile,
-    references: (cond.affectedSystems || []).map(s => ({ id: s, label: s, type: 'system_variable' })),
+    references: (cond.affectedSystems || []).map((/** @type {any} */ s) => ({ id: s, label: s, type: 'system_variable' })),
     sources: ['activeConditions'],
   });
 }
 
 /** Explain an escalation clock — trigger + stages. */
+/**
+ * @param {any} settlement
+ * @param {any} clockId
+ */
 export function explainEscalationClock(settlement, clockId) {
   if (!settlement || !clockId) return null;
   const all = deriveEscalationClocks(settlement);
-  const clock = all.find(c => c.id === clockId);
+  const clock = all.find((/** @type {any} */ c) => c.id === clockId);
   if (!clock) return emptyEnvelope('clock', clockId);
 
   const causes = [{
@@ -609,11 +649,15 @@ export function explainEscalationClock(settlement, clockId) {
 }
 
 /** Explain a history beat. */
+/**
+ * @param {any} settlement
+ * @param {any} beatKey
+ */
 export function explainHistoryBeat(settlement, beatKey) {
   if (!settlement || !beatKey) return null;
   const beats = deriveHistoryBeats(settlement);
   const key = beatKey.startsWith('history.') ? beatKey.slice('history.'.length) : beatKey;
-  const beat = beats[key];
+  const beat = (/** @type {any} */ (beats))[key];
   if (!beat) return emptyEnvelope('history_beat', beatKey);
 
   const causes = [{
@@ -643,16 +687,20 @@ export function explainHistoryBeat(settlement, beatKey) {
 }
 
 /** Explain a substrate variable — contributors are the causes. */
+/**
+ * @param {any} settlement
+ * @param {any} variable
+ */
 export function explainSystemVariable(settlement, variable) {
   if (!settlement || !variable) return null;
   const name = variable.startsWith('var.') ? variable.slice('var.'.length) : variable;
   if (!SYSTEM_VARIABLES.includes(name)) return emptyEnvelope('system_variable', name);
 
-  const v = deriveSystemVariable(name, settlement);
+  const v = /** @type {any} */ (deriveSystemVariable(name, settlement));
   if (!v) return emptyEnvelope('system_variable', name);
 
   // Contributors ARE the causes
-  const causes = (v.contributors || []).map(c => ({
+  const causes = (v.contributors || []).map((/** @type {any} */ c) => ({
     source: c.source,
     effect: c.effect,
     reason: c.reason,
@@ -663,6 +711,7 @@ export function explainSystemVariable(settlement, variable) {
   // declare a few canonical reads — the substrate doesn't yet track
   // these explicitly, but documented the inputs each
   // variable consumes.
+  /** @type {any[]} */
   const downstreamEffects = [];
 
   const profile = {
@@ -682,7 +731,7 @@ export function explainSystemVariable(settlement, variable) {
     downstreamEffects,
     ifRemoved: { consequences: ['System variables are derived, not removable; they reflect the underlying substrate.'] },
     profile,
-    references: (v.contributors || []).map(c => ({ id: c.source, label: c.source, type: 'unknown' })),
+    references: (v.contributors || []).map((/** @type {any} */ c) => ({ id: c.source, label: c.source, type: 'unknown' })),
     sources: ['causalState'],
   });
 }
@@ -693,10 +742,14 @@ export function explainSystemVariable(settlement, variable) {
  * defenseProfile.scores, stressors, neighbours, active conditions),
  * so the explainer surfaces the original surface as a cause.
  */
+/**
+ * @param {any} settlement
+ * @param {any} threatId
+ */
 export function explainThreat(settlement, threatId) {
   if (!settlement || !threatId) return null;
   const all = deriveAllThreatProfiles(settlement);
-  const threat = all.find(t => t.id === threatId);
+  const threat = all.find((/** @type {any} */ t) => t.id === threatId);
   if (!threat) return emptyEnvelope('threat', threatId);
 
   // Origin surface becomes the primary cause
@@ -725,7 +778,7 @@ export function explainThreat(settlement, threatId) {
 
   // Downstream pressures map to system variables
   /** @type {Array<{target: string, effect: string, reason: string, step?: string}>} */
-  const downstreamEffects = (threat.affectedSystems || []).map(sys => ({
+  const downstreamEffects = (threat.affectedSystems || []).map((/** @type {any} */ sys) => ({
     target: sys,
     effect: 'pressures',
     reason: `${threat.label} pressures ${sys}.`,
@@ -760,7 +813,7 @@ export function explainThreat(settlement, threatId) {
   };
 
   const references = (threat.affectedSystems || [])
-    .map(s => ({ id: s, label: s, type: 'system_variable' }));
+    .map((/** @type {any} */ s) => ({ id: s, label: s, type: 'system_variable' }));
 
   return envelope({
     type: 'threat', id: threat.id, label: threat.label,
@@ -778,6 +831,10 @@ export function explainThreat(settlement, threatId) {
  * Explain a capacity. Supply + demand are the
  * two competing pressures; bands derive from supply/demand ratio.
  */
+/**
+ * @param {any} settlement
+ * @param {any} capacityRef
+ */
 export function explainCapacity(settlement, capacityRef) {
   if (!settlement || !capacityRef) return null;
   const name = typeof capacityRef === 'string' && capacityRef.startsWith('capacity.')
@@ -785,7 +842,7 @@ export function explainCapacity(settlement, capacityRef) {
     : capacityRef;
   if (!CAPACITY_NAMES.includes(name)) return emptyEnvelope('capacity', name);
 
-  const profile = deriveCapacityProfile(name, settlement);
+  const profile = /** @type {any} */ (deriveCapacityProfile(name, settlement));
   if (!profile) return emptyEnvelope('capacity', name);
 
   // Supply contributors AND demand contributors both feed into the
@@ -810,7 +867,7 @@ export function explainCapacity(settlement, capacityRef) {
   // are parallel readers of the same ledgers. Surface the substrate
   // variable that shares this lens's inputs as a SIBLING, so a DM
   // doesn't edit the capacity profile expecting the variable to follow.
-  const sibling = (target, label) => downstreamEffects.push({
+  const sibling = (/** @type {any} */ target, /** @type {any} */ label) => downstreamEffects.push({
     target,
     effect: 'sibling_reader',
     reason: `${label} reads the same conserved ledgers as this capacity lens; neither feeds the other.`,
@@ -866,10 +923,14 @@ export function explainCapacity(settlement, capacityRef) {
 /**
  * Explain a district.
  */
+/**
+ * @param {any} settlement
+ * @param {any} districtId
+ */
 export function explainDistrict(settlement, districtId) {
   if (!settlement || !districtId) return null;
   const all = deriveAllDistricts(settlement);
-  const district = all.find(d => d.id === districtId);
+  const district = all.find((/** @type {any} */ d) => d.id === districtId);
   if (!district) return emptyEnvelope('district', districtId);
 
   /** @type {Array<{source: string, effect: string, reason: string, step?: string, delta?: number}>} */
@@ -933,6 +994,10 @@ export function explainDistrict(settlement, districtId) {
  * Returns null for missing settlement; an empty envelope for unknown
  * entity types or missing entities.
  */
+/**
+ * @param {any} settlement
+ * @param {any} ref
+ */
 export function explainEntity(settlement, ref) {
   if (!settlement || !ref) return null;
 
@@ -971,8 +1036,12 @@ export function explainEntity(settlement, ref) {
  * array of `{ type, id, label }` entries suitable for indexing,
  * navigation menus, or the public compendium's listing pages.
  */
+/**
+ * @param {any} settlement
+ */
 export function entityCatalog(settlement) {
   if (!settlement) return [];
+  /** @type {any[]} */
   const out = [];
 
   // Institutions
@@ -998,7 +1067,7 @@ export function entityCatalog(settlement) {
   }
 
   // Hooks
-  for (const h of deriveAllStructuredHooks(settlement)) {
+  for (const h of /** @type {any[]} */ (deriveAllStructuredHooks(settlement))) {
     out.push({ type: 'hook', id: h.id, label: h.text });
   }
 
@@ -1035,7 +1104,7 @@ export function entityCatalog(settlement) {
   }
 
   // Districts
-  for (const d of deriveAllDistricts(settlement)) {
+  for (const d of /** @type {any[]} */ (deriveAllDistricts(settlement))) {
     out.push({ type: 'district', id: d.id, label: d.name });
   }
 
@@ -1050,6 +1119,10 @@ export function entityCatalog(settlement) {
  * + tracesFor. Useful for the AI overlay's "what's connected to this?"
  * surface.
  */
+/**
+ * @param {any} settlement
+ * @param {any} entityId
+ */
 export function relatedTraces(settlement, entityId) {
   if (!settlement || !entityId) return { caused: [], affecting: [], targeting: [] };
   return {
@@ -1061,10 +1134,12 @@ export function relatedTraces(settlement, entityId) {
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {any} status */
 function nextWorseStatus(status) {
   switch (status) {
     case 'stable':       return 'strained';

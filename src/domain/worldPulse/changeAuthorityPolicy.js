@@ -137,7 +137,9 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
   }),
   relationship_evolution: Object.freeze({
     authority: 'severity-gated',
-    module: 'relationshipEvolution.js',
+    // The rule evaluators were extracted from relationshipEvolution.js into the
+    // rule modules in the god-module split; the severity-gated drift gate lives here.
+    module: 'relationshipRulesCore.js',
     consultsProposalFlag: false,
     rationale:
       'Major relationship transitions escalate to proposal on severity alone, independent of the flag.',
@@ -183,7 +185,9 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
   }),
   relationship_label_change: Object.freeze({
     authority: 'always-proposal',
-    module: 'relationshipEvolution.js',
+    // labelProposal (the always-proposal label gate) was extracted into the
+    // helper leaf in the god-module split.
+    module: 'relationshipRuleHelpers.js',
     consultsProposalFlag: false,
     rationale:
       'Every diplomatic relabel built through labelProposal emits a bare applyMode: "proposal". A visible relationship label flip (neutral->rival, allied, vassal rebellion, etc.) is a new premise and is unconditionally offered to the DM. Distinct from relationship_evolution, which is the severity-gated internal-drift path.',

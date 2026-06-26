@@ -272,6 +272,17 @@ button {
   @keyframes sf-goldShimmer { 0%, 100% { background-position: 0% 0; } }
 }
 
+/* primitives/Button — busy-state spinner (globally loaded so off-map busy
+   buttons animate, not just the world-map route) */
+.sf-spin { animation: sf-spin 1.2s linear infinite; }
+@keyframes sf-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-spin { animation: none; }
+}
+
 /* primitives/BottomSheet — slide-up entrance for the mobile bottom sheet */
 @keyframes sf-sheet-up {
   from { transform: translateY(100%); }

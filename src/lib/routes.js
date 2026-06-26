@@ -31,10 +31,10 @@ const DEFAULT_VIEW = 'generate';
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
-  // The staged front door for new visitors: a hero over the same generation
-  // flow as /create. Leftmost nav tab. First-time visitors are routed here on a
-  // bare root visit; returning visitors land on /create — the gate lives in
-  // App's init effect, keyed on a localStorage flag.
+  // The Welcome front door: a hero over the same generation flow as /create.
+  // Leftmost nav tab. A bare root visit ('/') canonicalizes here for EVERYONE —
+  // logged-out visitors see the marketing CTAs, signed-in members the member
+  // CTAs — via App's front-door effect (it rewrites only '/', not deep links).
   { view: 'home',                  path: '/home',                  title: 'Welcome' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (App's NAV array).

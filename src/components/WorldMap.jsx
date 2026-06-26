@@ -41,6 +41,11 @@ import { WorldMapStage } from './map/WorldMapStage.jsx';
 import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
 import { AdvanceAutoResolveToggle } from './map/AdvanceAutoResolveToggle.jsx';
 
+// The share-to-gallery editor mount. A thin store-reading wrapper (sources the
+// active campaign + its members itself) so WorldMap stays under the size ratchet
+// and only threads the open flag, close callback, and the FMG bridge ref.
+const MapShareEditorOverlay = lazy(() => import('./map/MapShareEditorOverlay.jsx'));
+
 const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
 // Mobile-only: the defer-to-desktop wall + read-only dashboard. Lazy so the
 // desktop build never pulls it, and the mobile build only loads it when the
@@ -206,6 +211,12 @@ export default function WorldMap({ onNavigate } = {}) {
     setToast({ kind, text, action });
     toastTimerRef.current = setTimeout(() => setToast(null), action ? 6000 : 2600);
   }, []);
+  // Clear any in-flight toast timer on unmount so the trailing setToast(null)
+  // never fires after the component is gone (a "setState on unmounted" warning,
+  // and a dangling timer). Empty deps — runs the teardown only at unmount.
+  useEffect(() => () => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+  }, []);
 
   // UX Phase 4 — the Realm Inspector state + handlers live in a dedicated hook so
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
@@ -225,6 +236,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const {
     advanceSession, worldPulseBusy, multiTickOn,
     performAdvanceRealm, handleResumeAdvance, handleUndoRealm,
+    performCanonizeWorld, canonizeBusy,
   } = useAdvanceSession({ activeCampaignId, worldPulseInterval, openInspectorAt, showToast });
 
   // Advance-scaling Stage 4: the paused-advance cursor for the active campaign, read
@@ -585,6 +597,11 @@ export default function WorldMap({ onNavigate } = {}) {
     setAdvanceConfirm(true);
   }, [activeCampaignId, worldPulseBusy]);
 
+  // #5: the Advance dialog carries an inline Canonize button while the world is
+  // uncanonized (it removes itself once worldCanonized re-derives true). The handler
+  // + busy state live in useAdvanceSession; this is just the derived gate.
+  const worldCanonized = !!activeCampaign?.worldState?.canonizedAt;
+
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
     const bridge = bridgeRef.current;
@@ -673,41 +690,32 @@ export default function WorldMap({ onNavigate } = {}) {
     pendingImportFile, cancelImportImage, handleImportImage, performImportImage, handleClearImage,
   } = useMapImageImport({ activeCampaignId, setMapBackdrop, clearMapBackdrop, showToast });
 
-  // ── Share map to the gallery (Project 2, blank canvas) ────────────────
+  // ── Share map to the gallery (Project 2) ──────────────────────────────
+  // The toolbar "Share to gallery…" no longer one-shot publishes. It persists
+  // the working map first (so the saved_maps row carries the current map_data
+  // the publish RPC reads), then OPENS the share editor, which owns the full
+  // publish / kind-pick / edit / unshare flow. `sharingMap` covers the brief
+  // persist-and-open window; `shareEditorOpen` drives the overlay mount.
   const [sharingMap, setSharingMap] = useState(false);
-  const handleShareMap = useCallback(async (kind = 'map') => {
+  const [shareEditorOpen, setShareEditorOpen] = useState(false);
+  const handleShareMap = useCallback(async () => {
     if (!activeCampaignId) { showToast('info', 'Select a campaign to share its map.'); return; }
     setSharingMap(true);
     try {
-      // Capture a render-inert gallery thumbnail of the terrain (see mapThumb.js)
-      // BEFORE the persist+upsert, so it rides along in the same map_data that
-      // publish_map reads. Best-effort (null → keeps the placeholder); skips
-      // custom-image maps; stored in galleryThumb, never customBackdrop.
-      const { captureMapThumb } = await import('../lib/mapThumb.js');
-      const thumb = await captureMapThumb({
-        bridge: bridgeRef.current, ownerId: useStore.getState().auth?.user?.id,
-        campaignId: activeCampaignId,
-        skip: !!useStore.getState().mapState.customBackdrop?.imageUrl });
-      if (thumb) useStore.getState().setGalleryThumb(thumb);
-
-      // Persist the latest map AND await its cloud upsert before publishing —
-      // publish_map only flips gallery flags and reads whatever map_data is
-      // already in the saved_maps row, so the row must exist + carry the current
-      // mapState first (a fresh campaign hasn't synced yet → otherwise the RPC
-      // 404s, and an edited one would publish a stale backdrop).
+      // Persist the latest map AND await its cloud upsert BEFORE the editor can
+      // publish — publish_map reads whatever map_data is already in the
+      // saved_maps row, so the row must exist + carry the current mapState first
+      // (a fresh campaign hasn't synced yet → the RPC would 404, and an edited
+      // one would publish a stale backdrop).
       saveCampaignMap(activeCampaignId, useStore.getState().mapState);
       const camp = useStore.getState().campaigns.find(c => c.id === activeCampaignId);
       if (camp) {
         const { campaigns: campaignService } = await import('../lib/campaigns.js');
         await campaignService.upsert(camp);
       }
-      const { shareMap } = await import('../lib/gallery.js');
-      await shareMap(activeCampaignId, { kind });
-      showToast('success', kind === 'map_with_campaign'
-        ? 'Map + settlements shared to the gallery.'
-        : 'Map shared to the gallery as a reusable blank canvas.');
+      setShareEditorOpen(true);
     } catch (err) {
-      showToast('error', err?.message || 'Map share failed.');
+      showToast('error', err?.message || 'Could not prepare the map for sharing.');
     } finally {
       setSharingMap(false);
     }
@@ -721,7 +729,15 @@ export default function WorldMap({ onNavigate } = {}) {
   useEffect(() => {
     const onKey = (e) => {
       const tag = (e.target?.tagName || '').toUpperCase();
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      // Don't hijack typing/selection: text fields, contenteditable, AND
+      // <select> (arrow/letter keys drive its option list — 'a'/'t' must not
+      // switch map mode while a dropdown is focused).
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return;
+      // A modal/focus-trap is open (every house dialog renders
+      // [role="dialog"][aria-modal="true"], including the confirm dialogs this
+      // surface raises). The keymap is a map-canvas affordance; it must stay
+      // quiet while a dialog owns focus, so its keys don't bleed through.
+      if (typeof document !== 'undefined' && document.querySelector('[role="dialog"][aria-modal="true"]')) return;
       if (e.metaKey || e.ctrlKey || e.altKey) {
         // ⌘S = save, ⌘Z handled by store actions (if registered)
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
@@ -865,9 +881,22 @@ export default function WorldMap({ onNavigate } = {}) {
         advanceExtra={multiTickOn ? (
           <AdvanceAutoResolveToggle value={advanceAutoResolve} onChange={setAdvanceAutoResolve} />
         ) : null}
+        // #5: an inline Canonize CTA in the Advance dialog when the world isn't yet
+        // canonized — removed automatically once worldCanonized flips true.
+        worldCanonized={worldCanonized} onCanonizeWorld={performCanonizeWorld} canonizeBusy={canonizeBusy}
         importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
         setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />
+
+      {shareEditorOpen && (
+        <Suspense fallback={null}>
+          <MapShareEditorOverlay
+            open={shareEditorOpen}
+            onClose={() => setShareEditorOpen(false)}
+            bridgeRef={bridgeRef}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

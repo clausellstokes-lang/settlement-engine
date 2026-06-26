@@ -26,7 +26,7 @@ functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 data/        Pure content tables — the moat. ~18k lines: institutionalCatalog,
              namingData, supplyChainData, npcData, historyData, … No logic.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 14-step pipeline; the rest are domain generators
+             steps/ holds the 19-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
@@ -67,9 +67,9 @@ generateEconomy → generatePower → neighbourFactions → factionCorrelationPa
 generatePopulation → generateNarratives → assembleSettlement`.
 
 Determinism matters: same seed ⇒ same settlement. This is what makes the
-property-based and snapshot tests possible. A **Strangler-Fig** migration is in
-flight — legacy `generateSettlement.js` is being replaced by
-`generateSettlementPipeline.js`; both still exist.
+property-based and snapshot tests possible. The **Strangler-Fig** migration is
+COMPLETE — the legacy monolithic `generateSettlement.js` has been removed;
+`generateSettlementPipeline.js` (the registered-step pipeline) is the sole path.
 
 `structuralValidator.js` validates engine output shape; `settlement.schema.js`
 (domain) is the canonical schema and `settlementMigrations.js` upgrades old
@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (83) — schema + RLS policies + credit ledger + version
+- **migrations/** (91) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -143,7 +143,24 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   edit whose campaign snapshot carries the new `worldState.deferredImpacts` key,
   with the cross-settlement regional ripple deferred to the next world-pulse
   Advance; creates no new object, re-affirms the authenticated-only GRANT, and
-  updates the function COMMENT to name both callers) —
+  updates the function COMMENT to name both callers) +
+  **084** (duplicate-saveId hardening for **069**'s `persist_world_pulse_advance`:
+  its ownership pre-check compared owned settlement rows against the raw
+  `jsonb_array_length` of the write-set, so a repeated saveId tripped a false
+  "not owned" abort; 084 recreates the net-current body comparing owned rows against
+  the count of DISTINCT referenced ids instead — every other line, the signature, and
+  the GRANT are 069 verbatim) +
+  **085** (refund_credits service-role gate fix: 033 locked the GRANT to
+  `service_role`, but 009's body opened with an `auth.uid() is null` raise +
+  owner check, so the AI-failure refund — called from the edge via the
+  service-role client — threw every time, charging the user without refunding;
+  085 recreates 009's net-current body, skipping the auth.uid()/ownership raises
+  ONLY when the caller is `service_role`, preserving the authenticated-user
+  checks exactly) +
+  **086** (atomic AI-spend reservation: the global daily/monthly USD cap was
+  checked read-only before the model calls while COGS landed only after, so
+  concurrent generations could collectively overrun the cap; 086 adds a
+  reservation RPC reconciled to actuals) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

@@ -13,15 +13,21 @@ import { TIER_ORDER } from '../../data/constants.js';
 
 const UNHEALTHY_CHAIN_STATUSES = new Set(['strained', 'scarce', 'blocked', 'captured', 'substituted', 'collapsing']);
 
+/** @param {any} input */
 export function settlementFromSave(input) {
   if (!input) return null;
   return input.settlement || input;
 }
 
+/**
+ * @param {any} input
+ * @param {any} settlement
+ */
 function saveIdOf(input, settlement) {
   return input?.id || settlement?.id || null;
 }
 
+/** @param {any} items */
 function uniqueById(items) {
   const out = [];
   const seen = new Set();
@@ -33,24 +39,34 @@ function uniqueById(items) {
   return out;
 }
 
+/** @param {any} settlement */
 function economicOf(settlement) {
   return settlement?.economicState || settlement?.economy || {};
 }
 
+/**
+ * @param {any} settlement
+ * @param {any} save
+ */
 function configOf(settlement, save) {
   return settlement?.config || save?.config || {};
 }
 
+/** @param {any} settlement */
 function routeCutSignals(settlement) {
   const config = settlement?.config || {};
   const cutRoutes = Array.isArray(config._cutRoutes) ? config._cutRoutes : [];
   const conditions = deriveAllActiveConditions(settlement);
-  const conditionCuts = conditions.filter(c =>
+  const conditionCuts = conditions.filter(/** @param {any} c */ c =>
     c.archetype === 'trade_route_cut' || c.archetype === 'regional_route_disruption'
   );
   return { cutRoutes, conditionCuts };
 }
 
+/**
+ * @param {any} settlement
+ * @param {any} save
+ */
 function tradeRouteState(settlement, save) {
   const cfg = configOf(settlement, save);
   const access = cfg.tradeRouteAccess || economicOf(settlement).tradeAccess || settlement?.tradeRouteAccess || 'none';
@@ -66,6 +82,7 @@ function tradeRouteState(settlement, save) {
   };
 }
 
+/** @param {any} settlement */
 function exportLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -75,6 +92,7 @@ function exportLabels(settlement) {
   ];
 }
 
+/** @param {any} settlement */
 function importLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -84,14 +102,16 @@ function importLabels(settlement) {
   ];
 }
 
+/** @param {any} settlement */
 function localProductionLabels(settlement) {
   const econ = economicOf(settlement);
   return [
     ...(econ.localProduction || []),
-    ...((settlement?.config?.nearbyResources || []).map(r => ({ id: r, label: r }))),
+    ...((settlement?.config?.nearbyResources || []).map(/** @param {any} r */ r => ({ id: r, label: r }))),
   ];
 }
 
+/** @param {any} settlement */
 function resourceDepletionState(settlement) {
   const state = settlement?.config?.nearbyResourcesState || {};
   const depleted = [];
@@ -114,6 +134,8 @@ function resourceDepletionState(settlement) {
  * route; graph nodes read id/name/tier; world-pulse readers consume
  * buildWorldSnapshot items, not this projection) — and they were embedded
  * twice per event-log record. Dropped; re-add only with a real reader.
+ *
+ * @param {any} input
  */
 export function deriveRegionalState(input) {
   const settlement = settlementFromSave(input);
@@ -147,10 +169,17 @@ export function deriveRegionalState(input) {
   };
 }
 
+/** @param {any} items */
 function byId(items) {
-  return new Map((items || []).map(item => [item.id, item]));
+  return new Map((items || []).map(/** @param {any} item */ item => [item.id, item]));
 }
 
+/**
+ * @param {any} kind
+ * @param {any} beforeGoods
+ * @param {any} afterGoods
+ * @param {any} source
+ */
 function diffGoods(kind, beforeGoods, afterGoods, source) {
   const out = [];
   const before = byId(beforeGoods);
@@ -179,6 +208,10 @@ function diffGoods(kind, beforeGoods, afterGoods, source) {
   return out;
 }
 
+/**
+ * @param {any} beforeState
+ * @param {any} afterState
+ */
 function diffChains(beforeState, afterState) {
   const out = [];
   const before = byId(beforeState.activeChains);
@@ -200,6 +233,7 @@ function diffChains(beforeState, afterState) {
   return out;
 }
 
+/** @param {any} status */
 function severityForChainStatus(status) {
   switch (status) {
     case 'collapsing': return 0.95;
@@ -212,6 +246,11 @@ function severityForChainStatus(status) {
   }
 }
 
+/**
+ * @param {any} beforeState
+ * @param {any} afterState
+ * @param {any} event
+ */
 function diffRoute(beforeState, afterState, event) {
   if (event?.type === 'CUT_TRADE_ROUTE') {
     return [{
@@ -240,11 +279,16 @@ function diffRoute(beforeState, afterState, event) {
   return [];
 }
 
+/** @param {any} tier */
 function tierRank(tier) {
   const index = TIER_ORDER.indexOf(tier);
   return index >= 0 ? index : -1;
 }
 
+/**
+ * @param {any} beforeState
+ * @param {any} afterState
+ */
 function diffTier(beforeState, afterState) {
   if (!beforeState.tier || !afterState.tier || beforeState.tier === afterState.tier) return [];
   const beforeRank = tierRank(beforeState.tier);
@@ -259,12 +303,22 @@ function diffTier(beforeState, afterState) {
   }];
 }
 
+/**
+ * @param {any} beforePopulation
+ * @param {any} afterPopulation
+ * @param {any} event
+ */
 function populationKind(beforePopulation, afterPopulation, event) {
   const candidateType = String(event?.payload?.candidateType || event?.payload?.outcomeType || '').toLowerCase();
   if (/migration|emigration|refugee/.test(candidateType) || event?.type === 'REFUGEE_WAVE') return 'migration_wave';
   return afterPopulation > beforePopulation ? 'population_growth' : 'population_loss';
 }
 
+/**
+ * @param {any} beforeState
+ * @param {any} afterState
+ * @param {any} event
+ */
 function diffPopulation(beforeState, afterState, event) {
   const beforePopulation = Math.max(0, Number(beforeState.population) || 0);
   const afterPopulation = Math.max(0, Number(afterState.population) || 0);
@@ -282,6 +336,10 @@ function diffPopulation(beforeState, afterState, event) {
   }];
 }
 
+/**
+ * @param {any} beforeSettlement
+ * @param {any} afterSettlement
+ */
 function diffCausal(beforeSettlement, afterSettlement) {
   try {
     const before = deriveCausalState(beforeSettlement);
@@ -302,6 +360,10 @@ function diffCausal(beforeSettlement, afterSettlement) {
   }
 }
 
+/**
+ * @param {any} event
+ * @param {number} [fallback]
+ */
 function eventMagnitude(event, fallback = 0.55) {
   const severity = event?.payload?.severity;
   if (typeof severity === 'number' && Number.isFinite(severity)) {
@@ -313,6 +375,7 @@ function eventMagnitude(event, fallback = 0.55) {
   return fallback;
 }
 
+/** @param {any} event */
 function eventRegionalChanges(event) {
   if (!event?.type) return [];
   switch (event.type) {
@@ -358,6 +421,10 @@ function eventRegionalChanges(event) {
 
 /**
  * Derive the regional significance of a local before/after settlement change.
+ *
+ * @param {any} beforeInput
+ * @param {any} afterInput
+ * @param {any} [cause]
  */
 export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
   const beforeSettlement = settlementFromSave(beforeInput);

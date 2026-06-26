@@ -683,9 +683,15 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
  * @param {any[]} [args.returnOutcomes]  this tick's deployment-return outcomes (liberations).
  * @param {number} [args.tick]
  * @param {{ warLayerEnabled?: boolean }} [args.rules]
+ * @param {ReadonlySet<string>|null} [args.dismissedOutcomeIds]  RESUME dismissal: outcome
+ *   ids the DM dismissed. An `occupation_vassalized` outcome the DM dismissed is keyed
+ *   `world_outcome.occupation_vassalized.<occupiedId>.<tick>`; when its id is dismissed,
+ *   the state machine does NOT promote that occupation to `vassalized` — it HOLDS at its
+ *   prior rung (stabilized) so the occupation is never stranded at the top with the
+ *   vassal edge never forming. Parity with conquest-dismiss. Inert (null) otherwise.
  * @returns {{ outcomes: any[], occupations: Record<string, any>, dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}> }}
  */
-export function evaluateOccupations({ snapshot, worldState, graph, deployments = {}, warOutcomes = [], returnOutcomes = [], tick = 0, rules = {} }) {
+export function evaluateOccupations({ snapshot, worldState, graph, deployments = {}, warOutcomes = [], returnOutcomes = [], tick = 0, rules = {}, dismissedOutcomeIds = null }) {
   const existing = (worldState?.occupations && typeof worldState.occupations === 'object') ? worldState.occupations : {};
   if (!rules?.warLayerEnabled) {
     // OFF: pure no-op. Return the existing ledger untouched (absent stays absent).
@@ -693,6 +699,11 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   }
 
   const t = Math.max(0, Math.floor(num(tick)));
+  // RESUME dismissal predicate (parity with conquest-dismiss): is THIS occupation's
+  // vassalization the DM dismissed? Keyed by the outcome id vassalizationOutcomes mints.
+  const vassalizationDismissed = dismissedOutcomeIds && typeof dismissedOutcomeIds.has === 'function' && dismissedOutcomeIds.size > 0
+    ? (/** @type {string} */ occupiedId) => dismissedOutcomeIds.has(`world_outcome.occupation_vassalized.${stablePart(occupiedId)}.${t}`)
+    : null;
   const nameFor = (/** @type {any} */ id) => {
     const item = snapshot?.byId?.get?.(String(id));
     return item?.name || item?.settlement?.name || String(id);
@@ -772,23 +783,40 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     }
 
     const prevState = rec.state;
+    // RESUME dismissal: a DM-dismissed `occupation_vassalized` must NOT promote the
+    // occupation to the terminal `vassalized` rung — otherwise the apply filter drops
+    // the vassal-edge relabel while the occupation is stranded at vassalized forever
+    // (the arrived-this-tick one-shot already fired, so it never re-emits). Roll the
+    // promotion back: HOLD at the prior rung (stabilized) with a reset dwell, so the
+    // occupation can re-argue the vassalization on a later tick if the DM permits. The
+    // resistance/disposition advance is kept (the occupation otherwise progressed
+    // normally) — only the terminal promotion is undone. Inert without dismissals.
+    let nextState = advanced.state;
+    let nextStateHeld = advanced.stateHeld;
+    if (vassalizationDismissed
+        && advanced.state === 'vassalized' && prevState !== 'vassalized'
+        && vassalizationDismissed(occupiedId)) {
+      nextState = prevState;
+      nextStateHeld = 0;
+    }
     occupations[occupiedId] = {
       ...rec,
-      state: advanced.state,
-      stateHeld: advanced.stateHeld,
+      state: nextState,
+      stateHeld: nextStateHeld,
       resistance: nextResistance,
       lastTick: t,
     };
     // A stabilization advance banks a small disposition WIN for the occupier (a
     // consolidating empire grows more confident); a regression a small loss.
-    if (stateRank(advanced.state) > stateRank(prevState)) {
+    if (stateRank(nextState) > stateRank(prevState)) {
       dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'win', magnitude: 0.3 });
-    } else if (stateRank(advanced.state) < stateRank(prevState)) {
+    } else if (stateRank(nextState) < stateRank(prevState)) {
       dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'loss', magnitude: 0.3 });
     }
     // Record the one-shot arrival edge for the vassalization outcome (finding 3): the
-    // occupation just CLIMBED to vassalized from a lower rung this tick.
-    if (advanced.state === 'vassalized' && prevState !== 'vassalized') {
+    // occupation just CLIMBED to vassalized from a lower rung this tick. A dismissed
+    // vassalization (rolled back above) never arrives, so it is correctly omitted.
+    if (nextState === 'vassalized' && prevState !== 'vassalized') {
       arrivedAtVassalized.add(String(occupiedId));
     }
 

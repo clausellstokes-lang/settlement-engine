@@ -144,9 +144,22 @@ export default {
           if (!arg || arg.type !== 'ObjectExpression') return;
           for (const prop of arg.properties) {
             if (prop.type === 'SpreadElement') {
-              const id = prop.argument;
-              if (id?.type === 'Identifier' && BANNED_SPREADS.has(id.name)) {
-                context.report({ node: prop, messageId: 'bannedSpread', data: { name: id.name } });
+              const arg = prop.argument;
+              // Bare identifier: `{ ...settlement }`. Member expression:
+              // `{ ...state.settlement }` / `{ ...props.npc }` — resolve the
+              // TERMINAL property name so a wrapped domain object can't slip
+              // its names/prose/secrets past the bare-identifier check.
+              let spreadName = null;
+              if (arg?.type === 'Identifier') {
+                spreadName = arg.name;
+              } else if (
+                arg?.type === 'MemberExpression' && !arg.computed
+                && arg.property.type === 'Identifier'
+              ) {
+                spreadName = arg.property.name;
+              }
+              if (spreadName && BANNED_SPREADS.has(spreadName)) {
+                context.report({ node: prop, messageId: 'bannedSpread', data: { name: spreadName } });
               }
               continue;
             }

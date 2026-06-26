@@ -241,6 +241,14 @@ export async function persistSaveUpdates(updates = []) {
  * `backward: true`, which sends p_expected_tick = NULL so 069 skips the guard and
  * applies the reverted snapshot unconditionally. The FORWARD advance path leaves
  * `backward` falsy and keeps the guard (preventing a double-advance).
+ *
+ * NON-ADVANCING WRITES (apply proposal / record party impact): these mutate the
+ * world + member settlements but DO NOT bump worldState.tick — the snapshot's tick
+ * EQUALS the cloud's current tick. Under the forward guard "strictly behind" rule
+ * that ties, so the RPC returns stale_tick (read as success) and the write is
+ * silently DROPPED — the applied proposal + settlement deltas vanish on reload. Like
+ * undo, they are deliberate LAST-WRITE-WINS writes: callers pass `backward: true`
+ * (same expectedTick = NULL effect) so the guard is skipped and the write lands.
  */
 export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false }) {
   if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };
@@ -264,15 +272,35 @@ export async function flushWorldPulsePersist({ result, campaignPersist, persistU
     const tick = Number(campaign?.worldState?.tick);
     const expectedTick = backward ? null : (Number.isFinite(tick) ? tick : null);
     try {
-      await campaignService.persistWorldPulseAdvance({
+      const outcome = await campaignService.persistWorldPulseAdvance({
         campaignId,
         campaign,
         settlementUpdates: Array.isArray(persistUpdates) ? persistUpdates : [],
         expectedTick,
       });
-      // A stale_tick no-op (applied:false) means the cloud already holds this tick
-      // (a prior retry landed) — the cloud is coherent, so this is success, not a
-      // pending failure. Any genuine failure throws and is handled below.
+      // A stale_tick no-op (applied:false) splits by write kind:
+      //   • BACKWARD / non-advancing (proposal, undo, party impact) pass
+      //     expectedTick = null, so the guard is SKIPPED and applied:false can only
+      //     mean the cloud already coherently holds this write (an id-keyed retry) —
+      //     success, leave it.
+      //   • A FORWARD ADVANCE (backward falsy, expectedTick = the post-advance tick)
+      //     hitting the guard means the cloud already advanced to/past this tick — a
+      //     CONCURRENT same-tick advance (another tab) won the race. THIS tab's
+      //     locally-advanced (DIFFERENT) world was NOT written and will be silently
+      //     dropped on reload. Surface it as a conflict (cloud-pending + the retryable
+      //     banner) so the caller can warn + reload, exactly like a rejected write —
+      //     NOT a clean success. The local tick stands; reload reconciles to the
+      //     winning timeline.
+      //   Intentionally guards on `applied === false` BROADLY, not a specific
+      //   reason: for a forward advance, ANY non-applied write means the local
+      //   timeline didn't land = a conflict. Narrowing to reason==='stale_tick'
+      //   would let an unforeseen applied:false reason fall through to ok:true —
+      //   re-opening the silent-drop bug. Fail toward surfacing, never toward a drop.
+      if (!backward && outcome && outcome.applied === false) {
+        try { _reportPersistFailure?.(new Error('advance conflicted with a concurrent same-tick advance; left cloud-pending')); }
+        catch { /* reporting must never throw */ }
+        return { ok: false, savesFailed: 0, campaignSynced: false, conflict: true };
+      }
     } catch (e) {
       // Any failure — a member not owned, a rejected write, or 069 not applied —
       // rolls the WHOLE advance back in the DB (atomic). Surface the honest

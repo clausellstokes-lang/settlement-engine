@@ -45,40 +45,59 @@ const WAR_TYPES = ['siege', 'wartime', 'occupation'];
 const GATE_MULT_MIN = 0.1;
 const GATE_MULT_MAX = 3;
 
+/** @param {any} value */
 function clampMult(value) {
   return Math.max(GATE_MULT_MIN, Math.min(GATE_MULT_MAX, value));
 }
 
 const NEUTRAL = Object.freeze({ probabilityMult: 1, reasons: [] });
 
-/** Compose fired factors into a gate result. */
+/**
+ * Compose fired factors into a gate result.
+ * @param {any} factors
+ * @param {any[]} extraReasons
+ */
 function gateResult(factors, extraReasons = []) {
   const fired = factors.filter(Boolean);
   return {
-    probabilityMult: clampMult(fired.reduce((m, f) => m * f.mult, 1)),
-    reasons: [...fired.map(f => f.reason), ...extraReasons],
+    probabilityMult: clampMult(fired.reduce((/** @type {any} */ m, /** @type {any} */ f) => m * f.mult, 1)),
+    reasons: [...fired.map((/** @type {any} */ f) => f.reason), ...extraReasons],
   };
 }
 
 // ── Snapshot readers ───────────────────────────────────────────────────────
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function entryFor(snapshot, pressure) {
   return snapshot?.byId?.get?.(String(pressure.settlementId)) || null;
 }
 
+/**
+ * @param {any} entry
+ * @param {any} key
+ */
 function causalScore(entry, key) {
   const score = entry?.causal?.scores?.[key];
   return Number.isFinite(score) ? score : 50;
 }
 
+/** @param {any} snapshot */
 function edgesOf(snapshot) {
   return snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
 }
 
+/** @param {any} snapshot */
 function channelsOf(snapshot) {
   return snapshot?.regionalGraph?.channels || snapshot?.channels || [];
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} sid
+ */
 function neighborIdsOf(snapshot, sid) {
   const id = String(sid);
   const out = new Set();
@@ -98,12 +117,17 @@ function neighborIdsOf(snapshot, sid) {
   return out;
 }
 
+/** @param {any} snapshot */
 function liveStressors(snapshot) {
   return (snapshot?.worldState?.stressors || [])
-    .filter(s => s && !INACTIVE_STATUSES.has(s.status));
+    .filter((/** @type {any} */ s) => s && !INACTIVE_STATUSES.has(s.status));
 }
 
-/** Types of stressors currently gripping this settlement. */
+/**
+ * Types of stressors currently gripping this settlement.
+ * @param {any} snapshot
+ * @param {any} sid
+ */
 export function activeTypesAt(snapshot, sid) {
   const id = String(sid);
   const out = new Set();
@@ -113,7 +137,11 @@ export function activeTypesAt(snapshot, sid) {
   return out;
 }
 
-/** Types of stressors currently gripping any neighbour of this settlement. */
+/**
+ * Types of stressors currently gripping any neighbour of this settlement.
+ * @param {any} snapshot
+ * @param {any} sid
+ */
 export function activeTypesAtNeighbors(snapshot, sid) {
   const neighbors = neighborIdsOf(snapshot, sid);
   const out = new Set();
@@ -125,7 +153,12 @@ export function activeTypesAtNeighbors(snapshot, sid) {
   return out;
 }
 
-/** Strongest residual memory of a given crisis type at this settlement. */
+/**
+ * Strongest residual memory of a given crisis type at this settlement.
+ * @param {any} snapshot
+ * @param {any} sid
+ * @param {any} type
+ */
 export function echoStrengthAt(snapshot, sid, type) {
   const id = String(sid);
   let best = 0;
@@ -137,7 +170,11 @@ export function echoStrengthAt(snapshot, sid, type) {
   return best;
 }
 
-/** Distinct trade partners: confirmed trade channels + trade-labelled edges. */
+/**
+ * Distinct trade partners: confirmed trade channels + trade-labelled edges.
+ * @param {any} snapshot
+ * @param {any} sid
+ */
 export function tradeLinkCount(snapshot, sid) {
   const id = String(sid);
   const partners = new Set();
@@ -158,29 +195,32 @@ export function tradeLinkCount(snapshot, sid) {
   return partners.size;
 }
 
+/** @param {any} settlement */
 function isEntrepot(settlement) {
   if (settlement?.economicState?.isEntrepot === true) return true;
   return (settlement?.economicState?.activeChains || [])
-    .some(c => c?.status === 'entrepot' || c?.entrepot === true);
+    .some((/** @type {any} */ c) => c?.status === 'entrepot' || c?.entrepot === true);
 }
 
 /**
  * The "magic matters here" signals for the deadzone gate. A deadzone is only
  * a crisis where magic is load-bearing — each signal names one way it is.
+ * @param {any} settlement
  */
 export function magicDependenceSignals(settlement) {
+  /** @type {any[]} */
   const signals = [];
   const ledger = magicLedger(settlement);
   if (!ledger.magicExists) return signals;
   const institutions = settlement?.institutions || [];
-  if (institutions.some(inst => ARCANE_INSTITUTION_PATTERN.test(String(inst?.name || '')))) {
+  if (institutions.some((/** @type {any} */ inst) => ARCANE_INSTITUTION_PATTERN.test(String(inst?.name || '')))) {
     signals.push('arcane institutions anchor daily life');
   }
   if (settlement?.defenseProfile?.magicDependency === true) {
     signals.push('the defenses lean on magic');
   }
   const chains = settlement?.economicState?.activeChains || [];
-  if (chains.some(c => c?.status === 'magically_sustained' || c?.magicNote)) {
+  if (chains.some((/** @type {any} */ c) => c?.status === 'magically_sustained' || c?.magicNote)) {
     signals.push('supply chains run on magical substitution');
   }
   // Live-first (the field-manifest contract): the channel is derived from
@@ -189,7 +229,7 @@ export function magicDependenceSignals(settlement) {
   // at all marks magic-borne trade as load-bearing for the deadzone story.
   const magicTrade = !!resolveBlockadeBypassChannel(settlement)
     || settlement?.config?._magicTradeOnly === true
-    || institutions.some(inst => /teleportation|planar|extradimensional|airship/i.test(String(inst?.name || '')));
+    || institutions.some((/** @type {any} */ inst) => /teleportation|planar|extradimensional|airship/i.test(String(inst?.name || '')));
   if (magicTrade) signals.push('trade arrives by teleport or airship');
   if (['medium', 'high'].includes(ledger.magicLevel)) {
     signals.push(`ambient magic runs ${ledger.magicLevel}`);
@@ -199,11 +239,20 @@ export function magicDependenceSignals(settlement) {
 
 // Strongest hostile-class neighbour, or null. hostileNeighborsOf sorts most
 // hostile first with a deterministic tiebreak (see stressorDynamics).
+/**
+ * @param {any} snapshot
+ * @param {any} sid
+ */
 function strongestHostile(snapshot, sid) {
   const hostiles = hostileNeighborsOf(snapshot, sid);
   return hostiles.length ? hostiles[0] : null;
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} sid
+ * @param {any} options
+ */
 function hostileFactor(snapshot, sid, { hostileMult, coldWarMult = null }) {
   const top = strongestHostile(snapshot, sid);
   if (!top) return null;
@@ -221,6 +270,10 @@ function hostileFactor(snapshot, sid, { hostileMult, coldWarMult = null }) {
 // Blocking gates return null without an entry (they require political/world
 // context to exist at all); gradient-only gates fall back to NEUTRAL.
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function siegeGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -242,6 +295,10 @@ function siegeGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function famineGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -260,6 +317,10 @@ function famineGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function occupationGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null; // gated births require world context
@@ -279,6 +340,10 @@ function occupationGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function politicalFractureGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -298,6 +363,10 @@ function politicalFractureGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function indebtednessGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -320,6 +389,11 @@ function indebtednessGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ * @param {any} context
+ */
 function betrayalGate(snapshot, pressure, context = {}) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -341,6 +415,10 @@ function betrayalGate(snapshot, pressure, context = {}) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function infiltrationGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -354,6 +432,10 @@ function infiltrationGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function diseaseOutbreakGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -372,6 +454,10 @@ function diseaseOutbreakGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function successionVoidGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -389,6 +475,10 @@ function successionVoidGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function monsterRaiderGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -411,6 +501,10 @@ function monsterRaiderGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function insurgencyGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -425,6 +519,10 @@ function insurgencyGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function religiousConversionGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -441,6 +539,10 @@ function religiousConversionGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function rebellionGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -460,6 +562,10 @@ function rebellionGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function wartimeGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -478,6 +584,10 @@ function wartimeGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function massMigrationGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -495,6 +605,10 @@ function massMigrationGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function marketShockGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
@@ -513,12 +627,16 @@ function marketShockGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function criminalCorridorGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return NEUTRAL;
   const sid = String(pressure.settlementId);
   const links = tradeLinkCount(snapshot, sid);
-  const corridorChannel = channelsOf(snapshot).some(c =>
+  const corridorChannel = channelsOf(snapshot).some((/** @type {any} */ c) =>
     String(c?.type) === 'criminal_corridor'
     && (String(c?.from) === sid || String(c?.to) === sid));
   return gateResult([
@@ -535,6 +653,10 @@ function criminalCorridorGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function magicalInstabilityGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -552,6 +674,10 @@ function magicalInstabilityGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function magicDeadzoneGate(snapshot, pressure) {
   const entry = entryFor(snapshot, pressure);
   if (!entry) return null;
@@ -581,6 +707,10 @@ function magicDeadzoneGate(snapshot, pressure) {
 // occupier already governing at spearpoint, and at least one non-criminal
 // faction with the muscle to act (criminal factions never vie openly — the
 // capture ladder is their path).
+/**
+ * @param {any} snapshot
+ * @param {any} pressure
+ */
 function coupSpawnGate(snapshot, pressure) {
   const sid = String(pressure.settlementId);
   const entry = snapshot?.byId?.get?.(sid);
@@ -635,5 +765,5 @@ for (const type of [
   'occupation', 'succession_void', 'insurgency', 'rebellion', 'mass_migration',
   'magical_instability', 'magic_deadzone', 'coup_detat',
 ]) {
-  STRESSOR_SPAWN_GATES[type].requiresSnapshot = true;
+  /** @type {any} */ (STRESSOR_SPAWN_GATES)[type].requiresSnapshot = true;
 }

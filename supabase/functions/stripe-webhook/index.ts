@@ -87,7 +87,25 @@ async function grantCreditsForSessionOnce(
   amount: number,
   source: string,
   sessionId: string,
+  oncePerUser = false,
 ) {
+  // Per-ACCOUNT idempotency: the founder bonus is once-per-account, not
+  // once-per-session — a SECOND founder_lifetime purchase (a new checkout session)
+  // must not re-grant the 30-credit bonus. (Credit-pack purchases stay
+  // once-per-session: a user can buy the same pack repeatedly.)
+  if (oncePerUser) {
+    const { data: priorForUser } = await supabase
+      .from('credit_ledger')
+      .select('id')
+      .eq('source', source)
+      .eq('user_id', userId)
+      .limit(1)
+      .maybeSingle();
+    if (priorForUser?.id) {
+      console.log(`[stripe-webhook] ${source} already granted to user ${userId} — skipping (once-per-account)`);
+      return;
+    }
+  }
   const { data: existing } = await supabase
     .from('credit_ledger')
     .select('id')
@@ -109,10 +127,10 @@ async function findUserIdForStripeCustomer(
   if (customerId) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('id, is_founder')
+      .select('id, is_founder, stripe_subscription_id, tier')
       .eq('stripe_customer_id', customerId)
       .maybeSingle();
-    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null, tier: (profile.tier as string | null) ?? null };
   }
 
   let email = fallbackEmail || null;
@@ -129,7 +147,7 @@ async function findUserIdForStripeCustomer(
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('id, is_founder')
+    .select('id, is_founder, stripe_subscription_id, tier')
     .ilike('email', email)
     .maybeSingle();
   if (!profile?.id) return null;
@@ -140,7 +158,7 @@ async function findUserIdForStripeCustomer(
       .eq('id', profile.id);
     if (error) throw new Error(`Stripe customer binding failed: ${error.message}`);
   }
-  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder), stripeSubscriptionId: (profile.stripe_subscription_id as string | null) ?? null, tier: (profile.tier as string | null) ?? null };
 }
 
 async function grantMonthlyAllowanceIfNeeded(
@@ -153,6 +171,33 @@ async function grantMonthlyAllowanceIfNeeded(
   const profile = await findUserIdForStripeCustomer(supabase, customerId, invoice.customer_email || null);
   if (!profile?.userId) {
     throw new Error(`Monthly allowance invoice ${invoice.id} has no matching profile`);
+  }
+
+  // Only SUBSCRIPTION invoices carry the monthly allowance. A non-subscription
+  // invoice (manual / one-off) must NOT grant 30 credits or back-fill a sub id.
+  // (Stripe always sets billing_reason; an absent value ⇒ proceed for back-compat.)
+  if (invoice.billing_reason
+    && invoice.billing_reason !== 'subscription_create'
+    && invoice.billing_reason !== 'subscription_cycle') {
+    return;
+  }
+
+  // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
+  // users who pre-date the column. We deliberately do NOT overwrite an existing
+  // recorded id from an invoice: Stripe reorders/redelivers, so a late OLD-sub
+  // invoice must not clobber the current sub back to a cancelled one and re-arm a
+  // stale customer.subscription.deleted. The authoritative "current sub" write is
+  // the checkout premium branch (on subscribe/re-subscribe); invoices only fill
+  // the gap once, when nothing is recorded yet.
+  const renewalSubId = typeof invoice.subscription === 'string'
+    ? invoice.subscription
+    : invoice.subscription?.id || null;
+  if (renewalSubId && !profile.stripeSubscriptionId) {
+    const { error: subErr } = await supabase.from('profiles')
+      .update({ stripe_subscription_id: renewalSubId })
+      .eq('id', profile.userId)
+      .is('stripe_subscription_id', null);   // atomic back-fill: write only if still unset
+    if (subErr) throw new Error(`Recording subscription id failed: ${subErr.message}`);
   }
 
   const { data: existing } = await supabase
@@ -259,6 +304,9 @@ export async function handleStripeWebhook(
         const { error: profileError } = await supabase.from('profiles').update({
           tier: 'premium',
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+          // Record THIS subscription so a later stale/redelivered .deleted for an
+          // OLD subscription can't downgrade this re-subscribed user (087).
+          stripe_subscription_id: typeof session.subscription === 'string' ? session.subscription : session.subscription?.id || null,
           premium_downgraded_at: null,
           premium_retention_expires_at: null,
         }).eq('id', userId);
@@ -291,7 +339,7 @@ export async function handleStripeWebhook(
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
         // Founder bonus: one-time 30-credit grant (idempotent on session id).
-        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id);
+        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id, /* oncePerUser */ true);
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
         // One-shot purchase, no account required. Nothing to mutate on
@@ -307,6 +355,13 @@ export async function handleStripeWebhook(
         // the grant idempotent against Stripe's at-least-once redelivery.
         await grantCreditsForSessionOnce(supabase, userId!, credits, 'purchase', session.id);
         console.log(`Added ${credits} credits to user ${userId}`);
+      } else {
+        // A completed checkout whose product matches none of the above AND carries
+        // no credits. create-checkout validates product keys server-side, so this is
+        // unreachable in normal operation — fail LOUD rather than silently ack a paid
+        // session we did not fulfil, so a metadata misconfiguration surfaces in
+        // Stripe's webhook dashboard + retries instead of being swallowed.
+        throw new Error(`Unhandled checkout product: ${product || '(missing)'} (session=${session.id})`);
       }
       break;
     }
@@ -329,6 +384,25 @@ export async function handleStripeWebhook(
           console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);
           break;
         }
+        // IDEMPOTENT (087): a redelivered .deleted on an already-downgraded user
+        // must not re-run handle_premium_downgrade (which would re-stamp the
+        // retention window each time). Only a currently-premium user downgrades.
+        if (profile.tier !== 'premium') {
+          console.log(`User ${profile.userId} is already not premium; ignoring subscription.deleted ${subscription.id}`);
+          break;
+        }
+        // STALE-DELETE GUARD (087): Stripe redelivers + reorders webhooks. A
+        // .deleted for an OLD subscription must NOT downgrade a user who has since
+        // re-subscribed and is currently premium. Only downgrade when the deleted
+        // subscription is the user's CURRENTLY-RECORDED one. When we have no
+        // recorded id (legacy premium predating the column), fall back to the
+        // prior customer-match behavior so a genuine cancellation still downgrades;
+        // the next renewal back-fills the id and closes the gap.
+        const recordedSub = profile.stripeSubscriptionId;
+        if (recordedSub && recordedSub !== subscription.id) {
+          console.log(`Ignoring stale subscription.deleted ${subscription.id} for user ${profile.userId}; current subscription is ${recordedSub}`);
+          break;
+        }
         const { error: downgradeError } = await supabase.rpc('handle_premium_downgrade', {
           target_user: profile.userId,
         });
@@ -341,6 +415,14 @@ export async function handleStripeWebhook(
         if (authDowngradeError) {
           throw new Error(`Auth downgrade failed: ${authDowngradeError.message}`);
         }
+        // Clear the recorded subscription now that it's gone, so a future
+        // re-subscribe records a fresh id and this one can't match again. Fail
+        // loud like every other write in this handler.
+        const { error: clearErr } = await supabase.from('profiles')
+          .update({ stripe_subscription_id: null })
+          .eq('id', profile.userId)
+          .eq('stripe_subscription_id', subscription.id);   // only if it still matches the deleted sub (race-safe)
+        if (clearErr) throw new Error(`Clearing subscription id failed: ${clearErr.message}`);
         console.log(`User ${profile.userId} downgraded to free with retention window`);
       }
       break;

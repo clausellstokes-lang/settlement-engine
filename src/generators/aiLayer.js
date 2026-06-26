@@ -222,7 +222,7 @@ export function buildAiLayerPrompt(ctx) {
 
   lines.push('SETTLEMENT DATA');
   lines.push(`Name: ${ctx.name}`);
-  lines.push(`Tier: ${ctx.tier}${ctx.population ? ` — population ~${ctx.population.toLocaleString()}` : ''}`);
+  lines.push(`Tier: ${ctx.tier}${ctx.population ? ` — population ~${ctx.population.toLocaleString('en-US')}` : ''}`);
   if (ctx.culture)    lines.push(`Culture: ${ctx.culture}`);
   if (ctx.terrain)    lines.push(`Terrain: ${ctx.terrain}`);
   lines.push(`Trade access: ${ctx.tradeRoute}`);

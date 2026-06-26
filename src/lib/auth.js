@@ -71,9 +71,27 @@ function buildProfileResult(user, data = {}) {
 }
 
 /**
+ * PostgREST returns this code from `.single()` when the filter matched no row.
+ * It is the ONLY error that legitimately means "this user has no profile yet"
+ * — every other error (RLS denial, network blip, 5xx) is a TRANSIENT query
+ * failure, and treating those as "no row" would silently rebuild the session
+ * at free/user and downgrade a premium/admin user mid-flight.
+ */
+const PROFILE_NO_ROW = 'PGRST116';
+
+/**
  * Fetch profile-backed auth grants from the profiles table, the source of
- * truth for every privileged gate. On failure, fall back to safe non-
- * privileged defaults rather than trusting user-writable metadata.
+ * truth for every privileged gate.
+ *
+ * Failure handling distinguishes two cases:
+ *   - NO ROW (PGRST116): the user genuinely has no profile, so safe
+ *     non-privileged defaults are the correct grant — never trust the
+ *     user-writable metadata for tier/role.
+ *   - TRANSIENT failure (any other error / thrown exception): we must NOT
+ *     downgrade. Returning defaults here would drop a premium/admin user to
+ *     free/user on a momentary blip (and every token refresh re-runs this).
+ *     Instead we throw, so the caller preserves the last-known session rather
+ *     than overwriting it with a downgrade.
  */
 async function fetchProfileAuth(user) {
   if (!user) {
@@ -82,18 +100,23 @@ async function fetchProfileAuth(user) {
   if (!supabase) {
     return buildProfileResult(user, {});
   }
-  try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name')
-      .eq('id', user.id)
-      .single();
-    if (!error && data) {
-      return buildProfileResult(user, data);
-    }
-  } catch {
-    // Safe defaults below.
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name')
+    .eq('id', user.id)
+    .single();
+  if (error && error.code !== PROFILE_NO_ROW) {
+    // Transient query failure — do not downgrade. Surface it so the caller
+    // keeps the existing session/tier instead of rebuilding at free/user.
+    /** @type {Error & { code?: string }} */
+    const err = new Error('Profile lookup failed.');
+    err.code = 'profile_lookup_failed';
+    throw err;
   }
+  if (!error && data) {
+    return buildProfileResult(user, data);
+  }
+  // PROFILE_NO_ROW (or a null row with no error): genuinely no profile yet.
   return buildProfileResult(user, {});
 }
 
@@ -207,6 +230,13 @@ async function supabaseGetSession() {
   const { data: { session }, error } = await supabase.auth.getSession();
   if (error) throw error;
   if (!session) return null;
+  // A transient profile-lookup failure PROPAGATES (fetchProfileAuth throws on a
+  // non-PGRST116 error). We deliberately do NOT swallow it into a fallback profile:
+  // the only tier source available here is the user-WRITABLE user_metadata (trusting
+  // it would let a user self-promote to premium) or buildProfileResult(user,{}) which
+  // is a FREE/user DOWNGRADE — both wrong. Rejecting lets initAuth treat it as the
+  // retryable transient state it is (a later onAuthChange / retry restores the real
+  // tier) instead of persisting a wrong tier. No false grant, no silent downgrade.
   const profile = await fetchProfileAuth(session.user);
   return authPayload(session.user, session, profile);
 }
@@ -312,6 +342,32 @@ async function supabaseRecoveryVerify({ email, slot, answer }) {
  * we constrain the redirect to our own origin to satisfy the
  * Supabase redirect-allowlist requirement.
  */
+
+/**
+ * Recognise the "no such account" error class GoTrue returns when
+ * `shouldCreateUser:false` is set and the email has no account (or OTP signups
+ * are disabled). Across versions this surfaces as the `otp_disabled` code, a
+ * 422 "Signups not allowed for otp" message, or a "user not found" message.
+ *
+ * This is the enumeration-oracle case: letting it throw while a real account
+ * resolves success would tell an attacker which emails are registered. We treat
+ * the whole class as success-shaped so the caller can't distinguish the two.
+ *
+ * @param {{ code?: string, status?: number, message?: string } | null} error
+ */
+function isMagicLinkNoAccountError(error) {
+  if (!error) return false;
+  const code = String(error.code || '').toLowerCase();
+  const msg = String(error.message || '').toLowerCase();
+  return (
+    code === 'otp_disabled' ||
+    code === 'user_not_found' ||
+    msg.includes('signups not allowed') ||
+    msg.includes('user not found') ||
+    msg.includes('not allowed for otp')
+  );
+}
+
 async function supabaseSignInWithMagicLink(email) {
   const { error } = await supabase.auth.signInWithOtp({
     email,
@@ -319,10 +375,16 @@ async function supabaseSignInWithMagicLink(email) {
       // Restrict to our own origin so a stolen link can't redirect
       // a user into an attacker-controlled callback.
       emailRedirectTo: `${window.location.origin}`,
-      shouldCreateUser: true,  // sign up + sign in are unified
+      // Sign-IN surface: never mint a new account here. Creating a user on this
+      // path would forge a passwordless account that can never use a password.
+      // Only the explicit sign-UP flow creates users.
+      shouldCreateUser: false,
     },
   });
-  if (error) throw error;
+  // Suppress the no-account error class so existence stays hidden: a missing
+  // account resolves with the SAME success shape as a real send. Other failures
+  // (rate limit, network, config) still throw — they aren't existence oracles.
+  if (error && !isMagicLinkNoAccountError(error)) throw error;
   // No session yet — completion happens when the user clicks the link
   // and Supabase's onAuthStateChange fires.
   return { sentTo: email };
@@ -689,11 +751,60 @@ async function mockUpdateProfileNames() {
   // No-op in mock mode.
 }
 
+// Bounded retry for a transient profile read on an auth-change event. A
+// momentary blip (RLS warm-up, 5xx, network) must not decide a session's fate
+// on the first try. We retry fetchProfileAuth a few times with a short backoff;
+// the FIRST success returns the real, server-authoritative profile.
+//
+// This matters most on a one-shot OAuth / magic-link SIGNED_IN: there is no
+// prior session in the store to fall back to, so a single transient failure
+// would otherwise drop a user who genuinely just authenticated. Retrying gives
+// the blip a chance to clear before we surface success. It is equally safe on a
+// TOKEN_REFRESHED — a recovered read restores the real tier sooner; an
+// unrecovered one still falls through to the deliberate skip below.
+//
+// We never substitute a tier here: every attempt reads the profiles table (the
+// source of truth). We do NOT trust user-writable user_metadata and do NOT
+// fabricate a free downgrade — exhausting the retries means the caller is
+// skipped, not granted anything.
+const PROFILE_RETRY_ATTEMPTS = 4;
+const PROFILE_RETRY_BACKOFF_MS = 250;
+
+async function fetchProfileAuthWithRetry(user) {
+  let lastError;
+  for (let attempt = 0; attempt < PROFILE_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      return await fetchProfileAuth(user);
+    } catch (e) {
+      // PGRST116 never reaches here (fetchProfileAuth returns the no-row
+      // defaults rather than throwing), so any throw is a genuine transient
+      // failure worth re-attempting.
+      lastError = e;
+      if (attempt < PROFILE_RETRY_ATTEMPTS - 1) {
+        await new Promise(r => setTimeout(r, PROFILE_RETRY_BACKOFF_MS * (attempt + 1)));
+      }
+    }
+  }
+  throw lastError;
+}
+
 function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
       if (session?.user) {
-        const profile = await fetchProfileAuth(session.user);
+        let profile;
+        try {
+          profile = await fetchProfileAuthWithRetry(session.user);
+        } catch {
+          // Transient profile-lookup failure that survived every retry. Do NOT
+          // rebuild auth from downgraded defaults and do NOT trust the writable
+          // user_metadata — skip this event so the store keeps its last-known
+          // tier/role (refresh) or stays in its safe logged-out-and-retry state
+          // (a first sign-in with no prior session) until a later event or a
+          // manual retry succeeds. The retry above already gave a momentary blip
+          // its chances; a sustained outage is the deliberate safe failure.
+          return;
+        }
         callback(
           event,
           session.user,
@@ -705,9 +816,20 @@ function supabaseOnAuthChange(callback) {
           profile.avatarUrl,
           profile.emailNotifications,
           profile.modelPreference,
+          // Account identity (migration 075) as an APPEND-ONLY trailing object so
+          // a token refresh re-seeds it from the fresh profile instead of blanking
+          // it. Without this, every TOKEN_REFRESHED rebuilds auth without the
+          // identity fields until a full profile reload.
+          {
+            accountNumber: profile.accountNumber,
+            externalName: profile.externalName,
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            preferredName: profile.preferredName,
+          },
         );
       } else {
-        callback(event, null, null, 'anon', 'user', null, false, null, true, DEFAULT_MODEL_PREFERENCE);
+        callback(event, null, null, 'anon', 'user', null, false, null, true, DEFAULT_MODEL_PREFERENCE, null);
       }
     }
   );

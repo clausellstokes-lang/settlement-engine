@@ -34,6 +34,12 @@
 const STORAGE_KEY = 'sf:auth_intent';
 const TTL_MS = 30 * 60 * 1000; // 30 minutes — well past the longest auth flow
 
+// Monotonic counter for the per-stash id. Combined with stashedAt it makes a
+// dispatch key that's stable for one stash but distinct across re-stashes — so
+// the in-flight guard below can tell "the same intent firing twice" apart from
+// "a fresh intent the user re-stashed after a retry".
+let _stashSeq = 0;
+
 /** Intent type constants. Keep snake_case stable strings; analytics + tests pin on these. */
 export const INTENTS = Object.freeze({
   SAVE_SETTLEMENT:  'save-settlement',
@@ -66,7 +72,14 @@ function writeStored(value) {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value));
       _memoryStore = null; // keep the two stores coherent on success
       return;
-    } catch { /* fall through */ }
+    } catch {
+      // The write failed (quota/disabled) but an EARLIER write may have left a
+      // stale value in sessionStorage. readStored prefers a present
+      // sessionStorage value over _memoryStore, so that stale value would
+      // shadow the correct in-memory fallback below. Drop it first to keep the
+      // two stores coherent.
+      try { sessionStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    }
   }
   _memoryStore = value;
 }
@@ -80,10 +93,13 @@ function clearStored() {
 
 // ── Public API ────────────────────────────────────────────────────────
 
-/** Set the pending intent. Overwrites any prior intent — only one at a time. */
+/** Set the pending intent. Overwrites any prior intent — only one at a time.
+ *  Each stash gets a fresh `id` so a re-stash (e.g. after a failed save the
+ *  user retries) is a distinct intent the in-flight guard won't suppress. */
 export function setPending(type, payload) {
   if (!type) return;
-  writeStored({ type, payload, stashedAt: Date.now() });
+  const id = `${Date.now()}-${++_stashSeq}`;
+  writeStored({ type, payload, stashedAt: Date.now(), id });
 }
 
 /** Read the pending intent without consuming it. Returns null when empty
@@ -106,6 +122,15 @@ export function clearPending() {
 // ── Handler registry ──────────────────────────────────────────────────
 const _handlers = new Map();
 
+// One-shot guard: the id of the stash currently being dispatched. SIGNED_IN
+// fires consume() and can re-fire (token refresh, a second tab, sign-out +
+// sign-in) while the first dispatch is still awaiting its async handler. The
+// L15 contract keeps a failed intent stashed for a retry, so without this guard
+// a re-fire would re-enter the handler on the same stash → a duplicate save.
+// We track the in-flight id and treat a concurrent consume of that same id as a
+// no-op. It clears once the dispatch settles, so a deliberate retry still runs.
+let _inFlightId = null;
+
 /** Register a handler for an intent type. Module-init time call. */
 export function registerHandler(type, handlerFn) {
   if (typeof handlerFn !== 'function') {
@@ -121,11 +146,30 @@ export function unregisterHandler(type) {
 
 /** Consume + dispatch the pending intent. Called by AuthModal's success
  *  handler. Returns the handler's return value (or null on no-op). The
- *  intent is cleared once a handler exists, whether that handler succeeded
- *  or threw — failed handled intents do NOT linger across sessions. */
+ *  intent is cleared ONLY after the handler resolves successfully — a handler
+ *  that throws OR returns a falsy result (the SAVE_SETTLEMENT handler returns
+ *  null on save failure rather than throwing) leaves the intent stashed so the
+ *  user can retry instead of silently losing their dossier. */
 export async function consume(ctx) {
+  const stored = readStored();
   const pending = readPending();
   if (!pending) return null;
+
+  // Idempotency: if a dispatch for this exact stash is already in flight, a
+  // re-fire (concurrent SIGNED_IN) must not re-enter the handler. Bail out
+  // rather than duplicate the side effect (a duplicate save).
+  //
+  // setPending always assigns an id, but a stash can reach consume() without
+  // one — an older stash format, or an intent written outside setPending. With
+  // no id the guard would key on null and never match, so a no-id intent could
+  // re-fire and duplicate the save. Backfill a stable id and persist it so the
+  // concurrent re-fire reads the SAME key and the guard catches it.
+  let stashId = stored?.id ?? null;
+  if (stored && stashId === null) {
+    stashId = `backfill-${Date.now()}-${++_stashSeq}`;
+    writeStored({ ...stored, id: stashId });
+  }
+  if (stashId !== null && _inFlightId === stashId) return null;
 
   const handler = _handlers.get(pending.type);
   if (!handler) {
@@ -136,15 +180,25 @@ export async function consume(ctx) {
     return null;
   }
 
-  clearPending();
+  _inFlightId = stashId;
   try {
-    return await handler(pending.payload, ctx || {});
+    const result = await handler(pending.payload, ctx || {});
+    // A falsy result signals the handler could not complete (e.g. the save
+    // failed). Keep the intent stashed in that case so it survives for a retry.
+    if (result) clearPending();
+    return result;
   } catch (e) {
     if (typeof console !== 'undefined') {
 
       console.warn(`[authIntents] handler "${pending.type}" threw:`, e);
     }
+    // Leave the intent stashed — a throw is a failure, not a consumed success.
     return null;
+  } finally {
+    // Release the guard so a deliberate retry (or a re-stash) can dispatch
+    // again. A still-stashed failed intent will only re-fire on the NEXT
+    // SIGNED_IN, never re-enter while this dispatch is mid-flight.
+    if (_inFlightId === stashId) _inFlightId = null;
   }
 }
 
@@ -152,4 +206,5 @@ export async function consume(ctx) {
 export function _resetForTests() {
   _handlers.clear();
   clearStored();
+  _inFlightId = null;
 }

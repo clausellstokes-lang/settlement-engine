@@ -13,9 +13,9 @@ export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+const clamp01 = (/** @type {any} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
 
-const round2 = (value) => Math.round((Number(value) || 0) * 100) / 100;
+const round2 = (/** @type {any} */ value) => Math.round((Number(value) || 0) * 100) / 100;
 
 const TYPE_DAILY_LIFE_BASE = Object.freeze({
   neutral: 0.08,
@@ -51,31 +51,31 @@ const POSTURE_LABELS = Object.freeze({
   covert_corridor: 'covert criminal-corridor posture',
 });
 
-function clipText(value, max = 220) {
+function clipText(/** @type {any} */ value, max = 220) {
   const text = String(value || '').replace(/\s+/g, ' ').trim();
   // Word-boundary truncation — a hard slice left mid-word fragments in
   // persisted memory summaries and AI context payloads.
   return truncateAtWord(text, max, '...');
 }
 
-function titleForType(type) {
+function titleForType(/** @type {any} */ type) {
   return String(type || 'neutral').replace(/_/g, ' ');
 }
 
-function tierRank(item) {
+function tierRank(/** @type {any} */ item) {
   const tier = item?.settlement?.tier || item?.tier || 'village';
   const rank = TIER_ORDER.indexOf(tier);
   return rank >= 0 ? rank : TIER_ORDER.indexOf('village');
 }
 
-function population(item) {
+function population(/** @type {any} */ item) {
   const pop = item?.settlement?.population;
   if (typeof pop === 'number') return pop;
   if (pop && typeof pop.total === 'number') return pop.total;
   return 0;
 }
 
-function settlementPower(item) {
+function settlementPower(/** @type {any} */ item) {
   if (!item) return 0.35;
   const popScore = Math.min(1, Math.log10(Math.max(10, population(item))) / 5);
   const tierScore = tierRank(item) / Math.max(1, TIER_ORDER.length - 1);
@@ -86,22 +86,22 @@ function settlementPower(item) {
   return clamp01(tierScore * 0.38 + popScore * 0.18 + economy * 0.18 + defense * 0.16 + legitimacy * 0.1);
 }
 
-function itemFor(snapshot, saveId) {
+function itemFor(/** @type {any} */ snapshot, /** @type {any} */ saveId) {
   return snapshot?.byId?.get?.(String(saveId)) || null;
 }
 
-function nameFor({ snapshot, savedSettlements, saveId }) {
+function nameFor(/** @type {any} */ { snapshot, savedSettlements, saveId }) {
   const id = String(saveId);
   const item = itemFor(snapshot, id);
   if (item?.name) return item.name;
-  const save = (savedSettlements || []).find(s => String(s.id || s.settlement?.id) === id);
+  const save = (savedSettlements || []).find((/** @type {any} */ s) => String(s.id || s.settlement?.id) === id);
   return save?.name || save?.settlement?.name || id;
 }
 
 export function relationshipMemoryWeight(
-  eventTick,
+  /** @type {any} */ eventTick,
   currentTick = 0,
-  {
+  /** @type {any} */ {
     halfLifeTicks = RELATIONSHIP_MEMORY_HALF_LIFE_TICKS,
     maxLookbackTicks = RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS,
   } = {},
@@ -117,7 +117,7 @@ export function relationshipMemoryWeight(
   return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
 }
 
-function memoryEntry(raw, currentTick, fallbackType) {
+function memoryEntry(/** @type {any} */ raw, /** @type {any} */ currentTick, /** @type {any} */ fallbackType) {
   const tick = Number.isFinite(raw?.tick) ? raw.tick : null;
   const severity = clamp01(raw?.severity ?? raw?.outcome?.severity ?? 0.45);
   const weight = relationshipMemoryWeight(tick, currentTick);
@@ -135,7 +135,8 @@ function memoryEntry(raw, currentTick, fallbackType) {
   };
 }
 
-function collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick }) {
+function collectRelationshipMemories(/** @type {any} */ { worldState, relationshipKey, relState, currentTick }) {
+  /** @type {any[]} */
   const out = [];
   // One world event lands in up to THREE stores: applyRelationshipPatch writes
   // a recentIncidents row AND (for label changes) a history row, while the
@@ -156,12 +157,12 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // The per-relationship stores then fill in only events the pulse window no
   // longer covers (party incidents, war resolutions, truncated history).
   const seen = new Set();
-  const keyFor = (tick, type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
-  const outcomeKeyFor = (id) => (id ? `outcome:${id}` : null);
-  const add = (entry, keys) => {
+  const keyFor = (/** @type {any} */ tick, /** @type {any} */ type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
+  const outcomeKeyFor = (/** @type {any} */ id) => (id ? `outcome:${id}` : null);
+  const add = (/** @type {any} */ entry, /** @type {any} */ keys) => {
     if (!entry) return;
     const valid = keys.filter(Boolean);
-    if (valid.some(key => seen.has(key))) return;
+    if (valid.some((/** @type {any} */ key) => seen.has(key))) return;
     for (const key of valid) seen.add(key);
     out.push(entry);
   };
@@ -223,7 +224,7 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   return out.sort((a, b) => b.score - a.score).slice(0, 8);
 }
 
-function flowProfile(type, relState) {
+function flowProfile(/** @type {any} */ type, /** @type {any} */ relState) {
   const trust = clamp01(relState.trust);
   const resentment = clamp01(relState.resentment);
   const dependency = clamp01(relState.dependency);
@@ -251,7 +252,7 @@ function flowProfile(type, relState) {
   }
 }
 
-function classifyPosture(type, relState, memoryScore) {
+function classifyPosture(/** @type {any} */ type, /** @type {any} */ relState, /** @type {any} */ memoryScore) {
   if (type === 'neutral') return relState.trust > 0.55 ? 'open_neutral' : 'stable_neutral';
   if (type === 'trade_partner') return relState.resentment > 0.34 || relState.tradeBalance < 0.38 ? 'strained_trade' : 'open_trade';
   if (type === 'allied') return relState.obligationFatigue > 0.45 || relState.resentment > 0.28 ? 'strained_alliance' : 'protective_alliance';
@@ -268,7 +269,8 @@ function classifyPosture(type, relState, memoryScore) {
   return 'stable_neutral';
 }
 
-function postureReasons(type, relState, memories, asymmetry) {
+function postureReasons(/** @type {any} */ type, /** @type {any} */ relState, /** @type {any} */ memories, /** @type {any} */ asymmetry) {
+  /** @type {any[]} */
   const out = [];
   if (memories[0]) out.push(`Recent memory: ${memories[0].summary}`);
   if (relState.resentment > 0.5) out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);
@@ -283,7 +285,7 @@ function postureReasons(type, relState, memories, asymmetry) {
   return out.slice(0, 4);
 }
 
-function practicalEffects(type, posture) {
+function practicalEffects(/** @type {any} */ type, /** @type {any} */ posture) {
   if (type === 'trade_partner') return posture === 'strained_trade'
     ? ['Merchants price risk into contracts.', 'Caravans delay departures or seek alternate routes.', 'Market gossip tracks shortages and favors.']
     : ['Caravans and market factors move with confidence.', 'Imported goods feel routine rather than exceptional.'];
@@ -315,10 +317,10 @@ function practicalEffects(type, posture) {
 // instead of recomputing — that read is what earns the field family its
 // persistence. Returns null (recompute fallback) for legacy saves that predate
 // the stamp or carry an unrecognizable posture.
-function persistedPostureRow(relState, edge, relationshipKey, from, to) {
+function persistedPostureRow(/** @type {any} */ relState, /** @type {any} */ edge, /** @type {any} */ relationshipKey, /** @type {any} */ from, /** @type {any} */ to) {
   const blob = relState?.relationshipMemory;
   if (!blob || typeof blob !== 'object') return null;
-  if (!POSTURE_LABELS[blob.posture]) return null;
+  if (!POSTURE_LABELS[/** @type {keyof typeof POSTURE_LABELS} */ (blob.posture)]) return null;
   if (!Number.isFinite(blob.score) || !Number.isFinite(blob.dailyLifeWeight)) return null;
   const type = relState.relationshipType;
   return {
@@ -328,7 +330,7 @@ function persistedPostureRow(relState, edge, relationshipKey, from, to) {
     relationshipType: type,
     legacyRelationshipType: edge.legacyRelationshipType || null,
     posture: blob.posture,
-    postureLabel: blob.postureLabel || POSTURE_LABELS[blob.posture],
+    postureLabel: blob.postureLabel || POSTURE_LABELS[/** @type {keyof typeof POSTURE_LABELS} */ (blob.posture)],
     memoryScore: round2(clamp01(blob.score)),
     dailyLifeWeight: round2(clamp01(blob.dailyLifeWeight)),
     asymmetry: round2(blob.asymmetry ?? 0),
@@ -378,7 +380,7 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const asymmetry = round2(settlementPower(itemFor(snapshot, from)) - settlementPower(itemFor(snapshot, to)));
     const flow = flowProfile(type, relState);
     const reasons = postureReasons(type, relState, memories, asymmetry);
-    const dailyLifeWeight = clamp01((TYPE_DAILY_LIFE_BASE[type] ?? 0.12) + memoryScore * 0.35 + Math.max(0, relState.resentment - 0.35) * 0.18);
+    const dailyLifeWeight = clamp01((TYPE_DAILY_LIFE_BASE[/** @type {keyof typeof TYPE_DAILY_LIFE_BASE} */ (type)] ?? 0.12) + memoryScore * 0.35 + Math.max(0, relState.resentment - 0.35) * 0.18);
 
     postures.push({
       relationshipKey,
@@ -426,7 +428,7 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
       dailyLifeWeight: posture.dailyLifeWeight,
       flowProfile: posture.flowProfile,
       asymmetry: posture.asymmetry,
-      recentMemory: posture.recentMemory.slice(0, 4).map(({ tick, type, label, summary, severity, weight }) => ({
+      recentMemory: posture.recentMemory.slice(0, 4).map((/** @type {any} */ { tick, type, label, summary, severity, weight }) => ({
         tick,
         type,
         label,
@@ -450,7 +452,7 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
   return { ...worldState, relationshipStates };
 }
 
-function directionFor(posture, settlementId) {
+function directionFor(/** @type {any} */ posture, /** @type {any} */ settlementId) {
   const id = String(settlementId);
   // (No self-loop branch: buildRelationshipPostures only emits pair edges with
   // distinct from/to, so from === to === id is unreachable for a normal edge.)
@@ -467,7 +469,7 @@ function directionFor(posture, settlementId) {
   return 'indirect';
 }
 
-function entrySummary(posture, settlementId, otherName) {
+function entrySummary(/** @type {any} */ posture, /** @type {any} */ settlementId, /** @type {any} */ otherName) {
   const direction = directionFor(posture, settlementId);
   if (direction === 'overlord_to_vassal') return `${otherName} is a vassal under a ${posture.postureLabel}.`;
   if (direction === 'vassal_to_overlord') return `${otherName} is the overlord; the settlement lives under a ${posture.postureLabel}.`;
@@ -486,7 +488,7 @@ export function sanitizeRelationshipMemoryContext(context, {
 } = {}) {
   if (!context || typeof context !== 'object') return null;
   const relationships = Array.isArray(context.relationships) ? context.relationships : [];
-  const sanitized = relationships.slice(0, maxRelationships).map(item => ({
+  const sanitized = relationships.slice(0, maxRelationships).map((/** @type {any} */ item) => ({
     otherSettlementId: item.otherSettlementId ? String(item.otherSettlementId) : null,
     otherSettlementName: clipText(item.otherSettlementName, 80),
     relationshipType: clipText(item.relationshipType, 40),
@@ -495,15 +497,15 @@ export function sanitizeRelationshipMemoryContext(context, {
     summary: clipText(item.summary, 240),
     practicalEffects: (Array.isArray(item.practicalEffects) ? item.practicalEffects : [])
       .slice(0, 4)
-      .map(text => clipText(text, 180)),
+      .map((/** @type {any} */ text) => clipText(text, 180)),
     recentMemory: (Array.isArray(item.recentMemory) ? item.recentMemory : [])
       .slice(0, maxMemories)
-      .map(memory => ({
+      .map((/** @type {any} */ memory) => ({
         tick: Number.isFinite(memory?.tick) ? memory.tick : null,
         label: clipText(memory?.label || memory?.type, 80),
         summary: clipText(memory?.summary, 200),
       })),
-  })).filter(item => item.otherSettlementName || item.summary);
+  })).filter((/** @type {any} */ item) => item.otherSettlementName || item.summary);
   if (!sanitized.length) return null;
   return {
     settlementId: context.settlementId ? String(context.settlementId) : null,
@@ -557,7 +559,7 @@ export function buildSettlementRelationshipMemoryContext({
       direction: directionFor(posture, id),
       summary: entrySummary(posture, id, otherSettlementName),
       practicalEffects: posture.practicalEffects,
-      recentMemory: posture.recentMemory.slice(0, maxMemories).map(memory => ({
+      recentMemory: posture.recentMemory.slice(0, maxMemories).map((/** @type {any} */ memory) => ({
         tick: memory.tick,
         label: memory.label,
         summary: memory.summary,

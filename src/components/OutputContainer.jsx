@@ -371,7 +371,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const executeAiAction = async (_kind) => {
     if (isConfigured) {
       await requestNarrative(saveId);
-      landOnNarrativeSurface();
+      // requestNarrative returns no value but writes its outcome to the store:
+      // every failure path (validation, insufficient credits, generate throw)
+      // sets aiError, and a success clears it. Read the FRESH post-await state
+      // (the selector value closed over above is stale) and only land on the
+      // narrative surface when the run actually succeeded — otherwise a failed
+      // narration would still navigate the reader off their current tab onto an
+      // empty payoff. (P9 the peak action lands only when there's a payoff.)
+      if (!useStore.getState().aiError) landOnNarrativeSurface();
     } else {
       await runLocalAiLayer(landOnNarrativeSurface);
     }
