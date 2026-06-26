@@ -238,6 +238,7 @@ export default function MapOverlay({ bridge, transformOut }) {
   return (
     <div ref={wrapperRef} style={wrapperStyle}>
       <svg
+        data-map-overlay-svg=""
         style={svgStyle}
         viewBox={`0 0 ${vbW} ${vbH}`}
         preserveAspectRatio="none"

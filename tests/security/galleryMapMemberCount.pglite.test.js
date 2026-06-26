@@ -74,7 +74,11 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         tier text,
         data jsonb default '{}'::jsonb,
         campaign_state jsonb default '{}'::jsonb,
-        access_state text default 'active'
+        access_state text default 'active',
+        -- get_gallery_map (088) deep-links each member to its own dossier when the
+        -- member settlement is itself published, so it reads these columns.
+        is_public boolean default false,
+        public_slug text
       );
       create table public.saved_maps (
         id uuid primary key default gen_random_uuid(),
@@ -90,7 +94,20 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         published_at timestamptz default now(),
         view_count int default 0,
         import_count int default 0,
-        gallery_importable boolean default false
+        gallery_importable boolean default false,
+        -- Migration 088 columns (the net-current list_gallery_maps projects the
+        -- image cover; get_gallery_map/publish_map reference the rest). Mirror the
+        -- real saved_maps shape so the net-current RPC bodies resolve.
+        gallery_image_url text,
+        gallery_image_alt text,
+        gallery_share_world boolean default false,
+        gallery_world_sections jsonb default '[]'::jsonb,
+        gallery_world_snapshot jsonb,
+        gallery_realm_arc_summary text,
+        gallery_facet_member_band text,
+        gallery_facet_at_war boolean,
+        gallery_facet_dominant_culture text,
+        gallery_facet_tier_spread text
       );
       -- Migration 076 added a LEFT JOIN onto profiles.external_name to resolve
       -- the map AUTHOR by owner id. This test exercises member_count, not the
