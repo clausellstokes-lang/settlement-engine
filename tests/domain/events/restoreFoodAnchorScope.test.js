@@ -56,6 +56,58 @@ describe('food_anchor_lost winds down when the anchor is restored / re-opened', 
     expect(findActiveCondition(restored, 'food_anchor_lost')).toBeNull();
   });
 
+  it('restoring an UNRELATED wound on a still-broken anchor does NOT clear the food crisis', () => {
+    // The granary takes a capacity break (raises the food crisis), then later a
+    // separate legitimacy scandal. A RESTORE with no explicit cause undoes the
+    // MOST RECENT impairment — the scandal — leaving the capacity break in place.
+    // The granary is still physically broken, so the food crisis must survive.
+    const base = {
+      name: 'Town',
+      institutions: [{ id: 'institution.granary', name: 'Granary', status: 'active', impairments: [] }],
+    };
+    // Capacity break — raises food_anchor_lost.
+    let st = mutateSettlement({
+      settlement: base,
+      event: { id: 'e_break', type: 'IMPAIR_INSTITUTION', targetId: 'institution.granary', payload: { dimension: 'capacity', severity: 0.7 } },
+    });
+    expect(findActiveCondition(st, 'food_anchor_lost')).not.toBeNull();
+    // A LATER, unrelated legitimacy scandal (the most-recent impairment).
+    st = mutateSettlement({
+      settlement: st,
+      event: { id: 'e_scandal', type: 'IMPAIR_INSTITUTION', targetId: 'institution.granary', payload: { dimension: 'legitimacy', severity: 0.4 } },
+    });
+    // RESTORE with no explicit cause winds down only the most-recent (the scandal).
+    st = mutateSettlement({
+      settlement: st,
+      event: { id: 'e_restore', type: 'RESTORE_INSTITUTION', targetId: 'institution.granary' },
+    });
+
+    const granary = st.institutions.find(i => i.id === 'institution.granary');
+    // The capacity break still stands; the scandal is gone.
+    expect((granary.impairments || []).filter(i => i.type === 'capacity')).toHaveLength(1);
+    expect((granary.impairments || []).some(i => i.type === 'legitimacy')).toBe(false);
+    // A still-broken granary must NOT read as a healthy food supply.
+    expect(findActiveCondition(st, 'food_anchor_lost')).not.toBeNull();
+  });
+
+  it('restoring the capacity break itself DOES clear the food crisis (anchor whole again)', () => {
+    const base = {
+      name: 'Town',
+      institutions: [{ id: 'institution.granary', name: 'Granary', status: 'active', impairments: [] }],
+    };
+    const broken = mutateSettlement({
+      settlement: base,
+      event: { id: 'e_break', type: 'IMPAIR_INSTITUTION', targetId: 'institution.granary', payload: { dimension: 'capacity', severity: 0.7 } },
+    });
+    expect(findActiveCondition(broken, 'food_anchor_lost')).not.toBeNull();
+    // RESTORE the only impairment (the capacity break) — anchor is whole again.
+    const restored = mutateSettlement({
+      settlement: broken,
+      event: { id: 'e_restore', type: 'RESTORE_INSTITUTION', targetId: 'institution.granary' },
+    });
+    expect(findActiveCondition(restored, 'food_anchor_lost')).toBeNull();
+  });
+
   it('restoring one anchor does NOT clear a food crisis raised by a DIFFERENT anchor', () => {
     const base = {
       name: 'Town',

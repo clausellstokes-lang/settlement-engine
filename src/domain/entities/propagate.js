@@ -237,11 +237,14 @@ function mapDimension(fromType, toType, dim, sourceNpc) {
   if (fromType === 'faction'     && toType === 'institution') return FACTION_TO_INSTITUTION_DIM[dim] || null;
   if (fromType === 'npc' && toType === 'institution') return 'staffing';
   if (fromType === 'npc' && toType === 'faction') {
-    // Per the contract: leadership or membership by importance tier. A
-    // pillar/key figure shapes the faction's direction (LEADERSHIP); a
-    // notable/minor one is rank-and-file (MEMBERSHIP). Reuse the tier
-    // boundary already encoded in importanceWeight so the two stay aligned.
-    return importanceWeight(sourceNpc) >= 0.7 ? 'leadership' : 'membership';
+    // Per the contract: leadership or membership by importance tier — and the
+    // boundary MUST match killNpc's own direct-impairment choice, or a single
+    // death lands TWO faction dimensions (a direct one + a propagated twin on a
+    // different dimension) and conjures a spurious crisis. killNpc stamps
+    // LEADERSHIP only for a PILLAR (npc.importance === 'pillar'); a key figure is
+    // MEMBERSHIP there. Gate on the pillar weight (1.0), not the key weight (0.7),
+    // so the two agree: pillar → leadership, key/notable → membership.
+    return importanceWeight(sourceNpc) >= 1.0 ? 'leadership' : 'membership';
   }
   return null;
 }

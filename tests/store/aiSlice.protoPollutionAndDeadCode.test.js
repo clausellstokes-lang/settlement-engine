@@ -33,6 +33,11 @@ vi.mock('../../src/lib/ai.js', () => ({
       // Stream a hostile dotted path through onField — this is the setNestedPath
       // entry point the guard protects.
       opts.onField?.('__proto__.polluted', 'pwned');
+      // Also stream a hostile daily-life beat directly at the consumer. The real
+      // ai.js drops this before forwarding, but a defense-in-depth guard in the
+      // slice must refuse to act on it even if a forwarded beat slips through.
+      opts.onField?.('dailyLife.__proto__', { polluted: 'pwned' });
+      opts.onField?.('dailyLife.dawn', 'Dawn breaks clean.');
       opts.onField?.('thesis', 'A clean thesis.');
       return {
         result: { thesis: 'A clean thesis.', name: 'Ashford' },
@@ -106,6 +111,23 @@ describe('aiSlice — prototype pollution / dead code / stale banner', () => {
     expect(Object.prototype.polluted).toBeUndefined();
     // The legit narrative still committed.
     expect(store.getState().aiSettlement).toMatchObject({ thesis: 'A clean thesis.' });
+
+    delete Object.prototype.polluted; // belt-and-suspenders cleanup
+  });
+
+  test('a forwarded __proto__ daily-life beat never reaches Object.prototype through the slice', async () => {
+    const store = makeStore();
+    await store.getState().requestNarrative('save.a');
+
+    // The slice refused to act on the dangerous beat — no prototype pollution,
+    // and the dangerous key never landed as an own property of aiDailyLife.
+    expect(({}).polluted).toBeUndefined();
+    expect(Object.prototype.polluted).toBeUndefined();
+    const dl = store.getState().aiDailyLife;
+    expect(Object.getPrototypeOf(dl)).toBe(Object.prototype);
+    expect(Object.prototype.hasOwnProperty.call(dl, '__proto__')).toBe(false);
+    // The clean beat still landed.
+    expect(dl).toMatchObject({ dawn: 'Dawn breaks clean.' });
 
     delete Object.prototype.polluted; // belt-and-suspenders cleanup
   });

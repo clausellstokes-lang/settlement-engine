@@ -1,4 +1,6 @@
 
+import { useMemo } from 'react';
+
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
 import {
@@ -41,6 +43,13 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
     item.primaryResource,
     ...(item.tags || []),
   ].filter(Boolean).slice(0, 5);
+  // DOMPurify is not cheap; in a long gallery list this card re-renders on every
+  // vote/scroll. Memoize the sanitized description so it's only re-run when the
+  // source HTML actually changes, not on each render. (defense-in-depth at the sink.)
+  const descriptionHtml = useMemo(
+    () => (item.description ? sanitizeGalleryHtml(item.description) : ''),
+    [item.description],
+  );
 
   return (
     <article style={{
@@ -150,7 +159,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
             }}
-            dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(item.description) }}
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           />
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>

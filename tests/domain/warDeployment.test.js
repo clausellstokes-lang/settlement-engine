@@ -156,8 +156,10 @@ describe('war layer — deployment + drain', () => {
     expect(war.deployments.strong.maxStartStrength).toBeGreaterThan(0);
     expect(war.deployments.strong.currentEffectiveStrength).toBe(war.deployments.strong.maxStartStrength);
     expect(war.graphChannels.map(c => `${c.from}->${c.to}:${c.type}`)).toEqual(['strong->weak:war_front']);
+    // Opening a NEW siege now also surfaces a strategy_deploy MAJOR (the deferrable
+    // siege-initiation outcome) alongside the home-bleed conditions.
     const kinds = war.outcomes.map(o => o.candidateType).sort();
-    expect(kinds).toEqual(['army_deployed', 'war_drain']);
+    expect(kinds).toEqual(['army_deployed', 'strategy_deploy', 'war_drain']);
     const drain = war.outcomes.find(o => o.candidateType === 'war_drain');
     expect(drain.condition.archetype).toBe('war_drain');
     expect(drain.condition.severity).toBeGreaterThan(0);

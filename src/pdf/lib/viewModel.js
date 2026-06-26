@@ -1253,7 +1253,7 @@ function normalizeIncomeSources(arr) {
   // (or zero-amount) source has no bar to draw and would only add noise / risk a
   // degenerate total here, where the bar fill and label MUST agree. The screen may
   // still list such sources; this is a per-surface formatting choice, not a data
-  // disagreement. (See cross-bundle note re: documenting in display/PARITY_EXEMPT.)
+  // disagreement. (See the PARITY_EXEMPT contract in domain/display/parityContract.js.)
   const items = arr.map(s => ({
     ...s,
     raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,

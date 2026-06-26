@@ -227,7 +227,11 @@ function estimateUsd(provider: Provider, model: string, inputTokens: number, out
 // makes the cap admit FEWER concurrent runs (fail toward protection); the real
 // committed spend is always the source of truth for the actual ceiling.
 const RESERVATION_TOKEN_BUDGET: Record<string, { input: number; output: number }> = {
-  narrative:   { input: 40_000, output: 16_000 },
+  // A 'narrative' run fires the thesis + refinement passes AND folds in the 5
+  // daily-life beats (each re-sending the grounding) — so its reservation must
+  // cover the daily-life work too, else the up-front cap admission structurally
+  // under-reserves the real ~15-call run. = the old narrative budget + dailyLife.
+  narrative:   { input: 72_000, output: 28_000 },
   dailyLife:   { input: 32_000, output: 12_000 },
   progression: { input: 60_000, output: 16_000 },
 };

@@ -87,7 +87,25 @@ async function grantCreditsForSessionOnce(
   amount: number,
   source: string,
   sessionId: string,
+  oncePerUser = false,
 ) {
+  // Per-ACCOUNT idempotency: the founder bonus is once-per-account, not
+  // once-per-session — a SECOND founder_lifetime purchase (a new checkout session)
+  // must not re-grant the 30-credit bonus. (Credit-pack purchases stay
+  // once-per-session: a user can buy the same pack repeatedly.)
+  if (oncePerUser) {
+    const { data: priorForUser } = await supabase
+      .from('credit_ledger')
+      .select('id')
+      .eq('source', source)
+      .eq('user_id', userId)
+      .limit(1)
+      .maybeSingle();
+    if (priorForUser?.id) {
+      console.log(`[stripe-webhook] ${source} already granted to user ${userId} — skipping (once-per-account)`);
+      return;
+    }
+  }
   const { data: existing } = await supabase
     .from('credit_ledger')
     .select('id')
@@ -321,7 +339,7 @@ export async function handleStripeWebhook(
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
         // Founder bonus: one-time 30-credit grant (idempotent on session id).
-        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id);
+        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id, /* oncePerUser */ true);
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
         // One-shot purchase, no account required. Nothing to mutate on

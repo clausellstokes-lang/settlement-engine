@@ -14,7 +14,26 @@
  * These tests pin both behaviours and confirm the regression (blank output).
  */
 import { describe, test, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { __sanitizeForPdf as s } from '../../src/utils/generateCampaignPDF.js';
+
+const generatorSrc = readFileSync(
+  fileURLToPath(new URL('../../src/utils/generateCampaignPDF.js', import.meta.url)),
+  'utf8',
+);
+
+describe('generateCampaignPDF — no local binding shadows the module sanitiser s()', () => {
+  // buildCover (and the map/appendix iterators) once bound `s` as the loop /
+  // arrow variable, shadowing the module-level `s()` sanitiser inside that
+  // scope — so any sanitiser call moved into the block would silently invoke
+  // the settlement object as a function. The bindings are renamed to `save`;
+  // pin that no `s`-named iteration over `settlements` reappears.
+  test('settlements is never iterated with a single-letter `s` binding', () => {
+    expect(generatorSrc).not.toMatch(/for\s*\(\s*const\s+s\s+of\s+settlements\s*\)/);
+    expect(generatorSrc).not.toMatch(/settlements\.(?:map|filter|forEach)\(\s*s\s*=>/);
+  });
+});
 
 describe('generateCampaignPDF — Latin-1 sanitiser does not blank non-Latin names', () => {
   test('a fully CJK name no longer sanitises to an empty string', () => {

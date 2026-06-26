@@ -6,16 +6,22 @@ import GalleryDescriptionEditor from '../../src/components/GalleryDescriptionEdi
 
 afterEach(cleanup);
 
+// Visible-text length of an HTML string (what the cap counts).
+function visible(html) {
+  const box = document.createElement('div');
+  box.innerHTML = html;
+  return (box.textContent || '').length;
+}
+
 /**
- * §4c length cap. emit() measures clean.length but the buggy version sliced the
- * UNSANITIZED raw HTML at that boundary. Links are the sharpest case: cutting
- * raw mid-anchor and re-sanitizing makes DOMPurify re-expand the link with the
- * full target/rel attributes we inject — so the re-sanitized slice balloons
- * well PAST maxLength. Slicing the SAME sanitized string we measured keeps the
- * stored value within the cap.
+ * §4c length cap. The cap counts VISIBLE text, not raw markup: a description
+ * that's mostly tags (links, styled runs) must not be silently cut short just
+ * because its HTML is long. emit() sanitizes, measures textContent, and — only
+ * when the visible text is over — trims whole trailing text nodes (never
+ * mid-tag), re-sanitizing so the stored value stays well-formed.
  */
-describe('GalleryDescriptionEditor — length cap is enforced on the sanitized string', () => {
-  test('emit caps the sanitized output at maxLength even when raw HTML is much longer', () => {
+describe('GalleryDescriptionEditor — length cap counts visible text, not markup', () => {
+  test('markup-heavy content under the visible cap is NOT trimmed', () => {
     const onChange = vi.fn();
     const maxLength = 60;
     const { container } = render(
@@ -23,22 +29,40 @@ describe('GalleryDescriptionEditor — length cap is enforced on the sanitized s
     );
     const editable = container.querySelector('[contenteditable]');
 
-    // A run of links: sanitized output is hundreds of chars (> cap). Slicing the
-    // RAW markup at 60 lands mid-<a href=...>; re-sanitizing re-emits that anchor
-    // with target="_blank" rel="…" — ~95 chars, OVER the cap. Slicing the
-    // sanitized string instead stays within it.
+    // 8 links: the SANITIZED HTML is hundreds of chars (target/rel injected),
+    // but the visible text ("link 0 … link 7") is ~55 chars — under the cap.
+    // The buggy version capped on the HTML LENGTH and would have truncated this.
     const rawLinks = Array.from({ length: 8 }, (_, i) =>
-      `<a href="https://example.com/page${i}">link ${i}</a>`,
+      `<a href="https://example.com/page${i}">l${i}</a>`,
     ).join(' ');
     editable.innerHTML = rawLinks;
 
     fireEvent.input(editable);
 
-    expect(onChange).toHaveBeenCalled();
     const emitted = onChange.mock.calls.at(-1)[0];
-    // The cap must hold on the sanitized output. The old code (slice on raw)
-    // emitted a string longer than maxLength.
-    expect(emitted.length).toBeLessThanOrEqual(maxLength);
+    // Visible text fits, so every link survives — visible-text cap, not markup cap.
+    expect(visible(emitted)).toBeLessThanOrEqual(maxLength);
+    expect(emitted).toMatch(/l0/);
+    expect(emitted).toMatch(/l7/);
+  });
+
+  test('over-cap content is trimmed to maxLength VISIBLE characters', () => {
+    const onChange = vi.fn();
+    const maxLength = 40;
+    const { container } = render(
+      <GalleryDescriptionEditor value="" onChange={onChange} maxLength={maxLength} />,
+    );
+    const editable = container.querySelector('[contenteditable]');
+    // 120 visible chars across formatting — over the 40 cap.
+    editable.innerHTML = `<p><strong>${'A'.repeat(60)}</strong> <em>${'B'.repeat(60)}</em></p>`;
+
+    fireEvent.input(editable);
+
+    const emitted = onChange.mock.calls.at(-1)[0];
+    expect(visible(emitted)).toBeLessThanOrEqual(maxLength);
+    // Trim happens at a text-node boundary, never mid-tag: still balanced markup.
+    expect(emitted).toMatch(/<strong>/);
+    expect(emitted).toMatch(/<\/strong>/);
   });
 
   test('short content passes through unchanged (no spurious truncation)', () => {
@@ -53,6 +77,37 @@ describe('GalleryDescriptionEditor — length cap is enforced on the sanitized s
 
     const emitted = onChange.mock.calls.at(-1)[0];
     expect(emitted).toContain('Salt-marsh trading post.');
-    expect(emitted.length).toBeLessThanOrEqual(4000);
+    expect(visible(emitted)).toBeLessThanOrEqual(4000);
+  });
+
+  test('renders a live N/maxLength visible-character counter that updates on input', () => {
+    const onChange = vi.fn();
+    const maxLength = 100;
+    const { container, getByText } = render(
+      <GalleryDescriptionEditor value="<p>Hello</p>" onChange={onChange} maxLength={maxLength} />,
+    );
+    // Seeded value is 5 visible chars.
+    expect(getByText(`5/${maxLength}`)).toBeTruthy();
+
+    const editable = container.querySelector('[contenteditable]');
+    editable.innerHTML = '<p>Hello there</p>'; // 11 visible chars
+    fireEvent.input(editable);
+
+    expect(getByText(`11/${maxLength}`)).toBeTruthy();
+  });
+
+  test('surfaces a soft warning when the content hits the cap', () => {
+    const onChange = vi.fn();
+    const maxLength = 10;
+    const { container, queryByText } = render(
+      <GalleryDescriptionEditor value="" onChange={onChange} maxLength={maxLength} />,
+    );
+    expect(queryByText(/at the .*-character limit/i)).toBeNull();
+
+    const editable = container.querySelector('[contenteditable]');
+    editable.innerHTML = `<p>${'word '.repeat(20)}</p>`; // way over 10 visible
+    fireEvent.input(editable);
+
+    expect(queryByText(/at the 10-character limit/i)).toBeTruthy();
   });
 });

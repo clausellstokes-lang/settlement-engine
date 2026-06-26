@@ -235,12 +235,12 @@ function buildCover(d, campaign, settlements) {
   let totalPop = 0;
   let totalNPCs = 0;
   const cultures = new Set();
-  for (const s of settlements) {
-    const tier = s.settlement?.tier || 'unknown';
+  for (const save of settlements) {
+    const tier = save.settlement?.tier || 'unknown';
     tierCounts[tier] = (tierCounts[tier] || 0) + 1;
-    totalPop += Number(s.settlement?.population) || 0;
-    totalNPCs += (s.settlement?.npcs || []).length;
-    if (s.settlement?.culture) cultures.add(s.settlement.culture);
+    totalPop += Number(save.settlement?.population) || 0;
+    totalNPCs += (save.settlement?.npcs || []).length;
+    if (save.settlement?.culture) cultures.add(save.settlement.culture);
   }
 
   // Two-column stat grid
@@ -364,10 +364,10 @@ function buildMap(d, campaignName, settlements, pageN) {
   // Build nodes & edges. Node ids and neighbour ids can disagree in JS type
   // (numeric save id vs stringified neighbour id), so key every id on String —
   // a raw `===` lookup would silently drop edges on a type mismatch.
-  const nodes = settlements.map(s => ({
-    id: String(s.id),
-    label: s.name || s.settlement?.name || 'Unnamed',
-    tier: s.settlement?.tier || '',
+  const nodes = settlements.map(save => ({
+    id: String(save.id),
+    label: save.name || save.settlement?.name || 'Unnamed',
+    tier: save.settlement?.tier || '',
   }));
   const nodeIds = new Set(nodes.map(nn => nn.id));
 
@@ -719,8 +719,8 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
     return { y: MT, pageN };
   }
 
-  const withEffects = settlements.filter(s => {
-    const m = allModifiers.get(s.id);
+  const withEffects = settlements.filter(save => {
+    const m = allModifiers.get(save.id);
     return m && m.sources && m.sources.length > 0;
   });
   if (withEffects.length === 0) return { y: MT, pageN };

@@ -303,9 +303,11 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
         const beat = msg.field.slice('dailyLife.'.length);
         // The beat name is untrusted server input, same as a setPath segment:
         // reject __proto__/constructor/prototype so a crafted beat can't walk
-        // the prototype chain and pollute Object.prototype.
+        // the prototype chain and pollute Object.prototype. DROP it entirely —
+        // don't forward to onField — so the consumer slice can't act on it
+        // either (a forwarded beat would otherwise be written into aiDailyLife
+        // state under the dangerous key). The write below is skipped too.
         if (beat === '__proto__' || beat === 'constructor' || beat === 'prototype') {
-          try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
           return;
         }
         if (!dailyLife || typeof dailyLife !== 'object') dailyLife = {};

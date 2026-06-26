@@ -115,6 +115,27 @@ describe.runIf(exists)('world-pulse atomic persist — execution against 069 (pg
         version_history jsonb,
         updated_at timestamptz not null default now()
       );
+
+      -- Minimal profiles + the account-status predicate the RPC guards on
+      -- (account_is_active, verbatim shape from migration 057). persist_world_pulse_
+      -- advance refuses banned/disabled/deleted callers; the harness must model that
+      -- dependency or the function errors at runtime (function does not exist).
+      create table public.profiles (
+        id uuid primary key,
+        role text,
+        credits integer not null default 0,
+        banned_at   timestamptz,
+        disabled_at timestamptz,
+        deleted_at  timestamptz
+      );
+      create or replace function public.account_is_active(p_uid uuid)
+      returns boolean language sql stable as $$
+        select exists (
+          select 1 from public.profiles
+          where id = p_uid
+            and banned_at is null and disabled_at is null and deleted_at is null
+        );
+      $$;
     `);
 
     // The real, verbatim RPC body from 069.
@@ -122,7 +143,15 @@ describe.runIf(exists)('world-pulse atomic persist — execution against 069 (pg
   });
 
   beforeEach(async () => {
-    await db.exec(`truncate public.saved_maps; truncate public.settlements;`);
+    await db.exec(`truncate public.saved_maps; truncate public.settlements; truncate public.profiles cascade;`);
+    // Active profiles for both owners. persist_world_pulse_advance guards on
+    // account_is_active(auth.uid()) (banned/disabled/deleted accounts must not mutate
+    // world state — same status spine as 057/060's definer writes), so the calling
+    // owner needs a live profile row or every apply raises 'account is not active'.
+    await db.query(
+      `insert into public.profiles (id, role, credits) values ($1,'user',0), ($2,'user',0)`,
+      [ALICE, MALLORY],
+    );
     // Alice owns the campaign (tick 0) and both member settlements; Mallory owns FOREIGN.
     await db.query(
       `insert into public.saved_maps (id, user_id, name, map_seed, map_data)

@@ -751,17 +751,58 @@ async function mockUpdateProfileNames() {
   // No-op in mock mode.
 }
 
+// Bounded retry for a transient profile read on an auth-change event. A
+// momentary blip (RLS warm-up, 5xx, network) must not decide a session's fate
+// on the first try. We retry fetchProfileAuth a few times with a short backoff;
+// the FIRST success returns the real, server-authoritative profile.
+//
+// This matters most on a one-shot OAuth / magic-link SIGNED_IN: there is no
+// prior session in the store to fall back to, so a single transient failure
+// would otherwise drop a user who genuinely just authenticated. Retrying gives
+// the blip a chance to clear before we surface success. It is equally safe on a
+// TOKEN_REFRESHED — a recovered read restores the real tier sooner; an
+// unrecovered one still falls through to the deliberate skip below.
+//
+// We never substitute a tier here: every attempt reads the profiles table (the
+// source of truth). We do NOT trust user-writable user_metadata and do NOT
+// fabricate a free downgrade — exhausting the retries means the caller is
+// skipped, not granted anything.
+const PROFILE_RETRY_ATTEMPTS = 4;
+const PROFILE_RETRY_BACKOFF_MS = 250;
+
+async function fetchProfileAuthWithRetry(user) {
+  let lastError;
+  for (let attempt = 0; attempt < PROFILE_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      return await fetchProfileAuth(user);
+    } catch (e) {
+      // PGRST116 never reaches here (fetchProfileAuth returns the no-row
+      // defaults rather than throwing), so any throw is a genuine transient
+      // failure worth re-attempting.
+      lastError = e;
+      if (attempt < PROFILE_RETRY_ATTEMPTS - 1) {
+        await new Promise(r => setTimeout(r, PROFILE_RETRY_BACKOFF_MS * (attempt + 1)));
+      }
+    }
+  }
+  throw lastError;
+}
+
 function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
       if (session?.user) {
         let profile;
         try {
-          profile = await fetchProfileAuth(session.user);
+          profile = await fetchProfileAuthWithRetry(session.user);
         } catch {
-          // Transient profile-lookup failure on a refresh/sign-in event. Do NOT
-          // rebuild auth from downgraded defaults — skip this event so the store
-          // keeps its last-known tier/role until a later event succeeds.
+          // Transient profile-lookup failure that survived every retry. Do NOT
+          // rebuild auth from downgraded defaults and do NOT trust the writable
+          // user_metadata — skip this event so the store keeps its last-known
+          // tier/role (refresh) or stays in its safe logged-out-and-retry state
+          // (a first sign-in with no prior session) until a later event or a
+          // manual retry succeeds. The retry above already gave a momentary blip
+          // its chances; a sustained outage is the deliberate safe failure.
           return;
         }
         callback(

@@ -88,6 +88,21 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
   });
 }
 
+// True when an institution STILL carries a capacity impairment severe enough to
+// keep a food anchor broken. Mirrors the raise threshold (a single capacity
+// impairment at severity >= 0.6 — see withFoodAnchorLostIfAnchor / impairInstitution);
+// a covert mark never breaks an anchor. A still-removed/destroyed status also
+// counts as broken. Used to gate the food-crisis wind-down so restoring an
+// UNRELATED impairment on a granary that remains physically broken does not
+// prematurely declare its food supply healthy again.
+/** @param {any} inst */
+function hasBreakingCapacityImpairment(inst) {
+  if (inst?.status === STATUS_REMOVED || inst?.status === 'destroyed') return true;
+  return (inst?.impairments || []).some(
+    (/** @type {any} */ i) => i?.type === 'capacity' && i?.covert !== true && Number(i?.severity ?? 0) >= 0.6,
+  );
+}
+
 // The inverse of withFoodAnchorLostIfAnchor: when a food-anchor institution is
 // restored or re-opened, the settlement-level food_anchor_lost crisis it raised
 // must not outlive it. We drop ONLY the conditions this exact institution
@@ -247,7 +262,13 @@ function restoreInstitution(s, event) {
   let next = replaceInstitution(s, inst, restored);
   // A restored food anchor is functional again — wind down the settlement-level
   // food crisis its loss raised (the inverse of damage/impair/remove raising it).
-  next = withoutFoodAnchorLostFor(next, inst);
+  // But RESTORE is scoped to ONE prior impairment: restoring an UNRELATED (e.g.
+  // most-recent) wound on an anchor that STILL carries a capacity break must not
+  // declare the food supply healthy. Only wind down when the restore actually
+  // left the anchor whole — no breaking capacity impairment remains.
+  if (!hasBreakingCapacityImpairment(restored)) {
+    next = withoutFoodAnchorLostFor(next, inst);
+  }
   return next;
 }
 

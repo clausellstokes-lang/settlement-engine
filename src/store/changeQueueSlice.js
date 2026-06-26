@@ -222,6 +222,13 @@ export function createChangeQueueSlice(set, get) {
       if (activeSaveId != null && String(activeSaveId) !== key) {
         return { ok: false, error: 'Open this settlement before committing its changes.' };
       }
+      // Fail-safe: with NO active save there is no row to persist into, so the
+      // single-row write below is skipped — and clearing the queue on a "success"
+      // that never wrote anything is silent data loss. Refuse instead, leaving the
+      // queue intact so it commits once a settlement is open (no-op, not discard).
+      if (activeSaveId == null) {
+        return { ok: false, error: 'Open this settlement before committing its changes.' };
+      }
 
       // (1) Pre-flush snapshot for rollback (R2/R8). Deep-cloned so a later
       // mutate cannot reach back into it.
@@ -255,6 +262,16 @@ export function createChangeQueueSlice(set, get) {
           // leaves no half-staged war-front intent behind (the stash mutates
           // worldState.deferredWarFronts during the flush replay).
           deferredWarFronts: cloneJson(c.worldState?.deferredWarFronts) || [],
+          // The regional half is DEFERRED on a member commit, but the CRISIS-TWIN
+          // half stays IMMEDIATE (rippleEventThroughWorld runs with skipRegional,
+          // not skip-all): a committed inject/resolve event mutates
+          // worldState.stressors right now, and a resolve also queues residual
+          // worldState.proposals. Snapshot BOTH so a FAILED commit rolls the
+          // condition/crisis state back in lockstep with the regional buckets —
+          // else a rolled-back commit leaves a phantom stressor (or proposal) the
+          // live settlement no longer reflects.
+          stressors: cloneJson(c.worldState?.stressors) || [],
+          proposals: cloneJson(c.worldState?.proposals) || [],
           regionalGraph: cloneJson(c.regionalGraph) || null,
         };
       })();
@@ -462,6 +479,11 @@ export function createChangeQueueSlice(set, get) {
                   ...c.worldState,
                   deferredImpacts: preCampaign.deferredImpacts,
                   deferredWarFronts: preCampaign.deferredWarFronts,
+                  // Roll the IMMEDIATE crisis-twin half back too: the inject/resolve
+                  // directive mutated stressors (and a resolve queued proposals)
+                  // during replay, so a failed commit must restore both buckets.
+                  stressors: preCampaign.stressors,
+                  proposals: preCampaign.proposals,
                 };
               }
               if (preCampaign.regionalGraph) c.regionalGraph = preCampaign.regionalGraph;

@@ -246,6 +246,24 @@ describe('changeQueueSlice — flush', () => {
     expect('beforeState' in entry).toBe(true);
   });
 
+  test('with NO active save the flush is a no-op that KEEPS the queue (no silent discard)', async () => {
+    // Regression: a null activeSaveId skips the single-row persist branch, so the
+    // old code reached the "delete the queue" line on a "success" that never wrote
+    // anything — silent data loss. The flush must refuse instead and leave the
+    // queue intact so it commits once a settlement is opened.
+    store.setState({ activeSaveId: null });
+    store.getState().queueChange('save_1', {
+      type: 'event', humanLabel: 'Add tavern',
+      payload: { event: { id: 'e1', type: 'ADD_INSTITUTION', targetId: 'tavern', payload: { label: 'Tavern', category: 'civic' } } },
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(false);
+    // The order is STILL queued (not silently dropped) and nothing was persisted.
+    expect(store.getState().listQueuedChanges('save_1')).toHaveLength(1);
+    expect(saves.update).not.toHaveBeenCalled();
+  });
+
   test('recordCanonFlavorEntry is a no-op off canon (draft never logs)', () => {
     store.setState({ phase: 'draft' });
     const recorded = store.getState().recordCanonFlavorEntry({

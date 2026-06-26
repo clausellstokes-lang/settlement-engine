@@ -111,6 +111,17 @@ begin
     raise exception 'not authorized to refund this spend';
   end if;
 
+  -- An ELEVATED (dev/admin) spend never debited credits or wrote allocations
+  -- (spend_credits skips the profiles.credits cache + credit_spend_allocations for
+  -- metadata.elevated=true). Refunding it would BUMP profiles.credits for a debit
+  -- that never happened — minting phantom credits. No-op + return the live balance
+  -- (mirrors spend_credits' own elevated-skip; the edge already guards this, this
+  -- is the RPC's defense-in-depth). Placed AFTER the ownership gate so a caller
+  -- can't probe another user's balance via a non-owned elevated spend id.
+  if coalesce(spend_row.metadata->>'elevated', 'false') = 'true' then
+    return (select credits from public.profiles where id = spend_row.user_id);
+  end if;
+
   -- Idempotency: don't double-refund. Any prior grant row referencing this
   -- spend id means it's already been refunded.
   if exists (

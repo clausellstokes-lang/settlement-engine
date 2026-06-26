@@ -229,6 +229,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     if (get().isAdvanceInFlight(campaignId)) {
       return { ok: false, reason: 'advance_in_flight' };
     }
+    // Parked-pause guard (mirrors advance_in_flight; checked SYNCHRONOUSLY before the
+    // first await): a campaign with an OUTSTANDING pausedAdvance cursor — a multi-tick
+    // interval that paused for DM verdicts, including one rehydrated by a reload-into-
+    // paused — is mid-interval, not idle. A fresh Advance over it would drain the queue
+    // and run a NEW interval, then clobber the parked cursor in Phase 2 (overwrite on a
+    // re-pause, or drop it on a complete), discarding the in-flight interval and
+    // silently advancing past the paused state — lost ticks / a corrupted resume. So
+    // no-op with a typed result; the caller must resolveIntervalMajors (resume) or
+    // undoLastPulse (abandon) to clear the pause explicitly before advancing again.
+    if (get().getPausedAdvance(campaignId)) {
+      return { ok: false, reason: 'advance_paused' };
+    }
     set(state => {
       state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
     });
@@ -623,6 +635,21 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * @param {{ now?: string }} [options]
    */
   resolveIntervalMajors: async (campaignId, decisions = {}, options = {}) => {
+    // Re-entrancy guard — the SAME advanceInFlight machine advanceCampaignWorld uses
+    // (set SYNCHRONOUSLY before the first await, cleared in finally). resolveInterval-
+    // Majors is async (it awaits the lazy import + the cloud flush), so a double-click
+    // on the Resume button — or a Resume racing an Advance, both keyed on this id —
+    // would otherwise re-enter and run the resumed segment TWICE off the SAME cursor
+    // (two real tick batches, two persists). A re-entrant call sees the campaign already
+    // in flight and no-ops with the typed result; advanceCampaignWorld's parked-pause
+    // guard already blocks the reverse race (Advance over an outstanding pause).
+    if (get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_in_flight' };
+    }
+    set(state => {
+      state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
+    });
+    try {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -735,6 +762,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       result.cloudPending = true;
     }
     return result;
+    } finally {
+      // Clear the in-flight mark on every exit path (success, the no-paused-advance
+      // guard, AND any throw from the kernel) so a failed resume never wedges the
+      // campaign permanently disabled.
+      set(state => {
+        state.advanceInFlight = (state.advanceInFlight || []).filter(id => String(id) !== String(campaignId));
+      });
+    }
   },
 
   /** Advance-scaling Stage 3: is there a paused advance awaiting major decisions

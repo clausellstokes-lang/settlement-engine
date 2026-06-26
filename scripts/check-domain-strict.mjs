@@ -22,7 +22,11 @@ import path from 'node:path';
 import url from 'node:url';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
-const BASELINE = path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
+// DOMAIN_STRICT_BASELINE overrides the baseline path so the ratchet semantics
+// (esp. the --update lower-only contract) are testable against a temp file
+// without clobbering the committed baseline — same testability rationale as the
+// DOMAIN_STRICT_TSC_CMD override below.
+const BASELINE = process.env.DOMAIN_STRICT_BASELINE || path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
 const UPDATE = process.argv.includes('--update');
 
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
@@ -65,6 +69,22 @@ for (const line of out.split('\n')) {
 const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
 if (UPDATE) {
+  // A ratchet only TIGHTENS. `--update` re-baselines after a burn-down, so the
+  // new ceiling may only stay equal or drop — never RISE. Writing a higher total
+  // here would silently widen the allowance (the exact thing the gate forbids on
+  // a normal run), turning the re-baseline into a debt-laundering backdoor. So
+  // refuse to raise: if a baseline exists, the new total must be ≤ the old one.
+  if (fs.existsSync(BASELINE)) {
+    const prev = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
+    if (typeof prev.total === 'number' && total > prev.total) {
+      console.error(
+        `[domain-strict] refusing to RAISE the ceiling: new total ${total} > baseline ${prev.total}. ` +
+          `--update may only LOWER the ratchet (the debt can shrink, never grow). ` +
+          `Fix or annotate the +${total - prev.total} new strict error(s) instead of widening the baseline.`,
+      );
+      process.exit(1);
+    }
+  }
   const sorted = Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
   fs.writeFileSync(BASELINE, `${JSON.stringify({ total, files: sorted }, null, 2)}\n`);
   console.log(`[domain-strict] baseline updated: ${total} errors across ${Object.keys(counts).length} files.`);

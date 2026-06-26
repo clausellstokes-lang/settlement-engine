@@ -55,6 +55,14 @@ begin
     raise exception 'not authenticated' using errcode = '28000';
   end if;
 
+  -- Account-status gate (the 059 invariant): EVERY SECURITY DEFINER write RPC that
+  -- mutates settlements/maps/profiles must reject a banned/disabled/soft-deleted
+  -- account even with a valid JWT. persist_world_pulse_advance is a settlement+
+  -- campaign write, so it carries the standard guard like 057/059/073.
+  if not public.account_is_active(v_uid) then
+    raise exception 'account is not active' using errcode = '42501';
+  end if;
+
   -- Ownership: the caller must own the campaign. Lock the row so a concurrent
   -- advance of the SAME campaign serialises behind this transaction (the optional
   -- tick guard below then sees a consistent current tick).

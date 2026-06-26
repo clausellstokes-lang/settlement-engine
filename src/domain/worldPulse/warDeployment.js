@@ -1074,6 +1074,35 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       source: 'war_layer_deploy',
       now,
     }));
+
+    // ── SIEGE INITIATION as a deferrable MAJOR. Opening a NEW siege is a
+    // campaign-altering move (a strategy_deploy, listed in decisionTier's
+    // CAMPAIGN_ALTERING_CANDIDATE_TYPES) the DM should get a say on once pausing lands —
+    // exactly like the conquest that may END it. So surface the deploy as its own major
+    // outcome. It is a SETTLEMENT-STATE no-op (no condition / power_transfer): the home
+    // bleed is the war_drain/army_deployed conditions in step 5 and the front is the
+    // graph mint above; this outcome only ANNOUNCES the march and gives the pause/dismiss
+    // path a handle to suppress its out-of-band residue (the deployment seed + the
+    // war_front channel). targetSaveId is the BESIEGER (the actor mobilizing the army) and
+    // sourceEventTargetId the BESIEGED — the pulseKernel residue strip reads both off this
+    // outcome to drop the new deployment + its front when the siege is deferred/dismissed.
+    const fromName = settlementNameFor(fromId);
+    const chosenName = settlementNameFor(chosenTarget);
+    outcomes.push({
+      id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
+      type: 'strategy_deploy',
+      candidateType: 'strategy_deploy',
+      ruleId: 'war_layer_strategy_deploy',
+      ruleFamily: 'stressor',
+      applyMode: 'auto',
+      probability: 1,
+      targetSaveId: fromId,
+      severity: clamp01(0.5 + fromStrength * 0.2),
+      headline: `${fromName} marches on ${chosenName}`,
+      summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
+      reasons: [`${fromName} is war-ready and ${chosenName} is a feasible target.`],
+      sourceEventTargetId: chosenTarget,
+    });
   }
 
   // ── Step 5: re-upsert the home conditions each tick for every active deployer.

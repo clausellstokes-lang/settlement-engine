@@ -57,6 +57,45 @@ describe('KILL_NPC double-application', () => {
     expect(leadership[0].severity).toBe(1.0);
   });
 
+  it('a KEY (non-pillar) npc death lands EXACTLY ONE faction dimension (membership), no spurious leadership crisis', () => {
+    // killNpc stamps MEMBERSHIP for a key npc (leadership is pillar-only). The
+    // propagation must agree: before the fix, mapDimension mapped a key npc's
+    // weight-0.7 edge to LEADERSHIP, so the faction ended with BOTH membership
+    // (direct) AND a phantom leadership impairment (propagated) — a faction
+    // double-wounded across two dimensions by one death.
+    const keySettlement = () => ({
+      name: 'Town',
+      institutions: [{ id: 'inst.watch', name: 'City Watch', impairments: [] }],
+      powerStructure: { factions: [{ id: 'faction.militia', name: 'Town Militia', impairments: [] }] },
+      npcs: [{
+        id: 'npc.lt',
+        name: 'Lieutenant Mara',
+        role: 'Lieutenant',
+        importance: 'key',
+        linkedInstitutionIds: ['inst.watch'],
+        linkedFactionIds: ['faction.militia'],
+      }],
+    });
+
+    const next = mutateSettlement({
+      settlement: keySettlement(),
+      event: { id: 'e_key', type: 'KILL_NPC', targetId: 'npc.lt', payload: {} },
+    });
+
+    const faction = next.powerStructure.factions[0];
+    const factionDims = new Set((faction.impairments || []).map(i => i.type));
+
+    // Exactly ONE faction-impairment dimension, and it is membership — not leadership.
+    expect(factionDims.size).toBe(1);
+    expect(factionDims.has('membership')).toBe(true);
+    expect(factionDims.has('leadership')).toBe(false);
+
+    // The single membership impairment carries the key weight (0.7) at full strength.
+    const membership = (faction.impairments || []).filter(i => i.type === 'membership');
+    expect(membership).toHaveLength(1);
+    expect(membership[0].severity).toBe(0.7);
+  });
+
   it('KILL_LEADER (forced pillar) does not double-impair its linked entities either', () => {
     const next = mutateSettlement({
       settlement: settlement(),

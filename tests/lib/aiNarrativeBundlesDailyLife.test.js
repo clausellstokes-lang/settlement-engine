@@ -161,8 +161,11 @@ describe('narrative run folds in daily life (single spend)', () => {
     expect(({}).injected).toBeUndefined();
     // The legitimate beat still landed; the crafted one was dropped.
     expect(out.dailyLife).toEqual({ dawn: 'Dawn.' });
-    // The crafted beat is still forwarded to the progress UI.
-    expect(fields).toContainEqual(['dailyLife.__proto__', { injected: true }]);
+    // The crafted beat is DROPPED entirely — never forwarded to the consumer,
+    // so the slice can't write it into aiDailyLife state either. The legit beat
+    // is still forwarded for progress UI.
+    expect(fields).toContainEqual(['dailyLife.dawn', 'Dawn.']);
+    expect(fields.some(([f]) => f === 'dailyLife.__proto__')).toBe(false);
   });
 
   test('every beat failing yields a null dailyLife (server sends {})', async () => {

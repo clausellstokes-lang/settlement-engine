@@ -123,7 +123,12 @@ function deriveResilience(s) {
   // 'impaired' via withImpairment, but it is hidden by design — surfacing it as a
   // visible "impaired institution" risk here would leak the covert capture into
   // public derived state. Exclude institutions whose impairment is solely covert.
-  const impaired = countByStatus(s.institutions, ['impaired', 'critical'], { excludeCovertOnly: true });
+  // 'impaired' is the ONLY degraded status the entity model emits (see
+  // status.js EntityStatus: active|impaired|removed|destroyed|vacant). The old
+  // list also counted 'critical', which no institution ever carries — a dead
+  // branch ('critical' is a capacity/severity BAND elsewhere, never a status),
+  // so it matched nothing and only misled the reader. Reconciled to the real status.
+  const impaired = countByStatus(s.institutions, ['impaired'], { excludeCovertOnly: true });
   if (impaired > 0) {
     value -= Math.min(15, impaired * 4);
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);

@@ -419,6 +419,11 @@ export const createAiSlice = (set, get) => ({
             // daily-life label set rather than the narrative field counter.
             if (typeof fieldName === 'string' && fieldName.startsWith('dailyLife.')) {
               const beat = fieldName.slice('dailyLife.'.length);
+              // Defense in depth: ai.js already drops dangerous beats before
+              // forwarding, but the beat name is untrusted server input, so the
+              // consumer refuses to act on a prototype-walking key too — neither
+              // layer writes __proto__/constructor/prototype into aiDailyLife.
+              if (beat === '__proto__' || beat === 'constructor' || beat === 'prototype') return;
               lastFieldMsg = true;
               if (error) {
                 set(state => { state.aiProgress = `\u26a0 ${beat} fell back to raw`; });
@@ -827,8 +832,8 @@ export const createAiSlice = (set, get) => ({
    * and 'revert' keep recording regardless of phase.
    *
    * @param {string} saveId
-   * @param {object} opts
-   * @param {'initial'|'regenerate'|'progression'|'revert'} opts.reason
+   * @param {object} [opts]
+   * @param {'initial'|'regenerate'|'progression'|'revert'} [opts.reason='initial']
    * @param {string|null} [opts.triggeredBy]
    * @param {'full'|'summary'} [opts.mode='full']
    * @param {object|null} [opts.aiSettlement] - this run's own refined prose; threaded
@@ -838,7 +843,7 @@ export const createAiSlice = (set, get) => ({
    */
   _appendChronicleEntry: async (
     saveId,
-    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife } = {},
+    { reason = 'initial', triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife } = {},
   ) => {
     if (!saveId) return;
     const state = get();

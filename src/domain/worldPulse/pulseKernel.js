@@ -468,7 +468,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // mobilized posture — so a thorpe cannot storm a city on a lucky roll, and no one
   // sieges from peace. war_drain severity is derived from the PRE-TICK war_front count
   // INSIDE the evaluator (no intra-tick read-after-write).
-  const war = evaluateWarLayer({
+  let war = evaluateWarLayer({
     snapshot: postTimeSnapshot,
     worldState,
     rng: rng.fork('war-layer'),
@@ -492,6 +492,49 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   /** @type {any[]} */
   let pendingDispositionDeltas = [];
   if (simulationRules.warLayerEnabled) {
+    // The war-outcome suppression id set, computed ONCE up front (the dismissed majors on
+    // the resume path, EVERY major on the pause path, null otherwise). Reused below for
+    // the conquest occupation-seed / disposition strip AND, right here, for the SIEGE-
+    // INITIATION (strategy_deploy) residue.
+    const warOutcomeSuppressedIds = residueSuppressionIds(war.outcomes);
+    // SIEGE-INITIATION residue suppression: a DEFERRED or DISMISSED strategy_deploy major
+    // is the campaign-altering decision to OPEN a new siege. Its apply outcome is a
+    // settlement no-op (withheld from / excluded from the apply pass by the major
+    // partition below), but the deploy banked OUT-OF-BAND residue this tick: the new
+    // deployment SEED in war.deployments and the war_front channel mint in
+    // war.graphChannels. Left committed, a paused/dismissed siege would leave an army in
+    // the field + a confirmed front (the next tick reads them as a live siege, bypassing
+    // the DM decision entirely) — the same "phantom out-of-band ledger" the conquest
+    // dismiss fix closes. So strip BOTH for every suppressed strategy_deploy, keyed off
+    // the outcome's targetSaveId (the besieger) → sourceEventTargetId (the besieged).
+    // Mirrors the conquest occupation-seed suppression; byte-neutral when nothing is
+    // suppressed (the autoresolve-ON path keeps the deployment + front untouched).
+    if (warOutcomeSuppressedIds) {
+      const suppressedDeploys = war.outcomes.filter(
+        o => o?.candidateType === 'strategy_deploy'
+          && deriveDecisionTier(o) === 'major'
+          && warOutcomeSuppressedIds.has(String(o.id)),
+      );
+      if (suppressedDeploys.length) {
+        const strippedDeployments = { ...war.deployments };
+        const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
+        for (const o of suppressedDeploys) {
+          const fromId = String(o.targetSaveId);
+          const toId = String(o.sourceEventTargetId);
+          // Clear the freshly-seeded deployment (a brand-new siege has no prior record
+          // under this key, so this never drops a pre-existing campaign's army).
+          delete strippedDeployments[fromId];
+          strippedFronts.add(`${fromId}->${toId}`);
+        }
+        war = {
+          ...war,
+          deployments: strippedDeployments,
+          graphChannels: war.graphChannels.filter(
+            c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
+          ),
+        };
+      }
+    }
     // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
@@ -564,7 +607,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // EVERY deferred conquest major (a paused world must not seed an occupation from a
     // conquest parked for a DM decision). Byte-neutral when nothing is suppressed (the
     // array is returned unchanged by reference).
-    const conquestSuppressedIds = residueSuppressionIds(war.outcomes);
+    const conquestSuppressedIds = warOutcomeSuppressedIds;
     const occupationWarOutcomes = conquestSuppressedIds
       ? war.outcomes.filter(o => !(deriveDecisionTier(o) === 'major' && conquestSuppressedIds.has(String(o.id))))
       : war.outcomes;

@@ -158,7 +158,17 @@ export async function consume(ctx) {
   // Idempotency: if a dispatch for this exact stash is already in flight, a
   // re-fire (concurrent SIGNED_IN) must not re-enter the handler. Bail out
   // rather than duplicate the side effect (a duplicate save).
-  const stashId = stored?.id ?? null;
+  //
+  // setPending always assigns an id, but a stash can reach consume() without
+  // one — an older stash format, or an intent written outside setPending. With
+  // no id the guard would key on null and never match, so a no-id intent could
+  // re-fire and duplicate the save. Backfill a stable id and persist it so the
+  // concurrent re-fire reads the SAME key and the guard catches it.
+  let stashId = stored?.id ?? null;
+  if (stored && stashId === null) {
+    stashId = `backfill-${Date.now()}-${++_stashSeq}`;
+    writeStored({ ...stored, id: stashId });
+  }
   if (stashId !== null && _inFlightId === stashId) return null;
 
   const handler = _handlers.get(pending.type);

@@ -103,6 +103,38 @@ describe('consume() — idempotent against concurrent SIGNED_IN re-fire', () => 
     expect(readPending()).toBeNull();
   });
 
+  it('dedups a re-fire of a stash that has NO id (older / external stash format)', async () => {
+    // setPending always assigns an id, but a stash can reach consume() without
+    // one — an older stash format, or an intent written straight to storage
+    // outside setPending. The in-flight guard keyed on id alone, so a no-id
+    // stash would never match and could re-fire → duplicate save.
+    window.sessionStorage.setItem(
+      'sf:auth_intent',
+      JSON.stringify({ type: INTENTS.SAVE_SETTLEMENT, payload: PAYLOAD, stashedAt: Date.now() }),
+    );
+
+    let calls = 0;
+    let release;
+    const gate = new Promise((resolve) => { release = resolve; });
+    registerHandler(INTENTS.SAVE_SETTLEMENT, async () => {
+      calls += 1;
+      await gate;
+      return { id: 'save_1' };
+    });
+
+    const first = consume({});
+    // The second consume re-fires the SAME no-id stash while the first is still
+    // in flight. It must be a no-op — not a duplicate dispatch.
+    const second = await consume({});
+    expect(second).toBeNull();
+    expect(calls).toBe(1);
+
+    release();
+    await first;
+    expect(calls).toBe(1);
+    expect(readPending()).toBeNull();
+  });
+
   it('allows a re-stashed intent to dispatch again after a failed save', async () => {
     setPending(INTENTS.SAVE_SETTLEMENT, PAYLOAD);
     let calls = 0;
