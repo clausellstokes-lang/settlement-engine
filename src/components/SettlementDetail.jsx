@@ -437,7 +437,10 @@ export default function SettlementDetail({
    * settlement renders nothing.
    * @type {import('react').ReactNode}
    */
-  const dossierHero = detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
+  // The read-only dossier panel, extracted from dossierHero so it mounts in read
+  // mode (beside the NextActionRail aside) AND beneath the editor in edit mode.
+  // Same readOnly + key in both; one branch renders at a time (no double-mount).
+  const dossierReadPanel = detail.settlement && (
     <div style={{flex:'1 1 520px',minWidth:0}}>
       <FeatureErrorBoundary
         label="SettlementDetail.output"
@@ -446,12 +449,12 @@ export default function SettlementDetail({
         fallback={<div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>}
       >
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-          {/* The dossier inherits the one top-level PAGE_MAX frame; no
-              per-section cap. The settlement-name rename was relocated to the
-              persistent header card's <h1> (the single consolidated control),
-              since the read dossier is no longer mounted in edit mode — so the
-              dossier header name stays plain text here (allowRename omitted ⇒
-              DossierHeaderRow's nameEditable falls to false). */}
+          {/* The dossier inherits the one top-level PAGE_MAX frame; no per-section
+              cap. The settlement-name rename lives in the persistent header card's
+              <h1> (the single consolidated control), so the read dossier mounted
+              here — in read mode AND beneath the editor — stays plain text
+              (allowRename omitted ⇒ DossierHeaderRow's nameEditable falls to false),
+              never a second rename input. */}
           <OutputContainer
             // Key-bump on commit forces a clean remount so all derived
             // selectors re-run against the soft-refreshed committed state.
@@ -463,6 +466,10 @@ export default function SettlementDetail({
         </Suspense>
       </FeatureErrorBoundary>
     </div>
+  );
+
+  const dossierHero = detail.settlement&&<div style={{display:'flex',gap:16,flexWrap:'wrap',alignItems:'flex-start',marginBottom:24}}>
+    {dossierReadPanel}
     {saveId && (
       <aside style={{flex:'0 1 248px',minWidth:0,position:'sticky',top:isMobile?CHROME.headerMobile+CHROME.stickyTop:CHROME.stickyTop,alignSelf:'flex-start'}}>
         <NextActionRail
@@ -853,9 +860,13 @@ export default function SettlementDetail({
             header card above; the NextActionRail (read-mode guidance) is
             read-mode-only by design. */}
       {editMode ? (
-        <div className="sf-readable-surface" style={{padding:16}}>
-          {editChrome}{workshop}{editBody}
-        </div>
+        <>
+          {/* Editor band, then the read-only dossier mounted BENEATH it (not a
+              body-swap that hides it); the read-mode NextActionRail aside is
+              omitted here — edit mode has its own chrome. */}
+          <div className="sf-readable-surface" style={{padding:16}}>{editChrome}{workshop}{editBody}</div>
+          {dossierReadPanel && <div style={{marginTop:24}}>{dossierReadPanel}</div>}
+        </>
       ) : (
         <>
           {dossierHero}
