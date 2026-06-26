@@ -864,10 +864,10 @@ const WORLD_SECTION_KEYS = Object.freeze([
  *   imageAlt?: string,
  *   tags?: string[]|string,
  *   realmArcSummary?: string,
- *   facetCulture?: string,
- *   facetProsperity?: string,
- *   facetDeity?: string,
- *   facetAtWar?: boolean,
+ *   memberBand?: string,
+ *   dominantCulture?: string,
+ *   tierSpread?: string,
+ *   atWar?: boolean,
  *   shareWorld?: boolean,
  *   worldSections?: string[],
  *   worldSnapshot?: object|null,
@@ -903,19 +903,22 @@ function galleryMapMetadataPatch(metadata = {}) {
     const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
     patch.gallery_realm_arc_summary = summary || null;
   }
-  // Campaign facet snapshots — clamp + null empties so a facet column never
-  // holds an empty string. Mirrors galleryMetadataPatch's facet block.
-  if (metadata.facetCulture !== undefined) {
-    patch.gallery_facet_culture = String(metadata.facetCulture || '').trim().slice(0, 64) || null;
+  // CAMPAIGN facet snapshots — the saved_maps facet columns are campaign-shaped
+  // (migration 088: member_band / dominant_culture / tier_spread / at_war), NOT the
+  // settlement-shaped culture/prosperity/deity (those live on the settlements table).
+  // The editor's campaignFacets() emits exactly these keys; clamp + null empties so a
+  // facet column never holds an empty string.
+  if (metadata.memberBand !== undefined) {
+    patch.gallery_facet_member_band = String(metadata.memberBand || '').trim().slice(0, 64) || null;
   }
-  if (metadata.facetProsperity !== undefined) {
-    patch.gallery_facet_prosperity = String(metadata.facetProsperity || '').trim().slice(0, 64) || null;
+  if (metadata.dominantCulture !== undefined) {
+    patch.gallery_facet_dominant_culture = String(metadata.dominantCulture || '').trim().slice(0, 64) || null;
   }
-  if (metadata.facetDeity !== undefined) {
-    patch.gallery_facet_deity = String(metadata.facetDeity || '').trim().slice(0, 120) || null;
+  if (metadata.tierSpread !== undefined) {
+    patch.gallery_facet_tier_spread = String(metadata.tierSpread || '').trim().slice(0, 64) || null;
   }
-  if (metadata.facetAtWar !== undefined) {
-    patch.gallery_facet_at_war = metadata.facetAtWar === true;
+  if (metadata.atWar !== undefined) {
+    patch.gallery_facet_at_war = metadata.atWar === true;
   }
   // Owner opt-in: reveal the living-world snapshot alongside the shared map.
   if (metadata.shareWorld !== undefined) {

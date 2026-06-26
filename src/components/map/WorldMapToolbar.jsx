@@ -489,14 +489,13 @@ function WorldMapToolbarImpl({
                         <ImageIcon size={13} /> Import Image
                       </IconButton>
                     )}
-                    <IconButton onClick={() => handleShareMap('map')} disabled={sharingMap} title="Share this map to the gallery as a reusable blank canvas">
-                      <Share2 size={13} /> {sharingMap ? 'Sharing…' : 'Share Map'}
+                    {/* One share entry point. The old split (Share Map / Share +
+                        Settlements) is collapsed: the share editor now lets the
+                        owner pick bare-map vs map-and-campaign inside its own kind
+                        picker, so the toolbar just opens it. */}
+                    <IconButton onClick={() => handleShareMap()} disabled={sharingMap} title="Open the share editor to publish this map to the gallery">
+                      <Share2 size={13} /> {sharingMap ? 'Opening…' : 'Share to gallery…'}
                     </IconButton>
-                    {(activeCampaign?.settlementIds?.length > 0) && (
-                      <IconButton onClick={() => handleShareMap('map_with_campaign')} disabled={sharingMap} title="Share this map WITH its settlements (public-safe dossiers)">
-                        <Share2 size={13} /> Share + Settlements
-                      </IconButton>
-                    )}
                   </>
                 )}
 

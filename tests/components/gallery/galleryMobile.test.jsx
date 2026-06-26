@@ -30,24 +30,30 @@ const shareMap = vi.fn().mockResolvedValue('owned-slug');
 const unshareMap = vi.fn().mockResolvedValue(undefined);
 const fetchGalleryMaps = vi.fn().mockResolvedValue({ items: GALLERY_ITEMS });
 const fetchGalleryMap = vi.fn().mockResolvedValue(null);
+const updateMapGalleryMetadata = vi.fn().mockResolvedValue(undefined);
 
 vi.mock('../../../src/lib/gallery.js', () => ({
   shareMap: (...a) => shareMap(...a),
   unshareMap: (...a) => unshareMap(...a),
   fetchGalleryMaps: (...a) => fetchGalleryMaps(...a),
   fetchGalleryMap: (...a) => fetchGalleryMap(...a),
+  updateMapGalleryMetadata: (...a) => updateMapGalleryMetadata(...a),
   GALLERY_SORT_OPTIONS: [['relevant', 'Most relevant'], ['top_voted', 'Top voted']],
 }));
 
 const storeState = {
-  auth: { tier: 'premium', role: 'user' },
+  // auth.user present so the MapShareEditor (which self-gates anon) renders.
+  auth: { tier: 'premium', role: 'user', user: { id: 'user-1' } },
   campaigns: [
-    { id: 'campaign-1', name: 'Coastal Realm', isPublic: true, publicSlug: 'owned-slug', shareKind: 'map', galleryDescription: 'old desc', galleryTags: ['old'] },
+    // A real UUID id so MapShareEditor's canSync gate (UUID_RE) passes.
+    { id: '11111111-2222-4333-8444-555555555555', name: 'Coastal Realm', isPublic: true, publicSlug: 'owned-slug', shareKind: 'map', galleryDescription: 'old desc', galleryTags: ['old'] },
   ],
   renameCampaign: vi.fn(),
   importGalleryMap: vi.fn(),
   importGalleryMapWithCampaign: vi.fn(),
   setActiveCampaign: vi.fn(),
+  updateSavedCampaign: vi.fn(),
+  savedSettlements: [],
 };
 
 vi.mock('../../../src/store', () => {
@@ -114,7 +120,11 @@ describe('GalleryMaps — mobile owner-editor gate', () => {
     expect(screen.queryByText('Manage on desktop')).toBeNull();
 
     fireEvent.click(editButtons[0]);
-    expect(screen.getByLabelText('Map description')).toBeTruthy();
+    // Edit now mounts the shared MapShareEditor (not the old inline form) in its
+    // published state — the Public badge + an Unshare control prove it opened on
+    // desktop with no mobile defer-note.
+    await waitFor(() => expect(screen.getByText('Public')).toBeTruthy());
+    expect(screen.getByRole('button', { name: /Unshare/i })).toBeTruthy();
   });
 });
 
