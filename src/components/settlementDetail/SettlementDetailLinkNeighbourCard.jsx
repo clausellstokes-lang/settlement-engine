@@ -70,6 +70,12 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
           ? <div style={{fontSize:FS.xs,color:SECOND}}>This settlement will be: <span style={{fontWeight:700,color:INK}}>{phrase}</span></div>
           : null;
       })()}
+      {/* Set the realm expectation: a link between two members of the same campaign
+          now surfaces in the realm graph automatically (no manual Discover); a link
+          to a settlement outside the campaign stays a dossier-local relationship. */}
+      <div style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4}}>
+        If both settlements share a campaign, this link appears in the realm graph automatically. Otherwise it stays on the dossier.
+      </div>
       <div style={{display:'flex',gap:8}}>
         <Button variant="primary" size="sm" onClick={()=>onLink(selected,relType)}>Confirm</Button>
         <Button variant="secondary" size="sm" onClick={()=>setSelected(null)}>Cancel</Button>

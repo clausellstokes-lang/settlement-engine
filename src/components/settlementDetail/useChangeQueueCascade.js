@@ -194,7 +194,27 @@ export function useChangeQueueCascade(ctx) {
       flushAffectedRef.current.add(linkedSave.id);
     } else {
       setLinking(false);
-      persistBatch(updatedSaves, [detail.saveData.id, linkedSave.id]);
+      persistBatch(updatedSaves, [detail.saveData.id, linkedSave.id]).then((ok) => {
+        // Auto-surface the link in the realm: when BOTH settlements are members of
+        // the same campaign, rebuild that campaign's regional graph so the new
+        // neighbour becomes a channel in the inspector/map without a manual
+        // "Discover regional" step. setSaves already wrote the link THROUGH to the
+        // store's savedSettlements (setSavedSettlements — the rebuild's source), so
+        // this reads it live. Skipped on a failed persist (the store is rolled back
+        // there). Non-member links stay dossier-local, as designed. Non-fatal.
+        if (ok === false) return;
+        try {
+          const st = useStore.getState();
+          const a = String(detail.saveData.id), b = String(linkedSave.id);
+          const shared = (st.campaigns || []).find(c => {
+            const ids = (c.settlementIds || []).map(String);
+            return ids.includes(a) && ids.includes(b);
+          });
+          if (shared && typeof st.rebuildCampaignRegionalGraph === 'function') {
+            st.rebuildCampaignRegionalGraph(shared.id);
+          }
+        } catch { /* non-fatal: the manual Discover regional still surfaces it */ }
+      });
     }
   };
 

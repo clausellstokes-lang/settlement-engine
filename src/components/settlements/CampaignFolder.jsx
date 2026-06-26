@@ -6,7 +6,7 @@ import {ChevronDown, ChevronRight, Edit3, Check, X, FileText, Clock} from 'lucid
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, RED, RED_BG, sans, serif_, FS, SP, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
@@ -177,11 +177,13 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         />
       )}
 
-      {/* Nested settlements — the cards reflow in a grid (P12 + GalleryList
-          consistency) while the header / RealmStrip / RegionalGraphSummary above
-          keep full folder width. Single-card-empty falls back to a flat block. */}
+      {/* Nested settlements — a single readable column capped at PROSE_MAX so the
+          member-card NAME always shows in full (matching the unassigned pile fix;
+          the prior 2-up grid clipped names to 1-2 chars). The header / RealmStrip /
+          RegionalGraphSummary above keep full folder width. Empty falls back to a
+          centered note. */}
       {!collapsed && (
-        <div style={{ padding:`${SP.md}px 8px 8px`, display: settlements.length === 0 ? 'flex' : 'grid', flexDirection:'column', gridTemplateColumns: settlements.length === 0 ? undefined : 'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap:SP.sm }}>
+        <div style={{ padding:`${SP.md}px 8px 8px`, display: settlements.length === 0 ? 'flex' : 'grid', flexDirection:'column', gridTemplateColumns: settlements.length === 0 ? undefined : '1fr', maxWidth: settlements.length === 0 ? undefined : PROSE_MAX, gap:SP.sm }}>
           {settlements.length === 0 ? (
             <div style={{ padding:'10px 8px', fontSize:FS.xs, color:BODY, textAlign:'center', fontStyle:'italic', maxWidth:'60ch', marginLeft:'auto', marginRight:'auto' }}>
               No settlements in this campaign yet. Use the arrow button to move settlements here.
