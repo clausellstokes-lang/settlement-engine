@@ -230,14 +230,39 @@ export default defineConfig({
       {
         extends: true,
         test: {
+          name: 'vendor-libs',
+          // The three supply-chain build tests that touch the SHARED
+          // public/map/libs/ tree. vendorManifestExactSet WRITES it (adds a probe
+          // file, renames flatqueue.js away) to assert the validator's failure
+          // paths, while ciGateHardening + vendorManifestNonEmpty READ every pinned
+          // file's sha256/byteSize. At full parallelism a reader could observe the
+          // tree mid-mutation (flatqueue.js momentarily gone) and flake. Pinning all
+          // three into one fileParallelism:false project runs them serially — the
+          // writer never overlaps a reader — and they are subtracted from `unit`
+          // below so no other project reads the tree concurrently. No other test
+          // under tests/ references public/map/libs/, so this fully closes the race.
+          include: [
+            'tests/build/ciGateHardening.test.js',
+            'tests/build/vendorManifestExactSet.test.js',
+            'tests/build/vendorManifestNonEmpty.test.js',
+          ],
+          fileParallelism: false,
+        },
+      },
+      {
+        extends: true,
+        test: {
           name: 'unit',
-          // Everything EXCEPT the pglite suites, at full parallelism
+          // Everything EXCEPT the pglite + vendor-libs suites, at full parallelism
           // (vitest's default pool/concurrency, left untouched here).
           // Mirrors vitest's default include extension set so no suite is
-          // silently dropped, then subtracts the pglite files via exclude.
+          // silently dropped, then subtracts the isolated files via exclude.
           include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
           exclude: [
             'tests/security/**/*.pglite.test.js',
+            'tests/build/ciGateHardening.test.js',
+            'tests/build/vendorManifestExactSet.test.js',
+            'tests/build/vendorManifestNonEmpty.test.js',
             'e2e/**',
             'node_modules/**',
             'dist/**',

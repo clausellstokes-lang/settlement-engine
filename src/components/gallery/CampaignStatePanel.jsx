@@ -105,30 +105,23 @@ function WorldClockSection({ worldClock }) {
 }
 
 /**
- * Dashboard section — the realm-arc summary lines (gold callouts) + a quiet
- * simulation-rule scent line. Derived entirely from the sanitized
- * snapshot.dashboard ({ realmArcLines, simulationRules }).
+ * Dashboard section — the simulation-rule scent chips. The realm-arc summary is
+ * rendered ONCE, by MapGalleryDetail's "Realm Chronicle" gold callout (always shown
+ * for a campaign share), so it is deliberately NOT duplicated here even though the
+ * snapshot.dashboard still carries realmArcLines.
  */
 function DashboardSection({ dashboard }) {
-  const arcLines = Array.isArray(dashboard?.realmArcLines) ? dashboard.realmArcLines : [];
   const rules = dashboard?.simulationRules && typeof dashboard.simulationRules === 'object' ? dashboard.simulationRules : {};
   const ruleChips = ['propagationMode', 'intensity', 'migrationMode']
     .map(key => (rules[key] != null ? human(rules[key]) : null))
     .filter(Boolean);
-  if (arcLines.length === 0 && ruleChips.length === 0) return null;
+  if (ruleChips.length === 0) return null;
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
       <SectionHead Icon={Globe2}>State of the Realm</SectionHead>
-      {arcLines.map((line, i) => (
-        <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
-          {line}
-        </div>
-      ))}
-      {ruleChips.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
-          {ruleChips.map(chip => <Chip key={chip}>{chip}</Chip>)}
-        </div>
-      )}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
+        {ruleChips.map(chip => <Chip key={chip}>{chip}</Chip>)}
+      </div>
     </section>
   );
 }

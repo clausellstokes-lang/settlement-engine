@@ -129,9 +129,12 @@ export default function EventComposer() {
   // advance is in flight the store no-ops the write (the advance replaces worldState
   // wholesale and would clobber it). Surface that here so the form DISABLES submit
   // and shows why, instead of silently swallowing a GM action with no recovery.
-  const isAdvanceInFlight = useStore(s => s.isAdvanceInFlight);
+  // Subscribe to the advanceInFlight LIST itself (not the stable isAdvanceInFlight fn
+  // ref) so the disable + hint re-render the instant an advance starts or ends — same
+  // membership test the store uses.
+  const advanceInFlightList = useStore(s => s.advanceInFlight);
   const boundCampaign = useMemo(() => (clockBound ? campaigns.find(c => (c.settlementIds || []).some(id => String(id) === String(activeSaveId))) : null), [clockBound, campaigns, activeSaveId]);
-  const advanceBusy = !!(boundCampaign && typeof isAdvanceInFlight === 'function' && isAdvanceInFlight(boundCampaign.id));
+  const advanceBusy = !!(boundCampaign && Array.isArray(advanceInFlightList) && advanceInFlightList.some(id => String(id) === String(boundCampaign.id)));
   const campaignSettlementOptions = useMemo(
     () => campaignPeerOptions(campaigns, savedSettlements, activeSaveId),
     [campaigns, savedSettlements, activeSaveId],

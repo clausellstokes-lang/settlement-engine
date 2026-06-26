@@ -304,7 +304,9 @@ describe('EventComposer — advance-in-flight guard', () => {
     state = baseState({
       isSettlementClockBound: (id) => id === 'save-1',
       campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
-      isAdvanceInFlight: (cid) => cid === 'camp-1',
+      // The composer subscribes to the advanceInFlight LIST (render-tight), so the
+      // bound campaign's id present here = an advance in flight for it.
+      advanceInFlight: ['camp-1'],
       applyEvent: vi.fn(),
     });
     render(<EventComposer />);

@@ -381,14 +381,15 @@ function publicChronicle(worldState, nameById, maxTicks, maxHeadlines) {
     }
     const digest = Array.isArray(pulse?.impactDigest) ? pulse.impactDigest : [];
     for (const d of digest) {
-      // Player-visibility gate for the digest. Unlike selectedOutcomes (which keep
-      // applyMode='proposal' even after approval, so the outcome loop reconciles via
-      // appliedIds), a digest entry IS a news row whose `kind` tracks surfaced state:
-      // newsEntryForOutcome stamps kind='applied' for auto + APPROVED outcomes and
-      // kind='queued' for an un-approved proposal (applyWorldPulse.js:125). So gate on
-      // the real field — keep 'applied' (the player-visible feed), drop 'queued' so a
-      // pending proposal's affected ids never leak. (The prior applyMode/bare-id gate
-      // matched NO real entry — digests carry no applyMode + a compound id.)
+      // Player-visibility gate for the digest. A digest entry IS a news row whose
+      // `kind` tracks surfaced state: newsEntryForOutcome stamps kind='applied' for an
+      // auto-applied outcome and kind='queued' for a proposal (applyWorldPulse.js:125).
+      // Gate on that real field: keep 'applied', drop 'queued' so a pending proposal's
+      // affected ids never leak. An APPROVED proposal's affected ids still surface, via
+      // the outcome-loop appliedIds reconciliation above (its digest row keeps 'queued'
+      // since approval does not mint a fresh digest entry), so dropping 'queued' here
+      // costs no fidelity. (The prior applyMode/bare-id gate matched NO real entry:
+      // digests carry no applyMode and a compound id.)
       if (d?.kind !== 'applied') continue;
       const ids = Array.isArray(d?.settlementIds) ? d.settlementIds : [];
       ids.forEach((/** @type {any} */ x) => slot.affected.add(String(x)));
