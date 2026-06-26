@@ -88,7 +88,9 @@ const APPLIED_HEADLINE_REWRITES = [
   [/\bmay mobilize\b/, 'mobilizes'],
   [/\bmay sabotage\b/, 'sabotages'],
   [/\bmay seek promotion\b/, 'seeks promotion'],
-  [/\bmay undermine rival\b/, 'undermines rival'],
+  // Matches both the bare "may undermine rival" and the named "may undermine <Name>"
+  // (#6 names the subject), so either way it reads past-tense once applied.
+  [/\bmay undermine\b/, 'undermines'],
 ];
 
 function appliedHeadlineFor(/** @type {any} */ outcome) {

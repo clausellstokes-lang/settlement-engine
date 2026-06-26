@@ -338,6 +338,43 @@ export function inferInstitutionName(npc, settlement) {
 }
 
 /**
+ * All settlement institutions whose name fits a DOMAIN category's hint — the
+ * power-tab counterpart to {@link inferInstitutionName}. inferInstitutionName
+ * answers "which institution is THIS npc tied to" (first match, one result);
+ * this answers "which institutions does a power of this CATEGORY touch" (every
+ * match). A power row uses it so it shows its institutional footprint even when
+ * it has no sub-faction members to infer from — e.g. the Religious Authorities
+ * power surfaces the temple/shrine without a single clergy member on file.
+ *
+ * Returns DISPLAY NAMES (the caller resolves rename-safe ids via the entity
+ * index, exactly as the member path does). Same hints + aliases as the npc
+ * path, so the two stay consistent.
+ *
+ * @param {string} category  a faction/power domain (military/religious/economy/…)
+ * @param {any} settlement
+ * @returns {string[]} matching institution display names (deduped, source order)
+ */
+export function institutionsForCategory(category, settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0) return [];
+  const rawCategory = typeof category === 'string' ? category.toLowerCase() : category;
+  const resolved = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (
+    CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory
+  );
+  const hint = CATEGORY_INSTITUTION_HINTS[resolved];
+  if (!hint) return [];
+  const seen = new Set();
+  const out = [];
+  for (const inst of institutions) {
+    if (!inst || typeof inst.name !== 'string' || !hint.test(inst.name)) continue;
+    if (seen.has(inst.name)) continue;
+    seen.add(inst.name);
+    out.push(inst.name);
+  }
+  return out;
+}
+
+/**
  * @param {any} npc
  * @param {any} settlement
  */

@@ -231,6 +231,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const {
     advanceSession, worldPulseBusy, multiTickOn,
     performAdvanceRealm, handleResumeAdvance, handleUndoRealm,
+    performCanonizeWorld, canonizeBusy,
   } = useAdvanceSession({ activeCampaignId, worldPulseInterval, openInspectorAt, showToast });
 
   // Advance-scaling Stage 4: the paused-advance cursor for the active campaign, read
@@ -591,6 +592,11 @@ export default function WorldMap({ onNavigate } = {}) {
     setAdvanceConfirm(true);
   }, [activeCampaignId, worldPulseBusy]);
 
+  // #5: the Advance dialog carries an inline Canonize button while the world is
+  // uncanonized (it removes itself once worldCanonized re-derives true). The handler
+  // + busy state live in useAdvanceSession; this is just the derived gate.
+  const worldCanonized = !!activeCampaign?.worldState?.canonizedAt;
+
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
     const bridge = bridgeRef.current;
@@ -879,6 +885,9 @@ export default function WorldMap({ onNavigate } = {}) {
         advanceExtra={multiTickOn ? (
           <AdvanceAutoResolveToggle value={advanceAutoResolve} onChange={setAdvanceAutoResolve} />
         ) : null}
+        // #5: an inline Canonize CTA in the Advance dialog when the world isn't yet
+        // canonized — removed automatically once worldCanonized flips true.
+        worldCanonized={worldCanonized} onCanonizeWorld={performCanonizeWorld} canonizeBusy={canonizeBusy}
         importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
         setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />

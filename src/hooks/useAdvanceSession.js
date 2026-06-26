@@ -33,8 +33,10 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
   const resolveIntervalMajors = useStore(s => s.resolveIntervalMajors);
   const undoLastPulse = useStore(s => s.undoLastPulse);
+  const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
 
   const [advanceSession, setAdvanceSession] = useState(IDLE);
+  const [canonizeBusy, setCanonizeBusy] = useState(false);
   // Legacy alias: "not idle". Every prior worldPulseBusy read maps to this.
   const worldPulseBusy = advanceSession.phase !== 'idle';
   const multiTickOn = flag('advanceMultiTick');
@@ -131,6 +133,23 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     }
   }, [activeCampaignId, advanceSession.phase, undoLastPulse, showToast]);
 
+  // Canonize the realm's world (#5). Surfaced inline in the Advance dialog when the
+  // world isn't canonized yet, so the GM canonizes in place instead of failing an
+  // advance and being routed elsewhere.
+  const performCanonizeWorld = useCallback(async () => {
+    if (!activeCampaignId || canonizeBusy) return;
+    setCanonizeBusy(true);
+    try {
+      await canonizeCampaignWorld(activeCampaignId);
+      showToast('success', 'World canonized. Its history begins now — advance when ready.');
+    } catch (err) {
+      console.warn('[WorldMap] canonize world failed', err);
+      showToast('error', `Canonize failed: ${err?.message || err}`);
+    } finally {
+      setCanonizeBusy(false);
+    }
+  }, [activeCampaignId, canonizeBusy, canonizeCampaignWorld, showToast]);
+
   return {
     advanceSession,
     worldPulseBusy,
@@ -139,5 +158,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     performAdvanceRealm,
     handleResumeAdvance,
     handleUndoRealm,
+    performCanonizeWorld,
+    canonizeBusy,
   };
 }

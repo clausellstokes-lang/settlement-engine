@@ -4,7 +4,7 @@ import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
 import { entityAnchor, entityIdFor, localNpcId, institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
-import { inferInstitutionName } from '../../../domain/npcProfile.js';
+import { inferInstitutionName, institutionsForCategory } from '../../../domain/npcProfile.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { useStore } from '../../../store/index.js';
 import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
@@ -222,20 +222,37 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const associatedInstitutions = (() => {
               const seen = new Set();
               const out = [];
+              const pushByName = (instName) => {
+                if (!instName) return;
+                const instId = institutionIdFromName(index, instName);
+                if (!instId || seen.has(instId)) return;
+                seen.add(instId);
+                out.push({ id: instId, name: instName });
+              };
+              // 1) Member-precise: each sub-faction member's category infers the
+              //    institution it staffs (the militia → the Watch). Most accurate,
+              //    but only powers WITH members get anything here.
               for (const mem of matchedGroups.flatMap(g => g.members || [])) {
                 // Prefer the live indexed NPC so a renamed/recategorised member
                 // infers off current data; fall back to the member snapshot.
                 const npcId = localNpcId(index, mem.name);
                 const liveNpc = npcId ? index?.resolve?.(npcId)?.raw : null;
-                const instName = inferInstitutionName(liveNpc || mem, s);
-                if (!instName) continue;
-                const instId = institutionIdFromName(index, instName);
-                if (!instId || seen.has(instId)) continue;
-                seen.add(instId);
-                out.push({ id: instId, name: instName });
+                pushByName(inferInstitutionName(liveNpc || mem, s));
               }
+              // 2) Domain footprint: EVERY power has a category (its domain), so
+              //    map that to the institutions it touches — this is what gives a
+              //    faction-less power (Religious Authorities, Merchant Guilds) its
+              //    institutions instead of an empty card. Members refine; category
+              //    guarantees coverage.
+              for (const instName of institutionsForCategory(f.category, s)) pushByName(instName);
               return out.slice(0, 5);
             })();
+
+            // A row expands to its detail card when it has a description OR an
+            // institutional footprint — so a faction-less power (no desc, no
+            // members) is still openable to read its associated institutions,
+            // not a dead row.
+            const canExpand = !!(f.desc || associatedInstitutions.length > 0);
 
             return (
               <div
@@ -245,10 +262,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
               >
                 <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',borderRadius:5,
                   background:isExp?'#f5f0e8':f.legitimacyCrisis?'#fdf4f4':'transparent',
-                  cursor:f.desc?'pointer':'default',
+                  cursor:canExpand?'pointer':'default',
                   border: f.legitimacyCrisis ? '1px solid #e8c0c0' : '1px solid transparent',
                 }}
-                  {...(f.desc ? {
+                  {...(canExpand ? {
                     role: 'button',
                     tabIndex: 0,
                     'aria-label': `${f.faction} faction details`,
@@ -275,7 +292,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                       {matchedGroups.reduce((n,g) => n+(g.members||[]).length, 0)}m
                     </span>
                   )}
-                  {f.desc && <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>}
+                  {canExpand && <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>}
                 </div>
 
                 {/* Sub-faction groups */}
@@ -287,13 +304,17 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                   </div>
                 ))}
 
-                {/* Expanded description */}
-                {isExp && f.desc && (
+                {/* Expanded detail card — opens for any power with a description
+                    OR an institutional footprint (canExpand). */}
+                {isExp && canExpand && (
                   <div style={{padding:'6px 12px 8px 28px',background:swatch['#FAF8F4'],borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2,borderRadius:'0 0 4px 4px'}}>
-                    <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>
+                    {f.desc && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>}
                     {f.crisisNote && (
                       <p style={{fontSize: FS['11.5'],color:swatch.danger,fontStyle:'italic',margin:'6px 0 0',lineHeight:1.4}}>⚠ {f.crisisNote}</p>
                     )}
+                    {/* Associated NPCs — named figures come from sub-faction
+                        members, so this stays gated on a matched group (a power
+                        with no members has no specific people to name). */}
                     {matchedGroups.length > 0 && (
                       <div style={{marginTop:8}}>
                         <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated NPCs</span>
@@ -308,27 +329,26 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                             <EntityLink id={localNpcId(index, mem.name) ?? entityIdFor('npc', mem, mem.name)} type="npc" fallback={mem.name} style={{color:c,textDecorationColor:`${c}80`}} /> <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
-                        {/* Associated Institutions — the SAME pill format as the
-                            NPC list above so the two read as a pair. Derived from
-                            this power's members' institution affinity (see
-                            associatedInstitutions). A quiet "None" when nothing
-                            resolves keeps the pairing deliberate rather than
-                            leaving an empty bordered block; each institution is a
-                            rename-safe EntityLink to its Overview card. */}
-                        <div style={{marginTop:6}}>
-                          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated Institutions</span>
-                          {associatedInstitutions.length === 0 ? (
-                            <span style={{fontSize:FS.xxs,color:MUTED}}>None</span>
-                          ) : (
-                            associatedInstitutions.map((inst) => (
-                              <span key={inst.id} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
-                                <EntityLink id={inst.id} type="institution" fallback={inst.name} style={{color:c,textDecorationColor:`${c}80`}} />
-                              </span>
-                            ))
-                          )}
-                        </div>
                       </div>
                     )}
+                    {/* Associated Institutions — shown for EVERY power, derived
+                        from its category footprint (+ any member affinity). This
+                        is the fix for the faction-less powers: a power's
+                        institutions no longer depend on it having sub-faction
+                        members. Each is a rename-safe EntityLink to its Overview
+                        card; a quiet "None" only when truly nothing fits. */}
+                    <div style={{marginTop: matchedGroups.length > 0 ? 6 : 8}}>
+                      <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated Institutions</span>
+                      {associatedInstitutions.length === 0 ? (
+                        <span style={{fontSize:FS.xxs,color:MUTED}}>None</span>
+                      ) : (
+                        associatedInstitutions.map((inst) => (
+                          <span key={inst.id} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
+                            <EntityLink id={inst.id} type="institution" fallback={inst.name} style={{color:c,textDecorationColor:`${c}80`}} />
+                          </span>
+                        ))
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

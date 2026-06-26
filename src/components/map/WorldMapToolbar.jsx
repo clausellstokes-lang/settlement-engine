@@ -135,7 +135,13 @@ function MoreMenu({ children }) {
             background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
             boxShadow: ELEV[2],
           }}
-          onClick={() => setOpen(false)}
+          // Dismiss ONLY when a real action button inside the menu is activated.
+          // The previous unconditional close fired on ANY click in the popover —
+          // including opening the map-type <select> — snapping the menu (and the
+          // dropdown with it) shut before the user could choose. Gating on a
+          // button target lets non-dismissing controls (the <select>) work, while
+          // an action button still closes the menu after it runs.
+          onClick={(e) => { if (e.target instanceof Element && e.target.closest('button')) setOpen(false); }}
         >
           {children}
         </div>

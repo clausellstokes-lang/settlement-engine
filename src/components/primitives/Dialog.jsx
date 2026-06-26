@@ -135,6 +135,10 @@ export function ConfirmDialog({
   extra = null,
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
+  // Optional: disable the confirm action while a precondition is unmet (e.g. an
+  // Advance dialog whose realm must be canonized first). Default false keeps every
+  // existing call site unchanged.
+  confirmDisabled = false,
   tone = 'danger',
   onConfirm,
   onCancel,
@@ -144,7 +148,7 @@ export function ConfirmDialog({
       {extra}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
-        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm}>{confirmLabel}</Button>
+        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm} disabled={confirmDisabled}>{confirmLabel}</Button>
       </div>
     </Shell>
   );

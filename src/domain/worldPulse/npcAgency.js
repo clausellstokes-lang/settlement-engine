@@ -800,6 +800,20 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   return { worldState: { ...worldState, npcStates }, exposures };
 }
 
+// Actions that move AGAINST a specific rival — these read as a dangling verb
+// ("X may expose", "X may suppress") unless the headline names WHO. Each maps to a
+// transitive phrasing that takes the subject's name and still trips the past-tense
+// transform in applyWorldPulse (… may expose Y → exposes Y). Everything else keeps
+// the intransitive "may <action>" form. Membership ALSO gates the rival consequence
+// below, so seek_promotion (which carries a rivalTarget only for rivalry tracking)
+// neither names a subject nor sets one back.
+const TARGETED_ACTION_PHRASING = Object.freeze({
+  expose:          (/** @type {string} */ name) => `expose ${name}`,
+  suppress:        (/** @type {string} */ name) => `suppress ${name}`,
+  sabotage:        (/** @type {string} */ name) => `sabotage ${name}`,
+  undermine_rival: (/** @type {string} */ name) => `undermine ${name}`,
+});
+
 /**
  * @param {any} state
  * @param {any} actionFamily
@@ -809,6 +823,13 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
  */
 function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
   const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
+  // A move-against-a-named-rival action with a resolved subject. Drives both the
+  // subject in the headline/summary and the setback applied to that subject.
+  const targetPhrasing = /** @type {((n: string) => string) | undefined} */ (
+    (/** @type {any} */ (TARGETED_ACTION_PHRASING))[actionFamily]
+  );
+  const subject = (targetPhrasing && rivalTarget?.name) ? rivalTarget : null;
+  const actionPhrase = (subject && targetPhrasing) ? targetPhrasing(subject.name) : actionFamily.replace(/_/g, ' ');
   const severity = clamp01(
     pressure * 0.5
     + state.ambition * 0.24
@@ -831,8 +852,8 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     severity,
     probability: Math.min(0.48, 0.06 + severity * 0.36 + state.ambition * 0.08),
     applyMode: proposal ? 'proposal' : 'auto',
-    headline: `${state.name} may ${actionFamily.replace(/_/g, ' ')}`,
-    summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionFamily.replace(/_/g, ' ')}.`,
+    headline: `${state.name} may ${actionPhrase}`,
+    summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
       `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
       `Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`,
@@ -854,6 +875,23 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
       lastActedTick: tick,
       lastAction: actionFamily,
     },
+    // Consequence to the subject of a move-against action (#6): being exposed,
+    // suppressed, undermined, or sabotaged is a setback. We dampen the subject's
+    // momentum + leverage (both feed action severity → a lower probability the next
+    // tick, so their OWN next move lands weaker) and cool their ambition heat —
+    // computed from the subject's snapshot, mirroring how the actor's npcPatch is.
+    // applyNpcPatch applies this to rivalNpcId. Null for non-targeted actions and
+    // for seek_promotion (a self-advancement that doesn't strike at the rival).
+    rivalNpcId: subject?.npcId || null,
+    rivalPatch: subject
+      ? {
+          momentum: clamp01((subject.momentum || 0) - 0.12),
+          leverage: clamp01((subject.leverage || 0) - 0.08),
+          ambitionHeat: clamp01((subject.ambitionHeat || 0) - 0.06),
+          lastTargetedTick: tick,
+          lastTargetedBy: state.npcId,
+        }
+      : null,
     proposalPayload: proposal
       ? {
           kind: 'npc_action',
@@ -1049,7 +1087,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     const minimum = state.dotRank >= 3 ? 0.34 : 0.42;
     if (!best || best.pressure < minimum || state.ambition < 0.42) continue;
 
-    const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose'].includes(best.actionFamily)
+    const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose', 'suppress'].includes(best.actionFamily)
       ? rivalryTargetFor(state, bySettlement)
       : null;
     out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
@@ -1104,5 +1142,12 @@ export function applyNpcPatch(worldState, outcome) {
     rivalryTargets: patch.rivalryTargets || current.rivalryTargets || [],
     goalHistory,
   };
+  // #6: a move-against action sets its subject back. Apply the rival consequence
+  // to the targeted NPC's state (guarded — null/absent for non-targeted actions,
+  // so every existing outcome is byte-unchanged). Skip if the rival has no state
+  // row yet (nothing to dampen).
+  if (outcome.rivalNpcId && outcome.rivalPatch && npcStates[outcome.rivalNpcId]) {
+    npcStates[outcome.rivalNpcId] = { ...npcStates[outcome.rivalNpcId], ...outcome.rivalPatch };
+  }
   return { ...worldState, npcStates };
 }
