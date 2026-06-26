@@ -14,6 +14,16 @@
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
+// CI has no .env, so VITE_SUPABASE_URL is undefined there and ai.js derives a
+// null AUTH_TOKEN_LS_KEY (computed EAGERLY at module load — ai.js:49), leaving the
+// localStorage-fallback path under test unreachable. Pin a deterministic project
+// URL BEFORE ai.js is imported (vi.hoisted runs ahead of the static imports
+// below), so ai.js's key and this file's authTokenKey() agree on a real key and
+// the test stays hermetic regardless of the ambient environment.
+vi.hoisted(() => {
+  vi.stubEnv('VITE_SUPABASE_URL', 'https://testref.supabase.co');
+});
+
 const auth = vi.hoisted(() => ({
   getSession: vi.fn(async () => ({ data: { session: null } })),
   refreshSession: vi.fn(async () => ({ data: { session: null } })),
