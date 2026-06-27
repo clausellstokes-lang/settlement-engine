@@ -163,3 +163,44 @@ its telemetry was too coarse to confirm dynamics — it measured `war_front`/`li
 (zero, because war activity is in the stressor lifecycle) and `relationshipStates`
 type-flips (zero, because evolution surfaces as candidates). `simulate-deep.mjs`
 captures the real signals.
+
+---
+
+## Phase 2c — deity competition + religion spread
+
+Religion is a **double-gated, opt-in subsystem**: it is a pure no-op unless
+`simulationRules.religionDynamicsEnabled` is true (default **false**, exposed via the
+map's "Religion dynamics" toggle / the Workshop "Awaken religion" gate, behind the
+`pantheon_preview` feature flag) AND ≥1 settlement carries an embedded
+`config.primaryDeitySnapshot` (assigned by the DM via `PrimaryDeityPicker` /
+SET_PRIMARY_DEITY). Contests then run along `allied`/`trade_partner` faith carriers.
+Phases 2/2b never exercised it (flag off, no deities, no faith carriers).
+
+`simulate-religion.mjs` builds a religion-ACTIVE region — 6 faith centres bearing
+3 rival MAJOR deities (Vael/Korl/Aurum), 8 weak-faith cult converts, edges so ≥2
+deities reach each convert — and advances 3 reps × 30 ticks at each scale.
+
+**Result: the subsystem works, and produces a coherent religious history.** Per scale
+(week/month/season/year), all numbers are similar:
+- **Competition:** deities contest and bank a wins/losses/seats/tier ledger
+  (`worldState.pantheon`). ~57–66 wins / 43–51 losses per cell; 52 `religious_authority`
+  channels minted. Final ledger of a sampled run: **Aurum 14–0, 11 seats, major** —
+  one deity swept the region while every displaced cult fell to 0 seats.
+- **Spread:** 43–51 conversions/cell (a convert's `config.primaryDeitySnapshot`
+  re-embeds to the winning neighbour's faith), seeding `religious_conversion_fracture`
+  stressors (~1/tick). Distinct faiths **consolidate 11 → 2–3** — strong deities
+  absorbing weak cults.
+- **Deity tiers shift:** cult→minor→major promotions 15–17/cell; demotions 2–3 — the
+  same promote-biased hysteresis as settlement tiers (here it does fire downward at
+  scale, unlike the settlement demotion which stayed ~0).
+- **All scales:** identical-shaped activity week through year; consolidation lands at
+  every interval.
+
+**Caveats / observations:**
+- **Reachability:** none of this fires in a default campaign. Religion needs the DM to
+  (1) enable the rule (preview-flagged) and (2) assign deities. A campaign that does
+  neither sees zero religion activity — by design, but it means the subsystem is
+  invisible until deliberately switched on.
+- **Possible balance note (1 data point):** the peaceful-aligned major (Aurum) swept
+  the sampled run; whether winner correlates with alignment/position vs. seed is worth
+  a glance if faith balance matters, but it is not a confirmed finding.
