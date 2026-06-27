@@ -18,6 +18,7 @@ import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
 import { advanceReligionStates } from './religiousContest.js';
+import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
@@ -954,10 +955,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // capture transitions included), and this file owns the pulse sequencing.
   // Identity no-op per settlement: an untouched roster keeps its reference.
   const settlementUpdates = applied.settlementUpdates.map(update => {
-    const projected = projectFactionStatesOntoSettlement(
+    let s = projectFactionStatesOntoSettlement(
       update.settlement, memoryState.factionStates, update.saveId, { tick: worldState.tick },
     );
-    return projected === update.settlement ? update : { ...update, settlement: projected };
+    // Religion rework: project the pantheon onto config.faithProfile, then apply the
+    // divine-mandate legitimacy term for royal/authoritative regimes. Both are identity
+    // no-ops when religion is dormant (nextReligionStates null), preserving byte-identity.
+    s = projectReligionStateOntoSettlement(s, nextReligionStates, update.saveId);
+    s = applyDivineMandate(s);
+    return s === update.settlement ? update : { ...update, settlement: s };
   });
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
