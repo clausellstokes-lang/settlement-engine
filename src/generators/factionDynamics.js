@@ -456,6 +456,25 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 }
 
 
+// Largest-remainder renormalisation to integer points summing to exactly 100.
+// File-local copy of powerGenerator's renormalizeFactionPower: factionDynamics
+// must NOT import from powerGenerator (powerGenerator already imports THIS module,
+// so importing back would close an import cycle the architecture test bans).
+function renormTo100(factions) {
+  if (!factions || !factions.length) return;
+  const total = factions.reduce((s, f) => s + (f.power || 0), 0);
+  if (total <= 0) return;
+  const shares = factions.map((f, i) => {
+    const exact = ((f.power || 0) / total) * 100;
+    const floor = Math.floor(exact);
+    return { i, floor, remainder: exact - floor };
+  });
+  let leftover = 100 - shares.reduce((s, x) => s + x.floor, 0);
+  shares.slice().sort((a, b) => b.remainder - a.remainder || a.i - b.i)
+    .forEach((s) => { if (leftover > 0) { s.floor += 1; leftover -= 1; } });
+  shares.forEach((s) => { factions[s.i].power = s.floor; });
+}
+
 /**
  * Apply performance legitimacy multipliers to faction powers in place.
  * Governing faction gets govMultiplier. Criminal faction gets crimMultiplier.
@@ -498,8 +517,19 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
 
     f.rawPower = f.power; // preserve original for display
     f.power    = Math.max(POWER_FLOOR, Math.round(f.power * mult));
+  });
 
-    // Add power label
+  // Restore the share invariant. The multipliers above change each faction's
+  // RELATIVE power but leak the roster total off 100 — worst on small rosters
+  // where a penalised governing faction is a large share (a thorp council could
+  // sum to ~85%). Renormalise to integer points summing to exactly 100,
+  // preserving the relative shifts; rawPower keeps the pre-dynamics value for the
+  // raw→effective display. (Audit finding: faction-power leak.)
+  renormTo100(factions);
+
+  // Labels read the FINAL renormalised share so a faction's band matches its
+  // displayed percentage.
+  factions.forEach(f => {
     f.powerLabel = f.power >= 35 ? 'Dominant'
                  : f.power >= 25 ? 'Strong'
                  : f.power >= 18 ? 'Significant'
