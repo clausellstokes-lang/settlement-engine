@@ -38,8 +38,10 @@ import { detectContradictions } from './contradictions.js';
 import { entityCatalog } from './explanation.js';
 import { canonBreakdown } from './canonStatus.js';
 
+/** @param {any} settlement */
 function tracesByStepCounts(settlement) {
   const traces = getTraces(settlement);
+  /** @type {Record<string, number>} */
   const out = {};
   for (const t of traces) {
     if (!t?.step) continue;
@@ -48,8 +50,10 @@ function tracesByStepCounts(settlement) {
   return out;
 }
 
+/** @param {any} settlement */
 function tracesByTypeCounts(settlement) {
   const traces = getTraces(settlement);
+  /** @type {Record<string, number>} */
   const out = {};
   for (const t of traces) {
     if (!t?.targetType) continue;
@@ -61,7 +65,7 @@ function tracesByTypeCounts(settlement) {
 /**
  * Build the full dev-debug envelope.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Object}
  */
 export function deriveDevDebug(settlement) {
@@ -117,9 +121,10 @@ export function deriveDevDebug(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Just the counts — useful for dev dashboard tiles. */
+/** Just the counts — useful for dev dashboard tiles.
+ *  @param {any} settlement */
 export function devDebugCounts(settlement) {
-  const d = deriveDevDebug(settlement);
+  const d = /** @type {any} */ (deriveDevDebug(settlement));
   return {
     traces:        d.traces.total,
     factions:      d.factions.length,
@@ -134,7 +139,8 @@ export function devDebugCounts(settlement) {
   };
 }
 
-/** Return only the traces that affect a specific entity id. */
+/** Return only the traces that affect a specific entity id.
+ *  @param {any} settlement @param {any} entityId */
 export function tracesForEntity(settlement, entityId) {
   return [
     ...tracesByType(settlement, 'entity'),

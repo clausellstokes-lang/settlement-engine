@@ -26,8 +26,8 @@
  * strings, not stressor objects, and substrate readers expect objects with
  * type/name/severity.
  *
- * @param {Object} settlement
- * @returns {Array<Object>}
+ * @param {any} settlement
+ * @returns {any[]}
  */
 export function canonStressors(settlement) {
   const s = settlement || {};
@@ -43,8 +43,8 @@ export function canonStressors(settlement) {
 /**
  * The settlement's exports — canonical `economicState.primaryExports`, falling
  * back to the legacy `exports` alias.
- * @param {Object} settlement
- * @returns {Array}
+ * @param {any} settlement
+ * @returns {any[]}
  */
 export function canonExports(settlement) {
   const ec = settlement?.economicState || {};
@@ -56,8 +56,8 @@ export function canonExports(settlement) {
 /**
  * The settlement's imports — canonical `economicState.primaryImports`, falling
  * back to the legacy `imports` alias.
- * @param {Object} settlement
- * @returns {Array}
+ * @param {any} settlement
+ * @returns {any[]}
  */
 export function canonImports(settlement) {
   const ec = settlement?.economicState || {};

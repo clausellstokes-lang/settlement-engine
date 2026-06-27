@@ -33,6 +33,7 @@ import { entityCatalog } from './explanation.js';
 
 // ── Catalog diff ─────────────────────────────────────────────────────────
 
+/** @param {any} settlement */
 function catalogIndex(settlement) {
   const cat = entityCatalog(settlement);
   const byId = new Map();
@@ -40,6 +41,7 @@ function catalogIndex(settlement) {
   return byId;
 }
 
+/** @param {any} before @param {any} after */
 function diffEntityCatalogs(before, after) {
   const beforeMap = catalogIndex(before);
   const afterMap  = catalogIndex(after);
@@ -145,7 +147,8 @@ export function deriveRegenerationDelta(before, after) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Total count of structural changes across all layers. */
+/** Total count of structural changes across all layers.
+ * @param {any} delta */
 export function regenerationDeltaSize(delta) {
   if (!delta) return 0;
   return (delta.directEffects?.length    || 0)
@@ -156,8 +159,10 @@ export function regenerationDeltaSize(delta) {
        + (delta.removedEntities?.length  || 0);
 }
 
-/** Group new entities by type. Useful for "what's new" UI sections. */
+/** Group new entities by type. Useful for "what's new" UI sections.
+ * @param {any} delta */
 export function newEntitiesByType(delta) {
+  /** @type {Record<string, any[]>} */
   const out = {};
   for (const e of delta?.newEntities || []) {
     if (!out[e.type]) out[e.type] = [];

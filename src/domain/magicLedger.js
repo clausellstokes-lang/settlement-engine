@@ -42,6 +42,7 @@ const NEUTRAL = Object.freeze({
 });
 
 // Fold the stale lens vocabulary (and any legacy saves) into getMagicLevel's canonical set.
+/** @param {any} level */
 function canonBand(level) {
   switch (level) {
     case 'pervasive':            return 'high';
@@ -52,10 +53,11 @@ function canonBand(level) {
   }
 }
 
+/** @param {any} v */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {MagicLedger}
  */
 export function magicLedger(settlement) {

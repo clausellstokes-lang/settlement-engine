@@ -1,17 +1,26 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
 
+/** @param {any} condition */
 function conditionId(condition) {
   return condition?.archetype || condition?.id || condition?.label || null;
 }
 
+/** @param {any} value @returns {string | null} */
 function compactLabel(value) {
   const text = String(value || '').trim();
   return text ? text.slice(0, 160) : null;
 }
 
+/**
+ * @param {any} nextSettlement
+ * @param {any} priorSettlement
+ * @param {Record<string, any>} [options]
+ * @returns {any}
+ */
 export function reconcileSettlementChange(nextSettlement, priorSettlement, options = {}) {
   if (!nextSettlement || !priorSettlement) return nextSettlement;
   const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
+  /** @type {any} */
   const reconciled = preserveWorldConditions(nextSettlement, priorSettlement);
   const entry = {
     // `at` is a deterministic, caller-supplied timestamp. When options.now is

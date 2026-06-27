@@ -42,14 +42,22 @@ export const CONTRADICTION_TYPES = Object.freeze([
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {any} type
+ * @param {any} suffix
+ */
 function contradictionId(type, suffix) {
   return `contradiction.${type}.${snakeCase(suffix || 'unknown')}`;
 }
 
+/**
+ * @param {{ type: any, classification: any, description: any, explanation: any, consequences?: any, references?: any }} args
+ */
 function contradiction({ type, classification, description, explanation, consequences, references }) {
   return {
     id: contradictionId(type, description || ''),
@@ -67,6 +75,7 @@ function contradiction({ type, classification, description, explanation, consequ
 const OVERSIZED_PATTERN = /(cathedral|grand|college|conclave|fortress|citadel|palace|university)/i;
 const ENFORCEMENT_PATTERN = /(watch|garrison|barracks|militia|guard|constabulary|sheriff)/i;
 
+/** @param {any} settlement */
 function detectOversizedInstitutions(settlement) {
   const tier = settlement.tier;
   if (tier !== 'village' && tier !== 'hamlet') return [];
@@ -89,11 +98,12 @@ function detectOversizedInstitutions(settlement) {
   return out;
 }
 
+/** @param {any} settlement */
 function detectMissingEnforcement(settlement) {
   const tier = settlement.tier;
   if (tier !== 'town' && tier !== 'city') return [];
   const inst = settlement.institutions || [];
-  const hasEnforcement = inst.some(i => ENFORCEMENT_PATTERN.test(String(i?.name || '')));
+  const hasEnforcement = inst.some((/** @type {any} */ i) => ENFORCEMENT_PATTERN.test(String(i?.name || '')));
   if (hasEnforcement) return [];
   return [contradiction({
     type: 'missing_enforcement_for_tier',
@@ -109,6 +119,10 @@ function detectMissingEnforcement(settlement) {
   })];
 }
 
+/**
+ * @param {any} settlement
+ * @param {any} causal
+ */
 function detectLegitimacyVsCrime(settlement, causal) {
   const legBand = causal.bands.public_legitimacy;
   const crimScore = causal.scores.criminal_opportunity ?? 50;
@@ -133,6 +147,10 @@ function detectLegitimacyVsCrime(settlement, causal) {
   return [];
 }
 
+/**
+ * @param {any} settlement
+ * @param {any[]} profiles
+ */
 function detectOrphanedFactionPower(settlement, profiles) {
   const out = [];
   const inst = settlement.institutions || [];
@@ -148,7 +166,7 @@ function detectOrphanedFactionPower(settlement, profiles) {
     else if (p.archetype === 'military') { pattern = MILITARY_INST; label = 'military institution'; }
     else if (p.archetype === 'arcane') { pattern = ARCANE_INST; label = 'arcane institution'; }
     if (!pattern) continue;
-    const supporting = inst.some(i => pattern.test(String(i?.name || '')));
+    const supporting = inst.some((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
     if (supporting) continue;
     out.push(contradiction({
       type: 'orphaned_faction_power',
@@ -165,6 +183,11 @@ function detectOrphanedFactionPower(settlement, profiles) {
   return out;
 }
 
+/**
+ * @param {any} settlement
+ * @param {any} causal
+ * @param {any} capacities
+ */
 function detectSurplusButCritical(settlement, causal, capacities) {
   const out = [];
   // food_security surplus but food_production capacity critical/collapsed — the
@@ -196,6 +219,11 @@ function detectSurplusButCritical(settlement, causal, capacities) {
   return out;
 }
 
+/**
+ * @param {any} settlement
+ * @param {any[]} threats
+ * @param {any} capacities
+ */
 function detectThreatWithoutResponse(settlement, threats, capacities) {
   const out = [];
   for (const threat of threats) {
@@ -256,10 +284,14 @@ export function detectContradictions(settlement) {
   ];
 }
 
-/** Group by classification. */
+/**
+ * Group by classification.
+ * @param {any} settlement
+ */
 export function contradictionBreakdown(settlement) {
+  /** @type {Record<string, number>} */
   const out = { invalid: 0, rare_but_justified: 0, interesting_tension: 0, user_authored_exception: 0 };
-  for (const c of detectContradictions(settlement)) {
+  for (const c of /** @type {any[]} */ (detectContradictions(settlement))) {
     if (out[c.classification] !== undefined) out[c.classification] += 1;
   }
   return out;

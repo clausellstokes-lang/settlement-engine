@@ -103,13 +103,14 @@ const DISPLAY_LABELS = Object.freeze({
  * @returns {string}
  */
 export function displayBandLabel(domain, band) {
-  const map = DISPLAY_LABELS[domain];
+  const map = /** @type {Record<string, Record<string, string>>} */ (DISPLAY_LABELS)[domain];
   if (!map || typeof band !== 'string') return band || '';
   return map[band] || band;
 }
 
 // ── Reference parsing ───────────────────────────────────────────────────
 
+/** @param {any} ref */
 function parseRef(ref) {
   if (typeof ref === 'string') return { id: ref };
   if (ref && typeof ref === 'object') return ref;
@@ -128,7 +129,7 @@ function parseRef(ref) {
  *   - 'district.<id>' with { domain: 'wealth' | 'safety' } modifier
  *
  * @param {string | {id: string, domain?: string}} ref
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {string | null}
  */
 export function bandFor(ref, settlement) {
@@ -150,17 +151,17 @@ export function bandFor(ref, settlement) {
   if (id.startsWith('capacity.')) {
     const name = id.slice('capacity.'.length);
     if (!CAPACITY_NAMES.includes(name)) return null;
-    const p = deriveCapacityProfile(name, settlement);
+    const p = /** @type {any} */ (deriveCapacityProfile(name, settlement));
     return p?.band || null;
   }
   if (CAPACITY_NAMES.includes(id)) {
-    const p = deriveCapacityProfile(id, settlement);
+    const p = /** @type {any} */ (deriveCapacityProfile(id, settlement));
     return p?.band || null;
   }
 
   // Chain
   if (id.startsWith('chain.')) {
-    const c = deriveAllSupplyChainStates(settlement).find(x => x.id === id);
+    const c = deriveAllSupplyChainStates(settlement).find((/** @type {any} */ x) => x.id === id);
     return c?.status || null;
   }
 
@@ -172,13 +173,13 @@ export function bandFor(ref, settlement) {
 
   // Threat
   if (id.startsWith('threat.')) {
-    const t = deriveAllThreatProfiles(settlement).find(x => x.id === id);
+    const t = deriveAllThreatProfiles(settlement).find((/** @type {any} */ x) => x.id === id);
     return t?.severityBand || null;
   }
 
   // District — needs a domain modifier (wealth | safety).
   if (id.startsWith('district.')) {
-    const d = deriveAllDistricts(settlement).find(x => x.id === id);
+    const d = deriveAllDistricts(settlement).find((/** @type {any} */ x) => x.id === id);
     if (!d) return null;
     if (domain === 'safety') return d.safety;
     return d.wealth;  // default
@@ -190,6 +191,8 @@ export function bandFor(ref, settlement) {
 /**
  * Convenience: return the user-facing display value for any reference.
  * Routes the right domain to displayBandLabel automatically.
+ * @param {any} ref
+ * @param {any} settlement
  */
 export function displayValueFor(ref, settlement) {
   const { id, domain } = parseRef(ref);
@@ -217,7 +220,8 @@ export function supportedBandDomains() {
   return Object.keys(DISPLAY_LABELS);
 }
 
+/** @param {string} domain */
 export function displayLabelsFor(domain) {
-  const m = DISPLAY_LABELS[domain];
+  const m = /** @type {Record<string, Record<string, string>>} */ (DISPLAY_LABELS)[domain];
   return m ? { ...m } : null;
 }

@@ -61,6 +61,7 @@ import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTic
 // memoized `(id) => boolean` over the pre-tick edges + relationshipStates. Pure,
 // codepoint-stable (the result is a set membership test, order-free).
 const MOBILIZATION_HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
+/** @param {any} snapshot */
 function buildWantsWarLookup(snapshot) {
   const states = snapshot?.worldState?.relationshipStates || {};
   /** @type {Set<string>} */
@@ -79,6 +80,7 @@ function buildWantsWarLookup(snapshot) {
   return (/** @type {string} */ id) => wants.has(String(id));
 }
 
+/** @param {any} snapshot @param {any} localSettlements */
 function buildSettlementMap(snapshot, localSettlements) {
   const map = new Map();
   for (const item of snapshot.settlements) {
@@ -91,6 +93,7 @@ function buildSettlementMap(snapshot, localSettlements) {
   return map;
 }
 
+/** @param {any} worldState @param {any} campaign @param {any} interval */
 function nextWorldStateForPulse(worldState, campaign, interval) {
   const current = ensureWorldState(worldState, campaign);
   const tick = current.tick + 1;
@@ -257,6 +260,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const timeTicks = [];
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
+    /** @type {any} */
     const result = advanceTime(item.settlement, { interval: tickInterval, previousTickState });
     // The granary moves: surplus fills it, deficits draw it down (rationed),
     // mild hardship tithes into it, an active siege/occupation cuts the
@@ -986,11 +990,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     })),
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
-    corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map(e => ({
+    corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map((/** @type {any} */ e) => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
       criminalInstitution: e.criminalInstitution, homeInstitution: e.homeInstitution,
     })),
-    factionCaptureEvents: (factionCapture.transitions || []).slice(0, 24).map(t => ({
+    factionCaptureEvents: (factionCapture.transitions || []).slice(0, 24).map((/** @type {any} */ t) => ({
       settlementId: t.settlementId, name: t.name, from: t.from, to: t.to,
     })),
   };
@@ -1003,13 +1007,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // capped feed with 30 near-identical headlines. Re-emit when membership
   // changes or after the cooldown lapses (keeps long arcs visible).
   const ARC_REEMIT_COOLDOWN_TICKS = 6;
-  const isFreshArcEntry = (entry) => {
+  const isFreshArcEntry = (/** @type {any} */ entry) => {
     if (!['realm', 'compound'].includes(entry.kind)) return true;
     // The feed is newest-first, so the cooldown window must be a tick filter —
     // a tail slice would inspect the OLDEST entries once the feed exceeds it.
     const recent = (applied.wizardNews?.entries || [])
-      .filter(e => worldState.tick - (e.tick ?? -Infinity) < ARC_REEMIT_COOLDOWN_TICKS);
-    return !recent.some(e =>
+      .filter((/** @type {any} */ e) => worldState.tick - (e.tick ?? -Infinity) < ARC_REEMIT_COOLDOWN_TICKS);
+    return !recent.some((/** @type {any} */ e) =>
       e.impactKind === entry.impactKind
       && JSON.stringify((e.settlementIds || []).slice().sort()) === JSON.stringify((entry.settlementIds || []).slice().sort()));
   };
@@ -1040,7 +1044,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Capture transitions reach the DM: the factionCaptureEvents
   // pulseRecord rollup above was consumed by nobody, so a faction falling to
   // (or breaking from) the underworld never surfaced in the Chronicle.
-  const settlementNameFor = (id) => {
+  const settlementNameFor = (/** @type {any} */ id) => {
     const entry = settlementMap.get(String(id));
     return entry?.save?.name || entry?.settlement?.name || String(id);
   };

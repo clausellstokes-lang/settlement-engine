@@ -26,10 +26,15 @@ const INTERVAL_MONTHS = Object.freeze({
 // consistent with the label.
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 
+/**
+ * @param {any} value
+ * @param {number} [fallback]
+ */
 function finite(value, fallback = 0) {
   return Number.isFinite(value) ? value : fallback;
 }
 
+/** @param {any} value */
 export function stablePart(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -38,10 +43,12 @@ export function stablePart(value) {
     .slice(0, 80) || 'unknown';
 }
 
+/** @param {any} value */
 function cloneArray(value) {
-  return Array.isArray(value) ? value.map(item => ({ ...item })) : [];
+  return Array.isArray(value) ? value.map((/** @type {any} */ item) => ({ ...item })) : [];
 }
 
+/** @param {any} value */
 function cloneObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? { ...value } : {};
 }
@@ -51,6 +58,7 @@ function cloneObject(value) {
 // ticks, so a shallow copy would let a snapshot alias live state and corrupt
 // determinism. These ledgers route through deepClone (the sole sanctioned clone
 // seam) instead. Non-objects normalize to an empty ledger.
+/** @param {any} value */
 function deepCloneLedger(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? deepClone(value) : {};
 }
@@ -62,6 +70,7 @@ function deepCloneLedger(value) {
 // `undefined` (key omitted by the conditional spread below) when the value is
 // absent or empty, and a DEEP clone of a present, non-empty pantheon otherwise —
 // never the `{}` default deepCloneLedger materializes unconditionally.
+/** @param {any} value */
 function deepCloneConditionalLedger(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
   if (Object.keys(value).length === 0) return undefined;
@@ -73,15 +82,18 @@ function deepCloneConditionalLedger(value) {
 // to its empty default). Modelled on settlementMigrations: each entry bumps a
 // breaking shape. The first future BREAKING change registers its step here so the
 // upgrade path is explicit and ordered, never an ad-hoc inline coercion.
+/** @type {ReadonlyArray<{ to: number, migrate: (raw: any) => any }>} */
 const WORLD_STATE_MIGRATIONS = Object.freeze([
   // { to: 2, migrate: (raw) => ({ ...raw, /* breaking reshape */ }) },
 ]);
 
+/** @param {any} raw */
 export function runWorldStateMigrations(raw = {}) {
   const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
   return WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
 }
 
+/** @param {any} campaign */
 export function createDefaultWorldState(campaign = {}) {
   const seedPart = campaign.id || campaign.name || 'campaign';
   return {
@@ -221,6 +233,11 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   };
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} [now]
+ * @param {any} [campaign]
+ */
 export function canonizeWorldState(worldState, now = wallClockNow(), campaign = {}) {
   const current = ensureWorldState(worldState, campaign);
   return {
@@ -229,8 +246,12 @@ export function canonizeWorldState(worldState, now = wallClockNow(), campaign = 
   };
 }
 
+/**
+ * @param {any} calendar
+ * @param {string} [interval]
+ */
 export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
-  const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (INTERVAL_MONTHS[interval] ?? 1);
+  const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (/** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1);
   const wholeMonthIndex = Math.floor(elapsed);
   const month = (wholeMonthIndex % 12) + 1;
   const year = Math.floor(wholeMonthIndex / 12) + 1;
@@ -238,6 +259,10 @@ export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
   return { elapsedMonths: elapsed, month, year, season };
 }
 
+/**
+ * @param {any} outcome
+ * @param {any} tick
+ */
 export function proposalIdFor(outcome, tick) {
   return [
     'world_proposal',
@@ -248,19 +273,31 @@ export function proposalIdFor(outcome, tick) {
   ].join('.');
 }
 
+/**
+ * @param {any} campaignId
+ * @param {any} tick
+ */
 export function pulseIdFor(campaignId, tick) {
   return `world_pulse.${stablePart(campaignId)}.${tick}`;
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} record
+ */
 export function appendPulseHistory(worldState, record) {
   const current = ensureWorldState(worldState);
   const next = [...current.pulseHistory, record].slice(-MAX_HISTORY);
   return { ...current, pulseHistory: next };
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} proposal
+ */
 export function upsertProposal(worldState, proposal) {
   const current = ensureWorldState(worldState);
-  const byId = new Map(current.proposals.map(item => [item.id, item]));
+  const byId = new Map(current.proposals.map((/** @type {any} */ item) => [item.id, item]));
   byId.set(proposal.id, { ...(byId.get(proposal.id) || {}), ...proposal });
   return {
     ...current,
@@ -268,11 +305,17 @@ export function upsertProposal(worldState, proposal) {
   };
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} proposalId
+ * @param {any} status
+ * @param {any} [patch]
+ */
 export function updateProposalStatus(worldState, proposalId, status, patch = {}) {
   const current = ensureWorldState(worldState);
   return {
     ...current,
-    proposals: current.proposals.map(proposal => (
+    proposals: current.proposals.map((/** @type {any} */ proposal) => (
       proposal.id === proposalId
         ? { ...proposal, ...patch, status, updatedAt: patch.updatedAt || wallClockNow() }
         : proposal

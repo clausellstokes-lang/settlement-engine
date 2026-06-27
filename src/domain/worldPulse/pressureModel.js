@@ -1,8 +1,10 @@
+/** @param {any} value @returns {number} */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any} score @param {boolean} [invert] @returns {number} */
 function pressureFromScore(score, invert = true) {
   const value = Number.isFinite(score) ? score : 50;
   return invert ? clamp01((70 - value) / 70) : clamp01(value / 100);
@@ -31,13 +33,14 @@ const CRIME_ARCHETYPES = new Set(['regional_criminal_pressure', 'trade_route_cut
 
 // Returns the deduped archetype ids that matched — reason strings must name
 // the real matched archetypes, never a fabricated classification.
+/** @param {any} item @param {Set<string>} archetypes @param {string[]} [systems] @returns {string[]} */
 function matchedConditionArchetypes(item, archetypes, systems = []) {
   const matched = [];
   for (const c of item.activeConditions || []) {
     if (!c) continue;
     if (archetypes.has(c.archetype)) matched.push(c.archetype);
     else if (c.archetype === 'custom_crisis'
-      && (c.affectedSystems || []).some(s => systems.includes(s))) matched.push('custom_crisis');
+      && (c.affectedSystems || []).some(/** @param {any} s */ s => systems.includes(s))) matched.push('custom_crisis');
   }
   return [...new Set(matched)];
 }
@@ -61,7 +64,7 @@ function buildConfirmedChannelIndex(graph) {
   return index;
 }
 
-/** @param {Map<string, any[]>} channelIndex */
+/** @param {Map<string, any[]>} channelIndex @param {any} settlementId @param {string[]} [types] @returns {number} */
 function countChannels(channelIndex, settlementId, types = []) {
   const set = new Set(types);
   const bucket = channelIndex.get(String(settlementId));
@@ -76,6 +79,7 @@ function countChannels(channelIndex, settlementId, types = []) {
 //   • a trade-dependency supplier in a food crisis raises the dependent's FOOD
 //     pressure (the supplier's famine becomes the dependent's problem)
 
+/** @param {any} snapshot @param {any} settlementId @returns {any[]} */
 function relationshipsTouching(snapshot, settlementId) {
   const sid = String(settlementId);
   const states = snapshot.worldState?.relationshipStates || {};
@@ -90,6 +94,7 @@ function relationshipsTouching(snapshot, settlementId) {
   return out;
 }
 
+/** @param {any} snapshot @param {any} settlementId @returns {number} */
 function relationshipHostility(snapshot, settlementId) {
   let max = 0;
   for (const r of relationshipsTouching(snapshot, settlementId)) {
@@ -100,9 +105,10 @@ function relationshipHostility(snapshot, settlementId) {
   return max;
 }
 
+/** @param {any} snapshot @param {any} settlementId @returns {boolean} */
 function supplierInFoodCrisis(snapshot, settlementId) {
   // trade_dependency channels point supplier → dependent.
-  const channels = (snapshot.regionalGraph?.channels || []).filter(c =>
+  const channels = (snapshot.regionalGraph?.channels || []).filter(/** @param {any} c */ c =>
     c.status === 'confirmed' && c.type === 'trade_dependency' && String(c.to) === String(settlementId));
   for (const c of channels) {
     const supplier = snapshot.byId?.get?.(String(c.from));
@@ -111,6 +117,7 @@ function supplierInFoodCrisis(snapshot, settlementId) {
   return false;
 }
 
+/** @param {any} snapshot @returns {any[]} */
 export function deriveSettlementPressures(snapshot) {
   const out = [];
   const season = snapshot.worldState.calendar?.season;
@@ -256,8 +263,11 @@ export function deriveSettlementPressures(snapshot) {
   }));
 }
 
+/** @param {any[]} [pressures] @returns {any} */
 export function pressureIndex(pressures = []) {
+  /** @type {Map<string, any>} */
   const map = new Map();
+  /** @type {Record<string, any[]>} */
   const bySettlement = {};
   for (const pressure of pressures) {
     map.set(`${pressure.settlementId}:${pressure.kind}`, pressure);
@@ -267,7 +277,9 @@ export function pressureIndex(pressures = []) {
   }
   return {
     bySettlement,
+    /** @param {any} settlementId @param {any} kind */
     get: (settlementId, kind) => map.get(`${settlementId}:${kind}`) || null,
+    /** @param {any} settlementId @param {any[]} [kinds] */
     strongest: (settlementId, kinds = []) => kinds
       .map(kind => map.get(`${settlementId}:${kind}`))
       .filter(Boolean)

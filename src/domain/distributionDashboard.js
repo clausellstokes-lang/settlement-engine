@@ -24,6 +24,7 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState, SYSTEM_VARIABLES, CAUSAL_BANDS } from './causalState.js';
 import { detectContradictions } from './contradictions.js';
 
+/** @returns {any} */
 function blank() {
   return {
     n: 0,
@@ -43,10 +44,12 @@ function blank() {
   };
 }
 
+/** @param {Record<string, number>} obj @param {string} key */
 function incr(obj, key) {
   obj[key] = (obj[key] || 0) + 1;
 }
 
+/** @param {any} name */
 function institutionCategory(name) {
   const n = String(name || '').toLowerCase();
   if (/granary|mill|silo|storage|bakery|farm/.test(n))           return 'food';
@@ -64,8 +67,8 @@ function institutionCategory(name) {
 /**
  * Aggregate distribution stats across many settlements. Pure.
  *
- * @param {Object[]} settlements
- * @returns {Object}
+ * @param {any[]} settlements
+ * @returns {any}
  */
 export function aggregateDistribution(settlements) {
   if (!Array.isArray(settlements) || settlements.length === 0) {
@@ -119,7 +122,7 @@ export function aggregateDistribution(settlements) {
 
     // Contradiction types
     for (const c of detectContradictions(s)) {
-      incr(out.contradictionTypes, c.type);
+      incr(out.contradictionTypes, /** @type {any} */ (c).type);
     }
 
     // Aggregate counts for averages
@@ -140,6 +143,7 @@ export function aggregateDistribution(settlements) {
 /**
  * Convert an aggregate to a flat array of `{label, value}` rows
  * suitable for table rendering.
+ * @param {any} aggregate @param {string} section
  */
 export function distributionRows(aggregate, section) {
   if (!aggregate || !aggregate[section]) return [];

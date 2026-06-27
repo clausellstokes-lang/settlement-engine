@@ -185,6 +185,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
 
 const FOOD_INSTITUTION_PATTERNS = /granary|mill|bakery|farm|orchard|fishery/i;
 
+/** @param {any} event */
 function inferEventArchetype(event) {
   if (!event) return null;
 
@@ -217,10 +218,12 @@ function inferEventArchetype(event) {
 
 // ── Faction match helpers ────────────────────────────────────────────────
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {any} name */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -239,13 +242,9 @@ function factionIdFromName(name) {
  *
  *   recalculateFactionRelationships(settlement, { type: 'PLAGUE' }, { archetype: 'plague' })
  *
- * @param {Object} settlement
- * @param {Object} event              { type, targetId?, factionImpactArchetype?, … }
- * @param {Object} [options]
- * @param {string} [options.archetype]  Override; bypasses inference.
- * @param {Object} [options.targetNpc]  When archetype is 'dominant_npc_removed',
- *                                      the structured profile of the NPC being
- *                                      removed. Required for that archetype.
+ * @param {any} settlement
+ * @param {any} event              { type, targetId?, factionImpactArchetype?, … }
+ * @param {{ archetype?: string, targetNpc?: any }} [options]
  * @returns {Array<Object>} Updates.
  */
 export function recalculateFactionRelationships(settlement, event, options = {}) {
@@ -254,9 +253,10 @@ export function recalculateFactionRelationships(settlement, event, options = {})
   const archetype = options.archetype || inferEventArchetype(event);
   if (!archetype) return [];
 
-  const impacts = ARCHETYPE_IMPACTS[archetype];
+  const impacts = /** @type {Record<string, any>} */ (ARCHETYPE_IMPACTS)[archetype];
   if (!impacts) return [];
 
+  /** @type {any[]} */
   const profiles = deriveAllFactionProfiles(settlement);
   if (profiles.length === 0) return [];
 
@@ -348,8 +348,10 @@ export function recalculateFactionRelationships(settlement, event, options = {})
  *   { 'faction.<id>': { name, archetype, deltas: { power, legitimacy, … } } }
  * with summed numeric deltas per field. Useful for the "net change per
  * faction" surface and for forecast tooling.
+ * @param {any[]} updates
  */
 export function summarizeByFaction(updates) {
+  /** @type {Record<string, any>} */
   const out = {};
   for (const u of updates || []) {
     if (typeof u.delta !== 'number') continue; // skip band changes for now

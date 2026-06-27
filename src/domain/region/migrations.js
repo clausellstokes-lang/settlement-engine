@@ -7,10 +7,12 @@
 
 import { ensureRegionalGraph } from './graph.js';
 
+/** @param {any} graph */
 export function migrateRegionalGraphToLatest(graph) {
   return ensureRegionalGraph(graph || {});
 }
 
+/** @param {any} campaign */
 export function withMigratedCampaignRegionalGraph(campaign) {
   if (!campaign || typeof campaign !== 'object') return campaign;
   return {
@@ -19,6 +21,7 @@ export function withMigratedCampaignRegionalGraph(campaign) {
   };
 }
 
+/** @param {any[]} [campaigns] */
 export function migrateCampaignsRegionalGraphs(campaigns = []) {
   return (Array.isArray(campaigns) ? campaigns : []).map(campaign => {
     if (!campaign || typeof campaign !== 'object') return campaign;

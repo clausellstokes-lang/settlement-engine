@@ -112,7 +112,8 @@ export const TRADE_CATEGORIES = Object.freeze([
 const _TRADE_CAT_BY_KEY = new Map(TRADE_CATEGORIES.map((c) => [c.key, c]));
 
 /** Display label for a `satisfies` value: a known category key → its label; a
- *  free-text ("Other") value → returned as-is by the caller (this returns null). */
+ *  free-text ("Other") value → returned as-is by the caller (this returns null).
+ *  @param {any} value */
 export function tradeCategoryLabelOf(value) {
   if (!value) return null;
   return _TRADE_CAT_BY_KEY.get(String(value))?.label || null;
@@ -120,7 +121,8 @@ export function tradeCategoryLabelOf(value) {
 
 /** Picker options for the `satisfies` field: the unified categories as builtins
  *  (value=key) + any free-text value currently in use across custom goods/
- *  institutions (the "Other" escape hatch — persists only while referenced). */
+ *  institutions (the "Other" escape hatch — persists only while referenced).
+ *  @param {any} customContent */
 export function satisfiesOptions(customContent) {
   const builtins = TRADE_CATEGORIES.map((c) => ({ value: c.key, label: c.label }));
   const knownKeys = new Set(TRADE_CATEGORIES.map((c) => c.key));
@@ -233,14 +235,16 @@ export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', '
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Normalize a comma-string or array of tags to a clean lowercase array. */
+/** Normalize a comma-string or array of tags to a clean lowercase array.
+ *  @param {any} raw */
 export function normalizeTags(raw) {
   if (Array.isArray(raw)) return raw.map((t) => String(t).trim().toLowerCase()).filter(Boolean);
   if (typeof raw === 'string') return raw.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean);
   return [];
 }
 
-/** Effective tags including the magical / criminal toggles folded in. */
+/** Effective tags including the magical / criminal toggles folded in.
+ *  @param {any} [entity] */
 export function effectiveTags(entity = {}) {
   const tags = new Set(normalizeTags(entity?.tags));
   if (entity?.magical) tags.add('magical');
@@ -248,10 +252,12 @@ export function effectiveTags(entity = {}) {
   return Array.from(tags);
 }
 
+/** @param {any} [entity] */
 export function isMagical(entity = {}) {
   return entity?.magical === true || normalizeTags(entity?.tags).includes('magical');
 }
 
+/** @param {any} [entity] */
 export function isCriminal(entity = {}) {
   return entity?.criminal === true || normalizeTags(entity?.tags).includes('criminal');
 }
@@ -269,6 +275,7 @@ export function isCriminal(entity = {}) {
  */
 export function eligibleCustomContent(customContent, { tier } = {}) {
   if (!customContent || typeof customContent !== 'object' || !tier) return customContent;
+  /** @type {Record<string, any>} */
   const out = {};
   for (const [bucket, items] of Object.entries(customContent)) {
     out[bucket] = Array.isArray(items) ? items.filter((it) => passesTierGate(it, tier)) : items;
@@ -280,6 +287,8 @@ export function eligibleCustomContent(customContent, { tier } = {}) {
  * Does `entity` satisfy its tier gate at the given settlement `tier`?
  * tierMin / tierMax are inclusive; missing gates mean "no bound". Unknown tiers
  * pass (fail-open — never hide content over a typo).
+ * @param {any} entity
+ * @param {any} tier
  */
 export function passesTierGate(entity = {}, tier) {
   if (!tier) return true;

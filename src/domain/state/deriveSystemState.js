@@ -55,6 +55,7 @@ export function deriveSystemState(settlement) {
  * Can the settlement absorb shocks? Drivers: prosperity, food security,
  * income/export diversity, public legitimacy. Famine, single-source
  * exports, and impaired institutions push it down.
+ * @param {any} s
  */
 function deriveResilience(s) {
   let value = 50;
@@ -157,6 +158,7 @@ function deriveResilience(s) {
  * relationships between factions, criminal capture, low public
  * legitimacy. A stable monoculture scores low; a town with rivals,
  * thieves' guilds, and weak rulers scores high.
+ * @param {any} s
  */
 function deriveVolatility(s) {
   let value = 30; // baseline — most towns have some friction
@@ -245,6 +247,7 @@ function deriveVolatility(s) {
 /**
  * How much pressure comes from outside the settlement? Monster threat,
  * hostile neighbours, raids/sieges/occupation in stressors.
+ * @param {any} s
  */
 function deriveExternalThreat(s) {
   let value = 30;
@@ -265,7 +268,7 @@ function deriveExternalThreat(s) {
 
   // Hostile neighbour relationships (network effects)
   const network = s.neighbourNetwork || s.neighbourLinks || [];
-  const hostile = network.filter(n => n.relationshipType === 'hostile' || n.relationshipType === 'cold_war').length;
+  const hostile = network.filter((/** @type {any} */ n) => n.relationshipType === 'hostile' || n.relationshipType === 'cold_war').length;
   if (hostile > 0) {
     value += Math.min(20, hostile * 8);
     risks.push(`${hostile} hostile neighbour${hostile === 1 ? '' : 's'}`);
@@ -275,14 +278,14 @@ function deriveExternalThreat(s) {
   // resilience above; without it, the threat dimension silently zeros
   // out on settlements that only carry the new `stressors` field.
   const stressList = canonStressors(s);
-  const threatStresses = stressList.filter(st => {
+  const threatStresses = stressList.filter((/** @type {any} */ st) => {
     const t = String(st.type || st.name || '').toLowerCase();
     return t.includes('siege') || t.includes('occupation') || t.includes('raid')
         || t.includes('plague') || t.includes('war') || t.includes('refugee');
   });
   if (threatStresses.length > 0) {
     value += Math.min(20, threatStresses.length * 8);
-    risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
+    risks.push(`Active threat: ${threatStresses.map((/** @type {any} */ t) => t.name || t.type).join(', ')}`);
   }
 
   // War-layer conditions (S2). A PULSE-born war surfaces as a CONDITION, not a
@@ -307,6 +310,7 @@ function deriveExternalThreat(s) {
 /**
  * Are key materials under strain? Depleted resources, narrow chain
  * dependencies, unmet imports. High value = the place will hurt soon.
+ * @param {any} s
  */
 function deriveResourcePressure(s) {
   let value = 30;
@@ -324,7 +328,7 @@ function deriveResourcePressure(s) {
   // Chain vulnerabilities
   const econ = econOf(s);
   const chains = econ.activeChains || [];
-  const vulnerable = chains.filter(c => c.resourceDepleted || c.substituteActive).length;
+  const vulnerable = chains.filter((/** @type {any} */ c) => c.resourceDepleted || c.substituteActive).length;
   if (vulnerable > 0) {
     value += Math.min(15, vulnerable * 5);
     risks.push(`${vulnerable} vulnerable supply chain${vulnerable === 1 ? '' : 's'}`);
@@ -378,8 +382,14 @@ function readWarReligionMovement(s) {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function econOf(s) { return s?.economicState || {}; }
 
+/**
+ * @param {any} items
+ * @param {any} statuses
+ * @param {{ excludeCovertOnly?: boolean }} [opts]
+ */
 function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
   if (!Array.isArray(items)) return 0;
   const set = new Set(statuses);
@@ -396,6 +406,9 @@ function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
  * Wrap raw value+drivers+risks into the StateDimension shape with band
  * label and clamped value. Centralizing this means every dimension comes
  * out of derivation in the same shape — no surprises for the UI consumer.
+ * @param {number} rawValue
+ * @param {any[]} drivers
+ * @param {any[]} risks
  */
 function finalize(rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));

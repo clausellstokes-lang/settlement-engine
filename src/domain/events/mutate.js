@@ -108,7 +108,7 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: any, event: any) => any>
  * @param {Object} args
  * @param {Object} args.settlement
  * @param {Event} args.event
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {Object} mutated settlement
  */
 export function mutateSettlement({ settlement, event, now = null }) {

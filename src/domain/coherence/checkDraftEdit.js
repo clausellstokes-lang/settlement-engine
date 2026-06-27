@@ -16,7 +16,7 @@ import { checkStructuralValidity } from '../../generators/structuralValidator.js
 /** @typedef {import('../types.js').CoherenceWarning} CoherenceWarning */
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {CoherenceWarning[]}
  */
 export function checkDraftEdit(settlement) {
@@ -35,7 +35,7 @@ export function checkDraftEdit(settlement) {
   try {
     result = checkStructuralValidity(institutions, config);
   } catch (e) {
-    return [{ severity: 'warning', message: `Validator error: ${e?.message || e}` }];
+    return [{ severity: 'warning', message: `Validator error: ${/** @type {any} */ (e)?.message || e}` }];
   }
 
   for (const v of result?.violations || []) {
@@ -57,12 +57,17 @@ export function checkDraftEdit(settlement) {
   return out;
 }
 
+/**
+ * @param {any} s
+ * @param {any} type
+ */
 function severityFromValidator(s, type) {
   if (s === 'critical' || s === 'error') return 'mismatch';
   if (type === 'survival_crisis')        return 'mismatch';
   return 'warning';
 }
 
+/** @param {any} v */
 function formatViolation(v) {
   if (v.reason) return v.reason;
   if (v.type === 'tier_violation') return `${v.institution || 'Institution'} doesn't fit this tier.`;
@@ -70,6 +75,7 @@ function formatViolation(v) {
   return `${v.type}: ${v.institution || ''}`.trim();
 }
 
+/** @param {any} s */
 function formatSuggestion(s) {
   if (s.reason) return s.reason;
   if (s.suggested?.length) return `Consider adding ${s.suggested.join(' or ')}.`;
@@ -81,10 +87,11 @@ function formatSuggestion(s) {
  * shallow — the structuralValidator's `suggested` field already has
  * most useful hints; we just promote them. A future version can produce
  * "click to add this institution" affordances against the catalog.
+ * @param {any} v
  */
 function suggestFixesForViolation(v) {
   if (Array.isArray(v.suggested) && v.suggested.length) return v.suggested;
-  if (Array.isArray(v.missing) && v.missing.length) return v.missing.map(m => `Add ${m}`);
+  if (Array.isArray(v.missing) && v.missing.length) return v.missing.map((/** @type {any} */ m) => `Add ${m}`);
   if (v.type === 'tier_violation') return ['Increase settlement tier', 'Remove this institution'];
   return undefined;
 }

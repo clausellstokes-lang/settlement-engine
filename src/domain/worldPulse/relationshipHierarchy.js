@@ -6,13 +6,21 @@ import { ensureRelationshipState, getRelationshipSettlements, relationshipKeyFro
 const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 const POSITIVE_TYPES = new Set(['allied', 'trade_partner', 'patron', 'client']);
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+const clamp01 = (/** @type {any} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
 
+/**
+ * @param {any} edge
+ * @param {any} states
+ */
 function edgeType(edge, states) {
   const key = relationshipKeyFromEdge(edge);
   return ensureRelationshipState(edge, states?.[key]).relationshipType;
 }
 
+/**
+ * @param {any} edge
+ * @param {any} id
+ */
 function otherSettlementId(edge, id) {
   const { from, to } = getRelationshipSettlements(edge);
   if (String(from) === String(id)) return String(to);
@@ -20,12 +28,18 @@ function otherSettlementId(edge, id) {
   return null;
 }
 
+/**
+ * @param {any} edge
+ * @param {any} a
+ * @param {any} b
+ */
 function isPair(edge, a, b) {
   const { from, to } = getRelationshipSettlements(edge);
   return (String(from) === String(a) && String(to) === String(b))
     || (String(from) === String(b) && String(to) === String(a));
 }
 
+/** @param {{ currentType: any, overlordType: any, vassalState: any }} args */
 function hierarchyDecision({ currentType, overlordType, vassalState }) {
   if (POSITIVE_TYPES.has(currentType) && HOSTILE_TYPES.has(overlordType)) {
     const coercion = Math.max(
@@ -61,6 +75,7 @@ function hierarchyDecision({ currentType, overlordType, vassalState }) {
   return null;
 }
 
+/** @param {{ state: any, edge: any, key: any, fromType: any, decision: any, tick: any, now: any, context: any }} args */
 function updateRelationshipState({ state, edge, key, fromType, decision, tick, now, context }) {
   const current = ensureRelationshipState(edge, state.relationshipStates?.[key]);
   const toType = decision.toType;
@@ -105,6 +120,11 @@ function updateRelationshipState({ state, edge, key, fromType, decision, tick, n
   };
 }
 
+/**
+ * @param {any} edge
+ * @param {any} toType
+ * @param {any} now
+ */
 function updateGraphEdge(edge, toType, now) {
   const fromType = edge.relationshipType || edge.type || 'neutral';
   return {
@@ -118,6 +138,7 @@ function updateGraphEdge(edge, toType, now) {
 // Shared cascade scan: every third-party edge of the vassal whose label the
 // hierarchy would rewrite, decided against the CURRENT states. Pure read —
 // both the resolve (apply) and the preview (proposal prose) walk this list.
+/** @param {{ worldState: any, regionalGraph: any, vassalEdge: any, overlordId: any, vassalId: any, vassalState: any }} args */
 function cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vassalId, vassalState }) {
   const causeRelationshipKey = relationshipKeyFromEdge(vassalEdge);
   const states = worldState.relationshipStates || {};
@@ -130,7 +151,7 @@ function cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vas
     const thirdPartyId = otherSettlementId(edge, vassalId);
     if (!thirdPartyId || String(thirdPartyId) === String(overlordId)) continue;
 
-    const overlordEdge = (regionalGraph.edges || []).find(candidate =>
+    const overlordEdge = (regionalGraph.edges || []).find((/** @type {any} */ candidate) =>
       relationshipKeyFromEdge(candidate) !== key
       && relationshipKeyFromEdge(candidate) !== causeRelationshipKey
       && isPair(candidate, overlordId, thirdPartyId)
@@ -218,7 +239,7 @@ export function resolveRelationshipHierarchy(args = {}) {
     states[key] = updatedState;
 
     let updatedEdge = null;
-    edges = edges.map(candidate => {
+    edges = edges.map((/** @type {any} */ candidate) => {
       if (relationshipKeyFromEdge(candidate) !== key) return candidate;
       updatedEdge = updateGraphEdge(candidate, decision.toType, now);
       return updatedEdge;

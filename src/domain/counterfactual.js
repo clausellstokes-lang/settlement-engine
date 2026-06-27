@@ -62,6 +62,11 @@ export const COUNTERFACTUAL_ACTIONS = Object.freeze([
 
 // ── Action → event mapping for the event-pipeline path ───────────────────
 
+/**
+ * @param {string} type
+ * @param {string} id
+ * @param {string} action
+ */
 function buildEventFor(type, id, action) {
   // Bare-id institution targets (e.g. 'institution.granary'): the
   // event registry expects the targetId to match an institution.id on
@@ -84,6 +89,12 @@ function buildEventFor(type, id, action) {
 
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
+/**
+ * @param {any} settlement
+ * @param {string} type
+ * @param {string} id
+ * @param {string} action
+ */
 function manualMutate(settlement, type, id, action) {
   // Pure clone strategy: spread the relevant paths so consumers
   // don't observe mutation of the input.
@@ -92,7 +103,7 @@ function manualMutate(settlement, type, id, action) {
   if (type === 'faction') {
     const factionId = String(id || '');
     const slug = factionId.startsWith('faction.') ? factionId.slice('faction.'.length) : factionId;
-    const factions = (settlement.powerStructure?.factions || []).map(f => {
+    const factions = (settlement.powerStructure?.factions || []).map(/** @param {any} f */ f => {
       const fSlug = (f?.faction || f?.name || '').toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
       const matched = f?.id === factionId || fSlug === slug;
       if (!matched) return f;
@@ -112,7 +123,7 @@ function manualMutate(settlement, type, id, action) {
 
   if (type === 'chain') {
     const chainId = String(id || '');
-    const activeChains = (settlement.economicState?.activeChains || []).map(c => {
+    const activeChains = (settlement.economicState?.activeChains || []).map(/** @param {any} c */ c => {
       const candidateId = `chain.${(c?.needKey || '').toLowerCase()}.${(c?.chainId || '').toLowerCase()}`;
       if (chainId === candidateId || c?.id === chainId) {
         const nextStatus =
@@ -220,7 +231,7 @@ export function counterfactual(settlement, ref) {
     summary.push(pipelineResult.narrativeSummary);
   }
 
-  for (const d of deltas.systemState || []) {
+  for (const d of /** @type {any[]} */ (deltas.systemState || [])) {
     if (d.explanation) summary.push(d.explanation);
   }
   for (const d of deltas.capacities || []) {
@@ -252,6 +263,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
+/** @param {any} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];
@@ -293,6 +305,7 @@ export function supportedCounterfactualActions() {
  * Summarize a counterfactual result as a flat array of lines. Same
  * pattern as summarizeEventResult / summarizeForecast.
  */
+/** @param {any} result */
 export function summarizeCounterfactual(result) {
   if (!result || !Array.isArray(result.summary)) return [];
   return [...result.summary];
@@ -300,6 +313,10 @@ export function summarizeCounterfactual(result) {
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/**
+ * @param {any} ref
+ * @param {any[]} messages
+ */
 function makeEmptyResult(ref, messages) {
   return {
     target: ref ? { id: ref.id || null, type: ref.type || null, label: null } : { id: null, type: null, label: null },
@@ -319,10 +336,15 @@ function makeEmptyResult(ref, messages) {
   };
 }
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {any} s
+ * @param {number} n
+ */
 function truncateText(s, n) {
   const str = String(s || '');
   if (str.length <= n) return str;

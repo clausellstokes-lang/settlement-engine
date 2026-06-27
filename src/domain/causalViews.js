@@ -51,9 +51,10 @@ const VIEW_TITLES = Object.freeze({
 
 // ── Per-view derivers ───────────────────────────────────────────────────
 
+/** @param {any} settlement */
 function viewNarrative(settlement) {
   const spine = deriveSimulationSpine(settlement);
-  const daily = deriveDailyLife(settlement);
+  const daily = /** @type {any} */ (deriveDailyLife(settlement));
   return {
     spine,
     dailyLife: daily.slots,
@@ -64,34 +65,37 @@ function viewNarrative(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function viewSimulation(settlement) {
-  const causal = deriveCausalState(settlement);
-  const capacities = deriveAllCapacities(settlement);
+  const causal = /** @type {any} */ (deriveCausalState(settlement));
+  const capacities = /** @type {any} */ (deriveAllCapacities(settlement));
   return {
     substrate: causal,
     capacities,
     summary: [
       `Substrate variables: ${Object.keys(causal.bands).length}.`,
       `Capacities: ${Object.keys(capacities.bands).length}.`,
-      ...(causal.summary.collapsed.map(v => `${v} is COLLAPSED.`)),
-      ...(causal.summary.critical.map(v => `${v} is critical.`)),
+      ...(causal.summary.collapsed.map((/** @type {any} */ v) => `${v} is COLLAPSED.`)),
+      ...(causal.summary.critical.map((/** @type {any} */ v) => `${v} is critical.`)),
     ],
   };
 }
 
+/** @param {any} settlement */
 function viewDelta(settlement) {
   const events = Array.isArray(settlement.eventLog) ? settlement.eventLog : [];
   const recent = events.slice(-10);
   return {
     eventLog: recent,
     summary: recent.length
-      ? recent.map(e => `${e.appliedAt || '–'}: ${e.event?.type || 'unknown'}. ${e.narrativeSummary || 'no narrative'}`)
+      ? recent.map((/** @type {any} */ e) => `${e.appliedAt || '–'}: ${e.event?.type || 'unknown'}. ${e.narrativeSummary || 'no narrative'}`)
       : ['No applied events yet.'],
   };
 }
 
+/** @param {any} settlement */
 function viewFaction(settlement) {
-  const profiles = deriveAllFactionProfiles(settlement);
+  const profiles = /** @type {any[]} */ (deriveAllFactionProfiles(settlement));
   return {
     factions: profiles,
     summary: profiles.length
@@ -100,8 +104,9 @@ function viewFaction(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function viewSupplyChain(settlement) {
-  const chains = deriveAllSupplyChainStates(settlement);
+  const chains = /** @type {any[]} */ (deriveAllSupplyChainStates(settlement));
   return {
     chains,
     summary: chains.length
@@ -110,9 +115,10 @@ function viewSupplyChain(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function viewTimeline(settlement) {
-  const beats = deriveHistoryBeats(settlement);
-  const clocks = deriveEscalationClocks(settlement);
+  const beats = /** @type {any} */ (deriveHistoryBeats(settlement));
+  const clocks = /** @type {any[]} */ (deriveEscalationClocks(settlement));
   const lines = [];
   for (const beat of Object.values(beats)) {
     if (beat) lines.push(`${beat.label}: ${beat.text}`);
@@ -127,8 +133,9 @@ function viewTimeline(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function viewDistrict(settlement) {
-  const districts = deriveAllDistricts(settlement);
+  const districts = /** @type {any[]} */ (deriveAllDistricts(settlement));
   return {
     districts,
     summary: districts.length
@@ -168,15 +175,15 @@ export function deriveCausalView(settlement, viewName) {
   if (!settlement) {
     return {
       view: viewName,
-      title: VIEW_TITLES[viewName],
+      title: /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName],
       entries: null,
       summary: ['No settlement to view.'],
     };
   }
-  const entries = VIEW_DERIVERS[viewName](settlement);
+  const entries = /** @type {Record<string, any>} */ (VIEW_DERIVERS)[viewName](settlement);
   return {
     view: viewName,
-    title: VIEW_TITLES[viewName],
+    title: /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName],
     entries,
     summary: entries.summary || [],
   };
@@ -187,6 +194,7 @@ export function supportedCausalViews() {
   return [...CAUSAL_VIEWS];
 }
 
+/** @param {string} viewName */
 export function viewTitle(viewName) {
-  return VIEW_TITLES[viewName] || viewName;
+  return /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName] || viewName;
 }
