@@ -2,13 +2,13 @@
  * religionState.test.js — the per-settlement pantheon core (religion rework).
  * Covers: legacy migration, share renorm to 100, the three entry paths
  * (open-slot cult / same-niche push-out / capacity-full cross-niche eviction),
- * forced (occupation) override, gradual share movement + chief buffer, and the
- * chief incumbency hysteresis (brief challenger held off, sustained lead flips).
+ * forced (occupation) override, gradual share movement + patron buffer, and the
+ * patron incumbency hysteresis (brief challenger held off, sustained lead flips).
  */
 import { describe, it, expect } from 'vitest';
 import {
   nicheOf, capacityForTier, ensureReligionState, renormShares,
-  attemptEntry, advanceShares, selectChief, chiefSnapshot, RELIGION_TUNING,
+  attemptEntry, advanceShares, selectPatron, patronSnapshot, RELIGION_TUNING,
 } from '../../src/domain/worldPulse/religionState.js';
 
 const d = (name, temper = 'neutral', align = 'neutral', rank = 'minor') =>
@@ -24,12 +24,12 @@ describe('religionState — niche + capacity', () => {
 });
 
 describe('religionState — migration + renorm', () => {
-  it('seeds the legacy single patron as chief at 100%', () => {
+  it('seeds the legacy single patron as patron at 100%', () => {
     const settlement = { config: { primaryDeitySnapshot: d('Aurum', 'peaceful', 'good', 'major') } };
     const s = ensureReligionState(null, settlement, 'town');
-    expect(s.chiefRef).toBe(ref('Aurum'));
+    expect(s.patronRef).toBe(ref('Aurum'));
     expect(s.deities[ref('Aurum')].share).toBe(100);
-    expect(chiefSnapshot(s).name).toBe('Aurum');
+    expect(patronSnapshot(s).name).toBe('Aurum');
   });
 
   it('renormShares makes active shares sum to exactly 100', () => {
@@ -48,7 +48,7 @@ describe('religionState — entry paths', () => {
   function townWith(...entries) {
     const deities = {};
     for (const [dd, share] of entries) deities[String(dd._deityRef)] = { deityRef: String(dd._deityRef), snapshot: dd, niche: nicheOf(dd), share, standing: 'established', standingHeld: 0, suppressed: false };
-    return { deities, chiefRef: entries[0] ? String(entries[0][0]._deityRef) : null, chiefHeld: 0, chiefChallengeTicks: 0, capacity: 3 };
+    return { deities, patronRef: entries[0] ? String(entries[0][0]._deityRef) : null, patronHeld: 0, patronChallengeTicks: 0, capacity: 3 };
   }
 
   it('open niche + free slot → enters as a cult', () => {
@@ -99,7 +99,7 @@ describe('religionState — entry paths', () => {
   });
 });
 
-describe('religionState — gradual growth + chief buffer', () => {
+describe('religionState — gradual growth + patron buffer', () => {
   function two(aShare, bShare) {
     const A = d('Aurum', 'peaceful', 'good'), B = d('Korl', 'warlike', 'evil');
     return {
@@ -107,7 +107,7 @@ describe('religionState — gradual growth + chief buffer', () => {
         [A._deityRef]: { deityRef: A._deityRef, snapshot: A, niche: nicheOf(A), share: aShare, standing: 'ascendant', standingHeld: 0, suppressed: false },
         [B._deityRef]: { deityRef: B._deityRef, snapshot: B, niche: nicheOf(B), share: bShare, standing: 'established', standingHeld: 0, suppressed: false },
       },
-      chiefRef: A._deityRef, chiefHeld: 0, chiefChallengeTicks: 0, contestedTicks: 0, capacity: 5,
+      patronRef: A._deityRef, patronHeld: 0, patronChallengeTicks: 0, contestedTicks: 0, capacity: 5,
     };
   }
 
@@ -121,33 +121,33 @@ describe('religionState — gradual growth + chief buffer', () => {
     expect(60 - s.deities[ref('Aurum')].share).toBeLessThanOrEqual(RELIGION_TUNING.SHARE_STEP_MAX); // gradual
   });
 
-  it('the chief resists losing adherents (buffer) vs a non-chief in the same spot', () => {
-    const asChief = two(60, 40);
-    const notChief = two(60, 40); notChief.chiefRef = ref('Korl');         // A is NOT chief here
+  it('the patron resists losing adherents (buffer) vs a non-patron in the same spot', () => {
+    const asPatron = two(60, 40);
+    const notPatron = two(60, 40); notPatron.patronRef = ref('Korl');         // A is NOT patron here
     // compound several ticks so the per-tick buffer survives integer-share rounding.
     for (let t = 0; t < 5; t++) {
-      advanceShares(asChief, { [ref('Aurum')]: 0.2, [ref('Korl')]: 0.8 });
-      advanceShares(notChief, { [ref('Aurum')]: 0.2, [ref('Korl')]: 0.8 });
+      advanceShares(asPatron, { [ref('Aurum')]: 0.2, [ref('Korl')]: 0.8 });
+      advanceShares(notPatron, { [ref('Aurum')]: 0.2, [ref('Korl')]: 0.8 });
     }
-    expect(asChief.deities[ref('Aurum')].share).toBeGreaterThan(notChief.deities[ref('Aurum')].share);
+    expect(asPatron.deities[ref('Aurum')].share).toBeGreaterThan(notPatron.deities[ref('Aurum')].share);
   });
 });
 
-describe('religionState — chief incumbency hysteresis', () => {
-  it('a brief challenger does NOT flip the chief; a sustained decisive lead does', () => {
+describe('religionState — patron incumbency hysteresis', () => {
+  it('a brief challenger does NOT flip the patron; a sustained decisive lead does', () => {
     const A = d('Aurum', 'peaceful', 'good'), B = d('Korl', 'warlike', 'evil');
     const s = {
       deities: {
         [A._deityRef]: { deityRef: A._deityRef, snapshot: A, niche: nicheOf(A), share: 40, standing: 'ascendant', suppressed: false },
         [B._deityRef]: { deityRef: B._deityRef, snapshot: B, niche: nicheOf(B), share: 60, standing: 'ascendant', suppressed: false },
       },
-      chiefRef: A._deityRef, chiefChallengeTicks: 0, capacity: 5,
+      patronRef: A._deityRef, patronChallengeTicks: 0, capacity: 5,
     };
     // B leads by 20 (≥ margin). First two selections: A holds (buffer).
-    expect(selectChief(s)).toBe(ref('Aurum'));
-    expect(selectChief(s)).toBe(ref('Aurum'));
+    expect(selectPatron(s)).toBe(ref('Aurum'));
+    expect(selectPatron(s)).toBe(ref('Aurum'));
     // third consecutive tick of decisive lead → flip.
-    expect(selectChief(s)).toBe(ref('Korl'));
+    expect(selectPatron(s)).toBe(ref('Korl'));
   });
 
   it('challenge resets if the lead lapses below the flip margin', () => {
@@ -157,9 +157,9 @@ describe('religionState — chief incumbency hysteresis', () => {
         [A._deityRef]: { deityRef: A._deityRef, snapshot: A, niche: nicheOf(A), share: 48, standing: 'ascendant', suppressed: false },
         [B._deityRef]: { deityRef: B._deityRef, snapshot: B, niche: nicheOf(B), share: 52, standing: 'ascendant', suppressed: false },
       },
-      chiefRef: A._deityRef, chiefChallengeTicks: 2, capacity: 5,           // B leads by only 4 (< margin 6)
+      patronRef: A._deityRef, patronChallengeTicks: 2, capacity: 5,           // B leads by only 4 (< margin 6)
     };
-    expect(selectChief(s)).toBe(ref('Aurum'));
-    expect(s.chiefChallengeTicks).toBe(0);                                   // reset
+    expect(selectPatron(s)).toBe(ref('Aurum'));
+    expect(s.patronChallengeTicks).toBe(0);                                   // reset
   });
 });

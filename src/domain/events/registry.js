@@ -123,9 +123,10 @@ export const RERUN_KEYS_FOR_EVENT = {
   REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
   PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
   DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
-  // Assigning a primary deity re-derives the religion substrate
-  // (the deity term in deriveReligiousAuthority) and refreshes the narrative.
+  // Assigning a patron deity (or imposing a cult beneath it) re-derives the
+  // religion substrate (the deity term in deriveReligiousAuthority) + narrative.
   SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
+  IMPOSE_CULT:            ['powerStructure', 'narrative'],
 };
 
 /**
@@ -756,8 +757,8 @@ export const EVENT_REGISTRY = {
   },
 
   SET_PRIMARY_DEITY: {
-    label: 'Assign primary deity',
-    description: 'A settlement adopts (or sheds) a primary deity. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
+    label: 'Assign patron deity',
+    description: 'A settlement adopts (or sheds) its patron deity — the leading creed of the pantheon. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
     requiresTarget: false,
     stateDeltas(/** @type {any} */ event) {
       // A change of patron god is a legitimacy/ritual event, not an economic
@@ -765,7 +766,7 @@ export const EVENT_REGISTRY = {
       // it visibly moves a dial. The substrate weight lives in
       // deriveReligiousAuthority (read off the embedded snapshot), not here.
       const hasDeity = !!(event?.payload?.snapshot || event?.payload?.deityRef || event?.targetId);
-      // Adopting a primary deity steadies legitimacy and dampens unrest;
+      // Adopting a patron deity steadies legitimacy and dampens unrest;
       // shedding one (null payload) is the small inverse, the patron-less drift.
       return hasDeity
         ? { resilience: +3, volatility: -2 }
@@ -778,7 +779,30 @@ export const EVENT_REGISTRY = {
         return 'The settlement turns away from its patron god. No deity now holds primacy.';
       }
       const name = snap.name || 'a new god';
-      return `${name} is proclaimed the settlement's primary deity.`;
+      return `${name} is proclaimed the settlement's patron deity.`;
+    },
+  },
+
+  IMPOSE_CULT: {
+    label: 'Impose a cult',
+    description: "A cult-level deity is seeded into the settlement BENEATH the patron — a secondary faith taking root in its own niche (temperament × alignment). Large settlements sustain more cults across the niche grid; small ones reconcile by displacing the weakest cult, or refuse when only the patron's slot remains. The resolved snapshot is embedded on the settlement so the religion substrate reads it without touching the custom-content store.",
+    requiresTarget: false,
+    stateDeltas(/** @type {any} */ event) {
+      // A new cult stirs the populace — a small unrest ripple, the rough inverse
+      // of adopting a steadying patron. Removing a cult settles it back.
+      const hasCult = !!(event?.payload?.snapshot && (event?.payload?.deityRef ?? event?.targetId));
+      return hasCult
+        ? { volatility: +2, resilience: -1 }
+        : { volatility: -1, resilience: +1 };
+    },
+    /** @param {any} event */
+    narrate(event) {
+      const snap = event.payload?.snapshot;
+      if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
+        return 'A cult fades from the settlement, its shrine left to the dust.';
+      }
+      const name = snap.name || 'a foreign god';
+      return `A cult of ${name} takes root in the settlement, beneath the patron's gaze.`;
     },
   },
 

@@ -56,6 +56,7 @@ import {
 import EventComposer from './EventComposer.jsx';
 import ChangeQueuePanel from './ChangeQueuePanel.jsx';
 import PrimaryDeityPicker from './PrimaryDeityPicker.jsx';
+import CultPicker from './CultPicker.jsx';
 import Timeline from './Timeline.jsx';
 import PendingIntentions from './PendingIntentions.jsx';
 import CoherencePanel from './CoherencePanel.jsx';
@@ -380,23 +381,27 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           )}
         </WorkshopCard>
 
-        {/* 7 ── Assign a deity ───────────────────────────────────────────────── */}
+        {/* 7 ── Faith: patron + cults ─────────────────────────────────────────── */}
         {/* The faith READ now lives in the dossier's War & Faith tab and the
-            Pressures card above; only the deity-assign WRITE remains, regrouped
-            here under the change surface (SET_PRIMARY_DEITY via PrimaryDeityPicker). */}
+            Pressures card above; only the deity WRITES remain, regrouped here under
+            the change surface: the patron (SET_PRIMARY_DEITY via PrimaryDeityPicker)
+            and the cults beneath it (IMPOSE_CULT via CultPicker). */}
         <WorkshopCard
           id="assign-deity"
-          title="Assign a Deity"
-          hint="Name this settlement's patron. Its effect on the substrate is read in the dossier's War & Faith tab; awaken the living religion layer below."
+          title="Patron & Cults"
+          hint="Name this settlement's patron deity, then impose minor cults beneath it. Their effect on the substrate is read in the dossier's War & Faith tab; awaken the living religion layer below."
           editMode={showWrite}
         >
           {showAuthoring ? (
-            <PrimaryDeityPicker />
+            <>
+              <PrimaryDeityPicker />
+              <CultPicker />
+            </>
           ) : showWrite ? (
             <DesktopOnlyGate
               variant="gate"
               title="Assign a deity on a larger screen"
-              message="Naming a patron deity is an authoring step best done on desktop. Open this settlement on a larger screen to assign one."
+              message="Naming a patron deity and imposing cults are authoring steps best done on desktop. Open this settlement on a larger screen to assign them."
             />
           ) : (
             <PremiumWriteHint onUpgrade={onUpgrade} />

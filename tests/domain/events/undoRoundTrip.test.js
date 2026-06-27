@@ -170,6 +170,10 @@ const FIXTURES = {
   // Feature D / R1: assigning a primary deity onto a deity-free settlement must
   // undo to exactly the dormant pre-event state (both config keys removed).
   SET_PRIMARY_DEITY: (s) => ({ before: s, event: ev('SET_PRIMARY_DEITY', { targetId: 'custom:lu_vael', payload: { deityRef: 'custom:lu_vael', snapshot: { name: 'Vael', alignmentAxis: 'good', temperamentAxis: 'warlike', rankAxis: 'major', domain: 'war' } } }) }),
+  // Imposing a cult onto a cult-free settlement must undo to exactly the prior
+  // state (config.cultDeitySnapshots removed). The deity sits in its own niche
+  // (peaceful:good ≠ any patron the base settlement carries) so it seats cleanly.
+  IMPOSE_CULT: (s) => ({ before: s, event: ev('IMPOSE_CULT', { targetId: 'custom:lu_sael', payload: { deityRef: 'custom:lu_sael', snapshot: { name: 'Sael', alignmentAxis: 'good', temperamentAxis: 'peaceful', rankAxis: 'cult', domain: 'harvest' } } }) }),
 };
 
 // Documented residue: undoing a RESOLVE_STRESSOR does not resurrect the LIVE

@@ -72,6 +72,9 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   // pre-event and restores a key (and its exact value) that was present, so an
   // undone assignment returns the settlement to its prior dormancy/deity.
   SET_PRIMARY_DEITY:  Object.freeze(['primaryDeityRef', 'primaryDeitySnapshot']),
+  // IMPOSE_CULT writes (or deletes, when emptied) config.cultDeitySnapshots — the
+  // single array key holds every cult, so snapshotting it makes undo a true inverse.
+  IMPOSE_CULT:        Object.freeze(['cultDeitySnapshots']),
 });
 
 const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({

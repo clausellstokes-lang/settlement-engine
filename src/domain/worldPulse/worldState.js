@@ -2,7 +2,7 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 
-export const WORLD_STATE_SCHEMA_VERSION = 1;
+export const WORLD_STATE_SCHEMA_VERSION = 2;
 
 const MAX_HISTORY = 80;
 const MAX_PROPOSALS = 80;
@@ -84,7 +84,34 @@ function deepCloneConditionalLedger(value) {
 // upgrade path is explicit and ordered, never an ad-hoc inline coercion.
 /** @type {ReadonlyArray<{ to: number, migrate: (raw: any) => any }>} */
 const WORLD_STATE_MIGRATIONS = Object.freeze([
-  // { to: 2, migrate: (raw) => ({ ...raw, /* breaking reshape */ }) },
+  // v2 — the per-settlement pantheon renamed its leading deity from "chief" to
+  // "patron", unifying vocabulary with the DM "Assign patron deity" action. Rename
+  // the persisted religionStates keys in place. IDEMPOTENT: migrations run
+  // unconditionally, so a state already carrying patronRef (or no religionStates at
+  // all) passes through untouched.
+  { to: 2, migrate: (/** @type {any} */ raw) => {
+    const states = raw?.religionStates;
+    if (!states || typeof states !== 'object' || Array.isArray(states)) return raw;
+    let touched = false;
+    /** @type {Record<string, any>} */
+    const next = {};
+    for (const [cid, st] of Object.entries(states)) {
+      if (st && typeof st === 'object' && !Array.isArray(st)
+        && ('chiefRef' in st || 'chiefHeld' in st || 'chiefChallengeTicks' in st)) {
+        touched = true;
+        const { chiefRef, chiefHeld, chiefChallengeTicks, ...rest } = /** @type {any} */ (st);
+        next[cid] = {
+          ...rest,
+          ...(chiefRef !== undefined ? { patronRef: chiefRef } : {}),
+          ...(chiefHeld !== undefined ? { patronHeld: chiefHeld } : {}),
+          ...(chiefChallengeTicks !== undefined ? { patronChallengeTicks: chiefChallengeTicks } : {}),
+        };
+      } else {
+        next[cid] = st;
+      }
+    }
+    return touched ? { ...raw, religionStates: next, schemaVersion: 2 } : raw;
+  } },
 ]);
 
 /** @param {any} raw */

@@ -142,7 +142,7 @@ export default function PantheonPanel({ campaign }) {
       <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: 16, display: 'flex', flexDirection: 'column', gap: 16 }}>
         {!hasPantheon(campaign) ? (
           <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-            No pantheon yet. Assign a primary deity to a settlement to awaken the realm&apos;s faith.
+            No pantheon yet. Assign a patron deity to a settlement to awaken the realm&apos;s faith.
           </div>
         ) : (
           <>

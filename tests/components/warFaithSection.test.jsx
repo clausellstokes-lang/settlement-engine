@@ -72,7 +72,7 @@ describe('WarFaithSection — self-gating + altitude', () => {
     const { getByTestId } = render(
       <WarFaithSection settlement={deityOnly} settlementId="peace" forceLevel="standard" />,
     );
-    expect(getByTestId('war-faith-section').textContent).toMatch(/Primary faith|Lumina/);
+    expect(getByTestId('war-faith-section').textContent).toMatch(/Patron faith|Lumina/);
   });
 
   test('Detail+ surfaces war-exhaustion, disposition, trade-war prize and named posture inputs', () => {

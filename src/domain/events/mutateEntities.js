@@ -16,6 +16,7 @@ import {
 import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
+import { reconcileCultImposition } from '../worldPulse/religionState.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
@@ -784,6 +785,54 @@ function setPrimaryDeity(s, event) {
   return { ...s, config };
 }
 
+/**
+ * IMPOSE_CULT — seed (or remove) a CULT-level deity into a settlement, BENEATH the
+ * patron. Mirrors setPrimaryDeity's embed discipline: the store resolves the ref →
+ * snapshot (it can read customContent; this handler is pure and cannot), and we
+ * hand-pick + freeze the exact snapshot fields so no wall-clock or foreign field
+ * leaks in. Placement (tier capacity, one-deity-per-niche, weakest-cult eviction on
+ * a full small settlement) is decided by the pure `reconcileCultImposition`. A
+ * null/absent snapshot REMOVES the cult named by deityRef (or clears all cults when
+ * no ref is given); an emptied list drops the key so a cult-free settlement is
+ * structurally identical to one that never had a cult (the dormancy oracle).
+ *
+ * @param {any} s
+ * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
+ */
+function imposeCult(s, event) {
+  const ref = event.payload?.deityRef ?? event.targetId ?? null;
+  const snapshot = event.payload?.snapshot ?? null;
+  const config = { ...(s.config || {}) };
+  const cults = Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots.filter(Boolean) : [];
+
+  // Remove path: a null snapshot drops the named cult (or clears all when no ref).
+  if (!snapshot) {
+    const next = ref
+      ? cults.filter((/** @type {any} */ c) => String(c?._deityRef || c?.name || '') !== String(ref))
+      : [];
+    if (!next.length) delete config.cultDeitySnapshots;
+    else config.cultDeitySnapshots = Object.freeze(next.map((/** @type {any} */ c) => Object.freeze({ ...c })));
+    return { ...s, config };
+  }
+
+  // Add/replace path. Embed a self-contained, frozen copy (re-pick exact fields —
+  // never spread the raw payload), then reconcile it against capacity + niche.
+  const entry = Object.freeze({
+    _deityRef: String(ref || snapshot._deityRef || snapshot.name || ''),
+    name: String(snapshot.name || ''),
+    alignmentAxis: snapshot.alignmentAxis || 'neutral',
+    temperamentAxis: snapshot.temperamentAxis || 'neutral',
+    rankAxis: snapshot.rankAxis || 'minor',
+    lawAxis: snapshot.lawAxis || 'neutral',
+    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
+  });
+  const tier = s.tier || config.tier || 'village';
+  const result = reconcileCultImposition({ patron: config.primaryDeitySnapshot || null, cults, tier, deity: entry });
+  if (!result.cults.length) delete config.cultDeitySnapshots;
+  else config.cultDeitySnapshots = Object.freeze(result.cults.map((/** @type {any} */ c) => Object.freeze({ ...c })));
+  return { ...s, config };
+}
+
 export {
   destroySettlement,
   damageInstitution, removeInstitution, addInstitution,
@@ -791,5 +840,5 @@ export {
   impairFaction, restoreFaction, addFaction,
   addNpc, killNpcMutation, assignNpcMutation, killLeaderMutation,
   exposeCorruption, imposeCorruption,
-  swapNpcStanding, setPrimaryDeity,
+  swapNpcStanding, setPrimaryDeity, imposeCult,
 };

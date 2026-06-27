@@ -4,9 +4,9 @@
  * The religion rework (see docs/RELIGION_REWORK.md): a settlement holds MULTIPLE
  * deities, each with an adherent SHARE (0..100, summing to 100 like faction power),
  * a NICHE (temperament × alignment — one deity per niche), a STANDING
- * (cult → established → ascendant), and exactly ONE chief (the patron). Faith grows
- * GRADUALLY: a deity arrives as a cult and climbs by winning adherents, instead of
- * the old binary winner-take-all flip.
+ * (cult → established → ascendant), and exactly ONE PATRON (the chief creed). Faith
+ * grows GRADUALLY: a deity arrives as a cult and climbs by winning adherents,
+ * instead of the old binary winner-take-all flip.
  *
  * This module is the PURE state core (no kernel/snapshot deps): it takes the
  * religionState plus strengths/inputs the kernel computes, and returns the evolved
@@ -29,12 +29,12 @@ export const RELIGION_TUNING = Object.freeze({
   PUSH_MARGIN: 1.1,           // same-niche push-out: newcomer claim must beat incumbent share ×this
   EVICTION_MARGIN: 1.5,       // cross-niche eviction (capacity full): harder bar
   STANDING_ESTABLISHED: 15,   // share to be "established"
-  STANDING_ASCENDANT: 30,     // share to be "ascendant" (chief-eligible top tier)
+  STANDING_ASCENDANT: 30,     // share to be "ascendant" (patron-eligible top tier)
   STANDING_HYSTERESIS: 4,     // band to avoid standing flicker
-  CHIEF_HOLD: 0.35,           // chief's downward-share defense (resists losing share); large enough to register through integer renorm, erodable so not perpetual
-  CHIEF_HOLD_DECAY: 0.02,     // erosion per tick while seriously contested (not perpetual)
-  CHIEF_FLIP_MARGIN: 6,       // a challenger must lead the chief by this share…
-  CHIEF_FLIP_TICKS: 3,        // …for this many consecutive ticks to seize the chief seat
+  PATRON_HOLD: 0.35,          // patron's downward-share defense (resists losing share); large enough to register through integer renorm, erodable so not perpetual
+  PATRON_HOLD_DECAY: 0.02,    // erosion per tick while seriously contested (not perpetual)
+  PATRON_FLIP_MARGIN: 6,      // a challenger must lead the patron by this share…
+  PATRON_FLIP_TICKS: 3,       // …for this many consecutive ticks to seize the patron seat
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -87,8 +87,10 @@ function standingFor(share, prev) {
 }
 
 /**
- * Normalize / migrate a settlement's religion state. Seeds from a legacy single
- * `primaryDeitySnapshot` (chief at 100% in its niche) when no state exists yet.
+ * Normalize / migrate a settlement's religion state. Seeds from the embedded
+ * `primaryDeitySnapshot` (the PATRON, at 100% in its niche) and any DM-imposed
+ * `cultDeitySnapshots` (each entering at cult standing in its own free niche,
+ * capped by tier capacity) when no state exists yet.
  * @param {any} state @param {any} settlement @param {string} tier
  */
 export function ensureReligionState(state, settlement, tier) {
@@ -100,15 +102,90 @@ export function ensureReligionState(state, settlement, tier) {
   if (state && state.deities) for (const k of Object.keys(state.deities)) clonedDeities[k] = { ...state.deities[k] };
   const s = (state && typeof state === 'object' && state.deities)
     ? { ...state, deities: clonedDeities, capacity }
-    : { deities: {}, chiefRef: null, chiefHeld: 0, chiefChallengeTicks: 0, contestedTicks: 0, capacity };
-  // legacy migration: a single embedded patron becomes the chief at 100%.
-  const legacy = settlement?.config?.primaryDeitySnapshot;
-  if (!Object.keys(s.deities).length && legacy) {
-    const ref = String(legacy._deityRef || legacy.name || 'patron');
-    s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false };
-    s.chiefRef = ref;
+    : { deities: {}, patronRef: null, patronHeld: 0, patronChallengeTicks: 0, contestedTicks: 0, capacity };
+  // First-seed: the embedded patron + imposed cults become the initial pantheon.
+  if (!Object.keys(s.deities).length) {
+    // legacy migration: a single embedded patron becomes the patron at 100%.
+    const legacy = settlement?.config?.primaryDeitySnapshot;
+    if (legacy) {
+      const ref = String(legacy._deityRef || legacy.name || 'patron');
+      s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false };
+      s.patronRef = ref;
+    }
+    // DM-imposed cults: each enters at cult standing in its own (free) niche, capped
+    // by tier capacity; we then renorm so the patron + cults sum to 100. A settlement
+    // with no patron but imposed cults seeds a cult-led pantheon (selectPatron picks
+    // the strongest). Absent both, s.deities stays empty (the dormancy oracle).
+    const cultSnaps = Array.isArray(settlement?.config?.cultDeitySnapshots) ? settlement.config.cultDeitySnapshots : [];
+    let seededCult = false;
+    for (const cultSnap of cultSnaps) {
+      if (!cultSnap) continue;
+      const ref = String(cultSnap._deityRef || cultSnap.name || '');
+      if (!ref || s.deities[ref]) continue;                                   // skip blanks + dedupe (patron / already seeded)
+      const niche = nicheOf(cultSnap);
+      if (Object.values(s.deities).some((d) => d.niche === niche)) continue;  // one deity per niche
+      if (activeRefs(s.deities).length >= capacity) break;                    // respect tier capacity
+      s.deities[ref] = { deityRef: ref, snapshot: cultSnap, niche, share: RELIGION_TUNING.CULT_SEED_SHARE, standing: 'cult', standingHeld: 0, suppressed: false };
+      seededCult = true;
+    }
+    if (seededCult) {
+      // Only when cults were actually seeded do we renorm/refresh — a patron-only
+      // settlement stays byte-identical to the pre-cult seed (single deity at 100%).
+      renormShares(s.deities);
+      for (const k of activeRefs(s.deities)) s.deities[k].standing = standingFor(s.deities[k].share, s.deities[k].standing);
+      if (!s.patronRef) selectPatron(s);
+    }
   }
   return s;
+}
+
+/**
+ * Reconcile a DM-imposed CULT into a settlement's persistent cult list, honoring
+ * tier capacity (the patron reserves one slot) and the one-deity-per-niche rule
+ * (temperament × alignment). A large settlement (more slots) hosts cults across the
+ * full niche grid; a small one (few slots) reconciles by refusing or evicting the
+ * weakest existing cult. PURE: returns the next cult array + an outcome tag; never
+ * touches the patron. The incoming `deity` must already be embed-shaped + frozen
+ * (the handler owns the field discipline, mirroring setPrimaryDeity).
+ * @param {{ patron?: any, cults?: any[], tier?: string, deity: any }} args
+ * @returns {{ cults: any[], action: 'added'|'replaced'|'evicted'|'refused', reason: string, evicted: (string|null) }}
+ */
+export function reconcileCultImposition({ patron = null, cults = [], tier = 'village', deity }) {
+  const list = Array.isArray(cults) ? cults.filter(Boolean) : [];
+  const ref = String(deity?._deityRef || deity?.name || '');
+  if (!ref) return { cults: list, action: 'refused', reason: 'invalid', evicted: null };
+  // A deity cannot be both patron and cult.
+  if (patron && String(patron._deityRef || patron.name || '') === ref) {
+    return { cults: list, action: 'refused', reason: 'is_patron', evicted: null };
+  }
+  const niche = nicheOf(deity);
+  // The patron owns its niche; a cult cannot establish in the patron's domain.
+  if (patron && nicheOf(patron) === niche) {
+    return { cults: list, action: 'refused', reason: 'patron_niche', evicted: null };
+  }
+  // Same-niche existing cult → replace it (idempotent refresh, or a niche swap).
+  const sameNicheIdx = list.findIndex((c) => nicheOf(c) === niche);
+  if (sameNicheIdx >= 0) {
+    const replaced = String(list[sameNicheIdx]?._deityRef || list[sameNicheIdx]?.name || '');
+    const next = list.slice();
+    next[sameNicheIdx] = deity;
+    return { cults: next, action: 'replaced', reason: replaced === ref ? 'refresh' : 'niche_swap', evicted: replaced === ref ? null : replaced };
+  }
+  // Capacity: total deities (patron + cults) ≤ tier slots ⇒ cult slots = slots − patron.
+  const cultCapacity = Math.max(0, capacityForTier(tier) - (patron ? 1 : 0));
+  if (list.length < cultCapacity) {
+    return { cults: [...list, deity], action: 'added', reason: 'open_slot', evicted: null };
+  }
+  if (cultCapacity === 0) {
+    return { cults: list, action: 'refused', reason: 'no_cult_slots', evicted: null };
+  }
+  // Capacity full → evict the WEAKEST existing cult (lowest global rank; codepoint
+  // tiebreak) so the imposition seats (a small settlement reconciles by displacement).
+  const weakest = list.slice().sort((a, b) =>
+    (deityRankStrength(a) - deityRankStrength(b)) || codepoint(String(a?._deityRef || a?.name || ''), String(b?._deityRef || b?.name || '')))[0];
+  const weakestRef = String(weakest?._deityRef || weakest?.name || '');
+  const next = list.filter((c) => String(c?._deityRef || c?.name || '') !== weakestRef);
+  return { cults: [...next, deity], action: 'evicted', reason: 'capacity_full', evicted: weakestRef };
 }
 
 /**
@@ -162,7 +239,7 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
 }
 
 /**
- * Move every active deity's share toward its target (gradual), apply the chief's
+ * Move every active deity's share toward its target (gradual), apply the patron's
  * erodable downward-defense buffer, renorm to 100, and refresh standings.
  * @param {any} state @param {Record<string, number>} strengthByRef  0..1 per active deity
  */
@@ -171,21 +248,21 @@ export function advanceShares(state, strengthByRef) {
   const keys = activeRefs(deities);
   if (!keys.length) return;
   const totalStrength = keys.reduce((t, k) => t + clamp01(strengthByRef[k] ?? 0), 0) || 1;
-  // chief buffer erodes while a rival is within striking distance.
-  const chiefRef = state.chiefRef;
-  const chiefShare = chiefRef && deities[chiefRef] ? deities[chiefRef].share : 0;
-  const topRival = keys.filter((k) => k !== chiefRef).reduce((m, k) => Math.max(m, deities[k].share), 0);
-  // The chief's downward-defense buffer erodes the longer it stays seriously
-  // contested (a rival within CHIEF_FLIP_MARGIN), so the hold is NOT perpetual.
-  const contested = Boolean(chiefRef) && (chiefShare - topRival) < RELIGION_TUNING.CHIEF_FLIP_MARGIN;
+  // patron buffer erodes while a rival is within striking distance.
+  const patronRef = state.patronRef;
+  const patronShare = patronRef && deities[patronRef] ? deities[patronRef].share : 0;
+  const topRival = keys.filter((k) => k !== patronRef).reduce((m, k) => Math.max(m, deities[k].share), 0);
+  // The patron's downward-defense buffer erodes the longer it stays seriously
+  // contested (a rival within PATRON_FLIP_MARGIN), so the hold is NOT perpetual.
+  const contested = Boolean(patronRef) && (patronShare - topRival) < RELIGION_TUNING.PATRON_FLIP_MARGIN;
   state.contestedTicks = contested ? (state.contestedTicks || 0) + 1 : 0;
-  const hold = Math.max(0, RELIGION_TUNING.CHIEF_HOLD - RELIGION_TUNING.CHIEF_HOLD_DECAY * (state.contestedTicks || 0));
+  const hold = Math.max(0, RELIGION_TUNING.PATRON_HOLD - RELIGION_TUNING.PATRON_HOLD_DECAY * (state.contestedTicks || 0));
 
   for (const k of keys) {
     const target = (clamp01(strengthByRef[k] ?? 0) / totalStrength) * 100;
     let delta = target - deities[k].share;
     delta = Math.max(-RELIGION_TUNING.SHARE_STEP_MAX, Math.min(RELIGION_TUNING.SHARE_STEP_MAX, delta));
-    if (delta < 0 && k === chiefRef) delta *= (1 - hold);                 // chief resists the (clamped) loss
+    if (delta < 0 && k === patronRef) delta *= (1 - hold);                // patron resists the (clamped) loss
     deities[k].share = Math.max(0, deities[k].share + delta);
   }
   renormShares(deities);
@@ -202,32 +279,32 @@ function pruneSuppressed(state) {
 }
 
 /**
- * Select the chief with the incumbency buffer: the top-share active deity becomes
- * chief, but an incumbent is only displaced by a challenger that leads by
- * CHIEF_FLIP_MARGIN for CHIEF_FLIP_TICKS consecutive ticks. Returns the chief ref.
+ * Select the patron with the incumbency buffer: the top-share active deity becomes
+ * patron, but an incumbent is only displaced by a challenger that leads by
+ * PATRON_FLIP_MARGIN for PATRON_FLIP_TICKS consecutive ticks. Returns the patron ref.
  * @param {any} state
  */
-export function selectChief(state) {
+export function selectPatron(state) {
   const keys = activeRefs(state.deities);
-  if (!keys.length) { state.chiefRef = null; return null; }
+  if (!keys.length) { state.patronRef = null; return null; }
   const byShare = keys.slice().sort((a, b) => (state.deities[b].share - state.deities[a].share) || codepoint(a, b));
   const top = byShare[0];
-  const cur = state.chiefRef && state.deities[state.chiefRef] && !state.deities[state.chiefRef].suppressed ? state.chiefRef : null;
-  if (!cur) { state.chiefRef = top; state.chiefChallengeTicks = 0; return top; }
-  if (top === cur) { state.chiefChallengeTicks = 0; return cur; }
+  const cur = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
+  if (!cur) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }
+  if (top === cur) { state.patronChallengeTicks = 0; return cur; }
   // a challenger leads — only flips with a decisive, SUSTAINED lead (the buffer).
   const lead = state.deities[top].share - state.deities[cur].share;
-  if (lead >= RELIGION_TUNING.CHIEF_FLIP_MARGIN) {
-    state.chiefChallengeTicks = (state.chiefChallengeTicks || 0) + 1;
-    if (state.chiefChallengeTicks >= RELIGION_TUNING.CHIEF_FLIP_TICKS) { state.chiefRef = top; state.chiefChallengeTicks = 0; return top; }
+  if (lead >= RELIGION_TUNING.PATRON_FLIP_MARGIN) {
+    state.patronChallengeTicks = (state.patronChallengeTicks || 0) + 1;
+    if (state.patronChallengeTicks >= RELIGION_TUNING.PATRON_FLIP_TICKS) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }
   } else {
-    state.chiefChallengeTicks = 0;
+    state.patronChallengeTicks = 0;
   }
-  return cur; // chief holds (buffered)
+  return cur; // patron holds (buffered)
 }
 
-/** The chief deity's snapshot, for the derived `primaryDeitySnapshot` compat mirror. @param {any} state */
-export function chiefSnapshot(state) {
-  const ref = state?.chiefRef;
+/** The patron deity's snapshot, for the derived `primaryDeitySnapshot` compat mirror. @param {any} state */
+export function patronSnapshot(state) {
+  const ref = state?.patronRef;
   return ref && state.deities?.[ref] ? state.deities[ref].snapshot : null;
 }

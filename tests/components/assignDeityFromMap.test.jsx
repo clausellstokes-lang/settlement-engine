@@ -81,7 +81,7 @@ describe('AssignDeityFromMap — assign-deity steering (the one wired interventi
 
     // 2. The embedded PrimaryDeityPicker is now live — pick the authored deity.
     const ref = customRefIdFromItem(DEITY);
-    fireEvent.change(screen.getByLabelText('Primary deity'), { target: { value: ref } });
+    fireEvent.change(screen.getByLabelText('Patron deity'), { target: { value: ref } });
 
     // 3. SET_PRIMARY_DEITY landed: a self-contained snapshot is embedded on config.
     const config = store.getState().settlement.config;
@@ -93,11 +93,11 @@ describe('AssignDeityFromMap — assign-deity steering (the one wired interventi
     render(<AssignDeityFromMap campaign={CAMPAIGN} />);
     fireEvent.change(screen.getByLabelText('Settlement to assign a deity'), { target: { value: 's1' } });
     const ref = customRefIdFromItem(DEITY);
-    fireEvent.change(screen.getByLabelText('Primary deity'), { target: { value: ref } });
+    fireEvent.change(screen.getByLabelText('Patron deity'), { target: { value: ref } });
     expect(store.getState().settlement.config.primaryDeitySnapshot).toBeTruthy();
 
-    // Select "No primary deity (dormant)" → clears back to dormant (byte-identical).
-    fireEvent.change(screen.getByLabelText('Primary deity'), { target: { value: '' } });
+    // Select "No patron deity (dormant)" → clears back to dormant (byte-identical).
+    fireEvent.change(screen.getByLabelText('Patron deity'), { target: { value: '' } });
     const config = store.getState().settlement.config;
     expect('primaryDeityRef' in config).toBe(false);
     expect('primaryDeitySnapshot' in config).toBe(false);

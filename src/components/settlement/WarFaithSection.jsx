@@ -163,18 +163,20 @@ export default function WarFaithSection({
 
     const deity = settlement?.config?.primaryDeitySnapshot || null;
     const faithEffects = describeDeityEffects(deity);
+    // DM-imposed cults (IMPOSE_CULT) — minor faiths beneath the patron.
+    const cults = Array.isArray(settlement?.config?.cultDeitySnapshots) ? settlement.config.cultDeitySnapshots : [];
 
     return {
       status, exhaustionRaw, exhaustionBand, standing, prizes,
       mobilization, army, occupied, holdings, tradeTies,
-      aggressiveness, posture, deity, faithEffects,
+      aggressiveness, posture, deity, faithEffects, cults,
     };
   }, [settlement, settlementId, worldState, regionalGraph, settlements, nameFor]);
 
   const {
     status, exhaustionRaw, exhaustionBand, standing, prizes,
     mobilization, army, occupied, holdings, tradeTies,
-    aggressiveness, posture, deity, faithEffects,
+    aggressiveness, posture, deity, faithEffects, cults,
   } = model;
 
   // Dossier hyperlink SINK for the patron deity. The deity renders ONLY here, so
@@ -199,7 +201,7 @@ export default function WarFaithSection({
   // render — only LIVE geopolitical state or an assigned deity opens the block.
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || prizes.length > 0
     || !!mobilization || !!army || !!occupied || !!holdings || tradeTies.length > 0;
-  if (!hasLive && !deity) return null;
+  if (!hasLive && !deity && cults.length === 0) return null;
 
   return (
     <div
@@ -352,7 +354,7 @@ export default function WarFaithSection({
       {/* ── Faith line + effects disclosure ──────────────────────────────── */}
       {deity && (
         <>
-          <Line strong="Primary faith:">
+          <Line strong="Patron faith:">
             {/* This section IS the deity's sink (the outer div carries the
                 deity anchor), so the patron's own name is PLAIN TEXT — a
                 self-link that scrolls to the section it already sits in is
@@ -391,6 +393,21 @@ export default function WarFaithSection({
             </div>
           )}
         </>
+      )}
+
+      {/* ── Cults — minor faiths imposed beneath the patron (IMPOSE_CULT) ────── */}
+      {cults.length > 0 && (
+        <Line strong="Cults:">
+          {cults.map((c, i) => (
+            <span key={String(c._deityRef || c.name || i)}>
+              {i > 0 ? ', ' : ''}
+              <span style={{ fontWeight: 700, color: INK_BROWN }}>{c.name}</span>
+              {c.rankAxis ? ` (${c.rankAxis})` : ''}
+              {c.domain ? ` · ${c.domain}` : ''}
+            </span>
+          ))}
+          {' beneath the patron.'}
+        </Line>
       )}
     </div>
   );
