@@ -113,3 +113,53 @@ recommendations, not changes — and any change shifts the golden master.
 npx vite-node scripts/audit/generate-audit.mjs --count 60000 --harnessSeed 7 --out /tmp/gen.json
 npx vite-node scripts/audit/simulate-audit.mjs --reps 8 --ticks 24 --out /tmp/sim.json
 ```
+
+---
+
+## Phase 2b — deep dynamics probe (do the SPECIFIC mechanics happen, at every scale?)
+
+Phase 2 proved the sim is bounded/alive/crash-free but did not verify the specific
+dynamics. `simulate-deep.mjs` runs 2 topologies × 2 authority modes (gated/auto) ×
+4 interval scales × 3 reps × 30 ticks and counts the actual candidate spectrum,
+applied tier changes, war lifecycle, and relationship evolution.
+
+**The sim is richly active.** Candidate spectrum (totals across all cells), top families:
+NPC agency dominates (npc_expose 19810, npc_suppress 15849, npc_exploit/bargain/
+mobilize/reform/protect/seek_promotion/sabotage/defect…), population_growth 12817 /
+population_decline 2282 / emigration 30, crime_pressure 11120, resource_depletion
+9928, food/legitimacy/conflict/trade/disease pressure, faction dynamics
+(government_challenge 2097, institution_capture 1397, rival_power_contest 835,
+institution_suppression 2208), and a full **stressor lifecycle** (birth → escalate →
+spread) for famine, betrayal, coup d'état (892), insurgency (508), siege, wartime,
+monster-raider, mass-migration, infiltration, etc.
+
+Answers:
+- **Relationships evolve: yes.** `neutral_to_rival` fired 4094× (+ border incidents),
+  plus continuous disposition drift in `worldState.relationshipStates`. Type-flips to
+  rival happen under pressure; they don't flip from purely neutral, calm pairs.
+- **Promotion vs demotion: a real asymmetry.** tier_promotion 814 vs tier_demotion 6
+  (~135:1); promotions apply in auto mode (up to 26/run in a year-advance), demotions
+  ~never. Settlements DO decline in population (population_decline 2282) but almost
+  never cross a tier boundary downward — consistent with the deliberate promote/demote
+  hysteresis (pantheon.js), but the ratio is extreme. **Tuning flag:** if decline
+  should register at the tier level (a besieged/famined city slipping to town), the
+  demotion threshold/hysteresis needs loosening. Not a hard bug — the path fires (6×).
+- **Wars: conflict dynamics yes; territorial conquest needs provocation.** Siege and
+  wartime stressors are BORN, ESCALATE, and SPREAD across the region (siege_spread
+  788, siege_escalate 325, wartime_escalate 40, insurgency 508, coup 892). What did
+  NOT fire from neutral starting conditions is organic **conquest** (0) → no
+  regionalGraph `war_front` channels → `liveSieges` 0. The war PROJECTION is verified
+  working (a seeded war_front reports a siege coalition correctly). So territorial war
+  needs a genuine aggressor (hostile relationship + mobilization), which neutral
+  random neighbours don't create — likely by design, but the conquest→war_front path
+  is unverified end-to-end without a hostility setup.
+- **Scales: all dynamics fire at week/month/season/year.** State evolution is
+  interval-equivalent (existing test: one_year == 48 one_week ticks, byte-identical);
+  longer intervals collapse the surfaced event log (intended curation), so a
+  year-advance shows fewer discrete rows than 48 weekly advances.
+
+**Harness note:** Phase 2's "0 sim anomalies" stands (bounded/alive/crash-free), but
+its telemetry was too coarse to confirm dynamics — it measured `war_front`/`liveSieges`
+(zero, because war activity is in the stressor lifecycle) and `relationshipStates`
+type-flips (zero, because evolution surfaces as candidates). `simulate-deep.mjs`
+captures the real signals.
