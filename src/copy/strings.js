@@ -121,7 +121,7 @@ export const COPY = {
       },
       anon_cap_hit: {
         headline: 'You’ve explored hamlet, village, town.',
-        body:     'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
+        body:     'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
@@ -129,7 +129,7 @@ export const COPY = {
       },
       third_save: {
         headline: 'You’re building a campaign.',
-        body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
+        body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, cloud sync, the neighbour network, and full export.',
       },
       regen_burst: {
         headline: 'You’re pushing the engine.',

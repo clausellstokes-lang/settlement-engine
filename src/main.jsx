@@ -59,10 +59,10 @@ installAnalyticsQueue();
 // No-op network unless VITE_ERROR_REPORT_URL is set; always logs locally.
 installGlobalErrorHandlers();
 
-// Content-copy deterrent: block casual copy/cut/right-click + disable text
-// selection site-wide (exempting form fields, [data-allow-copy], and elevated
-// operators) to nudge readers toward the PDF export and premium. Flag-gated
-// (copyGuard, default on); a deterrent, not security.
+// Content-copy deterrent — now OFF by default (copyGuard flag). When enabled it
+// blocks casual copy/cut/right-click + disables text selection site-wide, which
+// fought the core DM workflow (copying prep into notes / VTT / Discord) more than
+// it deterred anyone, and it was never security. No-ops unless the flag is set.
 installCopyGuard();
 
 // Expose store globally in dev so we can validate map features via automation.
@@ -82,13 +82,24 @@ class ErrorBoundary extends React.Component {
   }
   render() {
     if (this.state.error) {
+      // DEV shows the message + stack inline for fast debugging. PRODUCTION must
+      // NOT leak a stack trace to users — show a calm, reassuring fallback with a
+      // refresh path instead. The full error is still captured for diagnostics in
+      // componentDidCatch (console + reportError), just not rendered to the user.
+      const dev = import.meta.env.DEV;
       return React.createElement('div', {
-        style: { padding: 24, fontFamily: 'monospace', background: swatch.dangerBg, border: `2px solid ${swatch.danger}`, margin: 16, borderRadius: 8 }
+        style: { padding: 24, fontFamily: dev ? 'monospace' : 'inherit', background: swatch.dangerBg, border: `2px solid ${swatch.danger}`, margin: 16, borderRadius: 8, maxWidth: 640 }
       },
-        React.createElement('h2', null, 'Render Error'),
-        React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
-          this.state.error.message + '\n\n' + this.state.error.stack
-        )
+        React.createElement('h2', { style: { marginTop: 0 } }, dev ? 'Render Error' : 'Something went wrong'),
+        dev
+          ? React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
+              this.state.error.message + '\n\n' + this.state.error.stack)
+          : React.createElement('p', { style: { fontSize: FS.sm, lineHeight: 1.5 } },
+              'Your work was not intentionally changed. Refreshing the page usually fixes this — if it keeps happening, please contact support.'),
+        !dev && React.createElement('button', {
+          onClick: () => window.location.reload(),
+          style: { marginTop: 12, padding: '8px 16px', cursor: 'pointer', borderRadius: 6, border: `1px solid ${swatch.danger}`, background: 'transparent', color: 'inherit', font: 'inherit' },
+        }, 'Refresh')
       );
     }
     return this.props.children;
