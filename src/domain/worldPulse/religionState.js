@@ -39,6 +39,10 @@ export const RELIGION_TUNING = Object.freeze({
   LEGIT_SEED_PATRON: 0.55,    // a founding/legacy patron starts moderately legitimate
   LEGIT_SEED_CULT: 0.08,      // an arriving/imposed cult starts near-illegitimate
   LEGIT_STAIN_IMPOSED: 0.45,  // heresy stain on a force-installed faith (DM impose / occupation)
+  // Patron CONTEST (fires when a rival shares the patron's niche — a schism).
+  CONTEST_LEGIT_W: 0.7,       // legitimacy dominates the seeded patron roll…
+  CONTEST_SHARE_W: 0.3,       // …with adherent share a secondary pull
+  CONTEST_PATRON_AMP: 1.5,    // standing patron's roll weight ×(1 + AMP × its legitimacy)
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -121,13 +125,17 @@ export function ensureReligionState(state, settlement, tier) {
     // with no patron but imposed cults seeds a cult-led pantheon (selectPatron picks
     // the strongest). Absent both, s.deities stays empty (the dormancy oracle).
     const cultSnaps = Array.isArray(settlement?.config?.cultDeitySnapshots) ? settlement.config.cultDeitySnapshots : [];
+    const patronNiche = s.patronRef && s.deities[s.patronRef] ? s.deities[s.patronRef].niche : null;
     let seededCult = false;
     for (const cultSnap of cultSnaps) {
       if (!cultSnap) continue;
       const ref = String(cultSnap._deityRef || cultSnap.name || '');
       if (!ref || s.deities[ref]) continue;                                   // skip blanks + dedupe (patron / already seeded)
       const niche = nicheOf(cultSnap);
-      if (Object.values(s.deities).some((d) => d.niche === niche)) continue;  // one deity per niche
+      // One deity per niche — EXCEPT the patron's niche, which tolerates a single
+      // contestant (an imposed cult that challenges the patron in its own domain).
+      const nicheCount = Object.values(s.deities).filter((d) => d.niche === niche && !d.suppressed).length;
+      if (nicheCount >= (niche === patronNiche ? 2 : 1)) continue;
       if (activeRefs(s.deities).length >= capacity) break;                    // respect tier capacity
       // An imposed cult carries the heresy stain (it rose by DM fiat, not conversion).
       s.deities[ref] = { deityRef: ref, snapshot: cultSnap, niche, share: RELIGION_TUNING.CULT_SEED_SHARE, standing: 'cult', standingHeld: 0, suppressed: false, legitimacy: RELIGION_TUNING.LEGIT_SEED_CULT, tenure: 0, heresyStain: RELIGION_TUNING.LEGIT_STAIN_IMPOSED };
@@ -164,10 +172,9 @@ export function reconcileCultImposition({ patron = null, cults = [], tier = 'vil
     return { cults: list, action: 'refused', reason: 'is_patron', evicted: null };
   }
   const niche = nicheOf(deity);
-  // The patron owns its niche; a cult cannot establish in the patron's domain.
-  if (patron && nicheOf(patron) === niche) {
-    return { cults: list, action: 'refused', reason: 'patron_niche', evicted: null };
-  }
+  // NOTE: a cult imposed in the PATRON's niche is NOT refused — it enters as a
+  // contestant and triggers the seeded patron contest (resolvePatronContest) in the
+  // pulse. It still occupies a cult slot, so capacity/eviction below applies.
   // Same-niche existing cult → replace it (idempotent refresh, or a niche swap).
   const sameNicheIdx = list.findIndex((c) => nicheOf(c) === niche);
   if (sameNicheIdx >= 0) {
@@ -306,6 +313,62 @@ export function selectPatron(state) {
     state.patronChallengeTicks = 0;
   }
   return cur; // patron holds (buffered)
+}
+
+/**
+ * Resolve a CONTESTED patron niche — a rival shares the patron's niche (e.g. a
+ * DM-imposed cult planted in the patron's own domain, a schism). The top-three
+ * faiths re-contest the patron seat via a SEEDED weighted roll: weight = legitimacy
+ * (primary) blended with adherent share (secondary), the standing patron amplified
+ * by its OWN legitimacy (a commanding patron almost always holds; a shaky one faces
+ * a real fight). A decisive winner must take the roll for PATRON_FLIP_TICKS ticks
+ * running (the siege) before it resolves — then it holds the patron seat and the
+ * losing same-niche rival(s) are suppressed, clearing the schism. Until then the
+ * patron seat holds and the rival keeps climbing. Mutates state.
+ *
+ * Returns true if it OWNED the patron seat this tick (caller skips selectPatron);
+ * false when the niche is uncontested (caller runs the deterministic flip).
+ * @param {any} state
+ * @param {{ weightedPick: (items: any[], weights: number[]) => any }} rng
+ */
+export function resolvePatronContest(state, rng) {
+  const active = activeRefs(state.deities);
+  const patronRef = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
+  const patronNiche = patronRef ? state.deities[patronRef].niche : null;
+  const contested = patronRef && active.some((k) => k !== patronRef && state.deities[k].niche === patronNiche);
+  if (!contested) { state.patronSiegeRef = null; state.patronSiegeTicks = 0; return false; }
+
+  const T = RELIGION_TUNING;
+  /** @param {string} k @returns {number} */
+  const weightOf = (k) => {
+    const d = state.deities[k];
+    let w = T.CONTEST_LEGIT_W * clamp01(Number(d.legitimacy) || 0) + T.CONTEST_SHARE_W * (Math.max(0, Number(d.share) || 0) / 100);
+    if (k === patronRef) w *= (1 + T.CONTEST_PATRON_AMP * clamp01(Number(d.legitimacy) || 0));
+    return Math.max(1e-6, w);
+  };
+  const top3 = active.slice().sort((a, b) => (weightOf(b) - weightOf(a)) || codepoint(a, b)).slice(0, 3);
+  const winner = String(rng.weightedPick(top3, top3.map(weightOf)));
+
+  // Siege hysteresis: a faith must win the roll PATRON_FLIP_TICKS ticks running.
+  if (winner === state.patronSiegeRef) state.patronSiegeTicks = (state.patronSiegeTicks || 0) + 1;
+  else { state.patronSiegeRef = winner; state.patronSiegeTicks = 1; }
+
+  if (state.patronSiegeTicks >= T.PATRON_FLIP_TICKS) {
+    // Resolve: the winner holds its niche; same-niche rivals are suppressed (latent).
+    const winnerNiche = state.deities[winner].niche;
+    for (const k of active) {
+      if (k !== winner && state.deities[k].niche === winnerNiche) {
+        state.deities[k] = { ...state.deities[k], suppressed: true, share: 0, standing: 'cult' };
+      }
+    }
+    state.patronRef = winner;
+    state.patronChallengeTicks = 0;
+    state.patronSiegeRef = null;
+    state.patronSiegeTicks = 0;
+    renormShares(state.deities);
+    for (const k of activeRefs(state.deities)) state.deities[k].standing = standingFor(state.deities[k].share, state.deities[k].standing);
+  }
+  return true;
 }
 
 /** The patron deity's snapshot, for the derived `primaryDeitySnapshot` compat mirror. @param {any} state */

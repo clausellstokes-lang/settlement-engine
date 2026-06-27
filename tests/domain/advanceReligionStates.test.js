@@ -103,3 +103,52 @@ describe('advanceReligionStates — determinism', () => {
     expect(run()).toBe(run());
   });
 });
+
+describe('advanceReligionStates — imposed-cult schism (the contest, end to end)', () => {
+  // A settlement whose patron (Korl, warlike:evil) has a cult imposed in its OWN
+  // niche (Vorr, warlike:evil) via config.cultDeitySnapshots — a schism that the
+  // seeded patron contest must RESOLVE (the niche cannot stay two-deity forever).
+  function imposedRegion() {
+    const Korl = deity('Korl', 'warlike', 'evil', 'major');
+    const Vorr = deity('Vorr', 'warlike', 'evil', 'cult');   // SAME niche as the patron
+    const s = save('x', 'Xburg', Korl, 'city');
+    s.settlement.config.cultDeitySnapshots = [{ ...Vorr, lawAxis: 'neutral' }];
+    const campaign = {
+      id: 'sch', name: 'sch', settlementIds: ['x'],
+      worldState: { rngSeed: 'schism', tick: 1, simulationRules: { religionDynamicsEnabled: true } },
+      regionalGraph: ensureRegionalGraph({ edges: [] }),
+      wizardNews: { currentTick: 1, entries: [] },
+    };
+    return { campaign, saves: [s] };
+  }
+
+  it('seeds the imposed cult as a contestant in the patron niche, then resolves the schism', () => {
+    let { campaign, saves } = imposedRegion();
+    const rules = { religionDynamicsEnabled: true };
+    // tick 1: both faiths share the warlike:evil niche (the schism is live).
+    let out = step(campaign, saves, rules); campaign = out.campaign; saves = out.saves;
+    const x0 = campaign.worldState.religionStates.x;
+    const niche0 = Object.values(x0.deities).filter((d) => d.niche === 'warlike:evil' && !d.suppressed);
+    expect(niche0.length).toBe(2);                                   // contested: patron + imposed cult
+    expect(x0.deities[ref('Vorr')].heresyStain).toBeGreaterThan(0);  // the cult rose by fiat
+
+    // Run the siege out — the contest must collapse the niche back to ONE active faith.
+    for (let t = 0; t < 60; t++) { out = step(campaign, saves, rules); campaign = out.campaign; saves = out.saves; }
+    const xN = campaign.worldState.religionStates.x;
+    const niche = Object.values(xN.deities).filter((d) => d.niche === 'warlike:evil' && !d.suppressed);
+    expect(niche.length).toBe(1);                                    // schism RESOLVED to a single creed
+    expect(niche[0].deityRef).toBe(xN.patronRef);                   // and that creed holds the patron seat
+    const sum = Object.values(xN.deities).filter((d) => !d.suppressed).reduce((t, d) => t + d.share, 0);
+    expect(sum).toBe(100);                                           // shares stay conserved
+  });
+
+  it('is deterministic across the whole schism (same seed ⇒ same patron)', () => {
+    const run = () => {
+      let { campaign, saves } = imposedRegion();
+      const rules = { religionDynamicsEnabled: true };
+      for (let t = 0; t < 40; t++) ({ campaign, saves } = step(campaign, saves, rules));
+      return campaign.worldState.religionStates.x.patronRef;
+    };
+    expect(run()).toBe(run());
+  });
+});

@@ -31,10 +31,11 @@ describe('reconcileCultImposition — capacity + niche reconciliation', () => {
     expect(r.reason).toBe('is_patron');
   });
 
-  it("refuses a cult that shares the patron's niche (the patron owns its domain)", () => {
+  it("admits a cult that shares the patron's niche as a CONTESTANT (a schism, not a refusal)", () => {
+    // The contest resolves in the pulse (resolvePatronContest); reconcile just seats it.
     const r = reconcileCultImposition({ patron, cults: [], tier: 'city', deity: d('Vorr', 'warlike', 'evil', 'minor') });
-    expect(r.action).toBe('refused');
-    expect(r.reason).toBe('patron_niche');
+    expect(r.action).toBe('added');
+    expect(r.cults.map(c => c._deityRef)).toEqual([ref('Vorr')]);
   });
 
   it('replaces an existing cult in the same niche (a niche swap)', () => {

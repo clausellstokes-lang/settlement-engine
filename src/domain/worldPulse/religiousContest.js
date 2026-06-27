@@ -48,8 +48,9 @@ import { isSubsystemActive } from './subsystemActivation.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
-import { ensureReligionState, attemptEntry, advanceShares, selectPatron, patronSnapshot } from './religionState.js';
+import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot } from './religionState.js';
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy } from './religionLegitimacy.js';
+import { createPRNG } from '../../generators/prng.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -650,7 +651,12 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, deitySnapshotFor });
       stepDeityLegitimacy(entry, target);
     }
-    selectPatron(state);
+    // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
+    // imposed cult) is decided by a SEEDED, legitimacy-weighted top-three contest;
+    // an uncontested pantheon uses the deterministic share-based flip. The PRNG is
+    // forked per settlement+tick from the world seed ⇒ reproducible, never Math.random.
+    const contestRng = createPRNG(`${worldState?.rngSeed || 'religion'}::religion-contest::${tick}::${cid}`);
+    if (!resolvePatronContest(state, contestRng)) selectPatron(state);
     religionStates[cid] = state;
 
     // 3c. patron change → a gradual conversion outcome (re-embed the new patron).
