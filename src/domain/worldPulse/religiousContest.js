@@ -50,7 +50,6 @@ import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot } from './religionState.js';
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor } from './religionLegitimacy.js';
-import { createPRNG } from '../../generators/prng.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -548,9 +547,12 @@ function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, 
  * @param {Object} args
  * @param {any} args.snapshot @param {any} [args.worldState]
  * @param {number} [args.tick] @param {string|null} [args.now] @param {any} args.rules
+ * @param {any} [args.rng]  the pulse PRNG (DI'd, not imported — keeps the domain off
+ *   the generators layer). The patron contest forks it per settlement; forking is
+ *   consumption-independent, so it never perturbs the rest of the pulse's RNG stream.
  * @returns {{ religionStates: Record<string, any>|null, outcomes: any[], graphChannels: any[] }}
  */
-export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {} }) {
+export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {}, rng = null }) {
   if (!rules?.religionDynamicsEnabled) return { religionStates: null, outcomes: [], graphChannels: [] };
   if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [] };
 
@@ -664,10 +666,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     }
     // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
     // imposed cult) is decided by a SEEDED, legitimacy-weighted top-three contest;
-    // an uncontested pantheon uses the deterministic share-based flip. The PRNG is
-    // forked per settlement+tick from the world seed ⇒ reproducible, never Math.random.
-    const contestRng = createPRNG(`${worldState?.rngSeed || 'religion'}::religion-contest::${tick}::${cid}`);
-    if (!resolvePatronContest(state, contestRng)) selectPatron(state);
+    // an uncontested pantheon (or an absent PRNG) uses the deterministic share-based
+    // flip. The PRNG is forked per settlement+tick ⇒ reproducible, never Math.random.
+    const contestRng = rng?.fork ? rng.fork(`religion-contest::${tick}::${cid}`) : null;
+    if (!contestRng || !resolvePatronContest(state, contestRng)) selectPatron(state);
     religionStates[cid] = state;
 
     // 3c. patron change → a gradual conversion outcome (re-embed the new patron).

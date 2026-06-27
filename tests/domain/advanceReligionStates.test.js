@@ -9,6 +9,7 @@ import { advanceReligionStates } from '../../src/domain/worldPulse/religiousCont
 import { patronSnapshot } from '../../src/domain/worldPulse/religionState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { createPRNG } from '../../src/generators/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const deity = (name, temper, align, rank) => ({ _deityRef: `custom:lu_${name.toLowerCase()}`, name, temperamentAxis: temper, alignmentAxis: align, rankAxis: rank });
@@ -32,7 +33,8 @@ function save(id, name, d, tier = 'town') {
 // back onto config.primaryDeitySnapshot (what the kernel does via deityReembed).
 function step(campaign, saves, rules) {
   const snapshot = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
-  const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: campaign.worldState.tick, now: NOW, rules });
+  const rng = createPRNG(`${campaign.worldState.rngSeed}::tick:${campaign.worldState.tick}`);
+  const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: campaign.worldState.tick, now: NOW, rules, rng });
   const nextWS = { ...campaign.worldState, tick: campaign.worldState.tick + 1 };
   if (r.religionStates) nextWS.religionStates = r.religionStates;
   const nextSaves = saves.map((s) => {

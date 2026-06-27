@@ -738,6 +738,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
       now,
       rules: simulationRules,
+      rng,                       // DI the pulse PRNG (forked per settlement for the patron contest)
     });
     religiousOutcomes = religion.outcomes;
     nextReligionStates = religion.religionStates;
