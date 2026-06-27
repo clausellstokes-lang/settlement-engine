@@ -107,3 +107,44 @@ describe('purity + smoke', () => {
     expect(Object.keys(a.factionArchetypes).length).toBeGreaterThan(0);
   });
 });
+
+describe('aggregateDistribution() — faith / pantheon (religion rework)', () => {
+  const faithTown = {
+    institutions: [], economicState: {},
+    config: {
+      primaryDeitySnapshot: { name: 'Aurum', rankAxis: 'major', temperamentAxis: 'peaceful', alignmentAxis: 'good' },
+      faithProfile: {
+        chief: { name: 'Aurum', deityRef: 'custom:lu_aurum', share: 62 },
+        deities: [
+          { deityRef: 'custom:lu_aurum', name: 'Aurum', niche: 'peaceful:good', share: 62, standing: 'ascendant', isChief: true },
+          { deityRef: 'custom:lu_korl', name: 'Korl', niche: 'warlike:evil', share: 38, standing: 'established', isChief: false },
+        ],
+        contested: false, chiefSecurity: 0.62,
+      },
+    },
+    powerStructure: { government: 'theocracy', publicLegitimacy: { score: 60, label: 'Stable' }, factions: [] },
+  };
+
+  it('aggregates chief rank, niches, pantheon size, and divine-mandate', () => {
+    const a = aggregateDistribution([faithTown]);
+    expect(a.faithChiefRank.major).toBe(1);
+    expect(a.faithNiche['peaceful:good']).toBe(1);
+    expect(a.faithNiche['warlike:evil']).toBe(1);
+    expect(a.faithPantheonSize['2']).toBe(1);
+    expect(a.faithMandate.propping).toBe(1);           // theocracy + secure chief
+  });
+
+  it('exposes the faith sections as renderable distribution sections/rows', () => {
+    const a = aggregateDistribution([faithTown]);
+    const sections = distributionSections();
+    expect(sections).toContain('faithChiefRank');
+    expect(sections).toContain('faithNiche');
+    expect(distributionRows(a, 'faithNiche').length).toBeGreaterThan(0);
+  });
+
+  it('is empty (all-none) when religion is dormant', () => {
+    const a = aggregateDistribution([{ institutions: [], economicState: {}, config: {}, powerStructure: { factions: [] } }]);
+    expect(Object.keys(a.faithChiefRank).length).toBe(0);
+    expect(a.faithMandate.none).toBe(1);
+  });
+});

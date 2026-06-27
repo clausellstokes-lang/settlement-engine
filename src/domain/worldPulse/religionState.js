@@ -102,12 +102,30 @@ export function ensureReligionState(state, settlement, tier) {
   const s = (state && typeof state === 'object' && state.deities)
     ? { ...state, deities: clonedDeities, capacity }
     : { deities: {}, chiefRef: null, chiefHeld: 0, chiefChallengeTicks: 0, contestedTicks: 0, capacity };
-  // legacy migration: a single embedded patron becomes the chief at 100%.
+  // Reconcile the DM's assign-deity event (SET_PRIMARY_DEITY writes
+  // config.primaryDeitySnapshot directly; it cannot see worldState.religionStates).
+  // The DM is AUTHORITATIVE over the chief: a fresh assign seeds the patron as sole
+  // chief; a RE-assign onto an existing pantheon installs the new deity as the
+  // dominant chief (so the assignment is never overwritten by the stale chief-mirror
+  // on the next advance — the bug this guards). In-sync (assigned === chief) is a no-op.
   const legacy = settlement?.config?.primaryDeitySnapshot;
-  if (!Object.keys(s.deities).length && legacy) {
+  if (legacy) {
     const ref = String(legacy._deityRef || legacy.name || 'patron');
-    s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false };
-    s.chiefRef = ref;
+    if (!Object.keys(s.deities).length) {
+      s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false };
+      s.chiefRef = ref;
+    } else if (s.chiefRef !== ref) {
+      // Make the DM-assigned deity genuinely DOMINANT (more than half the pantheon) so
+      // it holds the chief seat after renorm + selectChief, not merely present.
+      const others = activeRefs(s.deities).filter((k) => k !== ref).reduce((t, k) => t + (Number(s.deities[k].share) || 0), 0);
+      const dominantShare = Math.max(60, others + 10);
+      const existing = s.deities[ref];
+      if (existing) Object.assign(existing, { snapshot: legacy, niche: nicheOf(legacy), suppressed: false, standing: 'ascendant', share: dominantShare });
+      else s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: dominantShare, standing: 'ascendant', standingHeld: 0, suppressed: false };
+      s.chiefRef = ref;
+      s.chiefChallengeTicks = 0;
+      renormShares(s.deities);          // restore the 100-point share after the override
+    }
   }
   return s;
 }
