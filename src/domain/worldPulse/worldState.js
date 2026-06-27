@@ -137,6 +137,10 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
   if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
   if ('occupations' in shallowRaw) delete shallowRaw.occupations;
+  // religionStates — CONDITIONAL, same discipline as pantheon/occupations: the
+  // per-settlement pantheon ledger is ABSENT until religion is active (byte-identical
+  // dormant), stripped here and re-added conditionally below.
+  if ('religionStates' in shallowRaw) delete shallowRaw.religionStates;
   // Advance-scaling Stage 3 — pausedAdvance is CONDITIONALLY MATERIALIZED, the same
   // discipline as pantheon/warPosture/occupations: a campaign with NO advance in
   // flight carries NO pausedAdvance key at all (so a dormant campaign serializes
@@ -146,6 +150,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
   const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
   const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
+  const clonedReligionStates = deepCloneConditionalLedger(raw?.religionStates);
   const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
   return {
     ...base,
@@ -184,6 +189,11 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // dormancy oracle), while an active world's pantheon never aliases live state
     // across ticks.
     ...(clonedPantheon !== undefined ? { pantheon: clonedPantheon } : {}),
+    // religionStates — CONDITIONAL materialization (per-settlement pantheon: deities,
+    // adherent shares, niches, standings, chief). ABSENT until religion is active ⇒
+    // byte-identical dormant; DEEP-cloned when present so a pre-tick snapshot never
+    // aliases live share state across ticks.
+    ...(clonedReligionStates !== undefined ? { religionStates: clonedReligionStates } : {}),
     // warPosture — CONDITIONAL materialization, identical discipline to pantheon:
     // the per-settlement mobilization posture ledger ({ id -> { state, progress,
     // sinceTick, covert } }). ABSENT while no settlement has left peace (a no-war /

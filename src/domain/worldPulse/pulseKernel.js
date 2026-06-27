@@ -17,7 +17,7 @@ import { evaluateWarLayer } from './warDeployment.js';
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
-import { evaluateReligiousContest } from './religiousContest.js';
+import { advanceReligionStates } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
@@ -719,6 +719,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   let pendingFaithDeltas = [];
   /** @type {any} */
   let pantheonSeatSnapshot = null;
+  /** @type {Record<string, any> | null} the evolved per-settlement pantheon ledger */
+  let nextReligionStates = null;
   const religionActiveThisTick = simulationRules.religionDynamicsEnabled && isSubsystemActive(postTimeSnapshot, 'religion');
   if (religionActiveThisTick) {
     // Capture the PRE-conversion snapshot for seat aggregation BEFORE the contest's
@@ -726,15 +728,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // either snapshot counts the same seats — but pinning the pre-contest one keeps
     // the aggregation provably pre-tick.)
     pantheonSeatSnapshot = postTimeSnapshot;
-    const religion = evaluateReligiousContest({
+    const religion = advanceReligionStates({
       snapshot: postTimeSnapshot,
       worldState,
-      rng: rng.fork('religious-contest'),
       tick: worldState.tick,
       now,
       rules: simulationRules,
     });
     religiousOutcomes = religion.outcomes;
+    nextReligionStates = religion.religionStates;
     // The winner banks a win, the displaced incumbent a loss — read from the
     // PRE-TICK snapshot's deity assignments, never this tick's fresh re-embed.
     pendingFaithDeltas = collectFaithDeltas(religion, pantheonSeatSnapshot);
@@ -937,6 +939,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = { ...memoryState, pantheon: advanced.pantheon };
       pantheonTierChanges = advanced.changes;
     }
+  }
+  // Persist the evolved per-settlement pantheon ledger (religion rework) — CONDITIONAL
+  // materialization: only when non-empty, so a dormant/legacy world carries no
+  // religionStates key (byte-identical under the dormancy oracle).
+  if (nextReligionStates && Object.keys(nextReligionStates).length) {
+    memoryState = { ...memoryState, religionStates: nextReligionStates };
   }
   // The dossier stops lying: project the per-faction live state
   // (capture rung, momentum band, rivals, institution control) onto each

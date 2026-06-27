@@ -195,6 +195,7 @@ describe('mounted-everywhere-it-should-be guarantee', () => {
       'src/domain/worldPulse/warDeployment.js',          // B1/B2 — deployment strength envelope
       'src/domain/worldPulse/occupation.js',             // B3 — occupied-settlement usefulness
       'src/domain/worldPulse/tradeSalience.js',          // B4 — materiel-gap salience
+      'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)
       'src/domain/display/armyStrength.js',              // F1 — player-safe army-strength read-model
     ]);
     const offenders = hits.filter(p => !ALLOWED.has(p));
