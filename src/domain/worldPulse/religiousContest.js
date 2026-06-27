@@ -49,6 +49,7 @@ import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, selectPatron, patronSnapshot } from './religionState.js';
+import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy } from './religionLegitimacy.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -639,6 +640,16 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       strengthByRef[dref] = deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity });
     }
     advanceShares(state, strengthByRef);
+    // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
+    // ruler endorsement + neighbour recognition + tenure + chronicle momentum, minus
+    // the heresy stain and corruption rot. Distinct from share; it LAGS conversion.
+    const lens = rulerLens(settlement);
+    for (const dref of Object.keys(state.deities)) {
+      const entry = state.deities[dref];
+      if (entry.suppressed) continue;
+      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, deitySnapshotFor });
+      stepDeityLegitimacy(entry, target);
+    }
     selectPatron(state);
     religionStates[cid] = state;
 

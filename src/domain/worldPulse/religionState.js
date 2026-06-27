@@ -35,6 +35,10 @@ export const RELIGION_TUNING = Object.freeze({
   PATRON_HOLD_DECAY: 0.02,    // erosion per tick while seriously contested (not perpetual)
   PATRON_FLIP_MARGIN: 6,      // a challenger must lead the patron by this share…
   PATRON_FLIP_TICKS: 3,       // …for this many consecutive ticks to seize the patron seat
+  // Legitimacy seeds (the *rightful claim* axis; dynamics live in religionLegitimacy.js).
+  LEGIT_SEED_PATRON: 0.55,    // a founding/legacy patron starts moderately legitimate
+  LEGIT_SEED_CULT: 0.08,      // an arriving/imposed cult starts near-illegitimate
+  LEGIT_STAIN_IMPOSED: 0.45,  // heresy stain on a force-installed faith (DM impose / occupation)
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -109,7 +113,7 @@ export function ensureReligionState(state, settlement, tier) {
     const legacy = settlement?.config?.primaryDeitySnapshot;
     if (legacy) {
       const ref = String(legacy._deityRef || legacy.name || 'patron');
-      s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false };
+      s.deities[ref] = { deityRef: ref, snapshot: legacy, niche: nicheOf(legacy), share: 100, standing: 'ascendant', standingHeld: 0, suppressed: false, legitimacy: RELIGION_TUNING.LEGIT_SEED_PATRON, tenure: 0, heresyStain: 0 };
       s.patronRef = ref;
     }
     // DM-imposed cults: each enters at cult standing in its own (free) niche, capped
@@ -125,7 +129,8 @@ export function ensureReligionState(state, settlement, tier) {
       const niche = nicheOf(cultSnap);
       if (Object.values(s.deities).some((d) => d.niche === niche)) continue;  // one deity per niche
       if (activeRefs(s.deities).length >= capacity) break;                    // respect tier capacity
-      s.deities[ref] = { deityRef: ref, snapshot: cultSnap, niche, share: RELIGION_TUNING.CULT_SEED_SHARE, standing: 'cult', standingHeld: 0, suppressed: false };
+      // An imposed cult carries the heresy stain (it rose by DM fiat, not conversion).
+      s.deities[ref] = { deityRef: ref, snapshot: cultSnap, niche, share: RELIGION_TUNING.CULT_SEED_SHARE, standing: 'cult', standingHeld: 0, suppressed: false, legitimacy: RELIGION_TUNING.LEGIT_SEED_CULT, tenure: 0, heresyStain: RELIGION_TUNING.LEGIT_STAIN_IMPOSED };
       seededCult = true;
     }
     if (seededCult) {
@@ -205,7 +210,7 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
   if (deities[ref] && !deities[ref].suppressed) return { entered: false, path: 'present' };
   const niche = nicheOf(deity);
   const claim = clamp01(newcomerStrength) * 100;
-  const seed = (existingShare = 0) => ({ deityRef: ref, snapshot: deity, niche, share: Math.max(RELIGION_TUNING.CULT_SEED_SHARE, Math.round(existingShare * 0.5)), standing: 'cult', standingHeld: 0, suppressed: false });
+  const seed = (existingShare = 0) => ({ deityRef: ref, snapshot: deity, niche, share: Math.max(RELIGION_TUNING.CULT_SEED_SHARE, Math.round(existingShare * 0.5)), standing: 'cult', standingHeld: 0, suppressed: false, legitimacy: RELIGION_TUNING.LEGIT_SEED_CULT, tenure: 0, heresyStain: opts.force ? RELIGION_TUNING.LEGIT_STAIN_IMPOSED : 0 });
   /** @param {any} rec @param {string} path @param {string|null} [evicted] */
   const enter = (rec, path, evicted = null) => { deities[ref] = rec; return { entered: true, path, evicted }; };
 
