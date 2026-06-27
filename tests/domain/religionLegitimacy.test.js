@@ -5,7 +5,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, RELIGION_LEGITIMACY_TUNING,
+  rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, RELIGION_LEGITIMACY_TUNING,
 } from '../../src/domain/worldPulse/religionLegitimacy.js';
 
 const deity = (name, temper = 'neutral', align = 'neutral', rank = 'minor') =>
@@ -104,5 +104,27 @@ describe('stepDeityLegitimacy — lagged approach + tenure + stain decay', () =>
     stepDeityLegitimacy(entry, 0.5);
     expect(entry.legitimacy).toBeGreaterThan(0);
     expect(entry.legitimacy).toBeLessThan(0.5);
+  });
+});
+
+describe('deityGrowthFavor — the conversion-speed knob', () => {
+  it('a faith that fits the ruling power grows faster than one that clashes', () => {
+    const lens = rulerLens(militarySettlement());            // warlike junta
+    expect(deityGrowthFavor(deity('Korl', 'warlike', 'neutral'), lens))
+      .toBeGreaterThan(deityGrowthFavor(deity('Sael', 'peaceful', 'good'), lens));
+  });
+
+  it('corruption speeds an evil-leaning faith and slows a good one', () => {
+    const corrupt = { temper: 0.5, align: 0.5, power: 0.5, corrupt: 0.85 };
+    expect(deityGrowthFavor(deity('Vorr', 'neutral', 'evil'), corrupt))
+      .toBeGreaterThan(deityGrowthFavor(deity('Lumis', 'neutral', 'good'), corrupt));
+  });
+
+  it('is bounded 0..1 and deterministic', () => {
+    const lens = rulerLens(militarySettlement());
+    const v = deityGrowthFavor(deity('Korl', 'warlike', 'evil'), lens);
+    expect(v).toBeGreaterThanOrEqual(0);
+    expect(v).toBeLessThanOrEqual(1);
+    expect(v).toBe(deityGrowthFavor(deity('Korl', 'warlike', 'evil'), lens));
   });
 });

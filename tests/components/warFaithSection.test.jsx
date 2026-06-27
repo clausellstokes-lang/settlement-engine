@@ -123,6 +123,47 @@ describe('WarFaithSection — self-gating + altitude', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Live pantheon — share + standing + LEGITIMACY, and the patron-contest forecast
+// when a rival shares the patron's niche (a schism).
+// ─────────────────────────────────────────────────────────────────────────────
+
+const schismWorldState = {
+  religionStates: {
+    A: {
+      patronRef: 'd.maug',
+      deities: {
+        'd.maug': { deityRef: 'd.maug', snapshot: { name: 'Maug' }, niche: 'warlike:evil', share: 70, standing: 'ascendant', legitimacy: 0.82, suppressed: false },
+        'd.skarn': { deityRef: 'd.skarn', snapshot: { name: 'Skarn' }, niche: 'warlike:evil', share: 30, standing: 'cult', legitimacy: 0.1, suppressed: false },
+      },
+    },
+  },
+};
+
+describe('WarFaithSection — live pantheon + legitimacy + contest odds', () => {
+  test('renders pantheon standings with legitimacy and the contest forecast', () => {
+    const { getByTestId } = render(
+      <WarFaithSection settlement={warTown} settlementId="A" worldState={schismWorldState} forceLevel="standard" />,
+    );
+    const standings = getByTestId('pantheon-standings');
+    expect(standings.textContent).toMatch(/Maug/);
+    expect(standings.textContent).toMatch(/Skarn/);
+    expect(standings.textContent).toMatch(/legitimacy/i);        // the rightful-claim axis is surfaced
+    // The schism (Skarn shares Maug's warlike:evil niche) shows the contest odds.
+    const root = getByTestId('war-faith-section');
+    expect(root.textContent).toMatch(/Faith contest/i);
+    expect(root.textContent).toMatch(/%/);
+  });
+
+  test('a single-creed pantheon shows no contest forecast', () => {
+    const calmWorld = { religionStates: { A: { patronRef: 'd.maug', deities: { 'd.maug': { deityRef: 'd.maug', snapshot: { name: 'Maug' }, niche: 'warlike:evil', share: 100, standing: 'ascendant', legitimacy: 0.7, suppressed: false } } } } };
+    const { getByTestId } = render(
+      <WarFaithSection settlement={warTown} settlementId="A" worldState={calmWorld} forceLevel="standard" />,
+    );
+    expect(getByTestId('war-faith-section').textContent).not.toMatch(/Faith contest/i);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // F1 — the B-track surfaces (mobilization / army strength / occupation), in
 // heuristic language, self-gating, player-safe (covert excluded by default).
 // ─────────────────────────────────────────────────────────────────────────────

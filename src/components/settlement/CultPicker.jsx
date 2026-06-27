@@ -128,7 +128,7 @@ export default function CultPicker() {
             })}
           </select>
           <div style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
-            One faith per temperament × alignment niche; a cult that clashes with the patron, or that a full settlement can't seat, is turned away.
+            One faith per temperament × alignment niche — except the patron&apos;s own: impose a cult there to spark a contest for the patron seat. A full settlement displaces its weakest cult to make room.
           </div>
         </>
       )}

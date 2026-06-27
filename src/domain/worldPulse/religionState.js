@@ -315,6 +315,42 @@ export function selectPatron(state) {
   return cur; // patron holds (buffered)
 }
 
+/** The contest roll weight of a deity: legitimacy (primary) + share (secondary), patron amplified by its own legitimacy. @param {any} state @param {string} k @param {string} patronRef */
+function contestWeightOf(state, k, patronRef) {
+  const T = RELIGION_TUNING;
+  const d = state.deities[k];
+  let w = T.CONTEST_LEGIT_W * clamp01(Number(d.legitimacy) || 0) + T.CONTEST_SHARE_W * (Math.max(0, Number(d.share) || 0) / 100);
+  if (k === patronRef) w *= (1 + T.CONTEST_PATRON_AMP * clamp01(Number(d.legitimacy) || 0));
+  return Math.max(1e-6, w);
+}
+
+/** Whether the patron's niche is contested (a rival shares it). @param {any} state @returns {boolean} */
+export function patronNicheContested(state) {
+  const active = activeRefs(state.deities);
+  const patronRef = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
+  if (!patronRef) return false;
+  const niche = state.deities[patronRef].niche;
+  return active.some((k) => k !== patronRef && state.deities[k].niche === niche);
+}
+
+/**
+ * The DETERMINISTIC odds the patron contest would resolve by — the normalized
+ * top-three weights (the same weighting resolvePatronContest rolls on). Returns null
+ * when the patron niche is NOT contested. This is the "what happens next" forecast a
+ * preview surfaces; the seeded roll in the pulse decides the actual outcome.
+ * @param {any} state
+ * @returns {Array<{ deityRef: string, name: string, odds: number, isPatron: boolean }> | null}
+ */
+export function patronContestOdds(state) {
+  if (!patronNicheContested(state)) return null;
+  const active = activeRefs(state.deities);
+  const patronRef = state.patronRef;
+  const top3 = active.slice().sort((a, b) => (contestWeightOf(state, b, patronRef) - contestWeightOf(state, a, patronRef)) || codepoint(a, b)).slice(0, 3);
+  const ws = top3.map((k) => contestWeightOf(state, k, patronRef));
+  const total = ws.reduce((s, w) => s + w, 0) || 1;
+  return top3.map((k, i) => ({ deityRef: k, name: state.deities[k].snapshot?.name || k, odds: ws[i] / total, isPatron: k === patronRef }));
+}
+
 /**
  * Resolve a CONTESTED patron niche — a rival shares the patron's niche (e.g. a
  * DM-imposed cult planted in the patron's own domain, a schism). The top-three
@@ -339,13 +375,7 @@ export function resolvePatronContest(state, rng) {
   if (!contested) { state.patronSiegeRef = null; state.patronSiegeTicks = 0; return false; }
 
   const T = RELIGION_TUNING;
-  /** @param {string} k @returns {number} */
-  const weightOf = (k) => {
-    const d = state.deities[k];
-    let w = T.CONTEST_LEGIT_W * clamp01(Number(d.legitimacy) || 0) + T.CONTEST_SHARE_W * (Math.max(0, Number(d.share) || 0) / 100);
-    if (k === patronRef) w *= (1 + T.CONTEST_PATRON_AMP * clamp01(Number(d.legitimacy) || 0));
-    return Math.max(1e-6, w);
-  };
+  const weightOf = (/** @type {string} */ k) => contestWeightOf(state, k, patronRef);
   const top3 = active.slice().sort((a, b) => (weightOf(b) - weightOf(a)) || codepoint(a, b)).slice(0, 3);
   const winner = String(rng.weightedPick(top3, top3.map(weightOf)));
 

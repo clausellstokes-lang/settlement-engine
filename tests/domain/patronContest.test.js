@@ -5,7 +5,7 @@
  * toppled by a legitimate/popular rival, determinism, and the uncontested no-op.
  */
 import { describe, it, expect } from 'vitest';
-import { resolvePatronContest, RELIGION_TUNING } from '../../src/domain/worldPulse/religionState.js';
+import { resolvePatronContest, patronContestOdds, patronNicheContested, RELIGION_TUNING } from '../../src/domain/worldPulse/religionState.js';
 import { createPRNG } from '../../src/generators/prng.js';
 
 const ref = (x) => `custom:lu_${x.toLowerCase()}`;
@@ -66,6 +66,27 @@ describe('resolvePatronContest — the schism contest', () => {
     const b = siege(contested({ patronLegit: 0.08, cultLegit: 0.85, cultShare: 45 }), 'rep');
     expect(a.patronRef).toBe(b.patronRef);
     expect(a.deities[ref('Korl')].suppressed).toBe(b.deities[ref('Korl')].suppressed);
+  });
+
+  it('patronContestOdds forecasts the deterministic odds (sum to 1; patron favoured)', () => {
+    const s = contested({ patronLegit: 0.85, cultLegit: 0.1, cultShare: 20 });
+    const odds = patronContestOdds(s);
+    expect(odds).not.toBeNull();
+    const total = odds.reduce((t, o) => t + o.odds, 0);
+    expect(total).toBeCloseTo(1, 5);
+    const patron = odds.find((o) => o.isPatron);
+    expect(patron.odds).toBeGreaterThan(0.5);                    // amplified by its legitimacy
+  });
+
+  it('patronContestOdds is null when uncontested', () => {
+    const s = {
+      deities: {
+        [ref('Korl')]: dEntry('Korl', 'warlike:evil', 100, 0.6, 'ascendant'),
+      },
+      patronRef: ref('Korl'), capacity: 3,
+    };
+    expect(patronContestOdds(s)).toBeNull();
+    expect(patronNicheContested(s)).toBe(false);
   });
 
   it('requires a SUSTAINED winner — one lucky roll does not flip the seat', () => {

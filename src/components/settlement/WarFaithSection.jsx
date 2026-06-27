@@ -42,6 +42,7 @@ import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
+import { patronContestOdds } from '../../domain/worldPulse/religionState.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { slugifyEntity, entityAnchor } from '../../domain/dossier/entityLinks.js';
 import { useStore } from '../../store/index.js';
@@ -53,6 +54,14 @@ import {
 } from '../theme.js';
 
 const INK_BROWN = swatch['#3A2A10'];
+
+/** Human band for a 0..1 legitimacy (a faith's rightful claim). */
+function legitimacyBand(v) {
+  if (v >= 0.75) return { label: 'secure', color: GREEN };
+  if (v >= 0.5) return { label: 'established', color: GOLD };
+  if (v >= 0.25) return { label: 'tenuous', color: GOLD };
+  return { label: 'contested', color: RED };
+}
 
 /** Human posture band for a centered-on-1.0 aggressiveness multiplier. */
 function aggressionPosture(mult) {
@@ -166,17 +175,33 @@ export default function WarFaithSection({
     // DM-imposed cults (IMPOSE_CULT) — minor faiths beneath the patron.
     const cults = Array.isArray(settlement?.config?.cultDeitySnapshots) ? settlement.config.cultDeitySnapshots : [];
 
+    // Live pantheon (campaign only): the EVOLVED per-settlement faith state — each
+    // creed's adherent share, standing, and LEGITIMACY (its rightful claim). Plus the
+    // patron-contest odds when a rival shares the patron's niche (a schism in play).
+    const religionState = id ? (worldState?.religionStates?.[id] || null) : null;
+    const livePantheon = religionState
+      ? Object.values(religionState.deities || {})
+          .filter((/** @type {any} */ d) => !d.suppressed)
+          .map((/** @type {any} */ d) => ({
+            deityRef: d.deityRef, name: d.snapshot?.name || d.deityRef,
+            share: Math.round(Number(d.share) || 0), standing: d.standing,
+            legitimacy: Number(d.legitimacy) || 0, isPatron: d.deityRef === religionState.patronRef,
+          }))
+          .sort((/** @type {any} */ a, /** @type {any} */ b) => b.share - a.share)
+      : [];
+    const contestOdds = religionState ? patronContestOdds(religionState) : null;
+
     return {
       status, exhaustionRaw, exhaustionBand, standing, prizes,
       mobilization, army, occupied, holdings, tradeTies,
-      aggressiveness, posture, deity, faithEffects, cults,
+      aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds,
     };
   }, [settlement, settlementId, worldState, regionalGraph, settlements, nameFor]);
 
   const {
     status, exhaustionRaw, exhaustionBand, standing, prizes,
     mobilization, army, occupied, holdings, tradeTies,
-    aggressiveness, posture, deity, faithEffects, cults,
+    aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds,
   } = model;
 
   // Dossier hyperlink SINK for the patron deity. The deity renders ONLY here, so
@@ -201,7 +226,7 @@ export default function WarFaithSection({
   // render — only LIVE geopolitical state or an assigned deity opens the block.
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || prizes.length > 0
     || !!mobilization || !!army || !!occupied || !!holdings || tradeTies.length > 0;
-  if (!hasLive && !deity && cults.length === 0) return null;
+  if (!hasLive && !deity && cults.length === 0 && livePantheon.length === 0) return null;
 
   return (
     <div
@@ -408,6 +433,41 @@ export default function WarFaithSection({
           ))}
           {' beneath the patron.'}
         </Line>
+      )}
+
+      {/* ── Faith contest — a rival in the patron's niche (a schism). The "what
+          happens next" forecast: deterministic odds; the seeded roll decides. ──── */}
+      {contestOdds && (
+        <Line strong="Faith contest:">
+          A rival challenges the patron&apos;s niche &mdash; odds next turn:{' '}
+          {contestOdds.map((o, i) => (
+            <span key={o.deityRef}>
+              {i > 0 ? ', ' : ''}
+              <span style={{ fontWeight: 700, color: o.isPatron ? INK_BROWN : RED }}>{o.name}</span> {Math.round(o.odds * 100)}%
+            </span>
+          ))}.
+        </Line>
+      )}
+
+      {/* ── Pantheon standings (live, detail+): each creed's share, standing, and
+          LEGITIMACY (its rightful claim, which lags adherent share). ──────────── */}
+      {detail && livePantheon.length > 1 && (
+        <div style={{ marginTop: 6 }} data-testid="pantheon-standings">
+          <div style={{ fontSize: FS.xs, fontWeight: 700, color: RED, marginBottom: 3 }}>Pantheon standings</div>
+          <ul style={{ margin: 0, padding: '0 0 0 14px', listStyle: 'none' }}>
+            {livePantheon.map((d) => {
+              const band = legitimacyBand(d.legitimacy);
+              return (
+                <li key={d.deityRef} style={{ fontSize: FS.xs, color: BODY, marginBottom: 2, lineHeight: 1.4 }}>
+                  <span style={{ fontWeight: 700, color: INK_BROWN }}>{d.name}</span>
+                  {d.isPatron ? ' (patron)' : ''} &mdash; {d.share}% · {d.standing} ·{' '}
+                  <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>{' '}
+                  <span style={{ color: MUTED }}>(legitimacy {Math.round(d.legitimacy * 100)}%)</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
     </div>
   );

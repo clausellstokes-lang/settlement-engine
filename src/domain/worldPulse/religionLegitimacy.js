@@ -21,7 +21,7 @@
  */
 
 import { deityRankStrength, RELIGION_TUNING } from './religionState.js';
-import { npcAlignmentScore, readCorruptionClimate } from '../corruption.js';
+import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection } from '../corruption.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
@@ -107,6 +107,22 @@ function deityRulerFit(deity, lens) {
 /** 0..1 ruler endorsement: fit × how much power backs the ruler. @param {any} deity @param {{temper:number,align:number,power:number}} lens */
 function rulerEndorsement(deity, lens) {
   return clamp01(deityRulerFit(deity, lens)) * (0.5 + 0.5 * lens.power);
+}
+
+/**
+ * 0..1 GROWTH favour — how much the ruling power + the settlement's corruption climate
+ * SPEED this faith's conversion (the "how fast a cult grows" knob, distinct from
+ * legitimacy/the contest). A deity the rulers favour converts faster; high corruption
+ * speeds evil/chaotic-leaning faiths and slows the good. Pure, deterministic. Multiply
+ * a deity's local strength by ~(0.7 + 0.6 × this) so it modulates ±30% of growth.
+ * @param {any} deity @param {{ temper:number, align:number, power:number, corrupt:number }} lens
+ */
+export function deityGrowthFavor(deity, lens) {
+  if (!lens) return 0.5;
+  const rulerFit = deityRulerFit(deity, lens);                 // 0..1 fit with who holds power
+  const alignDir = deityAlignmentDirection(deity);             // −1 evil .. +1 good
+  const corruptFavor = clamp01(0.5 - 0.5 * (Number(lens.corrupt) || 0) * alignDir);  // rot speeds the dark, slows the bright
+  return clamp01(0.6 * rulerFit + 0.4 * corruptFavor);
 }
 
 /**
