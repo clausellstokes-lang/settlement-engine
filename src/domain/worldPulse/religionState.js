@@ -264,8 +264,9 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
 // Divine-mandate legitimacy coupling (decision 13): royal/authoritative governments
 // lean on the chief deity + religious authority. Scope by government class.
 const MANDATE_GOV_WEIGHT = Object.freeze({ theocracy: 1, royal: 0.45 });
-const MANDATE_SWING = 4;        // legitimacy points at full secure-vs-contested swing
-const MANDATE_MAX_DELTA = 3;    // hard per-tick clamp so it stays one bounded force among many
+const MANDATE_RANGE = 30;   // how far the mandate TARGET swings from neutral (50) at the security extremes
+const MANDATE_PULL = 0.15;  // fraction of the gap to the target closed per tick (gentle, self-limiting)
+const MANDATE_STEP = 2;     // hard per-tick clamp
 
 /** @param {any} government @returns {number} */
 function mandateGovWeight(government) {
@@ -311,10 +312,13 @@ export function applyDivineMandate(settlement) {
   // weak chief (security→0) erodes. fit scales a PROP but never beyond the contested floor.
   const security = clamp01(Number(profile.chiefSecurity) || 0);
   const base = security - 0.45;
-  const fitFactor = base >= 0 ? fit : 1;   // a mismatched chief PROPS less, but a contested chief erodes regardless
-  const raw = weight * base * MANDATE_SWING * fitFactor;
-  const delta = Math.max(-MANDATE_MAX_DELTA, Math.min(MANDATE_MAX_DELTA, raw));
-  if (!delta) return settlement;
+  const fitFactor = base >= 0 ? fit : 1;   // a mismatched chief PROPS less; a contested chief gets less prop regardless
+  // The mandate pulls legitimacy toward a TARGET band, not by an unbounded delta — so a
+  // persistently-contested chief WITHDRAWS its prop (target drifts to ~neutral) rather
+  // than crashing legitimacy to zero. Other forces (coups, crises) still move it freely;
+  // this is one bounded, self-limiting input. A secure kindred chief targets ~high.
+  const target = 50 + weight * base * MANDATE_RANGE * fitFactor;
+  const delta = Math.max(-MANDATE_STEP, Math.min(MANDATE_STEP, (target - leg.score) * MANDATE_PULL));
   const nextScore = Math.round(Math.max(0, Math.min(100, leg.score + delta)));
   if (nextScore === leg.score) return settlement;
   return { ...settlement, powerStructure: { ...settlement.powerStructure, publicLegitimacy: { ...leg, score: nextScore } } };
