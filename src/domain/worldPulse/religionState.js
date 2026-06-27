@@ -37,6 +37,7 @@ export const RELIGION_TUNING = Object.freeze({
   CHIEF_FLIP_TICKS: 3,        // …for this many consecutive ticks to seize the chief seat
 });
 
+/** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /** A deity's niche key — its temperament × alignment. @param {any} d @returns {string} */
@@ -44,17 +45,17 @@ export function nicheOf(d) {
   return `${d?.temperamentAxis || 'neutral'}:${d?.alignmentAxis || 'neutral'}`;
 }
 
-/** Slot capacity for a settlement tier (how many faiths the populace sustains). */
+/** Slot capacity for a settlement tier (how many faiths the populace sustains). @param {string} tier */
 export function capacityForTier(tier) {
-  return RELIGION_TUNING.SLOTS_BY_TIER[tier] ?? 2;
+  return /** @type {Record<string, number>} */ (RELIGION_TUNING.SLOTS_BY_TIER)[tier] ?? 2;
 }
 
-/** 0..1 global-rank strength of a deity (major > minor > cult). */
+/** 0..1 global-rank strength of a deity (major > minor > cult). @param {any} d */
 export function deityRankStrength(d) {
   return /** @type {Record<string,number>} */ (DEITY_RANK_STRENGTH)[d?.rankAxis] ?? DEITY_RANK_STRENGTH.minor;
 }
 
-/** Active (non-suppressed) deity refs, codepoint-sorted. */
+/** Active (non-suppressed) deity refs, codepoint-sorted. @param {Record<string, any>} deities */
 function activeRefs(deities) {
   return Object.keys(deities).filter((k) => !deities[k].suppressed).sort(codepoint);
 }
@@ -77,7 +78,7 @@ export function renormShares(deities) {
   for (const r of rows) deities[r.k].share = r.floor;
 }
 
-/** Standing from share, with hysteresis against the previous standing. */
+/** Standing from share, with hysteresis against the previous standing. @param {number} share @param {string} prev */
 function standingFor(share, prev) {
   const { STANDING_ESTABLISHED: E, STANDING_ASCENDANT: A, STANDING_HYSTERESIS: H } = RELIGION_TUNING;
   if (prev === 'ascendant') return share >= A - H ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
@@ -94,6 +95,7 @@ export function ensureReligionState(state, settlement, tier) {
   const capacity = capacityForTier(tier);
   // Clone each deity ENTRY (not just the map) so evolving this tick never mutates the
   // prior tick's state (snapshots are immutable, so sharing the ref is safe).
+  /** @type {Record<string, any>} */
   const clonedDeities = {};
   if (state && state.deities) for (const k of Object.keys(state.deities)) clonedDeities[k] = { ...state.deities[k] };
   const s = (state && typeof state === 'object' && state.deities)
@@ -127,6 +129,7 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
   const niche = nicheOf(deity);
   const claim = clamp01(newcomerStrength) * 100;
   const seed = (existingShare = 0) => ({ deityRef: ref, snapshot: deity, niche, share: Math.max(RELIGION_TUNING.CULT_SEED_SHARE, Math.round(existingShare * 0.5)), standing: 'cult', standingHeld: 0, suppressed: false });
+  /** @param {any} rec @param {string} path @param {string|null} [evicted] */
   const enter = (rec, path, evicted = null) => { deities[ref] = rec; return { entered: true, path, evicted }; };
 
   // a suppressed copy resurging counts as a fresh entry below (we overwrite it).
@@ -190,7 +193,7 @@ export function advanceShares(state, strengthByRef) {
   pruneSuppressed(state);
 }
 
-/** Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while). */
+/** Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while). @param {any} state */
 function pruneSuppressed(state) {
   // keep at most a few suppressed entries (latent revival memory); prune the rest.
   const supp = Object.keys(state.deities).filter((k) => state.deities[k].suppressed).sort(codepoint);
@@ -223,7 +226,7 @@ export function selectChief(state) {
   return cur; // chief holds (buffered)
 }
 
-/** The chief deity's snapshot, for the derived `primaryDeitySnapshot` compat mirror. */
+/** The chief deity's snapshot, for the derived `primaryDeitySnapshot` compat mirror. @param {any} state */
 export function chiefSnapshot(state) {
   const ref = state?.chiefRef;
   return ref && state.deities?.[ref] ? state.deities[ref].snapshot : null;

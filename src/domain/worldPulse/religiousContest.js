@@ -102,8 +102,8 @@ const OCC_CONVERSION_GAIN = 0.5;        // max claim-lift fraction at full contr
 const WARBOUND_CONVERSION_MULT = 1.35;  // warlike occupier deity lifts the pull "a little further"
 const OCC_CARRIER_FLOOR = 0.5;          // an occupation is itself a strong faith carrier (the garrison path)
 // Temperament / alignment axes mapped onto a line so opposition = distance.
-const TEMPER_POS = Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0 });
-const ALIGN_POS = Object.freeze({ evil: 0, neutral: 0.5, good: 1 });
+const TEMPER_POS = /** @type {Record<string, number>} */ (Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0 }));
+const ALIGN_POS = /** @type {Record<string, number>} */ (Object.freeze({ evil: 0, neutral: 0.5, good: 1 }));
 
 /**
  * The occupation faith-pull an occupier O exerts on the city C it holds.
@@ -246,7 +246,7 @@ function faithCarriersOut(snapshot, fromId) {
  * ONCE per convert and a re-fire merges (the apply-side commutative merge). The
  * outcome ALSO carries `deityReembed` so the apply pass re-embeds the winning
  * neighbour's snapshot onto C's config.primaryDeitySnapshot.
- * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any }} args
+ * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any, cause?: string }} args
  */
 function conversionOutcome({ id, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, deityReembed, cause = 'contest' }) {
   const stressor = normalizeStressor({
@@ -496,7 +496,7 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
 // Deterministic — gradual movement needs no RNG.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Neighbour ids of C across relationship edges + graph channels (codepoint-sorted). */
+/** Neighbour ids of C across relationship edges + graph channels (codepoint-sorted). @param {any} snapshot @param {string} id */
 function neighbourIdsOf(snapshot, id) {
   const set = new Set();
   for (const e of snapshot?.regionalGraph?.edges || []) {
@@ -511,7 +511,7 @@ function neighbourIdsOf(snapshot, id) {
   return [...set].sort(codepoint);
 }
 
-/** Capped prevalence bonus: neighbours whose embedded chief faith IS this deity. */
+/** Capped prevalence bonus: neighbours whose embedded chief faith IS this deity. @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef */
 function prevalenceBonus(snapshot, neighbourIds, deityRef) {
   let n = 0;
   for (const nid of neighbourIds) {
@@ -525,6 +525,7 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef) {
  * A deity's 0..1 local strength in settlement C: global rank + carrier reach +
  * regional prevalence, modulated by receptivity (alignment/temperament fit with C's
  * current mood — its chief faith). Occupation force-pull is layered on by the caller.
+ * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any }} args
  */
 function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity }) {
   const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef));
@@ -542,11 +543,13 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   if (!rules?.religionDynamicsEnabled) return { religionStates: null, outcomes: [], graphChannels: [] };
   if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [] };
 
+  /** @param {any} id */
   const nameFor = (id) => { const it = snapshot?.byId?.get?.(String(id)); return it?.name || it?.settlement?.name || String(id); };
   const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : null;
   const prior = worldState?.religionStates && typeof worldState.religionStates === 'object' ? worldState.religionStates : {};
   const outcomes = [];
   const graphChannels = [];
+  /** @type {Record<string, any>} */
   const religionStates = {};
   const bearers = deityBearers(snapshot);
 
@@ -568,6 +571,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
 
   // 2. Carrier reach: convertId → Map(deityRef → { deity, carrier, occupied }).
   const reach = new Map();
+  /** @param {any} to @param {any} deity @param {number} carrier @param {boolean} [occupied] */
   const note = (to, deity, carrier, occupied = false) => {
     const t = String(to); const dref = String(deity?._deityRef || deity?.name || '');
     if (!t || !dref) return;
@@ -592,7 +596,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   }
 
   // 3. Evolve each settlement's pantheon (codepoint-sorted ⇒ deterministic).
-  const ids = (snapshot?.settlements || []).map((it) => String(it.id)).sort(codepoint);
+  const ids = (snapshot?.settlements || []).map((/** @type {any} */ it) => String(it.id)).sort(codepoint);
   for (const cid of ids) {
     const settlement = snapshot?.byId?.get?.(cid)?.settlement;
     if (!settlement) continue;
@@ -626,6 +630,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     }
 
     // 3b. advance shares for all present (active) deities toward their strengths.
+    /** @type {Record<string, number>} */
     const strengthByRef = {};
     for (const dref of Object.keys(state.deities)) {
       if (state.deities[dref].suppressed) continue;
