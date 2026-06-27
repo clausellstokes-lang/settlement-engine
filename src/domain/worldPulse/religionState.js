@@ -319,3 +319,18 @@ export function applyDivineMandate(settlement) {
   if (nextScore === leg.score) return settlement;
   return { ...settlement, powerStructure: { ...settlement.powerStructure, publicLegitimacy: { ...leg, score: nextScore } } };
 }
+
+/**
+ * Player-safe display read-model for the divine mandate, for the faith panel. Returns
+ * null when the government carries no mandate or there is no faith profile.
+ * @param {any} settlement @returns {{ propping: boolean, phrase: string } | null}
+ */
+export function divineMandateStatus(settlement) {
+  const profile = settlement?.config?.faithProfile;
+  if (!profile) return null;
+  if (mandateGovWeight(settlement?.powerStructure?.government) <= 0) return null;
+  const security = clamp01(Number(profile.chiefSecurity) || 0);
+  if (profile.contested || security < 0.4) return { propping: false, phrase: 'A contested faith weakens the ruler’s divine mandate.' };
+  if (security > 0.6) return { propping: true, phrase: 'A dominant church shores up the ruler’s divine mandate.' };
+  return { propping: true, phrase: 'The faith lends the ruler a measure of divine mandate.' };
+}

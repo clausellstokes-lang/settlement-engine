@@ -42,6 +42,7 @@ import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
+import { divineMandateStatus } from '../../domain/worldPulse/religionState.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { slugifyEntity, entityAnchor } from '../../domain/dossier/entityLinks.js';
 import { useStore } from '../../store/index.js';
@@ -163,18 +164,23 @@ export default function WarFaithSection({
 
     const deity = settlement?.config?.primaryDeitySnapshot || null;
     const faithEffects = describeDeityEffects(deity);
+    // Religion rework: the live per-settlement pantheon (multiple deities + adherent
+    // shares + chief), projected onto config.faithProfile by the pulse. Absent on a
+    // single-faith / pre-pulse settlement (then only the Primary-faith line shows).
+    const faithProfile = settlement?.config?.faithProfile || null;
+    const mandate = divineMandateStatus(settlement);
 
     return {
       status, exhaustionRaw, exhaustionBand, standing, prizes,
       mobilization, army, occupied, holdings, tradeTies,
-      aggressiveness, posture, deity, faithEffects,
+      aggressiveness, posture, deity, faithEffects, faithProfile, mandate,
     };
   }, [settlement, settlementId, worldState, regionalGraph, settlements, nameFor]);
 
   const {
     status, exhaustionRaw, exhaustionBand, standing, prizes,
     mobilization, army, occupied, holdings, tradeTies,
-    aggressiveness, posture, deity, faithEffects,
+    aggressiveness, posture, deity, faithEffects, faithProfile, mandate,
   } = model;
 
   // Dossier hyperlink SINK for the patron deity. The deity renders ONLY here, so
@@ -391,6 +397,37 @@ export default function WarFaithSection({
             </div>
           )}
         </>
+      )}
+
+      {/* ── Pantheon (religion rework): the faiths competing for adherents, each
+          with its adherent share, standing (cult → established → ascendant), and
+          the chief. Shows only once a settlement holds more than one faith. ── */}
+      {faithProfile && faithProfile.deities.length > 1 && (
+        <div data-testid="pantheon-panel" style={{ marginTop: 10, paddingTop: 8, borderTop: `1px dashed ${BORDER}` }}>
+          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
+            Pantheon{faithProfile.contested ? ' · contested' : ''}
+          </div>
+          {faithProfile.deities.map(d => (
+            <div key={d.deityRef} style={{ marginBottom: 5 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', fontSize: FS.xs, color: INK_BROWN }}>
+                <span>
+                  <span style={{ fontWeight: 700 }}>{d.name}</span>
+                  {d.isChief && <span style={{ color: GOLD, fontWeight: 800 }}> · chief</span>}
+                  <span style={{ color: MUTED }}> · {d.standing}</span>
+                </span>
+                <span style={{ color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{d.share}%</span>
+              </div>
+              <div style={{ height: 6, background: BORDER, borderRadius: 3, overflow: 'hidden', marginTop: 2 }}>
+                <div style={{ width: `${Math.max(0, Math.min(100, d.share))}%`, height: '100%', background: d.isChief ? GOLD : MUTED }} />
+              </div>
+            </div>
+          ))}
+          {mandate && (
+            <div data-testid="divine-mandate" style={{ fontSize: FS.xxs, color: mandate.propping ? '#1a5a28' : RED, marginTop: 6, lineHeight: 1.4 }}>
+              {mandate.phrase}
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
