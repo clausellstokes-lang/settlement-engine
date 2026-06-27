@@ -92,7 +92,13 @@ function standingFor(share, prev) {
  */
 export function ensureReligionState(state, settlement, tier) {
   const capacity = capacityForTier(tier);
-  const s = (state && typeof state === 'object' && state.deities) ? { ...state, deities: { ...state.deities }, capacity } : { deities: {}, chiefRef: null, chiefHeld: 0, chiefChallengeTicks: 0, capacity };
+  // Clone each deity ENTRY (not just the map) so evolving this tick never mutates the
+  // prior tick's state (snapshots are immutable, so sharing the ref is safe).
+  const clonedDeities = {};
+  if (state && state.deities) for (const k of Object.keys(state.deities)) clonedDeities[k] = { ...state.deities[k] };
+  const s = (state && typeof state === 'object' && state.deities)
+    ? { ...state, deities: clonedDeities, capacity }
+    : { deities: {}, chiefRef: null, chiefHeld: 0, chiefChallengeTicks: 0, contestedTicks: 0, capacity };
   // legacy migration: a single embedded patron becomes the chief at 100%.
   const legacy = settlement?.config?.primaryDeitySnapshot;
   if (!Object.keys(s.deities).length && legacy) {
