@@ -131,10 +131,13 @@ export function deityGrowthFavor(deity, lens) {
   if (!lens) return 0.5;
   const rulerFit = deityRulerFit(deity, lens);                 // 0..1 fit with who holds power
   const alignDir = deityAlignmentDirection(deity);             // −1 evil .. +1 good
-  const corruptFavor = clamp01(0.5 - 0.5 * (Number(lens.corrupt) || 0) * alignDir);  // rot speeds the dark, slows the bright
+  // Ambient corruption GENTLY slows the bright (good only) — the evil side of rot is
+  // the richer compromise chain below, so we don't double-count corruption for evil.
+  const corruptFavor = clamp01(0.5 - 0.5 * (Number(lens.corrupt) || 0) * Math.max(0, alignDir));
   const base = clamp01(0.6 * rulerFit + 0.4 * corruptFavor);
-  // The COMPROMISE CHAIN (a flawed/criminal rulership + criminal institutions) is a
-  // significant, VARIABLE amplifier for EVIL faiths — the dark thrives where rule rots.
+  // The COMPROMISE CHAIN (a flawed/criminal rulership + criminal institutions) is the
+  // SINGLE, significant, VARIABLE amplifier for EVIL faiths — the dark thrives where
+  // rule rots. Evil-only, and it stays responsive across the full compromise range.
   const evilBoost = Math.max(0, -alignDir) * (Number(lens.compromise) || 0);   // 0..1, evil-only
   return clamp01(base + RELIGION_LEGITIMACY_TUNING.COMPROMISE_EVIL_AMP * evilBoost);
 }
