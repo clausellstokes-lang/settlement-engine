@@ -45,9 +45,6 @@ export const RELIGION_TUNING = Object.freeze({
   CONTEST_PATRON_AMP: 1.7,    // standing patron's roll weight ×(1 + AMP × legitimacy²) — a LEGITIMATE
                               // patron is near-unbeatable, but a discredited one (low legit) keeps almost
                               // no shield, so a more-rightful rival can topple it (e.g. under a rotten regime)
-  LEGIT_STANDING_WEIGHT: 0.7, // selectPatron ranks by share + this×100×legitimacy, so the patron seat is
-                              // the RIGHTFUL faith (not just the popular one): a discredited majority creed
-                              // yields to a more-legitimate rival — how a captured regime installs its patron
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -304,19 +301,19 @@ function pruneSuppressed(state) {
 export function selectPatron(state) {
   const keys = activeRefs(state.deities);
   if (!keys.length) { state.patronRef = null; return null; }
-  // STANDING = adherent share blended with LEGITIMACY (the rightful claim). A creed
-  // with no legitimacy field ranks by pure share (back-compat); in the live pulse the
-  // blend lets a more-legitimate creed hold the seat over a more-popular one — the
-  // mechanism by which a captured regime installs its dark patron over the loved one.
-  const scoreOf = (/** @type {string} */ k) => (Number(state.deities[k].share) || 0)
-    + RELIGION_TUNING.LEGIT_STANDING_WEIGHT * 100 * clamp01(Number(state.deities[k].legitimacy) || 0);
-  const byScore = keys.slice().sort((a, b) => (scoreOf(b) - scoreOf(a)) || codepoint(a, b));
-  const top = byScore[0];
+  // Patron selection is by adherent SHARE — ORGANIC turnover stays popularity-driven, so
+  // a clearly-stronger faith consolidates (the world keeps changing). Legitimacy governs
+  // the SCHISM contest (resolvePatronContest), not this organic flip: weighting it here
+  // froze legitimate incumbents and stalled faith change (validated in religion-soak).
+  // Corruption still drives evil to power organically via the GROWTH amplifier (it
+  // out-grows weaker patrons), not by overriding adherence.
+  const byShare = keys.slice().sort((a, b) => (state.deities[b].share - state.deities[a].share) || codepoint(a, b));
+  const top = byShare[0];
   const cur = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
   if (!cur) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }
   if (top === cur) { state.patronChallengeTicks = 0; return cur; }
   // a challenger leads — only flips with a decisive, SUSTAINED lead (the buffer).
-  const lead = scoreOf(top) - scoreOf(cur);
+  const lead = state.deities[top].share - state.deities[cur].share;
   if (lead >= RELIGION_TUNING.PATRON_FLIP_MARGIN) {
     state.patronChallengeTicks = (state.patronChallengeTicks || 0) + 1;
     if (state.patronChallengeTicks >= RELIGION_TUNING.PATRON_FLIP_TICKS) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }

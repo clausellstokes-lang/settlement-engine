@@ -49,7 +49,7 @@ import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot } from './religionState.js';
-import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor } from './religionLegitimacy.js';
+import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -531,16 +531,23 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef) {
 /**
  * A deity's 0..1 local GROWTH strength in settlement C — how fast it converts: global
  * rank + carrier reach + regional prevalence (count × avg neighbour rank), modulated by
- * receptivity (fit with C's current mood) AND by growth favour (the ruling power's
- * leaning + the corruption climate). Occupation force-pull is layered on by the caller.
- * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any }} args
+ * receptivity (fit with C's current mood), by growth favour (the ruling power's leaning
+ * + corruption climate), AND by the CHRONICLE — recent settlement events that match the
+ * faith's character spike its conversion (action-alignment, temporal + fading).
+ * Occupation force-pull is layered on by the caller.
+ * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string }} args
  */
-function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens }) {
+function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid }) {
   const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef));
   const fit = moodDeity ? (1 - incumbentCounterForce(deity, moodDeity)) : 1;   // resist alien creeds, welcome kindred
   // Growth favour: who holds power + the corruption climate speed or slow conversion.
   const growth = lens ? deityGrowthFavor(deity, lens) : 0.5;
-  return clamp01(base * (0.7 + 0.3 * fit) * (0.7 + 0.6 * growth));
+  // Chronicle: recent events whose character matches this faith spike its growth (and
+  // clashing events slow it) — a temporal, fading action-alignment pull. ~0 when the
+  // settlement's recent history is quiet or absent (e.g. a fresh standalone settlement).
+  const chronicle = (worldState && cid && lens) ? chronicleMomentum(worldState, cid, deity, lens) : 0;
+  const chronMult = 1 + RELIGION_LEGITIMACY_TUNING.CHRONICLE_GROWTH_AMP * chronicle;
+  return clamp01(base * (0.7 + 0.3 * fit) * (0.7 + 0.6 * growth) * chronMult);
 }
 
 /**
@@ -634,7 +641,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         const { deity, carrier, occupied } = reaching.get(dref);
         const cur = state.deities[dref];
         if (cur && !cur.suppressed) continue;
-        let strength = deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens });
+        let strength = deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid });
         if (occupied) {
           const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
           if (pull) {
@@ -652,7 +659,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       if (state.deities[dref].suppressed) continue;
       const carrier = reaching?.get(dref)?.carrier ?? (dref === state.patronRef ? 0.5 : 0.25);   // home faith keeps innate footing
-      strengthByRef[dref] = deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens });
+      strengthByRef[dref] = deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid });
     }
     advanceShares(state, strengthByRef);
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —

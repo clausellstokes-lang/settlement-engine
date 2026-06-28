@@ -49,6 +49,7 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   PREVALENCE_CAP: 0.5,        // max neighbour-endorsement contribution
   CHRONICLE_WINDOW: 12,       // pulseHistory records scanned (recency-weighted)
   CHRONICLE_MAX: 0.25,        // max |chronicle momentum| swing
+  CHRONICLE_GROWTH_AMP: 0.6,  // recent matching/clashing events spike/slow conversion by ±(this×MAX)
   W_RULER: 0.42, W_NEIGHBOUR: 0.20, W_TENURE: 0.30, W_CHRONICLE: 0.08, // target weights (sum 1)
   // A COMPROMISED rulership OVERRIDES tradition: the captured state's endorsement
   // dominates legitimacy (ruler weight rises) while the organic, slow sources (tenure
@@ -168,9 +169,11 @@ function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor
  * settlement (corruption exposures, faction captures, applied outcomes) read through the
  * ruler's character. A change under a ruler whose lens matches the deity vindicates it;
  * a mismatched change erodes it. Bounded so no single beat swings legitimacy wildly.
+ * Also DI'd into deityLocalStrength as a temporal GROWTH modulator (a settlement that
+ * just turned dark/bright spikes the matching faith's conversion, fading over ticks).
  * @param {any} worldState @param {string} cid @param {any} deity @param {{temper:number,align:number}} lens
  */
-function chronicleMomentum(worldState, cid, deity, lens) {
+export function chronicleMomentum(worldState, cid, deity, lens) {
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   if (!history.length) return 0;
   const { CHRONICLE_WINDOW: W, CHRONICLE_MAX: MAX } = RELIGION_LEGITIMACY_TUNING;

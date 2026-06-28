@@ -5,7 +5,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, RELIGION_LEGITIMACY_TUNING,
+  rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, RELIGION_LEGITIMACY_TUNING,
 } from '../../src/domain/worldPulse/religionLegitimacy.js';
 
 const deity = (name, temper = 'neutral', align = 'neutral', rank = 'minor') =>
@@ -126,6 +126,22 @@ describe('deityGrowthFavor — the conversion-speed knob', () => {
     expect(v).toBeGreaterThanOrEqual(0);
     expect(v).toBeLessThanOrEqual(1);
     expect(v).toBe(deityGrowthFavor(deity('Korl', 'warlike', 'evil'), lens));
+  });
+});
+
+describe('chronicleMomentum — recent events tilt growth + legitimacy by action-alignment', () => {
+  const darkLens = { temper: 0.7, align: 0.15 };   // a criminal-leaning rulership's character
+  const ws = { pulseHistory: Array.from({ length: 4 }, (_, i) => ({ corruptionEvents: [{ settlementId: 's' }], factionCaptureEvents: i === 3 ? [{ settlementId: 's' }] : [], selectedOutcomes: [] })) };
+  it('recent dark events vindicate an aligned (evil) faith and clash with a good one', () => {
+    const evil = chronicleMomentum(ws, 's', deity('V', 'warlike', 'evil'), darkLens);
+    const good = chronicleMomentum(ws, 's', deity('L', 'peaceful', 'good'), darkLens);
+    expect(evil).toBeGreaterThan(0);
+    expect(good).toBeLessThan(0);
+    expect(Math.abs(evil)).toBeLessThanOrEqual(RELIGION_LEGITIMACY_TUNING.CHRONICLE_MAX + 1e-9);   // bounded
+  });
+  it('no recent events touching the settlement ⇒ zero (a quiet/absent history)', () => {
+    expect(chronicleMomentum({ pulseHistory: [{ corruptionEvents: [{ settlementId: 'other' }] }] }, 's', deity('V', 'warlike', 'evil'), darkLens)).toBe(0);
+    expect(chronicleMomentum({}, 's', deity('V', 'warlike', 'evil'), darkLens)).toBe(0);
   });
 });
 

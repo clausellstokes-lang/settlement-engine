@@ -164,23 +164,15 @@ describe('religionState — patron incumbency hysteresis', () => {
   });
 });
 
-describe('religionState — legitimacy-weighted patron standing', () => {
-  it('a more-LEGITIMATE minority creed holds the seat over a more-popular one', () => {
-    const P = d('Pop', 'warlike', 'evil'); const C = d('Right', 'peaceful', 'good');
-    const deities = {
-      [ref('Pop')]: { deityRef: ref('Pop'), snapshot: P, niche: nicheOf(P), share: 60, standing: 'ascendant', legitimacy: 0.1, suppressed: false },
-      [ref('Right')]: { deityRef: ref('Right'), snapshot: C, niche: nicheOf(C), share: 40, standing: 'established', legitimacy: 0.9, suppressed: false },
-    };
-    const s = { deities, patronRef: ref('Right'), patronChallengeTicks: 0, capacity: 3 };
-    expect(selectPatron(s)).toBe(ref('Right'));   // 40%+0.9 legit outranks 60%+0.1 legit
-  });
-
-  it('legitimacy-free entries rank by pure share (back-compat with the share model)', () => {
+describe('religionState — patron selection stays share-driven (organic turnover)', () => {
+  it('the top-share active creed takes the seat (legitimacy governs the schism, not this flip)', () => {
+    // Even a low-legitimacy faith holds on adherents alone — legitimacy weighting here
+    // froze faith change; it lives in resolvePatronContest instead.
     const A = d('A', 'warlike', 'evil'); const B = d('B', 'peaceful', 'good');
     const deities = {
-      [ref('A')]: { deityRef: ref('A'), snapshot: A, niche: nicheOf(A), share: 70, standing: 'ascendant', suppressed: false },
-      [ref('B')]: { deityRef: ref('B'), snapshot: B, niche: nicheOf(B), share: 30, standing: 'cult', suppressed: false },
+      [ref('A')]: { deityRef: ref('A'), snapshot: A, niche: nicheOf(A), share: 70, standing: 'ascendant', legitimacy: 0.1, suppressed: false },
+      [ref('B')]: { deityRef: ref('B'), snapshot: B, niche: nicheOf(B), share: 30, standing: 'cult', legitimacy: 0.95, suppressed: false },
     };
-    expect(selectPatron({ deities, patronRef: null, capacity: 3 })).toBe(ref('A'));
+    expect(selectPatron({ deities, patronRef: null, capacity: 3 })).toBe(ref('A'));   // 70% share wins despite lower legit
   });
 });
