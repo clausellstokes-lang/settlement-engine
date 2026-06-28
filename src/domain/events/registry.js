@@ -127,6 +127,9 @@ export const RERUN_KEYS_FOR_EVENT = {
   // religion substrate (the deity term in deriveReligiousAuthority) + narrative.
   SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
   IMPOSE_CULT:            ['powerStructure', 'narrative'],
+  // A forced tier shift rebands population and performs institution roster surgery, so it
+  // re-derives the broad structural surface (institutions + demand/food + economy + power).
+  SHIFT_TIER:             ['institutions', 'demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
 };
 
 /**
@@ -803,6 +806,25 @@ export const EVENT_REGISTRY = {
       }
       const name = snap.name || 'a foreign god';
       return `A cult of ${name} takes root in the settlement, beneath the patron's gaze.`;
+    },
+  },
+
+  SHIFT_TIER: {
+    label: 'Promote or demote tier',
+    description: "Force the settlement up or down one size tier (thorp through metropolis), a DM override of the organic growth-and-decline drift. Population resettles into the new tier's band, and the institution roster reconciles exactly as an organic shift would: a promotion raises the institutions the larger tier sustains, while a demotion leaves the ones it can no longer support behind as ruined remnants (a watch-post where a garrison stood, a privatized market, a hollowed-out hall) rather than erasing them.",
+    requiresTarget: false,
+    /** @param {any} event */
+    stateDeltas(event) {
+      // Growth steadies a settlement; forced decline unsettles it. A rough mirror.
+      return event?.payload?.direction === 'demotion'
+        ? { volatility: +2, resilience: -2 }
+        : { volatility: -1, resilience: +1 };
+    },
+    /** @param {any} event */
+    narrate(event) {
+      return event?.payload?.direction === 'demotion'
+        ? 'The settlement contracts, slipping to a smaller tier as its grander institutions fall to ruin.'
+        : 'The settlement swells to a larger tier, its institutions rising to match the new scale.';
     },
   },
 

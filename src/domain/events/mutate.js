@@ -28,7 +28,7 @@ import {
   impairFaction, restoreFaction, addFaction,
   addNpc, killNpcMutation, assignNpcMutation, killLeaderMutation,
   exposeCorruption, imposeCorruption,
-  swapNpcStanding, setPrimaryDeity, imposeCult,
+  swapNpcStanding, setPrimaryDeity, imposeCult, shiftTier,
 } from './mutateEntities.js';
 import {
   depleteResource, recoveredResource,
@@ -98,6 +98,7 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: any, event: any) => any>
   DEMOTE_NPC: swapNpcStanding,
   SET_PRIMARY_DEITY: setPrimaryDeity,
   IMPOSE_CULT: imposeCult,
+  SHIFT_TIER: shiftTier,
 });
 
 /**

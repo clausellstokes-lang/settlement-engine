@@ -17,6 +17,8 @@ import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { reconcileCultImposition } from '../worldPulse/religionState.js';
+import { applyTierOutcomeToSettlement } from '../worldPulse/tierResourceDynamics.js';
+import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
@@ -833,6 +835,37 @@ function imposeCult(s, event) {
   return { ...s, config };
 }
 
+/**
+ * SHIFT_TIER — a DM-forced one-step settlement PROMOTION or DEMOTION (an override of the
+ * organic tier-drift system, tierResourceDynamics). Rebands population into the target
+ * tier's band, then REUSES the world-pulse apply path verbatim so the institution roster
+ * surgery (a promotion adds/reactivates the new tier's required institutions; a demotion
+ * leaves over-tier ones as inactive RUINED remnants with their fates) and the tier +
+ * institution history are byte-identical to an organic tier change. One tier per call; a
+ * no-op at the cap (metropolis) or floor (thorp).
+ * @param {any} s
+ * @param {{ payload?: { direction?: string } }} event
+ */
+function shiftTier(s, event) {
+  const direction = event.payload?.direction === 'demotion' ? 'demotion' : 'promotion';
+  const fromTier = s.tier || s.config?.tier || popToTier(Number(s.population) || 0);
+  const idx = TIER_ORDER.indexOf(fromTier);
+  if (idx < 0) return s;
+  const toTier = TIER_ORDER[direction === 'promotion' ? idx + 1 : idx - 1];
+  if (!toTier) return s;                                  // already at the cap / floor
+  // Reband population into the target band — a forced shift needs it (the organic path
+  // does not, since population already crossed the threshold). A plain clamp lands a
+  // promotion at the band floor and a demotion at the band ceiling, leaving an already
+  // in-band population unchanged.
+  const band = /** @type {Record<string, { min: number, max: number }>} */ (POPULATION_RANGES)[toTier];
+  const curPop = Number(s.population) || 0;
+  const population = band ? Math.min(band.max, Math.max(band.min, curPop)) : curPop;
+  // Reuse the organic apply path (institution surgery + history + tier write). Pass
+  // tier: fromTier explicitly so its stale-guard (currentTier === fromTier) passes.
+  const outcome = { id: `dm_shift_tier:${String(s.id || 'settlement')}:${fromTier}>${toTier}`, tierChange: { fromTier, toTier, direction } };
+  return applyTierOutcomeToSettlement({ ...s, tier: fromTier, population }, outcome);
+}
+
 export {
   destroySettlement,
   damageInstitution, removeInstitution, addInstitution,
@@ -840,5 +873,5 @@ export {
   impairFaction, restoreFaction, addFaction,
   addNpc, killNpcMutation, assignNpcMutation, killLeaderMutation,
   exposeCorruption, imposeCorruption,
-  swapNpcStanding, setPrimaryDeity, imposeCult,
+  swapNpcStanding, setPrimaryDeity, imposeCult, shiftTier,
 };

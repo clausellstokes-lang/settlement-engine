@@ -57,6 +57,7 @@ import EventComposer from './EventComposer.jsx';
 import ChangeQueuePanel from './ChangeQueuePanel.jsx';
 import PrimaryDeityPicker from './PrimaryDeityPicker.jsx';
 import CultPicker from './CultPicker.jsx';
+import TierShiftControl from './TierShiftControl.jsx';
 import Timeline from './Timeline.jsx';
 import PendingIntentions from './PendingIntentions.jsx';
 import CoherencePanel from './CoherencePanel.jsx';
@@ -376,6 +377,24 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
             <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
               In edit mode, the event composer applies in-world changes: declare a war, install a ruler,
               raze an institution. Each one lands on the timeline.
+              <PremiumWriteHint onUpgrade={onUpgrade} />
+            </div>
+          )}
+        </WorkshopCard>
+
+        {/* 6b ── Settlement size: force a tier promotion/demotion ─────────────── */}
+        <WorkshopCard
+          id="settlement-tier"
+          title="Settlement Size"
+          hint="Force this settlement up or down one size tier, a DM override of the organic growth-and-decline drift. Population resettles into the new band and institutions reconcile. It lands on the timeline like any change."
+          editMode={showWrite}
+        >
+          {showWrite ? (
+            <TierShiftControl />
+          ) : (
+            <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+              In edit mode, promote or demote the settlement a tier at a time. Population resettles and
+              institutions reconcile, mirroring the organic growth-and-decline drift.
               <PremiumWriteHint onUpgrade={onUpgrade} />
             </div>
           )}

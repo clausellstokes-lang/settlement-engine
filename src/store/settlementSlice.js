@@ -67,6 +67,7 @@ import { propagateRegionalEvent } from '../domain/region/index.js';
 import { WAR_STRESSOR_TYPES } from '../domain/worldPulse/warStressorTypes.js';
 import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
+import { TIER_ORDER, popToTier } from '../data/constants.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
@@ -2167,6 +2168,28 @@ export const createSettlementSlice = (set, get) => ({
       targetId: deityRefId,
       payload: { deityRef: deityRefId, snapshot },
     });
+  },
+
+  /**
+   * Force the current settlement up ('promotion') or down ('demotion') one size tier — a
+   * DM override of the organic tier-drift system. Population resettles into the new band
+   * and the institution roster reconciles (promotion raises tier-appropriate institutions;
+   * demotion leaves the unsupported ones as ruined remnants), all via the same world-pulse
+   * apply path an organic shift uses. Refuses (null, no log) at the cap (metropolis) or
+   * floor (thorp). Returns the resulting log entry, or null.
+   *
+   * @param {'promotion'|'demotion'} direction
+   */
+  shiftTier: (direction) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const dir = direction === 'demotion' ? 'demotion' : 'promotion';
+    const fromTier = state.settlement.tier || state.settlement.config?.tier || popToTier(Number(state.settlement.population) || 0);
+    const idx = TIER_ORDER.indexOf(fromTier);
+    if (idx < 0) return null;
+    if (dir === 'promotion' && idx >= TIER_ORDER.length - 1) return null;   // already a metropolis
+    if (dir === 'demotion' && idx <= 0) return null;                        // already a thorp
+    return state.applyEvent({ type: 'SHIFT_TIER', targetId: null, payload: { direction: dir } });
   },
 
   /**

@@ -174,6 +174,11 @@ const FIXTURES = {
   // state (config.cultDeitySnapshots removed). The deity sits in its own niche
   // (peaceful:good ≠ any patron the base settlement carries) so it seats cleanly.
   IMPOSE_CULT: (s) => ({ before: s, event: ev('IMPOSE_CULT', { targetId: 'custom:lu_sael', payload: { deityRef: 'custom:lu_sael', snapshot: { name: 'Sael', alignmentAxis: 'good', temperamentAxis: 'peaceful', rankAxis: 'cult', domain: 'harvest' } } }) }),
+  // A forced tier DEMOTION (the base is a city → town) rebands population and deactivates
+  // the city-only institutions into ruined remnants + appends tier/institution history;
+  // undo restores tier, config.tier/settType, population, and the full institution roster
+  // + history exactly from the pre-event snapshot (none of it provenance-reversible).
+  SHIFT_TIER: (s) => ({ before: s, event: ev('SHIFT_TIER', { payload: { direction: 'demotion' } }) }),
 };
 
 // Documented residue: undoing a RESOLVE_STRESSOR does not resurrect the LIVE
