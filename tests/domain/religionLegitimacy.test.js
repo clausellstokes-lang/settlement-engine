@@ -128,3 +128,34 @@ describe('deityGrowthFavor — the conversion-speed knob', () => {
     expect(v).toBe(deityGrowthFavor(deity('Korl', 'warlike', 'evil'), lens));
   });
 });
+
+describe('compromise chain — corruption/criminal-rule amplifies EVIL faiths', () => {
+  // A settlement ruled by a criminal syndicate with a corruptible boss NPC and a
+  // criminal institution: the NPC→faction→ruler compromise chain is deep.
+  const compromised = () => ({
+    tier: 'city', config: {},
+    powerStructure: { governingName: 'The Syndicate', factions: [{ id: 'f.crime', name: 'The Syndicate', archetype: 'criminal', power: 70 }] },
+    npcs: [{ id: 'n1', name: 'Boss', importance: 'pillar', linkedFactionIds: ['f.crime'], personality: { dominant: 'greedy', flaw: 'greedy' }, flaw: 'greedy' }],
+    institutions: [{ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', status: 'active' }],
+    economicState: { prosperity: 'struggling' },
+  });
+
+  it('rulerLens surfaces a high compromise for a rotten rulership', () => {
+    expect(rulerLens(compromised()).compromise).toBeGreaterThan(rulerLens(militarySettlement()).compromise);
+    expect(rulerLens(compromised()).compromise).toBeGreaterThan(0.5);
+  });
+
+  it('an evil faith grows significantly faster under a compromised rulership', () => {
+    const evil = deity('Vorr', 'neutral', 'evil');
+    expect(deityGrowthFavor(evil, rulerLens(compromised())))
+      .toBeGreaterThan(deityGrowthFavor(evil, rulerLens(militarySettlement())));
+  });
+
+  it('the compromise amplifier does NOT lift good faiths (evil-only)', () => {
+    const lens = rulerLens(compromised());
+    // Strip the compromise term and confirm a GOOD faith's favour is unchanged by it.
+    const lensNoCompromise = { ...lens, compromise: 0 };
+    expect(deityGrowthFavor(deity('Lumis', 'neutral', 'good'), lens))
+      .toBe(deityGrowthFavor(deity('Lumis', 'neutral', 'good'), lensNoCompromise));
+  });
+});

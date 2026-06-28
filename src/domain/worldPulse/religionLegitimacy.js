@@ -21,7 +21,7 @@
  */
 
 import { deityRankStrength, RELIGION_TUNING } from './religionState.js';
-import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection } from '../corruption.js';
+import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcCorruptibleFlaw } from '../corruption.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
@@ -43,6 +43,7 @@ const ARCHETYPE_LEAN = /** @type {Record<string, { temper: number, align: number
 
 export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   LAG: 0.12,                  // per-tick approach to target — slow, so legitimacy lags share
+  COMPROMISE_EVIL_AMP: 0.45,  // a rotten rulership (NPC→faction→ruler + criminal insts) SIGNIFICANTLY speeds evil faiths
   STAIN_DECAY: 0.06,          // heresy stain burns off per tick of held standing (seed in RELIGION_TUNING.LEGIT_*)
   TENURE_HALF: 8,             // ticks of held standing for tenure term to reach ~0.5
   PREVALENCE_CAP: 0.5,        // max neighbour-endorsement contribution
@@ -65,7 +66,7 @@ function orgPower(npc) {
  * lean, how much org-power backs it, and the corruption it sits in. Folds the
  * governing faction's archetype with its strongest linked NPC's authored alignment.
  * @param {any} settlement
- * @returns {{ temper: number, align: number, power: number, corrupt: number }}
+ * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number }}
  */
 export function rulerLens(settlement) {
   const ps = settlement?.powerStructure || {};
@@ -80,19 +81,28 @@ export function rulerLens(settlement) {
   // The faction's strongest linked NPC sharpens the alignment lean (authored character).
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   const rulerId = String(ruler?.id || '');
-  let lead = null; let leadPow = -1;
+  let lead = null; let leadPow = -1; let rulerFlaw = 0;
   for (const n of npcs) {
     const linked = Array.isArray(n?.linkedFactionIds) ? n.linkedFactionIds.map(String) : [];
     if (rulerId && !linked.includes(rulerId)) continue;
     const p = orgPower(n);
     if (p > leadPow) { leadPow = p; lead = n; }
+    // A corruptible flaw on a power-holder rots the throne proportional to their clout.
+    if (npcCorruptibleFlaw(n)) rulerFlaw = Math.max(rulerFlaw, 0.4 + 0.6 * p);
   }
   // npcAlignmentScore: −1 (evil) .. +1 (good) → 0..1 position; blend with archetype lean.
   const npcAlign = lead ? (npcAlignmentScore(lead) + 1) / 2 : lean.align;
   const align = clamp01(0.5 * lean.align + 0.5 * npcAlign);
   const power = clamp01(0.45 + 0.55 * Math.max(Number(ruler?.power) / 100 || 0, leadPow > 0 ? leadPow : 0));
   const climate = /** @type {any} */ (readCorruptionClimate(settlement) || {});
-  return { temper: clamp01(lean.temper), align, power, corrupt: clamp01(Number(climate.crime) || 0) };
+  const crime = clamp01(Number(climate.crime) || 0);
+  // COMPROMISE CHAIN: ambient crime + criminal institutions + a flawed power-holder +
+  // a criminal ruling faction each rot the legitimate rulership. Saturating 0..1. This
+  // is the variable amplifier for evil faiths (consumed by deityGrowthFavor).
+  const crimInst = climate.hasCriminalInst ? clamp01(0.3 + 0.18 * (Array.isArray(climate.criminalInstitutions) ? climate.criminalInstitutions.length : 1)) : 0;
+  const factionDark = String(ruler?.archetype) === 'criminal' ? 0.5 : 0;
+  const compromise = clamp01(0.35 * crime + 0.28 * crimInst + 0.40 * rulerFlaw + 0.25 * factionDark);
+  return { temper: clamp01(lean.temper), align, power, corrupt: crime, compromise };
 }
 
 /** 0..1 fit between a deity and a ruling-power lens (alignment + temperament). @param {any} deity @param {{temper:number,align:number}} lens */
@@ -115,14 +125,18 @@ function rulerEndorsement(deity, lens) {
  * legitimacy/the contest). A deity the rulers favour converts faster; high corruption
  * speeds evil/chaotic-leaning faiths and slows the good. Pure, deterministic. Multiply
  * a deity's local strength by ~(0.7 + 0.6 × this) so it modulates ±30% of growth.
- * @param {any} deity @param {{ temper:number, align:number, power:number, corrupt:number }} lens
+ * @param {any} deity @param {{ temper:number, align:number, power:number, corrupt:number, compromise?:number }} lens
  */
 export function deityGrowthFavor(deity, lens) {
   if (!lens) return 0.5;
   const rulerFit = deityRulerFit(deity, lens);                 // 0..1 fit with who holds power
   const alignDir = deityAlignmentDirection(deity);             // −1 evil .. +1 good
   const corruptFavor = clamp01(0.5 - 0.5 * (Number(lens.corrupt) || 0) * alignDir);  // rot speeds the dark, slows the bright
-  return clamp01(0.6 * rulerFit + 0.4 * corruptFavor);
+  const base = clamp01(0.6 * rulerFit + 0.4 * corruptFavor);
+  // The COMPROMISE CHAIN (a flawed/criminal rulership + criminal institutions) is a
+  // significant, VARIABLE amplifier for EVIL faiths — the dark thrives where rule rots.
+  const evilBoost = Math.max(0, -alignDir) * (Number(lens.compromise) || 0);   // 0..1, evil-only
+  return clamp01(base + RELIGION_LEGITIMACY_TUNING.COMPROMISE_EVIL_AMP * evilBoost);
 }
 
 /**
