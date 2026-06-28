@@ -20,7 +20,7 @@
  * read off the immutable pulse snapshot / worldState, so it is replay-identical.
  */
 
-import { deityRankStrength, RELIGION_TUNING } from './religionState.js';
+import { deityRankStrength, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcCorruptibleFlaw } from '../corruption.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
@@ -180,17 +180,21 @@ export function deityGrowthFavor(deity, lens) {
 }
 
 /**
- * 0..1 neighbour endorsement: the fraction of neighbours whose PATRON is this deity,
- * weighted toward higher-rank patrons (a metropolis's creed confers more). Capped.
+ * 0..1 neighbour endorsement: neighbours whose PATRON is this deity, each weighted by
+ * patron rank AND by the SIZE ASYMMETRY between that neighbour and this settlement — a
+ * neighbouring city lends a creed far more standing here than a hamlet does (mirrors the
+ * growth-side prevalence weighting). Capped.
  * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef
- * @param {(snapshot:any, id:string)=>any} deitySnapshotFor
+ * @param {(snapshot:any, id:string)=>any} deitySnapshotFor @param {number} [targetMass]
  */
-function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor) {
+function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass) {
   if (!neighbourIds.length) return 0;
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
-    if (snap && String(snap._deityRef || snap.name) === String(deityRef)) acc += 0.5 + 0.5 * deityRankStrength(snap);
+    if (!snap || String(snap._deityRef || snap.name) !== String(deityRef)) continue;
+    const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
+    acc += (0.5 + 0.5 * deityRankStrength(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
   }
   return clamp01(Math.min(RELIGION_LEGITIMACY_TUNING.PREVALENCE_CAP, acc / Math.max(1, neighbourIds.length)));
 }
@@ -239,7 +243,7 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
-  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor);
+  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement));
   const tenure = (Number(entry?.tenure) || 0) / ((Number(entry?.tenure) || 0) + T.TENURE_HALF);   // 0..~1, saturating
   const chronicle = chronicleMomentum(worldState, cid, deity, L);
   const stain = Math.max(0, Number(entry?.heresyStain) || 0);

@@ -19,6 +19,7 @@
 
 import { clamp01 } from './relationshipState.js';
 import { PANTHEON_TUNING } from './pantheon.js';
+import { popToTier } from '../../data/constants.js';
 
 const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
 
@@ -62,6 +63,35 @@ export function nicheOf(d) {
 /** Slot capacity for a settlement tier (how many faiths the populace sustains). @param {string} tier */
 export function capacityForTier(tier) {
   return /** @type {Record<string, number>} */ (RELIGION_TUNING.SLOTS_BY_TIER)[tier] ?? 2;
+}
+
+// ── Faith MASS: a settlement's weight in PROJECTING and RESISTING cross-settlement
+// faith influence. A bigger settlement sways its smaller neighbours strongly and barely
+// bends to them; equal-size neighbours pull each other evenly. The mass rides the
+// settlement's CURRENT tier — which the tier-drift system (tierResourceDynamics) can
+// change over a campaign — so a promoted city starts projecting harder and a demoted one
+// fades. Captures the intuition: a village is strongly swayed by a neighbouring city,
+// while a city scarcely notices a hamlet's creed.
+export const TIER_MASS = /** @type {Record<string, number>} */ (Object.freeze({ thorp: 1, hamlet: 2, village: 4, town: 8, city: 16, metropolis: 32 }));
+const MASS_INFLUENCE_MIN = 0.12;   // a far-smaller neighbour's floor (never zero — a creed still leaks across)
+const MASS_INFLUENCE_MAX = 4;      // a far-larger neighbour's ceiling (dominant, but bounded)
+
+/** A settlement's faith mass from its CURRENT tier (population-derived fallback). @param {any} settlement @returns {number} */
+export function faithMass(settlement) {
+  const tier = settlement?.tier || settlement?.config?.tier
+    || (Number.isFinite(settlement?.population) ? popToTier(settlement.population) : 'village');
+  return TIER_MASS[tier] ?? TIER_MASS.village;
+}
+
+/**
+ * Asymmetric neighbour→target faith influence = clamp(neighbourMass / targetMass): 1 at
+ * equal size, up to MASS_INFLUENCE_MAX when the neighbour dwarfs the target, down to
+ * MASS_INFLUENCE_MIN when it is dwarfed. Unknown mass coerces to neutral (1).
+ * @param {number} [neighbourMass] @param {number} [targetMass] @returns {number}
+ */
+export function neighbourFaithInfluence(neighbourMass, targetMass) {
+  const r = (Number(neighbourMass) || 1) / Math.max(1e-6, Number(targetMass) || 1);
+  return Math.max(MASS_INFLUENCE_MIN, Math.min(MASS_INFLUENCE_MAX, r));
 }
 
 /** 0..1 global-rank strength of a deity (major > minor > cult). @param {any} d */
