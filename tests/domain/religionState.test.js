@@ -176,3 +176,44 @@ describe('religionState — patron selection stays share-driven (organic turnove
     expect(selectPatron({ deities, patronRef: null, capacity: 3 })).toBe(ref('A'));   // 70% share wins despite lower legit
   });
 });
+
+describe('religionState — DM assign-deity reconciliation (SET_PRIMARY_DEITY)', () => {
+  const A = d('Aurum', 'peaceful', 'good', 'major');
+  const B = d('Korl', 'warlike', 'evil', 'major');
+  const C = d('Vael', 'warlike', 'good', 'major');
+  // a settlement carrying an existing pantheon (patron A, rival B) from prior pulses
+  const priorState = () => ({
+    deities: {
+      [A._deityRef]: { deityRef: A._deityRef, snapshot: A, niche: nicheOf(A), share: 60, standing: 'ascendant', suppressed: false },
+      [B._deityRef]: { deityRef: B._deityRef, snapshot: B, niche: nicheOf(B), share: 40, standing: 'established', suppressed: false },
+    },
+    patronRef: A._deityRef, patronChallengeTicks: 0, capacity: 5,
+  });
+
+  it('a fresh assign (no prior state) seeds the patron as sole patron', () => {
+    const s = ensureReligionState(null, { tier: 'town', config: { primaryDeitySnapshot: A } }, 'town');
+    expect(s.patronRef).toBe(ref('Aurum'));
+    expect(s.deities[ref('Aurum')].share).toBe(100);
+  });
+
+  it('a RE-assign to a NEW deity installs it as the dominant patron (not overwritten by the stale patron)', () => {
+    const s = ensureReligionState(priorState(), { tier: 'town', config: { primaryDeitySnapshot: C } }, 'town');
+    expect(s.patronRef).toBe(ref('Vael'));                      // DM is authoritative
+    expect(s.deities[ref('Vael')].share).toBeGreaterThanOrEqual(s.deities[ref('Aurum')].share); // dominant
+    const sum = Object.values(s.deities).filter((x) => !x.suppressed).reduce((t, x) => t + x.share, 0);
+    expect(sum).toBe(100);                                       // shares reconciled to 100
+  });
+
+  it('a RE-assign to an EXISTING non-patron deity promotes it to patron', () => {
+    const s = ensureReligionState(priorState(), { tier: 'town', config: { primaryDeitySnapshot: B } }, 'town');
+    expect(s.patronRef).toBe(ref('Korl'));
+    expect(s.deities[ref('Korl')].standing).toBe('ascendant');
+  });
+
+  it('in-sync (assigned === current patron) is a no-op on the patron', () => {
+    const before = priorState();
+    const s = ensureReligionState(before, { tier: 'town', config: { primaryDeitySnapshot: A } }, 'town');
+    expect(s.patronRef).toBe(ref('Aurum'));
+    expect(s.deities[ref('Aurum')].share).toBe(60);             // untouched (no forced override)
+  });
+});
