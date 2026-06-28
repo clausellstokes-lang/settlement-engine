@@ -40,9 +40,14 @@ export const RELIGION_TUNING = Object.freeze({
   LEGIT_SEED_CULT: 0.08,      // an arriving/imposed cult starts near-illegitimate
   LEGIT_STAIN_IMPOSED: 0.45,  // heresy stain on a force-installed faith (DM impose / occupation)
   // Patron CONTEST (fires when a rival shares the patron's niche — a schism).
-  CONTEST_LEGIT_W: 0.7,       // legitimacy dominates the seeded patron roll…
-  CONTEST_SHARE_W: 0.3,       // …with adherent share a secondary pull
-  CONTEST_PATRON_AMP: 1.5,    // standing patron's roll weight ×(1 + AMP × its legitimacy)
+  CONTEST_LEGIT_W: 0.78,      // legitimacy DOMINATES the seeded patron roll (rightful > popular)…
+  CONTEST_SHARE_W: 0.22,      // …with adherent share only a secondary pull
+  CONTEST_PATRON_AMP: 1.7,    // standing patron's roll weight ×(1 + AMP × legitimacy²) — a LEGITIMATE
+                              // patron is near-unbeatable, but a discredited one (low legit) keeps almost
+                              // no shield, so a more-rightful rival can topple it (e.g. under a rotten regime)
+  LEGIT_STANDING_WEIGHT: 0.7, // selectPatron ranks by share + this×100×legitimacy, so the patron seat is
+                              // the RIGHTFUL faith (not just the popular one): a discredited majority creed
+                              // yields to a more-legitimate rival — how a captured regime installs its patron
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -299,13 +304,19 @@ function pruneSuppressed(state) {
 export function selectPatron(state) {
   const keys = activeRefs(state.deities);
   if (!keys.length) { state.patronRef = null; return null; }
-  const byShare = keys.slice().sort((a, b) => (state.deities[b].share - state.deities[a].share) || codepoint(a, b));
-  const top = byShare[0];
+  // STANDING = adherent share blended with LEGITIMACY (the rightful claim). A creed
+  // with no legitimacy field ranks by pure share (back-compat); in the live pulse the
+  // blend lets a more-legitimate creed hold the seat over a more-popular one — the
+  // mechanism by which a captured regime installs its dark patron over the loved one.
+  const scoreOf = (/** @type {string} */ k) => (Number(state.deities[k].share) || 0)
+    + RELIGION_TUNING.LEGIT_STANDING_WEIGHT * 100 * clamp01(Number(state.deities[k].legitimacy) || 0);
+  const byScore = keys.slice().sort((a, b) => (scoreOf(b) - scoreOf(a)) || codepoint(a, b));
+  const top = byScore[0];
   const cur = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
   if (!cur) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }
   if (top === cur) { state.patronChallengeTicks = 0; return cur; }
   // a challenger leads — only flips with a decisive, SUSTAINED lead (the buffer).
-  const lead = state.deities[top].share - state.deities[cur].share;
+  const lead = scoreOf(top) - scoreOf(cur);
   if (lead >= RELIGION_TUNING.PATRON_FLIP_MARGIN) {
     state.patronChallengeTicks = (state.patronChallengeTicks || 0) + 1;
     if (state.patronChallengeTicks >= RELIGION_TUNING.PATRON_FLIP_TICKS) { state.patronRef = top; state.patronChallengeTicks = 0; return top; }
@@ -319,8 +330,9 @@ export function selectPatron(state) {
 function contestWeightOf(state, k, patronRef) {
   const T = RELIGION_TUNING;
   const d = state.deities[k];
-  let w = T.CONTEST_LEGIT_W * clamp01(Number(d.legitimacy) || 0) + T.CONTEST_SHARE_W * (Math.max(0, Number(d.share) || 0) / 100);
-  if (k === patronRef) w *= (1 + T.CONTEST_PATRON_AMP * clamp01(Number(d.legitimacy) || 0));
+  const legit = clamp01(Number(d.legitimacy) || 0);
+  let w = T.CONTEST_LEGIT_W * legit + T.CONTEST_SHARE_W * (Math.max(0, Number(d.share) || 0) / 100);
+  if (k === patronRef) w *= (1 + T.CONTEST_PATRON_AMP * legit * legit);   // legitimacy² ⇒ a discredited patron loses its shield
   return Math.max(1e-6, w);
 }
 

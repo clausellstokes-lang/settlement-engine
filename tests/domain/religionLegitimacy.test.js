@@ -129,6 +129,25 @@ describe('deityGrowthFavor — the conversion-speed knob', () => {
   });
 });
 
+describe('compromise re-weights legitimacy toward the captured rulership', () => {
+  const cleanLens = { temper: 0.5, align: 0.7, power: 0.6, corrupt: 0, compromise: 0 };
+  const corruptLens = { temper: 0.7, align: 0.15, power: 0.6, corrupt: 0.6, compromise: 0.85 };
+  const target = (deityArg, entry, lens) => deityLegitimacyTarget({
+    settlement: militarySettlement(), snapshot: {}, worldState: {}, cid: 's',
+    deity: deityArg, deityRef: deityArg._deityRef, neighbourIds: [], entry, lens, deitySnapshotFor: noNeighbour,
+  });
+  it('a corrupt rulership collapses a misaligned (good) patron’s legitimacy', () => {
+    const good = deity('Lumis', 'peaceful', 'good');
+    expect(target(good, { tenure: 25, heresyStain: 0, standing: 'ascendant' }, corruptLens))
+      .toBeLessThan(target(good, { tenure: 25, heresyStain: 0, standing: 'ascendant' }, cleanLens));
+  });
+  it('…and lifts the aligned (evil) creed it favours', () => {
+    const evil = deity('Vorr', 'warlike', 'evil');
+    expect(target(evil, { tenure: 0, heresyStain: 0, standing: 'cult' }, corruptLens))
+      .toBeGreaterThan(target(evil, { tenure: 0, heresyStain: 0, standing: 'cult' }, cleanLens));
+  });
+});
+
 describe('compromise chain — corruption/criminal-rule amplifies EVIL faiths', () => {
   // A settlement ruled by a criminal syndicate with a corruptible boss NPC and a
   // criminal institution: the NPC→faction→ruler compromise chain is deep.

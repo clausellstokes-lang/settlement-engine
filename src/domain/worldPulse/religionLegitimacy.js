@@ -50,7 +50,12 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   CHRONICLE_WINDOW: 12,       // pulseHistory records scanned (recency-weighted)
   CHRONICLE_MAX: 0.25,        // max |chronicle momentum| swing
   W_RULER: 0.42, W_NEIGHBOUR: 0.20, W_TENURE: 0.30, W_CHRONICLE: 0.08, // target weights (sum 1)
-  CORRUPTION_DRAG: 0.20,      // crime erodes the institutionally-sanctioned faith
+  // A COMPROMISED rulership OVERRIDES tradition: the captured state's endorsement
+  // dominates legitimacy (ruler weight rises) while the organic, slow sources (tenure
+  // + neighbour recognition) fade — so a rotten regime can de/re-legitimize faiths by
+  // fiat, and an imposed creed it favours can actually seize the patron seat.
+  COMPROMISE_RULER_SHIFT: 0.40,   // added to W_RULER at full compromise
+  COMPROMISE_TRADITION_FADE: 0.5, // fraction of tenure+neighbour weight stripped at full compromise (entrenched faiths keep some)
 });
 
 const clamp01 = (/** @type {number} */ n) => (n < 0 ? 0 : n > 1 ? 1 : n);
@@ -204,9 +209,17 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   const tenure = (Number(entry?.tenure) || 0) / ((Number(entry?.tenure) || 0) + T.TENURE_HALF);   // 0..~1, saturating
   const chronicle = chronicleMomentum(worldState, cid, deity, L);
   const stain = Math.max(0, Number(entry?.heresyStain) || 0);
-  const corruptionDrag = T.CORRUPTION_DRAG * L.corrupt * deityRulerFit(deity, L);  // rot erodes the sanctioned faith most
-  const base = T.W_RULER * ruler + T.W_NEIGHBOUR * neighbour + T.W_TENURE * tenure + T.W_CHRONICLE * (0.5 + chronicle);
-  return clamp01(base - stain - corruptionDrag);
+  // Compromise RE-WEIGHTS the sources: a captured state's endorsement dominates, while
+  // tradition (tenure) + neighbour recognition fade. A clean settlement keeps the
+  // balanced organic weighting; a deeply rotten one legitimizes whatever the rulers
+  // favour — so a corrupt regime delegitimizes its good church and an imposed dark
+  // creed can actually earn the standing to seize the patron seat. (Replaces the old
+  // corruptionDrag, which perversely eroded the very faith the corrupt rulers backed.)
+  const c = clamp01(Number(L.compromise) || 0);
+  const wRuler = T.W_RULER + c * T.COMPROMISE_RULER_SHIFT;
+  const fade = 1 - c * T.COMPROMISE_TRADITION_FADE;
+  const base = wRuler * ruler + (T.W_NEIGHBOUR * fade) * neighbour + (T.W_TENURE * fade) * tenure + T.W_CHRONICLE * (0.5 + chronicle);
+  return clamp01(base - stain);
 }
 
 /**
