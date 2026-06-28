@@ -123,6 +123,51 @@ describe('WarFaithSection — self-gating + altitude', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Religion rework — the per-settlement PANTHEON panel (multiple faiths competing
+// for adherents, the chief, contested-ness, and the divine-mandate line).
+// ─────────────────────────────────────────────────────────────────────────────
+describe('WarFaithSection — pantheon panel', () => {
+  const pantheonTown = {
+    id: 'P', name: 'Pyrespire', population: 9000,
+    config: {
+      primaryDeitySnapshot: { name: 'Aurum', rankAxis: 'major', temperamentAxis: 'peaceful', alignmentAxis: 'good', domain: 'sun' },
+      faithProfile: {
+        chief: { name: 'Aurum', deityRef: 'custom:lu_aurum', share: 62 },
+        deities: [
+          { deityRef: 'custom:lu_aurum', name: 'Aurum', niche: 'peaceful:good', share: 62, standing: 'ascendant', isChief: true },
+          { deityRef: 'custom:lu_korl', name: 'Korl', niche: 'warlike:evil', share: 38, standing: 'established', isChief: false },
+        ],
+        contested: false,
+        chiefSecurity: 0.62,
+      },
+    },
+    powerStructure: { government: 'theocracy', publicLegitimacy: { score: 60, label: 'Stable' }, factions: [{ faction: 'Temple', archetype: 'religious', power: 70, isGoverning: true }] },
+    economicState: {},
+  };
+
+  test('renders each faith with its share, standing, and the chief marker', () => {
+    const { getByTestId } = render(<WarFaithSection settlement={pantheonTown} settlementId="P" forceLevel="standard" />);
+    const panel = getByTestId('pantheon-panel');
+    expect(panel.textContent).toMatch(/Aurum/);
+    expect(panel.textContent).toMatch(/Korl/);
+    expect(panel.textContent).toMatch(/62%/);
+    expect(panel.textContent).toMatch(/chief/i);
+    expect(panel.textContent).toMatch(/ascendant|established/i);
+  });
+
+  test('a theocracy with a secure chief shows the divine-mandate prop', () => {
+    const { getByTestId } = render(<WarFaithSection settlement={pantheonTown} settlementId="P" forceLevel="standard" />);
+    expect(getByTestId('divine-mandate').textContent).toMatch(/mandate/i);
+  });
+
+  test('a single-faith settlement shows NO pantheon panel (only the faith line)', () => {
+    const single = { ...pantheonTown, config: { primaryDeitySnapshot: pantheonTown.config.primaryDeitySnapshot } };
+    const { queryByTestId } = render(<WarFaithSection settlement={single} settlementId="P" forceLevel="standard" />);
+    expect(queryByTestId('pantheon-panel')).toBeNull();
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // F1 — the B-track surfaces (mobilization / army strength / occupation), in
 // heuristic language, self-gating, player-safe (covert excluded by default).
 // ─────────────────────────────────────────────────────────────────────────────

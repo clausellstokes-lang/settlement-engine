@@ -66,7 +66,7 @@ export const en = Object.freeze({
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:       'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -77,7 +77,7 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach thorp through metropolis, save every draft, and export the PDF.',
+      unlockTpl: '{signin} to reach thorp through metropolis, save your drafts, and export the PDF.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -676,7 +676,7 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to reach thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:     'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
@@ -684,7 +684,7 @@ export const en = Object.freeze({
     },
     third_save: {
       headline: 'You’re building a campaign.',
-      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
+      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, cloud sync, the neighbour network, and full export.',
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',

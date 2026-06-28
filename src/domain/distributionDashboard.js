@@ -23,6 +23,7 @@
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState, SYSTEM_VARIABLES, CAUSAL_BANDS } from './causalState.js';
 import { detectContradictions } from './contradictions.js';
+import { divineMandateStatus } from './worldPulse/religionState.js';
 
 function blank() {
   return {
@@ -33,6 +34,14 @@ function blank() {
     foodSecurity: {},
     substrateBandFloors: {},
     contradictionTypes: {},
+    // Religion rework — faith / pantheon distribution, as first-class flat sections
+    // (rendered through distributionRows like the others). Populated from each
+    // settlement's config.primaryDeitySnapshot (chief mirror) + projected
+    // config.faithProfile; empty when religion is dormant across the set.
+    faithChiefRank: {},      // major / minor / cult of the chief deity
+    faithNiche: {},          // temperament:alignment frequency across all faiths
+    faithPantheonSize: {},   // '1','2',... how many faiths a settlement holds
+    faithMandate: {},        // propping / undermining / none (divine-mandate status)
     averages: {
       institutions: 0,
       factions: 0,
@@ -122,6 +131,20 @@ export function aggregateDistribution(settlements) {
       incr(out.contradictionTypes, c.type);
     }
 
+    // Faith / pantheon (religion rework). config.primaryDeitySnapshot is the chief
+    // mirror; config.faithProfile is the projected per-settlement pantheon (present
+    // once a religion-active campaign has pulsed). All no-ops when religion is dormant.
+    const cfg = /** @type {any} */ (s).config;
+    const chief = cfg?.primaryDeitySnapshot;
+    if (chief) incr(out.faithChiefRank, chief.rankAxis || 'minor');
+    const fp = cfg?.faithProfile;
+    if (fp && Array.isArray(fp.deities) && fp.deities.length) {
+      incr(out.faithPantheonSize, String(fp.deities.length));
+      for (const dd of fp.deities) incr(out.faithNiche, dd.niche || 'unknown');
+    }
+    const mandate = divineMandateStatus(s);
+    incr(out.faithMandate, mandate ? (mandate.propping ? 'propping' : 'undermining') : 'none');
+
     // Aggregate counts for averages
     npcSum += Array.isArray(s.npcs) ? s.npcs.length : 0;
     hookSum += Array.isArray(s.plotHooks) ? s.plotHooks.length : 0;
@@ -158,5 +181,9 @@ export function distributionSections() {
     'factionArchetypes',
     'foodSecurity',
     'contradictionTypes',
+    'faithChiefRank',
+    'faithNiche',
+    'faithPantheonSize',
+    'faithMandate',
   ];
 }

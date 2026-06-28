@@ -109,8 +109,8 @@ export const FLAGS = Object.freeze({
     description: '"?" affordance on every config control opens Compendium snippet.',
   },
   copyGuard: {
-    default: true,
-    description: 'Content-copy deterrent: block copy/cut/right-click and disable text selection site-wide (exempting form fields, [data-allow-copy], and elevated users) to nudge readers toward the PDF export and premium. A deterrent, not security — text stays in the DOM for rendering, SEO, and screen readers.',
+    default: false,
+    description: 'OFF by default (was on). The content-copy deterrent blocked copy/cut/right-click + disabled text selection site-wide, which fought the core DM workflow (copying prep into notes / VTT / Discord) far more than it deterred anyone — and it was never security (text stays in the DOM for rendering, SEO, and screen readers). Left behind the flag so it can be re-enabled or scoped to public pages later if there is evidence it helps conversion.',
   },
   // ── Simulation ──────────────────────────────────────────────────────────────
   // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks

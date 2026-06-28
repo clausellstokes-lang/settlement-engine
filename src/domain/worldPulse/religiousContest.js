@@ -47,6 +47,13 @@ import { clamp01 } from '../region/contestMath.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
+import { militaryCapacityScalar } from './militaryStrength.js';
+import { ensureReligionState, attemptEntry, advanceShares, selectChief, chiefSnapshot } from './religionState.js';
+
+// Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
+// of C that already holds it as chief (geographic faith clustering), capped.
+const PREVALENCE_PER_NEIGHBOUR = 0.06;
+const PREVALENCE_MAX = 0.3;
 
 const CHANNEL_TYPE = 'religious_authority';
 // The relationship labels that carry a faith — a deity's influence travels with
@@ -79,6 +86,62 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 function deitySnapshotFor(snapshot, id) {
   const item = snapshot?.byId?.get?.(String(id));
   return item?.settlement?.config?.primaryDeitySnapshot || null;
+}
+
+// ── Occupation → conversion coupling ─────────────────────────────────────────
+// A conquered settlement tends to adopt its occupier's faith — "the creed follows
+// the garrison." The pull scales with the SIZE of the occupying force (the
+// occupier's military capacity) tempered by how firmly the occupation is held (a
+// garrison still fighting resistance converts less), and is amplified when the
+// occupier's deity is WARBOUND (warlike temperament — a martial creed spreads at
+// the point of a spear). It is COUNTERED by an incumbent faith of opposed nature:
+// FULL force lands against a warlike or adjacent (neutral-temperament) creed, but a
+// peaceful or alignment-opposed (good↔evil) faith digs in and resists. The lift is
+// bounded — it pushes the occupier's claim toward, never past, certainty.
+const OCC_CONVERSION_GAIN = 0.5;        // max claim-lift fraction at full control, peaceful occupier deity
+const WARBOUND_CONVERSION_MULT = 1.35;  // warlike occupier deity lifts the pull "a little further"
+const OCC_CARRIER_FLOOR = 0.5;          // an occupation is itself a strong faith carrier (the garrison path)
+// Temperament / alignment axes mapped onto a line so opposition = distance.
+const TEMPER_POS = /** @type {Record<string, number>} */ (Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0 }));
+const ALIGN_POS = /** @type {Record<string, number>} */ (Object.freeze({ evil: 0, neutral: 0.5, good: 1 }));
+
+/**
+ * The occupation faith-pull an occupier O exerts on the city C it holds.
+ * { control, warbound } or null when O does not occupy C. `control` (0..1) scales
+ * with O's military capacity (the occupying-force size) and how firmly the
+ * occupation is established (1 − resistance); a present garrison always pulls some.
+ * @param {any} snapshot @param {any} occupations @param {any} occupierId @param {any} convertId
+ * @returns {{ control: number, warbound: boolean } | null}
+ */
+function occupationFaithPull(snapshot, occupations, occupierId, convertId) {
+  const rec = occupations?.[String(convertId)];
+  if (!rec || String(rec.occupierId) !== String(occupierId)) return null;
+  const occItem = snapshot?.byId?.get?.(String(occupierId));
+  const force = clamp01(militaryCapacityScalar(occItem || {}));            // size of occupying forces
+  const established = clamp01(1 - (Number(rec.resistance) || 0));          // garrison in control vs still fighting
+  const control = clamp01(force * (0.4 + 0.6 * established));
+  const deity = deitySnapshotFor(snapshot, occupierId);
+  const warbound = String(deity?.temperamentAxis || '') === 'warlike';
+  return { control, warbound };
+}
+
+/**
+ * The counter-force (0..1) an INCUMBENT faith mounts against an occupier's creed —
+ * 0 = no resistance (full conversion force), 1 = fully countered. Zero when the two
+ * creeds are kindred (warlike occupier vs a warlike/adjacent incumbent — "full force
+ * against a warlike or adjacent deity"); rises with temperament opposition (a
+ * peaceful incumbent) and alignment opposition (good↔evil).
+ * @param {any} occDeity @param {any} incDeity
+ * @returns {number}
+ */
+function incumbentCounterForce(occDeity, incDeity) {
+  if (!incDeity) return 0;                                                  // no entrenched faith → no resistance
+  const tGap = Math.abs((TEMPER_POS[occDeity?.temperamentAxis] ?? 0.5) - (TEMPER_POS[incDeity?.temperamentAxis] ?? 0.5)); // 0..1
+  const aGap = Math.abs((ALIGN_POS[occDeity?.alignmentAxis] ?? 0.5) - (ALIGN_POS[incDeity?.alignmentAxis] ?? 0.5));       // 0..1
+  // Adjacent temperament (gap ≤ 0.5) mounts NO temperament resistance; an opposed
+  // temperament (warlike↔peaceful, gap = 1) does. Opposed alignment resists too.
+  const tempResist = Math.max(0, tGap - 0.5) * 2;                           // 0 at gap ≤ 0.5, 1 at gap = 1
+  return clamp01(0.6 * tempResist + 0.6 * aGap);                            // either opposition alone can substantially counter
 }
 
 /**
@@ -183,9 +246,9 @@ function faithCarriersOut(snapshot, fromId) {
  * ONCE per convert and a re-fire merges (the apply-side commutative merge). The
  * outcome ALSO carries `deityReembed` so the apply pass re-embeds the winning
  * neighbour's snapshot onto C's config.primaryDeitySnapshot.
- * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any }} args
+ * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any, cause?: any }} args
  */
-function conversionOutcome({ id, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, deityReembed }) {
+function conversionOutcome({ id, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, deityReembed, cause = 'contest' }) {
   const stressor = normalizeStressor({
     type: 'religious_conversion_fracture',
     originSettlementId: targetSaveId,
@@ -210,6 +273,7 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
       lifecycleStage: stressor.lifecycleStage,
       durationPolicy: stressor.durationPolicy,
       spreadChannels: stressor.spreadChannels,
+      conversionCause: cause,
     },
     // The embed bridge: the apply pass re-embeds this winning-neighbour snapshot
     // onto the convert's config.primaryDeitySnapshot (copied from the neighbour's
@@ -239,11 +303,16 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
  * @returns {{ outcomes: any[], graphChannels: any[] }}
  */
 export function evaluateReligiousContest({ snapshot, worldState = null, rng, tick = 0, now = null, rules = {} }) {
-  void worldState;
   // ── DOUBLE GATE: byte-identical no-op unless BOTH the opt-in flag AND the
   //    activation gate hold. Either false ⇒ empties (no mint, no contest). ─────
   if (!rules?.religionDynamicsEnabled) return { outcomes: [], graphChannels: [] };
   if (!isSubsystemActive(snapshot, 'religion')) return { outcomes: [], graphChannels: [] };
+
+  // Occupation faith-pull reads the pre-tick occupations ledger (war layer). Absent
+  // on a war-off / unconquered campaign ⇒ the coupling is a pure no-op.
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object'
+    ? worldState.occupations
+    : null;
 
   const outcomes = [];
   const graphChannels = [];
@@ -295,6 +364,19 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
     }
   }
 
+  // Occupation injects the occupier as a faith contender over the city it holds —
+  // the creed follows the garrison, even where no peacetime faith-carrier edge
+  // exists. Codepoint-sorted ⇒ deterministic. The occupier must itself carry a deity.
+  if (occupations) {
+    for (const convertId of Object.keys(occupations).sort(codepoint)) {
+      const occId = occupations[convertId]?.occupierId ? String(occupations[convertId].occupierId) : null;
+      if (!occId || occId === convertId || !deitySnapshotFor(snapshot, occId)) continue;
+      if (!contendersByConvert.has(convertId)) contendersByConvert.set(convertId, new Map());
+      const m = contendersByConvert.get(convertId);
+      m.set(occId, Math.max(m.get(occId) ?? 0, OCC_CARRIER_FLOOR));
+    }
+  }
+
   // Codepoint-sorted converts ⇒ deterministic contest order.
   const converts = [...contendersByConvert.keys()].map(String).sort(codepoint);
   for (const convertId of converts) {
@@ -339,7 +421,19 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
       const carrier = clamp01(carrierMap.get(homeId) ?? 0);
       const neighbourAuthority = religiousAuthority01(snapshot, homeId);
       const convertibility = clamp01(1 - cOrthodoxy);
-      const scoreFor = clamp01(rank * carrier * neighbourAuthority * (0.4 + 0.6 * convertibility));
+      let scoreFor = clamp01(rank * carrier * neighbourAuthority * (0.4 + 0.6 * convertibility));
+      // Occupation faith-pull: an occupier of C lifts its claim toward (never past)
+      // certainty — scaled by occupying-force size, amplified if warbound, COUNTERED
+      // by an opposed incumbent faith (full force only against a warlike/adjacent creed).
+      if (occupations) {
+        const pull = occupationFaithPull(snapshot, occupations, homeId, convertId);
+        if (pull && pull.control > 0) {
+          const incDeity = deitySnapshotFor(snapshot, convertId);
+          let lift = OCC_CONVERSION_GAIN * pull.control * (pull.warbound ? WARBOUND_CONVERSION_MULT : 1);
+          lift = clamp01(lift * (1 - incumbentCounterForce(deity, incDeity)));
+          scoreFor = clamp01(scoreFor + lift * (1 - scoreFor));
+        }
+      }
       return { id: homeId, scoreFor };
     });
 
@@ -363,7 +457,12 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
     const winnerSnapshot = deitySnapshotFor(snapshot, winnerHomeId);
     if (!winnerSnapshot) continue; // a winner must carry a deity to convert C.
 
+    // Attribute the conversion: occupation-driven if the winner is C's occupier.
+    const winnerIsOccupier = Boolean(occupations && occupations[convertId]?.occupierId
+      && String(occupations[convertId].occupierId) === String(winnerHomeId));
+
     outcomes.push(conversionOutcome({
+      cause: winnerIsOccupier ? 'occupation' : 'contest',
       // Stable per-convert id ⇒ the crisis is born once; a same-tick re-fire to
       // the same convert merges (the apply-side commutative merge).
       id: `world_stressor.religious_conversion_fracture.${prizeId}`,
@@ -383,4 +482,180 @@ export function evaluateReligiousContest({ snapshot, worldState = null, rng, tic
   }
 
   return { outcomes, graphChannels };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GRADUAL PANTHEON DRIVER (religion rework — see docs/RELIGION_REWORK.md). Replaces
+// the binary winner-take-all flip: each tick every settlement's per-deity adherent
+// SHARES evolve toward their strengths (global rank + carrier reach + regional
+// prevalence + receptivity), faiths ENTER as cults and climb, the chief is held with
+// an erodable incumbency buffer, and a conversion outcome (re-embed) fires only when
+// the CHIEF actually changes. Returns the evolved per-settlement religionStates for
+// the kernel to persist as a CONDITIONAL worldState ledger (absent ⇒ byte-identical
+// dormant), plus chief-change outcomes and the religious_authority mints.
+// Deterministic — gradual movement needs no RNG.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Neighbour ids of C across relationship edges + graph channels (codepoint-sorted). @param {any} snapshot @param {any} id */
+function neighbourIdsOf(snapshot, id) {
+  const set = new Set();
+  for (const e of snapshot?.regionalGraph?.edges || []) {
+    if (String(e?.from) === id) set.add(String(e.to));
+    else if (String(e?.to) === id) set.add(String(e.from));
+  }
+  for (const c of snapshot?.regionalGraph?.channels || []) {
+    if (String(c?.from) === id) set.add(String(c.to));
+    else if (String(c?.to) === id) set.add(String(c.from));
+  }
+  set.delete(id);
+  return [...set].sort(codepoint);
+}
+
+/** Capped prevalence bonus: neighbours whose embedded chief faith IS this deity. @param {any} snapshot @param {any[]} neighbourIds @param {any} deityRef */
+function prevalenceBonus(snapshot, neighbourIds, deityRef) {
+  let n = 0;
+  for (const nid of neighbourIds) {
+    const snap = deitySnapshotFor(snapshot, nid);
+    if (snap && String(snap._deityRef || snap.name) === String(deityRef)) n++;
+  }
+  return Math.min(PREVALENCE_MAX, n * PREVALENCE_PER_NEIGHBOUR);
+}
+
+/**
+ * A deity's 0..1 local strength in settlement C: global rank + carrier reach +
+ * regional prevalence, modulated by receptivity (alignment/temperament fit with C's
+ * current mood — its chief faith). Occupation force-pull is layered on by the caller.
+ * @param {{ snapshot: any, deity: any, deityRef: any, neighbourIds: any[], carrier: number, moodDeity: any }} args
+ */
+function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity }) {
+  const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef));
+  const fit = moodDeity ? (1 - incumbentCounterForce(deity, moodDeity)) : 1;   // resist alien creeds, welcome kindred
+  return clamp01(base * (0.7 + 0.3 * fit));
+}
+
+/**
+ * @param {Object} args
+ * @param {any} args.snapshot @param {any} [args.worldState]
+ * @param {number} [args.tick] @param {string|null} [args.now] @param {any} args.rules
+ * @returns {{ religionStates: Record<string, any>|null, outcomes: any[], graphChannels: any[] }}
+ */
+export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {} }) {
+  if (!rules?.religionDynamicsEnabled) return { religionStates: null, outcomes: [], graphChannels: [] };
+  if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [] };
+
+  const nameFor = (/** @type {any} */ id) => { const it = snapshot?.byId?.get?.(String(id)); return it?.name || it?.settlement?.name || String(id); };
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : null;
+  const prior = worldState?.religionStates && typeof worldState.religionStates === 'object' ? worldState.religionStates : {};
+  const outcomes = [];
+  const graphChannels = [];
+  /** @type {Record<string, any>} */
+  const religionStates = {};
+  const bearers = deityBearers(snapshot);
+
+  // 1. Mint religious_authority channels along faith carriers (deity-gated, directed).
+  for (const fromId of bearers) {
+    const deity = deitySnapshotFor(snapshot, fromId);
+    const rankStrength = deityRankStrength(deity);
+    for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
+      if (strength < MIN_CARRIER) continue;
+      const mintStrength = clamp01(0.35 + strength * 0.4 + rankStrength * 0.25);
+      graphChannels.push(mintDirectedChannel({
+        type: CHANNEL_TYPE, from: fromId, to, strength: mintStrength, confidence: 0.75,
+        explanation: `${deity?.name || nameFor(fromId)} projects religious authority from ${nameFor(fromId)} to ${nameFor(to)}.`,
+        relationshipKey: `${CHANNEL_TYPE}.${stablePart(fromId)}.${stablePart(to)}`,
+        source: 'religious_authority_mint', now,
+      }));
+    }
+  }
+
+  // 2. Carrier reach: convertId → Map(deityRef → { deity, carrier, occupied }).
+  const reach = new Map();
+  const note = (/** @type {any} */ to, /** @type {any} */ deity, /** @type {number} */ carrier, /** @type {boolean} */ occupied = false) => {
+    const t = String(to); const dref = String(deity?._deityRef || deity?.name || '');
+    if (!t || !dref) return;
+    if (!reach.has(t)) reach.set(t, new Map());
+    const m = reach.get(t); const prev = m.get(dref);
+    m.set(dref, { deity, carrier: Math.max(prev?.carrier ?? 0, carrier), occupied: occupied || Boolean(prev?.occupied) });
+  };
+  for (const fromId of bearers) {
+    const deity = deitySnapshotFor(snapshot, fromId);
+    if (!deity) continue;
+    for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
+      if (strength >= MIN_CARRIER) note(to, deity, strength);
+    }
+  }
+  if (occupations) {
+    for (const cid of Object.keys(occupations).sort(codepoint)) {
+      const occId = occupations[cid]?.occupierId ? String(occupations[cid].occupierId) : null;
+      if (!occId || occId === cid) continue;
+      const deity = deitySnapshotFor(snapshot, occId);
+      if (deity) note(cid, deity, OCC_CARRIER_FLOOR, true);
+    }
+  }
+
+  // 3. Evolve each settlement's pantheon (codepoint-sorted ⇒ deterministic).
+  const ids = (snapshot?.settlements || []).map((/** @type {any} */ it) => String(it.id)).sort(codepoint);
+  for (const cid of ids) {
+    const settlement = snapshot?.byId?.get?.(cid)?.settlement;
+    if (!settlement) continue;
+    const reaching = reach.get(cid);
+    const hasState = Boolean(prior[cid]?.deities && Object.keys(prior[cid].deities).length);
+    const hasDeity = Boolean(deitySnapshotFor(snapshot, cid));
+    if (!hasDeity && !hasState && !reaching) continue;     // dormancy: untouched ⇒ no state
+
+    const tier = settlement.tier || settlement.config?.tier || 'village';
+    const state = ensureReligionState(prior[cid], settlement, tier);
+    const prevChief = state.chiefRef;
+    const neighbourIds = neighbourIdsOf(snapshot, cid);
+    const moodDeity = chiefSnapshot(state);
+
+    // 3a. entries — faiths reaching C not yet present (or resurging from suppression).
+    if (reaching) {
+      for (const dref of [...reaching.keys()].sort(codepoint)) {
+        const { deity, carrier, occupied } = reaching.get(dref);
+        const cur = state.deities[dref];
+        if (cur && !cur.suppressed) continue;
+        let strength = deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity });
+        if (occupied) {
+          const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
+          if (pull) {
+            const lift = clamp01(OCC_CONVERSION_GAIN * pull.control * (pull.warbound ? WARBOUND_CONVERSION_MULT : 1) * (1 - incumbentCounterForce(deity, moodDeity)));
+            strength = clamp01(strength + lift * (1 - strength));
+          }
+        }
+        attemptEntry(state, deity, strength, { force: Boolean(occupied) });
+      }
+    }
+
+    // 3b. advance shares for all present (active) deities toward their strengths.
+    /** @type {Record<string, number>} */
+    const strengthByRef = {};
+    for (const dref of Object.keys(state.deities)) {
+      if (state.deities[dref].suppressed) continue;
+      const carrier = reaching?.get(dref)?.carrier ?? (dref === state.chiefRef ? 0.5 : 0.25);   // home faith keeps innate footing
+      strengthByRef[dref] = deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity });
+    }
+    advanceShares(state, strengthByRef);
+    selectChief(state);
+    religionStates[cid] = state;
+
+    // 3c. chief change → a gradual conversion outcome (re-embed the new chief).
+    if (state.chiefRef && state.chiefRef !== prevChief) {
+      const newChief = chiefSnapshot(state);
+      if (newChief) outcomes.push(conversionOutcome({
+        cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',
+        id: `world_stressor.religious_conversion_fracture.${stablePart(cid)}`,
+        targetSaveId: cid,
+        severity: 0.5,
+        headline: `${nameFor(cid)} turns to the faith of ${newChief.name || 'a new creed'}`,
+        summary: `After a long contest of devotion, ${newChief.name || 'a rising faith'} has become the chief creed of ${nameFor(cid)}.`,
+        reasons: [`${newChief.name || 'a rising faith'} overtook the old patron as ${nameFor(cid)}'s chief deity.`],
+        tick,
+        sourceEventTargetId: cid,
+        deityReembed: { snapshot: newChief, fromSettlementId: cid },
+      }));
+    }
+  }
+
+  return { religionStates, outcomes, graphChannels };
 }

@@ -8,7 +8,7 @@ exports[`pdf.6 — golden snapshot of the SHARED_FIELDS canon values > canon val
   "food.deficitPct (residual deficit ÷ daily need)": 0,
   "food.surplus (lb/day)": 5449,
   "headcounts.factions": 6,
-  "headcounts.institutions": 55,
+  "headcounts.institutions": 54,
   "headcounts.npcs": 11,
   "prosperity.label": "Prosperous",
   "safety.label": "Moderate",
