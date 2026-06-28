@@ -44,6 +44,8 @@ const ARCHETYPE_LEAN = /** @type {Record<string, { temper: number, align: number
 export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   LAG: 0.12,                  // per-tick approach to target — slow, so legitimacy lags share
   COMPROMISE_EVIL_AMP: 0.45,  // a rotten rulership (NPC→faction→ruler + criminal insts) SIGNIFICANTLY speeds evil faiths
+  COMPROMISE_MOOD_EROSION: 0.55, // a compromised populace resists an alien creed LESS (frayed moral fabric),
+                              // scaled by compromise — so DEEP corruption converts faster than mild (the gradient)
   STAIN_DECAY: 0.06,          // heresy stain burns off per tick of held standing (seed in RELIGION_TUNING.LEGIT_*)
   TENURE_HALF: 8,             // ticks of held standing for tenure term to reach ~0.5
   PREVALENCE_CAP: 0.5,        // max neighbour-endorsement contribution

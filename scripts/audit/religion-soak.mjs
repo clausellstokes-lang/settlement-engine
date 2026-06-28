@@ -63,19 +63,6 @@ function makeSave(i, kind, patron, cultSnap) {
   };
 }
 
-function step(campaign, saves) {
-  const snapshot = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
-  const rng = createPRNG(`${campaign.worldState.rngSeed}::tick:${campaign.worldState.tick}`);
-  const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: campaign.worldState.tick, now: NOW, rules: RULES, rng });
-  const nextWS = { ...campaign.worldState, tick: campaign.worldState.tick + 1 };
-  if (r.religionStates) nextWS.religionStates = r.religionStates;
-  const nextSaves = saves.map((s) => {
-    const st = r.religionStates?.[s.id]; const p = st ? patronSnapshot(st) : null;
-    return p ? { ...s, settlement: { ...s.settlement, config: { ...s.settlement.config, primaryDeityRef: p._deityRef, primaryDeitySnapshot: p } } } : s;
-  });
-  return { campaign: { ...campaign, worldState: nextWS }, saves: nextSaves };
-}
-
 // One run: N independent settlements, each a GOOD patron + an imposed EVIL cult.
 // schism=false ⇒ cult in a DIFFERENT niche (growth-driven rise + deterministic flip);
 // schism=true ⇒ cult shares the patron's niche (the seeded contest).
@@ -101,9 +88,21 @@ function run(kind, schism, topology, seed) {
     regionalGraph: ensureRegionalGraph({ edges }),
     wizardNews: { currentTick: 1, entries: [] },
   };
-  let saves = saves0;
-  for (let t = 0; t < TICKS; t++) ({ campaign, saves } = step(campaign, saves));
-  return { campaign };
+  // FAST PATH: build the snapshot ONCE, then mutate the patron embed IN PLACE each tick
+  // (advanceReligionStates reads config/powerStructure/npcs live off these objects, so the
+  // mutation is seen — ~TICKS× fewer buildWorldSnapshot rebuilds, the dominant cost).
+  let worldState = campaign.worldState;
+  const snapshot = buildWorldSnapshot({ campaign, saves: saves0, worldState });
+  for (let t = 0; t < TICKS; t++) {
+    const rng = createPRNG(`${worldState.rngSeed}::tick:${worldState.tick}`);
+    const r = advanceReligionStates({ snapshot, worldState, tick: worldState.tick, now: NOW, rules: RULES, rng });
+    worldState = { ...worldState, tick: worldState.tick + 1, religionStates: r.religionStates || worldState.religionStates };
+    for (const item of snapshot.settlements) {
+      const st = r.religionStates?.[item.id]; const p = st ? patronSnapshot(st) : null;
+      if (p) { item.settlement.config.primaryDeityRef = p._deityRef; item.settlement.config.primaryDeitySnapshot = p; }
+    }
+  }
+  return { campaign: { ...campaign, worldState } };
 }
 
 // Aggregate over seeds. Tracks the imposed evil cult (custom:lu_vorr): how often it
@@ -143,8 +142,74 @@ function table(title, schism) {
   }
 }
 
+// ── MONTE CARLO: a fresh RANDOM settlement per trial (tier, ranks, alignments, ruler
+// corruption, neighbours, imposed cult) so N trials sample the SPACE — the only way
+// extra trials add information (the structured table above is deterministic per config).
+const MONTE = arg('monte', 0);
+const ALIGNS = ['good', 'good', 'neutral', 'evil'];
+const TEMPERS = ['peaceful', 'neutral', 'warlike'];
+const RANKS = ['major', 'minor', 'cult'];
+const RULERS = ['clean', 'clean', 'corrupt', 'corrupt', 'deep'];   // weighted toward cleaner
+
+function monteTrial(seed) {
+  const rng = createPRNG(`mc::${seed}`);
+  const ruler = rng.pick(RULERS);
+  const patron = deity('pat', rng.pick(TEMPERS), rng.pick(ALIGNS), rng.pick(RANKS));
+  const cult = deity('cul', rng.pick(TEMPERS), rng.pick(['good', 'neutral', 'evil', 'evil']), rng.pick(['cult', 'cult', 'minor', 'major']));
+  const save = makeSave(0, ruler, patron, cult);
+  save.settlement.tier = rng.pick(['thorp', 'village', 'town', 'city', 'metropolis']);
+  const campaign = {
+    id: `mc${seed}`, name: 'mc', settlementIds: ['s0'],
+    worldState: { rngSeed: `mc::${seed}`, tick: 1, simulationRules: RULES },
+    regionalGraph: ensureRegionalGraph({ edges: [] }), wizardNews: { currentTick: 1, entries: [] },
+  };
+  let worldState = campaign.worldState;
+  const snapshot = buildWorldSnapshot({ campaign, saves: [save], worldState });
+  for (let t = 0; t < TICKS; t++) {
+    const r = advanceReligionStates({ snapshot, worldState, tick: worldState.tick, now: NOW, rules: RULES, rng: createPRNG(`mc::${seed}::${t}`) });
+    worldState = { ...worldState, tick: worldState.tick + 1, religionStates: r.religionStates || worldState.religionStates };
+    const st = r.religionStates?.s0; const p = st ? patronSnapshot(st) : null;
+    if (p) { snapshot.settlements[0].settlement.config.primaryDeityRef = p._deityRef; snapshot.settlements[0].settlement.config.primaryDeitySnapshot = p; }
+  }
+  const st = worldState.religionStates?.s0;
+  const active = st ? Object.values(st.deities).filter((d) => !d.suppressed) : [];
+  const patronSnap = st?.patronRef ? st.deities[st.patronRef]?.snapshot : null;
+  const sum = active.reduce((a, d) => a + (Number(d.share) || 0), 0);
+  return {
+    ruler, cultAlign: cult.alignmentAxis,
+    cultSeized: st?.patronRef === 'custom:lu_cul',
+    evilPatron: patronSnap?.alignmentAxis === 'evil',
+    legit: active.length ? active.reduce((a, d) => a + (Number(d.legitimacy) || 0), 0) / active.length : null,
+    diversity: active.length,
+    degenerate: (active.length && Math.abs(sum - 100) > 0.5) || active.some((d) => !Number.isFinite(Number(d.legitimacy))) || active.length === 0,
+  };
+}
+
+function monteCarlo(n) {
+  const by = {}; const legHist = new Array(10).fill(0); let degen = 0, legN = 0, divSum = 0;
+  const bump = (k, r) => { const b = (by[k] = by[k] || { n: 0, seized: 0, evil: 0 }); b.n++; if (r.cultSeized) b.seized++; if (r.evilPatron) b.evil++; };
+  for (let s = 0; s < n; s++) {
+    const r = monteTrial(s);
+    bump(`ruler:${r.ruler}`, r); bump(`cultAlign:${r.cultAlign}`, r); bump('ALL', r);
+    if (r.degenerate) degen++;
+    if (r.legit != null) { legHist[Math.min(9, Math.floor(r.legit * 10))]++; legN++; }
+    divSum += r.diversity;
+  }
+  const row = (k) => { const b = by[k]; const ci = 1.96 * Math.sqrt((b.evil / b.n) * (1 - b.evil / b.n) / b.n); return `${k.padEnd(18)} n=${String(b.n).padStart(6)}  cultSeized ${pct(b.seized / b.n)}  evilPatron ${pct(b.evil / b.n)} ±${(ci * 100).toFixed(1)}%`; };
+  console.log(`\n# Religion MONTE CARLO  (N=${n} RANDOM settlements, ${TICKS} ticks each)`);
+  console.log('\n## Outcome by RULER corruption (a random patron + imposed cult each):');
+  for (const k of ['ruler:clean', 'ruler:corrupt', 'ruler:deep']) console.log('  ' + row(k));
+  console.log('\n## Outcome by imposed-CULT alignment:');
+  for (const k of ['cultAlign:good', 'cultAlign:neutral', 'cultAlign:evil']) console.log('  ' + row(k));
+  console.log('\n  ' + row('ALL'));
+  console.log(`\n## Degeneracy over ${n} trials: ${degen}  (want 0) | avg diversity ${f2(divSum / n)} | legit samples ${legN}`);
+  console.log('## Legitimacy distribution (0.0→1.0 deciles): ' + legHist.map((c) => Math.round((c / legN) * 100) + '%').join(' '));
+}
+
 console.log(`\n# Religion LIVE-LOOP soak  (seeds=${SEEDS}, ticks=${TICKS}, 8 settlements/run)`);
 table('GROWTH-driven — good patron + imposed EVIL cult (different niche)', false);
 table('SCHISM — good patron + imposed EVIL cult (SAME niche; the seeded contest)', true);
 console.log('\nWANT: clean evilRate ~low; corrupt/deep rises (esp. isolated, where the cult has a fair shot)');
-console.log('      but stays variable (not 100%); avgLegit mid; diversity >1; guards all [0 0 0 0].\n');
+console.log('      but stays variable (not 100%); avgLegit mid; diversity >1; guards all [0 0 0 0].');
+if (MONTE > 0) monteCarlo(MONTE);
+console.log('');

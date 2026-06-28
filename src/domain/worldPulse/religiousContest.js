@@ -539,7 +539,10 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef) {
  */
 function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid }) {
   const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef));
-  const fit = moodDeity ? (1 - incumbentCounterForce(deity, moodDeity)) : 1;   // resist alien creeds, welcome kindred
+  // Receptivity: the settlement's mood resists alien creeds — but a COMPROMISED populace
+  // resists LESS (frayed moral fabric), so deeper corruption opens the door wider.
+  const counter = moodDeity ? incumbentCounterForce(deity, moodDeity) * (1 - RELIGION_LEGITIMACY_TUNING.COMPROMISE_MOOD_EROSION * clamp01(Number(lens?.compromise) || 0)) : 0;
+  const fit = 1 - counter;
   // Growth favour: who holds power + the corruption climate speed or slow conversion.
   const growth = lens ? deityGrowthFavor(deity, lens) : 0.5;
   // Chronicle: recent events whose character matches this faith spike its growth (and
