@@ -148,6 +148,8 @@ describe('WarFaithSection — live pantheon + legitimacy + contest odds', () => 
     expect(standings.textContent).toMatch(/Maug/);
     expect(standings.textContent).toMatch(/Skarn/);
     expect(standings.textContent).toMatch(/legitimacy/i);        // the rightful-claim axis is surfaced
+    // Each creed also gets an adherent-share BAR alongside the legitimacy text (both signals).
+    expect(standings.querySelectorAll('[data-testid="pantheon-share-bar"]').length).toBe(2);
     // The schism (Skarn shares Maug's warlike:evil niche) shows the contest odds.
     const root = getByTestId('war-faith-section');
     expect(root.textContent).toMatch(/Faith contest/i);

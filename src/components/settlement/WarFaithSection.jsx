@@ -468,11 +468,16 @@ export default function WarFaithSection({
             {livePantheon.map((d) => {
               const band = legitimacyBand(d.legitimacy);
               return (
-                <li key={d.deityRef} style={{ fontSize: FS.xs, color: BODY, marginBottom: 2, lineHeight: 1.4 }}>
+                <li key={d.deityRef} style={{ fontSize: FS.xs, color: BODY, marginBottom: 5, lineHeight: 1.4 }}>
                   <span style={{ fontWeight: 700, color: INK_BROWN }}>{d.name}</span>
                   {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
                   <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>{' '}
                   <span style={{ color: MUTED }}>(legitimacy {Math.round(d.legitimacy * 100)}%)</span>
+                  {/* Adherent-share bar (patron in gold, cults muted) under the line, so
+                      share reads at a glance alongside the legitimacy band in the text. */}
+                  <div data-testid="pantheon-share-bar" style={{ height: 6, background: BORDER, borderRadius: 3, overflow: 'hidden', marginTop: 2 }}>
+                    <div style={{ width: `${Math.max(0, Math.min(100, d.share))}%`, height: '100%', background: d.isPatron ? GOLD : MUTED }} />
+                  </div>
                 </li>
               );
             })}
