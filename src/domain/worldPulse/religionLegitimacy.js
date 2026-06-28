@@ -59,9 +59,38 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   // fiat, and an imposed creed it favours can actually seize the patron seat.
   COMPROMISE_RULER_SHIFT: 0.40,   // added to W_RULER at full compromise
   COMPROMISE_TRADITION_FADE: 0.5, // fraction of tenure+neighbour weight stripped at full compromise (entrenched faiths keep some)
+  W_INSTITUTION: 0.12,            // max legitimacy a temple-rich settlement lends the ESTABLISHED faith (a bounded
+                                  // bonus atop the sum-1 base — creed-agnostic structural backing that entrenches incumbents)
 });
 
 const clamp01 = (/** @type {number} */ n) => (n < 0 ? 0 : n > 1 ? 1 : n);
+
+// ── Religious-institution backing ────────────────────────────────────────────
+// A settlement's organized worship (temples, churches, monasteries, shrines) lends
+// STANDING to whatever faith already holds the seat — creed-agnostic structural
+// legitimacy. Institutions carry no strength field (verified: they are presence
+// records), so the signal is count×scale, saturated. It is NOT read by
+// deriveReligiousAuthority, so this is genuinely new signal (no double-count).
+const INSTITUTION_SCALE = /** @type {Record<string, number>} */ ({ church: 1, monastery: 0.6 });
+const INSTITUTION_SAT = 2.2;     // weighted religious-institution count that saturates backing to ~1
+// Backing entrenches the ESTABLISHED faith, not a fresh cult: temples back the seat.
+const STANDING_BACKING = /** @type {Record<string, number>} */ ({ ascendant: 1, established: 0.6, cult: 0.1 });
+
+/**
+ * 0..1 religious-institution backing of a settlement (count × scale, saturated). A
+ * cathedral/church weighs full, a monastery less, a shrine least. Creed-agnostic.
+ * @param {any} settlement @returns {number}
+ */
+export function institutionBackingOf(settlement) {
+  const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  let weighted = 0;
+  for (const it of insts) {
+    const tags = Array.isArray(it?.tags) ? it.tags : [];
+    if (!tags.includes('religious') && String(it?.priorityCategory) !== 'religion') continue;
+    weighted += tags.includes('church') ? INSTITUTION_SCALE.church : tags.includes('monastery') ? INSTITUTION_SCALE.monastery : 0.35;
+  }
+  return clamp01(weighted / INSTITUTION_SAT);
+}
 
 /** Importance → org-power weight (mirrors entities/npcs importanceWeight). @param {any} npc */
 function orgPower(npc) {
@@ -203,10 +232,10 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
  * endorsement, neighbour recognition, accumulated tenure, and chronicle momentum,
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
- *   neighbourIds:string[], entry:any, lens?:any, deitySnapshotFor:(s:any,id:string)=>any }} args
+ *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, deitySnapshotFor }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
@@ -224,7 +253,10 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   const wRuler = T.W_RULER + c * T.COMPROMISE_RULER_SHIFT;
   const fade = 1 - c * T.COMPROMISE_TRADITION_FADE;
   const base = wRuler * ruler + (T.W_NEIGHBOUR * fade) * neighbour + (T.W_TENURE * fade) * tenure + T.W_CHRONICLE * (0.5 + chronicle);
-  return clamp01(base - stain);
+  // Religious-institution backing: temples lend bounded, creed-agnostic legitimacy to
+  // the faith that holds the seat (scaled by its standing) — entrenching the incumbent.
+  const instTerm = T.W_INSTITUTION * clamp01(institutionBacking) * (STANDING_BACKING[entry?.standing] ?? 0.1);
+  return clamp01(base + instTerm - stain);
 }
 
 /**

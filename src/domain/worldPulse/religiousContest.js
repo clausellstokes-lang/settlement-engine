@@ -48,8 +48,8 @@ import { isSubsystemActive } from './subsystemActivation.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
-import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot } from './religionState.js';
-import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
+import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING } from './religionState.js';
+import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -637,6 +637,9 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // The ruling power as a character lens — drives both growth favour (here) and the
     // legitimacy target (below). Computed once per settlement per tick (deterministic).
     const lens = rulerLens(settlement);
+    // Religious-institution backing (0..1): temples lend creed-agnostic legitimacy to
+    // whatever faith holds the seat. Computed once per settlement (read off institutions).
+    const institutionBacking = institutionBackingOf(settlement);
 
     // 3a. entries — faiths reaching C not yet present (or resurging from suppression).
     if (reaching) {
@@ -671,7 +674,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       const entry = state.deities[dref];
       if (entry.suppressed) continue;
-      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, deitySnapshotFor });
+      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor });
       stepDeityLegitimacy(entry, target);
     }
     // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
@@ -684,6 +687,14 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
 
     // 3c. patron change → a gradual conversion outcome (re-embed the new patron).
     if (state.patronRef && state.patronRef !== prevPatron) {
+      // An occupation-DRIVEN patron flip stains the new patron: a faith that took the
+      // seat under the garrison (not by earned devotion) carries the heresy stain even
+      // if it had already entered un-forced → low legitimacy → brittle. Covers the
+      // share-flip case that attemptEntry's force-stain (entry-only) misses.
+      if (occupations?.[cid]?.occupierId && state.deities[state.patronRef]) {
+        const e = state.deities[state.patronRef];
+        e.heresyStain = Math.max(Number(e.heresyStain) || 0, RELIGION_TUNING.LEGIT_STAIN_IMPOSED);
+      }
       const newPatron = patronSnapshot(state);
       if (newPatron) outcomes.push(conversionOutcome({
         cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',

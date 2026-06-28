@@ -45,6 +45,10 @@ export const RELIGION_TUNING = Object.freeze({
   CONTEST_PATRON_AMP: 1.7,    // standing patron's roll weight ×(1 + AMP × legitimacy²) — a LEGITIMATE
                               // patron is near-unbeatable, but a discredited one (low legit) keeps almost
                               // no shield, so a more-rightful rival can topple it (e.g. under a rotten regime)
+  LEGIT_ORGANIC_CONTEST: 0.3, // below this patron legitimacy the seat is ORGANICALLY contestable — a
+                              // discredited patron faces a challenge from any established rival (even
+                              // cross-niche), no DM imposition required ("when legitimacy is low, the top
+                              // three compete"). A more-rightful rival can then topple it via the roll.
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -377,13 +381,23 @@ export function patronContestOdds(state) {
  * @param {{ weightedPick: (items: any[], weights: number[]) => any }} rng
  */
 export function resolvePatronContest(state, rng) {
+  const T = RELIGION_TUNING;
   const active = activeRefs(state.deities);
   const patronRef = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
   const patronNiche = patronRef ? state.deities[patronRef].niche : null;
-  const contested = patronRef && active.some((k) => k !== patronRef && state.deities[k].niche === patronNiche);
+  // A SCHISM: a rival shares the patron's own niche (e.g. an imposed cult).
+  const sameNiche = Boolean(patronRef) && active.some((k) => k !== patronRef && state.deities[k].niche === patronNiche);
+  // ORGANIC upheaval: a DISCREDITED patron (legitimacy below the floor) can be
+  // challenged by any ESTABLISHED rival that out-weighs its (now-shieldless) roll —
+  // even across niches, with no DM imposition. This is the "top three compete when
+  // legitimacy is low" rule: a rotten regime's patron is toppled by a more-rightful faith.
+  const patronLegit = patronRef ? clamp01(Number(state.deities[patronRef].legitimacy) || 0) : 1;
+  const organic = Boolean(patronRef) && patronLegit < T.LEGIT_ORGANIC_CONTEST
+    && active.some((k) => k !== patronRef && state.deities[k].standing !== 'cult'
+         && contestWeightOf(state, k, patronRef) > contestWeightOf(state, patronRef, patronRef));
+  const contested = sameNiche || organic;
   if (!contested) { state.patronSiegeRef = null; state.patronSiegeTicks = 0; return false; }
 
-  const T = RELIGION_TUNING;
   const weightOf = (/** @type {string} */ k) => contestWeightOf(state, k, patronRef);
   const top3 = active.slice().sort((a, b) => (weightOf(b) - weightOf(a)) || codepoint(a, b)).slice(0, 3);
   const winner = String(rng.weightedPick(top3, top3.map(weightOf)));
