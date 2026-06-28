@@ -415,3 +415,108 @@ export function patronSnapshot(state) {
   const ref = state?.patronRef;
   return ref && state.deities?.[ref] ? state.deities[ref].snapshot : null;
 }
+
+/**
+ * Project the live per-settlement pantheon onto `config.faithProfile` — a share-sorted
+ * read-model (patron flagged, contested flag, patronSecurity) that the dossier and the
+ * divine-mandate coupling read. patronSecurity is LEGITIMACY-driven (this branch's
+ * rightful-claim axis, which folds in the compromise chain), blended with share
+ * dominance and damped when contested. Identity no-op when the settlement has no state.
+ * @param {any} settlement @param {Record<string, any>} religionStates @param {string} saveId
+ */
+export function projectReligionStateOntoSettlement(settlement, religionStates, saveId) {
+  const state = religionStates?.[String(saveId)];
+  if (!state || !state.deities) return settlement;
+  const active = activeRefs(state.deities);
+  if (!active.length) return settlement;
+  const deities = active
+    .map((ref) => { const d = state.deities[ref]; return { deityRef: ref, name: d.snapshot?.name || ref, niche: d.niche, share: d.share, standing: d.standing, legitimacy: clamp01(Number(d.legitimacy) || 0), isPatron: ref === state.patronRef }; })
+    .sort((a, b) => (b.share - a.share) || codepoint(a.deityRef, b.deityRef));
+  const patron = state.patronRef && state.deities[state.patronRef] ? state.deities[state.patronRef] : null;
+  const patronShare = patron ? (Number(patron.share) || 0) : 0;
+  const patronLegit = patron ? clamp01(Number(patron.legitimacy) || 0) : 0;
+  const topRival = active.filter((r) => r !== state.patronRef).reduce((m, r) => Math.max(m, state.deities[r].share), 0);
+  const contested = active.length > 1 && (patronShare - topRival) < RELIGION_TUNING.PATRON_FLIP_MARGIN;
+  // Security = the patron's rightful claim (legitimacy, primary) + its share dominance,
+  // damped when a rival presses. This is what props or fails the throne (applyDivineMandate).
+  const patronSecurity = clamp01((0.7 * patronLegit + 0.3 * (patronShare / 100)) * (contested ? 0.65 : 1));
+  const snap = patronSnapshot(state);
+  const faithProfile = {
+    patron: snap ? { name: snap.name, deityRef: state.patronRef, share: patronShare, legitimacy: patronLegit } : null,
+    deities, contested, patronSecurity,
+  };
+  return { ...settlement, config: { ...settlement.config, faithProfile } };
+}
+
+// ── Divine-mandate legitimacy coupling ───────────────────────────────────────
+// Royal / authoritative regimes lean on the patron deity: a secure, kindred patron PROPS
+// publicLegitimacy; a contested or DISCREDITED one (low legitimacy) ERODES it → feeds the
+// coup cluster. Because patronSecurity rides legitimacy (which folds in the compromise
+// chain), a corrupt regime's good church loses its claim AND drags the throne down with
+// it. Bounded + self-limiting per tick; scoped by government class.
+const MANDATE_GOV_WEIGHT = Object.freeze({ theocracy: 1, royal: 0.45 });
+const MANDATE_RANGE = 30;   // target swing from neutral (50) at the security extremes
+const MANDATE_PULL = 0.15;  // fraction of the gap to target closed per tick (gentle)
+const MANDATE_STEP = 2;     // hard per-tick clamp
+
+/** Government class → mandate dependence. @param {any} government @returns {number} */
+function mandateGovWeight(government) {
+  const g = String(government || '').toLowerCase();
+  if (/theocra/.test(g)) return MANDATE_GOV_WEIGHT.theocracy;
+  if (/monarch|feudal|autocra|imperial|empire|despot|magocra|kingdom|throne|royal|king|queen|emperor/.test(g)) return MANDATE_GOV_WEIGHT.royal;
+  return 0;  // merchant / council / republic / oligarchy / confederation — no divine mandate
+}
+
+/** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. @param {any} deity @param {any} government */
+function mandateAlignmentFit(deity, government) {
+  const g = String(government || '').toLowerCase();
+  if (/theocra/.test(g)) return 1;                                  // a theocracy IS its patron's faith
+  const temper = deity?.temperamentAxis, align = deity?.alignmentAxis;
+  let fit = 0.75;
+  if (/despot|autocra|imperial|empire/.test(g)) {                   // martial / authoritarian
+    if (temper === 'warlike') fit += 0.25; if (align === 'evil') fit += 0.1;
+    if (temper === 'peaceful') fit -= 0.25; if (align === 'good') fit -= 0.1;
+  } else if (/monarch|feudal|kingdom|throne|royal|king|queen/.test(g)) {   // traditional order
+    if (align === 'good' || align === 'neutral') fit += 0.15;
+    if (temper === 'peaceful' || temper === 'neutral') fit += 0.1;
+    if (align === 'evil') fit -= 0.15;
+  }
+  return clamp01(fit);
+}
+
+/**
+ * Apply the divine-mandate legitimacy term (reads config.faithProfile + primaryDeitySnapshot
+ * + powerStructure.government). A secure, kindred patron PROPS publicLegitimacy; a weak,
+ * contested, or discredited one ERODES it (feeding coups). The mandate pulls toward a
+ * bounded TARGET, so a persistently-contested patron WITHDRAWS its prop rather than crashing
+ * the throne to zero — other forces still move legitimacy freely. Identity no-op for
+ * non-royal/theocratic governments or absent faithProfile. @param {any} settlement
+ */
+export function applyDivineMandate(settlement) {
+  const profile = settlement?.config?.faithProfile;
+  const leg = settlement?.powerStructure?.publicLegitimacy;
+  if (!profile || !leg || typeof leg !== 'object' || typeof leg.score !== 'number') return settlement;
+  const government = settlement?.powerStructure?.government || settlement?.powerStructure?.governingName;
+  const weight = mandateGovWeight(government);
+  if (weight <= 0) return settlement;
+  const fit = mandateAlignmentFit(settlement?.config?.primaryDeitySnapshot, government);
+  const security = clamp01(Number(profile.patronSecurity) || 0);
+  const base = security - 0.45;                  // >0 props, <0 erodes
+  const fitFactor = base >= 0 ? fit : 1;         // a mismatched patron props LESS; erosion is fit-agnostic
+  const target = 50 + weight * base * MANDATE_RANGE * fitFactor;
+  const delta = Math.max(-MANDATE_STEP, Math.min(MANDATE_STEP, (target - leg.score) * MANDATE_PULL));
+  const nextScore = Math.round(Math.max(0, Math.min(100, leg.score + delta)));
+  if (nextScore === leg.score) return settlement;
+  return { ...settlement, powerStructure: { ...settlement.powerStructure, publicLegitimacy: { ...leg, score: nextScore } } };
+}
+
+/** Player-safe display read-model for the divine mandate (the faith panel). @param {any} settlement @returns {{ propping: boolean, phrase: string } | null} */
+export function divineMandateStatus(settlement) {
+  const profile = settlement?.config?.faithProfile;
+  if (!profile) return null;
+  if (mandateGovWeight(settlement?.powerStructure?.government || settlement?.powerStructure?.governingName) <= 0) return null;
+  const security = clamp01(Number(profile.patronSecurity) || 0);
+  if (profile.contested || security < 0.4) return { propping: false, phrase: 'A contested faith weakens the ruler’s divine mandate.' };
+  if (security > 0.6) return { propping: true, phrase: 'A dominant church shores up the ruler’s divine mandate.' };
+  return { propping: true, phrase: 'The faith lends the ruler a measure of divine mandate.' };
+}

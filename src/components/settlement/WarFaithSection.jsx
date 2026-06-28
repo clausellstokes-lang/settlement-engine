@@ -42,7 +42,7 @@ import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { governingFactionOf } from '../../domain/rulingPower.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
-import { patronContestOdds } from '../../domain/worldPulse/religionState.js';
+import { patronContestOdds, divineMandateStatus } from '../../domain/worldPulse/religionState.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { slugifyEntity, entityAnchor } from '../../domain/dossier/entityLinks.js';
 import { useStore } from '../../store/index.js';
@@ -190,18 +190,20 @@ export default function WarFaithSection({
           .sort((/** @type {any} */ a, /** @type {any} */ b) => b.share - a.share)
       : [];
     const contestOdds = religionState ? patronContestOdds(religionState) : null;
+    // Divine mandate: for a royal/theocratic regime, whether the faith props or weakens it.
+    const mandate = divineMandateStatus(settlement);
 
     return {
       status, exhaustionRaw, exhaustionBand, standing, prizes,
       mobilization, army, occupied, holdings, tradeTies,
-      aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds,
+      aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds, mandate,
     };
   }, [settlement, settlementId, worldState, regionalGraph, settlements, nameFor]);
 
   const {
     status, exhaustionRaw, exhaustionBand, standing, prizes,
     mobilization, army, occupied, holdings, tradeTies,
-    aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds,
+    aggressiveness, posture, deity, faithEffects, cults, livePantheon, contestOdds, mandate,
   } = model;
 
   // Dossier hyperlink SINK for the patron deity. The deity renders ONLY here, so
@@ -439,13 +441,21 @@ export default function WarFaithSection({
           happens next" forecast: deterministic odds; the seeded roll decides. ──── */}
       {contestOdds && (
         <Line strong="Faith contest:">
-          A rival challenges the patron&apos;s niche &mdash; odds next turn:{' '}
+          A rival challenges the patron&apos;s niche. Odds next turn:{' '}
           {contestOdds.map((o, i) => (
             <span key={o.deityRef}>
               {i > 0 ? ', ' : ''}
               <span style={{ fontWeight: 700, color: o.isPatron ? INK_BROWN : RED }}>{o.name}</span> {Math.round(o.odds * 100)}%
             </span>
           ))}.
+        </Line>
+      )}
+
+      {/* ── Divine mandate: for a royal/theocratic regime, whether the faith props or
+          weakens its legitimacy (the religion → governance → coup coupling). ────── */}
+      {mandate && (
+        <Line strong="Divine mandate:">
+          <span style={{ color: mandate.propping ? GREEN : RED, fontWeight: 700 }}>{mandate.phrase}</span>
         </Line>
       )}
 
@@ -460,7 +470,7 @@ export default function WarFaithSection({
               return (
                 <li key={d.deityRef} style={{ fontSize: FS.xs, color: BODY, marginBottom: 2, lineHeight: 1.4 }}>
                   <span style={{ fontWeight: 700, color: INK_BROWN }}>{d.name}</span>
-                  {d.isPatron ? ' (patron)' : ''} &mdash; {d.share}% · {d.standing} ·{' '}
+                  {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
                   <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>{' '}
                   <span style={{ color: MUTED }}>(legitimacy {Math.round(d.legitimacy * 100)}%)</span>
                 </li>

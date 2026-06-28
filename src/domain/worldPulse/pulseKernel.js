@@ -18,6 +18,7 @@ import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
 import { advanceReligionStates } from './religiousContest.js';
+import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
@@ -959,9 +960,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // capture transitions included), and this file owns the pulse sequencing.
   // Identity no-op per settlement: an untouched roster keeps its reference.
   const settlementUpdates = applied.settlementUpdates.map(update => {
-    const projected = projectFactionStatesOntoSettlement(
+    let projected = projectFactionStatesOntoSettlement(
       update.settlement, memoryState.factionStates, update.saveId, { tick: worldState.tick },
     );
+    // Project the live pantheon onto config.faithProfile, then apply the DIVINE-MANDATE
+    // legitimacy term — a secure/legitimate patron props the throne; a contested or
+    // discredited one erodes it (feeding the coup cluster). No-op without religionStates,
+    // a non-royal/theocratic government, or a deity-free settlement (byte-identical).
+    if (nextReligionStates) {
+      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId);
+      projected = applyDivineMandate(projected);
+    }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
   const pulseRecord = {

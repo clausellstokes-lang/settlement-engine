@@ -154,6 +154,20 @@ describe('WarFaithSection — live pantheon + legitimacy + contest odds', () => 
     expect(root.textContent).toMatch(/%/);
   });
 
+  test('a theocracy with a contested patron shows a weakened divine mandate', () => {
+    const theocracy = {
+      ...warTown,
+      config: { ...warTown.config, faithProfile: { patron: { name: 'Maug' }, deities: [], contested: true, patronSecurity: 0.2 } },
+      powerStructure: { government: 'Theocratic Council', factions: warTown.powerStructure.factions },
+    };
+    const { getByTestId } = render(
+      <WarFaithSection settlement={theocracy} settlementId="A" worldState={schismWorldState} forceLevel="standard" />,
+    );
+    const root = getByTestId('war-faith-section');
+    expect(root.textContent).toMatch(/Divine mandate/i);
+    expect(root.textContent).toMatch(/weakens|contested/i);
+  });
+
   test('a single-creed pantheon shows no contest forecast', () => {
     const calmWorld = { religionStates: { A: { patronRef: 'd.maug', deities: { 'd.maug': { deityRef: 'd.maug', snapshot: { name: 'Maug' }, niche: 'warlike:evil', share: 100, standing: 'ascendant', legitimacy: 0.7, suppressed: false } } } } };
     const { getByTestId } = render(
