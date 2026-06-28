@@ -52,11 +52,25 @@ function Line({ label, children, tone = 'ink' }) {
   );
 }
 
+// 0..1 legitimacy → band + PDF tone. Mirrors WarFaithSection.legitimacyBand (same
+// thresholds) so the printed pantheon's bands match the screen exactly.
+function legitimacyBand(v) {
+  if (v >= 0.75) return { label: 'secure', tone: 'good' };
+  if (v >= 0.5) return { label: 'established', tone: 'gold' };
+  if (v >= 0.25) return { label: 'tenuous', tone: 'gold' };
+  return { label: 'contested', tone: 'bad' };
+}
+
 export function FaithWar({ settlement, narrativeMode, vm }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
   const { posture, exhaustion, standing, tradeWars, deity, pantheon, realmArcs } = lw;
+  // Per-settlement living pantheon (cults + standings + legitimacy + contest + mandate).
+  const livePantheon = Array.isArray(lw.livePantheon) ? lw.livePantheon : [];
+  const contestOdds = Array.isArray(lw.contestOdds) ? lw.contestOdds : null;
+  const mandate = lw.mandate || null;
+  const cults = Array.isArray(lw.cults) ? lw.cults : [];
   // B-track heuristic surfaces (player-safe; mirror the screen WarFaithSection).
   const mobilization = lw.mobilization || null;
   const army = lw.army || null;
@@ -214,6 +228,44 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
                 </View>
               ))}
             </View>
+          )}
+        </View>
+      )}
+
+      {/* ── Living pantheon: this settlement's own creeds (cults + standings +
+            LEGITIMACY), the patron-contest forecast, and the divine mandate. ── */}
+      {(livePantheon.length > 1 || cults.length > 0 || contestOdds || mandate) && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>LIVING PANTHEON</Text>
+          {cults.length > 0 && (
+            <Line label="Cults:" tone="gold">
+              {cults.map((c, i) => `${i > 0 ? ', ' : ''}${c.name}${c.alignmentAxis ? ` (${c.alignmentAxis})` : ''}`).join('')}
+            </Line>
+          )}
+          {livePantheon.length > 1 && livePantheon.map((d, i) => {
+            const band = legitimacyBand(d.legitimacy);
+            return (
+              <View key={i} style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
+                <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: d.isPatron ? palette.ink : palette.second, width: 120 }}>
+                  {d.name}{d.isPatron ? ' (patron)' : ''}
+                </Text>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], flex: 1 }}>
+                  {d.share}% · {cap(d.standing)} · legitimacy <Text style={{ color: palette[band.tone] }}>{band.label}</Text>
+                </Text>
+              </View>
+            );
+          })}
+          {contestOdds && contestOdds.length > 0 && (
+            <Line label="Faith contest:" tone="bad">
+              A rival presses the patron&apos;s niche. Odds next turn:{' '}
+              {contestOdds.map((o, i) => `${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`).join('')}.
+            </Line>
+          )}
+          {mandate && (
+            <Line label="Divine mandate:" tone={mandate.propping ? 'good' : 'bad'}>
+              {mandate.phrase}
+            </Line>
           )}
         </View>
       )}
