@@ -47,7 +47,7 @@ export const WORKSHOP_GATES = Object.freeze({
   },
   religionDynamicsEnabled: {
     label: 'Awaken religion',
-    description: 'Deities contest converts and gain seats, but only once a settlement carries a primary deity. Off (or deity-free) = no faith drift.',
+    description: 'Deities contest converts and gain seats, but only once a settlement carries a patron deity (or an imposed cult). Off (or deity-free) = no faith drift.',
   },
 });
 

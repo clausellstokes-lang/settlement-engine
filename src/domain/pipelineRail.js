@@ -23,14 +23,16 @@
 import { tracesByStep } from './trace.js';
 import { explainEntity } from './explanation.js';
 
+/** @param {any} trace */
 function reasonLines(trace) {
-  return (trace.causes || []).map(c =>
+  return (trace.causes || []).map((/** @type {any} */ c) =>
     c.reason || `${c.source}: ${c.effect}`
   );
 }
 
+/** @param {any} trace */
 function downstreamLines(trace) {
-  return (trace.downstreamEffects || []).map(d =>
+  return (trace.downstreamEffects || []).map((/** @type {any} */ d) =>
     d.reason || `${d.target}: ${d.effect}`
   );
 }
@@ -47,7 +49,7 @@ export function expandPipelineStep(settlement, stepName) {
     return { step: stepName || null, decisions: [], summary: [] };
   }
   const traces = tracesByStep(settlement, stepName);
-  const decisions = traces.map(t => ({
+  const decisions = traces.map((/** @type {any} */ t) => ({
     targetType: t.targetType || null,
     targetId: t.targetId || null,
     result: t.result || null,
@@ -74,6 +76,7 @@ export function expandPipelineStep(settlement, stepName) {
 /**
  * List every step that has at least one trace, with a count.
  * Useful for the rail's overview density indicator.
+ * @param {any} settlement
  */
 export function pipelineStepSummary(settlement) {
   if (!settlement) return [];
@@ -86,7 +89,8 @@ export function pipelineStepSummary(settlement) {
   return Array.from(out.values());
 }
 
-/** Total trace count. Cheap dashboard tile. */
+/** Total trace count. Cheap dashboard tile.
+ *  @param {any} settlement */
 export function totalTraceCount(settlement) {
   return Array.isArray(settlement?.simulationTrace) ? settlement.simulationTrace.length : 0;
 }

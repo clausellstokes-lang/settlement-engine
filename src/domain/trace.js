@@ -54,6 +54,7 @@ const ALLOWED_TARGET_TYPES = new Set([
   'condition', 'district', 'history',
 ]);
 
+/** @param {any} trace */
 function validateTrace(trace) {
   // Validation is cheap (a handful of property checks); always-on. If
   // the cost ever shows up in a profile, gate this behind a build-time
@@ -115,6 +116,10 @@ function validateTrace(trace) {
  * Mutates `ctx.simulationTrace` in place (initializing it if absent).
  * Returns the recorded trace for chaining.
  */
+/**
+ * @param {any} ctx
+ * @param {any} trace
+ */
 export function recordTrace(ctx, trace) {
   if (!ctx || typeof ctx !== 'object') return null;
   validateTrace(trace);
@@ -150,6 +155,10 @@ export function recordTrace(ctx, trace) {
  * Record many traces in one call. Useful for steps that emit a batch of
  * traces (e.g. assembleInstitutions emitting one per selected institution).
  */
+/**
+ * @param {any} ctx
+ * @param {any} traces
+ */
 export function recordTraces(ctx, traces) {
   if (!Array.isArray(traces)) return;
   for (const t of traces) recordTrace(ctx, t);
@@ -159,38 +168,57 @@ export function recordTraces(ctx, traces) {
 // Pure read-only helpers. Never mutate. Safe to call from React components,
 // PDF renderers, AI prompt assemblers, etc.
 
-/** All traces on a settlement, in insertion order. */
+/**
+ * All traces on a settlement, in insertion order.
+ * @param {any} settlement
+ */
 export function getTraces(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
   return Array.isArray(settlement.simulationTrace) ? settlement.simulationTrace : [];
 }
 
-/** Traces affecting a specific entity id. */
+/**
+ * Traces affecting a specific entity id.
+ * @param {any} settlement
+ * @param {any} targetId
+ */
 export function tracesFor(settlement, targetId) {
   if (!targetId) return [];
-  return getTraces(settlement).filter(t => t.targetId === targetId);
+  return getTraces(settlement).filter((/** @type {any} */ t) => t.targetId === targetId);
 }
 
-/** Traces emitted by a specific pipeline step. */
+/**
+ * Traces emitted by a specific pipeline step.
+ * @param {any} settlement
+ * @param {any} stepName
+ */
 export function tracesByStep(settlement, stepName) {
   if (!stepName) return [];
-  return getTraces(settlement).filter(t => t.step === stepName);
+  return getTraces(settlement).filter((/** @type {any} */ t) => t.step === stepName);
 }
 
-/** Traces of a specific target type ('institution', 'faction', etc.). */
+/**
+ * Traces of a specific target type ('institution', 'faction', etc.).
+ * @param {any} settlement
+ * @param {any} targetType
+ */
 export function tracesByType(settlement, targetType) {
   if (!targetType) return [];
-  return getTraces(settlement).filter(t => t.targetType === targetType);
+  return getTraces(settlement).filter((/** @type {any} */ t) => t.targetType === targetType);
 }
 
 /**
  * Reverse causality: which traces list `sourceId` in any of their causes?
  * Useful for "what did this stressor end up causing?" style queries.
  */
+/**
+ * @param {any} settlement
+ * @param {any} sourceId
+ */
 export function tracesCausedBy(settlement, sourceId) {
   if (!sourceId) return [];
-  return getTraces(settlement).filter(t =>
-    Array.isArray(t.causes) && t.causes.some(c => c.source === sourceId)
+  return getTraces(settlement).filter((/** @type {any} */ t) =>
+    Array.isArray(t.causes) && t.causes.some((/** @type {any} */ c) => c.source === sourceId)
   );
 }
 
@@ -198,10 +226,14 @@ export function tracesCausedBy(settlement, sourceId) {
  * Forward causality: which traces declare `targetId` as a downstream
  * effect? "What feeds into the public-order subsystem?"
  */
+/**
+ * @param {any} settlement
+ * @param {any} targetId
+ */
 export function tracesAffecting(settlement, targetId) {
   if (!targetId) return [];
-  return getTraces(settlement).filter(t =>
-    Array.isArray(t.downstreamEffects) && t.downstreamEffects.some(d => d.target === targetId)
+  return getTraces(settlement).filter((/** @type {any} */ t) =>
+    Array.isArray(t.downstreamEffects) && t.downstreamEffects.some((/** @type {any} */ d) => d.target === targetId)
   );
 }
 
@@ -209,14 +241,15 @@ export function tracesAffecting(settlement, targetId) {
  * Render-friendly summary of a single trace — short lines suitable for
  * a tooltip or expanded rail step. Pure; returns strings, not JSX.
  */
+/** @param {any} trace */
 export function summarizeTrace(trace) {
   if (!trace) return null;
-  const causeLines = (trace.causes || []).map(c => {
+  const causeLines = (trace.causes || []).map((/** @type {any} */ c) => {
     const lead = c.effect ? `${c.effect}` : '';
     const tail = c.reason ? `. ${c.reason}` : '';
     return `${c.source}${lead ? ' (' + lead + ')' : ''}${tail}`;
   });
-  const downstreamLines = (trace.downstreamEffects || []).map(d => {
+  const downstreamLines = (trace.downstreamEffects || []).map((/** @type {any} */ d) => {
     return `${d.target}: ${d.effect}${d.reason ? `. ${d.reason}` : ''}`;
   });
   return {

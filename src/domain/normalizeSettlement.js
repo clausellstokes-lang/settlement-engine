@@ -59,6 +59,7 @@ import { migrateSettlementToLatest } from './settlementMigrations.js';
  * Hash a seed string into a stable, opaque id. Same seed → same id.
  * Not cryptographically strong — just a deterministic short identifier
  * that survives reruns of the same seed.
+ * @param {any} seed
  */
 function idFromSeed(seed) {
   const s = String(seed);
@@ -83,6 +84,7 @@ function idFromSeed(seed) {
 // settlement always normalizes to the same id. Math.random here produced a fresh id
 // on every load, violating this file's idempotency contract
 // (normalize(normalize(s)) === normalize(s)).
+/** @param {any} settlement */
 function contentId(settlement) {
   return idFromSeed(JSON.stringify({
     name: settlement?.name ?? null,
@@ -94,10 +96,12 @@ function contentId(settlement) {
 /**
  * Resolve a canonical field value by checking the canonical key first,
  * then each declared alias. Returns the first defined value found.
+ * @param {any} settlement
+ * @param {any} canonicalKey
  */
 function resolveAliased(settlement, canonicalKey) {
   if (settlement[canonicalKey] !== undefined) return settlement[canonicalKey];
-  const aliases = FIELD_ALIASES[canonicalKey] || [];
+  const aliases = /** @type {Record<string, string[]>} */ (FIELD_ALIASES)[canonicalKey] || [];
   for (const alias of aliases) {
     if (settlement[alias] !== undefined) return settlement[alias];
   }
@@ -108,7 +112,7 @@ function resolveAliased(settlement, canonicalKey) {
  * Convert a settlement (any shape — legacy, partially-canonical, fully
  * canonical) into a canonical settlement.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Object} New object — input is not mutated.
  */
 export function normalizeSettlement(settlement) {
@@ -175,6 +179,7 @@ export function normalizeSettlement(settlement) {
  * Whether a settlement appears to have been normalized at least once
  * (has version stamps and a stable id). Useful for short-circuiting
  * repeated normalize calls in hot paths.
+ * @param {any} settlement
  */
 export function isNormalized(settlement) {
   return Boolean(

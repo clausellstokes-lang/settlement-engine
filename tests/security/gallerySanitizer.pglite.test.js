@@ -52,8 +52,10 @@ function sqlNpcAllowed(sql) {
 function jsNpcAllowed() {
   const js = readFileSync(PUBLIC_SAFE_JS, 'utf-8');
   // The npcs map projects `key: npc.key` for each kept field. Capture the LHS keys
-  // inside the `clean.npcs = clean.npcs.map(npc => ({ ... }))` block.
-  const block = js.match(/clean\.npcs\s*=\s*clean\.npcs\.map\(npc\s*=>\s*\(\{([\s\S]*?)\}\)\)/);
+  // inside the `clean.npcs = clean.npcs.map(npc => ({ ... }))` block. Tolerate an
+  // inline JSDoc cast on the param (`((/** @type {any} */ npc) => ...)`) so a strict
+  // annotation never silently breaks this allow-list sync guard.
+  const block = js.match(/clean\.npcs\s*=\s*clean\.npcs\.map\(\s*\(?\s*(?:\/\*\*[\s\S]*?\*\/\s*)?npc\s*\)?\s*=>\s*\(\{([\s\S]*?)\}\)\)/);
   if (!block) throw new Error('npc projection block not found in publicSafe.js');
   return new Set([...block[1].matchAll(/(\w+):\s*npc\./g)].map((x) => x[1]));
 }

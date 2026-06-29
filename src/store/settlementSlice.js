@@ -66,6 +66,8 @@ import {
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { WAR_STRESSOR_TYPES } from '../domain/worldPulse/warStressorTypes.js';
 import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
+import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
+import { TIER_ORDER, popToTier } from '../data/constants.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
@@ -2105,6 +2107,89 @@ export const createSettlementSlice = (set, get) => ({
       targetId: deityRefId,
       payload: { deityRef: deityRefId, snapshot },
     });
+  },
+
+  /**
+   * Impose (or remove) a CULT-level deity on the current settlement — the cult
+   * counterpart of setPrimaryDeity. Same embed-on-assign bridge: resolve the ref
+   * against customContent HERE, dispatch IMPOSE_CULT with the snapshot in the
+   * payload, and let the pure handler reconcile it against tier capacity + niche.
+   *
+   * Pass a falsy `deityRefId` to remove the cult named by `removeRef` (or, with no
+   * removeRef, clear all cults). Before dispatching an ADD we run the SAME pure
+   * reconciliation as the handler and refuse (return null, no log entry) when the
+   * cult can't be seated — so a full small settlement or a patron-niche clash never
+   * logs a no-op. Returns the resulting log entry, or null if nothing happened.
+   *
+   * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to remove
+   * @param {string|null} [removeRef]  when clearing, the specific cult ref to drop
+   */
+  imposeCult: (deityRefId, removeRef = null) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const config = state.settlement.config || {};
+
+    if (!deityRefId) {
+      // Remove path — a no-op if there's nothing to drop.
+      const cults = Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [];
+      if (!cults.length) return null;
+      if (removeRef && !cults.some(c => String(c?._deityRef || c?.name || '') === String(removeRef))) return null;
+      return state.applyEvent({
+        type: 'IMPOSE_CULT',
+        targetId: removeRef || null,
+        payload: { deityRef: removeRef || null, snapshot: null },
+      });
+    }
+
+    // Resolve the ref → authored deity → frozen snapshot (intent time, store layer).
+    const registry = buildRegistryFromStore(get);
+    const entry = registry.resolve(deityRefId);
+    const raw = entry?.raw;
+    if (!raw) return null;                              // unknown ref — refuse.
+    const snapshot = {
+      name: raw.name,
+      alignmentAxis: raw.alignmentAxis,
+      temperamentAxis: raw.temperamentAxis,
+      rankAxis: raw.rankAxis,
+      lawAxis: raw.lawAxis,
+      ...(raw.domain ? { domain: raw.domain } : {}),
+    };
+    // Pre-check placement with the same pure rule the handler uses, so a refused
+    // imposition never logs a no-op event.
+    const probe = reconcileCultImposition({
+      patron: config.primaryDeitySnapshot || null,
+      cults: Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [],
+      tier: state.settlement.tier || config.tier || 'village',
+      deity: { _deityRef: deityRefId, ...snapshot },
+    });
+    if (probe.action === 'refused') return null;
+    return state.applyEvent({
+      type: 'IMPOSE_CULT',
+      targetId: deityRefId,
+      payload: { deityRef: deityRefId, snapshot },
+    });
+  },
+
+  /**
+   * Force the current settlement up ('promotion') or down ('demotion') one size tier — a
+   * DM override of the organic tier-drift system. Population resettles into the new band
+   * and the institution roster reconciles (promotion raises tier-appropriate institutions;
+   * demotion leaves the unsupported ones as ruined remnants), all via the same world-pulse
+   * apply path an organic shift uses. Refuses (null, no log) at the cap (metropolis) or
+   * floor (thorp). Returns the resulting log entry, or null.
+   *
+   * @param {'promotion'|'demotion'} direction
+   */
+  shiftTier: (direction) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const dir = direction === 'demotion' ? 'demotion' : 'promotion';
+    const fromTier = state.settlement.tier || state.settlement.config?.tier || popToTier(Number(state.settlement.population) || 0);
+    const idx = TIER_ORDER.indexOf(fromTier);
+    if (idx < 0) return null;
+    if (dir === 'promotion' && idx >= TIER_ORDER.length - 1) return null;   // already a metropolis
+    if (dir === 'demotion' && idx <= 0) return null;                        // already a thorp
+    return state.applyEvent({ type: 'SHIFT_TIER', targetId: null, payload: { direction: dir } });
   },
 
   /**

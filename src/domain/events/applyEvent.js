@@ -23,7 +23,7 @@ import { captureEventUndoSnapshot } from './undoEvent.js';
  * @param {Object} args.settlement
  * @param {SystemState} args.systemState  before-state for the log entry
  * @param {Event}  args.event
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {(string|null)} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {{ logEntry: EventLogEntry, nextSystemState: SystemState, nextSettlement: Object }}
  */
 export function applyEvent({ settlement, systemState, event, now = null }) {

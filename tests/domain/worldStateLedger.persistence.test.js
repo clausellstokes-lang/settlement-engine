@@ -268,4 +268,28 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     // The whole hot state is byte-stable across a second normalize pass.
     expect(ensureWorldState(out, CAMPAIGN)).toEqual(out);
   });
+
+  // MIGRATION v2: the pantheon renamed its leading deity "chief" → "patron". A
+  // persisted religionStates entry carrying chiefRef/chiefHeld/chiefChallengeTicks
+  // is renamed in place; an already-migrated (or deity-free) state is untouched.
+  test('worldState v2 migration renames religionStates chiefRef → patronRef (idempotent)', () => {
+    const legacy = {
+      tick: 3,
+      religionStates: {
+        a: { deities: { x: { share: 100 } }, chiefRef: 'x', chiefHeld: 0, chiefChallengeTicks: 2, contestedTicks: 1, capacity: 3 },
+      },
+    };
+    const out = runWorldStateMigrations(legacy);
+    expect(out.religionStates.a.patronRef).toBe('x');
+    expect(out.religionStates.a.patronChallengeTicks).toBe(2);
+    expect(out.religionStates.a).not.toHaveProperty('chiefRef');
+    expect(out.religionStates.a.contestedTicks).toBe(1);   // unrelated keys preserved
+    expect(out.schemaVersion).toBe(2);
+
+    // Idempotent: re-running on already-patron state is a no-op (no chief keys to map).
+    expect(runWorldStateMigrations(out)).toEqual(out);
+    // Deity-free / no religionStates → passes straight through.
+    const bare = { tick: 1 };
+    expect(runWorldStateMigrations(bare)).toBe(bare);
+  });
 });

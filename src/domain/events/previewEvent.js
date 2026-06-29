@@ -31,6 +31,7 @@ import { runEventPipeline } from './eventPipeline.js';
  * @returns {EventPreview}
  */
 export function previewEvent({ settlement, systemState, event }) {
+  /** @type {any} */
   const result = runEventPipeline(settlement, event);
   // Note: we intentionally do NOT return result.nextSettlement here.
   // The mutated settlement is intentionally omitted from the preview

@@ -1,7 +1,7 @@
 /**
- * PrimaryDeityPicker — assign (or clear) the current settlement's primary deity.
- * This is the UI half of the embed-on-assign bridge: the
- * picker dispatches the store action `setPrimaryDeity(refId)`, which resolves the
+ * PrimaryDeityPicker — assign (or clear) the current settlement's PATRON deity
+ * (the leading creed of its pantheon). This is the UI half of the embed-on-assign
+ * bridge: the picker dispatches the store action `setPrimaryDeity(refId)`, which resolves the
  * authored deity → a frozen snapshot and commits it on the settlement record via
  * the SET_PRIMARY_DEITY canon event. The pulse never sees this picker or the
  * store — only the embedded snapshot.
@@ -47,7 +47,7 @@ export default function PrimaryDeityPicker() {
   const heading = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
       <span style={{ fontSize: FS.xs, fontWeight: 700, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-        Primary Deity
+        Patron Deity
       </span>
     </div>
   );
@@ -83,12 +83,12 @@ export default function PrimaryDeityPicker() {
         <>
           <select
             id="primary-deity-select"
-            aria-label="Primary deity"
+            aria-label="Patron deity"
             value={currentRef}
             onChange={(e) => setPrimaryDeity?.(e.target.value || null)}
             style={{ width: '100%', padding: '5px 8px', border: `1px solid ${BORDER}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD }}
           >
-            <option value="">No primary deity (dormant)</option>
+            <option value="">No patron deity (dormant)</option>
             {deities.map((d) => {
               const ref = d.refId || customRefIdFromItem(d.raw);
               return <option key={ref} value={ref}>{d.name}</option>;

@@ -114,6 +114,10 @@ const PRESERVATION_RULES = Object.freeze({
   },
 });
 
+/**
+ * @param {any} rule
+ * @param {any} tag
+ */
 function shouldPreserve(rule, tag) {
   if (rule === 'always') return true;
   if (rule === 'never')  return false;
@@ -135,9 +139,10 @@ function shouldPreserve(rule, tag) {
  * @returns {Object} RegenerationPlan
  */
 export function buildRegenerationPlan(settlement, options = {}) {
-  const mode = REGENERATION_MODES.includes(options.mode) ? options.mode : 'rebalance';
+  /** @type {any} */
+  const mode = REGENERATION_MODES.includes(/** @type {any} */ (options.mode)) ? options.mode : 'rebalance';
   const contributors = [];
-  if (!REGENERATION_MODES.includes(options.mode)) {
+  if (!REGENERATION_MODES.includes(/** @type {any} */ (options.mode))) {
     contributors.push({
       source: 'options.mode',
       effect: 'fallback',
@@ -157,17 +162,19 @@ export function buildRegenerationPlan(settlement, options = {}) {
       preserveEntities: [],
       rerollEntities: [],
       preserveFields: [...HARD_ANCHOR_FIELDS],
-      rerollSubsystems: [...MODE_SUBSYSTEM_REROLLS[mode]],
+      rerollSubsystems: [.../** @type {Record<string, string[]>} */ (MODE_SUBSYSTEM_REROLLS)[mode]],
       contributors,
     };
   }
 
   const cat = entityCatalog(settlement);
+  /** @type {any[]} */
   const preserveEntities = [];
+  /** @type {any[]} */
   const rerollEntities = [];
 
   for (const e of cat) {
-    const rule = PRESERVATION_RULES[mode]?.[e.type] || 'always';
+    const rule = /** @type {Record<string, Record<string, string>>} */ (PRESERVATION_RULES)[mode]?.[e.type] || 'always';
     // Look up the entity on the settlement to get its tag. The
     // catalog entry only has { type, id, label }, so for tagging we
     // re-fetch from the appropriate settlement array.
@@ -196,13 +203,17 @@ export function buildRegenerationPlan(settlement, options = {}) {
     preserveEntities,
     rerollEntities,
     preserveFields: [...HARD_ANCHOR_FIELDS],
-    rerollSubsystems: [...MODE_SUBSYSTEM_REROLLS[mode]],
+    rerollSubsystems: [.../** @type {Record<string, string[]>} */ (MODE_SUBSYSTEM_REROLLS)[mode]],
     contributors,
   };
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any} catalogEntry
+ */
 function lookupTagForEntity(settlement, catalogEntry) {
   // Resolve the underlying object (institution, faction, etc.) so we
   // can tag it. For derived entities (system_variable, capacity,
@@ -220,7 +231,7 @@ function lookupTagForEntity(settlement, catalogEntry) {
   const type = catalogEntry.type;
 
   if (type === 'institution') {
-    const inst = (settlement.institutions || []).find(i =>
+    const inst = (settlement.institutions || []).find((/** @type {any} */ i) =>
       i?.id === id || `institution.${snakeCase(i?.name || '')}` === id);
     return tagEntityCanon(inst || {});
   }
@@ -231,19 +242,19 @@ function lookupTagForEntity(settlement, catalogEntry) {
                   || settlement.power?.factions
                   || settlement.factions
                   || [];
-    const f = factions.find(fac =>
+    const f = factions.find((/** @type {any} */ fac) =>
       fac?.id === id || /** @type {any} */ (deriveFactionProfile(fac, settlement))?.id === id);
     return tagEntityCanon(f || {});
   }
   if (type === 'npc') {
     // Catalog stamps `npc.id || npc.<slug>`; legacy NPCs lacking a stored id
     // were missed the same way factions were (see note above).
-    const n = (settlement.npcs || []).find(npc =>
+    const n = (settlement.npcs || []).find((/** @type {any} */ npc) =>
       npc?.id === id || `npc.${snakeCase(npc?.name || 'unnamed')}` === id);
     return tagEntityCanon(n || {});
   }
   if (type === 'condition') {
-    const c = (settlement.activeConditions || []).find(cond =>
+    const c = (settlement.activeConditions || []).find((/** @type {any} */ cond) =>
       cond?.id === id || /** @type {any} */ (deriveActiveCondition(cond))?.id === id);
     return tagEntityCanon(c || {});
   }

@@ -61,6 +61,7 @@ export const BAND_HINT = {
  * Clamp a raw score to the valid 0–100 range. Defensive — derivation
  * code can produce out-of-range values when summing many small drivers,
  * and we want band-mapping to be total.
+ * @param {number} value
  */
 export function clamp01(value) {
   if (!Number.isFinite(value)) return 50;
@@ -75,6 +76,7 @@ export function clamp01(value) {
  * rather than relative because a 10-point drop from Stable to Strained
  * means the same thing as a 10-point drop from Strained to Vulnerable —
  * it's a real shift in band probability.
+ * @param {number} delta
  */
 export function severityFor(delta) {
   const m = Math.abs(delta);

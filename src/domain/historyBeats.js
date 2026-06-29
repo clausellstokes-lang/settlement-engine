@@ -33,6 +33,7 @@
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
+/** @param {...any} candidates */
 function firstNonEmpty(...candidates) {
   for (const c of candidates) {
     if (typeof c === 'string' && c.trim()) return c.trim();
@@ -47,11 +48,18 @@ const SEVERITY_RANK = Object.freeze({
   minor:        1,
 });
 
-/** Total order on severity. Unknown values rank below 'minor'. */
+/**
+ * Total order on severity. Unknown values rank below 'minor'.
+ * @param {any} s
+ */
 function severityScore(s) {
-  return SEVERITY_RANK[(s || '').toLowerCase()] || 0;
+  return /** @type {Record<string, number>} */ (SEVERITY_RANK)[(s || '').toLowerCase()] || 0;
 }
 
+/**
+ * @param {any[]} arr
+ * @param {(x: any) => number} scoreFn
+ */
 function _topBy(arr, scoreFn) {
   if (!Array.isArray(arr) || !arr.length) return null;
   let best = arr[0];
@@ -68,6 +76,7 @@ function _topBy(arr, scoreFn) {
 
 // ── Per-beat derivations ────────────────────────────────────────────────
 
+/** @param {any} settlement */
 function deriveFoundingCause(settlement) {
   const founding = settlement?.history?.founding;
   if (!founding) return null;
@@ -96,6 +105,7 @@ function deriveFoundingCause(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function deriveFirstProsperitySource(settlement) {
   // Strongest signal today: the topExport on the economic state — that's
   // what the settlement currently trades on. We hedge with the founding
@@ -121,6 +131,7 @@ function deriveFirstProsperitySource(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function deriveDefiningCrisis(settlement) {
   // The defining crisis is the most severe historical event. Among
   // events of equal severity, prefer the older one — those leave deeper
@@ -154,12 +165,13 @@ function deriveDefiningCrisis(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function deriveInstitutionalLegacy(settlement) {
   // Events whose lastingEffects mention 'institution' or that have an
   // institutional effect listed in some form. These are the events that
   // built the present-day structural character.
   const events = settlement?.history?.historicalEvents || [];
-  const carriers = events.filter(e => {
+  const carriers = events.filter(/** @param {any} e */ e => {
     const effects = e?.lastingEffects;
     if (!Array.isArray(effects) || !effects.length) return false;
     return effects.some(ef =>
@@ -204,6 +216,7 @@ function deriveInstitutionalLegacy(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function deriveRecentDisruption(settlement) {
   // Most recent significant disruption — within the last 30 years AND
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
@@ -213,9 +226,9 @@ function deriveRecentDisruption(settlement) {
   // (they ARE the recent disruption) and `0 || Infinity` silently excluded
   // every one of them.
   const recent = events
-    .filter(e => severityScore(e.severity) >= SEVERITY_RANK.major)
-    .filter(e => (Number.isFinite(e.yearsAgo) ? e.yearsAgo : Infinity) <= 30)
-    .sort((a, b) => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : 0) - (Number.isFinite(b.yearsAgo) ? b.yearsAgo : 0));
+    .filter(/** @param {any} e */ e => severityScore(e.severity) >= SEVERITY_RANK.major)
+    .filter(/** @param {any} e */ e => (Number.isFinite(e.yearsAgo) ? e.yearsAgo : Infinity) <= 30)
+    .sort(/** @param {any} a @param {any} b */ (a, b) => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : 0) - (Number.isFinite(b.yearsAgo) ? b.yearsAgo : 0));
 
   if (recent.length > 0) {
     const top = recent[0];
@@ -234,8 +247,8 @@ function deriveRecentDisruption(settlement) {
   // since some settlements have nothing major in the last 30 years.
   const anns = settlement?.history?.legacyAnnotations || [];
   const recentAnn = anns
-    .filter(a => (a.yearsAgo || Infinity) <= 50)
-    .sort((a, b) => (a.yearsAgo || 0) - (b.yearsAgo || 0))[0];
+    .filter(/** @param {any} a */ a => (a.yearsAgo || Infinity) <= 50)
+    .sort(/** @param {any} a @param {any} b */ (a, b) => (a.yearsAgo || 0) - (b.yearsAgo || 0))[0];
   if (recentAnn) {
     return {
       key: 'recentDisruption',
@@ -249,6 +262,7 @@ function deriveRecentDisruption(settlement) {
   return null;
 }
 
+/** @param {any} settlement */
 function deriveUnresolvedWound(settlement) {
   // Pulled from currentTensions. The generator produces tensions as
   // strings OR objects depending on the source — handle both.
@@ -270,6 +284,7 @@ function deriveUnresolvedWound(settlement) {
   };
 }
 
+/** @param {any} settlement */
 function deriveLikelyFuture(settlement) {
   // Pull from history.currentTensions trajectory if available, else
   // power-structure stability. Mirrors the simulationSpine logic so the
@@ -357,9 +372,10 @@ export function deriveHistoryBeats(settlement) {
  * Render the beats as an ordered array of [label, text, key] tuples,
  * ready for the rail or PDF. Skips null beats so the consumer never
  * sees a hole.
+ * @param {any} settlement
  */
 export function historyBeatRows(settlement) {
-  const beats = deriveHistoryBeats(settlement);
+  const beats = /** @type {Record<string, any>} */ (deriveHistoryBeats(settlement));
   const order = [
     'foundingCause',
     'firstProsperitySource',
@@ -379,9 +395,11 @@ export function historyBeatRows(settlement) {
  * Diagnostic: which beats produced non-null output? Used by
  * distribution tests and future tuning to spot under-supplied
  * history fields.
+ * @param {any} settlement
  */
 export function historyBeatPresence(settlement) {
   const beats = deriveHistoryBeats(settlement);
+  /** @type {Record<string, boolean>} */
   const out = {};
   for (const [k, v] of Object.entries(beats)) out[k] = v != null;
   return out;

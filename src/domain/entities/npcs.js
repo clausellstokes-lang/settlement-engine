@@ -68,11 +68,11 @@ const IMPORTANCE_WEIGHT = {
  * tags each NPC at generation time; this is a fallback for legacy
  * saves.
  *
- * @param {Object} npc
+ * @param {any} npc
  * @returns {NpcImportance}
  */
 export function inferImportance(npc) {
-  if (npc?.importance && IMPORTANCE_WEIGHT[npc.importance] !== undefined) return npc.importance;
+  if (npc?.importance && /** @type {Record<string, number>} */ (IMPORTANCE_WEIGHT)[npc.importance] !== undefined) return npc.importance;
   // Power, leadership, or named-role NPCs are more likely "key"
   const role = String(npc?.role || npc?.title || '').toLowerCase();
   if (/high priest|patriarch|matriarch|archmage|dragon|lord mayor|noble lord|baron|baroness|duke|duchess/.test(role)) return 'pillar';
@@ -81,7 +81,8 @@ export function inferImportance(npc) {
   return 'minor';
 }
 
-/** Numeric weight (0-1) for propagation strength. */
+/** Numeric weight (0-1) for propagation strength.
+ *  @param {any} npc */
 export function importanceWeight(npc) {
   return IMPORTANCE_WEIGHT[inferImportance(npc)] ?? 0;
 }
@@ -232,6 +233,8 @@ export function killNpc(npc, eventId) {
  *
  * Returns the updated NPC plus the inverse impairments that should be
  * applied to the institution (negative-severity impairment = restore).
+ *
+ * @param {{ npc?: any, institutionId?: any, role?: any, quality?: any, factionAlignment?: any, importance?: any, influence?: any, eventId?: any }} args
  */
 export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, importance, influence, eventId }) {
   const updated = createNpc({
@@ -253,7 +256,7 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
   // from a kill event — handled by the reducer via withoutEventImpairments
   // — then optionally adding a positive-severity legitimacy bump for
   // popular replacements.
-  const Q = QUALITY[quality] || QUALITY.competent;
+  const Q = /** @type {Record<string, any>} */ (QUALITY)[quality] || QUALITY.competent;
   if (Q.legitimacyBoost > 0) {
     restorations.push({
       instId: institutionId,
@@ -290,6 +293,7 @@ const QUALITY = {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function slugify(s) {
   return String(s || '')
     .toLowerCase()
@@ -300,6 +304,7 @@ function slugify(s) {
 
 // Deterministic short hash (djb2). createNpc runs inside the pure, seeded event
 // pipeline — Math.random() here broke seed-replayability of stored settlements.
+/** @param {any} s */
 function shortHash(s) {
   let h = 0;
   const str = String(s);
@@ -307,6 +312,7 @@ function shortHash(s) {
   return Math.abs(h).toString(36).slice(0, 6).padStart(5, '0');
 }
 
+/** @param {any[]} arr */
 function dedupeIds(arr) {
   return [...new Set(arr.filter(Boolean))];
 }

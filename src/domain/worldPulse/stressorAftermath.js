@@ -51,6 +51,7 @@ const HISTORY_EVENT_TYPE = Object.freeze({
 
 const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
 
+/** @param {number} peak */
 function severityWord(peak) {
   if (peak >= 0.85) return 'catastrophic';
   if (peak >= 0.6) return 'major';
@@ -58,6 +59,7 @@ function severityWord(peak) {
   return 'minor';
 }
 
+/** @param {any} stressor */
 function residualText(stressor) {
   return (stressor.residualEffects || []).slice(0, 3).join(', ').replace(/_/g, ' ');
 }
@@ -66,11 +68,17 @@ function residualText(stressor) {
 // lastingEffects as a STRING ARRAY — generator-era events all use arrays, and
 // the renderers call .join/.map on it. A bare string would pass their
 // `?.length > 0` guards and crash the render.
+/** @param {any} stressor */
 function residualList(stressor) {
-  return (stressor.residualEffects || []).slice(0, 3).map(s => String(s).replace(/_/g, ' '));
+  return (stressor.residualEffects || []).slice(0, 3).map((/** @type {any} */ s) => String(s).replace(/_/g, ' '));
 }
 
-/** Wizard-News entries for stressors that resolved this tick. */
+/**
+ * Wizard-News entries for stressors that resolved this tick.
+ * @param {any[]} resolved
+ * @param {number} [tick]
+ * @param {any} [now]
+ */
 export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
   return resolved.map(stressor => ({
     id: `wizard_news.${tick}.aftermath.${stressor.id}`,
@@ -97,7 +105,12 @@ export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
   }));
 }
 
-/** Wizard-News entries for echoes that faded into history this tick. */
+/**
+ * Wizard-News entries for echoes that faded into history this tick.
+ * @param {any[]} graduated
+ * @param {number} [tick]
+ * @param {any} [now]
+ */
 export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
   return graduated.map(stressor => ({
     id: `wizard_news.${tick}.history.${stressor.id}`,
@@ -127,17 +140,17 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
  * the settlement's present-day past), and are capped so a long campaign
  * can't balloon the record. Idempotent per echo id.
  *
- * @param {Object} settlement
- * @param {Object} echo        the graduated stressor record
+ * @param {any} settlement
+ * @param {any} echo        the graduated stressor record
  * @param {number} tick
- * @returns {Object} new settlement (same reference when nothing changed)
+ * @returns {any} new settlement (same reference when nothing changed)
  */
 export function withCampaignHistoryEvent(settlement, echo, tick) {
   if (!settlement || !echo) return settlement;
   const history = settlement.history || {};
   const events = Array.isArray(history.historicalEvents) ? history.historicalEvents : [];
   const eventId = `campaign.${echo.id}.${echo.resolvedAt || tick}`;
-  if (events.some(e => e?.campaignEventId === eventId)) return settlement;
+  if (events.some((/** @type {any} */ e) => e?.campaignEventId === eventId)) return settlement;
 
   const peak = echo.peakSeverity ?? echo.severity ?? 0.3;
   const event = {
@@ -146,7 +159,7 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
     tick,
     yearsAgo: 0,
     name: echo.label,
-    type: HISTORY_EVENT_TYPE[echo.type] || 'external_threat',
+    type: /** @type {Record<string, string>} */ (HISTORY_EVENT_TYPE)[echo.type] || 'external_threat',
     description: `${echo.label} gripped the settlement during the campaign and has passed into memory${residualText(echo) ? `, and ${residualText(echo)} linger` : ''}.`,
     severity: severityWord(peak),
     lastingEffects: residualList(echo),
@@ -154,14 +167,14 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
     anchored: true,
   };
 
-  const campaignEvents = events.filter(e => e?.campaignEra);
+  const campaignEvents = events.filter((/** @type {any} */ e) => e?.campaignEra);
   let nextEvents = [...events, event];
   if (campaignEvents.length + 1 > MAX_CAMPAIGN_HISTORY_EVENTS) {
     // Drop the OLDEST campaign-era entry (generation history is never pruned).
     const oldest = campaignEvents
       .slice()
-      .sort((a, b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
-    nextEvents = nextEvents.filter(e => e !== oldest);
+      .sort((/** @type {any} */ a, /** @type {any} */ b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
+    nextEvents = nextEvents.filter((/** @type {any} */ e) => e !== oldest);
   }
   return { ...settlement, history: { ...history, historicalEvents: nextEvents } };
 }
@@ -180,10 +193,10 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
  * Deterministic; identity no-op when nothing local matches (the common case
  * for pulse-born crises).
  *
- * @param {Object} settlement          a settlementUpdates settlement
- * @param {Array}  resolvedStressors   the pulse result's resolved twins
- * @param {string|number} saveId       the settlement's save id
- * @returns {Object} new settlement (same reference when untouched)
+ * @param {any} settlement              a settlementUpdates settlement
+ * @param {any[]}  resolvedStressors     the pulse result's resolved twins
+ * @param {string|number} saveId         the settlement's save id
+ * @returns {any} new settlement (same reference when untouched)
  */
 export function withOrganicStressorResolution(settlement, resolvedStressors = [], saveId) {
   let next = settlement;
@@ -198,6 +211,9 @@ export function withOrganicStressorResolution(settlement, resolvedStressors = []
  * Apply graduation history to every affected settlement in a local map
  * (advanceCampaignWorld's settlement working set). Mutates the Map values
  * immutably; returns the count of settlements written.
+ * @param {Map<string, any>} localSettlements
+ * @param {any[]} graduated
+ * @param {number} [tick]
  */
 export function recordGraduationsIntoHistory(localSettlements, graduated = [], tick = 0) {
   let written = 0;

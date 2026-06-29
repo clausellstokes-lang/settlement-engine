@@ -27,18 +27,20 @@ const SERVICE_LABELS = Object.freeze({
   entertainment: 'Entertainment', employment: 'Employment', criminal: 'Criminal Services',
 });
 
-export const serviceLabel = (key) => SERVICE_LABELS[key] || key;
+export const serviceLabel = (/** @type {any} */ key) => /** @type {Record<string, string>} */ (SERVICE_LABELS)[key] || key;
 
 /**
  * Service categories a settlement of `tier` is expected to have but lacks.
  * Mirrors the web ServicesTab's `missing` computation. `availableServices` is
  * the settlement.availableServices map (category key -> array of services).
  * Returns [{ key, label }].
+ * @param {any} tier
+ * @param {any} availableServices
  */
 export function deriveNotableAbsences(tier, availableServices) {
-  const expected = EXPECTED_SERVICES_BY_TIER[tier] || [];
+  const expected = /** @type {Record<string, string[]>} */ (EXPECTED_SERVICES_BY_TIER)[tier] || [];
   const avail = availableServices || {};
   return expected
-    .filter((k) => !(Array.isArray(avail[k]) && avail[k].length > 0))
-    .map((k) => ({ key: k, label: serviceLabel(k) }));
+    .filter((/** @type {any} */ k) => !(Array.isArray(avail[k]) && avail[k].length > 0))
+    .map((/** @type {any} */ k) => ({ key: k, label: serviceLabel(k) }));
 }

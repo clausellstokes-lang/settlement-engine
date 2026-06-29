@@ -37,7 +37,8 @@ const _SVC_KEYS = new Set(SERVICE_TYPES.map((t) => t.key));
 const _SVC_BY_LABEL = new Map(SERVICE_TYPES.map((t) => [t.label.toLowerCase(), t.key]));
 
 /** Map a custom service's category (label OR key) to its availableServices key.
- *  Returns null for an unrecognized value (caller picks a fallback bucket). */
+ *  Returns null for an unrecognized value (caller picks a fallback bucket).
+ * @param {any} category */
 export function serviceTypeKeyFromCategory(category) {
   if (!category) return null;
   const c = String(category).trim().toLowerCase();
@@ -64,7 +65,9 @@ const ALL_BUILTIN_LOWER = new Set(Object.values(BUILTIN_CATEGORIES).flat().map((
  * category authored on an institution is also offerable on a resource, etc.
  * Disappears automatically when no item uses it (derived from live content).
  */
+/** @param {any} customContent */
 export function selectCustomCategories(customContent) {
+  /** @type {Map<string, string>} */
   const seen = new Map(); // lowercased → original-cased display
   for (const type of ['institutions', 'services', 'resources', 'tradeGoods', 'factions', 'stressors']) {
     for (const item of (customContent?.[type] || [])) {
@@ -80,9 +83,13 @@ export function selectCustomCategories(customContent) {
  * The dropdown options for one type: { builtins, customs }. `customs` excludes
  * anything already a built-in for any type (deduped).
  */
+/**
+ * @param {string} type
+ * @param {any} customContent
+ */
 export function categoryOptions(type, customContent) {
-  const builtins = BUILTIN_CATEGORIES[type] || [];
-  const builtinLower = new Set(builtins.map((c) => c.toLowerCase()));
-  const customs = selectCustomCategories(customContent).filter((c) => !builtinLower.has(c.toLowerCase()));
+  const builtins = /** @type {Record<string, string[]>} */ (BUILTIN_CATEGORIES)[type] || [];
+  const builtinLower = new Set(builtins.map((/** @type {string} */ c) => c.toLowerCase()));
+  const customs = selectCustomCategories(customContent).filter((/** @type {string} */ c) => !builtinLower.has(c.toLowerCase()));
   return { builtins, customs };
 }

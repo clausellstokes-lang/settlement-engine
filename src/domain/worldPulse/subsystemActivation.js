@@ -31,17 +31,19 @@ function settlementItems(snapshot) {
 
 /**
  * The religion layer activates the instant ANY member settlement carries an
- * embedded primary-deity snapshot (stamped at assign-time by SET_PRIMARY_DEITY).
- * It reads the resolved `config.primaryDeitySnapshot` — never customContent — because
- * the pulse is intentionally decoupled from the store. Until then the campaign's
- * religious behaviour is exactly the legacy `deriveReligiousAuthority` path.
+ * embedded primary-deity snapshot (the patron, stamped by SET_PRIMARY_DEITY) OR a
+ * DM-imposed cult (stamped by IMPOSE_CULT into `config.cultDeitySnapshots`). It
+ * reads the resolved embeds — never customContent — because the pulse is
+ * intentionally decoupled from the store. Until then the campaign's religious
+ * behaviour is exactly the legacy `deriveReligiousAuthority` path.
  *
  * @type {ActivationPredicate}
  */
 function religionActive(snapshot) {
   return settlementItems(snapshot).some(
     /** @param {any} item */
-    item => Boolean(item?.settlement?.config?.primaryDeitySnapshot),
+    item => Boolean(item?.settlement?.config?.primaryDeitySnapshot)
+      || ((item?.settlement?.config?.cultDeitySnapshots || []).length > 0),
   );
 }
 

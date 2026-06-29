@@ -362,7 +362,7 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null, region
   for (const [type, settlements] of byType) {
     if (settlements.size < REALM_STRESSOR_THRESHOLD) continue;
     const human = String(type).replace(/_/g, ' ');
-    const label = REALM_LABELS[type] || `Realm-wide ${human}`;
+    const label = /** @type {Record<string, string>} */ (REALM_LABELS)[type] || `Realm-wide ${human}`;
     const ids = [...settlements].sort();
     entries.push({
       id: `wizard_news.${tick}.realm.${type}`,

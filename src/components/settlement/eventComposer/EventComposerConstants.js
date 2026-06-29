@@ -82,6 +82,13 @@ export const NON_AUTHORABLE_EVENTS = new Set([
   'REMOVED_THREAT',
   'STARTED_RIOT',
   'DEMOTE_NPC',               // folded into PROMOTE_NPC ("Promote/Demote NPC")
+  // Authored via dedicated pickers, NOT the generic composer — they carry no buildEvent
+  // payload branch, so a composer selection would assemble an empty (payload-less) event:
+  // SET_PRIMARY_DEITY/IMPOSE_CULT via PrimaryDeityPicker/CultPicker (need a resolved
+  // deity snapshot), SHIFT_TIER via TierShiftControl (needs a direction + cap/floor guard).
+  'SET_PRIMARY_DEITY',
+  'IMPOSE_CULT',
+  'SHIFT_TIER',
 ]);
 
 // ADD_RESOURCE — sentinel select value for "name a custom resource"; the real

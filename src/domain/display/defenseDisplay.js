@@ -13,12 +13,14 @@
 
 import { buildThreatAssessment } from '../../generators/defenseGenerator.js';
 
+/** @param {number} n */
 const scoreColor = (n) =>
   n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';
 
 /**
  * Per-criminal-operation enforcement note (Defense-tab voice), keyed off the
  * institution name.
+ * @param {any} name
  */
 export function criminalOpNote(name) {
   const n = String(name || '').toLowerCase();
@@ -45,6 +47,7 @@ export function criminalOpNote(name) {
 
 /**
  * Per-criminal-operation economic role (Economics-tab voice). Short label.
+ * @param {any} name
  */
 export function criminalOpEcon(name) {
   const n = String(name || '').toLowerCase();
@@ -76,14 +79,15 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
  * Classify the settlement's criminal structure from its institution names.
  * Returns { key, label, color, bg, note } or null when there is no organized
  * criminal infrastructure.
+ * @param {any} settlement
  */
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
-  const names = (r.institutions || []).map((i) => (i?.name || '').toLowerCase());
-  const hasGuild = names.some((n) => n.includes("thieves' guild") || n.includes('thieves guild') || n.includes('organized crime'));
-  const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
-  const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
-  const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));
+  const names = (r.institutions || []).map(/** @param {any} i */ (i) => (i?.name || '').toLowerCase());
+  const hasGuild = names.some(/** @param {string} n */ (n) => n.includes("thieves' guild") || n.includes('thieves guild') || n.includes('organized crime'));
+  const hasSyndicate = names.some(/** @param {string} n */ (n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
+  const hasSemiOrg = names.some(/** @param {string} n */ (n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
+  const hasDiffuse = names.some(/** @param {string} n */ (n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));
   const key = hasGuild || hasSyndicate ? 'organized'
     : hasSemiOrg ? 'semi-organized'
       : hasDiffuse ? 'diffuse'
@@ -96,6 +100,7 @@ export function deriveCriminalStructure(settlement) {
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of
  * { label, status, color, score|null, note }.
+ * @param {any} settlement
  */
 export function deriveSupportingCapabilities(settlement) {
   const r = settlement || {};
@@ -118,7 +123,7 @@ export function deriveSupportingCapabilities(settlement) {
       label: 'Magical Capability',
       status: f.hasMagicInst ? 'Arcane support' : 'None',
       color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: scores.magical || 0,
-      note: f.hasMagicInst ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}: detection, wards, counterspell.` : 'Conventional defense only, so invisible threats go undetected and unanswered.',
+      note: f.hasMagicInst ? `${magicDef.slice(0, 2).map(/** @param {any} m */ (m) => m.name).join(', ')}: detection, wards, counterspell.` : 'Conventional defense only, so invisible threats go undetected and unanswered.',
     },
     {
       label: 'Legal Infrastructure',
@@ -150,6 +155,7 @@ export function deriveSupportingCapabilities(settlement) {
   return caps;
 }
 
+/** @param {number} n */
 const readinessBadge = (n) =>
   n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
 
@@ -172,12 +178,14 @@ const READINESS_GATE_FOR = Object.freeze({
  * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
  * garrison pay at 60%") instead of leaving a silently lower bar.
  * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
+ * @param {any} settlement
  */
 export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
   const scores = r.defenseProfile?.scores || {};
   const gates = r.defenseProfile?.economicGates || {};
   const f = r.economicState?.compound?.inst || {};
+  /** @type {Record<string, number>} */
   const scoreFor = {
     'Beasts & Monsters': scores.monster || 0,
     'Invasion & War': scores.military || 0,
@@ -188,9 +196,9 @@ export function deriveDefenseReadiness(settlement) {
       r.economicState?.foodSecurity?.resilienceScore ??
       Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
   };
-  return buildThreatAssessment(r).map((row) => {
+  return buildThreatAssessment(r).map(/** @param {any} row */ (row) => {
     const score = scoreFor[row.label] ?? 0;
-    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+    const [gateKey, expense] = /** @type {Record<string, string[]>} */ (READINESS_GATE_FOR)[row.label] || [];
     const gate = gateKey ? gates[gateKey] : undefined;
     const fundingNote = Number.isFinite(gate) && gate < 1
       ? `Upkeep underfunded: ${expense} at ${Math.round(gate * 100)}%`
@@ -207,13 +215,15 @@ export function deriveDefenseReadiness(settlement) {
   });
 }
 
-const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).values()];
+/** @param {any[]} arr */
+const dedupByName = (arr) => [...new Map((arr || []).map(/** @param {any} m */ (m) => [m?.name, m])).values()];
 
 /**
  * Armed forces grouped the way the web Defense tab presents them: fortifications,
  * standing forces (garrison + militia + watch, de-duplicated by name),
  * contracted (mercenary), monster-response charter, and arcane defense. Each
  * entry is a force object { name, desc, source } from defenseProfile.institutions.
+ * @param {any} settlement
  */
 export function deriveArmedForces(settlement) {
   const inst = settlement?.defenseProfile?.institutions || {};

@@ -37,11 +37,16 @@ export const COUP_STRESSOR_TYPE = 'coup_detat';
  * The generic stressor_residual outcome for a resolved coup is replaced by
  * the verdict's own condition — without this filter every verdict would
  * double-stamp the settlement (residual scars + regime shock).
+ * @param {any} outcome
  */
 export function isCoupResidualOutcome(outcome) {
   return outcome?.ruleId === `stressor_${COUP_STRESSOR_TYPE}_residual`;
 }
 
+/**
+ * @param {any} entry
+ * @param {any} governingName
+ */
 function lockedGoverningFaction(entry, governingName) {
   const locked = entry?.save?.campaignState?.locks?.factions;
   if (!Array.isArray(locked) || !locked.length || !governingName) return false;
@@ -52,6 +57,11 @@ function lockedGoverningFaction(entry, governingName) {
   });
 }
 
+/**
+ * @param {number} min
+ * @param {number} max
+ * @param {number} value
+ */
 function clamp(min, max, value) {
   return Math.max(min, Math.min(max, value));
 }
@@ -79,12 +89,12 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0 }) 
     if (!entry?.settlement) continue;
 
     const severity = Math.max(stressor.peakSeverity ?? 0, stressor.severity ?? 0, 0.3);
-    const verdict = resolveCoupVerdict({
+    const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
       severity,
       rulingAuthorityScore: entry.causal?.scores?.ruling_authority ?? null,
-    });
+    }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';
     const base = {
@@ -131,8 +141,8 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0 }) 
 
     const locked = lockedGoverningFaction(entry, verdict.incumbent?.name);
     const losers = verdict.challengers
-      .filter(c => c.name !== verdict.winner.name)
-      .map(c => c.name);
+      .filter((/** @type {any} */ c) => c.name !== verdict.winner.name)
+      .map((/** @type {any} */ c) => c.name);
     outcomes.push({
       ...base,
       type: 'power_transfer',

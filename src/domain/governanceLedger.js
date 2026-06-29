@@ -34,10 +34,11 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
+/** @param {any} v @returns {boolean} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {GovernanceLedger}
  */
 export function governanceLedger(settlement) {

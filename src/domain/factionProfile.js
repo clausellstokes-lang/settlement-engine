@@ -38,12 +38,14 @@ import { governanceLedger } from './governanceLedger.js';
 // across into src/lib (which is outside the domain tsconfig include).
 // Matches the format produced by src/lib/entities.js#idOf so consumers
 // querying traces by id see the same shape from both call paths.
+/** @param {any} s @returns {string} */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '')
     .toLowerCase();
 }
+/** @param {any} name @returns {string} */
 function factionIdFromName(name) {
   return `faction.${snakeCase(name)}`;
 }
@@ -70,10 +72,12 @@ const CANONICAL_TO_PROFILE = Object.freeze({
  * Archetype for a faction, in factionProfile's local vocabulary
  * (occupation/criminal/arcane/religious/military/merchant/craft/government/other).
  * Delegates detection to the canonical factionArchetype() so every layer agrees.
+ * @param {any} faction
+ * @returns {string}
  */
 export function deriveFactionArchetype(faction) {
   if (!faction) return 'other';
-  return CANONICAL_TO_PROFILE[factionArchetype(faction)] || 'other';
+  return /** @type {Record<string, string>} */ (CANONICAL_TO_PROFILE)[factionArchetype(faction)] || 'other';
 }
 
 // ── Archetype templates ──────────────────────────────────────────────────
@@ -151,9 +155,10 @@ const ARCHETYPE_TEMPLATES = Object.freeze({
 /**
  * Look up the archetype template. Returns 'other' for unknown values.
  * Read-only — returns a shallow clone so callers can safely customize.
+ * @param {any} archetype
  */
 export function templateForArchetype(archetype) {
-  const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.other;
+  const t = /** @type {Record<string, any>} */ (ARCHETYPE_TEMPLATES)[archetype] || ARCHETYPE_TEMPLATES.other;
   // Shallow clone (with deeper clones for array/object fields) so a
   // consumer modifying `wants` doesn't pollute the frozen template.
   return {
@@ -174,6 +179,7 @@ export function templateForArchetype(archetype) {
 // updates after events land, this derivation will be the place
 // where event-driven legitimacy adjustments aggregate.
 
+/** @param {any} faction @param {any} [settlement] @returns {number} */
 function legitimacyFor(faction, settlement) {
   const power = settlement?.powerStructure || settlement?.power;
   if (!power) return 50;
@@ -209,11 +215,11 @@ function legitimacyFor(faction, settlement) {
  * produces the same output. Lossless on the input fields — `power`,
  * `desc`, etc. are preserved on the returned profile.
  *
- * @param {Object|string} faction
- * @param {Object} [settlement]   Optional context for legitimacy
+ * @param {any} faction
+ * @param {any} [settlement]   Optional context for legitimacy
  *                                derivation. If omitted, legitimacy
  *                                falls back to 50 (neutral).
- * @returns {Object} The enriched profile.
+ * @returns {any} The enriched profile.
  */
 export function deriveFactionProfile(faction, settlement) {
   if (!faction) return null;
@@ -257,6 +263,8 @@ export function deriveFactionProfile(faction, settlement) {
  * Convenience: enrich every faction on a settlement into a structured
  * profile. Useful for the PipelineRail / PDF faction section that
  * wants to render the whole roster.
+ * @param {any} settlement
+ * @returns {any[]}
  */
 export function deriveAllFactionProfiles(settlement) {
   if (!settlement) return [];
@@ -264,5 +272,5 @@ export function deriveAllFactionProfiles(settlement) {
                 || settlement.power?.factions
                 || settlement.factions
                 || [];
-  return factions.map(f => deriveFactionProfile(f, settlement));
+  return factions.map(/** @param {any} f */ f => deriveFactionProfile(f, settlement));
 }

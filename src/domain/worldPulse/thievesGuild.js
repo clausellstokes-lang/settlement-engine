@@ -21,6 +21,8 @@ const CAPTURED = new Set(['corrupted', 'capture']);
 /**
  * Per-settlement guild strength (0..1), from the captured factions in that
  * settlement (power joined from the snapshot, diversity = distinct factions).
+ * @param {any} worldState
+ * @param {any} snapshot
  * @returns {Map<string, number>} settlementId → strength
  */
 export function computeGuildStrengthBy(worldState, snapshot) {
@@ -56,6 +58,8 @@ export function computeGuildStrengthBy(worldState, snapshot) {
  * Mirror the guild's strength onto a settlement: floor the criminal faction's
  * power and hard-cap its legitimacy, and stamp settlement.thievesGuildStrength
  * for the dossier. Pure; returns the same reference when nothing changed.
+ * @param {any} settlement
+ * @param {any} strength
  */
 export function applyGuildToSettlement(settlement, strength) {
   if (!settlement) return settlement;

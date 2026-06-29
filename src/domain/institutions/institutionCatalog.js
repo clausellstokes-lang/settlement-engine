@@ -12,8 +12,8 @@
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 
 /**
- * @param {Array<{name?:string}>} institutions  institutions already present
- * @param {Array<Object>} customInstitutions     Compendium institutions
+ * @param {Array<any>} institutions  institutions already present
+ * @param {Array<any>} customInstitutions     Compendium institutions
  * @returns {Array<{ id:string, name:string, category:string, tierKey?:string,
  *   desc:string, tags:string[], def?:Object, isCustom?:boolean, alreadyAdded:boolean }>}
  */
@@ -44,7 +44,7 @@ export function buildInstitutionCatalog(institutions = [], customInstitutions = 
     items.push({
       id: ci.id, name: ci.name, category: ci.category || 'Custom',
       desc: ci.description || '',
-      tags: typeof ci.tags === 'string' ? ci.tags.split(',').map(t => t.trim()) : (ci.tags || []),
+      tags: typeof ci.tags === 'string' ? ci.tags.split(',').map((/** @type {any} */ t) => t.trim()) : (ci.tags || []),
       isCustom: true, alreadyAdded: existing.has(ci.name),
     });
   }

@@ -44,7 +44,7 @@ function nameByIdFrom(snapshot) {
  *   channels name a siege's COALITION and its trade_dependency goods name a trade
  *   war's COMMODITY. Optional: absent ⇒ the coalition/commodity story is
  *   simply omitted (a no-war chronicle is unchanged).
- * @param {number} [args.tick]      restrict to a single tick (default: the latest)
+ * @param {(number|null)} [args.tick]      restrict to a single tick (default: the latest)
  * @param {number} [args.lookback]  how many recent ticks to include when tick is omitted
  * @returns {Object} grounding payload — pure data, no PII
  */
@@ -56,18 +56,18 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
   const latestTick = tick != null
     ? tick
     : allEntries.length
-      ? allEntries.reduce((max, e) => Math.max(max, e.tick || 0), 0)
+      ? allEntries.reduce((/** @type {number} */ max, /** @type {any} */ e) => Math.max(max, e.tick || 0), 0)
       : (worldState?.tick ?? 0);
   const minTick = tick != null ? tick : latestTick - Math.max(0, lookback - 1);
 
-  const entries = allEntries.filter(e => (e.tick ?? 0) >= minTick && (e.tick ?? 0) <= latestTick);
+  const entries = allEntries.filter((/** @type {any} */ e) => (e.tick ?? 0) >= minTick && (e.tick ?? 0) <= latestTick);
 
-  const settlements = (snapshot?.settlements || []).map(item => ({
+  const settlements = (snapshot?.settlements || []).map((/** @type {any} */ item) => ({
     id: item.id,
     name: item.name,
     conditions: (item.activeConditions || [])
       .slice(0, 6)
-      .map(c => ({ label: c.label || c.archetype, archetype: c.archetype, severity: c.severity })),
+      .map((/** @type {any} */ c) => ({ label: c.label || c.archetype, archetype: c.archetype, severity: c.severity })),
   }));
 
   const nameById = nameByIdFrom(snapshot);
@@ -81,9 +81,9 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
   );
 
   const stressors = (worldState?.stressors || [])
-    .filter(s => ACTIVE_STAGES.has(s.lifecycleStage || 'active'))
+    .filter((/** @type {any} */ s) => ACTIVE_STAGES.has(s.lifecycleStage || 'active'))
     .slice(0, 12)
-    .map(s => {
+    .map((/** @type {any} */ s) => {
       // For a war-shaped stressor, the coalition is the union of besiegers across
       // its affected (besieged) settlements — the STORY the chronicle should name.
       const coalition = WAR_SHAPED_STRESSOR_TYPES.has(s.type)
@@ -107,7 +107,7 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
 
   // The live trade wars, each naming its contested COMMODITY (the story a
   // trade-war chronicle should name). Empty when no prize has flipped.
-  const tradeWars = liveTradeWars({ worldState, regionalGraph }).map(w => ({
+  const tradeWars = liveTradeWars({ worldState, regionalGraph }).map((/** @type {any} */ w) => ({
     commodity: w.commodityLabel,
     buyer: resolveName(w.buyerId),
     supplier: resolveName(w.winnerId),
@@ -118,7 +118,7 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
     tick: latestTick,
     fromTick: minTick,
     calendar: worldState?.calendar || null,
-    headlines: entries.map(e => ({
+    headlines: entries.map((/** @type {any} */ e) => ({
       headline: e.headline,
       summary: e.summary,
       scope: e.scope,
@@ -126,8 +126,8 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, regi
       settlementIds: e.settlementIds || [],
       reasons: e.reasons || [],
     })),
-    majorHeadlines: entries.filter(e => e.significance === 'major').map(e => e.headline),
-    realmArcs: entries.filter(e => e.scope === 'realm').map(e => ({ headline: e.headline, settlementIds: e.settlementIds || [] })),
+    majorHeadlines: entries.filter((/** @type {any} */ e) => e.significance === 'major').map((/** @type {any} */ e) => e.headline),
+    realmArcs: entries.filter((/** @type {any} */ e) => e.scope === 'realm').map((/** @type {any} */ e) => ({ headline: e.headline, settlementIds: e.settlementIds || [] })),
     settlements,
     stressors,
     // The live trade wars (commodity + buyer + new supplier). Omitted when

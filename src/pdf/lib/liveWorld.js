@@ -52,6 +52,7 @@ import { pantheonStandings, deityDisplayName } from '../../domain/display/panthe
 import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
+import { divineMandateStatus, patronContestOdds } from '../../domain/worldPulse/religionState.js';
 
 /** Human posture band for a centered-on-1.0 aggressiveness multiplier. Mirrors
  * WarFaithSection.aggressionPosture so the printed posture matches the screen. */
@@ -102,6 +103,10 @@ function resolveSettlementId(settlement, campaign) {
  *   deity: { name: string, rankAxis: string|null, alignmentAxis: string|null, temperamentAxis: string|null, lawAxis: string|null, domain: string|null, effects: string[] } | null,
  *   pantheon: Array<{ id: string, name: string, seats: number, tier: string, wins: number, losses: number, fromMajor: number }>,
  *   realmArcs: string[],
+ *   livePantheon: Array<{ name: string, share: number, standing: string, legitimacy: number, isPatron: boolean }>,
+ *   contestOdds: Array<{ deityRef: string, name: string, odds: number, isPatron: boolean }> | null,
+ *   mandate: { propping: boolean, phrase: string } | null,
+ *   cults: Array<{ name: string, rankAxis: string|null, alignmentAxis: string|null, temperamentAxis: string|null }>,
  * }}
  */
 export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ ({})) {
@@ -165,12 +170,41 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
       }
     : null;
 
-  // ── Self-gating: nothing live AND no deity ⇒ dormant ⇒ null. ─────────────
+  // ── Living pantheon (campaign only): the evolved per-settlement faith state —
+  //    patron + cults with adherent share, standing, and LEGITIMACY (the rightful
+  //    claim). Mirrors WarFaithSection so the printed pantheon matches the screen.
+  const religionState = id && worldState?.religionStates ? worldState.religionStates[id] : null;
+  const livePantheon = religionState?.deities
+    ? Object.values(religionState.deities)
+        .filter((/** @type {any} */ d) => !d.suppressed)
+        .map((/** @type {any} */ d) => ({
+          name: d.snapshot?.name || String(d.deityRef),
+          share: Number(d.share) || 0,
+          standing: d.standing || 'cult',
+          legitimacy: Math.max(0, Math.min(1, Number(d.legitimacy) || 0)),
+          isPatron: d.deityRef === religionState.patronRef,
+        }))
+        .sort((/** @type {any} */ a, /** @type {any} */ b) => b.share - a.share)
+    : [];
+  // The patron-contest forecast (a schism in the patron's niche), null when uncontested.
+  const contestOdds = religionState ? patronContestOdds(religionState) : null;
+  // The divine mandate (royal/theocratic regimes only): whether the faith props or weakens
+  // the throne. Reads config.faithProfile (pulse-projected) + government ⇒ null off-campaign.
+  const mandate = divineMandateStatus(s);
+  // DM-imposed cults — minor faiths beneath the patron (present even without a campaign).
+  const cults = Array.isArray(s?.config?.cultDeitySnapshots)
+    ? s.config.cultDeitySnapshots.filter(Boolean).map((/** @type {any} */ c) => ({
+        name: c.name || 'a cult', rankAxis: c.rankAxis || null,
+        alignmentAxis: c.alignmentAxis || null, temperamentAxis: c.temperamentAxis || null,
+      }))
+    : [];
+
+  // ── Self-gating: nothing live AND no faith of any kind ⇒ dormant ⇒ null. ───
   // This is the byte-identity seam: identical result with/without an empty
   // worldState, and identical result for campaign === null.
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow
     || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0;
-  if (!hasLive && !deity) return null;
+  if (!hasLive && !deity && !cults.length && !livePantheon.length) return null;
 
   const tradeWars = tradeWarsRaw.map(t => {
     const role = t.winnerId === id ? 'supplier'
@@ -223,6 +257,11 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
       fromMajor: p.fromMajor,
     })),
     realmArcs: realmArcLines({ worldState, regionalGraph, settlements: occItems }),
+    // ── Per-settlement living pantheon (distinct from realm-scope `pantheon`) ──
+    livePantheon,
+    contestOdds,
+    mandate,
+    cults,
   };
 }
 

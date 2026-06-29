@@ -53,7 +53,7 @@ const PRODUCES_KIND = Object.freeze({
  * at apply time, so only the name is registered (NPCs are referenced by the
  * institution/faction they join, not the other way around).
  *
- * @param {Event} event
+ * @param {any} event
  * @returns {Array<{kind:string, id?:string, name?:string}>}
  */
 export function eventProduces(event) {
@@ -68,7 +68,7 @@ export function eventProduces(event) {
     if (archetype) refs.push({ kind: 'stressorArchetype', id: archetype, name: archetype });
     return refs;
   }
-  const kind = PRODUCES_KIND[event?.type];
+  const kind = /** @type {Record<string, string>} */ (PRODUCES_KIND)[event?.type];
   if (!kind) return [];
   const name = labelFromTarget(event?.targetId) || event?.payload?.name || '';
   if (!name) return [];
@@ -188,6 +188,7 @@ export function eventConsumes(event) {
  */
 export function validateBatch(settlement, events = []) {
   const ns = initNamespace(settlement);
+  /** @type {Array<{index:number, eventId:string, severity:string, message:string}>} */
   const warnings = [];
   events.forEach((event, index) => {
     const label = EVENT_REGISTRY[event?.type]?.label || event?.type || 'Change';
@@ -220,10 +221,10 @@ export function validateBatch(settlement, events = []) {
  * can run a single reactive generator rerun.
  *
  * @param {Object} args
- * @param {Object} args.settlement
- * @param {Object} [args.systemState] before-state (derived if omitted)
- * @param {Event[]} args.events
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {any} args.settlement
+ * @param {any} [args.systemState] before-state (derived if omitted)
+ * @param {Event[]} [args.events]
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {{
  *   beforeSettlement: Object, nextSettlement: Object,
  *   beforeSystemState: Object, afterSystemState: Object,
@@ -237,8 +238,11 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
   const beforeSystemState = systemState || deriveSystemState(beforeSettlement);
 
   let working = beforeSettlement;
+  /** @type {Record<string, number>} */
   const summedStateDeltas = {};
+  /** @type {Array<{event:any, narrativeSummary:string, warnings:Array<any>}>} */
   const perEvent = [];
+  /** @type {Set<string>} */
   const rerunKeys = new Set();
 
   for (const event of events) {
@@ -297,8 +301,13 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
 
 // Mirror of eventPipeline.applyAuthoredStateDeltas (kept local so this module
 // stays decoupled from the single-event pipeline).
+/**
+ * @param {any} state
+ * @param {any} deltas
+ */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
+  /** @type {Record<string, any>} */
   const next = {};
   for (const key of Object.keys(state)) {
     const dim = state[key];
@@ -314,8 +323,10 @@ function applyAuthoredStateDeltas(state, deltas) {
   return next;
 }
 
+/** @param {any} x */
 function lc(x) { return String(x || '').trim().toLowerCase(); }
 
+/** @param {any} s */
 function initNamespace(s) {
   const ns = {
     institution: new Set(),
@@ -350,7 +361,7 @@ function initNamespace(s) {
   // re-rolls away while the condition survives via the record. Campaign-owned
   // conditions (origin cause = a regional channel / the world pulse) are
   // excluded — resolveStressor refuses to wind them down.
-  for (const st of canonStressors(s)) {
+  for (const st of /** @type {any[]} */ (canonStressors(s))) {
     ns.stressor.add(lc(st?.type));
     ns.stressor.add(lc(st?.name));
   }
@@ -358,7 +369,7 @@ function initNamespace(s) {
     ...(Array.isArray(s?.config?.eventConditions) ? s.config.eventConditions : []),
     ...(Array.isArray(s?._config?.eventConditions) ? s._config.eventConditions : []),
   ];
-  const locallyOwned = (c) => {
+  const locallyOwned = (/** @type {any} */ c) => {
     const origin = String(c?.causes?.[0]?.source ?? '');
     return origin === '' || origin === 'event' || origin === 'generation';
   };
@@ -370,6 +381,11 @@ function initNamespace(s) {
   return ns;
 }
 
+/**
+ * @param {any} ns
+ * @param {string} kind
+ * @param {any} ref
+ */
 function nsHas(ns, kind, ref) {
   const r = lc(ref);
   if (!r) return true; // nothing to validate
@@ -404,17 +420,24 @@ function nsHas(ns, kind, ref) {
   return set.has(r) || set.has(label);
 }
 
+/**
+ * @param {any} ns
+ * @param {string} kind
+ * @param {any} value
+ */
 function nsAdd(ns, kind, value) {
   const v = lc(value);
   if (!v || !ns[kind]) return;
   ns[kind].add(v);
 }
 
+/** @param {any} targetId */
 function labelFromTarget(targetId) {
-  const tail = String(targetId || '').split('.').pop();
+  const tail = /** @type {string} */ (String(targetId || '').split('.').pop());
   return tail.replace(/_/g, ' ');
 }
 
+/** @param {any} s */
 function slugify(s) {
   return String(s || '')
     .toLowerCase()

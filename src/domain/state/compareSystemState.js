@@ -70,9 +70,15 @@ export function compareSystemState(before, after) {
   return deltas;
 }
 
+/**
+ * @param {any} key
+ * @param {number} before
+ * @param {number} after
+ * @param {number} change
+ */
 function explain(key, before, after, change) {
-  const label  = LABEL[key];
-  const polar  = POLARITY[key];
+  const label  = /** @type {Record<string, string>} */ (LABEL)[key];
+  const polar  = /** @type {Record<string, string>} */ (POLARITY)[key];
   const dir    = change > 0 ? 'rose' : 'fell';
   const mag    = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
   const better = (polar === 'higher_is_better' && change > 0) ||

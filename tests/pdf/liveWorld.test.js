@@ -192,3 +192,54 @@ describe('Phase 7 — no screen↔PDF drift (same selectors, same values)', () =
     expect(lw.tradeWars[0].commodityLabel).toBe(prizes[0].commodityLabel);
   });
 });
+
+// ── Living pantheon in the PDF: per-settlement cults + standings + legitimacy +
+//    the patron-contest forecast + the divine mandate (mirrors WarFaithSection). ─
+describe('living pantheon in the PDF', () => {
+  const theoTown = {
+    id: 'T', name: 'Highmoor', population: 9000,
+    config: {
+      primaryDeitySnapshot: { name: 'Aurelia', rankAxis: 'major', temperamentAxis: 'peaceful', alignmentAxis: 'good' },
+      cultDeitySnapshots: [{ name: 'Vorr', rankAxis: 'minor', temperamentAxis: 'warlike', alignmentAxis: 'evil' }],
+      faithProfile: { patron: { name: 'Aurelia' }, deities: [], contested: true, patronSecurity: 0.2 },
+    },
+    powerStructure: { government: 'Theocratic Council', publicLegitimacy: { score: 40, label: 'Wavering' }, factions: [{ faction: 'Temple', archetype: 'religious', power: 60, isGoverning: true }] },
+    economicState: {},
+  };
+  const theoWorldState = {
+    religionStates: {
+      T: {
+        patronRef: 'd.aurelia',
+        deities: {
+          'd.aurelia': { deityRef: 'd.aurelia', snapshot: { name: 'Aurelia' }, niche: 'peaceful:good', share: 52, standing: 'ascendant', legitimacy: 0.3, suppressed: false },
+          'd.vorr': { deityRef: 'd.vorr', snapshot: { name: 'Vorr' }, niche: 'peaceful:evil', share: 48, standing: 'established', legitimacy: 0.6, suppressed: false },
+        },
+      },
+    },
+  };
+  const theoCampaign = { settlementId: 'T', worldState: theoWorldState, regionalGraph: { channels: [] }, settlements: [{ id: 'T', name: 'Highmoor' }] };
+
+  it('the slice carries livePantheon (patron flagged, share-sorted), cults, and the divine mandate', () => {
+    const lw = buildPdfLiveWorld({ settlement: theoTown, campaign: theoCampaign });
+    expect(lw.livePantheon.length).toBe(2);
+    expect(lw.livePantheon[0].isPatron).toBe(true);            // Aurelia 52% sorts first
+    expect(lw.livePantheon[0].legitimacy).toBeCloseTo(0.3, 5);
+    expect(lw.cults.map((c) => c.name)).toContain('Vorr');
+    expect(lw.mandate).not.toBeNull();                         // theocracy + faithProfile ⇒ a mandate read
+    expect(lw.mandate.propping).toBe(false);                   // contested + low security ⇒ weakens the throne
+  });
+
+  it('the FaithWar chapter renders the LIVING PANTHEON block', () => {
+    const vm = buildViewModel({ settlement: theoTown, campaign: theoCampaign });
+    const text = collectText(FaithWar({ settlement: theoTown, vm })).join(' ');
+    expect(text).toMatch(/LIVING PANTHEON/);
+    expect(text).toMatch(/Aurelia/);
+    expect(text).toMatch(/tenuous|established|contested|secure/i);   // a legitimacy band
+    expect(text).toMatch(/Divine mandate/);
+  });
+
+  it('a deity-free non-campaign settlement still renders no pantheon (byte-identity)', () => {
+    const lw = buildPdfLiveWorld({ settlement: peacefulTown });
+    expect(lw).toBeNull();
+  });
+});

@@ -40,11 +40,13 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
+/** @param {any} v */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
+/** @param {any} v @param {any} d */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {DefenseLedger}
  */
 export function defenseLedger(settlement) {

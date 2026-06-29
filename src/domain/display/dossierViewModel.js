@@ -43,11 +43,13 @@ const VIABILITY_LABEL = Object.freeze({
   unknown:         'Unknown',
 });
 
+/** @param {any} n */
 function fmtInt(n) {
   const v = cleanNum(n);
   return v == null ? null : Math.round(v).toLocaleString('en-US');
 }
 
+/** @param {any} v */
 function toArray(v) {
   if (Array.isArray(v)) return v.filter(Boolean);
   return v ? [v] : [];
@@ -59,6 +61,7 @@ function toArray(v) {
  * dailyProduction / dailyNeed (NOT production / need). Enforces the rule:
  * never show produced=0 & needed=0 next to a non-zero surplus/deficit —
  * fall back to "Not calculated".
+ * @param {any} settlement
  */
 export function deriveFoodBalance(settlement) {
   const fb = settlement?.economicViability?.metrics?.foodBalance || null;
@@ -120,6 +123,7 @@ export function deriveFoodBalance(settlement) {
  * Export posture (§1d). Single source for "does this settlement export, and
  * how exposed is that trade?". Reads economicState.primaryExports (what the
  * Economics surface shows), falling back to the legacy economicState.exports.
+ * @param {any} settlement
  */
 export function deriveExportPosture(settlement) {
   const eco = settlement?.economicState || {};
@@ -138,7 +142,7 @@ export function deriveExportPosture(settlement) {
   else if (count === 1)          status = 'limited';
   else                           status = 'established';
 
-  return { status, label: EXPORT_STATUS_LABEL[status], exports, count, isEntrepot, access };
+  return { status, label: /** @type {Record<string, string>} */ (EXPORT_STATUS_LABEL)[status], exports, count, isEntrepot, access };
 }
 
 /**
@@ -153,6 +157,7 @@ export function deriveExportPosture(settlement) {
  * while the dossier shows a food deficit. buildViabilitySummary() (economicGenerator)
  * only checks dependency warnings for its "self-sufficient" branch — it
  * ignores a food deficit — which is the contradiction this corrects.
+ * @param {any} settlement
  */
 export function deriveViability(settlement) {
   const v = settlement?.economicViability || {};
@@ -234,6 +239,7 @@ export function deriveViability(settlement) {
  * unexplained. Settlements the pulse has never touched (no stockpile record)
  * report available:false and say nothing. The prose field is named `display`
  * (the view-model idiom) — NOT `note`, which the publicSafe denylist strips.
+ * @param {any} settlement
  */
 export function deriveBlockadeRelief(settlement) {
   const sp = settlement?.economicState?.foodSecurity?.stockpile || null;
@@ -264,6 +270,7 @@ const MAGIC_ROLE_LABEL = Object.freeze({
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
  * price a magic economy that does not exist.
+ * @param {any} settlement
  */
 export function deriveMagicPosture(settlement) {
   const m = deriveMagicProfile(settlement);
@@ -283,7 +290,7 @@ export function deriveMagicPosture(settlement) {
     display: m.magicExists === false
       ? 'Magic does not function in this world'
       : `Availability ${m.availability}: ${m.legality}, ${m.cost} services, ${m.risk} risk`,
-    roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
+    roleLines: Object.entries(m.roles).map(([role, band]) => `${/** @type {Record<string, string>} */ (MAGIC_ROLE_LABEL)[role] || role} role: ${band}`),
   };
 }
 
@@ -360,6 +367,10 @@ export function deriveTopExport(settlement) {
   return { label: item.good || item.name || item.label || '' };
 }
 
+/**
+ * @param {any} settlement
+ * @param {{ aiOverlay?: any }} [opts]
+ */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),

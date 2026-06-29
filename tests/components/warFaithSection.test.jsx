@@ -72,7 +72,7 @@ describe('WarFaithSection — self-gating + altitude', () => {
     const { getByTestId } = render(
       <WarFaithSection settlement={deityOnly} settlementId="peace" forceLevel="standard" />,
     );
-    expect(getByTestId('war-faith-section').textContent).toMatch(/Primary faith|Lumina/);
+    expect(getByTestId('war-faith-section').textContent).toMatch(/Patron faith|Lumina/);
   });
 
   test('Detail+ surfaces war-exhaustion, disposition, trade-war prize and named posture inputs', () => {
@@ -123,47 +123,59 @@ describe('WarFaithSection — self-gating + altitude', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Religion rework — the per-settlement PANTHEON panel (multiple faiths competing
-// for adherents, the chief, contested-ness, and the divine-mandate line).
+// Live pantheon — share + standing + LEGITIMACY, and the patron-contest forecast
+// when a rival shares the patron's niche (a schism).
 // ─────────────────────────────────────────────────────────────────────────────
-describe('WarFaithSection — pantheon panel', () => {
-  const pantheonTown = {
-    id: 'P', name: 'Pyrespire', population: 9000,
-    config: {
-      primaryDeitySnapshot: { name: 'Aurum', rankAxis: 'major', temperamentAxis: 'peaceful', alignmentAxis: 'good', domain: 'sun' },
-      faithProfile: {
-        chief: { name: 'Aurum', deityRef: 'custom:lu_aurum', share: 62 },
-        deities: [
-          { deityRef: 'custom:lu_aurum', name: 'Aurum', niche: 'peaceful:good', share: 62, standing: 'ascendant', isChief: true },
-          { deityRef: 'custom:lu_korl', name: 'Korl', niche: 'warlike:evil', share: 38, standing: 'established', isChief: false },
-        ],
-        contested: false,
-        chiefSecurity: 0.62,
+
+const schismWorldState = {
+  religionStates: {
+    A: {
+      patronRef: 'd.maug',
+      deities: {
+        'd.maug': { deityRef: 'd.maug', snapshot: { name: 'Maug' }, niche: 'warlike:evil', share: 70, standing: 'ascendant', legitimacy: 0.82, suppressed: false },
+        'd.skarn': { deityRef: 'd.skarn', snapshot: { name: 'Skarn' }, niche: 'warlike:evil', share: 30, standing: 'cult', legitimacy: 0.1, suppressed: false },
       },
     },
-    powerStructure: { government: 'theocracy', publicLegitimacy: { score: 60, label: 'Stable' }, factions: [{ faction: 'Temple', archetype: 'religious', power: 70, isGoverning: true }] },
-    economicState: {},
-  };
+  },
+};
 
-  test('renders each faith with its share, standing, and the chief marker', () => {
-    const { getByTestId } = render(<WarFaithSection settlement={pantheonTown} settlementId="P" forceLevel="standard" />);
-    const panel = getByTestId('pantheon-panel');
-    expect(panel.textContent).toMatch(/Aurum/);
-    expect(panel.textContent).toMatch(/Korl/);
-    expect(panel.textContent).toMatch(/62%/);
-    expect(panel.textContent).toMatch(/chief/i);
-    expect(panel.textContent).toMatch(/ascendant|established/i);
+describe('WarFaithSection — live pantheon + legitimacy + contest odds', () => {
+  test('renders pantheon standings with legitimacy and the contest forecast', () => {
+    const { getByTestId } = render(
+      <WarFaithSection settlement={warTown} settlementId="A" worldState={schismWorldState} forceLevel="standard" />,
+    );
+    const standings = getByTestId('pantheon-standings');
+    expect(standings.textContent).toMatch(/Maug/);
+    expect(standings.textContent).toMatch(/Skarn/);
+    expect(standings.textContent).toMatch(/legitimacy/i);        // the rightful-claim axis is surfaced
+    // Each creed also gets an adherent-share BAR alongside the legitimacy text (both signals).
+    expect(standings.querySelectorAll('[data-testid="pantheon-share-bar"]').length).toBe(2);
+    // The schism (Skarn shares Maug's warlike:evil niche) shows the contest odds.
+    const root = getByTestId('war-faith-section');
+    expect(root.textContent).toMatch(/Faith contest/i);
+    expect(root.textContent).toMatch(/%/);
   });
 
-  test('a theocracy with a secure chief shows the divine-mandate prop', () => {
-    const { getByTestId } = render(<WarFaithSection settlement={pantheonTown} settlementId="P" forceLevel="standard" />);
-    expect(getByTestId('divine-mandate').textContent).toMatch(/mandate/i);
+  test('a theocracy with a contested patron shows a weakened divine mandate', () => {
+    const theocracy = {
+      ...warTown,
+      config: { ...warTown.config, faithProfile: { patron: { name: 'Maug' }, deities: [], contested: true, patronSecurity: 0.2 } },
+      powerStructure: { government: 'Theocratic Council', factions: warTown.powerStructure.factions },
+    };
+    const { getByTestId } = render(
+      <WarFaithSection settlement={theocracy} settlementId="A" worldState={schismWorldState} forceLevel="standard" />,
+    );
+    const root = getByTestId('war-faith-section');
+    expect(root.textContent).toMatch(/Divine mandate/i);
+    expect(root.textContent).toMatch(/weakens|contested/i);
   });
 
-  test('a single-faith settlement shows NO pantheon panel (only the faith line)', () => {
-    const single = { ...pantheonTown, config: { primaryDeitySnapshot: pantheonTown.config.primaryDeitySnapshot } };
-    const { queryByTestId } = render(<WarFaithSection settlement={single} settlementId="P" forceLevel="standard" />);
-    expect(queryByTestId('pantheon-panel')).toBeNull();
+  test('a single-creed pantheon shows no contest forecast', () => {
+    const calmWorld = { religionStates: { A: { patronRef: 'd.maug', deities: { 'd.maug': { deityRef: 'd.maug', snapshot: { name: 'Maug' }, niche: 'warlike:evil', share: 100, standing: 'ascendant', legitimacy: 0.7, suppressed: false } } } } };
+    const { getByTestId } = render(
+      <WarFaithSection settlement={warTown} settlementId="A" worldState={calmWorld} forceLevel="standard" />,
+    );
+    expect(getByTestId('war-faith-section').textContent).not.toMatch(/Faith contest/i);
   });
 });
 

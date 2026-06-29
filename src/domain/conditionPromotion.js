@@ -76,7 +76,10 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /coup|putsch/i,                                         archetype: 'faction_challenge' },
 ]);
 
-/** @returns {string|null} the condition archetype this stressor promotes to, or null. */
+/**
+ * @param {any} stressor
+ * @returns {string|null} the condition archetype this stressor promotes to, or null.
+ */
 export function archetypeForStressor(stressor) {
   // `.label` included: world-pulse stressors carry their display text as
   // `label` (stressors.js normalizeStressor), not `name` — a label-only
@@ -101,9 +104,9 @@ export function archetypeForStressor(stressor) {
  * Scoped by `archetype` so re-promoting the settlement's OTHER stressors never
  * re-attributes their conditions to the new event.
  *
- * @param {Object} settlement
- * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}} [origin]
- * @returns {Object}
+ * @param {any} settlement
+ * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string} | null} [origin]
+ * @returns {any}
  */
 export function promoteStressorsToConditions(settlement, origin = null) {
   if (!settlement) return settlement;
@@ -113,8 +116,9 @@ export function promoteStressorsToConditions(settlement, origin = null) {
   // double-penalize the same affectedSystems in the causal substrate. Keyed off
   // the archetype (not the stressor label) so the condition id is stable and the
   // promotion stays idempotent. Order-independent.
+  /** @type {Map<string, any>} */
   const byArchetype = new Map();
-  for (const stressor of canonStressors(settlement)) {
+  for (const stressor of /** @type {any[]} */ (canonStressors(settlement))) {
     const archetype = archetypeForStressor(stressor);
     if (!archetype) continue;
     const severity = typeof stressor?.severity === 'number' ? stressor.severity : null;
@@ -182,6 +186,7 @@ export function promoteStressorsToConditions(settlement, origin = null) {
  * event conditions of one archetype (two severed routes) keep their distinct
  * ids and all survive. Pure, deterministic, consumes no rng — a config
  * without the record generates byte-identically.
+ * @param {any} settlement
  */
 export function reapplyEventConditions(settlement) {
   const record = settlement?.config?.eventConditions ?? settlement?._config?.eventConditions;
