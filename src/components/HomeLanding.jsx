@@ -6,7 +6,7 @@
  * returning visitors go straight to Create.
  *
  * Icons-off (text-only). Copy is the template's, which is already house voice
- * ("Not a dice roll", "A world that holds together").
+ * ("architecting an ever-evolving, coherent world").
  */
 import { INK, PARCH_100, CARD, BORDER, BODY, serif_, sans, FS, SP, R } from './theme.js';
 import Button from './primitives/Button.jsx';
@@ -54,7 +54,7 @@ export default function HomeLanding({ isMobile, signedIn, isPremium = false, onN
             SettlementForge generates living towns: economies, people, tensions, and history.
             {/* The simulation turn starts on its own line so "Then ..." reads as a
                 clean second beat instead of orphaning off the end of the first. */}
-            <span style={{ display: 'block' }}>Then it simulates how they change. Not a dice roll. A world that holds together.</span>
+            <span style={{ display: 'block' }}>Then it simulates how they change,.. architecting an ever-evolving, coherent world.</span>
           </p>
           <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>{signedIn ? 'Forge your next settlement' : 'Forge your first settlement'}</Button>

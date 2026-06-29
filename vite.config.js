@@ -252,6 +252,29 @@ export default defineConfig({
       {
         extends: true,
         test: {
+          name: 'heavy',
+          // The CPU-bound property / world-pulse suites. Each test drives the FULL
+          // generation pipeline or a 48-tick year-long campaign advance across many
+          // seeds — deterministic but heavy. In isolation each runs ~14-20s; under the
+          // forks pool's full-suite CPU contention they slow ~2.2-2.8x to ~32-39s and
+          // trip the root 20s testTimeout as a FALSE timeout (the assertions pass every
+          // time in isolation — only the wall clock loses). A 60s testTimeout clears
+          // the contention without touching seed counts, parallelism, or coverage, so
+          // rigor is unchanged; genuinely-hung tests still fail, just at 60s. File-level
+          // because several of these files hold more than one heavy test. Subtracted
+          // from `unit` below so they run exactly once.
+          include: [
+            'tests/store/advancePauseResume.test.js',
+            'tests/generators/neighbourFactionRenorm.test.js',
+            'tests/joins/ordering.test.js',
+            'tests/property/pipeline.property.test.js',
+          ],
+          testTimeout: 60000,
+        },
+      },
+      {
+        extends: true,
+        test: {
           name: 'unit',
           // Everything EXCEPT the pglite + vendor-libs suites, at full parallelism
           // (vitest's default pool/concurrency, left untouched here).
@@ -263,6 +286,11 @@ export default defineConfig({
             'tests/build/ciGateHardening.test.js',
             'tests/build/vendorManifestExactSet.test.js',
             'tests/build/vendorManifestNonEmpty.test.js',
+            // Heavy CPU-bound suites — isolated into the 'heavy' project (60s timeout) above.
+            'tests/store/advancePauseResume.test.js',
+            'tests/generators/neighbourFactionRenorm.test.js',
+            'tests/joins/ordering.test.js',
+            'tests/property/pipeline.property.test.js',
             'e2e/**',
             'node_modules/**',
             'dist/**',
