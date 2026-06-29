@@ -14,6 +14,11 @@
  * Pure, read-only.
  */
 
+/**
+ * @param {string} type
+ * @param {string} description
+ * @param {{ severity?: string, references?: any[] }} [opts]
+ */
 function record(type, description, { severity = 'block', references = [] } = {}) {
   return { id: `consistency.${type}`, type, classification: 'invalid', severity, description, references };
 }
@@ -21,9 +26,12 @@ function record(type, description, { severity = 'block', references = [] } = {})
 /**
  * Validate a settlement for cross-surface display contradictions.
  * Returns { blocking, warnings } — both arrays of contradiction records.
+ * @param {any} settlement
  */
 export function validateDossier(settlement) {
+  /** @type {any[]} */
   const blocking = [];
+  /** @type {any[]} */
   const warnings = [];
   if (!settlement) return { blocking, warnings };
 

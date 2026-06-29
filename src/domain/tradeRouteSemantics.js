@@ -54,13 +54,19 @@ const ROUTE_TIER = Object.freeze({
   none:       'isolated',
 });
 
-/** @returns {'major'|'standard'|'isolated'|'unknown'} the canonical tier for a route value. */
+/**
+ * @param {any} value
+ * @returns {'major'|'standard'|'isolated'|'unknown'} the canonical tier for a route value.
+ */
 export function tradeRouteTier(value) {
   if (!value) return 'unknown';
-  return ROUTE_TIER[String(value).toLowerCase()] || 'unknown';
+  return /** @type {Record<string, any>} */ (ROUTE_TIER)[String(value).toLowerCase()] || 'unknown';
 }
 
-/** True when the route is isolated/none (no real regional connection). */
+/**
+ * True when the route is isolated/none (no real regional connection).
+ * @param {any} value
+ */
 export function isIsolatedRoute(value) {
   return tradeRouteTier(value) === 'isolated';
 }

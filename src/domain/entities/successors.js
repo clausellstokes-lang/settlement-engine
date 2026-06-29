@@ -31,13 +31,14 @@
  * institutional/faction links is the standard successor.
  *
  * @param {Object} args
- * @param {NpcStructural} args.outgoing
- * @param {Object} args.settlement
+ * @param {any} args.outgoing
+ * @param {any} args.settlement
  * @param {number} [args.limit=3]
  * @returns {NpcStructural[]} ranked candidates
  */
 export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
   if (!outgoing || !settlement) return [];
+  /** @type {any[]} */
   const npcs = settlement.npcs || [];
   const outId = outgoing.id || outgoing.name;
   const outInst = new Set(outgoing.linkedInstitutionIds || []);
@@ -60,6 +61,8 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
  * populated before any deaths occur. If no candidates exist yet, the
  * field is empty and the SuccessorPrompt will fall back to free-form
  * input.
+ *
+ * @param {{ npc: any, settlement: any, limit?: number }} args
  */
 export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
   return inferSuccessors({ outgoing: npc, settlement, limit })
@@ -67,6 +70,11 @@ export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
     .filter(Boolean);
 }
 
+/**
+ * @param {any} candidate
+ * @param {Set<any>} outInst
+ * @param {Set<any>} outFac
+ */
 function scoreCandidate(candidate, outInst, outFac) {
   // Institutional overlap is the strongest signal — internal succession
   // is the standard inheritance pattern (deputy mayor becomes mayor).

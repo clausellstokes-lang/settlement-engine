@@ -22,7 +22,7 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { effectiveStressorSeverity } from './stressors.js';
 import { stablePart } from './worldState.js';
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+const clamp01 = (/** @type {any} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
 
 // Proposal gates the flow formulas can actually REACH (the old severity>=0.72
 // gate was unreachable by construction: migration severity caps at 0.6 and
@@ -49,6 +49,11 @@ const TRADE_CRISIS = /trade_route_cut|export_market|famine|import_shortage|food_
 // purposes — nobody flees a siege that was BROKEN last month.
 const ACTIVE_FLOW_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
+/**
+ * @param {any} snapshot
+ * @param {number} tick
+ * @param {boolean} requireProposal
+ */
 function populationFlows(snapshot, tick, requireProposal) {
   const graph = snapshot.regionalGraph;
   const out = [];
@@ -111,12 +116,17 @@ function populationFlows(snapshot, tick, requireProposal) {
   return out;
 }
 
+/**
+ * @param {any} snapshot
+ * @param {number} tick
+ * @param {boolean} requireProposal
+ */
 function tradeScarcityFlows(snapshot, tick, requireProposal) {
   const graph = snapshot.regionalGraph;
   const out = [];
   for (const item of snapshot.settlements || []) {
     const supplierId = String(item.id);
-    const conditionCrisis = (item.activeConditions || []).some(c => TRADE_CRISIS.test(c.archetype || ''));
+    const conditionCrisis = (item.activeConditions || []).some(/** @param {any} c */ c => TRADE_CRISIS.test(c.archetype || ''));
     const connectivityCrisis = (item.causal?.scores?.trade_connectivity ?? 60) < 35;
     if (!conditionCrisis && !connectivityCrisis) continue;
     for (const channel of activeChannelsFrom(graph, supplierId, { types: ['trade_dependency'] })) {

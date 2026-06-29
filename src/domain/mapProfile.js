@@ -44,6 +44,7 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 
 // ── Input envelope ───────────────────────────────────────────────────────
 
+/** @param {any} settlement */
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
@@ -59,6 +60,11 @@ function deriveInputs(settlement) {
 
 // ── Output: roadImportance ──────────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any} causal
+ * @param {any[]} contributors
+ */
 function deriveRoadImportance(settlement, causal, contributors) {
   const trade = causal.scores?.trade_connectivity ?? 50;
   const access = settlement.config?.tradeRouteAccess;
@@ -80,11 +86,16 @@ function deriveRoadImportance(settlement, causal, contributors) {
 
 // ── Output: defensiveTerrain ────────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any} causal
+ * @param {any[]} contributors
+ */
 function deriveDefensiveTerrain(settlement, causal, contributors) {
   const defense = causal.scores?.defense_readiness ?? 50;
   const terrain = settlement.config?.terrain || '';
   const hasWalls = /\bwall|\brampart|\bpalisade/i.test(JSON.stringify(settlement.defenseProfile || {}))
-                || (settlement.institutions || []).some(i => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
+                || (settlement.institutions || []).some((/** @type {any} */ i) => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
 
   let idx = 1; // 'open' baseline
   if (/mountain|highland|peak|cliff/i.test(terrain))  { idx = 3; contributors.push({ source: 'config.terrain', effect: 'highland', reason: 'Mountain / cliff terrain is sheltered.' }); }
@@ -106,8 +117,14 @@ function deriveDefensiveTerrain(settlement, causal, contributors) {
 
 // ── Output: regionalAuthority ───────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any[]} contributors
+ */
 function deriveRegionalAuthority(settlement, contributors) {
+  /** @type {any} */
   const graph = deriveRegionalGraph(settlement);
+  /** @type {any[]} */
   const authorities = [];
   for (const link of graph.links) {
     if (link.relationshipType === 'tax_authority'
@@ -132,8 +149,13 @@ function deriveRegionalAuthority(settlement, contributors) {
 
 // ── Output: hazardMarkers ───────────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any[]} contributors
+ */
 function deriveHazardMarkers(settlement, contributors) {
   const threats = deriveAllThreatProfiles(settlement);
+  /** @type {any[]} */
   const out = [];
   for (const t of threats) {
     if (t.severity < 0.4) continue;
@@ -158,7 +180,13 @@ function deriveHazardMarkers(settlement, contributors) {
 
 // ── Output: suggestedFeatures ───────────────────────────────────────────
 
+/**
+ * @param {any} settlement
+ * @param {any} causal
+ * @param {any[]} contributors
+ */
 function deriveSuggestedFeatures(settlement, causal, contributors) {
+  /** @type {any[]} */
   const out = [];
   // Walls suggested for fortified-ish defense bands
   const def = causal.scores?.defense_readiness ?? 50;
@@ -203,6 +231,7 @@ export function deriveMapProfile(settlement) {
   }
 
   const causal = deriveCausalState(settlement);
+  /** @type {any[]} */
   const contributors = [];
 
   return {
@@ -223,8 +252,12 @@ export function deriveMapProfile(settlement) {
 export function roadImportanceBands()    { return [...ROAD_IMPORTANCE_BANDS]; }
 export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; }
 
-/** Human-readable summary. */
+/**
+ * Human-readable summary.
+ * @param {any} settlement
+ */
 export function summarizeMap(settlement) {
+  /** @type {any} */
   const m = deriveMapProfile(settlement);
   return [
     `Inputs: terrain: ${m.inputs.terrain || 'unset'}; biome: ${m.inputs.biome || 'unset'}; trade access: ${m.inputs.tradeRouteAccess || 'unset'}; monster threat: ${m.inputs.monsterThreat || 'unset'}.`,
@@ -232,6 +265,6 @@ export function summarizeMap(settlement) {
     `Terrain defense: ${m.outputs.defensiveTerrain}.`,
     `Regional authorities: ${m.outputs.regionalAuthority.length}.`,
     `Hazards pinned: ${m.outputs.hazardMarkers.length}.`,
-    `Suggested features: ${m.outputs.suggestedFeatures.map(f => f.feature).join(', ') || 'none'}.`,
+    `Suggested features: ${m.outputs.suggestedFeatures.map((/** @type {any} */ f) => f.feature).join(', ') || 'none'}.`,
   ];
 }

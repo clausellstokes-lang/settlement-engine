@@ -68,7 +68,7 @@ const ADVANCED_GATES = [
   ['settlementStrategyEnabled', 'Settlement strategy',
     'Settlements choose to defend, deploy, or sue for peace. Off = no strategy candidates.'],
   ['religionDynamicsEnabled', 'Religion dynamics',
-    'Deities contest converts and gain seats, but only once a settlement carries a primary deity. Off or deity-free equals no faith drift.'],
+    'Deities contest converts and gain seats, but only once a settlement carries a patron deity (or an imposed cult). Off or deity-free equals no faith drift.'],
 ];
 
 function human(value) {

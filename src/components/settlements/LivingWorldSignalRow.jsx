@@ -113,7 +113,7 @@ export default function LivingWorldSignalRow({ model }) {
       {faith && (
         <Pip
           color={faith.color}
-          title={`Primary faith: ${faith.name}${faith.rank ? ` (${faith.rank})` : ''}`}
+          title={`Patron faith: ${faith.name}${faith.rank ? ` (${faith.rank})` : ''}`}
         >
           {faith.glyph ? <span aria-hidden="true">{faith.glyph} </span> : null}{faith.name}{faith.rank ? ` · ${faith.rank}` : ''}
         </Pip>

@@ -13,7 +13,7 @@
  * All copy lives in en.js (valueLadder / aboutLiving). Pure presentational.
  */
 
-import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, RED, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
 import { t, tx } from '../../copy/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import Button from '../primitives/Button.jsx';
@@ -123,6 +123,80 @@ function LivingSystemCard({ id }) {
   );
 }
 
+// A fictional realm's pantheon caught mid-upheaval — a good patron losing its
+// rightful claim to a rising dark cult under a compromised throne. Illustrative
+// sample data (never a real save), labeled as such, so a FREE/anon reader can SEE
+// the living-faith system the premium tier runs. Mirrors WarFaithSection's read
+// surface (standings + legitimacy bands + contest odds + the divine mandate).
+const SAMPLE_PANTHEON = Object.freeze({
+  settlement: 'Highmoor',
+  deities: Object.freeze([
+    { name: 'Aurelia, the Dawnmother', tags: 'peaceful · good', share: 47, standing: 'ascendant', legitimacy: 0.33, isPatron: true },
+    { name: 'Vorr, the Iron Maw', tags: 'warlike · evil', share: 36, standing: 'established', legitimacy: 0.58 },
+    { name: 'The Hollow Choir', tags: 'neutral · neutral', share: 17, standing: 'cult', legitimacy: 0.18 },
+  ]),
+  contest: Object.freeze([
+    { name: 'Vorr', odds: 55 }, { name: 'Aurelia', odds: 40 }, { name: 'The Hollow Choir', odds: 5 },
+  ]),
+  mandate: 'A contested faith weakens the ruler’s divine mandate, and the throne wavers with it.',
+});
+
+/** 0..1 legitimacy → band + colour. Mirrors WarFaithSection.legitimacyBand. */
+function legBand(v) {
+  if (v >= 0.75) return { label: 'secure', color: GREEN };
+  if (v >= 0.5) return { label: 'established', color: GOLD_TXT };
+  if (v >= 0.25) return { label: 'tenuous', color: GOLD_TXT };
+  return { label: 'contested', color: RED };
+}
+
+// A read-only showcase of the living pantheon (sample data, all readers). Slots
+// before the value ladder so a free reader SEES the simulation depth, then climbs.
+function PantheonTeaser() {
+  const { settlement, deities, contest, mandate } = SAMPLE_PANTHEON;
+  return (
+    <section style={{ ...NO_BREAK, borderLeft: `3px solid ${VIOLET}`, paddingLeft: 14, marginBottom: SP.xl, maxWidth: PROSE_MAX }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: VIOLET }}>
+          Sample pantheon
+        </span>
+        <span title="Cartographer is the paid tier that runs the living simulation, $6 a month."
+          style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`, borderRadius: 999, padding: '2px 8px' }}>
+          {t('aboutLiving.premiumChip')}
+        </span>
+      </div>
+      <h3 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK, margin: '0 0 3px' }}>
+        The faiths of {settlement}, contested
+      </h3>
+      <p style={{ fontSize: FS['12.5'], color: SEC, lineHeight: 1.55, margin: '0 0 10px' }}>
+        Each settlement grows its own pantheon. Creeds win adherents, earn or lose the rightful claim to the
+        patron seat, and rise or fall with who holds power. Here a dark cult is overtaking the old church.
+      </p>
+      {deities.map((d) => {
+        const band = legBand(d.legitimacy);
+        return (
+          <div key={d.name} style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: FS.sm, fontWeight: d.isPatron ? 700 : 500, color: d.isPatron ? INK : BODY, minWidth: 150 }}>
+              {d.name}{d.isPatron ? ' (patron)' : ''}
+            </span>
+            <span style={{ fontSize: FS.xs, color: SEC }}>
+              {d.share}% · {d.standing} · {d.tags} · legitimacy{' '}
+              <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>
+            </span>
+          </div>
+        );
+      })}
+      <p style={{ fontSize: FS['12.5'], color: BODY, lineHeight: 1.55, margin: '8px 0 3px' }}>
+        <span style={{ fontWeight: 700, color: RED }}>Faith contest:</span> a rival presses the patron&apos;s claim.
+        Odds next turn: {contest.map((c, i) => `${i > 0 ? ', ' : ''}${c.name} ${c.odds}%`).join('')}.
+      </p>
+      <p style={{ fontSize: FS['12.5'], color: BODY, lineHeight: 1.55, margin: 0 }}>
+        <span style={{ fontWeight: 700, color: RED }}>Divine mandate:</span> {mandate}
+      </p>
+    </section>
+  );
+}
+
 export default function LivingWorldTab() {
   const systems = Object.keys(tx('aboutLiving.systems') || {});
   return (
@@ -150,6 +224,10 @@ export default function LivingWorldTab() {
           style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
         />
       </figure>
+
+      {/* A read-only taste of the living pantheon (sample data) — so a free reader
+          SEES the simulation depth that the premium tier runs, before the pitch. */}
+      <PantheonTeaser />
 
       {/* The value ladder — anon tries / free saves + full-size / premium simulates */}
       <ValueLadder />

@@ -145,7 +145,7 @@ const NEUTRAL_TEMPLATE = Object.freeze({
 /**
  * Derive the structured GenreProfile.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Object} GenreProfile
  */
 export function deriveGenreProfile(settlement) {
@@ -164,7 +164,7 @@ export function deriveGenreProfile(settlement) {
   }
 
   const normalized = String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
-  const template = GENRE_TEMPLATES[normalized];
+  const template = /** @type {Record<string, any>} */ (GENRE_TEMPLATES)[normalized];
   if (!template) {
     contributors.push({
       source: 'config.genre',
@@ -181,6 +181,11 @@ export function deriveGenreProfile(settlement) {
   return finalizeProfile(normalized, template, contributors);
 }
 
+/**
+ * @param {string|null} genre
+ * @param {any} template
+ * @param {any[]} contributors
+ */
 function finalizeProfile(genre, template, contributors) {
   return {
     genre,
@@ -202,9 +207,12 @@ export function supportedGenres() {
   return [...CANONICAL_GENRES];
 }
 
-/** Catalog accessor for a single genre's template (read-only copy). */
+/**
+ * Catalog accessor for a single genre's template (read-only copy).
+ * @param {string} genre
+ */
 export function genreTemplate(genre) {
-  const t = GENRE_TEMPLATES[genre];
+  const t = /** @type {Record<string, any>} */ (GENRE_TEMPLATES)[genre];
   if (!t) return null;
   return {
     institutionEmphasis: [...t.institutionEmphasis],
@@ -217,9 +225,12 @@ export function genreTemplate(genre) {
   };
 }
 
-/** Human-readable summary. */
+/**
+ * Human-readable summary.
+ * @param {any} settlement
+ */
 export function summarizeGenre(settlement) {
-  const g = deriveGenreProfile(settlement);
+  const g = /** @type {any} */ (deriveGenreProfile(settlement));
   return [
     `Genre: ${g.genre || 'unset'}.`,
     `Institution emphasis: ${g.institutionEmphasis.join(', ') || 'neutral'}.`,

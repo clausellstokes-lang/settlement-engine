@@ -78,6 +78,7 @@ export function canonicalPropagationLabel(label) {
   return PROPAGATION_ALIASES[base.toLowerCase()] || base;
 }
 
+/** @type {Record<string, number>} */
 const TIER_RANK = {
   thorp: 0,
   hamlet: 1,
@@ -101,18 +102,30 @@ export const RELATIONSHIP_SELECTIONS = [
   { value: 'vassal_of', label: 'Current settlement is vassal' },
 ];
 
+/** @param {any} save */
 function strengthScore(save) {
   const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
   const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
   return (TIER_RANK[tier] ?? 2) + Math.min(0.8, Math.log10(Math.max(1, population)) / 8);
 }
 
+/**
+ * @param {any} sourceId
+ * @param {any} targetId
+ * @param {any} sourceSave
+ * @param {any} targetSave
+ */
 function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
   return strengthScore(targetSave) > strengthScore(sourceSave)
     ? { from: String(targetId), to: String(sourceId) }
     : { from: String(sourceId), to: String(targetId) };
 }
 
+/**
+ * @param {any} selection
+ * @param {any} sourceId
+ * @param {any} targetId
+ */
 export function relationshipDefinition(selection, sourceId, targetId) {
   const source = String(sourceId);
   const target = String(targetId);
@@ -140,6 +153,10 @@ export function relationshipDefinition(selection, sourceId, targetId) {
   return relationshipDefinition('neutral', source, target);
 }
 
+/**
+ * @param {any} definition
+ * @param {any} localRole
+ */
 export function relationshipLinkMetadata(definition, localRole) {
   return {
     relationshipType: definition.relationshipType,
@@ -150,6 +167,11 @@ export function relationshipLinkMetadata(definition, localRole) {
   };
 }
 
+/**
+ * @param {any} edge
+ * @param {any} sourceId
+ * @param {any} [_targetId]
+ */
 export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
   const sourceIsFrom = String(edge?.from) === String(sourceId);
   if (edge?.relationshipType === 'patron') {
@@ -171,6 +193,9 @@ export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
 /**
  * Resolve new canonical metadata and old display-oriented saves to one edge.
  * Legacy hierarchical links infer the stronger endpoint as patron/overlord.
+ * @param {any} link
+ * @param {any} sourceSave
+ * @param {any} targetSave
  */
 export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   const sourceId = sourceSave?.id || sourceSave?.settlement?.id;
@@ -251,6 +276,7 @@ export function directionalRelationshipLabel(link, neighbourName) {
   return phrase(name);
 }
 
+/** @param {any} link */
 export function localPropagationType(link) {
   const role = link?.localRelationshipRole || link?.displayRelationshipType;
   if (role === 'client') return 'patron';

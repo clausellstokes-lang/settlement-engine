@@ -43,11 +43,13 @@ const NEUTRAL = Object.freeze({
   present: false,        // true once a real foodSecurity object backed it
 });
 
+/** @param {any} v @returns {boolean} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
+/** @param {any} v @param {number} d @returns {number} */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {FoodLedger}
  */
 export function foodLedger(settlement) {

@@ -135,7 +135,7 @@ function hasVisibleImpairment(entity) {
  * leader's legitimacy bonus, stored as negative severity) or a covert-only
  * capture reads ACTIVE, not impaired.
  *
- * @param {Object} entity   institution/faction/npc with optional `status` and `impairments`
+ * @param {any} entity   institution/faction/npc with optional `status` and `impairments`
  * @returns {EntityStatus}
  */
 export function effectiveStatus(entity) {
@@ -154,7 +154,7 @@ export function effectiveStatus(entity) {
  * Returns a new entity object — never mutates the input. The pipeline
  * uses this to compose patches; the store reducer applies them.
  *
- * @param {Object} entity
+ * @param {any} entity
  * @param {Impairment} impairment
  * @returns {Object} new entity
  */
@@ -162,7 +162,7 @@ export function withImpairment(entity, impairment) {
   if (!entity) return entity;
   const prev = entity.impairments || [];
   // Idempotency: replace if same type + same cause
-  const filtered = prev.filter(i => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
+  const filtered = prev.filter((/** @type {any} */ i) => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
   const nextImpairments = [...filtered, { ...impairment, appliedAt: impairment.appliedAt ?? null }];
   return {
     ...entity,
@@ -190,11 +190,12 @@ export function withImpairment(entity, impairment) {
 /**
  * Remove all impairments produced by a given event id — the inverse of
  * withImpairment. Used by undoLastEvent to restore prior state.
+ * @param {any} entity @param {any} causeEventId
  */
 export function withoutEventImpairments(entity, causeEventId) {
   if (!entity) return entity;
   const prev = entity.impairments || [];
-  const filtered = prev.filter(i => i.causeEventId !== causeEventId);
+  const filtered = prev.filter((/** @type {any} */ i) => i.causeEventId !== causeEventId);
   const status = filtered.length === 0 && entity.status === STATUS_IMPAIRED
     ? STATUS_ACTIVE
     : entity.status;
@@ -209,15 +210,17 @@ export function withoutEventImpairments(entity, causeEventId) {
  *
  * Compounding rule: combined = 1 - prod(1 - s_i). Two 0.5 impairments
  * yield 0.75, not 1.0 — preserves "still has some capacity."
+ * @param {any} entity @param {any} type
  */
 export function severityFor(entity, type) {
-  const impairments = (entity?.impairments || []).filter(i => i.type === type);
+  const impairments = (entity?.impairments || []).filter((/** @type {any} */ i) => i.type === type);
   if (!impairments.length) return 0;
   let surviving = 1;
   for (const i of impairments) surviving *= (1 - clamp01(i.severity ?? 0));
   return Number((1 - surviving).toFixed(3));
 }
 
+/** @param {any} v */
 function clamp01(v) {
   if (!Number.isFinite(v)) return 0;
   if (v < 0) return 0;
@@ -228,6 +231,7 @@ function clamp01(v) {
 /**
  * True if the entity is at full capacity with no impairments.
  * Convenient predicate for UI rendering ("show damaged badge?").
+ * @param {any} entity
  */
 export function isFullyActive(entity) {
   return effectiveStatus(entity) === STATUS_ACTIVE;

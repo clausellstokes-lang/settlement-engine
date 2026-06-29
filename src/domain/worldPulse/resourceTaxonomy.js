@@ -15,9 +15,10 @@ const NONRENEWABLE_PATTERNS = [
 
 const MAGICAL_PATTERNS = [/magic|arcane|ley|planar/];
 
+/** @param {any} resource */
 function textFor(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = RESOURCE_DATA[key] || {};
+  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
   return [
     key,
     spec.label,
@@ -28,6 +29,7 @@ function textFor(resource) {
   ].filter(Boolean).join(' ').toLowerCase();
 }
 
+/** @param {any} settlement */
 function magicLevelScore(settlement = {}) {
   const level = String(settlement?.config?.magicLevel || settlement?.magicLevel || '').toLowerCase();
   if (level === 'pervasive') return 4;
@@ -37,9 +39,10 @@ function magicLevelScore(settlement = {}) {
   return 0;
 }
 
+/** @param {any} resource */
 export function classifyResource(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = RESOURCE_DATA[key] || {};
+  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
   const text = textFor(resource);
   const magical = MAGICAL_PATTERNS.some(pattern => pattern.test(text));
   const nonrenewable = NONRENEWABLE_PATTERNS.some(pattern => pattern.test(text));
@@ -81,6 +84,11 @@ export function classifyResource(resource) {
   };
 }
 
+/**
+ * @param {any} resource
+ * @param {any} settlement
+ * @param {any} [context]
+ */
 export function canRecoverResource(resource, settlement, context = {}) {
   const taxonomy = classifyResource(resource);
   if (context.forceRecovery) return { canRecover: true, taxonomy, reason: 'Recovery was explicitly forced.' };

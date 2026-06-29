@@ -44,10 +44,12 @@ export const REGIONAL_RELATIONSHIP_TYPES = Object.freeze([
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {any} n */
 function neighbourId(n) {
   if (!n) return null;
   if (typeof n === 'string') return `settlement.${snakeCase(n)}`;
@@ -56,6 +58,7 @@ function neighbourId(n) {
   return null;
 }
 
+/** @param {any} n */
 function neighbourName(n) {
   if (typeof n === 'string') return n;
   return n?.name || n?.id || 'Unnamed';
@@ -94,6 +97,7 @@ const NEIGHBOUR_NAME_PATTERNS = Object.freeze([
   { pattern: /(border|march|wild|frontier)/i,         type: 'military_threat' },
 ]);
 
+/** @param {any} rawNeighbour */
 function inferRelationshipType(rawNeighbour) {
   if (!rawNeighbour) return 'other';
   // Explicit canonical type wins
@@ -107,7 +111,7 @@ function inferRelationshipType(rawNeighbour) {
   const legacy = canonicalRelationshipLabel(
     String(rawNeighbour.relationshipType || '').toLowerCase()
   ).toLowerCase();
-  if (legacy && LEGACY_RELATIONSHIP_MAP[legacy]) return LEGACY_RELATIONSHIP_MAP[legacy];
+  if (legacy && /** @type {Record<string, string>} */ (LEGACY_RELATIONSHIP_MAP)[legacy]) return /** @type {Record<string, string>} */ (LEGACY_RELATIONSHIP_MAP)[legacy];
   // Fall back to name pattern
   const name = String(rawNeighbour.name || '');
   for (const { pattern, type } of NEIGHBOUR_NAME_PATTERNS) {
@@ -116,6 +120,7 @@ function inferRelationshipType(rawNeighbour) {
   return 'other';
 }
 
+/** @param {any} rawNeighbour @param {string} relType */
 function inferSeverity(rawNeighbour, relType) {
   // Explicit numeric severity wins
   if (typeof rawNeighbour?.severity === 'number') {
@@ -137,9 +142,10 @@ function inferSeverity(rawNeighbour, relType) {
     market_hub:         0.6,
     other:              0.3,
   };
-  return defaults[relType] || 0.3;
+  return /** @type {Record<string, number>} */ (defaults)[relType] || 0.3;
 }
 
+/** @param {string} relType */
 function inferDirection(relType) {
   // 'incoming' = the other settlement acts on us
   // 'outgoing' = we act on them
@@ -178,12 +184,14 @@ const PROPAGATION_HINTS = Object.freeze({
   other:              [],
 });
 
+/** @param {string} relType */
 function propagationHintsFor(relType) {
-  return [...(PROPAGATION_HINTS[relType] || [])];
+  return [...(/** @type {Record<string, string[]>} */ (PROPAGATION_HINTS)[relType] || [])];
 }
 
 // ── Single-link derivation ───────────────────────────────────────────────
 
+/** @param {any} rawNeighbour @param {any} settlement */
 export function deriveRegionalLink(rawNeighbour, settlement) {
   if (!rawNeighbour) return null;
   const otherId = neighbourId(rawNeighbour);
@@ -211,7 +219,7 @@ export function deriveRegionalLink(rawNeighbour, settlement) {
 /**
  * Derive the full regional graph centered on this settlement.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Object} RegionalGraph
  */
 export function deriveRegionalGraph(settlement) {
@@ -224,11 +232,12 @@ export function deriveRegionalGraph(settlement) {
   if (Array.isArray(settlement.neighbourNetwork))  sources.push(...settlement.neighbourNetwork);
   if (Array.isArray(settlement.neighborNetwork))   sources.push(...settlement.neighborNetwork);
 
+  /** @type {any[]} */
   const links = sources.map(n => deriveRegionalLink(n, settlement)).filter(Boolean);
 
   const nodes = [
     { id: centerId, name: centerName, role: 'center' },
-    ...links.map(l => ({ id: l.to, name: l.toName, role: 'neighbour' })),
+    ...links.map(/** @param {any} l */ l => ({ id: l.to, name: l.toName, role: 'neighbour' })),
   ];
 
   return { center: centerId, nodes, links };
@@ -240,22 +249,23 @@ export function supportedRelationshipTypes() {
   return [...REGIONAL_RELATIONSHIP_TYPES];
 }
 
-/** Group links by relationship type. */
+/** Group links by relationship type. @param {any} settlement */
 export function regionalBreakdown(settlement) {
+  /** @type {Record<string, number>} */
   const out = {};
   for (const type of REGIONAL_RELATIONSHIP_TYPES) out[type] = 0;
-  const g = deriveRegionalGraph(settlement);
+  const g = /** @type {any} */ (deriveRegionalGraph(settlement));
   for (const l of g.links) {
     if (out[l.relationshipType] !== undefined) out[l.relationshipType] += 1;
   }
   return out;
 }
 
-/** Human-readable lines. */
+/** Human-readable lines. @param {any} settlement */
 export function summarizeRegional(settlement) {
-  const g = deriveRegionalGraph(settlement);
+  const g = /** @type {any} */ (deriveRegionalGraph(settlement));
   if (g.links.length === 0) return ['No structured regional neighbours.'];
-  return g.links.map(l =>
+  return g.links.map(/** @param {any} l */ l =>
     `${l.toName}: ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
   );
 }

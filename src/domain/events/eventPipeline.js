@@ -51,10 +51,11 @@ import { resolveStressorEventSeverity } from './resolveStressorEventSeverity.js'
 // so the pipeline can layer the registry's authored deltas on top of
 // the structurally-derived SystemState.
 
+/** @param {any} state @param {any} deltas */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
-  /** @type {SystemState} */
-  const next = /** @type {SystemState} */ ({});
+  /** @type {Record<string, any>} */
+  const next = /** @type {Record<string, any>} */ ({});
   for (const key of Object.keys(state)) {
     const dim = state[key];
     const change = deltas?.[key] ?? 0;
@@ -86,7 +87,7 @@ function applyAuthoredStateDeltas(state, deltas) {
  *
  * @param {SystemState} systemState — a freshly derived SystemState
  * @param {Event}  event
- * @param {Object} [settlement] the BEFORE settlement (authored deltas may read it)
+ * @param {any} [settlement] the BEFORE settlement (authored deltas may read it)
  * @returns {SystemState}
  */
 export function layerAuthoredDeltas(systemState, event, settlement = null) {
@@ -137,7 +138,9 @@ export function runEventPipeline(settlement, event, options = {}) {
   const beforeCausalState = deriveCausalState(beforeSettlement);
 
   // 1. Validate the event
+  /** @type {any} */
   const spec = event ? EVENT_REGISTRY[event.type] : null;
+  /** @type {any[]} */
   const warnings = [];
   if (!event || !spec) {
     warnings.push({ severity: 'mismatch', message: `Unknown event type: ${event?.type}` });
@@ -175,7 +178,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   // 2. Mutate a cloned settlement — entity-level changes (status flips,
   //    impairments, NPC patches, propagation). mutateSettlement never
   //    mutates the input.
-  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event: resolvedEvent, now });
+  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event: resolvedEvent, now: /** @type {any} */ (now) });
 
   // 3. Re-derive structural SystemState from the mutated settlement
   const afterStructural = deriveSystemState(nextSettlement);
@@ -205,22 +208,24 @@ export function runEventPipeline(settlement, event, options = {}) {
   // 7. Faction relationship deltas — computed against the
   //    BEFORE settlement because the deltas describe how the event
   //    moves factions, not what the post-event state already reflects.
+  /** @type {any[]} */
   let factionRelationshipDeltas = [];
   if (!skipFactionResponses) {
     try {
       factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, resolvedEvent);
-    } catch (e) {
+    } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction relationship calc failed: ${e?.message || e}` });
     }
   }
 
   // 8. Faction responses (existing system) — computed against the
   //    MUTATED settlement so impaired factions speak as such.
+  /** @type {any[]} */
   let factionResponses = [];
   if (!skipFactionResponses) {
     try {
       factionResponses = generateFactionResponses(nextSettlement, resolvedEvent);
-    } catch (e) {
+    } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction responses failed: ${e?.message || e}` });
     }
   }
@@ -267,6 +272,7 @@ export function runEventPipeline(settlement, event, options = {}) {
  * systemStateDeltas only. The substrate's causalStateDeltas ship
  * separately in `diagnosticLines` for internal/debug surfaces; nothing
  * DM-facing should render them.
+ * @param {any} result
  */
 export function summarizeEventResult(result) {
   if (!result) {

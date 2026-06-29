@@ -37,16 +37,18 @@ const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
 export function deriveTradeLinks(exportsList, importsList, neighbourProfile, opts = {}) {
   const np = neighbourProfile;
   if (!np || !np.name) return [];
-  if (NO_TRADE_RELATIONSHIPS.has(np.relationshipType) || np.dynamics?.economyMode === 'suppress') return [];
+  if (NO_TRADE_RELATIONSHIPS.has(/** @type {string} */ (np.relationshipType)) || np.dynamics?.economyMode === 'suppress') return [];
 
+  /** @type {Array<{good:string, goodId:string, direction:string, partner:string, viaNeighbour:boolean, viaCategory?:boolean}>} */
   const links = [];
   const seen = new Set(); // `${direction}:${goodLabelLower}` so the two matchers don't duplicate
 
+  /** @param {any} good @param {any} goodId @param {any} direction @param {any} viaCategory */
   const push = (good, goodId, direction, viaCategory) => {
     const key = `${direction}:${String(good).toLowerCase()}`;
     if (seen.has(key)) return;
     seen.add(key);
-    links.push({ good, goodId, direction, partner: np.name, viaNeighbour: true, ...(viaCategory ? { viaCategory: true } : {}) });
+    links.push({ good, goodId, direction, partner: /** @type {string} */ (np.name), viaNeighbour: true, ...(viaCategory ? { viaCategory: true } : {}) });
   };
 
   // 1) canonical good id — same good traded both ways.
@@ -54,7 +56,7 @@ export function deriveTradeLinks(exportsList, importsList, neighbourProfile, opt
   for (const m of goodsIntersect(exportsList || [], np.primaryImports || [])) push(m.sourceLabel, m.id, 'export', false);
 
   // 2) category bridge — one link per category per direction.
-  const ourCat = (label) => (opts.satisfiesOf && opts.satisfiesOf(label)) || finishedGoodsCategoryOf(label);
+  const ourCat = (/** @type {any} */ label) => (opts.satisfiesOf && opts.satisfiesOf(label)) || finishedGoodsCategoryOf(label);
   const neighExportCats = new Set((np.primaryExports || []).map(finishedGoodsCategoryOf).filter(Boolean));
   const neighImportCats = new Set((np.primaryImports || []).map(finishedGoodsCategoryOf).filter(Boolean));
   const usedCat = new Set(); // `${direction}:${cat}` — one bridged link per category/direction

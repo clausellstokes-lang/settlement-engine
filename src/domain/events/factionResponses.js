@@ -37,7 +37,7 @@ export function generateFactionResponses(settlement, event) {
   const out = [];
   for (const faction of factions) {
     const archetype = matchArchetype(faction);
-    const responder = ARCHETYPE_RESPONDERS[archetype] || respondAsGeneric;
+    const responder = /** @type {Record<string, any>} */ (ARCHETYPE_RESPONDERS)[archetype] || respondAsGeneric;
     const response = responder(faction, event, settlement);
     if (response) out.push(/** @type {FactionResponse} */ (response));
   }
@@ -64,7 +64,7 @@ const CANONICAL_TO_RESPONDER = Object.freeze({
  * @param {any} faction
  */
 function matchArchetype(faction) {
-  return CANONICAL_TO_RESPONDER[factionArchetype(faction)] || null;
+  return /** @type {Record<string, any>} */ (CANONICAL_TO_RESPONDER)[factionArchetype(faction)] || null;
 }
 
 const ARCHETYPE_RESPONDERS = {
@@ -90,6 +90,9 @@ const ARCHETYPE_RESPONDERS = {
  * authored. The AI narrative layer (when wired) gets the structured
  * response and can elaborate; the structured response is the source of
  * truth.
+ * @param {any} faction
+ * @param {any} event
+ * @param {any} [_settlement]
  */
 function respondAsMerchantGuild(faction, event, _settlement) {
   const name = faction.name || faction.faction || 'Merchant Guild';
@@ -203,6 +206,8 @@ function respondAsMerchantGuild(faction, event, _settlement) {
  *               sermons, claim to moral high ground.
  * Vulnerability: depends on legitimacy that can collapse from a single
  *               failed prophecy or scandal.
+ * @param {any} faction
+ * @param {any} event
  */
 function respondAsTemple(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Temple';
@@ -320,6 +325,8 @@ function respondAsTemple(faction, event /* , settlement */) {
  *               networks, holding cells.
  * Vulnerability: vulnerable to political shifts in the ruling order;
  *               low pay creates corruption pressure.
+ * @param {any} faction
+ * @param {any} event
  */
 function respondAsWatch(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Watch';
@@ -450,6 +457,8 @@ function respondAsWatch(faction, event /* , settlement */) {
  *               rackets, blackmail material on prominent citizens.
  * Vulnerability: depends on watch corruption and on the silence of its
  *               own ranks.
+ * @param {any} faction
+ * @param {any} event
  */
 function respondAsThievesGuild(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Organized Crime';
@@ -593,12 +602,14 @@ function respondAsGeneric(faction, event /* , settlement */) {
 // target may be a slug or a name; classifyInstitution lowercases its arg, so
 // passing targetId verbatim matches the prior behaviour for every category the
 // local copy recognised.
+/** @param {any} targetId */
 function classifyInstitutionTarget(targetId) {
   return classifyInstitution(targetId);
 }
 
+/** @param {any} targetId */
 function labelOf(targetId) {
   if (!targetId) return 'institution';
-  const tail = String(targetId).split('.').pop();
+  const tail = /** @type {string} */ (String(targetId).split('.').pop());
   return tail.replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
 }

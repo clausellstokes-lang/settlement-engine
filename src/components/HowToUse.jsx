@@ -483,7 +483,7 @@ function RefTab({ onNavigate }) {
     { title: 'The Living World (Realm)', rows: [
       ['Advance Time','Push the campaign forward a month at a time. The whole region responds at once: wars, faiths, trade, population all shift; each change carries a why-trace, so you always know what moved and why. Off by default, opt-in, reversible.'],
       ['War Layer','Sieges, coalitions, conquest, and trade wars. War drains the economy and burns war-exhaustion, which drives the realm back to peace without needing a script. Toggle it on in the simulation rules.'],
-      ['Pantheon','Assign a primary deity and the living pantheon awakens: deities contest converts, win seats, and rise from cult to major. Faith couples back into corruption, aggression, and magic legality.'],
+      ['Pantheon','Assign a patron deity (and impose cults beneath it) and the living pantheon awakens: deities contest converts, win seats, and rise from cult to major. Faith couples back into corruption, aggression, and magic legality.'],
       ['Chronicle','A scrubbable history of every advance, derived from the pulse record. Click a headline to highlight the settlements it touched.'],
     ]},
   ];

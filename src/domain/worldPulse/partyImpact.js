@@ -32,7 +32,7 @@ import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 import { deepClone } from '../clone.js';
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+const clamp01 = (/** @type {any} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
 
 /**
  * Catalog of party impact kinds. `targets` documents the fields the DM must
@@ -57,6 +57,10 @@ export const PARTY_IMPACT_KINDS = Object.freeze({
 // Relationship de-/escalation ladder, worst → best.
 const RELATIONSHIP_LADDER = ['hostile', 'cold_war', 'rival', 'neutral', 'trade_partner', 'allied'];
 
+/**
+ * @param {any} fromType
+ * @param {number} steps
+ */
 function ladderShift(fromType, steps) {
   const idx = RELATIONSHIP_LADDER.indexOf(fromType);
   const start = idx === -1 ? RELATIONSHIP_LADDER.indexOf('neutral') : idx;
@@ -64,6 +68,10 @@ function ladderShift(fromType, steps) {
   return RELATIONSHIP_LADDER[next];
 }
 
+/**
+ * @param {any} action
+ * @param {any[]} extra
+ */
 function partyReasons(action, extra = []) {
   return [
     action.label ? `Party action: ${action.label}` : 'A party action reshaped the campaign.',
@@ -72,6 +80,11 @@ function partyReasons(action, extra = []) {
   ];
 }
 
+/**
+ * @param {any} action
+ * @param {any} kind
+ * @param {any} fields
+ */
 function baseOutcome(action, kind, fields) {
   return {
     id: `party.${stablePart(kind)}.${stablePart(action.id || action.label || kind)}.${fields.targetSaveId || fields.relationshipKey || 'realm'}`,
@@ -88,7 +101,12 @@ function baseOutcome(action, kind, fields) {
   };
 }
 
-/** Find an NPC/faction world-state key for a settlement + raw id or name. */
+/**
+ * Find an NPC/faction world-state key for a settlement + raw id or name.
+ * @param {any} states
+ * @param {any} settlementId
+ * @param {any} rawId
+ */
 function resolveStateKey(states = {}, settlementId, rawId) {
   const want = stablePart(rawId);
   const sid = String(settlementId);
@@ -113,7 +131,7 @@ function resolveStateKey(states = {}, settlementId, rawId) {
 export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 0, now = null } = {}) {
   const state = ensureWorldState(worldState);
   const kind = action?.kind;
-  const spec = PARTY_IMPACT_KINDS[kind];
+  const spec = /** @type {Record<string, any>} */ (PARTY_IMPACT_KINDS)[kind];
   if (!spec) return { outcomes: [], worldState: state, settlementOverrides: new Map(), ok: false };
 
   const magnitude = clamp01(action.magnitude ?? spec.defaultMagnitude);
@@ -123,7 +141,7 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
 
   switch (kind) {
     case 'resolve_stressor': {
-      const { stressors, residualOutcomes, found } = resolveStressorById(state.stressors, action.stressorId, { tick, now, reason: action.label });
+      const { stressors, residualOutcomes, found } = resolveStressorById(state.stressors, action.stressorId, { tick, now: /** @type {any} */ (now), reason: action.label });
       if (!found) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
       nextState = { ...state, stressors };
       // The crisis ended; its scars linger as residual conditions (auto).
@@ -136,10 +154,10 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
     case 'name_attacker': {
       // Attacker identity is nullable by design (a siege may have no
       // settlement-shaped attacker); this is the DM's hook for filling it in.
-      const { stressors, changed } = setStressorAttacker(state.stressors, action.stressorId, {
+      const { stressors, changed } = /** @type {{ stressors: any, changed: any }} */ (setStressorAttacker(state.stressors, action.stressorId, {
         attackerSettlementId: action.attackerSettlementId ?? null,
         attackerLabel: action.attackerLabel ?? null,
-      }, { now });
+      }, { now: /** @type {any} */ (now) }));
       if (!changed) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
       nextState = { ...state, stressors };
       const attackerName = action.attackerLabel
@@ -166,7 +184,7 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
     case 'ease_stressor':
     case 'worsen_stressor': {
       const delta = (kind === 'ease_stressor' ? -1 : 1) * (0.18 + magnitude * 0.42);
-      const { stressors, changed } = adjustStressorSeverityById(state.stressors, action.stressorId, delta, { now });
+      const { stressors, changed } = adjustStressorSeverityById(state.stressors, action.stressorId, delta, { now: /** @type {any} */ (now) });
       if (!changed) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
       nextState = { ...state, stressors };
       break;
@@ -215,9 +233,9 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
       // Derive to canonical (stable ids) first so removal works even when the
       // stored conditions were raw / id-less.
       const all = deriveAllActiveConditions(settlement);
-      const existing = all.find(c => c.id === action.condition || c.archetype === action.condition);
+      const existing = all.find((/** @type {any} */ c) => c.id === action.condition || c.archetype === action.condition);
       const cleared = existing
-        ? { ...settlement, activeConditions: all.filter(c => c.id !== existing.id) }
+        ? { ...settlement, activeConditions: all.filter((/** @type {any} */ c) => c.id !== existing.id) }
         : { ...settlement, activeConditions: all };
       // Clearing an EVENT-promoted condition must also drop it from the
       // authored config.eventConditions record (dual-written to _config) —
@@ -346,7 +364,7 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
  * @param {(string|null)} [args.now]
  */
 export function applyPartyImpact({ campaign, saves = [], action, now = null } = {}) {
-  if (!action || !PARTY_IMPACT_KINDS[action.kind]) return null;
+  if (!action || !(/** @type {Record<string, any>} */ (PARTY_IMPACT_KINDS)[action.kind])) return null;
   const worldState = ensureWorldState(campaign?.worldState, campaign);
   const tick = worldState.tick;
   const snapshot = buildWorldSnapshot({ campaign, saves, worldState });
@@ -373,7 +391,7 @@ export function applyPartyImpact({ campaign, saves = [], action, now = null } = 
     settlementMap,
     outcomes: built.outcomes,
     tick,
-    now,
+    now: /** @type {any} */ (now),
     // Party impacts are a discrete injection, not a time advance.
     advanceNewsTick: false,
     advanceRegionalImpacts: false,

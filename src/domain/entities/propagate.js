@@ -67,7 +67,7 @@ const FACTION_TO_INSTITUTION_DIM = {
  * the source entity. This function only adds the *propagated* effects.
  *
  * @param {Object} args
- * @param {Object} args.settlement       must have .institutions[], .factions[], .npcs[]
+ * @param {any} args.settlement       must have .institutions[], .factions[], .npcs[]
  * @param {{ entityType:'institution'|'faction'|'npc', entityId:string, impairment:Impairment }} args.origin
  * @param {Object} [args.opts]
  * @param {number} [args.opts.damping=0.6]
@@ -119,7 +119,7 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
         // contract in findLinkedEntities). Resolve the source NPC so
         // mapDimension can honor that branch.
         const sourceNpc = node.entityType === 'npc'
-          ? (working.npcs || []).find(n => npcId(n) === node.entityId)
+          ? (working.npcs || []).find((/** @type {any} */ n) => npcId(n) === node.entityId)
           : null;
         const propagatedDim = mapDimension(node.entityType, link.targetType, node.dimension, sourceNpc);
         if (!propagatedDim) continue;
@@ -196,8 +196,11 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
  *
  * Relationship strength is derived from explicit fields when present
  * (e.g. faction.controlStrength) or defaulted by category match.
+ * @param {any} settlement
+ * @param {any} node
  */
 function findLinkedEntities(settlement, node) {
+  /** @type {any[]} */
   const out = [];
   // Factions live in either `settlement.factions` or
   // `settlement.powerStructure.factions` depending on which generator
@@ -231,10 +234,16 @@ function findLinkedEntities(settlement, node) {
   return out;
 }
 
-/** Cross-type dimension mapping. */
+/**
+ * Cross-type dimension mapping.
+ * @param {any} fromType
+ * @param {any} toType
+ * @param {any} dim
+ * @param {any} sourceNpc
+ */
 function mapDimension(fromType, toType, dim, sourceNpc) {
-  if (fromType === 'institution' && toType === 'faction') return INSTITUTION_TO_FACTION_DIM[dim] || null;
-  if (fromType === 'faction'     && toType === 'institution') return FACTION_TO_INSTITUTION_DIM[dim] || null;
+  if (fromType === 'institution' && toType === 'faction') return /** @type {Record<string, any>} */ (INSTITUTION_TO_FACTION_DIM)[dim] || null;
+  if (fromType === 'faction'     && toType === 'institution') return /** @type {Record<string, any>} */ (FACTION_TO_INSTITUTION_DIM)[dim] || null;
   if (fromType === 'npc' && toType === 'institution') return 'staffing';
   if (fromType === 'npc' && toType === 'faction') {
     // Per the contract: leadership or membership by importance tier — and the
@@ -253,6 +262,8 @@ function mapDimension(fromType, toType, dim, sourceNpc) {
  * Estimate the strength of a faction's link to an institution. Returns
  * 0 if no link, 0.0–1.0 otherwise. Prefers explicit fields; falls back
  * to category match.
+ * @param {any} faction
+ * @param {any} instId
  */
 function factionInstitutionStrength(faction, instId) {
   if (!faction || !instId) return 0;
@@ -280,9 +291,15 @@ function importanceWeight(npc) {
   }
 }
 
+/**
+ * @param {any} settlement
+ * @param {any} type
+ * @param {any} id
+ * @param {any} impairment
+ */
 function applyImpairmentToEntity(settlement, type, id, impairment) {
   if (type === 'institution') {
-    const next = (settlement.institutions || []).map(i =>
+    const next = (settlement.institutions || []).map((/** @type {any} */ i) =>
       instId(i) === id ? withImpairment(i, impairment) : i,
     );
     return { ...settlement, institutions: next };
@@ -292,18 +309,18 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
     // is the canonical home for generator output; settlement.factions
     // exists in legacy paths. Pick the populated one.
     if (settlement.powerStructure?.factions) {
-      const next = settlement.powerStructure.factions.map(f =>
+      const next = settlement.powerStructure.factions.map((/** @type {any} */ f) =>
         factionId(f) === id ? withImpairment(f, impairment) : f,
       );
       return { ...settlement, powerStructure: { ...settlement.powerStructure, factions: next } };
     }
-    const next = (settlement.factions || []).map(f =>
+    const next = (settlement.factions || []).map((/** @type {any} */ f) =>
       factionId(f) === id ? withImpairment(f, impairment) : f,
     );
     return { ...settlement, factions: next };
   }
   if (type === 'npc') {
-    const next = (settlement.npcs || []).map(n =>
+    const next = (settlement.npcs || []).map((/** @type {any} */ n) =>
       npcId(n) === id ? withImpairment(n, impairment) : n,
     );
     return { ...settlement, npcs: next };
@@ -313,16 +330,25 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
 
 // ── Lookup helpers — entities lack consistent ID fields, so we
 //    normalize via name fallback. Long-term, structured IDs replace this.
-const instId    = (i) => i?.id || i?.name || '';
-const factionId = (f) => f?.id || f?.faction || f?.name || '';
-const npcId     = (n) => n?.id || n?.name || '';
-/** Normalize the two faction-storage shapes the codebase ships with. */
+const instId    = (/** @type {any} */ i) => i?.id || i?.name || '';
+const factionId = (/** @type {any} */ f) => f?.id || f?.faction || f?.name || '';
+const npcId     = (/** @type {any} */ n) => n?.id || n?.name || '';
+/**
+ * Normalize the two faction-storage shapes the codebase ships with.
+ * @param {any} s
+ */
 const factionsList = (s) => s?.powerStructure?.factions || s?.factions || [];
+/**
+ * @param {any} s
+ * @param {any} type
+ * @param {any} id
+ */
 function entityName(s, type, id) {
   const list = type === 'institution' ? s.institutions : type === 'faction' ? factionsList(s) : s.npcs;
-  const e = (list || []).find(x => (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
+  const e = (list || []).find((/** @type {any} */ x) => (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
   return e?.name || id;
 }
+/** @param {number} v */
 function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
 /**

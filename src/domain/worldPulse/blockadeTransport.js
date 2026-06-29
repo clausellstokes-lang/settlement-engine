@@ -20,6 +20,7 @@ import { withImpairment, withoutEventImpairments } from '../entities/status.js';
 const AIRSHIP_RE = /airship/i;
 const CAUSE_PREFIX = 'stressor-blockade:';
 
+/** @param {number} [severity] */
 function blockadeSeverityToImpairment(severity) {
   // 0.4 (gate) → 0.46, 1.0 → 0.7: impaired, never inoperable — the dock
   // keeps flying, the math of HOW MUCH lands lives in foodStockpile.
@@ -27,7 +28,7 @@ function blockadeSeverityToImpairment(severity) {
 }
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @param {any} blockade - active siege/occupation stressor gripping this settlement, or null
  * @param {{ now?: string }} [options]
  */
@@ -43,7 +44,7 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
       const causeEventId = `${CAUSE_PREFIX}${blockade.id}`;
       const severity = blockadeSeverityToImpairment(blockade.severity);
       const existing = (inst.impairments || []).find(
-        (im) => im?.type === 'access' && im?.causeEventId === causeEventId
+        (/** @type {any} */ im) => im?.type === 'access' && im?.causeEventId === causeEventId
       );
       if (existing && existing.severity === severity) return inst; // already stamped at this grip
       changed = true;
@@ -59,7 +60,7 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
 
     // No active blockade: lift every impairment this module ever stamped.
     const stale = (inst.impairments || []).filter(
-      (im) => String(im?.causeEventId || '').startsWith(CAUSE_PREFIX)
+      (/** @type {any} */ im) => String(im?.causeEventId || '').startsWith(CAUSE_PREFIX)
     );
     if (!stale.length) return inst;
     changed = true;

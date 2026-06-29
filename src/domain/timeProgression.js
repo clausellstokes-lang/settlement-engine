@@ -51,8 +51,9 @@ const INTERVAL_SCALES = Object.freeze({
 
 const VALID_INTERVALS = new Set(Object.keys(INTERVAL_SCALES));
 
+/** @param {any} interval */
 function intervalScale(interval) {
-  return INTERVAL_SCALES[interval] ?? INTERVAL_SCALES.one_month;
+  return /** @type {Record<string, number>} */ (INTERVAL_SCALES)[interval] ?? INTERVAL_SCALES.one_month;
 }
 
 // ── Legitimacy banding ──────────────────────────────────────────────────
@@ -60,6 +61,7 @@ function intervalScale(interval) {
 // label / multipliers / boolean flags must update too. Centralized
 // here so advance + forecast both produce consistent settlement state.
 
+/** @param {number} score */
 function reBand(score) {
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
   if (clamped >= 75) return { label: 'Endorsed',          color: '#1a5a28', govMultiplier: 1.30, crimMultiplier: 0.75 };
@@ -69,6 +71,7 @@ function reBand(score) {
   return { label: 'Legitimacy Crisis', color: '#8b1a1a', govMultiplier: 0.60, crimMultiplier: 1.30 };
 }
 
+/** @param {any} legitimacy @param {number} delta */
 function applyLegitimacyDelta(legitimacy, delta) {
   if (!legitimacy) return legitimacy;
   const newScore = Math.max(0, Math.min(100, Math.round((legitimacy.score || 0) + delta)));
@@ -95,6 +98,7 @@ function applyLegitimacyDelta(legitimacy, delta) {
 // report. Once completed, a clock holds at stage 6 until the trigger
 // resolves.
 
+/** @param {any} settlement @param {any} previousState */
 function advanceClocks(settlement, previousState) {
   // Re-derive the current clock set from the settlement. Any clock no
   // longer triggered (e.g. supply chain recovered) drops off.
@@ -102,7 +106,9 @@ function advanceClocks(settlement, previousState) {
   const liveIds = new Set(liveClocks.map(c => c.id));
 
   const prevStages = previousState?.clockStages || {};
+  /** @type {Record<string, number>} */
   const nextStages = {};
+  /** @type {any[]} */
   const advancements = [];
 
   for (const clock of liveClocks) {
@@ -145,6 +151,7 @@ function advanceClocks(settlement, previousState) {
 // they're band-only. (custom user content) will add
 // numeric storage for those bands.
 
+/** @param {any} settlement @param {any} allDeltas */
 function applyFactionDeltasToSettlement(settlement, allDeltas) {
   if (!allDeltas || allDeltas.length === 0) return settlement;
 
@@ -152,7 +159,7 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     ...settlement,
     powerStructure: settlement.powerStructure ? {
       ...settlement.powerStructure,
-      factions: (settlement.powerStructure.factions || []).map(f => ({ ...f })),
+      factions: (settlement.powerStructure.factions || []).map(/** @param {any} f */ f => ({ ...f })),
       publicLegitimacy: settlement.powerStructure.publicLegitimacy
         ? { ...settlement.powerStructure.publicLegitimacy }
         : null,
@@ -166,7 +173,7 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     const targetSlug = factionId.replace(/^faction\./, '');
 
     // Find the faction by stable id (slug match).
-    const faction = (cloned.powerStructure?.factions || []).find(f =>
+    const faction = (cloned.powerStructure?.factions || []).find(/** @param {any} f */ f =>
       f && typeof f.faction === 'string'
       && f.faction.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '') === targetSlug
     );
@@ -230,7 +237,7 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
  *                                                       settlement.activeConditions
  *                                                       (canonical state).
  * @param {Object}       [options.previousTickState]     { clockStages: { [clockId]: int } }
- * @returns {Object} { newSettlement, tick, nextTickState }
+ * @returns {any} { newSettlement, tick, nextTickState }
  */
 export function advanceTime(settlement, options = {}) {
   const {
@@ -270,11 +277,11 @@ export function advanceTime(settlement, options = {}) {
   // ── 1. Collect faction deltas from every active condition ───────────
   const allDeltas = [];
   for (const conditionArchetype of sourceArchetypes) {
-    const deltas = recalculateFactionRelationships(
+    const deltas = /** @type {any[]} */ (recalculateFactionRelationships(
       settlement,
       { type: `CONDITION_TICK_${conditionArchetype.toUpperCase()}` },
       { archetype: conditionArchetype },
-    );
+    ));
     // Scale by interval (per-week is a quarter as intense as per-month
     // for the same condition).
     for (const d of deltas) {
@@ -363,7 +370,9 @@ export function forecastTime(settlement, options = {}) {
   const safeTicks = Math.max(1, Math.min(24, Math.round(ticks)));
 
   let current = settlement;
+  /** @type {any} */
   let state = previousTickState;
+  /** @type {any[]} */
   const ticksOut = [];
 
   for (let i = 0; i < safeTicks; i++) {
@@ -389,17 +398,18 @@ export function forecastTime(settlement, options = {}) {
  * Aggregate forecast across all ticks. Returns:
  *   { totalDeltas: byFaction, summaryLines: string[], clocksAtFinal }
  */
+/** @param {any} forecast */
 export function summarizeForecast(forecast) {
   if (!forecast || !Array.isArray(forecast.ticks)) {
     return { totalDeltas: {}, summaryLines: [], clocksAtFinal: {} };
   }
 
   // Flatten + summarize all faction deltas across ticks.
-  const allDeltas = forecast.ticks.flatMap(t => t.factionDeltas || []);
+  const allDeltas = forecast.ticks.flatMap(/** @param {any} t */ t => t.factionDeltas || []);
   const totalDeltas = summarizeByFaction(allDeltas);
 
   // Flat narrative lines.
-  const summaryLines = forecast.ticks.flatMap(t => t.summary || []);
+  const summaryLines = forecast.ticks.flatMap(/** @param {any} t */ t => t.summary || []);
 
   return {
     totalDeltas,

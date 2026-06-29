@@ -72,6 +72,12 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   // pre-event and restores a key (and its exact value) that was present, so an
   // undone assignment returns the settlement to its prior dormancy/deity.
   SET_PRIMARY_DEITY:  Object.freeze(['primaryDeityRef', 'primaryDeitySnapshot']),
+  // IMPOSE_CULT writes (or deletes, when emptied) config.cultDeitySnapshots — the
+  // single array key holds every cult, so snapshotting it makes undo a true inverse.
+  IMPOSE_CULT:        Object.freeze(['cultDeitySnapshots']),
+  // SHIFT_TIER rewrites config.tier + config.settType to the new tier (alongside the
+  // top-level tier/population/institutions/history captured in SNAPSHOT_SETTLEMENT_KEYS).
+  SHIFT_TIER:         Object.freeze(['tier', 'settType']),
 });
 
 const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
@@ -173,6 +179,12 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   // Resurrecting the live entry directly there would double-count against that
   // regeneration path, so RESOLVE_STRESSOR's live-entry residue is expected.)
   REMOVED_THREAT:      STRESS_CONTAINER_KEYS,
+  // SHIFT_TIER rewrites the top-level tier + population and performs institution roster
+  // surgery (promotion adds/reactivates; demotion deactivates over-tier institutions into
+  // ruined remnants), appending to tierHistory + institutionHistory. None of that is
+  // exactly reversible from provenance, so the pre-event copy of these subtrees is the
+  // only true inverse. (config.tier/settType are restored via SNAPSHOT_CONFIG_KEYS.)
+  SHIFT_TIER:          Object.freeze(['tier', 'population', 'institutions', 'tierHistory', 'institutionHistory']),
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers

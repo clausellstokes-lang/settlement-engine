@@ -26,9 +26,13 @@ const MAX_ENTRIES = 6;
 // (vs. merely 'strained'/'substituted', which still function).
 const DISRUPTED_STATUSES = new Set(['blocked', 'collapsing', 'scarce', 'captured']);
 
+/** @type {Record<string, number>} */
 const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
 
-/** Read an NPC secret regardless of shape — generators emit { what, stakes }. */
+/**
+ * Read an NPC secret regardless of shape — generators emit { what, stakes }.
+ * @param {any} npc
+ */
 function npcSecretText(npc) {
   if (!npc?.secret) return '';
   return typeof npc.secret === 'string' ? npc.secret : (npc.secret.what || '');
@@ -37,7 +41,7 @@ function npcSecretText(npc) {
 /** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {TableEntry[]}
  */
 export function tonightAtTheTable(settlement) {
@@ -105,7 +109,7 @@ export function tonightAtTheTable(settlement) {
   // A "don't mention" derived live from a disrupted supply chain — the
   // settlement carries no supplyChainState.failures array of its own.
   const disrupted = deriveAllSupplyChainStates(settlement)
-    .filter(c => DISRUPTED_STATUSES.has(c.status));
+    .filter((/** @type {any} */ c) => DISRUPTED_STATUSES.has(c.status));
   if (disrupted.length > 0) {
     const f = disrupted[0];
     const good = f.needLabel || f.name || 'the supply';
@@ -120,6 +124,10 @@ export function tonightAtTheTable(settlement) {
   return out.slice(0, MAX_ENTRIES);
 }
 
+/**
+ * @param {any} s
+ * @param {number} n
+ */
 function truncate(s, n) {
   const str = String(s || '');
   if (str.length <= n) return str;

@@ -201,7 +201,10 @@ const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 // design, not an off-by error; do not "align" them — consumers that quote both
 // rely on the two scales being independent.
 
-/** 0..1 score → 4-band severity. Matches conditions. */
+/**
+ * 0..1 score → 4-band severity. Matches conditions.
+ * @param {any} severity
+ */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.75) return 'critical';
@@ -210,7 +213,10 @@ export function threatSeverityBand(severity) {
   return 'low';
 }
 
-/** 0..1 score → 5-stage progression. */
+/**
+ * 0..1 score → 5-stage progression.
+ * @param {any} severity
+ */
 export function severityToStage(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.8) return 'realized';
@@ -245,6 +251,7 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);
 
+/** @param {any} text */
 function inferThreatType(text) {
   if (!text) return 'other';
   const s = String(text);
@@ -256,16 +263,23 @@ function inferThreatType(text) {
 
 // ── Id helper ────────────────────────────────────────────────────────────
 
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {string} s */
 function shortHash(s) {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
+/**
+ * @param {any} type
+ * @param {any} source
+ * @param {any} label
+ */
 function threatIdFor(type, source, label) {
   const t = snakeCase(type || 'other');
   const suffix = shortHash(`${source || ''}.${label || ''}`);
@@ -276,7 +290,10 @@ function threatIdFor(type, source, label) {
 // Each collector returns 0+ raw threats it spotted on a particular
 // settlement surface. The composer normalizes them into ThreatProfile.
 
-/** Walk every surface and return raw threat-shaped entries. */
+/**
+ * Walk every surface and return raw threat-shaped entries.
+ * @param {any} settlement
+ */
 export function collectThreatSources(settlement) {
   if (!settlement) return [];
   const out = [];
@@ -423,6 +440,7 @@ export function collectThreatSources(settlement) {
 
 // Map a 0..100 score to its inverse 0..1 threat severity (low score
 // = high threat pressure).
+/** @param {number} score */
 function clampInv(score) {
   const s = Math.max(0, Math.min(100, score));
   return Math.max(0, Math.min(1, (60 - s) / 60));
@@ -434,9 +452,10 @@ function clampInv(score) {
  * Enrich a single collected threat-source entry into a canonical
  * ThreatProfile. Pure; idempotent.
  *
- * @param {Object} source  { raw, inferredType, originSurface } from
+ * @param {any} source  { raw, inferredType, originSurface } from
  *                         collectThreatSources, or a structured threat
  *                         passed in directly.
+ * @param {any} [_settlement]
  * @returns {Object | null}
  */
 export function deriveThreatProfile(source, _settlement) {
@@ -451,7 +470,7 @@ export function deriveThreatProfile(source, _settlement) {
   const type = source.inferredType || raw?.type || inferThreatType(
     raw?.name || raw?.label || ''
   );
-  const tmpl = THREAT_TYPE_TEMPLATES[type] || THREAT_TYPE_TEMPLATES.other;
+  const tmpl = /** @type {Record<string, any>} */ (THREAT_TYPE_TEMPLATES)[type] || THREAT_TYPE_TEMPLATES.other;
 
   // Severity: prefer explicit numeric, fall back to template-implied moderate.
   const severity = typeof raw?.severity === 'number'
@@ -545,11 +564,17 @@ export function deriveAllThreatProfiles(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Count threats by type / band / stage. */
+/**
+ * Count threats by type / band / stage.
+ * @param {any} settlement
+ */
 export function threatBreakdown(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
+  /** @type {Record<string, number>} */
   const byType = {};
+  /** @type {Record<string, number>} */
   const byBand = { low: 0, medium: 0, high: 0, critical: 0 };
+  /** @type {Record<string, number>} */
   const byStage = { latent: 0, developing: 0, active: 0, imminent: 0, realized: 0 };
   for (const t of profiles) {
     byType[t.type] = (byType[t.type] || 0) + 1;
@@ -562,6 +587,7 @@ export function threatBreakdown(settlement) {
 /**
  * Flat list of system variables pressured by the active threats.
  * Useful for the substrate to cross-reference. Deduplicated.
+ * @param {any} settlement
  */
 export function pressuresOnSubstrate(settlement) {
   const out = new Set();
@@ -571,7 +597,10 @@ export function pressuresOnSubstrate(settlement) {
   return Array.from(out);
 }
 
-/** Human-readable lines suitable for AI / PDF / UI. */
+/**
+ * Human-readable lines suitable for AI / PDF / UI.
+ * @param {any} settlement
+ */
 export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
@@ -585,9 +614,12 @@ export function supportedThreatTypes() {
   return [...THREAT_TYPES];
 }
 
-/** Catalog template accessor for UI / help text. */
+/**
+ * Catalog template accessor for UI / help text.
+ * @param {any} type
+ */
 export function threatTypeTemplate(type) {
-  return THREAT_TYPE_TEMPLATES[type] || null;
+  return /** @type {Record<string, any>} */ (THREAT_TYPE_TEMPLATES)[type] || null;
 }
 
 /** Severity bands list. */

@@ -47,14 +47,16 @@ const FLAW_VECTOR = Object.freeze({
 
 export const CORRUPTIBLE_FLAWS = Object.freeze(Object.keys(FLAW_VECTOR));
 
+/** @param {any} flaw */
 export function isCorruptibleFlaw(flaw) {
   if (!flaw) return false;
   return Object.prototype.hasOwnProperty.call(FLAW_VECTOR, String(flaw).toLowerCase());
 }
 
-/** Corruption vector for a flaw; defaults to 'greed' for an unmapped value. */
+/** Corruption vector for a flaw; defaults to 'greed' for an unmapped value.
+ *  @param {any} flaw */
 export function corruptionVectorForFlaw(flaw) {
-  return FLAW_VECTOR[String(flaw || '').toLowerCase()] || 'greed';
+  return /** @type {Record<string, string>} */ (FLAW_VECTOR)[String(flaw || '').toLowerCase()] || 'greed';
 }
 
 /** The NPC's corruptible flaw (lowercased) if any, else null. Reads ONLY the
@@ -117,7 +119,9 @@ export const CORRUPTION_TUNING = Object.freeze({
   temperamentSteadiness: 0.5,
 });
 
+/** @param {number} x @param {number} lo @param {number} hi @returns {number} */
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+/** @param {any} x @returns {number} */
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
 // ── Good/evil deity → corruption pressure ───────────────────────────────────
@@ -358,19 +362,22 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
 // Importance tiers (entities/npcs.js): pillar > key > notable > minor.
 export const IMPORTANCE_LADDER = Object.freeze(['pillar', 'key', 'notable', 'minor']);
 
-/** Demote one importance step (floor = minor). Unknown → 'notable'. */
+/** Demote one importance step (floor = minor). Unknown → 'notable'.
+ *  @param {any} importance */
 export function demoteImportance(importance) {
   const i = IMPORTANCE_LADDER.indexOf(importance);
   if (i < 0) return 'notable';
   return IMPORTANCE_LADDER[Math.min(IMPORTANCE_LADDER.length - 1, i + 1)];
 }
 
-/** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1). */
+/** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1).
+ *  @param {any} dotRank */
 export function demoteDotRank(dotRank) {
   return Math.max(1, (Number(dotRank) || 1) - 1);
 }
 
-/** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced. */
+/** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced.
+ *  @param {any} importance */
 export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
@@ -381,7 +388,8 @@ export function canBeOuted(importance) {
 // toward 'none'. Higher the corrupt member's seat, the faster it climbs.
 export const CAPTURE_LADDER = Object.freeze(['none', 'adversarial', 'equilibrium', 'corrupted', 'capture']);
 
-/** Step the ladder one rung up (toward capture) or down (toward none). */
+/** Step the ladder one rung up (toward capture) or down (toward none).
+ *  @param {any} state @param {any} up */
 export function advanceCaptureState(state, up) {
   const i = CAPTURE_LADDER.indexOf(state);
   const cur = i < 0 ? 0 : i;
@@ -440,7 +448,8 @@ export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = 
   return clamp(base * diversityMult, 0, 1);
 }
 
-/** Effective security after the guild's drag — bounded so it never reaches zero. */
+/** Effective security after the guild's drag — bounded so it never reaches zero.
+ *  @param {number} security @param {number} strength */
 export function guildEffectiveSecurity(security, strength) {
   return n01(n01(security) * (1 - n01(strength) * GUILD_TUNING.securityDrag));
 }
@@ -456,12 +465,14 @@ const PROSPERITY_SCORE = Object.freeze({
   prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
 });
 
+/** @param {any} value */
 function prosperityScore(value) {
   const s = String(value || '').toLowerCase();
   for (const [k, v] of Object.entries(PROSPERITY_SCORE)) { if (s.includes(k)) return v; }
   return 0.4; // unknown → middling
 }
 
+/** @param {any} inst */
 function isCriminalInstitution(inst) {
   if (!inst) return false;
   // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
@@ -472,7 +483,7 @@ function isCriminalInstitution(inst) {
 }
 
 /**
- * @param {object} settlement
+ * @param {any} settlement
  * @returns {{crime:number, security:number, prosperity:number, hasCriminalInst:boolean, criminalInstitutions:string[]}}
  */
 export function readCorruptionClimate(settlement) {
@@ -480,7 +491,7 @@ export function readCorruptionClimate(settlement) {
   const sp = eco.safetyProfile || settlement?.safetyProfile || {};
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
 
-  const criminalInstitutions = institutions.filter(isCriminalInstitution).map((i) => i.name).filter(Boolean);
+  const criminalInstitutions = institutions.filter(isCriminalInstitution).map((/** @type {any} */ i) => i.name).filter(Boolean);
   const hasCriminalInst = criminalInstitutions.length > 0
     || (Array.isArray(sp.criminalInstitutions) && sp.criminalInstitutions.length > 0);
 
@@ -522,6 +533,7 @@ export const PATRONAGE_TUNING = Object.freeze({
   proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
 });
 
+/** @param {any} a @param {any} b */
 function nameMatches(a, b) {
   const x = String(a || '').trim().toLowerCase();
   const y = String(b || '').trim().toLowerCase();
@@ -529,7 +541,8 @@ function nameMatches(a, b) {
   return x === y || x.includes(y) || y.includes(x);
 }
 
-/** The home-institution fields the exposure path reads, in the same order. */
+/** The home-institution fields the exposure path reads, in the same order.
+ *  @param {any} npc */
 export function npcHomeInstitution(npc) {
   return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
 }
@@ -542,13 +555,13 @@ export function npcHomeInstitution(npc) {
  *              made it public); drags onset security AND raises the exposure
  *              visibility of anyone still corrupt inside it.
  *
- * @param {object} settlement
+ * @param {any} settlement
  * @returns {{covert: string[], revealed: string[]}}
  */
 export function compromisedSecurityInstitutions(settlement) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const securityInstitutions = institutions
-    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+    .filter((/** @type {any} */ inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
 
   // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
@@ -569,7 +582,7 @@ export function compromisedSecurityInstitutions(settlement) {
     if (npc?.corrupt !== true || npc?.ousted) continue;
     const home = npcHomeInstitution(npc);
     if (!home) continue;
-    const match = securityInstitutions.find((inst) => nameMatches(inst.name, home));
+    const match = securityInstitutions.find((/** @type {any} */ inst) => nameMatches(inst.name, home));
     if (match && !revealed.has(match.name)) covert.add(match.name);
   }
 

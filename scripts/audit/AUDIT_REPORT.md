@@ -204,3 +204,96 @@ deities reach each convert — and advances 3 reps × 30 ticks at each scale.
 - **Possible balance note (1 data point):** the peaceful-aligned major (Aurum) swept
   the sampled run; whether winner correlates with alignment/position vs. seed is worth
   a glance if faith balance matters, but it is not a confirmed finding.
+
+---
+
+## Phase 3 — the unified "everything-on" whole-world soak
+
+`simulate-world.mjs` activates EVERY subsystem at once (war layer, settlement strategy,
+religion, plus every default-on organic system) on an 18-settlement region built to
+trigger the conditional dynamics, then soaks it and measures whether the catalogued
+dynamics fire, in balance, with no stalls or runaways. The audit found the **engine
+healthy** but the **harness's coverage claims resting on two unverified grounds** — a
+fixture bug that silenced the organic war loop, and several measurement gaps. Both are
+now fixed; the soak below is the trustworthy re-run.
+
+### Fixed (harness fixture): the organic war loop never fired
+
+**Symptom.** `war_mobilization` / `army_deployed` / `strategy_deploy` / `war_drain` /
+`war_exhaustion` / `mobilization_reaction_*` fired **0×**; the only conquests came from a
+pre-seeded siege. The war PROJECTION worked, but the organic peace→war ramp never started.
+
+**Root cause (NOT a per-tick rebuild).** The war gate (`buildWantsWarLookup`, pulseKernel.js)
+ramps a settlement only against a `hostile`/`rival`/`cold_war` neighbour. `buildWorld`
+seeded six such edges, then its alliance/trade edge loop **re-emitted an edge with the same
+`edge.<from>.<to>` id over every one of those pairs** (e.g. `E(0,6,'hostile')` then
+`E(0,6,'trade_partner')` for `c=6`). `ensureRegionalGraph`'s `dedupeById` keeps the **last
+write**, so all six hostility seeds were clobbered to `trade_partner`/`allied` **at graph
+construction, before tick 1** — `wantsWar` was false forever, posture never left peace. (The
+suspected neighbourNetwork rebuild is a red herring here: generated settlements ship an
+*empty* neighbourNetwork, and the pure kernel does not rebuild the graph from saves.)
+
+**Fix.** Seed durable hostility in the three places the engine reads, none of which the
+alliance loop can now clobber: (1) the regionalGraph edge (the alliance/trade loop skips any
+hostile pair); (2) `worldState.relationshipStates` (the gate reads this first, and an
+existing state is sticky across ticks); (3) each end's `neighbourNetwork` (so a store-layer
+`deriveRegionalGraphFromSaves` re-mints the hostile edge rather than refreshing it away) —
+the same durable-hostility shape `tests/domain/mobilizationPulse.integration` uses. The
+pre-seeded siege was removed so every conquest is now organic. **No engine code changed.**
+
+**Verified (an isolated probe + the full soak):** the ramp fires on schedule —
+peace (t1-2) → alert (t3-4) → war_preparation (t5-6) → mobilized (t7) → deployed (t8) — and
+the loop is **bounded and self-terminating**: it bleeds the home economy
+(`war_drain`/`army_deployed`), accrues a non-reverting `war_exhaustion` scar, and de-escalates
+via `sue_for_peace`, after which scarred settlements demobilize back to peace. The
+`COOL`/`shouldCool` gate was left untouched.
+
+### Fixed (harness measurement) — so the next soak is trustworthy
+
+| Gap | Before | After |
+|---|---|---|
+| corruption onsets | dead counter (no engine 'onset' event; regex never matched) | diff `npcStates[id].corruption` false→true tick-over-tick |
+| institution gains/losses | `institutions.length` deltas (closures mutate in place → ~0) | count `_worldPulseInactive` flips (active↔inactive) + new founded ids |
+| rolled vs landed | `candByType` counted ROLLS only | added `appliedByType` from `autoApplied` (what LANDED) |
+| stressor share | live-tick AUC only (persistence-weights long-lived types) | added `stressorBirthsByType` (true generation share) alongside the AUC |
+| scale comparison | varied seed+interval at fixed 14 ticks; each tick took a coarse interval magnitude (≈7.8× for one_year) → spurious "+89%" / "interval collapse" | hold seed FIXED, run `ticksForInterval` REAL one-week ticks (1/4/12/48) |
+| multi-month population | single coarse kernel tick stacked → artifact | drive `simulateCampaignWorldInterval`; cross-checked against the weekly run (`intervalEquivalence`) |
+| novelty tail | measured tail family DENSITY, mislabelled novelty | renamed `tailFamilyDensity`; added `lateNovelFamilies` (families first-seen in the window) |
+| population recovery | inferred from min/max only | emit a per-tick `popPerTick` trajectory |
+
+Plus self-diagnosing `flags` (e.g. `WAR_LOOP_SILENT`, `NO_ORGANIC_CONQUEST`) so a future soak
+fails loudly if a load-bearing dynamic goes quiet, and a `--scales 0` switch for a fast core run.
+
+### Result — the re-run (160 ticks / 2 reps, all subsystems on)
+
+**0 throws, 0 stalls, HEALTH OK, 91 distinct dynamics fired** (cand/tick 119-155, mean 136).
+
+- **Organic war loop, end-to-end:** war_mobilization 308, strategy_deploy 90, army_deployed
+  204, war_drain 204, war_exhaustion 317, sue_for_peace 57, mobilization_reaction 1; **12
+  conquests, all organic** (12 rolled → 12 applied), occupations bounded at peak 5. The loop
+  starts, deploys, exhausts, and sues for peace repeatedly — bounded, not a runaway.
+- **Rolled vs landed (the new signal):** betrayal 1241 rolled → 1 landed; coup_detat 100
+  rolled → 0 landed. The coverage report now shows both, so "rolled but never lands" is
+  visible instead of inflating the fired-dynamics count.
+- **Births vs live-AUC:** by GENERATION, betrayal dominates (1241, ≈56% of births) and
+  religious_conversion_fracture is small (84, ≈4%); by live-tick AUC, rcf dominates (283) —
+  confirming its apparent "monoculture" is episodic residual echo, not generation share.
+- **Population is bounded and recovers:** the maximal six-front war world declines ≈28% over
+  160 ticks but oscillates (per-tick min 102,548, max 165,076 — recovery is now measured, not
+  inferred). The deliberately-belligerent fixture makes the decline expected; it never
+  collapses or runs away.
+- **Scales are interval-equivalent:** fixed-seed weekly ticks give a gentle, monotonic
+  population curve (one_week 0% · one_month -0.7% · one_season -5.7% · one_year -26%), and
+  `simulateCampaignWorldInterval` reproduces each EXACTLY (`match=true` at month/season/year).
+  The old "+89% / interval collapse" was harness arithmetic, now gone.
+
+**Net:** the engine PASSED (0 throws/stalls/runaways, well-spread families, bounded-and-
+recovering population, load-bearing conquest→occupation→conversion coupling), and the soak
+now actually exercises — and can be trusted to report — the organic war loop.
+
+### Reproducing
+
+```
+npx vite-node scripts/audit/simulate-world.mjs --ticks 80 --reps 2 --out /tmp/world.json
+npx vite-node scripts/audit/simulate-world.mjs --ticks 40 --reps 1 --scales 0 --out /tmp/core.json   # fast core soak
+```

@@ -29,7 +29,7 @@ import {
  * behind `religionActive` (the caller's religionDynamicsEnabled +
  * isSubsystemActive). false (default) ⇒ gate unrelaxed ⇒ byte-identical.
  *
- * @param {object} worldState
+ * @param {any} worldState
  * @param {any} snapshot
  * @param {{ fork: (k:string)=>{ random: ()=>number } }} rng
  * @param {{ tick?: number, guildStrengthBy?: Map<string, number>|null, religionActive?: boolean }} [opts]
@@ -91,6 +91,10 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
  * settlement, for mirroring onto settlement.powerStructure.criminalCaptureState
  * (which npcStructure + the dossier already read). Pure.
  */
+/**
+ * @param {any} factionStates
+ * @param {any} settlementId
+ */
 export function settlementCaptureState(factionStates, settlementId) {
   const LADDER = ['none', 'adversarial', 'equilibrium', 'corrupted', 'capture'];
   let worst = 0;
@@ -112,12 +116,17 @@ export function settlementCaptureState(factionStates, settlementId) {
 
 const CAPTURED_RUNGS = new Set(['corrupted', 'capture']);
 
+/** @param {any} t */
 function newsworthyTransition(t) {
   // The institutional-corruption boundary and above: rung moves wholly below
   // 'corrupted' (none ↔ adversarial ↔ equilibrium) are posture, not news.
   return CAPTURED_RUNGS.has(t.to) || CAPTURED_RUNGS.has(t.from);
 }
 
+/**
+ * @param {any} t
+ * @param {any} settlementName
+ */
 function transitionHeadline(t, settlementName) {
   if (t.to === 'capture') return `${t.name} of ${settlementName} falls under criminal control`;
   if (t.from === 'capture') return `${t.name} of ${settlementName} breaks the underworld's grip`;
@@ -125,6 +134,10 @@ function transitionHeadline(t, settlementName) {
   return `${t.name} of ${settlementName} pushes the underworld back`;
 }
 
+/**
+ * @param {any} t
+ * @param {any} settlementName
+ */
 function transitionSummary(t, settlementName) {
   if (t.to === 'capture') {
     return `${t.name} now answers to criminal interests; its formal authority in ${settlementName} is a front.`;
@@ -144,14 +157,14 @@ function transitionSummary(t, settlementName) {
  * the 'capture' rung), 'notable' for the corrupted boundary. Pure;
  * timestamps threaded, never minted.
  *
- * @param {Array}    transitions  from advanceFactionCapture
+ * @param {any[]}    transitions  from advanceFactionCapture
  * @param {Function} nameFor      settlementId → display name
  * @param {number}   tick
- * @param {string}   [now]
+ * @param {(string|null)}   [now]
  */
-export function captureTransitionNewsEntries(transitions = [], nameFor = id => String(id), tick = 0, now = null) {
+export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @type {any} */ id) => String(id), tick = 0, now = null) {
   const LADDER = ['none', 'adversarial', 'equilibrium', 'corrupted', 'capture'];
-  return transitions.filter(newsworthyTransition).map(t => {
+  return transitions.filter(newsworthyTransition).map((/** @type {any} */ t) => {
     const major = t.to === 'capture' || t.from === 'capture';
     const settlementName = nameFor(t.settlementId);
     return {
@@ -185,6 +198,9 @@ const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
  * derives "defining crisis" / "recent disruption" from, same vocabulary and
  * caps as stressorAftermath's graduation stamp. Idempotent per
  * (faction, tick). Returns the same reference when nothing changed.
+ * @param {any} settlement
+ * @param {any} transition
+ * @param {any} tick
  */
 export function withCaptureHistoryEvent(settlement, transition, tick) {
   if (!settlement || !transition) return settlement;
@@ -193,7 +209,7 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
   const history = settlement.history || {};
   const events = Array.isArray(history.historicalEvents) ? history.historicalEvents : [];
   const eventId = `campaign.faction_capture.${transition.factionId}.${tick}`;
-  if (events.some(e => e?.campaignEventId === eventId)) return settlement;
+  if (events.some((/** @type {any} */ e) => e?.campaignEventId === eventId)) return settlement;
 
   const event = {
     campaignEventId: eventId,
@@ -213,14 +229,14 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
     anchored: true,
   };
 
-  const campaignEvents = events.filter(e => e?.campaignEra);
+  const campaignEvents = events.filter((/** @type {any} */ e) => e?.campaignEra);
   let nextEvents = [...events, event];
   if (campaignEvents.length + 1 > MAX_CAMPAIGN_HISTORY_EVENTS) {
     // Drop the OLDEST campaign-era entry (generation history is never pruned).
     const oldest = campaignEvents
       .slice()
-      .sort((a, b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
-    nextEvents = nextEvents.filter(e => e !== oldest);
+      .sort((/** @type {any} */ a, /** @type {any} */ b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
+    nextEvents = nextEvents.filter((/** @type {any} */ e) => e !== oldest);
   }
   return { ...settlement, history: { ...history, historicalEvents: nextEvents } };
 }
@@ -229,6 +245,9 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
  * Apply capture history to every affected settlement in a local map
  * (advanceCampaignWorld's settlement working set). Mirrors
  * recordGraduationsIntoHistory. Returns the count of settlements written.
+ * @param {any} localSettlements
+ * @param {any[]} transitions
+ * @param {number} tick
  */
 export function recordCaptureTransitionsIntoHistory(localSettlements, transitions = [], tick = 0) {
   let written = 0;
