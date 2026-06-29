@@ -111,13 +111,23 @@ describe('tonightAtTheTable', () => {
     expect(tonightAtTheTable(set).length).toBeLessThanOrEqual(6);
   });
 
-  it('long bodies get truncated with an ellipsis', () => {
-    const set = {
+  it('passes normal-length bodies through in full and only soft-caps very long ones', () => {
+    // A 200-char hook is well within the generous cap — it must NOT be cut off
+    // (the cheat-sheet card was clipping readable hooks/secrets mid-sentence).
+    const shortSet = {
       npcs: [{ name: 'X', power: 9, role: 'r', plotHooks: ['a'.repeat(200)] }],
     };
-    const out = tonightAtTheTable(set);
-    const hook = out.find(e => e.kind === 'HOOK');
-    expect(hook.body.length).toBeLessThanOrEqual(120);
-    expect(hook.body.endsWith('…')).toBe(true);
+    const shortHook = tonightAtTheTable(shortSet).find(e => e.kind === 'HOOK');
+    expect(shortHook.body).toBe('a'.repeat(200));
+    expect(shortHook.body.endsWith('…')).toBe(false);
+
+    // A pathologically long body still gets a soft ceiling + ellipsis so one
+    // runaway string can't blow out the card.
+    const longSet = {
+      npcs: [{ name: 'X', power: 9, role: 'r', plotHooks: ['b'.repeat(400)] }],
+    };
+    const longHook = tonightAtTheTable(longSet).find(e => e.kind === 'HOOK');
+    expect(longHook.body.length).toBeLessThanOrEqual(280);
+    expect(longHook.body.endsWith('…')).toBe(true);
   });
 });

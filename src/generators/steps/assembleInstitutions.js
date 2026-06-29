@@ -365,7 +365,18 @@ registerStep('assembleInstitutions', {
       Object.entries(tc).forEach(([cat, insts]) => {
         if (!all[cat]) all[cat] = {};
         Object.entries(insts).forEach(([name, def]) => {
-          if (!all[cat][name]) all[cat][name] = { ...def, nativeTier: t };
+          if (!all[cat][name]) {
+            // nativeTier is the tier at which an institution genuinely belongs and
+            // drives the out-of-tier override label. A handful of names are
+            // duplicated across tiers where the LOWER-tier definition carries a
+            // higher `minTier` (e.g. 'Smuggling network' is defined under village
+            // but gated minTier:'city'). Plain first-wins would mislabel those as
+            // their (lower) definition tier; honor minTier so the override warning
+            // reports the true scale (the long-standing "Smuggling" mislabel).
+            const minRank = def.minTier ? TIER_ORDER.indexOf(def.minTier) : -1;
+            const nativeTier = minRank > TIER_ORDER.indexOf(t) ? def.minTier : t;
+            all[cat][name] = { ...def, nativeTier };
+          }
         });
       });
     });
@@ -376,7 +387,17 @@ registerStep('assembleInstitutions', {
     if (!toggle?.require) return;
     const parts = key.split('::');
     if (parts.length < 3) return;
-    const [, category, instName] = parts;
+    const [keyTier, category, instName] = parts;
+    // Scope the override to THIS settlement's tier (or the tier-agnostic 'all'
+    // bucket random/custom mode uses) — mirroring the in-tier loop's toggle
+    // contract above. Without this gate the tier prefix was discarded, so a
+    // forced toggle authored against a DIFFERENT tier in a prior build — e.g.
+    // `town::Economy::Bakers (5-15)` set while building a town — leaked into an
+    // unrelated hamlet and surfaced as a phantom "deliberate override" the user
+    // never made for that settlement. Toggles persist across builds, so stale
+    // cross-tier forces could pile up; this is the load-bearing fix (the
+    // new-build toggle reset is the complementary hygiene pass).
+    if (keyTier !== tier && keyTier !== 'all') return;
     if (institutions.some(i => i.name === instName)) return;
     const catInsts = fullCatalogAllTiers[category];
     if (!catInsts || !catInsts[instName]) return;

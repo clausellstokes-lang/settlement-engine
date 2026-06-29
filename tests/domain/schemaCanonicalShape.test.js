@@ -44,19 +44,23 @@ describe('pipeline path writes both stress and stressors', () => {
   let src;
   beforeAll(() => { src = readFileSync(ASSEMBLE, 'utf8'); });
 
+  // Both keys are written from `namedStress` — the stress array re-rendered with
+  // the resolved settlement name (an early pipeline step generates stress before
+  // the name exists). The dual-write contract (same value into both legacy and
+  // canonical keys, same object literal) is unchanged; only the source variable.
   it('assembleSettlement.js writes the legacy `stress` key', () => {
-    expect(src).toMatch(/^\s*stress,\s*$/m);
+    expect(src).toMatch(/^\s*stress:\s*namedStress,\s*$/m);
   });
 
-  it('assembleSettlement.js writes the canonical `stressors` key sourced from `stress`', () => {
-    expect(src).toMatch(/stressors:\s*stress,/);
+  it('assembleSettlement.js writes the canonical `stressors` key sourced from the same value', () => {
+    expect(src).toMatch(/stressors:\s*namedStress,/);
   });
 
   it('the two keys live in the same settlement object literal (dual-write, not branched)', () => {
     // Find the lines for both keys and make sure stressors comes
     // right after stress (no intervening object boundary).
-    const stressIdx    = src.search(/^\s*stress,\s*$/m);
-    const stressorsIdx = src.search(/^\s*stressors:\s*stress,/m);
+    const stressIdx    = src.search(/^\s*stress:\s*namedStress,\s*$/m);
+    const stressorsIdx = src.search(/^\s*stressors:\s*namedStress,/m);
     expect(stressIdx).toBeGreaterThan(0);
     expect(stressorsIdx).toBeGreaterThan(stressIdx);
     // No closing brace between them.

@@ -17,7 +17,7 @@
  *   (set via profiles.role only; user_metadata is not trusted)
  */
 
-import { supabase, isConfigured, setSessionPersistence } from './supabase.js';
+import { supabase, isConfigured, setSessionPersistence, withTimeout } from './supabase.js';
 import { DEFAULT_MODEL_PREFERENCE, normalizeModelPreference } from '../config/pricing.js';
 
 // Owner-override email for CLIENT-SIDE admin-UI gating only — never a security
@@ -222,7 +222,13 @@ async function supabaseSignIn(email, password, rememberMe = true) {
 }
 
 async function supabaseSignOut() {
-  const { error } = await supabase.auth.signOut();
+  // Guard against a hung revoke: supabase.auth.signOut() performs a network
+  // token-revoke with no internal timeout, so a stalled connection would leave
+  // this awaiting forever. authSignOut (authSlice) calls clearAuth() AFTER this
+  // resolves OR rejects — so on timeout we reject, the caller's catch runs, and
+  // clearAuth() still clears the local session. The user is signed out locally
+  // even if the server revoke never lands (10s — sign-out should feel instant).
+  const { error } = await withTimeout(supabase.auth.signOut(), 10000, 'Sign out');
   if (error) throw error;
 }
 

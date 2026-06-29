@@ -294,7 +294,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             const isCrim = src.isCriminal;
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             return (
-            <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
+            <div key={i} style={{display:'flex',alignItems:'flex-start',gap:10}}>
               <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
                   {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
@@ -306,7 +306,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                   {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ Criminal</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:FS.xxs,color:BODY,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:FS.xxs,color:BODY,lineHeight:1.35,marginTop:2}}>{src.desc}</div>}
               </div>
             </div>
             );

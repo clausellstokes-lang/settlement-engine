@@ -213,6 +213,8 @@ describe('save schema — supabase row (mocked)', () => {
         auth: { getUser: () => Promise.resolve({ data: { user: { id: 'u1' } } }) },
       },
       isConfigured: true,
+      // saves.js guards network legs with withTimeout; passthrough in tests.
+      withTimeout: (p) => p,
     }));
     ({ saves } = await import('../../src/lib/saves.js'));
   });

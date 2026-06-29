@@ -235,6 +235,9 @@ describe('saves — supabase backend round-trip (mocked)', () => {
           },
         },
         isConfigured: true,
+        // saves.js now guards every network leg with withTimeout; in tests it is
+        // a passthrough (the mocked client resolves synchronously).
+        withTimeout: (p) => p,
       };
     });
 

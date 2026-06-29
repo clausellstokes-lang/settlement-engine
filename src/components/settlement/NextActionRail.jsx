@@ -18,12 +18,14 @@
  * existing handlers — this is purely an aggregation surface.
  */
 
+import { useState } from 'react';
 import {
   Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
+import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { COPY } from '../../copy/strings.js';
 
 /**
@@ -46,9 +48,31 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
   const aiSettlement = useStore(s => s.aiSettlement);
   const narrated = !!(aiSettlement || save?.aiSettlement);
 
-  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers });
+  // Regenerate discards the existing prose and re-spends credits, so the rung
+  // routes through a discard-confirm before firing the real action. Owning the
+  // dialog here keeps the regenerate lifecycle on the rail (and SettlementDetail
+  // at its size ratchet).
+  const [confirmRegen, setConfirmRegen] = useState(false);
+  const railHandlers = handlers.onRegenerateAi
+    ? { ...handlers, onRegenerateAi: () => setConfirmRegen(true) }
+    : handlers;
+
+  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers });
   if (!items.length) return null;
-  return <ActionRail title="Next best action" items={items} />;
+  return (
+    <>
+      <ActionRail title="Next best action" items={items} />
+      <ConfirmDialog
+        open={confirmRegen}
+        tone="warning"
+        title="Regenerate the narrative?"
+        body="The current narrative and daily-life prose will be replaced by a fresh pass, and this spends credits. Chronicle history is preserved."
+        confirmLabel="Regenerate"
+        onConfirm={() => { setConfirmRegen(false); handlers.onRegenerateAi?.(); }}
+        onCancel={() => setConfirmRegen(false)}
+      />
+    </>
+  );
 }
 
 /** Pure derivation — testable without the store. */
@@ -116,6 +140,18 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
       label: COPY.ai.polishCta,
       hint:  COPY.ai.inlineHintFn(getAiCost('narrative')),
       onClick: handlers.onPolishAi,
+    });
+  }
+  // Once a narrative exists, the first-narrate rung is replaced by Regenerate —
+  // the (confirm-gated, credit-spending) re-roll that used to live as a button in
+  // the dossier header. Surfacing it here keeps narration's full lifecycle on the
+  // rail, decoupled from the dossier/editor.
+  if (narrated && handlers.onRegenerateAi) {
+    items.push({
+      id: 'regenerate', Icon: Sparkles,
+      label: COPY.ai.regenerateCta,
+      hint:  COPY.ai.regenerateHintFn(getAiCost('narrative')),
+      onClick: handlers.onRegenerateAi,
     });
   }
   if (handlers.onExport) {

@@ -79,6 +79,8 @@ export const COPY = {
     // honest when the pricing config flips schedules. See aiInlineHint().
     inlineHintFn: (cost) => `${cost} credit${cost === 1 ? '' : 's'} · streams section by section · partial failures keep your raw draft intact`,
     polishCta:    'Narrate',
+    regenerateCta: 'Regenerate narrative',
+    regenerateHintFn: (cost) => `${cost} credit${cost === 1 ? '' : 's'} · replaces the current prose with a fresh pass`,
     progressCta:  'Apply event and progress narrative',
   },
 

@@ -4,7 +4,7 @@ import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
 import { entityAnchor, entityIdFor, localNpcId, institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
-import { inferInstitutionName, institutionsForCategory } from '../../../domain/npcProfile.js';
+import { inferInstitutionName, institutionsForPower } from '../../../domain/npcProfile.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { useStore } from '../../../store/index.js';
 import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
@@ -239,13 +239,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 const liveNpc = npcId ? index?.resolve?.(npcId)?.raw : null;
                 pushByName(inferInstitutionName(liveNpc || mem, s));
               }
-              // 2) Domain footprint: EVERY power has a category (its domain), so
-              //    map that to the institutions it touches — this is what gives a
-              //    faction-less power (Religious Authorities, Merchant Guilds) its
-              //    institutions instead of an empty card. Members refine; category
-              //    guarantees coverage.
-              for (const instName of institutionsForCategory(f.category, s)) pushByName(instName);
-              return out.slice(0, 5);
+              // 2) Domain footprint: every power maps to the institutions that
+              //    logically belong to it — by tag (primary), name, or explicit
+              //    faction_source link. This is what gives a faction-less power
+              //    (Religious Authorities, Merchant Guilds) its institutions, and
+              //    the tag signal is what finally maps the non-obvious cases (a
+              //    criminal power's fence/smuggling ring) the name match missed.
+              for (const instName of institutionsForPower(f, s)) pushByName(instName);
+              return out.slice(0, 8);
             })();
 
             // A row expands to its detail card when it has a description OR an

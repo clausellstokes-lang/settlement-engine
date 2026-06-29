@@ -7,8 +7,9 @@
  * save intent and opens the auth flow.
  */
 
-import { useState } from 'react';
-import { saves as savesService } from '../../lib/saves.js';
+import { useState, useRef } from 'react';
+import { saves as savesService, newSaveId } from '../../lib/saves.js';
+import { writeDraft, clearDraft } from '../../lib/pendingSaveDraft.js';
 import { useStore } from '../../store/index.js';
 import { sans, FS, SP, swatch } from '../theme.js';
 import { Save } from 'lucide-react';
@@ -23,19 +24,34 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
   const [saveError, setSaveError] = useState(null);
   const notePersistedSave = useStore(s => s.notePersistedSave);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
+  // A stable save id PER dossier so a timeout-retry upserts the same row instead
+  // of creating a duplicate. Re-minted whenever the settlement object changes, so
+  // each generated settlement gets its own id.
+  const saveIdRef = useRef({ settlement: null, id: null });
 
   const handleSave = async () => {
     if (!settlement || saving) return;
     setSaveError(null);
     setSaving(true);
+    if (saveIdRef.current.settlement !== settlement) {
+      saveIdRef.current = { settlement, id: newSaveId() };
+    }
+    const payload = {
+      name: settlement.name || 'Untitled Settlement',
+      tier: settlement.tier || 'unknown',
+      settlement,
+      config: settlement._config || null,
+      clientSaveId: saveIdRef.current.id,
+    };
+    // Safety net: stash the dossier locally BEFORE the network call. If the save
+    // stalls and the user refreshes to recover, the empty-state offers to restore
+    // it (the generated settlement is never persisted in the store otherwise).
+    // Left in place on failure so a reload can still recover; cleared on success.
+    writeDraft(payload);
     try {
-      const saveId = await savesService.save({
-        name: settlement.name || 'Untitled Settlement',
-        tier: settlement.tier || 'unknown',
-        settlement,
-        config: settlement._config || null,
-      });
+      const saveId = await savesService.save(payload);
       setSaved(true);
+      clearDraft();
       setTimeout(() => setSaved(false), 3000);
       // Refresh the store's savedSettlements so the count is accurate, then
       // fire the real-save instrumentation (first_save/third_save pricing

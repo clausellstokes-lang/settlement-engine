@@ -37,6 +37,43 @@ const isConfigured = !!(supabaseUrl && supabaseAnon) && !forceLocalData;
 // refresh attempts — one wins, the other sees a fresh token on retry.
 const noopLock = async (_name, _acquireTimeout, fn) => await fn();
 
+// ── Hang guard for unguarded Supabase network legs ───────────────────────────
+//
+// supabase-js data calls (.insert/.update/.select) and auth.signOut() have NO
+// built-in timeout. The noopLock above fixes the token-refresh LOCK hanging, but
+// the network legs themselves can still stall forever — a flaky connection, a
+// laptop sleep/wake mid-request, or an implicit token refresh that never settles
+// leaves the promise PERMANENTLY pending. Any UI awaiting it (the Save button,
+// the Sign-out action) then wedges with its loading flag stuck true, and the only
+// escape is a page refresh — which, for an unsaved dossier, destroys the work.
+//
+// withTimeout races the call against a timer that REJECTS with a coded error, so
+// the caller's existing catch/finally runs: the button re-enables and surfaces an
+// error instead of hanging. We reject (not resolve) so callers never mistake a
+// timed-out write for a successful one.
+export class TimeoutError extends Error {
+  constructor(ms, label) {
+    super(`${label || 'Request'} timed out after ${ms}ms`);
+    this.name = 'TimeoutError';
+    this.isTimeout = true;
+  }
+}
+
+/**
+ * Guard a promise (or a supabase-js thenable builder) against hanging forever.
+ * @param {Promise|PromiseLike} promise the awaitable to guard
+ * @param {number} ms timeout in milliseconds (default 20s — generous so a slow
+ *   but valid large-settlement insert or a cold edge function is not false-aborted)
+ * @param {string} label human-readable name for the error message
+ */
+export function withTimeout(promise, ms = 20000, label = 'Request') {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new TimeoutError(ms, label)), ms);
+  });
+  return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timer));
+}
+
 // ── "Remember me off" → genuinely non-persistent session ─────────────────────
 //
 // Bug this fixes: signing in with persistSession:true + storage:localStorage and
