@@ -28,7 +28,7 @@ import {
   impairFaction, restoreFaction, addFaction,
   addNpc, killNpcMutation, assignNpcMutation, killLeaderMutation,
   exposeCorruption, imposeCorruption,
-  swapNpcStanding, setPrimaryDeity,
+  swapNpcStanding, setPrimaryDeity, imposeCult, shiftTier,
 } from './mutateEntities.js';
 import {
   depleteResource, recoveredResource,
@@ -97,6 +97,8 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: any, event: any) => any>
   PROMOTE_NPC: swapNpcStanding,
   DEMOTE_NPC: swapNpcStanding,
   SET_PRIMARY_DEITY: setPrimaryDeity,
+  IMPOSE_CULT: imposeCult,
+  SHIFT_TIER: shiftTier,
 });
 
 /**
@@ -108,7 +110,7 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: any, event: any) => any>
  * @param {Object} args
  * @param {Object} args.settlement
  * @param {Event} args.event
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {Object} mutated settlement
  */
 export function mutateSettlement({ settlement, event, now = null }) {

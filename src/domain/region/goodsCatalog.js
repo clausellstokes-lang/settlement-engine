@@ -251,6 +251,7 @@ const TOKEN_STOPWORDS = new Set([
   'naval', 'route', 'routes',
 ]);
 
+/** @param {any} value */
 function stripAnnotations(value) {
   return String(value || '')
     .replace(/\([^)]*\)/g, ' ')
@@ -260,6 +261,7 @@ function stripAnnotations(value) {
     .trim();
 }
 
+/** @param {any} value */
 export function slugifyGood(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -268,6 +270,7 @@ export function slugifyGood(value) {
     .slice(0, 64) || 'unknown';
 }
 
+/** @param {any} value */
 function comparable(value) {
   return stripAnnotations(value)
     .toLowerCase()
@@ -276,6 +279,7 @@ function comparable(value) {
     .trim();
 }
 
+/** @param {any} value */
 function tokensOf(value) {
   return comparable(value)
     .split(' ')
@@ -296,6 +300,7 @@ function buildAliasIndex() {
 
 const ALIAS_INDEX = buildAliasIndex();
 
+/** @param {any} label */
 function fuzzyMatch(label) {
   const labelTokens = tokensOf(label);
   if (!labelTokens.length) return null;
@@ -327,6 +332,7 @@ function fuzzyMatch(label) {
 // prose roughly mean grain?") but wrong as a merge key — token overlap calls
 // "Baked goods" iron (via "metal goods") and "Smoked seafood" salt (via "sea
 // salt"), and merging on a guess erases real exports.
+/** @param {any} label */
 function exactCatalogEntry(label) {
   const key = comparable(label);
   return (key && ALIAS_INDEX.get(key)) || null;
@@ -338,6 +344,7 @@ function exactCatalogEntry(label) {
  * for display predicates: subsumption renames within a canonical good
  * ('Boots and shoes' surviving as 'Leather goods') stay matchable by id where
  * first-word/substring text checks snap.
+ * @param {any} label
  */
 export function exactGoodId(label) {
   const entry = exactCatalogEntry(label);
@@ -346,11 +353,12 @@ export function exactGoodId(label) {
 
 /**
  * Convert any label/object into a canonical regional good/service entry.
+ * @param {any} value
  */
 export function normalizeGood(value) {
   if (value == null) return null;
-  if (typeof value === 'object' && value.id && GOOD_CATALOG[value.id]) {
-    const entry = GOOD_CATALOG[value.id];
+  if (typeof value === 'object' && value.id && /** @type {Record<string, any>} */ (GOOD_CATALOG)[value.id]) {
+    const entry = /** @type {Record<string, any>} */ (GOOD_CATALOG)[value.id];
     return { ...entry, sourceLabel: value.label || value.name || entry.label };
   }
 
@@ -379,6 +387,7 @@ export function normalizeGood(value) {
   };
 }
 
+/** @param {any} [values] */
 export function normalizeGoodsList(values = []) {
   const list = Array.isArray(values) ? values : [values];
   const out = [];
@@ -399,6 +408,11 @@ const ANNOTATION_RE = /\([^)]*\)/;
 // "(transit)") explains why the entry exists and drives display pills; the
 // catalog's own label ("Grain") beats catch-all phrasings ("Bulk grain and
 // foodstuffs"); shorter beats longer; first-seen breaks ties.
+/**
+ * @param {string} a
+ * @param {string} b
+ * @param {any} entry
+ */
 function preferTradeLabel(a, b, entry) {
   // '(transit)' outranks every other annotation: reconcileTradeLists spares
   // transit re-exports by that marker, so a merge that erased it ("Refined
@@ -439,6 +453,8 @@ function preferTradeLabel(a, b, entry) {
  * opts.opaque — Set of lowercased labels that must never merge or be
  * renamed (user-authored custom trade goods; the dossier's gold tint
  * matches them by exact label).
+ * @param {any} [labels]
+ * @param {{ opaque?: any }} [opts]
  */
 export function subsumeTradeGoods(labels = [], opts = {}) {
   const opaque = opts.opaque || null;
@@ -470,6 +486,8 @@ export function subsumeTradeGoods(labels = [], opts = {}) {
  * importing a good and re-selling it onward is what an entrepôt does.
  * Matching is exact-alias only: a fuzzy resemblance is not a contradiction,
  * and dropping an export on a guess erases a real economy line.
+ * @param {any[]} [exports]
+ * @param {any[]} [imports]
  */
 export function reconcileTradeLists(exports = [], imports = []) {
   const importIds = new Set();
@@ -485,12 +503,17 @@ export function reconcileTradeLists(exports = [], imports = []) {
   });
 }
 
+/** @param {any} goodOrId */
 export function goodCriticality(goodOrId) {
   const id = typeof goodOrId === 'string' ? goodOrId : goodOrId?.id;
   if (!id) return 0.35;
-  return GOOD_CATALOG[id]?.criticality ?? goodOrId?.criticality ?? 0.35;
+  return /** @type {Record<string, any>} */ (GOOD_CATALOG)[id]?.criticality ?? goodOrId?.criticality ?? 0.35;
 }
 
+/**
+ * @param {any[]} [left]
+ * @param {any[]} [right]
+ */
 export function goodsIntersect(left = [], right = []) {
   const leftGoods = normalizeGoodsList(left);
   const rightGoods = normalizeGoodsList(right);
@@ -504,6 +527,7 @@ export function goodsIntersect(left = [], right = []) {
   return matches;
 }
 
+/** @param {any[]} [goods] */
 export function summarizeGoods(goods = []) {
   return normalizeGoodsList(goods).map(g => g.label);
 }

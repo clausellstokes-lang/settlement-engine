@@ -52,6 +52,6 @@ describe('SummaryTabV2 + War & Faith (dossier keystone) — self-gating', () => 
       config: { ...town.config, primaryDeitySnapshot: { name: 'Sol', rankAxis: 'major', alignmentAxis: 'good' } },
     };
     const { getByTestId } = render(<WarFaithTab settlement={deityTown} saveId={null} />);
-    expect(getByTestId('war-faith-section').textContent).toMatch(/Sol|Primary faith/);
+    expect(getByTestId('war-faith-section').textContent).toMatch(/Sol|Patron faith/);
   });
 });

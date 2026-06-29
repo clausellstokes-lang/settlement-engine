@@ -61,7 +61,7 @@ export default function AssignDeityFromMap({ campaign }) {
 
       {members.length === 0 ? (
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
-          Add canon settlements to this campaign to assign a primary deity.
+          Add canon settlements to this campaign to assign a patron deity.
         </div>
       ) : (
         <>
@@ -93,7 +93,7 @@ export default function AssignDeityFromMap({ campaign }) {
             <PrimaryDeityPicker />
           ) : (
             <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
-              Pick a settlement above to assign or change its primary deity.
+              Pick a settlement above to assign or change its patron deity.
             </div>
           )}
         </>

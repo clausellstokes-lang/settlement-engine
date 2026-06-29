@@ -36,12 +36,12 @@ export const HEALING_INSTITUTION_PATTERN =
  */
 
 /**
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {HealingLedger}
  */
 export function healingLedger(settlement) {
   const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const healerCount = inst.filter(i => HEALING_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const healerCount = inst.filter((/** @type {any} */ i) => HEALING_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
   const svc = settlement?.economicState?.availableServices?.healing
            ?? settlement?.availableServices?.healing;
   return {

@@ -37,6 +37,7 @@ export const COMPENDIUM_TABS = Object.freeze([
 ]);
 
 // kebab-case slug for stable entry ids and anchor fallbacks.
+/** @param {any} s */
 function slug(s) {
   return String(s || '')
     .toLowerCase()
@@ -207,6 +208,7 @@ export const COMPENDIUM_INDEX = Object.freeze([
 
 // ── Scoring ────────────────────────────────────────────────────────────────
 
+/** @param {any} entry @param {string} q @param {string[]} tokens */
 function scoreEntry(entry, q, tokens) {
   const term = entry.term.toLowerCase();
   const haystack = `${term} ${(entry.keywords || '').toLowerCase()} ${entry.category.toLowerCase()}`;
@@ -214,11 +216,11 @@ function scoreEntry(entry, q, tokens) {
   if (term === q) return 100;
   if (term.startsWith(q)) return 80;
   // word-boundary start inside a multi-word term (e.g. "city" in "Mage City")
-  if (term.split(/\s+/).some(w => w.startsWith(q))) return 65;
+  if (term.split(/\s+/).some(/** @param {string} w */ w => w.startsWith(q))) return 65;
   if (term.includes(q)) return 55;
   if (haystack.includes(q)) return 35;
   // every token present somewhere — handles out-of-order multi-word queries
-  if (tokens.length > 1 && tokens.every(t => haystack.includes(t))) return 20;
+  if (tokens.length > 1 && tokens.every(/** @param {string} t */ t => haystack.includes(t))) return 20;
   return 0;
 }
 
@@ -237,6 +239,7 @@ export function searchCompendium(query, opts = {}) {
 
   const tokens = q.split(/\s+/).filter(Boolean);
 
+  /** @type {Array<{ entry: any, score: number }>} */
   const scored = [];
   for (const entry of index) {
     const score = scoreEntry(entry, q, tokens);

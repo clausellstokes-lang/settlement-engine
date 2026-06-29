@@ -106,7 +106,7 @@ function newAgg() {
     convByCause: {}, occupiedPeak: 0, occupationTicks: 0, warlikeOccupierTicks: 0,
     warPostureSeen: false, deploymentsSeen: false, occupationsSeen: false, tradeWarSeen: false, pantheonSeen: false, warExhaustionSeen: false,
     deityTierChanges: 0, conditionPeak: 0,
-    stalls: 0, zeroCandTicks: 0, noveltyTail: 0,
+    stalls: 0, zeroCandTicks: 0, distinctFamiliesTailSum: 0,
     firstSeenTick: {},
   };
 }
@@ -148,7 +148,8 @@ function runWorld(seedBase, interval, ticks, agg) {
     agg.candPerTick.push(cands.length);
     agg.distinctFamiliesPerTick.push(fams.size);
     if (cands.length === 0) { agg.zeroCandTicks++; }
-    if (t >= ticks - Math.min(10, ticks) && fams.size > 0) agg.noveltyTail += fams.size;
+    // sum of distinct candidate families seen each tick over the last 10 ticks — tail activity density, NOT novelty (a world repeating the same families scores the same); genuine first-seen novelty lives in agg.firstSeenTick.
+    if (t >= ticks - Math.min(10, ticks) && fams.size > 0) agg.distinctFamiliesTailSum += fams.size;
     agg.autoAppliedTotal += (r.autoApplied || []).length;
     agg.proposalsTotal += (r.proposals || []).length;
     agg.majorsTotal += (r.majors || []).length;
@@ -244,7 +245,7 @@ report.soakSummary = {
   distinctDynamicsFired: Object.keys(s.candByType).length,
   candPerTickMean: mean(s.candPerTick), candPerTickMin: Math.min(...s.candPerTick), candPerTickMax: Math.max(...s.candPerTick),
   distinctFamiliesPerTickMean: mean(s.distinctFamiliesPerTick),
-  zeroCandTicks: s.zeroCandTicks, noveltyTailFamilies: s.noveltyTail,
+  zeroCandTicks: s.zeroCandTicks, distinctFamiliesTailSum: s.distinctFamiliesTailSum,
   stressorCountMean: mean(s.stressorCountPerTick), stressorCountMax: Math.max(...s.stressorCountPerTick),
   autoApplied: s.autoAppliedTotal, proposals: s.proposalsTotal, majors: s.majorsTotal, resolvedStressors: s.resolvedStressors,
   promotions: s.promotions, demotions: s.demotions, instGained: s.instGained, instLost: s.instLost,

@@ -56,6 +56,7 @@ const TYPE_PATTERNS = Object.freeze([
   // Default to institution if a noun-looking name is present
 ]);
 
+/** @param {any} rawEntity */
 export function inferCustomEntityType(rawEntity) {
   if (!rawEntity) return null;
   // Explicit type wins
@@ -83,6 +84,7 @@ const INSTITUTION_CATEGORY_PATTERNS = Object.freeze([
   { pattern: /(infirmary|hospice|herbalist|apothecary|healer|hospital)/i,                 category: 'healing' },
 ]);
 
+/** @param {any} name */
 function inferInstitutionCategory(name) {
   for (const { pattern, category } of INSTITUTION_CATEGORY_PATTERNS) {
     if (pattern.test(name)) return category;
@@ -206,12 +208,14 @@ const CATEGORY_TEMPLATES = Object.freeze({
 
 /**
  * Classify a custom institution. Returns the structured envelope.
+ * @param {any} rawEntity
+ * @param {any} [settlement]
  */
 export function classifyCustomInstitution(rawEntity, settlement) {
   if (!rawEntity) return null;
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed institution');
   const category = inferInstitutionCategory(name);
-  const tmpl = CATEGORY_TEMPLATES[category];
+  const tmpl = /** @type {Record<string, any>} */ (CATEGORY_TEMPLATES)[category];
   const contributors = [{
     source: 'category_inference',
     effect: 'matched',
@@ -264,6 +268,7 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 // ── Other-type classifiers (light) ──────────────────────────────────────
 
+/** @param {any} rawEntity */
 function classifyCustomFaction(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
   const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
@@ -280,6 +285,7 @@ function classifyCustomFaction(rawEntity) {
   };
 }
 
+/** @param {any} rawEntity */
 function classifyCustomNpc(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed NPC');
   return {
@@ -295,6 +301,7 @@ function classifyCustomNpc(rawEntity) {
   };
 }
 
+/** @param {any} rawEntity */
 function classifyCustomThreat(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed threat');
   return {
@@ -310,6 +317,7 @@ function classifyCustomThreat(rawEntity) {
   };
 }
 
+/** @param {any} rawEntity */
 function classifyCustomHook(rawEntity) {
   const text = String(rawEntity.text || rawEntity.name || 'Unnamed hook');
   return {
@@ -355,8 +363,9 @@ export function supportedCustomContentTypes() {
 export function supportedInstitutionCategories() {
   return [...INSTITUTION_CATEGORIES];
 }
+/** @param {any} category */
 export function institutionCategoryTemplate(category) {
-  const t = CATEGORY_TEMPLATES[category];
+  const t = /** @type {Record<string, any>} */ (CATEGORY_TEMPLATES)[category];
   if (!t) return null;
   return {
     provides:     [...t.provides],

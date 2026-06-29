@@ -1,3 +1,4 @@
+/** @param {any} save */
 export function savePhase(save) {
   return save?.phase
     || save?.campaignState?.phase
@@ -6,6 +7,7 @@ export function savePhase(save) {
     || 'draft';
 }
 
+/** @param {any} save */
 export function saveCanonizedAt(save) {
   return save?.canonizedAt
     || save?.campaignState?.canonizedAt
@@ -14,6 +16,7 @@ export function saveCanonizedAt(save) {
     || null;
 }
 
+/** @param {any} save */
 export function isCanonSave(save) {
   return savePhase(save) === 'canon' || Boolean(saveCanonizedAt(save));
 }

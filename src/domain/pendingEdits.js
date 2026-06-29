@@ -52,6 +52,7 @@ const _editKindSet = new Set(EDIT_KINDS);
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the
 // same (kind, payload, clock) because the edit queue is PERSISTED — Math.random
 // here put non-determinism into persisted state and broke replay/idempotency.
+/** @param {string} str */
 function shortHash(str) {
   let h = 0x811c9dc5;
   for (let i = 0; i < str.length; i++) {
@@ -63,7 +64,8 @@ function shortHash(str) {
 
 // ── Construction ──────────────────────────────────────────────────────
 
-/** Build a new pending-edit. Pure; no side effects. */
+/** Build a new pending-edit. Pure; no side effects.
+ * @param {string} kind @param {any} payload @param {number} [clock] */
 export function buildEdit(kind, payload, clock = 0) {
   if (!_editKindSet.has(kind)) {
     throw new Error(`pendingEdits: unknown kind "${kind}"`);
@@ -79,31 +81,36 @@ export function buildEdit(kind, payload, clock = 0) {
 
 // ── Queue operations ─────────────────────────────────────────────────
 
-/** Append an edit. Returns a new queue (does not mutate). */
+/** Append an edit. Returns a new queue (does not mutate).
+ * @param {any[]} queue @param {any} edit */
 export function appendEdit(queue, edit) {
   if (!Array.isArray(queue)) return [edit];
   return [...queue, edit];
 }
 
-/** Mark a queue entry as reverted (soft delete — kept for history). */
+/** Mark a queue entry as reverted (soft delete — kept for history).
+ * @param {any[]} queue @param {string} editId */
 export function revertEdit(queue, editId) {
   if (!Array.isArray(queue)) return [];
   return queue.map(e => e.id === editId ? { ...e, reverted: true } : e);
 }
 
-/** Discard a queue entry entirely (hard delete). */
+/** Discard a queue entry entirely (hard delete).
+ * @param {any[]} queue @param {string} editId */
 export function dropEdit(queue, editId) {
   if (!Array.isArray(queue)) return [];
   return queue.filter(e => e.id !== editId);
 }
 
-/** Reduce to the active (non-reverted) edits only. */
+/** Reduce to the active (non-reverted) edits only.
+ * @param {any[]} queue */
 export function activeEdits(queue) {
   if (!Array.isArray(queue)) return [];
   return queue.filter(e => !e.reverted);
 }
 
-/** True if the queue has unapplied work the user can commit/revert. */
+/** True if the queue has unapplied work the user can commit/revert.
+ * @param {any[]} queue */
 export function hasPending(queue) {
   return activeEdits(queue).length > 0;
 }
@@ -118,12 +125,13 @@ export function hasPending(queue) {
  * The preview is *coarse* — it summarizes counts and impact bands,
  * not a full re-simulation. A full re-sim is what `commit()` does.
  *
- * @param {Object} settlement — live settlement (pre-edit state)
- * @param {Array}  queue      — pending edits to preview
- * @returns {Object} preview as documented above
+ * @param {any} settlement — live settlement (pre-edit state)
+ * @param {any[]}  queue      — pending edits to preview
+ * @returns {any} preview as documented above
  */
 export function previewCascade(settlement, queue) {
   const edits = activeEdits(queue);
+  /** @type {any} */
   const out = {
     summaryLines: [],
     downstreamCounts: {},

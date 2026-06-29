@@ -31,7 +31,12 @@ import { deepClone } from '../clone.js';
 // over-match and needs a matching SQL migration (Postgres uses \y for boundaries).
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
 
-/** Recursively strip denied keys; preserves history.currentTensions. */
+/**
+ * Recursively strip denied keys; preserves history.currentTensions.
+ * @param {any} value
+ * @param {string[]} [path]
+ * @returns {any}
+ */
 export function sanitizePublicValue(value, path = []) {
   if (Array.isArray(value)) {
     return value
@@ -40,6 +45,7 @@ export function sanitizePublicValue(value, path = []) {
   }
   if (!value || typeof value !== 'object') return value;
 
+  /** @type {Record<string, any>} */
   const out = {};
   for (const [key, child] of Object.entries(value)) {
     const childPath = [...path, key];
@@ -69,6 +75,8 @@ export function sanitizePublicValue(value, path = []) {
  * `gallery_share_narrated` toggle, so even in full mode we still drop the AI
  * base blobs defensively. SECURITY: full mode is reachable ONLY when the
  * gallery row's `gallery_share_dm` is true (set by the owner).
+ * @param {any} settlement
+ * @param {{ full?: boolean }} [options]
  */
 export function toPublicSafe(settlement, { full = false } = {}) {
   if (full) {
@@ -93,6 +101,7 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     // never reads this partial object — see OutputContainer showNarrative.)
     if (clone.aiSettlement && typeof clone.aiSettlement === 'object') {
       const ai = clone.aiSettlement;
+      /** @type {Record<string, any>} */
       const compass = {};
       for (const k of ['identityMarkers', 'frictionPoints', 'connectionsMap', 'dmCompass']) {
         if (ai[k] != null) compass[k] = ai[k];
@@ -109,7 +118,7 @@ export function toPublicSafe(settlement, { full = false } = {}) {
   delete clean.dossierNotes;
   delete clean.notes;
   if (Array.isArray(clean.npcs)) {
-    clean.npcs = clean.npcs.map(npc => ({
+    clean.npcs = clean.npcs.map((/** @type {any} */ npc) => ({
       id: npc.id,
       name: npc.name,
       role: npc.role,
@@ -121,7 +130,7 @@ export function toPublicSafe(settlement, { full = false } = {}) {
       secondaryAffiliation: npc.secondaryAffiliation,
       presentation: npc.presentation,
       influence: npc.influence,
-    })).filter(npc => npc.name || npc.role);
+    })).filter((/** @type {any} */ npc) => npc.name || npc.role);
   }
   return clean;
 }

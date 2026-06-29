@@ -23,8 +23,8 @@
  * tick.
  *
  * @param {object} args
- * @param {Array}  args.queue  worldState.pendingEvents: [{ queueId, saveId, event, queuedAt }]
- * @param {Array}  args.saves  campaign member saves: [{ id, settlement, campaignState }]
+ * @param {any[]}  args.queue  worldState.pendingEvents: [{ queueId, saveId, event, queuedAt }]
+ * @param {any[]}  args.saves  campaign member saves: [{ id, settlement, campaignState }]
  * @param {string} args.now    one timestamp for the whole tick (simultaneity)
  * @param {number|null} [args.tick] worldState.tick, stamped on each drained entry
  * @returns {{ updates: Array<{ saveId:string, settlement:object, systemState:object, eventLog:Array, authoredEvent:object|null }>,
@@ -41,13 +41,18 @@ import { twinDirectiveForEvent } from '../crisisLifecycle.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 
+/** @param {any} value */
 function clone(value) {
   return value == null ? value : deepClone(value);
 }
 
+/** @param {{ queue?: any[], saves?: any[], now?: string, tick?: (number|null) }} [args] */
 export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow(), tick = null } = {}) {
+  /** @type {any[]} */
   const updates = [];
+  /** @type {any[]} */
   const twinDirectives = [];
+  /** @type {any[]} */
   const partyImpacts = [];
   let drainedCount = 0;
   if (!Array.isArray(queue) || queue.length === 0) {

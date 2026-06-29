@@ -33,17 +33,17 @@ const EVENT_TO_PARTY_KIND = Object.freeze({
  * Map a party-caused settlement event to a party-impact action, or null when the
  * event has no world-scale analog (attribution-only).
  *
- * @param {Object} event   the applied settlement event ({ type, targetId, partyCaused, description, ... })
+ * @param {any} event   the applied settlement event ({ type, targetId, partyCaused, description, ... })
  * @param {string} saveId  the settlement's campaign save id (party impacts are settlement-scoped)
  * @returns {Object|null}  a PARTY_IMPACT action, or null
  */
 export function mapEventToPartyImpact(event, saveId) {
   if (!event || !event.partyCaused || !saveId) return null;
-  const mapping = EVENT_TO_PARTY_KIND[event.type];
+  const mapping = /** @type {Record<string, any>} */ (EVENT_TO_PARTY_KIND)[event.type];
   if (!mapping) return null;
   const targetId = String(event.targetId || '').trim();
   if (!targetId) return null;
-  const spec = PARTY_IMPACT_KINDS[mapping.kind];
+  const spec = /** @type {Record<string, any>} */ (PARTY_IMPACT_KINDS)[mapping.kind];
   if (!spec) return null;
   return {
     kind: mapping.kind,

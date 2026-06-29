@@ -12,7 +12,11 @@
  * persistence — this reads the arrays the save already carries. Pure + tested.
  */
 
-/** Best-effort epoch ms for a timestamp-ish value, or null. */
+/**
+ * Best-effort epoch ms for a timestamp-ish value, or null.
+ * @param {any} at
+ * @returns {number | null}
+ */
 function toTime(at) {
   if (!at) return null;
   const t = new Date(at).getTime();
@@ -24,6 +28,10 @@ function toTime(at) {
  * `source` is the feed the entry came from; a party-caused entry overrides it
  * to 'party'. EventLog entries nest the authored event under `.event`, so we
  * look there too.
+ * @param {any} raw
+ * @param {string|number} index
+ * @param {string} source
+ * @returns {any}
  */
 function normalizeEntry(raw, index, source) {
   if (!raw) return null;
@@ -53,16 +61,16 @@ function normalizeEntry(raw, index, source) {
  * Build the unified Chronicle feed, newest first.
  *
  * @param {Object} sources
- * @param {Array} [sources.manual]     authored EventLog entries (campaignState.eventLog)
- * @param {Array} [sources.worldPulse] world-pulse events (campaignState.worldPulse.events)
- * @param {Array} [sources.worldLog]   world-state event log (campaignState.worldState.eventLog)
- * @param {Array} [sources.recent]     settlement.recentEvents (historical)
+ * @param {any[]} [sources.manual]     authored EventLog entries (campaignState.eventLog)
+ * @param {any[]} [sources.worldPulse] world-pulse events (campaignState.worldPulse.events)
+ * @param {any[]} [sources.worldLog]   world-state event log (campaignState.worldState.eventLog)
+ * @param {any[]} [sources.recent]     settlement.recentEvents (historical)
  * @param {Object} [opts]
  * @param {number} [opts.limit=40]     max entries (0 / negative = unlimited)
- * @param {string|number|Date} [opts.reference] campaign-start / canonization moment;
+ * @param {string|number|Date|null} [opts.reference] campaign-start / canonization moment;
  *                                      when given, each dated entry gets a relativeDay
  *                                      (≥0, starting at zero) + "Day N" relativeLabel.
- * @returns {Array<{id,title,summary,at,severity,partyCaused,source,relativeDay,relativeLabel}>}
+ * @returns {any[]}
  */
 export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = [], recent = [] } = {}, { limit = 40, reference = null } = {}) {
   // Order of collection sets dedupe precedence: a manual/party entry wins over a
@@ -83,7 +91,7 @@ export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = []
   }
 
   // Newest first; undated entries trail in collection order (stable).
-  const dated = deduped.filter(e => toTime(e.at) != null).sort((a, b) => toTime(b.at) - toTime(a.at));
+  const dated = deduped.filter(e => toTime(e.at) != null).sort((a, b) => /** @type {number} */ (toTime(b.at)) - /** @type {number} */ (toTime(a.at)));
   const undated = deduped.filter(e => toTime(e.at) == null);
   const sorted = [...dated, ...undated];
 
@@ -100,6 +108,7 @@ export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = []
   return (typeof limit === 'number' && limit > 0) ? timed.slice(0, limit) : timed;
 }
 
+/** @param {any} v @returns {any[]} */
 function arr(v) {
   return Array.isArray(v) ? v : [];
 }
@@ -114,10 +123,10 @@ function arr(v) {
  * the top `limit` in chronological (newest-first) order as a compact, PII-free
  * payload the prompt can lean on. Pure.
  *
- * @param {Array} feed                a buildChronicleFeed result
+ * @param {any[]} feed                a buildChronicleFeed result
  * @param {Object} [opts]
  * @param {number} [opts.limit=8]
- * @returns {Array<{when:?string, what:string, detail?:string, source:string, party:boolean}>}
+ * @returns {any[]}
  */
 export function selectChronicleContext(feed = [], { limit = 8 } = {}) {
   if (!Array.isArray(feed) || !feed.length) return [];

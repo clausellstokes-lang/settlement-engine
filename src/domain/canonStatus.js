@@ -35,6 +35,7 @@ export const CANON_STATUSES = Object.freeze([
 
 // ── Single-entity tagger ────────────────────────────────────────────────
 
+/** @param {any} entity */
 function inferSource(entity) {
   if (typeof entity.source === 'string' && CANON_SOURCES.includes(entity.source)) {
     return entity.source;
@@ -48,6 +49,7 @@ function inferSource(entity) {
   return 'generated';
 }
 
+/** @param {any} entity @param {string} source */
 function inferCanonStatus(entity, source) {
   if (typeof entity.canonStatus === 'string' && CANON_STATUSES.includes(entity.canonStatus)) {
     return entity.canonStatus;
@@ -66,6 +68,7 @@ function inferCanonStatus(entity, source) {
   return 'draft';
 }
 
+/** @param {any} entity @param {string} source @param {string} canonStatus */
 function inferLocked(entity, source, canonStatus) {
   if (entity.locked === true || entity.pinned === true) return true;
   // User-canon entities default to locked; the user has staked them.
@@ -98,8 +101,8 @@ export function tagEntityCanon(entity /* , settlement */) {
  * `{ entity, ...tag }` records so consumers can render lists with
  * the tag attached without modifying the entity itself.
  */
-// eslint-disable-next-line no-unused-vars
-export function tagEntityList(entities, settlement) {
+/** @param {any} entities @param {any} [_settlement] */
+export function tagEntityList(entities, _settlement) {
   if (!Array.isArray(entities)) return [];
   return entities.map(e => ({ entity: e, ...tagEntityCanon(e) }));
 }
@@ -108,15 +111,19 @@ export function tagEntityList(entities, settlement) {
  * Count entities by source + canon status across the major
  * settlement entity arrays.
  */
+/** @param {any} settlement */
 export function canonBreakdown(settlement) {
   const out = {
+    /** @type {Record<string, number>} */
     bySource: { generated: 0, user: 0, event: 0, ai_overlay: 0 },
+    /** @type {Record<string, number>} */
     byStatus: { draft: 0, canon: 0, optional: 0, superseded: 0 },
     locked: 0,
     total: 0,
   };
   if (!settlement) return out;
 
+  /** @param {any} arr */
   const collect = (arr) => {
     if (!Array.isArray(arr)) return;
     for (const e of arr) {

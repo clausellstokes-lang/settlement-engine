@@ -25,6 +25,7 @@ export const FACTION_CATEGORY_LABELS = Object.freeze({
   other:      'Other',
 });
 
+/** @param {any} x @returns {string} */
 function norm(x) {
   return String(x || '').trim().toLowerCase();
 }
@@ -34,11 +35,12 @@ function norm(x) {
  * older/neighbour records keep a flat settlement.factions. Read both, and
  * accept either `name` or `faction` as the label key.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Set<string>} lowercased names already present
  */
 export function presentFactionNames(settlement) {
   const list = settlement?.powerStructure?.factions || settlement?.factions || [];
+  /** @type {Set<string>} */
   const set = new Set();
   for (const f of list) {
     const n = norm(f?.name || f?.faction);
@@ -52,7 +54,7 @@ export function presentFactionNames(settlement) {
  * in the settlement. Empty groups are dropped so the UI never renders a
  * heading with no options.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @returns {Array<{ category: string, label: string, options: Array<{ name: string, category: string }> }>}
  */
 export function factionCompendium(settlement) {
@@ -70,7 +72,7 @@ export function factionCompendium(settlement) {
     if (options.length) {
       groups.push({
         category,
-        label: FACTION_CATEGORY_LABELS[category] || category,
+        label: /** @type {Record<string, string>} */ (FACTION_CATEGORY_LABELS)[category] || category,
         options,
       });
     }

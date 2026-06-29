@@ -213,7 +213,7 @@ export default function LibraryToolbar({
       <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
       {/* Living world */}
       <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
-      <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a primary deity.">Has deity</Button>
+      <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a patron deity.">Has deity</Button>
       <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
       {/* Campaign selector */}
@@ -495,7 +495,7 @@ export default function LibraryToolbar({
           <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
           {/* Living world */}
           <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
-          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a primary deity.">Has deity</Button>
+          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a patron deity.">Has deity</Button>
           <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
           {/* Campaign selector */}

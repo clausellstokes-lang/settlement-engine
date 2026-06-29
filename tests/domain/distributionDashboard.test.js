@@ -114,12 +114,12 @@ describe('aggregateDistribution() — faith / pantheon (religion rework)', () =>
     config: {
       primaryDeitySnapshot: { name: 'Aurum', rankAxis: 'major', temperamentAxis: 'peaceful', alignmentAxis: 'good' },
       faithProfile: {
-        chief: { name: 'Aurum', deityRef: 'custom:lu_aurum', share: 62 },
+        patron: { name: 'Aurum', deityRef: 'custom:lu_aurum', share: 62, legitimacy: 0.7 },
         deities: [
-          { deityRef: 'custom:lu_aurum', name: 'Aurum', niche: 'peaceful:good', share: 62, standing: 'ascendant', isChief: true },
-          { deityRef: 'custom:lu_korl', name: 'Korl', niche: 'warlike:evil', share: 38, standing: 'established', isChief: false },
+          { deityRef: 'custom:lu_aurum', name: 'Aurum', niche: 'peaceful:good', share: 62, standing: 'ascendant', legitimacy: 0.7, isPatron: true },
+          { deityRef: 'custom:lu_korl', name: 'Korl', niche: 'warlike:evil', share: 38, standing: 'established', legitimacy: 0.3, isPatron: false },
         ],
-        contested: false, chiefSecurity: 0.62,
+        contested: false, patronSecurity: 0.62,
       },
     },
     powerStructure: { government: 'theocracy', publicLegitimacy: { score: 60, label: 'Stable' }, factions: [] },

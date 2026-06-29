@@ -115,26 +115,40 @@ const RULE_COMPARISON_KEYS = Object.freeze([
   ...BOOLEAN_KEYS,
 ]);
 
+/**
+ * @param {any} value
+ * @param {any} allowed
+ * @param {any} fallback
+ */
 function enumValue(value, allowed, fallback) {
   return allowed.includes(value) ? value : fallback;
 }
 
+/**
+ * @param {Record<string, any>} rules
+ * @param {any} preset
+ */
 function rulesMatchPreset(rules, preset) {
   return RULE_COMPARISON_KEYS.every(key => rules[key] === preset?.rules?.[key]);
 }
 
+/**
+ * @param {Record<string, any>} input
+ * @param {Record<string, any>} rules
+ */
 function presetIdForRules(input, rules) {
-  const explicit = typeof input.presetId === 'string' && SIMULATION_RULE_PRESETS[input.presetId]
+  const explicit = typeof input.presetId === 'string' && /** @type {Record<string, any>} */ (SIMULATION_RULE_PRESETS)[input.presetId]
     ? input.presetId
     : null;
-  if (explicit && rulesMatchPreset(rules, SIMULATION_RULE_PRESETS[explicit])) return explicit;
+  if (explicit && rulesMatchPreset(rules, /** @type {Record<string, any>} */ (SIMULATION_RULE_PRESETS)[explicit])) return explicit;
   const inferred = Object.keys(SIMULATION_RULE_PRESETS)
-    .find(id => rulesMatchPreset(rules, SIMULATION_RULE_PRESETS[id]));
+    .find(id => rulesMatchPreset(rules, /** @type {Record<string, any>} */ (SIMULATION_RULE_PRESETS)[id]));
   return inferred || CUSTOM_SIMULATION_PRESET_ID;
 }
 
 export function normalizeSimulationRules(raw = {}) {
   const input = /** @type {SimulationRulesInput} */ (raw && typeof raw === 'object' ? raw : {});
+  /** @type {Record<string, any>} */
   const next = {
     ...DEFAULT_SIMULATION_RULES,
     ...input,
@@ -144,7 +158,7 @@ export function normalizeSimulationRules(raw = {}) {
     migrationMode: enumValue(input.migrationMode, MIGRATION_MODES, DEFAULT_SIMULATION_RULES.migrationMode),
   };
   for (const key of BOOLEAN_KEYS) {
-    next[key] = input[key] === undefined ? DEFAULT_SIMULATION_RULES[key] : input[key] !== false;
+    next[key] = input[key] === undefined ? /** @type {Record<string, any>} */ (DEFAULT_SIMULATION_RULES)[key] : input[key] !== false;
   }
   next.presetId = presetIdForRules(input, next);
   return next;
