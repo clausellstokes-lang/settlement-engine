@@ -34,33 +34,62 @@ export function stressSummary(type, ctx = {}, { rng, instFlags } = {}) {
   return fn ? fn(name, { rng, instFlags }) : undefined;
 }
 
+/**
+ * Re-render a stressor summary with the REAL settlement name, replaying the rng
+ * draws captured at generation time so no NEW draw occurs.
+ *
+ * Stress is resolved at an early pipeline step, before the settlement name
+ * exists, so summaries are first rendered with an empty name. Once the name is
+ * known (assembly), we re-render — but `wartime` draws from rng inside its
+ * template, and drawing again here would shift the pipeline's rng order and
+ * break determinism. Instead we replay the value(s) recorded at generation
+ * (`draws`), reproducing the exact same branch while substituting the real name.
+ * Templates that branch on name (e.g. religious_conversion's `name.length`) now
+ * resolve against the real name, which is the whole point.
+ *
+ * @param {string} type   stressor type key
+ * @param {string} name   the resolved settlement name
+ * @param {number[]} draws rng values captured at generation (replayed in order)
+ * @returns {string|undefined}
+ */
+export function renderStressSummaryWithName(type, name, draws = []) {
+  let i = 0;
+  const replayRng = () => (i < draws.length ? draws[i++] : 0);
+  return stressSummary(type, { name }, { rng: replayRng });
+}
+
+// Every name-interpolating template falls back to a generic subject so a
+// missing/empty name can NEVER leave a subjectless sentence (" is under active
+// siege."). Sentence-START positions capitalize ('The settlement'); mid-sentence
+// positions stay lowercase ('the settlement'). The real name is threaded in at
+// assembly (renderStressSummaryWithName) — the fallback is the safety net.
 const SUMMARIES = {
   under_siege: (name) =>
-    `${name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
+    `${name || 'The settlement'} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
 
   famine: (name) =>
-    `${name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
+    `${name || 'The settlement'} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
 
   occupied: (name) =>
-    `${name} is under the administrative control of an outside power. Locals comply outwardly, but resistance exists, distributed and careful.`,
+    `${name || 'The settlement'} is under the administrative control of an outside power. Locals comply outwardly, but resistance exists, distributed and careful.`,
 
   politically_fractured: (name) =>
-    `${name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
+    `${name || 'The settlement'} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
 
   indebted: (name) =>
-    `${name} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
+    `${name || 'The settlement'} owes a debt it cannot repay to an external power: a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
 
   recently_betrayed: (name) =>
-    `${name} was betrayed from within, recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
+    `${name || 'The settlement'} was betrayed from within, recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
 
   infiltrated: (name) =>
-    `${name} has been quietly penetrated by an outside interest: enemy agents, a cult, a merchant intelligence network. The settlement does not know. Its decisions are already being steered.`,
+    `${name || 'The settlement'} has been quietly penetrated by an outside interest: enemy agents, a cult, a merchant intelligence network. The settlement does not know. Its decisions are already being steered.`,
 
   plague_onset: (name) =>
-    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
+    `Something is spreading in ${name || 'the settlement'}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
-    `The last strong leader of ${name} died recently. No one has consolidated authority. Power is there for whoever moves first, and several parties already know it.`,
+    `The last strong leader of ${name || 'the settlement'} died recently. No one has consolidated authority. Power is there for whoever moves first, and several parties already know it.`,
 
   monster_pressure: () =>
     "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse, the settlement's defences are adequate for normal times, but these are not normal times.",

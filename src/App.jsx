@@ -447,16 +447,28 @@ export default function App() {
                 quiet two-cap emphasis that keeps the whole word legible. The
                 aria-label restores the plain name for assistive tech, since the
                 per-letter spans would otherwise read as fragments. */}
+            {/* The wordmark doubles as the home link (matches the mobile header's
+                brand button) — clicking it returns to Create. Rendered as a button
+                for keyboard + AT access; the h1 keeps the heading semantics with
+                its per-letter spans hidden from AT (the button's aria-label reads
+                the plain name). */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <h1
-                aria-label="SettlementForge"
-                style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+              <button
+                type="button"
+                onClick={() => setView('generate')}
+                aria-label="SettlementForge home"
+                style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >
-                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
-                <span aria-hidden="true">ettlement</span>
-                <span aria-hidden="true" style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
-                <span aria-hidden="true">orge</span>
-              </h1>
+                <h1
+                  aria-hidden="true"
+                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+                >
+                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
+                  <span>ettlement</span>
+                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
+                  <span>orge</span>
+                </h1>
+              </button>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>

@@ -107,8 +107,14 @@ export const useStore = create(
             // expect to land on the mode picker on every visit, not get
             // dumped straight into whatever flow they used last session.
             config: state.config,
-            institutionToggles: state.institutionToggles,
-            categoryToggles:    state.categoryToggles,
+            // institutionToggles / categoryToggles are intentionally NOT
+            // persisted. They are per-build creation inputs; carrying them across
+            // sessions let a forced (esp. out-of-tier) institution set in a past
+            // build silently re-apply to an unrelated new settlement and surface
+            // as a phantom "deliberate override" the user never made this build.
+            // Each new build starts with a clean institution slate (the in-app
+            // "New Draft" path also resets all toggles). The generator's tier
+            // gate is the complementary guard against any cross-tier leak.
             goodsToggles:       state.goodsToggles,
             servicesToggles:    state.servicesToggles,
             // The progressive-disclosure altitude is a durable, user-owned pref

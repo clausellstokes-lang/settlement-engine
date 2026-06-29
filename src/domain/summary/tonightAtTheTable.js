@@ -64,8 +64,8 @@ export function tonightAtTheTable(settlement) {
     const secret = npcSecretText(npc);
     const want = npc.goal?.short || npc.want || '';
     const trait = secret
-      ? `secret: ${truncate(secret, 80)}`
-      : (want ? `wants: ${truncate(want, 80)}` : (role || 'major NPC'));
+      ? `secret: ${truncate(secret, 200)}`
+      : (want ? `wants: ${truncate(want, 200)}` : (role || 'major NPC'));
     out.push({
       kind: 'NPC',
       title: npc.name || 'Unnamed NPC',
@@ -82,7 +82,7 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'HOOK',
       title: hook.source || hook.role || 'Plot hook',
-      body:  truncate(hook.text || '', 120),
+      body:  truncate(hook.text || '', 280),
     });
   }
 
@@ -95,13 +95,13 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'TWIST',
       title: annotation.eventName || 'The hidden thread',
-      body:  truncate(annotation.annotation, 120),
+      body:  truncate(annotation.annotation, 280),
     });
   } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
     out.push({
       kind: 'TWIST',
       title: ranked[2].name,
-      body:  truncate(npcSecretText(ranked[2]), 120),
+      body:  truncate(npcSecretText(ranked[2]), 280),
     });
   }
 
@@ -117,7 +117,7 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'RED',
       title: `Don't mention ${good}`,
-      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 160),
+      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 280),
     });
   }
 

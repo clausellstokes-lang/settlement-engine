@@ -374,6 +374,73 @@ export function institutionsForCategory(category, settlement) {
   return out;
 }
 
+// Domain (faction category) -> institution TAG affinity. Tag-based association is
+// the PRIMARY signal for a power's institutional footprint: every catalog
+// institution is tagged, and tags don't suffer the misses/false-positives of name
+// matching — a "Local fence" or "Smuggling ring" carries the `criminal` tag but
+// matches no criminal NAME keyword, so the name path alone left criminal powers
+// showing "None" despite the settlement having criminal institutions. Tags also
+// overlap by design (a guild hall is `['guild','market']`), so one institution
+// maps to MORE THAN ONE power — exactly the "maps to one or more powers" intent.
+// Keyed by the SAME resolved domains as CATEGORY_INSTITUTION_HINTS (after the
+// magic→arcane / crafts→craft / noble→government aliases). The generic `trade`
+// tag is deliberately excluded — it sits on a third of all institutions, so it is
+// "participates in commerce", not "is an economic institution".
+const CATEGORY_INSTITUTION_TAGS = Object.freeze({
+  military:   ['military', 'defense', 'fortification', 'law_enforcement'],
+  government: ['civic', 'legal', 'law_enforcement'],
+  religious:  ['religious', 'church', 'monastery', 'divine'],
+  economy:    ['market', 'banking', 'guild', 'port', 'warehouse', 'economy'],
+  craft:      ['guild', 'metalwork', 'textile', 'leather', 'timber'],
+  criminal:   ['criminal', 'smuggling', 'underground'],
+  arcane:     ['arcane', 'alchemy', 'planar', 'enchanting'],
+});
+
+/**
+ * A power's full institutional footprint — every institution that LOGICALLY
+ * belongs to this power (faction). Three signals, unioned:
+ *   1. TAGS — the institution carries a tag in this power's domain affinity
+ *      (primary; see {@link CATEGORY_INSTITUTION_TAGS}).
+ *   2. NAME — the institution name fits the domain hint (fallback for the rare
+ *      untagged entry; same hints {@link inferInstitutionName} uses).
+ *   3. EXPLICIT — the institution was pulled into existence BY this faction at
+ *      generation (`factionSource` === the power's name, set by factionCorrelation).
+ * Because tags overlap, an institution can belong to several powers at once.
+ *
+ * Returns DISPLAY NAMES (deduped, source order); the caller resolves rename-safe
+ * ids via the entity index, same as the member path. Pure, UI-only (not consumed
+ * by the generator), so it is safe to evolve without a golden-master regen.
+ *
+ * @param {{faction?: string, category?: string}|null} faction  a power-structure faction
+ * @param {{institutions?: Array<{name?: string, tags?: string[], factionSource?: string}>}|null} settlement
+ * @returns {string[]} matching institution display names
+ */
+export function institutionsForPower(faction, settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0 || !faction) return [];
+  const rawCategory = typeof faction.category === 'string' ? faction.category.toLowerCase() : faction.category;
+  const resolved = /** @type {keyof typeof CATEGORY_INSTITUTION_HINTS} */ (
+    CATEGORY_HINT_ALIASES[/** @type {keyof typeof CATEGORY_HINT_ALIASES} */ (rawCategory)] || rawCategory
+  );
+  const hint = CATEGORY_INSTITUTION_HINTS[resolved];
+  const tags = CATEGORY_INSTITUTION_TAGS[resolved];
+  const factionName = typeof faction.faction === 'string' ? faction.faction : null;
+  const seen = new Set();
+  const out = [];
+  for (const inst of institutions) {
+    if (!inst || typeof inst.name !== 'string' || seen.has(inst.name)) continue;
+    const instTags = Array.isArray(inst.tags) ? inst.tags : [];
+    const byTag     = !!tags && instTags.some(t => tags.includes(t));
+    const byName    = !!hint && hint.test(inst.name);
+    const byFaction = !!factionName && inst.factionSource === factionName;
+    if (byTag || byName || byFaction) {
+      seen.add(inst.name);
+      out.push(inst.name);
+    }
+  }
+  return out;
+}
+
 /**
  * @param {any} npc
  * @param {any} settlement

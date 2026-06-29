@@ -59,6 +59,13 @@ export function useDossierEntityNav(settlement, setActiveTab, tabs = []) {
     // effect is the reliable path. Matches CompendiumPanel's ~140ms heuristic.
     if (typeof document !== 'undefined' && entry.anchor) {
       setTimeout(() => {
+        // The 140ms timer can fire AFTER the test/jsdom teardown (or an SSR
+        // unmount), when `document` is no longer a defined global. A bare
+        // `document` reference then throws an async ReferenceError that aborts
+        // the whole Vitest run — the outer guard only holds at schedule time,
+        // not when the deferred callback actually runs. Re-check here so the
+        // belated scroll is always a safe no-op.
+        if (typeof document === 'undefined') return;
         document.getElementById(entry.anchor)?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
       }, 140);
     }

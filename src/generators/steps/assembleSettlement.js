@@ -10,6 +10,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
+import { rerenderStressNames } from '../stressGenerator.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
@@ -51,8 +52,17 @@ registerStep('assembleSettlement', {
   } = ctx;
   const config = ctx.config || {};
 
+  // Resolve the name FIRST so stressor summaries can be threaded with it. Stress
+  // is generated at an early step (resolveStress), before any name exists, so
+  // every summary was rendered with an empty name — leaving subjectless sentences
+  // (" is under active siege."). Re-render them now with the real name; the helper
+  // replays the rng draws captured at generation, so no new draw shifts pipeline
+  // determinism. (generateSettlementName itself still draws at this exact point.)
+  const settlementName = (effectiveConfig.customName?.trim()) || generateSettlementName(culture);
+  const namedStress = rerenderStressNames(stress, settlementName);
+
   const settlement = {
-    name: (effectiveConfig.customName?.trim()) || generateSettlementName(culture),
+    name: settlementName,
     tier,
     population,
     institutions,
@@ -86,8 +96,8 @@ registerStep('assembleSettlement', {
     // bypass normalizeSettlement (e.g. UI components that read directly
     // from a freshly-generated settlement) now see the canonical shape
     // without going through the adapter.
-    stress,
-    stressors: stress,
+    stress: namedStress,
+    stressors: namedStress,
     // RESOLVED effectiveConfig snapshot — carries derived keys (stressTypes,
     // _magicTradeOnly, tier, …) that display/validator/sim readers depend on.
     // It is NEVER a valid generation input: applyChange regenerates from

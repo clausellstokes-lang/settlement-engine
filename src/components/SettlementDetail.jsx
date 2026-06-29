@@ -460,8 +460,10 @@ export default function SettlementDetail({
             // selectors re-run against the soft-refreshed committed state.
             key={`dossier-${saveId}-${dossierRefreshKey}`}
             settlement={detail.settlement}
-            readOnly
-            saveId={saveId}
+            readOnly saveId={saveId}
+            // Rail owns Narrate/Regenerate in read mode → suppress the dossier's
+            // paid CTAs there; in edit mode (no rail) the dossier keeps them.
+            suppressNarrativeCta={!editMode}
           />
         </Suspense>
       </FeatureErrorBoundary>

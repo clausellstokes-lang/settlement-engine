@@ -63,7 +63,13 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const echoes = liveStressors.filter(s => s.status === 'residual');
 
   const runProposalAction = async (proposalId, action) => {
-    if (busyProposalId) return;
+    // Guard only against re-firing THIS exact action — not every other row. A
+    // single global guard meant that while one proposal's apply/dismiss was in
+    // flight (the store updates optimistically but the cloud persist can lag),
+    // every other row's buttons were blocked, so the GM had to switch tabs (which
+    // remounts the panel and resets the flag) to resolve the next one. Per-row
+    // scoping lets pending proposals be resolved consecutively in place.
+    if (busyProposalId === `${action}:${proposalId}`) return;
     setBusyProposalId(`${action}:${proposalId}`);
     setActionError(null);
     try {
@@ -281,7 +287,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {pending.map(proposal => (
+              {pending.map(proposal => {
+                // Disable only THIS row's buttons while either of its actions is in
+                // flight — never the whole list, so the next proposal stays clickable.
+                const rowBusy = busyProposalId === `apply:${proposal.id}`
+                  || busyProposalId === `dismiss:${proposal.id}`;
+                return (
                 <OutcomeCard
                   key={proposal.id}
                   title={proposal.headline}
@@ -297,7 +308,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
                         title="Apply proposal"
-                        disabled={!!busyProposalId}
+                        disabled={rowBusy}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
                       </SmallButton>
@@ -305,14 +316,15 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
                         title="Dismiss proposal"
-                        disabled={!!busyProposalId}
+                        disabled={rowBusy}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
                       </SmallButton>
                     </>
                   )}
                 />
-              ))}
+                );
+              })}
             </div>
           )}
         </Section>

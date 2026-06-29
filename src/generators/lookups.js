@@ -58,7 +58,12 @@ export const getInstitutionalCatalog = (tier) => {
  * in. Used by InstitutionalGrid for the "all tiers" view.
  */
 export const getFullCatalogWithTierMeta = () => {
-  const tierOrder = ['thorp','hamlet','village','town','city'];
+  // Include 'metropolis' so metropolis-native institutions appear in the grid's
+  // all-tiers view and resolve their nativeTier correctly — matching the
+  // generator's own cross-tier catalog (assembleInstitutions), which already
+  // spans metropolis. Last-wins, so a name shared with a higher tier reports the
+  // higher (truer) nativeTier.
+  const tierOrder = ['thorp','hamlet','village','town','city','metropolis'];
   const merged = {};
   for (const t of tierOrder) {
     const tierCat = institutionalCatalog[t] || {};

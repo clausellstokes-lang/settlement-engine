@@ -73,10 +73,13 @@ export function useNextActionRailHandlers({
     enterEdit();
     scrollFocusWhenReady('#event-composer');
   };
-  // AI rung: fire the SAME narrative invocation + first_ai_use moment the inline
-  // card's CTA fires, then scroll/focus that card to show streaming status.
-  const polishWithAi = () => {
-    enterEdit();
+  // Core narrate invocation — DECOUPLED from the editor (no edit-mode entry).
+  // It fires requestNarrative against the saved record exactly like the dossier's
+  // own paid CTA did; the read dossier shows progress via its in-progress chip and
+  // auto-flips to the prose on success (requestNarrative sets showNarrative). This
+  // is what lets the rail's Narrate button stand on its own rather than dragging
+  // the user into the edit surface. Shared by first-narrate and regenerate.
+  const runNarrate = () => {
     const live = useStore.getState();
     if (typeof live.requestNarrative === 'function' && saveId) {
       live.requestNarrative(saveId).catch(e => {
@@ -86,13 +89,18 @@ export function useNextActionRailHandlers({
     triggerPricingMoment('first_ai_use', () => {
       live.setPurchaseModalOpen?.(true);
     }, { tier: live.auth?.tier });
-    scrollFocusWhenReady('#ai-inline-card');
   };
+
+  // First narration — offered until a narrative exists.
+  const polishWithAi = () => runNarrate();
 
   const railHandlers = {
     onCanonize: (canEdit && phase !== 'canon') ? requestCanonize : undefined,
     onApplyEvent: canEdit ? enterEditAndComposeEvent : undefined,
     onPolishAi: (canEdit && !narrated) ? polishWithAi : undefined,
+    // Regenerate is the same paid invocation as the first narrate; the rail wraps
+    // it in a discard-confirm (NextActionRail owns that dialog) before firing.
+    onRegenerateAi: (canEdit && narrated) ? runNarrate : undefined,
     onExport: openExportSheet,
     onPlaceOnMap: () => navigate('realm'),
     onEdit: canEdit ? toggleEditMode : undefined,

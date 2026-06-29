@@ -10,7 +10,7 @@
  * in Supabase and spread back out when loading.
  */
 
-import { supabase, isConfigured } from './supabase.js';
+import { supabase, isConfigured, withTimeout } from './supabase.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 import { ACTIVE_SAVE_STATE, activeSaveCount, isSaveActive } from './saveAccess.js';
 import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLink.js';
@@ -18,8 +18,10 @@ import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLin
 const LOCAL_KEY = 'dnd_settlement_saves';
 
 /** Generate a client-side UUID for saves we must reference before insert
- *  (the bidirectional link embeds the new save's id in both rows). */
-function newSaveId() {
+ *  (the bidirectional link embeds the new save's id in both rows; the
+ *  interactive Save button mints one per dossier so a timeout-retry upserts
+ *  the same row instead of duplicating). */
+export function newSaveId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
 }
@@ -246,7 +248,12 @@ async function fetchActivePartnersByName(name) {
 }
 
 async function supabaseSave(entry) {
-  const { data: { user } } = await supabase.auth.getUser();
+  // Every leg below is timeout-guarded: getUser, the insert, and the batch RPC
+  // can each implicitly trigger a token refresh that, if it stalls, hangs the
+  // Save button forever (see withTimeout in supabase.js). On timeout the promise
+  // rejects and SaveToLibraryButton's catch/finally re-enables the button and
+  // surfaces the error instead of wedging.
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) throw new Error('Not authenticated');
 
   const v2 = migrateSaveToV2(entry);
@@ -272,6 +279,11 @@ async function supabaseSave(entry) {
   }
 
   const row = {
+    // When the caller mints a stable id (the interactive Save button), persist it
+    // so a timeout-retry can upsert the SAME row instead of duplicating. Absent
+    // for other callers (post-login intent, account import), where the DB default
+    // generates the id on a plain insert.
+    ...(entry.clientSaveId ? { id: entry.clientSaveId } : {}),
     user_id:         user.id,
     name:            v2.name,
     tier:            v2.tier,
@@ -285,11 +297,15 @@ async function supabaseSave(entry) {
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
   };
 
-  const { data, error } = await supabase
-    .from('settlements')
-    .insert(row)
-    .select('id')
-    .single();
+  // Idempotent retry: with a client-minted id we upsert on the primary key so a
+  // save that actually landed server-side just after the client timed out is
+  // re-written, not duplicated, when the user retries. Other callers keep a plain
+  // insert (DB-generated id). RLS gates on user_id only, so an explicit id is safe;
+  // an upsert that resolves to UPDATE does not re-trip the per-tier save-limit.
+  const query = entry.clientSaveId
+    ? supabase.from('settlements').upsert(row, { onConflict: 'id' }).select('id').single()
+    : supabase.from('settlements').insert(row).select('id').single();
+  const { data, error } = await withTimeout(query, 20000, 'Save settlement');
   if (error) throw error;
   return data.id;
 }
@@ -339,11 +355,15 @@ async function supabaseReactivateFreeSettlement(id) {
 }
 
 async function supabaseMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
-  const { data, error } = await supabase.rpc('mutate_settlement_batch', {
-    updates: updates.map(entry => mutationRow(entry)),
-    delete_ids: deletes,
-    creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
-  });
+  const { data, error } = await withTimeout(
+    supabase.rpc('mutate_settlement_batch', {
+      updates: updates.map(entry => mutationRow(entry)),
+      delete_ids: deletes,
+      creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
+    }),
+    20000,
+    'Save settlement',
+  );
   if (error) throw error;
   return data;
 }

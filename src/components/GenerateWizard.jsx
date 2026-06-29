@@ -29,6 +29,7 @@ import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
+import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import ExportDraftButton from './generate/ExportDraftButton.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
@@ -79,9 +80,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const setWizardMode   = useStore(s => s.setWizardMode);
   const setEntryPath    = useStore(s => s.setEntryPath);
   const resetConfig     = useStore(s => s.resetConfig);
+  const resetAllToggles = useStore(s => s.resetAllToggles);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
+  const setSettlement   = useStore(s => s.setSettlement);
 
   // Pipeline reveal state. When `pipelineRevealActive` is
   // true, the dossier is hidden behind the reveal overlay. Once the
@@ -94,6 +97,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
+  // Recoverable unsaved dossier. If a save stalled and the user reloaded to
+  // recover, the generated settlement is gone from the store (never persisted)
+  // but a draft survives in localStorage. Read once at init; the restore banner
+  // only renders in the empty state (no settlement), so no mount effect is needed.
+  const [restorableDraft, setRestorableDraft] = useState(() => readDraft());
 
   // ── Analytics: wizard-funnel session bookkeeping ─────────────────────────
   // Plain refs so they never trigger renders. `generatedThisSession` flips
@@ -115,6 +123,20 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       prevSettlementRef.current = settlement;
     }
   }, [settlement]);
+
+  // Restore the recovered dossier into the store. The draft is kept (not cleared)
+  // until a save actually lands, so a second stall/reload can recover again.
+  const handleRestoreDraft = useCallback(() => {
+    if (!restorableDraft?.settlement) return;
+    setSettlement(restorableDraft.settlement);
+    setShowOutput(true);
+    setRestorableDraft(null);
+  }, [restorableDraft, setSettlement]);
+
+  const handleDismissDraft = useCallback(() => {
+    clearDraft();
+    setRestorableDraft(null);
+  }, []);
 
   // ── Scroll-padding so the pinned chrome never hides a dossier control ──
   // While the dossier is on screen, two stacked sticky bars pin to the top of
@@ -249,13 +271,17 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       // keep their wizardMode + config so you can tweak and re-roll.
       if (entryPath === 'instant') { setWizardMode(null); setWizardStep(0); }
     } else {
-      // New Draft → the SAME path you chose, but fresh: configs are cleared so
-      // none of your prior choices carry over.
+      // New Draft → the SAME path you chose, but fresh: configs AND institution/
+      // service/goods toggles are cleared so none of your prior choices carry
+      // over. Resetting the toggles here is what keeps a force you set on an
+      // earlier build (e.g. an out-of-tier institution) from silently re-applying
+      // to the next settlement and surfacing as a phantom "deliberate override".
       setWizardMode(entryPath === 'instant' ? null : (entryPath || wizardMode || null));
       resetConfig();
+      resetAllToggles();
       setWizardStep(0);
     }
-  }, [clearSettlement, setWizardMode, setWizardStep, entryPath, wizardMode, resetConfig]);
+  }, [clearSettlement, setWizardMode, setWizardStep, entryPath, wizardMode, resetConfig, resetAllToggles]);
 
   const requestExit = useCallback((kind) => {
     // Unsaved + generated → warn before discarding the random draft.
@@ -313,14 +339,36 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   if (!wizardMode && !settlement) {
     return (
-      <WizardEmptyState
-        showHomeHero={showHomeHero}
-        showModePicker={showModePicker}
-        isMobile={isMobile}
-        setWizardMode={setWizardMode}
-        onSignIn={onSignIn}
-        onNavigate={onNavigate}
-      />
+      <>
+        {restorableDraft && (
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', padding: `${SP.md}px 0 0` }}>
+            <div style={{
+              background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8,
+              padding: '12px 16px', display: 'flex', flexWrap: 'wrap', alignItems: 'center',
+              gap: 12, justifyContent: 'space-between',
+            }}>
+              <div style={{ fontFamily: sans, fontSize: FS.sm, color: swatch['#5A3A00'], flex: '1 1 280px' }}>
+                <strong>A save was interrupted.</strong>{' '}
+                Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
+                {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
+                  ? `"${restorableDraft.name}"` : 'settlement'} is still here.
+              </div>
+              <div style={{ display: 'flex', gap: SP.sm }}>
+                <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
+                <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
+              </div>
+            </div>
+          </div>
+        )}
+        <WizardEmptyState
+          showHomeHero={showHomeHero}
+          showModePicker={showModePicker}
+          isMobile={isMobile}
+          setWizardMode={setWizardMode}
+          onSignIn={onSignIn}
+          onNavigate={onNavigate}
+        />
+      </>
     );
   }
 

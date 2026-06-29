@@ -9,7 +9,7 @@
 import { random as _rng } from './rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { getInstFlags } from './priorityHelpers.js';
-import { stressSummary } from './stressNarrative.js';
+import { stressSummary, renderStressSummaryWithName } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
 
@@ -34,16 +34,50 @@ const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
  * @param {Object} stressData    - STRESS_TYPE_MAP[stressType]
  * @param {Object} instFlags     - getInstFlags(config, institutions) output
  */
-const buildStressEntry = (settlementName, stressType, stressData, instFlags) => ({
-  type:          stressType,
-  label:         stressData.label,
-  icon:          stressData.icon,
-  colour:        stressData.colour,
-  summary:       stressSummary(stressType, { name: settlementName }, { rng: _rng, instFlags }),
-  crisisHook:    stressData.crisisHook,
-  viabilityNote: stressData.viabilityNote,
-  historyColour: stressData.historyColour,
-});
+const buildStressEntry = (settlementName, stressType, stressData, instFlags) => {
+  // Capture any rng draws made while rendering the summary (only `wartime`
+  // draws today) so the summary can be re-rendered with the real settlement name
+  // at assembly WITHOUT drawing again — replaying these preserves the exact
+  // branch and keeps pipeline rng order byte-identical. The draw still happens
+  // HERE, at the historical point, so same-seed determinism upstream is intact.
+  const _summaryDraws = [];
+  const capturingRng = () => { const v = _rng(); _summaryDraws.push(v); return v; };
+  return {
+    type:          stressType,
+    label:         stressData.label,
+    icon:          stressData.icon,
+    colour:        stressData.colour,
+    summary:       stressSummary(stressType, { name: settlementName }, { rng: capturingRng, instFlags }),
+    _summaryDraws,
+    crisisHook:    stressData.crisisHook,
+    viabilityNote: stressData.viabilityNote,
+    historyColour: stressData.historyColour,
+  };
+};
+
+/**
+ * Thread the resolved settlement name into stressor summaries, dropping the
+ * transient `_summaryDraws` capture. Handles the null / single-object / array
+ * shapes generateStress returns. Only catalog types (in STRESS_TYPE_MAP) are
+ * re-rendered from their template; authored custom-type stressors are left as-is
+ * (they carry their own text). Pure + rng-safe — replays captured draws, never
+ * draws fresh — so it is safe to call at assembly without shifting determinism.
+ *
+ * @param {null|object|object[]} stress the generated stress value
+ * @param {string} name the resolved settlement name
+ * @returns {null|object|object[]} same shape, with named summaries
+ */
+export function rerenderStressNames(stress, name) {
+  if (!stress) return stress;
+  const one = (entry) => {
+    if (!entry || typeof entry !== 'object') return entry;
+    const { _summaryDraws, ...rest } = entry;
+    if (!STRESS_TYPE_MAP[entry.type]) return rest; // custom/authored — keep its text
+    const summary = renderStressSummaryWithName(entry.type, name, _summaryDraws || []);
+    return summary === undefined ? rest : { ...rest, summary };
+  };
+  return Array.isArray(stress) ? stress.map(one) : one(stress);
+}
 
 // ─── buildStressContext ───────────────────────────────────────────────────────
 

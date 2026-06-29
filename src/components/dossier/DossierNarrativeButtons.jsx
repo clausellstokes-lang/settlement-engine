@@ -18,6 +18,11 @@ export default function DossierNarrativeButtons({
   storeShowNarrative,
   setShowNarrative,
   runNarrativeLayer,
+  // When the surface hosts the NextActionRail (saved-settlement detail), the
+  // credit-spending Generate/Regenerate actions live on the rail instead — so we
+  // suppress them here to avoid two CTAs for one action. The free View toggle and
+  // the in-progress loading chip stay (they are view/feedback, not paid triggers).
+  suppressNarrativeCta = false,
 }) {
     // Unsaved settlements: render nothing here. The AI-enrichment affordance
     // moved to a slim hint line below the tab strip so the header stays
@@ -35,8 +40,10 @@ export default function DossierNarrativeButtons({
       cursor: 'pointer',
     };
 
-    // State 1: no narrative yet → single generate button
+    // State 1: no narrative yet → single generate button. Suppressed when the
+    // rail owns the Narrate action (the rail's rung is the sole CTA there).
     if (!aiSettlement && !aiLoading) {
+      if (suppressNarrativeCta) return null;
       return (
         // aiError no longer renders as a floating tooltip here \u2014 moved to a
         // persistent inline notice + recovery CTA in OutputContainer's session-
@@ -106,16 +113,18 @@ export default function DossierNarrativeButtons({
             it recedes to a low-emphasis ghost: the costly/destructive action must
             never out-shout the free toggle (this reinforces the three-button split
             that exists so view-toggling can't accidentally spend credits). */}
-        <Button
-          variant="ghost"
-          size="md"
-          onClick={runNarrativeLayer}
-          disabled={regenerating}
-          busy={regenerating}
-          title={`Regenerate the Narrative Layer from the simulator output, daily life included. Spends ${getCost('narrative')} credits.`}
-        >
-          {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
-        </Button>
+        {!suppressNarrativeCta && (
+          <Button
+            variant="ghost"
+            size="md"
+            onClick={runNarrativeLayer}
+            disabled={regenerating}
+            busy={regenerating}
+            title={`Regenerate the Narrative Layer from the simulator output, daily life included. Spends ${getCost('narrative')} credits.`}
+          >
+            {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
+          </Button>
+        )}
         {/* aiError moved to OutputContainer's persistent session-notices cluster
             (with a recovery CTA) \u2014 see State 1 note. (P10.) */}
       </div>
