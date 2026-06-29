@@ -7,6 +7,12 @@ import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 
+// Minimum pressure for the city+ depletion floor to fire. The tier branch used to
+// emit depletion candidates regardless of pressure, so a quiescent zero-pressure
+// city still spammed ~8/tick — making resource_depletion the #1 candidate family.
+// Gating it here leaves a ~0.13 hysteresis dead-zone above recovery's 0.32 ceiling.
+const RESOURCE_CITY_FLOOR_PRESSURE = 0.45;
+
 /** @param {any} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -418,7 +424,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
     const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
     const effectivePressure = clamp01(pressureScore + tradeLoad);
-    if (state !== 'depleted' && (effectivePressure >= 0.64 || rank >= tierRank('city'))) {
+    if (state !== 'depleted' && (effectivePressure >= 0.64 || (rank >= tierRank('city') && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE))) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({
         id: `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,

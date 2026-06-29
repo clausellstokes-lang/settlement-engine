@@ -278,7 +278,16 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   const { pop, delta, severe } = result;
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
-  const massThreshold = Math.max(25, Math.round(pop * 0.025));
+  // Scale the mass-emigration bar DOWN for sub-month intervals. The fixed
+  // 2.5%-of-pop bar was structurally unreachable at one_week — the GA cadence —
+  // where a max-crisis settlement's weekly loss (~2.2%) never crossed it; only
+  // one_month+ deltas did. The magnitude factor is clamped to 1 so the bar only
+  // ever lowers: at one_month+ it stays at the design 2.5%, because the loss delta
+  // is itself capped at pop*0.18 (the severe cap in deltaForSettlement). Letting the
+  // bar scale past that — e.g. pop*0.207 at one_year — would push it ABOVE the
+  // achievable delta and make mass emigration unreachable at long intervals instead
+  // (one_year reachability is pinned by worldPulseExpansion / migrationDispersal).
+  const massThreshold = Math.max(25, Math.round(pop * 0.025 * Math.min(1, intervalMagnitude(interval))));
   const isMassEmigration = delta < 0 && abs >= massThreshold && (severe || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES));
   const populationDeltas = [{ saveId: sourceId, delta, reason: delta > 0 ? 'Organic growth from favorable conditions.' : 'Population loss from cumulative settlement pressure.' }];
   let transferMode = null;
