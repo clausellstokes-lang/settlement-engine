@@ -155,8 +155,11 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
   });
 });
 
-describe('toPublicSafe — per-member overrides (migration 092 mirror)', () => {
+describe('toPublicSafe — per-member overrides (migration 093 mirror)', () => {
   const dm = () => ({
+    // Settlement-level DM content that a per-member reveal must NEVER leak (the 092 bug).
+    plotHooks: ['the mayor is a doppelganger'],
+    dmCompass: { frictionPoints: 'the guild versus the crown' },
     npcs: [
       { id: 'n1', name: 'Aldric', role: 'mayor', influence: 'high', secret: 'is a spy', goal: 'seize the crown' },
       { id: 'n2', name: 'Mara', role: 'priest', influence: 'mid', secret: 'embezzles tithes', goal: 'flee' },
@@ -168,8 +171,12 @@ describe('toPublicSafe — per-member overrides (migration 092 mirror)', () => {
     expect(galleryMemberKey({ name: 'Old Tom the Smith!' })).toBe('npc.old_tom_the_smith');
   });
 
-  it('settlement hidden + one member revealed: only that member keeps DM fields', () => {
+  it('REGRESSION (092 leak): hidden settlement + one member revealed leaks NO settlement-level DM content', () => {
     const out = toPublicSafe(dm(), { full: false, memberOverrides: { n1: { revealDm: true } } });
+    // Settlement-level DM content stays stripped (the fix).
+    expect(out.plotHooks).toBeUndefined();
+    expect(out.dmCompass).toBeUndefined();
+    // Only the revealed member gets its DM fields.
     const a = out.npcs.find(n => n.name === 'Aldric');
     const b = out.npcs.find(n => n.name === 'Mara');
     expect(a.secret).toBe('is a spy');

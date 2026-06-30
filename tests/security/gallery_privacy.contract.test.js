@@ -358,3 +358,34 @@ describe('per-member gallery overrides (migration 092)', () => {
     expect(saves).toMatch(/gallery_member_overrides/);
   });
 });
+
+describe('per-member override leak fix (migration 093)', () => {
+  const FIX_MIGRATION = join(ROOT, 'supabase', 'migrations', '093_gallery_member_overrides_fix.sql');
+
+  it('migration 093 exists', () => {
+    expect(existsSync(FIX_MIGRATION)).toBe(true);
+  });
+
+  it('the base projection follows the SETTLEMENT flag only (no promotion on a member reveal)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    // The fixed base CASE keys on gallery_share_dm alone, NOT "OR _gallery_member_reveals_any".
+    expect(sql).toMatch(/case when s\.gallery_share_dm then public\._gallery_dm_full_json\(base\.j\) else public\._gallery_sanitize_public_json\(base\.j\) end/);
+    // The buggy promotion pattern (base goes DM-full when ANY member reveals) is gone...
+    expect(sql).not.toMatch(/gallery_share_dm\s+or\s+public\._gallery_member_reveals_any/i);
+    // ...and the helper that drove it is dropped.
+    expect(sql).toMatch(/drop function if exists public\._gallery_member_reveals_any/);
+  });
+
+  it('the apply helper takes a dm_full splice source (reveals a member without widening the base)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    expect(sql).toMatch(/_gallery_apply_member_overrides\(\s*base jsonb,\s*dm_full jsonb/);
+    // A revealed member is spliced from dm_full's npcs by key, not by promoting the base.
+    expect(sql).toMatch(/from jsonb_array_elements\(dm_full -> 'npcs'\)/);
+  });
+
+  it('still does NOT redefine the base sanitizers (denylists only grow elsewhere)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    expect(sql).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
+    expect(sql).not.toMatch(/create or replace function public\._gallery_dm_full_json/);
+  });
+});
