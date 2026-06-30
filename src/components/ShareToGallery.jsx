@@ -23,6 +23,7 @@ import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
 import { settlementWarStatus } from '../domain/display/warStatus.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
+import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
 import Button from './primitives/Button.jsx';
 import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, GREEN_BG, SUCCESS_BORDER, RED, INK, BODY, swatch } from './theme.js';
 
@@ -84,6 +85,7 @@ export default function ShareToGallery({
   galleryShareNarrated = false,
   galleryShareDm = false,
   galleryImportable = false,
+  galleryMemberOverrides = null,
   onSaved = null,
 }) {
   const auth = useStore(s => s.auth);
@@ -116,6 +118,16 @@ export default function ShareToGallery({
   const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
   // Opt-in: let other users import (clone) this public dossier into their library.
   const [importable, setImportable] = useState(Boolean(galleryImportable));
+  // Per-member (per-NPC) visibility overrides (migration 092). Each NPC inherits
+  // the settlement shareDm / importable flags unless explicitly overridden here; we
+  // store ONLY the deltas (an entry whose value equals the current settlement
+  // default is dropped) so the column stays minimal and un-overridden members keep
+  // following the settlement flags as those change.
+  const [memberOverrides, setMemberOverrides] = useState(() => (
+    galleryMemberOverrides && typeof galleryMemberOverrides === 'object' && !Array.isArray(galleryMemberOverrides)
+      ? galleryMemberOverrides
+      : {}
+  ));
   const canonReady = isCampaignCanonized(campaignState);
   // §S4 — derive the public-safe realm-arc digest from the owning campaign's LIVE
   // war/pantheon ledgers. Empty for a no-war/no-deity campaign (the field is then
@@ -160,9 +172,10 @@ export default function ShareToGallery({
     shareNarrated,
     shareDm,
     importable,
+    memberOverrides,
     realmArcSummary,
     ...facets,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, realmArcSummary, facets]);
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -231,6 +244,7 @@ export default function ShareToGallery({
           gallery_share_dm: shareDm,
           gallery_share_narrated: shareNarrated,
           gallery_importable: importable,
+          gallery_member_overrides: memberOverrides,
         });
       } catch { /* non-fatal */ }
     } catch (e) {
@@ -262,6 +276,7 @@ export default function ShareToGallery({
         gallery_share_dm: shareDm,
         gallery_share_narrated: shareNarrated,
         gallery_importable: importable,
+        gallery_member_overrides: memberOverrides,
       });
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
@@ -366,6 +381,13 @@ export default function ShareToGallery({
           <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Disabled by default; save details or re-share to enable.
         </span>
       </label>
+      <GalleryMemberVisibility
+        settlement={settlement}
+        shareDm={shareDm}
+        importable={importable}
+        memberOverrides={memberOverrides}
+        setMemberOverrides={setMemberOverrides}
+      />
       <Field label="Public description">
         <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>

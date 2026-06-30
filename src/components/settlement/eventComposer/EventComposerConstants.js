@@ -82,13 +82,12 @@ export const NON_AUTHORABLE_EVENTS = new Set([
   'REMOVED_THREAT',
   'STARTED_RIOT',
   'DEMOTE_NPC',               // folded into PROMOTE_NPC ("Promote/Demote NPC")
-  // Authored via dedicated pickers, NOT the generic composer — they carry no buildEvent
-  // payload branch, so a composer selection would assemble an empty (payload-less) event:
-  // SET_PRIMARY_DEITY/IMPOSE_CULT via PrimaryDeityPicker/CultPicker (need a resolved
-  // deity snapshot), SHIFT_TIER via TierShiftControl (needs a direction + cap/floor guard).
-  'SET_PRIMARY_DEITY',
-  'IMPOSE_CULT',
-  'SHIFT_TIER',
+  // SHIFT_TIER, SET_PRIMARY_DEITY, and IMPOSE_CULT were folded INTO the composer
+  // (the retired "Settlement Size" and "Patron & Cults" Workshop cards). Tier needs
+  // only a direction; the deity events resolve their frozen snapshot from
+  // customContent at build time (EventComposerDeityField + buildEvent), exactly as
+  // the setPrimaryDeity/imposeCult store actions do, behind the same premium gate.
+  // The map's AssignDeityFromMap keeps the immediate-apply store path.
 ]);
 
 // ADD_RESOURCE — sentinel select value for "name a custom resource"; the real

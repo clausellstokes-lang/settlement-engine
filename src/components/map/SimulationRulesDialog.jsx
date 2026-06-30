@@ -14,6 +14,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
+import GateToggle from './SimulationRulesGateToggle.jsx';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -151,48 +152,6 @@ function Toggle({ checked, label, onChange }) {
 // A gate row with a one-line "what it does" description. Distinct from Toggle:
 // (1) it shows OFF unless explicitly `true` (these gates default false), and
 // (2) it carries the explanatory copy the plan requires for each living-world gate.
-function GateToggle({ checked, label, description, onChange }) {
-  const controlId = useId();
-  return (
-    <label htmlFor={controlId} style={{
-      display: 'grid',
-      gap: 4,
-      padding: '10px 12px',
-      border: `1px solid ${checked ? GOLD : BORDER2}`,
-      borderRadius: R.md,
-      background: checked ? GOLD_BG : CARD,
-      cursor: 'pointer',
-    }}>
-      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <input
-          id={controlId}
-          type="checkbox"
-          aria-label={label}
-          checked={checked}
-          onChange={event => onChange(event.target.checked)}
-        />
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>{label}</span>
-        {/* Second channel beyond border/fill hue (P7): an explicit On/Off word so
-            the enabled state never reads on color alone. */}
-        <span style={{
-          marginLeft: 'auto',
-          color: checked ? GOLD : MUTED,
-          fontFamily: sans,
-          fontSize: FS.xxs,
-          fontWeight: 950,
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-        }}>
-          {checked ? 'On' : 'Off'}
-        </span>
-      </span>
-      <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
-        {description}
-      </span>
-    </label>
-  );
-}
-
 // A disclosure group header — a real button with aria-expanded controlling a
 // region, so the Detail / Engine altitudes collapse without trapping focus. The
 // caret + the open/closed word carry the state in two channels (P7), never on a
@@ -296,7 +255,13 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   const previewOutcomes = previewResult?.pulseRecord?.selectedOutcomes || previewResult?.selected || [];
 
   const setField = (key, value) => {
-    setDraft(current => normalizeSimulationRules({ ...current, [key]: value }));
+    setDraft(current => {
+      const merged = { ...current, [key]: value };
+      // War auto-activates (and locks on) Settlement Strategy — mirror of the
+      // store-side coupling so the draft reflects it live while editing.
+      if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
+      return normalizeSimulationRules(merged);
+    });
     setPreviewResult(null);
   };
 
@@ -569,15 +534,21 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                   gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
                   gap: SP.sm,
                 }}>
-                  {ADVANCED_GATES.map(([key, label, description]) => (
-                    <GateToggle
-                      key={key}
-                      label={label}
-                      description={description}
-                      checked={draft[key] === true}
-                      onChange={value => setField(key, value)}
-                    />
-                  ))}
+                  {ADVANCED_GATES.map(([key, label, description]) => {
+                    // Settlement Strategy is auto-enabled and locked on while War
+                    // is on (it has no inputs without war fronts).
+                    const forcedByWar = key === 'settlementStrategyEnabled' && draft.warLayerEnabled === true;
+                    return (
+                      <GateToggle
+                        key={key}
+                        label={label}
+                        description={forcedByWar ? `${description} Auto-enabled by the War layer.` : description}
+                        checked={draft[key] === true}
+                        disabled={forcedByWar}
+                        onChange={value => setField(key, value)}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             )}

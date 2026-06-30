@@ -450,3 +450,31 @@ export function buildRegistryFromStore(getState) {
   const s = typeof getState === 'function' ? getState() : getState;
   return buildRegistry(s?.customContent || {});
 }
+
+/**
+ * Resolve a deity ref → the FROZEN snapshot embedded on a settlement when a patron
+ * or cult is assigned. This is the one source of that snapshot shape: the
+ * EventComposer (which now stages SET_PRIMARY_DEITY / IMPOSE_CULT) and the
+ * setPrimaryDeity / imposeCult store actions (the map's immediate-apply path) both
+ * mint the SAME fields, so a deity assigned from the dossier and one assigned from
+ * the map are byte-identical. Returns null for a falsy or unresolvable ref (the
+ * caller refuses rather than embedding a half-resolved record).
+ * @param {any} customContent  the store's customContent bag
+ * @param {string|null|undefined} refId  a `custom:<localUid>` deity ref
+ */
+export function resolveDeitySnapshot(customContent, refId) {
+  if (!refId) return null;
+  const entry = buildRegistry(customContent || {}).resolve(String(refId));
+  const raw = entry?.raw;
+  if (!raw) return null;
+  return {
+    name: raw.name,
+    alignmentAxis: raw.alignmentAxis,
+    temperamentAxis: raw.temperamentAxis,
+    rankAxis: raw.rankAxis,
+    // lawAxis (B5) — a legacy 3-axis deity has none; mutate.js defaults it to
+    // 'neutral' in the embed, so the snapshot stays self-contained either way.
+    lawAxis: raw.lawAxis,
+    ...(raw.domain ? { domain: raw.domain } : {}),
+  };
+}

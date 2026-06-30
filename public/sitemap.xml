@@ -1,97 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  sitemap.xml — Public SEO surfaces.
+  sitemap.xml: Public SEO surfaces (canonical PATH URLs).
 
-  Generated for Tier 8.7 (public compendium SEO surface) and Tier 8.6
-  (comparison pages). Updated by hand when a new public surface ships.
-  Vercel serves /public/* as static files.
+  Path routing shipped (src/lib/routes.js), so this lists the real canonical
+  paths, NOT the legacy ?view= query forms (those now client-rewrite to paths,
+  which Google would otherwise read as redirect duplicates). Hand-maintained;
+  update when a new public surface ships. Vercel serves /public/* as static.
+
+  Public surfaces only. The private library, realm/map/workshop app surfaces,
+  auth/account flows, and checkout are Disallow'd in robots.txt and omitted here.
 
   Coverage:
-    /                            — Homepage (anonymous hero)
-    /?view=pricing               — Pricing
-    /?view=gallery               — Public dossier gallery
-    /?view=howto&tab=compare     — How We Compare (the former /compare* pages,
-                                   now a tab in the About guide)
-    /?view=compendium&tab=...    — Compendium tabs (seven sections)
-    /?view=howto                 — How-to-use guide
-
-  We use the ?view= query-string routing pattern the SPA already
-  understands; until per-route URLs land, the query-string entries are
-  what Google sees in the SPA's link graph.
+    /                          Home (the front door; '/' canonicalizes to /home)
+    /create                    The generator
+    /pricing                   Pricing
+    /gallery                   Public dossier + map gallery
+    /how-to                    About / how-to guide
+    /compendium[?tab=…]         Reference compendium (8 sections)
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Home -->
   <url>
     <loc>https://settlementforge.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Pricing -->
   <url>
-    <loc>https://settlementforge.com/?view=pricing</loc>
+    <loc>https://settlementforge.com/create</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Gallery -->
   <url>
-    <loc>https://settlementforge.com/?view=gallery</loc>
+    <loc>https://settlementforge.com/gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Comparisons (Tier 8.6) — the dedicated competitor pages were folded into
-       the About guide's "How We Compare" tab; the old /?view=compare* URLs all
-       redirect there. We advertise only the live destination so Google never
-       indexes three redirect duplicates with no canonical. -->
   <url>
-    <loc>https://settlementforge.com/?view=howto&amp;tab=compare</loc>
+    <loc>https://settlementforge.com/how-to</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Compendium (Tier 8.7) — one URL per tab so each indexes with its own title -->
+  <!-- Compendium: one URL per tab so each indexes with its own title/description
+       (per-tab canonical is set client-side by the head manager). -->
   <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=tiers</loc>
+    <loc>https://settlementforge.com/compendium</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=economy</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=power</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=arcane</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=stress</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=neighbour</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/?view=compendium&amp;tab=institutions</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- How-to-use -->
-  <url>
-    <loc>https://settlementforge.com/?view=howto</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  <url><loc>https://settlementforge.com/compendium?tab=tiers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=economy</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=power</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=arcane</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=living</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=stress</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=neighbour</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://settlementforge.com/compendium?tab=institutions</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

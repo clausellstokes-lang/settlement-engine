@@ -87,6 +87,7 @@ export default function DossierActionBand({
           galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
           galleryShareDm={liveSaveEntry?.gallery_share_dm}
           galleryImportable={liveSaveEntry?.gallery_importable}
+          galleryMemberOverrides={liveSaveEntry?.gallery_member_overrides}
         />
         {/* "How this was simulated" trigger — a "more info" affordance. In the
             embedded generate flow it lives in the wizard toolbar instead. */}

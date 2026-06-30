@@ -47,6 +47,12 @@ export const createConfigSlice = (set, get) => ({
   // (instant -> Create landing; basic/advanced -> that config panel). Not
   // persisted, mirrors wizardMode.
   entryPath: null,
+  // Bumped by App when the user RE-CLICKS the already-active Create nav tab. The
+  // Create page's "first screen" (the generate-ask) vs the generated dossier is
+  // wizard-LOCAL state, not a distinct route, so a re-click can't reset it via the
+  // path router — this counter is the signal GenerateWizard watches to run its
+  // own reset. Transient (not persisted); only the CHANGE matters, not the value.
+  createResetNonce: 0,
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,
@@ -73,6 +79,11 @@ export const createConfigSlice = (set, get) => ({
     set(state => {
       state.config = { ...DEFAULT_CONFIG };
     }),
+
+  /** Signal GenerateWizard to reset to its first (generate-ask) screen — fired
+   *  when the user re-clicks the already-active Create nav tab. */
+  requestCreateReset: () =>
+    set(state => { state.createResetNonce = (state.createResetNonce || 0) + 1; }),
 
   setWizardStep: (step) =>
     set(state => { state.wizardStep = step; }),

@@ -1,15 +1,26 @@
 /**
  * LayersPanel — right-side sidebar listing every overlay layer with a
- * checkbox toggle and, where applicable, a filter sub-list.
+ * checkbox toggle and, where applicable, a filter sub-list. The panel is the
+ * single place to control every live map layer, so each layer MapOverlay gates
+ * has a toggle here (the prior gap: forests, war/faith, and biomes rendered but
+ * were unreachable from this panel).
  *
- * Layers:
- *   - Relationships (with per-type filter: trade_partner, allied, …)
- *   - Supply chains (with per-good filter — optional)
- *   - Labels
- *   - Markers
- *   - Forests
- *   - Native state borders
- *   - Native culture regions
+ * Map layers (the campaign-facing overlays):
+ *   - Settlements
+ *   - Relationships (with per-type filter)
+ *   - Roads
+ *   - Supply chains
+ *   - Regional channels (with per-channel filter)
+ *   - Regional impacts (with status filter + severity floor)
+ *   - War & faith (deployment, siege, and occupation glyphs)
+ *   - GM regional channels (reveal gm-only channels)
+ *
+ * Map features (decorative / native-map reference):
+ *   - Labels, Markers, Forests
+ *   - State borders, Culture regions, Biomes
+ *
+ * Biomes also has a contextual toggle in the Terrain toolbar (same layer key);
+ * both stay in sync because they flip the one mapState.layers.nativeBiomes flag.
  */
 
 import { X, Check } from 'lucide-react';
@@ -223,6 +234,11 @@ export default function LayersPanel({ onClose }) {
           </ChipGroup>
         )}
         <LayerToggle
+          label="War & faith"
+          checked={layers.warFaith !== false}
+          onChange={() => toggleLayer('warFaith')}
+        />
+        <LayerToggle
           label="GM regional channels"
           checked={layers.regionalShowGm !== false}
           onChange={() => toggleLayer('regionalShowGm')}
@@ -244,6 +260,11 @@ export default function LayersPanel({ onClose }) {
           onChange={() => toggleLayer('markers')}
         />
         <LayerToggle
+          label="Forests"
+          checked={!!layers.forests}
+          onChange={() => toggleLayer('forests')}
+        />
+        <LayerToggle
           label="State borders"
           checked={!!layers.nativeStateBorders}
           onChange={() => toggleLayer('nativeStateBorders')}
@@ -252,6 +273,11 @@ export default function LayersPanel({ onClose }) {
           label="Culture regions"
           checked={!!layers.nativeCultureRegions}
           onChange={() => toggleLayer('nativeCultureRegions')}
+        />
+        <LayerToggle
+          label="Biomes"
+          checked={!!layers.nativeBiomes}
+          onChange={() => toggleLayer('nativeBiomes')}
         />
       </div>
     </div>

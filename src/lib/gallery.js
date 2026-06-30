@@ -666,6 +666,13 @@ function sanitizeRealmArcSummary(value) {
 }
 
 function sanitizeDossier(row) {
+  // Per-member overrides (migration 092). The server RPC already projected row.data
+  // through these; passing them into toPublicSafe keeps the client defense-in-depth
+  // from re-stripping a member the owner individually revealed (and re-strips one
+  // they individually hid), so client + server agree member-for-member.
+  const memberOverrides = (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
+    ? row.gallery_member_overrides
+    : {};
   return {
     id:           row.id,
     slug:         row.public_slug,
@@ -674,7 +681,7 @@ function sanitizeDossier(row) {
     // Owner opt-in: when gallery_share_dm is set, publish the full DM view
     // unstripped (the server RPC already returns it raw in that case; this keeps
     // the client defense-in-depth from re-stripping what the owner chose to show).
-    settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true }),
+    settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true, memberOverrides }),
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),
@@ -687,6 +694,8 @@ function sanitizeDossier(row) {
     shareDm:      row.gallery_share_dm === true,
     // Owner opt-in (migration 047): may other users clone this into their library?
     importable:   row.gallery_importable === true,
+    // Per-member visibility overrides (migration 092), for any UI that surfaces them.
+    memberOverrides,
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
@@ -832,7 +841,40 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.facetAtWar !== undefined) {
     patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
+  // Per-member (per-NPC) gallery visibility overrides (migration 092). There is no
+  // server/DB scrub of this column, so shape-clamp on write (defense in depth, like
+  // tags/description): a json object keyed by NPC key, values { revealDm?, allowImport? }
+  // with boolean values only. ShareToGallery already drops keys equal to the
+  // settlement default; this is the final shape gate.
+  if (metadata.memberOverrides !== undefined) {
+    patch.gallery_member_overrides = clampMemberOverrides(metadata.memberOverrides);
+  }
   return patch;
+}
+
+/**
+ * Final shape gate for the gallery_member_overrides column: keep only string keys
+ * (bounded) mapping to { revealDm?, allowImport? } with boolean values, capped in
+ * count. Drops anything malformed so a drifted bag can never store an unbounded or
+ * non-boolean blob the server would then read.
+ * @param {any} raw
+ */
+function clampMemberOverrides(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  /** @type {Record<string, any>} */
+  const out = {};
+  let n = 0;
+  for (const [key, val] of Object.entries(raw)) {
+    if (n >= 1000) break;
+    if (typeof key !== 'string' || !key || key.length > 200) continue;
+    if (!val || typeof val !== 'object') continue;
+    /** @type {Record<string, boolean>} */
+    const entry = {};
+    if (typeof (/** @type {any} */ (val).revealDm) === 'boolean') entry.revealDm = (/** @type {any} */ (val)).revealDm;
+    if (typeof (/** @type {any} */ (val).allowImport) === 'boolean') entry.allowImport = (/** @type {any} */ (val)).allowImport;
+    if (Object.keys(entry).length) { out[key] = entry; n += 1; }
+  }
+  return out;
 }
 
 // ── Map gallery metadata write (campaigns / saved_maps) ──────────────────────

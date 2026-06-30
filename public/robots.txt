@@ -1,12 +1,27 @@
-# robots.txt — SettlementForge public crawl policy.
+# robots.txt: SettlementForge public crawl policy.
 
 User-agent: *
 Allow: /
 
-# Don't waste crawl budget on the API gateway or build artifacts.
+# Public content (home, create, compendium, how-to, pricing, gallery, compare)
+# is crawlable. Keep crawl budget OFF the app surfaces, the private library, the
+# auth/account flows, the checkout return, and build artifacts.
 Disallow: /api/
 Disallow: /assets/*.map
+Disallow: /settlements
+Disallow: /realm
+Disallow: /map
+Disallow: /workshop
+Disallow: /account
+Disallow: /admin
+Disallow: /signin
+Disallow: /register
+Disallow: /reset-password
+Disallow: /set-new-password
+Disallow: /verify-email
+Disallow: /confirm-email
+Disallow: /checkout/
 
-# Surface the sitemap so search engines find the compare/compendium
-# URLs without needing to crawl the SPA link graph.
+# Surface the sitemap (canonical path URLs) so search engines find the public
+# pages without crawling the SPA link graph.
 Sitemap: https://settlementforge.com/sitemap.xml

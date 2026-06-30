@@ -311,3 +311,50 @@ describe('gallery report moderation contract', () => {
     expect(sql).not.toMatch(/grant execute on function public\.resolve_gallery_report\(uuid, text, text\) to authenticated, anon/);
   });
 });
+
+describe('per-member gallery overrides (migration 092)', () => {
+  const MEMBER_MIGRATION = join(ROOT, 'supabase', 'migrations', '092_gallery_member_overrides.sql');
+
+  it('migration 092 exists', () => {
+    expect(existsSync(MEMBER_MIGRATION)).toBe(true);
+  });
+
+  it('adds gallery_member_overrides as a default-{} json object column, no new RLS', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/add column if not exists gallery_member_overrides jsonb not null default '\{\}'::jsonb/);
+    expect(sql).toMatch(/check \(jsonb_typeof\(gallery_member_overrides\) = 'object'\)/);
+    // The owner-update RLS from 001 already authorizes the write — no new policy.
+    expect(sql).not.toMatch(/create policy/i);
+  });
+
+  it('does NOT redefine the base sanitizer / dm-full projection (denylists only grow elsewhere)', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
+    expect(sql).not.toMatch(/create or replace function public\._gallery_dm_full_json/);
+  });
+
+  it('defines the key + apply helpers and reuses the canonical sanitizer for the per-member strip', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/create or replace function public\._gallery_npc_key/);
+    expect(sql).toMatch(/create or replace function public\._gallery_apply_member_overrides/);
+    // The strip must reuse _gallery_sanitize_public_json (no hand-rolled allowlist that could drift).
+    expect(sql).toMatch(/_gallery_sanitize_public_json\(jsonb_build_object\('npcs'/);
+  });
+
+  it('forks BOTH net-current RPCs and routes their data through the override apply', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/create or replace function public\.get_gallery_dossier/);
+    expect(sql).toMatch(/create or replace function public\.import_gallery_dossier/);
+    // Both wrap their projection in the per-member apply; import passes for_import=true.
+    expect((sql.match(/_gallery_apply_member_overrides\(/g) || []).length).toBeGreaterThanOrEqual(2);
+    // The import gate (the settlement-importable wall) is preserved, not loosened.
+    expect(sql).toMatch(/and s\.gallery_importable = true\s*\n\s*and auth\.uid\(\) is not null/);
+  });
+
+  it('the client writes a shape-clamped column and round-trips it on load', () => {
+    const gallery = readFileSync(GALLERY_JS, 'utf8');
+    expect(gallery).toMatch(/patch\.gallery_member_overrides = clampMemberOverrides\(metadata\.memberOverrides\)/);
+    const saves = readFileSync(SAVES_JS, 'utf8');
+    expect(saves).toMatch(/gallery_member_overrides/);
+  });
+});

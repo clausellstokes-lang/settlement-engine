@@ -23,6 +23,5 @@
   "src/components/new/tabs/ServicesTab.jsx",
   "src/components/settlement/CatalogPicker.jsx",
   "src/components/settlement/ExportSheet.jsx",
-  "src/components/settlement/SuccessorPrompt.jsx",
-  "src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx"
+  "src/components/settlement/SuccessorPrompt.jsx"
 ]

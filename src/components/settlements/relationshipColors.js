@@ -1,8 +1,13 @@
 /**
  * relationshipColors.js — the SINGLE source of truth for the relationship-type
- * swatch used across the LIBRARY surface: the settlement card's neighbour chips,
- * the settlement-detail neighbour-network list, and the campaign PDF's
- * relationship lines.
+ * swatch across the LIBRARY surface (the settlement card's neighbour chips, the
+ * settlement-detail neighbour-network list, the campaign PDF's relationship lines)
+ * AND the world map: relationshipEdgeStyle.js now DERIVES the map edge colors from
+ * REL_HEX so the map line, the dossier chip, and the PDF line share one hue per
+ * type. These are the muted parchment brand hues (the map's old vivid Tailwind set
+ * was the outlier and was reconciled to these). Covers every canonical relationship
+ * type, including vassal and criminal_network which the live palettes previously
+ * left to a grey/neutral fallback.
  *
  * Previously REL_COLORS was duplicated with DIVERGENT values: SettlementCard
  * rendered `rival` as #8b1a1a / `patron` as #2a3a7a, while SettlementDetail (and
@@ -24,25 +29,29 @@
  */
 
 export const REL_HEX = Object.freeze({
-  trade_partner: '#1a5a28',
-  allied:        '#1a3a7a',
-  patron:        '#4a1a6a',
-  client:        '#6a3a1a',
-  rival:         '#8a5010',
-  cold_war:      '#8a3010',
-  hostile:       '#8b1a1a',
-  neutral:       '#6b5340',
+  trade_partner:    '#1a5a28',
+  allied:           '#1a3a7a',
+  patron:           '#4a1a6a',
+  client:           '#6a3a1a',
+  vassal:           '#3a1a5a',
+  rival:            '#8a5010',
+  cold_war:         '#8a3010',
+  hostile:          '#8b1a1a',
+  criminal_network: '#5a2a8a',
+  neutral:          '#6b5340',
 });
 
 export const REL_RGB = Object.freeze({
-  trade_partner: [26,  90,  40],
-  allied:        [26,  58, 122],
-  patron:        [74,  26, 106],
-  client:        [106, 58,  26],
-  rival:         [138, 80,  16],
-  cold_war:      [138, 48,  16],
-  hostile:       [139, 26,  26],
-  neutral:       [107, 83,  64],
+  trade_partner:    [26,  90,  40],
+  allied:           [26,  58, 122],
+  patron:           [74,  26, 106],
+  client:           [106, 58,  26],
+  vassal:           [58,  26,  90],
+  rival:            [138, 80,  16],
+  cold_war:         [138, 48,  16],
+  hostile:          [139, 26,  26],
+  criminal_network: [90,  42, 138],
+  neutral:          [107, 83,  64],
 });
 
 /** Hex for a relationship type, falling back to the neutral hue. */

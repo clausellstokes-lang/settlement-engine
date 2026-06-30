@@ -81,10 +81,14 @@ export default function WorkshopGateToggle({ gateKey, campaign, canWrite = false
     setPurchaseModalOpen?.(true);
   };
 
-  const checked = useMemo(() => {
+  const { checked, warOn } = useMemo(() => {
     const rules = normalizeSimulationRules(campaign?.worldState?.simulationRules);
-    return rules[gateKey] === true;
+    return { checked: rules[gateKey] === true, warOn: rules.warLayerEnabled === true };
   }, [campaign, gateKey]);
+  // Settlement Strategy is auto-enabled — and locked on — while the War layer is on:
+  // it scores moves off war_front channels that only exist under War. Mirrors the
+  // store-side coupling in updateCampaignSimulationRules.
+  const forcedByWar = gateKey === 'settlementStrategyEnabled' && warOn;
 
   if (!meta) return null;
 
@@ -131,7 +135,7 @@ export default function WorkshopGateToggle({ gateKey, campaign, canWrite = false
           type="checkbox"
           aria-label={meta.label}
           checked={checked}
-          disabled={busy}
+          disabled={busy || (forcedByWar && canWrite)}
           onChange={canWrite ? (e) => onChange(e.target.checked) : undefined}
           onClick={!canWrite ? handleLockedReach : undefined}
           readOnly={!canWrite}
@@ -139,7 +143,7 @@ export default function WorkshopGateToggle({ gateKey, campaign, canWrite = false
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>{meta.label}</span>
       </span>
       <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
-        {meta.description}
+        {meta.description}{forcedByWar ? ' Auto-enabled by the War layer.' : ''}
       </span>
     </label>
   );

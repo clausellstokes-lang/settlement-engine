@@ -1,8 +1,8 @@
 /**
  * PipelineReveal.jsx — "the wow is the simulation."
  *
- * Renders a 2-3 second overlay narrating the pipeline steps the engine
- * just ran. Each user-facing step name is sourced from
+ * Renders a tier-scaled overlay (≈3-10s by settlement tier) narrating the
+ * pipeline steps the engine just ran. Each user-facing step name is sourced from
  * copy.en.pipelineSteps (theatrical translations of the actual function
  * names — "casting NPCs…" instead of "generatePopulation").
  *
@@ -16,9 +16,10 @@
  * Lifecycle:
  *   1. Wizard sets `pipelineRevealActive: true` right after the engine
  *      returns. Reveal mounts.
- *   2. Reveal animates through pipelineHistory at ~280ms per step.
- *      Minimum total display = 2000ms even on tiny histories so the
- *      reveal lands.
+ *      2. Reveal animates the steps at ~280ms each, then dwells on the finished
+ *      list until a tier-scaled randomized window elapses (thorp 3-5s, hamlet
+ *      4-7, village 5-8, town 6-9, city/metropolis 7-10), so larger settlements
+ *      read as taking longer to forge.
  *   3. On final step, calls `onComplete` (typically clears the flag
  *      and renders the dossier).
  *
@@ -43,9 +44,25 @@ const mono = '"JetBrains Mono", Consolas, monospace';
 const STEP_INTERVAL_MS = 280;
 const MIN_TOTAL_MS = 2000;
 
+// Tier → [minSeconds, maxSeconds] display window. Larger settlements read as
+// "taking longer to forge": the overlay holds for a RANDOM time within the tier's
+// band (rolled once per reveal). The engine has already finished by the time this
+// mounts, so this purely controls how long the loading screen shows. city +
+// metropolis share the top band per spec; unknown/capital falls to a middle band.
+const TIER_DURATION_S = {
+  thorp:      [3, 5],
+  hamlet:     [4, 7],
+  village:    [5, 8],
+  town:       [6, 9],
+  city:       [7, 10],
+  metropolis: [7, 10],
+};
+const DEFAULT_DURATION_S = [5, 8];
+
 export default function PipelineReveal({ onComplete }) {
   const history = useStore(s => s.pipelineHistory || []);
   const settlementName = useStore(s => s.settlement?.name || 'this settlement');
+  const tier = useStore(s => s.settlement?.tier);
 
   // Stable label lookup. tx() returns the whole map; we read once.
   const labelMap = useMemo(() => tx('pipelineSteps') || {}, []);
@@ -61,12 +78,16 @@ export default function PipelineReveal({ onComplete }) {
   }, [history, labelMap]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  // Lazy-init the ref with null and stamp in the mount effect so we don't
-  // call Date.now() during render (purity rule).
+  // Lazy-init the refs with null and stamp in the mount effect so we don't
+  // call Date.now()/Math.random() during render (purity rule).
   const startedAtRef = useRef(null);
+  // The randomized tier display target, rolled ONCE per reveal (guarded so a
+  // re-run of the effect can't re-roll it mid-play).
+  const targetMsRef = useRef(null);
 
-  // Drive the animation. Fire WOW_REVEAL_SHOWN once on mount; advance
-  // through steps on a fixed interval; cap minimum total at 2s.
+  // Drive the animation. Fire WOW_REVEAL_SHOWN once on mount; animate the steps
+  // at the snappy fixed interval, then DWELL on the completed list until the
+  // tier's randomized minimum window elapses, then reveal the dossier.
   useEffect(() => {
     if (!steps.length) {
       // Empty pipeline history (shouldn't happen, but safe): dismiss
@@ -77,28 +98,35 @@ export default function PipelineReveal({ onComplete }) {
     Funnel.track(EVENTS.WOW_REVEAL_SHOWN, { steps: steps.length });
     // Stamp inside the effect (not in render — purity rule).
     startedAtRef.current = Date.now();
-
-    const total = Math.max(MIN_TOTAL_MS, steps.length * STEP_INTERVAL_MS);
-    const perStepMs = total / steps.length;
+    // Roll the tier-scaled display window once. Animating the steps across the
+    // whole window would make each step crawl at the 10s end; instead we play
+    // steps at STEP_INTERVAL_MS and dwell on the finished list to fill the window.
+    if (targetMsRef.current == null) {
+      const [minS, maxS] = TIER_DURATION_S[tier] || DEFAULT_DURATION_S;
+      const rolled = (minS + Math.random() * (maxS - minS)) * 1000;
+      targetMsRef.current = Math.max(MIN_TOTAL_MS, rolled);
+    }
 
     let i = 0;
+    let dwellTimer = null;
     const id = setInterval(() => {
       i += 1;
       if (i >= steps.length) {
         clearInterval(id);
-        Funnel.track(EVENTS.WOW_REVEAL_COMPLETED, {
-          steps: steps.length,
-          elapsedMs: Date.now() - (startedAtRef.current || Date.now()),
-        });
-        // Small grace period (200ms) on the final step so the user sees the ✓
-        setTimeout(() => onComplete?.(), 200);
+        // Mark every step complete (✓) and hold the finished list until the
+        // rolled tier window elapses, so the dossier reveals on schedule.
+        setActiveIndex(steps.length);
+        const elapsed = Date.now() - (startedAtRef.current || Date.now());
+        Funnel.track(EVENTS.WOW_REVEAL_COMPLETED, { steps: steps.length, elapsedMs: elapsed });
+        const remaining = Math.max(200, (targetMsRef.current || MIN_TOTAL_MS) - elapsed);
+        dwellTimer = setTimeout(() => onComplete?.(), remaining);
         return;
       }
       setActiveIndex(i);
-    }, perStepMs);
+    }, STEP_INTERVAL_MS);
 
-    return () => clearInterval(id);
-  }, [steps.length, onComplete]);
+    return () => { clearInterval(id); if (dwellTimer) clearTimeout(dwellTimer); };
+  }, [steps.length, onComplete, tier]);
 
   // No skip / Esc fast-path: the reveal plays to completion so the first dossier
   // view is the finished settlement, not a half-played pipeline. It auto-dismisses

@@ -133,7 +133,7 @@ const TABS = [
   { id: 'daily_life', label: 'Daily Life' },
   { id: 'npcs',       label: 'NPCs' },
   { id: 'dm_notes',   label: 'DM Notes' },
-  { id: 'ai_notes',   label: 'Narrative Notes' },
+  { id: 'ai_notes',   label: 'AI Instructions' },
   { id: 'chronicle',  label: 'Chronicle' },
 ];
 
