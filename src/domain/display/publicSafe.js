@@ -119,20 +119,22 @@ export function galleryMemberKey(npc) {
  * gallery row's `gallery_share_dm` is true (set by the owner).
  * `options.memberOverrides` is the per-NPC override map (keyed by galleryMemberKey,
  * value { revealDm?, allowImport? }). Each member DEFAULTS to the settlement `full`
- * flag; an explicit revealDm wins. The base goes DM-full when `full` OR ANY member
- * reveals, then every NOT-effectively-revealed member is reduced to the public
- * allowlist — mirroring the server's _gallery_apply_member_overrides so this
+ * flag; an explicit revealDm wins. The settlement-level projection follows `full`
+ * ONLY — a per-member reveal restores DM fields on THAT member alone (spliced from
+ * the source) and never widens settlement-level content (DM Compass / plot hooks).
+ * Mirrors the server's _gallery_apply_member_overrides (migration 093) so this
  * defense-in-depth / preview projection matches the authoritative read.
  * @param {any} settlement
  * @param {{ full?: boolean, memberOverrides?: Record<string, any>|null }} [options]
  */
 export function toPublicSafe(settlement, { full = false, memberOverrides = null } = {}) {
   const overrides = (memberOverrides && typeof memberOverrides === 'object') ? memberOverrides : {};
-  const anyReveals = Object.values(overrides).some(o => o && o.revealDm === true);
-  const dmFull = full || anyReveals;
 
+  // The settlement-level projection follows the SETTLEMENT `full` flag ONLY. A
+  // per-member reveal must NEVER widen settlement-level content (the DM Compass /
+  // plot hooks): individual members are spliced below, the base is not promoted.
   let result;
-  if (dmFull) {
+  if (full) {
     const clone = deepClone(settlement || {});
     // AI prose blobs are the narrated toggle's domain, not this one.
     delete clone.aiData;
@@ -179,15 +181,20 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
   }
 
   // Per-member overrides: a member with no override follows the settlement `full`
-  // flag; an explicit revealDm wins. A not-revealed member is reduced to the public
-  // allowlist even inside a DM-full base (so a settlement-hidden dossier with one
-  // revealed NPC exposes ONLY that NPC's DM fields).
+  // flag; an explicit revealDm wins. A REVEALED member is restored to its full DM
+  // record (spliced from a clone of the source); a non-revealed member is reduced to
+  // the public allowlist. Settlement-level content is untouched, so a hidden
+  // settlement with one revealed NPC exposes ONLY that NPC's DM fields.
   if (Array.isArray(result.npcs)) {
+    const fullSource = Array.isArray(settlement?.npcs) ? deepClone(settlement.npcs) : [];
+    /** @type {Map<string, any>} */
+    const fullByKey = new Map(fullSource.map((/** @type {any} */ npc) => [galleryMemberKey(npc), npc]));
     result.npcs = result.npcs
       .map((/** @type {any} */ npc) => {
-        const ov = overrides[galleryMemberKey(npc)];
+        const key = galleryMemberKey(npc);
+        const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-        return effReveal ? npc : publicNpc(npc);
+        return effReveal ? (fullByKey.get(key) || npc) : publicNpc(npc);
       })
       .filter((/** @type {any} */ npc) => npc.name || npc.role);
   }

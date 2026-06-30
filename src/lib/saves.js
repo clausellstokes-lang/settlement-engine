@@ -168,6 +168,14 @@ function migrateSettlementShape(entry) {
 
 // ── Supabase methods ────────────────────────────────────────────────────────
 
+// Core columns the Library load has always depended on. gallery_member_overrides
+// (migration 092) is appended OPTIONALLY below: a feature column must never be able
+// to break the whole library load. If the DB has not had 092 applied yet, selecting
+// it would 400 the entire list (settlements save but never appear), so we fall back
+// to the core columns and default the field to {}.
+const LIBRARY_CORE_COLS = 'id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at';
+const LIBRARY_FULL_COLS = LIBRARY_CORE_COLS.replace('gallery_importable,', 'gallery_importable, gallery_member_overrides,');
+
 async function supabaseList() {
   // Timeout-guard the library list, mirroring supabaseSave/supabaseMutateBatch.
   // This is the only network await on the Library load path, and it was UNguarded:
@@ -175,14 +183,18 @@ async function supabaseList() {
   // savesLoading=true forever (no then/catch ever fired), so the Library/info
   // spun indefinitely with no error and no recovery. On timeout it now rejects,
   // the caller's .catch clears loading and surfaces the failure.
-  const { data, error } = await withTimeout(
-    supabase
-      .from('settlements')
-      .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
-      .order('updated_at', { ascending: false }),
+  const listQuery = (cols) => withTimeout(
+    supabase.from('settlements').select(cols).order('updated_at', { ascending: false }),
     20000,
     'Load library',
   );
+  let { data, error } = await listQuery(LIBRARY_FULL_COLS);
+  // Resilience: a pre-092 DB lacks gallery_member_overrides. Postgres reports an
+  // undefined column as 42703; retry with the core columns so the library still
+  // loads (the per-member toggles just won't pre-populate until 092 is applied).
+  if (error && (error.code === '42703' || /gallery_member_overrides/i.test(error.message || ''))) {
+    ({ data, error } = await listQuery(LIBRARY_CORE_COLS));
+  }
   if (error) throw error;
   return data.map(row => {
     const accessState = row.access_state || ACTIVE_SAVE_STATE;

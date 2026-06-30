@@ -152,9 +152,11 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
   const KEY = netCurrentFn('_gallery_npc_key');
   const APPLY = netCurrentFn('_gallery_apply_member_overrides');
 
-  it('locates the net-current override helpers', () => {
+  it('locates the net-current override helpers (6-arg apply: base + dm_full)', () => {
     expect(KEY.sql, 'no _gallery_npc_key in any migration').toBeTruthy();
     expect(APPLY.sql, 'no _gallery_apply_member_overrides in any migration').toBeTruthy();
+    // The 093 fix: apply takes a settlement-level base AND a dm_full splice source.
+    expect(APPLY.sql).toMatch(/dm_full\s+jsonb/);
   });
 
   beforeAll(async () => {
@@ -166,17 +168,23 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
     await mdb.exec(APPLY.sql);
   });
 
-  // A DM-full base (both NPCs carry secrets) — the apply step decides who keeps them.
-  const DM_FULL = {
+  // The RAW DM-full dossier the RPC passes as `dm_full`: it carries SETTLEMENT-LEVEL
+  // DM content (plotHooks, dmCompass) plus full NPCs. The leak in 092 was promoting
+  // this whole thing to the public base on a single member reveal.
+  const RAW_FULL = {
+    plotHooks: ['the mayor is a doppelganger'],
+    dmCompass: { frictionPoints: 'the guild versus the crown' },
     npcs: [
       { id: 'n1', name: 'Aldric', role: 'mayor', influence: 'high', secret: 'is a spy', goal: 'seize the crown' },
       { id: 'n2', name: 'Mara', role: 'priest', influence: 'mid', secret: 'embezzles tithes', goal: 'flee the city' },
     ],
   };
-  const apply = async (overrides, shareDm, importable, forImport) =>
+  const sanitize = async (obj) =>
+    (await mdb.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
+  const apply = async (base, overrides, shareDm, importable, forImport) =>
     (await mdb.query(
-      `select public._gallery_apply_member_overrides($1::jsonb,$2::jsonb,$3::boolean,$4::boolean,$5::boolean) as out`,
-      [JSON.stringify(DM_FULL), JSON.stringify(overrides), shareDm, importable, forImport],
+      `select public._gallery_apply_member_overrides($1::jsonb,$2::jsonb,$3::jsonb,$4::boolean,$5::boolean,$6::boolean) as out`,
+      [JSON.stringify(base), JSON.stringify(RAW_FULL), JSON.stringify(overrides), shareDm, importable, forImport],
     )).rows[0].out;
 
   it('npc key prefers npc.id, falls back to a name slug matching the client', async () => {
@@ -186,37 +194,43 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
     expect(bySlug).toBe('npc.old_tom_the_smith');
   });
 
-  it('settlement HIDDEN + one member revealed: only that member keeps DM fields', async () => {
-    const out = await apply({ n1: { revealDm: true } }, false, false, false);
-    const [a, b] = out.npcs;
-    expect(a.secret).toBe('is a spy');       // n1 individually revealed
+  it('REGRESSION (092 leak): revealing one NPC under a HIDDEN settlement leaks NO settlement-level DM content', async () => {
+    // Settlement hidden → base is the sanitized projection (no plotHooks/dmCompass).
+    const sanitized = await sanitize(RAW_FULL);
+    const out = await apply(sanitized, { n1: { revealDm: true } }, false, false, false);
+    // The whole point: settlement-level DM content stays stripped.
+    expect(out.plotHooks).toBeUndefined();
+    expect(out.dmCompass).toBeUndefined();
+    // The individually-revealed member gets its DM fields; the other stays public.
+    const a = out.npcs.find(n => n.name === 'Aldric');
+    const b = out.npcs.find(n => n.name === 'Mara');
+    expect(a.secret).toBe('is a spy');
     expect(a.goal).toBe('seize the crown');
-    expect(b.secret).toBeUndefined();         // n2 follows the hidden default
+    expect(b.secret).toBeUndefined();
     expect(b.goal).toBeUndefined();
-    expect(b.name).toBe('Mara');              // public allowlist fields survive
   });
 
-  it('settlement REVEALED + one member hidden: that member is re-stripped', async () => {
-    const out = await apply({ n2: { revealDm: false } }, true, false, false);
-    const [a, b] = out.npcs;
-    expect(a.secret).toBe('is a spy');        // n1 follows the revealed default
-    expect(b.secret).toBeUndefined();          // n2 individually hidden
-    expect(b.name).toBe('Mara');
+  it('settlement REVEALED + one member hidden: settlement content present, hidden member re-stripped', async () => {
+    // Settlement revealed → base is the DM-full projection (settlement content intended).
+    const out = await apply(RAW_FULL, { n2: { revealDm: false } }, true, false, false);
+    expect(out.plotHooks).toBeDefined();       // owner revealed the settlement: intended
+    const a = out.npcs.find(n => n.name === 'Aldric');
+    const b = out.npcs.find(n => n.name === 'Mara');
+    expect(a.secret).toBe('is a spy');
+    expect(b.secret).toBeUndefined();          // individually hidden
   });
 
-  it('import: a member must be revealed AND import-allowed to keep DM fields', async () => {
-    // n1 revealed but import-blocked → stripped in the import payload; n2 revealed + allowed → kept.
-    const out = await apply({ n1: { revealDm: true, allowImport: false }, n2: { revealDm: true, allowImport: true } }, false, false, true);
-    const [a, b] = out.npcs;
+  it('import: a member keeps DM fields only when revealed AND import-allowed', async () => {
+    const sanitized = await sanitize(RAW_FULL);
+    const out = await apply(sanitized, { n1: { revealDm: true, allowImport: false }, n2: { revealDm: true, allowImport: true } }, false, false, true);
+    const a = out.npcs.find(n => n.name === 'Aldric');
+    const b = out.npcs.find(n => n.name === 'Mara');
     expect(a.secret).toBeUndefined();          // revealed but not importable
     expect(b.secret).toBe('embezzles tithes'); // revealed + importable
   });
 
   it('no npcs array → returned unchanged', async () => {
-    const out = (await mdb.query(
-      `select public._gallery_apply_member_overrides($1::jsonb,'{}'::jsonb,false,false,false) as out`,
-      [JSON.stringify({ name: 'Riverbend', population: 900 })],
-    )).rows[0].out;
+    const out = await apply({ name: 'Riverbend', population: 900 }, {}, false, false, false);
     expect(out).toEqual({ name: 'Riverbend', population: 900 });
   });
 });
