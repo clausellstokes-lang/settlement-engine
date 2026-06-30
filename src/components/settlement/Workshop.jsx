@@ -55,9 +55,6 @@ import {
 // Write controls (premium). Mounted only in edit mode.
 import EventComposer from './EventComposer.jsx';
 import ChangeQueuePanel from './ChangeQueuePanel.jsx';
-import PrimaryDeityPicker from './PrimaryDeityPicker.jsx';
-import CultPicker from './CultPicker.jsx';
-import TierShiftControl from './TierShiftControl.jsx';
 import Timeline from './Timeline.jsx';
 import PendingIntentions from './PendingIntentions.jsx';
 import CoherencePanel from './CoherencePanel.jsx';
@@ -207,7 +204,7 @@ function GroupCard({ id, title, blurb, children }) {
  *   queueActive?: boolean,
  * }} props
  */
-export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null, onQueueCommitted = null, queueActive = true }) {
+export default function Workshop({ settlement, saveId, save, editMode = false, canEdit = false, changeExtras = null, onQueueCommitted = null, queueActive = true, onLink = null }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const { campaign, worldState, regionalGraph, settlements, nameFor } = useSettlementLiveWorld(saveId);
   const onUpgrade = () => setPurchaseModalOpen?.(true);
@@ -356,7 +353,7 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
                   queue is empty. Committing soft-refreshes the dossier above. */}
               <ChangeQueuePanel saveId={saveId} active={queueActive} onCommitted={onQueueCommitted} />
               <CoherencePanel />
-              <EventComposer />
+              <EventComposer onLink={onLink} />
               <PendingIntentions />
             </>
           ) : showWrite ? (
@@ -382,50 +379,15 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
           )}
         </WorkshopCard>
 
-        {/* 6b ── Settlement size: force a tier promotion/demotion ─────────────── */}
-        <WorkshopCard
-          id="settlement-tier"
-          title="Settlement Size"
-          hint="Force this settlement up or down one size tier, a DM override of the organic growth-and-decline drift. Population resettles into the new band and institutions reconcile. It lands on the timeline like any change."
-          editMode={showWrite}
-        >
-          {showWrite ? (
-            <TierShiftControl />
-          ) : (
-            <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
-              In edit mode, promote or demote the settlement a tier at a time. Population resettles and
-              institutions reconcile, mirroring the organic growth-and-decline drift.
-              <PremiumWriteHint onUpgrade={onUpgrade} />
-            </div>
-          )}
-        </WorkshopCard>
+        {/* 6b ── Settlement size moved INTO the Make Changes dropdown (the "Promote or
+            demote tier" event) so every settlement-level change is authored, previewed,
+            and staged from one place. The standalone card was retired. */}
 
-        {/* 7 ── Faith: patron + cults ─────────────────────────────────────────── */}
-        {/* The faith READ now lives in the dossier's War & Faith tab and the
-            Pressures card above; only the deity WRITES remain, regrouped here under
-            the change surface: the patron (SET_PRIMARY_DEITY via PrimaryDeityPicker)
-            and the cults beneath it (IMPOSE_CULT via CultPicker). */}
-        <WorkshopCard
-          id="assign-deity"
-          title="Patron & Cults"
-          hint="Name this settlement's patron deity, then impose minor cults beneath it. Their effect on the substrate is read in the dossier's War & Faith tab; awaken the living religion layer below."
-          editMode={showWrite}
-        >
-          {showAuthoring ? (
-            <>
-              <PrimaryDeityPicker />
-              <CultPicker />
-            </>
-          ) : showWrite ? (
-            <DesktopOnlyGate
-              variant="gate"
-              title="Assign a deity on a larger screen"
-              message="Naming a patron deity and imposing cults are authoring steps best done on desktop. Open this settlement on a larger screen to assign them."
-            />
-          ) : (
-            <PremiumWriteHint onUpgrade={onUpgrade} />
-          )}
-        </WorkshopCard>
+        {/* 7 ── Faith moved INTO the Make Changes dropdown: the patron is the
+            "Set patron deity" event (SET_PRIMARY_DEITY) and cults are "Impose a cult"
+            (IMPOSE_CULT), so they are authored, previewed, and staged from one place
+            like every other change. The faith READ stays in the dossier's War & Faith
+            tab; the standalone "Patron & Cults" card was retired. */}
 
         {/* 8 ── Living-world layers ──────────────────────────────────────────── */}
         {/* The three subsystem gates, now one group: War layer, Settlement

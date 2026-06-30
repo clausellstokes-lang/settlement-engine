@@ -267,11 +267,16 @@ function conditionMatchesChain(condition, chain, haystack) {
 /**
  * @param {any} chain
  * @param {any} settlement
+ * @param {any[]} [conditions]  the settlement's active conditions, derived ONCE by
+ *   the caller (deriveAllSupplyChainStates) and passed down so a 20-chain
+ *   settlement does not re-derive its identical condition list 20 times — the
+ *   single biggest cost in the trade-war hot path. Falls back to deriving them
+ *   when called standalone, so the result is identical either way.
  */
-function inferRegionalPressures(chain, settlement) {
+function inferRegionalPressures(chain, settlement, conditions) {
   if (!settlement) return [];
   const haystack = searchableChainText(chain);
-  return deriveAllActiveConditions(settlement)
+  return (conditions || deriveAllActiveConditions(settlement))
     .filter((/** @type {any} */ condition) => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
     .filter((/** @type {any} */ condition) => conditionMatchesChain(condition, chain, haystack))
     .map((/** @type {any} */ condition) => ({
@@ -389,13 +394,16 @@ function inferSubstitutes(chain) {
  * @param {any} [settlement] Optional context — reserved for
  *                            controller-by-faction-archetype derivation
  *                            in future iterations.
+ * @param {any[]} [conditions] The settlement's active conditions, derived once by
+ *                            deriveAllSupplyChainStates and threaded in to avoid a
+ *                            per-chain re-derivation; falls back to deriving them.
  * @returns {Object|null}
  */
-export function deriveSupplyChainState(chain, settlement) {
+export function deriveSupplyChainState(chain, settlement, conditions) {
   if (!chain || typeof chain !== 'object') return null;
 
   const baseStatus = canonicalSupplyChainStatus(chain.status);
-  const regionalPressures = inferRegionalPressures(chain, settlement);
+  const regionalPressures = inferRegionalPressures(chain, settlement, conditions);
   const status = applyRegionalPressureToStatus(baseStatus, regionalPressures);
 
   return {
@@ -458,7 +466,11 @@ export function deriveAllSupplyChainStates(settlement) {
               || settlement.economy?.activeChains
               || settlement.supplyChains
               || [];
-  return chains.map((/** @type {any} */ c) => deriveSupplyChainState(c, settlement)).filter(Boolean);
+  // Derive the active-conditions list ONCE for the whole settlement and thread it
+  // into every chain (it is identical for all of them) instead of letting each
+  // chain re-derive it inside inferRegionalPressures — the dominant redundant cost.
+  const conditions = deriveAllActiveConditions(settlement);
+  return chains.map((/** @type {any} */ c) => deriveSupplyChainState(c, settlement, conditions)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ────────────────────────────────────────────────────

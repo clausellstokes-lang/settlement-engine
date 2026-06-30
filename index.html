@@ -4,6 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SettlementForge</title>
+
+    <!-- ── SEO + social baseline ─────────────────────────────────────────────
+         The static head every crawler and social-unfurl bot sees BEFORE JS runs.
+         Per-route titles/descriptions are managed client-side; these are the
+         site-level defaults + the home canonical. theme-color matches the dark
+         ink header so mobile browser chrome reads as part of the app. -->
+    <meta name="description" content="SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates them as a persistent world for game masters." />
+    <meta name="theme-color" content="#1B1408" />
+    <link rel="canonical" href="https://settlementforge.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SettlementForge" />
+    <meta property="og:title" content="SettlementForge" />
+    <meta property="og:description" content="Generate living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulate them as a persistent world." />
+    <meta property="og:url" content="https://settlementforge.com/" />
+    <meta property="og:image" content="https://settlementforge.com/og-default.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SettlementForge: living settlements for game masters" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SettlementForge" />
+    <meta name="twitter:description" content="Generate living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulate them as a persistent world." />
+    <meta name="twitter:image" content="https://settlementforge.com/og-default.svg" />
+
+    <!-- WebSite + SoftwareApplication structured data (site-wide, first paint). -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          { "@type": "WebSite", "name": "SettlementForge", "url": "https://settlementforge.com/" },
+          {
+            "@type": "SoftwareApplication",
+            "name": "SettlementForge",
+            "applicationCategory": "GameApplication",
+            "operatingSystem": "Web",
+            "url": "https://settlementforge.com/",
+            "description": "Generate living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulate them as a persistent world for game masters."
+          }
+        ]
+      }
+    </script>
+
     <!-- Preconnect to Google Fonts for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

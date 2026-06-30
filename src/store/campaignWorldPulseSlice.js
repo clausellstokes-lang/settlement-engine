@@ -203,10 +203,21 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       const worldState = ensureWorldState(c.worldState, c);
       // Build the plain rules object first so the telemetry read below is NOT an
       // Immer draft proxy (which would be revoked once set() returns).
-      normalizedRules = normalizeSimulationRules({
+      const merged = {
         ...(worldState.simulationRules || {}),
         ...(patch || {}),
-      });
+      };
+      // War and Settlement Strategy go hand in hand: Strategy scores defend/deploy/
+      // sue-for-peace moves off war_front channels that ONLY exist when the War
+      // layer is on, so a War-on/Strategy-off state leaves Strategy with no inputs.
+      // Enabling War therefore auto-activates Strategy (and the DM can't turn
+      // Strategy off while War is on — it re-asserts here). One-way by design:
+      // turning War off leaves Strategy as the DM last set it. Enforced at this
+      // write seam (both the map dialog and the Workshop toggle route through here)
+      // rather than in normalizeSimulationRules, so engine-direct callers and saved
+      // campaigns are untouched until the DM actually changes a rule.
+      if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
+      normalizedRules = normalizeSimulationRules(merged);
       c.worldState = { ...worldState, simulationRules: normalizedRules };
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);

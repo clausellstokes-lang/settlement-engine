@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="SettlementForge: living settlements for game masters">
+  <defs>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2C2210"/>
+      <stop offset="1" stop-color="#1B1408"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#D9B566"/>
+      <stop offset="1" stop-color="#C9A24C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Parchment field -->
+  <rect width="1200" height="630" fill="#FBF5E6"/>
+  <rect width="1200" height="630" fill="none" stroke="#E8D9B0" stroke-width="2"/>
+
+  <!-- Top ink band with the gold rule, echoing the app header -->
+  <rect width="1200" height="150" fill="url(#ink)"/>
+  <rect y="150" width="1200" height="4" fill="url(#gold)"/>
+
+  <!-- Wordmark: the two capitals a step larger, matching the in-app mark -->
+  <text x="600" y="350" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" fill="#8C6F32" letter-spacing="1">
+    <tspan font-size="118">S</tspan><tspan font-size="92">ettlement</tspan><tspan font-size="118">F</tspan><tspan font-size="92">orge</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="430" text-anchor="middle" font-family="'Nunito', system-ui, sans-serif" font-weight="600" font-size="34" fill="#4A3B22">
+    Living settlements for game masters
+  </text>
+  <text x="600" y="478" text-anchor="middle" font-family="'Nunito', system-ui, sans-serif" font-weight="500" font-size="24" fill="#6A511F">
+    Economies · factions · NPCs · history · simulated as a persistent world
+  </text>
+
+  <!-- Bottom gold rule -->
+  <rect x="450" y="540" width="300" height="3" fill="url(#gold)"/>
+</svg>

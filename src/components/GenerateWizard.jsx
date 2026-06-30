@@ -295,6 +295,20 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
+  // Contextual nav (#15): App bumps createResetNonce when the user re-clicks the
+  // ALREADY-ACTIVE Create tab. Reset to the first (generate-ask) screen via the
+  // same New-Draft path, so an unsaved generated roll still triggers the
+  // discard-confirm rather than vanishing silently. Mount value is captured so
+  // the effect never fires on first render.
+  const createResetNonce = useStore(s => s.createResetNonce);
+  const prevResetNonceRef = useRef(createResetNonce);
+  useEffect(() => {
+    if (createResetNonce !== prevResetNonceRef.current) {
+      prevResetNonceRef.current = createResetNonce;
+      handleNewSettlement();
+    }
+  }, [createResetNonce, handleNewSettlement]);
+
   // Onboarding coach step tracking
   const onboardingActive = useStore(s => s.onboardingActive);
   const onboardingStep = useStore(s => s.onboardingStep);

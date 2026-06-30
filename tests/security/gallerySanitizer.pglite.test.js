@@ -51,12 +51,11 @@ function sqlNpcAllowed(sql) {
 /** Extract the NPC allowlist the JS mirror keeps (the object literal in toPublicSafe). */
 function jsNpcAllowed() {
   const js = readFileSync(PUBLIC_SAFE_JS, 'utf-8');
-  // The npcs map projects `key: npc.key` for each kept field. Capture the LHS keys
-  // inside the `clean.npcs = clean.npcs.map(npc => ({ ... }))` block. Tolerate an
-  // inline JSDoc cast on the param (`((/** @type {any} */ npc) => ...)`) so a strict
-  // annotation never silently breaks this allow-list sync guard.
-  const block = js.match(/clean\.npcs\s*=\s*clean\.npcs\.map\(\s*\(?\s*(?:\/\*\*[\s\S]*?\*\/\s*)?npc\s*\)?\s*=>\s*\(\{([\s\S]*?)\}\)\)/);
-  if (!block) throw new Error('npc projection block not found in publicSafe.js');
+  // The public NPC allowlist now lives in the shared publicNpc() helper (used by
+  // both the default-mode strip and the per-member override strip). Capture the
+  // `key: npc.key` LHS keys from its returned object literal.
+  const block = js.match(/function\s+publicNpc\s*\(\s*npc\s*\)\s*\{\s*return\s*\{([\s\S]*?)\};/);
+  if (!block) throw new Error('publicNpc projection block not found in publicSafe.js');
   return new Set([...block[1].matchAll(/(\w+):\s*npc\./g)].map((x) => x[1]));
 }
 
@@ -144,5 +143,80 @@ describe('gallery public-JSON sanitizer — net-current execution (pglite)', () 
     // Both lists must be identical: a field added to one but not the other either
     // hides a public field or (worse) leaks a private one.
     expect([...sql].sort()).toEqual([...js].sort());
+  });
+});
+
+// ── Per-member overrides (migration 092) — execute the REAL SQL ───────────────
+describe('gallery per-member overrides — net-current execution (pglite)', () => {
+  let mdb;
+  const KEY = netCurrentFn('_gallery_npc_key');
+  const APPLY = netCurrentFn('_gallery_apply_member_overrides');
+
+  it('locates the net-current override helpers', () => {
+    expect(KEY.sql, 'no _gallery_npc_key in any migration').toBeTruthy();
+    expect(APPLY.sql, 'no _gallery_apply_member_overrides in any migration').toBeTruthy();
+  });
+
+  beforeAll(async () => {
+    mdb = new PGlite();
+    await mdb.exec('create schema if not exists public;');
+    // The apply helper depends on the sanitizer (single-NPC re-strip) + the key fn.
+    await mdb.exec(SANITIZER.sql);
+    await mdb.exec(KEY.sql);
+    await mdb.exec(APPLY.sql);
+  });
+
+  // A DM-full base (both NPCs carry secrets) — the apply step decides who keeps them.
+  const DM_FULL = {
+    npcs: [
+      { id: 'n1', name: 'Aldric', role: 'mayor', influence: 'high', secret: 'is a spy', goal: 'seize the crown' },
+      { id: 'n2', name: 'Mara', role: 'priest', influence: 'mid', secret: 'embezzles tithes', goal: 'flee the city' },
+    ],
+  };
+  const apply = async (overrides, shareDm, importable, forImport) =>
+    (await mdb.query(
+      `select public._gallery_apply_member_overrides($1::jsonb,$2::jsonb,$3::boolean,$4::boolean,$5::boolean) as out`,
+      [JSON.stringify(DM_FULL), JSON.stringify(overrides), shareDm, importable, forImport],
+    )).rows[0].out;
+
+  it('npc key prefers npc.id, falls back to a name slug matching the client', async () => {
+    const byId = (await mdb.query(`select public._gallery_npc_key($1::jsonb) as k`, [JSON.stringify({ id: 'n1', name: 'Aldric' })])).rows[0].k;
+    expect(byId).toBe('n1');
+    const bySlug = (await mdb.query(`select public._gallery_npc_key($1::jsonb) as k`, [JSON.stringify({ name: 'Old Tom the Smith!' })])).rows[0].k;
+    expect(bySlug).toBe('npc.old_tom_the_smith');
+  });
+
+  it('settlement HIDDEN + one member revealed: only that member keeps DM fields', async () => {
+    const out = await apply({ n1: { revealDm: true } }, false, false, false);
+    const [a, b] = out.npcs;
+    expect(a.secret).toBe('is a spy');       // n1 individually revealed
+    expect(a.goal).toBe('seize the crown');
+    expect(b.secret).toBeUndefined();         // n2 follows the hidden default
+    expect(b.goal).toBeUndefined();
+    expect(b.name).toBe('Mara');              // public allowlist fields survive
+  });
+
+  it('settlement REVEALED + one member hidden: that member is re-stripped', async () => {
+    const out = await apply({ n2: { revealDm: false } }, true, false, false);
+    const [a, b] = out.npcs;
+    expect(a.secret).toBe('is a spy');        // n1 follows the revealed default
+    expect(b.secret).toBeUndefined();          // n2 individually hidden
+    expect(b.name).toBe('Mara');
+  });
+
+  it('import: a member must be revealed AND import-allowed to keep DM fields', async () => {
+    // n1 revealed but import-blocked → stripped in the import payload; n2 revealed + allowed → kept.
+    const out = await apply({ n1: { revealDm: true, allowImport: false }, n2: { revealDm: true, allowImport: true } }, false, false, true);
+    const [a, b] = out.npcs;
+    expect(a.secret).toBeUndefined();          // revealed but not importable
+    expect(b.secret).toBe('embezzles tithes'); // revealed + importable
+  });
+
+  it('no npcs array → returned unchanged', async () => {
+    const out = (await mdb.query(
+      `select public._gallery_apply_member_overrides($1::jsonb,'{}'::jsonb,false,false,false) as out`,
+      [JSON.stringify({ name: 'Riverbend', population: 900 })],
+    )).rows[0].out;
+    expect(out).toEqual({ name: 'Riverbend', population: 900 });
   });
 });

@@ -52,7 +52,6 @@ import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import StateBadge        from './primitives/StateBadge.jsx';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
-import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 // Next-action rail wiring + the shared canonize confirm/commit, extracted to keep
 // SettlementDetail under the component-size ratchet (behavior-preserving).
@@ -62,7 +61,7 @@ import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailH
 // disagree with the full panel's headline fact.
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
 import { directionalRelationshipLabel } from '../domain/relationships/canonicalRelationship.js';
-import { INK, MUTED, BODY, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
+import { INK, MUTED, BODY, SECOND, BORDER, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
 // PDF consume, so a named relationship looks identical across every surface
 // (was previously a divergent local REL_COLORS copy — the cardinal-sin coherence
@@ -88,7 +87,10 @@ import { REL_HEX } from './settlements/relationshipColors.js';
 export default function SettlementDetail({
   detail, setDetail,
   saves,
-  linking, setLinking,
+  // `linking` (the old link-picker disclosure flag) is retired now that link
+  // creation lives in the Make Changes dropdown; setLinking is still called to
+  // keep the (now inert) flag false on back-navigation and after a staged link.
+  setLinking,
   editNamesOpen, setEditNamesOpen,
   // applyRename is the IMMEDIATE rename cascade. For a STANDALONE settlement the
   // rename STAGES on the change-queue (replayed at commit by the executor
@@ -538,6 +540,7 @@ export default function SettlementDetail({
       canEdit={canEdit}
       onQueueCommitted={handleQueueCommitted}
       queueActive={!simulated}
+      onLink={handleLink}
       changeExtras={editMode && (
         // ── Relationship cluster ── Link Neighbour, the existing Neighbour
         // Network list, and the cascading Network Effects, grouped tight
@@ -547,24 +550,14 @@ export default function SettlementDetail({
         // Card 2.
         <div style={{display:'flex',flexDirection:'column',gap:24,marginTop:8}}>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
-          {/* Neighbour links — the toggle reveals the linking picker; the
-              network list below shows existing links. The disclosure routes
-              through the Button primitive (fullWidth), inheriting the ~44px
-              min target + focus ring + variant tokens. */}
-          <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
-            <Button variant="secondary" fullWidth
-              aria-expanded={linking} aria-pressed={linking}
-              onClick={()=>setLinking(v=>!v)}
-              style={{ justifyContent:'flex-start', gap:8, padding:'10px 14px', borderRadius:linking?'8px 8px 0 0':8, background:linking?'#f5ede0':CARD, border:'none', boxShadow:'none', textAlign:'left' }}>
-              <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
-              <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
-            </Button>
-            {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
-          </div>
+          {/* Link CREATION folded into the Make Changes dropdown ("Link a
+              neighbour") so all changes are authored from one surface; the
+              standalone toggle/card was retired. The Neighbour Network list below
+              (with its per-row Remove) and the cascading Network Effects stay here. */}
 
           {/* Neighbour Network list — demoted to spacing + tint (border
               removed): one of three pieces of the single relationship set. */}
-          {network.length>0&&!linking&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
+          {network.length>0&&<div role="group" aria-labelledby="neighbour-network-heading" style={{background:swatch.infoBg,borderRadius:8,padding:'12px 14px'}}>
             <h3 id="neighbour-network-heading" style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',margin:'0 0 8px',display:'flex',alignItems:'center',gap:6}}>
               Neighbour Network ({network.length})
             </h3>
@@ -831,6 +824,7 @@ export default function SettlementDetail({
             galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
             galleryShareDm={liveSaveEntry?.gallery_share_dm}
             galleryImportable={liveSaveEntry?.gallery_importable}
+            galleryMemberOverrides={liveSaveEntry?.gallery_member_overrides}
           />
         </div>
       )}

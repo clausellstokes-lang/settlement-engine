@@ -33,7 +33,6 @@ vi.mock('../../src/components/dossier/EngineSections.jsx', () => ({
 
 // ── Stub the premium WRITE controls — bare markers so we can assert presence. ──
 vi.mock('../../src/components/settlement/EventComposer.jsx', () => ({ default: () => <div data-testid="event-composer" /> }));
-vi.mock('../../src/components/settlement/PrimaryDeityPicker.jsx', () => ({ default: () => <div data-testid="primary-deity-picker" /> }));
 vi.mock('../../src/components/settlement/Timeline.jsx', () => ({ default: () => <div data-testid="timeline" /> }));
 vi.mock('../../src/components/settlement/PendingIntentions.jsx', () => ({ default: () => <div data-testid="pending-intentions" /> }));
 vi.mock('../../src/components/settlement/CoherencePanel.jsx', () => ({ default: () => <div data-testid="coherence-panel" /> }));
@@ -79,8 +78,10 @@ describe('Workshop — two-card information architecture', () => {
     for (const id of ['causal-state', 'pressures-strength', 'power-succession', 'timeline-chronicle', 'provenance-links']) {
       expect(within(settlementGroup).getByTestId(`workshop-card-${id}`)).toBeTruthy();
     }
-    // Card 2 "Change the settlement" — the write surface.
-    for (const id of ['make-changes', 'assign-deity', 'living-world-layers']) {
+    // Card 2 "Change the settlement" — the write surface. Patron/cult authoring
+    // folded into make-changes (SET_PRIMARY_DEITY / IMPOSE_CULT), so there is no
+    // longer a standalone assign-deity card.
+    for (const id of ['make-changes', 'living-world-layers']) {
       expect(within(changeGroup).getByTestId(`workshop-card-${id}`)).toBeTruthy();
     }
     // No leakage across the two cards.
@@ -110,7 +111,6 @@ describe('Workshop — two-card information architecture', () => {
     openCard('causal-state');
     expect(screen.getAllByTestId('read-system-state-bar').length).toBeGreaterThan(0);
     expect(screen.queryByTestId('event-composer')).toBeNull();
-    expect(screen.queryByTestId('primary-deity-picker')).toBeNull();
     expect(screen.queryByTestId('timeline')).toBeNull();
 
     // Edit mode (premium / Edit Dossier on): the write controls mount.
@@ -121,12 +121,11 @@ describe('Workshop — two-card information architecture', () => {
   it('every preserved edit action still mounts in edit mode', () => {
     render(<Workshop settlement={settlement} saveId="save-1" editMode canEdit />);
     // Make Changes (event composer) and Timeline default-open in edit mode; the
-    // deity-assign write lives in its own card. Open the ones that start closed.
-    openCard('assign-deity');
+    // patron/cult write now lives INSIDE the composer (folded in). Open the ones
+    // that start closed.
     openCard('timeline-chronicle');
     openCard('provenance-links');
-    expect(screen.getByTestId('event-composer')).toBeTruthy();     // Make Changes
-    expect(screen.getByTestId('primary-deity-picker')).toBeTruthy(); // Assign deity
+    expect(screen.getByTestId('event-composer')).toBeTruthy();     // Make Changes (incl. deity events)
     expect(screen.getByTestId('timeline')).toBeTruthy();             // Timeline & Chronicle
     expect(screen.getByTestId('provenance-block')).toBeTruthy();     // Provenance & Links
   });

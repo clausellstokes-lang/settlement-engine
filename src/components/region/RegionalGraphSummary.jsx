@@ -166,6 +166,10 @@ export default function RegionalGraphSummary({
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: 8 }}>
           {topImpacts.map(impact => {
             const available = isRegionalImpactAvailable(impact);
+            // A queued impact isn't acceptable until it matures (delayTicks ticks
+            // down to 0). Show WHY the Accept is disabled and point at the advance
+            // controls above — the bare disabled checkmark read as a dead button.
+            const delayTicks = Math.max(0, impact.delayTicks || 0);
             return (
             <div
               key={impact.id}
@@ -184,11 +188,18 @@ export default function RegionalGraphSummary({
                 </div>
                 <div style={{ fontSize: FS.micro, color: BODY, fontFamily: sans }}>
                   {impactGoodsLabel(impact)} · severity {Math.round((impact.severity || 0) * 100)}%
+                  {!available && delayTicks > 0 && (
+                    <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance above to apply)</span>
+                  )}
                 </div>
               </div>
               <IconButton
                 Icon={Check}
-                label={available ? 'Apply regional impact' : 'Impact is delayed'}
+                label={available
+                  ? 'Apply regional impact'
+                  : delayTicks > 0
+                    ? `Delayed: matures in ${delayTicks} tick${delayTicks === 1 ? '' : 's'}; advance the realm to apply`
+                    : 'Impact is delayed'}
                 disabled={!available}
                 onClick={() => onApplyImpact?.(campaign.id, impact.id)}
                 tone="primary"

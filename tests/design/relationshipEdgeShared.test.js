@@ -17,6 +17,7 @@ import {
   WAR_FAITH_STYLE,
   relChannelColor,
 } from '../../src/components/map/relationshipEdgeStyle.js';
+import { relColor } from '../../src/components/settlements/relationshipColors.js';
 
 describe('shared relationship-type list', () => {
   test('covers every drawn edge style and labels each type', () => {
@@ -34,6 +35,24 @@ describe('shared relationship-type list', () => {
     const byId = Object.fromEntries(REL_TYPES.map(t => [t.id, t.label]));
     expect(byId.trade_partner).toBe('Trade partner');
     expect(byId.cold_war).toBe('Cold war');
+  });
+});
+
+describe('map edges derive from the canonical brand palette', () => {
+  test('every map edge color equals the parchment REL_HEX hue, so map and dossier agree', () => {
+    for (const t of REL_TYPES) {
+      expect(REL_EDGE_STYLE[t.id].color).toBe(relColor(t.id));
+    }
+  });
+
+  test('criminal_network is colored (no grey fallback) now that the palette covers it', () => {
+    expect(REL_EDGE_STYLE.criminal_network).toBeTruthy();
+    expect(relEdgeColor('criminal_network')).toBe(relColor('criminal_network'));
+    expect(relEdgeColor('criminal_network')).not.toBe('#888');
+  });
+
+  test('war_front uses the brand hostile hue', () => {
+    expect(WAR_FAITH_STYLE.war_front.color).toBe(relColor('hostile'));
   });
 });
 

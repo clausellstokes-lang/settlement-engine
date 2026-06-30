@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toPublicSafe, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
+import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -78,6 +78,23 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.narrativeNotes).toBeUndefined();
   });
 
+  // Defense-in-depth for the gallery DM-notes invariant: in production DM notes
+  // live NESTED at aiData.dossierNotes.dmNotes, not at the top level. aiData is
+  // dropped wholesale in full mode, so the nested secret must never survive.
+  // This pins it against any future change (e.g. a per-member gallery reveal)
+  // that tries to preserve part of aiData for the DM view: the dmNotes content
+  // must appear NOWHERE in the projected output, share-DM on or off.
+  it('never leaks the nested aiData.dossierNotes.dmNotes, even in full DM mode', () => {
+    const dmSecret = 'the BBEG is the mayor, kill on sight';
+    const withNested = {
+      name: 'Foo', tier: 'town',
+      aiData: { dossierNotes: { dmNotes: dmSecret, aiGuidance: 'campaign lore the model weaves in' } },
+    };
+    expect(JSON.stringify(toPublicSafe(withNested, { full: true }))).not.toContain(dmSecret);
+    expect(JSON.stringify(toPublicSafe(withNested))).not.toContain(dmSecret); // default mode too
+    expect(toPublicSafe(withNested, { full: true }).aiData).toBeUndefined();
+  });
+
   it('drops AI prose blobs but keeps ONLY the four DM-Compass fields of aiSettlement', () => {
     const out = toPublicSafe(dm(), { full: true });
     expect(out.aiData).toBeUndefined();
@@ -135,5 +152,45 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.connectionsMap).toBeUndefined();
     expect(out.dmCompass).toBeUndefined();
     expect(out.narrativeNotes).toBeUndefined();
+  });
+});
+
+describe('toPublicSafe — per-member overrides (migration 092 mirror)', () => {
+  const dm = () => ({
+    npcs: [
+      { id: 'n1', name: 'Aldric', role: 'mayor', influence: 'high', secret: 'is a spy', goal: 'seize the crown' },
+      { id: 'n2', name: 'Mara', role: 'priest', influence: 'mid', secret: 'embezzles tithes', goal: 'flee' },
+    ],
+  });
+
+  it('galleryMemberKey prefers npc.id, else a name slug (matches the SQL key)', () => {
+    expect(galleryMemberKey({ id: 'n1', name: 'Aldric' })).toBe('n1');
+    expect(galleryMemberKey({ name: 'Old Tom the Smith!' })).toBe('npc.old_tom_the_smith');
+  });
+
+  it('settlement hidden + one member revealed: only that member keeps DM fields', () => {
+    const out = toPublicSafe(dm(), { full: false, memberOverrides: { n1: { revealDm: true } } });
+    const a = out.npcs.find(n => n.name === 'Aldric');
+    const b = out.npcs.find(n => n.name === 'Mara');
+    expect(a.secret).toBe('is a spy');
+    expect(a.goal).toBe('seize the crown');
+    expect(b.secret).toBeUndefined();
+    expect(b.goal).toBeUndefined();
+  });
+
+  it('settlement revealed + one member hidden: that member is re-stripped', () => {
+    const out = toPublicSafe(dm(), { full: true, memberOverrides: { n2: { revealDm: false } } });
+    const a = out.npcs.find(n => n.name === 'Aldric');
+    const b = out.npcs.find(n => n.name === 'Mara');
+    expect(a.secret).toBe('is a spy');
+    expect(b.secret).toBeUndefined();
+    expect(b.name).toBe('Mara');
+  });
+
+  it('no overrides leaves the settlement-level behavior unchanged', () => {
+    const hidden = toPublicSafe(dm(), { full: false });
+    expect(hidden.npcs.every(n => n.secret === undefined)).toBe(true);
+    const shown = toPublicSafe(dm(), { full: true });
+    expect(shown.npcs.every(n => n.secret !== undefined)).toBe(true);
   });
 });

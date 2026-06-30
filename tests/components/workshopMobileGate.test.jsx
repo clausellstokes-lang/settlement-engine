@@ -36,7 +36,6 @@ vi.mock('../../src/components/dossier/EngineSections.jsx', () => ({
   NpcAgencySection: () => <div data-testid="npc-agency-section" />,
 }));
 vi.mock('../../src/components/settlement/EventComposer.jsx', () => ({ default: () => <div data-testid="event-composer" /> }));
-vi.mock('../../src/components/settlement/PrimaryDeityPicker.jsx', () => ({ default: () => <div data-testid="primary-deity-picker" /> }));
 vi.mock('../../src/components/settlement/Timeline.jsx', () => ({ default: () => <div data-testid="timeline" /> }));
 vi.mock('../../src/components/settlement/PendingIntentions.jsx', () => ({ default: () => <div data-testid="pending-intentions" /> }));
 vi.mock('../../src/components/settlement/CoherencePanel.jsx', () => ({ default: () => <div data-testid="coherence-panel" /> }));
@@ -115,15 +114,10 @@ describe('Workshop — mobile heavy-authoring gate', () => {
     expect(within(make).getAllByText(/larger screen/i).length).toBeGreaterThan(0);
   });
 
-  test('mobile: deity assign + living-world layers + changeExtras all defer to desktop', async () => {
+  test('mobile: living-world layers + changeExtras all defer to desktop', async () => {
     installMatchMedia(true);
     const Workshop = await loadWorkshop();
     render(<Workshop settlement={settlement} saveId="save-1" editMode canEdit changeExtras={changeExtras} />);
-
-    openCard('assign-deity');
-    const deity = screen.getByTestId('workshop-card-assign-deity');
-    expect(within(deity).queryByTestId('primary-deity-picker')).toBeNull();
-    expect(within(deity).getAllByText(/larger screen/i).length).toBeGreaterThan(0);
 
     openCard('living-world-layers');
     const layers = screen.getByTestId('workshop-card-living-world-layers');
@@ -140,11 +134,9 @@ describe('Workshop — mobile heavy-authoring gate', () => {
     const Workshop = await loadWorkshop();
     render(<Workshop settlement={settlement} saveId="save-1" editMode canEdit changeExtras={changeExtras} />);
 
-    // make-changes default-opens; the composer mounts.
+    // make-changes default-opens; the composer mounts (patron/cult authoring is
+    // folded inside it now, not a separate card).
     expect(screen.getByTestId('event-composer')).toBeTruthy();
-
-    openCard('assign-deity');
-    expect(screen.getByTestId('primary-deity-picker')).toBeTruthy();
 
     openCard('living-world-layers');
     expect(screen.getByTestId('workshop-gate-warLayerEnabled')).toBeTruthy();

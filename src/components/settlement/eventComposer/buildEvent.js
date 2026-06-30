@@ -8,6 +8,7 @@
 
 import { inferImportance } from '../../../domain/entities/npcs.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../../domain/roles/roleCatalog.js';
+import { resolveDeitySnapshot } from '../../../lib/customRegistry.js';
 import { buildTargetOptions, labelOfTarget } from './helpers.js';
 import { RELATIONSHIP_OPTIONS, CUSTOM_RESOURCE_OPTION } from './EventComposerConstants.js';
 
@@ -19,7 +20,8 @@ export function buildEvent(form) {
     npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
     quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
     stressorPick, powerCause,
-    tradeDirection, tradeEntrepot, swapWithNpcId,
+    tradeDirection, tradeEntrepot, swapWithNpcId, tierDirection,
+    customContent, deityRef, deityMode, cultRemoveRef,
     isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
     partyCaused, description,
   } = form;
@@ -115,13 +117,45 @@ export function buildEvent(form) {
   if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
     payload.swapWithNpcId = swapWithNpcId;
   }
+  // SHIFT_TIER — a one-step forced promotion/demotion. The composer's Direction
+  // field only offers a direction the current tier can actually move (promotion is
+  // hidden at metropolis, demotion at thorp), so this mirrors exactly the event the
+  // retired shiftTier store action used to dispatch ({ direction }, no target).
+  if (type === 'SHIFT_TIER') {
+    payload.direction = tierDirection === 'demotion' ? 'demotion' : 'promotion';
+  }
+  // SET_PRIMARY_DEITY / IMPOSE_CULT (the folded "Patron & Cults" card). The snapshot
+  // is resolved from customContent HERE (intent time), exactly as the setPrimaryDeity
+  // / imposeCult store actions do via resolveDeitySnapshot — so a deity staged from
+  // the dossier is byte-identical to one assigned from the map. deityMode 'remove'
+  // clears the patron (SET_PRIMARY_DEITY) or drops the named cult (IMPOSE_CULT).
+  let deityTargetId;
+  if (type === 'SET_PRIMARY_DEITY') {
+    if (deityMode === 'remove' || !deityRef) {
+      payload.deityRef = null; payload.snapshot = null; deityTargetId = null;
+    } else {
+      payload.deityRef = deityRef; payload.snapshot = resolveDeitySnapshot(customContent, deityRef); deityTargetId = deityRef;
+    }
+  } else if (type === 'IMPOSE_CULT') {
+    if (deityMode === 'remove') {
+      const ref = cultRemoveRef || null;
+      payload.deityRef = ref; payload.snapshot = null; deityTargetId = ref;
+    } else {
+      payload.deityRef = deityRef || null; payload.snapshot = resolveDeitySnapshot(customContent, deityRef); deityTargetId = deityRef || null;
+    }
+  }
   // #6 — OPENED_TRADE_ROUTE may target ANOTHER campaign settlement instead of a
   // pre-linked neighbour. When one is chosen it overrides the neighbour target;
   // the handler ADDS a neighbourNetwork link for it (no longer a no-op for an
-  // unlinked name).
-  const targetId = (type === 'OPENED_TRADE_ROUTE' && tradeTarget.trim())
-    ? tradeTarget.trim()
-    : effectiveTarget.trim();
+  // unlinked name). SHIFT_TIER carries no target (reads payload.direction); the
+  // deity events carry the deity ref as the target (resolved above).
+  const targetId = type === 'SHIFT_TIER'
+    ? null
+    : (type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT')
+      ? deityTargetId
+      : (type === 'OPENED_TRADE_ROUTE' && tradeTarget.trim())
+        ? tradeTarget.trim()
+        : effectiveTarget.trim();
 
   return {
     id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,

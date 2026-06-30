@@ -30,6 +30,7 @@ import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { pantheonStandings, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { runVisibilityAudit } from '../../domain/display/visibilityAudit.js';
 import { OCCUPATION_TUNING } from '../../domain/worldPulse/occupation.js';
+import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRules.js';
 import { Card, BarList, MiniTable, Empty, Select } from './AdminTrendsCharts.jsx';
 import Button from '../primitives/Button.jsx';
 import { MUTED, GREEN, RED, sans, FS, SP } from '../theme.js';
@@ -76,7 +77,11 @@ function balanceWarnings(campaign, members) {
 /** Dormant-subsystem verification: a war-off campaign must carry no war ledgers. */
 function dormancyReport(campaign) {
   const ws = campaign?.worldState || {};
-  const warOff = !campaign?.rules?.warLayerEnabled;
+  // Rules live at worldState.simulationRules, NOT campaign.rules (the store never
+  // writes campaign.rules — it was always undefined, so warOff was always true and
+  // the dormancy card raised a false "war ledger present while war off" failure on
+  // every war-ON campaign). Read the normalized rules off worldState like the engine.
+  const warOff = !normalizeSimulationRules(ws.simulationRules).warLayerEnabled;
   const hasWarLedger = !!(ws.deployments && Object.keys(ws.deployments).length)
     || !!(ws.occupations && Object.keys(ws.occupations).length)
     || !!(ws.warPosture && Object.keys(ws.warPosture).length);

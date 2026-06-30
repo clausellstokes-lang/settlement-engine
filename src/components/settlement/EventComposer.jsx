@@ -17,14 +17,13 @@ import { useState, useMemo } from 'react';
 import { X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
-import { inferImportance } from '../../domain/entities/npcs.js';
 import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { deriveOnsetSeverity } from '../../domain/state/deriveStressorSeverity.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
-import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
+import { governingFactionOf } from '../../domain/rulingPower.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
@@ -36,6 +35,11 @@ import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
 import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
 import { EventComposerRelationshipExtras } from './eventComposer/EventComposerRelationshipExtras.jsx';
+import { EventComposerTierField, clampTierDirection } from './eventComposer/EventComposerTierField.jsx';
+import { EventComposerCorruptionFields } from './eventComposer/EventComposerCorruptionFields.jsx';
+import { EventComposerDeityField, canStageDeityEvent } from './eventComposer/EventComposerDeityField.jsx';
+import { EventComposerSecondaryFields } from './eventComposer/EventComposerSecondaryFields.jsx';
+import { EventComposerLinkNeighbourField, linkableSiblings } from './eventComposer/EventComposerLinkNeighbourField.jsx';
 import { buildEvent as assembleEvent } from './eventComposer/buildEvent.js';
 import { AddNpcTraitFields } from './eventComposer/AddNpcTraitFields.jsx';
 import {
@@ -44,7 +48,11 @@ import {
   inputStyle, selectStyle,
 } from './eventComposer/EventComposerConstants.js';
 
-export default function EventComposer() {
+// onLink (= SettlementDetail's handleLink) is threaded in only so the folded
+// "Link a neighbour" dropdown entry can reuse the exact link cascade (stage a
+// `link` order standalone / full applyLink clock-bound). When it is absent the
+// LINK_NEIGHBOUR entry simply does not appear.
+export default function EventComposer({ onLink = null }) {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
@@ -111,9 +119,23 @@ export default function EventComposer() {
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
   const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
+  const [tierDirection, setTierDirection] = useState('promotion'); // SHIFT_TIER: promote up / demote down one tier
+  // SET_PRIMARY_DEITY / IMPOSE_CULT (the folded "Patron & Cults" card). deityMode is
+  // 'assign' (pick a deity ref) or 'remove' (clear the patron / drop a named cult).
+  const [deityRef, setDeityRef] = useState('');
+  const [deityMode, setDeityMode] = useState('assign');
+  const [cultRemoveRef, setCultRemoveRef] = useState('');
+  // LINK_NEIGHBOUR (the folded "Link a neighbour" card): pick a partner save + a
+  // relationship; Apply delegates to onLink (handleLink), never to applyEvent.
+  const [partnerSaveId, setPartnerSaveId] = useState('');
+  const [linkRelType, setLinkRelType] = useState('neutral');
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
+  // Premium gate for deity authoring/assignment (the simulation is the gate), and
+  // the purchase modal opener for the upsell — both consumed by EventComposerDeityField.
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const [instigatorNeighbour, setInstigatorNeighbour] = useState(''); // #1 APPLY_STRESSOR: optional war instigator
   const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // #3 APPLY_STRESSOR (infiltrated): souring level
   const [tradeTarget, setTradeTarget] = useState('');          // #6 OPENED_TRADE_ROUTE: optional campaign-settlement target
@@ -246,6 +268,12 @@ export default function EventComposer() {
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
   const needsTarget = !!spec?.requiresTarget;
+  // LINK_NEIGHBOUR is a folded pseudo-event (not in EVENT_REGISTRY): it only
+  // appears when an onLink handler is wired AND there is at least one other saved
+  // settlement to link to. Apply delegates to onLink, so it is never previewed,
+  // batched, or routed through buildEvent.
+  const canLinkNeighbour = !!onLink && linkableSiblings(savedSettlements, settlement, activeSaveId).length > 0;
+  const isLinkNeighbour = type === 'LINK_NEIGHBOUR';
   // ADD_RESOURCE's "Custom resource…" option holds the real target in the
   // companion text input; the swap events also need their counterpart picked.
   const effectiveTarget = type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION
@@ -259,6 +287,12 @@ export default function EventComposer() {
     : effectiveTarget;
   const canSubmit = (!needsTarget || resolvedTarget.trim().length > 0)
     && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId)
+    // Deity events: refuse a no-op or unseatable imposition before it can stage
+    // (the same guards the setPrimaryDeity / imposeCult store actions enforce).
+    && !((type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT')
+      && !canStageDeityEvent({ type, settlement, deityRef, deityMode, cultRemoveRef, customContent, canUseCustom }))
+    // LINK_NEIGHBOUR needs a partner picked.
+    && !(isLinkNeighbour && !partnerSaveId)
     // Block submit while this member's campaign is advancing — the store would no-op
     // the apply, and the composer lives on a different surface from the Advance button
     // so the two can be open at once.
@@ -280,6 +314,9 @@ export default function EventComposer() {
 
   // buildEvent (the per-type payload assembly) lives in eventComposer/buildEvent.js;
   // this thin closure threads the form state in so the parent stays under the ratchet.
+  // SHIFT_TIER's direction is clamped to a legal move (clampTierDirection) so the
+  // staged event matches what the Direction field shows (the handler also no-ops an
+  // out-of-bounds shift, so a queue replay past the cap/floor stays harmless).
   function buildEvent() {
     return assembleEvent({
       type, target, effectiveTarget, settlement, phase,
@@ -288,7 +325,8 @@ export default function EventComposer() {
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
       quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
       stressorPick, powerCause,
-      tradeDirection, tradeEntrepot, swapWithNpcId,
+      tradeDirection, tradeEntrepot, swapWithNpcId, tierDirection: clampTierDirection(settlement, tierDirection),
+      customContent, deityRef, deityMode, cultRemoveRef,
       isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
       partyCaused, description,
     });
@@ -299,6 +337,16 @@ export default function EventComposer() {
   }
 
   function onApply() {
+    // LINK_NEIGHBOUR — delegate to onLink (handleLink), which stages the `link`
+    // change-queue order for a standalone save or applies the full cascade
+    // immediately for a clock-bound member. Never builds/stages an event.
+    if (isLinkNeighbour) {
+      const partner = (savedSettlements || []).find(s => String(s.id) === String(partnerSaveId));
+      if (onLink && partner) onLink(partner, linkRelType);
+      setPartnerSaveId('');
+      setLinkRelType('neutral');
+      return;
+    }
     // §9c — Destroy Settlement is drastic + recoverable-only-by-effort, so it
     // requires typing the settlement name to confirm. Block apply until it matches.
     const evType = pendingPreview?.event?.type || type;
@@ -329,6 +377,9 @@ export default function EventComposer() {
     setInstigatorNeighbour('');
     setInstigatorRelationship('rival');
     setTradeTarget('');
+    setDeityRef('');
+    setDeityMode('assign');
+    setCultRemoveRef('');
     // The staleness notice moves to COMMIT time (nothing has mutated here yet —
     // see ChangeQueuePanel's onCommitted seam in SettlementDetail).
   }
@@ -363,7 +414,7 @@ export default function EventComposer() {
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setRole(''); setInstitutionId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); setRole(''); setInstitutionId(''); setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret(''); setInstigatorNeighbour(''); setTradeTarget(''); setTierDirection('promotion'); setDeityRef(''); setDeityMode('assign'); setCultRemoveRef(''); setPartnerSaveId(''); setLinkRelType('neutral'); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -387,6 +438,10 @@ export default function EventComposer() {
               .map(([k, s]) => (
                 <option key={k} value={k}>{s.label}</option>
               ))}
+            {/* LINK_NEIGHBOUR — folded "Link a neighbour" card. A pseudo-event (no
+                registry entry): shown only when an onLink handler is wired and a
+                linkable sibling save exists. */}
+            {canLinkNeighbour && <option value="LINK_NEIGHBOUR">Link a neighbour</option>}
           </select>
         </Field>
 
@@ -413,101 +468,72 @@ export default function EventComposer() {
           npcSwapGroups={npcSwapGroups}
         />
 
-        {/* IMPOSE_CORRUPTION — which criminal organization gets its hooks into the NPC */}
+        {/* SHIFT_TIER — promote or demote one size tier (the folded "Settlement
+            Size" card). Only the legal move(s) appear. */}
+        {type === 'SHIFT_TIER' && (
+          <EventComposerTierField
+            settlement={settlement}
+            tierDirection={tierDirection}
+            setTierDirection={setTierDirection}
+          />
+        )}
+
+        {/* SET_PRIMARY_DEITY / IMPOSE_CULT — the folded "Patron & Cults" card. */}
+        {(type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT') && (
+          <EventComposerDeityField
+            type={type}
+            settlement={settlement}
+            customContent={customContent}
+            canUseCustom={canUseCustom}
+            setPurchaseModalOpen={setPurchaseModalOpen}
+            deityRef={deityRef}
+            setDeityRef={setDeityRef}
+            deityMode={deityMode}
+            setDeityMode={setDeityMode}
+            cultRemoveRef={cultRemoveRef}
+            setCultRemoveRef={setCultRemoveRef}
+          />
+        )}
+
+        {/* LINK_NEIGHBOUR — the folded "Link a neighbour" card. */}
+        {isLinkNeighbour && (
+          <EventComposerLinkNeighbourField
+            settlement={settlement}
+            savedSettlements={savedSettlements}
+            activeSaveId={activeSaveId}
+            partnerSaveId={partnerSaveId}
+            setPartnerSaveId={setPartnerSaveId}
+            linkRelType={linkRelType}
+            setLinkRelType={setLinkRelType}
+          />
+        )}
+
+        {/* IMPOSE_CORRUPTION — which criminal organization corrupts the NPC, and how
+            far the rot reaches (extracted to keep the composer under the ratchet) */}
         {type === 'IMPOSE_CORRUPTION' && (
-          criminalOrgs.length > 0 ? (
-            <Field label="Criminal organization" hint="The organization that corrupts the chosen NPC">
-              <select value={criminalOrg || criminalOrgs[0]} onChange={e => setCriminalOrg(e.target.value)} style={selectStyle}>
-                {criminalOrgs.map(o => <option key={o} value={o}>{o}</option>)}
-              </select>
-            </Field>
-          ) : (
-            <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
-              <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
-                This settlement has no criminal organization. Add one (e.g. Organized Crime) before imposing corruption.
-              </div>
-            </Field>
-          )
+          <EventComposerCorruptionFields
+            criminalOrgs={criminalOrgs}
+            criminalOrg={criminalOrg}
+            setCriminalOrg={setCriminalOrg}
+            corruptScope={corruptScope}
+            setCorruptScope={setCorruptScope}
+          />
         )}
 
-        {/* IMPOSE_CORRUPTION — how far the rot reaches: the individual alone, or their institution too */}
-        {type === 'IMPOSE_CORRUPTION' && criminalOrgs.length > 0 && (
-          <Field
-            label="Scope"
-            hint={corruptScope === 'individual_institution'
-              ? 'Their home institution is quietly compromised in-chain as well'
-              : 'Only this individual is turned'}
-          >
-            <select value={corruptScope} onChange={e => setCorruptScope(e.target.value)} style={selectStyle}>
-              <option value="individual">This individual</option>
-              <option value="individual_institution">Individual and their institution</option>
-            </select>
-          </Field>
-        )}
-
-        {/* ADD_TRADE_GOOD — direction, plus entrepôt handling for exports */}
-        {type === 'ADD_TRADE_GOOD' && (
-          <Field label="Direction" hint={tradeDirection === 'import' ? 'The settlement buys this in' : 'The settlement sells this outward'}>
-            <select
-              value={tradeDirection}
-              onChange={e => { setTradeDirection(e.target.value); if (e.target.value !== 'export') setTradeEntrepot(false); }}
-              style={selectStyle}
-            >
-              <option value="export">Export</option>
-              <option value="import">Import</option>
-            </select>
-          </Field>
-        )}
-        {type === 'ADD_TRADE_GOOD' && tradeDirection === 'export' && (
-          <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses, listed as (transit)' : 'Produced locally'}>
-            <select
-              value={tradeEntrepot ? 'transit' : 'local'}
-              onChange={e => setTradeEntrepot(e.target.value === 'transit')}
-              style={selectStyle}
-            >
-              <option value="local">Local production</option>
-              <option value="transit">Entrepôt transit</option>
-            </select>
-          </Field>
-        )}
-
-        {/* APPLY_STRESSOR — onset severity is DERIVED from the settlement's
-            preexisting pressure, not picked. Read-only so the DM sees the
-            consequence the state produces. */}
-        {type === 'APPLY_STRESSOR' && (
-          <Field label="Onset severity" hint="Derived from the settlement's current pressure, not picked">
-            <div style={{
-              fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700,
-              padding: '5px 0', textTransform: 'capitalize',
-            }}>
-              {derivedOnset.word}
-              <span style={{ fontWeight: 400, color: MUTED, marginLeft: 6 }}>
-                {derivedOnset.sev >= 0.7
-                  ? 'This settlement is already strained; the crisis lands hard.'
-                  : derivedOnset.sev >= 0.55
-                    ? 'A serious, active crisis on a settlement under pressure.'
-                    : 'A real but survivable onset on a steadier settlement.'}
-              </span>
-            </div>
-          </Field>
-        )}
-
-        {/* CHANGE_RULING_POWER — how power changes hands shapes the aftermath */}
-        {type === 'CHANGE_RULING_POWER' && (
-          <Field label="How" hint={
-            powerCause === 'election'   ? 'A fresh mandate. Legitimacy starts warmer' :
-            powerCause === 'conquest'   ? 'Imposed from outside. Legitimacy starts cold' :
-            powerCause === 'succession' ? 'The line held; the household reorders' :
-            powerCause === 'appointment'? 'Installed by a higher authority' :
-                                          'Seized by force. Loyalties re-sworn at swordpoint'
-          }>
-            <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle}>
-              {RULING_POWER_CAUSES.map(c => (
-                <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
-              ))}
-            </select>
-          </Field>
-        )}
+        {/* ADD_TRADE_GOOD direction/handling, APPLY_STRESSOR onset, and
+            CHANGE_RULING_POWER "how" — extracted to hold the line ratchet. */}
+        <EventComposerSecondaryFields
+          type={type}
+          tradeDirection={tradeDirection}
+          setTradeDirection={setTradeDirection}
+          tradeEntrepot={tradeEntrepot}
+          setTradeEntrepot={setTradeEntrepot}
+          derivedOnset={derivedOnset}
+          powerCause={powerCause}
+          setPowerCause={setPowerCause}
+          settlement={settlement}
+          target={target}
+        />
 
         {/* #1 war-stressor instigator + #6 trade-route campaign target — both
             optional, settlement-local relationship effects. */}
@@ -560,33 +586,6 @@ export default function EventComposer() {
             goals={npcGoals} setGoals={setNpcGoals} constraint={npcConstraint} setConstraint={setNpcConstraint}
             secret={npcSecret} setSecret={setNpcSecret} />
         )}
-
-        {/* KILL_NPC: importance is pulled from the chosen NPC and shown
-            read-only, so the DM sees the consequence tier before applying. */}
-        {type === 'KILL_NPC' && target && (() => {
-          const npc = (settlement.npcs || []).find(
-            n => String(n.id || n.name) === String(target),
-          );
-          if (!npc) return null;
-          const imp = npc.importance || inferImportance(npc);
-          return (
-            <Field label="Importance (from this NPC)" hint={
-              imp === 'pillar' ? 'Pillar. Death shakes the settlement.' :
-              imp === 'key'    ? 'Key. Meaningful effect on linked entity.' :
-              imp === 'notable'? 'Notable. Small modifier on linked entity.' :
-                                 'Minor. No engine effect.'
-            }>
-              <div style={{
-                padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180,
-                background: swatch['#FAF8F4'], fontWeight: 700,
-                textTransform: 'capitalize', display: 'flex', alignItems: 'center',
-              }}>
-                {imp}
-              </div>
-            </Field>
-          );
-        })()}
 
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && (() => {
           // ASSIGN into a known institution: roles come from that institution's
@@ -685,7 +684,9 @@ export default function EventComposer() {
       )}
 
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit}>
+        {/* Link creation is a structural change-queue order, not a previewable
+            event, so Preview is suppressed for it (Apply delegates to onLink). */}
+        <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit || isLinkNeighbour}>
           Preview
         </Button>
         {(() => {
@@ -721,7 +722,7 @@ export default function EventComposer() {
                 onClick={onApply}
                 disabled={!applyOk}
               >
-                {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
+                {isDestroy ? 'Destroy settlement' : isLinkNeighbour ? 'Link a neighbour' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
               </Button>
               {pendingPreview && (
                 <Button variant="secondary" size="sm" icon={<X size={11} />} onClick={() => { dismissPreview(); setDestroyConfirm(''); }}>
@@ -735,7 +736,7 @@ export default function EventComposer() {
           variant="gold"
           size="sm"
           onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); setInstigatorNeighbour(''); setTradeTarget(''); }}
-          disabled={!canSubmit}
+          disabled={!canSubmit || isLinkNeighbour}
         >
           + Add to batch
         </Button>

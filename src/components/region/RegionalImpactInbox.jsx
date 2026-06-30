@@ -106,6 +106,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
             const sourceName = context.nodeNames.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId;
             const color = statusColor(impact.status);
             const available = isRegionalImpactAvailable(impact);
+            const delayTicks = Math.max(0, impact.delayTicks || 0);
             return (
               <div
                 key={impact.id}
@@ -131,13 +132,20 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   </div>
                   <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, lineHeight: 1.35 }}>
                     {sourceName} · {goodsLabel(impact)} · {Math.round((impact.severity || 0) * 100)}%
+                    {impact.status === 'queued' && !available && delayTicks > 0 && (
+                      <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance the realm to apply)</span>
+                    )}
                   </div>
                 </div>
                 {impact.status === 'queued' && (
                   <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
                     <IconButton
                       Icon={Check}
-                      label={available ? 'Apply regional impact' : 'Impact is delayed'}
+                      label={available
+                        ? 'Apply regional impact'
+                        : delayTicks > 0
+                          ? `Delayed: matures in ${delayTicks} tick${delayTicks === 1 ? '' : 's'}; advance the realm to apply`
+                          : 'Impact is delayed'}
                       tone="primary"
                       disabled={!available}
                       onClick={() => handleApply(impact.id)}

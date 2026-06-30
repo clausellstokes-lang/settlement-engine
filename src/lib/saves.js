@@ -169,10 +169,20 @@ function migrateSettlementShape(entry) {
 // ── Supabase methods ────────────────────────────────────────────────────────
 
 async function supabaseList() {
-  const { data, error } = await supabase
-    .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
-    .order('updated_at', { ascending: false });
+  // Timeout-guard the library list, mirroring supabaseSave/supabaseMutateBatch.
+  // This is the only network await on the Library load path, and it was UNguarded:
+  // a stalled query (cold connection, dropped socket, auth-refresh hang) left
+  // savesLoading=true forever (no then/catch ever fired), so the Library/info
+  // spun indefinitely with no error and no recovery. On timeout it now rejects,
+  // the caller's .catch clears loading and surfaces the failure.
+  const { data, error } = await withTimeout(
+    supabase
+      .from('settlements')
+      .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+      .order('updated_at', { ascending: false }),
+    20000,
+    'Load library',
+  );
   if (error) throw error;
   return data.map(row => {
     const accessState = row.access_state || ACTIVE_SAVE_STATE;
@@ -191,6 +201,7 @@ async function supabaseList() {
     gallery_share_narrated: row.gallery_share_narrated || false,
     gallery_share_dm: row.gallery_share_dm || false,
     gallery_importable: row.gallery_importable || false,
+    gallery_member_overrides: row.gallery_member_overrides || {},
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
     gallery_description: row.gallery_description || '',

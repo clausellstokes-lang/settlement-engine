@@ -22,7 +22,8 @@ import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
-import { titleForView, guardForView, viewToPath } from './lib/routes.js';
+import { guardForView, viewToPath } from './lib/routes.js';
+import { applyDocumentHead } from './lib/seo.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
@@ -111,6 +112,7 @@ export default function App() {
   const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
 
   const authTier = useStore(s => s.auth.tier);
+  const requestCreateReset = useStore(s => s.requestCreateReset);
   const displayName = useStore(s => s.auth.displayName);
   const _authRole = useStore(s => s.auth.role);
   const authUserId = useStore(s => s.auth.user?.id || null);
@@ -255,9 +257,11 @@ export default function App() {
     }
   }, [view, legacy, notFound]);
 
-  // ── Document title ─────────────────────────────────────────────────────────
+  // ── Document head (title + description + canonical + OG + robots) ───────────
+  // Per-route refinement over the static index.html defaults. Compendium keeps
+  // its own per-tab head refinement on top of this base (see CompendiumPanel).
   useEffect(() => {
-    if (typeof document !== 'undefined') document.title = titleForView(view);
+    applyDocumentHead(view);
   }, [view]);
 
   // ── Cloud sync custom content when user enters premium / elevated state ───
@@ -307,6 +311,17 @@ export default function App() {
 
   // Gate premium-only views
   const handleNavClick = (id) => {
+    // Contextual re-click: clicking the ALREADY-ACTIVE nav tab resets that page to
+    // its first screen; navigating to it from ELSEWHERE preserves in-progress state
+    // (Create keeps its generated dossier, Library keeps its open detail). Create's
+    // first screen is wizard-local (generate-ask vs dossier), so we signal the
+    // wizard via a store nonce; Library's is a route (/settlements/:id → /settlements),
+    // so a plain re-navigation to the base path closes the open detail. Other tabs
+    // have no distinct sub-state to reset, so they fall through to a normal re-nav.
+    if (id === view) {
+      if (id === 'generate') { requestCreateReset(); return; }
+      if (id === 'settlements') { setView('settlements'); return; }
+    }
     setView(id);
     // The Realm nav. Free wanderers clicking Realm see a
     // Cartographer-upgrade pitch (cooldown 24h; premium auto-skipped). Anon are
@@ -410,7 +425,7 @@ export default function App() {
           }}>
             <Button
               variant="ghost"
-              onClick={() => setView('generate')}
+              onClick={() => setView('home')}
               aria-label="SettlementForge home"
               icon={<MapIcon size={18} color={GOLD} />}
               style={{
@@ -448,14 +463,15 @@ export default function App() {
                 aria-label restores the plain name for assistive tech, since the
                 per-letter spans would otherwise read as fragments. */}
             {/* The wordmark doubles as the home link (matches the mobile header's
-                brand button) — clicking it returns to Create. Rendered as a button
-                for keyboard + AT access; the h1 keeps the heading semantics with
-                its per-letter spans hidden from AT (the button's aria-label reads
+                brand button) — clicking it returns to the Welcome/home view (/home).
+                Rendered as a button for keyboard + AT access; the h1 keeps the
+                heading semantics with its per-letter spans hidden from AT (the
+                button's aria-label reads
                 the plain name). */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
               <button
                 type="button"
-                onClick={() => setView('generate')}
+                onClick={() => setView('home')}
                 aria-label="SettlementForge home"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >

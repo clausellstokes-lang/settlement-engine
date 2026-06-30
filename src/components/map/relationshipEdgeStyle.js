@@ -7,19 +7,28 @@
  * key), and RoutesToolbar (the Routes-mode filter chips). RoutesToolbar's copy had
  * DIVERGED — a user filtering "Trade" there saw a green chip while the map line and
  * legend showed teal. Centralizing here keeps the chip, the legend, and the drawn
- * line in lockstep for every relationship type. Values match the long-standing map
- * palette, so this is a dedupe, not a recolor.
+ * line in lockstep for every relationship type. The hues are now the muted
+ * parchment brand set (relationshipColors.js), reconciled from the old vivid map
+ * palette so the map agrees with the dossier and PDF.
  */
 
+import { relColor } from '../settlements/relationshipColors.js';
+
+// Edge COLORS derive from the canonical brand palette (relationshipColors.js) so
+// the map line, the dossier chip, and the PDF line share one muted parchment hue
+// per type. This module owns the edge METADATA (width/dash/priority/arrow) and the
+// type LIST. criminal_network was previously uncolored on the map (grey fallback)
+// despite being a real canonical relationship type — now covered.
 export const REL_EDGE_STYLE = Object.freeze({
-  trade_partner: { color: '#0f766e', width: 2,   dash: null,    priority: 2 },
-  allied:        { color: '#2563eb', width: 2.2, dash: null,    priority: 3 },
-  patron:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: true  },
-  client:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: false },
-  vassal:        { color: '#6d28d9', width: 2.3, dash: '8 3',   priority: 3, arrow: true  },
-  rival:         { color: '#ea580c', width: 1.8, dash: '2 3',   priority: 1 },
-  cold_war:      { color: '#b91c1c', width: 1.8, dash: '1 3',   priority: 1 },
-  hostile:       { color: '#991b1b', width: 3,   dash: null,    priority: 4 },
+  trade_partner:    { color: relColor('trade_partner'),    width: 2,   dash: null,  priority: 2 },
+  allied:           { color: relColor('allied'),           width: 2.2, dash: null,  priority: 3 },
+  patron:           { color: relColor('patron'),           width: 2,   dash: '6 3', priority: 2, arrow: true  },
+  client:           { color: relColor('client'),           width: 2,   dash: '6 3', priority: 2, arrow: false },
+  vassal:           { color: relColor('vassal'),           width: 2.3, dash: '8 3', priority: 3, arrow: true  },
+  rival:            { color: relColor('rival'),            width: 1.8, dash: '2 3', priority: 1 },
+  cold_war:         { color: relColor('cold_war'),         width: 1.8, dash: '1 3', priority: 1 },
+  hostile:          { color: relColor('hostile'),          width: 3,   dash: null,  priority: 4 },
+  criminal_network: { color: relColor('criminal_network'), width: 1.8, dash: '3 2', priority: 2 },
 });
 
 /** Edge color for a relationship type (falls back to a neutral grey). */
@@ -46,6 +55,7 @@ export const REL_TYPES = Object.freeze(
     { id: 'rival',         label: 'Rival' },
     { id: 'cold_war',      label: 'Cold war' },
     { id: 'hostile',       label: 'Hostile' },
+    { id: 'criminal_network', label: 'Criminal network' },
   ].map(t => Object.freeze({ ...t, color: relEdgeColor(t.id) })),
 );
 
@@ -57,8 +67,8 @@ export const REL_TYPES = Object.freeze(
  * Three files previously re-typed `#b91c1c` independently; this is the one home.
  */
 export const WAR_FAITH_STYLE = Object.freeze({
-  war_front:           { color: '#b91c1c', width: 3,   dash: null,  priority: 5, arrow: true },
-  religious_authority: { color: '#9333ea', width: 2.2, dash: '5 3', priority: 4, arrow: true },
+  war_front:           { color: relColor('hostile'), width: 3,   dash: null,  priority: 5, arrow: true },
+  religious_authority: { color: '#6a2a9a',           width: 2.2, dash: '5 3', priority: 4, arrow: true },
 });
 
 /** Channel color for a war/faith channel type (falls back to a neutral grey). */

@@ -163,6 +163,7 @@ export default function GalleryDetail({
               galleryShareNarrated={ownedSave.gallery_share_narrated}
               galleryShareDm={ownedSave.gallery_share_dm}
               galleryImportable={ownedSave.gallery_importable}
+              galleryMemberOverrides={ownedSave.gallery_member_overrides}
               // Re-fetch the dossier in place after a save so the public view
               // reflects the new narrated / DM-visibility choices — WITHOUT a full
               // page reload (which would land on a fresh gallery URL where saves
