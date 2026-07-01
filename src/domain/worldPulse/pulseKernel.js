@@ -177,6 +177,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return ids.size > 0 ? ids : null;
   };
+  // ── RESIDUE-STRIP REGISTRY (read before adding a simulation layer) ──────────
+  // The pause/resume + dismiss byte-equivalence invariant depends on a manual,
+  // repeated pattern: any layer that, while running, banks OUT-OF-BAND ledger/graph
+  // residue (a write NOT routed through the deferred-majors apply partition) MUST,
+  // for every suppressed major (residueSuppressionIds), strip that residue back out.
+  // The strip sites that currently exist — keep this list in sync when you add one:
+  //   1. war_mobilization → warPosture ramp + neighbour-signal channels   (~line 420)
+  //   2. strategy_deploy (siege initiation) → deployment seed + war_front  (~line 505)
+  //   3. conquest → occupation seed + conquest disposition ratchet         (~line 619)
+  //   4. occupation_vassalized → vassal promotion residue                  (~line 645)
+  // CONTRACT: a NEW layer that banks its own residue without adding a matching strip
+  // here will leave a phantom ledger on a paused/dismissed world and silently break
+  // the equivalence invariant (advanceCampaignWorldPause.test.js will only catch it
+  // if the test exercises that layer's major). There is no structural enforcement yet
+  // — a residue-registry abstraction is the right long-term refactor; until then this
+  // list IS the registry. All four strips are byte-neutral when nothing is suppressed.
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -564,7 +580,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       postTimeSnapshot = buildWorldSnapshot({ campaign: mintedCampaign, saves: postTimeSaves, worldState });
     }
     // Contextual returns read the POST-mint graph (so "is my home besieged?" is
-    // current) and the pre-tick snapshot for home state. Forked 'deployment-return'.
+    // current) and the pre-tick snapshot for home state.
+    // NOTE: this deliberately re-forks the SAME 'war-layer' label as evaluateWarLayer
+    // above, so the two share an identical PARENT stream. That is safe ONLY because
+    // neither draws from this parent directly — evaluateWarLayer re-forks on
+    // 'siege:<target>:<tick>' and deploymentReturnOutcomes re-forks on
+    // 'deployment-return', so the actual draws are independent. The label cannot be
+    // renamed to disambiguate (a fork label feeds the derived child seed, so changing
+    // it would alter sim output for every existing campaign + break the golden master).
+    // INVARIANT: if either layer is ever changed to draw from this fork directly, give
+    // this call site its own distinct label first, or the two will silently correlate.
     warReturnOutcomes = deploymentReturnOutcomes({
       resolvedDeployments: war.resolvedDeployments,
       snapshot: postTimeSnapshot,

@@ -59,7 +59,7 @@ const ROLE_BANDS = Object.freeze([
 // ARCANE_PATTERN + HEALING_PATTERN now imported (single canonical matchers).
 
 /**
- * @param {any} s
+ * @param {import('./settlement.schema.js').SimSettlement} s
  * @param {any} pattern
  * @returns {any}
  */
@@ -79,7 +79,7 @@ function institutionsByPattern(s, pattern) {
 
 /** The embedded major-deity snapshot, or null. ONLY a MAJOR god regulates a realm's
  *  magic — a minor god or fringe cult lacks the institutional reach.
- *  @param {any} settlement
+ *  @param {import('./settlement.schema.js').SimSettlement} settlement
  *  @returns {any} */
 function dominantDeityOf(settlement) {
   const deity = settlement?.config?.primaryDeitySnapshot;
@@ -105,7 +105,7 @@ export const DEITY_MAGIC_LEGALITY_STEPS = Object.freeze({ regulatory: 2, major: 
 // ── Derivers ─────────────────────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} contributors
  */
 function deriveAvailability(settlement, contributors) {
@@ -127,7 +127,7 @@ function deriveAvailability(settlement, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} profiles
  * @param {any} contributors
  */
@@ -177,7 +177,7 @@ function deriveLegality(settlement, profiles, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} profiles
  * @param {any} contributors
  */
@@ -209,7 +209,7 @@ function deriveInstitutionalControl(settlement, profiles, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} contributors
  */
 function deriveCost(settlement, contributors) {
@@ -222,7 +222,7 @@ function deriveCost(settlement, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any} contributors
  */
@@ -244,7 +244,7 @@ function deriveRisk(settlement, causal, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} profiles
  * @param {any} contributors
  */
@@ -296,7 +296,7 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} profiles
  * @param {any} contributors
  */
@@ -371,7 +371,7 @@ function downBand(bands, current, steps) {
 /**
  * Derive the structured MagicProfile for a settlement.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any} MagicProfile
  */
 export function deriveMagicProfile(settlement) {
@@ -425,7 +425,7 @@ export function magicRiskBands()         { return [...RISK_BANDS]; }
 export function magicRoleBands()         { return [...ROLE_BANDS]; }
 
 /** Human-readable summary.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeMagic(settlement) {
   const m = deriveMagicProfile(settlement);

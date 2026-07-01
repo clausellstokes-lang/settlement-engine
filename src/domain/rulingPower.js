@@ -55,7 +55,7 @@ function round2(value) {
   return Math.round(value * 100) / 100;
 }
 
-/** @param {any} faction */
+/** @param {import('./settlement.schema.js').SimFaction} faction */
 function nameOf(faction) {
   return String(faction?.faction || faction?.name || '').trim();
 }
@@ -182,7 +182,7 @@ function byWeightDescThenName(a, b) {
  * amplified weight must match or beat the weakest challenger; a thinner
  * field always admits the incumbent (the pool is the top 3 by definition).
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{ governing: Object|null,
  *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
  *            incumbent: { name:string|null, power:number, govMultiplier:number,

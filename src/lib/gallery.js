@@ -78,7 +78,26 @@ export async function fetchDossierForImport(slug) {
   if (error) throw new Error(error.message || 'Import fetch failed');
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) return null;
-  return { id: row.id, name: row.name, tier: row.tier, settlement: row.data };
+  return { id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) };
+}
+
+/**
+ * Client defense-in-depth for the import payload. The import_gallery_dossier RPC
+ * is server-gated and already sanitized, but every OTHER gallery read re-clamps
+ * client-side because RLS/raw writes mean the row can't be fully trusted — this
+ * path was the one exception. Strip only the keys that are NEVER legitimately
+ * shared (so this is non-lossy for an opted-in DM share's secrets/hooks/prose):
+ * the generation seed (the RPC contract promises it is absent) and the DM scratch
+ * notes that toPublicSafe drops even in owner-opted full mode (publicSafe.js).
+ */
+function stripImportConfidential(data) {
+  if (!data || typeof data !== 'object') return data;
+  const out = { ...data };
+  delete out.seed;           // contract: "never the generation seed"
+  delete out.dmNotes;        // truly-confidential DM scratch — dropped even in full mode
+  delete out.dossierNotes;
+  delete out.narrativeNotes;
+  return out;
 }
 
 /** Remove from the gallery. Slug is preserved server-side for re-share. */

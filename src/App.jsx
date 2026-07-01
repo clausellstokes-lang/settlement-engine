@@ -179,8 +179,9 @@ export default function App() {
           setTimeout(() => setCheckoutToast(null), 4000);
         }
       }
-      // Always fetch credit balance on mount
-      fetchCreditBalance().then(bal => setCreditBalance(bal));
+      // Always fetch credit balance on mount. `null` means "couldn't determine"
+      // (transient failure) — keep the last-known balance rather than flashing 0.
+      fetchCreditBalance().then(bal => { if (typeof bal === 'number') setCreditBalance(bal); });
     });
   }, [initAuth, initOnboarding, setCreditBalance]);
 
@@ -196,7 +197,7 @@ export default function App() {
   useEffect(() => {
     if (authLoading) return;
     import('./lib/stripe.js').then(({ fetchCreditBalance }) =>
-      fetchCreditBalance().then(bal => setCreditBalance(bal)));
+      fetchCreditBalance().then(bal => { if (typeof bal === 'number') setCreditBalance(bal); }));
   }, [authLoading, authUserId, setCreditBalance]);
 
   // ── Auth guards ─────────────────────────────────────────────────────────

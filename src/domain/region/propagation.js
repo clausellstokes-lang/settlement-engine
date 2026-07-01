@@ -746,7 +746,7 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
   };
 }
 
-/** @param {any} settlement @param {any} impactItem @param {any} [options] */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement @param {any} impactItem @param {any} [options] */
 export function applyRegionalImpact(settlement, impactItem, options = {}) {
   if (!settlement || !impactItem) return settlement;
   const condition = conditionFromRegionalImpact(impactItem, options);

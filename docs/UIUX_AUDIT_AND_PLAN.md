@@ -1,5 +1,7 @@
 # SettlementForge — Page-by-Page Audit + Overhaul Plan
 
+> **⚠️ HISTORICAL (audit + plan snapshot) — do NOT read as current state.** Much of this plan has since shipped on `master`. Code is the source of truth; see [docs/README.md](README.md) for the CANONICAL-vs-HISTORICAL index and the precedence rule (code > canonical > historical).
+
 > Every page/card answered against the [review checklist](UIUX_PRINCIPLES.md#per-page-review-checklist), with a concrete, principle-tied overhaul. Treat the app as a SYSTEM: the plan section below sequences the work foundation-first so pages stay cohesive. Audit reflects the BASE on-disk app (a prior structural pass is stashed; copy is being handled by the voice workstream).
 
 ## Overhaul plan (system-level)

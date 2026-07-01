@@ -351,8 +351,8 @@ function summariseViolations(violations) {
 /**
  * Run every check and return a violations report.
  *
- * @param {any} original  The settlement BEFORE the AI overlay.
- * @param {any} refined   The settlement AFTER the AI overlay.
+ * @param {import('./settlement.schema.js').SimSettlement} original  The settlement BEFORE the AI overlay.
+ * @param {import('./settlement.schema.js').SimSettlement} refined   The settlement AFTER the AI overlay.
  * @returns {{
  *   ok: boolean,
  *   violations: Array<{

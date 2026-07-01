@@ -215,7 +215,7 @@ function snapshotKeys(/** @type {any} */ source, /** @type {any} */ keys) {
  * are provenance-scrubable (the common case) — only the resource/trade-good
  * family needs a snapshot.
  *
- * @param {any} settlement  the BEFORE settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement  the BEFORE settlement
  * @param {any} event
  * @returns {any}
  */
@@ -243,7 +243,7 @@ function restoreKeys(/** @type {any} */ target, /** @type {any} */ snap) {
   return next;
 }
 
-function restoreSnapshottedRecords(/** @type {any} */ s, /** @type {any} */ snapshot) {
+function restoreSnapshottedRecords(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return s;
   let next = s;
   if (snapshot.config) {
@@ -320,7 +320,7 @@ function unEase(/** @type {any} */ condition, /** @type {any} */ strippedCauses)
  * condition, so undoing the second cannot restore the first's copy — the
  * crisis drops entirely. Same class as re-authoring a stressor then undoing.
  */
-function withoutEventConditions(/** @type {any} */ s, /** @type {any} */ eventId) {
+function withoutEventConditions(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
   const list = Array.isArray(s.activeConditions) ? s.activeConditions : [];
   if (!list.length) return s;
   let changed = false;
@@ -353,7 +353,7 @@ function withoutEventConditions(/** @type {any} */ s, /** @type {any} */ eventId
  * stressorEdits.added record brings the authored entry back on the next
  * regeneration.
  */
-function withoutEventStressEntries(/** @type {any} */ s, /** @type {any} */ eventId) {
+function withoutEventStressEntries(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
   let next = s;
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = next[key];
@@ -389,7 +389,7 @@ function scrubConfigAnnotations(/** @type {any} */ config, /** @type {any} */ ev
   return next;
 }
 
-function withoutEventAnnotations(/** @type {any} */ s, /** @type {any} */ eventId) {
+function withoutEventAnnotations(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
   let next = s;
   const config = scrubConfigAnnotations(s.config, eventId);
   if (config !== s.config) next = { ...next, config };
@@ -421,7 +421,7 @@ function withoutEventDestruction(/** @type {any} */ s, /** @type {any} */ eventI
  * survived its own undo. Re-add of a pre-existing entity (the idempotent
  * un-remove branch) carries no createdByEventId, so it is left intact.
  */
-function withoutEventCreations(/** @type {any} */ s, /** @type {any} */ eventId) {
+function withoutEventCreations(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
   let next = s;
   const dropCreated = (/** @type {any} */ arr) => arr.filter((/** @type {any} */ e) => e?.createdByEventId !== eventId);
   if (Array.isArray(next.npcs) && next.npcs.some((/** @type {any} */ n) => n?.createdByEventId === eventId)) {

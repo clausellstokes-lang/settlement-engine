@@ -192,6 +192,43 @@ function interpolate(str: string, vars: Record<string, unknown>): string {
   );
 }
 
+// Defense-in-depth for the anonymous cap_warning path, whose payload values are
+// caller-supplied and get interpolated into the rendered email. Coerce to a
+// string, strip CR/LF and other C0/C1 control characters (header-injection
+// defense – even though Resend's JSON API is not raw SMTP, we never want a
+// caller-controlled value to carry control bytes into a message), and cap the
+// length so a value can't bloat the fixed template.
+const MAX_PLACEHOLDER_LEN = 200;
+function sanitizePlaceholderValue(value: unknown): string {
+  // Replace every C0/C1 control char (incl. CR \x0d, LF \x0a, NUL \x00) and the
+  // DEL char with a single space, then cap the length. Hex escapes keep the
+  // source free of literal control bytes.
+  // deno-lint-ignore no-control-regex
+  const stripped = String(value ?? "").replace(/[\x00-\x1f\x7f-\x9f]/g, " ");
+  return stripped.slice(0, MAX_PLACEHOLDER_LEN);
+}
+
+// Sanitize every value in a caller-supplied payload (keys are template-fixed –
+// only declared {placeholders} are ever read by interpolate()).
+function sanitizePayload(
+  payload: Record<string, unknown>,
+): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(payload)) {
+    out[key] = sanitizePlaceholderValue(value);
+  }
+  return out;
+}
+
+// Plausible-email check for the caller-supplied recipient on the anonymous
+// path. Deliberately conservative (single @, non-empty local + dotted domain,
+// no whitespace/control chars) – a stricter gate than the prior ".includes('@')".
+function isPlausibleEmail(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  if (value.length > 254) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 async function sendViaResend(opts: {
   to: string;
   from: string;
@@ -294,7 +331,9 @@ serve(async (req) => {
     let displayName: string | null = null;
 
     if (ANON_OK_TEMPLATES.has(template)) {
-      if (typeof recipient !== "string" || !recipient.includes("@")) {
+      // Caller-supplied recipient: require a plausible single-address email
+      // (stricter than ".includes('@')") and reject control chars/whitespace.
+      if (!isPlausibleEmail(recipient)) {
         return new Response(
           JSON.stringify({ ok: false, reason: "bad_recipient" }),
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -363,7 +402,14 @@ serve(async (req) => {
     }
 
     // Render. Inject displayName from auth if not supplied.
-    const fullPayload = { displayName: displayName || "there", ...payload };
+    // For the anonymous path the payload values are caller-supplied, so they are
+    // sanitized (control chars stripped, length-capped, coerced to string)
+    // before interpolation. Authenticated paths trust the values they assemble
+    // from auth state, so their behavior is unchanged.
+    const safePayload = ANON_OK_TEMPLATES.has(template)
+      ? sanitizePayload(payload as Record<string, unknown>)
+      : payload;
+    const fullPayload = { displayName: displayName || "there", ...safePayload };
     const tmpl = TEMPLATES[template];
     const subject = interpolate(tmpl.subject, fullPayload);
     const text = interpolate(tmpl.text, fullPayload);

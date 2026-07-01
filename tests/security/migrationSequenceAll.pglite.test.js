@@ -45,6 +45,13 @@ describe('migration chain exists (guards against silent vacuous skip)', () => {
   });
 });
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('migration chain present (suite not vacuous)', () => {
+  expect(band.length).toBeGreaterThan(0);
+});
+
 describe.runIf(band.length > 0)('migration chain — sequence integrity', () => {
   it('the chain is numerically GAPLESS on disk (001→HEAD, each number exactly once)', () => {
     const numbers = band.map(f => Number(f.slice(0, 3)));

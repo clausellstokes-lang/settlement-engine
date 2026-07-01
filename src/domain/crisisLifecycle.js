@@ -449,8 +449,8 @@ export function crisisResolve({ settlement, event }) {
  * record follows (status easing + the world_pulse receipt survive
  * regeneration).
  *
- * @param {any} settlement   the origin settlement
- * @param {any} twin         the resolved roaming stressor record
+ * @param {import('./settlement.schema.js').SimSettlement} settlement   the origin settlement
+ * @param {import('./settlement.schema.js').SimStressor} twin         the resolved roaming stressor record
  * @returns {Object} new settlement (same reference when nothing matched)
  */
 export function resolveCrisisLocally(settlement, twin) {

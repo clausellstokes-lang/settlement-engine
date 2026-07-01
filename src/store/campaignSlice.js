@@ -259,6 +259,12 @@ export const createCampaignSlice = (set, get) => {
       state.campaigns = [];
       state.campaignsLoaded = false;
       state.activeCampaignId = null;
+      // Also clear the PERSISTED last-active pointer. clearCampaigns fires only on
+      // sign-out (clearAuth); leaving lastActiveCampaignId behind let a different
+      // user on a shared device inherit the prior account's campaign id. (Resume
+      // already re-validates it against the new user's campaigns, but clearing it
+      // removes the cross-account carryover entirely.)
+      state.lastActiveCampaignId = null;
       clearCampaignSyncBookkeeping();
     }),
 

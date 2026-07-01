@@ -83,7 +83,7 @@ const factionProfilesMemo = new WeakMap();
  * Memoized deriveAllActiveConditions, keyed on the settlement identity.
  * Byte-identical to calling deriveAllActiveConditions(s) directly — only the
  * repeated derivations within a single deriveCausalState call are collapsed.
- * @param {any} s
+ * @param {import('./settlement.schema.js').SimSettlement} s
  * @returns {any[]}
  */
 function cachedActiveConditions(s) {
@@ -98,7 +98,7 @@ function cachedActiveConditions(s) {
 /**
  * Memoized deriveAllFactionProfiles, keyed on the settlement identity.
  * Byte-identical to calling deriveAllFactionProfiles(s) directly.
- * @param {any} s
+ * @param {import('./settlement.schema.js').SimSettlement} s
  * @returns {any[]}
  */
 function cachedFactionProfiles(s) {
@@ -497,7 +497,7 @@ const PROSPERITY_BASE = Object.freeze({
   impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
   moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
 });
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveEconomicCapacity(s) {
   /** @type {any[]} */
   const contributors = [];
@@ -786,7 +786,7 @@ function deriveCriminalOpportunity(/** @type {any} */ s) {
 // settlement never reads any of this).
 export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveReligiousAuthority(s) {
   let score = 50;
   /** @type {any[]} */
@@ -1009,7 +1009,7 @@ function finalizeVariable(/** @type {any} */ name, /** @type {any} */ raw, /** @
  * about food security).
  *
  * @param {string} variable   One of SYSTEM_VARIABLES.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any}    SystemVariable, or null for unknown variable.
  */
 export function deriveSystemVariable(variable, settlement) {

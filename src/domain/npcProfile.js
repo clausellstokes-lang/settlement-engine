@@ -351,7 +351,7 @@ export function inferInstitutionName(npc, settlement) {
  * path, so the two stay consistent.
  *
  * @param {string} category  a faction/power domain (military/religious/economy/…)
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {string[]} matching institution display names (deduped, source order)
  */
 export function institutionsForCategory(category, settlement) {
@@ -442,8 +442,8 @@ export function institutionsForPower(faction, settlement) {
 }
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferInstitutionLink(npc, settlement) {
   const name = inferInstitutionName(npc, settlement);
@@ -457,8 +457,8 @@ function inferInstitutionLink(npc, settlement) {
 // follow-up — the data is there, but the surface needs careful UX.
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
@@ -496,10 +496,10 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {any} npc       The legacy NPC entry.
+ * @param {import('./settlement.schema.js').SimNpc} npc       The legacy NPC entry.
  * @param {any} [settlement] Optional context for institution-link +
  *                              relationship-triangle derivation.
- * @returns {Object|null}
+ * @returns {any}
  */
 export function deriveNpcProfile(npc, settlement) {
   if (!npc || typeof npc !== 'object') return null;
@@ -576,12 +576,12 @@ export function deriveNpcProfile(npc, settlement) {
 
 /**
  * Enrich every NPC on a settlement. Returns []. for missing data.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveAllNpcProfiles(settlement) {
   if (!settlement) return [];
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  return npcs.map(/** @param {any} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
+  return npcs.map(/** @param {import('./settlement.schema.js').SimNpc} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
@@ -589,7 +589,7 @@ export function deriveAllNpcProfiles(settlement) {
 /**
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function npcArchetypeBreakdown(settlement) {
   // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
@@ -610,7 +610,7 @@ export function npcArchetypeBreakdown(settlement) {
  * Forecast the cumulative impact of removing all 'dominant'-rank NPCs.
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function dominantNpcRemovalImpact(settlement) {
   const dominant = deriveAllNpcProfiles(settlement)

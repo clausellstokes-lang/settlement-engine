@@ -29,7 +29,7 @@ function textFor(resource) {
   ].filter(Boolean).join(' ').toLowerCase();
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function magicLevelScore(settlement = {}) {
   const level = String(settlement?.config?.magicLevel || settlement?.magicLevel || '').toLowerCase();
   if (level === 'pervasive') return 4;
@@ -86,7 +86,7 @@ export function classifyResource(resource) {
 
 /**
  * @param {any} resource
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} [context]
  */
 export function canRecoverResource(resource, settlement, context = {}) {

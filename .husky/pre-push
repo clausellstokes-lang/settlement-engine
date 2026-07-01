@@ -8,9 +8,13 @@
 npm run check
 
 # CI also runs two jobs that `npm run check` does NOT:
-#   - deno-tests : the edge-function execution tests (money-path signature
-#                  verification, refund decisions). Fast — run here when Deno
-#                  is installed so a broken edge function is caught pre-push.
+#   - deno-tests : the edge-function type-check + execution tests (money-path
+#                  signature verification, refund decisions). Run here via
+#                  check:edge-behavior (deno task check:edge + test:edge) when Deno
+#                  is installed, so a broken edge function is caught pre-push.
+#                  `npm run check` itself deliberately EXCLUDES this to stay in
+#                  lockstep with the CI `check` job (tests/build/ciCheckParity);
+#                  the edge behavioral coverage lives here + in CI's deno-tests job.
 #   - e2e        : Playwright Chromium + mobile-safari. Deliberately NOT run
 #                  on every push (needs `npx playwright install` browsers + a
 #                  dev server, ~minutes). Run it manually before risky UI
@@ -19,9 +23,4 @@ npm run check
 # So `npm run check` is a SUBSET of CI. With production deploying independently
 # of CI today (see docs/DEPLOY.md "Gating production on CI"), do not rely on a
 # green local `check` alone — let this hook finish and watch the Actions tab.
-if command -v deno >/dev/null 2>&1; then
-  deno task test:edge
-else
-  echo "pre-push: deno not installed — SKIPPING edge-function execution tests."
-  echo "          CI's deno-tests job still runs them. Install: https://deno.land"
-fi
+npm run check:edge-behavior

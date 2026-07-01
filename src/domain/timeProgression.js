@@ -98,7 +98,7 @@ function applyLegitimacyDelta(legitimacy, delta) {
 // report. Once completed, a clock holds at stage 6 until the trigger
 // resolves.
 
-/** @param {any} settlement @param {any} previousState */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement @param {any} previousState */
 function advanceClocks(settlement, previousState) {
   // Re-derive the current clock set from the settlement. Any clock no
   // longer triggered (e.g. supply chain recovered) drops off.

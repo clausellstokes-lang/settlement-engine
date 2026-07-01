@@ -2343,136 +2343,172 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   appendTradeAndCriminalIncome(incomeBuild, { v, ecoStressFlags, safetyProfile });
   // Stage 3a — resource-trade income, applied only when trade routes exist.
   const appendResourceTradeIncome = () => {
-    // Resource trade income — only when trade routes exist
-    const ee = (v.localProduction || []).map(function (K) {
-        return (typeof K == 'string' ? K : K.name || '').toLowerCase();
-      }),
-      E = (v.exports || []).map(function (K) {
-        return (typeof K == 'object' ? K.product || K.chain || '' : K || '').toLowerCase();
-      }),
-      _ = function (K) {
-        return institutions.some(function (V) {
-          return (V.name || '').toLowerCase().includes(K);
+    // Resource trade income — only when trade routes exist.
+    // Lowercased names of locally produced goods.
+    const localProductionNames = (v.localProduction || []).map(function (item) {
+      return (typeof item == 'string' ? item : item.name || '').toLowerCase();
+    });
+    // Lowercased names of exported products / chains.
+    const exportProductNames = (v.exports || []).map(function (item) {
+      return (typeof item == 'object' ? item.product || item.chain || '' : item || '').toLowerCase();
+    });
+    // True if any institution name contains the given substring.
+    const hasInstitutionMatching = function (needle) {
+      return institutions.some(function (inst) {
+        return (inst.name || '').toLowerCase().includes(needle);
+      });
+    };
+    // True if an income source whose name contains the needle is already present.
+    const incomeSourceExists = function (needle) {
+      return incomeBuild.some(function (source) {
+        return (source.source || '').toLowerCase().includes(needle.toLowerCase());
+      });
+    };
+    const nearbyResources = config.nearbyResources || [];
+    // True if any nearby-resource entry includes any of the given substrings.
+    const hasNearbyResource = function (...needles) {
+      return nearbyResources.some(function (resource) {
+        return needles.some(function (needle) {
+          return resource.includes(needle);
         });
-      },
-      O = function (K) {
-        return incomeBuild.some(function (V) {
-          return (V.source || '').toLowerCase().includes(K.toLowerCase());
-        });
-      },
-      F = config.nearbyResources || [],
-      X = function () {
-        var K = [].slice.call(arguments);
-        return F.some(function (V) {
-          return K.some(function (de) {
-            return V.includes(de);
-          });
-        });
-      };
+      });
+    };
+
+    // Grain — local cereal production or grain/cereal exports, not already noted.
+    const producesGrain =
+      localProductionNames.some(function (name) {
+        return name.includes('grain') || name.includes('wheat') || name.includes('rye') || name.includes('barley');
+      }) ||
+      exportProductNames.some(function (name) {
+        return name.includes('grain') || name.includes('cereal');
+      });
+    if (producesGrain && !incomeSourceExists('grain') && !incomeSourceExists('agricultural')) {
+      incomeBuild.push({
+        source: 'Grain Sales',
+        percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
+        desc: hasNearbyResource('grain_field', 'fertile_flood')
+          ? 'Surplus from local harvest sold to nearby settlements and passing merchants. Steady income tied to the growing season.'
+          : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
+      });
+    }
+
+    // Wool & textile — cloth-related production/exports plus a textile institution.
+    const producesTextiles =
+      localProductionNames.some(function (name) {
+        return name.includes('wool') || name.includes('fleece') || name.includes('cloth') || name.includes('textile');
+      }) ||
+      exportProductNames.some(function (name) {
+        return name.includes('wool') || name.includes('textile') || name.includes('cloth');
+      });
+    const hasTextileInstitution =
+      hasInstitutionMatching('weav') || hasInstitutionMatching('fuller') || hasInstitutionMatching('cloth');
     if (
-      ((ee.some(function (K) {
-        return K.includes('grain') || K.includes('wheat') || K.includes('rye') || K.includes('barley');
-      }) ||
-        E.some(function (K) {
-          return K.includes('grain') || K.includes('cereal');
-        })) &&
-        !O('grain') &&
-        !O('agricultural') &&
-        incomeBuild.push({
-          source: 'Grain Sales',
-          percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
-          desc: X('grain_field', 'fertile_flood')
-            ? 'Surplus from local harvest sold to nearby settlements and passing merchants. Steady income tied to the growing season.'
-            : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
-        }),
-      (ee.some(function (K) {
-        return K.includes('wool') || K.includes('fleece') || K.includes('cloth') || K.includes('textile');
-      }) ||
-        E.some(function (K) {
-          return K.includes('wool') || K.includes('textile') || K.includes('cloth');
-        })) &&
-        (_('weav') || _('fuller') || _('cloth')) &&
-        !O('wool') &&
-        !O('textile') &&
-        incomeBuild.push({
-          source: 'Wool & Textile Trade',
-          percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
-          desc: X('grazing_land')
-            ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-            : 'Wool bought from pastoral regions and processed locally. Value-add trade dependent on consistent supply.',
-        }),
-      (X('iron_deposit', 'coal_deposit', 'precious_metal') ||
-        ((ee.some(function (K) {
-          return K.includes('iron') || K.includes('ore');
-        }) ||
-          E.some(function (K) {
-            return K.includes('iron') || K.includes('ore');
-          })) &&
-          _('smith'))) &&
-        !O('iron') &&
-        !O('metal') &&
-        incomeBuild.push({
-          source: 'Iron & Metalwork',
-          percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
-          desc: X('iron_deposit', 'coal_deposit', 'precious_metal')
-            ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
-            : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
-        }),
-      X('managed_forest', 'forest_access', 'timber_rights') &&
-        !O('timber') &&
-        !O('lumber') &&
-        incomeBuild.push({
-          source: 'Timber Trade',
-          percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
-          desc: X('managed_forest', 'shipbuilding_timber', 'hunting_ground')
-            ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-            : 'Timber sourced from more distant forests and resold or processed locally. Trade route dependent.',
-        }),
-      (ee.some(function (K) {
-        return K.includes('fish') || K.includes('herring') || K.includes('cod') || K.includes('salt');
-      }) ||
-        E.some(function (K) {
-          return K.includes('fish') || K.includes('herring');
-        })) &&
-        !O('fish') &&
-        !O('maritime') &&
-        incomeBuild.push({
-          source: 'Fish & Maritime Produce',
-          percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 8)),
-          desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
-        }),
-      (ee.some(function (K) {
-        return K.includes('stone') || K.includes('granite') || K.includes('marble') || K.includes('limestone');
-      }) ||
-        E.some(function (K) {
-          return K.includes('stone') || K.includes('quarry');
-        })) &&
-        !O('stone') &&
-        !O('quarry') &&
-        incomeBuild.push({
-          source: 'Stone Quarrying',
-          percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
-          desc: X('stone_quarry', 'gemstone')
-            ? 'Local quarry provides dressed stone to regional builders. Reliable income with low transport overhead.'
-            : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
-        }),
-      goodsToggles && Object.keys(goodsToggles).length > 0)
+      producesTextiles &&
+      hasTextileInstitution &&
+      !incomeSourceExists('wool') &&
+      !incomeSourceExists('textile')
     ) {
-      const K = /_good_(.+)$/;
-      Object.entries(goodsToggles).forEach(function (V) {
-        const de = V[0].match(K);
-        if (!de || !V[1].force) return;
-        const fe = de[1];
-        !O(fe) &&
-          !incomeBuild.some(function (ge) {
-            return (ge.source || '').toLowerCase().includes(fe.toLowerCase());
-          }) &&
+      incomeBuild.push({
+        source: 'Wool & Textile Trade',
+        percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
+        desc: hasNearbyResource('grazing_land')
+          ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
+          : 'Wool bought from pastoral regions and processed locally. Value-add trade dependent on consistent supply.',
+      });
+    }
+
+    // Iron & metalwork — nearby ore/metal deposits, or iron production/exports
+    // backed by a smithy.
+    const producesIron =
+      localProductionNames.some(function (name) {
+        return name.includes('iron') || name.includes('ore');
+      }) ||
+      exportProductNames.some(function (name) {
+        return name.includes('iron') || name.includes('ore');
+      });
+    const hasMetalSource =
+      hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal') ||
+      (producesIron && hasInstitutionMatching('smith'));
+    if (hasMetalSource && !incomeSourceExists('iron') && !incomeSourceExists('metal')) {
+      incomeBuild.push({
+        source: 'Iron & Metalwork',
+        percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
+        desc: hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal')
+          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
+          : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+      });
+    }
+
+    // Timber — nearby forest/timber rights, not already noted.
+    if (
+      hasNearbyResource('managed_forest', 'forest_access', 'timber_rights') &&
+      !incomeSourceExists('timber') &&
+      !incomeSourceExists('lumber')
+    ) {
+      incomeBuild.push({
+        source: 'Timber Trade',
+        percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
+        desc: hasNearbyResource('managed_forest', 'shipbuilding_timber', 'hunting_ground')
+          ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
+          : 'Timber sourced from more distant forests and resold or processed locally. Trade route dependent.',
+      });
+    }
+
+    // Fish & maritime — fish/salt production or fish exports, not already noted.
+    const producesFish =
+      localProductionNames.some(function (name) {
+        return name.includes('fish') || name.includes('herring') || name.includes('cod') || name.includes('salt');
+      }) ||
+      exportProductNames.some(function (name) {
+        return name.includes('fish') || name.includes('herring');
+      });
+    if (producesFish && !incomeSourceExists('fish') && !incomeSourceExists('maritime')) {
+      incomeBuild.push({
+        source: 'Fish & Maritime Produce',
+        percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 8)),
+        desc: 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.',
+      });
+    }
+
+    // Stone — stone/quarry production or exports, not already noted.
+    const producesStone =
+      localProductionNames.some(function (name) {
+        return name.includes('stone') || name.includes('granite') || name.includes('marble') || name.includes('limestone');
+      }) ||
+      exportProductNames.some(function (name) {
+        return name.includes('stone') || name.includes('quarry');
+      });
+    if (producesStone && !incomeSourceExists('stone') && !incomeSourceExists('quarry')) {
+      incomeBuild.push({
+        source: 'Stone Quarrying',
+        percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
+        desc: hasNearbyResource('stone_quarry', 'gemstone')
+          ? 'Local quarry provides dressed stone to regional builders. Reliable income with low transport overhead.'
+          : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+      });
+    }
+
+    // Operator-forced goods toggles — add a trade line for each forced good
+    // that isn't already represented.
+    if (goodsToggles && Object.keys(goodsToggles).length > 0) {
+      const goodKeyPattern = /_good_(.+)$/;
+      Object.entries(goodsToggles).forEach(function (entry) {
+        const match = entry[0].match(goodKeyPattern);
+        if (!match || !entry[1].force) return;
+        const goodName = match[1];
+        const alreadyPresent =
+          incomeSourceExists(goodName) ||
+          incomeBuild.some(function (source) {
+            return (source.source || '').toLowerCase().includes(goodName.toLowerCase());
+          });
+        if (!alreadyPresent) {
           incomeBuild.push({
-            source: fe + ' Trade',
+            source: goodName + ' Trade',
             percentage: Math.max(5, Math.round(ecoInstFlags.economyOutput / 12)),
             desc:
-              'Revenue from locally produced ' + fe.toLowerCase() + ' sold to merchants and neighboring settlements.',
+              'Revenue from locally produced ' + goodName.toLowerCase() + ' sold to merchants and neighboring settlements.',
           });
+        }
       });
     }
   };

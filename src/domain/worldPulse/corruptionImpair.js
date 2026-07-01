@@ -31,7 +31,7 @@ function matchByName(arr, name) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} inst
  * @param {any} impairment
  */
@@ -45,7 +45,7 @@ function impairInstitution(settlement, inst, impairment) {
 
 /**
  * @param {any} settlement
- * @param {any} fac
+ * @param {import('../settlement.schema.js').SimFaction} fac
  * @param {any} impairment
  * @param {any} inPower
  */
@@ -63,7 +63,7 @@ function impairFaction(settlement, fac, impairment, inPower) {
 
 /** Impair the named entity — an institution if one matches, else a faction. No-op
  *  when nothing matches (a corrupt NPC's home may not be a tracked institution).
- *  @param {any} settlement
+ *  @param {import('../settlement.schema.js').SimSettlement} settlement
  *  @param {any} name
  *  @param {any} impairment
  */
@@ -136,13 +136,13 @@ export function reformChance({ security = 0.4, prosperity = 0.4 } = {}) {
   return Math.max(REFORM_TUNING.min, Math.min(REFORM_TUNING.max, p));
 }
 
-/** @param {any} inst */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function hasCorruptionImpairment(inst) {
   return (inst?.impairments || []).some((/** @type {any} */ i) => i?.type === 'corruption');
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} instName
  */
 function harborsCorruptInsider(settlement, instName) {
@@ -155,7 +155,7 @@ function harborsCorruptInsider(settlement, instName) {
   return false;
 }
 
-/** @param {any} inst */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function withoutCorruptionImpairments(inst) {
   const filtered = (inst.impairments || []).filter((/** @type {any} */ i) => i?.type !== 'corruption');
   const status = filtered.length === 0 && inst.status === 'impaired' ? 'active' : inst.status;
@@ -166,7 +166,7 @@ function withoutCorruptionImpairments(inst) {
  * Roll reform for every corruption-impaired institution in a settlement.
  * Deterministic via the threaded rng (fork per institution name).
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{fork: (key: string) => {random: () => number}}} rng
  * @returns {{settlement: object, reformed: Array<{name: string}>}}
  */

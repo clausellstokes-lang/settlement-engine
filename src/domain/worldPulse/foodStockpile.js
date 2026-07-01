@@ -109,7 +109,7 @@ const TRANSPORT_DOWN_STATUSES = new Set(['removed', 'destroyed', 'remnant']);
 const transportIsDown = (/** @type {any} */ inst) =>
   TRANSPORT_DOWN_STATUSES.has(inst?.status) || inst?._worldPulseInactive === true;
 
-/** @param {any} inst */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function transportChannelOf(inst) {
   const n = String(inst?.name || '').toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
@@ -119,7 +119,7 @@ function transportChannelOf(inst) {
 
 /** The magical import channel that can run a blockade, or null. Live-first;
  *  see the block comment above for the verdict-fallback contract.
- *  @param {any} settlement */
+ *  @param {import('../settlement.schema.js').SimSettlement} settlement */
 export function resolveBlockadeBypassChannel(settlement) {
   if (settlement?.config?.magicExists === false) return null;
   let sawTransportSignal = false;
@@ -161,7 +161,7 @@ function resilienceStorageComponent(months) {
  * Storage capacity in months, mirroring the generator's granary tier table
  * (foodGenerator baseStorage) so play-time refills can't exceed what the
  * infrastructure could ever have held.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function storageCapacityMonths(settlement) {
   const names = (settlement?.institutions || []).map((/** @type {any} */ i) => String(i?.name || '').toLowerCase());

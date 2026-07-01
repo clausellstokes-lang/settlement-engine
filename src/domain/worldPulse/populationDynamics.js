@@ -351,7 +351,7 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  * @param {any} saveId
  */

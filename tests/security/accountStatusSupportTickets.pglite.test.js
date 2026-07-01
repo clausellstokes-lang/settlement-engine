@@ -166,6 +166,13 @@ async function buildDb({ with060 }) {
   return db;
 }
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('account-status support-ticket gate — executed against 050/051/055/057/060 (pglite)', () => {
   let db;
   beforeAll(async () => { db = await buildDb({ with060: true }); });

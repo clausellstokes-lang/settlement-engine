@@ -91,6 +91,13 @@ async function createTicket(actor, subject, message) {
   return rows[0].t.id;
 }
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('A5 support tickets — executed against 050/051/055 (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

@@ -90,7 +90,7 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {string} type
  * @param {string} id
  * @param {string} action
@@ -263,7 +263,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];

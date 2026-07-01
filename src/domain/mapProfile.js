@@ -44,7 +44,7 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 
 // ── Input envelope ───────────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
@@ -61,7 +61,7 @@ function deriveInputs(settlement) {
 // ── Output: roadImportance ──────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
@@ -87,7 +87,7 @@ function deriveRoadImportance(settlement, causal, contributors) {
 // ── Output: defensiveTerrain ────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
@@ -118,7 +118,7 @@ function deriveDefensiveTerrain(settlement, causal, contributors) {
 // ── Output: regionalAuthority ───────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} contributors
  */
 function deriveRegionalAuthority(settlement, contributors) {
@@ -150,7 +150,7 @@ function deriveRegionalAuthority(settlement, contributors) {
 // ── Output: hazardMarkers ───────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} contributors
  */
 function deriveHazardMarkers(settlement, contributors) {
@@ -181,7 +181,7 @@ function deriveHazardMarkers(settlement, contributors) {
 // ── Output: suggestedFeatures ───────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
@@ -254,7 +254,7 @@ export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; 
 
 /**
  * Human-readable summary.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeMap(settlement) {
   /** @type {any} */

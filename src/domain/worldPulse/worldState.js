@@ -48,6 +48,21 @@ function cloneArray(value) {
   return Array.isArray(value) ? value.map((/** @type {any} */ item) => ({ ...item })) : [];
 }
 
+// Stressors are special: each item carries NESTED mutable structures
+// (affectedSettlementIds, severityBySettlement, causes). A shallow `{...item}`
+// (cloneArray) would alias those nested arrays/objects into the per-tick snapshot,
+// so any future in-place mutation of one (push/splice/index-assign, instead of the
+// normalizeStressor rebuild every current writer uses) would corrupt the persisted
+// pre-tick record and break determinism. Deep-clone each stressor through the
+// sanctioned seam so the snapshot can never alias live nested state. The cloned
+// values are deeply EQUAL to the source, so the dormancy / byte-identity invariants
+// are unaffected — this only removes the aliasing fragility the shallow clone relied
+// on an unenforced "writers always rebuild" convention to stay safe.
+/** @param {any} value */
+function cloneStressors(value) {
+  return Array.isArray(value) ? value.map((/** @type {any} */ item) => deepClone(item)) : [];
+}
+
 /** @param {any} value */
 function cloneObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? { ...value } : {};
@@ -208,7 +223,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     rngSeed: raw?.rngSeed || base.rngSeed,
     volatility: ['calm', 'normal', 'turbulent'].includes(raw?.volatility) ? raw.volatility : base.volatility,
     simulationRules: normalizeSimulationRules(raw?.simulationRules),
-    stressors: cloneArray(raw?.stressors),
+    stressors: cloneStressors(raw?.stressors),
     relationshipStates: cloneObject(raw?.relationshipStates),
     npcStates: cloneObject(raw?.npcStates),
     factionStates: cloneObject(raw?.factionStates),

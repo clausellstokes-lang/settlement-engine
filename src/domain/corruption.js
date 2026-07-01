@@ -65,7 +65,7 @@ export function corruptionVectorForFlaw(flaw) {
  *  flaw. Since trait generation now makes flaw genuinely optional, a temperament
  *  must never masquerade as a corruptible flaw, or a temperament-only NPC would be
  *  (mis)read as corruptible and turned by the sim, breaking the no-flaw rule.
- *  @param {any} npc @returns {string|null} */
+ *  @param {import('./settlement.schema.js').SimNpc} npc @returns {string|null} */
 export function npcCorruptibleFlaw(npc) {
   const candidates = [npc?.personality?.flaw, npc?.flaw];
   for (const c of candidates) {
@@ -77,7 +77,7 @@ export function npcCorruptibleFlaw(npc) {
 /** True when the NPC carries a steady TEMPERAMENT (the personality.dominant
  *  slot). A temperament makes the NPC harder for the world-pulse sim to turn (it
  *  does NOT, on its own, make them corruptible — that requires a flaw).
- *  @param {any} npc @returns {boolean} */
+ *  @param {import('./settlement.schema.js').SimNpc} npc @returns {boolean} */
 export function npcHasTemperament(npc) {
   return Boolean(npc?.personality?.dominant);
 }
@@ -90,7 +90,7 @@ export function npcHasTemperament(npc) {
  *                                       (a real, strictly-lower-but-positive chance)
  *  This governs ONLY the background sim. The manual "Impose corruption" DM
  *  override (mutate.js imposeCorruption) does NOT consult this — it turns any NPC.
- *  @param {any} npc @returns {number} a factor in [0, 1] */
+ *  @param {import('./settlement.schema.js').SimNpc} npc @returns {number} a factor in [0, 1] */
 export function corruptibility(npc) {
   if (!npcCorruptibleFlaw(npc)) return 0;
   return npcHasTemperament(npc) ? CORRUPTION_TUNING.temperamentSteadiness : 1;
@@ -141,7 +141,7 @@ export const DEITY_CORRUPTION_TUNING = Object.freeze({
 /** Lowercased authored personality descriptor strings for an NPC: reads the
  *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
  *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
- * @param {any} npc @returns {string[]} */
+ * @param {import('./settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredAlignmentTraits(npc = {}) {
   const p = npc?.personality;
   if (!p) return [];
@@ -153,7 +153,7 @@ function authoredAlignmentTraits(npc = {}) {
 /** Signed good↔evil conscience score for an NPC's AUTHORED personality (Σ of
  *  TRAIT_ALIGNMENT weights, clamped to [-1, 1]). + is good-leaning, − is
  *  evil-leaning. Absent personality ⇒ 0 (neutral, no signal).
- * @param {any} npc @returns {number} */
+ * @param {import('./settlement.schema.js').SimNpc} npc @returns {number} */
 export function npcAlignmentScore(npc) {
   let score = 0;
   for (const trait of authoredAlignmentTraits(npc)) {
@@ -222,13 +222,13 @@ export function deityCorruptionTolerance(deity) {
  *  is the per-settlement form of the activation gate: the caller still gates
  *  on religionDynamicsEnabled + isSubsystemActive, but the per-settlement deity
  *  presence is what relaxes the onset gate for THAT settlement.
- * @param {any} settlement @returns {boolean} */
+ * @param {import('./settlement.schema.js').SimSettlement} settlement @returns {boolean} */
 export function hasCorruptingDeity(settlement) {
   return deityAlignmentDirection(settlement?.config?.primaryDeitySnapshot) < 0;
 }
 
 /** True iff the settlement carries an embedded GOOD-aligned primary deity.
- * @param {any} settlement @returns {boolean} */
+ * @param {import('./settlement.schema.js').SimSettlement} settlement @returns {boolean} */
 export function hasRepressingDeity(settlement) {
   return deityAlignmentDirection(settlement?.config?.primaryDeitySnapshot) > 0;
 }
@@ -255,7 +255,7 @@ export function hasRepressingDeity(settlement) {
  * death-spiral the substrate.
  *
  * @param {any} deity - an embedded primaryDeitySnapshot (or null)
- * @param {any} npc - the NPC record (reads AUTHORED personality only)
+ * @param {import('./settlement.schema.js').SimNpc} npc - the NPC record (reads AUTHORED personality only)
  * @returns {{ onset: number, exposure: number }} centered-on-1.0 multipliers
  */
 export function npcDeityDisfavor(deity, npc) {
@@ -472,7 +472,7 @@ function prosperityScore(value) {
   return 0.4; // unknown → middling
 }
 
-/** @param {any} inst */
+/** @param {import('./settlement.schema.js').SimInstitution} inst */
 function isCriminalInstitution(inst) {
   if (!inst) return false;
   // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
@@ -483,7 +483,7 @@ function isCriminalInstitution(inst) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{crime:number, security:number, prosperity:number, hasCriminalInst:boolean, criminalInstitutions:string[]}}
  */
 export function readCorruptionClimate(settlement) {
@@ -542,7 +542,7 @@ function nameMatches(a, b) {
 }
 
 /** The home-institution fields the exposure path reads, in the same order.
- *  @param {any} npc */
+ *  @param {import('./settlement.schema.js').SimNpc} npc */
 export function npcHomeInstitution(npc) {
   return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
 }
@@ -555,7 +555,7 @@ export function npcHomeInstitution(npc) {
  *              made it public); drags onset security AND raises the exposure
  *              visibility of anyone still corrupt inside it.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{covert: string[], revealed: string[]}}
  */
 export function compromisedSecurityInstitutions(settlement) {
@@ -594,7 +594,7 @@ export function compromisedSecurityInstitutions(settlement) {
  * effective security (covert + revealed both count: a bought watch shields
  * recruits whether or not the town knows it's bought).
  *
- * @param {object} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{drag: number, covert: string[], revealed: string[]}}
  */
 export function patronageSecurityDrag(settlement) {

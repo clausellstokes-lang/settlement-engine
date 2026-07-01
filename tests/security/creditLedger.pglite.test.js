@@ -98,6 +98,13 @@ const grant = (uid, amount, { source = 'purchase', expiresAt = null } = {}) =>
     [uid, amount, source, expiresAt],
   );
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

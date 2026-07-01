@@ -221,7 +221,7 @@ export function validateBatch(settlement, events = []) {
  * can run a single reactive generator rerun.
  *
  * @param {Object} args
- * @param {any} args.settlement
+ * @param {import('../settlement.schema.js').SimSettlement} args.settlement
  * @param {any} [args.systemState] before-state (derived if omitted)
  * @param {Event[]} [args.events]
  * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
@@ -326,7 +326,7 @@ function applyAuthoredStateDeltas(state, deltas) {
 /** @param {any} x */
 function lc(x) { return String(x || '').trim().toLowerCase(); }
 
-/** @param {any} s */
+/** @param {import('../settlement.schema.js').SimSettlement} s */
 function initNamespace(s) {
   const ns = {
     institution: new Set(),

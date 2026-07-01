@@ -13,7 +13,7 @@ const factionIdOf = (/** @type {any} */ f) => f?.id || f?.faction || f?.name || 
 const eventTime = (/** @type {any} */ event) => event.timestamp || event.createdAt;
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} target
  */
 function findInstitution(s, target) {
@@ -27,7 +27,7 @@ function findInstitution(s, target) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} target
  */
 function findFaction(s, target) {
@@ -45,7 +45,7 @@ function findFaction(s, target) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} target
  */
 function findNpc(s, target) {
@@ -59,9 +59,9 @@ function findNpc(s, target) {
 }
 
 /**
- * @param {any} s
- * @param {any} oldInst
- * @param {any} newInst
+ * @param {import('../settlement.schema.js').SimSettlement} s
+ * @param {import('../settlement.schema.js').SimInstitution} oldInst
+ * @param {import('../settlement.schema.js').SimInstitution} newInst
  */
 function replaceInstitution(s, oldInst, newInst) {
   const list = s.institutions || [];
@@ -71,9 +71,9 @@ function replaceInstitution(s, oldInst, newInst) {
 }
 
 /**
- * @param {any} s
- * @param {any} oldF
- * @param {any} newF
+ * @param {import('../settlement.schema.js').SimSettlement} s
+ * @param {import('../settlement.schema.js').SimFaction} oldF
+ * @param {import('../settlement.schema.js').SimFaction} newF
  */
 function replaceFaction(s, oldF, newF) {
   // Factions can live in two places — settlement.factions or
@@ -101,9 +101,9 @@ function replaceFaction(s, oldF, newF) {
 }
 
 /**
- * @param {any} s
- * @param {any} oldN
- * @param {any} newN
+ * @param {import('../settlement.schema.js').SimSettlement} s
+ * @param {import('../settlement.schema.js').SimNpc} oldN
+ * @param {import('../settlement.schema.js').SimNpc} newN
  */
 function replaceNpc(s, oldN, newN) {
   const list = s.npcs || [];

@@ -172,7 +172,10 @@ export default function MapOverlay({ bridge, transformOut }) {
       window.removeEventListener('pointerup', onUp);
       el.removeEventListener('wheel', onWheel);
     };
-  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height]);
+    // `transformOut` is a stable useRef container threaded from WorldMap; its
+    // identity never changes across renders, so listing it here satisfies
+    // exhaustive-deps without ever re-running this pan/zoom effect on render.
+  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height, transformOut]);
 
   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the

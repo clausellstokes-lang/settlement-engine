@@ -61,6 +61,13 @@ import { saves as savesService }    from '../lib/saves.js';
 export function mergePersistedState(persisted, current) {
   const c = /** @type {any} */ (current) || {};
   const p = /** @type {any} */ (persisted) || {};
+  // config / userPrefs / productPrefs are DEEP-overlaid onto their current defaults
+  // (a key added to the default after the user last persisted reads its default,
+  // not undefined). Other persisted bags (goodsToggles / servicesToggles) fall
+  // through the top-level `...p` spread and WHOLESALE-replace their slice default —
+  // fine today because those defaults are `{}` (nothing to lose). If either ever
+  // gains a non-empty default, add it to the deep-overlay list below, or a persisted
+  // bag will shadow the new default keys.
   return {
     ...c,
     ...p,

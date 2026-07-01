@@ -213,9 +213,9 @@ const OCCUPATION_DISARM = 0.3;
 const OCCUPATION_GOVERNING_CUT = 0.6;
 const OCCUPATION_CIVIC_CUT = 0.82;
 
-/** @param {any} f */
+/** @param {import('../settlement.schema.js').SimFaction} f */
 const factionNameOf = (f) => String(f?.faction || f?.name || '').trim();
-/** @param {any} f */
+/** @param {import('../settlement.schema.js').SimFaction} f */
 const isMilitaryFaction = (f) => {
   const cat = String(f?.category || f?.archetype || '').toLowerCase();
   const nm = factionNameOf(f).toLowerCase();

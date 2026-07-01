@@ -38,7 +38,7 @@ import { detectContradictions } from './contradictions.js';
 import { entityCatalog } from './explanation.js';
 import { canonBreakdown } from './canonStatus.js';
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function tracesByStepCounts(settlement) {
   const traces = getTraces(settlement);
   /** @type {Record<string, number>} */
@@ -50,7 +50,7 @@ function tracesByStepCounts(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function tracesByTypeCounts(settlement) {
   const traces = getTraces(settlement);
   /** @type {Record<string, number>} */
@@ -65,7 +65,7 @@ function tracesByTypeCounts(settlement) {
 /**
  * Build the full dev-debug envelope.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object}
  */
 export function deriveDevDebug(settlement) {
@@ -122,7 +122,7 @@ export function deriveDevDebug(settlement) {
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
 /** Just the counts — useful for dev dashboard tiles.
- *  @param {any} settlement */
+ *  @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function devDebugCounts(settlement) {
   const d = /** @type {any} */ (deriveDevDebug(settlement));
   return {
@@ -140,7 +140,7 @@ export function devDebugCounts(settlement) {
 }
 
 /** Return only the traces that affect a specific entity id.
- *  @param {any} settlement @param {any} entityId */
+ *  @param {import('./settlement.schema.js').SimSettlement} settlement @param {any} entityId */
 export function tracesForEntity(settlement, entityId) {
   return [
     ...tracesByType(settlement, 'entity'),

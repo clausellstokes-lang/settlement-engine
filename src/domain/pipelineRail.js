@@ -76,7 +76,7 @@ export function expandPipelineStep(settlement, stepName) {
 /**
  * List every step that has at least one trace, with a count.
  * Useful for the rail's overview density indicator.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function pipelineStepSummary(settlement) {
   if (!settlement) return [];
@@ -90,7 +90,7 @@ export function pipelineStepSummary(settlement) {
 }
 
 /** Total trace count. Cheap dashboard tile.
- *  @param {any} settlement */
+ *  @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function totalTraceCount(settlement) {
   return Array.isArray(settlement?.simulationTrace) ? settlement.simulationTrace.length : 0;
 }

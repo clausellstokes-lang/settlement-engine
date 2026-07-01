@@ -235,9 +235,11 @@ export async function handleCreateCheckout(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     // One structured line per checkout failure so the money path is greppable.
+    // The real message (which may carry Stripe/Postgres internals) is logged
+    // server-side; the client only ever sees a generic string.
     logError('create-checkout', user?.id ?? null, message);
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'Checkout could not be started' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }

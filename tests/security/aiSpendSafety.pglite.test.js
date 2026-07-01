@@ -55,6 +55,13 @@ const checkCap = async () => (await scalar('select public.check_ai_spend_cap() a
 const consumeRl = async (uid, limit) =>
   (await scalar('select public.consume_ai_generate_rate_limit($1, 86400, $2) as r', [uid, limit])).r;
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(haveMigration).toBe(true);
+});
+
 describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
   beforeAll(async () => {
     db = await new PGlite();

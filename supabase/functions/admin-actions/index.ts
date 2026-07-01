@@ -22,6 +22,9 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { botGuard } from "../_shared/requestMeta.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
+// Structured server-side error logging — the real (possibly internal) detail is
+// logged here; clients only ever see a generic message.
+import { logError } from "../_shared/logError.ts";
 
 // CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
 // this admin endpoint. The endpoint is independently protected by JWT auth +
@@ -141,6 +144,16 @@ export async function handleAdminActions(
   const jsonHeaders = { ...cors, "Content-Type": "application/json" };
   const json = (body: Record<string, unknown>, status = 200) =>
     new Response(JSON.stringify(body), { status, headers: jsonHeaders });
+  // Genericize internal errors before they reach the client: a Supabase
+  // PostgrestError / thrown-error `.message` can echo table/constraint/function
+  // names and object state. We log the real detail server-side (greppable by the
+  // "admin-actions" fn tag) and return a fixed, non-leaky string to the caller.
+  // Status code is preserved by the caller. Deliberate validation messages
+  // (e.g. buildProfilePatch) are NOT routed through here.
+  const adminFail = (detail: unknown, status = 500) => {
+    logError("admin-actions", null, detail);
+    return json({ error: "Admin action failed" }, status);
+  };
 
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -334,7 +347,7 @@ export async function handleAdminActions(
         if (!fn) return json({ error: "Unknown dashboard" }, 400);
         const args = fn === "report_retention" ? {} : { p_from: pFrom, p_to: pTo };
         const { data, error } = await adminClient.rpc(fn, args);
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -350,7 +363,7 @@ export async function handleAdminActions(
           p_from: pFrom,
           p_to: pTo,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, metric, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -360,13 +373,13 @@ export async function handleAdminActions(
         if (typeof granularity === "string" && granularity) args.p_granularity = granularity;
         if (Number.isFinite(Number(limit))) args.p_limit = Math.trunc(Number(limit));
         const { data, error } = await adminClient.rpc("report_distribution", args);
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, field, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_analytics_summary": {
         const { data, error } = await adminClient.rpc("report_summary", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -380,7 +393,7 @@ export async function handleAdminActions(
           p_from: pFrom,
           p_to: pTo,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rowField, colField, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -388,19 +401,19 @@ export async function handleAdminActions(
       // functions whose own allowlists reject out-of-set input; no SQL here.
       case "get_pulse_mutations": {
         const { data, error } = await adminClient.rpc("report_pulse_mutations", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_stressor_genesis": {
         const { data, error } = await adminClient.rpc("report_stressor_genesis", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_proposal_decisions": {
         const { data, error } = await adminClient.rpc("report_proposal_decisions", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -411,39 +424,39 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("report_config_variance", {
           p_config_signature: configSignature, p_from: pFrom, p_to: pTo,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, configSignature, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       // ── Regional / NPC reports (migration 042) ──────────────────────────────
       case "get_regional_impacts": {
         const { data, error } = await adminClient.rpc("report_regional_impacts", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_channel_funnel": {
         const { data, error } = await adminClient.rpc("report_channel_funnel", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_regional_arcs": {
         const { data, error } = await adminClient.rpc("report_regional_arcs", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_regional_propagation": {
         const { data, error } = await adminClient.rpc("report_regional_propagation", { p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
       case "get_npc_distribution": {
         if (typeof field !== "string") return json({ error: "Missing field" }, 400);
         const { data, error } = await adminClient.rpc("report_npc_distribution", { p_field: field, p_from: pFrom, p_to: pTo });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, field, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
@@ -535,7 +548,7 @@ export async function handleAdminActions(
         }
 
         const { data, error } = await query;
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
 
         // Mask the email in the response; the raw value is used ONLY server-side
         // for the search filter, never returned. No payment ids are selected.
@@ -559,7 +572,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("admin_user_summary", {
           target_user: userId,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, summary: data });
       }
 
@@ -574,7 +587,7 @@ export async function handleAdminActions(
           target_user: userId,
           p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, user: data });
       }
 
@@ -585,7 +598,7 @@ export async function handleAdminActions(
           p_status: status,
           p_limit: 100,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, messages: data || [] });
       }
 
@@ -681,7 +694,7 @@ export async function handleAdminActions(
           p_actor: callingUser.id, p_target: userId,
           p_severity: sev, p_reason: auditReason, p_notified: notified,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, warningId: data, notified });
       }
 
@@ -694,7 +707,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("add_internal_note", {
           p_actor: callingUser.id, p_target: userId, p_note: note,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, noteId: data });
       }
 
@@ -703,13 +716,13 @@ export async function handleAdminActions(
       case "list_warnings": {
         if (!userId) return json({ error: "Missing userId" }, 400);
         const { data, error } = await adminClient.rpc("admin_list_warnings", { p_target: userId });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, warnings: data || [] });
       }
       case "list_internal_notes": {
         if (!userId) return json({ error: "Missing userId" }, 400);
         const { data, error } = await adminClient.rpc("admin_list_internal_notes", { p_target: userId });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, notes: data || [] });
       }
 
@@ -751,7 +764,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("admin_billing_summary", {
           p_actor: callingUser.id, p_target: userId,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, billing: data });
       }
 
@@ -766,7 +779,7 @@ export async function handleAdminActions(
           p_actor: callingUser.id, p_target: userId,
           p_disabled: wantDisabled, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         // Layer 2 (review B16 #1): invalidate the user's tokens/sessions at the
         // auth provider so the live JWT dies too. The DB profiles.disabled_at flag
         // (above) + the RLS/trigger account-status gate (migrations 057/059) reject
@@ -795,7 +808,7 @@ export async function handleAdminActions(
           p_actor: callingUser.id, p_target: userId,
           p_banned: wantBanned, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         // Layer 2 (review B16 #1): a still-valid JWT no longer grants WRITE access
         // once banned_at is set — spend_credits / mutate_settlement_batch (057), the
         // direct-table RLS/trigger gate (059), and the AI edge functions'
@@ -816,7 +829,7 @@ export async function handleAdminActions(
           p_actor: callingUser.id, p_id: settlementId,
           p_delete: del, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
       }
 
@@ -827,7 +840,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("admin_remove_gallery_item", {
           p_actor: callingUser.id, p_id: settlementId, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
       }
 
@@ -838,7 +851,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("admin_revoke_share_link", {
           p_actor: callingUser.id, p_id: settlementId, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
       }
 
@@ -858,7 +871,7 @@ export async function handleAdminActions(
           p_actor: callingUser.id, p_target: userId,
           p_full: wantFull, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, bundle: data, full: wantFull });
       }
 
@@ -896,7 +909,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("list_ticket_pool", {
           p_status: filter, p_limit: 100,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, tickets: data || [] });
       }
 
@@ -908,7 +921,7 @@ export async function handleAdminActions(
           return json({ error: "A ticketId is required" }, 400);
         }
         const { data, error } = await userClient.rpc("list_ticket_thread", { p_id: ticketId });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, events: data || [] });
       }
 
@@ -920,7 +933,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("claim_ticket", {
           p_actor: callingUser.id, p_id: ticketId,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
       }
 
@@ -936,7 +949,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("set_ticket_status", {
           p_actor: callingUser.id, p_id: ticketId, p_status: status, p_reason: auditReason,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         // Resolve the ticket owner to notify them of the lifecycle change.
         let notified = false;
         const NOTIFY_STATES: Record<string, string> = {
@@ -976,7 +989,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("post_ticket_reply", {
           p_actor: callingUser.id, p_id: ticketId, p_body: replyBody.trim(), p_visibility: vis,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         let notified = false;
         if (vis === "user") {
           const { data: ticketRow } = await adminClient
@@ -1005,7 +1018,7 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("link_ticket_faq", {
           p_actor: callingUser.id, p_id: ticketId, p_faq: faq.trim(),
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
       }
 
@@ -1013,7 +1026,7 @@ export async function handleAdminActions(
         return json({ error: `Unknown action: ${action}` }, 400);
     }
   } catch (err) {
-    return json({ error: errorMessage(err) }, 500);
+    return adminFail(err, 500);
   }
 }
 

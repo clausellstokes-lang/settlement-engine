@@ -40,7 +40,7 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
-/** @param {any} power */
+/** @param {import('./settlement.schema.js').SimPowerStructure} power */
 function topFactionByPower(power) {
   if (!power || !Array.isArray(power.factions) || power.factions.length === 0) return null;
   return [...power.factions].sort((a, b) => (b.power || 0) - (a.power || 0))[0];
@@ -57,7 +57,7 @@ function lowercaseFirst(s) {
 // (`deriveSimulationSpine`) substitutes a placeholder for null lines so
 // the spine is always seven entries.
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveExistsBecause(s) {
   // settlementReason is the canonical "founding cause" field; historical
   // character is a secondary one. Both are free prose.
@@ -76,7 +76,7 @@ function deriveExistsBecause(s) {
   return `A ${tier} took root here for reasons no one writes down.`;
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveSurvivesBy(s) {
   // Strongest signal: top export from the economic state.
   const eco = s.economicState || s.economy || {};
@@ -90,7 +90,7 @@ function deriveSurvivesBy(s) {
   return 'Subsistence trade with neighbours and what the land offers.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveRuledBy(s) {
   const power = s.powerStructure || s.power;
   if (!power) return 'A loose informal authority no one questions yet.';
@@ -109,7 +109,7 @@ function deriveRuledBy(s) {
   return 'Authority is contested and unclear.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveRealPower(s) {
   // "Real power" is interesting only when it differs from "ruled by."
   // We compare the highest-power faction against the governing name.
@@ -135,7 +135,7 @@ function deriveRealPower(s) {
   return null;
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveStrainedBy(s) {
   const stressors = s.stressors || s.stress;
   // Stressors can be a string, an array of strings, or an array of objects.
@@ -156,7 +156,7 @@ function deriveStrainedBy(s) {
   return 'Nothing strains it at the moment.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function derivePeopleFear(s) {
   // Threats from defense profile.
   const threats = s.defenseProfile?.threats;
@@ -180,7 +180,7 @@ function derivePeopleFear(s) {
   return 'No widely-shared dread. Yet.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveLikelyFuture(s) {
   // Active tensions imply trajectory.
   const tensions = s.history?.currentTensions;
@@ -213,7 +213,7 @@ function deriveLikelyFuture(s) {
  * every line either succeeds or substitutes a placeholder so consumers
  * never need to guard against null.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any} { existsBecause, survivesBy, ruledBy, realPower,
  *                     strainedBy, peopleFear, likelyFuture }
  */
@@ -248,7 +248,7 @@ export function deriveSimulationSpine(settlement) {
  * can be null today — it's deliberately omitted when authority and
  * real power are aligned).
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function simulationSpineRows(settlement) {
   const spine = deriveSimulationSpine(settlement);
   const rows = [

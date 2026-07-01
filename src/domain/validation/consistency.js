@@ -26,7 +26,7 @@ function record(type, description, { severity = 'block', references = [] } = {})
 /**
  * Validate a settlement for cross-surface display contradictions.
  * Returns { blocking, warnings } — both arrays of contradiction records.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function validateDossier(settlement) {
   /** @type {any[]} */

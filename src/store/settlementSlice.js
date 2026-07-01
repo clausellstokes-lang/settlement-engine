@@ -667,6 +667,24 @@ export const createSettlementSlice = (set, get) => ({
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
   pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
 
+  // ── CLOUD-WRITE SUPPRESSION INVARIANT (read before adding a write action) ──
+  // Atomicity of the change-queue flush and the world-pulse advance depends on a
+  // small set of store flags that any action issuing a CLOUD persist must honour:
+  //   • flushSuppressPersist  — set by the change-queue flush (changeQueueSlice);
+  //                             while true, an executor mutates local + the
+  //                             savedSettlements mirror but MUST NOT call its own
+  //                             persistSaveUpdate (the flush owns the one write).
+  //   • flushApplyLocalOnly   — set by the flush during a campaign-member replay
+  //                             (defers the regional ripple; see below).
+  //   • advanceInFlight       — set by campaignWorldPulseSlice before its first
+  //                             await; a re-entrant applyEvent is rejected/suppressed.
+  // RULE: any NEW action added to this slice that performs a cloud persist must
+  // consult get().flushSuppressPersist (and, if campaign-aware, advanceInFlight)
+  // exactly as applyEvent / renameSettlement / persistSaveUpdate / updateSavedSettlement
+  // already do — otherwise it can issue a mid-flush write and break the single-
+  // atomic-commit guarantee with no compile-time signal. This block is the one
+  // authoritative statement of the rule the flags below each restate locally.
+  //
   // Change-queue flush seam (R2 — Double-applying mitigation). When the
   // change-queue commits, it replays each order through the SAME executors
   // (applyEvent / renameSettlement) that run on a direct apply. Those

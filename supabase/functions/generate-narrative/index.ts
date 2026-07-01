@@ -931,6 +931,39 @@ export async function handleGenerateNarrative(
     reservationId =
       (capResult as { reservation_id?: string | null } | null)?.reservation_id ?? null;
 
+    // ── SUFFICIENCY PRECHECK: don't burn a rate-limit unit on a doomed spend ──
+    // The per-user/day rate limit below INCREMENTS a counter (consume, not peek;
+    // there is no decrement RPC). spend_credits runs AFTER it and is the atomic
+    // authority on funds. If the user can't afford this run, spend_credits would
+    // throw insufficient_funds — but only after the rate-limit unit was already
+    // consumed, so a low-balance user retrying erodes their 60/day quota for free.
+    //
+    // To stop that, do a CHEAP read-only sufficiency check here and reject BEFORE
+    // consuming the unit. This is a guard, NOT the authority: spend_credits below
+    // still does the race-safe compare-and-decrement (a balance change between
+    // this read and the spend is caught there). Elevated/privileged operators
+    // never debit credits, so they SKIP this check (their balance is irrelevant).
+    // FAIL OPEN on any RPC error: a precheck outage must never block a legitimate
+    // user — spend_credits remains the real gate, and a missed precheck only costs
+    // the pre-existing (unfixed) behaviour, never a wrongful block.
+    {
+      const { data: precheckPrivileged, error: privErr } =
+        await supabaseUser.rpc('current_user_is_privileged');
+      if (privErr) {
+        logError('generate-narrative', user.id, `current_user_is_privileged errored: ${privErr.message}`, { stage: 'sufficiency-precheck' });
+      } else if (precheckPrivileged !== true) {
+        const { data: precheckBalance, error: balErr } =
+          await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
+        if (balErr) {
+          logError('generate-narrative', user.id, `get_credit_balance errored: ${balErr.message}`, { stage: 'sufficiency-precheck' });
+        } else if (typeof precheckBalance === 'number' && precheckBalance < cost) {
+          // Same message shape as the spend_credits insufficient-funds throw below,
+          // so the client UI is unchanged — only the rate-limit unit is spared.
+          throw new Error(`Insufficient credits. Need ${cost}, have ${precheckBalance}.`);
+        }
+      }
+    }
+
     // ── SAFETY 2: per-user/day rate limit — FAIL OPEN ──
     // One abusive account can't drain the shared provider pool. A limiter
     // OUTAGE must never block a legitimate paying user (same rationale as

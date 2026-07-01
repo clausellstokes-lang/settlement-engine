@@ -1,5 +1,6 @@
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
+import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
@@ -74,7 +75,7 @@ export function catalogEntryByName(name) {
   return null;
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 export function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
     .filter((/** @type {any} */ inst) => inst?.status !== 'removed' && !inst?._worldPulseInactive)
@@ -107,7 +108,7 @@ function newInstitution(entry, tier, outcome) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} toTier
  */
 function promotionAdditions(settlement, toTier) {
@@ -275,7 +276,7 @@ function tierCandidate(item, drift, tick, rules) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function resourceList(settlement) {
   return [
     ...(settlement?.config?.nearbyResources || []),
@@ -284,7 +285,7 @@ function resourceList(settlement) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} resource
  */
 function resourceState(settlement, resource) {
@@ -383,12 +384,16 @@ function tradeListMatchesResource(labels, resource) {
 /** Exported for pin tests: classification feeds depletion trade-load and the
  *  primary-export recovery block, so mislabeling an exported resource as
  *  local-only underweights it in the drift logic.
- *  @param {any} settlement
+ *  @param {import('../settlement.schema.js').SimSettlement} settlement
  *  @param {any} resource */
 export function resourceEconomicRole(settlement, resource) {
-  const economicState = settlement?.economicState || {};
-  const exportsList = economicState.primaryExports || [];
-  const importsList = economicState.primaryImports || [];
+  // Route through the canonical accessors, NOT settlement.economicState.primaryExports
+  // directly: a legacy save stores the trade lists under the `exports`/`imports` alias,
+  // which canonExports/canonImports resolve. Reading primaryExports directly here would
+  // see empty lists and misclassify every resource as local_resource (the same
+  // dead-field class as the capacityModel bug canonicalAccessors was created to fix).
+  const exportsList = canonExports(settlement);
+  const importsList = canonImports(settlement);
   // Canonical goods vocabulary first (verbatim chain labels + exact good ids,
   // which survive subsumption renames); token match stays as the fallback for
   // custom labels that mention the resource by name.
@@ -534,7 +539,7 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  */
 export function applyTierOutcomeToSettlement(settlement, outcome) {
@@ -636,7 +641,7 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  */
 export function applyResourceOutcomeToSettlement(settlement, outcome) {

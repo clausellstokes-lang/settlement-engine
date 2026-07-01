@@ -139,8 +139,10 @@ export async function handleVerifyDossier(
     const message = error instanceof Error ? error.message : 'Purchase verification failed';
     // One structured line per verification failure. This endpoint is anonymous-
     // allowed (single-dossier microtransaction), so there is no user id to attribute.
+    // The real message (which may carry Stripe internals) is logged server-side;
+    // the client only ever sees a generic string.
     logError('verify-single-dossier', null, message);
-    return new Response(JSON.stringify({ verified: false, error: message }), {
+    return new Response(JSON.stringify({ verified: false, error: 'Verification failed' }), {
       status: 400,
       headers: { ...headers, 'Content-Type': 'application/json' },
     });

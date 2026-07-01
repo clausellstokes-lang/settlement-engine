@@ -29,6 +29,18 @@ import { deepClone } from '../clone.js';
 // like `landmarks`, `admin`, `administrative`, and `isAdmin` from public output.
 // NOTE: the server's authoritative _gallery_sanitize_public_json carries the same
 // over-match and needs a matching SQL migration (Postgres uses \y for boundaries).
+//
+// INTENTIONAL OVER-MATCH — `note`: the bare `note` token is a *deliberate*
+// conservative strip. The true DM-private note keys are dmNotes / dossierNotes /
+// notes / narrativeNotes (toPublicSafe's full-mode path drops exactly those four),
+// but bare `note` also strips analytical annotations (viabilityNote, magicNote,
+// culturalNotes, priorityNote, stressNote, …) from the STRICT public projection.
+// That is by design: this denylist errs toward stripping (per the "must only grow"
+// rule below) — over-stripping hides a field, under-stripping leaks DM content.
+// Full (owner-opted DM-share) mode re-includes the analytical notes while still
+// dropping the four real DM-note keys explicitly. To PUBLISH a specific analytical
+// note in the default projection, add an explicit allowlist exception here AND a
+// matching server change, with a security review — do not narrow `note` blindly.
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
 
 /**
@@ -65,7 +77,7 @@ export function sanitizePublicValue(value, path = []) {
  * The public allowlist projection of a single NPC (id + non-private fields). The
  * one place that allowlist lives client-side; reused by the default-mode strip AND
  * the per-member override strip so they can never diverge.
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  */
 function publicNpc(npc) {
   return {
@@ -96,7 +108,7 @@ function snakeCase(s) {
  * NPC's stored id (created NPCs carry `npc.<slug>_<hash>`); falls back to a name
  * slug. Mirrors the SQL public._gallery_npc_key exactly so a toggle written here
  * targets the same NPC the server strips/reveals.
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  */
 export function galleryMemberKey(npc) {
   const id = npc && npc.id != null ? String(npc.id) : '';
@@ -124,7 +136,7 @@ export function galleryMemberKey(npc) {
  * the source) and never widens settlement-level content (DM Compass / plot hooks).
  * Mirrors the server's _gallery_apply_member_overrides (migration 093) so this
  * defense-in-depth / preview projection matches the authoritative read.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{ full?: boolean, memberOverrides?: Record<string, any>|null }} [options]
  */
 export function toPublicSafe(settlement, { full = false, memberOverrides = null } = {}) {

@@ -79,7 +79,7 @@ function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
-/** @param {any} saveId @param {any} faction @param {any} index */
+/** @param {any} saveId @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionId(saveId, faction, index) {
   const name = faction?.id || faction?.faction || faction?.name || faction?.label || `faction_${index}`;
   return `${saveId}:${stablePart(name)}`;
@@ -92,7 +92,7 @@ function inferFactionArchetype(faction = {}) {
   return (/** @type {any} */ (CANONICAL_TO_COMPETITION))[factionArchetype(faction)] || 'civic';
 }
 
-/** @param {any} faction @param {any} index */
+/** @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionPower(faction = {}, index = 0) {
   const raw = faction.power ?? faction.influence ?? faction.score ?? faction.weight;
   if (Number.isFinite(raw)) return raw > 1 ? clamp01(raw / 100) : clamp01(raw);
@@ -375,7 +375,7 @@ function sameStringList(a, b) {
  * the field — a fresh campaign's first pulse must not dirty every roster
  * with 'none'/'quiet'/[] noise.
  */
-/** @param {any} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
 export function projectFactionStatesOntoSettlement(settlement, factionStates, settlementId, { tick = 0 } = {}) {
   const factions = settlement?.powerStructure?.factions;
   if (!Array.isArray(factions) || !factions.length) return settlement;
