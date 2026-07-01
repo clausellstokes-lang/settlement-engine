@@ -78,14 +78,24 @@ input[type="radio"],
   border: 0;
 }
 
-/* Skip-to-content link — appears on focus. Uncomment and add the link
- * to App.jsx when implementing the accessibility pass.
- *
- * .skip-link {
- *   position: absolute; top: -40px; left: 0;
- *   background: var(--sf-focus); color: #fff;
- *   padding: 8px 16px; z-index: 1000;
- *   border-radius: 0 0 4px 0;
- * }
- * .skip-link:focus { top: 0; }
- */
+/* Skip-to-content link — the first focusable element in the DOM (App.jsx renders
+ * <a href="#main-content" class="skip-link">). Off-screen until focused, then it
+ * slides into view so a keyboard/SR user can jump past the header/nav to <main>. */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 8px;
+  background: var(--sf-focus, #1d4ed8);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 2000;
+  border-radius: 0 0 4px 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}

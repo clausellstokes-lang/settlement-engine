@@ -19,6 +19,7 @@ import { useStore } from '../../store/index.js';
 import { isCanonSave } from '../../domain/campaign/canon.js';
 import MapShareEditor from '../gallery/MapShareEditor.jsx';
 import { IconButton } from './IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import {
   BORDER, CARD, CARD_HDR, ELEV, INK, R, SP, sans, serif_, FS,
 } from '../theme.js';
@@ -60,6 +61,11 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
       .map(s => ({ name: s.name, tier: s.tier, settlement: s.settlement }));
   }, [activeCampaign, saves]);
 
+  // Back the aria-modal="true" promise with real focus management. Hook runs
+  // unconditionally (before the early return) per the rules of hooks; it no-ops
+  // while `open` is false.
+  const dialogRef = useDialogFocusTrap(open, onClose);
+
   if (!open || !activeCampaign) return null;
 
   return (
@@ -73,6 +79,7 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
       onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Share this map to the gallery"

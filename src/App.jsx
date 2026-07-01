@@ -16,11 +16,12 @@
  *   account     — Full account page (post-auth)
  *   admin       — Developer admin panel (elevated roles only)
  */
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Map as MapIcon, Zap, Shield } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
 import { guardForView, viewToPath } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
@@ -102,6 +103,12 @@ export default function App() {
   // effect below; `params` carries route segments (e.g. /settlements/:id).
   const { view, params, legacy, notFound } = useRoute();
   const setView = navigate;
+  // A11y: move focus to the <main> region on every view change so keyboard /
+  // screen-reader users aren't stranded at the top of the DOM after navigating
+  // (WCAG 2.4.3). The skip-to-content link + main[tabIndex=-1] below are the
+  // target. Behavior lives in a unit-tested hook so it can't silently regress.
+  const mainRef = useRef(null);
+  useFocusOnViewChange(view, mainRef);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
   // Auth-modal visibility now lives on the store (uiSlice) so app-wide nudges
@@ -389,6 +396,10 @@ export default function App() {
 
   return (
     <>
+      {/* Skip-to-content: the first focusable element in the DOM. Visually hidden
+          until focused (.skip-link in styles/a11y.css), it lets keyboard/SR users
+          jump past the header/nav straight to <main id="main-content">. */}
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <CampaignSyncBanner />
       <div
         // Painted clean views (settlements/gallery/compendium/pricing/account/
@@ -626,7 +637,7 @@ export default function App() {
             companion `scroll-padding-top` that keeps anchored / focus scrolls
             clear of the pinned chrome lives on the real scroller (the document
             element), set by the view that owns sticky chrome. */}
-        <main style={{ flex: 1, padding: isMobile ? `${SP.md}px ${SP.md}px ${CHROME.mainPadMobile}px` : `${SP.lg}px ${SP.xxl}px` }}>
+        <main id="main-content" ref={mainRef} tabIndex={-1} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px ${CHROME.mainPadMobile}px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* The pre-generation OnboardingCoach spotlight-overlay was deleted
               along with its forever-off `onboardingDiet` flag-twin: the Checklist
               + first-dossier callouts carry first-run coaching, and PostGenCoach
