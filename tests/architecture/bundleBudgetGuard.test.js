@@ -1,0 +1,43 @@
+import { describe, test, expect } from 'vitest';
+
+import { lazyChunkLeaks } from '../../scripts/check-bundle-budget.mjs';
+
+/**
+ * Proves the first-paint lazy-chunk guard (review R6 follow-up) is CORRECT and
+ * NON-VACUOUS. The 1.8 MB PDF payload and the sim engine are deliberately gated
+ * behind user action in vite.config.js and stripped from modulepreload — they must
+ * never enter index.html's up-front <script>/modulepreload set. The total-KB ceiling
+ * would eventually catch such a leak, but only opaquely; this guard names the exact
+ * regression (a static import reaching a deliberately-lazy chunk).
+ *
+ * Without this test, "the budget passes" could just mean the guard's regex never
+ * matches anything — so we assert it stays silent on a healthy first-paint set AND
+ * fires for each lazy chunk by its real hashed filename shape.
+ */
+describe('bundle-budget lazyChunkLeaks — first-paint guard has teeth', () => {
+  const healthy = ['index-D0vu1M9N.js', 'vendor-react-SKOiWvso.js', 'vendor-state-Bg-g3ARq.js', 'data-XSm_D-v7.js'];
+
+  test('a healthy first-paint set (entry + vendor + data) reports no leak', () => {
+    expect(lazyChunkLeaks(healthy)).toEqual([]);
+  });
+
+  test('a leaked vendor-pdf chunk is detected by its hashed filename', () => {
+    const leaks = lazyChunkLeaks([...healthy, 'vendor-pdf-BiNWw-M3.js']);
+    expect(leaks).toEqual(['vendor-pdf-BiNWw-M3.js']);
+  });
+
+  test('a leaked engine chunk is detected', () => {
+    const leaks = lazyChunkLeaks([...healthy, 'engine-CItE2vVd.js']);
+    expect(leaks).toEqual(['engine-CItE2vVd.js']);
+  });
+
+  test('both leaking at once are both reported', () => {
+    expect(lazyChunkLeaks(['engine-AAAA1111.js', 'vendor-pdf-BBBB2222.js'])).toHaveLength(2);
+  });
+
+  test('a look-alike that is NOT the gated chunk (e.g. engine-adjacent feature) does not false-alarm', () => {
+    // Only the exact manualChunks names gate: `engineRoom-x.js` / `pdfExport-x.js` are
+    // ordinary lazy feature chunks, not the vendor-pdf/engine payloads.
+    expect(lazyChunkLeaks(['engineRoom-CVMcH6dL.js', 'pdfExport-Cn4PYS48.js'])).toEqual([]);
+  });
+});

@@ -130,6 +130,17 @@ DEPLOYED_HEAD=$(npx supabase migration list --linked 2>/dev/null | grep -oE '^[[
 SUPABASE_MIGRATION_HEAD="$DEPLOYED_HEAD" npm run validate:migration-head
 ```
 
+**After `db push`, bump the applied-head ledger.** `supabase/applied-head.json` records the
+last migration number live in production (currently `097`, applied 2026-07-01). It is the
+in-repo record that makes "is the deployed DB at head?" a reviewable fact instead of tribal
+knowledge — and unlike the `SUPABASE_MIGRATION_HEAD` probe (which needs a live DB), it is
+checked on **every** `npm run check`: when the repo head is ahead of `appliedHead`,
+`validate:migration-head` prints the exact list of pending (undeployed) migrations, so the
+"code ahead of deployed DB" state is visible in the gate output rather than silent. Bump
+`appliedHead` (and `appliedAt`) in the SAME commit/PR as the `db push` that applied the new
+migrations. `tests/docs/migrationAppliedHead.test.js` keeps it honest: the value must
+reference a real, committed migration and can never exceed the repo head.
+
 **Apply every file in `supabase/migrations/` in lexical order — do not stop at a
 remembered number.** `db push` does this for you (it applies all pending migrations
 on top of the current schema). Migration numbers grow every release, so this guide

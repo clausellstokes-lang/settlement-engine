@@ -25,6 +25,24 @@ const DIST = join(dirname(fileURLToPath(import.meta.url)), '../dist');
 const ENTRY_MAX_KB = 960;
 const INITIAL_TOTAL_MAX_KB = 1900;
 
+// Chunks that vite.config.js deliberately gates behind user action and strips from
+// modulepreload (vendor-pdf ~614 KB gz, engine ~213 KB gz). The total ceiling would
+// eventually catch a leak, but only as an opaque "total too big". This names the
+// specific regression: a stray STATIC import pulling a deliberately-lazy chunk into
+// the first-paint graph. Keeping this list in lockstep with the manualChunks names in
+// vite.config.js is the point — if you intentionally make one of these eager, delete
+// it here in the same diff.
+const MUST_STAY_LAZY = /^(vendor-pdf|engine)-[A-Za-z0-9_-]+\.js$/;
+
+/**
+ * First-paint refs that are one of the deliberately-lazy chunks (a regression: the
+ * chunk leaked into index.html's up-front <script>/modulepreload set). Pure + exported
+ * so a unit test can prove the guard is non-vacuous. @param {string[]} refs
+ */
+export function lazyChunkLeaks(refs) {
+  return refs.filter((r) => MUST_STAY_LAZY.test(r));
+}
+
 function kib(bytes) { return Math.round(bytes / 1024); }
 
 function main() {
@@ -57,6 +75,13 @@ function main() {
   if (kib(total) > INITIAL_TOTAL_MAX_KB) {
     failures.push(`first-paint JS total ${kib(total)}KB > ${INITIAL_TOTAL_MAX_KB}KB ceiling`);
   }
+  const leaks = lazyChunkLeaks(refs);
+  if (leaks.length) {
+    failures.push(
+      `deliberately-lazy chunk(s) leaked into first paint: ${leaks.join(', ')} — a static ` +
+      `import reached a chunk vite.config.js gates behind user action (the PDF/engine payload)`,
+    );
+  }
 
   if (failures.length) {
     console.error(
@@ -66,7 +91,10 @@ function main() {
     );
     process.exit(1);
   }
-  console.log(`[bundle-budget] OK — entry ${kib(entryBytes)}KB / ${ENTRY_MAX_KB}KB, first-paint total ${kib(total)}KB / ${INITIAL_TOTAL_MAX_KB}KB.`);
+  console.log(`[bundle-budget] OK — entry ${kib(entryBytes)}KB / ${ENTRY_MAX_KB}KB, first-paint total ${kib(total)}KB / ${INITIAL_TOTAL_MAX_KB}KB, no lazy-chunk leak.`);
 }
 
-main();
+// Run only when invoked as a script; the exported helper stays side-effect-free on import.
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main();
+}

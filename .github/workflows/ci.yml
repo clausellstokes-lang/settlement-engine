@@ -51,6 +51,9 @@ jobs:
       - name: Validate vendored map JavaScript
         run: npm run validate:map
 
+      - name: Validate migration head (contiguity + applied-head ledger)
+        run: npm run validate:migration-head
+
       # tsc --noEmit against src/domain/. The JSDoc types in the domain
       # layer get validated by tsc; the pipeline output object shapes,
       # impairment dimensions, event types, and faction-response shapes

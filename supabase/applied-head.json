@@ -1,0 +1,5 @@
+{
+  "appliedHead": 97,
+  "appliedAt": "2026-07-01",
+  "note": "Last migration number applied to the PRODUCTION Supabase project. Bump this in the SAME commit/PR as the `supabase db push` that applies new migrations. The gate cross-checks it (scripts/check-migration-head.mjs + tests/docs/migrationAppliedHead.test.js): appliedHead must reference a real, contiguous migration file and may never exceed the repo migration head. When the repo head is AHEAD of appliedHead, `validate:migration-head` surfaces the pending (undeployed) migrations so the 'code ahead of deployed DB' state is visible in the gate output rather than tribal knowledge. The authoritative live check remains the SUPABASE_MIGRATION_HEAD deploy probe (see docs/DEPLOY.md)."
+}
