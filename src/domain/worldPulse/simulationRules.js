@@ -56,6 +56,13 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // (deployed − returned === war dead). Nested under warLayerEnabled. Inherited false by
   // every preset (stability-guarded).
   warEconomyDrainEnabled: false,
+  // Two-track defender resolve (P4). Opt-in, DEFAULT FALSE ⇒ byte-identical (the siege
+  // verdict uses capacity alone). When true, a besieged town's WILL to resist — composed
+  // from leadership/faith temperament (facets.will), legitimacy, food/supply, and hope
+  // (the odds it faces) — biases the siege roll, and a fully-broken will (starving +
+  // illegitimate + pacifist + hopeless) CAPITULATES deterministically (surrender, not a
+  // storm). Complements defenderAttritionEnabled (capacity erosion). Preset-stable.
+  defenderResolveEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -121,6 +128,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'religionDynamicsEnabled',
   'defenderAttritionEnabled',
   'warEconomyDrainEnabled',
+  'defenderResolveEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([

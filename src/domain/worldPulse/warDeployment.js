@@ -87,6 +87,12 @@ const ARMY_DEPLOYED_CAPACITY_PENALTY = 14; // home-defense points lost while the
 // out the implausible matchups, so this slope only ever governs a genuine contest.
 const SIEGE_CAPACITY_K = 0.16;
 const SIEGE_CAPACITY_HOLD_BIAS = 3;
+// Defender-resolve (P4, flag-gated) — the WILL track. A resolute defender shifts the
+// siege log-odds toward holding; a broken one toward falling. WILL_BIAS_STRENGTH is the
+// max shift (comparable to the hold bias). At/below the capitulate floor the will has
+// collapsed and the town yields deterministically (surrender rather than storm).
+const WILL_BIAS_STRENGTH = 2.2;
+const WILL_CAPITULATE_FLOOR = -0.72;
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that
 // cannot storm the town still RAIDS — a low-severity war_pressure on the target, NOT
@@ -535,10 +541,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null) }} args
- * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean }} args
+ * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -629,8 +635,37 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
     };
   }
 
-  // ── PLAUSIBLE band (or a satisfied override) → the stochastic siege roll. ─────────
-  const logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS;
+  // ── DEFENDER RESOLVE (P4, flag-gated). Compose the WILL to keep resisting from
+  // leadership+faith temperament (facets.will), legitimacy, food/supply (facets.logistics),
+  // and hope (the capacity odds). A resolute will biases the roll toward holding; a broken
+  // one toward falling; a fully-collapsed will CAPITULATES outright (surrender, not storm).
+  // Off ⇒ willBias 0, no capitulation ⇒ logOdds unchanged ⇒ byte-identical.
+  let willBias = 0;
+  if (defenderResolveEnabled) {
+    const facets = defenderCap.facets || {};
+    const willRaw = Number(facets.will);
+    const willFacetN = (((Number.isFinite(willRaw) ? willRaw : 50)) - 50) / 50;  // martial/pacifist gov + deity temper (0 is a real value)
+    const legit = Number(defenderItem?.settlement?.powerStructure?.publicLegitimacy?.score);
+    const legitN = Number.isFinite(legit) ? (legit - 50) / 50 : 0;
+    const logisticsN = Number.isFinite(Number(facets.logistics)) ? (Number(facets.logistics) - 50) / 50 : 0; // food + supply
+    const denom = coalitionCurrent + defenderCurrent;
+    const hopeN = (((denom > 0 ? defenderCurrent / denom : 0.5)) - 0.5) * 2;     // the odds it faces
+    const willScore = Math.max(-1, Math.min(1, 0.40 * willFacetN + 0.25 * legitN + 0.20 * logisticsN + 0.15 * hopeN));
+    willBias = WILL_BIAS_STRENGTH * willScore;
+    if (willScore <= WILL_CAPITULATE_FLOOR) {
+      // WILL COLLAPSE → the defenders yield rather than be stormed (a bloodless fall).
+      return {
+        falls: true, harass: false, forcedLift: false, verdict, ratio,
+        pFall: 1, roll: 0, coalitionCurrent, defenderCurrent, band: 'narrow_success',
+        capitulation: true,
+        reasons: [...reasons, `${defenderItem?.name || targetId}'s will broke — starving, discredited, and out of hope, the defenders capitulated rather than be stormed.`],
+      };
+    }
+  }
+
+  // ── PLAUSIBLE band (or a satisfied override) → the stochastic siege roll. A resolute
+  // defender's willBias lowers pFall (holds); a crumbling one raises it. ────────────
+  const logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias;
   const pFall = clamp01(logistic(logOdds));
   const roll = rng.fork(`siege:${stablePart(targetId)}:${tick}`).random();
   const falls = roll < pFall;
@@ -816,6 +851,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // ongoing sieges survive the end-of-loop prune, so the ledger can never leak.
   const defenderAttritionEnabled = !!(/** @type {any} */ (rules)?.defenderAttritionEnabled);
   const warEconomyEnabled = !!(/** @type {any} */ (rules)?.warEconomyDrainEnabled);
+  const defenderResolveEnabled = !!(/** @type {any} */ (rules)?.defenderResolveEnabled);
   const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
   const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
 
@@ -854,7 +890,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       const eroded = prior && Number.isFinite(prior.currentEffectiveStrength) ? prior.currentEffectiveStrength : homeDef;
       defenderStrengthOverride = Math.min(eroded, homeDef);
     }
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride });
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
