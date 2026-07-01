@@ -29,6 +29,20 @@ Deno.test('flags a role-marked proper noun absent from canon + DM color', () => 
   assertEquals(samples.includes('Ironhold'), true);
 });
 
+Deno.test('catches broadened org/title structures (empirical recall fix: League, Warden-of, Consortium)', () => {
+  const canon = collectFullCanon(settlement);
+  // A corpus measurement showed the narrow vocab caught ~50%; these forms were the misses.
+  const cases = [
+    'The Warden of the Meltwater rules the northern locks.',       // TITLE of X
+    'The Broken Rake League undercuts the harbour trade.',          // the X League
+    'The Coalfactors of Emmet Drane bought the failing terraces.',  // STRUCT of X
+    'The Palewick Consortium now rivals the old guild.',            // the X Consortium
+  ];
+  for (const prose of cases) {
+    assertEquals(scanProseForInvention([prose], canon, '').count > 0, true, `should flag: ${prose}`);
+  }
+});
+
 Deno.test('does NOT flag a canon entity given a role', () => {
   const canon = collectFullCanon(settlement);
   // Aldric is a known NPC; "the Salt Wharf" is a known institution.

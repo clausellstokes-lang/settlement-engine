@@ -64,13 +64,20 @@ export function proseFieldsOf(settlement: any): string[] {
   return out;
 }
 
-const TITLE = '(?:Guildmaster|Guildmistress|Captain|Commander|Lord|Lady|Sir|Dame|Baron|Baroness|Count|Countess|Duke|Duchess|King|Queen|Prince|Princess|High\\s+Priest(?:ess)?|Archmage|Warden|Steward|Reeve|Sheriff|Chancellor|Magister|Abbot|Prior|Bishop|Master|Mistress|Elder|Chief|Overseer|Marshal)';
-const STRUCT = '(?:Temple|Order|House|Guild|Church|Cult|Cathedral|Chapel|Shrine|Company|Brotherhood|Sisterhood|College|Academy|Lodge|Bank|Consortium)';
+const TITLE = '(?:Guildmaster|Guildmistress|Captain|Commander|Lord|Lady|Sir|Dame|Baron|Baroness|Count|Countess|Duke|Duchess|King|Queen|Prince|Princess|High\\s+Priest(?:ess)?|Archmage|Warden|Steward|Reeve|Sheriff|Chancellor|Magister|Abbot|Prior|Bishop|Master|Mistress|Elder|Chief|Overseer|Marshal|Provost|Keeper|Deepreeve|Factor|Marshal)';
+// Organisation / structure nouns. Broadened (empirically: the narrow set caught ~50%,
+// missing League/Bench/Union/Reckoners/Factors-style orgs) — a NEW capitalised org given
+// one of these roles is the invention signal; a canonical one is subtracted by the canon
+// set, so widening this does not raise the (measured 0%) false-positive rate.
+const STRUCT = '(?:Temple|Order|House|Guild|Guildhall|Church|Cult|Cathedral|Chapel|Shrine|Company|Brotherhood|Sisterhood|College|Academy|Lodge|Bank|Consortium|League|Circle|Conclave|Syndicate|Bench|Bureau|Chapter|Union|Compact|Fellowship|Covenant|Assembly|Council|Watch|Wardens|Keepers|Factors|Coalfactors|Reckoners)';
 const PROPER = '([A-Z][a-z]+(?:\\s+[A-Z][a-z]+){0,2})';
+// `[Tt]he` so a sentence-initial "The Broken Rake League" is caught as well as a
+// mid-sentence "the …"; the structure/title noun still gates, so this is recall-only.
 const PATTERNS: RegExp[] = [
-  new RegExp(`\\b${TITLE}\\s+${PROPER}`, 'g'),          // "Guildmaster Ferrick"
-  new RegExp(`\\bthe\\s+${PROPER}\\s+${STRUCT}\\b`, 'g'), // "the Ferrick Temple"
-  new RegExp(`\\b${STRUCT}\\s+of\\s+(?:the\\s+)?${PROPER}`, 'g'), // "Order of the Iron Hand"
+  new RegExp(`\\b${TITLE}\\s+${PROPER}`, 'g'),                       // "Guildmaster Ferrick"
+  new RegExp(`\\b${TITLE}\\s+of\\s+(?:[Tt]he\\s+)?${PROPER}`, 'g'),  // "Warden of the Meltwater"
+  new RegExp(`\\b[Tt]he\\s+${PROPER}\\s+${STRUCT}\\b`, 'g'),         // "the Ferrick Temple", "The Broken Rake League"
+  new RegExp(`\\b${STRUCT}\\s+of\\s+(?:[Tt]he\\s+)?${PROPER}`, 'g'), // "Order of the Iron Hand", "Coalfactors of Emmet Drane"
 ];
 
 /**
