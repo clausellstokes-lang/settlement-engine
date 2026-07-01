@@ -43,6 +43,12 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // DEFAULT_SIMULATION_RULES so all presets inherit it and presetId stays stable
   // (guarded by simulationRulesPreset.stability.test).
   religionDynamicsEnabled: false,
+  // Defender-side siege attrition (SPIKE). Opt-in, DEFAULT FALSE so every existing
+  // campaign is byte-identical (a besieged town's home defense stays a fresh per-tick
+  // computation). When true, a besieged settlement accrues an eroding defensive-losses
+  // ledger that feeds the siege verdict — a game-balance change gated behind the soak's
+  // convergence flags before it graduates. Inherited false by every preset (stability-guarded).
+  defenderAttritionEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -106,6 +112,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'warLayerEnabled',
   'settlementStrategyEnabled',
   'religionDynamicsEnabled',
+  'defenderAttritionEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([

@@ -527,10 +527,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null) }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[] }}
  */
-function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0 }) {
+function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -555,7 +555,14 @@ function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStreng
   // So a worn-down besieger does not also defend its own home weaker: the home garrison
   // and the field army are separate forces. The defender's field-army attrition is
   // applied below (it is the attacker on its own front).
-  const defenderCurrent = defenderCap.homeDefense;
+  //
+  // defenderStrengthOverride (SPIKE, default null): when the defenderAttrition flag is
+  // on, the caller passes an ERODED home-defense value from the per-target siege ledger
+  // instead of the fresh capacity — so a long siege wears the walls down. Null (the
+  // default / flag-off path) uses fresh homeDefense → byte-identical to before.
+  const defenderCurrent = Number.isFinite(defenderStrengthOverride)
+    ? /** @type {number} */ (defenderStrengthOverride)
+    : defenderCap.homeDefense;
 
   // ── HARD FEASIBILITY GATE (deterministic, NO rng). ───────────────────────────────
   const { verdict, ratio, reasons } = classifyFeasibility({
@@ -678,8 +685,8 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {{ random: () => number, fork: (label:string) => any }} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean }} args.rules
- * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number> }}
+ * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean }} args.rules
+ * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
@@ -694,7 +701,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const existing = worldState?.deployments || {};
   // ── Gate: byte-identical no-op when the war layer is OFF. ────────────────────
   if (!rules?.warLayerEnabled) {
-    return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {} };
+    return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null };
   }
 
   const graph = snapshot?.regionalGraph || {};
@@ -792,6 +799,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // Collect the attacker ids whose deployment cleared this tick (their armies return).
   const clearedAttackers = new Set();
 
+  // Defender-attrition SPIKE (flag-gated, default OFF ⇒ all of this is inert and the
+  // siege verdict uses fresh homeDefense exactly as before). When on, a besieged town
+  // accrues an eroding defensive-losses ledger keyed by targetId: seeded from its fresh
+  // homeDefense, worn each tick via applyAttritionToRecord(isAttacker:false), fed back
+  // into the verdict, and RETIRED the moment the siege ends (fall/withdrawal) or the
+  // town is no longer besieged — so a relieved town heals to full next time. Only
+  // ongoing sieges survive the end-of-loop prune, so the ledger can never leak.
+  const defenderAttritionEnabled = !!(/** @type {any} */ (rules)?.defenderAttritionEnabled);
+  const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
+  const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
+
   for (const targetId of targets) {
     if (!snapshot?.byId?.has?.(targetId)) continue;
     // Besiegers = war_front sources INTO T ∪ deployment.targetId === T (dedup, sorted).
@@ -817,7 +835,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         siegeAge = Math.max(siegeAge, Number(rec.deploymentAge) || 0);
       }
     }
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge });
+    // Flag-off: null override ⇒ resolveSiegeVerdict uses fresh homeDefense (unchanged).
+    // Flag-on: feed the eroded defender strength from the ledger (seeded from fresh
+    // homeDefense on the first siege tick), never above the fresh value.
+    let defenderStrengthOverride = null;
+    if (defenderAttritionEnabled) {
+      const homeDef = capacityFor(targetId).homeDefense;
+      const prior = defenderSiegeLedger[targetId];
+      const eroded = prior && Number.isFinite(prior.currentEffectiveStrength) ? prior.currentEffectiveStrength : homeDef;
+      defenderStrengthOverride = Math.min(eroded, homeDef);
+    }
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
@@ -843,6 +871,30 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         fortification: defFort,
       });
       deployments[attackerId] = degraded;
+    }
+
+    // Defender-attrition SPIKE: the walls spent men holding (or being stormed). Erode
+    // the per-target defender ledger with the DEFENSIVE band, and carry it forward ONLY
+    // while the siege is ongoing — a fall (captured) or withdrawal (relieved) retires it.
+    // (`&& ongoingSieges` narrows it non-null for strict tsc; it is set iff the flag is.)
+    if (defenderAttritionEnabled && ongoingSieges) {
+      const homeDef = capacityFor(targetId).homeDefense;
+      const prior = defenderSiegeLedger[targetId];
+      const seed = prior && Number.isFinite(prior.currentEffectiveStrength) ? prior : { currentEffectiveStrength: homeDef, deploymentAge: 0 };
+      const { record: worn } = applyAttritionToRecord(seed, {
+        isAttacker: false,
+        band: /** @type {any} */ (verdict.band),
+        attackerCurrent: verdict.coalitionCurrent,
+        defenderCurrent: verdict.defenderCurrent,
+        fortification: defFort,
+      });
+      const isWithdrawal = !verdict.falls && (verdict.forcedLift || !verdictPermitsSiege(/** @type {any} */ (verdict.verdict)));
+      if (!verdict.falls && !isWithdrawal) {
+        defenderSiegeLedger[targetId] = { ...worn, targetId, deploymentAge: (Number(seed.deploymentAge) || 0) + 1 };
+        ongoingSieges.add(targetId);
+      } else {
+        delete defenderSiegeLedger[targetId];
+      }
     }
 
     if (!verdict.falls) {
@@ -1247,5 +1299,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // but a stable, deduped list keeps the output order-independent).
   const retiredChannelsOut = [...new Set(retiredChannels)].sort(codepoint);
 
-  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion };
+  // Defender-attrition SPIKE: retire every ledger entry whose siege is no longer
+  // ongoing (fell, lifted, or simply not besieged this tick) so a relieved town heals
+  // to fresh homeDefense next time — the ledger only ever holds active sieges, so it
+  // cannot leak. null when the flag is off ⇒ the kernel skips threading it entirely.
+  if (defenderSiegeLedger && ongoingSieges) {
+    for (const id of Object.keys(defenderSiegeLedger)) {
+      if (!ongoingSieges.has(id)) delete defenderSiegeLedger[id];
+    }
+  }
+  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion, defenderSiegeLedger };
 }

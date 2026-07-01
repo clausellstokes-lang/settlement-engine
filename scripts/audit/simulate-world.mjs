@@ -66,6 +66,10 @@ const RULES = {
   migrationFlowsEnabled: true, tradeFlowsEnabled: true, resourceDriftEnabled: true,
   tierDriftEnabled: true, institutionLifecycleEnabled: true,
   warLayerEnabled: true, settlementStrategyEnabled: true, religionDynamicsEnabled: true,
+  // Defender-attrition SPIKE: OFF by default so the soak baseline is unchanged. Enable
+  // with DEFENDER_ATTRITION=1 to validate the spike's convergence (WAR_NEVER_TERMINATED /
+  // STALL_RISK must stay clear) before the flag graduates.
+  defenderAttritionEnabled: process.env.DEFENDER_ATTRITION === '1',
   majorChangesRequireProposal: false,   // auto-apply majors so cascades propagate
 };
 

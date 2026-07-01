@@ -592,6 +592,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
     worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    // Defender-attrition SPIKE (flag-gated): persist the per-target defender siege
+    // ledger only when the flag produced one. Null on the default path ⇒ the key is
+    // never added, so worldState stays byte-identical for every existing campaign.
+    if (war.defenderSiegeLedger) {
+      worldState = { ...worldState, defenderSiegeLedger: war.defenderSiegeLedger };
+    }
     // Land the war_front directed mints on the graph BEFORE candidate generation and
     // the apply pass, then rebuild the snapshot so downstream reads see the new front.
     // ALSO retire any war_front channels whose siege resolved this tick (conquest or
