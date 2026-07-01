@@ -158,6 +158,33 @@ const AGE_DRAIN_CAP = 0.35;
 const WAR_CONSCRIPT_RATE_PER_TICK = 0.006; // ~0.6% of home pop per deployed tick
 const WAR_CONSCRIPT_POP_FLOOR = 250;       // never conscript the home below this
 
+// ── SACK & FORAGE (P3, flag warForageEnabled). A stormed town is pillaged: a fraction of
+// its population is carried off — some pressed into service and marched to the victor's
+// home (spoils), the rest killed or scattered. CONSERVED as a two-delta transfer with a
+// SINK: the conquered loses SACK_POP_FRACTION of its people; FORAGE_CAPTURE_FRACTION of
+// THAT reaches the victor's home, and the remainder is the war dead (never minted). The
+// floor spares a skeleton population so a sack never annihilates a settlement outright.
+const SACK_POP_FRACTION = 0.08;      // ~8% of the conquered population is carried off
+const FORAGE_CAPTURE_FRACTION = 0.5; // half of the sacked reach the victor; half are the dead
+const SACK_POP_FLOOR = 150;          // never sack a town below this skeleton population
+
+/**
+ * The pure conserved-arithmetic core of a sack: how many of a conquered town's people are
+ * carried off, and how many of those reach the victor's home. Returns null when the town is
+ * at/under the skeleton floor (nothing to take). `captured ≤ sacked` always ⇒ the transfer
+ * never mints (the shortfall is the war dead).
+ * @param {any} targetPop
+ * @returns {{ sacked: number, captured: number } | null}
+ */
+export function computeSackTransfer(targetPop) {
+  const pop = Math.max(0, Math.round(Number(targetPop) || 0));
+  const room = Math.max(0, pop - SACK_POP_FLOOR);
+  const sacked = Math.min(Math.round(pop * SACK_POP_FRACTION), room);
+  if (sacked <= 0) return null;
+  const captured = Math.round(sacked * FORAGE_CAPTURE_FRACTION);
+  return { sacked, captured };
+}
+
 // ── HARD SIEGE-DURATION CEILING (the absolute homeostasis backstop). ──────────────
 // The exhaustion/withdrawal arc normally ends a war: a stalled siege drops out of the
 // plausible band (capacity collapses under the scar) and the besieger withdraws. But a
@@ -888,6 +915,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const warEconomyEnabled = !!(/** @type {any} */ (rules)?.warEconomyDrainEnabled);
   const defenderResolveEnabled = !!(/** @type {any} */ (rules)?.defenderResolveEnabled);
   const allyDefenseEnabled = !!(/** @type {any} */ (rules)?.allyDefenseEnabled);
+  const warForageEnabled = !!(/** @type {any} */ (rules)?.warForageEnabled);
   const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
   const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
 
@@ -1079,6 +1107,15 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const losers = besiegers.filter(id => id !== occupierId).map(id => settlementNameFor(id));
     const coalitionStrength01 = clamp01(verdict.coalitionCurrent / 100);
 
+    // P3 sack & forage: a stormed town is pillaged. The deltas RIDE the conquest outcome
+    // (not a separate emission) so a dismissed / deferred conquest — "the takeover didn't
+    // stick; the armies disperse" — withholds the sack atomically, leaving no phantom
+    // population loss. Flag-off ⇒ sack is null ⇒ NO populationDeltas key is added (the
+    // conquest outcome is byte-identical). The transfer is conserved with a war-dead sink.
+    const sack = warForageEnabled
+      ? computeSackTransfer(snapshot?.byId?.get?.(targetId)?.settlement?.population)
+      : null;
+
     outcomes.push({
       id: `world_outcome.conquest.${stablePart(targetId)}.${tick}`,
       type: 'power_transfer',
@@ -1112,6 +1149,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           reason: `${occupierName} conquered ${targetName}.`,
         }],
       },
+      ...(sack ? {
+        populationDeltas: [
+          { saveId: String(targetId), delta: -sack.sacked, reason: `${occupierName}'s army sacks ${targetName}.` },
+          ...(sack.captured > 0
+            ? [{ saveId: String(occupierId), delta: sack.captured, reason: `Captives and levies from ${targetName} are carried to ${occupierName}.` }]
+            : []),
+        ],
+      } : {}),
     });
 
     // Disposition ratchet: the conqueror banked a war WIN; the conquered settlement a LOSS.

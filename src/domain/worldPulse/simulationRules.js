@@ -75,6 +75,14 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // themselves under siege send relief — a fraction of their home defense — bolstering
   // the defender in the siege verdict, so alliances matter at the walls. Preset-stable.
   allyDefenseEnabled: false,
+  // Sack & forage (P3). Opt-in, DEFAULT FALSE ⇒ byte-identical (a stormed town keeps its
+  // people intact under occupation, ready to rebel). When true, a CONQUEST carries off a
+  // fraction of the conquered population as a CONSERVED transfer with a war-dead sink —
+  // some are pressed into service and marched to the victor's home (spoils), the rest are
+  // killed or scattered — so a siege finally costs the conquered real blood and rewards
+  // the victor. The deltas ride the conquest outcome, so a dismissed/deferred conquest
+  // withholds the sack atomically (no phantom population loss). Preset-stable.
+  warForageEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -143,6 +151,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'defenderResolveEnabled',
   'warDispositionEnabled',
   'allyDefenseEnabled',
+  'warForageEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([
