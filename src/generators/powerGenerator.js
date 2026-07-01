@@ -659,15 +659,19 @@ const renormalizeFactionPower = (factions) => {
 };
 
 export { renormalizeFactionPower };
+export { normalizeAndAnnotateFactions };
 
 // normalizeAndAnnotateFactions — renormalise faction powers to percentages,
 // sort governing-first then by descending power, and append inter-faction
 // rivalry/relationship colour to each faction's description in place.
 const normalizeAndAnnotateFactions = (factions) => {
-  const totalPower = factions.reduce((sum, f) => sum + f.power, 0);
+  const totalPower = factions.reduce((sum, f) => sum + (f.power || 0), 0);
   // Renormalise powers to percentages, then order governing-first, else by power desc.
+  // Guard the degenerate empty / all-zero-power roster exactly as renormalizeFactionPower
+  // does: without it `f.power / 0` is NaN and would corrupt every share, the sort, and the
+  // rivalry annotation. Byte-identical on the normal path (totalPower > 0).
   (factions.forEach((f) => {
-    f.power = Math.round((f.power / totalPower) * 100);
+    f.power = totalPower > 0 ? Math.round(((f.power || 0) / totalPower) * 100) : 0;
   }),
     factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power)),
     // The IIFE below appends inter-faction rivalry colour to each faction's blurb.
