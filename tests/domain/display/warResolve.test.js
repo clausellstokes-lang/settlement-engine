@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { warResolveSignal, realmResolveSignals } from '../../../src/domain/display/warResolve.js';
+import { warResolveSignal, realmResolveSignals, buildWarMoraleContext } from '../../../src/domain/display/warResolve.js';
 
 /**
  * War & Resolve read-side projection (P5b). Pure, presentation-only. Proves: dormancy (a
@@ -128,5 +128,34 @@ describe('hope + roles read from live war state', () => {
     const saves = [{ id: 'zeta', settlement: town('Zeta') }, { id: 'alpha', settlement: town('Alpha') }];
     const ids = realmResolveSignals({ saves, worldState: {} }).map(s => s.id);
     expect(ids).toEqual(['alpha', 'zeta']);
+  });
+});
+
+describe('buildWarMoraleContext — the compact AI grounding digest', () => {
+  const besiegedSaves = [
+    { id: 'aurelia', settlement: town('Aurelia', { institutions: [teleportCircle], foodSecurity: { storageMonths: 0.5, deficitPct: 40 }, deity: { name: 'Aurel', alignmentAxis: 'good', temperamentAxis: 'peacelike' } }) },
+    { id: 'ravager', settlement: town('Ravager', { tier: 'city', population: 30000, deity: { name: 'Malok', alignmentAxis: 'evil', temperamentAxis: 'warlike' } }) },
+  ];
+  const nameOf = (id) => ({ aurelia: 'Aurelia', ravager: 'Ravager' }[id] || id);
+
+  test('a besieged circle-town yields a digest with the bypass note + besieger + faith opposition (names resolved)', () => {
+    const [aurelia] = realmResolveSignals({ saves: besiegedSaves, worldState: besiegingWorld });
+    const ctx = buildWarMoraleContext(aurelia, nameOf);
+    expect(ctx.besieged).toBe(true);
+    expect(ctx.supply).toBe('supplied');
+    expect(ctx.supplyChannel).toBe('teleport');
+    expect(ctx.supplyNote).toMatch(/blockade cannot touch/i);
+    expect(ctx.besiegedBy).toEqual(['Ravager']);
+    expect(ctx.faith.patron).toBe('Aurel');
+    expect(ctx.faith.opposedBy).toContain('Malok');
+  });
+
+  test('a peaceful, provisioned, undivided town yields NULL (no block ⇒ leaner prompt)', () => {
+    const sig = warResolveSignal({ settlement: town('Haven'), saveId: 'haven', worldState: {} });
+    expect(buildWarMoraleContext(sig)).toBeNull();
+  });
+
+  test('null signal ⇒ null', () => {
+    expect(buildWarMoraleContext(null)).toBeNull();
   });
 });

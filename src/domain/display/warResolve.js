@@ -236,6 +236,44 @@ export function warResolveSignal({ settlement, saveId, worldState, regionalGraph
 }
 
 /**
+ * Compact a full signal into the AI grounding digest — the small, prose-oriented shape the
+ * narrative + daily-life prompts read (bands and the supply sentence, not raw capacities).
+ * Returns null for a settlement with nothing war-relevant to say (at peace, provisioned,
+ * unscarred, undivided) so a quiet town's prompt gains no block. `nameOf` resolves besieger
+ * ids to names for the prose; it defaults to the id.
+ *
+ * @param {any} signal                       a warResolveSignal bundle (or null).
+ * @param {(id:any)=>string} [nameOf]        id → display name.
+ * @returns {Record<string, any> | null}
+ */
+export function buildWarMoraleContext(signal, nameOf = (id) => String(id)) {
+  if (!signal) return null;
+  const notable = signal.atWar
+    || (signal.supply?.band && signal.supply.band !== 'provisioned')
+    || (signal.warExhaustion?.scar || 0) > 0
+    || (signal.sentiment?.band && signal.sentiment.band !== 'divided');
+  if (!notable) return null;
+
+  /** @type {Record<string, any>} */
+  const ctx = { name: signal.name, atWar: !!signal.atWar, besieged: !!signal.besieged };
+  if (signal.resolve?.band) ctx.resolve = signal.resolve.band;
+  if (signal.hope?.band) ctx.hope = signal.hope.band;
+  if (signal.supply?.band) ctx.supply = signal.supply.band;
+  if (signal.supply?.note) ctx.supplyNote = signal.supply.note;
+  if (signal.supply?.bypassChannel) ctx.supplyChannel = signal.supply.bypassChannel;
+  if (signal.sentiment?.band) ctx.sentiment = signal.sentiment.band;
+  if ((signal.warExhaustion?.scar || 0) > 0 && signal.warExhaustion?.band) ctx.warWeariness = signal.warExhaustion.band;
+  if (Array.isArray(signal.besiegedBy) && signal.besiegedBy.length) ctx.besiegedBy = signal.besiegedBy.map(nameOf);
+  if (Array.isArray(signal.besieging) && signal.besieging.length) ctx.besieging = signal.besieging.map(nameOf);
+  if (signal.faith?.patron?.name) {
+    ctx.faith = { patron: signal.faith.patron.name, alignment: signal.faith.patron.alignment || null, temper: signal.faith.patron.temper || null };
+    const opposed = (signal.faith.opposed || []).map((/** @type {any} */ o) => o.deity || nameOf(o.besieger)).filter(Boolean);
+    if (opposed.length) ctx.faith.opposedBy = opposed;
+  }
+  return ctx;
+}
+
+/**
  * The War & Resolve signals for a whole realm, codepoint-sorted by id. Builds ONE cached
  * capacity lookup across the roster (so a besieged town can read its besiegers' strength)
  * and a settlement lookup (for besieger faith). Pure; tolerant of an empty roster.

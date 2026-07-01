@@ -268,6 +268,48 @@ function augmentSummaryWithGrounding(
   }
 }
 
+// ── War-morale grounding (P5). The client sends a compact { resolve/hope/supply/faith/
+// sentiment } digest ONLY under its warEconomySurfacing flag. It is UNTRUSTED input that
+// reaches the prompt, so it is whitelisted (bounded key set), length/count-capped, and
+// fence-stripped here before it is embedded. Anything else is dropped; an empty/absent
+// digest yields null so the prompt gains no `_warMorale` key (byte-identical off-flag).
+const WAR_MORALE_STRING_KEYS = ['name', 'resolve', 'hope', 'supply', 'supplyNote', 'supplyChannel', 'sentiment', 'warWeariness'] as const;
+const WAR_MORALE_STR_CAP = 240;
+
+function boundedStringList(value: unknown, maxItems: number, maxLen: number): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((v) => typeof v === 'string' && v.trim()).slice(0, maxItems).map((v) => String(v).trim().slice(0, maxLen));
+}
+
+function sanitizeWarMoraleContext(raw: unknown): Record<string, unknown> | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const r = raw as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
+  for (const k of WAR_MORALE_STRING_KEYS) {
+    const v = r[k];
+    if (typeof v === 'string' && v.trim()) out[k] = v.trim().slice(0, WAR_MORALE_STR_CAP);
+  }
+  if (typeof r.atWar === 'boolean') out.atWar = r.atWar;
+  if (typeof r.besieged === 'boolean') out.besieged = r.besieged;
+  const besiegedBy = boundedStringList(r.besiegedBy, 8, 80);
+  if (besiegedBy.length) out.besiegedBy = besiegedBy;
+  const besieging = boundedStringList(r.besieging, 8, 80);
+  if (besieging.length) out.besieging = besieging;
+  if (r.faith && typeof r.faith === 'object') {
+    const f = r.faith as Record<string, unknown>;
+    const faith: Record<string, unknown> = {};
+    for (const k of ['patron', 'alignment', 'temper']) {
+      const v = f[k];
+      if (typeof v === 'string' && v.trim()) faith[k] = v.trim().slice(0, 120);
+    }
+    const opposedBy = boundedStringList(f.opposedBy, 6, 120);
+    if (opposedBy.length) faith.opposedBy = opposedBy;
+    if (Object.keys(faith).length) out.faith = faith;
+  }
+  if (Object.keys(out).length === 0) return null;
+  return stripFencesDeep(out);
+}
+
 function buildThesisPrompt(
   summary: Record<string, unknown>,
   aiGuidance = '',
@@ -1459,7 +1501,7 @@ Return ONLY the paragraph. No preamble, no markdown, no heading.`;
 export {
   stripGuidanceFences, buildThesisPrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
   buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse,
-  sanitizeChronicleContext, preservationBlockFor,
+  sanitizeChronicleContext, sanitizeWarMoraleContext, preservationBlockFor,
   DAILY_LIFE_FIELDS, PRESERVATION_RULES, PROGRESSION_AFFECTED_FIELDS, REFINEMENT_PASSES,
 };
 export type { PassContext };

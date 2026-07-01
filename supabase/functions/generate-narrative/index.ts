@@ -55,7 +55,7 @@ import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } fro
 import { CACHE_BREAKPOINT, buildAnthropicUserContent, stripCacheBreakpoint } from './promptCache.ts';
 import {
   stripGuidanceFences, buildThesisPrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
-  buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse,
+  buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse, sanitizeWarMoraleContext,
   sanitizeChronicleContext, preservationBlockFor,
   DAILY_LIFE_FIELDS, PRESERVATION_RULES, PROGRESSION_AFFECTED_FIELDS, REFINEMENT_PASSES,
 } from './prompts.ts';
@@ -833,6 +833,7 @@ export async function handleGenerateNarrative(
       modelPreference,
       relationshipMemoryContext,
       chronicleContext,
+      warMoraleContext,
       // Progression-only (AI-4b) — ignored for other types.
       changeType,
       changeLabel,
@@ -1048,6 +1049,13 @@ export async function handleGenerateNarrative(
       summary = confirmedRelationshipMemoryContext
         ? { ...baseSummary, relationshipMemory: confirmedRelationshipMemoryContext }
         : baseSummary;
+      // P5 war-morale grounding: a compact { resolve/hope/supply/faith/sentiment } digest the
+      // client sends ONLY under its warEconomySurfacing flag. Sanitized + fence-stripped here
+      // (untrusted input reaching the prompt); it rides the summary as an underscore grounding
+      // key (like _lockedEntities), so it reaches BOTH the thesis and daily-life prompts, which
+      // both embed the summary. Absent/empty ⇒ no `_warMorale` key ⇒ the prompt is byte-identical.
+      const warMorale = sanitizeWarMoraleContext(warMoraleContext);
+      if (warMorale) summary = { ...summary, _warMorale: warMorale };
       // Per-call preservation block — adds settlement-specific MUST
       // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
       // into refinement-pass prompt building below.
