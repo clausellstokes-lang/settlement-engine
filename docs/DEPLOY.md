@@ -121,6 +121,13 @@ npx supabase db push
 
 # Optional: verify the migration ran without errors:
 npx supabase db diff
+
+# Verify the LIVE schema head caught up to the repo head (review M5). Obtain the
+# deployed head, then let check-migration-head.mjs compare it to the repo head —
+# it exits non-zero on drift (e.g. an unpushed hardening migration whose defense
+# is then silently absent in production):
+DEPLOYED_HEAD=$(npx supabase migration list --linked 2>/dev/null | grep -oE '^[[:space:]]*[0-9]+' | tail -1)
+SUPABASE_MIGRATION_HEAD="$DEPLOYED_HEAD" npm run validate:migration-head
 ```
 
 **Apply every file in `supabase/migrations/` in lexical order — do not stop at a

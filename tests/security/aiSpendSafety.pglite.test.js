@@ -126,11 +126,22 @@ describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
     it('BLOCKS once MONTHLY spend reaches the monthly cap (even if today is clear)', async () => {
       // Spend that lands earlier this month but not today: daily clear, month over.
       await setCap(50, 100, true);
-      await recordCost(60, 5);  // 5 days ago, same month
-      await recordCost(50, 6);  // 6 days ago, same month → month total 110 > 100
+      // Month-boundary safe: a fixed "N days ago" lands in the PREVIOUS calendar
+      // month in the first days of a month (e.g. on the 1st, 5 days ago is last
+      // month), so the current-month total would be 0 and the block would not
+      // fire. Land the prior spend on day 1 of THIS month instead: daysAgo =
+      // (day-of-month - 1). On the 1st that is 0 (spend lands today), so the
+      // daily-clear assertion is skipped that one day — the monthly block, the
+      // point of this test, still holds every day.
+      const dayOfMonth = new Date().getUTCDate();
+      const earlierThisMonth = Math.max(0, dayOfMonth - 1);
+      await recordCost(60, earlierThisMonth);  // earlier this month
+      await recordCost(50, earlierThisMonth);  // month total 110 > 100
       const r = await checkCap();
-      expect(Number(r.daily_spend)).toBeCloseTo(0, 5); // nothing today
-      expect(r.allowed).toBe(false);                   // but month cap blocks
+      if (earlierThisMonth > 0) {
+        expect(Number(r.daily_spend)).toBeCloseTo(0, 5); // nothing today
+      }
+      expect(r.allowed).toBe(false);                     // but month cap blocks
     });
 
     it('respects the operator kill-switch: enabled:false disables the cap', async () => {

@@ -56,10 +56,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
   },
-  workshopNav: {
-    default: true,
-    description: 'Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
-  },
   canonicalViewModel: {
     default: true,
     description: 'Route food balance + export posture + viability through the canonical display model (deriveDossierViewModel). PROMOTED default-on; flag retained as soak killswitch.',
@@ -80,21 +76,9 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
   },
-  welcomeBack: {
-    default: true,
-    description: 'Welcome-back hero variant on return visits + post-session check-in.',
-  },
   founderRecognition: {
     default: false,
     description: 'Founder Lifetime surfaces only to demonstrated worldbuilders.',
-  },
-  heroV2: {
-    default: true,
-    description: 'Two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
-  },
-  wizardChromeDiet: {
-    default: true,
-    description: 'Collapse 7 wizard chrome rows into one combined header.',
   },
   narrativeLayerStrip: {
     default: true,

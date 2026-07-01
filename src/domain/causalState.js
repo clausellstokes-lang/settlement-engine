@@ -53,6 +53,7 @@ import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
+import { institutionIsLawOrder } from './institutionClassify.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
@@ -556,9 +557,8 @@ function deriveEconomicCapacity(s) {
 // string absent from BOTH lists contributes nothing.
 const LAWFUL_GOVERNMENT_PATTERN = /autocra|authoritarian|militar|junta|despot|tyrann|imperial|monarch|lordship|theocra|magocra|ecclesiastical|magistrat/i;
 const ANARCHIC_GOVERNMENT_PATTERN = /anarch|commune|free city|free council|peasant|frontier|lawless|warlord|failed/i;
-// Institutions that embody the rule of law: courts, the watch/guard, magistrates,
-// gaols. Mirrors healingLedger's name-pattern classifier — name-only, defensive.
-const LAW_ORDER_INSTITUTION_PATTERN = /court|magistrat|tribunal|watch|constab|gaol|jail|prison|assize|sheriff|marshal|justice/i;
+// (Law-and-order institution classification moved to domain/institutionClassify.js
+// as the id-first, rename-proof institutionIsLawOrder — used by deriveLawOrder below.)
 
 /** @param {any} s */
 function deriveLawOrder(s) {
@@ -609,9 +609,10 @@ function deriveLawOrder(s) {
   }
 
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
-  // teeth. Classified by name like healingLedger's healer pattern.
+  // teeth. Id-first (rename-proof) via institutionClassify; a DM-renamed-but-stamped
+  // court still counts. id-match === the old name rule for the current corpus.
   const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
-  const lawCount = institutions.filter((/** @type {any} */ i) => LAW_ORDER_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const lawCount = institutions.filter((/** @type {any} */ i) => institutionIsLawOrder(i)).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
   } else if (lawCount === 1) {

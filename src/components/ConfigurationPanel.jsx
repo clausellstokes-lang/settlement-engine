@@ -15,9 +15,7 @@ const PARCHMENT=swatch['#F7F0E4'];
 
 function Lbl({children,topic}){
   const base={fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4};
-  // Optional inline Compendium help. HelpPopover self-gates
-  // on flag('compendiumInlineHelp') and renders null when off, so the
-  // label is byte-identical until the flag is flipped on.
+  // Optional inline Compendium help (GA): a topic renders the `?` affordance.
   if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
   return<div style={base}>{children}</div>;
 }

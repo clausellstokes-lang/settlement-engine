@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-07-01T03:50:30.384Z",
+  "generatedAt": "2026-07-01T08:59:52.024Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "d8cf2911aadf745a",
+  "sourceHash": "bc646d2e643dd4c9",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
+    "src/data/institutionalCatalog.js",
     "src/data/npcData.js",
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
@@ -25,6 +26,7 @@
     "src/domain/healingLedger.js",
     "src/domain/historyBeats.js",
     "src/domain/hookEscalation.js",
+    "src/domain/institutionClassify.js",
     "src/domain/magicLedger.js",
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",

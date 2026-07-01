@@ -76,6 +76,7 @@ export function useGalleryPageState(routeSlug = null) {
   // not on every keystroke. An empty search (clear / backspace-to-empty) skips
   // the delay so resetting the feed feels instant.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
     if (search === '') { setDebouncedSearch(''); return undefined; }
     const id = setTimeout(() => setDebouncedSearch(search), 250);
     return () => clearTimeout(id);
@@ -94,6 +95,7 @@ export function useGalleryPageState(routeSlug = null) {
   useEffect(() => {
     let cancelled = false;
     const gen = ++queryGenRef.current;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- spinner on query change
     setListLoading(true); // show the spinner immediately on a query change
     const mine = !!galleryQuery.filters?.mine;
     const run = mine
@@ -198,6 +200,7 @@ export function useGalleryPageState(routeSlug = null) {
     // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
     // close the open dossier so the view matches the URL.
     openSlugRef.current = null;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- route-sync: close dossier to match URL
     setActiveSlug(null);
     setDossier(null);
     setMapDetail(null);

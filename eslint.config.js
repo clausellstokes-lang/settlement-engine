@@ -150,11 +150,13 @@ export default [
     rules: {
       'no-restricted-syntax': ['error',
         {
-          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          // MemberExpression (not CallExpression) so an ALIAS — `const r = Math.random; r()`,
+          // or `Math.random` handed to a callback — is caught too, not only direct calls.
+          selector: "MemberExpression[object.name='Math'][property.name='random']",
           message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
         },
         {
-          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          selector: "MemberExpression[object.name='Date'][property.name='now']",
           message: 'Determinism: Date.now() is non-reproducible in the seeded pipeline. Thread a timestamp in instead.',
         },
         {
@@ -195,7 +197,8 @@ export default [
     rules: {
       'no-restricted-syntax': ['error',
         {
-          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          // MemberExpression so an alias (`const r = Math.random; r()`) is caught too.
+          selector: "MemberExpression[object.name='Math'][property.name='random']",
           message: 'Determinism: the domain kernel must be pure — no Math.random(). Thread a seeded/derived value from the caller.',
         },
         {
@@ -207,7 +210,7 @@ export default [
           message: 'Determinism: new Date() reads wall-clock — thread `now` from the caller (default wallClockNow() from domain/clock.js, the sole sanctioned wall-clock entry).',
         },
         {
-          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          selector: "MemberExpression[object.name='Date'][property.name='now']",
           message: 'Determinism: Date.now() reads wall-clock — use wallClockMs() from domain/clock.js (the sole sanctioned entry) or thread a value in.',
         },
         {

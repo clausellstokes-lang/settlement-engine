@@ -320,9 +320,13 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     probability: 1,
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
+    // Pin locale to 'en-US' (as the generator paths do): a bare toLocaleString()
+    // renders `12,000` on en-US ICU but `12 000`/`12.000` elsewhere, so persisted
+    // candidate summaries — and any future golden over advance output — would drift
+    // by the runner's locale. CI's pinned Node masks this today; the pin removes it.
     summary: delta > 0
-      ? `${item.name || sourceId} gains about ${abs.toLocaleString()} people from favorable conditions.`
-      : `${item.name || sourceId} loses about ${abs.toLocaleString()} people from cumulative pressure${migrants ? `; about ${migrants.toLocaleString()} may migrate onward` : ''}.`,
+      ? `${item.name || sourceId} gains about ${abs.toLocaleString('en-US')} people from favorable conditions.`
+      : `${item.name || sourceId} loses about ${abs.toLocaleString('en-US')} people from cumulative pressure${migrants ? `; about ${migrants.toLocaleString('en-US')} may migrate onward` : ''}.`,
     reasons: [
       `Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`,
       `Interval ${interval.replace(/_/g, ' ')} with ${rules.intensity} intensity.`,

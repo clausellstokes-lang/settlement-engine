@@ -21,6 +21,7 @@ import { applyTierOutcomeToSettlement } from '../worldPulse/tierResourceDynamics
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
+import { institutionIsFoodAnchor } from '../institutionClassify.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 import {
@@ -55,15 +56,13 @@ function destroySettlement(s, event) {
 // template names (granary, mill, fishery) — losing one is a settlement-level food
 // crisis, not just a closed shop. Sawmills/lumber mills cut wood, not flour.
 /** @param {import('../settlement.schema.js').SimInstitution} inst */
-function isFoodAnchorInstitution(inst) {
-  const n = String(inst?.name || '').toLowerCase();
-  if (!n) return false;
-  // 'fisher|fishing' catches Fisher's landing + Fishing community (production)
-  // without matching Fish market / Fishmonger (retail — losing a shop is not a
-  // settlement-level food crisis).
-  if (/(granar|fisher|fishing|silo)/.test(n)) return true;
-  return n.includes('mill') && !n.includes('sawmill') && !n.includes('lumber');
-}
+// Id-first (rename-proof) food-anchor test. The name rule + its catalog-id twin
+// now live at the canonical join (institutionIsFoodAnchor in computeActiveChains,
+// alongside the other institutionMatches* joins); this local alias keeps the two
+// call sites below reading unchanged. Id-match === the old name rule for every
+// unrenamed catalog institution (byte-identical), but a DM-renamed-but-stamped
+// granary ("Old Pete's grain hoard") now stays a food anchor via its stamped id.
+const isFoodAnchorInstitution = institutionIsFoodAnchor;
 
 // Promote the food_anchor_lost condition when a food anchor is destroyed or
 // crippled. These archetypes had rich consumers (capacity, causal, daily life,

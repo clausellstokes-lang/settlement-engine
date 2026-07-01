@@ -14,15 +14,20 @@
  * style themselves out of accessibility (no "ghost on ghost" combos).
  */
 
+import { GOLD, GOLD_DEEP, GOLD_BG } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 
+// Gold tones are driven off the canonical GOLD/GOLD_DEEP/GOLD_BG tokens (not a
+// one-off bronze) so a palette tweak to GOLD propagates here the same as it does
+// to Button — previously IconButton painted a stale off-palette #a0762a the
+// visual-budget gate can't see (primitives are lint-exempt).
 const TONES = {
-  default:  { bg: '#fff',                       fg: '#1c1409', border: '#d2bd96', hover: '#fffbf5' },
-  primary:  { bg: '#a0762a',                    fg: '#ffffff', border: '#a0762a', hover: '#8c651e' },
-  ghost:    { bg: 'transparent',                fg: '#6b5340', border: 'transparent', hover: 'rgba(160,118,42,0.08)' },
-  active:   { bg: 'rgba(160,118,42,0.12)',      fg: '#1c1409', border: '#a0762a', hover: 'rgba(160,118,42,0.18)' },
-  danger:   { bg: '#fff',                       fg: '#8b1a1a', border: '#c89a9a', hover: '#fff5f5' },
+  default:  { bg: '#fff',        fg: '#1c1409', border: '#d2bd96',    hover: '#fffbf5' },
+  primary:  { bg: GOLD,          fg: '#ffffff', border: GOLD,         hover: GOLD_DEEP },
+  ghost:    { bg: 'transparent', fg: '#6b5340', border: 'transparent', hover: GOLD_BG },
+  active:   { bg: GOLD_BG,       fg: '#1c1409', border: GOLD,         hover: GOLD_BG },
+  danger:   { bg: '#fff',        fg: '#8b1a1a', border: '#c89a9a',    hover: '#fff5f5' },
 };
 
 const SIZES = {

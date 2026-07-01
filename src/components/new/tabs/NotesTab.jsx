@@ -33,6 +33,7 @@ export default function NotesTab({ saveId, notes, section }) {
   }));
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState('');
 
   if (!saving && draft.sourceKey !== notesSourceKey) {
     setDraft({
@@ -55,10 +56,17 @@ export default function NotesTab({ saveId, notes, section }) {
     if (!saveId) return;
     setSaving(true);
     setSaved(false);
+    setError('');
     try {
       await updateDossierNotes(saveId, { dmNotes, aiGuidance });
       setSaved(true);
       setTimeout(() => setSaved(false), 1800);
+    } catch {
+      // updateDossierNotes updates local state optimistically and rethrows when
+      // the cloud write fails — without this catch the rejection was unhandled and
+      // the user saw no error, then the notes vanished on reload (cloud never got
+      // them). Surface it so they can retry; the draft text is still in the boxes.
+      setError('Those notes could not be saved. Your text is still here — try again.');
     } finally {
       setSaving(false);
     }
@@ -117,15 +125,22 @@ export default function NotesTab({ saveId, notes, section }) {
         )}
 
         {saveId ? (
-          <Button
-            type="button"
-            variant="primary"
-            onClick={save}
-            disabled={saving}
-            style={{ justifySelf: 'start' }}
-          >
-            {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
-          </Button>
+          <div style={{ display: 'grid', gap: 8, justifyItems: 'start' }}>
+            <Button
+              type="button"
+              variant="primary"
+              onClick={save}
+              disabled={saving}
+              style={{ justifySelf: 'start' }}
+            >
+              {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
+            </Button>
+            {error && (
+              <p role="alert" style={{ margin: 0, fontSize: FS.xs, color: swatch['#8B1A1A'], lineHeight: 1.5 }}>
+                {error}
+              </p>
+            )}
+          </div>
         ) : (
           <p style={{ margin: 0, fontSize: FS.xs, color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
             Type freely. Save this settlement to keep your notes with it.

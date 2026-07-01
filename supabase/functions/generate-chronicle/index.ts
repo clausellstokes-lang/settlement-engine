@@ -253,7 +253,13 @@ export async function handleGenerateChronicle(
     const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
       feature: 'chronicle',
     });
-    if (spendErr) { await releaseReservation(); return json({ error: spendErr.message || 'Insufficient credits' }, 402, cors); }
+    if (spendErr) {
+      await releaseReservation();
+      // spendErr is an RPC-level failure (business "insufficient" is spendResult.ok
+      // below) — log the raw message, return a generic one so no Postgres internals leak.
+      logError('generate-chronicle', user.id, `spend_credits errored: ${spendErr.message}`, { stage: 'spend' });
+      return json({ error: 'Credit spend failed — no credits were charged. Please try again.' }, 402, cors);
+    }
     if (!spendResult?.ok) {
       await releaseReservation();
       return json({ error: spendResult?.reason || 'Insufficient credits', balance: spendResult?.balance ?? 0 }, 402, cors);
@@ -375,7 +381,8 @@ export async function handleGenerateChronicle(
       if (!metered) await meter(estTokens(promptText), 0, true, false, Date.now() - started);
       await refund('chronicle generation failed');
       await releaseReservation();   // COGS metered above; the headroom hold is redundant
-      return json({ error: (e as Error).message, refunded: true }, 502, cors);
+      logError('generate-chronicle', user.id, `chronicle generation failed: ${(e as Error).message}`, { stage: 'generation' });
+      return json({ error: 'Chronicle generation failed. Your credits were refunded.', refunded: true }, 502, cors);
     }
 
     await releaseReservation();   // success: COGS metered, reservation no longer needed
@@ -394,7 +401,8 @@ export async function handleGenerateChronicle(
         logError('generate-chronicle', null, `reservation release on outer error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
       }
     }
-    return json({ error: (e as Error).message }, 500, cors);
+    logError('generate-chronicle', null, `outer handler error: ${(e as Error).message}`, { stage: 'outer' });
+    return json({ error: 'The chronicle request failed. Please try again.' }, 500, cors);
   }
 }
 

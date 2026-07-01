@@ -594,7 +594,14 @@ export const createSettlementSlice = (set, get) => ({
         s.settlement.versionHistory = cappedVersionHistory([...(Array.isArray(s.settlement.versionHistory) ? s.settlement.versionHistory : []), snapshot]);
       });
     }
-    if (targetSaveId && persistedHistory) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
+    if (targetSaveId && persistedHistory) {
+      // Fire-and-forget: version-history snapshots are a non-critical local
+      // timeline (recordSnapshot is synchronous by contract, so it can't await).
+      // persistSaveUpdate never throws and surfaces cloud failures via the
+      // campaignSyncError banner; the .catch is defensive against a future
+      // contract change so a rejected persist can't become an unhandled rejection.
+      Promise.resolve(persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory })).catch(() => {});
+    }
     return snapshot;
   },
 

@@ -251,21 +251,13 @@ async function supabaseList() {
  * that pulled every save's data/config/toggles blobs and ran the v2 + canonical
  * adapters on all of them just to find one partner by name.
  *
- * KNOWN LIMITATION — read-modify-write race (low severity, deliberately deferred):
- * the partner's settlement is read HERE (outside any transaction), the reciprocal
- * back-link is merged in JS by buildNeighbourBackLink, then written via the batch
- * RPC. Two saves that reference the SAME partner within the read→write window each
- * merge onto their own stale snapshot, so the second write's partner row can drop
- * the first's back-link (last-write-wins). Impact is narrow: it only affects the
- * PARTNER'S back-link array (never the primary save), only under genuinely
- * concurrent same-partner saves (two tabs/devices), and self-heals on the partner's
- * next save/edit. The correct fix is server-side and NOT done here on purpose — it
- * is a change to the shared mutate_settlement_batch RPC (also used by the
- * change-queue flush), which is too central to rewrite for a rare race under a
- * safety-first pass. SPEC for when it's done deliberately: move the partner
- * read-modify-write INTO the RPC — `select ... from settlements where id = <partner>
- * for update`, merge the back-link server-side, write in the same transaction — so
- * concurrent partner updates serialize instead of clobbering.
+ * RESOLVED (migration 096) — the partner back-link read-modify-write race that
+ * this comment used to flag is closed. supabaseSave() now writes the reciprocal
+ * back-link via the merge_neighbour_backlink RPC, which does the partner's
+ * read-modify-write server-side under `select … for update`, so concurrent
+ * same-partner saves serialize instead of clobbering (the former JS-side merge on
+ * a stale snapshot was last-write-wins). This function only READS candidate
+ * partners by name; the atomic reciprocal merge happens in the RPC.
  */
 async function fetchActivePartnersByName(name) {
   if (!name) return [];

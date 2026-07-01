@@ -8,6 +8,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
@@ -82,9 +83,13 @@ serve(async (req) => {
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (err) {
+    // Log the raw Stripe/RPC message server-side (greppable), but return a
+    // generic client message — raw .message can echo Stripe internals or
+    // Postgres function/constraint names. Mirrors create-checkout's catch.
     const message = err instanceof Error ? err.message : 'Unknown error';
+    logError('create-customer-portal', null, message);
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'The billing portal could not be opened. Please try again.' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }

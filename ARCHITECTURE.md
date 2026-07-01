@@ -108,7 +108,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (96) — schema + RLS policies + credit ledger + version
+- **migrations/** (97) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -160,7 +160,13 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   **086** (atomic AI-spend reservation: the global daily/monthly USD cap was
   checked read-only before the model calls while COGS landed only after, so
   concurrent generations could collectively overrun the cap; 086 adds a
-  reservation RPC reconciled to actuals) —
+  reservation RPC reconciled to actuals) +
+  **097** (defense-in-depth for the credit ledger's allocation invariant: a
+  constraint trigger on `credit_spend_allocations` locks the referenced grant row
+  and rejects any insert/update whose per-grant total would exceed the grant's
+  amount, so `SUM(allocations) <= grant.amount` is enforced by the schema — not
+  only by `spend_credits`'s arithmetic — even against a future caller or a manual
+  fix) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->

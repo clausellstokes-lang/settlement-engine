@@ -36,6 +36,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
+import { logError } from "../_shared/logError.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 // Fail CLOSED, never "*": the endpoint is independently protected by JWT auth +
 // role gating + botGuard, but a misconfigured deploy must not silently allow any
@@ -188,7 +189,7 @@ export async function handleAccountActions(
           p_links: links && typeof links === "object" ? links : {},
           p_metadata: metadata && typeof metadata === "object" ? metadata : {},
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
         const ticket = (data ?? {}) as Record<string, unknown>;
         const notified = await sendEmail(
           callingUser.email ?? null,
@@ -206,7 +207,7 @@ export async function handleAccountActions(
       // service-role one) so auth.uid() resolves to the caller.
       case "list_my_tickets": {
         const { data, error } = await userClient.rpc("list_my_tickets");
-        if (error) return json({ error: error.message }, 500);
+        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
         return json({ success: true, tickets: data || [] });
       }
 
@@ -218,7 +219,7 @@ export async function handleAccountActions(
           return json({ error: "A ticketId is required" }, 400);
         }
         const { data, error } = await userClient.rpc("list_ticket_thread", { p_id: ticketId });
-        if (error) return json({ error: error.message }, 500);
+        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
         return json({ success: true, events: data || [] });
       }
 
@@ -235,7 +236,7 @@ export async function handleAccountActions(
         const { data, error } = await adminClient.rpc("post_ticket_reply", {
           p_actor: callingUser.id, p_id: ticketId, p_body: body.trim(), p_visibility: "user",
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
         return json({ success: true, event: data });
       }
       // ── request_deletion — any authed user files their OWN soft-delete ──────
@@ -272,7 +273,8 @@ export async function handleAccountActions(
             status: "requested",
           });
         if (insertErr) {
-          return json({ error: insertErr.message }, 500);
+          logError("account-actions", callingUser.id, `deletion insert failed: ${insertErr.message}`);
+          return json({ error: "The request could not be completed. Please try again." }, 500);
         }
 
         // Best-effort confirmation email so the grace window is genuine notice.
@@ -337,7 +339,7 @@ export async function handleAccountActions(
           p_grace_days: grace,
           p_limit: 500,
         });
-        if (error) return json({ error: error.message }, 500);
+        if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
 
         // Layer 2 (review B16 #1): the RPC stamped deleted_at + disabled_at (so the
         // 057/059 DB+RLS gate already rejects every WRITE from the anonymised shell),
@@ -387,7 +389,9 @@ export async function handleAccountActions(
         return json({ error: `Unknown action: ${action}` }, 400);
     }
   } catch (err) {
-    return json({ error: errorMessage(err) }, 500);
+    // Generic client message; raw error logged server-side (may carry DB internals).
+    logError("account-actions", null, `outer handler error: ${errorMessage(err)}`);
+    return json({ error: "The request could not be completed. Please try again." }, 500);
   }
 }
 

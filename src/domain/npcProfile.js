@@ -23,6 +23,8 @@
  * self-contained, the same constraint the sibling derivations honor.
  */
 
+import { institutionMatchesRegex } from './institutionClassify.js';
+
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
 // the faction archetype vocabulary. We map them
@@ -332,7 +334,7 @@ export function inferInstitutionName(npc, settlement) {
 
   const match = institutions.find(
     /** @param {{name?: string}} inst */
-    inst => !!inst && typeof inst.name === 'string' && hint.test(inst.name)
+    inst => !!inst && typeof inst.name === 'string' && institutionMatchesRegex(inst, hint)
   );
   return match && typeof match.name === 'string' ? match.name : null;
 }
@@ -366,7 +368,7 @@ export function institutionsForCategory(category, settlement) {
   const seen = new Set();
   const out = [];
   for (const inst of institutions) {
-    if (!inst || typeof inst.name !== 'string' || !hint.test(inst.name)) continue;
+    if (!inst || typeof inst.name !== 'string' || !institutionMatchesRegex(inst, hint)) continue;
     if (seen.has(inst.name)) continue;
     seen.add(inst.name);
     out.push(inst.name);

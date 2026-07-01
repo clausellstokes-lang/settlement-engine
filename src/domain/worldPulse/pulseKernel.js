@@ -56,6 +56,36 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval } from './pulseHelpers.js';
+import { assertNoResidueLeak } from './residueStripGuard.js';
+
+/**
+ * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
+ * @enforced-by tests/domain/residueStripRegistry.test.js
+ *
+ * Each entry is a simulation layer that banks OUT-OF-BAND ledger/graph residue while
+ * running, which the pause/resume + dismiss byte-equivalence invariant requires be
+ * stripped for every suppressed major. In the kernel each site carries a matching
+ * `@residue-strip: <id>` marker; tests/domain/residueStripRegistry.test.js fails the
+ * gate if the markers and this list drift apart — so a NEW residue-banking layer can
+ * no longer silently ship without a strip + a registry entry, and a deleted strip is
+ * caught. `coveredBy` names the pause/dismiss equivalence test that pins the site's
+ * byte-equivalence (null = a KNOWN, TRACKED coverage gap — the meta-test asserts it
+ * against an explicit allowlist, so an uncovered site is VISIBLE and acknowledged
+ * rather than silently unverified, which was the whole problem the review flagged).
+ *
+ * @type {ReadonlyArray<{ id: string, banks: string, coveredBy: string|null }>}
+ */
+export const RESIDUE_STRIP_SITES = Object.freeze([
+  { id: 'war_mobilization',      banks: 'warPosture ramp + information_flow signal channels', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+  // strategy_deploy (siege INITIATION) is a tracked coverage gap: unlike the other
+  // three, no pause/dismiss equivalence test triggers a fresh siege-open (it needs a
+  // past-mobilization war state that's fiddly to construct deterministically). The
+  // strip itself exists (its marker is present at the siege-initiation site) — this
+  // only marks that its byte-equivalence isn't yet pinned. Closing it is its own task.
+  { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel',                coveredBy: null },
+  { id: 'conquest',              banks: 'occupation seed + conquest disposition ratchet',     coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+  { id: 'occupation_vassalized', banks: 'vassal promotion + advance-win disposition residue', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+]);
 
 // The upward pressure to mobilize: a settlement RAMPS its war posture
 // when it faces a hostile-axis neighbour (rival / cold_war / hostile). Returns a
@@ -177,22 +207,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return ids.size > 0 ? ids : null;
   };
-  // ── RESIDUE-STRIP REGISTRY (read before adding a simulation layer) ──────────
+  // ── RESIDUE-STRIP REGISTRY — see RESIDUE_STRIP_SITES (module scope, exported) ──
   // The pause/resume + dismiss byte-equivalence invariant depends on a manual,
   // repeated pattern: any layer that, while running, banks OUT-OF-BAND ledger/graph
   // residue (a write NOT routed through the deferred-majors apply partition) MUST,
   // for every suppressed major (residueSuppressionIds), strip that residue back out.
-  // The strip sites that currently exist — keep this list in sync when you add one:
-  //   1. war_mobilization → warPosture ramp + neighbour-signal channels   (~line 420)
-  //   2. strategy_deploy (siege initiation) → deployment seed + war_front  (~line 505)
-  //   3. conquest → occupation seed + conquest disposition ratchet         (~line 619)
-  //   4. occupation_vassalized → vassal promotion residue                  (~line 645)
-  // CONTRACT: a NEW layer that banks its own residue without adding a matching strip
-  // here will leave a phantom ledger on a paused/dismissed world and silently break
-  // the equivalence invariant (advanceCampaignWorldPause.test.js will only catch it
-  // if the test exercises that layer's major). There is no structural enforcement yet
-  // — a residue-registry abstraction is the right long-term refactor; until then this
-  // list IS the registry. All four strips are byte-neutral when nothing is suppressed.
+  // Each strip site below carries an `@residue-strip: <id>` marker; the prose list
+  // that used to live here (and rot) is now the machine-enforced RESIDUE_STRIP_SITES
+  // constant. @enforced-by tests/domain/residueStripRegistry.test.js — it fails the gate
+  // if the markers and the registry drift apart (a new strip without a registry entry, or a deleted
+  // strip), and pins which pause/dismiss equivalence test covers each site. A NEW
+  // layer that banks residue must add a strip + its marker + a registry entry, or the
+  // gate blocks. All strips are byte-neutral when nothing is suppressed.
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -433,6 +459,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       dismissedOutcomeIds: activeDismissals,
     });
     mobilizationOutcomes = effects.outcomes;
+    // @residue-strip: war_mobilization  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // PAUSE-path residue suppression: a DEFERRED war_mobilization major is still SURFACED
     // (it must reach deferredMajors so the DM can decide it on resume) and its footing
     // condition is withheld from the apply pass by the deferMajors partition below — but
@@ -518,6 +545,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the conquest occupation-seed / disposition strip AND, right here, for the SIEGE-
     // INITIATION (strategy_deploy) residue.
     const warOutcomeSuppressedIds = residueSuppressionIds(war.outcomes);
+    // @residue-strip: strategy_deploy  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // SIEGE-INITIATION residue suppression: a DEFERRED or DISMISSED strategy_deploy major
     // is the campaign-altering decision to OPEN a new siege. Its apply outcome is a
     // settlement no-op (withheld from / excluded from the apply pass by the major
@@ -628,6 +656,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // presence) + the live deployments + the pre-tick snapshot (usefulness/resistance).
     // Deterministic (no rng — the state machine is pure). The occupations ledger is
     // read-last/write-next and CONDITIONAL: absent until the first conquest.
+    // @residue-strip: conquest  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // A DM-DISMISSED conquest must not seed an occupation: drop any conquest
     // power_transfer the DM dismissed from the conquest set the occupation layer
     // reads, so freshConquestsFrom never seeds a phantom `contested` occupation for a
@@ -658,6 +687,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the arrival one-shot never fires ⇒ the outcome is dropped). Parity with the
     // conquest-dismiss occupation suppression.
     let occupation = evaluateOccupations({ ...occupationArgs, dismissedOutcomeIds: activeDismissals });
+    // @residue-strip: occupation_vassalized  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // PAUSE-path residue suppression: a DEFERRED occupation_vassalized major must NOT
     // promote the ledger to the terminal `vassalized` rung either (else the paused world
     // holds a vassalized occupation whose vassal edge — withheld from the apply pass — never
@@ -1089,6 +1119,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries, ...pantheonArcEntries];
   const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
+  // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
+  // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to
+  // the simulation), so a forgotten/drifted strip in a known residue store reds a test
+  // across the WHOLE suite rather than surfacing as a silent determinism drift. Inert
+  // (deferredMajors is empty) on the autoresolve path.
+  assertNoResidueLeak(finalWorldState, applied.regionalGraph, deferredMajors);
 
   return {
     campaignId: campaign?.id,

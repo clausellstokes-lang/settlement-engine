@@ -34,7 +34,7 @@ import PlacementsLayer   from './map/PlacementsLayer.jsx';
 import { MAP_MODES }     from '../store/mapSlice.js';
 import { TextInputDialog } from './primitives/Dialog.jsx';
 
-export default function MapOverlay({ bridge, transformOut }) {
+export default function MapOverlay({ bridge, onTransform }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
@@ -113,7 +113,11 @@ export default function MapOverlay({ bridge, transformOut }) {
 
     const applyT = (t) => {
       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
-      if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      // Emit the live transform to the owner (WorldMap) via callback instead of
+      // reaching into a ref passed through props — the owner writes it to a ref
+      // IT owns, which its drop handler reads synchronously. Same live-read
+      // guarantee, but no mutate-a-foreign-ref side channel (react-hooks/immutability).
+      onTransform?.(transformRef.current);
       const { tx, ty, scale } = transformRef.current;
       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
       schedulePersist(tx, ty, scale, W, H);
@@ -172,10 +176,10 @@ export default function MapOverlay({ bridge, transformOut }) {
       window.removeEventListener('pointerup', onUp);
       el.removeEventListener('wheel', onWheel);
     };
-    // `transformOut` is a stable useRef container threaded from WorldMap; its
-    // identity never changes across renders, so listing it here satisfies
-    // exhaustive-deps without ever re-running this pan/zoom effect on render.
-  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height, transformOut]);
+    // `onTransform` is a stable useCallback from WorldMap; its identity never
+    // changes across renders, so listing it here satisfies exhaustive-deps
+    // without ever re-running this pan/zoom effect on render.
+  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height, onTransform]);
 
   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the

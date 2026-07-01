@@ -67,12 +67,12 @@ jobs:
       - name: Type check (domain strict)
         run: npm run typecheck:domain:strict
 
-      # ESLint on the full src/ + tests + scripts. Correctness rules
-      # (undefined vars, dupe keys, rules-of-hooks, the design-token and
-      # analytics-event contracts) are errors; forward-looking React 19
-      # rules and unused-vars are warnings, surfaced for drift tracking
-      # without blocking. The tree currently lints clean (0 problems).
-      # Promote the React 19 warnings to errors when adopting React Compiler.
+      # ESLint on the full src/ + tests + scripts, run with `--max-warnings 0`
+      # so a WARNING is now blocking too (not just errors) — a new stale-closure
+      # (react-hooks/exhaustive-deps) or accidental setState-in-effect can no
+      # longer slip through green. The tree is warning-clean; the few legitimate
+      # forward-looking-rule sites (data-load / debounce / reset effects) carry a
+      # co-located, justified eslint-disable rather than a blanket suppression.
       - name: Lint
         run: npm run lint
 

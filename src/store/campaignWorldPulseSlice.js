@@ -900,11 +900,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       });
     }
     {
-      // backward:true — a party impact is a discrete injection, NOT a time advance
-      // (the snapshot tick equals the cloud's), so the forward guard would tie and
-      // return stale_tick (read as success), dropping the impact's settlement deltas
-      // on reload. Last-write-wins like undo (expectedTick = null) so the write lands.
-      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward: true });
+      // rejectIfNewer:true — a party impact is a same-tick INJECTION (it does not
+      // bump worldState.tick). It must land when the cloud is at our snapshot tick,
+      // but must NOT clobber a world-pulse advance a second tab committed in between.
+      // rejectIfNewer sets 069's expectedTick = tick+1, so the existing atomic guard
+      // applies iff cloud <= our tick and REJECTS (→ conflict) iff a concurrent tab
+      // advanced past it — reusing the tested 069 path, no RPC change. A rejected
+      // write surfaces as cloudPending below so the user can reload + re-apply, rather
+      // than silently overwriting the newer timeline. Single-tab is unchanged (applies).
+      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, rejectIfNewer: true });
       if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
         result.cloudPending = true;
       }

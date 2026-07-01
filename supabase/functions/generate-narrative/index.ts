@@ -1006,8 +1006,11 @@ export async function handleGenerateNarrative(
     });
 
     if (spendErr) {
-      console.error('[generate-narrative] spend_credits RPC errored:', spendErr.message);
-      throw new Error(`Credit spend failed: ${spendErr.message}. Try again — no credits were charged.`);
+      // Log the raw RPC message server-side, but throw a GENERIC user-facing
+      // error (the outer catch surfaces it to the client) — the raw spend_credits
+      // message can carry Postgres function/constraint names (L8 info-disclosure).
+      logError('generate-narrative', user.id, `spend_credits RPC errored: ${spendErr.message}`, { stage: 'spend' });
+      throw new Error('Credit spend failed. Try again — no credits were charged.');
     }
     if (!spendResult) {
       throw new Error('Credit spend returned no result. Try again — no credits were charged.');
@@ -1148,7 +1151,8 @@ export async function handleGenerateNarrative(
                 send({ field: fieldName, value });
               } catch (e) {
                 if (!firstError) firstError = e as Error;
-                send({ field: fieldName, error: (e as Error).message });
+                logError('generate-narrative', user.id, `field '${fieldName}' failed: ${(e as Error).message}`, { stage: 'stream' });
+                send({ field: fieldName, error: 'This section could not be generated.' });
               }
             }));
 
@@ -1158,7 +1162,8 @@ export async function handleGenerateNarrative(
               if (shouldRefundOnFailure('dailyLifeField')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-              send({ error: (firstError as Error).message, refunded: !isElevated, aiUsage });
+              logError('generate-narrative', user.id, `narration failed: ${(firstError as Error).message}`, { stage: 'stream' });
+              send({ error: 'Narration failed.', refunded: !isElevated, aiUsage });
             } else {
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
@@ -1213,7 +1218,8 @@ export async function handleGenerateNarrative(
               if (shouldRefundOnFailure('thesis')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-              send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
+              logError('generate-narrative', user.id, `progression thesis failed: ${(e as Error).message}`, { stage: 'stream' });
+              send({ error: 'Progression thesis failed. No new credits were charged.', refunded: !isElevated, aiUsage });
               controller.close();
               return;
             }
@@ -1280,7 +1286,7 @@ export async function handleGenerateNarrative(
               } catch (e) {
                 failedFields.push(key);
                 console.error(`[generate-narrative] progression pass '${key}' failed:`, (e as Error).message);
-                send({ field: key, error: (e as Error).message });
+                send({ field: key, error: 'This section could not be generated.' });
               }
             }));
 
@@ -1327,7 +1333,7 @@ export async function handleGenerateNarrative(
             if (shouldRefundOnFailure('thesis')) await refund();
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-            send({ error: `Thesis generation failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
+            send({ error: 'Thesis generation failed.', refunded: !isElevated, aiUsage });
             controller.close();
             return;
           }
@@ -1392,7 +1398,7 @@ export async function handleGenerateNarrative(
             } catch (e) {
               failedFields.push(key);
               console.error(`[generate-narrative] pass '${key}' failed:`, (e as Error).message);
-              send({ field: key, error: (e as Error).message });
+              send({ field: key, error: 'This section could not be generated.' });
             }
           });
 
@@ -1427,7 +1433,7 @@ export async function handleGenerateNarrative(
             } catch (e) {
               failedFields.push(`dailyLife.${beat}`);
               console.error(`[generate-narrative] daily-life beat '${beat}' failed:`, (e as Error).message);
-              send({ field: `dailyLife.${beat}`, error: (e as Error).message });
+              send({ field: `dailyLife.${beat}`, error: 'This section could not be generated.' });
             }
           });
 
@@ -1508,7 +1514,7 @@ export async function handleGenerateNarrative(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     const stack = err instanceof Error ? err.stack : undefined;
-    console.error('[generate-narrative] error:', message, stack);
+    logError('generate-narrative', null, message, { stage: 'pre-stream', stack });
     // Release a reservation taken before this throw (086). Reaching this catch
     // means the streaming Response was never returned, so the in-stream `finally`
     // release will never fire and the headroom would leak for the full TTL.
@@ -1521,6 +1527,11 @@ export async function handleGenerateNarrative(
         logError('generate-narrative', null, `reservation release on pre-stream error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
       }
     }
+    // Pass the message through: the intentional pre-stream errors here are
+    // user-facing and safe to show ('Account is not active', 'Insufficient
+    // credits. Need N…'). The ONE path that embedded a raw RPC message
+    // (spend_credits failure) is genericized at its THROW site below and logged
+    // server-side, so raw Postgres internals never reach the client.
     return new Response(
       JSON.stringify({ error: message }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },

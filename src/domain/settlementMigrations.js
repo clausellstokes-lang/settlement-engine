@@ -115,6 +115,16 @@ export function migrateSettlementToLatest(settlement) {
       );
     }
     const next = step.migrate(out);
+    // Explicit shape guard for the first REAL field-rename migration (today's
+    // chain is a no-op): a migrate() that returns null/undefined/non-object would
+    // otherwise surface only as a confusing version-mismatch below. Fail with a
+    // precise message so a buggy migration is obvious the moment it's written.
+    if (!next || typeof next !== 'object') {
+      throw new Error(
+        `[settlementMigrations] migration ${step.from}→${step.to} returned a ${next === null ? 'null' : typeof next} ` +
+        `instead of the migrated settlement object.`,
+      );
+    }
     if (currentVersion(next) !== step.to) {
       throw new Error(
         `[settlementMigrations] migration ${step.from}→${step.to} produced schemaVersion=${currentVersion(next)} ` +

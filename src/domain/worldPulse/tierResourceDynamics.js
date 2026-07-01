@@ -610,9 +610,21 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
     });
   }
 
+  // Promotion nudges population to at least the new tier's floor. Eligibility
+  // promotes at pop >= nextTier.min * 0.92, so without this a just-promoted
+  // settlement sits below its own tier's currentMin and can trip
+  // `strainedBelowFloor` (pop < currentMin && support < 0.45) on the very next
+  // tick — a promote/demote churn loop at the boundary. Demotion leaves
+  // population untouched (the population already fell; the tier is catching up).
+  const promotedFloor = /** @type {any} */ (POPULATION_RANGES)[toTier]?.min || 0;
+  const nextPopulation = direction === 'promotion'
+    ? Math.max(Math.round(Number(settlement.population) || 0), promotedFloor)
+    : settlement.population;
+
   return {
     ...settlement,
     tier: toTier,
+    population: nextPopulation,
     config: {
       ...(settlement.config || {}),
       tier: toTier,

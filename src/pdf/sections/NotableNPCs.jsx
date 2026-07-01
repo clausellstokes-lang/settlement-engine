@@ -148,7 +148,13 @@ function FullCard({ npc, index }) {
         borderRadius: 2,
         backgroundColor: palette.card,
       }}
-      wrap={false}
+      // Was wrap={false}: for a top-power NPC with a long AI blurb + several
+      // secrets/plot-hooks, the (unbounded) card exceeds a full page, and react-pdf
+      // cannot split a no-wrap block — so it CLIPPED the overflow tail, silently
+      // dropping secrets/hooks on the settlement's most important NPC. Allowing the
+      // card to wrap breaks it across a page boundary instead: never lossy. The
+      // occasional split card is an acceptable cost vs. dropping DM-critical content.
+      wrap
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <View style={{ flex: 1 }}>

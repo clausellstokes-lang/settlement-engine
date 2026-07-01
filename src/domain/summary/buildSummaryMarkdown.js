@@ -17,7 +17,7 @@
 function metaLine(s) {
   return [
     s.tierLabel || (s.tier != null && String(s.tier)),
-    s.population != null && `Pop. ${s.population.toLocaleString()}`,
+    s.population != null && `Pop. ${s.population.toLocaleString('en-US')}`,
     s.tradeAccess || (s.config?.tradeRouteAccess && String(s.config.tradeRouteAccess).replace(/_/g, ' ')),
     s.age != null && `${s.age} years old`,
   ].filter(Boolean).join(' · ');

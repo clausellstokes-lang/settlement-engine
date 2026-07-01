@@ -36,6 +36,7 @@ import {
   deriveLocalProductionFromChains,
   deriveInstitutionalServices,
   deriveServiceExports,
+  institutionMatchesKeyword,
 } from './computeActiveChains.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
@@ -1442,10 +1443,13 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
         const hasWaterInst = institutions.some(
           (i) =>
             i.tags?.includes('port') ||
-            (i.name || '').toLowerCase().includes('port') ||
-            (i.name || '').toLowerCase().includes('harbour') ||
-            (i.name || '').toLowerCase().includes('harbor') ||
-            ((i.name || '').toLowerCase().includes('dock') && waterRoute)
+            // id-first (rename-proof) for stamped institutions; byte-identical to the
+            // former name.includes(kw) since institutionMatchesKeyword's id-set is
+            // built from that exact predicate (unstamped custom insts fall back to it).
+            institutionMatchesKeyword(i, 'port') ||
+            institutionMatchesKeyword(i, 'harbour') ||
+            institutionMatchesKeyword(i, 'harbor') ||
+            (institutionMatchesKeyword(i, 'dock') && waterRoute)
         );
         if (!waterRoute && !hasWaterInst) return;
       }
@@ -2140,8 +2144,11 @@ function applyNeighbourEconBias(re, { config, isSubsistenceIsolated }) {
   if (Object.keys(_econBias).length > 0 && !isSubsistenceIsolated) {
     // Apply weights: filter or reorder exports based on bias
     if (_econMode === 'suppress') {
-      // Hostile: cap exports to a max of 4 items (trade embargo simulation)
-      if (re.length > 4) re.splice(4);
+      // Hostile embargo: the cap-to-4 runs AFTER Stage 9 subsumption (see the caller),
+      // so it limits DISTINCT export goods, not raw pre-dedup entries. Capping raw
+      // entries HERE could drop a distinct good (position 5+) while keeping a
+      // near-duplicate ("Grain" + "Bulk grain and foodstuffs") that later collapses —
+      // yielding a smaller, differently-composed embargo set than "top 4 goods".
     } else if (_econMode === 'complement') {
       // Trade partner/allied: remove exports that compete with neighbour's exports
       const biasKeys = Object.keys(_econBias);
@@ -2626,6 +2633,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // Stage 9 — trade-goods subsumption: collapse near-duplicate goods to one
   // canonical entry per list and drop self-imported exports.
   subsumeAllTradeGoods({ re, q, v });
+
+  // Stage 9b — hostile-embargo export cap, applied AFTER subsumption so it limits
+  // DISTINCT canonical export goods to 4 (moved here from applyNeighbourEconBias's
+  // suppress branch, which capped raw pre-dedup entries).
+  if (!_isSubsistenceIsolated
+      && (config._neighbourEconMode || 'independent') === 'suppress'
+      && Object.keys(config._neighbourEconBias || {}).length > 0
+      && re.length > 4) {
+    re.splice(4);
+  }
 
   // Sort income sources by percentage desc, then by source — must be LAST.
   // The tiebreak is codepoint-stable, NOT localeCompare: this output feeds the
