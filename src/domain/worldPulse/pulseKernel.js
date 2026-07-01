@@ -299,6 +299,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         snapshot,
         rng: rng.fork('coup-verdict'),
         tick: worldState.tick,
+        warExhaustion: worldState.warExhaustion || {},
+        warDispositionEnabled: simulationRules.warDispositionEnabled,
       })
     : [];
 

@@ -63,6 +63,13 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // illegitimate + pacifist + hopeless) CAPITULATES deterministically (surrender, not a
   // storm). Complements defenderAttritionEnabled (capacity erosion). Preset-stable.
   defenderResolveEnabled: false,
+  // War-disposition political flywheel (P2). Opt-in, DEFAULT FALSE ⇒ byte-identical (the
+  // coup verdict ignores war sentiment). When true, an unpopular/exhausting war shifts the
+  // ruling seat's hold-chance: a warlike regime waging a sustainable war is steadier, while
+  // war-weariness (the exhaustion scar) erodes the seat and makes a coup — an internal
+  // "end the war" — more likely. So an overextended aggressor can lose on its OWN home
+  // front. Nested under warLayerEnabled. Preset-stable.
+  warDispositionEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -129,6 +136,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'defenderAttritionEnabled',
   'warEconomyDrainEnabled',
   'defenderResolveEnabled',
+  'warDispositionEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([

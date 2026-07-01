@@ -181,6 +181,28 @@ function squash(x) {
   return Math.tanh(x);
 }
 
+// How hard war-weariness drags a regime's political footing. The exhaustion scar is
+// 0..1; a fully-exhausted home front pulls the sentiment strongly negative regardless
+// of how warlike the seat is.
+const WAR_WEARINESS_WEIGHT = 1.5;
+
+/**
+ * Signed war sentiment for the political flywheel (P2). Positive ⇒ the regime's war is
+ * sustainable (a warlike governing seat, low weariness); negative ⇒ the home front is
+ * turning against an exhausting/unpopular war. Composed from the SAME governing-weighted
+ * personality drive the aggression kernel uses (so the seat of power colours it) minus a
+ * war-exhaustion drag. Pure, order-independent (personalityDrive is a weighted sum), and
+ * `0` for a leaderless settlement with no war-exhaustion.
+ * @param {any} settlement
+ * @param {number} [warExhaustionScar] the settlement's ratcheted war-exhaustion (0..1)
+ * @returns {number} signed, clamped to [-1, 1]
+ */
+export function computeWarSentiment(settlement, warExhaustionScar = 0) {
+  const scar = Math.max(0, Math.min(1, Number(warExhaustionScar) || 0));
+  const appetite = personalityDrive(settlement); // governing-weighted aggression, signed
+  return Math.max(-1, Math.min(1, appetite - WAR_WEARINESS_WEIGHT * scar));
+}
+
 /**
  * The settlement's aggression disposition as a centered-on-1.0 multiplier.
  *
