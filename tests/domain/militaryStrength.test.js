@@ -197,6 +197,7 @@ describe('mounted-everywhere-it-should-be guarantee', () => {
       'src/domain/worldPulse/tradeSalience.js',          // B4 — materiel-gap salience
       'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)
       'src/domain/display/armyStrength.js',              // F1 — player-safe army-strength read-model
+      'src/domain/display/warResolve.js',                // P5 — War & Resolve display read-model (needs the raw facets for the exact will/hope the siege uses)
     ]);
     const offenders = hits.filter(p => !ALLOWED.has(p));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
