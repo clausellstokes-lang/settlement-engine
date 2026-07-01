@@ -2371,6 +2371,15 @@ export function slugifyInstitutionName(name) {
     .replace(/^_+|_+$/g, '');
 }
 
+// Single normalizer shared by BOTH the index build and every lookup, so the two
+// can never drift. The lookup trimmed but the index build did not: a catalog (or
+// query) name with stray whitespace would be indexed un-trimmed yet looked up
+// trimmed — a silent id-join miss that falls back to the fuzzy matcher. Route both
+// through this so "lowercase + trimmed" is enforced by construction, not convention.
+export function normalizeCatalogName(name) {
+  return String(name).trim().toLowerCase();
+}
+
 // normalized name → id. Collision-checked at module load: two DIFFERENT
 // canonical names must never slug to the same id, or id-joins would alias
 // them the way the old 12-char-prefix matcher did.
@@ -2380,7 +2389,7 @@ function buildCatalogIdIndex() {
   for (const tierCatalog of Object.values(institutionalCatalog)) {
     for (const group of Object.values(tierCatalog)) {
       for (const name of Object.keys(group)) {
-        const key = name.toLowerCase();
+        const key = normalizeCatalogName(name);
         if (byName.has(key)) continue; // same name at another tier shares the id
         const id = slugifyInstitutionName(name);
         const holder = nameForId.get(id);
@@ -2407,5 +2416,5 @@ const CATALOG_ID_BY_NAME = buildCatalogIdIndex();
  */
 export function catalogIdForName(name) {
   if (name == null) return null;
-  return CATALOG_ID_BY_NAME.get(String(name).trim().toLowerCase()) ?? null;
+  return CATALOG_ID_BY_NAME.get(normalizeCatalogName(name)) ?? null;
 }

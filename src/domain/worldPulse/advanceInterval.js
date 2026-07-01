@@ -6,7 +6,7 @@
 // history-ring collapse. Imports the kernel + the shared helpers (saveId,
 // usableTickInterval); never imported BY the kernel (keeps the chain acyclic).
 import { ensureWorldState } from './worldState.js';
-import { wallClockNow } from '../clock.js';
+import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
 
@@ -193,9 +193,13 @@ function foldUpdatesOntoSaves(saves, updates) {
  * @returns {Promise<any>}
  */
 export async function simulateCampaignWorldInterval({
-  campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(),
+  campaign, saves = [], interval = 'one_month', commit = false, now,
   autoResolve = true, resume = null,
 } = {}) {
+  // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
+  // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
+  // call would forfeit reproducibility across the whole year. Throw in test.
+  if (now == null) { assertNowPinnedInTest('simulateCampaignWorldInterval'); now = wallClockNow(); }
   // The DM-CHOSEN interval (one_year/one_month/…). Interior ticks always run at
   // one_week granularity; the composed metadata folds the DM's chosen label back.
   const resuming = !!resume;

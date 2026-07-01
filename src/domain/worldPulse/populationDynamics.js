@@ -187,9 +187,11 @@ function relationshipWeight(snapshot, sourceId, destId) {
 }
 
 /**
+ * Split `migrants` across candidate destinations. Exported for a focused
+ * conservation unit test (the split must never create or destroy population).
  * @param {any} options
  */
-function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
+export function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
   const chosenMode = mode === 'roll' ? migrationChoice(sourceId, tick) : mode;
   if (chosenMode === 'void') return { mode: chosenMode, deltas: [] };
 
@@ -214,9 +216,18 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
   let assigned = 0;
   const deltas = top.map((item, index) => {
     const last = index === top.length - 1;
+    const remaining = migrants - assigned;
+    // Clamp every non-last share to what's LEFT so the running total can never
+    // exceed `migrants`. Without this the Math.max(1,…) floor could over-assign
+    // when migrants < destinations (e.g. 2 migrants over 4 dests → [1,1,1,-1]),
+    // forcing the last delta negative; it was then filtered out, injecting phantom
+    // people (a non-conservation leak). Conservation now holds by construction:
+    // sum(deltas) === migrants exactly. Unreachable on the live path today (the
+    // mass-emigration gate floors migrants ≥ 11) but pinned so a future threshold
+    // change can't silently re-open it.
     const delta = last
-      ? migrants - assigned
-      : Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight)));
+      ? remaining
+      : Math.min(remaining, Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight))));
     assigned += delta;
     return { saveId: item.id, delta, reason: 'Displaced population disperses through regional links.' };
   }).filter(d => d.delta > 0);

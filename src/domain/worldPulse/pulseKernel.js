@@ -54,7 +54,7 @@ import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
-import { wallClockNow } from '../clock.js';
+import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval } from './pulseHelpers.js';
 import { assertNoResidueLeak } from './residueStripGuard.js';
 
@@ -159,7 +159,11 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   resume that dismissed nothing re-runs BYTE-IDENTICALLY to the autoresolve-ON
  *   tick (the equivalence invariant). Inert on the non-resume path.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(), deferMajors = false, dismissMajorIds = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null } = {}) {
+  // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
+  // test run it throws (never silently divergent bytes); production pins `now` and
+  // falls back to the wall clock only here, at the boundary.
+  if (now == null) { assertNowPinnedInTest('simulateCampaignWorldPulse'); now = wallClockNow(); }
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
   // RESUME dismissal set, computed ONCE up front (before the war/occupation block).
