@@ -93,6 +93,39 @@ const SIEGE_CAPACITY_HOLD_BIAS = 3;
 // collapsed and the town yields deterministically (surrender rather than storm).
 const WILL_BIAS_STRENGTH = 2.2;
 const WILL_CAPITULATE_FLOOR = -0.72;
+// Ally defense (P3, flag-gated). Support relationships whose neighbour may send relief,
+// and the fraction of that neighbour's home defense it contributes to the besieged town.
+const ALLY_SUPPORT_TYPES = new Set(['allied', 'ally', 'vassal', 'patron', 'defensive_pact']);
+const ALLY_RELIEF_FRACTION = 0.4;
+
+/**
+ * Relief a besieged target can draw from its support-relationship neighbours (P3). Sums a
+ * fraction of each allied/vassal/patron neighbour's home defense — but an ally that is
+ * ITSELF under siege this tick can't spare relief. Pure + order-independent (codepoint-
+ * sorted). Mirrors the hostile-edge reader; returns 0 for a friendless target.
+ * @param {any} snapshot @param {string} targetId @param {(id:any)=>any} capacityFor @param {Set<string>} besiegedSet
+ * @returns {number}
+ */
+export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const allies = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    if (!ALLY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a === String(targetId) && snapshot?.byId?.has?.(b)) allies.add(b);
+    else if (b === String(targetId) && snapshot?.byId?.has?.(a)) allies.add(a);
+  }
+  let relief = 0;
+  for (const ally of [...allies].sort(codepoint)) {
+    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+    relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
+  }
+  return relief;
+}
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that
 // cannot storm the town still RAIDS — a low-severity war_pressure on the target, NOT
@@ -541,10 +574,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -574,9 +607,11 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   // on, the caller passes an ERODED home-defense value from the per-target siege ledger
   // instead of the fresh capacity — so a long siege wears the walls down. Null (the
   // default / flag-off path) uses fresh homeDefense → byte-identical to before.
-  const defenderCurrent = Number.isFinite(defenderStrengthOverride)
+  // P3 ally defense: allied/vassal/patron relief (0 when the flag is off) bolsters the
+  // town's effective defense in the verdict — alliances hold at the walls.
+  const defenderCurrent = (Number.isFinite(defenderStrengthOverride)
     ? /** @type {number} */ (defenderStrengthOverride)
-    : defenderCap.homeDefense;
+    : defenderCap.homeDefense) + (Number(defenderReliefBonus) || 0);
 
   // ── HARD FEASIBILITY GATE (deterministic, NO rng). ───────────────────────────────
   const { verdict, ratio, reasons } = classifyFeasibility({
@@ -852,6 +887,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const defenderAttritionEnabled = !!(/** @type {any} */ (rules)?.defenderAttritionEnabled);
   const warEconomyEnabled = !!(/** @type {any} */ (rules)?.warEconomyDrainEnabled);
   const defenderResolveEnabled = !!(/** @type {any} */ (rules)?.defenderResolveEnabled);
+  const allyDefenseEnabled = !!(/** @type {any} */ (rules)?.allyDefenseEnabled);
   const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
   const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
 
@@ -890,7 +926,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       const eroded = prior && Number.isFinite(prior.currentEffectiveStrength) ? prior.currentEffectiveStrength : homeDef;
       defenderStrengthOverride = Math.min(eroded, homeDef);
     }
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled });
+    // P3 ally defense: allied/vassal/patron neighbours (not themselves besieged) send
+    // relief. 0 when the flag is off ⇒ the verdict is unchanged.
+    const defenderReliefBonus = allyDefenseEnabled
+      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets))
+      : 0;
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front

@@ -70,6 +70,11 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // "end the war" — more likely. So an overextended aggressor can lose on its OWN home
   // front. Nested under warLayerEnabled. Preset-stable.
   warDispositionEnabled: false,
+  // Ally defense (P3). Opt-in, DEFAULT FALSE ⇒ byte-identical (a besieged town defends
+  // alone). When true, a target's allied / vassal / patron neighbours that are not
+  // themselves under siege send relief — a fraction of their home defense — bolstering
+  // the defender in the siege verdict, so alliances matter at the walls. Preset-stable.
+  allyDefenseEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -137,6 +142,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'warEconomyDrainEnabled',
   'defenderResolveEnabled',
   'warDispositionEnabled',
+  'allyDefenseEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([
