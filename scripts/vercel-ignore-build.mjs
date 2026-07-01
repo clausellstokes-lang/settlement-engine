@@ -43,6 +43,24 @@
  */
 
 import { pathToFileURL } from 'node:url';
+import { migrationNumbers, readAppliedHeadLedger } from './check-migration-head.mjs';
+
+/**
+ * Read the migration-currency state from the repo: the highest migration file
+ * number vs the applied-head ledger's claim of what's live in prod. Injected into
+ * decideDeploy so tests can drive drift without touching the filesystem.
+ * @returns {{ repoHead: number | null, appliedHead: number | null }}
+ */
+export function defaultReadMigrationState() {
+  let repoHead = null;
+  try {
+    const nums = migrationNumbers();
+    repoHead = nums.length ? nums[nums.length - 1] : null;
+  } catch { /* migrations dir unreadable in this context — treat as unknown */ }
+  const ledger = readAppliedHeadLedger();
+  const appliedHead = ledger && Number.isFinite(ledger.appliedHead) ? ledger.appliedHead : null;
+  return { repoHead, appliedHead };
+}
 
 // Exported so a test can assert these still match the `name:` of every job in
 // .github/workflows/ci.yml — a renamed CI job would otherwise leave the gate
@@ -68,7 +86,7 @@ export const REQUIRED_CHECKS = [
  *   `action: 'skip'` → exit 0 (Vercel ignores the build);
  *   `action: 'proceed'` → exit 1 (Vercel runs the build).
  */
-export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns) {
+export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns, readMigrationState = defaultReadMigrationState) {
   const sha = env.VERCEL_GIT_COMMIT_SHA;
   const owner = env.VERCEL_GIT_REPO_OWNER;
   const repo = env.VERCEL_GIT_REPO_SLUG;
@@ -144,6 +162,27 @@ export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns) {
     return {
       action: 'skip',
       reason: `required checks not green: ${failed.map((n) => `${n}=${byName.get(n).conclusion}`).join(', ')}`,
+    };
+  }
+
+  // Migration-currency gate. CI's validate:migration-head only WARNS when the repo
+  // is ahead of the applied-head ledger (the commit→deploy window is normal), so the
+  // DEPLOY gate is where it turns fail-closed: don't ship client/edge code whose
+  // migrations aren't marked applied to prod — it may reference a schema the live DB
+  // doesn't have yet. Fail-open only when the state is unknowable (null); a definite
+  // drift blocks, with a loud one-line override for a deliberate schema-free deploy.
+  const { repoHead, appliedHead } = readMigrationState();
+  if (repoHead != null && appliedHead != null && repoHead > appliedHead) {
+    if (env.VERCEL_ALLOW_MIGRATION_DRIFT === '1') {
+      return {
+        action: 'proceed',
+        warn: true,
+        reason: `migration ledger behind (prod applied ${appliedHead} < repo head ${repoHead}) but VERCEL_ALLOW_MIGRATION_DRIFT=1 — proceeding (schema may be behind the shipped code)`,
+      };
+    }
+    return {
+      action: 'skip',
+      reason: `CI green, but prod is at migration ${appliedHead} while the repo head is ${repoHead} — run \`supabase db push\` and bump supabase/applied-head.json before deploying (or set VERCEL_ALLOW_MIGRATION_DRIFT=1 for a deliberate schema-free deploy)`,
     };
   }
 

@@ -252,6 +252,34 @@ describe('production deploy is gated on CI', () => {
     expect(d.reason).toMatch(/not green/);
   });
 
+  // ── Migration-currency gate (audit: CI only WARNS on ledger drift; the deploy
+  //    gate makes it fail-closed so code can't ship ahead of the prod schema). ──
+  const greenCiEnv = { ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' };
+  const migState = (repoHead, appliedHead) => () => ({ repoHead, appliedHead });
+
+  it('FAILS CLOSED: skips when CI is green but the prod migration ledger is behind the repo head', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(98, 97));
+    expect(d.action).toBe('skip');
+    expect(d.reason).toMatch(/prod is at migration 97 while the repo head is 98|db push/i);
+  });
+
+  it('proceeds when the ledger confirms prod is at the repo head', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(97, 97));
+    expect(d.action).toBe('proceed');
+  });
+
+  it('honors VERCEL_ALLOW_MIGRATION_DRIFT=1 for a deliberate schema-free deploy (loudly)', async () => {
+    const d = await decideDeploy({ ...greenCiEnv, VERCEL_ALLOW_MIGRATION_DRIFT: '1' }, okFetch(greenRuns), migState(98, 97));
+    expect(d.action).toBe('proceed');
+    expect(d.warn).toBe(true);
+    expect(d.reason).toMatch(/VERCEL_ALLOW_MIGRATION_DRIFT/);
+  });
+
+  it('fails OPEN on unknown migration state (null) — never blocks on an unreadable ledger', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(null, null));
+    expect(d.action).toBe('proceed');
+  });
+
   it('PROCEEDS on a green-after-rerun commit (a re-run success overrides a same-name stale failure)', async () => {
     // GitHub returns check-runs newest-first; a re-run leaves [{success},{failure}]
     // for the same name. The dedup must keep the SUCCESS (not the older failure),

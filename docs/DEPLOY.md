@@ -54,6 +54,21 @@ so provisioning the token is a required setup step, not an optional hardening on
 See the script header in `scripts/vercel-ignore-build.mjs` for the full decision
 table.
 
+**Migration-currency gate (fail-closed).** Even when CI is green, the deploy is
+BLOCKED if `supabase/applied-head.json` says production is behind the repo migration
+head — i.e. the code being shipped may reference a schema the live DB doesn't have
+yet. `npm run check`'s `validate:migration-head` only WARNS on this (the commit→push
+window is normal); the deploy gate is where it turns fatal. To ship: run
+`supabase db push`, bump `appliedHead` in the ledger, and redeploy. For a deliberate
+schema-free deploy while the ledger is legitimately behind, set
+`VERCEL_ALLOW_MIGRATION_DRIFT=1` (proceeds with a loud warning). Verified through the
+real `decideDeploy` in `tests/build/ciGateHardening.test.js`.
+
+**Local convenience.** `npm run check` mirrors CI's `check` job (deliberately excludes
+the Deno edge tests, which are CI's separate `deno-tests` job). To run EVERYTHING CI
+runs in one command locally, use `npm run check:full` (= `check` + `check:edge-behavior`).
+The pre-push hook already runs both.
+
 For defense in depth, also do one of the two below (weakest → strongest):
 
 1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
