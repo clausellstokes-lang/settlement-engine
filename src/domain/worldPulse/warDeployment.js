@@ -78,7 +78,7 @@ const EXHAUSTION_CONDITION_FLOOR = 0.20;
 // committed abroad fights home battles at reduced strength). The siege contest uses
 // CURRENT capacity. Capacities are 0..100; the logistic slope is calibrated for that
 // scale.
-const ARMY_DEPLOYED_CAPACITY_PENALTY = 14; // home-defense points lost while the army is abroad
+export const ARMY_DEPLOYED_CAPACITY_PENALTY = 14; // home-defense points lost while the army is abroad
 // Siege verdict on the 0..100 capacity scale. K is the log-odds slope per capacity
 // point; HOLD_BIAS is the home-ground defender advantage. Calibrated so a MUTUAL /
 // near-even siege HOLDS most ticks (pFall ≈ 0.3 — wars take a few ticks, the scar
@@ -92,7 +92,30 @@ const SIEGE_CAPACITY_HOLD_BIAS = 3;
 // max shift (comparable to the hold bias). At/below the capitulate floor the will has
 // collapsed and the town yields deterministically (surrender rather than storm).
 const WILL_BIAS_STRENGTH = 2.2;
-const WILL_CAPITULATE_FLOOR = -0.72;
+export const WILL_CAPITULATE_FLOOR = -0.72;
+
+/**
+ * The defender's WILL-to-resist score ∈ [-1, 1], composed from leadership/faith
+ * temperament (facets.will, 0..100), regime legitimacy (0..100), food/supply
+ * (facets.logistics, 0..100), and hope (the capacity odds it faces). SHARED by the P4
+ * siege verdict (which biases the roll by it) and the read-only War & Resolve display —
+ * so the resolve the DM sees is the resolve the siege uses. Pure; 0 is a real `will`
+ * value (not a missing-default). A score ≤ WILL_CAPITULATE_FLOOR means the will has
+ * collapsed (the town surrenders rather than be stormed).
+ *
+ * @param {{ willFacet?: any, legitimacyScore?: any, logisticsFacet?: any, defenderCurrent?: number, coalitionCurrent?: number }} args
+ * @returns {number}
+ */
+export function composeDefenderWillScore({ willFacet, legitimacyScore, logisticsFacet, defenderCurrent = 0, coalitionCurrent = 0 }) {
+  const willRaw = Number(willFacet);
+  const willFacetN = (((Number.isFinite(willRaw) ? willRaw : 50)) - 50) / 50;  // martial/pacifist gov + deity temper (0 is a real value)
+  const legit = Number(legitimacyScore);
+  const legitN = Number.isFinite(legit) ? (legit - 50) / 50 : 0;
+  const logisticsN = Number.isFinite(Number(logisticsFacet)) ? (Number(logisticsFacet) - 50) / 50 : 0; // food + supply
+  const denom = coalitionCurrent + defenderCurrent;
+  const hopeN = (((denom > 0 ? defenderCurrent / denom : 0.5)) - 0.5) * 2;     // the odds it faces
+  return Math.max(-1, Math.min(1, 0.40 * willFacetN + 0.25 * legitN + 0.20 * logisticsN + 0.15 * hopeN));
+}
 // Ally defense (P3, flag-gated). Support relationships whose neighbour may send relief,
 // and the fraction of that neighbour's home defense it contributes to the besieged town.
 const ALLY_SUPPORT_TYPES = new Set(['allied', 'ally', 'vassal', 'patron', 'defensive_pact']);
@@ -705,14 +728,13 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   let willBias = 0;
   if (defenderResolveEnabled) {
     const facets = defenderCap.facets || {};
-    const willRaw = Number(facets.will);
-    const willFacetN = (((Number.isFinite(willRaw) ? willRaw : 50)) - 50) / 50;  // martial/pacifist gov + deity temper (0 is a real value)
-    const legit = Number(defenderItem?.settlement?.powerStructure?.publicLegitimacy?.score);
-    const legitN = Number.isFinite(legit) ? (legit - 50) / 50 : 0;
-    const logisticsN = Number.isFinite(Number(facets.logistics)) ? (Number(facets.logistics) - 50) / 50 : 0; // food + supply
-    const denom = coalitionCurrent + defenderCurrent;
-    const hopeN = (((denom > 0 ? defenderCurrent / denom : 0.5)) - 0.5) * 2;     // the odds it faces
-    const willScore = Math.max(-1, Math.min(1, 0.40 * willFacetN + 0.25 * legitN + 0.20 * logisticsN + 0.15 * hopeN));
+    const willScore = composeDefenderWillScore({
+      willFacet: facets.will,
+      legitimacyScore: defenderItem?.settlement?.powerStructure?.publicLegitimacy?.score,
+      logisticsFacet: facets.logistics,
+      defenderCurrent,
+      coalitionCurrent,
+    });
     willBias = WILL_BIAS_STRENGTH * willScore;
     if (willScore <= WILL_CAPITULATE_FLOOR) {
       // WILL COLLAPSE → the defenders yield rather than be stormed (a bloodless fall).

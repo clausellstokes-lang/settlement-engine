@@ -106,6 +106,17 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. Set false to fall back to the legacy single-tick advance.',
   },
+  // The read-only surfacing layer for the war-economy phases (P1-P4 + sack). OFF by
+  // default. When on, a "War & Resolve" tab reads each settlement's morale signals —
+  // Hope, Resolve, Faith relation, Supply, and the pro-war / anti-war balance — and the
+  // same signals ground the AI narrative + daily-life prose. Pure display: it computes
+  // nothing the simulation doesn't already know, mutates no state, and is independent of
+  // the sim flags (it reads whatever the current rules produce), so it never touches
+  // determinism or the golden master.
+  warEconomySurfacing: {
+    default: false,
+    description: 'A read-only "War & Resolve" tab surfacing each settlement\'s Hope / Resolve / Faith relation / Supply / pro-war vs anti-war balance, and the same signals grounding the AI narrative + daily-life prose. Display-only; touches no simulation state.',
+  },
 
   // ── Pricing copy ────────────────────────────────────────────────────────────
   // The simulation-led copy ("Generate a town in seconds, then run the region for
