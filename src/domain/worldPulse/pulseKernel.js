@@ -634,6 +634,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
       tick: worldState.tick,
+      warEconomyEnabled: simulationRules.warEconomyDrainEnabled,
     });
 
     // The trade-war layer. The per-commodity primary-supplier contest composes

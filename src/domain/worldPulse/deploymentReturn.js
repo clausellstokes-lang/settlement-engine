@@ -196,9 +196,10 @@ function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess
  * @param {any} args.graph      the regional graph AFTER this tick's mints (so "besieged" is current)
  * @param {{ random: () => number, fork: (label:string) => any }} args.rng
  * @param {number} [args.tick]
+ * @param {boolean} [args.warEconomyEnabled]  P1 flag: emit the conserved homecoming population credit
  * @returns {any[]} probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  */
-export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0 }) {
+export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0, warEconomyEnabled = false }) {
   const outcomes = [];
   const baseRng = rng.fork('deployment-return');
   // Codepoint-sort by home id so iteration order never leaks into output.
@@ -216,6 +217,30 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
     // / negotiates / splinters. The roll is forked on the home id (order-independent).
     const ratio = strengthRatioOf(record.deployment, record.outcome);
     const recordRng = baseRng.fork(homeId);
+
+    // ── WAR-ECONOMY RETURN-REPLENISH (P1, flag-gated). The army banked a headcount of
+    // conscripted population (deployedPopulation) on its march; the SURVIVORS come home,
+    // scaled by the army's remaining-strength ratio. The war dead (deployedPopulation −
+    // survivors) are the ONLY population sink — they are never credited back, so the
+    // books balance by construction (Σ conscription debits − survivors === war dead).
+    const deployedPopulation = Math.max(0, Math.round(Number(record.deployment?.deployedPopulation) || 0));
+    if (warEconomyEnabled && deployedPopulation > 0) {
+      const survivors = Math.min(deployedPopulation, Math.round(deployedPopulation * ratio));
+      if (survivors > 0) {
+        const fell = deployedPopulation - survivors;
+        outcomes.push({
+          id: `world_outcome.army_homecoming.${stablePart(homeId)}.${tick}`,
+          candidateType: 'army_homecoming',
+          targetSaveId: homeId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${homeName}'s army comes home`,
+          summary: `${survivors.toLocaleString()} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString()} did not` : ''}.`,
+          populationDeltas: [{ saveId: homeId, delta: survivors, reason: `${homeName}'s surviving soldiers return home.` }],
+          metadata: { warEconomy: 'homecoming', armyId: homeId, survivors, fell, deployedPopulation },
+        });
+      }
+    }
 
     if (isOccupied(item)) {
       // STRENGTH-SCALED: a strong returning army breaks the foreign occupation; a

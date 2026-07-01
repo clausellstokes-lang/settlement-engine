@@ -49,6 +49,13 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // ledger that feeds the siege verdict — a game-balance change gated behind the soak's
   // convergence flags before it graduates. Inherited false by every preset (stability-guarded).
   defenderAttritionEnabled: false,
+  // War-economy population drain (P1). Opt-in, DEFAULT FALSE so every existing campaign
+  // is byte-identical (deploying an army moves no real population/food). When true, a
+  // deployed army conscripts population from its home each tick (a conserved debit) and
+  // returns the survivors when it comes home — so war costs blood, and the books balance
+  // (deployed − returned === war dead). Nested under warLayerEnabled. Inherited false by
+  // every preset (stability-guarded).
+  warEconomyDrainEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -113,6 +120,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'settlementStrategyEnabled',
   'religionDynamicsEnabled',
   'defenderAttritionEnabled',
+  'warEconomyDrainEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([

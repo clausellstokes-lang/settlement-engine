@@ -47,7 +47,7 @@ const GRANDFATHERED = {
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
-  'src/domain/worldPulse/warDeployment.js': 1331, // +59: defender-attrition spike ledger (flag-gated)
+  'src/domain/worldPulse/warDeployment.js': 1367, // defender-attrition + war-economy P1 conscription (both flag-gated)
   'src/generators/narrativeGenerator.js': 1250,
   'src/domain/causalState.js': 1242,
   'src/domain/worldPulse/stressors.js': 1227,

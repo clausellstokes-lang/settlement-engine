@@ -111,6 +111,14 @@ const REINFORCEMENT_COST_FLOOR = 0.0; // the module already floors; this is a do
 const AGE_DRAIN_PER_TICK = 0.02;
 const AGE_DRAIN_CAP = 0.35;
 
+// War-economy population drain (P1, flag-gated). Each tick a deployed army is in the
+// field, it conscripts this fraction of the home population to the front (accumulated
+// on the record's deployedPopulation, restored on return minus the war dead). Kept
+// small so a campaign bleeds the home over many ticks rather than gutting it at once,
+// and floored so a war never conscripts a settlement below a skeleton population.
+const WAR_CONSCRIPT_RATE_PER_TICK = 0.006; // ~0.6% of home pop per deployed tick
+const WAR_CONSCRIPT_POP_FLOOR = 250;       // never conscript the home below this
+
 // ── HARD SIEGE-DURATION CEILING (the absolute homeostasis backstop). ──────────────
 // The exhaustion/withdrawal arc normally ends a war: a stalled siege drops out of the
 // plausible band (capacity collapses under the scar) and the besieger withdraws. But a
@@ -807,6 +815,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // town is no longer besieged — so a relieved town heals to full next time. Only
   // ongoing sieges survive the end-of-loop prune, so the ledger can never leak.
   const defenderAttritionEnabled = !!(/** @type {any} */ (rules)?.defenderAttritionEnabled);
+  const warEconomyEnabled = !!(/** @type {any} */ (rules)?.warEconomyDrainEnabled);
   const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
   const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
 
@@ -1182,6 +1191,32 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const origin = buildOriginEnvelope(snapshot, graph, capacityFor, warExhaustion, fromId);
     const flow = computeReinforcement({ record: rec, origin });
     deployments[fromId] = applyReinforcementToRecord(rec, flow);
+
+    // ── WAR-ECONOMY CONSCRIPTION (P1, flag-gated; inert + byte-identical when off). A
+    // deployed army draws real population from its home each tick — men march to the
+    // front. The debit is a conserved populationDelta, and the headcount is banked on
+    // the record (deployedPopulation) so the return-replenish gives back exactly the
+    // SURVIVORS (deploymentReturn.js). Floored so a war can't conscript a home to zero.
+    if (warEconomyEnabled) {
+      const homePop = Math.max(0, Math.round(Number(snapshot?.byId?.get?.(fromId)?.settlement?.population) || 0));
+      const room = Math.max(0, homePop - WAR_CONSCRIPT_POP_FLOOR);
+      const sent = Math.min(Math.round(homePop * WAR_CONSCRIPT_RATE_PER_TICK), room);
+      if (sent > 0) {
+        const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
+        deployments[fromId] = { ...deployments[fromId], deployedPopulation: prevDeployed + sent };
+        outcomes.push({
+          id: `world_outcome.war_conscription.${stablePart(fromId)}.${tick}`,
+          candidateType: 'war_conscription',
+          targetSaveId: fromId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${name} conscripts for the front`,
+          summary: `${name} sends ${sent.toLocaleString()} more to the army besieging ${targetName}.`,
+          populationDeltas: [{ saveId: fromId, delta: -sent, reason: `${name} conscripts men for the campaign against ${targetName}.` }],
+          metadata: { warEconomy: 'conscription', armyId: fromId, sent },
+        });
+      }
+    }
 
     // The age-scaled war_drain bump: the LONGER deployed, the deeper the home bleed —
     // even a winning war keeps draining the origin. Stacks on the front-count drain.
