@@ -36,6 +36,7 @@ import { shouldRefundOnFailure } from './refundPolicy.ts';
 // refined free-form prose with id-bearing tokens the client tokenizer parses.
 // Ids are byte-identical to the client dossier index (parity-tested).
 import { wrapEntityRefsInProse } from './entityRefWrapper.ts';
+import { scanProseForInvention, collectFullCanon, proseFieldsOf } from './inventionSignal.ts';
 // Tier 6.8 — bundled aiGrounding contract. Pre-built by
 // `scripts/build-edge-shared.mjs`. Freshness enforced by
 // tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
@@ -1308,6 +1309,14 @@ export async function handleGenerateNarrative(
               skippedFields,
               aiUsage,
             });
+            // Advisory AI-invention signal (logging-only) — same contract as the narrative
+            // path: AFTER send({done}), wrapped so it can never throw into the refund catch-all.
+            try {
+              if ((globalThis as any).Deno?.env?.get?.('AI_INVENTION_SIGNAL') !== 'off') {
+                const sig = scanProseForInvention(proseFieldsOf(aiClone), collectFullCanon(aiClone), confirmedAiGuidance);
+                if (sig.count > 0) console.warn('[generate-narrative] ai_invention_signal', JSON.stringify({ where: 'progression', count: sig.count, samples: sig.samples }));
+              }
+            } catch { /* advisory only — must never affect generation or the money path */ }
             controller.close();
             return;
           }
@@ -1461,6 +1470,15 @@ export async function handleGenerateNarrative(
             skippedFields,
             aiUsage,
           });
+          // Advisory AI-invention signal (logging-only; disable with AI_INVENTION_SIGNAL=off).
+          // AFTER send({done}) and wrapped so it can NEVER throw into the stream's catch-all
+          // refund() below — a throw here would spuriously refund a successful paid run.
+          try {
+            if ((globalThis as any).Deno?.env?.get?.('AI_INVENTION_SIGNAL') !== 'off') {
+              const sig = scanProseForInvention(proseFieldsOf(aiClone), collectFullCanon(aiClone), confirmedAiGuidance);
+              if (sig.count > 0) console.warn('[generate-narrative] ai_invention_signal', JSON.stringify({ where: 'narrative', count: sig.count, samples: sig.samples }));
+            }
+          } catch { /* advisory only — must never affect generation or the money path */ }
           controller.close();
         } catch (err) {
           await refund();
