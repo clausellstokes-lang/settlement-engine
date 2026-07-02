@@ -45,6 +45,19 @@ const recordCost = (usd, daysAgo = 0) =>
     [UID, usd, String(daysAgo)],
   );
 
+/**
+ * Insert a COGS row at a created_at pinned to a raw SQL time expression evaluated in the
+ * DB's OWN clock/timezone — the boundary-proof way to land a spend "this month" or "today".
+ * `tsSql` is a trusted test-authored SQL fragment (no user input), so interpolation is safe.
+ */
+const recordCostAt = (usd, tsSql) =>
+  db.query(
+    `insert into public.ai_usage_events
+       (user_id, feature, provider, model, input_tokens, output_tokens, estimated_cost_usd, ok, created_at)
+     values ($1, 'narrative', 'anthropic', 'claude-opus-4-8', 100, 100, $2, true, ${tsSql})`,
+    [UID, usd],
+  );
+
 const setCap = (daily, monthly, enabled = true) =>
   db.query(
     `update public.system_config set value = $1::jsonb where key = 'ai_spend_cap'`,
@@ -126,22 +139,25 @@ describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
     it('BLOCKS once MONTHLY spend reaches the monthly cap (even if today is clear)', async () => {
       // Spend that lands earlier this month but not today: daily clear, month over.
       await setCap(50, 100, true);
-      // Month-boundary safe: a fixed "N days ago" lands in the PREVIOUS calendar
-      // month in the first days of a month (e.g. on the 1st, 5 days ago is last
-      // month), so the current-month total would be 0 and the block would not
-      // fire. Land the prior spend on day 1 of THIS month instead: daysAgo =
-      // (day-of-month - 1). On the 1st that is 0 (spend lands today), so the
-      // daily-clear assertion is skipped that one day — the monthly block, the
-      // point of this test, still holds every day.
-      const dayOfMonth = new Date().getUTCDate();
-      const earlierThisMonth = Math.max(0, dayOfMonth - 1);
-      await recordCost(60, earlierThisMonth);  // earlier this month
-      await recordCost(50, earlierThisMonth);  // month total 110 > 100
+      // Boundary-proof: anchor the spend's timestamp to the DB's OWN clock (date_trunc on
+      // now()), NOT a JS `new Date()` offset. The old fixture computed "N days ago" from
+      // getUTCDate(), which disagrees with the SQL windows when the JS UTC date and the DB
+      // session's now()/date_trunc straddle a day/month boundary — so on the 1st the spend
+      // slipped OUT of the monthly window and the block silently failed to fire (a flake,
+      // not a guard bug; the RPC's `day/month < cap` logic is correct). Landing at the start
+      // of THIS month keeps both rows inside the monthly window on every calendar day.
+      await recordCostAt(60, `date_trunc('month', now()) + interval '1 second'`);
+      await recordCostAt(50, `date_trunc('month', now()) + interval '2 seconds'`); // month total 110 > 100
+      // "Today is clear" is only demonstrable when the month started BEFORE today (i.e. not
+      // the 1st); ask the DB, so the check matches the same clock the spend was pinned to.
+      const startedBeforeToday = (await scalar(
+        `select (date_trunc('month', now()) < date_trunc('day', now())) as before`,
+      )).before;
       const r = await checkCap();
-      if (earlierThisMonth > 0) {
+      if (startedBeforeToday) {
         expect(Number(r.daily_spend)).toBeCloseTo(0, 5); // nothing today
       }
-      expect(r.allowed).toBe(false);                     // but month cap blocks
+      expect(r.allowed).toBe(false);                     // but month cap blocks, every day
     });
 
     it('respects the operator kill-switch: enabled:false disables the cap', async () => {
