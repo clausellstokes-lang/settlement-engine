@@ -196,10 +196,9 @@ function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess
  * @param {any} args.graph      the regional graph AFTER this tick's mints (so "besieged" is current)
  * @param {{ random: () => number, fork: (label:string) => any }} args.rng
  * @param {number} [args.tick]
- * @param {boolean} [args.warEconomyEnabled]  P1 flag: emit the conserved homecoming population credit
  * @returns {any[]} probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  */
-export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0, warEconomyEnabled = false }) {
+export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0 }) {
   const outcomes = [];
   const baseRng = rng.fork('deployment-return');
   // Codepoint-sort by home id so iteration order never leaks into output.
@@ -218,13 +217,22 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
     const ratio = strengthRatioOf(record.deployment, record.outcome);
     const recordRng = baseRng.fork(homeId);
 
-    // ── WAR-ECONOMY RETURN-REPLENISH (P1, flag-gated). The army banked a headcount of
-    // conscripted population (deployedPopulation) on its march; the SURVIVORS come home,
-    // scaled by the army's remaining-strength ratio. The war dead (deployedPopulation −
-    // survivors) are the ONLY population sink — they are never credited back, so the
-    // books balance by construction (Σ conscription debits − survivors === war dead).
+    // ── WAR-ECONOMY RETURN-REPLENISH (P1/F2). The army banked a headcount of
+    // conscripted + levied population (deployedPopulation) on its march; the SURVIVORS
+    // come home, scaled by the army's remaining-strength ratio. The war dead
+    // (deployedPopulation − survivors) are the ONLY population sink — they are never
+    // credited back, so the books balance by construction (Σ conscription/levy debits −
+    // survivors === war dead).
+    //
+    // Gated on the BANK, not a live flag: deployedPopulation is only ever banked by a
+    // flag-gated debit (conscription under warEconomyDrainEnabled, levy under
+    // warLevyEnabled), so a non-zero bank PROVES real population was debited and MUST be
+    // credited back regardless of which flags hold at RETURN time. Gating the credit on
+    // warEconomyDrainEnabled here made warLevyEnabled-without-drain a permanent 100%
+    // population sink (every levied man vanished) and let a mid-war drain flag-off strand
+    // the whole banked headcount. Flag-off worlds never bank ⇒ byte-identical.
     const deployedPopulation = Math.max(0, Math.round(Number(record.deployment?.deployedPopulation) || 0));
-    if (warEconomyEnabled && deployedPopulation > 0) {
+    if (deployedPopulation > 0) {
       const survivors = Math.min(deployedPopulation, Math.round(deployedPopulation * ratio));
       if (survivors > 0) {
         const fell = deployedPopulation - survivors;

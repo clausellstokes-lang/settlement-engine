@@ -31,6 +31,7 @@ import {
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,
   ensureRelationshipState,
+  relationshipRoles,
 } from './relationshipEvolution.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { mintDirectedChannel, hasWarLayerEvidence } from '../region/graph.js';
@@ -166,7 +167,11 @@ export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) 
  * The non-besieged, non-deploying vassal / allied neighbours a warring settlement can levy
  * from (F2). Mirrors computeAllyRelief's symmetric support-edge reading, but over
  * LEVY_SUPPORT_TYPES (no 'patron'), and drops any source in `excludeSet` (itself besieged or
- * fielding its own army — it can spare nothing). Pure, codepoint-sorted, order-independent.
+ * fielding its own army — it can spare nothing). A 'vassal' edge is HIERARCHICAL, not
+ * symmetric: relationshipRoles resolves the direction (state-first via overlordSaveId, edge
+ * orientation as the fallback) and only the SENIOR side may levy its junior — a junior
+ * levying its own OVERLORD is excluded exactly like the 'patron' direction is. Pure,
+ * codepoint-sorted, order-independent.
  * @param {any} snapshot @param {string} homeId @param {Set<string>} excludeSet
  * @returns {string[]}
  */
@@ -180,10 +185,50 @@ export function computeLevySources(snapshot, homeId, excludeSet) {
     const { from, to } = getRelationshipSettlements(edge);
     const a = String(from);
     const b = String(to);
+    if (relState.relationshipType === 'vassal') {
+      // Hierarchy-aware: the OVERLORD levies its vassal, never the reverse.
+      const { seniorId, juniorId } = relationshipRoles(edge, relState);
+      if (String(seniorId) === String(homeId) && snapshot?.byId?.has?.(String(juniorId))) sources.add(String(juniorId));
+      continue;
+    }
     if (a === String(homeId) && snapshot?.byId?.has?.(b)) sources.add(b);
     else if (b === String(homeId) && snapshot?.byId?.has?.(a)) sources.add(a);
   }
   return [...sources].filter(id => !excludeSet.has(String(id))).sort(codepoint);
+}
+
+/**
+ * Revert the OUT-OF-BAND war-exhaustion residue a SUPPRESSED (DM-dismissed / paused)
+ * strategy_deploy banked this tick (the pulseKernel residue strip calls this — kept here
+ * so the arithmetic shares the accrual/decay/strain tunables it inverts).
+ *
+ * The HOME: had the deploy never fired it would NOT have been a deployer, so its scar
+ * would have taken the step-5b DECAY path instead of the accrual ratchet — replay that
+ * counterfactual from the PRE-TICK ledger (byte-equal to the tick never deploying).
+ * Each LEVIED VASSAL: subtract the LEVY_STRAIN_PER_TICK the dismissed war charged it
+ * (its own step-5b decay already ran, so subtracting the strain reproduces the
+ * no-levy counterfactual). Entries at 0 are dropped, matching the ledger hygiene.
+ * Pure — returns a new ledger, never mutates.
+ *
+ * @param {Object} args
+ * @param {Record<string, number>} args.warExhaustion         the post-evaluate (next-tick) ledger.
+ * @param {Record<string, number>} args.preTickWarExhaustion  the pre-tick ledger (worldState's).
+ * @param {string} args.homeId                                the dismissed deploy's besieger.
+ * @param {string[]} [args.leviedSourceIds]                   vassals its war_levy strained this tick.
+ * @returns {Record<string, number>}
+ */
+export function revertSuppressedDeployExhaustion({ warExhaustion, preTickWarExhaustion, homeId, leviedSourceIds = [] }) {
+  const next = { ...warExhaustion };
+  const pre = clamp01(Number(preTickWarExhaustion?.[String(homeId)]) || 0);
+  const decayed = clamp01(pre - EXHAUSTION_DECAY_PER_TICK);
+  if (decayed <= 0) delete next[String(homeId)];
+  else next[String(homeId)] = decayed;
+  for (const srcId of leviedSourceIds) {
+    const reverted = clamp01((Number(next[String(srcId)]) || 0) - LEVY_STRAIN_PER_TICK);
+    if (reverted <= 0) delete next[String(srcId)];
+    else next[String(srcId)] = reverted;
+  }
+  return next;
 }
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that
@@ -1559,7 +1604,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         summary: `The long campaign against ${targetName} has left ${name} a lasting wound. The treasury thins and the public tires of war.`,
         reasons: [`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`],
         tick,
-        sourceEventTargetId: rec.targetId,
+        // Keyed by the HOME (like the decay path below), NOT the war target:
+        // deriveActiveCondition hashes the condition id from sourceEventTargetId, so a
+        // target-keyed accrual and a home-keyed decay would mint TWO distinct
+        // war_exhaustion conditions on the same settlement — the accrual one lingering
+        // (double-stamping the penalty) for ticks after the war while the decay one
+        // re-stamps. One key ⇒ one condition that accrues and then decays.
+        sourceEventTargetId: fromId,
         causes: [{ source: fromId, effect: 'war_exhaustion', reason: `${name} has campaigned too long against ${targetName}.` }],
       }));
     }

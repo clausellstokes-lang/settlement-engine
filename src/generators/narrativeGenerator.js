@@ -753,6 +753,11 @@ const genPressureDetail = settlement => {
     healersRef: healerRef,
     stresses: stresses.map(type => ({ type })),
     commodity,
+    // compound: the economic/military/criminal effectiveness triplet the
+    // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
+    // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
+    // this the closures always hit their '|| default' fallback (dead compound branch).
+    compound: economicState?.compound || undefined,
     prosperity: economicState?.prosperity || 'Moderate',
     govFaction,
     topFaction: topFaction || govFaction,

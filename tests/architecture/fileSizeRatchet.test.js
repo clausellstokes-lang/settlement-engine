@@ -44,6 +44,13 @@ const BASELINE = new Set([
   // decomposed advanceCampaignWorld into kernel/interval/helpers, removing more than
   // this adds. Splitting warDeployment is a separate refactor, not this fix pass.
   'src/domain/worldPulse/warDeployment.js',
+  // Was 1,174 lines; the review-remediation war-economy dismiss-conservation fix (the
+  // graduation blocker: a suppressed strategy_deploy now strips its exhaustion ratchet
+  // and restores the conscripted/levied population instead of silently sinking it)
+  // nudged it just over 1,200. The pure helper (revertSuppressedDeployExhaustion) lives
+  // in warDeployment.js; the inline dismiss handler + its invariant comments stay here.
+  // Grandfathered per the same set-based rationale; extracting the dismiss handler is a followup.
+  'src/domain/worldPulse/pulseKernel.js',
 ]);
 
 function jsFiles(rel) {

@@ -58,6 +58,7 @@ import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
+import { WAR_RECOVERY_CONDITIONS } from './worldPulse/archetypeCatalog.js';
 
 // ── Per-settlement derivation memo ───────────────────────────────────────
 //
@@ -109,6 +110,39 @@ function cachedFactionProfiles(s) {
   const derived = deriveAllFactionProfiles(s);
   factionProfilesMemo.set(s, derived);
   return derived;
+}
+
+// ── Condition polarity + wall detection ──────────────────────────────────
+
+// Recovery conditions are LIFTS, not pressures: siege_lifted AND its documented
+// polarity clone occupation_lifted (a liberation) both RAISE the systems they
+// declare. Sourced from the war-layer archetype catalog so a new recovery
+// archetype lands here without re-typing the strings.
+const LIFT_ARCHETYPES = new Set(WAR_RECOVERY_CONDITIONS);
+
+/** +1 for a recovery/lift condition, -1 for a pressure. @param {any} cond */
+function conditionDirection(cond) {
+  return LIFT_ARCHETYPES.has(cond?.archetype) ? +1 : -1;
+}
+
+/**
+ * True when the defense profile carries REAL walls — an explicit hasWalls flag,
+ * a non-empty classified walls group (defenseGenerator's institutions.walls), or
+ * a legacy non-empty walls descriptor. Deliberately reads the DATA, never a
+ * regex over JSON.stringify: the profile always contains the literal key
+ * "walls" (even as walls: []), so a stringify match granted every settlement
+ * the walled bonus whether or not a single wall stood.
+ * @param {any} def defenseProfile (may be null / partial / legacy-shaped)
+ */
+export function defenseProfileHasWalls(def) {
+  if (!def || typeof def !== 'object') return false;
+  if (def.hasWalls === true) return true;
+  for (const walls of [def.walls, def.institutions?.walls]) {
+    if (Array.isArray(walls)) { if (walls.length > 0) return true; continue; }
+    if (typeof walls === 'string' && walls.trim() !== '') return true;
+    if (walls && typeof walls === 'object' && Object.keys(walls).length > 0) return true;
+  }
+  return false;
 }
 
 // ── Canonical catalog ────────────────────────────────────────────────────
@@ -318,7 +352,7 @@ function derivePublicLegitimacy(/** @type {any} */ s) {
   // Active conditions that affect public_legitimacy (corruption etc.)
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('public_legitimacy')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 15) * direction;
     if (magnitude === 0) continue;
     score += magnitude;
@@ -650,7 +684,7 @@ function deriveLawOrder(s) {
   // every settlement today (none declare it yet) ⇒ byte-identical.
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('law_order')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 15) * direction;
     if (magnitude === 0) continue;
     score += magnitude;
@@ -726,8 +760,10 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
     push(contributors, 'defenseProfile.readiness.score', 'measured', c,
       `Defense readiness score: ${led.readinessScore}.`);
   }
-  // Wall, garrison, walls present
-  if (def.hasWalls === true || /wall|rampart|palisade/i.test(JSON.stringify(def))) {
+  // Walls present — read the classified walls DATA, not a stringify regex
+  // (the profile always contains the literal key "walls", so the old regex
+  // granted every settlement this bonus).
+  if (defenseProfileHasWalls(def)) {
     score += 6;
     push(contributors, 'defenseProfile', 'walled', +6, 'Defensive walls in place.');
   }
@@ -735,7 +771,7 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
   // Active conditions
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('defense_readiness')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 12) * direction;
     score += magnitude;
     push(contributors, cond.id, direction > 0 ? 'recovering' : 'strained', magnitude,

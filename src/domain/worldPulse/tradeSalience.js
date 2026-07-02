@@ -207,13 +207,17 @@ function hardToReplace(snapshot, buyerId, commodityId, supplierId, supplierStren
  */
 function recencyLift(worldState, buyerId, commodityId, supplierId, tick) {
   const ledger = worldState?.tradeWarState || {};
-  // Prize ids are `${stablePart(buyer)}:${stablePart(commodity)}` in tradeWar.js;
-  // we scan for any entry whose winner is this supplier and whose buyer/commodity
-  // match by the stable-part embedding, taking the freshest flip.
+  // Each ledger entry carries the REAL buyerId/commodityId/winnerId (tradeWar.js
+  // stamps them alongside the slugged prize key). Scope the recency lift to the
+  // SPECIFIC buyer←supplier commodity tie that flipped — matching only winnerId
+  // would inflate every one of a supplier's ties world-wide off a single flip on
+  // an unrelated tie. Take the freshest matching flip.
   let best = 0;
   for (const [, entry] of Object.entries(ledger)) {
     const e = /** @type {any} */ (entry);
     if (String(e?.winnerId) !== String(supplierId)) continue;
+    if (String(e?.buyerId) !== String(buyerId)) continue;
+    if (String(e?.commodityId) !== String(commodityId)) continue;
     const last = Number.isFinite(e?.lastFlipTick) ? e.lastFlipTick : null;
     if (last == null) continue;
     const age = tick - last;

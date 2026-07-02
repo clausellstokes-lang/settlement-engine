@@ -28,6 +28,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 import { GOODS_MODIFIERS_BY_TIER, COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES } from '../data/tradeGoodsData.js';
 import { evaluateWaterDependency } from './helpers.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../domain/region/goodsCatalog.js';
+import { tradeRouteTier } from '../domain/tradeRouteSemantics.js';
 // ─── Economic helper functions ──────────────────────────────
 import {
   computeActiveChains,
@@ -1143,7 +1144,14 @@ const generateTradeIncomeStreams = (tier, institutions = [], route = 'road', goo
       const name = typeof item === 'string' ? item : item?.name || '';
       return !(hasSaltLocal && !isEntrepot && hasEconomicKeyword(name));
     });
-  const imports = getUpgradeChain(tier, route, false, goodsToggles);
+  // Tier-connectivity: is this settlement plugged into a higher-tier trading
+  // partner? True when a bound imported neighbour outranks it, or when it sits
+  // on a major-artery route (crossroads/port) that by construction reaches
+  // higher-tier hubs. This is the real isFromHigher signal that selects the
+  // fromHigher/fromCityOrMetropolis/fromMetropolis upgrade-import pools.
+  const _neighbourTierIdx = TIER_ORDER.indexOf(config._importedNeighbor?.tier ?? '');
+  const isFromHigher = _neighbourTierIdx > TIER_ORDER.indexOf(tier) || tradeRouteTier(route) === 'major';
+  const imports = getUpgradeChain(tier, route, isFromHigher, goodsToggles);
   const bonuses = [];
   if (isEntrepot && route === 'crossroads' && !['thorp', 'hamlet'].includes(tier))
     bonuses.push({
@@ -1400,18 +1408,25 @@ const UPGRADE_GOODS_BY_TIER = {
   },
 };
 
-// getUpgradeChain
-const getUpgradeChain = (tier, route, isFromHigher = false, goodsToggles = {}) => {
+// getUpgradeChain — exported for the focused unit tests (tier-connectivity pool
+// selection); production callers go through generateTradeIncomeStreams.
+export const getUpgradeChain = (tier, route, isFromHigher = false, goodsToggles = {}) => {
   // Isolated settlements have no trade access — no upgrade goods come in from outside
   if (route === 'isolated') return [];
   const tierData = UPGRADE_GOODS_BY_TIER[tier] || {};
   const result = [];
+  // Pool selection is driven by tier-CONNECTIVITY (isFromHigher: the settlement
+  // is connected to a higher-tier trading partner), NOT by the route category.
+  // `route` here is a route type (road/river/crossroads/port/isolated) and can
+  // never equal a tier name — the old `route === 'city' || route === 'metropolis'`
+  // guards made the fromCityOrMetropolis/fromMetropolis pools unreachable, so
+  // fromHinterland always shadowed them for town/city. The higher-tier pools are
+  // tested BEFORE fromHinterland so a real higher-tier connection selects them.
   let source = 'basic';
   if (isFromHigher && tierData.fromHigher) source = 'fromHigher';
-  else if ((route === 'city' || route === 'metropolis') && tierData.fromCityOrMetropolis)
-    source = 'fromCityOrMetropolis';
+  else if (isFromHigher && tierData.fromCityOrMetropolis) source = 'fromCityOrMetropolis';
+  else if (isFromHigher && tierData.fromMetropolis) source = 'fromMetropolis';
   else if (tierData.fromHinterland) source = 'fromHinterland';
-  else if (tierData.fromMetropolis && route === 'metropolis') source = 'fromMetropolis';
   (tierData[source] || []).forEach((item) => {
     const toggleKey = `${tier}_import_${item.name}`;
     const isService =
@@ -2054,7 +2069,7 @@ function deriveTradeDependencies(H, { config, institutions, tradeRoute }) {
 // and finished-goods demand gaps, then overrides the heuristic `re`/`q` lists
 // (and folds in service exports). Returns the chain artifacts the caller needs
 // for later stages and final assembly.
-function deriveChainTradeArtifacts({ tier, tradeRoute, institutions, config, goodsToggles, H, U, re, q }) {
+function deriveChainTradeArtifacts({ tier, tradeRoute, institutions, config, goodsToggles, H, U, re, q, stage5Trade }) {
   const depletedResources = config.nearbyResourcesDepleted || [];
   const activeChainsList = computeActiveChains(
     institutions || [],
@@ -2125,6 +2140,28 @@ function deriveChainTradeArtifacts({ tier, tradeRoute, institutions, config, goo
   });
   q.length = 0;
   chainImports.forEach((i) => q.push(i));
+  // Re-seat Stage 5's military/slave-trade exports (and the paired enslaved-
+  // labour import): the chain pipeline doesn't model them, so the override
+  // above would otherwise discard legitimately-produced entries. The Stage 5
+  // RNG draw has already fired by this point — nothing here touches the
+  // stream. Dedup mirrors Stage 5's own keyword guards so a chain/service
+  // export that already covers the ground wins.
+  const _stage5Exports = stage5Trade?.pushedExports || [];
+  const _stage5Imports = stage5Trade?.pushedImports || [];
+  _stage5Exports.forEach((e) => {
+    const eLow = e.toLowerCase();
+    const isMilitaryEntry = eLow.includes('military') || eLow.includes('mercenary');
+    const covered = re.some((g) => {
+      const gLow = g.toLowerCase();
+      return isMilitaryEntry
+        ? gLow.includes('military') || gLow.includes('mercenary')
+        : gLow.includes('slave');
+    });
+    if (!covered) re.push(e);
+  });
+  _stage5Imports.forEach((i) => {
+    if (!q.some((g) => g.toLowerCase().includes('slave'))) q.push(i);
+  });
 
   return { activeChainsList, chainLocalProd, instServices };
 }
@@ -2528,8 +2565,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   const { re, q, P, I } = buildInitialTradeLists({ v, config, tradeRoute, goodsToggles, U, W });
   const H = [];
   // Stage 5 — military-services and (chance-gated) slave-trade exports; the only
-  // RNG draw in this function lives here. Mutates the `re`/`q` trade lists.
+  // RNG draw in this function lives here. Mutates the `re`/`q` trade lists and
+  // returns what it pushed so the Stage 7 chain override (which rebuilds re/q
+  // from the chain pipeline) can re-seat these entries instead of silently
+  // discarding them — the chain pipeline doesn't model military services or
+  // the slave trade.
   const appendMilitaryAndIllicitExports = () => {
+    const pushedExports = [],
+      pushedImports = [];
     const E = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].indexOf(tier),
       _ = (institutions || []).map(function (fe) {
         return (fe.name || '').toLowerCase();
@@ -2552,7 +2595,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             : 'Military services: garrison contracts and armed escort';
       re.some(function (ge) {
         return ge.toLowerCase().includes('military') || ge.toLowerCase().includes('mercenary');
-      }) || re.push(fe);
+      }) || (re.push(fe), pushedExports.push(fe));
     }
     const de = E >= 4 ? 0.3 : E === 3 ? 0.1 : 0;
     if (
@@ -2574,16 +2617,19 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                 : dt
                   ? 'Captive trade: war captives and debtors sold through established trafficking networks'
                   : 'Slave trade: human trafficking and forced labour; legally tolerated or actively regulated';
+        const St = 'Enslaved labour: purchased from regional trafficking networks';
         (re.push(Gt),
+          pushedExports.push(Gt),
           ke &&
             !q.some(function (Me) {
               return Me.toLowerCase().includes('slave');
             }) &&
-            q.push('Enslaved labour: purchased from regional trafficking networks'));
+            (q.push(St), pushedImports.push(St)));
       }
     }
+    return { pushedExports, pushedImports };
   };
-  appendMilitaryAndIllicitExports();
+  const stage5Trade = appendMilitaryAndIllicitExports();
   // Stage 6 — trade-dependency derivation: flag each catalogued-need institution
   // whose resource is not locally available, with severity/impact keyed to siege
   // and isolation state. Pushes records into `H`.
@@ -2603,6 +2649,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     U,
     re,
     q,
+    stage5Trade,
   });
 
   // ── Isolated thorp/hamlet: subsistence economy — no imports or exports ────

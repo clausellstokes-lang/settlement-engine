@@ -13,7 +13,7 @@ import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor 
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
-import { evaluateWarLayer } from './warDeployment.js';
+import { evaluateWarLayer, revertSuppressedDeployExhaustion } from './warDeployment.js';
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
@@ -77,12 +77,7 @@ import { assertNoResidueLeak } from './residueStripGuard.js';
  */
 export const RESIDUE_STRIP_SITES = Object.freeze([
   { id: 'war_mobilization',      banks: 'warPosture ramp + information_flow signal channels', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
-  // strategy_deploy (siege INITIATION) is a tracked coverage gap: unlike the other
-  // three, no pause/dismiss equivalence test triggers a fresh siege-open (it needs a
-  // past-mobilization war state that's fiddly to construct deterministically). The
-  // strip itself exists (its marker is present at the siege-initiation site) — this
-  // only marks that its byte-equivalence isn't yet pinned. Closing it is its own task.
-  { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel',                coveredBy: null },
+  { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel + deploy-tick exhaustion ratchet + conscription/levy debits', coveredBy: 'warConservationDismiss.test.js' },
   { id: 'conquest',              banks: 'occupation seed + conquest disposition ratchet',     coveredBy: 'worldPulseDeferMajorResidue.test.js' },
   { id: 'occupation_vassalized', banks: 'vassal promotion + advance-win disposition residue', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
 ]);
@@ -562,6 +557,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the DM decision entirely) — the same "phantom out-of-band ledger" the conquest
     // dismiss fix closes. So strip BOTH for every suppressed strategy_deploy, keyed off
     // the outcome's targetSaveId (the besieger) → sourceEventTargetId (the besieged).
+    // The deploy ALSO banked residue beyond the seed + front on its very first tick:
+    //   • the war-exhaustion RATCHET (step 5 accrues the scar for every deployer, the
+    //     fresh one included, and a war_levy strains each levied vassal's scar), and
+    //   • the same-tick MINOR emissions its deployment triggered — the conserved
+    //     war_conscription / war_levy population+granary DEBITS plus the
+    //     war_drain / army_deployed / war_exhaustion / reinforcement_cost home
+    //     conditions. These are minors, so the major partition below would still
+    //     auto-apply them; left in, a dismissed deploy would ratchet a scar for a war
+    //     that never opened AND permanently SINK the conscripted/levied population
+    //     (the debit commits while the deployedPopulation bank that would credit the
+    //     survivors home is stripped with the deployment).
+    // So a suppressed deploy strips ALL of it — the seed, the front, its same-tick
+    // minors, and the exhaustion ratchet (reverted to the no-deploy counterfactual via
+    // revertSuppressedDeployExhaustion) — making dismiss fully conserving. A fresh
+    // deployer holds no prior deployment (step 4's one-army gate), so every step-5
+    // emission keyed to it this tick belongs to the dismissed deploy alone.
     // Mirrors the conquest occupation-seed suppression; byte-neutral when nothing is
     // suppressed (the autoresolve-ON path keeps the deployment + front untouched).
     if (warOutcomeSuppressedIds) {
@@ -573,6 +584,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       if (suppressedDeploys.length) {
         const strippedDeployments = { ...war.deployments };
         const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
+        const suppressedHomeIds = new Set(); // besiegers whose deploy-tick residue is stripped
+        let strippedExhaustion = war.warExhaustion;
         for (const o of suppressedDeploys) {
           const fromId = String(o.targetSaveId);
           const toId = String(o.sourceEventTargetId);
@@ -580,10 +593,39 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
           // under this key, so this never drops a pre-existing campaign's army).
           delete strippedDeployments[fromId];
           strippedFronts.add(`${fromId}->${toId}`);
+          suppressedHomeIds.add(fromId);
+          // Revert the exhaustion ratchet: the home's accrual back to the no-deploy
+          // decay counterfactual, and each levied vassal's loyalty strain (the levy's
+          // debit sources are read off its outcome before that outcome is dropped).
+          const levy = war.outcomes.find(
+            w => w?.candidateType === 'war_levy' && String(w?.targetSaveId) === fromId,
+          );
+          const leviedSourceIds = [...new Set([
+            ...(levy?.populationDeltas || []),
+            ...(levy?.foodStockpileDeltas || []),
+          ]
+            .filter(d => String(d?.saveId) !== fromId)
+            .map(d => String(d.saveId)))];
+          strippedExhaustion = revertSuppressedDeployExhaustion({
+            warExhaustion: strippedExhaustion,
+            preTickWarExhaustion: worldState.warExhaustion || {},
+            homeId: fromId,
+            leviedSourceIds,
+          });
         }
+        // The dismissed deploys' same-tick MINOR emissions (step 5 keyed to the
+        // besieger): conserved conscription/levy debits + the home war conditions.
+        const deployResidueTypes = new Set([
+          'war_conscription', 'war_levy', 'war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost',
+        ]);
         war = {
           ...war,
           deployments: strippedDeployments,
+          warExhaustion: strippedExhaustion,
+          outcomes: war.outcomes.filter(
+            o => !(suppressedHomeIds.has(String(o?.targetSaveId))
+              && deployResidueTypes.has(String(o?.candidateType || ''))),
+          ),
           graphChannels: war.graphChannels.filter(
             c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
           ),
@@ -636,7 +678,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
       tick: worldState.tick,
-      warEconomyEnabled: simulationRules.warEconomyDrainEnabled,
+      // NOTE: no warEconomy flag threaded — the homecoming credit is gated on the
+      // record's BANKED deployedPopulation (whether population was actually debited),
+      // not the live flag, so conservation holds under any flag combination and
+      // mid-war flag changes (see deploymentReturn.js).
     });
 
     // The trade-war layer. The per-commodity primary-supplier contest composes

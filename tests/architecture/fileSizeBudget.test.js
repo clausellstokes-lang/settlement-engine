@@ -42,16 +42,21 @@ const MAX_SLACK = 40;
 // RAISE one without a deliberate, in-diff reason.
 const GRANDFATHERED = {
   'src/generators/powerGenerator.js': 2857,
-  'src/generators/economicGenerator.js': 2855,
+  'src/generators/economicGenerator.js': 2901, // + review-remediation: getUpgradeChain tier-connectivity + Stage 5/7 export re-seating
   'src/store/settlementSlice.js': 2446,
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
   // of the pure support-edge readers + levy computation into a sibling module is overdue.
-  'src/domain/worldPulse/warDeployment.js': 1616, // defender-attrition + war-economy P1 + defender-resolve P4 + ally-defense P3 + sack/forage P3 (pop + granary) + war levy F2 + shared composeDefenderWillScore
+  'src/domain/worldPulse/warDeployment.js': 1686, // + review-remediation: war_exhaustion home-keying, vassal-direction levy, revertSuppressedDeployExhaustion
   'src/generators/narrativeGenerator.js': 1250,
-  'src/domain/causalState.js': 1242,
+  'src/domain/causalState.js': 1277, // + review-remediation: real-walls detection (no JSON.stringify regex) + occupation_lifted polarity
+  // NOTE: pulseKernel.js crossed the cap with the war-economy dismiss-conservation fix (the
+  // graduation blocker); the pure helper lives in warDeployment.js, but the strategy_deploy
+  // dismiss handler's inline residue-strip + its invariant comments stay here. Extraction of
+  // the dismiss handler into a sibling module is a followup.
+  'src/domain/worldPulse/pulseKernel.js': 1239, // + review-remediation: strategy_deploy dismiss fully-conserving residue strip
   'src/domain/worldPulse/stressors.js': 1227,
 };
 

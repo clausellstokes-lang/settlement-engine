@@ -1266,13 +1266,17 @@ const applyStressFactionEffects = (factions, hasStress, powerStructure, hasNobil
           " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before.";
       }
     });
-    factions.push({
-      faction: 'War Council',
-      power: warGoingWell ? 20 : 25,
-      desc: warGoingWell
-        ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly. The war is going well enough that its authority isn't contested."
-        : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
-    });
+    // under_siege already pushes a 'War Council'; guard against a duplicate
+    // when both stresses are active (siege + wartime).
+    if (!factions.some((f) => f.faction === 'War Council')) {
+      factions.push({
+        faction: 'War Council',
+        power: warGoingWell ? 20 : 25,
+        desc: warGoingWell
+          ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly. The war is going well enough that its authority isn't contested."
+          : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
+      });
+    }
     if (!warGoingWell) {
       factions.push({
         faction: 'Peace Faction',
@@ -1404,7 +1408,9 @@ const deriveStability = (stressFlags, instFlags, tradeRoute, hasStress, monsterT
                 ? (stability = 'Tense (militarised, chronically underfunded)')
                 : stressFlags.theocraticEconomy
                   ? (stability = 'Stable (theocratic governance)')
-                  : (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'Hostile rival' ||
+                  : (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'hostile' ||
+                      (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'rival' ||
+                      (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'Hostile rival' ||
                       (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'hostile_rival' ||
                       (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'cold_war' ||
                       (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'Cold war' ||

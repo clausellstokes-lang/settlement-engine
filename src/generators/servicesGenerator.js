@@ -97,7 +97,12 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
     !p &&
       (m >= 38 || b < 1.2) &&
       l.criminal.length === 0 &&
-      !['thorp', 'hamlet', 'village'].includes(d.settType || d.tier || 'village') &&
+      // Resolve the real tier first: d.settType may be the sentinel 'random'/'custom'
+      // (a non-tier string that would slip past this small-tier gate), while
+      // resolveConfig has written the true resolved tier to d.tier. Prefer d.tier
+      // so this criminal-services gate isn't keyed off a sentinel in random/custom
+      // mode — mirrors institutionProbability.js:34-36 and economicGenerator.
+      !['thorp', 'hamlet', 'village'].includes(d.tier || d.settType || 'village') &&
       (b < 0.6
         ? l.criminal.push(
             {
@@ -127,7 +132,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         m >= 55 &&
         b < 0.5 &&
         l.criminal.length === 0 &&
-        ['village'].includes(d.settType || d.tier || '') &&
+        ['village'].includes(d.tier || d.settType || '') &&
         (b < 0.4
           ? l.criminal.push(
               {
