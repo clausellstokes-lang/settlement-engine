@@ -67,6 +67,19 @@ const BAND_DEFENDER = Object.freeze({
   costly_success: 2.8,   // the town fell after a brutal fight — heavy defender losses
   withdrawal:     0.4,   // the besieger left — the defenders barely paid
 });
+// RESERVED — deliberately not yet wired (an audit flagged BAND_DEFENDER as "dead
+// code + a modeling gap"; it is a reasoned deferral, not an oversight).
+// applyAttritionToRecord already honors isAttacker:false + this table, but the siege
+// loop (warDeployment.js) only ever attrits DEPLOYED armies as attackers on their own
+// front. By design a pure defender has no deployed field army to attrit — its wall
+// strength is homeDefense, a FRESH per-tick computation (garrison + fortification),
+// not an eroding pool. Giving a besieged town an eroding defensive-losses ledger is a
+// GAME-BALANCE feature, not a wiring fix: it would change every siege's outcome (and
+// the golden master), and feeding this unvalidated table into the convergence-critical
+// verdict loop could break the "wars provably converge" property (non-reverting
+// war-exhaustion scar + SIEGE_MAX_AGE ceiling). It needs a deliberate balance pass —
+// candidate values soaked across seeds with a convergence assertion — before it ships.
+// Kept here (not deleted) so that tuning work isn't lost when that decision is made.
 
 // Relative-strength tilt: an army fighting UP (out-classed) bleeds faster; fighting
 // DOWN (out-classing) bleeds slower. `relStrength` is attacker/defender effective

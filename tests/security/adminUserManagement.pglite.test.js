@@ -80,6 +80,13 @@ async function queryAs(uid, singleSelect, params = []) {
  *  actor uuid as an argument; the RPC re-checks via has_role(actor,…)). */
 const rpc = (q) => db.query(q);
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('A4 user-management — executed against 050/051/053 (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

@@ -215,6 +215,17 @@ describe('collectThreatSources()', () => {
     expect(types.has('siege')).toBe(true);
     expect(types.has('cult')).toBe(true);
   });
+
+  it("reads the legacy 'stress' alias, like every sibling deriver (via canonStressors)", () => {
+    // Regression: the hand-rolled read only checked `stressors`/`stresses`,
+    // missing the `stress` alias that canonStressors (and every sibling
+    // deriver) resolves. A settlement carrying its stressors under `stress`
+    // now contributes threat sources.
+    const sources = collectThreatSources({
+      stress: [{ name: 'Bandit raids on the south road', severity: 0.6 }],
+    });
+    expect(sources.some(s => s.originSurface === 'stressors' && s.inferredType === 'bandit_raids')).toBe(true);
+  });
 });
 
 // ── deriveThreatProfile ────────────────────────────────────────────────

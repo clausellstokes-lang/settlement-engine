@@ -31,6 +31,9 @@ const SENSITIVE = [
   'A masked merchant seeks passage',  // plot hook prose
   'private DM notes about betrayal',  // dossier notes
   'A town built on buried secrets',   // thesis prose
+  'Voss family heirloom daggers',     // user-authored trade good (ADD_TRADE_GOOD)
+  'Blackmire ancestor ash',           // user-authored trade good, entrepôt form
+  'voss_family_heirloom_daggers',     // its custom.<slug> id form must not leak either
 ];
 
 const settlement = {
@@ -41,7 +44,14 @@ const settlement = {
   generatorVersion: 'g1',
   _seed: 'seed-xyz',
   config: { culture: 'germanic', terrainType: 'swamp', tradeRouteAccess: 'river', magicLevel: 'low', monsterThreat: 'frontier', selectedStresses: ['famine_risk'] },
-  economicState: { prosperity: 'struggling', foodSecurity: { resilienceScore: 40 }, primaryExports: ['salt'], primaryImports: ['grain'] },
+  economicState: {
+    prosperity: 'struggling',
+    foodSecurity: { resilienceScore: 40 },
+    // Catalog labels PLUS user-authored goods, exactly as ADD_TRADE_GOOD writes
+    // them (verbatim label; entrepôt takes the ' (transit)' suffixed form).
+    primaryExports: ['salt', 'Voss family heirloom daggers', 'Blackmire ancestor ash (transit)'],
+    primaryImports: ['grain', { label: 'Voss family heirloom daggers' }], // legacy object entry
+  },
   powerStructure: {
     publicLegitimacy: { score: 30, label: 'Contested' },
     factions: [{ faction: 'The Hidden Hand', name: 'The Hidden Hand', category: 'criminal', power: 70 }],
@@ -114,6 +124,17 @@ describe('structuralFingerprint — redaction canary', () => {
     expect(fp.lifecycle.phase).toBe('canon');
     expect(fp.ai.has_narrative).toBe(true);
     expect(Object.keys(fp.causal.bands).length).toBeGreaterThan(0);
+  });
+
+  it('trade lists emit canonical catalog ids only; user-authored goods are counted, not copied', () => {
+    const fp = extractSettlementFingerprint(settlement, save);
+    // catalog labels fold to stable catalog ids
+    expect(fp.economy.primaryExports).toEqual(['salt']);
+    expect(fp.economy.primaryImports).toEqual(['grain']);
+    // the user-authored entries (string, transit-suffixed, legacy object) are
+    // counted — their labels/slugs never appear (assertNoLeak covers the text)
+    expect(fp.economy.custom_export_count).toBe(2);
+    expect(fp.economy.custom_import_count).toBe(1);
   });
 
   it('the NPC sim-state evolution distributions populate (enums only, no prose)', () => {

@@ -12,7 +12,7 @@
  * SKUs offered without touching any UI code.
  */
 
-import { supabase, isConfigured } from './supabase.js';
+import { supabase, isConfigured, withTimeout } from './supabase.js';
 import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
 import { fetchCreditBalanceFromLedger } from './creditLedger.js';
 
@@ -164,17 +164,23 @@ export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
 
 /**
  * Fetch the user's current credit balance from the server.
+ *
+ * Returns a number on success, 0 for the genuine signed-out / not-configured
+ * cases, and `null` when the balance could NOT be determined (transient
+ * network/RLS failure). Callers must treat `null` as "unknown" and keep the
+ * last-known balance rather than rendering 0 — a blip must not flash a paying
+ * user to zero credits.
  */
 export async function fetchCreditBalance() {
   if (!isConfigured) return 0;
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) return 0;
 
   try {
     return await fetchCreditBalanceFromLedger();
   } catch {
-    // Legacy fallback below.
+    // Ledger read failed; try the legacy counter once before giving up.
   }
 
   const { data, error } = await supabase
@@ -185,7 +191,7 @@ export async function fetchCreditBalance() {
 
   if (error) {
     console.error('Failed to fetch credits:', error);
-    return 0;
+    return null; // unknown — caller preserves the last-known balance
   }
   return data?.credits || 0;
 }

@@ -6,6 +6,7 @@ import { describe, it, expect } from 'vitest';
 import {
   deriveDevDebug,
   devDebugCounts,
+  tracesForEntity,
 } from '../../src/domain/devDebug.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
@@ -85,6 +86,29 @@ describe('devDebugCounts()', () => {
     expect(counts).toHaveProperty('districts');
     expect(counts).toHaveProperty('contradictions');
     expect(counts).toHaveProperty('entities');
+  });
+});
+
+describe('tracesForEntity()', () => {
+  const s = {
+    simulationTrace: [
+      { step: 'a', targetType: 'institution', targetId: 'i.1', result: 'selected' },
+      { step: 'b', targetType: 'faction',     targetId: 'f.1', result: 'promoted' },
+      { step: 'c', targetType: 'institution', targetId: 'i.1', result: 'patched' },
+    ],
+  };
+
+  it('returns every trace whose targetId matches, regardless of targetType', () => {
+    // Regression: the old body filtered on targetType 'entity' (a type no trace
+    // carries) and always returned []. It must key off targetId now.
+    const traces = tracesForEntity(s, 'i.1');
+    expect(traces).toHaveLength(2);
+    expect(traces.map(t => t.result)).toEqual(['selected', 'patched']);
+    expect(tracesForEntity(s, 'f.1')).toHaveLength(1);
+  });
+
+  it('returns [] for an unknown entity id', () => {
+    expect(tracesForEntity(s, 'nope')).toEqual([]);
   });
 });
 

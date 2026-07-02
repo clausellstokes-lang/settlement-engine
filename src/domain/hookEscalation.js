@@ -35,7 +35,7 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 // returns a flat array. Tolerant of missing fields / mixed shapes.
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]} Raw hook entries gathered from across the settlement.
  *                  Shapes vary; downstream consumers pass each through
  *                  deriveStructuredHook to normalize.
@@ -276,7 +276,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
  *
  * Pure; tolerant; returns null for empty hooks.
  * @param {any} rawWrapper
- * @param {any} [settlement]
+ * @param {import('./settlement.schema.js').SimSettlement} [settlement]
  */
 export function deriveStructuredHook(rawWrapper, settlement) {
   if (!rawWrapper) return null;
@@ -318,7 +318,7 @@ export function deriveStructuredHook(rawWrapper, settlement) {
 
 /**
  * Convert every hook on the settlement into a structured form.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveAllStructuredHooks(settlement) {
   if (!settlement) return [];
@@ -423,7 +423,7 @@ function fillStage(stage, vars) {
  *   }
  *
  * Tolerant: returns an empty array when no triggers are present.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveEscalationClocks(settlement) {
   if (!settlement) return [];
@@ -505,7 +505,7 @@ export function deriveEscalationClocks(settlement) {
 
 /**
  * Aggregate count by origin classification.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function structuredHookOriginBreakdown(settlement) {
   /** @type {Record<string, number>} */

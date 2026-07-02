@@ -94,15 +94,23 @@ export function collectEntityNameRefs(settlement: any): NameRef[] {
     refs.push({ name, id });
   };
 
-  for (const npc of (settlement?.npcs || [])) {
+  // Client-supplied settlements can carry truthy NON-array shapes here (e.g.
+  // npcs: {}). `|| []` only guards falsy values, and `for…of` over a plain
+  // object throws — post-generation, inside the caller's refund catch-all — so
+  // every collection is Array.isArray-gated instead.
+  const asArray = (value: unknown): any[] => (Array.isArray(value) ? value : []);
+
+  for (const npc of asArray(settlement?.npcs)) {
     push(npc?.name || npc?.label, npcIdFor(npc));
   }
-  const factions = settlement?.powerStructure?.factions || settlement?.factions || [];
+  const factions = Array.isArray(settlement?.powerStructure?.factions)
+    ? settlement.powerStructure.factions
+    : asArray(settlement?.factions);
   for (const f of factions) {
     const name = f?.faction || f?.name || f?.label;
     push(name, factionIdFromName(name));
   }
-  for (const n of (settlement?.neighbourNetwork || [])) {
+  for (const n of asArray(settlement?.neighbourNetwork)) {
     push(n?.neighbourName || n?.name, neighbourIdFor(n));
   }
   const live = settlement?.neighborRelationship;

@@ -12,8 +12,8 @@ function compactLabel(value) {
 }
 
 /**
- * @param {any} nextSettlement
- * @param {any} priorSettlement
+ * @param {import('./settlement.schema.js').SimSettlement} nextSettlement
+ * @param {import('./settlement.schema.js').SimSettlement} priorSettlement
  * @param {Record<string, any>} [options]
  * @returns {any}
  */

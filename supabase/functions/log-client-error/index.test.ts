@@ -96,6 +96,48 @@ Deno.test('over the per-IP rate limit returns 202 and does NOT insert', async ()
   assertStringIncludes(await res.text(), 'throttled');
 });
 
+// ── Limiter failure = FAIL CLOSED ─────────────────────────────────────────────
+// A limiter error must NOT remove the throttle from this anonymous service-role
+// insert path: on a count-query error (returned or thrown) the report is dropped
+// with the same 202 accepted-but-not-stored as an over-window flood.
+
+Deno.test('a limiter error (returned) drops the report — 202, no insert (fail closed)', async () => {
+  const inserts: Array<Record<string, unknown>> = [];
+  const client = {
+    from() {
+      return {
+        select() { return this; },
+        eq() { return this; },
+        gte() { return Promise.resolve({ count: null, error: { message: 'count hiccup' } }); },
+        insert(row: Record<string, unknown>) { inserts.push(row); return Promise.resolve({ error: null }); },
+      };
+    },
+    // deno-lint-ignore no-explicit-any
+  } as any;
+  const res = await handleLogClientError(post({ message: 'real crash' }), { adminClient: () => client });
+  assertEquals(res.status, 202);
+  assertEquals(inserts.length, 0);
+  assertStringIncludes(await res.text(), 'throttled');
+});
+
+Deno.test('a limiter error (thrown) drops the report — 202, no insert (fail closed)', async () => {
+  const inserts: Array<Record<string, unknown>> = [];
+  const client = {
+    from() {
+      return {
+        select() { return this; },
+        eq() { return this; },
+        gte() { return Promise.reject(new Error('network down')); },
+        insert(row: Record<string, unknown>) { inserts.push(row); return Promise.resolve({ error: null }); },
+      };
+    },
+    // deno-lint-ignore no-explicit-any
+  } as any;
+  const res = await handleLogClientError(post({ message: 'real crash' }), { adminClient: () => client });
+  assertEquals(res.status, 202);
+  assertEquals(inserts.length, 0);
+});
+
 Deno.test('malformed JSON is rejected 400', async () => {
   const res = await handleLogClientError(
     new Request('https://edge/log-client-error', {

@@ -36,7 +36,7 @@ export const HEALING_INSTITUTION_PATTERN =
  */
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {HealingLedger}
  */
 export function healingLedger(settlement) {

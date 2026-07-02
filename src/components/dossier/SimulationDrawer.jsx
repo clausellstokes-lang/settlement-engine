@@ -25,6 +25,7 @@ import { FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
@@ -47,6 +48,9 @@ export default function SimulationDrawer({ variant = 'inline' }) {
   // Regenerate / New as a matching secondary button.
   const toolbar = variant === 'toolbar';
   const [open, setOpen] = useState(false);
+  // Back aria-modal="true" with focus-in/Tab-trap/restore; the hook also owns
+  // Escape (via the shared open-dialog stack), superseding the ad-hoc listener.
+  const dialogRef = useDialogFocusTrap(open, () => setOpen(false));
   const firedRef = useRef(false);
 
   useEffect(() => {
@@ -103,6 +107,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
           />
           {/* Panel */}
           <aside
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="How this was simulated"

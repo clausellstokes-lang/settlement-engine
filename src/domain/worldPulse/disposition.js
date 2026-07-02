@@ -67,7 +67,7 @@ function govBaselineFor(archetype) {
 // disposition read the same authored-importance ladder). Authored importance
 // strings dominate; falls back to dots/notability; an unranked NPC still counts
 // at a small floor so a town of minor NPCs isn't silently weightless.
-/** @param {any} npc @returns {number} */
+/** @param {import('../settlement.schema.js').SimNpc} npc @returns {number} */
 function importanceWeight(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
@@ -81,7 +81,7 @@ function importanceWeight(npc = {}) {
 // AUTHORED personality strings only. Reads the {dominant, flaw, modifier}
 // slots the generator writes (npcGenerator.js:81-84); tolerant of a flat string
 // or array shape. NEVER reads npcStates.alignment.
-/** @param {any} npc @returns {string[]} */
+/** @param {import('../settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredTraits(npc = {}) {
   const p = npc.personality;
   if (!p) return [];
@@ -91,7 +91,7 @@ function authoredTraits(npc = {}) {
 }
 
 /** Signed aggression score for one NPC's authored personality (Σ of trait weights).
- * @param {any} npc @returns {number} */
+ * @param {import('../settlement.schema.js').SimNpc} npc @returns {number} */
 function npcTraitScore(npc) {
   let score = 0;
   for (const trait of authoredTraits(npc)) {
@@ -104,7 +104,7 @@ function npcTraitScore(npc) {
 // Normalize a faction power field to 0..1 (mirrors factionCompetition.factionPower:
 // >1 is treated as a 0..100 scale). A missing power is a neutral 0.5 so the NPC
 // still contributes rather than vanishing.
-/** @param {any} faction @returns {number} */
+/** @param {import('../settlement.schema.js').SimFaction} faction @returns {number} */
 function normFactionPower(faction) {
   const raw = faction?.power ?? faction?.influence ?? faction?.score ?? faction?.weight;
   if (!Number.isFinite(raw)) return 0.5;
@@ -120,7 +120,7 @@ const GOVERNING_UPWEIGHT = 1.5;
  * scoring NPCs ⇒ 0 (no personality signal). Order-independent (weighted mean is
  * a commutative sum).
  */
-/** @param {any} settlement @returns {number} */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number} */
 function personalityDrive(settlement) {
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   if (!npcs.length) return 0;
@@ -165,7 +165,7 @@ export const DEITY_TEMPER_SIGN = Object.freeze({ warlike: 1, peacelike: -1, neut
 /** Signed warlike drive for a settlement's embedded primary-deity snapshot.
  *  0 (no tilt) when there is no deity, a neutral-temperament deity, or an
  *  unrecognized axis — the byte-identity anchor for a deity-free settlement.
- * @param {any} settlement @returns {number} */
+ * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number} */
 function deityTemperDrive(settlement) {
   const axis = settlement?.config?.primaryDeitySnapshot?.temperamentAxis;
   const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[axis];
@@ -179,6 +179,28 @@ const MULTIPLIER_SPAN = 0.5;
  * @param {number} x @returns {number} */
 function squash(x) {
   return Math.tanh(x);
+}
+
+// How hard war-weariness drags a regime's political footing. The exhaustion scar is
+// 0..1; a fully-exhausted home front pulls the sentiment strongly negative regardless
+// of how warlike the seat is.
+const WAR_WEARINESS_WEIGHT = 1.5;
+
+/**
+ * Signed war sentiment for the political flywheel (P2). Positive ⇒ the regime's war is
+ * sustainable (a warlike governing seat, low weariness); negative ⇒ the home front is
+ * turning against an exhausting/unpopular war. Composed from the SAME governing-weighted
+ * personality drive the aggression kernel uses (so the seat of power colours it) minus a
+ * war-exhaustion drag. Pure, order-independent (personalityDrive is a weighted sum), and
+ * `0` for a leaderless settlement with no war-exhaustion.
+ * @param {any} settlement
+ * @param {number} [warExhaustionScar] the settlement's ratcheted war-exhaustion (0..1)
+ * @returns {number} signed, clamped to [-1, 1]
+ */
+export function computeWarSentiment(settlement, warExhaustionScar = 0) {
+  const scar = Math.max(0, Math.min(1, Number(warExhaustionScar) || 0));
+  const appetite = personalityDrive(settlement); // governing-weighted aggression, signed
+  return Math.max(-1, Math.min(1, appetite - WAR_WEARINESS_WEIGHT * scar));
 }
 
 /**

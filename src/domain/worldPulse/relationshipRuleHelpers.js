@@ -68,8 +68,13 @@ const hostilityRank = (/** @type {any} */ type) => {
 // Internal drifts carry no toType; classify by candidateType keyword. An unmatched
 // type is NEUTRAL (factor 1.0 ⇒ no effect), so a misclassification can never churn
 // legacy and only ever damps/boosts once dispositions are non-trivial.
-const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction)/i;
-const DEESCALATION_HINT = /(thaw|recovery|compact|protect|stability|alliance|allied|trade_partner|patronage|compliance|support|reconcil)/i;
+// The trade-leverage pair (tradeLeverageCandidate) classifies by documented intent:
+// trade_embargo_collapse WEAPONIZES the tie (escalation, like a sanction);
+// trade_dependency_coercion is the supplier pressing terms INSTEAD of war
+// (de-escalation), so the salience factor RAISES it as its rule comment promises —
+// neither matched any hint before, silently zeroing both documented adjustments.
+const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction|embargo)/i;
+const DEESCALATION_HINT = /(thaw|recovery|compact|protect|stability|alliance|allied|trade_partner|patronage|compliance|support|reconcil|dependency_coercion)/i;
 
 export function candidateDirection(/** @type {any} */ candidateType, /** @type {any} */ relState, /** @type {any} */ metadataAny) {
   const toType = typeof metadataAny?.toType === "string" ? metadataAny.toType : null;

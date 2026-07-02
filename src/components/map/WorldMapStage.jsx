@@ -15,7 +15,6 @@
 
 import { memo, Suspense, lazy } from 'react';
 import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
-import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
@@ -50,7 +49,7 @@ function WorldMapStageImpl({
   iframeRef,
   bridgeReady,
   bridgeRef,
-  overlayTransformRef,
+  onOverlayTransform,
   onNavigate,
   showLayersPanel,
   setShowLayersPanel,
@@ -155,7 +154,7 @@ function WorldMapStageImpl({
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
               {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} onTransform={onOverlayTransform} />
             </Suspense>
           )}
           <Suspense fallback={null}>
@@ -232,10 +231,9 @@ function WorldMapStageImpl({
                   the data the user needs to decide if this is a sensible
                   placement: terrain hint + trade-route candidacy +
                   proximity to existing placements. We render a static
-                  hint card (top-right) under the flag — a future
-                  iteration can hover-follow the cursor with live FMG
-                  cell data. */}
-              {flag('mapDropPreview') && (
+                  hint card (top-right) — a future iteration can
+                  hover-follow the cursor with live FMG cell data. */}
+              {(
                 // a11y: presentational hint card (pointerEvents:'none'); the
                 // onMouseEnter is fire-and-forget analytics, not a user control.
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions

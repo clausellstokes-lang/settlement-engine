@@ -21,7 +21,8 @@
  *   - the explicit production + apex/www hosts
  *   - the Vercel app host
  *   - CLIENT_URL and any comma-separated ALLOWED_ORIGINS env entries
- *   - any http://localhost:<port>            (local dev, any Vite/CRA port)
+ *   - any http://localhost:<port>            (DEV deployments ONLY — any
+ *                                            Vite/CRA port; see isDevDeployment)
  *   - any https://<subdomain>.settlement-engine.pages.dev
  *                                            (Cloudflare Pages branch/preview)
  *
@@ -32,15 +33,12 @@
  * `https://evil-settlement-engine.pages.dev.attacker.com`.
  */
 
-/** Explicit, always-allowed production/staging hosts. */
+/** Explicit, always-allowed production/staging hosts. Localhost is NOT listed
+ *  here — dev origins are matched by the dev-gated rule in `isAllowedOrigin`. */
 const STATIC_ORIGINS = [
   'https://settlementforge.com',
   'https://www.settlementforge.com',
   'https://settlementwork.vercel.app',
-  'http://localhost:5173',
-  'http://localhost:5174',
-  'http://localhost:5175',
-  'http://localhost:3000',
 ];
 
 /** Cloudflare Pages project host. Branch/preview deploys are subdomains of it. */
@@ -80,6 +78,22 @@ function configuredOrigins(): string[] {
 }
 
 /**
+ * Whether this is a DEV deployment. Production always sets an https CLIENT_URL
+ * (checkout redirect URLs depend on it); local `supabase functions serve`, unit
+ * tests, and localhost-pointed stacks either leave it unset or point it at
+ * localhost. Used to gate the localhost-any-port origin rule: a deployed
+ * production function must not reflect `http://localhost:<port>` origins.
+ * A developer who genuinely needs a localhost origin against a production
+ * deploy can add it explicitly via ALLOWED_ORIGINS.
+ *
+ * @returns {boolean}
+ */
+function isDevDeployment(): boolean {
+  const clientUrl = readEnv('CLIENT_URL');
+  return !clientUrl || /^http:\/\/localhost(:\d+)?$/.test(clientUrl);
+}
+
+/**
  * Whether an Origin is allowed. A missing Origin counts as same-origin (true).
  *
  * @param {string} origin
@@ -88,8 +102,8 @@ function configuredOrigins(): string[] {
 export function isAllowedOrigin(origin: string): boolean {
   if (!origin) return true;
   if (configuredOrigins().includes(origin)) return true;
-  // Any http://localhost:<port>.
-  if (/^http:\/\/localhost:\d+$/.test(origin)) return true;
+  // Any http://localhost:<port> — DEV deployments only (see isDevDeployment).
+  if (isDevDeployment() && /^http:\/\/localhost:\d+$/.test(origin)) return true;
   // Cloudflare Pages branch/preview: https + suffix match (never a bare match
   // on the suffix host itself without a subdomain, and https-only so the
   // scheme can't be downgraded).

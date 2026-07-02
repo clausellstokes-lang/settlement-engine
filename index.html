@@ -19,7 +19,11 @@
     <meta property="og:title" content="SettlementForge" />
     <meta property="og:description" content="Generate living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulate them as a persistent world." />
     <meta property="og:url" content="https://settlementforge.com/" />
-    <meta property="og:image" content="https://settlementforge.com/og-default.svg" />
+    <!-- Raster (PNG) is the unfurl image: Facebook, X/Twitter, LinkedIn, Slack,
+         Discord et al. do not rasterize SVG, so an SVG og:image ships no preview
+         card. og-default.png is generated from og-default.svg at the same 1200×630. -->
+    <meta property="og:image" content="https://settlementforge.com/og-default.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="SettlementForge: living settlements for game masters" />
@@ -27,7 +31,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SettlementForge" />
     <meta name="twitter:description" content="Generate living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulate them as a persistent world." />
-    <meta name="twitter:image" content="https://settlementforge.com/og-default.svg" />
+    <meta name="twitter:image" content="https://settlementforge.com/og-default.png" />
 
     <!-- WebSite + SoftwareApplication structured data (site-wide, first paint). -->
     <script type="application/ld+json">

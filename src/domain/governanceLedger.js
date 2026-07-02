@@ -38,7 +38,7 @@ const NEUTRAL = Object.freeze({
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {GovernanceLedger}
  */
 export function governanceLedger(settlement) {

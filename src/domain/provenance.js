@@ -32,7 +32,7 @@ const TRUST_KEYS = Object.freeze({
 /**
  * Build the structured provenance summary.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object}
  */
 export function deriveProvenanceSummary(settlement) {

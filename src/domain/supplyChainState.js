@@ -102,7 +102,7 @@ function snakeCase(s) {
     .toLowerCase();
 }
 
-/** @param {any} chain */
+/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function chainIdFromShape(chain) {
   if (!chain) return null;
   if (typeof chain.id === 'string' && chain.id.startsWith('chain.')) return chain.id;
@@ -218,7 +218,7 @@ const REGIONAL_CHAIN_ARCHETYPES = new Set([
   'regional_tax_revenue_disruption',
 ]);
 
-/** @param {any} chain */
+/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function searchableChainText(chain) {
   return [
     chain?.name,
@@ -237,7 +237,7 @@ function searchableChainText(chain) {
 
 /**
  * @param {any} condition
- * @param {any} chain
+ * @param {import('./settlement.schema.js').SimSupplyChain} chain
  * @param {any} haystack
  */
 function conditionMatchesChain(condition, chain, haystack) {
@@ -265,7 +265,7 @@ function conditionMatchesChain(condition, chain, haystack) {
 }
 
 /**
- * @param {any} chain
+ * @param {import('./settlement.schema.js').SimSupplyChain} chain
  * @param {any} settlement
  * @param {any[]} [conditions]  the settlement's active conditions, derived ONCE by
  *   the caller (deriveAllSupplyChainStates) and passed down so a 20-chain
@@ -340,7 +340,7 @@ function appendRegionalFailureContext(base, regionalPressures) {
 // reliable signal), falling back to the first processing institution.
 // If neither is present, the controller is 'unattributed'.
 
-/** @param {any} chain */
+/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function inferController(chain) {
   if (chain?.dependency?.institution) return chain.dependency.institution;
   const first = Array.isArray(chain?.processingInstitutions) ? chain.processingInstitutions[0] : null;
@@ -354,7 +354,7 @@ function inferController(chain) {
 // resulting list is a flat strings array suitable for "what does this
 // chain need?" displays.
 
-/** @param {any} chain */
+/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function inferDependencies(chain) {
   const out = [];
   if (chain?.resource) out.push(`resource: ${chain.resource}`);
@@ -375,7 +375,7 @@ function inferDependencies(chain) {
 // active, empty otherwise. Custom content as causal objects
 // will expand this; for now it's a faithful read of available data.
 
-/** @param {any} chain */
+/** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function inferSubstitutes(chain) {
   if (chain?.substituteActive) return ['active magical / alternative substitute in use'];
   return [];
@@ -389,9 +389,9 @@ function inferSubstitutes(chain) {
  * Pure; idempotent; lossless on legacy fields. Returns null for
  * nullish input.
  *
- * @param {any} chain      Active chain entry from
+ * @param {import('./settlement.schema.js').SimSupplyChain} chain      Active chain entry from
  *                            settlement.economicState.activeChains[].
- * @param {any} [settlement] Optional context — reserved for
+ * @param {import('./settlement.schema.js').SimSettlement} [settlement] Optional context — reserved for
  *                            controller-by-faction-archetype derivation
  *                            in future iterations.
  * @param {any[]} [conditions] The settlement's active conditions, derived once by
@@ -459,7 +459,7 @@ export function deriveSupplyChainState(chain, settlement, conditions) {
 }
 
 /** Enrich every active chain on a settlement. Returns []. for missing data. */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function deriveAllSupplyChainStates(settlement) {
   if (!settlement) return [];
   const chains = settlement.economicState?.activeChains
@@ -481,7 +481,7 @@ export function deriveAllSupplyChainStates(settlement) {
  * Count chains by canonical status. Returns { stable, strained,
  * scarce, blocked, captured, substituted, collapsing } with zeros.
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function supplyChainStatusBreakdown(settlement) {
   const out = {
     stable: 0, strained: 0, scarce: 0, blocked: 0,
@@ -495,7 +495,7 @@ export function supplyChainStatusBreakdown(settlement) {
 
 /**
  * True when any chain is in a non-stable state.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function hasDisruptedChains(settlement) {
   for (const c of deriveAllSupplyChainStates(settlement)) {

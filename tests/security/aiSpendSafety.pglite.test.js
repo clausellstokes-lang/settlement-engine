@@ -45,6 +45,19 @@ const recordCost = (usd, daysAgo = 0) =>
     [UID, usd, String(daysAgo)],
   );
 
+/**
+ * Insert a COGS row at a created_at pinned to a raw SQL time expression evaluated in the
+ * DB's OWN clock/timezone — the boundary-proof way to land a spend "this month" or "today".
+ * `tsSql` is a trusted test-authored SQL fragment (no user input), so interpolation is safe.
+ */
+const recordCostAt = (usd, tsSql) =>
+  db.query(
+    `insert into public.ai_usage_events
+       (user_id, feature, provider, model, input_tokens, output_tokens, estimated_cost_usd, ok, created_at)
+     values ($1, 'narrative', 'anthropic', 'claude-opus-4-8', 100, 100, $2, true, ${tsSql})`,
+    [UID, usd],
+  );
+
 const setCap = (daily, monthly, enabled = true) =>
   db.query(
     `update public.system_config set value = $1::jsonb where key = 'ai_spend_cap'`,
@@ -54,6 +67,13 @@ const setCap = (daily, monthly, enabled = true) =>
 const checkCap = async () => (await scalar('select public.check_ai_spend_cap() as r')).r;
 const consumeRl = async (uid, limit) =>
   (await scalar('select public.consume_ai_generate_rate_limit($1, 86400, $2) as r', [uid, limit])).r;
+
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(haveMigration).toBe(true);
+});
 
 describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
   beforeAll(async () => {
@@ -119,11 +139,25 @@ describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
     it('BLOCKS once MONTHLY spend reaches the monthly cap (even if today is clear)', async () => {
       // Spend that lands earlier this month but not today: daily clear, month over.
       await setCap(50, 100, true);
-      await recordCost(60, 5);  // 5 days ago, same month
-      await recordCost(50, 6);  // 6 days ago, same month → month total 110 > 100
+      // Boundary-proof: anchor the spend's timestamp to the DB's OWN clock (date_trunc on
+      // now()), NOT a JS `new Date()` offset. The old fixture computed "N days ago" from
+      // getUTCDate(), which disagrees with the SQL windows when the JS UTC date and the DB
+      // session's now()/date_trunc straddle a day/month boundary — so on the 1st the spend
+      // slipped OUT of the monthly window and the block silently failed to fire (a flake,
+      // not a guard bug; the RPC's `day/month < cap` logic is correct). Landing at the start
+      // of THIS month keeps both rows inside the monthly window on every calendar day.
+      await recordCostAt(60, `date_trunc('month', now()) + interval '1 second'`);
+      await recordCostAt(50, `date_trunc('month', now()) + interval '2 seconds'`); // month total 110 > 100
+      // "Today is clear" is only demonstrable when the month started BEFORE today (i.e. not
+      // the 1st); ask the DB, so the check matches the same clock the spend was pinned to.
+      const startedBeforeToday = (await scalar(
+        `select (date_trunc('month', now()) < date_trunc('day', now())) as before`,
+      )).before;
       const r = await checkCap();
-      expect(Number(r.daily_spend)).toBeCloseTo(0, 5); // nothing today
-      expect(r.allowed).toBe(false);                   // but month cap blocks
+      if (startedBeforeToday) {
+        expect(Number(r.daily_spend)).toBeCloseTo(0, 5); // nothing today
+      }
+      expect(r.allowed).toBe(false);                     // but month cap blocks, every day
     });
 
     it('respects the operator kill-switch: enabled:false disables the cap', async () => {

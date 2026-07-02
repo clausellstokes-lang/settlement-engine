@@ -13,24 +13,11 @@ const ERROR = true;
 // detect device
 const MOBILE = window.innerWidth < 600 || navigator.userAgentData?.mobile;
 
-// Service worker disabled for embedded SettlementForge Map
-if (false && PRODUCTION && "serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(err => {
-      console.error("ServiceWorker registration failed: ", err);
-    });
-  });
-
-  window.addEventListener(
-    "beforeinstallprompt",
-    async event => {
-      event.preventDefault();
-      const Installation = await import("./modules/dynamic/installation.js?v=1.89.19");
-      Installation.init(event);
-    },
-    {once: true}
-  );
-}
+// Service worker support removed for embedded SettlementForge Map: upstream's
+// sw.js pulled workbox from a Google CDN via importScripts, which would hand a
+// CDN-controlled script persistent control of this auth-bearing origin. The
+// sw.js file is deleted; if offline support is ever wanted, vendor workbox
+// locally (pinned in VENDOR-MANIFEST.json) instead of re-adding a CDN import.
 
 // append svg layers (in default order)
 let svg = d3.select("#map");
@@ -315,13 +302,17 @@ async function checkLoadParameters() {
     WARN && console.warn("Load map from URL");
     const maplink = params.get("maplink");
     const pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const valid = pattern.test(maplink);
+    // besides being URL-shaped, the link must be same-origin or from a trusted
+    // host (isTrustedMapLink in modules/io/load.js) — '?maplink=' is attacker
+    // land, and fetching arbitrary origins let a crafted .map be delivered to
+    // this auth-bearing origin with a single link click
+    const valid = pattern.test(maplink) && isTrustedMapLink(decodeURIComponent(maplink));
     if (valid) {
       setTimeout(() => {
         loadMapFromURL(maplink, 1);
       }, 1000);
       return;
-    } else showUploadErrorMessage("Map link is not a valid URL", maplink);
+    } else showUploadErrorMessage("Map link is not a valid URL or not from a trusted host", maplink);
   }
 
   // if there is a seed (user of MFCG provided), generate map for it

@@ -231,3 +231,37 @@ describe('computeTradeSalienceMap / overlay — order-independence', () => {
     expect(pair.supplierId).toBe('farm');
   });
 });
+
+describe('recencyLift — scoped to the SPECIFIC flipped buyer←supplier commodity tie', () => {
+  // One supplier `farm` sells grain into TWO buyers, b1 and b2. The trade-war
+  // ledger records a FRESH flip that `farm` won on the b1←grain tie only. The
+  // b2←grain tie is the SAME supplier + commodity but an UNRELATED buyer — it
+  // must NOT inherit b1's recency lift.
+  const twoBuyers = snapshotFor({
+    settlementIds: ['b1', 'b2', 'farm'],
+    channels: [tradeChannel('farm', 'b1', 0.7), tradeChannel('farm', 'b2', 0.7)],
+  }, [
+    save('b1', 'Buyone', { imports: ['Grain'] }),
+    save('b2', 'Buytwo', { imports: ['Grain'] }),
+    save('farm', 'Farmstead', { exports: ['Grain'] }),
+  ]);
+  // Ledger entry as tradeWar.js stamps it: real buyerId/commodityId/winnerId + a
+  // just-happened flip (age 0 ⇒ full recency lift for the MATCHING tie).
+  const worldState = {
+    ...twoBuyers.worldState,
+    tradeWarState: {
+      'b1:grain': { winnerId: 'farm', incumbentId: 'other', buyerId: 'b1', commodityId: 'grain', lastFlipTick: 5, updatedTick: 5 },
+    },
+  };
+
+  test('the flipped tie (b1) gets the recency lift; the supplier\'s unrelated tie (b2) does not', () => {
+    const flipped = commodityTradeSalience(twoBuyers, worldState, 'b1', 'farm', 'Grain', { tick: 5 });
+    const unrelated = commodityTradeSalience(twoBuyers, worldState, 'b2', 'farm', 'Grain', { tick: 5 });
+    expect(flipped).not.toBeNull();
+    expect(unrelated).not.toBeNull();
+    // The buyer whose tie actually flipped gets the lift…
+    expect(flipped.recency).toBeGreaterThan(0);
+    // …but the supplier's unrelated tie stays at zero recency (the bug lifted it too).
+    expect(unrelated.recency).toBe(0);
+  });
+});

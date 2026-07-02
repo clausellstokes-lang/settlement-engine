@@ -198,7 +198,7 @@ const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
  * derives "defining crisis" / "recent disruption" from, same vocabulary and
  * caps as stressorAftermath's graduation stamp. Idempotent per
  * (faction, tick). Returns the same reference when nothing changed.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} transition
  * @param {any} tick
  */

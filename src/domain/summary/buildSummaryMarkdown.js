@@ -13,11 +13,11 @@
  * no engine work of its own and never reaches past what its caller computed.
  */
 
-/** @param {any} s @returns {string} */
+/** @param {import('../settlement.schema.js').SimSettlement} s @returns {string} */
 function metaLine(s) {
   return [
     s.tierLabel || (s.tier != null && String(s.tier)),
-    s.population != null && `Pop. ${s.population.toLocaleString()}`,
+    s.population != null && `Pop. ${s.population.toLocaleString('en-US')}`,
     s.tradeAccess || (s.config?.tradeRouteAccess && String(s.config.tradeRouteAccess).replace(/_/g, ' ')),
     s.age != null && `${s.age} years old`,
   ].filter(Boolean).join(' · ');
@@ -27,7 +27,7 @@ function metaLine(s) {
  * V2 magazine shape: the "Tonight at the table" cast is the body. Mirrors the
  * cards a GM sees on screen so the paste matches the read.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {Array<{kind:string,title:string,body?:string}>} tableEntries
  */
 export function buildSummaryMarkdown(settlement, tableEntries) {
@@ -52,7 +52,7 @@ export function buildSummaryMarkdown(settlement, tableEntries) {
  * defense one-liners, full NPC + plot-hook rosters). The caller passes the
  * pre-derived strings/rosters it already computed so this stays pure.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {object} parts
  * @param {string} [parts.tierLabel]
  * @param {string} [parts.tradeAccess]

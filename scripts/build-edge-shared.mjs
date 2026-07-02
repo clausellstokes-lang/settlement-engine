@@ -80,8 +80,16 @@ async function buildOne({ label, entry, out, meta }) {
     inputs: inputPaths,
   }, null, 2) + '\n');
 
-  // Embed the hash into the banner for in-band checking (idempotent).
-  const bundleSrc = readFileSync(OUT_FILE, 'utf8');
+  // Strip JSDoc blocks that carry an `import(...)` TYPE reference before writing.
+  // Bundled app source may thread `@param {import('../settlement.schema.js').SimX}`
+  // annotations; esbuild (minify:false) preserves comments, so those would leak into
+  // the bundle and break `deno check` — Deno resolves JSDoc import types, and
+  // settlement.schema.js does not exist under supabase/functions/_shared/. The types
+  // are runtime-irrelevant here; the DO-NOT-EDIT banner carries no `import(` so it is
+  // preserved. The recorded sourceHash is computed from INPUT source (above), so this
+  // output-only strip does not affect freshness.
+  const bundleSrc = readFileSync(OUT_FILE, 'utf8')
+    .replace(/\/\*\*[^]*?\*\//g, (block) => (block.includes('import(') ? '' : block));
   const finalSrc = bundleSrc.includes('Source hash:')
     ? bundleSrc
     : bundleSrc.replace('DO NOT EDIT BY HAND.', `DO NOT EDIT BY HAND.\n * Source hash: ${sourceHash}`);

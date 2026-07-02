@@ -17,15 +17,39 @@ import { useEffect } from 'react';
 import { useStore } from '../store/index.js';
 import { flag } from '../lib/flags.js';
 
+/**
+ * Content-aware fingerprint of the user-editable parts of a map.
+ *
+ * The old key folded in only placement *ids* and layer *counts*, so a
+ * drag-move (updatePlacement / updateLabel / updateMarker / updateForest —
+ * which change x/y and annotation content without touching the id set or the
+ * counts) left the fingerprint unchanged. Autosave then never fired and the
+ * change was silently lost. We fold coordinates + annotation content into the
+ * fingerprint so any editable mutation is observed.
+ */
+export function mapFingerprint(m) {
+  const s = m || {};
+  const placements = Object.entries(s.placements || {})
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([k, p]) => `${k}:${p?.x},${p?.y},${p?.cellId ?? ''},${p?.settlementId ?? ''}`)
+    .join(',');
+  const labels = (s.labels || [])
+    .map(l => `${l?.id}:${l?.x},${l?.y},${l?.rotation ?? 0},${l?.fontSize ?? ''},${l?.color ?? ''},${l?.fontFamily ?? ''},${l?.text ?? ''}`)
+    .join(';');
+  const markers = (s.markers || [])
+    .map(mk => `${mk?.id}:${mk?.x},${mk?.y},${mk?.icon ?? ''},${mk?.color ?? ''},${mk?.title ?? ''},${mk?.note ?? ''}`)
+    .join(';');
+  const forests = (s.forests || [])
+    .map(f => `${f?.id}:${f?.x},${f?.y},${f?.radius ?? ''},${f?.density ?? ''},${f?.treeStyle ?? ''}`)
+    .join(';');
+  return `${placements}|${labels}|${markers}|${forests}|${s.customBackdrop?.imageUrl || ''}`;
+}
+
 export function useMapAutosave(activeCampaignId, activeCampaign, saveCampaignMap) {
-  const mapDirtyKey = useStore(s => {
-    const m = s.mapState || {};
-    return `${Object.keys(m.placements || {}).sort().join(',')}|${(m.labels || []).length}|${(m.markers || []).length}|${(m.forests || []).length}|${m.customBackdrop?.imageUrl || ''}`;
-  });
+  const mapDirtyKey = useStore(s => mapFingerprint(s.mapState));
   useEffect(() => {
     if (!flag('mapAutosave') || !activeCampaignId) return undefined;
-    const p = activeCampaign?.mapState || {};
-    const persistedKey = `${Object.keys(p.placements || {}).sort().join(',')}|${(p.labels || []).length}|${(p.markers || []).length}|${(p.forests || []).length}|${p.customBackdrop?.imageUrl || ''}`;
+    const persistedKey = mapFingerprint(activeCampaign?.mapState);
     if (mapDirtyKey === persistedKey) return undefined;
     const t = setTimeout(() => {
       try { saveCampaignMap(activeCampaignId, useStore.getState().mapState); }

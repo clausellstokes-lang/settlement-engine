@@ -8,9 +8,12 @@
  *   - Idempotent: normalize(normalize(s)) === normalize(s) for all valid s.
  *   - Tolerant: missing fields default to safe values; unknown fields pass
  *     through untouched (forward compatibility).
- *   - Lossless on round-trip with `denormalizeSettlement`: any field that
- *     gets renamed in `normalize` is restored to its legacy alias by the
- *     reverse adapter, so legacy consumers keep reading the same field.
+ *   - Additive, not reversible: there is intentionally NO `denormalizeSettlement`
+ *     reverse adapter. Rather than rename fields and rely on a reverse pass,
+ *     normalize writes the unified value AND preserves every legacy alias in
+ *     place (see step 3), so legacy consumers keep reading the same field with
+ *     no round-trip needed. (Earlier drafts envisioned a reverse adapter; the
+ *     preserve-in-place approach made it unnecessary, so it was never built.)
  *   - Cheap. This runs at save / load / PDF / AI boundaries. O(n) over
  *     settlement size, no deep traversal of nested generator output.
  *
@@ -84,7 +87,17 @@ function idFromSeed(seed) {
 // settlement always normalizes to the same id. Math.random here produced a fresh id
 // on every load, violating this file's idempotency contract
 // (normalize(normalize(s)) === normalize(s)).
-/** @param {any} settlement */
+//
+// KNOWN, DELIBERATE LIMITATION (kept narrow on purpose): the tuple is only
+// {name, tier, population}. Consequences for this rare path: two distinct id-less
+// settlements that share those three fields collide to the same id, and a rename /
+// repopulation changes the id (breaking any saved reference keyed on it). This is
+// the inherent tension of a content-hash fallback — widening the tuple cuts
+// collisions but ADDS rename-sensitivity, and changing the tuple at all would
+// re-id every settlement currently relying on it. A settlement with a real id or
+// _seed never reaches here, so the blast radius is imported/mock data only. Do not
+// widen without a migration story for already-content-id'd saves.
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function contentId(settlement) {
   return idFromSeed(JSON.stringify({
     name: settlement?.name ?? null,
@@ -96,7 +109,7 @@ function contentId(settlement) {
 /**
  * Resolve a canonical field value by checking the canonical key first,
  * then each declared alias. Returns the first defined value found.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} canonicalKey
  */
 function resolveAliased(settlement, canonicalKey) {
@@ -112,7 +125,7 @@ function resolveAliased(settlement, canonicalKey) {
  * Convert a settlement (any shape — legacy, partially-canonical, fully
  * canonical) into a canonical settlement.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object} New object — input is not mutated.
  */
 export function normalizeSettlement(settlement) {
@@ -179,7 +192,7 @@ export function normalizeSettlement(settlement) {
  * Whether a settlement appears to have been normalized at least once
  * (has version stamps and a stable id). Useful for short-circuiting
  * repeated normalize calls in hot paths.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function isNormalized(settlement) {
   return Boolean(

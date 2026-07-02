@@ -37,15 +37,21 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
  *  relationshipState.js). Any cycle at all now fails the guard. */
 const ALLOWED_CYCLES = new Set([]);
 
-function listSourceFiles() {
+/** Enumerate .jsx? source files under `base` (relative to ROOT), excluding tests.
+ *  Parametrized so the regex-coverage fixtures below can run the REAL pipeline
+ *  over a scratch tree OUTSIDE src/ — writing throwaway files into src/ raced the
+ *  whole-src size scanners (fileSizeBudget/fileSizeRatchet enumerate at collection
+ *  and readFileSync later), ENOENT-flaking a healthy tree when afterEach deletes
+ *  a fixture mid-run in another worker. */
+function listSourceFiles(base = 'src') {
   const out = [];
   (function walk(dir) {
-    for (const e of readdirSync(dir, { withFileTypes: true })) {
+    for (const e of readdirSync(join(ROOT, dir), { withFileTypes: true })) {
       const p = posix.join(dir, e.name);
       if (e.isDirectory()) walk(p);
       else if (/\.jsx?$/.test(e.name) && !/\.test\./.test(e.name)) out.push(p);
     }
-  })('src');
+  })(base);
   return out;
 }
 
@@ -129,21 +135,24 @@ describe('no NEW ESM import cycles in src/', () => {
 // REQUIRED a `from` clause, so a cycle closed by a bare side-effect import
 // (`import './x'`) or a dynamic import (`import('./x')`) was invisible to the
 // detector — a cycle could regress under those forms and this guard would stay
-// green. We write throwaway fixture modules into a temp dir under src/ (so the
-// REAL listSourceFiles → buildGraph → findCycles pipeline picks them up), assert
-// each form's cycle is detected, and remove them in afterEach. A `from`-only
-// regex passes the static-import case below but FAILS both of the others.
+// green. We write throwaway fixture modules into a scratch dir OUTSIDE src/ (so
+// the whole-src size scanners never enumerate them and ENOENT when afterEach
+// deletes them mid-run) and run the REAL listSourceFiles → buildGraph →
+// findCycles pipeline over that dir. A `from`-only regex passes the static-import
+// case below but FAILS both of the others.
 describe('cycle detection sees side-effect and dynamic imports (regex coverage)', () => {
-  const FIXDIR = '__cycle_fixtures__';
-  const dirAbs = join(ROOT, 'src', FIXDIR);
+  // Under tests/, NOT src/ — fileSizeBudget/fileSizeRatchet only walk src/, so
+  // transient fixtures here can't race their enumerate-then-read pipelines.
+  const FIXBASE = posix.join('tests', 'architecture', '.cycle_fixtures');
+  const dirAbs = join(ROOT, FIXBASE);
 
   const writeFixture = (name, body) => {
     mkdirSync(dirAbs, { recursive: true });
     writeFileSync(join(dirAbs, name), body);
   };
-  // Detect a cycle confined to our fixture dir (avoids coupling to src/'s real graph).
+  // Run the pipeline over ONLY the fixture dir (avoids coupling to src/'s real graph).
   const fixtureCycleDetected = () =>
-    findCycles(buildGraph(listSourceFiles())).some((c) => c.includes(`src/${FIXDIR}/`));
+    findCycles(buildGraph(listSourceFiles(FIXBASE))).some((c) => c.includes(`${FIXBASE}/`));
 
   afterEach(() => rmSync(dirAbs, { recursive: true, force: true }));
 

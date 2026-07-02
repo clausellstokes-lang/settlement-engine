@@ -57,6 +57,29 @@ if (!tscRan) {
   process.exit(2);
 }
 
+// tscRan is necessary but not sufficient: config-load failures ALSO print
+// `error TSxxxx:` lines (TS18003 "no inputs found", TS5083 "cannot read file",
+// tsconfig syntax errors located in the .json itself) — so they pass the sniff
+// above, yet no source file was ever typechecked, the per-file count comes out
+// 0, and the gate would green on nothing. Classify every diagnostic: a REAL
+// typecheck diagnostic is located in a source file (`file(line,col): error TS`
+// where file is not a .json config). Any other `error TS` line is a
+// config-level failure ⇒ the typecheck did not run over the domain ⇒ fail
+// CLOSED, same as a tsc that never started.
+const FILE_DIAG = /^(.+?)\((\d+),(\d+)\): error TS\d+/;
+const configErrors = [];
+for (const raw of out.split('\n')) {
+  const line = raw.trim();
+  if (!/error TS\d+:/.test(line)) continue;
+  const m = FILE_DIAG.exec(line);
+  if (!m || m[1].endsWith('.json')) configErrors.push(line);
+}
+if (configErrors.length) {
+  console.error('[domain-strict] tsc reported config-level errors — the strict typecheck never ran over the domain; failing closed; this is NOT a clean typecheck.');
+  console.error(configErrors.slice(0, 20).join('\n'));
+  process.exit(2);
+}
+
 // Count errors per src/domain file (ignore import-followed errors outside the
 // domain — those belong to the non-strict full typecheck, not this scope).
 const counts = {};

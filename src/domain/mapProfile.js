@@ -31,7 +31,7 @@
  * mutation belongs to a UI/runtime layer that consumes this profile.
  */
 
-import { deriveCausalState } from './causalState.js';
+import { deriveCausalState, defenseProfileHasWalls } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
 
@@ -44,7 +44,7 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 
 // ── Input envelope ───────────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
@@ -61,7 +61,7 @@ function deriveInputs(settlement) {
 // ── Output: roadImportance ──────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
@@ -87,14 +87,17 @@ function deriveRoadImportance(settlement, causal, contributors) {
 // ── Output: defensiveTerrain ────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
 function deriveDefensiveTerrain(settlement, causal, contributors) {
   const defense = causal.scores?.defense_readiness ?? 50;
   const terrain = settlement.config?.terrain || '';
-  const hasWalls = /\bwall|\brampart|\bpalisade/i.test(JSON.stringify(settlement.defenseProfile || {}))
+  // Real walls only: read the classified walls DATA (or real institution names),
+  // never a stringify regex — the profile always contains the literal key
+  // "walls", so the old regex banded every settlement as walled.
+  const hasWalls = defenseProfileHasWalls(settlement.defenseProfile)
                 || (settlement.institutions || []).some((/** @type {any} */ i) => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
 
   let idx = 1; // 'open' baseline
@@ -118,7 +121,7 @@ function deriveDefensiveTerrain(settlement, causal, contributors) {
 // ── Output: regionalAuthority ───────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} contributors
  */
 function deriveRegionalAuthority(settlement, contributors) {
@@ -150,7 +153,7 @@ function deriveRegionalAuthority(settlement, contributors) {
 // ── Output: hazardMarkers ───────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} contributors
  */
 function deriveHazardMarkers(settlement, contributors) {
@@ -181,7 +184,7 @@ function deriveHazardMarkers(settlement, contributors) {
 // ── Output: suggestedFeatures ───────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any[]} contributors
  */
@@ -254,7 +257,7 @@ export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; 
 
 /**
  * Human-readable summary.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeMap(settlement) {
   /** @type {any} */

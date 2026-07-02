@@ -10,7 +10,9 @@
  * This closes that gap WITHOUT Docker: it loads the ACTUAL, NET-CURRENT function
  * bodies — spend_credits from migration 024 (the ledger-allocation rewrite, NOT
  * the superseded 009 counter version), get_credit_balance + credit_spend_
- * allocations from 018, refund_credits + admin_grant_credits from 009 — into an
+ * allocations from 018, refund_credits from 087 (its net-current recreate: adds
+ * the FOR-UPDATE lock, the service-role bypass, and the elevated-spend no-op —
+ * NOT the superseded 009 body), admin_grant_credits from 009 — into an
  * in-process Postgres (pglite) and exercises them. auth.uid() /
  * current_user_is_privileged are settable GUC stubs; _audit_action is a no-op;
  * the credit tables are minimal mirrors (no auth.users FK). Everything else is
@@ -33,6 +35,7 @@ import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { netExecuteGrantsFromSql } from './netExecuteGrants.js';
 
 /** Compute the NET-CURRENT set of roles holding EXECUTE on a public function,
  *  by replaying every migration's grant/revoke in file order. Implicit PUBLIC
@@ -40,17 +43,7 @@ import { resolve } from 'node:path';
  *  at the platform level); this pins the EXPLICIT grants the migrations manage. */
 function netExecuteGrants(fnName) {
   const files = readdirSync(dir).filter(f => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`(grant|revoke)\\s+execute\\s+on\\s+function\\s+public\\.${fnName}\\b[\\s\\S]*?\\b(?:to|from)\\s+(\\w+)`, 'i');
-  const roles = new Set();
-  for (const f of files) {
-    for (const stmt of readFileSync(resolve(dir, f), 'utf-8').split(';')) {
-      const m = stmt.match(re);
-      if (!m) continue;
-      if (/grant/i.test(m[1])) roles.add(m[2].toLowerCase());
-      else roles.delete(m[2].toLowerCase());
-    }
-  }
-  return roles;
+  return netExecuteGrantsFromSql(fnName, files.map(f => readFileSync(resolve(dir, f), 'utf-8')));
 }
 
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
@@ -58,6 +51,11 @@ const MIG = {
   '009': resolve(dir, '009_profile_security.sql'),
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
+  // refund_credits' NET-CURRENT body: 009 → 033 → 085 → 087. Executing 009's
+  // superseded counter body would miss the shipping FOR-UPDATE lock, the
+  // service-role bypass, and the elevated-spend refund no-op guard — so the
+  // execution suite loads it from 087, the highest-numbered recreate.
+  '087': resolve(dir, '087_review_money_hardening.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -97,6 +95,43 @@ const grant = (uid, amount, { source = 'purchase', expiresAt = null } = {}) =>
     `insert into public.credit_ledger (user_id, kind, amount, source, expires_at) values ($1,'grant',$2,$3,$4)`,
     [uid, amount, source, expiresAt],
   );
+
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
+// The grant-replay guard itself must not be bypassable: a multi-role
+// `grant ... to service_role, authenticated` previously registered only the
+// FIRST role, so `authenticated` smuggled in second would go undetected.
+describe('netExecuteGrants — multi-role GRANT/REVOKE lists', () => {
+  const FN = 'refund_credits';
+  const grantTo = (roles) => `grant execute on function public.${FN}(uuid, text) to ${roles};`;
+  const revokeFrom = (roles) => `revoke execute on function public.${FN}(uuid, text) from ${roles};`;
+
+  it('registers EVERY role in a comma-separated grant, not just the first', () => {
+    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role, authenticated')]);
+    expect(roles.has('service_role')).toBe(true);
+    expect(roles.has('authenticated')).toBe(true); // the previously-dropped second role
+  });
+
+  it('removes EVERY role in a comma-separated revoke', () => {
+    const roles = netExecuteGrantsFromSql(FN, [
+      grantTo('authenticated'),
+      grantTo('anon'),
+      revokeFrom('authenticated, anon'),
+      grantTo('service_role'),
+    ]);
+    expect([...roles]).toEqual(['service_role']);
+  });
+
+  it('handles a role list wrapped across lines', () => {
+    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role,\n  authenticated')]);
+    expect(roles.has('authenticated')).toBe(true);
+  });
+});
 
 describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite)', () => {
   beforeAll(async () => {
@@ -158,7 +193,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     // reference by the function name — behaviorally identical — so the rest of the
     // real idempotency claim/grant body runs verbatim.
     await db.exec(extractFn('024', 'system_grant_credits').replace(/\bgrant_fn\.source\b/g, 'system_grant_credits.source'));
-    await db.exec(extractFn('009', 'refund_credits'));
+    await db.exec(extractFn('087', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
   });
 
@@ -234,6 +269,25 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
     await expect(db.query(`select public.refund_credits('${r.spend_id}', null)`)).rejects.toThrow(/already refunded/i);
     expect(await balanceOf(UID)).toBe(10);
+  });
+
+  // 087 net-current guard: an ELEVATED spend never debited profiles.credits, so
+  // refunding it must be a no-op that returns the live balance rather than minting
+  // phantom credits. This path exists ONLY in the 087 body — it silently vanishes
+  // if the suite regresses to executing the superseded 009 refund_credits.
+  it('refunding an elevated spend is a no-op (does not mint phantom credits)', async () => {
+    await grant(UID, 10);
+    const sid = (await scalar(
+      `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+         values ('${UID}','spend',3,'narrative','{"elevated":"true"}'::jsonb) returning id`,
+    )).id;
+    const before = await balanceOf(UID);
+    const returned = (await scalar(`select public.refund_credits('${sid}', null) as b`)).b;
+    // No refund grant row was written and the balance is unchanged.
+    expect((await scalar(`select count(*)::int n from public.credit_ledger where source='refund'`)).n).toBe(0);
+    expect(await balanceOf(UID)).toBe(before);
+    // Returns the live profiles.credits cache (0 here — the elevated spend never bumped it).
+    expect(returned).toBe(0);
   });
 
   it('refuses to refund a non-spend ledger row', async () => {

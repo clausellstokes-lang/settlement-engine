@@ -31,7 +31,7 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
              Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
-store/       Zustand slices (15) — the single client state container.
+store/       Zustand slices (16) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
@@ -61,10 +61,12 @@ module calls `registerStep()` on import. The runner lives in
 `generators/pipeline.js` and threads a **seeded PRNG context** (`rngContext.js`,
 `prng.js`) plus an `onStep` callback (used by the UI "pipeline reveal").
 
-Order: `resolveConfig → resolveResources → resolveStress → resolveNeighbour →
-assembleInstitutions → subsumptionPass → cascadePass → isolationPass →
-generateEconomy → generatePower → neighbourFactions → factionCorrelationPass →
-generatePopulation → generateNarratives → assembleSettlement`.
+Order (all 19 registered steps): `resolveConfig → resolveResources →
+resolveStress → resolveNeighbour → assembleInstitutions → subsumptionPass →
+cascadePass → isolationPass → stressConfirmPass → generateEconomy →
+generatePower → neighbourFactions → factionCorrelationPass →
+economyReconcilePass → structuralValidationPass → generatePopulation →
+corruptionPass → generateNarratives → assembleSettlement`.
 
 Determinism matters: same seed ⇒ same settlement. This is what makes the
 property-based and snapshot tests possible. The **Strangler-Fig** migration is
@@ -108,7 +110,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (93) — schema + RLS policies + credit ledger + version
+- **migrations/** (106) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -160,7 +162,13 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   **086** (atomic AI-spend reservation: the global daily/monthly USD cap was
   checked read-only before the model calls while COGS landed only after, so
   concurrent generations could collectively overrun the cap; 086 adds a
-  reservation RPC reconciled to actuals) —
+  reservation RPC reconciled to actuals) +
+  **097** (defense-in-depth for the credit ledger's allocation invariant: a
+  constraint trigger on `credit_spend_allocations` locks the referenced grant row
+  and rejects any insert/update whose per-grant total would exceed the grant's
+  amount, so `SUM(allocations) <= grant.amount` is enforced by the schema — not
+  only by `spend_credits`'s arithmetic — even against a future caller or a manual
+  fix) —
   all via SECURITY DEFINER RPCs with sanitized public reads. RLS is the security
   spine. Apply every file in `supabase/migrations/` in lexical order; never skip
   the 057+ security set. <!-- @enforced-by tests/docs/docCounts.test.js -->
@@ -179,7 +187,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
     metadata keys/roles (anti-privilege-escalation).
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
-    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->
+    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/aiGroundingBundle.freshness.test.js -->
 
 Secrets live in the Supabase dashboard / Vercel env, never in the repo. Client
 reads only `VITE_*` vars (see `.env.example`); the anon key is public by design
@@ -202,13 +210,22 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 
 ## The gate
 
-`npm run check` = `validate:data && typecheck && lint && test && build`.
+`npm run check` = `validate:data && validate:edge && validate:map &&
+validate:migration-head && typecheck && typecheck:domain:strict && lint &&
+test && build` (nine stages — the authoritative list is the `check` script in
+`package.json`; keep this line in sync with it).
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
+- **validate:edge** — edge-function contract/shape checks.
+- **validate:map** — Azgaar/FMG map-bridge validation.
+- **validate:migration-head** — the migration applied-head ledger is in sync
+  (fails closed if a migration was added without bumping the head).
 - **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
   tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
   punch-list reached zero, so the gate was switched to full coverage;
   `typecheck:domain` keeps the fast domain-only check.
+- **typecheck:domain:strict** — the strict-mode domain typecheck (tighter than
+  the full-tree pass, scoped to the domain layer).
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).

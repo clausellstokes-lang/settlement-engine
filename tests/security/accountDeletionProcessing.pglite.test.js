@@ -63,6 +63,13 @@ const USER_B = '44444444-4444-4444-4444-444444444444';
 
 let db;
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('A3 follow-up — account-deletion processor (pglite, executed against 054)', () => {
   beforeAll(async () => {
     db = new PGlite();

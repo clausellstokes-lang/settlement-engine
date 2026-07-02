@@ -55,7 +55,7 @@ export function deriveSystemState(settlement) {
  * Can the settlement absorb shocks? Drivers: prosperity, food security,
  * income/export diversity, public legitimacy. Famine, single-source
  * exports, and impaired institutions push it down.
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  */
 function deriveResilience(s) {
   let value = 50;
@@ -158,7 +158,7 @@ function deriveResilience(s) {
  * relationships between factions, criminal capture, low public
  * legitimacy. A stable monoculture scores low; a town with rivals,
  * thieves' guilds, and weak rulers scores high.
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  */
 function deriveVolatility(s) {
   let value = 30; // baseline — most towns have some friction
@@ -247,7 +247,7 @@ function deriveVolatility(s) {
 /**
  * How much pressure comes from outside the settlement? Monster threat,
  * hostile neighbours, raids/sieges/occupation in stressors.
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  */
 function deriveExternalThreat(s) {
   let value = 30;
@@ -310,7 +310,7 @@ function deriveExternalThreat(s) {
 /**
  * Are key materials under strain? Depleted resources, narrow chain
  * dependencies, unmet imports. High value = the place will hurt soon.
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  */
 function deriveResourcePressure(s) {
   let value = 30;
@@ -364,7 +364,7 @@ function deriveResourcePressure(s) {
  *   - primaryDeitySnapshot: a dominant deity moving religious_authority — a named
  *     driver on the internal-conflict (volatility) axis.
  *
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @returns {{ warDrain: any|null, warPressure: any|null, armyDeployed: any|null, deity: any|null }}
  */
 function readWarReligionMovement(s) {
@@ -382,7 +382,7 @@ function readWarReligionMovement(s) {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-/** @param {any} s */
+/** @param {import('../settlement.schema.js').SimSettlement} s */
 function econOf(s) { return s?.economicState || {}; }
 
 /**

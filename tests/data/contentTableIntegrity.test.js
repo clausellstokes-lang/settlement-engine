@@ -44,6 +44,17 @@ describe('EVENT_TYPE_NAMES ⇄ HISTORICAL_EVENTS_DATA', () => {
     expect(EVENT_TYPE_NAMES.crime_wave).toBe('The Crime Wave');
   });
 
+  test('EVENT_TYPE_NAMES maps distinct types to distinct display names', () => {
+    // Two different event types resolving to the same title (e.g. both
+    // infiltration_fear and occupation_legacy → 'The Occupation') mislabels one
+    // crisis as the other and can print two eras under one name.
+    const names = Object.values(EVENT_TYPE_NAMES);
+    const seen = new Set();
+    const collisions = names.filter((n) => (seen.has(n) ? true : (seen.add(n), false)));
+    expect([...new Set(collisions)]).toEqual([]);
+    expect(EVENT_TYPE_NAMES.infiltration_fear).not.toBe(EVENT_TYPE_NAMES.occupation_legacy);
+  });
+
   test('EVENT_TYPE_NAMES has no orphan keys that no template can look up', () => {
     // exile_return was dead vocabulary: it is a category/theme key elsewhere,
     // never a HISTORICAL_EVENTS_DATA template `type`, so the lookup never hit it.
@@ -84,6 +95,20 @@ describe('NAMING_DATA arrays have no duplicate entries', () => {
   test('slavic.settlementSuffixes is de-duped (the worst copy-paste offender)', () => {
     const arr = NAMING_DATA.slavic.settlementSuffixes;
     expect(new Set(arr).size).toBe(arr.length);
+  });
+
+  test('no name embeds an ALL-CAPS identifier token (find/replace corruption)', () => {
+    // A name value should never contain a screaming-snake identifier fragment
+    // like `STRESS_TYPE_MAP` — that only happens when a symbol gets spliced into
+    // a literal during a find/replace or paste (e.g. "STRESS_TYPE_MAPðla").
+    const identifierToken = /[A-Z]{2,}_[A-Z]/;
+    const offenders = [];
+    for (const [path, arr] of stringArrays) {
+      for (const value of arr) {
+        if (identifierToken.test(value)) offenders.push(`${path}: ${value}`);
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 });
 

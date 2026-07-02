@@ -26,7 +26,10 @@ export const tierAtLeast = (tier, min) =>
 
 /** @param {number} pop @returns {string} */
 export const popToTier = (pop) =>
-  pop <= 80    ? 'thorp'
+  // Boundaries must agree with POPULATION_RANGES exactly, else a settlement is
+  // stamped with a tier whose own max it exceeds. thorp maxes at 60 (hamlet
+  // starts at 61); this was previously 80, leaking pop 61-80 into `thorp`.
+  pop <= 60    ? 'thorp'
   : pop <= 400   ? 'hamlet'
   : pop <= 900   ? 'village'
   : pop <= 5000  ? 'town'

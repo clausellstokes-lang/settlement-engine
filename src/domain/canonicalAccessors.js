@@ -26,7 +26,7 @@
  * strings, not stressor objects, and substrate readers expect objects with
  * type/name/severity.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]}
  */
 export function canonStressors(settlement) {
@@ -43,7 +43,7 @@ export function canonStressors(settlement) {
 /**
  * The settlement's exports — canonical `economicState.primaryExports`, falling
  * back to the legacy `exports` alias.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]}
  */
 export function canonExports(settlement) {
@@ -56,7 +56,7 @@ export function canonExports(settlement) {
 /**
  * The settlement's imports — canonical `economicState.primaryImports`, falling
  * back to the legacy `imports` alias.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]}
  */
 export function canonImports(settlement) {

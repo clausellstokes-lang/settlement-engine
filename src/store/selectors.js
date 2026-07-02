@@ -54,6 +54,20 @@ export const selectIsManualTier = (state) => {
  * Memoised: React 19's useSyncExternalStore requires getSnapshot to return
  * a stable reference on consecutive calls with the same inputs. Without
  * caching, every call creates a new object which triggers infinite re-renders.
+ *
+ * Module-global cache safety (why this single-entry cache is NOT a cross-store
+ * hazard, despite living at module scope): the result is a pure function of the
+ * cache key PLUS process-global inputs only. The key captures every per-store
+ * input (state.config's tier/manual/magic fields). The remaining inputs —
+ * getInstitutionalCatalog / getFullCatalogWithTierMeta and the custom-content
+ * source — are process-global (the custom-content getter reads the singleton
+ * store via setCustomContentSource, not a per-instance store). So two store
+ * instances that compute the same key necessarily resolve to the same catalog;
+ * a stale cross-store hit is not realizable. Same reasoning holds for
+ * selectTierInstitutionNames (keyed on tier, a pure function of it) and
+ * selectToggleSummary (keyed on the institutionToggles REFERENCE, which is
+ * inherently per-store). Do not "fix" these into per-store maps — the coarse key
+ * is deliberate for render stability and is already collision-safe.
  */
 let _catalogCache = { key: null, result: null };
 

@@ -333,6 +333,13 @@ registerStep('assembleInstitutions', {
     if (!toggle?.require) return;
     const parts = key.split('_');
     if (parts.length < 3) return;
+    // Scope legacy underscore toggles to THIS settlement's tier (or the
+    // tier-agnostic 'all' bucket), mirroring the '::' sweep's gate below.
+    // Without it a persisted `town_Economy_Bakers` force leaked onto an
+    // unrelated village, since toggles survive across builds. The `::` keys
+    // contain no bare '_' in the tier slot, so they never match `parts[0]`
+    // here and are correctly ignored by this legacy pass.
+    if (parts[0] !== tier && parts[0] !== 'all') return;
     const instName = parts.slice(2).join('_');
     if (institutions.some(i => i.name === instName)) return;
     for (const [cat, catInsts] of Object.entries(catalogForTier)) {

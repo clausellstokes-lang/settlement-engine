@@ -252,15 +252,19 @@ function augmentSummaryWithGrounding(
     const locked  = Array.isArray(payload?.constraints?.lockedEntities) ? payload.constraints.lockedEntities : [];
     const edits   = Array.isArray(payload?.userEdits) ? payload.userEdits : [];
     const augmented: Record<string, unknown> = { ...summary };
+    // Fence-strip both spliced lists: they're appended AFTER summarizeSettlement's
+    // stripFencesDeep and carry user-authored text verbatim — entity labels and,
+    // for _userEdits, the user-edited prose itself in `value` — so an unstripped
+    // splice would smuggle a live fence token straight past the summary strip.
     if (locked.length > 0) {
-      augmented._lockedEntities = locked.map((e: any) => ({
+      augmented._lockedEntities = stripFencesDeep(locked.map((e: any) => ({
         type: e.type, label: e.label, source: e.source,
-      }));
+      })));
     }
     if (edits.length > 0) {
-      augmented._userEdits = edits.map((e: any) => ({
+      augmented._userEdits = stripFencesDeep(edits.map((e: any) => ({
         kind: e.kind, label: e.label, path: e.path, value: e.value,
-      }));
+      })));
     }
     return augmented;
   } catch {
@@ -268,6 +272,56 @@ function augmentSummaryWithGrounding(
   }
 }
 
+// ── War-morale grounding (P5). The client sends a compact { resolve/hope/supply/faith/
+// sentiment } digest ONLY under its warEconomySurfacing flag. It is UNTRUSTED input that
+// reaches the prompt, so it is whitelisted (bounded key set), length/count-capped, and
+// fence-stripped here before it is embedded. Anything else is dropped; an empty/absent
+// digest yields null so the prompt gains no `_warMorale` key (byte-identical off-flag).
+const WAR_MORALE_STRING_KEYS = ['name', 'resolve', 'hope', 'supply', 'supplyNote', 'supplyChannel', 'sentiment', 'warWeariness'] as const;
+const WAR_MORALE_STR_CAP = 240;
+
+function boundedStringList(value: unknown, maxItems: number, maxLen: number): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((v) => typeof v === 'string' && v.trim()).slice(0, maxItems).map((v) => String(v).trim().slice(0, maxLen));
+}
+
+function sanitizeWarMoraleContext(raw: unknown): Record<string, unknown> | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const r = raw as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
+  for (const k of WAR_MORALE_STRING_KEYS) {
+    const v = r[k];
+    if (typeof v === 'string' && v.trim()) out[k] = v.trim().slice(0, WAR_MORALE_STR_CAP);
+  }
+  if (typeof r.atWar === 'boolean') out.atWar = r.atWar;
+  if (typeof r.besieged === 'boolean') out.besieged = r.besieged;
+  const besiegedBy = boundedStringList(r.besiegedBy, 8, 80);
+  if (besiegedBy.length) out.besiegedBy = besiegedBy;
+  const besieging = boundedStringList(r.besieging, 8, 80);
+  if (besieging.length) out.besieging = besieging;
+  if (r.faith && typeof r.faith === 'object') {
+    const f = r.faith as Record<string, unknown>;
+    const faith: Record<string, unknown> = {};
+    for (const k of ['patron', 'alignment', 'temper']) {
+      const v = f[k];
+      if (typeof v === 'string' && v.trim()) faith[k] = v.trim().slice(0, 120);
+    }
+    const opposedBy = boundedStringList(f.opposedBy, 6, 120);
+    if (opposedBy.length) faith.opposedBy = opposedBy;
+    if (Object.keys(faith).length) out.faith = faith;
+  }
+  if (Object.keys(out).length === 0) return null;
+  return stripFencesDeep(out);
+}
+
+// NOTE: every prompt builder re-strips its untrusted interpolations at the point
+// of embedding (stripFencesDeep / stripGuidanceFences). summarizeSettlement
+// already strips its own fields, but callers splice grounding riders onto the
+// summary AFTER that strip (relationshipMemory in index.ts, _warMorale), and
+// progression threads client-supplied prior prose straight in — the embed-time
+// strip is the chokepoint that makes the "no live fence token except the real
+// guidance pair" invariant structural. Stripping is idempotent, so clean input
+// builds a byte-identical prompt.
 function buildThesisPrompt(
   summary: Record<string, unknown>,
   aiGuidance = '',
@@ -280,7 +334,7 @@ ${guidanceBlock(aiGuidance)}
 ${chronicleBlock(chronicleContext)}
 
 Settlement context:
-${JSON.stringify(summary, null, 2)}`;
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
 }
 
 // ── Refinement pass infrastructure ──────────────────────────────────────────
@@ -1077,10 +1131,10 @@ function buildRefinementPrompt(
     ? `
 
 PRIOR VERSION (evolve this, do not discard its best lines):
-${JSON.stringify(priorValue, null, 2)}
+${JSON.stringify(stripFencesDeep(priorValue), null, 2)}
 
 CHANGE THAT PROMPTED THIS EVOLUTION:
-${changeLabel || '(unlabeled change)'}
+${stripGuidanceFences(changeLabel || '(unlabeled change)')}
 
 Your job is to EVOLVE the prior prose to match the new facts. Keep every sentence from the prior version that is still accurate. Rewrite only what the change invalidates. Do not introduce material that wasn't in the prior version AND isn't demanded by the new facts.`
     : '';
@@ -1093,26 +1147,28 @@ Your job is to EVOLVE the prior prose to match the new facts. Keep every sentenc
     ? `
 
 SETTLEMENT-SPECIFIC PRESERVATION (read this before the task — these are non-negotiable):
-${dynamicPreservationBlock.split('\n').filter(l => l.startsWith('- ') || l.startsWith('SETTLEMENT')).join('\n')}
+${stripGuidanceFences(dynamicPreservationBlock).split('\n').filter(l => l.startsWith('- ') || l.startsWith('SETTLEMENT')).join('\n')}
 `
     : '';
 
+  // `payload` is extracted from the RAW settlement (not the fence-stripped
+  // summary), so user-edited prose reaches this builder live — strip it here.
   return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
 
 THESIS (inherit this voice; reference its themes subtly; do not repeat it):
 """
-${thesis}
+${stripGuidanceFences(thesis)}
 """
 
 SETTLEMENT CONTEXT (for grounding only — do not repeat):
-${JSON.stringify(summary, null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}
 ${CACHE_BREAKPOINT}
 TASK:
 ${instruction}
 ${guidanceBlock(aiGuidance)}
 
 ITEMS TO REFINE:
-${JSON.stringify(payload, null, 2)}${priorBlock}
+${JSON.stringify(stripFencesDeep(payload), null, 2)}${priorBlock}
 
 CRITICAL: Return ONLY valid JSON matching the schema in the task. No markdown code fences, no preamble, no commentary.`;
 }
@@ -1157,10 +1213,10 @@ function buildProgressionThesisPrompt(
 
 You wrote the previous identity statement for this settlement:
 """
-${priorThesis || '(no prior thesis was recorded)'}
+${stripGuidanceFences(priorThesis || '(no prior thesis was recorded)')}
 """
 
-The settlement has changed: ${changeLabel || '(unlabeled change)'}
+The settlement has changed: ${stripGuidanceFences(changeLabel || '(unlabeled change)')}
 
 Update the identity statement to acknowledge this shift without throwing away what was true. Keep the voice. Two to three sentences. Ground the new claim in a specific data point from the new state — name a faction, a stressor, an institution, a trade fact, or an NPC.
 
@@ -1170,7 +1226,7 @@ ${guidanceBlock(aiGuidance)}
 Return ONLY the identity statement. No preamble, no markdown, no headings. Plain prose, one paragraph.
 
 Settlement context (new state):
-${JSON.stringify(summary, null, 2)}`;
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
 }
 
 /**
@@ -1398,7 +1454,9 @@ const DAILY_LIFE_FIELDS: Record<string, FieldCfg> = {
 };
 
 // §8 M3c — compact Chronicle digest the client sends (recent + party-caused
-// events). Sanitized + length-capped here; used as background grounding only.
+// events). Sanitized, length-capped, and fence-stripped here (a live fence
+// token is far shorter than the 200/400-char caps, so capping alone does not
+// neutralize a break-out); used as background grounding only.
 function sanitizeChronicleContext(ctx: unknown): Record<string, unknown> | null {
   if (!ctx || typeof ctx !== 'object') return null;
   const items = (ctx as { items?: unknown }).items;
@@ -1413,25 +1471,30 @@ function sanitizeChronicleContext(ctx: unknown): Record<string, unknown> | null 
       party: o.party === true,
     };
   }).filter((it) => it.what);
-  return clean.length ? { items: clean } : null;
+  return clean.length ? stripFencesDeep({ items: clean }) : null;
 }
 
 function chronicleBlock(chronicleContext: Record<string, unknown> | null): string {
   if (!chronicleContext) return '';
+  // Embed-time re-strip: defense in depth for a caller that skips the sanitizer.
   return `
 
 RECENT CHRONICLE (what has happened here, newest first; "party": true entries are the table's own deeds — weight these heavily):
-${JSON.stringify(chronicleContext, null, 2)}
+${JSON.stringify(stripFencesDeep(chronicleContext), null, 2)}
 
 Let this color the current mood and ongoing situation. Do NOT invent new events beyond this list; reference it only as background that has already happened.`;
 }
 
 function relationshipMemoryBlock(relationshipMemoryContext: Record<string, unknown> | null): string {
   if (!relationshipMemoryContext) return '';
+  // This channel's sanitizer (sanitizeRelationshipMemoryContext, in the shared
+  // aiGrounding bundle) clips lengths but does NOT know the fence tokens — a
+  // live token fits comfortably inside its 240-char caps. The strip must
+  // therefore happen here, at the embed.
   return `
 
 REGIONAL RELATIONSHIP MEMORY FOR DAILY LIFE:
-${JSON.stringify(relationshipMemoryContext, null, 2)}
+${JSON.stringify(stripFencesDeep(relationshipMemoryContext), null, 2)}
 
 Use this strongly as background pressure on ordinary routines: market caution, patrol tempo, sanctions, tribute, vassal levies, ally hesitation, patron protection, rumors, road checks, and who ordinary people avoid or trust. Do NOT invent new relationships, battles, NPCs, or events beyond this memory.`;
 }
@@ -1448,7 +1511,7 @@ ${relationshipMemoryBlock(relationshipMemoryContext)}
 ${chronicleBlock(chronicleContext)}
 
 Settlement context:
-${JSON.stringify(summary, null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}
 ${CACHE_BREAKPOINT}
 ${instruction}
 ${guidanceBlock(aiGuidance)}
@@ -1459,7 +1522,7 @@ Return ONLY the paragraph. No preamble, no markdown, no heading.`;
 export {
   stripGuidanceFences, buildThesisPrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
   buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse,
-  sanitizeChronicleContext, preservationBlockFor,
+  sanitizeChronicleContext, sanitizeWarMoraleContext, preservationBlockFor,
   DAILY_LIFE_FIELDS, PRESERVATION_RULES, PROGRESSION_AFFECTED_FIELDS, REFINEMENT_PASSES,
 };
 export type { PassContext };

@@ -59,10 +59,12 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
 export function NotableNPCs({ settlement, narrativeMode, vm }) {
   const all = vm.npcs.sorted; // already sorted desc by power
   const index = vm.entityIndex; // Phase-D: id→card resolver (anchors + links)
-  // Relative tiering: top 3 (or any with power ≥ 80) → major; next 4 → notable.
+  // Relative tiering: top 3 (or any with power ≥ 8) → major; next 4 → notable.
+  // NPC power is a 1-10 scale (npcGenerator: high 8-10, mid 4-7, low 1-3); the
+  // old 80 threshold was 0-100 and could never promote anyone.
   const majorMin = 3;
   const notableMin = 4;
-  const HIGH_POWER = 80;
+  const HIGH_POWER = 8;
   const major = [];
   const notable = [];
   const other = [];
@@ -148,7 +150,13 @@ function FullCard({ npc, index }) {
         borderRadius: 2,
         backgroundColor: palette.card,
       }}
-      wrap={false}
+      // Was wrap={false}: for a top-power NPC with a long AI blurb + several
+      // secrets/plot-hooks, the (unbounded) card exceeds a full page, and react-pdf
+      // cannot split a no-wrap block — so it CLIPPED the overflow tail, silently
+      // dropping secrets/hooks on the settlement's most important NPC. Allowing the
+      // card to wrap breaks it across a page boundary instead: never lossy. The
+      // occasional split card is an acceptable cost vs. dropping DM-critical content.
+      wrap
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <View style={{ flex: 1 }}>

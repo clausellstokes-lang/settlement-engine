@@ -79,7 +79,7 @@ const STANDING_BACKING = /** @type {Record<string, number>} */ ({ ascendant: 1, 
 /**
  * 0..1 religious-institution backing of a settlement (count × scale, saturated). A
  * cathedral/church weighs full, a monastery less, a shrine least. Creed-agnostic.
- * @param {any} settlement @returns {number}
+ * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
  */
 export function institutionBackingOf(settlement) {
   const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
@@ -92,7 +92,7 @@ export function institutionBackingOf(settlement) {
   return clamp01(weighted / INSTITUTION_SAT);
 }
 
-/** Importance → org-power weight (mirrors entities/npcs importanceWeight). @param {any} npc */
+/** Importance → org-power weight (mirrors entities/npcs importanceWeight). @param {import('../settlement.schema.js').SimNpc} npc */
 function orgPower(npc) {
   const w = /** @type {Record<string, number>} */ ({ minor: 0.0, notable: 0.4, key: 0.7, pillar: 1.0 });
   return w[String(npc?.importance || 'minor')] ?? 0;
@@ -102,7 +102,7 @@ function orgPower(npc) {
  * The ruling power's CHARACTER as a lens (deterministic): its temperament + alignment
  * lean, how much org-power backs it, and the corruption it sits in. Folds the
  * governing faction's archetype with its strongest linked NPC's authored alignment.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number }}
  */
 export function rulerLens(settlement) {

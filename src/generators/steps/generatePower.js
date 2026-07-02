@@ -38,7 +38,7 @@ registerStep('generatePower', {
   // branch fires for ANY truthy value, so an allied/trade_partner neighbour must be
   // passed as null to avoid a false "ongoing tensions" claim.
   const neighbourRel = effectiveConfig.neighborRelationship;
-  const ADVERSARIAL_REL = new Set(['hostile_rival', 'Hostile rival', 'cold_war', 'Cold war', 'tense']);
+  const ADVERSARIAL_REL = new Set(['hostile', 'rival', 'hostile_rival', 'Hostile rival', 'cold_war', 'Cold war', 'tense']);
   const tradeRouteArg = neighbourRel && ADVERSARIAL_REL.has(neighbourRel.relationshipType)
     ? neighbourRel
     : null;

@@ -63,10 +63,13 @@ export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
   const iframeRef = useRef(null);
   const mapContainerRef = useRef(null);
-  // Live overlay transform {tx,ty,scale,width,height} — written by MapOverlay in
+  // Live overlay transform {tx,ty,scale,width,height} — emitted by MapOverlay in
   // image mode so the drop handler can inverse-project screen→image coords
-  // without waiting on the debounced viewport persist.
+  // without waiting on the debounced viewport persist. MapOverlay reports it via
+  // the stable onTransform callback below; WorldMap owns this ref and the write.
   const overlayTransformRef = useRef(null);
+  // Stable (empty-deps) so MapOverlay's pan/zoom effect never re-runs on render.
+  const handleOverlayTransform = useCallback((t) => { overlayTransformRef.current = t; }, []);
   const bridgeRef = useRef(null);
   const [bridgeReady, setBridgeReady] = useState(false);
   const [toast, setToast] = useState(null);
@@ -849,7 +852,7 @@ export default function WorldMap({ onNavigate } = {}) {
             activeCampaign={activeCampaign} activeSaves={activeSaves}
             mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
             handleDragLeave={handleDragLeave} handleDrop={handleDrop} iframeRef={iframeRef}
-            bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
+            bridgeReady={bridgeReady} bridgeRef={bridgeRef} onOverlayTransform={handleOverlayTransform}
             onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
             mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap}
             {...campaignActivation}

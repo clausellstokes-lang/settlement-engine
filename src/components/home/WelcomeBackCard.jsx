@@ -5,8 +5,7 @@
  * after their last visit. Reads the most-recent saved settlement from
  * the store and offers a two-click resume.
  *
- * Self-gates on:
- *   - flag('welcomeBack')           (default off; flip per phase plan)
+ * Self-gates on (GA — the welcomeBack flag was promoted and inlined):
  *   - useReturnVisit().isReturn     (24h+ since last visit)
  *   - auth.tier !== 'anon'          (anons have no saved settlement context)
  *   - lastSettlement present        (no point greeting an empty library)
@@ -15,7 +14,6 @@
  */
 
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
@@ -27,7 +25,6 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
   const displayName = useStore(s => s.auth.displayName);
   const { isReturn, daysSinceLastVisit, lastSettlement } = useReturnVisit();
 
-  if (!flag('welcomeBack')) return null;
   if (tier === 'anon') return null;
   if (!isReturn) return null;
   if (!lastSettlement) return null;

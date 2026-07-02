@@ -15,7 +15,7 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
@@ -89,9 +89,13 @@ export async function handleLogClientError(
 
   const admin = makeAdminClient();
 
-  // Per-IP rate limit. FAIL OPEN on a limiter error (an observability sink must
-  // not lose a real crash report because the count query hiccuped), but DROP
-  // silently once over the window so a flood can't grow the table unbounded.
+  // Per-IP rate limit. FAIL CLOSED on a limiter error: the count query and the
+  // insert run through the same client against the same table, so if counting
+  // can't run, storing almost certainly can't either — dropping loses no report
+  // we could have kept, while failing open would let a limiter hiccup remove
+  // the only throttle on this anonymous service-role insert path. Over-window
+  // and limiter-error reports alike get a 202 accepted-but-not-stored; the
+  // fire-and-forget reporter never sees an error.
   try {
     const since = new Date(Date.now() - 60_000).toISOString();
     const { count, error } = await admin
@@ -99,12 +103,12 @@ export async function handleLogClientError(
       .select('id', { count: 'exact', head: true })
       .eq('ip_hash', ipHash)
       .gte('created_at', since);
-    if (!error && typeof count === 'number' && count >= RATE_PER_MINUTE) {
-      // 202: accepted-but-not-stored. Never surface an error to the reporter.
+    if (error || typeof count !== 'number' || count >= RATE_PER_MINUTE) {
       return json({ ok: true, throttled: true }, 202, cors);
     }
   } catch {
-    /* fail open */
+    // Same posture as a returned limiter error: drop, never surface a failure.
+    return json({ ok: true, throttled: true }, 202, cors);
   }
 
   const row = {

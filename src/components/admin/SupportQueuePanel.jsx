@@ -76,17 +76,29 @@ export default function SupportQueuePanel() {
   const [busy, setBusy] = useState(false);
   const [prompt, setPrompt] = useState(null);
 
+  /**
+   * Fetch the pool + commit it to state. Returns the fresh rows so callers
+   * (runAction) can reconcile the captured `active` row against server truth —
+   * without it, a mutated ticket's detail header and controlled selects snap
+   * back to the pre-mutation value. Returns [] on failure.
+   */
+  const loadInto = useCallback(async () => {
+    const data = await callAdmin({ action: 'list_ticket_pool', status: filter || undefined });
+    const rows = Array.isArray(data?.tickets) ? data.tickets : [];
+    setTickets(rows);
+    return rows;
+  }, [filter]);
+
   const load = useCallback(async () => {
     setLoading(true); setError(null);
     try {
-      const data = await callAdmin({ action: 'list_ticket_pool', status: filter || undefined });
-      setTickets(Array.isArray(data?.tickets) ? data.tickets : []);
+      await loadInto();
     } catch (e) {
       setError(e?.message || 'Failed to load queue'); setTickets([]);
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [loadInto]);
 
   const openTicket = useCallback(async (ticket) => {
     setActive(ticket); setEvents([]); setError(null); setStatus(null); setBusy(true);
@@ -109,13 +121,27 @@ export default function SupportQueuePanel() {
       setStatus(successMsg);
       const data = await callAdmin({ action: 'list_ticket_thread', ticketId: active.id });
       setEvents(Array.isArray(data?.events) ? data.events : []);
-      await load();
+      // Reconcile the captured `active` row against server truth. The queue we
+      // just reloaded carries the post-mutation status; without this the detail
+      // header and the controlled <select value={active.status}> revert to the
+      // pre-mutation value, inviting the agent to re-issue a transition that
+      // already happened. Fold in the fields we just set so the header stays
+      // consistent even if the row dropped out of the current status filter.
+      const rows = await loadInto();
+      setActive((prev) => {
+        if (!prev) return prev;
+        const fresh = rows.find((t) => t.id === prev.id);
+        const local = {};
+        if (body.action === 'set_ticket_status' && body.status) local.status = body.status;
+        if (body.action === 'link_ticket_faq' && body.faq) local.linked_faq = body.faq;
+        return { ...prev, ...local, ...(fresh || {}) };
+      });
     } catch (e) {
       setError(e?.message || 'Action failed');
     } finally {
       setBusy(false);
     }
-  }, [active, load]);
+  }, [active, loadInto]);
 
   const ask = useCallback((cfg, onValue) => {
     setPrompt({

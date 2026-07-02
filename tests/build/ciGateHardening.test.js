@@ -21,6 +21,14 @@
  *      SKIPS the deploy when the CI status token is missing or CI cannot be
  *      verified (network/4xx), proceeds only when every required check is green,
  *      and the lone escape hatch is the explicit VERCEL_ALLOW_UNGATED_DEPLOY=1.
+ *      Fail-closed extends to CRASHES: Vercel reads exit 1 as PROCEED, so a
+ *      thrown error anywhere in the decision path (e.g. a corrupt
+ *      applied-head.json) must become SKIP (exit 0), never a crash-exit-1 ship.
+ *   4b. ci.yml's `redeploy` job closes the "deploy never happens" gap: the gate
+ *      always skips the push-triggered deploy (CI hasn't reported yet) and
+ *      Vercel never re-evaluates, so a post-CI Deploy-Hook retrigger — master
+ *      only, after ALL gating jobs, opt-in via the VERCEL_DEPLOY_HOOK_URL
+ *      secret — is what actually ships an auto-deploy.
  */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
@@ -29,7 +37,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { decideDeploy, REQUIRED_CHECKS } from '../../scripts/vercel-ignore-build.mjs';
+import { decideDeploy, runGate, REQUIRED_CHECKS } from '../../scripts/vercel-ignore-build.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -103,14 +111,16 @@ describe('vercel.json CSP — app-origin strictness + scoped /map/ override', ()
 
   it('the /map/* fork gets the relaxations FMG genuinely needs, scoped to that path', () => {
     // The vendored FMG iframe (public/map/index.html) has ~80 inline on*=
-    // handlers, d3-dsv parses CSV via `new Function`, and dropbox.html loads the
-    // Dropbox SDK from unpkg — all of which the strict app CSP would break.
+    // handlers and d3-dsv parses CSV via `new Function` — both of which the
+    // strict app CSP would break, so /map/* keeps unsafe-inline + unsafe-eval.
+    // The Dropbox SDK is now vendored locally (sha-pinned) and no longer loaded
+    // from unpkg, so the /map/ CSP must NOT allow a CDN script origin.
     const mapCsp = effectiveCsp('/map/index.html');
     expect(mapCsp, 'a /map/ CSP must exist').toBeTruthy();
     const mapScript = directive(mapCsp, 'script-src');
     expect(mapScript).toMatch(/'unsafe-inline'/); // inline on*= handlers
     expect(mapScript).toMatch(/'unsafe-eval'/); // d3-dsv new Function
-    expect(mapScript).toMatch(/https:\/\/unpkg\.com/); // dropbox.html SDK
+    expect(mapScript).not.toMatch(/unpkg/); // Dropbox SDK now vendored locally, not from a CDN
     // dropbox.html token exchange + FMG embedded generators.
     expect(directive(mapCsp, 'connect-src')).toMatch(/https:\/\/api\.dropboxapi\.com/);
     expect(directive(mapCsp, 'frame-src')).toMatch(/https:\/\/watabou\.github\.io/);
@@ -238,8 +248,14 @@ describe('production deploy is gated on CI', () => {
     expect(d.reason).toMatch(/UNGATED/);
   });
 
+  // The check-run tests inject a repo==applied migration state so they stay
+  // hermetic: with the DEFAULT reader they'd read the real supabase/ tree and
+  // start failing whenever the repo is legitimately in the normal
+  // commit→`db push` window (repo head ahead of the applied ledger).
+  const cleanMigState = () => ({ repoHead: 1, appliedHead: 1 });
+
   it('proceeds only when all required checks are green', async () => {
-    const d = await decideDeploy({ ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' }, okFetch(greenRuns));
+    const d = await decideDeploy({ ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' }, okFetch(greenRuns), cleanMigState);
     expect(d.action).toBe('proceed');
   });
 
@@ -252,6 +268,60 @@ describe('production deploy is gated on CI', () => {
     expect(d.reason).toMatch(/not green/);
   });
 
+  // ── Migration-currency gate (audit: CI only WARNS on ledger drift; the deploy
+  //    gate makes it fail-closed so code can't ship ahead of the prod schema). ──
+  const greenCiEnv = { ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' };
+  const migState = (repoHead, appliedHead) => () => ({ repoHead, appliedHead });
+
+  it('FAILS CLOSED: skips when CI is green but the prod migration ledger is behind the repo head', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(98, 97));
+    expect(d.action).toBe('skip');
+    expect(d.reason).toMatch(/prod is at migration 97 while the repo head is 98|db push/i);
+  });
+
+  it('proceeds when the ledger confirms prod is at the repo head', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(97, 97));
+    expect(d.action).toBe('proceed');
+  });
+
+  it('honors VERCEL_ALLOW_MIGRATION_DRIFT=1 for a deliberate schema-free deploy (loudly)', async () => {
+    const d = await decideDeploy({ ...greenCiEnv, VERCEL_ALLOW_MIGRATION_DRIFT: '1' }, okFetch(greenRuns), migState(98, 97));
+    expect(d.action).toBe('proceed');
+    expect(d.warn).toBe(true);
+    expect(d.reason).toMatch(/VERCEL_ALLOW_MIGRATION_DRIFT/);
+  });
+
+  it('fails OPEN on unknown migration state (null) — never blocks on an unreadable ledger', async () => {
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), migState(null, null));
+    expect(d.action).toBe('proceed');
+  });
+
+  // ── Fail-closed on CRASH. Vercel's exit convention (exit 1 = PROCEED) turns
+  //    an uncaught exception — Node's default exit 1 — into a fail-OPEN ship,
+  //    the exact inversion the gate exists to prevent. ──
+  it('FAILS CLOSED when the migration-state read THROWS (e.g. corrupt applied-head.json)', async () => {
+    // Distinct from the null case above: null = knowably-unknown (deliberate
+    // fail-open); a THROW (readAppliedHeadLedger JSON.parses unguarded) must
+    // skip, not propagate out of decideDeploy into a crash-proceed.
+    const d = await decideDeploy(greenCiEnv, okFetch(greenRuns), () => {
+      throw new SyntaxError('Unexpected token ‘}’ in JSON');
+    });
+    expect(d.action).toBe('skip');
+    expect(d.reason).toMatch(/blocking deploy/i);
+  });
+
+  it('runGate() translates ANY thrown error into SKIP (exit 0), never a crash-exit-1 proceed', async () => {
+    const code = await runGate({}, async () => {
+      throw new Error('unexpected gate bug');
+    });
+    expect(code).toBe(0); // exit 0 → Vercel skips the build (fail-closed)
+  });
+
+  it('runGate() preserves the Vercel exit-code convention (skip → 0, proceed → 1)', async () => {
+    expect(await runGate({}, async () => ({ action: 'skip', reason: 'r' }))).toBe(0);
+    expect(await runGate({}, async () => ({ action: 'proceed', reason: 'r' }))).toBe(1);
+  });
+
   it('PROCEEDS on a green-after-rerun commit (a re-run success overrides a same-name stale failure)', async () => {
     // GitHub returns check-runs newest-first; a re-run leaves [{success},{failure}]
     // for the same name. The dedup must keep the SUCCESS (not the older failure),
@@ -262,7 +332,7 @@ describe('production deploy is gated on CI', () => {
       { name: 'Validate, test, build', conclusion: 'success' },
       { name: 'Edge function execution tests (Deno)', conclusion: 'success' },
     ];
-    const d = await decideDeploy({ ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' }, okFetch(runs));
+    const d = await decideDeploy({ ...vercelEnv, GITHUB_CI_STATUS_TOKEN: 't' }, okFetch(runs), cleanMigState);
     expect(d.action).toBe('proceed');
   });
 
@@ -413,6 +483,44 @@ describe('production deploy is gated on CI', () => {
     // "Brand New Gate" is gating but absent from REQUIRED_CHECKS → the real test
     // above would FAIL for it, which is the protection we want.
     expect(REQUIRED_CHECKS).not.toContain('Brand New Gate');
+  });
+});
+
+// ── 4b. Post-CI Vercel redeploy hook (the "deploy never happens" fix) ──────────
+// The gate always SKIPS the push-triggered deploy (Vercel runs it seconds after
+// the push; CI hasn't reported) and Vercel never re-evaluates on its own — so
+// without a retrigger, NO auto-deploy ever ships. ci.yml's `redeploy` job is
+// that retrigger. Pin its load-bearing properties so a refactor can't quietly
+// widen it (deploy on a PR / red CI) or sever it (drop the needs edge).
+describe('ci.yml redeploy job retriggers Vercel after CI goes green', () => {
+  const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+  const start = ci.search(/^ {2}redeploy:/m);
+  const jobBlock = ci.slice(start);
+
+  it('exists and needs ALL three gating jobs (a red/cancelled gate skips the trigger)', () => {
+    expect(start, 'ci.yml must have a top-level `redeploy:` job').toBeGreaterThanOrEqual(0);
+    expect(jobBlock).toMatch(/needs:\s*\[check, e2e, deno-tests\]/);
+  });
+
+  it('fires only on a master push — never PRs or other branches', () => {
+    const [ifLine] = jobBlock.match(/^\s{4}if:.*$/m) ?? [''];
+    expect(ifLine).toMatch(/github\.event_name == 'push'/);
+    expect(ifLine).toMatch(/github\.ref == 'refs\/heads\/master'/);
+  });
+
+  it('is OPT-IN via the VERCEL_DEPLOY_HOOK_URL secret and no-ops when unset', () => {
+    // Non-breaking by construction: without the secret the step exits 0, so an
+    // operator who keeps deploying manually sees zero behavior change.
+    expect(jobBlock).toMatch(/secrets\.VERCEL_DEPLOY_HOOK_URL/);
+    expect(jobBlock).toMatch(/-z "\$VERCEL_DEPLOY_HOOK_URL"/);
+    expect(jobBlock).toMatch(/curl -fsS -X POST "\$VERCEL_DEPLOY_HOOK_URL"/);
+  });
+
+  it('is marked deploy-gate: optional (the trigger must not be required to gate itself)', () => {
+    // Without the marker the inverse-direction guard above would demand the
+    // redeploy job join REQUIRED_CHECKS — a check that can never report before
+    // the deploy it triggers, i.e. a permanent deadlock.
+    expect(ci).toMatch(/^ {2}redeploy:.*#\s*deploy-gate:\s*optional/m);
   });
 });
 

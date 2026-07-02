@@ -1,23 +1,29 @@
 /**
- * theme.js — Backward-compat shim. Canonical tokens live in `src/design/tokens.js`.
+ * theme.js — Canonical re-export surface for design tokens across the
+ * component tree. The underlying values live in `src/design/tokens.js`; this
+ * file is the stable, flat-named façade (GOLD, INK, MUTED, FS, SP, …) that the
+ * UI imports.
  *
- * History: this file used to be the single source for flat constants
- * (GOLD, INK, MUTED, etc.) and was imported by ~80 components. It's now
- * a re-export shim so those imports keep working unchanged while the
- * actual values come from the new token system.
+ * History: this began as a backward-compat shim over the old flat constants,
+ * intended as a transitional layer toward importing `design/tokens.js`
+ * everywhere. That migration never completed and is no longer the plan —
+ * ~295 components import this surface and only a handful read tokens.js
+ * directly. So this is now PERMANENT shared infrastructure, not a stopgap:
+ * the flat re-export tier is a first-class, supported way to consume tokens.
  *
- * Values intentionally shift to the UI Redesign palette (parchment-50,
- * ink-900, gold-500, etc.) — same NAMES, refreshed VALUES. That's the
- * whole point of the shim: re-skin the app without touching 80 files.
+ * Both entry points are supported, and new code MAY use either:
+ *   • this surface — flat named constants, the dominant convention:
+ *       import { GOLD, INK, FS, SP, swatch } from './theme.js';
+ *   • `src/design/tokens.js` directly — the structured token objects:
+ *       import { color, semantic, type, space, radius } from '@/design/tokens';
+ *   • or the CSS custom properties (emitted at app boot by `emitCssTokens()`):
+ *       color: var(--color-gold-500);
+ *       color: var(--sem-text-body);
+ *       padding: var(--space-4);
  *
- * New code should import from `src/design/tokens.js` directly:
- *   import { color, semantic, type, space, radius } from '@/design/tokens';
- *
- * Or read the CSS custom properties (emitted at app boot by
- * `emitCssTokens()`):
- *   color: var(--color-gold-500);
- *   color: var(--sem-text-body);
- *   padding: var(--space-4);
+ * Values intentionally track the UI Redesign palette (parchment-50, ink-900,
+ * gold-500, etc.) — same NAMES, palette VALUES — so re-skinning stays a one-file
+ * change here rather than a sweep across the component tree.
  */
 
 import { legacy as L, semantic as SEM, layout as LAYOUT } from '../design/tokens.js';

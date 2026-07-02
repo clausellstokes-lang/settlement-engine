@@ -68,7 +68,7 @@ const IMPORTANCE_WEIGHT = {
  * tags each NPC at generation time; this is a fallback for legacy
  * saves.
  *
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  * @returns {NpcImportance}
  */
 export function inferImportance(npc) {
@@ -82,7 +82,7 @@ export function inferImportance(npc) {
 }
 
 /** Numeric weight (0-1) for propagation strength.
- *  @param {any} npc */
+ *  @param {import('../settlement.schema.js').SimNpc} npc */
 export function importanceWeight(npc) {
   return IMPORTANCE_WEIGHT[inferImportance(npc)] ?? 0;
 }

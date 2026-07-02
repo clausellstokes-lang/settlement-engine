@@ -98,7 +98,7 @@ function applyLegitimacyDelta(legitimacy, delta) {
 // report. Once completed, a clock holds at stage 6 until the trigger
 // resolves.
 
-/** @param {any} settlement @param {any} previousState */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement @param {any} previousState */
 function advanceClocks(settlement, previousState) {
   // Re-derive the current clock set from the settlement. Any clock no
   // longer triggered (e.g. supply chain recovered) drops off.
@@ -212,12 +212,20 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     // content will add the storage. We DO mirror them onto the faction as
     // string-suffixed delta lines so consumers reading the live shape
     // can show "wealth pressure" without a separate state surface.
+    // Clone _timePressure before writing rather than mutating in place. The
+    // faction here is a shallow copy (`{ ...f }`), so an inherited _timePressure
+    // still points at the ORIGINAL faction's object — mutating it would leak into
+    // the input (and throw on an immer-frozen input). A fresh copy keeps every
+    // tick pure and accumulates correctly across the multi-tick loop.
+    let touchedPressure = false;
+    const nextPressure = { ...(faction._timePressure || {}) };
     for (const field of ['wealth', 'publicTrust', 'manpower']) {
       if (typeof deltas[field] === 'number') {
-        if (!faction._timePressure) faction._timePressure = {};
-        faction._timePressure[field] = (faction._timePressure[field] || 0) + deltas[field];
+        nextPressure[field] = (nextPressure[field] || 0) + deltas[field];
+        touchedPressure = true;
       }
     }
+    if (touchedPressure) faction._timePressure = nextPressure;
   }
 
   return cloned;

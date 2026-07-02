@@ -39,10 +39,16 @@
 
 // ── Version stamps ──────────────────────────────────────────────────────────
 // Bumped when the shape changes in a way that requires per-version handling.
-// SCHEMA_VERSION jumps when fields are renamed, removed, or restructured.
-// SIMULATION_VERSION jumps when generator output semantics change in a way
-// that older saves wouldn't recompute identically. GENERATOR_VERSION is the
-// build-time stamp — useful for "this save was made by SettlementForge 1.2.3."
+// SCHEMA_VERSION jumps when fields are renamed, removed, or restructured; it is
+// the ONLY stamp that gates behavior — migrateSettlementToLatest reads it to run
+// the migration chain.
+// SIMULATION_VERSION and GENERATOR_VERSION are INFORMATIONAL/provenance stamps;
+// nothing reads them to gate or recompute. SIMULATION_VERSION marks when generator
+// output semantics changed (a deriver reweight) for diagnostics — but the substrate
+// is RECOMPUTED, not stored, so an older save simply re-derives under current math
+// by design. There is intentionally no simulation-version migration step; do not
+// assume bumping it triggers any recompute. GENERATOR_VERSION is the build-time
+// stamp — useful for "this save was made by SettlementForge 1.2.3."
 
 export const SCHEMA_VERSION     = 1;
 export const SIMULATION_VERSION = 1;
@@ -71,9 +77,19 @@ export const FIELD_ALIASES = Object.freeze({
 // the single boundary the substrate readers go through.
 
 // ── Canonical typedef ───────────────────────────────────────────────────────
-// The eventual target shape. Today's pipeline output is a flatter version of
-// this; `normalizeSettlement()` is the adapter. Update both this typedef and
-// the adapter when adding fields.
+// The eventual TARGET shape (nested: identity / geography / resources …). Today's
+// pipeline output is a FLATTER version of this; `normalizeSettlement()` is the
+// (additive) adapter. Update both this typedef and the adapter when adding fields.
+//
+// TYPING DEBT (deliberate, bounded — do not "fix" by threading CanonicalSettlement):
+// the simulation layer (worldPulse/, causalState, events, mutateEntities) operates
+// on the CURRENT flat shape and types its settlement params `{any}`. That is NOT
+// laziness — CanonicalSettlement is the nested target, so annotating those params
+// with it would be semantically WRONG (they read `settlement.factions` / `.npcs` /
+// `.population`, which live at the flat top level, not under identity/…) and would
+// surface hundreds of full-tree typecheck errors. Properly typing that layer needs a
+// dedicated FLAT-shape typedef (a sizeable design pass) threaded through ~3k call
+// sites; until that exists, `any` here is a known, intentional gap, not drift.
 
 /**
  * @typedef {Object} CanonicalSettlement
@@ -148,6 +164,423 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * @property {Object[]} [aiOverlays]
  *   Optional AI-generated prose layers. Distinct from canon facts.
+ */
+
+// ── Simulation flat-shape typedef ────────────────────────────────────────────
+// SimSettlement is the CURRENT FLAT shape the simulation layer (worldPulse/,
+// causalState, events, mutateEntities) actually reads at runtime — distinct from
+// CanonicalSettlement's FUTURE NESTED target shape above. The sim code reads
+// `settlement.factions` / `.npcs` / `.population` at the TOP level, not under
+// `identity` / `population` sub-objects, so annotating those params with
+// CanonicalSettlement would be semantically wrong (see the TYPING DEBT note above).
+// This is the missing artifact that note calls for: a dedicated flat-shape typedef
+// to thread through the ~3k sim call sites.
+//
+// LOOSE BY DESIGN. The `& Record<string, any>` intersection gives it a TS index
+// signature, so accessing a field NOT listed below does NOT error (it resolves to
+// `any`) — required to thread it into the sim layer without surfacing hundreds of
+// full-tree / strict-ratchet errors while the field set is still being enumerated.
+// The listed properties are still real constraints: misusing a listed scalar (e.g.
+// `settlement.population.toUpperCase()`) DOES error, so the type earns its keep.
+// As the paydown proceeds, MOVE fields out of the implicit index-signature bucket
+// into explicit @property lines (tightening types) — never the reverse.
+//
+// Scalars below are typed as their real type ONLY where they are reliably that
+// scalar; every array / nested object is typed LOOSELY (`any[]` / `Object` /
+// `Record<string, any>`) to avoid over-constraining a shape still being mapped.
+// All properties are optional: sim helpers routinely receive partial settlements
+// (mid-tick projections, snapshot slices), and optionality keeps direct callers
+// from newly erroring on legitimately-absent fields.
+//
+// The threading target: replace `@param {any} settlement` in the sim layer with
+// `@param {import('../settlement.schema.js').SimSettlement} settlement`.
+//
+/**
+ * @typedef {{
+ *   name?: string,
+ *   tier?: string,
+ *   id?: string,
+ *   genre?: string,
+ *   schema?: string,
+ *   schemaVersion?: number,
+ *   simulationVersion?: number,
+ *   population?: number,
+ *   economicViability?: any,
+ *   thievesGuildStrength?: number,
+ *   nearbyResourcesDepleted?: boolean,
+ *   factions?: SimFaction[],
+ *   npcs?: SimNpc[],
+ *   institutions?: SimInstitution[],
+ *   stressors?: SimStressor[],
+ *   supplyChains?: SimSupplyChain[],
+ *   activeConditions?: any[],
+ *   neighbours?: any[],
+ *   neighbors?: any[],
+ *   plotHooks?: any[],
+ *   hooks?: any[],
+ *   threats?: any[],
+ *   eventLog?: any[],
+ *   simulationTrace?: any[],
+ *   aiOverlays?: any[],
+ *   relationships?: any[],
+ *   interSettlementRelationships?: any[],
+ *   config?: Record<string, any>,
+ *   _config?: Record<string, any>,
+ *   powerStructure?: SimPowerStructure,
+ *   economicState?: SimEconomicState,
+ *   systemState?: Record<string, any>,
+ *   defenseProfile?: SimDefenseProfile,
+ *   resourceAnalysis?: SimResourceAnalysis,
+ *   resourceHistory?: Record<string, any>,
+ *   history?: SimHistory,
+ *   institutionHistory?: Record<string, any>,
+ *   tierHistory?: any[],
+ *   populationHistory?: any[],
+ *   neighbourNetwork?: any,
+ *   neighborNetwork?: any,
+ *   power?: Record<string, any>,
+ *   economy?: Record<string, any>,
+ *   spatialLayout?: Record<string, any>,
+ *   primaryDeity?: Record<string, any>
+ * } & Record<string, any>} SimSettlement
+ *
+ * The current FLAT settlement shape consumed by the simulation layer. Loose by
+ * design (see the block comment above): unlisted fields resolve to `any` via the
+ * `& Record<string, any>` index signature, so this is safe to thread through hot
+ * sim signatures without over-constraining. Tighten it field-by-field over time;
+ * it is the threading target for the sim-layer typing paydown, and the flat-shape
+ * counterpart to CanonicalSettlement's future nested shape.
+ */
+
+// ── Sim flat-shape SUB-typedefs (B1 paydown) ─────────────────────────────────
+// Real sub-shapes for SimSettlement's array + nested-object buckets, replacing
+// the former `any[]` / `Record<string, any>` placeholders. Each was built by
+// grepping the ACTUAL field accesses across the sim (worldPulse/, timeProgression,
+// events, mutateEntities) and generator layers, then typing only the scalars that
+// are reliably one type and leaving everything else loose.
+//
+// SAME SAFE FORM AS SimSettlement: every sub-type is an object literal of listed
+// fields INTERSECTED with `& Record<string, any>`. That trailing index signature
+// is NON-NEGOTIABLE — it guarantees access to any UNLISTED field still resolves to
+// `any`, so tightening these buckets surfaces ZERO new type errors and keeps the
+// full-tree typecheck + strict ratchet green. Tighten field-by-field over time;
+// never drop the `& Record<string, any>`. All properties optional (sim helpers
+// receive partial entities: mid-tick projections, snapshot slices).
+
+/**
+ * @typedef {{
+ *   id?: string,
+ *   name?: string,
+ *   role?: string,
+ *   title?: string,
+ *   category?: string,
+ *   importance?: any,
+ *   notability?: number,
+ *   influence?: (string | number),
+ *   power?: number,
+ *   corrupt?: boolean,
+ *   ousted?: boolean,
+ *   timesExposed?: number,
+ *   dots?: number,
+ *   factionId?: string,
+ *   factionLink?: string,
+ *   factionAffiliation?: string,
+ *   secondaryAffiliation?: string,
+ *   institutionId?: string,
+ *   organizationId?: string,
+ *   settlementId?: string,
+ *   structuralPosition?: string,
+ *   structuralRank?: (string | number),
+ *   secret?: any,
+ *   goal?: any,
+ *   personality?: any,
+ *   physical?: any,
+ *   presentation?: any,
+ *   corruptTies?: any,
+ *   corruptionVector?: any,
+ *   plotHooks?: any[],
+ *   linkedFactionIds?: any[],
+ *   linkedInstitutionIds?: any[]
+ * } & Record<string, any>} SimNpc
+ *
+ * CURRENT flat shape of an NPC as the sim + generator layers read it. Loose by
+ * design (& Record<string, any>) pending full enumeration. `influence` and
+ * `structuralRank` are unioned (string|number) because both forms appear across
+ * legacy generator output. Nested prose/pointer fields (secret, goal, personality,
+ * corruptTies …) stay loose until their own sub-shapes are enumerated.
+ */
+
+/**
+ * @typedef {{
+ *   id?: string,
+ *   name?: string,
+ *   faction?: string,
+ *   label?: string,
+ *   desc?: string,
+ *   category?: string,
+ *   archetype?: string,
+ *   power?: number,
+ *   weight?: number,
+ *   score?: number,
+ *   influence?: any,
+ *   legitimacy?: number,
+ *   isGoverning?: boolean,
+ *   governmentPreference?: string,
+ *   momentumBand?: string,
+ *   controlStrength?: number,
+ *   settlementId?: string,
+ *   modifiers?: any,
+ *   captureState?: any,
+ *   internalSeats?: any,
+ *   rivals?: any[],
+ *   suppressedInstitutions?: any[],
+ *   controlsInstitutionIds?: any[],
+ *   controlledInstitutions?: any[]
+ * } & Record<string, any>} SimFaction
+ *
+ * CURRENT flat shape of a faction as the sim + generator layers read it. Loose by
+ * design (& Record<string, any>) pending full enumeration. `faction` is the legacy
+ * NAME string (the generator's `{ faction, power, desc }` shape); `power` is the
+ * numeric power score. `influence` is unioned (string|number) — legacy output uses
+ * both. Nested structural fields (modifiers, captureState, internalSeats …) stay
+ * loose until enumerated.
+ */
+
+/**
+ * @typedef {{
+ *   id?: string,
+ *   name?: string,
+ *   category?: string,
+ *   status?: (string | Object),
+ *   source?: string,
+ *   desc?: string,
+ *   tags?: any[],
+ *   impairments?: any[],
+ *   required?: any,
+ *   exclusiveGroup?: (string | any[]),
+ *   produces?: any,
+ *   hasGarrison?: boolean,
+ *   hasWatch?: boolean,
+ *   hasMilitia?: boolean,
+ *   hasWalls?: boolean,
+ *   hasPrison?: boolean,
+ *   hasChurch?: boolean,
+ *   hasMercenary?: boolean,
+ *   hasCharterHall?: boolean,
+ *   hasCourtSystem?: boolean,
+ *   hasMagicInst?: boolean
+ * } & Record<string, any>} SimInstitution
+ *
+ * CURRENT flat shape of an institution as the sim + generator layers read it. Loose
+ * by design (& Record<string, any>) pending full enumeration. `status` is unioned
+ * (string|Object) — the schema's Institution typedef documents an object status but
+ * the sim reads it as a string band in places. The `has*` booleans are capability
+ * flags the power/defense generators set. `exclusiveGroup` appears as both a string
+ * and an array across call sites.
+ */
+
+/**
+ * @typedef {{
+ *   id?: string,
+ *   type?: string,
+ *   name?: string,
+ *   label?: string,
+ *   severity?: number,
+ *   peakSeverity?: number,
+ *   status?: string,
+ *   lifecycleStage?: string,
+ *   age?: number,
+ *   createdAt?: (string | number),
+ *   updatedAt?: (string | number),
+ *   resolvedAt?: (string | number),
+ *   originSettlementId?: string,
+ *   originRegion?: string,
+ *   decayRate?: number,
+ *   memoryStrength?: number,
+ *   resolutionReason?: string,
+ *   resolutionChance?: number,
+ *   resolutionRoll?: number,
+ *   durationPolicy?: any,
+ *   originContext?: any,
+ *   resolutionContext?: any,
+ *   affectedSettlementIds?: any[],
+ *   spreadChannels?: any[],
+ *   residualEffects?: any[],
+ *   severityBySettlement?: Record<string, any>,
+ *   synergy?: any,
+ *   counterforce?: any
+ * } & Record<string, any>} SimStressor
+ *
+ * CURRENT flat shape of a world-pulse stressor as the sim layer reads it. Loose by
+ * design (& Record<string, any>) pending full enumeration. `severity`/`peakSeverity`
+ * are 0..1 numbers; `age` is a numeric tick count; timestamps are unioned
+ * (string|number) since both epoch-ms and ISO forms appear. Structured sub-objects
+ * (durationPolicy, originContext, synergy …) stay loose until enumerated.
+ */
+
+/**
+ * @typedef {{
+ *   id?: string,
+ *   chainId?: string,
+ *   name?: string,
+ *   label?: string,
+ *   needKey?: string,
+ *   status?: string,
+ *   controller?: string,
+ *   resource?: string,
+ *   rawResource?: string,
+ *   entrepot?: boolean,
+ *   exportable?: boolean,
+ *   resourceDepleted?: boolean,
+ *   substituteActive?: boolean,
+ *   upstreamMissing?: boolean,
+ *   upstreamWeak?: boolean,
+ *   upstreamNote?: string,
+ *   magicNote?: string,
+ *   magicRecovery?: any,
+ *   activatedByResource?: any,
+ *   failureConsequences?: string,
+ *   dependency?: any,
+ *   dependencies?: any[],
+ *   substitutes?: any[],
+ *   victims?: any[],
+ *   services?: any[],
+ *   outputs?: any[],
+ *   intermediateGoods?: any[],
+ *   upstreamChains?: any[],
+ *   processingInstitutions?: any[]
+ * } & Record<string, any>} SimSupplyChain
+ *
+ * CURRENT flat shape of an active supply chain (economicState.activeChains /
+ * settlement.supplyChains) as the sim + generator layers read it via the `chain.`
+ * accessor. Loose by design (& Record<string, any>) pending full enumeration.
+ * `status` is a string band ('running' | 'operational' | 'vulnerable' | 'impaired'
+ * | 'stable' …); the boolean flags gate resource/substitution logic. Structured
+ * sub-objects and dependency lists stay loose until enumerated.
+ */
+
+/**
+ * @typedef {{
+ *   prosperity?: any,
+ *   foodSecurity?: Record<string, any>,
+ *   economicComplexity?: (string | number),
+ *   isEntrepot?: boolean,
+ *   situationDesc?: string,
+ *   tradeCommodity?: string,
+ *   safetyProfile?: any,
+ *   transit?: any,
+ *   compound?: any,
+ *   primaryExports?: any[],
+ *   primaryImports?: any[],
+ *   exports?: any[],
+ *   incomeSources?: any[],
+ *   tradeLinks?: any[],
+ *   activeChains?: SimSupplyChain[],
+ *   customChains?: any[],
+ *   customTradeLabels?: Record<string, any>,
+ *   customCategoryExports?: any,
+ *   customCategoryImports?: any
+ * } & Record<string, any>} SimEconomicState
+ *
+ * CURRENT flat shape of settlement.economicState as the sim + generator layers read
+ * it. Loose by design (& Record<string, any>) pending full enumeration.
+ * `foodSecurity` is a NESTED OBJECT (storageMonths / resilienceScore / deficitPct …
+ * per domain/fieldManifest.js), NOT a scalar — kept as Record<string, any>.
+ * `prosperity` / `economicComplexity` are unioned (string|number): they appear as
+ * both qualitative bands and numeric scores. `activeChains` reuses SimSupplyChain.
+ */
+
+/**
+ * @typedef {{
+ *   factions?: SimFaction[],
+ *   government?: (string | Object),
+ *   governingName?: string,
+ *   publicLegitimacy?: any,
+ *   stability?: (string | number),
+ *   conflicts?: any[],
+ *   previousGovernments?: any[],
+ *   plotHooks?: any[],
+ *   criminalCaptureState?: any
+ * } & Record<string, any>} SimPowerStructure
+ *
+ * CURRENT flat shape of settlement.powerStructure as the sim + generator layers read
+ * it. Loose by design (& Record<string, any>) pending full enumeration. `factions`
+ * reuses SimFaction. `government` is unioned (string|Object) — the generator writes a
+ * government-type STRING in places and a richer object elsewhere. `stability` appears
+ * as both a band string and a number. (NB: the `powerStructure.includes(...)` /
+ * `.toLowerCase()` grep hits are a LOCAL government-type string variable in
+ * powerGenerator.js, not this settlement sub-object — deliberately not modeled here.)
+ */
+
+/**
+ * @typedef {{
+ *   scores?: Record<string, any>,
+ *   readiness?: any,
+ *   economicGates?: any,
+ *   institutions?: any,
+ *   threats?: any[],
+ *   plotHooks?: any[]
+ * } & Record<string, any>} SimDefenseProfile
+ *
+ * CURRENT flat shape of settlement.defenseProfile as the sim + generator layers read
+ * it. Loose by design (& Record<string, any>) pending full enumeration. `scores` is
+ * a per-dimension numeric MAP (object), not a scalar. `readiness` is unioned
+ * (string|number) — a band label or a numeric score depending on the surface.
+ */
+
+/**
+ * @typedef {{
+ *   terrain?: (string | Object),
+ *   issues?: any[],
+ *   warnings?: any[],
+ *   suggestions?: any[]
+ * } & Record<string, any>} SimResourceAnalysis
+ *
+ * CURRENT flat shape of settlement.resourceAnalysis as the sim + generator layers
+ * read it. Loose by design (& Record<string, any>) pending full enumeration. Very
+ * few fields are accessed today; `terrain` is unioned (string|Object) since it is
+ * read both as a bare label and as a structured terrain descriptor.
+ */
+
+/**
+ * @typedef {{
+ *   founding?: any,
+ *   age?: (string | number),
+ *   historicalEvents?: any[],
+ *   events?: any[],
+ *   eventsTimeline?: any[],
+ *   currentTensions?: any[],
+ *   legacyAnnotations?: any[],
+ *   recentDisruption?: any,
+ *   unresolvedWound?: any,
+ *   historicalCharacter?: any,
+ *   siegeNarrative?: any
+ * } & Record<string, any>} SimHistory
+ *
+ * CURRENT flat shape of settlement.history (the OBJECT form — sim code reads it as
+ * `settlement.history || {}`) as the sim + generator layers read it. Loose by design
+ * (& Record<string, any>) pending full enumeration. `age` is unioned (string|number).
+ * NB: the array-like `history.length` / `.slice` grep hits belong to a DIFFERENT
+ * per-relationship history array in worldPulse/, not this settlement sub-object.
+ */
+
+/**
+ * @typedef {{
+ *   viable?: boolean,
+ *   verdict?: string,
+ *   summary?: (string | any[]),
+ *   stability?: (string | number),
+ *   metrics?: Record<string, any>,
+ *   issues?: any[],
+ *   plotHooks?: any[]
+ * } & Record<string, any>} SimViability
+ *
+ * CURRENT flat shape of a settlement economic-viability report (economicViability /
+ * viability) as the sim + generator layers read it. Loose by design
+ * (& Record<string, any>) pending full enumeration. NB: SimSettlement's own
+ * `economicViability` field is a NUMBER score elsewhere; this sub-type models the
+ * separate report OBJECT some surfaces read — not wired into SimSettlement to avoid
+ * colliding with the numeric field. `summary` is unioned (string|array).
  */
 
 /**
@@ -666,8 +1099,9 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * The canonical 5-band vocabulary for substrate variables. This is the
  * qualitative banding consumers should display in lieu of
- * raw numeric scores. Boundaries: ≥75 surplus, ≥55 adequate, ≥35
- * strained, ≥15 critical, else collapsed.
+ * raw numeric scores. Boundaries (match causalBand() in domain/causalState.js
+ * and its test assertions): ≥75 surplus, ≥50 adequate, ≥30 strained,
+ * ≥15 critical, else collapsed.
  */
 
 /**

@@ -21,6 +21,7 @@ import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
@@ -85,6 +86,11 @@ function Chip({ color, Icon, children, filled = false, title }) {
 // ── Full-entry modal ─────────────────────────────────────────────────────────
 
 function FullEntryModal({ entry, onClose }) {
+  // Shared modal focus management: focus-in, Tab cycling, Escape-to-close, and
+  // focus restore on unmount — the same contract PurchaseModal/AuthModal use.
+  // Replaces the hand-rolled backdrop + card role=button (no focus trap, no
+  // Escape) that this component carried before.
+  const dialogRef = useDialogFocusTrap(!!entry, onClose);
   if (!entry) return null;
   const s = entry.aiSettlement || {};
   const dl = entry.aiDailyLife || {};
@@ -116,12 +122,9 @@ function FullEntryModal({ entry, onClose }) {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click-to-close; keyboard dismissal (Escape) is handled by useDialogFocusTrap.
     <div
-      role="button"
-      tabIndex={0}
-      aria-label="Close chronicle entry"
       onClick={onClose}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.55)',
@@ -129,12 +132,14 @@ function FullEntryModal({ entry, onClose }) {
         padding: 20,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- handler only stops propagation to the backdrop, not real interactivity; keyboard dismissal (Escape) is handled by useDialogFocusTrap */}
       <div
-        role="button"
-        tabIndex={0}
+        ref={dialogRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
         aria-label="Chronicle entry details"
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',

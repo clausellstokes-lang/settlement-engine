@@ -22,6 +22,13 @@ export const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
   '087': resolve(dir, '087_review_money_hardening.sql'),
+  // 097/098: the allocation-within-grant backstop trigger (097 shipped the
+  // constraint trigger; 098 is the net-current function body — 097's AFTER-
+  // trigger double-count fix). Registered here so creditAllocationTrigger.
+  // pglite.test.js extracts them through the same path; makeCreditLedgerDb
+  // does NOT install the trigger (that suite layers it on explicitly).
+  '097': resolve(dir, '097_enforce_allocation_within_grant.sql'),
+  '098': resolve(dir, '098_fix_allocation_trigger_double_count.sql'),
 };
 export const allMigrationsExist = Object.values(MIG).every(existsSync);
 

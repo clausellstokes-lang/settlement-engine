@@ -7,7 +7,7 @@
  * schema migration for every simulator feature.
  */
 
-import { supabase, isConfigured } from './supabase.js';
+import { supabase, isConfigured, withTimeout } from './supabase.js';
 
 const LOCAL_KEY = 'sf_campaigns';
 const LOCAL_KEY_PREFIX = 'sf_campaigns:';
@@ -173,24 +173,43 @@ function rowForCampaign(campaign, userId) {
   return row;
 }
 
+// Every supabase network leg below is timeout-guarded (see withTimeout in
+// supabase.js — data calls and RPCs have NO built-in timeout). A stalled call
+// here otherwise hangs its caller forever: list() leaves the campaign screen
+// loading, upsert()/delete() wedge Save/Delete with their in-flight flags stuck
+// true, and a hung persist_world_pulse_advance permanently wedges
+// advanceInFlight/changeQueueFlushing — blocking every future advance until a
+// page refresh. On timeout the promise REJECTS, so the caller's existing
+// catch/finally clears the flag and surfaces the error.
+
 async function supabaseList() {
-  const { data, error } = await supabase
-    .from('saved_maps')
-    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at, public_slug, is_public, share_kind, gallery_description, gallery_tags')
-    .order('updated_at', { ascending: false });
+  const { data, error } = await withTimeout(
+    supabase
+      .from('saved_maps')
+      .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at, public_slug, is_public, share_kind, gallery_description, gallery_tags')
+      .order('updated_at', { ascending: false }),
+    20000,
+    'Load campaigns',
+  );
   if (error) throw error;
   return (data || []).map(campaignFromRow);
 }
 
 async function supabaseUpsert(campaign) {
-  const { data: { user } } = await supabase.auth.getUser();
+  // getUser can implicitly trigger a token refresh that never settles — guard it
+  // like saves.js supabaseSave does, or a wedged refresh hangs every campaign save.
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) throw new Error('Not authenticated');
   const row = rowForCampaign(campaign, user.id);
-  const { data, error } = await supabase
-    .from('saved_maps')
-    .upsert(row, { onConflict: 'id' })
-    .select('id')
-    .single();
+  const { data, error } = await withTimeout(
+    supabase
+      .from('saved_maps')
+      .upsert(row, { onConflict: 'id' })
+      .select('id')
+      .single(),
+    20000,
+    'Save campaign',
+  );
   if (error) throw error;
   return data?.id || campaign.id;
 }
@@ -202,7 +221,11 @@ async function supabaseWriteAll(campaigns) {
 }
 
 async function supabaseDelete(id) {
-  const { error } = await supabase.from('saved_maps').delete().eq('id', id);
+  const { error } = await withTimeout(
+    supabase.from('saved_maps').delete().eq('id', id),
+    20000,
+    'Delete campaign',
+  );
   if (error) throw error;
 }
 
@@ -227,12 +250,21 @@ async function supabaseDelete(id) {
  * @returns {Promise<{ applied: boolean, settlementsWritten?: number, settlementsRequested?: number, reason?: string }>}
  */
 async function supabasePersistWorldPulseAdvance({ campaignId, campaign, settlementUpdates = [], expectedTick = null }) {
-  const { data, error } = await supabase.rpc('persist_world_pulse_advance', {
-    p_campaign_id: campaignId,
-    p_campaign_snapshot: mapDataForCampaign(campaign),
-    p_settlement_updates: settlementUpdates,
-    p_expected_tick: expectedTick == null ? null : Number(expectedTick),
-  });
+  // 30s (vs the 20s default): this is the heaviest single write in the app — the
+  // full campaign snapshot plus every member settlement's post-pulse row in one
+  // RPC. A false abort on a slow-but-live call is recoverable (it rejects into the
+  // honest cloud-pending state below); an UNguarded hang is not — it permanently
+  // wedges advanceInFlight/changeQueueFlushing, blocking all future advances.
+  const { data, error } = await withTimeout(
+    supabase.rpc('persist_world_pulse_advance', {
+      p_campaign_id: campaignId,
+      p_campaign_snapshot: mapDataForCampaign(campaign),
+      p_settlement_updates: settlementUpdates,
+      p_expected_tick: expectedTick == null ? null : Number(expectedTick),
+    }),
+    30000,
+    'World pulse advance',
+  );
   if (error) throw error;
   return data || { applied: false };
 }

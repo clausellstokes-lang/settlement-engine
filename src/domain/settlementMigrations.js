@@ -43,7 +43,7 @@ const MIGRATIONS = Object.freeze([
     from: 0,
     to:   1,
     description: 'Stamp schemaVersion = 1. No structural changes; v0 settlements just lacked the version field.',
-    /** @param {any} settlement */
+    /** @param {import('./settlement.schema.js').SimSettlement} settlement */
     migrate(settlement) {
       // Pure passthrough: normalizeSettlement already stamps the
       // version stamp. This entry exists to make the chain explicit
@@ -59,7 +59,7 @@ const MIGRATIONS = Object.freeze([
  * Map a settlement's stored `schemaVersion` to the runner's current
  * pointer. Missing / null / 0 values are treated as v0 so the V0→V1
  * migration applies (which is the no-op stamp).
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {number}
  */
 function currentVersion(settlement) {
@@ -79,7 +79,7 @@ function currentVersion(settlement) {
  * settlement's current version after a migration step). That would
  * mean MIGRATIONS got reordered or had a hole — a code bug, not
  * runtime data drift.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any}
  */
 export function migrateSettlementToLatest(settlement) {
@@ -115,6 +115,16 @@ export function migrateSettlementToLatest(settlement) {
       );
     }
     const next = step.migrate(out);
+    // Explicit shape guard for the first REAL field-rename migration (today's
+    // chain is a no-op): a migrate() that returns null/undefined/non-object would
+    // otherwise surface only as a confusing version-mismatch below. Fail with a
+    // precise message so a buggy migration is obvious the moment it's written.
+    if (!next || typeof next !== 'object') {
+      throw new Error(
+        `[settlementMigrations] migration ${step.from}→${step.to} returned a ${next === null ? 'null' : typeof next} ` +
+        `instead of the migrated settlement object.`,
+      );
+    }
     if (currentVersion(next) !== step.to) {
       throw new Error(
         `[settlementMigrations] migration ${step.from}→${step.to} produced schemaVersion=${currentVersion(next)} ` +

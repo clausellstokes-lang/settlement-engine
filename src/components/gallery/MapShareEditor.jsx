@@ -192,7 +192,11 @@ export default function MapShareEditor({
       ? captureCampaignThumb({ bridge, ownerId, campaignId })
       : captureMapThumb({ bridge, ownerId, campaignId });
     capture
-      .then(result => { if (!cancelled && result?.imageUrl) setImageUrl(result.imageUrl); })
+      // Functional update: the capture only FILLS AN EMPTY SLOT. If the persisted-
+      // cover seed (fetchCampaignGalleryFields) or the owner landed a cover while
+      // this capture was in flight, keep it — the seedKeyRef guard stops future
+      // captures but cannot recall one already airborne.
+      .then(result => { if (!cancelled && result?.imageUrl) setImageUrl(prev => prev || result.imageUrl); })
       .catch(() => { /* non-fatal: keep the dropzone */ })
       .finally(() => { if (!cancelled) setSeedingCover(false); });
     return () => { cancelled = true; };
@@ -302,9 +306,17 @@ export default function MapShareEditor({
 
   // The cache patch mirrors the campaign row shape (lib/campaigns.js) so the tile
   // and any re-render off the cached campaign reflect the publish/edit at once.
-  function cachePatch(extra = {}) {
+  //
+  // shareKind rides along ONLY when the server write actually set it (kindWritten:
+  // publish via shareMap's p_kind). updateMapGalleryMetadata never touches
+  // share_kind, and on a stale campaign-share mount (members not yet hydrated) the
+  // draft kind is forced back to 'map' — stamping that onto the cached row (which
+  // persistCampaignState persists) would make the NEXT save read shareKind:'map',
+  // skip the world PRESERVE-ON-OMIT guard in handleSaveDetails, and null the
+  // published living world. Preserve-on-omit extends to the cached shareKind.
+  function cachePatch(extra = {}, { kindWritten = false } = {}) {
     return {
-      shareKind: shareCampaign ? 'map_with_campaign' : 'map',
+      ...(kindWritten ? { shareKind: shareCampaign ? 'map_with_campaign' : 'map' } : {}),
       galleryDescription: description,
       galleryTags: tagsInput.split(',').map(t => t.trim()).filter(Boolean),
       ...extra,
@@ -317,7 +329,7 @@ export default function MapShareEditor({
       const newSlug = await shareMap(campaignId, buildShareOpts());
       setSlug(newSlug);
       setIsPublic(true);
-      try { updateSavedCampaign?.(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug })); } catch { /* non-fatal */ }
+      try { updateSavedCampaign?.(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug }, { kindWritten: true })); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Map share failed');
     } finally {

@@ -28,8 +28,8 @@ function blockadeSeverityToImpairment(severity) {
 }
 
 /**
- * @param {any} settlement
- * @param {any} blockade - active siege/occupation stressor gripping this settlement, or null
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {import('../settlement.schema.js').SimStressor} blockade - active siege/occupation stressor gripping this settlement, or null
  * @param {{ now?: string }} [options]
  */
 export function applyBlockadeTransportImpairment(settlement, blockade, { now } = {}) {

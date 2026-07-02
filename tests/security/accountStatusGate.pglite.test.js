@@ -56,6 +56,13 @@ let db;
 const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('account-status write gate — execution against 057 (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

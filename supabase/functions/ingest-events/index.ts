@@ -1,5 +1,5 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { EVENTS, EVENT_CLASS, EVENT_NAME_RE, EDIT_KINDS } from '../_shared/analyticsEventsBundle.js';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
@@ -56,15 +56,36 @@ const boolOrNull = (v: unknown) => (typeof v === 'boolean' ? v : null);
 const strArr = (v: unknown) =>
   Array.isArray(v) ? v.filter((x) => typeof x === 'string' && x.length <= 64).slice(0, 64) : null;
 
-/** Server-side prose backstop: drop string props longer than 64 chars. */
-function stripProps(props: unknown): Record<string, unknown> {
-  if (!props || typeof props !== 'object') return {};
-  const out: Record<string, unknown> = {};
-  for (const [k, v] of Object.entries(props as Record<string, unknown>)) {
-    if (typeof v === 'string' && v.length > 64) continue;
-    out[k] = v;
+/**
+ * Server-side prose backstop: drop string props longer than 64 chars at ANY
+ * depth (the old top-level-only filter let `{ note: { text: '…prose…' } }`
+ * through untouched). Recursion is bounded: anything nested deeper than
+ * MAX_PROP_DEPTH is dropped outright. The DB adds a hard 8KB pg_column_size
+ * check on props (036), so this is prose/PII hygiene, not the size backstop.
+ * Exported for the regression test.
+ */
+const MAX_PROP_STRING = 64;
+const MAX_PROP_DEPTH = 4;
+function stripPropValue(v: unknown, depth: number): unknown {
+  if (typeof v === 'string') return v.length > MAX_PROP_STRING ? undefined : v;
+  if (Array.isArray(v)) {
+    if (depth >= MAX_PROP_DEPTH) return undefined;
+    return v.map((x) => stripPropValue(x, depth + 1)).filter((x) => x !== undefined).slice(0, 64);
   }
-  return out;
+  if (v && typeof v === 'object') {
+    if (depth >= MAX_PROP_DEPTH) return undefined;
+    const out: Record<string, unknown> = {};
+    for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
+      const stripped = stripPropValue(x, depth + 1);
+      if (stripped !== undefined) out[k] = stripped;
+    }
+    return out;
+  }
+  return v; // number / boolean / null pass through
+}
+export function stripProps(props: unknown): Record<string, unknown> {
+  if (!props || typeof props !== 'object' || Array.isArray(props)) return {};
+  return stripPropValue(props, 0) as Record<string, unknown>;
 }
 
 // deno-lint-ignore no-explicit-any
@@ -91,7 +112,12 @@ async function resolveUserActor(admin: any, userId: string, deviceKey: string | 
   return actor;
 }
 
-serve(async (req: Request) => {
+// Body cap in BYTES, not UTF-16 code units: `text.length` let ~192KB of 3-byte
+// UTF-8 under a 64KB "cap" (the same bug generate-narrative and
+// generate-chronicle fixed with regression tests).
+const MAX_BODY_BYTES = 64 * 1024;
+
+export async function handleIngestEvents(req: Request): Promise<Response> {
   const headers = corsHeaders(req);
   if (req.method === 'OPTIONS') return new Response(null, { headers });
 
@@ -105,7 +131,7 @@ serve(async (req: Request) => {
   let body: Record<string, unknown>;
   try {
     const text = await req.text();
-    if (text.length > 64 * 1024) return json({ error: 'too_large' }, 413, headers);
+    if (new TextEncoder().encode(text).length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, headers);
     body = JSON.parse(text);
   } catch {
     return json({ error: 'invalid_json' }, 400, headers);
@@ -267,4 +293,6 @@ serve(async (req: Request) => {
   }
 
   return json({ accepted, rejected }, 202, headers);
-});
+}
+
+serve(handleIngestEvents);

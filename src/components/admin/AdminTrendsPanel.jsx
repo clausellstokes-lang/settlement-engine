@@ -191,10 +191,13 @@ export default function AdminTrendsPanel() {
     setLoading(false);
   }, [from, to, granularity, mixField, distField, rowField, colField, activeMetrics]);
 
+  // Data-load effect: load() sets loading/rows on mount + dep change. Intentional.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   // Fetch per-config variance when a signature is chosen.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- clears/loads variance on signature change
     if (!configSig) { setVariance(null); return; }
     let ignore = false;
     setVarianceLoading(true);

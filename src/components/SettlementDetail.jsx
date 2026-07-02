@@ -56,10 +56,12 @@ import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNa
 // Next-action rail wiring + the shared canonize confirm/commit, extracted to keep
 // SettlementDetail under the component-size ratchet (behavior-preserving).
 import { useNextActionRailHandlers } from './settlementDetail/useNextActionRailHandlers.js';
+import { REL_LABELS } from '../lib/relationshipGraph.js';
 // Read-only network-effect echo: the SAME modifier selector + effect taxonomy
 // the (edit-only) NetworkEffectsPanel uses, so the View's one-line echo can never
-// disagree with the full panel's headline fact.
-import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../lib/relationshipGraph.js';
+// disagree with the full panel's headline fact. Extracted to its own module to
+// keep this surface under the component-size ratchet (behavior-preserving).
+import { computeNetworkEcho } from './settlementDetail/computeNetworkEcho.js';
 import { directionalRelationshipLabel } from '../domain/relationships/canonicalRelationship.js';
 import { INK, MUTED, BODY, SECOND, BORDER, sans, serif_, FS, swatch, PAGE_MAX, CHROME } from './theme';
 // Shared relationship palette — the SAME source the library card and the campaign
@@ -99,7 +101,7 @@ export default function SettlementDetail({
   // prop, preserving the pre-queue behaviour.
   handleLink, removeNeighbour, applyRename,
 }) {
-  const network=detail.settlement.neighbourNetwork||[];
+  const network = detail.settlement.neighbourNetwork || [];
   // Mobile is a read-and-light-act surface. The header keeps Export (the
   // at-the-table read action) primary; Share to Gallery (a publish/authoring
   // action) is deferred to desktop so the three peer buttons don't stack tall on
@@ -113,20 +115,7 @@ export default function SettlementDetail({
   // but the View must not hide the loudest causal signal, so we surface the
   // single dominant category here as one quiet de-emphasized line, mirroring the
   // panel's own hasDominant gate (only when a link actually moves a meter).
-  const networkEcho=(()=>{
-    const id=detail?.saveData?.id;
-    if(!id||!Array.isArray(saves)||!saves.length) return null;
-    let mods;
-    try{ mods=getSettlementModifiers(id,saves); }catch{ return null; }
-    if(!mods?.sources?.length) return null;
-    const dom=EFFECT_CATEGORIES.reduce((best,c)=>
-      Math.abs(mods.totals[c.key])>Math.abs(mods.totals[best.key])?c:best
-    ,EFFECT_CATEGORIES[0]);
-    const val=mods.totals[dom.key];
-    if(Math.abs(val)<0.005) return null;
-    const top=mods.sources[0];
-    return {label:dom.label,val,delta:fmtMod(val),isPos:val>=0,via:top?.settlementName||null,count:mods.sources.length};
-  })();
+  const networkEcho = computeNetworkEcho(detail?.saveData?.id, saves);
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
@@ -539,7 +528,15 @@ export default function SettlementDetail({
       editMode={editMode}
       canEdit={canEdit}
       onQueueCommitted={handleQueueCommitted}
-      queueActive={!simulated}
+      // Lost-action guard: ChangeQueuePanel's commit is the ONLY flushQueue
+      // caller, so it stays mountable for EVERY open settlement — anything
+      // queued must remain committable. A clock-bound member's edits all apply
+      // immediately (events, renames, links alike), so its queue is normally
+      // empty and the panel self-hides; but orders staged BEFORE a mid-session
+      // canonization (the queue survives navigation) still surface here and
+      // commit through flushQueue's Phase 4b campaign branch (the 069 RPC)
+      // instead of stranding invisibly.
+      queueActive
       onLink={handleLink}
       changeExtras={editMode && (
         // ── Relationship cluster ── Link Neighbour, the existing Neighbour

@@ -69,7 +69,7 @@ import { walkUserEdits } from './userEdits.js';
 // payload. The structured profile sections strip prose down to typed
 // fields, so the AI wouldn't see the actual edited text without this
 // dedicated section.
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function collectUserEditsSummary(settlement) {
   if (!settlement) return [];
   return walkUserEdits(settlement).map((/** @type {any} */ { kind, entityIndex, entity, path, record }) => ({
@@ -115,7 +115,7 @@ function canonicalCapacityBands(bands) {
 // both surfaces ground on the one magic-profile derivation. Dead-magic worlds
 // carry magicExists:false with the profile's honest 'absent' bands.
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function magicGroundingFacets(settlement) {
   const m = /** @type {any} */ (deriveMagicProfile(settlement));
   if (!m) return null;
@@ -147,7 +147,7 @@ const DEFAULT_OPTIONS = Object.freeze({
 // locked, anything committed via an event (those are timeline-anchored).
 // We walk the settlement's tagged entity arrays and collect references.
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function collectLockedEntities(settlement) {
   /** @type {any[]} */
   const out = [];
@@ -194,7 +194,7 @@ const STATIC_FORBIDDEN = Object.freeze([
   'Removing or replacing any entity tagged as user-authored.',
 ]);
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function forbiddenChanges(settlement) {
   const out = [...STATIC_FORBIDDEN];
   if (!settlement) return out;
@@ -233,7 +233,7 @@ export function forbiddenChanges(settlement) {
 
 const HOOK_SEVERITY_ORDER = { critical: 4, high: 3, medium: 2, low: 1 };
 
-/** @param {any} settlement @param {any} n */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement @param {any} n */
 function topHooksBySeverity(settlement, n) {
   const all = deriveAllStructuredHooks(settlement);
   const sorted = [...all].sort((/** @type {any} */ a, /** @type {any} */ b) => {
@@ -249,7 +249,7 @@ function topHooksBySeverity(settlement, n) {
 /**
  * Build the structured grounding envelope.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} [options]
  * @returns {Object} AiGroundingPayload
  */
