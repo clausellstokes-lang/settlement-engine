@@ -79,7 +79,7 @@ export function EventComposerTargetField({
     return (
       <Field label="New ruling power" hint={spec?.targetPrompt}>
         <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-          <option value="">, Pick a faction -</option>
+          <option value="">Pick a faction -</option>
           {rulingPowerOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
@@ -140,7 +140,7 @@ export function EventComposerTargetField({
           onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
           style={selectStyle}
         >
-          <option value="">, Pick a resource -</option>
+          <option value="">Pick a resource -</option>
           {resourceCatalogOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
@@ -173,7 +173,7 @@ export function EventComposerTargetField({
             onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
             style={selectStyle}
           >
-            <option value="">, Pick an NPC -</option>
+            <option value="">Pick an NPC -</option>
             {npcSwapGroups.map(g => (
               <optgroup key={g.faction} label={g.faction}>
                 {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
@@ -191,7 +191,7 @@ export function EventComposerTargetField({
             style={selectStyle}
             disabled={!target}
           >
-            <option value="">, Pick the counterpart -</option>
+            <option value="">Pick the counterpart -</option>
             {counterparts.map(n => (
               <option key={n.id} value={n.id}>{n.name}</option>
             ))}
@@ -220,7 +220,7 @@ export function EventComposerTargetField({
           onChange={e => setTarget(e.target.value)}
           style={selectStyle}
         >
-          <option value="">, Pick a {collectionKey.replace(/s$/, '')} -</option>
+          <option value="">Pick a {collectionKey.replace(/s$/, '')} -</option>
           {targetOpts.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}

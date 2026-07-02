@@ -200,10 +200,10 @@ describe('TIERS', () => {
     expect(TIERS.cartographer.features.supplyChainMap).toBe(true);
   });
 
-  it('founder is $99 lifetime with a 500-seat cap', () => {
+  it('founder is $99 lifetime with a 30-seat cap', () => {
     expect(TIERS.founder.priceCents).toBe(9900);
     expect(TIERS.founder.billing).toBe('lifetime');
-    expect(TIERS.founder.seatLimit).toBe(500);
+    expect(TIERS.founder.seatLimit).toBe(30);
     expect(TIERS.founder.features.founderBadge).toBe(true);
   });
 

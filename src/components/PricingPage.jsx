@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../store/index.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
+import { FOUNDER_SEAT_CAP } from '../lib/founderSeats.js';
 import {
   getVisibleTiers, getActivePacks, getTierDisplayName,
 } from '../config/pricing.js';
@@ -187,11 +188,11 @@ function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, empha
               channels (count + filled meter), in legible BODY weight-600 rather
               than violet-hue-alone. Live count via the founder_seats_taken RPC
               (migration 010); the fetch may fail or be pending, so fall back to
-              the safe "Limited to 500 seats" copy with no meter in those cases. */}
+              the safe "Limited to N seats" copy with no meter in those cases. */}
           <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
             {typeof founderSeatsRemaining === 'number'
-              ? `${founderSeatsRemaining} of 500 seats remaining.`
-              : 'Limited to 500 seats.'}
+              ? `${founderSeatsRemaining} of ${FOUNDER_SEAT_CAP} seats remaining.`
+              : `Limited to ${FOUNDER_SEAT_CAP} seats.`}
           </p>
           {typeof founderSeatsRemaining === 'number' && (
             <div
@@ -203,7 +204,7 @@ function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, empha
             >
               <div style={{
                 height: '100%', borderRadius: R.sm, background: GOLD,
-                width: `${Math.min(100, Math.max(0, ((500 - founderSeatsRemaining) / 500) * 100))}%`,
+                width: `${Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - founderSeatsRemaining) / FOUNDER_SEAT_CAP) * 100))}%`,
               }} />
             </div>
           )}
@@ -343,7 +344,7 @@ export default function PricingPage({ onNavigate }) {
   };
 
   // Live founder seat counter. Null until the RPC resolves
-  // OR on any failure — TierCard falls back to "Limited to 500 seats"
+  // OR on any failure — TierCard falls back to "Limited to N seats"
   // when null, so a transient backend hiccup doesn't break the page.
   const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
   useEffect(() => {

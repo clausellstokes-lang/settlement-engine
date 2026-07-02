@@ -167,7 +167,7 @@ Deno.test('single_dossier without a valid checkout token is rejected (400)', asy
   assertEquals(stripe.created.length, 0);
 });
 
-// ── Founder Lifetime seat cap (advertised 500 seats, enforced server-side) ────
+// ── Founder Lifetime seat cap (advertised 30 seats, enforced server-side) ────
 // founder_seats_taken() feeds both the pricing-page counter AND this gate; a
 // sold-out founder tier must never reach Stripe.
 
@@ -175,21 +175,21 @@ Deno.test('founder_lifetime with seats remaining creates a checkout session', as
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 499) },
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
   );
   assertEquals(res.status, 200);
   assertEquals(stripe.created.length, 1);
   assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'founder_lifetime');
 });
 
-Deno.test('founder_lifetime at the 500-seat cap is rejected (400) and never reaches Stripe', async () => {
+Deno.test('founder_lifetime at the 30-seat cap is rejected (400) and never reaches Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 500) },
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 30) },
   );
   assertEquals(res.status, 400);
-  assertEquals(stripe.created.length, 0);   // seat 501 is never offered for sale
+  assertEquals(stripe.created.length, 0);   // seat 31 is never offered for sale
 });
 
 Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {

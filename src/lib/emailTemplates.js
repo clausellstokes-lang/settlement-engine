@@ -47,7 +47,7 @@ export const TEMPLATES = Object.freeze({
       '',
       '  • Your first three saves are free. After that, sign up for a',
       '    Cartographer subscription or claim a Founder Lifetime seat',
-      '    (limited to the first 500 supporters).',
+      '    (limited to the first 30 supporters).',
       '',
       '  • Narrative refinement (the optional prose layer) costs credits',
       '    per pass. Cartographer subscriptions include a monthly',
@@ -122,7 +122,7 @@ export const TEMPLATES = Object.freeze({
     text: [
       'Hello {displayName},',
       '',
-      'You are one of the first 500 supporters. Thank you.',
+      'You are one of the first 30 supporters. Thank you.',
       '',
       'Your Founder Lifetime seat is permanent: Cartographer-tier',
       'access, unlimited saves, all current and future expansion packs.',

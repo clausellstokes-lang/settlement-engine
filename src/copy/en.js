@@ -368,9 +368,9 @@ export const en = Object.freeze({
         name:        'Founder Lifetime',
         priceLabel:  '$99',
         priceSub:    'one-time',
-        tagline:     'The first 500 supporters keep Cartographer forever.',
+        tagline:     'The first 30 supporters keep Cartographer forever.',
         cta:         'Claim a Founder seat',
-        seatsRemaining: '{remaining} of 500 seats remaining.',
+        seatsRemaining: '{remaining} of 30 seats remaining.',
         features: [
           'Everything in Cartographer, forever',
           'Founder badge on your dossiers',
@@ -727,7 +727,7 @@ export const en = Object.freeze({
     },
     founder: {
       lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
-      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
+      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 30 seats only.',
       lineWorldbuilder: 'For DMs running living regions. Pay once, run every campaign you’ll ever build.',
     },
   },
@@ -933,7 +933,7 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is the Founder Lifetime plan?',
-      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 500 buyers; the counter is live above this FAQ.',
+      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 30 buyers; the counter is live above this FAQ.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',

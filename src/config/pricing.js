@@ -222,7 +222,7 @@ export const TIERS = Object.freeze({
     priceCents:   9900,                   // $99 one-time
     billing:      'lifetime',
     oneTimeCredits: 30,
-    seatLimit:    500,
+    seatLimit:    30,
     saveLimit:    Infinity,
     maxSize:      'metropolis',           // size is not a premium lever; free reaches it too
     features: {
