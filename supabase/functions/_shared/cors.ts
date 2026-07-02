@@ -45,6 +45,17 @@ const STATIC_ORIGINS = [
 const CLOUDFLARE_PAGES_SUFFIX = '.settlement-engine.pages.dev';
 
 /**
+ * Vercel deployment-URL suffix for this project's TEAM scope. Vercel assigns a
+ * fresh `<project>-<hash>-<scope>.vercel.app` per deploy/preview, so an exact
+ * list can't keep up (same reason as the Cloudflare rule). The team scope is the
+ * trailing segment and is owned by us — an attacker cannot deploy under it — so
+ * requiring the hostname to END with `-<scope>.vercel.app` (https, leading char
+ * before the hyphen guaranteed by the suffix) is a safe branch/preview match.
+ * The apex production access stays via the settlementforge.com custom domain.
+ */
+const VERCEL_DEPLOY_SUFFIX = '-settlement-forge.vercel.app';
+
+/**
  * Read an env var without assuming the Deno global exists. The helper is
  * imported by vitest (Node) for behavioral testing, where `Deno` is undefined;
  * guarding here keeps the module importable in both runtimes.
@@ -114,6 +125,13 @@ export function isAllowedOrigin(origin: string): boolean {
       url.hostname !== CLOUDFLARE_PAGES_SUFFIX.slice(1) &&
       url.hostname.endsWith(CLOUDFLARE_PAGES_SUFFIX)
     ) {
+      return true;
+    }
+    // Vercel deploy/preview: https + team-scoped suffix (the leading hyphen in
+    // the suffix guarantees a project/hash prefix, and the scope is ours), so
+    // every `<project>-<hash>-settlement-forge.vercel.app` build can call the
+    // edge functions — matching the Cloudflare branch/preview treatment.
+    if (url.protocol === 'https:' && url.hostname.endsWith(VERCEL_DEPLOY_SUFFIX)) {
       return true;
     }
   } catch {
