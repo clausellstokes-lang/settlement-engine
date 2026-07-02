@@ -11,6 +11,7 @@ import {
   stablePart,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
+import { storageCapacityMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
@@ -196,6 +197,9 @@ function affectedSaveIdsForOutcome(/** @type {any} */ outcome) {
   for (const delta of outcome.populationDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
   }
+  for (const delta of outcome.foodStockpileDeltas || []) {
+    if (delta?.saveId) ids.add(String(delta.saveId));
+  }
   if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer || outcome.deityReembed)) {
     ids.add(String(outcome.targetSaveId));
   }
@@ -268,11 +272,38 @@ function installOccupationAuthority(/** @type {any} */ settlement, /** @type {an
   };
 }
 
+// Conserved granary transfer (war sack food seizure). `foodStockpileDeltas` carries a
+// per-settlement storageMonths change (target loses, victor gains) the same way
+// populationDeltas carries a per-settlement population change, so it applies through the
+// standard per-outcome pass and is atomic with the conquest's defer/dismiss. Clamped to
+// [0, granary capacity]; a settlement with no food ledger is a safe no-op.
+function applyFoodStockpileOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {any} */ saveId) {
+  const fs = settlement?.economicState?.foodSecurity;
+  if (!fs || !Number.isFinite(Number(fs.storageMonths))) return settlement;
+  const deltaMonths = (outcome.foodStockpileDeltas || [])
+    .filter((/** @type {any} */ d) => String(d?.saveId) === String(saveId))
+    .reduce((/** @type {number} */ sum, /** @type {any} */ d) => sum + (Number(d?.deltaMonths) || 0), 0);
+  if (!deltaMonths) return settlement;
+  const cap = storageCapacityMonths(settlement);
+  const nextMonths = Math.round(Math.max(0, Math.min(cap, Number(fs.storageMonths) + deltaMonths)) * 10) / 10;
+  if (nextMonths === Number(fs.storageMonths)) return settlement;
+  return {
+    ...settlement,
+    economicState: {
+      ...settlement.economicState,
+      foodSecurity: { ...fs, storageMonths: nextMonths },
+    },
+  };
+}
+
 function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {any} */ saveId) {
   if (!settlement || !outcome) return settlement;
   let next = settlement;
   if (outcome.populationDeltas?.length) {
     next = applyPopulationOutcomeToSettlement(next, outcome, saveId);
+  }
+  if (outcome.foodStockpileDeltas?.length) {
+    next = applyFoodStockpileOutcomeToSettlement(next, outcome, saveId);
   }
   if (outcome.tierChange && String(outcome.targetSaveId) === String(saveId)) {
     next = applyTierOutcomeToSettlement(next, outcome);

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { evaluateWarLayer, computeSackTransfer, SIEGE_MAX_AGE } from '../../src/domain/worldPulse/warDeployment.js';
+import { computeSackFoodTransfer } from '../../src/domain/worldPulse/foodStockpile.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/generators/prng.js';
@@ -47,7 +48,11 @@ function settlement(name, patch = {}) {
   return {
     name, tier: patch.tier || 'town', population: patch.population || 1800,
     config: { tradeRouteAccess: 'road', priorityEconomy: 25, priorityMilitary: 35 },
-    institutions: [], economicState: { prosperity: 'Prosperous', primaryExports: [], primaryImports: [] },
+    institutions: patch.granary ? [{ name: 'State Granary' }] : [],
+    economicState: {
+      prosperity: 'Prosperous', primaryExports: [], primaryImports: [],
+      ...(patch.storageMonths != null ? { foodSecurity: { storageMonths: patch.storageMonths } } : {}),
+    },
     powerStructure: {
       publicLegitimacy: { score: patch.legitimacy ?? 60, label: 'Stable' },
       factions: [{ faction: 'Military Council', category: 'military', power: 78, isGoverning: true }, { faction: 'Merchant League', category: 'economy', power: 52 }],
@@ -67,8 +72,14 @@ function siegeRecord(targetId, { age, strength }) {
 }
 const HOSTILE = { id: 'edge.atlas.borin', from: 'atlas', to: 'borin', relationshipType: 'hostile' };
 
+const ATLAS_POP = 30000;
+const BORIN_STORAGE = 4;   // conquered granary months
+const ATLAS_STORAGE = 1;   // victor granary months (headroom to receive loot)
 function conquer(warForage) {
-  const saves = [save('atlas', 'Atlas', { tier: 'city', population: 30000 }), save('borin', 'Borin', { tier: 'town', population: BORIN_POP, legitimacy: 65 })];
+  const saves = [
+    save('atlas', 'Atlas', { tier: 'city', population: ATLAS_POP, storageMonths: ATLAS_STORAGE, granary: true }),
+    save('borin', 'Borin', { tier: 'town', population: BORIN_POP, legitimacy: 65, storageMonths: BORIN_STORAGE, granary: true }),
+  ];
   const rules = { warLayerEnabled: true, warForageEnabled: warForage };
   const worldState = {
     rngSeed: 'war-seed', tick: 700,
@@ -106,5 +117,48 @@ describe('sack rides the conquest outcome', () => {
     expect(gained).toBe(expected.captured);
     expect(gained).toBeLessThan(-lost);                          // never mints
     expect(-lost - gained).toBe(expected.sacked - expected.captured); // the shortfall = war dead
+  });
+});
+
+describe('computeSackFoodTransfer — the pure conserved granary seizure', () => {
+  test('never mints absolute food: gained × victorPop ≤ lost × conqueredPop', () => {
+    const t = computeSackFoodTransfer({ conqueredStorageMonths: 4, conqueredPopulation: 9000, victorStorageMonths: 1, victorPopulation: 30000, victorCapMonths: 8 });
+    expect(t.lostMonths).toBe(2);        // half of 4 months
+    expect(t.gainedMonths).toBe(0.3);    // floor(0.6 × 2 × 9000 / 30000) = floor(0.36) → 0.3
+    expect(t.gainedMonths * 30000).toBeLessThanOrEqual(t.lostMonths * 9000); // absolute food conserved
+  });
+
+  test('the victor gain is capped at its granary headroom (excess loot spoils)', () => {
+    // A near-full victor granary (7.9 of cap 8) can only absorb 0.1 more month.
+    const t = computeSackFoodTransfer({ conqueredStorageMonths: 10, conqueredPopulation: 50000, victorStorageMonths: 7.9, victorPopulation: 8000, victorCapMonths: 8 });
+    expect(t.gainedMonths).toBe(0.1);
+  });
+
+  test('null when there is nothing to seize (no granary / no population)', () => {
+    expect(computeSackFoodTransfer({ conqueredStorageMonths: 0, conqueredPopulation: 9000, victorPopulation: 30000, victorCapMonths: 8 })).toBeNull();
+    expect(computeSackFoodTransfer({ conqueredStorageMonths: 4, conqueredPopulation: 0, victorPopulation: 30000, victorCapMonths: 8 })).toBeNull();
+    expect(computeSackFoodTransfer({})).toBeNull();
+  });
+});
+
+describe('food seizure rides the conquest outcome', () => {
+  test('flag OFF: the conquest carries NO foodStockpileDeltas (byte-identical)', () => {
+    expect(conquer(false).foodStockpileDeltas).toBeUndefined();
+  });
+
+  test('flag ON: the conquest loots the granary — a conserved storageMonths transfer', () => {
+    const expected = computeSackFoodTransfer({
+      conqueredStorageMonths: BORIN_STORAGE, conqueredPopulation: BORIN_POP,
+      victorStorageMonths: ATLAS_STORAGE, victorPopulation: ATLAS_POP, victorCapMonths: 8,
+    });
+    const conquest = conquer(true);
+    const deltas = conquest.foodStockpileDeltas;
+    expect(Array.isArray(deltas)).toBe(true);
+    const lost = deltas.find(d => d.saveId === 'borin').deltaMonths;
+    const gained = deltas.find(d => d.saveId === 'atlas').deltaMonths;
+    expect(lost).toBe(-expected.lostMonths);
+    expect(gained).toBe(expected.gainedMonths);
+    // Absolute-food conservation: the victor never gains more real food than was seized.
+    expect(gained * ATLAS_POP).toBeLessThanOrEqual(-lost * BORIN_POP);
   });
 });

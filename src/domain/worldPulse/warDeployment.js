@@ -41,6 +41,7 @@ import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } fro
 import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
+import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 
 // ── Tunables (calibration is load-bearing — see GEOPOLITICAL_WAR_LAYER §2.4/§6) ──
 // HOSTILE_CONFIDENCE gates whether a settlement is strong enough to open a war at
@@ -1137,6 +1138,20 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const sack = warForageEnabled
       ? computeSackTransfer(snapshot?.byId?.get?.(targetId)?.settlement?.population)
       : null;
+    // Granary loot: the same sack empties the conquered stores into the victor's, a
+    // conserved storageMonths transfer (see computeSackFoodTransfer). Rides the conquest
+    // outcome like the population sack ⇒ atomic with defer/dismiss; null ⇒ no key added.
+    const conqueredSettlement = snapshot?.byId?.get?.(targetId)?.settlement;
+    const victorSettlement = snapshot?.byId?.get?.(occupierId)?.settlement;
+    const foodSack = warForageEnabled && conqueredSettlement && victorSettlement
+      ? computeSackFoodTransfer({
+        conqueredStorageMonths: conqueredSettlement?.economicState?.foodSecurity?.storageMonths,
+        conqueredPopulation: conqueredSettlement?.population,
+        victorStorageMonths: victorSettlement?.economicState?.foodSecurity?.storageMonths,
+        victorPopulation: victorSettlement?.population,
+        victorCapMonths: storageCapacityMonths(victorSettlement),
+      })
+      : null;
 
     outcomes.push({
       id: `world_outcome.conquest.${stablePart(targetId)}.${tick}`,
@@ -1176,6 +1191,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           { saveId: String(targetId), delta: -sack.sacked, reason: `${occupierName}'s army sacks ${targetName}.` },
           ...(sack.captured > 0
             ? [{ saveId: String(occupierId), delta: sack.captured, reason: `Captives and levies from ${targetName} are carried to ${occupierName}.` }]
+            : []),
+        ],
+      } : {}),
+      ...(foodSack && foodSack.lostMonths > 0 ? {
+        foodStockpileDeltas: [
+          { saveId: String(targetId), deltaMonths: -foodSack.lostMonths, reason: `${occupierName}'s army loots the granaries of ${targetName}.` },
+          ...(foodSack.gainedMonths > 0
+            ? [{ saveId: String(occupierId), deltaMonths: foodSack.gainedMonths, reason: `Seized stores from ${targetName} resupply ${occupierName}.` }]
             : []),
         ],
       } : {}),

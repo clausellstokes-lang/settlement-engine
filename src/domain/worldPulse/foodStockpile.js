@@ -403,3 +403,41 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     },
   };
 }
+
+// ── SACK FOOD SEIZURE (P3, flag warForageEnabled). A stormed granary is looted: the victor
+// carries off part of the conquered's stores. CONSERVED in ABSOLUTE food — storageMonths ×
+// population is proportional to real stored food (the per-capita monthly need is the same
+// constant on both sides, so it cancels in the transfer ratio) — with a spoilage SINK: the
+// victor gains no more absolute food than was seized, and any excess above its own granary
+// headroom is lost. So a conquest feeds the victor's war chest and starves the occupied town.
+export const SACK_FOOD_FRACTION = 0.5;           // half the conquered granary is looted
+export const FORAGE_FOOD_CAPTURE_FRACTION = 0.6; // 60% of the loot reaches the victor; the rest spoils / burns
+
+/**
+ * The conserved granary-seizure of a sack, in storageMonths. The conquered loses
+ * SACK_FOOD_FRACTION of its granary; the victor gains the captured share, re-expressed in
+ * ITS OWN months (÷ its population) and capped at its granary headroom. `gained × victorPop`
+ * is always ≤ `lost × conqueredPop` ⇒ absolute food is never minted. Null when there is
+ * nothing to seize (no granary ledger, zero population, or an empty granary).
+ *
+ * @param {{ conqueredStorageMonths?: any, conqueredPopulation?: any, victorStorageMonths?: any, victorPopulation?: any, victorCapMonths?: any }} args
+ * @returns {{ lostMonths: number, gainedMonths: number } | null}
+ */
+export function computeSackFoodTransfer({ conqueredStorageMonths, conqueredPopulation, victorStorageMonths, victorPopulation, victorCapMonths } = {}) {
+  const cMonths = Math.max(0, Number(conqueredStorageMonths) || 0);
+  const cPop = Math.max(0, Number(conqueredPopulation) || 0);
+  const vPop = Math.max(0, Number(victorPopulation) || 0);
+  const vMonths = Math.max(0, Number(victorStorageMonths) || 0);
+  const vCap = Math.max(0, Number(victorCapMonths) || 0);
+  const lostMonths = round1(SACK_FOOD_FRACTION * cMonths);
+  if (lostMonths <= 0 || cPop <= 0 || vPop <= 0) return null;
+  const seizedAbs = lostMonths * cPop;                    // ∝ absolute food (per-capita need cancels)
+  const gainedAbs = FORAGE_FOOD_CAPTURE_FRACTION * seizedAbs;
+  const headroom = Math.max(0, vCap - vMonths);
+  // FLOOR the seized share (not round) so rounding can only ever UNDER-credit the victor —
+  // absolute food is never minted: `gained × victorPop ≤ gainedAbs ≤ lost × conqueredPop`.
+  // The final round1 only cleans float error in the headroom cap (e.g. 8 − 7.9); the apply
+  // pass re-clamps to the granary capacity regardless.
+  const gainedMonths = round1(Math.min(Math.floor((gainedAbs / vPop) * 10) / 10, headroom));
+  return { lostMonths, gainedMonths: Math.max(0, gainedMonths) };
+}
