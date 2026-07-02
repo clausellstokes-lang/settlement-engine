@@ -5,8 +5,7 @@
       "name": "dev",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["vite", "--port", "5175", "--host"],
-      "port": 5175,
-      "cwd": "C:/Users/stoke/Desktop/settlement_work"
+      "port": 5175
     }
   ]
 }
