@@ -832,7 +832,8 @@ export default function App() {
       {/* ── Scroll-to-top / scroll-to-bottom stack ────────────── */}
       {(showScrollTop || showScrollBottom) && (() => {
         const btn = {
-          width: 38, height: 38, minHeight: 38, borderRadius: R.lg,
+          // 44×44 to meet the mobile touch-target floor (e2e mobile-pointer-targets).
+          width: 44, height: 44, minHeight: 44, borderRadius: R.lg,
           background: 'rgba(28,20,9,0.82)',
           border: '1px solid rgba(160,118,42,0.5)',
           color: GOLD, fontSize: FS['16'],

@@ -85,6 +85,13 @@ input[type="radio"],
   position: absolute;
   top: -48px;
   left: 8px;
+  /* Meet the 44×44 mobile touch-target floor (tests/e2e mobile-pointer-targets):
+   * min-height + inline-flex centering guarantees ≥44px tall regardless of
+   * line-height, instead of relying on padding math that yields ~38px. */
+  box-sizing: border-box;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   background: var(--sf-focus, #1d4ed8);
   color: #fff;
   padding: 8px 16px;
