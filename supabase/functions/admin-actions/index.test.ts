@@ -180,6 +180,116 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge 
   assertEquals(stub.rpc.length, 0); // no service_update_profile_metadata dispatched
 });
 
+// ── mint_redeem_code (migration 107) ─────────────────────────────────────────
+// Minting a redeem code is deferred money (a free month or a credit grant), so
+// it is HIGHEST-role gated like grant_credits, the code is generated
+// server-side (crypto.getRandomValues, SFC- + 12 Crockford chars), and the
+// bearer value is returned to the operator exactly once — never audited.
+
+/** Admin stub for the mint action: records redeem_codes inserts + audit RPCs. */
+function makeMintAdminClient(callerRole: string) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const inserts: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (table: string) => {
+      if (table === 'redeem_codes') {
+        return { insert: (row: Record<string, unknown>) => { inserts.push(row); return Promise.resolve({ error: null }); } };
+      }
+      return {
+        select: () => ({
+          eq: () => ({
+            single: () => Promise.resolve({ data: { role: callerRole, email: 'caller@x.com' }, error: null }),
+          }),
+        }),
+      };
+    },
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ data: null, error: null }); },
+  };
+  return { rpc, inserts, adminClient: () => client };
+}
+
+// Crockford base32 body: no I, L, O, or U — unambiguous when read back.
+const REDEEM_CODE_SHAPE = /^SFC-[0-9A-HJKMNP-TV-Z]{12}$/;
+
+Deno.test('an admin mints a credits code: high-entropy SFC code, server-shaped row, code never audited', async () => {
+  const stub = makeMintAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 25, max_uses: 5 },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.success, true);
+  assertEquals(REDEEM_CODE_SHAPE.test(body.code), true);
+
+  // The inserted row is server-shaped: no coupon on a credits code, and the
+  // stored code is exactly the returned one.
+  assertEquals(stub.inserts.length, 1);
+  const row = stub.inserts[0];
+  assertEquals(row.code, body.code);
+  assertEquals(row.kind, 'credits');
+  assertEquals(row.credit_amount, 25);
+  assertEquals(row.stripe_coupon_id, null);
+  assertEquals(row.max_uses, 5);
+  assertEquals(row.applies_to, 'any');
+
+  // The audit row records the SHAPE, never the bearer code itself.
+  const audit = stub.rpc.find((c) => c.fn === 'write_audit');
+  assertEquals(audit !== undefined, true);
+  assertEquals(JSON.stringify(audit!.args).includes(body.code), false);
+});
+
+Deno.test('a free_month mint defaults applies_to to subscription and requires the operator coupon id', async () => {
+  const stub = makeMintAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'mint_redeem_code', kind: 'free_month', stripe_coupon_id: 'referral_free_month', max_uses: 1 },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const row = stub.inserts[0];
+  assertEquals(row.kind, 'free_month');
+  assertEquals(row.stripe_coupon_id, 'referral_free_month');
+  // The safe default: a 100%-off coupon must not zero a one-time purchase
+  // unless the operator widens the scope explicitly.
+  assertEquals(row.applies_to, 'subscription');
+});
+
+Deno.test('a free_month mint WITHOUT a stripe_coupon_id is rejected 400 before any insert', async () => {
+  const stub = makeMintAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'mint_redeem_code', kind: 'free_month', max_uses: 1 }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stub.inserts.length, 0);
+});
+
+Deno.test('a credits mint without a positive credit_amount is rejected 400 before any insert', async () => {
+  const stub = makeMintAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 0, max_uses: 1 }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stub.inserts.length, 0);
+});
+
+Deno.test('a SUPPORT-role caller CANNOT mint redeem codes (highest-only edge gate)', async () => {
+  const stub = makeMintAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'mint_redeem_code', kind: 'credits', credit_amount: 25, max_uses: 1 },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.inserts.length, 0);
+  assertEquals(stub.rpc.length, 0);   // no audit, no RPC — rejected at the gate
+});
+
 Deno.test('an unknown action from a privileged caller is rejected 400 with no mutating RPC', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(

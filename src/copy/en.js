@@ -568,6 +568,27 @@ export const en = Object.freeze({
     fullAccess:            'Full Access',
     purchaseCreditsLabel:  'Purchase Credits (Volume Discounts)',
     purchaseErrorTitle:    'Purchase could not start. Try again or refresh the page.',
+    // Referral card (107). The founder variant swaps the reward: a free month
+    // is worthless against a lifetime seat, so founders earn credits instead.
+    referralLabel:         'Refer a Friend',
+    referralBody:          'Share your account ID. When someone subscribes for the first time and names it, you both get a month on us.',
+    referralBodyFounder:   'Share your account ID. When someone subscribes for the first time and names it, you get 10 credits.',
+    referralCopy:          'Copy account ID',
+    referralCopied:        'Copied',
+    referralNoId:          'Your account ID is assigned shortly after sign-up. Check back in a moment.',
+    // Redeem block (107). Unknown / expired / exhausted codes all read the
+    // same line on purpose, mirroring the validator's anti-enumeration.
+    redeemLabel:           'Redeem a Code',
+    redeemHint:            'Enter a code and we will check it before you pick a purchase.',
+    redeemPlaceholder:     'SFC-XXXXXXXXXXXX',
+    redeemApply:           'Apply',
+    redeemChecking:        'Checking...',
+    redeemValid:           'Code accepted. It will be applied at checkout.',
+    redeemAlreadyUsed:     'That code has already been redeemed on this account.',
+    redeemInvalid:         'That code is not live.',
+    redeemCheckFailed:     'The code could not be checked. Try once more.',
+    redeemUnavailable:     'Codes cannot be checked in this environment.',
+    redeemChoosePurchase:  'Choose a purchase',
   },
 
   // ── Gallery (public dossier listing) ────────────────────────────────────
@@ -627,6 +648,25 @@ export const en = Object.freeze({
     valueLabel:        'Most popular',
     perCreditTemplate: '{price}/credit',
     failureMessage:    'Checkout could not start. Try once more.',
+    // Redeem-code disclosure (107). The code is advisory input; create-checkout
+    // re-validates and reserves it, and a code that does not fit comes back as
+    // a non-fatal notice while the purchase proceeds at the regular price.
+    haveCode:          'Have a code?',
+    codeLabel:         'Redeem code',
+    codePlaceholder:   'SFC-XXXXXXXXXXXX',
+    codeAttached:      'This code rides along at checkout. If it does not fit the purchase, checkout continues at the regular price.',
+    // Referral intent field (107). A rejection is a note, never a blocker.
+    referredByLabel:       'Referred by someone? Their account ID',
+    referredByPlaceholder: 'SF-XXXXXXX',
+    referredByRecord:      'Record referral',
+    referredByRecording:   'Recording...',
+    referralRecorded:      'Referral recorded. The reward follows your first payment.',
+    referralSelf:          'That is your own account ID, so the referral was not recorded.',
+    referralUnknown:       'That account ID was not recognized, so the referral was not recorded.',
+    referralAlready:       'A referral is already recorded on this account.',
+    referralCap:           'That account has reached its referral limit, so the referral was not recorded.',
+    referralInactive:      'Referrals need an active account, so this one was not recorded.',
+    referralFailed:        'The referral could not be recorded. Checkout is unaffected.',
   },
 
   // ── Errors (user-facing only — internal logs stay in console) ────────────

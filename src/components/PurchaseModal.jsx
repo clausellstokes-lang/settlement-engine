@@ -14,11 +14,15 @@ import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
+import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
+import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import { GOLD, GOLD_DEEP, GOLD_B, GOLD_BG, GREEN_DEEP, INK, INK_DEEP, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch, TINT_GOLD, TINT_GREEN, TINT_VIOLET_HI, DANGER_BORDER } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import Button from './primitives/Button.jsx';
+import RedeemCodeField from './purchase/RedeemCodeField.jsx';
+import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 export default function PurchaseModal({ onClose }) {
@@ -27,16 +31,38 @@ export default function PurchaseModal({ onClose }) {
   const isElevated    = useStore(s => s.isElevated());
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
+  // Redeem code (107): seeded from the Account-page handoff, editable inline.
+  // Advisory input only — create-checkout re-validates and reserves it.
+  const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
+  const [redeemNotice, setRedeemNotice] = useState(null);
+  // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
+  const referral = useReferralIntent();
 
   // Shared modal focus management: focus-in, Tab cycling, Escape-to-close, and
   // focus restore on unmount. Replaces the hand-rolled backdrop role=button.
   const dialogRef = useDialogFocusTrap(true, onClose);
 
+  // Keep the cross-surface stash in sync with the field so the code survives
+  // closing this modal and buying from Pricing instead (and vice versa).
+  const handleRedeemChange = (v) => {
+    setRedeemCode(v);
+    if (v.trim()) setPendingRedeemCode(v.trim());
+    else clearPendingRedeemCode();
+  };
+
   const handlePurchase = async (product) => {
     setError(null);
     setLoading(product);
     try {
-      await startCheckout(product);
+      // Referral intent rides AHEAD of checkout so the pending row exists
+      // before the first payment lands. recordIntent never throws and a
+      // rejection surfaces as a note — it must never block the purchase.
+      await referral.recordIntent();
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode });
+      // The code is consumed (reserved or declined server-side) — drop the
+      // stash so it cannot resurface on a later, unrelated purchase.
+      clearPendingRedeemCode();
+      if (notice) setRedeemNotice(notice);
       // Redirects to Stripe — won't reach here unless it fails
     } catch (e) {
       // P11 — keep the raw Stripe/network text out of the purchase surface
@@ -210,6 +236,22 @@ export default function PurchaseModal({ onClose }) {
               );
             })}
           </div>
+
+          {/* Redeem-code disclosure (107). The typed code rides along on
+              whichever pack the reader buys; the server decides whether it
+              fits and answers with a notice when it does not. */}
+          {isConfigured && !isElevated && (
+            <RedeemCodeField code={redeemCode} onChange={handleRedeemChange} idPrefix="purchase-modal" />
+          )}
+          {redeemNotice && (
+            <div role="status" style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+              {redeemNotice}
+            </div>
+          )}
+
+          {/* Referral intent (107) — renders nothing unless the reader is
+              signed in, unpaid, and never referred. */}
+          <ReferralIntentField referral={referral} idPrefix="purchase-modal" />
 
           {/* Free users: a soft upsell to the subscription (which includes a
               monthly credit allowance) instead of repeat credit top-ups. */}

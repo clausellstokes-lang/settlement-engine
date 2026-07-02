@@ -23,6 +23,9 @@ vi.mock('../../src/store/index.js', () => ({
 }));
 vi.mock('../../src/lib/supabase.js', () => ({
   isConfigured: true,
+  // referralRedeem.js (imported via the modal's redeem/referral fields) pulls
+  // withTimeout from this module; a passthrough keeps the mock inert.
+  withTimeout: (p) => p,
   supabase: {
     auth: { getSession: () => Promise.resolve({ data: { session: null } }) },
     functions: { invoke: () => Promise.resolve({ data: null, error: null }) },

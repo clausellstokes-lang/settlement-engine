@@ -21,10 +21,13 @@ import { setFlagOverride } from '../../src/lib/flags.js';
 beforeEach(() => { window.localStorage.clear(); window.history.replaceState({}, '', '/'); });
 afterEach(() => { cleanup(); window.localStorage.clear(); });
 
-// Stripe / supabase / founder-seats are network — stub them.
+// Stripe / supabase / founder-seats are network — stub them. The supabase stub
+// carries supabase/withTimeout too (referralRedeem.js, reached via the page's
+// redeem/referral riders, imports all three), and the founder-seats stub the
+// FOUNDER_SEAT_CAP the page renders in the seat counter.
 vi.mock('../../src/lib/stripe.js', () => ({ startCheckout: vi.fn(), startCustomerPortal: vi.fn() }));
-vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false }));
-vi.mock('../../src/lib/founderSeats.js', () => ({ fetchFounderSeatsRemaining: vi.fn(async () => 123) }));
+vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false, supabase: null, withTimeout: (p) => p }));
+vi.mock('../../src/lib/founderSeats.js', () => ({ FOUNDER_SEAT_CAP: 30, fetchFounderSeatsRemaining: vi.fn(async () => 123) }));
 
 // Store mock — PricingPage reads tier/elevated/founder + useCopy reads audience
 // signals off the same store. Defaults: a signed-in free user.

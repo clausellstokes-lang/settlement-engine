@@ -6,6 +6,7 @@
  *   update_user_credits  — Set a user's credit balance through the ledger
  *   list_users           — List all users (with profiles)
  *   get_stats            — System-wide statistics
+ *   mint_redeem_code     — Mint an operator redeem code (migration 107)
  *
  * Authorization: Only users with role='developer' or role='admin'
  * in the profiles table (or the OWNER_EMAIL identity) can invoke this function.
@@ -55,6 +56,21 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function hasOwn(record: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+// Crockford base32 (no I/L/O/U): unambiguous when a code is read aloud or
+// retyped from paper. 32 symbols divide 256 evenly, so `byte % 32` carries no
+// modulo bias — each of the 12 characters is a full 5 bits (60 bits of
+// entropy per code, far beyond guessable at any request rate botGuard allows).
+const CROCKFORD_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+
+/** High-entropy operator redeem code: 'SFC-' + 12 Crockford base32 chars. */
+function generateRedeemCode(): string {
+  const bytes = new Uint8Array(12);
+  crypto.getRandomValues(bytes);
+  let body = "";
+  for (const b of bytes) body += CROCKFORD_ALPHABET[b % 32];
+  return `SFC-${body}`;
 }
 
 /** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
@@ -258,6 +274,9 @@ export async function handleAdminActions(
       severity, note, settlementId, enabled, full, emailTemplate, emailPayload,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
+      // Redeem-code minting params (migration 107)
+      kind, stripe_coupon_id: mintCouponId, credit_amount: mintCreditAmount,
+      max_uses: mintMaxUses, expires_at: mintExpiresAt, applies_to: mintAppliesTo,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
@@ -760,6 +779,88 @@ export async function handleAdminActions(
           destructive: false, reversible: true,
         });
         return json({ success: true, ...adjusted });
+      }
+
+      // ── Redeem-code minting (migration 107) ─────────────────────────────────
+      // Inserts an operator redeem code into redeem_codes via the service role
+      // (the table has NO client policies, so this action is the only mint path
+      // short of SQL). HIGHEST role only: a code is deferred money — a 100%-off
+      // month or a credit grant — so it gets the same edge gate as
+      // grant_credits, and the code itself is returned to the minting operator
+      // exactly once, never written to the audit log (it is a bearer secret).
+      //
+      // For kind='free_month' the OPERATOR supplies stripe_coupon_id and must
+      // create that coupon in the Stripe dashboard FIRST (percent_off: 100,
+      // duration: 'once'), or reuse the existing 'referral_free_month' coupon
+      // the webhook lazily maintains. This function never talks to Stripe; a
+      // typo'd coupon id surfaces as a Stripe error at checkout-create time.
+      case "mint_redeem_code": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+
+        if (kind !== "free_month" && kind !== "credits") {
+          return json({ error: "kind must be free_month or credits" }, 400);
+        }
+        const couponId = typeof mintCouponId === "string" ? mintCouponId.trim() : "";
+        if (kind === "free_month" && !couponId) {
+          return json({ error: "free_month codes require a stripe_coupon_id (create the coupon in Stripe first, or reuse referral_free_month)" }, 400);
+        }
+        const creditAmount = kind === "credits" ? parseInt(String(mintCreditAmount), 10) : null;
+        if (kind === "credits" && (!Number.isFinite(creditAmount) || (creditAmount as number) <= 0)) {
+          return json({ error: "credits codes require a positive integer credit_amount" }, 400);
+        }
+        const maxUses = parseInt(String(mintMaxUses ?? 1), 10);
+        if (!Number.isFinite(maxUses) || maxUses <= 0) {
+          return json({ error: "max_uses must be a positive integer" }, 400);
+        }
+        let expiresAt: string | null = null;
+        if (mintExpiresAt !== undefined && mintExpiresAt !== null && mintExpiresAt !== "") {
+          const parsed = new Date(String(mintExpiresAt));
+          if (Number.isNaN(parsed.getTime())) {
+            return json({ error: "expires_at must be an ISO timestamp" }, 400);
+          }
+          expiresAt = parsed.toISOString();
+        }
+        // applies_to gates WHICH checkout mode the code can ride (enforced by
+        // create-checkout against the session mode). Default free_month codes
+        // to 'subscription': a 100%-off coupon minted for a free month must
+        // not zero a one-time purchase (founder seat, credit pack) unless the
+        // operator widens the scope explicitly.
+        const APPLIES_TO_VALUES = ["subscription", "one_time", "any"];
+        const appliesTo = typeof mintAppliesTo === "string" && APPLIES_TO_VALUES.includes(mintAppliesTo)
+          ? mintAppliesTo
+          : (kind === "free_month" ? "subscription" : "any");
+
+        const code = generateRedeemCode();
+        const { error: insertErr } = await adminClient.from("redeem_codes").insert({
+          code,
+          kind,
+          // A credits code's coupon column is meaningless — keep it null even
+          // if one was supplied, so the row shape stays unambiguous.
+          stripe_coupon_id: kind === "free_month" ? couponId : null,
+          credit_amount: creditAmount,
+          applies_to: appliesTo,
+          max_uses: maxUses,
+          expires_at: expiresAt,
+        });
+        if (insertErr) return adminFail(insertErr, 500);
+
+        // Audit the mint WITHOUT the code: the A3 log is a broad-read surface
+        // and the code is a bearer value. Shape only.
+        await writeAudit({
+          action: "mint_redeem_code",
+          targetType: "redeem_code",
+          after: {
+            kind,
+            applies_to: appliesTo,
+            max_uses: maxUses,
+            credit_amount: creditAmount,
+            expires_at: expiresAt,
+          },
+          destructive: false,
+          reversible: true, // active=false deactivates a leaked code via SQL
+        });
+
+        return json({ success: true, code, kind, appliesTo, maxUses, expiresAt });
       }
 
       // Review billing — REDACTED Stripe summary (support+, masked customer id).
