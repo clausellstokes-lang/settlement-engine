@@ -347,7 +347,7 @@ export const en = Object.freeze({
       },
       cartographer: {
         name:        'Cartographer',
-        priceLabel:  '$6',
+        priceLabel:  '$5.99',
         priceSub:    'per month',
         tagline:     'For the DM running a campaign.',
         cta:         'Subscribe',

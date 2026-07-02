@@ -201,7 +201,7 @@ export const TIERS = Object.freeze({
     key:          'cartographer',
     legacyKey:    'premium',
     stripeProduct: 'premium',             // existing premium SKU
-    priceCents:   600,                    // $6/mo
+    priceCents:   599,                    // $5.99/mo
     billing:      'monthly',
     monthlyCredits: 30,
     seatLimit:    null,

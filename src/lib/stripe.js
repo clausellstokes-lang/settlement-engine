@@ -27,7 +27,7 @@ function buildProductsMap() {
     premium: {
       key:       'premium',
       name:      'Premium Upgrade',
-      price:     '$6/mo',
+      price:     '$5.99/mo',
       credits:   30,
       perCredit: null,
       discount:  null,

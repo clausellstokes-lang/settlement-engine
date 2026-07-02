@@ -171,13 +171,13 @@ export default function FounderTile() {
         {/* P3 — the value delta is the card's conviction, so make it the focal
             level rather than the smallest, most-muted line. The "$99 forever"
             figure is promoted to display size (gold-400 on ink = 9.4:1) so the
-            save-this-much math is what the eye lands on; the "$144" comparison
+            save-this-much math is what the eye lands on; the "$143.76" comparison
             stays a quiet supporting line above it, and the decorative title is
             already the demoted label. P5 — grouped by spacing alone now (no
             tint/radius box); the bold gold figures carry the emphasis the faint
             tint used to. WORDING is unchanged from the original two lines. */}
         <div style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.6, fontFamily: serif_ }}>
-          <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>
+          <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$143.76</b></div>
           <div style={{
             fontSize: FS['28'], fontWeight: 700, color: GOLD_400,
             lineHeight: 1.1, marginTop: SP.xs,

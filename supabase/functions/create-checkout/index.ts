@@ -4,7 +4,7 @@
  * Creates a Stripe Checkout session for any of:
  *   - Credit packs (new schedule:  25 / 60 / 150)
  *   - Credit packs (legacy:         5 / 15 / 40)  — kept for refund/replay
- *   - Premium subscription ($6/mo)
+ *   - Premium subscription ($5.99/mo)
  *   - Founder Lifetime ($99 one-time)
  *   - Single-dossier microtransaction ($2.99 one-time)
  *
@@ -21,7 +21,7 @@
  *     STRIPE_PRICE_CREDITS_25         — 25-credit pack  ($4.99)
  *     STRIPE_PRICE_CREDITS_60         — 60-credit pack  ($9.99)
  *     STRIPE_PRICE_CREDITS_150        — 150-credit pack ($19.99)
- *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($6/mo)
+ *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($5.99/mo)
  *     STRIPE_PRICE_FOUNDER_LIFETIME   — Founder Lifetime ($99 one-time)
  *     STRIPE_PRICE_SINGLE_DOSSIER     — Single-dossier microtransaction ($2.99)
  *
