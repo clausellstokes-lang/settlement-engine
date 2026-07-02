@@ -30,6 +30,7 @@ Deno.env.set('CLIENT_URL', 'https://settlementforge.com');
 Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_credits_25');
 Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
 Deno.env.set('STRIPE_PRICE_SINGLE_DOSSIER', 'price_single_dossier');
+Deno.env.set('STRIPE_PRICE_FOUNDER_LIFETIME', 'price_founder_lifetime');
 
 const { handleCreateCheckout } = await import('./index.ts');
 
@@ -70,14 +71,20 @@ function makeUserClient(user: { id: string; email?: string | null } | null, auth
   });
 }
 
-/** Admin stub: profile read returns an existing stripe_customer_id by default. */
-function makeAdminClient(customerId: string | null = 'cus_existing') {
+/** Admin stub: profile read returns an existing stripe_customer_id by default;
+ *  rpc('founder_seats_taken') resolves the given seat count (default: plenty free). */
+function makeAdminClient(customerId: string | null = 'cus_existing', seatsTaken: number | null = 0) {
   // deno-lint-ignore no-explicit-any
   return (): any => ({
     from: (_t: string) => ({
       select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: customerId }, error: null }) }) }),
       update: () => ({ eq: () => Promise.resolve({ error: null }) }),
     }),
+    rpc: (fn: string) => Promise.resolve(
+      fn === 'founder_seats_taken'
+        ? { data: seatsTaken, error: null }
+        : { data: null, error: { message: `unexpected rpc ${fn}` } },
+    ),
   });
 }
 
@@ -155,6 +162,51 @@ Deno.test('single_dossier without a valid checkout token is rejected (400)', asy
   const res = await handleCreateCheckout(
     req({ product: 'single_dossier', checkoutToken: 'short' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
+});
+
+// ── Founder Lifetime seat cap (advertised 500 seats, enforced server-side) ────
+// founder_seats_taken() feeds both the pricing-page counter AND this gate; a
+// sold-out founder tier must never reach Stripe.
+
+Deno.test('founder_lifetime with seats remaining creates a checkout session', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 499) },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'founder_lifetime');
+});
+
+Deno.test('founder_lifetime at the 500-seat cap is rejected (400) and never reaches Stripe', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 500) },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);   // seat 501 is never offered for sale
+});
+
+Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {
+  const stripe = makeStripe();
+  // rpc resolves an error (seatsTaken=null + patched rpc): simulate via a stub
+  // whose rpc always errors.
+  // deno-lint-ignore no-explicit-any
+  const adminClient = (): any => ({
+    from: () => ({
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_x' }, error: null }) }) }),
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: () => Promise.resolve({ data: null, error: { message: 'counter unavailable' } }),
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient },
   );
   assertEquals(res.status, 400);
   assertEquals(stripe.created.length, 0);

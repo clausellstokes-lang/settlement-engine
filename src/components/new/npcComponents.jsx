@@ -195,25 +195,30 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       // Subtle tint when pinned — mirrors the narrative panel's purple wash.
       boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
     }}>
-      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
-        <div style={{flex:1,minWidth:0}}>
-          <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
-            <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
-            <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
+      {/* Header row: the expand/collapse toggle and the pin control are SIBLING
+          buttons, never nested. A focusable control inside a native <button> is
+          invalid HTML (screen readers present buttons as atomic) — the same
+          hazard this file avoids for the faction EntityLink below. */}
+      <div style={{display:'flex',alignItems:'center',gap:4,padding:'0 12px 0 0'}}>
+        <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{flex:1,minWidth:0,display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+          <div style={{flex:1,minWidth:0}}>
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
+              <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
+              <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
+            </div>
+            <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}</div>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}</div>
-        </div>
+          <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
+        </button>
         {pinAvailable && (
-          <span
-            role="button"
-            tabIndex={0}
+          <button
+            type="button"
             aria-pressed={isPinned}
             aria-label={isPinned
               ? 'Pinned. This figure holds steady when you reforge or advance time.'
               : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
-            onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
               ? 'Pinned. This figure holds steady when you reforge or advance time.'
               : 'Pin this figure so a reforge or time advance leaves it unchanged.'}
@@ -229,10 +234,9 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             }}
           >
             <span aria-hidden="true" style={{fontSize:FS.xs,fontWeight:isPinned?800:600,lineHeight:1}}>{isPinned ? '●' : '○'}</span>
-          </span>
+          </button>
         )}
-        <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
-      </button>
+      </div>
       {/* Faction affiliation — an in-dossier cross-link to the faction's Power
           card. Rendered OUTSIDE the toggle button (a link inside a button is
           invalid + would swallow the toggle). EntityLink degrades to plain text

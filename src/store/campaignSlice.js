@@ -37,6 +37,7 @@ import { ensureWorldState } from '../domain/worldPulse/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
+  campaignUpdatedAtMs,
   mergeCampaignLists,
   primeCampaignSync,
   reconcileTombstones,
@@ -157,6 +158,61 @@ function migrateMapState(ms) {
   };
 }
 
+/**
+ * Post-merge guard against the HYBRID-TIMELINE reload hazard. A world-pulse
+ * advance commits locally (Phase 2 caches the ADVANCED campaign via
+ * cacheCampaignState) BEFORE the atomic persist_world_pulse_advance RPC (069)
+ * writes the campaign snapshot + every member settlement in ONE transaction.
+ * When that RPC fails, the cloud keeps the coherent PRE-advance write-set
+ * (campaign row + settlement rows together), but the local cache keeps the
+ * ADVANCED campaign with a newer updatedAt. On reload the merge would pick
+ * that local copy — while savedSettlements hydrate from the (pre-advance)
+ * cloud — and loadCampaigns' backfill would then bare-upsert the advanced
+ * campaign row WITHOUT its member-settlement writes: a PERMANENT campaign-tick
+ * vs settlement-state split, exactly the hybrid 069 exists to prevent.
+ *
+ * The unpersisted-advance residue is detectable without extra bookkeeping:
+ * worldState.tick only ever moves through the atomic RPC (forward on an
+ * advance/resume, backward on an undo — flushWorldPulsePersist), never through
+ * the bare campaign-upsert path. So a merged LOCAL winner whose tick differs
+ * from its own cloud row is by construction a failed atomic write-set. Its
+ * settlement halves are unrecoverable after a reload (the cloud rolled them
+ * back atomically; saves are not cached locally in cloud mode), so re-driving
+ * the persist is impossible — the one coherent choice is to roll the campaign
+ * back to its cloud row, restoring the documented flushWorldPulsePersist
+ * contract ("a reload reconciles to a coherent pre-advance state rather than
+ * a hybrid"). Same-tick local winners (rename, map save, queued intentions —
+ * campaign-row-ONLY writes whose bare backfill is their correct persist path)
+ * keep winning and backfilling exactly as before.
+ */
+function reconcileUnpersistedTickDrift(merged, migratedRemote) {
+  const remoteById = new Map(
+    (migratedRemote || []).filter(c => c?.id).map(c => [String(c.id), c]),
+  );
+  let changed = false;
+  const out = (merged || []).map(campaign => {
+    const remote = remoteById.get(String(campaign?.id));
+    if (!remote) return campaign; // local-only: no atomic write-set to diverge from
+    const localTick = Number(campaign?.worldState?.tick) || 0;
+    const remoteTick = Number(remote?.worldState?.tick) || 0;
+    // A remote-winner merge already carries the remote tick, so a differing
+    // tick here can only mean the LOCAL copy won with an unpersisted advance
+    // (or undo) — the cloud write-set is the authoritative, coherent one.
+    if (localTick === remoteTick) return campaign;
+    changed = true;
+    // Mirror mergeCampaignLists' remote-winner stamping (cloud-confirmed).
+    return { ...cloneJson(remote), pendingSync: false };
+  });
+  if (!changed) return merged;
+  // Re-sort: the merge's ordering contract is updatedAt-desc (resumeCampaignTarget
+  // trusts it), and a rolled-back campaign carries an older updatedAt.
+  return out.sort((a, b) => {
+    const delta = campaignUpdatedAtMs(b) - campaignUpdatedAtMs(a);
+    if (delta) return delta;
+    return String(a.name || '').localeCompare(String(b.name || ''));
+  });
+}
+
 // ── Cross-slice contract ──────────────────────────────────────────────────
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. campaignSlice is the campaign
@@ -232,20 +288,31 @@ export const createCampaignSlice = (set, get) => {
         // that ran while list() was in flight has by now written its tombstone,
         // and that is exactly the same-device race we must not lose to.
         const tombstones = campaignService.loadTombstones(ownerId);
-        const merged = mergeCampaignLists(cached, migratedRemote, { tombstones });
+        // Merge against the LIVE campaign list, not the load-start `cached`
+        // snapshot: state.campaigns began as `cached` above, so the live list is
+        // a superset — a create/rename that landed while list() was in flight
+        // would otherwise be clobbered by this wholesale overwrite (and erased
+        // from the cache by the localWrite below).
+        const merged = mergeCampaignLists(get().campaigns, migratedRemote, { tombstones });
         const prunedTombstones = reconcileTombstones(tombstones, migratedRemote);
         if (prunedTombstones.length !== tombstones.length) {
           campaignService.writeTombstones(prunedTombstones, ownerId);
         }
+        // Roll back any locally-cached campaign whose worldState.tick diverges
+        // from its cloud row — the residue of a FAILED atomic advance persist.
+        // Letting it win the merge and then bare-backfilling it below would
+        // push an advanced campaign tick to the cloud WITHOUT its member
+        // settlement writes (a permanent hybrid timeline). See the helper.
+        const reconciled = reconcileUnpersistedTickDrift(merged, migratedRemote);
         set(state => {
-          state.campaigns = merged;
+          state.campaigns = reconciled;
           state.campaignsLoaded = true;
         });
-        localWrite(merged, ownerId);
-        syncCampaignChanges(merged, { service: campaignService }).catch(e => {
+        localWrite(reconciled, ownerId);
+        syncCampaignChanges(reconciled, { service: campaignService }).catch(e => {
           console.warn('[campaignSlice] campaign cloud backfill failed', e);
         });
-        return merged;
+        return reconciled;
       })
       .catch(error => {
         console.warn('[campaignSlice] campaign cloud load failed', error);
@@ -756,7 +823,15 @@ export const createCampaignSlice = (set, get) => {
   },
 
   getCampaignForSettlement: (settlementId) => {
-    return get().campaigns.find(c => isCampaignActive(c) && c.settlementIds.includes(settlementId)) || null;
+    // String-normalized like every other membership scan (isSettlementClockBound /
+    // queueSettlementEvent / campaignSettlements): settlement ids are an
+    // acknowledged number/string mix, and an exact-match includes() here made
+    // this load-bearing resolver miss members the sibling scans found.
+    if (settlementId == null) return null;
+    const sid = String(settlementId);
+    return get().campaigns.find(
+      c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid),
+    ) || null;
   },
 
   // ── Campaign clock (Phase C) ────────────────────────────────────────────
@@ -770,8 +845,8 @@ export const createCampaignSlice = (set, get) => {
    * Is this settlement bound to the world-map clock? True when it is a member
    * of a campaign whose world is CANONIZED. Canon-only by product decision:
    * map placement is NOT required (the world pulse already simulates every
-   * canon member). Matches applyEvent's String-normalized membership scan, not
-   * the exact-match getCampaignForSettlement, so number/string id mixes resolve.
+   * canon member). Matches applyEvent's String-normalized membership scan (as
+   * getCampaignForSettlement now does too), so number/string id mixes resolve.
    */
   isSettlementClockBound: (settlementId) => {
     if (settlementId == null) return false;

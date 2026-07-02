@@ -270,7 +270,7 @@ reg('criminal','governance_fractured',
     constraint:'Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.' },
   { position:  'Operates within a criminal network as a position secondary to the dominant criminal interest in a settlement with failing governance.',
     goal:      'Advance within the criminal hierarchy using the conditions of governance failure.',
-    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstiting threat to it. Both are visible to the hierarchy.' }
+    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstrating threat to it. Both are visible to the hierarchy.' }
 );
 reg('criminal','corruption',
   { position:  'Has arrangements with enforcement that create unusual operational freedom. The position depends on those arrangements remaining stable.',

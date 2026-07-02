@@ -74,6 +74,43 @@ describe('live war status (§S3)', () => {
     expect(wars[0].winnerId).toBe('sup1');
   });
 
+  test('a flipped prize prefers the ledger\'s real ids over the slugged prizeId key', () => {
+    // prizeId is the SLUG form `stablePart(buyer):stablePart(commodity)` (lowercased,
+    // non-alnum → underscore); the ledger persists the REAL ids separately. Splitting
+    // the slug would render slugs ("port_kaer", "salt_beef") as names in the Realm UI /
+    // PDF / gallery — the real ids ("Port-Kaer", "Salt Beef") must win.
+    const worldState = {
+      tradeWarState: {
+        'port_kaer:salt_beef': {
+          winnerId: 'sup1',
+          incumbentId: 'sup0',
+          buyerId: 'Port-Kaer',
+          commodityId: 'Salt Beef',
+          lastFlipTick: 7,
+          updatedTick: 8,
+        },
+      },
+    };
+    const wars = liveTradeWars({ worldState });
+    expect(wars).toHaveLength(1);
+    expect(wars[0].buyerId).toBe('Port-Kaer');
+    expect(wars[0].commodityId).toBe('Salt Beef');
+    // commodityLabel humanizes the real commodityId (underscores → spaces), not the slug.
+    expect(wars[0].commodityLabel).toBe('Salt Beef');
+  });
+
+  test('a legacy entry without persisted ids still falls back to the slug split', () => {
+    const worldState = {
+      tradeWarState: {
+        'buyerx:iron': { winnerId: 'sup1', incumbentId: 'sup0', lastFlipTick: 7, updatedTick: 8 },
+      },
+    };
+    const wars = liveTradeWars({ worldState });
+    expect(wars).toHaveLength(1);
+    expect(wars[0].buyerId).toBe('buyerx');
+    expect(wars[0].commodityId).toBe('iron');
+  });
+
   test('disposition standings surface net win/loss records, not net-zero', () => {
     const worldState = {
       dispositionStats: {

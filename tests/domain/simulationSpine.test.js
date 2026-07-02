@@ -15,18 +15,21 @@ const richSettlement = () => ({
   tier: 'town',
   settlementReason: 'Founded at the river crossing where the salt road meets the road north.',
   history: { historicalCharacter: 'a quiet trade town, suspicious of strangers' },
+  // Real economicState shape the generator emits: primaryExports is an array
+  // of string|{good/name/label}, and the prosperity *label* is on `prosperity`.
   economicState: {
-    topExport: 'Smoked river fish',
-    prosperityBand: 'comfortable',
+    primaryExports: [{ good: 'Smoked river fish' }, { good: 'River salt' }],
+    prosperity: 'Comfortable',
   },
+  // Real faction shape the generator emits: the label is on `.faction`.
   powerStructure: {
     governanceType: 'A merchant council',
     governingName: 'The Salt-Tongue Guild',
     publicLegitimacy: { label: 'Tolerated' },
     stability: 'unstable',
     factions: [
-      { name: 'The Salt-Tongue Guild', power: 60 },
-      { name: 'The Riverwarden Temple', power: 78 },
+      { faction: 'The Salt-Tongue Guild', power: 60 },
+      { faction: 'The Riverwarden Temple', power: 78 },
     ],
     recentConflict: 'a bread riot last winter',
   },
@@ -49,6 +52,30 @@ describe('deriveSimulationSpine()', () => {
     expect(s.likelyFuture).toContain('test whoever holds');
   });
 
+  it('falls back to the prosperity label when there are no exports', () => {
+    const s = richSettlement();
+    s.economicState = { prosperity: 'Struggling' };
+    const spine = deriveSimulationSpine(s);
+    expect(spine.survivesBy).toContain('struggling footing');
+  });
+
+  it('reads the top faction from the generator .faction key for realPower', () => {
+    // Generator factions carry `.faction`, not `.name`. Without this the top
+    // faction is invisible and realPower degrades to null / the wrong branch.
+    const s = deriveSimulationSpine({
+      powerStructure: {
+        governanceType: 'A council',
+        governingName: 'The Salt-Tongue Guild',
+        factions: [
+          { faction: 'The Salt-Tongue Guild', power: 60 },
+          { faction: 'The Riverwarden Temple', power: 78 },
+        ],
+      },
+    });
+    expect(s.realPower).toContain('Riverwarden Temple');
+    expect(s.realPower).toContain('more practical influence');
+  });
+
   it('omits realPower when authority and top faction are aligned', () => {
     const s = deriveSimulationSpine({
       ...richSettlement(),
@@ -56,7 +83,7 @@ describe('deriveSimulationSpine()', () => {
         governanceType: 'A merchant council',
         governingName:  'The Salt-Tongue Guild',
         publicLegitimacy: { label: 'Endorsed' },
-        factions: [{ name: 'The Salt-Tongue Guild', power: 90 }],
+        factions: [{ faction: 'The Salt-Tongue Guild', power: 90 }],
       },
     });
     expect(s.realPower).toContain('aligned');
@@ -69,7 +96,7 @@ describe('deriveSimulationSpine()', () => {
         governanceType: 'A merchant council',
         governingName:  'The Salt-Tongue Guild',
         publicLegitimacy: { label: 'Contested' },
-        factions: [{ name: 'The Salt-Tongue Guild', power: 90 }],
+        factions: [{ faction: 'The Salt-Tongue Guild', power: 90 }],
       },
     });
     expect(s.realPower).toContain('legitimacy is contested');
@@ -132,7 +159,7 @@ describe('simulationSpineRows()', () => {
         governanceType: 'A merchant council',
         governingName:  'The Salt-Tongue Guild',
         publicLegitimacy: { label: 'Endorsed' },
-        factions: [{ name: 'The Salt-Tongue Guild', power: 90 }],
+        factions: [{ faction: 'The Salt-Tongue Guild', power: 90 }],
       },
     });
     const labels = rows.map(r => r[0]);

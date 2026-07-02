@@ -257,6 +257,11 @@ function installOccupationAuthority(/** @type {any} */ settlement, /** @type {an
     }
     return { ...f, power: round(num(f.power) * OCCUPATION_CIVIC_CUT), modifiers: [...mods, 'occupied'] };
   });
+  // NOTE: the roster's power values are RELATIVE WEIGHTS, not a normalized 100-point
+  // share — the sum≈100 seen at generation is a generation-time-only normalization
+  // (pinned against the pipeline output), with no runtime consumer enforcing it.
+  // Seeding the occupier at 90 without renormalizing matches the other sim-time
+  // power writers (transferRulingPower's +6 coup bump, the thieves-guild floor-raise).
   const occupier = {
     faction: name,
     name,

@@ -44,8 +44,19 @@ export function readAppliedHeadLedger(file = APPLIED_HEAD_LEDGER) {
   } catch {
     return null; // no ledger → skip (back-compat); the live probe stays authoritative.
   }
-  const parsed = JSON.parse(raw);
-  return parsed;
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    // A corrupt/truncated ledger must not crash the gate with a raw parse error.
+    // Treat it as "unknown applied head" (same as absent) but say so loudly, so the
+    // drift signal degrades to the authoritative live probe instead of throwing.
+    console.warn(
+      `[check-migration-head] applied-head ledger at ${file} is not valid JSON ` +
+      `(${err.message}) — ignoring it (treating applied head as unknown). ` +
+      `Fix or regenerate supabase/applied-head.json.`,
+    );
+    return null;
+  }
 }
 
 /** Numeric prefixes of the migration files, ascending. */

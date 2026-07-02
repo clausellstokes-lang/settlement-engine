@@ -247,8 +247,8 @@ function deriveRecentDisruption(settlement) {
   // since some settlements have nothing major in the last 30 years.
   const anns = settlement?.history?.legacyAnnotations || [];
   const recentAnn = anns
-    .filter(/** @param {any} a */ a => (a.yearsAgo || Infinity) <= 50)
-    .sort(/** @param {any} a @param {any} b */ (a, b) => (a.yearsAgo || 0) - (b.yearsAgo || 0))[0];
+    .filter(/** @param {any} a */ a => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : Infinity) <= 50)
+    .sort(/** @param {any} a @param {any} b */ (a, b) => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : Infinity) - (Number.isFinite(b.yearsAgo) ? b.yearsAgo : Infinity))[0];
   if (recentAnn) {
     return {
       key: 'recentDisruption',

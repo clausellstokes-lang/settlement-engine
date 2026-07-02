@@ -96,29 +96,33 @@ export default function ServicesTogglePanel() {
   };
 
   // Cycle: allow → force → exclude → allow
+  // Toggles are keyed by the catalog key (svcKey), NOT the display institution
+  // name. Multiple generated institutions can fuzzy-match the same svcKey and be
+  // grouped under one row; the generator resolves each institution's override
+  // against `${resolvedKey}_service_${name}` (its keyToggleKey), so keying by
+  // svcKey applies the toggle to every grouped institution — not just
+  // catalogNames[0]. (getToggle still reads the svcKey-keyed value via k2.)
   const cycleService = (catalogName, svcKey, svcName, def) => {
     const cur = getToggle(catalogName, svcKey, svcName, def);
     let next;
     if (cur.forceExclude)       next = { allow:true,  force:false, forceExclude:false }; // exclude → allow
     else if (cur.force)         next = { allow:false, force:false, forceExclude:true  }; // force   → exclude
     else                        next = { allow:true,  force:true,  forceExclude:false }; // allow   → force
-    onServiceToggle(toggleKey(catalogName, svcName), next);
+    onServiceToggle(toggleKey(svcKey, svcName), next);
   };
 
   // Bulk operations
   const bulkForce = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {catalogNames, services}]) => {
-      const catName = catalogNames[0] || svcKey;
+    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
       Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(catName, svcName), { allow:true, force:true, forceExclude:false });
+        onServiceToggle(toggleKey(svcKey, svcName), { allow:true, force:true, forceExclude:false });
       });
     });
   };
   const bulkExclude = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {catalogNames, services}]) => {
-      const catName = catalogNames[0] || svcKey;
+    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
       Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(catName, svcName), { allow:false, force:false, forceExclude:true });
+        onServiceToggle(toggleKey(svcKey, svcName), { allow:false, force:false, forceExclude:true });
       });
     });
   };

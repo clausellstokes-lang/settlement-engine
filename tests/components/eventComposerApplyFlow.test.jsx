@@ -313,4 +313,65 @@ describe('EventComposer — advance-in-flight guard', () => {
     expect(screen.getByText(/realm is advancing/i)).toBeTruthy();
     expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(true);
   });
+
+  test('a pending preview does NOT waive the guard — Apply stays disabled and the preview survives', () => {
+    // Pre-fix, applyOk short-circuited to true under a pending preview (the
+    // guard lived only in canSubmit), so Apply stayed enabled mid-advance: the
+    // store no-op'd applyEvent (null + console.warn) while onApply cleared the
+    // form and dismissed the preview — the GM's event silently vanished.
+    const previewedEvent = { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' };
+    state = baseState({
+      isSettlementClockBound: (id) => id === 'save-1',
+      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
+      advanceInFlight: ['camp-1'],
+      applyEvent: vi.fn(),
+      pendingPreview: {
+        event: previewedEvent,
+        deltas: [], factionResponses: [], warnings: [],
+        narrativeSummary: 'Mira dies.',
+      },
+    });
+    render(<EventComposer />);
+
+    const apply = screen.getByRole('button', { name: /Apply to Timeline/ });
+    expect(apply.disabled).toBe(true);
+    fireEvent.click(apply);
+    expect(state.applyEvent).not.toHaveBeenCalled();
+    expect(state.queueChange).not.toHaveBeenCalled();
+    // The preview is NOT dismissed — nothing was applied, nothing clears.
+    expect(state.dismissPreview).not.toHaveBeenCalled();
+  });
+
+  test('batch "Apply all" mid-advance applies nothing and keeps the cart intact', () => {
+    // Events staged BEFORE the advance started sit in the cart while it runs
+    // ("+ Add to batch" only blocks new staging). Pre-fix the BatchCart onApply
+    // closure was unguarded: each clock-bound applyEvent was no-op'd by the
+    // store, then the cart cleared — the whole batch silently dropped.
+    state = baseState({
+      phase: 'draft',
+      isSettlementClockBound: (id) => id === 'save-1',
+      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
+      advanceInFlight: [],
+      applyEvent: vi.fn(),
+    });
+    const { container, rerender } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_NPC');
+    const targetInput = () => screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt);
+    fireEvent.change(targetInput(), { target: { value: 'First Person' } });
+    fireEvent.click(screen.getByText('+ Add to batch'));
+    fireEvent.change(targetInput(), { target: { value: 'Second Person' } });
+    fireEvent.click(screen.getByText('+ Add to batch'));
+    expect(screen.getByText('Staged changes (2)')).toBeTruthy();
+
+    // The campaign's advance starts (on the Advance surface, not here).
+    state.advanceInFlight = ['camp-1'];
+    rerender(<EventComposer />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Apply all \(2\)/ }));
+    expect(state.applyEvent).not.toHaveBeenCalled();
+    expect(state.queueChange).not.toHaveBeenCalled();
+    // The staged events survive for a re-apply after the advance settles.
+    expect(screen.getByText('Staged changes (2)')).toBeTruthy();
+  });
 });

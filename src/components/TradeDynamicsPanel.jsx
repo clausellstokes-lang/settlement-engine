@@ -194,7 +194,12 @@ function GoodsPanel() {
         </div>
       )}
 
-      <SectionHeader label="Import Goods" forced={0} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
+      {/* Both sections render the same goods bound to the same `${tier}_good_*`
+          toggle keys, so a good forced under Export is forced under Import too.
+          The header must therefore report the SAME forcedCount as Export — the
+          previous hardcoded forced={0} made the Import header read "N allowed"
+          with no forced badge even while its own rows showed '● Forced'. */}
+      <SectionHeader label="Import Goods" forced={forcedCount} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
       {showImport && (
         <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
           {sorted.length===0 && search

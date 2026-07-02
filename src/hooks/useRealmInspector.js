@@ -16,6 +16,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { useStore } from '../store/index.js';
+
 // Plain-language, GM-facing text for the engine's known advance-failure reasons
 // (P10/P11): the raw reason code goes to console.warn, never the toast.
 export const ADVANCE_ERROR_TEXT = Object.freeze({
@@ -67,6 +69,20 @@ export function useRealmInspector({
   onNavigate,
   showToast,
 }) {
+  // While this campaign's advance is in flight the store no-ops every rules write
+  // (updateCampaignSimulationRules returns null — the advance replaces worldState
+  // wholesale and would clobber it). Subscribe to the advanceInFlight LIST itself
+  // (not the stable isAdvanceInFlight fn ref) so the block + affordance re-render the
+  // instant an advance starts or ends — same membership test the store uses. This
+  // gates handleApplyPreset (below) and is surfaced to the toolbar/dialog so a preset
+  // chip or Save can't fire a write that will be silently dropped.
+  const advanceInFlightList = useStore(s => s.advanceInFlight);
+  const rulesEditBlocked = !!(
+    activeCampaignId
+    && Array.isArray(advanceInFlightList)
+    && advanceInFlightList.some(id => String(id) === String(activeCampaignId))
+  );
+
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [inspectorSection, setInspectorSection] = useState('dashboard');
   // The dock's three-state size (plan §1). Starts at 'default' (today's 420px)
@@ -155,6 +171,12 @@ export function useRealmInspector({
   // Toolbar preset chips — Quiet / Realistic / Dramatic in one click.
   const handleApplyPreset = useCallback(async (presetId) => {
     if (!activeCampaignId) { showToast('info', 'Select a campaign first.'); return; }
+    // The store no-ops the rules write while the realm advances (it would be
+    // clobbered by the advance's wholesale worldState replace). Refuse here with a
+    // clear line instead of a false "Applied …" toast over a dropped write. The
+    // toolbar also disables the chips off rulesEditBlocked; this is the belt-and-
+    // braces guard for a click that lands mid-tick.
+    if (rulesEditBlocked) { showToast('info', 'The realm is advancing. Give it a moment, then apply the preset.'); return; }
     try {
       const { SIMULATION_RULE_PRESETS } = await import('../domain/worldPulse/index.js');
       const preset = SIMULATION_RULE_PRESETS[presetId];
@@ -164,7 +186,7 @@ export function useRealmInspector({
     } catch (err) {
       showToast('error', `Couldn't apply preset: ${err?.message || err}`);
     }
-  }, [activeCampaignId, updateCampaignSimulationRules, showToast]);
+  }, [activeCampaignId, rulesEditBlocked, updateCampaignSimulationRules, showToast]);
 
   // Route anon/free from the Realm locked-state to the premium-value surface.
   const handleUpgrade = useCallback(() => {
@@ -186,6 +208,7 @@ export function useRealmInspector({
     setInspectorSize,
     openInspectorAt,
     handleApplyPreset,
+    rulesEditBlocked,
     handleUpgrade,
     showSimulationRules,
     setShowSimulationRules,

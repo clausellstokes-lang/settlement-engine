@@ -30,7 +30,7 @@ import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
 import { createConfigSlice, DEFAULT_CONFIG } from './configSlice.js';
-import { createToggleSlice }     from './toggleSlice.js';
+import { createToggleSlice, normalizeServicesToggles } from './toggleSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
@@ -74,6 +74,11 @@ export function mergePersistedState(persisted, current) {
     config: { ...DEFAULT_CONFIG, ...(p.config || {}) },
     userPrefs: { ...c.userPrefs, ...(p.userPrefs || {}) },
     productPrefs: { ...c.productPrefs, ...(p.productPrefs || {}) },
+    // Migrate any servicesToggles persisted in the pre-Stage-2b display-name key
+    // form (`<instName>_service_<svcName>`) to the current svcKey form on hydrate —
+    // this is the ONLY real load-path seam (the slice's hydrateServicesToggles
+    // action is never invoked at boot), so the normalization must land here.
+    servicesToggles: normalizeServicesToggles(p.servicesToggles),
   };
 }
 

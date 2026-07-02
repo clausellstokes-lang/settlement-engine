@@ -28,6 +28,7 @@
 
 import { EVENT_REGISTRY, RERUN_KEYS_FOR_EVENT } from './registry.js';
 import { mutateSettlement } from './mutate.js';
+import { resolveStressorEventSeverity } from './resolveStressorEventSeverity.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { clamp01, bandFor } from '../state/bands.js';
@@ -260,21 +261,28 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     // the already-mutated `working` drifted severity-derived deltas (e.g. a
     // RESOLVE_STRESSOR reading the stressor it just removed).
     const before = working;
+    // Resolve a DERIVED onset severity for an APPLY_STRESSOR whose DM did not pick
+    // one, stamping it ONCE against the BEFORE settlement so the mutation and the
+    // authored stateDeltas read the SAME value — mirrors eventPipeline's single
+    // chokepoint. Without this the batch path falls back to crisisOnset's static
+    // 0.6 default, so batch preview/apply deltas diverged from the store's real
+    // applyEvent path (0.45-0.80 derived severity).
+    const resolvedEvent = resolveStressorEventSeverity(before, event);
     // Entity mutation, threaded into the next event.
-    working = mutateSettlement({ settlement: working, event, now });
+    working = mutateSettlement({ settlement: working, event: resolvedEvent, now });
 
     // Sum the authored state deltas (additive across the batch).
     // Cast: spec.stateDeltas is typed 1-arg in the registry typedef but
     // accepts an optional settlement (every spec honors it), as in eventPipeline.
     const deltas = (typeof spec.stateDeltas === 'function'
-      ? /** @type {Function} */ (spec.stateDeltas)(event, before)
+      ? /** @type {Function} */ (spec.stateDeltas)(resolvedEvent, before)
       : {}) || {};
     for (const [k, v] of Object.entries(deltas)) {
       summedStateDeltas[k] = (summedStateDeltas[k] || 0) + (Number(v) || 0);
     }
 
     const narrativeSummary = typeof spec.narrate === 'function'
-      ? /** @type {Function} */ (spec.narrate)(event, beforeSettlement)
+      ? /** @type {Function} */ (spec.narrate)(resolvedEvent, beforeSettlement)
       : '';
     perEvent.push({ event, narrativeSummary, warnings: [] });
 

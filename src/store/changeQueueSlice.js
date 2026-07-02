@@ -471,18 +471,38 @@ export function createChangeQueueSlice(set, get) {
           throw new Error('persist_failed');
         }
 
-        // Success: drop the queue. The soft-refresh (re-derive detail +
+        // Success: drop ONLY the orders this flush actually replayed. queueChange
+        // is not gated on changeQueueFlushing, so an Apply click landing in one of
+        // the persist await windows above enqueues a NEW order the replay loop
+        // never saw — a blanket `delete state.changeQueues[key]` would silently
+        // discard it. Filtering by the snapshotted ids keeps any late arrival
+        // staged for the next commit. The soft-refresh (re-derive detail +
         // key-bump) is the caller's job — return the committed settlement.
-        set(state => { delete state.changeQueues[key]; });
+        const replayedIds = new Set(queue.map(o => o.id));
+        set(state => {
+          const remaining = (state.changeQueues[key] || []).filter(o => !replayedIds.has(o.id));
+          if (remaining.length === 0) delete state.changeQueues[key];
+          else state.changeQueues[key] = remaining;
+        });
         return { ok: true, committed: queue.length, settlement: nextSettlement };
       } catch (e) {
         // Rollback: restore the pre-flush store state. The queue is UNTOUCHED, so
         // "Save N changes" re-applies from this clean base (never on a partial).
         set(state => {
-          state.settlement  = preSettlement;
-          state.eventLog    = preEventLog;
-          state.systemState = preSystemState;
-          state.editedAt    = preEditedAt;
+          // Only restore the LIVE view if THIS settlement is still the open one.
+          // hydrateFromSave has no changeQueueFlushing guard, so the user can open
+          // a different settlement during the persist await windows above — an
+          // unconditional restore here would clobber save B's freshly-hydrated
+          // view with save A's pre-flush snapshot (the undoLastPulse precedent:
+          // guard the live-view restore on activeSaveId). The id-keyed rollbacks
+          // below (mirror rows + campaign buckets) still run either way, so save
+          // A's half-applied state is undone wherever it actually lives.
+          if (state.activeSaveId != null && String(state.activeSaveId) === key) {
+            state.settlement  = preSettlement;
+            state.eventLog    = preEventLog;
+            state.systemState = preSystemState;
+            state.editedAt    = preEditedAt;
+          }
           // Roll the savedSettlements mirror row back in lockstep with the store
           // so a failed flush never leaves the half-applied settlement behind in
           // the mirror (atomic rollback — the retry reads a clean base).

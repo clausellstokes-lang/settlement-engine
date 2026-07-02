@@ -16,7 +16,9 @@
  *     this from becoming a spam relay it is gated by a real per-IP
  *     AND per-recipient rate limit (consume_email_rate_limit, migration
  *     034) checked via the service-role client before dispatch, on top
- *     of the per-request botGuard.
+ *     of the per-request botGuard. Its caller-supplied placeholders are
+ *     schema-validated (digit-only counters) so the rendered mail can
+ *     never carry attacker-controlled text.
  *
  * Templates: inlined here (kept in sync with src/lib/emailTemplates.js
  * — the client tests assert key parity). Edge function can't import
@@ -32,7 +34,7 @@
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 import { botGuard } from "../_shared/requestMeta.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 // This previously emitted "*"; the shared helper fails closed (echoes the
@@ -171,10 +173,14 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
 //   2. consume_email_rate_limit (migration 034) enforces a real fixed-window
 //      per-IP AND per-recipient limit via the service-role client BEFORE any
 //      send. A caller over either limit gets 429 and no email leaves.
+//   3. ANON_PLACEHOLDER_RULES below rejects any payload value that is not the
+//      exact shape the template calls for (cap_warning: two small counters).
+//      An anonymous caller therefore cannot place ANY free text — no URLs, no
+//      phishing copy — into an email sent from our Resend identity.
 // The blast radius is also bounded by design: a single fixed-content "you hit
 // your cap" template with no caller-supplied body. Do NOT add free-text
 // templates here, and do NOT add a template to this set without a rate-limit
-// path of its own.
+// path AND a placeholder rule set of its own.
 const ANON_OK_TEMPLATES = new Set(["cap_warning"]);
 
 // Rate-limit defaults for the anonymous path. Kept in the function (not the DB
@@ -192,30 +198,51 @@ function interpolate(str: string, vars: Record<string, unknown>): string {
   );
 }
 
-// Defense-in-depth for the anonymous cap_warning path, whose payload values are
-// caller-supplied and get interpolated into the rendered email. Coerce to a
-// string, strip CR/LF and other C0/C1 control characters (header-injection
-// defense – even though Resend's JSON API is not raw SMTP, we never want a
-// caller-controlled value to carry control bytes into a message), and cap the
-// length so a value can't bloat the fixed template.
-const MAX_PLACEHOLDER_LEN = 200;
-function sanitizePlaceholderValue(value: unknown): string {
-  // Replace every C0/C1 control char (incl. CR \x0d, LF \x0a, NUL \x00) and the
-  // DEL char with a single space, then cap the length. Hex escapes keep the
-  // source free of literal control bytes.
-  // deno-lint-ignore no-control-regex
-  const stripped = String(value ?? "").replace(/[\x00-\x1f\x7f-\x9f]/g, " ");
-  return stripped.slice(0, MAX_PLACEHOLDER_LEN);
+// A cap-usage counter: a small non-negative integer, as a number or a digit
+// string (the client sends `String(capUsed ?? 3)`). Returns the canonical
+// digit string, or null when the value is anything else.
+function asBoundedCount(value: unknown): string | null {
+  const str =
+    typeof value === "number" && Number.isFinite(value) ? String(value) : value;
+  if (typeof str !== "string" || !/^\d{1,4}$/.test(str)) return null;
+  return str;
 }
 
-// Sanitize every value in a caller-supplied payload (keys are template-fixed –
-// only declared {placeholders} are ever read by interpolate()).
-function sanitizePayload(
+// Strict placeholder schema for the anonymous templates, whose payload values
+// are caller-supplied and get interpolated into the rendered email. A previous
+// revision merely stripped control chars and length-capped each value, which
+// still let an anonymous caller inject ~200 chars of arbitrary visible text
+// (URLs, phishing copy) PER SLOT into mail sent from our Resend identity.
+// Now each anonymous template declares the exact shape of every placeholder it
+// accepts; anything that doesn't match is rejected with 400 before rendering.
+// cap_warning's two placeholders are usage counters, so only small
+// non-negative integers pass.
+const ANON_PLACEHOLDER_RULES: Record<
+  string,
+  Record<string, (value: unknown) => string | null>
+> = {
+  cap_warning: {
+    capUsed: asBoundedCount,
+    capTotal: asBoundedCount,
+  },
+};
+
+// Validate a caller-supplied anonymous payload against its template's rules.
+// Every declared placeholder must be present and pass its rule; keys outside
+// the schema are dropped (interpolate() would never read them, but we don't
+// let them near the renderer either — in particular a caller cannot smuggle a
+// displayName override). Returns the validated string map, or null (reject).
+function validateAnonPayload(
+  template: string,
   payload: Record<string, unknown>,
-): Record<string, unknown> {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(payload)) {
-    out[key] = sanitizePlaceholderValue(value);
+): Record<string, string> | null {
+  const rules = ANON_PLACEHOLDER_RULES[template];
+  if (!rules) return null; // no declared schema → fail closed
+  const out: Record<string, string> = {};
+  for (const [key, rule] of Object.entries(rules)) {
+    const value = rule(payload?.[key]);
+    if (value === null) return null;
+    out[key] = value;
   }
   return out;
 }
@@ -303,7 +330,22 @@ async function consumeAnonRateLimit(
   return { ok: true };
 }
 
-serve(async (req) => {
+/**
+ * Exported handler with an injectable `deps` seam (production passes nothing)
+ * so the anonymous-path trust boundary — bot reject, recipient plausibility,
+ * strict placeholder schema, rate limit, rendered-output shape — is
+ * execution-testable without a live Supabase or a live Resend key.
+ */
+export async function handleSendEmail(
+  req: Request,
+  deps: {
+    consumeRateLimit?: typeof consumeAnonRateLimit;
+    dispatch?: typeof sendViaResend;
+  } = {},
+): Promise<Response> {
+  const consumeRateLimit = deps.consumeRateLimit ?? consumeAnonRateLimit;
+  const dispatch = deps.dispatch ?? sendViaResend;
+
   const corsHeaders = corsHeadersFor(req);
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -329,6 +371,7 @@ serve(async (req) => {
     // recipient string from the payload.
     let to: string | null = null;
     let displayName: string | null = null;
+    let anonPayload: Record<string, string> | null = null;
 
     if (ANON_OK_TEMPLATES.has(template)) {
       // Caller-supplied recipient: require a plausible single-address email
@@ -339,11 +382,25 @@ serve(async (req) => {
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
+      // Strict placeholder schema: every value the caller supplies must match
+      // the exact shape the template declares (cap_warning: digit-only
+      // counters). Rejected before the rate limit is consumed — an invalid
+      // payload never costs the caller budget and never reaches the renderer.
+      anonPayload = validateAnonPayload(
+        template,
+        (payload ?? {}) as Record<string, unknown>,
+      );
+      if (anonPayload === null) {
+        return new Response(
+          JSON.stringify({ ok: false, reason: "bad_payload" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
       // Real rate limit (per-IP AND per-recipient) before this unauthenticated
       // path can dispatch. botGuard above only blocks obvious bots; this is the
       // throttle that keeps cap_warning from becoming a spam relay. Consumed
       // here (not after a successful send) so a caller can't probe for free.
-      const limit = await consumeAnonRateLimit(ip, recipient);
+      const limit = await consumeRateLimit(ip, recipient);
       if (!limit.ok) {
         // 429 for an over-limit caller; 503 when the limiter itself is down
         // (fail-closed — see consumeAnonRateLimit). Either way, no email sent.
@@ -402,12 +459,12 @@ serve(async (req) => {
     }
 
     // Render. Inject displayName from auth if not supplied.
-    // For the anonymous path the payload values are caller-supplied, so they are
-    // sanitized (control chars stripped, length-capped, coerced to string)
-    // before interpolation. Authenticated paths trust the values they assemble
-    // from auth state, so their behavior is unchanged.
+    // For the anonymous path only the schema-validated payload (digit-only
+    // counters for cap_warning) reaches the renderer — the raw caller payload
+    // never does. Authenticated paths trust the values they assemble from
+    // auth state, so their behavior is unchanged.
     const safePayload = ANON_OK_TEMPLATES.has(template)
-      ? sanitizePayload(payload as Record<string, unknown>)
+      ? anonPayload!
       : payload;
     const fullPayload = { displayName: displayName || "there", ...safePayload };
     const tmpl = TEMPLATES[template];
@@ -415,7 +472,7 @@ serve(async (req) => {
     const text = interpolate(tmpl.text, fullPayload);
 
     try {
-      const result = await sendViaResend({ to: to!, from: fromEmail, subject, text, apiKey });
+      const result = await dispatch({ to: to!, from: fromEmail, subject, text, apiKey });
       return new Response(
         JSON.stringify({ ok: true, id: result?.id || null }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -434,4 +491,6 @@ serve(async (req) => {
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
-});
+}
+
+serve((req) => handleSendEmail(req));

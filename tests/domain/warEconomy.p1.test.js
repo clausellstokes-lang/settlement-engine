@@ -98,19 +98,26 @@ describe('war-economy P1 — homecoming returns survivors, war dead are the only
     const campaign = { id: 'r', name: 'R', settlementIds: ['atlas'], worldState, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 200, entries: [] } };
     return buildWorldSnapshot({ campaign, saves, worldState });
   };
-  const returned = (warEconomy) => deploymentReturnOutcomes({
+  const returned = (deployedPopulation) => deploymentReturnOutcomes({
     resolvedDeployments: [{ attackerId: 'atlas', targetId: 'borin', outcome: 'withdrawal',
-      deployment: { maxStartStrength: 100, currentEffectiveStrength: 60, deployedPopulation: 1000 } }],
+      deployment: { maxStartStrength: 100, currentEffectiveStrength: 60, ...(deployedPopulation != null ? { deployedPopulation } : {}) } }],
     snapshot: snapshotWithHome(), graph: ensureRegionalGraph({ edges: [], channels: [] }),
-    rng: createPRNG('r'), tick: 200, warEconomyEnabled: warEconomy,
+    rng: createPRNG('r'), tick: 200,
   });
 
-  test('flag OFF: no homecoming credit', () => {
-    expect(returned(false).some(o => o.candidateType === 'army_homecoming')).toBe(false);
+  test('no banked headcount (flag-off worlds never bank): no homecoming credit', () => {
+    expect(returned(null).some(o => o.candidateType === 'army_homecoming')).toBe(false);
   });
 
-  test('flag ON: survivors = round(deployed × strengthRatio), never more than deployed; the fallen are the sink', () => {
-    const hc = returned(true).find(o => o.candidateType === 'army_homecoming');
+  test('a BANKED headcount is credited even if the drain flag is off at return time (the debit, not the live flag, gates the credit — conservation under mid-war flag changes / levy-without-drain)', () => {
+    // deploymentReturnOutcomes takes no flag: the bank proves a debit happened.
+    const hc = returned(1000).find(o => o.candidateType === 'army_homecoming');
+    expect(hc).toBeTruthy();
+    expect(hc.populationDeltas.find(d => d.saveId === 'atlas').delta).toBe(600);
+  });
+
+  test('survivors = round(deployed × strengthRatio), never more than deployed; the fallen are the sink', () => {
+    const hc = returned(1000).find(o => o.candidateType === 'army_homecoming');
     expect(hc).toBeTruthy();
     const credit = hc.populationDeltas.find(d => d.saveId === 'atlas').delta;
     expect(credit).toBe(600);              // 1000 × (60/100)

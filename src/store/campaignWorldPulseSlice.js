@@ -83,6 +83,10 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
+// Light transport for the off-main-thread advance (NO domain edge — it takes the
+// sim function as a fallback, so this slice keeps its no-static-worldPulse-import
+// invariant; the sim still enters only via loadWorldPulse()).
+import { runAdvanceInterval } from '../lib/advanceWorkerClient.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
 import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
@@ -124,6 +128,16 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // concurrent call sees its campaign already in flight and no-ops. Session-scoped
   // like pulseUndoStack (an array, not a Set, so it stays Immer-/persist-friendly);
   // a reload clears it. Mirrors aiLoading / changeQueueFlushing.
+  //
+  // The SAME mark also gates every OTHER pulse mutator on this campaign
+  // (canonize / rules / apply-proposal / dismiss-proposal / undo). The multi-tick
+  // advance yields to the event loop between tick batches, and its Phase-2 commit
+  // replaces worldState WHOLESALE from clones lifted BEFORE that yield — so a
+  // mutation landing during the await would be silently reverted (and its persist
+  // clobbered by the advance's). Each mutator therefore no-ops with its existing
+  // "nothing changed" value (null / false) while its campaign is advancing.
+  // recordPartyImpact is deliberately NOT gated: advanceCampaignWorld itself
+  // replays drained party impacts through it while still marked in flight.
   advanceInFlight: [],
   /** Is an advanceCampaignWorld currently running for this campaign? Drives the
    *  disabled state of the Advance button so a second click can't fire mid-tick. */
@@ -171,6 +185,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   canonizeCampaignWorld: async (campaignId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. A
+    // mutation during a running advance would be reverted by its Phase-2 commit.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let campaignPersist = /** @type {any} */ (null);
     let settlementCount = 0;
     let regionalSnapshot = /** @type {any} */ (null);
@@ -194,6 +211,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   updateCampaignSimulationRules: async (campaignId, patch = {}) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. Rules
+    // edited mid-advance would be silently reverted by the Phase-2 commit (the
+    // running interval computed from the OLD rules), so block the write instead.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let campaignPersist = /** @type {any} */ (null);
     let normalizedRules = /** @type {any} */ (null);
     const now = new Date().toISOString();
@@ -454,15 +475,25 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // Flag-gated path select (commit:true rides the interval orchestrator's
         // final tick; the single-tick path commits as before). The composed
         // result has the SAME shape, so Phase 2 + persist + analytics are identical.
+        const multiTickArgs = {
+          campaign: simCampaign,
+          saves: simSaves,
+          interval,
+          commit: true,
+          now,
+          autoResolve,
+        };
         result = useMultiTick
-          ? await domainSimulateCampaignWorldInterval({
-              campaign: simCampaign,
-              saves: simSaves,
-              interval,
-              commit: true,
-              now,
-              autoResolve,
-            })
+          // The worker runs the SAME simulate function off the main thread; the
+          // fallback is the in-thread call, used in Node/tests and when the flag is
+          // off. customContent is snapshotted so the worker's chain-activation seam
+          // matches the page (see advanceWorkerClient / dependencyEngine).
+          ? await (flag('simAdvanceWorker')
+              ? runAdvanceInterval(multiTickArgs, {
+                  fallback: domainSimulateCampaignWorldInterval,
+                  customContent: cloneJson(get().customContent) || {},
+                })
+              : domainSimulateCampaignWorldInterval(multiTickArgs))
           : domainAdvanceCampaignWorld({
               campaign: simCampaign,
               saves: simSaves,
@@ -487,8 +518,25 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
         // Cap PER campaign so churn in one campaign can't evict another's
         // history: drop only this campaign's oldest snapshot past the cap.
+        //
+        // Retained-memory diet: each snapshot is the FULL pre-pulse world
+        // (worldState + regional graph + wizard news + every member
+        // settlement), and up to PULSE_UNDO_CAP of them per campaign made the
+        // stack the store's largest retained-memory consumer as live object
+        // graphs (which Immer also deep-freezes on commit). Park the heavy
+        // body as ONE serialized string instead — same undo fidelity at a
+        // fraction of the retained bytes — keeping only the light fields the
+        // UI reads (campaignId / interval / tick) live. undoLastPulse
+        // re-parses the payload back to the capturePulseSnapshot shape.
         {
-          const next = [...(state.pulseUndoStack || []), preSnapshot];
+          const entry = {
+            campaignId: preSnapshot.campaignId,
+            tick: preSnapshot.tick,
+            interval: preSnapshot.interval ?? null,
+            now: preSnapshot.now,
+            payload: JSON.stringify(preSnapshot),
+          };
+          const next = [...(state.pulseUndoStack || []), entry];
           const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
           if (mineCount > PULSE_UNDO_CAP) {
             const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
@@ -723,7 +771,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // serializes resume/advance on this campaign across the yield, and the resume
     // is pure over the cursor's pre-tick inputs, so the yield changes only WHEN
     // the commit lands, not WHAT it computes (seed-replay determinism preserved).
-    result = await domainSimulateCampaignWorldInterval({
+    const resumeArgs = {
       campaign: simCampaign,
       saves: simSaves,
       commit: true,
@@ -743,7 +791,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // multi-segment interval collapses to ONE composed record on finish.
         preIntervalHistoryLen: cursor.preIntervalHistoryLen,
       },
-    });
+    };
+    // Same worker/fallback split as the advance path (a resumed segment is also a
+    // multi-tick run through the same simulate function).
+    result = await (flag('simAdvanceWorker')
+      ? runAdvanceInterval(resumeArgs, {
+          fallback: domainSimulateCampaignWorldInterval,
+          customContent: cloneJson(get().customContent) || {},
+        })
+      : domainSimulateCampaignWorldInterval(resumeArgs));
 
     if (result && result.status) {
       set(state => {
@@ -821,6 +877,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   applyWorldPulseProposal: async (campaignId, proposalId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above.
+    // (WorldPulsePanel also hides this control while advancing; the store seam
+    // is the layer that must hold regardless of which surface calls in.)
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -872,6 +932,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // (resolve a stressor, broker/inflame a relationship, clear/impose a
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
+  //
+  // Deliberately NOT gated on isAdvanceInFlight (unlike the other pulse
+  // mutators): advanceCampaignWorld replays its drained party impacts through
+  // this action while its campaign is still marked in flight.
   recordPartyImpact: async (campaignId, action) => {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
@@ -917,6 +981,8 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let proposal = /** @type {any} */ (null);
     let dismissDecision = /** @type {any} */ (null);
     let campaignPersist = /** @type {any} */ (null);
@@ -963,6 +1029,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * an advance was undone. Session-scoped: a reload clears the stack.
    */
   undoLastPulse: async (campaignId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. An
+    // undo popped mid-advance would restore a PRIOR tick under the running
+    // interval, whose Phase-2 commit then re-lands the advanced world on top —
+    // the undo evaporates AND its snapshot is consumed. Undoing a PARKED pause
+    // (the documented abandon path) is unaffected: a paused advance has
+    // returned, so its campaign is no longer marked in flight.
+    if (get().isAdvanceInFlight(campaignId)) return false;
     const persistUpdates = [];
     let campaignPersist = null;
     let didUndo = false;
@@ -973,7 +1046,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         if (stack[i].campaignId === campaignId) { idx = i; break; }
       }
       if (idx === -1) return;
-      const snap = stack[idx];
+      // Stack entries park the heavy snapshot body as a serialized payload
+      // (see the push site's retained-memory note) — parse it back to the
+      // capturePulseSnapshot shape. Entries are only ever minted by the push
+      // site, so an unparseable payload can't happen in practice; if it ever
+      // does, drop the entry (so the Undo affordance doesn't dangle on it
+      // forever) and report no undo.
+      let snap = null;
+      try { snap = JSON.parse(stack[idx].payload); } catch { /* handled below */ }
+      if (!snap) {
+        state.pulseUndoStack = stack.filter((_, i) => i !== idx);
+        return;
+      }
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const stamp = new Date().toISOString();

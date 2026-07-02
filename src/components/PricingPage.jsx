@@ -404,10 +404,17 @@ export default function PricingPage({ onNavigate }) {
       // 'Current plan' only for the actual free-tier user — a paying/founder/
       // elevated user is NOT on Wanderer, so they get the normal CTA.
       const onWanderer = authTier === 'free' && !isElevated && !isFounder;
+      // The Wanderer CTA only ever NAVIGATES (to the generator) — it is never a
+      // Stripe checkout. Labelling it kind:'purchase' let the primary-selection
+      // fallback (below) pick the free tier as the page's single loud primary
+      // for a paying user, burying the intended Founder upgrade. 'current' when
+      // this reader is actually on the free tier; otherwise 'navigate' — neither
+      // of which the fallback's kind==='purchase' filter nor the primary Button
+      // variant will treat as the loud conversion action.
       return {
         label: onWanderer ? 'Current plan' : t('pricing.tiers.wanderer.cta'),
         onCta: () => onNavigate?.('generate'),
-        kind: onWanderer ? 'current' : 'purchase',
+        kind: onWanderer ? 'current' : 'navigate',
       };
     }
     if (tier.key === 'founder') {

@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 
-import { lazyChunkLeaks } from '../../scripts/check-bundle-budget.mjs';
+import { lazyChunkLeaks, findEntryRef } from '../../scripts/check-bundle-budget.mjs';
 
 /**
  * Proves the first-paint lazy-chunk guard (review R6 follow-up) is CORRECT and
@@ -39,5 +39,30 @@ describe('bundle-budget lazyChunkLeaks — first-paint guard has teeth', () => {
     // Only the exact manualChunks names gate: `engineRoom-x.js` / `pdfExport-x.js` are
     // ordinary lazy feature chunks, not the vendor-pdf/engine payloads.
     expect(lazyChunkLeaks(['engineRoom-CVMcH6dL.js', 'pdfExport-Cn4PYS48.js'])).toEqual([]);
+  });
+});
+
+/**
+ * Proves the entry-KB ceiling has a concrete target. The 960KB entry guard is pinned
+ * to Vite's `index-` filename prefix; if that prefix ever changes, findEntryRef must
+ * return undefined so main() fails LOUD instead of letting entryBytes stay 0 and the
+ * named entry guard go silently vacuous (backstopped only by the loose total).
+ */
+describe('bundle-budget findEntryRef — entry guard is non-vacuous', () => {
+  const healthy = ['index-D0vu1M9N.js', 'vendor-react-SKOiWvso.js', 'vendor-state-Bg-g3ARq.js', 'data-XSm_D-v7.js'];
+
+  test('the entry chunk is found by its index- prefix', () => {
+    expect(findEntryRef(healthy)).toBe('index-D0vu1M9N.js');
+  });
+
+  test('returns undefined when no ref matches the index- prefix (Vite renamed the entry)', () => {
+    // e.g. a future entryFileNames of `app-[hash].js` — the guard would go vacuous,
+    // so findEntryRef must signal the miss and main() fails loud on it.
+    expect(findEntryRef(['app-D0vu1M9N.js', 'vendor-react-SKOiWvso.js', 'data-XSm_D-v7.js'])).toBeUndefined();
+  });
+
+  test('a non-entry chunk that merely contains "index" is not mistaken for the entry', () => {
+    // ENTRY_PREFIX anchors at the start, so `reindex-*.js` / `vendor-index-*.js` don't match.
+    expect(findEntryRef(['reindex-CVMcH6dL.js', 'vendor-index-Cn4PYS48.js'])).toBeUndefined();
   });
 });

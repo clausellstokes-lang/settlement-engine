@@ -819,6 +819,20 @@ export const createSettlementSlice = (set, get) => ({
       throw genErr;
     }
     const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
+
+    // Sentinel re-gate — the pre-generation tier gate above deliberately lets
+    // 'random'/'custom' through (authSlice: the size isn't known until the
+    // engine resolves it) on the documented promise that the rolled tier is
+    // "re-gated at generation". Enforce that promise here: apply the same
+    // fail-closed check to the RESOLVED tier, so an anon (max 'town') can't
+    // mint a metropolis via Random or a typed custom population. Blocks
+    // BEFORE the state commit and the anon-cap spend, so a blocked roll
+    // costs nothing and the on-screen settlement is untouched.
+    if ((settType === 'random' || settType === 'custom') && !state.isTierAllowed(result?.tier)) {
+      console.warn(`Resolved tier "${result?.tier}" (from settType "${settType}") not allowed for current user tier.`);
+      return null;
+    }
+
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first
@@ -859,6 +873,11 @@ export const createSettlementSlice = (set, get) => ({
         state.whatIfPreview = null;
         state.pendingChange = null;
         state.pendingPreview = null;
+        // Queued inline edits target the settlement they were staged
+        // against (npcIndex-based renames especially) — a regeneration
+        // mints a new identity, so committing them later would mutate the
+        // wrong town. Drop, don't carry.
+        state.pendingEditsQueue = [];
         state.pipelineHistory = pipelineHistory;
         // Arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
@@ -938,6 +957,9 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.settlement = settlement;
       state.activeSaveId = null;
+      // Identity swap (draft restore) — edits queued against the previous
+      // settlement must not commit against this one.
+      state.pendingEditsQueue = [];
     }),
 
   clearSettlement: () =>
@@ -948,6 +970,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastCtx = null;
       state.whatIfPreview = null;
       state.pendingChange = null;
+      state.pendingEditsQueue = [];
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
@@ -2397,6 +2420,9 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
+    // Edits queued against the previously-open settlement must not survive
+    // a settlement switch — a stale rename would commit against this save.
+    state.pendingEditsQueue = [];
     // Reset the FULL AI session from this save's aiData blob, not just
     // aiSettlement. Previously only aiSettlement was set here, so callers that
     // open a save via hydrateFromSave alone (e.g. the deity-from-map picker)

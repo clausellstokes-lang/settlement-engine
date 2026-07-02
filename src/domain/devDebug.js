@@ -25,7 +25,7 @@
  * Pure read-only. No mutation. No side effects.
  */
 
-import { getTraces, tracesByType } from './trace.js';
+import { getTraces, tracesFor } from './trace.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
@@ -142,7 +142,8 @@ export function devDebugCounts(settlement) {
 /** Return only the traces that affect a specific entity id.
  *  @param {import('./settlement.schema.js').SimSettlement} settlement @param {any} entityId */
 export function tracesForEntity(settlement, entityId) {
-  return [
-    ...tracesByType(settlement, 'entity'),
-  ].filter(t => t.targetId === entityId);
+  // tracesFor filters getTraces by targetId regardless of targetType; the old
+  // tracesByType(settlement, 'entity') filter matched a targetType no trace
+  // ever carries, so this always returned [].
+  return tracesFor(settlement, entityId);
 }

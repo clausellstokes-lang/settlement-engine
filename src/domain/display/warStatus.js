@@ -148,11 +148,19 @@ export function liveTradeWars({ worldState, regionalGraph } = /** @type {any} */
   for (const prizeId of Object.keys(state).sort(codepoint)) {
     const entry = state[prizeId] || {};
     if (entry.lastFlipTick == null) continue; // never contested → not a trade war
-    // prizeId is `<stablePart(buyer)>:<stablePart(commodity)>`. The pieces are
-    // sanitized (no embedded colons), so a single split recovers them.
+    // Prefer the REAL ids the ledger persists (tradeWar.js writes buyerId/commodityId).
+    // The prizeId key is the SLUG form `<stablePart(buyer)>:<stablePart(commodity)>`
+    // (lowercased, non-alnum → underscore), so splitting it recovers slugs, not the
+    // real ids the Realm UI / PDF / gallery render as names — which rendered slugs as
+    // names. Fall back to the slug-split only for a legacy entry written before the
+    // ids were persisted. Mirrors worldSnapshotPublic.js:264-269.
     const idx = String(prizeId).indexOf(':');
-    const buyerId = idx >= 0 ? String(prizeId).slice(0, idx) : String(prizeId);
-    const commodityId = idx >= 0 ? String(prizeId).slice(idx + 1) : '';
+    const buyerId = entry.buyerId != null
+      ? String(entry.buyerId)
+      : (idx >= 0 ? String(prizeId).slice(0, idx) : String(prizeId));
+    const commodityId = entry.commodityId != null
+      ? String(entry.commodityId)
+      : (idx >= 0 ? String(prizeId).slice(idx + 1) : '');
     out.push({
       prizeId: String(prizeId),
       buyerId,

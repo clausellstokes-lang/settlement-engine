@@ -192,8 +192,7 @@ function legitimacyFor(faction, settlement) {
   // matched a "Merchant League" government; "Noble Families" matched every
   // "Noble Governorship"). The roster isGoverning flag wins when present.
   const isGoverning = (typeof faction === 'object' && faction?.isGoverning === true)
-    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase())
-    || power.governingFactionName === factionName;
+    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase());
 
   // Governing faction inherits the settlement's public legitimacy via the conserved
   // governance ledger (handles the { score } object + legacy bare number uniformly).

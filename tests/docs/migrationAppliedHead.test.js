@@ -1,4 +1,7 @@
-import { describe, test, expect } from 'vitest';
+import { afterEach, describe, test, expect, vi } from 'vitest';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import {
   migrationNumbers,
@@ -37,10 +40,21 @@ describe('applied-head ledger is well-formed and bounded by the repo', () => {
     expect(ledger.appliedHead).toBeLessThanOrEqual(head);
   });
 
-  test('with everything pushed, the ledger is currently in sync (status ok, no pending)', () => {
+  test('the ledger is in sync or in the normal commit→deploy window — never corrupt', () => {
     const { status, pending } = classifyAppliedHead(ledger.appliedHead, head, nums);
-    expect(status).toBe('ok');
-    expect(pending).toEqual([]);
+    // 'pending' (repo ahead of prod) is the DOCUMENTED-NORMAL state between
+    // committing a migration and running `supabase db push` — the gate script
+    // surfaces it as a visible warning, and this suite must not hard-fail it
+    // (that would force bumping appliedHead before the push actually happened,
+    // which is the exact lie the ledger exists to prevent). Only 'corrupt'
+    // (appliedHead EXCEEDS the repo head) is a hard failure.
+    expect(['ok', 'pending']).toContain(status);
+    expect(status).not.toBe('corrupt');
+    // Whatever is pending must be real, committed migrations above the applied head.
+    for (const n of pending) {
+      expect(nums).toContain(n);
+      expect(n).toBeGreaterThan(ledger.appliedHead);
+    }
   });
 });
 
@@ -61,5 +75,35 @@ describe('classifyAppliedHead drift logic is non-vacuous', () => {
 
   test('readAppliedHeadLedger returns null for a missing file (back-compat, not a throw)', () => {
     expect(readAppliedHeadLedger('/no/such/applied-head.json')).toBeNull();
+  });
+});
+
+describe('readAppliedHeadLedger degrades gracefully on a corrupt ledger', () => {
+  let dir;
+  afterEach(() => {
+    if (dir) {
+      rmSync(dir, { recursive: true, force: true });
+      dir = undefined;
+    }
+    vi.restoreAllMocks();
+  });
+
+  test('a corrupt/truncated ledger returns null (does not throw a raw parse error)', () => {
+    dir = mkdtempSync(join(tmpdir(), 'applied-head-'));
+    const file = join(dir, 'applied-head.json');
+    writeFileSync(file, '{ "appliedHead": 097', 'utf8'); // truncated — invalid JSON
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => readAppliedHeadLedger(file)).not.toThrow();
+    expect(readAppliedHeadLedger(file)).toBeNull();
+    expect(warn).toHaveBeenCalled();
+  });
+
+  test('a valid ledger still parses unchanged', () => {
+    dir = mkdtempSync(join(tmpdir(), 'applied-head-'));
+    const file = join(dir, 'applied-head.json');
+    writeFileSync(file, JSON.stringify({ appliedHead: 97, appliedAt: '2026-07-02' }), 'utf8');
+
+    expect(readAppliedHeadLedger(file)).toEqual({ appliedHead: 97, appliedAt: '2026-07-02' });
   });
 });

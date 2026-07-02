@@ -26,11 +26,13 @@ Object.values(SUPPLY_CHAIN_NEEDS || {}).forEach((cat) => {
 });
 
 const STATUS = {
-  running:     { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
-  operational: { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
-  vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable' },
-  impaired:    { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
-  broken:      { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
+  running:             { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
+  operational:         { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
+  entrepot:            { color: '#a0762a', bg: '#faf6ec', border: '#d8c090', label: 'Entrepot' },
+  magically_sustained: { color: '#5a2a8a', bg: '#f8f0ff', border: '#c0a0e0', label: 'Magically Sustained' },
+  vulnerable:          { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable' },
+  impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
+  broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
 };
 const getStatus = (s) => STATUS[s] || STATUS.vulnerable;
 

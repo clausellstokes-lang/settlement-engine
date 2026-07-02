@@ -45,4 +45,24 @@ describe('realm-arc summary (§S4)', () => {
     // Bounded scalar string — public-safe.
     expect(summary.length).toBeLessThanOrEqual(600);
   });
+
+  test('a GM-concealed (gm/hidden) war_front never surfaces in the public arc', () => {
+    // Defense-in-depth: the gallery-facing arc must match worldSnapshotPublic —
+    // a war_front whose visibility is gm/hidden is GM-only and must not name the siege.
+    const worldState = { deployments: { a: { targetId: 'c' } } };
+    const gmGraph = {
+      channels: [
+        { type: 'war_front', status: 'confirmed', from: 'a', to: 'c', visibility: 'gm' },
+      ],
+    };
+    expect(realmArcLines({ worldState, regionalGraph: gmGraph, settlements: SETTLEMENTS })).toEqual([]);
+    expect(buildRealmArcSummary({ worldState, regionalGraph: gmGraph, settlements: SETTLEMENTS })).toBe('');
+
+    const hiddenGraph = {
+      channels: [
+        { type: 'war_front', status: 'confirmed', from: 'a', to: 'c', visibility: 'hidden' },
+      ],
+    };
+    expect(realmArcLines({ worldState, regionalGraph: hiddenGraph, settlements: SETTLEMENTS })).toEqual([]);
+  });
 });

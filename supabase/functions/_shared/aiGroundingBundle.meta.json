@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-01T11:11:05.697Z",
+  "generatedAt": "2026-07-02T17:41:27.946Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "cdc5970eacce5cb7",
+  "sourceHash": "b512d2a41b7f5704",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -37,6 +37,7 @@
     "src/domain/threatProfile.js",
     "src/domain/tradeRouteSemantics.js",
     "src/domain/userEdits.js",
+    "src/domain/worldPulse/archetypeCatalog.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",
     "src/domain/worldPulse/relationshipHierarchy.js",

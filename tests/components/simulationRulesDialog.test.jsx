@@ -7,6 +7,10 @@ import SimulationRulesDialog from '../../src/components/map/SimulationRulesDialo
 const actions = {
   previewCampaignWorldPulse: vi.fn(),
   updateCampaignSimulationRules: vi.fn(),
+  // Which campaigns have an advance in flight. The dialog subscribes to this LIST
+  // (not the isAdvanceInFlight fn) and does the membership test itself, so tests
+  // drive the blocked state by mutating this array. Empty = nothing advancing.
+  advanceInFlight: [],
 };
 
 vi.mock('../../src/store/index.js', () => ({
@@ -17,6 +21,7 @@ describe('SimulationRulesDialog', () => {
   afterEach(() => {
     cleanup();
     vi.clearAllMocks();
+    actions.advanceInFlight = [];
   });
 
   test('previews and saves a selected preset without mutating first', async () => {
@@ -117,6 +122,60 @@ describe('SimulationRulesDialog', () => {
         settlementStrategyEnabled: true,
         religionDynamicsEnabled: true,
       }));
+      expect(onClose).toHaveBeenCalled();
+    });
+  });
+
+  // ── advance-guard-ui — the store no-ops rules writes mid-advance, so the dialog
+  // must DISABLE its edit controls + show the affordance rather than let Save fire a
+  // write the store will silently drop and still report success over. ───────────────
+  test('blocks the rules edit while this campaign is advancing', async () => {
+    actions.updateCampaignSimulationRules.mockResolvedValue({});
+    actions.advanceInFlight = ['camp-1'];
+    const onClose = vi.fn();
+
+    render(<SimulationRulesDialog
+      open
+      // camp-1 present in advanceInFlight → every rules write is a store no-op.
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={onClose}
+    />);
+
+    // The "the realm is advancing…" affordance is shown, the write control is
+    // disabled, and the living-world gates carry the brief in-flight hint.
+    expect(screen.getByTestId('rules-advance-blocked')).toBeTruthy();
+    const saveBtn = screen.getByRole('button', { name: 'Save' });
+    expect(saveBtn.disabled).toBe(true);
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).disabled).toBe(true);
+    expect(screen.getAllByTestId('gate-disabled-reason').length).toBeGreaterThan(0);
+
+    // Even if Save is fired (defensively), no store write goes out — the guard
+    // refuses so no false-success path exists.
+    fireEvent.click(saveBtn);
+    await Promise.resolve();
+    expect(actions.updateCampaignSimulationRules).not.toHaveBeenCalled();
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  test('does not block the rules edit for a DIFFERENT campaign advancing', async () => {
+    actions.updateCampaignSimulationRules.mockResolvedValue({});
+    actions.advanceInFlight = ['camp-other'];
+    const onClose = vi.fn();
+
+    render(<SimulationRulesDialog
+      open
+      // The advance is on camp-other, not this dialog's camp-2, so editing is free.
+      campaign={{ id: 'camp-2', name: 'Realm Two', worldState: { simulationRules: {} } }}
+      onClose={onClose}
+    />);
+
+    expect(screen.queryByTestId('rules-advance-blocked')).toBeNull();
+    const saveBtn = screen.getByRole('button', { name: 'Save' });
+    expect(saveBtn.disabled).toBe(false);
+
+    fireEvent.click(saveBtn);
+    await waitFor(() => {
+      expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-2', expect.anything());
       expect(onClose).toHaveBeenCalled();
     });
   });

@@ -1,9 +1,11 @@
 # SettlementForge — Deploy guide
 
 Deployment has two halves: the **client app** (Vite SPA on Vercel) and the
-**backend** (Supabase Postgres + Edge Functions). The client redeploys
-automatically on every push to `master`; the backend pieces need manual
-commands run with your Supabase + Stripe credentials.
+**backend** (Supabase Postgres + Edge Functions). The client redeploys from
+`master` through a CI-gated path — a push does NOT ship directly; CI must go
+green first, and (once the deploy-hook secret is set) a post-CI job triggers the
+actual build. The backend pieces need manual commands run with your Supabase +
+Stripe credentials.
 
 ## Quick status check (post-push)
 
@@ -15,9 +17,16 @@ After pushing to `origin/master`:
    Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
-2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
-   points at `npx vite build` → `dist/`. Watch the Vercel dashboard for
-   the project.
+2. **Vercel deploy**: the push-triggered build is SKIPPED by the fail-closed
+   ignore-gate (`vercel.json` → `scripts/vercel-ignore-build.mjs`) because CI
+   hasn't reported yet. What actually ships is the `redeploy` job at the end of
+   `ci.yml`: after `check` + `e2e` + `deno-tests` all go green on a `master`
+   push, it POSTs the Vercel Deploy Hook, and that hook-triggered build passes
+   the (now-green) gate. This is OPT-IN — it no-ops unless the
+   `VERCEL_DEPLOY_HOOK_URL` secret is set (see *Gating production on CI*); until
+   then a green CI run leaves the deploy waiting on a manual dashboard Redeploy.
+   `vercel.json` points at `npx vite build` → `dist/`. Watch the Vercel
+   dashboard for the project.
 
 3. **Supabase**: nothing happens automatically. Run the manual steps
    below.
@@ -54,6 +63,30 @@ so provisioning the token is a required setup step, not an optional hardening on
 See the script header in `scripts/vercel-ignore-build.mjs` for the full decision
 table.
 
+**Auto-deploy loop (opt-in): the CI `redeploy` job + `VERCEL_DEPLOY_HOOK_URL`.**
+The gate above only ever SKIPS or PROCEEDS — it never triggers a build. And it
+skips the push-triggered deployment every time: Vercel runs the ignoreCommand
+seconds after a push, long before CI (~10-15m) can conclude, so it always reads
+"required checks not yet reported" and skips. Vercel does NOT re-evaluate on its
+own once CI later goes green — that push's deployment is terminally skipped. The
+`redeploy` job at the end of `.github/workflows/ci.yml` closes the loop: on a
+`master` push, after `check` + `e2e` + `deno-tests` all succeed (`needs:` — a
+red or cancelled gating job skips it), it POSTs the **Vercel Deploy Hook**. That
+fires a FRESH deployment; Vercel re-runs the ignoreCommand on it, and this time
+the required checks ARE green, so the gate PROCEEDS and the build ships.
+
+This auto-deploy is **OFF until you set the secret** and non-breaking: the job
+no-ops (exits 0 with a log line) unless the `VERCEL_DEPLOY_HOOK_URL` GitHub
+Actions secret is present. To turn it on: Vercel → Project → Settings → Git →
+Deploy Hooks → create a hook on branch `master`, then paste its URL into GitHub →
+repo Settings → Secrets and variables → Actions as `VERCEL_DEPLOY_HOOK_URL`.
+Until that secret exists, nothing about the current flow changes — a green CI run
+leaves the deploy waiting on a manual dashboard Redeploy. Note the hook deploys
+the branch HEAD, which may have advanced past the commit whose CI fired it; that
+is safe because the ignoreCommand re-evaluates the required checks on whatever
+commit actually builds, so a red HEAD still cannot ship (and the newer commit's
+own CI run fires its own hook).
+
 **Migration-currency gate (fail-closed).** Even when CI is green, the deploy is
 BLOCKED if `supabase/applied-head.json` says production is behind the repo migration
 head — i.e. the code being shipped may reference a schema the live DB doesn't have
@@ -63,6 +96,28 @@ window is normal); the deploy gate is where it turns fatal. To ship: run
 schema-free deploy while the ledger is legitimately behind, set
 `VERCEL_ALLOW_MIGRATION_DRIFT=1` (proceeds with a loud warning). Verified through the
 real `decideDeploy` in `tests/build/ciGateHardening.test.js`.
+
+**Edge functions are the one UNGATED path to production — deploy them by hand,
+deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
+and the DB has the `applied-head.json` currency gate above, but edge functions ship
+via a bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from
+whatever your **local working tree** contains. Nothing checks that CI is green,
+nothing checks the tree is clean, and — unlike the migration ledger — nothing records
+which commit's functions are live. This matters because the edge layer IS the money +
+auth trust boundary (`stripe-webhook`, `create-checkout`, `auth-recovery`). Two
+consequences to guard against by discipline:
+
+- **Deploy only from a clean tree at a pushed, CI-green commit.** Before deploying any
+  function, confirm `git status` is clean and the commit you're on is the one CI passed
+  on `origin/master`. Deploying with local edits present ships bytes that were never
+  tested and that no reviewer saw. Note the deploying commit SHA in your deploy record
+  (there is no automated ledger to consult later).
+- **`npm run check:edge-behavior` is FAIL-OPEN on a missing toolchain.** It runs the
+  edge type-check + behavioral suite when `deno` is on `PATH`, but **exits 0 (skips)
+  when deno is absent** — so a green local run does NOT prove the edge functions were
+  exercised. Install deno so the pre-push hook actually gates them, and never treat a
+  "skipped" edge check as a pass. CI's separate `deno-tests` job is the real gate, which
+  is exactly why you must only deploy from a commit that job passed.
 
 **Local convenience.** `npm run check` mirrors CI's `check` job (deliberately excludes
 the Deno edge tests, which are CI's separate `deno-tests` job). To run EVERYTHING CI
@@ -99,16 +154,27 @@ red commit from reaching `master` at all. Regardless of which defenses are on,
 **always let the `pre-push` hook run** (never `--no-verify` to `master`) and watch
 the Actions tab after pushing.
 
-## Client app (Vercel) — automatic
+## Client app (Vercel) — CI-gated auto-deploy
 
 ```bash
-# Already done by `git push origin master`.
-# Vercel sees the push and runs `npx vite build`.
-# Output: dist/ uploaded to the Vercel CDN.
+# `git push origin master` does NOT ship on its own.
+# 1. The push-triggered Vercel build is SKIPPED by the fail-closed
+#    ignoreCommand (CI hasn't reported yet).
+# 2. CI runs (~10-15m). When check + e2e + deno-tests are green, the
+#    `redeploy` job POSTs the Vercel Deploy Hook (if VERCEL_DEPLOY_HOOK_URL
+#    is set), which fires a fresh build that now passes the gate.
+# 3. Output: `npx vite build` → dist/ uploaded to the Vercel CDN.
+#
+# If VERCEL_DEPLOY_HOOK_URL is NOT set, step 2 no-ops — trigger the deploy
+# with a manual dashboard Redeploy once CI is green. See "Gating production
+# on CI" for the token + deploy-hook setup.
 ```
 
-No manual command needed. The only Vercel-side gotcha: **environment
-variables**. The client needs:
+No manual build command needed (the gate + hook drive it), but two Vercel-side
+env prerequisites govern whether it deploys at all: the `GITHUB_CI_STATUS_TOKEN`
+that arms the CI gate and the `VERCEL_DEPLOY_HOOK_URL` secret that arms the
+auto-redeploy (both under *Gating production on CI*). The other Vercel-side
+gotcha: **client environment variables**. The client needs:
 
 ```
 VITE_SUPABASE_URL=...
@@ -215,6 +281,12 @@ npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 
 Deploy each function:
 
+> **This is the ungated path to production.** Unlike the client (fail-closed
+> CI gate) and the DB (migration-currency gate), nothing here checks CI is green
+> or the tree is clean, and nothing records the live commit. Deploy only from a
+> clean `git status` at a pushed, CI-green commit, and note the SHA — see "Edge
+> functions are the one UNGATED path to production" under *Gating production on CI*.
+
 ```bash
 npx supabase functions deploy stripe-webhook          # Stripe posts a signature, not a JWT
 npx supabase functions deploy create-checkout
@@ -303,7 +375,10 @@ git revert <bad-sha>
 git push origin master
 ```
 
-Vercel will auto-deploy the revert. For an edge-function regression,
+The revert ships the same CI-gated way as any push: it deploys once its CI run
+is green and the `redeploy` job fires the hook (or via a manual dashboard
+Redeploy if the deploy-hook secret isn't set) — it is NOT an instant push-to-live
+rollback. For an edge-function regression,
 also re-deploy from the prior good commit:
 
 ```bash

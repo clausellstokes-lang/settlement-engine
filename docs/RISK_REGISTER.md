@@ -13,7 +13,8 @@
 - Each entry cites **`file:line` on the current branch** so it can be re-verified, not taken on faith.
 - Update an entry the same commit you change its code. Add new risks at the top of [§3](#3-open-risk-register-prioritized).
 - This register is deliberately a **register**, not a findings dump. Exhaustive per-finding evidence
-  for the old review lives in `REVIEW_FINDINGS.md` / `.review_findings.json`.
+  for the old review lives in `REVIEW_FINDINGS.md` (the git-tracked file;
+  `.review_findings.json` is a gitignored ~1.2MB machine dump, not in the repo).
 
 ---
 

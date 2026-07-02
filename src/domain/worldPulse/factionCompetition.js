@@ -700,16 +700,40 @@ export function deriveFactionCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateFactionRules(snapshot, pressureIdx, options);
 }
 
+// Union of two id lists, LIVE order first, patch additions appended. Deterministic
+// (both inputs are deterministically ordered) and a byte-identical no-op when the
+// patch was authored against the live state (the auto/same-tick path).
+/** @param {any} liveList @param {any} patchList */
+function mergeInstitutionIds(liveList, patchList) {
+  return [...new Set([...(liveList || []), ...(patchList || [])])];
+}
+
 /** @param {any} worldState @param {any} outcome */
 export function applyFactionPatch(worldState, outcome) {
   if (!outcome?.factionId) return worldState;
   const factionStates = { ...(worldState.factionStates || {}) };
   const current = factionStates[outcome.factionId] || {};
+  const patch = outcome.factionPatch || {};
+  // Candidates bake ABSOLUTE next-values at authoring time, but a proposal-mode
+  // outcome can be accepted many ticks later (applyWorldPulseProposal re-routes the
+  // STORED outcome back through here). Wholesale replacement would roll live state
+  // back to the stale authoring snapshot. Institution lists only ever ACCRETE at
+  // authoring (capture/suppression add one id, never remove), so a UNION with the
+  // live lists preserves both the patch's addition and every interim capture — and
+  // is byte-identical on same-tick application. lastActedTick is monotonic for the
+  // same reason: a late accept must not rewind the live cooldown. Clamped scalars
+  // (momentum/exhaustion/legitimacyClaim) stay last-write-wins — they carry no
+  // pre-value to rebase a delta from, and a bounded stale write self-corrects.
+  const lastActedTick = Math.max(
+    Number.isFinite(Number(current.lastActedTick)) ? Number(current.lastActedTick) : -Infinity,
+    Number.isFinite(Number(patch.lastActedTick)) ? Number(patch.lastActedTick) : -Infinity,
+  );
   factionStates[outcome.factionId] = {
     ...current,
-    ...(outcome.factionPatch || {}),
-    controlledInstitutions: outcome.factionPatch?.controlledInstitutions || current.controlledInstitutions || [],
-    suppressedInstitutions: outcome.factionPatch?.suppressedInstitutions || current.suppressedInstitutions || [],
+    ...patch,
+    controlledInstitutions: mergeInstitutionIds(current.controlledInstitutions, patch.controlledInstitutions),
+    suppressedInstitutions: mergeInstitutionIds(current.suppressedInstitutions, patch.suppressedInstitutions),
+    ...(Number.isFinite(lastActedTick) ? { lastActedTick } : {}),
   };
   return { ...worldState, factionStates };
 }

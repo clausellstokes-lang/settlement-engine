@@ -175,7 +175,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   useEffect(() => {
     return useStore.subscribe(
       state => state.savedSettlements,
-      nextSaves => { _setSavesLocal(nextSaves || []); },
+      nextSaves => {
+        // Keep the flush snapshot in lockstep with external store writes too.
+        // aiSlice persists narrative/notes/pins straight onto store rows; if
+        // only local state mirrored them, a later change-queue flush would
+        // rebuild rows from the stale ref and clobber the fresh aiData.
+        // (Writes routed through setSaves already set the ref first, so this
+        // re-assignment is idempotent for them.)
+        savesRef.current = nextSaves || [];
+        _setSavesLocal(nextSaves || []);
+      },
     );
   }, []);
   const [savesLoading, setSavesLoading] = useState(true);

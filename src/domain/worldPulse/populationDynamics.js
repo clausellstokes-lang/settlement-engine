@@ -365,6 +365,22 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
     .filter(Boolean);
 }
 
+// ── Migration staleness re-verify (self-contained; the same re-verify contract as
+// applyTierOutcomeToSettlement). A mass-emigration outcome can be applied MANY ticks
+// after it was generated (a long-parked proposal): by then the source may hold fewer
+// people than the stored debit. The source side always clamped at zero — but the
+// paired destination credits landed IN FULL, minting people out of thin air. The
+// apply pass hands every settlement of one outcome the SAME outcome object, source
+// first (populationDeltas order → affectedSaveIds order), so the source apply records
+// the REALIZED debit fraction here and each destination apply scales its credit by it
+// (floored, so Σ scaled credits ≤ the people who actually left). Keyed on outcome
+// object identity — scoped to a single apply pass, invisible to persistence. A
+// destination applied without a source record (source missing from the settlement
+// map) keeps the legacy full credit. Fresh (non-stale) outcomes realize fraction 1 ⇒
+// byte-identical.
+/** @type {WeakMap<object, number>} */
+const migrationRealizedFraction = new WeakMap();
+
 /**
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
@@ -372,11 +388,23 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
  */
 export function applyPopulationOutcomeToSettlement(settlement, outcome, saveId) {
   if (!settlement || !outcome?.populationDeltas) return settlement;
-  const delta = outcome.populationDeltas
+  let delta = outcome.populationDeltas
     .filter((/** @type {any} */ item) => String(item.saveId) === String(saveId))
     .reduce((/** @type {any} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
   if (!delta) return settlement;
   const current = Math.max(0, Math.round(finite(settlement.population, 0)));
+  if (outcome.candidateType === 'population_emigration') {
+    if (String(saveId) === String(outcome.targetSaveId) && delta < 0) {
+      const debit = Math.abs(Math.round(delta));
+      const realized = Math.min(debit, current);
+      migrationRealizedFraction.set(outcome, debit > 0 ? realized / debit : 1);
+      delta = -realized;
+    } else if (delta > 0) {
+      const fraction = migrationRealizedFraction.get(outcome);
+      if (fraction != null && fraction < 1) delta = Math.floor(delta * fraction);
+    }
+    if (!delta) return settlement; // fully-stale debit/credit — no phantom history entry
+  }
   const nextPopulation = Math.max(0, current + Math.round(delta));
   return {
     ...settlement,

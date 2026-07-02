@@ -426,7 +426,9 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     if (f === winner) {
       return {
         ...f,
-        power: Math.round(num(f.power) + 6),
+        // Clamp to the 0-100 faction-power domain that coup odds + power-band
+        // computations assume; a 95-100 winner would otherwise land at 101-106.
+        power: Math.max(0, Math.min(100, Math.round(num(f.power) + 6))),
         modifiers: [...(f.modifiers || []), 'ascendant'],
       };
     }

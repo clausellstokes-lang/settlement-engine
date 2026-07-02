@@ -30,7 +30,7 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { shouldRefundOnFailure } from './refundPolicy.ts';
 // Deterministic entity-link post-processor: wraps known entity names found in
 // refined free-form prose with id-bearing tokens the client tokenizer parses.
@@ -422,6 +422,23 @@ const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall
 // regardless of input size, so an unbounded body would only inflate the provider
 // token bill. Read req.text() with this cap before JSON.parse.
 const MAX_BODY_BYTES = 64 * 1024;
+
+/**
+ * Refinement passes affected by a progression changeType — OWN-property lookup
+ * only. changeType is client-supplied: a prototype-chain name ('constructor',
+ * 'toString', …) used to resolve an inherited function via bare indexing —
+ * truthy, so `|| []` never applied and `.map` threw inside the progression
+ * stream (post-spend, pre-model: refunded, but it burned a rate-limit unit and
+ * surfaced a raw internal error in a 200 stream). Unknown change types degrade
+ * to the designed thesis-only fallback. Exported for the regression test.
+ */
+export function progressionAffectedKeys(
+  changeType: string,
+): Array<keyof typeof REFINEMENT_PASSES> {
+  return Object.hasOwn(PROGRESSION_AFFECTED_FIELDS, changeType)
+    ? PROGRESSION_AFFECTED_FIELDS[changeType]
+    : [];
+}
 
 function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   const ctrl = new AbortController();
@@ -1190,7 +1207,7 @@ export async function handleGenerateNarrative(
 
           // ── PROGRESSION: thesis + subset of refinement passes ─────────────
           if (type === 'progression') {
-            const affectedKeys = PROGRESSION_AFFECTED_FIELDS[changeType] || [];
+            const affectedKeys = progressionAffectedKeys(changeType);
             // Filter to passes that actually exist (defensive against future
             // changes to either map).
             const affectedEntries = affectedKeys

@@ -100,6 +100,7 @@ export default function AccountDataPrivacySection({
   // Bulk content deletion (confirmation-gated, one step of disclosure).
   const [confirmWipe, setConfirmWipe] = useState(null); // 'settlements' | 'campaigns' | null
   const [wipeBusy, setWipeBusy] = useState(false);
+  const [wipeError, setWipeError] = useState(null);
 
   // Account deletion (typed-phrase confirmation, soft-delete request).
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -197,6 +198,7 @@ export default function AccountDataPrivacySection({
 
   const runWipe = async () => {
     setWipeBusy(true);
+    setWipeError(null);
     try {
       if (confirmWipe === 'settlements' && typeof onDeleteAllSettlements === 'function') {
         await onDeleteAllSettlements();
@@ -204,6 +206,11 @@ export default function AccountDataPrivacySection({
         await onDeleteAllCampaigns();
       }
       setConfirmWipe(null);
+    } catch (e) {
+      // The handler throws when a server-side delete fails (a partial wipe must
+      // not report a clean success on a privacy surface). Surface the message and
+      // keep the confirm panel open so the user can retry.
+      setWipeError(e?.message || 'Could not delete your content. Please try again.');
     } finally {
       setWipeBusy(false);
     }
@@ -410,13 +417,14 @@ export default function AccountDataPrivacySection({
           </p>
           {confirmWipe ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.md, background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md }}>
+              {wipeError && <div role="alert" style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>{wipeError}</div>}
               <div style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>
                 Delete all {confirmWipe}? This permanently removes
                 {confirmWipe === 'settlements' ? ` ${settlementCount} settlement${settlementCount === 1 ? '' : 's'}` : ` ${campaignCount} campaign${campaignCount === 1 ? '' : 's'}`}.
               </div>
               <div style={{ display: 'flex', gap: SP.sm }}>
                 <Button variant="danger" size="md" busy={wipeBusy} onClick={runWipe}>Yes, delete all</Button>
-                <Button variant="ghost" size="md" disabled={wipeBusy} onClick={() => setConfirmWipe(null)}>Cancel</Button>
+                <Button variant="ghost" size="md" disabled={wipeBusy} onClick={() => { setConfirmWipe(null); setWipeError(null); }}>Cancel</Button>
               </div>
             </div>
           ) : (

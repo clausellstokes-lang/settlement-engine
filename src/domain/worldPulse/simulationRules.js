@@ -214,7 +214,14 @@ export function normalizeSimulationRules(raw = {}) {
     migrationMode: enumValue(input.migrationMode, MIGRATION_MODES, DEFAULT_SIMULATION_RULES.migrationMode),
   };
   for (const key of BOOLEAN_KEYS) {
-    next[key] = input[key] === undefined ? /** @type {Record<string, any>} */ (DEFAULT_SIMULATION_RULES)[key] : input[key] !== false;
+    // Fail CLOSED on malformed values: only an explicit boolean is honored;
+    // anything else (undefined, null, 0, '', 'false', …) falls back to the
+    // key's default. The old `!== false` coercion turned null/0/''/'false'
+    // into TRUE — silently activating opt-in default-off war flags from a
+    // corrupted saved rules blob. For default-true keys the outcome is
+    // unchanged (garbage → default true, explicit false still disables).
+    const value = input[key];
+    next[key] = typeof value === 'boolean' ? value : /** @type {Record<string, any>} */ (DEFAULT_SIMULATION_RULES)[key];
   }
   next.presetId = presetIdForRules(input, next);
   return next;

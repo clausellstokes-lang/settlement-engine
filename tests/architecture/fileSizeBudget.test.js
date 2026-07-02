@@ -42,16 +42,19 @@ const MAX_SLACK = 40;
 // RAISE one without a deliberate, in-diff reason.
 const GRANDFATHERED = {
   'src/generators/powerGenerator.js': 2857,
-  'src/generators/economicGenerator.js': 2855,
-  'src/store/settlementSlice.js': 2446,
+  'src/generators/economicGenerator.js': 2901, // + review-remediation: getUpgradeChain tier-connectivity + Stage 5/7 export re-seating
+  'src/store/settlementSlice.js': 2471, // + review-remediation: pendingEditsQueue clear + identity-swap guards
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
   // of the pure support-edge readers + levy computation into a sibling module is overdue.
-  'src/domain/worldPulse/warDeployment.js': 1616, // defender-attrition + war-economy P1 + defender-resolve P4 + ally-defense P3 + sack/forage P3 (pop + granary) + war levy F2 + shared composeDefenderWillScore
+  'src/domain/worldPulse/warDeployment.js': 1840, // + stripSuppressedDeployResidue extracted from pulseKernel (the strategy_deploy dismiss residue strip)
   'src/generators/narrativeGenerator.js': 1250,
-  'src/domain/causalState.js': 1242,
+  'src/domain/causalState.js': 1277, // + review-remediation: real-walls detection (no JSON.stringify regex) + occupation_lifted polarity
+  // NOTE: pulseKernel.js is no longer grandfathered — the strategy_deploy dismiss residue
+  // strip was extracted into warDeployment.js (stripSuppressedDeployResidue), dropping it
+  // back under GENERAL_CAP.
   'src/domain/worldPulse/stressors.js': 1227,
 };
 

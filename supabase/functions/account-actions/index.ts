@@ -15,6 +15,10 @@
  *                       each. HIGHEST role only (admin|developer); the actual work
  *                       is the SECURITY DEFINER process_account_deletions RPC
  *                       (migration 054), invoked with the service-role client.
+ *                       Each processed account is then GoTrue-banned (kill the
+ *                       live session) and its Stripe subscription CANCELED with
+ *                       the stored Stripe ids cleared (billing stops with the
+ *                       account; the RPC itself never touches Stripe).
  *
  * Authorization:
  *   request_deletion  — any authenticated user (acts on their own row only).
@@ -30,10 +34,15 @@
  *   DELETION_GRACE_DAYS  — grace window before a request is processed (default 7).
  *   RESEND_API_KEY / RESEND_FROM_EMAIL — when set, request_deletion sends a
  *                          best-effort confirmation; never blocks the request.
+ *   STRIPE_SECRET_KEY    — lets process_deletions CANCEL a deleted account's live
+ *                          subscription (billing must stop when the account goes).
+ *                          Unset = the cancel is skipped, logged loud, and the
+ *                          Stripe ids are RETAINED so a re-run can catch up.
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import Stripe from "https://esm.sh/stripe@14.14.0?target=deno";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 import { logError } from "../_shared/logError.ts";
@@ -79,6 +88,28 @@ function defaultAdminClient() {
   );
 }
 
+/** The one Stripe surface process_deletions needs (structural, so tests inject a
+ *  plain recording stub instead of a full Stripe client). `list` exists for the
+ *  legacy rows (pre-087) that recorded a customer id but never a subscription id. */
+type StripeSubscriptionsApi = {
+  subscriptions: {
+    cancel: (id: string) => Promise<unknown>;
+    list: (params: { customer: string; limit?: number }) => Promise<{ data: Array<{ id: string }> }>;
+  };
+};
+
+// Default Stripe client — LAZY, unlike create-checkout's module-level init: this
+// function's core job (deletion processing) must keep working on a deploy where
+// STRIPE_SECRET_KEY isn't wired, so a missing key returns null (caller logs loud
+// and retains the ids for a re-run) rather than crashing the whole function.
+let stripeSingleton: Stripe | null = null;
+function defaultStripeClient(): StripeSubscriptionsApi | null {
+  const key = Deno.env.get("STRIPE_SECRET_KEY");
+  if (!key) return null;
+  stripeSingleton ??= new Stripe(key, { apiVersion: "2023-10-16" });
+  return stripeSingleton;
+}
+
 // Best-effort email send (Resend). Soft-fails to false when unconfigured or on
 // error — a ticket lifecycle email must never block or fail the user action.
 async function sendEmail(to: string | null, subject: string, text: string): Promise<boolean> {
@@ -110,10 +141,12 @@ export async function handleAccountActions(
   deps: {
     userClient?: (authHeader: string) => ReturnType<typeof createClient>;
     adminClient?: () => ReturnType<typeof createClient>;
+    stripeClient?: () => StripeSubscriptionsApi | null;
   } = {},
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
   const makeAdminClient = deps.adminClient ?? defaultAdminClient;
+  const makeStripeClient = deps.stripeClient ?? defaultStripeClient;
   const cors = corsHeadersFor(req);
   const jsonHeaders = { ...cors, "Content-Type": "application/json" };
   const json = (body: Record<string, unknown>, status = 200) =>
@@ -349,6 +382,7 @@ export async function handleAccountActions(
         // advanced; resolve each to its user_id and ban it. Soft-fails per user — a
         // GoTrue error never undoes the soft-delete (the DB anonymise/lock stands).
         let sessionsRevoked = 0;
+        let subscriptionsCanceled = 0;
         const requestIds = Array.isArray((data as Record<string, unknown> | null)?.ids)
           ? ((data as Record<string, unknown>).ids as unknown[]).map(String)
           : [];
@@ -377,10 +411,97 @@ export async function handleAccountActions(
           }
         }
 
+        // Layer 3: a deleted account must also STOP BILLING. The RPC anonymises
+        // + locks the profile but leaves the Stripe linkage untouched — without
+        // this sweep a premium user who deletes their account keeps being
+        // charged, with the portal now locked behind the ban above. Sweep EVERY
+        // soft-deleted profile still holding a Stripe id, not just the rows this
+        // run advanced: the nightly pg_cron run (054) calls the RPC directly and
+        // returns to nobody, so its users would otherwise keep their
+        // subscriptions forever. Cancel IMMEDIATELY (deletion is the honest
+        // cancel-now case, not cancel_at_period_end); a legacy row (pre-087)
+        // with a customer id but no recorded subscription id is resolved via
+        // subscriptions.list. Then clear the stored ids so the anonymised shell
+        // retains no billing identifier — a successful pass empties the set, so
+        // the sweep is self-limiting and idempotent (already-canceled /
+        // resource_missing still clears). Soft-fails like the ban: any OTHER
+        // Stripe failure is logged and RETAINS the ids so the next run retries —
+        // a billing hiccup never undoes the soft-delete.
+        const { data: billingRows } = await adminClient
+          .from("profiles")
+          .select("id, stripe_subscription_id, stripe_customer_id")
+          .not("deleted_at", "is", null)
+          .or("stripe_subscription_id.not.is.null,stripe_customer_id.not.is.null")
+          .limit(500);
+        for (const row of (billingRows || []) as Array<Record<string, unknown>>) {
+          const uid = typeof row.id === "string" ? row.id : null;
+          const subId = typeof row.stripe_subscription_id === "string" && row.stripe_subscription_id
+            ? row.stripe_subscription_id
+            : null;
+          const customerId = typeof row.stripe_customer_id === "string" && row.stripe_customer_id
+            ? row.stripe_customer_id
+            : null;
+          if (!uid || (!subId && !customerId)) continue;
+
+          const stripeApi = makeStripeClient();
+          if (!stripeApi) {
+            // Misconfigured deploy: we can't cancel, so keep the ids visible for
+            // a re-run once the key is wired. The deletion itself stands.
+            logError("account-actions", uid, "STRIPE_SECRET_KEY unset — subscription not canceled on deletion");
+            continue;
+          }
+
+          // Which subscriptions to cancel: the recorded one, else whatever
+          // Stripe still has open for the customer (list omits canceled subs).
+          let clearLinkage = true;
+          let subIds: string[] = [];
+          if (subId) {
+            subIds = [subId];
+          } else if (customerId) {
+            try {
+              const listed = await stripeApi.subscriptions.list({ customer: customerId, limit: 100 });
+              subIds = (listed?.data || []).map((s) => s.id);
+            } catch (e) {
+              // Can't PROVE the customer has no live subscription — retain the
+              // linkage so the next run re-checks rather than orphaning a sub.
+              logError("account-actions", uid, `stripe list on deletion failed: ${errorMessage(e)}`);
+              clearLinkage = false;
+            }
+          }
+
+          for (const id of subIds) {
+            try {
+              await stripeApi.subscriptions.cancel(id);
+              subscriptionsCanceled += 1;
+            } catch (e) {
+              const code = (e as { code?: string } | null)?.code;
+              const msg = errorMessage(e);
+              if (code === "resource_missing" || /no such subscription|already.{0,10}cancell?ed|has been cancell?ed/i.test(msg)) {
+                // Already gone at Stripe — nothing left to stop; treat as done.
+              } else {
+                console.warn("[account-actions] Stripe cancel on deletion failed:", msg);
+                logError("account-actions", uid, `stripe cancel on deletion failed: ${msg}`);
+                clearLinkage = false;
+              }
+            }
+          }
+
+          if (clearLinkage) {
+            const { error: clearErr } = await adminClient
+              .from("profiles")
+              .update({ stripe_subscription_id: null, stripe_customer_id: null })
+              .eq("id", uid);
+            if (clearErr) {
+              console.warn("[account-actions] clearing Stripe linkage on deletion failed:", clearErr.message);
+            }
+          }
+        }
+
         return json({
           success: true,
           result: data,
           sessionsRevoked,
+          subscriptionsCanceled,
           processedAt: new Date().toISOString(),
         });
       }

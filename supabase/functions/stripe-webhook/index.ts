@@ -19,7 +19,11 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+// Pinned EXACT version (not the floating `@2`): deno.lock only constrains local/CI
+// deno tasks — at deploy time the edge runtime resolves the URL itself, so a
+// floating major on the money path could silently ship a different client than CI
+// tested. Keep in lockstep with deno.lock's resolution when upgrading.
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
@@ -145,11 +149,18 @@ async function findUserIdForStripeCustomer(
   }
   if (!email) return null;
 
-  const { data: profile } = await supabase
+  // Case-insensitive EXACT match — never a pattern. ILIKE treats %, _ and \ as
+  // wildcards, so an unescaped email like `a_b@x.com` could bind this money
+  // event (grants/downgrades) to the WRONG profile (`aXb@x.com`). Escape the
+  // SQL metacharacters. PostgREST additionally rewrites `*` in ilike values to
+  // `%` with no escape form, so for the rare email containing `*` fall back to
+  // case-sensitive exact equality rather than risk a wrong-profile match.
+  const baseQuery = () => supabase
     .from('profiles')
-    .select('id, is_founder, stripe_subscription_id, tier')
-    .ilike('email', email)
-    .maybeSingle();
+    .select('id, is_founder, stripe_subscription_id, tier');
+  const { data: profile } = email.includes('*')
+    ? await baseQuery().eq('email', email).maybeSingle()
+    : await baseQuery().ilike('email', email.replace(/([\\%_])/g, '\\$1')).maybeSingle();
   if (!profile?.id) return null;
 
   if (customerId) {
@@ -258,8 +269,11 @@ async function grantMonthlyAllowanceIfNeeded(
 // nothing, so behavior is identical to the previous inline handler.
 export async function handleStripeWebhook(
   req: Request,
-  deps: { adminClient?: typeof adminClient } = {},
+  deps: { adminClient?: typeof adminClient; stripeClient?: typeof stripe } = {},
 ): Promise<Response> {
+  // Injection seam for the live-subscription-status check in the premium branch
+  // (tests stub subscriptions.retrieve); production passes nothing.
+  const stripeApi = deps.stripeClient ?? stripe;
   // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
@@ -280,8 +294,28 @@ export async function handleStripeWebhook(
   const supabase = (deps.adminClient ?? adminClient)();
 
   switch (event.type) {
-    case 'checkout.session.completed': {
+    // async_payment_succeeded is the settlement signal for delayed-notification
+    // methods (ACH debit, some wallets): those sessions fire `completed` with
+    // payment_status='unpaid' (deferred below), then this event once the funds
+    // actually clear. Same fulfillment branch — the session-id idempotency in
+    // grantCreditsForSessionOnce makes the two deliveries safe to share, and the
+    // premium/founder profile writes are same-value re-runs.
+    case 'checkout.session.completed':
+    case 'checkout.session.async_payment_succeeded': {
       const session = event.data.object as Stripe.Checkout.Session;
+
+      // Do NOT fulfil unsettled money. `completed` only means the checkout flow
+      // finished; with async payment methods the charge can still fail, so
+      // granting credits/premium here would hand out goods for money that never
+      // arrives. Ack (200) and wait for async_payment_succeeded — a non-2xx would
+      // just make Stripe redeliver the same unpaid event. 'paid' and
+      // 'no_payment_required' (trials, 100%-off promos) both fulfil; an absent
+      // payment_status (older API payloads) proceeds for back-compat.
+      if (session.payment_status === 'unpaid') {
+        console.log(`[stripe-webhook] session ${session.id} completed but unpaid — deferring fulfillment to async_payment_succeeded`);
+        break;
+      }
+
       const userId  = session.metadata?.supabase_user_id;
       const product = session.metadata?.product;
       const credits = parseInt(session.metadata?.credits || '0', 10);
@@ -296,6 +330,26 @@ export async function handleStripeWebhook(
       if (product === 'premium') {
         // Cartographer subscription (legacy SKU key kept = "premium" so
         // existing customers' subscriptions keep flowing into the same code).
+
+        // OUT-OF-ORDER GUARD: Stripe does not guarantee delivery order. If this
+        // session's customer.subscription.deleted arrived FIRST (e.g. this
+        // completed event sat in retry backoff while the user cancelled), the
+        // deleted handler no-opped (tier was not yet premium) — so upgrading now
+        // would record an already-dead subscription id and grant premium that no
+        // future event ever revokes. Check the subscription's LIVE status before
+        // granting; a dead one is skipped (ack 200 — retrying won't revive it).
+        // A throw here (network) is fine: non-2xx → Stripe redelivers.
+        const premiumSubId = typeof session.subscription === 'string'
+          ? session.subscription
+          : session.subscription?.id || null;
+        if (premiumSubId) {
+          const liveSub = await stripeApi.subscriptions.retrieve(premiumSubId);
+          if (liveSub.status === 'canceled' || liveSub.status === 'incomplete_expired') {
+            console.log(`[stripe-webhook] session ${session.id} completed but subscription ${premiumSubId} is already ${liveSub.status} (out-of-order delete) — not upgrading user ${userId}`);
+            break;
+          }
+        }
+
         const { error } = await supabase.auth.admin.updateUserById(userId!, {
           user_metadata: { tier: 'premium' },
         });
@@ -306,7 +360,7 @@ export async function handleStripeWebhook(
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
           // Record THIS subscription so a later stale/redelivered .deleted for an
           // OLD subscription can't downgrade this re-subscribed user (087).
-          stripe_subscription_id: typeof session.subscription === 'string' ? session.subscription : session.subscription?.id || null,
+          stripe_subscription_id: premiumSubId,
           premium_downgraded_at: null,
           premium_retention_expires_at: null,
         }).eq('id', userId);

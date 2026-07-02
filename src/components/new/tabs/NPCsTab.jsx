@@ -111,19 +111,34 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         {npcs.length} figures · tap any card to expand
       </p>
     
-      {/* NPC Relationships */}
-      {(settlement?.relationships?.length > 0) && (
-        <Collapsible title={`NPC Relationships (${settlement.relationships.length})`} defaultOpen={false}>
-          <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
-            {(settlement?.relationships||[]).filter(r=>r.flagDriven).slice(0,6).map((r,i)=>(
-              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
-            ))}
-            {(settlement?.relationships||[]).filter(r=>!r.flagDriven).slice(0,8).map((r,i)=>(
-              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
-            ))}
-          </div>
-        </Collapsible>
-      )}
+      {/* NPC Relationships. The list caps the flag-driven set at 6 and the rest
+          at 8; the title reflects the shown count against the total so it never
+          advertises more than it renders, with a "showing N of M" note when the
+          cap bites. */}
+      {(settlement?.relationships?.length > 0) && (() => {
+        const allRels = settlement?.relationships || [];
+        const shownFlagDriven = allRels.filter(r=>r.flagDriven).slice(0,6);
+        const shownOthers = allRels.filter(r=>!r.flagDriven).slice(0,8);
+        const shownCount = shownFlagDriven.length + shownOthers.length;
+        const total = allRels.length;
+        return (
+          <Collapsible title={`NPC Relationships (${total})`} defaultOpen={false}>
+            <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
+              {shownFlagDriven.map((r,i)=>(
+                <NPCRelCard2 key={`f${i}`} rel={r} style={relStyle(r.type)}/>
+              ))}
+              {shownOthers.map((r,i)=>(
+                <NPCRelCard2 key={`o${i}`} rel={r} style={relStyle(r.type)}/>
+              ))}
+              {shownCount < total && (
+                <p style={{fontSize:FS.xs,color:MUTED,margin:'2px 0 0',fontStyle:'italic'}}>
+                  Showing {shownCount} of {total}.
+                </p>
+              )}
+            </div>
+          </Collapsible>
+        );
+      })()}
 
       {/* UX overhaul Phase 2 — NPC agency disclosure: goals / ambition /
           rivalries / consequenceIfRemoved. Self-gates to nothing when no NPC
