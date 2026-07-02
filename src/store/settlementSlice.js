@@ -859,6 +859,11 @@ export const createSettlementSlice = (set, get) => ({
         state.whatIfPreview = null;
         state.pendingChange = null;
         state.pendingPreview = null;
+        // Queued inline edits target the settlement they were staged
+        // against (npcIndex-based renames especially) — a regeneration
+        // mints a new identity, so committing them later would mutate the
+        // wrong town. Drop, don't carry.
+        state.pendingEditsQueue = [];
         state.pipelineHistory = pipelineHistory;
         // Arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
@@ -938,6 +943,9 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.settlement = settlement;
       state.activeSaveId = null;
+      // Identity swap (draft restore) — edits queued against the previous
+      // settlement must not commit against this one.
+      state.pendingEditsQueue = [];
     }),
 
   clearSettlement: () =>
@@ -948,6 +956,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastCtx = null;
       state.whatIfPreview = null;
       state.pendingChange = null;
+      state.pendingEditsQueue = [];
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
@@ -2397,6 +2406,9 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
+    // Edits queued against the previously-open settlement must not survive
+    // a settlement switch — a stale rename would commit against this save.
+    state.pendingEditsQueue = [];
     // Reset the FULL AI session from this save's aiData blob, not just
     // aiSettlement. Previously only aiSettlement was set here, so callers that
     // open a save via hydrateFromSave alone (e.g. the deity-from-map picker)

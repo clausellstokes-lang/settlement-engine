@@ -20,7 +20,8 @@ function getCorsHeaders(req?: Request) {
   return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
-function userClient(authHeader: string) {
+/** Default user-scoped client (anon key + the caller's Authorization header). */
+function defaultUserClient(authHeader: string) {
   return createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_ANON_KEY')!,
@@ -28,15 +29,32 @@ function userClient(authHeader: string) {
   );
 }
 
-function adminClient() {
+/** Default service-role client (bypasses RLS for the profile read/write). */
+function defaultAdminClient() {
   return createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
   );
 }
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the portal gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected stubs and asserts the
+// customer the portal session binds to is claimed by verified identity
+// (metadata.supabase_user_id), never by bare email match. `deps` is the
+// optional injection seam; production passes nothing. Mirrors create-checkout.
+export async function handleCreateCustomerPortal(
+  req: Request,
+  deps: {
+    stripeClient?: typeof stripe;
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const stripeApi = deps.stripeClient ?? stripe;
+  const userClient = deps.userClient ?? defaultUserClient;
+  const adminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
+
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
   const guard = botGuard(req, 'create-customer-portal');
@@ -60,8 +78,18 @@ serve(async (req) => {
     let customerId = profile?.stripe_customer_id || null;
     if (!customerId) {
       if (!user.email) throw new Error('Account email required for billing portal');
-      const existing = await stripe.customers.list({ email: user.email, limit: 1 });
-      const customer = existing.data[0] || await stripe.customers.create({
+      // Bind by VERIFIED identity, never bare email: only reuse an existing
+      // customer whose metadata.supabase_user_id matches the JWT-verified user
+      // (covers a prior create-checkout customer whose profile write raced).
+      // An email-only match could be someone else's customer — opening the
+      // billing portal on it would expose their payment methods and let this
+      // caller cancel their subscription. Otherwise create a fresh customer
+      // keyed to the user id, matching create-checkout's own path.
+      const existing = await stripeApi.customers.list({ email: user.email, limit: 10 });
+      const identityMatch = existing.data.find(
+        (c: { metadata?: Record<string, string> }) => c.metadata?.supabase_user_id === user.id,
+      );
+      const customer = identityMatch ?? await stripeApi.customers.create({
         email: user.email,
         metadata: { supabase_user_id: user.id },
       });
@@ -73,7 +101,7 @@ serve(async (req) => {
     }
 
     const clientUrl = Deno.env.get('CLIENT_URL') || 'http://localhost:5173';
-    const session = await stripe.billingPortal.sessions.create({
+    const session = await stripeApi.billingPortal.sessions.create({
       customer: customerId,
       return_url: `${clientUrl}?view=account`,
     });
@@ -93,4 +121,8 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — same as create-checkout.
+serve((req) => handleCreateCustomerPortal(req));

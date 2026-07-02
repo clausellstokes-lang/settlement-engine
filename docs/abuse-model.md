@@ -47,22 +47,62 @@ before exposing new attack surface.
 
 ### Edge functions
 
-All four edge functions (`stripe-webhook`, `create-checkout`,
-`generate-narrative`, `admin-actions`) inherit the same defense
-pattern as of Tier 0.10:
+There are **13** edge functions under `supabase/functions/` (excluding
+`_shared/`). They split by auth posture, but share one baseline defense
+as of Tier 0.10.
 
-- **Obvious-bot guard.** `_shared/requestMeta.ts#botGuard` rejects
-  obvious scrapers (curl / python-requests / headless browsers / bot
-  UAs) with 403 before any other work. Real users are never blocked;
-  the bot pattern list is deliberately conservative.
+**Bot guard (baseline, all functions except `stripe-webhook`).**
+`_shared/requestMeta.ts#botGuard` rejects obvious scrapers (curl /
+python-requests / headless browsers / bot UAs) with 403 before any
+other work. Real users are never blocked; the bot pattern list is
+deliberately conservative. `stripe-webhook` skips it because Stripe's
+own signed POST is the trust anchor there, not the UA.
+
 - **Allow-list.** Stripe's own UA, monitoring services (UptimeRobot,
   Pingdom, BetterStack), Supabase health checks bypass the bot
   guard so legitimate infra isn't broken.
-- **Auth gate.** Every function that takes user input requires either
-  a Supabase JWT (`create-checkout`, `generate-narrative`,
-  `admin-actions`) or a verified Stripe signature (`stripe-webhook`).
-- **Role gate.** `admin-actions` additionally requires
+
+**Authenticated (`verify_jwt = true`) — require a Supabase user JWT.**
+The platform gate is pinned on in `config.toml` as defense-in-depth,
+and each handler re-checks auth (and role, where relevant) internally:
+
+- `create-checkout`, `create-customer-portal` — money paths; derive the
+  user from `auth.getUser()`, never from the request body.
+- `generate-narrative`, `generate-chronicle` — AI overlay / chronicle
+  passes; JWT-gated so AI credits bill only authenticated callers.
+- `account-actions` — self-service account mutations; per-action role /
+  ownership checks inside.
+- `admin-actions` — additionally requires
   `profile.role IN ('developer', 'admin')`.
+
+**Self-authenticating / anonymous (`verify_jwt = false`).** The platform
+JWT gate is deliberately off — these authenticate themselves (a
+signature, a shared secret, or a rate-limited anon path). Each is pinned
+false in `config.toml` (a forgotten `--no-verify-jwt` can't silently
+flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
+
+- `stripe-webhook` — verifies the Stripe **signature**
+  (`constructEvent`) before any metadata read; a user JWT would be
+  meaningless here.
+- `verify-single-dossier` — trusts the **Stripe session id**, not auth.
+- `ingest-events` — public analytics sink; anonymous traffic is the
+  point. It stitches an optional JWT when present but must accept
+  no-JWT posts; defends with the bot guard + a per-actor/device/IP rate
+  limit + a server-side payload allowlist.
+- `log-client-error` — anonymous crash sink (`sendBeacon` can't set an
+  `Authorization` header and the crash may precede auth); bot-guarded,
+  payload length-bounded, IP hashed, per-IP rate-limited.
+- `analytics-export` — cron-invoked (pg_net) export authenticated by the
+  `x-export-secret` shared secret; fail-closed on a wrong/missing
+  secret.
+- `send-email` — per-template self-auth: authenticated templates read
+  the recipient from `auth.getUser()`; the anonymous `cap_warning` path
+  takes an explicit recipient behind a per-IP / per-recipient rate limit
+  + bot guard.
+- `auth-recovery` — logged-out password recovery (the caller has no JWT
+  because they forgot their password); defended by a hard per-IP +
+  per-email rate limit, the bot guard, JSON-only parsing, and
+  service-role-only recovery RPCs (066).
 
 ### Database (Postgres + RLS)
 

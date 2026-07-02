@@ -113,6 +113,35 @@ describe('applyRenameToAiData()', () => {
     expect(out.aiSettlement.thesis).toBe('Cdef (the prophet) is here.');
   });
 
+  test('renames names that start with a non-ASCII letter', () => {
+    // Regression: `\b` is ASCII-only, so "Éowyn" (leading non-ASCII letter)
+    // never matched and left stale prose behind.
+    const aiData = { aiSettlement: { thesis: "Éowyn rules. Éowyn's hall stands." } };
+    const out = applyRenameToAiData(aiData, 'Éowyn', 'Bran');
+    expect(out.aiSettlement.thesis).toBe("Bran rules. Bran's hall stands.");
+  });
+
+  test('renames names that end with a non-ASCII letter', () => {
+    const aiData = { aiSettlement: { thesis: 'José leads and Zoë follows.' } };
+    let out = applyRenameToAiData(aiData, 'José', 'Rue');
+    out = applyRenameToAiData(out, 'Zoë', 'Wren');
+    expect(out.aiSettlement.thesis).toBe('Rue leads and Wren follows.');
+  });
+
+  test('does not rewrite partial matches around a non-ASCII name', () => {
+    // "Björns" (plural) must not be touched when renaming "Björn".
+    const aiData = { aiSettlement: { thesis: 'Björn and the Björns march.' } };
+    const out = applyRenameToAiData(aiData, 'Björn', 'Kai');
+    expect(out.aiSettlement.thesis).toBe('Kai and the Björns march.');
+  });
+
+  test('inserts the new name verbatim even when it contains $', () => {
+    // Function-form replacement: "$&" etc. in a user name are not special.
+    const aiData = { aiSettlement: { thesis: 'Pay Rusk today.' } };
+    const out = applyRenameToAiData(aiData, 'Rusk', 'The $ Guild');
+    expect(out.aiSettlement.thesis).toBe('Pay The $ Guild today.');
+  });
+
   test('walks arrays inside narrative blobs', () => {
     const aiData = {
       aiSettlement: {

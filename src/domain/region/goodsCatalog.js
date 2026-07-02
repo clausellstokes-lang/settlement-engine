@@ -300,18 +300,50 @@ function buildAliasIndex() {
 
 const ALIAS_INDEX = buildAliasIndex();
 
+// ── fuzzyMatch is on the per-tick hot path (regional graph derivation calls
+// normalizeGood over every settlement's trade lists, every kernel tick) ──────
+// Two pure caches keep it deterministic AND stop the re-tokenization churn:
+//   • FUZZY_CANDIDATES — the static catalog's candidate token lists, computed
+//     ONCE (the catalog is frozen, so tokenizing it per call was pure waste).
+//     The flat array preserves the original scan order (entries in catalog
+//     order, id → label → aliases within each), so best-match tie-breaking
+//     ("first strictly-better score wins") is byte-identical.
+//   • FUZZY_MEMO — result per comparable(label) key (the ONLY input the match
+//     depends on), null misses included. Same input → same output by
+//     construction, so this cannot shift results — it only skips the rescan.
+//     Bounded: user content can mint unbounded custom labels, so the memo
+//     clears past FUZZY_MEMO_MAX rather than growing without limit.
+/** @type {{ entry: any, tokens: string[] }[] | null} */
+let FUZZY_CANDIDATES = null;
+
+function fuzzyCandidates() {
+  if (!FUZZY_CANDIDATES) {
+    FUZZY_CANDIDATES = [];
+    for (const entry of Object.values(GOOD_CATALOG)) {
+      for (const candidate of [entry.id, entry.label, ...(entry.aliases || [])]) {
+        const tokens = tokensOf(candidate);
+        if (tokens.length) FUZZY_CANDIDATES.push({ entry, tokens });
+      }
+    }
+  }
+  return FUZZY_CANDIDATES;
+}
+
+const FUZZY_MEMO_MAX = 512;
+/** @type {Map<string, any>} */
+const FUZZY_MEMO = new Map();
+
 /** @param {any} label */
 function fuzzyMatch(label) {
-  const labelTokens = tokensOf(label);
-  if (!labelTokens.length) return null;
-  let best = null;
-  let bestScore = 0;
+  const key = comparable(label);
+  if (FUZZY_MEMO.has(key)) return FUZZY_MEMO.get(key);
 
-  for (const entry of Object.values(GOOD_CATALOG)) {
-    const candidates = [entry.id, entry.label, ...(entry.aliases || [])];
-    for (const candidate of candidates) {
-      const candidateTokens = tokensOf(candidate);
-      if (!candidateTokens.length) continue;
+  const labelTokens = tokensOf(label);
+  let result = null;
+  if (labelTokens.length) {
+    let best = null;
+    let bestScore = 0;
+    for (const { entry, tokens: candidateTokens } of fuzzyCandidates()) {
       const overlap = labelTokens.filter(t =>
         candidateTokens.some(c => c === t || c.startsWith(t) || t.startsWith(c))
       ).length;
@@ -321,9 +353,12 @@ function fuzzyMatch(label) {
         bestScore = score;
       }
     }
+    result = bestScore >= 0.42 ? best : null;
   }
 
-  return bestScore >= 0.42 ? best : null;
+  if (FUZZY_MEMO.size >= FUZZY_MEMO_MAX) FUZZY_MEMO.clear();
+  FUZZY_MEMO.set(key, result);
+  return result;
 }
 
 // Exact-alias resolution for subsumption/reconciliation: a catalog entry only

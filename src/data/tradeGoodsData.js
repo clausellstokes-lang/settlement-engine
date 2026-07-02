@@ -344,48 +344,82 @@ export const EXPORT_GOODS_BY_TIER = {
 };
 
 /**
- * Import goods needed by settlement tier
- * Structured by what tier needs from what tier
+ * Import goods needed by settlement tier.
+ *
+ * Shape: tier → goodName → props (mirrors EXPORT_GOODS_BY_TIER). Each good
+ * carries an optional `source` tag (`basic` | `fromHigher` | `fromHinterland`
+ * | `fromCityOrMetropolis` | `fromMetropolis`) recording which supplier the
+ * import comes from — previously encoded as an extra layer of bucket keys.
+ *
+ * That bucket-nested shape was a landmine: customRegistry's prebuilt-catalog
+ * enumeration walks tier → key → props expecting `key` to be a good name, so
+ * the bucket labels (`basic`, `fromHinterland`, …) leaked into the Compendium
+ * as fake trade goods while the real imports (arrays) were dropped. Flattening
+ * to good-name keys fixes the enumeration and keeps the supplier metadata via
+ * `source`. Nothing consumes the bucket layout for generation — the economic
+ * generator keeps its own local UPGRADE_GOODS_BY_TIER pools.
  */
 export const IMPORT_GOODS_BY_TIER = {
   thorp: {
-    basic: [
-      { name: "Salt", category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, desc: "Food preservation" },
-      { name: "Metal tools", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Simple implements" },
-      { name: "Cloth", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Basic textiles" },
-    ],
+    Salt: { category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, source: "basic", desc: "Food preservation" },
+    "Metal tools": { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Simple implements" },
+    Cloth: { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Basic textiles" },
   },
 
   hamlet: {
-    basic: [
-      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
-      { name: "Salt", category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, desc: "Food preservation" },
-      { name: "Quality cloth", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Better textiles" },
-    ],
+    "Metal goods": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "basic",
+      desc: "Tools, nails, horseshoes",
+    },
+    Salt: { category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, source: "basic", desc: "Food preservation" },
+    "Quality cloth": { category: GOODS_CATEGORIES.MANUFACTURED, on: true, source: "basic", desc: "Better textiles" },
   },
 
   village: {
-    basic: [
-      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
-      {
-        name: "Quality cloth and clothing",
-        category: GOODS_CATEGORIES.MANUFACTURED,
-        on: true,
-        desc: "Finished garments",
-      },
-      {
-        name: "Salt for preservation",
-        category: GOODS_CATEGORIES.FOOD_PROCESSED,
-        on: true,
-        desc: "Essential preservative",
-      },
-      { name: "Specialized tools", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Advanced implements" },
-    ],
-    fromHigher: [
-      { name: "Legal services", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Contracts, court access" },
-      { name: "Advanced medical care", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Skilled physicians" },
-      { name: "Manufactured goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Wide variety of crafts" },
-    ],
+    "Metal goods": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "basic",
+      desc: "Tools, nails, horseshoes",
+    },
+    "Quality cloth and clothing": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "basic",
+      desc: "Finished garments",
+    },
+    "Salt for preservation": {
+      category: GOODS_CATEGORIES.FOOD_PROCESSED,
+      on: true,
+      source: "basic",
+      desc: "Essential preservative",
+    },
+    "Specialized tools": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "basic",
+      desc: "Advanced implements",
+    },
+    "Legal services": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromHigher",
+      desc: "Contracts, court access",
+    },
+    "Advanced medical care": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromHigher",
+      desc: "Skilled physicians",
+    },
+    "Manufactured goods": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "fromHigher",
+      desc: "Wide variety of crafts",
+    },
   },
 
   town: {
@@ -393,54 +427,114 @@ export const IMPORT_GOODS_BY_TIER = {
       category: GOODS_CATEGORIES.TRADE,
       desc: "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
     },
-    fromCityOrMetropolis: [
-      { name: "Luxury textiles", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Fine cloth, silk" },
-      { name: "Spices and exotic dyes", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Imported rarities" },
-      { name: "Banking services", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Letters of credit" },
-      { name: "Advanced legal expertise", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Specialized law" },
-      { name: "Rare materials", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Exotic goods" },
-    ],
-    fromHinterland: [
-      { name: "Food surplus", category: GOODS_CATEGORIES.AGRICULTURAL, on: true, desc: "Agricultural hinterland" },
-      { name: "Raw wool and hides", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "For processing" },
-      { name: "Timber", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Construction material" },
-    ],
+    "Luxury textiles": {
+      category: GOODS_CATEGORIES.LUXURY,
+      on: true,
+      source: "fromCityOrMetropolis",
+      desc: "Fine cloth, silk",
+    },
+    "Spices and exotic dyes": {
+      category: GOODS_CATEGORIES.LUXURY,
+      on: true,
+      source: "fromCityOrMetropolis",
+      desc: "Imported rarities",
+    },
+    "Banking services": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromCityOrMetropolis",
+      desc: "Letters of credit",
+    },
+    "Advanced legal expertise": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromCityOrMetropolis",
+      desc: "Specialized law",
+    },
+    "Rare materials": {
+      category: GOODS_CATEGORIES.LUXURY,
+      on: true,
+      source: "fromCityOrMetropolis",
+      desc: "Exotic goods",
+    },
+    "Food surplus": {
+      category: GOODS_CATEGORIES.AGRICULTURAL,
+      on: true,
+      source: "fromHinterland",
+      desc: "Agricultural hinterland",
+    },
+    "Raw wool and hides": {
+      category: GOODS_CATEGORIES.RAW_MATERIALS,
+      on: true,
+      source: "fromHinterland",
+      desc: "For processing",
+    },
+    Timber: {
+      category: GOODS_CATEGORIES.RAW_MATERIALS,
+      on: true,
+      source: "fromHinterland",
+      desc: "Construction material",
+    },
   },
 
   city: {
-    fromMetropolis: [
-      { name: "International banking", category: GOODS_CATEGORIES.SERVICES, on: true, desc: "Global connections" },
-      { name: "Highest luxury goods", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Rarities and masterworks" },
-      {
-        name: "Political legitimacy",
-        category: GOODS_CATEGORIES.SERVICES,
-        on: true,
-        desc: "Royal/imperial connections",
-      },
-    ],
-    fromHinterland: [
-      { name: "Bulk food", category: GOODS_CATEGORIES.AGRICULTURAL, on: true, desc: "Massive agricultural needs" },
-      { name: "Raw materials", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Ore, timber, wool" },
-      {
-        name: "Basic goods for resale",
-        category: GOODS_CATEGORIES.MANUFACTURED,
-        on: true,
-        desc: "Market redistribution",
-      },
-    ],
+    "International banking": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromMetropolis",
+      desc: "Global connections",
+    },
+    "Highest luxury goods": {
+      category: GOODS_CATEGORIES.LUXURY,
+      on: true,
+      source: "fromMetropolis",
+      desc: "Rarities and masterworks",
+    },
+    "Political legitimacy": {
+      category: GOODS_CATEGORIES.SERVICES,
+      on: true,
+      source: "fromMetropolis",
+      desc: "Royal/imperial connections",
+    },
+    "Bulk food": {
+      category: GOODS_CATEGORIES.AGRICULTURAL,
+      on: true,
+      source: "fromHinterland",
+      desc: "Massive agricultural needs",
+    },
+    "Raw materials": {
+      category: GOODS_CATEGORIES.RAW_MATERIALS,
+      on: true,
+      source: "fromHinterland",
+      desc: "Ore, timber, wool",
+    },
+    "Basic goods for resale": {
+      category: GOODS_CATEGORIES.MANUFACTURED,
+      on: true,
+      source: "fromHinterland",
+      desc: "Market redistribution",
+    },
   },
 
   metropolis: {
-    basic: [
-      {
-        name: "Massive food requirements",
-        category: GOODS_CATEGORIES.AGRICULTURAL,
-        on: true,
-        desc: "Regional network",
-      },
-      { name: "Raw materials", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Entire regional supply" },
-      { name: "Luxury imports", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "From distant lands" },
-    ],
+    "Massive food requirements": {
+      category: GOODS_CATEGORIES.AGRICULTURAL,
+      on: true,
+      source: "basic",
+      desc: "Regional network",
+    },
+    "Raw materials": {
+      category: GOODS_CATEGORIES.RAW_MATERIALS,
+      on: true,
+      source: "basic",
+      desc: "Entire regional supply",
+    },
+    "Luxury imports": {
+      category: GOODS_CATEGORIES.LUXURY,
+      on: true,
+      source: "basic",
+      desc: "From distant lands",
+    },
   },
 };
 

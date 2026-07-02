@@ -6,6 +6,7 @@ import { sans, TabIntro } from '../Primitives';
 import {useIsMobileTab} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
+import { prosperityRank } from '../../../data/constants.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
 
@@ -136,7 +137,16 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId: _saveId = n
   const hasContent = !!displayNarrative;
 
   const tierLabel     = ctx.tierLabel;
-  const prospColor    = ctx.prospBand === 'prosperous' ? swatch['#1A5A28'] : ctx.prospBand === 'comfortable' ? swatch['#A0762A'] : ctx.prospBand === 'subsistence' ? '#8a4010' : swatch['#8B1A1A'];
+  // Rank on the canonical prosperity vocabulary (Subsistence..Wealthy, 0..6) so
+  // every band gets the right signal. Matching hand-typed strings meant the
+  // top bands (Wealthy, and Moderate) fell through to danger red.
+  const prospRank     = prosperityRank(ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1));
+  const prospColor    =
+    prospRank >= 5 ? swatch['#1A5A28'] :   // Prosperous, Wealthy — green
+    prospRank >= 3 ? swatch['#A0762A'] :   // Moderate, Comfortable — amber
+    prospRank >= 1 ? '#8a4010' :           // Struggling, Poor — brown
+    prospRank === 0 ? swatch['#8B1A1A'] :  // Subsistence — danger red
+    swatch['#8B1A1A'];                     // unknown/unrecognized — danger red
   const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
   const safetyColor   = ctx.safetyScore >= 70 ? swatch['#1A5A28'] : ctx.safetyScore >= 50 ? swatch['#A0762A'] : ctx.safetyScore >= 30 ? '#8a4010' : swatch['#8B1A1A'];
   const foodLabel     =

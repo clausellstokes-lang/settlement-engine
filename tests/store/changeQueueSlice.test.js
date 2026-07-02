@@ -264,6 +264,70 @@ describe('changeQueueSlice — flush', () => {
     expect(saves.update).not.toHaveBeenCalled();
   });
 
+  test('an order enqueued DURING the flush persist window survives the commit (no silent discard)', async () => {
+    // Regression: queueChange is not gated on changeQueueFlushing, so an Apply
+    // click landing in the flush's persist await window stages a new order the
+    // replay never saw. The old success path deleted the WHOLE queue key,
+    // silently discarding it. The flush must clear only the replayed orders.
+    store.getState().queueChange('save_1', {
+      type: 'event', humanLabel: 'Add tavern',
+      payload: { event: { id: 'e1', type: 'ADD_INSTITUTION', targetId: 'tavern', payload: { label: 'Tavern', category: 'civic' } } },
+    });
+    let lateId = null;
+    saves.update.mockImplementationOnce(async () => {
+      // Mid-persist enqueue — the flush is awaiting this very write.
+      lateId = store.getState().queueChange('save_1', {
+        type: 'event', humanLabel: 'Add smithy',
+        payload: { event: { id: 'e2', type: 'ADD_INSTITUTION', targetId: 'smithy', payload: { label: 'Smithy', category: 'craft' } } },
+      });
+      return true;
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(true);
+    expect(res.committed).toBe(1); // only the replayed order counts
+    // The late order is STILL staged for the next commit, not silently dropped.
+    const remaining = store.getState().listQueuedChanges('save_1');
+    expect(remaining.map(o => o.id)).toEqual([lateId]);
+    // …and it was NOT applied by this flush (one timeline entry, not two).
+    expect(store.getState().eventLog).toHaveLength(1);
+    expect(store.getState().eventLog[0].event.id).toBe('e1');
+  });
+
+  test('a failed persist does NOT clobber a settlement opened mid-flush (guarded live-view rollback)', async () => {
+    // Regression: hydrateFromSave has no changeQueueFlushing guard, so the user
+    // can open save B during the flush's persist await window. The old catch
+    // unconditionally restored save A's pre-flush snapshot into the live view,
+    // overwriting save B. The rollback must re-check activeSaveId (the
+    // undoLastPulse precedent) and leave the live view alone on a switch —
+    // while STILL rolling back save A's id-keyed mirror row.
+    const preMirror = store.getState().savedSettlements.find(s => s.id === 'save_1');
+    const preInstitutions = preMirror.settlement.institutions.length;
+    store.getState().queueChange('save_1', {
+      type: 'event', humanLabel: 'Add tavern',
+      payload: { event: { id: 'e1', type: 'ADD_INSTITUTION', targetId: 'tavern', payload: { label: 'Tavern', category: 'civic' } } },
+    });
+    const saveB = { ...fixture(), name: 'Mossbridge' };
+    saves.update.mockImplementationOnce(async () => {
+      // Mid-persist switch: the user opens save B (hydrateFromSave flips the
+      // live view) while the flush awaits this write — which then fails.
+      store.setState({ activeSaveId: 'save_2', settlement: saveB, eventLog: [], systemState: null });
+      throw new Error('cloud down'); // persistSaveUpdate resolves false
+    });
+
+    const res = await store.getState().flushQueue('save_1');
+    expect(res.ok).toBe(false);
+    // Save B's live view survives — NOT clobbered with save A's snapshot.
+    expect(store.getState().activeSaveId).toBe('save_2');
+    expect(store.getState().settlement.name).toBe('Mossbridge');
+    // Save A's half-applied mirror row was still rolled back (id-keyed).
+    const mirrorAfter = store.getState().savedSettlements.find(s => s.id === 'save_1');
+    expect(mirrorAfter.settlement.institutions.length).toBe(preInstitutions);
+    // The queue survives the failure, retryable once save A is reopened.
+    expect(store.getState().listQueuedChanges('save_1')).toHaveLength(1);
+    expect(store.getState().changeQueueFlushing).toBe(false);
+  });
+
   test('recordCanonFlavorEntry is a no-op off canon (draft never logs)', () => {
     store.setState({ phase: 'draft' });
     const recorded = store.getState().recordCanonFlavorEntry({

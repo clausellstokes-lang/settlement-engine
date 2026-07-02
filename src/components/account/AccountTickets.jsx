@@ -17,7 +17,7 @@
  * RPC enforces visibility, so there is nothing to hide client-side — the
  * thread payload simply doesn't contain them.
  */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
@@ -101,6 +101,12 @@ export default function AccountTickets() {
       setLoading(false);
     }
   }, []);
+
+  // Load the caller's tickets on mount — otherwise a user with open (even
+  // waiting_on_user) tickets is shown a definitive "No tickets yet" until they
+  // manually hit Refresh. The fetch is RLS/RPC-scoped to the caller server-side.
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- mount data-load: loadTickets sets the spinner/list on open (same pattern as GalleryMaps/AdminPanel)
+  useEffect(() => { loadTickets(); }, [loadTickets]);
 
   const openThread = useCallback(async (ticket) => {
     setActive(ticket); setView('thread'); setEvents([]); setError(null);

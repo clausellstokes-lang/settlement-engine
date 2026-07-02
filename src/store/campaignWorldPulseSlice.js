@@ -124,6 +124,16 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // concurrent call sees its campaign already in flight and no-ops. Session-scoped
   // like pulseUndoStack (an array, not a Set, so it stays Immer-/persist-friendly);
   // a reload clears it. Mirrors aiLoading / changeQueueFlushing.
+  //
+  // The SAME mark also gates every OTHER pulse mutator on this campaign
+  // (canonize / rules / apply-proposal / dismiss-proposal / undo). The multi-tick
+  // advance yields to the event loop between tick batches, and its Phase-2 commit
+  // replaces worldState WHOLESALE from clones lifted BEFORE that yield — so a
+  // mutation landing during the await would be silently reverted (and its persist
+  // clobbered by the advance's). Each mutator therefore no-ops with its existing
+  // "nothing changed" value (null / false) while its campaign is advancing.
+  // recordPartyImpact is deliberately NOT gated: advanceCampaignWorld itself
+  // replays drained party impacts through it while still marked in flight.
   advanceInFlight: [],
   /** Is an advanceCampaignWorld currently running for this campaign? Drives the
    *  disabled state of the Advance button so a second click can't fire mid-tick. */
@@ -171,6 +181,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   canonizeCampaignWorld: async (campaignId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. A
+    // mutation during a running advance would be reverted by its Phase-2 commit.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let campaignPersist = /** @type {any} */ (null);
     let settlementCount = 0;
     let regionalSnapshot = /** @type {any} */ (null);
@@ -194,6 +207,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   updateCampaignSimulationRules: async (campaignId, patch = {}) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. Rules
+    // edited mid-advance would be silently reverted by the Phase-2 commit (the
+    // running interval computed from the OLD rules), so block the write instead.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let campaignPersist = /** @type {any} */ (null);
     let normalizedRules = /** @type {any} */ (null);
     const now = new Date().toISOString();
@@ -821,6 +838,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   applyWorldPulseProposal: async (campaignId, proposalId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above.
+    // (WorldPulsePanel also hides this control while advancing; the store seam
+    // is the layer that must hold regardless of which surface calls in.)
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -872,6 +893,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // (resolve a stressor, broker/inflame a relationship, clear/impose a
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
+  //
+  // Deliberately NOT gated on isAdvanceInFlight (unlike the other pulse
+  // mutators): advanceCampaignWorld replays its drained party impacts through
+  // this action while its campaign is still marked in flight.
   recordPartyImpact: async (campaignId, action) => {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
@@ -917,6 +942,8 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above.
+    if (get().isAdvanceInFlight(campaignId)) return null;
     let proposal = /** @type {any} */ (null);
     let dismissDecision = /** @type {any} */ (null);
     let campaignPersist = /** @type {any} */ (null);
@@ -963,6 +990,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * an advance was undone. Session-scoped: a reload clears the stack.
    */
   undoLastPulse: async (campaignId) => {
+    // Advance-concurrency guard — see the advanceInFlight contract above. An
+    // undo popped mid-advance would restore a PRIOR tick under the running
+    // interval, whose Phase-2 commit then re-lands the advanced world on top —
+    // the undo evaporates AND its snapshot is consumed. Undoing a PARKED pause
+    // (the documented abandon path) is unaffected: a paused advance has
+    // returned, so its campaign is no longer marked in flight.
+    if (get().isAdvanceInFlight(campaignId)) return false;
     const persistUpdates = [];
     let campaignPersist = null;
     let didUndo = false;

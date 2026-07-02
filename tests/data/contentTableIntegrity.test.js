@@ -85,6 +85,20 @@ describe('NAMING_DATA arrays have no duplicate entries', () => {
     const arr = NAMING_DATA.slavic.settlementSuffixes;
     expect(new Set(arr).size).toBe(arr.length);
   });
+
+  test('no name embeds an ALL-CAPS identifier token (find/replace corruption)', () => {
+    // A name value should never contain a screaming-snake identifier fragment
+    // like `STRESS_TYPE_MAP` — that only happens when a symbol gets spliced into
+    // a literal during a find/replace or paste (e.g. "STRESS_TYPE_MAPðla").
+    const identifierToken = /[A-Z]{2,}_[A-Z]/;
+    const offenders = [];
+    for (const [path, arr] of stringArrays) {
+      for (const value of arr) {
+        if (identifierToken.test(value)) offenders.push(`${path}: ${value}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
 });
 
 describe('required institutions declare an explicit baseChance', () => {

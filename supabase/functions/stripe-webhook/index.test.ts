@@ -103,6 +103,51 @@ Deno.test('credit grant trusts ONLY session.metadata.credits, not smuggled body 
   assertEquals((grant!.args as { amount: number }).amount, 10);            // the metadata value, not 99999
 });
 
+// ── Async payment methods (payment_status guard) ─────────────────────────────
+// Delayed-notification methods (ACH debit, some wallets) fire
+// checkout.session.completed with payment_status='unpaid' BEFORE the money
+// settles — fulfillment must wait for checkout.session.async_payment_succeeded.
+
+Deno.test('an UNPAID checkout.session.completed does NOT fulfil (no grant, no upgrade)', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' }, { payment_status: 'unpaid' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);                                           // ack — Stripe should NOT retry
+  assertEquals(stub.calls.rpc.length, 0);                                  // no credit grant
+  assertEquals(stub.calls.authUpdates.length, 0);                          // no tier change
+  assertEquals(stub.calls.profileUpdates.length, 0);
+});
+
+Deno.test('an UNPAID premium checkout does NOT upgrade the user', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { payment_status: 'unpaid' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.authUpdates.length, 0);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+});
+
+Deno.test('checkout.session.async_payment_succeeded fulfils once the async payment settles', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_async_1', type: 'checkout.session.async_payment_succeeded',
+    data: { object: { id: 'cs_async_1', payment_status: 'paid', metadata: { supabase_user_id: 'u1', credits: '60' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits');
+  assertEquals(grant !== undefined, true);
+  assertEquals((grant!.args as { amount: number }).amount, 60);
+});
+
+Deno.test('a PAID checkout.session.completed still fulfils (guard only blocks unpaid)', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { payment_status: 'paid' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.authUpdates.length, 1);
+});
+
 // ── Monthly allowance (invoice.paid / invoice.payment_succeeded) ──────────────
 // Subscription renewals grant 30 expiring credits/month. Stripe delivers
 // at-least-once AND fires invoice.paid + invoice.payment_succeeded for the same
@@ -331,4 +376,79 @@ Deno.test('a REDELIVERED delete on an already-free user is a no-op (no retention
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(res.status, 200);
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // idempotent — not re-downgraded
+});
+
+// ── Email-fallback profile binding: ILIKE must be EXACT, never a pattern ─────
+// findUserIdForStripeCustomer falls back to email matching when no profile has
+// the Stripe customer id. ILIKE treats %/_/\ as wildcards, so an unescaped
+// email could bind a money event to the WRONG profile. The handler must escape
+// the metacharacters (and route `*`, PostgREST's unescapable wildcard, to eq).
+
+/** Stub where the customer-id lookup MISSES and the email fallback resolves,
+ *  recording every email filter (ilike pattern / eq value) the handler issues. */
+function makeEmailFallbackStub() {
+  const emailFilters: Array<{ op: string; value: string }> = [];
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => ({
+      select: (_cols?: string) => {
+        let matchedEmail = false;
+        const builder = {
+          eq: (col: string, val: string) => {
+            if (table === 'profiles' && col === 'email') { emailFilters.push({ op: 'eq', value: val }); matchedEmail = true; }
+            return builder;
+          },
+          ilike: (col: string, pattern: string) => {
+            if (table === 'profiles' && col === 'email') { emailFilters.push({ op: 'ilike', value: pattern }); matchedEmail = true; }
+            return builder;
+          },
+          maybeSingle: () => {
+            // The stripe_customer_id lookup misses; only the email match resolves.
+            if (table === 'profiles' && matchedEmail) {
+              return Promise.resolve({ data: { id: 'email_user', is_founder: false, stripe_subscription_id: 'sub_1', tier: 'premium' }, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
+        };
+        return builder;
+      },
+      update: () => {
+        // chainable + awaitable, matching makeSubDeletedStub's update builder
+        // deno-lint-ignore no-explicit-any
+        const b: any = { eq: () => b, is: () => b, then: (res: (v: unknown) => unknown) => Promise.resolve({ error: null }).then(res) };
+        return b;
+      },
+    }),
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+  };
+  return { emailFilters, rpc, adminClient: () => client };
+}
+
+const invoiceEventForEmail = (email: string) =>
+  JSON.stringify({
+    id: 'evt_email_fallback', type: 'invoice.paid',
+    data: { object: { id: 'in_email', customer: 'cus_unbound', customer_email: email, billing_reason: 'subscription_cycle', subscription: 'sub_1', period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
+  });
+
+Deno.test('email fallback ESCAPES ILIKE metacharacters (%, _, \\) — exact match, not a pattern', async () => {
+  const stub = makeEmailFallbackStub();
+  const body = invoiceEventForEmail('a_b%c@x.com');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const ilikes = stub.emailFilters.filter((f) => f.op === 'ilike');
+  assertEquals(ilikes.length, 1);
+  assertEquals(ilikes[0].value, 'a\\_b\\%c@x.com');      // wildcards neutralized
+  assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), true);  // still binds + grants
+});
+
+Deno.test('an email containing * (PostgREST wildcard, unescapable in ilike) falls back to exact eq', async () => {
+  const stub = makeEmailFallbackStub();
+  const body = invoiceEventForEmail('star*man@x.com');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.emailFilters.some((f) => f.op === 'ilike'), false);       // never a pattern
+  const eqs = stub.emailFilters.filter((f) => f.op === 'eq');
+  assertEquals(eqs.length, 1);
+  assertEquals(eqs[0].value, 'star*man@x.com');
 });

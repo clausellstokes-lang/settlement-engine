@@ -64,6 +64,28 @@ schema-free deploy while the ledger is legitimately behind, set
 `VERCEL_ALLOW_MIGRATION_DRIFT=1` (proceeds with a loud warning). Verified through the
 real `decideDeploy` in `tests/build/ciGateHardening.test.js`.
 
+**Edge functions are the one UNGATED path to production — deploy them by hand,
+deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
+and the DB has the `applied-head.json` currency gate above, but edge functions ship
+via a bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from
+whatever your **local working tree** contains. Nothing checks that CI is green,
+nothing checks the tree is clean, and — unlike the migration ledger — nothing records
+which commit's functions are live. This matters because the edge layer IS the money +
+auth trust boundary (`stripe-webhook`, `create-checkout`, `auth-recovery`). Two
+consequences to guard against by discipline:
+
+- **Deploy only from a clean tree at a pushed, CI-green commit.** Before deploying any
+  function, confirm `git status` is clean and the commit you're on is the one CI passed
+  on `origin/master`. Deploying with local edits present ships bytes that were never
+  tested and that no reviewer saw. Note the deploying commit SHA in your deploy record
+  (there is no automated ledger to consult later).
+- **`npm run check:edge-behavior` is FAIL-OPEN on a missing toolchain.** It runs the
+  edge type-check + behavioral suite when `deno` is on `PATH`, but **exits 0 (skips)
+  when deno is absent** — so a green local run does NOT prove the edge functions were
+  exercised. Install deno so the pre-push hook actually gates them, and never treat a
+  "skipped" edge check as a pass. CI's separate `deno-tests` job is the real gate, which
+  is exactly why you must only deploy from a commit that job passed.
+
 **Local convenience.** `npm run check` mirrors CI's `check` job (deliberately excludes
 the Deno edge tests, which are CI's separate `deno-tests` job). To run EVERYTHING CI
 runs in one command locally, use `npm run check:full` (= `check` + `check:edge-behavior`).
@@ -214,6 +236,12 @@ npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 ```
 
 Deploy each function:
+
+> **This is the ungated path to production.** Unlike the client (fail-closed
+> CI gate) and the DB (migration-currency gate), nothing here checks CI is green
+> or the tree is clean, and nothing records the live commit. Deploy only from a
+> clean `git status` at a pushed, CI-green commit, and note the SHA — see "Edge
+> functions are the one UNGATED path to production" under *Gating production on CI*.
 
 ```bash
 npx supabase functions deploy stripe-webhook          # Stripe posts a signature, not a JWT

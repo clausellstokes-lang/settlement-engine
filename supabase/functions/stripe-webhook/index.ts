@@ -19,7 +19,11 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+// Pinned EXACT version (not the floating `@2`): deno.lock only constrains local/CI
+// deno tasks — at deploy time the edge runtime resolves the URL itself, so a
+// floating major on the money path could silently ship a different client than CI
+// tested. Keep in lockstep with deno.lock's resolution when upgrading.
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
@@ -145,11 +149,18 @@ async function findUserIdForStripeCustomer(
   }
   if (!email) return null;
 
-  const { data: profile } = await supabase
+  // Case-insensitive EXACT match — never a pattern. ILIKE treats %, _ and \ as
+  // wildcards, so an unescaped email like `a_b@x.com` could bind this money
+  // event (grants/downgrades) to the WRONG profile (`aXb@x.com`). Escape the
+  // SQL metacharacters. PostgREST additionally rewrites `*` in ilike values to
+  // `%` with no escape form, so for the rare email containing `*` fall back to
+  // case-sensitive exact equality rather than risk a wrong-profile match.
+  const baseQuery = () => supabase
     .from('profiles')
-    .select('id, is_founder, stripe_subscription_id, tier')
-    .ilike('email', email)
-    .maybeSingle();
+    .select('id, is_founder, stripe_subscription_id, tier');
+  const { data: profile } = email.includes('*')
+    ? await baseQuery().eq('email', email).maybeSingle()
+    : await baseQuery().ilike('email', email.replace(/([\\%_])/g, '\\$1')).maybeSingle();
   if (!profile?.id) return null;
 
   if (customerId) {
@@ -280,8 +291,28 @@ export async function handleStripeWebhook(
   const supabase = (deps.adminClient ?? adminClient)();
 
   switch (event.type) {
-    case 'checkout.session.completed': {
+    // async_payment_succeeded is the settlement signal for delayed-notification
+    // methods (ACH debit, some wallets): those sessions fire `completed` with
+    // payment_status='unpaid' (deferred below), then this event once the funds
+    // actually clear. Same fulfillment branch — the session-id idempotency in
+    // grantCreditsForSessionOnce makes the two deliveries safe to share, and the
+    // premium/founder profile writes are same-value re-runs.
+    case 'checkout.session.completed':
+    case 'checkout.session.async_payment_succeeded': {
       const session = event.data.object as Stripe.Checkout.Session;
+
+      // Do NOT fulfil unsettled money. `completed` only means the checkout flow
+      // finished; with async payment methods the charge can still fail, so
+      // granting credits/premium here would hand out goods for money that never
+      // arrives. Ack (200) and wait for async_payment_succeeded — a non-2xx would
+      // just make Stripe redeliver the same unpaid event. 'paid' and
+      // 'no_payment_required' (trials, 100%-off promos) both fulfil; an absent
+      // payment_status (older API payloads) proceeds for back-compat.
+      if (session.payment_status === 'unpaid') {
+        console.log(`[stripe-webhook] session ${session.id} completed but unpaid — deferring fulfillment to async_payment_succeeded`);
+        break;
+      }
+
       const userId  = session.metadata?.supabase_user_id;
       const product = session.metadata?.product;
       const credits = parseInt(session.metadata?.credits || '0', 10);
