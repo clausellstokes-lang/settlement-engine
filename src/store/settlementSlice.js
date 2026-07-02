@@ -819,6 +819,20 @@ export const createSettlementSlice = (set, get) => ({
       throw genErr;
     }
     const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
+
+    // Sentinel re-gate — the pre-generation tier gate above deliberately lets
+    // 'random'/'custom' through (authSlice: the size isn't known until the
+    // engine resolves it) on the documented promise that the rolled tier is
+    // "re-gated at generation". Enforce that promise here: apply the same
+    // fail-closed check to the RESOLVED tier, so an anon (max 'town') can't
+    // mint a metropolis via Random or a typed custom population. Blocks
+    // BEFORE the state commit and the anon-cap spend, so a blocked roll
+    // costs nothing and the on-screen settlement is untouched.
+    if ((settType === 'random' || settType === 'custom') && !state.isTierAllowed(result?.tier)) {
+      console.warn(`Resolved tier "${result?.tier}" (from settType "${settType}") not allowed for current user tier.`);
+      return null;
+    }
+
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first

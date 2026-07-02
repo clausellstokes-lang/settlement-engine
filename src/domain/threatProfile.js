@@ -43,6 +43,7 @@
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
+import { canonStressors } from './canonicalAccessors.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -374,9 +375,7 @@ export function collectThreatSources(settlement) {
   }
 
   // 5. Stressors with threat-shaped tags / names
-  const stressors = Array.isArray(settlement.stressors) ? settlement.stressors
-                  : Array.isArray(settlement.stresses)  ? settlement.stresses
-                  : [];
+  const stressors = canonStressors(settlement);
   for (const stressor of stressors) {
     if (!stressor) continue;
     const text = String(stressor.name || stressor.type || stressor.label || stressor || '');

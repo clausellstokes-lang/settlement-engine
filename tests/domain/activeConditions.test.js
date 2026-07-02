@@ -369,6 +369,26 @@ describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
     expect(sev(tick(s0))).toBe(0.6);
   });
 
+  it('an undirected condition holds severity ACROSS ticks — the persisted status must not re-drift', () => {
+    // Regression: the drift correctly read the RAW status (undirected → 0),
+    // but the returned condition used to persist canonical.status (plague's
+    // template default 'worsening'), so from tick 2 onward severity climbed —
+    // the invented motion, merely delayed one tick. Persist a drift-neutral
+    // status instead so the flat promise holds every tick.
+    const s0 = { activeConditions: [{
+      archetype: 'plague', severity: 0.6,
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    }] };
+    const s1 = tick(s0);
+    const s2 = tick(s1);
+    const s3 = tick(s2);
+    expect(sev(s1)).toBe(0.6);
+    expect(sev(s2)).toBe(0.6);
+    expect(sev(s3)).toBe(0.6);
+    // And the persisted status is drift-neutral, not the template default.
+    expect(s1.activeConditions[0].status).toBe('stable');
+  });
+
   it('drift scales with the interval (week 0.25x, year 6x)', () => {
     const s0 = { activeConditions: [deriveActiveCondition({ archetype: 'plague', severity: 0.6 })] };
     expect(sev(tick(s0, 'one_week'))).toBeCloseTo(0.6 + 0.04 * 0.25);

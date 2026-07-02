@@ -78,6 +78,11 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // in src/config/pricing.js.
 const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
 
+// Founder Lifetime is advertised as "X of 500 seats remaining". Keep in sync
+// with `seatLimit` in src/config/pricing.js (the pricing-page counter reads the
+// same founder_seats_taken() RPC this gate does).
+const FOUNDER_SEAT_LIMIT = 500;
+
 /**
  * Build CORS headers from the shared allowlist (_shared/cors.ts). Fail-closed,
  * never '*' for this credentialed money endpoint; the shared list also accepts
@@ -170,6 +175,23 @@ export async function handleCreateCheckout(
       }
     } else if (!isAnonymousProduct) {
       throw new Error('Missing authorization header');
+    }
+
+    // Founder Lifetime seat gate — the advertised "X of 500 seats" contract is
+    // enforced HERE, not just displayed. founder_seats_taken() (migration 010)
+    // is the same counter the pricing page renders; once the cap is reached no
+    // new founder checkout session can be created. FAIL CLOSED on a counter
+    // error: blocking a sale we could have made beats selling seat 501 of an
+    // advertised-500 product. Two truly-concurrent checkouts at seat 499 can
+    // still race past this gate — that residual is a one-off refund, not a
+    // standing hole in the contract.
+    if (product === 'founder_lifetime') {
+      const { data: seatsTaken, error: seatErr } = await adminClient().rpc('founder_seats_taken');
+      if (seatErr) throw new Error(`Founder seat check failed: ${seatErr.message}`);
+      if (typeof seatsTaken !== 'number') throw new Error('Founder seat check returned no count');
+      if (seatsTaken >= FOUNDER_SEAT_LIMIT) {
+        throw new Error(`Founder Lifetime is sold out (${seatsTaken}/${FOUNDER_SEAT_LIMIT} seats taken)`);
+      }
     }
 
     const priceId = PRICE_MAP[product];

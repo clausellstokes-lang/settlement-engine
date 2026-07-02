@@ -823,7 +823,15 @@ export const createCampaignSlice = (set, get) => {
   },
 
   getCampaignForSettlement: (settlementId) => {
-    return get().campaigns.find(c => isCampaignActive(c) && c.settlementIds.includes(settlementId)) || null;
+    // String-normalized like every other membership scan (isSettlementClockBound /
+    // queueSettlementEvent / campaignSettlements): settlement ids are an
+    // acknowledged number/string mix, and an exact-match includes() here made
+    // this load-bearing resolver miss members the sibling scans found.
+    if (settlementId == null) return null;
+    const sid = String(settlementId);
+    return get().campaigns.find(
+      c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid),
+    ) || null;
   },
 
   // ── Campaign clock (Phase C) ────────────────────────────────────────────
@@ -837,8 +845,8 @@ export const createCampaignSlice = (set, get) => {
    * Is this settlement bound to the world-map clock? True when it is a member
    * of a campaign whose world is CANONIZED. Canon-only by product decision:
    * map placement is NOT required (the world pulse already simulates every
-   * canon member). Matches applyEvent's String-normalized membership scan, not
-   * the exact-match getCampaignForSettlement, so number/string id mixes resolve.
+   * canon member). Matches applyEvent's String-normalized membership scan (as
+   * getCampaignForSettlement now does too), so number/string id mixes resolve.
    */
   isSettlementClockBound: (settlementId) => {
     if (settlementId == null) return false;

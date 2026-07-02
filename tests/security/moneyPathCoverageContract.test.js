@@ -60,9 +60,28 @@ describe('money-path coverage contract — all three legs present and load-beari
   test('leg 3: the secrets-gated e2e spec still documents the live money journey (cannot be silently gutted)', () => {
     const rel = 'e2e/flow-b-auth-credits-ai.spec.js';
     const src = read(rel);
-    // The live leg references the journey it stands in for; keep those anchors present so
-    // deleting/hollowing the spec (which CI never runs) trips this guard instead.
-    requireAll(src, rel, ['credit', 'Stripe', 'webhook', 'narrative']);
+    // The old token set ('credit'/'Stripe'/'webhook'/'narrative') all occur in
+    // COMMENTS and describe-titles, so a gutted spec that kept only its header
+    // prose would still pass. Anchor instead on the STABLE boundary/API strings
+    // and driver calls that ONLY exist inside the live test BODIES — hollowing a
+    // body drops these even if the comment shell survives.
+    requireAll(src, rel, [
+      '4242 4242 4242 4242',    // the Stripe test card the checkout body fills — body-only
+      'get_credit_balance',     // the ledger-backed balance the body polls
+      'Generate Narrative',     // the AI-spend chokepoint the body clicks
+      'settledBalance',         // driver helper the live bodies call
+      'readBalance',            // driver helper the live bodies call
+    ]);
+    // The two load-bearing live cases must both be present (checkout→grant→spend
+    // decrement, and AI-failure refund) — the spec's whole reason to exist.
+    expect(
+      src.includes('decrements the real balance'),
+      `${rel} lost the checkout→grant→AI-spend decrement case`,
+    ).toBe(true);
+    expect(
+      src.includes('refunds the reserved credits'),
+      `${rel} lost the AI-failure refund case`,
+    ).toBe(true);
     expect(src.split('\n').length, `${rel} looks gutted`).toBeGreaterThan(80);
   });
 });

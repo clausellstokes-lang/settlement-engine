@@ -617,14 +617,31 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   // tick — a promote/demote churn loop at the boundary. Demotion leaves
   // population untouched (the population already fell; the tier is catching up).
   const promotedFloor = /** @type {any} */ (POPULATION_RANGES)[toTier]?.min || 0;
+  const currentPopulation = Math.round(Number(settlement.population) || 0);
   const nextPopulation = direction === 'promotion'
-    ? Math.max(Math.round(Number(settlement.population) || 0), promotedFloor)
-    : settlement.population;
+    ? Math.max(currentPopulation, promotedFloor)
+    : currentPopulation; // demotion leaves population untouched (already the rounded current value)
+  // The anti-churn floor bump is a deliberate (unconserved) mint — leave a
+  // populationHistory breadcrumb (same shape as applyPopulationOutcomeToSettlement's)
+  // so the chronicle/audit surfaces can see it instead of an invisible population jump.
+  const floorBump = direction === 'promotion' ? Math.max(0, nextPopulation - currentPopulation) : 0;
 
   return {
     ...settlement,
     tier: toTier,
     population: nextPopulation,
+    ...(floorBump > 0 ? {
+      populationHistory: [
+        ...(Array.isArray(settlement.populationHistory) ? settlement.populationHistory.slice(-11) : []),
+        {
+          tick: outcome.generatedAtTick ?? outcome.tick ?? null,
+          delta: floorBump,
+          population: nextPopulation,
+          reason: `Promotion to ${toTier} draws settlers up to the tier's population floor.`,
+          outcomeId: outcome.id,
+        },
+      ],
+    } : {}),
     config: {
       ...(settlement.config || {}),
       tier: toTier,

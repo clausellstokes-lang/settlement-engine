@@ -39,6 +39,11 @@ const STATUS_LABEL = {
 
 /** Invoke an account-actions edge action. Returns data or throws. */
 async function callAccount(body) {
+  // Single choke point for the null-supabase (unconfigured / mock) case: without
+  // this every create/open/reply path would deref supabase.functions and surface
+  // a raw "Cannot read properties of null" in the error banner. loadTickets
+  // already short-circuits on !supabase; this covers the write paths too.
+  if (!supabase) throw new Error('Support tickets are unavailable in this environment.');
   const { data, error } = await supabase.functions.invoke('account-actions', { body });
   if (error) throw error;
   if (data?.error) throw new Error(data.error);

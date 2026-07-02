@@ -504,8 +504,25 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
         // Cap PER campaign so churn in one campaign can't evict another's
         // history: drop only this campaign's oldest snapshot past the cap.
+        //
+        // Retained-memory diet: each snapshot is the FULL pre-pulse world
+        // (worldState + regional graph + wizard news + every member
+        // settlement), and up to PULSE_UNDO_CAP of them per campaign made the
+        // stack the store's largest retained-memory consumer as live object
+        // graphs (which Immer also deep-freezes on commit). Park the heavy
+        // body as ONE serialized string instead — same undo fidelity at a
+        // fraction of the retained bytes — keeping only the light fields the
+        // UI reads (campaignId / interval / tick) live. undoLastPulse
+        // re-parses the payload back to the capturePulseSnapshot shape.
         {
-          const next = [...(state.pulseUndoStack || []), preSnapshot];
+          const entry = {
+            campaignId: preSnapshot.campaignId,
+            tick: preSnapshot.tick,
+            interval: preSnapshot.interval ?? null,
+            now: preSnapshot.now,
+            payload: JSON.stringify(preSnapshot),
+          };
+          const next = [...(state.pulseUndoStack || []), entry];
           const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
           if (mineCount > PULSE_UNDO_CAP) {
             const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
@@ -1007,7 +1024,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         if (stack[i].campaignId === campaignId) { idx = i; break; }
       }
       if (idx === -1) return;
-      const snap = stack[idx];
+      // Stack entries park the heavy snapshot body as a serialized payload
+      // (see the push site's retained-memory note) — parse it back to the
+      // capturePulseSnapshot shape. Entries are only ever minted by the push
+      // site, so an unparseable payload can't happen in practice; if it ever
+      // does, drop the entry (so the Undo affordance doesn't dangle on it
+      // forever) and report no undo.
+      let snap = null;
+      try { snap = JSON.parse(stack[idx].payload); } catch { /* handled below */ }
+      if (!snap) {
+        state.pulseUndoStack = stack.filter((_, i) => i !== idx);
+        return;
+      }
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const stamp = new Date().toISOString();

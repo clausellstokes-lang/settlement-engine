@@ -269,8 +269,11 @@ async function grantMonthlyAllowanceIfNeeded(
 // nothing, so behavior is identical to the previous inline handler.
 export async function handleStripeWebhook(
   req: Request,
-  deps: { adminClient?: typeof adminClient } = {},
+  deps: { adminClient?: typeof adminClient; stripeClient?: typeof stripe } = {},
 ): Promise<Response> {
+  // Injection seam for the live-subscription-status check in the premium branch
+  // (tests stub subscriptions.retrieve); production passes nothing.
+  const stripeApi = deps.stripeClient ?? stripe;
   // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
@@ -327,6 +330,26 @@ export async function handleStripeWebhook(
       if (product === 'premium') {
         // Cartographer subscription (legacy SKU key kept = "premium" so
         // existing customers' subscriptions keep flowing into the same code).
+
+        // OUT-OF-ORDER GUARD: Stripe does not guarantee delivery order. If this
+        // session's customer.subscription.deleted arrived FIRST (e.g. this
+        // completed event sat in retry backoff while the user cancelled), the
+        // deleted handler no-opped (tier was not yet premium) — so upgrading now
+        // would record an already-dead subscription id and grant premium that no
+        // future event ever revokes. Check the subscription's LIVE status before
+        // granting; a dead one is skipped (ack 200 — retrying won't revive it).
+        // A throw here (network) is fine: non-2xx → Stripe redelivers.
+        const premiumSubId = typeof session.subscription === 'string'
+          ? session.subscription
+          : session.subscription?.id || null;
+        if (premiumSubId) {
+          const liveSub = await stripeApi.subscriptions.retrieve(premiumSubId);
+          if (liveSub.status === 'canceled' || liveSub.status === 'incomplete_expired') {
+            console.log(`[stripe-webhook] session ${session.id} completed but subscription ${premiumSubId} is already ${liveSub.status} (out-of-order delete) — not upgrading user ${userId}`);
+            break;
+          }
+        }
+
         const { error } = await supabase.auth.admin.updateUserById(userId!, {
           user_metadata: { tier: 'premium' },
         });
@@ -337,7 +360,7 @@ export async function handleStripeWebhook(
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
           // Record THIS subscription so a later stale/redelivered .deleted for an
           // OLD subscription can't downgrade this re-subscribed user (087).
-          stripe_subscription_id: typeof session.subscription === 'string' ? session.subscription : session.subscription?.id || null,
+          stripe_subscription_id: premiumSubId,
           premium_downgraded_at: null,
           premium_retention_expires_at: null,
         }).eq('id', userId);

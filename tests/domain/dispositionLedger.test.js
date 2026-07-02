@@ -144,5 +144,10 @@ describe('signed candidateBase multiplier', () => {
     expect(candidateDirection('allied_shared_recovery', { relationshipType: 'allied' }, {})).toBe('de_escalation');
     // unknown ⇒ neutral (cannot churn legacy)
     expect(candidateDirection('some_unmapped_drift', { relationshipType: 'neutral' }, {})).toBe('neutral');
+    // the trade-leverage pair classifies by documented intent (neither matched any
+    // hint before, so the signed salience adjustment silently never fired):
+    // an embargo weaponizes the tie; coercion is the supplier's ALTERNATIVE to war.
+    expect(candidateDirection('trade_embargo_collapse', { relationshipType: 'trade_partner' }, {})).toBe('escalation');
+    expect(candidateDirection('trade_dependency_coercion', { relationshipType: 'trade_partner' }, {})).toBe('de_escalation');
   });
 });

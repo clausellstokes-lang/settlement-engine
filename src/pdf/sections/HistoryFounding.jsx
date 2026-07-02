@@ -392,9 +392,9 @@ function Timeline({ events, age }) {
           />
         ))}
       </View>
-      {/* Year ticks (every ~quarter of the span) */}
+      {/* Year ticks at the axis extents + midpoint (space-between => 0/50/100%) */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 1 }}>
-        {[0.25, 0.5, 0.75].map(p => (
+        {[0, 0.5, 1].map(p => (
           <Text
             key={`tick-${p}`}
             style={{ ...type.caption, fontSize: pt['6.5'], color: palette.faint }}

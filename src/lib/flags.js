@@ -1,10 +1,17 @@
 /**
  * lib/flags.js — Feature flag registry.
  *
- * Every cross-cutting product change ships behind a flag so we can
- * roll back without redeploying. The funnel + UI redesign is a big
- * change touching dozens of components — without flags, "ship it" and
- * "revert it" both become multi-hour migrations.
+ * Every cross-cutting product change ships behind a flag. Two rollback
+ * modes, with very different reach:
+ *   - Per-browser (URL param / localStorage override): instant, deploy-free,
+ *     but affects only that one browser — this is the QA / dev / single-user
+ *     escape hatch.
+ *   - Fleet-wide (a `default` change here, or a VITE_FLAG_* env value): the
+ *     flag layers are build-time-inlined by Vite, so flipping the default for
+ *     everyone still requires a rebuild + redeploy. It is a controlled revert,
+ *     not a runtime toggle.
+ * The funnel + UI redesign is a big change touching dozens of components —
+ * without flags, "ship it" and "revert it" both become multi-hour migrations.
  *
  * Resolution order (highest precedence first):
  *
@@ -68,10 +75,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Per-settlement version timeline + diff + revert. Cartographer-gated. PROMOTED default-on after revert-mutation soak.',
   },
-  mapDropPreview: {
-    default: true,
-    description: 'Hover-tooltip during drag with terrain + trade-route context.',
-  },
   mapAutosave: {
     default: true,
     description: 'Auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
@@ -79,18 +82,6 @@ export const FLAGS = Object.freeze({
   founderRecognition: {
     default: false,
     description: 'Founder Lifetime surfaces only to demonstrated worldbuilders.',
-  },
-  narrativeLayerStrip: {
-    default: true,
-    description: 'Lift narrative buttons into labeled strip below dossier title.',
-  },
-  mobileSingleChrome: {
-    default: false,
-    description: 'Drop mobile top header; auth chip joins bottom nav.',
-  },
-  compendiumInlineHelp: {
-    default: true,
-    description: '"?" affordance on every config control opens Compendium snippet.',
   },
   copyGuard: {
     default: false,
@@ -183,7 +174,7 @@ function fromLocalStorage(name) {
   }
 }
 
-// Read from Vite env. Convention: VITE_FLAG_MOBILE_SINGLE_CHROME.
+// Read from Vite env. Convention: VITE_FLAG_FOUNDER_RECOGNITION.
 function fromEnv(name) {
   if (typeof import.meta === 'undefined' || !import.meta.env) return undefined;
   const key = 'VITE_FLAG_' + name.replace(/([A-Z])/g, '_$1').toUpperCase();

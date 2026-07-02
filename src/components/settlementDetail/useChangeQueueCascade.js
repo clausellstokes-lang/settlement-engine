@@ -198,8 +198,20 @@ export function useChangeQueueCascade(ctx) {
     const currentBase = deferring
       ? (findSaveById(baseSaves, detail.saveData.id)?.settlement || detail.settlement)
       : detail.settlement;
-    const network = [...(currentBase.neighbourNetwork||[]), entryForCurrent];
-    const ownISR = [...(currentBase.interSettlementRelationships||[]), ...npcForA, ...conflictForA];
+    // Dedupe the current side the same way the partner side already self-heals
+    // (see the `.filter(n => n.id !== …)` / `.filter(r => r.linkId !== linkId)`
+    // below): two 'link' orders for the SAME partner in one queue commit — or a
+    // re-link of an existing neighbour — must not double-append the entry or
+    // stack a second full ISR set. Drop any prior entry/relationships for this
+    // linkId (or partner id) before appending the fresh ones. Idempotent.
+    const network = [
+      ...(currentBase.neighbourNetwork||[]).filter(n => (n.linkId ? n.linkId !== linkId : n.id !== linkedSave.id)),
+      entryForCurrent,
+    ];
+    const ownISR = [
+      ...(currentBase.interSettlementRelationships||[]).filter(r => r.linkId !== linkId),
+      ...npcForA, ...conflictForA,
+    ];
     let updatedSaves = baseSaves.map(s => {
       if (s.id === detail?.saveData?.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
       if (s.id === linkedSave.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForPartner, ...(s.settlement?.neighbourNetwork||[]).filter(n => n.id !== detail.saveData.id)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r => r.linkId !== linkId), ...npcForB, ...conflictForB] } };

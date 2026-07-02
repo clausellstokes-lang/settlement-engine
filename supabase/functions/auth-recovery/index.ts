@@ -467,7 +467,11 @@ export async function handleAuthRecovery(
         return json({ error: `Unknown action: ${action}` }, 400);
     }
   } catch (err) {
-    return json({ error: errorMessage(err) }, 500);
+    // Genericize: this endpoint is UNAUTHENTICATED, and a thrown `.message`
+    // can echo internal RPC/table/constraint names. Log the real detail
+    // server-side only (account-actions and admin-actions do the same).
+    console.error("[auth-recovery] unhandled error:", errorMessage(err));
+    return json({ error: "Recovery request failed" }, 500);
   }
 }
 

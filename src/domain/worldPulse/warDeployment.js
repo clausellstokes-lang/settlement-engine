@@ -133,6 +133,15 @@ const LEVY_POP_FLOOR = 300;           // never levy a vassal below this skeleton
 const LEVY_STRAIN_PER_TICK = 0.05;    // war-weariness a vassal accrues per tick of being levied (the loyalty cost)
 const LEVY_FOOD_FRACTION = 0.1;       // a tenth of the vassal's granary flows to the war each tick
 const LEVY_FOOD_CAPTURE = 0.6;        // of that, 60% reaches the overlord; the rest is en-route loss
+// Same-tick decay compensation: a levied vassal is never a deployer (computeLevySources
+// excludes deployers), so step 5b's decay runs on it the SAME tick its strain accrues.
+// Accrue the GROSS (strain + one decay step) so the NET per-tick loyalty cost is exactly
+// LEVY_STRAIN_PER_TICK — the raw constant alone netted 0.02/tick, stretching the 0.20
+// condition floor from 4 ticks of levying to 10 and weakening the rebellion/coup
+// coupling. revertSuppressedDeployExhaustion subtracts the same gross, which reproduces
+// the no-levy counterfactual exactly in every case (the step-5b decay runs once per tick
+// regardless of how many overlords levied the vassal).
+const LEVY_STRAIN_GROSS_PER_TICK = LEVY_STRAIN_PER_TICK + EXHAUSTION_DECAY_PER_TICK;
 
 /**
  * Relief a besieged target can draw from its support-relationship neighbours (P3). Sums a
@@ -205,9 +214,12 @@ export function computeLevySources(snapshot, homeId, excludeSet) {
  * The HOME: had the deploy never fired it would NOT have been a deployer, so its scar
  * would have taken the step-5b DECAY path instead of the accrual ratchet — replay that
  * counterfactual from the PRE-TICK ledger (byte-equal to the tick never deploying).
- * Each LEVIED VASSAL: subtract the LEVY_STRAIN_PER_TICK the dismissed war charged it
- * (its own step-5b decay already ran, so subtracting the strain reproduces the
- * no-levy counterfactual). Entries at 0 are dropped, matching the ledger hygiene.
+ * Each LEVIED VASSAL: subtract the GROSS strain (LEVY_STRAIN_GROSS_PER_TICK — the net
+ * strain plus its same-tick decay compensation) the dismissed war charged it. Its own
+ * step-5b decay ran once regardless of the levy, so the gross subtraction reproduces
+ * the no-levy counterfactual exactly — including the multi-overlord case, where each
+ * surviving levy's gross accrual stays. Entries at 0 are dropped, matching the ledger
+ * hygiene.
  * Pure — returns a new ledger, never mutates.
  *
  * @param {Object} args
@@ -224,7 +236,7 @@ export function revertSuppressedDeployExhaustion({ warExhaustion, preTickWarExha
   if (decayed <= 0) delete next[String(homeId)];
   else next[String(homeId)] = decayed;
   for (const srcId of leviedSourceIds) {
-    const reverted = clamp01((Number(next[String(srcId)]) || 0) - LEVY_STRAIN_PER_TICK);
+    const reverted = clamp01((Number(next[String(srcId)]) || 0) - LEVY_STRAIN_GROSS_PER_TICK);
     if (reverted <= 0) delete next[String(srcId)];
     else next[String(srcId)] = reverted;
   }
@@ -1128,7 +1140,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // ceiling without out-classing the defender); a `plausible` siege that merely
       // HELD this tick keeps grinding (drain accrues, step 5). ──────────────────────
       if (verdict.forcedLift || !verdictPermitsSiege(/** @type {any} */ (verdict.verdict))) {
-        const withdrawn = besiegers.filter(id => deployments[id]?.targetId === targetId);
+        // String-coerce like the besieger-collection compare above: a deployment record's
+        // targetId is any-typed, so a strict === would leave a numeric-id record unable to
+        // ever withdraw (a stuck phantom army on a lifted siege).
+        const withdrawn = besiegers.filter(id => String(deployments[id]?.targetId) === targetId);
         if (withdrawn.length) {
           for (const attackerId of withdrawn) {
             const withdrawnRec = deployments[attackerId];
@@ -1177,7 +1192,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         // never mount a new campaign (finding 4). A still-feasible front would have rolled
         // above and is left untouched.
         for (const attackerId of besiegers) {
-          if (deployments[attackerId]?.targetId === targetId) continue; // (none here — withdrawn.length was 0)
+          if (String(deployments[attackerId]?.targetId) === targetId) continue; // (none here — withdrawn.length was 0; same String-coercion contract)
           for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
         }
       }
@@ -1419,6 +1434,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // (NOT this-tick's fresh mints) — avoids intra-tick read-after-write, so a fresh
   // deploy raises the drain only NEXT tick. army_deployed is a flat garrison debuff. ─
   const activeDeployers = new Set(Object.keys(deployments).map(String));
+  // F2: vassals levied THIS tick (populated only under warLevyEnabled ⇒ empty on the
+  // default path = byte-identical). Step 5b reads it to narrate a levied vassal's scar
+  // as ACTIVE levy strain rather than post-war recovery — the number is the same.
+  const leviedThisTick = new Set();
   for (const fromId of Object.keys(deployments).sort(codepoint)) {
     const preTickFrontCount = warFrontsFrom(graph, fromId).length;
     // A just-deployed settlement has 0 pre-tick fronts → minimum-severity drain this
@@ -1481,6 +1500,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       /** @type {any[]} */
       const levyFoodDeltas = [];
       let totalLevied = 0;
+      /** @type {Record<string, number>} */
+      const leviedBySource = {};
       for (const srcId of computeLevySources(snapshot, fromId, excludeSet)) {
         const src = snapshot?.byId?.get?.(srcId)?.settlement;
         if (!src) continue;
@@ -1490,6 +1511,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         const levied = Math.min(Math.round(srcPop * LEVY_POP_RATE_PER_TICK), Math.max(0, srcPop - LEVY_POP_FLOOR));
         if (levied > 0) {
           totalLevied += levied;
+          leviedBySource[srcId] = levied;
           levyPopDeltas.push({ saveId: srcId, delta: -levied, reason: `${srcName} levies men for ${name}'s war against ${targetName}.` });
         }
         // Grain: a gentle conserved granary transfer from the vassal to the overlord's home.
@@ -1507,13 +1529,31 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           if (food.gainedMonths > 0) levyFoodDeltas.push({ saveId: fromId, deltaMonths: food.gainedMonths, reason: `Grain levied from ${srcName} resupplies ${name}.` });
         }
         // Loyalty cost: the levied vassal grows war-weary (feeds P2's coup flywheel).
+        // Gross-accrued so the same-tick step-5b decay nets it to exactly
+        // LEVY_STRAIN_PER_TICK (see LEVY_STRAIN_GROSS_PER_TICK).
         if (levied > 0 || (food && food.lostMonths > 0)) {
-          warExhaustion[srcId] = clamp01((warExhaustion[srcId] || 0) + LEVY_STRAIN_PER_TICK);
+          warExhaustion[srcId] = clamp01((warExhaustion[srcId] || 0) + LEVY_STRAIN_GROSS_PER_TICK);
+          leviedThisTick.add(String(srcId));
         }
       }
       if (totalLevied > 0) {
         const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
-        deployments[fromId] = { ...deployments[fromId], deployedPopulation: prevDeployed + totalLevied };
+        // Bank the per-vassal headcount alongside the aggregate deployedPopulation.
+        // deploymentReturn currently credits ALL survivors to the overlord's home —
+        // conserved in total but silently redistributive (a one-way population pump
+        // from vassals to overlord). This per-source ledger is the seam that lets the
+        // homecoming credit each vassal's surviving men back to the VASSAL; it rides
+        // the same flag-gated record (flag-off worlds never bank ⇒ byte-identical).
+        /** @type {Record<string, number>} */
+        const bankedBySource = { ...(/** @type {any} */ (deployments[fromId]).leviedPopulationBySource || {}) };
+        for (const [srcId, count] of Object.entries(leviedBySource)) {
+          bankedBySource[srcId] = (Number(bankedBySource[srcId]) || 0) + count;
+        }
+        deployments[fromId] = {
+          ...deployments[fromId],
+          deployedPopulation: prevDeployed + totalLevied,
+          leviedPopulationBySource: bankedBySource,
+        };
       }
       if (levyPopDeltas.length || levyFoodDeltas.length) {
         outcomes.push({
@@ -1633,17 +1673,30 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     warExhaustion[homeId] = decayed;
     if (decayed >= EXHAUSTION_CONDITION_FLOOR && snapshot?.byId?.has?.(homeId)) {
       const name = settlementNameFor(homeId);
+      // A vassal levied THIS tick is not recovering — its scar is the ACTIVE loyalty
+      // cost of an overlord's war (accrued in step 5's levy block; empty set when the
+      // flag is off). Same condition id/arithmetic; only the narrative differs, so the
+      // vassal is no longer described as nursing wounds from a war it never waged.
+      const leviedNow = leviedThisTick.has(homeId);
       outcomes.push(conditionOutcome({
         id: `world_outcome.war_exhaustion.${stablePart(homeId)}.${tick}`,
         archetype: 'war_exhaustion',
         targetSaveId: homeId,
         severity: decayed,
-        headline: `${name} nurses its war wounds`,
-        summary: `${name}'s army is home, but the cost of the war it waged still weighs on the economy and the public.`,
-        reasons: [`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`],
+        headline: leviedNow ? `${name} strains under the levy` : `${name} nurses its war wounds`,
+        summary: leviedNow
+          ? `${name}'s men and grain feed an overlord's war, and the repeated levies wear on the settlement.`
+          : `${name}'s army is home, but the cost of the war it waged still weighs on the economy and the public.`,
+        reasons: [leviedNow
+          ? `War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`
+          : `War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`],
         tick,
         sourceEventTargetId: homeId,
-        causes: [{ source: homeId, effect: 'war_exhaustion', reason: `${name} is recovering from a costly war.` }],
+        causes: [{
+          source: homeId,
+          effect: 'war_exhaustion',
+          reason: leviedNow ? `${name} is drained by an overlord's war levies.` : `${name} is recovering from a costly war.`,
+        }],
       }));
     }
   }

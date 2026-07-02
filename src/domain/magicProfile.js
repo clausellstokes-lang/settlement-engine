@@ -337,7 +337,7 @@ function deriveRoles(settlement, profiles, contributors) {
   const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, topBand);
   const military     = role('military',     arcanePower >= 35, topBand && arcanePower >= 50);
   const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && topBand);
-  const infrastructure = role('infrastructure', arcaneInstCount >= 1 && topBand, topBand && arcaneInstCount >= 1);
+  const infrastructure = role('infrastructure', arcaneInstCount >= 1, topBand && arcaneInstCount >= 1);
 
   return { economic, military, medical, infrastructure };
 }

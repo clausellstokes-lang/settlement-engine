@@ -20,6 +20,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const TIERS    = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CULTURES = ['germanic', 'celtic', 'norse', 'mediterranean'];
@@ -99,6 +101,107 @@ describe('generator golden master (cross-build output stability)', () => {
       const k = keyOf(c);
       const got = hashFor(c);
       if (manifest[k] !== got) drift.push(k);
+    }
+    expect(drift).toEqual([]);
+  });
+});
+
+// ── worldPulse cross-build golden master ──────────────────────────────────────
+// Finding: the generator golden above pins generation only. The pulse layer had
+// strong WITHIN-build determinism tests but NO cross-build pin, so a tuning
+// constant or an rng fork-label rename in pulse code would ship silently. This
+// closes that gap. It pins the MECHANICAL projection of a preview run — the
+// candidate rolls (id, roll value, passed) plus the selected candidate ids and
+// the tick — NOT prose, so it catches tuning/rng drift without false-positiving
+// on unrelated narrative-copy edits. Inputs are fully deterministic (fixed
+// rngSeed + fixed `now`), the same seams the within-build determinism test uses.
+const PULSE_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'worldpulse-golden-master.json');
+
+function pulseSettlement(name, patch = {}) {
+  return {
+    name, tier: 'town', population: 1800,
+    config: { tradeRouteAccess: 'road', priorityEconomy: 25, priorityMilitary: 30 },
+    institutions: [], economicState: { primaryExports: [], primaryImports: ['Bulk grain and foodstuffs'] },
+    powerStructure: {
+      publicLegitimacy: { score: 28, label: 'Legitimacy Crisis' },
+      factions: [
+        { faction: 'Merchant League', category: 'economy', power: 72 },
+        { faction: 'Temple Wardens', category: 'religious', power: 54 },
+      ],
+      conflicts: [],
+    },
+    npcs: [{ id: 'reeve', name: 'Reeve Mara', importance: 'key' }],
+    activeConditions: [], ...patch,
+  };
+}
+const pulseSave = (id, name, patch = {}) => ({
+  id, name, phase: 'canon', settlement: pulseSettlement(name, patch),
+  campaignState: { phase: 'canon', eventLog: [], locks: {} },
+});
+
+/** The pulse corpus: a fixed base world driven at a few (seed, tick, interval)
+ *  points. Small and deterministic — broad enough to trip on a candidate-set,
+ *  roll-formula, or selection-order change without depending on prose. */
+function pulseCorpus() {
+  return [
+    { seed: 'gm-pulse-a', tick: 3, interval: 'one_week' },
+    { seed: 'gm-pulse-a', tick: 3, interval: 'one_month' },
+    { seed: 'gm-pulse-b', tick: 5, interval: 'one_month' },
+    { seed: 'gm-pulse-c', tick: 8, interval: 'one_week' },
+  ];
+}
+const pulseKeyOf = (c) => [c.seed, c.tick, c.interval].join('|');
+
+/** Hash the MECHANICAL projection only (rolls + selected ids + tick), never prose. */
+function pulseHashFor({ seed, tick, interval }) {
+  const campaign = {
+    id: 'camp-world', name: 'World', settlementIds: ['a', 'b'],
+    worldState: { rngSeed: seed, tick },
+    regionalGraph: ensureRegionalGraph({ edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'trade_partner' }] }),
+    wizardNews: { currentTick: tick, entries: [] },
+  };
+  const saves = [
+    pulseSave('a', 'Ashford', { activeConditions: [{ archetype: 'regional_import_shortage', severity: 0.7 }] }),
+    pulseSave('b', 'Briarwatch'),
+  ];
+  const r = previewCampaignWorldPulse({ campaign, saves, interval, now: '2026-01-01T00:00:00.000Z' });
+  const projection = {
+    tick: r.tick,
+    rolls: (r.rollExplanations || []).map((x) => [x.candidateId, x.roll, x.passed]),
+    selected: (r.selected || []).map((x) => x.id),
+  };
+  return createHash('sha256').update(JSON.stringify(projection)).digest('hex');
+}
+
+describe('worldPulse golden master (cross-build mechanical stability)', () => {
+  const rows = pulseCorpus();
+
+  if (process.env.UPDATE_GOLDEN) {
+    it('captures the pulse golden manifest', () => {
+      const out = {};
+      for (const c of rows) out[pulseKeyOf(c)] = pulseHashFor(c);
+      if (!existsSync(dirname(PULSE_MANIFEST))) mkdirSync(dirname(PULSE_MANIFEST), { recursive: true });
+      writeFileSync(PULSE_MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
+      expect(Object.keys(out).length).toBe(rows.length);
+    });
+    return;
+  }
+
+  it('pulse manifest exists (run UPDATE_GOLDEN=1 to create it)', () => {
+    expect(existsSync(PULSE_MANIFEST)).toBe(true);
+  });
+
+  const manifest = existsSync(PULSE_MANIFEST) ? JSON.parse(readFileSync(PULSE_MANIFEST, 'utf-8')) : {};
+
+  it('covers the full pulse corpus (no keys added/removed without a manifest update)', () => {
+    expect(rows.map(pulseKeyOf).sort()).toEqual(Object.keys(manifest).sort());
+  });
+
+  it('every pulse config produces the golden mechanical projection', () => {
+    const drift = [];
+    for (const c of rows) {
+      const k = pulseKeyOf(c);
+      if (manifest[k] !== pulseHashFor(c)) drift.push(k);
     }
     expect(drift).toEqual([]);
   });

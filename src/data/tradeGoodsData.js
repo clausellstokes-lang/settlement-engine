@@ -689,11 +689,11 @@ export const GOODS_MODIFIERS_BY_TIER = {
   },
   town: {
     "Enslaved persons": {
-      institutions: ["Slave market", "Slave market district", "Human trafficking network"],
-      tradeRoutes: ["port", "crossroads", "river"],
-      resourceBoost: 0,
-      institutionBoost: 0.3,
-      routeBoost: 0.15,
+      category: GOODS_CATEGORIES.TRADE,
+      p: 0.15,
+      on: false,
+      desc: "Human beings bought and sold as property. War captives, debt slaves, and trafficked persons. High value, restricted to settlements with slave markets.",
+      requiredInstitution: "Slave market",
     },
     "Guild-manufactured goods": {
       category: GOODS_CATEGORIES.MANUFACTURED,

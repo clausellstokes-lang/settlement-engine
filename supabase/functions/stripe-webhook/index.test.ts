@@ -306,6 +306,53 @@ Deno.test('a replayed credit-pack checkout (same session id) does NOT double-gra
   assertEquals(grants.length, 1);   // the redelivery is a no-op (idempotent on session id)
 });
 
+// ── Out-of-order delivery: .deleted BEFORE .completed (premium branch) ───────
+// Stripe does not guarantee order. If subscription.deleted for sub A lands while
+// checkout.session.completed for sub A is in retry backoff, the deleted handler
+// no-ops (tier not yet premium); the late completed must then NOT grant premium
+// against the already-dead subscription — nothing would ever downgrade it.
+
+/** Stripe stub whose subscriptions.retrieve reports the given live status. */
+function makeStripeStatusStub(status: string) {
+  const retrieved: string[] = [];
+  return {
+    retrieved,
+    // deno-lint-ignore no-explicit-any
+    stripeClient: { subscriptions: { retrieve: (id: string) => { retrieved.push(id); return Promise.resolve({ id, status }); } } } as any,
+  };
+}
+
+Deno.test('a late premium checkout for an ALREADY-CANCELED subscription does NOT upgrade', async () => {
+  const stub = makeStub();
+  const stripeStub = makeStripeStatusStub('canceled');
+  const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { subscription: 'sub_dead' });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripeStub.stripeClient },
+  );
+  assertEquals(res.status, 200);                                           // ack — retrying won't revive it
+  assertEquals(stripeStub.retrieved, ['sub_dead']);                        // live status was consulted
+  assertEquals(stub.calls.authUpdates.length, 0);                          // NOT upgraded
+  assertEquals(stub.calls.profileUpdates.length, 0);                       // dead sub id never recorded
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+});
+
+Deno.test('a premium checkout for a LIVE subscription upgrades and records the sub id', async () => {
+  const stub = makeStub();
+  const stripeStub = makeStripeStatusStub('active');
+  const body = checkoutEvent({ supabase_user_id: 'u1', product: 'premium' }, { subscription: 'sub_live' });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripeStub.stripeClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.authUpdates.length, 1);                          // upgraded
+  assertEquals(
+    (stub.calls.profileUpdates[0] as Record<string, unknown>).stripe_subscription_id,
+    'sub_live',
+  );
+});
+
 // ── customer.subscription.deleted: stale-delete guard (migration 087) ────────
 // Stripe redelivers + reorders webhooks. A .deleted for an OLD subscription must
 // not downgrade a user who has since re-subscribed and is currently premium.

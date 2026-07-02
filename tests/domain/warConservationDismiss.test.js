@@ -302,10 +302,11 @@ describe('revertSuppressedDeployExhaustion replays the no-deploy counterfactual'
     expect(next.home).toBeCloseTo(0.47, 5); // 0.5 − 0.03 decay, not 0.5 + 0.16 accrual
   });
 
-  test('each levied vassal sheds exactly the levy strain; a fresh vassal is dropped', () => {
+  test('each levied vassal sheds exactly the gross levy strain; a fresh vassal is dropped', () => {
     const next = revertSuppressedDeployExhaustion({
-      // vassA pre 0.4: strained to 0.45, then step-5b decayed to 0.42; vassB fresh: 0.05 − 0.03 = 0.02.
-      warExhaustion: { home: 0.16, vassA: 0.42, vassB: 0.02 },
+      // vassA pre 0.4: gross-strained to 0.48 (0.05 net + 0.03 same-tick-decay
+      // compensation), then step-5b decayed to 0.45; vassB fresh: 0.08 − 0.03 = 0.05.
+      warExhaustion: { home: 0.16, vassA: 0.45, vassB: 0.05 },
       preTickWarExhaustion: { vassA: 0.4 },
       homeId: 'home',
       leviedSourceIds: ['vassA', 'vassB'],

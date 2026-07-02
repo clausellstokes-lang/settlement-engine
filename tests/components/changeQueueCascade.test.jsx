@@ -97,4 +97,37 @@ describe('useChangeQueueCascade — clock-bound (queue inactive) applies immedia
     const [, ids] = ctx.persistBatch.mock.calls[0];
     expect(new Set(ids.map(String))).toEqual(new Set(['save_1', 'save_2']));
   });
+
+  it('re-linking an already-linked partner does NOT double-append the current-side entry or ISR', () => {
+    // detail.settlement already carries a neighbourNetwork entry for save_2 under
+    // linkId 'link_save_1_save_2' plus a matching ISR row. Applying a link for the
+    // SAME partner must self-heal (dedupe) rather than stack a second entry — the
+    // same idempotency the partner side already had.
+    const ctx = makeCtx({ queueActiveForOpenDetail: false });
+    ctx.detail.settlement.interSettlementRelationships = [
+      { linkId: 'link_save_1_save_2', partnerSettlement: 'Mossbridge', npcName: 'Old link' },
+    ];
+    ctx.saves = [
+      { id: 'save_1', name: 'Stoneford', settlement: ctx.detail.settlement },
+      partner,
+    ];
+    const { result } = renderHook(() => useChangeQueueCascade(ctx));
+    result.current.handleLink(partner, 'ally');
+
+    const nextSaves = ctx.setSaves.mock.calls.at(-1)[0];
+    const currentRow = nextSaves.find(s => s.id === 'save_1');
+    const linkIdMatches = (currentRow.settlement.neighbourNetwork || []).filter(
+      n => n.linkId === 'link_save_1_save_2',
+    );
+    // Exactly one neighbour entry for the partner, not two.
+    expect(linkIdMatches).toHaveLength(1);
+    // The stale ISR row for this linkId was dropped before the fresh set appended,
+    // so no duplicate 'link_save_1_save_2' ISR rows survive.
+    const isrForLink = (currentRow.settlement.interSettlementRelationships || []).filter(
+      r => r.linkId === 'link_save_1_save_2',
+    );
+    // Every surviving ISR row for this link is freshly generated (the stale
+    // hand-written 'Old link' row was filtered out).
+    expect(isrForLink.every(r => r.npcName !== 'Old link')).toBe(true);
+  });
 });

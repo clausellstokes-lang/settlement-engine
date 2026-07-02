@@ -110,12 +110,17 @@ describe('the levy rides a war_levy outcome', () => {
     const levied = -levy.populationDeltas.find(d => d.saveId === 'carth').delta;
     expect(levied).toBe(Math.round(CARTH_POP * 0.004)); // 20
     expect(war.deployments.atlas.deployedPopulation).toBe(levied); // conserved: the army gained exactly the levy
+    // The per-vassal headcount is banked alongside the aggregate, so the homecoming
+    // can credit Carth's surviving men back to Carth (not silently to Atlas).
+    expect(war.deployments.atlas.leviedPopulationBySource).toEqual({ carth: levied });
     // Grain: a conserved granary transfer Carth → Atlas (victor gains ≤ what the vassal lost).
     const foodLost = -levy.foodStockpileDeltas.find(d => d.saveId === 'carth').deltaMonths;
     const foodGain = levy.foodStockpileDeltas.find(d => d.saveId === 'atlas')?.deltaMonths || 0;
     expect(foodLost).toBeGreaterThan(0);
     expect(foodGain * 6000).toBeLessThanOrEqual(foodLost * CARTH_POP); // absolute food never minted
-    // Loyalty cost: Carth accrues net war-weariness (0.05 strain − 0.03 decay = 0.02).
-    expect(war.warExhaustion.carth).toBeCloseTo(0.02, 5);
+    // Loyalty cost: Carth accrues net war-weariness of exactly LEVY_STRAIN_PER_TICK.
+    // The accrual is gross (0.05 strain + 0.03 same-tick-decay compensation) so step
+    // 5b's decay nets it to the tunable, not 40% of it.
+    expect(war.warExhaustion.carth).toBeCloseTo(0.05, 5);
   });
 });

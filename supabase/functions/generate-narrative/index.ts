@@ -423,6 +423,23 @@ const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall
 // token bill. Read req.text() with this cap before JSON.parse.
 const MAX_BODY_BYTES = 64 * 1024;
 
+/**
+ * Refinement passes affected by a progression changeType — OWN-property lookup
+ * only. changeType is client-supplied: a prototype-chain name ('constructor',
+ * 'toString', …) used to resolve an inherited function via bare indexing —
+ * truthy, so `|| []` never applied and `.map` threw inside the progression
+ * stream (post-spend, pre-model: refunded, but it burned a rate-limit unit and
+ * surfaced a raw internal error in a 200 stream). Unknown change types degrade
+ * to the designed thesis-only fallback. Exported for the regression test.
+ */
+export function progressionAffectedKeys(
+  changeType: string,
+): Array<keyof typeof REFINEMENT_PASSES> {
+  return Object.hasOwn(PROGRESSION_AFFECTED_FIELDS, changeType)
+    ? PROGRESSION_AFFECTED_FIELDS[changeType]
+    : [];
+}
+
 function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   const ctrl = new AbortController();
   const id = setTimeout(() => ctrl.abort(new DOMException(`provider fetch timed out after ${ms}ms`, 'TimeoutError')), ms);
@@ -1190,7 +1207,7 @@ export async function handleGenerateNarrative(
 
           // ── PROGRESSION: thesis + subset of refinement passes ─────────────
           if (type === 'progression') {
-            const affectedKeys = PROGRESSION_AFFECTED_FIELDS[changeType] || [];
+            const affectedKeys = progressionAffectedKeys(changeType);
             // Filter to passes that actually exist (defensive against future
             // changes to either map).
             const affectedEntries = affectedKeys

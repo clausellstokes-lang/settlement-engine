@@ -490,7 +490,7 @@ export async function handleAdminActions(
           });
 
         if (profileError) {
-          return json({ error: profileError.message }, 500);
+          return adminFail(profileError, 500);
         }
 
         // profiles is the source of truth; auth metadata is a compatibility
@@ -626,7 +626,7 @@ export async function handleAdminActions(
           });
 
         if (creditError) {
-          return json({ error: creditError.message }, 500);
+          return adminFail(creditError, 500);
         }
 
         // A3: audit the credit change. before/after balances are not PII; we log
@@ -726,10 +726,14 @@ export async function handleAdminActions(
         return json({ success: true, notes: data || [] });
       }
 
-      // Grant / refund credits — REUSES the audited service_set_credits RPC via
-      // the existing update_user_credits path conceptually, but here we apply a
-      // DELTA (grant +N / refund +N) computed from the current balance so the
-      // caller doesn't have to know the absolute value. HIGHEST role only.
+      // Grant / refund credits — applies a DELTA (grant +N / refund −N)
+      // ATOMICALLY via service_adjust_credits (migration 103): the RPC locks the
+      // profile row, reads the balance from the LEDGER (get_credit_balance),
+      // clamps at zero, and dual-writes ledger + cache in one transaction. The
+      // previous shape read profiles.credits here, computed next in TypeScript,
+      // and called the ABSOLUTE-set service_set_credits — a concurrent user
+      // spend between the read and the write was silently clobbered, and the
+      // delta was derived from the legacy cached counter. HIGHEST role only.
       case "grant_credits": {
         if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId) return json({ error: "Missing userId" }, 400);
@@ -737,25 +741,25 @@ export async function handleAdminActions(
         if (!Number.isFinite(delta) || Number.isNaN(delta) || delta === 0) {
           return json({ error: "credits delta must be a non-zero integer" }, 400);
         }
-        const { data: prof } = await adminClient
-          .from("profiles").select("credits").eq("id", userId).single();
-        const prev = Number(prof?.credits ?? 0);
-        const next = Math.max(0, prev + delta);
         const { data: result, error: creditError } =
-          await adminClient.rpc("service_set_credits", {
+          await adminClient.rpc("service_adjust_credits", {
             actor_user: callingUser.id, target_user: userId,
-            new_credits: next, reason: auditReason,
+            delta, reason: auditReason,
           });
-        if (creditError) return json({ error: creditError.message }, 500);
-        // service_set_credits audits to admin_actions; mirror a row into the A3
-        // append-only log so the unified trail captures grant/refund too.
+        if (creditError) return adminFail(creditError, 500);
+        const adjusted = (result && typeof result === "object"
+          ? result
+          : {}) as Record<string, unknown>;
+        // service_adjust_credits audits to admin_actions; mirror a row into the
+        // A3 append-only log so the unified trail captures grant/refund too.
         await writeAudit({
           action: delta > 0 ? "grant_credits" : "refund_credits",
           targetUserId: userId, targetType: "profile", targetId: String(userId),
-          before: { credits: prev }, after: { credits: next },
+          before: { credits: adjusted.prev ?? null },
+          after: { credits: adjusted.next ?? null },
           destructive: false, reversible: true,
         });
-        return json({ success: true, prev, next, ...(result || {}) });
+        return json({ success: true, ...adjusted });
       }
 
       // Review billing — REDACTED Stripe summary (support+, masked customer id).

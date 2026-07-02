@@ -816,8 +816,19 @@ export function withTickedConditionDurations(settlement, interval) {
     const cap = canonical.duration.expiresAtTicks;
     const windingDown = typeof cap === 'number'
       && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
+    // Read the RAW status, not canonical.status: canonical defaulting maps a
+    // legacy/undirected condition (e.g. 'active' or absent) onto a template
+    // default like 'worsening', which would silently invent drift. The status
+    // we persist below must match the one that drove this decision, or the
+    // invented motion just reappears one tick later.
     const driftStatus = windingDown ? 'easing' : c.status;
     const driftPerTick = (/** @type {any} */ (SEVERITY_DRIFT_PER_TICK))[driftStatus] ?? 0;
+    // The status we persist must reproduce this drift on the next tick.
+    // A directed status (worsening/easing) is kept verbatim; anything
+    // undirected (legacy 'active', absent, template-defaulted) normalizes
+    // to drift-neutral 'stable' so canonical defaulting can't reintroduce
+    // the invented motion one tick later.
+    const persistedStatus = driftPerTick !== 0 ? driftStatus : 'stable';
     let severity = canonical.severity;
     if (driftPerTick > 0) {
       severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
@@ -829,7 +840,7 @@ export function withTickedConditionDurations(settlement, interval) {
       ...canonical,
       severity,
       severityBand: severityBand(severity),
-      status: windingDown ? 'easing' : canonical.status,
+      status: persistedStatus,
       duration: {
         ...canonical.duration,
         elapsedTicks,

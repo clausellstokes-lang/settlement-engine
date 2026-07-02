@@ -76,8 +76,12 @@ export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];
-  const ids = new Set(c.settlementIds || []);
-  return (state.savedSettlements || []).filter(save => ids.has(save.id));
+  // String-normalize both sides: settlement ids are an acknowledged
+  // number/string mix (cloud rows vs. local saves), and the sibling membership
+  // scans (isSettlementClockBound / queueSettlementEvent) already normalize —
+  // an exact-match Set here silently dropped members whose id type differed.
+  const ids = new Set((c.settlementIds || []).map(String));
+  return (state.savedSettlements || []).filter(save => ids.has(String(save.id)));
 }
 
 export function campaignCacheOwner(state) {

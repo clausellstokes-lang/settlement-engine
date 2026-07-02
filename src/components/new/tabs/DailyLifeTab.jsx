@@ -13,6 +13,10 @@ import Button from '../../primitives/Button.jsx';
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
 
+// Placeholder for a missing fact value — matches OverviewTab's NO_VALUE. An
+// automated em-dash-strip pass had left a garbled bare ', ' literal here.
+const NO_VALUE = 'Unknown';
+
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
 // Lead anchor — full card chrome, 700-weight value. Reserved for the two or
@@ -27,7 +31,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || ', '}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || NO_VALUE}</div>
     </div>
   );
 }
@@ -39,7 +43,7 @@ function MetaFact({ label, value, accent }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 4, fontSize: FS['11.5'], lineHeight: 1.4 }}>
       <span style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</span>
-      <span style={{ fontWeight: 400, color: BODY }}>{value || ', '}</span>
+      <span style={{ fontWeight: 400, color: BODY }}>{value || NO_VALUE}</span>
     </span>
   );
 }

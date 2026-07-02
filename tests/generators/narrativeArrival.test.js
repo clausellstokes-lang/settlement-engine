@@ -115,4 +115,31 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
     const tensions = [{ type: 'resource_scarcity' }];
     expect(generateSiegeCapability([], tensions, 100)).toBe(tensions);
   });
+
+  test('finds the recent event at the TAIL of an oldest-first timeline (age 100)', () => {
+    // historicalEvents is yearsAgo-descending (oldest first). For a mature
+    // settlement (age 100 → recency window 30y) the qualifying "living memory"
+    // event sits at the END; the old slice(0,3) grabbed only founding-era
+    // events and nulled the grounding line. This pins the tail selection.
+    const timeline = [
+      { name: 'Founding Charter', type: 'political', yearsAgo: 95 },
+      { name: 'Great Fire', type: 'disaster', yearsAgo: 80 },
+      { name: 'Grain Boom', type: 'economic', yearsAgo: 60 },
+      { name: 'Border Skirmish', type: 'political', yearsAgo: 8 },
+    ];
+    const out = generateSiegeCapability(timeline, ['unrest in the market'], 100);
+    expect(out).toBe(
+      'The Border Skirmish is still present in living memory. Unrest in the market.',
+    );
+  });
+
+  test('picks the FRESHEST qualifying event when several are recent', () => {
+    const timeline = [
+      { name: 'Old Plague', type: 'disaster', yearsAgo: 90 },
+      { name: 'Market Riot', type: 'political', yearsAgo: 12 },
+      { name: 'Palace Coup', type: 'political', yearsAgo: 3 },
+    ];
+    const out = generateSiegeCapability(timeline, ['a fractured council'], 100);
+    expect(out).toContain('The Palace Coup is still present in living memory.');
+  });
 });

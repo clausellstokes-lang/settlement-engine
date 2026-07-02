@@ -43,6 +43,21 @@ export function lazyChunkLeaks(refs) {
   return refs.filter((r) => MUST_STAY_LAZY.test(r));
 }
 
+// The entry chunk carries Vite's default `index-` filename prefix. Pinned here so
+// the entry-KB ceiling has a concrete target; if Vite's entryFileNames ever changes
+// this prefix, findEntryRef returns undefined and main() fails LOUD rather than
+// letting the entry guard go silently vacuous (entryBytes stuck at 0).
+const ENTRY_PREFIX = /^index-/;
+
+/**
+ * The single first-paint ref that is the entry chunk, or undefined if none match
+ * ENTRY_PREFIX. Pure + exported so a test can prove the entry guard is non-vacuous
+ * (and catches a Vite entryFileNames rename). @param {string[]} refs
+ */
+export function findEntryRef(refs) {
+  return refs.find((r) => ENTRY_PREFIX.test(r));
+}
+
 function kib(bytes) { return Math.round(bytes / 1024); }
 
 function main() {
@@ -60,12 +75,26 @@ function main() {
     process.exit(1);
   }
 
+  // Identify the entry chunk up front. If Vite's entryFileNames prefix ever
+  // changes, NO ref matches, and the entry-KB ceiling would go silently vacuous
+  // (backstopped only by the loose total). Fail loud instead so the mismatch is a
+  // build error, not an unnoticed no-op.
+  const entryRef = findEntryRef(refs);
+  if (!entryRef) {
+    console.error(
+      `[bundle-budget] no entry chunk matched /^index-/ among: ${refs.join(', ')}\n` +
+      `  Vite's entry filename prefix changed — update ENTRY_PREFIX in ` +
+      `scripts/check-bundle-budget.mjs so the entry-chunk ceiling stays enforced.`,
+    );
+    process.exit(1);
+  }
+
   let total = 0;
   let entryBytes = 0;
   for (const r of refs) {
     const bytes = statSync(join(DIST, 'assets', r)).size;
     total += bytes;
-    if (/^index-/.test(r)) entryBytes = bytes;
+    if (r === entryRef) entryBytes = bytes;
   }
 
   const failures = [];

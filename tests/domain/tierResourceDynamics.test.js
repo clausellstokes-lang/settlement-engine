@@ -166,6 +166,27 @@ describe('applyTierOutcomeToSettlement — apply-time tier re-verify', () => {
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('town', 'city', 'promotion')).tier).toBe('city');
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('village', 'town', 'promotion'))).toBe(implicit);
   });
+
+  it('the anti-churn promotion floor bump leaves a populationHistory breadcrumb', () => {
+    // Eligibility promotes at pop >= nextTier.min * 0.92, so a 4700-strong town is
+    // promoted BELOW the city floor (5001) and bumped up to it. That mint is
+    // deliberate, but it must be visible to the chronicle/audit surfaces.
+    const town = settlement('Ashford', { tier: 'town', population: 4700 });
+    const next = applyTierOutcomeToSettlement(town, tierOutcome('town', 'city', 'promotion'));
+
+    expect(next.population).toBe(5001);
+    expect(next.populationHistory.at(-1)).toMatchObject({
+      delta: 301,
+      population: 5001,
+      outcomeId: 'candidate.tier.promotion.a.4',
+    });
+
+    // A promotion already at/above the new floor mints nothing — no breadcrumb.
+    const big = settlement('Ashford', { tier: 'town', population: 6000 });
+    const bigNext = applyTierOutcomeToSettlement(big, tierOutcome('town', 'city', 'promotion'));
+    expect(bigNext.population).toBe(6000);
+    expect(bigNext.populationHistory).toBeUndefined();
+  });
 });
 
 describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => {

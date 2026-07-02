@@ -121,12 +121,19 @@ function isBesieged(graph, homeId) {
 }
 
 /**
- * Does `homeId` carry an active war_pressure condition (an occupation / assault aftermath)?
- * @param {any} item
+ * Is `homeId` OCCUPIED — an entry in the authoritative `worldState.occupations`
+ * ledger (the war layer's occupation state machine, keyed by the occupied id)?
+ * Conditions are deliberately NOT consulted: an ambient `war_pressure` condition
+ * (harassment, an assault aftermath, a nearby war) used to read as "occupied"
+ * here, minting a false "throws off its occupiers" chronicle event plus an
+ * unearned occupation_lifted recovery on a never-occupied home. The ledger is
+ * absent on a war-off / unconquered campaign, so this stays a pure no-op there.
+ * @param {any} snapshot
+ * @param {string} homeId
  */
-function isOccupied(item) {
-  const conditions = item?.activeConditions || [];
-  return conditions.some(/** @param {any} cond */ cond => cond?.archetype === 'war_pressure' && (cond.status !== 'easing'));
+function isOccupied(snapshot, homeId) {
+  const occupations = snapshot?.worldState?.occupations;
+  return Boolean(occupations && typeof occupations === 'object' && occupations[String(homeId)]);
 }
 
 /**
@@ -243,14 +250,17 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           generatedAtTick: tick,
           tick,
           headline: `${homeName}'s army comes home`,
-          summary: `${survivors.toLocaleString()} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString()} did not` : ''}.`,
+          // Locale pinned to 'en-US' (as populationDynamics does): this summary
+          // persists into wizardNews/chronicle records, so a bare toLocaleString()
+          // would make the same seed produce different bytes across runner locales.
+          summary: `${survivors.toLocaleString('en-US')} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`,
           populationDeltas: [{ saveId: homeId, delta: survivors, reason: `${homeName}'s surviving soldiers return home.` }],
           metadata: { warEconomy: 'homecoming', armyId: homeId, survivors, fell, deployedPopulation },
         });
       }
     }
 
-    if (isOccupied(item)) {
+    if (isOccupied(snapshot, homeId)) {
       // STRENGTH-SCALED: a strong returning army breaks the foreign occupation; a
       // depleted one mounts a FAILED rebellion (it cannot retake its own home).
       const pSuccess = returnSuccessProbability(ratio);

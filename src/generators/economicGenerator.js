@@ -281,6 +281,14 @@ const deriveFoodSecurityHooks = (population, terrain, institutions, config, food
         hook: ' PLOT HOOK: Settlement is starving. Desperate villagers might turn to banditry, or a merchant offers to supply food... at a terrible price (debt servitude? dark pact?).',
         severity: 'critical',
       });
+      // Roads carry raidable caravans, so a road deficit also invites bandit
+      // pressure on the food supply line — additive to the survival crisis above.
+      if (route === 'road')
+        hooks.push({
+          category: 'Bandit Raids',
+          hook: ' PLOT HOOK: Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
+          severity: 'medium',
+        });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
@@ -298,12 +306,6 @@ const deriveFoodSecurityHooks = (population, terrain, institutions, config, food
           category: 'Naval Blockade',
           hook: ` PLOT HOOK: Enemy fleet or pirates blockade the port. Settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves. Hire ships to break blockade? Negotiate? Starve?`,
           severity: 'high',
-        });
-      if (route === 'road' && hasDeficit)
-        hooks.push({
-          category: 'Bandit Raids',
-          hook: ' PLOT HOOK: Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
-          severity: 'medium',
         });
     }
   }
@@ -1139,7 +1141,10 @@ const generateTradeIncomeStreams = (tier, institutions = [], route = 'road', goo
   const isEntrepot = getTradeRouteBonus(route, institutions);
   const hasSaltLocal = necessityImports.some((i) => i.toLowerCase() === 'salt');
   const exports = getGoodsModifiers(tier, institutions, goodsToggles)
-    .filter((item) => !necessityImports.includes(item.name))
+    .filter((item) => {
+      const name = typeof item === 'string' ? item : item?.name || '';
+      return !necessityImports.includes(name);
+    })
     .filter((item) => {
       const name = typeof item === 'string' ? item : item?.name || '';
       return !(hasSaltLocal && !isEntrepot && hasEconomicKeyword(name));

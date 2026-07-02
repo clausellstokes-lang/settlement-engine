@@ -130,6 +130,26 @@ Deno.test('a valid admin update_user_credits routes to service_set_credits with 
   assertEquals(args.new_credits, 42);
 });
 
+Deno.test('grant_credits routes the RAW DELTA to the atomic service_adjust_credits RPC (no TS read-modify-write)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'grant_credits', userId: 'target1', credits: -3, actor_user: 'someone_else' },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  // The delta lands in the DB untouched — the balance math happens INSIDE the
+  // locked RPC (103), never as an edge-side read → compute → absolute-set,
+  // which raced concurrent user spends.
+  const adjust = stub.rpc.find((c) => c.fn === 'service_adjust_credits');
+  assertEquals(adjust !== undefined, true);
+  const args = adjust!.args as { actor_user: string; target_user: string; delta: number };
+  assertEquals(args.actor_user, 'admin1'); // verified JWT, not the body's someone_else
+  assertEquals(args.target_user, 'target1');
+  assertEquals(args.delta, -3);
+  assertEquals(stub.rpc.find((c) => c.fn === 'service_set_credits'), undefined);
+});
+
 Deno.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge gate, defense-in-depth)', async () => {
   // support passes the general elevated-role gate but is NOT "highest". The edge
   // gate must reject the real-money credit set BEFORE the service_set_credits RPC

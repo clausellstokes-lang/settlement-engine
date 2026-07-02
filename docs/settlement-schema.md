@@ -155,8 +155,15 @@ schema's `FIELD_ALIASES` map declares those relationships, and
 `normalizeSettlement` promotes them to the canonical shape. Today:
 
 ```
-stressors ← stress | stresses | stressTypes
+stressors ← stress | stresses
 ```
+
+`stressTypes` is deliberately **not** an alias of `stressors`: it is a separate
+`string[]` field (type labels), whereas `stressors` holds stressor objects
+(`type`/`name`/`severity`). Aliasing it would let `normalizeSettlement` write a
+`string[]` into the object-expecting `stressors` field and corrupt substrate
+readers. `FIELD_ALIASES` and `canonicalAccessors.canonStressors` both exclude
+it for this reason.
 
 When adding a new alias, update three places:
 

@@ -1323,7 +1323,7 @@ export const EVENT_TYPE_NAMES = {
   resource_scarcity:   'The Shortage',
   guild_conflict:      'The Guild War',
   corruption_scandal:  'The Scandal',
-  infiltration_fear:   'The Occupation',
+  infiltration_fear:   'The Purge',
   leadership_vacuum:   'The Interregnum',
   occupation_legacy:   'The Occupation',
   disputed_land:       'The Land Dispute',
