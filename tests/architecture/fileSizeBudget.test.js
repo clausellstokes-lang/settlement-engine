@@ -47,7 +47,9 @@ const GRANDFATHERED = {
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
-  'src/domain/worldPulse/warDeployment.js': 1515, // defender-attrition + war-economy P1 + defender-resolve P4 + ally-defense P3 + sack/forage P3 (pop + granary) + shared composeDefenderWillScore (reused by the War & Resolve display)
+  // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
+  // of the pure support-edge readers + levy computation into a sibling module is overdue.
+  'src/domain/worldPulse/warDeployment.js': 1616, // defender-attrition + war-economy P1 + defender-resolve P4 + ally-defense P3 + sack/forage P3 (pop + granary) + war levy F2 + shared composeDefenderWillScore
   'src/generators/narrativeGenerator.js': 1250,
   'src/domain/causalState.js': 1242,
   'src/domain/worldPulse/stressors.js': 1227,

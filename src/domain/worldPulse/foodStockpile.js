@@ -420,19 +420,24 @@ export const FORAGE_FOOD_CAPTURE_FRACTION = 0.6; // 60% of the loot reaches the 
  * is always ≤ `lost × conqueredPop` ⇒ absolute food is never minted. Null when there is
  * nothing to seize (no granary ledger, zero population, or an empty granary).
  *
- * @param {{ conqueredStorageMonths?: any, conqueredPopulation?: any, victorStorageMonths?: any, victorPopulation?: any, victorCapMonths?: any }} args
+ * `takeFraction` / `captureFraction` default to the sack's aggressive values; a gentler pair
+ * models a voluntary levy (F2) drawing grain from a willing vassal. The same conserved
+ * arithmetic serves both — the source loses a fraction of its granary, the recipient gains
+ * the captured share re-expressed in its own months, never minting absolute food.
+ *
+ * @param {{ conqueredStorageMonths?: any, conqueredPopulation?: any, victorStorageMonths?: any, victorPopulation?: any, victorCapMonths?: any, takeFraction?: number, captureFraction?: number }} args
  * @returns {{ lostMonths: number, gainedMonths: number } | null}
  */
-export function computeSackFoodTransfer({ conqueredStorageMonths, conqueredPopulation, victorStorageMonths, victorPopulation, victorCapMonths } = {}) {
+export function computeSackFoodTransfer({ conqueredStorageMonths, conqueredPopulation, victorStorageMonths, victorPopulation, victorCapMonths, takeFraction = SACK_FOOD_FRACTION, captureFraction = FORAGE_FOOD_CAPTURE_FRACTION } = {}) {
   const cMonths = Math.max(0, Number(conqueredStorageMonths) || 0);
   const cPop = Math.max(0, Number(conqueredPopulation) || 0);
   const vPop = Math.max(0, Number(victorPopulation) || 0);
   const vMonths = Math.max(0, Number(victorStorageMonths) || 0);
   const vCap = Math.max(0, Number(victorCapMonths) || 0);
-  const lostMonths = round1(SACK_FOOD_FRACTION * cMonths);
+  const lostMonths = round1(Math.max(0, Number(takeFraction) || 0) * cMonths);
   if (lostMonths <= 0 || cPop <= 0 || vPop <= 0) return null;
   const seizedAbs = lostMonths * cPop;                    // ∝ absolute food (per-capita need cancels)
-  const gainedAbs = FORAGE_FOOD_CAPTURE_FRACTION * seizedAbs;
+  const gainedAbs = Math.max(0, Math.min(1, Number(captureFraction))) * seizedAbs;
   const headroom = Math.max(0, vCap - vMonths);
   // FLOOR the seized share (not round) so rounding can only ever UNDER-credit the victor —
   // absolute food is never minted: `gained × victorPop ≤ gainedAbs ≤ lost × conqueredPop`.

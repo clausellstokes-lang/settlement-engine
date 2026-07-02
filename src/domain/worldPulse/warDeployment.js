@@ -122,6 +122,17 @@ export function composeDefenderWillScore({ willFacet, legitimacyScore, logistics
 const ALLY_SUPPORT_TYPES = new Set(['allied', 'ally', 'vassal', 'patron', 'defensive_pact']);
 const ALLY_RELIEF_FRACTION = 0.4;
 
+// War levy (F2, flag-gated). A warring settlement raises men + grain from its non-besieged
+// vassal / allied neighbours. LEVY_SUPPORT_TYPES excludes 'patron' — you levy subordinates
+// and peers, not your own overlord. The strain is the loyalty cost: a levied vassal accrues
+// war-weariness, so an over-drawn client eventually rebels (and, under warDisposition, coups).
+const LEVY_SUPPORT_TYPES = new Set(['vassal', 'allied', 'ally', 'defensive_pact']);
+const LEVY_POP_RATE_PER_TICK = 0.004; // ~0.4% of a vassal's population per tick (gentler than home conscription)
+const LEVY_POP_FLOOR = 300;           // never levy a vassal below this skeleton population
+const LEVY_STRAIN_PER_TICK = 0.05;    // war-weariness a vassal accrues per tick of being levied (the loyalty cost)
+const LEVY_FOOD_FRACTION = 0.1;       // a tenth of the vassal's granary flows to the war each tick
+const LEVY_FOOD_CAPTURE = 0.6;        // of that, 60% reaches the overlord; the rest is en-route loss
+
 /**
  * Relief a besieged target can draw from its support-relationship neighbours (P3). Sums a
  * fraction of each allied/vassal/patron neighbour's home defense — but an ally that is
@@ -149,6 +160,30 @@ export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) 
     relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
   }
   return relief;
+}
+
+/**
+ * The non-besieged, non-deploying vassal / allied neighbours a warring settlement can levy
+ * from (F2). Mirrors computeAllyRelief's symmetric support-edge reading, but over
+ * LEVY_SUPPORT_TYPES (no 'patron'), and drops any source in `excludeSet` (itself besieged or
+ * fielding its own army — it can spare nothing). Pure, codepoint-sorted, order-independent.
+ * @param {any} snapshot @param {string} homeId @param {Set<string>} excludeSet
+ * @returns {string[]}
+ */
+export function computeLevySources(snapshot, homeId, excludeSet) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const sources = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    if (!LEVY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a === String(homeId) && snapshot?.byId?.has?.(b)) sources.add(b);
+    else if (b === String(homeId) && snapshot?.byId?.has?.(a)) sources.add(a);
+  }
+  return [...sources].filter(id => !excludeSet.has(String(id))).sort(codepoint);
 }
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that
@@ -939,6 +974,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const defenderResolveEnabled = !!(/** @type {any} */ (rules)?.defenderResolveEnabled);
   const allyDefenseEnabled = !!(/** @type {any} */ (rules)?.allyDefenseEnabled);
   const warForageEnabled = !!(/** @type {any} */ (rules)?.warForageEnabled);
+  const warLevyEnabled = !!(/** @type {any} */ (rules)?.warLevyEnabled);
   const defenderSiegeLedger = defenderAttritionEnabled ? { ...(worldState?.defenderSiegeLedger || {}) } : null;
   const ongoingSieges = defenderAttritionEnabled ? new Set() : null;
 
@@ -1381,6 +1417,71 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           summary: `${name} sends ${sent.toLocaleString()} more to the army besieging ${targetName}.`,
           populationDeltas: [{ saveId: fromId, delta: -sent, reason: `${name} conscripts men for the campaign against ${targetName}.` }],
           metadata: { warEconomy: 'conscription', armyId: fromId, sent },
+        });
+      }
+    }
+
+    // ── WAR LEVY (F2, flag-gated; inert + byte-identical when off). The deploying home also
+    // draws men + grain from its NON-besieged, NON-deploying vassal / allied neighbours. The
+    // men join the overlord's army (a conserved populationDelta debit on the vassal + a
+    // deployedPopulation credit, so homecoming returns the survivors); the grain is a gentle
+    // conserved granary transfer. The cost is LOYALTY: each levied vassal accrues war-weariness
+    // (→ rebellion, and couplable under warDisposition), so an over-drawn client turns on its
+    // overlord. Rides a MINOR war_levy outcome (auto-applied like conscription). ─────────────
+    if (warLevyEnabled) {
+      const excludeSet = new Set([...targets, ...Object.keys(deployments).map(String)]);
+      const home = snapshot?.byId?.get?.(fromId)?.settlement;
+      /** @type {any[]} */
+      const levyPopDeltas = [];
+      /** @type {any[]} */
+      const levyFoodDeltas = [];
+      let totalLevied = 0;
+      for (const srcId of computeLevySources(snapshot, fromId, excludeSet)) {
+        const src = snapshot?.byId?.get?.(srcId)?.settlement;
+        if (!src) continue;
+        const srcName = settlementNameFor(srcId);
+        // Men: a floored fraction of the vassal's population marches into the overlord's army.
+        const srcPop = Math.max(0, Math.round(Number(src.population) || 0));
+        const levied = Math.min(Math.round(srcPop * LEVY_POP_RATE_PER_TICK), Math.max(0, srcPop - LEVY_POP_FLOOR));
+        if (levied > 0) {
+          totalLevied += levied;
+          levyPopDeltas.push({ saveId: srcId, delta: -levied, reason: `${srcName} levies men for ${name}'s war against ${targetName}.` });
+        }
+        // Grain: a gentle conserved granary transfer from the vassal to the overlord's home.
+        const food = home ? computeSackFoodTransfer({
+          conqueredStorageMonths: src?.economicState?.foodSecurity?.storageMonths,
+          conqueredPopulation: src.population,
+          victorStorageMonths: home?.economicState?.foodSecurity?.storageMonths,
+          victorPopulation: home.population,
+          victorCapMonths: storageCapacityMonths(home),
+          takeFraction: LEVY_FOOD_FRACTION,
+          captureFraction: LEVY_FOOD_CAPTURE,
+        }) : null;
+        if (food && food.lostMonths > 0) {
+          levyFoodDeltas.push({ saveId: srcId, deltaMonths: -food.lostMonths, reason: `${srcName}'s granary feeds ${name}'s war.` });
+          if (food.gainedMonths > 0) levyFoodDeltas.push({ saveId: fromId, deltaMonths: food.gainedMonths, reason: `Grain levied from ${srcName} resupplies ${name}.` });
+        }
+        // Loyalty cost: the levied vassal grows war-weary (feeds P2's coup flywheel).
+        if (levied > 0 || (food && food.lostMonths > 0)) {
+          warExhaustion[srcId] = clamp01((warExhaustion[srcId] || 0) + LEVY_STRAIN_PER_TICK);
+        }
+      }
+      if (totalLevied > 0) {
+        const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
+        deployments[fromId] = { ...deployments[fromId], deployedPopulation: prevDeployed + totalLevied };
+      }
+      if (levyPopDeltas.length || levyFoodDeltas.length) {
+        outcomes.push({
+          id: `world_outcome.war_levy.${stablePart(fromId)}.${tick}`,
+          candidateType: 'war_levy',
+          targetSaveId: fromId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${name} calls up its vassals`,
+          summary: `${name} levies ${totalLevied.toLocaleString()} men and grain from its vassals and allies for the war against ${targetName}.`,
+          ...(levyPopDeltas.length ? { populationDeltas: levyPopDeltas } : {}),
+          ...(levyFoodDeltas.length ? { foodStockpileDeltas: levyFoodDeltas } : {}),
+          metadata: { warEconomy: 'levy', armyId: fromId, levied: totalLevied },
         });
       }
     }

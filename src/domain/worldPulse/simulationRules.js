@@ -80,9 +80,18 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // fraction of the conquered population as a CONSERVED transfer with a war-dead sink —
   // some are pressed into service and marched to the victor's home (spoils), the rest are
   // killed or scattered — so a siege finally costs the conquered real blood and rewards
-  // the victor. The deltas ride the conquest outcome, so a dismissed/deferred conquest
-  // withholds the sack atomically (no phantom population loss). Preset-stable.
+  // the victor — and it loots the granary (a conserved storageMonths transfer). The deltas
+  // ride the conquest outcome, so a dismissed/deferred conquest withholds the sack
+  // atomically (no phantom population/food). Preset-stable.
   warForageEnabled: false,
+  // War levy (F2). Opt-in, DEFAULT FALSE ⇒ byte-identical (a warring settlement raises its
+  // army from its own home alone). When true, a settlement fielding an army also LEVIES men
+  // and grain from its non-besieged vassal / allied neighbours each tick — a CONSERVED
+  // transfer (the vassal's people join the overlord's army, its granary feeds the war) at a
+  // LOYALTY cost: the levied vassal accrues war-weariness, so an over-drawn client turns
+  // rebellious (and, with warDispositionEnabled, more couplable — it can end the arrangement
+  // by coup). Nested under warLayerEnabled. Preset-stable.
+  warLevyEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -152,6 +161,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'warDispositionEnabled',
   'allyDefenseEnabled',
   'warForageEnabled',
+  'warLevyEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([
