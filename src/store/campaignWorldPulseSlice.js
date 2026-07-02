@@ -83,6 +83,10 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
+// Light transport for the off-main-thread advance (NO domain edge — it takes the
+// sim function as a fallback, so this slice keeps its no-static-worldPulse-import
+// invariant; the sim still enters only via loadWorldPulse()).
+import { runAdvanceInterval } from '../lib/advanceWorkerClient.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
 import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
@@ -471,15 +475,25 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // Flag-gated path select (commit:true rides the interval orchestrator's
         // final tick; the single-tick path commits as before). The composed
         // result has the SAME shape, so Phase 2 + persist + analytics are identical.
+        const multiTickArgs = {
+          campaign: simCampaign,
+          saves: simSaves,
+          interval,
+          commit: true,
+          now,
+          autoResolve,
+        };
         result = useMultiTick
-          ? await domainSimulateCampaignWorldInterval({
-              campaign: simCampaign,
-              saves: simSaves,
-              interval,
-              commit: true,
-              now,
-              autoResolve,
-            })
+          // The worker runs the SAME simulate function off the main thread; the
+          // fallback is the in-thread call, used in Node/tests and when the flag is
+          // off. customContent is snapshotted so the worker's chain-activation seam
+          // matches the page (see advanceWorkerClient / dependencyEngine).
+          ? await (flag('simAdvanceWorker')
+              ? runAdvanceInterval(multiTickArgs, {
+                  fallback: domainSimulateCampaignWorldInterval,
+                  customContent: cloneJson(get().customContent) || {},
+                })
+              : domainSimulateCampaignWorldInterval(multiTickArgs))
           : domainAdvanceCampaignWorld({
               campaign: simCampaign,
               saves: simSaves,
@@ -757,7 +771,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // serializes resume/advance on this campaign across the yield, and the resume
     // is pure over the cursor's pre-tick inputs, so the yield changes only WHEN
     // the commit lands, not WHAT it computes (seed-replay determinism preserved).
-    result = await domainSimulateCampaignWorldInterval({
+    const resumeArgs = {
       campaign: simCampaign,
       saves: simSaves,
       commit: true,
@@ -777,7 +791,15 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         // multi-segment interval collapses to ONE composed record on finish.
         preIntervalHistoryLen: cursor.preIntervalHistoryLen,
       },
-    });
+    };
+    // Same worker/fallback split as the advance path (a resumed segment is also a
+    // multi-tick run through the same simulate function).
+    result = await (flag('simAdvanceWorker')
+      ? runAdvanceInterval(resumeArgs, {
+          fallback: domainSimulateCampaignWorldInterval,
+          customContent: cloneJson(get().customContent) || {},
+        })
+      : domainSimulateCampaignWorldInterval(resumeArgs));
 
     if (result && result.status) {
       set(state => {

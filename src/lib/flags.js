@@ -97,6 +97,17 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. Set false to fall back to the legacy single-tick advance.',
   },
+  // Runs the multi-tick advance in a Web Worker so the main thread stays
+  // interactive during a long advance (a year is 48 synchronous kernel ticks). The
+  // worker runs the SAME pure simulate function with a custom-content snapshot, so
+  // output is byte-identical to the in-thread path; a killswitch fallback runs it
+  // in-thread when off (and it always runs in-thread in Node/tests/SSR, where there
+  // is no Worker). Set false (?flag.simAdvanceWorker=false) for instant per-browser
+  // rollback to the synchronous advance.
+  simAdvanceWorker: {
+    default: true,
+    description: 'Run the multi-tick world advance in a Web Worker (main thread stays interactive). Byte-identical output; set false to fall back to the in-thread advance.',
+  },
   // The read-only surfacing layer for the war-economy phases (P1-P4 + sack). OFF by
   // default. When on, a "War & Resolve" tab reads each settlement's morale signals —
   // Hope, Resolve, Faith relation, Supply, and the pro-war / anti-war balance — and the
