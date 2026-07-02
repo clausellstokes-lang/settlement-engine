@@ -27,7 +27,7 @@ import { classifyInstitution } from './registry.js';
  * that archetype's response; every other faction falls through to the generic
  * neutral responder, so each faction emits at least a stance.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {Event}  event
  * @returns {FactionResponse[]}
  */
@@ -61,7 +61,7 @@ const CANONICAL_TO_RESPONDER = Object.freeze({
  * so faction responses classify factions the same way every other layer does.
  * Falls back to `null` for archetypes with no specific responder; the caller then
  * routes those through the generic neutral responder.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  */
 function matchArchetype(faction) {
   return /** @type {Record<string, any>} */ (CANONICAL_TO_RESPONDER)[factionArchetype(faction)] || null;
@@ -90,9 +90,9 @@ const ARCHETYPE_RESPONDERS = {
  * authored. The AI narrative layer (when wired) gets the structured
  * response and can elaborate; the structured response is the source of
  * truth.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} event
- * @param {any} [_settlement]
+ * @param {import('../settlement.schema.js').SimSettlement} [_settlement]
  */
 function respondAsMerchantGuild(faction, event, _settlement) {
   const name = faction.name || faction.faction || 'Merchant Guild';
@@ -206,7 +206,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
  *               sermons, claim to moral high ground.
  * Vulnerability: depends on legitimacy that can collapse from a single
  *               failed prophecy or scandal.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} event
  */
 function respondAsTemple(faction, event /* , settlement */) {
@@ -325,7 +325,7 @@ function respondAsTemple(faction, event /* , settlement */) {
  *               networks, holding cells.
  * Vulnerability: vulnerable to political shifts in the ruling order;
  *               low pay creates corruption pressure.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} event
  */
 function respondAsWatch(faction, event /* , settlement */) {
@@ -457,7 +457,7 @@ function respondAsWatch(faction, event /* , settlement */) {
  *               rackets, blackmail material on prominent citizens.
  * Vulnerability: depends on watch corruption and on the silence of its
  *               own ranks.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} event
  */
 function respondAsThievesGuild(faction, event /* , settlement */) {
@@ -578,7 +578,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
  * line keyed off the event type, never model-driven prose. This is intentionally
  * minimal — when a faction earns its own archetype card, add a specific responder
  * and it stops falling through here.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} event
  */
 function respondAsGeneric(faction, event /* , settlement */) {

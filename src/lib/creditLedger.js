@@ -24,7 +24,17 @@
  * drift the first time we add a grant kind on the server.
  */
 
-import { supabase, isConfigured } from './supabase.js';
+import { supabase, isConfigured, withTimeout } from './supabase.js';
+
+/** True when an error means the ledger schema isn't present yet (pre-007
+ *  deploy), so a legacy-counter fallback is the right move. A transient
+ *  network/RLS blip is NOT this — it must surface, not silently read 0. */
+function isMissingLedgerError(e) {
+  if (!e) return false;
+  if (e.code === '42883' || e.code === '42P01') return true; // undefined_function / undefined_table
+  const text = `${e.message || ''} ${e.details || ''}`.toLowerCase();
+  return text.includes('does not exist') || text.includes('could not find');
+}
 
 // ── Source labels (UI-friendly) ───────────────────────────────────────────
 // Keys mirror `credit_ledger.source` values in 007_credit_ledger.sql.
@@ -52,7 +62,7 @@ const SOURCE_LABELS = Object.freeze({
 export async function fetchCreditBalanceFromLedger() {
   if (!isConfigured) return 0;
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) return 0;
 
   // The RPC is `get_credit_balance(target_user uuid)`. Supabase v2
@@ -62,10 +72,13 @@ export async function fetchCreditBalanceFromLedger() {
   });
 
   if (error) {
-    // Fall back to the legacy profiles.credits column if the ledger
-    // isn't migrated yet. This lets us deploy the client before the
-    // server migration without breaking the balance display.
-    return fetchLegacyBalance();
+    // Fall back to the legacy profiles.credits column ONLY if the ledger
+    // isn't migrated yet (this lets us deploy the client before the server
+    // migration). A transient network/RLS error is NOT a missing ledger —
+    // throw it so the caller can preserve the last-known balance instead of
+    // silently rendering 0 for a paying user.
+    if (isMissingLedgerError(error)) return fetchLegacyBalance();
+    throw error;
   }
   return Number(data) || 0;
 }
@@ -77,7 +90,7 @@ export async function fetchCreditBalanceFromLedger() {
 export async function fetchRecentTransactions(limit = 50) {
   if (!isConfigured) return [];
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) return [];
 
   const { data, error } = await supabase
@@ -126,7 +139,7 @@ export function formatLedgerRow(row) {
 // migration. Once the migration is live everywhere, delete these.
 
 async function fetchLegacyBalance() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) return 0;
 
   const { data, error } = await supabase
@@ -135,12 +148,15 @@ async function fetchLegacyBalance() {
     .eq('id', user.id)
     .single();
 
-  if (error) return 0;
+  // A genuine query error here is a failure, not a zero balance — throw so the
+  // caller (stripe.fetchCreditBalance) can return "unknown" and the UI keeps
+  // the last-known value instead of alarming a paying user with 0.
+  if (error) throw error;
   return Number(data?.credits) || 0;
 }
 
 async function fetchLegacyTransactions(limit) {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
   if (!user) return [];
 
   const { data, error } = await supabase

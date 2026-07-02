@@ -6,7 +6,7 @@
 // history-ring collapse. Imports the kernel + the shared helpers (saveId,
 // usableTickInterval); never imported BY the kernel (keeps the chain acyclic).
 import { ensureWorldState } from './worldState.js';
-import { wallClockNow } from '../clock.js';
+import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
 
@@ -21,9 +21,14 @@ const YIELD_EVERY_TICKS = 8;
 /**
  * Yield to the event loop so pending paints/tasks can run between tick batches.
  * Prefers the platform scheduler.yield() (lower-priority continuation) when
- * present, falling back to a resolved microtask. Awaiting either is a no-op for
- * the simulation's output — it only defers WHEN the next tick runs, not WHAT it
- * computes.
+ * present. The fallback MUST be a MACROTASK: a resolved promise resumes in a
+ * microtask, BEFORE the browser regains the event loop, so a microtask
+ * "fallback" never actually yields — the whole advance stays one long task and
+ * paint/input starve on browsers without scheduler.yield (Safari, older
+ * Firefox/Chromium). MessageChannel posts an unthrottled macrotask (setTimeout
+ * is clamped, and heavily throttled in background tabs); setTimeout(0) is the
+ * last resort. Awaiting any of these is a no-op for the simulation's output —
+ * it only defers WHEN the next tick runs, not WHAT it computes.
  * @returns {Promise<void>}
  */
 function yieldToEventLoop() {
@@ -31,7 +36,45 @@ function yieldToEventLoop() {
   if (scheduler && typeof scheduler.yield === 'function') {
     return Promise.resolve(scheduler.yield());
   }
-  return Promise.resolve();
+  if (typeof MessageChannel === 'function') {
+    return new Promise((resolve) => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => {
+        channel.port1.close();
+        resolve();
+      };
+      channel.port2.postMessage(null);
+    });
+  }
+  return new Promise((resolve) => { setTimeout(resolve, 0); });
+}
+
+// Progress channel for the toolbar's determinate "Advancing N of Y" bar. The
+// orchestrator reports after EVERY completed kernel tick, two ways at once:
+//   • the optional `onProgress` callback (the direct API for callers that can
+//     thread one through), and
+//   • a CustomEvent on globalThis — the UI hook (useAdvanceSession) listens for
+//     this so progress reaches it WITHOUT threading a callback through the
+//     store's lazy-loaded seam. The event name is mirrored there (the hook must
+//     not import this heavy chunk), so treat the string as a frozen contract.
+// Reporting is fire-and-forget and reads nothing back: a throwing observer or a
+// host without CustomEvent (older Node) must never affect the advance, so both
+// legs are guarded. Purely observational — determinism is untouched.
+export const ADVANCE_PROGRESS_EVENT = 'settlementforge:advance-progress';
+
+/**
+ * @param {((detail: {ticksDone:number, ticksTotal:number, interval:string}) => void)|null|undefined} onProgress
+ * @param {{ticksDone:number, ticksTotal:number, interval:string}} detail
+ */
+function reportAdvanceProgress(onProgress, detail) {
+  if (typeof onProgress === 'function') {
+    try { onProgress(detail); } catch { /* observer errors must not kill the advance */ }
+  }
+  const host = /** @type {any} */ (globalThis);
+  if (typeof host.dispatchEvent !== 'function' || typeof host.CustomEvent !== 'function') return;
+  try {
+    host.dispatchEvent(new host.CustomEvent(ADVANCE_PROGRESS_EVENT, { detail }));
+  } catch { /* no listener contract — never let the notification break the tick loop */ }
 }
 
 // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
@@ -181,6 +224,11 @@ function foldUpdatesOntoSaves(saves, updates) {
  * }|null} [args.resume] Stage 3 RESUME cursor (from a prior pause). When set, the
  *   orchestrator re-runs `resumeTick` from the pre-tick inputs (with decisions
  *   folded in), then continues.
+ * @param {((detail: {ticksDone:number, ticksTotal:number, interval:string}) => void)|null} [args.onProgress]
+ *   Called after EVERY completed kernel tick with the running tick count (a
+ *   resumed segment continues from its cursor, so ticksDone picks up where the
+ *   pause left off). Observational only — see reportAdvanceProgress; the same
+ *   detail is also dispatched as ADVANCE_PROGRESS_EVENT on globalThis.
  *
  * ASYNC: the orchestrator is async + yields to the event loop every
  * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 48
@@ -193,9 +241,13 @@ function foldUpdatesOntoSaves(saves, updates) {
  * @returns {Promise<any>}
  */
 export async function simulateCampaignWorldInterval({
-  campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(),
-  autoResolve = true, resume = null,
+  campaign, saves = [], interval = 'one_month', commit = false, now,
+  autoResolve = true, resume = null, onProgress = null,
 } = {}) {
+  // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
+  // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
+  // call would forfeit reproducibility across the whole year. Throw in test.
+  if (now == null) { assertNowPinnedInTest('simulateCampaignWorldInterval'); now = wallClockNow(); }
   // The DM-CHOSEN interval (one_year/one_month/…). Interior ticks always run at
   // one_week granularity; the composed metadata folds the DM's chosen label back.
   const resuming = !!resume;
@@ -288,6 +340,12 @@ export async function simulateCampaignWorldInterval({
     if (tickResult.proposals) proposals.push(...tickResult.proposals);
     if (tickResult.resolvedStressors) resolvedStressors.push(...tickResult.resolvedStressors);
     if (tickResult.majors) majors.push(...tickResult.majors);
+
+    // Progress beat: tick i is fully computed (whether the loop pauses on it or
+    // threads onward), so the determinate bar can read i+1 of tickCount. The
+    // React state updates this feeds are batched; they PAINT at the macrotask
+    // yields below. Observational only — never touches the tick pipeline.
+    reportAdvanceProgress(onProgress, { ticksDone: i + 1, ticksTotal: tickCount, interval: chosenInterval });
 
     // PAUSE BOUNDARY (autoresolve OFF): this tick committed its minors and surfaced
     // majors. STOP at the tick boundary — after the minor-commit, before tick i+1's

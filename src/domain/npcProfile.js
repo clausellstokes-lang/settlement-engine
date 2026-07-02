@@ -23,6 +23,8 @@
  * self-contained, the same constraint the sibling derivations honor.
  */
 
+import { institutionMatchesRegex } from './institutionClassify.js';
+
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
 // the faction archetype vocabulary. We map them
@@ -112,8 +114,11 @@ function templateForArchetype(archetype) {
 // ── Consequence-if-removed templates ─────────────────────────────────────
 // The headline feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
-// Severity scales with `structuralRank` ('dominant' / 'secondary' /
-// 'minor'); the consequence palette comes from the archetype.
+// Severity scales with `structuralRank`; the consequence palette comes from
+// the archetype. The generator's getRank (npcStructure.js) emits
+// 'dominant' | 'subordinate', so the mid tier is keyed 'subordinate' to match —
+// keying it 'secondary' left every non-dominant NPC falling through to 'minor'.
+// 'minor' is retained for legacy/explicit-minor NPCs.
 
 const REMOVAL_CONSEQUENCES = Object.freeze({
   military: {
@@ -123,7 +128,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public order strains within weeks; criminal activity rises.',
       'A succession dispute opens among the surviving captains.',
     ],
-    secondary: [
+    subordinate: [
       'A unit captain loses their reporting line briefly.',
       'A subordinate moves up; the new face takes time to settle.',
     ],
@@ -138,7 +143,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
-    secondary: [
+    subordinate: [
       'A clerk or under-official scrambles to backfill paperwork.',
       'The governing body absorbs the role temporarily.',
     ],
@@ -153,7 +158,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
-    secondary: [
+    subordinate: [
       'A novice or under-priest steps up unprepared.',
       'Donations dip until a new face earns trust.',
     ],
@@ -168,7 +173,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A rival guildmaster consolidates the routes.',
       'Tax revenue drops as the books reshuffle.',
     ],
-    secondary: [
+    subordinate: [
       'A specific contract goes unfulfilled; clients seek alternatives.',
       'Guild succession becomes the dinner-table topic.',
     ],
@@ -182,7 +187,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Cheap imports flow in unchecked; quality drops.',
       'Apprentices scatter to other masters.',
     ],
-    secondary: [
+    subordinate: [
       'A workshop closes or transfers ownership.',
     ],
     minor: [
@@ -196,7 +201,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A corruption network collapses; protected favors become vulnerable.',
       'The watch claims a public victory whether or not it caused this.',
     ],
-    secondary: [
+    subordinate: [
       'A lieutenant takes over; old favors get reaccounted.',
     ],
     minor: [
@@ -210,7 +215,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Arcane research projects stall or move elsewhere.',
       'Public superstition resurges without the moderating expert.',
     ],
-    secondary: [
+    subordinate: [
       'A research line is paused; reagents get reassigned.',
     ],
     minor: [
@@ -223,7 +228,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
-    secondary: [
+    subordinate: [
       'A junior officer takes a temporary command.',
     ],
     minor: [
@@ -234,7 +239,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
     dominant: [
       'A noticeable absence in civic life that the settlement adapts around.',
     ],
-    secondary: [
+    subordinate: [
       'A small role goes unfilled briefly.',
     ],
     minor: [
@@ -249,7 +254,10 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
  */
 function consequencesForRemoval(archetype, rank) {
   const archetypeMap = REMOVAL_CONSEQUENCES[/** @type {keyof typeof REMOVAL_CONSEQUENCES} */ (archetype)] || REMOVAL_CONSEQUENCES.other;
-  const normalizedRank = (rank || 'minor').toLowerCase();
+  // Coerce to string first: the schema unions structuralRank as string|number, so a
+  // legacy NPC with a numeric rank must not crash `.toLowerCase()` (it would take down
+  // the whole causal-substrate derivation for the settlement).
+  const normalizedRank = String(rank ?? 'minor').toLowerCase();
   const consequences = /** @type {any} */ (archetypeMap)[normalizedRank] || archetypeMap.minor || [];
   return [...consequences];
 }
@@ -332,7 +340,7 @@ export function inferInstitutionName(npc, settlement) {
 
   const match = institutions.find(
     /** @param {{name?: string}} inst */
-    inst => !!inst && typeof inst.name === 'string' && hint.test(inst.name)
+    inst => !!inst && typeof inst.name === 'string' && institutionMatchesRegex(inst, hint)
   );
   return match && typeof match.name === 'string' ? match.name : null;
 }
@@ -351,7 +359,7 @@ export function inferInstitutionName(npc, settlement) {
  * path, so the two stay consistent.
  *
  * @param {string} category  a faction/power domain (military/religious/economy/…)
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {string[]} matching institution display names (deduped, source order)
  */
 export function institutionsForCategory(category, settlement) {
@@ -366,7 +374,7 @@ export function institutionsForCategory(category, settlement) {
   const seen = new Set();
   const out = [];
   for (const inst of institutions) {
-    if (!inst || typeof inst.name !== 'string' || !hint.test(inst.name)) continue;
+    if (!inst || typeof inst.name !== 'string' || !institutionMatchesRegex(inst, hint)) continue;
     if (seen.has(inst.name)) continue;
     seen.add(inst.name);
     out.push(inst.name);
@@ -442,8 +450,8 @@ export function institutionsForPower(faction, settlement) {
 }
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferInstitutionLink(npc, settlement) {
   const name = inferInstitutionName(npc, settlement);
@@ -457,8 +465,8 @@ function inferInstitutionLink(npc, settlement) {
 // follow-up — the data is there, but the surface needs careful UX.
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
@@ -496,10 +504,10 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {any} npc       The legacy NPC entry.
+ * @param {import('./settlement.schema.js').SimNpc} npc       The legacy NPC entry.
  * @param {any} [settlement] Optional context for institution-link +
  *                              relationship-triangle derivation.
- * @returns {Object|null}
+ * @returns {any}
  */
 export function deriveNpcProfile(npc, settlement) {
   if (!npc || typeof npc !== 'object') return null;
@@ -576,12 +584,12 @@ export function deriveNpcProfile(npc, settlement) {
 
 /**
  * Enrich every NPC on a settlement. Returns []. for missing data.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveAllNpcProfiles(settlement) {
   if (!settlement) return [];
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
-  return npcs.map(/** @param {any} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
+  return npcs.map(/** @param {import('./settlement.schema.js').SimNpc} n */ n => deriveNpcProfile(n, settlement)).filter(Boolean);
 }
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
@@ -589,7 +597,7 @@ export function deriveAllNpcProfiles(settlement) {
 /**
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function npcArchetypeBreakdown(settlement) {
   // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
@@ -610,7 +618,7 @@ export function npcArchetypeBreakdown(settlement) {
  * Forecast the cumulative impact of removing all 'dominant'-rank NPCs.
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function dominantNpcRemovalImpact(settlement) {
   const dominant = deriveAllNpcProfiles(settlement)

@@ -29,7 +29,30 @@ import { deepClone } from '../clone.js';
 // like `landmarks`, `admin`, `administrative`, and `isAdmin` from public output.
 // NOTE: the server's authoritative _gallery_sanitize_public_json carries the same
 // over-match and needs a matching SQL migration (Postgres uses \y for boundaries).
-export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
+//
+// INTENTIONAL OVER-MATCH — `note`: the bare `note` token is a *deliberate*
+// conservative strip. The true DM-private note keys are dmNotes / dossierNotes /
+// notes / narrativeNotes (toPublicSafe's full-mode path drops exactly those four),
+// but bare `note` also strips analytical annotations (viabilityNote, magicNote,
+// culturalNotes, priorityNote, stressNote, …) from the STRICT public projection.
+// That is by design: this denylist errs toward stripping (per the "must only grow"
+// rule below) — over-stripping hides a field, under-stripping leaks DM content.
+// Full (owner-opted DM-share) mode re-includes the analytical notes while still
+// dropping the four real DM-note keys explicitly. To PUBLISH a specific analytical
+// note in the default projection, add an explicit allowlist exception here AND a
+// matching server change, with a security review — do not narrow `note` blindly.
+//
+// INTENTIONAL OVER-MATCH — `seed`: the bare `seed` token kills the deterministic
+// generation seed at every depth (`_seed`, `config._seed`, `_regenSeed`, any
+// future variant). The seed regenerates the FULL unsanitized settlement — every
+// secret this projection strips — so under-matching it is a total leak. `config`
+// itself is NOT stripped (public renderers read config.terrainType /
+// config.primaryDeitySnapshot / config.tradeRouteAccess); only its seed key dies.
+// The raw authoring `_config` (also seed-bearing, no public consumer) is dropped
+// as an explicit top-level delete in toPublicSafe, NOT here: the snapshot
+// denylist-drift guard requires every regex token to exist in the 089 SQL
+// mirror, which carries `seed` but not `_config`.
+export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|seed)/i;
 
 /**
  * Recursively strip denied keys; preserves history.currentTensions.
@@ -65,7 +88,7 @@ export function sanitizePublicValue(value, path = []) {
  * The public allowlist projection of a single NPC (id + non-private fields). The
  * one place that allowlist lives client-side; reused by the default-mode strip AND
  * the per-member override strip so they can never diverge.
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  */
 function publicNpc(npc) {
   return {
@@ -96,7 +119,7 @@ function snakeCase(s) {
  * NPC's stored id (created NPCs carry `npc.<slug>_<hash>`); falls back to a name
  * slug. Mirrors the SQL public._gallery_npc_key exactly so a toggle written here
  * targets the same NPC the server strips/reveals.
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  */
 export function galleryMemberKey(npc) {
   const id = npc && npc.id != null ? String(npc.id) : '';
@@ -124,7 +147,7 @@ export function galleryMemberKey(npc) {
  * the source) and never widens settlement-level content (DM Compass / plot hooks).
  * Mirrors the server's _gallery_apply_member_overrides (migration 093) so this
  * defense-in-depth / preview projection matches the authoritative read.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{ full?: boolean, memberOverrides?: Record<string, any>|null }} [options]
  */
 export function toPublicSafe(settlement, { full = false, memberOverrides = null } = {}) {
@@ -148,6 +171,15 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clone.dmNotes;
     delete clone.notes;
     delete clone.narrativeNotes;
+    // The generation seed is TRULY confidential like the notes above: it
+    // regenerates content beyond anything the owner chose to reveal (and the
+    // settlement's entire deterministic future), so it is stripped from EVERY
+    // gallery view — even full mode. `config` itself stays (the owner shares
+    // it in full mode); only its seed key and the raw `_config` die. Mirrors
+    // the server's _gallery_dm_full_json (migration 099).
+    delete clone._seed;
+    delete clone._config;
+    if (clone.config && typeof clone.config === 'object') delete clone.config._seed;
     // aiSettlement is a full refined-settlement clone — its PROSE is governed by
     // gallery_share_narrated, NOT this toggle. But the DM Compass (which the owner
     // explicitly opted to reveal) lives on it. Preserve ONLY the four DM-Compass
@@ -172,6 +204,11 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clean.dmCompass;
     delete clean.dossierNotes;
     delete clean.notes;
+    // Raw DM authoring config (sentinels + its own _seed copy). No public
+    // consumer reads it; an explicit delete rather than a PRIVATE_KEY_RE token
+    // because the 089 SQL mirror the drift guard pins lacks a `_config` token.
+    // (`_seed` / `config._seed` are already gone via the regex's `seed`.)
+    delete clean._config;
     if (Array.isArray(clean.npcs)) {
       clean.npcs = clean.npcs
         .map((/** @type {any} */ npc) => publicNpc(npc))

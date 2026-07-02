@@ -64,6 +64,13 @@ const aiRefund = (spendId) => {
   return db.query(`select public.refund_credits('${spendId}', 'ai_generation_failed')`);
 };
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allMigrationsExist).toBe(true);
+});
+
 describe.runIf(allMigrationsExist)('money-path journey — composed revenue chain (pglite)', () => {
   beforeAll(async () => {
     db = await makeCreditLedgerDb();

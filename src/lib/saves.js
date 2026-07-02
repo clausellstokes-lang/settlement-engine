@@ -26,6 +26,16 @@ export function newSaveId() {
   return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
 }
 
+/** True for a Postgres unique-violation (primary-key collision). Used so a
+ *  timeout-retry of a stable-id write that actually landed is treated as an
+ *  idempotent success instead of surfacing a spurious error. */
+function isDuplicateKeyError(e) {
+  if (!e) return false;
+  if (e.code === '23505') return true;
+  const text = `${e.message || ''} ${e.details || ''}`.toLowerCase();
+  return text.includes('duplicate key') || text.includes('unique constraint');
+}
+
 // ── Local storage helpers ───────────────────────────────────────────────────
 
 function localLoad() {
@@ -239,9 +249,15 @@ async function supabaseList() {
  *
  * This replaces the previous full-table supabaseList() read on the back-link path:
  * that pulled every save's data/config/toggles blobs and ran the v2 + canonical
- * adapters on all of them just to find one partner by name. The remaining
- * read-modify-write race (the back-link is computed from a snapshot read OUTSIDE
- * the batch RPC's transaction) needs a server-side fix — see crossBundleNotes.
+ * adapters on all of them just to find one partner by name.
+ *
+ * RESOLVED (migration 096) — the partner back-link read-modify-write race that
+ * this comment used to flag is closed. supabaseSave() now writes the reciprocal
+ * back-link via the merge_neighbour_backlink RPC, which does the partner's
+ * read-modify-write server-side under `select … for update`, so concurrent
+ * same-partner saves serialize instead of clobbering (the former JS-side merge on
+ * a stale snapshot was last-write-wins). This function only READS candidate
+ * partners by name; the atomic reciprocal merge happens in the RPC.
  */
 async function fetchActivePartnersByName(name) {
   if (!name) return [];
@@ -283,20 +299,50 @@ async function supabaseSave(entry) {
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
 
   // Bidirectional neighbour link: if this settlement was generated against an
-  // existing save, both rows must reference each other. That needs a multi-row
-  // write, so we pre-mint the id, compute both sides, and create+update
-  // atomically via the batch RPC. Skipped (single insert) when there's no
-  // generated neighbour or no matching active partner.
+  // existing save, both rows must reference each other. We write our OWN row (with
+  // the forward link) then apply the reciprocal back-link to the partner via the
+  // merge_neighbour_backlink RPC (migration 096), which does the partner's
+  // read-modify-write server-side under FOR UPDATE. This replaces the old approach
+  // of writing the partner's full STALE settlement blob through the batch UPDATE —
+  // that clobbered a concurrent save's back-link (last-write-wins). Both legs are
+  // idempotent, so the whole neighbour save is retry-safe. Skipped (single insert)
+  // when there's no generated neighbour or no matching active partner.
   if (settlement?.neighborRelationship?.name) {
-    const saveId = newSaveId();
+    // Reuse the caller's stable id (interactive Save button) so a timeout-retry
+    // targets the SAME row instead of minting a fresh one and duplicating the
+    // library entry. Other callers (post-login intent, account import) carry no
+    // clientSaveId, so they keep the freshly-minted id as before.
+    const saveId = entry.clientSaveId || newSaveId();
     // Targeted single-name lookup instead of a full-table read (see helper).
     const existing = (await fetchActivePartnersByName(settlement.neighborRelationship.name)).filter(isSaveActive);
     const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
     if (link) {
-      await supabaseMutateBatch({
-        creates: [{ ...v2, id: saveId, settlement: link.settlement }],
-        updates: [{ id: link.partner.id, settlement: link.partner.settlement }],
-      });
+      // 1) Our own row (carries the forward link). The batch create is a plain
+      //    INSERT; a stable-id retry of a write that already landed collides on the
+      //    PK — treat that as "own row exists" and fall through to the (idempotent)
+      //    back-link merge so the retry still completes the link.
+      try {
+        await supabaseMutateBatch({ creates: [{ ...v2, id: saveId, settlement: link.settlement }] });
+      } catch (e) {
+        if (!(entry.clientSaveId && isDuplicateKeyError(e))) throw e;
+      }
+      // 2) The partner's reciprocal back-link — applied atomically server-side so a
+      //    concurrent same-partner save can't clobber it. A missing/not-owned partner
+      //    is a server-side no-op (the link self-heals on the partner's next save).
+      if (link.partnerDelta) {
+        const { error } = await withTimeout(
+          supabase.rpc('merge_neighbour_backlink', {
+            p_partner_id:           link.partnerDelta.partnerId,
+            p_link_id:              link.partnerDelta.linkId,
+            p_new_save_id:          link.partnerDelta.newSaveId,
+            p_network_entry:        link.partnerDelta.networkEntry,
+            p_relationship_entries: link.partnerDelta.relationshipEntries,
+          }),
+          20000,
+          'Neighbour link',
+        );
+        if (error) throw error;
+      }
       return saveId;
     }
   }
@@ -351,28 +397,52 @@ async function supabaseUpdate(id, partial) {
   if (toggles) updates.toggles = toggles;
 
   if (Object.keys(updates).length === 0) return;
-  const { error } = await supabase.from('settlements').update(updates).eq('id', id);
+  // Timeout-guarded like list/save/mutateBatch above: a stalled update (dropped
+  // socket, hung token refresh) otherwise pends forever and wedges the caller's
+  // in-flight state. On timeout this rejects so the caller's catch/finally runs.
+  const { error } = await withTimeout(
+    supabase.from('settlements').update(updates).eq('id', id),
+    20000,
+    'Update settlement',
+  );
   if (error) throw error;
 }
 
 async function supabaseDelete(id) {
-  const { error } = await supabase.from('settlements').delete().eq('id', id);
+  // Same hang guard as supabaseUpdate — a stalled delete must reject, not pend.
+  const { error } = await withTimeout(
+    supabase.from('settlements').delete().eq('id', id),
+    20000,
+    'Delete settlement',
+  );
   if (error) throw error;
 }
 
 async function supabaseCount() {
-  const { count, error } = await supabase
-    .from('settlements')
-    .select('id', { count: 'exact', head: true })
-    .eq('access_state', ACTIVE_SAVE_STATE);
+  // Timeout-guarded like list/save/update/delete above: a stalled count (dropped
+  // socket, hung token refresh) otherwise pends forever and wedges the caller's
+  // save-limit check. On timeout this rejects so the caller's catch/finally runs.
+  const { count, error } = await withTimeout(
+    supabase
+      .from('settlements')
+      .select('id', { count: 'exact', head: true })
+      .eq('access_state', ACTIVE_SAVE_STATE),
+    20000,
+    'Count settlements',
+  );
   if (error) throw error;
   return count || 0;
 }
 
 async function supabaseReactivateFreeSettlement(id) {
-  const { data, error } = await supabase.rpc('reactivate_free_settlement', {
-    target_settlement_id: id,
-  });
+  // Same hang guard as the sibling legs — a stalled reactivate RPC must reject, not pend.
+  const { data, error } = await withTimeout(
+    supabase.rpc('reactivate_free_settlement', {
+      target_settlement_id: id,
+    }),
+    20000,
+    'Reactivate settlement',
+  );
   if (error) throw error;
   return data;
 }

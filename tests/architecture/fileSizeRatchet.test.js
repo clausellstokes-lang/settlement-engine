@@ -44,6 +44,11 @@ const BASELINE = new Set([
   // decomposed advanceCampaignWorld into kernel/interval/helpers, removing more than
   // this adds. Splitting warDeployment is a separate refactor, not this fix pass.
   'src/domain/worldPulse/warDeployment.js',
+  // pulseKernel.js was grandfathered here at 1,220 lines (the review-remediation
+  // dismiss-conservation fix nudged it just over the cap). The strategy_deploy residue
+  // strip was since extracted into warDeployment.js (stripSuppressedDeployResidue),
+  // dropping pulseKernel back under 1,200 — so it is REMOVED from the baseline and the
+  // ratchet tightens around it.
 ]);
 
 function jsFiles(rel) {

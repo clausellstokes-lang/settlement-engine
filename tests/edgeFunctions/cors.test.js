@@ -62,7 +62,8 @@ describe('shared edge CORS — explicit hosts and localhost', () => {
     expect(isAllowedOrigin('https://settlementwork.vercel.app')).toBe(true);
   });
 
-  it('allows any http://localhost:<port>', () => {
+  it('allows any http://localhost:<port> on a DEV deployment (no CLIENT_URL configured)', () => {
+    // Under vitest no Deno env exists, so CLIENT_URL is unset ⇒ dev deployment.
     expect(isAllowedOrigin('http://localhost:5173')).toBe(true);
     expect(isAllowedOrigin('http://localhost:4321')).toBe(true);
     expect(isAllowedOrigin('http://localhost:9999')).toBe(true);
@@ -71,6 +72,40 @@ describe('shared edge CORS — explicit hosts and localhost', () => {
   it('does NOT allow https localhost or a localhost-lookalike host', () => {
     expect(isAllowedOrigin('https://localhost:5173')).toBe(false);
     expect(isAllowedOrigin('http://localhost.attacker.com')).toBe(false);
+  });
+});
+
+describe('shared edge CORS — the localhost rule is DEV-only, never production', () => {
+  /** Stub the Deno env seam the helper reads (readEnv guards on globalThis.Deno). */
+  function withDenoEnv(env, fn) {
+    globalThis.Deno = { env: { get: (name) => env[name] || '' } };
+    try { fn(); } finally { delete globalThis.Deno; }
+  }
+
+  it('REJECTS http://localhost:<port> when CLIENT_URL declares a production deploy', () => {
+    withDenoEnv({ CLIENT_URL: 'https://settlementforge.com' }, () => {
+      expect(isAllowedOrigin('http://localhost:5173')).toBe(false);
+      expect(isAllowedOrigin('http://localhost:9999')).toBe(false);
+      // Production hosts stay allowed, of course.
+      expect(isAllowedOrigin('https://settlementforge.com')).toBe(true);
+    });
+  });
+
+  it('still allows localhost when CLIENT_URL itself points at localhost (dev stack)', () => {
+    withDenoEnv({ CLIENT_URL: 'http://localhost:5173' }, () => {
+      expect(isAllowedOrigin('http://localhost:5173')).toBe(true);
+      expect(isAllowedOrigin('http://localhost:4321')).toBe(true);   // any port, not just CLIENT_URL's
+    });
+  });
+
+  it('ALLOWED_ORIGINS is the explicit escape hatch for a localhost origin in production', () => {
+    withDenoEnv({
+      CLIENT_URL: 'https://settlementforge.com',
+      ALLOWED_ORIGINS: 'http://localhost:5173',
+    }, () => {
+      expect(isAllowedOrigin('http://localhost:5173')).toBe(true);   // explicitly listed
+      expect(isAllowedOrigin('http://localhost:9999')).toBe(false);  // the blanket rule stays off
+    });
   });
 });
 

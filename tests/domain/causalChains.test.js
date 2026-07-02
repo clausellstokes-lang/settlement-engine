@@ -120,11 +120,11 @@ describe('causal chain: probabilistic institutions cite their selection odds', (
   it('selected (not required) traces include a baseChance cause', () => {
     const s = gen({ settType: 'town', culture: 'germanic' });
     const selected = tracesByType(s, 'institution').filter(t => t.result === 'selected');
-    if (selected.length === 0) {
-      // Highly unlikely with town tier — but guard so the test doesn't
-      // spuriously fail on a strange seed.
-      return;
-    }
+    // The seed is FIXED (STABLE_SEED), so this is deterministic — a town tier
+    // always yields selected (non-required) institutions. Hard-assert rather than
+    // bail on 0: an early return would let a regression that stops emitting
+    // 'selected' traces pass this test vacuously.
+    expect(selected.length).toBeGreaterThan(0);
     for (const t of selected) {
       const chanceCause = t.causes.find(c => c.source === 'baseChance');
       expect(chanceCause, `${t.targetId} missing baseChance cause`).toBeTruthy();

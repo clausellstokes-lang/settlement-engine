@@ -53,10 +53,12 @@ import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
+import { institutionIsLawOrder } from './institutionClassify.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
+import { WAR_RECOVERY_CONDITIONS } from './worldPulse/archetypeCatalog.js';
 
 // ── Per-settlement derivation memo ───────────────────────────────────────
 //
@@ -83,7 +85,7 @@ const factionProfilesMemo = new WeakMap();
  * Memoized deriveAllActiveConditions, keyed on the settlement identity.
  * Byte-identical to calling deriveAllActiveConditions(s) directly — only the
  * repeated derivations within a single deriveCausalState call are collapsed.
- * @param {any} s
+ * @param {import('./settlement.schema.js').SimSettlement} s
  * @returns {any[]}
  */
 function cachedActiveConditions(s) {
@@ -98,7 +100,7 @@ function cachedActiveConditions(s) {
 /**
  * Memoized deriveAllFactionProfiles, keyed on the settlement identity.
  * Byte-identical to calling deriveAllFactionProfiles(s) directly.
- * @param {any} s
+ * @param {import('./settlement.schema.js').SimSettlement} s
  * @returns {any[]}
  */
 function cachedFactionProfiles(s) {
@@ -108,6 +110,39 @@ function cachedFactionProfiles(s) {
   const derived = deriveAllFactionProfiles(s);
   factionProfilesMemo.set(s, derived);
   return derived;
+}
+
+// ── Condition polarity + wall detection ──────────────────────────────────
+
+// Recovery conditions are LIFTS, not pressures: siege_lifted AND its documented
+// polarity clone occupation_lifted (a liberation) both RAISE the systems they
+// declare. Sourced from the war-layer archetype catalog so a new recovery
+// archetype lands here without re-typing the strings.
+const LIFT_ARCHETYPES = new Set(WAR_RECOVERY_CONDITIONS);
+
+/** +1 for a recovery/lift condition, -1 for a pressure. @param {any} cond */
+function conditionDirection(cond) {
+  return LIFT_ARCHETYPES.has(cond?.archetype) ? +1 : -1;
+}
+
+/**
+ * True when the defense profile carries REAL walls — an explicit hasWalls flag,
+ * a non-empty classified walls group (defenseGenerator's institutions.walls), or
+ * a legacy non-empty walls descriptor. Deliberately reads the DATA, never a
+ * regex over JSON.stringify: the profile always contains the literal key
+ * "walls" (even as walls: []), so a stringify match granted every settlement
+ * the walled bonus whether or not a single wall stood.
+ * @param {any} def defenseProfile (may be null / partial / legacy-shaped)
+ */
+export function defenseProfileHasWalls(def) {
+  if (!def || typeof def !== 'object') return false;
+  if (def.hasWalls === true) return true;
+  for (const walls of [def.walls, def.institutions?.walls]) {
+    if (Array.isArray(walls)) { if (walls.length > 0) return true; continue; }
+    if (typeof walls === 'string' && walls.trim() !== '') return true;
+    if (walls && typeof walls === 'object' && Object.keys(walls).length > 0) return true;
+  }
+  return false;
 }
 
 // ── Canonical catalog ────────────────────────────────────────────────────
@@ -317,7 +352,7 @@ function derivePublicLegitimacy(/** @type {any} */ s) {
   // Active conditions that affect public_legitimacy (corruption etc.)
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('public_legitimacy')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 15) * direction;
     if (magnitude === 0) continue;
     score += magnitude;
@@ -497,7 +532,7 @@ const PROSPERITY_BASE = Object.freeze({
   impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
   moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
 });
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveEconomicCapacity(s) {
   /** @type {any[]} */
   const contributors = [];
@@ -556,9 +591,8 @@ function deriveEconomicCapacity(s) {
 // string absent from BOTH lists contributes nothing.
 const LAWFUL_GOVERNMENT_PATTERN = /autocra|authoritarian|militar|junta|despot|tyrann|imperial|monarch|lordship|theocra|magocra|ecclesiastical|magistrat/i;
 const ANARCHIC_GOVERNMENT_PATTERN = /anarch|commune|free city|free council|peasant|frontier|lawless|warlord|failed/i;
-// Institutions that embody the rule of law: courts, the watch/guard, magistrates,
-// gaols. Mirrors healingLedger's name-pattern classifier — name-only, defensive.
-const LAW_ORDER_INSTITUTION_PATTERN = /court|magistrat|tribunal|watch|constab|gaol|jail|prison|assize|sheriff|marshal|justice/i;
+// (Law-and-order institution classification moved to domain/institutionClassify.js
+// as the id-first, rename-proof institutionIsLawOrder — used by deriveLawOrder below.)
 
 /** @param {any} s */
 function deriveLawOrder(s) {
@@ -609,9 +643,10 @@ function deriveLawOrder(s) {
   }
 
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
-  // teeth. Classified by name like healingLedger's healer pattern.
+  // teeth. Id-first (rename-proof) via institutionClassify; a DM-renamed-but-stamped
+  // court still counts. id-match === the old name rule for the current corpus.
   const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
-  const lawCount = institutions.filter((/** @type {any} */ i) => LAW_ORDER_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const lawCount = institutions.filter((/** @type {any} */ i) => institutionIsLawOrder(i)).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
   } else if (lawCount === 1) {
@@ -649,7 +684,7 @@ function deriveLawOrder(s) {
   // every settlement today (none declare it yet) ⇒ byte-identical.
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('law_order')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 15) * direction;
     if (magnitude === 0) continue;
     score += magnitude;
@@ -725,8 +760,10 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
     push(contributors, 'defenseProfile.readiness.score', 'measured', c,
       `Defense readiness score: ${led.readinessScore}.`);
   }
-  // Wall, garrison, walls present
-  if (def.hasWalls === true || /wall|rampart|palisade/i.test(JSON.stringify(def))) {
+  // Walls present — read the classified walls DATA, not a stringify regex
+  // (the profile always contains the literal key "walls", so the old regex
+  // granted every settlement this bonus).
+  if (defenseProfileHasWalls(def)) {
     score += 6;
     push(contributors, 'defenseProfile', 'walled', +6, 'Defensive walls in place.');
   }
@@ -734,7 +771,7 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
   // Active conditions
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('defense_readiness')) continue;
-    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const direction = conditionDirection(cond);
     const magnitude = Math.round(cond.severity * 12) * direction;
     score += magnitude;
     push(contributors, cond.id, direction > 0 ? 'recovering' : 'strained', magnitude,
@@ -786,7 +823,7 @@ function deriveCriminalOpportunity(/** @type {any} */ s) {
 // settlement never reads any of this).
 export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveReligiousAuthority(s) {
   let score = 50;
   /** @type {any[]} */
@@ -1009,7 +1046,7 @@ function finalizeVariable(/** @type {any} */ name, /** @type {any} */ raw, /** @
  * about food security).
  *
  * @param {string} variable   One of SYSTEM_VARIABLES.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any}    SystemVariable, or null for unknown variable.
  */
 export function deriveSystemVariable(variable, settlement) {

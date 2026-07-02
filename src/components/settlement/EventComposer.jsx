@@ -337,6 +337,12 @@ export default function EventComposer({ onLink = null }) {
   }
 
   function onApply() {
+    // Advance-in-flight floor: the store no-ops a clock-bound member's applyEvent
+    // during its campaign's advance (returns null with only a console.warn), so
+    // falling through would clear every field + dismiss the preview and silently
+    // drop the GM's event. The button is disabled while advanceBusy (applyOk),
+    // but a click racing the advance start must ALSO bail before any state clears.
+    if (advanceBusy) return;
     // LINK_NEIGHBOUR — delegate to onLink (handleLink), which stages the `link`
     // change-queue order for a standalone save or applies the full cascade
     // immediately for a clock-bound member. Never builds/stages an event.
@@ -696,9 +702,12 @@ export default function EventComposer({ onLink = null }) {
           // form as built, so it honors the same canSubmit rule as Preview.
           // The Destroy confirm gate follows the event that would actually
           // apply (the previewed one if pending, else the picked type).
+          // The advance-in-flight guard applies EITHER WAY — a pending preview
+          // waives the form-completeness checks in canSubmit, not the store's
+          // "apply would be no-op'd during an advance" floor.
           const isDestroy = (pendingPreview?.event?.type || type) === 'DESTROY_SETTLEMENT';
           const destroyOk = !isDestroy || destroyConfirm.trim() === (settlement?.name || '').trim();
-          const applyOk = destroyOk && (pendingPreview ? true : canSubmit);
+          const applyOk = destroyOk && !advanceBusy && (pendingPreview ? true : canSubmit);
           return (
             <>
               {isDestroy && (
@@ -749,11 +758,19 @@ export default function EventComposer({ onLink = null }) {
           staged={staged}
           settlement={settlement}
           phase={phase}
+          advanceBusy={advanceBusy}
           pendingBatchPreview={pendingBatchPreview}
           onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
           onClear={() => { setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
           onApply={() => {
+            // Same advance-in-flight floor as onApply: a clock-bound member's
+            // applyEvent is no-op'd mid-advance, so applying the batch then
+            // would clear the cart while every event silently dropped. Keep the
+            // staged events intact; the DM re-applies after the advance settles.
+            // (Events can sit staged from before the advance started — the
+            // "+ Add to batch" disable only stops NEW staging.)
+            if (advanceBusy) return;
             // Batch apply now ENQUEUES one order per staged event (spec §2.2
             // option a). The flush replays each through applyEvent in order, so
             // forward references between staged events resolve exactly as the

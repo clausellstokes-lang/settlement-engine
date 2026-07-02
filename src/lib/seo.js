@@ -13,6 +13,14 @@
  */
 import { titleForView, viewToPath } from './routes.js';
 
+/**
+ * Routes whose canonical + og:url must reflect the entity slug/id, not just the
+ * view. Without this, every /gallery/:slug share page canonicalizes to the
+ * /gallery index and crawlers treat each shared dossier as a duplicate of the
+ * index (de-indexing the individual shares). Passing `params` lets viewToPath
+ * build the per-entity path.
+ */
+
 const ORIGIN = 'https://settlementforge.com';
 const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates them as a persistent world for game masters.';
 
@@ -67,14 +75,17 @@ function setRobotsNoindex(noindex) {
 /**
  * Apply the per-route head for `view`. Called from App on every route change.
  * Home keeps the canonical '/' (matching the static tag and the '/'-to-/home
- * front door); every other route canonicalizes to its own path.
+ * front door); every other route canonicalizes to its own path — and, for
+ * entity routes like /gallery/:slug, to the per-entity path (so each shared
+ * dossier gets its own canonical rather than collapsing onto the index).
  * @param {string} view
+ * @param {{ slug?: string, id?: string }} [params] route params (e.g. gallery slug)
  */
-export function applyDocumentHead(view) {
+export function applyDocumentHead(view, params) {
   if (typeof document === 'undefined') return;
   const title = titleForView(view);
   const description = VIEW_DESCRIPTIONS[view] || DEFAULT_DESCRIPTION;
-  const path = view === 'home' ? '/' : (viewToPath(view) || '/');
+  const path = view === 'home' ? '/' : (viewToPath(view, params) || '/');
   const canonical = ORIGIN + path;
 
   document.title = title;

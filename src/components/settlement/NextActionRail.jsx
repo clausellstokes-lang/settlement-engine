@@ -46,7 +46,16 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
   const phase      = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const aiSettlement = useStore(s => s.aiSettlement);
-  const narrated = !!(aiSettlement || save?.aiSettlement);
+  const aiDailyLife  = useStore(s => s.aiDailyLife);
+  // "Narrated" means EITHER prose layer exists — the refined-settlement pass or
+  // the daily-life pass — in the live store OR the persisted save. The save keeps
+  // both under `aiData` (never a top-level `save.aiSettlement`), so a
+  // daily-life-only save is correctly treated as narrated and gets the
+  // (confirm-gated) Regenerate rung, not the credit-spending first-narrate Polish.
+  const narrated = !!(
+    aiSettlement || aiDailyLife
+    || save?.aiData?.aiSettlement || save?.aiData?.aiDailyLife
+  );
 
   // Regenerate discards the existing prose and re-spends credits, so the rung
   // routes through a discard-confirm before firing the real action. Owning the

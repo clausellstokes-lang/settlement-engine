@@ -101,7 +101,7 @@ export function tagEntityCanon(entity /* , settlement */) {
  * `{ entity, ...tag }` records so consumers can render lists with
  * the tag attached without modifying the entity itself.
  */
-/** @param {any} entities @param {any} [_settlement] */
+/** @param {any} entities @param {import('./settlement.schema.js').SimSettlement} [_settlement] */
 export function tagEntityList(entities, _settlement) {
   if (!Array.isArray(entities)) return [];
   return entities.map(e => ({ entity: e, ...tagEntityCanon(e) }));
@@ -111,7 +111,7 @@ export function tagEntityList(entities, _settlement) {
  * Count entities by source + canon status across the major
  * settlement entity arrays.
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function canonBreakdown(settlement) {
   const out = {
     /** @type {Record<string, number>} */

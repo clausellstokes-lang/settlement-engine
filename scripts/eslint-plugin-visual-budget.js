@@ -1,10 +1,10 @@
 /**
  * eslint-plugin-visual-budget.js — Local ESLint rules guarding the visual budget.
  *
- * Three rules, all warnings (not errors — the codebase has legitimate
- * legacy violations to migrate). They surface drift without blocking
- * CI so the cleanup happens organically rather than as a blocking
- * sweep.
+ * Three rules, all configured as ERRORS in eslint.config.js — a raw
+ * fontSize / color / button-copy literal fails the lint gate. (They
+ * began as warnings during the legacy burn-down; that reached zero, so
+ * they were promoted to errors and now block rather than merely surface.)
  *
  *   no-raw-fontsize — fontSize: 11 / fontSize: '13px' literal in inline
  *     styles. The design token `FS.{xxs,xs,sm,md,lg,xl,xxl}` should be

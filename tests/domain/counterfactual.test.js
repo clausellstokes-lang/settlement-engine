@@ -147,6 +147,40 @@ describe('counterfactual() — manual-path actions', () => {
   });
 });
 
+// ── Missing-path warning ───────────────────────────────────────────────
+// Regression: manualMutate always spread the settlement, so the identity
+// guard (nextSettlement === settlement) never fired and unsupported actions
+// silently reported empty deltas with no warning. It now returns the original
+// reference when nothing matched/mutated, so the warning surfaces.
+describe('counterfactual() — surfaces missing counterfactual paths', () => {
+  const warned = (r) => r.warnings.some(w => /No counterfactual path/.test(w.message));
+
+  it('warns on an unsupported manual action (npc:weaken)', () => {
+    const r = counterfactual(fixture(), { type: 'npc', id: 'npc.captain_rusk', action: 'weaken' });
+    expect(warned(r)).toBe(true);
+  });
+
+  it('warns on replace, which no manual branch handles (faction:replace)', () => {
+    const r = counterfactual(fixture(), { type: 'faction', id: 'faction.council', action: 'replace' });
+    expect(warned(r)).toBe(true);
+  });
+
+  it('warns when the target id matches nothing (faction unmatched)', () => {
+    const r = counterfactual(fixture(), { type: 'faction', id: 'faction.nonexistent', action: 'remove' });
+    expect(warned(r)).toBe(true);
+  });
+
+  it('warns when a chain id matches nothing', () => {
+    const r = counterfactual(fixture(), { type: 'chain', id: 'chain.nope.missing', action: 'remove' });
+    expect(warned(r)).toBe(true);
+  });
+
+  it('does NOT warn on a supported, matched manual action', () => {
+    const r = counterfactual(fixture(), { type: 'faction', id: 'faction.council', action: 'weaken' });
+    expect(warned(r)).toBe(false);
+  });
+});
+
 // ── No-mutation contract ───────────────────────────────────────────────
 
 describe('counterfactual() does not mutate input', () => {

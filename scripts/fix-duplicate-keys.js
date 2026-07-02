@@ -11,8 +11,9 @@
  * downstream lookups are case-sensitive.
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, realpathSync } from 'node:fs';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { parse } from 'acorn';
 import { simple as walk } from 'acorn-walk';
 
@@ -35,7 +36,7 @@ function keyName(prop) {
   return null;
 }
 
-function processFile(file, dryRun) {
+export function processFile(file, dryRun) {
   const src = readFileSync(file, 'utf8');
   let ast;
   try {
@@ -44,8 +45,7 @@ function processFile(file, dryRun) {
     return { file, parseError: e.message };
   }
 
-  const removals = []; // { start, end } byte ranges to delete
-  const dropped = [];  // { key, line, snippet } records for the recovery report
+  const removals = []; // { start, end, rec } byte ranges to delete + report record
   const casingCollisions = [];
 
   walk(ast, {
@@ -59,13 +59,13 @@ function processFile(file, dryRun) {
         if (seen.has(k)) {
           // Earlier prop loses; mark it for removal
           const earlier = seen.get(k);
-          removals.push({ start: earlier.start, end: earlier.end, key: k, line: earlier.loc.start.line });
-          dropped.push({
+          const rec = {
             key: k, kind: 'exact',
             line: earlier.loc.start.line,
             laterLine: prop.loc.start.line,
             snippet: src.slice(earlier.start, earlier.end),
-          });
+          };
+          removals.push({ start: earlier.start, end: earlier.end, key: k, line: earlier.loc.start.line, rec });
         }
         seen.set(k, prop);
         const lc = k.toLowerCase();
@@ -79,13 +79,13 @@ function processFile(file, dryRun) {
             file, key: k, otherKey: lcSeen.get(lc).key,
             line: prop.loc.start.line, otherLine: lcSeen.get(lc).line,
           });
-          removals.push({ start: prop.start, end: prop.end, key: k, line: prop.loc.start.line });
-          dropped.push({
+          const rec = {
             key: k, kind: 'casing', otherKey: lcSeen.get(lc).key,
             line: prop.loc.start.line,
             laterLine: lcSeen.get(lc).line,
             snippet: src.slice(prop.start, prop.end),
-          });
+          };
+          removals.push({ start: prop.start, end: prop.end, key: k, line: prop.loc.start.line, rec });
         } else if (!lcSeen.has(lc)) {
           lcSeen.set(lc, { key: k, line: prop.loc.start.line, prop });
         }
@@ -95,11 +95,33 @@ function processFile(file, dryRun) {
 
   if (!removals.length && !casingCollisions.length) return { file, removed: 0, casingCollisions };
 
+  // A removed property can itself CONTAIN further removals (its value is an
+  // object literal with its own duplicate keys — the walk visits nested
+  // ObjectExpressions too), and one property can be flagged twice (once by
+  // the exact pass and once by the casing pass). The splice loop below
+  // applies absolute original-source offsets to a mutating string, so any
+  // overlapping ranges shift surviving bytes and corrupt the file (verified:
+  // a key `outer` was rewritten to `ter`). AST property ranges either nest
+  // exactly or are disjoint, so it is sufficient to (1) collapse identical
+  // ranges and (2) drop ranges contained within another surviving range —
+  // the containing splice deletes them wholesale, and its recovery snippet
+  // already includes theirs.
+  const byRange = new Map();
+  for (const r of removals) {
+    const id = `${r.start}:${r.end}`;
+    if (!byRange.has(id)) byRange.set(id, r);
+  }
+  const deduped = [...byRange.values()];
+  const splices = deduped.filter(
+    (r) => !deduped.some((q) => q !== r && q.start <= r.start && q.end >= r.end),
+  );
+  const dropped = splices.map((r) => r.rec); // report records for what is actually spliced
+
   // Sort removals descending by start so byte offsets stay valid as we splice.
-  removals.sort((a, b) => b.start - a.start);
+  splices.sort((a, b) => b.start - a.start);
 
   let out = src;
-  for (const r of removals) {
+  for (const r of splices) {
     // Extend the deletion range forward to consume the property separator.
     // The source files use a few formatting variants:
     //   `},`                            — comma immediately after `}`
@@ -129,7 +151,7 @@ function processFile(file, dryRun) {
   }
 
   if (!dryRun) writeFileSync(file, out, 'utf8');
-  return { file, removed: removals.length, dropped, casingCollisions };
+  return { file, removed: splices.length, dropped, casingCollisions };
 }
 
 function main() {
@@ -177,4 +199,16 @@ function main() {
   console.log(`\nSummary: removed ${totalRemoved} exact duplicate(s)${dryRun ? ' (DRY RUN)' : ''}, ${totalCasing} casing collision(s) flagged.`);
 }
 
-main();
+// Only run the CLI when invoked directly, not when imported by a test.
+// import.meta.url is realpath-resolved and percent-encoded, so normalize
+// argv[1] the same way (mirrors scripts/check-e2e-not-vacuous.mjs).
+const invokedDirectly = (() => {
+  if (!process.argv[1]) return false;
+  try {
+    return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) main();

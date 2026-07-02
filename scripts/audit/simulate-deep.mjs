@@ -46,7 +46,6 @@ function member(i, seed) {
 }
 
 function inc(m, k, by = 1) { m[k] = (m[k] || 0) + by; }
-function summ(a) { if (!a.length) return { n: 0 }; const s = a.slice().sort((x, y) => x - y); return { n: a.length, min: s[0], p50: s[(s.length / 2) | 0], mean: Math.round(a.reduce((x, y) => x + y, 0) / a.length * 100) / 100, max: s[s.length - 1] }; }
 
 const TOPOS = { interdependent: 16, frontier: 12 };
 const report = { meta: { reps: REPS, ticks: TICKS }, cells: {} };

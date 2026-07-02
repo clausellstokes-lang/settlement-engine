@@ -121,12 +121,19 @@ function isBesieged(graph, homeId) {
 }
 
 /**
- * Does `homeId` carry an active war_pressure condition (an occupation / assault aftermath)?
- * @param {any} item
+ * Is `homeId` OCCUPIED — an entry in the authoritative `worldState.occupations`
+ * ledger (the war layer's occupation state machine, keyed by the occupied id)?
+ * Conditions are deliberately NOT consulted: an ambient `war_pressure` condition
+ * (harassment, an assault aftermath, a nearby war) used to read as "occupied"
+ * here, minting a false "throws off its occupiers" chronicle event plus an
+ * unearned occupation_lifted recovery on a never-occupied home. The ledger is
+ * absent on a war-off / unconquered campaign, so this stays a pure no-op there.
+ * @param {any} snapshot
+ * @param {string} homeId
  */
-function isOccupied(item) {
-  const conditions = item?.activeConditions || [];
-  return conditions.some(/** @param {any} cond */ cond => cond?.archetype === 'war_pressure' && (cond.status !== 'easing'));
+function isOccupied(snapshot, homeId) {
+  const occupations = snapshot?.worldState?.occupations;
+  return Boolean(occupations && typeof occupations === 'object' && occupations[String(homeId)]);
 }
 
 /**
@@ -217,7 +224,43 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
     const ratio = strengthRatioOf(record.deployment, record.outcome);
     const recordRng = baseRng.fork(homeId);
 
-    if (isOccupied(item)) {
+    // ── WAR-ECONOMY RETURN-REPLENISH (P1/F2). The army banked a headcount of
+    // conscripted + levied population (deployedPopulation) on its march; the SURVIVORS
+    // come home, scaled by the army's remaining-strength ratio. The war dead
+    // (deployedPopulation − survivors) are the ONLY population sink — they are never
+    // credited back, so the books balance by construction (Σ conscription/levy debits −
+    // survivors === war dead).
+    //
+    // Gated on the BANK, not a live flag: deployedPopulation is only ever banked by a
+    // flag-gated debit (conscription under warEconomyDrainEnabled, levy under
+    // warLevyEnabled), so a non-zero bank PROVES real population was debited and MUST be
+    // credited back regardless of which flags hold at RETURN time. Gating the credit on
+    // warEconomyDrainEnabled here made warLevyEnabled-without-drain a permanent 100%
+    // population sink (every levied man vanished) and let a mid-war drain flag-off strand
+    // the whole banked headcount. Flag-off worlds never bank ⇒ byte-identical.
+    const deployedPopulation = Math.max(0, Math.round(Number(record.deployment?.deployedPopulation) || 0));
+    if (deployedPopulation > 0) {
+      const survivors = Math.min(deployedPopulation, Math.round(deployedPopulation * ratio));
+      if (survivors > 0) {
+        const fell = deployedPopulation - survivors;
+        outcomes.push({
+          id: `world_outcome.army_homecoming.${stablePart(homeId)}.${tick}`,
+          candidateType: 'army_homecoming',
+          targetSaveId: homeId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${homeName}'s army comes home`,
+          // Locale pinned to 'en-US' (as populationDynamics does): this summary
+          // persists into wizardNews/chronicle records, so a bare toLocaleString()
+          // would make the same seed produce different bytes across runner locales.
+          summary: `${survivors.toLocaleString('en-US')} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`,
+          populationDeltas: [{ saveId: homeId, delta: survivors, reason: `${homeName}'s surviving soldiers return home.` }],
+          metadata: { warEconomy: 'homecoming', armyId: homeId, survivors, fell, deployedPopulation },
+        });
+      }
+    }
+
+    if (isOccupied(snapshot, homeId)) {
       // STRENGTH-SCALED: a strong returning army breaks the foreign occupation; a
       // depleted one mounts a FAILED rebellion (it cannot retake its own home).
       const pSuccess = returnSuccessProbability(ratio);

@@ -30,7 +30,7 @@ import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
 import { createConfigSlice, DEFAULT_CONFIG } from './configSlice.js';
-import { createToggleSlice }     from './toggleSlice.js';
+import { createToggleSlice, normalizeServicesToggles } from './toggleSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
@@ -61,12 +61,24 @@ import { saves as savesService }    from '../lib/saves.js';
 export function mergePersistedState(persisted, current) {
   const c = /** @type {any} */ (current) || {};
   const p = /** @type {any} */ (persisted) || {};
+  // config / userPrefs / productPrefs are DEEP-overlaid onto their current defaults
+  // (a key added to the default after the user last persisted reads its default,
+  // not undefined). Other persisted bags (goodsToggles / servicesToggles) fall
+  // through the top-level `...p` spread and WHOLESALE-replace their slice default —
+  // fine today because those defaults are `{}` (nothing to lose). If either ever
+  // gains a non-empty default, add it to the deep-overlay list below, or a persisted
+  // bag will shadow the new default keys.
   return {
     ...c,
     ...p,
     config: { ...DEFAULT_CONFIG, ...(p.config || {}) },
     userPrefs: { ...c.userPrefs, ...(p.userPrefs || {}) },
     productPrefs: { ...c.productPrefs, ...(p.productPrefs || {}) },
+    // Migrate any servicesToggles persisted in the pre-Stage-2b display-name key
+    // form (`<instName>_service_<svcName>`) to the current svcKey form on hydrate —
+    // this is the ONLY real load-path seam (the slice's hydrateServicesToggles
+    // action is never invoked at boot), so the normalization must land here.
+    servicesToggles: normalizeServicesToggles(p.servicesToggles),
   };
 }
 

@@ -279,17 +279,28 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
 
 function CategorySection({ category, institutions, tier, toggles, onToggle, isEnabled, _onCategoryToggle, forceCollapsed, _isManualTier, _tierInstitutionNames }) {
   const [collapsed, setCollapsed] = useState(true);
-  // Sync local state when forceCollapsed goes from true → false: an
-  // "Expand All" press should clear individual manual collapses. We
-  // mirror the previous forceCollapsed in a ref + useEffect rather than
-  // doing the comparison during render (react-hooks/refs forbids ref
-  // writes during render; React Compiler enforces the same boundary).
+  // A header click AFTER "Collapse All" must still be able to open its own
+  // section — otherwise every header is a dead control until "Expand All" is
+  // pressed. `localOverride` records that the user has manually toggled this
+  // section since the last Collapse All, which lets the local `collapsed` state
+  // win over the global `forceCollapsed`. A fresh Collapse All clears it.
+  const [localOverride, setLocalOverride] = useState(false);
+  // Sync local state on the "Collapse All" / "Expand All" edges. Expand All
+  // (true → false) clears individual manual collapses; a new Collapse All
+  // (false → true) drops any per-section override so the bulk action wins. We
+  // mirror the previous forceCollapsed in a ref + useEffect rather than doing
+  // the comparison during render (react-hooks/refs forbids ref writes during
+  // render; React Compiler enforces the same boundary).
   const prevForce = useRef(forceCollapsed);
   useEffect(() => {
-    if (prevForce.current && !forceCollapsed) setCollapsed(false);
+    if (prevForce.current && !forceCollapsed) { setCollapsed(false); setLocalOverride(false); }
+    else if (!prevForce.current && forceCollapsed) setLocalOverride(false);
     prevForce.current = forceCollapsed;
   }, [forceCollapsed]);
-  const isCollapsed = forceCollapsed || collapsed;
+  const handleHeaderToggle = () => { setLocalOverride(true); setCollapsed(c => !c); };
+  // Once the user has toggled this section post-Collapse-All, their local
+  // choice governs; otherwise the global bulk collapse does.
+  const isCollapsed = localOverride ? collapsed : (forceCollapsed || collapsed);
   const catColor = CAT_COLORS[category] || muted;
   const forceCount = Object.entries(toggles).filter(([k, v]) => k.startsWith(`${tier}::${category}::`) && v.require).length;
   const excludeCount = Object.entries(toggles).filter(([k, v]) => k.startsWith(`${tier}::${category}::`) && v.forceExclude).length;
@@ -306,7 +317,7 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
       <Button
         variant="secondary"
         fullWidth
-        onClick={() => setCollapsed(c => !c)}
+        onClick={handleHeaderToggle}
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
           padding: '7px 12px', minHeight: 0,

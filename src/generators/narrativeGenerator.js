@@ -160,7 +160,13 @@ const buildStressProfile = (events, _tier, _config) => {
 export const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
   if (!historicalEvents || historicalEvents.length === 0) return currentTensions;
 
-  const recentEvents = historicalEvents.slice(0, 3).filter(e => e.yearsAgo < Math.max(30, age * 0.3));
+  // historicalEvents is oldest-first (yearsAgo-descending), so the recent
+  // 'living memory' events sit at the TAIL. Filter the whole timeline for
+  // recency, then order most-recent-first so recentEvents[0] is the freshest.
+  const recentEvents = historicalEvents
+    .filter(e => e.yearsAgo < Math.max(30, age * 0.3))
+    .sort((a, b) => a.yearsAgo - b.yearsAgo)
+    .slice(0, 3);
 
   if (!recentEvents.length) return currentTensions;
 
@@ -185,7 +191,10 @@ export const generateSiegeCapability = (historicalEvents, currentTensions, age) 
   const clause = primaryTension || 'its effects shape current decisions';
   const tensionSentence = clause.charAt(0).toUpperCase() + clause.slice(1);
 
-  return `The ${recent.name} is still present in living memory. ${tensionSentence}.`;
+  // Event display names (EVENT_TYPE_NAMES) already carry their article, e.g.
+  // "The Occupation" — don't prepend a second "The".
+  const article = /^the\s/i.test(recent.name) ? '' : 'The ';
+  return `${article}${recent.name} is still present in living memory. ${tensionSentence}.`;
 };
 
 // ─── STRESS_DESCS ─────────────────────────────────────────────────────────────
@@ -753,6 +762,11 @@ const genPressureDetail = settlement => {
     healersRef: healerRef,
     stresses: stresses.map(type => ({ type })),
     commodity,
+    // compound: the economic/military/criminal effectiveness triplet the
+    // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
+    // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
+    // this the closures always hit their '|| default' fallback (dead compound branch).
+    compound: economicState?.compound || undefined,
     prosperity: economicState?.prosperity || 'Moderate',
     govFaction,
     topFaction: topFaction || govFaction,

@@ -59,6 +59,7 @@ const DEITIES = [
 const cultDeity = (i) => ({ _deityRef: `custom:lu_faded${i}`, name: `Faded${i}`, alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'cult' });
 
 // EVERYTHING-ON rules.
+const WAR_ECON_ALL = process.env.WAR_ECON_ALL === '1';
 const RULES = {
   propagationMode: 'full', intensity: 'dramatic', migrationMode: 'roll',
   stressorsEnabled: true, emergentEventsEnabled: true, relationshipDynamicsEnabled: true,
@@ -66,6 +67,17 @@ const RULES = {
   migrationFlowsEnabled: true, tradeFlowsEnabled: true, resourceDriftEnabled: true,
   tierDriftEnabled: true, institutionLifecycleEnabled: true,
   warLayerEnabled: true, settlementStrategyEnabled: true, religionDynamicsEnabled: true,
+  // War-economy SPIKES / phases: OFF by default so the soak baseline is unchanged. Enable
+  // per-flag via env (or ALL at once with WAR_ECON_ALL=1) to validate convergence — the
+  // health flags (WAR_NEVER_TERMINATED / STALL_RISK / POP_SWING / THREW) must stay clear —
+  // before any of these graduate to default-on. All are conserved + flag-gated.
+  defenderAttritionEnabled: process.env.DEFENDER_ATTRITION === '1',
+  warEconomyDrainEnabled: WAR_ECON_ALL || process.env.WAR_ECONOMY === '1',
+  defenderResolveEnabled: WAR_ECON_ALL || process.env.DEFENDER_RESOLVE === '1',
+  warDispositionEnabled: WAR_ECON_ALL || process.env.WAR_DISPOSITION === '1',
+  allyDefenseEnabled: WAR_ECON_ALL || process.env.ALLY_DEFENSE === '1',
+  warForageEnabled: WAR_ECON_ALL || process.env.WAR_FORAGE === '1',
+  warLevyEnabled: WAR_ECON_ALL || process.env.WAR_LEVY === '1',
   majorChangesRequireProposal: false,   // auto-apply majors so cascades propagate
 };
 

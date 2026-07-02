@@ -1,24 +1,26 @@
 import { describe, expect, test } from 'vitest';
 
 import { previewCampaignWorldPulse, applyWorldPulseOutcomes } from '../../src/domain/worldPulse/index.js';
-import { evaluateReligiousContest } from '../../src/domain/worldPulse/religiousContest.js';
+import { advanceReligionStates } from '../../src/domain/worldPulse/religiousContest.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/generators/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Feature D (R2) — deity contest + conversion spread + religious_authority mint.
+// Feature D (R2) — the religion core: gradual pantheon driver + conversion
+// spread + religious_authority mint. These pins target the LIVE driver
+// (`advanceReligionStates`, the one pulseKernel mounts) — the legacy binary
+// `evaluateReligiousContest` driver was removed as unmounted dead code.
 //
 // DOUBLE-GATE determinism contract under test:
 //   - Religion ACTS only when BOTH simulationRules.religionDynamicsEnabled AND
 //     the F2 activation gate (≥1 settlement carries config.primaryDeitySnapshot)
 //     hold. Either false ⇒ pure no-op (no mint, no contest, no conversion) ⇒
 //     byte-identical legacy.
-//   - The contest forks on the F3 frozen recipe (contest:religious_authority:
-//     <prize>:<tick>); every output iteration is codepoint-sorted (bearers,
-//     converts, contenders, mint endpoints); the re-embed copies the winning
-//     NEIGHBOUR's embedded snapshot (never customContent); same-tick multi-spread
-//     is a commutative field-merge (union ids, max severities).
+//   - Every output iteration is codepoint-sorted (bearers, settlements, mint
+//     endpoints); the re-embed copies an EMBEDDED snapshot (never customContent);
+//     same-tick multi-spread is a commutative field-merge (union ids, max
+//     severities).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -87,7 +89,7 @@ function snapshotFor(campaign, saves) {
 }
 
 // A strong major deity at A and B, both allied/trade-linked to a weak-faith
-// convert C. With ≥2 neighbouring deities reaching C, the contest runs.
+// convert C.
 function contestFixture({ cHasDeity = false, edges } = {}) {
   const saves = [
     save('asource', 'Asource', { deity: deitySnapshot('Vael', { rank: 'major', alignment: 'good', temper: 'warlike' }) }),
@@ -105,15 +107,23 @@ function contestFixture({ cHasDeity = false, edges } = {}) {
 
 const rng = () => createPRNG('religion-contest');
 
-describe('evaluateReligiousContest — DOUBLE GATE dormancy', () => {
+function drive(campaign, saves, rules) {
+  return advanceReligionStates({
+    snapshot: snapshotFor(campaign, saves),
+    worldState: campaign.worldState,
+    tick: 4,
+    now: NOW,
+    rules,
+    rng: rng(),
+  });
+}
+
+describe('advanceReligionStates — DOUBLE GATE dormancy', () => {
   test('flag OFF ⇒ empties even with deities present (byte-identical no-op)', () => {
     const fx = contestFixture();
     const campaign = religionCampaign({ religionDynamicsEnabled: false }, fx);
-    const result = evaluateReligiousContest({
-      snapshot: snapshotFor(campaign, fx.saves),
-      rng: rng(), tick: 4, now: NOW,
-      rules: { religionDynamicsEnabled: false },
-    });
+    const result = drive(campaign, fx.saves, { religionDynamicsEnabled: false });
+    expect(result.religionStates).toBeNull();
     expect(result.outcomes).toEqual([]);
     expect(result.graphChannels).toEqual([]);
   });
@@ -127,25 +137,18 @@ describe('evaluateReligiousContest — DOUBLE GATE dormancy', () => {
       { id: 'edge.y.z', from: 'y', to: 'z', relationshipType: 'trade_partner' },
     ];
     const campaign = religionCampaign({}, { settlementIds: ['x', 'y', 'z'], edges });
-    const result = evaluateReligiousContest({
-      snapshot: snapshotFor(campaign, saves),
-      rng: rng(), tick: 4, now: NOW,
-      rules: { religionDynamicsEnabled: true },
-    });
+    const result = drive(campaign, saves, { religionDynamicsEnabled: true });
+    expect(result.religionStates).toBeNull();
     expect(result.outcomes).toEqual([]);
     expect(result.graphChannels).toEqual([]);
   });
 });
 
-describe('evaluateReligiousContest — mints only under deity presence', () => {
+describe('advanceReligionStates — mints only under deity presence', () => {
   test('a deity-bearing settlement mints religious_authority along faith carriers; a deity-free graph mints none', () => {
     const fx = contestFixture();
     const campaign = religionCampaign({}, fx);
-    const result = evaluateReligiousContest({
-      snapshot: snapshotFor(campaign, fx.saves),
-      rng: rng(), tick: 4, now: NOW,
-      rules: { religionDynamicsEnabled: true },
-    });
+    const result = drive(campaign, fx.saves, { religionDynamicsEnabled: true });
     expect(result.graphChannels.length).toBeGreaterThan(0);
     expect(result.graphChannels.every(c => c.type === 'religious_authority')).toBe(true);
     // Mints originate at the deity-bearing sources, never at the deity-free convert.
@@ -153,39 +156,21 @@ describe('evaluateReligiousContest — mints only under deity presence', () => {
     expect(froms.has('asource')).toBe(true);
     expect(froms.has('bsource')).toBe(true);
     expect(froms.has('cconv')).toBe(false);
-
-    // A deity-FREE campaign (no embedded snapshot) mints nothing.
-    const freeSaves = [save('p', 'Ptown'), save('q', 'Qtown'), save('r', 'Rtown')];
-    const freeEdges = [
-      { id: 'edge.p.r', from: 'p', to: 'r', relationshipType: 'allied' },
-      { id: 'edge.q.r', from: 'q', to: 'r', relationshipType: 'trade_partner' },
-    ];
-    const freeCampaign = religionCampaign({}, { settlementIds: ['p', 'q', 'r'], edges: freeEdges });
-    const freeResult = evaluateReligiousContest({
-      snapshot: snapshotFor(freeCampaign, freeSaves),
-      rng: rng(), tick: 4, now: NOW,
-      rules: { religionDynamicsEnabled: true },
-    });
-    expect(freeResult.graphChannels).toEqual([]);
   });
 });
 
-describe('evaluateReligiousContest — order independence', () => {
-  test('reversing the saves + edges arrays yields identical winners + conversions', () => {
+describe('advanceReligionStates — order independence', () => {
+  test('reversing the saves + edges arrays yields identical religionStates + mints', () => {
     const fx = contestFixture();
     const fwdCampaign = religionCampaign({}, fx);
-    const fwd = evaluateReligiousContest({
-      snapshot: snapshotFor(fwdCampaign, fx.saves),
-      rng: rng(), tick: 4, now: NOW, rules: { religionDynamicsEnabled: true },
-    });
+    const fwd = drive(fwdCampaign, fx.saves, { religionDynamicsEnabled: true });
 
     const revSaves = [...fx.saves].reverse();
     const revEdges = [...fx.edges].reverse();
     const revCampaign = religionCampaign({}, { settlementIds: [...fx.settlementIds].reverse(), edges: revEdges });
-    const rev = evaluateReligiousContest({
-      snapshot: snapshotFor(revCampaign, revSaves),
-      rng: rng(), tick: 4, now: NOW, rules: { religionDynamicsEnabled: true },
-    });
+    const rev = drive(revCampaign, revSaves, { religionDynamicsEnabled: true });
+
+    expect(JSON.stringify(fwd.religionStates)).toBe(JSON.stringify(rev.religionStates));
 
     const convertEmbeds = (r) => r.outcomes
       .filter(o => o.deityReembed)
@@ -198,29 +183,8 @@ describe('evaluateReligiousContest — order independence', () => {
   });
 });
 
-describe('evaluateReligiousContest — conversion re-embeds the winning neighbour', () => {
-  test('a strong major deity converts a weak-faith convert; re-embed copies the NEIGHBOUR snapshot, not customContent', () => {
-    const fx = contestFixture({ cHasDeity: false });
-    const campaign = religionCampaign({}, fx);
-    const snapshot = snapshotFor(campaign, fx.saves);
-    const result = evaluateReligiousContest({
-      snapshot, rng: rng(), tick: 4, now: NOW, rules: { religionDynamicsEnabled: true },
-    });
-    const conversion = result.outcomes.find(o => o.deityReembed && o.targetSaveId === 'cconv');
-    expect(conversion).toBeTruthy();
-    // The re-embedded snapshot is one of the neighbours' EMBEDDED deity snapshots.
-    const embedded = conversion.deityReembed.snapshot;
-    expect(['Vael', 'Korl']).toContain(embedded.name);
-    expect(embedded._deityRef).toMatch(/^custom:lu_/);
-    // It is the winning NEIGHBOUR's snapshot — the fromSettlementId is a source.
-    expect(['asource', 'bsource']).toContain(conversion.deityReembed.fromSettlementId);
-    // The conversion seeds the EXISTING religious_conversion_fracture stressor.
-    expect(conversion.type).toBe('stressor');
-    expect(conversion.stressor.type).toBe('religious_conversion_fracture');
-  });
-
-  test("incumbency advantage: a strong-orthodoxy convert with its OWN major deity does NOT flip to a weaker challenger", () => {
-    // C carries a major deity and a strong orthodoxy; the lone neighbour is a cult.
+describe('advanceReligionStates — incumbency advantage', () => {
+  test('a strong-orthodoxy settlement with its OWN major deity does NOT flip to a weaker challenger in one tick', () => {
     const saves = [
       save('weak', 'Weakcult', { deity: deitySnapshot('Murk', { rank: 'cult' }), legitimacy: 20 }),
       save('strong', 'Stronghold', {
@@ -229,7 +193,6 @@ describe('evaluateReligiousContest — conversion re-embeds the winning neighbou
         institutions: [{ type: 'temple', classification: 'religious', name: 'Grand Temple' }],
         activeConditions: [{ archetype: 'religious_revival', severity: 0.6, affectedSystems: ['religious_authority'] }],
       }),
-      // A second deity-bearer so the activation gate + contest are reachable.
       save('mid', 'Midshrine', { deity: deitySnapshot('Lyte', { rank: 'minor' }) }),
     ];
     const edges = [
@@ -237,13 +200,11 @@ describe('evaluateReligiousContest — conversion re-embeds the winning neighbou
       { id: 'edge.mid.strong', from: 'mid', to: 'strong', relationshipType: 'allied' },
     ];
     const campaign = religionCampaign({}, { settlementIds: ['weak', 'strong', 'mid'], edges });
-    const result = evaluateReligiousContest({
-      snapshot: snapshotFor(campaign, saves),
-      rng: rng(), tick: 4, now: NOW, rules: { religionDynamicsEnabled: true },
-    });
+    const result = drive(campaign, saves, { religionDynamicsEnabled: true });
     // The strong incumbent holds — no conversion lands on 'strong'.
     const flippedStrong = result.outcomes.find(o => o.deityReembed && o.targetSaveId === 'strong');
     expect(flippedStrong).toBeFalsy();
+    expect(result.religionStates.strong.patronRef).toBe('custom:lu_aegis');
   });
 });
 

@@ -79,7 +79,7 @@ function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
-/** @param {any} saveId @param {any} faction @param {any} index */
+/** @param {any} saveId @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionId(saveId, faction, index) {
   const name = faction?.id || faction?.faction || faction?.name || faction?.label || `faction_${index}`;
   return `${saveId}:${stablePart(name)}`;
@@ -92,7 +92,7 @@ function inferFactionArchetype(faction = {}) {
   return (/** @type {any} */ (CANONICAL_TO_COMPETITION))[factionArchetype(faction)] || 'civic';
 }
 
-/** @param {any} faction @param {any} index */
+/** @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionPower(faction = {}, index = 0) {
   const raw = faction.power ?? faction.influence ?? faction.score ?? faction.weight;
   if (Number.isFinite(raw)) return raw > 1 ? clamp01(raw / 100) : clamp01(raw);
@@ -375,7 +375,7 @@ function sameStringList(a, b) {
  * the field — a fresh campaign's first pulse must not dirty every roster
  * with 'none'/'quiet'/[] noise.
  */
-/** @param {any} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
 export function projectFactionStatesOntoSettlement(settlement, factionStates, settlementId, { tick = 0 } = {}) {
   const factions = settlement?.powerStructure?.factions;
   if (!Array.isArray(factions) || !factions.length) return settlement;
@@ -700,16 +700,40 @@ export function deriveFactionCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateFactionRules(snapshot, pressureIdx, options);
 }
 
+// Union of two id lists, LIVE order first, patch additions appended. Deterministic
+// (both inputs are deterministically ordered) and a byte-identical no-op when the
+// patch was authored against the live state (the auto/same-tick path).
+/** @param {any} liveList @param {any} patchList */
+function mergeInstitutionIds(liveList, patchList) {
+  return [...new Set([...(liveList || []), ...(patchList || [])])];
+}
+
 /** @param {any} worldState @param {any} outcome */
 export function applyFactionPatch(worldState, outcome) {
   if (!outcome?.factionId) return worldState;
   const factionStates = { ...(worldState.factionStates || {}) };
   const current = factionStates[outcome.factionId] || {};
+  const patch = outcome.factionPatch || {};
+  // Candidates bake ABSOLUTE next-values at authoring time, but a proposal-mode
+  // outcome can be accepted many ticks later (applyWorldPulseProposal re-routes the
+  // STORED outcome back through here). Wholesale replacement would roll live state
+  // back to the stale authoring snapshot. Institution lists only ever ACCRETE at
+  // authoring (capture/suppression add one id, never remove), so a UNION with the
+  // live lists preserves both the patch's addition and every interim capture — and
+  // is byte-identical on same-tick application. lastActedTick is monotonic for the
+  // same reason: a late accept must not rewind the live cooldown. Clamped scalars
+  // (momentum/exhaustion/legitimacyClaim) stay last-write-wins — they carry no
+  // pre-value to rebase a delta from, and a bounded stale write self-corrects.
+  const lastActedTick = Math.max(
+    Number.isFinite(Number(current.lastActedTick)) ? Number(current.lastActedTick) : -Infinity,
+    Number.isFinite(Number(patch.lastActedTick)) ? Number(patch.lastActedTick) : -Infinity,
+  );
   factionStates[outcome.factionId] = {
     ...current,
-    ...(outcome.factionPatch || {}),
-    controlledInstitutions: outcome.factionPatch?.controlledInstitutions || current.controlledInstitutions || [],
-    suppressedInstitutions: outcome.factionPatch?.suppressedInstitutions || current.suppressedInstitutions || [],
+    ...patch,
+    controlledInstitutions: mergeInstitutionIds(current.controlledInstitutions, patch.controlledInstitutions),
+    suppressedInstitutions: mergeInstitutionIds(current.suppressedInstitutions, patch.suppressedInstitutions),
+    ...(Number.isFinite(lastActedTick) ? { lastActedTick } : {}),
   };
   return { ...worldState, factionStates };
 }

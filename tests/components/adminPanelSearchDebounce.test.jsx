@@ -105,6 +105,46 @@ describe('AdminPanel — debounced user search', () => {
     expect(after[after.length - 1][1].body.metadata.search).toBe('orc');
   });
 
+  test('an out-of-order (stale) fetch response does NOT overwrite the newest results', async () => {
+    // Only DEFER the list_users search calls (keyed by their search term); every
+    // other panel's invoke resolves immediately so the panel body settles. This
+    // lets us resolve the "old" and "new" list_users fetches out of firing order.
+    const pending = new Map(); // search term -> resolve fn
+    invoke.mockImplementation((fn, opts) => {
+      if (fn === 'admin-actions' && opts?.body?.action === 'list_users') {
+        const term = opts.body.metadata?.search ?? '';
+        if (term === 'old' || term === 'new') {
+          return new Promise((resolve) => { pending.set(term, resolve); });
+        }
+      }
+      return Promise.resolve({ data: { users: [] }, error: null });
+    });
+
+    let getByLabelText, getByText, queryByText;
+    await act(async () => {
+      ({ getByLabelText, getByText, queryByText } = render(<AdminPanel />));
+    });
+
+    const input = getByLabelText('Search users by email or name');
+
+    // Fire search "old" (flush via Enter), then search "new" (flush via Enter).
+    // Both list_users fetches are now in flight, unresolved.
+    act(() => { fireEvent.change(input, { target: { value: 'old' } }); });
+    await act(async () => { fireEvent.keyDown(input, { key: 'Enter' }); });
+    act(() => { fireEvent.change(input, { target: { value: 'new' } }); });
+    await act(async () => { fireEvent.keyDown(input, { key: 'Enter' }); });
+
+    // Resolve NEW first, then the stale OLD — the stale payload must be dropped.
+    await act(async () => {
+      pending.get('new')({ data: { users: [{ id: 'u-new', display_name: 'Newmatch' }] }, error: null });
+      pending.get('old')({ data: { users: [{ id: 'u-old', display_name: 'Oldmatch' }] }, error: null });
+    });
+
+    // The newest search's row is shown; the stale response never clobbered it.
+    expect(getByText('Newmatch')).toBeTruthy();
+    expect(queryByText('Oldmatch')).toBeNull();
+  });
+
   test('the audited list_users path (action + search metadata) is preserved', async () => {
     await act(async () => {
       render(<AdminPanel />);

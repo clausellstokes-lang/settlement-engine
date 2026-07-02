@@ -180,7 +180,7 @@ function clamp01(value) {
 
 /**
  * @param {any} saveId
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  * @param {any} index
  */
 export function npcId(saveId, npc, index) {
@@ -194,7 +194,7 @@ export function npcId(saveId, npc, index) {
  * (no rng/Date); returns the same settlement reference when nothing changed.
  */
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} npcStates
  * @param {any} settlementId
  */
@@ -224,7 +224,7 @@ function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
-/** @param {any} npc */
+/** @param {import('../settlement.schema.js').SimNpc} npc */
 function notability(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
@@ -235,7 +235,7 @@ function notability(npc = {}) {
   return 0.38;
 }
 
-/** @param {any} npc */
+/** @param {import('../settlement.schema.js').SimNpc} npc */
 function dotRankFor(npc = {}) {
   const score = notability(npc);
   if (score >= 0.82) return 3;
@@ -243,7 +243,7 @@ function dotRankFor(npc = {}) {
   return 1;
 }
 
-/** @param {any} npc */
+/** @param {import('../settlement.schema.js').SimNpc} npc */
 function inferRoleArchetype(npc = {}) {
   const text = `${npc.name || ''} ${npc.label || ''} ${npc.role || ''} ${npc.title || ''} ${npc.description || ''}`.toLowerCase();
   for (const [role, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
@@ -253,7 +253,7 @@ function inferRoleArchetype(npc = {}) {
 }
 
 /**
- * @param {Record<string, any>} [npc]
+ * @param {import('../settlement.schema.js').SimNpc} [npc]
  * @param {any} [item]
  * @param {number} [index]
  */

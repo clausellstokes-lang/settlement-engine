@@ -17,8 +17,13 @@
  *     (registerBatchCommit), so a failed link commit restores BOTH settlements.
  *
  * The change-queue staging entry points (handleLink / removeNeighbour) QUEUE an
- * order when the open settlement is standalone (queueActiveForOpenDetail), and
- * apply immediately otherwise (Phase 4a scope: the queue is standalone-only).
+ * order when the open settlement is STANDALONE, and apply immediately for a
+ * CLOCK-BOUND canon campaign member — matching how every other member edit
+ * lands (EventComposer's Apply calls applyEvent now, the world-pulse redirect;
+ * the header rename calls applyRename now). queueActiveForOpenDetail is true
+ * for ANY open detail since Phase 4b, so the clock-bound check is made here,
+ * live against the store at click time — without it a member's link order
+ * would stage into a queue whose commit panel treats members as immediate.
  * A link order captures the partner SAVE ID + a STABLE linkId (never a neighbour
  * array index, which drifts as other queued orders mutate the network); an
  * unlink order captures the stable linkId. Both resolve to the live partner /
@@ -133,12 +138,26 @@ export function useChangeQueueCascade(ctx) {
     }
   };
 
+  // Is the OPEN settlement bound to a canonized campaign clock? Checked at
+  // click time against the live store (canonization can happen mid-session, so
+  // a render-time snapshot could go stale). A clock-bound member's edits apply
+  // IMMEDIATELY on every other surface — EventComposer's Apply (applyEvent →
+  // world-pulse redirect) and the header rename (applyRename) — so link/unlink
+  // follow the same rule rather than staging where nothing else stages.
+  const openDetailIsClockBound = () => {
+    const st = useStore.getState();
+    const id = detail?.saveData?.id;
+    return !!(id != null
+      && typeof st.isSettlementClockBound === 'function'
+      && st.isSettlementClockBound(id));
+  };
+
   // ── Link ──────────────────────────────────────────────────────────────────
   // Staging entry point (standalone): QUEUE a link order. Clock-bound: apply now.
   const handleLink = (linkedSave, relType) => {
     const currentId = detail?.saveData?.id;
     if (!currentId || !linkedSave?.id) return;
-    if (queueActiveForOpenDetail) {
+    if (queueActiveForOpenDetail && !openDetailIsClockBound()) {
       const linkId = linkIdFor(currentId, linkedSave.id);
       queueChange(currentId, {
         type: 'link',
@@ -179,8 +198,20 @@ export function useChangeQueueCascade(ctx) {
     const currentBase = deferring
       ? (findSaveById(baseSaves, detail.saveData.id)?.settlement || detail.settlement)
       : detail.settlement;
-    const network = [...(currentBase.neighbourNetwork||[]), entryForCurrent];
-    const ownISR = [...(currentBase.interSettlementRelationships||[]), ...npcForA, ...conflictForA];
+    // Dedupe the current side the same way the partner side already self-heals
+    // (see the `.filter(n => n.id !== …)` / `.filter(r => r.linkId !== linkId)`
+    // below): two 'link' orders for the SAME partner in one queue commit — or a
+    // re-link of an existing neighbour — must not double-append the entry or
+    // stack a second full ISR set. Drop any prior entry/relationships for this
+    // linkId (or partner id) before appending the fresh ones. Idempotent.
+    const network = [
+      ...(currentBase.neighbourNetwork||[]).filter(n => (n.linkId ? n.linkId !== linkId : n.id !== linkedSave.id)),
+      entryForCurrent,
+    ];
+    const ownISR = [
+      ...(currentBase.interSettlementRelationships||[]).filter(r => r.linkId !== linkId),
+      ...npcForA, ...conflictForA,
+    ];
     let updatedSaves = baseSaves.map(s => {
       if (s.id === detail?.saveData?.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
       if (s.id === linkedSave.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForPartner, ...(s.settlement?.neighbourNetwork||[]).filter(n => n.id !== detail.saveData.id)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r => r.linkId !== linkId), ...npcForB, ...conflictForB] } };
@@ -224,7 +255,7 @@ export function useChangeQueueCascade(ctx) {
   const removeNeighbour = (idx) => {
     const currentId = detail?.saveData?.id;
     const removedEntry = detail.settlement.neighbourNetwork[idx];
-    if (queueActiveForOpenDetail && currentId) {
+    if (queueActiveForOpenDetail && currentId && !openDetailIsClockBound()) {
       const linkId = removedEntry?.linkId || null;
       const partnerId = removedEntry?.id || null;
       queueChange(currentId, {

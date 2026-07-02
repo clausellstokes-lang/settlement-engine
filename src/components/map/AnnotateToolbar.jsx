@@ -5,9 +5,9 @@
  * the options for each tool (font size, color, marker icon, forest style).
  */
 
-import { MousePointer2, Type, Pin, Trash2, Undo2, Redo2 } from 'lucide-react';
+import { MousePointer2, Type, Pin, TreePine, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
-import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
+import { ANNOTATE_TOOLS, FOREST_STYLES } from '../../store/mapSlice.js';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, ELEV, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -76,6 +76,12 @@ export default function AnnotateToolbar() {
           Icon={Pin}
           label="Marker"
         />
+        <ToolButton
+          active={annotateTool === ANNOTATE_TOOLS.FOREST}
+          onClick={() => setAnnotateTool(ANNOTATE_TOOLS.FOREST)}
+          Icon={TreePine}
+          label="Forest"
+        />
       </div>
 
       {/* Grouping via differential spacing, not a hairline: a single wide gap
@@ -141,6 +147,42 @@ export default function AnnotateToolbar() {
             aria-label="Color"
             style={{ width: 28, height: 28, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
           />
+        </>
+      )}
+
+      {annotateTool === ANNOTATE_TOOLS.FOREST && (
+        <>
+          <OptionLabel>Style</OptionLabel>
+          <select
+            value={opts.forestStyle}
+            onChange={e => setOpt('forestStyle', e.target.value)}
+            aria-label="Forest style"
+            style={selectStyle}
+          >
+            {FOREST_STYLES.map(style => (
+              <option key={style} value={style}>
+                {style.charAt(0).toUpperCase() + style.slice(1)}
+              </option>
+            ))}
+          </select>
+          <OptionLabel>Radius</OptionLabel>
+          <input
+            type="range" min={20} max={160} step={5}
+            value={opts.forestRadius}
+            onChange={e => setOpt('forestRadius', Number(e.target.value))}
+            aria-label="Radius"
+            style={{ width: 90, accentColor: GOLD }}
+          />
+          <span style={{ fontSize: FS.xs, color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
+          <OptionLabel>Density</OptionLabel>
+          <input
+            type="range" min={0.1} max={1} step={0.05}
+            value={opts.forestDensity}
+            onChange={e => setOpt('forestDensity', Number(e.target.value))}
+            aria-label="Density"
+            style={{ width: 90, accentColor: GOLD }}
+          />
+          <span style={{ fontSize: FS.xs, color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
         </>
       )}
 

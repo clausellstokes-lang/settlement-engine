@@ -136,6 +136,7 @@ export default function GalleryMaps({ onNavigate }) {
   const [detailLoading, setDetailLoading] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- data-load: reset/spinner on slug change
     if (!viewingSlug) { setDetail(null); return; }
     let ignore = false;
     setDetailLoading(true); setDetail(null);
@@ -165,6 +166,7 @@ export default function GalleryMaps({ onNavigate }) {
   // is active, since the server already returned the narrowed set.
   useEffect(() => {
     let ignore = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- data-load: spinner/reset on query change
     setLoading(true); setError(null);
     fetchGalleryMaps({ page: 0, pageSize: 60, sort, search: debouncedSearch, filters })
       .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })

@@ -294,3 +294,16 @@ Deno.test('an UNDER-CAP body parses normally (cap does not block legitimate requ
   assertEquals(res.status, 200);   // streaming response opened → body parsed
   await drain(res);
 });
+
+// ── progression changeType is a client string: own-property lookup only ──────
+Deno.test('progressionAffectedKeys ignores prototype-chain names and unknown types (thesis-only fallback)', async () => {
+  const { progressionAffectedKeys } = await import('./index.ts');
+  // A prototype name used to resolve the inherited Object member (truthy, so
+  // `|| []` never applied) and `.map` threw inside the stream post-spend.
+  for (const hostile of ['constructor', 'toString', 'hasOwnProperty', '__proto__']) {
+    assertEquals(progressionAffectedKeys(hostile), []);
+  }
+  assertEquals(progressionAffectedKeys('not_a_real_change_type'), []);
+  // A REAL changeType still resolves its refinement passes.
+  assertEquals(progressionAffectedKeys('addStressor').length > 0, true);
+});

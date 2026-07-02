@@ -77,7 +77,7 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
 ]);
 
 /**
- * @param {any} stressor
+ * @param {import('./settlement.schema.js').SimStressor} stressor
  * @returns {string|null} the condition archetype this stressor promotes to, or null.
  */
 export function archetypeForStressor(stressor) {
@@ -104,7 +104,7 @@ export function archetypeForStressor(stressor) {
  * Scoped by `archetype` so re-promoting the settlement's OTHER stressors never
  * re-attributes their conditions to the new event.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string} | null} [origin]
  * @returns {any}
  */
@@ -186,7 +186,7 @@ export function promoteStressorsToConditions(settlement, origin = null) {
  * event conditions of one archetype (two severed routes) keep their distinct
  * ids and all survive. Pure, deterministic, consumes no rng — a config
  * without the record generates byte-identically.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function reapplyEventConditions(settlement) {
   const record = settlement?.config?.eventConditions ?? settlement?._config?.eventConditions;

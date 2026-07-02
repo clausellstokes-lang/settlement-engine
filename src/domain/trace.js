@@ -170,7 +170,7 @@ export function recordTraces(ctx, traces) {
 
 /**
  * All traces on a settlement, in insertion order.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function getTraces(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
@@ -179,7 +179,7 @@ export function getTraces(settlement) {
 
 /**
  * Traces affecting a specific entity id.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} targetId
  */
 export function tracesFor(settlement, targetId) {
@@ -189,7 +189,7 @@ export function tracesFor(settlement, targetId) {
 
 /**
  * Traces emitted by a specific pipeline step.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} stepName
  */
 export function tracesByStep(settlement, stepName) {
@@ -199,7 +199,7 @@ export function tracesByStep(settlement, stepName) {
 
 /**
  * Traces of a specific target type ('institution', 'faction', etc.).
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} targetType
  */
 export function tracesByType(settlement, targetType) {
@@ -212,7 +212,7 @@ export function tracesByType(settlement, targetType) {
  * Useful for "what did this stressor end up causing?" style queries.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} sourceId
  */
 export function tracesCausedBy(settlement, sourceId) {
@@ -227,7 +227,7 @@ export function tracesCausedBy(settlement, sourceId) {
  * effect? "What feeds into the public-order subsystem?"
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} targetId
  */
 export function tracesAffecting(settlement, targetId) {

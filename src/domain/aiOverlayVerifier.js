@@ -26,6 +26,28 @@
  * the AI streaming response pipeline before committing the overlay
  * into store state.
  *
+ * SCOPE BOUNDARY (deliberate — an audit named this the "weakest link"; it is a
+ * reasoned boundary, not an oversight):
+ *   - STRUCTURAL by design. This diffs entity ARRAYS (factions/NPCs/institutions
+ *     by id/index/role) and typed FACTS (population/tier/canon tag). It does NOT
+ *     scan free-form prose for an invented proper noun — a temple or NPC that the
+ *     model names only in a sentence and never adds to an entity array is not
+ *     flagged. Robust prose proper-noun-vs-canon detection is a fuzzy NLP problem
+ *     with real false-positive cost, and here it would run on a PAID generation, so
+ *     a naive heuristic that wrongly flags legitimate color is a liability, not a
+ *     safeguard. The defenses against prose invention are instead: the prompt
+ *     contract ("Do not invent … reference DM-named lore as color only", prompts.ts)
+ *     and the clone-based merge (the FIRST defense) — this structural check is the
+ *     defense-in-depth behind them, not a prose linter.
+ *   - CLIENT-SIDE at commit by design. generate-narrative refines PROSE fields, so a
+ *     server-side structural pass over its output would be near-vacuous; and the app's
+ *     trust model is not adversarial-client. The commit-time run (aiSlice) is the
+ *     effective trust boundary for the structural changes that CAN occur (edits).
+ *   - NEVER REFUSES a commit by design (see aiSlice.js): the user paid for the call,
+ *     so a surfaced "your AI output drifted" warning beats withholding the prose.
+ *   Escalating any of these (server-side pass, prose scan, hard refuse) is a product
+ *   decision with money-path tradeoffs — intentionally left to an explicit call.
+ *
  * Architectural fit:
  *   - The store's `setAiSettlement` action (src/store/aiSlice.js)
  *     runs every overlay through this verifier before committing it.
@@ -351,8 +373,8 @@ function summariseViolations(violations) {
 /**
  * Run every check and return a violations report.
  *
- * @param {any} original  The settlement BEFORE the AI overlay.
- * @param {any} refined   The settlement AFTER the AI overlay.
+ * @param {import('./settlement.schema.js').SimSettlement} original  The settlement BEFORE the AI overlay.
+ * @param {import('./settlement.schema.js').SimSettlement} refined   The settlement AFTER the AI overlay.
  * @returns {{
  *   ok: boolean,
  *   violations: Array<{

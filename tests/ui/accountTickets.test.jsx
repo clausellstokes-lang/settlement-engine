@@ -83,6 +83,17 @@ describe('A5 — Account Support section (FAQ-first + tickets)', () => {
     expect(invoke).toHaveBeenCalledWith('account-actions', { body: { action: 'list_my_tickets' } });
   });
 
+  test('loads existing tickets on mount — no Refresh click required', async () => {
+    const Section = await importSection();
+    render(<Section auth={{ user: { email: 'alice@example.com' } }} />);
+    // Without touching Refresh, the owner's ticket must appear (the mount effect
+    // fires list_my_tickets). Before the fix the user saw "No tickets yet".
+    expect(await screen.findByText('SF-000001')).toBeTruthy();
+    expect(screen.getByText('My town vanished')).toBeTruthy();
+    expect(screen.queryByText(/no tickets yet/i)).toBeNull();
+    expect(invoke).toHaveBeenCalledWith('account-actions', { body: { action: 'list_my_tickets' } });
+  });
+
   test('"New ticket" creates a ticket via create_ticket with the form values', async () => {
     const Section = await importSection();
     render(<Section auth={{ user: { email: 'alice@example.com' } }} />);

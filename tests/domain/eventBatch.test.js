@@ -9,6 +9,8 @@ import {
   validateBatch, applyEventBatch, eventProduces, eventConsumes,
 } from '../../src/domain/events/batch.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
+import { deriveOnsetSeverity } from '../../src/domain/state/deriveStressorSeverity.js';
+import { canonStressors } from '../../src/domain/canonicalAccessors.js';
 
 const base = {
   tier: 'town',
@@ -261,6 +263,22 @@ describe('applyEventBatch', () => {
     const factions = result.nextSettlement.powerStructure?.factions || [];
     expect(factions.some(f => /dockhands/i.test(f.name))).toBe(true);
     expect(result.rerunKeys).toEqual(expect.arrayContaining(['powerStructure', 'narrative']));
+  });
+
+  test('APPLY_STRESSOR onset severity is DERIVED, not the static 0.6 default', () => {
+    // Regression: the batch path used to skip resolveStressorEventSeverity, so an
+    // unauthored APPLY_STRESSOR fell back to crisisOnset's 0.6 default — diverging
+    // from the store's real applyEvent (0.45-0.80 derived) path. It must now resolve
+    // the same derived severity the single-event pipeline stamps.
+    const expected = deriveOnsetSeverity(base);
+    expect(expected).not.toBe(0.6); // fixture derives a distinct value (guards the assertion)
+    const result = applyEventBatch({
+      settlement: base,
+      events: [ev('APPLY_STRESSOR', { targetId: 'famine', payload: { stressorType: 'famine', label: 'Famine' } })],
+    });
+    const applied = canonStressors(result.nextSettlement)
+      .find(s => String(s.type).toLowerCase() === 'famine');
+    expect(applied?.severity).toBe(expected);
   });
 
   test('derives a single combined SystemState delta for the batch', () => {

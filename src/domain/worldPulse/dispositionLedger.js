@@ -90,9 +90,25 @@ export function ratchetDisposition(ledger, id, delta) {
  */
 export function applyDispositionDeltas(ledger, deltas = []) {
   if (!Array.isArray(deltas) || deltas.length === 0) return ledger || {};
+  // Same-id deltas are NOT commutative under the ±SCORE_MAX clamp in
+  // ratchetDisposition: clamp(clamp(x+a)+b) ≠ clamp(clamp(x+b)+a) once an
+  // intermediate saturates. Sorting by id alone leaves the fold of two same-id
+  // deltas dependent on their saves-array order. A total secondary key (signed
+  // magnitude ascending) makes the fold deterministic for any input permutation;
+  // ties on signed magnitude are genuinely commutative, so this is a strict
+  // strengthening with no effect on the ≤1-delta-per-id common path.
+  /** @param {{ outcome: 'win'|'loss', magnitude?: number }} d */
+  const signedOf = (d) => {
+    const mag = Number.isFinite(d.magnitude) ? Math.max(0, Number(d.magnitude)) : 1;
+    return d.outcome === 'win' ? mag : -mag;
+  };
   const ordered = [...deltas]
     .filter((d) => d && d.id != null)
-    .sort((a, b) => (String(a.id) < String(b.id) ? -1 : String(a.id) > String(b.id) ? 1 : 0));
+    .sort((a, b) => {
+      const ai = String(a.id), bi = String(b.id);
+      if (ai !== bi) return ai < bi ? -1 : 1;
+      return signedOf(a) - signedOf(b);
+    });
   return ordered.reduce((acc, d) => ratchetDisposition(acc, d.id, d), ledger || {});
 }
 

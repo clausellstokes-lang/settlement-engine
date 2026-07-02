@@ -85,6 +85,13 @@ async function lockdown(db) {
   `);
 }
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('profiles moderation-column self-UPDATE lock — executed against 061 (pglite)', () => {
   let db;
   beforeAll(async () => {

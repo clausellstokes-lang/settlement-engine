@@ -1,10 +1,17 @@
 /**
  * lib/flags.js — Feature flag registry.
  *
- * Every cross-cutting product change ships behind a flag so we can
- * roll back without redeploying. The funnel + UI redesign is a big
- * change touching dozens of components — without flags, "ship it" and
- * "revert it" both become multi-hour migrations.
+ * Every cross-cutting product change ships behind a flag. Two rollback
+ * modes, with very different reach:
+ *   - Per-browser (URL param / localStorage override): instant, deploy-free,
+ *     but affects only that one browser — this is the QA / dev / single-user
+ *     escape hatch.
+ *   - Fleet-wide (a `default` change here, or a VITE_FLAG_* env value): the
+ *     flag layers are build-time-inlined by Vite, so flipping the default for
+ *     everyone still requires a rebuild + redeploy. It is a controlled revert,
+ *     not a runtime toggle.
+ * The funnel + UI redesign is a big change touching dozens of components —
+ * without flags, "ship it" and "revert it" both become multi-hour migrations.
  *
  * Resolution order (highest precedence first):
  *
@@ -56,10 +63,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
   },
-  workshopNav: {
-    default: true,
-    description: 'Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
-  },
   canonicalViewModel: {
     default: true,
     description: 'Route food balance + export posture + viability through the canonical display model (deriveDossierViewModel). PROMOTED default-on; flag retained as soak killswitch.',
@@ -72,41 +75,13 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Per-settlement version timeline + diff + revert. Cartographer-gated. PROMOTED default-on after revert-mutation soak.',
   },
-  mapDropPreview: {
-    default: true,
-    description: 'Hover-tooltip during drag with terrain + trade-route context.',
-  },
   mapAutosave: {
     default: true,
     description: 'Auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
   },
-  welcomeBack: {
-    default: true,
-    description: 'Welcome-back hero variant on return visits + post-session check-in.',
-  },
   founderRecognition: {
     default: false,
     description: 'Founder Lifetime surfaces only to demonstrated worldbuilders.',
-  },
-  heroV2: {
-    default: true,
-    description: 'Two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
-  },
-  wizardChromeDiet: {
-    default: true,
-    description: 'Collapse 7 wizard chrome rows into one combined header.',
-  },
-  narrativeLayerStrip: {
-    default: true,
-    description: 'Lift narrative buttons into labeled strip below dossier title.',
-  },
-  mobileSingleChrome: {
-    default: false,
-    description: 'Drop mobile top header; auth chip joins bottom nav.',
-  },
-  compendiumInlineHelp: {
-    default: true,
-    description: '"?" affordance on every config control opens Compendium snippet.',
   },
   copyGuard: {
     default: false,
@@ -121,6 +96,28 @@ export const FLAGS = Object.freeze({
   advanceMultiTick: {
     default: true,
     description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) instead of one coarse step. Set false to fall back to the legacy single-tick advance.',
+  },
+  // Runs the multi-tick advance in a Web Worker so the main thread stays
+  // interactive during a long advance (a year is 48 synchronous kernel ticks). The
+  // worker runs the SAME pure simulate function with a custom-content snapshot, so
+  // output is byte-identical to the in-thread path; a killswitch fallback runs it
+  // in-thread when off (and it always runs in-thread in Node/tests/SSR, where there
+  // is no Worker). Set false (?flag.simAdvanceWorker=false) for instant per-browser
+  // rollback to the synchronous advance.
+  simAdvanceWorker: {
+    default: true,
+    description: 'Run the multi-tick world advance in a Web Worker (main thread stays interactive). Byte-identical output; set false to fall back to the in-thread advance.',
+  },
+  // The read-only surfacing layer for the war-economy phases (P1-P4 + sack). OFF by
+  // default. When on, a "War & Resolve" tab reads each settlement's morale signals —
+  // Hope, Resolve, Faith relation, Supply, and the pro-war / anti-war balance — and the
+  // same signals ground the AI narrative + daily-life prose. Pure display: it computes
+  // nothing the simulation doesn't already know, mutates no state, and is independent of
+  // the sim flags (it reads whatever the current rules produce), so it never touches
+  // determinism or the golden master.
+  warEconomySurfacing: {
+    default: false,
+    description: 'A read-only "War & Resolve" tab surfacing each settlement\'s Hope / Resolve / Faith relation / Supply / pro-war vs anti-war balance, and the same signals grounding the AI narrative + daily-life prose. Display-only; touches no simulation state.',
   },
 
   // ── Pricing copy ────────────────────────────────────────────────────────────
@@ -188,7 +185,7 @@ function fromLocalStorage(name) {
   }
 }
 
-// Read from Vite env. Convention: VITE_FLAG_MOBILE_SINGLE_CHROME.
+// Read from Vite env. Convention: VITE_FLAG_FOUNDER_RECOGNITION.
 function fromEnv(name) {
   if (typeof import.meta === 'undefined' || !import.meta.env) return undefined;
   const key = 'VITE_FLAG_' + name.replace(/([A-Z])/g, '_$1').toUpperCase();

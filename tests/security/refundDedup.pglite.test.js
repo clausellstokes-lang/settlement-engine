@@ -36,6 +36,14 @@ const indexDdl = () => {
 let db;
 const scalar = async (q) => (await db.query(q)).rows[0];
 
+// Vacuity guard (runs unconditionally): if 087 is ever renamed/removed, `have`
+// goes false and the runIf block below silently executes ZERO assertions while
+// reporting green — the exact green-on-nothing class this repo ratchets against.
+// Fail loudly here instead. Mirrors accountStatusGate.pglite.test.js.
+it('migration 087 is present (suite is not vacuous)', () => {
+  expect(have).toBe(true);
+});
+
 describe.runIf(have)('087 refund pre-dedup makes the unique index deploy-safe (pglite)', () => {
   beforeAll(async () => { db = await new PGlite(); });
   beforeEach(async () => {

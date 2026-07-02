@@ -51,7 +51,7 @@ const VIEW_TITLES = Object.freeze({
 
 // ── Per-view derivers ───────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewNarrative(settlement) {
   const spine = deriveSimulationSpine(settlement);
   const daily = /** @type {any} */ (deriveDailyLife(settlement));
@@ -65,7 +65,7 @@ function viewNarrative(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewSimulation(settlement) {
   const causal = /** @type {any} */ (deriveCausalState(settlement));
   const capacities = /** @type {any} */ (deriveAllCapacities(settlement));
@@ -81,7 +81,7 @@ function viewSimulation(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewDelta(settlement) {
   const events = Array.isArray(settlement.eventLog) ? settlement.eventLog : [];
   const recent = events.slice(-10);
@@ -93,7 +93,7 @@ function viewDelta(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewFaction(settlement) {
   const profiles = /** @type {any[]} */ (deriveAllFactionProfiles(settlement));
   return {
@@ -104,7 +104,7 @@ function viewFaction(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewSupplyChain(settlement) {
   const chains = /** @type {any[]} */ (deriveAllSupplyChainStates(settlement));
   return {
@@ -115,7 +115,7 @@ function viewSupplyChain(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewTimeline(settlement) {
   const beats = /** @type {any} */ (deriveHistoryBeats(settlement));
   const clocks = /** @type {any[]} */ (deriveEscalationClocks(settlement));
@@ -133,7 +133,7 @@ function viewTimeline(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function viewDistrict(settlement) {
   const districts = /** @type {any[]} */ (deriveAllDistricts(settlement));
   return {

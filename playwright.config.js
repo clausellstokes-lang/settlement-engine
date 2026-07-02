@@ -19,6 +19,15 @@ import { defineConfig, devices } from '@playwright/test';
 const PORT = 5173;
 const BASE_URL = process.env.E2E_BASE_URL || `http://localhost:${PORT}`;
 
+// Default: the Vite DEV server, which is what the specs (and the live
+// money-path suite's window.__store seam) are written against. The dev
+// server is NOT the production bundle — chunking, minification, and lazy
+// boundaries differ — so prod-bundle regressions are invisible to the
+// default run. E2E_PROD_PREVIEW=1 opts into building + serving the real
+// bundle via `vite preview` instead (same port, same specs; the live
+// money-path suite skips there since __store is DEV-only).
+const PROD_PREVIEW = !!process.env.E2E_PROD_PREVIEW;
+
 export default defineConfig({
   testDir: './e2e',
 
@@ -70,11 +79,16 @@ export default defineConfig({
 
   // Boot the Vite dev server for the spec lifetime. If a dev server
   // is already running on PORT, reuse it (interactive dev loop).
+  // E2E_PROD_PREVIEW=1 swaps in a production build served by `vite
+  // preview` (never reused — a stale dev server on the port would
+  // silently defeat the point of the prod run).
   webServer: {
-    command: 'npm run dev -- --mode e2e',
+    command: PROD_PREVIEW
+      ? `npx vite build --mode e2e && npx vite preview --port ${PORT} --strictPort`
+      : 'npm run dev -- --mode e2e',
     url: BASE_URL,
-    timeout: 60_000,
-    reuseExistingServer: !process.env.CI,
+    timeout: PROD_PREVIEW ? 240_000 : 60_000,
+    reuseExistingServer: !process.env.CI && !PROD_PREVIEW,
     stdout: 'ignore',
     stderr: 'pipe',
   },

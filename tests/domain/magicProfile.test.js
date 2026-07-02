@@ -150,6 +150,19 @@ describe('roles', () => {
     expect(m.roles.economic).toBe('integral');
     expect(m.roles.infrastructure).toBe('integral');
   });
+
+  it("infrastructure reaches the 'common' band below the top magic tier (present without integral)", () => {
+    // Regression: infrastructure's 'present' and 'integral' conditions were the
+    // identical expression, so role() (which checks integral first) skipped
+    // 'common' entirely. An arcane institution at a NON-top magic tier is
+    // present-but-not-integral → 'common'.
+    const m = deriveMagicProfile({
+      config: { magicLevel: 'moderate' },
+      institutions: [{ name: "Mage's Tower" }],
+      powerStructure: { factions: [] },
+    });
+    expect(m.roles.infrastructure).toBe('common');
+  });
 });
 
 // ── Diagnostics ────────────────────────────────────────────────────────

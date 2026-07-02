@@ -65,6 +65,26 @@ describe('GalleryDescriptionEditor — length cap counts visible text, not marku
     expect(emitted).toMatch(/<\/strong>/);
   });
 
+  test('over-cap: the editable DOM is trimmed back to match the emitted value (WYSIWYG)', () => {
+    // Regression: emit() capped the emitted value but left the contenteditable
+    // showing the over-cap tail, so the user kept editing text already dropped
+    // from the draft. The trimmed HTML must be written back into the editable.
+    const onChange = vi.fn();
+    const maxLength = 20;
+    const { container } = render(
+      <GalleryDescriptionEditor value="" onChange={onChange} maxLength={maxLength} />,
+    );
+    const editable = container.querySelector('[contenteditable]');
+    editable.innerHTML = `<p>${'Z'.repeat(80)}</p>`; // 80 visible, over the 20 cap
+
+    fireEvent.input(editable);
+
+    const emitted = onChange.mock.calls.at(-1)[0];
+    // The live editor DOM now shows exactly what was emitted — no stale tail.
+    expect(visible(editable.innerHTML)).toBeLessThanOrEqual(maxLength);
+    expect(visible(editable.innerHTML)).toBe(visible(emitted));
+  });
+
   test('short content passes through unchanged (no spurious truncation)', () => {
     const onChange = vi.fn();
     const { container } = render(

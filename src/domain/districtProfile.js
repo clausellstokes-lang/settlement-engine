@@ -109,7 +109,7 @@ function inferDominantFaction(category, profiles) {
 // Category → base wealth band (settlement prosperity nudges from there).
 /**
  * @param {any} category
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} contributors
  */
 function inferWealth(category, settlement, contributors) {
@@ -149,7 +149,7 @@ function inferWealth(category, settlement, contributors) {
 // Category → base safety band (substrate + threats nudge).
 /**
  * @param {any} category
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any} threats
  * @param {any} contributors
@@ -196,7 +196,7 @@ function inferSafety(category, settlement, causal, threats, contributors) {
 // Match institutions by name overlap with the quarter's name / landmarks.
 /**
  * @param {any} quarter
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferInstitutions(quarter, settlement) {
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
@@ -313,7 +313,7 @@ function inferHook(category, quarter, conditions, threats) {
 
 /**
  * @param {any} quarter
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 function inferConnectedDistricts(quarter, settlement) {
   const all = settlement.spatialLayout?.quarters || [];
@@ -331,7 +331,7 @@ function inferConnectedDistricts(quarter, settlement) {
 /**
  * Build a structured DistrictProfile for one quarter.
  * @param {any} quarter
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveDistrictProfile(quarter, settlement) {
   if (!quarter || !quarter.name || !settlement) return null;
@@ -374,7 +374,7 @@ export function deriveDistrictProfile(quarter, settlement) {
 
 /**
  * Derive every district.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveAllDistricts(settlement) {
   if (!settlement) return [];
@@ -395,7 +395,7 @@ export function supportedDistrictCategories() {
   return [...DISTRICT_CATEGORIES];
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function summarizeDistricts(settlement) {
   return deriveAllDistricts(settlement)
     .map((/** @type {any} */ d) => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`);

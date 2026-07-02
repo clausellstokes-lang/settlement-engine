@@ -88,6 +88,37 @@ function handleMouseMove() {
 
 let currentNoteId = null; // store currently displayed node to not rerender to often
 
+// Note names/legends are user-authored rich text that travels inside shared .map
+// files, so treat them as untrusted markup: parse inert via DOMParser, strip
+// anything executable, and only then hand the result to innerHTML. Keeps
+// legitimate formatting (the notes editor produces styled HTML) while killing
+// <script>, event-handler attributes and javascript: URLs smuggled through a
+// crafted map file.
+const UNSAFE_NOTE_TAGS = /^(script|style|iframe|frame|frameset|object|embed|link|meta|base|form|template)$/i;
+const UNSAFE_NOTE_PROTOCOL = /^\s*(javascript|vbscript|data):/i;
+const NOTE_NAVIGATION_ATTRIBUTES = ["href", "xlink:href", "action", "formaction"]; // no data: either — data:text/html navigates
+const NOTE_RESOURCE_ATTRIBUTES = ["src", "poster", "background"]; // data: images are legitimate here
+const UNSAFE_NOTE_RESOURCE_PROTOCOL = /^\s*(javascript|vbscript):/i;
+
+function sanitizeNoteHtml(html) {
+  const doc = new DOMParser().parseFromString(String(html ?? ""), "text/html");
+  for (const element of doc.body.querySelectorAll("*")) {
+    if (UNSAFE_NOTE_TAGS.test(element.tagName)) {
+      element.remove();
+      continue;
+    }
+    for (const attribute of [...element.attributes]) {
+      const name = attribute.name.toLowerCase();
+      if (name.startsWith("on") || name === "srcdoc") element.removeAttribute(attribute.name);
+      else if (NOTE_NAVIGATION_ATTRIBUTES.includes(name) && UNSAFE_NOTE_PROTOCOL.test(attribute.value))
+        element.removeAttribute(attribute.name);
+      else if (NOTE_RESOURCE_ATTRIBUTES.includes(name) && UNSAFE_NOTE_RESOURCE_PROTOCOL.test(attribute.value))
+        element.removeAttribute(attribute.name);
+    }
+  }
+  return doc.body.innerHTML;
+}
+
 // show note box on hover (if any)
 function showNotes(e) {
   if (notesEditor?.offsetParent) return;
@@ -101,8 +132,8 @@ function showNotes(e) {
     currentNoteId = id;
 
     document.getElementById("notes").style.display = "block";
-    document.getElementById("notesHeader").innerHTML = note.name;
-    document.getElementById("notesBody").innerHTML = note.legend;
+    document.getElementById("notesHeader").innerHTML = sanitizeNoteHtml(note.name);
+    document.getElementById("notesBody").innerHTML = sanitizeNoteHtml(note.legend);
   } else if (!options.pinNotes && !markerEditor?.offsetParent && !e.shiftKey) {
     document.getElementById("notes").style.display = "none";
     document.getElementById("notesHeader").innerHTML = "";

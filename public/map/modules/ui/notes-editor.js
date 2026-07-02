@@ -29,7 +29,7 @@ function editNotes(id, name) {
 
     notesSelect.value = id;
     notesName.value = note.name;
-    notesLegend.innerHTML = note.legend;
+    notesLegend.innerHTML = sanitizeNoteHtml(note.legend);
     initEditor();
     updateNotesBox(note);
   } else {
@@ -109,8 +109,8 @@ function editNotes(id, name) {
   }
 
   function updateNotesBox(note) {
-    byId("notesHeader").innerHTML = note.name;
-    byId("notesBody").innerHTML = note.legend;
+    byId("notesHeader").innerHTML = sanitizeNoteHtml(note.name);
+    byId("notesBody").innerHTML = sanitizeNoteHtml(note.legend);
   }
 
   function changeElement() {
@@ -118,7 +118,7 @@ function editNotes(id, name) {
     if (!note) return tip("Note element is not found", true, "error", 4000);
 
     notesName.value = note.name;
-    notesLegend.innerHTML = note.legend;
+    notesLegend.innerHTML = sanitizeNoteHtml(note.legend);
     updateNotesBox(note);
 
     if (window.tinymce) tinymce.activeEditor.setContent(note.legend);

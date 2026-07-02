@@ -424,7 +424,7 @@ export const EVENT_REGISTRY = {
     description: 'A corrupt NPC is publicly revealed. The NPC is cleaned, scarred, and replaced by a successor; both the criminal institution they answered to and their home institution are tarnished by propagation; legitimacy collapses and rivals exploit the vacuum. A faction or institution becomes scandalised only through this chain, never by direct exposure.',
     requiresTarget: true,
     targetPrompt: 'Corrupt NPC to reveal',
-    /** @param {any} event @param {any} [settlement] */
+    /** @param {any} event @param {import('../settlement.schema.js').SimSettlement} [settlement] */
     stateDeltas(event, settlement) {
       // Backstop: the mutation only fires for a corrupt NPC target (mutate.js
       // exposeCorruption no-ops on anything else). The dials and prose must
@@ -439,7 +439,7 @@ export const EVENT_REGISTRY = {
         volatility: +Math.round(sev * 14),
       };
     },
-    /** @param {any} event @param {any} [settlement] */
+    /** @param {any} event @param {import('../settlement.schema.js').SimSettlement} [settlement] */
     narrate(event, settlement) {
       // No structural change happened for a non-corrupt-NPC target (see
       // stateDeltas), so write no scandal prose for it either.
@@ -910,7 +910,7 @@ function labelOf(/** @type {any} */ targetId) {
  * mutation acts on. Without a settlement (e.g. a label-only registry probe) we
  * cannot tell, so we permit the authored effect rather than suppress it.
  *
- * @param {any} [settlement]
+ * @param {import('../settlement.schema.js').SimSettlement} [settlement]
  * @param {string} [targetId]
  * @returns {boolean}
  */
