@@ -74,4 +74,14 @@ describe('LockedDestination', () => {
     expect(onCta).toHaveBeenCalledTimes(1);
     expect(setPurchaseModalOpen).not.toHaveBeenCalled();
   });
+
+  it('does not claim a free trial (checkout charges immediately — no trial exists)', () => {
+    const { container } = render(<LockedDestination {...baseProps} />);
+    // The false "Free 7-day trial" subline must be gone across every caller
+    // of this shared primitive. Assert on the rendered text, not the source.
+    expect(container.textContent).not.toMatch(/trial/i);
+    expect(screen.queryByText(/free 7-day trial/i)).toBeNull();
+    // Subline still communicates the real plan.
+    expect(screen.getByText('$6/mo · cancel anytime')).toBeTruthy();
+  });
 });

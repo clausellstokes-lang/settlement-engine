@@ -159,16 +159,30 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     expect(parsed.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
-  test('pipeline rail is visible after generation (How this was simulated)', async ({ page }) => {
+  test('pipeline rail is reachable after generation (How this was simulated)', async ({ page }) => {
     await waitForHero(page);
     await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
-    // The rail shows step labels — anything that mentions "simulated"
-    // or the rail header should be visible. Be flexible because the
-    // exact copy can vary.
-    const railSignal = page.locator('text=/simulated|how this was|pipeline/i').first();
-    await expect(railSignal).toBeVisible({ timeout: 15_000 });
+    // The rail lives behind the SimulationDrawer: the wizard toolbar mounts a
+    // "How this was simulated" trigger (WizardOutputToolbar.jsx →
+    // SimulationDrawer.jsx). The old assertion was a page-wide loose text
+    // regex (/simulated|how this was|pipeline/i) that ANY stray copy could
+    // satisfy; instead, exercise the real affordance and assert the real rail.
+    const trigger = page.getByRole('button', { name: /^How this was simulated$/i }).first();
+    await expect(trigger).toBeVisible({ timeout: 15_000 });
+    await trigger.click();
+
+    // The drawer is a role="dialog" aria-label="How this was simulated"
+    // (SimulationDrawer.jsx) containing the lazy-loaded PipelineRail — an
+    // <aside> (role complementary) with the same aria-label
+    // (PipelineRail.jsx). PipelineRail renders null when pipelineHistory is
+    // empty, so this also verifies the generation actually recorded steps.
+    const drawer = page.getByRole('dialog', { name: 'How this was simulated' });
+    await expect(drawer).toBeVisible({ timeout: 10_000 });
+    await expect(
+      drawer.getByRole('complementary', { name: 'How this was simulated' }),
+    ).toBeVisible({ timeout: 15_000 });
   });
 
   test('"New Draft" button after generation returns to a fresh state', async ({ page }) => {
@@ -257,7 +271,13 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     const errors = [];
     page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
     page.on('console', (msg) => {
-      if (msg.type() === 'error') errors.push(`console.error: ${msg.text()}`);
+      if (msg.type() === 'error') {
+        // Chromium's "Failed to load resource" text does NOT include the URL —
+        // it lives in msg.location(). Append it so the noise allowlist below
+        // can distinguish genuinely-optional assets from real app failures.
+        const url = msg.location?.()?.url;
+        errors.push(`console.error: ${msg.text()}${url ? ` (${url})` : ''}`);
+      }
     });
 
     await waitForHero(page);
@@ -270,10 +290,16 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     // console.warn during normal operation (these are useful in DEV but
     // not failures). Tighten this list if the engine starts producing
     // genuine errors.
+    //
+    // NOTE: a bare /Failed to load resource/i entry used to live here — it
+    // masked EVERY failed network resource, so a 4xx/5xx on the happy path
+    // could never fail this test. Only genuinely-optional assets (external
+    // fonts on an offline runner, the absent favicon) are allowlisted now;
+    // any app-origin resource failure is a real error.
     const noise = [
       /credit_ledger write skipped/i,
       /Download the React DevTools/i,
-      /Failed to load resource/i,    // any 4xx on optional asset
+      /Failed to load resource.*(fonts\.googleapis\.com|fonts\.gstatic\.com|favicon)/i,
     ];
     const real = errors.filter(e => !noise.some(rx => rx.test(e)));
     expect(real, `Console errors during generation:\n${real.join('\n')}`).toEqual([]);

@@ -37,10 +37,21 @@ describe('applied-head ledger is well-formed and bounded by the repo', () => {
     expect(ledger.appliedHead).toBeLessThanOrEqual(head);
   });
 
-  test('with everything pushed, the ledger is currently in sync (status ok, no pending)', () => {
+  test('the ledger is in sync or in the normal commit→deploy window — never corrupt', () => {
     const { status, pending } = classifyAppliedHead(ledger.appliedHead, head, nums);
-    expect(status).toBe('ok');
-    expect(pending).toEqual([]);
+    // 'pending' (repo ahead of prod) is the DOCUMENTED-NORMAL state between
+    // committing a migration and running `supabase db push` — the gate script
+    // surfaces it as a visible warning, and this suite must not hard-fail it
+    // (that would force bumping appliedHead before the push actually happened,
+    // which is the exact lie the ledger exists to prevent). Only 'corrupt'
+    // (appliedHead EXCEEDS the repo head) is a hard failure.
+    expect(['ok', 'pending']).toContain(status);
+    expect(status).not.toBe('corrupt');
+    // Whatever is pending must be real, committed migrations above the applied head.
+    for (const n of pending) {
+      expect(nums).toContain(n);
+      expect(n).toBeGreaterThan(ledger.appliedHead);
+    }
   });
 });
 

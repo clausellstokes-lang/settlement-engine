@@ -215,3 +215,39 @@ jobs:
 
       - name: Run edge-function Deno tests
         run: deno task test:edge
+
+  # Retrigger the Vercel production deploy AFTER CI concludes. Vercel runs the
+  # fail-closed ignoreCommand (scripts/vercel-ignore-build.mjs) seconds after a
+  # push — CI (~10-15m) has never reported by then, so the push-triggered deploy
+  # is ALWAYS skipped with "required checks not yet reported", and Vercel does
+  # NOT re-evaluate on its own when CI later goes green: without a retrigger the
+  # auto-deploy is terminally skipped and only a manual dashboard Redeploy ships.
+  # This job closes that loop: on a master push, only after EVERY gating job
+  # succeeds (`needs` — a failed/cancelled dependency skips this job entirely),
+  # POST the Vercel Deploy Hook so a fresh deployment runs with CI now green and
+  # the gate PROCEEDS. OPT-IN and non-breaking: it no-ops (exit 0) unless the
+  # VERCEL_DEPLOY_HOOK_URL secret is set (create the hook in Vercel → Project →
+  # Settings → Git → Deploy Hooks, branch `master`; paste the URL into GitHub →
+  # repo Settings → Secrets and variables → Actions). Until then, deploys stay
+  # manual — nothing about the current workflow changes.
+  redeploy: # deploy-gate: optional (this job IS the deploy trigger — it cannot gate itself)
+    name: Trigger Vercel deploy (post-CI)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [check, e2e, deno-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: POST the Vercel Deploy Hook (no-op unless the secret is set)
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL secret not set — skipping the auto-redeploy (deploys remain manual)."
+            exit 0
+          fi
+          # The hook deploys the branch HEAD, which may have advanced past this
+          # commit. That is safe: the ignoreCommand re-verifies the required
+          # checks on whatever commit actually builds, so a red HEAD still
+          # cannot ship — and the newer commit's own CI run fires its own hook.
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL" -o /dev/null
+          echo "Vercel deploy hook triggered for master."

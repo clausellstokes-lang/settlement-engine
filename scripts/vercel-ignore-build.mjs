@@ -40,6 +40,29 @@
  * a LOUD warning so an ungated deploy is never silent. The not-running-in-Vercel
  * branch always proceeds (local `vercel build`, `vite preview`, etc. must never
  * be blocked by a gate meant for production deploys).
+ *
+ * Fail-closed ON CRASH too: Vercel's exit convention (exit 1 = PROCEED) means
+ * an uncaught exception — Node's default exit 1 — would silently INVERT the
+ * gate into fail-open. runGate() therefore catches ANY throw from the decision
+ * path (a corrupt applied-head.json, an API-shape change, a bug here) and
+ * translates it into SKIP (exit 0), never a crash-proceed.
+ *
+ * DOCUMENTED BYPASS — CLI deploys: a `vercel deploy --prod` run from an
+ * operator's machine carries NO VERCEL_GIT_* metadata, so it takes the
+ * not-running-in-Vercel branch and proceeds UNGATED. That is a deliberate
+ * trade-off: hard-blocking the no-metadata branch would also block every local
+ * `vercel build` / `vite preview`. Treat a CLI production deploy as the same
+ * class of explicit operator action as VERCEL_ALLOW_UNGATED_DEPLOY=1 — it
+ * bypasses CI verification, so don't reach for it casually.
+ *
+ * Timing: Vercel runs this ignoreCommand seconds after a push — long before CI
+ * (~10-15m) can conclude — so the push-triggered deploy is ALWAYS skipped with
+ * "not yet reported", and Vercel does NOT re-evaluate on its own when CI later
+ * goes green. The auto-deploy loop is closed by the `redeploy` job in
+ * .github/workflows/ci.yml: on master, after every gating job succeeds, it
+ * POSTs the Vercel Deploy Hook (opt-in secret VERCEL_DEPLOY_HOOK_URL) so a
+ * fresh deployment runs with CI now green and this gate PROCEEDS. Without that
+ * secret, deploys remain manual (dashboard redeploy) — nothing regresses.
  */
 
 import { pathToFileURL } from 'node:url';
@@ -94,7 +117,10 @@ export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns, r
   const allowUngated = env.VERCEL_ALLOW_UNGATED_DEPLOY === '1';
 
   if (!sha || !owner || !repo) {
-    // Outside Vercel (or missing git metadata) — never block.
+    // Outside Vercel (or missing git metadata) — never block. NOTE this is also
+    // the documented CLI-deploy bypass (see the header): `vercel deploy --prod`
+    // carries no git metadata and proceeds UNGATED. Kept proceed-on-purpose —
+    // a hard block here would break local `vercel build` / `vite preview`.
     return { action: 'proceed', reason: 'not running in a Vercel git deploy context' };
   }
 
@@ -151,9 +177,14 @@ export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns, r
 
   const missing = REQUIRED_CHECKS.filter((name) => !byName.has(name));
   if (missing.length) {
-    // Checks haven't reported yet for this commit. Skip — a deploy will be
-    // retriggered once CI publishes its conclusion (Vercel re-evaluates on
-    // each redeploy), and a half-reported run must not ship.
+    // Checks haven't reported yet for this commit — the normal race: Vercel
+    // runs this gate seconds after the push, long before CI can conclude. Skip;
+    // a half-reported run must not ship. Vercel does NOT re-evaluate on its own
+    // when CI finishes — the skipped deployment is terminal. The retrigger is
+    // ci.yml's `redeploy` job: after all gating jobs succeed on master it POSTs
+    // the Vercel Deploy Hook (secret VERCEL_DEPLOY_HOOK_URL) and the fresh
+    // deployment passes this gate with CI green. If that secret isn't set, the
+    // recovery is a manual dashboard Redeploy once CI is green.
     return { action: 'skip', reason: `required checks not yet reported: ${missing.join(', ')}` };
   }
 
@@ -171,7 +202,21 @@ export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns, r
   // migrations aren't marked applied to prod — it may reference a schema the live DB
   // doesn't have yet. Fail-open only when the state is unknowable (null); a definite
   // drift blocks, with a loud one-line override for a deliberate schema-free deploy.
-  const { repoHead, appliedHead } = readMigrationState();
+  // A THROWING state read must fail CLOSED here, not crash: readAppliedHeadLedger
+  // JSON.parses the ledger unguarded, so a corrupt supabase/applied-head.json
+  // would otherwise throw → main crashes → Node exits 1 → Vercel reads exit 1 as
+  // PROCEED (the fail-open inversion). A MISSING ledger still reads as null and
+  // fails open below — unknowable state and corrupt state are different animals.
+  let repoHead;
+  let appliedHead;
+  try {
+    ({ repoHead, appliedHead } = readMigrationState());
+  } catch (err) {
+    return {
+      action: 'skip',
+      reason: `error reading migration state (${err?.message || err}) — cannot verify schema currency; blocking deploy (fix or delete supabase/applied-head.json)`,
+    };
+  }
   if (repoHead != null && appliedHead != null && repoHead > appliedHead) {
     if (env.VERCEL_ALLOW_MIGRATION_DRIFT === '1') {
       return {
@@ -213,19 +258,42 @@ async function fetchGithubCheckRuns({ owner, repo, sha, token }) {
   return { ok: true, status: res.status, runs };
 }
 
-/** Run the gate as a CLI: translate the decision into Vercel's exit-code convention. */
-async function main() {
-  const decision = await decideDeploy(process.env);
+/**
+ * Run the gate: translate the decision into Vercel's exit-code convention,
+ * FAIL-CLOSED ON CRASH. Because Vercel treats exit 1 as PROCEED, an uncaught
+ * exception (Node's default exit 1) would invert the gate into fail-open and
+ * ship unverified bytes. So ANY throw from the decision path becomes a SKIP.
+ * Exported (with `decide` injectable) so the test can prove the inversion is
+ * closed without spawning a process; main() just applies the returned code.
+ *
+ * @param {Record<string, string | undefined>} [env]
+ * @param {typeof decideDeploy} [decide]
+ * @returns {Promise<0 | 1>} process exit code: 0 → skip build, 1 → run build.
+ */
+export async function runGate(env = process.env, decide = decideDeploy) {
+  let decision;
+  try {
+    decision = await decide(env);
+  } catch (err) {
+    decision = {
+      action: 'skip',
+      reason: `gate crashed (${err?.message || err}) — cannot verify CI; blocking deploy (fail-closed on crash)`,
+    };
+  }
   if (decision.warn) {
     console.warn(`[vercel-ignore-build] WARNING: ${decision.reason}`);
   }
   if (decision.action === 'skip') {
     console.log(`[vercel-ignore-build] SKIP deploy: ${decision.reason}`);
-    process.exit(0); // exit 0 → Vercel IGNORES (skips) the build
-  } else {
-    console.log(`[vercel-ignore-build] PROCEED with deploy: ${decision.reason}`);
-    process.exit(1); // exit 1 → Vercel RUNS the build
+    return 0; // exit 0 → Vercel IGNORES (skips) the build
   }
+  console.log(`[vercel-ignore-build] PROCEED with deploy: ${decision.reason}`);
+  return 1; // exit 1 → Vercel RUNS the build
+}
+
+/** CLI entry: apply the gate's exit code. */
+async function main() {
+  process.exit(await runGate());
 }
 
 // Only run the CLI when invoked directly (`node scripts/vercel-ignore-build.mjs`),

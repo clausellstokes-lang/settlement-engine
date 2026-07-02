@@ -528,7 +528,15 @@ export default function SettlementDetail({
       editMode={editMode}
       canEdit={canEdit}
       onQueueCommitted={handleQueueCommitted}
-      queueActive={!simulated}
+      // Lost-action guard: ChangeQueuePanel's commit is the ONLY flushQueue
+      // caller, so it stays mountable for EVERY open settlement — anything
+      // queued must remain committable. A clock-bound member's edits all apply
+      // immediately (events, renames, links alike), so its queue is normally
+      // empty and the panel self-hides; but orders staged BEFORE a mid-session
+      // canonization (the queue survives navigation) still surface here and
+      // commit through flushQueue's Phase 4b campaign branch (the 069 RPC)
+      // instead of stranding invisibly.
+      queueActive
       onLink={handleLink}
       changeExtras={editMode && (
         // ── Relationship cluster ── Link Neighbour, the existing Neighbour
