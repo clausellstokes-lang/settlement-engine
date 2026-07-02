@@ -190,6 +190,15 @@ export function getCorsHeaders(req?: Request, options: CorsOptions = {}): Record
     // else pin to the first allowed host.
     'Access-Control-Allow-Origin': resolveAllowedOrigin(req),
     'Access-Control-Allow-Headers': options.headers || DEFAULT_ALLOW_HEADERS,
+    // The supabase-js client (supabase.functions.invoke, used by ingest-events
+    // and others) issues its fetch with credentials mode 'include'. Per the CORS
+    // spec, a credentialed request's response MUST carry
+    // Access-Control-Allow-Credentials: 'true' AND a non-'*' Allow-Origin, or the
+    // browser blocks it at preflight ("...Allow-Credentials header is '' which
+    // must be 'true'..."). We already echo an exact origin (never '*'), so this
+    // is safe: a disallowed origin is still pinned to the first host and rejected
+    // on the origin mismatch regardless of this flag.
+    'Access-Control-Allow-Credentials': 'true',
   };
   if (options.methods) {
     headers['Access-Control-Allow-Methods'] = options.methods;
