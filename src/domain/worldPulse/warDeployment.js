@@ -43,6 +43,7 @@ import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
+import { deriveDecisionTier } from './decisionTier.js';
 
 // ── Tunables (calibration is load-bearing — see GEOPOLITICAL_WAR_LAYER §2.4/§6) ──
 // HOSTILE_CONFIDENCE gates whether a settlement is strong enough to open a war at
@@ -241,6 +242,103 @@ export function revertSuppressedDeployExhaustion({ warExhaustion, preTickWarExha
     else next[String(srcId)] = reverted;
   }
   return next;
+}
+
+// The same-tick MINOR emissions a fresh deploy triggers (step 5 keyed to the besieger):
+// the conserved conscription/levy population+granary DEBITS plus the home war conditions.
+// A suppressed (DM-dismissed / paused) deploy must withhold ALL of these — left in, the
+// minor partition would still auto-apply them, sinking the conscripted/levied population
+// (its deployedPopulation credit-bank is stripped with the deployment) and ratcheting a
+// scar for a war that never opened.
+const DEPLOY_RESIDUE_TYPES = new Set([
+  'war_conscription', 'war_levy', 'war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost',
+]);
+
+/**
+ * Strip the OUT-OF-BAND residue a DEFERRED or DISMISSED strategy_deploy banked this tick,
+ * so a paused/dismissed siege leaves the books BYTE-IDENTICAL to the tick never opening a
+ * war. The pulseKernel dismiss path calls this; the logic lives here co-located with
+ * revertSuppressedDeployExhaustion (which it drives) and the accrual/levy tunables they
+ * share.
+ *
+ * A suppressed strategy_deploy is the campaign-altering decision to OPEN a new siege. Its
+ * apply outcome is a settlement no-op (withheld by the major partition), but the deploy
+ * banked residue THIS tick that must be reverted for every suppressed besieger:
+ *   • the freshly-seeded deployment SEED in war.deployments (a brand-new siege holds no
+ *     prior record under its key — the one-army gate — so this never drops a pre-existing
+ *     campaign's army), keyed off the outcome's targetSaveId (besieger);
+ *   • the war_front channel mint in war.graphChannels (besieger → sourceEventTargetId);
+ *   • the war-exhaustion RATCHET — the home's accrual reverted to the no-deploy decay
+ *     counterfactual, and each levied vassal's loyalty strain (read off the matching
+ *     war_levy outcome's population/food deltas before it is dropped) — via
+ *     revertSuppressedDeployExhaustion; and
+ *   • the same-tick MINOR emissions its deployment triggered (DEPLOY_RESIDUE_TYPES).
+ * Byte-neutral when nothing is suppressed (the autoresolve-ON path keeps everything).
+ * Pure — reads `war` + the pre-tick ledger, returns a new war-shape slice, never mutates.
+ *
+ * @param {Object} args
+ * @param {{ outcomes: any[], deployments: Record<string, any>, warExhaustion: Record<string, number>, graphChannels: any[] }} args.war
+ * @param {ReadonlySet<string>|null} args.suppressedIds  the dismissed/deferred major outcome ids (null ⇒ no-op).
+ * @param {Record<string, number>} [args.preTickWarExhaustion]  the pre-tick (worldState) scar ledger.
+ * @returns {{ deployments: Record<string, any>, warExhaustion: Record<string, number>, outcomes: any[], graphChannels: any[] }}
+ */
+export function stripSuppressedDeployResidue({ war, suppressedIds, preTickWarExhaustion = {} }) {
+  const base = {
+    deployments: war.deployments,
+    warExhaustion: war.warExhaustion,
+    outcomes: war.outcomes,
+    graphChannels: war.graphChannels,
+  };
+  if (!suppressedIds) return base;
+  const suppressedDeploys = war.outcomes.filter(
+    o => o?.candidateType === 'strategy_deploy'
+      && deriveDecisionTier(o) === 'major'
+      && suppressedIds.has(String(o.id)),
+  );
+  if (!suppressedDeploys.length) return base;
+
+  const strippedDeployments = { ...war.deployments };
+  const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
+  const suppressedHomeIds = new Set(); // besiegers whose deploy-tick residue is stripped
+  let strippedExhaustion = war.warExhaustion;
+  for (const o of suppressedDeploys) {
+    const fromId = String(o.targetSaveId);
+    const toId = String(o.sourceEventTargetId);
+    // Clear the freshly-seeded deployment (a brand-new siege has no prior record
+    // under this key, so this never drops a pre-existing campaign's army).
+    delete strippedDeployments[fromId];
+    strippedFronts.add(`${fromId}->${toId}`);
+    suppressedHomeIds.add(fromId);
+    // Revert the exhaustion ratchet: the home's accrual back to the no-deploy
+    // decay counterfactual, and each levied vassal's loyalty strain (the levy's
+    // debit sources are read off its outcome before that outcome is dropped).
+    const levy = war.outcomes.find(
+      w => w?.candidateType === 'war_levy' && String(w?.targetSaveId) === fromId,
+    );
+    const leviedSourceIds = [...new Set([
+      ...(levy?.populationDeltas || []),
+      ...(levy?.foodStockpileDeltas || []),
+    ]
+      .filter(d => String(d?.saveId) !== fromId)
+      .map(d => String(d.saveId)))];
+    strippedExhaustion = revertSuppressedDeployExhaustion({
+      warExhaustion: strippedExhaustion,
+      preTickWarExhaustion,
+      homeId: fromId,
+      leviedSourceIds,
+    });
+  }
+  return {
+    deployments: strippedDeployments,
+    warExhaustion: strippedExhaustion,
+    outcomes: war.outcomes.filter(
+      o => !(suppressedHomeIds.has(String(o?.targetSaveId))
+        && DEPLOY_RESIDUE_TYPES.has(String(o?.candidateType || ''))),
+    ),
+    graphChannels: war.graphChannels.filter(
+      c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
+    ),
+  };
 }
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that

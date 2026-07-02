@@ -15,7 +15,7 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 

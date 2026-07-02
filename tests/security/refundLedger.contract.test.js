@@ -19,6 +19,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { netExecuteGrantsFromSql } from './netExecuteGrants.js';
 
 const ROOT = resolve(process.cwd());
 const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
@@ -36,28 +37,6 @@ describe('refund-ledger contract target exists (guards against silent vacuous sk
     expect(migExists, `missing ${MIG_009} — refund-ledger contract coverage dropped`).toBe(true);
   });
 });
-
-/** Pure core of netExecuteGrants: replay grant/revoke statements from an
- *  ordered list of SQL texts. The role capture takes the FULL comma-separated
- *  role list (`to service_role, authenticated`) and applies every role — a
- *  single-role `(\w+)` capture here previously registered only the first role,
- *  so a re-grant to `authenticated` hidden second in a role list would have
- *  slipped past the audit-#1 regression guard below. */
-function netExecuteGrantsFromSql(fnName, sqlTexts) {
-  const re = new RegExp(`(grant|revoke)\\s+execute\\s+on\\s+function\\s+public\\.${fnName}\\b[\\s\\S]*?\\b(?:to|from)\\s+((?:\\w+\\s*,\\s*)*\\w+)`, 'i');
-  const roles = new Set();
-  for (const sql of sqlTexts) {
-    for (const stmt of sql.split(';')) {
-      const m = stmt.match(re);
-      if (!m) continue;
-      for (const role of m[2].split(/\s*,\s*/)) {
-        if (/grant/i.test(m[1])) roles.add(role.toLowerCase());
-        else roles.delete(role.toLowerCase());
-      }
-    }
-  }
-  return roles;
-}
 
 /** Compute the NET-CURRENT set of roles holding EXECUTE on a public function, by
  *  replaying every migration's grant/revoke in file order (mirrors the helper in

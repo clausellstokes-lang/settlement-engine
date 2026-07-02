@@ -13,7 +13,7 @@ import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor 
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
-import { evaluateWarLayer, revertSuppressedDeployExhaustion } from './warDeployment.js';
+import { evaluateWarLayer, stripSuppressedDeployResidue } from './warDeployment.js';
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
@@ -575,63 +575,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // emission keyed to it this tick belongs to the dismissed deploy alone.
     // Mirrors the conquest occupation-seed suppression; byte-neutral when nothing is
     // suppressed (the autoresolve-ON path keeps the deployment + front untouched).
-    if (warOutcomeSuppressedIds) {
-      const suppressedDeploys = war.outcomes.filter(
-        o => o?.candidateType === 'strategy_deploy'
-          && deriveDecisionTier(o) === 'major'
-          && warOutcomeSuppressedIds.has(String(o.id)),
-      );
-      if (suppressedDeploys.length) {
-        const strippedDeployments = { ...war.deployments };
-        const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
-        const suppressedHomeIds = new Set(); // besiegers whose deploy-tick residue is stripped
-        let strippedExhaustion = war.warExhaustion;
-        for (const o of suppressedDeploys) {
-          const fromId = String(o.targetSaveId);
-          const toId = String(o.sourceEventTargetId);
-          // Clear the freshly-seeded deployment (a brand-new siege has no prior record
-          // under this key, so this never drops a pre-existing campaign's army).
-          delete strippedDeployments[fromId];
-          strippedFronts.add(`${fromId}->${toId}`);
-          suppressedHomeIds.add(fromId);
-          // Revert the exhaustion ratchet: the home's accrual back to the no-deploy
-          // decay counterfactual, and each levied vassal's loyalty strain (the levy's
-          // debit sources are read off its outcome before that outcome is dropped).
-          const levy = war.outcomes.find(
-            w => w?.candidateType === 'war_levy' && String(w?.targetSaveId) === fromId,
-          );
-          const leviedSourceIds = [...new Set([
-            ...(levy?.populationDeltas || []),
-            ...(levy?.foodStockpileDeltas || []),
-          ]
-            .filter(d => String(d?.saveId) !== fromId)
-            .map(d => String(d.saveId)))];
-          strippedExhaustion = revertSuppressedDeployExhaustion({
-            warExhaustion: strippedExhaustion,
-            preTickWarExhaustion: worldState.warExhaustion || {},
-            homeId: fromId,
-            leviedSourceIds,
-          });
-        }
-        // The dismissed deploys' same-tick MINOR emissions (step 5 keyed to the
-        // besieger): conserved conscription/levy debits + the home war conditions.
-        const deployResidueTypes = new Set([
-          'war_conscription', 'war_levy', 'war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost',
-        ]);
-        war = {
-          ...war,
-          deployments: strippedDeployments,
-          warExhaustion: strippedExhaustion,
-          outcomes: war.outcomes.filter(
-            o => !(suppressedHomeIds.has(String(o?.targetSaveId))
-              && deployResidueTypes.has(String(o?.candidateType || ''))),
-          ),
-          graphChannels: war.graphChannels.filter(
-            c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
-          ),
-        };
-      }
-    }
+    // The seed/front/exhaustion/minor strip is a pure war-shape transform living beside
+    // its arithmetic in warDeployment.js (stripSuppressedDeployResidue); byte-neutral when
+    // nothing is suppressed. Re-seat the cleaned deployments/warExhaustion/outcomes/fronts.
+    war = {
+      ...war,
+      ...stripSuppressedDeployResidue({
+        war,
+        suppressedIds: warOutcomeSuppressedIds,
+        preTickWarExhaustion: worldState.warExhaustion || {},
+      }),
+    };
     // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.

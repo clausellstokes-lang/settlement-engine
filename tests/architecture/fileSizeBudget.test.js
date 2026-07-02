@@ -49,14 +49,12 @@ const GRANDFATHERED = {
   'src/pdf/lib/viewModel.js': 1320,
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
   // of the pure support-edge readers + levy computation into a sibling module is overdue.
-  'src/domain/worldPulse/warDeployment.js': 1739, // + review-remediation: war_exhaustion home-keying, vassal-direction levy, revertSuppressedDeployExhaustion, low-finding edge fixes
+  'src/domain/worldPulse/warDeployment.js': 1840, // + stripSuppressedDeployResidue extracted from pulseKernel (the strategy_deploy dismiss residue strip)
   'src/generators/narrativeGenerator.js': 1250,
   'src/domain/causalState.js': 1277, // + review-remediation: real-walls detection (no JSON.stringify regex) + occupation_lifted polarity
-  // NOTE: pulseKernel.js crossed the cap with the war-economy dismiss-conservation fix (the
-  // graduation blocker); the pure helper lives in warDeployment.js, but the strategy_deploy
-  // dismiss handler's inline residue-strip + its invariant comments stay here. Extraction of
-  // the dismiss handler into a sibling module is a followup.
-  'src/domain/worldPulse/pulseKernel.js': 1239, // + review-remediation: strategy_deploy dismiss fully-conserving residue strip
+  // NOTE: pulseKernel.js is no longer grandfathered — the strategy_deploy dismiss residue
+  // strip was extracted into warDeployment.js (stripSuppressedDeployResidue), dropping it
+  // back under GENERAL_CAP.
   'src/domain/worldPulse/stressors.js': 1227,
 };
 

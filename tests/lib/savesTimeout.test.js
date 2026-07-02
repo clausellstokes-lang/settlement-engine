@@ -1,12 +1,13 @@
 /**
- * tests/lib/savesTimeout.test.js — hang guard on saves.js update/delete legs.
+ * tests/lib/savesTimeout.test.js — hang guard on saves.js update/delete/count/reactivate legs.
  *
  * Locks (the saves.js sibling of campaignsTimeout.test.js):
- *   • supabaseUpdate and supabaseDelete are withTimeout-guarded like the
+ *   • supabaseUpdate, supabaseDelete, supabaseCount, and
+ *     supabaseReactivateFreeSettlement are withTimeout-guarded like the
  *     list/save/mutateBatch legs in the same file, so a stalled call REJECTS
  *     with a TimeoutError instead of pending forever. Unguarded, a hang wedged
- *     the caller's in-flight state (edit spinner / delete confirm) with no
- *     recovery short of a page refresh.
+ *     the caller's in-flight state (edit spinner / delete confirm / save-limit
+ *     check / reactivate) with no recovery short of a page refresh.
  *   • The guard rejects (never resolves), so a timed-out write is never
  *     mistaken for a successful one.
  *   • Legs that settle normally still resolve (the wrapper changes the failure
@@ -93,5 +94,26 @@ describe('saves.js update/delete legs reject on a stalled call instead of hangin
     const saves = await loadSaves({ from });
     await expect(saves.update('s1', {})).resolves.toBeUndefined();
     expect(from).not.toHaveBeenCalled();
+  });
+
+  it('count() times out when the count query never settles', async () => {
+    const saves = await loadSaves({ from: () => hangingBuilder() });
+    await expectTimeout(() => saves.count(), 20000);
+  });
+
+  it('count() still resolves the count when the query settles in time', async () => {
+    const saves = await loadSaves({ from: () => resolvingBuilder({ count: 7, error: null }) });
+    await expect(saves.count()).resolves.toBe(7);
+  });
+
+  it('reactivateFreeSettlement() times out when the RPC never settles', async () => {
+    const saves = await loadSaves({ rpc: () => hangingBuilder() });
+    await expectTimeout(() => saves.reactivateFreeSettlement('s1'), 20000);
+  });
+
+  it('reactivateFreeSettlement() still resolves the RPC result when it settles in time', async () => {
+    const result = { ok: true };
+    const saves = await loadSaves({ rpc: () => resolvingBuilder({ data: result, error: null }) });
+    await expect(saves.reactivateFreeSettlement('s1')).resolves.toBe(result);
   });
 });

@@ -419,18 +419,30 @@ async function supabaseDelete(id) {
 }
 
 async function supabaseCount() {
-  const { count, error } = await supabase
-    .from('settlements')
-    .select('id', { count: 'exact', head: true })
-    .eq('access_state', ACTIVE_SAVE_STATE);
+  // Timeout-guarded like list/save/update/delete above: a stalled count (dropped
+  // socket, hung token refresh) otherwise pends forever and wedges the caller's
+  // save-limit check. On timeout this rejects so the caller's catch/finally runs.
+  const { count, error } = await withTimeout(
+    supabase
+      .from('settlements')
+      .select('id', { count: 'exact', head: true })
+      .eq('access_state', ACTIVE_SAVE_STATE),
+    20000,
+    'Count settlements',
+  );
   if (error) throw error;
   return count || 0;
 }
 
 async function supabaseReactivateFreeSettlement(id) {
-  const { data, error } = await supabase.rpc('reactivate_free_settlement', {
-    target_settlement_id: id,
-  });
+  // Same hang guard as the sibling legs — a stalled reactivate RPC must reject, not pend.
+  const { data, error } = await withTimeout(
+    supabase.rpc('reactivate_free_settlement', {
+      target_settlement_id: id,
+    }),
+    20000,
+    'Reactivate settlement',
+  );
   if (error) throw error;
   return data;
 }

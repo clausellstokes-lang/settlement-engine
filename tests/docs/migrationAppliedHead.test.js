@@ -1,4 +1,7 @@
-import { describe, test, expect } from 'vitest';
+import { afterEach, describe, test, expect, vi } from 'vitest';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import {
   migrationNumbers,
@@ -72,5 +75,35 @@ describe('classifyAppliedHead drift logic is non-vacuous', () => {
 
   test('readAppliedHeadLedger returns null for a missing file (back-compat, not a throw)', () => {
     expect(readAppliedHeadLedger('/no/such/applied-head.json')).toBeNull();
+  });
+});
+
+describe('readAppliedHeadLedger degrades gracefully on a corrupt ledger', () => {
+  let dir;
+  afterEach(() => {
+    if (dir) {
+      rmSync(dir, { recursive: true, force: true });
+      dir = undefined;
+    }
+    vi.restoreAllMocks();
+  });
+
+  test('a corrupt/truncated ledger returns null (does not throw a raw parse error)', () => {
+    dir = mkdtempSync(join(tmpdir(), 'applied-head-'));
+    const file = join(dir, 'applied-head.json');
+    writeFileSync(file, '{ "appliedHead": 097', 'utf8'); // truncated — invalid JSON
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => readAppliedHeadLedger(file)).not.toThrow();
+    expect(readAppliedHeadLedger(file)).toBeNull();
+    expect(warn).toHaveBeenCalled();
+  });
+
+  test('a valid ledger still parses unchanged', () => {
+    dir = mkdtempSync(join(tmpdir(), 'applied-head-'));
+    const file = join(dir, 'applied-head.json');
+    writeFileSync(file, JSON.stringify({ appliedHead: 97, appliedAt: '2026-07-02' }), 'utf8');
+
+    expect(readAppliedHeadLedger(file)).toEqual({ appliedHead: 97, appliedAt: '2026-07-02' });
   });
 });

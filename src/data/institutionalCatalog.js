@@ -1,5 +1,15 @@
 // institutionalCatalog.js — normalized: all constants expanded to plain strings
-
+//
+// priorityCategory is a FACTION-ROLE axis (which power bloc the institution answers to),
+// deliberately distinct from `tags` (an institution's functional domains). These may differ
+// by design: e.g. a customs/tax/tariff/regulatory body legitimately carries 'trade' tags
+// while having priorityCategory 'government'. Do NOT infer priorityCategory from tags.
+//
+// One invariant DOES hold: a given institution NAME must carry a single priorityCategory
+// across every tier it appears in (guarded by tests/data/priorityCategoryConsistency.test.js).
+// Normalized 4 economic PRODUCTION institutions that were mislabeled 'government' in one tier
+// but 'economy' in another: 'Charcoal burner', 'Dairy farmer', 'Salt works', 'Stone quarry'
+// (all now 'economy'). See that test for any remaining, deliberately-out-of-scope exceptions.
 export const institutionalCatalog = {
   thorp: {
     Government: {
@@ -173,14 +183,14 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Hunters pool knowledge, prepare game, and sell pelts. Tracks routes, seasons, and dangerous animals.',
         tags: ['trade', 'military'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       'Charcoal burner': {
         required: false,
         baseChance: 0.2,
         desc: 'Operates kilns in nearby woodland. Supplies fuel for smithing and baking, the essential intermediate step between forest and forge.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       Maltster: {
         required: false,
@@ -215,7 +225,7 @@ export const institutionalCatalog = {
         baseChance: 0.18,
         desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges: slow work, but the only way to get proper building material.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       'Pack animal trader': {
         required: false,
@@ -229,7 +239,7 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal, with production peaking in summer.',
         tags: ['food', 'trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       Shepherd: {
         required: false,
@@ -243,7 +253,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Evaporates salt from coastal water or brine springs. Produces the raw salt used for preservation. Only viable near salt flats or coastal access.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
     },
     Government: {
@@ -986,7 +996,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Sells road maps, regional surveys, and coastal charts. Takes commissions for estate surveys and dungeon sketching. Maintains a reference collection of older maps for consultation. Standard stop for adventurers, merchants, and military scouts.',
         tags: ['education', 'trade'],
-        priorityCategory: 'economy',
+        priorityCategory: 'crafts',
       },
       'Assay office': {
         required: false,
