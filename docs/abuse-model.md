@@ -98,7 +98,11 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
 - `send-email` — per-template self-auth: authenticated templates read
   the recipient from `auth.getUser()`; the anonymous `cap_warning` path
   takes an explicit recipient behind a per-IP / per-recipient rate limit
-  + bot guard.
+  + bot guard + a strict placeholder schema (`ANON_PLACEHOLDER_RULES`)
+  that admits only the exact shape each anonymous template declares
+  (`cap_warning`: two small digit-only counters), so a caller cannot
+  interpolate any free text — URLs, phishing copy — into mail sent from
+  our Resend identity.
 - `auth-recovery` — logged-out password recovery (the caller has no JWT
   because they forgot their password); defended by a hard per-IP +
   per-email rate limit, the bot guard, JSON-only parsing, and
@@ -155,10 +159,13 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
   - **Dynamic PRESERVATION_RULES** emitted from
     `forbiddenChanges(settlement)` so every refinement-pass prompt
     explicitly names every locked entity + user-edited field.
-- **Coverage.** 24 grounding integration tests + 22 violations-UI
-  tests + 12 contract tests on the edge function. Each prompt-
-  injection canary asserts user-direction text never appears in the
-  dossier JSON.
+- **Coverage.** Three layers guard this surface: grounding tests over
+  the user-edit preservation path (`tests/domain/userEdits.grounding.test.js`),
+  violations-UI tests over how a failed verify is surfaced
+  (`tests/ui/AiOverlayViolations.test.jsx`), and contract tests on the
+  edge function (`tests/edgeFunctions/aiGroundingContract.test.js`,
+  `tests/edgeFunctions/contracts.test.js`). Each prompt-injection canary
+  asserts user-direction text never appears in the dossier JSON.
 
 ## Gaps (open work)
 

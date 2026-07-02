@@ -17,7 +17,7 @@
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).

@@ -102,6 +102,32 @@ describe('AutoSaveChip', () => {
     expect(screen.getByText('Unsaved changes')).toBeTruthy();
   });
 
+  it('renders "Unsaved changes" when a placement is drag-moved (same id + count)', () => {
+    // Regression: the old count-only fingerprint keyed on placement ids +
+    // layer counts, so a drag-move (same id "b1", same count, new x/y) left
+    // the key unchanged and the chip stayed on "Saved". The shared
+    // content-aware mapFingerprint folds coordinates in, so this is dirty.
+    const savedAt = new Date(NOW - 60_000).toISOString();
+    useStore.__set({
+      activeCampaignId: 'c1',
+      campaigns: [{
+        id: 'c1',
+        mapState: {
+          savedAt,
+          placements: { b1: { settlementId: 's1', x: 1, y: 2 } },
+          labels: [], markers: [], forests: [],
+        },
+      }],
+      mapState: {
+        // b1 dragged to a new position: id set + count identical.
+        placements: { b1: { settlementId: 's1', x: 99, y: 42 } },
+        labels: [], markers: [], forests: [],
+      },
+    });
+    render(<AutoSaveChip />);
+    expect(screen.getByText('Unsaved changes')).toBeTruthy();
+  });
+
   it('renders "Saving…" when saving=true', () => {
     const savedAt = new Date(NOW - 60_000).toISOString();
     useStore.__set({

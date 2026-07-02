@@ -397,12 +397,24 @@ async function supabaseUpdate(id, partial) {
   if (toggles) updates.toggles = toggles;
 
   if (Object.keys(updates).length === 0) return;
-  const { error } = await supabase.from('settlements').update(updates).eq('id', id);
+  // Timeout-guarded like list/save/mutateBatch above: a stalled update (dropped
+  // socket, hung token refresh) otherwise pends forever and wedges the caller's
+  // in-flight state. On timeout this rejects so the caller's catch/finally runs.
+  const { error } = await withTimeout(
+    supabase.from('settlements').update(updates).eq('id', id),
+    20000,
+    'Update settlement',
+  );
   if (error) throw error;
 }
 
 async function supabaseDelete(id) {
-  const { error } = await supabase.from('settlements').delete().eq('id', id);
+  // Same hang guard as supabaseUpdate — a stalled delete must reject, not pend.
+  const { error } = await withTimeout(
+    supabase.from('settlements').delete().eq('id', id),
+    20000,
+    'Delete settlement',
+  );
   if (error) throw error;
 }
 

@@ -758,6 +758,7 @@ export default function EventComposer({ onLink = null }) {
           staged={staged}
           settlement={settlement}
           phase={phase}
+          advanceBusy={advanceBusy}
           pendingBatchPreview={pendingBatchPreview}
           onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
           onClear={() => { setStaged([]); dismissBatchPreview(); }}

@@ -30,7 +30,7 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { shouldRefundOnFailure } from './refundPolicy.ts';
 // Deterministic entity-link post-processor: wraps known entity names found in
 // refined free-form prose with id-bearing tokens the client tokenizer parses.
