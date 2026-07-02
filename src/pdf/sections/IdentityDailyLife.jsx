@@ -79,7 +79,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
             pairs={[
               a.foodDeficit > 0
                 ? { label: 'FOOD',  value: `−${num(a.foodDeficit)} units` }
-                : a.foodSurplus != null
+                : a.foodSurplus > 0
                   ? { label: 'FOOD',  value: `+${num(a.foodSurplus)} units` }
                   : null,
               a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,

@@ -91,7 +91,25 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
     // trailing text nodes (never mid-tag), re-sanitizing so the stored value
     // stays well-formed. The counter reflects the same visible measure.
     let clean = sanitizeGalleryHtml(raw);
-    clean = capVisible(clean, maxLength);
+    const capped = capVisible(clean, maxLength);
+    // WYSIWYG: when the cap actually trimmed the value, write the trimmed HTML
+    // back into the editable so the user isn't left wordsmithing a tail that's
+    // already gone from the emitted draft. Only touch the DOM on a real change
+    // (over-cap) so the common under-cap path never disturbs the caret; on the
+    // trim path the removed text is the trailing overflow, so parking the caret
+    // at the end is the natural resting spot.
+    if (capped !== clean && ref.current) {
+      ref.current.innerHTML = capped;
+      const sel = typeof window !== 'undefined' ? window.getSelection() : null;
+      if (sel && typeof document !== 'undefined') {
+        const range = document.createRange();
+        range.selectNodeContents(ref.current);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    }
+    clean = capped;
     setUsed(visibleText(clean).length);
     onChange?.(clean);
   };

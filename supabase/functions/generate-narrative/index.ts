@@ -30,12 +30,13 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { shouldRefundOnFailure } from './refundPolicy.ts';
 // Deterministic entity-link post-processor: wraps known entity names found in
 // refined free-form prose with id-bearing tokens the client tokenizer parses.
 // Ids are byte-identical to the client dossier index (parity-tested).
 import { wrapEntityRefsInProse } from './entityRefWrapper.ts';
+import { scanProseForInvention, collectFullCanon, proseFieldsOf } from './inventionSignal.ts';
 // Tier 6.8 — bundled aiGrounding contract. Pre-built by
 // `scripts/build-edge-shared.mjs`. Freshness enforced by
 // tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
@@ -54,7 +55,7 @@ import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } fro
 import { CACHE_BREAKPOINT, buildAnthropicUserContent, stripCacheBreakpoint } from './promptCache.ts';
 import {
   stripGuidanceFences, buildThesisPrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
-  buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse,
+  buildDailyLifePrompt, summarizeSettlement, augmentSummaryWithGrounding, overlayPriorRefinedProse, sanitizeWarMoraleContext,
   sanitizeChronicleContext, preservationBlockFor,
   DAILY_LIFE_FIELDS, PRESERVATION_RULES, PROGRESSION_AFFECTED_FIELDS, REFINEMENT_PASSES,
 } from './prompts.ts';
@@ -421,6 +422,23 @@ const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall
 // regardless of input size, so an unbounded body would only inflate the provider
 // token bill. Read req.text() with this cap before JSON.parse.
 const MAX_BODY_BYTES = 64 * 1024;
+
+/**
+ * Refinement passes affected by a progression changeType — OWN-property lookup
+ * only. changeType is client-supplied: a prototype-chain name ('constructor',
+ * 'toString', …) used to resolve an inherited function via bare indexing —
+ * truthy, so `|| []` never applied and `.map` threw inside the progression
+ * stream (post-spend, pre-model: refunded, but it burned a rate-limit unit and
+ * surfaced a raw internal error in a 200 stream). Unknown change types degrade
+ * to the designed thesis-only fallback. Exported for the regression test.
+ */
+export function progressionAffectedKeys(
+  changeType: string,
+): Array<keyof typeof REFINEMENT_PASSES> {
+  return Object.hasOwn(PROGRESSION_AFFECTED_FIELDS, changeType)
+    ? PROGRESSION_AFFECTED_FIELDS[changeType]
+    : [];
+}
 
 function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   const ctrl = new AbortController();
@@ -832,6 +850,7 @@ export async function handleGenerateNarrative(
       modelPreference,
       relationshipMemoryContext,
       chronicleContext,
+      warMoraleContext,
       // Progression-only (AI-4b) — ignored for other types.
       changeType,
       changeLabel,
@@ -931,6 +950,39 @@ export async function handleGenerateNarrative(
     reservationId =
       (capResult as { reservation_id?: string | null } | null)?.reservation_id ?? null;
 
+    // ── SUFFICIENCY PRECHECK: don't burn a rate-limit unit on a doomed spend ──
+    // The per-user/day rate limit below INCREMENTS a counter (consume, not peek;
+    // there is no decrement RPC). spend_credits runs AFTER it and is the atomic
+    // authority on funds. If the user can't afford this run, spend_credits would
+    // throw insufficient_funds — but only after the rate-limit unit was already
+    // consumed, so a low-balance user retrying erodes their 60/day quota for free.
+    //
+    // To stop that, do a CHEAP read-only sufficiency check here and reject BEFORE
+    // consuming the unit. This is a guard, NOT the authority: spend_credits below
+    // still does the race-safe compare-and-decrement (a balance change between
+    // this read and the spend is caught there). Elevated/privileged operators
+    // never debit credits, so they SKIP this check (their balance is irrelevant).
+    // FAIL OPEN on any RPC error: a precheck outage must never block a legitimate
+    // user — spend_credits remains the real gate, and a missed precheck only costs
+    // the pre-existing (unfixed) behaviour, never a wrongful block.
+    {
+      const { data: precheckPrivileged, error: privErr } =
+        await supabaseUser.rpc('current_user_is_privileged');
+      if (privErr) {
+        logError('generate-narrative', user.id, `current_user_is_privileged errored: ${privErr.message}`, { stage: 'sufficiency-precheck' });
+      } else if (precheckPrivileged !== true) {
+        const { data: precheckBalance, error: balErr } =
+          await supabaseAdmin.rpc('get_credit_balance', { target_user: user.id });
+        if (balErr) {
+          logError('generate-narrative', user.id, `get_credit_balance errored: ${balErr.message}`, { stage: 'sufficiency-precheck' });
+        } else if (typeof precheckBalance === 'number' && precheckBalance < cost) {
+          // Same message shape as the spend_credits insufficient-funds throw below,
+          // so the client UI is unchanged — only the rate-limit unit is spared.
+          throw new Error(`Insufficient credits. Need ${cost}, have ${precheckBalance}.`);
+        }
+      }
+    }
+
     // ── SAFETY 2: per-user/day rate limit — FAIL OPEN ──
     // One abusive account can't drain the shared provider pool. A limiter
     // OUTAGE must never block a legitimate paying user (same rationale as
@@ -973,8 +1025,11 @@ export async function handleGenerateNarrative(
     });
 
     if (spendErr) {
-      console.error('[generate-narrative] spend_credits RPC errored:', spendErr.message);
-      throw new Error(`Credit spend failed: ${spendErr.message}. Try again — no credits were charged.`);
+      // Log the raw RPC message server-side, but throw a GENERIC user-facing
+      // error (the outer catch surfaces it to the client) — the raw spend_credits
+      // message can carry Postgres function/constraint names (L8 info-disclosure).
+      logError('generate-narrative', user.id, `spend_credits RPC errored: ${spendErr.message}`, { stage: 'spend' });
+      throw new Error('Credit spend failed. Try again — no credits were charged.');
     }
     if (!spendResult) {
       throw new Error('Credit spend returned no result. Try again — no credits were charged.');
@@ -1011,6 +1066,13 @@ export async function handleGenerateNarrative(
       summary = confirmedRelationshipMemoryContext
         ? { ...baseSummary, relationshipMemory: confirmedRelationshipMemoryContext }
         : baseSummary;
+      // P5 war-morale grounding: a compact { resolve/hope/supply/faith/sentiment } digest the
+      // client sends ONLY under its warEconomySurfacing flag. Sanitized + fence-stripped here
+      // (untrusted input reaching the prompt); it rides the summary as an underscore grounding
+      // key (like _lockedEntities), so it reaches BOTH the thesis and daily-life prompts, which
+      // both embed the summary. Absent/empty ⇒ no `_warMorale` key ⇒ the prompt is byte-identical.
+      const warMorale = sanitizeWarMoraleContext(warMoraleContext);
+      if (warMorale) summary = { ...summary, _warMorale: warMorale };
       // Per-call preservation block — adds settlement-specific MUST
       // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
       // into refinement-pass prompt building below.
@@ -1115,7 +1177,8 @@ export async function handleGenerateNarrative(
                 send({ field: fieldName, value });
               } catch (e) {
                 if (!firstError) firstError = e as Error;
-                send({ field: fieldName, error: (e as Error).message });
+                logError('generate-narrative', user.id, `field '${fieldName}' failed: ${(e as Error).message}`, { stage: 'stream' });
+                send({ field: fieldName, error: 'This section could not be generated.' });
               }
             }));
 
@@ -1125,7 +1188,8 @@ export async function handleGenerateNarrative(
               if (shouldRefundOnFailure('dailyLifeField')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-              send({ error: (firstError as Error).message, refunded: !isElevated, aiUsage });
+              logError('generate-narrative', user.id, `narration failed: ${(firstError as Error).message}`, { stage: 'stream' });
+              send({ error: 'Narration failed.', refunded: !isElevated, aiUsage });
             } else {
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
@@ -1143,7 +1207,7 @@ export async function handleGenerateNarrative(
 
           // ── PROGRESSION: thesis + subset of refinement passes ─────────────
           if (type === 'progression') {
-            const affectedKeys = PROGRESSION_AFFECTED_FIELDS[changeType] || [];
+            const affectedKeys = progressionAffectedKeys(changeType);
             // Filter to passes that actually exist (defensive against future
             // changes to either map).
             const affectedEntries = affectedKeys
@@ -1180,7 +1244,8 @@ export async function handleGenerateNarrative(
               if (shouldRefundOnFailure('thesis')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-              send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
+              logError('generate-narrative', user.id, `progression thesis failed: ${(e as Error).message}`, { stage: 'stream' });
+              send({ error: 'Progression thesis failed. No new credits were charged.', refunded: !isElevated, aiUsage });
               controller.close();
               return;
             }
@@ -1247,7 +1312,7 @@ export async function handleGenerateNarrative(
               } catch (e) {
                 failedFields.push(key);
                 console.error(`[generate-narrative] progression pass '${key}' failed:`, (e as Error).message);
-                send({ field: key, error: (e as Error).message });
+                send({ field: key, error: 'This section could not be generated.' });
               }
             }));
 
@@ -1269,6 +1334,14 @@ export async function handleGenerateNarrative(
               skippedFields,
               aiUsage,
             });
+            // Advisory AI-invention signal (logging-only) — same contract as the narrative
+            // path: AFTER send({done}), wrapped so it can never throw into the refund catch-all.
+            try {
+              if ((globalThis as any).Deno?.env?.get?.('AI_INVENTION_SIGNAL') !== 'off') {
+                const sig = scanProseForInvention(proseFieldsOf(aiClone), collectFullCanon(aiClone), confirmedAiGuidance);
+                if (sig.count > 0) console.warn('[generate-narrative] ai_invention_signal', JSON.stringify({ where: 'progression', count: sig.count, samples: sig.samples }));
+              }
+            } catch { /* advisory only — must never affect generation or the money path */ }
             controller.close();
             return;
           }
@@ -1294,7 +1367,7 @@ export async function handleGenerateNarrative(
             if (shouldRefundOnFailure('thesis')) await refund();
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
-            send({ error: `Thesis generation failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
+            send({ error: 'Thesis generation failed.', refunded: !isElevated, aiUsage });
             controller.close();
             return;
           }
@@ -1359,7 +1432,7 @@ export async function handleGenerateNarrative(
             } catch (e) {
               failedFields.push(key);
               console.error(`[generate-narrative] pass '${key}' failed:`, (e as Error).message);
-              send({ field: key, error: (e as Error).message });
+              send({ field: key, error: 'This section could not be generated.' });
             }
           });
 
@@ -1394,7 +1467,7 @@ export async function handleGenerateNarrative(
             } catch (e) {
               failedFields.push(`dailyLife.${beat}`);
               console.error(`[generate-narrative] daily-life beat '${beat}' failed:`, (e as Error).message);
-              send({ field: `dailyLife.${beat}`, error: (e as Error).message });
+              send({ field: `dailyLife.${beat}`, error: 'This section could not be generated.' });
             }
           });
 
@@ -1422,6 +1495,15 @@ export async function handleGenerateNarrative(
             skippedFields,
             aiUsage,
           });
+          // Advisory AI-invention signal (logging-only; disable with AI_INVENTION_SIGNAL=off).
+          // AFTER send({done}) and wrapped so it can NEVER throw into the stream's catch-all
+          // refund() below — a throw here would spuriously refund a successful paid run.
+          try {
+            if ((globalThis as any).Deno?.env?.get?.('AI_INVENTION_SIGNAL') !== 'off') {
+              const sig = scanProseForInvention(proseFieldsOf(aiClone), collectFullCanon(aiClone), confirmedAiGuidance);
+              if (sig.count > 0) console.warn('[generate-narrative] ai_invention_signal', JSON.stringify({ where: 'narrative', count: sig.count, samples: sig.samples }));
+            }
+          } catch { /* advisory only — must never affect generation or the money path */ }
           controller.close();
         } catch (err) {
           await refund();
@@ -1475,7 +1557,7 @@ export async function handleGenerateNarrative(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     const stack = err instanceof Error ? err.stack : undefined;
-    console.error('[generate-narrative] error:', message, stack);
+    logError('generate-narrative', null, message, { stage: 'pre-stream', stack });
     // Release a reservation taken before this throw (086). Reaching this catch
     // means the streaming Response was never returned, so the in-stream `finally`
     // release will never fire and the headroom would leak for the full TTL.
@@ -1488,6 +1570,11 @@ export async function handleGenerateNarrative(
         logError('generate-narrative', null, `reservation release on pre-stream error failed: ${relErr instanceof Error ? relErr.message : String(relErr)}`, { stage: 'spend-cap' });
       }
     }
+    // Pass the message through: the intentional pre-stream errors here are
+    // user-facing and safe to show ('Account is not active', 'Insufficient
+    // credits. Need N…'). The ONE path that embedded a raw RPC message
+    // (spend_credits failure) is genericized at its THROW site below and logged
+    // server-side, so raw Postgres internals never reach the client.
     return new Response(
       JSON.stringify({ error: message }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },

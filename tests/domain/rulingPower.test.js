@@ -141,6 +141,17 @@ describe('transferRulingPower', () => {
       r.pair.includes('Merchant Guilds') && r.type === 'competitive')).toBe(true);
   });
 
+  test('the ascendant winner power bump clamps to the 0-100 domain', () => {
+    // A near-cap winner (97) must not exceed 100 after the +6 ascension bump.
+    const s = settlementFixture();
+    s.powerStructure.factions = s.powerStructure.factions.map(f =>
+      f.faction === 'The Garrison' ? { ...f, power: 97 } : f);
+    const { settlement } = transferRulingPower(s, 'The Garrison', { cause: 'coup' });
+    const garrison = settlement.powerStructure.factions.find(f => f.faction === 'The Garrison');
+    expect(garrison.power).toBe(100);
+    expect(garrison.modifiers).toContain('ascendant');
+  });
+
   test('legitimacy reseeds by cause — deposing a hated ruler starts warmer', () => {
     // Old score 22 (hated): coup seed = 38 + (50-22)*0.25 = 45 → Tolerated.
     const hated = transferRulingPower(settlementFixture(), 'The Garrison', { cause: 'coup' });

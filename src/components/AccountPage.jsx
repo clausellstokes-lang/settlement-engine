@@ -306,14 +306,28 @@ export default function AccountPage({ onNavigateAdmin }) {
   };
 
   // Bulk content deletion (Data & Privacy). Delete each saved settlement
-  // through the saves service so the server copy goes too, then clear local
-  // state. Failures on individual rows are swallowed so one bad row can't wedge
-  // the whole wipe — local state is cleared regardless.
+  // through the saves service so the server copy goes too. allSettled keeps one
+  // bad row from wedging the whole wipe, but the results are INSPECTED: only
+  // rows the server actually deleted leave local state. Rows whose server
+  // delete failed stay visible (they'd resurrect at next sign-in anyway), and
+  // the aggregated failure is thrown so the confirm UI doesn't report a clean
+  // wipe that didn't happen — this is a privacy surface; false success is the
+  // worst outcome.
   const handleDeleteAllSettlements = async () => {
     const ids = (savedSettlements || []).map(s => s.id);
-    await Promise.allSettled(ids.map(id => savesService.delete?.(id)));
-    if (typeof clearSavedSettlements === 'function') clearSavedSettlements();
-    else ids.forEach(id => removeSavedSettlement?.(id));
+    const results = await Promise.allSettled(ids.map(id => savesService.delete?.(id)));
+    const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
+    if (failedIds.length === 0) {
+      if (typeof clearSavedSettlements === 'function') clearSavedSettlements();
+      else ids.forEach(id => removeSavedSettlement?.(id));
+      return;
+    }
+    const failed = new Set(failedIds);
+    ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id));
+    throw new Error(
+      `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `
+      + 'They remain in your library – try again.'
+    );
   };
 
   const handleDeleteAllCampaigns = async () => {

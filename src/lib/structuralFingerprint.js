@@ -14,10 +14,13 @@
  *
  * NEVER copied: settlement.name; any npc field (name/personality/goal/secret);
  * institution/faction names; all prose (history, hooks, dailyLife, thesis,
- * dmCompass, notes); dossierNotes; eventLog labels; map coordinates; emails.
+ * dmCompass, notes); dossierNotes; eventLog labels; map coordinates; emails;
+ * user-authored trade-good labels (ADD_TRADE_GOOD / custom content — folded
+ * to catalog ids or counted, see tradeGoodIdList).
  */
 
 import { deriveCausalState, SYSTEM_VARIABLES } from '../domain/causalState.js';
+import { normalizeGood } from '../domain/region/goodsCatalog.js';
 
 // ── Banding helpers ──────────────────────────────────────────────────────────
 export function populationBand(pop) {
@@ -116,6 +119,28 @@ function npcDistributions(settlement, save, opts = {}) {
   return block;
 }
 
+/**
+ * Trade lists → canonical catalog good/service ids ONLY. primaryExports /
+ * primaryImports are NOT catalog-pure: ADD_TRADE_GOOD (event composer) and
+ * custom-content trade goods write user-authored labels verbatim into
+ * economicState. normalizeGood folds catalog labels/aliases to stable ids;
+ * anything it can't resolve comes back as a custom.<slug> entry whose slug
+ * still carries the user's text — those are COUNTED, never copied.
+ */
+function tradeGoodIdList(list) {
+  const ids = [];
+  const seen = new Set();
+  let customCount = 0;
+  for (const item of arr(list)) {
+    let good;
+    try { good = normalizeGood(item); } catch { good = null; }
+    if (!good) continue;
+    if (good.custom) { customCount += 1; continue; }
+    if (!seen.has(good.id)) { seen.add(good.id); ids.push(good.id); }
+  }
+  return { ids, customCount };
+}
+
 // ── Causal: scores + bands ONLY (contributors carry text — dropped) ──────────
 function causalDigest(settlement) {
   let derived;
@@ -161,6 +186,8 @@ export function extractSettlementFingerprint(settlement, save = null, opts = {})
   const eco = settlement.economicState || {};
   const power = settlement.powerStructure || {};
   const causal = causalDigest(settlement);
+  const tradeExports = tradeGoodIdList(eco.primaryExports);
+  const tradeImports = tradeGoodIdList(eco.primaryImports);
 
   const fp = {
     // identity / versioning
@@ -178,12 +205,14 @@ export function extractSettlementFingerprint(settlement, save = null, opts = {})
       monsterThreat: str(cfg.monsterThreat),
       selectedStresses: arr(cfg.selectedStresses).map(str).filter(Boolean),
     },
-    // economy (category ids / labels — catalog enums, not user content)
+    // economy (canonical catalog ids only — user-authored labels counted, not copied)
     economy: {
       prosperity: str(eco.prosperity),
       food_resilience: num(eco.foodSecurity?.resilienceScore),
-      primaryExports: arr(eco.primaryExports).map(str).filter(Boolean),
-      primaryImports: arr(eco.primaryImports).map(str).filter(Boolean),
+      primaryExports: tradeExports.ids,
+      primaryImports: tradeImports.ids,
+      custom_export_count: tradeExports.customCount,
+      custom_import_count: tradeImports.customCount,
     },
     // power — faction NAMES dropped; topology preserved via stable indices
     power: {

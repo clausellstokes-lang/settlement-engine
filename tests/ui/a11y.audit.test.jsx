@@ -146,6 +146,25 @@ describe('A+ design-a11y.4 — Alert live region', () => {
     expect(node).not.toBeNull();
     expect(node.getAttribute('aria-live')).toBe('polite');
   });
+
+  // The Toast primitive carries the SAME tone→liveness contract (an error toast
+  // — a failed save/load/placement — must interrupt, not queue politely).
+  test('error Toast is an assertive live region (role=alert)', async () => {
+    const Toast = (await import('../../src/components/primitives/Toast.jsx')).default;
+    const { container } = render(<Toast toast={{ kind: 'error', text: 'Save failed' }} />);
+    const node = container.querySelector('[role="alert"]');
+    expect(node).not.toBeNull();
+    expect(node.getAttribute('aria-live')).toBe('assertive');
+    expect(node.textContent).toContain('Save failed');
+  });
+
+  test('non-error Toast is a polite status region (role=status)', async () => {
+    const Toast = (await import('../../src/components/primitives/Toast.jsx')).default;
+    const { container } = render(<Toast toast={{ kind: 'success', text: 'Saved' }} />);
+    const node = container.querySelector('[role="status"]');
+    expect(node).not.toBeNull();
+    expect(node.getAttribute('aria-live')).toBe('polite');
+  });
 });
 
 // ── A+ design-a11y.6 — Dialog focus-trap is keyboard-locked ──────────────────

@@ -625,7 +625,7 @@ export function deriveActiveCondition(condition) {
 
 /**
  * Derive every condition on a settlement. Returns []. for missing data.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function deriveAllActiveConditions(settlement) {
   if (!settlement) return [];
@@ -635,7 +635,7 @@ export function deriveAllActiveConditions(settlement) {
 
 /**
  * Flat archetype keys from canonical conditions. Used by advanceTime.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function activeArchetypes(settlement) {
   return deriveAllActiveConditions(settlement).map((/** @type {any} */ c) => c.archetype);
@@ -643,7 +643,7 @@ export function activeArchetypes(settlement) {
 
 /**
  * Lookup by id OR by archetype. Returns the first match or null.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} idOrArchetype
  */
 export function findActiveCondition(settlement, idOrArchetype) {
@@ -660,7 +660,7 @@ export function findActiveCondition(settlement, idOrArchetype) {
 /**
  * Add (or overwrite) an active condition. If a condition with the same
  * id already exists it is replaced. Returns a new settlement.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} partial
  */
 export function withActiveCondition(settlement, partial) {
@@ -675,7 +675,7 @@ export function withActiveCondition(settlement, partial) {
 
 /**
  * Remove a condition by id. No-op if not found. Returns a new settlement.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} conditionId
  */
 export function withoutActiveCondition(settlement, conditionId) {
@@ -724,7 +724,7 @@ export function isEventSourcedCondition(condition) {
  * the input settlement untouched when there is nothing to record and no
  * stale record to update, so no-op events and plain settlements stay
  * byte-identical.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function withEventConditionsSynced(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
@@ -759,7 +759,7 @@ export function withEventConditionsSynced(settlement) {
  * flat-then-cliff. The severityBand is recomputed to match the nudged
  * severity.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
  * @returns {any} new settlement
  */
@@ -797,7 +797,7 @@ const EASING_SEVERITY_FLOOR = 0.05;
 const EXPIRY_EASING_WINDOW_TICKS = 2;
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
  * @returns {any} new settlement
  */
@@ -816,8 +816,19 @@ export function withTickedConditionDurations(settlement, interval) {
     const cap = canonical.duration.expiresAtTicks;
     const windingDown = typeof cap === 'number'
       && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
+    // Read the RAW status, not canonical.status: canonical defaulting maps a
+    // legacy/undirected condition (e.g. 'active' or absent) onto a template
+    // default like 'worsening', which would silently invent drift. The status
+    // we persist below must match the one that drove this decision, or the
+    // invented motion just reappears one tick later.
     const driftStatus = windingDown ? 'easing' : c.status;
     const driftPerTick = (/** @type {any} */ (SEVERITY_DRIFT_PER_TICK))[driftStatus] ?? 0;
+    // The status we persist must reproduce this drift on the next tick.
+    // A directed status (worsening/easing) is kept verbatim; anything
+    // undirected (legacy 'active', absent, template-defaulted) normalizes
+    // to drift-neutral 'stable' so canonical defaulting can't reintroduce
+    // the invented motion one tick later.
+    const persistedStatus = driftPerTick !== 0 ? driftStatus : 'stable';
     let severity = canonical.severity;
     if (driftPerTick > 0) {
       severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
@@ -829,7 +840,7 @@ export function withTickedConditionDurations(settlement, interval) {
       ...canonical,
       severity,
       severityBand: severityBand(severity),
-      status: windingDown ? 'easing' : canonical.status,
+      status: persistedStatus,
       duration: {
         ...canonical.duration,
         elapsedTicks,
@@ -848,7 +859,7 @@ export function withTickedConditionDurations(settlement, interval) {
  * Conditions with `expiresAtTicks: null` persist indefinitely. Returns
  * `{ settlement, expired }`.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{settlement: any, expired: Array<any>}}
  */
 export function withExpiredConditionsRemoved(settlement) {
@@ -890,7 +901,7 @@ export function withExpiredConditionsRemoved(settlement) {
  *     bySeverityBand: { low: 0, medium: 1, high: 1, critical: 0 },
  *     summaryLines: [...],
  *   }
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeActiveConditions(settlement) {
   const all = deriveAllActiveConditions(settlement);

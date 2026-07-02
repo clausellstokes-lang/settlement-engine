@@ -69,6 +69,27 @@ describe('AccountSecuritySection — change password', () => {
   });
 });
 
+describe('AccountSecuritySection — reset via email', () => {
+  it('shows the sent confirmation on success', async () => {
+    resetPassword.mockResolvedValueOnce(undefined);
+    render(<AccountSecuritySection auth={AUTH} onSignOut={vi.fn()} />);
+
+    fireEvent.click(screen.getByText('Reset via email instead'));
+    await waitFor(() => expect(resetPassword).toHaveBeenCalledWith('me@example.test'));
+    await screen.findByText('Reset email sent');
+  });
+
+  it('surfaces a genuine failure instead of a false "sent" (own authenticated account)', async () => {
+    resetPassword.mockRejectedValueOnce(new Error('Network down'));
+    render(<AccountSecuritySection auth={AUTH} onSignOut={vi.fn()} />);
+
+    fireEvent.click(screen.getByText('Reset via email instead'));
+    // The genuine error is shown; the button label must NOT flip to the success copy.
+    await screen.findByText('Network down');
+    expect(screen.queryByText('Reset email sent')).toBeNull();
+  });
+});
+
 describe('AccountSecuritySection — linked accounts', () => {
   it('lists the providers and links a not-yet-connected one', async () => {
     // Only email connected → both Google and Discord offer "Link".

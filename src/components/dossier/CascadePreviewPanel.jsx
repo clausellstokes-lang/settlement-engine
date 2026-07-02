@@ -69,8 +69,14 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
   // count here from the store-side data.
   const linkedSaves = useMemo(() => {
     if (!settlement || !Array.isArray(savedSettlements)) return 0;
+    // The neighbour list lives at settlement.neighbourNetwork (mirrored to the
+    // Supabase row's neighbour_links); the old top-level save.neighbourLinks
+    // field never exists, so the previous read always returned 0. A neighbour
+    // entry carries the linked save's id as `id` (see useChangeQueueCascade),
+    // with `targetId` as the alternate key (see map/RelationshipEdges).
     return savedSettlements.filter(s =>
-      s.neighbourLinks?.some(link => link.targetId === settlement.id)
+      (s.settlement?.neighbourNetwork || s.neighbour_links || [])
+        .some(link => (link?.id ?? link?.targetId) === settlement.id)
     ).length;
   }, [settlement, savedSettlements]);
 

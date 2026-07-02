@@ -145,6 +145,18 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   return {
     settlement: ownSettlement,
+    // Full merged partner blob — used by the LOCAL storage path (single-threaded, no
+    // race) which writes the whole entry back.
     partner: { id: partnerSave.id, name: partnerSave.name, tier: partnerSave.tier, settlement: partnerSettlement },
+    // The DELTA the cloud path applies atomically via the merge_neighbour_backlink RPC
+    // (migration 096) instead of writing the stale full blob — fixes the read-modify-
+    // write clobber race when two saves reference the same partner concurrently.
+    partnerDelta: {
+      partnerId: partnerSave.id,
+      linkId,
+      newSaveId: saveId,
+      networkEntry: entryForPartner,
+      relationshipEntries: [...npcForPartner, ...conflictForPartner],
+    },
   };
 }

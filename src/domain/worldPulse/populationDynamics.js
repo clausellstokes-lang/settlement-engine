@@ -187,9 +187,11 @@ function relationshipWeight(snapshot, sourceId, destId) {
 }
 
 /**
+ * Split `migrants` across candidate destinations. Exported for a focused
+ * conservation unit test (the split must never create or destroy population).
  * @param {any} options
  */
-function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
+export function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
   const chosenMode = mode === 'roll' ? migrationChoice(sourceId, tick) : mode;
   if (chosenMode === 'void') return { mode: chosenMode, deltas: [] };
 
@@ -214,9 +216,18 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
   let assigned = 0;
   const deltas = top.map((item, index) => {
     const last = index === top.length - 1;
+    const remaining = migrants - assigned;
+    // Clamp every non-last share to what's LEFT so the running total can never
+    // exceed `migrants`. Without this the Math.max(1,…) floor could over-assign
+    // when migrants < destinations (e.g. 2 migrants over 4 dests → [1,1,1,-1]),
+    // forcing the last delta negative; it was then filtered out, injecting phantom
+    // people (a non-conservation leak). Conservation now holds by construction:
+    // sum(deltas) === migrants exactly. Unreachable on the live path today (the
+    // mass-emigration gate floors migrants ≥ 11) but pinned so a future threshold
+    // change can't silently re-open it.
     const delta = last
-      ? migrants - assigned
-      : Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight)));
+      ? remaining
+      : Math.min(remaining, Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight))));
     assigned += delta;
     return { saveId: item.id, delta, reason: 'Displaced population disperses through regional links.' };
   }).filter(d => d.delta > 0);
@@ -320,9 +331,13 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     probability: 1,
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
+    // Pin locale to 'en-US' (as the generator paths do): a bare toLocaleString()
+    // renders `12,000` on en-US ICU but `12 000`/`12.000` elsewhere, so persisted
+    // candidate summaries — and any future golden over advance output — would drift
+    // by the runner's locale. CI's pinned Node masks this today; the pin removes it.
     summary: delta > 0
-      ? `${item.name || sourceId} gains about ${abs.toLocaleString()} people from favorable conditions.`
-      : `${item.name || sourceId} loses about ${abs.toLocaleString()} people from cumulative pressure${migrants ? `; about ${migrants.toLocaleString()} may migrate onward` : ''}.`,
+      ? `${item.name || sourceId} gains about ${abs.toLocaleString('en-US')} people from favorable conditions.`
+      : `${item.name || sourceId} loses about ${abs.toLocaleString('en-US')} people from cumulative pressure${migrants ? `; about ${migrants.toLocaleString('en-US')} may migrate onward` : ''}.`,
     reasons: [
       `Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`,
       `Interval ${interval.replace(/_/g, ' ')} with ${rules.intensity} intensity.`,
@@ -350,18 +365,46 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
     .filter(Boolean);
 }
 
+// ── Migration staleness re-verify (self-contained; the same re-verify contract as
+// applyTierOutcomeToSettlement). A mass-emigration outcome can be applied MANY ticks
+// after it was generated (a long-parked proposal): by then the source may hold fewer
+// people than the stored debit. The source side always clamped at zero — but the
+// paired destination credits landed IN FULL, minting people out of thin air. The
+// apply pass hands every settlement of one outcome the SAME outcome object, source
+// first (populationDeltas order → affectedSaveIds order), so the source apply records
+// the REALIZED debit fraction here and each destination apply scales its credit by it
+// (floored, so Σ scaled credits ≤ the people who actually left). Keyed on outcome
+// object identity — scoped to a single apply pass, invisible to persistence. A
+// destination applied without a source record (source missing from the settlement
+// map) keeps the legacy full credit. Fresh (non-stale) outcomes realize fraction 1 ⇒
+// byte-identical.
+/** @type {WeakMap<object, number>} */
+const migrationRealizedFraction = new WeakMap();
+
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  * @param {any} saveId
  */
 export function applyPopulationOutcomeToSettlement(settlement, outcome, saveId) {
   if (!settlement || !outcome?.populationDeltas) return settlement;
-  const delta = outcome.populationDeltas
+  let delta = outcome.populationDeltas
     .filter((/** @type {any} */ item) => String(item.saveId) === String(saveId))
     .reduce((/** @type {any} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
   if (!delta) return settlement;
   const current = Math.max(0, Math.round(finite(settlement.population, 0)));
+  if (outcome.candidateType === 'population_emigration') {
+    if (String(saveId) === String(outcome.targetSaveId) && delta < 0) {
+      const debit = Math.abs(Math.round(delta));
+      const realized = Math.min(debit, current);
+      migrationRealizedFraction.set(outcome, debit > 0 ? realized / debit : 1);
+      delta = -realized;
+    } else if (delta > 0) {
+      const fraction = migrationRealizedFraction.get(outcome);
+      if (fraction != null && fraction < 1) delta = Math.floor(delta * fraction);
+    }
+    if (!delta) return settlement; // fully-stale debit/credit — no phantom history entry
+  }
   const nextPopulation = Math.max(0, current + Math.round(delta));
   return {
     ...settlement,

@@ -95,11 +95,12 @@ function Field({ label, children }) {
   );
 }
 
-function Select({ id, value, options, onChange }) {
+function Select({ id, value, options, onChange, disabled = false }) {
   return (
     <select
       id={id}
       value={value}
+      disabled={disabled}
       onChange={event => onChange(event.target.value)}
       style={{
         width: '100%',
@@ -112,6 +113,8 @@ function Select({ id, value, options, onChange }) {
         fontFamily: sans,
         fontSize: FS.sm,
         fontWeight: 800,
+        opacity: disabled ? 0.85 : 1,
+        cursor: disabled ? 'default' : undefined,
       }}
     >
       {options.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
@@ -119,7 +122,7 @@ function Select({ id, value, options, onChange }) {
   );
 }
 
-function Toggle({ checked, label, onChange }) {
+function Toggle({ checked, label, onChange, disabled = false }) {
   const controlId = useId();
   return (
     <label htmlFor={controlId} style={{
@@ -135,13 +138,15 @@ function Toggle({ checked, label, onChange }) {
       fontFamily: sans,
       fontSize: FS.xs,
       fontWeight: 850,
-      cursor: 'pointer',
+      cursor: disabled ? 'default' : 'pointer',
+      opacity: disabled ? 0.85 : 1,
     }}>
       <input
         id={controlId}
         type="checkbox"
         aria-label={label}
         checked={checked}
+        disabled={disabled}
         onChange={event => onChange(event.target.checked)}
       />
       <span>{label}</span>
@@ -232,6 +237,17 @@ export default function SimulationRulesDialog({ open, campaign, onClose }) {
 function SimulationRulesDialogContent({ campaign, onClose }) {
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
   const previewWorldPulse = useStore(s => s.previewCampaignWorldPulse);
+  // While this campaign's advance is in flight the store no-ops the rules write
+  // (it would be clobbered by the advance's wholesale worldState replace), so a
+  // Save would silently drop the GM's edit. Subscribe to the advanceInFlight LIST
+  // itself (not the stable isAdvanceInFlight fn ref) so the disable + hint re-render
+  // the instant an advance starts or ends — same membership test the store uses.
+  const advanceInFlightList = useStore(s => s.advanceInFlight);
+  const advanceBlocked = !!(
+    campaign?.id
+    && Array.isArray(advanceInFlightList)
+    && advanceInFlightList.some(id => String(id) === String(campaign.id))
+  );
   // Trap focus inside the modal, close on Escape, and restore focus to the
   // trigger on unmount (a11y: the dialog previously closed only on outside
   // mousedown — no Escape, no focus containment). This content only mounts while
@@ -289,6 +305,10 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
 
   const save = async () => {
     if (!campaign?.id || busy) return;
+    // The store no-ops the rules write while the realm advances; refuse here so
+    // Save never reports success over a dropped write. The button is also disabled
+    // off advanceBlocked — this is the belt-and-braces guard.
+    if (advanceBlocked) { setError('The realm is advancing. Give it a moment, then save your rules.'); return; }
     setBusy(true);
     setError(null);
     try {
@@ -391,6 +411,14 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
         </header>
 
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>
+          {advanceBlocked && (
+            <div
+              data-testid="rules-advance-blocked" role="status" aria-live="polite"
+              style={{ border: `1px solid ${GOLD}`, borderRadius: R.md, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+            >
+              The realm is advancing. Give it a moment, then save your rules.
+            </div>
+          )}
           {error && (
             <div style={{
               border: '1px solid rgba(197,74,74,0.45)',
@@ -422,6 +450,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                     key={preset.id}
                     type="button"
                     onClick={() => applyPreset(preset.id)}
+                    disabled={advanceBlocked}
                     style={{
                       display: 'grid',
                       gap: 5,
@@ -432,7 +461,8 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       borderRadius: R.md,
                       background: selected ? GOLD_BG : CARD,
                       color: INK,
-                      cursor: 'pointer',
+                      cursor: advanceBlocked ? 'default' : 'pointer',
+                      opacity: advanceBlocked ? 0.85 : 1,
                     }}
                   >
                     <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
@@ -471,13 +501,13 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                   gap: SP.md,
                 }}>
                   <Field label="Propagation">
-                    <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} onChange={value => setField('propagationMode', value)} />
+                    <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} disabled={advanceBlocked} onChange={value => setField('propagationMode', value)} />
                   </Field>
                   <Field label="Intensity">
-                    <Select value={draft.intensity} options={INTENSITY_OPTIONS} onChange={value => setField('intensity', value)} />
+                    <Select value={draft.intensity} options={INTENSITY_OPTIONS} disabled={advanceBlocked} onChange={value => setField('intensity', value)} />
                   </Field>
                   <Field label="Migration">
-                    <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} onChange={value => setField('migrationMode', value)} />
+                    <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} disabled={advanceBlocked} onChange={value => setField('migrationMode', value)} />
                   </Field>
                 </div>
 
@@ -491,6 +521,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       key={key}
                       label={label}
                       checked={draft[key] !== false}
+                      disabled={advanceBlocked}
                       onChange={value => setField(key, value)}
                     />
                   ))}
@@ -544,7 +575,8 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                         label={label}
                         description={forcedByWar ? `${description} Auto-enabled by the War layer.` : description}
                         checked={draft[key] === true}
-                        disabled={forcedByWar}
+                        disabled={forcedByWar || advanceBlocked}
+                        disabledReason={advanceBlocked && !forcedByWar ? 'The realm is advancing…' : ''}
                         onChange={value => setField(key, value)}
                       />
                     );
@@ -627,7 +659,15 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           <footer style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
             <Button variant="secondary" onClick={reset} disabled={busy}>Reset</Button>
             <Button variant="secondary" onClick={onClose} disabled={busy}>Cancel</Button>
-            <Button variant="primary" onClick={save} busy={busy}>Save</Button>
+            <Button
+              variant="primary"
+              onClick={save}
+              busy={busy}
+              disabled={advanceBlocked}
+              title={advanceBlocked ? 'The realm is advancing. Give it a moment, then save your rules.' : undefined}
+            >
+              Save
+            </Button>
           </footer>
         </div>
       </section>

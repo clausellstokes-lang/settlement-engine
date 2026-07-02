@@ -1,6 +1,6 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
@@ -139,8 +139,10 @@ export async function handleVerifyDossier(
     const message = error instanceof Error ? error.message : 'Purchase verification failed';
     // One structured line per verification failure. This endpoint is anonymous-
     // allowed (single-dossier microtransaction), so there is no user id to attribute.
+    // The real message (which may carry Stripe internals) is logged server-side;
+    // the client only ever sees a generic string.
     logError('verify-single-dossier', null, message);
-    return new Response(JSON.stringify({ verified: false, error: message }), {
+    return new Response(JSON.stringify({ verified: false, error: 'Verification failed' }), {
       status: 400,
       headers: { ...headers, 'Content-Type': 'application/json' },
     });

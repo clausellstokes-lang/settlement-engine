@@ -263,6 +263,34 @@ describe('consequenceIfRemoved', () => {
     expect(profile.rank).toBe('minor');
     expect(profile.consequenceIfRemoved.severity).toBe('minor');
   });
+
+  it('a numeric structuralRank does not crash the derivation', () => {
+    // The schema unions structuralRank as string|number; a legacy NPC with a
+    // numeric rank must not blow up `.toLowerCase()` and take down the whole
+    // causal-substrate derivation. It resolves to no keyed tier → the minor
+    // consequence set.
+    let profile;
+    expect(() => {
+      profile = deriveNpcProfile({
+        id: 'x', name: 'X', category: 'military', structuralRank: 2,
+      });
+    }).not.toThrow();
+    expect(profile.consequenceIfRemoved.consequences.length).toBeGreaterThan(0);
+  });
+
+  it('a subordinate-rank NPC reads the subordinate tier, not minor', () => {
+    // getRank (npcStructure.js) emits 'dominant' | 'subordinate' — the mid tier.
+    // It must resolve to the intended (formerly dead) subordinate consequences,
+    // NOT fall through to the trivial single-line minor tier.
+    const profile = deriveNpcProfile(militaryCaptain({ structuralRank: 'subordinate' }));
+    expect(profile.consequenceIfRemoved.severity).toBe('subordinate');
+    const cons = profile.consequenceIfRemoved.consequences;
+    // The subordinate military tier has two lines; the minor tier has one.
+    expect(cons.length).toBe(2);
+    expect(cons.join(' ')).toMatch(/captain loses their reporting line|subordinate moves up/i);
+    // Guard against regressing to the minor tier's single line.
+    expect(cons.join(' ')).not.toMatch(/a guard or two notice/i);
+  });
 });
 
 // ── Primary relationship inference ──────────────────────────────────────

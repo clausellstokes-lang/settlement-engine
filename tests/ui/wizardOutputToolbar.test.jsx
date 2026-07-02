@@ -127,8 +127,10 @@ describe('Create-view sticky chrome: occlusion root-cause guards', () => {
     const appSrc = readFileSync(fromTest('../../src/App.jsx'), 'utf8');
     // Capture the <main style={{ ... }}> object up to its closing `}}>` (the
     // style contains `${...}` template braces, so match non-greedily to `}}>`).
-    const mainTag = appSrc.match(/<main style=\{\{([\s\S]*?)\}\}>/);
-    expect(mainTag, 'expected a <main style={{...}}> in App.jsx').toBeTruthy();
+    // `<main>` carries a11y attributes (id/ref/tabIndex) before `style` now, so allow
+    // any leading attributes rather than requiring style to be first.
+    const mainTag = appSrc.match(/<main[^>]*?style=\{\{([\s\S]*?)\}\}>/);
+    expect(mainTag, 'expected a <main …style={{...}}> in App.jsx').toBeTruthy();
     const mainStyle = mainTag[1];
     expect(mainStyle).not.toMatch(/overflow(Y)?\s*:\s*['"](auto|scroll|hidden)['"]/);
   });

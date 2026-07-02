@@ -59,7 +59,7 @@ function severityWord(peak) {
   return 'minor';
 }
 
-/** @param {any} stressor */
+/** @param {import('../settlement.schema.js').SimStressor} stressor */
 function residualText(stressor) {
   return (stressor.residualEffects || []).slice(0, 3).join(', ').replace(/_/g, ' ');
 }
@@ -68,7 +68,7 @@ function residualText(stressor) {
 // lastingEffects as a STRING ARRAY — generator-era events all use arrays, and
 // the renderers call .join/.map on it. A bare string would pass their
 // `?.length > 0` guards and crash the render.
-/** @param {any} stressor */
+/** @param {import('../settlement.schema.js').SimStressor} stressor */
 function residualList(stressor) {
   return (stressor.residualEffects || []).slice(0, 3).map((/** @type {any} */ s) => String(s).replace(/_/g, ' '));
 }
@@ -140,7 +140,7 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
  * the settlement's present-day past), and are capped so a long campaign
  * can't balloon the record. Idempotent per echo id.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} echo        the graduated stressor record
  * @param {number} tick
  * @returns {any} new settlement (same reference when nothing changed)
@@ -193,8 +193,8 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
  * Deterministic; identity no-op when nothing local matches (the common case
  * for pulse-born crises).
  *
- * @param {any} settlement              a settlementUpdates settlement
- * @param {any[]}  resolvedStressors     the pulse result's resolved twins
+ * @param {import('../settlement.schema.js').SimSettlement} settlement              a settlementUpdates settlement
+ * @param {import('../settlement.schema.js').SimStressor[]}  resolvedStressors     the pulse result's resolved twins
  * @param {string|number} saveId         the settlement's save id
  * @returns {any} new settlement (same reference when untouched)
  */

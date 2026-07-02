@@ -78,7 +78,38 @@ export async function fetchDossierForImport(slug) {
   if (error) throw new Error(error.message || 'Import fetch failed');
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) return null;
-  return { id: row.id, name: row.name, tier: row.tier, settlement: row.data };
+  return { id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) };
+}
+
+/**
+ * Client defense-in-depth for the import payload. The import_gallery_dossier RPC
+ * is server-gated and already sanitized, but every OTHER gallery read re-clamps
+ * client-side because RLS/raw writes mean the row can't be fully trusted — this
+ * path was the one exception. Strip only the keys that are NEVER legitimately
+ * shared (so this is non-lossy for an opted-in DM share's secrets/hooks/prose):
+ * the generation seed (the RPC contract promises it is absent) and the DM scratch
+ * notes that toPublicSafe drops even in owner-opted full mode (publicSafe.js).
+ */
+function stripImportConfidential(data) {
+  if (!data || typeof data !== 'object') return data;
+  const out = { ...data };
+  // Contract: "never the generation seed". The engine persists it as `_seed`
+  // (top-level AND config._seed) plus the raw authoring `_config` — with any of
+  // them, the importer could regenerate the full UNSANITIZED settlement through
+  // the deterministic engine. `seed` covers drifted/legacy shapes. `config`
+  // itself stays (it drives public display facets); clone it before deleting so
+  // the caller's row object is never mutated.
+  delete out.seed;
+  delete out._seed;
+  delete out._config;
+  if (out.config && typeof out.config === 'object') {
+    out.config = { ...out.config };
+    delete out.config._seed;
+  }
+  delete out.dmNotes;        // truly-confidential DM scratch — dropped even in full mode
+  delete out.dossierNotes;
+  delete out.narrativeNotes;
+  return out;
 }
 
 /** Remove from the gallery. Slug is preserved server-side for re-share. */
@@ -780,27 +811,41 @@ function normalizeGalleryFilters(filters = {}) {
 }
 
 function galleryMetadataPatch(metadata = {}) {
+  // MERGE-PATCH semantics: every field below is written ONLY when the caller
+  // provided it (!== undefined), like the shareNarrated/shareDm/facet fields
+  // have always been. The old shape wrote description/image/alt/tags
+  // unconditionally, so a partial bag (e.g. publishSettlement called with just
+  // { importable: true }) silently wiped the published metadata. An explicitly
+  // provided empty value still clears its column — omission is what preserves.
+  const patch = {
+    gallery_updated_at: new Date().toISOString(),
+  };
   // Descriptions are sanitized rich-text HTML (§4c). Sanitize ON WRITE here (not
   // only at render): there is no server/DB-side scrub of gallery_description, so
   // sanitizing the stored value is what makes it XSS-safe regardless of which
   // consumer renders it — a future unsanitized render path can't resurrect stored
   // script. Cap the raw input generously before sanitizing, then hard-bound the
   // sanitized result to the column budget.
-  const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
-  const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
-  const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
-  const patch = {
-    gallery_description: description || null,
-    gallery_image_url: isSafePublicImageUrl(imageUrl) ? imageUrl : null,
-    gallery_image_alt: imageAlt || null,
-    // The single shared tag clamp (clampTags) the read + publish paths use too,
-    // so the three can never diverge: lower-case, strip to [a-z0-9 -], bound each
-    // tag, drop empties, cap the count. Writing the same shape we'd accept on read
-    // keeps a stored row from carrying an unbounded blob the read normalizer would
-    // later trim.
-    gallery_tags: clampTags(metadata.tags),
-    gallery_updated_at: new Date().toISOString(),
-  };
+  if (metadata.description !== undefined) {
+    const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
+    patch.gallery_description = description || null;
+  }
+  if (metadata.imageUrl !== undefined) {
+    const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
+    patch.gallery_image_url = isSafePublicImageUrl(imageUrl) ? imageUrl : null;
+  }
+  if (metadata.imageAlt !== undefined) {
+    const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
+    patch.gallery_image_alt = imageAlt || null;
+  }
+  // The single shared tag clamp (clampTags) the read + publish paths use too,
+  // so the three can never diverge: lower-case, strip to [a-z0-9 -], bound each
+  // tag, drop empties, cap the count. Writing the same shape we'd accept on read
+  // keeps a stored row from carrying an unbounded blob the read normalizer would
+  // later trim.
+  if (metadata.tags !== undefined) {
+    patch.gallery_tags = clampTags(metadata.tags);
+  }
   // Owners can opt to publish the AI-narrated dossier instead of the raw
   // simulation; the public RPC honors this flag (see migration 025).
   if (metadata.shareNarrated !== undefined) {

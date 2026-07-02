@@ -95,6 +95,13 @@ function fixtureSettlement() {
         { category: 'food_security', hook: 'Bread prices climb sharply.', severity: 'medium' },
       ],
     },
+    // Top-level plotHooks is a surface collectAllHooks() actually reads (the
+    // economicState.plotHooks above is NOT). Without this, entityCatalog yields
+    // zero hooks and every explainHook test below silently bails on
+    // hooks.length === 0 — the exact coverage-evaporation this fixture guards.
+    plotHooks: [
+      { category: 'food_security', hook: 'Bread prices climb sharply.', severity: 'medium' },
+    ],
     npcs: [
       {
         id: 'npc.captain_rusk',
@@ -305,7 +312,9 @@ describe('explainHook()', () => {
   it('reads Phase 11 origin + severity + possibleResolutions', () => {
     const s = fixtureSettlement();
     const hooks = entityCatalog(s).filter(e => e.type === 'hook');
-    if (hooks.length === 0) return;
+    // Hard-assert the fixture yields a hook rather than bailing on 0 — a bail
+    // would let a hook-enumeration regression pass this test vacuously.
+    expect(hooks.length).toBeGreaterThan(0);
     const env = explainHook(s, hooks[0].id);
     expect(env.profile).toHaveProperty('origin');
     expect(env.profile).toHaveProperty('severity');
@@ -315,7 +324,7 @@ describe('explainHook()', () => {
   it('downstreamEffects carry the ifIgnored consequences', () => {
     const s = fixtureSettlement();
     const hooks = entityCatalog(s).filter(e => e.type === 'hook');
-    if (hooks.length === 0) return;
+    expect(hooks.length).toBeGreaterThan(0);
     const env = explainHook(s, hooks[0].id);
     expect(Array.isArray(env.downstreamEffects)).toBe(true);
   });
@@ -480,6 +489,10 @@ describe('entityCatalog()', () => {
     expect(types.has('chain')).toBe(true);
     expect(types.has('condition')).toBe(true);
     expect(types.has('system_variable')).toBe(true);
+    // Assert 'hook' too (the comment above claims it): the explainHook tests all
+    // bail when hooks.length === 0, so without this backstop a hook-enumeration
+    // regression would ship green with an entirely vacuous explainHook suite.
+    expect(types.has('hook')).toBe(true);
   });
 
   it('returns [] for nullish settlement', () => {

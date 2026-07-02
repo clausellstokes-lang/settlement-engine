@@ -58,6 +58,18 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 // The hostile/adversarial axis a settlement can act on (besiege / escalate).
 const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 
+// Sue-for-peace winds an edge ONE step DOWN the hostility ladder, landing on the
+// SAME labels the reactive de-escalation levers use (hostile_truce → cold_war,
+// cold_war_thaw → rival, rival_detente → trade_partner). Hard-coding
+// hostile→cold_war here mislabeled the proposal's fromType on non-hostile edges
+// AND *escalated* a mere rivalry into a cold war — a "peace" move that worsened
+// the relationship.
+const PEACE_STEP = Object.freeze({
+  hostile: 'cold_war',
+  cold_war: 'rival',
+  rival: 'trade_partner',
+});
+
 // Softmax temperature (decisiveness). Load-bearing: too high collapses to a hard
 // argmax (the RNG never varies the move, defeating the "controlled variety"
 // requirement); too low routs/sues at random. Mid-range — the best move is most
@@ -208,9 +220,9 @@ function hostileEdgeBetween(snapshot, a, b) {
  * war candidates so the strategy move wins the exclusive group.
  *
  * @param {{ move: string, sId: string, tick: number, severity: number, headline: string,
- *   summary: string, reasons: string[], proposal?: any, condition?: any }} args
+ *   summary: string, reasons: string[], proposal?: any, condition?: any, metadata?: any }} args
  */
-function strategyCandidate({ move, sId, tick, severity, headline, summary, reasons, proposal, condition }) {
+function strategyCandidate({ move, sId, tick, severity, headline, summary, reasons, proposal, condition, metadata }) {
   const base = {
     id: `candidate.strategy.${move}.${stablePart(sId)}.${tick}`,
     type: (proposal || condition) ? (proposal ? 'relationship' : 'condition') : 'condition',
@@ -224,7 +236,7 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
     headline,
     summary,
     reasons,
-    metadata: { settlementId: String(sId), strategyMove: move },
+    metadata: { settlementId: String(sId), strategyMove: move, ...(metadata || {}) },
     // `strategy:<S>` is the exclusive tag (allow-listed in candidateEvents). The
     // reactive raid/occupation candidates where S is the aggressor resolve to the
     // SAME tag (via their metadata.aggressorSaveId) — exactly one is admitted.
@@ -315,6 +327,16 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     const target = ctx.hostileTargets[0] || ctx.besieging[0];
     const edge = target ? hostileEdgeBetween(snapshot, sId, target) : null;
     if (!edge) return null; // no edge to de-escalate — fall through to nothing
+    // Read the edge's ACTUAL current label (the relationshipStates overlay wins over
+    // the raw edge) and step it ONE rung down the PEACE_STEP ladder. An edge that is
+    // not on the hostile axis has nothing to wind down.
+    const relState = ensureRelationshipState(
+      normalizeRelationshipEdge(edge),
+      snapshot?.worldState?.relationshipStates?.[relationshipKeyFromEdge(edge)],
+    );
+    const fromType = relState.relationshipType;
+    const toType = PEACE_STEP[/** @type {keyof typeof PEACE_STEP} */ (fromType)];
+    if (!toType) return null;
     const key = relationshipKeyFromEdge(edge);
     return strategyCandidate({
       move,
@@ -329,12 +351,12 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
       ],
       proposal: {
         relationshipKey: key,
-        relationshipPatch: { proposedRelationshipType: 'cold_war', trajectory: 'transitioning' },
+        relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
         proposalPayload: {
           kind: 'relationship_label_change',
           relationshipKey: key,
-          fromType: 'hostile',
-          toType: 'cold_war',
+          fromType,
+          toType,
           reason: `${name} sued for peace; the sponsored hostility winds down.`,
         },
       },
@@ -419,11 +441,15 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const hasArmyAbroad = !!deployment?.targetId;
 
     // ── HARD-OVERRIDE: return-home. If S has its army committed ABROAD while its
-    // home (or a vassal obligation) is compromised — besieged/occupied — it RECALLS
-    // the army, deterministically (probability 1, BYPASSING the softmax). An
+    // home (or a vassal obligation) is compromised — besieged/occupied — it ORDERS
+    // the army home, deterministically (probability 1, BYPASSING the softmax). An
     // emergency recall cannot be out-competed by a high deploy weight. The
     // strategy:<S> exclusive tag SUPPRESSES the reactive escalation for S (no
-    // double-fire). ──────────────────────────────────────────────────────────────
+    // double-fire). NOTE: this candidate is the recall DECISION — it carries
+    // metadata.recallTargetId for the war layer, but the deployment itself is only
+    // physically withdrawn by warDeployment's withdrawal path; until that consumer
+    // is wired, the order (correctly) re-fires each tick the predicament persists,
+    // and its only world effect is suppressing S's reactive escalation. ───────────
     if (hasArmyAbroad && (ctx.homeBesieged || ctx.vassalBesieged)) {
       const name = item?.name || item?.settlement?.name || sId;
       out.push(strategyCandidate({
@@ -431,6 +457,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         sId,
         tick,
         severity: OVERRIDE_SEVERITY,
+        metadata: { recallTargetId: String(deployment.targetId) },
         headline: `${name} recalls its army`,
         summary: ctx.homeBesieged
           ? `${name} is itself besieged. Its army abroad is recalled to defend the home walls.`

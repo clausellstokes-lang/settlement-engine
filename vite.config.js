@@ -78,6 +78,16 @@ export default defineConfig({
         warn(warning);
       },
       output: {
+        // Pin the chunk filename scheme the modulePreload filter above depends
+        // on. That filter drops preload for the lazy vendor-pdf / engine chunks
+        // by matching `/(vendor-pdf|engine)-<hash>.js$` — i.e. it assumes the
+        // manualChunks NAME ('vendor-pdf', 'engine') becomes the filename prefix.
+        // Rollup's DEFAULT scheme happens to do that today, but it isn't
+        // contractual; if the default ever changed, the regex would silently
+        // stop matching and ~800 kB would re-enter first paint with no error.
+        // Declaring it here makes `[name]` (the manualChunks name) the prefix
+        // explicitly, so the filename and the regex can't drift apart.
+        chunkFileNames: 'assets/[name]-[hash].js',
         manualChunks(id) {
           // ── Vendor chunks (stable, cached across deploys) ─────────
           // scheduler is React's own internal dep (react-dom pulls it in and it

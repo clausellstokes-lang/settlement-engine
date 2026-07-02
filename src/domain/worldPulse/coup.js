@@ -30,6 +30,11 @@
 
 import { stablePart } from './worldState.js';
 import { resolveCoupVerdict } from '../rulingPower.js';
+import { computeWarSentiment } from './disposition.js';
+
+// How strongly war sentiment shifts the coup hold-chance (P2). Modest — a sour war
+// tilts the seat's footing, it does not by itself topple a secure ruler.
+const WAR_SENTIMENT_PHOLD_WEIGHT = 0.22;
 
 export const COUP_STRESSOR_TYPE = 'coup_detat';
 
@@ -74,9 +79,11 @@ function clamp(min, max, value) {
  * @param {any} args.snapshot       world snapshot (byId entries carry settlement + causal + save)
  * @param {{ random: () => number }} args.rng
  * @param {number} [args.tick]
+ * @param {Record<string, number>} [args.warExhaustion]  P2: the war-exhaustion scar ledger
+ * @param {boolean} [args.warDispositionEnabled]  P2 flag: fold war sentiment into the hold-chance
  * @returns {any[]} outcomes for applyWorldPulseOutcomes (deterministic, probability 1)
  */
-export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0 }) {
+export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false }) {
   const outcomes = [];
   for (const stressor of resolved) {
     if (stressor?.type !== COUP_STRESSOR_TYPE) continue;
@@ -89,11 +96,16 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0 }) 
     if (!entry?.settlement) continue;
 
     const severity = Math.max(stressor.peakSeverity ?? 0, stressor.severity ?? 0, 0.3);
+    // P2: an exhausting/unpopular war shifts the ruling seat's footing (0 when off).
+    const warSentimentAdj = warDispositionEnabled
+      ? WAR_SENTIMENT_PHOLD_WEIGHT * computeWarSentiment(entry.settlement, warExhaustion[saveId])
+      : 0;
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
       severity,
       rulingAuthorityScore: entry.causal?.scores?.ruling_authority ?? null,
+      warSentimentAdj,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';

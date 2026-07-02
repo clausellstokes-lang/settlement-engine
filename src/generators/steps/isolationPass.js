@@ -19,6 +19,7 @@ import {
 } from '../isolationGenerator.js';
 import { TOWN_PLUS_TIERS } from '../../data/constants.js';
 import { recordTrace } from '../../domain/trace.js';
+import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
@@ -26,8 +27,8 @@ function instId(name) {
 
 registerStep('isolationPass', {
   deps: ['cascadePass'],
-  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
-  provides: [],
+  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute', 'stress'], // ctx keys this step consumes that another step produces
+  provides: ['stress', 'stressTypes'], // re-emits the container when the subsistence famine joins it
   mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place
   phase: 'institutions',
 }, (ctx, rng) => {
@@ -62,7 +63,7 @@ registerStep('isolationPass', {
   }
 
   const beforeSubsistence = institutions.map(i => i.name);
-  applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper);
+  const subsistenceFamine = applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper);
   // Trace any subsistence-stripped institutions (the pass removes
   // institutions incompatible with full subsistence mode).
   const afterSubsistenceSet = new Set(institutions.map(i => i.name));
@@ -101,5 +102,37 @@ registerStep('isolationPass', {
   // Note: stripArcaneInstitutions runs later in the original (line 889, after faction correlation).
   // We keep it in a separate logical position but it's still part of institution finalization.
 
-  return {};
+  // Merge the subsistence famine into the stress CONTAINER, not just the
+  // effectiveConfig.stressTypes channel applySubsistenceMode already stamped —
+  // stressConfirmPass iterates container entries ONLY (a stressTypes-only
+  // famine was a ghost: it drove the food math but never appeared on the
+  // roster and was erased whenever the confirm pass re-stamped the confirmed
+  // set), and assembleSettlement renders the stressor roster from the
+  // container. Appended LAST so the confirm pass's re-weighting draws for
+  // earlier entries keep their exact order.
+  if (!subsistenceFamine) return {};
+
+  const entries = Array.isArray(ctx.stress) ? [...ctx.stress] : ctx.stress ? [ctx.stress] : [];
+  entries.push(subsistenceFamine);
+  recordTrace(ctx, {
+    targetType: 'stressor',
+    targetId:   'stressor.famine',
+    step:       'isolationPass',
+    result:     'emergent',
+    causes: [
+      { source: 'subsistenceMode', effect: 'derived',
+        reason: `Isolated ${tier} in subsistence mode rolled a famine: no external supply lines to buffer a failed harvest.` },
+    ],
+    downstreamEffects: [
+      { target: 'foodSecurity', effect: 'context' },
+      { target: 'stressTypes',  effect: 'added' },
+    ],
+  });
+
+  // Preserve generateStress's output shape convention (null / bare object /
+  // array) and the catalog-types-only stressTypes channel filter.
+  return {
+    stress:      entries.length === 1 ? entries[0] : entries,
+    stressTypes: entries.map(e => e?.type).filter(t => t && STRESS_TYPE_MAP[t]),
+  };
 });

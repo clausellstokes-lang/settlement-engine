@@ -168,7 +168,15 @@ export const createCampaignRegionalSlice = (set, get) => ({
       c.worldState = { ...worldState, stressors: [...byId.values()] };
       c.updatedAt = now;
       injected = normalized;
-      persistCampaignState(state, campaignId);
+      // R2 — during a change-queue flush this action is reached via the replay's
+      // rippleEventThroughWorld (the crisis-twin half stays IMMEDIATE), so the
+      // persist must defer to the flush's ONE end-of-batch commit: an eager
+      // persistCampaigns here writes the whole campaigns snapshot (this twin PLUS
+      // any already-stashed deferred buckets) to cache + cloud mid-flush, where a
+      // FAILED flush rolls back memory only — the phantom twin resurrects on
+      // reload. Mirrors the stashDeferred* actions and applyEvent's own
+      // flushSuppressPersist gate; off a flush the flag is false (byte-unchanged).
+      if (!state.flushSuppressPersist) persistCampaignState(state, campaignId);
     });
     return injected;
   },
@@ -211,7 +219,11 @@ export const createCampaignRegionalSlice = (set, get) => ({
       seeded = applyWarFrontSeed(c, { instigatorId, targetId, sinceTick, now: stamp });
       if (!seeded) return;
       c.updatedAt = stamp;
-      persistCampaignState(state, campaignId);
+      // R2 — reached mid-flush via the immediate ripple on a non-clock-bound
+      // canon member (see injectCampaignStressor): defer the persist to the
+      // flush's atomic commit so a failed flush leaves no half-seeded front
+      // in the cache/cloud copy. Off a flush the flag is false.
+      if (!state.flushSuppressPersist) persistCampaignState(state, campaignId);
     });
     return seeded;
   },
@@ -274,7 +286,11 @@ export const createCampaignRegionalSlice = (set, get) => ({
       c.worldState = nextWorldState;
       c.updatedAt = stamp;
       resolved = result.resolved[0] || null;
-      persistCampaignState(state, campaignId);
+      // R2 — the inverse twin half of injectCampaignStressor (see the rationale
+      // there): a resolve reached mid-flush must not eagerly persist the echoed
+      // twin + its queued residual proposals, or a FAILED flush resurrects them
+      // from the cache/cloud copy the memory-only rollback never touched.
+      if (!state.flushSuppressPersist) persistCampaignState(state, campaignId);
     });
     return resolved;
   },
@@ -380,7 +396,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       graph = c.regionalGraph;
-      persistCampaignState(state, campaignId);
+      // R2 — reached mid-flush via the immediate regional ripple on a
+      // non-clock-bound canon member (see injectCampaignStressor): defer the
+      // persist to the flush's atomic commit so a failed flush cannot leave the
+      // rippled graph (and any deferred buckets riding in the same whole-array
+      // snapshot) in the cache/cloud copy. Off a flush the flag is false.
+      if (!state.flushSuppressPersist) persistCampaignState(state, campaignId);
     });
     return graph;
   },

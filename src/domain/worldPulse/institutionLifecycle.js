@@ -31,6 +31,7 @@
  */
 
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
+import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
@@ -444,7 +445,9 @@ export function institutionContribution(/** @type {any} */ settlement, /** @type
   if (!settlement || !inst) return 0;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const weights = INSTITUTION_LIFECYCLE_TUNING.contribution;
-  const exportsList = settlement?.economicState?.primaryExports || [];
+  // canonExports (not economicState.primaryExports directly) so a legacy `exports`-
+  // aliased save still scores its export-anchor institutions instead of reading empty.
+  const exportsList = canonExports(settlement);
   const exportsText = exportsList.join(' ');
   // Canonical good ids alongside the token check: subsumption renames within
   // a good ('Boots and shoes' surviving as 'Leather goods') share no >=4-char

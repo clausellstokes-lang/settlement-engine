@@ -42,7 +42,7 @@ const derivationCache = new WeakMap();
  * together (a throw in either falls back to deriveCausalState(null)/system=null),
  * while activeConditions is derived independently.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ causal: any, system: any, activeConditions: any }}
  */
 function deriveSettlementState(settlement) {

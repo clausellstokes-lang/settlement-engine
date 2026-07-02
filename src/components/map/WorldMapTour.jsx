@@ -27,6 +27,7 @@ export default function WorldMapTour({ open, steps = [], onClose }) {
   const [rect, setRect] = useState(null);
 
   // Reset to the first step whenever the tour (re)opens.
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on open
   useEffect(() => { if (open) setI(0); }, [open]);
 
   // Measure the current step's target + wire keyboard / reflow listeners.

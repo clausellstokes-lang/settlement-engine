@@ -78,6 +78,25 @@ describe('dispositionLedger — ratchet/accumulate', () => {
     const ledger = { a: { score: 5, wins: 5, losses: 0 } };
     expect(applyDispositionDeltas(ledger, [])).toBe(ledger); // empty ⇒ same reference (byte-neutral)
   });
+
+  test('same-id deltas straddling the ±SCORE_MAX clamp fold order-independently', () => {
+    // Regression: clamp(clamp(x+a)+b) ≠ clamp(clamp(x+b)+a) when an intermediate
+    // saturates, so an id-only sort left two same-id deltas order-dependent.
+    // start=10, SCORE_MAX=12: win+5 then loss-8 = clamp(15)→12, 12-8 = 4;
+    // loss-8 then win+5 = 2, +5 = 7. The signed-magnitude secondary key folds
+    // the most-negative first deterministically ⇒ 7 for BOTH input orders.
+    const start = { a: { score: 10, wins: 10, losses: 0 } };
+    const deltas = [
+      { id: 'a', outcome: 'win', magnitude: 5 },
+      { id: 'a', outcome: 'loss', magnitude: 8 },
+    ];
+    const fwd = applyDispositionDeltas(start, deltas);
+    const rev = applyDispositionDeltas(start, [...deltas].reverse());
+    expect(fwd).toEqual(rev);
+    expect(fwd.a.score).toBe(7);
+    expect(fwd.a.wins).toBe(11);
+    expect(fwd.a.losses).toBe(1);
+  });
 });
 
 describe('dispositionLedger — factor map (the candidate-build read)', () => {
@@ -125,5 +144,10 @@ describe('signed candidateBase multiplier', () => {
     expect(candidateDirection('allied_shared_recovery', { relationshipType: 'allied' }, {})).toBe('de_escalation');
     // unknown ⇒ neutral (cannot churn legacy)
     expect(candidateDirection('some_unmapped_drift', { relationshipType: 'neutral' }, {})).toBe('neutral');
+    // the trade-leverage pair classifies by documented intent (neither matched any
+    // hint before, so the signed salience adjustment silently never fired):
+    // an embargo weaponizes the tie; coercion is the supplier's ALTERNATIVE to war.
+    expect(candidateDirection('trade_embargo_collapse', { relationshipType: 'trade_partner' }, {})).toBe('escalation');
+    expect(candidateDirection('trade_dependency_coercion', { relationshipType: 'trade_partner' }, {})).toBe('de_escalation');
   });
 });

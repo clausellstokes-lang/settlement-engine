@@ -242,7 +242,7 @@ function factionIdFromName(name) {
  *
  *   recalculateFactionRelationships(settlement, { type: 'PLAGUE' }, { archetype: 'plague' })
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} event              { type, targetId?, factionImpactArchetype?, … }
  * @param {{ archetype?: string, targetNpc?: any }} [options]
  * @returns {Array<Object>} Updates.

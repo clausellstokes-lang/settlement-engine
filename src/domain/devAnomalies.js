@@ -34,7 +34,7 @@ export const ANOMALY_TYPES = Object.freeze([
 
 // ── Detectors ────────────────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectFactionInstitutionRefs(settlement) {
   const out = [];
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
@@ -59,7 +59,7 @@ function detectFactionInstitutionRefs(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectChainMissingProcessors(settlement) {
   const out = [];
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
@@ -83,7 +83,7 @@ function detectChainMissingProcessors(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectStressorUnconsumed(settlement) {
   // A stressor is "consumed" if there's a matching active condition,
   // threat, or causal-state contributor referencing it. We do a coarse
@@ -116,7 +116,7 @@ function detectStressorUnconsumed(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectNpcFactionRefs(settlement) {
   const out = [];
   const factions = settlement.powerStructure?.factions || [];
@@ -142,7 +142,7 @@ function detectNpcFactionRefs(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectTraceMissingFields(settlement) {
   const out = [];
   const traces = Array.isArray(settlement.simulationTrace) ? settlement.simulationTrace : [];
@@ -167,7 +167,7 @@ function detectTraceMissingFields(settlement) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function detectDevAnomalies(settlement) {
   if (!settlement) return { anomalies: [], count: 0 };
   const anomalies = [
@@ -181,7 +181,7 @@ export function detectDevAnomalies(settlement) {
 }
 
 /** Group anomalies by severity for dashboard tiles.
- *  @param {any} settlement */
+ *  @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function anomalyBreakdown(settlement) {
   /** @type {Record<string, number>} */
   const out = { info: 0, warning: 0, error: 0, total: 0 };

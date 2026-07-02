@@ -13,9 +13,10 @@
  *               state is observable via WorldMap's local saving flag)
  *
  * The "dirty" state derives from comparing the live mapState to the
- * campaign's persisted mapState (deep-equal on placements/labels). A
- * cheap fingerprint check (Object.keys lengths + JSON length) is good
- * enough; the user rarely cares about precise diff.
+ * campaign's persisted mapState via the shared content-aware
+ * mapFingerprint (placement coords/ids + annotation content), so a
+ * drag-move or a label rename is caught — a count-only key would miss
+ * both and leave the chip stuck on "Saved".
  *
  * Self-gated on activeCampaignId. When there is no active campaign, the
  * chip renders nothing — the save target is undefined, so a save-status
@@ -25,6 +26,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store';
+import { mapFingerprint } from '../../hooks/useMapAutosave.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
@@ -46,17 +48,6 @@ function formatRelative(savedAt) {
   return `${d}d ago`;
 }
 
-/** Cheap fingerprint of the parts of mapState the user can edit. Used
- *  to spot "dirty" without a deep equality on every render. */
-function fingerprint(s) {
-  if (!s) return '';
-  const placements = Object.keys(s.placements || {}).sort().join(',');
-  const labelCount = (s.labels?.length || 0);
-  const markerCount = (s.markers?.length || 0);
-  const forestCount = (s.forests?.length || 0);
-  return `${placements}|${labelCount}|${markerCount}|${forestCount}`;
-}
-
 export default function AutoSaveChip({ saving = false }) {
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
@@ -74,7 +65,7 @@ export default function AutoSaveChip({ saving = false }) {
 
   const dirty = useMemo(() => {
     if (!campaign?.mapState) return false;
-    return fingerprint(liveMapState) !== fingerprint(campaign.mapState);
+    return mapFingerprint(liveMapState) !== mapFingerprint(campaign.mapState);
   }, [liveMapState, campaign?.mapState]);
 
   if (!activeCampaignId || !campaign) return null;

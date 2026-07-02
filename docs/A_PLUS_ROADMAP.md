@@ -1,5 +1,7 @@
 # SettlementForge — The A+ Program
 
+> **⚠️ HISTORICAL (point-in-time plan) — do NOT read as current state.** Many items here have since been addressed on `master`. Code is the source of truth; see [docs/README.md](README.md) for the CANONICAL-vs-HISTORICAL index and the precedence rule (code > canonical > historical).
+
 > **Authored 2026-06-16.** An exhaustive, prescriptive path to take every subsystem to A+, derived from the
 > fresh-eyes evaluation (see [`RISK_REGISTER.md`](./RISK_REGISTER.md) for current grades + open risks and
 > [`PRODUCT_COHERENCE.md`](./PRODUCT_COHERENCE.md) for the UX model). Every step names the concrete change

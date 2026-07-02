@@ -3,7 +3,7 @@
  *
  * Pins:
  *   - SYSTEM_VARIABLES catalog stability (the 14 names).
- *   - causalBand boundaries (surplus ≥75, adequate ≥55, strained ≥35,
+ *   - causalBand boundaries (surplus ≥75, adequate ≥50, strained ≥30,
  *     critical ≥15, else collapsed).
  *   - defaultScoreForCausalBand round-trips through causalBand.
  *   - deriveSystemVariable produces canonical SystemVariable shape.

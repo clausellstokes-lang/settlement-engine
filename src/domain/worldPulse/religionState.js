@@ -135,7 +135,7 @@ function standingFor(share, prev) {
  * `primaryDeitySnapshot` (the PATRON, at 100% in its niche) and any DM-imposed
  * `cultDeitySnapshots` (each entering at cult standing in its own free niche,
  * capped by tier capacity) when no state exists yet.
- * @param {any} state @param {any} settlement @param {string} tier
+ * @param {any} state @param {import('../settlement.schema.js').SimSettlement} settlement @param {string} tier
  */
 export function ensureReligionState(state, settlement, tier) {
   const capacity = capacityForTier(tier);
@@ -486,7 +486,7 @@ export function patronSnapshot(state) {
  * divine-mandate coupling read. patronSecurity is LEGITIMACY-driven (this branch's
  * rightful-claim axis, which folds in the compromise chain), blended with share
  * dominance and damped when contested. Identity no-op when the settlement has no state.
- * @param {any} settlement @param {Record<string, any>} religionStates @param {string} saveId
+ * @param {import('../settlement.schema.js').SimSettlement} settlement @param {Record<string, any>} religionStates @param {string} saveId
  */
 export function projectReligionStateOntoSettlement(settlement, religionStates, saveId) {
   const state = religionStates?.[String(saveId)];
@@ -554,7 +554,7 @@ function mandateAlignmentFit(deity, government) {
  * contested, or discredited one ERODES it (feeding coups). The mandate pulls toward a
  * bounded TARGET, so a persistently-contested patron WITHDRAWS its prop rather than crashing
  * the throne to zero — other forces still move legitimacy freely. Identity no-op for
- * non-royal/theocratic governments or absent faithProfile. @param {any} settlement
+ * non-royal/theocratic governments or absent faithProfile. @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function applyDivineMandate(settlement) {
   const profile = settlement?.config?.faithProfile;
@@ -574,7 +574,7 @@ export function applyDivineMandate(settlement) {
   return { ...settlement, powerStructure: { ...settlement.powerStructure, publicLegitimacy: { ...leg, score: nextScore } } };
 }
 
-/** Player-safe display read-model for the divine mandate (the faith panel). @param {any} settlement @returns {{ propping: boolean, phrase: string } | null} */
+/** Player-safe display read-model for the divine mandate (the faith panel). @param {import('../settlement.schema.js').SimSettlement} settlement @returns {{ propping: boolean, phrase: string } | null} */
 export function divineMandateStatus(settlement) {
   const profile = settlement?.config?.faithProfile;
   if (!profile) return null;

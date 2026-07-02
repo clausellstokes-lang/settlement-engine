@@ -191,7 +191,7 @@ function propagationHintsFor(relType) {
 
 // ── Single-link derivation ───────────────────────────────────────────────
 
-/** @param {any} rawNeighbour @param {any} settlement */
+/** @param {any} rawNeighbour @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function deriveRegionalLink(rawNeighbour, settlement) {
   if (!rawNeighbour) return null;
   const otherId = neighbourId(rawNeighbour);
@@ -219,7 +219,7 @@ export function deriveRegionalLink(rawNeighbour, settlement) {
 /**
  * Derive the full regional graph centered on this settlement.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object} RegionalGraph
  */
 export function deriveRegionalGraph(settlement) {
@@ -249,7 +249,7 @@ export function supportedRelationshipTypes() {
   return [...REGIONAL_RELATIONSHIP_TYPES];
 }
 
-/** Group links by relationship type. @param {any} settlement */
+/** Group links by relationship type. @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function regionalBreakdown(settlement) {
   /** @type {Record<string, number>} */
   const out = {};
@@ -261,7 +261,7 @@ export function regionalBreakdown(settlement) {
   return out;
 }
 
-/** Human-readable lines. @param {any} settlement */
+/** Human-readable lines. @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function summarizeRegional(settlement) {
   const g = /** @type {any} */ (deriveRegionalGraph(settlement));
   if (g.links.length === 0) return ['No structured regional neighbours.'];

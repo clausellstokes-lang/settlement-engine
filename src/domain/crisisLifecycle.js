@@ -164,10 +164,16 @@ export function crisisOnset({ settlement: s, event }) {
   // the object(s) into the working list and write the merged array back to
   // EVERY key that held one; a settlement with no container at all gets the
   // editor's canonical `stress` array.
-  const arrayKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
+  const arrayKeys = ['stressors', 'stress', 'stresses'].filter(k => Array.isArray(s[k]));
+  const arrayKey = arrayKeys[0];
   const objectKeys = arrayKey ? [] : ['stressors', 'stress', 'stresses']
     .filter(k => s[k] && typeof s[k] === 'object');
-  const writeKeys = arrayKey ? [arrayKey] : objectKeys.length ? objectKeys : ['stress'];
+  // Write the merged array back to EVERY container that already holds one, not
+  // just the first: after a first onset a pipeline settlement's stress + stressors
+  // both hold the same array, and writing only arrayKey on a second onset left the
+  // sibling (`stress`) stale — a real stress-vs-stressors divergence. They agreed
+  // going in (canonStressors reads stressors first), so keeping them in sync is safe.
+  const writeKeys = arrayKey ? arrayKeys : objectKeys.length ? objectKeys : ['stress'];
   // Lift by CONTENT identity, not reference: a round-tripped settlement holds
   // content-identical twins under stress + stressors, and the old Set dedupe
   // kept both — upserting a DUPLICATE entry into every container key.
@@ -449,8 +455,8 @@ export function crisisResolve({ settlement, event }) {
  * record follows (status easing + the world_pulse receipt survive
  * regeneration).
  *
- * @param {any} settlement   the origin settlement
- * @param {any} twin         the resolved roaming stressor record
+ * @param {import('./settlement.schema.js').SimSettlement} settlement   the origin settlement
+ * @param {import('./settlement.schema.js').SimStressor} twin         the resolved roaming stressor record
  * @returns {Object} new settlement (same reference when nothing matched)
  */
 export function resolveCrisisLocally(settlement, twin) {

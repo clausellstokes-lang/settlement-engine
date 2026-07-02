@@ -73,6 +73,13 @@ let db;
 const asUser = (sql) => db.exec(`set role nosuperuser; set test.uid = '${UID}'; ${sql}`);
 const asSuper = (sql) => db.exec(`reset role; ${sql}`);
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('account identity — 075 generation + RLS + external_name + 076 resolve (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

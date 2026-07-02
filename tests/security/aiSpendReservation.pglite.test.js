@@ -62,6 +62,13 @@ const cleanup = async (retentionSeconds) =>
 const outstandingCount = async () =>
   Number((await scalar('select count(*)::int as c from public.ai_spend_reservations')).c);
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(haveMigration).toBe(true);
+});
+
 describe.runIf(haveMigration)('ai spend reservation — real SQL (pglite)', () => {
   beforeAll(async () => {
     db = await new PGlite();

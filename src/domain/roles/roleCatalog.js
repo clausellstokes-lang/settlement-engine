@@ -41,7 +41,7 @@ const INFLUENCE_BY_IMPORTANCE = Object.freeze({ pillar: 85, key: 60, notable: 35
 
 /**
  * Roles available at a given institution (derived from its kind).
- * @param {any} institution
+ * @param {import('../settlement.schema.js').SimInstitution} institution
  */
 export function rolesForInstitution(institution) {
   if (!institution) return [];
@@ -51,7 +51,7 @@ export function rolesForInstitution(institution) {
 
 /**
  * Roles (seats) available within a faction.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  */
 export function rolesForFaction(faction) {
   const seats = faction?.internalSeats && Object.keys(faction.internalSeats).length

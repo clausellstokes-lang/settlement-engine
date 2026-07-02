@@ -319,7 +319,7 @@ const ENTITY_ARRAY_PATHS = Object.freeze([
 ]);
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} segments
  */
 function readNestedArray(settlement, segments) {
@@ -342,7 +342,7 @@ function readNestedArray(settlement, segments) {
  * `kind` is the singular entity type ('npc' / 'faction' / 'institution'
  * / 'historicalEvent' / 'currentTension' / 'hook' / 'plotHook' /
  * 'condition' / 'supplyChain' / 'settlement').
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function walkUserEdits(settlement) {
   const out = /** @type {any[]} */ ([]);
@@ -394,7 +394,7 @@ export function walkUserEdits(settlement) {
 
 /**
  * Total count of user edits anywhere in the settlement tree.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function countSettlementEdits(settlement) {
   return walkUserEdits(settlement).length;
@@ -403,7 +403,7 @@ export function countSettlementEdits(settlement) {
 /**
  * True if any field anywhere in the settlement is user-edited. Powers
  * the "Edited" badge on the dossier header.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function isSettlementEdited(settlement) {
   return countSettlementEdits(settlement) > 0;
@@ -413,7 +413,7 @@ export function isSettlementEdited(settlement) {
  * A compact `[ "kind: label > path" ]` summary suitable for tooltips
  * and audit logs. Entity labels default to the entity's `name` /
  * `faction` / index when no name is present.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeUserEdits(settlement) {
   const tuples = walkUserEdits(settlement);

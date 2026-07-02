@@ -90,7 +90,7 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {string} type
  * @param {string} id
  * @param {string} action
@@ -100,6 +100,13 @@ function manualMutate(settlement, type, id, action) {
   // don't observe mutation of the input.
   const next = { ...settlement };
 
+  // Track whether any entity actually matched and mutated. An unmatched id,
+  // an unhandled action ('replace' has no branch below), or an unsupported
+  // type must return the ORIGINAL reference so counterfactual()'s identity
+  // guard fires and surfaces the "no counterfactual path" warning instead of
+  // silently reporting empty deltas.
+  let changed = false;
+
   if (type === 'faction') {
     const factionId = String(id || '');
     const slug = factionId.startsWith('faction.') ? factionId.slice('faction.'.length) : factionId;
@@ -108,12 +115,15 @@ function manualMutate(settlement, type, id, action) {
       const matched = f?.id === factionId || fSlug === slug;
       if (!matched) return f;
       const power = typeof f?.power === 'number' ? f.power : 0;
-      let nextPower = power;
+      let /** @type {number} */ nextPower;
       if (action === 'remove')      nextPower = 0;
-      if (action === 'weaken')      nextPower = Math.max(0, power - 30);
-      if (action === 'strengthen')  nextPower = Math.min(100, power + 20);
+      else if (action === 'weaken')      nextPower = Math.max(0, power - 30);
+      else if (action === 'strengthen')  nextPower = Math.min(100, power + 20);
+      else return f; // unhandled action (e.g. 'replace') — leave untouched
+      changed = true;
       return { ...f, power: nextPower, _counterfactual: { previousPower: power, action } };
     });
+    if (!changed) return settlement;
     next.powerStructure = {
       ...(settlement.powerStructure || {}),
       factions,
@@ -130,11 +140,14 @@ function manualMutate(settlement, type, id, action) {
           action === 'remove'     ? 'collapsing' :
           action === 'weaken'     ? 'scarce'     :
           action === 'strengthen' ? 'operational':
-                                    c?.status;
+                                    undefined;
+        if (nextStatus === undefined) return c; // unhandled action — leave untouched
+        changed = true;
         return { ...c, status: nextStatus, _counterfactual: { previousStatus: c?.status, action } };
       }
       return c;
     });
+    if (!changed) return settlement;
     next.economicState = {
       ...(settlement.economicState || {}),
       activeChains,
@@ -142,7 +155,9 @@ function manualMutate(settlement, type, id, action) {
     return next;
   }
 
-  return next;
+  // Unsupported type (no event pipeline path either) — return the original
+  // reference so the caller's identity guard reports the missing path.
+  return settlement;
 }
 
 // ── Composer ─────────────────────────────────────────────────────────────
@@ -263,7 +278,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];

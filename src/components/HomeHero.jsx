@@ -29,11 +29,10 @@ import {
   anonAtCap, anonGensRemaining, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
-import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
-import { GOLD, GOLD_TXT, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, DANGER_BORDER, LANDING_MAX, swatch } from './theme.js';
+import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, DANGER_BORDER, LANDING_MAX, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -179,62 +178,26 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           gets a short greeting + a "Pick a size, hit Generate" prompt.
       */}
       {isAnon ? (
-        flag('heroV2') ? (
-          // Two-voice hero rewrite. Anti-AI line as H1
-          // (worldbuilder hook); italic deck translates for the new DM
-          // ("the pieces explain each other"). Eyebrow + footer-signin +
-          // anti-AI quote block all removed — the H1 IS the anti-AI line.
-          <>
-            <h1 style={{
-              margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: FS['32'], color: INK, lineHeight: 1.15,
-              letterSpacing: '-0.005em',
-            }}>
-              {t('hero.v2.headline')}<br />
-              <em style={{ color: GOLD_DEEP }}>{t('hero.v2.headlineAccent')}</em>
-            </h1>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 520,
-              fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
-            }}>
-              {t('hero.v2.deck')}
-            </p>
-          </>
-        ) : (
-          <>
-            <div style={{
-              fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: GOLD_DEEP,
-              marginBottom: SP.xs,
-            }}>
-              {t('hero.eyebrow')}
-            </div>
-            <h1 style={{
-              margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: FS['32'], color: INK, lineHeight: 1.15,
-            }}>
-              {t('hero.title')}
-            </h1>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 520,
-              fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
-            }}>
-              {t('hero.subtitle')}
-            </p>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 480,
-              padding: `${SP.xs}px ${SP.md}px`,
-              borderLeft: `2px solid ${GOLD}`,
-              fontFamily: sans, fontSize: FS.sm, color: swatch['#5A4A2A'],
-              lineHeight: 1.5, textAlign: 'left',
-              fontStyle: 'italic',
-            }}>
-              {t('hero.antiAi')}
-            </p>
-          </>
-        )
+        // Two-voice hero (GA — heroV2 promoted + inlined). Anti-AI line as H1
+        // (worldbuilder hook); italic deck translates for the new DM. The old
+        // eyebrow + separate anti-AI quote block were dropped: the H1 IS the anti-AI line.
+        <>
+          <h1 style={{
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: FS['32'], color: INK, lineHeight: 1.15,
+            letterSpacing: '-0.005em',
+          }}>
+            {t('hero.v2.headline')}<br />
+            <em style={{ color: GOLD_DEEP }}>{t('hero.v2.headlineAccent')}</em>
+          </h1>
+          <p style={{
+            margin: `${SP.md}px auto 0`, maxWidth: 520,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.lg, color: BODY, lineHeight: 1.55,
+          }}>
+            {t('hero.v2.deck')}
+          </p>
+        </>
       ) : (
         // No eyebrow on the signed-in hero. WelcomeBackCard (when it mounts
         // directly above) carries an eyebrow+serif-title pair; a matching
@@ -353,11 +316,9 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             >
               {generating
                 ? 'Forging…'
-                : flag('heroV2') && isAnon
+                : isAnon
                   ? t('hero.v2.ctaTemplate', { tier: t(`generate.sizes.${pickedSize}`).toLowerCase() })
-                  : isAnon
-                    ? t('hero.cta')
-                    : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
+                  : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
             </Button>
             {/* Plain-language failure strip (P10). Sits in the centered column so
                 it doesn't disturb the hero layout; the CTA above IS the retry. */}

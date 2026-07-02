@@ -25,8 +25,8 @@ const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
 ]);
 
 /**
- * @param {any} sourceSave
- * @param {any} targetSave
+ * @param {import('../settlement.schema.js').SimSettlement} sourceSave
+ * @param {import('../settlement.schema.js').SimSettlement} targetSave
  */
 function relationBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
@@ -42,8 +42,8 @@ function relationBetween(sourceSave, targetSave) {
 }
 
 /**
- * @param {any} sourceSave
- * @param {any} targetSave
+ * @param {import('../settlement.schema.js').SimSettlement} sourceSave
+ * @param {import('../settlement.schema.js').SimSettlement} targetSave
  */
 function linkBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
@@ -163,8 +163,8 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
 }
 
 /**
- * @param {any} sourceSave
- * @param {any} targetSave
+ * @param {import('../settlement.schema.js').SimSettlement} sourceSave
+ * @param {import('../settlement.schema.js').SimSettlement} targetSave
  * @param {any} source
  * @param {any} target
  */
@@ -268,7 +268,7 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
  * offered healing service.
  */
 /**
- * @param {any} save
+ * @param {import('../settlement.schema.js').SimSettlement} save
  */
 function healingCapacityOf(save) {
   const settlement = settlementFromSave(save) || {};
@@ -303,8 +303,8 @@ function tierRankOf(tier) {
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
  */
 /**
- * @param {any} sourceSave
- * @param {any} targetSave
+ * @param {import('../settlement.schema.js').SimSettlement} sourceSave
+ * @param {import('../settlement.schema.js').SimSettlement} targetSave
  * @param {any} [options]
  */
 export function discoverDependencyCandidates(sourceSave, targetSave, options = {}) {

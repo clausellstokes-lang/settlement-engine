@@ -67,7 +67,7 @@ const FACTION_TO_INSTITUTION_DIM = {
  * the source entity. This function only adds the *propagated* effects.
  *
  * @param {Object} args
- * @param {any} args.settlement       must have .institutions[], .factions[], .npcs[]
+ * @param {import('../settlement.schema.js').SimSettlement} args.settlement       must have .institutions[], .factions[], .npcs[]
  * @param {{ entityType:'institution'|'faction'|'npc', entityId:string, impairment:Impairment }} args.origin
  * @param {Object} [args.opts]
  * @param {number} [args.opts.damping=0.6]
@@ -196,7 +196,7 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
  *
  * Relationship strength is derived from explicit fields when present
  * (e.g. faction.controlStrength) or defaulted by category match.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} node
  */
 function findLinkedEntities(settlement, node) {
@@ -262,7 +262,7 @@ function mapDimension(fromType, toType, dim, sourceNpc) {
  * Estimate the strength of a faction's link to an institution. Returns
  * 0 if no link, 0.0–1.0 otherwise. Prefers explicit fields; falls back
  * to category match.
- * @param {any} faction
+ * @param {import('../settlement.schema.js').SimFaction} faction
  * @param {any} instId
  */
 function factionInstitutionStrength(faction, instId) {
@@ -280,7 +280,7 @@ function factionInstitutionStrength(faction, instId) {
   return 0;
 }
 
-/** @param {any} npc */
+/** @param {import('../settlement.schema.js').SimNpc} npc */
 function importanceWeight(npc) {
   switch (npc?.importance) {
     case 'pillar': return 1.0;
@@ -292,7 +292,7 @@ function importanceWeight(npc) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} type
  * @param {any} id
  * @param {any} impairment
@@ -335,11 +335,11 @@ const factionId = (/** @type {any} */ f) => f?.id || f?.faction || f?.name || ''
 const npcId     = (/** @type {any} */ n) => n?.id || n?.name || '';
 /**
  * Normalize the two faction-storage shapes the codebase ships with.
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  */
 const factionsList = (s) => s?.powerStructure?.factions || s?.factions || [];
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} type
  * @param {any} id
  */
@@ -356,7 +356,7 @@ function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
  * second cause path can compound onto it. Matches both type and cause so we
  * only ever fold paths from the SAME originating event together (distinct
  * events stack independently via withImpairment, as before).
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {string} type
  * @param {string} id
  * @param {string} dimension

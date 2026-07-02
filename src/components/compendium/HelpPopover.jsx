@@ -11,9 +11,7 @@
  * inline-help on). Falls back to a generic "see Compendium" link when
  * the topic isn't in the lookup.
  *
- * Self-gates on flag('compendiumInlineHelp'). When the flag is off the
- * component renders nothing — drop-in to any control without breaking
- * the visual layout (the `?` only appears under the flag).
+ * Inline help is GA: the `?` affordance is a drop-in on any control.
  *
  * Click-outside closes; Esc closes; keyboard-accessible.
  */
@@ -22,7 +20,6 @@ import { useEffect, useRef, useState } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { FS, ELEV, PARCH_100, INK, GOLD, GOLD_DEEP, swatch, sans, serif_ } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
-import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
 const COMPENDIUM_HINTS = Object.freeze({
@@ -64,7 +61,6 @@ const COMPENDIUM_HINTS = Object.freeze({
 });
 
 export default function HelpPopover({ topic, label = 'Help' }) {
-  const enabled = flag('compendiumInlineHelp');
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -83,7 +79,6 @@ export default function HelpPopover({ topic, label = 'Help' }) {
     };
   }, [open]);
 
-  if (!enabled) return null;
 
   const content = COMPENDIUM_HINTS[topic];
   if (!content) {

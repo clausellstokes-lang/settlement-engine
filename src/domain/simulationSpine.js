@@ -40,7 +40,7 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
-/** @param {any} power */
+/** @param {import('./settlement.schema.js').SimPowerStructure} power */
 function topFactionByPower(power) {
   if (!power || !Array.isArray(power.factions) || power.factions.length === 0) return null;
   return [...power.factions].sort((a, b) => (b.power || 0) - (a.power || 0))[0];
@@ -52,12 +52,24 @@ function lowercaseFirst(s) {
   return s.charAt(0).toLowerCase() + s.slice(1);
 }
 
+/**
+ * Label of an export entry — mirrors dossierViewModel.deriveTopExport /
+ * the PDF labelOfThing helper. Exports are strings or {good/name/label}
+ * objects; either way we want the display label.
+ * @param {any} item
+ */
+function exportLabel(item) {
+  if (!item) return null;
+  if (typeof item === 'string') return item;
+  return item.good || item.name || item.label || null;
+}
+
 // ── Per-line derivations ──────────────────────────────────────────────────
 // Each one returns either a non-empty string or null. The composer
 // (`deriveSimulationSpine`) substitutes a placeholder for null lines so
 // the spine is always seven entries.
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveExistsBecause(s) {
   // settlementReason is the canonical "founding cause" field; historical
   // character is a secondary one. Both are free prose.
@@ -76,21 +88,27 @@ function deriveExistsBecause(s) {
   return `A ${tier} took root here for reasons no one writes down.`;
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveSurvivesBy(s) {
-  // Strongest signal: top export from the economic state.
+  // Strongest signal: top export from the economic state. The generator writes
+  // `primaryExports` (an array of string|{good/name/label}); label-map the first
+  // entry the same way dossierViewModel.deriveTopExport does.
   const eco = s.economicState || s.economy || {};
-  const topExport = firstNonEmpty(eco.topExport, eco.primaryExport);
+  const exports = Array.isArray(eco.primaryExports) ? eco.primaryExports
+    : Array.isArray(eco.exports) ? eco.exports
+    : [];
+  const topExport = firstNonEmpty(exportLabel(exports[0]));
   if (topExport) return `Its livelihood rests on ${lowercaseFirst(topExport)}.`;
 
-  // Failing that, the prosperity band tells us how well it's doing.
-  const band = firstNonEmpty(eco.prosperityBand, eco.prospBand);
-  if (band) return `The economy runs on a ${band} footing, drawing on what the land yields.`;
+  // Failing that, the prosperity label tells us how well it's doing. The
+  // generator emits this on `eco.prosperity` (a string label).
+  const band = firstNonEmpty(eco.prosperity);
+  if (band) return `The economy runs on a ${lowercaseFirst(band)} footing, drawing on what the land yields.`;
 
   return 'Subsistence trade with neighbours and what the land offers.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveRuledBy(s) {
   const power = s.powerStructure || s.power;
   if (!power) return 'A loose informal authority no one questions yet.';
@@ -103,13 +121,15 @@ function deriveRuledBy(s) {
     return `${formal}.`;
   }
 
-  // Fall back to the highest-power faction.
+  // Fall back to the highest-power faction. Generator factions carry the
+  // label on `.faction`; legacy/test fixtures may use `.name`.
   const top = topFactionByPower(power);
-  if (top?.name) return `${top.name} holds nominal authority.`;
+  const topName = firstNonEmpty(top?.faction, top?.name);
+  if (topName) return `${topName} holds nominal authority.`;
   return 'Authority is contested and unclear.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveRealPower(s) {
   // "Real power" is interesting only when it differs from "ruled by."
   // We compare the highest-power faction against the governing name.
@@ -120,7 +140,10 @@ function deriveRealPower(s) {
   const governing = firstNonEmpty(power.governingName);
 
   if (!top) return null;
-  if (governing && top.name && governing.toLowerCase() === top.name.toLowerCase()) {
+  // Generator factions carry the label on `.faction`; legacy/test fixtures
+  // may use `.name`. Read whichever is present.
+  const topName = firstNonEmpty(top.faction, top.name);
+  if (governing && topName && governing.toLowerCase() === topName.toLowerCase()) {
     // Same. The spine entry becomes about legitimacy instead.
     const leg = power.publicLegitimacy?.label;
     if (leg && leg !== 'Endorsed') {
@@ -129,13 +152,13 @@ function deriveRealPower(s) {
     return 'Authority and power are aligned (for now).';
   }
 
-  if (top.name) {
-    return `${top.name} commands more practical influence than the formal authority does.`;
+  if (topName) {
+    return `${topName} commands more practical influence than the formal authority does.`;
   }
   return null;
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveStrainedBy(s) {
   const stressors = s.stressors || s.stress;
   // Stressors can be a string, an array of strings, or an array of objects.
@@ -156,7 +179,7 @@ function deriveStrainedBy(s) {
   return 'Nothing strains it at the moment.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function derivePeopleFear(s) {
   // Threats from defense profile.
   const threats = s.defenseProfile?.threats;
@@ -180,7 +203,7 @@ function derivePeopleFear(s) {
   return 'No widely-shared dread. Yet.';
 }
 
-/** @param {any} s */
+/** @param {import('./settlement.schema.js').SimSettlement} s */
 function deriveLikelyFuture(s) {
   // Active tensions imply trajectory.
   const tensions = s.history?.currentTensions;
@@ -213,7 +236,7 @@ function deriveLikelyFuture(s) {
  * every line either succeeds or substitutes a placeholder so consumers
  * never need to guard against null.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any} { existsBecause, survivesBy, ruledBy, realPower,
  *                     strainedBy, peopleFear, likelyFuture }
  */
@@ -248,7 +271,7 @@ export function deriveSimulationSpine(settlement) {
  * can be null today — it's deliberately omitted when authority and
  * real power are aligned).
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function simulationSpineRows(settlement) {
   const spine = deriveSimulationSpine(settlement);
   const rows = [

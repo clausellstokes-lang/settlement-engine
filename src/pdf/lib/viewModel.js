@@ -24,6 +24,7 @@
 import { flag } from '../../lib/flags.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import { canonExports } from '../../domain/canonicalAccessors.js';
 import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
   deriveDefenseReadiness, deriveArmedForces,
@@ -279,7 +280,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       },
       economy: {
         complexity: ec?.economicComplexity || null,
-        topExport: labelOfThing(ec?.primaryExports?.[0]),
+        topExport: labelOfThing(canonExports(s)[0]), // canonExports (not ec.primaryExports) — legacy-`exports`-safe, matches deriveTopExport
       },
       defense: {
         readiness: dp?.readiness?.label || null,

@@ -21,6 +21,7 @@ import { applyTierOutcomeToSettlement } from '../worldPulse/tierResourceDynamics
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
+import { institutionIsFoodAnchor } from '../institutionClassify.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 import {
@@ -33,7 +34,7 @@ import {
 // ── Institution mutations ──────────────────────────────────────────────────
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function destroySettlement(s, event) {
@@ -54,24 +55,22 @@ function destroySettlement(s, event) {
 // A FOOD ANCHOR is the load-bearing food infrastructure the food_anchor_lost
 // template names (granary, mill, fishery) — losing one is a settlement-level food
 // crisis, not just a closed shop. Sawmills/lumber mills cut wood, not flour.
-/** @param {any} inst */
-function isFoodAnchorInstitution(inst) {
-  const n = String(inst?.name || '').toLowerCase();
-  if (!n) return false;
-  // 'fisher|fishing' catches Fisher's landing + Fishing community (production)
-  // without matching Fish market / Fishmonger (retail — losing a shop is not a
-  // settlement-level food crisis).
-  if (/(granar|fisher|fishing|silo)/.test(n)) return true;
-  return n.includes('mill') && !n.includes('sawmill') && !n.includes('lumber');
-}
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
+// Id-first (rename-proof) food-anchor test. The name rule + its catalog-id twin
+// now live at the canonical join (institutionIsFoodAnchor in computeActiveChains,
+// alongside the other institutionMatches* joins); this local alias keeps the two
+// call sites below reading unchanged. Id-match === the old name rule for every
+// unrenamed catalog institution (byte-identical), but a DM-renamed-but-stamped
+// granary ("Old Pete's grain hoard") now stays a food anchor via its stamped id.
+const isFoodAnchorInstitution = institutionIsFoodAnchor;
 
 // Promote the food_anchor_lost condition when a food anchor is destroyed or
 // crippled. These archetypes had rich consumers (capacity, causal, daily life,
 // districts, threats) but NO producer — destroying the granary updated faction
 // edges yet never raised the food crisis those consumers were waiting for.
 /**
- * @param {any} next
- * @param {any} inst
+ * @param {import('../settlement.schema.js').SimSettlement} next
+ * @param {import('../settlement.schema.js').SimInstitution} inst
  * @param {any} event
  * @param {any} severity
  */
@@ -98,7 +97,7 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
 // counts as broken. Used to gate the food-crisis wind-down so restoring an
 // UNRELATED impairment on a granary that remains physically broken does not
 // prematurely declare its food supply healthy again.
-/** @param {any} inst */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function hasBreakingCapacityImpairment(inst) {
   if (inst?.status === STATUS_REMOVED || inst?.status === 'destroyed') return true;
   return (inst?.impairments || []).some(
@@ -113,8 +112,8 @@ function hasBreakingCapacityImpairment(inst) {
 // id), so a food_anchor_lost crisis raised by a DIFFERENT anchor's loss survives.
 // No-op for a non-anchor institution (it never raised one).
 /**
- * @param {any} next
- * @param {any} inst
+ * @param {import('../settlement.schema.js').SimSettlement} next
+ * @param {import('../settlement.schema.js').SimInstitution} inst
  */
 function withoutFoodAnchorLostFor(next, inst) {
   if (!isFoodAnchorInstitution(inst)) return next;
@@ -130,7 +129,7 @@ function withoutFoodAnchorLostFor(next, inst) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function damageInstitution(s, event) {
@@ -153,7 +152,7 @@ function damageInstitution(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function removeInstitution(s, event) {
@@ -184,7 +183,7 @@ function removeInstitution(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function addInstitution(s, event) {
@@ -222,7 +221,7 @@ function addInstitution(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function impairInstitution(s, event) {
@@ -248,7 +247,7 @@ function impairInstitution(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function restoreInstitution(s, event) {
@@ -278,6 +277,7 @@ function restoreInstitution(s, event) {
 // The causeEventId of the most recently applied impairment (impairments append
 // in order, so the last entry is newest). Null when the entity carries none.
 /** @param {any} entity */
+// entity is an institution OR faction (union) — left as any.
 function latestImpairmentCause(entity) {
   const imps = Array.isArray(entity?.impairments) ? entity.impairments : [];
   if (!imps.length) return null;
@@ -287,7 +287,7 @@ function latestImpairmentCause(entity) {
 // ── Faction mutations ──────────────────────────────────────────────────────
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function impairFaction(s, event) {
@@ -308,7 +308,7 @@ function impairFaction(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function restoreFaction(s, event) {
@@ -330,7 +330,7 @@ function restoreFaction(s, event) {
  * power-structure rerun and seat logic see it.
  */
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function addFaction(s, event) {
@@ -378,7 +378,7 @@ function addFaction(s, event) {
 // ── NPC mutations ──────────────────────────────────────────────────────────
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function addNpc(s, event) {
@@ -403,7 +403,7 @@ function addNpc(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function killNpcMutation(s, event) {
@@ -411,7 +411,7 @@ function killNpcMutation(s, event) {
   if (!npc) return s;
   const importance = event.payload?.importance || npc.importance || inferImportance(npc);
   const enriched = { ...npc, importance };
-  const result = killNpc(enriched, event.id);
+  const result = killNpc(/** @type {import('../entities/npcs.js').NpcStructural} */ (enriched), event.id);
   let next = replaceNpc(s, npc, result.npc);
 
   // Apply the structural impairments to linked institutions and factions.
@@ -461,7 +461,7 @@ function killNpcMutation(s, event) {
 }
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function assignNpcMutation(s, event) {
@@ -481,9 +481,11 @@ function assignNpcMutation(s, event) {
   // Replace or insert the NPC record
   const list = s.npcs || [];
   const idx = list.findIndex((/** @type {any} */ n) => idOf(n) === idOf(npc));
+  const nextNpc = /** @type {import('../settlement.schema.js').SimNpc} */ (result.npc);
+  /** @type {import('../settlement.schema.js').SimSettlement} */
   let next = idx >= 0
-    ? { ...s, npcs: [...list.slice(0, idx), result.npc, ...list.slice(idx + 1)] }
-    : { ...s, npcs: [...list, result.npc] };
+    ? { ...s, npcs: [...list.slice(0, idx), nextNpc, ...list.slice(idx + 1)] }
+    : { ...s, npcs: [...list, nextNpc] };
 
   // Restore staffing impairments on the institution caused by prior
   // KILL_NPC events. Capacity-recovery factor scales by quality.
@@ -531,7 +533,7 @@ function assignNpcMutation(s, event) {
  * that entails. Reuses killNpcMutation under the hood.
  */
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function killLeaderMutation(s, event) {
@@ -551,7 +553,7 @@ function killLeaderMutation(s, event) {
  * institution exposure. A non-corrupt or non-NPC target is a no-op.
  */
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function exposeCorruption(s, event) {
@@ -567,7 +569,7 @@ function exposeCorruption(s, event) {
 // tied criminal + home institution/faction (shared organic path), then remove the
 // disgraced NPC and install a fresh successor in their seat.
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} npc
  * @param {any} event
  */
@@ -596,7 +598,7 @@ function exposeCorruptNpc(s, npc, event) {
 // corruption ties of NPCs bound to it: they separate from criminal activity.
 // No-op for a non-criminal institution (no NPC names it as a tie).
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} institutionName
  */
 function severCorruptionTiesTo(s, institutionName) {
@@ -620,7 +622,7 @@ function severCorruptionTiesTo(s, institutionName) {
 // so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
 // Covert by design: no public legitimacy impairment here (that is the exposure consequence).
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function imposeCorruption(s, event) {
@@ -690,7 +692,7 @@ const NPC_STANDING_FIELDS = Object.freeze(['importance', 'influence', 'structura
  * both refs; the composer only offers real same-faction pairs).
  */
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {any} event
  */
 function swapNpcStanding(s, event) {
@@ -753,7 +755,7 @@ function swapNpcStanding(s, event) {
  * never the store. A null/absent payload deity clears the assignment (returns
  * the settlement to dormant). No wall-clock field is written.
  *
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
  */
 function setPrimaryDeity(s, event) {
@@ -798,7 +800,7 @@ function setPrimaryDeity(s, event) {
  * no ref is given); an emptied list drops the key so a cult-free settlement is
  * structurally identical to one that never had a cult (the dormancy oracle).
  *
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
  */
 function imposeCult(s, event) {
@@ -843,7 +845,7 @@ function imposeCult(s, event) {
  * leaves over-tier ones as inactive RUINED remnants with their fates) and the tier +
  * institution history are byte-identical to an organic tier change. One tier per call; a
  * no-op at the cap (metropolis) or floor (thorp).
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @param {{ payload?: { direction?: string } }} event
  */
 function shiftTier(s, event) {

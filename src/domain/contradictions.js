@@ -75,7 +75,7 @@ function contradiction({ type, classification, description, explanation, consequ
 const OVERSIZED_PATTERN = /(cathedral|grand|college|conclave|fortress|citadel|palace|university)/i;
 const ENFORCEMENT_PATTERN = /(watch|garrison|barracks|militia|guard|constabulary|sheriff)/i;
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectOversizedInstitutions(settlement) {
   const tier = settlement.tier;
   if (tier !== 'village' && tier !== 'hamlet') return [];
@@ -98,7 +98,7 @@ function detectOversizedInstitutions(settlement) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function detectMissingEnforcement(settlement) {
   const tier = settlement.tier;
   if (tier !== 'town' && tier !== 'city') return [];
@@ -120,7 +120,7 @@ function detectMissingEnforcement(settlement) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  */
 function detectLegitimacyVsCrime(settlement, causal) {
@@ -148,7 +148,7 @@ function detectLegitimacyVsCrime(settlement, causal) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} profiles
  */
 function detectOrphanedFactionPower(settlement, profiles) {
@@ -184,7 +184,7 @@ function detectOrphanedFactionPower(settlement, profiles) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} causal
  * @param {any} capacities
  */
@@ -220,7 +220,7 @@ function detectSurplusButCritical(settlement, causal, capacities) {
 }
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any[]} threats
  * @param {any} capacities
  */
@@ -286,7 +286,7 @@ export function detectContradictions(settlement) {
 
 /**
  * Group by classification.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function contradictionBreakdown(settlement) {
   /** @type {Record<string, number>} */

@@ -594,7 +594,14 @@ export const createSettlementSlice = (set, get) => ({
         s.settlement.versionHistory = cappedVersionHistory([...(Array.isArray(s.settlement.versionHistory) ? s.settlement.versionHistory : []), snapshot]);
       });
     }
-    if (targetSaveId && persistedHistory) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
+    if (targetSaveId && persistedHistory) {
+      // Fire-and-forget: version-history snapshots are a non-critical local
+      // timeline (recordSnapshot is synchronous by contract, so it can't await).
+      // persistSaveUpdate never throws and surfaces cloud failures via the
+      // campaignSyncError banner; the .catch is defensive against a future
+      // contract change so a rejected persist can't become an unhandled rejection.
+      Promise.resolve(persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory })).catch(() => {});
+    }
     return snapshot;
   },
 
@@ -667,6 +674,24 @@ export const createSettlementSlice = (set, get) => ({
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
   pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
 
+  // ── CLOUD-WRITE SUPPRESSION INVARIANT (read before adding a write action) ──
+  // Atomicity of the change-queue flush and the world-pulse advance depends on a
+  // small set of store flags that any action issuing a CLOUD persist must honour:
+  //   • flushSuppressPersist  — set by the change-queue flush (changeQueueSlice);
+  //                             while true, an executor mutates local + the
+  //                             savedSettlements mirror but MUST NOT call its own
+  //                             persistSaveUpdate (the flush owns the one write).
+  //   • flushApplyLocalOnly   — set by the flush during a campaign-member replay
+  //                             (defers the regional ripple; see below).
+  //   • advanceInFlight       — set by campaignWorldPulseSlice before its first
+  //                             await; a re-entrant applyEvent is rejected/suppressed.
+  // RULE: any NEW action added to this slice that performs a cloud persist must
+  // consult get().flushSuppressPersist (and, if campaign-aware, advanceInFlight)
+  // exactly as applyEvent / renameSettlement / persistSaveUpdate / updateSavedSettlement
+  // already do — otherwise it can issue a mid-flush write and break the single-
+  // atomic-commit guarantee with no compile-time signal. This block is the one
+  // authoritative statement of the rule the flags below each restate locally.
+  //
   // Change-queue flush seam (R2 — Double-applying mitigation). When the
   // change-queue commits, it replays each order through the SAME executors
   // (applyEvent / renameSettlement) that run on a direct apply. Those
@@ -794,6 +819,20 @@ export const createSettlementSlice = (set, get) => ({
       throw genErr;
     }
     const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
+
+    // Sentinel re-gate — the pre-generation tier gate above deliberately lets
+    // 'random'/'custom' through (authSlice: the size isn't known until the
+    // engine resolves it) on the documented promise that the rolled tier is
+    // "re-gated at generation". Enforce that promise here: apply the same
+    // fail-closed check to the RESOLVED tier, so an anon (max 'town') can't
+    // mint a metropolis via Random or a typed custom population. Blocks
+    // BEFORE the state commit and the anon-cap spend, so a blocked roll
+    // costs nothing and the on-screen settlement is untouched.
+    if ((settType === 'random' || settType === 'custom') && !state.isTierAllowed(result?.tier)) {
+      console.warn(`Resolved tier "${result?.tier}" (from settType "${settType}") not allowed for current user tier.`);
+      return null;
+    }
+
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first
@@ -834,6 +873,11 @@ export const createSettlementSlice = (set, get) => ({
         state.whatIfPreview = null;
         state.pendingChange = null;
         state.pendingPreview = null;
+        // Queued inline edits target the settlement they were staged
+        // against (npcIndex-based renames especially) — a regeneration
+        // mints a new identity, so committing them later would mutate the
+        // wrong town. Drop, don't carry.
+        state.pendingEditsQueue = [];
         state.pipelineHistory = pipelineHistory;
         // Arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
@@ -913,6 +957,9 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.settlement = settlement;
       state.activeSaveId = null;
+      // Identity swap (draft restore) — edits queued against the previous
+      // settlement must not commit against this one.
+      state.pendingEditsQueue = [];
     }),
 
   clearSettlement: () =>
@@ -923,6 +970,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastCtx = null;
       state.whatIfPreview = null;
       state.pendingChange = null;
+      state.pendingEditsQueue = [];
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
@@ -2372,6 +2420,9 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
+    // Edits queued against the previously-open settlement must not survive
+    // a settlement switch — a stale rename would commit against this save.
+    state.pendingEditsQueue = [];
     // Reset the FULL AI session from this save's aiData blob, not just
     // aiSettlement. Previously only aiSettlement was set here, so callers that
     // open a save via hydrateFromSave alone (e.g. the deity-from-map picker)

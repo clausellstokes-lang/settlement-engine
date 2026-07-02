@@ -80,16 +80,32 @@ function mapStrings(value, fn) {
 }
 
 /**
+ * A single "word character" for boundary purposes: any Unicode letter, number,
+ * combining mark, or underscore. We can't use `\b` here — it's ASCII-only, so a
+ * name that starts or ends with a non-ASCII letter (Éowyn, José, Zoë) sits
+ * between two characters `\b` both consider "non-word", and never matches at
+ * all. Instead we assert the name isn't flanked by a word character via
+ * Unicode-aware lookarounds under the `u` flag.
+ */
+const WORD_CHAR = '[\\p{L}\\p{N}\\p{M}_]';
+
+/**
  * Return a copy of `text` with whole-word matches of `oldName` replaced by
- * `newName`. The word-boundary check means renaming "Aldric" doesn't also
- * rewrite "Aldric's" → wait, it does. JavaScript `\b` handles apostrophes
- * correctly (apostrophe is a non-word character, so `\bAldric\b` matches
- * the "Aldric" in "Aldric's"). Good — possessives get rewritten too.
+ * `newName`. "Whole word" means the match isn't glued to an adjacent word
+ * character on either side, so:
+ *   - "Ruskovia" is NOT rewritten when renaming "Rusk" (trailing 'o'),
+ *   - "Aldric's" IS rewritten (apostrophe is not a word character),
+ *   - "Éowyn" / "José" / "Zoë" rename correctly (Unicode-aware, unlike `\b`).
+ * `newName` is inserted verbatim (function-form replacement), so `$`-sequences
+ * in a user-supplied name aren't interpreted as replacement patterns.
  */
 function substituteWholeWord(text, oldName, newName) {
   if (!oldName || oldName === newName) return text;
-  const re = new RegExp(`\\b${escapeRegex(oldName)}\\b`, 'g');
-  return text.replace(re, newName);
+  const re = new RegExp(
+    `(?<!${WORD_CHAR})${escapeRegex(oldName)}(?!${WORD_CHAR})`,
+    'gu',
+  );
+  return text.replace(re, () => newName);
 }
 
 /**

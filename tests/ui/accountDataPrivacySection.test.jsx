@@ -104,6 +104,30 @@ describe('AccountDataPrivacySection — bulk content deletion', () => {
     fireEvent.click(screen.getByText('Yes, delete all'));
     await waitFor(() => expect(onDeleteAllSettlements).toHaveBeenCalledTimes(1));
   });
+
+  it('surfaces the error when the wipe handler rejects (server delete failed)', async () => {
+    // AccountPage.handleDeleteAllSettlements throws when a server-side delete
+    // fails, so a partial wipe cannot report a clean success. The confirm panel
+    // must show that error and stay open for a retry.
+    const onDeleteAllSettlements = vi.fn().mockRejectedValue(
+      new Error('1 of 2 settlements could not be deleted from the server. They remain in your library – try again.')
+    );
+    render(
+      <AccountDataPrivacySection
+        auth={AUTH} settlementCount={2} campaignCount={1}
+        onDeleteAllSettlements={onDeleteAllSettlements}
+      />
+    );
+
+    fireEvent.click(screen.getByText('Delete all settlements (2)'));
+    fireEvent.click(screen.getByText('Yes, delete all'));
+
+    // The rejection is surfaced as an alert instead of silently finishing…
+    const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toMatch(/could not be deleted from the server/i);
+    // …and the confirm panel stays open so the user can retry.
+    expect(screen.getByText('Yes, delete all')).toBeTruthy();
+  });
 });
 
 describe('AccountDataPrivacySection — visibility prefs', () => {

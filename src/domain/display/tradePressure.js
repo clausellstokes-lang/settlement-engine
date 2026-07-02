@@ -92,7 +92,7 @@ export function saliencePhrase(v) {
  * @param {any} [args.worldState]
  * @param {number} [args.tick]
  * @param {(id:any)=>string} [args.nameFor]
- * @returns {{ phrase: string, restrains: boolean, critical: boolean, dependentName: string|null, supplierName: string|null } | null}
+ * @returns {{ phrase: string, restrains: boolean, critical: boolean, dependentId: any, supplierId: any, dependentName: string|null, supplierName: string|null } | null}
  */
 export function pairTradePressure({ aId, bId, regionalGraph, settlements, worldState = {}, tick, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
   if (aId == null || bId == null) return null;
@@ -105,6 +105,10 @@ export function pairTradePressure({ aId, bId, regionalGraph, settlements, worldS
     // costlier. Always true at/above the valuable gate (we filtered below it).
     restrains: true,
     critical: pair.critical === true,
+    // Raw ids so callers resolve the dependent/supplier ROLE by identity, not by
+    // comparing rendered display names (two settlements can render the same name).
+    dependentId: pair.critical ? (pair.dependentId ?? null) : null,
+    supplierId: pair.critical ? (pair.supplierId ?? null) : null,
     dependentName: pair.critical && pair.dependentId != null ? nameFor(pair.dependentId) : null,
     supplierName: pair.critical && pair.supplierId != null ? nameFor(pair.supplierId) : null,
   };
@@ -172,9 +176,10 @@ export function settlementTradePressure({ settlementId, regionalGraph, settlemen
     /** @type {'dependent'|'supplier'|'partner'} */
     let role = 'partner';
     if (pressure.critical) {
-      // The salience rollup names the dependent + supplier; map to THIS settlement.
-      if (pressure.dependentName === nameFor(id)) role = 'dependent';
-      else if (pressure.supplierName === nameFor(id)) role = 'supplier';
+      // The salience rollup carries the dependent + supplier ids; map to THIS
+      // settlement by id (never by rendered name — two settlements can share one).
+      if (String(pressure.dependentId) === id) role = 'dependent';
+      else if (String(pressure.supplierId) === id) role = 'supplier';
     }
     out.push({
       partnerName: nameFor(partnerId),

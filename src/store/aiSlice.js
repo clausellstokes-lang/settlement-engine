@@ -31,6 +31,34 @@ import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '..
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
 import { buildChronicleFeed, selectChronicleContext } from '../domain/dossier/chronicleFeed.js';
+import { flag } from '../lib/flags.js';
+import { realmResolveSignals, buildWarMoraleContext } from '../domain/display/warResolve.js';
+
+/**
+ * The compact war-morale grounding digest for a saved settlement, or null. Gated on the
+ * warEconomySurfacing flag (off ⇒ null ⇒ the AI request is byte-identical). Reads the live
+ * campaign that owns the save (worldState + regional graph + roster) so a besieged town's
+ * hope reflects its besiegers' real strength; a settlement in no campaign yields null.
+ * @param {any} state  the store state (get()).
+ * @param {any} saveId
+ */
+function warMoraleContextForSave(state, saveId) {
+  if (!flag('warEconomySurfacing')) return null;
+  const id = String(saveId);
+  const campaign = (state?.campaigns || []).find(c =>
+    Array.isArray(c?.settlementIds) && c.settlementIds.map(String).includes(id));
+  if (!campaign) return null;
+  const worldState = campaign.worldState || {};
+  const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+  const ids = new Set((campaign.settlementIds || []).map(String));
+  const roster = (state?.savedSettlements || []).filter(s => ids.has(String(s?.id ?? s?.settlement?.id)));
+  const nameOf = (rawId) => {
+    const e = roster.find(r => String(r?.id ?? r?.settlement?.id) === String(rawId));
+    return e?.name || e?.settlement?.name || String(rawId);
+  };
+  const signal = realmResolveSignals({ saves: roster, worldState, regionalGraph }).find(s => s.id === id);
+  return buildWarMoraleContext(signal, nameOf);
+}
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
@@ -405,11 +433,16 @@ export const createAiSlice = (set, get) => ({
       ? saveEntry.aiData.pinnedNpcs
       : [];
 
+    // War-morale grounding (flag-gated; null when off or the save is in no campaign ⇒ the
+    // request stays byte-identical). Computed once here where the live campaign is reachable.
+    const warMoraleContext = warMoraleContextForSave(get(), saveId);
+
     try {
       const { result, dailyLife, creditsRemaining, partialFailure, failedFields } =
         await generateNarrative('narrative', settlement, saveId, {
           pinnedNpcIds,
           aiGuidance,
+          warMoraleContext,
           chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
           onField(fieldName, value, error) {
             // Daily-life beats stream as `dailyLife.<beat>` because the

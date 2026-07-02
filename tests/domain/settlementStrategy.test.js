@@ -374,3 +374,84 @@ describe('C2 strategy chooser — integration through evaluateWorldPulseRules', 
     for (const c of strategyCandidates) expect(c.probability).toBe(1);
   });
 });
+
+describe('C2 strategy chooser — sue-for-peace steps DOWN the ladder from the ACTUAL edge label', () => {
+  // Regression pin: sue_for_peace used to hard-code fromType 'hostile' → toType
+  // 'cold_war' for ANY hostile-axis edge — which mislabeled the proposal AND
+  // *escalated* a mere rivalry into a cold war. It now reads the edge's actual
+  // label and winds it one rung down the same ladder the reactive levers use
+  // (hostile→cold_war, cold_war→rival, rival→trade_partner).
+  function drainedPair(relationshipType) {
+    const drained = save('strong', 'Ironhold', {
+      tier: 'city',
+      population: 45000,
+      activeConditions: [
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain' },
+        { archetype: 'war_drain', severity: 0.95, label: 'War drain 2' },
+      ],
+    });
+    const saves = [drained, weakSave('weak', 'Thornmere')];
+    const fixture = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType } },
+    };
+    return { saves, fixture };
+  }
+
+  function sweepForPeace(relationshipType) {
+    const { saves, fixture } = drainedPair(relationshipType);
+    const { snap, pIdx } = snapshotFor(strategyCampaign({}, fixture), saves);
+    for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']) {
+      const out = evaluateSettlementStrategyRules(snap, pIdx, { tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(seed) });
+      const peace = out.find(c => c.metadata.settlementId === 'strong' && c.candidateType === 'strategy_sue_for_peace');
+      if (peace) return peace;
+    }
+    return null;
+  }
+
+  test('a RIVAL edge de-escalates to trade_partner (detente) — never up to cold_war', () => {
+    const peace = sweepForPeace('rival');
+    expect(peace).toBeTruthy();
+    expect(peace.proposalPayload.fromType).toBe('rival');
+    expect(peace.proposalPayload.toType).toBe('trade_partner');
+  });
+
+  test('a COLD_WAR edge thaws to rival', () => {
+    const peace = sweepForPeace('cold_war');
+    expect(peace).toBeTruthy();
+    expect(peace.proposalPayload.fromType).toBe('cold_war');
+    expect(peace.proposalPayload.toType).toBe('rival');
+  });
+
+  test('a HOSTILE edge still winds down to cold_war (the original path, now correctly labeled)', () => {
+    const peace = sweepForPeace('hostile');
+    expect(peace).toBeTruthy();
+    expect(peace.proposalPayload.fromType).toBe('hostile');
+    expect(peace.proposalPayload.toType).toBe('cold_war');
+  });
+});
+
+describe('C2 strategy chooser — return_home carries the recall target', () => {
+  test('the recall decision is machine-readable (metadata.recallTargetId names the abandoned front)', () => {
+    const saves = [strongSave('strong', 'Ironhold'), weakSave('weak', 'Thornmere'), save('enemy', 'Foehold', { tier: 'city', population: 30000 })];
+    const fixture = {
+      settlementIds: ['strong', 'weak', 'enemy'],
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        { id: 'edge.enemy.strong', from: 'enemy', to: 'strong', relationshipType: 'hostile' },
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile' },
+        'edge.enemy.strong': { relationshipType: 'hostile' },
+      },
+      channels: [{ type: 'war_front', from: 'enemy', to: 'strong', status: 'confirmed' }],
+      extraState: { deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } } },
+    };
+    const { snap, pIdx } = snapshotFor(strategyCampaign({}, fixture), saves);
+    const out = evaluateSettlementStrategyRules(snap, pIdx, { tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG('recall') });
+    const recall = out.find(c => c.candidateType === 'strategy_return_home');
+    expect(recall).toBeTruthy();
+    expect(recall.metadata.recallTargetId).toBe('weak');
+  });
+});

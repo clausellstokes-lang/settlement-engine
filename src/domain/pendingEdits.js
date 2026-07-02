@@ -125,7 +125,7 @@ export function hasPending(queue) {
  * The preview is *coarse* — it summarizes counts and impact bands,
  * not a full re-simulation. A full re-sim is what `commit()` does.
  *
- * @param {any} settlement — live settlement (pre-edit state)
+ * @param {import('./settlement.schema.js').SimSettlement} settlement — live settlement (pre-edit state)
  * @param {any[]}  queue      — pending edits to preview
  * @returns {any} preview as documented above
  */

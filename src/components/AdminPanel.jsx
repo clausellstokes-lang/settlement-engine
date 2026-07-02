@@ -257,11 +257,18 @@ export default function AdminPanel({ onBack }) {
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [stats, setStats] = useState(null);
 
+  // Monotonic request token: every fetch bumps it and captures its own id, so a
+  // slow earlier response that resolves AFTER a newer one is dropped instead of
+  // painting a stale user list under a newer search box (out-of-order guard on
+  // an operator console with inline credit/role mutations).
+  const fetchSeqRef = useRef(0);
+
   // Fetch users via the audited admin-actions edge function. The search term is
   // passed explicitly (defaulting to the debounced value) so manual triggers can
   // fetch the live query without waiting for the debounce window.
   const fetchUsers = useCallback(async (searchTerm = debouncedQuery) => {
     if (!supabase) return;
+    const seq = ++fetchSeqRef.current;
     setUsersLoading(true);
     setUsersError(null);
     try {
@@ -277,6 +284,9 @@ export default function AdminPanel({ onBack }) {
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
+      // A newer fetch superseded this one while it was in flight — drop the
+      // stale payload rather than paint it over the current search's results.
+      if (seq !== fetchSeqRef.current) return;
       const list = Array.isArray(data?.users) ? data.users : [];
       setUsers(list);
 
@@ -287,11 +297,14 @@ export default function AdminPanel({ onBack }) {
       setStats({ total, premiumCount, totalCredits });
     } catch (e) {
       // P10: a failed load must read as an error with a path forward, not get
-      // mislabelled as an empty result ('No users found').
+      // mislabelled as an empty result ('No users found'). Skip if superseded.
+      if (seq !== fetchSeqRef.current) return;
       console.error('Failed to fetch users:', e);
       setUsersError(e?.message || 'Failed to load users.');
     } finally {
-      setUsersLoading(false);
+      // Only the latest fetch owns the loading flag; a stale one clearing it
+      // would flip the spinner off while the current fetch is still running.
+      if (seq === fetchSeqRef.current) setUsersLoading(false);
     }
   }, [debouncedQuery]);
 

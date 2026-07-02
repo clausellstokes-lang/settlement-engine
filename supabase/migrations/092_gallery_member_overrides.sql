@@ -110,6 +110,11 @@ create or replace function public._gallery_apply_member_overrides(
 $$;
 
 -- ── 5. get_gallery_dossier — fork 076, thread the column + per-member overrides ─
+-- This ADDS columns (gallery_importable, gallery_member_overrides) to the RETURNS
+-- TABLE shape. Postgres forbids changing a function's return type via CREATE OR
+-- REPLACE (42P13: "cannot change return type of existing function"), so DROP the
+-- prior (narrower) definition first. IF EXISTS keeps it a no-op on a fresh DB.
+drop function if exists public.get_gallery_dossier(text);
 create or replace function public.get_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
@@ -204,6 +209,10 @@ comment on function public.get_gallery_dossier(text) is
   'Public gallery detail read (092 — adds per-member overrides). Safe columns plus settlement data projected through the settlement reveal/sanitize choice AND per-NPC overrides (a member reveals only if its override or the settlement says so; the base goes DM-full when any member reveals, then non-revealed members are re-stripped), the gallery_importable + gallery_member_overrides flags, the chronicle, and live-resolved author_name.';
 
 -- ── 6. import_gallery_dossier — fork 048, apply per-member (reveal AND import) ──
+-- Same 42P13 guard as get_gallery_dossier above: drop the prior definition before
+-- recreating, since the RETURNS TABLE shape changes. Harmless no-op if the shape
+-- happens to be unchanged.
+drop function if exists public.import_gallery_dossier(text);
 create or replace function public.import_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,

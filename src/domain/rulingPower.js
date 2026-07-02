@@ -55,7 +55,7 @@ function round2(value) {
   return Math.round(value * 100) / 100;
 }
 
-/** @param {any} faction */
+/** @param {import('./settlement.schema.js').SimFaction} faction */
 function nameOf(faction) {
   return String(faction?.faction || faction?.name || '').trim();
 }
@@ -182,7 +182,7 @@ function byWeightDescThenName(a, b) {
  * amplified weight must match or beat the weakest challenger; a thinner
  * field always admits the incumbent (the pool is the top 3 by definition).
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {{ governing: Object|null,
  *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
  *            incumbent: { name:string|null, power:number, govMultiplier:number,
@@ -242,11 +242,12 @@ export function coupContenders(settlement) {
  * @param {{ random: () => number }} args.rng
  * @param {number} [args.severity]              coup severity at the verdict (0..1)
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
+ * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<any>, incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -267,7 +268,9 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // ruling-authority score nudges ±0.125 across its full range.
     const severityDrag = 1.15 - 0.4 * clamp01(severity);
     const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {any} */ (rulingAuthorityScore) - 50) / 400 : 0;
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj));
+    // warSentimentAdj (P2): 0 when the flag is off ⇒ byte-identical. A war turning sour
+    // (negative sentiment) lowers the seat's hold-chance; a sustainable one raises it.
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0)));
   }
 
   const roll = rng.random();
@@ -423,7 +426,9 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     if (f === winner) {
       return {
         ...f,
-        power: Math.round(num(f.power) + 6),
+        // Clamp to the 0-100 faction-power domain that coup odds + power-band
+        // computations assume; a 95-100 winner would otherwise land at 101-106.
+        power: Math.max(0, Math.min(100, Math.round(num(f.power) + 6))),
         modifiers: [...(f.modifiers || []), 'ascendant'],
       };
     }

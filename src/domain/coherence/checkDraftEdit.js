@@ -16,7 +16,7 @@ import { checkStructuralValidity } from '../../generators/structuralValidator.js
 /** @typedef {import('../types.js').CoherenceWarning} CoherenceWarning */
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {CoherenceWarning[]}
  */
 export function checkDraftEdit(settlement) {

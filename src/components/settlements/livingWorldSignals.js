@@ -187,10 +187,20 @@ export function settlementSignals({ settlement, settlementId, worldState = null,
   const status = id && worldState
     ? settlementWarStatus({ settlementId: id, worldState, regionalGraph })
     : null;
-  const occupied = !!status && status.besiegedBy.length > 0
-    && occupationOf(worldState, id);
-  const war = status
-    ? { besiegedBy: status.besiegedBy, besiegingTargets: status.besiegingTargets, occupied }
+  // Occupation is read off the persistent occupation ledger, NOT conjoined with
+  // an active siege. A regime-changed settlement stays in worldState.occupations
+  // across ticks even after its siege front is torn down (conquest deletes the
+  // war_front, so settlementWarStatus goes null), so gating occupation on an
+  // active siege would wrongly hide the "Occupied" pip for a settlement that is
+  // occupied but no longer besieged. Occupation therefore also OPENS the war
+  // model on its own when there is no live front.
+  const occupied = !!(id && worldState) && occupationOf(worldState, id);
+  const war = (status || occupied)
+    ? {
+        besiegedBy: status ? status.besiegedBy : [],
+        besiegingTargets: status ? status.besiegingTargets : [],
+        occupied,
+      }
     : null;
 
   // ── Change signal (P3: emphasize movement, not static state) ──────────────

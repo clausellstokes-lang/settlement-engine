@@ -151,6 +151,14 @@ function wrap(d,text,maxW,fontSize) {
 function truncate(text, maxChars) {
   return truncateAtWord(s(text), maxChars, '...');
 }
+// Culture lives on the RESOLVED config (settlement.config.culture, written by
+// assembleSettlement from effectiveConfig) — the generator never sets a
+// top-level `settlement.culture`. Reading the bare field left the Cultures stat,
+// the CULTURE column, and the digest culture pill silently blank. Prefer the
+// config, fall back to the legacy top-level in case an older/imported save
+// carried it there.
+const cultureOf = (st) => st?.config?.culture || st?.culture;
+
 // A silent `lines.slice(0, n)` hides that prose continues — keep at most
 // `maxLines` lines and mark the final kept line when the clamp actually cut.
 function clampLines(lines, maxLines) {
@@ -240,7 +248,7 @@ function buildCover(d, campaign, settlements) {
     tierCounts[tier] = (tierCounts[tier] || 0) + 1;
     totalPop += Number(save.settlement?.population) || 0;
     totalNPCs += (save.settlement?.npcs || []).length;
-    if (save.settlement?.culture) cultures.add(save.settlement.culture);
+    const c = cultureOf(save.settlement); if (c) cultures.add(c);
   }
 
   // Two-column stat grid
@@ -342,7 +350,7 @@ function buildIndex(d, campaignName, settlements, pageN) {
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
     d.text(truncate(st_.tier || '-', 14), ML + 65, y);
     d.text(String((Number(st_.population) || 0).toLocaleString()), ML + 95, y);
-    d.text(truncate(String(st_.culture || '-').replace(/_/g,' '), 20), ML + 118, y);
+    d.text(truncate(String(cultureOf(st_) || '-').replace(/_/g,' '), 20), ML + 118, y);
 
     d.setFont('helvetica','bold');
     st(d, links > 0 ? GOLD : MUTED);
@@ -621,7 +629,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
     const pops = (Number(st_.population) || 0).toLocaleString();
     const right1 = `${pops} pop`;
     const right2 = s(st_.tier || '');
-    const right3 = s(String(st_.culture || '').replace(/_/g,' '));
+    const right3 = s(String(cultureOf(st_) || '').replace(/_/g,' '));
     const pw1 = pill(right1);
     const pw2 = pill(right2);
     const pw3 = pill(right3);

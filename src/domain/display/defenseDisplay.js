@@ -79,7 +79,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
  * Classify the settlement's criminal structure from its institution names.
  * Returns { key, label, color, bg, note } or null when there is no organized
  * criminal infrastructure.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
@@ -100,7 +100,7 @@ export function deriveCriminalStructure(settlement) {
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of
  * { label, status, color, score|null, note }.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveSupportingCapabilities(settlement) {
   const r = settlement || {};
@@ -178,7 +178,7 @@ const READINESS_GATE_FOR = Object.freeze({
  * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
  * garrison pay at 60%") instead of leaving a silently lower bar.
  * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
@@ -223,7 +223,7 @@ const dedupByName = (arr) => [...new Map((arr || []).map(/** @param {any} m */ (
  * standing forces (garrison + militia + watch, de-duplicated by name),
  * contracted (mercenary), monster-response charter, and arcane defense. Each
  * entry is a force object { name, desc, source } from defenseProfile.institutions.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveArmedForces(settlement) {
   const inst = settlement?.defenseProfile?.institutions || {};

@@ -34,7 +34,7 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
@@ -77,6 +77,11 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // else uses Stripe's payment mode. Keep this in sync with TIERS.billing
 // in src/config/pricing.js.
 const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
+
+// Founder Lifetime is advertised as "X of 500 seats remaining". Keep in sync
+// with `seatLimit` in src/config/pricing.js (the pricing-page counter reads the
+// same founder_seats_taken() RPC this gate does).
+const FOUNDER_SEAT_LIMIT = 500;
 
 /**
  * Build CORS headers from the shared allowlist (_shared/cors.ts). Fail-closed,
@@ -172,6 +177,23 @@ export async function handleCreateCheckout(
       throw new Error('Missing authorization header');
     }
 
+    // Founder Lifetime seat gate — the advertised "X of 500 seats" contract is
+    // enforced HERE, not just displayed. founder_seats_taken() (migration 010)
+    // is the same counter the pricing page renders; once the cap is reached no
+    // new founder checkout session can be created. FAIL CLOSED on a counter
+    // error: blocking a sale we could have made beats selling seat 501 of an
+    // advertised-500 product. Two truly-concurrent checkouts at seat 499 can
+    // still race past this gate — that residual is a one-off refund, not a
+    // standing hole in the contract.
+    if (product === 'founder_lifetime') {
+      const { data: seatsTaken, error: seatErr } = await adminClient().rpc('founder_seats_taken');
+      if (seatErr) throw new Error(`Founder seat check failed: ${seatErr.message}`);
+      if (typeof seatsTaken !== 'number') throw new Error('Founder seat check returned no count');
+      if (seatsTaken >= FOUNDER_SEAT_LIMIT) {
+        throw new Error(`Founder Lifetime is sold out (${seatsTaken}/${FOUNDER_SEAT_LIMIT} seats taken)`);
+      }
+    }
+
     const priceId = PRICE_MAP[product];
     if (!priceId) throw new Error(`Price ID not configured for ${product}`);
 
@@ -235,9 +257,11 @@ export async function handleCreateCheckout(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     // One structured line per checkout failure so the money path is greppable.
+    // The real message (which may carry Stripe/Postgres internals) is logged
+    // server-side; the client only ever sees a generic string.
     logError('create-checkout', user?.id ?? null, message);
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'Checkout could not be started' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }

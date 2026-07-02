@@ -133,6 +133,7 @@ async function getAccessTokenSafe() {
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {object|null} [opts.relationshipMemoryContext] - dailyLife only: compact campaign relationship posture digest.
  * @param {object|null} [opts.chronicleContext] - narrative + dailyLife: compact weighted Chronicle digest (recent + party-caused events).
+ * @param {object|null} [opts.warMoraleContext] - narrative + dailyLife: compact war-morale digest (resolve/hope/supply/faith/sentiment), computed client-side only under the warEconomySurfacing flag. Absent ⇒ byte-identical prompt.
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
@@ -171,6 +172,12 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // narrative + daily-life passes, so prose can reference what's happened.
   if ((type === 'narrative' || type === 'dailyLife') && opts.chronicleContext && typeof opts.chronicleContext === 'object') {
     body.chronicleContext = opts.chronicleContext;
+  }
+  // P5 war-morale grounding (narrative + daily-life). Computed client-side only when the
+  // warEconomySurfacing flag is on; the server sanitizes + fence-strips it before it reaches
+  // the prompt. Absent ⇒ no field ⇒ the request (and prompt) is byte-identical.
+  if ((type === 'narrative' || type === 'dailyLife') && opts.warMoraleContext && typeof opts.warMoraleContext === 'object') {
+    body.warMoraleContext = opts.warMoraleContext;
   }
   if (type === 'progression') {
     body.changeType     = opts.changeType || '';

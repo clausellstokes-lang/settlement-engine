@@ -31,8 +31,8 @@
  * institutional/faction links is the standard successor.
  *
  * @param {Object} args
- * @param {any} args.outgoing
- * @param {any} args.settlement
+ * @param {import('../settlement.schema.js').SimNpc} args.outgoing
+ * @param {import('../settlement.schema.js').SimSettlement} args.settlement
  * @param {number} [args.limit=3]
  * @returns {NpcStructural[]} ranked candidates
  */
@@ -62,7 +62,7 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
  * field is empty and the SuccessorPrompt will fall back to free-form
  * input.
  *
- * @param {{ npc: any, settlement: any, limit?: number }} args
+ * @param {{ npc: import('../settlement.schema.js').SimNpc, settlement: import('../settlement.schema.js').SimSettlement, limit?: number }} args
  */
 export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
   return inferSuccessors({ outgoing: npc, settlement, limit })
@@ -71,7 +71,7 @@ export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
 }
 
 /**
- * @param {any} candidate
+ * @param {import('../settlement.schema.js').SimNpc} candidate
  * @param {Set<any>} outInst
  * @param {Set<any>} outFac
  */

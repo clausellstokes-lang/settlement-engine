@@ -40,6 +40,13 @@ const mig062 = () => readFileSync(MIG['062'], 'utf-8');
 const UID = '11111111-1111-1111-1111-111111111111';
 const OTHER = '22222222-2222-2222-2222-222222222222';
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('062 migration content is wired (binds the test to the real SQL)', () => {
   it('drops the dev-update bypass and enables RLS on the two analytics tables', () => {
     const sql = mig062();

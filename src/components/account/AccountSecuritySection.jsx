@@ -84,6 +84,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   // ── Reset via email ───────────────────────────────────────────────────────
   const [resetBusy, setResetBusy] = useState(false);
   const [resetSent, setResetSent] = useState(false);
+  const [resetError, setResetError] = useState(null);
 
   // ── Linked accounts ───────────────────────────────────────────────────────
   const [identities, setIdentities] = useState(null); // null = loading
@@ -133,12 +134,15 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   const handleResetEmail = async () => {
     if (!auth.user?.email) return;
     setResetBusy(true);
+    setResetError(null);
     try {
       await authService.resetPassword(auth.user.email);
       setResetSent(true);
-    } catch {
-      // Never disclose whether the email exists — show the same neutral note.
-      setResetSent(true);
+    } catch (e) {
+      // Anti-enumeration doesn't apply here: the user is authenticated and the
+      // address is their own, so a failure is a genuine one (network, outage,
+      // rate limit). Surface it with a retry cue rather than a false "sent".
+      setResetError(e?.message || 'Could not send the reset email. Please try again.');
     } finally {
       setResetBusy(false);
     }
@@ -198,6 +202,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
             Password
           </div>
           {pwDone && <div style={{ marginTop: SP.sm }}><OkBanner>Your password has been updated.</OkBanner></div>}
+          {resetError && <div style={{ marginTop: SP.sm }}><ErrorBanner>{resetError}</ErrorBanner></div>}
           {!pwOpen ? (
             <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', marginTop: SP.sm }}>
               <Button variant="secondary" size="md" onClick={() => { setPwOpen(true); setPwDone(false); setPwError(null); }}>

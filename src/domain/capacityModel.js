@@ -49,6 +49,7 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
+import { institutionMatchesRegex } from './institutionClassify.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
@@ -157,7 +158,9 @@ function populationOf(/** @type {any} */ settlement) {
 
 function institutionNamesMatching(/** @type {any} */ settlement, /** @type {any} */ pattern) {
   const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  return inst.filter((/** @type {any} */ i) => pattern.test(String(i?.name || ''))).map((/** @type {any} */ i) => i?.name || '');
+  // Id-first (rename-proof) for stamped institutions; byte-identical to the former
+  // pattern.test(name) for the current corpus (see institutionMatchesRegex).
+  return inst.filter((/** @type {any} */ i) => institutionMatchesRegex(i, pattern)).map((/** @type {any} */ i) => i?.name || '');
 }
 
 function factionPower(/** @type {any} */ profiles, /** @type {any} */ archetype) {

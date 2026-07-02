@@ -208,21 +208,29 @@ export default function WizardNewsPanel({ campaign }) {
         .filter(save => ids.has(save.id))
         .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
     };
-    const result = await requestCampaignChronicle({
-      campaign,
-      snapshot,
-      tick: latestEntryTick,
-    });
-    if (result.error || !result.chronicle) {
-      setChronicleError(result.error || 'Chronicle generation failed.');
-    } else {
-      appendCampaignChronicle(campaign.id, {
+    try {
+      const result = await requestCampaignChronicle({
+        campaign,
+        snapshot,
         tick: latestEntryTick,
-        prose: result.chronicle,
       });
-      if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
+      if (result.error || !result.chronicle) {
+        setChronicleError(result.error || 'Chronicle generation failed.');
+      } else {
+        appendCampaignChronicle(campaign.id, {
+          tick: latestEntryTick,
+          prose: result.chronicle,
+        });
+        if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
+      }
+    } catch (err) {
+      // An unexpected rejection (getSession()/grounding throwing rather than
+      // returning {error}) must never permanently stick the paid button in
+      // busy state — surface it and always clear busy in finally.
+      setChronicleError(`Chronicle generation failed: ${err?.message || err}`);
+    } finally {
+      setChronicleBusy(false);
     }
-    setChronicleBusy(false);
   }
 
   if (!campaign) return null;

@@ -69,15 +69,18 @@ describe('pipeline reads/produces data-flow contract (A+ generators.3)', () => {
   });
 
   it('a step that reads-and-reprovides a key (re-derivation) has an earlier first producer', () => {
-    // stressConfirmPass reads `stress` then re-provides a confirmed `stress`;
-    // economyReconcilePass reads `economicState` then re-provides a re-derived one.
-    // That read∩provides overlap is a legitimate re-derivation — but it must still
-    // have an EARLIER producer (covered by the soundness test). Pin the two known
+    // isolationPass reads `stress` then re-provides it with the subsistence
+    // famine merged into the container (so the famine is a real stressor, not
+    // a stressTypes-only ghost); stressConfirmPass reads `stress` then
+    // re-provides a confirmed `stress`; economyReconcilePass reads
+    // `economicState` then re-provides a re-derived one. That read∩provides
+    // overlap is a legitimate re-derivation — but it must still have an
+    // EARLIER producer (covered by the soundness test). Pin the known
     // re-derivers so the pattern is documented, not accidental.
     const rederivers = ORDER.filter((n) => {
       const m = META.get(n);
       return m.reads.some((k) => m.provides.includes(k));
     });
-    expect(rederivers.sort()).toEqual(['economyReconcilePass', 'stressConfirmPass']);
+    expect(rederivers.sort()).toEqual(['economyReconcilePass', 'isolationPass', 'stressConfirmPass']);
   });
 });

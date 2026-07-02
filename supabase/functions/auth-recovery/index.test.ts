@@ -314,3 +314,25 @@ Deno.test({
   );
   },
 });
+
+// ── the outer catch never echoes internal error text to the anonymous caller ─
+Deno.test('an unexpected throw returns a GENERIC 500 — internal error text is never echoed', async () => {
+  const INTERNAL = 'relation "recovery_rate_limits" does not exist (pgcode 42P01)';
+  // An admin client whose rpc THROWS (not a structured { error }) drives the
+  // request into the handler's outer catch — previously that catch returned
+  // errorMessage(err) raw to an unauthenticated caller.
+  // deno-lint-ignore no-explicit-any
+  const throwing: any = {
+    rpc: () => {
+      throw new Error(INTERNAL);
+    },
+  };
+  const res = await handleAuthRecovery(
+    req({ action: 'lookup', email: 'u@x.com' }),
+    { adminClient: () => throwing },
+  );
+  assertEquals(res.status, 500);
+  const body = await res.json();
+  assertEquals(body.error, 'Recovery request failed');
+  assertEquals(JSON.stringify(body).includes('recovery_rate_limits'), false);
+});

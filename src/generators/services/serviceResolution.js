@@ -144,87 +144,92 @@ function _customProducedServices(institutionName, tier, opts = {}) {
 // last resort. All paths share one roll block so toggle objects (allow/force),
 // guaranteed p>=1 services, and requiredTradeRoute gates apply uniformly
 // regardless of how the key was resolved.
-export const getServicesForInstitution = (r, s, o = {}) => {
-  const d = Object.keys(INSTITUTION_SERVICES),
-    l = LOCALE_SERVICE_OVERRIDES[r.toLowerCase()];
+export const getServicesForInstitution = (institutionName, tier, overrides = {}) => {
+  const catalogKeys = Object.keys(INSTITUTION_SERVICES);
+  const localeOverride = LOCALE_SERVICE_OVERRIDES[institutionName.toLowerCase()];
   // Custom-content extension: any services declared via `produces` augment
   // (or, for unknown custom institutions, replace) the prebuilt service set.
-  const _customServices = _customProducedServices(r, s, o);
-  const _exactKey = d.find((k) => k.toLowerCase() === r.toLowerCase());
-  let w = _exactKey || (l && INSTITUTION_SERVICES[l] ? l : null);
-  if (!w) {
-    const m = r
+  const _customServices = _customProducedServices(institutionName, tier, overrides);
+  const exactKey = catalogKeys.find((k) => k.toLowerCase() === institutionName.toLowerCase());
+  let resolvedKey = exactKey || (localeOverride && INSTITUTION_SERVICES[localeOverride] ? localeOverride : null);
+  // Last-resort fuzzy match: score each catalog key by shared name tokens (exact
+  // token = 2, prefix overlap = 1), pick the highest raw score, tie-broken by the
+  // higher per-token normalized score.
+  if (!resolvedKey) {
+    const nameTokens = institutionName
       .toLowerCase()
       .split(/[\s'(),/-]+/)
-      .filter((C) => C.length > 2);
-    let h = null,
-      g = 0;
-    for (const C of d) {
-      const T = C.toLowerCase()
+      .filter((tok) => tok.length > 2);
+    let bestKey = null,
+      bestScore = 0;
+    for (const candidate of catalogKeys) {
+      const candidateTokens = candidate.toLowerCase()
         .split(/[\s'(),/-]+/)
-        .filter((v) => v.length > 2);
-      let M = 0;
-      for (const v of T)
-        for (const j of m)
-          j === v ? (M += 2) : ((v.length > 3 && j.startsWith(v)) || (j.length > 4 && v.startsWith(j))) && (M += 1);
-      const A = M / (T.length * 2),
-        S = h
-          ? h
+        .filter((tok) => tok.length > 2);
+      let score = 0;
+      for (const ct of candidateTokens)
+        for (const nt of nameTokens)
+          nt === ct ? (score += 2) : ((ct.length > 3 && nt.startsWith(ct)) || (nt.length > 4 && ct.startsWith(nt))) && (score += 1);
+      const normScore = score / (candidateTokens.length * 2),
+        bestTokenCount = bestKey
+          ? bestKey
               .toLowerCase()
               .split(/[\s'(),/-]+/)
-              .filter((v) => v.length > 2).length
+              .filter((tok) => tok.length > 2).length
           : 1,
-        y = g / (S * 2);
-      (M > g || (M === g && M > 0 && A > y)) && ((g = M), (h = C));
+        normBest = bestScore / (bestTokenCount * 2);
+      (score > bestScore || (score === bestScore && score > 0 && normScore > normBest)) && ((bestScore = score), (bestKey = candidate));
     }
-    w = g > 0 ? h : null;
+    resolvedKey = bestScore > 0 ? bestKey : null;
   }
-  if (!w) {
+  if (!resolvedKey) {
     // No prebuilt service mapping, but custom institution may declare its own.
     return _customServices;
   }
-  const p = INSTITUTION_SERVICES[w],
-    b = SERVICE_TIER_CHANCE[s] || 0.5,
-    k = [],
-    f = Object.entries(p).sort((C, T) => T[1].p - C[1].p);
+  const serviceMap = INSTITUTION_SERVICES[resolvedKey],
+    tierChance = SERVICE_TIER_CHANCE[tier] || 0.5,
+    services = [],
+    sortedEntries = Object.entries(serviceMap).sort((a, b) => b[1].p - a[1].p);
   if (
-    (f.forEach(([C, T]) => {
-      const M = `${r}_service_${C}`,
-        A = `${w}_service_${C}`,
-        S = o[M] ?? o[A],
-        y = S !== void 0 ? S : T.on,
-        v = typeof y == 'object' ? (y.allow ?? !0) : y,
-        j = typeof y == 'object' ? (y.force ?? !1) : !1;
-      if (!v && !j) return;
-      const z = T.p * b;
-      (j || T.p >= 1 || _rng() < z) &&
-        (!T.requiredTradeRoute || (o._tradeRoute || '').includes(T.requiredTradeRoute)) &&
-        k.push({
-          name: C,
-          ...T,
-          institution: r,
-          svcKey: w,
-          forced: j,
+    (sortedEntries.forEach(([serviceName, serviceDef]) => {
+      const instToggleKey = `${institutionName}_service_${serviceName}`,
+        keyToggleKey = `${resolvedKey}_service_${serviceName}`,
+        toggleRaw = overrides[instToggleKey] ?? overrides[keyToggleKey],
+        toggle = toggleRaw !== undefined ? toggleRaw : serviceDef.on,
+        allow = typeof toggle == 'object' ? (toggle.allow ?? true) : toggle,
+        force = typeof toggle == 'object' ? (toggle.force ?? false) : false;
+      if (!allow && !force) return;
+      const chance = serviceDef.p * tierChance;
+      (force || serviceDef.p >= 1 || _rng() < chance) &&
+        (!serviceDef.requiredTradeRoute || (overrides._tradeRoute || '').includes(serviceDef.requiredTradeRoute)) &&
+        services.push({
+          name: serviceName,
+          ...serviceDef,
+          institution: institutionName,
+          svcKey: resolvedKey,
+          forced: force,
         });
     }),
-    k.length === 0)
+    services.length === 0)
   ) {
-    const C = f.find(([T, M]) => {
-      const A = `${r}_service_${T}`,
-        S = `${w}_service_${T}`;
-      return o[A] ?? o[S] ?? M.on;
+    // Nothing rolled on: force at least one service (the highest-probability one
+    // whose toggle allows it) so a live institution never renders serviceless.
+    const fallbackEntry = sortedEntries.find(([serviceName, serviceDef]) => {
+      const instToggleKey = `${institutionName}_service_${serviceName}`,
+        keyToggleKey = `${resolvedKey}_service_${serviceName}`;
+      return overrides[instToggleKey] ?? overrides[keyToggleKey] ?? serviceDef.on;
     });
-    C &&
-      k.push({
-        name: C[0],
-        ...C[1],
-        institution: r,
-        svcKey: w,
+    fallbackEntry &&
+      services.push({
+        name: fallbackEntry[0],
+        ...fallbackEntry[1],
+        institution: institutionName,
+        svcKey: resolvedKey,
       });
   }
   // Augment matched results with custom-declared produced services
   for (const cs of _customServices) {
-    if (!k.some(x => x.name === cs.name)) k.push(cs);
+    if (!services.some(x => x.name === cs.name)) services.push(cs);
   }
-  return k;
+  return services;
 };

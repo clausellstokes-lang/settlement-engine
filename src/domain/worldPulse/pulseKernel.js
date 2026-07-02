@@ -13,7 +13,7 @@ import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor 
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
-import { evaluateWarLayer } from './warDeployment.js';
+import { evaluateWarLayer, stripSuppressedDeployResidue } from './warDeployment.js';
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
@@ -54,8 +54,33 @@ import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
-import { wallClockNow } from '../clock.js';
+import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval } from './pulseHelpers.js';
+import { assertNoResidueLeak } from './residueStripGuard.js';
+
+/**
+ * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
+ * @enforced-by tests/domain/residueStripRegistry.test.js
+ *
+ * Each entry is a simulation layer that banks OUT-OF-BAND ledger/graph residue while
+ * running, which the pause/resume + dismiss byte-equivalence invariant requires be
+ * stripped for every suppressed major. In the kernel each site carries a matching
+ * `@residue-strip: <id>` marker; tests/domain/residueStripRegistry.test.js fails the
+ * gate if the markers and this list drift apart — so a NEW residue-banking layer can
+ * no longer silently ship without a strip + a registry entry, and a deleted strip is
+ * caught. `coveredBy` names the pause/dismiss equivalence test that pins the site's
+ * byte-equivalence (null = a KNOWN, TRACKED coverage gap — the meta-test asserts it
+ * against an explicit allowlist, so an uncovered site is VISIBLE and acknowledged
+ * rather than silently unverified, which was the whole problem the review flagged).
+ *
+ * @type {ReadonlyArray<{ id: string, banks: string, coveredBy: string|null }>}
+ */
+export const RESIDUE_STRIP_SITES = Object.freeze([
+  { id: 'war_mobilization',      banks: 'warPosture ramp + information_flow signal channels', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+  { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel + deploy-tick exhaustion ratchet + conscription/levy debits', coveredBy: 'warConservationDismiss.test.js' },
+  { id: 'conquest',              banks: 'occupation seed + conquest disposition ratchet',     coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+  { id: 'occupation_vassalized', banks: 'vassal promotion + advance-win disposition residue', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+]);
 
 // The upward pressure to mobilize: a settlement RAMPS its war posture
 // when it faces a hostile-axis neighbour (rival / cold_war / hostile). Returns a
@@ -129,7 +154,11 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   resume that dismissed nothing re-runs BYTE-IDENTICALLY to the autoresolve-ON
  *   tick (the equivalence invariant). Inert on the non-resume path.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow(), deferMajors = false, dismissMajorIds = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null } = {}) {
+  // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
+  // test run it throws (never silently divergent bytes); production pins `now` and
+  // falls back to the wall clock only here, at the boundary.
+  if (now == null) { assertNowPinnedInTest('simulateCampaignWorldPulse'); now = wallClockNow(); }
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
   // RESUME dismissal set, computed ONCE up front (before the war/occupation block).
@@ -177,6 +206,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return ids.size > 0 ? ids : null;
   };
+  // ── RESIDUE-STRIP REGISTRY — see RESIDUE_STRIP_SITES (module scope, exported) ──
+  // The pause/resume + dismiss byte-equivalence invariant depends on a manual,
+  // repeated pattern: any layer that, while running, banks OUT-OF-BAND ledger/graph
+  // residue (a write NOT routed through the deferred-majors apply partition) MUST,
+  // for every suppressed major (residueSuppressionIds), strip that residue back out.
+  // Each strip site below carries an `@residue-strip: <id>` marker; the prose list
+  // that used to live here (and rot) is now the machine-enforced RESIDUE_STRIP_SITES
+  // constant. @enforced-by tests/domain/residueStripRegistry.test.js — it fails the gate
+  // if the markers and the registry drift apart (a new strip without a registry entry, or a deleted
+  // strip), and pins which pause/dismiss equivalence test covers each site. A NEW
+  // layer that banks residue must add a strip + its marker + a registry entry, or the
+  // gate blocks. All strips are byte-neutral when nothing is suppressed.
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -253,6 +294,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         snapshot,
         rng: rng.fork('coup-verdict'),
         tick: worldState.tick,
+        warExhaustion: worldState.warExhaustion || {},
+        warDispositionEnabled: simulationRules.warDispositionEnabled,
       })
     : [];
 
@@ -417,6 +460,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       dismissedOutcomeIds: activeDismissals,
     });
     mobilizationOutcomes = effects.outcomes;
+    // @residue-strip: war_mobilization  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // PAUSE-path residue suppression: a DEFERRED war_mobilization major is still SURFACED
     // (it must reach deferredMajors so the DM can decide it on resume) and its footing
     // condition is withheld from the apply pass by the deferMajors partition below — but
@@ -502,6 +546,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the conquest occupation-seed / disposition strip AND, right here, for the SIEGE-
     // INITIATION (strategy_deploy) residue.
     const warOutcomeSuppressedIds = residueSuppressionIds(war.outcomes);
+    // @residue-strip: strategy_deploy  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // SIEGE-INITIATION residue suppression: a DEFERRED or DISMISSED strategy_deploy major
     // is the campaign-altering decision to OPEN a new siege. Its apply outcome is a
     // settlement no-op (withheld from / excluded from the apply pass by the major
@@ -512,38 +557,45 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the DM decision entirely) — the same "phantom out-of-band ledger" the conquest
     // dismiss fix closes. So strip BOTH for every suppressed strategy_deploy, keyed off
     // the outcome's targetSaveId (the besieger) → sourceEventTargetId (the besieged).
+    // The deploy ALSO banked residue beyond the seed + front on its very first tick:
+    //   • the war-exhaustion RATCHET (step 5 accrues the scar for every deployer, the
+    //     fresh one included, and a war_levy strains each levied vassal's scar), and
+    //   • the same-tick MINOR emissions its deployment triggered — the conserved
+    //     war_conscription / war_levy population+granary DEBITS plus the
+    //     war_drain / army_deployed / war_exhaustion / reinforcement_cost home
+    //     conditions. These are minors, so the major partition below would still
+    //     auto-apply them; left in, a dismissed deploy would ratchet a scar for a war
+    //     that never opened AND permanently SINK the conscripted/levied population
+    //     (the debit commits while the deployedPopulation bank that would credit the
+    //     survivors home is stripped with the deployment).
+    // So a suppressed deploy strips ALL of it — the seed, the front, its same-tick
+    // minors, and the exhaustion ratchet (reverted to the no-deploy counterfactual via
+    // revertSuppressedDeployExhaustion) — making dismiss fully conserving. A fresh
+    // deployer holds no prior deployment (step 4's one-army gate), so every step-5
+    // emission keyed to it this tick belongs to the dismissed deploy alone.
     // Mirrors the conquest occupation-seed suppression; byte-neutral when nothing is
     // suppressed (the autoresolve-ON path keeps the deployment + front untouched).
-    if (warOutcomeSuppressedIds) {
-      const suppressedDeploys = war.outcomes.filter(
-        o => o?.candidateType === 'strategy_deploy'
-          && deriveDecisionTier(o) === 'major'
-          && warOutcomeSuppressedIds.has(String(o.id)),
-      );
-      if (suppressedDeploys.length) {
-        const strippedDeployments = { ...war.deployments };
-        const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
-        for (const o of suppressedDeploys) {
-          const fromId = String(o.targetSaveId);
-          const toId = String(o.sourceEventTargetId);
-          // Clear the freshly-seeded deployment (a brand-new siege has no prior record
-          // under this key, so this never drops a pre-existing campaign's army).
-          delete strippedDeployments[fromId];
-          strippedFronts.add(`${fromId}->${toId}`);
-        }
-        war = {
-          ...war,
-          deployments: strippedDeployments,
-          graphChannels: war.graphChannels.filter(
-            c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
-          ),
-        };
-      }
-    }
+    // The seed/front/exhaustion/minor strip is a pure war-shape transform living beside
+    // its arithmetic in warDeployment.js (stripSuppressedDeployResidue); byte-neutral when
+    // nothing is suppressed. Re-seat the cleaned deployments/warExhaustion/outcomes/fronts.
+    war = {
+      ...war,
+      ...stripSuppressedDeployResidue({
+        war,
+        suppressedIds: warOutcomeSuppressedIds,
+        preTickWarExhaustion: worldState.warExhaustion || {},
+      }),
+    };
     // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
     worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    // Defender-attrition SPIKE (flag-gated): persist the per-target defender siege
+    // ledger only when the flag produced one. Null on the default path ⇒ the key is
+    // never added, so worldState stays byte-identical for every existing campaign.
+    if (war.defenderSiegeLedger) {
+      worldState = { ...worldState, defenderSiegeLedger: war.defenderSiegeLedger };
+    }
     // Land the war_front directed mints on the graph BEFORE candidate generation and
     // the apply pass, then rebuild the snapshot so downstream reads see the new front.
     // ALSO retire any war_front channels whose siege resolved this tick (conquest or
@@ -564,13 +616,26 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       postTimeSnapshot = buildWorldSnapshot({ campaign: mintedCampaign, saves: postTimeSaves, worldState });
     }
     // Contextual returns read the POST-mint graph (so "is my home besieged?" is
-    // current) and the pre-tick snapshot for home state. Forked 'deployment-return'.
+    // current) and the pre-tick snapshot for home state.
+    // NOTE: this deliberately re-forks the SAME 'war-layer' label as evaluateWarLayer
+    // above, so the two share an identical PARENT stream. That is safe ONLY because
+    // neither draws from this parent directly — evaluateWarLayer re-forks on
+    // 'siege:<target>:<tick>' and deploymentReturnOutcomes re-forks on
+    // 'deployment-return', so the actual draws are independent. The label cannot be
+    // renamed to disambiguate (a fork label feeds the derived child seed, so changing
+    // it would alter sim output for every existing campaign + break the golden master).
+    // INVARIANT: if either layer is ever changed to draw from this fork directly, give
+    // this call site its own distinct label first, or the two will silently correlate.
     warReturnOutcomes = deploymentReturnOutcomes({
       resolvedDeployments: war.resolvedDeployments,
       snapshot: postTimeSnapshot,
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
       tick: worldState.tick,
+      // NOTE: no warEconomy flag threaded — the homecoming credit is gated on the
+      // record's BANKED deployedPopulation (whether population was actually debited),
+      // not the live flag, so conservation holds under any flag combination and
+      // mid-war flag changes (see deploymentReturn.js).
     });
 
     // The trade-war layer. The per-commodity primary-supplier contest composes
@@ -603,6 +668,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // presence) + the live deployments + the pre-tick snapshot (usefulness/resistance).
     // Deterministic (no rng — the state machine is pure). The occupations ledger is
     // read-last/write-next and CONDITIONAL: absent until the first conquest.
+    // @residue-strip: conquest  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // A DM-DISMISSED conquest must not seed an occupation: drop any conquest
     // power_transfer the DM dismissed from the conquest set the occupation layer
     // reads, so freshConquestsFrom never seeds a phantom `contested` occupation for a
@@ -633,6 +699,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // the arrival one-shot never fires ⇒ the outcome is dropped). Parity with the
     // conquest-dismiss occupation suppression.
     let occupation = evaluateOccupations({ ...occupationArgs, dismissedOutcomeIds: activeDismissals });
+    // @residue-strip: occupation_vassalized  (registered in RESIDUE_STRIP_SITES; sync-enforced)
     // PAUSE-path residue suppression: a DEFERRED occupation_vassalized major must NOT
     // promote the ledger to the terminal `vassalized` rung either (else the paused world
     // holds a vassalized occupation whose vassal edge — withheld from the apply pass — never
@@ -1064,6 +1131,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries, ...pantheonArcEntries];
   const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
+  // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
+  // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to
+  // the simulation), so a forgotten/drifted strip in a known residue store reds a test
+  // across the WHOLE suite rather than surfacing as a silent determinism drift. Inert
+  // (deferredMajors is empty) on the autoresolve path.
+  assertNoResidueLeak(finalWorldState, applied.regionalGraph, deferredMajors);
 
   return {
     campaignId: campaign?.id,

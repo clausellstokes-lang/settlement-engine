@@ -76,7 +76,7 @@ function _topBy(arr, scoreFn) {
 
 // ── Per-beat derivations ────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveFoundingCause(settlement) {
   const founding = settlement?.history?.founding;
   if (!founding) return null;
@@ -105,7 +105,7 @@ function deriveFoundingCause(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveFirstProsperitySource(settlement) {
   // Strongest signal today: the topExport on the economic state — that's
   // what the settlement currently trades on. We hedge with the founding
@@ -131,7 +131,7 @@ function deriveFirstProsperitySource(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveDefiningCrisis(settlement) {
   // The defining crisis is the most severe historical event. Among
   // events of equal severity, prefer the older one — those leave deeper
@@ -165,7 +165,7 @@ function deriveDefiningCrisis(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveInstitutionalLegacy(settlement) {
   // Events whose lastingEffects mention 'institution' or that have an
   // institutional effect listed in some form. These are the events that
@@ -216,7 +216,7 @@ function deriveInstitutionalLegacy(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveRecentDisruption(settlement) {
   // Most recent significant disruption — within the last 30 years AND
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
@@ -247,8 +247,8 @@ function deriveRecentDisruption(settlement) {
   // since some settlements have nothing major in the last 30 years.
   const anns = settlement?.history?.legacyAnnotations || [];
   const recentAnn = anns
-    .filter(/** @param {any} a */ a => (a.yearsAgo || Infinity) <= 50)
-    .sort(/** @param {any} a @param {any} b */ (a, b) => (a.yearsAgo || 0) - (b.yearsAgo || 0))[0];
+    .filter(/** @param {any} a */ a => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : Infinity) <= 50)
+    .sort(/** @param {any} a @param {any} b */ (a, b) => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : Infinity) - (Number.isFinite(b.yearsAgo) ? b.yearsAgo : Infinity))[0];
   if (recentAnn) {
     return {
       key: 'recentDisruption',
@@ -262,7 +262,7 @@ function deriveRecentDisruption(settlement) {
   return null;
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveUnresolvedWound(settlement) {
   // Pulled from currentTensions. The generator produces tensions as
   // strings OR objects depending on the source — handle both.
@@ -284,7 +284,7 @@ function deriveUnresolvedWound(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function deriveLikelyFuture(settlement) {
   // Pull from history.currentTensions trajectory if available, else
   // power-structure stability. Mirrors the simulationSpine logic so the
@@ -372,7 +372,7 @@ export function deriveHistoryBeats(settlement) {
  * Render the beats as an ordered array of [label, text, key] tuples,
  * ready for the rail or PDF. Skips null beats so the consumer never
  * sees a hole.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function historyBeatRows(settlement) {
   const beats = /** @type {Record<string, any>} */ (deriveHistoryBeats(settlement));
@@ -395,7 +395,7 @@ export function historyBeatRows(settlement) {
  * Diagnostic: which beats produced non-null output? Used by
  * distribution tests and future tuning to spot under-supplied
  * history fields.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function historyBeatPresence(settlement) {
   const beats = deriveHistoryBeats(settlement);

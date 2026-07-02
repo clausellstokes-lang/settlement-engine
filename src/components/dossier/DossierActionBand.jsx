@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import { FS, SP, swatch } from '../theme.js';
-import { flag } from '../../lib/flags.js';
 import ShareToGallery from '../ShareToGallery.jsx';
 import BuyThisDossier from '../BuyThisDossier.jsx';
 
@@ -32,7 +31,8 @@ export default function DossierActionBand({
   // The narrative-layer pitch (violet tint + eyebrow + copy + Narrate buttons) is
   // earned only when the strip flag is on, narrative can fire here, AND no other
   // surface is already carrying the pitch (the welcome card).
-  const showNarrativePitch = flag('narrativeLayerStrip') && narrativeEnabled && !suppressNarrativePitch;
+  // narrativeLayerStrip is GA (the labeled narrative strip is the only surface now).
+  const showNarrativePitch = narrativeEnabled && !suppressNarrativePitch;
   // In the embedded flow the only possible content is the narrative pitch — no
   // saveId means ShareToGallery self-gates to null, and Buy/How moved out — so
   // the band collapses to nothing when the pitch isn't live.

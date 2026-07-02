@@ -172,6 +172,22 @@ describe('war layer — hard siege-duration ceiling (a saturated stalemate termi
     expect(abandoned.reasons.some(r => /hard \d+-tick ceiling/.test(r))).toBe(true);
   });
 
+  test('a NUMERIC-targetId record still withdraws at the ceiling (the String-coercion contract)', () => {
+    // A deployment record's targetId is any-typed; every other targetId compare in the
+    // siege loop String-coerces. A strict === in the withdrawal filter left a numeric-id
+    // record unable to ever withdraw — a stuck phantom army on a lifted siege.
+    const war = evaluate({
+      saves: [save('atlas', 'Atlas', { tier: 'city', population: 22000 }),
+              save('77', 'Borin', { tier: 'city', population: 22000, legitimacy: 70 })],
+      edges: [{ id: 'edge.atlas.77', from: 'atlas', to: '77', relationshipType: 'hostile' }],
+      channels: [{ type: 'war_front', from: 'atlas', to: '77', status: 'confirmed' }],
+      warExhaustion: { atlas: 1.0 },
+      tick: 500,
+      deployments: { atlas: siegeRecord(77, { age: SIEGE_MAX_AGE - 1, strength: STALEMATE_STRENGTH }) },
+    });
+    expect(resolution(war)).toEqual({ conquest: false, withdrawal: true, stillDeployed: false });
+  });
+
   // A strong attacker (city) pinned ABOVE a weaker, home-defended defender (town): at
   // the ceiling the direction is a pure function of capacities → it FALLS (conquest).
   // The seed strength is above the home ceiling, so it caps to the attacker's live

@@ -1,5 +1,5 @@
 
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -25,7 +25,7 @@ import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import VoteButton from './VoteButton.jsx';
 
-export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
+function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
   // Tier is the runnable identity anchor (front-loaded, INK, bolder); population
   // and terrain follow as quieter muted facts. (P6 keyword-first / P4 two-lever.)
   const tierLabel = TIER_LABELS[item.tier] || human(item.tier);
@@ -203,3 +203,8 @@ export default function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }
     </article>
   );
 }
+
+// Memoized: this card renders inside items.map() in a long gallery list and the
+// parent (useGalleryPageState) useCallback's onOpen/onVote, so memo skips the
+// re-render when only sibling state (another card's vote, the query) changes.
+export default memo(GalleryCard);

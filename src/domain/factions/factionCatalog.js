@@ -35,7 +35,7 @@ function norm(x) {
  * older/neighbour records keep a flat settlement.factions. Read both, and
  * accept either `name` or `faction` as the label key.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {Set<string>} lowercased names already present
  */
 export function presentFactionNames(settlement) {
@@ -54,7 +54,7 @@ export function presentFactionNames(settlement) {
  * in the settlement. Empty groups are dropped so the UI never renders a
  * heading with no options.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {Array<{ category: string, label: string, options: Array<{ name: string, category: string }> }>}
  */
 export function factionCompendium(settlement) {

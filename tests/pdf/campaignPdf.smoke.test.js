@@ -85,7 +85,7 @@ function makeSave(id, name, opts = {}) {
       culture: opts.culture || 'germanic',
       npcs: opts.npcs || [
         { name: `${name} Reeve`, role: 'Reeve & toll-keeper', influence: 'high' },
-        { name: `${name} Smith`, role: 'Blacksmith', influence: 'medium' },
+        { name: `${name} Smith`, role: 'Blacksmith', influence: 'moderate' },
         { name: `${name} Priest`, role: 'Keeper of the shrine', influence: 'low' },
       ],
       neighbourNetwork: opts.neighbourNetwork || [],

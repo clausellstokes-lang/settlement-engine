@@ -27,12 +27,16 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
   const dismiss      = useStore(s => s.dismissPendingSuccession);
+  // Back aria-modal="true" with focus-in/Tab-trap/Escape/restore. Hook runs
+  // unconditionally (before the early return); "open" = the prompt is rendered.
+  const dialogRef = useDialogFocusTrap(Boolean(pending && settlement), dismiss);
 
   if (!pending || !settlement) return null;
 
@@ -109,6 +113,7 @@ export default function SuccessorPrompt() {
     // keyboard users dismiss via the labelled IconButton or footer button.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="succession-title"

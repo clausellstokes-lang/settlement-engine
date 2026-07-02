@@ -22,6 +22,16 @@
  * @param {Request} req
  * @returns {Promise<Response>}
  */
+// Real CSP violation reports are a few hundred bytes; 32 KiB is generous slack
+// for report-to batches. Anything bigger is not a browser report — it's an
+// unauthenticated caller trying to flood the log sink, so bounce it before it
+// becomes log volume (this endpoint is public by design, the cap is its only
+// brake).
+const MAX_REPORT_BYTES = 32 * 1024;
+// When a body isn't recognizable JSON we still log it as signal, but only a
+// bounded prefix — never let a garbage body become a multi-KB log line.
+const MAX_RAW_LOG_CHARS = 2048;
+
 export default async function handler(req) {
   // Only POST carries reports; reject everything else cheaply (and don't leak a
   // body on a probe). 405 with Allow is the correct, boring answer.
@@ -29,13 +39,21 @@ export default async function handler(req) {
     return new Response(null, { status: 405, headers: { Allow: 'POST' } });
   }
 
+  // Cheap pre-read rejection when the sender declares an oversized body…
+  const declaredLength = Number(req.headers.get('content-length'));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_REPORT_BYTES) {
+    return new Response(null, { status: 413 });
+  }
+
   const contentType = req.headers.get('content-type') || '';
   let payload;
   try {
     const raw = await req.text();
+    // …and a post-read backstop for chunked bodies that never declared one.
+    if (raw.length > MAX_REPORT_BYTES) return new Response(null, { status: 413 });
     payload = parseReport(raw, contentType);
   } catch (err) {
-    payload = { parseError: String(err && err.message ? err.message : err) };
+    payload = { parseError: String(err && err.message ? err.message : err).slice(0, MAX_RAW_LOG_CHARS) };
   }
 
   // ONE structured line per request so Vercel log search ("csp-report") and any
@@ -68,8 +86,9 @@ function parseReport(raw, contentType) {
   try {
     parsed = JSON.parse(raw);
   } catch {
-    // Not JSON — keep the raw text so the violation isn't silently lost.
-    return raw;
+    // Not JSON — keep (a bounded prefix of) the raw text so the violation
+    // isn't silently lost, without letting garbage inflate the log line.
+    return raw.slice(0, MAX_RAW_LOG_CHARS);
   }
   // report-uri format: a single object wrapping the report under "csp-report".
   if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && 'csp-report' in parsed) {

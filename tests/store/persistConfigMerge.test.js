@@ -67,4 +67,32 @@ describe('mergePersistedState — config migration gap (finding #5)', () => {
     expect(merged.productPrefs.pdfStyle).toBe('parchment');
     expect(merged.productPrefs.playerView).toBe(false);
   });
+
+  // servicesToggles persisted before the Stage-2b key change are keyed by the
+  // display institution name; the merge is the ONLY real hydrate seam, so it must
+  // normalize them to the current svcKey form (the slice's hydrate action never
+  // runs at boot). Correctness of the mapping itself is covered by
+  // toggleSlice.servicesNormalize.test.js; here we prove the merge delegates to it.
+  it('normalizes a pre-Stage-2b servicesToggles bag on hydrate (through merge)', () => {
+    const merged = mergePersistedState(
+      { servicesToggles: { 'Grand Market_service_Price discovery': { force: true } } },
+      current(),
+    );
+    // the old display-name key is migrated away…
+    expect(merged.servicesToggles['Grand Market_service_Price discovery']).toBeUndefined();
+    // …and exactly one normalized entry survives, carrying the same value.
+    const entries = Object.entries(merged.servicesToggles);
+    expect(entries).toHaveLength(1);
+    expect(entries[0][0]).toMatch(/_service_Price discovery$/);
+    expect(entries[0][1]).toEqual({ force: true });
+  });
+
+  it('drops an unmappable old-format servicesToggle and defaults absent bags to {}', () => {
+    const dropped = mergePersistedState(
+      { servicesToggles: { 'Zzz Nonexistent Institution_service_Foo': { allow: true } } },
+      current(),
+    );
+    expect(dropped.servicesToggles).toEqual({});
+    expect(mergePersistedState({}, current()).servicesToggles).toEqual({});
+  });
 });

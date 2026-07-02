@@ -304,6 +304,14 @@ export function getNeighbourFactionBias(neighbourProfile) {
 export function getMirrorFactionLabel(factionType, relType, neighbourName) {
   const n = neighbourName || 'the neighbour';
   const labels = {
+    neutral: {
+      military:   null,
+      economy:    `${n} Trade Correspondents`,
+      religious:  null,
+      government: `${n} Observers' Delegation`,
+      criminal:   null,
+      magic:      null,
+    },
     allied: {
       military:   `Joint Defense Compact (with ${n})`,
       economy:    `Merchants of the ${n} Alliance`,

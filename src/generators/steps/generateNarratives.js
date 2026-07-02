@@ -90,15 +90,15 @@ registerStep('generateNarratives', {
     });
   }
 
-  if (history && Array.isArray(history.events) && history.events.length) {
+  if (history && Array.isArray(history.historicalEvents) && history.historicalEvents.length) {
     recordTrace(ctx, {
       targetType: 'history',
-      targetId: 'history.events',
+      targetId: 'history.historicalEvents',
       step: 'generateNarratives',
       result: 'composed',
       causes: [{
         source: `tier.${tier}`,
-        effect: `${history.events.length} events`,
+        effect: `${history.historicalEvents.length} events`,
         reason: `History length scales with tier; legacy annotations link past to present.`,
       }],
       downstreamEffects: [

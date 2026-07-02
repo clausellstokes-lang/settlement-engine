@@ -43,6 +43,7 @@
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
+import { canonStressors } from './canonicalAccessors.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -292,7 +293,7 @@ function threatIdFor(type, source, label) {
 
 /**
  * Walk every surface and return raw threat-shaped entries.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function collectThreatSources(settlement) {
   if (!settlement) return [];
@@ -374,9 +375,7 @@ export function collectThreatSources(settlement) {
   }
 
   // 5. Stressors with threat-shaped tags / names
-  const stressors = Array.isArray(settlement.stressors) ? settlement.stressors
-                  : Array.isArray(settlement.stresses)  ? settlement.stresses
-                  : [];
+  const stressors = canonStressors(settlement);
   for (const stressor of stressors) {
     if (!stressor) continue;
     const text = String(stressor.name || stressor.type || stressor.label || stressor || '');
@@ -455,7 +454,7 @@ function clampInv(score) {
  * @param {any} source  { raw, inferredType, originSurface } from
  *                         collectThreatSources, or a structured threat
  *                         passed in directly.
- * @param {any} [_settlement]
+ * @param {import('./settlement.schema.js').SimSettlement} [_settlement]
  * @returns {Object | null}
  */
 export function deriveThreatProfile(source, _settlement) {
@@ -553,7 +552,7 @@ export function dedupeThreatsByPressure(profiles) {
  * dedupeThreatsByPressure (capacityModel does this in its demand math) so they
  * do not double-count a single pressure.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]} every derived ThreatProfile, un-collapsed.
  */
 export function deriveAllThreatProfiles(settlement) {
@@ -566,7 +565,7 @@ export function deriveAllThreatProfiles(settlement) {
 
 /**
  * Count threats by type / band / stage.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function threatBreakdown(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
@@ -587,7 +586,7 @@ export function threatBreakdown(settlement) {
 /**
  * Flat list of system variables pressured by the active threats.
  * Useful for the substrate to cross-reference. Deduplicated.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function pressuresOnSubstrate(settlement) {
   const out = new Set();
@@ -599,7 +598,7 @@ export function pressuresOnSubstrate(settlement) {
 
 /**
  * Human-readable lines suitable for AI / PDF / UI.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);

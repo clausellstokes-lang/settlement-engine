@@ -46,6 +46,8 @@ export default function AdminAnalyticsPanel() {
     }
   }, []);
 
+  // Data-load effect: load() sets loading/rows on mount + dashboard change. Intentional.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(dashboard); }, [dashboard, load]);
 
   const columns = rows.length ? Object.keys(rows[0]) : [];

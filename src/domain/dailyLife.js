@@ -92,7 +92,7 @@ function institutionByPattern(settlement, pattern) {
   return inst.filter((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveFoodCulture(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
@@ -136,7 +136,7 @@ function deriveFoodCulture(s, ctx) {
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
 // craft band used to gate now keys off faction power alone.
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveDawnWork(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
@@ -163,7 +163,7 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
-/** @param {any} s @param {any} _ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} _ctx */
 function deriveGatheringPlaces(s, _ctx) {
   const refs = [];
   const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
@@ -194,7 +194,7 @@ function deriveGatheringPlaces(s, _ctx) {
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveChildWarnings(s, ctx) {
   const refs = [];
   // Top threats by severity
@@ -230,7 +230,7 @@ function threatWarning(threat) {
   }
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveCommonerResentments(s, ctx) {
   const refs = [];
   const causalState = ctx.causal;
@@ -274,7 +274,7 @@ function deriveCommonerResentments(s, ctx) {
   return slot('commoner_resentments', text, 'criminal_opportunity + food_production + public_legitimacy + corruption', refs);
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveOutsiderImpressions(s, ctx) {
   const refs = [];
   const top = [...ctx.threats].sort((/** @type {any} */ a, /** @type {any} */ b) => b.severity - a.severity)[0];
@@ -308,7 +308,7 @@ function deriveOutsiderImpressions(s, ctx) {
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveUnspokenTopics(s, ctx) {
   const refs = [];
   const topics = [];
@@ -341,7 +341,7 @@ function deriveUnspokenTopics(s, ctx) {
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
 }
 
-/** @param {any} s @param {any} ctx */
+/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
 function deriveRecentChanges(s, ctx) {
   const refs = [];
   const changes = [];
@@ -406,7 +406,7 @@ const DERIVERS = Object.freeze({
  * Build the substrate context once per call so each slot deriver
  * doesn't re-derive.
  */
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function buildContext(settlement) {
   return {
     profiles:   deriveAllFactionProfiles(settlement),
@@ -439,7 +439,7 @@ export function deriveDailyLifeSlot(key, settlement) {
 /**
  * Derive every canonical daily-life slot. Builds context once.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object} {
  *   slots: { [key]: DailyLifeSlot },
  *   summary: string[],
@@ -464,7 +464,7 @@ export function deriveDailyLife(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Flat array of `${label}: ${text}` lines. @param {any} settlement */
+/** Flat array of `${label}: ${text}` lines. @param {import('./settlement.schema.js').SimSettlement} settlement */
 export function summarizeDailyLife(settlement) {
   return (/** @type {any} */ (deriveDailyLife(settlement))).summary;
 }

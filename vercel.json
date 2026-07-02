@@ -21,7 +21,7 @@
     {
       "source": "/map/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.dropboxapi.com https://content.dropboxapi.com; frame-src 'self' https://watabou.github.io https://deorum.vercel.app; worker-src 'self' blob:; form-action 'self'; report-uri /api/csp-report; report-to csp-endpoint" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.dropboxapi.com https://content.dropboxapi.com; frame-src 'self' https://watabou.github.io https://deorum.vercel.app; worker-src 'self' blob:; form-action 'self'; navigate-to 'self' https://*.supabase.co; report-uri /api/csp-report; report-to csp-endpoint" }
       ]
     }
   ]

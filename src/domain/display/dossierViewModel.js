@@ -24,6 +24,7 @@
  */
 
 import { cleanNum } from './placeholders.js';
+import { canonExports } from '../canonicalAccessors.js';
 import { deriveMagicProfile } from '../magicProfile.js';
 
 const EXPORT_STATUS_LABEL = Object.freeze({
@@ -61,7 +62,7 @@ function toArray(v) {
  * dailyProduction / dailyNeed (NOT production / need). Enforces the rule:
  * never show produced=0 & needed=0 next to a non-zero surplus/deficit —
  * fall back to "Not calculated".
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveFoodBalance(settlement) {
   const fb = settlement?.economicViability?.metrics?.foodBalance || null;
@@ -123,7 +124,7 @@ export function deriveFoodBalance(settlement) {
  * Export posture (§1d). Single source for "does this settlement export, and
  * how exposed is that trade?". Reads economicState.primaryExports (what the
  * Economics surface shows), falling back to the legacy economicState.exports.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveExportPosture(settlement) {
   const eco = settlement?.economicState || {};
@@ -157,7 +158,7 @@ export function deriveExportPosture(settlement) {
  * while the dossier shows a food deficit. buildViabilitySummary() (economicGenerator)
  * only checks dependency warnings for its "self-sufficient" branch — it
  * ignores a food deficit — which is the contradiction this corrects.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveViability(settlement) {
   const v = settlement?.economicViability || {};
@@ -239,7 +240,7 @@ export function deriveViability(settlement) {
  * unexplained. Settlements the pulse has never touched (no stockpile record)
  * report available:false and say nothing. The prose field is named `display`
  * (the view-model idiom) — NOT `note`, which the publicSafe denylist strips.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveBlockadeRelief(settlement) {
   const sp = settlement?.economicState?.foodSecurity?.stockpile || null;
@@ -270,7 +271,7 @@ const MAGIC_ROLE_LABEL = Object.freeze({
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
  * price a magic economy that does not exist.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function deriveMagicPosture(settlement) {
   const m = deriveMagicProfile(settlement);
@@ -305,7 +306,7 @@ export function deriveMagicPosture(settlement) {
  * Headcounts (§overview). The institution / NPC / faction totals that BOTH the
  * screen overview and the PDF overview render — sourced identically here so the
  * two surfaces can never disagree on a count.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ institutions: number, npcs: number, factions: number }}
  */
 export function deriveHeadcounts(settlement) {
@@ -322,7 +323,7 @@ export function deriveHeadcounts(settlement) {
  * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
  * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
  * scale, the PDF a print palette), so only the label is a shared scalar.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ label: string | null }}
  */
 export function deriveProsperityPosture(settlement) {
@@ -332,7 +333,7 @@ export function deriveProsperityPosture(settlement) {
 /**
  * Safety label (§overview) — the safetyProfile.safetyLabel BOTH surfaces render.
  * Tone is per-surface (see deriveProsperityPosture); only the label is shared.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ label: string | null }}
  */
 export function deriveSafetyPosture(settlement) {
@@ -344,7 +345,7 @@ export function deriveSafetyPosture(settlement) {
  * score BOTH surfaces render. scoreAvg mirrors the PDF avgScore helper exactly
  * (rounded mean of the numeric score values); the parity pin guards the two copies
  * against future drift.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ readinessLabel: string | null, scoreAvg: number | null }}
  */
 export function deriveDefensePosture(settlement) {
@@ -357,18 +358,21 @@ export function deriveDefensePosture(settlement) {
 /**
  * Top export label (§summary) — labelOfThing(primaryExports[0]); mirrors the PDF
  * labelOfThing helper exactly (the good/name/label of the first primary export).
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @returns {{ label: string }}
  */
 export function deriveTopExport(settlement) {
-  const item = settlement?.economicState?.primaryExports?.[0];
+  // canonExports (not primaryExports directly) so a legacy `exports`-aliased save
+  // still yields a top export. deriveTradeExposure above already does this fallback;
+  // this brings the summary's topExport into line with it (and with the PDF).
+  const item = canonExports(settlement)[0];
   if (!item) return { label: '' };
   if (typeof item === 'string') return { label: item };
   return { label: item.good || item.name || item.label || '' };
 }
 
 /**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{ aiOverlay?: any }} [opts]
  */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {

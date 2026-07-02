@@ -221,7 +221,9 @@ export function enqueueEdit(row) {
 /** Enqueue a structural snapshot (hot + optional structural). */
 export function enqueueSnapshot(row) {
   if (!isConfigured) return;
-  const rec = { ...row, ts: row.ts || nowMs() };
+  // Stamp the research tier so purgeRevoked() actually drops these on a
+  // research-consent revocation (its _snapshots filter keys on consentTier).
+  const rec = { ...row, ts: row.ts || nowMs(), consentTier: 'research' };
   if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; }
   _snapshots.push(rec);
   capQueue(); scheduleSpill(); maybeFlush();

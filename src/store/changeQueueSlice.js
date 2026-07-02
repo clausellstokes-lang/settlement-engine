@@ -308,6 +308,18 @@ export function createChangeQueueSlice(set, get) {
         && get().isSettlementClockBound(saveId);
       const isCampaignCommit = !!(isClockBound && get().phase === 'canon');
 
+      // M2 — the campaign-commit branch persists via persistCampaignLocalCommit,
+      // which (unlike the standalone `hasCascade` path's _batchCommit) has NO
+      // per-row LOCAL rollback. A link/rename cascade mutates the savedSettlements
+      // mirror for BOTH this settlement and the partner, so a failed commit after
+      // the atomic RPC rolled the cloud back would leave partner rows locally
+      // mutated — mirror diverges from cloud until reload. Partner ids aren't known
+      // until the link executor runs, so snapshot the whole mirror by id here.
+      // Bounded to the campaign+cascade case so the common single-row path pays nothing.
+      const preSavedById = (isCampaignCommit && hasCascade)
+        ? new Map((get().savedSettlements || []).map(r => [String(r.id), cloneJson(r)]))
+        : null;
+
       set(state => {
         state.changeQueueFlushing = true;
         state.flushSuppressPersist = true;
@@ -344,9 +356,11 @@ export function createChangeQueueSlice(set, get) {
             // write; the affected rows ride along into the end-of-batch commit.
             if (_linkExecutor) {
               const r = await _linkExecutor(order);
+              // Record affected partner ids BEFORE the throw so the M2 rollback
+              // covers any row the cascade already mutated on a failed commit.
+              for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
               if (r && r.ok === false) throw new Error('Rename cascade failed.');
               if (r && r.settlement) linkSettlement = r.settlement;
-              for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
             }
           } else if (order.type === 'link' || order.type === 'unlink') {
             // The cascade executor mutates local saves/detail for BOTH this
@@ -354,9 +368,11 @@ export function createChangeQueueSlice(set, get) {
             // affected ids feed the single atomic end-of-batch persistBatch so a
             // failure restores BOTH rows (no partial apply to either settlement).
             const r = await _linkExecutor(order);
+            // Record affected partner ids BEFORE the throw so the M2 rollback
+            // covers any row the cascade already mutated on a failed commit.
+            for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
             if (r && r.ok === false) throw new Error('Neighbour link failed.');
             if (r && r.settlement) linkSettlement = r.settlement;
-            for (const aid of (r?.affectedIds || [])) affectedIds.add(aid);
             // Canon flavor record (spec §2.5): generalize the rename precedent so
             // every committed order leaves a chronicle line. No-op off canon.
             const partnerName = order.payload?.partnerName || 'a neighbour';
@@ -455,22 +471,55 @@ export function createChangeQueueSlice(set, get) {
           throw new Error('persist_failed');
         }
 
-        // Success: drop the queue. The soft-refresh (re-derive detail +
+        // Success: drop ONLY the orders this flush actually replayed. queueChange
+        // is not gated on changeQueueFlushing, so an Apply click landing in one of
+        // the persist await windows above enqueues a NEW order the replay loop
+        // never saw — a blanket `delete state.changeQueues[key]` would silently
+        // discard it. Filtering by the snapshotted ids keeps any late arrival
+        // staged for the next commit. The soft-refresh (re-derive detail +
         // key-bump) is the caller's job — return the committed settlement.
-        set(state => { delete state.changeQueues[key]; });
+        const replayedIds = new Set(queue.map(o => o.id));
+        set(state => {
+          const remaining = (state.changeQueues[key] || []).filter(o => !replayedIds.has(o.id));
+          if (remaining.length === 0) delete state.changeQueues[key];
+          else state.changeQueues[key] = remaining;
+        });
         return { ok: true, committed: queue.length, settlement: nextSettlement };
       } catch (e) {
         // Rollback: restore the pre-flush store state. The queue is UNTOUCHED, so
         // "Save N changes" re-applies from this clean base (never on a partial).
         set(state => {
-          state.settlement  = preSettlement;
-          state.eventLog    = preEventLog;
-          state.systemState = preSystemState;
-          state.editedAt    = preEditedAt;
+          // Only restore the LIVE view if THIS settlement is still the open one.
+          // hydrateFromSave has no changeQueueFlushing guard, so the user can open
+          // a different settlement during the persist await windows above — an
+          // unconditional restore here would clobber save B's freshly-hydrated
+          // view with save A's pre-flush snapshot (the undoLastPulse precedent:
+          // guard the live-view restore on activeSaveId). The id-keyed rollbacks
+          // below (mirror rows + campaign buckets) still run either way, so save
+          // A's half-applied state is undone wherever it actually lives.
+          if (state.activeSaveId != null && String(state.activeSaveId) === key) {
+            state.settlement  = preSettlement;
+            state.eventLog    = preEventLog;
+            state.systemState = preSystemState;
+            state.editedAt    = preEditedAt;
+          }
           // Roll the savedSettlements mirror row back in lockstep with the store
           // so a failed flush never leaves the half-applied settlement behind in
           // the mirror (atomic rollback — the retry reads a clean base).
-          if (preSavedSettlement !== undefined) {
+          // M2 — on the campaign+cascade path, restore EVERY affected row (this
+          // settlement + every link/rename partner) from the pre-flush snapshot,
+          // matching the standalone _batchCommit path's all-rows rollback. Off
+          // that path, restore just the single active row as before.
+          if (preSavedById) {
+            for (const id of affectedIds) {
+              const prev = preSavedById.get(String(id));
+              if (prev === undefined) continue;
+              const idx = (state.savedSettlements || []).findIndex(
+                s => String(s.id) === String(id),
+              );
+              if (idx !== -1) state.savedSettlements[idx] = prev;
+            }
+          } else if (preSavedSettlement !== undefined) {
             const idx = (state.savedSettlements || []).findIndex(
               s => String(s.id) === String(activeSaveId),
             );

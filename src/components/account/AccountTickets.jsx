@@ -17,7 +17,7 @@
  * RPC enforces visibility, so there is nothing to hide client-side — the
  * thread payload simply doesn't contain them.
  */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
@@ -39,6 +39,11 @@ const STATUS_LABEL = {
 
 /** Invoke an account-actions edge action. Returns data or throws. */
 async function callAccount(body) {
+  // Single choke point for the null-supabase (unconfigured / mock) case: without
+  // this every create/open/reply path would deref supabase.functions and surface
+  // a raw "Cannot read properties of null" in the error banner. loadTickets
+  // already short-circuits on !supabase; this covers the write paths too.
+  if (!supabase) throw new Error('Support tickets are unavailable in this environment.');
   const { data, error } = await supabase.functions.invoke('account-actions', { body });
   if (error) throw error;
   if (data?.error) throw new Error(data.error);
@@ -101,6 +106,12 @@ export default function AccountTickets() {
       setLoading(false);
     }
   }, []);
+
+  // Load the caller's tickets on mount — otherwise a user with open (even
+  // waiting_on_user) tickets is shown a definitive "No tickets yet" until they
+  // manually hit Refresh. The fetch is RLS/RPC-scoped to the caller server-side.
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- mount data-load: loadTickets sets the spinner/list on open (same pattern as GalleryMaps/AdminPanel)
+  useEffect(() => { loadTickets(); }, [loadTickets]);
 
   const openThread = useCallback(async (ticket) => {
     setActive(ticket); setView('thread'); setEvents([]); setError(null);

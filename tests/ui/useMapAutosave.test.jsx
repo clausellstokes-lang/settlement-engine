@@ -36,7 +36,7 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-import { useMapAutosave } from '../../src/hooks/useMapAutosave.js';
+import { useMapAutosave, mapFingerprint } from '../../src/hooks/useMapAutosave.js';
 
 beforeEach(() => {
   vi.useFakeTimers();
@@ -92,5 +92,66 @@ describe('useMapAutosave', () => {
     vi.advanceTimersByTime(1);
     expect(saveCampaignMap).toHaveBeenCalledTimes(1);
     expect(saveCampaignMap).toHaveBeenCalledWith('camp-1', liveMapState);
+  });
+
+  // ── Regression: drag-moves / annotation edits must be observed. ──────────
+  // The old fingerprint keyed only on placement *ids* + layer *counts*, so a
+  // drag-move (same id set, same counts, different x/y) left the key unchanged
+  // → no autosave, while the chip showed "Saved". These lock in that content
+  // and coordinates now participate in the dirty diff.
+
+  test('saves when a placement is drag-moved (same id, different coordinates)', () => {
+    // Same burg id "7", moved from (1,2) to (99,42): id set + count unchanged.
+    liveMapState = { placements: { 7: { x: 99, y: 42, cellId: 3 } }, labels: [], markers: [], forests: [] };
+    const persisted = { placements: { 7: { x: 1, y: 2, cellId: 3 } }, labels: [], markers: [], forests: [] };
+    const saveCampaignMap = vi.fn();
+    renderHook(() => useMapAutosave('camp-1', { mapState: persisted }, saveCampaignMap));
+    vi.advanceTimersByTime(3500);
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1);
+    expect(saveCampaignMap).toHaveBeenCalledWith('camp-1', liveMapState);
+  });
+
+  test('saves when a label is renamed / moved (same id + count, different content)', () => {
+    liveMapState = {
+      placements: {},
+      labels: [{ id: 'lbl_1', x: 10, y: 20, text: 'Renamed', rotation: 90 }],
+      markers: [], forests: [],
+    };
+    const persisted = {
+      placements: {},
+      labels: [{ id: 'lbl_1', x: 5, y: 5, text: 'Original', rotation: 0 }],
+      markers: [], forests: [],
+    };
+    const saveCampaignMap = vi.fn();
+    renderHook(() => useMapAutosave('camp-1', { mapState: persisted }, saveCampaignMap));
+    vi.advanceTimersByTime(3500);
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1);
+  });
+
+  test('mapFingerprint distinguishes coordinate and content edits across all layers', () => {
+    const base = {
+      placements: { 7: { x: 1, y: 2, cellId: 3, settlementId: 's1' } },
+      labels: [{ id: 'l1', x: 0, y: 0, text: 'A', rotation: 0, fontSize: 12, color: '#000', fontFamily: 'serif' }],
+      markers: [{ id: 'm1', x: 0, y: 0, icon: 'pin', color: '#f00', title: 'T', note: 'N' }],
+      forests: [{ id: 'f1', x: 0, y: 0, radius: 5, density: 3, treeStyle: 'oak' }],
+    };
+    const same = JSON.parse(JSON.stringify(base));
+    expect(mapFingerprint(base)).toBe(mapFingerprint(same));
+
+    const movedPlacement = JSON.parse(JSON.stringify(base));
+    movedPlacement.placements[7].x = 999;
+    expect(mapFingerprint(movedPlacement)).not.toBe(mapFingerprint(base));
+
+    const renamedLabel = JSON.parse(JSON.stringify(base));
+    renamedLabel.labels[0].text = 'B';
+    expect(mapFingerprint(renamedLabel)).not.toBe(mapFingerprint(base));
+
+    const editedMarker = JSON.parse(JSON.stringify(base));
+    editedMarker.markers[0].note = 'changed';
+    expect(mapFingerprint(editedMarker)).not.toBe(mapFingerprint(base));
+
+    const grownForest = JSON.parse(JSON.stringify(base));
+    grownForest.forests[0].radius = 50;
+    expect(mapFingerprint(grownForest)).not.toBe(mapFingerprint(base));
   });
 });

@@ -6,11 +6,16 @@ import { sans, TabIntro } from '../Primitives';
 import {useIsMobileTab} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
+import { prosperityRank } from '../../../data/constants.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
+
+// Placeholder for a missing fact value — matches OverviewTab's NO_VALUE. An
+// automated em-dash-strip pass had left a garbled bare ', ' literal here.
+const NO_VALUE = 'Unknown';
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
@@ -26,7 +31,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || ', '}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || NO_VALUE}</div>
     </div>
   );
 }
@@ -38,7 +43,7 @@ function MetaFact({ label, value, accent }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 4, fontSize: FS['11.5'], lineHeight: 1.4 }}>
       <span style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</span>
-      <span style={{ fontWeight: 400, color: BODY }}>{value || ', '}</span>
+      <span style={{ fontWeight: 400, color: BODY }}>{value || NO_VALUE}</span>
     </span>
   );
 }
@@ -136,7 +141,16 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId: _saveId = n
   const hasContent = !!displayNarrative;
 
   const tierLabel     = ctx.tierLabel;
-  const prospColor    = ctx.prospBand === 'prosperous' ? swatch['#1A5A28'] : ctx.prospBand === 'comfortable' ? swatch['#A0762A'] : ctx.prospBand === 'subsistence' ? '#8a4010' : swatch['#8B1A1A'];
+  // Rank on the canonical prosperity vocabulary (Subsistence..Wealthy, 0..6) so
+  // every band gets the right signal. Matching hand-typed strings meant the
+  // top bands (Wealthy, and Moderate) fell through to danger red.
+  const prospRank     = prosperityRank(ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1));
+  const prospColor    =
+    prospRank >= 5 ? swatch['#1A5A28'] :   // Prosperous, Wealthy — green
+    prospRank >= 3 ? swatch['#A0762A'] :   // Moderate, Comfortable — amber
+    prospRank >= 1 ? '#8a4010' :           // Struggling, Poor — brown
+    prospRank === 0 ? swatch['#8B1A1A'] :  // Subsistence — danger red
+    swatch['#8B1A1A'];                     // unknown/unrecognized — danger red
   const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
   const safetyColor   = ctx.safetyScore >= 70 ? swatch['#1A5A28'] : ctx.safetyScore >= 50 ? swatch['#A0762A'] : ctx.safetyScore >= 30 ? '#8a4010' : swatch['#8B1A1A'];
   const foodLabel     =

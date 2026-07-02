@@ -140,10 +140,18 @@ export default function SummaryTabV2({ settlement, onOpenTableView, hideIdentity
   // self-gating read the legacy SummaryTab used; a peaceful town shows nothing.
   const stresses = (Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : []).filter(Boolean);
 
-  const copyDossier = () => {
-    navigator.clipboard?.writeText(buildSummaryMarkdown(settlement, tableEntries));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyDossier = async () => {
+    // Only flip to "✓ Copied" if the clipboard write actually succeeds.
+    // navigator.clipboard is undefined in non-secure contexts and writeText
+    // can reject, so an unconditional success flag lies to the user.
+    if (!navigator.clipboard?.writeText) return;
+    try {
+      await navigator.clipboard.writeText(buildSummaryMarkdown(settlement, tableEntries));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Leave the button in its idle state; the copy did not land.
+    }
   };
 
   // Plot hooks moved out to their own Summary sub-tab (PlotHooksTab, spec §8)

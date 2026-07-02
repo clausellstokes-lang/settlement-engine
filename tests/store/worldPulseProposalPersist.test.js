@@ -189,7 +189,7 @@ describe('non-advancing world-pulse writes persist last-write-wins (expectedTick
     expect(arg.expectedTick).not.toBe(5);
   });
 
-  test('recordPartyImpact calls the atomic RPC with expectedTick = null (NOT the current tick)', async () => {
+  test('recordPartyImpact calls the atomic RPC with expectedTick = tick+1 (reject-if-newer, not LWW)', async () => {
     const store = makeStore();
     seedCanonized(store);
 
@@ -204,8 +204,10 @@ describe('non-advancing world-pulse writes persist last-write-wins (expectedTick
     expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledTimes(1);
     const arg = campaignService.persistWorldPulseAdvance.mock.calls[0][0];
     expect(arg.campaignId).toBe(CAMPAIGN_ID);
-    // A party impact is a discrete injection, not a time advance — last-write-wins.
-    expect(arg.expectedTick).toBeNull();
-    expect(arg.expectedTick).not.toBe(5);
+    // A party impact is a same-tick injection (it does NOT bump the tick). It must
+    // land at the tied tick 5 but must NOT clobber a concurrent-tab advance (tick 6+).
+    // expectedTick = snapshot tick (5) + 1 makes 069's "cloud < expected" guard mean
+    // "cloud <= 5" — applies at 5, rejects (→ cloudPending) if the cloud already moved on.
+    expect(arg.expectedTick).toBe(6);
   });
 });

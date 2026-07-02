@@ -180,3 +180,57 @@ describe('party-impact replay respects the advance cloud-pending state', () => {
     expect(recordSpy).toHaveBeenCalledWith(CAMPAIGN_ID, expect.objectContaining({ kind: 'remove_npc', npcId: NPC_ID }));
   });
 });
+
+// H — a party impact is a same-tick injection; it must NOT last-write-wins clobber a
+// world-pulse advance a second tab committed in between. rejectIfNewer sets 069's
+// expectedTick = snapshotTick+1, so the atomic guard applies iff cloud <= our tick and
+// rejects (→ cloudPending) iff a concurrent tab advanced past it.
+describe('recordPartyImpact rejects on a concurrent-tab advance (H — no clobber)', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    installLocalStorage();
+    primeCampaignSync([]);
+  });
+
+  function seedCanonCampaign(store, tick) {
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: SAVE_ID, name: 'Ashford', phase: 'canon',
+        settlement: settlement('Ashford'),
+        campaignState: { phase: 'canon', eventLog: [], locks: {}, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+      state.campaigns = [{
+        id: CAMPAIGN_ID, name: 'Realm', settlementIds: [SAVE_ID],
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: tick, entries: [] },
+        worldState: { rngSeed: 'store-seed', tick, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+    });
+  }
+
+  test('cloud at our snapshot tick: the impact APPLIES with expectedTick = tick+1', async () => {
+    const store = makeStore();
+    seedCanonCampaign(store, 5);
+    campaignService.persistWorldPulseAdvance.mockResolvedValue({ applied: true, settlementsWritten: 1, settlementsRequested: 1 });
+
+    const result = await store.getState().recordPartyImpact(CAMPAIGN_ID, { kind: 'remove_npc', npcId: NPC_ID });
+
+    expect(result).toBeTruthy();
+    expect(result.cloudPending).toBeFalsy();
+    // reject-if-newer threads expectedTick = snapshot tick (5) + 1.
+    expect(campaignService.persistWorldPulseAdvance).toHaveBeenCalledWith(expect.objectContaining({ expectedTick: 6 }));
+  });
+
+  test('a concurrent tab advanced past our tick: the impact is REJECTED (cloudPending), not clobbered', async () => {
+    const store = makeStore();
+    seedCanonCampaign(store, 5);
+    // 069 guard: cloud tick >= expectedTick(6) ⇒ applied:false. Formerly (LWW) this
+    // would have force-written and clobbered the newer advance.
+    campaignService.persistWorldPulseAdvance.mockResolvedValue({ applied: false, reason: 'stale_tick' });
+
+    const result = await store.getState().recordPartyImpact(CAMPAIGN_ID, { kind: 'remove_npc', npcId: NPC_ID });
+
+    expect(result).toBeTruthy();
+    expect(result.cloudPending).toBe(true);
+  });
+});

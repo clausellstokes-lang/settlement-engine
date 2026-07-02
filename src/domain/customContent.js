@@ -209,7 +209,7 @@ const CATEGORY_TEMPLATES = Object.freeze({
 /**
  * Classify a custom institution. Returns the structured envelope.
  * @param {any} rawEntity
- * @param {any} [settlement]
+ * @param {import('./settlement.schema.js').SimSettlement} [settlement]
  */
 export function classifyCustomInstitution(rawEntity, settlement) {
   if (!rawEntity) return null;

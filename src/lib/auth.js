@@ -794,9 +794,22 @@ async function fetchProfileAuthWithRetry(user) {
   throw lastError;
 }
 
+// Monotonic sequence for onAuthStateChange invocations. Each handler captures
+// the counter value at its START; before applying its (possibly slow) async
+// profile fetch it re-checks the counter and bails if a newer event has since
+// begun. This makes a stale resolution a no-op so an older event (e.g. a
+// TOKEN_REFRESHED whose profile fetch is slow) cannot resolve AFTER a newer
+// SIGNED_OUT and resurrect signed-in state. The exposure is mainly cross-tab
+// (BroadcastChannel) — within a single tab auth-js mostly serializes — but the
+// guard is cheap and closes the window either way. The happy path (a single
+// in-flight event) is unchanged: nothing newer started, so it always applies.
+let authChangeSeq = 0;
+
 function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
+      authChangeSeq += 1;
+      const mySeq = authChangeSeq;
       if (session?.user) {
         let profile;
         try {
@@ -811,6 +824,10 @@ function supabaseOnAuthChange(callback) {
           // its chances; a sustained outage is the deliberate safe failure.
           return;
         }
+        // A newer auth event began while this profile fetch was in flight. Its
+        // resolution is stale — applying it could resurrect superseded state
+        // (e.g. an older TOKEN_REFRESHED landing after a SIGNED_OUT). Drop it.
+        if (mySeq !== authChangeSeq) return;
         callback(
           event,
           session.user,

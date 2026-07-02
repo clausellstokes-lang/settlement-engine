@@ -214,6 +214,28 @@ describe('advanceTime() — applies faction deltas to settlement', () => {
     expect(typeof merchant._timePressure.wealth).toBe('number');
     expect(typeof merchant._timePressure.publicTrust).toBe('number');
   });
+
+  it('does not mutate a pre-existing _timePressure on the input (frozen-safe, accumulates on a copy)', () => {
+    // A faction that already carries _timePressure (e.g. an immer-frozen input
+    // or a prior forecast tick): the tick must accumulate onto a COPY, never
+    // mutate the input's object in place (which would leak and throw on frozen).
+    const s = multiFactionSettlement();
+    const merchantIn = s.powerStructure.factions.find(f => f.faction === 'Merchant Guilds');
+    merchantIn._timePressure = Object.freeze({ wealth: 5 });
+    Object.freeze(merchantIn._timePressure);
+
+    let result;
+    expect(() => {
+      result = advanceTime(s, { activeConditions: ['plague'], interval: 'one_month' });
+    }).not.toThrow();
+
+    // Input untouched.
+    expect(merchantIn._timePressure).toEqual({ wealth: 5 });
+    // Output accumulated onto the prior value on a fresh object.
+    const merchantOut = result.newSettlement.powerStructure.factions.find(f => f.faction === 'Merchant Guilds');
+    expect(merchantOut._timePressure).not.toBe(merchantIn._timePressure);
+    expect(merchantOut._timePressure.wealth).toBeGreaterThan(5);
+  });
 });
 
 // ── Interval scaling ───────────────────────────────────────────────────

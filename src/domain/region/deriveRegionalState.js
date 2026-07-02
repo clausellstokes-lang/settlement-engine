@@ -39,20 +39,20 @@ function uniqueById(items) {
   return out;
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function economicOf(settlement) {
   return settlement?.economicState || settlement?.economy || {};
 }
 
 /**
- * @param {any} settlement
- * @param {any} save
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} save
  */
 function configOf(settlement, save) {
   return settlement?.config || save?.config || {};
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function routeCutSignals(settlement) {
   const config = settlement?.config || {};
   const cutRoutes = Array.isArray(config._cutRoutes) ? config._cutRoutes : [];
@@ -64,8 +64,8 @@ function routeCutSignals(settlement) {
 }
 
 /**
- * @param {any} settlement
- * @param {any} save
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} save
  */
 function tradeRouteState(settlement, save) {
   const cfg = configOf(settlement, save);
@@ -82,7 +82,7 @@ function tradeRouteState(settlement, save) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function exportLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -92,7 +92,7 @@ function exportLabels(settlement) {
   ];
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function importLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -102,7 +102,7 @@ function importLabels(settlement) {
   ];
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function localProductionLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -111,7 +111,7 @@ function localProductionLabels(settlement) {
   ];
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function resourceDepletionState(settlement) {
   const state = settlement?.config?.nearbyResourcesState || {};
   const depleted = [];
@@ -337,8 +337,8 @@ function diffPopulation(beforeState, afterState, event) {
 }
 
 /**
- * @param {any} beforeSettlement
- * @param {any} afterSettlement
+ * @param {import('../settlement.schema.js').SimSettlement} beforeSettlement
+ * @param {import('../settlement.schema.js').SimSettlement} afterSettlement
  */
 function diffCausal(beforeSettlement, afterSettlement) {
   try {

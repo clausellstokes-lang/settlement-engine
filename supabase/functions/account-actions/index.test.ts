@@ -16,6 +16,19 @@
  *   - an ACTIVE actor is allowed through and the write RPC runs with the verified id
  *   - a read-only action (list_my_tickets) is NOT gated (reachable while inactive)
  *
+ * ALSO covered here (stripe-deletion remediation): process_deletions must STOP
+ * BILLING for each deleted account. The process_account_deletions RPC anonymises
+ * the profile but never touches Stripe (and the nightly pg_cron run calls the RPC
+ * directly), so the handler sweeps every soft-deleted profile still holding a
+ * Stripe id: cancel the subscription, then clear the stored ids. Asserted at the
+ * boundary with an injected fake Stripe:
+ *   - a deleted user with a recorded subscription ⇒ stripe.subscriptions.cancel
+ *     runs with the stored id and the profile's Stripe ids are cleared
+ *   - a legacy customer-only row (pre-087, no recorded sub id) ⇒ resolved via
+ *     subscriptions.list; open subs canceled, nothing open ⇒ just cleared
+ *   - already-canceled / missing at Stripe ⇒ idempotent, deletion still succeeds
+ *   - an unexpected Stripe outage ⇒ deletion still succeeds, ids RETAINED for retry
+ *
  * `handleAccountActions` is the exported handler; we inject recording stubs via its
  * `deps` seam (production passes nothing).
  *
@@ -141,6 +154,158 @@ Deno.test('an ACTIVE actor is allowed through and create_ticket runs with the ve
   const create = admin.rpc.find((c) => c.fn === 'create_ticket');
   assertEquals(create !== undefined, true);
   assertEquals((create!.args as { p_actor: string }).p_actor, 'active1');   // verified, not the body
+});
+
+// ── process_deletions × Stripe (stripe-deletion remediation) ────────────────────
+
+/** Billing row shape the sweep reads back for each processed user. */
+type BillingRow = { id: string; stripe_subscription_id: string | null; stripe_customer_id: string | null };
+
+/** Admin stub for the process_deletions path: the role gate reads an ADMIN
+ *  profile, the processor RPC reports one processed request (req1 → user u1),
+ *  and the soft-deleted billing sweep (.not/.or/.limit chain) reads `billing`.
+ *  Every profiles UPDATE is recorded so a test can assert whether the Stripe
+ *  linkage was cleared or retained. */
+function makeDeletionAdmin(billing: BillingRow[]) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const updates: Array<{ values: Record<string, unknown>; id: string }> = [];
+  let bans = 0;
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_table: string) => ({
+      select: (_cols: string) => ({
+        // role gate: profiles.role for the caller.
+        eq: () => ({ single: () => Promise.resolve({ data: { role: 'admin', email: 'a@x.com' }, error: null }) }),
+        // processed request ids → user ids (awaited .in on deletion_requests).
+        in: (_col: string, _ids: string[]) => Promise.resolve({ data: [{ user_id: 'u1' }], error: null }),
+        // the billing sweep: soft-deleted profiles still holding a Stripe id.
+        not: () => ({ or: () => ({ limit: () => Promise.resolve({ data: billing, error: null }) }) }),
+      }),
+      update: (values: Record<string, unknown>) => ({
+        eq: (_col: string, id: string) => { updates.push({ values, id }); return Promise.resolve({ error: null }); },
+      }),
+    }),
+    auth: { admin: { updateUserById: () => { bans += 1; return Promise.resolve({ error: null }); } } },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      return Promise.resolve({ data: { ids: ['req1'] }, error: null });
+    },
+  };
+  return { rpc, updates, bans: () => bans, adminClient: () => client };
+}
+
+/** Recording fake Stripe. `behavior` drives subscriptions.cancel/list:
+ *  ok = resolves; missing = cancel rejects resource_missing (already gone at
+ *  Stripe); outage = cancel AND list reject with an unrelated transport error.
+ *  `listedSubs` is what subscriptions.list reports open for any customer. */
+function makeStripe(behavior: 'ok' | 'missing' | 'outage' = 'ok', listedSubs: string[] = []) {
+  const canceled: string[] = [];
+  const listedFor: string[] = [];
+  const client = {
+    subscriptions: {
+      cancel: (id: string) => {
+        canceled.push(id);
+        if (behavior === 'missing') {
+          return Promise.reject(Object.assign(new Error(`No such subscription: '${id}'`), { code: 'resource_missing' }));
+        }
+        if (behavior === 'outage') return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
+        return Promise.resolve({ id, status: 'canceled' });
+      },
+      list: ({ customer }: { customer: string }) => {
+        listedFor.push(customer);
+        if (behavior === 'outage') return Promise.reject(new Error('An error occurred with our connection to Stripe.'));
+        return Promise.resolve({ data: listedSubs.map((id) => ({ id })) });
+      },
+    },
+  };
+  return { canceled, listedFor, stripeClient: () => client };
+}
+
+/** Did any profiles update clear the Stripe linkage for `id`? */
+function linkageCleared(updates: Array<{ values: Record<string, unknown>; id: string }>, id: string): boolean {
+  return updates.some((u) =>
+    u.id === id && u.values.stripe_subscription_id === null && u.values.stripe_customer_id === null
+  );
+}
+
+const processReq = () =>
+  req({ action: 'process_deletions' }, { Authorization: 'Bearer jwt' });
+
+Deno.test('process_deletions CANCELS a processed user\'s live subscription and clears the stored Stripe ids', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
+  const stripe = makeStripe('ok');
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.subscriptionsCanceled, 1);
+  assertEquals(stripe.canceled, ['sub_live_1']);          // canceled the STORED id
+  assertEquals(linkageCleared(admin.updates, 'u1'), true); // shell keeps no billing identifier
+});
+
+Deno.test('a customer-only row (no recorded sub id) is resolved via list — nothing open ⇒ no cancel, ids cleared', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_1' }]);
+  const stripe = makeStripe('ok', []);   // nothing open at Stripe
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(stripe.listedFor, ['cus_1']);   // the customer WAS checked
+  assertEquals(stripe.canceled.length, 0);
+  assertEquals(linkageCleared(admin.updates, 'u1'), true);
+});
+
+Deno.test('a legacy customer-only row WITH an open subscription at Stripe is listed, canceled and cleared', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: null, stripe_customer_id: 'cus_legacy' }]);
+  const stripe = makeStripe('ok', ['sub_legacy_1']);   // pre-087: sub id never recorded
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 1);
+  assertEquals(stripe.canceled, ['sub_legacy_1']);
+  assertEquals(linkageCleared(admin.updates, 'u1'), true);
+});
+
+Deno.test('a subscription already gone at Stripe (resource_missing) does not abort the deletion — idempotent, ids cleared', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_gone', stripe_customer_id: 'cus_1' }]);
+  const stripe = makeStripe('missing');
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);                           // deletion never aborts
+  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(linkageCleared(admin.updates, 'u1'), true); // nothing left to stop ⇒ still cleared
+});
+
+Deno.test('an unexpected Stripe outage never aborts the deletion — ids RETAINED so a re-run can retry', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
+  const stripe = makeStripe('outage');
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);                            // soft-fail, like the GoTrue ban
+  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(linkageCleared(admin.updates, 'u1'), false); // kept for the retry sweep
+  assertEquals(admin.bans() > 0, true);                     // the ban still ran (deletion stands)
+});
+
+Deno.test('no Stripe client configured (STRIPE_SECRET_KEY unset) — deletion still succeeds, ids retained', async () => {
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_live_1', stripe_customer_id: 'cus_1' }]);
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: () => null,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 0);
+  assertEquals(linkageCleared(admin.updates, 'u1'), false);
 });
 
 Deno.test('a read-only action (list_my_tickets) is NOT gated — reachable while inactive', async () => {

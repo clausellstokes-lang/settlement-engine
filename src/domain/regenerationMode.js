@@ -211,7 +211,7 @@ export function buildRegenerationPlan(settlement, options = {}) {
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} catalogEntry
  */
 function lookupTagForEntity(settlement, catalogEntry) {

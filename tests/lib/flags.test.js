@@ -35,49 +35,49 @@ describe('flag() resolution', () => {
     // configured in the Supabase dashboard, so the OAuth buttons are live.
     expect(flag('discordOauth')).toBe(true);
     expect(flag('googleOauth')).toBe(true);
-    // mobileSingleChrome is also default-false, used below to exercise the
+    // founderRecognition is also default-false, used below to exercise the
     // override-over-false-default resolution mechanics.
-    expect(flag('mobileSingleChrome')).toBe(false);
+    expect(flag('founderRecognition')).toBe(false);
   });
 
   it('localStorage override beats default', () => {
     // An explicit true override wins over the false default…
-    setFlagOverride('mobileSingleChrome', true);
-    expect(flag('mobileSingleChrome')).toBe(true);
+    setFlagOverride('founderRecognition', true);
+    expect(flag('founderRecognition')).toBe(true);
 
     // …and an explicit false override is honored, not treated as "unset"
     // (guards the nullish-coalescing precedence in flag()).
-    setFlagOverride('mobileSingleChrome', false);
-    expect(flag('mobileSingleChrome')).toBe(false);
+    setFlagOverride('founderRecognition', false);
+    expect(flag('founderRecognition')).toBe(false);
   });
 
   it('removing the override falls back to default', () => {
-    setFlagOverride('mobileSingleChrome', true);
-    expect(flag('mobileSingleChrome')).toBe(true);
+    setFlagOverride('founderRecognition', true);
+    expect(flag('founderRecognition')).toBe(true);
 
-    setFlagOverride('mobileSingleChrome', null);
-    expect(flag('mobileSingleChrome')).toBe(false);
+    setFlagOverride('founderRecognition', null);
+    expect(flag('founderRecognition')).toBe(false);
   });
 
   it('URL parameter beats localStorage', () => {
-    setFlagOverride('mobileSingleChrome', false);
-    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true');
-    expect(flag('mobileSingleChrome')).toBe(true);
+    setFlagOverride('founderRecognition', false);
+    window.history.replaceState({}, '', '/?flag.founderRecognition=true');
+    expect(flag('founderRecognition')).toBe(true);
   });
 
   it('flag() reading a URL override is PURE — no localStorage write during resolution (#5)', () => {
     // flag() runs inside useSyncExternalStore's getSnapshot; it must NOT write to
     // localStorage as a side effect. The URL value still wins precedence, but
     // persistence is deferred to persistUrlFlags() (called once at boot).
-    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true');
-    expect(flag('mobileSingleChrome')).toBe(true);          // URL still resolves
-    expect(window.localStorage.getItem('flag.mobileSingleChrome')).toBeNull(); // but no write
+    window.history.replaceState({}, '', '/?flag.founderRecognition=true');
+    expect(flag('founderRecognition')).toBe(true);          // URL still resolves
+    expect(window.localStorage.getItem('flag.founderRecognition')).toBeNull(); // but no write
   });
 
   it('persistUrlFlags() persists URL overrides to localStorage at boot (#5)', () => {
-    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true&flag.heroV2=false');
+    window.history.replaceState({}, '', '/?flag.founderRecognition=true&flag.heroV2=false');
     persistUrlFlags();
-    expect(window.localStorage.getItem('flag.mobileSingleChrome')).toBe('true');
+    expect(window.localStorage.getItem('flag.founderRecognition')).toBe('true');
     expect(window.localStorage.getItem('flag.heroV2')).toBe('false');
   });
 
@@ -88,10 +88,10 @@ describe('flag() resolution', () => {
   });
 
   it('parses both "true/false" and "1/0" override values', () => {
-    setFlagOverride('mobileSingleChrome', 1);
-    expect(flag('mobileSingleChrome')).toBe(true);
-    setFlagOverride('mobileSingleChrome', 0);
-    expect(flag('mobileSingleChrome')).toBe(false);
+    setFlagOverride('founderRecognition', 1);
+    expect(flag('founderRecognition')).toBe(true);
+    setFlagOverride('founderRecognition', 0);
+    expect(flag('founderRecognition')).toBe(false);
   });
 });
 

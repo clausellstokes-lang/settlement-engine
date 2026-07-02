@@ -31,7 +31,7 @@ const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
 
 /**
  * Read an NPC secret regardless of shape — generators emit { what, stakes }.
- * @param {any} npc
+ * @param {import('../settlement.schema.js').SimNpc} npc
  */
 function npcSecretText(npc) {
   if (!npc?.secret) return '';

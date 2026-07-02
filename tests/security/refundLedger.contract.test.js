@@ -19,6 +19,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { netExecuteGrantsFromSql } from './netExecuteGrants.js';
 
 const ROOT = resolve(process.cwd());
 const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
@@ -44,18 +45,38 @@ describe('refund-ledger contract target exists (guards against silent vacuous sk
  *  a regex over migration 009 alone (where it WAS granted) would never see. */
 function netExecuteGrants(fnName) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`(grant|revoke)\\s+execute\\s+on\\s+function\\s+public\\.${fnName}\\b[\\s\\S]*?\\b(?:to|from)\\s+(\\w+)`, 'i');
-  const roles = new Set();
-  for (const f of files) {
-    for (const stmt of readFileSync(join(MIGRATIONS_DIR, f), 'utf-8').split(';')) {
-      const m = stmt.match(re);
-      if (!m) continue;
-      if (/grant/i.test(m[1])) roles.add(m[2].toLowerCase());
-      else roles.delete(m[2].toLowerCase());
-    }
-  }
-  return roles;
+  return netExecuteGrantsFromSql(fnName, files.map((f) => readFileSync(join(MIGRATIONS_DIR, f), 'utf-8')));
 }
+
+// The grant-replay guard itself must not be bypassable: a multi-role
+// `grant ... to service_role, authenticated` previously registered only the
+// FIRST role, so `authenticated` smuggled in second would go undetected.
+describe('netExecuteGrants — multi-role GRANT/REVOKE lists', () => {
+  const FN = 'refund_credits';
+  const grantTo = (roles) => `grant execute on function public.${FN}(uuid, text) to ${roles};`;
+  const revokeFrom = (roles) => `revoke execute on function public.${FN}(uuid, text) from ${roles};`;
+
+  it('registers EVERY role in a comma-separated grant, not just the first', () => {
+    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role, authenticated')]);
+    expect(roles.has('service_role')).toBe(true);
+    expect(roles.has('authenticated')).toBe(true); // the previously-dropped second role
+  });
+
+  it('removes EVERY role in a comma-separated revoke', () => {
+    const roles = netExecuteGrantsFromSql(FN, [
+      grantTo('authenticated'),
+      grantTo('anon'),
+      revokeFrom('authenticated, anon'),
+      grantTo('service_role'),
+    ]);
+    expect([...roles]).toEqual(['service_role']);
+  });
+
+  it('handles a role list wrapped across lines', () => {
+    const roles = netExecuteGrantsFromSql(FN, [grantTo('service_role,\n  authenticated')]);
+    expect(roles.has('authenticated')).toBe(true);
+  });
+});
 
 describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
   // Guard the read: vitest EXECUTES a describe.runIf(false) callback at collection

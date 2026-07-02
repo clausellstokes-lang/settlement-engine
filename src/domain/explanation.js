@@ -203,7 +203,7 @@ function tracesAsDownstream(traces) {
  * structural ifRemoved consequences.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} institutionId
  */
 export function explainInstitution(settlement, institutionId) {
@@ -281,7 +281,7 @@ export function explainInstitution(settlement, institutionId) {
 
 /** Explain a faction — wants/fears/leverage + dependencies + ifRemoved. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} factionId
  */
 export function explainFaction(settlement, factionId) {
@@ -357,7 +357,7 @@ export function explainFaction(settlement, factionId) {
 
 /** Explain an NPC — profile + consequenceIfRemoved + faction link. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} npcId
  */
 export function explainNpc(settlement, npcId) {
@@ -425,7 +425,7 @@ export function explainNpc(settlement, npcId) {
 
 /** Explain a supply chain — controller/dependencies/failureConsequences. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} chainId
  */
 export function explainSupplyChain(settlement, chainId) {
@@ -492,7 +492,7 @@ export function explainSupplyChain(settlement, chainId) {
 
 /** Explain a hook — origin/severity/ifIgnored/possibleResolutions. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} hookId
  */
 export function explainHook(settlement, hookId) {
@@ -543,7 +543,7 @@ export function explainHook(settlement, hookId) {
 
 /** Explain an active condition — archetype/severity/affectedSystems. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} conditionId
  */
 export function explainCondition(settlement, conditionId) {
@@ -603,7 +603,7 @@ export function explainCondition(settlement, conditionId) {
 
 /** Explain an escalation clock — trigger + stages. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} clockId
  */
 export function explainEscalationClock(settlement, clockId) {
@@ -650,7 +650,7 @@ export function explainEscalationClock(settlement, clockId) {
 
 /** Explain a history beat. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} beatKey
  */
 export function explainHistoryBeat(settlement, beatKey) {
@@ -688,7 +688,7 @@ export function explainHistoryBeat(settlement, beatKey) {
 
 /** Explain a substrate variable — contributors are the causes. */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} variable
  */
 export function explainSystemVariable(settlement, variable) {
@@ -743,7 +743,7 @@ export function explainSystemVariable(settlement, variable) {
  * so the explainer surfaces the original surface as a cause.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} threatId
  */
 export function explainThreat(settlement, threatId) {
@@ -832,7 +832,7 @@ export function explainThreat(settlement, threatId) {
  * two competing pressures; bands derive from supply/demand ratio.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} capacityRef
  */
 export function explainCapacity(settlement, capacityRef) {
@@ -924,7 +924,7 @@ export function explainCapacity(settlement, capacityRef) {
  * Explain a district.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} districtId
  */
 export function explainDistrict(settlement, districtId) {
@@ -995,7 +995,7 @@ export function explainDistrict(settlement, districtId) {
  * entity types or missing entities.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} ref
  */
 export function explainEntity(settlement, ref) {
@@ -1037,7 +1037,7 @@ export function explainEntity(settlement, ref) {
  * navigation menus, or the public compendium's listing pages.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function entityCatalog(settlement) {
   if (!settlement) return [];
@@ -1120,7 +1120,7 @@ export function entityCatalog(settlement) {
  * surface.
  */
 /**
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @param {any} entityId
  */
 export function relatedTraces(settlement, entityId) {

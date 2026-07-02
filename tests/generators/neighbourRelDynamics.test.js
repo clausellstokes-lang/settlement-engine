@@ -39,6 +39,7 @@ import {
   REL_DYNAMICS,
   extractNeighbourProfile,
   getNeighbourFactionBias,
+  getMirrorFactionLabel,
 } from '../../src/generators/neighbourGenerator.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -232,5 +233,28 @@ describe('config.neighborRelationship reaches the effective scores (H14)', () =>
     const solo = generateSettlementPipeline(SELF_CFG, null, { seed: SEED, customContent: {} });
     expect(solo.config.neighborRelationship).toBeUndefined();
     expect(solo._config.neighborRelationship).toBeUndefined();
+  });
+});
+
+describe('getMirrorFactionLabel does not lend alliance language to non-allies', () => {
+  // REL_DYNAMICS.neutral carries govMirrorW 0.05, so ~5% of neutral neighbours
+  // spawn a mirror faction. With no 'neutral' label set the lookup fell back to
+  // labels.allied, minting an incongruous 'Joint Defense Compact' beside a
+  // '(neutral)' descriptor. A neutral relationship must yield neutral naming.
+  test('neutral government mirror gets a neutral-toned label, not the allied one', () => {
+    const label = getMirrorFactionLabel('government', 'neutral', 'Ashford');
+    expect(label).toBe("Ashford Observers' Delegation");
+    expect(label).not.toContain('Joint Defense Compact');
+    expect(label).not.toContain('Alliance');
+  });
+
+  test('neutral military mirror is null (no faction language leaks in)', () => {
+    expect(getMirrorFactionLabel('military', 'neutral', 'Ashford')).toBeNull();
+  });
+
+  test('allied path is unchanged (regression guard on the fallback removal)', () => {
+    expect(getMirrorFactionLabel('military', 'allied', 'Ashford')).toBe(
+      'Joint Defense Compact (with Ashford)',
+    );
   });
 });

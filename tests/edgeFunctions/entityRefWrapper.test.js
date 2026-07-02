@@ -148,6 +148,41 @@ describe('degrade + backward compat', () => {
   });
 });
 
+describe('collectEntityNameRefs — client-shaped (non-array) collections', () => {
+  // Regression: a truthy NON-array (e.g. {}) in a client-supplied settlement
+  // used to throw TypeError in the `for…of` (the `|| []` guard is falsy-only).
+  // wrapEntityRefsInProse runs post-generation inside the caller's refund
+  // catch-all, so the crash refunded a fully-streamed generation.
+  it('does not throw when npcs/factions/neighbourNetwork are truthy non-arrays', () => {
+    const s = {
+      thesis: 'Nothing to wrap here.',
+      npcs: {},
+      powerStructure: { factions: { faction: 'Iron Guild' } },
+      neighbourNetwork: { neighbourName: 'Vale End' },
+    };
+    expect(() => collectEntityNameRefs(s)).not.toThrow();
+    expect(collectEntityNameRefs(s)).toEqual([]);
+    expect(() => wrapEntityRefsInProse(s)).not.toThrow();
+    expect(s.thesis).toBe('Nothing to wrap here.');
+  });
+
+  it('falls back to top-level factions when powerStructure.factions is a non-array', () => {
+    const refs = collectEntityNameRefs({
+      powerStructure: { factions: 'corrupt' },
+      factions: [{ faction: 'Iron Guild' }],
+    });
+    expect(refs).toEqual([{ name: 'Iron Guild', id: 'faction.iron_guild' }]);
+  });
+
+  it('still prefers an EMPTY powerStructure.factions array over top-level factions (pre-fix semantics)', () => {
+    const refs = collectEntityNameRefs({
+      powerStructure: { factions: [] },
+      factions: [{ faction: 'Iron Guild' }],
+    });
+    expect(refs).toEqual([]);
+  });
+});
+
 describe('collectEntityNameRefs', () => {
   it('drops names shorter than 2 chars and dedups by name', () => {
     const refs = collectEntityNameRefs({

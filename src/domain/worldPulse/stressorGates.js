@@ -195,7 +195,7 @@ export function tradeLinkCount(snapshot, sid) {
   return partners.size;
 }
 
-/** @param {any} settlement */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function isEntrepot(settlement) {
   if (settlement?.economicState?.isEntrepot === true) return true;
   return (settlement?.economicState?.activeChains || [])
@@ -205,7 +205,7 @@ function isEntrepot(settlement) {
 /**
  * The "magic matters here" signals for the deadzone gate. A deadzone is only
  * a crisis where magic is load-bearing — each signal names one way it is.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function magicDependenceSignals(settlement) {
   /** @type {any[]} */

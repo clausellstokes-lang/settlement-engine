@@ -72,7 +72,7 @@ const CANONICAL_TO_PROFILE = Object.freeze({
  * Archetype for a faction, in factionProfile's local vocabulary
  * (occupation/criminal/arcane/religious/military/merchant/craft/government/other).
  * Delegates detection to the canonical factionArchetype() so every layer agrees.
- * @param {any} faction
+ * @param {import('./settlement.schema.js').SimFaction} faction
  * @returns {string}
  */
 export function deriveFactionArchetype(faction) {
@@ -179,7 +179,7 @@ export function templateForArchetype(archetype) {
 // updates after events land, this derivation will be the place
 // where event-driven legitimacy adjustments aggregate.
 
-/** @param {any} faction @param {any} [settlement] @returns {number} */
+/** @param {import('./settlement.schema.js').SimFaction} faction @param {import('./settlement.schema.js').SimSettlement} [settlement] @returns {number} */
 function legitimacyFor(faction, settlement) {
   const power = settlement?.powerStructure || settlement?.power;
   if (!power) return 50;
@@ -192,8 +192,7 @@ function legitimacyFor(faction, settlement) {
   // matched a "Merchant League" government; "Noble Families" matched every
   // "Noble Governorship"). The roster isGoverning flag wins when present.
   const isGoverning = (typeof faction === 'object' && faction?.isGoverning === true)
-    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase())
-    || power.governingFactionName === factionName;
+    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase());
 
   // Governing faction inherits the settlement's public legitimacy via the conserved
   // governance ledger (handles the { score } object + legacy bare number uniformly).
@@ -215,8 +214,8 @@ function legitimacyFor(faction, settlement) {
  * produces the same output. Lossless on the input fields — `power`,
  * `desc`, etc. are preserved on the returned profile.
  *
- * @param {any} faction
- * @param {any} [settlement]   Optional context for legitimacy
+ * @param {import('./settlement.schema.js').SimFaction} faction
+ * @param {import('./settlement.schema.js').SimSettlement} [settlement]   Optional context for legitimacy
  *                                derivation. If omitted, legitimacy
  *                                falls back to 50 (neutral).
  * @returns {any} The enriched profile.
@@ -263,7 +262,7 @@ export function deriveFactionProfile(faction, settlement) {
  * Convenience: enrich every faction on a settlement into a structured
  * profile. Useful for the PipelineRail / PDF faction section that
  * wants to render the whole roster.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {any[]}
  */
 export function deriveAllFactionProfiles(settlement) {

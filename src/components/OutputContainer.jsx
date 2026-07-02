@@ -4,7 +4,6 @@ import { runAiLayer } from '../generators/aiLayer';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
-import { flag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
@@ -761,7 +760,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             stressObj={stressObj}
             allowRename={allowRename}
             onRenameSettlement={onRenameSettlement}
-            narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
+            narrativeButtons={readOnly && renderNarrativeButtons()}
           />
         )}
         {/* Lifecycle secondary bar — a thin parchment band under the identity

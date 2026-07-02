@@ -145,7 +145,7 @@ const NEUTRAL_TEMPLATE = Object.freeze({
 /**
  * Derive the structured GenreProfile.
  *
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {Object} GenreProfile
  */
 export function deriveGenreProfile(settlement) {
@@ -227,7 +227,7 @@ export function genreTemplate(genre) {
 
 /**
  * Human-readable summary.
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function summarizeGenre(settlement) {
   const g = /** @type {any} */ (deriveGenreProfile(settlement));

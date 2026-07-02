@@ -22,7 +22,7 @@ export function clamp01(value) {
 /**
  * The severity a stressor actually exerts on ONE settlement: the recorded global
  * severity, optionally tightened by a per-settlement override (the lower of the two).
- * @param {any} stressor
+ * @param {import('../settlement.schema.js').SimStressor} stressor
  * @param {string|number} saveId
  * @returns {number}
  */

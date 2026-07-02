@@ -75,6 +75,37 @@ describe('tradePressure — dependency + coercion', () => {
     }
   });
 
+  test('critical role resolves by id, not by rendered display name (name collision)', () => {
+    // Two settlements that render the SAME display name: role must key off id, so
+    // the dependent buyer is never mislabeled as its own supplier (or vice versa).
+    const settlements = [
+      save('hungry', 'Twin', { imports: ['Grain'], foodSecurity: { resilienceScore: 8, storageMonths: 0 } }),
+      save('farm', 'Twin', { exports: ['Grain'] }),
+    ];
+    const regionalGraph = ensureRegionalGraph({
+      edges: [{ id: 'e1', from: 'farm', to: 'hungry', relationshipType: 'trade_partner' }],
+      channels: [tradeChannel('farm', 'hungry')],
+    });
+    const nameFor = () => 'Twin'; // every settlement renders the same name
+    const pair = pairTradePressure({
+      aId: 'hungry', bId: 'farm', regionalGraph, settlements, worldState: { tick: 5 }, tick: 5, nameFor,
+    });
+    expect(pair).not.toBeNull();
+    if (pair.critical) {
+      // Raw ids are exposed so callers resolve role by identity.
+      expect(pair.dependentId).toBe('hungry');
+      expect(pair.supplierId).toBe('farm');
+      const dependentTie = settlementTradePressure({
+        settlementId: 'hungry', regionalGraph, settlements, worldState: { tick: 5 }, tick: 5, nameFor,
+      }).find(t => t.role !== 'partner');
+      expect(dependentTie?.role).toBe('dependent');
+      const supplierTie = settlementTradePressure({
+        settlementId: 'farm', regionalGraph, settlements, worldState: { tick: 5 }, tick: 5, nameFor,
+      }).find(t => t.role !== 'partner');
+      expect(supplierTie?.role).toBe('supplier');
+    }
+  });
+
   test('settlement-level pressure surfaces ties; inert when no tie', () => {
     const settlements = [
       save('hungry', 'Hungerton', { imports: ['Grain'], foodSecurity: { resilienceScore: 8, storageMonths: 0 } }),

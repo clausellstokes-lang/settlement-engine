@@ -20,6 +20,18 @@
  * model here (pg_cron, http, storage, vault, a pre-existing relation/role) are
  * classified ENVIRONMENTAL and tolerated — those paths are covered by the
  * per-migration tests' fuller scaffolds.
+ *
+ * SCOPE OF THE GUARANTEE (so it isn't overstated):
+ *  - PARSE errors: full coverage. pglite's db.exec parses the ENTIRE
+ *    multi-statement file before executing any statement, so a genuine syntax
+ *    error anywhere in a file is surfaced even when an earlier statement fails
+ *    environmentally. The "syntactically valid" claim holds for whole files.
+ *  - ORDERING bugs: per-file-PREFIX only. Within a single file, execution stops
+ *    at the first statement that raises (parse errors excepted); when that raise
+ *    is a tolerated ENVIRONMENTAL failure, statements AFTER it in the SAME file
+ *    are never executed, so a forward-reference ordering bug hiding behind an
+ *    environmental gap in the same file would go undetected. Cross-file ordering
+ *    (a whole file depending on a later file) is fully covered.
  */
 import { describe, expect, it, beforeAll } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
@@ -43,6 +55,13 @@ describe('migration chain exists (guards against silent vacuous skip)', () => {
   it('at least one NNN_*.sql migration is present on disk (a moved tree must fail loudly)', () => {
     expect(band.length, 'no NNN_*.sql migrations found — sequence coverage dropped').toBeGreaterThan(0);
   });
+});
+
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('migration chain present (suite not vacuous)', () => {
+  expect(band.length).toBeGreaterThan(0);
 });
 
 describe.runIf(band.length > 0)('migration chain — sequence integrity', () => {

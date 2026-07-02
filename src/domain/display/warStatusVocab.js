@@ -81,7 +81,7 @@ export const WAR_CONDITION_TO_GEN = Object.freeze({
 const GEN_PRIORITY = Object.freeze(['under_siege', 'occupied', 'wartime', 'insurgency']);
 
 /**
- * @param {any} s
+ * @param {import('../settlement.schema.js').SimSettlement} s
  * @returns {any[]} the settlement's stress entries as an array (tolerates the
  *   array / single-object / null shapes stressGenerator produces).
  */
@@ -133,7 +133,7 @@ function synthStress(genType, cond) {
  *   2. Otherwise, if a war-layer condition is present, synthesize the matching
  *      generation entry so a PULSE-born siege lights the SAME banner.
  *
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{ types?: readonly string[] }} [opts]
  *   `types` restricts which generation keys count as a hit (defaults to the war
  *   banner set). Each banner passes the set its inline predicate used so the
@@ -174,7 +174,7 @@ export function resolveMilitaryStress(settlement, opts = {}) {
 /**
  * Boolean convenience: is the settlement at war / under siege by EITHER
  * vocabulary? Thin wrapper over resolveMilitaryStress.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{ types?: readonly string[] }} [opts]
  * @returns {boolean}
  */

@@ -76,8 +76,12 @@ export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];
-  const ids = new Set(c.settlementIds || []);
-  return (state.savedSettlements || []).filter(save => ids.has(save.id));
+  // String-normalize both sides: settlement ids are an acknowledged
+  // number/string mix (cloud rows vs. local saves), and the sibling membership
+  // scans (isSettlementClockBound / queueSettlementEvent) already normalize —
+  // an exact-match Set here silently dropped members whose id type differed.
+  const ids = new Set((c.settlementIds || []).map(String));
+  return (state.savedSettlements || []).filter(save => ids.has(String(save.id)));
 }
 
 export function campaignCacheOwner(state) {
@@ -250,7 +254,7 @@ export async function persistSaveUpdates(updates = []) {
  * undo, they are deliberate LAST-WRITE-WINS writes: callers pass `backward: true`
  * (same expectedTick = NULL effect) so the guard is skipped and the write lands.
  */
-export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false }) {
+export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward = false, rejectIfNewer = false }) {
   if (!(result && campaignPersist)) return { ok: true, savesFailed: 0, campaignSynced: false };
 
   // ── Cloud: one atomic RPC for the entire advance write-set. ────────────────
@@ -270,7 +274,15 @@ export async function flushWorldPulsePersist({ result, campaignPersist, persistU
     // expectedTick = null (last-write-wins): 069 skips the guard and applies the
     // reverted snapshot unconditionally, while a forward advance keeps the guard.
     const tick = Number(campaign?.worldState?.tick);
-    const expectedTick = backward ? null : (Number.isFinite(tick) ? tick : null);
+    // `rejectIfNewer` (a same-tick INJECTION like a party impact, which does NOT
+    // bump worldState.tick): apply only if the cloud hasn't advanced past our
+    // snapshot tick. expectedTick = tick+1 makes 069's "cloud < expected" guard
+    // mean "cloud <= our snapshot tick", so a concurrent-tab advance (cloud > tick)
+    // is REJECTED (applied:false → surfaced as a conflict below) instead of
+    // last-write-wins CLOBBERING it. Single-tab (cloud == tick) still applies.
+    const expectedTick = rejectIfNewer
+      ? (Number.isFinite(tick) ? tick + 1 : null)
+      : (backward ? null : (Number.isFinite(tick) ? tick : null));
     try {
       const outcome = await campaignService.persistWorldPulseAdvance({
         campaignId,
@@ -296,8 +308,12 @@ export async function flushWorldPulsePersist({ result, campaignPersist, persistU
       //   timeline didn't land = a conflict. Narrowing to reason==='stale_tick'
       //   would let an unforeseen applied:false reason fall through to ok:true —
       //   re-opening the silent-drop bug. Fail toward surfacing, never toward a drop.
-      if (!backward && outcome && outcome.applied === false) {
-        try { _reportPersistFailure?.(new Error('advance conflicted with a concurrent same-tick advance; left cloud-pending')); }
+      // A forward advance OR a rejectIfNewer injection whose write didn't apply lost
+      // the race to a concurrent same-tick advance in another tab — surface it as a
+      // conflict (cloud-pending) rather than a silent drop/clobber. (Pure backward
+      // undo/proposal skip the guard and legitimately no-op on an id-keyed retry.)
+      if ((!backward || rejectIfNewer) && outcome && outcome.applied === false) {
+        try { _reportPersistFailure?.(new Error('write conflicted with a concurrent same-tick advance; left cloud-pending')); }
         catch { /* reporting must never throw */ }
         return { ok: false, savesFailed: 0, campaignSynced: false, conflict: true };
       }

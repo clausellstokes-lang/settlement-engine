@@ -24,6 +24,7 @@ import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { COPY } from '../../copy/strings.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 // Variants that print canon-only chapters as their reason for being — disabled
 // in draft (a draft export of them would degrade to a thin shell).
@@ -42,6 +43,10 @@ const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
  *   the sheet with a retry affordance, so status + recovery sit with the action.
  */
 export default function ExportSheet({ onClose, onExport, exporting, error }) {
+  // aria-modal="true" promises the background is inert; back it with real focus
+  // management (focus-in on open, Tab trap, Escape, restore on close). Conditionally
+  // mounted by the parent, so it is always "open" while rendered.
+  const dialogRef = useDialogFocusTrap(true, onClose);
   const phase    = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
@@ -66,6 +71,7 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
     // (vs button) is the correct a11y semantics, so this rule can't be satisfied.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="export-sheet-title"

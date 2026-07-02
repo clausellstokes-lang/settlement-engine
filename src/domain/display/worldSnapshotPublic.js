@@ -75,7 +75,9 @@ const PUBLIC_SIMULATION_RULE_KEYS = Object.freeze([
 /** Covert / seed / prose key names scrubbed from every serialized value as a final
  *  defense-in-depth pass (on top of publicSafe's PRIVATE_KEY_RE). These catch any
  *  field that rode in on an allowed aggregate. */
-const COVERT_KEY_RE = /(covert|rngSeed|seed|rollExplanation|rollExplanations|diceDetail|explanation|preSnapshot|preWorldState|preRegionalGraph|preSaves)/i;
+// Exported so the server-side mirror (089 gallery-snapshot sanitizer SQL) can be
+// drift-guarded against it — see tests/security/snapshotDenylistDrift.test.js.
+export const COVERT_KEY_RE = /(covert|rngSeed|seed|rollExplanation|rollExplanations|diceDetail|explanation|preSnapshot|preWorldState|preRegionalGraph|preSaves)/i;
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);

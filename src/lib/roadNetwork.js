@@ -361,13 +361,23 @@ export function computeRoadEdges(saves, placements) {
   }
   for (const n of nodes) {
     if (connectedIds.has(n.burgId)) continue;
-    let best = null, bd = Infinity;
+    // Connect to the nearest NON-HOSTILE neighbour. Walking candidates in
+    // ascending distance (not just the single nearest) means a placement whose
+    // closest neighbour is a rival still gets a lane to the next-nearest peer,
+    // honouring the "every placement is connected" contract — a lane to a
+    // hostile pair silently no-ops in addEdge and would leave n isolated.
+    const candidates = [];
     for (const o of nodes) {
       if (o.burgId === n.burgId) continue;
-      const d = (n.x - o.x) ** 2 + (n.y - o.y) ** 2;
-      if (d < bd) { bd = d; best = o; }
+      candidates.push({ dist: (n.x - o.x) ** 2 + (n.y - o.y) ** 2, node: o });
     }
-    if (best) addEdge(n, best, 'lane', 'nearest');
+    candidates.sort((c1, c2) => c1.dist - c2.dist);
+    for (const { node: o } of candidates) {
+      const key = [n.burgId, o.burgId].sort().join('|');
+      if (hostilePairs.has(key)) continue;  // a lane road can't cross an enemy pair
+      addEdge(n, o, 'lane', 'nearest');
+      break;
+    }
   }
 
   return edges;

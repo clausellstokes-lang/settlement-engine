@@ -22,7 +22,7 @@ const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal. Determined t
 
 /**
  * Build a fresh successor for an ousted NPC, inheriting their seat.
- * @param {any} ousted
+ * @param {import('../settlement.schema.js').SimNpc} ousted
  * @param {any} [rng]
  */
 export function successorNpc(ousted = {}, rng) {
@@ -57,7 +57,7 @@ export function successorNpc(ousted = {}, rng) {
 /**
  * Replace any NPC named in `oustedNames` with a fresh successor (same seat).
  * Pure; returns the same settlement reference when there's nothing to replace.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} oustedNames
  * @param {any} rng
  */

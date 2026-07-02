@@ -3,7 +3,7 @@
 exports[`pdf.6 — golden snapshot of the SHARED_FIELDS canon values > canon values for the fixed seed are golden (review any change, do not auto-update) 1`] = `
 {
   "defense.readinessLabel": "Defensible",
-  "defense.scoreAvg": 60,
+  "defense.scoreAvg": 61,
   "food.deficit (lb/day)": 0,
   "food.deficitPct (residual deficit ÷ daily need)": 0,
   "food.surplus (lb/day)": 5449,

@@ -112,8 +112,12 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   }
 
   // ── War arcs: a named war for each live siege coalition. ───────────────────
+  // Public-only: a gm/hidden war_front is GM-concealed and must never surface in
+  // the gallery-facing realm arc, mirroring worldSnapshotPublic.publicSieges.
+  // liveSieges carries the per-target visibility (public unless a front concealed it).
   const sieges = liveSieges({ worldState, regionalGraph });
   for (const siege of sieges) {
+    if (siege.visibility && siege.visibility !== 'public') continue;
     const targetName = nameFor(nameById, siege.targetId);
     if (siege.coalition.length >= 2) {
       const attackers = siege.coalition.map(id => nameFor(nameById, id));

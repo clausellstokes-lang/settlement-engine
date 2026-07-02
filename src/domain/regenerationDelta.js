@@ -33,7 +33,7 @@ import { entityCatalog } from './explanation.js';
 
 // ── Catalog diff ─────────────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {import('./settlement.schema.js').SimSettlement} settlement */
 function catalogIndex(settlement) {
   const cat = entityCatalog(settlement);
   const byId = new Map();
@@ -41,7 +41,7 @@ function catalogIndex(settlement) {
   return byId;
 }
 
-/** @param {any} before @param {any} after */
+/** @param {import('./settlement.schema.js').SimSettlement} before @param {import('./settlement.schema.js').SimSettlement} after */
 function diffEntityCatalogs(before, after) {
   const beforeMap = catalogIndex(before);
   const afterMap  = catalogIndex(after);

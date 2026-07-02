@@ -50,7 +50,8 @@ echo ""
 echo "  Generate an access token at:"
 echo "  https://supabase.com/dashboard/account/tokens"
 echo ""
-read -rp "  Supabase access token: " SUPABASE_TOKEN
+read -rsp "  Supabase access token: " SUPABASE_TOKEN
+echo ""
 [[ -z "$SUPABASE_TOKEN" ]] && fail "Token required"
 
 export SUPABASE_ACCESS_TOKEN="$SUPABASE_TOKEN"
@@ -224,7 +225,10 @@ WEBHOOK_SECRET=$(echo "$WEBHOOK_RESULT" | grep -o '"secret": *"whsec_[^"]*"' | h
 
 if [[ -n "$WEBHOOK_SECRET" ]]; then
   ok "Webhook created: $WEBHOOK_URL"
-  ok "Webhook secret: $WEBHOOK_SECRET"
+  # Do NOT echo the signing secret — it is the money-path trust anchor and must
+  # not land in terminal scrollback or a screen recording. It is wired straight
+  # into the function secrets in Step 8; the operator never needs to read it here.
+  ok "Webhook signing secret captured (${#WEBHOOK_SECRET} chars) — wiring into function secrets"
 else
   warn "Could not extract webhook secret. Check Stripe dashboard."
   warn "Webhook URL should be: $WEBHOOK_URL"

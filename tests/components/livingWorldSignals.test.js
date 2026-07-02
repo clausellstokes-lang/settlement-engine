@@ -93,6 +93,30 @@ describe('settlementSignals — self-gating', () => {
     expect(model.hasLiveWorld).toBe(true);
     expect(model.standing).toEqual({ id: 's-peace', wins: 3, losses: 1, score: 2 });
   });
+
+  it('occupation WITHOUT an active siege still marks war.occupied (front torn down by conquest)', () => {
+    // Conquest deletes the siege front, so settlementWarStatus goes null — but the
+    // occupation ledger persists across ticks. The Occupied pip must survive that.
+    const worldState = {
+      deployments: {},                              // no live front
+      occupations: { 's-peace': { occupierId: 's-enemy' } },
+    };
+    const model = settlementSignals({
+      settlement: peacefulTown,
+      settlementId: 's-peace',
+      worldState,
+      nameFor: (id) => (id === 's-enemy' ? 'Ironhold' : String(id)),
+    });
+    expect(model.hasLiveWorld).toBe(true);
+    expect(model.war?.occupied).toBe(true);
+    expect(model.war?.besiegedBy).toEqual([]);      // not currently besieged
+  });
+
+  it('a peaceful campaign settlement with no occupation stays off (byte-identical)', () => {
+    const worldState = { deployments: {}, occupations: {} };
+    const model = settlementSignals({ settlement: peacefulTown, settlementId: 's-peace', worldState });
+    expect(model.war).toBeNull();
+  });
 });
 
 describe('faithPip — alignment color + rank', () => {

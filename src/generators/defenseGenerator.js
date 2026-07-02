@@ -317,12 +317,15 @@ const computeDefenseScores = (
     if (hasDivine)      magical = Math.min(100, magical + Math.round(relPri * 0.12)); // divine healing, morale
     if (hasDruid)       magical = Math.min(100, magical + 6);  // nature warding, terrain knowledge
     if (hasArcaneGuild) magical = Math.min(100, magical + 8);  // organized wards, counterspells
-    // Wire the (previously dead) magInfluence parameter: it is the slider
-    // AFTER economy/crime degradation (priorityHelpers getInstFlags), so a
-    // destitute, crime-ridden city's underfunded and compromised practitioners
-    // drag arcane defense down — same gate shape as the economic dimension.
+    // Wire the (previously dead) magInfluence parameter: it is the effective
+    // presence score AFTER economy/crime degradation (priorityHelpers
+    // getInstFlags), so a destitute, crime-ridden city's underfunded and
+    // compromised practitioners drag arcane defense down — same gate shape as
+    // the economic dimension. Divide by the UNGATED presence score (not the
+    // raw slider): the ratio isolates the degradation multipliers, ~1.0 for a
+    // healthy settlement, without double-counting weak presence.
     if (magPri > 0) {
-      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, magPri)));
+      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, _magicPresence.score)));
       magical = Math.round(magical * magHealthMult);
     } else {
       magical = Math.round(magical);
@@ -363,10 +366,12 @@ const computeDefenseScores = (
       milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
       monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
     }
-    // Divine: Create Food and Water, Bless crops
+    // Divine: Create Food and Water, Bless crops — caps, like arcane below.
+    // (Math.max here would RAISE a druid-reduced penalty back up: stacking
+    // mitigation must never worsen the score.)
     if (hasDivine) {
-      econPenalty = Math.max(Math.round(econPenalty * 0.6), Math.round(20 * 0.6)); // -20 → -12
-      milPenalty  = Math.max(Math.round(milPenalty  * 0.6), Math.round(10 * 0.6)); // -10 → -6
+      econPenalty = Math.min(econPenalty, Math.round(20 * 0.6)); // -20 → -12 (caps)
+      milPenalty  = Math.min(milPenalty,  Math.round(10 * 0.6)); // -10 → -6 (caps)
     }
     // Arcane: minor Goodberry, Plant Growth
     if (hasArcane && magPri >= 50)

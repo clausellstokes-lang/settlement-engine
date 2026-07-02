@@ -4,9 +4,83 @@
  * Key formats:
  *   Institution: "tier::category::name"  →  { allow, require, forceExclude }
  *   Category:    "tier::category"        →  boolean
- *   Service:     arbitrary string key    →  { allow, force, forceExclude }
+ *   Service:     "svcKey_service_name"   →  { allow, force, forceExclude }
  *   Good:        "tier_good_name"        →  { allow, force, forceExclude }
  */
+
+import { INSTITUTION_SERVICES } from '../data/tradeGoodsData';
+
+// ── Service-key normalization ────────────────────────────────────────────────
+// The Stage-2b ServicesTogglePanel fix moved the servicesToggles WRITE key from
+// the display institution name (`${instName}_service_${svcName}`) to the catalog
+// service-key form (`${svcKey}_service_${svcName}`, where svcKey ∈ keys of
+// INSTITUTION_SERVICES). Toggles a user persisted under the OLD form are now
+// orphaned — `getToggle` reads the svcKey-keyed value and never finds them.
+//
+// `matchServiceName` is a verbatim mirror of the panel's derivation (the panel
+// does not export it), so an old display-name key maps to exactly the svcKey the
+// panel now writes/reads.
+function matchServiceName(instName) {
+  const lower = instName.toLowerCase().split(/[\s'(),\-/]+/).filter(w => w.length > 2);
+  let best = null, bestScore = 0;
+  for (const key of Object.keys(INSTITUTION_SERVICES)) {
+    const kw = key.toLowerCase().split(/[\s'(),\-/]+/).filter(w => w.length > 2);
+    let score = 0;
+    for (const kp of kw) for (const lp of lower) {
+      if (kp === lp) score += 2;
+      else if (kp.length > 3 && lp.startsWith(kp)) score += 1;
+      else if (lp.length > 4 && kp.startsWith(lp)) score += 1;
+    }
+    const norm = kw.length > 0 ? score / (kw.length * 2) : 0;
+    if (score > bestScore || (score === bestScore && score > 0 && norm > (bestScore / (kw.length * 2 || 1)))) {
+      bestScore = score; best = key;
+    }
+  }
+  return bestScore > 0 ? best : null;
+}
+
+/**
+ * One-time hydrate migration: normalize a persisted servicesToggles bag keyed in
+ * the OLD display-name form into the new svcKey form. Pure + idempotent.
+ *
+ * Rules:
+ *  - Keys are `<instName>_service_<svcName>`. Service names in INSTITUTION_SERVICES
+ *    never contain "_service_" (verified), so the split isolates svcName off the
+ *    LAST "_service_" occurrence — robust even if instName itself contains one.
+ *  - If the leading segment is ALREADY a valid INSTITUTION_SERVICES key, the entry
+ *    is already in the new form → keep it verbatim. This is what makes the pass
+ *    idempotent AND collision-safe: matchServiceName is NOT a fixed point on all
+ *    of its own outputs (e.g. "Brothel" ↦ "Brothel (red light district)"), so
+ *    re-mapping an already-migrated key would corrupt it.
+ *  - Otherwise derive svcKey = matchServiceName(instName). If null (unmappable),
+ *    DROP the entry rather than mis-apply it.
+ *  - A genuine new-format entry always wins a key collision with a remapped one
+ *    (never overwrite already-correct data).
+ *  - Keys that don't contain "_service_" are left untouched (not ours to judge).
+ */
+export function normalizeServicesToggles(bag) {
+  if (!bag || typeof bag !== 'object') return {};
+  const out = {};
+  const remapped = []; // defer remapped writes so real new-format entries win collisions
+  for (const [key, val] of Object.entries(bag)) {
+    const sep = key.lastIndexOf('_service_');
+    if (sep === -1) { out[key] = val; continue; }
+    const instName = key.slice(0, sep);
+    const svcName  = key.slice(sep + '_service_'.length);
+    // Already new-format (leading segment is a real service key) → passthrough.
+    if (Object.prototype.hasOwnProperty.call(INSTITUTION_SERVICES, instName)) {
+      out[key] = val;
+      continue;
+    }
+    const svcKey = matchServiceName(instName);
+    if (!svcKey) continue; // unmappable → drop rather than mis-apply
+    remapped.push([`${svcKey}_service_${svcName}`, val]);
+  }
+  for (const [newKey, val] of remapped) {
+    if (!Object.prototype.hasOwnProperty.call(out, newKey)) out[newKey] = val;
+  }
+  return out;
+}
 
 export const createToggleSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -69,6 +143,14 @@ export const createToggleSlice = (set, get) => ({
 
   setServiceToggles: (toggles) =>
     set(state => { state.servicesToggles = toggles; }),
+
+  // One-time on-load migration: rewrite any servicesToggles persisted under the
+  // pre-Stage-2b display-name key into the current svcKey form. Idempotent — a
+  // bag already in the new form normalizes to itself, so re-running is a no-op.
+  // Wire from the store's onRehydrateStorage so orphaned toggles are recovered
+  // before the panel reads them.
+  hydrateServicesToggles: () =>
+    set(state => { state.servicesToggles = normalizeServicesToggles(state.servicesToggles); }),
 
   // ── Resets ─────────────────────────────────────────────────────────────────
   resetToggles: () =>

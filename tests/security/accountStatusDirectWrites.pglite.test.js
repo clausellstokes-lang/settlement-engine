@@ -83,6 +83,13 @@ const count = async (table, where = 'true') => {
   return rows[0].n;
 };
 
+// Vacuity guard (runs unconditionally): if the targeted migration(s) are ever
+// renamed/removed the condition below goes false and the runIf suite silently
+// runs ZERO assertions while reporting green. Fail loudly here instead.
+it('targeted migration(s) present (suite not vacuous)', () => {
+  expect(allExist).toBe(true);
+});
+
 describe.runIf(allExist)('account-status DIRECT-table write gate — executed against 059 (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

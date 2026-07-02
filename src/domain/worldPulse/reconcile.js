@@ -46,7 +46,7 @@ export function isWorldAuthoredCondition(condition) {
 
 /**
  * The world/party-authored conditions currently on a settlement.
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function worldAuthoredConditions(settlement) {
   return deriveAllActiveConditions(settlement).filter(isWorldAuthoredCondition);

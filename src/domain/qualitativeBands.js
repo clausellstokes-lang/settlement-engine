@@ -129,7 +129,7 @@ function parseRef(ref) {
  *   - 'district.<id>' with { domain: 'wealth' | 'safety' } modifier
  *
  * @param {string | {id: string, domain?: string}} ref
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  * @returns {string | null}
  */
 export function bandFor(ref, settlement) {
@@ -192,7 +192,7 @@ export function bandFor(ref, settlement) {
  * Convenience: return the user-facing display value for any reference.
  * Routes the right domain to displayBandLabel automatically.
  * @param {any} ref
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
  */
 export function displayValueFor(ref, settlement) {
   const { id, domain } = parseRef(ref);

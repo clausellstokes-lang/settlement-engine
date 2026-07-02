@@ -196,7 +196,7 @@ export default function LockedDestination({
           marginLeft: 'auto',
           fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         }}>
-          Free 7-day trial · cancel anytime
+          $6/mo · cancel anytime
         </span>
       </div>
     </div>

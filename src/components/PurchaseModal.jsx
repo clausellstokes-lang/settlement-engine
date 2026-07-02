@@ -39,7 +39,11 @@ export default function PurchaseModal({ onClose }) {
       await startCheckout(product);
       // Redirects to Stripe — won't reach here unless it fails
     } catch (e) {
-      setError(e.message);
+      // P11 — keep the raw Stripe/network text out of the purchase surface
+      // (console only) and show the reader a domain-language message, matching
+      // PricingPage's checkout error handling.
+      console.error('Checkout failed:', e);
+      setError(t('purchase.failureMessage'));
       setLoading(null);
     }
   };

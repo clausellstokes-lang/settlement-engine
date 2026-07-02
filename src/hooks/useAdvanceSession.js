@@ -27,7 +27,40 @@ import { ADVANCE_ERROR_TEXT } from './useRealmInspector.js';
 // (lazy-loaded) domain module. The legacy single-tick path collapses this to 1.
 const ADVANCE_TICKS = { one_week: 1, one_month: 4, one_season: 12, one_year: 48 };
 
+// Progress channel from the multi-tick orchestrator: advanceInterval.js
+// dispatches this CustomEvent on globalThis after EVERY completed kernel tick
+// ({ticksDone, ticksTotal} in detail). Mirrored string for the same reason as
+// ADVANCE_TICKS above — the domain module is heavy and lazy-loaded, so the hook
+// must not import it. The name is a frozen contract with ADVANCE_PROGRESS_EVENT
+// in src/domain/worldPulse/advanceInterval.js.
+const ADVANCE_PROGRESS_EVENT = 'settlementforge:advance-progress';
+
+// Listen for per-tick progress beats for the duration of one advance/resume
+// call. Returns the unsubscribe; a host without EventTarget on globalThis
+// degrades to the old static bar (no listener, no error).
+function subscribeAdvanceProgress(onTick) {
+  const host = /** @type {any} */ (globalThis);
+  if (typeof host.addEventListener !== 'function') return () => {};
+  const listener = (/** @type {any} */ event) => onTick(event?.detail || {});
+  host.addEventListener(ADVANCE_PROGRESS_EVENT, listener);
+  return () => host.removeEventListener(ADVANCE_PROGRESS_EVENT, listener);
+}
+
 const IDLE = { phase: 'idle', ticksDone: 0, ticksTotal: 0 };
+
+// Fold one orchestrator progress beat into the session. Running-phase only: a
+// stray/late event must never resurrect an idle session or overwrite the
+// paused cursor's counts (the pause result is authoritative there).
+function withProgressBeat(session, detail = {}) {
+  if (session.phase !== 'running') return session;
+  const ticksDone = Number(detail.ticksDone);
+  const ticksTotal = Number(detail.ticksTotal);
+  return {
+    ...session,
+    ticksDone: Number.isFinite(ticksDone) && ticksDone > 0 ? ticksDone : session.ticksDone,
+    ticksTotal: Number.isFinite(ticksTotal) && ticksTotal > 0 ? ticksTotal : session.ticksTotal,
+  };
+}
 
 export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openInspectorAt, showToast }) {
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
@@ -47,6 +80,12 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     // legacy single-tick path), so the progress bar reads N of Y.
     setAdvanceSession({ phase: 'running', ticksDone: 0, ticksTotal: ADVANCE_TICKS[worldPulseInterval] || 1 });
     openInspectorAt('pulse');
+    // Per-tick progress beats from the orchestrator drive the determinate bar
+    // ("Advancing N of Y"); unsubscribed in the finally so a later advance's
+    // events cannot leak into a stale closure.
+    const unsubscribeProgress = subscribeAdvanceProgress(
+      detail => setAdvanceSession(s => withProgressBeat(s, detail)),
+    );
     // Set true on a paused result so the finally does NOT reset to idle — the
     // session must hold 'paused' until the DM resumes or undoes.
     let paused = false;
@@ -84,6 +123,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
       console.warn('[WorldMap] advance realm failed', err);
       showToast('error', 'The realm could not advance. Try again in a moment.');
     } finally {
+      unsubscribeProgress();
       if (!paused) setAdvanceSession(IDLE);
     }
   }, [activeCampaignId, advanceSession.phase, advanceCampaignWorld, worldPulseInterval, openInspectorAt, showToast]);
@@ -96,6 +136,11 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     if (!activeCampaignId) return;
     setAdvanceSession(s => ({ ...s, phase: 'running' }));
     openInspectorAt('pulse');
+    // Resumed segments report a RUNNING ticksDone (the orchestrator counts from
+    // the pause cursor), so the bar picks up where the pause left it.
+    const unsubscribeProgress = subscribeAdvanceProgress(
+      detail => setAdvanceSession(s => withProgressBeat(s, detail)),
+    );
     let paused = false;
     try {
       const result = await resolveIntervalMajors(activeCampaignId, decisions || {});
@@ -113,6 +158,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
       console.warn('[WorldMap] resume advance failed', err);
       showToast('error', 'The realm could not continue. Try again in a moment.');
     } finally {
+      unsubscribeProgress();
       if (!paused) setAdvanceSession(IDLE);
     }
   }, [activeCampaignId, resolveIntervalMajors, openInspectorAt, showToast]);

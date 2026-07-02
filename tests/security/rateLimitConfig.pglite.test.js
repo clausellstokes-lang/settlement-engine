@@ -32,6 +32,13 @@ const setCfg = (windowSeconds, perUserLimit) =>
   db.query(`update public.system_config set value = $1::jsonb where key = 'ai_user_rate_limit'`,
     [JSON.stringify({ window_seconds: windowSeconds, per_user_limit: perUserLimit })]);
 
+// Vacuity guard (runs unconditionally): if 087 is ever renamed/removed, `have`
+// goes false and the runIf block below silently executes ZERO assertions while
+// reporting green. Fail loudly here. Mirrors accountStatusGate.pglite.test.js.
+it('migration 087 is present (suite is not vacuous)', () => {
+  expect(have).toBe(true);
+});
+
 describe.runIf(have)('consume_ai_generate_rate_limit — live operator config (pglite, 087)', () => {
   beforeAll(async () => {
     db = await new PGlite();
