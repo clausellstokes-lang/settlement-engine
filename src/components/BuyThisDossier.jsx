@@ -35,11 +35,9 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { useDossierExportAccess } from '../hooks/useDossierExportAccess.js';
 import { t } from '../copy/index.js';
-import { sans, FS, swatch, RED } from './theme.js';
+import { sans, FS, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
-
-const MUTED = swatch['#6B5340'];
 
 /**
  * @param {object} props
@@ -126,7 +124,6 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         >
           {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
         </Button>
-        <span style={hintStyle}>One-time, no account needed.</span>
         {error && <span style={errStyle}>{error}</span>}
         {ladderOpen && (
           <DossierLadderModal
@@ -159,15 +156,14 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           icon={<Save size={12} />}
           onClick={openSignupOrSave}
           style={{ minHeight: 44 }}
-          title={t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })}
+          // Hover reveals the full context: the durable-rights explainer normally,
+          // or the at-cap notice when the free save slots are full.
+          title={canSave
+            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
+            : t('dossierExport.saveFirst.atCap')}
         >
           {t('dossierExport.saveFirst.cta')}
         </Button>
-        <span style={hintStyle}>
-          {canSave
-            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
-            : t('dossierExport.saveFirst.atCap')}
-        </span>
       </div>
     );
   }
@@ -191,18 +187,20 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           ? t('dossierExport.buySaved.busy')
           : t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       </Button>
-      <span style={hintStyle}>{t('dossierExport.buySaved.subline')}</span>
       {error && <span style={errStyle}>{error}</span>}
     </div>
   );
 }
 
+// inline-GRID with a single min-content column pins this control to the BUTTON's
+// intrinsic width (its label is white-space:nowrap, so its min-content IS its full
+// width). The purchase caption now lives in the button's hover title, not an
+// always-visible line — so the only thing that can render below the button is a
+// checkout error, and the grid makes it WRAP within the button width instead of
+// stretching the item and shoving the neighbouring Save / Edit / Share buttons
+// off-centre.
 const wrapStyle = {
-  display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-  flexWrap: 'wrap', fontFamily: sans,
+  display: 'inline-grid', gridTemplateColumns: 'min-content', justifyItems: 'center',
+  gap: 6, fontFamily: sans,
 };
-const hintStyle = { fontSize: FS.xs, color: MUTED, fontStyle: 'italic' };
-const errStyle = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  fontSize: FS.xs, color: RED,
-};
+const errStyle = { fontSize: FS.xs, color: RED, textAlign: 'center' };
