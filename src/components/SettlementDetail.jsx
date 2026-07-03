@@ -799,8 +799,10 @@ export default function SettlementDetail({
               // nothing for entitled / Cartographer / Founder — but this branch
               // is only reached when the gate already denied those, so it always
               // has a CTA to show for the free-account case. (Anon never opens
-              // this owner view.)
-              <BuyThisDossier settlement={detail.settlement} saveId={saveId} />
+              // this owner view.) size="md" matches the Export Dossier button it
+              // stands in for (and the md Share/Edit siblings) so the buy CTA reads
+              // as a proper button in this toolbar, not an undersized sm control.
+              <BuyThisDossier settlement={detail.settlement} saveId={saveId} size="md" />
             )}
           </div>
         </div>
