@@ -242,7 +242,6 @@ export const useCredits    = ()  => useStore(s => s.creditBalance);
 // Permission helpers
 export const useCanSave       = () => useStore(s => s.canSave());
 export const useCanUseNeighbour = () => useStore(s => s.canUseNeighbour());
-export const useCanExport     = () => useStore(s => s.canExport());
 export const useMaxTier       = () => useStore(s => s.maxAllowedTier());
 
 // Role helpers
