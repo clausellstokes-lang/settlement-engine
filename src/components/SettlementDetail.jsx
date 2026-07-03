@@ -885,11 +885,14 @@ export default function SettlementDetail({
         </>
       ) : (
         <>
-          {dossierHero}
-          {/* Free-user teaser only: see the READ note above. */}
+          {/* Free-user teaser only (see the READ note above): positioned at the
+              TOP, above the dossier, mirroring premium EDIT mode (workbench first,
+              read content beneath) so the edit surface sits in the SAME place for
+              a free account as it does for Cartographer. */}
           {!canEdit && (
             <div className="sf-readable-surface" style={{padding:16}}>{workshop}</div>
           )}
+          {dossierHero}
         </>
       )}
 

@@ -418,10 +418,14 @@ const PER_ATTEMPT_TIMEOUT_MS = 30_000; // single provider fetch
 const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall-clock)
 
 // Reject an oversized body up front (mirrors generate-chronicle / ingest-events).
-// The settlement payload is client-supplied and the credit charged is fixed
-// regardless of input size, so an unbounded body would only inflate the provider
-// token bill. Read req.text() with this cap before JSON.parse.
-const MAX_BODY_BYTES = 64 * 1024;
+// The cap bounds abuse/DoS, NOT the provider token bill: the prompt is built from
+// a COMPACT summarizeSettlement() (a few KB regardless of settlement size), so a
+// larger body does not scale the token cost. The old 64KB ceiling was too tight —
+// a rich/canonized settlement (many NPCs/institutions + campaign chronicle; the
+// client already strips its capped versionHistory snapshots) legitimately exceeds
+// it and 413'd. 256KB comfortably fits any real settlement while still rejecting a
+// pathological payload. Read req.text() with this cap before JSON.parse.
+const MAX_BODY_BYTES = 256 * 1024;
 
 /**
  * Refinement passes affected by a progression changeType — OWN-property lookup
