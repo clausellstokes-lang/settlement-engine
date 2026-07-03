@@ -66,7 +66,7 @@ export const en = Object.freeze({
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
+      body:       'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -77,7 +77,7 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach thorp through metropolis, save your drafts, and export the PDF.',
+      unlockTpl: '{signin} to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -136,8 +136,8 @@ export const en = Object.freeze({
   auth: {
     modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
-    subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work: saves, exports, larger settlements, and the Neighbourhood System.',
+    subtitle: 'Saves, larger settlements, and the Neighbourhood System.',
+    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbourhood System.',
     signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
@@ -341,7 +341,7 @@ export const en = Object.freeze({
         features: [
           'Generate any size, from hamlet to metropolis',
           '3 saved settlements',
-          'PDF export of any saved dossier',
+          'Keep any dossier’s PDF for $2.99, yours to re-download',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
@@ -360,7 +360,7 @@ export const en = Object.freeze({
           'The self-ending war layer + the living pantheon',
           'Custom content + share to the Gallery',
           'Unlimited saves + cloud sync',
-          'PDF + JSON export',
+          'Unlimited PDF and JSON export of every settlement',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
@@ -409,7 +409,7 @@ export const en = Object.freeze({
           features: [
             'Generate any size, from hamlet to metropolis, free',
             '3 saved settlements',
-            'PDF export of any saved dossier',
+            'Keep any dossier’s PDF for $2.99, yours to re-download',
             'Pay-per-use narrative refinement (credit packs)',
           ],
         },
@@ -422,6 +422,7 @@ export const en = Object.freeze({
             'Campaigns + a chronicle that writes itself',
             'Custom content + share to the Gallery',
             'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+            'Unlimited PDF and JSON export of every settlement',
           ],
         },
         founder: {
@@ -463,7 +464,7 @@ export const en = Object.freeze({
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates any size, from hamlet to metropolis. It saves your work and exports the PDF.',
+        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -541,7 +542,7 @@ export const en = Object.freeze({
       step2Title:   'Here it is. Explore the tabs',
       step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
       step3Title:   "You're all set",
-      step3Body:    'Save this to your library, export a PDF, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
+      step3Body:    'Save this to your library, keep its PDF for $2.99, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
       finish:       'Finish tour',
       dismiss:      'Dismiss onboarding',
     },
@@ -716,11 +717,11 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
+      body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Wanderer exports any saved dossier to PDF, unlimited. Cartographer adds unlimited saves and cloud sync: phone, laptop, table.',
+      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
@@ -820,6 +821,48 @@ export const en = Object.freeze({
     cascadeHeading:  'What changes if you apply these edits',
   },
 
+  // ── PDF export ladder (migration 108) ──────────────────────────────────────
+  // The Buy CTA on a saved dossier, its unsaved-first state, and the anonymous
+  // pre-checkout ladder popup. Calm archivist voice: state the offer plainly,
+  // present the one-time download AS one-time (the retro auto-upgrade is a
+  // grace we never promise up front, since it depends on browser storage).
+  dossierExport: {
+    // Free account, dossier SAVED, no durable right yet.
+    buySaved: {
+      cta:      'Keep the PDF for this settlement · {price}',
+      subline:  'A one-time purchase. The download stays yours for as long as this settlement is in your library.',
+      busy:     'Redirecting…',
+      error:    'Checkout could not start. Please try again.',
+    },
+    // Free account, dossier NOT saved yet. Durable rights attach to a save, so
+    // the honest path is to save first.
+    saveFirst: {
+      cta:      'Save this settlement to buy its PDF',
+      subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
+      atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
+    },
+    // Anonymous pre-checkout ladder popup.
+    ladder: {
+      title:    'How would you like your dossier?',
+      intro:    'Three ways to take this settlement with you.',
+      account: {
+        label:       'Create a free account',
+        description: 'Save this settlement, then buy its PDF once and keep re-downloading it. No card to start.',
+      },
+      cartographer: {
+        label:       'Consider Cartographer',
+        description: 'Unlimited PDFs of every settlement you save, plus the living simulation. {price}/mo.',
+      },
+      oneTime: {
+        label:       'Continue with the one-time download',
+        description: 'Pay {price} once and download this dossier now. No account needed.',
+      },
+      cancel:   'Never mind',
+    },
+    // Silent same-device retro auto-upgrade confirmation toast.
+    claimed:  'This settlement’s PDF is yours. You bought it before you signed up.',
+  },
+
   // The "Workshop" copy block lived here. The Workshop / Custom
   // Generate feature was removed (the /workshop route redirects to Create and
   // ModeSelector renders only Basic + Advanced), so its strings were deleted —
@@ -895,7 +938,7 @@ export const en = Object.freeze({
   // the premium one.
   authBlurb: {
     freeLabel:    'Free account',
-    freeBody:     'Generate any size, from hamlet to metropolis. Save your work and export the PDF.',
+    freeBody:     'Generate any size, from hamlet to metropolis, and save your work. Keep any dossier’s PDF for $2.99.',
     premiumLabel: 'Cartographer',
     premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
   },

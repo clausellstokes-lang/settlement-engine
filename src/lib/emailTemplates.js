@@ -150,7 +150,7 @@ export const TEMPLATES = Object.freeze({
       'Sign up for a free account to unlock:',
       '  • Up to Town size (Capital with a Cartographer subscription)',
       '  • Saved settlements (3 free)',
-      '  • PDF export of any saved dossier',
+      '  • Keep any saved dossier\'s PDF for $2.99, yours to re-download',
       '',
       'Sign up: https://settlementforge.com/signin',
       '',

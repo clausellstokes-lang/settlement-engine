@@ -80,6 +80,12 @@ export const createUiSlice = (set, get) => ({
   // left out of the persist partialize so a reload lands on a closed modal.
   authModalOpen: false,
 
+  // Quiet confirmation for a same-device dossier retro auto-upgrade (108). Set
+  // by the silent post-save claim when a durable right attaches to a just-saved
+  // settlement; the App renders it as one transient toast and clears it. Null =
+  // nothing to show. Transient (left out of persist).
+  dossierClaimToast: null,
+
   /** Durable product-preference defaults (Account → Product Preferences). */
   productPrefs: { ...PRODUCT_PREF_DEFAULTS },
 
@@ -138,6 +144,10 @@ export const createUiSlice = (set, get) => ({
   /** Open/close the auth (sign-in / create-account) modal. */
   setAuthModalOpen: (open) =>
     set(state => { state.authModalOpen = !!open; }),
+
+  /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
+  setDossierClaimToast: (message) =>
+    set(state => { state.dossierClaimToast = message || null; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>

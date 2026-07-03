@@ -73,7 +73,10 @@ const PRODUCTS = new Proxy({}, {
  * Stripe follows regardless).
  *
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string, redeemCode?: string }} options
+ * @param {{ checkoutToken?: string, redeemCode?: string, saveId?: string }} options
+ *   `saveId` (single_dossier + signed-in only): binds the durable export right
+ *   to that SAVED settlement (migration 108). The server re-verifies ownership;
+ *   an anonymous checkout ignores it.
  * @returns {Promise<{ redeemNotice: string|null }>}
  */
 export async function startCheckout(product, options = {}) {
@@ -108,8 +111,16 @@ export async function startCheckout(product, options = {}) {
     ? options.redeemCode.trim()
     : undefined;
 
+  // saveId (durable-rights binding, 108): only meaningful for a SIGNED-IN
+  // single_dossier buyer picking one saved settlement to bind the right to. The
+  // server verifies ownership and ignores it for anonymous checkouts; we only
+  // forward a non-empty string.
+  const saveId = product === 'single_dossier' && typeof options.saveId === 'string' && options.saveId.trim()
+    ? options.saveId.trim()
+    : undefined;
+
   const { data, error } = await supabase.functions.invoke('create-checkout', {
-    body: { product, checkoutToken, ...(redeemCode ? { redeemCode } : {}) },
+    body: { product, checkoutToken, ...(redeemCode ? { redeemCode } : {}), ...(saveId ? { saveId } : {}) },
   });
 
   if (error) throw new Error(error.message || 'Checkout failed');

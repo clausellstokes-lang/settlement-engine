@@ -212,7 +212,11 @@ export async function handleCreateCheckout(
 
   try {
     // Parse request body first so we know whether the product requires auth.
-    const { product, checkoutToken, redeemCode } = await req.json();
+    // saveId (optional, single_dossier only): when a SIGNED-IN buyer picks a
+    // saved settlement at checkout, the durable-rights entitlement (108) binds
+    // to it. It is verified for ownership below and stashed in the session
+    // metadata; the webhook grants the right on the paid session.
+    const { product, checkoutToken, redeemCode, saveId } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -261,6 +265,41 @@ export async function handleCreateCheckout(
       if (seatsTaken >= FOUNDER_SEAT_LIMIT) {
         throw new Error(`Founder Lifetime is sold out (${seatsTaken}/${FOUNDER_SEAT_LIMIT} seats taken)`);
       }
+    }
+
+    // ── Durable-rights save binding (108): single_dossier + signed-in only ──
+    // A signed-in single_dossier buyer MAY pick one saved settlement to bind the
+    // durable re-download right to. Verify server-side that the save EXISTS and
+    // belongs to THIS authed user before stashing it in the metadata: a forged
+    // or foreign saveId must never bind rights to someone else's save. Reject
+    // with the SAME generic 400 every other checkout failure returns (never echo
+    // whose save it is). A signed-in purchase with NO saveId stays valid — the
+    // one-shot download semantics still apply, and the buyer can retro-claim the
+    // voucher to a save later. Anonymous purchases ignore saveId entirely (the
+    // durable ledger keys on the account).
+    let verifiedSaveId: string | null = null;
+    if (product === 'single_dossier' && user && saveId !== undefined && saveId !== null && saveId !== '') {
+      if (typeof saveId !== 'string') {
+        logError('create-checkout', user.id, 'non-string saveId on single_dossier checkout', { stage: 'verify_save_ownership' });
+        throw new Error('Invalid save reference');
+      }
+      const admin = adminClient();
+      const { data: save, error: saveErr } = await admin
+        .from('settlements')
+        .select('id, user_id')
+        .eq('id', saveId)
+        .maybeSingle();
+      if (saveErr || !save || save.user_id !== user.id) {
+        // Missing, foreign, or unreadable — never bind the right, and never
+        // reveal which case it was. Fail the whole checkout (a client that
+        // sent a saveId meant to bind it; silently dropping it would leave the
+        // buyer paying with no durable right against the save they chose).
+        logError('create-checkout', user.id, saveErr?.message ?? 'save not found or not owned', {
+          stage: 'verify_save_ownership', save_id: saveId,
+        });
+        throw new Error('Invalid save reference');
+      }
+      verifiedSaveId = save.id as string;
     }
 
     const priceId = PRICE_MAP[product];
@@ -356,6 +395,10 @@ export async function handleCreateCheckout(
         credits: String(CREDIT_AMOUNTS[product] || 0),
         anonymous: isAnonymousProduct && !user ? 'true' : 'false',
         checkout_token: isAnonymousProduct ? checkoutToken : '',
+        // Durable-rights save binding (108): only ever the server-VERIFIED save
+        // id for a signed-in single_dossier buyer, never a raw body value. The
+        // webhook reads this to grant the entitlement.
+        save_id: verifiedSaveId ?? '',
       },
     };
     if (stripeCustomerId) {

@@ -753,6 +753,12 @@ async function applyRedemptionIfBound(
   }
 }
 
+// The durable single-dossier export-rights helpers (migration 108) are defined
+// BELOW handleStripeWebhook, next to dispatchStripeEvent that calls them — so the
+// FIRST lexical session-metadata read stays AFTER the signature check (the Tier
+// 0.5 signature-order contract test asserts on textual position). They only ever
+// run from the dispatch switch, i.e. after the event signature is verified.
+
 // ── Trust boundary documentation (Tier 0.5 audit) ──────────────────────────
 //
 // EVERY METADATA READ BELOW IS ONLY SAFE BECAUSE:
@@ -888,6 +894,176 @@ export async function handleStripeWebhook(
   });
 }
 
+// ── Durable single-dossier export rights (migration 108) ─────────────────────
+//
+// Defined here (after handleStripeWebhook / constructEvent, next to the dispatch
+// switch that calls them) so the FIRST lexical `session.metadata?.` read in this
+// file stays AFTER signature verification — the Tier 0.5 trust-boundary contract
+// test asserts on textual order. These helpers run ONLY from dispatchStripeEvent,
+// i.e. strictly after constructEvent has verified the signature.
+//
+// PDF export moves to a ladder (user-locked): a signed-in $2.99 single_dossier
+// purchase mints a DURABLE re-download right bound to one SAVED settlement; an
+// anonymous $2.99 purchase stays a one-shot download but is RECORDED as a
+// same-device token-claim voucher (the retro upgrade is same-device + same-
+// settlement + automatic only — the original device still holds the checkout
+// token in its purchase stash, and a silent post-save call claims the right).
+//
+// This webhook is the ONLY writer on both value-moving paths:
+//   * SIGNED-IN paid single_dossier session carrying supabase_user_id + save_id
+//     → grant_dossier_entitlement mints the durable right (claim-once on
+//       stripe_session_id). A grant failure must NOT break fulfilment — the
+//       one-shot download (client verify-single-dossier flow) is unchanged, so a
+//       failed durable grant is logged and the operator remediates off the
+//       (missing) entitlement row; throwing here would only strand the whole
+//       session in Stripe's retry loop for a right the buyer can still retro-claim.
+//   * ANONYMOUS paid single_dossier session (metadata.anonymous === 'true')
+//     → record single_dossier_purchases: the sha256 of the checkout token so the
+//       same-device token-claim path can prove the original buyer WITHOUT ever
+//       storing the token, plus the buyer's Stripe email (lowercased) for AUDIT /
+//       SUPPORT ONLY (no claim path reads it). Idempotent (PK = stripe_session_id,
+//       upsert ignoreDuplicates), so a redelivery re-inserts nothing. Stripe may
+//       return no email on a session (rare); we still record when a token hash is
+//       present — the email is audit-only, so its absence never blocks the claim
+//       voucher. A record failure never fails fulfilment of a paid one-shot download.
+//   * REFUND / dispute of a single_dossier charge (charge.refunded /
+//     charge.dispute.created) → clawback_dossier_entitlement reverses the durable
+//     right AND poisons the purchase voucher so it can never be retro-claimed
+//     (even the anonymous-refund case where no entitlement was ever minted). Wired
+//     into the EXISTING referral clawback resolver, keyed by the same session id.
+
+/** sha256 hex of a string (crypto.subtle, the ingest-events idiom). Used to hash
+ *  the anonymous checkout token before it is stored — the raw token never lands. */
+async function sha256hex(s: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * SIGNED-IN single_dossier grant: mint the durable export right on the paid
+ * session. Validates nothing itself — grant_dossier_entitlement re-checks that
+ * the save exists AND belongs to the user ("save it first"), and is claim-once on
+ * the session id. NEVER throws into the fulfilment path: a grant failure is logged
+ * and swallowed (see the failure posture above).
+ */
+async function grantDossierEntitlementForSession(
+  supabase: ReturnType<typeof adminClient>,
+  userId: string,
+  saveId: string,
+  sessionId: string,
+): Promise<void> {
+  try {
+    const { data: grant, error: grantErr } = await supabase.rpc('grant_dossier_entitlement', {
+      p_user: userId,
+      p_save_id: saveId,
+      p_session_id: sessionId,
+      p_source: 'purchase',
+    });
+    if (grantErr) {
+      logError('stripe-webhook', userId, grantErr.message, {
+        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+      });
+      return;
+    }
+    if (!grant?.ok) {
+      // save_not_found / already_entitled / invalid_source — a business reason,
+      // not a transport failure. The one-shot download still worked; log so the
+      // operator can see a durable right that could not attach.
+      logError('stripe-webhook', userId, `grant_dossier_entitlement declined: ${grant?.reason ?? 'unknown'}`, {
+        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+      });
+      return;
+    }
+    console.log(`[stripe-webhook] dossier entitlement ${grant.entitlement_id} granted on session ${sessionId} (user ${userId}, save ${saveId}, already_existed=${grant.already_existed})`);
+  } catch (err) {
+    // Post-fulfilment convenience path: never let it reach the throw that would
+    // stall the whole session's retry loop.
+    logError('stripe-webhook', userId, err, {
+      stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+    });
+  }
+}
+
+/**
+ * ANONYMOUS single_dossier purchase: record the same-device token-claim voucher.
+ * The checkout_token_hash (sha256 of metadata.checkout_token, NEVER the token) is
+ * the load-bearing proof for the retro claim; buyer_email_lower is recorded for
+ * AUDIT / SUPPORT ONLY (no claim path reads it). Also writes amount_cents
+ * (session.amount_total). Idempotent on the session id (PK) via upsert
+ * ignoreDuplicates. NEVER throws: absence of a token (nothing to claim against)
+ * skips the record with a warning; an insert error is logged. This is a
+ * convenience ledger — its absence must never fail a paid one-shot download.
+ */
+async function recordAnonymousDossierPurchase(
+  supabase: ReturnType<typeof adminClient>,
+  session: Stripe.Checkout.Session,
+): Promise<void> {
+  const rawToken = session.metadata?.checkout_token ?? '';
+  if (!rawToken) {
+    // No checkout token on this session → the same-device claim has no proof to
+    // verify against, so there is nothing to record. The one-shot download still
+    // works (it verifies against the session, not this row). Warn, never throw.
+    console.warn(`[stripe-webhook] anonymous single_dossier session ${session.id} has no checkout token — skipping token-claim record`);
+    return;
+  }
+  const checkoutTokenHash = await sha256hex(rawToken);
+
+  // Audit/support-only. Stripe may return no email on a session (rare); an empty
+  // string satisfies the NOT NULL column and is honest — no claim path reads it.
+  const rawEmail = session.customer_details?.email ?? null;
+  const buyerEmailLower = typeof rawEmail === 'string' ? rawEmail.trim().toLowerCase() : '';
+  const amountCents = typeof session.amount_total === 'number' ? session.amount_total : null;
+
+  const { error: insertErr } = await supabase
+    .from('single_dossier_purchases')
+    .upsert(
+      {
+        stripe_session_id: session.id,
+        buyer_email_lower: buyerEmailLower,
+        checkout_token_hash: checkoutTokenHash,
+        amount_cents: amountCents,
+      },
+      // PK = stripe_session_id: a redelivery of the same paid session re-inserts
+      // nothing (ON CONFLICT DO NOTHING). Never overwrite — the first record is
+      // the paid truth; a later delivery must not flip a claimed/refunded row.
+      { onConflict: 'stripe_session_id', ignoreDuplicates: true },
+    );
+  if (insertErr) {
+    // A failed voucher record is not fatal: the paid download already worked, and
+    // the buyer can still retro-claim once the operator repairs the ledger.
+    logError('stripe-webhook', null, insertErr.message, {
+      stage: 'record_single_dossier_purchase', session_id: session.id,
+    });
+    return;
+  }
+  console.log(`[stripe-webhook] anonymous single_dossier purchase recorded for retro-claim: session=${session.id}`);
+}
+
+/**
+ * Reverse a refunded/disputed single_dossier durable right and poison its voucher.
+ * clawback_dossier_entitlement flips the purchase row to 'refunded' UNCONDITIONALLY
+ * (so an anonymous-refund can never be claimed even when no entitlement existed)
+ * and claims the active entitlement → clawed_back atomically. Idempotent + tolerant
+ * of absence (a session that never held a right returns entitlement_id:null).
+ * Best-effort like the referral clawback: a transport failure throws so Stripe
+ * redelivers; a business no-op is silent.
+ */
+async function clawbackDossierEntitlementForSession(
+  supabase: ReturnType<typeof adminClient>,
+  sessionId: string,
+): Promise<void> {
+  const { data: claw, error: clawErr } = await supabase.rpc('clawback_dossier_entitlement', {
+    p_session_id: sessionId,
+  });
+  if (clawErr) {
+    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_dossier_entitlement', session_id: sessionId });
+    throw new Error(`clawback_dossier_entitlement failed: ${clawErr.message}`);
+  }
+  if (claw?.ok && claw.entitlement_id) {
+    console.log(`[stripe-webhook] dossier entitlement ${claw.entitlement_id} clawed back on session ${sessionId}`);
+  }
+}
+
 // The per-event handlers, extracted from the inline switch so the claim/release
 // bracket above stays readable. Behavior is IDENTICAL to the previous inline
 // switch — every guard, log line, and throw is preserved verbatim.
@@ -1021,12 +1197,24 @@ async function dispatchStripeEvent(
           });
         }
       } else if (product === 'single_dossier') {
-        // One-shot purchase, no account required. Nothing to mutate on
-        // user state — the customer's receipt + the success-page redirect
-        // (handled client-side via session_id query param) deliver the PDF.
-        // We log it so audit can match against Stripe payments.
+        // One-shot purchase, no account required. The customer's receipt + the
+        // success-page redirect (handled client-side via session_id query param)
+        // deliver the PDF; the client verify-single-dossier flow is unchanged.
         // PII: do NOT log customer_email — the session id reconciles to the email
         // inside Stripe's own access controls. (A+ P0.2)
+        //
+        // DURABLE RIGHTS (108): the purchase ALSO feeds the export-rights ladder.
+        // Both branches are additive to the one-shot download and NEVER throw:
+        //   * a SIGNED-IN buyer who bound a saved settlement at checkout gets a
+        //     durable re-download right on it (grant_dossier_entitlement);
+        //   * an ANONYMOUS buyer's purchase is recorded as a same-device
+        //     token-claim voucher (single_dossier_purchases).
+        const dossierSaveId = session.metadata?.save_id || '';
+        if (userId && dossierSaveId) {
+          await grantDossierEntitlementForSession(supabase, userId, dossierSaveId, session.id);
+        } else if (session.metadata?.anonymous === 'true') {
+          await recordAnonymousDossierPurchase(supabase, session);
+        }
         console.log(`single_dossier purchased: session=${session.id}`);
       } else if (credits > 0) {
         // Credit pack purchase. The RPC handles ledger, legacy counter,
@@ -1097,8 +1285,25 @@ async function dispatchStripeEvent(
     case 'charge.refunded':
     case 'charge.dispute.created': {
       const keys = await resolveChargeClawbackKeys(event, stripeApi);
+      let referralClawed = false;
       for (const key of keys) {
-        if (await clawbackReferralByKey(supabase, stripeApi, key)) break;
+        // REFERRAL clawback (107): stop after the first key that claimed a
+        // granted referral — one payment rewarded at most one.
+        if (!referralClawed && await clawbackReferralByKey(supabase, stripeApi, key)) {
+          referralClawed = true;
+        }
+        // DOSSIER clawback (108): a refunded/disputed single_dossier charge
+        // carries no invoice, so its key is the checkout SESSION id — the same
+        // id the durable grant / purchase voucher keyed on. clawback_dossier_
+        // entitlement is idempotent and tolerant of absence (most refunds touch
+        // charges that never held a dossier right → entitlement_id:null, no-op),
+        // and it ALSO poisons any anonymous purchase voucher so a refunded
+        // purchase can never be retro-claimed. Run it for EVERY candidate key
+        // (independent of the referral outcome — a single charge is one or the
+        // other, but resolving keys is cheap and the RPC no-ops when nothing
+        // matches). A subscription-invoice key (referral case) simply finds no
+        // dossier row and no-ops.
+        await clawbackDossierEntitlementForSession(supabase, key);
       }
       break;
     }

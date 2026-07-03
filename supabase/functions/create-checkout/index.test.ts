@@ -351,3 +351,111 @@ Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async (
   assertEquals(res.status, 400);
   assertEquals(stripe.created.length, 0);
 });
+
+// ── Durable-rights save binding (migration 108) ───────────────────────────────
+// A SIGNED-IN single_dossier buyer may bind the durable re-download right to one
+// saved settlement. The save is verified server-side for ownership before it is
+// stashed in session.metadata.save_id — a forged/foreign saveId must never bind
+// rights to someone else's save (generic 400, no session created). A signed-in
+// purchase WITHOUT a saveId stays valid (one-shot semantics). Anonymous ignores it.
+
+/** Admin stub that resolves BOTH the profile read (stripe_customer_id via
+ *  .single()) and the settlements ownership read (id + user_id via .maybeSingle()).
+ *  `save` is the row the settlements lookup returns (null = not found). Records the
+ *  settlements ids queried so a test can assert the lookup happened. */
+function makeSaveAdminClient(save: { id: string; user_id: string } | null) {
+  const settlementLookups: string[] = [];   // shared across every adminClient() call
+  // deno-lint-ignore no-explicit-any
+  const factory = (): any => ({
+    from: (table: string) => ({
+      select: (_cols?: string) => ({
+        eq: (_col: string, val: string) => ({
+          // profiles read → stripe_customer_id via .single()
+          single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_existing' }, error: null }),
+          // settlements read → id + user_id via .maybeSingle()
+          maybeSingle: () => {
+            if (table === 'settlements') {
+              settlementLookups.push(val);
+              return Promise.resolve({ data: save, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
+        }),
+      }),
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (fn: string) => Promise.resolve(
+      fn === 'founder_seats_taken' ? { data: 0, error: null } : { data: null, error: { message: `unexpected rpc ${fn}` } },
+    ),
+  });
+  return { factory, settlementLookups };
+}
+
+Deno.test('a signed-in single_dossier binds save_id ONLY after ownership verification', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'u1' });   // owned by the buyer
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.product, 'single_dossier');
+  assertEquals(metadata.supabase_user_id, 'u1');
+  assertEquals(metadata.save_id, 'save_1');            // the verified save id rode the metadata
+});
+
+Deno.test('a FORGED saveId (a save the buyer does not own) is rejected (400), no session', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_victim', user_id: 'someone_else' });  // foreign save
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_victim' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);              // a forged binding never reaches Stripe
+});
+
+Deno.test('an UNKNOWN saveId (no such save) is rejected (400), no session', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient(null);             // settlements lookup misses
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_ghost' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
+});
+
+Deno.test('a signed-in single_dossier WITHOUT a saveId stays valid (one-shot) with empty save_id', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient(null);
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token }, { Authorization: 'Bearer jwt' }),  // no saveId
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.save_id, '');                  // no binding, but the purchase proceeds
+  assertEquals(admin.settlementLookups.length, 0);     // no ownership read attempted
+});
+
+Deno.test('an ANONYMOUS single_dossier IGNORES saveId (never reads settlements, empty save_id)', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'whoever' });
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_1' }),  // no auth → anonymous
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.anonymous, 'true');
+  assertEquals(metadata.save_id, '');                  // anonymous never binds durable rights
+  assertEquals(admin.settlementLookups.length, 0);     // anonymous never reads settlements
+});

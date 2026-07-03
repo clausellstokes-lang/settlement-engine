@@ -571,9 +571,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
-            <BuyThisDossier settlement={settlement} />
+            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} />
             {/* Premium / elevated can export the draft as a PDF without saving;
-                self-gates on canExport so anon (Buy) and free see nothing here. */}
+                self-gates on the export-access hook so anon (Buy) and free see
+                nothing here. */}
             <ExportDraftButton />
           </div>
 

@@ -15,6 +15,7 @@
  */
 import { useState, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
+import { useDossierExportAccess } from '../../hooks/useDossierExportAccess.js';
 import Button from '../primitives/Button.jsx';
 
 // Lazy so the PDF chunk only loads when the user actually exports.
@@ -24,14 +25,21 @@ const ExportSheet = lazy(() => import('../settlement/ExportSheet.jsx'));
 
 export default function ExportDraftButton() {
   const settlement = useStore(s => s.settlement);
-  const canExport = useStore(s => s.canExport());
+  // Export ladder (108): this is an UNSAVED draft (saveId null), so only the
+  // unlimited-export tiers (Cartographer / Founder / elevated) can export it in
+  // place. A free account must SAVE first — then its per-save durable right (or
+  // its purchase) applies on the saved view. Anonymous gets the one-shot Buy CTA
+  // on the hero, not this button. Routing through the shared hook keeps the gate
+  // in one place; for a null save id it yields reason 'tier' (allow) or
+  // 'unsaved'/'anon' (deny), matching the old canExport() behaviour exactly.
+  const exportAccess = useDossierExportAccess(null);
 
   const [open, setOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Premium / elevated only; nothing to export without a settlement.
-  if (!settlement || !canExport) return null;
+  // Unlimited-export tiers only; nothing to export without a settlement.
+  if (!settlement || !exportAccess.allowed) return null;
 
   const handleExport = async (variant, useAi) => {
     if (exporting) return;

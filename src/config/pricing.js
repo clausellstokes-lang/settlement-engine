@@ -191,7 +191,13 @@ export const TIERS = Object.freeze({
                                           // free account is what unlocks full size.)
     features: {
       neighbourhoodSystem: false,
-      pdfExport:           true,
+      // PDF export is a ladder (108): a free Wanderer account does NOT get
+      // unlimited export. It buys a DURABLE re-download right per saved
+      // settlement ($2.99, own entitlement ledger) — so the tier feature is
+      // false and the per-save right is checked separately (has_dossier_
+      // entitlement). Cartographer / Founder keep unlimited export as a tier
+      // gate. useDossierExportAccess resolves the two together.
+      pdfExport:           false,
       jsonExport:          false,
       supplyChainMap:      false,
       founderBadge:        false,
@@ -305,6 +311,34 @@ export function getVisibleTiers() {
 /** Whether the single-dossier microtransaction is offered. */
 export function singleDossierEnabled() {
   return true;
+}
+
+// Runtime auth tiers ('anon' | 'free' | 'premium' | 'founder', authSlice) map to
+// the catalog TIERS by their legacyKey. This bridges the stored/runtime tier
+// string to the config that owns the feature flags, so the PDF-export gate reads
+// from ONE source (TIERS.<tier>.features.pdfExport) instead of a second hard-coded
+// tier list drifting out of sync.
+const RUNTIME_TIER_TO_CATALOG = Object.freeze({
+  anon:         null,                 // anonymous is not a saved-account tier
+  free:         TIERS.wanderer,
+  wanderer:     TIERS.wanderer,
+  premium:      TIERS.cartographer,
+  cartographer: TIERS.cartographer,
+  founder:      TIERS.founder,
+});
+
+/**
+ * Whether a runtime auth tier grants UNLIMITED PDF export as a tier feature
+ * (Cartographer / Founder). A free Wanderer account returns false — its export
+ * rights are per-saved-settlement entitlements (108), checked separately. Anon
+ * returns false (the anonymous one-shot is a purchase, not a tier feature).
+ *
+ * @param {string|null|undefined} runtimeTier — the auth.tier value.
+ * @returns {boolean}
+ */
+export function tierHasUnlimitedPdfExport(runtimeTier) {
+  const catalog = RUNTIME_TIER_TO_CATALOG[String(runtimeTier || '').toLowerCase()];
+  return catalog?.features?.pdfExport === true;
 }
 
 // ── Stripe product → catalog reverse lookup ───────────────────────────────

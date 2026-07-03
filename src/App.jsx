@@ -25,7 +25,7 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
 import { guardForView, viewToPath } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, BORDER, BODY, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -133,6 +133,11 @@ export default function App() {
   const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
+  // Silent dossier retro auto-upgrade confirmation (108): one quiet toast when a
+  // durable export right attaches to a just-saved settlement bought anonymously
+  // on this device. Set by notePersistedSave; auto-cleared below.
+  const dossierClaimToast = useStore(s => s.dossierClaimToast);
+  const setDossierClaimToast = useStore(s => s.setDossierClaimToast);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
@@ -170,12 +175,37 @@ export default function App() {
       const result = checkCheckoutResult();
       if (result?.status === 'success') {
         if (result.product === 'single_dossier') {
-          const { attachPendingDossierCheckout } = await import('./lib/pendingDossier.js');
-          attachPendingDossierCheckout(result.sessionId);
-          // The single-dossier flow needs a full landing page (PDF
-          // download + sign-up upsell), not just a toast. Replace so the
-          // Stripe-return URL isn't a Back-button trap.
-          navigate('dossier-success', { replace: true });
+          // Distinguish the TWO single_dossier checkouts by the ANON one-shot's
+          // fingerprint — a pending-dossier stash written before the Stripe
+          // redirect — NOT the live auth tier. A buyer who signed in DURING the
+          // round-trip is still an anonymous one-shot purchase (no durable right
+          // was granted server-side, its PDF is only in the stash), so keying on
+          // auth tier would strand their download and never arm the voucher.
+          const { readPendingDossier, attachPendingDossierCheckout } = await import('./lib/pendingDossier.js');
+          const hasPendingOneShot = !!readPendingDossier();
+          if (!hasPendingOneShot) {
+            // No stash → a SIGNED-IN buyer of a SAVED dossier bought a DURABLE
+            // right (108), granted server-side by the webhook keyed to the saveId
+            // they picked. Drop the durable-rights read cache so the saved dossier
+            // refetches its (now true) right on next view, and confirm calmly.
+            useStore.getState().clearDossierEntitlements?.();
+            setCheckoutToast('Your dossier PDF is unlocked. It stays yours while this settlement is saved.');
+            setTimeout(() => setCheckoutToast(null), 4000);
+          } else {
+            attachPendingDossierCheckout(result.sessionId);
+            // Arm the same-device retro-claim voucher with the paid session id
+            // (108), so a later sign-up + save of this settlement can silently
+            // attach the durable export right. Best-effort; a missing voucher
+            // just means the anonymous one-shot stays a one-shot.
+            try {
+              const { attachDossierClaimSession } = await import('./lib/dossierClaimStash.js');
+              attachDossierClaimSession(result.sessionId);
+            } catch { /* non-fatal */ }
+            // The anonymous one-shot needs a full landing page (PDF download +
+            // sign-up upsell), not just a toast. Replace so the Stripe-return URL
+            // isn't a Back-button trap.
+            navigate('dossier-success', { replace: true });
+          }
         } else {
           const msg = result.product === 'premium'
             ? 'Cartographer activated!'
@@ -197,6 +227,13 @@ export default function App() {
       loadCampaigns();
     }
   }, [authLoading, authTier, authUserId, loadCampaigns]);
+
+  // Auto-dismiss the dossier retro-claim confirmation toast after a short read.
+  useEffect(() => {
+    if (!dossierClaimToast) return undefined;
+    const id = setTimeout(() => setDossierClaimToast(null), 6000);
+    return () => clearTimeout(id);
+  }, [dossierClaimToast, setDossierClaimToast]);
 
   // Refresh the credit balance on auth transitions (in-session sign-in/out).
   // The mount-only fetch above left a user who signed in after load with a stale
@@ -890,6 +927,28 @@ export default function App() {
           animation: 'fadeIn 0.3s ease-out',
         }}>
           {checkoutToast}
+        </div>
+      )}
+
+      {/* ── Dossier retro auto-upgrade toast (108) ─────────────────────
+          A quiet, single confirmation that a durable PDF right silently
+          attached to a just-saved settlement bought before sign-up. Calm
+          parchment styling (not the green success gradient) — it is a gentle
+          grace, not a purchase receipt. role="status" so it is announced. */}
+      {dossierClaimToast && (
+        <div
+          role="status"
+          style={{
+            position: 'fixed', bottom: SP.xl, left: '50%', transform: 'translateX(-50%)',
+            zIndex: 2000, maxWidth: 'min(92vw, 420px)',
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: PARCH_100, color: BODY,
+            border: `1px solid ${BORDER}`, borderRadius: R.lg,
+            fontSize: FS.sm, fontWeight: 600, fontFamily: sans, lineHeight: 1.45,
+            boxShadow: '0 6px 24px rgba(0,0,0,0.18)',
+          }}
+        >
+          {dossierClaimToast}
         </div>
       )}
 

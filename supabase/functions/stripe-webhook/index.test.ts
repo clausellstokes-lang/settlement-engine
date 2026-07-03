@@ -1286,3 +1286,223 @@ Deno.test('a free-tier referrer with NO Stripe customer gets one created and the
   // And the binding was persisted to the profile.
   assertEquals(world.profileUpdates.some((u) => u.stripe_customer_id === 'cus_created_1'), true);
 });
+
+// ── Durable single-dossier export rights (migration 108) ──────────────────────
+// The paid single_dossier branch now feeds the export-rights ladder ON TOP of the
+// unchanged one-shot download:
+//   * SIGNED-IN + save_id metadata → grant_dossier_entitlement (claim-once); a
+//     grant failure must NOT break fulfilment.
+//   * ANONYMOUS → record single_dossier_purchases (token hashed = the claim proof;
+//     email lowercased = audit-only; amount_cents), idempotent on the session id; a
+//     missing checkout token SKIPS the record (nothing to claim against), a missing
+//     email still records (empty audit value). Neither ever fails fulfilment.
+//   * REFUND / dispute of the single_dossier charge → clawback_dossier_entitlement
+//     (reverses the right + poisons the voucher), keyed by the checkout session id.
+
+/** sha256 hex mirror of the handler's helper, so a test can assert the STORED
+ *  token hash equals sha256(rawToken) — proving the raw token never lands. */
+async function sha256hexTest(s: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** Recording stub for the dossier paths: an in-memory single_dossier_purchases
+ *  table keyed on session id (upsert ignoreDuplicates = the real PK semantics),
+ *  plus the grant/clawback RPCs. `grantResult` / `grantError` drive the grant
+ *  outcome; `clawResult` drives the clawback outcome. */
+function makeDossierStub(cfg: {
+  grantResult?: Record<string, unknown>;
+  grantError?: { message: string } | null;
+  clawResult?: Record<string, unknown>;
+} = {}) {
+  const claims = makeClaimTable('track');
+  const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  const purchases = new Map<string, Record<string, unknown>>();   // session_id → row
+  const upserts: Array<{ row: Record<string, unknown>; ignoreDuplicates: boolean }> = [];
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'single_dossier_purchases') {
+        return {
+          upsert: (row: Record<string, unknown>, opts?: { onConflict?: string; ignoreDuplicates?: boolean }) => {
+            upserts.push({ row, ignoreDuplicates: opts?.ignoreDuplicates === true });
+            const key = row.stripe_session_id as string;
+            // ON CONFLICT DO NOTHING: never overwrite an existing row (PK dedup).
+            if (!purchases.has(key)) purchases.set(key, row);
+            return Promise.resolve({ error: null });
+          },
+        };
+      }
+      // credit_ledger / profiles generic reads used by other branches.
+      return {
+        select: () => {
+          const b = { eq: () => b, ilike: () => b, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+          return b;
+        },
+        update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+      };
+    },
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      rpc.push({ fn, args });
+      if (fn === 'grant_dossier_entitlement') {
+        if (cfg.grantError) return Promise.resolve({ data: null, error: cfg.grantError });
+        return Promise.resolve({ data: cfg.grantResult ?? { ok: true, already_existed: false, entitlement_id: 'ent_1' }, error: null });
+      }
+      if (fn === 'clawback_dossier_entitlement') {
+        // Poison the voucher (mirrors the RPC) so an idempotency assertion holds.
+        const sid = args.p_session_id as string;
+        const row = purchases.get(sid);
+        if (row) row.status = 'refunded';
+        return Promise.resolve({ data: cfg.clawResult ?? { ok: true, entitlement_id: 'ent_1' }, error: null });
+      }
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, purchases, upserts, claims, adminClient: () => client };
+}
+
+const dossierCheckoutEvent = (id: string, metadata: Record<string, string>, extra: Record<string, unknown> = {}) =>
+  JSON.stringify({
+    id: `evt_${id}`, type: 'checkout.session.completed',
+    data: { object: { id, payment_status: 'paid', metadata: { product: 'single_dossier', ...metadata }, ...extra } },
+  });
+
+Deno.test('a signed-in single_dossier with save_id metadata grants the durable entitlement', async () => {
+  const stub = makeDossierStub();
+  const body = dossierCheckoutEvent('cs_dossier_signed', { supabase_user_id: 'u1', save_id: 'save_1', anonymous: 'false' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const grant = stub.rpc.find((c) => c.fn === 'grant_dossier_entitlement');
+  assertEquals(grant !== undefined, true);
+  assertEquals(grant!.args.p_user, 'u1');
+  assertEquals(grant!.args.p_save_id, 'save_1');
+  assertEquals(grant!.args.p_session_id, 'cs_dossier_signed');
+  assertEquals(grant!.args.p_source, 'purchase');
+  // A signed-in grant does NOT write the anonymous retro-claim voucher.
+  assertEquals(stub.upserts.length, 0);
+});
+
+Deno.test('a REPLAYED signed-in dossier session does NOT double-grant (event-level dedup)', async () => {
+  const stub = makeDossierStub();
+  const body = dossierCheckoutEvent('cs_dossier_dup', { supabase_user_id: 'u1', save_id: 'save_1' });
+  const first = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  const second = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(first.status, 200);
+  assertEquals(second.status, 200);
+  assertEquals(await second.text(), '[duplicate]');   // the redelivery ran no handler
+  assertEquals(stub.rpc.filter((c) => c.fn === 'grant_dossier_entitlement').length, 1);
+});
+
+Deno.test('a grant FAILURE does not break fulfilment (single_dossier still acks 200)', async () => {
+  const stub = makeDossierStub({ grantError: { message: 'transient rpc failure' } });
+  const body = dossierCheckoutEvent('cs_dossier_grantfail', { supabase_user_id: 'u1', save_id: 'save_1' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);                       // fulfilment survives a durable-grant error
+  assertEquals(await res.text(), JSON.stringify({ received: true }));
+});
+
+Deno.test('an ANONYMOUS single_dossier records the purchase (email lowercased, token hashed, amount)', async () => {
+  const stub = makeDossierStub();
+  const rawToken = 'tok_' + 'z'.repeat(40);
+  const body = dossierCheckoutEvent(
+    'cs_dossier_anon',
+    { anonymous: 'true', checkout_token: rawToken },
+    { amount_total: 299, customer_details: { email: '  Buyer@Example.COM  ' } },
+  );
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.upserts.length, 1);
+  const row = stub.upserts[0].row;
+  assertEquals(stub.upserts[0].ignoreDuplicates, true);            // idempotent on the PK
+  assertEquals(row.stripe_session_id, 'cs_dossier_anon');
+  assertEquals(row.buyer_email_lower, 'buyer@example.com');        // trimmed + lowercased
+  assertEquals(row.checkout_token_hash, await sha256hexTest(rawToken));  // the HASH, never the token
+  assertEquals(row.checkout_token_hash !== rawToken, true);
+  assertEquals(row.amount_cents, 299);
+  // No durable entitlement is minted for an anonymous purchase.
+  assertEquals(stub.rpc.some((c) => c.fn === 'grant_dossier_entitlement'), false);
+});
+
+Deno.test('a REPLAYED anonymous dossier session records the voucher only once (PK dedup)', async () => {
+  const stub = makeDossierStub();
+  const rawToken = 'tok_' + 'y'.repeat(40);
+  const body = dossierCheckoutEvent(
+    'cs_dossier_anon_dup',
+    { anonymous: 'true', checkout_token: rawToken },
+    { amount_total: 299, customer_details: { email: 'dup@example.com' } },
+  );
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  // A DIFFERENT event id for the SAME session (Stripe redelivery via a resend):
+  const body2 = body.replace('evt_cs_dossier_anon_dup', 'evt_cs_dossier_anon_dup_resend');
+  await handleStripeWebhook(req(body2, { 'stripe-signature': await sign(body2, SECRET) }), stub);
+  assertEquals(stub.purchases.size, 1);                // exactly one voucher row survives
+});
+
+Deno.test('an anonymous dossier session with NO customer email still RECORDS (email is audit-only)', async () => {
+  // Same-device model: the checkout token is the claim proof; buyer_email_lower is
+  // audit/support-only. Stripe returning no email must NOT block the claim voucher.
+  const stub = makeDossierStub();
+  const rawToken = 'tok_' + 'w'.repeat(40);
+  const body = dossierCheckoutEvent(
+    'cs_dossier_noemail',
+    { anonymous: 'true', checkout_token: rawToken },
+    { amount_total: 299, customer_details: { email: null } },
+  );
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(await res.text(), JSON.stringify({ received: true }));
+  assertEquals(stub.upserts.length, 1);                            // the token-claim voucher is recorded
+  const row = stub.upserts[0].row;
+  assertEquals(row.buyer_email_lower, '');                         // empty audit value, satisfies NOT NULL
+  assertEquals(row.checkout_token_hash, await sha256hexTest(rawToken));   // the claim proof still lands
+});
+
+Deno.test('an anonymous dossier session with NO checkout token SKIPS the record (nothing to claim, still 200)', async () => {
+  // No token → the same-device claim has no proof to verify against, so there is
+  // nothing to record. The one-shot download still worked; fulfilment never blocks.
+  const stub = makeDossierStub();
+  const body = dossierCheckoutEvent(
+    'cs_dossier_notoken',
+    { anonymous: 'true' },   // no checkout_token in metadata
+    { amount_total: 299, customer_details: { email: 'buyer@example.com' } },
+  );
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(await res.text(), JSON.stringify({ received: true }));
+  assertEquals(stub.upserts.length, 0);                // no voucher row written
+});
+
+Deno.test('a refund of a single_dossier charge claws back the entitlement AND poisons the voucher', async () => {
+  const stub = makeDossierStub();
+  // Seed a voucher for the session so the poison is observable.
+  const rawToken = 'tok_' + 'r'.repeat(40);
+  const paid = dossierCheckoutEvent(
+    'cs_dossier_refund',
+    { anonymous: 'true', checkout_token: rawToken },
+    { amount_total: 299, customer_details: { email: 'refundme@example.com' } },
+  );
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), stub);
+  assertEquals(stub.purchases.get('cs_dossier_refund')!.status, undefined);   // unclaimed (no status set on insert)
+
+  // A charge.refunded whose charge has no invoice → resolveChargeClawbackKeys
+  // resolves the checkout session id via payment_intent. Stub that Stripe surface.
+  const refundBody = JSON.stringify({
+    id: 'evt_dossier_refund', type: 'charge.refunded',
+    data: { object: { id: 'ch_1', invoice: null, payment_intent: 'pi_1' } },
+  });
+  // deno-lint-ignore no-explicit-any
+  const stripeClient = {
+    charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_1' }) },
+    checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: 'cs_dossier_refund' }] }) } },
+  } as any;
+  const res = await handleStripeWebhook(
+    req(refundBody, { 'stripe-signature': await sign(refundBody, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient },
+  );
+  assertEquals(res.status, 200);
+  const claw = stub.rpc.find((c) => c.fn === 'clawback_dossier_entitlement');
+  assertEquals(claw !== undefined, true);
+  assertEquals(claw!.args.p_session_id, 'cs_dossier_refund');
+  assertEquals(stub.purchases.get('cs_dossier_refund')!.status, 'refunded');  // voucher poisoned
+});

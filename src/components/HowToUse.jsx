@@ -180,7 +180,7 @@ function QuickTab() {
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and legacy annotations that connect the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
+      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. Keep a saved dossier's PDF for $2.99, yours to re-download, or export every settlement freely with Cartographer. You can also copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
       {/* P8/P9: the guide's primary task is generating — close the Quick Start
           region on the runnable next step rather than only documenting it. */}
@@ -261,7 +261,7 @@ function PowerTab({ onNavigate }) {
         </p>
         <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
         <Step n={2}><strong>Campaigns</strong>. Group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
-        <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
+        <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief. Keep a saved dossier's PDF for $2.99, or export every settlement freely with Cartographer. Full campaign PDFs export from the campaign folder with Cartographer.</Step>
         <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view. Use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
         <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
         <Step n={6}><strong>World Map</strong>. Drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
@@ -468,7 +468,7 @@ function RefTab({ onNavigate }) {
       ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
       ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
-      ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix.'],
+      ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix. Keep a saved dossier for $2.99, or export every settlement freely with Cartographer.'],
     ]},
     { title: 'World Map', rows: [
       ['Drag to Place','Drag a saved settlement from the drawer below the map onto any location on the map. A new burg is created at that point, linked to your settlement.'],

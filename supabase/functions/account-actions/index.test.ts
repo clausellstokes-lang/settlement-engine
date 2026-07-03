@@ -320,3 +320,164 @@ Deno.test('a read-only action (list_my_tickets) is NOT gated — reachable while
   assertEquals(admin.rpc.some((c) => c.fn === 'account_is_active'), false);
   assertEquals(user.rpc.some((c) => c.fn === 'list_my_tickets'), true);
 });
+
+// ── Dossier retro-claim, same-device token path (migration 108) ───────────────
+// claim_dossier_purchase is the SOLE retro-claim path: same-device + same-
+// settlement + automatic. The original device still holds the checkout token in
+// its purchase stash; after the buyer signs up and saves that settlement, the
+// client makes a silent post-save call with { sessionId, checkoutToken, saveId }.
+// The handler verifies, server-side, that a purchase row exists + is 'unclaimed' +
+// sha256(checkoutToken) matches the stored hash (constant-time), then calls the
+// service-role claim RPC. There is NO email-match path. No Stripe call.
+
+/** sha256 hex mirror so a test can seed the stored checkout_token_hash. */
+async function sha256hexTest(s: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** Admin stub for the claim path. `purchase` is the single_dossier_purchases row
+ *  the lookup returns (null = unknown session). `claimResult` drives the claim RPC.
+ *  `rateOk` drives the ingest_check_rate limiter (default under-limit). */
+function makeClaimAdminClient(cfg: {
+  purchase?: { checkout_token_hash: string; status: string } | null;
+  claimResult?: Record<string, unknown>;
+  rateOk?: boolean;
+}) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (table: string) => ({
+      select: () => ({
+        eq: () => ({
+          maybeSingle: () => table === 'single_dossier_purchases'
+            ? Promise.resolve({ data: cfg.purchase ?? null, error: null })
+            : Promise.resolve({ data: null, error: null }),
+        }),
+      }),
+    }),
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'ingest_check_rate') {
+        return Promise.resolve({ data: cfg.rateOk === false ? false : true, error: null });
+      }
+      if (fn === 'claim_dossier_purchase_by_session') {
+        return Promise.resolve({ data: cfg.claimResult ?? { ok: true, entitlement_id: 'ent_1' }, error: null });
+      }
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, adminClient: () => client };
+}
+
+const TOKEN = 'tok_' + 'q'.repeat(40);   // 24..128 chars
+
+Deno.test('claim_dossier_purchase happy path: verifies the token then claims (no Stripe call)', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({
+    purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
+  });
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: TOKEN, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).entitlementId, 'ent_1');
+  const claim = admin.rpc.find((c) => c.fn === 'claim_dossier_purchase_by_session');
+  assertEquals(claim !== undefined, true);
+  assertEquals((claim!.args as Record<string, unknown>).p_session_id, 'cs_1');
+  assertEquals((claim!.args as Record<string, unknown>).p_user, 'claimer');   // the verified JWT id
+  assertEquals((claim!.args as Record<string, unknown>).p_save_id, 'save_1');
+});
+
+Deno.test('claim_dossier_purchase rejects a WRONG token (403) and never calls the claim RPC', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({
+    // The stored hash is for the REAL token; the caller presents a different one.
+    purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
+  });
+  const wrongToken = 'tok_' + 'p'.repeat(40);
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: wrongToken, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);  // no claim on a bad token
+});
+
+Deno.test('claim_dossier_purchase rejects an UNKNOWN session (403), no claim RPC', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({ purchase: null });   // no such purchase row
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_ghost', checkoutToken: TOKEN, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
+});
+
+Deno.test('claim_dossier_purchase rejects an ALREADY-CLAIMED purchase (403), no claim RPC', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({
+    purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'claimed' },  // terminal
+  });
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: TOKEN, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 403);
+  // A non-unclaimed row is rejected at the verify gate — the claim RPC never runs.
+  assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
+});
+
+Deno.test('claim_dossier_purchase requires sessionId, a valid token, and saveId (400s)', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({ purchase: null });
+  // Missing sessionId.
+  let res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', checkoutToken: TOKEN, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);
+  // A too-short token (below the 24-char floor).
+  res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: 'short', saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);
+  // Missing saveId.
+  res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: TOKEN }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);
+});
+
+Deno.test('claim_dossier_purchase over the rate limit is rejected (429), no verify/claim', async () => {
+  const user = makeUserClient({ id: 'spammer', email: 's@x.com' });
+  const admin = makeClaimAdminClient({
+    purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
+    rateOk: false,   // limiter says over-limit
+  });
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: TOKEN, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 429);
+  assertEquals(admin.rpc.some((c) => c.fn === 'claim_dossier_purchase_by_session'), false);  // no claim past the limiter
+});
+
+Deno.test('claim_dossier_purchase surfaces a save_not_found business rejection (400)', async () => {
+  const user = makeUserClient({ id: 'claimer', email: 'c@x.com' });
+  const admin = makeClaimAdminClient({
+    purchase: { checkout_token_hash: await sha256hexTest(TOKEN), status: 'unclaimed' },
+    claimResult: { ok: false, reason: 'save_not_found' },   // RPC rejects the bind
+  });
+  const res = await handleAccountActions(
+    req({ action: 'claim_dossier_purchase', sessionId: 'cs_1', checkoutToken: TOKEN, saveId: 'not_mine' }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals((await res.json()).reason, 'save_not_found');
+});

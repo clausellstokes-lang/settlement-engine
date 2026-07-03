@@ -108,6 +108,13 @@ export const createAuthSlice = (set, get) => ({
     error: null,          // last auth error message
   },
 
+  // Durable single-dossier export rights (migration 108), cached per SAVED
+  // settlement id so the export surfaces don't re-hit has_dossier_entitlement on
+  // every render. A map of { [saveId]: boolean }. The server is authoritative;
+  // this is a read cache only — refreshed on demand (open a save, after a
+  // purchase success, after a retro auto-upgrade) and cleared on sign-out.
+  dossierEntitlements: {},
+
   // ── Core setters ──────────────────────────────────────────────────────────
   // `identity` is an APPEND-ONLY trailing object (not a positional arg) so the
   // existing nine-arg callers stay byte-compatible while new identity fields
@@ -138,6 +145,9 @@ export const createAuthSlice = (set, get) => ({
   clearAuth: () => {
     set(state => {
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, accountNumber: null, externalName: null, firstName: null, lastName: null, preferredName: null, loading: false, error: null };
+      // Durable-rights cache is per-user — drop it on sign-out so a later user on
+      // the same device never reads the previous account's entitlements.
+      state.dossierEntitlements = {};
     });
     try {
       get().clearCampaigns?.();
@@ -153,6 +163,41 @@ export const createAuthSlice = (set, get) => ({
 
   setAuthError: (error) =>
     set(state => { state.auth.error = error; }),
+
+  // ── Durable single-dossier export rights cache (migration 108) ─────────────
+  /** Synchronous read of the cached durable-right flag for a saved settlement.
+   *  Unknown (never fetched) reads false — the export surface then offers the
+   *  purchase path rather than a free export it cannot prove. */
+  hasCachedDossierEntitlement: (saveId) => {
+    if (!saveId) return false;
+    return get().dossierEntitlements[saveId] === true;
+  },
+
+  /** Optimistically mark a save's durable right as held (e.g. right after a
+   *  successful retro auto-upgrade) without waiting for a refetch. */
+  setDossierEntitlement: (saveId, held) =>
+    set(state => {
+      if (!saveId) return;
+      state.dossierEntitlements[saveId] = held === true;
+    }),
+
+  /** Drop the whole durable-rights read cache so every saved dossier refetches
+   *  its right on next view. Called after a durable purchase completes (the
+   *  webhook granted a new right server-side; the buyer's stale `false` must not
+   *  linger). */
+  clearDossierEntitlements: () =>
+    set(state => { state.dossierEntitlements = {}; }),
+
+  /** Refresh the cached durable-right flag for one saved settlement from the
+   *  server (has_dossier_entitlement). Fire-and-forget-safe: never throws, and
+   *  a transient failure caches false (fail-closed). Resolves to the boolean. */
+  refreshDossierEntitlement: async (saveId) => {
+    if (!saveId) return false;
+    const { fetchHasDossierEntitlement } = await import('../lib/dossierEntitlements.js');
+    const held = await fetchHasDossierEntitlement(saveId);
+    set(state => { state.dossierEntitlements[saveId] = held; });
+    return held;
+  },
 
   // ── Role queries ──────────────────────────────────────────────────────────
   isDeveloper: () => get().auth.role === 'developer',

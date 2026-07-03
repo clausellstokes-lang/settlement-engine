@@ -1,75 +1,181 @@
 /**
- * BuyThisDossier.jsx — $2.99 single-dossier CTA for anonymous viewers.
+ * BuyThisDossier.jsx — the PDF-export purchase CTA, one control across the whole
+ * export ladder (migration 108).
  *
- * Shown in the dossier toolbar for anonymous users only. Clicking:
- *   1. Stashes the current settlement so it survives the redirect.
- *   2. Sends the user to Stripe Checkout (product='single_dossier').
- *   3. After payment, App.jsx routes them to SingleDossierSuccessPage
- *      which pulls the stash back out and downloads the PDF.
+ * It routes on the shared export-access gate (useDossierExportAccess) so the
+ * decision lives in exactly one place. The four states it can render:
  *
- * Why anonymous-only:
- *   Signed-in users already have saves and exports; for them the
- *   subscription tiers are the right offer. For the anonymous "first
- *   touch" visitor, the $2.99 microtransaction is the lowest-friction
- *   conversion — pay once, get the dossier, optionally upgrade later.
+ *   · reason 'tier' | 'entitled'  → render NOTHING. Cartographer / Founder /
+ *       elevated already export freely; a free account that already holds the
+ *       durable right on this save does too.
+ *   · reason 'anon'               → an anonymous visitor. The button opens the
+ *       LADDER POPUP (free account / Cartographer / one-time download) rather
+ *       than jumping straight to Stripe.
+ *   · reason 'unpurchased'        → a signed-in free account viewing a SAVED
+ *       dossier it has not bought yet. Offers the $2.99 DURABLE purchase, keyed
+ *       to this save (saveId threaded to create-checkout so the right binds to
+ *       it).
+ *   · reason 'unsaved'            → a signed-in free account viewing an UNSAVED
+ *       draft. Durable rights attach to a save, so the honest CTA is "save it
+ *       first" — wired to the same save action the wizard uses, and honest about
+ *       a full save slot.
  *
- * Failure modes:
- *   - Supabase not configured (local dev) → button shows but a click
- *     surfaces an inline error rather than 500-ing through Stripe.
- *   - Secure token or stash write fails → checkout is stopped before
- *     redirect so the buyer cannot pay for a dossier we cannot recover.
+ * Failure modes (anon one-time path): a secure-token or stash-write failure stops
+ * the checkout BEFORE redirect so a buyer can never pay for a dossier we cannot
+ * recover.
  */
 
 import { useState } from 'react';
-import { Download } from 'lucide-react';
+import { Download, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
 import { createDossierCheckoutToken, stashPendingDossier } from '../lib/pendingDossier.js';
+import { stashDossierClaim } from '../lib/dossierClaimStash.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
+import { useDossierExportAccess } from '../hooks/useDossierExportAccess.js';
+import { t } from '../copy/index.js';
 import { sans, SP, FS, swatch, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
+import DossierLadderModal from './dossier/DossierLadderModal.jsx';
 
 const MUTED = swatch['#6B5340'];
 
-export default function BuyThisDossier({ settlement }) {
-  const authTier = useStore(s => s.auth.tier);
-  const isElevated = useStore(s => s.isElevated());
+/**
+ * @param {object} props
+ * @param {object} props.settlement       — the in-memory or saved settlement object.
+ * @param {string|null} [props.saveId]     — the SAVED settlement id, or null for a draft.
+ * @param {() => void} [props.onSignIn]    — open the auth flow (ladder "create account").
+ * @param {(view: string) => void} [props.onNavigate] — app navigation (ladder "Cartographer").
+ */
+export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onNavigate }) {
+  const isElevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
+  const canSave = useStore(s => (typeof s.canSave === 'function' ? s.canSave() : false));
+  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
+  const access = useDossierExportAccess(saveId);
 
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
+  const [ladderOpen, setLadderOpen] = useState(false);
 
-  if (authTier !== 'anon') return null;     // Signed-in users get the subscription CTA elsewhere
-  if (isElevated) return null;              // Devs / admins shouldn't see purchase prompts
   if (!settlement) return null;
+  if (isElevated) return null;              // Devs / admins never see purchase prompts.
+  // Already covered: unlimited-export tier, or a durable right already held.
+  if (access.allowed) return null;
 
-  async function handleBuy() {
+  // ── The anonymous one-time checkout (unchanged mechanics) ───────────────────
+  // Stashes the settlement so it survives the Stripe round-trip, AND records a
+  // versioned claim stash so a later same-device sign-up + save of THIS
+  // settlement can silently attach the durable right (the retro auto-upgrade).
+  async function runOneTimeCheckout() {
     setBusy(true); setError(null);
     try {
       const checkoutToken = createDossierCheckoutToken();
       if (!stashPendingDossier(settlement, checkoutToken)) {
         throw new Error('This browser cannot safely retain the dossier through checkout. Enable local storage and try again.');
       }
+      // Record the retro-claim stash BEFORE redirect (best-effort; a failure here
+      // must not block a paid download — the one-shot still works, it just can't
+      // be auto-upgraded later).
+      try { stashDossierClaim({ settlement, checkoutToken }); } catch { /* non-fatal */ }
       await startCheckout('single_dossier', { checkoutToken });
-      // startCheckout redirects on success, so we only reach this
-      // line on failure.
+      // startCheckout redirects on success; we only reach here on failure.
     } catch (e) {
-      setError(e.message || 'Checkout failed');
+      setError(e.message || t('dossierExport.buySaved.error'));
+      setBusy(false);
+      setLadderOpen(false);
+    }
+  }
+
+  // ── The signed-in free-account durable purchase, keyed to this saved dossier ─
+  async function runSavedCheckout() {
+    setBusy(true); setError(null);
+    try {
+      await startCheckout('single_dossier', { checkoutToken: createDossierCheckoutToken(), saveId });
+      // Redirects on success.
+    } catch (e) {
+      setError(e.message || t('dossierExport.buySaved.error'));
       setBusy(false);
     }
   }
 
+  // ── State: ANON → the ladder popup ──────────────────────────────────────────
+  if (access.reason === 'anon') {
+    const openAccount = () => {
+      setLadderOpen(false);
+      if (typeof onSignIn === 'function') onSignIn();
+      else setAuthModalOpen?.(true);
+    };
+    const openCartographer = () => {
+      setLadderOpen(false);
+      if (typeof onNavigate === 'function') onNavigate('pricing');
+    };
+    return (
+      <div style={wrapStyle}>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          icon={<Download size={12} />}
+          disabled={!isConfigured}
+          onClick={() => { setError(null); setLadderOpen(true); }}
+          style={{ minHeight: 44 }}
+          title={isConfigured
+            ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
+            : 'Payments are not configured in this environment.'}
+        >
+          {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+        </Button>
+        <span style={hintStyle}>One-time, no account needed.</span>
+        {error && <span style={errStyle}>{error}</span>}
+        {ladderOpen && (
+          <DossierLadderModal
+            busy={busy}
+            onClose={() => { if (!busy) setLadderOpen(false); }}
+            onCreateAccount={openAccount}
+            onCartographer={openCartographer}
+            onOneTime={runOneTimeCheckout}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // ── State: signed-in free, UNSAVED draft → save-first CTA ────────────────────
+  if (access.reason === 'unsaved') {
+    const openSignupOrSave = () => {
+      // A free account that CAN save just needs to press Save (owned by
+      // SaveToLibraryButton elsewhere in the flow); when they cannot (at cap), we
+      // route to the auth/upgrade door and stay honest about the full slots.
+      if (typeof onSignIn === 'function') onSignIn();
+      else setAuthModalOpen?.(true);
+    };
+    return (
+      <div style={wrapStyle}>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          icon={<Save size={12} />}
+          onClick={openSignupOrSave}
+          style={{ minHeight: 44 }}
+          title={t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })}
+        >
+          {t('dossierExport.saveFirst.cta')}
+        </Button>
+        <span style={hintStyle}>
+          {canSave
+            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
+            : t('dossierExport.saveFirst.atCap')}
+        </span>
+      </div>
+    );
+  }
+
+  // ── State: signed-in free, SAVED, not entitled → the durable $2.99 purchase ──
+  // (access.reason === 'unpurchased')
   return (
-    <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: SP.sm,
-      flexWrap: 'wrap', fontFamily: sans,
-    }}>
-      {/* Outline (secondary), not a filled CTA: in the dossier chrome the
-          purchase is a contextual offer, not the region's primary task, so it
-          must not be the loudest control. Per P8, upgrade/credits CTAs are
-          primary only on Pricing/Account and secondary elsewhere; it stays
-          visually distinct (gold-bordered outline + Download glyph) without
-          dominating the freshly generated dossier at its peak moment. (P8 / P9.) */}
+    <div style={wrapStyle}>
       <Button
         type="button"
         variant="secondary"
@@ -77,31 +183,26 @@ export default function BuyThisDossier({ settlement }) {
         icon={<Download size={12} />}
         busy={busy}
         disabled={!isConfigured}
-        onClick={handleBuy}
-        // Purchase is a real money control, so it must clear the ~44px touch
-        // target even though it renders at the dense `sm` size in dossier chrome.
+        onClick={runSavedCheckout}
         style={{ minHeight: 44 }}
-        title={
-          isConfigured
-            ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
-            : 'Payments are not configured in this environment.'
-        }
+        title={t('dossierExport.buySaved.subline')}
       >
-        {busy ? 'Redirecting…' : `Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+        {busy
+          ? t('dossierExport.buySaved.busy')
+          : t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       </Button>
-      <span style={{
-        fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
-      }}>
-        One-time, no account needed.
-      </span>
-      {error && (
-        <span style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4,
-          fontSize: FS.xs, color: RED,
-        }}>
-          {error}
-        </span>
-      )}
+      <span style={hintStyle}>{t('dossierExport.buySaved.subline')}</span>
+      {error && <span style={errStyle}>{error}</span>}
     </div>
   );
 }
+
+const wrapStyle = {
+  display: 'inline-flex', alignItems: 'center', gap: SP.sm,
+  flexWrap: 'wrap', fontFamily: sans,
+};
+const hintStyle = { fontSize: FS.xs, color: MUTED, fontStyle: 'italic' };
+const errStyle = {
+  display: 'inline-flex', alignItems: 'center', gap: 4,
+  fontSize: FS.xs, color: RED,
+};

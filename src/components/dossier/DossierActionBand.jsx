@@ -73,7 +73,7 @@ export default function DossierActionBand({
           primary's lead so it reads as subordinate. On narrow widths it reflows
           BELOW the narrative primary (last flex item with marginLeft:auto). */}
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', marginLeft: 'auto' }}>
-        {!embedded && <BuyThisDossier settlement={settlement} />}
+        {!embedded && <BuyThisDossier settlement={settlement} saveId={saveId} />}
         <ShareToGallery
           saveId={saveId}
           isPublic={liveSaveEntry?.is_public}

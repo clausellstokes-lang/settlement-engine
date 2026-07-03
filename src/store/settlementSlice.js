@@ -1355,6 +1355,18 @@ export const createSettlementSlice = (set, get) => ({
           });
         }).catch(() => {});
       }
+
+      // Same-device dossier retro auto-upgrade (108): if THIS just-saved
+      // settlement was bought anonymously on this device, silently attach the
+      // durable export right to the new save. Fully fire-and-forget — a
+      // non-matching save no-ops, and only a genuine claim refreshes the
+      // entitlement cache + raises the one quiet confirmation toast. The whole
+      // orchestration lives in dossierRetroClaim.js and never throws.
+      if (saveId != null) {
+        import('../lib/dossierRetroClaim.js')
+          .then(({ runDossierRetroClaimForSave }) => runDossierRetroClaimForSave({ settlement, saveId, get }))
+          .catch(() => { /* never block a save */ });
+      }
     } catch { /* instrumentation must never throw */ }
   },
 
