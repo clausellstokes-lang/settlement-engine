@@ -53,13 +53,25 @@ describe('Dossier IA — no global detail toggle; Substrate is a normal tab', ()
     openSystemsGroup(container);
     const substrateTab = [...container.querySelectorAll('[role="tab"], button')]
       .find(b => /^Substrate$/.test((b.textContent || '').trim()));
-    if (substrateTab) fireEvent.click(substrateTab);
+    // Loud precondition: if the Substrate tab is missing, fail HERE at the real
+    // cause rather than letting the waitFor below expire into a confusing
+    // "altitude-control never appeared" timeout.
+    expect(substrateTab).toBeTruthy();
+    fireEvent.click(substrateTab);
     // SubstrateTab is lazy; wait for it. The local control lives ON the tab now
-    // (not in the dossier header).
-    await waitFor(() =>
-      expect(container.querySelector('[data-testid="altitude-control"]')).toBeTruthy(),
+    // (not in the dossier header). The generous 15s waitFor mirrors the
+    // testTimeout reasoning in vite.config.js: the pre-push hook runs the FULL
+    // suite (~9k tests across ~127 files in parallel), and under that CPU
+    // contention the lazy dynamic-import chunk for SubstrateTab can take well
+    // over RTL's 1s waitFor default to resolve + render — a false timeout, not a
+    // real failure (AltitudeControl renders synchronously once the chunk lands).
+    // The 30s per-test timeout (third arg below) keeps the 15s waitFor from ever
+    // colliding with the 20s suite-level testTimeout under extreme load.
+    await waitFor(
+      () => expect(container.querySelector('[data-testid="altitude-control"]')).toBeTruthy(),
+      { timeout: 15_000 },
     );
-  });
+  }, 30_000);
 
   test('the dossier mounts without throwing', () => {
     const { container } = render(<OutputContainer settlement={town} readOnly saveId={null} />);
