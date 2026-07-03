@@ -35,7 +35,7 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { useDossierExportAccess } from '../hooks/useDossierExportAccess.js';
 import { t } from '../copy/index.js';
-import { sans, SP, FS, swatch, RED } from './theme.js';
+import { sans, FS, swatch, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
 
@@ -48,7 +48,7 @@ const MUTED = swatch['#6B5340'];
  * @param {() => void} [props.onSignIn]    — open the auth flow (ladder "create account").
  * @param {(view: string) => void} [props.onNavigate] — app navigation (ladder "Cartographer").
  */
-export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onNavigate }) {
+export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onNavigate, size = 'sm' }) {
   const isElevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const canSave = useStore(s => (typeof s.canSave === 'function' ? s.canSave() : false));
   const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
@@ -115,7 +115,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         <Button
           type="button"
           variant="secondary"
-          size="sm"
+          size={size}
           icon={<Download size={12} />}
           disabled={!isConfigured}
           onClick={() => { setError(null); setLadderOpen(true); }}
@@ -155,7 +155,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         <Button
           type="button"
           variant="secondary"
-          size="sm"
+          size={size}
           icon={<Save size={12} />}
           onClick={openSignupOrSave}
           style={{ minHeight: 44 }}
@@ -179,7 +179,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
       <Button
         type="button"
         variant="secondary"
-        size="sm"
+        size={size}
         icon={<Download size={12} />}
         busy={busy}
         disabled={!isConfigured}
@@ -198,7 +198,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
 }
 
 const wrapStyle = {
-  display: 'inline-flex', alignItems: 'center', gap: SP.sm,
+  display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 6,
   flexWrap: 'wrap', fontFamily: sans,
 };
 const hintStyle = { fontSize: FS.xs, color: MUTED, fontStyle: 'italic' };

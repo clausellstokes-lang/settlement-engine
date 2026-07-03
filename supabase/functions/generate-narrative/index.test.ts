@@ -35,7 +35,7 @@ Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 Deno.env.delete('ANTHROPIC_API_KEY');
 Deno.env.delete('OPENAI_API_KEY');
 
-const { handleGenerateNarrative } = await import('./index.ts');
+const { handleGenerateNarrative, MAX_BODY_BYTES } = await import('./index.ts');
 
 /** user-client stub: getUser() resolves the verified JWT identity, and rpc()
  *  handles spend_credits. `spendResult` is what spend_credits returns; every rpc
@@ -240,13 +240,14 @@ Deno.test('a request with NO authorization header is rejected (400) before any s
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
 });
 
-// Finding (1): an oversized body is rejected with 413 BEFORE parse + spend,
-// mirroring generate-chronicle's 64KB cap. Without the cap, an unbounded
-// settlement payload inflates the provider token bill at a fixed credit price.
-Deno.test('an OVER-CAP body (>64KB) is rejected (413) before any spend', async () => {
+// Finding (1): an oversized body is rejected with 413 BEFORE parse + spend.
+// The cap bounds abuse/DoS, not the token bill (the prompt is a compact summary).
+// Sized OVER the real exported ceiling so this test tracks MAX_BODY_BYTES and can
+// never silently drift when the cap is retuned.
+Deno.test('an OVER-CAP body (> MAX_BODY_BYTES) is rejected (413) before any spend', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
-  const huge = { type: 'narrative', settlement: { ...SETTLEMENT, blob: 'x'.repeat(70 * 1024) } };
+  const huge = { type: 'narrative', settlement: { ...SETTLEMENT, blob: 'x'.repeat(MAX_BODY_BYTES + 1024) } };
   const res = await handleGenerateNarrative(
     req(huge, { Authorization: 'Bearer jwt' }),
     { userClient: user.userClient, adminClient: admin.adminClient },
@@ -256,19 +257,19 @@ Deno.test('an OVER-CAP body (>64KB) is rejected (413) before any spend', async (
 });
 
 // Finding (1, byte cap): a multi-byte payload whose UTF-16 code-unit count is
-// UNDER the cap but whose BYTE count is OVER it must be rejected (413). Before
-// the fix the cap measured rawBody.length (code units), so a payload of ~24k
-// 3-byte chars (~24k code units, ~72KB bytes) slipped past the 64KB byte ceiling
-// and inflated the provider token bill. '実' is 3 bytes / 1 code unit in UTF-8.
+// UNDER the cap but whose BYTE count is OVER it must be rejected (413). The cap
+// must measure BYTES (new TextEncoder().encode(rawBody).length), not rawBody.length
+// (code units) — else a payload of many 3-byte chars slips past the byte ceiling.
+// '実' is 3 UTF-8 bytes / 1 UTF-16 code unit, so ceil(cap/3)+pad chars gives a body
+// whose byte size exceeds the cap while its code-unit count stays comfortably under.
 Deno.test('a multi-byte body OVER the BYTE cap (but under code-unit count) is rejected (413)', async () => {
   const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
   const admin = makeAdminClient(true);
-  // 24_000 '実' = 24_000 code units (< 65_536) but 72_000 bytes (> 65_536).
-  const blob = '実'.repeat(24_000);
+  const blob = '実'.repeat(Math.ceil(MAX_BODY_BYTES / 3) + 4_000);
   const body = JSON.stringify({ type: 'narrative', settlement: { ...SETTLEMENT, blob } });
-  // Sanity: the OLD code-unit cap would have ADMITTED this body; the byte cap rejects it.
-  assertEquals(body.length <= 64 * 1024, true);
-  assertEquals(new TextEncoder().encode(body).length > 64 * 1024, true);
+  // Sanity: a code-unit cap would ADMIT this body (code units < cap); the byte cap rejects it (bytes > cap).
+  assertEquals(body.length <= MAX_BODY_BYTES, true);
+  assertEquals(new TextEncoder().encode(body).length > MAX_BODY_BYTES, true);
   const res = await handleGenerateNarrative(
     new Request('https://edge/generate-narrative', {
       method: 'POST',

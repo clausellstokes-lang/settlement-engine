@@ -564,14 +564,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               dossier" sits beside it as the quiet one-time-purchase alternative,
               hoisted from the dossier action band so the two commit actions live
               together. Save leads; Buy is the neighbour. */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', paddingTop: SP.xs }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: SP.sm, flexWrap: 'wrap', paddingTop: SP.xs }}>
             <SaveToLibraryButton
               settlement={settlement}
               canSave={canSave}
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
-            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} />
+            {/* size="lg" matches the Save button so the two read as a balanced
+                primary+secondary pair; BuyThisDossier stacks its one-time caption
+                BELOW the button (not inline) so the note no longer pushes the
+                centered pair off to the side. */}
+            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             {/* Premium / elevated can export the draft as a PDF without saving;
                 self-gates on the export-access hook so anon (Buy) and free see
                 nothing here. */}

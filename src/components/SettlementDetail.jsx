@@ -127,6 +127,12 @@ export default function SettlementDetail({
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
+  // Free-user Workshop teaser visibility. A Cartographer/Founder uses editMode
+  // (store) to reveal the workbench; a free account has no editMode, so the same
+  // "Edit Dossier" button toggles this local flag instead — the read-only teaser
+  // (write controls replaced by the "writing is premium" strip) is gated behind
+  // the button exactly as the real workbench is, rather than always showing.
+  const [teaserOpen, setTeaserOpen] = useState(false);
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   // Shared canonize-confirm gate — BOTH PhaseBadge and the rail route through this
   // one dialog + commit, so neither fires the persisted transition unconfirmed or
@@ -189,7 +195,6 @@ export default function SettlementDetail({
   const countSettlementEdits = useStore(s => s.countSettlementEdits);
   const authTier             = useStore(s => s.auth?.tier);
   const isElevated           = useStore(s => typeof s.isElevated === 'function' ? s.isElevated() : false);
-  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
@@ -750,17 +755,19 @@ export default function SettlementDetail({
               icon={!canEdit ? <Lock size={12}/> : <Edit3 size={12}/>}
               onClick={() => {
                 if (canEdit) { toggleEditMode(); }
-                else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); }
+                else { setTeaserOpen(o => !o); }
               }}
               title={canEdit
                 ? (editMode
                     ? 'Stop editing. Fields return to read-only display.'
                     : 'Edit dossier prose in place. Edits are preserved across rerolls, and a narrative pass leaves them in place.')
-                : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
+                : (teaserOpen
+                    ? 'Hide the editing workshop.'
+                    : 'Open the editing workshop. Reading it is free; making changes is a Cartographer feature.')}
             >
-              {!canEdit
-                ? 'Edit (Premium)'
-                : (editMode ? 'Stop Editing' : 'Edit Dossier')}
+              {canEdit
+                ? (editMode ? 'Stop Editing' : 'Edit Dossier')
+                : (teaserOpen ? 'Hide Workshop' : 'Edit Dossier')}
             </Button>
             {saveId && !isMobile && (
               <Button
@@ -885,11 +892,15 @@ export default function SettlementDetail({
         </>
       ) : (
         <>
-          {dossierHero}
-          {/* Free-user teaser only: see the READ note above. */}
-          {!canEdit && (
+          {/* Free-user teaser, GATED behind the Edit Dossier button (teaserOpen)
+              exactly as the premium workbench is gated behind editMode — no longer
+              always-on. When opened it sits at the TOP, above the dossier, mirroring
+              premium EDIT mode so the edit surface is in the SAME place for a free
+              account as for Cartographer. */}
+          {!canEdit && teaserOpen && (
             <div className="sf-readable-surface" style={{padding:16}}>{workshop}</div>
           )}
+          {dossierHero}
         </>
       )}
 

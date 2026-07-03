@@ -156,7 +156,14 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
 
   // Build the request body. Progression carries extra fields the server needs
   // to do its diff-aware thesis + subset-of-passes run.
-  const body = { type, settlement, settlementId, pinnedNpcIds };
+  // Strip client-only undo history before sending: `versionHistory` is an array
+  // of capped full-settlement snapshots that can push a rich/canonized settlement
+  // past the edge body cap (HTTP 413). The server never reads it — the prompt is
+  // built from a compact summarizeSettlement(), and the refined-prose overlay it
+  // returns is stored separately from the raw settlement (which keeps its history
+  // untouched in the store). Shallow-omit so the caller's settlement is unmutated.
+  const { versionHistory: _omitVersionHistory, ...leanSettlement } = settlement || {};
+  const body = { type, settlement: leanSettlement, settlementId, pinnedNpcIds };
   if (typeof opts.aiGuidance === 'string' && opts.aiGuidance.trim()) {
     body.aiGuidance = opts.aiGuidance.trim();
   }
