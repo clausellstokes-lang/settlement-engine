@@ -341,6 +341,7 @@ export const en = Object.freeze({
         features: [
           'Generate any size, from hamlet to metropolis',
           '3 saved settlements',
+          'Share your settlements to the community Gallery',
           'Keep any dossier’s PDF for $2.99, yours to re-download',
           'Pay-per-use narrative refinement (credit packs)',
         ],
@@ -358,7 +359,7 @@ export const en = Object.freeze({
           'Advance time and run the region for years',
           'Campaigns: link settlements into one living world',
           'The self-ending war layer + the living pantheon',
-          'Custom content + share to the Gallery',
+          'Custom content + import settlements from the Gallery',
           'Unlimited saves + cloud sync',
           'Unlimited PDF and JSON export of every settlement',
           'Pay-per-use narrative refinement (credit packs)',
@@ -409,6 +410,7 @@ export const en = Object.freeze({
           features: [
             'Generate any size, from hamlet to metropolis, free',
             '3 saved settlements',
+            'Share your settlements to the community Gallery',
             'Keep any dossier’s PDF for $2.99, yours to re-download',
             'Pay-per-use narrative refinement (credit packs)',
           ],
@@ -420,7 +422,7 @@ export const en = Object.freeze({
             'The self-ending war layer: sieges, coalitions, conquest',
             'The living pantheon: deities contest converts and rise',
             'Campaigns + a chronicle that writes itself',
-            'Custom content + share to the Gallery',
+            'Custom content + import settlements from the Gallery',
             'Unlimited saves + cloud sync',   // secondary bullet — storage stays
             'Unlimited PDF and JSON export of every settlement',
           ],
