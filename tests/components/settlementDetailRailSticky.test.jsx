@@ -17,7 +17,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { CHROME } from '../../src/components/theme';
 
 afterEach(() => {
@@ -132,9 +132,10 @@ afterEach(() => {
 describe('SettlementDetail — read / edit surface split by editMode', () => {
   // The contract changed from an order-swap to a one-surface-per-mode split:
   //   • READ (editMode off): the dossier hero renders (its sticky <aside> rail
-  //     present). For a free/anon user (canEdit false, the store mock's tier)
-  //     the Workshop teaser ALSO renders — a free user can't enter edit mode, so
-  //     it must stay reachable. Dossier still precedes the teaser Workshop.
+  //     present). A free/anon user (canEdit false) cannot enter edit mode, so the
+  //     Workshop teaser is GATED behind the Edit Dossier button — HIDDEN by
+  //     default, revealed (at the TOP, before the dossier) on click, mirroring
+  //     where the premium edit workbench sits.
   //   • EDIT (editMode on): ONLY the authoring workbench renders. The dossier
   //     hero (and thus the sticky rail) is NOT mounted; the Workshop IS present.
   // The dossier hero owns the sticky <aside>; the Workshop renders the first
@@ -143,18 +144,21 @@ describe('SettlementDetail — read / edit surface split by editMode', () => {
     return container.querySelector('section[data-testid^="workshop-group-"]');
   }
 
-  test('read mode (editMode off, free user): dossier hero renders and precedes the Workshop teaser', async () => {
+  test('read mode (free user): the Workshop teaser is gated behind the Edit Dossier button', async () => {
     installMatchMedia(false);
     storeState.editMode = false;
-    const { container } = await renderDetail();
-    const rail = stickyRail(container);
+    const { container, getByRole } = await renderDetail();
+    // Default: the dossier hero (its sticky rail) renders; the free-user Workshop
+    // teaser is HIDDEN until opened via the Edit Dossier button (no longer always-on).
+    expect(stickyRail(container)).toBeTruthy();
+    expect(firstWorkshopSection(container)).toBeFalsy();
+    // Clicking the button reveals the teaser at the TOP — before the dossier rail.
+    fireEvent.click(getByRole('button', { name: /edit dossier/i }));
     const workshop = firstWorkshopSection(container);
-    // Free/anon (canEdit false): dossier + reachable Workshop teaser both mount.
-    expect(rail).toBeTruthy();
     expect(workshop).toBeTruthy();
-    // DOCUMENT_POSITION_FOLLOWING (4) set on the rail→workshop comparison means
-    // the workshop comes AFTER the dossier rail — i.e. dossier-first.
-    expect(rail.compareDocumentPosition(workshop) & Node.DOCUMENT_POSITION_FOLLOWING)
+    // DOCUMENT_POSITION_FOLLOWING (4) on workshop→rail means the rail comes AFTER
+    // the workshop — i.e. teaser-first (mirrors premium edit mode).
+    expect(workshop.compareDocumentPosition(stickyRail(container)) & Node.DOCUMENT_POSITION_FOLLOWING)
       .toBeTruthy();
   });
 
