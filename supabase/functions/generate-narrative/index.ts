@@ -425,7 +425,9 @@ const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall
 // client already strips its capped versionHistory snapshots) legitimately exceeds
 // it and 413'd. 256KB comfortably fits any real settlement while still rejecting a
 // pathological payload. Read req.text() with this cap before JSON.parse.
-const MAX_BODY_BYTES = 256 * 1024;
+// Exported so the execution tests size their over/under-cap payloads relative to
+// the REAL ceiling — the tests can never silently drift from the handler again.
+export const MAX_BODY_BYTES = 256 * 1024;
 
 /**
  * Refinement passes affected by a progression changeType — OWN-property lookup
