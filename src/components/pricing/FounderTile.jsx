@@ -24,6 +24,7 @@ import { useStore } from '../../store/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
 import { startCheckout } from '../../lib/stripe.js';
+import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
 import { GOLD, GOLD_B, sans, serif_, FS, SP, R, swatch, FORM_MAX } from '../theme.js';
@@ -84,7 +85,7 @@ export default function FounderTile() {
 
   if (!eligible) return null;
 
-  const claimSeat = seatsRemaining ? 500 - seatsRemaining + 1 : null;
+  const claimSeat = seatsRemaining ? FOUNDER_SEAT_CAP - seatsRemaining + 1 : null;
 
   async function handleClick() {
     setLoading(true);
@@ -106,7 +107,7 @@ export default function FounderTile() {
   // live count (accessible channel) PLUS a thin filled meter (aria-hidden). Same
   // computation as PricingPage so the seat-scarcity reads identically on both.
   const seatsPct = typeof seatsRemaining === 'number'
-    ? Math.min(100, Math.max(0, ((500 - seatsRemaining) / 500) * 100))
+    ? Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - seatsRemaining) / FOUNDER_SEAT_CAP) * 100))
     : null;
 
   return (
@@ -152,7 +153,7 @@ export default function FounderTile() {
         {typeof seatsRemaining === 'number' && (
           <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
             <div style={{ fontSize: FS.xs, color: swatch['#C8B098'], fontStyle: 'italic' }}>
-              {seatsRemaining} of 500 seats remaining
+              {seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining
             </div>
             <div
               aria-hidden="true"
@@ -170,13 +171,13 @@ export default function FounderTile() {
         {/* P3 — the value delta is the card's conviction, so make it the focal
             level rather than the smallest, most-muted line. The "$99 forever"
             figure is promoted to display size (gold-400 on ink = 9.4:1) so the
-            save-this-much math is what the eye lands on; the "$144" comparison
+            save-this-much math is what the eye lands on; the "$143.76" comparison
             stays a quiet supporting line above it, and the decorative title is
             already the demoted label. P5 — grouped by spacing alone now (no
             tint/radius box); the bold gold figures carry the emphasis the faint
             tint used to. WORDING is unchanged from the original two lines. */}
         <div style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.6, fontFamily: serif_ }}>
-          <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>
+          <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$143.76</b></div>
           <div style={{
             fontSize: FS['28'], fontWeight: 700, color: GOLD_400,
             lineHeight: 1.1, marginTop: SP.xs,

@@ -1272,7 +1272,10 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
     // path is still mandatory for every NON-single_dossier product,
     // and supabase_user_id still comes from the server-verified JWT
     // for any product that does provide auth.
-    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product(?:\s*,\s*checkoutToken)?\s*\}\s*=\s*await\s*req\.json/);
+    // The destructure now also carries checkoutToken (P95) and redeemCode
+    // (107) — the CONTRACT here is only the position of the body parse
+    // relative to auth, so match the leading `product` and tolerate the rest.
+    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product\b[^}]*\}\s*=\s*await\s*req\.json/);
     const authIdx = checkoutSrc.search(/getUser\s*\(/);
     expect(bodyIdx).toBeGreaterThan(0);
     expect(authIdx).toBeGreaterThan(0);

@@ -607,7 +607,7 @@ export default function EventComposer({ onLink = null }) {
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
                 <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
-                  <option value="">, Pick a role -</option>
+                  <option value="">Pick a role -</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
               </Field>

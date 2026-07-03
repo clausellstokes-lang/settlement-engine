@@ -41,7 +41,7 @@ const MAX_SLACK = 40;
 // current LOC + ~20. SHRINK these as files shrink (the slack guard enforces it); never
 // RAISE one without a deliberate, in-diff reason.
 const GRANDFATHERED = {
-  'src/generators/powerGenerator.js': 2857,
+  'src/generators/powerGenerator.js': 2760, // shrank: genSuccessionNarr extracted to successionNarrative.js
   'src/generators/economicGenerator.js': 2901, // + review-remediation: getUpgradeChain tier-connectivity + Stage 5/7 export re-seating
   'src/store/settlementSlice.js': 2471, // + review-remediation: pendingEditsQueue clear + identity-swap guards
   'src/generators/npcGenerator.js': 1688,

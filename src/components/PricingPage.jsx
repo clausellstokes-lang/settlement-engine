@@ -24,6 +24,9 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../store/index.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
+import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
+import { useReferralIntent } from '../hooks/useReferralIntent.js';
+import { FOUNDER_SEAT_CAP } from '../lib/founderSeats.js';
 import {
   getVisibleTiers, getActivePacks, getTierDisplayName,
 } from '../config/pricing.js';
@@ -51,6 +54,8 @@ import FounderBadge from './primitives/FounderBadge.jsx';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
+import RedeemCodeField from './purchase/RedeemCodeField.jsx';
+import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 
 function FeatureRow({ children }) {
   return (
@@ -187,11 +192,11 @@ function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, empha
               channels (count + filled meter), in legible BODY weight-600 rather
               than violet-hue-alone. Live count via the founder_seats_taken RPC
               (migration 010); the fetch may fail or be pending, so fall back to
-              the safe "Limited to 500 seats" copy with no meter in those cases. */}
+              the safe "Limited to N seats" copy with no meter in those cases. */}
           <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
             {typeof founderSeatsRemaining === 'number'
-              ? `${founderSeatsRemaining} of 500 seats remaining.`
-              : 'Limited to 500 seats.'}
+              ? `${founderSeatsRemaining} of ${FOUNDER_SEAT_CAP} seats remaining.`
+              : `Limited to ${FOUNDER_SEAT_CAP} seats.`}
           </p>
           {typeof founderSeatsRemaining === 'number' && (
             <div
@@ -203,7 +208,7 @@ function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, empha
             >
               <div style={{
                 height: '100%', borderRadius: R.sm, background: GOLD,
-                width: `${Math.min(100, Math.max(0, ((500 - founderSeatsRemaining) / 500) * 100))}%`,
+                width: `${Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - founderSeatsRemaining) / FOUNDER_SEAT_CAP) * 100))}%`,
               }} />
             </div>
           )}
@@ -312,6 +317,20 @@ export default function PricingPage({ onNavigate }) {
   // Remember the last attempted checkout action so the error banner can offer a
   // real "try again" path instead of being a terminal dead-end (P10).
   const [lastAttempt, setLastAttempt] = useState(null);
+  // Redeem code (107): seeded from the Account-page handoff, editable inline.
+  // Advisory input only — create-checkout re-validates and reserves it.
+  const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
+  const [redeemNotice, setRedeemNotice] = useState(null);
+  // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
+  const referral = useReferralIntent();
+
+  // Keep the cross-surface stash in sync with the field so the code survives
+  // leaving for the credit-pack modal (and vice versa).
+  const handleRedeemChange = (v) => {
+    setRedeemCode(v);
+    if (v.trim()) setPendingRedeemCode(v.trim());
+    else clearPendingRedeemCode();
+  };
 
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
@@ -343,7 +362,7 @@ export default function PricingPage({ onNavigate }) {
   };
 
   // Live founder seat counter. Null until the RPC resolves
-  // OR on any failure — TierCard falls back to "Limited to 500 seats"
+  // OR on any failure — TierCard falls back to "Limited to N seats"
   // when null, so a transient backend hiccup doesn't break the page.
   const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
   useEffect(() => {
@@ -366,7 +385,15 @@ export default function PricingPage({ onNavigate }) {
     setLastAttempt({ kind: 'buy', product });
     setLoading(product);
     try {
-      await startCheckout(product);
+      // Referral intent rides AHEAD of checkout so the pending row exists
+      // before the first payment lands. recordIntent never throws and a
+      // rejection surfaces as a note — it must never block the purchase.
+      await referral.recordIntent();
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode });
+      // The code is consumed (reserved or declined server-side) — drop the
+      // stash so it cannot resurface on a later, unrelated purchase.
+      clearPendingRedeemCode();
+      if (notice) setRedeemNotice(notice);
     } catch (e) {
       // P11 — keep the raw Stripe/network text out of the UI (console only);
       // surface a domain-language message the reader can act on (P10).
@@ -486,6 +513,25 @@ export default function PricingPage({ onNavigate }) {
               Try again
             </Button>
           )}
+        </div>
+      )}
+
+      {/* ── Checkout riders (107): redeem code + referral intent ────────── */}
+      {/* A quiet strip above the tiers: both are optional inputs that attach
+          to whichever purchase follows, so they must be set BEFORE a tier or
+          pack CTA is clicked. Neither ever blocks checkout. */}
+      {isConfigured && (
+        <div style={{
+          margin: `0 auto ${HEADER_GAP}px`, maxWidth: FORM_MAX,
+          display: 'flex', flexDirection: 'column', gap: SP.md,
+        }}>
+          <RedeemCodeField code={redeemCode} onChange={handleRedeemChange} idPrefix="pricing" />
+          {redeemNotice && (
+            <div role="status" style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, fontFamily: sans }}>
+              {redeemNotice}
+            </div>
+          )}
+          <ReferralIntentField referral={referral} idPrefix="pricing" />
         </div>
       )}
 

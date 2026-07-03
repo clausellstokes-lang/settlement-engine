@@ -82,6 +82,6 @@ describe('LockedDestination', () => {
     expect(container.textContent).not.toMatch(/trial/i);
     expect(screen.queryByText(/free 7-day trial/i)).toBeNull();
     // Subline still communicates the real plan.
-    expect(screen.getByText('$6/mo · cancel anytime')).toBeTruthy();
+    expect(screen.getByText('$5.99/mo · cancel anytime')).toBeTruthy();
   });
 });

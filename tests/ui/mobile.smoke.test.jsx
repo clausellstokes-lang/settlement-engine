@@ -92,7 +92,7 @@ vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { from: () => ({ select: () => ({ eq: () => Promise.resolve({ data: [] }) }) }) },
 }));
 vi.mock('../../src/lib/founderSeats.js', () => ({
-  fetchFounderSeatsRemaining: vi.fn(() => Promise.resolve(500)),
+  fetchFounderSeatsRemaining: vi.fn(() => Promise.resolve(12)),
 }));
 
 describe('Tier 7.18 — Mobile viewport baseline', () => {

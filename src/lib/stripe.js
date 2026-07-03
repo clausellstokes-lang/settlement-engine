@@ -27,7 +27,7 @@ function buildProductsMap() {
     premium: {
       key:       'premium',
       name:      'Premium Upgrade',
-      price:     '$6/mo',
+      price:     '$5.99/mo',
       credits:   30,
       perCredit: null,
       discount:  null,
@@ -65,8 +65,19 @@ const PRODUCTS = new Proxy({}, {
 
 /**
  * Create a Stripe Checkout session and redirect.
+ *
+ * A redeem code (migration 107) is resolved entirely server-side: the edge
+ * function reserves it and attaches any discount itself. When the code did
+ * not apply, checkout still proceeds and the server sends back a non-fatal
+ * `redeemNotice` — returned here so callers can toast it (the redirect to
+ * Stripe follows regardless).
+ *
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string }} options
+ * @param {{ checkoutToken?: string, redeemCode?: string, saveId?: string }} options
+ *   `saveId` (single_dossier + signed-in only): binds the durable export right
+ *   to that SAVED settlement (migration 108). The server re-verifies ownership;
+ *   an anonymous checkout ignores it.
+ * @returns {Promise<{ redeemNotice: string|null }>}
  */
 export async function startCheckout(product, options = {}) {
   if (!isConfigured) {
@@ -94,8 +105,22 @@ export async function startCheckout(product, options = {}) {
     throw new Error('You must be signed in to purchase');
   }
 
+  // Only send a non-empty trimmed code; the server treats anything else as
+  // "no code". Case is preserved — codes are matched exactly server-side.
+  const redeemCode = typeof options.redeemCode === 'string' && options.redeemCode.trim()
+    ? options.redeemCode.trim()
+    : undefined;
+
+  // saveId (durable-rights binding, 108): only meaningful for a SIGNED-IN
+  // single_dossier buyer picking one saved settlement to bind the right to. The
+  // server verifies ownership and ignores it for anonymous checkouts; we only
+  // forward a non-empty string.
+  const saveId = product === 'single_dossier' && typeof options.saveId === 'string' && options.saveId.trim()
+    ? options.saveId.trim()
+    : undefined;
+
   const { data, error } = await supabase.functions.invoke('create-checkout', {
-    body: { product, checkoutToken },
+    body: { product, checkoutToken, ...(redeemCode ? { redeemCode } : {}), ...(saveId ? { saveId } : {}) },
   });
 
   if (error) throw new Error(error.message || 'Checkout failed');
@@ -103,6 +128,7 @@ export async function startCheckout(product, options = {}) {
 
   // Redirect to Stripe
   window.location.href = data.url;
+  return { redeemNotice: data.redeemNotice ?? null };
 }
 
 /** Create a Stripe Billing Portal session and redirect the signed-in user. */

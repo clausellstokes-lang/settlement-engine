@@ -24,6 +24,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Download, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
+import { attachDossierClaimSession } from '../lib/dossierClaimStash.js';
 import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
@@ -58,6 +59,12 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     verifySingleDossierPurchase(pending.sessionId, pending.checkoutToken)
       .then(() => {
         if (!cancelled) setVerification({ status: 'verified', error: null });
+        // Arm the same-device retro-claim voucher with the paid session id (108).
+        // The voucher was stashed at checkout without a session id; binding it
+        // here lets a later sign-up + save of THIS settlement silently attach the
+        // durable right. Best-effort: a missing/expired voucher just means the
+        // one-shot stays a one-shot.
+        try { attachDossierClaimSession(pending.sessionId); } catch { /* non-fatal */ }
       })
       .catch(error => {
         if (!cancelled) {

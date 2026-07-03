@@ -66,7 +66,7 @@ export const en = Object.freeze({
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
+      body:       'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -77,7 +77,7 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach thorp through metropolis, save your drafts, and export the PDF.',
+      unlockTpl: '{signin} to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -136,8 +136,8 @@ export const en = Object.freeze({
   auth: {
     modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
-    subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work: saves, exports, larger settlements, and the Neighbourhood System.',
+    subtitle: 'Saves, larger settlements, and the Neighbourhood System.',
+    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbourhood System.',
     signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
@@ -341,13 +341,14 @@ export const en = Object.freeze({
         features: [
           'Generate any size, from hamlet to metropolis',
           '3 saved settlements',
-          'PDF export of any saved dossier',
+          'Share your settlements to the community Gallery',
+          'Keep any dossier’s PDF for $2.99, yours to re-download',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
       cartographer: {
         name:        'Cartographer',
-        priceLabel:  '$6',
+        priceLabel:  '$5.99',
         priceSub:    'per month',
         tagline:     'For the DM running a campaign.',
         cta:         'Subscribe',
@@ -358,9 +359,9 @@ export const en = Object.freeze({
           'Advance time and run the region for years',
           'Campaigns: link settlements into one living world',
           'The self-ending war layer + the living pantheon',
-          'Custom content + share to the Gallery',
+          'Custom content + import settlements from the Gallery',
           'Unlimited saves + cloud sync',
-          'PDF + JSON export',
+          'Unlimited PDF and JSON export of every settlement',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
@@ -368,9 +369,9 @@ export const en = Object.freeze({
         name:        'Founder Lifetime',
         priceLabel:  '$99',
         priceSub:    'one-time',
-        tagline:     'The first 500 supporters keep Cartographer forever.',
+        tagline:     'The first 30 supporters keep Cartographer forever.',
         cta:         'Claim a Founder seat',
-        seatsRemaining: '{remaining} of 500 seats remaining.',
+        seatsRemaining: '{remaining} of 30 seats remaining.',
         features: [
           'Everything in Cartographer, forever',
           'Founder badge on your dossiers',
@@ -409,7 +410,8 @@ export const en = Object.freeze({
           features: [
             'Generate any size, from hamlet to metropolis, free',
             '3 saved settlements',
-            'PDF export of any saved dossier',
+            'Share your settlements to the community Gallery',
+            'Keep any dossier’s PDF for $2.99, yours to re-download',
             'Pay-per-use narrative refinement (credit packs)',
           ],
         },
@@ -420,8 +422,9 @@ export const en = Object.freeze({
             'The self-ending war layer: sieges, coalitions, conquest',
             'The living pantheon: deities contest converts and rise',
             'Campaigns + a chronicle that writes itself',
-            'Custom content + share to the Gallery',
+            'Custom content + import settlements from the Gallery',
             'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+            'Unlimited PDF and JSON export of every settlement',
           ],
         },
         founder: {
@@ -463,7 +466,7 @@ export const en = Object.freeze({
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates any size, from hamlet to metropolis. It saves your work and exports the PDF.',
+        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -541,7 +544,7 @@ export const en = Object.freeze({
       step2Title:   'Here it is. Explore the tabs',
       step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
       step3Title:   "You're all set",
-      step3Body:    'Save this to your library, export a PDF, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
+      step3Body:    'Save this to your library, keep its PDF for $2.99, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
       finish:       'Finish tour',
       dismiss:      'Dismiss onboarding',
     },
@@ -568,6 +571,27 @@ export const en = Object.freeze({
     fullAccess:            'Full Access',
     purchaseCreditsLabel:  'Purchase Credits (Volume Discounts)',
     purchaseErrorTitle:    'Purchase could not start. Try again or refresh the page.',
+    // Referral card (107). The founder variant swaps the reward: a free month
+    // is worthless against a lifetime seat, so founders earn credits instead.
+    referralLabel:         'Refer a Friend',
+    referralBody:          'Share your account ID. When someone subscribes for the first time and names it, you both get a month on us.',
+    referralBodyFounder:   'Share your account ID. When someone subscribes for the first time and names it, you get 10 credits.',
+    referralCopy:          'Copy account ID',
+    referralCopied:        'Copied',
+    referralNoId:          'Your account ID is assigned shortly after sign-up. Check back in a moment.',
+    // Redeem block (107). Unknown / expired / exhausted codes all read the
+    // same line on purpose, mirroring the validator's anti-enumeration.
+    redeemLabel:           'Redeem a Code',
+    redeemHint:            'Enter a code and we will check it before you pick a purchase.',
+    redeemPlaceholder:     'SFC-XXXXXXXXXXXX',
+    redeemApply:           'Apply',
+    redeemChecking:        'Checking...',
+    redeemValid:           'Code accepted. It will be applied at checkout.',
+    redeemAlreadyUsed:     'That code has already been redeemed on this account.',
+    redeemInvalid:         'That code is not live.',
+    redeemCheckFailed:     'The code could not be checked. Try once more.',
+    redeemUnavailable:     'Codes cannot be checked in this environment.',
+    redeemChoosePurchase:  'Choose a purchase',
   },
 
   // ── Gallery (public dossier listing) ────────────────────────────────────
@@ -627,6 +651,25 @@ export const en = Object.freeze({
     valueLabel:        'Most popular',
     perCreditTemplate: '{price}/credit',
     failureMessage:    'Checkout could not start. Try once more.',
+    // Redeem-code disclosure (107). The code is advisory input; create-checkout
+    // re-validates and reserves it, and a code that does not fit comes back as
+    // a non-fatal notice while the purchase proceeds at the regular price.
+    haveCode:          'Have a code?',
+    codeLabel:         'Redeem code',
+    codePlaceholder:   'SFC-XXXXXXXXXXXX',
+    codeAttached:      'This code rides along at checkout. If it does not fit the purchase, checkout continues at the regular price.',
+    // Referral intent field (107). A rejection is a note, never a blocker.
+    referredByLabel:       'Referred by someone? Their account ID',
+    referredByPlaceholder: 'SF-XXXXXXX',
+    referredByRecord:      'Record referral',
+    referredByRecording:   'Recording...',
+    referralRecorded:      'Referral recorded. The reward follows your first payment.',
+    referralSelf:          'That is your own account ID, so the referral was not recorded.',
+    referralUnknown:       'That account ID was not recognized, so the referral was not recorded.',
+    referralAlready:       'A referral is already recorded on this account.',
+    referralCap:           'That account has reached its referral limit, so the referral was not recorded.',
+    referralInactive:      'Referrals need an active account, so this one was not recorded.',
+    referralFailed:        'The referral could not be recorded. Checkout is unaffected.',
   },
 
   // ── Errors (user-facing only — internal logs stay in console) ────────────
@@ -676,11 +719,11 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
+      body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Wanderer exports any saved dossier to PDF, unlimited. Cartographer adds unlimited saves and cloud sync: phone, laptop, table.',
+      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
@@ -727,7 +770,7 @@ export const en = Object.freeze({
     },
     founder: {
       lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
-      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
+      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 30 seats only.',
       lineWorldbuilder: 'For DMs running living regions. Pay once, run every campaign you’ll ever build.',
     },
   },
@@ -778,6 +821,48 @@ export const en = Object.freeze({
     commit:          'Commit',
     revert:          'Revert',
     cascadeHeading:  'What changes if you apply these edits',
+  },
+
+  // ── PDF export ladder (migration 108) ──────────────────────────────────────
+  // The Buy CTA on a saved dossier, its unsaved-first state, and the anonymous
+  // pre-checkout ladder popup. Calm archivist voice: state the offer plainly,
+  // present the one-time download AS one-time (the retro auto-upgrade is a
+  // grace we never promise up front, since it depends on browser storage).
+  dossierExport: {
+    // Free account, dossier SAVED, no durable right yet.
+    buySaved: {
+      cta:      'Keep the PDF for this settlement · {price}',
+      subline:  'A one-time purchase. The download stays yours for as long as this settlement is in your library.',
+      busy:     'Redirecting…',
+      error:    'Checkout could not start. Please try again.',
+    },
+    // Free account, dossier NOT saved yet. Durable rights attach to a save, so
+    // the honest path is to save first.
+    saveFirst: {
+      cta:      'Save this settlement to buy its PDF',
+      subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
+      atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
+    },
+    // Anonymous pre-checkout ladder popup.
+    ladder: {
+      title:    'How would you like your dossier?',
+      intro:    'Three ways to take this settlement with you.',
+      account: {
+        label:       'Create a free account',
+        description: 'Save this settlement, then buy its PDF once and keep re-downloading it. No card to start.',
+      },
+      cartographer: {
+        label:       'Consider Cartographer',
+        description: 'Unlimited PDFs of every settlement you save, plus the living simulation. {price}/mo.',
+      },
+      oneTime: {
+        label:       'Continue with the one-time download',
+        description: 'Pay {price} once and download this dossier now. No account needed.',
+      },
+      cancel:   'Never mind',
+    },
+    // Silent same-device retro auto-upgrade confirmation toast.
+    claimed:  'This settlement’s PDF is yours. You bought it before you signed up.',
   },
 
   // The "Workshop" copy block lived here. The Workshop / Custom
@@ -855,7 +940,7 @@ export const en = Object.freeze({
   // the premium one.
   authBlurb: {
     freeLabel:    'Free account',
-    freeBody:     'Generate any size, from hamlet to metropolis. Save your work and export the PDF.',
+    freeBody:     'Generate any size, from hamlet to metropolis, and save your work. Keep any dossier’s PDF for $2.99.',
     premiumLabel: 'Cartographer',
     premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
   },
@@ -933,7 +1018,7 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is the Founder Lifetime plan?',
-      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 500 buyers; the counter is live above this FAQ.',
+      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 30 buyers; the counter is live above this FAQ.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',

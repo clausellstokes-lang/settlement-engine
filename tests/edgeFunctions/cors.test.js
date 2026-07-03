@@ -55,6 +55,30 @@ describe('shared edge CORS — Cloudflare Pages preview (the motivating bug)', (
   });
 });
 
+describe('shared edge CORS — Vercel deploy/preview (the second motivating bug)', () => {
+  it('echoes an https Vercel deployment URL under the team scope', () => {
+    // The exact origin that was CORS-blocked in production: a direct Vercel
+    // build URL, not the settlementforge.com custom domain.
+    expect(isAllowedOrigin('https://settlementforge-qt686wl98-settlement-forge.vercel.app')).toBe(true);
+  });
+
+  it('echoes a git-branch preview build under the team scope', () => {
+    expect(isAllowedOrigin('https://settlementforge-git-main-settlement-forge.vercel.app')).toBe(true);
+  });
+
+  it('rejects http (non-https) Vercel origins — the suffix match is https-only', () => {
+    expect(isAllowedOrigin('http://settlementforge-x-settlement-forge.vercel.app')).toBe(false);
+  });
+
+  it('rejects a spoofed suffix that is not actually a *.vercel.app under our scope', () => {
+    expect(isAllowedOrigin('https://x-settlement-forge.vercel.app.attacker.com')).toBe(false);
+  });
+
+  it('rejects an unrelated vercel.app project (different team scope)', () => {
+    expect(isAllowedOrigin('https://someone-else-other-team.vercel.app')).toBe(false);
+  });
+});
+
 describe('shared edge CORS — explicit hosts and localhost', () => {
   it('allows the production apex + www + vercel hosts', () => {
     expect(isAllowedOrigin('https://settlementforge.com')).toBe(true);

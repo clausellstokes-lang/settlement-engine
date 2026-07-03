@@ -1,7 +1,7 @@
 /**
  * FounderBadge.jsx — Small pill marking a Founder Lifetime account.
  *
- * The Founder tier is a 500-seat one-time-purchase Cartographer grant.
+ * The Founder tier is a 30-seat one-time-purchase Cartographer grant.
  * It's the sort of thing supporters appreciate visible acknowledgement
  * of, both on their own dossiers and (when Gallery ships) on public
  * pages.

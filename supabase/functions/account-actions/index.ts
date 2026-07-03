@@ -71,6 +71,30 @@ function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
 }
 
+// ── Dossier retro-claim, same-device token path (migration 108) ──────────────
+// sha256 hex of a string (crypto.subtle, the ingest-events idiom). The webhook
+// stored sha256(checkout_token); the claimer re-hashes the token they present and
+// we compare the two DIGESTS — the raw token is never stored and never compared.
+async function sha256hex(s: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+// Constant-time equality of two ASCII/hex strings. Both operands here are sha256
+// hex digests (fixed 64 chars), but we still compare in constant time so the
+// token claim cannot be probed by response-timing: fold length into the
+// accumulator (never early-return on a mismatch) so the loop runs to a fixed
+// bound regardless of where — or whether — the strings differ. Mirrors the
+// verify-single-dossier token-comparison discipline, hardened past its `===`.
+function timingSafeEqualHex(a: string, b: string): boolean {
+  const len = Math.max(a.length, b.length);
+  let diff = a.length ^ b.length;
+  for (let i = 0; i < len; i++) {
+    diff |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
+
 /** Default user-scoped client (anon key + the caller's JWT) — verifies identity. */
 function defaultUserClient(authHeader: string) {
   return createClient(
@@ -184,6 +208,8 @@ export async function handleAccountActions(
       action, graceDays: graceOverride,
       // A5 ticket params (user-facing self-service path).
       subject, message, category, priority, links, ticketId, body, metadata,
+      // Dossier retro-claim, same-device token params (108).
+      sessionId, checkoutToken, saveId,
     } = await req.json();
 
     // A+ defense-in-depth (finding #1): a banned/disabled/soft-deleted account may
@@ -272,6 +298,102 @@ export async function handleAccountActions(
         if (error) { logError("account-actions", callingUser.id, `db error: ${error.message}`); return json({ error: "The request could not be completed. Please try again." }, 500); }
         return json({ success: true, event: data });
       }
+      // ── claim_dossier_purchase — same-device token retro-claim (108) ────────
+      // The SOLE retro-claim path (user-locked): same-device + same-settlement +
+      // automatic. The original device still holds the checkout token in its
+      // purchase stash; after the anonymous buyer signs up and saves THAT
+      // settlement, the client makes a silent post-save call with
+      // { sessionId, checkoutToken, saveId }. There is NO email-match / cross-
+      // device path. We verify, on the SERVER, that:
+      //   1. a purchase row exists for sessionId and is still 'unclaimed', and
+      //   2. sha256(checkoutToken) matches the stored checkout_token_hash
+      //      (constant-time) — proof the caller holds the original device's token.
+      // Only then do we call the service-role claim RPC, which binds the voucher
+      // to a save the caller owns and mints the durable right. NO Stripe API call:
+      // the webhook-recorded row IS the paid truth (it exists only for a paid,
+      // signed session). Rate-limited per user; every rejection is logged.
+      case "claim_dossier_purchase": {
+        if (typeof sessionId !== "string" || !sessionId.trim()) {
+          return json({ error: "A sessionId is required" }, 400);
+        }
+        if (typeof checkoutToken !== "string" || checkoutToken.length < 24 || checkoutToken.length > 128) {
+          return json({ error: "A valid checkout token is required" }, 400);
+        }
+        if (typeof saveId !== "string" || !saveId.trim()) {
+          return json({ error: "A saveId is required" }, 400);
+        }
+
+        // Per-user rate limit (reuse the shared keyed limiter, 036): a token
+        // claim is a proof-of-purchase check, so bound the guess rate per account
+        // and namespace the key so it can never collide with another limiter.
+        // Fail CLOSED on a limiter error — a claim is value-moving, so an
+        // unavailable limiter must not open an unbounded guessing window.
+        const { data: underRate, error: rateErr } = await adminClient.rpc("ingest_check_rate", {
+          p_key: `dossier_claim:${callingUser.id}`,
+          p_max: 20,
+          p_window_seconds: 3600,
+        });
+        if (rateErr || underRate === false) {
+          if (rateErr) logError("account-actions", callingUser.id, `dossier claim rate limiter error: ${rateErr.message}`, { stage: "dossier_claim_rate" });
+          return json({ error: "Too many attempts. Please wait a little while and try again." }, 429);
+        }
+
+        // Read the recorded purchase (service-role bypasses the no-policy RLS on
+        // single_dossier_purchases). A missing row, a non-unclaimed row, or a
+        // token-hash mismatch ALL collapse to the SAME generic rejection so the
+        // endpoint cannot be used to probe which session ids exist or which are
+        // already claimed/refunded. Every branch logs the true reason server-side.
+        const { data: purchase, error: readErr } = await adminClient
+          .from("single_dossier_purchases")
+          .select("stripe_session_id, checkout_token_hash, status")
+          .eq("stripe_session_id", sessionId.trim())
+          .maybeSingle();
+        if (readErr) {
+          logError("account-actions", callingUser.id, `dossier purchase read failed: ${readErr.message}`, { stage: "dossier_claim_read" });
+          return json({ error: "The request could not be completed. Please try again." }, 500);
+        }
+
+        const storedHash = typeof purchase?.checkout_token_hash === "string" ? purchase.checkout_token_hash : "";
+        const presentedHash = await sha256hex(checkoutToken);
+        // Always compute the hash + compare, even when the row/hash is absent, so
+        // the response timing does not distinguish "no such session" from "wrong
+        // token". The compare against an empty stored hash fails on length.
+        const tokenOk = storedHash !== "" && timingSafeEqualHex(presentedHash, storedHash);
+        if (!purchase || purchase.status !== "unclaimed" || !tokenOk) {
+          logError(
+            "account-actions",
+            callingUser.id,
+            !purchase ? "dossier claim: unknown session"
+              : purchase.status !== "unclaimed" ? `dossier claim: purchase not unclaimed (${purchase.status})`
+              : "dossier claim: token mismatch",
+            { stage: "dossier_claim_verify", session_id: sessionId.trim() },
+          );
+          return json({ error: "This purchase could not be verified." }, 403);
+        }
+
+        // Token proof established → the service-role RPC claims the voucher and
+        // mints the durable right, keyed to a save the caller owns. It re-checks
+        // save ownership and is claim-once (a concurrent/replayed claim no-ops).
+        const { data: claim, error: claimErr } = await adminClient.rpc("claim_dossier_purchase_by_session", {
+          p_session_id: sessionId.trim(),
+          p_user: callingUser.id,
+          p_save_id: saveId.trim(),
+        });
+        if (claimErr) {
+          logError("account-actions", callingUser.id, `claim_dossier_purchase_by_session failed: ${claimErr.message}`, { stage: "dossier_claim_rpc" });
+          return json({ error: "The request could not be completed. Please try again." }, 500);
+        }
+        if (!claim?.ok) {
+          // A business rejection (save_not_found / already_claimed / refunded /
+          // already_entitled). Surface a stable generic message; log the reason.
+          logError("account-actions", callingUser.id, `dossier claim declined: ${claim?.reason ?? "unknown"}`, { stage: "dossier_claim_declined", session_id: sessionId.trim() });
+          const status = claim?.reason === "save_not_found" ? 400 : 409;
+          return json({ error: "This purchase could not be claimed.", reason: claim?.reason ?? "unknown" }, status);
+        }
+
+        return json({ success: true, entitlementId: claim.entitlement_id });
+      }
+
       // ── request_deletion — any authed user files their OWN soft-delete ──────
       // The user acts only on their own row (user_id is taken from the verified
       // JWT, never the body). Idempotent: an already-open request is returned as

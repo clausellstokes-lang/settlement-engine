@@ -30,6 +30,25 @@ const FLOW_STATUS = {
 const TRADE_IN_COLOR = swatch['#7A5010'];   // ← imported from a neighbour
 const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
 
+// Trade goods reach the dossier in two shapes: snake_case storage keys
+// (`glass_sand`, `mountain_timber`) and already-spaced labels (`glass sand`,
+// `fine textiles`). `showGood` renders both uniformly — underscores/hyphens
+// become spaces, nothing else (casing is preserved so "Cut stone and masonry"
+// stays as authored). `goodKey` is the case/separator-insensitive identity used
+// to dedupe, so a good stored under both spellings collapses to one chip instead
+// of appearing twice (the `glass sand` + `glass_sand` duplication).
+const showGood = (g) => String(g == null ? '' : g).replace(/[_-]+/g, ' ');
+const goodKey = (g) => showGood(g).toLowerCase().replace(/\s+/g, ' ').trim();
+function dedupeGoods(arr) {
+  const seen = new Set();
+  const out = [];
+  for (const g of (arr || [])) {
+    const k = goodKey(g);
+    if (k && !seen.has(k)) { seen.add(k); out.push(g); }
+  }
+  return out;
+}
+
 /**
  * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
  * in EconomicsTab.jsx. The IIFE pattern violated rules-of-hooks because
@@ -322,9 +341,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>x.toLowerCase()===e.toLowerCase());const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
-                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
+                {dedupeGoods(eco.primaryExports).map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>goodKey(x)===goodKey(e));const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
+                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{showGood(e)}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{showGood(e)}</span>;})}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:FS.sm,color:BODY,fontStyle:'italic',margin:0}}>No significant exports.</p>
@@ -335,18 +354,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Imports</div>
             {eco.primaryImports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {[...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase())))].sort().map((imp,i)=>{
-                    const n=eco.necessityImports?.some(x=>imp.toLowerCase().includes(x.toLowerCase()));
-                    const t=terrainCriticals.some(tc=>imp.toLowerCase().includes(tc.toLowerCase())||tc.toLowerCase().includes(imp.toLowerCase()));
+                {dedupeGoods([...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => goodKey(imp).includes(goodKey(tc))))]).sort((a,b)=>showGood(a).localeCompare(showGood(b))).map((imp,i)=>{
+                    const n=eco.necessityImports?.some(x=>goodKey(imp).includes(goodKey(x)));
+                    const t=terrainCriticals.some(tc=>goodKey(imp).includes(goodKey(tc))||goodKey(tc).includes(goodKey(imp)));
                     const color = t?'#7a0a0a':n?'#8b1a1a':'#7a5010';
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
                     const icon  = t?' ':n?' ':'';
-                    const isCust=(eco.customTradeLabels?.imports||[]).some(x=>x.toLowerCase()===imp.toLowerCase());
+                    const isCust=(eco.customTradeLabels?.imports||[]).some(x=>goodKey(x)===goodKey(imp));
                     const incl=isCust?(eco.customCategoryImports?.[imp]||null):null;
                     return isCust
-                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}{icon}</span>;
+                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{showGood(imp)}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
+                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{showGood(imp)}{icon}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}> Terrain cannot produce</span>}
@@ -376,8 +395,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                     ? <EntityLink id={partnerEntry.id} type="neighbour" fallback={partner} style={{color:swatch.inkMag}} />
                     : partner}
                 </strong>
-                {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.join(', ')}</span>}
-                {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}
+                {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.map(showGood).join(', ')}</span>}
+                {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.map(showGood).join(', ')}</span>}
               </div>
             );})}
             <div style={{fontSize:FS.micro,color:BODY,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>

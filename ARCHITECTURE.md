@@ -110,7 +110,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (106) — schema + RLS policies + credit ledger + version
+- **migrations/** (108) — schema + RLS policies + credit ledger + version
   history + save-limit + profile-security + auth/credit trust-boundary repair +
   account/billing models + the community gallery (votes, comments, privacy
   sanitization, reports, moderation, importable dossiers) + analytics core +
@@ -182,7 +182,11 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
   - `stripe-webhook` — verifies the signature (`constructEvent`) before acting;
-    uses the service-role key (no user JWT on webhooks).
+    uses the service-role key (no user JWT on webhooks). Also settles referral
+    rewards (107) on the referee's first real payment — claim-once RPCs, both
+    parties rewarded (founder credits / customer-level coupon), clawed back on
+    refund/dispute/payment-failure — and sends the reward notices directly via
+    Resend (`_shared/referralEmails.ts`, fire-and-forget).
   - `admin-actions` — JWT-auth → profile `role` check → 403; allowlisted
     metadata keys/roles (anti-privilege-escalation).
   - `create-checkout`, `send-email` — JWT-authed.

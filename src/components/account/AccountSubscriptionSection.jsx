@@ -3,9 +3,11 @@
  * portal, inline credit-pack purchase, and the Founder tile for the Account
  * page.
  *
- * Extracted verbatim from AccountPage.jsx during decomposition. Purely
- * presentational: all state, handlers, and store access stay in AccountPage
- * and arrive via props.
+ * Extracted verbatim from AccountPage.jsx during decomposition. Mostly
+ * presentational: all shared page state, handlers, and store access stay in
+ * AccountPage and arrive via props. The referral/redeem blocks (107) are the
+ * one exception — they are self-contained (local copy-feedback + validation
+ * state only) and live in ReferralRedeemBlocks.jsx.
  *
  * This is the page's one "feature" section (tone="feature") and its conversion
  * region: for free users it carries the single high-emphasis primary upgrade
@@ -25,6 +27,7 @@ import {
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
+import { ReferralCard, RedeemBlock } from './ReferralRedeemBlocks.jsx';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 // Founder Lifetime tile, audience-gated to worldbuilder behavior.
@@ -285,6 +288,16 @@ export default function AccountSubscriptionSection({
           </div>
         </div>
       )}
+
+      {/* Refer a Friend — every signed-in reader can refer (founders get the
+          credits variant of the pitch); the account ID is the immutable handle
+          from migration 075, read straight off auth state. */}
+      <ReferralCard auth={auth} />
+
+      {/* Redeem a Code — pre-validates for instant feedback, then stashes the
+          accepted code so it rides along on the next checkout. Elevated
+          operators never purchase, so the block would be dead weight. */}
+      {!isElevated && <RedeemBlock onNavigatePricing={onNavigatePricing} />}
 
       {/* Founder Lifetime tile. Self-gates on
           audience='worldbuilder' + flag + seats-remaining > 0.

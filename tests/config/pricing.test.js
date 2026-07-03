@@ -193,17 +193,17 @@ describe('TIERS', () => {
     expect(TIERS.founder.maxSize).toBe('metropolis');
   });
 
-  it('cartographer is $6/mo and unlocks neighbourhood + supply chain', () => {
-    expect(TIERS.cartographer.priceCents).toBe(600);
+  it('cartographer is $5.99/mo and unlocks neighbourhood + supply chain', () => {
+    expect(TIERS.cartographer.priceCents).toBe(599);
     expect(TIERS.cartographer.billing).toBe('monthly');
     expect(TIERS.cartographer.features.neighbourhoodSystem).toBe(true);
     expect(TIERS.cartographer.features.supplyChainMap).toBe(true);
   });
 
-  it('founder is $99 lifetime with a 500-seat cap', () => {
+  it('founder is $99 lifetime with a 30-seat cap', () => {
     expect(TIERS.founder.priceCents).toBe(9900);
     expect(TIERS.founder.billing).toBe('lifetime');
-    expect(TIERS.founder.seatLimit).toBe(500);
+    expect(TIERS.founder.seatLimit).toBe(30);
     expect(TIERS.founder.features.founderBadge).toBe(true);
   });
 

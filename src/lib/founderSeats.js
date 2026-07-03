@@ -26,7 +26,7 @@ import { supabase, isConfigured } from './supabase.js';
  * src/copy/en.js#seatsRemaining and the contract in
  * docs/abuse-model.md.
  */
-export const FOUNDER_SEAT_CAP = 500;
+export const FOUNDER_SEAT_CAP = 30;
 
 /**
  * Returns the current taken-seat count.

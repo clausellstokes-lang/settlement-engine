@@ -103,7 +103,7 @@ function LivingSystemCard({ id }) {
         {/* P7: chip text raised to FS.xs (was 9px, below the persistent-label floor).
             First-contact gloss: the bare tier name means nothing to a new GM, so a
             native title= names it plainly as the paid simulation tier. */}
-        <span title="Cartographer is the paid tier that runs the living simulation, $6 a month."
+        <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
           style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
           color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`,
           borderRadius: 999, padding: '2px 8px' }}>
@@ -159,7 +159,7 @@ function PantheonTeaser() {
         <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: VIOLET }}>
           Sample pantheon
         </span>
-        <span title="Cartographer is the paid tier that runs the living simulation, $6 a month."
+        <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
           style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
           color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`, borderRadius: 999, padding: '2px 8px' }}>
           {t('aboutLiving.premiumChip')}

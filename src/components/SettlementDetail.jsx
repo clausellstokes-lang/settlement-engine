@@ -34,6 +34,12 @@ import Workshop         from './settlement/Workshop.jsx';
 import NextActionRail   from './settlement/NextActionRail.jsx';
 import AIInlineCard     from './settlement/AIInlineCard.jsx';
 import ExportSheet      from './settlement/ExportSheet.jsx';
+// PDF export ladder (108): the single gate deciding whether THIS dossier may be
+// exported. A free account holds durable per-saved-settlement rights, not a tier
+// feature, so the Export control routes through BuyThisDossier when the right is
+// not yet held.
+import { useDossierExportAccess } from '../hooks/useDossierExportAccess.js';
+import BuyThisDossier from './BuyThisDossier.jsx';
 // Modal that fires after pillar-tier KILL_NPC commits. Reads
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
@@ -186,6 +192,12 @@ export default function SettlementDetail({
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
+
+  // PDF export ladder (108). This is the owner's SAVED view, so a durable right
+  // CAN attach here. `allowed` is true for Cartographer/Founder/elevated (tier)
+  // and for a free account that holds the durable right on this save (entitled);
+  // otherwise the Export control becomes the $2.99 durable-rights purchase.
+  const exportAccess = useDossierExportAccess(saveId);
 
   // Chronicle, pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
@@ -762,16 +774,27 @@ export default function SettlementDetail({
                 {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
               </Button>
             )}
-            <Button
-              variant="primary"
-              size="md"
-              busy={exporting}
-              icon={<FileText size={12}/>}
-              onClick={() => { setPdfError(null); setExportSheetOpen(true); }}
-              title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-            >
-              {exporting ? 'Building PDF…' : 'Export Dossier'}
-            </Button>
+            {exportAccess.allowed ? (
+              <Button
+                variant="primary"
+                size="md"
+                busy={exporting}
+                icon={<FileText size={12}/>}
+                onClick={() => { setPdfError(null); setExportSheetOpen(true); }}
+                title="Choose Draft Brief / Canon Dossier / Timeline Packet."
+              >
+                {exporting ? 'Building PDF…' : 'Export Dossier'}
+              </Button>
+            ) : (
+              // Free account without a durable right on this SAVED dossier: the
+              // Export control becomes the $2.99 durable-rights purchase, keyed
+              // to this save so the right binds to it. BuyThisDossier renders
+              // nothing for entitled / Cartographer / Founder — but this branch
+              // is only reached when the gate already denied those, so it always
+              // has a CTA to show for the free-account case. (Anon never opens
+              // this owner view.)
+              <BuyThisDossier settlement={detail.settlement} saveId={saveId} />
+            )}
           </div>
         </div>
       </div>

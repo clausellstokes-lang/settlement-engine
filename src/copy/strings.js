@@ -123,11 +123,11 @@ export const COPY = {
       },
       anon_cap_hit: {
         headline: 'You’ve explored hamlet, village, town.',
-        body:     'Sign in (free) to reach thorp through metropolis, save your drafts, and export the PDF.',
+        body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
-        body:     'Wanderer exports any saved dossier to PDF, unlimited. Cartographer adds unlimited saves and cloud sync: phone, laptop, table.',
+        body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
       },
       third_save: {
         headline: 'You’re building a campaign.',

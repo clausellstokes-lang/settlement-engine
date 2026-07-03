@@ -19,6 +19,7 @@ import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
 import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
+import { getPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
 import { MUTED, sans, FS, layout } from './theme.js';
@@ -298,7 +299,14 @@ export default function AccountPage({ onNavigateAdmin }) {
     setPurchaseError(null);
     setPurchasing(product);
     try {
-      await startCheckout(product);
+      // The Redeem block (107) sits directly above these pack buttons, so an
+      // accepted code must ride along here too, not only via Pricing. The
+      // server decides whether it fits; a mismatch just proceeds at the
+      // regular price.
+      await startCheckout(product, { redeemCode: getPendingRedeemCode() });
+      // Consumed (reserved or declined server-side) — drop the stash so it
+      // cannot resurface on a later, unrelated purchase.
+      clearPendingRedeemCode();
     } catch (e) {
       setPurchaseError(e.message);
       setPurchasing(null);

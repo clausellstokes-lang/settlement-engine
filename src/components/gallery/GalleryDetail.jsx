@@ -122,6 +122,13 @@ export default function GalleryDetail({
   // BandPill token so the header reads "identity + current state", not a static
   // stat line buried above the deep dossier body (P1 / P3).
   const heroStability = stabilityBand(dossier.stability);
+  // Importing another DM's settlement is a premium feature (parity with map
+  // import); sharing your own to the gallery is free. tier==='premium' covers
+  // Cartographer + Founder (stored as tier='premium'); dev/admin pass for testing.
+  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  // Base eligibility: an importable dossier the signed-in viewer doesn't already
+  // own. A non-premium viewer still sees an "Import (premium)" upgrade next-step
+  // (not a dead-end), so the highest-intent page routes them to pricing.
   const importEligible = dossier.importable && auth?.user && !ownedSave;
 
   return (
@@ -227,7 +234,7 @@ export default function GalleryDetail({
                 dead-end (P9). Import is server-gated by the import RPC (048); the
                 save-limit trigger enforces the slot cap. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              {importEligible ? (
+              {importEligible && isPremium ? (
                 <Button
                   variant={imported ? 'success' : 'primary'}
                   size="md"
@@ -238,6 +245,16 @@ export default function GalleryDetail({
                   icon={imported ? <Check size={13} /> : <Download size={13} />}
                 >
                   {imported ? 'Imported' : 'Import'}
+                </Button>
+              ) : importEligible ? (
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => onNavigate?.('pricing')}
+                  icon={<Download size={13} />}
+                  title="Importing a settlement into your library is a Cartographer feature"
+                >
+                  Import (premium)
                 </Button>
               ) : (
                 <Button

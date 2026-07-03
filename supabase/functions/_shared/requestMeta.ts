@@ -32,6 +32,8 @@
  * the volume justifies it.
  */
 
+import { getCorsHeaders } from './cors.ts';
+
 const OBVIOUS_BOT_PATTERNS = [
   // Generic bot indicators
   /\bbot\b/i,
@@ -112,7 +114,11 @@ export function readRequestMeta(req: Request): RequestMeta {
  * @param meta   The RequestMeta from readRequestMeta(req).
  * @param functionName Short identifier of the calling function for logs.
  */
-export function rejectObviousBot(meta: RequestMeta, functionName: string): Response {
+export function rejectObviousBot(
+  meta: RequestMeta,
+  functionName: string,
+  corsHeaders: Record<string, string> = {},
+): Response {
   // Log a single warning line per rejection. The supabase function
   // logs surface these without us needing a structured pipeline yet.
   console.warn(
@@ -122,7 +128,11 @@ export function rejectObviousBot(meta: RequestMeta, functionName: string): Respo
     JSON.stringify({ error: 'Automated requests are not permitted on this endpoint.' }),
     {
       status: 403,
-      headers: { 'Content-Type': 'application/json' },
+      // CORS headers MUST be present even on a fail-closed rejection: without
+      // Access-Control-Allow-Origin the browser cannot read the 403, so a
+      // rejected fetch surfaces as an opaque "Failed to send a request to the
+      // Edge Function" / "can't connect" instead of this readable message.
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     },
   );
 }
@@ -143,7 +153,9 @@ export function botGuard(req: Request, functionName: string): {
 } {
   const meta = readRequestMeta(req);
   if (meta.isObviousBot) {
-    return { meta, reject: rejectObviousBot(meta, functionName) };
+    // Build the reject WITH the shared CORS headers for this request's origin,
+    // so a browser can actually read the 403 (see rejectObviousBot).
+    return { meta, reject: rejectObviousBot(meta, functionName, getCorsHeaders(req)) };
   }
   return { meta, reject: null };
 }

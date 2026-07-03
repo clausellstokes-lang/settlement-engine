@@ -45,6 +45,17 @@ const STATIC_ORIGINS = [
 const CLOUDFLARE_PAGES_SUFFIX = '.settlement-engine.pages.dev';
 
 /**
+ * Vercel deployment-URL suffix for this project's TEAM scope. Vercel assigns a
+ * fresh `<project>-<hash>-<scope>.vercel.app` per deploy/preview, so an exact
+ * list can't keep up (same reason as the Cloudflare rule). The team scope is the
+ * trailing segment and is owned by us — an attacker cannot deploy under it — so
+ * requiring the hostname to END with `-<scope>.vercel.app` (https, leading char
+ * before the hyphen guaranteed by the suffix) is a safe branch/preview match.
+ * The apex production access stays via the settlementforge.com custom domain.
+ */
+const VERCEL_DEPLOY_SUFFIX = '-settlement-forge.vercel.app';
+
+/**
  * Read an env var without assuming the Deno global exists. The helper is
  * imported by vitest (Node) for behavioral testing, where `Deno` is undefined;
  * guarding here keeps the module importable in both runtimes.
@@ -116,6 +127,13 @@ export function isAllowedOrigin(origin: string): boolean {
     ) {
       return true;
     }
+    // Vercel deploy/preview: https + team-scoped suffix (the leading hyphen in
+    // the suffix guarantees a project/hash prefix, and the scope is ours), so
+    // every `<project>-<hash>-settlement-forge.vercel.app` build can call the
+    // edge functions — matching the Cloudflare branch/preview treatment.
+    if (url.protocol === 'https:' && url.hostname.endsWith(VERCEL_DEPLOY_SUFFIX)) {
+      return true;
+    }
   } catch {
     // Not a parseable absolute origin — reject.
   }
@@ -172,6 +190,15 @@ export function getCorsHeaders(req?: Request, options: CorsOptions = {}): Record
     // else pin to the first allowed host.
     'Access-Control-Allow-Origin': resolveAllowedOrigin(req),
     'Access-Control-Allow-Headers': options.headers || DEFAULT_ALLOW_HEADERS,
+    // The supabase-js client (supabase.functions.invoke, used by ingest-events
+    // and others) issues its fetch with credentials mode 'include'. Per the CORS
+    // spec, a credentialed request's response MUST carry
+    // Access-Control-Allow-Credentials: 'true' AND a non-'*' Allow-Origin, or the
+    // browser blocks it at preflight ("...Allow-Credentials header is '' which
+    // must be 'true'..."). We already echo an exact origin (never '*'), so this
+    // is safe: a disallowed origin is still pinned to the first host and rejected
+    // on the origin mismatch regardless of this flag.
+    'Access-Control-Allow-Credentials': 'true',
   };
   if (options.methods) {
     headers['Access-Control-Allow-Methods'] = options.methods;

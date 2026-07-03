@@ -167,7 +167,7 @@ Deno.test('single_dossier without a valid checkout token is rejected (400)', asy
   assertEquals(stripe.created.length, 0);
 });
 
-// ── Founder Lifetime seat cap (advertised 500 seats, enforced server-side) ────
+// ── Founder Lifetime seat cap (advertised 30 seats, enforced server-side) ────
 // founder_seats_taken() feeds both the pricing-page counter AND this gate; a
 // sold-out founder tier must never reach Stripe.
 
@@ -175,21 +175,161 @@ Deno.test('founder_lifetime with seats remaining creates a checkout session', as
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 499) },
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
   );
   assertEquals(res.status, 200);
   assertEquals(stripe.created.length, 1);
   assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'founder_lifetime');
 });
 
-Deno.test('founder_lifetime at the 500-seat cap is rejected (400) and never reaches Stripe', async () => {
+Deno.test('founder_lifetime at the 30-seat cap is rejected (400) and never reaches Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 500) },
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 30) },
   );
   assertEquals(res.status, 400);
-  assertEquals(stripe.created.length, 0);   // seat 501 is never offered for sale
+  assertEquals(stripe.created.length, 0);   // seat 31 is never offered for sale
+});
+
+// ── Redeem codes (migration 107) ──────────────────────────────────────────────
+// reserve_redemption runs BEFORE the Stripe session exists (server-attached
+// discount only — NEVER allow_promotion_codes), bind_redemption_session stamps
+// the session id right after create, and every failure path degrades to a
+// non-fatal redeemNotice: a bad code must never fail a paying checkout.
+
+/** Admin stub answering the redeem lifecycle + founder counter, recording every rpc. */
+function makeRedeemAdminClient(cfg: {
+  reservation?: Record<string, unknown> | null;   // reserve_redemption's data payload
+  reserveError?: { message: string } | null;
+} = {}) {
+  const rpcCalls: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_t: string) => ({
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_existing' }, error: null }) }) }),
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (fn: string, args: Record<string, unknown> = {}) => {
+      rpcCalls.push({ fn, args });
+      if (fn === 'founder_seats_taken') return Promise.resolve({ data: 0, error: null });
+      if (fn === 'reserve_redemption') {
+        return Promise.resolve({ data: cfg.reservation ?? null, error: cfg.reserveError ?? null });
+      }
+      if (fn === 'bind_redemption_session') return Promise.resolve({ data: { ok: true }, error: null });
+      if (fn === 'revert_redemption') return Promise.resolve({ data: { ok: true, redemption_id: 'red_1' }, error: null });
+      return Promise.resolve({ data: null, error: { message: `unexpected rpc ${fn}` } });
+    },
+  };
+  return { rpcCalls, adminClient: () => client };
+}
+
+Deno.test('a reserved free_month code attaches a SERVER-side discount and binds the session', async () => {
+  const stripe = makeStripe();
+  const admin = makeRedeemAdminClient({
+    reservation: { ok: true, stripe_coupon_id: 'coupon_free_month', kind: 'free_month', credit_amount: null, applies_to: 'subscription', redemption_id: 'red_1' },
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'premium', redeemCode: '  SFC-TESTTESTTEST  ' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+
+  // The reserve used the VERIFIED user id and the trimmed code from the body.
+  const reserve = admin.rpcCalls.find((c) => c.fn === 'reserve_redemption');
+  assertEquals(reserve !== undefined, true);
+  assertEquals(reserve!.args.p_user, 'u1');
+  assertEquals(reserve!.args.p_code, 'SFC-TESTTESTTEST');
+
+  // The discount is server-attached from the RPC's coupon id; the checkout
+  // page is never opened to arbitrary promotion codes.
+  const params = stripe.created[0];
+  assertEquals((params.discounts as Array<{ coupon: string }>)[0].coupon, 'coupon_free_month');
+  assertEquals('allow_promotion_codes' in params, false);
+
+  // The reserved seat was bound to the created session for the webhook.
+  const bind = admin.rpcCalls.find((c) => c.fn === 'bind_redemption_session');
+  assertEquals(bind!.args.p_redemption_id, 'red_1');
+  assertEquals(bind!.args.p_session_id, 'cs_stub');
+
+  const body = await res.json();
+  assertEquals(body.url, 'https://stripe.test/session');
+  assertEquals(body.redeemNotice, undefined);      // applied cleanly — no notice
+});
+
+Deno.test('a reserved credits-kind code attaches NO discount (the webhook grants on completion)', async () => {
+  const stripe = makeStripe();
+  const admin = makeRedeemAdminClient({
+    reservation: { ok: true, stripe_coupon_id: null, kind: 'credits', credit_amount: 15, applies_to: 'any', redemption_id: 'red_2' },
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', redeemCode: 'SFC-CREDITCODE12' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals('discounts' in stripe.created[0], false);   // nothing rides the session
+  // …but the seat is still bound so apply_redemption can grant the credits.
+  const bind = admin.rpcCalls.find((c) => c.fn === 'bind_redemption_session');
+  assertEquals(bind!.args.p_redemption_id, 'red_2');
+  assertEquals(bind!.args.p_session_id, 'cs_stub');
+});
+
+Deno.test('a code that fails to reserve proceeds WITHOUT a discount and returns a redeemNotice', async () => {
+  const stripe = makeStripe();
+  const admin = makeRedeemAdminClient({
+    reservation: { ok: false, reason: 'invalid_code' },
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', redeemCode: 'SFC-NOTACODE0000' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);                           // the paying checkout survives
+  assertEquals(stripe.created.length, 1);
+  assertEquals('discounts' in stripe.created[0], false);
+  assertEquals(admin.rpcCalls.some((c) => c.fn === 'bind_redemption_session'), false);
+  const body = await res.json();
+  assertEquals(typeof body.redeemNotice, 'string');        // the UI can say it didn't apply
+  assertEquals(typeof body.url, 'string');
+});
+
+Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never reserves)', async () => {
+  const stripe = makeStripe();
+  const admin = makeRedeemAdminClient();
+  const token = 'x'.repeat(40);
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, redeemCode: 'SFC-ANONATTEMPT0' }),  // no auth
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(admin.rpcCalls.some((c) => c.fn === 'reserve_redemption'), false);  // no seat touched
+  assertEquals('discounts' in stripe.created[0], false);
+  const body = await res.json();
+  assertEquals(typeof body.redeemNotice, 'string');        // told why, purchase unharmed
+});
+
+Deno.test('an applies_to mismatch attaches NO discount and hands the reserved seat back', async () => {
+  const stripe = makeStripe();
+  // A subscription-scoped free_month code against a one-time credit pack: the
+  // 100%-off coupon must never zero a purchase it was not minted for.
+  const admin = makeRedeemAdminClient({
+    reservation: { ok: true, stripe_coupon_id: 'coupon_free_month', kind: 'free_month', credit_amount: null, applies_to: 'subscription', redemption_id: 'red_3' },
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', redeemCode: 'SFC-WRONGMODE000' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals('discounts' in stripe.created[0], false);   // the coupon never rode the session
+
+  // Seat handback = the expired-checkout lifecycle: phantom bind, then revert.
+  const bind = admin.rpcCalls.find((c) => c.fn === 'bind_redemption_session');
+  assertEquals(bind!.args.p_redemption_id, 'red_3');
+  assertEquals(String(bind!.args.p_session_id).startsWith('released:'), true);
+  const revert = admin.rpcCalls.find((c) => c.fn === 'revert_redemption');
+  assertEquals(revert!.args.p_session_id, bind!.args.p_session_id);
+
+  const body = await res.json();
+  assertEquals(typeof body.redeemNotice, 'string');
 });
 
 Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {
@@ -210,4 +350,112 @@ Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async (
   );
   assertEquals(res.status, 400);
   assertEquals(stripe.created.length, 0);
+});
+
+// ── Durable-rights save binding (migration 108) ───────────────────────────────
+// A SIGNED-IN single_dossier buyer may bind the durable re-download right to one
+// saved settlement. The save is verified server-side for ownership before it is
+// stashed in session.metadata.save_id — a forged/foreign saveId must never bind
+// rights to someone else's save (generic 400, no session created). A signed-in
+// purchase WITHOUT a saveId stays valid (one-shot semantics). Anonymous ignores it.
+
+/** Admin stub that resolves BOTH the profile read (stripe_customer_id via
+ *  .single()) and the settlements ownership read (id + user_id via .maybeSingle()).
+ *  `save` is the row the settlements lookup returns (null = not found). Records the
+ *  settlements ids queried so a test can assert the lookup happened. */
+function makeSaveAdminClient(save: { id: string; user_id: string } | null) {
+  const settlementLookups: string[] = [];   // shared across every adminClient() call
+  // deno-lint-ignore no-explicit-any
+  const factory = (): any => ({
+    from: (table: string) => ({
+      select: (_cols?: string) => ({
+        eq: (_col: string, val: string) => ({
+          // profiles read → stripe_customer_id via .single()
+          single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_existing' }, error: null }),
+          // settlements read → id + user_id via .maybeSingle()
+          maybeSingle: () => {
+            if (table === 'settlements') {
+              settlementLookups.push(val);
+              return Promise.resolve({ data: save, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
+        }),
+      }),
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (fn: string) => Promise.resolve(
+      fn === 'founder_seats_taken' ? { data: 0, error: null } : { data: null, error: { message: `unexpected rpc ${fn}` } },
+    ),
+  });
+  return { factory, settlementLookups };
+}
+
+Deno.test('a signed-in single_dossier binds save_id ONLY after ownership verification', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'u1' });   // owned by the buyer
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_1' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.product, 'single_dossier');
+  assertEquals(metadata.supabase_user_id, 'u1');
+  assertEquals(metadata.save_id, 'save_1');            // the verified save id rode the metadata
+});
+
+Deno.test('a FORGED saveId (a save the buyer does not own) is rejected (400), no session', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_victim', user_id: 'someone_else' });  // foreign save
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_victim' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);              // a forged binding never reaches Stripe
+});
+
+Deno.test('an UNKNOWN saveId (no such save) is rejected (400), no session', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient(null);             // settlements lookup misses
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_ghost' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
+});
+
+Deno.test('a signed-in single_dossier WITHOUT a saveId stays valid (one-shot) with empty save_id', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient(null);
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token }, { Authorization: 'Bearer jwt' }),  // no saveId
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.save_id, '');                  // no binding, but the purchase proceeds
+  assertEquals(admin.settlementLookups.length, 0);     // no ownership read attempted
+});
+
+Deno.test('an ANONYMOUS single_dossier IGNORES saveId (never reads settlements, empty save_id)', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'whoever' });
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, saveId: 'save_1' }),  // no auth → anonymous
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.factory },
+  );
+  assertEquals(res.status, 200);
+  const metadata = (stripe.created[0].metadata as Record<string, string>);
+  assertEquals(metadata.anonymous, 'true');
+  assertEquals(metadata.save_id, '');                  // anonymous never binds durable rights
+  assertEquals(admin.settlementLookups.length, 0);     // anonymous never reads settlements
 });

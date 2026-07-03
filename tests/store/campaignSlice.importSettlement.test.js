@@ -35,9 +35,13 @@ vi.mock('../../src/lib/analytics.js', () => ({
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 
+// The eligible-importer baseline is a PREMIUM viewer — importing another DM's
+// settlement is a Cartographer/Founder feature (parity with map import). Tests
+// that exercise the import mechanics assume this baseline; the auth + non-premium
+// gates override it explicitly.
 function makeStore(extra = {}) {
   return create(immer((set, get, api) => ({
-    auth: { user: { id: 'u1' }, tier: 'free', role: 'user' },
+    auth: { user: { id: 'u1' }, tier: 'premium', role: 'user' },
     savedSettlements: [],
     maxSaves: () => 50,
     ...createCampaignSlice(set, get, api),
@@ -73,6 +77,22 @@ describe('campaignSlice — importGallerySettlement', () => {
     await expect(store.getState().importGallerySettlement('slug')).rejects.toThrow(/sign in/i);
     expect(fetchDossierForImport).not.toHaveBeenCalled();
     expect(saveMock).not.toHaveBeenCalled();
+  });
+
+  test('rejects a signed-in NON-premium viewer: import is a premium feature', async () => {
+    // Sharing to the gallery is free; importing another DM's settlement is not.
+    const store = makeStore({ auth: { user: { id: 'u1' }, tier: 'free', role: 'user' } });
+    await expect(store.getState().importGallerySettlement('old-harbor')).rejects.toThrow(/premium feature/i);
+    // The gate precedes the fetch and the save — nothing is pulled or written.
+    expect(fetchDossierForImport).not.toHaveBeenCalled();
+    expect(saveMock).not.toHaveBeenCalled();
+  });
+
+  test('a developer role may import without a premium tier (testing access)', async () => {
+    fetchDossierForImport.mockResolvedValue(DOSSIER);
+    const store = makeStore({ auth: { user: { id: 'u1' }, tier: 'free', role: 'developer' } });
+    const id = await store.getState().importGallerySettlement('old-harbor');
+    expect(id).toBe('new-save-id');
   });
 
   test('clones a fresh draft: refs stripped, every seed scrubbed, provenance stamped', async () => {

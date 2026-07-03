@@ -543,9 +543,13 @@ export const createCampaignSlice = (set, get) => {
 
   /**
    * Import a single public dossier into the importer's own library as a fresh
-   * DRAFT. Gated auth + save-limit (NOT premium): the server RPC (048) only
-   * returns the payload for a gallery_importable dossier to a signed-in caller,
-   * and the 014 BEFORE INSERT trigger enforces the per-tier slot cap on save.
+   * DRAFT. Gated auth + PREMIUM + save-limit: importing another DM's settlement
+   * into your library is a Cartographer/Founder feature (parity with map import),
+   * while SHARING your own settlement to the gallery stays free. The server RPC
+   * (048) still returns the payload only for a gallery_importable dossier to a
+   * signed-in caller, and the 014 BEFORE INSERT trigger enforces the per-tier slot
+   * cap on save — this tier check is the same client-side gate the map-import path
+   * uses (campaign creation is the server-authoritative resource limit).
    * The clone is the public-safe projection (DM-private content already stripped
    * server-side); cross-settlement refs and the generation seed are dropped, and
    * provenance is stamped. Returns the new save id.
@@ -553,6 +557,13 @@ export const createCampaignSlice = (set, get) => {
   importGallerySettlement: async (slug) => {
     const st = get();
     if (!st.auth?.user) throw new Error('Sign in to import settlements.');
+    // Premium gate (parity with importGalleryMap): tier==='premium' covers both
+    // Cartographer and Founder (the webhook stores tier='premium' + is_founder for
+    // Founder Lifetime); developer/admin roles pass for testing. Sharing to the
+    // gallery is free — this gate is on IMPORT only.
+    const role = st.auth?.role;
+    const canImport = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+    if (!canImport) throw new Error('Importing settlements is a premium feature.');
     // Slot pre-flight for a friendly message; the 014 trigger is the real gate.
     const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
     const activeNow = (st.savedSettlements || []).length;
