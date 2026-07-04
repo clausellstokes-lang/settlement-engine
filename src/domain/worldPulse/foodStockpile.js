@@ -434,7 +434,13 @@ export function computeSackFoodTransfer({ conqueredStorageMonths, conqueredPopul
   const vPop = Math.max(0, Number(victorPopulation) || 0);
   const vMonths = Math.max(0, Number(victorStorageMonths) || 0);
   const vCap = Math.max(0, Number(victorCapMonths) || 0);
-  const lostMonths = round1(Math.max(0, Number(takeFraction) || 0) * cMonths);
+  // FLOOR (not round) the debit to 1 decimal so the source is NEVER over-drained:
+  // round1() could round the taken share UP past `takeFraction` of the true granary,
+  // over-debiting the conquered/levied source by up to ~0.05 months every tick (the
+  // levy F2 path reuses this each tick). Flooring makes the debit ≤ the intended
+  // fraction, and since `seizedAbs` derives from this same floored value the victor's
+  // gain stays ≤ what the source lost — a pure sink under BOTH rounding directions.
+  const lostMonths = Math.floor(Math.max(0, Number(takeFraction) || 0) * cMonths * 10) / 10;
   if (lostMonths <= 0 || cPop <= 0 || vPop <= 0) return null;
   const seizedAbs = lostMonths * cPop;                    // ∝ absolute food (per-capita need cancels)
   const gainedAbs = Math.max(0, Math.min(1, Number(captureFraction))) * seizedAbs;

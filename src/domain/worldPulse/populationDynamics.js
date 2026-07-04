@@ -201,7 +201,12 @@ export function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, 
     destinationScore(item, pressureIdx) * relationshipWeight(snapshot, sourceId, item.id);
   const destinations = candidateDestinations(snapshot, sourceId)
     .filter((/** @type {any} */ item) => weightedScore(item) >= 0.35)
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => weightedScore(b) - weightedScore(a));
+    // Codepoint tie-break on id (matching religiousContest.js/tradeSalience.js): without
+    // it, two equal-score destinations rank by candidateDestinations' Set-build order, so a
+    // refactor that reorders edges/channels would silently perturb the migrant split and
+    // break the golden master. The id key makes the ranking order-independent.
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (weightedScore(b) - weightedScore(a))
+      || (String(a.id) < String(b.id) ? -1 : String(a.id) > String(b.id) ? 1 : 0));
   if (!destinations.length) return { mode: 'void', deltas: [] };
 
   if (chosenMode === 'concentrated') {

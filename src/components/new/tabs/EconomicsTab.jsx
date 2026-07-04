@@ -17,12 +17,18 @@ import { institutionIdFromName } from '../../../domain/dossier/entityLinks.js';
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
 // re-allocating per render of EconomicFlowsSection).
-const FLOW_STATUS = {
+export const FLOW_STATUS = {
   impaired:            {label:' Impaired',            color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
   vulnerable:          {label:' Vulnerable',          color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
   running:             {label:'✓ Running',           color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0'},
   entrepot:            {label:' Entrepôt',          color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
-  magically_sustained: {label:'✦ Magically Sustained', color:'#5a2a8a', bg:'#f8f0ff', border:'#c0a0e0'},
+  // Magic actively covering a supply gap reads BLUE — matching the service-level
+  // "Magical Infrastructure" tag — so it says "supplied, not impaired" in one calm
+  // colour, distinct from the red/amber failure states. The ✦ keeps it apart from an
+  // ordinary blue node and carries the real nuance (a magically-sustained chain has
+  // no physical fallback if magic fails). Import nodes are neutralised off blue so
+  // blue means magic here, not "imported".
+  magically_sustained: {label:'✦ Magically Sustained', color:swatch.info, bg:swatch.infoBg, border:'#a0b0d8'},
   operational:         {label:'○ Operational',        color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
 };
 

@@ -1,5 +1,5 @@
 /**
- * store/index.js — Unified Zustand store with 15 slices.
+ * store/index.js — Unified Zustand store with 16 slices.
  *
  * Slices:
  *   auth              – user session, tier (anon / free / premium), permissions
@@ -17,6 +17,7 @@
  *   onboarding        – first-run coaching + nudge state
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
  *   changeQueue       – per-settlement pending-changes queue (stage → commit)
+ *   accountImport     – "Import my data" — batches exported records into the library
  *
  * Usage:
  *   import { useStore } from '../store';

@@ -22,6 +22,7 @@ export { SERVICE_TIER_DATA } from './services/serviceTierData.js';
 
 import { getServiceTierInfo, getServicesForInstitution } from './services/serviceResolution.js';
 import { categorizeService, _CRIMINAL_INST_KW, _isCriminalProvider } from './services/serviceCategory.js';
+import { isPureStructuralInstitution } from './services/serviceResolution.js';
 
 // generateAvailableServices
 export const generateAvailableServices = (r, s, o = {}, d = {}) => {
@@ -46,14 +47,23 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       });
     // Filter out magic/supernatural institutions when magic doesn't exist in this world
     const _noMagicSvcs = d.magicExists === false || (d.priorityMagic || 50) === 0;
+    // Drop pure physical-structure institutions (a well, dwellings, farmland,
+    // pasture, a sewer) BEFORE resolution. They carry only structural tags
+    // (water/housing/agriculture/sanitation) and have no dedicated service map,
+    // so the fuzzy fallback used to force an unrelated service onto them — e.g.
+    // a Water-source-only thorp advertising "Lodging <Water source>" or a
+    // "Sewage system" resolving to piped-water services. A structural entry that
+    // DOES have a real service map (an Aqueduct, a Courthouse) is exempt and
+    // resolves normally.
+    const _serviceBearingInsts = s.filter((A) => !isPureStructuralInstitution(A));
     const _filteredInsts = _noMagicSvcs
-      ? s.filter((A) => {
+      ? _serviceBearingInsts.filter((A) => {
           const n = (A.name || '').toLowerCase();
           const cat = (A.category || '').toLowerCase();
           if (cat === 'magic' || cat === 'exotic') return false;
           return !_ARCANE_SVC_KW.some((kw) => n.includes(kw));
         })
-      : s;
+      : _serviceBearingInsts;
     _filteredInsts.forEach((A) => {
       getServicesForInstitution(A.name, r, w).forEach((S) => {
         const y = S.name;

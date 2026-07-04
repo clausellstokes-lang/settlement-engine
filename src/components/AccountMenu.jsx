@@ -13,13 +13,13 @@
  * The menu closes on outside-click, Escape, or item selection, and is fully
  * keyboard-operable: opening moves focus to the first row, ArrowUp/ArrowDown
  * roves between rows, and Escape returns focus to the account chip (the single
- * focal control). Colors come from theme tokens (greens through GREEN/GREEN_BG,
- * the elevated purple through swatch one-offs, the popover shadow through ELEV)
- * so the visual-budget lint stays clean — no raw hex or rgba literals.
+ * focal control). Colors come from theme tokens (the gold identity pair through
+ * GOLD/GOLD_BG, the elevated purple through swatch one-offs, the popover shadow
+ * through ELEV) so the visual-budget lint stays clean — no raw hex or rgba literals.
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard, LogOut } from 'lucide-react';
-import { GOLD, GOLD_BG, GREEN, GREEN_BG, INK, MUTED, BORDER, FS, SP, R, ELEV, PARCH_100, VIOLET, TINT_VIOLET, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, R, ELEV, PARCH_100, VIOLET, TINT_VIOLET, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 function MenuRow({ icon, label, onClick, tone = 'default' }) {
@@ -160,13 +160,15 @@ export default function AccountMenu({
   }
 
   const name = displayName || (isElevated ? 'Developer' : 'Account');
-  // Standard identity rides the green token pair; the elevated (developer) chip
-  // tints purple through swatch one-offs so the two roles read apart at a glance.
-  const chipBg = isElevated ? swatch['#F0E0F0'] : GREEN_BG;
-  const chipBorder = isElevated ? swatch['#7C3AED'] : GREEN;
-  // Identity is carried by the green chip tint + border; the label itself uses
-  // the light parchment text tone so it clears AA on the dark header gradient
-  // (the former mid-green label text was the weakest contrast pairing here).
+  // Standard identity rides the GOLD token pair — the header's own accent
+  // (wordmark + active nav), so the chip reads as on-brand instead of the
+  // off-palette green tint it used to carry (which looked discoloured against the
+  // gold/parchment/violet header). The elevated (developer) chip tints purple
+  // through swatch one-offs so the two roles still read apart at a glance.
+  const chipBg = isElevated ? swatch['#F0E0F0'] : GOLD_BG;
+  const chipBorder = isElevated ? swatch['#7C3AED'] : GOLD;
+  // The label uses the light parchment text tone so it clears AA on the dark
+  // header gradient (a gold label on the gold wash would be the weakest pairing).
   const chipColor = isElevated ? swatch['#C8A0F0'] : PARCH_100;
 
   return (

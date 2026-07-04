@@ -57,4 +57,25 @@ describe('resolveConfig clamps a junk custom population', () => {
     // 2500 maps to the town tier via popToTier.
     expect(s.tier).toBe('town');
   });
+
+  // An in-range metropolis population is preserved (the clamp only binds ABOVE
+  // the ceiling, never inside it).
+  test('a large-but-valid metropolis population is preserved', () => {
+    const s = gen({ ...BASE_CFG, population: 50000 }, 'custom-pop-metro');
+    expect(s.population).toBe(50000);
+    expect(s.tier).toBe('metropolis');
+  });
+
+  // Absurd input must be CLAMPED to the metropolis ceiling, not passed verbatim.
+  // Before the fix, custom population was floored/sanitized but unbounded above,
+  // so a stray-digit "1,000,000-person village" flowed into every
+  // population-scaled calculation the sim was never balanced for.
+  test('an absurd custom population is clamped to the metropolis ceiling', () => {
+    const ceiling = POPULATION_RANGES.metropolis.max;
+    const s = gen({ ...BASE_CFG, population: 10_000_000 }, 'custom-pop-absurd');
+    expect(s.population).toBe(ceiling);
+    expect(s.tier).toBe('metropolis');
+    // Never exceeds its own tier band.
+    expect(s.population).toBeLessThanOrEqual(POPULATION_RANGES[s.tier].max);
+  });
 });

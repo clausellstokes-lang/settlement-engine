@@ -89,9 +89,18 @@ registerStep('resolveConfig', {
   const VILLAGE_DEFAULT_POP = Math.round(
     (POPULATION_RANGES.village.min + POPULATION_RANGES.village.max) / 2,
   );
+  // Upper ceiling: the population is not just floored/sanitized, it is CLAMPED
+  // to the metropolis max. Custom population arrives straight from user input;
+  // an absurd value (a stray extra digit, an intentional 10-million-person
+  // "city") would otherwise flow verbatim into the resolved population — where
+  // popToTier already saturates at 'metropolis', so the tier is right but every
+  // population-scaled calculation (institution counts, food, density, economy)
+  // is driven off a number the sim was never balanced for. Clamp to the top of
+  // the metropolis band so the largest custom settlement is a real metropolis.
+  const MAX_CUSTOM_POP = POPULATION_RANGES.metropolis.max;
   const rawCustomPop = Number(config.population);
   const customPopulation = Number.isFinite(rawCustomPop) && rawCustomPop >= 1
-    ? Math.floor(rawCustomPop)
+    ? Math.min(Math.floor(rawCustomPop), MAX_CUSTOM_POP)
     : VILLAGE_DEFAULT_POP;
 
   // Resolve tier

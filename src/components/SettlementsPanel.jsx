@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {FolderPlus, Plus} from 'lucide-react';
 
 import { track, EVENTS } from '../lib/analytics.js';
+import { reportError } from '../lib/errorReporter.js';
 import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {getAllModifiers} from '../lib/relationshipGraph.js';
@@ -133,7 +134,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // save. A failure here is caught below and only logged — it never blocks
         // the navigation that follows.
         const saveId = await savesService.save({ name: result.name || sample.name, tier: result.tier || sample.tier, settlement: result, config: result._config || forkedConfig });
-        await savesService.list().then(setSavedSettlements).catch(() => {});
+        // Refresh the library count after the fork save. A failure here is
+        // non-fatal (the save landed; only the local count refresh missed) so we
+        // don't reject the fork — but route it through the central error seam
+        // instead of swallowing it silently, so a persistently-failing list read
+        // is observable rather than invisible.
+        await savesService.list().then(setSavedSettlements)
+          .catch(e => reportError(e, { kind: 'settlementsPanel.forkSave.listRefresh' }));
         notePersistedSave?.(result, saveId);
       } catch (e) {
         // P10: the fork's "generate AND save" promise failed. Surface a
@@ -384,18 +391,30 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         was_published: !!deletedSave.is_public,
       });
     }
-    const deletedNet = deletedSave?.settlement?.neighbourNetwork || [];
-    let updated = saves.filter(s => s.id !== id).map(s => {
-      const wasLinked = deletedNet.some(n => n.id === s.id || n.linkId);
+    // Survivors computed ONCE (was recomputed per-row inside the map and again
+    // in the modifiedIds filter — O(n²)). `updated` is index-aligned to it, so
+    // the changed-row diff below is a cheap per-index identity compare.
+    const survivors = saves.filter(s => s.id !== id);
+    const deletedName = deletedSave?.name;
+    const deletedSettlementName = deletedSave?.settlement?.name;
+    const updated = survivors.map(s => {
+      // Only clean a survivor whose network genuinely references the deleted
+      // save — by neighbour id OR by matching name. The previous predicate's
+      // `|| n.linkId` matched ANY entry carrying a linkId, so a single linked
+      // neighbour anywhere in the deleted save's network flagged (and re-scanned)
+      // every survivor. Test the SURVIVOR's own network against the deleted id/name.
+      const net = s.settlement?.neighbourNetwork || [];
+      const isr = s.settlement?.interSettlementRelationships || [];
+      const wasLinked = net.some(n => n.id === id || n.name === deletedName || n.name === deletedSettlementName);
       if (!wasLinked) return s;
-      const cleanNet = (s.settlement?.neighbourNetwork||[]).filter(n => n.id !== id && n.name !== deletedSave?.name);
-      const cleanISR = (s.settlement?.interSettlementRelationships||[]).filter(r => r.partnerSettlement !== deletedSave?.settlement?.name && r.partnerSettlement !== deletedSave?.name);
-      if (cleanNet.length === (s.settlement?.neighbourNetwork||[]).length && cleanISR.length === (s.settlement?.interSettlementRelationships||[]).length) return s;
+      const cleanNet = net.filter(n => n.id !== id && n.name !== deletedName && n.name !== deletedSettlementName);
+      const cleanISR = isr.filter(r => r.partnerSettlement !== deletedSettlementName && r.partnerSettlement !== deletedName);
+      if (cleanNet.length === net.length && cleanISR.length === isr.length) return s;
       return { ...s, settlement: { ...s.settlement, neighbourNetwork: cleanNet, interSettlementRelationships: cleanISR } };
     });
     setSaves(updated); setDeleteId(null);
     if (detail?.saveData?.id === id) setDetail(null);
-    const modifiedIds = updated.filter((s, i) => s !== saves.filter(x => x.id !== id)[i]).map(s => s.id);
+    const modifiedIds = updated.filter((s, i) => s !== survivors[i]).map(s => s.id);
     persistBatch(updated, modifiedIds, { deletes: [id] });
   };
 

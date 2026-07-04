@@ -29,29 +29,34 @@ const DEFAULT_VIEW = 'generate';
 // `path`  — public URL.
 // `title` — document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
+// `nav`   — top-nav metadata `{ label, order }` for the views that appear in the
+//           primary navigation. The single source of truth for the nav bar:
+//           App derives its NAV array from these (see the NAV export below), so
+//           adding/relabelling/reordering a nav tab is a one-place edit here
+//           instead of a parallel array that can silently drift.
 export const ROUTES = Object.freeze([
-  { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
+  { view: 'generate',              path: '/create',                title: 'Create a Settlement',           nav: { label: 'Create',     order: 20 } },
   // The Welcome front door: a hero over the same generation flow as /create.
   // Leftmost nav tab. A bare root visit ('/') canonicalizes here for EVERYONE —
   // logged-out visitors see the marketing CTAs, signed-in members the member
   // CTAs — via App's front-door effect (it rewrites only '/', not deep links).
-  { view: 'home',                  path: '/home',                  title: 'Welcome' },
+  { view: 'home',                  path: '/home',                  title: 'Welcome',                       nav: { label: 'Welcome',    order: 10 } },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
-  // but the nav LABEL becomes "Library" (App's NAV array).
-  { view: 'settlements',           path: '/settlements',           title: 'Your Library' },
+  // but the nav LABEL becomes "Library" (via the nav.label below).
+  { view: 'settlements',           path: '/settlements',           title: 'Your Library',                  nav: { label: 'Library',    order: 30 } },
   // UX Phase 4 — the Realm hub: the simulation's new IA home (World Map + Pulse +
   // Chronicle + Pantheon as one destination). The old World Map lives here as the
   // Map sub-tab. `/map` (and `?view=map`) redirect into `/realm` — see
   // LEGACY_VIEW_ALIASES + App's redirect effect.
-  { view: 'realm',                 path: '/realm',                 title: 'Realm' },
+  { view: 'realm',                 path: '/realm',                 title: 'Realm',                         nav: { label: 'Realm',      order: 40 } },
   { view: 'map',                   path: '/map',                   title: 'World Map' },
-  { view: 'compendium',            path: '/compendium',            title: 'Compendium' },
-  { view: 'howto',                 path: '/how-to',                title: 'About' },
+  { view: 'compendium',            path: '/compendium',            title: 'Compendium',                    nav: { label: 'Compendium', order: 50 } },
+  { view: 'howto',                 path: '/how-to',                title: 'About',                         nav: { label: 'About',      order: 70 } },
   { view: 'workshop',              path: '/workshop',              title: 'Workshop' },
   { view: 'account',               path: '/account',               title: 'Account',                       guard: 'auth' },
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
-  { view: 'gallery',               path: '/gallery',               title: 'Gallery' },
+  { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
   // The dedicated competitor pages were deleted; App's redirect effect bounces
   // every `compare*` view to /how-to?tab=compare (the competitor-agnostic "How
   // We Compare" tab). The path entries stay so old/SEO links still resolve
@@ -100,6 +105,20 @@ const VIEW_TO_ROUTE = Object.freeze(
 );
 const PATH_TO_ROUTE = Object.freeze(
   ROUTES.reduce((acc, r) => { acc[r.path] = r; return acc; }, /** @type {Record<string, typeof ROUTES[number]>} */ ({})),
+);
+
+/**
+ * The primary top-nav destinations, derived from the ROUTES `nav` metadata and
+ * sorted by `nav.order`. The single source of truth for App's nav bar — a new
+ * nav tab is added by giving its ROUTES entry a `nav` block, not by editing a
+ * parallel array in App.jsx (which historically drifted out of sync).
+ * @type {ReadonlyArray<{ id: string, label: string, order: number }>}
+ */
+export const NAV = Object.freeze(
+  ROUTES
+    .filter(r => r.nav)
+    .map(r => ({ id: r.view, label: r.nav.label, order: r.nav.order }))
+    .sort((a, b) => a.order - b.order),
 );
 
 /** True if `view` is a declared view id. */

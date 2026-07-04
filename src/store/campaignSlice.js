@@ -57,6 +57,34 @@ import { deepClone } from '../domain/clone.js';
 const SCHEMA_VERSION = 2;
 
 /**
+ * The single campaign-creation entitlement predicate. Campaigns are a premium
+ * (or elevated: developer/admin) feature. Fails CLOSED: a missing or still-
+ * loading auth session is NOT premium, and only a definitively-'premium' tier
+ * (or an elevated role) passes. Shared by every creation entry point
+ * (createCampaign + importGalleryMap) so the gate can't drift between them.
+ *
+ * ARCHITECTURE BOUNDARY: this is a CLIENT (UX) gate that keeps a non-premium user
+ * from starting a campaign locally. It is NOT the security boundary, and does not
+ * need to be: campaign creation is purely local state until it PERSISTS cloud-side,
+ * and that persistence write (mapSaves → `.from('saved_maps').insert/upsert`) is
+ * gated by the "Premium users insert own maps" RLS policy, whose WITH CHECK requires
+ * `public.current_user_has_premium_access()` (migration 024, recreated in 059 with
+ * the account-active conjunct). That predicate reads tier/role/is_founder from the
+ * server-authoritative profiles row, so a free/anon user who bypasses this client
+ * check can create a local campaign but cannot persist one to the cloud — the row
+ * insert is rejected by RLS. This gate exists so the UI fails fast, not to enforce
+ * the entitlement (the DB does that).
+ * @param {{ auth?: { tier?: string, role?: string } }} state
+ * @returns {boolean}
+ */
+export function canCreateCampaign(state) {
+  const auth = state?.auth;
+  if (!auth) return false;
+  const role = auth.role;
+  return auth.tier === 'premium' || role === 'developer' || role === 'admin';
+}
+
+/**
  * Coarse, behavior-free analytics derivations for this slice. Each is a small
  * pure helper that returns enums/counts/bands only — never names/prose/domain
  * objects — so the additive track() calls stay fire-and-forget and lint-clean
@@ -337,9 +365,16 @@ export const createCampaignSlice = (set, get) => {
 
   createCampaign: (name) => {
     const current = get();
-    const role = current.auth?.role;
-    const canCreate = current.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
-    if (!canCreate) return null;
+    // Premium gate (client/UX layer). This ENTRY point only seeds a campaign into
+    // LOCAL state; it becomes cloud data later via mapSaves → `.from('saved_maps')`
+    // insert/upsert, which the "Premium users insert own maps" RLS policy gates on
+    // `current_user_has_premium_access()` (024/059) — server-authoritative tier from
+    // the profiles row. So the real entitlement is enforced by the DB: a free/anon
+    // user who bypasses this check can seed a local-only campaign but cannot persist
+    // it. This client gate exists to fail fast in the UI and to keep the same
+    // predicate at every creation caller (importGalleryMap) so they can't drift.
+    // Fails closed: a missing/loading auth is NOT premium. See canCreateCampaign.
+    if (!canCreateCampaign(current)) return null;
     const id = newCampaignId();
     set(state => {
       const campaign = {
@@ -372,9 +407,10 @@ export const createCampaignSlice = (set, get) => {
   // importer's own storage so it survives the sharer deleting theirs.
   importGalleryMap: async (slug) => {
     const st = get();
-    const role = st.auth?.role;
-    const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
-    if (!canCreate) throw new Error('Importing maps is a premium feature.');
+    // Same premium gate as createCampaign (this seeds a NEW campaign). Shared
+    // predicate so the two entry points never drift. Same client-boundary caveat
+    // documented on canCreateCampaign / createCampaign applies.
+    if (!canCreateCampaign(st)) throw new Error('Importing maps is a premium feature.');
 
     // Server-gated on the owner's gallery_importable opt-in (migration 072):
     // returns null for a non-importable / missing map, or an anonymous caller.

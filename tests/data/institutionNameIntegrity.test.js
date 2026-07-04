@@ -22,22 +22,16 @@ import {
 } from '../../src/data/spatialData.js';
 import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 
-// Pre-existing data bugs this guard surfaced on first run. These GATE_FEATURES
-// requirements name institutions that exist nowhere in the catalog/spatial maps,
-// so the requirement can never resolve. Fixing them is a domain/behavioral call
-// (which name was intended?), so they're quarantined here rather than guessed:
-//   - "Arcane university" / "Magical academy"  (required by "Magic item
-//     consignment") — no such institutions; likely meant "Academy of magic"
-//     and/or "Mages' guild".
-//   - "River access"  (required by "Tanners") — an ACCESS type, not an
-//     institution; belongs in `requiresAccess: ['river']`, not `requires`.
-// Remove each entry as the underlying data is fixed (the test enforces that:
-// a fixed name left in this list will fail).
-const KNOWN_UNRESOLVED = new Set([
-  'Arcane university',
-  'Magical academy',
-  'River access',
-]);
+// Quarantine for GATE_FEATURES requirements that name an institution existing
+// nowhere in the catalog/spatial maps (so the requirement can never resolve).
+// Now EMPTY: the three dead-vocabulary entries this guard originally surfaced
+// were removed from GATE_FEATURES —
+//   - "Arcane university" / "Magical academy"  (from "Magic item consignment")
+//   - "River access"  (from "Tanners") — an ACCESS type, not an institution.
+// The real institutions already listed alongside each carried the requirement,
+// so dropping the dead tokens changed no gate outcome. Keep this set empty; a
+// new unresolved name must be fixed in the data, not quarantined here.
+const KNOWN_UNRESOLVED = new Set([]);
 
 function buildDefinedNames() {
   const defined = new Set();

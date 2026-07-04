@@ -85,10 +85,24 @@ import { activeSaveCount } from '../lib/saveAccess.js';
 import { deepClone } from '../domain/clone.js';
 // WS4 decomposition — pure/leaf helpers extracted to a sibling.
 import {
-  cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
+  cloneJson, persistSaveUpdate, saveEnvelopeFor,
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession,
 } from './settlementSliceHelpers.js';
+// WS4 decomposition — cohesive action-group bodies extracted to siblings. Each
+// slice action below is a thin delegator to one of these; the bodies hold no
+// store state (they take the slice's get/set pair) so behaviour is unchanged.
+import {
+  recordSnapshotImpl, revertToSnapshotImpl,
+} from './settlementSnapshotHelpers.js';
+import {
+  canonizeImpl, uncanonizeImpl, canonizeSavedSettlementImpl,
+  persistActiveSaveLifecycleImpl,
+} from './settlementCanonHelpers.js';
+import {
+  renameNPCImpl, renameFactionImpl, syncActiveNeighbourFieldsImpl,
+  renameSettlementImpl, recordCanonFlavorEntryImpl,
+} from './settlementRenameHelpers.js';
 
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
@@ -562,97 +576,12 @@ export const createSettlementSlice = (set, get) => ({
   // is saved.
 
   /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
-  recordSnapshot: (opts = {}) => {
-    const state = get();
-    const ts = opts.ts || Date.now();
-    const targetSaveId = opts.saveId || state.activeSaveId || null;
-    const activeTarget = targetSaveId && state.activeSaveId && String(targetSaveId) === String(state.activeSaveId);
-    const sourceSettlement = targetSaveId
-      ? (activeTarget ? state.settlement : state.savedSettlements.find(e => String(e.id) === String(targetSaveId))?.settlement)
-      : state.settlement;
-    const snapshot = {
-      id: `snap_${ts}_${Math.random().toString(36).slice(2, 8)}`,
-      ts,
-      kind: opts.kind || 'manual',
-      label: opts.label || 'Snapshot',
-      settlement: sourceSettlement ? deepClone(sourceSettlement) : null,
-    };
-    let persistedHistory = null;
-    if (targetSaveId) {
-      set(s => {
-        const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
-        if (idx === -1) return;
-        const cur = s.savedSettlements[idx];
-        cur.versionHistory = cappedVersionHistory([...(Array.isArray(cur.versionHistory) ? cur.versionHistory : []), snapshot]);
-        persistedHistory = cloneJson(cur.versionHistory);
-      });
-    } else {
-      // No saveId — write into the live settlement's history. This
-      // lets unsaved sessions still build a local timeline.
-      set(s => {
-        if (!s.settlement) return;
-        s.settlement.versionHistory = cappedVersionHistory([...(Array.isArray(s.settlement.versionHistory) ? s.settlement.versionHistory : []), snapshot]);
-      });
-    }
-    if (targetSaveId && persistedHistory) {
-      // Fire-and-forget: version-history snapshots are a non-critical local
-      // timeline (recordSnapshot is synchronous by contract, so it can't await).
-      // persistSaveUpdate never throws and surfaces cloud failures via the
-      // campaignSyncError banner; the .catch is defensive against a future
-      // contract change so a rejected persist can't become an unhandled rejection.
-      Promise.resolve(persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory })).catch(() => {});
-    }
-    return snapshot;
-  },
+  recordSnapshot: (opts = {}) => recordSnapshotImpl(get, set, opts),
 
   /** Revert the live settlement (or a save) to a prior snapshot. Auto-
    *  snapshots the CURRENT state first so the user can re-revert if
    *  they meant the other thing. */
-  revertToSnapshot: ({ saveId, snapshotId }) => {
-    if (!snapshotId) return false;
-    const state = get();
-    const targetSaveId = saveId || state.activeSaveId || null;
-    // Read the snapshot from the appropriate version-history slot.
-    const history = targetSaveId
-      ? state.savedSettlements.find(e => String(e.id) === String(targetSaveId))?.versionHistory
-      : state.settlement?.versionHistory;
-    if (!Array.isArray(history)) return false;
-    const target = history.find(s => s.id === snapshotId);
-    if (!target?.settlement) return false;
-    // Snapshot the pre-revert state so this action is non-destructive.
-    try {
-      const fn = get().recordSnapshot;
-      if (typeof fn === 'function') {
-        fn({
-          saveId: targetSaveId,
-          kind: 'pre-revert',
-          label: `Before revert to ${target.label || 'snapshot'}`,
-        });
-      }
-    } catch (_e) { /* silent */ }
-    // Apply.
-    let persistedSettlement = null;
-    let persistedHistory = null;
-    set(s => {
-      if (targetSaveId) {
-        const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
-        if (idx === -1) return;
-        s.savedSettlements[idx].settlement = deepClone(target.settlement);
-        persistedSettlement = cloneJson(s.savedSettlements[idx].settlement);
-        persistedHistory = cloneJson(s.savedSettlements[idx].versionHistory || []);
-      }
-      // Always also refresh the live settlement view so the user sees
-      // the revert immediately.
-      s.settlement = deepClone(target.settlement);
-    });
-    if (targetSaveId && persistedSettlement) {
-      persistSaveUpdate(targetSaveId, {
-        settlement: persistedSettlement,
-        versionHistory: cappedVersionHistory(persistedHistory),
-      });
-    }
-    return true;
-  },
+  revertToSnapshot: (args) => revertToSnapshotImpl(get, set, args),
 
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
@@ -1450,34 +1379,9 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
-  renameNPC: (npcIndex, newName) =>
-    set(state => {
-      // Campaign-clock identity lock: NPC names freeze at canonization. Renames
-      // are a draft-only affordance (the UI hides them post-canon; guard here too).
-      if (state.phase === 'canon') return;
-      if (!state.settlement?.npcs?.[npcIndex]) return;
-      state.settlement.npcs[npcIndex].name = newName;
-    }),
+  renameNPC: (npcIndex, newName) => renameNPCImpl(set, npcIndex, newName),
 
-  renameFaction: (factionIndex, newName) =>
-    set(state => {
-      // Campaign-clock identity lock: faction names freeze at canonization.
-      if (state.phase === 'canon') return;
-      // Canonical factions live on powerStructure.factions; settlement.factions
-      // is a usually-empty legacy mirror. The old code only saw the mirror, so
-      // a rename silently no-opped on every generated settlement. Resolve the
-      // canonical list first, falling back to the legacy array.
-      const list = state.settlement?.powerStructure?.factions?.length
-        ? state.settlement.powerStructure.factions
-        : state.settlement?.factions;
-      const fac = list?.[factionIndex];
-      if (!fac) return;
-      // Faction records label on `.faction` (generated) or `.name` (edited/
-      // legacy); keep both in sync so every reader (findFaction checks both)
-      // sees the new name.
-      fac.name = newName;
-      if ('faction' in fac) fac.faction = newName;
-    }),
+  renameFaction: (factionIndex, newName) => renameFactionImpl(set, factionIndex, newName),
 
   // ── Settlement (town) rename ───────────────────────────────────────────────
   //
@@ -1504,83 +1408,9 @@ export const createSettlementSlice = (set, get) => ({
    * OPENED_TRADE_ROUTE) also mutate. No-op unless a flush is in progress.
    * @param {{ neighbourNetwork?: any[], interSettlementRelationships?: any[] }} neighbourFields
    */
-  syncActiveNeighbourFields: (neighbourFields) => {
-    if (!get().flushSuppressPersist) return;
-    set(state => {
-      if (!state.settlement || !neighbourFields) return;
-      if (Array.isArray(neighbourFields.neighbourNetwork)) {
-        state.settlement.neighbourNetwork = neighbourFields.neighbourNetwork;
-      }
-      if (Array.isArray(neighbourFields.interSettlementRelationships)) {
-        state.settlement.interSettlementRelationships = neighbourFields.interSettlementRelationships;
-      }
-    });
-  },
+  syncActiveNeighbourFields: (neighbourFields) => syncActiveNeighbourFieldsImpl(get, set, neighbourFields),
 
-  renameSettlement: (id, newName) => {
-    const trimmed = String(newName || '').trim();
-    if (!trimmed) return false;
-    const now = new Date().toISOString();
-    let recorded = false;
-    let persist = null;
-    set(state => {
-      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
-      const isActive = String(state.activeSaveId || '') === String(id);
-      const save = idx !== -1 ? state.savedSettlements[idx] : null;
-      const oldName = save?.settlement?.name || save?.name
-        || (isActive ? state.settlement?.name : '') || '';
-      if (trimmed === oldName) return;
-      const currentCampaignState = save?.campaignState
-        || (isActive ? { phase: state.phase, eventLog: state.eventLog } : {});
-      const isCanon = (currentCampaignState.phase || (isActive ? state.phase : 'draft')) === 'canon';
-
-      const eventLog = Array.isArray(currentCampaignState.eventLog)
-        ? [...currentCampaignState.eventLog]
-        : [];
-      if (isCanon) {
-        eventLog.push({
-          id: `rename.${id}.${Date.now()}`,
-          type: 'RENAME_SETTLEMENT',
-          targetId: oldName || null,
-          timestamp: now,
-          // Flavor only: a recorded line of in-world history, no afterState delta.
-          narrativeSummary: oldName
-            ? `${oldName} is now known as ${trimmed}.`
-            : `The settlement is now known as ${trimmed}.`,
-        });
-        recorded = true;
-      }
-
-      if (save) {
-        const nextSettlement = { ...(save.settlement || {}), name: trimmed };
-        const campaignState = isCanon
-          ? { ...currentCampaignState, phase: currentCampaignState.phase || 'canon', eventLog, editedAt: now }
-          : save.campaignState;
-        state.savedSettlements[idx] = {
-          ...save,
-          name: trimmed,
-          settlement: nextSettlement,
-          ...(isCanon ? { campaignState, timestamp: now } : {}),
-        };
-        persist = {
-          settlement: cloneJson(nextSettlement),
-          ...(isCanon ? { campaignState: cloneJson(campaignState), timestamp: now } : {}),
-        };
-      }
-
-      if (isActive && state.settlement) {
-        state.settlement = { ...state.settlement, name: trimmed };
-        if (isCanon) {
-          state.eventLog = eventLog;
-          state.editedAt = now;
-        }
-      }
-    });
-    // R2: a change-queue flush replays renameSettlement and owns the single
-    // atomic commit, so defer this row's cloud write while suppressed.
-    if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
-    return recorded;
-  },
+  renameSettlement: (id, newName) => renameSettlementImpl(get, set, id, newName),
 
   /**
    * Record a CANON-only flavor entry on the active settlement's timeline,
@@ -1602,32 +1432,7 @@ export const createSettlementSlice = (set, get) => ({
    * @param {{ type: string, narrativeSummary: string, targetId?: string|null }} entry
    * @returns {boolean} true when an entry was appended.
    */
-  recordCanonFlavorEntry: ({ type, narrativeSummary, targetId = null }) => {
-    if (get().phase !== 'canon') return false;
-    const now = new Date().toISOString();
-    let recorded = false;
-    set(state => {
-      if (state.phase !== 'canon' || !Array.isArray(state.eventLog)) return;
-      state.eventLog.push({
-        id: `flavor.${type}.${Date.now()}.${state.eventLog.length}`,
-        type,
-        targetId,
-        timestamp: now,
-        // Flavor only — a recorded line of in-world history, no afterState delta.
-        narrativeSummary,
-        // R3 undo-safety: a flavor entry carries no real state transition. Stamp
-        // the current systemState as beforeState so undoLastEvent's
-        // `systemState = popped.beforeState` is a no-op, and mark it flavor so a
-        // future undo refinement can skip it entirely.
-        flavor: true,
-        beforeState: state.systemState,
-        afterState: state.systemState,
-      });
-      state.editedAt = now;
-      recorded = true;
-    });
-    return recorded;
-  },
+  recordCanonFlavorEntry: (entry) => recordCanonFlavorEntryImpl(get, set, entry),
 
   // ── User-edited prose ────────────────────────────────────────────────────
   //
@@ -1699,48 +1504,11 @@ export const createSettlementSlice = (set, get) => ({
    * event log to an empty timeline starting now and stamps the
    * canonizedAt provenance timestamp.
    */
-  canonize: () => {
-    const fromPhase = get().phase;
-    set(state => {
-      state.phase = 'canon';
-      state.eventLog = [];
-      state.canonizedAt = new Date().toISOString();
-    });
-    // Persist so canon sticks across reload and the library reflects it.
-    get().persistActiveSaveLifecycle?.();
-    // Analytics — fire-and-forget. CANON_PHASE_CHANGED records the transition;
-    // captureFingerprint('canonized') snapshots the structural shape at canon
-    // (skips silently without a stable settlement uuid / consent).
-    const after = get();
-    const activeSaveId = after.activeSaveId || null;
-    const save = activeSaveId
-      ? after.savedSettlements.find(s => String(s.id) === String(activeSaveId))
-      : null;
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
-    }).catch(() => {});
-    if (after.settlement && activeSaveId) {
-      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
-        captureFingerprint('canonized', after.settlement, { save, settlementUuid: activeSaveId });
-      }).catch(() => {});
-    }
-  },
+  canonize: () => canonizeImpl(get, set),
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
    *  the campaign actually starts. Discards any prior event log. */
-  uncanonize: () => {
-    const fromPhase = get().phase;
-    set(state => {
-      state.phase = 'draft';
-      state.eventLog = [];
-      state.canonizedAt = null;
-    });
-    get().persistActiveSaveLifecycle?.();
-    // Analytics — fire-and-forget; the canon→draft transition.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'draft' });
-    }).catch(() => {});
-  },
+  uncanonize: () => uncanonizeImpl(get, set),
 
   /**
    * Canonize a saved settlement BY ID — the Settlements-list affordance. The
@@ -1751,69 +1519,14 @@ export const createSettlementSlice = (set, get) => ({
    * slice is kept in sync. No-ops on a missing or already-canon save. Returns
    * whether anything changed.
    */
-  canonizeSavedSettlement: (id) => {
-    const now = new Date().toISOString();
-    let changed = false;
-    let fromPhase = 'draft';
-    let campaignStateOut = null;
-    let settlementSnapshot = null;
-    set(state => {
-      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
-      if (idx === -1) return;
-      const save = state.savedSettlements[idx];
-      const current = save.campaignState || {};
-      fromPhase = typeof current.phase === 'string' ? current.phase : 'draft';
-      if (fromPhase === 'canon') return; // already canon — nothing to do
-      const campaignState = { ...current, phase: 'canon', eventLog: [], canonizedAt: now, editedAt: now };
-      state.savedSettlements[idx] = { ...save, campaignState, timestamp: now };
-      if (String(state.activeSaveId || '') === String(id)) {
-        state.phase = 'canon';
-        state.eventLog = [];
-        state.canonizedAt = now;
-      }
-      changed = true;
-      campaignStateOut = cloneJson(campaignState);
-      settlementSnapshot = save.settlement ? cloneJson(save.settlement) : null;
-    });
-    if (!changed) return false;
-    // Single persist path — the campaign_state column carries canon; the panel's
-    // savedSettlements subscription refreshes the row, so no optimistic re-read.
-    persistSaveUpdate(id, { campaignState: campaignStateOut, timestamp: now });
-    // Analytics — fire-and-forget, identical to canonize().
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
-    }).catch(() => {});
-    if (settlementSnapshot) {
-      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
-        captureFingerprint('canonized', settlementSnapshot, { settlementUuid: id });
-      }).catch(() => {});
-    }
-    return true;
-  },
+  canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
 
   /**
    * Persist the live lifecycle (phase / eventLog / canonizedAt) + settlement
    * to the active save, so deliberate lifecycle changes (canonize, uncanonize)
    * survive reload and the library reflects them. Mirrors applyEvent's persist.
    */
-  persistActiveSaveLifecycle: () => {
-    const s = get();
-    const activeSaveId = s.activeSaveId;
-    if (!activeSaveId || !s.settlement) return;
-    const campaignState = pickleCampaignState(s);
-    const savePartial = {
-      settlement: cloneJson(s.settlement),
-      campaignState,
-      timestamp: new Date().toISOString(),
-    };
-    if (typeof s.updateSavedSettlement === 'function') {
-      s.updateSavedSettlement(activeSaveId, savePartial);
-    }
-    persistSaveUpdate(activeSaveId, {
-      settlement: savePartial.settlement,
-      campaignState: savePartial.campaignState,
-    });
-  },
+  persistActiveSaveLifecycle: () => persistActiveSaveLifecycleImpl(get),
 
   /** Stamp lastExportAt — called by export flows. Drives the
    *  ProvenanceBlock display. */
@@ -2448,6 +2161,12 @@ export const createSettlementSlice = (set, get) => ({
     state.aiDataVersion  = aiBlob.narrativeGeneratedAt ? new Date(aiBlob.narrativeGeneratedAt).getTime() : null;
     state.aiSourceFingerprint = aiBlob.narrativeSourceFingerprint || null;
     state.showNarrative  = aiBlob.narrativeMode === 'narrated' && !!aiBlob.aiSettlement;
+    // Clear aiSlice's in-flight flags: a request against the PREVIOUS settlement can
+    // still be resolving on a save-switch, and its spinner/dimmed-content/error state
+    // would otherwise bleed onto the new settlement (the switch orphans its completion).
+    state.aiLoading      = false;
+    state.aiRegenerating = false;
+    state.aiError        = null;
 
     // SystemState: prefer the persisted snapshot; if absent or stale,
     // re-derive from the settlement so the rail/timeline never crashes.

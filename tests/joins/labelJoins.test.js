@@ -78,7 +78,7 @@ const FROZEN_LABEL_JOINS = Object.freeze({
   'src/generators/isolationGenerator.js': 1,
   'src/generators/narrativeGenerator.js': 1,
   'src/generators/npcGenerator.js': 5,
-  'src/generators/powerGenerator.js': 18, // 17 → 18: de-minification revealed an existing scan (see note above)
+  'src/generators/powerGenerator.js': 19, // 17 → 18 → 19: de-minification revealed existing scans (see note above); 2026-07-03 renamed `N` → `inst` in the hasRoyalSeat institution scan, making `inst.name.includes(...)` textually visible. No new label-join LOGIC (generator golden master byte-identical, 155/155 configs).
   'src/generators/priorityHelpers.js': 1,
   'src/generators/spatialGenerator.js': 8,
   'src/generators/steps/cascadePass.js': 1,

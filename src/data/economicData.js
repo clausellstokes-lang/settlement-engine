@@ -1038,6 +1038,14 @@ export const INSTITUTION_FINISHED_GOODS_DEMAND = {
 // cross-settlement trade matcher bridge a specific good (a neighbour's "Advanced
 // weapons and armour" import) to a category (our Dragonbone Greatswords, which
 // `satisfies: military`). Returns null when nothing matches.
+//
+// NOTE (data-purity): this is CLASSIFIER LOGIC living in the data/ layer. The
+// clean relocation to src/generators/finishedGoodsClassifier.js is blocked here
+// because the `no-restricted-imports` rule forbids data/ from importing
+// generators/, so a re-export shim will not lint, and the sole runtime importer
+// (src/domain/region/tradeLinks.js) is outside this change's file scope. Moving
+// it needs that importer repointed in the same commit — flagged for the main
+// loop. It stays here, correct and tested, until then.
 const _FINISHED_GOODS_CATEGORY_INDEX = (() => {
   const idx = [];
   for (const [cat, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {

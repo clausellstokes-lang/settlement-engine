@@ -118,6 +118,28 @@ export function _getBatchCommit() {
   return _batchCommit;
 }
 
+/**
+ * Structural guard for the flush's drain → compute → commit ordering. The
+ * atomicity contract (spec §2.4) historically rested only on PROSE invariants
+ * ("suppress each executor's own persist; the flush owns ONE end-of-batch
+ * write"). This turns the load-bearing ones into cheap, always-on runtime
+ * assertions so a future edit that breaks the ordering FAILS LOUDLY (aborting
+ * the flush → rollback of the pre-flush snapshot) instead of silently double-
+ * writing or clearing the queue on an unpersisted state.
+ *
+ * A violation throws a distinctive error the flush's own try/catch converts
+ * into a clean rollback + retryable failure — the same safe path a persist
+ * failure takes — so triggering a guard is never worse than a failed commit.
+ *
+ * @param {boolean} condition   the invariant that must hold
+ * @param {string} label        which invariant (for the thrown message)
+ */
+export function assertFlushInvariant(condition, label) {
+  if (!condition) {
+    throw new Error(`changeQueue flush invariant violated: ${label}`);
+  }
+}
+
 export function createChangeQueueSlice(set, get) {
   return {
     // { [saveId]: PendingOrder[] } — transient, NEVER persisted (see store/index
@@ -327,6 +349,13 @@ export function createChangeQueueSlice(set, get) {
       });
 
       let linkSettlement = null;
+      // STRUCTURAL GUARD (drain-compute-commit, step 2). Every replayed executor
+      // below must DEFER its own cloud write so the flush owns the single
+      // end-of-batch persist (R2). That deferral is keyed on flushSuppressPersist;
+      // if it isn't set here the executors would each write immediately and the
+      // "one atomic write" contract is already broken. Assert it rather than
+      // trust the set() landed. Throwing routes into the catch → clean rollback.
+      assertFlushInvariant(get().flushSuppressPersist === true, 'suppress-persist not armed before replay');
       // The UNION of every save row the cascades touched LOCALLY (this
       // settlement + every link/rename partner). Persisted atomically at the end.
       const affectedIds = new Set();
@@ -405,6 +434,16 @@ export function createChangeQueueSlice(set, get) {
         //   • pure event / settlement-name queue → the single-row
         //     persistSaveUpdate fast path (Option A — one row, itself atomic).
         const after = get();
+        // STRUCTURAL GUARD (drain-compute-commit, step 4 boundary). Two loud
+        // checks before the SINGLE end-of-batch write:
+        //   • suppression is STILL armed — nothing cleared flushSuppressPersist
+        //     mid-replay, which would mean an executor already did its own cloud
+        //     write and this batch write would be a double-persist.
+        //   • the open settlement's row is in the affected-id write-set, so the
+        //     one commit actually carries this settlement (never a commit that
+        //     clears the queue without writing the row it drained).
+        assertFlushInvariant(after.flushSuppressPersist === true, 'suppress-persist cleared before commit');
+        assertFlushInvariant(affectedIds.has(activeSaveId), 'active save missing from commit write-set');
         const nextSettlement = linkSettlement || after.settlement;
         // Refresh the local saves mirror with the store's committed dossier row
         // so the end-of-batch write (either path) carries the event deltas too.
@@ -470,6 +509,12 @@ export function createChangeQueueSlice(set, get) {
         if (persistedOk === false) {
           throw new Error('persist_failed');
         }
+        // STRUCTURAL GUARD (drain-compute-commit, step 4→clear boundary). The
+        // queue is dropped ONLY after a confirmed persist. This pins that the
+        // clear below can never run on a non-true persist result (a truthy-but-
+        // not-boolean regression, say) — the commit must be affirmatively OK
+        // before we discard the drained orders.
+        assertFlushInvariant(persistedOk === true, 'clearing queue without a confirmed persist');
 
         // Success: drop ONLY the orders this flush actually replayed. queueChange
         // is not gated on changeQueueFlushing, so an Apply click landing in one of

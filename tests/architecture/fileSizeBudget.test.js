@@ -42,8 +42,8 @@ const MAX_SLACK = 40;
 // RAISE one without a deliberate, in-diff reason.
 const GRANDFATHERED = {
   'src/generators/powerGenerator.js': 2760, // shrank: genSuccessionNarr extracted to successionNarrative.js
-  'src/generators/economicGenerator.js': 2901, // + review-remediation: getUpgradeChain tier-connectivity + Stage 5/7 export re-seating
-  'src/store/settlementSlice.js': 2471, // + review-remediation: pendingEditsQueue clear + identity-swap guards
+  'src/generators/economicGenerator.js': 2923, // de-minified (minifier identifiers → meaningful names, !0/!1/void 0 → literals; byte-identical output)
+  'src/store/settlementSlice.js': 2183, // shrank: snapshot/canon/rename action groups extracted to settlement{Snapshot,Canon,Rename}Helpers.js
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,

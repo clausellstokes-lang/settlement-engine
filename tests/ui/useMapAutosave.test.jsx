@@ -154,4 +154,48 @@ describe('useMapAutosave', () => {
     grownForest.forests[0].radius = 50;
     expect(mapFingerprint(grownForest)).not.toBe(mapFingerprint(base));
   });
+
+  // ── Regression: a pending save must survive leaving within the debounce window. ──
+  // The timer's cleanup used to only clearTimeout, so navigating away (unmount) or
+  // closing the tab (pagehide) inside the 3.5s window silently dropped the last edit.
+
+  test('flushes the pending save on unmount (route change) before the debounce fires', () => {
+    liveMapState = { placements: { 7: { x: 1, y: 2 } }, labels: [], markers: [], forests: [] };
+    const saveCampaignMap = vi.fn();
+    const { unmount } = renderHook(() => useMapAutosave('camp-1', { mapState: { placements: {} } }, saveCampaignMap));
+    vi.advanceTimersByTime(1000); // leave BEFORE 3500ms
+    expect(saveCampaignMap).not.toHaveBeenCalled();
+    unmount();
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1);
+    expect(saveCampaignMap).toHaveBeenCalledWith('camp-1', liveMapState);
+  });
+
+  test('flushes the pending save on pagehide (tab close) within the debounce window', () => {
+    liveMapState = { placements: { 7: { x: 1, y: 2 } }, labels: [], markers: [], forests: [] };
+    const saveCampaignMap = vi.fn();
+    renderHook(() => useMapAutosave('camp-1', { mapState: { placements: {} } }, saveCampaignMap));
+    vi.advanceTimersByTime(1000);
+    window.dispatchEvent(new Event('pagehide'));
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1);
+    expect(saveCampaignMap).toHaveBeenCalledWith('camp-1', liveMapState);
+  });
+
+  test('does not double-save: a normal debounce fire leaves nothing to flush on unmount', () => {
+    liveMapState = { placements: { 7: { x: 1, y: 2 } }, labels: [], markers: [], forests: [] };
+    const saveCampaignMap = vi.fn();
+    const { unmount } = renderHook(() => useMapAutosave('camp-1', { mapState: { placements: {} } }, saveCampaignMap));
+    vi.advanceTimersByTime(3500);
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1);
+    unmount();
+    expect(saveCampaignMap).toHaveBeenCalledTimes(1); // no second (stale) save
+  });
+
+  test('a clean (non-dirty) map flushes nothing on unmount', () => {
+    const sameState = { placements: {}, labels: [], markers: [], forests: [] };
+    liveMapState = sameState;
+    const saveCampaignMap = vi.fn();
+    const { unmount } = renderHook(() => useMapAutosave('camp-1', { mapState: sameState }, saveCampaignMap));
+    unmount();
+    expect(saveCampaignMap).not.toHaveBeenCalled();
+  });
 });

@@ -23,7 +23,6 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { parse } from 'yaml';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -38,16 +37,65 @@ function checkScriptSteps() {
     .filter(Boolean);
 }
 
-/** The `npm run <step>` step names invoked by the ci.yml `check` job. */
-function ciCheckJobSteps() {
-  const ci = parse(readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8'));
-  const steps = ci.jobs.check.steps ?? [];
-  const names = [];
-  for (const step of steps) {
-    const run = typeof step.run === 'string' ? step.run : '';
-    // A step's `run:` may itself chain commands; pull every `npm run <step>`.
-    for (const m of run.matchAll(/npm run (\S+)/g)) names.push(m[1]);
+/**
+ * Slice ci.yml down to the body of ONE top-level job by name.
+ *
+ * We parse the YAML with targeted string scanning rather than importing a YAML
+ * package: `yaml` is not a declared dependency, so importing it made this
+ * load-bearing parity test depend on an undeclared module (it happened to
+ * resolve transitively). We only need the `run:` lines of the `check` job's
+ * steps, which is cheap to extract by hand.
+ *
+ * Jobs are the 2-space-indented keys under `jobs:` (e.g. `  check:`). A job's
+ * body runs from its header line until the next line indented ≤ 2 spaces that
+ * isn't blank/comment — i.e. the next job header. This isolates the `check`
+ * job from the sibling `e2e` / `deno-tests` / `redeploy` jobs so their commands
+ * never bleed into the parity check.
+ */
+function jobBody(yaml, jobName) {
+  const lines = yaml.split('\n');
+  const headerIdx = lines.findIndex((l) => new RegExp(`^  ${jobName}:\\s*$`).test(l));
+  if (headerIdx === -1) return null;
+  const body = [];
+  for (let i = headerIdx + 1; i < lines.length; i += 1) {
+    const line = lines[i];
+    // A non-blank line indented by 2 spaces or fewer starts the next job.
+    if (line.trim() !== '' && /^ {0,2}\S/.test(line)) break;
+    body.push(line);
   }
+  return body.join('\n');
+}
+
+/**
+ * The `npm run <step>` step names invoked by the ci.yml `check` job.
+ *
+ * A step's `run:` may chain commands, and CI runs MORE than `npm run` steps in
+ * the check job (e.g. `npm ci`, `npm audit …`, and the post-build
+ * `npx vitest …` anti-vacuity step). We pull only the `npm run <step>` tokens,
+ * matching what the package.json `check` script chains — `npm ci` / `npm audit`
+ * are intentionally excluded (they are `npm ci`/`npm audit`, not `npm run <x>`),
+ * as is the `npx vitest` post-build step, which is CI-only by design.
+ */
+function ciCheckJobSteps() {
+  const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+  const body = jobBody(ci, 'check');
+  expect(body, 'ci.yml must declare a top-level `check:` job').toBeTruthy();
+  // Strip comments so a `# … npm run check …` doc-comment can't be mistaken for
+  // an executed step. None of the real `run:` commands contain a literal `#`,
+  // so dropping full-line comments and trailing ` #…` is safe here: a full-line
+  // comment (first non-space char `#`) becomes empty; a trailing ` #…` is cut.
+  const runnable = body
+    .split('\n')
+    .map((line) => {
+      if (/^\s*#/.test(line)) return '';
+      return line.replace(/\s+#.*$/, '');
+    })
+    .join('\n');
+  const names = [];
+  // `npm run <step>` — the step name is the first bare token after `run`.
+  // `run:` chains (`&&`) and multi-line `run: |` blocks are both covered
+  // because matchAll scans the whole job body, not a single line.
+  for (const m of runnable.matchAll(/\bnpm run ([A-Za-z0-9:_-]+)/g)) names.push(m[1]);
   return names;
 }
 

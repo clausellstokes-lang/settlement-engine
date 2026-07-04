@@ -28,6 +28,24 @@ function json(payload: unknown, status: number) {
   return new Response(JSON.stringify(payload), { status, headers: { 'Content-Type': 'application/json' } });
 }
 
+// Constant-time comparison of the presented shared secret against the expected
+// one. The secret is arbitrary text (not a fixed-width hex digest), so encode
+// both to UTF-8 bytes and fold the length difference into the accumulator: the
+// loop always runs to a fixed bound and never early-returns on a mismatch, so
+// the response timing cannot be used to probe the secret byte-by-byte. A plain
+// `===` short-circuits at the first differing byte and leaks that position.
+// Exported for the regression test.
+export function secretsMatch(provided: string, expected: string): boolean {
+  const a = new TextEncoder().encode(provided);
+  const b = new TextEncoder().encode(expected);
+  const len = Math.max(a.length, b.length);
+  let diff = a.length ^ b.length;
+  for (let i = 0; i < len; i++) {
+    diff |= (a[i] ?? 0) ^ (b[i] ?? 0);
+  }
+  return diff === 0;
+}
+
 async function gzip(text: string): Promise<Blob> {
   const stream = new Blob([text]).stream().pipeThrough(new CompressionStream('gzip'));
   return new Response(stream).blob();
@@ -104,9 +122,9 @@ export async function handleAnalyticsExport(
   if (guard.reject) return guard.reject;
   if (!SUPABASE_URL || !SERVICE_KEY) return json({ error: 'unconfigured' }, 503);
 
-  // Fail-closed shared-secret gate (constant-ish compare; secret never logged).
+  // Fail-closed shared-secret gate (constant-time compare; secret never logged).
   const provided = req.headers.get('x-export-secret') || '';
-  if (!EXPORT_SECRET || provided !== EXPORT_SECRET) return json({ error: 'forbidden' }, 403);
+  if (!EXPORT_SECRET || !secretsMatch(provided, EXPORT_SECRET)) return json({ error: 'forbidden' }, 403);
 
   try {
     const admin = deps.adminClient ? deps.adminClient() : createClient(SUPABASE_URL, SERVICE_KEY);

@@ -82,7 +82,11 @@ export const GATE_FEATURES = {
     reason: "Sewage infrastructure requires engineered water supply for flushing and drainage."
   },
   Tanners: {
-    requires: ["Water source", "Multiple water sources", "Aqueduct or water system", "River access"],
+    // "River access" was dead vocabulary here: it is an ACCESS type, not an
+    // institution NAME, so the gate's `requires.some(r => expandedSet.includes(r))`
+    // check could never satisfy on it. The three real water institutions below
+    // already carry the requirement; the dead token is dropped.
+    requires: ["Water source", "Multiple water sources", "Aqueduct or water system"],
     reason: "Tanning requires massive amounts of water for hide processing."
   },
   "Market square": {
@@ -554,13 +558,15 @@ export const GATE_FEATURES = {
   },
   "Magic item consignment": {
     minTier: "city",
+    // "Arcane university" and "Magical academy" were dead vocabulary: no
+    // institution is ever named either, so neither could contribute to the
+    // gate's `requires.some(...)` satisfaction. The four real arcane
+    // institutions below carry the requirement; the dead tokens are dropped.
     requires: [
       "Mages' guild",
       "Enchanter's shop",
       "Enchanting quarter",
       "Wizard's tower",
-      "Arcane university",
-      "Magical academy",
     ],
     reason: "Consignment market requires concentration of both producers and wealthy buyers."
   },

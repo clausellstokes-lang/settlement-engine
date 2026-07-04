@@ -50,7 +50,11 @@ installAnalyticsQueue();
       : p.startsWith('/dossier') || p.startsWith('/s/') ? 'dossier'
         : p.startsWith('/gallery') ? 'gallery'
           : p.startsWith('/pricing') ? 'pricing' : 'other';
-  } catch { /* default */ }
+  } catch {
+    // location may be unavailable in a non-browser/SSR boot; the entry-route
+    // kind stays the 'other' default. This is a best-effort analytics tag, not
+    // load-bearing — a bad read must never block the session-started event.
+  }
   track(EVENTS.SESSION_STARTED, { is_return: rv.is_return, days_since_last_visit_band: rv.days_since_last_visit_band, auth_state: 'anon', entry_route_kind: entry });
   stampVisit();
 }
@@ -106,8 +110,14 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// Wrapped in StrictMode: it double-invokes effects/renders in DEV only (no
+// production cost) to surface missing effect cleanup, unsafe lifecycles, and
+// impure render. The ErrorBoundary stays the outermost app wrapper so a render
+// crash still funnels to reportError via componentDidCatch.
 ReactDOM.createRoot(document.getElementById('root')).render(
-  React.createElement(ErrorBoundary, null,
-    React.createElement(App)
+  React.createElement(React.StrictMode, null,
+    React.createElement(ErrorBoundary, null,
+      React.createElement(App)
+    )
   )
 );

@@ -14,6 +14,11 @@
  */
 import { jsPDF } from 'jspdf';
 import { autoLayout } from './graphLayout.js';
+// The per-settlement digest derives its overview line, adventure hook, and key
+// NPCs from the SAME shared view-model the single-settlement dossier renders, so
+// the two exports can't drift on field shape (e.g. an `influence` that is an
+// object vs a bare string, or a `role` the engine stores under `title`).
+import { buildViewModel } from '../pdf/lib/viewModel.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -612,6 +617,12 @@ function buildDigest(d, campaignName, settlements, pageN) {
     }
 
     const st_ = save.settlement || {};
+    // Derive the digest slices from the shared dossier view-model (same source
+    // as the single-settlement PDF). Guard the build: a malformed member save
+    // must not abort the whole campaign export, so fall back to a null vm and
+    // the section renders the blocks it can from the raw save.
+    let vm = null;
+    try { vm = buildViewModel({ settlement: st_ }); } catch { /* keep vm null; fall back to raw reads */ }
 
     // Card frame
     rect(d, ML, y, CW, CARD_H, CREAM, TAN);
@@ -655,10 +666,20 @@ function buildDigest(d, campaignName, settlements, pageN) {
     d.text('OVERVIEW', L_X, bodyY);
     hline(d, L_X, bodyY + 1, L_X + colW - 6, TAN, 0.2);
 
-    // Real settlement fields — characterSummary/description/overview were never
-    // produced, so the OVERVIEW block was always blank.
-    const reason = typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary;
-    const overview = s(st_.history?.historicalCharacter || st_.arrivalScene || st_.pressureSentence || reason || '');
+    // Overview line — read the SAME derived fields the dossier overview chapter
+    // uses (view-model coerces settlementReason objects, historicalCharacter, and
+    // the AI arrival/pressure prose). Falls back to raw fields only if the vm
+    // build failed above.
+    const ov = vm?.overview;
+    const reason = ov
+      ? ov.settlementReason
+      : (typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary);
+    const overview = s(
+      (ov ? ov.character : st_.history?.historicalCharacter)
+      || (ov ? ov.arrivalScene : st_.arrivalScene)
+      || (ov ? ov.pressureSentence : st_.pressureSentence)
+      || reason || '',
+    );
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
     const ovLines = wrap(d, overview, colW - 6, 7);
     let ly = bodyY + 5;
@@ -667,21 +688,28 @@ function buildDigest(d, campaignName, settlements, pageN) {
       ly += 3;
     }
 
-    // Adventure hook (one-liner)
-    const hooks = st_.plotHooks || st_.hooks || [];
-    if (hooks.length > 0) {
-      const hook = typeof hooks[0] === 'string' ? hooks[0] : (hooks[0].hook || hooks[0].text || hooks[0].title || '');
-      if (hook) {
-        d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
-        d.text('HOOK', L_X, ly + 2);
-        hline(d, L_X, ly + 3, L_X + colW - 6, TAN, 0.2);
-        d.setFont('helvetica','italic'); d.setFontSize(7); st(d, INK);
-        const hLines = wrap(d, hook, colW - 6, 7);
-        let hy = ly + 7;
-        for (const line of clampLines(hLines, 3)) {
-          d.text(line, L_X, hy);
-          hy += 3;
-        }
+    // Adventure hook (one-liner) — from the shared hooks aggregator the dossier
+    // Plot Hooks chapter uses (priority-sorted, `PLOT HOOK:`-cleaned); falls back
+    // to the raw save fields if the vm build failed.
+    let hook = '';
+    if (vm?.hooks?.all?.length) {
+      hook = vm.hooks.all[0].hook || '';
+    } else {
+      const hooks = st_.plotHooks || st_.hooks || [];
+      if (hooks.length > 0) {
+        hook = typeof hooks[0] === 'string' ? hooks[0] : (hooks[0].hook || hooks[0].text || hooks[0].title || '');
+      }
+    }
+    if (hook) {
+      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+      d.text('HOOK', L_X, ly + 2);
+      hline(d, L_X, ly + 3, L_X + colW - 6, TAN, 0.2);
+      d.setFont('helvetica','italic'); d.setFontSize(7); st(d, INK);
+      const hLines = wrap(d, hook, colW - 6, 7);
+      let hy = ly + 7;
+      for (const line of clampLines(hLines, 3)) {
+        d.text(line, L_X, hy);
+        hy += 3;
       }
     }
 
@@ -689,17 +717,24 @@ function buildDigest(d, campaignName, settlements, pageN) {
     d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
     d.text('KEY NPCs', R_X, bodyY);
     hline(d, R_X, bodyY + 1, R_X + colW - 6, TAN, 0.2);
-    const keyNpcs = (st_.npcs || [])
-      .filter(n => n.influence === 'high')
-      .slice(0, 3);
-    const shownNpcs = keyNpcs.length > 0 ? keyNpcs : (st_.npcs || []).slice(0, 3);
+    // Key NPCs — read the dossier-normalized NPC slice (power-sorted, with
+    // influence coerced to a label and role folded into `title`). The old raw
+    // read `n.influence === 'high'` silently matched nothing when the engine
+    // emits influence as an object ({ label: 'high' }), and `n.role` missed the
+    // NPCs whose role lives under `title`/`presentation`. Prefer high-influence
+    // figures, else the top figures by power (already the slice's sort order).
+    const npcPool = vm?.npcs?.sorted?.length ? vm.npcs.sorted : (st_.npcs || []);
+    const highInfl = vm?.npcs?.sorted
+      ? npcPool.filter(n => String(n.influenceLabel || '').toLowerCase() === 'high').slice(0, 3)
+      : npcPool.filter(n => n.influence === 'high').slice(0, 3);
+    const shownNpcs = highInfl.length > 0 ? highInfl : npcPool.slice(0, 3);
 
     let ry = bodyY + 5;
     for (const npc of shownNpcs) {
       d.setFont('helvetica','bold'); d.setFontSize(7); st(d, INK);
       d.text(truncate(s(npc.name), 22), R_X, ry);
       d.setFont('helvetica','italic'); d.setFontSize(6.5); st(d, BROWN);
-      d.text(truncate(s(npc.role), 30), R_X, ry + 3);
+      d.text(truncate(s(npc.title || npc.role), 30), R_X, ry + 3);
       ry += 7;
     }
 

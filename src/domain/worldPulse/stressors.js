@@ -636,24 +636,34 @@ const ECHO_DECAY_FACTOR = Math.pow(0.5, 1 / ECHO_HALF_LIFE_TICKS);
 const ECHO_GRADUATION_FLOOR = 0.1;
 
 /**
+ * Mint the residual ECHO (living memory) of a resolved crisis. Exported for a focused
+ * unit test of the footprint-collapse invariant below.
  * @param {any} resolvedStressor
  * @param {any} now
  */
-function echoOf(resolvedStressor, now) {
+export function echoOf(resolvedStressor, now) {
+  const originId = resolvedStressor.originSettlementId
+    || (resolvedStressor.affectedSettlementIds || [])[0]
+    || null;
   return normalizeStressor({
     ...resolvedStressor,
     // Canonical id (type + origin), even when the live stressor carried a
     // decorated id (e.g. rebellion births suffix the tick): echoes of the
     // same crisis at the same origin must coalesce, and a re-ignition must
     // overwrite the echo via the byId upsert instead of stacking beside it.
-    id: idFor({
-      type: resolvedStressor.type,
-      originSettlementId: resolvedStressor.originSettlementId
-        || (resolvedStressor.affectedSettlementIds || [])[0]
-        || null,
-    }),
+    id: idFor({ type: resolvedStressor.type, originSettlementId: originId }),
     status: 'residual',
     lifecycleStage: 'residual',
+    // COLLAPSE THE FOOTPRINT TO THE ORIGIN. A live crisis spreads to neighbours at an
+    // ATTENUATED severity; its resolved echo is a MEMORY, and a memory must not keep
+    // participating in cross-settlement synergyAssessment at every settlement it once
+    // brushed. Carrying the full affectedSettlementIds/severityBySettlement forward let a
+    // resolved famine keep amplifying a later disease_outbreak at a distant spread target
+    // where the famine was never at origin strength. The memory lives where the crisis
+    // was born; severity is governed uniformly by memoryStrength (severityBySettlement
+    // cleared so no attenuated spread value lingers as a synergy companion).
+    affectedSettlementIds: originId ? [originId] : (resolvedStressor.affectedSettlementIds || []),
+    severityBySettlement: null,
     // The echo is as loud as the crisis ended OR half as loud as its worst
     // moment, whichever is greater — a famine that once peaked at 0.9 is not
     // forgotten just because it limped out at 0.08.
@@ -1120,9 +1130,15 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   for (const stressor of currentStressors) {
     if (!['active', 'emerging', 'peaking', 'easing'].includes(stressor.lifecycleStage)) continue;
     const defaults = catalogFor(stressor.type);
-    const strongestPressure = (stressor.affectedSettlementIds || [])
-      .map((/** @type {any} */ id) => (defaults.pressureKinds || []).map((/** @type {any} */ kind) => pressureIdx.get?.(id, kind)?.score || 0))
-      .flat()
+    // Escalation must reflect pressure where the crisis is at FULL record severity — the
+    // ORIGIN — not the whole spread footprint. Spread targets hold the crisis at an
+    // attenuated severity, so scanning their independent local pressure let a distant,
+    // heavily-pressured spread-target escalate the crisis at the origin it merely caught a
+    // spread of. (A spread target with its own high pressure spawns/escalates its OWN
+    // record via the pressure→candidate loop above.) Restrict the scan to the origin.
+    const escalationOriginId = stressor.originSettlementId || (stressor.affectedSettlementIds || [])[0];
+    const strongestPressure = (defaults.pressureKinds || [])
+      .map((/** @type {any} */ kind) => pressureIdx.get?.(escalationOriginId, kind)?.score || 0)
       .reduce((/** @type {any} */ max, /** @type {any} */ score) => Math.max(max, score), 0);
 
     if (strongestPressure > 0.62 && stressor.severity < 0.92) {
