@@ -578,6 +578,14 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
  */
 async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<CompletionResult> {
   if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
+  // GPT-5-class reasoning models spend hidden reasoning tokens out of the SAME
+  // max_output_tokens budget as the visible answer. These passes are short prose,
+  // so we (a) pin reasoning to the minimal effort the Responses API accepts and
+  // (b) add headroom to the token budget, so reasoning can't starve the visible
+  // output and return status:'incomplete' with an empty output_text (a billed-but-
+  // blank run — the money bug finding #2 guards). Non-reasoning models (gpt-4.1)
+  // ignore the reasoning field and the extra headroom is harmless slack.
+  const REASONING_HEADROOM_TOKENS = 2_000;
   const res = await fetchAiWithRetry('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
@@ -587,7 +595,8 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
     body: JSON.stringify({
       model,
       input: stripCacheBreakpoint(prompt),
-      max_output_tokens: maxTokens,
+      max_output_tokens: maxTokens + REASONING_HEADROOM_TOKENS,
+      reasoning: { effort: 'low' },
     }),
   });
 
@@ -608,6 +617,18 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
       .filter(Boolean)
       .join('\n')
       .trim();
+  }
+  // status:'incomplete' means the model stopped without a usable answer — most
+  // often reasoning burned the whole budget (incomplete_details.reason ===
+  // 'max_output_tokens'). Treat it as a hard failure so the caller routes into
+  // the refund path instead of persisting a truncated/blank thesis as success.
+  // A truthy `text` from an 'incomplete' run is still partial garbage, so we
+  // reject on the status regardless of what leaked out.
+  if (json?.status === 'incomplete') {
+    const reason = typeof json?.incomplete_details?.reason === 'string'
+      ? json.incomplete_details.reason
+      : 'unknown';
+    throw new Error(`OpenAI response incomplete (${reason})`);
   }
   return { text, usage: normalizeProviderUsage(json?.usage, prompt, text) };
 }
@@ -1179,6 +1200,11 @@ export async function handleGenerateNarrative(
               try {
                 const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext, confirmedChronicleContext);
                 const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+                // An empty/whitespace beat is a failure, not blank success. In the
+                // standalone dailyLife type the beats are all-or-nothing (refund on
+                // any failure), so treat an empty beat like a thrown provider error:
+                // record it and DON'T write blank prose as a completed paragraph.
+                if (!value.trim()) throw new Error('Empty daily-life beat');
                 results[fieldName] = value;
                 send({ field: fieldName, value });
               } catch (e) {
@@ -1246,6 +1272,10 @@ export async function handleGenerateNarrative(
                 type,
                 usageTelemetry,
               );
+              // Empty/whitespace thesis = thesis-stage failure (see narrative path):
+              // route into the refund path rather than writing aiClone.thesis='' with
+              // done:true and billing the full 5-credit progression spend for blank output.
+              if (!thesis.trim()) throw new Error('Empty thesis');
             } catch (e) {
               if (shouldRefundOnFailure('thesis')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
@@ -1369,6 +1399,13 @@ export async function handleGenerateNarrative(
               type,
               usageTelemetry,
             );
+            // An empty/whitespace thesis is a THESIS-STAGE FAILURE, not a success:
+            // the provider call was billed but yielded no usable identity. Throwing
+            // here routes it into the SAME refund path as a thrown provider error
+            // (shouldRefundOnFailure('thesis') → full refund) instead of persisting
+            // aiClone.thesis='' with done:true and charging the full spend for blank
+            // output. Mirrors generate-chronicle's `if (!prose) throw 'Empty chronicle'`.
+            if (!thesis.trim()) throw new Error('Empty thesis');
           } catch (e) {
             if (shouldRefundOnFailure('thesis')) await refund();
             const aiUsage = aggregateAiUsage(usageTelemetry);
@@ -1467,6 +1504,10 @@ export async function handleGenerateNarrative(
                 confirmedChronicleContext,
               );
               const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+              // A blank beat is a partial failure (non-refundable here — the thesis +
+              // prose already landed), but it must be RECORDED in failedFields, not
+              // written as blank success. Throw into the per-beat catch below.
+              if (!value.trim()) throw new Error('Empty daily-life beat');
               dailyLife[beat] = value;
               succeededFields.push(`dailyLife.${beat}`);
               send({ field: `dailyLife.${beat}`, value });

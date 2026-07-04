@@ -7,6 +7,12 @@
  * (pglite) over a minimal schema mirror. auth.uid()/auth.role()/privileged are
  * GUC stubs; _audit_action is a no-op.
  *
+ * NOTE: get_credit_balance is loaded from 018 to exercise the BALANCE MATH, which
+ * migration 110 leaves byte-identical. 110 also adds an ownership/IDOR guard to the
+ * same function; that guard is exercised separately by creditBalanceIdorGuard.
+ * pglite.test.js (loading 110's body). The harness's callers read self or run with a
+ * NULL auth.uid(), so the guard would be a no-op here regardless.
+ *
  * This is the extracted setup that creditLedger.pglite.test.js pioneered, so the
  * unit suite AND the composed money-path JOURNEY test (moneyPathJourney.pglite.
  * test.js) exercise the SAME real SQL without drift. Not a `*.test.js` file, so

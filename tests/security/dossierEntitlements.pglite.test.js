@@ -49,6 +49,13 @@ const MIG = resolve(process.cwd(), 'supabase', 'migrations', '108_dossier_entitl
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
 
+// 109 recreates claim_dossier_purchase_by_session to PRESERVE the voucher when it can
+// mint nothing (an already-entitled save). Applied on top of 108 below so this suite
+// exercises the net-current RPC body.
+const MIG109 = resolve(process.cwd(), 'supabase', 'migrations', '109_dossier_voucher_preserve_on_already_entitled.sql');
+const have109 = existsSync(MIG109);
+const SRC109 = have109 ? readFileSync(MIG109, 'utf-8') : '';
+
 // Vacuity guard (runs unconditionally): if the targeted migration is ever
 // renamed/removed the runIf suite below silently runs ZERO assertions while
 // reporting green. Fail loudly here instead.
@@ -175,6 +182,9 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     // The REAL migration, whole file, verbatim — tables, indexes, RLS, policies,
     // grants, and all six RPC bodies.
     await db.exec(SRC);
+    // 109 recreates claim_dossier_purchase_by_session (voucher preservation). Apply it
+    // so the RPC under test is the net-current definition.
+    if (SRC109) await db.exec(SRC109);
 
     // Table privileges for the client role: PostgREST's authenticated role has
     // table grants in prod — RLS (not the grant layer) must be what denies.
@@ -369,6 +379,42 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
     it('the purchase claim is ONE guarded UPDATE (source pin: race-safe unclaimed → claimed)', () => {
       const body = SRC.match(/create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/i)?.[0] ?? '';
       expect(body).toMatch(/update public\.single_dossier_purchases[\s\S]*?set status = 'claimed'[\s\S]*?and status = 'unclaimed'[\s\S]*?returning/i);
+    });
+  });
+
+  // ── 109: the voucher is PRESERVED when it can mint nothing ───────────────────
+  describe.runIf(have109)('claim_dossier_purchase_by_session — voucher preserved on already_entitled (109)', () => {
+    it('SENTINEL: an already-entitled save returns already_entitled and does NOT consume the voucher', async () => {
+      const save = await seedSave(BUYER);
+      // The buyer already holds a durable right on this save (a prior grant/claim).
+      await grant(BUYER, save, 'cs_prior');
+      expect(await hasEnt(BUYER, save)).toBe(true);
+      // A NEW voucher, claimed against the SAME already-entitled save.
+      await seedPurchase(BUYER, 'cs_new');
+      const r = await claimBySession('cs_new', BUYER, save);
+      expect(r.ok).toBe(false);
+      expect(r.reason).toBe('already_entitled');
+      // The voucher is UNTOUCHED (still unclaimed) — spendable on another settlement,
+      // not burned for nothing (the 108 bug this migration fixes).
+      expect(await purchaseStatus('cs_new')).toBe('unclaimed');
+    });
+
+    it('control: a voucher against a FRESH save still mints the right and is consumed', async () => {
+      const save = await seedSave(BUYER);
+      await seedPurchase(BUYER, 'cs_fresh');
+      const r = await claimBySession('cs_fresh', BUYER, save);
+      expect(r.ok).toBe(true);
+      expect(await purchaseStatus('cs_fresh')).toBe('claimed');
+      expect(await hasEnt(BUYER, save)).toBe(true);
+    });
+
+    it('the RPC checks entitlement BEFORE the claiming update (preserve-before-consume)', () => {
+      const body = SRC109.match(/create or replace function public\.claim_dossier_purchase_by_session[\s\S]*?\$\$;/i)?.[0] ?? '';
+      const checkIdx = body.search(/from public\.dossier_entitlements\s+where user_id = p_user and save_id = p_save_id/i);
+      const claimIdx = body.search(/update public\.single_dossier_purchases[\s\S]*?set status = 'claimed'/i);
+      expect(checkIdx).toBeGreaterThan(-1);
+      expect(claimIdx).toBeGreaterThan(-1);
+      expect(checkIdx).toBeLessThan(claimIdx); // the guard precedes the consume
     });
   });
 

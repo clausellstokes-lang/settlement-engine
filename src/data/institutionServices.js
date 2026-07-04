@@ -181,14 +181,6 @@ export const INSTITUTION_SERVICES = {
     "Public games": { on: true, p: 0.8, desc: "Athletic competitions, races, spectacle" }
   },
 
-  "Assassins Guild": {
-    "Contract killing": { on: false, p: 0.9, desc: "Verified, deniable, professional" },
-    "Intimidation only": { on: false, p: 0.7, desc: "Scare a target without killing. Cheaper." },
-    "Poison supply": { on: false, p: 0.6, desc: "Custom preparations, untraceable" }
-  },
-
-  
-  
   "Adventurers Guild": {
     "Contract board": { on: true, p: 1.0, desc: "Posted bounties, dungeon expeditions, monster hunts" },
     "Equipment hire": { on: true, p: 0.8, desc: "Torches, rope, rations, basic tools" },
@@ -218,14 +210,6 @@ export const INSTITUTION_SERVICES = {
     "Aerial reconnaissance": { on: false, p: 0.5, desc: "Survey territory, scout positions" }
   },
 
-  
-  "Dream Parlor": {
-    "Lucid dream experiences": { on: false, p: 0.9, desc: "Curated magical visions, entertainment" },
-    "Memory access": { on: false, p: 0.5, desc: "Retrieve suppressed memories, relive the past" },
-    "Prophetic dreams": { on: false, p: 0.4, desc: "Divination through induced vision states" }
-  },
-
-  
   
   "Front Business": {
     "Legitimate facade": { on: true, p: 1.0, desc: "Normal-seeming shop concealing criminal activity" },
@@ -1466,11 +1450,6 @@ export const INSTITUTION_SERVICES = {
     "Guard hire": { on: true, p: 0.9, desc: "Soldiers available for static guard duty on contract." },
     "Contract witnessing": { on: false, p: 0.5, desc: "An officer witnesses and validates commercial agreements." },
     "Lost property": { on: false, p: 0.4, desc: "Report and recover lost or stolen property." }
-  },
-  "Watchtower": {
-    "Signal fire": { on: true, p: 0.9, desc: "Signal to neighbouring settlements or the garrison of approaching threats." },
-    "Approaching threat warning": { on: true, p: 1.0, desc: "Early warning of raiders, armies, or other threats." },
-    "Night watch": { on: true, p: 0.8, desc: "Continuous observation through the night." }
   },
   "Healer (divine, 1st level)": {
     "Cure light wounds": { on: true, p: 1.0, desc: "Basic divine healing. Closes cuts, reduces fever, eases pain." },

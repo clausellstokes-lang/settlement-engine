@@ -16,7 +16,11 @@ export const STATUS = {
   running:             { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',             dot: '●' },
   operational:         { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',             dot: '●' },
   entrepot:            { color: '#a0762a', bg: '#faf6ec', border: '#d8c090', label: 'Entrepôt',            dot: '●' },
-  magically_sustained: { color: '#5a2a8a', bg: '#f8f0ff', border: '#c0a0e0', label: 'Magically Sustained', dot: '✦' },
+  // Magic actively covering a supply gap reads BLUE (matching the service-level
+  // "Magical Infrastructure" tag) — supplied, not impaired. The ✦ marks it apart
+  // from a plain blue node; Import nodes are neutralised off blue (below) so blue
+  // means magic here, not "imported".
+  magically_sustained: { color: swatch.info, bg: swatch.infoBg, border: '#a0b0d8', label: 'Magically Sustained', dot: '✦' },
   vulnerable:          { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',          dot: '◐' },
   impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired',            dot: '○' },
   broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken',              dot: '✕' },
@@ -65,11 +69,15 @@ const InstNode = ({ name, present, st }) => (
 const ImportNode = ({ label }) => (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
-    background: swatch.infoBg, border: '1px dashed #a0b0d8',
+    // Neutral parchment, NOT blue: an import is an external-input LABEL, not a
+    // health state, and blue is now reserved for "magic covering a gap" (so the two
+    // never read as the same thing in one diagram). The dashed border + "Import:"
+    // prefix keep the node type unmistakable.
+    background: swatch['#F5F0E8'], border: '1px dashed #c8b898',
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
     <span style={{ fontSize: FS.xxs }}></span>
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: MUTED }}>Import: {label}</span>
   </div>
 );
 

@@ -23,7 +23,7 @@ import { useStore } from './store/index.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
-import { guardForView, viewToPath } from './lib/routes.js';
+import { guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, BORDER, BODY, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
@@ -65,8 +65,12 @@ import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 // fires; cooldown enforced by the moments library so it can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
-// Top-nav destinations. Gallery sits between Compendium and About. (Workshop /
-// "Custom Generate" was removed; the /workshop route redirects to Create.)
+// Top-nav destinations are the single-source-of-truth NAV derived from
+// lib/routes.js (each ROUTES entry with a `nav` block). Gallery sits between
+// Compendium and About; Welcome is leftmost. Adding/relabelling/reordering a
+// tab is a one-place edit in routes.js — this shell no longer carries a
+// parallel array that can silently drift. (Workshop / "Custom Generate" was
+// removed; the /workshop route redirects to Create.)
 //
 // The Realm IA move:
 //   - `settlements` keeps its view id + /settlements path for back-compat, but the
@@ -75,15 +79,6 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     World Map (+ Pulse / Chronicle / Pantheon via the Realm Inspector). The old
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
-const NAV = [
-  { id: 'home',        label: 'Welcome' },
-  { id: 'generate',    label: 'Create' },
-  { id: 'settlements', label: 'Library' },
-  { id: 'realm',       label: 'Realm' },
-  { id: 'compendium',  label: 'Compendium' },
-  { id: 'gallery',     label: 'Gallery' },
-  { id: 'howto',       label: 'About' },
-];
 
 function Loading() {
   return (

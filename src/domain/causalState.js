@@ -207,6 +207,16 @@ export const CAUSAL_BANDS = Object.freeze([
  * 50 is the neutral / no-information score and lands in 'adequate' —
  * the substrate is default-optimistic; surfaces only flag pressure
  * when there's evidence for it.
+ *
+ * DELIBERATE DESIGN STANCE (reviewed, not accidental). A settlement with no detected
+ * pressure — or a genuinely absent/malformed score — reads as 'adequate', NOT as a
+ * distinct 'unknown'. This is default-OPTIMISTIC on purpose: the alternative (treat
+ * missing evidence as strained/cautious) would paint false alarms across the PDF/UI/AI
+ * surfaces on every dimension the sim hasn't produced evidence for. Flipping to a
+ * default-cautious model — or adding an explicit 'unknown' band — is a PRODUCT/BALANCE
+ * decision (it changes what the player sees everywhere and shifts the golden master),
+ * so it is left to the designer rather than silently changed. If that stance is ever
+ * revisited, the only two touchpoints are this fallback and defaultScoreForCausalBand.
  */
 export function causalBand(/** @type {any} */ score) {
   const s = typeof score === 'number' ? Math.max(0, Math.min(100, score)) : 50;

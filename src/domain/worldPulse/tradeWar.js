@@ -459,11 +459,15 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       if (defeatedId && defeatedId !== winnerId) {
         dispositionDeltas.push({ id: String(defeatedId), outcome: 'loss', magnitude: 1 });
       }
+      const winnerStrength = clamp01(0.55 + (contenders.find(c => c.id === winnerId)?.scoreFor || 0) * 0.35);
+      // Shared goods set: channelIdFor keys on goods, so the winner-mint and the
+      // defeated-demote below MUST carry the identical goods to address the same channel.
+      const realignGoods = [{ id: commodityId, label: commodityLabelFor(commodityId) }];
       graphChannels.push(mintDirectedChannel({
         type: 'trade_dependency',
         from: winnerId,
         to: buyerId,
-        strength: clamp01(0.55 + (contenders.find(c => c.id === winnerId)?.scoreFor || 0) * 0.35),
+        strength: winnerStrength,
         confidence: 0.8,
         explanation: `${nameFor(buyerId)} realigns its ${commodityLabelFor(commodityId)} trade to ${nameFor(winnerId)}.`,
         relationshipKey: `trade_dependency.${stablePart(winnerId)}.${stablePart(buyerId)}`,
@@ -471,7 +475,29 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         now,
       }));
       // Goods carried on the realigned channel (so the next-tick selector reads K).
-      /** @type {any} */ (graphChannels[graphChannels.length - 1]).goods = [{ id: commodityId, label: commodityLabelFor(commodityId) }];
+      /** @type {any} */ (graphChannels[graphChannels.length - 1]).goods = realignGoods;
+
+      // DEMOTE the defeated incumbent's trade_dependency channel below the winner's. The
+      // next tick's deriveIncumbent reads RAW carrier strengths (suppliersInto), so an
+      // entrenched prior-flip channel left at full strength would stay stronger than the
+      // freshly-minted winner channel and the DERIVED primary would silently disagree with
+      // the persisted tradeWarState.winnerId. addRegionalChannels overwrites strength by
+      // channel id (type,from,to,goods), so re-minting defeated→buyer with the SAME goods
+      // at winnerStrength − 0.2 lowers exactly that channel and re-aligns derived to ledger.
+      if (defeatedId && defeatedId !== winnerId) {
+        graphChannels.push(mintDirectedChannel({
+          type: 'trade_dependency',
+          from: defeatedId,
+          to: buyerId,
+          strength: clamp01(winnerStrength - 0.2),
+          confidence: 0.8,
+          explanation: `${nameFor(defeatedId)} loses its ${commodityLabelFor(commodityId)} primacy over ${nameFor(buyerId)} to ${nameFor(winnerId)}.`,
+          relationshipKey: `trade_dependency.${stablePart(defeatedId)}.${stablePart(buyerId)}`,
+          source: 'trade_war_realign',
+          now,
+        }));
+        /** @type {any} */ (graphChannels[graphChannels.length - 1]).goods = realignGoods;
+      }
 
       outcomes.push(conditionOutcome({
         id: `world_outcome.trade_realignment.${prizeId}.${tick}`,

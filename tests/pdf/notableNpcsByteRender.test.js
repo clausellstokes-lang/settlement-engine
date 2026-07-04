@@ -46,9 +46,32 @@ Font.register({
   ],
 });
 
-const SENT = 'The archivist keeps a ledger of debts nobody remembers owing, and reads it aloud on feast days. ';
+// "fortified" carries an fi ligature that the bundled Lora subset mis-renders;
+// it MUST be defused (ZWNJ-split) by the section before it reaches the renderer.
+// (See the boundary-level assertion below and proseLigatureDefuse.test.js.)
+const SENT = 'The archivist keeps a ledger of debts nobody remembers owing behind the fortified door, and reads it aloud on feast days. ';
 const BLURB = SENT.repeat(5);
 const ITEM = SENT.repeat(2);
+const ZWNJ = '‌';
+
+// Deep collector that EXECUTES the section's (hookless) function components so we
+// reach the leaf <Text> strings — the byte stream itself is font-subset-encoded
+// and ungreppable, so ZWNJ presence is asserted on the element tree instead.
+function deepText(node, out = []) {
+  if (node == null || node === false || node === true) return out;
+  if (typeof node === 'string') { out.push(node); return out; }
+  if (typeof node === 'number') { out.push(String(node)); return out; }
+  if (Array.isArray(node)) { for (const c of node) deepText(c, out); return out; }
+  if (typeof node !== 'object') return out;
+  if (typeof node.type === 'function') {
+    try { deepText(node.type(node.props || {}), out); }
+    catch { /* skip a node we can't execute standalone */ }
+    return out;
+  }
+  const children = node?.props?.children;
+  if (children != null) deepText(children, out);
+  return out;
+}
 
 /** Amplify the top-power NPCs (the "major figures" that render as FullCard) to a
  *  worst-case size so their cards exceed a single page. */
@@ -86,6 +109,12 @@ describe('NotableNPCs renders real PDF bytes (M4 — worst-case NPC paginates, n
     const settlement = amplify(base);
     const vm = buildViewModel({ settlement });
     expect(vm.npcs.sorted.length).toBeGreaterThan(0);
+
+    // Boundary check: the blurb's "fortified" fi-ligature reaches the leaf <Text>
+    // already defused with a ZWNJ. This is what the byte stream can't prove (font
+    // subsetting encodes the glyphs), so we assert it on the executed element tree.
+    const sectionText = deepText(NotableNPCs({ settlement, vm })).join('');
+    expect(sectionText).toContain(`fortif${ZWNJ}ied`);
 
     const element = React.createElement(Document, null,
       React.createElement(NotableNPCs, { settlement, vm }));

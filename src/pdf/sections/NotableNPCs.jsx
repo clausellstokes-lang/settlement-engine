@@ -20,7 +20,7 @@ import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primi
 import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
+import { label, hookText, humanize, safe } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { ProseText } from '../primitives/ProseText.jsx';
 
@@ -50,7 +50,7 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
         {/* When an entity index is supplied, the value may carry ⟦entity:…⟧
             tokens (NPC goal prose) — render through ProseText so they become
             inline EntityRef links; otherwise it's plain text. */}
-        {index ? <ProseText text={String(value)} index={index} /> : String(value)}
+        {index ? <ProseText text={String(value)} index={index} /> : safe(value)}
       </Text>
     </View>
   );
@@ -133,8 +133,8 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
 }
 
 function FullCard({ npc, index }) {
-  const name = stripZwnj(npc.name || 'Unnamed');
-  const title = stripZwnj(npc.title || '');
+  const name = safe(npc.name || 'Unnamed');
+  const title = safe(npc.title || '');
   // Phase-D: this card is the anchor TARGET for any npc.id reference.
   const anchor = anchorTarget(index, npc.id);
   // The faction affiliation links to the faction card when it resolves in-doc.
@@ -194,7 +194,7 @@ function FullCard({ npc, index }) {
 
       {npc.influenceDescription && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
-          {npc.influenceDescription}
+          {safe(npc.influenceDescription)}
         </Text>
       )}
 
@@ -202,7 +202,7 @@ function FullCard({ npc, index }) {
       {npc.blurb && (
         <View style={{ marginTop: 4 }}>
           <Text style={{ ...type.body, fontSize: pt['9.5'], lineHeight: 1.4 }}>
-            {stripZwnj(npc.blurb)}
+            {safe(npc.blurb)}
           </Text>
         </View>
       )}
@@ -233,7 +233,7 @@ function FullCard({ npc, index }) {
             return (
               <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
                 <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
-                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{t}</Text>
+                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{safe(t)}</Text>
               </View>
             );
           })}
@@ -268,8 +268,8 @@ function FullCard({ npc, index }) {
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
-              {r?.type ? ` - ${r.type}` : ''}
-              {r?.description ? ` - ${r.description}` : ''}
+              {r?.type ? safe(` - ${r.type}`) : ''}
+              {r?.description ? safe(` - ${r.description}`) : ''}
             </Text>
           ))}
         </View>
@@ -317,17 +317,17 @@ function OtherNameRow({ npc, index }) {
       wrap={false}
     >
       <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>
-        {stripZwnj(npc.name || 'Unnamed')}
+        {safe(npc.name || 'Unnamed')}
       </Text>
       {npc.title && (
         <Text style={{ ...type.body, color: palette.second, fontSize: pt['8.5'], marginLeft: 4, flex: 1 }}>
-          · {stripZwnj(npc.title)}
+          · {safe(npc.title)}
         </Text>
       )}
       {!npc.title && <View style={{ flex: 1 }} />}
       {npc.factionLabel && (
         <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginLeft: 4 }}>
-          {npc.factionLabel}
+          {safe(npc.factionLabel)}
         </Text>
       )}
       <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: pt['7'] }}>
@@ -364,8 +364,8 @@ function CompactGrid({ items, index }) {
 }
 
 function CompactCard({ npc, index }) {
-  const name = stripZwnj(npc.name || 'Unnamed');
-  const title = stripZwnj(npc.title || '');
+  const name = safe(npc.name || 'Unnamed');
+  const title = safe(npc.title || '');
   const anchor = anchorTarget(index, npc.id);
   const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
   return (
@@ -405,7 +405,7 @@ function CompactCard({ npc, index }) {
       {npc.motivation && (
         <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
           <Text style={{ color: palette.faint }}>Motive: </Text>
-          {npc.motivation}
+          {safe(npc.motivation)}
         </Text>
       )}
       {npc.plotHooks?.length > 0 && (

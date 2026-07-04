@@ -152,9 +152,11 @@ describe('population conserved across levy + homecoming under warLevyEnabled wit
 
     // The army comes home. The credit is gated on the BANK (the debit that actually
     // happened), NOT the live drain flag — no flag is even threaded to the return.
-    const saves = [save('atlas', 'Atlas', { population: 6000 })];
+    // Include the levied vassal (carth) in the return snapshot: its surviving men are
+    // credited back to IT, not pumped to the overlord (per-settlement conservation).
+    const saves = [save('atlas', 'Atlas', { population: 6000 }), save('carth', 'Carth', { population: 6000 })];
     const worldState = { rngSeed: 'r', tick: 101, relationshipStates: {}, deployments: {}, simulationRules: { warLayerEnabled: true } };
-    const campaign = { id: 'r', name: 'R', settlementIds: ['atlas'], worldState, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 101, entries: [] } };
+    const campaign = { id: 'r', name: 'R', settlementIds: ['atlas', 'carth'], worldState, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 101, entries: [] } };
     const snapshot = buildWorldSnapshot({ campaign, saves, worldState });
     const returns = deploymentReturnOutcomes({
       resolvedDeployments: [{ attackerId: 'atlas', targetId: 'borin', outcome: 'withdrawal', deployment: record }],
@@ -162,12 +164,17 @@ describe('population conserved across levy + homecoming under warLevyEnabled wit
     });
     const hc = returns.find(o => o.candidateType === 'army_homecoming');
     expect(hc).toBeTruthy();
-    const survivors = hc.populationDeltas.find(d => d.saveId === 'atlas').delta;
-    // CONSERVATION: everything debited is accounted — survivors come home, the rest
-    // are the war dead (the only sink). Nothing is stranded in a stripped bank.
-    expect(survivors).toBeGreaterThan(0);
-    expect(survivors + hc.metadata.fell).toBe(levied);
-    expect(survivors).toBeLessThanOrEqual(levied);
+    // CONSERVATION: everything debited is accounted — survivors come home, the rest are
+    // the war dead (the only sink). Nothing is stranded in a stripped bank.
+    const totalSurvivors = hc.populationDeltas.reduce((sum, d) => sum + d.delta, 0);
+    expect(totalSurvivors).toBeGreaterThan(0);
+    expect(totalSurvivors + hc.metadata.fell).toBe(levied);
+    expect(totalSurvivors).toBeLessThanOrEqual(levied);
+    // PER-SETTLEMENT conservation (the fixed pump): the whole bank was levied from carth
+    // (no overlord conscription under warLevyEnabled-without-drain), so every survivor
+    // returns to CARTH — never pumped home to the overlord atlas.
+    expect(hc.populationDeltas.find(d => d.saveId === 'carth')?.delta).toBe(totalSurvivors);
+    expect(hc.populationDeltas.find(d => d.saveId === 'atlas')).toBeUndefined();
   });
 });
 

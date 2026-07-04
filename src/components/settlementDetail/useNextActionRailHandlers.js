@@ -43,6 +43,7 @@ function scrollFocusWhenReady(selector) {
  * @param {string|null} deps.saveId
  * @param {string} deps.phase
  * @param {boolean} deps.canEdit
+ * @param {boolean} deps.canNarrate - may run the paid narrate/regenerate action (signed-in owner; not premium-gated)
  * @param {boolean} deps.editMode
  * @param {boolean} deps.narrated
  * @param {() => void} deps.toggleEditMode
@@ -52,7 +53,7 @@ function scrollFocusWhenReady(selector) {
  * @returns {{ railHandlers: Object, requestCanonize: () => void, confirmCanonize: () => void }}
  */
 export function useNextActionRailHandlers({
-  saveId, phase, canEdit, editMode, narrated,
+  saveId, phase, canEdit, canNarrate, editMode, narrated,
   toggleEditMode, canonize, setConfirmCanonizeOpen, openExportSheet,
 }) {
   // Shared canonize commit — the ONE place the persisted draft→canon transition
@@ -97,10 +98,13 @@ export function useNextActionRailHandlers({
   const railHandlers = {
     onCanonize: (canEdit && phase !== 'canon') ? requestCanonize : undefined,
     onApplyEvent: canEdit ? enterEditAndComposeEvent : undefined,
-    onPolishAi: (canEdit && !narrated) ? polishWithAi : undefined,
+    // Narration (first-narrate + regenerate) rides `canNarrate`, NOT `canEdit`:
+    // it is a paid, edit-mode-free action, so a signed-in free owner sees it too
+    // (the runNarrate pricing moment handles credits / the purchase prompt).
+    onPolishAi: (canNarrate && !narrated) ? polishWithAi : undefined,
     // Regenerate is the same paid invocation as the first narrate; the rail wraps
     // it in a discard-confirm (NextActionRail owns that dialog) before firing.
-    onRegenerateAi: (canEdit && narrated) ? runNarrate : undefined,
+    onRegenerateAi: (canNarrate && narrated) ? runNarrate : undefined,
     onExport: openExportSheet,
     onPlaceOnMap: () => navigate('realm'),
     onEdit: canEdit ? toggleEditMode : undefined,

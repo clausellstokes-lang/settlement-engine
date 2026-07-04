@@ -8,17 +8,26 @@
  *   2. stripProps drops >64-char prose at ANY depth — the old top-level-only
  *      filter let nested `{ note: { text: '…prose…' } }` land verbatim in
  *      analytics_events.props on this anonymous, no-JWT endpoint.
+ *   3. The rate limiter fails CLOSED: an RPC error from `ingest_check_rate`
+ *      (data null/undefined + a non-null error) must yield 429 with ZERO
+ *      service-role writes, not sail through as "under rate" and upsert.
  *
  * Deno test (runs under the `deno-tests` CI job / `deno task test:edge`, NOT
  * vitest). The 413 path returns BEFORE any Supabase client work, so a stub URL
- * + key satisfy the config gate without network.
+ * + key satisfy the config gate without network. The limiter test injects a
+ * recording admin stub via the `__setSupabaseFactory` seam so it never touches
+ * the network either.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 
 Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
 Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 
-const { handleIngestEvents, stripProps } = await import('./index.ts');
+// A device token needs a pepper to resolve a device key (and thus a rate key);
+// set one so the limiter runs against `d:<hash>` rather than the ip fallback.
+Deno.env.set('ANALYTICS_HASH_PEPPER', 'test-pepper');
+
+const { handleIngestEvents, stripProps, __setSupabaseFactory } = await import('./index.ts');
 
 const UA = { 'user-agent': 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', 'content-type': 'application/json' };
 
@@ -66,6 +75,106 @@ Deno.test('stripProps drops long strings at any nesting depth, keeps short/scala
     nested: { keep: 'fine', deeper: { count: 3 } },
     arr: ['kept', 7, { tag: 'ok' }],
   });
+});
+
+/**
+ * Recording admin stub: device-link reads resolve to an existing actor (so no
+ * insert is attempted), `ingest_check_rate` returns whatever the test dictates,
+ * and every `.upsert` (the service-role writes) is recorded so the test can
+ * assert none happened when the limiter fails closed.
+ */
+function makeLimiterAdmin(rate: { data?: unknown; error?: { message: string } | null }) {
+  const upserts: string[] = [];
+  // deno-lint-ignore no-explicit-any
+  const table = (name: string): any => ({
+    // deno-lint-ignore no-explicit-any
+    select: (): any => ({
+      // deno-lint-ignore no-explicit-any
+      eq: (): any => ({
+        maybeSingle: () =>
+          Promise.resolve(
+            name === 'analytics_device_links'
+              ? { data: { actor_id: '11111111-1111-1111-1111-111111111111' }, error: null }
+              : { data: null, error: null },
+          ),
+      }),
+    }),
+    upsert: () => {
+      upserts.push(name);
+      return Promise.resolve({ data: null, error: null });
+    },
+    insert: () => {
+      upserts.push(`${name}:insert`);
+      return Promise.resolve({ data: null, error: null });
+    },
+  });
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (name: string) => table(name),
+    rpc: (fn: string) =>
+      fn === 'ingest_check_rate'
+        ? Promise.resolve({ data: rate.data ?? null, error: rate.error ?? null })
+        : Promise.resolve({ data: null, error: null }),
+    auth: { getUser: () => Promise.resolve({ data: { user: null } }) },
+  };
+  return { client, upserts };
+}
+
+Deno.test('rate limiter fails CLOSED: an RPC error yields 429 with zero writes', async () => {
+  const admin = makeLimiterAdmin({ error: { message: 'ingest_check_rate exploded' } });
+  __setSupabaseFactory(() => admin.client);
+  try {
+    const body = JSON.stringify({
+      deviceToken: 'dev-abc',
+      events: [{ event: 'homepage_view', seq: 0 }],
+    });
+    const res = await handleIngestEvents(
+      new Request('https://edge/ingest-events', { method: 'POST', headers: UA, body }),
+    );
+    assertEquals(res.status, 429);
+    const payload = await res.json();
+    assertEquals(payload.error, 'rate_limited');
+    // The whole point: no service-role upsert/insert ran after the limiter error.
+    assertEquals(admin.upserts, []);
+  } finally {
+    __setSupabaseFactory(null);
+  }
+});
+
+Deno.test('rate limiter fails CLOSED: underRate=false yields 429 with zero writes', async () => {
+  const admin = makeLimiterAdmin({ data: false });
+  __setSupabaseFactory(() => admin.client);
+  try {
+    const body = JSON.stringify({
+      deviceToken: 'dev-abc',
+      events: [{ event: 'homepage_view', seq: 0 }],
+    });
+    const res = await handleIngestEvents(
+      new Request('https://edge/ingest-events', { method: 'POST', headers: UA, body }),
+    );
+    assertEquals(res.status, 429);
+    assertEquals(admin.upserts, []);
+  } finally {
+    __setSupabaseFactory(null);
+  }
+});
+
+Deno.test('rate limiter admits when underRate=true (control): not a 429', async () => {
+  const admin = makeLimiterAdmin({ data: true });
+  __setSupabaseFactory(() => admin.client);
+  try {
+    const body = JSON.stringify({
+      deviceToken: 'dev-abc',
+      events: [{ event: 'homepage_view', seq: 0 }],
+    });
+    const res = await handleIngestEvents(
+      new Request('https://edge/ingest-events', { method: 'POST', headers: UA, body }),
+    );
+    assertEquals(res.status !== 429, true);
+    await res.body?.cancel();
+  } finally {
+    __setSupabaseFactory(null);
+  }
 });
 
 Deno.test('stripProps bounds recursion depth and rejects non-object roots', () => {

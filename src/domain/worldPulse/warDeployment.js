@@ -1576,7 +1576,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           generatedAtTick: tick,
           tick,
           headline: `${name} conscripts for the front`,
-          summary: `${name} sends ${sent.toLocaleString()} more to the army besieging ${targetName}.`,
+          // en-US pinned (as deploymentReturn/populationDynamics do): this summary
+          // persists into wizardNews/chronicle, so a bare toLocaleString() would emit
+          // locale-divergent bytes for the same seed and break golden byte-identity.
+          summary: `${name} sends ${sent.toLocaleString('en-US')} more to the army besieging ${targetName}.`,
           populationDeltas: [{ saveId: fromId, delta: -sent, reason: `${name} conscripts men for the campaign against ${targetName}.` }],
           metadata: { warEconomy: 'conscription', armyId: fromId, sent },
         });
@@ -1637,11 +1640,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       if (totalLevied > 0) {
         const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
         // Bank the per-vassal headcount alongside the aggregate deployedPopulation.
-        // deploymentReturn currently credits ALL survivors to the overlord's home —
-        // conserved in total but silently redistributive (a one-way population pump
-        // from vassals to overlord). This per-source ledger is the seam that lets the
-        // homecoming credit each vassal's surviving men back to the VASSAL; it rides
-        // the same flag-gated record (flag-off worlds never bank ⇒ byte-identical).
+        // deploymentReturnOutcomes READS this ledger to apportion the returning survivors
+        // back to each contributor — the overlord's conscript share to the overlord, each
+        // vassal's levied share to that vassal — so per-settlement population conserves
+        // instead of pumping one-way from vassals to overlord. It rides the same flag-gated
+        // record (flag-off worlds never bank ⇒ byte-identical).
         /** @type {Record<string, number>} */
         const bankedBySource = { ...(/** @type {any} */ (deployments[fromId]).leviedPopulationBySource || {}) };
         for (const [srcId, count] of Object.entries(leviedBySource)) {
@@ -1661,7 +1664,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           generatedAtTick: tick,
           tick,
           headline: `${name} calls up its vassals`,
-          summary: `${name} levies ${totalLevied.toLocaleString()} men and grain from its vassals and allies for the war against ${targetName}.`,
+          // en-US pinned: persists into wizardNews/chronicle (see the conscription
+          // summary above for the byte-identity rationale).
+          summary: `${name} levies ${totalLevied.toLocaleString('en-US')} men and grain from its vassals and allies for the war against ${targetName}.`,
           ...(levyPopDeltas.length ? { populationDeltas: levyPopDeltas } : {}),
           ...(levyFoodDeltas.length ? { foodStockpileDeltas: levyFoodDeltas } : {}),
           metadata: { warEconomy: 'levy', armyId: fromId, levied: totalLevied },

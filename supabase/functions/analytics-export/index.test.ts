@@ -15,7 +15,7 @@ Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
 Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 Deno.env.set('EXPORT_SHARED_SECRET', 'sekrit');
 
-const { handleAnalyticsExport } = await import('./index.ts');
+const { handleAnalyticsExport, secretsMatch } = await import('./index.ts');
 
 type TableResult = { data?: unknown; error?: { message: string } | null };
 
@@ -70,6 +70,33 @@ const req = () =>
     method: 'POST',
     headers: { 'x-export-secret': 'sekrit', 'user-agent': 'pg_net/0.7' },
   });
+
+Deno.test('secretsMatch is a correct constant-time equality (matches only the exact secret)', () => {
+  assertEquals(secretsMatch('sekrit', 'sekrit'), true);
+  assertEquals(secretsMatch('sekrit', 'sekrix'), false); // same length, last byte differs
+  assertEquals(secretsMatch('sekrit', 'sekri'), false); // prefix / shorter
+  assertEquals(secretsMatch('sekrit', 'sekritt'), false); // superset / longer
+  assertEquals(secretsMatch('', ''), true);
+  assertEquals(secretsMatch('', 'sekrit'), false);
+  assertEquals(secretsMatch('sekrit', ''), false);
+  // Multibyte: encoding is byte-wise, so identical multibyte strings still match.
+  assertEquals(secretsMatch('sé€kret', 'sé€kret'), true);
+  assertEquals(secretsMatch('sé€kret', 'sé€krex'), false);
+});
+
+Deno.test('a wrong x-export-secret is rejected 403 (fail-closed gate still holds)', async () => {
+  const admin = makeAdmin({ snapshots: { data: [] }, edits: { data: [] } });
+  const res = await handleAnalyticsExport(
+    new Request('https://edge/analytics-export', {
+      method: 'POST',
+      headers: { 'x-export-secret': 'wrong', 'user-agent': 'pg_net/0.7' },
+    }),
+    { adminClient: () => admin.client },
+  );
+  assertEquals(res.status, 403);
+  const body = await res.json();
+  assertEquals(body.error, 'forbidden');
+});
 
 Deno.test('a failing research view is a FAILED run (ok:false, 500), not a quiet month', async () => {
   const admin = makeAdmin({

@@ -243,6 +243,67 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       const survivors = Math.min(deployedPopulation, Math.round(deployedPopulation * ratio));
       if (survivors > 0) {
         const fell = deployedPopulation - survivors;
+
+        // ── PER-SOURCE HOMECOMING (war-levy per-settlement conservation). The banked
+        // deployedPopulation is the overlord's OWN conscripts PLUS every vassal's levied
+        // men (deployment.leviedPopulationBySource). Crediting all survivors to the
+        // overlord conserves the WORLD total but silently pumps population from vassals to
+        // the overlord over a long war. Instead, apportion the survivors back to each
+        // contributor in proportion to what it banked — the overlord's conscript share to
+        // the overlord, each vassal's share to that vassal — via largest-remainder rounding
+        // so the integer credits sum EXACTLY to `survivors` (per-settlement AND world
+        // conservation both hold; `fell` remains the sole sink). A conscription-only army
+        // (empty levy bank) collapses to a single credit to homeId, byte-identical to the
+        // pre-split behavior. Flag-off worlds never bank ⇒ this branch never runs.
+        const bankedBySource = /** @type {Record<string, number>} */ (
+          record.deployment?.leviedPopulationBySource || {}
+        );
+        let leviedTotal = 0;
+        /** @type {{ saveId: string, banked: number, name: string }[]} */
+        const recipients = [];
+        for (const srcId of Object.keys(bankedBySource).sort(codepoint)) {
+          const banked = Math.max(0, Math.round(Number(bankedBySource[srcId]) || 0));
+          if (banked <= 0) continue;
+          leviedTotal += banked;
+          const srcItem = snapshot?.byId?.get?.(srcId);
+          recipients.unshift({
+            saveId: String(srcId),
+            banked,
+            name: srcItem?.name || srcItem?.settlement?.name || String(srcId),
+          });
+        }
+        // The overlord's own conscript headcount is whatever wasn't levied. Prepended so a
+        // no-levy army yields exactly one recipient (homeId), preserving the old output.
+        const conscripted = Math.max(0, deployedPopulation - leviedTotal);
+        recipients.unshift({ saveId: homeId, banked: conscripted, name: homeName });
+
+        const totalBanked = recipients.reduce((sum, r) => sum + r.banked, 0) || 1;
+        const shares = recipients.map((r) => {
+          const exact = (survivors * r.banked) / totalBanked;
+          const floor = Math.floor(exact);
+          return { ...r, alloc: floor, remainder: exact - floor };
+        });
+        let allocated = shares.reduce((sum, s) => sum + s.alloc, 0);
+        // Hand the rounding leftover to the largest remainders (codepoint tie-break) so
+        // the per-recipient credits sum to exactly `survivors` — deterministically.
+        const byRemainder = [...shares].sort(
+          (a, b) => (b.remainder - a.remainder) || codepoint(a.saveId, b.saveId),
+        );
+        for (let i = 0; allocated < survivors && i < byRemainder.length; i += 1, allocated += 1) {
+          byRemainder[i].alloc += 1;
+        }
+
+        const populationDeltas = shares
+          .filter((s) => s.alloc > 0)
+          .map((s) => ({
+            saveId: s.saveId,
+            delta: s.alloc,
+            reason: s.saveId === homeId
+              ? `${homeName}'s surviving soldiers return home.`
+              : `${s.name}'s surviving levies return home from ${homeName}'s war.`,
+          }));
+        const dispersedToVassals = populationDeltas.some((d) => d.saveId !== homeId);
+
         outcomes.push({
           id: `world_outcome.army_homecoming.${stablePart(homeId)}.${tick}`,
           candidateType: 'army_homecoming',
@@ -253,8 +314,10 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           // Locale pinned to 'en-US' (as populationDynamics does): this summary
           // persists into wizardNews/chronicle records, so a bare toLocaleString()
           // would make the same seed produce different bytes across runner locales.
-          summary: `${survivors.toLocaleString('en-US')} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`,
-          populationDeltas: [{ saveId: homeId, delta: survivors, reason: `${homeName}'s surviving soldiers return home.` }],
+          summary: dispersedToVassals
+            ? `${survivors.toLocaleString('en-US')} of ${homeName}'s host disperse to their homes${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`
+            : `${survivors.toLocaleString('en-US')} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`,
+          populationDeltas,
           metadata: { warEconomy: 'homecoming', armyId: homeId, survivors, fell, deployedPopulation },
         });
       }

@@ -17,6 +17,43 @@ import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { SERVICE_TIER_CHANCE } from './serviceTierData.js';
 
+// Tags that denote a pure physical structure with no purchasable service of
+// its own (a well, dwellings, farmland, a pasture, a sewer). `essential` is a
+// criticality MODIFIER, not a service axis, so it is ignored when deciding
+// whether an institution is purely structural.
+const _STRUCTURAL_TAGS = new Set(['housing', 'water', 'agriculture', 'sanitation']);
+const _STRUCTURAL_TAG_MODIFIERS = new Set(['essential']);
+
+/**
+ * True when an institution is a pure physical structure that should surface NO
+ * services: it has no dedicated INSTITUTION_SERVICES map keyed to its exact
+ * name AND every one of its (non-modifier) tags is structural. Such entries
+ * would otherwise fall through to the fuzzy fallback and be forced to advertise
+ * an unrelated service (a Water source offering "Lodging", a "Sewage system"
+ * offering piped water). An entry that carries any service-bearing tag, or that
+ * DOES have an exact service map (an Aqueduct, a Courthouse), is not structural
+ * and resolves normally.
+ *
+ * @param {{ name?: string, tags?: string[] }} institution
+ * @returns {boolean}
+ */
+export function isPureStructuralInstitution(institution) {
+  const tags = Array.isArray(institution?.tags) ? institution.tags : [];
+  const meaningful = tags
+    .map((t) => String(t).toLowerCase())
+    .filter((t) => !_STRUCTURAL_TAG_MODIFIERS.has(t));
+  // No tags at all is not enough to call it structural — many service-bearing
+  // civic entries carry an empty tag list; leave those to normal resolution.
+  if (meaningful.length === 0) return false;
+  if (!meaningful.every((t) => _STRUCTURAL_TAGS.has(t))) return false;
+  // A dedicated exact service map wins over the structural classification.
+  const name = String(institution?.name || '');
+  const hasExactMap = Object.keys(INSTITUTION_SERVICES).some(
+    (k) => k.toLowerCase() === name.toLowerCase(),
+  );
+  return !hasExactMap;
+}
+
 // getServiceTierInfo
 export const getServiceTierInfo = (serviceName, institutionName, settlement = {}, institutions = []) => {
     getPriorities(settlement);
@@ -180,7 +217,13 @@ export const getServicesForInstitution = (institutionName, tier, overrides = {})
         normBest = bestScore / (bestTokenCount * 2);
       (score > bestScore || (score === bestScore && score > 0 && normScore > normBest)) && ((bestScore = score), (bestKey = candidate));
     }
-    resolvedKey = bestScore > 0 ? bestKey : null;
+    // Confidence gate: a score of 1 is a lone PREFIX overlap (no shared whole
+    // token) — the flimsiest possible signal, and empirically always a wrong
+    // hit (a "Fishing community" landing on "Fish market", a "Caravanserai" on
+    // "Caravan masters' exchange"). Require at least one full shared token
+    // (score ≥ 2) before force-mapping an institution to a foreign service map;
+    // below that, surface no services rather than an unrelated one.
+    resolvedKey = bestScore >= 2 ? bestKey : null;
   }
   if (!resolvedKey) {
     // No prebuilt service mapping, but custom institution may declare its own.

@@ -1,15 +1,28 @@
 /**
  * tests/edgeFunctions/contracts.test.js — Tier 3.3 comprehensive contract tests.
  *
- * Edge functions live in supabase/functions/<name>/index.ts. They use
- * Deno-specific APIs and esm.sh imports that vitest cannot import
- * directly. Full runtime integration tests (calling the real handler
- * against a Postgres test instance) require a parallel Deno test
- * runner — a separate infrastructure decision.
+ * ── STRUCTURAL COMPLEMENT, NOT A SUBSTITUTE ──────────────────────────────
+ * This vitest file greps the Deno/TypeScript edge sources rather than running
+ * them: edge functions live in supabase/functions/<name>/index.ts, use
+ * Deno-specific APIs + esm.sh URL imports, and CANNOT be imported into vitest.
+ * It is a DELIBERATE COMPLEMENT to — never a replacement for — the EXECUTING
+ * Deno suite that runs the real handlers:
  *
- * This file is the next-best layer of defence: STATIC SOURCE
- * INSPECTION that catches the regressions that cost real money or
- * leak data:
+ *   • Executed by `deno task test:edge` (see deno.json) in CI's `deno-tests`
+ *     job (.github/workflows/ci.yml).
+ *   • Those *.test.ts suites RUN the money-path trust boundaries against
+ *     forged vs. signed requests — e.g. supabase/functions/stripe-webhook/
+ *     index.test.ts (forged webhook → 400, zero DB writes) and
+ *     generate-narrative/refundPolicy.test.ts (refund decision). Behavior a
+ *     regex-over-source contract can only *approximate*, they *prove*.
+ *
+ * The two layers are load-bearing together: the `bothLayersPresent` meta-test
+ * below fails if the executing Deno complement is ever deleted, so this grep
+ * file can never be silently left as the *only* coverage.
+ *
+ * What THIS layer is the next-best (and always-run, since `deno-tests` is not
+ * yet a REQUIRED status check) defence for — the regressions that cost real
+ * money or leak data:
  *
  *   • Missing env var → 500s at runtime
  *   • Missing signature verification → arbitrary writes from anyone
@@ -60,6 +73,47 @@ function readMigrations() {
 function readMigration(name) {
   return readFileSync(join(MIGRATIONS_DIR, name), 'utf8');
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Meta — this grep layer must never be the ONLY edge coverage
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('edge contracts are a complement to the executing Deno suite', () => {
+  // These structural greps are the always-run half of a two-layer defence; the
+  // other half EXECUTES the handlers under Deno (deno.json `test:edge`, CI's
+  // `deno-tests` job). If someone deletes the executing suite for a money-path
+  // function, this file would silently become the only coverage — a regression
+  // from "behavior proven" to "source shape asserted". Pin the complement's
+  // existence so that can't happen unnoticed.
+  const MONEY_PATH_DENO_SUITES = [
+    join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'create-checkout', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'verify-single-dossier', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'generate-narrative', 'refundPolicy.test.ts'),
+  ];
+
+  for (const suite of MONEY_PATH_DENO_SUITES) {
+    it(`executing Deno suite present: ${suite.replace(ROOT + '/', '')}`, () => {
+      expect(
+        existsSync(suite),
+        `Missing executing Deno test ${suite} — the grep contracts in this ` +
+          'file are a COMPLEMENT, not a substitute. Restore the *.test.ts suite ' +
+          '(runs under `deno task test:edge` in the deno-tests CI job).',
+      ).toBe(true);
+    });
+  }
+
+  it('the executing suites actually invoke a handler (not empty stubs)', () => {
+    // A one-line grep that the trust-boundary suite EXECUTES the handler — so an
+    // emptied-out .test.ts that still exists on disk can't satisfy the presence
+    // check above while covering nothing. Deno test files call `Deno.test(...)`.
+    const webhookSuite = readFileSync(
+      join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
+      'utf8',
+    );
+    expect(webhookSuite).toMatch(/Deno\.test\s*\(/);
+  });
+});
 
 // ─────────────────────────────────────────────────────────────────────────
 // stripe-webhook

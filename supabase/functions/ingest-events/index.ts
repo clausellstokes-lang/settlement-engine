@@ -19,6 +19,16 @@ const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 const PEPPER = Deno.env.get('ANALYTICS_HASH_PEPPER') || '';
 
+// Test seam: production always uses the real createClient. A test may swap in a
+// recording admin stub so the branch-level behaviour (e.g. the fail-closed rate
+// limiter) can be exercised without network. Inert unless explicitly set.
+// deno-lint-ignore no-explicit-any
+type AdminFactory = (url: string, key: string) => any;
+let adminFactory: AdminFactory = createClient;
+export function __setSupabaseFactory(fn: AdminFactory | null): void {
+  adminFactory = fn ?? createClient;
+}
+
 const KNOWN_EVENTS = new Set(Object.values(EVENTS));
 const RESEARCH_NAMES = new Set(
   Object.entries(EVENTS).filter(([k]) => EVENT_CLASS[k] === 'research').map(([, v]) => v),
@@ -137,7 +147,7 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
     return json({ error: 'invalid_json' }, 400, headers);
   }
 
-  const admin = createClient(SUPABASE_URL, SERVICE_KEY);
+  const admin = adminFactory(SUPABASE_URL, SERVICE_KEY);
   const meta = readRequestMeta(req);
 
   // ── Resolve actor (JWT → identity link, adopting device actor; else device) ──
@@ -168,8 +178,12 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
 
   // ── Rate limit (per actor / device / ip) ────────────────────────────────────
   const rateKey = actorId ? `u:${actorId}` : (deviceKey ? `d:${deviceKey}` : `ip:${meta.ip}`);
-  const { data: underRate } = await admin.rpc('ingest_check_rate', { p_key: rateKey });
-  if (underRate === false) return json({ error: 'rate_limited' }, 429, headers);
+  // Fail CLOSED (mirrors account-actions / log-client-error): a null/undefined
+  // result from an RPC error must NOT sail through as "under rate" on this
+  // anonymous verify_jwt=false, service-role-writing path. Only a definite
+  // `underRate === true` may proceed; anything else (false OR an error) is 429.
+  const { data: underRate, error: rateErr } = await admin.rpc('ingest_check_rate', { p_key: rateKey });
+  if (rateErr || underRate === false) return json({ error: 'rate_limited' }, 429, headers);
 
   const batchId = uuidOrNull(body.batchId) || crypto.randomUUID();
   const sessionId = uuidOrNull(body.sessionId);

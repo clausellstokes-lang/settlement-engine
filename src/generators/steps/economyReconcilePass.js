@@ -87,6 +87,16 @@ registerStep('economyReconcilePass', {
   } = ctx;
 
   // ── 1. Re-derive the economy when the roster changed after step 9 ───────
+  // INTENTIONAL asymmetry, do NOT "fix" it: we re-derive economicState from the
+  // final roster here, but powerStructure.factions (produced by generatePower
+  // off the PROVISIONAL economy) is deliberately left one iteration stale. This
+  // is a damped single-iteration fixpoint of the
+  // institutions → economy → factions → institutions loop. Feeding the
+  // re-derived economy back into a second power pass would re-open that loop
+  // (faction powers shift the roster, which shifts the economy, which shifts
+  // powers…) with no guaranteed convergence, and would break both the coherence
+  // design and the generator golden master. The one-iteration lag is the
+  // accepted, bounded cost of cutting the cycle. See this file's header.
   let economicState = ctx.economicState;
   if (ctx._rosterChangedAfterEconomy) {
     economicState = computeEconomyState(ctx);

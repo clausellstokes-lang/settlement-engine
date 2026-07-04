@@ -196,6 +196,13 @@ export default function SettlementDetail({
   const authTier             = useStore(s => s.auth?.tier);
   const isElevated           = useStore(s => typeof s.isElevated === 'function' ? s.isElevated() : false);
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
+  // Narration is a PAID action, not an edit-permission one: it spends a credit
+  // (or opens the purchase moment for a non-premium user) and never enters edit
+  // mode. So it belongs to any SIGNED-IN owner of a saved settlement — a free
+  // account can narrate with its credits — decoupled from the premium `canEdit`
+  // gate that governs manual editing / canonize. Anon has no JWT for the AI edge
+  // call, so it stays gated to free-and-up.
+  const canNarrate           = !!saveId && authTier != null && authTier !== 'anon';
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
   // PDF export ladder (108). This is the owner's SAVED view, so a durable right
@@ -415,7 +422,7 @@ export default function SettlementDetail({
   // gate (BLOCKER #3) and the event/AI rungs through enter-edit + scroll-focus
   // (MAJOR #8).
   const { railHandlers, requestCanonize, confirmCanonize } = useNextActionRailHandlers({
-    saveId, phase, canEdit, editMode, narrated,
+    saveId, phase, canEdit, canNarrate, editMode, narrated,
     toggleEditMode, canonize, setConfirmCanonizeOpen,
     openExportSheet: () => { setPdfError(null); setExportSheetOpen(true); },
   });

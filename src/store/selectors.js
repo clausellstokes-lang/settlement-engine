@@ -33,7 +33,9 @@ export function resolveDisplayTier(config) {
     }
     return 'thorp';
   }
-  if (!t || t === 'random' || t === 'custom') return 'all';
+  // NOTE: t === 'custom' is handled by the early return above, so it can never
+  // reach here — the branch only needs to catch the falsy/random cases.
+  if (!t || t === 'random') return 'all';
   return t;
 }
 

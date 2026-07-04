@@ -330,14 +330,31 @@ export function buildDossierEntityIndex(settlement = {}) {
     decorateEntry('npc', { ...entityLink('npc', npc), traits: normalizeNpcTraits(npc) }, npc));
 
   const factions = (settlement.powerStructure?.factions || settlement.factions || []).map((/** @type {any} */ faction) => {
+    const displayName = faction.faction || faction.name || faction.label;
     const base = {
       ...entityLink('faction', faction, faction.faction),
-      label: faction.faction || faction.name || faction.label || 'Faction',
+      label: displayName || 'Faction',
     };
     // IDENTITY must be the canonical snake id (== npc.factionLink), not the
     // hyphen anchor slug entityLink derives. Override it here.
-    base.id = factionIdFromName(faction.faction || faction.name || faction.label) || base.id;
-    return decorateEntry('faction', base, faction);
+    base.id = factionIdFromName(displayName) || base.id;
+    // RENAME-TOLERANCE SEAM: the name-derived id above is the primary key every
+    // current consumer (npcProfile.factionLink, factionProfile, the PDF
+    // viewModel, and every EntityLink id={factionIdFromName(name)} call site)
+    // still computes from the display name — so it MUST remain the primary id.
+    // But a name-derived id breaks on rename. When a faction carries a STABLE,
+    // rename-decoupled `faction.id` (which the id-scheme migration will backfill;
+    // see flaggedForMainLoop), register the entry under that id too so a link
+    // that already holds the stable id resolves without name-matching. Aliasing
+    // (rather than replacing the primary) keeps every legacy link working while
+    // the stable id becomes resolvable — the minimum-safe enforcement of the
+    // "name is immutable" invariant this cluster can land without touching the
+    // ~15 cross-file consumers.
+    const entry = decorateEntry('faction', base, faction);
+    if (typeof faction.id === 'string' && faction.id && faction.id !== base.id) {
+      entry.aliasIds = [faction.id];
+    }
+    return entry;
   });
 
   const institutions = (settlement.institutions || []).map((/** @type {any} */ inst) =>
@@ -453,6 +470,17 @@ export function buildDossierEntityIndex(settlement = {}) {
   const byId = new Map();
   for (const entry of all) {
     if (entry.id && !byId.has(entry.id)) byId.set(entry.id, entry);
+  }
+  // Register alias ids AFTER every primary id so a primary always wins a shared
+  // key. Today only factions carry an `aliasIds` (their stable rename-decoupled
+  // id, in addition to the name-derived primary) — this is what lets a link that
+  // holds the stable id resolve to the same card the name-derived link hits.
+  for (const entry of all) {
+    const aliases = /** @type {any} */ (entry).aliasIds;
+    if (!Array.isArray(aliases)) continue;
+    for (const aliasId of aliases) {
+      if (aliasId && !byId.has(aliasId)) byId.set(aliasId, entry);
+    }
   }
 
   return {
