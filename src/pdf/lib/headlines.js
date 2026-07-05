@@ -55,11 +55,12 @@ export function powerHeadline(power, _identity) {
   // reads were always undefined so the headline never named the governing body.
   if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
-  if (challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    // A continuation clause weaves onto the lead with a comma.
+  // The ', with …' continuation weaves onto a LEAD clause — only add it when a lead
+  // exists, or a nameless governing faction with no governmentType (no lead pushed)
+  // would make the comma clause the first and only element, opening the headline on a comma.
+  if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
     bits.push(`, with ${challenger.name} pressing close behind`);
-  } else if (factions.length > 2) {
-    // An independent clause stands as its own sentence.
+  } else if (bits.length && factions.length > 2) {
     bits.push(`, with ${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
   }
   if (!bits.length) return null;
