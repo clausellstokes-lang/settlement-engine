@@ -111,6 +111,29 @@ describe('occupation_lifted polarity: liberation is a LIFT, not a pressure', () 
     expect(v.contributors.some(x => x.effect === 'restored')).toBe(true);
   });
 
+  it('raises food_security when a recovery condition declares it (was: taxed it)', () => {
+    // The siege_lifted template declares food_security among its affectedSystems,
+    // and deriveFoodSecurity had no conditionDirection() gate — so a just-relieved
+    // siege read as a food PRESSURE (-) and narrated the supply as worsening.
+    const cond = [{ archetype: 'siege_lifted', severity: 0.3, affectedSystems: ['food_security'] }];
+    const base = deriveSystemVariable('food_security', town());
+    const v = deriveSystemVariable('food_security', town({ activeConditions: cond }));
+    expect(v.score).toBeGreaterThan(base.score);
+    const c = v.contributors.find(x => String(x.source).includes('siege_lifted'));
+    expect(c.delta).toBeGreaterThan(0);
+    expect(c.effect).toBe('lift');
+  });
+
+  it('raises trade_connectivity when a recovery condition declares it (was: cut it)', () => {
+    const cond = [{ archetype: 'occupation_lifted', severity: 0.3, affectedSystems: ['trade_connectivity'] }];
+    const base = deriveSystemVariable('trade_connectivity', town());
+    const v = deriveSystemVariable('trade_connectivity', town({ activeConditions: cond }));
+    expect(v.score).toBeGreaterThan(base.score);
+    const c = v.contributors.find(x => String(x.source).includes('occupation_lifted'));
+    expect(c.delta).toBeGreaterThan(0);
+    expect(c.effect).toBe('restored');
+  });
+
   it('siege_lifted stays positive and pressure conditions stay negative', () => {
     const siege = deriveSystemVariable('defense_readiness',
       town({ defenseProfile: profile([]), activeConditions: [{ archetype: 'siege_lifted', severity: 0.3 }] }));

@@ -295,13 +295,13 @@ function deriveFoodSecurity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions that affect food_security
+  // Recovery archetypes (siege_lifted/occupation_lifted) LIFT — gate sign on conditionDirection().
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('food_security')) continue;
-    const magnitude = Math.round(cond.severity * 20);
+    const magnitude = Math.round(cond.severity * 20) * conditionDirection(cond);
     if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'pressure', -magnitude, `${cond.label} taxes food security.`);
+    score += magnitude;
+    push(contributors, cond.id, magnitude > 0 ? 'lift' : 'pressure', magnitude, `${cond.label} ${magnitude > 0 ? 'restores' : 'taxes'} food security.`);
   }
 
   // Generator food band, via the conserved ledger. The old code read
@@ -521,12 +521,12 @@ function deriveTradeConnectivity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions
+  // A lifted siege/occupation REOPENS routes — gate sign on conditionDirection() (not a 'cut').
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('trade_connectivity')) continue;
-    const magnitude = Math.round(cond.severity * 18);
-    score -= magnitude;
-    push(contributors, cond.id, 'cut', -magnitude, `${cond.label} disrupts trade flows.`);
+    const magnitude = Math.round(cond.severity * 18) * conditionDirection(cond);
+    score += magnitude;
+    push(contributors, cond.id, magnitude > 0 ? 'restored' : 'cut', magnitude, `${cond.label} ${magnitude > 0 ? 'reopens' : 'disrupts'} trade flows.`);
   }
 
   return { score, contributors };
