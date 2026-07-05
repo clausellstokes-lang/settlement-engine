@@ -22,6 +22,7 @@
 
 import { random as _rng } from './rngContext.js';
 import { pick, pickRandom2, random01 } from './helpers.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 
 import {
   ARRIVAL_SCENES,
@@ -325,25 +326,7 @@ const genSettSummary = settlement => {
   } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const factions = powerStructure.factions || [];
   const govFaction =
@@ -440,25 +423,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
   const commodity = economicContext?.tradeCommodity || null;
   const prosperity = economicContext?.prosperity || 'Moderate';
   const stresses = config?.stressTypes?.length ? config.stressTypes : config?.stressType ? [config.stressType] : [];
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const tier = config?.tier || config?.settType || 'town';
 
@@ -674,25 +639,7 @@ const genPressureDetail = settlement => {
   const hasInst = kw => instNames.some(n => n.includes(kw));
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const commodity = (() => {
     const exp = economicState?.primaryExports?.[0] || '';
@@ -1078,25 +1025,7 @@ export const generateArrivalScene = settlement => {
   const { name, tier, config = {}, institutions = [], stress } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const culture = config.culture || 'germanic';
   const magicPriority = config.priorityMagic ?? 50;

@@ -48,6 +48,7 @@ import {
 } from './capacityModel.js';
 import { deriveAllDistricts } from './districtProfile.js';
 
+import { snakeCase } from './ids.js';
 // ── Type catalog ─────────────────────────────────────────────────────────
 
 /**
@@ -1135,9 +1136,6 @@ export function relatedTraces(settlement, entityId) {
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {any} status */
 function nextWorseStatus(status) {

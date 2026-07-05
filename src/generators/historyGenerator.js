@@ -9,6 +9,7 @@
  */
 
 import { getInstFlags, getStressFlags, pick, randInt } from './helpers.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 import { random as _rng } from './rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
@@ -389,25 +390,7 @@ const buildHistoricalEvent = (
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   // Resolve faction names for text substitution
   const govFaction = factions.find(f => f.isGoverning)?.faction || 'the governing authority';

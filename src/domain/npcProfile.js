@@ -25,6 +25,7 @@
 
 import { institutionMatchesRegex } from './institutionClassify.js';
 
+import { snakeCase } from './ids.js';
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
 // the faction archetype vocabulary. We map them
@@ -273,12 +274,6 @@ function firstNonEmpty(...candidates) {
 }
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s)
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .toLowerCase();
-}
 
 /** @param {any} name */
 function factionIdFromName(name) {

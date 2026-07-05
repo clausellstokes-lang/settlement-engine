@@ -45,6 +45,7 @@ import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
 
+import { snakeCase } from './ids.js';
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 export const DAILY_LIFE_SLOTS = Object.freeze([
@@ -82,9 +83,6 @@ const SLOT_LABELS = Object.freeze({
 // a generic but truthful line.
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {any} settlement @param {any} pattern */
 function institutionByPattern(settlement, pattern) {

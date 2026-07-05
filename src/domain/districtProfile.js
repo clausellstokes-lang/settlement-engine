@@ -28,6 +28,7 @@ import { deriveCausalState } from './causalState.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 
+import { snakeCase } from './ids.js';
 // ── Catalog ──────────────────────────────────────────────────────────────
 
 export const DISTRICT_CATEGORIES = Object.freeze([
@@ -42,9 +43,6 @@ const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', '
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /**
  * @param {any} arr

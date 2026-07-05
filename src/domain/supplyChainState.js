@@ -39,6 +39,7 @@
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 
+import { snakeCase } from './ids.js';
 // ── Status remap ──────────────────────────────────────────────────────────
 // Legacy vocabulary → canonical vocabulary per the roadmap. The status
 // fields encode different intensities:
@@ -95,12 +96,6 @@ export function canonicalSupplyChainStatus(legacyStatus) {
 // querying traces by id from either path see the same shape.
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s)
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .toLowerCase();
-}
 
 /** @param {import('./settlement.schema.js').SimSupplyChain} chain */
 function chainIdFromShape(chain) {

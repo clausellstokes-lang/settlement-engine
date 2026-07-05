@@ -28,7 +28,6 @@ const BASELINE = new Set([
   'src/generators/powerGenerator.js',
   'src/store/settlementSlice.js',
   'src/generators/npcGenerator.js',
-  'src/generators/narrativeGenerator.js',
   'src/domain/settlement.schema.js',
   'src/domain/causalState.js',
   // Was 1,133 lines (effectively at cap); the strict-typecheck burn-down's JSDoc

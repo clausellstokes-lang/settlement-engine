@@ -56,7 +56,7 @@ const GRANDFATHERED = {
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
   // of the pure support-edge readers + levy computation into a sibling module is overdue.
   'src/domain/worldPulse/warDeployment.js': 1840, // + stripSuppressedDeployResidue extracted from pulseKernel (the strategy_deploy dismiss residue strip)
-  'src/generators/narrativeGenerator.js': 1202, // shrank: dead _getSettReason removed (was 1250)
+  'src/generators/narrativeGenerator.js': 1131, // shrank: _getSettReason + 4 copies of the stress-priority list extracted to stressPriority.js (was 1250)
   'src/domain/causalState.js': 1277, // + review-remediation: real-walls detection (no JSON.stringify regex) + occupation_lifted polarity
   // NOTE: pulseKernel.js is no longer grandfathered — the strategy_deploy dismiss residue
   // strip was extracted into warDeployment.js (stripSuppressedDeployResidue), dropping it

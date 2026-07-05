@@ -24,6 +24,7 @@
 
 import { canonicalRelationshipLabel } from './relationships/canonicalRelationship.js';
 
+import { snakeCase } from './ids.js';
 // ── Catalog ──────────────────────────────────────────────────────────────
 
 export const REGIONAL_RELATIONSHIP_TYPES = Object.freeze([
@@ -45,9 +46,6 @@ export const REGIONAL_RELATIONSHIP_TYPES = Object.freeze([
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {any} n */
 function neighbourId(n) {

@@ -25,6 +25,7 @@
 
 import { TAG, TAG_GROUPS } from '../data/entityTags.js';
 
+import { snakeCase } from '../domain/ids.js';
 // Re-exports so consumers can `import { hasTag, TAG } from '@/lib/entities'`
 // without two imports.
 export { TAG, TAG_GROUPS };
@@ -98,12 +99,6 @@ export function hasAllTags(entity, group) {
 // migration path: once consumers start querying by id, the data files can
 // be updated to carry explicit ids without breaking anything.
 
-function snakeCase(s) {
-  return String(s)
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .toLowerCase();
-}
 
 /**
  * Stable id for an entity. Prefers `entity.id`, falls back to deriving

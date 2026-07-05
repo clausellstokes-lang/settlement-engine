@@ -9,23 +9,9 @@ import { relColor } from '../../settlements/relationshipColors.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../../dossier/DossierEntityContext.jsx';
 import { factionIdFromName } from '../../../lib/entities.js';
-
-/**
- * Resolve a LOCAL NPC's display name to its stable index id (rename-safe).
- * Returns null for a name absent from the index (a foreign-settlement
- * contact), so the caller renders plain text rather than a dead link.
- *
- * @param {object|null} index  buildDossierEntityIndex result (or null).
- * @param {string} name        The NPC's stated name.
- * @returns {string|null}
- */
-function localNpcId(index, name) {
-  if (!index || !name) return null;
-  const key = String(name).trim().toLowerCase();
-  if (!key) return null;
-  const hit = (index.npcs || []).find(n => String(n.currentName || '').trim().toLowerCase() === key);
-  return hit ? hit.id : null;
-}
+// Canonical rename-safe NPC-id resolver — was shadowed by a byte-identical local
+// copy here (the diverged-duplicate pattern the conventions warn against).
+import { localNpcId } from '../../../domain/dossier/entityLinks.js';
 
 /**
  * Resolve a LOCAL faction name to its index id (the canonical

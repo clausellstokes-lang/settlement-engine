@@ -1,3 +1,4 @@
+import { snakeCase } from './ids.js';
 /**
  * domain/activeConditions.js — First-class persistent world conditions.
  *
@@ -524,9 +525,6 @@ export function defaultSeverityForBand(band) {
 // archetype + label on first construction.
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {any} s */
 function shortHash(s) {
