@@ -9,6 +9,24 @@ import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
+// Constant-time comparison for the checkout token. A plain `===` short-circuits on
+// the first differing byte, leaking a comparison-timing side channel that could let
+// an attacker recover the token (and claim someone's paid dossier) character by
+// character. Both sides are SHA-256'd to a fixed 32-byte digest first (so input
+// length can't leak either), then XOR-accumulated over the whole digest.
+async function timingSafeEqualStr(a: string, b: string): Promise<boolean> {
+  const enc = new TextEncoder();
+  const [da, db] = await Promise.all([
+    crypto.subtle.digest('SHA-256', enc.encode(a)),
+    crypto.subtle.digest('SHA-256', enc.encode(b)),
+  ]);
+  const va = new Uint8Array(da);
+  const vb = new Uint8Array(db);
+  let diff = 0;
+  for (let i = 0; i < va.length; i++) diff |= va[i] ^ vb[i];
+  return diff === 0;
+}
+
 // In-memory backstop (review B16 #8, hardened). The primary limiter is the DB RPC
 // below; when IT is unavailable (missing env, RPC error, throw) the original code
 // failed FULLY OPEN. A first patch added a PER-IP in-memory cap — but the IP comes
@@ -164,10 +182,14 @@ export async function handleVerifyDossier(
 
     const session = await stripeApi.checkout.sessions.retrieve(sessionId);
     const paid = session.payment_status === 'paid' || session.payment_status === 'no_payment_required';
+    const tokenMatches = await timingSafeEqualStr(
+      typeof session.metadata?.checkout_token === 'string' ? session.metadata.checkout_token : '',
+      checkoutToken,
+    );
     const verified = session.status === 'complete'
       && paid
       && session.metadata?.product === 'single_dossier'
-      && session.metadata?.checkout_token === checkoutToken;
+      && tokenMatches;
 
     if (!verified) {
       return new Response(JSON.stringify({ verified: false, error: 'Purchase not verified' }), {
