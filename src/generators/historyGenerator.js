@@ -72,8 +72,8 @@ const deriveTradeCommodity = (economicState) => {
 };
 
 /**
- * Extract the context object used by generateTradeNarrative2 and related helpers.
- * Classifies institution presence and economic state into descriptive fields.
+ * Extract the history context object (nearbyResources + classified institution/
+ * economic descriptors) threaded through history generation and the anchor pass.
  *
  * @param {Object} config        - Settlement config
  * @param {Array}  institutions  - Institution objects
@@ -245,228 +245,19 @@ const generateSafetyNarrative2 = (config = {}, institutions = []) => {
   return weights;
 };
 
-// ─── generateTradeNarrative2 ─────────────────────────────────────────────────
-/**
- * Return a context object of named template variables for a specific history
- * event category (economic, political, disaster, religious, magical).
- */
-const generateTradeNarrative2 = (category, context) => {
-  const {
-    tradeCommodity: commodity,
-    dominantGuild,
-    primaryExports,
-    incomeSources,
-    tradeRouteAccess: route,
-    dominantFaction,
-    govType,
-    religiousScale,
-    disasterProfile,
-    magicLevel,
-  } = context;
-
-  const primaryExport = commodity
-    ? commodity.charAt(0).toUpperCase() + commodity.slice(1)
-    : primaryExports[0] || 'trade goods';
-
-  switch (category) {
-    case 'economic': {
-      const routeType =
-        { port: 'coastal', river: 'river', crossroads: 'overland', road: 'overland', isolated: 'mountain' }[route] ||
-        'overland';
-      const destination =
-        route === 'port'
-          ? 'distant maritime ports'
-          : route === 'river'
-            ? 'upriver markets and capitals'
-            : 'the regional capital';
-      const demands = incomeSources.some(s => s.toLowerCase().includes('guild'))
-        ? 'guild recognition and fair wages'
-        : incomeSources.some(s => s.toLowerCase().includes('port'))
-          ? 'docking rights and fair tariffs'
-          : 'better working conditions';
-      return {
-        '{resource}': primaryExport.toLowerCase(),
-        '{guild_name}': dominantGuild,
-        '{route_type}': routeType,
-        '{destination}': destination,
-        '{demands}': demands,
-        '{bank_name}': pick(['Golden Scales', 'Iron Vault', "Merchant's Crown", 'Silver Ledger']),
-        '{frequency}': route === 'crossroads' ? 'weekly' : 'seasonal',
-      };
-    }
-    case 'political': {
-      const authority =
-        {
-          noble: 'the regional duke',
-          merchant_guild: 'the merchant council',
-          crown: 'the king',
-          democratic: 'the popular assembly',
-          council: 'the council',
-        }[govType] || 'the governing authority';
-      const method = dominantFaction.toLowerCase().includes('merchant')
-        ? 'economic pressure'
-        : dominantFaction.toLowerCase().includes('military')
-          ? 'armed negotiation'
-          : dominantFaction.toLowerCase().includes('guild')
-            ? 'guild coalition'
-            : 'legal maneuvering';
-      const faction = dominantFaction.toLowerCase().includes('merchant')
-        ? 'the merchant guilds'
-        : dominantFaction.toLowerCase().includes('military')
-          ? 'the military garrison'
-          : dominantFaction.toLowerCase().includes('noble')
-            ? 'the noble families'
-            : 'the common people';
-      return {
-        '{authority}': authority,
-        '{method}': method,
-        '{faction}': faction,
-        '{former_ruler}': pick(['the previous governing family', 'the regional empire', 'the old council']),
-        '{family_name}': pick(['Aldermere', 'Greystone', 'Vanthorpe', 'Coldmoor']),
-        '{new_family}': pick(['Ironmark', 'Brightwater', 'Stormveil', 'Ashford']),
-        '{ally_settlement}': pick(['Westmarch', 'Northgate', 'Riverhold', 'Silverpeak']),
-        '{outcome}': context.stability === 'Unstable' ? 'a costly compromise' : 'negotiated settlement',
-      };
-    }
-    case 'disaster': {
-      const quarter =
-        commodity === 'timber'
-          ? 'the lumber yards and sawmill district'
-          : route === 'port'
-            ? 'the dockside warehouses'
-            : route === 'river'
-              ? 'the riverside mill quarter'
-              : 'the market quarter';
-      const buildingType =
-        commodity === 'timber'
-          ? 'timber stockpiles and workshop buildings'
-          : route === 'port'
-            ? 'ships, warehouses, and dock infrastructure'
-            : 'wooden buildings and merchant stalls';
-      return {
-        '{quarter}': quarter,
-        '{building_type}': buildingType,
-        '{location}':
-          disasterProfile === 'coastal'
-            ? 'the harbour and coastal districts'
-            : disasterProfile === 'river'
-              ? 'the riverside quarter'
-              : disasterProfile === 'forest'
-                ? 'the mill and lumber district'
-                : 'the lower districts',
-        '{percent}': randInt(20, 50),
-        '{duration}': randInt(2, 4),
-        '{dragon_color}': pick(['red', 'black', 'green', 'blue']),
-        '{reason}': disasterProfile === 'monster' ? 'a monster incursion' : 'a natural disaster',
-      };
-    }
-    case 'religious': {
-      const orderMap = {
-        cathedral: pick(['Benedictine', 'Cistercian', 'Franciscan']),
-        monastery: pick(['Franciscan', 'Dominican', 'Augustinian']),
-        church: pick(['Parish', 'Mendicant', 'Hospitaller']),
-        shrine: pick(['Hermetic', 'Pilgrim', 'Wandering']),
-      };
-      return {
-        '{deity}': pick([
-          'the patron deity of the settlement',
-          'the church of the Sun God',
-          'the faith of the Earth Mother',
-        ]),
-        '{order_name}': orderMap[religiousScale] || 'Hospitaller',
-        '{saint_name}': pick(['St. Aldric', 'St. Brigid', 'St. Marcus', 'St. Helena', 'St. Corvin']),
-        '{heresy_type}': pick(['reformist', 'mystical', 'ascetic', 'apocalyptic']),
-        '{doctrinal_dispute}': pick([
-          'the role of the laity',
-          'interpretation of sacred texts',
-          'hierarchy and authority',
-        ]),
-      };
-    }
-    case 'magical': {
-      const founderDesc = pick(
-        magicLevel === 'high'
-          ? ['a conclave of archmages', 'the regional magical authority', 'a legendary wizard']
-          : ['a solitary wizard', 'wandering mage scholars', 'a minor magical order'],
-      );
-      return {
-        '{wizard_name}': pick(['Aldric the Wise', 'Morgana Shadowweaver', 'Theron Stormcaller', 'Elara Moonwhisper']),
-        '{magical_effect}': pick(
-          magicLevel === 'high'
-            ? ['a warping of local reality', 'transformation of the affected district', 'a permanent arcane storm']
-            : ['minor reality distortions', 'lingering magical residue', 'unstable enchantments on buildings'],
-        ),
-        '{plane_name}': pick(['the Feywild', 'the Shadowfell', 'the Elemental Chaos']),
-        '{founder}': founderDesc,
-      };
-    }
-    default:
-      return {};
-  }
-};
-
 // ─── generateEventNarrative ───────────────────────────────────────────────────
 /**
  * Render a historical event at a specific point in time, substituting template
  * variables and selecting effects/hooks appropriate to the event severity.
  */
 
-const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
-  // Template variable substitutions (can be overridden by extraTokens)
-  const defaultTokens = {
-    '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
-    '{building_type}': pick(['wooden buildings', 'warehouses', 'housing', 'commercial buildings']),
-    '{percent}': randInt(15, 60),
-    '{duration}': randInt(1, 5),
-    '{location}': pick(['lower districts', 'riverside quarter', 'eastern sector', 'merchant district']),
-    '{dragon_color}': pick(['red', 'black', 'green', 'white', 'blue']),
-    '{authority}': pick(['the king', 'the regional duke', 'the merchant council', 'the emperor']),
-    '{method}': pick(['negotiation', 'revolt', 'economic pressure', 'legal maneuvering']),
-    '{former_ruler}': pick(['the duke', 'the baron', 'the empire', 'the neighboring kingdom']),
-    '{family_name}': pick(['Blackwood', 'Redmont', 'Silverstone', 'Goldcrest']),
-    '{new_family}': pick(['Ironheart', 'Stormwind', 'Brightblade', 'Shadowmere']),
-    '{faction}': pick(['the common people', 'the merchant guilds', 'the military', 'the clergy']),
-    '{outcome}': pick(['partial success', 'costly victory', 'negotiated settlement', 'crushing defeat']),
-    '{ally_settlement}': pick(['Westmarch', 'Northgate', 'Riverhold', 'Silverpeak']),
-    '{route_type}': pick(['overland', 'river', 'mountain', 'coastal']),
-    '{destination}': pick(['the capital', 'distant ports', 'the eastern kingdoms', 'foreign lands']),
-    '{reason}': pick(['war', 'natural disaster', 'political dispute', 'monster incursion']),
-    '{guild_name}': pick(["Merchants'", "Crafters'", "Masons'", "Weavers'", "Smiths'"]),
-    '{demands}': pick(['better wages', 'representation', 'tax relief', 'working conditions']),
-    '{frequency}': pick(['weekly', 'monthly', 'seasonal', 'annual']),
-    '{bank_name}': pick(['Golden Eagle', 'Silver Crown', 'Iron Vault', 'Diamond Trust']),
-    '{resource}': pick(['silver', 'iron', 'gems', 'rare timber', 'magical crystal']),
-    '{deity}': pick(['the Sun God', 'the Earth Mother', 'the Lord of Justice', 'the Lady of Mercy']),
-    '{heresy_type}': pick(['dualistic', 'apocalyptic', 'reformist', 'mystical']),
-    '{saint_name}': pick(['St. Aldric', 'St. Brigid', 'St. Marcus', 'St. Helena']),
-    '{order_name}': pick(['Benedictine', 'Franciscan', 'Templar', 'Hospitallar']),
-    '{doctrinal_dispute}': pick([
-      'interpretation of scripture',
-      'hierarchy and authority',
-      'ritual practices',
-      'theological doctrine',
-    ]),
-    '{wizard_name}': pick(['Aldric the Wise', 'Morgana Shadowweaver', 'Theron Stormcaller', 'Elara Moonwhisper']),
-    '{magical_effect}': pick([
-      'reality distortion in the affected area',
-      'transformation of inhabitants',
-      'a permanent magical storm',
-      'dimensional rifts',
-    ]),
-    '{plane_name}': pick(['the Feywild', 'the Shadowfell', 'the Elemental Chaos', 'the Abyss']),
-    '{founder}': pick([
-      'a council of archmages',
-      'a legendary wizard',
-      'the regional magical authority',
-      'refugee mages',
-    ]),
-    ...extraTokens,
-  };
-
-  let description = eventTemplate.description;
-  Object.entries(defaultTokens).forEach(([token, value]) => {
-    description = description.replace(token, String(value));
-  });
+const generateEventNarrative = (eventTemplate, yearsAgo) => {
+  // HISTORICAL_EVENTS_DATA descriptions are authored as final static prose (no
+  // {token} placeholders), so history reads them verbatim. The former ~35-draw
+  // token-substitution machine + generateTradeNarrative2 were dead — they built
+  // and substituted tokens no description ever contained, while silently
+  // consuming the seeded PRNG. Excised.
+  const description = eventTemplate.description;
 
   // Select lasting effects based on severity
   const severity = pick(eventTemplate.severity || ['major']);
@@ -877,10 +668,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     const hiYearsAgo = Math.max(loYearsAgo, maxYearsAgo);
     const yearsAgo = Math.min(age, randInt(loYearsAgo, hiYearsAgo));
 
-    // Build context tokens
-    const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
-
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens);
+    const event = generateEventNarrative(tmpl, yearsAgo);
     event.type = cat;
     events.push(event);
   }
@@ -915,12 +703,11 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     if (anchoredTypes.has(cat)) return;
     anchoredTypes.add(cat);
 
-    const contextTokens = generateTradeNarrative2(cat, context) || {};
     if (_rng() < 0.6) {
       const anchorType = ANCHOR_TYPE_MAP[cat];
       const tmpl = anchorType ? HISTORICAL_EVENTS_DATA.find(e => e.type === anchorType) : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
+      const replacement = generateEventNarrative(tmpl, event.yearsAgo);
       if (replacement) {
         replacement.type = cat;
         replacement.anchored = true;
