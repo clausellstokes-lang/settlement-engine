@@ -35,6 +35,19 @@ describe('customDeps.finishedGoodsSupply', () => {
     });
   });
 
+  it('excludes a gated good whose requiredInstitution ref is DANGLING (unresolvable ≠ ungated)', () => {
+    // A deleted institution / dropped ref resolves to '' (falsy). The old guard
+    // `reqName && !present(reqName)` then skipped the gate and counted the good as freely
+    // supplied — an unproducible good shrinking imports AND named as a local export. A
+    // DECLARED-but-unresolvable requirement must gate the good OUT.
+    const cc = { tradeGoods: [{ name: 'Ghost Blade', localUid: 'g1', satisfies: 'military', economicWeight: 'major', requiredInstitution: 'custom:DELETED_FORGE' }] };
+    withCustomContent(cc, () => {
+      const r = customDeps.finishedGoodsSupply('military', new Set()); // no institution present
+      expect(r.supply).toBe(0);     // was 3 (gate inverted) before the fix
+      expect(r.goods).toEqual([]);  // and it was wrongly named a local export
+    });
+  });
+
   it('is an inert no-op for a category nothing satisfies', () => {
     withCustomContent({}, () => {
       expect(customDeps.finishedGoodsSupply('luxury', new Set(['anything']))).toEqual({ supply: 0, goods: [] });
