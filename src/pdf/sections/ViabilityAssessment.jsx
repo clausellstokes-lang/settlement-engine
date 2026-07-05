@@ -129,7 +129,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
               wrap={false}
             >
-              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>↯</Text>
+              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>·</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`viability.contradiction.${i}`}

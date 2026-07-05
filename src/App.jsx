@@ -130,6 +130,15 @@ export default function App() {
     // session to restore so a returning member never flashes the landing.
     if (hasStoredAuthToken() && authLoading) return;
     try {
+      // Defer the bare-root redirect while a Stripe checkout return is in flight.
+      // The return URL is the bare origin '/?checkout=success&session_id=…', and
+      // this effect runs SYNCHRONOUSLY on mount — before the checkout handler's
+      // import().then() microtask below. Rewriting to /home here would strip the
+      // query string before checkCheckoutResult() can read it, stranding an
+      // anonymous one-shot buyer's PAID dossier with no download surface and no
+      // recovery path. checkCheckoutResult() consumes + cleans the params, after
+      // which a later run of this effect redirects normally.
+      if (window.location.search.includes('checkout=')) return;
       const path = window.location.pathname;
       const atRoot = path === '/' || path === '';
       if (atRoot) replacePath('/home');              // bare root → the Welcome page (all visitors)

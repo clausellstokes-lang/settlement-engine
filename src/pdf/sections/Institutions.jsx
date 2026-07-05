@@ -35,7 +35,7 @@ const STATUS_TONE = {
 
 export function Institutions({ settlement, narrativeMode, vm }) {
   const s = vm.services;
-  const index = vm.entityIndex; // Phase-D id→card resolver
+  const index = vm.entityIndex; // Phase-D id»card resolver
   const detailed = s.detailed || [];
   const grouped  = groupBy(detailed, i => (i.category || 'other').toLowerCase());
   const categories = orderedCategories(grouped);
@@ -208,7 +208,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
             {displayInstitutionName(inst.name)}
           </Text>
           {isCustom && (
-            <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>✦</Text>
+            <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>
           )}
         </View>
         {status !== 'healthy' && <Pill tone={tone}>{cap(status)}</Pill>}
