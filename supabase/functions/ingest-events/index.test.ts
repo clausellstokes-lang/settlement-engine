@@ -159,6 +159,53 @@ Deno.test('rate limiter fails CLOSED: underRate=false yields 429 with zero write
   }
 });
 
+Deno.test('the IP gate stops device-token rotation: over-IP + under-device is still 429 with zero writes', async () => {
+  // The per-device rate key is derived from the (rotatable) deviceToken, so it reads
+  // "under rate" for every fresh token — that is the bypass. The ipall: gate is what a
+  // rotating host cannot escape: here the ipall key is OVER while the device key is
+  // UNDER, and the request must still be rejected before any service-role write.
+  const upserts: string[] = [];
+  // deno-lint-ignore no-explicit-any
+  const table = (name: string): any => ({
+    // deno-lint-ignore no-explicit-any
+    select: (): any => ({
+      // deno-lint-ignore no-explicit-any
+      eq: (): any => ({
+        maybeSingle: () =>
+          Promise.resolve(
+            name === 'analytics_device_links'
+              ? { data: { actor_id: '11111111-1111-1111-1111-111111111111' }, error: null }
+              : { data: null, error: null },
+          ),
+      }),
+    }),
+    upsert: () => { upserts.push(name); return Promise.resolve({ data: null, error: null }); },
+    insert: () => { upserts.push(`${name}:insert`); return Promise.resolve({ data: null, error: null }); },
+  });
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (n: string) => table(n),
+    // The ipall: gate reads OVER (false); every other key reads UNDER (true).
+    rpc: (fn: string, args: { p_key?: string }) =>
+      fn === 'ingest_check_rate'
+        ? Promise.resolve({ data: !String(args?.p_key || '').startsWith('ipall:'), error: null })
+        : Promise.resolve({ data: null, error: null }),
+    auth: { getUser: () => Promise.resolve({ data: { user: null } }) },
+  };
+  __setSupabaseFactory(() => client);
+  try {
+    const body = JSON.stringify({ deviceToken: 'dev-rotating-xyz', events: [{ event: 'homepage_view', seq: 0 }] });
+    const res = await handleIngestEvents(
+      new Request('https://edge/ingest-events', { method: 'POST', headers: UA, body }),
+    );
+    assertEquals(res.status, 429);
+    assertEquals((await res.json()).error, 'rate_limited');
+    assertEquals(upserts, []); // the IP gate ran BEFORE any service-role write
+  } finally {
+    __setSupabaseFactory(null);
+  }
+});
+
 Deno.test('rate limiter admits when underRate=true (control): not a 429', async () => {
   const admin = makeLimiterAdmin({ data: true });
   __setSupabaseFactory(() => admin.client);
