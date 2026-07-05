@@ -8,6 +8,40 @@ import {priorityToCategory} from './economicGenerator.js';
 import {TERRAIN_DATA} from '../data/geographyData.js';
 import {RESOURCE_CHAINS, SPECIAL_RESOURCES} from '../data/resourceData.js';
 
+// ─── processing-institution matcher ───────────────────────────────────────────
+// RESOURCE_CHAINS.processingInstitutions are idealized DISPLAY names ("Weavers'
+// guild", "Winery"); the real institutionalCatalog names drift by tier and
+// pluralization and sometimes vocabulary ("Weavers/Textile workers", "Vintner").
+// Matching them with strict `===` (the old code) meant almost every chain was
+// reported as unexploited even when its processors were present. Instead, match by
+// the processor's significant word(s) — mapped through a small keyword table for the
+// genuine plural/synonym cases — as a case-insensitive substring of the real name.
+// Whole-word keywords (never a bare prefix) so 'blacksmith' can't match "Black
+// market". Pinned by tests/joins/resourceChains.test.js.
+const PROC_STOPWORDS = new Set(['guild', 'workshop', 'access', 'external']);
+const PROC_KEYWORD = {
+  weavers: 'weaver', linen: 'weaver',
+  dyers: 'dyer',
+  fulling: 'fuller',
+  vintners: 'vintner', winery: 'vintner',
+  tannery: 'tann', tanner: 'tann', tanners: 'tann', leatherworkers: 'tann', leather: 'tann',
+  blacksmiths: 'blacksmith',
+  coppersmiths: 'smelter',
+  goldsmiths: 'jewel', jewelers: 'jewel',
+  carpenters: 'carpenter',
+  stonemasons: 'quarry',
+  herbalist: 'alchemist',
+  salters: 'salt',
+};
+const processorKeywords = (procName) =>
+  String(procName || '').toLowerCase().replace(/['’()\-/]/g, ' ').split(/\s+/)
+    .filter((w) => w.length >= 4 && !PROC_STOPWORDS.has(w))
+    .map((w) => PROC_KEYWORD[w] || w);
+export const instMatchesProcessor = (instName, procName) => {
+  const inst = String(instName || '').toLowerCase();
+  return processorKeywords(procName).some((kw) => inst.includes(kw));
+};
+
 // ─── evaluateEconomicActivity ─────────────────────────────────────────────────
 // Return resource chains that are active given the terrain and present resources.
 
@@ -32,8 +66,8 @@ const evaluateInstitutions = (institutions, activeChains) => {
   const result = { fullyExploited: [], partiallyExploited: [], unexploited: [], warnings: [] };
 
   activeChains.forEach(chain => {
-    const hasAll  = chain.processingInstitutions.every(name => institutions.some(i => i.name === name));
-    const hasSome = chain.processingInstitutions.some(name => institutions.some(i => i.name === name));
+    const hasAll  = chain.processingInstitutions.every(name => institutions.some(i => instMatchesProcessor(i.name, name)));
+    const hasSome = chain.processingInstitutions.some(name => institutions.some(i => instMatchesProcessor(i.name, name)));
 
     if (hasAll)       result.fullyExploited.push(chain);
     else if (hasSome) result.partiallyExploited.push(chain);
@@ -61,7 +95,7 @@ const buildViabilityReport = (terrainType, institutions) => {
   // Institution → resource mismatches: processing inst exists but terrain lacks the input
   Object.entries(RESOURCE_CHAINS).forEach(([, chain]) => {
     const hasProcessingInst = chain.processingInstitutions.some(name =>
-      institutions.some(i => i.name === name));
+      institutions.some(i => instMatchesProcessor(i.name, name)));
     const terrainHasResource = terrain.allowedResources.some(r =>
       r.toLowerCase().includes(chain.rawResource.toLowerCase()));
 
@@ -122,7 +156,7 @@ const evaluateInstitutionChain = (exploitation, institutions) => {
 
   exploitation.partiallyExploited?.forEach(chain => {
     const missingInsts = chain.processingInstitutions.filter(name =>
-      !institutions.some(i => i.name === name));
+      !institutions.some(i => instMatchesProcessor(i.name, name)));
     if (missingInsts.length > 0) {
       gaps.push({
         chain:   chain.rawResource,
@@ -145,7 +179,7 @@ const evaluateInstitutionChain = (exploitation, institutions) => {
   // Institutions that exist but whose resource inputs are missing
   institutions.forEach(institution => {
     Object.values(RESOURCE_CHAINS || {}).forEach(chain => {
-      if (!chain.processingInstitutions?.includes(institution.name)) return;
+      if (!chain.processingInstitutions?.some(name => instMatchesProcessor(institution.name, name))) return;
       const alreadyInGaps =
         exploitation.fullyExploited?.some(c => c.rawResource === chain.rawResource) ||
         exploitation.partiallyExploited?.some(c => c.rawResource === chain.rawResource);
