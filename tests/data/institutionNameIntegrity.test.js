@@ -20,7 +20,8 @@ import {
   GATE_FEATURES,
   GOVERNMENT_INSTITUTIONS,
 } from '../../src/data/spatialData.js';
-import { EXPORT_GOODS_BY_TIER } from '../../src/data/tradeGoodsData.js';
+import { EXPORT_GOODS_BY_TIER, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
+import { SERVICE_TIER_DATA } from '../../src/generators/servicesGenerator.js';
 import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 
 // The set of institution names a settlement can actually HOLD — i.e. names that
@@ -142,18 +143,22 @@ describe('institution-name integrity (string-coupling guard)', () => {
     expect([...orphans].sort()).toEqual([...KNOWN_UNRESOLVED].sort());
   });
 
-  it('every EXPORT_GOODS_BY_TIER requiredInstitution names an emittable catalog institution', () => {
-    // The good's `requiredInstitution` is what the dependency compendium tells the
-    // user gates that export, and it is matched by EXACT NAME against a settlement's
-    // institutions (customRegistry.ingest → resolveInstitutionRequirement passthrough).
-    // If it names something the catalog can never emit, the cross-link is a dead end
-    // and the stated requirement is a fiction. It must equal the AUTHORITATIVE gating
-    // name that GOODS_MODIFIERS_BY_TIER uses for the same good — both are catalog names.
+  it('every trade-good requiredInstitution (all 3 parallel maps) names an emittable catalog institution', () => {
+    // A good's `requiredInstitution` is matched by EXACT NAME against a settlement's
+    // institutions — GOODS_MODIFIERS_BY_TIER gates generation on it; EXPORT_GOODS_BY_TIER
+    // and SERVICE_TIER_DATA drive the dependency compendium's cross-links. All three are
+    // tier→good→spec maps and must reference REAL catalog institutions; if one names
+    // something the catalog can never emit ('University', 'Specialist craftsmen quarters',
+    // guild-forms like "Bakers' guild"), the requirement is a fiction that either
+    // permanently suppresses the good (generation) or dead-ends the cross-link (display).
+    const MAPS = { EXPORT_GOODS_BY_TIER, GOODS_MODIFIERS_BY_TIER, SERVICE_TIER_DATA };
     const orphans = new Set();
-    for (const goods of Object.values(EXPORT_GOODS_BY_TIER || {})) {
-      for (const [good, spec] of Object.entries(goods || {})) {
-        const req = spec?.requiredInstitution;
-        if (req && !catalogNames.has(req)) orphans.add(`${good} → ${req}`);
+    for (const [mapName, map] of Object.entries(MAPS)) {
+      for (const goods of Object.values(map || {})) {
+        for (const [good, spec] of Object.entries(goods || {})) {
+          const req = spec?.requiredInstitution;
+          if (req && !catalogNames.has(req)) orphans.add(`${mapName}:${good} → ${req}`);
+        }
       }
     }
     expect([...orphans].sort()).toEqual([]);

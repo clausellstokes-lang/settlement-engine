@@ -225,7 +225,7 @@ export const EXPORT_GOODS_BY_TIER = {
     "Legal services": {
       category: GOODS_CATEGORIES.SERVICES,
       p: 0.9,
-      requiredInstitution: "Courthouse",
+      requiredInstitution: "Multiple courthouses",
       on: true,
       desc: "Contracts, court access, legal expertise",
     },
