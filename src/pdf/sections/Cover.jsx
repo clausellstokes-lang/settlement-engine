@@ -116,7 +116,7 @@ function CrisisRow({ chips }) {
       ))}
       {chips.length > top.length && (
         <Text style={{ fontFamily: 'Nunito', fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
-          + {chips.length - top.length} more. See Summary, page 2.
+          + {chips.length - top.length} more, detailed inside.
         </Text>
       )}
     </View>

@@ -62,7 +62,7 @@ export default function DossierHeaderRow({
               <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
                 <span style={{ fontSize: FS.sm, color: HEADER_FACT, textTransform: 'capitalize', fontWeight: 700 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
                 <span aria-hidden="true" style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{'\u00b7'}</span>
-                <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
+                {settlement.population != null && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.population.toLocaleString() + ' pop.'}</span>}
                 {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
                 {/* The threat WORD comes from the shared threatDisplay helper so
                     a given monsterThreat reads identically here and in the
