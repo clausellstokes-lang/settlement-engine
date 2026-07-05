@@ -102,6 +102,55 @@ describe('the levy rides a war_levy outcome', () => {
     expect(war.deployments.atlas?.deployedPopulation).toBeUndefined();
   });
 
+  test('a vassal shared by two deploying overlords is levied ONCE per tick (no double-draw)', () => {
+    // atlas besieges borin and drake besieges elmet (separate HOLDING sieges so neither
+    // conquest preempts the levy step), and BOTH hold carth as a vassal. Without a
+    // cross-overlord dedup, each independently levies carth against the SAME pre-tick
+    // stores — 2× the men + war-weariness, and compounding food debits that can mint
+    // grain. leviedThisTick (accumulated across the overlord loop) must exclude carth
+    // from the second overlord so it is debited exactly once.
+    const edges = [
+      { id: 'edge.atlas.borin', from: 'atlas', to: 'borin', relationshipType: 'hostile' },
+      { id: 'edge.drake.elmet', from: 'drake', to: 'elmet', relationshipType: 'hostile' },
+      { id: 'edge.atlas.carth', from: 'atlas', to: 'carth', relationshipType: 'vassal' },
+      { id: 'edge.drake.carth', from: 'drake', to: 'carth', relationshipType: 'vassal' },
+    ];
+    const saves = [
+      save('atlas', 'Atlas', { tier: 'town', population: 6000, storageMonths: 2, granary: true }),
+      save('drake', 'Drake', { tier: 'town', population: 6000, storageMonths: 2, granary: true }),
+      save('borin', 'Borin', { tier: 'town', population: 4000 }),
+      save('elmet', 'Elmet', { tier: 'town', population: 4000 }),
+      save('carth', 'Carth', { tier: 'village', population: CARTH_POP, storageMonths: 4, granary: true }),
+    ];
+    const rules = { warLayerEnabled: true, warLevyEnabled: true };
+    const worldState = {
+      rngSeed: 'levy-seed', tick: 100,
+      relationshipStates: Object.fromEntries(edges.map(e => [e.id, { relationshipType: e.relationshipType }])),
+      deployments: {
+        atlas: siegeRecord('borin', { age: 5, strength: 50.9 }),
+        drake: siegeRecord('elmet', { age: 5, strength: 50.9 }),
+      },
+      warExhaustion: { atlas: 1.0, drake: 1.0 }, simulationRules: rules,
+    };
+    const campaign = {
+      id: 'levy-shared', name: 'L', settlementIds: ['atlas', 'drake', 'borin', 'elmet', 'carth'], worldState,
+      regionalGraph: ensureRegionalGraph({ edges, channels: [
+        { type: 'war_front', from: 'atlas', to: 'borin', status: 'confirmed' },
+        { type: 'war_front', from: 'drake', to: 'elmet', status: 'confirmed' },
+      ] }),
+      wizardNews: { currentTick: 100, entries: [] },
+    };
+    const snapshot = buildWorldSnapshot({ campaign, saves, worldState });
+    const war = evaluateWarLayer({ snapshot, worldState: snapshot.worldState, rng: createPRNG('levy-seed'), tick: 100, now: NOW, rules });
+
+    const carthDebits = war.outcomes
+      .filter(o => o.candidateType === 'war_levy')
+      .flatMap(o => o.populationDeltas.filter(d => d.saveId === 'carth'));
+    expect(carthDebits.length).toBe(1);                          // levied by exactly one overlord
+    expect(-carthDebits[0].delta).toBe(Math.round(CARTH_POP * 0.004)); // 20 drawn once, not 40
+    expect(war.warExhaustion.carth).toBeCloseTo(0.05, 5);        // a single levy's strain, not doubled
+  });
+
   test('flag ON: the overlord army grows by exactly what the vassal loses (conserved), grain transfers, loyalty erodes', () => {
     const war = evaluate(true);
     const levy = war.outcomes.find(o => o.candidateType === 'war_levy');
