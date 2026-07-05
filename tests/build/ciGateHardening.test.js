@@ -38,6 +38,7 @@ import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { decideDeploy, runGate, REQUIRED_CHECKS } from '../../scripts/vercel-ignore-build.mjs';
+import { readAppliedHeadLedger } from '../../scripts/check-migration-head.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -335,6 +336,22 @@ describe('production deploy is gated on CI', () => {
     });
     expect(d.action).toBe('skip');
     expect(d.reason).toMatch(/blocking deploy/i);
+  });
+
+  it('the REAL applied-head read THROWS on a present-but-corrupt file (strict), so the gate fails closed for real', () => {
+    // The prior test stubs a throwing read; this proves the real reader actually throws
+    // on a corrupt ledger under strict (the deploy gate's mode). Before the fix it
+    // swallowed the parse error to null — reading corrupt as "no ledger" and proceeding.
+    const dir = mkdtempSync(join(tmpdir(), 'applied-head-'));
+    try {
+      const corrupt = join(dir, 'applied-head.json');
+      writeFileSync(corrupt, '{ "appliedHead": 110,');            // truncated → invalid JSON
+      expect(() => readAppliedHeadLedger(corrupt, { strict: true })).toThrow(/not valid JSON/i);
+      expect(readAppliedHeadLedger(corrupt, { strict: false })).toBe(null);   // routine run tolerates
+      expect(readAppliedHeadLedger(join(dir, 'absent.json'), { strict: true })).toBe(null); // missing ≠ corrupt
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   it('runGate() translates ANY thrown error into SKIP (exit 0), never a crash-exit-1 proceed', async () => {

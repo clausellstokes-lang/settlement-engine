@@ -79,7 +79,9 @@ export function defaultReadMigrationState() {
     const nums = migrationNumbers();
     repoHead = nums.length ? nums[nums.length - 1] : null;
   } catch { /* migrations dir unreadable in this context — treat as unknown */ }
-  const ledger = readAppliedHeadLedger();
+  // strict: a present-but-corrupt ledger THROWS here (caught in decideDeploy → fail
+  // CLOSED), rather than reading as a missing ledger and falling through to fail-open.
+  const ledger = readAppliedHeadLedger(undefined, { strict: true });
   const appliedHead = ledger && Number.isFinite(ledger.appliedHead) ? ledger.appliedHead : null;
   return { repoHead, appliedHead };
 }

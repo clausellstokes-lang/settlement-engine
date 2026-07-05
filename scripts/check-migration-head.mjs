@@ -34,10 +34,17 @@ const APPLIED_HEAD_LEDGER = join(dirname(fileURLToPath(import.meta.url)), '../su
  * The checked-in "last migration applied to prod" ledger, or null if absent. This is
  * the in-repo record that turns "is prod at head?" from tribal knowledge into a
  * reviewable, gate-surfaced fact when the live SUPABASE_MIGRATION_HEAD probe isn't set.
+ *
+ * MISSING vs CORRUPT are different animals. An absent file is `null` (unknowable —
+ * back-compat: the gate degrades to the live probe). A file that EXISTS but is not
+ * valid JSON is a real integrity problem: `strict:true` (the deploy gate) THROWS so it
+ * can fail CLOSED; the default (the gate's own run) still degrades to null + a warning
+ * so a truncated ledger never crashes a routine check.
  * @param {string} file
+ * @param {{ strict?: boolean }} [opts]
  * @returns {{ appliedHead: number, appliedAt?: string } | null}
  */
-export function readAppliedHeadLedger(file = APPLIED_HEAD_LEDGER) {
+export function readAppliedHeadLedger(file = APPLIED_HEAD_LEDGER, { strict = false } = {}) {
   let raw;
   try {
     raw = readFileSync(file, 'utf8');
@@ -47,14 +54,14 @@ export function readAppliedHeadLedger(file = APPLIED_HEAD_LEDGER) {
   try {
     return JSON.parse(raw);
   } catch (err) {
-    // A corrupt/truncated ledger must not crash the gate with a raw parse error.
-    // Treat it as "unknown applied head" (same as absent) but say so loudly, so the
-    // drift signal degrades to the authoritative live probe instead of throwing.
-    console.warn(
-      `[check-migration-head] applied-head ledger at ${file} is not valid JSON ` +
-      `(${err.message}) — ignoring it (treating applied head as unknown). ` +
-      `Fix or regenerate supabase/applied-head.json.`,
-    );
+    const msg = `applied-head ledger at ${file} is present but not valid JSON (${err.message})`;
+    if (strict) {
+      // A present-but-corrupt ledger must not read as "no ledger" — the deploy gate
+      // cannot verify schema currency, so it has to fail CLOSED. Surface as a throw.
+      throw new Error(`[check-migration-head] ${msg}. Fix or regenerate supabase/applied-head.json.`, { cause: err });
+    }
+    // Non-strict (routine gate run): degrade loudly to the authoritative live probe.
+    console.warn(`[check-migration-head] ${msg} — ignoring it (treating applied head as unknown).`);
     return null;
   }
 }
