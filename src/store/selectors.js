@@ -16,7 +16,6 @@ import {
   getPopulationRanges,
 } from '../generators/lookups.js';
 import { filterCatalogForMagic } from '../domain/magicFilter.js';
-import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
 
 const TIER_ORDER        = getTierOrder();
@@ -129,9 +128,7 @@ export const selectToggleSummary = (state) => {
 /** Count of active saved settlements for save-limit display. */
 export const selectSaveCount = (state) => activeSaveCount(state.savedSettlements);
 
-/** Whether the settlement data has changed since the last AI narrative. */
-export const selectIsNarrativeStale = (state) => {
-  if (!state.aiSettlement || !state.settlement) return true;
-  if (!state.aiDataVersion || !state.aiSourceFingerprint) return true;
-  return state.aiSourceFingerprint !== settlementFingerprint(state.settlement);
-};
+// Narrative-staleness lives on aiSlice.isNarrativeStale() (called imperatively),
+// which memoizes the fingerprint. A selector form used to live here but was an
+// un-memoized full-settlement stableStringify on every store change with zero
+// consumers — removed to keep the expensive walk off the selector path.

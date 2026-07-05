@@ -3,6 +3,7 @@ import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS, BODY} from '../tabConstants';
 import {useIsMobileTab} from '../tabConstants';
+import { TAB_GOOD, TAB_WARN, TAB_WEAK, TAB_BAD, TAB_CATEGORY_COLORS, TAB_CATEGORY_DEFAULT } from './tabPalette.js';
 
 import WhatChangedPanel from '../../settlement/WhatChangedPanel.jsx';
 import Button from '../../primitives/Button.jsx';
@@ -31,10 +32,10 @@ const NO_VALUE = 'Unknown';
 // signal; `alert` marks the sub-strong bands that earn saturated color while
 // healthy rows stay muted so the anomaly is the loud one. (P7 / P3.)
 function scoreTier(n) {
-  if (n >= 70) return { c: '#1a5a28', word: 'Strong', alert: false };
-  if (n >= 45) return { c: '#a0762a', word: 'Fair', alert: false };
-  if (n >= 25) return { c: '#8a4010', word: 'Weak', alert: true };
-  return { c: '#8b1a1a', word: 'Critical', alert: true };
+  if (n >= 70) return { c: TAB_GOOD, word: 'Strong', alert: false };
+  if (n >= 45) return { c: TAB_WARN, word: 'Fair', alert: false };
+  if (n >= 25) return { c: TAB_WEAK, word: 'Weak', alert: true };
+  return { c: TAB_BAD, word: 'Critical', alert: true };
 }
 function ScoreRow({ label, score, icon }) {
   const n = Math.min(100, Math.max(0, score || 0));
@@ -161,8 +162,7 @@ export function OverviewTab({ settlement:r, hideIdentity=false, onNavigateTab}) 
   // (mid-migration, partial gen) can land here without an institutions
   // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
   const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
-  const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
-  const getCatColor = c => catColors2[c] || '#6b5340';
+  const getCatColor = c => TAB_CATEGORY_COLORS[c] || TAB_CATEGORY_DEFAULT;
 
   // Structural violations split: real issues (warnings / errors / critical) stay
   // in the red "Structural Issues" call-out; deliberate `by_design` out-of-tier

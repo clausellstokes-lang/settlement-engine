@@ -12,6 +12,18 @@
 > (`servicesDisplay.js`). A full slice-by-slice re-audit (all ~16 slices) confirms
 > no remaining "reads-empty" gaps. Keep this doc as the section reference; the gap
 > language below is historical.
+>
+> **What "complete" does and does not mean.** The rewrite landed and the sections
+> render the fields. What is *gate-enforced* is narrower: the value-equality parity
+> test (`tests/pdf/viewModelParity.test.js`) walks `SHARED_FIELDS` in
+> `src/domain/display/parityContract.js` and asserts `web === pdf` for that
+> enumerated set of shared scalars (food balance, headcounts, prosperity/safety
+> labels, defense readiness/score, top export, …). The remaining sections are
+> covered by render **smoke** tests (renders without throwing, contains expected
+> strings) plus manual discipline — not machine value-equality. So "complete" =
+> the rewrite shipped and the shared-layer scalars are pinned; it does **not** mean
+> every rendered field is gate-asserted equal. Adding a genuinely-shared scalar to
+> `SHARED_FIELDS` is the way to promote a field from smoke-tested to value-pinned.
 
 Research-only inventory comparing every on-screen tab to its PDF section. Goal: identify what each tab renders, what the PDF currently renders, and the explicit gap to drive a rewrite. Field paths are taken from the actual `settlement.*` shape used in tab code, with conditionals noted.
 

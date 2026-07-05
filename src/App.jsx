@@ -25,38 +25,21 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { hasStoredAuthToken } from './lib/supabase.js';
 import { guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, PARCH_100, BORDER, BODY, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, VIOLET, TINT_VIOLET, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance } from './components/theme.js';
 import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
-import HomeLanding from './components/HomeLanding.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
-import { IconsContext } from './components/primitives/IconsContext.js';
+// The route→component registry + shared Loading live in AppViews (extracted so the
+// shell stays legible; the view table has one home).
+import { AppViews, Loading } from './AppViews.jsx';
 
-// Lazy-loaded views
-const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
-const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
-const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
-const HowToUse        = lazy(() => import('./components/HowToUse'));
-const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
+// Modals stay in the shell (not view-switched): they overlay whatever view is up.
 const AuthModal        = lazy(() => import('./components/AuthModal.jsx'));
 const PurchaseModal    = lazy(() => import('./components/PurchaseModal.jsx'));
-const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
-const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
-const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
-const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
-const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
-// Dedicated auth routes (/signin · /register · /reset-password · /verify-email).
-// Thin page wrappers around the same <AuthPanel> the modal renders.
-const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
-const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
-const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
-const SetNewPasswordPage = lazy(() => import('./components/auth/SetNewPasswordPage.jsx'));
-const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
-const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.jsx'));
 
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
@@ -79,14 +62,6 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 //     World Map (+ Pulse / Chronicle / Pantheon via the Realm Inspector). The old
 //     `map` view redirects into it; the Realm body IS the World Map workspace.
 //     Visible to anon (a locked-state preview), no longer hidden.
-
-function Loading() {
-  return (
-    <div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
-      Loading...
-    </div>
-  );
-}
 
 export default function App() {
   const isMobile = useIsMobile();
@@ -708,43 +683,16 @@ export default function App() {
             )}
           >
           <Suspense fallback={<Loading />}>
-            {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
-            {/* Home is the Welcome landing. A bare root visit ('/')
-                canonicalizes here for everyone — logged-out and signed-in
-                alike (the front-door effect above); the page adapts its CTAs by
-                auth state. Deep links elsewhere are respected. */}
-            {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} isPremium={authTier === 'premium' || isElevated} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
-            {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
-            {/* The Realm hub. WorldMap is the Realm body (Map + the
-                Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
-                still renders it for the one frame before the redirect effect
-                upgrades the URL to /realm, so there's no blank flash. */}
-            {/* The Realm map is the ONE icons-on surface (template IconCtx parity):
-                everything else renders icons-off via the default IconsContext. */}
-            {(view === 'realm' || view === 'map') && (
-              <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
-            )}
-            {view === 'compendium'  && <CompendiumPanel standalone />}
-            {view === 'howto'       && <HowToUse onNavigate={setView} />}
-            {/* Guarded views: render only once authorized. The guard effect
-                redirects unauthorized visitors; until the session resolves we
-                show the loader rather than flash (or crash on) gated content. */}
-            {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
-            {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
-            {view === 'pricing'     && <PricingPage onNavigate={setView} />}
-            {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
-            {view === 'dossier-success' && (
-              <SingleDossierSuccessPage
-                onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
-                onGenerateAnother={() => setView('generate')}
-              />
-            )}
-            {view === 'signin'         && <SignInPage />}
-            {view === 'register'       && <RegisterPage />}
-            {view === 'reset-password' && <ResetPasswordPage />}
-            {view === 'set-new-password' && <SetNewPasswordPage />}
-            {view === 'verify-email'   && <VerifyEmailPage />}
-            {view === 'confirm-email'  && <ConfirmEmailPage />}
+            <AppViews
+              view={view}
+              isMobile={isMobile}
+              setView={setView}
+              setAuthModalOpen={setAuthModalOpen}
+              authTier={authTier}
+              isElevated={isElevated}
+              authLoading={authLoading}
+              params={params}
+            />
           </Suspense>
           </FeatureErrorBoundary>
         </main>

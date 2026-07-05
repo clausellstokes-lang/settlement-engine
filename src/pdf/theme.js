@@ -1,8 +1,16 @@
 /**
  * PDF design system — palette, type scale, spacing, page geometry.
  *
- * Mirrors src/components/theme.js (the on-screen palette) so the printed
- * artifact reads as an extension of the app, not a separate product.
+ * The palette shares the app's HUE with the on-screen UI (design/tokens.js is the
+ * canonical source), but the accent inks are deliberately PRINT-TUNED: darker and
+ * more saturated than their screen tokens so they hold ink density on white stock
+ * (the lighter screen gold/green/violet wash out in print). This is NOT a pixel
+ * mirror of the screen — the screen↔PDF parity contract (domain/display/parityContract.js
+ * PARITY_EXEMPT) already declares tone COLOR per-surface (web RGB scale vs this print
+ * palette); only the DATA/labels are pinned to match. Each print-tuned accent below
+ * names its screen-token lineage, and tests/pdf/printPaletteContract.test.js enforces
+ * that the print variant stays at-or-darker than its token so a re-skin can't silently
+ * lighten the printed product past legibility.
  *
  * All measurements in PDF points (pt). 1mm = 2.83465pt; @react-pdf accepts
  * either a number (pt) or a string with unit (e.g. "16mm"). For consistency
@@ -10,30 +18,33 @@
  * in mm (page margins).
  */
 import { Font, StyleSheet } from '@react-pdf/renderer';
+import { legacy as L } from '../design/tokens.js';
 
 // ── Color palette ────────────────────────────────────────────────────────────
-// Ported from src/components/theme.js. Hex values match the on-screen UI.
+// Neutrals that legitimately equal the screen tokens reference them directly (so a
+// re-skin of those flows straight through). The chromatic accents are print-tuned
+// darker variants of their named screen token — see the header + the contract test.
 export const palette = {
-  ink:     '#1c1409',  // primary text
-  second:  '#3d2b1a',  // body text
-  muted:   '#6b5340',  // captions, meta
-  faint:   '#9c8068',  // hairline meta
-  gold:    '#a0762a',  // section accents, badges
+  ink:     L.INK,      // = ink-900; primary text (print neutral == screen)
+  second:  '#3d2b1a',  // body text — print brown near ink-800 (L.INK_DEEP)
+  muted:   '#6b5340',  // captions/meta — print brown, darker than muted-500 (L.MUTED)
+  faint:   '#9c8068',  // hairline meta (≈ muted-500, L.MUTED)
+  gold:    '#a0762a',  // section accents/badges — print-tuned darker than gold-500 (L.GOLD)
   goldBg:  '#f5ede0',  // gold tint for callouts
-  card:    '#fffbf5',  // page background
-  border:  '#e0d0b0',  // dividers, table borders
+  card:    L.CARD,     // = CARD (#FFFBF5); page background (print neutral == screen)
+  border:  '#e0d0b0',  // dividers/table borders — near parchment-200 (L.BORDER)
 
-  // Tone accents — ported from individual tab components
-  good:        '#1a5a28',   // viability ok, allied, prosperity positive
+  // Tone accents — print-tuned darker variants of the screen status tokens.
+  good:        '#1a5a28',   // viability ok/allied — darker than green-600 (L.GREEN)
   goodBg:      '#e8f5e8',
-  warn:        '#a0762a',   // friction, mid stress
+  warn:        '#a0762a',   // friction/mid stress — matches print gold
   warnBg:      'rgba(160,118,42,0.08)',
-  bad:         '#8b1a1a',   // critical, hostile, criminal
+  bad:         '#8b1a1a',   // critical/hostile/criminal — darker than red-600 (L.RED)
   badBg:       '#fde8e8',
-  cool:        '#2a3a7a',   // patron/client, infrastructure
+  cool:        L.BLUE,      // = blue; patron/client/infrastructure (print == screen)
   coolBg:      '#f0f4ff',
 
-  // AI narrative — purple lens
+  // AI narrative — purple lens; darker than violet-500 (L.VIOLET) for print.
   ai:          '#6a2a9a',
   aiTint:      '#f4ecf8',
   aiRule:      '#8a50b0',

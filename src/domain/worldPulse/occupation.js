@@ -128,6 +128,14 @@ const REGRESS_THRESHOLD = 0.34;
 // Below this suitability a CONTESTED occupation collapses outright → liberated (the
 // occupier never established control and the settlement throws it off).
 const COLLAPSE_THRESHOLD = 0.12;
+// Max-dwell safety valve. A `contested` occupation whose suitability sits inside the
+// hysteresis band (REGRESS_THRESHOLD < s < ADVANCE_THRESHOLD) argues NEITHER direction,
+// so without this it can hold at `contested` forever — grinding out a fresh resistance
+// condition every tick in an insurgency that never resolves. Once an occupation has been
+// contested this many ticks it is force-resolved (see advanceOccupationState). The
+// threshold sits well beyond normal campaign lengths (the 40-tick soak horizon), so
+// ordinary occupations are untouched — this only closes the pathological infinite-grind.
+const MAX_CONTESTED_DWELL = 48;
 
 // ── Resistance dynamics (the occupied-side condition). ────────────────────────────
 // Resistance is a 0..1 scalar on the occupation record, ratcheted each tick: it GROWS
@@ -337,12 +345,18 @@ export function advanceResistance(record, occupiedItem) {
  * - A `contested` occupation whose suitability collapses below COLLAPSE_THRESHOLD is
  *   LIBERATED outright (the occupier never took hold). A regression BELOW `contested`
  *   (rank 0) is likewise a liberation.
+ * - A `contested` occupation stuck in the hysteresis dead-band for MAX_CONTESTED_DWELL
+ *   ticks is force-resolved (max-dwell valve): it breaks through one rung if it leans
+ *   toward control (suitability ≥ the band midpoint), else it is liberated. Requires
+ *   `tick` (the current tick) + the record's `sinceTick`; omit `tick` and the valve is
+ *   inert (pure unit calls stay 2-arg).
  *
- * @param {{ state: string, stateHeld: number }} record
+ * @param {{ state: string, stateHeld: number, sinceTick?: number }} record
  * @param {number} suitability  0..1 from stabilizationSuitability.
+ * @param {number|null} [tick]  current tick; enables the max-dwell valve.
  * @returns {{ state: string, stateHeld: number, liberated: boolean }}
  */
-export function advanceOccupationState(record, suitability) {
+export function advanceOccupationState(record, suitability, tick = null) {
   const curRank = stateRank(record?.state);
   const curTier = STATE_LADDER[curRank];
   const s = clamp01(suitability);
@@ -358,6 +372,20 @@ export function advanceOccupationState(record, suitability) {
   else if (s <= REGRESS_THRESHOLD) dir = -1;
 
   if (dir === 0) {
+    // Max-dwell valve: a contested occupation that has argued neither direction for
+    // MAX_CONTESTED_DWELL ticks is force-resolved so the insurgency can't grind forever.
+    // Lean on the band: above the midpoint the occupier is (barely) prevailing, so it
+    // breaks through one rung; at or below, the settlement throws the occupation off.
+    if (curTier === 'contested' && tick != null) {
+      const sinceTick = num(record?.sinceTick);
+      if (Number.isFinite(sinceTick) && tick - sinceTick >= MAX_CONTESTED_DWELL) {
+        const midpoint = (REGRESS_THRESHOLD + ADVANCE_THRESHOLD) / 2;
+        if (s >= midpoint && curRank < STATE_LADDER.length - 1) {
+          return { state: STATE_LADDER[curRank + 1], stateHeld: 0, liberated: false };
+        }
+        return { state: 'contested', stateHeld: 0, liberated: true };
+      }
+    }
     // Inside the sticky band — hold, reset the dwell.
     return { state: curTier, stateHeld: 0, liberated: false };
   }
@@ -758,7 +786,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     // Resistance first (from the pre-tick state), then suitability, then state.
     const nextResistance = advanceResistance(rec, occupiedItem);
     const suitability = stabilizationSuitability({ ...rec, resistance: nextResistance }, occupiedItem, present);
-    const advanced = advanceOccupationState(rec, suitability);
+    // Pass the current tick so a contested occupation stuck in the hysteresis dead-band
+    // is force-resolved after MAX_CONTESTED_DWELL ticks instead of grinding forever.
+    const advanced = advanceOccupationState(rec, suitability, t);
 
     if (advanced.liberated) {
       // The occupation collapsed (the occupier lost control). Exit the ledger; the

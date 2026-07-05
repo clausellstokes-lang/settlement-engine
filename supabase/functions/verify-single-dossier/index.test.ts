@@ -19,7 +19,7 @@ import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
 Deno.env.set('CLIENT_URL', 'https://settlementforge.com');
 
-const { handleVerifyDossier } = await import('./index.ts');
+const { handleVerifyDossier, withinBackstop, _resetBackstopsForTest } = await import('./index.ts');
 
 const VALID_SESSION = 'cs_test_' + 'a'.repeat(40);
 const VALID_TOKEN = 't'.repeat(40);  // 24..128 chars
@@ -135,4 +135,43 @@ Deno.test('the wrong product (not single_dossier) is not verified (403)', async 
     { stripeClient: stripe.stripeClient, rateLimit: allowAll },
   );
   assertEquals(res.status, 403);
+});
+
+// ── Fail-open backstop (limiter-outage path) ────────────────────────────────
+// These test the in-memory backstop directly (the DB limiter is bypassed by the
+// injected rateLimit stub in the handler tests above). The backstop only runs in
+// production when the DB RPC can't give a verdict; its job is to bound Stripe
+// amplification WITHOUT being defeated by x-forwarded-for spoofing.
+
+Deno.test('backstop: a single honest IP is throttled after its per-IP cap', () => {
+  _resetBackstopsForTest();
+  const ip = '203.0.113.7';
+  let allowed = 0;
+  for (let i = 0; i < 40; i++) if (withinBackstop(ip)) allowed++;
+  // Per-IP ceiling is 30; the same IP cannot exceed it within one window.
+  assertEquals(allowed, 30);
+});
+
+Deno.test('backstop: x-forwarded-for rotation cannot bypass the global ceiling', () => {
+  _resetBackstopsForTest();
+  // Attacker rotates a fresh spoofed IP every request. Each fresh IP would pass
+  // its own per-IP bucket, so WITHOUT the global ceiling this would be unbounded.
+  // With it, total allowed attempts across all IPs is capped at BACKSTOP_MAX_GLOBAL.
+  let allowed = 0;
+  for (let i = 0; i < 500; i++) {
+    if (withinBackstop(`10.0.${Math.floor(i / 256)}.${i % 256}`)) allowed++;
+  }
+  assertEquals(allowed, 120);  // BACKSTOP_MAX_GLOBAL — rotation is defeated
+});
+
+Deno.test('backstop: an over-limit IP does not consume global budget', () => {
+  _resetBackstopsForTest();
+  // One IP hammers past its per-IP cap (30). The over-limit attempts must NOT
+  // count against the global ceiling, so other IPs still get their fair share.
+  for (let i = 0; i < 200; i++) withinBackstop('198.51.100.1');  // 30 allowed, 170 rejected
+  let otherAllowed = 0;
+  for (let i = 0; i < 200; i++) if (withinBackstop(`172.16.${Math.floor(i / 256)}.${i % 256}`)) otherAllowed++;
+  // Global ceiling is 120; the first IP consumed only its 30 allowed hits, so a
+  // rotation of fresh IPs can still use the remaining 90 before the global cap.
+  assertEquals(otherAllowed, 90);
 });

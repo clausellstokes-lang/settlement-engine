@@ -47,13 +47,12 @@
  * path (a corrupt applied-head.json, an API-shape change, a bug here) and
  * translates it into SKIP (exit 0), never a crash-proceed.
  *
- * DOCUMENTED BYPASS — CLI deploys: a `vercel deploy --prod` run from an
- * operator's machine carries NO VERCEL_GIT_* metadata, so it takes the
- * not-running-in-Vercel branch and proceeds UNGATED. That is a deliberate
- * trade-off: hard-blocking the no-metadata branch would also block every local
- * `vercel build` / `vite preview`. Treat a CLI production deploy as the same
- * class of explicit operator action as VERCEL_ALLOW_UNGATED_DEPLOY=1 — it
- * bypasses CI verification, so don't reach for it casually.
+ * CLI deploys ARE now gated: a `vercel deploy --prod` run from an operator's
+ * machine carries NO VERCEL_GIT_* metadata, but its build still runs on Vercel
+ * infra with VERCEL=1 and VERCEL_ENV=production. The no-metadata branch detects
+ * that combination and BLOCKS it (fail-closed) unless VERCEL_ALLOW_UNGATED_DEPLOY=1
+ * is set, closing the former silent bypass. Local `vercel build` / `vite preview`
+ * set no VERCEL env, so they still proceed unblocked.
  *
  * Timing: Vercel runs this ignoreCommand seconds after a push — long before CI
  * (~10-15m) can conclude — so the push-triggered deploy is ALWAYS skipped with
@@ -117,10 +116,32 @@ export async function decideDeploy(env, fetchCheckRuns = fetchGithubCheckRuns, r
   const allowUngated = env.VERCEL_ALLOW_UNGATED_DEPLOY === '1';
 
   if (!sha || !owner || !repo) {
-    // Outside Vercel (or missing git metadata) — never block. NOTE this is also
-    // the documented CLI-deploy bypass (see the header): `vercel deploy --prod`
-    // carries no git metadata and proceeds UNGATED. Kept proceed-on-purpose —
-    // a hard block here would break local `vercel build` / `vite preview`.
+    // No git metadata. Two very different callers land here:
+    //   • Local `vercel build` / `vite preview` — sets no VERCEL env; must proceed.
+    //   • A CLI `vercel deploy --prod` — runs the build ON VERCEL INFRA (VERCEL=1,
+    //     VERCEL_ENV=production) but carries no git SHA, so it USED to slip through
+    //     this branch UNGATED (the old documented bypass). Close it: a production
+    //     deploy without git metadata is the same explicit operator action as a
+    //     token-less git deploy, so block unless the operator opts in with
+    //     VERCEL_ALLOW_UNGATED_DEPLOY=1 (which proceeds loudly). Local previews set
+    //     no VERCEL env, so they are unaffected; the blast radius of a false match is
+    //     at most a local `vercel build --prod` needing the same one-line opt-out.
+    const isVercelProdDeploy = env.VERCEL === '1' && env.VERCEL_ENV === 'production';
+    if (isVercelProdDeploy) {
+      if (allowUngated) {
+        return {
+          action: 'proceed',
+          warn: true,
+          reason:
+            'CLI production deploy without git metadata but VERCEL_ALLOW_UNGATED_DEPLOY=1 — proceeding UNGATED (CI was NOT verified)',
+        };
+      }
+      return {
+        action: 'skip',
+        reason:
+          'production deploy on Vercel without git metadata (a CLI `vercel deploy --prod`?) — cannot verify CI; blocking (set VERCEL_ALLOW_UNGATED_DEPLOY=1 to override)',
+      };
+    }
     return { action: 'proceed', reason: 'not running in a Vercel git deploy context' };
   }
 

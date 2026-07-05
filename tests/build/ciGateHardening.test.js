@@ -227,6 +227,33 @@ describe('production deploy is gated on CI', () => {
     expect(d.action).toBe('proceed');
   });
 
+  it('FAILS CLOSED: blocks a CLI `vercel deploy --prod` (VERCEL prod build, no git metadata)', async () => {
+    // The former silent bypass: a CLI prod deploy runs on Vercel infra (VERCEL=1,
+    // VERCEL_ENV=production) but carries no git SHA. It must now be blocked, not shipped.
+    const d = await decideDeploy({ VERCEL: '1', VERCEL_ENV: 'production' }, async () => {
+      throw new Error('must not fetch — no git metadata to verify');
+    });
+    expect(d.action).toBe('skip');
+    expect(d.reason).toMatch(/without git metadata/i);
+  });
+
+  it('a CLI prod deploy still honors VERCEL_ALLOW_UNGATED_DEPLOY (loudly)', async () => {
+    const d = await decideDeploy(
+      { VERCEL: '1', VERCEL_ENV: 'production', VERCEL_ALLOW_UNGATED_DEPLOY: '1' },
+      async () => { throw new Error('must not fetch in opt-out path'); },
+    );
+    expect(d.action).toBe('proceed');
+    expect(d.warn).toBe(true);
+    expect(d.reason).toMatch(/UNGATED/);
+  });
+
+  it('a non-production Vercel context without git metadata still proceeds (preview/local build)', async () => {
+    const d = await decideDeploy({ VERCEL: '1', VERCEL_ENV: 'preview' }, async () => {
+      throw new Error('must not fetch');
+    });
+    expect(d.action).toBe('proceed');
+  });
+
   it('FAILS CLOSED: blocks the deploy when the CI token is missing', async () => {
     // The core hardening: an unset GITHUB_CI_STATUS_TOKEN must SKIP (not ship).
     const d = await decideDeploy({ ...vercelEnv }, async () => {

@@ -45,18 +45,15 @@ function loadEngine() {
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import {
-  buildEdit as _pe_buildEdit,
-  appendEdit as _pe_appendEdit,
-  revertEdit as _pe_revertEdit,
-  activeEdits as _pe_activeEdits,
-} from '../domain/pendingEdits.js';
+  queueEditImpl, revertSingleEditImpl, revertPendingEditsImpl, commitPendingEditsImpl,
+} from './settlementPendingEditsHelpers.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
-import { buildRegistryFromStore } from '../lib/customRegistry.js';
+import { setPrimaryDeityImpl, imposeCultImpl } from './settlementDeityHelpers.js';
 import {
   CRISIS_EVENT_TYPES,
   crisisTwinFor,
@@ -66,7 +63,6 @@ import {
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { WAR_STRESSOR_TYPES } from '../domain/worldPulse/warStressorTypes.js';
 import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
-import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
@@ -397,165 +393,15 @@ export const createSettlementSlice = (set, get) => ({
   pendingEditsQueue: [],
   pendingEditsClock: 0,
 
-  /** Add an edit to the queue. Returns the edit so the caller can
-   *  reference its id (e.g. for an undo-this-edit affordance). */
-  queueEdit: (kind, payload) => {
-    // Campaign-clock identity lock: reject (rather than queue) NPC/faction
-    // renames once the settlement is canonized — names are frozen post-canon.
-    if (get().phase === 'canon' && (kind === 'rename-npc' || kind === 'rename-faction')) {
-      return null;
-    }
-    const clock = (get().pendingEditsClock || 0) + 1;
-    const edit = _pe_buildEdit(kind, payload, clock);
-    set(state => {
-      state.pendingEditsClock = clock;
-      state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
-    });
-    // Analytics — once per queued edit. Read coarse context AFTER the append so
-    // queue_depth_after reflects the new active depth. Fire-and-forget.
-    const canonPhase = get().phase;
-    const queueDepthAfter = _pe_activeEdits(get().pendingEditsQueue || []).length;
-    import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
-      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, {
-        kind,
-        canon_phase: canonPhase,
-        queue_depth_after: queueDepthAfter,
-      });
-    }).catch(() => {});
-    return edit;
-  },
+  // Stage→commit edit queue. Bodies live in settlementPendingEditsHelpers.js; these
+  // stay thin delegations. queueEdit returns the edit (for undo-this-edit affordances).
+  queueEdit: (kind, payload) => queueEditImpl(get, set, kind, payload),
 
-  /** Mark an edit as reverted (kept in history for undo). */
-  revertSingleEdit: (editId) => {
-    set(state => {
-      state.pendingEditsQueue = _pe_revertEdit(state.pendingEditsQueue || [], editId);
-    });
-    // Analytics — fire-and-forget; reverting one queued edit.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_REVERTED, { count: 1, scope: 'single' });
-    }).catch(() => {});
-  },
+  revertSingleEdit: (editId) => revertSingleEditImpl(get, set, editId),
 
-  /** Discard the entire queue without applying. */
-  revertPendingEdits: () => {
-    // Count the active edits being discarded BEFORE clearing, for analytics.
-    const droppedCount = _pe_activeEdits(get().pendingEditsQueue || []).length;
-    set(state => {
-      state.pendingEditsQueue = [];
-    });
-    // Analytics — fire-and-forget; whole-queue discard.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_REVERTED, { count: droppedCount, scope: 'all' });
-    }).catch(() => {});
-  },
+  revertPendingEdits: () => revertPendingEditsImpl(get, set),
 
-  /** Apply the queue against the live settlement. Each edit dispatches
-   *  to an existing mutation (renameNPC, etc.) by `kind`. Edits that
-   *  don't map to a known mutation are skipped with a warning — the
-   *  queue clears either way on a successful commit. */
-  commitPendingEdits: () => {
-    const state = get();
-    const queue = state.pendingEditsQueue || [];
-    const active = _pe_activeEdits(queue);
-    if (active.length === 0) return;
-
-    for (const edit of active) {
-      try {
-        switch (edit.kind) {
-          case 'rename-npc':
-            if (typeof state.renameNPC === 'function' &&
-                edit.payload?.npcIndex != null) {
-              state.renameNPC(edit.payload.npcIndex, edit.payload.newName);
-            }
-            break;
-          case 'rename-settlement':
-            set(s => { if (s.settlement) s.settlement.name = edit.payload?.newName; });
-            break;
-          // Future kinds (add-institution etc.) dispatch to existing
-          // mutations or — for not-yet-built ones — log a TODO. The
-          // queue still clears so the UI isn't stuck on a missing
-          // dispatcher.
-          default:
-            console.info(`[commitPendingEdits] no dispatcher for ${edit.kind} yet`);
-            break;
-        }
-      } catch (e) {
-        console.warn(`[commitPendingEdits] ${edit.kind} failed:`, e);
-      }
-    }
-
-    // Clear the queue. Failed-commit retry is a future-tier feature;
-    // for now, all-or-nothing matches the cascade-preview UX.
-    set(s => { s.pendingEditsQueue = []; });
-    // Snapshot the post-commit state so the version
-    // timeline records this as a discrete edit checkpoint. The
-    // snapshot label summarises what edits were applied; the user
-    // can revert to before this batch from VersionsTab.
-    try {
-      const labels = active.map(e => e.kind).join(', ');
-      const fn = get().recordSnapshot;
-      if (typeof fn === 'function') {
-        fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
-      }
-    } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
-
-    // Analytics — fire-and-forget. Band the committed edits into coarse
-    // structural / rename / prose counts (same kind groupings as previewCascade).
-    let structuralCount = 0;
-    let renameCount = 0;
-    let proseCount = 0;
-    for (const e of active) {
-      switch (e.kind) {
-        case 'add-institution':
-        case 'remove-institution':
-        case 'add-resource':
-        case 'remove-resource':
-        case 'add-stressor':
-        case 'remove-stressor':
-          structuralCount += 1;
-          break;
-        case 'rename-npc':
-        case 'rename-faction':
-        case 'rename-settlement':
-          renameCount += 1;
-          break;
-        case 'edit-prose':
-          proseCount += 1;
-          break;
-        default:
-          break;
-      }
-    }
-    const canonPhase = get().phase;
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_COMMITTED, {
-        count: active.length,
-        structural_count: structuralCount,
-        rename_count: renameCount,
-        prose_count: proseCount,
-        canon_phase: canonPhase,
-      });
-    }).catch(() => {});
-
-    // Research plane (edit_events) — feed the long-built but previously-unfed
-    // edit ledger. Saved settlements only (a stable uuid is required), research
-    // consent gated, payloads redacted to enum/count only (never edit prose).
-    const editUuid = state.activeSaveId;
-    if (editUuid) {
-      const preSettlement = state.settlement; // Immer-immutable pre-commit ref
-      Promise.all([
-        import('../lib/consent.js'),
-        import('../lib/analyticsQueue.js'),
-        import('../lib/editFingerprint.js'),
-        import('../domain/pendingEdits.js'),
-      ]).then(([{ getConsent }, { enqueueEdit }, { extractEditRows }, { previewCascade }]) => {
-        if (!getConsent().research) return;
-        let cascade = null;
-        try { cascade = previewCascade(preSettlement, queue); } catch { /* coarse cascade is best-effort */ }
-        for (const row of extractEditRows(active, { settlementUuid: editUuid, cascade })) enqueueEdit(row);
-      }).catch(() => {});
-    }
-  },
+  commitPendingEdits: () => commitPendingEditsImpl(get, set),
 
   // ── Version history mutations ───────────────────────────────────────
   //
@@ -1826,121 +1672,12 @@ export const createSettlementSlice = (set, get) => ({
   /** Dismiss the successor prompt without taking action. */
   dismissPendingSuccession: () => set(state => { state.pendingSuccession = null; }),
 
-  /**
-   * Assign (or clear) the current settlement's primary deity — the STORE half
-   * of the embed-on-assign bridge. This is the ONLY place a
-   * deity ref is resolved against customContent: we look the authored deity up
-   * here (where the store is available), build a self-contained snapshot, and
-   * dispatch SET_PRIMARY_DEITY with the snapshot already in the payload. The
-   * pure mutate.js handler commits it; the pulse/derivers then read ONLY
-   * `config.primaryDeitySnapshot`, never the store — preserving the headless /
-   * single-snapshot determinism contract.
-   *
-   * Pass a falsy `deityRefId` to clear the assignment (returns to dormant).
-   * Premium gating is enforced at the UI (canUseCustomContent) — a free user
-   * who somehow dispatched this still can't advance time, so the assignment is
-   * inert (D.0). Returns the resulting log entry, or null if nothing happened.
-   *
-   * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to clear
-   */
-  setPrimaryDeity: (deityRefId) => {
-    const state = get();
-    if (!state.settlement) return null;
+  // Deity/cult assignment — the store half of the embed-on-assign bridge. Bodies
+  // live in settlementDeityHelpers.js (resolve the ref → frozen snapshot → dispatch
+  // through applyEvent); these stay thin delegations. See that file for the contract.
+  setPrimaryDeity: (deityRefId) => setPrimaryDeityImpl(get, deityRefId),
 
-    if (!deityRefId) {
-      return state.applyEvent({
-        type: 'SET_PRIMARY_DEITY',
-        targetId: null,
-        payload: { deityRef: null, snapshot: null },
-      });
-    }
-
-    // Resolve the ref → authored deity → frozen snapshot. Resolution happens
-    // HERE (intent time, store layer), never inside the pulse.
-    const registry = buildRegistryFromStore(get);
-    const entry = registry.resolve(deityRefId);
-    const raw = entry?.raw;
-    if (!raw) {
-      // Unknown ref — refuse rather than embed a half-resolved record.
-      return null;
-    }
-    const snapshot = {
-      name: raw.name,
-      alignmentAxis: raw.alignmentAxis,
-      temperamentAxis: raw.temperamentAxis,
-      rankAxis: raw.rankAxis,
-      // lawAxis (B5) — a legacy 3-axis deity has none; mutate.js defaults it to
-      // 'neutral' in the embed, so the snapshot stays self-contained either way.
-      lawAxis: raw.lawAxis,
-      ...(raw.domain ? { domain: raw.domain } : {}),
-    };
-    return state.applyEvent({
-      type: 'SET_PRIMARY_DEITY',
-      targetId: deityRefId,
-      payload: { deityRef: deityRefId, snapshot },
-    });
-  },
-
-  /**
-   * Impose (or remove) a CULT-level deity on the current settlement — the cult
-   * counterpart of setPrimaryDeity. Same embed-on-assign bridge: resolve the ref
-   * against customContent HERE, dispatch IMPOSE_CULT with the snapshot in the
-   * payload, and let the pure handler reconcile it against tier capacity + niche.
-   *
-   * Pass a falsy `deityRefId` to remove the cult named by `removeRef` (or, with no
-   * removeRef, clear all cults). Before dispatching an ADD we run the SAME pure
-   * reconciliation as the handler and refuse (return null, no log entry) when the
-   * cult can't be seated — so a full small settlement or a patron-niche clash never
-   * logs a no-op. Returns the resulting log entry, or null if nothing happened.
-   *
-   * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to remove
-   * @param {string|null} [removeRef]  when clearing, the specific cult ref to drop
-   */
-  imposeCult: (deityRefId, removeRef = null) => {
-    const state = get();
-    if (!state.settlement) return null;
-    const config = state.settlement.config || {};
-
-    if (!deityRefId) {
-      // Remove path — a no-op if there's nothing to drop.
-      const cults = Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [];
-      if (!cults.length) return null;
-      if (removeRef && !cults.some(c => String(c?._deityRef || c?.name || '') === String(removeRef))) return null;
-      return state.applyEvent({
-        type: 'IMPOSE_CULT',
-        targetId: removeRef || null,
-        payload: { deityRef: removeRef || null, snapshot: null },
-      });
-    }
-
-    // Resolve the ref → authored deity → frozen snapshot (intent time, store layer).
-    const registry = buildRegistryFromStore(get);
-    const entry = registry.resolve(deityRefId);
-    const raw = entry?.raw;
-    if (!raw) return null;                              // unknown ref — refuse.
-    const snapshot = {
-      name: raw.name,
-      alignmentAxis: raw.alignmentAxis,
-      temperamentAxis: raw.temperamentAxis,
-      rankAxis: raw.rankAxis,
-      lawAxis: raw.lawAxis,
-      ...(raw.domain ? { domain: raw.domain } : {}),
-    };
-    // Pre-check placement with the same pure rule the handler uses, so a refused
-    // imposition never logs a no-op event.
-    const probe = reconcileCultImposition({
-      patron: config.primaryDeitySnapshot || null,
-      cults: Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [],
-      tier: state.settlement.tier || config.tier || 'village',
-      deity: { _deityRef: deityRefId, ...snapshot },
-    });
-    if (probe.action === 'refused') return null;
-    return state.applyEvent({
-      type: 'IMPOSE_CULT',
-      targetId: deityRefId,
-      payload: { deityRef: deityRefId, snapshot },
-    });
-  },
+  imposeCult: (deityRefId, removeRef = null) => imposeCultImpl(get, deityRefId, removeRef),
 
   /**
    * Commit the currently-pending preview event. This is the audit's

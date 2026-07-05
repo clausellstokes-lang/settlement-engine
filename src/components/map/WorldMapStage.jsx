@@ -128,6 +128,20 @@ function WorldMapStageImpl({
         >
           {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
               the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
+          {/* SECURITY — same-origin FMG fork (public/map, vendored libs). This iframe
+              runs on the app origin and can therefore read the Supabase session in
+              localStorage. Containment that IS in place: (1) the bridge validates
+              event.origin === our origin AND event.source === this iframe, and posts
+              with an explicit origin target, never '*' (lib/mapBridge.js); (2) the
+              vercel.json CSP scopes connect-src for /map/ so a compromised lib can't
+              freely exfiltrate. Deliberately NOT sandboxed: an iframe with BOTH
+              allow-scripts and allow-same-origin (which FMG needs for its localStorage
+              /IndexedDB) can remove its own sandbox, so a same-origin sandbox is theater
+              against a compromised-script threat while risking the paid map; dropping
+              allow-same-origin instead denies FMG storage and breaks it. The real
+              isolation is serving /map/ from a SEPARATE ORIGIN (an infra change): the
+              bridge already speaks postMessage, so that is a src + origin-config swap,
+              not a rewrite. Tracked as the follow-up; do not add a same-origin sandbox. */}
           {!imageMode && (
             <iframe
               // Keyed on mapReloadKey so the "Reload map" recovery action drops
@@ -137,6 +151,9 @@ function WorldMapStageImpl({
               data-tour="map"
               src={FMG_URL}
               title="Fantasy Map"
+              // Don't leak the parent URL (which can carry view/query state) to any
+              // request the map frame issues. Zero functional impact; small hardening.
+              referrerPolicy="no-referrer"
               style={{
                 width: '100%',
                 height: '100%',

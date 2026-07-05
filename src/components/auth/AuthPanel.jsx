@@ -363,10 +363,10 @@ export default function AuthPanel({
 
       {/* Primary path: email then password, always inline. Sign-up adds a
           confirm-password field directly below. */}
-      <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
-      <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+      <Input type="email" label={t('auth.placeholder.email')} placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
+      <Input type="password" label={t('auth.placeholder.password')} placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
       {mode === 'signup' && (
-        <Input type="password" placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
+        <Input type="password" label={t('auth.placeholder.confirmPassword')} placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
       )}
 
       {/* Security questions — sign-up only, AFTER confirm-password. The answers

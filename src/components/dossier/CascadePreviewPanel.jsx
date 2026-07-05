@@ -16,12 +16,13 @@
  * sheet on mobile. Backdrop click closes.
  */
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
 const VIOLET = swatch['#7B4FCF'];
 const VIOLET_BG = swatch['#EBE2FA'];
@@ -80,34 +81,36 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
     ).length;
   }, [settlement, savedSettlements]);
 
-  // Esc closes
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  // Shared modal focus management: trap Tab inside the panel, restore focus to the
+  // trigger on close, and dismiss on Escape (topmost dialog only). Backs the
+  // aria-modal promise below with real focus behavior.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   const summaryText = preview.summaryLines.length
     ? preview.summaryLines.join(' · ')
     : 'No structural changes.';
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- overlay backdrop: click/key here is dismiss-only; Escape also closes (see useEffect above)
-    <div
-      role="dialog"
-      aria-label="Cascade preview"
-      onClick={onClose}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 9100,
-        background: 'rgba(24,20,16,0.5)',
-        backdropFilter: 'blur(4px)',
-      }}
-    >
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- panel container: handlers only stop backdrop click/key from bubbling, not an interactive control */}
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9100 }}>
+      {/* Presentational backdrop — click dismisses; the KEYBOARD dismiss is Escape,
+          handled by the shared focus trap (useDialogFocusTrap) on the dialog, so the
+          backdrop needs no key handler of its own. A sibling (not a parent) of the
+          dialog, so a click on the panel never reaches it and no stopPropagation is
+          needed. */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- dismiss-only backdrop; Escape (focus trap) is the keyboard path */}
+      <div
+        onClick={onClose}
+        style={{
+          position: 'absolute', inset: 0,
+          background: 'rgba(24,20,16,0.5)',
+          backdropFilter: 'blur(4px)',
+        }}
+      />
       <aside
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Cascade preview"
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',

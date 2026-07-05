@@ -41,9 +41,15 @@ const MAX_SLACK = 40;
 // current LOC + ~20. SHRINK these as files shrink (the slack guard enforces it); never
 // RAISE one without a deliberate, in-diff reason.
 const GRANDFATHERED = {
+  // App.jsx is the shell orchestrator. It was only under the loose GENERAL_CAP (so it
+  // could grow ~240 lines for free); pinned here at a tight ceiling after the AppViews
+  // extraction so it can only shrink. The ESLint max-lines rule (effective lines) globs
+  // src/components/** and does not reach src/App.jsx — THIS physical-line ceiling is its
+  // size guard. Shrink it as the shell decomposes further.
+  'src/App.jsx': 982, // route→component registry extracted to AppViews.jsx
   'src/generators/powerGenerator.js': 2760, // shrank: genSuccessionNarr extracted to successionNarrative.js
   'src/generators/economicGenerator.js': 2923, // de-minified (minifier identifiers → meaningful names, !0/!1/void 0 → literals; byte-identical output)
-  'src/store/settlementSlice.js': 2183, // shrank: snapshot/canon/rename action groups extracted to settlement{Snapshot,Canon,Rename}Helpers.js
+  'src/store/settlementSlice.js': 1939, // shrank further: deity/cult + pending-edits action groups extracted to settlement{Deity,PendingEdits}Helpers.js (was 2183)
   'src/generators/npcGenerator.js': 1688,
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
@@ -55,7 +61,7 @@ const GRANDFATHERED = {
   // NOTE: pulseKernel.js is no longer grandfathered — the strategy_deploy dismiss residue
   // strip was extracted into warDeployment.js (stripSuppressedDeployResidue), dropping it
   // back under GENERAL_CAP.
-  'src/domain/worldPulse/stressors.js': 1227,
+  'src/domain/worldPulse/stressors.js': 1235, // + intra-tick decay→escalate precedence note (review-remediation #10b)
 };
 
 // src logic tree only — data/ (hand-authored content, the moat) is exempt.
