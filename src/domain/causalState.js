@@ -26,7 +26,7 @@
  *     That module produces a 4-dimension UI-facing summary
  *     (resilience / volatility / externalThreat / resourcePressure)
  *     deliberately consolidated for DM-facing display. This file
- *     produces the underlying 14-variable substrate the roadmap calls
+ *     produces the underlying 16-variable substrate the roadmap calls
  *     for. The UI surface can later derive FROM this substrate
  *     (Strangler Fig) without breaking consumers today.
  *   - The 5-band vocabulary (surplus / adequate / strained / critical

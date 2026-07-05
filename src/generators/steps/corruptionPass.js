@@ -38,7 +38,11 @@ registerStep('corruptionPass', {
   deps: ['generatePopulation', 'economyReconcilePass'],
   reads: ['economicState', 'institutions', 'npcs'], // ctx keys this step consumes that another step produces
   provides: [],
-  mutates: ['factions', 'npcs'], // stamps corruption onto the rosters in place
+  // Stamps corruption onto npc objects in place. `factions` is a REAL entry, not
+  // over-declaration: faction roster entries share object references with these
+  // npcs, so mutating an npc also mutates ctx.factions — the strict data-flow
+  // contract (pipelineContract) detects the change and requires it declared here.
+  mutates: ['factions', 'npcs'],
   phase: 'population',
 }, (ctx, rng) => {
   const npcs = Array.isArray(ctx.npcs) ? ctx.npcs : [];

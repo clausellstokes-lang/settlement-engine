@@ -373,7 +373,9 @@ export function installAnalyticsQueue() {
   startInterval();
   const onLeave = () => flush({ beacon: true });
   try {
-    window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') onLeave(); });
+    // visibilitychange fires on `document`; attach there (not window, which only
+    // saw it via bubbling) for parity with useSectionDwell and correctness.
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') onLeave(); });
     window.addEventListener('pagehide', onLeave);
   } catch { /* ignore */ }
 }
