@@ -249,10 +249,21 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
   });
 
   it('founder_lifetime grants the one-time 30 credit bonus', () => {
-    // grantCreditsForSessionOnce is the idempotent wrapper (dedups on session id);
-    // grantCredits is the legacy direct form — accept either so the "one-time"
-    // contract holds whether or not the redelivery guard is in place.
-    expect(src).toMatch(/grantCredits(?:ForSessionOnce)?\([\s\S]{0,200}30[\s\S]{0,200}founder_grant/);
+    // grantCreditsForSessionOnce is the idempotent wrapper (dedups on session id).
+    // The amount is the named FOUNDER_CREDIT_BONUS (pinned = 30 here so the grant AND
+    // the refund clawback that reverses it stay in sync).
+    expect(src).toMatch(/FOUNDER_CREDIT_BONUS\s*=\s*30\b/);
+    expect(src).toMatch(/grantCredits(?:ForSessionOnce)?\([\s\S]{0,200}FOUNDER_CREDIT_BONUS[\s\S]{0,200}founder_grant/);
+  });
+
+  it('a refunded/disputed founder_lifetime charge reverses the founder grant', () => {
+    // charge.refunded / charge.dispute.created must free the is_founder seat, downgrade
+    // premium, and claw the bonus — otherwise a refunded founder keeps everything free
+    // and permanently consumes one of the 30 advertised seats.
+    expect(src).toMatch(/clawbackFounderForSession\s*\(/);
+    expect(src).toMatch(/is_founder:\s*false/);
+    expect(src).toMatch(/handle_premium_downgrade/);
+    expect(src).toMatch(/founder_clawback:/);
   });
 
   it('downgrades through the retention RPC, not a bare profile tier write', () => {
