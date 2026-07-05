@@ -77,6 +77,23 @@ export function contiguityGaps(nums) {
 }
 
 /**
+ * Numeric prefixes that appear on MORE THAN ONE migration file (e.g. two files both
+ * numbered 109 — the classic cross-worktree collision). contiguityGaps() is blind to
+ * these: a duplicate leaves no MISSING integer, so the sequence reads "contiguous"
+ * while the ordered-apply contract is broken (db push applies the two in ambiguous
+ * order and one may be effectively skipped). @param {number[]} nums
+ */
+export function duplicateNumbers(nums) {
+  const seen = new Set();
+  const dupes = new Set();
+  for (const n of nums) {
+    if (seen.has(n)) dupes.add(n);
+    seen.add(n);
+  }
+  return [...dupes].sort((a, b) => a - b);
+}
+
+/**
  * Classify the checked-in applied head against the repo migration set. Pure + exported
  * so the drift logic is unit-tested (not just exercised by a live gate run).
  *   - corrupt: prod claims a migration the repo doesn't have (applied > head).
@@ -99,6 +116,15 @@ function main() {
     process.exit(1);
   }
   const head = nums[nums.length - 1];
+  const dupes = duplicateNumbers(nums);
+  if (dupes.length) {
+    console.error(
+      `[check-migration-head] DUPLICATE migration numbers: ${dupes.map((n) => String(n).padStart(3, '0')).join(', ')}. ` +
+      `Two files share a numeric prefix — \`supabase db push\` applies them in ambiguous order and one may be skipped. ` +
+      `Renumber one (usually the newer / less-deployed) so every prefix is unique.`,
+    );
+    process.exit(1);
+  }
   const gaps = contiguityGaps(nums);
   if (gaps.length) {
     console.error(
