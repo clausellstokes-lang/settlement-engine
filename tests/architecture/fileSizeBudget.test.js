@@ -50,13 +50,13 @@ const GRANDFATHERED = {
   'src/generators/powerGenerator.js': 2760, // shrank: genSuccessionNarr extracted to successionNarrative.js
   'src/generators/economicGenerator.js': 2923, // de-minified (minifier identifiers → meaningful names, !0/!1/void 0 → literals; byte-identical output)
   'src/store/settlementSlice.js': 1939, // shrank further: deity/cult + pending-edits action groups extracted to settlement{Deity,PendingEdits}Helpers.js (was 2183)
-  'src/generators/npcGenerator.js': 1688,
+  'src/generators/npcGenerator.js': 1500, // shrank: dead goalCategories metadata + 4 dead _-functions removed (was 1688)
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction
   // of the pure support-edge readers + levy computation into a sibling module is overdue.
   'src/domain/worldPulse/warDeployment.js': 1840, // + stripSuppressedDeployResidue extracted from pulseKernel (the strategy_deploy dismiss residue strip)
-  'src/generators/narrativeGenerator.js': 1250,
+  'src/generators/narrativeGenerator.js': 1202, // shrank: dead _getSettReason removed (was 1250)
   'src/domain/causalState.js': 1277, // + review-remediation: real-walls detection (no JSON.stringify regex) + occupation_lifted polarity
   // NOTE: pulseKernel.js is no longer grandfathered — the strategy_deploy dismiss residue
   // strip was extracted into warDeployment.js (stripSuppressedDeployResidue), dropping it

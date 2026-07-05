@@ -6,11 +6,9 @@
  *  - getHistoryTemplate was defined but never returned its value (dead function)
  *  - CONFLICT_TYPES was referenced but undefined; getSettlementAgeData always returned null silently
  *  - local popToTier shadowed imported popToTier with a different (multiplier) function; renamed to priorityMult
- *  - pickRandom2/random01 were local re-implementations; now imported from helpers
  */
 
-import { POLITICAL_FLAVOR } from './narrativeText.js';
-import { getInstFlags, getStressFlags, pick, pickRandom2, random01, randInt } from './helpers.js';
+import { getInstFlags, getStressFlags, pick, randInt } from './helpers.js';
 import { random as _rng } from './rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
@@ -42,77 +40,7 @@ const resolveSettlementAge = (tier, config = {}) => {
   return getSettlementAge(tier);
 };
 
-// ─── HISTORICAL_EVENTS_DATA ───────────────────────────────────────────────────
-
-// ─── getSettlementHistoryNote ─────────────────────────────────────────────────
-/**
- * Return a one-sentence historical character description based on the pattern
- * of event types in the settlement's historical record.
- *
- * @param {Array}  events  - Historical event objects with .type and .severity
- * @param {string} _tier   - Settlement tier
- * @param {Object} _config - Settlement config
- * @returns {string}
- */
-const _getSettlementHistoryNote = (events, _tier, _config) => {
-  if (!events || events.length === 0) return 'recently established and still finding its character';
-
-  const disasters = events.filter(e => e.type === 'disaster').length;
-  const political = events.filter(e => e.type === 'political').length;
-  const economic = events.filter(e => e.type === 'economic').length;
-  const religious = events.filter(e => e.type === 'religious').length;
-  const magical = events.filter(e => e.type === 'magical').length;
-  const catastrophic = events.some(e => e.severity === 'catastrophic');
-
-  // Small chance to use a stable/generic description regardless
-  if (random01(0.15)) return pickRandom2(POLITICAL_FLAVOR.stable)(events);
-
-  // Choose the dominant narrative pattern
-  let pattern;
-  if (catastrophic) pattern = 'catastrophic';
-  else if (political >= 2) pattern = 'political_heavy';
-  else if (disasters >= 2) pattern = 'disaster_heavy';
-  else if (economic >= 2) pattern = 'economic_heavy';
-  else if (religious >= 1 && random01(0.6)) pattern = 'religious_heavy';
-  else if (magical >= 1 && random01(0.5)) pattern = 'magical_heavy';
-  else if (events.length >= 4 && random01(0.65)) pattern = 'layered_history';
-  else pattern = 'stable';
-
-  // Map pattern to relevant event subset
-  const eventSubsets = {
-    political_heavy: events.filter(e => e.type === 'political'),
-    disaster_heavy: events.filter(e => e.type === 'disaster'),
-    economic_heavy: events.filter(e => e.type === 'economic'),
-    religious_heavy: events.filter(e => e.type === 'religious'),
-    magical_heavy: events.filter(e => e.type === 'magical'),
-    catastrophic: events.filter(e => e.severity === 'catastrophic'),
-    stable: events,
-    layered_history: events,
-  };
-
-  const flavors = POLITICAL_FLAVOR[pattern];
-  const subset = eventSubsets[pattern];
-
-  if (!flavors || !subset || subset.length === 0) {
-    return pickRandom2(POLITICAL_FLAVOR.stable)(events);
-  }
-
-  return pickRandom2(flavors)(subset)
-    .replace(/\bthe\s+(the|a|an)\s+/gi, 'the ')
-    .replace(/\bthe\s+(The|A|An)\s+/g, 'the ');
-};
-
-// ─── buildHistoryContext ──────────────────────────────────────────────────────
-/**
- * Extract the context object used by generateTradeNarrative2 and related helpers.
- * Classifies institution presence and economic state into descriptive fields.
- *
- * @param {Object} config        - Settlement config
- * @param {Array}  institutions  - Institution objects
- * @param {Object} economicState - Generated economic state
- * @param {Object} powerStructure - Generated power structure
- * @returns {Object} Context object with named descriptors
- */
+// ─── history context ──────────────────────────────────────────────────────────
 /**
  * Map a settlement's primary export to a canonical trade-commodity keyword
  * (timber / grain / iron / …), or null when there is no export or it maps to
@@ -143,6 +71,16 @@ const deriveTradeCommodity = (economicState) => {
   return null;
 };
 
+/**
+ * Extract the context object used by generateTradeNarrative2 and related helpers.
+ * Classifies institution presence and economic state into descriptive fields.
+ *
+ * @param {Object} config        - Settlement config
+ * @param {Array}  institutions  - Institution objects
+ * @param {Object} economicState - Generated economic state
+ * @param {Object} powerStructure - Generated power structure
+ * @returns {Object} Context object with named descriptors
+ */
 const buildHistoryContext = (config, institutions = [], economicState = null, powerStructure = null) => {
   const { tradeRouteAccess: route = 'road', magicLevel = 'medium', monsterThreat: threat = 'frontier' } = config;
 
@@ -319,14 +257,11 @@ const generateTradeNarrative2 = (category, context) => {
     primaryExports,
     incomeSources,
     tradeRouteAccess: route,
-    _prosperity,
     dominantFaction,
     govType,
     religiousScale,
     disasterProfile,
     magicLevel,
-    _hasTower,
-    _hasGuildMag,
   } = context;
 
   const primaryExport = commodity

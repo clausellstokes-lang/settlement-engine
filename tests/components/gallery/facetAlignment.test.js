@@ -10,6 +10,7 @@ import {
 
 import { TIER_ORDER, PROSPERITY_TIERS, getMagicLevel } from '../../../src/data/constants.js';
 import { TERRAIN_WEIGHTS, CULTURES } from '../../../src/generators/steps/resolveConfig.js';
+import { NAMING_DATA } from '../../../src/data/namingData.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Gallery facet ↔ engine vocabulary alignment.
@@ -74,6 +75,15 @@ describe('gallery facet vocabularies stay aligned to engine output', () => {
     expectSuperset(CULTURE_OPTIONS, CULTURES, 'culture');
     expectNoExtras(CULTURE_OPTIONS, CULTURES, 'culture');
     expect(CULTURE_OPTIONS.length, 'culture: expected the canonical 11-culture catalog').toBe(11);
+  });
+
+  it('NAMING_DATA supplies a name set for every canonical culture (no silent germanic fallback)', () => {
+    // The generator resolves names via `NAMING_DATA[culture] || NAMING_DATA.germanic`,
+    // so a culture added to CULTURES but forgotten in NAMING_DATA would silently
+    // generate germanic names — invisible to the facet tests above (which only pin
+    // CULTURE_OPTIONS↔CULTURES). Pin the third copy of the culture list too, so a new
+    // culture must ship its own naming data or this reds.
+    expect(Object.keys(NAMING_DATA).sort()).toEqual([...CULTURES].sort());
   });
 
   it('PROSPERITY_OPTIONS matches the labels economicGenerator emits', () => {
