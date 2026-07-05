@@ -241,7 +241,7 @@ export const SERVICE_TIER_DATA = {
     'Educational services': {
       category: 'services',
       baseChance: 0.8,
-      requiredInstitution: 'University',
+      requiredInstitution: 'Academy of magic',
       defaultEnabled: !0,
       desc: 'University degrees, advanced training',
     },
@@ -260,7 +260,7 @@ export const SERVICE_TIER_DATA = {
     'Master-crafted weapons': {
       category: 'luxury',
       baseChance: 0.6,
-      requiredInstitution: 'Specialist craftsmen quarters',
+      requiredInstitution: 'Specialized metalworkers',
       defaultEnabled: !0,
       desc: 'Legendary quality arms and armor',
     },

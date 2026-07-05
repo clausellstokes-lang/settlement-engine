@@ -290,6 +290,9 @@ async function grantMonthlyAllowanceIfNeeded(
 
 const REFERRAL_COUPON_ID = 'referral_free_month';
 const REFERRAL_CREDIT_REWARD = 10;
+// The one-time bonus a founder_lifetime purchase grants (see the completion handler);
+// reversed on refund/chargeback of that purchase. Keep in sync with the grant literal.
+const FOUNDER_CREDIT_BONUS = 30;
 
 /**
  * Lazy-create the shared referral coupon: 100% off, duration 'once', so it
@@ -550,6 +553,87 @@ async function deductReferralCredits(
     target_user: userId,
     delta: -REFERRAL_CREDIT_REWARD,
     reason: `referral_clawback:${referralId}`,
+  });
+  if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
+}
+
+/**
+ * Reverse a refunded / charged-back Founder Lifetime purchase. WITHOUT this, a
+ * refunded founder kept lifetime premium (handle_premium_downgrade no-ops on
+ * founders), kept the 30-credit bonus, and — worst — permanently consumed one of
+ * the 30 advertised founder seats (founder_seats_taken() counts is_founder=true),
+ * blocking a real paying customer from that now-refunded seat.
+ *
+ * `key` is one of the charge's resolved clawback keys (the founder checkout
+ * SESSION id for a one-time payment). We act ONLY when that session actually
+ * granted the founder bonus — its `founder_grant` ledger row names the buyer — so
+ * a refund of ANY other charge (a credit pack, a different customer) never touches
+ * founder state. Claim-once: the atomic is_founder true→false flip is the claim; a
+ * redelivered refund/dispute finds it already false and no-ops, exactly like the
+ * referral / dossier clawbacks. Once is_founder is false the standard downgrade
+ * path applies (tier→free + the retention window + settlement/map locking), and
+ * the bonus is reversed (service_adjust_credits clamps at zero if already spent).
+ */
+async function clawbackFounderForSession(
+  supabase: ReturnType<typeof adminClient>,
+  key: string,
+): Promise<void> {
+  const { data: grantRow, error: grantErr } = await supabase
+    .from('credit_ledger')
+    .select('user_id')
+    .eq('source', 'founder_grant')
+    .eq('metadata->>stripe_session_id', key)
+    .maybeSingle();
+  if (grantErr) throw new Error(`founder clawback lookup failed: ${grantErr.message}`);
+  const userId = grantRow?.user_id as string | undefined;
+  if (!userId) return; // this key never granted the founder bonus — nothing to reverse.
+
+  // Claim-once: flip is_founder true→false in one atomic statement. A redelivered
+  // refund/dispute finds it already false, claims no row, and no-ops.
+  const { data: claimed, error: claimErr } = await supabase
+    .from('profiles')
+    .update({ is_founder: false })
+    .eq('id', userId)
+    .eq('is_founder', true)
+    .select('id');
+  if (claimErr) throw new Error(`founder clawback claim failed: ${claimErr.message}`);
+  if (!claimed || claimed.length === 0) return; // already reversed by a prior delivery.
+
+  // is_founder is now false, so the founder-guarded downgrade path applies.
+  const { error: downgradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: userId });
+  if (downgradeErr) throw new Error(`founder premium downgrade failed: ${downgradeErr.message}`);
+  const { error: authErr } = await supabase.auth.admin.updateUserById(userId, {
+    user_metadata: { tier: 'free', is_founder: false },
+  });
+  if (authErr) throw new Error(`founder auth downgrade failed: ${authErr.message}`);
+  await deductFounderCredits(supabase, userId, key);
+}
+
+/**
+ * Reverse the 30-credit founder bonus via service_adjust_credits (103) — atomic,
+ * ledger-first, clamped at zero (a spent-down balance is deducted only as far as it
+ * goes). Attributed to the longest-standing elevated profile, same as the referral
+ * clawback; the reason string carries the session id for the audit trail.
+ */
+async function deductFounderCredits(
+  supabase: ReturnType<typeof adminClient>,
+  userId: string,
+  sessionId: string,
+): Promise<void> {
+  const { data: actor, error: actorErr } = await supabase.from('profiles')
+    .select('id')
+    .in('role', ['developer', 'admin'])
+    .order('created_at', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (actorErr || !actor?.id) {
+    throw new Error(`No elevated actor available for founder credit clawback: ${actorErr?.message ?? 'no developer/admin profile'}`);
+  }
+  const { error: adjustErr } = await supabase.rpc('service_adjust_credits', {
+    actor_user: actor.id,
+    target_user: userId,
+    delta: -FOUNDER_CREDIT_BONUS,
+    reason: `founder_clawback:${sessionId}`,
   });
   if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
 }
@@ -1181,7 +1265,7 @@ async function dispatchStripeEvent(
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
         // Founder bonus: one-time 30-credit grant (idempotent on session id).
-        await grantCreditsForSessionOnce(supabase, userId!, 30, 'founder_grant', session.id, /* oncePerUser */ true);
+        await grantCreditsForSessionOnce(supabase, userId!, FOUNDER_CREDIT_BONUS, 'founder_grant', session.id, /* oncePerUser */ true);
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
 
         // REFERRAL (107): a PAID founder purchase is a qualifying first
@@ -1304,6 +1388,11 @@ async function dispatchStripeEvent(
         // matches). A subscription-invoice key (referral case) simply finds no
         // dossier row and no-ops.
         await clawbackDossierEntitlementForSession(supabase, key);
+        // FOUNDER clawback: a refunded/disputed founder_lifetime charge carries no
+        // invoice, so its key is the checkout SESSION id — the same id its founder_grant
+        // ledger row keyed on. Reverses is_founder (freeing the seat), the premium tier,
+        // and the 30-credit bonus. No-ops for every key that never granted the bonus.
+        await clawbackFounderForSession(supabase, key);
       }
       break;
     }

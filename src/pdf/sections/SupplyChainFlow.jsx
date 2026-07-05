@@ -16,7 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, pt } from '../theme.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { exactGoodId } from '../../domain/region/goodsCatalog.js';
+import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { safe } from '../lib/format.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
@@ -86,9 +86,13 @@ function ChainRow({ chain, instNames, primaryExports }) {
       label: o,
       isExport: isExportable && (
         (oid != null && exportIds.has(oid)) ||
-        (primaryExports || []).some((ex) =>
-          ex.toLowerCase().includes(String(o).toLowerCase().split(' ')[0]) ||
-          String(o).toLowerCase().includes(ex.toLowerCase().split(' ')[0]))
+        (primaryExports || []).some((ex) => {
+          // ex may be a bare string OR the {good/name/label} object shape —
+          // goodText() keeps `.toLowerCase()` from crashing the whole PDF render.
+          const e = goodText(ex).toLowerCase();
+          return e.includes(String(o).toLowerCase().split(' ')[0]) ||
+            String(o).toLowerCase().includes(e.split(' ')[0]);
+        })
       ),
     };
   });

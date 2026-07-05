@@ -48,7 +48,7 @@ function PartyRef({ party, index, style }) {
 
 export function PowerStructure({ settlement, narrativeMode, vm }) {
   const p = vm.power;
-  const index = vm.entityIndex; // Phase-D id→card resolver
+  const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
 
   return (
@@ -72,7 +72,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
           breakdown={p.legitimacyBreakdown}
-          footer={p.governanceFractured ? '⚠ Governance fractured. No faction holds clear authority' : null}
+          footer={p.governanceFractured ? '! Governance fractured. No faction holds clear authority' : null}
         />
       )}
 
@@ -367,7 +367,7 @@ function FactionCard({ faction, index, entityIndex }) {
       />
       {f.crisisNote && (
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], fontStyle: 'italic', marginTop: 2 }}>
-          ⚠ {f.crisisNote}
+          ! {f.crisisNote}
         </Text>
       )}
       {f.blurb && (

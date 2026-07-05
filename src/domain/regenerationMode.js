@@ -28,13 +28,11 @@ import { tagEntityCanon } from './canonStatus.js';
 import { deriveFactionProfile } from './factionProfile.js';
 import { deriveActiveCondition } from './activeConditions.js';
 
+import { snakeCase } from './ids.js';
 // Same slug transform entityCatalog uses for institution ids, replicated here
 // (the catalog's copy is module-private) so the reverse lookup re-derives the
 // IDENTICAL id the catalog emitted.
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 // ── Catalog ──────────────────────────────────────────────────────────────
 

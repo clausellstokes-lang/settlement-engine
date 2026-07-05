@@ -29,7 +29,7 @@ import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
   const e = vm.economics;
-  const index = vm.entityIndex; // Phase-D id→card resolver (trade partners→neighbours)
+  const index = vm.entityIndex; // Phase-D id»card resolver (trade partners»neighbours)
 
   // A trade-partner name links to its neighbour relationship card when it
   // resolves in-doc (resolveTradePartner matches by id or name→slug), else

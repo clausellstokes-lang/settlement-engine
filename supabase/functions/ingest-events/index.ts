@@ -150,6 +150,25 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
   const admin = adminFactory(SUPABASE_URL, SERVICE_KEY);
   const meta = readRequestMeta(req);
 
+  // ── Anti-abuse IP gate (consulted BEFORE the device actor is resolved+inserted) ──
+  // The per-actor/device rate key below is derived from the client-controlled
+  // body.deviceToken, so rotating that token per request mints a fresh "under-rate"
+  // key every time — a single host could otherwise drive UNBOUNDED inserts across four
+  // tables (device link, rate bucket, up to 50 events, 2 snapshots). This IP-dimension
+  // gate bounds that trivial amplification: a single host is capped regardless of how
+  // many device tokens it rotates. The ceiling is deliberately GENEROUS — 2000/hour vs
+  // the 120/hour per device — so a shared NAT of many honest users is not throttled;
+  // it exists to stop unbounded amplification, not to meter legitimate telemetry. A
+  // distinct `ipall:` bucket keeps it separate from the tokenless `ip:` fallback below.
+  // (x-forwarded-for is spoofable — see readRequestMeta — so an attacker rotating BOTH
+  // the token AND XFF is bounded only at the platform/proxy layer; this closes the
+  // trivial single-host case, which was the open hole.) Fail CLOSED: only a definite
+  // `true` proceeds, matching the actor-key check below.
+  const { data: ipUnderRate, error: ipRateErr } = await admin.rpc('ingest_check_rate', {
+    p_key: `ipall:${meta.ip}`, p_max: 2000, p_window_seconds: 3600,
+  });
+  if (ipRateErr || ipUnderRate === false) return json({ error: 'rate_limited' }, 429, headers);
+
   // ── Resolve actor (JWT → identity link, adopting device actor; else device) ──
   const authHeader = req.headers.get('Authorization') || '';
   const jwt = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;

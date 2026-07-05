@@ -22,6 +22,7 @@
 
 import { deepClone } from '../clone.js';
 
+import { snakeCase } from '../ids.js';
 // Recursive key denylist. Any object key matching this is dropped entirely.
 // The `dm`/`gm` alternations use a word boundary (\bdm/\bgm) so they match the
 // real DM-private keys (dmNotes, dmCompass, dmNote, and any future dm*/gm* key)
@@ -110,9 +111,6 @@ function publicNpc(npc) {
  * snakeCase — MUST match the server _gallery_npc_key fallback byte-for-byte.
  * @param {any} s
  */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /**
  * The stable per-NPC key the gallery member-override map is keyed by. Prefers the

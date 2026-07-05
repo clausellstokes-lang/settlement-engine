@@ -1141,6 +1141,12 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       .map((/** @type {any} */ kind) => pressureIdx.get?.(escalationOriginId, kind)?.score || 0)
       .reduce((/** @type {any} */ max, /** @type {any} */ score) => Math.max(max, score), 0);
 
+    // Precedence (intra-tick decay→escalate): this loop runs AFTER ageRoamingStressors
+    // has already decayed stressor.severity for the tick (pulseKernel writes the aged
+    // stressors, then builds the snapshot this reads). Reading the POST-AGED severity is
+    // deliberate — escalation compounds on the decayed baseline, so the damped blend below
+    // never double-counts the pre-tick value. The blend is convergent (gated at < 0.92,
+    // then clamp01), so decay and escalation share this field without diverging.
     if (strongestPressure > 0.62 && stressor.severity < 0.92) {
       const severity = clamp01((stressor.severity + strongestPressure) / 2 + 0.08);
       candidates.push({

@@ -261,6 +261,22 @@ function stripAnnotations(value) {
     .trim();
 }
 
+/**
+ * The human string for a trade good that may arrive as a bare string OR the
+ * documented object shape `{ good | name | label }` (simulationSpine's
+ * primaryExports contract: "an array of string|{good/name/label}"). Reads the
+ * field instead of blindly `String()`-ing an object to the useless
+ * '[object Object]' — and, critically, never lets a caller call `.toLowerCase()`
+ * on an object and crash. Bare strings and nullish pass straight through.
+ * @param {any} value
+ */
+export function goodText(value) {
+  if (value && typeof value === 'object') {
+    return String(value.good ?? value.name ?? value.label ?? '');
+  }
+  return String(value ?? '');
+}
+
 /** @param {any} value */
 export function slugifyGood(value) {
   return String(value || 'unknown')

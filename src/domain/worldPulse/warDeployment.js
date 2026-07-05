@@ -1594,7 +1594,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // (→ rebellion, and couplable under warDisposition), so an over-drawn client turns on its
     // overlord. Rides a MINOR war_levy outcome (auto-applied like conscription). ─────────────
     if (warLevyEnabled) {
-      const excludeSet = new Set([...targets, ...Object.keys(deployments).map(String)]);
+      // …and NOT a settlement another overlord already levied THIS tick. leviedThisTick
+      // accumulates across overlords (outer loop), so a vassal/ally shared by two
+      // overlords is levied at most once — otherwise each overlord's independent
+      // pop/food floors draw against the same pre-tick stores and can breach the
+      // skeleton floor / mint food when the debits compound past what's on hand.
+      const excludeSet = new Set([...targets, ...Object.keys(deployments).map(String), ...leviedThisTick]);
       const home = snapshot?.byId?.get?.(fromId)?.settlement;
       /** @type {any[]} */
       const levyPopDeltas = [];

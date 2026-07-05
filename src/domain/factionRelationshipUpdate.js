@@ -29,6 +29,7 @@
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
 
+import { snakeCase } from './ids.js';
 // ── Event archetype → faction impact templates ───────────────────────────
 //
 // Each entry maps a high-level event archetype (which the caller passes
@@ -219,9 +220,6 @@ function inferEventArchetype(event) {
 // ── Faction match helpers ────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {any} name */
 function factionIdFromName(name) {

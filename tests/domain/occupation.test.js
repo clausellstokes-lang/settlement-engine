@@ -198,6 +198,31 @@ describe('occupation — state machine (hysteresis, no 1-tick flips, slide-back)
     expect(out.liberated).toBe(true);
   });
 
+  test('max-dwell valve: a contested occupation stuck in the dead-band force-resolves', () => {
+    // Dead band: REGRESS(0.34) < s < ADVANCE(0.58) argues NEITHER direction, so without
+    // the valve a contested occupation holds forever. sinceTick 0, tick 48 → 48 ticks stuck.
+    const stuck = { state: 'contested', stateHeld: 0, sinceTick: 0 };
+    // Leaning toward control (above the band midpoint 0.46) → breaks through one rung.
+    const up = advanceOccupationState(stuck, 0.5, 48);
+    expect(up.state).toBe('unstable');
+    expect(up.liberated).toBe(false);
+    // Leaning toward the insurgency (below the midpoint) → the occupation is thrown off.
+    const gone = advanceOccupationState(stuck, 0.40, 48);
+    expect(gone.liberated).toBe(true);
+  });
+
+  test('max-dwell valve is inert before the threshold and when tick is omitted', () => {
+    const stuck = { state: 'contested', stateHeld: 0, sinceTick: 0 };
+    // One tick short of the threshold → still holds contested.
+    const early = advanceOccupationState(stuck, 0.5, 47);
+    expect(early.state).toBe('contested');
+    expect(early.liberated).toBe(false);
+    // No tick supplied (2-arg pure call) → valve inert, holds.
+    const noTick = advanceOccupationState(stuck, 0.5);
+    expect(noTick.state).toBe('contested');
+    expect(noTick.liberated).toBe(false);
+  });
+
   test('a compliant regime drives advancement; an intact loyalist resists and stalls', () => {
     const snapshot = snapshotForSaves([richCity('a', 'Ironhold'), richCity('b', 'Goldport', { legitimacy: 85 })]);
     const loyalistItem = snapshot.byId.get('b'); // intact, high-legitimacy, populous → high resistance

@@ -9,21 +9,49 @@ import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
-// In-memory per-IP backstop (review B16 #8). The primary limiter is the DB RPC
-// below; when IT is unavailable (missing env, RPC error, throw) the original code
-// failed FULLY OPEN, removing all throttling — so a limiter outage let an
-// attacker amplify into Stripe. This static, per-instance cap survives only the
-// fail-open branches: it doesn't block legitimate buyers under normal operation
-// (the DB limiter is far more generous) but prevents an unbounded burst when the
-// DB limiter is down. Best-effort: edge instances are ephemeral and not shared,
-// so this is a coarse cap, not a precise quota.
-const BACKSTOP_WINDOW_MS = 60_000;   // fixed window
-const BACKSTOP_MAX_PER_WINDOW = 30;  // generous: ~1 attempt/2s per IP per instance
-const backstopHits = new Map<string, { count: number; resetAt: number }>();
+// Constant-time comparison for the checkout token. A plain `===` short-circuits on
+// the first differing byte, leaking a comparison-timing side channel that could let
+// an attacker recover the token (and claim someone's paid dossier) character by
+// character. Both sides are SHA-256'd to a fixed 32-byte digest first (so input
+// length can't leak either), then XOR-accumulated over the whole digest.
+async function timingSafeEqualStr(a: string, b: string): Promise<boolean> {
+  const enc = new TextEncoder();
+  const [da, db] = await Promise.all([
+    crypto.subtle.digest('SHA-256', enc.encode(a)),
+    crypto.subtle.digest('SHA-256', enc.encode(b)),
+  ]);
+  const va = new Uint8Array(da);
+  const vb = new Uint8Array(db);
+  let diff = 0;
+  for (let i = 0; i < va.length; i++) diff |= va[i] ^ vb[i];
+  return diff === 0;
+}
 
-/** Returns true if the IP is still under the in-memory backstop cap (and records
- *  the hit). Only consulted when the DB limiter could not give a verdict. */
-function withinBackstop(ip: string): boolean {
+// In-memory backstop (review B16 #8, hardened). The primary limiter is the DB RPC
+// below; when IT is unavailable (missing env, RPC error, throw) the original code
+// failed FULLY OPEN. A first patch added a PER-IP in-memory cap — but the IP comes
+// from x-forwarded-for (spoofable, see readRequestMeta), so an attacker rotating
+// XFF got a FRESH per-IP bucket every request and could still amplify into Stripe
+// unbounded. The backstop therefore now has TWO dimensions and BOTH must pass:
+//   1. per-IP — fairness between honest callers.
+//   2. GLOBAL — one IP-INDEPENDENT per-instance ceiling. This is the dimension XFF
+//      rotation cannot defeat: a spoofed IP gets a fresh per-IP bucket, but every
+//      per-IP-allowed attempt still counts against the single global ceiling, so a
+//      limiter outage can no longer be amplified past a bounded per-instance rate.
+// Only consulted on the fail-open branches; under normal operation the DB limiter
+// is authoritative. Best-effort: edge instances are ephemeral and not shared, so
+// these are coarse caps, not precise quotas. Failing fully closed here was rejected
+// deliberately: it would deny a paying customer their already-purchased dossier
+// during a transient limiter-DB blip. The global ceiling bounds abuse cost while
+// keeping legitimate verification available.
+const BACKSTOP_WINDOW_MS = 60_000;   // fixed window (both dimensions)
+const BACKSTOP_MAX_PER_IP = 30;      // ~1 attempt/2s per IP per instance
+const BACKSTOP_MAX_GLOBAL = 120;     // ~2 attempts/s per instance across ALL IPs
+const backstopHits = new Map<string, { count: number; resetAt: number }>();
+let globalBackstop = { count: 0, resetAt: 0 };
+
+/** Per-IP fixed-window check (records the hit). Fairness between honest callers. */
+function withinPerIpBackstop(ip: string): boolean {
   const now = Date.now();
   const entry = backstopHits.get(ip);
   if (!entry || now >= entry.resetAt) {
@@ -35,16 +63,49 @@ function withinBackstop(ip: string): boolean {
     return true;
   }
   entry.count += 1;
-  return entry.count <= BACKSTOP_MAX_PER_WINDOW;
+  return entry.count <= BACKSTOP_MAX_PER_IP;
+}
+
+/** IP-INDEPENDENT per-instance ceiling (records the hit). The dimension that
+ *  defeats x-forwarded-for rotation — a spoofed IP cannot mint fresh global
+ *  budget. */
+function withinGlobalBackstop(): boolean {
+  const now = Date.now();
+  if (now >= globalBackstop.resetAt) {
+    globalBackstop = { count: 1, resetAt: now + BACKSTOP_WINDOW_MS };
+    return true;
+  }
+  globalBackstop.count += 1;
+  return globalBackstop.count <= BACKSTOP_MAX_GLOBAL;
+}
+
+/**
+ * Fail-open backstop: BOTH the per-IP and the global ceiling must pass. Per-IP is
+ * consulted FIRST so an over-limit single IP does not consume global budget (only
+ * per-IP-allowed attempts count toward the global ceiling). Exported (with a reset)
+ * so the trust boundary can be EXECUTION-tested — the XFF-rotation case in
+ * index.test.ts drives 200 distinct IPs through here and asserts the global ceiling
+ * still throttles once BACKSTOP_MAX_GLOBAL is reached.
+ */
+export function withinBackstop(ip: string): boolean {
+  if (!withinPerIpBackstop(ip)) return false;
+  return withinGlobalBackstop();
+}
+
+/** Test-only: reset the in-memory backstop windows between cases. */
+export function _resetBackstopsForTest(): void {
+  backstopHits.clear();
+  globalBackstop = { count: 0, resetAt: 0 };
 }
 
 /**
  * Per-IP fixed-window rate check (consume_dossier_verify_rate_limit, migration
  * 035) so a well-formed-but-fake session id can't be used to amplify Stripe API
  * calls. The DB limiter is PRIMARY; if it cannot give a verdict (missing env, RPC
- * error, throw) we no longer fail fully open — we fall back to a cheap in-memory
- * per-IP backstop (withinBackstop) so a limiter outage can't remove ALL
- * throttling. A legitimate buyer is never blocked under normal operation. Returns
+ * error, throw) we no longer fail fully open — we fall back to the in-memory
+ * backstop (withinBackstop: per-IP AND a global per-instance ceiling), so a limiter
+ * outage can neither remove ALL throttling nor be bypassed by x-forwarded-for
+ * rotation. A legitimate buyer is never blocked under normal operation. Returns
  * false when the caller is over either the DB limit or the backstop.
  */
 async function withinRateLimit(req: Request): Promise<boolean> {
@@ -110,7 +171,8 @@ export async function handleVerifyDossier(
     }
 
     // Throttle BEFORE hitting Stripe (input validation above is free; the
-    // Stripe call is the amplifiable cost). Fail-open — see withinRateLimit.
+    // Stripe call is the amplifiable cost). Fail-open to the two-dimension
+    // in-memory backstop — see withinRateLimit / withinBackstop.
     if (!(await rateLimit(req))) {
       return new Response(
         JSON.stringify({ verified: false, error: 'Too many verification attempts. Please wait a moment and try again.' }),
@@ -120,10 +182,14 @@ export async function handleVerifyDossier(
 
     const session = await stripeApi.checkout.sessions.retrieve(sessionId);
     const paid = session.payment_status === 'paid' || session.payment_status === 'no_payment_required';
+    const tokenMatches = await timingSafeEqualStr(
+      typeof session.metadata?.checkout_token === 'string' ? session.metadata.checkout_token : '',
+      checkoutToken,
+    );
     const verified = session.status === 'complete'
       && paid
       && session.metadata?.product === 'single_dossier'
-      && session.metadata?.checkout_token === checkoutToken;
+      && tokenMatches;
 
     if (!verified) {
       return new Response(JSON.stringify({ verified: false, error: 'Purchase not verified' }), {

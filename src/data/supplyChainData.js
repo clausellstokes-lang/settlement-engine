@@ -113,7 +113,6 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Merchant guilds (3-8)',
           'Weekly market',
           'Fish market',
-          'Fishmonger',
         ],
         intermediateGoods: ['Fresh fish', 'Gutted catch'],
         outputs: ['Salted fish', 'Smoked seafood', 'Fish oil', 'Freshwater catch'],

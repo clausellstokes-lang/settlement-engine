@@ -398,8 +398,18 @@ export function applyPopulationOutcomeToSettlement(settlement, outcome, saveId) 
     .reduce((/** @type {any} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
   if (!delta) return settlement;
   const current = Math.max(0, Math.round(finite(settlement.population, 0)));
-  if (outcome.candidateType === 'population_emigration') {
-    if (String(saveId) === String(outcome.targetSaveId) && delta < 0) {
+  // Paired source-debit / destination-credit outcomes (a settlement loses people
+  // and another gains them) must CONSERVE population even when applied stale — e.g.
+  // a parked proposal whose source has since shrunk. The source is the NEGATIVE-delta
+  // side: for population_emigration that is targetSaveId, but for flow_migration
+  // targetSaveId is the DESTINATION, so key the debit on `delta < 0` (each of these
+  // outcomes has exactly one negative side) rather than on targetSaveId. Record how
+  // many of the intended departures the depleted source could actually supply, then
+  // scale the paired credit by that realized fraction so Σcredits ≤ people who left.
+  // Requires source-first apply order (which the emigration guard already relies on
+  // and worldPulseFlowMigrationConservation.test pins for flow_migration).
+  if (outcome.candidateType === 'population_emigration' || outcome.candidateType === 'flow_migration') {
+    if (delta < 0) {
       const debit = Math.abs(Math.round(delta));
       const realized = Math.min(debit, current);
       migrationRealizedFraction.set(outcome, debit > 0 ? realized / debit : 1);

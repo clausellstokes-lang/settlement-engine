@@ -1,6 +1,17 @@
 -- ────────────────────────────────────────────────────────────────────────────
 -- 015_welcome_credit.sql — Grant 1 narrate credit on signup.
 --
+-- ⚠️ SUPERSEDED BY 017_fix_credit_auth_integrity.sql. This migration's
+-- grant_welcome_credit() body is DEAD: it inserts into public.credit_balance, a
+-- table no migration ever creates (welcome credits are tracked in credit_ledger
+-- only), so the trigger below would throw if it ever fired. 017 DROPs this trigger
+-- and folds the welcome grant into handle_new_user() with a unique-index backstop,
+-- so on a fresh replay the trigger is removed before any auth.users INSERT can fire
+-- it — the dead body never executes. The file is retained (NOT deleted) on purpose:
+-- migrations are immutable forward-only history applied in lexical order, and
+-- removing 015 would break the contiguous-numbering invariant (validate:migration-head)
+-- and the fresh-DB replay guarantee. Left here as inert, superseded history.
+--
 -- P104 / X-4: every paying user has felt what they're paying for. The
 -- single strongest premium pitch is a Narrate credit the user has already
 -- spent — so they know exactly what they're buying when the second one

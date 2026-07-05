@@ -25,7 +25,7 @@
  *     impossible to represent with a single substrate score.
  *
  * Coexistence with the causal substrate:
- *   - The `causalState` substrate keeps its 14 variables (some
+ *   - The `causalState` substrate keeps its 16 variables (some
  *     of which overlap conceptually with capacities). The substrate
  *     score remains the "headline" the AI/UI displays first; the
  *     capacity profile is the structurally explainable

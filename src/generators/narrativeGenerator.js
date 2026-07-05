@@ -21,7 +21,8 @@
  */
 
 import { random as _rng } from './rngContext.js';
-import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { pick, pickRandom2, random01 } from './helpers.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 
 import {
   ARRIVAL_SCENES,
@@ -325,25 +326,7 @@ const genSettSummary = settlement => {
   } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const factions = powerStructure.factions || [];
   const govFaction =
@@ -440,25 +423,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
   const commodity = economicContext?.tradeCommodity || null;
   const prosperity = economicContext?.prosperity || 'Moderate';
   const stresses = config?.stressTypes?.length ? config.stressTypes : config?.stressType ? [config.stressType] : [];
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const tier = config?.tier || config?.settType || 'town';
 
@@ -674,25 +639,7 @@ const genPressureDetail = settlement => {
   const hasInst = kw => instNames.some(n => n.includes(kw));
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const commodity = (() => {
     const exp = economicState?.primaryExports?.[0] || '';
@@ -905,48 +852,6 @@ const genCoherence = settlement => {
   return notes;
 };
 
-// ─── getSettReason ────────────────────────────────────────────────────────────
-/**
- * Return a short flavour sentence matching the settlement's safety label.
- * Returns null if a stress type is active (pressure sentence handles that case).
- */
-const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
-  if (hasStress) return null;
-  const label = (safetyLabel || '').toLowerCase();
-
-  if (label.includes('authoritarian') || label.includes('enforced')) {
-    return pickRandom([
-      'The settlement is orderly in a way that requires maintenance.',
-      'The guard presence is higher than the threat level requires.',
-    ]);
-  }
-  if (label.includes('criminal') || label.includes('corrupt')) {
-    return pickRandom([
-      'The market stalls near the gate are attended by people who seem more interested in watching the street than selling.',
-      "Commerce is active, and some of it is the kind that doesn't invite close attention.",
-    ]);
-  }
-  if (label.includes('tense') || label.includes('unstable')) {
-    return pickRandom([
-      'Something is not quite right about the street, though it takes a moment to identify what.',
-      'The settlement is going about its business, but with a particular awareness of itself.',
-    ]);
-  }
-  if (label.includes('military') || label.includes('ordered')) {
-    return pickRandom([
-      'The settlement has a military discipline to it, not oppressive but structured.',
-      'The guards are well-turned-out. Someone takes their job seriously.',
-    ]);
-  }
-  return pickRandom(
-    monsterThreat === 'plagued'
-      ? [
-          "The settlement is armed in ways that a casual visitor might not notice immediately but can't stop noticing once they do.",
-          'The torches at the gate burn in the middle of the day.',
-        ]
-      : ['It is, as far as you can tell, a normal day here.', 'The settlement is going about its business.', null],
-  );
-};
 
 // ─── buildPoliticalNarrative ──────────────────────────────────────────────────
 /**
@@ -1120,25 +1025,7 @@ export const generateArrivalScene = settlement => {
   const { name, tier, config = {}, institutions = [], stress } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const culture = config.culture || 'germanic';
   const magicPriority = config.priorityMagic ?? 50;

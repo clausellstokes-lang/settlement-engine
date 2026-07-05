@@ -404,7 +404,7 @@ export const RESOURCE_CHAINS = {
   },
   grain: {
     rawResource: "grain",
-    processingInstitutions: ["Mill", "granar", "Baker", "Access to external mill"],
+    processingInstitutions: ["Mill", "Granary", "Baker", "Access to external mill"],
     intermediateGoods: ["flour", "stored grain"],
     finalProducts: ["bread", "beer", "animal feed"],
     exportValue: "medium",

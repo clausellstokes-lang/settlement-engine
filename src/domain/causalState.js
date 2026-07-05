@@ -26,7 +26,7 @@
  *     That module produces a 4-dimension UI-facing summary
  *     (resilience / volatility / externalThreat / resourcePressure)
  *     deliberately consolidated for DM-facing display. This file
- *     produces the underlying 14-variable substrate the roadmap calls
+ *     produces the underlying 16-variable substrate the roadmap calls
  *     for. The UI surface can later derive FROM this substrate
  *     (Strangler Fig) without breaking consumers today.
  *   - The 5-band vocabulary (surplus / adequate / strained / critical
@@ -295,13 +295,13 @@ function deriveFoodSecurity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions that affect food_security
+  // Recovery archetypes (siege_lifted/occupation_lifted) LIFT — gate sign on conditionDirection().
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('food_security')) continue;
-    const magnitude = Math.round(cond.severity * 20);
+    const magnitude = Math.round(cond.severity * 20) * conditionDirection(cond);
     if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'pressure', -magnitude, `${cond.label} taxes food security.`);
+    score += magnitude;
+    push(contributors, cond.id, magnitude > 0 ? 'lift' : 'pressure', magnitude, `${cond.label} ${magnitude > 0 ? 'restores' : 'taxes'} food security.`);
   }
 
   // Generator food band, via the conserved ledger. The old code read
@@ -437,15 +437,15 @@ function deriveRulingAuthority(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions that affect ruling_authority
+  // Conditions that DECLARE ruling_authority, signed by conditionDirection (lift restores,
+  // pressure undermines). The old scan keyed on public_legitimacy/faction_power + only
+  // fired for corruption_exposed, so every ruling_authority condition moved this by 0.
   for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('public_legitimacy')
-     && !cond.affectedSystems.includes('faction_power')) continue;
-    if (cond.archetype === 'corruption_exposed') {
-      const m = Math.round(cond.severity * 18);
-      score -= m;
-      push(contributors, cond.id, 'undermined', -m, `${cond.label} cripples the ability to govern.`);
-    }
+    if (!cond.affectedSystems.includes('ruling_authority')) continue;
+    const m = Math.round(cond.severity * 18) * conditionDirection(cond);
+    if (m === 0) continue;
+    score += m;
+    push(contributors, cond.id, m > 0 ? 'restored' : 'undermined', m, `${cond.label} ${m > 0 ? 'rebuilds' : 'cripples'} the ability to govern.`);
   }
 
   return { score, contributors };
@@ -521,12 +521,12 @@ function deriveTradeConnectivity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions
+  // A lifted siege/occupation REOPENS routes — gate sign on conditionDirection() (not a 'cut').
   for (const cond of cachedActiveConditions(s)) {
     if (!cond.affectedSystems.includes('trade_connectivity')) continue;
-    const magnitude = Math.round(cond.severity * 18);
-    score -= magnitude;
-    push(contributors, cond.id, 'cut', -magnitude, `${cond.label} disrupts trade flows.`);
+    const magnitude = Math.round(cond.severity * 18) * conditionDirection(cond);
+    score += magnitude;
+    push(contributors, cond.id, magnitude > 0 ? 'restored' : 'cut', magnitude, `${cond.label} ${magnitude > 0 ? 'reopens' : 'disrupts'} trade flows.`);
   }
 
   return { score, contributors };
@@ -1131,35 +1131,44 @@ const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
 });
 
 /**
+ * Polarity-correct display word for a variable's band — the SINGLE source both
+ * summarizeCausalState and the simulation causal view route through, so the
+ * lower_is_better inversion lives in exactly one place. Higher-is-better bands
+ * read the raw word; a lower_is_better 'collapsed' (crime RAMPANT, not gone) is
+ * computed off the INVERTED score (finalizeVariable) so it is re-phrased as a
+ * problem term. Benign bands never carry a lower_is_better var, so they fall through.
+ * @param {string} name  substrate variable name
+ * @param {string} band  surplus/adequate/strained/critical/collapsed
+ * @returns {string}
+ */
+export function causalBandWord(name, band) {
+  if (variablePolarity(name) === 'lower_is_better') {
+    return /** @type {any} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band] || band;
+  }
+  return band;
+}
+
+/**
  * Human-readable summary of what's wrong (or right) with the settlement
  * right now. Returns an array of single-line strings.
  */
 export function summarizeCausalState(/** @type {any} */ settlement) {
   const state = deriveCausalState(settlement);
   const out = [];
-  // Pull lower_is_better variables out of the raw-band lines so the band word
-  // never reads inverted; emit them with problem-term phrasing afterwards.
-  const inverted = (/** @type {any} */ name) => variablePolarity(name) === 'lower_is_better';
-  const higherOnly = (/** @type {any} */ band) => state.summary[band].filter((/** @type {any} */ n) => !inverted(n));
-  if (higherOnly('collapsed').length) {
-    out.push(`Collapsed: ${higherOnly('collapsed').join(', ')}.`);
-  }
-  if (higherOnly('critical').length) {
-    out.push(`Critical: ${higherOnly('critical').join(', ')}.`);
-  }
-  if (higherOnly('strained').length) {
-    out.push(`Strained: ${higherOnly('strained').join(', ')}.`);
-  }
-  // lower_is_better problems, phrased in problem terms (rampant/acute/elevated).
-  for (const band of ['collapsed', 'critical', 'strained']) {
-    const problems = state.summary[band].filter(inverted);
-    if (problems.length) {
-      out.push(`${/** @type {any} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band]}: ${problems.join(', ')}.`);
+  const cap = (/** @type {string} */ w) => w.charAt(0).toUpperCase() + w.slice(1);
+  const isLower = (/** @type {any} */ name) => variablePolarity(name) === 'lower_is_better';
+  // Higher-is-better problems first (raw word), then lower_is_better (problem
+  // terms) — every line's word comes from causalBandWord, one place for polarity.
+  for (const only of [(/** @type {any} */ n) => !isLower(n), isLower]) {
+    for (const band of ['collapsed', 'critical', 'strained']) {
+      const names = state.summary[band].filter(only);
+      if (names.length) out.push(`${cap(causalBandWord(names[0], band))}: ${names.join(', ')}.`);
     }
   }
-  if (higherOnly('surplus').length) {
-    out.push(`Surplus: ${higherOnly('surplus').join(', ')}.`);
-  }
+  // Surplus lists only higher-is-better vars: a lower_is_better var in 'surplus'
+  // means the problem is ABSENT (crime contained) — not worth a misleading line.
+  const surplus = state.summary.surplus.filter((/** @type {any} */ n) => !isLower(n));
+  if (surplus.length) out.push(`Surplus: ${surplus.join(', ')}.`);
   if (out.length === 0) out.push('All variables are within the adequate band.');
   return out;
 }

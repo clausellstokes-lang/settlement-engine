@@ -54,6 +54,7 @@ import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 
+import { snakeCase } from './ids.js';
 // ── Action vocabulary ────────────────────────────────────────────────────
 
 export const COUNTERFACTUAL_ACTIONS = Object.freeze([
@@ -352,9 +353,6 @@ function makeEmptyResult(ref, messages) {
 }
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /**
  * @param {any} s

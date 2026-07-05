@@ -33,18 +33,13 @@
 import { factionArchetype, FACTION_ARCHETYPES as FA } from './factionArchetypes.js';
 import { governanceLedger } from './governanceLedger.js';
 
+import { snakeCase } from './ids.js';
 // Small inline id helper — derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
 // across into src/lib (which is outside the domain tsconfig include).
 // Matches the format produced by src/lib/entities.js#idOf so consumers
 // querying traces by id see the same shape from both call paths.
 /** @param {any} s @returns {string} */
-function snakeCase(s) {
-  return String(s)
-    .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .toLowerCase();
-}
 /** @param {any} name @returns {string} */
 function factionIdFromName(name) {
   return `faction.${snakeCase(name)}`;

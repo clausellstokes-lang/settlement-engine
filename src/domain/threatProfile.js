@@ -45,6 +45,7 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
 import { canonStressors } from './canonicalAccessors.js';
 
+import { snakeCase } from './ids.js';
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
@@ -265,9 +266,6 @@ function inferThreatType(text) {
 // ── Id helper ────────────────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /** @param {string} s */
 function shortHash(s) {

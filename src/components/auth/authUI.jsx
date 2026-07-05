@@ -6,7 +6,7 @@
  * controls from one source. No logic lives here — just inputs, buttons,
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, GOLD_TXT, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, PARCH, sans, serif_,
@@ -104,7 +104,7 @@ export function OrDivider({ label = 'or with email' }) {
   );
 }
 
-export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
+export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, label }) {
   // Password fields get an in-field show/hide toggle so the user can verify
   // what they typed. The toggle is a labelled IconButton (aria-pressed +
   // aria-label routed through the copy registry) at the 44px usability
@@ -113,12 +113,22 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
   const [reveal, setReveal] = useState(false);
   const isPassword = type === 'password';
   const effectiveType = isPassword && reveal ? 'text' : type;
+  // Stable id for a VISIBLE, persistent label (a <span>, wired via aria-labelledby)
+  // when `label` is given — this replaces the placeholder-as-only-name anti-pattern,
+  // where the name vanished the instant the user typed. aria-label stays set as the
+  // fallback (and byte-identical for call sites without a `label`); when a visible
+  // label exists, aria-labelledby takes precedence per ARIA. A <span> + labelledby
+  // (rather than a <label> element) is intentional: it keeps the strict
+  // label-has-for / control-has-associated-label rules satisfied and avoids the
+  // password toggle triggering a <label>'s focus-the-input default.
+  const labelId = useId();
 
   const field = (
     <input
       type={effectiveType}
       placeholder={placeholder}
       aria-label={placeholder}
+      {...(label ? { 'aria-labelledby': labelId } : {})}
       value={value}
       onChange={e => onChange(e.target.value)}
       onKeyDown={onKeyDown}
@@ -141,9 +151,7 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
     />
   );
 
-  if (!isPassword) return field;
-
-  return (
+  const control = !isPassword ? field : (
     <div style={{ position: 'relative' }}>
       {field}
       <div style={{
@@ -159,6 +167,22 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
           onClick={() => setReveal(r => !r)}
         />
       </div>
+    </div>
+  );
+
+  // No label → return the bare control (aria-label carries the name). With a label,
+  // render it visibly above the control as a <span> wired via aria-labelledby, so it
+  // persists after the placeholder clears without a <label> element (see above).
+  if (!label) return control;
+  return (
+    <div>
+      <span id={labelId} style={{
+        display: 'block', marginBottom: SP.xs,
+        fontSize: FS.sm, fontWeight: 700, color: SECOND, fontFamily: sans,
+      }}>
+        {label}
+      </span>
+      {control}
     </div>
   );
 }

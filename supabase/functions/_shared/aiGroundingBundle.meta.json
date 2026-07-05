@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-04T01:05:51.266Z",
+  "generatedAt": "2026-07-05T15:54:47.209Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "025fb2049fba0901",
+  "sourceHash": "4d09cd6a2984db46",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -26,6 +26,7 @@
     "src/domain/healingLedger.js",
     "src/domain/historyBeats.js",
     "src/domain/hookEscalation.js",
+    "src/domain/ids.js",
     "src/domain/institutionClassify.js",
     "src/domain/magicLedger.js",
     "src/domain/magicProfile.js",

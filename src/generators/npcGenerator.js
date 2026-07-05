@@ -4,6 +4,7 @@
  */
 
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from './rngContext.js';
 
@@ -110,7 +111,7 @@ const computeNPCWeights = (config = {}, institutions = []) => {
   const threat = config.monsterThreat || 'frontier';
   const threatMult = threat === 'plagued' ? 1.4 : threat === 'heartland' ? 0.75 : 1;
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses[0] || null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const weights = {
     government: 1,
@@ -154,19 +155,6 @@ const getNPCCountRange = r =>
     city: { min: 10, max: 15 },
     metropolis: { min: 15, max: 20 },
   })[r] || { min: 6, max: 10 };
-
-// formatNPCForDisplay
-const _formatNPCForDisplay = (r, s, o, d) => {
-  const l = generateCrimeLevel(r, s, o, d),
-    m = l || r.secret;
-  let h = r.presentation;
-  if (m && random01(0.4)) {
-    const w = getStressHistory(m);
-    w && (h = w);
-  }
-  const g = { ...r, presentation: h };
-  return (l && (g.secret = l), g);
-};
 
 // mergeNPCLists
 
@@ -685,91 +673,6 @@ export const getStressHistory = secret => {
   return null;
 };
 
-// computeRelTension (local)
-const _generateFactionConflict = (npcA, npcB, stressFlags, instFlags) => {
-  const cats = [npcA.category, npcB.category].sort().join('_');
-  const powerGap = npcA.power - npcB.power;
-
-  // Stress-flag driven relationship archetypes (checked in priority order)
-  if (stressFlags.merchantCriminalBlur && cats.includes('economy') && cats.includes('criminal'))
-    return _rng() < 0.6 ? STRESS_ECONOMIC_EFFECTS.econ_crim_blur : STRESS_ECONOMIC_EFFECTS.econ_crim_exploitation;
-
-  if (stressFlags.stateCrime && cats.includes('military') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-
-  if (!stressFlags.stateCrime && cats.includes('military') && cats.includes('criminal'))
-    return instFlags.militaryEffective > instFlags.criminalEffective
-      ? STRESS_ECONOMIC_EFFECTS.mil_crim_suppression
-      : STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-
-  if (stressFlags.merchantArmy && cats.includes('economy') && cats.includes('military'))
-    return STRESS_ECONOMIC_EFFECTS.econ_mil_contract;
-  if (stressFlags.crusaderSynthesis && cats.includes('religious') && cats.includes('military'))
-    return STRESS_ECONOMIC_EFFECTS.rel_mil_crusader;
-  if (stressFlags.religiousFraud && cats.includes('religious') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.rel_crim_fraud;
-  if (stressFlags.arcaneBlackMarket && cats.includes('magic') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.mag_crim_market;
-
-  if (cats.includes('government') && cats.includes('economy') && instFlags.economyOutput > 65)
-    return STRESS_ECONOMIC_EFFECTS.gov_econ_dependence;
-
-  if (cats.includes('government') && cats.includes('military'))
-    return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.gov_mil_friction : STRESS_ECONOMIC_EFFECTS.peer_rivalry;
-
-  // Large power differential → mentorship or old debt dynamic
-  if (Math.abs(powerGap) >= 4)
-    return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.mentor_legacy : STRESS_ECONOMIC_EFFECTS.old_debt;
-
-  // Personality-driven archetypes
-  const getPersonalityStr = npc => {
-    const p = npc.personality;
-    if (!p) return '';
-    return Array.isArray(p) ? p.join(' ') : [p.dominant, p.flaw, p.modifier].filter(Boolean).join(' ');
-  };
-  const persA = getPersonalityStr(npcA);
-  const persB = getPersonalityStr(npcB);
-
-  if (
-    (persA.includes('arrogant') && persB.includes('arrogant')) ||
-    (persA.includes('greedy') && persB.includes('greedy')) ||
-    (npcA.category === npcB.category && _rng() < 0.4)
-  )
-    return STRESS_ECONOMIC_EFFECTS.peer_rivalry;
-
-  if (persA.includes('pragmatic') || persB.includes('pragmatic')) return STRESS_ECONOMIC_EFFECTS.mutual_leverage;
-
-  // Weighted random fallback
-  const WEIGHTED_ARCHETYPES = [
-    { archetype: STRESS_ECONOMIC_EFFECTS.wary_alliance, weight: 2.0 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.mutual_leverage, weight: 1.8 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.genuine_respect, weight: 1.5 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.peer_rivalry, weight: 1.5 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.old_debt, weight: 1.2 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.bitter_history, weight: 0.8 * (instFlags.criminalEffective / 50) },
-    { archetype: STRESS_ECONOMIC_EFFECTS.family_complication, weight: 0.7 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.mentor_legacy, weight: 0.8 },
-  ];
-  const total = WEIGHTED_ARCHETYPES.reduce((sum, a) => sum + a.weight, 0);
-  let roll = _rng() * total;
-  for (const { archetype, weight } of WEIGHTED_ARCHETYPES) {
-    roll -= weight;
-    if (roll <= 0) return archetype;
-  }
-  return STRESS_ECONOMIC_EFFECTS.wary_alliance;
-};
-
-const _pickFactionName = r => {
-  var o;
-  const s = {};
-  return (
-    r.forEach(d => {
-      s[d.category] = (s[d.category] || 0) + 1;
-    }),
-    ((o = Object.entries(s).sort((d, l) => l[1] - d[1])[0]) == null ? void 0 : o[0]) || 'other'
-  );
-};
-
 export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   if (!npcs || !factions || npcs.length === 0 || factions.length === 0) return npcs;
 
@@ -1206,61 +1109,6 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   });
 };
 
-// sortNPCsByPriority
-const _sortNPCsByPriority = function (historicalEvents, currentTensions, _tier) {
-  if (!historicalEvents || historicalEvents.length === 0) return currentTensions;
-
-  // Sort history by recency (most recent first)
-  const sortedHistory = historicalEvents.slice().sort((a, b) => b.yearsAgo - a.yearsAgo);
-
-  // Events that logically precede or follow others (avoid showing "cause" without "effect")
-  const NARRATIVE_SEQUENCES = {
-    'Bank Collapse': ['Resource Boom', 'Trade Route Opened', 'The Monopoly'],
-    'Debt Collapse': ['Resource Boom', 'Trade Route Opened'],
-    'The Famine': ['Resource Boom'],
-    'Trade Route Closed': ['Trade Route Opened'],
-    'The Great Exile': ['The Return', 'The Great Migration'],
-    'Demographic Collapse': ['The Great Migration', 'The Return'],
-    Occupation: ['Independence Gained', 'The Rebellion'],
-    Betrayal: ['Infiltration Revealed'],
-    'Succession Crisis': ['Founding Charter Granted', 'Independence Gained'],
-    'Heresy Purge': ['Religious Schism', 'False Prophet'],
-    'Temple Sacked': ['Cathedral Consecrated', "Saint's Miracle"],
-  };
-
-  // Find events that have their narrative consequence present (suppress the cause)
-  const suppressedEvents = new Set();
-  for (let i = 0; i < sortedHistory.length; i++) {
-    const followups = NARRATIVE_SEQUENCES[sortedHistory[i].name] || [];
-    const hasFollowup = followups.length > 0 && sortedHistory.slice(i + 1).some(e => followups.indexOf(e.name) >= 0);
-    if (hasFollowup) suppressedEvents.add(sortedHistory[i].name);
-  }
-
-  // Filter tensions: suppress if their linked history event is too old or suppressed
-  const MAX_RELEVANT_YEARS = 150;
-  const filtered = (currentTensions || []).filter(tension => {
-    const linkedEvent = historicalEvents.find(e => e.type === tension.type);
-    if (!linkedEvent) return true; // no linked event, keep the tension
-    if (suppressedEvents.has(linkedEvent.name)) return false;
-    if (linkedEvent.yearsAgo > MAX_RELEVANT_YEARS && linkedEvent.severity !== 'catastrophic' && !linkedEvent.anchored)
-      return false;
-    return true;
-  });
-
-  // If filtering removed everything, return the single most relevant tension
-  if (filtered.length === 0 && (currentTensions || []).length > 0) {
-    return [
-      (currentTensions || []).slice().sort((a, b) => {
-        const ea = historicalEvents.find(e => e.type === a.type);
-        const eb = historicalEvents.find(e => e.type === b.type);
-        return (ea ? ea.yearsAgo : 999) - (eb ? eb.yearsAgo : 999);
-      })[0],
-    ];
-  }
-
-  return filtered;
-};
-
 // ─── Inlined cross-module helpers (cycle-free) ─────────────
 
 // ─── NPC name helpers ─────────────────────
@@ -1295,7 +1143,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 8,
       minTier: 'village',
       category: 'noble',
-      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Baron/Baroness',
@@ -1303,7 +1150,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 9,
       minTier: 'town',
       category: 'noble',
-      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Court Advisor',
@@ -1311,7 +1157,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 7,
       minTier: 'town',
       category: 'noble',
-      goalCategories: ['power', 'knowledge'],
     },
     {
       role: 'House Steward',
@@ -1319,7 +1164,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 6,
       minTier: 'village',
       category: 'noble',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Noble Heir',
@@ -1327,7 +1171,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'hamlet',
       category: 'noble',
-      goalCategories: ['personal', 'power'],
     },
     {
       role: 'Land Agent',
@@ -1335,7 +1178,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'village',
       category: 'noble',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Knight/Dame',
@@ -1343,7 +1185,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 7,
       minTier: 'village',
       category: 'noble',
-      goalCategories: ['protection', 'personal'],
     },
     {
       role: 'Duke/Duchess',
@@ -1351,7 +1192,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 10,
       minTier: 'metropolis',
       category: 'noble',
-      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Royal Chamberlain',
@@ -1359,7 +1199,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 8,
       minTier: 'city',
       category: 'noble',
-      goalCategories: ['power', 'personal'],
     },
   ];
   const CRAFTS_ROLES = [
@@ -1369,7 +1208,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 7,
       minTier: 'hamlet',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Carpenter',
@@ -1377,7 +1215,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 6,
       minTier: 'hamlet',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Weaver',
@@ -1385,7 +1222,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 6,
       minTier: 'village',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Tanner',
@@ -1393,7 +1229,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'village',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Head Brewer',
@@ -1401,7 +1236,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'hamlet',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Guild Warden',
@@ -1409,7 +1243,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 7,
       minTier: 'town',
       category: 'crafts',
-      goalCategories: ['power', 'wealth'],
       requiresGuild: true,
     },
     {
@@ -1418,7 +1251,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'town',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Craft Guild Representative',
@@ -1426,7 +1258,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 6,
       minTier: 'city',
       category: 'crafts',
-      goalCategories: ['power', 'wealth'],
       requiresGuild: true,
     },
     {
@@ -1435,7 +1266,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 4,
       minTier: 'village',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Glassblower',
@@ -1443,7 +1273,6 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
       priority: 5,
       minTier: 'town',
       category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
     },
   ];
 
@@ -1476,7 +1305,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   }
 
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses[0] || null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   // Tier-appropriate mandatory roles
   // Derive terrain-appropriate second role for thorps
@@ -1544,8 +1373,12 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     }
   });
 
-  // Add a guild-master NPC if we have room
-  if (npcs.length < targetCount) {
+  // Add a guild-master NPC if we have room — unless a stress-mandated one is
+  // already present. famine/succession_void mandate a 'Guild Master' above, and
+  // filterByGuild mints another with the same role, so a famine city with a
+  // commerce guild used to emit two Guild Masters (differently titled). Guard on
+  // the role so the mandatory one wins and filterByGuild only fills a genuine gap.
+  if (npcs.length < targetCount && !npcs.some(n => n.role === 'Guild Master')) {
     const guildNPC = filterByGuild(institutions, culture, tier, npcConfig);
     if (guildNPC) npcs.push(guildNPC);
   }

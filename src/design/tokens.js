@@ -363,6 +363,15 @@ export const swatch = Object.freeze({
   '#C8A84A': '#c8a84a', // random-pool chip border
   '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
   '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
+  // Dossier reading-palette (src/components/new/tabs/tabPalette.js) — the darker
+  // status/category colors the dense dossier tabs use (a deliberate print-legibility
+  // palette on parchment, distinct from the lighter screen chrome tokens). Most
+  // already exist above; these five were the still-absent ones.
+  '#8A4010': '#8a4010', // TAB_WEAK — amber-brown "weak" score band
+  '#7A4A1A': '#7a4a1a', // category: Crafts
+  '#1A4A5A': '#1a4a5a', // category: Infrastructure
+  '#7A1A5A': '#7a1a5a', // category: Entertainment
+  '#1A5A3A': '#1a5a3a', // category: Adventuring
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────

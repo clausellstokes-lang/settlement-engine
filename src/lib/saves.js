@@ -206,7 +206,7 @@ async function supabaseList() {
     ({ data, error } = await listQuery(LIBRARY_CORE_COLS));
   }
   if (error) throw error;
-  return data.map(row => {
+  return (data || []).map(row => {
     const accessState = row.access_state || ACTIVE_SAVE_STATE;
     const usable = accessState === ACTIVE_SAVE_STATE;
     return migrateSettlementShape(migrateSaveToV2({
@@ -477,7 +477,7 @@ async function localSaveEntry(entry) {
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
   const saves = localLoad();
-  const id = v2.id || Date.now();
+  const id = v2.id || newSaveId();
 
   // Bidirectional neighbour link (see supabaseSave): when the named neighbour
   // already exists as an active save, write the reciprocal back-link onto the

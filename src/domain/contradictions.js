@@ -24,6 +24,7 @@ import { deriveCausalState } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities } from './capacityModel.js';
 
+import { snakeCase } from './ids.js';
 export const CONTRADICTION_CLASSIFICATIONS = Object.freeze([
   'invalid',
   'rare_but_justified',
@@ -43,9 +44,6 @@ export const CONTRADICTION_TYPES = Object.freeze([
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /** @param {any} s */
-function snakeCase(s) {
-  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
-}
 
 /**
  * @param {any} type
@@ -92,7 +90,7 @@ function detectOversizedInstitutions(settlement) {
         'authority structure tilts toward the institution\'s patrons',
         'visitors and pilgrims outnumber locals in season',
       ],
-      references: [{ id: inst.id || `institution.${snakeCase(inst.name)}`, label: inst.name, type: 'institution' }],
+      references: [{ id: inst.id || `institution.${snakeCase(String(inst.name))}`, label: inst.name, type: 'institution' }],
     }));
   }
   return out;

@@ -33,6 +33,7 @@ import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { resolveMilitaryStress } from '../../domain/display/warStatusVocab.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
+import { coverageRatioPct } from './foodCoverage.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -80,7 +81,8 @@ function coerceProse(v) {
 // NOT a percent — printing it directly produced the bogus "imports cover 15929%".
 // Falls back to 100% of the import qty when the gap is unknown.
 function coveragePct(ic, rd) {
-  return ic > 0 ? Math.round((ic / (rd || ic)) * 100) : null;
+  const p = coverageRatioPct(ic, rd);
+  return p == null ? null : Math.round(p);
 }
 
 function foodCore(viability) {

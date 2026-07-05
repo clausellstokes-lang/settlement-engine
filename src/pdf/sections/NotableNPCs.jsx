@@ -58,7 +58,7 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
 
 export function NotableNPCs({ settlement, narrativeMode, vm }) {
   const all = vm.npcs.sorted; // already sorted desc by power
-  const index = vm.entityIndex; // Phase-D: id→card resolver (anchors + links)
+  const index = vm.entityIndex; // Phase-D: id»card resolver (anchors + links)
   // Relative tiering: top 3 (or any with power ≥ 8) → major; next 4 → notable.
   // NPC power is a 1-10 scale (npcGenerator: high 8-10, mid 4-7, low 1-3); the
   // old 80 threshold was 0-100 and could never promote anyone.

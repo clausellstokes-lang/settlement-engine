@@ -121,20 +121,11 @@ function defaultAdminClient() {
 }
 
 // ── Redeem codes (migration 107) ─────────────────────────────────────────────
-
-/**
- * applies_to → Stripe session mode compatibility. 'subscription' codes ride
- * only subscription-mode sessions, 'one_time' only payment-mode; 'any' rides
- * both. Enforced HERE, before session create, because reserve_redemption
- * cannot see the purchase — and a mis-scoped 100%-off free_month coupon
- * attached to the wrong mode would zero a purchase (founder seat, credit
- * pack) it was never minted for.
- */
-function redeemAppliesToMode(appliesTo: unknown, mode: 'subscription' | 'payment'): boolean {
-  if (appliesTo === 'subscription') return mode === 'subscription';
-  if (appliesTo === 'one_time') return mode === 'payment';
-  return true; // 'any' (the column default)
-}
+//
+// The applies_to/mode gate now lives INSIDE reserve_redemption (migration 112): it
+// refuses a mismatch BEFORE creating the once-per-user row, so a code entered in the
+// wrong modal is never burned. create-checkout passes p_mode and handles the
+// 'mode_mismatch' reason like any other non-fatal redeem notice.
 
 /**
  * Hand a just-reserved seat back when the code cannot ride this checkout
@@ -350,9 +341,13 @@ export async function handleCreateCheckout(
         redeemNotice = 'Redeem codes need a signed-in account, so this purchase continues without one.';
       } else {
         const admin = adminClient();
+        // p_mode lets reserve_redemption reject an applies_to/mode mismatch BEFORE it
+        // creates the once-per-user row (112) — so a code typed into the wrong modal is
+        // never burned. The mismatch comes back as reason 'mode_mismatch' with no seat held.
         const { data: reservation, error: reserveErr } = await admin.rpc('reserve_redemption', {
           p_code: redeemCode.trim(),
           p_user: user.id,
+          p_mode: mode,
         });
         if (reserveErr || !reservation?.ok) {
           if (reserveErr) {
@@ -360,15 +355,13 @@ export async function handleCreateCheckout(
           }
           // The RPC's reasons are already enumeration-collapsed; only the
           // caller's OWN prior redemption reads differently (truthful to the
-          // one user it cannot leak to).
+          // one user it cannot leak to). mode_mismatch consumed NO redemption —
+          // the code stays usable on the correct purchase type.
           redeemNotice = reservation?.reason === 'already_used'
             ? 'That code has already been redeemed on this account, so this purchase continues at the regular price.'
-            : 'That code could not be applied, so this purchase continues at the regular price.';
-        } else if (!redeemAppliesToMode(reservation.applies_to, mode)) {
-          // applies_to gate (red-team): the seat is already held, so hand it
-          // back through the same lifecycle an expired checkout uses.
-          await releaseUnusedReservation(admin, user.id, reservation.redemption_id as string);
-          redeemNotice = 'That code does not apply to this type of purchase, so this purchase continues at the regular price.';
+            : reservation?.reason === 'mode_mismatch'
+              ? 'That code does not apply to this type of purchase, so this purchase continues at the regular price.'
+              : 'That code could not be applied, so this purchase continues at the regular price.';
         } else {
           redemptionId = reservation.redemption_id as string;
           if (reservation.kind === 'free_month' && typeof reservation.stripe_coupon_id === 'string' && reservation.stripe_coupon_id) {

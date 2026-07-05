@@ -10,6 +10,7 @@
  * it forces the DM to read past empty noise on every chapter opener.
  */
 import { cap, humanize, label as labelOf } from './format.js';
+import { coverageRatioPct } from './foodCoverage.js';
 
 // ── Overview ────────────────────────────────────────────────────────────────
 export function overviewHeadline(o, identity) {
@@ -54,11 +55,12 @@ export function powerHeadline(power, _identity) {
   // reads were always undefined so the headline never named the governing body.
   if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
-  if (challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    // A continuation clause weaves onto the lead with a comma.
+  // The ', with …' continuation weaves onto a LEAD clause — only add it when a lead
+  // exists, or a nameless governing faction with no governmentType (no lead pushed)
+  // would make the comma clause the first and only element, opening the headline on a comma.
+  if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
     bits.push(`, with ${challenger.name} pressing close behind`);
-  } else if (factions.length > 2) {
-    // An independent clause stands as its own sentence.
+  } else if (bits.length && factions.length > 2) {
     bits.push(`, with ${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
   }
   if (!bits.length) return null;
@@ -85,9 +87,9 @@ export function economicsHeadline(eco) {
   else if (prosperity) bits.push(`${prosperity} economy`);
   if (topExport) bits.push(`anchored on ${topExport.toLowerCase()}`);
   if (fb?.deficit > 0) {
-    // importCoverage is a qty; coverage% = qty ÷ pre-import gap (rawDeficit).
-    const ic = fb.importCoverage || 0;
-    const pct = ic > 0 ? Math.round((ic / (fb.rawDeficit || ic)) * 100) : 0;
+    // Shared coverage formula (foodCoverage); the headline rounds and shows 0 when
+    // imports cover nothing.
+    const pct = Math.round(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
     bits.push(`food deficit: imports cover ${pct}% of the gap`);
   } else if (fb?.surplus > 0) bits.push(`food surplus`);
   if (!bits.length) return null;
@@ -98,8 +100,9 @@ export function economicsTone(eco) {
   if (!eco) return 'gold';
   const fb = eco.foodBalance || {};
   if (fb?.deficit > 0) {
-    const ic = fb.importCoverage || 0;
-    const pct = ic > 0 ? (ic / (fb.rawDeficit || ic)) * 100 : 0;
+    // Compare the RAW (un-rounded) ratio at the 60% boundary — rounding here would
+    // flip the tone for values like 59.6%.
+    const pct = coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0;
     return pct < 60 ? 'bad' : 'warn';
   }
   return 'gold';

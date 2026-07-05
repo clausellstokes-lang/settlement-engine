@@ -83,7 +83,7 @@ function NPCRow({ npc, index }) {
 
 export function NPCQuickRef({ settlement, narrativeMode, vm }) {
   const all = vm?.npcs?.sorted || [];
-  const index = vm?.entityIndex; // Phase-D id→card resolver
+  const index = vm?.entityIndex; // Phase-D id»card resolver
   // Two columns side-by-side, balanced
   const half = Math.ceil(all.length / 2);
   const left = all.slice(0, half);

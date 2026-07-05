@@ -215,11 +215,18 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     return loaded;
   }, [setSaves]);
 
+  // Load the library for the CURRENT owner. Keyed on authUser?.id and guarded by
+  // a `cancelled` latch so a sign-out/in that resolves an in-flight list from the
+  // PREVIOUS user can't write that user's saves into this session (the campaign
+  // path guards the same way via campaignCacheOwner). Re-runs on owner change so a
+  // fresh sign-in refreshes the library instead of showing the mount-time snapshot.
   useEffect(() => {
+    let cancelled = false;
     savesService.list()
-      .then(loaded => { setSaves(loaded); setSavesLoading(false); })
-      .catch(e => { console.error('Failed to load saves:', e); setSavesLoading(false); });
-  }, [setSaves]);
+      .then(loaded => { if (cancelled) return; setSaves(loaded); setSavesLoading(false); })
+      .catch(e => { if (cancelled) return; console.error('Failed to load saves:', e); setSavesLoading(false); });
+    return () => { cancelled = true; };
+  }, [setSaves, authUser?.id]);
 
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
   // band is accurate. useFunnelEvent fires on the false→true transition and

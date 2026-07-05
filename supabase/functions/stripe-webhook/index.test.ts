@@ -1506,3 +1506,119 @@ Deno.test('a refund of a single_dossier charge claws back the entitlement AND po
   assertEquals(claw!.args.p_session_id, 'cs_dossier_refund');
   assertEquals(stub.purchases.get('cs_dossier_refund')!.status, 'refunded');  // voucher poisoned
 });
+
+// ── Founder Lifetime refund/chargeback reversal ───────────────────────────────
+// A refunded/disputed founder_lifetime charge must reverse the grant: free the
+// is_founder seat (founder_seats_taken counts it), downgrade premium, and claw the
+// 30-credit bonus — none of which happened before. The refunded charge's checkout
+// SESSION id is matched against the buyer via its founder_grant ledger row.
+function makeFounderStub(founderSessionId = 'cs_founder') {
+  const state = { isFounder: true };
+  const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  const authUpdates: Array<{ id: string; attrs: Record<string, unknown> }> = [];
+  const claim = makeClaimTable('track');
+  // deno-lint-ignore no-explicit-any
+  const from = (table: string): any => {
+    if (table === 'processed_webhook_events') return claim.builder();
+    // deno-lint-ignore no-explicit-any
+    const q: any = {
+      _table: table, _isUpdate: false, _payload: null as Record<string, unknown> | null,
+      _filters: {} as Record<string, unknown>,
+      select() { return q; },
+      update(p: Record<string, unknown>) { q._isUpdate = true; q._payload = p; return q; },
+      eq(col: string, val: unknown) { q._filters[col] = val; return q; },
+      in() { return q; },
+      order() { return q; },
+      limit() { return q; },
+      maybeSingle() {
+        if (table === 'credit_ledger') {
+          const isFounderGrant = q._filters['source'] === 'founder_grant'
+            && q._filters['metadata->>stripe_session_id'] === founderSessionId;
+          return Promise.resolve({ data: isFounderGrant ? { user_id: 'founder_u' } : null, error: null });
+        }
+        // profiles: the elevated-actor lookup for the credit clawback.
+        if (table === 'profiles') return Promise.resolve({ data: { id: 'admin_u' }, error: null });
+        return Promise.resolve({ data: null, error: null });
+      },
+      // Awaitable terminal: profiles.update({is_founder:false}).eq().eq().select('id').
+      // deno-lint-ignore no-explicit-any
+      then(resolve: any, reject: any) {
+        let result: { data: unknown; error: null };
+        if (table === 'profiles' && q._isUpdate
+          && q._payload?.is_founder === false && q._filters['is_founder'] === true && state.isFounder) {
+          state.isFounder = false;                       // claim-once: flips exactly once
+          result = { data: [{ id: 'founder_u' }], error: null };
+        } else {
+          result = { data: [], error: null };
+        }
+        return Promise.resolve(result).then(resolve, reject);
+      },
+    };
+    return q;
+  };
+  const client = {
+    auth: { admin: { updateUserById: (id: string, attrs: Record<string, unknown>) => { authUpdates.push({ id, attrs }); return Promise.resolve({ error: null }); } } },
+    from,
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      rpc.push({ fn, args });
+      if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false, reason: 'no_granted_referral' }, error: null });
+      if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
+      if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: { ok: true }, error: null });
+      if (fn === 'service_adjust_credits') return Promise.resolve({ data: { prev: 30, next: 0, delta: -30 }, error: null });
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { state, rpc, authUpdates, adminClient: () => client };
+}
+
+const founderRefund = (eventId: string) => JSON.stringify({
+  id: eventId, type: 'charge.refunded',
+  data: { object: { id: 'ch_f', invoice: null, payment_intent: 'pi_f' } },
+});
+// deno-lint-ignore no-explicit-any
+const founderStripe = (sessionId = 'cs_founder'): any => ({
+  charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_f' }) },
+  checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }) } },
+});
+
+Deno.test('a refunded founder_lifetime charge reverses is_founder, premium, and the 30-credit bonus', async () => {
+  const stub = makeFounderStub();
+  const body = founderRefund('evt_founder_refund_1');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                                  // seat freed
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true); // tier downgraded
+  const adj = stub.rpc.find((c) => c.fn === 'service_adjust_credits');
+  assertEquals(adj!.args.delta, -30);                                         // bonus reversed
+  assertEquals(adj!.args.reason, 'founder_clawback:cs_founder');
+  assertEquals(stub.authUpdates.length, 1);
+  assertEquals(stub.authUpdates[0].attrs, { user_metadata: { tier: 'free', is_founder: false } });
+});
+
+Deno.test('a redelivered founder refund is idempotent: no second downgrade or credit clawback', async () => {
+  const stub = makeFounderStub();
+  const first = founderRefund('evt_founder_refund_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  const second = founderRefund('evt_founder_refund_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  // The is_founder claim flipped once, so the downgrade + clawback ran exactly once.
+  assertEquals(stub.rpc.filter((c) => c.fn === 'handle_premium_downgrade').length, 1);
+  assertEquals(stub.rpc.filter((c) => c.fn === 'service_adjust_credits').length, 1);
+});
+
+Deno.test('a refund of a NON-founder charge leaves founder state untouched', async () => {
+  // The refunded session has no founder_grant ledger row (the stub only matches
+  // 'cs_founder'); resolveChargeClawbackKeys yields a different session id.
+  const stub = makeFounderStub('cs_founder');
+  const body = founderRefund('evt_nonfounder_refund');
+  await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe('cs_creditpack') },  // not the founder session
+  );
+  assertEquals(stub.state.isFounder, true);                                   // untouched
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+  assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), false);
+});

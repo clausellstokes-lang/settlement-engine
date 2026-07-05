@@ -249,7 +249,12 @@ async function supabaseGetSession() {
 
 async function supabaseResetPassword(email) {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/reset-password`,
+    // Land on /set-new-password — the page that detects the PASSWORD_RECOVERY
+    // session and shows the set-a-new-password form (same destination the
+    // logged-out auth-recovery edge link uses). /reset-password is the
+    // security-question REQUEST form, which has no new-password field, so the
+    // mailed recovery session there is unusable.
+    redirectTo: `${window.location.origin}/set-new-password`,
   });
   if (error) throw error;
 }

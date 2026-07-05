@@ -306,7 +306,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                   }}
                   wrap={false}
                 >
-                  <Text style={{ color: factionColors.magic, marginRight: 4, fontSize: pt['9'] }}>✦</Text>
+                  <Text style={{ color: factionColors.magic, marginRight: 4, fontSize: pt['9'] }}>*</Text>
                   <View style={{ flex: 1 }}>
                     <EditableText
                       name={`resources.priorityNote.${i}`}
@@ -426,7 +426,7 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
                 }}
               >
                 <Text style={{ ...type.pill, fontSize: pt['8'], color: palette.gold }}>{humanize(label(it))}</Text>
-                <Text style={{ fontSize: pt['7.5'], color: palette.gold, marginLeft: 3 }}>✦</Text>
+                <Text style={{ fontSize: pt['7.5'], color: palette.gold, marginLeft: 3 }}>*</Text>
               </View>
             );
           }
