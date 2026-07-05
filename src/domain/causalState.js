@@ -437,15 +437,15 @@ function deriveRulingAuthority(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions that affect ruling_authority
+  // Conditions that DECLARE ruling_authority, signed by conditionDirection (lift restores,
+  // pressure undermines). The old scan keyed on public_legitimacy/faction_power + only
+  // fired for corruption_exposed, so every ruling_authority condition moved this by 0.
   for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('public_legitimacy')
-     && !cond.affectedSystems.includes('faction_power')) continue;
-    if (cond.archetype === 'corruption_exposed') {
-      const m = Math.round(cond.severity * 18);
-      score -= m;
-      push(contributors, cond.id, 'undermined', -m, `${cond.label} cripples the ability to govern.`);
-    }
+    if (!cond.affectedSystems.includes('ruling_authority')) continue;
+    const m = Math.round(cond.severity * 18) * conditionDirection(cond);
+    if (m === 0) continue;
+    score += m;
+    push(contributors, cond.id, m > 0 ? 'restored' : 'undermined', m, `${cond.label} ${m > 0 ? 'rebuilds' : 'cripples'} the ability to govern.`);
   }
 
   return { score, contributors };

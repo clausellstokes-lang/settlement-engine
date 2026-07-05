@@ -134,6 +134,18 @@ describe('occupation_lifted polarity: liberation is a LIFT, not a pressure', () 
     expect(c.effect).toBe('restored');
   });
 
+  it('moves ruling_authority by its DECLARED affectedSystem (was: keyed on the wrong variable, moved 0)', () => {
+    // deriveRulingAuthority scanned public_legitimacy/faction_power and only fired for
+    // corruption_exposed, so a condition declaring ruling_authority moved it by nothing.
+    const lift = [{ archetype: 'occupation_lifted', severity: 0.4, affectedSystems: ['ruling_authority'] }];
+    const base = deriveSystemVariable('ruling_authority', town());
+    const up = deriveSystemVariable('ruling_authority', town({ activeConditions: lift }));
+    expect(up.score).toBeGreaterThan(base.score);                                 // liberation restores authority
+    const pressure = [{ archetype: 'government_overthrown', severity: 0.4, affectedSystems: ['ruling_authority'] }];
+    const down = deriveSystemVariable('ruling_authority', town({ activeConditions: pressure }));
+    expect(down.score).toBeLessThan(base.score);                                  // a coup undermines it
+  });
+
   it('siege_lifted stays positive and pressure conditions stay negative', () => {
     const siege = deriveSystemVariable('defense_readiness',
       town({ defenseProfile: profile([]), activeConditions: [{ archetype: 'siege_lifted', severity: 0.3 }] }));
