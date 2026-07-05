@@ -4,6 +4,7 @@
  */
 
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from './rngContext.js';
 
@@ -110,7 +111,7 @@ const computeNPCWeights = (config = {}, institutions = []) => {
   const threat = config.monsterThreat || 'frontier';
   const threatMult = threat === 'plagued' ? 1.4 : threat === 'heartland' ? 0.75 : 1;
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses[0] || null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const weights = {
     government: 1,
@@ -1304,7 +1305,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   }
 
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses[0] || null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   // Tier-appropriate mandatory roles
   // Derive terrain-appropriate second role for thorps

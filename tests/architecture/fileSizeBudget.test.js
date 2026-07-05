@@ -50,7 +50,7 @@ const GRANDFATHERED = {
   'src/generators/powerGenerator.js': 2760, // shrank: genSuccessionNarr extracted to successionNarrative.js
   'src/generators/economicGenerator.js': 2923, // de-minified (minifier identifiers → meaningful names, !0/!1/void 0 → literals; byte-identical output)
   'src/store/settlementSlice.js': 1939, // shrank further: deity/cult + pending-edits action groups extracted to settlement{Deity,PendingEdits}Helpers.js (was 2183)
-  'src/generators/npcGenerator.js': 1500, // shrank: dead goalCategories metadata + 4 dead _-functions removed (was 1688)
+  'src/generators/npcGenerator.js': 1501, // 1688→1500 (dead goalCategories + 4 dead _-fns removed); +1 for the resolvePrimaryStress import that de-duplicates the stress selector
   'src/domain/settlement.schema.js': 1677,
   'src/pdf/lib/viewModel.js': 1320,
   // NOTE: warDeployment.js is the war-economy hub and has grown across P1-F2; an extraction

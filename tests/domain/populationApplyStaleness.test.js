@@ -85,3 +85,47 @@ describe('applyPopulationOutcomeToSettlement — migration staleness re-verify',
     expect(next.populationHistory.at(-1).delta).toBe(-300); // legacy recorded delta unchanged
   });
 });
+
+// flow_migration has the SAME paired source-debit/dest-credit structure as
+// population_emigration, but its targetSaveId is the DESTINATION (not the source) —
+// so the staleness re-verify must key the debit on `delta < 0`, not on targetSaveId,
+// or a parked refugee proposal whose source shrank mints phantom people at the dest.
+function flowMigrationOutcome({ sourceDebit = 960, sourceId = 'A', destId = 'B' } = {}) {
+  return {
+    id: 'candidate.flow.migration.A.B.10',
+    type: 'condition',
+    candidateType: 'flow_migration',
+    targetSaveId: destId, // the DESTINATION (the flow_migration quirk that broke the old guard)
+    generatedAtTick: 10,
+    headline: `Refugees from ${sourceId} reach ${destId}`,
+    populationDeltas: [
+      { saveId: sourceId, delta: -sourceDebit, reason: 'flee' },
+      { saveId: destId, delta: sourceDebit, reason: 'arrive' },
+    ],
+    metadata: { flowKind: 'population', from: sourceId, to: destId },
+  };
+}
+
+describe('applyPopulationOutcomeToSettlement — flow_migration conservation (parked proposal)', () => {
+  test('a stale flow_migration scales the destination credit even though targetSaveId is the DESTINATION', () => {
+    const outcome = flowMigrationOutcome({ sourceDebit: 960 }); // A: -960, B: +960
+    // A shrank to 700 while the proposal was parked. Source applies FIRST.
+    const src = applyPopulationOutcomeToSettlement({ population: 700 }, outcome, 'A');
+    expect(src.population).toBe(0);
+    expect(src.populationHistory.at(-1).delta).toBe(-700); // realized, not the stored -960
+    // Destination is credited by the realized fraction (700/960), floored — not the full 960.
+    const dest = applyPopulationOutcomeToSettlement({ population: 5000 }, outcome, 'B');
+    expect(dest.population).toBe(5700); // 5000 + floor(960 * 700/960)
+    // Conservation: arrivals never exceed the people who actually left.
+    expect(dest.population - 5000).toBeLessThanOrEqual(700);
+  });
+
+  test('a FRESH flow_migration conserves world population exactly', () => {
+    const outcome = flowMigrationOutcome({ sourceDebit: 960 });
+    const src = applyPopulationOutcomeToSettlement({ population: 12000 }, outcome, 'A');
+    expect(src.population).toBe(11040); // -960 in full
+    const dest = applyPopulationOutcomeToSettlement({ population: 5000 }, outcome, 'B');
+    expect(dest.population).toBe(5960); // +960 in full
+    expect((src.population - 12000) + (dest.population - 5000)).toBe(0); // conserved
+  });
+});
