@@ -39,6 +39,10 @@ import { resolve } from 'node:path';
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '107_referral_redeem.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
+// 112 recreates reserve_redemption with the applies_to/mode gate; apply it on top of
+// 107 so the mode-gate tests run against the real, current function.
+const MIG_112 = resolve(process.cwd(), 'supabase', 'migrations', '112_reserve_redemption_mode_gate.sql');
+const SRC_112 = existsSync(MIG_112) ? readFileSync(MIG_112, 'utf-8') : '';
 
 // Vacuity guard (runs unconditionally): if the targeted migration is ever
 // renamed/removed the runIf suite below silently runs ZERO assertions while
@@ -108,6 +112,10 @@ const validate = async (uid, code) =>
   (await asAuthed(uid, 'select public.validate_redeem_code($1) as r', [code])).rows[0].r;
 const reserve = async (code, user) =>
   (await asService('select public.reserve_redemption($1, $2) as r', [code, user])).rows[0].r;
+const reserveMode = async (code, user, mode) =>
+  (await asService('select public.reserve_redemption($1, $2, $3) as r', [code, user, mode])).rows[0].r;
+const redemptionCount = async (code, user) =>
+  Number((await superRow('select count(*)::int as n from public.redemptions where code = $1 and user_id = $2', [code, user])).n);
 const bind = async (redemptionId, session) =>
   (await asService('select public.bind_redemption_session($1, $2) as r', [redemptionId, session])).rows[0].r;
 const apply = async (session) =>
@@ -181,6 +189,9 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
     // The REAL migration, whole file, verbatim — tables, indexes, RLS,
     // policies, grants, and all nine RPC bodies.
     await db.exec(SRC);
+    // 112 on top: recreates reserve_redemption with the mode gate (drops the 2-arg
+    // overload, creates the 3-arg p_mode form).
+    if (SRC_112) await db.exec(SRC_112);
 
     // Table privileges for the client role: PostgREST's authenticated role has
     // table grants in prod — RLS (not the grant layer) must be what denies.
@@ -706,6 +717,39 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
 
       await asClientTable(REFEREE, `delete from public.redemptions`);
       expect((await superRow(`select count(*)::int as n from public.redemptions`)).n).toBe(1);
+    });
+  });
+
+  describe('reserve_redemption mode gate (112) — a wrong-mode code is refused, never burned', () => {
+    it('a subscription-only code entered in payment mode is refused with NO once-per-user row', async () => {
+      await seedCode({ code: 'SUBONLY', applies_to: 'subscription', kind: 'credits', credit_amount: 50, stripe_coupon_id: null, max_uses: 5 });
+      const wrong = await reserveMode('SUBONLY', REFEREE, 'payment');
+      expect(wrong.ok).toBe(false);
+      expect(wrong.reason).toBe('mode_mismatch');
+      expect(await usesCount('SUBONLY')).toBe(0);            // the claimed seat was handed back
+      expect(await redemptionCount('SUBONLY', REFEREE)).toBe(0); // NOTHING burned — no row exists
+
+      // The SAME code still reserves on the correct mode: proof it was not consumed.
+      const right = await reserveMode('SUBONLY', REFEREE, 'subscription');
+      expect(right.ok).toBe(true);
+      expect(await usesCount('SUBONLY')).toBe(1);
+      expect(await redemptionCount('SUBONLY', REFEREE)).toBe(1);
+    });
+
+    it('a one_time code entered in subscription mode is refused; both modes work for an "any" code', async () => {
+      await seedCode({ code: 'ONETIME', applies_to: 'one_time', kind: 'credits', credit_amount: 25, stripe_coupon_id: null, max_uses: 5 });
+      expect((await reserveMode('ONETIME', REFEREE, 'subscription')).reason).toBe('mode_mismatch');
+      expect((await reserveMode('ONETIME', REFEREE, 'payment')).ok).toBe(true);
+
+      await seedCode({ code: 'ANYMODE', applies_to: 'any', kind: 'credits', credit_amount: 10, stripe_coupon_id: null, max_uses: 5 });
+      expect((await reserveMode('ANYMODE', REFEREE, 'payment')).ok).toBe(true);
+      expect((await reserveMode('ANYMODE', REFERRER, 'subscription')).ok).toBe(true);
+    });
+
+    it('a null p_mode stays mode-blind (the legacy 2-arg call still reserves a subscription code)', async () => {
+      await seedCode({ code: 'BLIND', applies_to: 'subscription', kind: 'credits', credit_amount: 10, stripe_coupon_id: null, max_uses: 5 });
+      const r = await reserve('BLIND', REFEREE);            // 2-arg → p_mode defaults null → gate skipped
+      expect(r.ok).toBe(true);
     });
   });
 });

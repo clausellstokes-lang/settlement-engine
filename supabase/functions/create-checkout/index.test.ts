@@ -240,6 +240,7 @@ Deno.test('a reserved free_month code attaches a SERVER-side discount and binds 
   assertEquals(reserve !== undefined, true);
   assertEquals(reserve!.args.p_user, 'u1');
   assertEquals(reserve!.args.p_code, 'SFC-TESTTESTTEST');
+  assertEquals(reserve!.args.p_mode, 'subscription');   // the mode gate (112) sees the session mode
 
   // The discount is server-attached from the RPC's coupon id; the checkout
   // page is never opened to arbitrary promotion codes.
@@ -292,6 +293,31 @@ Deno.test('a code that fails to reserve proceeds WITHOUT a discount and returns 
   assertEquals(typeof body.url, 'string');
 });
 
+Deno.test('a mode_mismatch reservation returns a notice WITHOUT reverting (no burn)', async () => {
+  // A subscription-only code typed into the credit-pack (payment-mode) modal. The mode
+  // gate (112) refuses it inside reserve_redemption BEFORE any once-per-user row exists,
+  // so create-checkout must NOT run the revert lifecycle that used to burn the code —
+  // it just surfaces the non-fatal notice and the paying checkout proceeds.
+  const stripe = makeStripe();
+  const admin = makeRedeemAdminClient({
+    reservation: { ok: false, reason: 'mode_mismatch', applies_to: 'subscription' },
+  });
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', redeemCode: 'SFC-SUBONLYCODE0' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);                        // checkout proceeds at full price
+  assertEquals('discounts' in stripe.created[0], false);
+  const reserve = admin.rpcCalls.find((c) => c.fn === 'reserve_redemption');
+  assertEquals(reserve!.args.p_mode, 'payment');                 // the payment mode was passed in
+  // The gate refused before creating a row → nothing to revert or bind → NOT burned.
+  assertEquals(admin.rpcCalls.some((c) => c.fn === 'revert_redemption'), false);
+  assertEquals(admin.rpcCalls.some((c) => c.fn === 'bind_redemption_session'), false);
+  const body = await res.json();
+  assertEquals(typeof body.redeemNotice, 'string');
+});
+
 Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never reserves)', async () => {
   const stripe = makeStripe();
   const admin = makeRedeemAdminClient();
@@ -307,30 +333,11 @@ Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never r
   assertEquals(typeof body.redeemNotice, 'string');        // told why, purchase unharmed
 });
 
-Deno.test('an applies_to mismatch attaches NO discount and hands the reserved seat back', async () => {
-  const stripe = makeStripe();
-  // A subscription-scoped free_month code against a one-time credit pack: the
-  // 100%-off coupon must never zero a purchase it was not minted for.
-  const admin = makeRedeemAdminClient({
-    reservation: { ok: true, stripe_coupon_id: 'coupon_free_month', kind: 'free_month', credit_amount: null, applies_to: 'subscription', redemption_id: 'red_3' },
-  });
-  const res = await handleCreateCheckout(
-    req({ product: 'credits_25', redeemCode: 'SFC-WRONGMODE000' }, { Authorization: 'Bearer jwt' }),
-    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: admin.adminClient },
-  );
-  assertEquals(res.status, 200);
-  assertEquals('discounts' in stripe.created[0], false);   // the coupon never rode the session
-
-  // Seat handback = the expired-checkout lifecycle: phantom bind, then revert.
-  const bind = admin.rpcCalls.find((c) => c.fn === 'bind_redemption_session');
-  assertEquals(bind!.args.p_redemption_id, 'red_3');
-  assertEquals(String(bind!.args.p_session_id).startsWith('released:'), true);
-  const revert = admin.rpcCalls.find((c) => c.fn === 'revert_redemption');
-  assertEquals(revert!.args.p_session_id, bind!.args.p_session_id);
-
-  const body = await res.json();
-  assertEquals(typeof body.redeemNotice, 'string');
-});
+// (The former "applies_to mismatch hands the reserved seat back" test is gone: the
+// mode gate now lives INSIDE reserve_redemption (112), which refuses a mismatch BEFORE
+// any row exists — so create-checkout never receives an ok:true wrong-mode reservation
+// to revert. The "a mode_mismatch reservation returns a notice WITHOUT reverting" test
+// above covers the replacement behaviour, including that no coupon rides the session.)
 
 Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {
   const stripe = makeStripe();
