@@ -1037,11 +1037,16 @@ describe('single-dossier payment verification', () => {
     expect(src).toMatch(/stripe(Api)?\.checkout\.sessions\.retrieve/);
   });
 
-  it('requires a complete paid single-dossier session with matching token', () => {
+  it('requires a complete paid single-dossier session with a constant-time token match', () => {
     expect(src).toMatch(/session\.status\s*===\s*['"]complete['"]/);
     expect(src).toMatch(/payment_status/);
     expect(src).toMatch(/metadata\?\.product\s*===\s*['"]single_dossier['"]/);
-    expect(src).toMatch(/metadata\?\.checkout_token\s*===\s*checkoutToken/);
+    // Token compare is CONSTANT-TIME (timingSafeEqualStr over checkout_token vs
+    // checkoutToken), not a leaky `===`, and its boolean is ANDed into `verified`
+    // so a wrong/absent token cannot satisfy the gate (edges: timing-safe hardening).
+    expect(src).toMatch(/timingSafeEqualStr\([\s\S]{0,160}checkoutToken/);
+    expect(src).toMatch(/checkout_token/);
+    expect(src).toMatch(/&&\s*tokenMatches/);
   });
 });
 
