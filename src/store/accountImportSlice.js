@@ -24,6 +24,7 @@ import { saves as savesService } from '../lib/saves.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
 import { validateAccountImport, prepareSettlementEntry } from '../lib/accountImport.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { persistCampaignState } from './campaignSliceShared.js';
 
 /** Whether the importing user may create campaigns (premium / elevated only). */
 function canImportCampaigns(auth) {
@@ -155,7 +156,14 @@ export const createAccountImportSlice = (set, get) => ({
             .filter(Boolean);
           set(state => {
             const created = state.campaigns.find(x => x.id === newCampaignId);
-            if (created) created.settlementIds = remappedIds;
+            if (created) {
+              created.settlementIds = remappedIds;
+              // createCampaign persisted the campaign with settlementIds:[]; without
+              // re-persisting here the remapped members live only in memory and are
+              // dropped on the next reload / cloud sync. Every other membership mutator
+              // (addToCampaign / removeFromCampaign / reorder) persists after mutating.
+              persistCampaignState(state, newCampaignId);
+            }
           });
           campaignsImported += 1;
         }
