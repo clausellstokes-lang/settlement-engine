@@ -246,14 +246,18 @@ export const generateResourceAnalysis = (
     );
   }
 
-  // High military + missing strategic resources = vulnerability note
+  // High military + missing strategic resources = vulnerability note.
+  // evaluateInstitutionChain names the gapped resource on `gap.chain` (the
+  // chain.rawResource value), NOT `gap.rawResource` — reading the latter left
+  // this note permanently dead (strategicGaps always empty), so a war-focused
+  // town with an iron/timber/stone processing gap never saw it.
   if (priorityToCategory(pri.military) === 'high' || priorityToCategory(pri.military) === 'very_high') {
     const strategicGaps = (gaps || []).filter(g =>
-      ['iron ore', 'timber', 'stone'].some(kw => g.rawResource?.toLowerCase().includes(kw))
+      ['iron ore', 'timber', 'stone'].some(kw => g.chain?.toLowerCase().includes(kw))
     );
     if (strategicGaps.length > 0) {
       priorityNotes.push(
-        `Military focus exposes a gap: ${strategicGaps[0].rawResource} processing is incomplete. A strategic vulnerability.`
+        `Military focus exposes a gap: ${strategicGaps[0].chain} processing is incomplete. A strategic vulnerability.`
       );
     }
   }

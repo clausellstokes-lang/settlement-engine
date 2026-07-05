@@ -53,21 +53,35 @@ function residueCheckers(worldState, channels) {
   const occupations = worldState?.occupations || {};
   const hasChannelFrom = (/** @type {string} */ type, /** @type {string} */ from) =>
     channels.some(c => c?.type === type && String(c?.from) === from);
+  // Each checker receives the full deferred major and reads whichever id names
+  // the ledger row it banked residue on. For war_mobilization / strategy_deploy /
+  // conquest that is targetSaveId; for occupation_vassalized the actor
+  // (targetSaveId) is the OCCUPIER, so it reads occupiedSaveId — the occupied
+  // ledger row's key — and the real rung field `state` (NOT `stage`).
   return {
-    war_mobilization: (/** @type {string} */ target) => {
+    war_mobilization: (/** @type {any} */ major) => {
+      const target = String(major.targetSaveId);
       if (posture[target] !== undefined) return `warPosture[${target}] survived`;
       if (hasChannelFrom('information_flow', target)) return `information_flow channel from ${target} survived`;
       return null;
     },
-    strategy_deploy: (/** @type {string} */ target) => {
+    strategy_deploy: (/** @type {any} */ major) => {
+      const target = String(major.targetSaveId);
       if (deployments[target] !== undefined) return `deployments[${target}] survived`;
       if (hasChannelFrom('war_front', target)) return `war_front channel from ${target} survived`;
       return null;
     },
-    conquest: (/** @type {string} */ target) =>
-      (occupations[target] !== undefined ? `occupations[${target}] survived` : null),
-    occupation_vassalized: (/** @type {string} */ target) =>
-      (occupations[target]?.stage === 'vassalized' ? `occupations[${target}] left at the vassalized rung` : null),
+    conquest: (/** @type {any} */ major) => {
+      const target = String(major.targetSaveId); // conquest targetSaveId = the conquered (occupied) id
+      return occupations[target] !== undefined ? `occupations[${target}] survived` : null;
+    },
+    occupation_vassalized: (/** @type {any} */ major) => {
+      const occupied = major.occupiedSaveId != null ? String(major.occupiedSaveId) : null;
+      if (occupied == null) return null;
+      return occupations[occupied]?.state === 'vassalized'
+        ? `occupations[${occupied}] left at the vassalized rung`
+        : null;
+    },
   };
 }
 
@@ -78,12 +92,13 @@ function residueCheckers(worldState, channels) {
  */
 export function findResidueLeaks(worldState, regionalGraph, deferredMajors) {
   const channels = regionalGraph?.channels || [];
-  const check = /** @type {Record<string, (t: string) => (string|null)>} */ (residueCheckers(worldState, channels));
+  const check = /** @type {Record<string, (m: any) => (string|null)>} */ (residueCheckers(worldState, channels));
   const leaks = [];
   for (const major of deferredMajors || []) {
-    const fn = check[major?.candidateType];
-    if (!fn || major?.targetSaveId == null) continue;
-    const leak = fn(String(major.targetSaveId));
+    if (major == null) continue;
+    const fn = check[major.candidateType];
+    if (!fn) continue;
+    const leak = fn(major);
     if (leak) leaks.push(`${major.candidateType}(${major.id}): ${leak}`);
   }
   return leaks;

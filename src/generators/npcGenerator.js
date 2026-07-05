@@ -1544,8 +1544,12 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     }
   });
 
-  // Add a guild-master NPC if we have room
-  if (npcs.length < targetCount) {
+  // Add a guild-master NPC if we have room — unless a stress-mandated one is
+  // already present. famine/succession_void mandate a 'Guild Master' above, and
+  // filterByGuild mints another with the same role, so a famine city with a
+  // commerce guild used to emit two Guild Masters (differently titled). Guard on
+  // the role so the mandatory one wins and filterByGuild only fills a genuine gap.
+  if (npcs.length < targetCount && !npcs.some(n => n.role === 'Guild Master')) {
     const guildNPC = filterByGuild(institutions, culture, tier, npcConfig);
     if (guildNPC) npcs.push(guildNPC);
   }

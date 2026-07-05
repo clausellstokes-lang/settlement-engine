@@ -9,7 +9,7 @@
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
-import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { canonicalEdgeForLink, canonicalRelationshipLabel } from '../relationships/canonicalRelationship.js';
 import { healingLedger } from '../healingLedger.js';
 import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
@@ -38,7 +38,13 @@ function relationBetween(sourceSave, targetSave) {
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
-  return link?.relationshipType || link?.type || null;
+  // Canonicalize legacy/spelling variants ('trade_partners' plural, 'ally',
+  // 'smuggling', 'coldwar', 'overlord') so discovery's branch matching agrees
+  // with the confirmed relationshipChannelBundle path (graph.js), which also
+  // routes through canonicalRelationshipLabel. Reading the raw label here made
+  // every legacy relationship silently mint ZERO discovered channels.
+  const raw = link?.relationshipType || link?.type;
+  return raw ? canonicalRelationshipLabel(raw) : null;
 }
 
 /**
@@ -198,7 +204,10 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   } else if (rel === 'rival' || rel === 'cold_war') {
     addTwoWay(out, 'resource_competition', source, target, rel, 0.56, 0.58);
     addTwoWay(out, 'information_flow', source, target, rel, 0.45, 0.55);
-  } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
+  } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
+    // 'smuggling_partner' (the canonical regional term, also reached from the
+    // 'smuggling' alias) mints the criminal corridor here, mirroring the
+    // confirmed relationshipChannelBundle branch in graph.js.
     addTwoWay(out, 'criminal_corridor', source, target, rel, 0.68, 0.72);
   } else if (rel === 'religious_authority') {
     addTwoWay(out, 'religious_authority', source, target, rel, 0.62, 0.65);

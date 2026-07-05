@@ -667,7 +667,13 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
       applyMode: 'auto',
       probability: 1,
       relationshipKey: found.key,
+      // The ACTOR is the occupier (targetSaveId), but the RESIDUE this outcome
+      // banks lives on the OCCUPIED settlement's ledger row (promoted to the
+      // 'vassalized' rung). Name the occupied id explicitly so the pause-path
+      // residue guard — and any other consumer — can locate the affected ledger
+      // row without reverse-engineering it from the outcome id or the edge key.
       targetSaveId: String(rec.occupierId),
+      occupiedSaveId: String(occupiedId),
       severity: 0.5,
       headline: `${occupiedName} bends the knee to ${occupierName}`,
       summary: `${occupierName}'s occupation of ${occupiedName} has stabilized into formal vassalage. The occupied settlement now serves as a client state.`,

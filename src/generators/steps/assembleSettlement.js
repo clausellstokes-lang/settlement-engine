@@ -13,6 +13,7 @@ import { generateSettlementName } from '../npcGenerator.js';
 import { rerenderStressNames } from '../stressGenerator.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
+import { generateCrossSettlementConflicts } from '../crossSettlementConflicts.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
@@ -187,5 +188,26 @@ registerStep('assembleSettlement', {
   // config + _config) that keeps a what-if regeneration from erasing what the
   // DM's events did. Order matters: re-promotion dedupes against the
   // GENERATION-stamped twins the stressor promotion just minted.
+  // Cross-settlement conflicts with the generation-time neighbour, generated HERE
+  // in the seeded pipeline so they are DETERMINISTIC and PERSISTED. The PDF
+  // (viewModel crossConflicts) and the Relationships tab both read this one field;
+  // the tab used to RE-GENERATE them at render time with no active PRNG, which fell
+  // back to Math.random() — non-deterministic across renders AND absent from the
+  // PDF (a screen/PDF parity break). Generated LAST (after the final NPC roster and
+  // after every other rng draw) so the sole output delta is this field, and only
+  // when the neighbour actually carries matching NPCs — the generator consumes zero
+  // rng and returns [] otherwise, so a neighbour without its own NPCs stays
+  // byte-identical (no field, no draws).
+  const neighbour = settlement.neighborRelationship;
+  if (neighbour?.name) {
+    const { forA: neighbourConflicts } = generateCrossSettlementConflicts(
+      { name: settlement.name, npcs: settlement.npcs || [], factions: settlement.factions || [] },
+      { name: neighbour.name, npcs: neighbour.npcs || [], factions: neighbour.factions || [] },
+      neighbour.relationshipType || 'neutral',
+      'generated',
+    );
+    if (neighbourConflicts.length) settlement.crossSettlementConflicts = neighbourConflicts;
+  }
+
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });

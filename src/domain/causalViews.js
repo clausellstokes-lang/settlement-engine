@@ -26,7 +26,7 @@
 
 import { deriveSimulationSpine } from './simulationSpine.js';
 import { deriveDailyLife } from './dailyLife.js';
-import { deriveCausalState } from './causalState.js';
+import { deriveCausalState, causalBandWord } from './causalState.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
@@ -75,8 +75,13 @@ function viewSimulation(settlement) {
     summary: [
       `Substrate variables: ${Object.keys(causal.bands).length}.`,
       `Capacities: ${Object.keys(capacities.bands).length}.`,
-      ...(causal.summary.collapsed.map((/** @type {any} */ v) => `${v} is COLLAPSED.`)),
-      ...(causal.summary.critical.map((/** @type {any} */ v) => `${v} is critical.`)),
+      // Phrase each band through the shared causalBandWord so a lower_is_better
+      // variable never reads inverted: a maximally-criminal settlement prints
+      // "criminal_opportunity is RAMPANT", not the wrong "…is COLLAPSED" (which
+      // a DM/AI reads as crime being gone). Higher-is-better variables keep the
+      // raw band word, so this is output-identical for them.
+      ...(causal.summary.collapsed.map((/** @type {any} */ v) => `${v} is ${causalBandWord(v, 'collapsed').toUpperCase()}.`)),
+      ...(causal.summary.critical.map((/** @type {any} */ v) => `${v} is ${causalBandWord(v, 'critical').toLowerCase()}.`)),
     ],
   };
 }

@@ -113,28 +113,42 @@ const _getSettlementHistoryNote = (events, _tier, _config) => {
  * @param {Object} powerStructure - Generated power structure
  * @returns {Object} Context object with named descriptors
  */
+/**
+ * Map a settlement's primary export to a canonical trade-commodity keyword
+ * (timber / grain / iron / …), or null when there is no export or it maps to
+ * nothing recognized. Single source of truth: buildHistoryContext AND the
+ * resource-scarcity tension prose both call this. The tension site previously
+ * read `economicState.tradeCommodity` — a field nothing ever assigns — so an
+ * iron-exporting town's scarcity line read "the supply of key goods" instead of
+ * "the supply of iron".
+ *
+ * @param {any} economicState
+ * @returns {string|null}
+ */
+const deriveTradeCommodity = (economicState) => {
+  const first = economicState?.primaryExports?.[0]?.toLowerCase();
+  if (!first) return null;
+  if (first.includes('timber') || first.includes('lumber') || first.includes('wood')) return 'timber';
+  if (first.includes('grain') || first.includes('wheat') || first.includes('rye')) return 'grain';
+  if (first.includes('fish') || first.includes('seafood')) return 'fish';
+  if (first.includes('wool') || first.includes('textile') || first.includes('cloth')) return 'wool';
+  if (first.includes('iron') || first.includes('metal') || first.includes('steel')) return 'iron';
+  if (first.includes('stone') || first.includes('marble') || first.includes('quarry')) return 'stone';
+  if (first.includes('gem') || first.includes('jewel') || first.includes('crystal')) return 'gems';
+  if (first.includes('potion') || first.includes('alchemical') || first.includes('reagent')) return 'alchemy';
+  if (first.includes('craft') || first.includes('tool') || first.includes('manufactured')) return 'crafts';
+  if (first.includes('livestock') || first.includes('cattle') || first.includes('sheep')) return 'livestock';
+  if (first.includes('salt')) return 'salt';
+  if (first.includes('spice') || first.includes('exotic')) return 'spices';
+  return null;
+};
+
 const buildHistoryContext = (config, institutions = [], economicState = null, powerStructure = null) => {
   const { tradeRouteAccess: route = 'road', magicLevel = 'medium', monsterThreat: threat = 'frontier' } = config;
 
   // Determine primary trade commodity
   const exports = economicState?.primaryExports || [];
-  const tradeCommodity = (() => {
-    if (!exports.length) return null;
-    const first = exports[0].toLowerCase();
-    if (first.includes('timber') || first.includes('lumber') || first.includes('wood')) return 'timber';
-    if (first.includes('grain') || first.includes('wheat') || first.includes('rye')) return 'grain';
-    if (first.includes('fish') || first.includes('seafood')) return 'fish';
-    if (first.includes('wool') || first.includes('textile') || first.includes('cloth')) return 'wool';
-    if (first.includes('iron') || first.includes('metal') || first.includes('steel')) return 'iron';
-    if (first.includes('stone') || first.includes('marble') || first.includes('quarry')) return 'stone';
-    if (first.includes('gem') || first.includes('jewel') || first.includes('crystal')) return 'gems';
-    if (first.includes('potion') || first.includes('alchemical') || first.includes('reagent')) return 'alchemy';
-    if (first.includes('craft') || first.includes('tool') || first.includes('manufactured')) return 'crafts';
-    if (first.includes('livestock') || first.includes('cattle') || first.includes('sheep')) return 'livestock';
-    if (first.includes('salt')) return 'salt';
-    if (first.includes('spice') || first.includes('exotic')) return 'spices';
-    return null;
-  })();
+  const tradeCommodity = deriveTradeCommodity(economicState);
 
   // Determine dominant guild
   const guildInsts = institutions.filter(i => {
@@ -718,7 +732,7 @@ const buildHistoricalEvent = (
     if ((economicViability.issues?.length || 0) > 0) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'resource_scarcity');
       if (tmpl && _rng() > 0.4) {
-        const commodity = economicState?.tradeCommodity || 'key goods';
+        const commodity = deriveTradeCommodity(economicState) || 'key goods';
         selected.push({
           ...tmpl,
           description: `The supply of ${commodity} (the settlement's economic backbone) is under pressure. ${economicViability.issues[0].message}`,

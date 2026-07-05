@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { FS, MUTED, BODY, swatch } from '../../theme.js';
-import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
@@ -51,37 +50,22 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   // NPCs / factions) in each row to their cards. Foreign-settlement parties
   // are absent from the index and degrade to plain text.
   const { index } = useDossierEntities();
-  // Conflicts: from saved links + live-generated for unsaved settlements.
-  // NOTE: this hook must come BEFORE any early return so React's hooks-
-  // order invariant holds across renders. Previously `useMemo` followed
-  // `if (!r) return null;` (caught by rules-of-hooks). r-guard moved to
-  // a no-op input check inside the memo + a deferred final null check.
-  // Granular deps (r?.name, r?.npcs, etc.) deliberately replace the
-  // whole-`r` dep — `r` is a settlement object that re-allocates on
-  // many unrelated state changes and would over-invalidate the memo.
-  const liveConflicts = useMemo(() => {
-    const nr = r?.neighborRelationship;
-    if (!r || !nr?.name) return [];
-    try {
-      const relType = nr.relationshipType || 'neutral';
-      const settA = { name: r.name||'', npcs: r.npcs||[], factions: r.factions||[] };
-      const settB = { name: nr.name, npcs: nr.npcs||[], factions: nr.factions||[] };
-      const { forA } = generateCrossSettlementConflicts(settA, settB, relType, 'live');
-      return forA;
-    } catch(e) { return []; }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
 
   if (!r) return null;
 
   const rels=(Array.isArray(r.relationships)?r.relationships:[]);
   const interSettlementRels=r.interSettlementRelationships||[];
 
+  // Conflicts come from two PERSISTED, deterministic sources: interSettlementRelationships
+  // (campaign-linked partners, keyed by linkId) and crossSettlementConflicts (the
+  // generation-time neighbour, minted in the seeded pipeline at assembleSettlement —
+  // the same field the PDF reads, so screen and PDF stay in parity). This tab no longer
+  // re-generates conflicts at render: doing so ran a seeded generator with no active
+  // PRNG (Math.random fallback → non-deterministic and PDF-divergent).
   // Only typed entries (conflict / faction_engagement) — not raw NPC contacts (which have no type)
   const crossConflictsRaw = [
     ...(r.interSettlementRelationships||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
     ...(r.crossSettlementConflicts||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-    ...liveConflicts.filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
   ];
   const seen = new Set();
   const crossConflicts = crossConflictsRaw.filter(x => {
