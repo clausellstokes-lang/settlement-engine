@@ -78,6 +78,30 @@ function mergeCatalogs(base, override) {
   return merged;
 }
 
+// Resource-specific extraction boosts: resource KEY → lowercased institution-name
+// FRAGMENT → multiplier. The fragment is substring-matched against the (lowercased)
+// institution name below — 'docks/port' deliberately truncates 'Docks/port facilities',
+// 'healer (divine' truncates 'Healer (divine, 1st level)'. Hoisted to module level and
+// exported so the string-coupling registry (tests/data/stringCouplingRegistry.test.js)
+// can pin two joins: every KEY is a real RESOURCE_DATA key, and every FRAGMENT
+// substring-matches at least one catalog institution. Values unchanged — the hoist is
+// behavior-identical (and stops re-allocating the table per institution roll).
+export const EXTRACTION_BOOSTS = Object.freeze({
+  'iron_deposits':     { 'mine (open cast)': 2.5, 'mine': 2.0 },
+  'stone_quarry':      { 'stone quarry': 2.5, 'stonemason': 1.8 },
+  'coal_deposits':     { 'peat cutter': 2.0, 'charcoal burner': 1.8 },
+  'precious_metals':   { 'mine (open cast)': 2.2, 'mint': 2.5 },
+  'gemstone_deposits': { 'mine (open cast)': 2.0 },
+  'fishing_grounds':   { "fisher's landing": 2.0, 'fish market': 1.8, 'fishmonger': 1.8 },
+  'river_fish':        { "fisher's landing": 1.8, 'fish market': 1.6, 'fishmonger': 1.5 },
+  'managed_forest':    { "woodcutter's camp": 2.0, 'charcoal burner': 1.8 },
+  'hunting_grounds':   { "hunter's lodge": 2.5 },
+  'deep_harbour':      { 'docks/port': 2.0, 'harbour master': 1.8 },
+  'ancient_ruins':     { "adventurers' charter": 1.8, "adventurers' guild": 1.6 },
+  'hot_springs':       { 'healer (divine': 1.8 },
+  'mountain_timber':   { "woodcutter's camp": 1.8, 'charcoal burner': 1.6 },
+});
+
 // Resource multiplier for institution base chances
 function getResourceMultiplier(instTags, instName, nearbyResources, instModifiers, tier) {
   let multiplier = 1;
@@ -104,21 +128,6 @@ function getResourceMultiplier(instTags, instName, nearbyResources, instModifier
     });
   });
 
-  const EXTRACTION_BOOSTS = {
-    'iron_deposits':     { 'mine (open cast)': 2.5, 'mine': 2.0 },
-    'stone_quarry':      { 'stone quarry': 2.5, 'stonemason': 1.8 },
-    'coal_deposits':     { 'peat cutter': 2.0, 'charcoal burner': 1.8 },
-    'precious_metals':   { 'mine (open cast)': 2.2, 'mint': 2.5 },
-    'gemstone_deposits': { 'mine (open cast)': 2.0 },
-    'fishing_grounds':   { "fisher's landing": 2.0, 'fish market': 1.8, 'fishmonger': 1.8 },
-    'river_fish':        { "fisher's landing": 1.8, 'fish market': 1.6, 'fishmonger': 1.5 },
-    'managed_forest':    { "woodcutter's camp": 2.0, 'charcoal burner': 1.8 },
-    'hunting_grounds':   { "hunter's lodge": 2.5 },
-    'deep_harbour':      { 'docks/port': 2.0, 'harbour master': 1.8 },
-    'ancient_ruins':     { "adventurers' charter": 1.8, "adventurers' guild": 1.6 },
-    'hot_springs':       { 'healer (divine': 1.8 },
-    'mountain_timber':   { "woodcutter's camp": 1.8, 'charcoal burner': 1.6 },
-  };
   res.forEach(resourceKey => {
     const exactBoosts = EXTRACTION_BOOSTS[resourceKey];
     if (!exactBoosts) return;

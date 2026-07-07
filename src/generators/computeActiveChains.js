@@ -505,7 +505,9 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
 // If a good appears here, it can only be exported if the settlement has
 // an institution whose name includes the specified keyword.
 // Goods NOT in this map are raw/extractable without processing.
-const RESOURCE_GOOD_INST_GATES = {
+// Exported for tests/data/stringCouplingRegistry.test.js: output good-NAMES here
+// flow into primaryExports and must resolve in the goods catalog (exactGoodId).
+export const RESOURCE_GOOD_INST_GATES = {
   'shipbuilding_timber': { 'Milled lumber': 'sawmill' },
   'river_mills':         { 'Milled flour': 'mill', 'Processed grain': 'mill', 'Fulled cloth': 'fuller' },
   'river_clay':          { 'Fired brick': 'brickmaker', 'Pottery and ceramics': 'potter', 'Roof tiles': 'brickmaker' },

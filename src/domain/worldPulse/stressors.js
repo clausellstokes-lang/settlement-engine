@@ -440,7 +440,9 @@ function resolutionChance(stressor, snapshot, assessment = undefined) {
 // are not real causal variables, so residual conditions carrying them silently
 // no-op'd against the substrate. Map them onto the nearest real variable at
 // emission time (catalog keeps its semantic names).
-const CAUSAL_SYSTEM_ALIASES = Object.freeze({
+// Exported so the string-coupling registry can pin crisisLifecycle's hand-mirrored
+// copy (STRESSOR_SYSTEM_ALIASES) as byte-identical to this canonical table.
+export const CAUSAL_SYSTEM_ALIASES = Object.freeze({
   faction_stability: 'faction_power',
   law_order: 'criminal_opportunity', // lawless interregnum -> opportunists move in
   tax_revenue: 'trade_connectivity',

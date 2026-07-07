@@ -35,6 +35,25 @@ const hash01 = (text) => {
   return (h >>> 0) / 4294967296;
 };
 
+// ─── HIGH_MAGIC_INSTITUTIONS ─────────────────────────────────────────────────
+// Institutions that read as exceptional/controversial in a LOW-magic setting —
+// checkStructuralValidity emits a context warning when one is present under
+// effectiveMagicLevel 'low'. The join is EXACT against the expanded present set,
+// so every token must be a real vocabulary name: four used to be shortened forms
+// ('Airship docking', 'Dream parlor', 'Message network', 'Magical banking') that
+// could NEVER equal their catalog names ('… (high magic)' suffixed) — the warning
+// was silently dead for exactly the most emblematic high-magic institutions.
+// 'High magic district' / 'Extradimensional vault' match no vocabulary name and
+// stay as dormant hooks for identically-named custom institutions (pinned in
+// tests/data/stringCouplingRegistry.test.js).
+export const HIGH_MAGIC_INSTITUTIONS = Object.freeze([
+  'Airship docking (high magic)', 'Golem workforce', 'Undead labor',
+  'Dream parlors (high magic)', 'Magical banking (high magic)',
+  'Message network (high magic)', 'Planar embassy', 'Teleportation circle',
+  'Magic item consignment', 'Enchanting quarter', 'High magic district',
+  'Extradimensional vault',
+]);
+
 // ─── SPATIAL_FEATURES ────────────────────────────────────────────────────────
 // Maps an institution name to the list of lesser institutions it implies
 // (for validation expansion — if you have the greater, you implicitly have the lesser).
@@ -444,12 +463,6 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   });
 
   // ── Low-magic exotic institution warnings ─────────────────────────────────
-  const HIGH_MAGIC_INSTITUTIONS = [
-    'Airship docking', 'Golem workforce', 'Undead labor', 'Dream parlor',
-    'Magical banking', 'Message network', 'Planar embassy', 'Teleportation circle',
-    'Magic item consignment', 'Enchanting quarter', 'High magic district',
-    'Extradimensional vault',
-  ];
   if (effectiveMagicLevel === 'low') {
     HIGH_MAGIC_INSTITUTIONS.forEach(instName => {
       if (expandedSet.includes(instName)) {

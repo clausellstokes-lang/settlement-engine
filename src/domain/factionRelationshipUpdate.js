@@ -42,7 +42,10 @@ import { snakeCase } from './ids.js';
 // events compound; we don't want any single event to swing a faction
 // from dominant to collapsed in one tick.
 
-const ARCHETYPE_IMPACTS = Object.freeze({
+// Exported for tests/data/stringCouplingRegistry.test.js: every per-faction key in
+// each impact profile must be a canonical FACTION_ARCHETYPES value, or a faction of
+// that archetype silently receives NO deltas from the event.
+export const ARCHETYPE_IMPACTS = Object.freeze({
   // ─────────────────────────────────────────────────────────────────────
   // PLAGUE — illness with collective response. Plays to whichever
   // faction tends the sick best (religious) and against whoever is

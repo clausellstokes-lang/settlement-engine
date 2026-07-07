@@ -65,7 +65,9 @@ function labelFromTarget(/** @type {any} */ targetId) {
 // Loose catalog alias map mirrored from stressors.js canonicalAffectedSystems
 // (kept tiny + local: importing the private helper would mean exporting it
 // just for this fallback path).
-const STRESSOR_SYSTEM_ALIASES = Object.freeze({
+// Exported so the string-coupling registry pins this mirror against stressors.js's
+// canonical CAUSAL_SYSTEM_ALIASES (the comment above documents WHY it is mirrored).
+export const STRESSOR_SYSTEM_ALIASES = Object.freeze({
   faction_stability: 'faction_power',
   law_order: 'criminal_opportunity',
   tax_revenue: 'trade_connectivity',
