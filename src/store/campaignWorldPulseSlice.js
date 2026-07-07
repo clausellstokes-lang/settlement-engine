@@ -228,16 +228,26 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         ...(worldState.simulationRules || {}),
         ...(patch || {}),
       };
+      // RELATIONSHIP DRIFT ⊃ WAR: war is a relationship dynamic — hostile edges
+      // escalate into fronts — so the War layer cannot run while inter-settlement
+      // relationship drift is frozen. Turning drift OFF cascades War off (and the
+      // UI renders War disabled until drift is on); the next advance winds any
+      // armies still afield home through the deploymentReturn machinery
+      // (evaluateWarLayer's OFF-branch withdrawal). Enforced at this write seam
+      // like the war→strategy coupling below — NOT in normalizeSimulationRules —
+      // so engine-direct callers and saved campaigns are untouched until the DM
+      // actually changes a rule.
+      if (!merged.relationshipDynamicsEnabled) merged.warLayerEnabled = false;
       // War and Settlement Strategy go hand in hand: Strategy scores defend/deploy/
       // sue-for-peace moves off war_front channels that ONLY exist when the War
       // layer is on, so a War-on/Strategy-off state leaves Strategy with no inputs.
       // Enabling War therefore auto-activates Strategy (and the DM can't turn
       // Strategy off while War is on — it re-asserts here). One-way by design:
-      // turning War off leaves Strategy as the DM last set it. Enforced at this
-      // write seam (both the map dialog and the Workshop toggle route through here)
-      // rather than in normalizeSimulationRules, so engine-direct callers and saved
-      // campaigns are untouched until the DM actually changes a rule.
+      // turning War off leaves Strategy as the DM last set it — EXCEPT when the
+      // drift cascade above forced War off: a frozen world has no fronts for
+      // Strategy to score, so it cascades off with War.
       if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
+      else if (!merged.relationshipDynamicsEnabled) merged.settlementStrategyEnabled = false;
       normalizedRules = normalizeSimulationRules(merged);
       c.worldState = { ...worldState, simulationRules: normalizedRules };
       c.updatedAt = now;
