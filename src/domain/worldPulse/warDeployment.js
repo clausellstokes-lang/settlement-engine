@@ -1019,7 +1019,34 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const existing = worldState?.deployments || {};
   // ── Gate: byte-identical no-op when the war layer is OFF. ────────────────────
   if (!rules?.warLayerEnabled) {
-    return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null };
+    const deployedIds = Object.keys(existing);
+    if (!deployedIds.length) {
+      return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null };
+    }
+    // WIND-DOWN: the layer was turned OFF while armies were afield (a mid-campaign
+    // toggle — directly, or cascaded by relationship drift turning off). Freezing
+    // the ledger would strand every deployed population away from home forever (a
+    // conservation leak), so every deployment resolves as a WITHDRAWAL: survivors
+    // march home through the normal deploymentReturn machinery (banked headcounts
+    // + per-vassal levy apportionment intact) and every war_front retires. Byte-
+    // identical for war-never-on worlds (no deployments ⇒ the fast path above).
+    // warExhaustion is the non-reverting scar ledger — the war leaves its mark.
+    const offGraph = snapshot?.regionalGraph || {};
+    const resolvedDeployments = [];
+    /** @type {string[]} */
+    const windDownChannels = [];
+    for (const attackerId of deployedIds.sort(codepoint)) {
+      const deployment = existing[attackerId];
+      const targetId = String(deployment?.targetId ?? '');
+      resolvedDeployments.push({ attackerId, deployment, targetId, outcome: 'withdrawal' });
+      for (const channelId of warFrontChannelIds(offGraph, attackerId, targetId)) windDownChannels.push(channelId);
+    }
+    return {
+      outcomes: [], deployments: {}, graphChannels: [],
+      retiredChannels: [...new Set(windDownChannels)].sort(codepoint),
+      resolvedDeployments, dispositionDeltas: [],
+      warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null,
+    };
   }
 
   const graph = snapshot?.regionalGraph || {};

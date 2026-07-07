@@ -139,10 +139,15 @@ describe('B2 — OFF byte-identity (the stateful layer is gated)', () => {
     expect(ids(b)).toEqual(ids(a));
   });
 
-  test('a flag-off campaign keeps deployments LIGHT (no strength fields materialize)', () => {
+  test('a flag-off campaign never ENRICHES a deployment: the wind-down returns it home light', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = HOSTILE_EDGES('strong', 'weak');
-    // Even with a pre-seeded LIGHT deployment, the OFF layer never enriches it.
+    // B2's OFF contract is "no strength fields ever materialize". A pre-seeded
+    // deployment under war-off no longer freezes in place (that stranded the
+    // deployed population forever) — the WIND-DOWN resolves it as a withdrawal
+    // and the army marches home (see warWindDown.test.js for conservation).
+    // Either way, the stateful B2 enrichment never runs: nothing in the result
+    // carries currentEffectiveStrength.
     const off = warCampaign({
       edges,
       channels: [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }],
@@ -152,9 +157,9 @@ describe('B2 — OFF byte-identity (the stateful layer is gated)', () => {
       },
     });
     const pulse = previewCampaignWorldPulse({ campaign: off, saves, interval: 'one_month', now: NOW });
-    const dep = pulse.worldState.deployments.strong;
-    expect(dep).toEqual({ targetId: 'weak', sinceTick: 1, role: 'siege' });
-    expect(dep.currentEffectiveStrength).toBeUndefined();
+    // The wind-down cleared the ledger (no frozen army, no strength fields anywhere).
+    expect(pulse.worldState.deployments || {}).toEqual({});
+    expect(JSON.stringify(pulse.worldState)).not.toMatch(/currentEffectiveStrength/);
   });
 });
 

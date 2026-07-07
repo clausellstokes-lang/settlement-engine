@@ -766,6 +766,31 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         );
       }
     }
+  } else if ((war.resolvedDeployments || []).length) {
+    // WAR-OFF WIND-DOWN: the layer is OFF but armies were still afield (a mid-
+    // campaign toggle). evaluateWarLayer's OFF branch resolved every deployment
+    // as a WITHDRAWAL; route the returns through the SAME machinery (conserved
+    // homecomings), retire the fronts, clear the ledger. War-never-on worlds:
+    // resolvedDeployments is empty ⇒ this never runs (byte-identical).
+    worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    const windDownRetired = war.retiredChannels || [];
+    if (windDownRetired.length) {
+      let warGraph = postTimeSnapshot.regionalGraph;
+      for (const channelId of windDownRetired) {
+        warGraph = setRegionalChannelStatus(warGraph, channelId, 'dormant', { now });
+      }
+      const windDownCampaign = { ...campaign, worldState, regionalGraph: warGraph };
+      postTimeSnapshot = buildWorldSnapshot({ campaign: windDownCampaign, saves: postTimeSaves, worldState });
+    }
+    // Same fork-label discipline as the ON path (see the NOTE above that call):
+    // neither layer draws from this parent directly, so the shared label is safe.
+    warReturnOutcomes = deploymentReturnOutcomes({
+      resolvedDeployments: war.resolvedDeployments,
+      snapshot: postTimeSnapshot,
+      graph: postTimeSnapshot.regionalGraph,
+      rng: rng.fork('war-layer'),
+      tick: worldState.tick,
+    });
   }
   // Religion dynamics: the deity contest + conversion spread +
   // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
