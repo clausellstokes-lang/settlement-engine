@@ -180,6 +180,11 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       'src/domain/worldPulse/tradeSalience.js',
       'src/domain/worldPulse/relationshipRulesAdversarial.js',
       'tests/domain/tradeSalience.test.js',
+      // String-coupling registry: READ-ONLY vocabulary pin — it asserts
+      // PRIMARY_RELATIONSHIP_TYPES ⇔ PROPAGATION_MATRIX set equality (the
+      // hand-mirrored list this file's header documents), the same
+      // no-parallel-ruleset intent this allowlist enforces.
+      'tests/data/stringCouplingRegistry.test.js',
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
