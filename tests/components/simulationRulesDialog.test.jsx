@@ -157,6 +157,36 @@ describe('SimulationRulesDialog', () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
+  // ── relationship drift ⊃ war — the dependency renders as a live constraint ──
+  test('War is disabled with a reason while Relationships is off, and unchecking Relationships cascades War off in the draft', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: { relationshipDynamicsEnabled: false } } }}
+      onClose={vi.fn()}
+    />);
+    // Drift off ⇒ the War (and Strategy) gates render locked with the reason.
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).disabled).toBe(true);
+    expect(screen.getByRole('checkbox', { name: 'Settlement strategy' }).disabled).toBe(true);
+    expect(screen.getAllByTestId('gate-disabled-reason').some(el => /relationship/i.test(el.textContent))).toBe(true);
+  });
+
+  test('unchecking Relationships in the draft cascades a checked War layer off live', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: { relationshipDynamicsEnabled: true, warLayerEnabled: true, settlementStrategyEnabled: true } } }}
+      onClose={vi.fn()}
+    />);
+    // Gates already on ⇒ the Engine disclosure starts collapsed; the core
+    // toggles live behind the Detail disclosure. Open both.
+    fireEvent.click(screen.getByRole('button', { name: /Engine gates/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Detail toggles/i }));
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).checked).toBe(true);
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Relationships' }));
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).checked).toBe(false);
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).disabled).toBe(true);
+    expect(screen.getByRole('checkbox', { name: 'Settlement strategy' }).checked).toBe(false);
+  });
+
   test('does not block the rules edit for a DIFFERENT campaign advancing', async () => {
     actions.updateCampaignSimulationRules.mockResolvedValue({});
     actions.advanceInFlight = ['camp-other'];

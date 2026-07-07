@@ -10,7 +10,7 @@
  *     "Awaken religion") sit together in the one Living-world Layers card.
  *   • A card RENDERS its read surface in view mode (free) and exposes WRITE
  *     controls only in edit mode (premium).
- *   • Each gate reaches the campaign's simulationRules via
+ *   • Each gate is a READ-ONLY status line of the campaign's simulationRules via
  *     updateCampaignSimulationRules; a non-premium reach routes to the
  *     purchase modal, not a write.
  *
@@ -42,8 +42,12 @@ vi.mock('../../src/components/settlement/ProvenanceBlock.jsx', () => ({ default:
 //    target. updateCampaignSimulationRules records the patch. ──────────────────
 const updateRules = vi.fn(() => Promise.resolve());
 const setPurchaseModalOpen = vi.fn();
+// Mutable per-test campaign rules (the status lines READ these).
+let campaignRules = {};
 const baseState = {
-  campaigns: [{ id: 'camp-1', settlementIds: ['save-1'], worldState: { simulationRules: {} } }],
+  get campaigns() {
+    return [{ id: 'camp-1', settlementIds: ['save-1'], worldState: { simulationRules: campaignRules } }];
+  },
   savedSettlements: [{ id: 'save-1', name: 'Stoneford' }],
   updateCampaignSimulationRules: updateRules,
   setPurchaseModalOpen,
@@ -65,7 +69,7 @@ function openCard(id) {
 }
 
 describe('Workshop — two-card information architecture', () => {
-  beforeEach(() => { updateRules.mockClear(); setPurchaseModalOpen.mockClear(); });
+  beforeEach(() => { updateRules.mockClear(); setPurchaseModalOpen.mockClear(); campaignRules = {}; });
   afterEach(() => cleanup());
 
   it('groups the edit cards into the two named cards (right cards in each)', () => {
@@ -144,22 +148,26 @@ describe('Workshop — two-card information architecture', () => {
     expect(within(changeGroup).getByTestId('change-extras-marker')).toBeTruthy();
   });
 
-  it('the layer gates reach simulationRules via updateCampaignSimulationRules', () => {
+  it('the layer gates are READ-ONLY status lines: no write path, no checkbox (campaign-scoped controls live on the campaign card / realm)', () => {
     render(<Workshop settlement={settlement} saveId="save-1" editMode canEdit />);
     openCard('living-world-layers');
-    fireEvent.click(screen.getByTestId('workshop-gate-warLayerEnabled').querySelector('input'));
-    expect(updateRules).toHaveBeenCalledWith('camp-1', { warLayerEnabled: true });
-    fireEvent.click(screen.getByTestId('workshop-gate-settlementStrategyEnabled').querySelector('input'));
-    expect(updateRules).toHaveBeenCalledWith('camp-1', { settlementStrategyEnabled: true });
-    fireEvent.click(screen.getByTestId('workshop-gate-religionDynamicsEnabled').querySelector('input'));
-    expect(updateRules).toHaveBeenCalledWith('camp-1', { religionDynamicsEnabled: true });
+    for (const key of ['warLayerEnabled', 'settlementStrategyEnabled', 'religionDynamicsEnabled']) {
+      const gate = screen.getByTestId(`workshop-gate-${key}`);
+      // The old per-settlement write affordance is gone: no input to click, so a
+      // DM can never again think the gates are per-settlement state.
+      expect(gate.querySelector('input')).toBeNull();
+      expect(gate.getAttribute('data-gate-status')).toBe('off');
+      // The status line points to where the control now lives.
+      expect(gate.textContent).toMatch(/campaign/i);
+    }
+    expect(updateRules).not.toHaveBeenCalled();
   });
 
-  it('a non-premium reach toward a gate routes to the purchase modal, not a write', () => {
-    render(<Workshop settlement={settlement} saveId="save-1" editMode={false} canEdit={false} />);
+  it('the status line reflects the campaign rules (on-state renders On)', () => {
+    campaignRules = { warLayerEnabled: true, relationshipDynamicsEnabled: true };
+    render(<Workshop settlement={settlement} saveId="save-1" editMode canEdit />);
     openCard('living-world-layers');
-    fireEvent.click(screen.getByTestId('workshop-gate-religionDynamicsEnabled').querySelector('input'));
-    expect(updateRules).not.toHaveBeenCalled();
-    expect(setPurchaseModalOpen).toHaveBeenCalled();
+    expect(screen.getByTestId('workshop-gate-warLayerEnabled').getAttribute('data-gate-status')).toBe('on');
+    expect(screen.getByTestId('workshop-gate-religionDynamicsEnabled').getAttribute('data-gate-status')).toBe('off');
   });
 });

@@ -38,6 +38,7 @@ import { mobilizationStandings } from '../../domain/display/mobilizationStatus.j
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { WAR_SHAPED_TYPES } from './WorldPulseData.js';
 import { hasPantheon } from './PantheonPanel.jsx';
+import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, R, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -360,6 +361,12 @@ export default function RealmDashboard({
           State of the Realm
         </h3>
       </div>
+
+      {/* Living-world gates: Relationship drift / War layer / Faith dynamics.
+          Campaign-scoped controls surfaced ON the realm (the DM's world view),
+          mirroring the Library campaign card; both write the same normalized
+          simulationRules seam. The full rule set stays in SimulationRulesDialog. */}
+      <LivingWorldGates campaign={campaign} canWrite={!!canManageCampaigns} />
 
       {/* Eye-path runs change/severity-first: the focal Conflict stat leads, then
           War-weariest (so all conflict signal is contiguous, P6), then the calmer

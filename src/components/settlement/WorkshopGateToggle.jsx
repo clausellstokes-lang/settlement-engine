@@ -1,45 +1,32 @@
 /**
- * WorkshopGateToggle — the three living-world subsystem gates
- * (`warLayerEnabled`, `settlementStrategyEnabled`, `religionDynamicsEnabled`),
- * surfaced INSIDE the editor Workshop's Faith/War cards (UX overhaul Phase 6,
- * plan §4.3) — in ADDITION to the SimulationRulesDialog group.
+ * WorkshopGateToggle — now a READ-ONLY status line for the living-world gates
+ * (`warLayerEnabled`, `settlementStrategyEnabled`, `religionDynamicsEnabled`)
+ * inside the editor Workshop's Faith/War cards.
  *
- * Each gate writes to the OWNING campaign's `simulationRules` via
- * `updateCampaignSimulationRules(campaignId, { [key]: value })` — the exact same
- * normalized seam the dialog uses, so the two surfaces stay in lockstep. The
- * gates default FALSE and carry the byte-identical-when-off promise in their
- * copy: a settlement whose campaign leaves the gate off (or which has no
- * campaign at all) is byte-identical to today.
+ * WHY read-only: these gates are CAMPAIGN-scoped (they write the owning
+ * campaign's simulationRules), but living inside a per-settlement editor made
+ * them read as per-settlement state — inviting the DM to visit every
+ * settlement to "turn them all on" when one flip was ever enough. The CONTROL
+ * moved to where its scope lives: the Library campaign card (CampaignFolder)
+ * and the Realm dashboard, both rendering LivingWorldGates and writing the
+ * same normalized updateCampaignSimulationRules seam. This surface keeps the
+ * discovery moment (the Faith/War cards still TEACH that the systems exist
+ * and show whether they are on) without the misleading write affordance —
+ * and without a per-settlement path that races the campaign surfaces.
  *
- * Self-gating:
- *   - No owning campaign (a non-campaign / dormant save) ⇒ a short read-only
- *     line explaining the gate lives on the campaign, never a dead toggle.
- *   - Write is premium: a non-premium user sees the read description, not the
- *     interactive checkbox (the read surface is the free→premium teaser).
- *
- * Pure store binding; the only write is the explicit `updateCampaignSimulationRules`.
+ * Self-gating: with no owning campaign, a short line explains the gates live
+ * on a campaign — never a dead control.
  */
 
-import { useId, useMemo, useState } from 'react';
-import { useStore } from '../../store/index.js';
+import { useMemo } from 'react';
 import { normalizeSimulationRules } from '../../domain/worldPulse/index.js';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, R, SP } from '../theme.js';
 
-// P9 — which simulation-intent pricing moment a non-premium reach toward a gate
-// should fire. War/strategy → the war-layer curiosity; religion → the pantheon
-// preview. Each NAMES that system (never size — size is free).
-const GATE_MOMENT = Object.freeze({
-  warLayerEnabled:           'war_layer_curiosity',
-  settlementStrategyEnabled: 'war_layer_curiosity',
-  religionDynamicsEnabled:   'pantheon_preview',
-});
-
-/** The three gate descriptors — mirror SimulationRulesDialog's ADVANCED_GATES copy. */
+/** The three gate descriptors — mirror LivingWorldGates / SimulationRulesDialog copy. */
 export const WORKSHOP_GATES = Object.freeze({
   warLayerEnabled: {
     label: 'War layer',
-    description: 'Armies march, sieges form, conquests change rulers. Off = no war fronts (byte-identical to today).',
+    description: 'Armies march, sieges form, conquests change rulers. Off = no war fronts.',
   },
   settlementStrategyEnabled: {
     label: 'Settlement strategy',
@@ -55,55 +42,18 @@ export const WORKSHOP_GATES = Object.freeze({
  * @param {{
  *   gateKey: 'warLayerEnabled'|'settlementStrategyEnabled'|'religionDynamicsEnabled',
  *   campaign?: any,
- *   canWrite?: boolean,
  * }} props
  */
-export default function WorkshopGateToggle({ gateKey, campaign, canWrite = false }) {
-  const updateRules = useStore(s => s.updateCampaignSimulationRules);
-  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
-  const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
-  const tier = useStore(s => s.auth?.tier);
-  const [busy, setBusy] = useState(false);
-  const controlId = useId();
+export default function WorkshopGateToggle({ gateKey, campaign }) {
   const meta = WORKSHOP_GATES[gateKey];
-
-  // A non-premium reach toward a living-world gate fires its simulation-intent
-  // pricing moment (cooldown-guarded). Deterministic by gate; routes the CTA to
-  // the canonical premium-value surface via the standard moment card.
-  const fireGateMoment = () => {
-    const reason = GATE_MOMENT[gateKey];
-    if (!reason || typeof setActivePricingMoment !== 'function') return;
-    triggerPricingMoment(reason, setActivePricingMoment, { tier });
-  };
-
-  const handleLockedReach = () => {
-    fireGateMoment();
-    setPurchaseModalOpen?.(true);
-  };
-
-  const { checked, warOn } = useMemo(() => {
+  const checked = useMemo(() => {
     const rules = normalizeSimulationRules(campaign?.worldState?.simulationRules);
-    return { checked: rules[gateKey] === true, warOn: rules.warLayerEnabled === true };
+    return rules[gateKey] === true;
   }, [campaign, gateKey]);
-  // Settlement Strategy is auto-enabled — and locked on — while the War layer is on:
-  // it scores moves off war_front channels that only exist under War. Mirrors the
-  // store-side coupling in updateCampaignSimulationRules.
-  const forcedByWar = gateKey === 'settlementStrategyEnabled' && warOn;
 
   if (!meta) return null;
 
-  const onChange = async (next) => {
-    if (!canWrite) { handleLockedReach(); return; }
-    if (!campaign?.id || busy) return;
-    setBusy(true);
-    try {
-      await updateRules?.(campaign.id, { [gateKey]: next });
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  // No owning campaign — the gate has no home to write to. Explain, don't dead-click.
+  // No owning campaign — the gate has no home. Explain, don't dead-click.
   if (!campaign?.id) {
     return (
       <div data-testid={`workshop-gate-${gateKey}`} data-gate-dormant style={{
@@ -119,32 +69,28 @@ export default function WorkshopGateToggle({ gateKey, campaign, canWrite = false
   }
 
   return (
-    <label
-      htmlFor={controlId}
+    <div
       data-testid={`workshop-gate-${gateKey}`}
+      data-gate-status={checked ? 'on' : 'off'}
       style={{
         display: 'grid', gap: 4, padding: '8px 10px',
         border: `1px solid ${checked ? GOLD : BORDER2}`, borderRadius: R.md,
         background: checked ? 'rgba(201,162,76,0.12)' : CARD,
-        cursor: canWrite ? 'pointer' : 'default', marginBottom: SP.xs,
+        marginBottom: SP.xs,
       }}
     >
       <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <input
-          id={controlId}
-          type="checkbox"
-          aria-label={meta.label}
-          checked={checked}
-          disabled={busy || (forcedByWar && canWrite)}
-          onChange={canWrite ? (e) => onChange(e.target.checked) : undefined}
-          onClick={!canWrite ? handleLockedReach : undefined}
-          readOnly={!canWrite}
-        />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>{meta.label}</span>
+        <span style={{
+          color: checked ? GOLD : MUTED, fontFamily: sans, fontSize: FS.xxs,
+          fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase',
+        }}>
+          {checked ? 'On' : 'Off'}
+        </span>
       </span>
       <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
-        {meta.description}{forcedByWar ? ' Auto-enabled by the War layer.' : ''}
+        {meta.description} Managed for the whole campaign on its library card and the realm view.
       </span>
-    </label>
+    </div>
   );
 }

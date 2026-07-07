@@ -16,6 +16,7 @@
   "src/components/gallery/GalleryMoreByCreator.jsx",
   "src/components/generate/ModeSelector.jsx",
   "src/components/map/SimulationRulesDialog.jsx",
+  "src/components/map/SimulationRulesDisclosure.jsx",
   "src/components/new/NarrativeNote.jsx",
   "src/components/new/neighbourComponents.jsx",
   "src/components/new/npcComponents.jsx",

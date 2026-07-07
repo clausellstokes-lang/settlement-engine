@@ -16,6 +16,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
+import LivingWorldGates from './LivingWorldGates.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
@@ -172,6 +173,16 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       {/* State-of-the-realm strip — self-hides when the world is dormant
           (not canonized). Byte-identical for a non-simulated campaign. */}
       {!collapsed && <RealmStrip campaign={campaign} settlements={settlements} />}
+
+      {/* Living-world gates: Relationship drift / War layer / Faith dynamics.
+          Campaign-scoped by nature (they write worldState.simulationRules), so
+          the control lives HERE on the campaign card, not inside per-settlement
+          editors. War renders disabled until Relationship drift is on. */}
+      {!collapsed && (
+        <div style={{ padding: `0 12px ${SP.xs}px` }}>
+          <LivingWorldGates campaign={campaign} canWrite={!!canManageCampaigns} showHint />
+        </div>
+      )}
 
       {/* Campaign delete confirmation */}
       {confirmDelete && (

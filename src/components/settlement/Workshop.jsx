@@ -408,9 +408,9 @@ export default function Workshop({ settlement, saveId, save, editMode = false, c
             />
           ) : (
             <div style={{ display: 'grid', gap: SP.xs }}>
-              <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} canWrite={canEdit} />
-              <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} canWrite={canEdit} />
-              <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} canWrite={canEdit} />
+              <WorkshopGateToggle gateKey="warLayerEnabled" campaign={campaign} />
+              <WorkshopGateToggle gateKey="settlementStrategyEnabled" campaign={campaign} />
+              <WorkshopGateToggle gateKey="religionDynamicsEnabled" campaign={campaign} />
             </div>
           )}
         </WorkshopCard>

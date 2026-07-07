@@ -15,6 +15,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 import GateToggle from './SimulationRulesGateToggle.jsx';
+import DisclosureHeader from './SimulationRulesDisclosure.jsx';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -157,50 +158,6 @@ function Toggle({ checked, label, onChange, disabled = false }) {
 // A gate row with a one-line "what it does" description. Distinct from Toggle:
 // (1) it shows OFF unless explicitly `true` (these gates default false), and
 // (2) it carries the explanatory copy the plan requires for each living-world gate.
-// A disclosure group header — a real button with aria-expanded controlling a
-// region, so the Detail / Engine altitudes collapse without trapping focus. The
-// caret + the open/closed word carry the state in two channels (P7), never on a
-// rotation alone. `summary` is quiet scent describing what is inside while closed.
-function DisclosureHeader({ open, onToggle, regionId, title, summary }) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-expanded={open}
-      aria-controls={regionId}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: SP.sm,
-        width: '100%',
-        padding: `${SP.sm}px ${SP.md}px`,
-        border: `1px solid ${BORDER2}`,
-        borderRadius: R.md,
-        background: CARD,
-        color: INK,
-        cursor: 'pointer',
-        textAlign: 'left',
-      }}
-    >
-      <span aria-hidden style={{ color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
-        {open ? '▾' : '▸'}
-      </span>
-      <span style={{ minWidth: 0, flex: 1 }}>
-        <span style={{ display: 'block', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
-          {title}
-        </span>
-        {summary && (
-          <span style={{ display: 'block', marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-            {summary}
-          </span>
-        )}
-      </span>
-      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        {open ? 'Hide' : 'Show'}
-      </span>
-    </button>
-  );
-}
 
 function Metric({ label, value }) {
   return (
@@ -273,8 +230,8 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   const setField = (key, value) => {
     setDraft(current => {
       const merged = { ...current, [key]: value };
-      // War auto-activates (and locks on) Settlement Strategy — mirror of the
-      // store-side coupling so the draft reflects it live while editing.
+      // Store-seam mirror: drift OFF cascades War + Strategy off; War ON locks Strategy on.
+      if (!merged.relationshipDynamicsEnabled) { merged.warLayerEnabled = false; merged.settlementStrategyEnabled = false; }
       if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
       return normalizeSimulationRules(merged);
     });
@@ -569,14 +526,16 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                     // Settlement Strategy is auto-enabled and locked on while War
                     // is on (it has no inputs without war fronts).
                     const forcedByWar = key === 'settlementStrategyEnabled' && draft.warLayerEnabled === true;
+                    // War IS a relationship dynamic: Relationships off ⇒ these gates stay locked off.
+                    const blockedByDrift = (key === 'warLayerEnabled' || key === 'settlementStrategyEnabled') && draft.relationshipDynamicsEnabled !== true;
                     return (
                       <GateToggle
                         key={key}
                         label={label}
                         description={forcedByWar ? `${description} Auto-enabled by the War layer.` : description}
                         checked={draft[key] === true}
-                        disabled={forcedByWar || advanceBlocked}
-                        disabledReason={advanceBlocked && !forcedByWar ? 'The realm is advancing…' : ''}
+                        disabled={forcedByWar || blockedByDrift || advanceBlocked}
+                        disabledReason={blockedByDrift ? 'Needs the Relationships toggle: war is a relationship dynamic, so a frozen web cannot raise fronts.' : advanceBlocked && !forcedByWar ? 'The realm is advancing…' : ''}
                         onChange={value => setField(key, value)}
                       />
                     );
