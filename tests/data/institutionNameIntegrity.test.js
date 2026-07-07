@@ -14,29 +14,27 @@
  * only feature — extend the defined set or KNOWN_UNRESOLVED below.
  */
 import { describe, it, expect } from 'vitest';
-import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import {
   INSTITUTION_SPATIAL,
   GATE_FEATURES,
-  GOVERNMENT_INSTITUTIONS,
 } from '../../src/data/spatialData.js';
 import { EXPORT_GOODS_BY_TIER, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
+import {
+  catalogInstitutionNames,
+  definedInstitutionNames,
+} from '../../src/data/entityVocabulary.js';
 import { SERVICE_TIER_DATA } from '../../src/generators/servicesGenerator.js';
 import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 
-// The set of institution names a settlement can actually HOLD — i.e. names that
-// appear on `settlement.institutions[].name`. Only the catalog emits these during
-// generation (assembleInstitutions pulls exclusively from institutionalCatalog);
-// GATE_FEATURES / SPATIAL_FEATURES are validation-rule keys, NOT emittable names.
-function buildCatalogNames() {
-  const names = new Set();
-  for (const tier of Object.values(institutionalCatalog)) {
-    for (const category of Object.values(tier)) {
-      for (const name of Object.keys(category)) names.add(name);
-    }
-  }
-  return names;
-}
+// The vocabularies come from the SHARED builders in src/data/entityVocabulary.js
+// so this guard and the runtime can never disagree about what "defined" means.
+// (The old test-local builder added GOVERNMENT_INSTITUTIONS' category KEYS —
+// 'government', 'marketScale'… — instead of its institution-name VALUES; the
+// shared builder flattens the values, closing that gap in the guard itself.)
+// SPATIAL_FEATURES is a generators export, so the data-layer module cannot
+// import it — this test passes it in as the extra layer.
+const buildCatalogNames = () => catalogInstitutionNames();
+const buildDefinedNames = () => definedInstitutionNames(Object.keys(SPATIAL_FEATURES));
 
 // Quarantine for GATE_FEATURES requirements that name an institution existing
 // nowhere in the catalog/spatial maps (so the requirement can never resolve).
@@ -48,25 +46,6 @@ function buildCatalogNames() {
 // so dropping the dead tokens changed no gate outcome. Keep this set empty; a
 // new unresolved name must be fixed in the data, not quarantined here.
 const KNOWN_UNRESOLVED = new Set([]);
-
-function buildDefinedNames() {
-  const defined = new Set();
-  for (const tier of Object.values(institutionalCatalog)) {
-    for (const category of Object.values(tier)) {
-      for (const name of Object.keys(category)) defined.add(name);
-    }
-  }
-  for (const key of Object.keys(GATE_FEATURES)) defined.add(key);
-  for (const entry of INSTITUTION_SPATIAL) {
-    if (entry?.institution) defined.add(entry.institution);
-  }
-  const govNames = Array.isArray(GOVERNMENT_INSTITUTIONS)
-    ? GOVERNMENT_INSTITUTIONS
-    : Object.keys(GOVERNMENT_INSTITUTIONS || {});
-  for (const g of govNames) defined.add(g);
-  for (const key of Object.keys(SPATIAL_FEATURES)) defined.add(key);
-  return defined;
-}
 
 // GATE_FEATURES is an INTENTIONAL SUPERSET of the emittable catalog: many of its
 // keys gate institution NAMES the base catalog never produces (rich-setting /
