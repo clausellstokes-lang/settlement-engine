@@ -126,6 +126,62 @@ function conditionDirection(cond) {
 }
 
 /**
+ * THE single active-condition scan — the one implementation of the
+ * affectedSystems join every deriver used to hand-roll. The polarity bug class
+ * (a recovery lift read as a pressure) appeared independently in THREE
+ * hand-written copies (food, trade, ruling_authority) before this existed; a
+ * deriver that calls this cannot re-create it. causalStateConditionScan.test.js
+ * pins that no deriver hand-rolls the join outside this helper.
+ *
+ * Modes:
+ *   'signed' — conditionDirection() signs severity*scale: lifts RAISE the
+ *              variable, pressures LOWER it. labels/tails are [positive, negative].
+ *   'drain'  — pressure-only: always subtracts (labor, healing, housing…).
+ *   'gain'   — pressure RAISES the variable (criminal_opportunity, the
+ *              religious-pressure amplifier).
+ * Zero-magnitude conditions are skipped uniformly (no phantom zero-delta
+ * contributor entries — the old copies disagreed on this).
+ *
+ * @param {any} s @param {any[]} contributors
+ * @param {string} system  affectedSystems key (must be a SYSTEM_VARIABLES entry)
+ * @param {{ scale: number, mode?: 'signed'|'drain'|'gain',
+ *           effect: string|[string,string], tail: string|[string,string],
+ *           special?: (cond: any) => number|null }} spec
+ *   effect/tail: for 'signed', [positive, negative] pairs; otherwise single
+ *   strings. tail is the reason phrase after the condition label.
+ *   special: optional pre-hook run BEFORE the affectedSystems filter (the
+ *   war_spoils seam) — returns the applied delta to consume the condition
+ *   (its own push included), or null to fall through to the normal scan.
+ * @returns {number} total score delta applied by this scan
+ */
+function applyConditions(s, contributors, system, spec) {
+  const { scale, mode = 'signed', effect, tail, special = null } = spec;
+  let total = 0;
+  for (const cond of cachedActiveConditions(s)) {
+    if (special) {
+      const consumed = special(cond);
+      if (consumed != null) { total += consumed; continue; }
+    }
+    if (!cond.affectedSystems.includes(system)) continue;
+    const base = Math.round(cond.severity * scale);
+    if (base === 0) continue;
+    if (mode === 'signed') {
+      const direction = conditionDirection(cond);
+      const magnitude = base * direction;
+      const positive = direction > 0;
+      total += magnitude;
+      push(contributors, cond.id, positive ? effect[0] : effect[1], magnitude,
+        `${cond.label} ${positive ? tail[0] : tail[1]}`);
+    } else {
+      const magnitude = mode === 'gain' ? base : -base;
+      total += magnitude;
+      push(contributors, cond.id, /** @type {string} */ (effect), magnitude, `${cond.label} ${tail}`);
+    }
+  }
+  return total;
+}
+
+/**
  * True when the defense profile carries REAL walls — an explicit hasWalls flag,
  * a non-empty classified walls group (defenseGenerator's institutions.walls), or
  * a legacy non-empty walls descriptor. Deliberately reads the DATA, never a
@@ -295,14 +351,9 @@ function deriveFoodSecurity(/** @type {any} */ s) {
     }
   }
 
-  // Recovery archetypes (siege_lifted/occupation_lifted) LIFT — gate sign on conditionDirection().
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('food_security')) continue;
-    const magnitude = Math.round(cond.severity * 20) * conditionDirection(cond);
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, magnitude > 0 ? 'lift' : 'pressure', magnitude, `${cond.label} ${magnitude > 0 ? 'restores' : 'taxes'} food security.`);
-  }
+  score += applyConditions(s, contributors, 'food_security', {
+    scale: 20, effect: ['lift', 'pressure'], tail: ['restores food security.', 'taxes food security.'],
+  });
 
   // Generator food band, via the conserved ledger. The old code read
   // `surplusMonths`/`deficitMonths` — fields foodGenerator never produces — so this
@@ -334,13 +385,9 @@ function deriveLaborCapacity(/** @type {any} */ s) {
   else if (pop > 0 && pop < 200) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
 
   // Active conditions that affect labor (plague especially)
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('labor_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 20);
-    if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'pressure', -magnitude, `${cond.label} reduces available labor.`);
-  }
+  score += applyConditions(s, contributors, 'labor_capacity', {
+    scale: 20, mode: 'drain', effect: 'pressure', tail: 'reduces available labor.',
+  });
 
   return { score, contributors };
 }
@@ -360,15 +407,9 @@ function derivePublicLegitimacy(/** @type {any} */ s) {
   }
 
   // Active conditions that affect public_legitimacy (corruption etc.)
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('public_legitimacy')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 15) * direction;
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'lift' : 'pressure', magnitude,
-      `${cond.label} ${direction > 0 ? 'lifts' : 'erodes'} public legitimacy.`);
-  }
+  score += applyConditions(s, contributors, 'public_legitimacy', {
+    scale: 15, effect: ['lift', 'pressure'], tail: ['lifts public legitimacy.', 'erodes public legitimacy.'],
+  });
 
   // A monster-plagued region indicts the crown only when the garrison
   // visibly cannot answer it — plagued threat over a weak measured defense
@@ -437,16 +478,10 @@ function deriveRulingAuthority(/** @type {any} */ s) {
     }
   }
 
-  // Conditions that DECLARE ruling_authority, signed by conditionDirection (lift restores,
-  // pressure undermines). The old scan keyed on public_legitimacy/faction_power + only
-  // fired for corruption_exposed, so every ruling_authority condition moved this by 0.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('ruling_authority')) continue;
-    const m = Math.round(cond.severity * 18) * conditionDirection(cond);
-    if (m === 0) continue;
-    score += m;
-    push(contributors, cond.id, m > 0 ? 'restored' : 'undermined', m, `${cond.label} ${m > 0 ? 'rebuilds' : 'cripples'} the ability to govern.`);
-  }
+  // Conditions that DECLARE ruling_authority (lift rebuilds, pressure cripples).
+  score += applyConditions(s, contributors, 'ruling_authority', {
+    scale: 18, effect: ['restored', 'undermined'], tail: ['rebuilds the ability to govern.', 'cripples the ability to govern.'],
+  });
 
   return { score, contributors };
 }
@@ -478,12 +513,9 @@ function deriveFactionPower(/** @type {any} */ s) {
   }
 
   // Active conditions affecting faction_power
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('faction_power')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score -= magnitude;
-    push(contributors, cond.id, 'destabilized', -magnitude, `${cond.label} destabilizes the faction system.`);
-  }
+  score += applyConditions(s, contributors, 'faction_power', {
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the faction system.',
+  });
 
   return { score, contributors };
 }
@@ -521,13 +553,10 @@ function deriveTradeConnectivity(/** @type {any} */ s) {
     }
   }
 
-  // A lifted siege/occupation REOPENS routes — gate sign on conditionDirection() (not a 'cut').
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('trade_connectivity')) continue;
-    const magnitude = Math.round(cond.severity * 18) * conditionDirection(cond);
-    score += magnitude;
-    push(contributors, cond.id, magnitude > 0 ? 'restored' : 'cut', magnitude, `${cond.label} ${magnitude > 0 ? 'reopens' : 'disrupts'} trade flows.`);
-  }
+  // A lifted siege/occupation REOPENS routes (lift restores, pressure cuts).
+  score += applyConditions(s, contributors, 'trade_connectivity', {
+    scale: 18, effect: ['restored', 'cut'], tail: ['reopens trade flows.', 'disrupts trade flows.'],
+  });
 
   return { score, contributors };
 }
@@ -562,25 +591,22 @@ function deriveEconomicCapacity(s) {
   }
 
   // Active conditions move economic capacity live — the war-layer seam.
-  for (const cond of cachedActiveConditions(s)) {
-    // war_spoils is the INVERSE of war_drain/war_exhaustion: the CAPPED
-    // benefit a stabilized occupation yields RELIEVES the occupier's war economy
-    // (extends supply endurance) rather than draining it. It is the ONLY economic-
-    // capacity condition that adds a POSITIVE magnitude — and the occupation layer
-    // HARD-CAPS its severity (the anti-snowball containment), so this relief is bounded
-    // no matter how many settlements the occupier holds. A lighter scale than the drain
-    // (war is never free): occupations soften, but never erase, the cost of campaigning.
-    if (cond.archetype === 'war_spoils') {
+  // war_spoils is the INVERSE of war_drain/war_exhaustion: the CAPPED benefit a
+  // stabilized occupation yields RELIEVES the occupier's war economy rather than
+  // draining it — the ONLY economic-capacity condition with a POSITIVE magnitude.
+  // The occupation layer HARD-CAPS its severity (anti-snowball), and it rides a
+  // lighter scale than the drain (war is never free): occupations soften, never
+  // erase, the cost of campaigning. Consumed by the `special` seam BEFORE the
+  // affectedSystems filter, preserving the original in-loop interleave order.
+  score += applyConditions(s, contributors, 'economic_capacity', {
+    scale: 18, mode: 'drain', effect: 'drain', tail: 'drains the war economy.',
+    special: (cond) => {
+      if (cond.archetype !== 'war_spoils') return null;
       const magnitude = Math.round(cond.severity * 12);
-      score += magnitude;
-      push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
-      continue;
-    }
-    if (!cond.affectedSystems.includes('economic_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 18);
-    score -= magnitude;
-    push(contributors, cond.id, 'drain', -magnitude, `${cond.label} drains the war economy.`);
-  }
+      if (magnitude !== 0) push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
+      return magnitude;
+    },
+  });
 
   return { score, contributors };
 }
@@ -692,15 +718,9 @@ function deriveLawOrder(s) {
   // archetypes that declare law_order press here; signed by the condition's
   // status. A condition that does NOT declare law_order is ignored, so no-op for
   // every settlement today (none declare it yet) ⇒ byte-identical.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('law_order')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 15) * direction;
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'restored' : 'eroded', magnitude,
-      `${cond.label} ${direction > 0 ? 'restores' : 'erodes'} the rule of law.`);
-  }
+  score += applyConditions(s, contributors, 'law_order', {
+    scale: 15, effect: ['restored', 'eroded'], tail: ['restores the rule of law.', 'erodes the rule of law.'],
+  });
 
   // Deity term — DORMANT until assigned, exactly like the deity term
   // in deriveReligiousAuthority. Only a settlement with an embedded
@@ -746,12 +766,9 @@ function deriveHealingCapacity(/** @type {any} */ s) {
   }
 
   // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('healing_capacity')) continue;
-    const magnitude = Math.round(cond.severity * 20);
-    score -= magnitude;
-    push(contributors, cond.id, 'overrun', -magnitude, `${cond.label} overwhelms healing capacity.`);
-  }
+  score += applyConditions(s, contributors, 'healing_capacity', {
+    scale: 20, mode: 'drain', effect: 'overrun', tail: 'overwhelms healing capacity.',
+  });
 
   return { score, contributors };
 }
@@ -778,15 +795,10 @@ function deriveDefenseReadiness(/** @type {any} */ s) {
     push(contributors, 'defenseProfile', 'walled', +6, 'Defensive walls in place.');
   }
 
-  // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('defense_readiness')) continue;
-    const direction = conditionDirection(cond);
-    const magnitude = Math.round(cond.severity * 12) * direction;
-    score += magnitude;
-    push(contributors, cond.id, direction > 0 ? 'recovering' : 'strained', magnitude,
-      `${cond.label} ${direction > 0 ? 'restores' : 'taxes'} defense readiness.`);
-  }
+  // Active conditions (lift restores, pressure strains)
+  score += applyConditions(s, contributors, 'defense_readiness', {
+    scale: 12, effect: ['recovering', 'strained'], tail: ['restores defense readiness.', 'taxes defense readiness.'],
+  });
 
   return { score, contributors };
 }
@@ -816,13 +828,10 @@ function deriveCriminalOpportunity(/** @type {any} */ s) {
     }
   }
 
-  // Active conditions
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('criminal_opportunity')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score += magnitude;
-    push(contributors, cond.id, 'opening', magnitude, `${cond.label} opens new criminal opportunities.`);
-  }
+  // Active conditions — pressure RAISES criminal opportunity (gain mode).
+  score += applyConditions(s, contributors, 'criminal_opportunity', {
+    scale: 15, mode: 'gain', effect: 'opening', tail: 'opens new criminal opportunities.',
+  });
 
   return { score, contributors };
 }
@@ -855,14 +864,9 @@ function deriveReligiousAuthority(s) {
   // now declares `religious_authority`, so a
   // regional spread presses the substrate here. Filtered on the affectedSystems
   // contract like every other deriver; signed by the condition's status.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('religious_authority')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    if (magnitude === 0) continue;
-    score += magnitude;
-    push(contributors, cond.id, 'religious_pressure', magnitude,
-      `${cond.label} amplifies religious authority.`);
-  }
+  score += applyConditions(s, contributors, 'religious_authority', {
+    scale: 15, mode: 'gain', effect: 'religious_pressure', tail: 'amplifies religious authority.',
+  });
 
   // Deity term — DORMANT until assigned. Only a settlement with an embedded
   // primaryDeitySnapshot (the embed-on-assign bridge) reads this; a deity-free
@@ -905,13 +909,9 @@ function deriveHousingPressure(/** @type {any} */ s) {
     // that stressor, and counting both would double-penalize one crisis.
     // Filtered on the affectedSystems contract like every other deriver, so
     // the explanation/AI surfaces list exactly what the substrate charges.
-    for (const cond of cachedActiveConditions(s)) {
-      if (!cond.affectedSystems.includes('housing_pressure')) continue;
-      const magnitude = Math.round(cond.severity * 12);
-      if (magnitude === 0) continue;
-      score -= magnitude;
-      push(contributors, cond.id, 'influx', -magnitude, `${cond.label} pushes arrivals into limited housing.`);
-    }
+    score += applyConditions(s, contributors, 'housing_pressure', {
+      scale: 12, mode: 'drain', effect: 'influx', tail: 'pushes arrivals into limited housing.',
+    });
   }
   if (pop >= 5000) { score -= 4; push(contributors, 'population', 'dense', -4, `Population ${pop} pushes housing demand.`); }
   return { score, contributors };
@@ -967,13 +967,9 @@ function deriveMagicalStability(/** @type {any} */ s) {
   // magical_instability archetype the deadzone/instability stressor family
   // promotes to). Until this scan, magical_stability was the one substrate
   // variable no condition could reach.
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('magical_stability')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    if (magnitude === 0) continue;
-    score -= magnitude;
-    push(contributors, cond.id, 'destabilized', -magnitude, `${cond.label} destabilizes the local weave.`);
-  }
+  score += applyConditions(s, contributors, 'magical_stability', {
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the local weave.',
+  });
 
   return { score, contributors };
 }
@@ -996,12 +992,9 @@ function deriveSocialTrust(/** @type {any} */ s) {
   }
 
   // Conditions that affect social_trust
-  for (const cond of cachedActiveConditions(s)) {
-    if (!cond.affectedSystems.includes('social_trust')) continue;
-    const magnitude = Math.round(cond.severity * 15);
-    score -= magnitude;
-    push(contributors, cond.id, 'erodes', -magnitude, `${cond.label} erodes communal trust.`);
-  }
+  score += applyConditions(s, contributors, 'social_trust', {
+    scale: 15, mode: 'drain', effect: 'erodes', tail: 'erodes communal trust.',
+  });
 
   // Dominant-NPC removal stress
   const dominantNpcs = deriveAllNpcProfiles(s).filter((/** @type {any} */ p) => p.rank === 'dominant');
