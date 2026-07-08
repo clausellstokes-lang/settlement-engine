@@ -234,6 +234,29 @@ const ROTATING_MSGS = [
   'Almost there\u2026',
 ];
 
+/**
+ * F18/F19 \u2014 decide what a resolved/failed AI request may still do to shared
+ * state, from its monotonic token + the save it was launched for:
+ *
+ *   'commit'  \u2014 still the current request for the active view: apply the
+ *               result (or the error) normally.
+ *   'release' \u2014 the active view has moved on, but this request's token is
+ *               still live and nothing else has taken the loading lock. Free
+ *               the lock so the UI can't wedge, but do NOT commit prose /
+ *               violations onto the settlement now on screen.
+ *   'abandon' \u2014 the token was superseded by an explicit cancel, a settlement
+ *               switch (clearAiSettlement), or a newer run \u2014 all of which bump
+ *               the token AND own loading cleanup. Touch nothing.
+ *
+ * Combined with the per-generation AbortController this makes it impossible
+ * for a stale/late/aborted request to overwrite a different settlement's view.
+ */
+const aiRequestDisposition = (get, myRequestId, capturedSaveId) => {
+  if ((get().aiRequestId || 0) !== myRequestId) return 'abandon';
+  if (String(get().activeSaveId) !== String(capturedSaveId)) return 'release';
+  return 'commit';
+};
+
 export const createAiSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   aiSettlement:     null,   // AI-refined version of settlement (display only)
@@ -247,6 +270,9 @@ export const createAiSlice = (set, get) => ({
   aiDataVersion:    null,   // timestamp of settlement data the narrative was built from
   aiSourceFingerprint: null, // stable settlement content hash for stale detection
   aiViolations:     null,   // Tier 6.5 verifier report (null when no overlay committed)
+  aiAbortController: null,  // F18: AbortController for the in-flight generation (cancel / stall teardown)
+  aiRequestId:      0,      // F18/F19: monotonic token; a superseded or aborted request must not commit
+  aiRefundNotice:   null,   // F1: { status, spendId, reason, supportNote } when a failed paid run's auto-refund ALSO failed
 
   // ── Actions ────────────────────────────────────────────────────────────────
   setAiSettlement: (aiData) =>
@@ -266,13 +292,52 @@ export const createAiSlice = (set, get) => ({
 
   clearAiSettlement: () =>
     set(state => {
+      // F18/F19: this runs on detail-view unmount (i.e. a settlement switch).
+      // Abort any in-flight generation and bump the request token so a late or
+      // stalled completion for the OLD settlement can never commit its prose /
+      // violations onto the NEW view, and the loading lock is released.
+      if (state.aiAbortController) {
+        try { state.aiAbortController.abort(); } catch (_) { /* already aborted */ }
+      }
+      state.aiAbortController = null;
+      state.aiRequestId = (state.aiRequestId || 0) + 1;
       state.aiSettlement = null;
       state.aiDailyLife = null;
       state.aiDataVersion = null;
       state.aiSourceFingerprint = null;
       state.aiPartialFailure = null;
       state.aiViolations = null;
+      state.aiRefundNotice = null;
+      state.aiLoading = false;
+      state.aiRegenerating = false;
+      state.aiProgress = '';
+      state.aiError = null;
     }),
+
+  /**
+   * F18 — explicitly cancel the in-flight AI generation. Aborts the stream,
+   * supersedes the request token so the aborted request's late completion can
+   * never commit, and releases the loading lock so the user can retry
+   * immediately (the retry guard `if (aiLoading) return` no longer wedges).
+   */
+  cancelAiGeneration: () =>
+    set(state => {
+      if (state.aiAbortController) {
+        try { state.aiAbortController.abort(); } catch (_) { /* already aborted */ }
+      }
+      state.aiAbortController = null;
+      state.aiRequestId = (state.aiRequestId || 0) + 1;
+      state.aiLoading = false;
+      state.aiRegenerating = false;
+      state.aiProgress = '';
+    }),
+
+  /**
+   * F1 — dismiss the refund-failure notice (the support-reference card shown
+   * when a paid generation failed AND its automatic refund also failed).
+   */
+  clearAiRefundNotice: () =>
+    set(state => { state.aiRefundNotice = null; }),
 
   /** Dismiss the violations notice without clearing the AI settlement
    *  itself. Used by the AiOverlayViolations card's close button.
@@ -368,7 +433,24 @@ export const createAiSlice = (set, get) => ({
     });
     const startedAt = Date.now();
 
+    // F18/F19 — stamp this request with an abort controller + a monotonic
+    // token bound to the settlement it was launched for. `isCurrentRequest()`
+    // gates every commit: a request is stale if its token was superseded (a
+    // newer run, an explicit cancel, or a settlement switch bumped it) OR the
+    // active view has moved to a different save. A stale request must not
+    // commit prose/violations onto the wrong settlement, nor touch the loading
+    // lock the superseding action now owns.
+    const capturedSaveId = saveId;
+    const controller = new AbortController();
+    const myRequestId = (get().aiRequestId || 0) + 1;
+    const isCurrentRequest = () =>
+      get().aiRequestId === myRequestId &&
+      String(get().activeSaveId) === String(capturedSaveId);
+
     set(state => {
+      state.aiRequestId = myRequestId;
+      state.aiAbortController = controller;
+      state.aiRefundNotice = null; // clear a stale notice from a prior run
       state.aiLoading = true;
       state.aiRegenerating = isRegenerate;
       state.aiError = null;
@@ -417,8 +499,19 @@ export const createAiSlice = (set, get) => ({
           pinnedNpcIds,
           aiGuidance,
           modelPreference,
+          signal: controller.signal,
           chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
+          onRefundFailure(notice) {
+            // F1 \u2014 surface UNCONDITIONALLY. This is about the user's money (a
+            // failed paid run whose auto-refund also failed), not about which
+            // settlement is on screen; the support reference must survive even
+            // if the user has navigated away.
+            set(state => { state.aiRefundNotice = notice; });
+          },
           onField(fieldName, value, error) {
+            // F19 \u2014 a superseded/aborted request must stop writing progress or
+            // partial prose into the store (it would clobber the new view).
+            if (!isCurrentRequest()) return;
             // Per-pass error: not fatal. Progress counter still advances so
             // the percentage reflects passes *attempted*, not successful.
             if (error) {
@@ -445,6 +538,23 @@ export const createAiSlice = (set, get) => ({
           },
         });
 
+      // F19 — gate the commit. A superseded run ('abandon') is discarded
+      // wholesale: no prose/violations onto the now-active view, no persist,
+      // no chronicle (chronicle snapshots the LIVE store, which now belongs to
+      // a different settlement). A view-moved run ('release') just frees the
+      // loading lock. `finally` still clears this run's rotation interval.
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition === 'abandon') return;
+      if (disposition === 'release') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+        });
+        return;
+      }
+
       const sourceFingerprint = settlementFingerprint(settlement);
 
       // Tier 6.5: verify the final atomic result against the source
@@ -463,6 +573,7 @@ export const createAiSlice = (set, get) => ({
         state.showNarrative = true;
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationN;
+        state.aiAbortController = null; // this run is done; release the controller
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
@@ -509,15 +620,29 @@ export const createAiSlice = (set, get) => ({
         console.error('Chronicle append failed:', chronErr);
       }
     } catch (e) {
-      set(state => {
-        state.aiError = e.message || 'Narrative generation failed';
-        state.aiLoading = false;
-        state.aiRegenerating = false;
-        state.aiProgress = '';
-        // On failure during regenerate, keep the old aiSettlement intact.
-        // On first-time failure, it was already null.
-      });
-      track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: errorKindFromError(e) });
+      // F19 — 'abandon' (superseded) leaves cleanup to the owner. Otherwise
+      // this request owns loading cleanup and releases the lock (so a stalled
+      // stream that aborted here can't wedge future AI actions — F18).
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition !== 'abandon') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+          if (disposition === 'commit') {
+            state.aiError = e.message || 'Narrative generation failed';
+            // F20 — a FIRST-TIME failure progressively wrote partial fields
+            // into aiSettlement; clear them so the dossier doesn't offer a
+            // "View Narrative" toggle over a half-written, credit-charged
+            // fragment. A regenerate never touched the live object.
+            if (!isRegenerate) state.aiSettlement = null;
+          }
+        });
+        if (disposition === 'commit') {
+          track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: errorKindFromError(e) });
+        }
+      }
     } finally {
       clearInterval(rotation);
     }
@@ -564,7 +689,19 @@ export const createAiSlice = (set, get) => ({
     });
     const startedAt = Date.now();
 
+    // F18/F19 — abort controller + monotonic token bound to this save (see
+    // requestNarrative for the full rationale).
+    const capturedSaveId = saveId;
+    const controller = new AbortController();
+    const myRequestId = (get().aiRequestId || 0) + 1;
+    const isCurrentRequest = () =>
+      get().aiRequestId === myRequestId &&
+      String(get().activeSaveId) === String(capturedSaveId);
+
     set(state => {
+      state.aiRequestId = myRequestId;
+      state.aiAbortController = controller;
+      state.aiRefundNotice = null;
       state.aiLoading = true;
       state.aiRegenerating = isRegenerate;
       state.aiError = null;
@@ -590,8 +727,13 @@ export const createAiSlice = (set, get) => ({
         aiGuidance,
         modelPreference,
         relationshipMemoryContext,
+        signal: controller.signal,
         chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
+        onRefundFailure(notice) {
+          set(state => { state.aiRefundNotice = notice; });
+        },
         onField(fieldName, value, error) {
+          if (!isCurrentRequest()) return;
           if (error) {
             fieldsDone += 1;
             lastFieldMsg = true;
@@ -611,11 +753,27 @@ export const createAiSlice = (set, get) => ({
           });
         },
       });
+
+      // F19 — discard a superseded run rather than committing daily life onto
+      // whatever settlement is now on screen; 'release' just frees the lock.
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition === 'abandon') return;
+      if (disposition === 'release') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+        });
+        return;
+      }
+
       set(state => {
         state.aiDailyLife = result;
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
+        state.aiAbortController = null;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
@@ -644,13 +802,26 @@ export const createAiSlice = (set, get) => ({
         set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
       }
     } catch (e) {
-      set(state => {
-        state.aiError = e.message || 'Daily life generation failed';
-        state.aiLoading = false;
-        state.aiRegenerating = false;
-        state.aiProgress = '';
-      });
-      track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: errorKindFromError(e) });
+      // F19 — 'abandon' leaves cleanup to the owner; otherwise release the lock.
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition !== 'abandon') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+          if (disposition === 'commit') {
+            state.aiError = e.message || 'Daily life generation failed';
+            // F20 — first-time failure progressively wrote partial prose into
+            // aiDailyLife; clear it so the dossier doesn't present a
+            // half-written day as complete. Regenerate leaves prior prose.
+            if (!isRegenerate) state.aiDailyLife = null;
+          }
+        });
+        if (disposition === 'commit') {
+          track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: errorKindFromError(e) });
+        }
+      }
     } finally {
       clearInterval(rotation);
     }
@@ -717,9 +888,20 @@ export const createAiSlice = (set, get) => ({
     });
     const startedAt = Date.now();
 
+    // F18/F19 — abort controller + monotonic token bound to this save.
+    const capturedSaveId = saveId;
+    const controller = new AbortController();
+    const myRequestId = (get().aiRequestId || 0) + 1;
+    const isCurrentRequest = () =>
+      get().aiRequestId === myRequestId &&
+      String(get().activeSaveId) === String(capturedSaveId);
+
     // Progression is always "regenerate-shaped": keep old aiSettlement
     // rendering (dimmed) until the new one is ready to swap in.
     set(state => {
+      state.aiRequestId = myRequestId;
+      state.aiAbortController = controller;
+      state.aiRefundNotice = null;
       state.aiLoading = true;
       state.aiRegenerating = true;
       state.aiError = null;
@@ -751,9 +933,14 @@ export const createAiSlice = (set, get) => ({
           changeLabel,
           aiGuidance,
           modelPreference,
+          signal: controller.signal,
           priorNarrative: aiSettlement,
           priorDailyLife: aiDailyLife,
+          onRefundFailure(notice) {
+            set(state => { state.aiRefundNotice = notice; });
+          },
           onField(fieldName, value, error) {
+            if (!isCurrentRequest()) return;
             if (error) {
               fieldsDone += 1;
               lastFieldMsg = true;
@@ -768,6 +955,20 @@ export const createAiSlice = (set, get) => ({
             set(state => { state.aiProgress = `${label}\u2026 (${fieldsDone})`; });
           },
         });
+
+      // F19 \u2014 progression is regenerate-shaped (old narrative still on screen);
+      // a superseded run must not swap its evolved prose onto the new view.
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition === 'abandon') return;
+      if (disposition === 'release') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+        });
+        return;
+      }
 
       const sourceFingerprint = settlementFingerprint(settlement);
 
@@ -786,6 +987,7 @@ export const createAiSlice = (set, get) => ({
         state.showNarrative = true;
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationP;
+        state.aiAbortController = null;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
@@ -830,14 +1032,22 @@ export const createAiSlice = (set, get) => ({
         console.error('Chronicle append (progression) failed:', chronErr);
       }
     } catch (e) {
-      set(state => {
-        state.aiError = e.message || 'Progression failed';
-        state.aiLoading = false;
-        state.aiRegenerating = false;
-        state.aiProgress = '';
-        // Old aiSettlement stays intact — the user didn't lose anything.
-      });
-      track(EVENTS.AI_GENERATION_FAILED, { type: 'progression', error_kind: errorKindFromError(e) });
+      // F19 — 'abandon' leaves cleanup to the owner; otherwise release the lock.
+      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
+      if (disposition !== 'abandon') {
+        set(state => {
+          state.aiLoading = false;
+          state.aiRegenerating = false;
+          state.aiProgress = '';
+          state.aiAbortController = null;
+          // Old aiSettlement stays intact — progression never wrote partials
+          // into the live object, so the user didn't lose anything.
+          if (disposition === 'commit') state.aiError = e.message || 'Progression failed';
+        });
+        if (disposition === 'commit') {
+          track(EVENTS.AI_GENERATION_FAILED, { type: 'progression', error_kind: errorKindFromError(e) });
+        }
+      }
     } finally {
       clearInterval(rotation);
     }
@@ -1005,6 +1215,13 @@ export const createAiSlice = (set, get) => ({
       state.aiError          = null;
       state.aiProgress       = '';
       state.aiPartialFailure = null;
+      // Identity hygiene: opening a save establishes a NEW settlement identity,
+      // so every ai-identity field must be (re)set together — otherwise the
+      // previous view's verifier report or refund notice bleeds onto this one.
+      // The persisted blob carries neither (they're session-derived), so both
+      // reset to null; a fresh commit repopulates aiViolations.
+      state.aiViolations     = null;
+      state.aiRefundNotice   = null;
     });
   },
 

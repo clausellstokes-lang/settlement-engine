@@ -78,6 +78,9 @@ async function getAccessTokenSafe() {
  * @param {object} [opts]
  * @param {(field: string, value: unknown, error?: string) => void} [opts.onField] - called as each field streams in (error set on per-pass failure)
  * @param {(status: object) => void} [opts.onStatus] - called for status/phase events
+ * @param {(notice: {status: string, spendId: string|null, reason: string|null, supportNote: string|null}) => void} [opts.onRefundFailure] - called when the server reports that an automatic refund for a failed generation also failed
+ * @param {AbortSignal} [opts.signal] - abort signal; when it fires the fetch + stream are torn down and the call rejects with an AbortError
+ * @param {number} [opts.idleTimeoutMs] - watchdog: abort if no bytes arrive within this window (default 60000; resets on every chunk to cover slow first-token)
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {string} [opts.modelPreference] - User model preference key.
@@ -128,30 +131,43 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   }
 
   const url = `${SUPABASE_URL}/functions/v1/generate-narrative`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON_KEY,
-    },
-    body: JSON.stringify(body),
-  });
 
-  // Non-streaming error path: the function threw before streaming started.
-  if (!res.ok) {
-    const txt = await res.text().catch(() => '');
-    let msg = `HTTP ${res.status}`;
-    try {
-      const body = JSON.parse(txt);
-      if (body?.error) msg = body.error;
-    } catch { /* not JSON; keep HTTP code */ }
-    throw new Error(msg);
+  // F18 — abort + idle-watchdog wiring. We own an internal AbortController so
+  // the stream can be torn down on (a) an external cancel signal (settlement
+  // switch / explicit cancel from the slice) and (b) an idle stream that stops
+  // delivering NDJSON lines. Without this a stalled edge-function stream leaves
+  // `await reader.read()` pending forever — which strands aiLoading and wedges
+  // every subsequent AI action. Either trigger aborts the fetch, `read()`
+  // rejects, and the loop unwinds instead of hanging.
+  const controller = new AbortController();
+  const externalSignal = opts.signal;
+  const onExternalAbort = () => controller.abort();
+  if (externalSignal) {
+    if (externalSignal.aborted) controller.abort();
+    else externalSignal.addEventListener('abort', onExternalAbort, { once: true });
   }
 
+  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 60000;
+  let idleTimedOut = false;
+  let watchdog = null;
+  const armWatchdog = () => {
+    if (watchdog) clearTimeout(watchdog);
+    watchdog = setTimeout(() => { idleTimedOut = true; controller.abort(); }, IDLE_TIMEOUT_MS);
+  };
+  const disarmWatchdog = () => { if (watchdog) { clearTimeout(watchdog); watchdog = null; } };
+
+  // A meaningful, user-facing error for the two abort flavors. Both carry
+  // name === 'AbortError' so the slice's errorKindFromError classifies them as
+  // 'aborted' (previously dead code — no path produced an abort here).
+  const makeAbortError = () => {
+    const e = new Error(idleTimedOut
+      ? 'AI generation stalled — the server stopped responding partway through. Please try again.'
+      : 'AI generation was cancelled.');
+    e.name = 'AbortError';
+    return e;
+  };
+
   // Streaming path: read NDJSON lines, dispatch to onField, collect final result.
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
   let buffer = '';
   let result = {};
   let creditsRemaining = null;
@@ -177,6 +193,24 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     // Status / phase events (progress hints for the UI)
     if (msg.status) {
       try { opts.onStatus?.(msg); } catch (_) { /* UI error should not break stream */ }
+      return;
+    }
+
+    // F1-CLIENT — refund-failure notice. When a paid generation fails the
+    // server auto-refunds the credit; if THAT refund also fails it emits
+    // `{ refund: 'failed', spend_id, reason, supportNote }`. Previously this
+    // line matched no branch and was silently dropped, so a user who was out
+    // a credit never saw the support reference. Surface it; non-fatal to the
+    // stream (a terminal `error` line, if present, still throws below).
+    if (msg.refund) {
+      try {
+        opts.onRefundFailure?.({
+          status:      typeof msg.refund === 'string' ? msg.refund : 'failed',
+          spendId:     msg.spend_id ?? null,
+          reason:      msg.reason ?? null,
+          supportNote: msg.supportNote ?? null,
+        });
+      } catch (_) { /* UI error should not break stream */ }
       return;
     }
 
@@ -214,27 +248,75 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     }
   };
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
+  // Arm the watchdog BEFORE fetch so a server that never sends response
+  // headers (dead connection) is still aborted; every received chunk resets
+  // it so a healthy-but-slow stream (long first-token, periodic status pings)
+  // is never killed prematurely.
+  armWatchdog();
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
 
-    let newlineIdx;
-    while ((newlineIdx = buffer.indexOf('\n')) !== -1) {
-      const line = buffer.slice(0, newlineIdx).trim();
-      buffer = buffer.slice(newlineIdx + 1);
-      if (!line) continue;
-      let msg;
-      try { msg = JSON.parse(line); } catch { continue; }
-      handleMessage(msg);
+    // Non-streaming error path: the function threw before streaming started.
+    if (!res.ok) {
+      const txt = await res.text().catch(() => '');
+      let msg = `HTTP ${res.status}`;
+      try {
+        const errBody = JSON.parse(txt);
+        if (errBody?.error) msg = errBody.error;
+      } catch { /* not JSON; keep HTTP code */ }
+      throw new Error(msg);
     }
-  }
 
-  // Flush any final line that wasn't newline-terminated — the `done` marker is
-  // often the last line and may arrive without a trailing newline.
-  const tail = buffer.trim();
-  if (tail) {
-    try { handleMessage(JSON.parse(tail)); } catch { /* unparseable tail = truncation */ }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      armWatchdog(); // bytes arrived — reset the idle timer
+      buffer += decoder.decode(value, { stream: true });
+
+      let newlineIdx;
+      while ((newlineIdx = buffer.indexOf('\n')) !== -1) {
+        const line = buffer.slice(0, newlineIdx).trim();
+        buffer = buffer.slice(newlineIdx + 1);
+        if (!line) continue;
+        let msg;
+        try { msg = JSON.parse(line); } catch { continue; }
+        handleMessage(msg);
+      }
+
+      // Stop as soon as the terminal marker arrives instead of blocking on
+      // another read. Some servers hold the connection open briefly after the
+      // final line; without this the idle watchdog would eventually fire and
+      // turn an already-complete generation into a false abort.
+      if (sawDone) break;
+    }
+
+    // Flush any final line that wasn't newline-terminated — the `done` marker
+    // is often the last line and may arrive without a trailing newline.
+    const tail = buffer.trim();
+    if (tail) {
+      try { handleMessage(JSON.parse(tail)); } catch { /* unparseable tail = truncation */ }
+    }
+  } catch (err) {
+    // A fetch/read abort (idle watchdog OR external cancel) surfaces here as a
+    // DOMException/AbortError. Translate it into a classified, user-facing
+    // error; re-throw anything else (network failure, HTTP error) untouched.
+    if (controller.signal.aborted) throw makeAbortError();
+    throw err;
+  } finally {
+    disarmWatchdog();
+    if (externalSignal) externalSignal.removeEventListener('abort', onExternalAbort);
   }
 
   if (fatalError) throw fatalError;
