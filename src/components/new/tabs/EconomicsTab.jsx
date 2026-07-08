@@ -519,7 +519,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                         ct.type?.toLowerCase().includes('black market'))
           .slice(0, 2);
 
-        return <Section title={`Shadow Economy${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        return <Section title={`Shadow Economy — ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}

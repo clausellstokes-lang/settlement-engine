@@ -32,7 +32,6 @@ const VIOLET_DIM = swatch['#EBE2FA80'];
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];
-const MUTED = swatch['#9C8068'];
 const BORDER = swatch['#E8D9B0'];
 
 const sans = '"Nunito", system-ui, sans-serif';
@@ -58,7 +57,7 @@ export default function LockedDestination({
   body,
   previewImageSrc,
   previewAlt,
-  ctaLabel = 'Upgrade, $6/mo',
+  ctaLabel = 'Upgrade — $6/mo',
   onCta,
   secondaryLink,
   trackEvent,
@@ -192,12 +191,6 @@ export default function LockedDestination({
             See sample →
           </a>
         )}
-        <span style={{
-          marginLeft: 'auto',
-          fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
-        }}>
-          Free 7-day trial · cancel anytime
-        </span>
       </div>
     </div>
   );

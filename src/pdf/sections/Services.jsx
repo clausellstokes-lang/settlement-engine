@@ -178,7 +178,7 @@ function CategoryCard({ cat }) {
                 }}
               >
                 <Text style={{ ...type.pill, fontSize: pt['8.5'], color: palette.gold }}>{svcLabel(svc)}</Text>
-                <Text style={{ fontSize: pt['8'], color: palette.gold, marginLeft: 3 }}>✦</Text>
+                <Text style={{ fontSize: pt['8'], color: palette.gold, marginLeft: 3 }}>*</Text>
               </View>
             );
           }

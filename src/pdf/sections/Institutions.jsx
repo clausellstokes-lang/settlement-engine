@@ -202,7 +202,7 @@ function InstitutionCard({ inst, idx }) {
             {inst.name}
           </Text>
           {isCustom && (
-            <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>✦</Text>
+            <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>
           )}
         </View>
         {status !== 'healthy' && <Pill tone={tone}>{cap(status)}</Pill>}

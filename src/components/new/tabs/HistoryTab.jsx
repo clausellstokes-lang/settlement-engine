@@ -38,18 +38,18 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
     occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Occupation'},
   };
 
-  // Tension type icons + colors
+  // Tension type colors + labels
   const TENSION_META = {
-    crime_wave:          {icon:'',color:'#8b1a1a',label:'Crime Wave'},
-    economic_disparity:  {icon:'',color:'#7a5010',label:'Economic Disparity'},
-    guild_conflict:      {icon:'',color:'#8a4010',label:'Guild Conflict'},
-    infiltration_fear:   {icon:'',color:'#3a1a6a',label:'Infiltration Fear'},
-    leadership_vacuum:   {icon:'',color:'#5a5a1a',label:'Leadership Vacuum'},
-    magical_controversy: {icon:'',color:'#5a2a8a',label:'Magical Controversy'},
-    occupation_legacy:   {icon:'',color:'#1a2a5a',label:'Occupation Legacy'},
-    outside_debt:        {icon:'',color:'#6b4010',label:'External Debt'},
-    resource_scarcity:   {icon:'',color:'#7a4010',label:'Resource Scarcity'},
-    succession_crisis:   {icon:'',color:'#8b1a1a',label:'Succession Crisis'},
+    crime_wave:          {color:'#8b1a1a',label:'Crime Wave'},
+    economic_disparity:  {color:'#7a5010',label:'Economic Disparity'},
+    guild_conflict:      {color:'#8a4010',label:'Guild Conflict'},
+    infiltration_fear:   {color:'#3a1a6a',label:'Infiltration Fear'},
+    leadership_vacuum:   {color:'#5a5a1a',label:'Leadership Vacuum'},
+    magical_controversy: {color:'#5a2a8a',label:'Magical Controversy'},
+    occupation_legacy:   {color:'#1a2a5a',label:'Occupation Legacy'},
+    outside_debt:        {color:'#6b4010',label:'External Debt'},
+    resource_scarcity:   {color:'#7a4010',label:'Resource Scarcity'},
+    succession_crisis:   {color:'#8b1a1a',label:'Succession Crisis'},
   };
 
   // Sort events most recent first
@@ -188,7 +188,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {currentTensions.map((t,i)=>{
-            const tm = TENSION_META[t.type] || {icon:'',color:'#b8860b',label:t.type||'Tension'};
+            const tm = TENSION_META[t.type] || {color:'#b8860b',label:t.type||'Tension'};
             const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
             const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
             const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
@@ -196,7 +196,6 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,borderRadius:7,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
                 {/* Header */}
                 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{fontSize: FS['14'],flexShrink:0}}>{tm.icon}</span>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color,textTransform:'uppercase',letterSpacing:'0.05em'}}>{tm.label}</span>
                   {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
                     <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>

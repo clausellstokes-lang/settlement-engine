@@ -89,7 +89,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryExports}
               tone="good"
               emptyText="None significant"
-              itemRender={(item) => { const isC = (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryExports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  ✦` : label(item); }}
+              itemRender={(item) => { const isC = (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryExports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  *` : label(item); }}
             />
           </View>
         }
@@ -100,7 +100,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryImports}
               tone="warn"
               emptyText="None significant"
-              itemRender={(item) => { const isC = (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryImports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  ✦` : label(item); }}
+              itemRender={(item) => { const isC = (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryImports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  *` : label(item); }}
             />
           </View>
         }
@@ -142,12 +142,12 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
           ).map(([partner, g], i) => (
             <Text key={`tl-${i}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second, marginBottom: 1 }}>
               <Text style={{ ...type.body_em, color: palette.ink }}>{partner}</Text>
-              {g.imports.length > 0 ? `   ← ${g.imports.map(label).join(', ')}` : ''}
-              {g.exports.length > 0 ? `   → ${g.exports.map(label).join(', ')}` : ''}
+              {g.imports.length > 0 ? `   <- ${g.imports.map(label).join(', ')}` : ''}
+              {g.exports.length > 0 ? `   -> ${g.exports.map(label).join(', ')}` : ''}
             </Text>
           ))}
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.faint, fontStyle: 'italic', marginTop: 1 }}>
-            ← imported from · → exported to
+            {'<- imported from · -> exported to'}
           </Text>
         </View>
       )}
@@ -251,7 +251,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: flow ? 2 : 0 }}>
                   <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
-                  <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>✦</Text>
+                  <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>*</Text>
                 </View>
                 {flow ? (
                   <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>{flow}</Text>

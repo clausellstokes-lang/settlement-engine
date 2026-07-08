@@ -95,3 +95,9 @@ export const ELEV = L.ELEV;
 export const PAGE_MAX  = L.PAGE_MAX;
 export const PROSE_MAX = L.PROSE_MAX;
 export const FORM_MAX  = L.FORM_MAX;
+
+// ── Display fallbacks ────────────────────────────────────────────────────────
+// One source for "this fact is absent/unknown". Render this (an em-dash) instead
+// of an empty string or an ad-hoc literal so every surface shows the same
+// placeholder for a missing value.
+export const EMPTY_VALUE = '—';

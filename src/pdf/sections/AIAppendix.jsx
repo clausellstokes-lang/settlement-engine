@@ -178,7 +178,7 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
                 <View style={{ flex: 1 }}>
                   {(fp.who || fp.parties) && (
                     <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
-                      {(() => { const p = fp.who || fp.parties; return (Array.isArray(p) ? p.join(' ↔ ') : String(p)).toUpperCase(); })()}
+                      {(() => { const p = fp.who || fp.parties; return (Array.isArray(p) ? p.join(' <-> ') : String(p)).toUpperCase(); })()}
                     </Text>
                   )}
                   <Text style={type.body}>{textOf(fp)}</Text>

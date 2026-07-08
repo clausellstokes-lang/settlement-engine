@@ -135,7 +135,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               }}
               wrap={false}
             >
-              <Text style={{ color: palette.ai, marginRight: 4, fontSize: pt['9'] }}>↯</Text>
+              <Text style={{ color: palette.ai, marginRight: 4, fontSize: pt['9'] }}>»</Text>
               <View style={{ flex: 1 }}>
                 <Text style={{ ...type.body, fontSize: pt['9'] }}>
                   <Text style={{ ...type.body_em, color: palette.ai }}>
@@ -236,7 +236,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               <Text style={{ color: palette.cool, marginRight: 4, fontSize: pt['9'] }}>•</Text>
               <Text style={{ ...type.body, flex: 1, fontSize: pt['9'] }}>
                 <Text style={{ ...type.body_em, color: palette.ink }}>
-                  {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} ↔ ${rel.to}` : 'Link'))}
+                  {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} <-> ${rel.to}` : 'Link'))}
                 </Text>
                 {rel.description ? `  ${rel.description}` : ''}
               </Text>

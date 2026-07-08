@@ -508,7 +508,7 @@ export default function EventComposer() {
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
                 <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
-                  <option value="">, Pick a role -</option>
+                  <option value="">— Pick a role —</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
               </Field>
@@ -524,7 +524,7 @@ export default function EventComposer() {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">, None</option>
+              <option value="">— None —</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}

@@ -77,12 +77,12 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
   // Stress military status
   const STRESS_STATUS = {
-    under_siege:          {posture:'ACTIVE SIEGE',          colour:'#8b1a1a', icon:'️'},
-    famine:               {posture:'INTERNAL PRESSURE',     colour:'#8b5a1a', icon:'️'},
-    occupied:             {posture:'UNDER OCCUPATION',      colour:'#4a3a6b', icon:''},
-    politically_fractured:{posture:'COMMAND SPLIT',         colour:'#5a4a1a', icon:''},
-    recently_betrayed:    {posture:'SECURITY COMPROMISED',  colour:'#6b1a2a', icon:'️'},
-    plague_onset:         {posture:'QUARANTINE ACTIVE',     colour:'#2a5a2a', icon:''},
+    under_siege:          {posture:'ACTIVE SIEGE',          colour:'#8b1a1a'},
+    famine:               {posture:'INTERNAL PRESSURE',     colour:'#8b5a1a'},
+    occupied:             {posture:'UNDER OCCUPATION',      colour:'#4a3a6b'},
+    politically_fractured:{posture:'COMMAND SPLIT',         colour:'#5a4a1a'},
+    recently_betrayed:    {posture:'SECURITY COMPROMISED',  colour:'#6b1a2a'},
+    plague_onset:         {posture:'QUARANTINE ACTIVE',     colour:'#2a5a2a'},
   };
   const activeStress = stressTypes.find(t=>STRESS_STATUS[t]);
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
@@ -214,7 +214,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,borderRadius:6,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure{csd.label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure — {csd.label}</div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 

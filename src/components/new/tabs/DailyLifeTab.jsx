@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, CARD } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
-import {isMobile} from '../tabConstants';
+import {isMobile, PROSPERITY_COLORS} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -108,7 +108,14 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const hasContent = !!displayNarrative;
 
   const tierLabel     = ctx.tierLabel;
-  const prospColor    = ctx.prospBand === 'prosperous' ? '#1a5a28' : ctx.prospBand === 'comfortable' ? '#a0762a' : ctx.prospBand === 'subsistence' ? '#8a4010' : '#8b1a1a';
+  // Prosperity color from the canonical PROSPERITY_COLORS map (the same source
+  // the Overview and Economics tabs read) so every surface agrees. The engine's
+  // real bands are Struggling/Poor/Moderate/Comfortable/Prosperous/Wealthy
+  // (economicGenerator LABELS); ctx.prospBand is that label lowercased. The old
+  // ad-hoc ternary only handled prosperous/comfortable and a never-emitted
+  // 'subsistence', so the real top band 'wealthy' — and Moderate/Poor — fell
+  // through to crisis red.
+  const prospColor    = PROSPERITY_COLORS[ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1)] || '#a0762a';
   const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
   const safetyColor   = ctx.safetyScore >= 70 ? '#1a5a28' : ctx.safetyScore >= 50 ? '#a0762a' : ctx.safetyScore >= 30 ? '#8a4010' : '#8b1a1a';
   const foodLabel     =

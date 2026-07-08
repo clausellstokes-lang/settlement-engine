@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
+import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 
@@ -35,7 +36,7 @@ function StatusTag({ label, value, _color, accent }) {
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, borderRadius: 6, padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
-      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || ', '}</div>
+      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
 }
@@ -55,7 +56,11 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
-  const foodBal = via.metrics?.foodBalance;
+  // Food balance from the canonical display model — the same residual
+  // deficitPct the Economics tab and the PDF print, so every surface agrees
+  // (not the raw engine metrics.foodBalance.deficitPercent, which is pre-import
+  // and diverges on import-dependent settlements).
+  const foodBal = deriveFoodBalance(r);
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
@@ -119,7 +124,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
           <StatusTag label="Safety" value={sp.safetyLabel?.split(', ')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
-          <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':', '} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
+          <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
         </div>
 
@@ -142,7 +147,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           {sp.safetyRatio!==undefined&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
               <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}> Enforcement Ratio</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?sp.safetyRatio.toFixed(1):', '}×</span>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?`${sp.safetyRatio.toFixed(1)}×`:EMPTY_VALUE}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden'}}>
               <div style={{height:'100%',width:`${Math.min(100,(sp.safetyRatio||0)*25)}%`,background:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a',borderRadius:3}}/>
@@ -151,12 +156,12 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         </div>
 
         {/* Food balance if significant */}
-        {foodBal?.deficit>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
+        {foodBal.deficitPct>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
           <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}> Food Deficit</span>
           <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:3,height:6,overflow:'hidden'}}>
-            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPercent)}%`,background:swatch.danger,borderRadius:3}}/>
+            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPct)}%`,background:swatch.danger,borderRadius:3}}/>
           </div>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,flexShrink:0}}>{foodBal.deficitPercent}%</span>
+          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,flexShrink:0}}>{foodBal.deficitPct}%</span>
         </div>}
       </Section>
 
