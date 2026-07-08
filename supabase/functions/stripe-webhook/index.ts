@@ -62,19 +62,45 @@ async function grantCredits(
   }
 }
 
-async function findUserIdForStripeCustomer(
+/**
+ * STRICT binding lookup (finding F5): resolve a profile ONLY by an
+ * already-established stripe_customer_id link. That link is written exactly
+ * once, at checkout.session.completed, from the server-verified
+ * metadata.supabase_user_id — never from an email. This function never falls
+ * back to email and never mutates the binding, so it is safe to gate
+ * DESTRUCTIVE lifecycle events (subscription downgrade → settlement purge) on it.
+ */
+async function findUserByStripeCustomerId(
+  supabase: ReturnType<typeof adminClient>,
+  customerId: string | null,
+) {
+  if (!customerId) return null;
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id, is_founder')
+    .eq('stripe_customer_id', customerId)
+    .maybeSingle();
+  return profile?.id ? { userId: profile.id as string, isFounder: Boolean(profile.is_founder) } : null;
+}
+
+/**
+ * ADDITIVE-grant lookup for invoice events: prefer the customer-id binding,
+ * else an EXACT, case-normalized email match. Deliberately does NOT bind
+ * stripe_customer_id from the email match — that unconditional overwrite was an
+ * account-hijack primitive: a paying attacker who set their Stripe customer
+ * email to a victim's address would clobber the victim's binding and feed the
+ * downgrade/purge path (finding F5). `ilike` is replaced by `eq` on a
+ * lowercased value to kill %/_ wildcard injection. Read-only and idempotent;
+ * a miss is fail-safe (no state change). Used only for CREDIT GRANTS, never for
+ * a destructive action.
+ */
+async function findUserForInvoiceGrant(
   supabase: ReturnType<typeof adminClient>,
   customerId: string | null,
   fallbackEmail?: string | null,
 ) {
-  if (customerId) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('id, is_founder')
-      .eq('stripe_customer_id', customerId)
-      .maybeSingle();
-    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
-  }
+  const byId = await findUserByStripeCustomerId(supabase, customerId);
+  if (byId) return byId;
 
   let email = fallbackEmail || null;
   if (!email && customerId) {
@@ -91,17 +117,9 @@ async function findUserIdForStripeCustomer(
   const { data: profile } = await supabase
     .from('profiles')
     .select('id, is_founder')
-    .ilike('email', email)
+    .eq('email', email.trim().toLowerCase())
     .maybeSingle();
-  if (!profile?.id) return null;
-
-  if (customerId) {
-    const { error } = await supabase.from('profiles')
-      .update({ stripe_customer_id: customerId })
-      .eq('id', profile.id);
-    if (error) throw new Error(`Stripe customer binding failed: ${error.message}`);
-  }
-  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+  return profile?.id ? { userId: profile.id as string, isFounder: Boolean(profile.is_founder) } : null;
 }
 
 async function grantMonthlyAllowanceIfNeeded(
@@ -111,7 +129,7 @@ async function grantMonthlyAllowanceIfNeeded(
   const customerId = typeof invoice.customer === 'string'
     ? invoice.customer
     : invoice.customer?.id || null;
-  const profile = await findUserIdForStripeCustomer(supabase, customerId, invoice.customer_email || null);
+  const profile = await findUserForInvoiceGrant(supabase, customerId, invoice.customer_email || null);
   if (!profile?.userId) {
     throw new Error(`Monthly allowance invoice ${invoice.id} has no matching profile`);
   }
@@ -287,7 +305,13 @@ export async function handleStripeWebhook(
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = subscription.customer as string;
 
-      const profile = await findUserIdForStripeCustomer(supabase, customerId);
+      // Destructive path (downgrade → retention purge): resolve ONLY by the
+      // established customer-id binding, never by email (finding F5). An
+      // unbound customer we can't safely map is logged and skipped, not guessed.
+      const profile = await findUserByStripeCustomerId(supabase, customerId);
+      if (!profile?.userId) {
+        console.warn(`[stripe-webhook] subscription.deleted for unbound customer ${customerId} — no profile bound; skipping downgrade`);
+      }
       if (profile?.userId) {
         if (profile.isFounder) {
           console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);

@@ -24,22 +24,51 @@ Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 
 const { handleStripeWebhook } = await import('./index.ts');
 
+type ProfileRow = { id: string; is_founder: boolean };
+interface StubOpts {
+  /** profiles resolvable by stripe_customer_id (the only trusted binding). */
+  profileByCustomerId?: Record<string, ProfileRow>;
+  /** profiles resolvable by exact lowercased email (invoice grant fallback). */
+  profileByEmail?: Record<string, ProfileRow>;
+}
+
 /** A recording stub of the service-role admin client. Captures every RPC/auth/table
- *  write so a test can assert what the handler did (or, for forgeries, did NOT do). */
-function makeStub() {
-  const calls: { rpc: Array<{ fn: string; args: unknown }>; authUpdates: unknown[]; profileUpdates: unknown[] } = {
-    rpc: [], authUpdates: [], profileUpdates: [],
-  };
+ *  write so a test can assert what the handler did (or, for forgeries, did NOT do).
+ *  Lookups (.eq('stripe_customer_id'|'email', …).maybeSingle()) resolve from the
+ *  configured maps so F5 binding behavior can be exercised. */
+function makeStub(opts: StubOpts = {}) {
+  const { profileByCustomerId = {}, profileByEmail = {} } = opts;
+  const calls: {
+    rpc: Array<{ fn: string; args: unknown }>;
+    authUpdates: unknown[];
+    profileUpdates: Array<{ vals: Record<string, unknown>; col: string; val: string }>;
+  } = { rpc: [], authUpdates: [], profileUpdates: [] };
   const client = {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
-    from: (_table: string) => ({
-      update: (vals: unknown) => ({ eq: (_col: string, _val: string) => { calls.profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
-      select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }),
-    }),
+    from: (_table: string) => {
+      let col = '', val = '';
+      const chain: Record<string, unknown> = {
+        update: (vals: Record<string, unknown>) => ({
+          eq: (c: string, v: string) => { calls.profileUpdates.push({ vals, col: c, val: v }); return Promise.resolve({ error: null }); },
+        }),
+        select: () => chain,
+        eq: (c: string, v: string) => { col = c; val = v; return chain; },
+        maybeSingle: () => {
+          let data: ProfileRow | null = null;
+          if (col === 'stripe_customer_id') data = profileByCustomerId[val] ?? null;
+          else if (col === 'email') data = profileByEmail[val] ?? null;
+          return Promise.resolve({ data, error: null });
+        },
+      };
+      return chain;
+    },
     rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
   };
   return { calls, adminClient: () => client };
 }
+
+const subDeletedEvent = (customerId: string) =>
+  JSON.stringify({ id: 'evt_sub', type: 'customer.subscription.deleted', data: { object: { id: 'sub_1', customer: customerId } } });
 
 /** Stripe v1 signature header: t=<ts>,v1=HMAC_SHA256(secret, `${ts}.${payload}`). */
 async function sign(payload: string, secret: string, ts = Math.floor(Date.now() / 1000)): Promise<string> {
@@ -96,4 +125,27 @@ Deno.test('credit grant trusts ONLY session.metadata.credits, not smuggled body 
   const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits');
   assertEquals(grant !== undefined, true);
   assertEquals((grant!.args as { amount: number }).amount, 10);            // the metadata value, not 99999
+});
+
+// ── F5: destructive subscription lifecycle resolves by BINDING only ─────────
+Deno.test('subscription.deleted for an UNBOUND customer skips the downgrade (F5)', async () => {
+  const stub = makeStub(); // no customer-id binding exists
+  const body = subDeletedEvent('cus_unknown');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  // No email guessing for a destructive action → no downgrade, no auth change.
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+  assertEquals(stub.calls.authUpdates.length, 0);
+});
+
+Deno.test('subscription.deleted for a BOUND non-founder downgrades exactly that user (F5)', async () => {
+  const stub = makeStub({ profileByCustomerId: { cus_bound: { id: 'u9', is_founder: false } } });
+  const body = subDeletedEvent('cus_bound');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const dg = stub.calls.rpc.find((c) => c.fn === 'handle_premium_downgrade');
+  assertEquals(dg !== undefined, true);
+  assertEquals((dg!.args as { target_user: string }).target_user, 'u9');
+  // The webhook must NEVER write a stripe_customer_id binding outside checkout.
+  assertEquals(stub.calls.profileUpdates.some((u) => 'stripe_customer_id' in u.vals), false);
 });
