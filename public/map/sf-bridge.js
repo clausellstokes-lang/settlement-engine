@@ -1072,6 +1072,16 @@
     const { type, _rid } = data;
     if (typeof type !== 'string' || !type.startsWith('settlementEngine:')) return;
 
+    // Trust boundary (finding F6): the settlementEngine:* handlers dispatch
+    // destructive commands (resetMap, loadSnapshot, clearAllPlacements, terrain
+    // edits) and this /map/ document is served same-origin, holding the Supabase
+    // auth token in localStorage. Mirror the parent bridge's discipline
+    // (src/lib/mapBridge.js): only accept commands from our own origin AND from
+    // the frame that embedded us (window.parent). Without this, any sibling
+    // frame or popup could drive the map's destructive command surface.
+    if (event.origin !== window.location.origin) return;
+    if (event.source !== window.parent) return;
+
     const handler = handlers[type];
     if (!handler) return;  // unknown command — silent
 

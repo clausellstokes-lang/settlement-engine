@@ -385,7 +385,12 @@ export const createCampaignSlice = (set, get) => {
       } catch { /* fall back to the shared public URL */ }
       mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
     } else if (sharedMap.fmgSnapshot) {
-      mapState.fmgSnapshot = sharedMap.fmgSnapshot;
+      // SECURITY (finding F6): do NOT import another user's raw FMG snapshot.
+      // It is a serialized SVG blob that the map iframe loads via
+      // insertAdjacentHTML on our own (Supabase-token-bearing) origin — a
+      // cross-user stored-XSS / account-takeover sink. Carry only the seed so
+      // the local map can regenerate comparable geography; placements (remapped
+      // below) and any IMAGE backdrop (sanitized re-upload above) still import.
       mapState.seed = sharedMap.seed ?? null;
     }
     const srcPlacements = (sharedMap.placements && typeof sharedMap.placements === 'object') ? sharedMap.placements : {};
