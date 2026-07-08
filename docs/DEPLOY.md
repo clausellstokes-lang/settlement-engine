@@ -24,36 +24,34 @@ If the client app's already up but a new feature is missing, the cause
 is almost always **a) missing migration** or **b) stale edge-function
 bundle**. Check the two manual sections.
 
-## Gating production on CI (recommended)
+## Gating production on CI
 
-Today CI and the Vercel deploy are **independent**: a push to `master`
-triggers the Vercel production build immediately, regardless of whether
-`.github/workflows/ci.yml` passed. The local `pre-push` hook is the only
-thing between a red gate and a live deploy — and hooks can be skipped
-(`--no-verify`). For a product that handles payments, make CI a hard gate.
-Two ways, weakest → strongest:
+**In-repo half — DONE (finding F35).** `.github/workflows/ci.yml` now:
+- runs on **every branch push** (not just `master`/`main`), so feature branches
+  get the gate before a PR even exists;
+- runs the **domain strict-type ratchet** (`typecheck:domain:strict`) that the
+  local `npm run check` runs — CI and the local gate no longer diverge;
+- has a **`deploy` job** gated on `needs: [check, e2e, deno-tests]`, `master`
+  only. It is a safe no-op until you finish the dashboard half below (it logs
+  and skips when `VERCEL_TOKEN` is unset), so adding it can't break today's flow.
+
+**Dashboard half — still required to make CI the ONLY path** (cannot be done from
+the repo). Today a push to `master` ALSO triggers Vercel's own production build
+immediately, so until you do ONE of the below the gate is still advisory to that
+auto-deploy. Weakest → strongest:
 
 1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
    → add a rule for `master`: *Require status checks to pass before
-   merging* → select the **`check`** job, and *Require a pull request
-   before merging*. Stop pushing straight to `master`; land work via PRs.
-   Vercel still builds `master`, but `master` now only advances through a
-   CI-passed merge.
+   merging* → select the **`check`**, **`e2e`**, and **`deno-tests`** jobs, and
+   *Require a pull request before merging*. Stop pushing straight to `master`;
+   land work via PRs. Vercel still builds `master`, but `master` now only
+   advances through a CI-passed merge.
 
 2. **Deploy from CI (strongest).** Turn OFF Vercel's production auto-deploy
-   on push (Vercel → Settings → Git), and add a deploy step to `ci.yml`
-   that runs **after** Build, only on `master`, with a `VERCEL_TOKEN`
-   secret:
-
-   ```yaml
-   - name: Deploy to Vercel (production)
-     if: github.ref == 'refs/heads/master'
-     run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
-     env:
-       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-   ```
-
-   Now CI is the only path to production: no green gate, no deploy.
+   on push (Vercel → Settings → Git), then add the **`VERCEL_TOKEN`** secret
+   (GitHub → Settings → Secrets → Actions). The `deploy` job already in
+   `ci.yml` then activates automatically: it runs after check + e2e + deno-tests
+   pass, on `master` only. No green gate, no deploy.
 
 Until one of these is in place, **always let the `pre-push` hook run** (never
 `--no-verify` to `master`) and watch the Actions tab after pushing.

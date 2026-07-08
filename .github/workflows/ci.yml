@@ -1,8 +1,11 @@
 name: CI
 
 on:
+  # Run on every branch push (not just master/main) so feature branches — where
+  # the work actually happens — get the same gate before they ever reach a PR
+  # (finding F35: CI was advisory to feature branches).
   push:
-    branches: [master, main]
+    branches: ['**']
   pull_request:
     branches: [master, main]
 
@@ -48,6 +51,15 @@ jobs:
       # updating EventType union fails here.
       - name: Type check
         run: npm run typecheck
+
+      # The domain strict-typecheck RATCHET (scripts/check-domain-strict.mjs):
+      # a monotone-shrink baseline of strict-mode errors in the domain kernel.
+      # It is wired into `npm run check` but CI previously omitted it, so a
+      # strict regression could ship green and was caught only by the
+      # bypassable pre-push hook (finding F35 / maintainability). Now enforced
+      # in CI so the local gate and CI can't diverge.
+      - name: Domain strict-type ratchet
+        run: npm run typecheck:domain:strict
 
       # ESLint on the full src/ + tests + scripts. Correctness rules
       # (undefined vars, dupe keys, rules-of-hooks, the design-token and
@@ -114,3 +126,35 @@ jobs:
 
       - name: Run edge-function Deno tests
         run: deno task test:edge
+
+  # ── Production deploy gated on the full green gate (finding F35) ─────────────
+  # "The gate is the product": production must advance only through CI. This job
+  # runs ONLY after check + e2e + deno-tests pass, ONLY on master. It is a safe
+  # no-op until the operator finishes the dashboard half — set the VERCEL_TOKEN
+  # secret AND turn OFF Vercel's push auto-deploy (see docs/DEPLOY.md). Until
+  # then it logs and skips (green), so adding it can't break the current flow;
+  # once configured, CI becomes the ONLY path to production.
+  deploy:
+    name: Deploy to production (gated)
+    needs: [check, e2e, deno-tests]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve deploy readiness
+        id: guard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN not set — skipping CI deploy. Vercel push auto-deploy (if still enabled) handles production. See docs/DEPLOY.md to make CI the only path."
+          fi
+      - name: Deploy to Vercel (production)
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes

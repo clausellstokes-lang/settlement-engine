@@ -49,6 +49,14 @@ describe('domain strict-typecheck ratchet (A+ domain.7)', () => {
     expect(pkg.scripts.check).toContain('typecheck:domain:strict');
   });
 
+  test('CI enforces the strict ratchet too (finding F35 — CI must not diverge from the local gate)', () => {
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    expect(ci, 'ci.yml must run the strict ratchet').toContain('typecheck:domain:strict');
+    // Deploy must be gated behind the full green gate (no green, no deploy).
+    expect(ci).toMatch(/deploy:/);
+    expect(ci).toMatch(/needs:\s*\[check, e2e, deno-tests\]/);
+  });
+
   test('the committed strict-error ceiling never rises (ratchet is monotone-down)', () => {
     expect(baseline.total).toBeLessThanOrEqual(CEILING);
   });
