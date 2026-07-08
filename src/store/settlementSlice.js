@@ -703,7 +703,18 @@ export const createSettlementSlice = (set, get) => ({
         state.lastSeed = seed;
         state.lastCtx = capturedCtx;
         state.systemState = systemState;
+        // A freshly generated settlement carries NO AI overlay — clear the FULL
+        // AI-identity slate, not just aiSettlement, so a prior settlement's
+        // daily-life / verifier report / refund notice / stale-detection
+        // fingerprints can't leak onto the new one (F17/F19 identity hygiene).
         state.aiSettlement = null;
+        state.aiDailyLife = null;
+        state.aiViolations = null;
+        state.aiRefundNotice = null;
+        state.aiDataVersion = null;
+        state.aiSourceFingerprint = null;
+        state.aiPartialFailure = null;
+        state.showNarrative = false;
         state.whatIfPreview = null;
         state.pendingChange = null;
         state.pendingPreview = null;
