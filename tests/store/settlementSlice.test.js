@@ -318,6 +318,29 @@ describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
     expect(s.eventLog).toEqual([]);
     expect(s.systemState).toBeTruthy();  // re-derived from settlement
   });
+
+  test('hydrateFromSave clears session-only state so save A does not leak into save B', () => {
+    // Pre-seed the slice as if the user had been working on save A: a queued
+    // rename, a bumped edit clock, a pending successor prompt, and a draft
+    // timeline. Opening a DIFFERENT save must not inherit any of it, or a
+    // rename queued on A could commit against B (cross-identity mutation).
+    store.setState(s => {
+      s.activeSaveId = 'save-A';
+      s.pendingEditsQueue = [{ id: 'edit-1', kind: 'rename-npc', payload: { npcIndex: 0, newName: 'Renamed' } }];
+      s.pendingEditsClock = 7;
+      s.pendingSuccession = { outgoingNpcId: 'npc-1', outgoingNpcName: 'Old Chief' };
+      s.draftVersionHistory = [{ id: 'snap-A', kind: 'manual', label: 'A checkpoint', settlement: { name: 'Save A' } }];
+    });
+
+    store.getState().hydrateFromSave({ id: 'save-B', settlement: fixture(), seed: 'seed-B' });
+
+    const s = store.getState();
+    expect(s.activeSaveId).toBe('save-B');
+    expect(s.pendingEditsQueue).toEqual([]);
+    expect(s.pendingEditsClock).toBe(0);
+    expect(s.pendingSuccession).toBeNull();
+    expect(s.draftVersionHistory).toEqual([]);
+  });
 });
 
 describe('settlementSlice — active save regional integration', () => {

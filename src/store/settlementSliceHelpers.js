@@ -35,6 +35,20 @@ export function cappedVersionHistory(history) {
   return Array.isArray(history) ? history.slice(-MAX_VERSION_HISTORY) : [];
 }
 
+/**
+ * Build a snapshot payload from a settlement: a deep clone with its OWN
+ * versionHistory stripped. A snapshot records CONTENT, never the timeline —
+ * embedding the history inside every snapshot made each new snapshot carry all
+ * prior ones (size ≈ base × 2^N). Stripping here guarantees payloads can never
+ * nest, whichever timeline (draft sibling or saved-entry sibling) they land in.
+ */
+export function snapshotSettlement(settlement) {
+  if (!settlement) return null;
+  const clone = cloneJson(settlement);
+  if (clone && typeof clone === 'object') delete clone.versionHistory;
+  return clone;
+}
+
 export function saveEnvelopeFor(saveId, save, settlement, campaignState) {
   return {
     ...(save || {}),

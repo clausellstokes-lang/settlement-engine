@@ -82,7 +82,7 @@ import { activeSaveCount } from '../lib/saveAccess.js';
 import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
-  stripImpairmentsForEvent, computePendingSuccession,
+  stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement,
 } from './settlementSliceHelpers.js';
 
 // ── Derived-config strip ────────────────────────────────────────────────
@@ -415,21 +415,35 @@ export const createSettlementSlice = (set, get) => ({
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
   //
-  // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
-  // snapshot of the live settlement (or a specified save) into
-  // `versionHistory`. Snapshots are immutable — the timeline never
-  // mutates an existing entry.
+  // Draft (unsaved) version-history timeline. A SIBLING to the live
+  // settlement — mirroring how a saved settlement keeps its versionHistory
+  // BESIDE the settlement on its savedSettlements entry, never inside it.
+  // Draft history used to live INSIDE settlement.versionHistory, so every
+  // snapshot (a full clone of the settlement) embedded all prior snapshots:
+  // size ≈ base × 2^N. Keeping the timeline as a sibling — and stripping
+  // versionHistory from every snapshot payload (snapshotSettlement) — makes
+  // growth linear and revert non-destructive (the timeline is no longer
+  // clobbered when the settlement content is restored). Session-only:
+  // excluded from the persist partialize allowlist (like pendingEditsQueue)
+  // and reset on hydrateFromSave.
+  draftVersionHistory: [],
   //
-  // `revertToSnapshot({ saveId, snapshotId })` finds the snapshot in
-  // versionHistory and overwrites the live settlement (or the save's
-  // settlement payload) with the snapshot's content. The CURRENT state
-  // is auto-snapshotted FIRST so reverting is never destructive — the
-  // critique was explicit about that.
+  // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
+  // snapshot of the live settlement (or a specified save) into the
+  // appropriate timeline sibling. Snapshots are immutable — the timeline
+  // never mutates an existing entry, and its payload never carries a nested
+  // versionHistory.
+  //
+  // `revertToSnapshot({ saveId, snapshotId })` finds the snapshot in the
+  // timeline and overwrites the live settlement (or the save's settlement
+  // payload) with the snapshot's content. The CURRENT state is auto-
+  // snapshotted FIRST so reverting is never destructive — the critique was
+  // explicit about that.
   //
   // Saved-settlement timelines persist immediately through the normal
   // save service (`version_history` in Supabase, `versionHistory` locally).
-  // Unsaved draft timelines remain live-only until the settlement itself
-  // is saved.
+  // Unsaved draft timelines live in `draftVersionHistory` until the
+  // settlement itself is saved.
 
   /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
   recordSnapshot: (opts = {}) => {
@@ -445,7 +459,9 @@ export const createSettlementSlice = (set, get) => ({
       ts,
       kind: opts.kind || 'manual',
       label: opts.label || 'Snapshot',
-      settlement: sourceSettlement ? JSON.parse(JSON.stringify(sourceSettlement)) : null,
+      // Snapshot CONTENT only — snapshotSettlement strips the settlement's own
+      // versionHistory so a snapshot never embeds the timeline (no 2^N nesting).
+      settlement: snapshotSettlement(sourceSettlement),
     };
     let persistedHistory = null;
     if (targetSaveId) {
@@ -457,11 +473,11 @@ export const createSettlementSlice = (set, get) => ({
         persistedHistory = cloneJson(cur.versionHistory);
       });
     } else {
-      // No saveId — write into the live settlement's history. This
-      // lets unsaved sessions still build a local timeline.
+      // No saveId — append to the SIBLING draft timeline (never into the
+      // settlement itself), so unsaved sessions build a local timeline
+      // without the settlement content ever nesting its own history.
       set(s => {
-        if (!s.settlement) return;
-        s.settlement.versionHistory = cappedVersionHistory([...(Array.isArray(s.settlement.versionHistory) ? s.settlement.versionHistory : []), snapshot]);
+        s.draftVersionHistory = cappedVersionHistory([...(Array.isArray(s.draftVersionHistory) ? s.draftVersionHistory : []), snapshot]);
       });
     }
     if (targetSaveId && persistedHistory) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
@@ -475,10 +491,11 @@ export const createSettlementSlice = (set, get) => ({
     if (!snapshotId) return false;
     const state = get();
     const targetSaveId = saveId || state.activeSaveId || null;
-    // Read the snapshot from the appropriate version-history slot.
+    // Read the snapshot from the appropriate version-history slot: the saved
+    // entry's sibling for a save, or the draft sibling for an unsaved session.
     const history = targetSaveId
       ? state.savedSettlements.find(e => String(e.id) === String(targetSaveId))?.versionHistory
-      : state.settlement?.versionHistory;
+      : state.draftVersionHistory;
     if (!Array.isArray(history)) return false;
     const target = history.find(s => s.id === snapshotId);
     if (!target?.settlement) return false;
@@ -504,9 +521,15 @@ export const createSettlementSlice = (set, get) => ({
         persistedSettlement = cloneJson(s.savedSettlements[idx].settlement);
         persistedHistory = cloneJson(s.savedSettlements[idx].versionHistory || []);
       }
-      // Always also refresh the live settlement view so the user sees
-      // the revert immediately.
-      s.settlement = JSON.parse(JSON.stringify(target.settlement));
+      // Always refresh the live settlement view so the user sees the revert
+      // immediately. Restore CONTENT only (snapshotSettlement strips any
+      // versionHistory the payload may carry): the timeline lives in the
+      // sibling (draftVersionHistory here, the saved entry above), so this
+      // restore no longer clobbers it — the freshly-recorded pre-revert
+      // snapshot survives and re-revert works. This is the F16 non-destructive
+      // fix: the draft revert used to overwrite the whole object (timeline and
+      // all) with the target's stale embedded history.
+      s.settlement = snapshotSettlement(target.settlement);
     });
     if (targetSaveId && persistedSettlement) {
       persistSaveUpdate(targetSaveId, {
@@ -1727,6 +1750,17 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
+    // Identity-leak audit (same class as the phase/eventLog hydration fix
+    // above): reset ALL session-only, non-persisted UI state so opening save B
+    // never inherits save A's in-flight state. Without this, a rename queued
+    // against save A could commit against save B (cross-identity mutation), a
+    // stale successor prompt could fire on the wrong town, and B would inherit
+    // A's draft timeline. draftVersionHistory is a sibling to the draft
+    // settlement only — a loaded save uses its own entry.versionHistory.
+    state.pendingEditsQueue    = [];
+    state.pendingEditsClock    = 0;
+    state.pendingSuccession    = null;
+    state.draftVersionHistory  = [];
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),
