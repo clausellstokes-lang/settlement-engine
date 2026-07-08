@@ -986,7 +986,12 @@ export const createSettlementSlice = (set, get) => ({
 
     const eng = await loadEngine();
 
-    const seed = state.lastSeed || eng.generateSeed();
+    // The settlement's OWN stamped seed is authoritative for a what-if rerun
+    // (finding F2): a loaded save must re-resolve under the seed that made it,
+    // not whatever seed the session last generated — otherwise a single edit
+    // silently swaps the town. Fall back to lastSeed, then a fresh seed only for
+    // a brand-new draft that was never generated through the pipeline.
+    const seed = state.settlement?._seed || state.lastSeed || eng.generateSeed();
     let capturedCtx = null;
     const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
         seed,
@@ -1707,7 +1712,12 @@ export const createSettlementSlice = (set, get) => ({
     const cs = save.campaignState || {};
     state.settlement     = save.settlement || state.settlement;
     state.activeSaveId   = save.id || null;
-    state.lastSeed       = save.seed || state.lastSeed;
+    // Recover the seed from the save (row column first, then the blob's stamped
+    // `_seed`), and NEVER fall back to the stale session seed (finding F2): a
+    // wrong seed is worse than none, because applyChange reruns the whole
+    // pipeline under lastSeed and would silently replace this town with another.
+    // null is honest — ProvenanceBlock shows "unknown", not a lie.
+    state.lastSeed       = save.seed ?? save.settlement?._seed ?? null;
     state.phase          = cs.phase || 'draft';
     state.eventLog       = Array.isArray(cs.eventLog) ? [...cs.eventLog] : [];
     state.locks          = cs.locks || {};

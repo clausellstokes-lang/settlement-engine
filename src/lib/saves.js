@@ -98,9 +98,20 @@ function mutationRow(entry, includeId = true) {
  */
 function migrateSaveToV2(entry) {
   if (!entry) return entry;
-  if (entry.campaignState && entry.campaignState.phase) return entry;
+  // Seed is part of the save contract, not an optional column (finding F2).
+  // Lift it from the settlement blob's stamped `_seed` (or config._seed) so no
+  // save path can drop the "same seed => same settlement" guarantee for the
+  // objects users keep. Because migrateSaveToV2 runs on every read AND write
+  // path, this also RECOVERS the seed for already-saved rows whose `seed`
+  // column is null but whose blob still carries `_seed`. Explicit entry.seed
+  // wins (campaign import). null is honest when truly unknown.
+  const seed = entry.seed ?? entry.settlement?._seed ?? entry.config?._seed ?? null;
+  if (entry.campaignState && entry.campaignState.phase) {
+    return entry.seed === seed ? entry : { ...entry, seed };
+  }
   return {
     ...entry,
+    seed,
     campaignState: {
       phase: 'draft',
       eventLog: [],

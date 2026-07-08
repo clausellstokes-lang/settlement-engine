@@ -58,6 +58,7 @@ const MIG = {
   '009': resolve(dir, '009_profile_security.sql'),
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
+  '047': resolve(dir, '047_refund_credits_service_role.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -75,6 +76,12 @@ const OTHER = '22222222-2222-2222-2222-222222222222';
 
 let db;
 const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
+/** Drive the caller role the refund_credits service-role branch reads via
+ *  `coalesce(current_setting('request.jwt.claim.role', true), auth.role())`.
+ *  request.jwt.claim.role is a Supabase-set 3-dot GUC that pglite can't set,
+ *  so the auth.role() fallback (stubbed off `test.role`) is the driveable seam. */
+const asRole = (role) => db.exec(`set test.role = '${role}';`);
+const asService = async () => { await asRole('service_role'); await db.exec(`set test.uid = '';`); };
 const setPrivileged = (v) => db.exec(`set test.privileged = '${v}';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 const balanceOf = async (uid) => (await scalar(`select public.get_credit_balance('${uid}') as b`)).b;
@@ -92,6 +99,9 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
       create schema if not exists auth;
       create or replace function auth.uid() returns uuid language sql stable as $fn$
         select nullif(current_setting('test.uid', true), '')::uuid
+      $fn$;
+      create or replace function auth.role() returns text language sql stable as $fn$
+        select nullif(current_setting('test.role', true), '')
       $fn$;
       create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
@@ -124,10 +134,20 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
         primary key (spend_id, grant_id)
       );
     `);
-    // Load the REAL, net-current function bodies.
+    // Structural refund idempotency (migration 047): at most one refund grant
+    // per spend row, so a double-refund fails at the DB even under a race.
+    await db.exec(`
+      create unique index if not exists idx_credit_ledger_one_refund_per_spend
+        on public.credit_ledger ((metadata->>'refund_of'))
+        where kind = 'grant' and source = 'refund';
+    `);
+    // Load the REAL, net-current function bodies. refund_credits comes from 047
+    // (service-role-first), NOT the superseded 009 body — 009 opened with an
+    // unconditional `if auth.uid() is null then raise` that made every
+    // service-role refund fail in production (finding F1).
     await db.exec(extractFn('018', 'get_credit_balance'));
     await db.exec(extractFn('024', 'spend_credits'));
-    await db.exec(extractFn('009', 'refund_credits'));
+    await db.exec(extractFn('047', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
   });
 
@@ -135,6 +155,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');
     await db.exec(`insert into public.profiles (id, role, credits) values ('${UID}', 'user', 0), ('${OTHER}', 'user', 0);`);
     await setPrivileged(false);
+    await asRole('authenticated');
     await asUser(UID);
   });
 
@@ -222,6 +243,48 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await asUser(OTHER);
     await setPrivileged(true);
     await db.query(`select public.refund_credits('${r.spend_id}', 'support')`);
+    expect(await balanceOf(UID)).toBe(10);
+  });
+
+  // ── F1 REGRESSION GUARD: the edge functions call refund_credits via the
+  //    service-role client, where auth.uid() is NULL. The superseded 009 body
+  //    raised 'not authenticated' on that path, so EVERY automatic refund of a
+  //    failed paid generation failed in production. This is the test the prior
+  //    suite lacked (it only ever refunded as the authenticated owner).
+  it('refunds under the service-role client even though auth.uid() is null (F1)', async () => {
+    await grant(UID, 10);
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // spent by UID, cost 3
+    expect(await balanceOf(UID)).toBe(7);
+    await asService(); // auth.uid() null, role service_role — exactly the edge-fn context
+    await db.query(`select public.refund_credits('${r.spend_id}', 'generation failed mid-stream')`);
+    expect(await balanceOf(UID)).toBe(10);
+    const g = await scalar(`select * from public.credit_ledger where source='refund'`);
+    expect(g.metadata.refund_of).toBe(r.spend_id);
+    expect(g.user_id).toBe(UID); // credited the SPEND owner, not the (null) caller
+  });
+
+  it('still rejects an unauthenticated NON-service caller (auth.uid() null, no service role)', async () => {
+    await grant(UID, 10);
+    const { r } = await scalar("select public.spend_credits('narrative') as r");
+    await asUser('');       // auth.uid() null
+    await asRole('anon');   // not service_role
+    await expect(db.query(`select public.refund_credits('${r.spend_id}', null)`)).rejects.toThrow(/not authenticated/i);
+    expect(await balanceOf(UID)).toBe(7); // untouched
+  });
+
+  it('structural idempotency: the unique index blocks a double-refund even without the guard message', async () => {
+    await grant(UID, 10);
+    const { r } = await scalar("select public.spend_credits('narrative') as r");
+    await asService();
+    await db.query(`select public.refund_credits('${r.spend_id}', null)`);
+    // Second refund: the friendly 'already refunded' early-out fires first, but
+    // the partial unique index is the real structural guarantee behind it.
+    await expect(db.query(`select public.refund_credits('${r.spend_id}', null)`)).rejects.toThrow(/already refunded/i);
+    // Prove the index itself would reject a direct duplicate insert too.
+    await expect(db.query(
+      `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+       values ('${UID}','grant',3,'refund', jsonb_build_object('refund_of','${r.spend_id}'))`,
+    )).rejects.toThrow(/duplicate key|unique/i);
     expect(await balanceOf(UID)).toBe(10);
   });
 
