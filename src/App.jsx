@@ -109,7 +109,14 @@ export default function App() {
   const isElevated = useStore(s => s.isElevated());
   // Drive the per-view painted background (and the generation-flow override).
   const wizardMode = useStore(s => s.wizardMode);
-  const settlement = useStore(s => s.settlement);
+  // F40: resolveViewBackground only reads `settlement` for TRUTHINESS (it picks
+  // a scene from wizardMode and treats settlement as a boolean "flow active"
+  // flag — see config/pageBackgrounds.js). Subscribing to the whole settlement
+  // object re-rendered the entire App shell (+ the active unmemoized view) on
+  // every event apply / pending edit / pulse writeback / AI overlay mutation.
+  // Subscribe to the boolean instead so the shell only re-renders when the
+  // settlement toggles between absent and present.
+  const hasSettlement = useStore(s => !!s.settlement);
   // The standing "buy credits" header chip is retired — credits are bought at
   // the moment of need (the insufficient-credits modal). Flip to restore.
   const showHeaderCredits = false;
@@ -386,7 +393,7 @@ export default function App() {
   // Per-view painted background. On the Create page a generation flow blows
   // up the chosen settlement scene (basic→thorpe, advanced→village,
   // custom→city); see src/config/pageBackgrounds.js + .page-bg in index.css.
-  const pageBg = resolveViewBackground({ view, wizardMode, settlement });
+  const pageBg = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
 
   return (
     <>

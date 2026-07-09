@@ -22,16 +22,16 @@ import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
+// Light, first-paint-safe world-state helpers ONLY. Imported from their leaf
+// modules (never the `export *` barrel) so the barrel's whole re-export graph
+// can't be pulled into the boot path. The heavy simulation machinery is loaded
+// lazily via loadWorldEngine() below.
 import {
-  advanceCampaignWorld as domainAdvanceCampaignWorld,
-  applyPartyImpact as domainApplyPartyImpact,
-  applyWorldPulseProposal as domainApplyWorldPulseProposal,
   canonizeWorldState,
   ensureWorldState,
-  normalizeSimulationRules,
-  previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
-} from '../domain/worldPulse/index.js';
+} from '../domain/worldPulse/worldState.js';
+import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, syncCampaignSnapshot,
   flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
@@ -54,6 +54,35 @@ import {
 // Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth).
 const PULSE_UNDO_CAP = 10;
 
+// ── Lazy world-simulation engine ──────────────────────────────────────────
+// The advance / preview / apply-proposal / party-impact machinery
+// (advanceCampaignWorld + its whole dependency graph: relationshipEvolution,
+// npcAgency, factionCompetition, institutionLifecycle, tier/population dynamics,
+// applyWorldPulse, …) is the single largest first-paint contributor and is ONLY
+// reachable from these async user actions. Statically importing it welded the
+// full campaign simulation into first paint for anonymous visitors. We instead
+// dynamic-import it here — memoized so it resolves once and every later call
+// hits the cached module promise — so Rollup splits it into its own chunk that
+// is fetched on the first pulse action, not on boot. Mirrors settlementSlice's
+// proven loadEngine() pattern. Each consumer below is already an async action,
+// so it simply awaits the load before mutating state.
+let _worldEnginePromise = null;
+function loadWorldEngine() {
+  if (!_worldEnginePromise) {
+    _worldEnginePromise = Promise.all([
+      import('../domain/worldPulse/advanceCampaignWorld.js'),
+      import('../domain/worldPulse/applyWorldPulse.js'),
+      import('../domain/worldPulse/partyImpact.js'),
+    ]).then(([advance, apply, party]) => ({
+      previewCampaignWorldPulse: advance.previewCampaignWorldPulse,
+      advanceCampaignWorld: advance.advanceCampaignWorld,
+      applyWorldPulseProposal: apply.applyWorldPulseProposal,
+      applyPartyImpact: party.applyPartyImpact,
+    }));
+  }
+  return _worldEnginePromise;
+}
+
 // ── Cross-slice contract ──────────────────────────────────────────────────
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. This slice's contract:
@@ -72,10 +101,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
-  previewCampaignWorldPulse: (campaignId, interval = 'one_month', options = {}) => {
+  previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
+    // Load the heavy preview machinery only once we know there's a campaign to
+    // preview (keeps the not-found path from touching the lazy engine chunk).
+    const { previewCampaignWorldPulse: domainPreviewCampaignWorldPulse } = await loadWorldEngine();
     const previewCampaign = cloneJson(campaign);
     if (options.simulationRules) {
       previewCampaign.worldState = {
@@ -149,6 +181,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   advanceCampaignWorld: async (campaignId, interval = 'one_month', options = {}) => {
+    const { advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldEngine();
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -278,6 +311,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   applyWorldPulseProposal: async (campaignId, proposalId) => {
+    const { applyWorldPulseProposal: domainApplyWorldPulseProposal } = await loadWorldEngine();
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -314,6 +348,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
   recordPartyImpact: async (campaignId, action) => {
+    const { applyPartyImpact: domainApplyPartyImpact } = await loadWorldEngine();
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);

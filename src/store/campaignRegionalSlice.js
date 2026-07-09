@@ -27,13 +27,23 @@ import {
   setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
   setRegionalImpactStatus as domainSetRegionalImpactStatus,
 } from '../domain/region/index.js';
+// Leaf-module imports (not the `export *` barrel). ensureWorldState/proposalIdFor/
+// upsertProposal are light world-state helpers; normalizeStressor/resolveStressorById
+// live in the stressor cluster (stressors → stressorDynamics/stressorGates/
+// foodStockpile). These are used SYNCHRONOUSLY inside injectCampaignStressor /
+// resolveCampaignStressor / undoCampaignStressorBridge, which settlementSlice's
+// rippleEventThroughWorld calls synchronously on canon edits — a true sync edge
+// that cannot go dynamic without changing that call ordering, so it stays static.
+// This still keeps the barrel's heavy advance/AI graph out of first paint.
 import {
   ensureWorldState,
-  normalizeStressor,
   proposalIdFor,
-  resolveStressorById,
   upsertProposal,
-} from '../domain/worldPulse/index.js';
+} from '../domain/worldPulse/worldState.js';
+import {
+  normalizeStressor,
+  resolveStressorById,
+} from '../domain/worldPulse/stressors.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';

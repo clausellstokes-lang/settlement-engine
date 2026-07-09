@@ -33,7 +33,10 @@ import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
-import { ensureWorldState } from '../domain/worldPulse/index.js';
+// Leaf-module import (not the `export *` barrel) so the heavy simulation graph
+// can't ride into first paint via the barrel. ensureWorldState is a light,
+// synchronous default-shape helper used on read paths.
+import { ensureWorldState } from '../domain/worldPulse/worldState.js';
 import { saves as savesService } from '../lib/saves.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {

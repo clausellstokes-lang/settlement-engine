@@ -216,6 +216,76 @@ async function supabaseList() {
   });
 }
 
+/**
+ * F42: metadata-only projection for painting the library grid. Selects ONLY the
+ * light columns needed for cards + access/gallery state — deliberately NONE of
+ * the blob columns (data, config, toggles, ai_data, campaign_state,
+ * version_history, neighbour_links), which on a full library run 84–220 kB per
+ * row and carry a 50-snapshot version history. Returns the same envelope shape
+ * as list() with the blob-derived fields nulled/emptied and an `isMeta` flag, so
+ * a caller can paint cards from meta and hydrate the full blob per-save when a
+ * settlement is actually opened. Callers that genuinely need blobs in memory
+ * (cross-save link/rename/delete, campaign simulation) keep using list().
+ */
+async function supabaseListMeta() {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, seed, gallery_share_narrated, gallery_share_dm, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  return data.map(row => ({
+    id:        row.id,
+    name:      row.name,
+    tier:      row.tier,
+    timestamp: row.updated_at,
+    savedAt:   new Date(row.updated_at).getTime(),
+    settlement: null,
+    config:    null,
+    seed:      row.seed ?? null,
+    aiData:    {},
+    gallery_share_narrated: row.gallery_share_narrated || false,
+    gallery_share_dm: row.gallery_share_dm || false,
+    is_public: row.is_public || false,
+    public_slug: row.public_slug || null,
+    gallery_description: row.gallery_description || '',
+    gallery_image_url: row.gallery_image_url || '',
+    gallery_image_alt: row.gallery_image_alt || '',
+    gallery_tags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    campaignState: null,
+    versionHistory: [],
+    accessState: row.access_state || ACTIVE_SAVE_STATE,
+    inactiveReason: row.inactive_reason || null,
+    inactiveSince: row.inactive_since || null,
+    retentionExpiresAt: row.retention_expires_at || null,
+    reactivatedFreeAt: row.reactivated_free_at || null,
+    isMeta: true,
+  }));
+}
+
+/**
+ * F42: fetch only the ACTIVE saves whose name matches `name`, with the full
+ * settlement blob (the neighbour back-link needs the partner's npcs /
+ * neighbourNetwork / interSettlementRelationships). Used to resolve a single
+ * neighbour partner on save instead of pulling the ENTIRE library (every blob +
+ * 50-snapshot version history) just to find one row. The `name` column is the
+ * canonical save name (set from the settlement name on write), so an equality
+ * filter on it mirrors findSaveByName's primary match without an egress blowup.
+ */
+async function supabaseListActiveByName(name) {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, data, access_state')
+    .eq('name', name);
+  if (error) throw error;
+  return (data || []).map(row => migrateSettlementShape(migrateSaveToV2({
+    id:         row.id,
+    name:       row.name,
+    tier:       row.tier,
+    settlement: row.data,
+    accessState: row.access_state || ACTIVE_SAVE_STATE,
+  }))).filter(isSaveActive);
+}
+
 async function supabaseSave(entry) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
@@ -227,10 +297,11 @@ async function supabaseSave(entry) {
   // existing save, both rows must reference each other. That needs a multi-row
   // write, so we pre-mint the id, compute both sides, and create+update
   // atomically via the batch RPC. Skipped (single insert) when there's no
-  // generated neighbour or no matching active partner.
+  // generated neighbour or no matching active partner. F42: resolve the partner
+  // with a targeted name query, not a full-library refetch.
   if (settlement?.neighborRelationship?.name) {
     const saveId = newSaveId();
-    const existing = (await supabaseList()).filter(isSaveActive);
+    const existing = await supabaseListActiveByName(settlement.neighborRelationship.name);
     const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
     if (link) {
       await supabaseMutateBatch({
@@ -330,6 +401,24 @@ async function localList() {
   return localLoad().map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
 }
 
+/**
+ * F42: local-mode mirror of supabaseListMeta — same light envelope with blob
+ * fields stripped and the `isMeta` flag set, so both backends expose one meta
+ * contract. Local mode has no network egress; this exists purely to keep the
+ * API symmetric for callers that opt into the metadata projection.
+ */
+async function localListMeta() {
+  return (await localList()).map(entry => ({
+    ...entry,
+    settlement: null,
+    config: null,
+    aiData: {},
+    campaignState: null,
+    versionHistory: [],
+    isMeta: true,
+  }));
+}
+
 async function localSaveEntry(entry) {
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
@@ -413,6 +502,8 @@ async function localMutateBatch({ updates = [], deletes = [], creates = [] } = {
 
 export const saves = {
   list:     isConfigured ? supabaseList     : localList,
+  /** F42: metadata-only library projection (no blob columns) for grid paint. */
+  listMeta: isConfigured ? supabaseListMeta : localListMeta,
   save:     isConfigured ? supabaseSave     : localSaveEntry,
   update:   isConfigured ? supabaseUpdate   : localUpdate,
   delete:   isConfigured ? supabaseDelete   : localDelete,

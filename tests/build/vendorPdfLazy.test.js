@@ -36,23 +36,40 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 
 // ── First-paint static-closure byte budget ──────────────────────────────────
 // The entry's transitive static import closure is everything the browser is
-// forced to download before it can paint. Measured after the vendor-pdf
-// helper-pin fix (2026-07-08, `npm run build`):
+// forced to download before it can paint. Measured after the worldPulse
+// lazy-engine split (2026-07-09, `npm run build`):
 //
-//   data          421,943   +  engine        660,730
-//   index(entry)  711,896   +  vendor-icons   30,041
+//   data          417,151   +  engine        655,641
+//   index(entry)  664,652   +  vendor-icons   30,041
 //   vendor-react  193,160   +  vendor-state   17,031
 //   ──────────────────────────────────────────────────
-//   MEASURED TOTAL: 2,034,801 raw bytes (~1.99 MB, ~639 kB gz)
+//   MEASURED TOTAL: 1,977,676 raw bytes (~1.89 MB)
+//
+// The entry (index) chunk dropped ~47 kB (711,694 → 664,652) when the campaign
+// world-pulse advance/preview/apply-proposal/party machinery was moved behind a
+// memoized dynamic import (loadWorldEngine in campaignWorldPulseSlice.js): the
+// advance-exclusive modules (advanceCampaignWorld, candidateEvents, coup,
+// factionCapture, flows, pressureModel, realmEvents, thievesGuild,
+// blockadeTransport) now split into their own lazy chunk fetched on the first
+// pulse action, not on boot.
+//
+// STILL in this closure (a KNOWN, out-of-scope anchor): applyWorldPulse + its
+// heavy graph (relationshipEvolution, npcAgency, factionCompetition,
+// relationshipMemory, institutionLifecycle, tier/population dynamics, partyImpact)
+// are pulled by settlementSlice → domain/events/partyEventLinkage.js →
+// worldPulse/partyImpact.js — a PARTY_IMPACT_KINDS const import that drags the
+// whole module because the project doesn't mark modules side-effect-free.
+// Extracting that const to a leaf module would let this fall out of first paint
+// too (the store edges are already dynamic).
 //
 // vendor-pdf (1.85 MB / 616 kB gz) is intentionally NOT in this closure.
-// engine (~214 kB gz) IS — it's genuinely reached by eager store/domain
+// engine (~213 kB gz) IS — it's genuinely reached by eager store/domain
 // edges today (tracked separately; see vite.config.js). The ceiling below
 // is measured + ~5% headroom, and is a monotone ratchet: it should only
 // ever move DOWN as chunks are made lazy, never up without a deliberate,
 // documented reason. If this fails high, something (very likely vendor-pdf)
 // re-entered the static graph — check the closure listing the test prints.
-const CLOSURE_BUDGET_BYTES = 2_140_000; // 2,034,801 measured + ~5%
+const CLOSURE_BUDGET_BYTES = 2_075_000; // 1,977,676 measured + ~5%
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

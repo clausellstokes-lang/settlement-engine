@@ -84,6 +84,27 @@ export async function generateSettlementPDF(settlement, options = {}) {
     isAnonymous,
   });
 
+  // F41: @react-pdf's toBlob() runs its reconcile + layout + serialization on
+  // the MAIN thread — a multi-second freeze on a large dossier, at the exact
+  // moment a paying DM judges the product. Moving it into a Web Worker does NOT
+  // work cleanly under Vite 7: @react-pdf/renderer's browser build reads
+  // `window.navigator` unguarded, and `window` is undefined in a Worker, so
+  // `pdf().toBlob()` throws there without shimming a global the vendor assumes
+  // exists (see the F41 investigation note in the PR). Given that hard blocker,
+  // the pragmatic guarantee is: paint the caller's busy state (the Export button
+  // spinner, global since F28) BEFORE the freeze begins. The caller flips
+  // `exporting` synchronously on click, but React hasn't committed/painted that
+  // yet when this async fn runs; yield two animation frames so the browser
+  // paints the spinner first, then do the heavy render. No-op off the main
+  // thread / in non-DOM test envs (which call renderToBuffer directly).
+  await new Promise(resolve => {
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    } else {
+      setTimeout(resolve, 0);
+    }
+  });
+
   const blob = await pdf(doc).toBlob();
 
   const url = URL.createObjectURL(blob);

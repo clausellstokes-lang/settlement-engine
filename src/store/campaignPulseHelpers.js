@@ -12,13 +12,21 @@ import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
+// Leaf-module imports (not the `export *` barrel). Light world-state helpers
+// come from worldState.js; normalizeStressor/resolveStressorById live in the
+// stressor cluster and are used synchronously inside the drain path, which runs
+// inside advanceCampaignWorld's set() callback — kept static (that cluster is
+// already anchored to first paint by campaignRegionalSlice's sync stressor
+// actions). The heavy advance/AI simulation graph stays out of the barrel path.
 import {
   ensureWorldState,
-  normalizeStressor,
   proposalIdFor,
-  resolveStressorById,
   upsertProposal,
-} from '../domain/worldPulse/index.js';
+} from '../domain/worldPulse/worldState.js';
+import {
+  normalizeStressor,
+  resolveStressorById,
+} from '../domain/worldPulse/stressors.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';

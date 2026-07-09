@@ -31,10 +31,11 @@ import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '..
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
 import { buildChronicleFeed, selectChronicleContext } from '../domain/dossier/chronicleFeed.js';
-import {
-  buildSettlementRelationshipMemoryContext,
-  buildWorldSnapshot,
-} from '../domain/worldPulse/index.js';
+// NOTE: buildSettlementRelationshipMemoryContext (relationshipMemory.js →
+// relationshipEvolution.js, ~117 kB) and buildWorldSnapshot are NOT imported
+// here. They are only needed by buildDailyLifeRelationshipMemory(), inside the
+// async requestDailyLife action, so they are dynamic-imported there to keep the
+// heavy relationship-evolution graph off the first-paint boot path.
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
@@ -153,10 +154,16 @@ function buildChronicleContextFromSave(saveEntry, settlement) {
   }
 }
 
-function buildDailyLifeRelationshipMemory(state, saveId) {
+async function buildDailyLifeRelationshipMemory(state, saveId) {
   try {
     const campaign = state.getCampaignForSettlement?.(saveId);
     if (!campaign) return null;
+    // Lazy-load the world-pulse relationship-memory machinery — heavy and only
+    // needed at Daily-Life generation time, never on first paint.
+    const [{ buildWorldSnapshot }, { buildSettlementRelationshipMemoryContext }] = await Promise.all([
+      import('../domain/worldPulse/worldSnapshot.js'),
+      import('../domain/worldPulse/relationshipMemory.js'),
+    ]);
     const worldState = state.getCampaignWorldState?.(campaign.id) || campaign.worldState;
     const regionalGraph = state.getCampaignRegionalGraph?.(campaign.id) || campaign.regionalGraph;
     const snapshot = buildWorldSnapshot({
@@ -669,7 +676,7 @@ export const createAiSlice = (set, get) => ({
     const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
     const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
     const modelPreference = get().auth?.modelPreference;
-    const relationshipMemoryContext = buildDailyLifeRelationshipMemory(get(), saveId);
+    const relationshipMemoryContext = await buildDailyLifeRelationshipMemory(get(), saveId);
     const isRegenerate = !!aiDailyLife;
     const cost = getAiCostForModel('dailyLife', modelPreference);
     const elevated = get().isElevated();
