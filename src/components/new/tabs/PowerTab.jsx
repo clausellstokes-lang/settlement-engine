@@ -3,6 +3,7 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
+import InstitutionLink from '../../primitives/InstitutionLink.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -193,7 +194,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                   <div style={{width:11,height:11,borderRadius:2,background:c,flexShrink:0}}/>
                   {f.isGoverning && <span style={{fontSize:FS.xs,color:c,flexShrink:0}}></span>}
                   {f.legitimacyCrisis && <span style={{fontSize:FS.xxs,color:swatch.danger,flexShrink:0}}>⚠</span>}
-                  <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,lineHeight:1.2}}>{f.faction}</span>
+                  <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,lineHeight:1.2}}>
+                    <InstitutionLink name={f.faction} settlement={s} />
+                  </span>
                   {/* Power label */}
                   {f.powerLabel && (
                     <span style={{fontSize:FS.micro,fontWeight:700,color:powerLabelColor(f.powerLabel),background:`${powerLabelColor(f.powerLabel)}12`,border:`1px solid ${powerLabelColor(f.powerLabel)}30`,borderRadius:3,padding:'1px 5px',flexShrink:0,textTransform:'uppercase',letterSpacing:'0.04em'}}>

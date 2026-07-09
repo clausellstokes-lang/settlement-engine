@@ -117,7 +117,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
-                      <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
+                      <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
                       <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.icon} {Ts[r.cat]?.label}</span>
                     </div>
                   ))}
@@ -242,7 +242,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                       return na.localeCompare(nb);
                     }).map((svc,i)=>(
                       <ServiceItem key={i} svc={svc} accent={meta.accent} isCriminal={isCriminal}
-                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
                     ))}
                   </div>
                 </div>}

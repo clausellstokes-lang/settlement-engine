@@ -67,6 +67,71 @@ function cleanHook(text) {
   return String(text || '').replace(/^\s*PLOT HOOK:\s*/i, '').trim();
 }
 
+// ── Anti-repetition: the aggregator owns final cross-tab uniqueness ───────────
+// Generators keep their OWN source varied (the settlement-scoped draw registry in
+// npcGenerator; see hookVariety.js). collectPlotHooks is the single point where
+// every source converges, so it owns the guarantee that the DM never reads the
+// same hook twice ACROSS tabs — by two layers of dedup on the priority-sorted
+// list, keeping the first (highest-priority) occurrence.
+//
+// Echo prefixes: historyGenerator reframes older present-tense hooks as archival
+// discoveries ("Old records suggest …"). Those are paraphrase VARIANTS of one hook
+// family, so the family key strips them before comparing — otherwise the same beat
+// reads once live and once reframed.
+const ECHO_PREFIXES = [
+  'old records suggest ',
+  'a recently surfaced document implies ',
+  'family accounts passed down from the time claim ',
+  "an archivist's notes from that period reveal ",
+  'evidence that survived the years indicates ',
+];
+
+/** Exact-text key: identical prose, modulo case/whitespace/edge punctuation.
+ *  @param {unknown} text @returns {string} */
+function normHookText(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/^["'\s]+|["'\s.!?]+$/g, '')
+    .trim();
+}
+
+/** Family key: the exact-text key with known reframing prefixes stripped, so
+ *  paraphrase variants of one authored hook collapse to a single family.
+ *  @param {unknown} text @returns {string} */
+function hookFamilyId(text) {
+  let key = normHookText(text);
+  for (const prefix of ECHO_PREFIXES) {
+    if (key.startsWith(prefix)) { key = key.slice(prefix.length); break; }
+  }
+  return key.trim();
+}
+
+/**
+ * Drop cross-tab repeats from a priority-sorted hook list, keeping the FIRST
+ * (highest-priority) occurrence. A hook is dropped when either its exact text OR
+ * its family id has already been kept — belt-and-suspenders: exact-text catches
+ * identical prose emitted by two sources; the family layer additionally catches
+ * reframed variants of the same authored beat.
+ * @param {PlotHook[]} sorted
+ * @returns {PlotHook[]}
+ */
+function dedupeHooks(sorted) {
+  /** @type {Set<string>} */ const seenText = new Set();
+  /** @type {Set<string>} */ const seenFamily = new Set();
+  /** @type {PlotHook[]} */ const out = [];
+  for (const hook of sorted) {
+    const textKey = normHookText(hook.text);
+    const familyKey = hookFamilyId(hook.text);
+    if (!textKey) continue;
+    if (seenText.has(textKey) || seenFamily.has(familyKey)) continue;
+    seenText.add(textKey);
+    seenFamily.add(familyKey);
+    out.push(hook);
+  }
+  return out;
+}
+
 /**
  * @param {PlotHook[]} out
  * @param {Record<string, unknown>} hook
@@ -240,7 +305,10 @@ export function collectPlotHooks(settlement = {}) {
     }));
   });
 
-  return hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
+  // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the
+  // kept instance of any repeated hook is always the highest-priority one.
+  const sorted = hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
+  return dedupeHooks(sorted);
 }
 
 /**

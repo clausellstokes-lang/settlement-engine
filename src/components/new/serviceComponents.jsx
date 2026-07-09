@@ -1,9 +1,10 @@
 import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 import { truncateAtWord } from '../../lib/text.js';
+import InstitutionLink from '../primitives/InstitutionLink.jsx';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null }) {
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
@@ -37,7 +38,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
-        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{inst}</p>}
+        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></p>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:FS.xxs,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>

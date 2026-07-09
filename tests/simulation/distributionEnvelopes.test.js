@@ -148,20 +148,29 @@ describe('ENVELOPE 2 — prosperity band distribution per tier', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ENVELOPE 3 — Intra-settlement hook repeat-rate (the Phase 5 anti-repetition BASELINE).
+// ENVELOPE 3 — Intra-settlement hook repeat-rate (the anti-repetition RATCHET).
 //
-//   MEASURED across 100 towns+cities (every NPC's plotHooks, per settlement):
+//   BEFORE (Wave D baseline, naive per-NPC pool picks) across 100 towns+cities:
 //     total hooks 1490, duplicates 122
-//     ► corpus duplicate rate = 8.19%  ◄  (THIS is the Phase-5 "before" number)
-//     worst single settlement   = 35.0% (city / envelope-33)
+//     ► corpus duplicate rate = 8.19% ◄   worst single settlement = 35.0% (city/envelope-33)
 //
-//   ENVELOPE: corpus rate ≤ 12% (measured 8.19% + margin); worst single ≤ 50%.
-//   A ratchet: Phase 5's anti-repetition work should drive the corpus rate DOWN
-//   (well inside the envelope); a regression that makes NPCs parrot the same hook
-//   pushes it up and trips this guard.
+//   AFTER (Wave E / batch E2 — the settlement-scoped draw registry in npcGenerator:
+//   every NPC draws its loyalty hook through drawUnique(pool, usedTitles) so no two
+//   NPCs emit the same family; see src/generators/hookVariety.js):
+//     total hooks 1532, duplicates 3   (the 3 residuals are pool-EXHAUSTION on the
+//     largest cities — a category's ~11-string pool ran out before its NPCs did)
+//     ► corpus duplicate rate = 0.20% ◄   worst single settlement = 6.3% (city/envelope-27)
+//
+//   ENVELOPE (RATCHETED to the new measured floor + small margin):
+//     corpus rate ≤ 2% (measured 0.20%; the machinery alone removed every AVOIDABLE
+//     repeat), worst single ≤ 15% (measured 6.3%; absorbs pool exhaustion on scale).
+//   The guard now trips if the registry regresses (a naive pick re-appears, jumping
+//   the corpus rate back toward 8%). Phase 5 content multiplication — more authored
+//   variants per pool — will retire even the pool-exhaustion residuals and let this
+//   ratchet move further down.
 // ─────────────────────────────────────────────────────────────────────────────
-describe('ENVELOPE 3 — hook repeat-rate (anti-repetition baseline)', () => {
-  test('a settlement rarely repeats its own plot hooks (corpus ≤ 12%, worst ≤ 50%)', () => {
+describe('ENVELOPE 3 — hook repeat-rate (anti-repetition ratchet)', () => {
+  test('a settlement rarely repeats its own plot hooks (corpus ≤ 2%, worst ≤ 15%)', () => {
     let totalHooks = 0;
     let totalDup = 0;
     let worstRate = 0;
@@ -183,9 +192,9 @@ describe('ENVELOPE 3 — hook repeat-rate (anti-repetition baseline)', () => {
     const worstPct = worstRate * 100;
     const diag =
       `hook repeat-rate — corpus ${corpusRate.toFixed(2)}% (${totalDup}/${totalHooks} dup across ${sampled} settlements), ` +
-      `worst ${worstPct.toFixed(1)}% @ ${worstWhere} (measured baseline: corpus 8.19%, worst 35.0%)`;
-    expect(corpusRate, diag).toBeLessThanOrEqual(12);
-    expect(worstPct, diag).toBeLessThanOrEqual(50);
+      `worst ${worstPct.toFixed(1)}% @ ${worstWhere} (before: corpus 8.19%, worst 35.0%; after: corpus 0.20%, worst 6.3%)`;
+    expect(corpusRate, diag).toBeLessThanOrEqual(2);
+    expect(worstPct, diag).toBeLessThanOrEqual(15);
   });
 });
 

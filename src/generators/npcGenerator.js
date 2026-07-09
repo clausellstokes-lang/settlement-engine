@@ -6,6 +6,7 @@
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
+import { drawUnique } from './hookVariety.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
@@ -57,7 +58,11 @@ const generateNPCGoal = role => {
 };
 
 // generateSingleNPC
-const generateSingleNPC = (role, namingTier, category, culture, tier, config = {}, institutions = []) => {
+// `usedTitles` — the settlement-scoped anti-repetition registry, created once per
+// generateNPCs() call and threaded to every NPC so no two NPCs emit the same
+// loyalty hook. title1 and title2 are drawn against the SAME registry (title2 is
+// therefore always distinct from title1 without the old guard needing to prove it).
+const generateSingleNPC = (role, namingTier, category, culture, tier, config = {}, institutions = [], usedTitles) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
   const lastName = pickLast(culture, namingTier || culture);
@@ -67,8 +72,8 @@ const generateSingleNPC = (role, namingTier, category, culture, tier, config = {
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeader(category, config, institutions);
-  const title1 = generateCharacterTitle(category, config);
-  const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config) : null;
+  const title1 = generateCharacterTitle(category, config, usedTitles);
+  const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config, usedTitles) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCGoal(role);
   return {
@@ -207,7 +212,7 @@ const pickLast = (r = 'germanic', s = 'mayor') => {
   return s.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
-const filterByGuild = (institutions, culture, tier, config = {}) => {
+const filterByGuild = (institutions, culture, tier, config = {}, usedTitles) => {
   const guildInsts = institutions.filter(i => {
     const n = (i.name || '').toLowerCase();
     return (i.tags?.includes('guild') || n.includes('guild')) && !n.includes('thieves');
@@ -215,7 +220,7 @@ const filterByGuild = (institutions, culture, tier, config = {}) => {
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
   const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
-  const npc = generateSingleNPC('Guild Master', culture, 'economy', culture, tier, config, institutions);
+  const npc = generateSingleNPC('Guild Master', culture, 'economy', culture, tier, config, institutions, usedTitles);
   npc.title = `${pickLast(culture, 'guild_master')} of ${guildName}`;
   npc.institution = guild.name;
   return npc;
@@ -456,13 +461,20 @@ const generateFactionLeader = (_category = 'other', config = {}, institutions = 
 };
 
 // generateCharacterTitle
-const generateCharacterTitle = (category = 'other', config = {}) => {
+// `usedTitles` is the settlement-scoped anti-repetition draw registry (a Set of
+// hook strings already emitted by any NPC in this population). Each authored
+// loyalty string is its own family, so the string itself is the family id: the
+// final pool draw goes through drawUnique(pool, usedTitles) instead of a naive
+// pick, which prefers a not-yet-emitted variant. Each branch still consumes the
+// SAME number of RNG rolls it always did (drawUnique spends one roll, exactly
+// like the pick it replaces), so title2 / power / downstream draws are unmoved.
+const generateCharacterTitle = (category = 'other', config = {}, usedTitles) => {
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const tier = config.tier || config.settType;
 
   // Small settlements: high chance of generic community loyalty description
   if (['thorp', 'hamlet'].includes(tier) && _rng() < 0.45) {
-    return pickFromArray(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other);
+    return drawUnique(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other, usedTitles);
   }
 
   // Stress-driven category bias
@@ -482,11 +494,11 @@ const generateCharacterTitle = (category = 'other', config = {}) => {
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
       const biasedCat = pickFromArray(biasedCategories);
-      if (NPC_FACTION_LOYALTY[biasedCat]) return pickFromArray(NPC_FACTION_LOYALTY[biasedCat]);
+      if (NPC_FACTION_LOYALTY[biasedCat]) return drawUnique(NPC_FACTION_LOYALTY[biasedCat], usedTitles);
     }
   }
 
-  return pickFromArray(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other);
+  return drawUnique(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, usedTitles);
 };
 
 // pickTitle
@@ -1251,6 +1263,11 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   const { min, max } = getNPCCountRange(tier);
   const targetCount = randInt(min, max);
   const npcs = [];
+  // Settlement-scoped anti-repetition draw registry: shared across EVERY NPC in
+  // this population so the same loyalty hook is never emitted twice (drawUnique
+  // prefers an unused pool variant). This is the machinery behind the hook
+  // repeat-rate envelope; see hookVariety.js.
+  const usedTitles = new Set();
   const candidates = getUpgradeOpportunities(institutions, tier, weights);
 
   // ── Inject faction-gated NPC roles ────────────────────────────────────────
@@ -1513,13 +1530,13 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   mandatoryRoles.forEach(role => {
     const candidate = candidates.find(c => c.role === role);
     if (candidate && npcs.length < targetCount) {
-      npcs.push(generateSingleNPC(candidate.role, candidate.title, candidate.category, culture, tier, npcConfig, institutions));
+      npcs.push(generateSingleNPC(candidate.role, candidate.title, candidate.category, culture, tier, npcConfig, institutions, usedTitles));
     }
   });
 
   // Add a guild-master NPC if we have room
   if (npcs.length < targetCount) {
-    const guildNPC = filterByGuild(institutions, culture, tier, npcConfig);
+    const guildNPC = filterByGuild(institutions, culture, tier, npcConfig, usedTitles);
     if (guildNPC) npcs.push(guildNPC);
   }
 
@@ -1541,7 +1558,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     }
     if (!chosen) chosen = remainingCandidates[0];
 
-    npcs.push(generateSingleNPC(chosen.role, chosen.title, chosen.category, culture, tier, npcConfig, institutions));
+    npcs.push(generateSingleNPC(chosen.role, chosen.title, chosen.category, culture, tier, npcConfig, institutions, usedTitles));
     usedRoles.add(chosen.role);
     remainingCandidates.splice(remainingCandidates.indexOf(chosen), 1);
   }
