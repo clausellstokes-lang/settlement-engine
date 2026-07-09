@@ -248,13 +248,13 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
   {
     field: 'importChannel',
     path: 'economicViability.metrics.foodBalance.importChannel',
-    producer: 'src/generators/economicGenerator.js',
+    producer: 'src/generators/economy/foodBalance.js',
     consumers: ['src/domain/display/dossierViewModel.js'],
   },
   {
     field: 'magicFoodOffset',
     path: 'economicViability.metrics.foodBalance.magicFoodOffset',
-    producer: 'src/generators/economicGenerator.js',
+    producer: 'src/generators/economy/foodBalance.js',
     consumers: [
       'src/domain/display/dossierViewModel.js',
       'src/generators/aiLayer.js',

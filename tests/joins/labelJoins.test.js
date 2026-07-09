@@ -72,7 +72,16 @@ const FROZEN_LABEL_JOINS = Object.freeze({
   'src/generators/cascadeGenerator.js': 2,
   'src/generators/computeActiveChains.js': 10,
   'src/generators/defenseGenerator.js': 2,
-  'src/generators/economicGenerator.js': 58, // 55 → 58: de-minification revealed existing scans (see note above)
+  // economicGenerator.js is now a re-export barrel (F31); its 58 sites moved
+  // verbatim into economy/* — minus dead-code deletions, a legitimate SHRINK
+  // to 51 total (golden byte-identical across the split).
+  'src/generators/economy/economicState.js': 1,
+  'src/generators/economy/finishedGoodsDemand.js': 1,
+  'src/generators/economy/foodBalance.js': 9,
+  'src/generators/economy/prosperity.js': 2,
+  'src/generators/economy/tradeGoods.js': 13,
+  'src/generators/economy/upgradeOpportunities.js': 5,
+  'src/generators/economy/viability.js': 20,
   'src/generators/foodGenerator.js': 3,
   'src/generators/historyGenerator.js': 13,
   'src/generators/isolationGenerator.js': 1,
