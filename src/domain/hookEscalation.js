@@ -427,7 +427,7 @@ export function deriveEscalationClocks(settlement) {
         stages: tmpl.stages.map(s => fillStage(s, { controller: chain.controller })),
       });
     }
-    if (chain.needKey === 'trade') {
+    if (chain.needKey === 'trade_entrepot') {
       const tmpl = CLOCK_TEMPLATES.smuggling_rise;
       clocks.push({
         id: `clock.smuggling_rise.${chain.id}`,

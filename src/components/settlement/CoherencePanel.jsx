@@ -6,6 +6,7 @@
  * the settlement has zero warnings.
  */
 
+import { useMemo } from 'react';
 import { AlertTriangle, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { checkDraftEdit } from '../../domain/coherence/checkDraftEdit.js';
@@ -15,9 +16,14 @@ export default function CoherencePanel() {
   const phase      = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
 
-  if (phase !== 'draft' || !settlement) return null;
+  // Memoize the coherence pass so a re-render that doesn't touch the
+  // settlement doesn't re-run the (now-pure) structural validator.
+  const warnings = useMemo(
+    () => (phase === 'draft' && settlement ? checkDraftEdit(settlement) : []),
+    [phase, settlement],
+  );
 
-  const warnings = checkDraftEdit(settlement);
+  if (phase !== 'draft' || !settlement) return null;
   if (!warnings.length) return null;
 
   return (

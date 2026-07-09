@@ -4,7 +4,6 @@
  * institution-to-narrative text adaptation.
  */
 
-import { random as _rng } from './rngContext.js';
 import {getTradeRouteFeatures, hasTeleportationInfra, pickRandom, tierAtLeast} from './helpers.js';
 export { getBaseChance } from './institutionProbability.js';
 
@@ -561,19 +560,21 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   // ── Isolation viability ───────────────────────────────────────────────────
   // Small isolated settlements (thorp/hamlet) are subsistence economies — historically valid
   if (['thorp','hamlet'].includes(tier) && route === 'isolated') {
-    const struggleChance = _rng();
-    if (struggleChance < 0.40) {
-      violations.push({
-        type:        'subsistence_struggle',
-        institution: `${tier.charAt(0).toUpperCase()+tier.slice(1)} Settlement`,
-        reason:      `This isolated ${tier} exists on the edge of survival. No trade, no outside medicine, no grain reserves. A bad harvest, a harsh winter, or a disease outbreak could collapse it entirely.`,
-        severity:    'warning',
-        suggestedFixes: [
-          'Consider a food or medicine cache as a plot element',
-          'A wandering healer or trader would be a significant event for this community',
-        ],
-      });
-    }
+    // Every isolated micro-settlement lives on the edge of survival — the
+    // reason text applies unconditionally. (Previously gated behind an RNG
+    // draw, which made the validator non-deterministic: in the unmemoized
+    // CoherencePanel there is no active RNG, so it fell to Math.random and
+    // flickered warnings + tripped a false determinism-leak dev warning.)
+    violations.push({
+      type:        'subsistence_struggle',
+      institution: `${tier.charAt(0).toUpperCase()+tier.slice(1)} Settlement`,
+      reason:      `This isolated ${tier} exists on the edge of survival. No trade, no outside medicine, no grain reserves. A bad harvest, a harsh winter, or a disease outbreak could collapse it entirely.`,
+      severity:    'warning',
+      suggestedFixes: [
+        'Consider a food or medicine cache as a plot element',
+        'A wandering healer or trader would be a significant event for this community',
+      ],
+    });
     violations.push({
       type:        'subsistence_economy',
       institution: `${tier.charAt(0).toUpperCase()+tier.slice(1)} Settlement`,

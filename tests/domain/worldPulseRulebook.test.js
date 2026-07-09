@@ -341,4 +341,44 @@ describe('World Pulse rulebook expansion', () => {
     expect(candidates).toHaveLength(1);
     expect(candidates[0].id).toBe('a');
   });
+
+  test('per-actor exclusivity keeps one candidate per composite npc tag', () => {
+    const candidates = resolveCandidateConflicts([
+      {
+        id: 'npc-high',
+        type: 'npc_action',
+        severity: 0.8,
+        conflictTags: ['npc:save1:mayor_bob'],
+      },
+      {
+        id: 'npc-low',
+        type: 'npc_action',
+        severity: 0.4,
+        conflictTags: ['npc:save1:mayor_bob'],
+      },
+    ]);
+
+    expect(candidates).toHaveLength(1);
+    expect(candidates[0].id).toBe('npc-high');
+  });
+
+  test('per-actor exclusivity keeps one candidate per composite faction tag', () => {
+    const candidates = resolveCandidateConflicts([
+      {
+        id: 'faction-high',
+        type: 'faction_action',
+        severity: 0.75,
+        conflictTags: ['faction:save1:merchant_league'],
+      },
+      {
+        id: 'faction-low',
+        type: 'faction_action',
+        severity: 0.35,
+        conflictTags: ['faction:save1:merchant_league'],
+      },
+    ]);
+
+    expect(candidates).toHaveLength(1);
+    expect(candidates[0].id).toBe('faction-high');
+  });
 });

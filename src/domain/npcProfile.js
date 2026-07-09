@@ -274,11 +274,15 @@ function factionIdFromName(name) {
 // with overlapping tags or name patterns. Best-effort — returns null
 // when no clear link exists.
 
+// Keyed by the canonical ARCHETYPE vocabulary (archetypeFromCategory), not by
+// raw npc.category — the generator emits categories like 'crafts'/'magic'/
+// 'noble' that only reach these hints through the normalizer. (Keying by raw
+// category silently dropped every institutionLink for those NPCs.)
 const CATEGORY_INSTITUTION_HINTS = Object.freeze({
   military:   /watch|garrison|militia|guard|barracks|patrol/i,
   government: /council|hall|government|courthouse|reeve|mayor|chamber|seat/i,
   religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
-  economy:    /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
+  merchant:   /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
   craft:      /smithy|forge|workshop|carpenter|tannery|brewery/i,
   criminal:   /tavern|den|gang|black\s+market/i,
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
@@ -289,7 +293,7 @@ function inferInstitutionLink(npc, settlement) {
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return null;
 
-  const hint = CATEGORY_INSTITUTION_HINTS[npc.category];
+  const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
   if (!hint) return null;
 
   const match = institutions.find(inst =>

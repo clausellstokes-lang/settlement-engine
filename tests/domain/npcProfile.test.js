@@ -125,6 +125,25 @@ describe('deriveNpcProfile()', () => {
     expect(deriveNpcProfile(militaryCaptain(), { institutions: [] }).institutionLink).toBeNull();
   });
 
+  it('resolves institutionLink for the generator-emitted categories via the archetype normalizer', () => {
+    const settlement = {
+      institutions: [
+        { name: 'Blacksmith Forge' },
+        { name: 'Arcane College' },
+        { name: 'Town Council' },
+      ],
+    };
+    // 'crafts' → craft archetype → forge/smithy hint
+    expect(deriveNpcProfile({ id: 'c', name: 'Smith', category: 'crafts' }, settlement).institutionLink)
+      .toBe('institution.blacksmith_forge');
+    // 'magic' → arcane archetype → college/mage hint
+    expect(deriveNpcProfile({ id: 'm', name: 'Archmage', category: 'magic' }, settlement).institutionLink)
+      .toBe('institution.arcane_college');
+    // 'noble' → government archetype → council/hall hint
+    expect(deriveNpcProfile({ id: 'n', name: 'Baron', category: 'noble' }, settlement).institutionLink)
+      .toBe('institution.town_council');
+  });
+
   it('vulnerabilities include the secret-driven exposure when a secret is present', () => {
     const profile = deriveNpcProfile(militaryCaptain());
     const hasSecretLine = profile.vulnerabilities.some(v => v.includes('Secret-driven exposure'));

@@ -1249,7 +1249,7 @@ const getGoodsModifiers = (tier, institutions = [], goodsToggles = {}) => {
   const tierData = GOODS_MODIFIERS_BY_TIER[tier] || {};
   const exports = [];
   Object.entries(tierData).forEach(([goodName, spec]) => {
-    const toggleKey = `${tier}_export_${goodName}`;
+    const toggleKey = `${tier}_good_${goodName}`;
     // Custom-content extension: resolve `requiredInstitution` refIds
     const reqInst = spec.requiredInstitution
       ? _customDeps.resolveInstitutionRequirement(spec.requiredInstitution)

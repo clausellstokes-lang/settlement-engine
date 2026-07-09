@@ -43,6 +43,7 @@
 
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
+import { canonStressors } from './canonicalAccessors.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -342,10 +343,10 @@ export function collectThreatSources(settlement) {
     }
   }
 
-  // 5. Stressors with threat-shaped tags / names
-  const stressors = Array.isArray(settlement.stressors) ? settlement.stressors
-                  : Array.isArray(settlement.stresses)  ? settlement.stresses
-                  : [];
+  // 5. Stressors with threat-shaped tags / names. Resolve via the canonical
+  // accessor so the bare-object single-stressor shape and the stress/stresses/
+  // stressors alias set all surface (the old inline chain missed both).
+  const stressors = canonStressors(settlement);
   for (const stressor of stressors) {
     if (!stressor) continue;
     const text = String(stressor.name || stressor.type || stressor.label || stressor || '');
