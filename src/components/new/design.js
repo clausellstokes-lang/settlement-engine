@@ -21,12 +21,8 @@ export const TIER_LABELS = {
   town:'Town', city:'City', metropolis:'Metropolis',
 };
 
-export const FACTION_COLORS = ['#2a3a7a','#8b1a1a','#1a5a28','#5a2a8a','#a0762a','#2a5a6a','#6a3a2a'];
-
-export const PROSPERITY_COLORS = {
-  'Thriving':'#1a5a28','Prosperous':'#2d7a44','Stable':'#a0762a',
-  'Struggling':'#a0580a','Poor':'#8b1a1a','Destitute':'#5a1a1a',
-};
+// FACTION_COLORS and PROSPERITY_COLORS live in ./tabConstants.js (the single
+// dossier palette source). They were duplicated here with drifted values and
+// had no importers, so the dead forks were removed rather than re-exported.
 
 export const catColor = (cat) => C[cat?.toLowerCase()] || C.other;
-export const prospColor = (p) => PROSPERITY_COLORS[p] || C.gold;

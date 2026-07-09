@@ -24,7 +24,7 @@
  * the lib stays decoupled from any specific modal implementation.
  */
 
-import { COPY } from '../copy/strings.js';
+import { tx } from '../copy/index.js';
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;   // 24 hours
 const STORAGE_PREFIX = 'sf:pricing_moment:';
@@ -47,7 +47,7 @@ export function triggerPricingMoment(reason, openModal, opts = {}) {
   if (typeof openModal !== 'function') return false;
   if (opts.tier === 'premium' || opts.tier === 'developer' || opts.tier === 'admin') return false;
 
-  const content = COPY.pricing.moments[reason];
+  const content = tx(`moments.${reason}`);
   if (!content) {
     console.warn(`[pricingMoments] unknown reason: ${reason}`);
     return false;

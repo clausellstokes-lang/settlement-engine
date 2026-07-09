@@ -23,7 +23,7 @@ import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { COPY } from '../../copy/strings.js';
+import { t } from '../../copy/index.js';
 
 /**
  * @param {Object} props
@@ -46,7 +46,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
   return (
     <Card
       variant="suggestion"
-      kicker={COPY.ai.inlineHook}
+      kicker={t('ai.inlineHook')}
       actions={
         <IconButton
           Icon={X}
@@ -73,7 +73,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         icon={<Sparkles size={12} aria-hidden="true" />}
         onClick={onPolish}
       >
-        {COPY.ai.polishCta}
+        {t('ai.polishCta')}
       </Button>
     </Card>
   );

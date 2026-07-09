@@ -1,8 +1,11 @@
 /**
- * aiLayer.js — Narrative Layer AI engine
+ * aiLayer.js — LOCAL template-based narrative engine (NOT an API client).
  *
- * Builds a structured prompt from the full settlement object,
- * calls the Claude API, and returns a structured narrative object:
+ * Despite the "AI" name, runTemplateNarrative makes no network calls and talks
+ * to no LLM. It extracts a context from the settlement and synthesizes the
+ * narrative deterministically from string templates (buildLocalThesis /
+ * buildLocalDailyLife / buildLocalNotes / buildLocalCompass). It returns a
+ * structured narrative object shaped like the real one:
  * {
  *   thesis:    string,            // 2-3 para settlement character overview
  *   dailyLife: string,            // 3-4 para daily life prose (replaces DailyLifeTab generate)
@@ -11,6 +14,13 @@
  *     npcs, history, resources, viability, plot_hooks
  *   }
  * }
+ *
+ * The genuine LLM path lives server-side (supabase/functions/generate-narrative,
+ * reached via src/store/aiSlice.js when Supabase is configured). This module is
+ * the offline fallback OutputContainer.jsx runs when it is NOT configured.
+ *
+ * buildAiLayerPrompt is exported for the server prompt + tests; the local
+ * synthesizer builds it but does not send it anywhere.
  */
 
 // ── Data extraction ─────────────────────────────────────────────────────────
@@ -371,7 +381,7 @@ function buildLocalCompass(ctx) {
   };
 }
 
-export async function runAiLayer(settlement, onProgress) {
+export async function runTemplateNarrative(settlement, onProgress) {
   const ctx    = extractFullContext(settlement);
   const _prompt = buildAiLayerPrompt(ctx);
 

@@ -35,7 +35,7 @@ const lineCount = (abs) => fs.readFileSync(abs, 'utf8').split('\n').length;
 // steps/generateNarratives, npcGenerator, powerGenerator, servicesGenerator,
 // resourceGenerator, and tests) reaches these through './economicGenerator.js'.
 const PUBLIC_EXPORTS = [
-  'HISTORY_EVENTS',
+  'POWER_ROLES_BY_CATEGORY',
   'generateEconomicState',
   'generateEconomicViability',
   'getUpgradeOpportunities',

@@ -458,11 +458,15 @@
 
   async function resetMapCmd(seed) {
     if (typeof regenerateMap !== 'function') throw new Error('regenerateMap unavailable');
-    if (seed != null) {
-      try { window.seed = String(seed); } catch (e) {}
-    }
     window.__sfPlacedBurgIds.clear();
-    await Promise.resolve(regenerateMap('SettlementForge resetMap'));
+    // FMG's generate(options) destructures `options.seed` (a STRING) and routes
+    // it through setSeed → aleaPRNG (public/map/main.js). The old call passed a
+    // bare STRING ('SettlementForge resetMap'), which destructured to
+    // seed:undefined — so the documented {seed} was silently ignored and every
+    // reset produced a fresh random map. Pass a real options object with the
+    // seed so it actually applies; omit it (undefined) to keep randomizing.
+    const options = seed != null ? { seed: String(seed) } : undefined;
+    await Promise.resolve(regenerateMap(options));
   }
 
   // ── Command handlers ────────────────────────────────────────────────────

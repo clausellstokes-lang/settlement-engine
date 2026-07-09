@@ -1,7 +1,5 @@
-// servicesData.js — Static service and goods data
+// servicesData.js — Static service data (institution → service overrides).
 // Extracted from servicesGenerator.js (was inline module-scope data)
-
-import { GOODS_CATEGORIES as _GC } from "../data/tradeGoodsData.js";
 
 // ── Locale service overrides ──────────────────────────────────────────────────
 // Maps institution name variants → canonical INSTITUTION_SERVICES key.
@@ -63,37 +61,4 @@ export const LOCALE_SERVICE_OVERRIDES = {
   "multiple water sources": "Inn/Tavern",
   "water source": "Inn/Tavern",
   "sewage system": "Inn/Tavern District",
-};
-
-// ── Category string constants (raw strings used in goods arrays) ──────────────
-
-// ── Goods by tier ─────────────────────────────────────────────────────────────
-// tier → [{name, category, defaultEnabled, baseChance, desc}]
-
-// ── Commodity category map ────────────────────────────────────────────────────
-export const COMMODITY_CATEGORY_MAP = {
-  fish: "fish",
-  salt: "salt",
-  salt_flat: "salt",
-  iron: "iron",
-  metalwork: "iron",
-  stone: "stone",
-  pottery: "stone",
-  timber: "timber",
-  grain: "grain",
-  flour: "grain",
-  livestock: "grain",
-  dairy: "grain",
-  wool: "grain",
-  furs: "timber",
-  honey: "herbs",
-  medicinal_herbs: "herbs",
-  herbs: "herbs",
-  peat: "fuel",
-  coal: "fuel",
-  luxury: "gems",
-  gems: "gems",
-  processed_textiles: "cloth",
-  maritime_access: null,
-  trade_access: null,
 };

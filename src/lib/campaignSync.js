@@ -29,21 +29,65 @@ function cloneJson(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
+// fmgSnapshot (the FMG map export persisted on mapState) is by far the heaviest
+// field on a campaign — routinely ~1MB. The old signature JSON.stringified the
+// whole campaign, so every dirty-check re-serialized that blob. We instead
+// fingerprint it ONCE per mapState object identity (WeakMap cache) and stringify
+// the rest without it. Store updates are immutable (a content change yields a
+// NEW mapState object), so a cache hit always implies unchanged snapshot bytes.
+const snapshotFingerprintCache = new WeakMap();
+
+// FNV-1a 32-bit + length. Fast, dependency-free, single pass; collisions are
+// astronomically unlikely for change detection (a real snapshot swap flips
+// thousands of bytes, and the length prefix guards the trivial cases).
+function hashText(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return `${text.length}:${(h >>> 0).toString(36)}`;
+}
+
+function fingerprintMapSnapshot(mapState) {
+  if (!mapState || typeof mapState !== 'object') return 'none';
+  const cached = snapshotFingerprintCache.get(mapState);
+  if (cached !== undefined) return cached;
+  const snapshot = mapState.fmgSnapshot;
+  const fp = snapshot == null
+    ? 'null'
+    : hashText(typeof snapshot === 'string' ? snapshot : JSON.stringify(snapshot));
+  snapshotFingerprintCache.set(mapState, fp);
+  return fp;
+}
+
 export function campaignSignature(campaign) {
   if (!campaign || typeof campaign !== 'object') return JSON.stringify(campaign ?? null);
   // `pendingSync` is local-only sync bookkeeping (never-synced marker). It must
   // not feed the signature, or merge's clearing of it (pendingSync:false on a
   // remote-confirmed campaign) would look like a content change and re-upload
   // every cloud campaign on every load.
-  const { pendingSync: _pendingSync, ...rest } = campaign;
+  const { pendingSync: _pendingSync, mapState, ...rest } = campaign;
+  const snapFp = fingerprintMapSnapshot(mapState);
+  // Rebuild mapState WITHOUT the heavy fmgSnapshot (captured by snapFp) so
+  // JSON.stringify never touches the blob. Copy sibling keys by name so we don't
+  // even read fmgSnapshot here — the WeakMap-cached fingerprint is its sole read.
+  let mapStateLite = mapState;
+  if (mapState && typeof mapState === 'object') {
+    mapStateLite = {};
+    for (const key of Object.keys(mapState)) {
+      if (key !== 'fmgSnapshot') mapStateLite[key] = mapState[key];
+    }
+  }
   try {
-    return JSON.stringify(rest);
+    return JSON.stringify({ ...rest, mapState: mapStateLite, __snapFp: snapFp });
   } catch {
     return JSON.stringify({
       id: campaign?.id,
       name: campaign?.name,
       updatedAt: campaign?.updatedAt,
-      mapSavedAt: campaign?.mapState?.savedAt,
+      mapSavedAt: mapState?.savedAt,
+      __snapFp: snapFp,
     });
   }
 }

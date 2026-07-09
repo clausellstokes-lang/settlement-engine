@@ -38,17 +38,35 @@ const AUTH_TOKEN_LS_KEY = (() => {
 
 /**
  * Get a usable access token without deadlocking on supabase-js's cross-tab
- * auth lock. Strategy: race `supabase.auth.getSession()` against a 2s timeout;
- * on timeout, read the token straight out of localStorage (skipping the
- * auto-refresh path). The noop-lock change in `supabase.js` should prevent
- * the hang in the first place — this is belt-and-suspenders for any future
- * regression (supabase-js upgrade, stale tab, etc.).
+ * auth lock.
+ *
+ * Primary path: race `supabase.auth.getSession()` (which reads the client's
+ * configured storage — sessionStorage when "remember me" is off, localStorage
+ * otherwise; see src/lib/supabase.js authStorageAdapter) against a 2s timeout.
+ *
+ * Fallback (timeout or no session): read the persisted token DIRECTLY, checking
+ * BOTH stores and reassembling supabase-js's chunked (`<key>.0`, `.1`, …) form
+ * for large tokens. The old fallback read only the unchunked localStorage key,
+ * so a "remember me off" session (token in sessionStorage) or a chunked token
+ * fell through to a spurious "Not signed in".
  */
 async function getAccessTokenSafe() {
-  const readLS = () => {
-    if (!AUTH_TOKEN_LS_KEY) return null;
+  // Read + validate a persisted supabase session from one Web Storage area,
+  // reassembling the chunked form supabase-js writes for large tokens.
+  const readFromStore = (store) => {
+    if (!store || !AUTH_TOKEN_LS_KEY) return null;
     try {
-      const raw = localStorage.getItem(AUTH_TOKEN_LS_KEY);
+      let raw = store.getItem(AUTH_TOKEN_LS_KEY);
+      if (raw == null) {
+        // Chunked: supabase-js splits large sessions across `<key>.0`, `.1`, …
+        let assembled = '';
+        for (let i = 0; ; i++) {
+          const chunk = store.getItem(`${AUTH_TOKEN_LS_KEY}.${i}`);
+          if (chunk == null) break;
+          assembled += chunk;
+        }
+        raw = assembled || null;
+      }
       if (!raw) return null;
       const parsed = JSON.parse(raw);
       const token = parsed?.access_token;
@@ -59,6 +77,14 @@ async function getAccessTokenSafe() {
     } catch { return null; }
   };
 
+  // "Remember me off" routes the token to sessionStorage, so check it first;
+  // otherwise fall to localStorage (the default persistent store).
+  const readStored = () => {
+    const fromSession = typeof sessionStorage !== 'undefined' ? readFromStore(sessionStorage) : null;
+    if (fromSession) return fromSession;
+    return typeof localStorage !== 'undefined' ? readFromStore(localStorage) : null;
+  };
+
   try {
     const result = await Promise.race([
       supabase.auth.getSession(),
@@ -66,8 +92,8 @@ async function getAccessTokenSafe() {
     ]);
     const token = result?.data?.session?.access_token;
     if (token) return token;
-  } catch (_) { /* fall through to LS */ }
-  return readLS();
+  } catch (_) { /* fall through to the persisted token */ }
+  return readStored();
 }
 
 /**

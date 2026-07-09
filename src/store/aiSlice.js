@@ -264,6 +264,26 @@ const aiRequestDisposition = (get, myRequestId, capturedSaveId) => {
   return 'commit';
 };
 
+/**
+ * After a COMMITTED AI failure, re-pull the authoritative credit balance. A
+ * failed paid run may have been charged then auto-refunded server-side (or its
+ * refund may have failed — see aiRefundNotice), so the cached client balance can
+ * now overstate the ledger. Fire-and-forget: never blocks teardown, and the late
+ * resolve is re-gated on the request still being current (F19) so it can't
+ * clobber a newer request's fresher balance.
+ */
+const resyncCreditBalanceAfterFailure = (get, myRequestId, capturedSaveId) => {
+  import('../lib/stripe.js')
+    .then(({ fetchCreditBalance }) => fetchCreditBalance())
+    .then(bal => {
+      if (typeof bal === 'number' &&
+          aiRequestDisposition(get, myRequestId, capturedSaveId) === 'commit') {
+        get().setCreditBalance(bal);
+      }
+    })
+    .catch(() => { /* best-effort; the balance re-syncs on next load anyway */ });
+};
+
 export const createAiSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   aiSettlement:     null,   // AI-refined version of settlement (display only)
@@ -648,6 +668,7 @@ export const createAiSlice = (set, get) => ({
         });
         if (disposition === 'commit') {
           track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: errorKindFromError(e) });
+          resyncCreditBalanceAfterFailure(get, myRequestId, capturedSaveId);
         }
       }
     } finally {
@@ -827,6 +848,7 @@ export const createAiSlice = (set, get) => ({
         });
         if (disposition === 'commit') {
           track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: errorKindFromError(e) });
+          resyncCreditBalanceAfterFailure(get, myRequestId, capturedSaveId);
         }
       }
     } finally {
@@ -1053,6 +1075,7 @@ export const createAiSlice = (set, get) => ({
         });
         if (disposition === 'commit') {
           track(EVENTS.AI_GENERATION_FAILED, { type: 'progression', error_kind: errorKindFromError(e) });
+          resyncCreditBalanceAfterFailure(get, myRequestId, capturedSaveId);
         }
       }
     } finally {

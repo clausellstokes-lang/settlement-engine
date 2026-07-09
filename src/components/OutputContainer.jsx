@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { FS, swatch } from './theme.js';
-import { runAiLayer } from '../generators/aiLayer';
+import { runTemplateNarrative } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -236,7 +236,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const earlyExitOnNoSettlement = !rawSettlement;
 
   // Use store-based AI (credit-gated via edge function) when Supabase is configured,
-  // fall back to direct aiLayer call for local dev
+  // fall back to the local template narrative engine for local dev
   const aiLoading = isConfigured ? storeAiLoading : localAiLoading;
   const aiRegenerating = isConfigured ? storeAiRegenerating : false;
   const aiError = isConfigured ? storeAiError : localAiError;
@@ -275,7 +275,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       setLocalAiError(null);
       setAiProgress('');
       try {
-        const result = await runAiLayer(rawSettlement, msg => setAiProgress(msg));
+        const result = await runTemplateNarrative(rawSettlement, msg => setAiProgress(msg));
         setAiSettlement?.(result);
       } catch (e) {
         setLocalAiError(e.message);

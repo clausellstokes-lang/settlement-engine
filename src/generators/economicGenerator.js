@@ -6,7 +6,7 @@
  * public surface so every existing importer keeps importing from
  * './economicGenerator.js' unchanged.
  */
-export { HISTORY_EVENTS } from '../data/historyData.js';
+export { POWER_ROLES_BY_CATEGORY } from '../data/historyData.js';
 export { isSaltPreserved } from './economy/tradeGoods.js';
 export { priorityToCategory } from './economy/prosperity.js';
 export { getUpgradeOpportunities } from './economy/upgradeOpportunities.js';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { TIER_LABELS, catColor } from './design';
 import { serif, TabIntro } from './Primitives';
-import { BODY } from './tabConstants.js';
+import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
@@ -13,7 +13,6 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 // Routing it through `BODY` from tabConstants centralises future contrast
 // changes — keep the local `second` name so we don't churn every usage.
 const gold=swatch['#A0762A'], ink=swatch['#1C1409'], muted=swatch['#9C8068'], second=BODY;
-const factionColors=['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a'];
 
 // ── Settlement character sentence ─────────────────────────────────────────────
 function characterSentence(r) {
@@ -51,7 +50,7 @@ function FactionBar({ factions }) {
       <div style={{display:'flex',height:20,borderRadius:4,overflow:'hidden',gap:1,marginBottom:10}}>
         {factions.map((f,i)=>{
           const pct=Math.round((f.power||0)/total*100);
-          const c=factionColors[i%factionColors.length];
+          const c=FACTION_COLORS[i%FACTION_COLORS.length];
           return <div key={i} style={{flex:pct,background:c,display:'flex',alignItems:'center',justifyContent:'center',minWidth:pct>5?undefined:0,overflow:'hidden'}}>
             {pct>11&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,padding:'0 3px'}}>{pct}%</span>}
           </div>;
@@ -59,7 +58,7 @@ function FactionBar({ factions }) {
       </div>
       <div style={{display:'flex',flexDirection:'column',gap:5}}>
         {factions.map((f,i)=>{
-          const c=factionColors[i%factionColors.length];
+          const c=FACTION_COLORS[i%FACTION_COLORS.length];
           const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
           return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:80}}>
             <div style={{width:10,height:10,borderRadius:2,background:c,flexShrink:0}}/>

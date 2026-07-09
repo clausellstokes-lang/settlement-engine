@@ -57,7 +57,10 @@ export const SPEECH_PATTERNS = [
   'Uses long pauses as punctuation — sits comfortably in silence',
 ];
 
-export const NPC_RELIGION_DATA = {
+// Personality-trait pools (positive / negative / neutral adjectives). The NPC
+// generator draws one dominant trait, one flaw, and one modifier from these.
+// (Formerly mis-exported as NPC_RELIGION_DATA — nothing here is about religion.)
+export const NPC_PERSONALITY_TRAITS = {
   positive: [
     'honest',
     'brave',

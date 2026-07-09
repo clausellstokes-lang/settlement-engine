@@ -24,7 +24,7 @@ import {
 import { useStore } from '../../store/index.js';
 import { getAiCost } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
-import { COPY } from '../../copy/strings.js';
+import { t } from '../../copy/index.js';
 
 /**
  * @param {Object} props
@@ -60,15 +60,15 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
   if (phase === 'draft' && !save && handlers.onSave) {
     items.push({
       id: 'save', primary: true, Icon: Save,
-      label: COPY.save.primary,
+      label: t('save.primary'),
       hint:  'Saving keeps this draft for later editing.',
       onClick: handlers.onSave,
     });
   } else if (phase === 'draft' && handlers.onCanonize) {
     items.push({
       id: 'canonize', primary: true, Icon: BookMarked,
-      label: COPY.detail.canonizeCta,
-      hint:  COPY.detail.canonizeHint,
+      label: t('detail.canonizeCta'),
+      hint:  t('detail.canonizeHint'),
       onClick: handlers.onCanonize,
     });
   } else if (phase === 'canon' && handlers.onApplyEvent) {
@@ -86,15 +86,15 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
   if (!narrated && handlers.onPolishAi) {
     items.push({
       id: 'polish', Icon: Sparkles,
-      label: COPY.ai.polishCta,
-      hint:  COPY.ai.inlineHintFn(getAiCost('narrative')),
+      label: t('ai.polishCta'),
+      hint:  t('ai.inlineHint', { cost: getAiCost('narrative') }),
       onClick: handlers.onPolishAi,
     });
   }
   if (handlers.onExport) {
     items.push({
       id: 'export', Icon: FileText,
-      label: COPY.export.primaryCta,
+      label: t('export.primaryCta'),
       onClick: handlers.onExport,
     });
   }

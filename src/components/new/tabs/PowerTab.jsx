@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
+import { FACTION_COLORS } from '../tabConstants';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -21,7 +22,6 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const factionGroups = s?.factions  || [];
   const tensions      = s?.history?.currentTensions || [];
 
-  const FACTION_COLORS = ['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a','#3a1a6a','#6a3a1a'];
   const total = pf.reduce((n,f) => n + (f.power||0), 0) || 100;
 
   const isStable   = (m||'').toLowerCase().includes('stable') && !(m||'').toLowerCase().includes('unstable');

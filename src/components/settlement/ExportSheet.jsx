@@ -21,7 +21,7 @@ import { FS, swatch } from '../theme.js';
 import { FileText, X, BookMarked, Clock, Edit3 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
-import { COPY } from '../../copy/strings.js';
+import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -76,7 +76,7 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="export-sheet-title" style={titleStyle}>
-            <FileText size={16} aria-hidden="true" /> {COPY.export.sheetTitle}
+            <FileText size={16} aria-hidden="true" /> {t('export.sheetTitle')}
           </h2>
           <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
         </header>

@@ -16,7 +16,7 @@ import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
-  NPC_RELIGION_DATA,
+  NPC_PERSONALITY_TRAITS,
   NPC_AGE_DATA,
   NPC_PLOT_HOOKS,
   NPC_BUILDS,
@@ -227,9 +227,9 @@ const filterByGuild = (institutions, culture, tier, config = {}) => {
 
 // generateReligionType
 const generateReligionType = () => ({
-  dominant: pickFromArray(NPC_RELIGION_DATA.positive),
-  flaw: pickFromArray(NPC_RELIGION_DATA.negative),
-  modifier: pickFromArray(NPC_RELIGION_DATA.neutral),
+  dominant: pickFromArray(NPC_PERSONALITY_TRAITS.positive),
+  flaw: pickFromArray(NPC_PERSONALITY_TRAITS.negative),
+  modifier: pickFromArray(NPC_PERSONALITY_TRAITS.neutral),
   tell: pickFromArray(MANNERISMS),
   speech: pickFromArray(SPEECH_PATTERNS),
 });

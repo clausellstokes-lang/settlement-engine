@@ -252,6 +252,14 @@ export const en = Object.freeze({
     },
     insufficient: 'You need {cost} credits for this. You have {balance}.',
     buyMore:      'Buy more credits',
+    // Inline "Polish with AI" hook + CTA shown on the dossier (migrated here
+    // from the retired copy/strings.js so there is one copy registry).
+    inlineHook:   'Want table-ready prose?',
+    polishCta:    'Polish with AI',
+    // Cost is interpolated at call time. Follows the house convention (see
+    // ai.narrative.button / ai.insufficient) of always pluralizing "credits" —
+    // the narrative cost is 3 (fast 2), so the singular case never renders.
+    inlineHint:   '{cost} credits · streams section by section · partial failures keep your raw draft intact',
   },
 
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
@@ -398,18 +406,71 @@ export const en = Object.freeze({
   // ── Save / signup / cap surfaces (P101 / X-3) ────────────────────────────
   save: {
     button:        'Save',
+    primary:       'Save Draft',
     signupButton:  'Save this town (free account) →',
     afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
     successTpl:    'Saved as {settlementName}. Find it in Settlements.',
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
   },
 
+  // ── Detail-view actions (migrated from copy/strings.js) ──────────────────
+  detail: {
+    canonizeCta:  'Canonize for Campaign',
+    canonizeHint: 'Marks this town as part of your campaign world. Future changes become events on a timeline.',
+  },
+
+  // ── Export sheet (migrated from copy/strings.js) ─────────────────────────
+  export: {
+    primaryCta: 'Export Dossier',
+    sheetTitle: 'Export Dossier',
+  },
+
+  // ── World-state badges + tooltips (migrated from copy/strings.js) ─────────
+  // Keyed by state kind; StateBadge looks them up dynamically via tx().
+  state: {
+    badges: {
+      draft:         'Draft',
+      canon:         'Canon',
+      preplay:       'Preplay',
+      event_pending: 'Pending',
+      narrated:      'Narrated',
+      raw:           'Raw',
+      locked:        'Locked',
+    },
+    tooltips: {
+      draft:    'Editable, not yet part of your campaign world.',
+      canon:    'Live campaign truth. Changes are logged as events.',
+      narrated: 'Narrative refinement layer is present.',
+      raw:      'Raw simulation output. No narrative layer.',
+      locked:   'Locked. Preserved through regeneration.',
+    },
+  },
+
   // ── Pricing-moment registry (P103 / X-2) ─────────────────────────────────
-  // Augments the existing COPY.pricing.moments registry with the new
-  // moments the critique calls for. usePricingMoment reads from here when
-  // resolving copy by reason. Keep keys snake_case to match the existing
+  // The single moment registry: lib/pricingMoments.js resolves copy by reason
+  // through tx('moments.<reason>'). Keep keys snake_case to match the
   // pricingMoments.js storage layout.
   moments: {
+    first_canonize: {
+      headline: 'You just made a town part of your campaign.',
+      body:     'Upgrade adds canon snapshots, timeline export variants, and narrative refinement. The free tier continues to work, just with the basics.',
+    },
+    first_ai_use: {
+      headline: 'Narrative refinement costs credits per pass.',
+      body:     'Upgrade includes a monthly credit allowance plus discounted top-ups.',
+    },
+    first_canon_export: {
+      headline: 'Canon dossiers are the deliverable DMs print.',
+      body:     'Upgrade unlocks unlimited canon-mode exports and the timeline-packet variant.',
+    },
+    cloud_save: {
+      headline: 'Save your campaign across devices.',
+      body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
+    },
+    founder_eligible: {
+      headline: 'You’ve earned this offer.',
+      body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
+    },
     first_save: {
       headline: 'Save it. Come back tomorrow.',
       body:     'Your dossier is yours to keep. Free tier holds 3 saves, plenty for a campaign’s first arc.',

@@ -2,7 +2,7 @@
  * economy/upgradeOpportunities.js — historical upgrade opportunities (faction roles available at a settlement tier).
  */
 
-import { HISTORY_EVENTS } from '../../data/historyData.js';
+import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
 
@@ -10,7 +10,7 @@ import { TIER_ORDER } from '../../data/constants.js';
 export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
   const tierIndex = TIER_ORDER.indexOf(tier);
   const result = [];
-  Object.entries(HISTORY_EVENTS).forEach(([category, roles]) => {
+  Object.entries(POWER_ROLES_BY_CATEGORY).forEach(([category, roles]) => {
     roles.forEach((role) => {
       if (tierIndex < TIER_ORDER.indexOf(role.minTier)) return;
       if (role.requiresGuild && !institutions.some((i) => i.tags?.includes('guild'))) return;

@@ -18,7 +18,11 @@ export const PROSPERITY_COLORS = {Poverty:'#8b1a1a',Impoverished:'#8b1a1a',Strug
 export const EVENT_COLORS = {disaster:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0',label:'Disaster'},political:{color:'#1a3a7a',bg:'#f4f6fd',border:'#c0cce8',label:'Political'},economic:{color:'#a0762a',bg:'#faf6ec',border:'#e0d0a0',label:'Economic'},religious:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8',label:'Religious'},magical:{color:'#2a5a8a',bg:'#f4f8fd',border:'#b8cce8',label:'Magical'}};
 export const SEV_COLORS = {minor:'#6b5340',major:'#a0762a',catastrophic:'#8b1a1a'};
 export const SERVICE_META = {lodging:{label:'Lodging',accent:'#2a3a7a',icon:'\u{1F3E0}'},food:{label:'Food & Drink',accent:'#1a5a28',icon:'\u{1F37A}'},equipment:{label:'Equipment',accent:'#a0762a',icon:'\u2694\uFE0F'},magic:{label:'Magical Services',accent:'#5a2a8a',icon:'\u2728'},information:{label:'Information',accent:'#1a5a6a',icon:'\u{1F4DC}'},healing:{label:'Healing',accent:'#8b1a1a',icon:'\u2695\uFE0F'},transport:{label:'Transportation',accent:'#2a4a7a',icon:'\u{1F40E}'},legal:{label:'Legal & Financial',accent:'#3a3a3a',icon:'\u2696\uFE0F'},entertainment:{label:'Entertainment',accent:'#7a3a1a',icon:'\u{1F3AD}'},employment:{label:'Employment',accent:'#1a4a2a',icon:'\u{1F4CB}'},criminal:{label:'Criminal Services',accent:'#3a1a1a',icon:'\u{1F5E1}\uFE0F',note:'Available if you know where to look'}};
-export const FACTION_COLORS = ['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a','#3a2a1a'];
+// Canonical index-keyed faction palette for the dossier. Single source of truth
+// for the Power tab's stacked faction bar and the Summary tab's faction bar —
+// both import this instead of forking their own arrays. (Consolidated from four
+// drifted copies; this is the dossier-canonical sequence the Power tab rendered.)
+export const FACTION_COLORS = ['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a','#3a1a6a','#6a3a1a'];
 export const REL_STYLES = {
   ally:           {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
   rival:          {color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},

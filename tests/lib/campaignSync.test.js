@@ -160,6 +160,33 @@ describe('campaign sync policy', () => {
       .toBe(campaignSignature(base));
   });
 
+  test('campaignSignature fingerprints the fmgSnapshot once per campaign object identity', () => {
+    // Count reads of the heavy blob via an enumerable getter. The WeakMap cache
+    // means a second signature of the SAME mapState object must not touch it.
+    let snapshotReads = 0;
+    const mapState = { savedAt: '2024-03-01T00:00:00Z' };
+    Object.defineProperty(mapState, 'fmgSnapshot', {
+      enumerable: true,
+      configurable: true,
+      get() { snapshotReads += 1; return 'x'.repeat(50000); },
+    });
+    const campaign = { id: 'camp-1', name: 'C', updatedAt: '2024-03-01T00:00:00Z', mapState };
+
+    const first = campaignSignature(campaign);
+    const second = campaignSignature(campaign);
+    expect(first).toBe(second);
+    expect(snapshotReads).toBe(1); // serialized once, then served from the WeakMap
+  });
+
+  test('campaignSignature still changes when the snapshot content changes', () => {
+    const a = { id: 'camp-1', name: 'C', updatedAt: '2024-03-01T00:00:00Z', mapState: { fmgSnapshot: 'AAAA' } };
+    const b = { id: 'camp-1', name: 'C', updatedAt: '2024-03-01T00:00:00Z', mapState: { fmgSnapshot: 'BBBB' } };
+    expect(campaignSignature(a)).not.toBe(campaignSignature(b));
+    // Identical snapshot content on distinct objects yields an identical signature.
+    const c = { id: 'camp-1', name: 'C', updatedAt: '2024-03-01T00:00:00Z', mapState: { fmgSnapshot: 'AAAA' } };
+    expect(campaignSignature(a)).toBe(campaignSignature(c));
+  });
+
   test('flipping pendingSync does not by itself mark a campaign as needing sync', () => {
     primeCampaignSync([{ id: 'camp-1', name: 'C', updatedAt: '2024-03-01T00:00:00Z' }]);
     const needing = getCampaignsNeedingSync([

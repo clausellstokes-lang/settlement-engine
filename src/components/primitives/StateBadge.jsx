@@ -16,7 +16,7 @@ import {
   Edit3, BookMarked, AlertTriangle, Hourglass,
   Sparkles, Box, Lock,
 } from 'lucide-react';
-import { COPY } from '../../copy/strings.js';
+import { tx } from '../../copy/index.js';
 
 const KINDS = {
   draft:         { bg: '#f3ead8',                 fg: '#6a4a1c', border: '#c8a96a',                 Icon: Edit3 },
@@ -42,8 +42,8 @@ export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
   const dim = size === 'sm'
     ? { fs: 9,  py: 2, px: 6, ic: 9  }
     : { fs: 11, py: 3, px: 8, ic: 11 };
-  const label = COPY.state.badges[kind] || kind;
-  const aria = tooltip || COPY.state.tooltips[kind] || `${label} state`;
+  const label = tx('state.badges')?.[kind] || kind;
+  const aria = tooltip || tx('state.tooltips')?.[kind] || `${label} state`;
   return (
     <span
       role="status"

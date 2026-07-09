@@ -15,7 +15,7 @@ import {
   isOrderedStability,
   formatStability,
   normalizePlotHook,
-  runAiLayer,
+  runTemplateNarrative,
 } from '../../src/generators/aiLayer.js';
 import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
 
@@ -106,13 +106,13 @@ describe('stability label handling (no more "Tense (external threat)/100")', () 
   });
 
   test('power note: a Stable theocracy reads procedural, a Tense fixture reads contested', async () => {
-    const stable = await runAiLayer(baseSettlement({
+    const stable = await runTemplateNarrative(baseSettlement({
       powerStructure: { stability: 'Stable (theocratic governance)', factions: [] },
     }));
     expect(stable.narrativeNotes.power).toContain("Stability of 'Stable (theocratic governance)'");
     expect(stable.narrativeNotes.power).toContain('recognizable and procedural');
 
-    const tense = await runAiLayer(baseSettlement({
+    const tense = await runTemplateNarrative(baseSettlement({
       powerStructure: { stability: 'Tense (external threat)', factions: [] },
     }));
     expect(tense.narrativeNotes.power).toContain("Stability of 'Tense (external threat)'");

@@ -30,7 +30,7 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 vi.mock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false }));
-vi.mock('../../src/generators/aiLayer', () => ({ runAiLayer: vi.fn() }));
+vi.mock('../../src/generators/aiLayer', () => ({ runTemplateNarrative: vi.fn() }));
 // The default landing tab — not under test; stub so the suite doesn't depend
 // on OverviewTab's data needs.
 vi.mock('../../src/components/new/tabs/OverviewTab', () => ({

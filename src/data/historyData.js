@@ -1,8 +1,18 @@
-// historyData.js — History event templates
+// historyData.js — Settlement history + power-role tables.
 // Extracted from economicGenerator.js where they were misplaced.
-// Used by historyGenerator.js for settlement history generation.
+//
+// This file holds two unrelated datasets:
+//   1. POWER_ROLES_BY_CATEGORY — the catalog of notable power-holder roles
+//      (mayor, high priest, guild master, crime lord, …) keyed by domain,
+//      tier/institution-gated by economy/upgradeOpportunities.js.
+//   2. The genuine history-generation data (AGE_BY_TIER, HISTORICAL_EVENTS_DATA,
+//      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
-export const HISTORY_EVENTS = {
+// Notable power-holder roles by domain (government, religious, noble, crafts,
+// military, economy, criminal, magic, other). Each entry describes a role that
+// can hold influence in a settlement and the conditions under which it appears.
+// Consumed by getUpgradeOpportunities to surface tier-appropriate roles.
+export const POWER_ROLES_BY_CATEGORY = {
   government: [
     {
       role: "Mayor",
