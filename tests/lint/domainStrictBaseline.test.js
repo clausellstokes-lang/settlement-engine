@@ -53,8 +53,16 @@ describe('domain strict-typecheck ratchet (A+ domain.7)', () => {
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     expect(ci, 'ci.yml must run the strict ratchet').toContain('typecheck:domain:strict');
     // Deploy must be gated behind the full green gate (no green, no deploy).
+    // Subset assertion, not an exact list: ADDING gates (e.g. coverage-floors)
+    // strengthens the deploy gate and must never fail this pin; only REMOVING
+    // one of the required three should.
     expect(ci).toMatch(/deploy:/);
-    expect(ci).toMatch(/needs:\s*\[check, e2e, deno-tests\]/);
+    const needs = ci.match(/deploy:[\s\S]*?needs:\s*\[([^\]]+)\]/);
+    expect(needs, 'deploy job must declare needs').toBeTruthy();
+    const gates = needs[1].split(',').map((s) => s.trim());
+    for (const required of ['check', 'e2e', 'deno-tests']) {
+      expect(gates, `deploy must be gated on ${required}`).toContain(required);
+    }
   });
 
   test('the committed strict-error ceiling never rises (ratchet is monotone-down)', () => {
