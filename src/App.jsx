@@ -29,6 +29,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, s
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
+import { ResearchDisclosureNotice } from './components/PrivacySettings.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
 
@@ -429,6 +430,10 @@ export default function App() {
   return (
     <>
       <CampaignSyncBanner />
+      {/* Research-consent first-run disclosure (opt-out model honesty surface).
+          Self-gates: renders nothing under DNT, when research is off, or once
+          seen/dismissed — so this mounts unconditionally. */}
+      <ResearchDisclosureNotice />
       <div
         className={`parchment-bg page-bg${pageBg.isFlow ? ' is-flow' : ''}`}
         style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}

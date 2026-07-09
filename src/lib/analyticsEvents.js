@@ -29,8 +29,12 @@ export { EDIT_KINDS };
  *  neighbour_linked + regional_graph_snapshot, enriched regional_impact /
  *  channel-status props, NPC distributions in the structural fingerprint.
  *  rev 4: regional_propagation_applied (the cross-settlement ripple moment).
- *  rev 5: gallery_imported (a shared map / map-with-campaign cloned into a library). */
-export const EVENTS_REV = 5;
+ *  rev 5: gallery_imported (a shared map / map-with-campaign cloned into a library).
+ *  rev 6: the generation-id SPINE — generation_milestone (one event, five waypoints:
+ *  generate/save/canonize/export/narrate, each carrying a pseudonymous generation_id
+ *  + a coarse structural fingerprint) and event_edit_applied (the revealed-preference
+ *  signal for which in-world event types DMs actually apply). */
+export const EVENTS_REV = 6;
 
 export const EVENTS = Object.freeze({
   // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
@@ -98,6 +102,11 @@ export const EVENTS = Object.freeze({
   WIZARD_STEP_VIEWED:             'wizard_step_viewed',
   WIZARD_ABANDONED:               'wizard_abandoned',
   REGENERATION_TRIGGERED:         'regeneration_triggered',
+  // The generation-id spine — one event, fired at every lifecycle waypoint
+  // (generate / save / canonize / export / narrate) carrying the SAME
+  // pseudonymous generation_id + a coarse structural fingerprint (bands/enums/
+  // coherence booleans). Lets analysis reconstruct a generation's whole journey.
+  GENERATION_MILESTONE:           'generation_milestone',
 
   // ── v2: dossier reading ────────────────────────────────────────────────
   DOSSIER_TAB_VIEWED:             'dossier_tab_viewed',
@@ -115,6 +124,9 @@ export const EVENTS = Object.freeze({
   NARRATIVE_DRIFT_MODAL_SHOWN:    'narrative_drift_modal_shown',
   NARRATIVE_DRIFT_DECISION:       'narrative_drift_decision',
   VERSION_RESTORED:               'version_restored',
+  // Revealed preference: which in-world event TYPE a DM actually applied
+  // (fired at the applyEvent commit; carries the event-type enum only).
+  EVENT_EDIT_APPLIED:             'event_edit_applied',
 
   // ── v2: ai ─────────────────────────────────────────────────────────────
   AI_GENERATION_STARTED:          'ai_generation_started',

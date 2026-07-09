@@ -206,6 +206,10 @@ function buildAiDataBlob(existing, patch) {
       : (prev.narrativeSourceFingerprint || null),
     chronicle:            Array.isArray(prev.chronicle)  ? prev.chronicle  : [],
     pinnedNpcs:           Array.isArray(prev.pinnedNpcs) ? prev.pinnedNpcs : [],
+    // Wave E1 — event-keyed narrative snapshots (canon-history preservation).
+    // Written by settlementSlice.applyEvent; preserved verbatim through every
+    // narrative/daily-life persist so the prose lineage isn't dropped on regen.
+    eventNarrativeSnapshots: Array.isArray(prev.eventNarrativeSnapshots) ? prev.eventNarrativeSnapshots : [],
     dossierNotes:         patch.dossierNotes !== undefined
       ? patch.dossierNotes
       : (prev.dossierNotes && typeof prev.dossierNotes === 'object' ? prev.dossierNotes : null),
@@ -617,6 +621,12 @@ export const createAiSlice = (set, get) => ({
         settlementUuid: saveId,
         save: get().savedSettlements.find(s => s.id === saveId) || null,
       });
+      // Wave E1 — 'narrate' milestone on the generation-id spine (fire-and-forget).
+      import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
+        recordGenerationMilestone('narrate', settlement, {
+          generationId: get().generationId, seed: get().lastSeed, stampIso: get().generatedAt,
+        });
+      }).catch(() => {});
 
       // Persist the refined narrative + mode flip to the saved settlement.
       // Generation succeeded — don't let a persist error lose what the user just paid for.

@@ -3,9 +3,26 @@
  *
  * Tiers (doc §3):
  *   essential — product telemetry. Default ON unless DNT or explicit opt-out.
- *   research  — full structural fingerprints + research-class events. Default OFF,
- *               explicit opt-in only.
+ *   research  — full structural fingerprints + research-class events. Default now
+ *               ON unless DNT (owner-ratified OPT-OUT, consent model v2). Anonymous
+ *               structure only — never names/prose/secrets.
  *   ai_prose  — reserved; gates nothing in v1. Named so the UI doesn't churn later.
+ *
+ * ── Consent model v2 (the research opt-out flip) ─────────────────────────────
+ * `research` default flipped false → !dntEnabled(). CONSENT_KEY is DELIBERATELY
+ * NOT bumped: bumping the storage key would discard every stored record and
+ * silently re-opt-in users who had explicitly opted out — the opposite of what a
+ * flip must preserve. Instead the meaning changed under the SAME key, and prior
+ * explicit choices are honored via the `updatedAt` provenance:
+ *   - a stored record with updatedAt > 0  ⇒ the user opened the consent UI and
+ *     set their preferences ⇒ honor the stored flags VERBATIM (their false stays
+ *     false; their true stays true).
+ *   - absence, or updatedAt === 0         ⇒ no user choice recorded ⇒ apply the
+ *     new defaults (research ON unless DNT).
+ * The updatedAt distinction is only real if NOTHING writes a record without user
+ * action. Verified: the sole `setConsent` caller is PrivacySettings (a user
+ * toggle); no boot/auto path writes consent. `CONSENT_MODEL_VERSION` is stamped
+ * on every research capture so a payload's consent basis is auditable.
  *
  * Dependency-free by design (analytics.js imports this; this must not import
  * analytics, or we'd create a cycle). The CONSENT_UPDATED event is fired by the
@@ -16,7 +33,13 @@
  */
 
 export const CONSENT_KEY = 'sf_consent_v1';
+/** Consent-model revision. v2 = the research opt-out flip. Stamped on research captures. */
+export const CONSENT_MODEL_VERSION = 2;
 export const CONSENT_TIERS = Object.freeze(['essential', 'research', 'ai_prose']);
+
+/** First-run research disclosure flag — the "you're contributing anonymous
+ *  structure; here's the off switch" notice is shown at most once, then dismissed. */
+export const RESEARCH_DISCLOSURE_KEY = 'sf_research_disclosed_v1';
 
 /** DNT check — honored as a hard opt-out of ALL telemetry, including essential. */
 export function dntEnabled() {
@@ -29,8 +52,10 @@ export function dntEnabled() {
 }
 
 function defaults() {
-  // essential defaults ON unless DNT; research/ai_prose are opt-in.
-  return { essential: !dntEnabled(), research: false, ai_prose: false, updatedAt: 0 };
+  // Consent model v2: essential AND research default ON unless DNT (research is now
+  // an OPT-OUT). ai_prose stays opt-in (reserved). updatedAt 0 = "no user choice yet".
+  const on = !dntEnabled();
+  return { essential: on, research: on, ai_prose: false, updatedAt: 0 };
 }
 
 function readRaw() {
@@ -49,7 +74,12 @@ function readRaw() {
 export function getConsent() {
   const base = defaults();
   const stored = readRaw();
-  const merged = stored && typeof stored === 'object'
+  // Explicit-choice provenance (model v2): only a user-touched record
+  // (updatedAt > 0) overrides the defaults. A stored record with updatedAt 0
+  // (there is no writer that produces one today) is treated as untouched, so the
+  // new opt-out default applies rather than a phantom "false" the user never set.
+  const touched = stored && typeof stored === 'object' && (Number(stored.updatedAt) || 0) > 0;
+  const merged = touched
     ? {
       essential: stored.essential !== false,
       research: stored.research === true,
@@ -57,7 +87,7 @@ export function getConsent() {
       updatedAt: Number(stored.updatedAt) || 0,
     }
     : base;
-  if (dntEnabled()) merged.essential = false; // DNT wins, always
+  if (dntEnabled()) { merged.essential = false; merged.research = false; } // DNT is a hard override of ALL telemetry
   return merged;
 }
 
@@ -85,4 +115,27 @@ export function isClassAllowed(eventClass, consent = getConsent()) {
   if (eventClass === 'research') return consent.research === true;
   if (eventClass === 'ai_prose') return consent.ai_prose === true;
   return consent.essential === true; // 'essential' (default)
+}
+
+// ── First-run research disclosure (the opt-out's honesty surface) ────────────
+/**
+ * Should the first-run research disclosure be shown? True only when research
+ * capture would actually fire under the CURRENT (default or chosen) consent —
+ * i.e. research is on, DNT is off — AND the user has not yet seen/dismissed the
+ * notice. Because research now defaults ON, this is what makes the opt-out
+ * honest: the user is told, once, before any structural data leaves.
+ */
+export function researchDisclosureNeeded(consent = getConsent()) {
+  if (dntEnabled() || consent.research !== true) return false;
+  try {
+    if (typeof localStorage === 'undefined') return true;
+    return localStorage.getItem(RESEARCH_DISCLOSURE_KEY) !== '1';
+  } catch { return false; }
+}
+
+/** Mark the first-run research disclosure as seen (idempotent; never throws). */
+export function markResearchDisclosed() {
+  try {
+    if (typeof localStorage !== 'undefined') localStorage.setItem(RESEARCH_DISCLOSURE_KEY, '1');
+  } catch { /* storage unavailable — the notice may reappear; harmless */ }
 }

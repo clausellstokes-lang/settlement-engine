@@ -58,6 +58,7 @@ Six of these gain **extended props** (non-breaking — additive only); see §3 E
 | `WIZARD_STEP_VIEWED` | `wizard_step_viewed` | essential | `GenerateWizard.jsx` step transition (`wizardStep` effect; step ids `config\|institutions\|services\|trade`, lines 79–94) | `{ step_id, step_index, mode, direction:'next'\|'back' }` | where the advanced wizard leaks |
 | `WIZARD_ABANDONED` | `wizard_abandoned` | essential | `GenerateWizard.jsx` unmount/pagehide with no generation this wizard session | `{ last_step_id, steps_visited_count, dwell_ms_band }` | wizard drop-off |
 | `REGENERATION_TRIGGERED` | `regeneration_triggered` | essential | re-roll path (settlementSlice regenerate; `src/domain/regenerationMode.js` consumers) | `{ regen_mode, config_changed, changed_config_fields:['culture',…], generation_index_this_session }` | do users tweak config or re-roll blindly |
+| `GENERATION_MILESTONE` | `generation_milestone` | essential | **the generation-id SPINE** (`src/lib/generationTelemetry.js`), fired at five waypoints: `generate` (settlementSlice generate), `save` (saveMoments chokepoint), `canonize` (settlementSlice.canonize), `export` (settlementSlice.markExported), `narrate` (aiSlice.requestNarrative success) | `{ generation_id, milestone, spine_version, tier, terrain_class, prosperity, stress_types, hook_count_band, chain_count_band, has_factions, has_conflicts, has_stressors, has_hooks, has_neighbours, has_supply_chains }` — `generation_id` is a pseudonymous, seed+stamp-derived id (NEVER on the settlement object); fingerprint is bands/enums/booleans ONLY | reconstruct a single generation's whole journey (generate→save→…→narrate); powers reroll-by-cell + abandonment-by-config (server-derived over `generation_id`) |
 
 ## 2. `dossier_reading` namespace
 
@@ -104,6 +105,7 @@ resources → resource category id; `rename-npc` → npc role category; `rename-
 | `NARRATIVE_DRIFT_MODAL_SHOWN` | `narrative_drift_modal_shown` | essential | `src/components/NarrativeDriftModal.jsx` mount | `{ change_class:'cosmetic'\|'structural'\|'seismic' (classifyChange), edits_since_narrative_count }` | how often edits invalidate AI prose |
 | `NARRATIVE_DRIFT_DECISION` | `narrative_drift_decision` | essential | modal buttons | `{ choice:'regenerate'\|'revert'\|'dismiss', change_class }` | regenerate-vs-revert economics |
 | `VERSION_RESTORED` | `version_restored` | essential | versionHistory restore handler (migration 016) | `{ versions_back, snapshot_kind, canon_phase }` | is version history a safety net or unused |
+| `EVENT_EDIT_APPLIED` | `event_edit_applied` | essential | `settlementSlice.applyEvent` commit (reads the C1 ActionResult's `before.eventType`) | `{ event_type }` (in-world event TYPE enum only) | revealed preference: which in-world events DMs actually apply |
 
 **Plus** (research plane, not via `track()`): on commit, for `research`-consented users, each
 committed edit also emits a typed `edit_events` row through `researchCapture.js` —
@@ -203,8 +205,18 @@ statuses: `queued | applied | ignored | expired | resolved`.
 
 | Constant | Event | Class | Trigger | Props |
 |---|---|---|---|---|
-| `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable |
+| `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, consent_version, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable; `consent_version` stamps the consent-model basis (see below) |
 | `CONSENT_UPDATED` | `consent_updated` | essential | `setConsent()` in `src/lib/consent.js` | `{ research:'granted'\|'denied'\|'unset', ai_prose:'granted'\|'denied'\|'unset', surface:'account'\|'opt_in_card'\|'banner' }` |
+
+> **Consent model v2 (research opt-out).** `research` flipped from opt-IN (default
+> false) to opt-OUT (default `!dntEnabled()`). CONSENT_KEY is preserved: prior
+> explicit choices are honored via `updatedAt` provenance (updatedAt>0 ⇒ user
+> touched it ⇒ honor verbatim; absence/0 ⇒ new default). Every research capture
+> carries `CONSENT_MODEL_VERSION` (=2) so the consent basis is auditable. A
+> first-run `ResearchDisclosureNotice` (surface `opt_in_card`) tells the user,
+> once, before structural data leaves — DNT is a hard override of all telemetry.
+> Server side: migration 051 sets `profiles.telemetry_consent` research default to
+> true for NEW ROWS ONLY (existing rows are never mass-updated).
 
 ---
 

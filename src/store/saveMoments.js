@@ -54,6 +54,9 @@ export function saveMomentReason(postSaveActiveCount, maxSaves) {
  * @param {number}   [opts.maxSaves]            the user's save cap
  * @param {string}   [opts.tier]                auth tier (premium/dev/admin skip the moment)
  * @param {(content:Object)=>void} [opts.openPricingMoment] store-bound opener
+ * @param {string}   [opts.generationId]        the generation-id spine id (store-held)
+ * @param {string|number} [opts.seed]           spine fallback derivation input
+ * @param {string}   [opts.stampIso]            spine fallback derivation input (generatedAt)
  * @returns {Promise<{fired:boolean, reason:('first_save'|'third_save'|null), deduped?:boolean}>}
  */
 export async function recordSaveMoment({
@@ -63,6 +66,9 @@ export async function recordSaveMoment({
   maxSaves,
   tier,
   openPricingMoment,
+  generationId,
+  seed,
+  stampIso,
 }) {
   if (saveId == null) return { fired: false, reason: null };
   const key = String(saveId);
@@ -89,6 +95,13 @@ export async function recordSaveMoment({
       settlementUuid: String(saveId),
     });
   }).catch(() => { /* research capture is best-effort */ });
+
+  // Wave E1 — 'save' milestone on the generation-id spine (fire-and-forget). This
+  // is the save chokepoint, so the spine reaches library saves the dead store
+  // action never fired for (F34). generationId is threaded from the store read.
+  import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
+    recordGenerationMilestone('save', settlement, { generationId, seed, stampIso });
+  }).catch(() => { /* spine is best-effort */ });
 
   return { fired: true, reason };
 }
@@ -126,6 +139,10 @@ export async function recordSaveMomentForActiveSave({ saveId, settlement, store 
       maxSaves,
       tier,
       openPricingMoment,
+      // Generation-id spine: thread the store-held id (+ fallbacks for a reloaded save).
+      generationId: st.generationId,
+      seed: st.lastSeed,
+      stampIso: st.generatedAt,
     });
   } catch {
     return { fired: false, reason: null };

@@ -135,7 +135,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (50) — schema + RLS policies + credit ledger + gallery +
+- **migrations/** (51) — schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
   votes, comments, privacy sanitization, reports, moderation (019-022), all via

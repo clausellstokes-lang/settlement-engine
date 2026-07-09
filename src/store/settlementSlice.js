@@ -108,6 +108,36 @@ function _dimsSummary(ss) {
   };
 }
 
+// ── Event-keyed narrative snapshots (Wave E1 · canon-history preservation) ──
+// As canon events accrue, the AI narrative that described each canon STATE is
+// silently overwritten — the prose history of the settlement is lost. This
+// stamps the narrative that was valid BEFORE an event, keyed by that event's id,
+// into a bounded archive so the lineage survives. Home: the save's `aiData`
+// archive (the least-invasive DURABLE home — already persisted, semantically the
+// AI layer, and NOT the golden settlement object). Never balloons: the narrative
+// is cloned ONCE per event and the archive is FIFO-capped.
+export const MAX_EVENT_NARRATIVE_SNAPSHOTS = 10;
+
+/**
+ * Return the next aiData with an event-keyed narrative snapshot appended (FIFO,
+ * capped, deduped by eventId). Pure — clones the narrative once; leaves aiData
+ * untouched when there is nothing to snapshot.
+ * @param {Object|null} aiData          the save's existing aiData blob
+ * @param {Object} [entry]
+ * @param {string} [entry.eventId]      the keying event id (no-op if absent)
+ * @param {Object} [entry.aiSettlement] the narrative valid at this event (no-op if absent)
+ * @param {string} [entry.ts]
+ */
+export function appendEventNarrativeSnapshot(aiData, { eventId, aiSettlement, ts } = {}) {
+  if (!eventId || !aiSettlement) return aiData;
+  const prev = (aiData && typeof aiData === 'object') ? aiData : {};
+  const existing = Array.isArray(prev.eventNarrativeSnapshots) ? prev.eventNarrativeSnapshots : [];
+  // Dedupe: a re-applied event id replaces its prior snapshot rather than doubling.
+  const kept = existing.filter(s => s?.eventId !== eventId);
+  kept.push({ eventId, ts: ts || new Date().toISOString(), aiSettlement: cloneJson(aiSettlement) });
+  return { ...prev, eventNarrativeSnapshots: kept.slice(-MAX_EVENT_NARRATIVE_SNAPSHOTS) };
+}
+
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
 // write purely-derived keys onto it (resolveStress → stressType/stressTypes/
@@ -232,6 +262,12 @@ export const createSettlementSlice = (set, get) => ({
   savedSettlementsLoaded: false, // true once hydrated from savesService
   activeSaveId:  null,   // save id backing the currently-open detail view
   lastSeed:      null,   // seed from last generation (for replay/determinism)
+  // Wave E1 — the generation-id SPINE. A pseudonymous, per-generation telemetry
+  // identity threaded to lifecycle milestone events (generate/save/canonize/
+  // export/narrate). NOT sim state and NEVER written onto the golden settlement:
+  // it lives here and is derived from seed+generatedAt so it recomputes across a
+  // reload. Reset on hydrate so a loaded save can't inherit a prior id.
+  generationId:  null,
   lastCtx:       null,   // full pipeline context from last run (config recovery for NPC/history regen + pipeline-rail diagnostics)
   // History of pipeline steps run for the currently-displayed settlement.
   // Powers the "How this was simulated" rail. Each entry:
@@ -848,6 +884,16 @@ export const createSettlementSlice = (set, get) => ({
       }
     }).catch(() => {});
 
+    // Wave E1 — the generation-id spine. Mint the pseudonymous id (stable across
+    // reload via seed+stamp), stash it in the store field (NOT on the settlement),
+    // and fire the 'generate' milestone. Lazy + fire-and-forget so it never touches
+    // cold start or the return value.
+    import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone, deriveGenerationId }) => {
+      const genId = deriveGenerationId(seed, now);
+      set(s => { s.generationId = genId; });
+      recordGenerationMilestone('generate', reconciled, { generationId: genId });
+    }).catch(() => {});
+
     return reconciled;
   },
 
@@ -1163,6 +1209,16 @@ export const createSettlementSlice = (set, get) => ({
         captureFingerprint('canonized', after.settlement, { save, settlementUuid: activeSaveId });
       }).catch(() => {});
     }
+    // Wave E1 — 'canonize' milestone on the generation-id spine. generationId is
+    // held in-store (reset on hydrate), so re-derive from the save's seed+stamp
+    // when a reloaded save has no live id.
+    if (after.settlement) {
+      import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
+        recordGenerationMilestone('canonize', after.settlement, {
+          generationId: after.generationId, seed: after.lastSeed, stampIso: after.generatedAt,
+        });
+      }).catch(() => {});
+    }
   },
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
@@ -1213,6 +1269,15 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.lastExportAt = new Date().toISOString();
     });
+    // Wave E1 — 'export' milestone on the generation-id spine (fire-and-forget).
+    const exp = get();
+    if (exp.settlement) {
+      import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
+        recordGenerationMilestone('export', exp.settlement, {
+          generationId: exp.generationId, seed: exp.lastSeed, stampIso: exp.generatedAt,
+        });
+      }).catch(() => {});
+    }
     if (wasFirstExport) {
       // P103 / X-2 — first_pdf_export pricing moment.
       import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
@@ -1356,10 +1421,22 @@ export const createSettlementSlice = (set, get) => ({
     let afterCampaignState = null;
     if (activeSaveId && afterState.settlement) {
       afterCampaignState = pickleCampaignState(afterState);
+      // Wave E1 — event-keyed narrative snapshot. When the active save carries an
+      // AI narrative, preserve the prose that described the PRE-event canon state,
+      // keyed by this event's id, so the narrative lineage isn't lost as events
+      // accrue. Clones once, FIFO-capped; stored in the durable aiData archive.
+      const eventId = event?.id || logEntry?.event?.id;
+      const priorNarrative = beforeSave?.aiData?.aiSettlement;
+      const nextAiData = (priorNarrative && eventId)
+        ? appendEventNarrativeSnapshot(beforeSave.aiData, {
+            eventId: String(eventId), aiSettlement: priorNarrative, ts: afterState.editedAt,
+          })
+        : null;
       const savePartial = {
         settlement: cloneJson(afterState.settlement),
         campaignState: afterCampaignState,
         timestamp: afterState.editedAt,
+        ...(nextAiData ? { aiData: nextAiData } : {}),
       };
       if (typeof afterState.updateSavedSettlement === 'function') {
         afterState.updateSavedSettlement(activeSaveId, savePartial);
@@ -1367,6 +1444,7 @@ export const createSettlementSlice = (set, get) => ({
       persistSaveUpdate(activeSaveId, {
         settlement: savePartial.settlement,
         campaignState: savePartial.campaignState,
+        ...(nextAiData ? { aiData: nextAiData } : {}),
       });
     }
 
@@ -1374,6 +1452,14 @@ export const createSettlementSlice = (set, get) => ({
     // graph, crisis-lifecycle twin, party-impact pipeline. See the helper for
     // the per-consumer rationale; all canon-only and best-effort + guarded.
     rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
+
+    // Wave E1 — revealed preference: WHICH in-world event type DMs actually apply
+    // (the C1 envelope's before.eventType, enum only). Fire-and-forget.
+    if (event?.type) {
+      import('../lib/analytics.js').then(({ track, EVENTS }) => {
+        track(EVENTS.EVENT_EDIT_APPLIED, { event_type: event.type });
+      }).catch(() => {});
+    }
 
     // Track K §C2 — ActionResult envelope. `receipts` carries an 'event'
     // Receipt derived from the eventLog entry this apply produced (the event is
@@ -1651,6 +1737,10 @@ export const createSettlementSlice = (set, get) => ({
     state.pendingEditsClock    = 0;
     state.pendingSuccession    = null;
     state.draftVersionHistory  = [];
+    // The generation-id spine is per-generation identity: clear it so a loaded
+    // save never inherits the prior generation's id. Milestones on a reloaded
+    // save re-derive a stable id from the save's seed + generatedAt.
+    state.generationId         = null;
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),
