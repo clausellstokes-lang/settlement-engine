@@ -45,11 +45,20 @@ lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
 hooks/ copy/ design/ config/   Cross-cutting: tokens, copy strings, pricing.
 ```
 
-**Three-layer rule (respected): `data → generators → presentation`.** Generators
-import data and never import React/Zustand, so the whole engine runs headlessly
-(tests, scripts, server). The one edge that wires live custom-content into the
-generator is `setCustomContentSource(...)` in `store/index.js` — kept there on
-purpose so the generator stays store-free.
+**The real layer map: `data → { generators, domain } → store → components/pdf`.**
+`generators` and `domain` are mutually-dependent PEER engine layers by design —
+generators reuse domain vocabulary (trace, magicFilter, goodsCatalog,
+customContentSchema, factionArchetypes) and domain reuses engine derivations
+(structuralValidator, defenseGenerator, computeActiveChains, createPRNG /
+rngContext are shared determinism primitives). The ONE invariant that is
+enforced, and the one that matters: **nothing under `src/data`,
+`src/generators`, or `src/domain` imports React, Zustand, or the store** — that
+is what keeps the whole engine headless (tests, scripts, server). Dependency
+cycles are pinned to a frozen 4-cycle baseline that may only shrink.
+<!-- @enforced-by tests/architecture/layerBoundaries.test.js -->
+The one edge that wires live custom-content into the generator is
+`setCustomContentSource(...)` in `store/index.js` — kept there on purpose so
+the generator stays store-free.
 
 ---
 
