@@ -272,12 +272,19 @@ function restoreSnapshottedRecords(s, snapshot) {
  * @returns {ActiveConditionShape}
  */
 function unEase(condition, strippedCauses) {
-  const restored = /** @type {ActiveConditionShape} */ (/** @type {*} */ (deriveActiveCondition({
+  const restored = deriveActiveCondition({
     ...condition,
     status: undefined,
     duration: { ...(condition.duration || {}), expiresAtTicks: undefined },
     causes: strippedCauses,
-  })));
+  });
+  // deriveActiveCondition only nulls on a falsy/non-object input, which the
+  // object literal above can never be — so this branch is unreachable in
+  // practice. Stay tolerant rather than throw on the impossible: keep the
+  // condition with its event receipts stripped and skip the un-ease transform.
+  if (!restored) {
+    return /** @type {ActiveConditionShape} */ ({ ...condition, causes: strippedCauses });
+  }
   // Never IMMORTALIZE via undo: a template-less archetype derives a null
   // cap — keep the wind-down's clamped cap instead.
   if (restored.duration.expiresAtTicks === null

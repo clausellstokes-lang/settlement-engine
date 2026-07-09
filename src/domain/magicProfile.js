@@ -339,7 +339,7 @@ export function deriveMagicProfile(settlement) {
     };
   }
 
-  const profiles = /** @type {FactionProfile[]} */ (deriveAllFactionProfiles(/** @type {any} */ (settlement)));
+  const profiles = deriveAllFactionProfiles(/** @type {any} */ (settlement));
   const causal = deriveCausalState(/** @type {any} */ (settlement));
   const capacity = deriveCapacityProfile('magical', /** @type {any} */ (settlement));
   /** @type {MagicContributor[]} */

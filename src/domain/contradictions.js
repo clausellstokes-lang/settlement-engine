@@ -337,11 +337,6 @@ function detectThreatWithoutResponse(settlement, threats, capacities) {
  */
 export function detectContradictions(settlement) {
   if (!settlement) return [];
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles maps deriveFactionProfile over the
-  // roster, which yields null only for falsy roster entries; a real roster
-  // never contains them (see bugs note: a falsy entry would crash the
-  // p.power read below regardless of typing).
   const profiles   = deriveAllFactionProfiles(settlement);
   const causal     = deriveCausalState(settlement);
   const threats    = deriveAllThreatProfiles(settlement);

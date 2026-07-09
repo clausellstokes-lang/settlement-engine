@@ -277,7 +277,7 @@ export function recalculateFactionRelationships(settlement, event, options = {})
   const impacts = /** @type {Record<string, Record<string, DeltaSpec[]>>} */ (ARCHETYPE_IMPACTS)[archetype];
   if (!impacts) return [];
 
-  const profiles = /** @type {import('./factionProfile.js').FactionProfile[]} */ (deriveAllFactionProfiles(settlement));
+  const profiles = deriveAllFactionProfiles(settlement);
   if (profiles.length === 0) return [];
 
   const out = [];

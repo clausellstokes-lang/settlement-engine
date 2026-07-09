@@ -168,6 +168,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string[]} [tags]    'civic' | 'security' | 'law' | 'religious' | 'economic' | etc.
  * @property {string}   [desc]
  * @property {Object}   [status]  'active' | 'impaired' | 'collapsed'
+ * @property {Array<{ type?: string, [key: string]: unknown }>} [impairments]  Impairment records written by domain/corruption.js (InstitutionLike); also present on older saves that carried them inline.
  */
 
 /**
@@ -378,6 +379,10 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string|null}   factionLink          Stable id of the linked faction.
  * @property {string|null}   publicReputation     What the town knows of them.
  * @property {string|null}   privateAgenda        The NPC's long-term goal.
+ * @property {boolean|null}  corrupt              Tri-state: false is a generation verdict, null a legacy save the corruption pass never judged.
+ * @property {string|null}   corruptionVector     How they are compromised (corruptionPass.js mirror).
+ * @property {number}        timesExposed         How many times their corruption has been surfaced.
+ * @property {boolean}       ousted               Whether they have been removed from their seat.
  * @property {string[]}      leverage             What they control.
  * @property {string[]}      vulnerabilities      What hangs over their head.
  * @property {string[]}      offerToPlayers       Hooks the players can engage with.

@@ -190,7 +190,7 @@ export function reapplyEventConditions(settlement) {
   if (!Array.isArray(record) || record.length === 0) return settlement;
   let next = settlement;
   for (const entry of record) {
-    const condition = /** @type {Record<string, any>} */ (deriveActiveCondition(entry));
+    const condition = deriveActiveCondition(entry);
     if (!condition) continue;
     for (const cond of next.activeConditions || []) {
       if (cond?.archetype === condition.archetype

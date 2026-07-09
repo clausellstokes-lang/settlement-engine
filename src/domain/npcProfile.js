@@ -50,10 +50,16 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
   nobility:   'government',
 });
 
-/** @param {any} category */
+/**
+ * @param {any} category
+ * @returns {import('./settlement.schema.js').FactionArchetype}
+ */
 function archetypeFromCategory(category) {
   if (!category) return 'other';
-  return CATEGORY_TO_ARCHETYPE[String(category).toLowerCase()] || 'other';
+  // Every CATEGORY_TO_ARCHETYPE value is a valid FactionArchetype; Object.freeze
+  // widens them to string, so narrow the dynamic-key lookup back to the union.
+  return /** @type {import('./settlement.schema.js').FactionArchetype} */ (
+    CATEGORY_TO_ARCHETYPE[String(category).toLowerCase()] || 'other');
 }
 
 // ── Per-archetype leverage / vulnerability templates ─────────────────────
@@ -368,7 +374,7 @@ function inferPrimaryRelationship(npc, settlement) {
  * @param {any} npc       The legacy NPC entry.
  * @param {any} [settlement] Optional context for institution-link +
  *                              relationship-triangle derivation.
- * @returns {Object|null}
+ * @returns {import('./settlement.schema.js').NpcProfile|null}
  */
 export function deriveNpcProfile(npc, settlement) {
   if (!npc || typeof npc !== 'object') return null;

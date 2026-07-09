@@ -67,7 +67,7 @@ import { healingLedger } from './healingLedger.js';
  * @typedef {import('./settlement.schema.js').CapacityContributor} CapacityContributor
  * @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition
  * @typedef {import('./settlement.schema.js').ThreatProfile} ThreatProfile
- * @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile
+ * @typedef {import('./factionProfile.js').FactionProfile} FactionProfile
  * @typedef {import('./settlement.schema.js').SupplyChainState} SupplyChainState
  * @typedef {import('./settlement.schema.js').StressorEntry} StressorEntry
  */
@@ -87,7 +87,8 @@ import { healingLedger } from './healingLedger.js';
  * @property {Array<{ name?: string }>} [institutions]
  * @property {{ magicLevel?: string, monsterThreat?: string, tradeRouteAccess?: string, magicExists?: boolean }} [config]
  * @property {StressorEntry[] | StressorEntry} [stressors]
- * @property {{ primaryExports?: unknown, exports?: unknown, activeChains?: import('./supplyChainState.js').LegacyChain[] }} [economicState]
+ * @property {{ primaryExports?: unknown, exports?: unknown, activeChains?: import('./supplyChainState.js').LegacyChain[], availableServices?: { healing?: string[] } }} [economicState]
+ * @property {{ healing?: string[] }} [availableServices]
  * @property {{ activeChains?: import('./supplyChainState.js').LegacyChain[] }} [economy]
  * @property {import('./supplyChainState.js').LegacyChain[]} [supplyChains]
  * @property {import('./defenseLedger.js').DefenseLedgerSource['defenseProfile']} [defenseProfile]
@@ -331,7 +332,7 @@ function deriveHealing(s, ctx) {
   // informal care (P3.3b Stage 4b) — so they rescue the harsh "absent" penalty rather than reading
   // as no healing at all. ~17% of generated settlements offer healing services without a
   // healer-named institution; they were being mis-read as having zero healing.
-  const heal = healingLedger(/** @type {any} */ (s));
+  const heal = healingLedger(s);
   const healers = heal.healerCount;
   if (healers >= 3) {
     supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
@@ -886,8 +887,6 @@ function finalizeCapacity(name, supply, demand, supplyContributors, demandContri
 function buildContext(settlement) {
   return {
     conditions: deriveAllActiveConditions(settlement),
-    // @ts-ignore -- deriveAllFactionProfiles is annotated Array<FactionProfile|null>; a null only
-    // appears for a falsy faction entry (corrupt save). Consumers here have always assumed no nulls.
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
     // @ts-ignore -- deriveAllThreatProfiles filter(Boolean)s its nulls at runtime; TS does not

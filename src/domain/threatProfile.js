@@ -300,8 +300,8 @@ function threatIdFor(type, source, label) {
  * @property {string[]=} beneficiaries
  * @property {string[]=} victims
  * @property {string[]=} affectedSystems
- * @property {Object=} neighbour     hostile-neighbour surface carrier
- * @property {Object=} condition     linked Phase 16 active condition
+ * @property {{ name?: string }=} neighbour            hostile-neighbour surface carrier
+ * @property {{ id?: string, label?: string }=} condition  linked Phase 16 active condition
  */
 
 /**

@@ -395,8 +395,6 @@ function deriveRulingAuthority(s) {
   }
 
   // Identify governing faction's power
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const governingName = s.powerStructure?.governingName || '';
   if (governingName && profiles.length) {
@@ -436,8 +434,6 @@ function deriveFactionPower(s) {
 
   // Healthy faction system = balance with a clear governing center.
   // We use the power-share spread among profiles.
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   if (profiles.length === 0) {
     return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
@@ -609,8 +605,6 @@ function deriveCriminalOpportunity(s) {
   }
 
   // Faction power: criminal factions
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number') {
@@ -641,8 +635,6 @@ function deriveReligiousAuthority(s) {
   /** @type {CausalContributor[]} */
   const contributors = [];
 
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const religious = profiles.find(p => p.archetype === 'religious');
   if (religious && typeof religious.power === 'number') {
@@ -746,8 +738,6 @@ function deriveMagicalStability(s) {
   else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, `Low magic investment limits arcane resilience.`); }
 
   // Arcane factions present?
-  /** @type {FactionProfile[]} */
-  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const arcane = profiles.find(p => p.archetype === 'arcane');
   if (arcane) {

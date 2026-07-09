@@ -102,7 +102,13 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   const relType = nr.relationshipType || 'neutral';
   const linkId = `link_${saveId}_${partnerSave.id}`;
-  const edge = /** @type {any} */ (canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave));
+  const edge = canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave);
+  // Invariant: canonicalEdgeForLink only returns null when a source/target id is
+  // missing. `saveId` is guarded non-empty above and `partnerSave.id` is a store
+  // primary key (every persisted save row carries one), so both endpoints are
+  // always present on this call and the edge is never null. Assert it rather
+  // than dereference null silently, should that invariant ever break upstream.
+  if (!edge) throw new Error(`buildNeighbourBackLink: canonical edge unexpectedly null for ${linkId}`);
   const roles = rolesForCanonicalEdge(edge, saveId, partnerSave.id);
   const definition = /** @type {any} */ ({ relationshipType: edge.relationshipType, from: edge.from, to: edge.to });
 

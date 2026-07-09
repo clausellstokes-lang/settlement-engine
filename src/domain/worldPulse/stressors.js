@@ -780,7 +780,7 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
  *
  * @param {any[]} stressors
  * @param {string} stressorId
- * @param {{ tick?: number, now?: string, reason?: string, emitResidual?: boolean }} [opts]
+ * @param {{ tick?: number, now?: string|null, reason?: string, emitResidual?: boolean }} [opts]
  */
 export function resolveStressorById(stressors = [], stressorId, opts = {}) {
   const { tick = 0, now = null, reason = 'Resolved by party action', emitResidual = true } = opts;
@@ -838,7 +838,7 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
  * @param {any[]} stressors
  * @param {string} stressorId
  * @param {number} delta  signed severity change
- * @param {{ now?: string }} [opts]
+ * @param {{ now?: string|null }} [opts]
  */
 export function adjustStressorSeverityById(stressors = [], stressorId, delta, opts = {}) {
   const { now = null } = opts;
@@ -972,7 +972,8 @@ function echoIndex(stressors = []) {
  * @param {any[]} stressors
  * @param {string} stressorId
  * @param {{ attackerSettlementId?: string|null, attackerLabel?: string|null }} attacker
- * @param {{ now?: string }} [opts]
+ * @param {{ now?: string|null }} [opts]
+ * @returns {{ stressors: any[], changed: any }}
  */
 export function setStressorAttacker(stressors = [], stressorId, attacker = {}, opts = {}) {
   const { now = null } = opts;

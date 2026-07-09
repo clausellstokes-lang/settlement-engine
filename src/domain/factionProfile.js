@@ -334,8 +334,15 @@ export function deriveFactionProfile(faction, settlement) {
  * Convenience: enrich every faction on a settlement into a structured
  * profile. Useful for the PipelineRail / PDF faction section that
  * wants to render the whole roster.
+ *
+ * Nullish roster rows (which `deriveFactionProfile` maps to null) are
+ * dropped, so the result is a dense `FactionProfile[]` — no consumer
+ * needs to null-guard elements. Consumers key on `profile.id`/`.name`,
+ * never on positional alignment with the raw faction list, so filtering
+ * is safe. On well-formed settlements the generator never emits nullish
+ * rows, so this is a no-op there.
  * @param {SettlementCtx|null|undefined} settlement
- * @returns {Array<FactionProfile|null>}
+ * @returns {FactionProfile[]}
  */
 export function deriveAllFactionProfiles(settlement) {
   if (!settlement) return [];
@@ -343,5 +350,11 @@ export function deriveAllFactionProfiles(settlement) {
                 || settlement.power?.factions
                 || settlement.factions
                 || [];
-  return factions.map(f => deriveFactionProfile(f, settlement));
+  /** @type {FactionProfile[]} */
+  const out = [];
+  for (const f of factions) {
+    const profile = deriveFactionProfile(f, settlement);
+    if (profile) out.push(profile);
+  }
+  return out;
 }

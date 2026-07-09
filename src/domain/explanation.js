@@ -296,8 +296,7 @@ function tracesAsDownstream(traces) {
 export function explainInstitution(settlement, institutionId) {
   if (!settlement || !institutionId) return null;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const inst = /** @type {(import('./settlement.schema.js').Institution & {impairments?: unknown[]})|undefined} */ (
-    institutions.find(i => i?.id === institutionId || `institution.${snakeCase(i?.name || '')}` === institutionId));
+  const inst = institutions.find(i => i?.id === institutionId || `institution.${snakeCase(i?.name || '')}` === institutionId);
   if (!inst) return emptyEnvelope('institution', institutionId);
 
   const label = inst.name || institutionId;
@@ -317,8 +316,7 @@ export function explainInstitution(settlement, institutionId) {
   }
 
   // Find factions that control this institution.
-  const profiles = /** @type {import('./factionProfile.js').FactionProfile[]} */ (
-    deriveAllFactionProfiles(settlement));
+  const profiles = deriveAllFactionProfiles(settlement);
   const controllers = profiles.filter(p => Array.isArray(p.controlsInstitutionIds)
     && p.controlsInstitutionIds.includes(institutionId));
   for (const p of controllers) {
@@ -427,8 +425,7 @@ export function explainFaction(settlement, factionId) {
     );
   }
   // Identify a plausible rival
-  const others = /** @type {import('./factionProfile.js').FactionProfile[]} */ (
-    deriveAllFactionProfiles(settlement)).filter(p => p.id !== profile.id);
+  const others = deriveAllFactionProfiles(settlement).filter(p => p.id !== profile.id);
   const rival = others.sort((a, b) => (b.power || 0) - (a.power || 0))[0];
   if (rival) {
     ifRemoved.consequences.push(`Most likely beneficiary: ${rival.name} (${rival.archetype}).`);
@@ -758,8 +755,7 @@ export function explainEscalationClock(settlement, clockId) {
  */
 export function explainHistoryBeat(settlement, beatKey) {
   if (!settlement || !beatKey) return null;
-  const beats = /** @type {Record<string, {key: string, label: string, text?: string, source: string, references?: Object}>} */ (
-    deriveHistoryBeats(settlement));
+  const beats = deriveHistoryBeats(settlement);
   const key = beatKey.startsWith('history.') ? beatKey.slice('history.'.length) : beatKey;
   const beat = beats[key];
   if (!beat) return emptyEnvelope('history_beat', beatKey);
@@ -1032,8 +1028,7 @@ export function explainCapacity(settlement, capacityRef) {
  */
 export function explainDistrict(settlement, districtId) {
   if (!settlement || !districtId) return null;
-  const all = /** @type {Array<NonNullable<ReturnType<typeof deriveAllDistricts>[number]>>} */ (
-    deriveAllDistricts(settlement));
+  const all = deriveAllDistricts(settlement);
   const district = all.find(d => d.id === districtId);
   if (!district) return emptyEnvelope('district', districtId);
 
@@ -1060,7 +1055,7 @@ export function explainDistrict(settlement, districtId) {
   }
 
   return envelope({
-    type: 'district', id: district.id, label: /** @type {string} */ (district.name),
+    type: 'district', id: district.id, label: district.name,
     causalReason: `${district.name} is a ${district.category} district — ${district.wealth}, ${district.safety}.`,
     causes,
     downstreamEffects,
@@ -1153,7 +1148,7 @@ export function entityCatalog(settlement) {
   }
 
   // Factions
-  for (const p of /** @type {Array<import('./factionProfile.js').FactionProfile>} */ (deriveAllFactionProfiles(settlement))) {
+  for (const p of deriveAllFactionProfiles(settlement)) {
     out.push({ type: 'faction', id: p.id, label: p.name });
   }
 
@@ -1205,7 +1200,7 @@ export function entityCatalog(settlement) {
   }
 
   // Districts (Phase 29)
-  for (const d of /** @type {Array<NonNullable<ReturnType<typeof deriveAllDistricts>[number]>>} */ (deriveAllDistricts(settlement))) {
+  for (const d of deriveAllDistricts(settlement)) {
     out.push({ type: 'district', id: d.id, label: d.name });
   }
 

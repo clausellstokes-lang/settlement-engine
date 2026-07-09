@@ -133,7 +133,7 @@ export function aggregateDistribution(settlements) {
     incr(out.prosperityBands, String(prosp));
 
     // Faction archetypes
-    const profs = /** @type {Array<import('./factionProfile.js').FactionProfile>} */ (deriveAllFactionProfiles(s));
+    const profs = deriveAllFactionProfiles(s);
     factSum += profs.length;
     for (const p of profs) incr(out.factionArchetypes, p.archetype || 'unknown');
 

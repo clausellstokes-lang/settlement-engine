@@ -314,11 +314,7 @@ function compareRootFacts(original, refined) {
 function compareHistoryBeats(original, refined) {
   /** @type {AiOverlayViolation[]} */
   const violations = [];
-  // deriveHistoryBeats is annotated `@returns {Object}` upstream; cast to an
-  // indexable record so the beat-key sweep type-checks. See crossFileNeeds.
-  /** @type {any} */
   const oBeats = deriveHistoryBeats(original);
-  /** @type {any} */
   const rBeats = deriveHistoryBeats(refined);
   for (const key of Object.keys(oBeats)) {
     if (oBeats[key] && !rBeats[key]) {

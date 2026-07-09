@@ -278,7 +278,7 @@ export function counterfactualCandidates(settlement) {
   }
 
   // Factions (Phase 9 ids)
-  for (const p of /** @type {any[]} */ (deriveAllFactionProfiles(settlement))) {
+  for (const p of deriveAllFactionProfiles(settlement)) {
     out.push({ type: 'faction', id: p.id, label: p.name });
   }
 

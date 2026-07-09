@@ -114,4 +114,30 @@ describe('buildNeighbourBackLink', () => {
     const linkId = first.settlement.neighbourNetwork.find(n => n.id === 'partner-9').linkId;
     c1.forEach(x => expect(x.linkId).toBe(linkId));
   });
+
+  // ── Wave B: canonical-edge invariant ──────────────────────────────────────
+  // canonicalEdgeForLink only returns null when a source/target id is missing.
+  // In the real save flow saveId is guarded non-empty and every partner save
+  // row carries a store primary key, so the edge is never null. These pin both
+  // sides of that invariant.
+  test('builds an edge with a defaulted (neutral) relationshipType without throwing', () => {
+    // No relationshipType on the link → relType defaults to 'neutral' at the
+    // canonicalEdgeForLink call. The invariant must hold: edge is non-null.
+    const entry = newEntry({ name: 'Eastgate', tier: 'town' });
+    let result;
+    expect(() => { result = buildNeighbourBackLink(entry, [partner]); }).not.toThrow();
+    expect(result).toBeTruthy();
+    const ownLink = result.settlement.neighbourNetwork.find(n => n.id === 'partner-1');
+    expect(ownLink.relationshipType).toBe('neutral');
+  });
+
+  test('throws a clear invariant error when the partner save carries no id anywhere', () => {
+    // Degenerate shape unreachable in production (every persisted save row has a
+    // primary key): the partner has neither a top-level id nor a settlement id,
+    // so canonicalEdgeForLink would return null. The invariant fires instead of
+    // dereferencing null.
+    const idlessPartner = { name: 'Eastgate', tier: 'town', settlement: { name: 'Eastgate', tier: 'town', neighbourNetwork: [] } };
+    const entry = newEntry({ name: 'Eastgate', tier: 'town', relationshipType: 'trade_partner' });
+    expect(() => buildNeighbourBackLink(entry, [idlessPartner])).toThrow(/canonical edge unexpectedly null/);
+  });
 });

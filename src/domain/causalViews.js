@@ -104,7 +104,7 @@ function viewFaction(settlement) {
   return {
     factions: profiles,
     summary: profiles.length
-      ? /** @type {import('./factionProfile.js').FactionProfile[]} */ (profiles).map(
+      ? profiles.map(
           p => `${p.name} (${p.archetype}, power ${p.power}).`)
       : ['No factions on this settlement.'],
   };

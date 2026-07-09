@@ -47,7 +47,7 @@ import { deriveCausalState } from './causalState.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
-/** @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile */
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
 /** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
 /** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
 /** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
@@ -516,14 +516,12 @@ const DERIVERS = Object.freeze({
  */
 function buildContext(settlement) {
   return {
-    // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
-    profiles:   deriveAllFactionProfiles(settlement),
+    profiles:   deriveAllFactionProfiles(/** @type {any} */ (settlement)),
     chains:     deriveAllSupplyChainStates(settlement),
     conditions: deriveAllActiveConditions(settlement),
     threats:    deriveAllThreatProfiles(settlement),
     capacities: deriveAllCapacities(settlement),
     causal:     deriveCausalState(settlement),
-    // @ts-ignore -- deriveHistoryBeats (historyBeats.js, owned elsewhere) still returns {Object}; inert once it is typed.
     history:    deriveHistoryBeats(settlement),
     npcs:       deriveAllNpcProfiles(settlement),
   };

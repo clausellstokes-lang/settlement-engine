@@ -70,7 +70,7 @@ const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', '
 /**
  * @typedef {Object} DistrictProfile
  * @property {string} id
- * @property {string} [name]
+ * @property {string} name
  * @property {(string|null)} origin
  * @property {string} category
  * @property {string} wealth
@@ -405,7 +405,7 @@ function inferConnectedDistricts(quarter, settlement) {
  */
 export function deriveDistrictProfile(quarter, settlement) {
   if (!quarter || !quarter.name || !settlement) return null;
-  const profiles = /** @type {FactionProfile[]} */ (deriveAllFactionProfiles(/** @type {any} */ (settlement)));
+  const profiles = deriveAllFactionProfiles(/** @type {any} */ (settlement));
   const causal = deriveCausalState(/** @type {any} */ (settlement));
   const conditions = deriveAllActiveConditions(/** @type {any} */ (settlement));
   const threats = deriveAllThreatProfiles(/** @type {any} */ (settlement));

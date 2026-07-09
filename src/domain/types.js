@@ -68,6 +68,7 @@
  *           | 'APPLY_STRESSOR' | 'CHANGE_RULING_POWER'
  *           | 'RESOLVE_STRESSOR' | 'ADD_TRADE_GOOD' | 'REMOVE_TRADE_GOOD'
  *           | 'ADD_RESOURCE' | 'REMOVE_RESOURCE'
+ *           | 'ADD_FACTION' | 'IMPOSE_CORRUPTION' | 'SETTLEMENT_DISPUTE'
  *           | 'PROMOTE_NPC' | 'DEMOTE_NPC'} EventType
  *
  * The full canonical event vocabulary across both shipping waves.
@@ -92,7 +93,7 @@
  *  @property {string}    id             uuid
  *  @property {EventType} type
  *  @property {string}    targetId       e.g. "institution.granary" — looked up by name match for v1
- *  @property {Object}    payload        type-specific extras
+ *  @property {Record<string, any>} payload  type-specific extras
  *  @property {'authoring' | 'player_action' | 'world_event'} cause
  *  @property {string=}   inWorldDate    free-form string, e.g. "17 Harvestwane"
  *  @property {string=}   description    DM's plain-English context

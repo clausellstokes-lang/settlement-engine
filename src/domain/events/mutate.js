@@ -60,7 +60,7 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
  */
 export function mutateSettlement({ settlement, event, now = null }) {
   if (!settlement || !event) return settlement;
-  const timedEvent = /** @type {any} */ (event);
+  const timedEvent = /** @type {Event & { timestamp?: string, createdAt?: string }} */ (event);
   // Deterministic by construction (A+ domain.6): the timestamp is a pure
   // function of (event, now). No wall-clock fallback — a caller that wants a
   // real apply time threads `now` (the store does); preview/replay with no now

@@ -343,11 +343,17 @@ function deriveLikelyFuture(settlement) {
 // ── Composer ────────────────────────────────────────────────────────────
 
 /**
+ * One structured causal beat. Every sub-deriver emits this uniform shape
+ * (see the builders above); `references` is an optional provenance bag.
+ * @typedef {{ key: string, label: string, text: string, source: string, references?: (Record<string, unknown>|null) }} HistoryBeat
+ */
+
+/**
  * Build the seven structured causal beats. Returns an object keyed by
  * beat name, with null for any beat that has no source data.
  *
  * @param {unknown} settlement
- * @returns {Record<string, any>}
+ * @returns {Record<string, HistoryBeat|null>}
  */
 export function deriveHistoryBeats(settlement) {
   if (!settlement || typeof settlement !== 'object') {
@@ -391,10 +397,13 @@ export function historyBeatRows(settlement) {
     'unresolvedWound',
     'likelyFuture',
   ];
-  return order
-    .map(k => beats[k])
-    .filter(Boolean)
-    .map(b => [b.label, b.text, b.key]);
+  /** @type {Array<Array<any>>} */
+  const rows = [];
+  for (const k of order) {
+    const b = beats[k];
+    if (b) rows.push([b.label, b.text, b.key]);
+  }
+  return rows;
 }
 
 /**
