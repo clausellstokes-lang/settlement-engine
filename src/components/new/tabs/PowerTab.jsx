@@ -192,7 +192,6 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                     onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
                   } : {})}>
                   <div style={{width:11,height:11,borderRadius:2,background:c,flexShrink:0}}/>
-                  {f.isGoverning && <span style={{fontSize:FS.xs,color:c,flexShrink:0}}></span>}
                   {f.legitimacyCrisis && <span style={{fontSize:FS.xxs,color:swatch.danger,flexShrink:0}}>⚠</span>}
                   <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,lineHeight:1.2}}>
                     <InstitutionLink name={f.faction} settlement={s} />

@@ -25,7 +25,7 @@
  */
 
 import { useMemo } from 'react';
-import { FS, VIOLET, swatch } from '../theme.js';
+import { FS, VIOLET, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
 
 const GOLD = swatch['#C9A24C'];
@@ -53,7 +53,7 @@ export default function QuickInspector() {
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const tier = s.tier || save.tier || ', ';
+  const tier = s.tier || save.tier || EMPTY_VALUE;
   const pop = (s.population || 0).toLocaleString();
   const pressure = s.pressureSentence || '';
   const topHook = (() => {

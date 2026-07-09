@@ -24,7 +24,7 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
-import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
@@ -32,7 +32,7 @@ const GREEN = swatch['#4A7A3A'];
 const AMBER = swatch['#D08020'];
 
 function formatTs(ts) {
-  if (!ts) return ', ';
+  if (!ts) return EMPTY_VALUE;
   try {
     return new Date(ts).toLocaleString('en-GB', {
       day: 'numeric', month: 'short', year: '2-digit',

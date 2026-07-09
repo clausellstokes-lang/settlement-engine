@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, CARD } from '../../theme.js';
+import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
@@ -24,7 +24,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || ', '}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
 }

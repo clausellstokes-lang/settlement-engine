@@ -14,10 +14,10 @@ import Button from '../../primitives/Button.jsx';
 // Module-scope so the object identity is stable across renders (avoids
 // re-allocating per render of EconomicFlowsSection).
 const FLOW_STATUS = {
-  impaired:            {label:' Impaired',            color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
-  vulnerable:          {label:' Vulnerable',          color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
+  impaired:            {label:'Impaired',             color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
+  vulnerable:          {label:'Vulnerable',           color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
   running:             {label:'✓ Running',           color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0'},
-  entrepot:            {label:' Entrepôt',          color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
+  entrepot:            {label:'Entrepôt',           color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
   magically_sustained: {label:'✦ Magically Sustained', color:'#5a2a8a', bg:'#f8f0ff', border:'#c0a0e0'},
   operational:         {label:'○ Operational',        color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
 };
@@ -56,10 +56,10 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
         {[
           {key:'all',label:`All (${chains.length + institutionalServices.length})`},
-          impairedCount + vulnerableCount > 0 && {key:'impaired',  label:` Issues (${impairedCount + vulnerableCount})`,  color:'#8b1a1a'},
+          impairedCount + vulnerableCount > 0 && {key:'impaired',  label:`Issues (${impairedCount + vulnerableCount})`,  color:'#8b1a1a'},
           runningCount > 0                    && {key:'productive',label:`✓ Productive (${runningCount})`,            color:'#1a5a28'},
-          entrepotCount > 0                   && {key:'entrepot',  label:` Entrepôt (${entrepotCount})`,              color:'#a0762a'},
-          institutionalServices.length > 0    && {key:'services',  label:` Services (${institutionalServices.length})`, color:'#5a3a1a'},
+          entrepotCount > 0                   && {key:'entrepot',  label:`Entrepôt (${entrepotCount})`,              color:'#a0762a'},
+          institutionalServices.length > 0    && {key:'services',  label:`Services (${institutionalServices.length})`, color:'#5a3a1a'},
         ].filter(Boolean).map(f => (
           <Button key={f.key} variant="secondary" size="sm" aria-pressed={flowFilter===f.key}
             onClick={() => setFlowFilter(f.key)} style={{
@@ -244,11 +244,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         {[
-          {icon:'',label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
-          {icon:'',label:'Food',value:foodLabel,sub:fb?`${fb.dailyProduction?.toLocaleString()} / ${fb.dailyNeed?.toLocaleString()} lbs/day`:undefined,color:foodColor},
-        ].map(({icon,label,value,sub,color})=>(
+          {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
+          {label:'Food',value:foodLabel,sub:fb?`${fb.dailyProduction?.toLocaleString()} / ${fb.dailyNeed?.toLocaleString()} lbs/day`:undefined,color:foodColor},
+        ].map(({label,value,sub,color})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
             {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
           </div>
@@ -271,7 +271,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
               </div>
               <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ CRIMINAL</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
                   {src.source}
                 </div>
                 {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
@@ -293,7 +293,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>x.toLowerCase()===e.toLowerCase());const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
                   ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
                   : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
-                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
+                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
@@ -309,17 +309,16 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                     const color = t?'#7a0a0a':n?'#8b1a1a':'#7a5010';
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
-                    const icon  = t?' ':n?' ':'';
                     const isCust=(eco.customTradeLabels?.imports||[]).some(x=>x.toLowerCase()===imp.toLowerCase());
                     const incl=isCust?(eco.customCategoryImports?.[imp]||null):null;
                     return isCust
                       ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}{icon}</span>;
+                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
-                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}> Terrain cannot produce</span>}
+                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
                   {terrainCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
-                  {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}> Settlement necessity</span>}
+                  {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>
               :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>

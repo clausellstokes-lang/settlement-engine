@@ -16,13 +16,13 @@ import {NarrativeNote} from '../NarrativeNote';
 // and have no closure dependency on OverviewTab state beyond their
 // props, so the lift is mechanical.
 
-function ScoreRow({ label, score, icon }) {
+function ScoreRow({ label, score }) {
   const n = Math.min(100, Math.max(0, score || 0));
   const c = n >= 70 ? '#1a5a28' : n >= 45 ? '#a0762a' : n >= 25 ? '#8a4010' : '#8b1a1a';
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
-        <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{icon} {label}</span>
+        <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
         <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{Math.round(n)}</span>
       </div>
       <div style={{ height: 6, background: swatch['#E8DCC8'], borderRadius: 3, overflow: 'hidden' }}>
@@ -123,7 +123,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
-          <StatusTag label="Safety" value={sp.safetyLabel?.split(', ')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
+          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
         </div>
@@ -134,19 +134,19 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>, resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>— resilience relies on magical infrastructure. See Viability tab.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'0 24px'}}>
-          <ScoreRow label="Military Might" score={scores.military} icon=""/>
-          <ScoreRow label="Monster Defense" score={scores.monster} icon=""/>
-          <ScoreRow label="Internal Security" score={scores.internal} icon=""/>
-          <ScoreRow label="Economic Resilience" score={scores.economic} icon=""/>
-          <ScoreRow label="Magical Capability" score={scores.magical} icon=""/>
+          <ScoreRow label="Military Might" score={scores.military}/>
+          <ScoreRow label="Monster Defense" score={scores.monster}/>
+          <ScoreRow label="Internal Security" score={scores.internal}/>
+          <ScoreRow label="Economic Resilience" score={scores.economic}/>
+          <ScoreRow label="Magical Capability" score={scores.magical}/>
           {sp.safetyRatio!==undefined&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
-              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}> Enforcement Ratio</span>
+              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Enforcement Ratio</span>
               <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?`${sp.safetyRatio.toFixed(1)}×`:EMPTY_VALUE}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden'}}>
@@ -157,7 +157,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
 
         {/* Food balance if significant */}
         {foodBal.deficitPct>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
-          <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}> Food Deficit</span>
+          <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}>Food Deficit</span>
           <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:3,height:6,overflow:'hidden'}}>
             <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPct)}%`,background:swatch.danger,borderRadius:3}}/>
           </div>
@@ -263,7 +263,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}> Structural Issues</div>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
@@ -279,7 +279,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           </div>
         ))}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px'}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}> Suggestions</div>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
           {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
         </div>}
       </div>}

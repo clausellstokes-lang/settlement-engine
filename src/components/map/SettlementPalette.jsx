@@ -9,7 +9,7 @@
 import { useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical } from 'lucide-react';
 import { useStore } from '../../store';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch, EMPTY_VALUE } from '../theme.js';
 
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
   const [query, setQuery] = useState('');
@@ -153,7 +153,7 @@ const THREAT_COLOR = {
 function SettlementCard({ save, placed, onSelect, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
-  const tier = save.tier || settlement.tier || ', ';
+  const tier = save.tier || settlement.tier || EMPTY_VALUE;
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
   // Stress can be an array (stressors[]) or a single object — both

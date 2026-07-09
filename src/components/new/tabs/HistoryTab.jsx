@@ -268,7 +268,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
                 {/* Anchored banner */}
                 {isAnchored&&<div style={{background:ec.color,padding:'3px 12px',display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}> STILL RELEVANT TODAY</span>
+                  <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}>STILL RELEVANT TODAY</span>
                 </div>}
                 {/* Event header */}
                 <div style={{padding:'10px 14px'}}>

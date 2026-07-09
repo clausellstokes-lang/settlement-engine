@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED } from '../theme.js';
+import { FS, swatch, MUTED, EMPTY_VALUE } from '../theme.js';
 import { TIER_LABELS, catColor } from './design';
 import { serif, TabIntro } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
@@ -78,10 +78,10 @@ function FactionBar({ factions }) {
 // ── Situation tile ────────────────────────────────────────────────────────────
 // Extracted to module scope so React Compiler can memoize it cleanly.
 // Used as <SitTile/> in the SITUATION ROW below.
-function SitTile({ icon, label, value, color, sub }) {
+function SitTile({ label, value, color, sub }) {
   return (
     <div style={{flex:1,minWidth:0,background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px'}}>
-      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
+      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
       <div style={{fontSize:FS.sm,fontWeight:700,color:ink,lineHeight:1.3,marginBottom:sub?2:0}}>{value}</div>
       {sub&&<div style={{fontSize:FS.xxs,color:muted,lineHeight:1.3}}>{sub}</div>}
     </div>
@@ -204,9 +204,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SITUATION ROW (3 scannable tiles) ───────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <SitTile icon="" label="Power" value={powStab.split(';')[0].split(', ')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
-        <SitTile icon="" label="Economy" value={eco.prosperity||', '} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split(', ')[0].trim()}/>
-        <SitTile icon="" label="Defense" value={dp.readiness?.label||', '} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
+        <SitTile label="Power" value={powStab.split(';')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
+        <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
+        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}

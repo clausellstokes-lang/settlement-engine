@@ -352,7 +352,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
             return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,borderRadius:6,padding:'9px 13px',marginBottom:6}}>
-              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{crit?' Structural':' Warning'}</div>
+              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
               <div style={{fontSize:FS.md,color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
             </div>;
           })}

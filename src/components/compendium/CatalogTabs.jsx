@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, swatch, EMPTY_VALUE } from '../theme.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes';
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../generators/lookups.js';
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
@@ -100,7 +100,7 @@ export function StressTab({ search='' }) {
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||', '}</div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||EMPTY_VALUE}</div>
       </div>))}
   </>;
 }

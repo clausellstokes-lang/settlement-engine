@@ -81,7 +81,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:6}}>
               <span style={{fontSize: FS['22'],fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
-                {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : ' MARGINAL COHERENCE'}
+                {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'}
               </span>
             </div>
             {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}

@@ -125,7 +125,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}> DEPLETED. Consumed locally, export potential reduced</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>DEPLETED. Consumed locally, export potential reduced</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>

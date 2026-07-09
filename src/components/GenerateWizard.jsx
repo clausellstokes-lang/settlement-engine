@@ -377,7 +377,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
           <strong style={{ fontFamily: serif_ }}>Basic Generate</strong>
-          {', '}Set the foundations and hit Generate. Everything else is randomized.
+          {' — '}Set the foundations and hit Generate. Everything else is randomized.
           Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
         </div>
 
@@ -484,7 +484,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             <strong style={{ fontFamily: serif_ }}>
               Step {wizardStep + 1}: {currentStepDef.label}
             </strong>
-            {', '}{currentStepDef.hint}
+            {' — '}{currentStepDef.hint}
           </div>
 
           {/* Current step content. P144 / A-4 — the step-change effect

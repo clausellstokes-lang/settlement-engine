@@ -267,11 +267,12 @@ export default [
   // the golden master byte-identical. This ratchet locks the shape: a generator
   // file that grows past 800 fails the gate.
   // @enforced-by max-lines (this rule)
-  // The five remaining >800 legacy files (npcGenerator 1640, narrativeGenerator
-  // 1220, historyGenerator 1108, computeActiveChains 920, defenseGenerator 802)
-  // are grandfathered by explicit override below — a burn-down worklist, not a
-  // licence: decompose one, DELETE its override (shrink-only, same doctrine as
-  // every baseline).
+  // The three remaining >800 legacy files (npcGenerator 1640, narrativeGenerator
+  // 1220, historyGenerator 1108) are grandfathered by explicit override below — a
+  // burn-down worklist, not a licence: decompose one, DELETE its override
+  // (shrink-only, same doctrine as every baseline). computeActiveChains and
+  // defenseGenerator have since fallen under the 800 ceiling and had their
+  // overrides deleted.
   {
     files: ['src/generators/**/*.js'],
     rules: {
@@ -283,8 +284,6 @@ export default [
       'src/generators/npcGenerator.js',
       'src/generators/narrativeGenerator.js',
       'src/generators/historyGenerator.js',
-      'src/generators/computeActiveChains.js',
-      'src/generators/defenseGenerator.js',
     ],
     rules: {
       'max-lines': 'off', // grandfathered — see ratchet note above; shrink-only
@@ -322,6 +321,44 @@ export default [
     rules: {
       'jsx-hygiene/no-raw-button': 'error',
       'jsx-hygiene/icon-button-needs-label': 'error',
+    },
+  },
+
+  // ── F24 follow-through — no ', ' placeholder in component fallbacks ─────────
+  // A typography reformat corrupted em-dashes into ', ' (`x || '—'` became
+  // `x || ', '`, `.split('—')` became `.split(', ')`), so missing values render
+  // as a bare comma-space in the app UI. The PDF side is pinned by
+  // tests/pdf/missingValuePlaceholders.test.js; this is the app-side guard.
+  // Missing-value placeholders must be EMPTY_VALUE from components/theme.js.
+  // Joiner usage stays legal by construction: `.join(', ')` / `.split(', ')`
+  // are call arguments and `{k > 0 ? ', ' : ''}` is a ConditionalExpression
+  // (PipelineRail's downstream-effects list) — none of these positions are
+  // matched. Only fallback positions (`|| ', '`, `?? ', '`, `return ', '`) and
+  // JSX copy that OPENS with ', ' (a decapitated em-dash) are errors.
+  // NOTE: scoped to src/components only — widening `files` to a glob that
+  // overlaps src/generators or src/domain would silently REPLACE their
+  // determinism no-restricted-syntax blocks (flat config is last-wins per rule).
+  {
+    files: ['src/components/**/*.{js,jsx}'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "LogicalExpression[operator='||'] > Literal[value=', ']",
+          message: "', ' as a fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        {
+          selector: "LogicalExpression[operator='??'] > Literal[value=', ']",
+          message: "', ' as a fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        {
+          selector: "ReturnStatement > Literal[value=', ']",
+          message: "Returning the literal ', ' is a corrupted em-dash placeholder — return EMPTY_VALUE from components/theme.js.",
+        },
+        {
+          selector: 'JSXElement > JSXText:first-child[value=/^\\s*,\\s/]',
+          message: "JSX copy opening with ', ' is a decapitated em-dash (e.g. '— Choose an archetype —') — restore the em-dash.",
+        },
+      ],
     },
   },
 

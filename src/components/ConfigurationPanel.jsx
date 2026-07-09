@@ -79,7 +79,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
           <Lbl>Archetype preset</Lbl>
           <div style={{display:'flex',gap:6}}>
             <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
-              <option value="">, Choose an archetype</option>
+              <option value="">— Choose an archetype —</option>
               {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} - {a.desc}</option>:null;})}</optgroup>)}
             </select>
             {applied&&<span style={{fontSize:FS.xs,color:swatch['#4A8A60'],fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
@@ -145,7 +145,7 @@ function NearbyResourcesPanel({config,updateConfig}){
   // Four-state cycle: off (unselected) → allow → abundant → depleted → off
   // 'off' has no label — just looks bland, like a stress that wasn't selected
   const _RESOURCE_STATES = ['off','allow','abundant','depleted'];
-  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:' Depleted'};
+  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:'◐ Depleted'};
   const STATE_COLORS  = {allow:'#9c8068',abundant:'#1a5a28',depleted:'#c05000'};
   const STATE_BG      = {allow:'transparent',abundant:'#f0faf2',depleted:'#fff7f0'};
   const STATE_BORDER  = {allow:'#c8b89a',abundant:'#88c880',depleted:'#e08040'};
@@ -287,7 +287,7 @@ function NearbyResourcesPanel({config,updateConfig}){
               <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
               <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>Allow (~{tierPct}% depleted)</span>
               <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}> Depleted</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}>Depleted</span>
             </>
         }
       </div>
@@ -340,7 +340,7 @@ export default function ConfigurationPanel(){
               if(blockTownPlus && ['town','city','metropolis'].includes(v)) return;
               updateConfig({settType:v});
             }}>
-            <option value="random"> Random</option>
+            <option value="random">Random</option>
             <option value="thorp">Thorp (20-80)</option>
             <option value="hamlet">Hamlet (81-400)</option>
             <option value="village">Village (401-900)</option>
@@ -362,7 +362,7 @@ export default function ConfigurationPanel(){
               if(blockIsolated && v === 'isolated') return;
               updateConfig({tradeRouteAccess:v});
             }}>
-            <option value="random_trade"> Random</option>
+            <option value="random_trade">Random</option>
             <option value="road">Road</option>
             <option value="river">River</option>
             <option value="port">Port</option>
@@ -393,14 +393,14 @@ export default function ConfigurationPanel(){
 
         <div><Lbl topic="terrain">Terrain</Lbl>
           <Sel value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
-            <option value="auto">️ Auto (from route)</option>
+            <option value="auto">Auto (from route)</option>
             <option value="plains">Plains / Farmland</option>
             <option value="forest">Forest / Woodland</option>
             <option value="hills">Rolling Hills</option>
             <option value="riverside">River Valley</option>
             <option value="coastal">Coastal</option>
-            <option value="mountain">️ Mountain</option>
-            <option value="desert">️ Desert / Arid</option>
+            <option value="mountain">Mountain</option>
+            <option value="desert">Desert / Arid</option>
           </Sel>
         </div>
       </div>
@@ -408,7 +408,7 @@ export default function ConfigurationPanel(){
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
-            <option value="random_culture"> Random</option>
+            <option value="random_culture">Random</option>
             <option value="mixed">Mixed</option>
             <option value="germanic">Germanic</option>
             <option value="latin">Latin/Roman</option>
@@ -445,10 +445,10 @@ export default function ConfigurationPanel(){
         <div>
           <Lbl topic="monster-threat">Regional Threat</Lbl>
           <Sel value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
-            <option value="random_threat"> Random</option>
-            <option value="heartland">️ Safe Heartland</option>
-            <option value="frontier">️ Active Frontier</option>
-            <option value="plagued">️ Embattled Region</option>
+            <option value="random_threat">Random</option>
+            <option value="heartland">Safe Heartland</option>
+            <option value="frontier">Active Frontier</option>
+            <option value="plagued">Embattled Region</option>
           </Sel>
         </div>
         <div>
