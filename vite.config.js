@@ -201,7 +201,10 @@ export default defineConfig({
     // the Playwright-only `test.describe` global.
     // supabase/functions/** are Deno edge functions; their *.test.ts use Deno
     // APIs and run under the dedicated `deno-tests` CI job, not vitest.
-    exclude: ['e2e/**', 'node_modules/**', 'dist/**', '.git/**', 'supabase/functions/**'],
+    // .claude/worktrees/** — agent/background-session worktrees carry their
+    // own (older) copies of the whole test tree; sweeping them fails vitest
+    // on stale sources that aren't part of this checkout.
+    exclude: ['e2e/**', 'node_modules/**', 'dist/**', '.git/**', 'supabase/functions/**', '.claude/worktrees/**'],
     // Route .jsx/.tsx files through Vite's web transform (which applies
     // the @vitejs/plugin-react JSX transform) instead of the default
     // SSR transform (which doesn't). Without this, importing any .jsx
