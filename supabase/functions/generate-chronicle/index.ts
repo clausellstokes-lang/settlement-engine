@@ -63,7 +63,50 @@ ${stressors || '(none of note)'}
 Return ONLY the chronicle prose. No preamble, no headings, no markdown.`;
 }
 
-serve(async (req) => {
+// ── Injectable seams (mirrors generate-narrative's extracted-handler deps) ───
+// The money path — spend_credits (as the user) → model call → provider failure →
+// refund_credits (as service_role) — previously had ZERO executed coverage: only
+// regex-over-source contracts in tests/edgeFunctions/contracts.test.js, which
+// can't prove that a spend happens before the model call, that a provider failure
+// refunds the EXACT spend row, or that auth/malformed-body bail before any spend.
+// The handler is exported as handleGenerateChronicle(req, deps) so index.test.ts
+// can drive it against recording stubs. THREE seams, each resolved through `deps`
+// with a production fallback so `serve()` (no deps) is byte-identical to the
+// previous inline handler:
+//   • userClient(authHeader) — anon client bound to the caller's JWT. Runs
+//     auth.getUser() and the spend_credits RPC AS THE USER (RLS-scoped).
+//   • adminClient()          — service-role client. Runs refund_credits, which
+//     migration 033/047/050 grants to service_role only (a user can't self-refund
+//     a successful spend).
+//   • anthropicFetch         — the provider fetch to the Anthropic messages API.
+function userClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+function adminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+type GenerateChronicleDeps = {
+  userClient?: typeof userClient;
+  adminClient?: typeof adminClient;
+  anthropicFetch?: typeof fetch;
+};
+
+export async function handleGenerateChronicle(
+  req: Request,
+  deps: GenerateChronicleDeps = {},
+): Promise<Response> {
+  // Provider fetch seam — the injected fetch (tests) or the real global fetch.
+  const providerFetch = deps.anthropicFetch ?? fetch;
+
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
 
@@ -74,17 +117,10 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) return json({ error: 'Missing authorization' }, 401);
 
-    const supabaseUser = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
+    const supabaseUser = (deps.userClient ?? userClient)(authHeader);
     // Service-role client for the refund path: refund_credits is granted only to
     // service_role (migration 033), so users can't self-refund successful spends.
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseAdmin = (deps.adminClient ?? adminClient)();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401);
 
@@ -117,7 +153,7 @@ serve(async (req) => {
 
     let prose = '';
     try {
-      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      const resp = await providerFetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'x-api-key': ANTHROPIC_API_KEY,
@@ -143,4 +179,8 @@ serve(async (req) => {
   } catch (e) {
     return json({ error: (e as Error).message }, 500);
   }
-});
+}
+
+// Production entry point — no deps, so every seam falls back to its real
+// implementation and behavior matches the previous inline `serve` handler.
+serve(handleGenerateChronicle);
