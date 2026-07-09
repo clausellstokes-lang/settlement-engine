@@ -3,7 +3,7 @@
  * STRESS_ECONOMIC_EFFECTS entry) between two factions from their category
  * pair, power gap, personalities and active stress flags.
  */
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {

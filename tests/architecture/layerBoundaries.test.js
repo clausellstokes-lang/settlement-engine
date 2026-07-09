@@ -6,15 +6,18 @@
  * aspirational: generators and domain are mutually-dependent PEER engine
  * layers (generators reuse domain vocabulary — trace, magicFilter,
  * goodsCatalog; domain reuses engine derivations — structuralValidator,
- * defenseGenerator, createPRNG), and five dependency cycles existed.
+ * crossSettlementConflicts), and both build on the src/kernel determinism
+ * primitives (createPRNG / rngContext), and five dependency cycles existed.
  *
  * This test pins what is ACTUALLY true and worth defending:
  *
- *  1. THE HEADLESS-ENGINE SPINE — nothing under src/data, src/generators or
- *     src/domain imports React, Zustand, or the store. This is the boundary
- *     that keeps the whole engine runnable in tests/scripts/servers, and it
- *     genuinely holds. A violation here is an architecture regression, full
- *     stop.
+ *  1. THE HEADLESS-ENGINE SPINE — nothing under src/kernel, src/data,
+ *     src/generators or src/domain imports React, Zustand, or the store. This
+ *     is the boundary that keeps the whole engine runnable in tests/scripts/
+ *     servers, and it genuinely holds. A violation here is an architecture
+ *     regression, full stop. (src/kernel is the lowest of these layers — the
+ *     shared determinism primitives, createPRNG / rngContext, that generators
+ *     and domain both build on.)
  *
  *  2. THE CYCLE BASELINE — the dependency-cycle set equals a checked-in
  *     allowlist (madge over src/). New cycles fail the gate; killing a cycle
@@ -51,9 +54,12 @@ const FORBIDDEN = [
 ];
 
 describe('layer boundaries (F29)', () => {
-  test('headless-engine spine: data/generators/domain import no React/Zustand/store', () => {
+  test('headless-engine spine: kernel/data/generators/domain import no React/Zustand/store', () => {
     const offenders = [];
-    for (const layer of ['data', 'generators', 'domain']) {
+    // src/kernel is the lowest engine layer — the shared determinism
+    // primitives (seeded PRNG seam + its context). It must stay as headless
+    // as data/generators/domain: nothing here may reach for React/Zustand/store.
+    for (const layer of ['kernel', 'data', 'generators', 'domain']) {
       for (const file of walk(join(SRC, layer))) {
         const src = readFileSync(file, 'utf8');
         // Match both `import ... from 'x'` and `import('x')` specifiers.

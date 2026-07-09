@@ -11,7 +11,7 @@
  * as variables.
  */
 
-import { buildThreatAssessment } from '../../generators/defenseGenerator.js';
+import { buildThreatAssessment } from './threatAssessment.js';
 
 const scoreColor = (n) =>
   n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';

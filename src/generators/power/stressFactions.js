@@ -3,7 +3,7 @@
  * stress type (siege, occupation, famine, insurgency, wartime, …): reweighting
  * existing factions and injecting the crisis-specific ones.
  */
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
 
 // applyStressEventFactions — apply every active stress type's power reweighting

@@ -2,7 +2,7 @@
  * economy/tradeGoods.js — trade-goods streams: local commodities, necessity imports, entrepot detection, tier export/upgrade goods, and salt-preservation classification.
  */
 
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';

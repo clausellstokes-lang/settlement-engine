@@ -22,7 +22,7 @@ import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
-import { createPRNG } from '../../generators/prng.js';
+import { createPRNG } from '../../kernel/prng.js';
 import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';

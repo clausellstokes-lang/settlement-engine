@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
-import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 
 // F12(4) regression pin: the trade-goods force/exclude toggle is keyed
 // `${tier}_good_${goodName}` — the vocabulary the Trade Dynamics UI writes

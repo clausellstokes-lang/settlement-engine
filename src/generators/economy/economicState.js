@@ -2,7 +2,7 @@
  * economy/economicState.js — assembles the complete economic state for a settlement: income sources, trade goods, chains, dependencies, and prosperity.
  */
 
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { getInstFlags, getPriorities, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra, priorityToMultiplier } from '../helpers.js';
 import { generateSafetyProfile } from '../safetyProfile.js';

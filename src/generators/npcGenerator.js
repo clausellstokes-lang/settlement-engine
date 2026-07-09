@@ -5,7 +5,7 @@
 
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
-import { random as _rng, pick as ctxPick } from './rngContext.js';
+import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';

@@ -6,7 +6,7 @@
  * selection, or probabilistically based on settlement characteristics.
  */
 
-import { random as _rng } from './rngContext.js';
+import { random as _rng } from '../kernel/rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 

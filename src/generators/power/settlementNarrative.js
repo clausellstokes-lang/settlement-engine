@@ -3,7 +3,7 @@
  * succession/tension prose (genSuccessionNarr) and the salient-relationship
  * rumour (genRelNarrative), with their STRESS_FLAVOR / STRESS_RUMORS tables.
  */
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { pickRandom2, random01 } from '../helpers.js';
 
 // STRESS_FLAVOR

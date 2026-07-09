@@ -25,9 +25,20 @@ functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 ```
 data/        Pure content tables — the moat. ~18k lines: institutionalCatalog,
              namingData, supplyChainData, npcData, historyData, … No logic.
+kernel/      Determinism primitives — the seeded-PRNG seam (prng.js) and its
+             global context (rngContext.js). Tiny, dependency-free (only
+             seedrandom); the lowest engine layer, which generators and domain
+             both build on. Its own first-paint chunk (`kernel`), so the
+             createPRNG seam never drags the lazy engine chunk into first paint.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              steps/ holds the 19-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
+             Bundled as the ~514 kB lazy `engine` chunk — fetched on first
+             Generate (settlementSlice's loadEngine dynamic import), NOT on
+             first paint. The small slice the entry legitimately reaches (the
+             coherence draft-check, neighbour backlink, pipeline-rail labels +
+             their influence-scoring spine) rides a separate first-paint
+             `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
              Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
@@ -45,16 +56,17 @@ lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
 hooks/ copy/ design/ config/   Cross-cutting: tokens, copy strings, pricing.
 ```
 
-**The real layer map: `data → { generators, domain } → store → components/pdf`.**
+**The real layer map: `data → kernel → { generators, domain } → store → components/pdf`.**
 `generators` and `domain` are mutually-dependent PEER engine layers by design —
 generators reuse domain vocabulary (trace, magicFilter, goodsCatalog,
 customContentSchema, factionArchetypes) and domain reuses engine derivations
-(structuralValidator, defenseGenerator, computeActiveChains, createPRNG /
-rngContext are shared determinism primitives). The ONE invariant that is
-enforced, and the one that matters: **nothing under `src/data`,
-`src/generators`, or `src/domain` imports React, Zustand, or the store** — that
-is what keeps the whole engine headless (tests, scripts, server). Dependency
-cycles are pinned to a frozen 4-cycle baseline that may only shrink.
+(structuralValidator, crossSettlementConflicts, computeActiveChains). Both build
+on `kernel`, the shared determinism primitives (`createPRNG` / `rngContext`).
+The ONE invariant that is enforced, and the one that matters: **nothing under
+`src/kernel`, `src/data`, `src/generators`, or `src/domain` imports React,
+Zustand, or the store** — that is what keeps the whole engine headless (tests,
+scripts, server). Dependency cycles are pinned to a frozen 4-cycle baseline that
+may only shrink.
 <!-- @enforced-by tests/architecture/layerBoundaries.test.js -->
 The one edge that wires live custom-content into the generator is
 `setCustomContentSource(...)` in `store/index.js` — kept there on purpose so
@@ -66,8 +78,9 @@ the generator stays store-free.
 
 `generators/steps/index.js` registers steps in dependency order; each step
 module calls `registerStep()` on import. The runner lives in
-`generators/pipeline.js` and threads a **seeded PRNG context** (`rngContext.js`,
-`prng.js`) plus an `onStep` callback (used by the UI "pipeline reveal").
+`generators/pipeline.js` and threads a **seeded PRNG context**
+(`kernel/rngContext.js`, `kernel/prng.js`) plus an `onStep` callback (used by
+the UI "pipeline reveal").
 
 Order (19 steps): `resolveConfig → resolveResources → resolveStress →
 resolveNeighbour → assembleInstitutions → subsumptionPass → cascadePass →

@@ -20,7 +20,7 @@
  *  - generateSiegeCapability   — history → tension string
  */
 
-import { random as _rng } from './rngContext.js';
+import { random as _rng } from '../kernel/rngContext.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 
 import {

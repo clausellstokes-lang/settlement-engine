@@ -1,10 +1,81 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
+import { resolve, dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // Optional bundle visualizer — opt in with `ANALYZE=1 npm run build`
 // (writes dist/stats.html). Off by default so the normal build stays fast.
 const analyze = process.env.ANALYZE === '1';
+
+const ROOT = dirname(fileURLToPath(import.meta.url));
+const SRC = resolve(ROOT, 'src');
+
+// ── Engine-shared domain vocabulary (for the engine-core chunk) ──────────────
+// generators and domain are mutually-dependent PEER engine layers: the
+// generators import a slice of domain (trace, magicFilter, goodsCatalog,
+// customContentSchema, the settlement schema/migrations, deterministicSort,
+// clock, corruption, faction* …). Those same domain modules are ALSO reached
+// eagerly by the store/domain code that runs on first paint. Left unassigned,
+// Rollup co-locates them into the big lazy `engine` chunk (they're pulled by
+// the generators there), and because first-paint code needs them the ENTRY is
+// forced to statically import `engine` — dragging the whole 656 kB engine chunk
+// into first paint through a back door that has nothing to do with generation.
+//
+// So we route that shared domain slice into the small first-paint `engine-core`
+// chunk instead. This set is DERIVED from the import graph — the transitive
+// closure, within src/domain, of every domain module any src/generators module
+// imports — not hand-curated, so it can't silently drift and re-drag the engine
+// into first paint. (None of these modules import a generator, so engine-core
+// stays closed over {engine-core, kernel, data} and never points back at
+// `engine`; the generators only ever reach the lazy worldPulse sim via dynamic
+// import, never statically, so that heavy graph never enters this set.)
+// @enforced-by tests/build/vendorPdfLazy.test.js (engine-absent-from-closure).
+function computeEngineSharedDomain() {
+  const walk = (d, out = []) => {
+    for (const e of readdirSync(d)) {
+      const p = join(d, e);
+      if (statSync(p).isDirectory()) walk(p, out);
+      else if (/\.jsx?$/.test(e)) out.push(p);
+    }
+    return out;
+  };
+  const resolveRel = (from, spec) => {
+    if (!spec.startsWith('.')) return null;
+    const base = resolve(dirname(from), spec);
+    for (const c of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')])
+      if (existsSync(c) && statSync(c).isFile()) return c;
+    return null;
+  };
+  const importsOf = (file) => {
+    const code = readFileSync(file, 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    const specs = [];
+    for (const m of code.matchAll(/(?:^|[^.\w])import\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.push(m[1]);
+    for (const m of code.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.push(m[1]);
+    return specs.map((s) => resolveRel(file, s)).filter(Boolean);
+  };
+  const DOMAIN = `${join(SRC, 'domain')}/`;
+  const seed = new Set();
+  for (const g of walk(join(SRC, 'generators')))
+    for (const dep of importsOf(g)) if (dep.startsWith(DOMAIN)) seed.add(dep);
+  const seen = new Set(seed);
+  const queue = [...seed];
+  while (queue.length) {
+    const f = queue.shift();
+    for (const dep of importsOf(f)) if (dep.startsWith(DOMAIN) && !seen.has(dep)) { seen.add(dep); queue.push(dep); }
+  }
+  // Store as project-relative "/src/domain/…" fragments so the manualChunks id
+  // check matches the same way the rest of this file does (id.includes).
+  return new Set([...seen].map((p) => p.slice(ROOT.length)));
+}
+const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
+const isEngineSharedDomain = (id) => {
+  for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
+  return false;
+};
 
 export default defineConfig({
   // Vite/Vitest's Rolldown parser still needs an explicit JSX transform
@@ -48,15 +119,16 @@ export default defineConfig({
     //     mobile) for the network fetch; subsequent exports hit the HTTP
     //     cache.
     //
-    // NOTE on engine: `engine` is intentionally NOT in this filter. Unlike
-    // vendor-pdf, the engine chunk (~214 kB gz) is *genuinely* in the
-    // entry's first-paint static closure today — it's reached by several
-    // eager store/domain edges (worldPulse advance, neighbour backlink,
-    // coherence draft-check, defense display). Filtering its preload hint
-    // would only hide that cost, not remove it: the browser would still
-    // fetch it (just later, unhinted), which is strictly worse. Making
-    // engine truly lazy requires converting those call-sites to dynamic
-    // import() — tracked separately, out of scope here.
+    // NOTE on engine: `engine` is intentionally NOT in this filter, and no
+    // longer needs to be — the engine chunk (~656 kB / 214 kB gz) is now
+    // ABSENT from the entry's first-paint static closure. The eager store/
+    // domain edges that used to reach it (neighbour backlink, coherence
+    // draft-check, defense display, and the createPRNG seam) now resolve to
+    // the small `kernel` + `engine-core` chunks instead (see manualChunks
+    // below), so the big engine chunk is genuinely lazy — fetched only when
+    // the user Generates (settlementSlice's loadEngine dynamic import) or a
+    // lazy dossier tab pulls it. A preload filter would be moot: the entry
+    // has no static edge to engine to hint in the first place.
     modulePreload: {
       resolveDependencies(_filename, deps) {
         return deps.filter(d => !/\/vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(d));
@@ -120,6 +192,17 @@ export default defineConfig({
           if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf') || id.includes('node_modules/pdfkit') || id.includes('node_modules/fontkit'))
             return 'vendor-pdf';
 
+          // ── Kernel (shared determinism primitives) ────────────────
+          // src/kernel/ holds the seeded-PRNG seam (prng.js) + its global
+          // context (rngContext.js): a tiny, dependency-free layer that
+          // sits BELOW both generators and domain. It is legitimately in
+          // the first-paint closure (domain/events/mutate reaches createPRNG
+          // eagerly), so give it its own small chunk instead of letting
+          // Rollup fold it into the big lazy engine chunk. Nothing here
+          // imports a generator, so this never drags the engine.
+          if (id.includes('/src/kernel/'))
+            return 'kernel';
+
           // ── Lookups (catalog/tier accessors, no generator deps) ──
           // Synchronously loaded by selectors.js + InstitutionalGrid.
           // Lives semantically with the data tables it accesses, so we
@@ -127,6 +210,46 @@ export default defineConfig({
           // grouped. Must match BEFORE the /src/generators/ rule below.
           if (id.includes('/src/generators/lookups.js'))
             return 'data';
+
+          // ── Engine-core (the first-paint slice of the {generators,domain} ──
+          // engine layers). Two kinds of module live here:
+          //
+          //  (a) The GENERATOR SPINE the entry reaches eagerly — the coherence
+          //      draft-check (checkStructuralValidity), the neighbour backlink
+          //      (crossSettlementConflicts, deterministic wrapper), the
+          //      pipeline-rail labels (stepMetadata), and the influence-scoring
+          //      modules those pull in (helpers, priorityHelpers,
+          //      institutionProbability, neighbourGenerator). Small, pure, and
+          //      needed on first paint.
+          //  (b) The DOMAIN VOCABULARY the engine leans on (ENGINE_SHARED_DOMAIN,
+          //      computed above) — the src/domain modules generators import,
+          //      which first-paint store/domain code needs too.
+          //
+          // Under the blanket /src/generators/ → 'engine' rule below (and
+          // Rollup's default co-location of the shared domain into that chunk),
+          // each of those edges dragged the WHOLE 656 kB engine chunk into the
+          // first-paint static closure. Splitting them into this small chunk
+          // keeps their transitive imports within {engine-core, kernel, data} —
+          // never a heavy generator (economy/power/npc/history/narrative/
+          // faction/services/steps) — so 'engine-core' never pulls 'engine'.
+          // The big engine chunk imports engine-core (it uses helpers et al.),
+          // but that edge points the safe way: engine (lazy) → engine-core
+          // (first-paint), never the reverse. This is what keeps the 656 kB
+          // engine chunk OUT of first paint. Must match BEFORE /src/generators/
+          // and BEFORE the /src/data/ rule (some domain here re-exports data).
+          // @enforced-by tests/build/vendorPdfLazy.test.js (engine-absent-from-
+          // closure contract + first-paint byte budget).
+          if (
+            id.includes('/src/generators/structuralValidator.js') ||
+            id.includes('/src/generators/helpers.js') ||
+            id.includes('/src/generators/priorityHelpers.js') ||
+            id.includes('/src/generators/institutionProbability.js') ||
+            id.includes('/src/generators/neighbourGenerator.js') ||
+            id.includes('/src/generators/crossSettlementConflicts.js') ||
+            id.includes('/src/generators/steps/stepMetadata.js') ||
+            isEngineSharedDomain(id)
+          )
+            return 'engine-core';
 
           // ── customRegistry + dependencyEngine ──────────────────────
           // These are reached from BOTH the entry (via store/index →
@@ -148,29 +271,39 @@ export default defineConfig({
           // that were pure sync importers were extracted into lookups.js
           // (routed to data above).
           //
-          // HONEST STATUS: despite the naming, the engine chunk is NOT lazy
-          // today. The entry statically reaches it (~660 kB / 214 kB gz)
-          // through several eager store/domain edges that run on first
-          // paint, not behind loadEngine() — among them worldPulse advance,
-          // neighbour backlink resolution, the coherence draft-check, and
-          // the defense display path. So engine sits in the first-paint
-          // static closure and the first-paint byte budget in
-          // tests/build/vendorPdfLazy.test.js accounts for it.
-          //
-          // Making engine truly lazy requires converting those call-sites
-          // to dynamic import() (and untangling the data ↔ engine circular
-          // imports). Tracked separately — out of scope for the vendor-pdf
-          // helper-pin fix that keeps THIS file's changes surgical.
+          // STATUS: the engine chunk is now genuinely LAZY — it is ABSENT
+          // from the entry's first-paint static closure (asserted by
+          // tests/build/vendorPdfLazy.test.js). The eager store/domain edges
+          // that used to anchor it here were cut: the createPRNG seam moved to
+          // src/kernel/ (routed above), buildThreatAssessment moved to a pure
+          // domain leaf (domain/display/threatAssessment.js), and the
+          // remaining entry-reachable generator leaves (structuralValidator,
+          // crossSettlementConflicts, stepMetadata + their influence-scoring
+          // spine) were split into the small 'engine-core' chunk above. What
+          // is left under this rule is the heavy generation-only code
+          // (economy/power/npc/history/narrative/faction/services/steps),
+          // fetched on first Generate via settlementSlice's loadEngine()
+          // dynamic import (and by lazy dossier tabs). Keep it that way: never
+          // add an EAGER store/domain/first-paint-UI static import of a module
+          // that lands in this chunk — import from kernel/engine-core/data (or
+          // extract a leaf) instead. @enforced-by vendorPdfLazy.test.js.
           if (id.includes('/src/generators/'))
             return 'engine';
 
           // ── Data tables (static, highly cacheable) ────────────────
-          // narrativeData.js and stressTypes.js call into the engine's
-          // PRNG/helpers at runtime, so they're not pure data — putting
-          // them in the engine chunk avoids the data ↔ engine circular
-          // import warning Rollup would otherwise emit.
-          if (id.includes('/src/data/narrativeData.js') ||
-              id.includes('/src/data/stressTypes.js'))
+          // narrativeData.js still calls into the engine's PRNG/helpers at
+          // runtime, so it's not pure data — keeping it in the engine chunk
+          // avoids the data ↔ engine circular-import warning Rollup would
+          // otherwise emit.
+          //
+          // stressTypes.js USED to be routed here too (same reason), but its
+          // executable, rng-capturing summary closures were split out into
+          // stressTypesMeta.js — the file is now pure data with zero imports.
+          // It MUST NOT stay in 'engine': helpers.js (engine-core) re-exports
+          // STRESS_INSTITUTION_EFFECTS from it, so an 'engine' assignment would
+          // make engine-core → engine and drag the 656 kB engine chunk back
+          // into first paint. Let it fall through to the 'data' rule below.
+          if (id.includes('/src/data/narrativeData.js'))
             return 'engine';
           if (id.includes('/src/data/'))
             return 'data';

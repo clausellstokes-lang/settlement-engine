@@ -15,7 +15,8 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { generateDefenseProfile, buildThreatAssessment } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 
 function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, stressTypes = [], magicExists = false, institutions } = {}) {

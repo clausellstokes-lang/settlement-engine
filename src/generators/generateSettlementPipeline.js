@@ -9,8 +9,8 @@
  * Once validated, the old file can be deleted and this becomes the sole entry point.
  */
 
-import { createPRNG, generateSeed } from './prng.js';
-import { setActiveRng, clearActiveRng } from './rngContext.js';
+import { createPRNG, generateSeed } from '../kernel/prng.js';
+import { setActiveRng, clearActiveRng } from '../kernel/rngContext.js';
 import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';

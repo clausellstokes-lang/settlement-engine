@@ -1,4 +1,4 @@
-import { createPRNG } from '../../generators/prng.js';
+import { createPRNG } from '../../kernel/prng.js';
 import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';

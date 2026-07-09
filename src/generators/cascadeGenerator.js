@@ -2,7 +2,7 @@
 // Gives chain-adjacent institutions a boosted second chance after main generation.
 // Shared cascade helpers for the settlement generation pipeline.
 
-import { random as _rng } from './rngContext.js';
+import { random as _rng } from '../kernel/rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 

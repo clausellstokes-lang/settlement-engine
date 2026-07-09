@@ -22,7 +22,7 @@ import { describe, test, expect, afterEach } from 'vitest';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
 import { applyCascadeInstitutions } from '../../src/generators/cascadeGenerator.js';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 // Same match key the cascade uses (cascadeGenerator.js `mk`): institutions and

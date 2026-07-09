@@ -145,12 +145,13 @@ export default [
   // for the same reason (F13): it collates through the host ICU/locale tables,
   // so a sort that feeds rng draw order or persisted output can order non-ASCII
   // strings differently across devices/locales — use compareCodepoint from
-  // domain/deterministicSort.js. Errors here, so a new leak fails CI. prng.js
-  // (the documented sole non-determinism entry, for seed minting) and
-  // rngContext.js (the fallback itself) are exempt.
+  // domain/deterministicSort.js. Errors here, so a new leak fails CI. The two
+  // sanctioned non-determinism seams — prng.js (the sole seed-minting entry)
+  // and rngContext.js (the Math.random fallback itself) — now live in
+  // src/kernel/, OUTSIDE this block's src/generators/ scope, so they need no
+  // explicit exemption: the ban simply doesn't reach them.
   {
     files: ['src/generators/**/*.js'],
-    ignores: ['src/generators/prng.js', 'src/generators/rngContext.js'],
     rules: {
       'no-restricted-syntax': ['error',
         {

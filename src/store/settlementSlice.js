@@ -30,7 +30,7 @@ function loadEngine() {
   if (_enginePromise) return _enginePromise;
   _enginePromise = Promise.all([
     import('../generators/generateSettlementPipeline.js'),
-    import('../generators/prng.js'),
+    import('../kernel/prng.js'),
   ]).then(([pipe, prng]) => {
     _engineModule = {
       generateSettlementPipeline: pipe.generateSettlementPipeline,

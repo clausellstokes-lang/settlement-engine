@@ -2,7 +2,7 @@
  * economy/prosperity.js — prosperity model, economic-situation narrative, prosperity labelling, complexity classification, and priority-to-category mapping.
  */
 
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra } from '../helpers.js';
 import { generateFoodSecurity } from '../foodGenerator.js';
 

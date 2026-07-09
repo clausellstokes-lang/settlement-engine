@@ -1,4 +1,4 @@
-import { random as _rng } from './rngContext.js';
+import { random as _rng } from '../kernel/rngContext.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
 import { getInstFlags, getStressFlags, getPriorities } from './helpers.js';
 import { ARCANE_INST_KW as _ARCANE_SVC_KW } from '../domain/magicFilter.js';

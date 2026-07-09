@@ -25,7 +25,7 @@ import { generateEconomicState } from '../../src/generators/economicGenerator.js
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
-import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 
 const PORT_INFRA = ['Docks/port facilities', "Harbour master's office", 'Shipyard'];
 

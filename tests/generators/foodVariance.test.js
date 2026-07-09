@@ -9,8 +9,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 
 const INSTITUTIONS = [{ name: 'Town Granary' }, { name: 'Common Field' }, { name: 'Watermill' }];

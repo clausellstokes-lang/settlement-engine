@@ -17,7 +17,7 @@
  * stay in src/data/narrativeData.js.
  */
 
-import { random as _rng } from "./rngContext.js";
+import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js";
 
 // ─── Per-stress pressure sentences (consumed by narrativeGenerator) ──────────

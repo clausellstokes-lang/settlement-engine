@@ -1,4 +1,4 @@
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { INSTITUTION_SERVICES } from '../../data/tradeGoodsData.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 // Custom-content dependency surface — institution.produces declarations.

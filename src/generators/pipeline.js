@@ -17,7 +17,7 @@
  * scope until it's empty and can be deleted.
  */
 
-import { setActiveRng, clearActiveRng } from './rngContext.js';
+import { setActiveRng, clearActiveRng } from '../kernel/rngContext.js';
 
 // ── A+ P1.7 — pipeline data-flow contract (strict mode) ──────────────────────
 // The topo-sort orders steps by `deps` (step names), but the REAL data flow is the

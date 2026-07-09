@@ -13,7 +13,7 @@
  * forever, on any device, with no ambient state.
  */
 
-import { createPRNG } from './prng.js';
+import { createPRNG } from '../kernel/prng.js';
 
 // Which NPC categories create friction per relationship type
 const CONFLICT_CATS = {

@@ -9,8 +9,8 @@
  * services make these pins seed-stable; the seeded loop proves it.
  */
 import { describe, it, expect } from 'vitest';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { deriveNotableAbsences } from '../../src/domain/display/servicesDisplay.js';
 

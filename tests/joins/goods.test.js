@@ -5,7 +5,7 @@ import { TRADE_DEPENDENCY_NEEDS } from '../../src/data/economicData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
 import { customDeps } from '../../src/lib/dependencyEngine.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
-import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 
 // Join harness: TRADE_DEPENDENCY_NEEDS keys and GOODS_MODIFIERS_BY_TIER
 // requiredInstitution fields are free-string joins against the institution

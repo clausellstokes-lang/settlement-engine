@@ -12,8 +12,8 @@
  *     well-garrisoned settlement keeps its defence service on every seed.
  */
 import { describe, it, expect } from 'vitest';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../src/data/servicesData.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';

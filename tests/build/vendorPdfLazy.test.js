@@ -1,9 +1,14 @@
 /**
- * tests/build/vendorPdfLazy.test.js — Tier 9.7 vendor-pdf lazy verification.
+ * tests/build/vendorPdfLazy.test.js — Tier 9.7 first-paint lazy verification.
  *
- * The @react-pdf/renderer + jsPDF stack weighs ~1.85 MB (~616 kB gz).
- * It must NOT load on first paint — only when a user clicks "Export
- * PDF". The load-bearing contract is:
+ * Two heavy chunks must stay OUT of the entry's first-paint static closure:
+ *   • vendor-pdf (@react-pdf/renderer + jsPDF, ~1.85 MB / 616 kB gz) — only
+ *     when the user clicks "Export PDF".
+ *   • the generator engine (~514 kB) — only on first Generate (settlementSlice's
+ *     loadEngine dynamic import) and lazy dossier tabs. The entry reaches only
+ *     the small kernel + engine-core chunks; see vite.config.js manualChunks.
+ *
+ * The load-bearing vendor-pdf contract is:
  *
  *   1. vendor-pdf is its own chunk (manualChunks isolates the PDF stack).
  *   2. vendor-pdf is ABSENT from the ENTRY chunk's *transitive static
@@ -36,44 +41,43 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 
 // ── First-paint static-closure byte budget ──────────────────────────────────
 // The entry's transitive static import closure is everything the browser is
-// forced to download before it can paint. Measured after the worldPulse
-// lazy-engine split + the PARTY_IMPACT_KINDS leaf extraction (2026-07-09,
-// `npm run build`):
+// forced to download before it can paint. Measured after the KERNEL + ENGINE-
+// CORE split that lifted the 656 kB engine chunk out of first paint
+// (2026-07-09, `npm run build`):
 //
-//   data          417,151   +  engine        655,647
-//   index(entry)  512,248   +  vendor-icons   30,041
-//   vendor-react  193,160   +  vendor-state   17,031
+//   data          438,161   +  index(entry)  516,565
+//   engine-core   107,802   +  vendor-icons   30,041
+//   kernel          8,852   +  vendor-react  193,160
+//   vendor-state   17,031
 //   ──────────────────────────────────────────────────
-//   MEASURED TOTAL: 1,825,278 raw bytes (~1.74 MB)
+//   MEASURED TOTAL: 1,311,612 raw bytes (~1.25 MB)  —  7 files
 //
-// Two worldPulse cuts got it here:
-//   1. (−47 kB) The campaign world-pulse advance/preview/apply-proposal/party
-//      machinery moved behind a memoized dynamic import (loadWorldEngine in
-//      campaignWorldPulseSlice.js), splitting the advance-exclusive modules
-//      (advanceCampaignWorld, candidateEvents, coup, factionCapture, flows,
-//      pressureModel, realmEvents, thievesGuild, blockadeTransport) into a
-//      lazy chunk fetched on the first pulse action, not on boot.
-//   2. (−152 kB, entry 664,652 → 512,248) The LAST static anchor into the
-//      apply pipeline was cut: settlementSlice → domain/events/
-//      partyEventLinkage.js imported PARTY_IMPACT_KINDS from
-//      worldPulse/partyImpact.js, dragging applyWorldPulse + its heavy graph
-//      (relationshipEvolution, npcAgency, factionCompetition,
-//      relationshipMemory, institutionLifecycle, tier/population dynamics)
-//      into first paint for one const. The const now lives in the
-//      dependency-free leaf worldPulse/partyImpactKinds.js (partyImpact.js
-//      re-exports it), and the whole apply graph is lazy. If this budget
-//      fails and the closure listing shows an applyWorldPulse/relationship*
-//      chunk, someone re-imported a worldPulse simulation module from eager
-//      store/domain code — import the leaf (or a new leaf) instead.
+// This was 1,825,278 (+ the 655,647 engine chunk) before the split. What moved:
+//   • The seeded-PRNG seam (prng.js + rngContext.js) became src/kernel/ — a
+//     tiny (~9 kB) first-paint chunk that the createPRNG edge (domain/events/
+//     mutate) now resolves to instead of the engine chunk.
+//   • The entry-reachable generator SPINE (structuralValidator,
+//     crossSettlementConflicts, stepMetadata + helpers/priorityHelpers/
+//     institutionProbability/neighbourGenerator) AND the domain vocabulary the
+//     generators lean on (the ENGINE_SHARED_DOMAIN closure — trace, schema,
+//     magicFilter, deterministicSort, clock, corruption, faction*, …) split
+//     into the small (~108 kB) 'engine-core' chunk. Rollup used to co-locate
+//     that shared domain into the 656 kB engine chunk, which is precisely why
+//     the entry statically imported engine before this change.
+//   • buildThreatAssessment moved to a pure domain leaf
+//     (domain/display/threatAssessment.js), cutting the defense-display edge.
+//   • stressTypes.js (now pure data) moved engine→data.
 //
-// vendor-pdf (1.85 MB / 616 kB gz) is intentionally NOT in this closure.
-// engine (~213 kB gz) IS — it's genuinely reached by eager store/domain
-// edges today (tracked separately; see vite.config.js). The ceiling below
-// is measured + ~5% headroom, and is a monotone ratchet: it should only
-// ever move DOWN as chunks are made lazy, never up without a deliberate,
-// documented reason. If this fails high, something (very likely vendor-pdf)
-// re-entered the static graph — check the closure listing the test prints.
-const CLOSURE_BUDGET_BYTES = 1_915_000; // 1,825,278 measured + ~5%
+// The 656 kB engine chunk is now ABSENT from this closure (asserted below) and
+// is fetched lazily on first Generate. vendor-pdf (1.85 MB / 616 kB gz) is
+// likewise absent. The ceiling below is measured + ~5% headroom, and is a
+// monotone ratchet: it should only ever move DOWN as more is made lazy, never
+// up without a deliberate, documented reason. If this fails high, something
+// re-entered the static graph — very likely a NEW eager store/domain/first-
+// paint-UI static import of a heavy generator (which would drag the engine
+// chunk back in). Check the closure listing the test prints and route the
+// offending edge through kernel / engine-core / a leaf instead.
+const CLOSURE_BUDGET_BYTES = 1_377_000; // 1,311,612 measured + ~5%
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -148,6 +152,39 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
       pdfInClosure,
       `vendor-pdf reached first paint via static graph. Closure:\n  ${files.join('\n  ')}`,
     ).toHaveLength(0);
+  });
+
+  // ── The engine contract this split establishes ───────────────────────────
+  // The ~656 kB (→ ~514 kB post-split) generator engine chunk must NOT be in
+  // the entry's first-paint static closure. It is fetched lazily on first
+  // Generate (settlementSlice's loadEngine dynamic import) and by lazy dossier
+  // tabs. The entry reaches only the small kernel + engine-core chunks. If this
+  // fails, an eager store/domain/first-paint-UI module statically imports a
+  // heavy generator (or a domain module the generators pull that Rollup then
+  // co-located into engine) — route it through kernel/engine-core/a leaf.
+  // NB: the 'engine' chunk is `engine-<hash>.js`; the first-paint spine chunk
+  // is `engine-core-<hash>.js` — exclude the latter explicitly.
+  it('the engine chunk is ABSENT from the entry transitive static closure', () => {
+    const { files } = entryStaticClosure();
+    const engineInClosure = files.filter(
+      f => /^engine-/.test(f) && !/^engine-core-/.test(f),
+    );
+    expect(
+      engineInClosure,
+      `the lazy engine chunk reached first paint via the static graph. Closure:\n  ${files.join('\n  ')}`,
+    ).toHaveLength(0);
+  });
+
+  it('the engine chunk still exists (lazy) and remains large', () => {
+    const files = readdirSync(assetsDir);
+    const engine = files.find(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f) && !/^engine-core-/.test(f));
+    expect(engine, 'expected a lazy engine-<hash>.js chunk to still be emitted').toBeDefined();
+    const size = statSync(join(assetsDir, engine)).size;
+    // It should stay meaningfully large (the generation pipeline lives here).
+    // If it collapses, generation code leaked into a hot chunk; if it balloons
+    // past the old ~660 kB, something eager re-merged into it.
+    expect(size).toBeGreaterThan(300_000);
+    expect(size).toBeLessThan(660_000);
   });
 
   // ── First-paint byte budget (the monotone ratchet) ───────────────────────

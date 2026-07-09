@@ -2,7 +2,7 @@
  * power/conflicts.js — inter-faction conflicts from rivalries/enmities, plus
  * the per-conflict plot-hook builder.
  */
-import { random as _rng } from '../rngContext.js';
+import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 
 // computeRelTension

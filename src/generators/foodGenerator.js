@@ -16,7 +16,7 @@
  *   - Economics tab UI
  */
 
-import { getActiveRng } from './rngContext.js';
+import { getActiveRng } from '../kernel/rngContext.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 
 // ── Constants (match buildFactionList in economicGenerator) ────────────────

@@ -3,7 +3,7 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
-import {buildThreatAssessment} from '../../../generators/defenseGenerator';
+import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
 import { truncateAtWord } from '../../../lib/text.js';

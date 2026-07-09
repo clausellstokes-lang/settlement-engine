@@ -16,7 +16,7 @@ import {
 } from '../data/constants.js';
 // chance/pick/randInt come from rngContext directly (not from constants.js)
 // since 2026-04 — eliminates the data→engine→data circular chunk warning.
-import { chance, pick, randInt } from './rngContext.js';
+import { chance, pick, randInt } from '../kernel/rngContext.js';
 export { STRESS_INSTITUTION_EFFECTS } from '../data/stressTypes.js';
 
 
@@ -46,7 +46,7 @@ export const priorityToMultiplier = (priority = 50) => Math.max(0, (priority ?? 
 
 // ─── Random utilities ────────────────────────────────────────────────────────
 
-import { random as _rng, chance as _chance, pick as _pick } from './rngContext.js';
+import { random as _rng, chance as _chance, pick as _pick } from '../kernel/rngContext.js';
 
 /** Random boolean: true with probability p. */
 export const random01 = (p) => _chance(p);
