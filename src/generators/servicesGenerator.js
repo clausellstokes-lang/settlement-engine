@@ -1,6 +1,6 @@
 import { random as _rng } from '../kernel/rngContext.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
-import { getInstFlags, getStressFlags, getPriorities } from './helpers.js';
+import { getInstFlags, getStressFlags } from './helpers.js';
 import { ARCANE_INST_KW as _ARCANE_SVC_KW } from '../domain/magicFilter.js';
 import { generateSafetyProfile } from './safetyProfile.js';
 import { classifyService } from './services/serviceClassifier.js';
@@ -116,12 +116,56 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
       return _CRIMINAL_INST_KW.some((kw) => name.includes(kw));
     }),
     securityRatio = getInstFlags(config, institutions).militaryEffective / Math.max(8, criminalEffective);
-  !hasCriminalInst &&
+  // Synthetic informal-crime fallback — a lawless-enough settlement offers
+  // criminal services even when no criminal institution was rolled.
+  // NOTE: this unwinds the original minified grouping FAITHFULLY — the village
+  // fallback and the contraband push were NESTED inside the outer (town+) gate,
+  // so they only evaluate when it passed. In particular the village fallback's
+  // own conditions can never hold here (the outer gate requires a non-village
+  // tier, and the first push makes buckets.criminal non-empty); it is preserved
+  // as-is because this is a pure de-minification, not a logic change.
+  if (
+    !hasCriminalInst &&
     (criminalEffective >= 38 || securityRatio < 1.2) &&
     buckets.criminal.length === 0 &&
-    !['thorp', 'hamlet', 'village'].includes(config.settType || config.tier || 'village') &&
-    (securityRatio < 0.6
-      ? buckets.criminal.push(
+    !['thorp', 'hamlet', 'village'].includes(config.settType || config.tier || 'village')
+  ) {
+    if (securityRatio < 0.6) {
+      buckets.criminal.push(
+        {
+          name: 'No law, bring coin',
+          desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
+          institution: '(lawless)',
+        },
+        {
+          name: 'Protection (informal)',
+          desc: 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
+          institution: '(informal)',
+        }
+      );
+    } else {
+      buckets.criminal.push(
+        {
+          name: 'Fence (word of mouth)',
+          desc: 'Ask around at the right tavern. Someone moves goods without questions.',
+          institution: '(covert)',
+        },
+        {
+          name: 'Hired muscle',
+          desc: 'Informal, no contract. Violence available for coin to those who know where to ask.',
+          institution: '(covert)',
+        }
+      );
+    }
+    if (
+      !hasCriminalInst &&
+      criminalEffective >= 55 &&
+      securityRatio < 0.5 &&
+      buckets.criminal.length === 0 &&
+      ['village'].includes(config.settType || config.tier || '')
+    ) {
+      if (securityRatio < 0.4) {
+        buckets.criminal.push(
           {
             name: 'No law, bring coin',
             desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
@@ -132,8 +176,9 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
             desc: 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
             institution: '(informal)',
           }
-        )
-      : buckets.criminal.push(
+        );
+      } else {
+        buckets.criminal.push(
           {
             name: 'Fence (word of mouth)',
             desc: 'Ask around at the right tavern. Someone moves goods without questions.',
@@ -144,45 +189,20 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
             desc: 'Informal, no contract. Violence available for coin to those who know where to ask.',
             institution: '(covert)',
           }
-        ),
-    !hasCriminalInst &&
-      criminalEffective >= 55 &&
-      securityRatio < 0.5 &&
-      buckets.criminal.length === 0 &&
-      ['village'].includes(config.settType || config.tier || '') &&
-      (securityRatio < 0.4
-        ? buckets.criminal.push(
-            {
-              name: 'No law, bring coin',
-              desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
-              institution: '(lawless)',
-            },
-            {
-              name: 'Protection (informal)',
-              desc: 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
-              institution: '(informal)',
-            }
-          )
-        : buckets.criminal.push(
-            {
-              name: 'Fence (word of mouth)',
-              desc: 'Ask around at the right tavern. Someone moves goods without questions.',
-              institution: '(covert)',
-            },
-            {
-              name: 'Hired muscle',
-              desc: 'Informal, no contract. Violence available for coin to those who know where to ask.',
-              institution: '(covert)',
-            }
-          )),
-    criminalEffective >= 55 &&
+        );
+      }
+    }
+    if (criminalEffective >= 55) {
       buckets.criminal.push({
         name: 'Contraband',
         desc: 'Untaxed or restricted goods available through back-channel contacts.',
         institution: '(covert)',
-      }));
+      });
+    }
+  }
+  // Stress-driven criminal service menus — one block per structural stress flag.
   const stressFlags = getStressFlags(config, institutions);
-  (stressFlags.stateCrime &&
+  if (stressFlags.stateCrime) {
     [
       {
         name: 'Bribe a guard',
@@ -197,164 +217,180 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
         desc: 'Knowing who can be bought, who is watched, and who reports to whom is worth coin.',
       },
     ].forEach((item) => {
-      buckets.criminal.some((existing) => existing.name === item.name) ||
+      if (!buckets.criminal.some((existing) => existing.name === item.name)) {
         buckets.criminal.push({
           ...item,
           institution: '(state apparatus)',
         });
-    }),
-    stressFlags.crimeIsGovt &&
-      [
-        {
-          name: 'Dispute resolution (guild)',
-          desc: 'The guild adjudicates conflicts. Their judgment is final; resistance is inadvisable.',
-        },
-        {
-          name: 'Extortion (structured)',
-          desc: 'The rate is posted. Everyone pays. It is not officially called extortion.',
-        },
-        {
-          name: 'Contraband licensing',
-          desc: 'The organization decides what flows through here. Operators without authorization are removed.',
-        },
-      ].forEach((item) => {
-        buckets.criminal.some((existing) => existing.name === item.name) ||
-          buckets.criminal.push({
-            ...item,
-            institution: '(criminal governance)',
-          });
-      }),
-    stressFlags.arcaneBlackMarket &&
-      [
-        {
-          name: 'Forbidden components',
-          desc: 'Rare and restricted magical ingredients available to those who do not ask where they come from.',
-        },
-        {
-          name: 'Unlicensed enchantment',
-          desc: 'Practitioners working outside guild oversight — cheaper, less traceable, and legally inadvisable.',
-        },
-        {
-          name: 'Magical forgery',
-          desc: 'Identification papers, writs, and seals with genuine magical authentication — fraudulently applied.',
-        },
-      ].forEach((item) => {
-        buckets.criminal.some((existing) => existing.name === item.name) ||
-          buckets.criminal.push({
-            ...item,
-            institution: '(arcane underground)',
-          });
-      }),
-    stressFlags.religiousFraud &&
-      [
-        {
-          name: 'Relics (dubious provenance)',
-          desc: 'Sacred objects with impeccable documentation. The documentation was written last week.',
-        },
-        {
-          name: 'Indulgences and dispensations',
-          desc: 'Formal church forgiveness, delivered by clergy with flexible interpretations of canon.',
-        },
-        {
-          name: 'False prophecy',
-          desc: 'Readings, visions, and omens from practitioners who know what the client wants to hear.',
-        },
-      ].forEach((item) => {
-        buckets.criminal.some((existing) => existing.name === item.name) ||
-          buckets.criminal.push({
-            ...item,
-            institution: '(religious fraud)',
-          });
-      }),
-    stressFlags.merchantCriminalBlur &&
-      [
-        {
-          name: 'Unofficial arbitration',
-          desc: 'Commercial disputes resolved outside the courts — faster, cheaper, and more reliably enforced.',
-        },
-        {
-          name: 'Gray market goods',
-          desc: 'Legitimately produced goods moving through channels that avoid inspection, duty, or guild oversight.',
-        },
-        {
-          name: 'Front company formation',
-          desc: 'Establish a legitimate face for operations that benefit from appearing above board.',
-        },
-      ].forEach((item) => {
-        buckets.criminal.some((existing) => existing.name === item.name) ||
-          buckets.criminal.push({
-            ...item,
-            institution: '(commercial crime)',
-          });
-      }));
-  const safetyProfile = generateSafetyProfile(config, tier, institutions),
-    instFlags = getInstFlags(config, institutions);
-  (getPriorities(config), instFlags.inst, instFlags.criminalEffective);
+      }
+    });
+  }
+  if (stressFlags.crimeIsGovt) {
+    [
+      {
+        name: 'Dispute resolution (guild)',
+        desc: 'The guild adjudicates conflicts. Their judgment is final; resistance is inadvisable.',
+      },
+      {
+        name: 'Extortion (structured)',
+        desc: 'The rate is posted. Everyone pays. It is not officially called extortion.',
+      },
+      {
+        name: 'Contraband licensing',
+        desc: 'The organization decides what flows through here. Operators without authorization are removed.',
+      },
+    ].forEach((item) => {
+      if (!buckets.criminal.some((existing) => existing.name === item.name)) {
+        buckets.criminal.push({
+          ...item,
+          institution: '(criminal governance)',
+        });
+      }
+    });
+  }
+  if (stressFlags.arcaneBlackMarket) {
+    [
+      {
+        name: 'Forbidden components',
+        desc: 'Rare and restricted magical ingredients available to those who do not ask where they come from.',
+      },
+      {
+        name: 'Unlicensed enchantment',
+        desc: 'Practitioners working outside guild oversight — cheaper, less traceable, and legally inadvisable.',
+      },
+      {
+        name: 'Magical forgery',
+        desc: 'Identification papers, writs, and seals with genuine magical authentication — fraudulently applied.',
+      },
+    ].forEach((item) => {
+      if (!buckets.criminal.some((existing) => existing.name === item.name)) {
+        buckets.criminal.push({
+          ...item,
+          institution: '(arcane underground)',
+        });
+      }
+    });
+  }
+  if (stressFlags.religiousFraud) {
+    [
+      {
+        name: 'Relics (dubious provenance)',
+        desc: 'Sacred objects with impeccable documentation. The documentation was written last week.',
+      },
+      {
+        name: 'Indulgences and dispensations',
+        desc: 'Formal church forgiveness, delivered by clergy with flexible interpretations of canon.',
+      },
+      {
+        name: 'False prophecy',
+        desc: 'Readings, visions, and omens from practitioners who know what the client wants to hear.',
+      },
+    ].forEach((item) => {
+      if (!buckets.criminal.some((existing) => existing.name === item.name)) {
+        buckets.criminal.push({
+          ...item,
+          institution: '(religious fraud)',
+        });
+      }
+    });
+  }
+  if (stressFlags.merchantCriminalBlur) {
+    [
+      {
+        name: 'Unofficial arbitration',
+        desc: 'Commercial disputes resolved outside the courts — faster, cheaper, and more reliably enforced.',
+      },
+      {
+        name: 'Gray market goods',
+        desc: 'Legitimately produced goods moving through channels that avoid inspection, duty, or guild oversight.',
+      },
+      {
+        name: 'Front company formation',
+        desc: 'Establish a legitimate face for operations that benefit from appearing above board.',
+      },
+    ].forEach((item) => {
+      if (!buckets.criminal.some((existing) => existing.name === item.name)) {
+        buckets.criminal.push({
+          ...item,
+          institution: '(commercial crime)',
+        });
+      }
+    });
+  }
+  const safetyProfile = generateSafetyProfile(config, tier, institutions);
+  // Crime-type service menu — one entry per crime type the safety profile reports.
   const crimeTypes = new Set((safetyProfile.crimeTypes || []).map((entry) => entry.type)),
     addCrimeService = (name, desc, institution) => {
-      seen.has(name) ||
-        (seen.add(name),
-        buckets.criminal.some((existing) => existing.name === name) ||
-          buckets.criminal.push({
-            name,
-            desc,
-            institution,
-          }));
+      if (seen.has(name)) return;
+      seen.add(name);
+      if (!buckets.criminal.some((existing) => existing.name === name)) {
+        buckets.criminal.push({
+          name,
+          desc,
+          institution,
+        });
+      }
     };
-  return (
-    crimeTypes.has('Survival crime') &&
-      addCrimeService(
-        'Fence (word of mouth)',
-        'No questions asked — stolen goods move through back channels for a fraction of value.',
-        '(covert)'
-      ),
-    crimeTypes.has('Street gang activity') &&
-      (addCrimeService(
-        'Protection racket',
-        'Pay or have your premises damaged. The gangs are territorial and consistent.',
-        '(street gang)'
-      ),
-      addCrimeService(
-        'Muscle for hire',
-        'Rough up a target, intimidate a debtor, move a problem — informal, no contract.',
-        '(street gang)'
-      )),
-    crimeTypes.has('Smuggling') &&
-      addCrimeService(
-        'Contraband transport',
-        'Goods move past checkpoints. The routes exist; the operators know the schedules.',
-        '(smuggling)'
-      ),
-    crimeTypes.has('Magical crime') &&
-      addCrimeService(
-        'Arcane services (illicit)',
-        'Magical practitioners outside guild oversight — identity work, scrying, targeted effects. Available if you know where to ask.',
-        '(arcane underground)'
-      ),
-    crimeTypes.has('Lawlessness') &&
-      (addCrimeService(
-        'No law, bring coin',
-        'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
-        '(lawless)'
-      ),
-      addCrimeService(
-        'Protection (informal)',
-        'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
-        '(informal)'
-      )),
-    crimeTypes.has('Organized guild crime') &&
-      addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions — expect 30-50% of value.', '(thieves guild)'),
-    crimeTypes.has('Background crime') &&
-      addCrimeService(
-        'Fence (word of mouth)',
-        'Ask around at the right tavern. Someone moves goods without questions.',
-        '(covert)'
-      ),
-    Object.keys(buckets).forEach(function (category) {
-      buckets[category].sort(function (a, b) {
-        return compareCodepoint(a.name, b.name);
-      });
-    }),
-    buckets
-  );
+  if (crimeTypes.has('Survival crime')) {
+    addCrimeService(
+      'Fence (word of mouth)',
+      'No questions asked — stolen goods move through back channels for a fraction of value.',
+      '(covert)'
+    );
+  }
+  if (crimeTypes.has('Street gang activity')) {
+    addCrimeService(
+      'Protection racket',
+      'Pay or have your premises damaged. The gangs are territorial and consistent.',
+      '(street gang)'
+    );
+    addCrimeService(
+      'Muscle for hire',
+      'Rough up a target, intimidate a debtor, move a problem — informal, no contract.',
+      '(street gang)'
+    );
+  }
+  if (crimeTypes.has('Smuggling')) {
+    addCrimeService(
+      'Contraband transport',
+      'Goods move past checkpoints. The routes exist; the operators know the schedules.',
+      '(smuggling)'
+    );
+  }
+  if (crimeTypes.has('Magical crime')) {
+    addCrimeService(
+      'Arcane services (illicit)',
+      'Magical practitioners outside guild oversight — identity work, scrying, targeted effects. Available if you know where to ask.',
+      '(arcane underground)'
+    );
+  }
+  if (crimeTypes.has('Lawlessness')) {
+    addCrimeService(
+      'No law, bring coin',
+      'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
+      '(lawless)'
+    );
+    addCrimeService(
+      'Protection (informal)',
+      'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
+      '(informal)'
+    );
+  }
+  if (crimeTypes.has('Organized guild crime')) {
+    addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions — expect 30-50% of value.', '(thieves guild)');
+  }
+  if (crimeTypes.has('Background crime')) {
+    addCrimeService(
+      'Fence (word of mouth)',
+      'Ask around at the right tavern. Someone moves goods without questions.',
+      '(covert)'
+    );
+  }
+  // Deterministic bucket order — codepoint sort, stable across devices/locales.
+  Object.keys(buckets).forEach(function (category) {
+    buckets[category].sort(function (a, b) {
+      return compareCodepoint(a.name, b.name);
+    });
+  });
+  return buckets;
 };

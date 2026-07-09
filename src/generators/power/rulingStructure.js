@@ -19,55 +19,62 @@ import { annotateFactionStanding } from './factionStanding.js';
 import { buildGovernanceLabels } from './governanceNarrative.js';
 
 export const generatePowerStructure = (tier, economicState, tradeRoute, config, institutions = []) => {
-  const instNames = (institutions || []).map((N) => (N.name || '').toLowerCase()),
+  const instNames = (institutions || []).map((inst) => (inst.name || '').toLowerCase()),
     priorities = getPriorities(config),
     instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
     factions = /** @type {Array<any>} */ ([]),
-    b = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
-    k = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
-    f = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
-    C = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
-    T =
+    baseGovPower = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
+    merchantPower = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
+    militaryPower = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
+    religiousPower = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
+    criminalPower =
       instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58)
         ? Math.round(12 * priorityToMultiplier(instFlags.criminalEffective))
         : 0,
-    M =
+    craftPower =
       tier !== 'thorp' && tier !== 'hamlet'
         ? Math.round(17 * priorityToMultiplier(instFlags.economyOutput * 0.75 + 10))
         : 0,
-    A =
+    arcanePower =
       instFlags.magicInfluence > 28 && (tier === 'city' || tier === 'metropolis')
         ? Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))
         : instFlags.magicInfluence > 55 &&
             tier === 'town' &&
-            (institutions || []).some(function (N) {
-              var ye = (N.name || '').toLowerCase();
-              return ye.includes('mage') || ye.includes('wizard') || ye.includes('alchemist') || ye.includes('arcane');
+            (institutions || []).some(function (inst) {
+              var nameLower = (inst.name || '').toLowerCase();
+              return nameLower.includes('mage') || nameLower.includes('wizard') || nameLower.includes('alchemist') || nameLower.includes('arcane');
             })
           ? Math.round(9 * priorityToMultiplier(instFlags.magicInfluence))
           : 0,
-    S = (institutions || []).some((N) => {
-      var ye = (N.name || '').toLowerCase();
+    hasNobleInst = (institutions || []).some((inst) => {
+      var nameLower = (inst.name || '').toLowerCase();
       return (
-        ye.includes('lord') ||
-        ye.includes('noble') ||
-        ye.includes('manor') ||
-        ye.includes('royal seat') ||
-        ye.includes('feudal')
+        nameLower.includes('lord') ||
+        nameLower.includes('noble') ||
+        nameLower.includes('manor') ||
+        nameLower.includes('royal seat') ||
+        nameLower.includes('feudal')
       );
     }),
-    y = priorities.economy > 70 && !S,
-    v = (institutions || []).some(function (N) {
-      return (N.name || '').toLowerCase().includes('royal seat');
+    economyDisplacesNobles = priorities.economy > 70 && !hasNobleInst,
+    hasRoyalSeat = (institutions || []).some(function (inst) {
+      return (inst.name || '').toLowerCase().includes('royal seat');
     }),
-    j = Math.round(22 * priorityToMultiplier(instFlags.militaryEffective * 0.65 + instFlags.economyOutput * 0.1)),
-    z = S ? (v ? 1.9 : 1.7) : 1,
-    $ = y ? 0.55 : 1,
-    Y = tier === 'town' ? (S ? 1.15 : 0.85) : 1,
-    J = tier === 'thorp' ? 0 : Math.round(tier === 'hamlet' || tier === 'village' ? j * z * $ * 0.75 : j * z * $ * Y),
-    D = institutions.map((N) => (N.name || '').toLowerCase()),
-    W = {
+    nobleBasePower = Math.round(22 * priorityToMultiplier(instFlags.militaryEffective * 0.65 + instFlags.economyOutput * 0.1)),
+    nobleInstMultiplier = hasNobleInst ? (hasRoyalSeat ? 1.9 : 1.7) : 1,
+    nobleEconomyPenalty = economyDisplacesNobles ? 0.55 : 1,
+    nobleTownAdjust = tier === 'town' ? (hasNobleInst ? 1.15 : 0.85) : 1,
+    noblePower =
+      tier === 'thorp'
+        ? 0
+        : Math.round(
+            tier === 'hamlet' || tier === 'village'
+              ? nobleBasePower * nobleInstMultiplier * nobleEconomyPenalty * 0.75
+              : nobleBasePower * nobleInstMultiplier * nobleEconomyPenalty * nobleTownAdjust
+          ),
+    lowerInstNames = institutions.map((inst) => (inst.name || '').toLowerCase()),
+    governanceLabelMap = {
       'head-of-household consensus': tier === 'hamlet' ? 'Elder Consensus' : 'Household Council',
       'informal elder consensus': tier === 'hamlet' ? 'Free Elder Council' : 'Elder Council',
       'village reeve': 'Elected Reeve',
@@ -83,25 +90,25 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'city-state government': 'City-State Council',
       'royal seat': 'Royal Authority',
     };
-  let U = null;
-  for (const [N, ye] of Object.entries(W))
-    if (D.some((he) => he.includes(N))) {
-      U = ye;
+  let govBody = null;
+  for (const [key, label] of Object.entries(governanceLabelMap))
+    if (lowerInstNames.some((name) => name.includes(key))) {
+      govBody = label;
       break;
     }
-  const re = {
+  const priorityByCategory = {
       military: priorities.military,
       religion: priorities.religion,
       economy: priorities.economy,
       criminal: priorities.criminal,
       magic: priorities.magic,
     },
-    ie = Object.entries(re).reduce((N, ye) => (N[1] > ye[1] ? N : ye))[0],
-    topPriority = re[ie];
-  let P,
-    I = null;
-  if (U) {
-    const N =
+    topCategory = Object.entries(priorityByCategory).reduce((best, entry) => (best[1] > entry[1] ? best : entry))[0],
+    topPriority = priorityByCategory[topCategory];
+  let governingFaction,
+    govModifier = null;
+  if (govBody) {
+    const modifier =
         topPriority > 65
           ? {
               military: 'military-dominated',
@@ -109,9 +116,9 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               economy: 'commerce-driven',
               criminal: 'corruption-riddled',
               magic: 'arcane-advised',
-            }[ie]
+            }[topCategory]
           : null,
-      ye =
+      modifierRedundant =
         [
           'Royal Authority',
           'Noble Governorship',
@@ -120,49 +127,49 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           'Household Council',
           'Elder Council',
           'Elected Reeve',
-        ].includes(U) ||
-        (U === 'Merchant oligarchy' && ie === 'economy') ||
-        (U === 'Merchant Guild Council' && ie === 'economy') ||
-        (U === 'Guild Council' && ie === 'economy') ||
-        (U === 'Democratic assembly' && ie === 'religion');
-    if (U && (U === 'Town Council' || U === 'City Council' || U === 'Grand Council')) {
-      const he = N
+        ].includes(govBody) ||
+        (govBody === 'Merchant oligarchy' && topCategory === 'economy') ||
+        (govBody === 'Merchant Guild Council' && topCategory === 'economy') ||
+        (govBody === 'Guild Council' && topCategory === 'economy') ||
+        (govBody === 'Democratic assembly' && topCategory === 'religion');
+    if (govBody && (govBody === 'Town Council' || govBody === 'City Council' || govBody === 'Grand Council')) {
+      const councilName = modifier
         ? {
             military:
-              U === 'Grand Council'
+              govBody === 'Grand Council'
                 ? 'Grand Military Council'
-                : U === 'City Council'
+                : govBody === 'City Council'
                   ? 'Military City Council'
                   : 'Military Council',
             religion:
-              U === 'Grand Council'
+              govBody === 'Grand Council'
                 ? 'High Theocratic Council'
-                : U === 'City Council'
+                : govBody === 'City Council'
                   ? 'Ecclesiastical Council'
                   : 'Church Council',
             economy:
-              U === 'Grand Council'
+              govBody === 'Grand Council'
                 ? 'Grand Merchant Senate'
-                : U === 'City Council'
+                : govBody === 'City Council'
                   ? 'Merchant City Council'
                   : 'Merchant Council',
             criminal:
-              U === 'Grand Council'
+              govBody === 'Grand Council'
                 ? 'Shadow Senate'
-                : U === 'City Council'
+                : govBody === 'City Council'
                   ? 'Corrupt City Council'
                   : topPriority > 72
                     ? 'Corrupt Council'
                     : 'Town Council',
-            magic: U === 'Grand Council' ? 'Arcane Senate' : 'Arcane Council',
-          }[ie]
+            magic: govBody === 'Grand Council' ? 'Arcane Senate' : 'Arcane Council',
+          }[topCategory]
         : null;
-      P = (U === 'Town Council' || U === 'City Council' || U === 'Grand Council') && he ? he : U;
-    } else P = U;
-    I = N && !ye ? N : null;
+      governingFaction = (govBody === 'Town Council' || govBody === 'City Council' || govBody === 'Grand Council') && councilName ? councilName : govBody;
+    } else governingFaction = govBody;
+    govModifier = modifier && !modifierRedundant ? modifier : null;
   } else
     ['thorp', 'hamlet', 'village'].includes(tier)
-      ? (P =
+      ? (governingFaction =
           (topPriority > 65 &&
             {
               military: "Headman's Authority",
@@ -170,10 +177,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               economy: 'Household Council',
               criminal: 'Elder Council',
               magic: 'Elder Council',
-            }[ie]) ||
+            }[topCategory]) ||
           'Elder Council')
       : tier === 'town'
-        ? (P =
+        ? (governingFaction =
             topPriority > 65
               ? {
                   military: 'Military Council',
@@ -181,7 +188,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                   economy: 'Merchant Council',
                   criminal: 'Corrupt Council',
                   magic: 'Arcane Council',
-                }[ie] || 'Town Council'
+                }[topCategory] || 'Town Council'
               : (topPriority > 55 &&
                   {
                     military: 'Military Council',
@@ -189,9 +196,9 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                     economy: 'Merchant Council',
                     criminal: 'Corrupt Council',
                     magic: 'Arcane Council',
-                  }[ie]) ||
+                  }[topCategory]) ||
                 'Town Mayor')
-        : (P =
+        : (governingFaction =
             tier === 'metropolis'
               ? topPriority > 65
                 ? {
@@ -200,7 +207,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                     economy: 'Grand Merchant Senate',
                     criminal: 'Shadow Senate',
                     magic: 'Arcane Senate',
-                  }[ie] || 'Grand Council'
+                  }[topCategory] || 'Grand Council'
                 : (topPriority > 55 &&
                     {
                       military: 'Grand Council',
@@ -208,7 +215,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                       economy: 'Grand Council',
                       criminal: 'Grand Council',
                       magic: 'Grand Council',
-                    }[ie]) ||
+                    }[topCategory]) ||
                   'Grand Council'
               : tier === 'city' || tier === 'metropolis'
                     ? topPriority > 65
@@ -218,7 +225,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                           economy: 'Merchant City Council',
                           criminal: 'Corrupt City Council',
                           magic: 'Arcane Council',
-                        }[ie] || 'City Council'
+                        }[topCategory] || 'City Council'
                       : (topPriority > 50 &&
                           {
                             military: 'City Council',
@@ -226,7 +233,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                             economy: 'City Council',
                             criminal: 'City Council',
                             magic: 'City Council',
-                          }[ie]) ||
+                          }[topCategory]) ||
                         'City Council'
                     : topPriority > 65
                       ? {
@@ -235,7 +242,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                           economy: 'Merchant Council',
                           criminal: 'Town Council',
                           magic: 'Arcane Council',
-                        }[ie] || 'Town Council'
+                        }[topCategory] || 'Town Council'
                       : (topPriority > 55 &&
                           {
                             military: 'Military Council',
@@ -243,32 +250,32 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                             economy: 'Merchant Council',
                             criminal: 'Town Council',
                             magic: 'Arcane Council',
-                          }[ie]) ||
+                          }[topCategory]) ||
                         'Town Council');
-  let H = null;
-  U ||
+  let informalModifier = null;
+  govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65
-      ? (H =
+      ? (informalModifier =
           {
             military: 'defended',
             religion: 'church-guided',
             economy: 'merchant-led',
             criminal: 'compromised',
             magic: 'mage-advised',
-          }[ie] || null)
+          }[topCategory] || null)
       : tier === 'town' &&
         topPriority > 55 &&
         topPriority <= 65 &&
-        (H =
+        (informalModifier =
           {
             military: 'garrison-backed',
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
             magic: 'arcane-advised',
-          }[ie] || null));
-  const Z = (typeof I < 'u' ? I : null) || H,
-    ne = {
+          }[topCategory] || null));
+  const resolvedModifier = (typeof govModifier < 'u' ? govModifier : null) || informalModifier,
+    govDescByLabel = {
       'Household Council':
         'Settlement governed by heads of household; decisions by informal consensus among property owners.',
       'Elder Council': 'Respected elders guide the community; authority is moral and traditional rather than formal.',
@@ -330,7 +337,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'Royal Authority':
         'A royal seat concentrates formal authority at the apex of the realm. How much real power the monarch exercises depends on their strength, the loyalty of the nobility, and whether anyone is currently contesting that loyalty.',
     },
-    ee = {
+    govDescByFaction = {
       'Military Council': 'Military commanders hold direct political authority; civic life is subordinate to defence.',
       'Theocratic Council': 'Religious leadership governs directly; doctrine shapes law and policy.',
       'Church Council': 'Clergy hold substantial political authority alongside civic governance.',
@@ -346,9 +353,9 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
-    E = ne[U] || ee[P] || ee['Mixed Council'],
-    _ = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
-    O = [
+    govDesc = govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council'],
+    priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
+    govPower = [
       'Theocratic Council',
       'Military Council',
       'Arcane Council',
@@ -356,79 +363,81 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       'Merchant oligarchy',
       'Corrupt Oligarchy',
       'City-State Council',
-    ].includes(P)
-      ? b + 8
-      : ['Feudal Stewardship', 'Feudal Appointee', 'Elder Council', 'Household Council', 'Elected Reeve'].includes(P)
-        ? b - 4
-        : b + 2;
+    ].includes(governingFaction)
+      ? baseGovPower + 8
+      : ['Feudal Stewardship', 'Feudal Appointee', 'Elder Council', 'Household Council', 'Elected Reeve'].includes(governingFaction)
+        ? baseGovPower - 4
+        : baseGovPower + 2;
   if (
     (factions.push({
-      faction: P,
-      modifier: Z || null,
-      power: O + _,
-      desc: E,
+      faction: governingFaction,
+      modifier: resolvedModifier || null,
+      power: govPower + priorityBonus,
+      desc: govDesc,
       isGoverning: true,
     }),
-    k > 5 &&
-      !(tier === 'thorp' && k < 12) &&
+    merchantPower > 5 &&
+      !(tier === 'thorp' && merchantPower < 12) &&
       (!['thorp', 'hamlet', 'village'].includes(tier) ||
-        (institutions || []).some(function (N) {
-          var ye = (N.name || '').toLowerCase();
-          return ye.includes('market') || N.category === 'Economy';
+        (institutions || []).some(function (inst) {
+          var nameLower = (inst.name || '').toLowerCase();
+          return nameLower.includes('market') || inst.category === 'Economy';
         })))
   ) {
-    const N =
-        P &&
-        (P.includes('Merchant oligarchy') || P.includes('Merchant Guild Council') || P.includes('Merchant Council')),
-      he = Math.round(k * (N ? 1.25 : 1)),
-      De = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'port',
-      Mi = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'crossroads',
-      cr =
-        N && he >= 12
+    const merchantGoverns =
+        governingFaction &&
+        (governingFaction.includes('Merchant oligarchy') ||
+          governingFaction.includes('Merchant Guild Council') ||
+          governingFaction.includes('Merchant Council')),
+      merchantAdjPower = Math.round(merchantPower * (merchantGoverns ? 1.25 : 1)),
+      isPort = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'port',
+      isCrossroads = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'crossroads',
+      merchantDesc =
+        merchantGoverns && merchantAdjPower >= 12
           ? 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.'
-          : he >= 26
-            ? De
+          : merchantAdjPower >= 26
+            ? isPort
               ? 'International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial.'
-              : Mi
+              : isCrossroads
                 ? 'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.'
                 : 'Dominant commercial class; their capital and networks give them leverage even formal institutions must respect.'
-            : he >= 18
-              ? De
+            : merchantAdjPower >= 18
+              ? isPort
                 ? 'Maritime traders and factor houses controlling import and export flows; prosperous, well-connected, and aware of both.'
-                : Mi
+                : isCrossroads
                   ? "Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both."
                   : 'Established merchant community; fund civic works and expect council access in return.'
-              : he >= 10
+              : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
                 : 'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.',
-      bt =
+      merchantLabel =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
         (economicState == null ? void 0 : economicState.prosperity) === 'Thriving'
           ? 'Merchant Guilds (dominant)'
           : 'Merchant Guilds',
-      tr = he,
-      ft = (O || b) + (_ || 0),
-      Fr = bt.includes('dominant') ? Math.round(ft * 0.88) : 9999;
+      merchantFinalPower = merchantAdjPower,
+      govFullPower = (govPower || baseGovPower) + (priorityBonus || 0),
+      merchantCap = merchantLabel.includes('dominant') ? Math.round(govFullPower * 0.88) : 9999;
     factions.push({
-      faction: bt,
-      power: Math.min(tr, Fr),
-      desc: cr,
+      faction: merchantLabel,
+      power: Math.min(merchantFinalPower, merchantCap),
+      desc: merchantDesc,
     });
   }
-  if (J > (tier === 'town' && !S ? 10 : 5)) {
-    const N =
-        P &&
-        (P.includes('Feudal') ||
-          P.includes('Noble') ||
-          P.includes('Royal Authority') ||
-          P.includes('Household Council')),
-      ye =
-        P &&
-        (P.includes('Merchant oligarchy') ||
-          P.includes('Democratic assembly') ||
-          P.includes('Guild Council') ||
-          P.includes('Merchant Guild Council')),
-      he =
+  if (noblePower > (tier === 'town' && !hasNobleInst ? 10 : 5)) {
+    const nobleGoverns =
+        governingFaction &&
+        (governingFaction.includes('Feudal') ||
+          governingFaction.includes('Noble') ||
+          governingFaction.includes('Royal Authority') ||
+          governingFaction.includes('Household Council')),
+      merchantAligned =
+        governingFaction &&
+        (governingFaction.includes('Merchant oligarchy') ||
+          governingFaction.includes('Democratic assembly') ||
+          governingFaction.includes('Guild Council') ||
+          governingFaction.includes('Merchant Guild Council')),
+      nobleLabel =
         tier === 'hamlet' || tier === 'village'
           ? 'Manor Household'
           : tier === 'town'
@@ -436,32 +445,32 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             : tier === 'metropolis'
               ? 'Noble Houses'
               : 'Noble Families',
-      De =
-        S && N
+      nobleDesc =
+        hasNobleInst && nobleGoverns
           ? priorityToCategory(priorities.military) === 'very_high'
             ? 'Hereditary landowners who are the governing authority here; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.'
-            : J > 20
+            : noblePower > 20
               ? 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'
-              : J > 10
+              : noblePower > 10
                 ? 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.'
                 : 'Noble families with residual feudal claims; the formal obligations are real, but other factions set the practical agenda day to day.'
-          : ye
+          : merchantAligned
             ? priorityToCategory(priorities.economy) === 'very_high'
               ? 'Old landed families being systematically displaced by merchant wealth; they retain hereditary title but little real leverage. A dangerous combination of pride and declining power.'
               : 'Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance.'
             : tier === 'hamlet' || tier === 'village'
               ? "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other factions hold more practical influence day to day."
-              : S && P && P.includes('Royal Authority')
-                ? J > 25
+              : hasNobleInst && governingFaction && governingFaction.includes('Royal Authority')
+                ? noblePower > 25
                   ? "The great noble houses are the crown's military and fiscal foundation — and they know it. Royal policy is negotiated with them as much as decreed over them."
-                  : J > 15
+                  : noblePower > 15
                     ? 'Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to court.'
                     : 'Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.'
                 : priorityToCategory(priorities.military) === 'very_high'
                   ? "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return."
-                  : J > 20
+                  : noblePower > 20
                     ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
-                    : J > 10
+                    : noblePower > 10
                       ? tier === 'metropolis'
                         ? 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.'
                         : tier === 'city'
@@ -469,15 +478,15 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                           : 'Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage'
                       : 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
     factions.push({
-      faction: he,
-      power: J,
-      desc: De,
+      faction: nobleLabel,
+      power: noblePower,
+      desc: nobleDesc,
     });
   }
-  if (f > 5 && (tier !== 'thorp' || priorities.military > 60)) {
-    const N =
+  if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
+    const militaryDesc =
         priorityToCategory(priorities.military) === 'very_high'
-          ? f > 25
+          ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
               ? 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.'
               : "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight."
@@ -490,128 +499,128 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
-                : f > 18
+                : militaryPower > 18
                   ? 'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.'
                   : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.',
-      he =
-        P && (P.toLowerCase().includes('military council') || P.toLowerCase().includes('martial'))
-          ? N +
+      militaryDescFinal =
+        governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
+          ? militaryDesc +
             ' Operationally distinct from the command council — these are the soldiers and watchmen, not the officers who govern.'
-          : N,
-      De = P && P.includes('Merchant oligarchy') ? Math.round(k * 0.85) : 9999;
+          : militaryDesc,
+      militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
       faction: 'Military/Guard',
-      power: Math.min(f, De),
-      desc: he,
+      power: Math.min(militaryPower, militaryCap),
+      desc: militaryDescFinal,
     });
   }
-  const X = D.some(
-      (N) =>
-        !N.startsWith('access to') &&
-        (N.includes('parish church') ||
-          N.includes('cathedral') ||
-          N.includes('monastery') ||
-          N.includes('friary') ||
-          N.includes('temple') ||
-          N.includes('shrine') ||
-          N.includes('priest (resident)') ||
-          N.includes('graveyard'))
+  const hasReligiousInst = lowerInstNames.some(
+      (name) =>
+        !name.startsWith('access to') &&
+        (name.includes('parish church') ||
+          name.includes('cathedral') ||
+          name.includes('monastery') ||
+          name.includes('friary') ||
+          name.includes('temple') ||
+          name.includes('shrine') ||
+          name.includes('priest (resident)') ||
+          name.includes('graveyard'))
     ),
-    K = ['village', 'town', 'city', 'metropolis'].includes(tier) || X;
-  if (C > 5 && K) {
-    const ye =
+    religiousGate = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInst;
+  if (religiousPower > 5 && religiousGate) {
+    const religiousDesc =
       priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
-        : P && P.includes('Theocratic Council')
+        : governingFaction && governingFaction.includes('Theocratic Council')
           ? 'Religious law governs directly; clergy are administrators as much as priests, and doctrine shapes civic ordinance.'
-          : P && P.includes('Church Council')
+          : governingFaction && governingFaction.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
-            : C > 24
-              ? D.some((he) => he.includes('cathedral') || he.includes('monastery'))
+            : religiousPower > 24
+              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery'))
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
-              : C > 17
+              : religiousPower > 17
                 ? ['city', 'metropolis'].includes(tier)
                   ? 'Major church institutions hold structural influence — land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
                   : ['hamlet', 'village'].includes(tier)
                     ? 'The parish priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'
-                : C > 10
+                : religiousPower > 10
                   ? ['hamlet', 'village', 'thorp'].includes(tier)
                     ? 'The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected.'
                     : 'Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust.'
                   : 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
     factions.push({
       faction: 'Religious Authorities',
-      power: C,
-      desc: ye,
+      power: religiousPower,
+      desc: religiousDesc,
     });
   }
   if (
-    (M > 5 &&
+    (craftPower > 5 &&
       priorities.economy > 22 &&
       factions.push({
         faction: 'Craft Guilds',
-        power: M,
+        power: craftPower,
         desc:
-          M > 16
+          craftPower > 16
             ? ['city', 'metropolis'].includes(tier)
               ? 'Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.'
               : 'Craft masters controlling production standards and apprenticeships; present in every civic dispute over prices and supply.'
-            : M > 10
+            : craftPower > 10
               ? 'Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.'
               : 'Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.',
       }),
-    T > 5)
+    criminalPower > 5)
   ) {
-    const N =
-      T > 22
+    const criminalDesc =
+      criminalPower > 22
         ? 'Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.'
-        : T > 16
+        : criminalPower > 16
           ? 'Criminal organisations have captured significant influence; corruption is systemic, not exceptional.'
-          : T > 10
+          : criminalPower > 10
             ? 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.'
             : ['hamlet', 'village', 'thorp'].includes(tier)
               ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
               : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
     factions.push({
       faction: "Thieves' Guild",
-      power: T,
-      desc: N,
+      power: criminalPower,
+      desc: criminalDesc,
     });
   }
-  const de =
-    P && P.includes('Arcane Council')
-      ? Math.max(A, Math.max(12, Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))))
-      : A;
-  de > 5 &&
+  const arcaneAdjPower =
+    governingFaction && governingFaction.includes('Arcane Council')
+      ? Math.max(arcanePower, Math.max(12, Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))))
+      : arcanePower;
+  arcaneAdjPower > 5 &&
     factions.push({
       faction: 'Arcane Orders',
-      power: de,
+      power: arcaneAdjPower,
       desc:
-        de > 22
+        arcaneAdjPower > 22
           ? 'Arcane institutions hold substantial political leverage here — contracts, security, and infrastructure all depend on magical services only they provide.'
-          : de > 16
+          : arcaneAdjPower > 16
             ? 'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.'
-            : de > 10
+            : arcaneAdjPower > 10
               ? 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.'
               : 'Magical practitioners are consulted but not formally empowered — their influence is advisory, transactional, and quietly resented.',
     });
-  const fe = (config == null ? void 0 : config.stressType) || null,
-    ge = (config == null ? void 0 : config.stressTypes) || (fe ? [fe] : []),
-    ke = (N) => ge.includes(N);
-  applyStressEventFactions(factions, ke, P, S, config, institutions);
-  const dt = factions.reduce((N, ye) => N + ye.power, 0);
-  (factions.forEach((N) => {
-    N.power = Math.round((N.power / dt) * 100);
+  const stressType = (config == null ? void 0 : config.stressType) || null,
+    stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
+    hasStress = (s) => stressTypes.includes(s);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
+  const totalPower = factions.reduce((sum, faction) => sum + faction.power, 0);
+  (factions.forEach((faction) => {
+    faction.power = Math.round((faction.power / totalPower) * 100);
   }),
-    factions.sort((N, ye) => (N.isGoverning ? -1 : ye.isGoverning ? 1 : ye.power - N.power)),
+    factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power)),
   annotateFactionStanding(factions));
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');
   });
-  const { stability: Me, recentConflict: We } = buildGovernanceLabels({
+  const { stability, recentConflict } = buildGovernanceLabels({
     factions,
     config,
     stressFlags,
@@ -620,10 +629,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     instNames,
     priorities,
     tier,
-    P,
-    S,
-    ge,
-    fe,
+    P: governingFaction,
+    S: hasNobleInst,
+    ge: stressTypes,
+    fe: stressType,
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional
@@ -666,7 +675,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   // 'adversarial' is not seeded — it asserts enforcement is WINNING, i.e.
   // no faction is on a capture arc.
   if (['equilibrium', 'corrupted', 'capture'].includes(criminalCaptureState)) {
-    const govEntry = factions.find((N) => N.isGoverning);
+    const govEntry = factions.find((f) => f.isGoverning);
     if (govEntry && !govEntry.captureState) govEntry.captureState = criminalCaptureState;
   }
   const stressTypesArr = config?.stressTypes || (config?.stressType ? [config.stressType] : []);
@@ -688,14 +697,14 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     // inheritance, ruling_authority governing-faction power, hook escalation,
     // simulation spine, world-event legitimacy deltas) key off this field;
     // it must always name the faction entry that carries isGoverning.
-    governingName: (factions.find((N) => N.isGoverning) || {}).faction || null,
+    governingName: (factions.find((f) => f.isGoverning) || {}).faction || null,
     // The government TYPE, persisted explicitly. At generation it equals
     // governingName (the governing entry's name doubles as the government
     // type); a transfer of power (domain/rulingPower.js) keeps both in step
     // while previousGovernments records what the seat used to be.
-    government: (factions.find((N) => N.isGoverning) || {}).faction || null,
-    stability: Me,
-    recentConflict: We,
+    government: (factions.find((f) => f.isGoverning) || {}).faction || null,
+    stability,
+    recentConflict,
     publicLegitimacy,
     factionRelationships,
     criminalCaptureState,
