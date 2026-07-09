@@ -7,6 +7,7 @@ import {SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS} from '../data/supplyChainData.js
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
+import { compareCodepoint } from '../domain/deterministicSort.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
@@ -402,7 +403,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (ra !== rb) return ra - rb;
     if (a.activatedByResource !== b.activatedByResource)
       return a.activatedByResource ? -1 : 1;
-    return a.needLabel.localeCompare(b.needLabel);
+    return compareCodepoint(a.needLabel, b.needLabel);
   });
 
   // ── Inter-chain dependency cascade ─────────────────────────────────────────────

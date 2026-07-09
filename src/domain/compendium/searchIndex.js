@@ -23,6 +23,7 @@
  */
 
 import { ARCHETYPES, REL_TYPES } from './catalogData.js';
+import { compareCodepoint } from '../deterministicSort.js';
 
 // Valid destination tabs — must mirror the TABS ids in CompendiumPanel.
 export const COMPENDIUM_TABS = Object.freeze([
@@ -191,7 +192,7 @@ export function searchCompendium(query, opts = {}) {
     if (a.entry.term.length !== b.entry.term.length) {
       return a.entry.term.length - b.entry.term.length;
     }
-    return a.entry.term.localeCompare(b.entry.term);
+    return compareCodepoint(a.entry.term, b.entry.term);
   });
 
   return scored.slice(0, limit).map(s => s.entry);

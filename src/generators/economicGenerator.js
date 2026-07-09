@@ -5,6 +5,7 @@
 
 import { random as _rng } from './rngContext.js';
 import { customDeps as _customDeps } from '../lib/dependencyEngine.js';
+import { compareCodepoint } from '../domain/deterministicSort.js';
 import {
   getInstFlags,
   getPriorities,
@@ -2420,8 +2421,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _subLocal.forEach((g) => v.localProduction.push(g));
   }
 
-  // Sort income sources by percentage desc, then alphabetically — must be LAST
-  incomeNormalized.sort((a, b) => b.percentage - a.percentage || a.source.localeCompare(b.source));
+  // Sort income sources by percentage desc, then by CODEPOINT source order (NOT
+  // localeCompare) — this list is persisted in the settlement, so the tiebreak
+  // must resolve identically across devices/locales — must be LAST
+  incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
   // ── Base prosperity model ───────────────────────────────────────────────
   // Inputs: route (channel), tier (capacity), economy slider (investment),
   //         magic (tier-scaled production), threat (drag), military (dual effect),

@@ -36,6 +36,7 @@ import { getTerrainType } from '../terrainHelpers.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
+import { byNameCodepoint } from '../../domain/deterministicSort.js';
 
 /**
  * Final trade-list normalization (exported for focused tests). Re-applies
@@ -129,11 +130,12 @@ registerStep('economyReconcilePass', {
   // service is GROUPED by its service TYPE (category → availableServices key) and
   // PRESENTED BY its provider institution (providedBy refId → name), matching how
   // generated services are attributed. Marked custom so the dossier tints it
-  // gold. Stable name order keeps rng deterministic; a no-op consuming zero rng
-  // when the user has no custom services.
+  // gold. CODEPOINT name order (NOT localeCompare) keeps rng replay byte-identical
+  // across devices/locales — this sort feeds the rng.chance() gate below; a no-op
+  // consuming zero rng when the user has no custom services.
   const customServices = (customDeps.registry().listCustom?.('services') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort(byNameCodepoint);
   for (const entry of customServices) {
     const item = entry.raw || {};
     const name = entry.name;

@@ -18,6 +18,7 @@ import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
+import { byNameCodepoint } from '../../domain/deterministicSort.js';
 
 // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
@@ -398,13 +399,15 @@ registerStep('assembleInstitutions', {
   // tier-filtered upstream (eligibleCustomContent), but we honour each item's own
   // gate again defensively. Essential ones always appear; the rest roll a modest
   // chance. Marked source:'custom' (the dossier tints these gold) and carrying the
-  // real `category` so they land in the right dossier section. Iterated in a
-  // stable name order so the rng rolls are deterministic; when the user has no
-  // custom institutions this loop is a no-op and consumes no rng (zero change to
-  // existing generation).
+  // real `category` so they land in the right dossier section. Iterated in
+  // CODEPOINT name order (NOT localeCompare) so the rng rolls replay byte-identical
+  // across devices/locales — this sort feeds rng.chance() below, so locale-collated
+  // order would break same-seed replay for non-ASCII custom names. When the user
+  // has no custom institutions this loop is a no-op and consumes no rng (zero
+  // change to existing generation).
   const customInstitutions = (customDeps.registry().listCustom?.('institutions') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort(byNameCodepoint);
   for (const entry of customInstitutions) {
     const item = entry.raw || {};
     const name = entry.name;

@@ -30,6 +30,7 @@ import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
 import { foldTradeCategories } from '../../domain/region/foldTradeCategories.js';
+import { compareCodepoint } from '../../domain/deterministicSort.js';
 
 /**
  * applyCustomTradeGoodsConfig — fold the EDITOR-authored trade-good input
@@ -141,7 +142,9 @@ export function computeEconomyState(ctx) {
   if (confirmedChains.length) {
     economicState.customChains = confirmedChains
       .slice()
-      .sort((a, b) => String(a.label || a.chainId || '').localeCompare(String(b.label || b.chainId || '')))
+      // CODEPOINT order (NOT localeCompare) — cross-device-stable; this list is
+      // persisted in economicState.customChains and must replay identically.
+      .sort((a, b) => compareCodepoint(a.label || a.chainId || '', b.label || b.chainId || ''))
       .map((c) => ({
         chainId: c.chainId || null,
         label: c.label || c.chainId || 'Custom chain',

@@ -4,6 +4,7 @@ import { random as _rng } from './rngContext.js';
 // code path. Caught by ESLint no-undef once we wired the lint gate.
 // Originally defined and exported from economicGenerator.js:959.
 import { priorityToCategory } from './economicGenerator.js';
+import { compareCodepoint } from '../domain/deterministicSort.js';
 import {
   getInstFlags,
   getPriorities,
@@ -2302,7 +2303,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         ),
       Object.keys(l).forEach(function (A) {
         l[A].sort(function (S, y) {
-          return S.name.localeCompare(y.name);
+          return compareCodepoint(S.name, y.name);
         });
       }),
       l

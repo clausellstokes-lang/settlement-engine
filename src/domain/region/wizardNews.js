@@ -1,6 +1,7 @@
 import { goodCriticality } from './goodsCatalog.js';
 import { ensureRegionalGraph } from './graph.js';
 import { wallClockNow } from '../clock.js';
+import { compareCodepoint } from '../deterministicSort.js';
 
 export const WIZARD_NEWS_SCHEMA_VERSION = 1;
 export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
@@ -271,7 +272,7 @@ function sortEntries(entries) {
   return entries.slice().sort((a, b) => {
     if (b.tick !== a.tick) return b.tick - a.tick;
     if (b.score !== a.score) return b.score - a.score;
-    return String(b.createdAt).localeCompare(String(a.createdAt));
+    return compareCodepoint(b.createdAt, a.createdAt);
   });
 }
 

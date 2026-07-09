@@ -14,6 +14,8 @@
  * Pure data + selectors; no React/store.
  */
 
+import { compareCodepoint } from './deterministicSort.js';
+
 // Services group by buyable-service TYPE (the engine's availableServices keys) —
 // the SAME way generated services are grouped in the dossier. The author picks
 // the type at creation and the generator drops the custom service into that
@@ -73,7 +75,7 @@ export function selectCustomCategories(customContent) {
       if (!seen.has(c.toLowerCase())) seen.set(c.toLowerCase(), c);
     }
   }
-  return [...seen.values()].sort((a, b) => a.localeCompare(b));
+  return [...seen.values()].sort(compareCodepoint);
 }
 
 /**

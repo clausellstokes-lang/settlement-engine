@@ -12,6 +12,8 @@
  * through the same simulation rails as built-in content.
  */
 
+import { compareCodepoint } from './deterministicSort.js';
+
 // Domain groups. Beyond categorizing, the group decides WHERE an entity surfaces
 // in the dossier (government → Power, economic → Economics, religious/arcane →
 // Services, etc.), so placement stays coherent.
@@ -132,7 +134,7 @@ export function satisfiesOptions(customContent) {
       if (!seen.has(v.toLowerCase())) seen.set(v.toLowerCase(), v);
     }
   }
-  return { builtins, customs: [...seen.values()].sort((a, b) => a.localeCompare(b)) };
+  return { builtins, customs: [...seen.values()].sort(compareCodepoint) };
 }
 
 // Back-compat: the DEMAND subset (the 5 categories that drive

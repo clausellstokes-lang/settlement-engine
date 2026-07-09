@@ -10,6 +10,7 @@
  */
 
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
+import { byNameCodepoint } from '../deterministicSort.js';
 
 /**
  * @param {Array<{name?:string}>} institutions  institutions already present
@@ -49,5 +50,5 @@ export function buildInstitutionCatalog(institutions = [], customInstitutions = 
     });
   }
 
-  return items.filter(i => !i.alreadyAdded).sort((a, b) => a.name.localeCompare(b.name));
+  return items.filter(i => !i.alreadyAdded).sort(byNameCodepoint);
 }

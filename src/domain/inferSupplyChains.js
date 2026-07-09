@@ -21,6 +21,7 @@
  * no Math.random, no set-iteration-order reliance. Same inputs → same chains.
  */
 import { buildRegistry } from '../lib/customRegistry.js';
+import { compareCodepoint } from './deterministicSort.js';
 
 const norm = (s) => String(s || '').trim().toLowerCase();
 const stem = (s) => norm(s).split(/[\s(]/)[0];
@@ -163,11 +164,11 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   const out = new Map(nodes.map((n) => [n.uid, []]));
   const inbound = new Map(nodes.map((n) => [n.uid, 0]));
   for (const e of edges) { out.get(e.from).push(e); inbound.set(e.to, inbound.get(e.to) + 1); }
-  for (const arr of out.values()) arr.sort((x, y) => `${x.commodity}${x.to}`.localeCompare(`${y.commodity}${y.to}`));
+  for (const arr of out.values()) arr.sort((x, y) => compareCodepoint(`${x.commodity}${x.to}`, `${y.commodity}${y.to}`));
 
   // Sources: no inbound edge but at least one outbound. Walk to maximal paths.
   const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && out.get(n.uid).length > 0)
-    .sort((a, b) => a.uid.localeCompare(b.uid));
+    .sort((a, b) => compareCodepoint(a.uid, b.uid));
   const paths = [];
   const walk = (uid, path, visited) => {
     const outs = out.get(uid) || [];
@@ -239,5 +240,5 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       verification: { state: 'discovered', userName: null, corrections: {} },
     });
   }
-  return discovered.sort((a, b) => a.chainId.localeCompare(b.chainId));
+  return discovered.sort((a, b) => compareCodepoint(a.chainId, b.chainId));
 }

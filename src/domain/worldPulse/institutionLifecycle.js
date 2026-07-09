@@ -39,6 +39,7 @@ import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
+import { compareCodepoint } from '../deterministicSort.js';
 
 const clamp01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
@@ -46,12 +47,9 @@ const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 // Codepoint tiebreak, NOT localeCompare: these sorts decide WHICH institution
 // is built or closed, and default-locale collation can reorder names across
 // machines, breaking replay determinism (the seedBetrayalTraitor rule in
-// applyWorldPulse.js).
-const byCodepoint = (a, b) => {
-  const x = String(a);
-  const y = String(b);
-  return x < y ? -1 : x > y ? 1 : 0;
-};
+// applyWorldPulse.js). The comparator now lives in domain/deterministicSort.js —
+// the single sanctioned cross-device-stable string order.
+const byCodepoint = compareCodepoint;
 
 // ── Tuning (every coefficient of the lifecycle in one place) ─────────────────
 export const INSTITUTION_LIFECYCLE_TUNING = Object.freeze({

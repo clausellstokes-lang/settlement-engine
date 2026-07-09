@@ -22,6 +22,7 @@
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 import { STRESSOR_CATALOG } from './worldPulse/stressors.js';
 import { canonStressors } from './canonicalAccessors.js';
+import { byNameCodepoint } from './deterministicSort.js';
 
 /**
  * Generation-time stress key → roaming world-pulse type. Used to dedupe the
@@ -116,5 +117,5 @@ export function buildStressorPickerItems(existingStresses = [], customStressors 
     });
   }
 
-  return items.sort((a, b) => a.name.localeCompare(b.name));
+  return items.sort(byNameCodepoint);
 }

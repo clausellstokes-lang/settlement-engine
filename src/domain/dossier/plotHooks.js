@@ -1,3 +1,5 @@
+import { compareCodepoint } from '../deterministicSort.js';
+
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
   economic_disparity: 'Economic Disparity',
@@ -153,7 +155,7 @@ export function collectPlotHooks(settlement = {}) {
     }));
   });
 
-  return hooks.sort((a, b) => b.priority - a.priority || a.category.localeCompare(b.category));
+  return hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
 }
 
 export function countPlotHookCategories(hooks = []) {

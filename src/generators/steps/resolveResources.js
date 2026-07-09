@@ -14,6 +14,7 @@ import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { slugify } from '../../lib/customRegistry.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
+import { byNameCodepoint } from '../../domain/deterministicSort.js';
 
 const DEPLETION_PROB = {
   thorp: 0.05, hamlet: 0.10, village: 0.20,
@@ -136,13 +137,14 @@ registerStep('resolveResources', {
   // Mirrors the custom-institution/service injection: tier-gated, essential ones
   // always appear, the rest roll a modest chance. Custom resources are authored
   // as present, so they join the abundant set (never auto-depleted). Tracked in
-  // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. Stable
-  // name order keeps rng deterministic; a no-op consuming zero rng when the user
-  // has no custom resources.
+  // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. CODEPOINT
+  // name order (NOT localeCompare) keeps rng replay byte-identical across
+  // devices/locales — this sort feeds the rng.chance() gate below; a no-op
+  // consuming zero rng when the user has no custom resources.
   let nearbyResourcesCustom = [];
   const customResources = (customDeps.registry().listCustom?.('resources') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort(byNameCodepoint);
   for (const entry of customResources) {
     const item = entry.raw || {};
     const name = entry.name;

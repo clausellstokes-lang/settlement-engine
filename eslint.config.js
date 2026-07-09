@@ -141,9 +141,13 @@ export default [
   // so a settlement replays byte-exact from its stored seed. A bare
   // Math.random(), Date.now(), or new Date() in generator logic is a silent
   // determinism leak the gate could not see before (rngContext's fallback
-  // converts it into invisible non-reproducibility). Errors here, so a new
-  // leak fails CI. prng.js (the documented sole non-determinism entry, for
-  // seed minting) and rngContext.js (the fallback itself) are exempt.
+  // converts it into invisible non-reproducibility). localeCompare is banned
+  // for the same reason (F13): it collates through the host ICU/locale tables,
+  // so a sort that feeds rng draw order or persisted output can order non-ASCII
+  // strings differently across devices/locales — use compareCodepoint from
+  // domain/deterministicSort.js. Errors here, so a new leak fails CI. prng.js
+  // (the documented sole non-determinism entry, for seed minting) and
+  // rngContext.js (the fallback itself) are exempt.
   {
     files: ['src/generators/**/*.js'],
     ignores: ['src/generators/prng.js', 'src/generators/rngContext.js'],
@@ -161,6 +165,10 @@ export default [
           selector: "NewExpression[callee.name='Date'][arguments.length=0]",
           message: 'Determinism: new Date() reads wall-clock time and breaks same-seed replay. Construct from an explicit value.',
         },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
       ],
     },
   },
@@ -168,8 +176,10 @@ export default [
   // ── A+ P1.2 — Determinism/purity guard widened to the domain kernel ──────────
   // The domain layer must be a pure function of its inputs (see P0.5, which removed
   // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
-  // CONSTRUCTION: no Math.random(), no import.meta, and no importing lib config/store
-  // modules (flags/saves/campaigns) from domain. @enforced-by this rule block.
+  // CONSTRUCTION: no Math.random(), no import.meta, no importing lib config/store
+  // modules (flags/saves/campaigns) from domain, and no localeCompare (F13 — the
+  // host ICU/locale collation reorders non-ASCII strings across devices; use
+  // compareCodepoint from domain/deterministicSort.js). @enforced-by this rule block.
   // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — the Phase-2
   // now-threading track (Track A) finished threading the ~20 `now = new Date()`
   // default-param fallbacks, so this block bans no-arg `new Date()` and `Date.now()`
@@ -198,6 +208,10 @@ export default [
         {
           selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Determinism: Date.now() reads wall-clock — use wallClockMs() from domain/clock.js (the sole sanctioned entry) or thread a value in.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
         },
       ],
       'no-restricted-imports': ['error', {
