@@ -1,5 +1,127 @@
 /* Global styles for SettlementForge */
-/* Fonts loaded via <link> in index.html for non-blocking preconnect */
+
+/* ─────────────────────────────────────────────────────────────────────
+   Self-hosted fonts. These used to load from the Google Fonts CDN via a
+   render-blocking stylesheet link in index.html; that stylesheet is gone.
+   We now serve the SAME TTFs the PDF path already ships (public/fonts/
+   Lora + Nunito) so the web UI and the exported dossier read in one type
+   voice, with no third-party origin on the critical path.
+
+   Every face uses swap display — text paints immediately in the fallback and
+   swaps to the web font when it arrives; never a blank (invisible) FOIT.
+
+   SERIF ALIAS — the design token still declares its serif as "Crimson Text"
+   (src/design/tokens.js → fontFamily.serif). But the only serif shipped in
+   public/fonts is Lora (the same serif the PDF renders). Rather than
+   reintroduce a Google fetch for Crimson Text, or regress the serif to the
+   Georgia *system* fallback, we self-host Lora and ALSO register it under the
+   'Crimson Text' family name so the existing token resolves to a real,
+   self-hosted, PDF-matching serif with zero source-file churn.
+     Follow-up (design-tokens owner): rename fontFamily.serif to 'Lora' and
+     drop the 'Crimson Text' alias below — one edit, then the alias is dead.
+
+   WEIGHTS — we ship exactly the faces the PDF cut: Nunito 400/700/800 (+400i)
+   and Lora 400/700 (+400i/700i). Intermediate weights the tokens request
+   (Nunito 500/600) are synthesized by the browser from the nearest face, as
+   they were under the Google variable font. font-family stacks in tokens.js
+   keep system fallbacks (system-ui / Georgia) for the pre-swap frame.
+
+   WOFF2 FOLLOW-UP — woff2 would cut these ~125KB TTFs to ~40KB each, but
+   generating it needs brotli (fonttools[woff2]) which isn't installable here
+   without a network fetch. The TTFs are already-shipped assets, so we serve
+   them as-is; add the woff2 conversions (and list them first in each src) when
+   the toolchain is available. Guarded by tests/build/fontsAndMeta.test.js.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Sans — Nunito (exact token name match). */
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Serif — Lora, registered under BOTH its true name and the 'Crimson Text'
+   token alias (see the note above). Each block is emitted twice so both family
+   names resolve to the same self-hosted files. */
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text'; /* alias → Lora files (see note above) */
+  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Crimson Text';
+  src: url('/fonts/Lora-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;

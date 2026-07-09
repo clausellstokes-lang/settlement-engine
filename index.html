@@ -4,11 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SettlementForge</title>
-    <!-- Preconnect to Google Fonts for faster loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Load fonts with display=swap (non-blocking) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;500;600;700;800;900&display=swap" />
+
+    <!--
+      Self-hosted fonts. The @font-face declarations live in src/index.css and
+      are served from /public/fonts (Vite serves public/ at the web root). We no
+      longer render-block on the Google Fonts CDN — the earlier stylesheet link
+      forced a blocking stylesheet plus a second CDN round-trip on every
+      landing, and left the family bytes on a third-party origin (a privacy +
+      reliability liability). The same TTFs the PDF path already ships (Lora +
+      Nunito) now dress the web UI too.
+
+      Preload the two faces the first paint actually needs so the browser
+      fetches them in parallel with the CSS rather than discovering them after
+      it parses @font-face:
+        · Nunito-Regular  — the app body font (body { font-family: 'Nunito' }).
+        · Lora-Bold       — the display/heading serif (largest above-the-fold
+                            text; the token asks for it via the 'Crimson Text'
+                            alias — see the @font-face comment in index.css).
+      Fonts are always fetched in CORS mode, so `crossorigin` is required on the
+      preload even though these are same-origin, or the preload is discarded and
+      re-fetched.
+    -->
+    <link rel="preload" href="/fonts/Nunito-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Lora-Bold.ttf" as="font" type="font/ttf" crossorigin />
+
+    <!-- ── Social / unfurl metadata (Open Graph + Twitter) ────────────────────
+      These STATIC tags give the landing page a rich unfurl in Slack, iMessage,
+      Discord, Twitter/X, Facebook, etc. Before this the card rendered blank.
+
+      Scope note: this is the LANDING unfurl only. Per-gallery-page dynamic OG
+      (a shared dossier link showing its own settlement name + painting) needs a
+      prerender / SSR meta layer because the app is a client-rendered SPA and
+      scrapers do not run JS. That is a Phase 5+ follow-up, out of scope here.
+
+      og:image must be a fully-qualified absolute URL — Slack/Twitter/Facebook
+      scrapers reject root-relative image paths. It points at an existing
+      painting already shipped in public/backgrounds/. -->
+    <meta name="description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
+    <meta property="og:site_name" content="SettlementForge" />
+    <meta property="og:title" content="SettlementForge — Forge a settlement worth running a campaign in." />
+    <meta property="og:description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://settlementforge.com/" />
+    <meta property="og:image" content="https://settlementforge.com/backgrounds/create.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SettlementForge — Forge a settlement worth running a campaign in." />
+    <meta name="twitter:description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
+    <meta name="twitter:image" content="https://settlementforge.com/backgrounds/create.jpg" />
   </head>
   <body>
     <div id="root"></div>
