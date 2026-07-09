@@ -51,8 +51,10 @@ import {
   deletePersistedCampaignState,
   clearCampaignSyncBookkeeping,
   initPersistFailureReporter,
+  retryOutboxPersist,
   newCampaignId, isUuid, findActiveCampaign,
 } from './campaignSliceShared.js';
+import { initOutboxStatusReporter, getStatus as outboxStatus } from './outbox.js';
 import { track, EVENTS } from '../lib/analytics.js';
 
 const SCHEMA_VERSION = 2;
@@ -168,6 +170,11 @@ export const createCampaignSlice = (set, get) => {
       + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
   }));
 
+  // Track K C3 — mirror the durable outbox's pending/parked counts into store
+  // state so the sync chip can render "n queued / n failed". Last-writer-wins
+  // (module-scoped, like initPersistFailureReporter); fires on every op change.
+  initOutboxStatusReporter(status => set(state => { state.outboxStatus = status; }));
+
   return {
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
@@ -179,6 +186,13 @@ export const createCampaignSlice = (set, get) => {
   campaignSyncError: null,
   /** Dismiss the cloud-sync warning banner. */
   clearCampaignSyncError: () => set(state => { state.campaignSyncError = null; }),
+  /** Durable-outbox status for the sync chip: pending + parked op counts. */
+  outboxStatus: outboxStatus(),
+  /** Retry affordance: revive parked ops and re-drain, clearing the warning. */
+  retryOutbox: () => {
+    set(state => { state.campaignSyncError = null; });
+    return retryOutboxPersist();
+  },
 
   // ── Actions ────────────────────────────────────────────────────────────────
 

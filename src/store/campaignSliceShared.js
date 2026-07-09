@@ -14,6 +14,17 @@ import {
   primeCampaignSync,
   syncCampaignChanges,
 } from '../lib/campaignSync.js';
+import {
+  enqueue as outboxEnqueue,
+  enqueueBarrier,
+  attemptOps,
+  resolveBarrier,
+  drainReady,
+  reviveAllPending,
+  loadMirror,
+  setOutboxScheduler,
+  OP_KIND_BARRIER,
+} from './outbox.js';
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
@@ -153,28 +164,77 @@ export function initPersistFailureReporter(fn) {
   _reportPersistFailure = fn;
 }
 
-export function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return Promise.resolve(true);
-  // Still must not rethrow — several callers fire-and-forget, and a rejection
-  // here produced unhandled promise rejections. But the failure is no longer
-  // SILENT: it used to leave the user seeing success while Supabase drifted from
-  // local state (surfacing later as a settlement that "reverts" on reload). Now
-  // it reports to the store so the UI can warn. Returns true/false so awaited
-  // batch callers can react too.
-  return savesService.update(saveId, partial).then(() => true).catch(e => {
+/**
+ * The op "kind" is the sorted set of top-level partial keys it writes
+ * ('campaignState+settlement+versionHistory', 'versionHistory', …). Supersede-
+ * dedup collapses ops of the SAME (saveId, kind) — i.e. writes to the same
+ * columns — so a newer full-blob write replaces a stale one, while a version-
+ * history-only write and a settlement write for the same save coexist (they
+ * touch different columns; superseding one by the other would drop a write).
+ */
+function kindForPartial(partial) {
+  return Object.keys(partial)
+    .filter(k => partial[k] !== undefined)
+    .sort()
+    .join('+') || 'empty';
+}
+
+/**
+ * The single outbox runner: performs the actual cloud write, reports a failure
+ * into the store (campaignSyncError — the load-bearing never-silent contract),
+ * and records the differential fingerprint on a successful MEMBER flush. Used by
+ * every drain path (first attempt, background retry, Retry affordance, boot
+ * replay) so all four behave identically.
+ *
+ * @param {{ saveId: string, kind: string, payloadFingerprint: string|null, differential: boolean }} op
+ * @param {any} payload
+ */
+async function outboxRunner(op, payload) {
+  if (op.kind === OP_KIND_BARRIER) return true;
+  let ok;
+  try {
+    await savesService.update(op.saveId, payload);
+    ok = true;
+  } catch (e) {
+    // Never rethrow — callers fire-and-forget, and the pool must not reject.
+    // Not SILENT either: report so the UI warns (the chip / banner).
     console.warn('[campaignSlice] save update failed', e);
     try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
-    return false;
+    ok = false;
+  }
+  // Differential cache: record ONLY on success, so an identical next flush skips
+  // the upload and a FAILED one re-uploads (never differential-skips a retry).
+  if (ok && op.differential && op.payloadFingerprint != null) {
+    lastPersistedFingerprints.set(op.saveId, op.payloadFingerprint);
+  }
+  return ok;
+}
+
+/**
+ * Persist a single save update through the durable outbox — SAME signature and
+ * SAME never-throws contract as before, so zero call sites change.
+ *
+ * The op is mirrored to localStorage (it survives a tab close), then attempted
+ * once now; the awaited result is that first attempt's outcome (true/false), so
+ * awaiting callers (e.g. the regional ordered-write gate) see exactly what they
+ * saw before. A failed op backs off and retries in the background / on Retry /
+ * on next boot — the caller is never blocked on retries.
+ */
+export function persistSaveUpdate(saveId, partial) {
+  if (!saveId || !partial) return Promise.resolve(true);
+  const op = outboxEnqueue({
+    saveId,
+    kind: kindForPartial(partial),
+    payload: partial,
+    fingerprint: fingerprintPersistPartial(partial),
+    differential: false,
   });
+  return attemptOps([op], outboxRunner)
+    .then(results => !!(results[0] && results[0].ok))
+    .catch(() => false);
 }
 
 // ── World-pulse member-save flush: parallelism + differential persistence ────
-
-// The whole-blob member uploads inside a world-pulse flush are wall-clock-bound
-// by Σ(RTT + upload), linear in members. Run them with a small concurrency cap
-// rather than strictly sequentially — enough to overlap the RTTs without hammering
-// the backend with the full fan-out at large member counts.
-const PERSIST_CONCURRENCY = 4;
 
 // FNV-1a 32-bit + length — the exact idiom campaignSync.js uses for its snapshot
 // fingerprint. Fast, dependency-free, single pass; collisions are astronomically
@@ -206,48 +266,29 @@ function fingerprintPersistPartial(partial) {
 }
 
 /**
- * Run `worker` over `items` with at most `limit` in flight at once. Every item is
- * processed (each lane pulls the next index until the queue drains) and ALL settle
- * before this resolves — no fail-fast abandonment. `worker` must not throw
- * (persistSaveUpdate never does; it resolves true/false), so one bad item can't
- * reject the batch and skip the rest.
- */
-async function runWithConcurrency(items, limit, worker) {
-  const results = new Array(items.length);
-  let next = 0;
-  const lane = async () => {
-    while (true) {
-      const i = next++;
-      if (i >= items.length) return;
-      results[i] = await worker(items[i], i);
-    }
-  };
-  const laneCount = Math.max(1, Math.min(limit, items.length));
-  const lanes = [];
-  for (let k = 0; k < laneCount; k++) lanes.push(lane());
-  await Promise.all(lanes);
-  return results;
-}
-
-/**
- * Flush per-member save updates with bounded parallelism + differential skipping.
+ * Flush per-member save updates through the outbox with bounded parallelism +
+ * differential skipping.
  *
- * Seam contract (unchanged): this settles EVERY update (success, reported failure,
- * or differential skip) before the caller runs syncCampaignSnapshot — the snapshot
- * is the commit point and must land after member saves are durable (F2 crash-
- * consistency). Ordering BETWEEN members is incidental, so we overlap them.
+ * Seam contract (unchanged): this settles EVERY member's first attempt (success,
+ * reported failure, or differential skip) before the caller runs
+ * syncCampaignSnapshot — the snapshot is the commit point and must land after
+ * member saves are attempted (F2 crash-consistency). Ordering BETWEEN members is
+ * incidental, so the WS31 pool (cap 4) overlaps them; a trailing BARRIER op marks
+ * the members-before-snapshot boundary in the durable mirror.
  *
- * Failure semantics (unchanged): persistSaveUpdate never throws and reports a
- * failure via campaignSyncError. Every update is still ATTEMPTED (no fail-fast), so
- * the banner ends up set if ANY member failed. A failed member's fingerprint is NOT
- * recorded, so the next flush re-uploads it (a retry is never skipped).
+ * Failure semantics (unchanged): the runner never throws and reports a failure
+ * via campaignSyncError. Every non-skipped member is still ATTEMPTED (no fail-
+ * fast), so the banner/chip ends up set if ANY member failed. A failed member's
+ * fingerprint is NOT recorded, so the next flush re-uploads it (a retry is never
+ * differential-skipped) — AND the op stays in the outbox to retry on its own.
  *
  * Returns a small summary ({ attempted, skipped, failed }) for tests/benchmarks;
  * existing callers ignore it.
  */
 export async function persistSaveUpdates(updates = []) {
   const summary = { attempted: 0, skipped: 0, failed: 0 };
-  await runWithConcurrency(updates, PERSIST_CONCURRENCY, async (update) => {
+  const enqueued = [];
+  for (const update of updates) {
     const partial = {
       settlement: update.settlement,
       campaignState: update.campaignState,
@@ -258,16 +299,31 @@ export async function persistSaveUpdates(updates = []) {
     // Differential skip: the exact payload already reached the cloud this session.
     if (fingerprint != null && lastPersistedFingerprints.get(saveId) === fingerprint) {
       summary.skipped += 1;
-      return true;
+      continue;
     }
+    if (!saveId) {
+      // No id — nothing to persist; a no-op that still counts as attempted, exactly
+      // as the pre-outbox persistSaveUpdate(null, …) resolve-true path did.
+      summary.attempted += 1;
+      continue;
+    }
+    enqueued.push(outboxEnqueue({
+      saveId,
+      kind: kindForPartial(partial),
+      payload: partial,
+      fingerprint,
+      differential: true,
+    }));
+  }
+  const barrier = enqueueBarrier();
+  const results = await attemptOps(enqueued, outboxRunner);
+  // Members' first attempts have all settled (none inflight) → release the
+  // barrier so the caller may commit the snapshot.
+  resolveBarrier(barrier);
+  for (const res of results) {
     summary.attempted += 1;
-    const ok = await persistSaveUpdate(saveId, partial);
-    // Record the fingerprint ONLY on a successful persist — recording on failure
-    // would let the retry be differential-skipped, silently dropping the write.
-    if (ok && fingerprint != null) lastPersistedFingerprints.set(saveId, fingerprint);
-    if (!ok) summary.failed += 1;
-    return ok;
-  });
+    if (!res.ok) summary.failed += 1;
+  }
   return summary;
 }
 
@@ -275,11 +331,37 @@ export async function persistSaveUpdates(updates = []) {
  * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
  * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
  * sync the campaign snapshot. Both awaits run only when the mutator produced
- * state. Failures inside persistSaveUpdates surface via campaignSyncError (see
- * persistSaveUpdate). Centralizing the pattern keeps the three call sites honest.
+ * state. persistSaveUpdates settles every member's first attempt (past the
+ * barrier) before this returns, so the snapshot never jumps ahead of the members.
  */
 export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
   if (!(result && campaignPersist)) return;
   await persistSaveUpdates(persistUpdates);
   await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+}
+
+/**
+ * Retry affordance (chip's Retry): revive every parked op (reset attempts) and
+ * re-drain. Resolves to the drain results. Never throws.
+ */
+export function retryOutboxPersist() {
+  reviveAllPending();
+  return drainReady(outboxRunner).catch(() => []);
+}
+
+/**
+ * Boot replay: wire the background retry scheduler and re-drain whatever the
+ * localStorage mirror survived from a prior (possibly dead) tab against the
+ * local payload cache. Called once at store init (alongside initAuth).
+ */
+export function initOutbox() {
+  // Production backoff scheduler. Tests leave this unset, so no stray timer
+  // fires — parked ops are re-attempted only on explicit Retry / boot replay.
+  setOutboxScheduler((fn, delayMs) => {
+    try {
+      if (typeof setTimeout === 'function') setTimeout(fn, delayMs);
+    } catch { /* no timer host */ }
+  });
+  loadMirror();
+  return drainReady(outboxRunner).catch(() => []);
 }

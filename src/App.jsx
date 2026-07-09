@@ -20,6 +20,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info, X } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
+import { initOutbox } from './store/campaignSliceShared.js';
 import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
@@ -144,6 +145,9 @@ export default function App() {
   useEffect(() => {
     initAuth();
     initOnboarding();
+    // Track K C3 — replay the durable persistence outbox from a prior (possibly
+    // dead) tab against the local payload cache, and arm background backoff.
+    initOutbox();
     let cancelled = false;
     import('./lib/stripe.js').then(async (stripeLib) => {
       const { checkCheckoutResult, fetchCreditBalance } = stripeLib;

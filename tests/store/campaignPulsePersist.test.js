@@ -41,7 +41,9 @@ import {
   clearPersistFingerprintCache,
   clearCampaignSyncBookkeeping,
   initPersistFailureReporter,
+  retryOutboxPersist,
 } from '../../src/store/campaignSliceShared.js';
+import { resetOutbox, peekOps, getStatus } from '../../src/store/outbox.js';
 
 function makeUpdate(saveId, { tick = 1, blob = 'x'.repeat(200) } = {}) {
   return {
@@ -59,6 +61,7 @@ beforeEach(() => {
   clearPersistFingerprintCache();
   clearCampaignSyncBookkeeping();
   initPersistFailureReporter(null);
+  resetOutbox();
 });
 
 describe('parallel-flush contract', () => {
@@ -242,4 +245,45 @@ describe('micro-benchmark — capped-parallel beats strict-sequential', () => {
     // Sequential ≈ N×50 = 500ms; capped-parallel ≈ ceil(10/4)×50 = 150ms.
     expect(parMs).toBeLessThan(seqMs * 0.6);
   }, 10000);
+});
+
+describe('durable outbox integration (Track K C3)', () => {
+  test('a failed member leaves a durable op that a later drain re-attempts (not lost)', async () => {
+    initPersistFailureReporter(vi.fn());
+    // First flush: member "b" fails its single attempt; a and c succeed.
+    saves.update.mockImplementation(saveId =>
+      saveId === 'b' ? Promise.reject(new Error('down')) : Promise.resolve(),
+    );
+    const first = await persistSaveUpdates(['a', 'b', 'c'].map(id => makeUpdate(id)));
+    expect(first).toMatchObject({ attempted: 3, failed: 1, skipped: 0 });
+
+    // The failed member survives IN the outbox (backing off), a/c drained clean.
+    const pendingIds = peekOps().filter(op => op.kind !== 'barrier').map(op => op.saveId);
+    expect(pendingIds).toEqual(['b']);
+    expect(getStatus().failed + getStatus().queued).toBe(1);
+
+    // Connectivity returns; the Retry affordance revives + re-drains it.
+    saves.update.mockResolvedValue(undefined);
+    await retryOutboxPersist();
+    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
+    expect(getStatus()).toMatchObject({ queued: 0, failed: 0 });
+  });
+
+  test('re-flushing the SAME save+kind supersedes the stale queued op (no duplicate)', async () => {
+    initPersistFailureReporter(vi.fn());
+    // First attempt for "a" fails → op parks in the queue (attempts=1, backing off).
+    saves.update.mockRejectedValueOnce(new Error('down'));
+    saves.update.mockImplementation(() => new Promise(() => {})); // subsequent attempts hang
+    await persistSaveUpdate('a', { settlement: { v: 1 } });
+
+    const afterFirst = peekOps().filter(op => op.kind !== 'barrier');
+    expect(afterFirst).toHaveLength(1);
+    expect(afterFirst[0].saveId).toBe('a');
+
+    // A newer write for the same save+kind supersedes it — still exactly ONE op,
+    // carrying the newer payload; the stale intent is dropped.
+    persistSaveUpdate('a', { settlement: { v: 2 } });
+    const afterSecond = peekOps().filter(op => op.kind !== 'barrier' && op.saveId === 'a');
+    expect(afterSecond).toHaveLength(1);
+  });
 });
