@@ -78,7 +78,13 @@ const FROZEN_LABEL_JOINS = Object.freeze({
   'src/generators/isolationGenerator.js': 1,
   'src/generators/narrativeGenerator.js': 1,
   'src/generators/npcGenerator.js': 5,
-  'src/generators/powerGenerator.js': 18, // 17 → 18: de-minification revealed an existing scan (see note above)
+  // F31 monolith split (2026-07-09): powerGenerator.js is now a thin re-export
+  // barrel (0 sites). Its 18 label-join sites moved VERBATIM into the power/
+  // split — 12 to governanceNarrative.js, 6 to rulingStructure.js. Total is
+  // unchanged; byte-identical output is proven by generatorGoldenMaster, so no
+  // new label-join LOGIC was added. Shrink-only holds from these new baselines.
+  'src/generators/power/governanceNarrative.js': 12,
+  'src/generators/power/rulingStructure.js': 6,
   'src/generators/priorityHelpers.js': 1,
   'src/generators/spatialGenerator.js': 8,
   'src/generators/steps/cascadePass.js': 1,
