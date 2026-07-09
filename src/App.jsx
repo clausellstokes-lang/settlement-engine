@@ -315,6 +315,33 @@ export default function App() {
     if (typeof document !== 'undefined') document.title = titleForView(view);
   }, [view]);
 
+  // ── Active-view background preload ───────────────────────────────────────────
+  // The .page-bg painting is a fixed CSS background, so the browser only
+  // discovers its URL after CSS applies — late enough to delay the first
+  // painted frame. Preload ONLY the current view's image (incl. the
+  // generation-flow scene) so its bytes are already in flight. One reused
+  // <link> element (found by id) is repointed on every view/flow change —
+  // we never accumulate stale preloads for views the user has left, and we
+  // never preload the whole set. The link is typed to the format the CSS
+  // will actually fetch (WebP where the engine decodes it, else JPEG — see
+  // config/pageBackgrounds.js), so preload and paint always agree and no
+  // image is fetched twice.
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const { href, type } = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
+    const ID = 'page-bg-preload';
+    let link = document.getElementById(ID);
+    if (!link) {
+      link = document.createElement('link');
+      link.id = ID;
+      link.rel = 'preload';
+      link.as = 'image';
+      document.head.appendChild(link);
+    }
+    link.type = type;
+    link.href = href;
+  }, [view, wizardMode, hasSettlement]);
+
   // ── Cloud sync custom content when user enters premium / elevated state ───
   // Triggers once per tier transition. Migrates local items on first premium
   // sign-in (tracked via a user-scoped localStorage migration flag).
