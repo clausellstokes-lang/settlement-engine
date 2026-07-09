@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { FS, swatch } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import PipelineRail from './PipelineRail.jsx';
@@ -49,6 +49,7 @@ const SummaryTab = lazy(() => import('./new/SummaryTab'));
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
 const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab.jsx'));
 const ChronicleTab = lazy(() => import('./new/tabs/ChronicleTab.jsx'));
+const VersionsTab = lazy(() => import('./settlement/VersionsTab.jsx'));
 const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
 const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
@@ -88,7 +89,7 @@ export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
-  notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle'] },
+  notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
 const TABS = [
@@ -376,7 +377,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
-      ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : [])
+      ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : []),
+    // Versions — the P109/E-5 snapshot timeline. Owner-only (revert mutates the
+    // save): needs an owning saved entry and never renders on the public player
+    // view. Self-gates further inside (versionHistory flag, tier lock).
+    ...(liveSaveEntry && !playerView
+      ? [{ id:'versions', label:'Versions', Icon: Clock }] : [])
   ];
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab
@@ -514,6 +520,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
+      case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;

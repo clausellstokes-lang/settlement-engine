@@ -132,7 +132,9 @@ export default function VersionsTab({ save }) {
   const enabled = flag('versionHistory');
   const tier = useStore(s => s.auth.tier);
   const revertToSnapshot = useStore(s => s.revertToSnapshot);
-  const isPaid = tier === 'premium' || tier === 'cartographer';
+  // 'premium' is the only paid tier value auth ever resolves (resolveTier maps
+  // elevated roles to it too); Cartographer is the PLAN name, not a tier value.
+  const isPaid = tier === 'premium';
   const [confirmRevert, setConfirmRevert] = useState(null);
   const [revertError, setRevertError] = useState(null);
 
