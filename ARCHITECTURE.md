@@ -26,7 +26,7 @@ functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 data/        Pure content tables — the moat. ~18k lines: institutionalCatalog,
              namingData, supplyChainData, npcData, historyData, … No logic.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 14-step pipeline; the rest are domain generators
+             steps/ holds the 19-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
@@ -69,15 +69,21 @@ module calls `registerStep()` on import. The runner lives in
 `generators/pipeline.js` and threads a **seeded PRNG context** (`rngContext.js`,
 `prng.js`) plus an `onStep` callback (used by the UI "pipeline reveal").
 
-Order: `resolveConfig → resolveResources → resolveStress → resolveNeighbour →
-assembleInstitutions → subsumptionPass → cascadePass → isolationPass →
-generateEconomy → generatePower → neighbourFactions → factionCorrelationPass →
-generatePopulation → generateNarratives → assembleSettlement`.
+Order (19 steps): `resolveConfig → resolveResources → resolveStress →
+resolveNeighbour → assembleInstitutions → subsumptionPass → cascadePass →
+isolationPass → stressConfirmPass → generateEconomy → generatePower →
+neighbourFactions → factionCorrelationPass → economyReconcilePass →
+structuralValidationPass → generatePopulation → corruptionPass →
+generateNarratives → assembleSettlement`.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (derived from steps/index.js) -->
 
-Determinism matters: same seed ⇒ same settlement. This is what makes the
-property-based and snapshot tests possible. A **Strangler-Fig** migration is in
-flight — legacy `generateSettlement.js` is being replaced by
-`generateSettlementPipeline.js`; both still exist.
+Determinism matters: same seed ⇒ same settlement — pinned by a 155-config
+golden-master hash manifest and enforced by construction (seeded per-step PRNG
+forks; Math.random/Date/localeCompare banned by lint in the engine + domain).
+The **Strangler-Fig** migration is COMPLETE: legacy `generateSettlement.js` is
+deleted; `generateSettlementPipeline.js` is the only entry point. The three
+big domain generators (economic/power/services) are thin barrels over
+`economy/` + `power/` + `services/` modules (≤800 lines each, ratchet-enforced).
 
 `structuralValidator.js` validates engine output shape; `settlement.schema.js`
 (domain) is the canonical schema and `settlementMigrations.js` upgrades old
@@ -116,7 +122,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (22) — schema + RLS policies + credit ledger + gallery +
+- **migrations/** (50) — schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
   votes, comments, privacy sanitization, reports, moderation (019-022), all via
@@ -164,7 +170,7 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~2,400 tests / ~159 files (unit, property-based, domain/
+- **test** — Vitest, ~5,000 tests / ~390 files (unit, property-based, domain/
   store/lib integration, component/UI smoke, a11y, security, edge-function).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
@@ -185,9 +191,10 @@ separate (`npm run test:e2e`), not in the default gate.
 - **The gate type-checks the full src logic tree** (it was domain-only; the
   punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
   `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
-- **`OutputContainer.jsx`** (the dossier renderer) is written in raw
-  `React.createElement`, not JSX — the densest, highest-stakes view. Edit
-  carefully; it's a candidate for a test-guarded JSX refactor.
+- **`OutputContainer.jsx`** (the dossier renderer) is the densest,
+  highest-stakes view — full JSX (the historical createElement form was
+  converted in Track C), guarded by the visual-budget + jsx-hygiene error
+  rules and the dossier smoke tests. Edit carefully anyway.
 - **`public/map/main.js`** is a ~1.4k-line fork of Azgaar FMG — outside all
   gates, reconciled by hand on upstream releases (`docs/fmg-fork.md`).
 - **PDF parity**: the on-screen dossier and the PDF render from related but

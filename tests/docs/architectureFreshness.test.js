@@ -31,3 +31,50 @@ describe('ARCHITECTURE.md freshness', () => {
     expect(Number(claim[1])).toBe(sliceCount);
   });
 });
+
+describe('ARCHITECTURE.md facts derive from the filesystem (F33)', () => {
+  // The doc understated its own suite by half and described a 14-step pipeline
+  // while 19 steps were registered — number drift is the exact rot class the
+  // meta-pin (claim vocabulary) cannot see. These pins derive the numbers from
+  // the artifacts themselves, so the doc can only be wrong loudly.
+
+  it('lists the exact registered step order from steps/index.js', () => {
+    const stepsIdx = read('../../src/generators/steps/index.js');
+    const steps = [...stepsIdx.matchAll(/import '\.\/(\w+)\.js';/g)].map((m) => m[1]);
+    expect(steps.length).toBeGreaterThan(0);
+    // The doc claims the count…
+    expect(archMd).toMatch(new RegExp(`${steps.length}-step pipeline`));
+    // …and the Order list must name every registered step, in order.
+    const orderBlock = archMd.match(/Order \(\d+ steps\): `([^`]+)`/);
+    expect(orderBlock, 'ARCHITECTURE.md must carry the Order list').toBeTruthy();
+    const docSteps = orderBlock[1].split('→').map((s) => s.trim());
+    expect(docSteps).toEqual(steps);
+  });
+
+  it('states the real migration count', () => {
+    const { readdirSync } = require('node:fs');
+    const n = readdirSync(resolve(here, '../../supabase/migrations')).filter((f) => f.endsWith('.sql')).length;
+    const claim = archMd.match(/\*\*migrations\/\*\* \((\d+)\)/);
+    expect(claim, 'ARCHITECTURE.md should state the migration count').toBeTruthy();
+    expect(Number(claim[1])).toBe(n);
+  });
+
+  it('does not understate the test suite by more than drift tolerance', () => {
+    const { readdirSync, statSync } = require('node:fs');
+    const walk = (d, out = []) => {
+      for (const e of readdirSync(d)) {
+        const p = resolve(d, e);
+        if (statSync(p).isDirectory()) walk(p, out);
+        else if (/\.test\.(js|jsx)$/.test(e)) out.push(p);
+      }
+      return out;
+    };
+    const files = walk(resolve(here, '../..', 'tests')).length;
+    const claim = archMd.match(/~([\d,]+) tests \/ ~(\d+) files/);
+    expect(claim, 'ARCHITECTURE.md should state suite size').toBeTruthy();
+    // Approximate claims are fine; a 25% understatement (the drift that
+    // actually shipped: "~159 files" vs 359 real) is not.
+    expect(Number(claim[2])).toBeGreaterThan(files * 0.75);
+    expect(Number(claim[2])).toBeLessThan(files * 1.25);
+  });
+});
