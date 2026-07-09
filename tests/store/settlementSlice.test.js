@@ -201,8 +201,10 @@ describe('settlementSlice — applyPendingPreview integrity', () => {
       payload: { severity: 0.8 }, cause: 'player_action',
     };
     store.getState().previewEvent(event);
-    const logEntry = store.getState().applyPendingPreview();
-    expect(logEntry.event.id).toBe('preview-1');
+    // applyPendingPreview passes through applyEvent's Track K §C1 ActionResult
+    // envelope; the eventLog entry rides in receipts[0].
+    const result = store.getState().applyPendingPreview();
+    expect(result.receipts[0].event.id).toBe('preview-1');
     expect(store.getState().eventLog[0].event.id).toBe('preview-1');
     expect(store.getState().pendingPreview).toBeNull();
   });

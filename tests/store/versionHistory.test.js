@@ -48,7 +48,9 @@ describe('version history mutations', () => {
     const state = useStore.getState();
     // Draft timeline is a SIBLING to the settlement, never inside it.
     expect(state.draftVersionHistory).toHaveLength(1);
-    expect(state.draftVersionHistory[0].id).toBe(snap.id);
+    // recordSnapshot returns a Track K §C1 ActionResult envelope; the snapshot
+    // id is surfaced on after.snapshotId (the raw snapshot rides in receipts[0]).
+    expect(state.draftVersionHistory[0].id).toBe(snap.after.snapshotId);
     expect(state.draftVersionHistory[0].kind).toBe('manual');
     expect(state.draftVersionHistory[0].label).toBe('After session 3');
     expect(state.draftVersionHistory[0].settlement.name).toBe('Hightower\'s Reach');
@@ -105,8 +107,9 @@ describe('version history mutations', () => {
     const snap = useStore.getState().recordSnapshot({ kind: 'manual', label: 'Checkpoint' });
     useStore.setState(s => { s.settlement.name = 'Mutated'; });
     expect(useStore.getState().settlement.name).toBe('Mutated');
-    const ok = useStore.getState().revertToSnapshot({ snapshotId: snap.id });
-    expect(ok).toBe(true);
+    // revertToSnapshot returns a Track K §C1 ActionResult envelope on success.
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: snap.after.snapshotId });
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
   });
 
@@ -124,7 +127,7 @@ describe('version history mutations', () => {
 
     const ok = useStore.getState().revertToSnapshot({ snapshotId: 'snap-active' });
 
-    expect(ok).toBe(true);
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Restored Saved Reach');
     expect(useStore.getState().savedSettlements[0].settlement.name).toBe('Restored Saved Reach');
   });
@@ -137,8 +140,8 @@ describe('version history mutations', () => {
 
     // Revert to A. This auto-records a pre-revert snapshot of the CURRENT
     // ('Mutated State') settlement into the sibling timeline, then restores A.
-    const ok = useStore.getState().revertToSnapshot({ snapshotId: snapA.id });
-    expect(ok).toBe(true);
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: snapA.after.snapshotId });
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
 
     // The pre-revert snapshot SURVIVES in the sibling timeline (the old bug
@@ -153,7 +156,7 @@ describe('version history mutations', () => {
     // Re-revert: rolling forward to the pre-revert snapshot restores the
     // mutated state — proving the revert is reversible, not a dead end.
     const ok2 = useStore.getState().revertToSnapshot({ snapshotId: preRevert.id });
-    expect(ok2).toBe(true);
+    expect(ok2.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Mutated State');
   });
 

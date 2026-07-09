@@ -83,6 +83,28 @@ import {
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement,
 } from './settlementSliceHelpers.js';
+// Track K §C1 — the ActionResult envelope. The five canon-path actions below
+// (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
+// destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
+// for the per-action before/after mapping and the C2/C3 loose-field TODOs.
+import { makeActionResult } from './actionResult.js';
+
+/**
+ * Coarse SystemState summary for an ActionResult before/after slice — the four
+ * dimension values (or null), never a clone. Tolerant of a null/partial state.
+ * @param {*} ss
+ * @returns {{resilience:number|null, volatility:number|null, externalThreat:number|null, resourcePressure:number|null}|null}
+ */
+function _dimsSummary(ss) {
+  if (!ss || typeof ss !== 'object') return null;
+  const pick = (d) => (d && typeof d.value === 'number' ? d.value : null);
+  return {
+    resilience:       pick(ss.resilience),
+    volatility:       pick(ss.volatility),
+    externalThreat:   pick(ss.externalThreat),
+    resourcePressure: pick(ss.resourcePressure),
+  };
+}
 
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
@@ -487,8 +509,20 @@ export const createSettlementSlice = (set, get) => ({
         s.draftVersionHistory = cappedVersionHistory([...(Array.isArray(s.draftVersionHistory) ? s.draftVersionHistory : []), snapshot]);
       });
     }
-    if (targetSaveId && persistedHistory) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
-    return snapshot;
+    const persisted = Boolean(targetSaveId && persistedHistory);
+    if (persisted) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
+    // Track K §C1 — ActionResult envelope. The immutable snapshot rides in
+    // `receipts` as-is (C2 tightens the Receipt type); its id is surfaced on
+    // `after.snapshotId` for callers that only need to reference it.
+    const timeline = targetSaveId ? 'saved' : 'draft';
+    return makeActionResult('recordSnapshot', {
+      before: { targetSaveId: targetSaveId ?? null, timeline },
+      after:  { snapshotId: snapshot.id, kind: snapshot.kind, label: snapshot.label, timeline },
+      receipts: [snapshot],
+      persistenceOps: persisted
+        ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: ['versionHistory'] }]
+        : [],
+    });
   },
 
   /** Revert the live settlement (or a save) to a prior snapshot. Auto-
@@ -538,13 +572,28 @@ export const createSettlementSlice = (set, get) => ({
       // all) with the target's stale embedded history.
       s.settlement = snapshotSettlement(target.settlement);
     });
-    if (targetSaveId && persistedSettlement) {
+    const persisted = Boolean(targetSaveId && persistedSettlement);
+    if (persisted) {
       persistSaveUpdate(targetSaveId, {
         settlement: persistedSettlement,
         versionHistory: cappedVersionHistory(persistedHistory),
       });
     }
-    return true;
+    // Track K §C1 — ActionResult envelope on the SUCCESS path. The failure
+    // fast-paths above deliberately keep returning bare `false`: VersionsTab
+    // (`const ok = revertToSnapshot(...); if (!ok)`) and its component test read
+    // the raw return as a boolean, and an envelope object is always truthy — so
+    // failure must stay falsy until that call site migrates to `.ok` (a
+    // component change outside this store-only fence). Success returning a
+    // truthy envelope keeps `if (!ok)` correct.
+    const timeline = targetSaveId ? 'saved' : 'draft';
+    return makeActionResult('revertToSnapshot', {
+      before: { targetSaveId: targetSaveId ?? null, snapshotId, timeline },
+      after:  { restoredSnapshotId: snapshotId, restoredLabel: target.label ?? null, timeline },
+      persistenceOps: persisted
+        ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: ['settlement', 'versionHistory'] }]
+        : [],
+    });
   },
 
   // Tier 5.1: structured delta from the most recent regenerate. UI
@@ -906,6 +955,10 @@ export const createSettlementSlice = (set, get) => ({
 
   destroySavedSettlement: (id, reason = 'destroyed') => {
     const now = new Date().toISOString();
+    // Annotated so tsc keeps the shape across the immer `set` closure assignment
+    // below (otherwise it infers `null` and the C1 envelope's persist.campaignState
+    // read narrows to `never`).
+    /** @type {{settlement: any, campaignState: any, timestamp: string}|null} */
     let persist = null;
     set(state => {
       const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
@@ -955,7 +1008,23 @@ export const createSettlementSlice = (set, get) => ({
       };
     });
     if (persist) persistSaveUpdate(id, persist);
-    return Boolean(persist);
+    // Track K §C1 — ActionResult envelope. `receipts` carries the
+    // DESTROY_SETTLEMENT eventLog entry this action appended to the save's log
+    // (C2 tightens the Receipt type). No current consumer reads the return, so
+    // both branches are full envelopes (ok:false when the save wasn't found).
+    if (!persist) {
+      return makeActionResult('destroySavedSettlement', {
+        ok: false,
+        before: { id: String(id), reason },
+      });
+    }
+    const destroyLog = persist.campaignState?.eventLog || [];
+    return makeActionResult('destroySavedSettlement', {
+      before: { id: String(id), reason },
+      after:  { id: String(id), status: 'destroyed', destroyedReason: reason },
+      receipts: destroyLog.length ? [destroyLog[destroyLog.length - 1]] : [],
+      persistenceOps: [{ saveId: String(id), kind: 'save-update', fields: ['settlement', 'campaignState', 'timestamp'] }],
+    });
   },
 
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
@@ -1295,7 +1364,34 @@ export const createSettlementSlice = (set, get) => ({
     // the per-consumer rationale; all canon-only and best-effort + guarded.
     rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
 
-    return logEntry;
+    // Track K §C1 — ActionResult envelope. `receipts` carries the eventLog
+    // entry this apply produced (C2 tightens the Receipt type); consumers that
+    // need it read result.receipts[0]. The direct-apply path fires no single
+    // analytics event of its own — regional propagation fires its own inside
+    // the ripple helper, conditionally — so analyticsEvent is null. The
+    // clock-bound (`return queued`) and no-settlement (`return null`) early
+    // returns above are deliberately NOT enveloped: they delegate to
+    // queueSettlementEvent / bail, and their callers already read those shapes.
+    const persistedToSave = Boolean(activeSaveId && afterState.settlement);
+    return makeActionResult('applyEvent', {
+      before: {
+        eventType: event?.type ?? null,
+        targetId: event?.targetId ?? null,
+        phase: state.phase,
+        activeSaveId: activeSaveId ?? null,
+        systemState: _dimsSummary(state.systemState),
+      },
+      after: {
+        phase: afterState.phase,
+        logged: afterState.phase === 'canon',
+        appliedAt: logEntry.appliedAt ?? null,
+        systemState: _dimsSummary(afterState.systemState),
+      },
+      receipts: [logEntry],
+      persistenceOps: persistedToSave
+        ? [{ saveId: String(activeSaveId), kind: 'save-update', fields: ['settlement', 'campaignState'] }]
+        : [],
+    });
   },
 
   /** Dismiss the successor prompt without taking action. */
@@ -1395,7 +1491,13 @@ export const createSettlementSlice = (set, get) => ({
    * log entry (legacy entries without one keep today's leave-it behavior).
    */
   undoLastEvent: () => {
-    if (get().phase !== 'canon' || get().eventLog.length === 0) return;
+    if (get().phase !== 'canon' || get().eventLog.length === 0) {
+      // Track K §C1 — nothing to undo: a conformant ok:false envelope. No
+      // consumer reads undoLastEvent's return today (Timeline's onUndo ignores
+      // it); the success path below is the real contract.
+      return makeActionResult('undoLastEvent', { ok: false });
+    }
+    const eventLogLengthBefore = get().eventLog.length;
     // Read the entry about to be popped while it is still in state — the
     // roaming-twin reconcile below needs its event + undo snapshot.
     const undoneEntry = get().eventLog[get().eventLog.length - 1];
@@ -1463,6 +1565,24 @@ export const createSettlementSlice = (set, get) => ({
         }
       } catch { /* world reconciliation is best-effort */ }
     }
+    // Track K §C1 — ActionResult envelope. The undo REVERSES the popped event,
+    // so `receipts` is empty this step (C2 may surface the reversed entry).
+    const persistedToSave = Boolean(afterState.activeSaveId && afterState.settlement);
+    return makeActionResult('undoLastEvent', {
+      before: {
+        poppedEventId: undoneEntry?.event?.id ?? null,
+        poppedEventType: undoneEntry?.event?.type ?? null,
+        eventLogLength: eventLogLengthBefore,
+      },
+      after: {
+        phase: afterState.phase,
+        eventLogLength: afterState.eventLog.length,
+        systemState: _dimsSummary(afterState.systemState),
+      },
+      persistenceOps: persistedToSave
+        ? [{ saveId: String(afterState.activeSaveId), kind: 'save-update', fields: ['settlement', 'campaignState'] }]
+        : [],
+    });
   },
 
   /** Force a re-derivation of systemState from the current settlement.
