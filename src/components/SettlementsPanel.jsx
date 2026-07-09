@@ -4,7 +4,7 @@ import {FolderPlus} from 'lucide-react';
 import { track, EVENTS } from '../lib/analytics.js';
 import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
-import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
+import {generateCrossSettlementConflictsDeterministic} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
 import { MUTED, BORDER, sans, FS, swatch, PAGE_MAX } from './theme.js';
 import { useStore } from '../store/index.js';
@@ -417,7 +417,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       description:`${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g,' ')}.`, bidirectional:true,
     };
     const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
-    const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
+    const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflictsDeterministic(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
     const network = [...(detail.settlement.neighbourNetwork||[]), entryForCurrent];
     const ownISR = [...(detail.settlement.interSettlementRelationships||[]), ...npcForA, ...conflictForA];
     let updatedSaves = saves.map(s => {

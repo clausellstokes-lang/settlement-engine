@@ -16,7 +16,7 @@
  * live here too because SettlementsPanel's manual-link UI shares them.
  */
 
-import { generateCrossSettlementConflicts } from '../../generators/crossSettlementConflicts.js';
+import { generateCrossSettlementConflictsDeterministic } from '../../generators/crossSettlementConflicts.js';
 import {
   canonicalEdgeForLink,
   relationshipLinkMetadata,
@@ -117,7 +117,7 @@ export function buildNeighbourBackLink(entry, existingSaves) {
   };
 
   const { forA: npcForOwn, forB: npcForPartner } = buildInterSettlementNPCs(settlement, partnerSave.settlement, edge.relationshipType, linkId);
-  const { forA: conflictForOwn, forB: conflictForPartner } = generateCrossSettlementConflicts(settlement, partnerSave.settlement, edge.relationshipType, linkId);
+  const { forA: conflictForOwn, forB: conflictForPartner } = generateCrossSettlementConflictsDeterministic(settlement, partnerSave.settlement, edge.relationshipType, linkId);
 
   const ownSettlement = {
     ...settlement,

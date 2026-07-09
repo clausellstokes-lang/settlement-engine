@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
-import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
+import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
@@ -23,13 +23,16 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
     if (!r || !nr?.name) return [];
     try {
       const relType = nr.relationshipType || 'neutral';
-      const settA = { name: r.name||'', npcs: r.npcs||[], factions: r.factions||[] };
-      const settB = { name: nr.name, npcs: nr.npcs||[], factions: nr.factions||[] };
-      const { forA } = generateCrossSettlementConflicts(settA, settB, relType, 'live');
+      // Carry the settlement's stable identity (_seed / id) so the derived rng
+      // is seeded off identity, not the transient {name} shape — same seed ⇒
+      // same live conflicts on every mount/remount/export.
+      const settA = { _seed: r._seed, id: r.id, name: r.name||'', npcs: r.npcs||[], factions: r.factions||[] };
+      const settB = { id: nr.id, name: nr.name, npcs: nr.npcs||[], factions: nr.factions||[] };
+      const { forA } = generateCrossSettlementConflictsDeterministic(settA, settB, relType, 'live');
       return forA;
     } catch(e) { return []; }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
+  }, [r?._seed, r?.id, r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
 
   if (!r) return null;
 

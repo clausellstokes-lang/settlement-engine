@@ -78,4 +78,40 @@ describe('buildNeighbourBackLink', () => {
     const links = second.partner.settlement.neighbourNetwork.filter(n => n.id === 'new-1');
     expect(links).toHaveLength(1);
   });
+
+  // F10: the cross-settlement conflicts persisted into both saves must be
+  // reproducible. Same settlement pair + relType ⇒ byte-identical conflicts,
+  // so the persisted state replays from its seed and does not drift on re-save.
+  test('persisted cross-settlement conflicts are deterministic and linkId-stamped', () => {
+    const npcs = (p) => ([
+      { id: `${p}_e`, name: `${p} Merchant`, role: 'Trader', category: 'economy' },
+      { id: `${p}_m`, name: `${p} Captain`, role: 'Officer', category: 'military' },
+    ]);
+    const rivalPartner = {
+      id: 'partner-9', name: 'Redkeep', tier: 'town',
+      settlement: { _seed: 'seed-redkeep', name: 'Redkeep', tier: 'town', npcs: npcs('R'), factions: [{ name: 'R Guild', dominantCategory: 'economy' }], neighbourNetwork: [] },
+    };
+    const rivalEntry = {
+      id: 'new-9', name: 'Blackford', tier: 'village',
+      settlement: {
+        _seed: 'seed-blackford', name: 'Blackford', tier: 'village', npcs: npcs('B'),
+        factions: [{ name: 'B Guild', dominantCategory: 'economy' }],
+        neighborRelationship: { name: 'Redkeep', tier: 'town', relationshipType: 'rival' },
+      },
+    };
+
+    const run = () => buildNeighbourBackLink(rivalEntry, [rivalPartner]);
+    const first = run();
+    const second = run();
+
+    const conflictsOf = (res) =>
+      res.settlement.interSettlementRelationships.filter(x => x.type === 'conflict' || x.type === 'faction_engagement');
+    const c1 = conflictsOf(first);
+    expect(c1.length).toBeGreaterThan(0);
+    // Reproducible across independent runs (fresh objects each time).
+    expect(conflictsOf(second)).toEqual(c1);
+    // Every conflict carries the shared linkId.
+    const linkId = first.settlement.neighbourNetwork.find(n => n.id === 'partner-9').linkId;
+    c1.forEach(x => expect(x.linkId).toBe(linkId));
+  });
 });

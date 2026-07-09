@@ -2,9 +2,18 @@
  * crossSettlementConflicts.js
  * Generates inter-settlement NPC conflicts and faction engagements
  * based on relationship type, settlement data, and economic/military context.
+ *
+ * DETERMINISM: this module NEVER runs inside the pipeline's setActiveRng scope
+ * (all callers are UI/save-flow code). Reaching for the ambient rngContext here
+ * silently fell back to Math.random(), so the same settlement pair rendered /
+ * persisted DIFFERENT conflicts on every mount — the marquee "same seed ⇒ same
+ * settlement" promise, broken. It now takes an EXPLICIT `rng` and exposes a
+ * convenience wrapper that derives that rng from the pair's STABLE IDENTITY, so
+ * a given (settlementA, settlementB, relationshipType) yields the same conflicts
+ * forever, on any device, with no ambient state.
  */
 
-import { random as _rng } from './rngContext.js';
+import { createPRNG } from './prng.js';
 
 // Which NPC categories create friction per relationship type
 const CONFLICT_CATS = {
@@ -55,17 +64,8 @@ const CONFLICT_NATURE = {
   },
 };
 
-function pick(arr) {
-  return arr[Math.floor(_rng() * arr.length)];
-}
-
-function _pickNPC(npcs, cat) {
-  const filtered = npcs.filter(n => (n.category||'').toLowerCase() === cat);
-  return filtered.length ? pick(filtered) : null;
-}
-
 // Generate a conflict description given two NPCs and context
-function buildConflictDesc(npcA, npcB, settA, settB, relType, nature) {
+function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
   const templates = {
     trade_partner: [
       `${npcA.name} (${npcA.role}) and ${npcB.name} (${npcB.role}) of ${settB.name} are locked in a ${nature} — both claim the right to set terms for the shared corridor.`,
@@ -101,11 +101,11 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature) {
     ],
   };
   const pool = templates[relType] || templates.neutral;
-  return pick(pool);
+  return rng.pick(pool);
 }
 
 // Faction engagement description
-function buildFactionDesc(facA, facB, settA, settB, relType) {
+function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
   const templates = {
     rival: [
       `The ${facA.name} of ${settA.name} and the ${facB.name} of ${settB.name} are in direct competition for the same economic territory. Both are escalating.`,
@@ -132,14 +132,35 @@ function buildFactionDesc(facA, facB, settA, settB, relType) {
     ],
   };
   const pool = templates[relType] || templates.neutral;
-  return pick(pool);
+  return rng.pick(pool);
+}
+
+/**
+ * Stable identity for a settlement, used to seed conflict generation.
+ * Prefers the generation seed (survives reruns of the same seed), then the
+ * persisted save/settlement id, then the name. Never the object reference —
+ * two structurally-equal settlements must seed identically.
+ */
+export function stableIdOf(settlement) {
+  return String(settlement?._seed ?? settlement?.id ?? settlement?.name ?? '');
 }
 
 /**
  * Generate cross-settlement conflicts between two settlements.
  * Returns { forA: [...], forB: [...] } — same entries, mirrored perspective.
+ *
+ * `rng` is REQUIRED (a createPRNG instance). This function draws no ambient
+ * randomness; callers without an rng should use
+ * generateCrossSettlementConflictsDeterministic below, which derives a stable
+ * one from the pair's identity.
  */
-export function generateCrossSettlementConflicts(settlementA, settlementB, relType, linkId) {
+export function generateCrossSettlementConflicts(settlementA, settlementB, relType, linkId, rng) {
+  if (!rng || typeof rng.pick !== 'function') {
+    throw new Error(
+      'generateCrossSettlementConflicts requires an rng (createPRNG instance). '
+      + 'Use generateCrossSettlementConflictsDeterministic() to seed one from settlement identity.',
+    );
+  }
   const cats  = CONFLICT_CATS[relType] || CONFLICT_CATS.neutral;
   const forA  = [];
   const forB  = [];
@@ -160,15 +181,15 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
     );
     if (!poolA.length || !poolB.length) continue;
 
-    const npcA = pick(poolA);
-    const npcB = pick(poolB);
+    const npcA = rng.pick(poolA);
+    const npcB = rng.pick(poolB);
     usedA.add(npcA.id);
     usedB.add(npcB.id);
 
     const natures = CONFLICT_NATURE[relType]?.[cat] || ['jurisdictional dispute'];
-    const nature  = pick(natures);
-    const desc    = buildConflictDesc(npcA, npcB, settlementA, settlementB, relType, nature);
-    const descB   = buildConflictDesc(npcB, npcA, settlementB, settlementA, relType, nature);
+    const nature  = rng.pick(natures);
+    const desc    = buildConflictDesc(npcA, npcB, settlementA, settlementB, relType, nature, rng);
+    const descB   = buildConflictDesc(npcB, npcA, settlementB, settlementA, relType, nature, rng);
 
     const base = { linkId, type: 'conflict', conflictNature: nature, relType };
     forA.push({
@@ -210,8 +231,8 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
     if (!bestB && factionsB.length) bestB = factionsB[0];
 
     if (bestA && bestB) {
-      const desc  = buildFactionDesc(bestA, bestB, settlementA, settlementB, relType);
-      const descB = buildFactionDesc(bestB, bestA, settlementB, settlementA, relType);
+      const desc  = buildFactionDesc(bestA, bestB, settlementA, settlementB, relType, rng);
+      const descB = buildFactionDesc(bestB, bestA, settlementB, settlementA, relType, rng);
       const base  = { linkId, type: 'faction_engagement', relType };
       forA.push({
         ...base,
@@ -231,4 +252,16 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
   }
 
   return { forA, forB };
+}
+
+/**
+ * Deterministic convenience wrapper: derives the rng from the pair's STABLE
+ * IDENTITY so the same (settlementA, settlementB, relType) always yields the
+ * same conflicts — across remounts, saves, exports, and devices — with no
+ * dependence on the ambient pipeline rng (which is never active for this
+ * module's callers). This is the entry point every caller should use.
+ */
+export function generateCrossSettlementConflictsDeterministic(settlementA, settlementB, relType, linkId) {
+  const rng = createPRNG(`xconflict:${stableIdOf(settlementA)}:${stableIdOf(settlementB)}:${relType}`);
+  return generateCrossSettlementConflicts(settlementA, settlementB, relType, linkId, rng);
 }
