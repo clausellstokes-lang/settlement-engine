@@ -1025,13 +1025,19 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
-  // Final deduplication pass — the anchor pass can produce same event name
+  // Final deduplication pass — the anchor pass can produce the same event
   // across multiple slots when two events share a category type mapping.
-  const seenNames = new Set();
+  // Keyed on the stable `type` id, NOT the rendered title: name-keying once
+  // silently destroyed a real arc whenever two types rendered the same title
+  // ('The Occupation' collision — infiltration_fear vs occupation_legacy),
+  // and it made every future title edit a potential content change. Titles
+  // are pinned unique (tests/generators/historyEventTitles.test.js), so this
+  // is behavior-identical today and rename-proof tomorrow.
+  const seenTypes = new Set();
   const deduped = events.filter(e => {
-    const key = e.name || e.type || '';
-    if (seenNames.has(key)) return false;
-    seenNames.add(key);
+    const key = e.type || e.name || '';
+    if (seenTypes.has(key)) return false;
+    seenTypes.add(key);
     return true;
   });
 

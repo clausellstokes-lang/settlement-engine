@@ -28,6 +28,18 @@ import {
   deriveDefenseReadiness, deriveArmedForces,
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
+import { humanize } from './format.js';
+
+// Human labels for the publicLegitimacy breakdown factors
+// (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
+// food }). ScoreWithBreakdown prints "<±delta> <label>"; any unmapped key falls
+// back to humanize() so a new factor still reads as a Title-Case word.
+const LEGITIMACY_FACTOR_LABELS = {
+  prosperity: 'Prosperity',
+  safety:     'Safety',
+  defense:    'Defense',
+  food:       'Food security',
+};
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -511,11 +523,16 @@ function powerSlice(active) {
     recentConflict:  s?.powerStructure?.recentConflict || null,
     legitimacy:      s?.powerStructure?.publicLegitimacy || null,
     // The engine emits breakdown as an object map ({ factor: delta }); normalize
-    // to the stable array the section iterates.
+    // to the stable array the section iterates. Each factor carries a human
+    // `label` (ScoreWithBreakdown prints "<±delta> <label>", e.g. "+12 Prosperity")
+    // — without it the chip rendered a bare delta with nothing naming what
+    // contributed. Labels match the derivation factors in
+    // factionDynamics.computePublicLegitimacy (prosperity / safety / defense /
+    // food security) and the PDF section's title-case voice.
     legitimacyBreakdown: Array.isArray(s?.powerStructure?.publicLegitimacy?.breakdown)
       ? s.powerStructure.publicLegitimacy.breakdown
       : Object.entries(s?.powerStructure?.publicLegitimacy?.breakdown || {})
-          .map(([key, delta]) => ({ key, delta })),
+          .map(([key, delta]) => ({ key, delta, label: LEGITIMACY_FACTOR_LABELS[key] || humanize(key) })),
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,

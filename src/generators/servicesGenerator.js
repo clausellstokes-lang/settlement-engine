@@ -124,7 +124,7 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
       ? buckets.criminal.push(
           {
             name: 'No law, bring coin',
-            desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for SEVERITY.',
+            desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
             institution: '(lawless)',
           },
           {
@@ -154,7 +154,7 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
         ? buckets.criminal.push(
             {
               name: 'No law, bring coin',
-              desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for SEVERITY.',
+              desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
               institution: '(lawless)',
             },
             {
@@ -334,7 +334,7 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
     crimeTypes.has('Lawlessness') &&
       (addCrimeService(
         'No law, bring coin',
-        'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for SEVERITY.',
+        'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
         '(lawless)'
       ),
       addCrimeService(

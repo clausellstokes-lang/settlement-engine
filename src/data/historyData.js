@@ -1317,7 +1317,12 @@ export const EVENT_TYPE_NAMES = {
   resource_scarcity:   'The Shortage',
   guild_conflict:      'The Guild War',
   corruption_scandal:  'The Scandal',
-  infiltration_fear:   'The Occupation',
+  crime_wave:          'The Crime Wave',
+  // infiltration_fear is a paranoia/denunciation arc (enemy agents, suspicion,
+  // denunciations) — NOT an occupation. It previously collided with
+  // occupation_legacy on 'The Occupation'; 'The Purge' names its actual theme
+  // (the internal hunt for infiltrators) and keeps the title set unique.
+  infiltration_fear:   'The Purge',
   leadership_vacuum:   'The Interregnum',
   occupation_legacy:   'The Occupation',
   disputed_land:       'The Land Dispute',

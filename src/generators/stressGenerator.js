@@ -39,7 +39,7 @@ const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
  * @param {string} stressType      - key from STRESS_TYPE_MAP
  * @param {Object} stressData      - STRESS_TYPE_MAP[stressType]
  */
-const buildStressEntry = (settlementName, stressType, stressData) => {
+export const buildStressEntry = (settlementName, stressType, stressData) => {
   const summaryRoll = rollStressSummary(stressType, { rng: _rng });
   return {
     type:          stressType,

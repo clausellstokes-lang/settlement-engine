@@ -26,9 +26,9 @@ function instId(name) {
 
 registerStep('isolationPass', {
   deps: ['cascadePass'],
-  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
-  provides: [],
-  mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place (A+ P1.7)
+  reads: ['catalogForTier', 'effectiveConfig', 'stress', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  provides: ['stress'], // applySubsistenceMode may append an isolation famine to the stress container
+  mutates: ['institutions', 'effectiveConfig'], // prunes the roster + stamps isolation flags on effectiveConfig in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   const { institutions, tier, tradeRoute, effectiveConfig, catalogForTier } = ctx;
@@ -62,7 +62,30 @@ registerStep('isolationPass', {
   }
 
   const beforeSubsistence = institutions.map(i => i.name);
-  applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper);
+  // applySubsistenceMode strips trade institutions IN PLACE and returns the
+  // (possibly new) stress container — a real famine entry appended when the
+  // isolation famine roll fires. The container is the single channel:
+  // stressConfirmPass re-weighs the entry against granaries and syncs
+  // effectiveConfig.stressTypes from the confirmed set, so the economy sees
+  // famine only when a famine entry actually survives (no more ghost famine).
+  const nextStress = applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper, ctx.stress);
+  const famineAdded = nextStress !== ctx.stress;
+  if (famineAdded) {
+    recordTrace(ctx, {
+      targetType: 'stressor',
+      targetId:   'stressor.famine',
+      step:       'isolationPass',
+      result:     'emergent',
+      causes: [
+        { source: `tradeRoute.${tradeRoute}`, effect: 'derived',
+          reason: `Isolated subsistence ${tier} has no external supply line — a failed harvest cannot be covered by imports, so famine is a live risk.` },
+      ],
+      downstreamEffects: [
+        { target: 'stressConfirmPass', effect: 'context',
+          reason: 'Re-weighed against granaries/food institutions like every other emergent stressor before the economy reads it.' },
+      ],
+    });
+  }
   // Trace any subsistence-stripped institutions (the pass removes
   // institutions incompatible with full subsistence mode).
   const afterSubsistenceSet = new Set(institutions.map(i => i.name));
@@ -101,5 +124,7 @@ registerStep('isolationPass', {
   // Note: stripArcaneInstitutions runs later in the original (line 889, after faction correlation).
   // We keep it in a separate logical position but it's still part of institution finalization.
 
-  return {};
+  // Write the stress container back (unchanged unless an isolation famine was
+  // appended above). stressConfirmPass (the next step) reads ctx.stress.
+  return { stress: nextStress };
 });

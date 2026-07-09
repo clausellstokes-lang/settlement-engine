@@ -6,6 +6,8 @@
  */
 
 import { ARCANE_INST_KW as _ARCANE_KW } from '../domain/magicFilter.js';
+import { buildStressEntry } from './stressGenerator.js';
+import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 
 const MAINTAINER_DESC = {
   town:       'A hedge wizard maintains the teleportation circle — the settlement\'s only trade lifeline. Without them, the circle fails.',
@@ -92,9 +94,19 @@ export function applyTeleportationInfrastructure(
 }
 
 // ─── 2. Subsistence mode (isolated thorp/hamlet) ──────────────────────────────
-export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chance) {
+//
+// Returns the (possibly new) stress container. When the famine roll fires it
+// APPENDS a real famine entry to the container — the single channel every other
+// stressor rides — instead of poking effectiveConfig.stressTypes. The old poke
+// pushed 'famine' into the economics channel WITHOUT a container entry, so
+// stressConfirmPass (which iterates the container) never re-weighed it and the
+// settlement got famine ECONOMICS with no stress entry, no Active Crisis card,
+// and no activeCondition — an invisible starvation. Routing it through the
+// container makes stressConfirmPass re-weigh it against granaries like every
+// other stressor, and assembleSettlement promotes it to an activeCondition.
+export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chance, stress) {
   const SUBSISTENCE_TIERS = ['thorp', 'hamlet'];
-  if (!SUBSISTENCE_TIERS.includes(tier) || tradeRoute !== 'isolated') return;
+  if (!SUBSISTENCE_TIERS.includes(tier) || tradeRoute !== 'isolated') return stress;
 
   const TRADE_TAGS = ['trade', 'market', 'guild', 'banking', 'luxury', 'port',
                       'transport', 'shipping', 'export', 'import', 'caravan',
@@ -120,14 +132,20 @@ export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveCo
     if (isTradeInst(institutions[i])) institutions.splice(i, 1);
   }
 
-  // Isolated subsistence settlements risk famine. Roll it into the real stress
-  // set so the downstream stressConfirmPass weighs it against the roster
-  // (granaries/food institutions suppress it) — the old `_isolationFoodStress`
-  // flag was stamped on the institutions array and read by nothing.
-  if (chance(0.35) && !effectiveConfig.stressTypes?.includes('famine')) {
-    if (!Array.isArray(effectiveConfig.stressTypes)) effectiveConfig.stressTypes = [];
-    effectiveConfig.stressTypes.push('famine');
+  // Isolated subsistence settlements risk famine. Build it as a REAL stress
+  // entry and append it to the container so the downstream stressConfirmPass
+  // weighs it against the roster (granaries/food institutions suppress it) like
+  // every other emergent stressor, and assembleSettlement re-renders its summary
+  // with the real name + promotes it to an activeCondition. The chance() draw
+  // stays the FIRST operand (its rng position is unchanged vs the old poke), and
+  // buildStressEntry draws no rng for famine (only 'wartime' consults the stream),
+  // so the pipeline's downstream rng is byte-identical.
+  const entries = Array.isArray(stress) ? stress : stress ? [stress] : [];
+  const hasFamine = entries.some((e) => e?.type === 'famine');
+  if (chance(0.35) && !hasFamine) {
+    return [...entries, buildStressEntry('', 'famine', STRESS_TYPE_MAP.famine)];
   }
+  return stress;
 }
 
 // ─── 2b. Planar institutions require a teleportation circle ───────────────────

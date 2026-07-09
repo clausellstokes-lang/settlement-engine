@@ -85,7 +85,6 @@ registerStep('stressConfirmPass', {
   ]);
 
   const kept = [];
-  let dropped = 0;
   for (const entry of entries) {
     const type = entry?.type;
     if (!type || forced.has(type)) { kept.push(entry); continue; }
@@ -106,7 +105,6 @@ registerStep('stressConfirmPass', {
       continue;
     }
 
-    dropped += 1;
     const suppressors = suppressorNames(type, institutions);
     recordTrace(ctx, {
       targetType: 'stressor',
@@ -128,8 +126,16 @@ registerStep('stressConfirmPass', {
     });
   }
 
-  if (dropped === 0) return {};
-
+  // Always re-stamp from the confirmed container (not just when something was
+  // dropped). isolationPass can APPEND an emergent famine to the container AFTER
+  // resolveStress set effectiveConfig.stressTypes, without touching that channel
+  // — so a config where nothing was dropped can still carry a container entry the
+  // economics channel hasn't seen yet. Syncing unconditionally makes the confirmed
+  // container the single source of truth: the economy reads famine iff a famine
+  // entry actually survived. For every OTHER config this is a no-op — kept equals
+  // the entries resolveStress already threaded, in the same order (the
+  // entries.length===0 guard above already short-circuits the no-stress case).
+  //
   // Keep the same effectiveConfig threading contract resolveStress set up,
   // so every downstream config.stressTypes reader sees the confirmed set.
   // Catalog types only — a custom authored entry (config.stressorEdits)
