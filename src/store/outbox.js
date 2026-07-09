@@ -1,10 +1,17 @@
 /**
  * outbox.js — the durable persistence outbox (Track K §C3).
  *
- * A FIFO-per-saveId queue of PersistenceOps, mirrored to localStorage, that
- * turns `persistSaveUpdate` from a fire-and-forget cloud write into a durable
+ * A queue of PersistenceOps, mirrored to localStorage, that turns
+ * `persistSaveUpdate` from a fire-and-forget cloud write into a durable
  * enqueue+drain: a local commit lands in one frame, the cloud catches up
  * visibly, and pending writes survive a tab close.
+ *
+ * ORDERING GUARANTEE (enforced, not merely hoped): writes to the SAME
+ * (saveId, kind) — i.e. the same columns — are serialized, so a newer write
+ * lands AFTER any in-flight older one and last-write-wins holds in enqueue
+ * order (see attemptOps' per-key gate). Writes to DIFFERENT keys never contend
+ * and drain fully concurrently, up to DRAIN_CAP. (It is deliberately NOT a
+ * single global FIFO — cross-save concurrency is the whole point of the pool.)
  *
  * WHAT THIS MODULE OWNS (and what it does NOT):
  *   • The op list (intent) and the payload cache (data), each mirrored to a
@@ -97,6 +104,16 @@ let _ops = [];
 let _payloads = {};
 let _counter = 0;
 
+/**
+ * Per-(saveId,kind) serialization gates. While an op for a key is mid-attempt,
+ * its entry here is a promise that resolves when it settles; a newer op for the
+ * SAME key awaits that before it starts, so same-column writes land in enqueue
+ * order (the durable "runs after" guarantee). Distinct keys never appear here at
+ * once, so cross-save writes stay fully concurrent.
+ * @type {Map<string, Promise<void>>}
+ */
+let _inflightByKey = new Map();
+
 /** @type {null | ((status: {queued:number, failed:number, inflight:number}) => void)} */
 let _statusReporter = null;
 
@@ -146,6 +163,7 @@ export function loadMirror() {
   const ls = safeLocalStorage();
   _ops = [];
   _payloads = {};
+  _inflightByKey = new Map(); // a fresh boot has no in-flight writes to serialize against
   if (!ls) return 0;
   let rawOps;
   let rawPayloads;
@@ -235,9 +253,11 @@ function payloadKeyFor(saveId, kind) {
  */
 export function enqueue({ saveId, kind, payload, fingerprint, differential = false }) {
   const key = payloadKeyFor(saveId, kind);
-  // Supersede: drop any non-inflight op with the same key (an inflight op is
-  // mid-attempt — let it settle; the new op runs after and last write wins).
-  // Its payload is about to be overwritten by the newer one, so no prune needed.
+  // Supersede: drop any non-inflight op with the same key (its payload is about
+  // to be overwritten by the newer one, so no prune needed). An in-flight op is
+  // mid-attempt and can't be recalled — but attemptOps' per-key gate makes this
+  // newer op WAIT for it, so the newer write lands after and last-write-wins
+  // holds in enqueue order (the ORDERING GUARANTEE in the module header).
   _ops = _ops.filter(op => !(op.payloadKey === key && op.status !== 'inflight'));
 
   _payloads[key] = payload;
@@ -346,29 +366,62 @@ function scheduleRetry(op, runner, delayMs) {
 export async function attemptOps(ops, runner) {
   const results = await runWithConcurrency(ops, DRAIN_CAP, async (op) => {
     if (op.status === 'done') return { op, ok: true };
-    op.status = 'inflight';
-    op.attempts += 1;
-    let ok;
-    try {
-      ok = await runner(op, op.payloadKey != null ? _payloads[op.payloadKey] : undefined);
-    } catch {
-      ok = false; // runner should be boolean-safe, but never let it reject the pool
-    }
-    if (ok) {
-      op.status = 'done';
-      pruneOp(op);
-    } else {
-      const delay = BACKOFF_MS[op.attempts - 1];
-      if (delay == null) {
-        op.status = 'failed';
-        op.nextAttemptAt = Infinity; // parked — Retry affordance / next boot revives it
-      } else {
-        op.status = 'queued';
-        op.nextAttemptAt = _clock() + delay;
-        scheduleRetry(op, runner, delay);
+    const key = op.payloadKey;
+
+    // ── Per-key serialization (the durable "runs after" guarantee) ──────────
+    // Wait out any op currently mid-attempt for the same (saveId, kind) so this
+    // newer write to the same columns lands AFTER the older one. Distinct keys
+    // never share a gate, so cross-save concurrency (up to DRAIN_CAP) is intact.
+    if (key != null) {
+      while (_inflightByKey.has(key)) {
+        try { await _inflightByKey.get(key); } catch { /* settle either way */ }
       }
+      // The op may have been superseded (and pruned) while it waited — a still-
+      // newer write for the same key took over; treat as persisted (that write
+      // carries the newest payload and will land).
+      if (!_ops.includes(op)) return { op, ok: true };
     }
-    return { op, ok };
+
+    let settleGate = () => {};
+    if (key != null) {
+      let resolveGate;
+      const gate = new Promise(res => { resolveGate = res; });
+      _inflightByKey.set(key, gate);
+      settleGate = () => {
+        if (_inflightByKey.get(key) === gate) _inflightByKey.delete(key);
+        resolveGate();
+      };
+    }
+
+    try {
+      op.status = 'inflight';
+      op.attempts += 1;
+      let ok;
+      try {
+        ok = await runner(op, key != null ? _payloads[key] : undefined);
+      } catch {
+        ok = false; // runner should be boolean-safe, but never let it reject the pool
+      }
+      if (ok) {
+        op.status = 'done';
+        pruneOp(op);
+      } else {
+        const delay = BACKOFF_MS[op.attempts - 1];
+        if (delay == null) {
+          op.status = 'failed';
+          op.nextAttemptAt = Infinity; // parked — Retry affordance / next boot revives it
+        } else {
+          op.status = 'queued';
+          op.nextAttemptAt = _clock() + delay;
+          scheduleRetry(op, runner, delay);
+        }
+      }
+      return { op, ok };
+    } finally {
+      // Release the key gate LAST — only once this op is fully settled (pruned or
+      // parked) may the next same-key op start, so ordering is exact.
+      settleGate();
+    }
   });
   commit();
   return results;
@@ -432,11 +485,12 @@ export function reviveAllPending() {
 
 // ── Lifecycle / test hooks ───────────────────────────────────────────────────
 
-/** Wipe the queue, payload cache, mirror, and counter (boot/test reset). */
+/** Wipe the queue, payload cache, mirror, counter, and key gates (boot/test reset). */
 export function resetOutbox() {
   _ops = [];
   _payloads = {};
   _counter = 0;
+  _inflightByKey = new Map();
   const ls = safeLocalStorage();
   if (ls) {
     try { ls.removeItem(MIRROR_KEY); ls.removeItem(PAYLOAD_KEY); } catch { /* ignore */ }

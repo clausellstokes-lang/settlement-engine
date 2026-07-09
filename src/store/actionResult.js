@@ -13,12 +13,20 @@
  * an eventLog entry, a DESTROY_SETTLEMENT entry, or a version snapshot — through
  * a Receipt builder (receiptFromTrace / receiptFromEventLogEntry / makeReceipt),
  * so the envelope carries derived causal receipts, not raw stored shapes.
- * `persistenceOps` stays typed LOOSELY (C3 makes it a durable outbox op).
  *
- * No side effects live here. `makeActionResult` is a pure constructor: the
- * action still fires its own analytics / persistence this step (the
- * `analyticsEvent` / `persistenceOps` fields DESCRIBE what happened, they do
- * not reroute it — that is future work, C3).
+ * `persistenceOps` carries lightweight PersistenceDescriptors — { saveId, kind,
+ * fields, opId? } — of the writes an action performed. The DURABLE op type now
+ * lives in outbox.js (Track K §C3, landed): a descriptor links to its durable
+ * outbox op by `opId` when the action routed the write through the outbox. The
+ * two are deliberately distinct — one names the write for the envelope's causal
+ * story, the other is the queued unit the sync path drains — so they no longer
+ * share the name `PersistenceOp` (the earlier C1 collision).
+ *
+ * No side effects live here. `makeActionResult` is a pure constructor. The
+ * envelope DESCRIBES persistence, it does not ROUTE it: the action itself fires
+ * `persistSaveUpdate` (which enqueues onto the durable outbox) this same step.
+ * That description-vs-routing split is a deliberate seam, not a pending TODO —
+ * C3's durable path exists and every canon-path write already flows through it.
  */
 
 /**
@@ -27,14 +35,23 @@
  */
 
 /**
- * @typedef {Object} PersistenceOp
- * LOOSE placeholder for C1. Today this is a plain description of the
- * persistSaveUpdate call the action already made — { saveId, kind, fields }.
- * C3 replaces this with a durable outbox op { id, saveId, kind,
- * payloadFingerprint, attempts, status, enqueuedAt }. TODO(Track K C3).
+ * The DURABLE persistence op — Track K §C3, defined in outbox.js. Referenced
+ * here only so a PersistenceDescriptor's `opId` can point at the real thing.
+ * @typedef {import('./outbox.js').PersistenceOp} PersistenceOp
+ */
+
+/**
+ * @typedef {Object} PersistenceDescriptor
+ * A lightweight description of a write an action performed, for the envelope's
+ * causal story — NOT the durable queue unit (that is {@link PersistenceOp} in
+ * outbox.js). Today the canon-path actions emit { saveId, kind:'save-update',
+ * fields } describing the persistSaveUpdate they fired; `opId`, when present,
+ * links the descriptor to the durable outbox op (outbox.js#PersistenceOp.id)
+ * that carries the write.
  * @property {string} saveId          save the write targets
  * @property {string} kind            op kind, e.g. 'save-update'
  * @property {string[]=} fields       which save-partial keys reached storage
+ * @property {string=} opId           id of the durable outbox op, when routed through it
  */
 
 /**
@@ -47,8 +64,8 @@
  * @property {string} action                       canonical action id, e.g. 'applyEvent'
  * @property {Object|null} before                  MINIMAL pre-state identity slice (NOT a clone)
  * @property {Object|null} after                   MINIMAL post-state identity slice
- * @property {Receipt[]} receipts                  why this happened (C2 type — loose for now)
- * @property {PersistenceOp[]} persistenceOps      what must reach durable storage (C3 type — loose for now)
+ * @property {Receipt[]} receipts                  why this happened (unified C2 Receipt type)
+ * @property {PersistenceDescriptor[]} persistenceOps  what reached durable storage (links to outbox ops via opId)
  * @property {{event: string, props: Object}|null} analyticsEvent  the event the action fired (describes, does not route)
  * @property {string|null} userMessage             toast/banner copy, null = silent
  */

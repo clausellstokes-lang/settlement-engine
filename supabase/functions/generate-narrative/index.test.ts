@@ -34,20 +34,29 @@ const { handleGenerateNarrative } = await import('./index.ts');
 
 type SpendResult = { ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean };
 
+type NarrateLimit = { allowed: boolean; window_seconds?: number };
+
 interface UserStubOpts {
   user?: { id: string } | null;
   authError?: { message: string } | null;
   spend?: SpendResult;
   spendError?: { message: string } | null;
+  narrateLimit?: NarrateLimit | null;
+  narrateLimitError?: { message: string } | null;
 }
 
-/** Recording stub of the anon+JWT user client: auth.getUser + spend_credits. */
+/** Recording stub of the anon+JWT user client: auth.getUser + spend_credits +
+ *  consume_narrate_rate_limit. narrateLimit defaults to null (→ { data:null }),
+ *  which the handler treats as "allowed" (fail-open) — so the existing money-path
+ *  tests keep passing untouched. */
 function makeUserStub(opts: UserStubOpts = {}) {
   const {
     user = { id: 'user_1' },
     authError = null,
     spend = { ok: true, balance: 42, spend_id: 'spend_row_1', elevated: false },
     spendError = null,
+    narrateLimit = null,
+    narrateLimitError = null,
   } = opts;
   const calls = { authHeaders: [] as string[], rpc: [] as Array<{ fn: string; args: unknown }> };
   const client = {
@@ -57,6 +66,7 @@ function makeUserStub(opts: UserStubOpts = {}) {
     rpc: (fn: string, args: unknown) => {
       calls.rpc.push({ fn, args });
       if (fn === 'spend_credits') return Promise.resolve({ data: spend, error: spendError });
+      if (fn === 'consume_narrate_rate_limit') return Promise.resolve({ data: narrateLimit, error: narrateLimitError });
       return Promise.resolve({ data: null, error: null });
     },
   };
@@ -241,4 +251,46 @@ Deno.test('a missing Authorization header is rejected 401 before the user client
   assertEquals(userStub.calls.authHeaders.length, 0);
   assertEquals(userStub.calls.rpc.length, 0);
   assertEquals(fetchRecord.calls, 0);
+});
+
+// ── (f) Velocity ceiling: a throttled user is rejected 429 before any spend ───
+Deno.test('a velocity-throttled user is rejected 429 before any spend or provider call', async () => {
+  const userStub = makeUserStub({ narrateLimit: { allowed: false, window_seconds: 3600 } });
+  const adminStub = makeAdminStub();
+  const fetchRecord = { calls: 0 };
+
+  const res = await handleGenerateNarrative(narrativeRequest(), {
+    userClient: userStub.factory,
+    adminClient: adminStub.factory,
+    anthropicFetch: makeOkFetch(fetchRecord),
+  });
+
+  assertEquals(res.status, 429);
+  assertEquals(res.headers.get('Retry-After'), '3600');
+  const body = await res.json();
+  assert(typeof body.error === 'string' && body.error.length > 0, 'a throttle message is returned');
+  // The limiter ran on the USER client, but NO spend and NO provider call happened,
+  // and refund (admin) was never touched — a throttled call costs nothing.
+  assert(userStub.calls.rpc.some((c) => c.fn === 'consume_narrate_rate_limit'), 'the limiter must run');
+  assertEquals(userStub.calls.rpc.some((c) => c.fn === 'spend_credits'), false);
+  assertEquals(fetchRecord.calls, 0);
+  assertEquals(adminStub.calls.rpc.length, 0);
+});
+
+// ── (g) Fail-open: a limiter error never blocks a legitimate paying user ──────
+Deno.test('a limiter error fails open — the narration still proceeds to spend', async () => {
+  const userStub = makeUserStub({ narrateLimitError: { message: 'limiter unavailable' } });
+  const adminStub = makeAdminStub();
+  const fetchRecord = { calls: 0 };
+
+  const res = await handleGenerateNarrative(narrativeRequest(), {
+    userClient: userStub.factory,
+    adminClient: adminStub.factory,
+    anthropicFetch: makeOkFetch(fetchRecord),
+  });
+
+  assertEquals(res.status, 200);
+  // The limiter was consulted and errored, but the spend still ran (fail-open).
+  assert(userStub.calls.rpc.some((c) => c.fn === 'consume_narrate_rate_limit'));
+  assert(userStub.calls.rpc.some((c) => c.fn === 'spend_credits'), 'fail-open must still spend');
 });

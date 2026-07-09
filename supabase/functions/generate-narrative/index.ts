@@ -2015,6 +2015,37 @@ export async function handleGenerateNarrative(
       );
     }
 
+    // ── Per-user velocity ceiling (independent of the credit gate) ──
+    // The credit spend below is the primary economic control, but a credit-rich
+    // or elevated account could still hammer the model at wire speed. This adds a
+    // per-user fixed-window RATE ceiling (migration 052, keyed on auth.uid()),
+    // enforced BEFORE any spend so a throttled call is never charged. It runs on
+    // the USER client (RLS-scoped, same as spend_credits) and FAILS OPEN: a
+    // limiter outage must never block a legitimate paying user, so only an
+    // explicit { allowed:false } throttles; any error / absent result proceeds.
+    try {
+      const { data: rl } = await supabaseUser.rpc('consume_narrate_rate_limit');
+      if (rl && (rl as { allowed?: boolean }).allowed === false) {
+        const windowSeconds = Number((rl as { window_seconds?: number }).window_seconds) || 3600;
+        return new Response(
+          JSON.stringify({
+            error: 'You are generating too quickly. Please wait a moment and try again — no credits were charged.',
+            retryAfterSeconds: windowSeconds,
+          }),
+          {
+            status: 429,
+            headers: {
+              ...corsHeaders,
+              'Content-Type': 'application/json',
+              'Retry-After': String(windowSeconds),
+            },
+          },
+        );
+      }
+    } catch (rlErr) {
+      console.warn('[generate-narrative] narrate rate limiter unavailable; failing open:', rlErr);
+    }
+
     // Parse request
     const {
       type,

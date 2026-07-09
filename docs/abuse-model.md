@@ -75,6 +75,30 @@ pattern as of Tier 0.10:
   proves every escalation path is blocked. Run via `supabase test
   db` before deploy.
 
+### Community (gallery votes + comments)
+
+- **Surface.** Authenticated RPCs `toggle_gallery_vote` and
+  `add_gallery_comment` (migration 019) let any signed-in user vote on
+  or comment under any public dossier.
+- **Threat.** Credit-free abuse: flooding a public dossier with
+  comments (rows persist even though the display list caps at 100) or
+  toggling votes at wire speed.
+- **Mitigation.** Per-user fixed-window velocity guards
+  (migration 052): 20 comments/hour and 60 vote-toggles/hour per
+  `auth.uid()`, enforced inside the SECURITY DEFINER RPCs via a shared
+  private counter (`_consume_action_rate_limit`) over an RLS-locked
+  `user_action_rate_limits` table. The server-fixed limit lives at each
+  call site (never client-overridable); the cap is on ACCEPTED actions
+  (an over-limit call raises, rolling back its own increment, so the
+  counter rests at the ceiling and every further call re-trips it) and
+  the atomic single-statement upsert is race-safe. Moderation
+  (migration 022) remains the reactive backstop.
+- **Coverage.** `tests/security/actionVelocity.pglite.test.js` runs the
+  real 052 SQL in-process and asserts each ceiling bites (the Nth call
+  raises, the throttled write inserts no row), that vote / comment
+  budgets and different users are isolated, plus a static drift pin
+  that the net-current RPC bodies still carry the guard.
+
 ### Stripe payments
 
 - **Surface.** `stripe-webhook` ingests checkout-completed events
@@ -115,10 +139,21 @@ pattern as of Tier 0.10:
   - **Dynamic PRESERVATION_RULES** emitted from
     `forbiddenChanges(settlement)` so every refinement-pass prompt
     explicitly names every locked entity + user-edited field.
+  - **Per-user velocity ceiling** (migration 052): beyond the credit
+    spend (the primary economic control), `generate-narrative` calls
+    `consume_narrate_rate_limit` as the user BEFORE spending — a
+    server-fixed 40 generations/hour/user ceiling. Credits bound TOTAL
+    spend; this bounds RATE, so a credit-rich or elevated account
+    can't hammer the model. It FAILS OPEN (a limiter outage never
+    blocks a paying user); a throttled call returns 429 with a
+    `Retry-After` header and no charge.
 - **Coverage.** 24 grounding integration tests + 22 violations-UI
   tests + 12 contract tests on the edge function. Each prompt-
   injection canary asserts user-direction text never appears in the
-  dossier JSON.
+  dossier JSON. The money-path Deno test
+  (`generate-narrative/index.test.ts`) additionally asserts a
+  throttled user is rejected 429 before any spend and that a limiter
+  error fails open (the paying user still generates).
 
 ## Gaps (open work)
 
@@ -127,11 +162,16 @@ pattern as of Tier 0.10:
   `edge_function_telemetry` table aggregating volume per IP/UA. A
   future phase could add this once volume data justifies the
   storage.
-- **No per-IP rate-limit at the edge.** The bot guard rejects
-  obvious-bot UAs, but a polite-UA scraper hitting 1000 endpoints/
-  second isn't rejected. Auth gating + Supabase's connection limit
-  is the de-facto throttle today. A future phase could wire
-  Cloudflare Workers KV or Postgres-backed bucketing.
+- **No GENERAL per-IP rate-limit at the edge.** The highest-value
+  actions now have real velocity guards — per-IP for the
+  unauthenticated ones (email 034, dossier-verify 035) and per-user
+  for the authenticated ones (gallery vote/comment + narrate 052) —
+  but there is no blanket per-IP limiter across ALL functions, so a
+  polite-UA scraper hitting a thousand *read* endpoints/second isn't
+  rejected. The bot guard (obvious-bot UAs) + auth gating + Supabase's
+  connection limit is the de-facto throttle for the rest. A future
+  phase could wire Cloudflare Workers KV or Postgres-backed per-IP
+  bucketing in front of every function.
 - **No CAPTCHA on signup.** Bot signups → unused accounts. Low cost
   to the system but pollutes analytics. Future phase.
 - **No bot detection on the gallery.** Public dossier pages are

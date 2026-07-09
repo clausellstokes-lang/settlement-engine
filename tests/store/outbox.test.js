@@ -209,6 +209,99 @@ describe('backoff + park', () => {
   });
 });
 
+describe('per-key ordering (the "runs after" guarantee)', () => {
+  const flush = async () => { for (let i = 0; i < 6; i++) await Promise.resolve(); };
+
+  test('a second same-key op waits for an in-flight one, then runs after it', async () => {
+    const started = [];
+    const finished = [];
+    const gates = new Map(); // op.id -> resolve(true)
+    const runner = vi.fn((op) => {
+      started.push(op.id);
+      return new Promise(res => { gates.set(op.id, () => { finished.push(op.id); res(true); }); });
+    });
+
+    // A goes in flight and BLOCKS on its gate.
+    const a = enq('s1', 'settlement', { v: 1 });
+    const pA = attemptOps([a], runner);
+    await flush();
+    expect(started).toEqual([a.id]); // A is mid-attempt
+
+    // While A is in flight, a newer same-key op is enqueued. A survives (inflight
+    // ops aren't superseded), so both coexist.
+    const b = enq('s1', 'settlement', { v: 2 });
+    expect(peekOps().filter(o => o.kind !== OP_KIND_BARRIER)).toHaveLength(2);
+    const pB = attemptOps([b], runner);
+    await flush();
+    // B must NOT have started — it's serialized behind A (same key).
+    expect(started).toEqual([a.id]);
+
+    // Complete A → its gate releases and B is free to run.
+    gates.get(a.id)();
+    await pA;
+    await flush();
+    expect(started).toEqual([a.id, b.id]); // B started only AFTER A finished
+    expect(finished).toEqual([a.id]);
+
+    gates.get(b.id)();
+    await pB;
+    expect(finished).toEqual([a.id, b.id]);
+  });
+
+  test('a same-key op superseded while it waits is skipped (the newer write takes over)', async () => {
+    const started = [];
+    const gates = new Map();
+    const runner = vi.fn((op) => {
+      started.push(op.id);
+      return new Promise(res => { gates.set(op.id, () => res(true)); });
+    });
+
+    const a = enq('s1', 'settlement', { v: 1 });
+    const pA = attemptOps([a], runner);
+    await flush();
+    expect(started).toEqual([a.id]);
+
+    // B enqueued (waits behind in-flight A), then C supersedes the still-queued B.
+    const b = enq('s1', 'settlement', { v: 2 });
+    const pB = attemptOps([b], runner);
+    await flush();
+    const c = enq('s1', 'settlement', { v: 3 }); // supersedes queued B
+    expect(peekPayloads()['s1:settlement']).toEqual({ v: 3 });
+    const pC = attemptOps([c], runner);
+
+    // Release A → B wakes, finds itself superseded (pruned), and skips its runner;
+    // C is the surviving op and runs with the newest payload.
+    gates.get(a.id)();
+    await pA;
+    await flush();
+    const bResult = await pB;
+    expect(bResult[0].ok).toBe(true);       // B resolves success (C carries the write)
+    expect(started).toEqual([a.id, c.id]);  // B's runner never fired
+    expect(runner).not.toHaveBeenCalledWith(b, expect.anything());
+
+    gates.get(c.id)();
+    await pC;
+    expect(peekOps().filter(o => o.kind !== OP_KIND_BARRIER)).toHaveLength(0);
+  });
+
+  test('distinct keys are NOT serialized — they drain concurrently', async () => {
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const resolvers = [];
+    const runner = vi.fn(() => {
+      inFlight += 1; maxInFlight = Math.max(maxInFlight, inFlight);
+      return new Promise(res => resolvers.push(() => { inFlight -= 1; res(true); }));
+    });
+    // Different saveIds → different keys → no gate contention.
+    const ops = ['s1', 's2', 's3'].map(id => enq(id, 'settlement', { v: 1 }));
+    const pending = attemptOps(ops, runner);
+    await flush();
+    expect(maxInFlight).toBe(3); // all three ran at once
+    resolvers.splice(0).forEach(fn => fn());
+    await pending;
+  });
+});
+
 describe('barrier ordering', () => {
   test('a barrier clears once no predecessor is in flight, then prunes', async () => {
     const resolvers = [];

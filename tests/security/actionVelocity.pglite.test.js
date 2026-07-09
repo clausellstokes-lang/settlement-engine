@@ -1,0 +1,181 @@
+/**
+ * actionVelocity.pglite.test.js — EXECUTION-level tests for the per-user
+ * velocity guards (migration 052).
+ *
+ * The Phase-3 re-grade held SECURITY at A- on exactly this gap: toggle_gallery_
+ * vote / add_gallery_comment (019) and generate-narrative were economically- or
+ * auth-gated only, with no independent RATE ceiling — an authenticated account
+ * could flood comments / toggle-vote at wire speed / hammer the model.
+ *
+ * These pins load the ACTUAL, NET-CURRENT function bodies from migration 052
+ * into in-process Postgres (pglite) and drive them until the ceiling bites, so a
+ * regression in the guard (a later migration dropping it, an off-by-one in the
+ * limit) can't ship green. auth.uid() is a settable GUC stub; the gallery /
+ * counter tables are minimal mirrors (no auth.users FK). Everything else is the
+ * real PL/pgSQL, including the atomic upsert counter and the wrappers.
+ *
+ * LIMITATION: pglite is single-connection, so TRUE concurrent races can't be
+ * exercised; the atomic guard is verified by its logical effect (the Nth call
+ * over the limit raises). Genuine race testing still needs `supabase test db`.
+ */
+import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
+import { PGlite } from '@electric-sql/pglite';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const dir = resolve(process.cwd(), 'supabase', 'migrations');
+const MIG_052 = resolve(dir, '052_action_velocity_guards.sql');
+const allExist = existsSync(MIG_052);
+
+/** Extract a function definition verbatim: from `create or replace function
+ *  public.<name>` to the first `$$;`. */
+function extractFn(src, name) {
+  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  if (!m) throw new Error(`could not extract ${name} from migration 052`);
+  return m[0];
+}
+
+/** The net-current definition of a public function across ALL migrations in file
+ *  order (the LAST create-or-replace wins) — used for the drift pin below. */
+function netCurrentFn(name) {
+  const files = readdirSync(dir).filter(f => /^\d.*\.sql$/.test(f)).sort();
+  let last = null;
+  for (const f of files) {
+    const src = readFileSync(resolve(dir, f), 'utf-8');
+    const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+    let m;
+    while ((m = re.exec(src)) !== null) last = m[0];
+  }
+  return last;
+}
+
+const UID = '11111111-1111-1111-1111-111111111111';
+const OTHER = '22222222-2222-2222-2222-222222222222';
+const SETTLEMENT = '33333333-3333-3333-3333-333333333333';
+
+let db;
+const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
+const scalar = async (q) => (await db.query(q)).rows[0];
+
+describe.runIf(allExist)('action velocity guards — execution against the real SQL (pglite)', () => {
+  beforeAll(async () => {
+    const src = readFileSync(MIG_052, 'utf-8');
+    db = new PGlite();
+    await db.exec(`
+      create schema if not exists auth;
+      create or replace function auth.uid() returns uuid language sql stable as $fn$
+        select nullif(current_setting('test.uid', true), '')::uuid
+      $fn$;
+
+      -- Minimal mirrors of the tables the gallery RPCs touch (no auth.users FK).
+      create table public.settlements (
+        id uuid primary key,
+        is_public boolean not null default false,
+        user_id uuid
+      );
+      create table public.gallery_votes (
+        settlement_id uuid not null,
+        user_id uuid not null,
+        created_at timestamptz not null default now(),
+        primary key (settlement_id, user_id)
+      );
+      create table public.gallery_comments (
+        id uuid primary key default gen_random_uuid(),
+        settlement_id uuid not null,
+        user_id uuid not null,
+        body text not null,
+        created_at timestamptz not null default now(),
+        deleted_at timestamptz
+      );
+    `);
+    // The counter table + the real function bodies from migration 052.
+    await db.exec(`
+      create table public.user_action_rate_limits (
+        user_key     uuid        not null,
+        action       text        not null,
+        window_start timestamptz not null,
+        count        integer     not null default 0,
+        primary key (user_key, action, window_start)
+      );
+    `);
+    await db.exec(extractFn(src, '_consume_action_rate_limit'));
+    await db.exec(extractFn(src, 'consume_narrate_rate_limit'));
+    await db.exec(extractFn(src, 'toggle_gallery_vote'));
+    await db.exec(extractFn(src, 'add_gallery_comment'));
+  });
+
+  beforeEach(async () => {
+    await db.exec('truncate public.settlements, public.gallery_votes, public.gallery_comments, public.user_action_rate_limits cascade;');
+    await db.exec(`insert into public.settlements (id, is_public, user_id) values ('${SETTLEMENT}', true, '${OTHER}');`);
+    await asUser(UID);
+  });
+
+  // ── toggle_gallery_vote — 60/hour ────────────────────────────────────────────
+  it('allows 60 vote-toggles then throttles the 61st', async () => {
+    for (let i = 0; i < 60; i++) {
+      await db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`); // toggles on/off, always succeeds
+    }
+    await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`))
+      .rejects.toThrow(/voting too quickly/i);
+    // The counter rests at the ceiling: the over-limit call raises, which rolls
+    // back its own increment (the whole function transaction), so the persisted
+    // count reflects ACCEPTED actions and every further call re-trips + rolls back.
+    const row = await scalar(`select count from public.user_action_rate_limits where user_key='${UID}' and action='gallery_vote'`);
+    expect(row.count).toBe(60);
+    // Still blocked on the next attempt (the ceiling holds for the window).
+    await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`))
+      .rejects.toThrow(/voting too quickly/i);
+  });
+
+  // ── add_gallery_comment — 20/hour ────────────────────────────────────────────
+  it('allows 20 comments then throttles the 21st', async () => {
+    for (let i = 0; i < 20; i++) {
+      await db.query(`select public.add_gallery_comment('${SETTLEMENT}', 'comment ${i}')`);
+    }
+    expect((await scalar(`select count(*)::int n from public.gallery_comments`)).n).toBe(20);
+    await expect(db.query(`select public.add_gallery_comment('${SETTLEMENT}', 'one too many')`))
+      .rejects.toThrow(/commenting too quickly/i);
+    // The throttled attempt inserted no row.
+    expect((await scalar(`select count(*)::int n from public.gallery_comments`)).n).toBe(20);
+  });
+
+  // ── Per-(user, action) isolation ─────────────────────────────────────────────
+  it('votes and comments draw from separate counters, and each user is independent', async () => {
+    // Exhaust UID's vote budget…
+    for (let i = 0; i < 60; i++) await db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`);
+    await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`)).rejects.toThrow(/voting too quickly/i);
+    // …UID can still comment (separate action counter)…
+    await expect(db.query(`select public.add_gallery_comment('${SETTLEMENT}', 'still fine')`)).resolves.toBeTruthy();
+    // …and OTHER's vote budget is untouched.
+    await asUser(OTHER);
+    await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`)).resolves.toBeTruthy();
+  });
+
+  // ── consume_narrate_rate_limit — 40/hour, returns { allowed } ────────────────
+  it('narrate limiter returns allowed for 40 calls then denies the 41st', async () => {
+    for (let i = 0; i < 40; i++) {
+      const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
+      expect(r.allowed).toBe(true);
+      expect(r.limit).toBe(40);
+    }
+    const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
+    expect(r.allowed).toBe(false);
+    expect(r.count).toBe(41);
+    expect(r.window_seconds).toBe(3600);
+  });
+
+  it('narrate limiter fails open for an unauthenticated caller (no uid)', async () => {
+    await db.exec(`set test.uid = '';`);
+    const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
+    expect(r.allowed).toBe(true);
+  });
+});
+
+// ── Drift pin: the guard cannot silently disappear from a later redefinition ──
+describe.runIf(allExist)('velocity-guard drift pin', () => {
+  it('the net-current gallery RPCs still call the velocity counter', () => {
+    expect(netCurrentFn('toggle_gallery_vote')).toMatch(/_consume_action_rate_limit\(\s*auth\.uid\(\)\s*,\s*'gallery_vote'/);
+    expect(netCurrentFn('add_gallery_comment')).toMatch(/_consume_action_rate_limit\(\s*auth\.uid\(\)\s*,\s*'gallery_comment'/);
+    expect(netCurrentFn('consume_narrate_rate_limit')).toMatch(/_consume_action_rate_limit\(\s*v_uid\s*,\s*'narrate'/);
+  });
+});
