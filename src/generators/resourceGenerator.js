@@ -6,10 +6,63 @@
 import {getPriorities} from './helpers.js';
 import {priorityToCategory} from './economicGenerator.js';
 import {TERRAIN_DATA} from '../data/geographyData.js';
-import {RESOURCE_CHAINS, SPECIAL_RESOURCES} from '../data/resourceData.js';
+import {RESOURCE_DATA, RESOURCE_CHAINS, SPECIAL_RESOURCES} from '../data/resourceData.js';
+import {institutionHasAnyTag} from '../lib/entities.js';
+
+// ─── resolveNearbyCommodities ─────────────────────────────────────────────────
+// Turn the settlement's ACTUALLY-rolled nearby resources into the commodity/
+// resource-key tokens the chain matcher reconciles against. This is what couples
+// the resource analysis to the specific settlement: config.nearbyResources holds
+// RESOURCE_DATA *keys* (e.g. 'iron_deposits'), each mapping to commodity tokens
+// (RESOURCE_DATA[key].commodities, e.g. ['iron','metalwork']). A depleted node
+// puts nothing on the table — a worked-out mine is not "iron present."
+//
+// The resolved list carries BOTH the commodity tokens AND the resource keys,
+// because the two chain families key off different vocabularies: generic chains
+// match commodity tokens ('iron' reconciles with rawResource 'iron ore'), while
+// terrain-specific chains match the resource KEY itself (rawResource
+// 'alpine_pasture'). evaluateEconomicActivity's normalized matcher bridges both.
+//
+// Falls back to the terrain's allowedResources when the config roster is empty or
+// unresolvable — preserving the terrain-driven default for settlements that never
+// rolled an explicit roster.
+
+export const resolveNearbyCommodities = (config = {}, terrainType) => {
+  const keys = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  const stateMap = config.nearbyResourcesState || {};
+  const depletedList = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  // A resource is depleted per the resolved roster (nearbyResourcesDepleted, the
+  // canonical output of resolveResources) OR the raw manual state map.
+  const depleted = new Set([
+    ...depletedList,
+    ...Object.keys(stateMap).filter(k => stateMap[k] === 'depleted'),
+  ]);
+
+  const out = new Set();
+  for (const key of keys) {
+    if (depleted.has(key)) continue;
+    const meta = RESOURCE_DATA[key];
+    if (!meta) continue;
+    out.add(key); // terrain-specific chains match on the resource key
+    for (const c of (meta.commodities || [])) out.add(c); // generic chains match on the commodity token
+  }
+  if (out.size > 0) return [...out];
+  return TERRAIN_DATA[terrainType]?.allowedResources?.slice() || [];
+};
 
 // ─── evaluateEconomicActivity ─────────────────────────────────────────────────
 // Return resource chains that are active given the terrain and present resources.
+
+// Normalized symmetric substring test: a nearby token 'iron' reconciles with a
+// chain rawResource 'iron ore', and the resource key 'alpine_pasture' reconciles
+// with rawResource 'alpine_pasture' — bridging the commodity- and key-keyed chain
+// families. Underscores/whitespace collapse so 'stone_quarry' matches 'stone'.
+const normalizeToken = (s) => String(s || '').toLowerCase().replace(/[_\s]+/g, ' ').trim();
+const tokensReconcile = (a, b) => {
+  const na = normalizeToken(a), nb = normalizeToken(b);
+  if (!na || !nb) return false;
+  return na === nb || na.includes(nb) || nb.includes(na);
+};
 
 const evaluateEconomicActivity = (terrainType, nearbyResources) => {
   const terrain = TERRAIN_DATA[terrainType];
@@ -17,13 +70,26 @@ const evaluateEconomicActivity = (terrainType, nearbyResources) => {
   const active = [];
   Object.entries(RESOURCE_CHAINS).forEach(([chainKey, chain]) => {
     const terrainAllows  = terrain.allowedResources.some(r => r.toLowerCase().includes(chain.rawResource.toLowerCase()));
-    const resourcePresent = nearbyResources.includes(chain.rawResource);
+    const resourcePresent = nearbyResources.some(r => tokensReconcile(r, chain.rawResource));
     if (terrainAllows && resourcePresent) {
       active.push({ ...chain, chainKey });
     }
   });
   return active;
 };
+
+// ─── institutionSupportsChain ─────────────────────────────────────────────────
+// Does this institution process this chain? Tag-first (real capability): anything
+// carrying one of the chain's processingTags processes it, regardless of whether
+// its NAME string matches a listed processor — "Weavers/Textile workers" processes
+// the wool chain because it carries TAG.TEXTILE. The exact-name clause is the
+// transitional fallback for chains with no distinct catalog capability tag (stone
+// masonry, desert salt), matched against real catalog names — never the old
+// phantom labels ('granar' etc.) that could match nothing.
+
+export const institutionSupportsChain = (inst, chain) =>
+  institutionHasAnyTag(inst, chain.processingTags || []) ||
+  (chain.processingInstitutions || []).some(name => name === inst.name);
 
 // ─── evaluateInstitutions ─────────────────────────────────────────────────────
 // Classify each active resource chain by how well it is institutionally supported.
@@ -32,12 +98,14 @@ const evaluateInstitutions = (institutions, activeChains) => {
   const result = { fullyExploited: [], partiallyExploited: [], unexploited: [], warnings: [] };
 
   activeChains.forEach(chain => {
-    const hasAll  = chain.processingInstitutions.every(name => institutions.some(i => i.name === name));
-    const hasSome = chain.processingInstitutions.some(name => institutions.some(i => i.name === name));
+    // Count the institutions that can process this chain. ≥2 processors ⇒ the
+    // chain runs end-to-end (raw → final goods); exactly 1 ⇒ a lone processor
+    // (raw reaches an intermediate, not final goods); 0 ⇒ untapped.
+    const supporters = institutions.filter(i => institutionSupportsChain(i, chain)).length;
 
-    if (hasAll)       result.fullyExploited.push(chain);
-    else if (hasSome) result.partiallyExploited.push(chain);
-    else              result.unexploited.push(chain);
+    if (supporters === 0)     result.unexploited.push(chain);
+    else if (supporters >= 2) result.fullyExploited.push(chain);
+    else                      result.partiallyExploited.push(chain);
   });
 
   return result;

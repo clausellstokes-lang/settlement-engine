@@ -385,9 +385,26 @@ export const RESOURCE_DATA = {
   },
 };
 
+// RESOURCE_CHAINS — raw-resource → processing → export chains.
+//
+// `processingTags` is the mechanical matcher: an institution processes a chain
+// if it carries any of these canonical capability tags (resourceGenerator's
+// institutionSupportsChain). Tags decouple the analysis from institution *labels*
+// — "Weavers/Textile workers" processes wool because it carries TAG.TEXTILE, not
+// because its name string equals "Weavers' guild". Every value MUST be a tag the
+// institutional catalog actually declares (pinned by tests/joins/resourceChainCatalog.test.js;
+// invented tags fail the gate). A few chains have no distinct catalog capability
+// tag (stone masonry, desert salt) — they carry an empty processingTags and lean
+// on the exact-name fallback against REAL catalog names.
+//
+// `processingInstitutions` stays the human-readable gap-row vocabulary. It must
+// resolve under the same resolver runtime uses (catalog name ∨ keyword-backfill
+// tag) — the pin that would have caught the old 'granar'/'Salt merchant'/
+// 'Cheesemaker' phantoms, now fixed to real catalog institutions.
 export const RESOURCE_CHAINS = {
   wool: {
     rawResource: "wool",
+    processingTags: [TAG.TEXTILE],
     processingInstitutions: ["Weavers' guild", "Dyers' guild", "Fulling mill"],
     intermediateGoods: ["cloth", "dyed fabric"],
     finalProducts: ["clothing", "tapestries", "sails"],
@@ -396,6 +413,7 @@ export const RESOURCE_CHAINS = {
   },
   flax: {
     rawResource: "flax",
+    processingTags: [TAG.TEXTILE],
     processingInstitutions: ["Weavers' guild", "Linen workshop"],
     intermediateGoods: ["linen thread", "linen cloth"],
     finalProducts: ["clothing", "bedding", "canvas"],
@@ -404,7 +422,9 @@ export const RESOURCE_CHAINS = {
   },
   grain: {
     rawResource: "grain",
-    processingInstitutions: ["Mill", "granar", "Baker", "Access to external mill"],
+    processingTags: [TAG.FOOD, TAG.AGRICULTURE],
+    // 'granar' (typo) → 'Town granary'; 'Baker' → 'Bakers (5-15)' (real catalog names).
+    processingInstitutions: ["Mill", "Town granary", "Bakers (5-15)", "Access to external mill"],
     intermediateGoods: ["flour", "stored grain"],
     finalProducts: ["bread", "beer", "animal feed"],
     exportValue: "medium",
@@ -412,7 +432,9 @@ export const RESOURCE_CHAINS = {
   },
   grapes: {
     rawResource: "grapes",
-    processingInstitutions: ["Winery", "Vintners' guild"],
+    processingTags: [TAG.FOOD],
+    // 'Winery' → 'Vintner' (the catalog institution that makes wine).
+    processingInstitutions: ["Vintner", "Vintners' guild"],
     intermediateGoods: ["wine"],
     finalProducts: ["aged wine", "vinegar"],
     exportValue: "high",
@@ -420,7 +442,9 @@ export const RESOURCE_CHAINS = {
   },
   livestock: {
     rawResource: "livestock",
-    processingInstitutions: ["Butcher", "Tannery", "Cheesemaker"],
+    processingTags: [TAG.FOOD, TAG.LEATHER],
+    // 'Cheesemaker' → 'Dairy farmer' (real catalog name).
+    processingInstitutions: ["Butcher", "Tannery", "Dairy farmer"],
     intermediateGoods: ["meat", "hides", "dairy"],
     finalProducts: ["leather goods", "cheese", "preserved meat"],
     exportValue: "medium",
@@ -428,6 +452,7 @@ export const RESOURCE_CHAINS = {
   },
   ironOre: {
     rawResource: "iron ore",
+    processingTags: [TAG.METALWORK],
     processingInstitutions: ["Mine", "Smelter", "Blacksmiths' guild"],
     intermediateGoods: ["pig iron", "iron bars"],
     finalProducts: ["tools", "weapons", "armor", "nails"],
@@ -436,6 +461,7 @@ export const RESOURCE_CHAINS = {
   },
   copperOre: {
     rawResource: "copper ore",
+    processingTags: [TAG.METALWORK],
     processingInstitutions: ["Mine", "Smelter", "Coppersmiths' guild"],
     intermediateGoods: ["copper bars"],
     finalProducts: ["cookware", "wire", "decorative items"],
@@ -444,6 +470,7 @@ export const RESOURCE_CHAINS = {
   },
   preciousMetals: {
     rawResource: "gold/silver ore",
+    processingTags: [TAG.METALWORK, TAG.LUXURY],
     processingInstitutions: ["Mine", "Smelter", "Goldsmiths' guild"],
     intermediateGoods: ["gold/silver bars"],
     finalProducts: ["jewelry", "coins", "religious items"],
@@ -452,6 +479,7 @@ export const RESOURCE_CHAINS = {
   },
   timber: {
     rawResource: "timber",
+    processingTags: [TAG.TIMBER],
     processingInstitutions: ["Sawmill", "Carpenters' guild"],
     intermediateGoods: ["lumber", "planks"],
     finalProducts: ["furniture", "ships", "buildings", "barrels"],
@@ -460,7 +488,11 @@ export const RESOURCE_CHAINS = {
   },
   stone: {
     rawResource: "stone",
-    processingInstitutions: ["Quarry", "Stonemasons' guild"],
+    // No distinct masonry capability tag exists in the catalog (quarries/masons
+    // are tagged only 'trade', too broad to mean "processes stone") — matched by
+    // exact name against the real catalog quarry instead.
+    processingTags: [],
+    processingInstitutions: ["Stone quarry", "Stonemasons' guild"],
     intermediateGoods: ["cut stone", "stone blocks"],
     finalProducts: ["buildings", "monuments", "sculpture"],
     exportValue: "medium",
@@ -468,6 +500,7 @@ export const RESOURCE_CHAINS = {
   },
   hides: {
     rawResource: "animal hides",
+    processingTags: [TAG.LEATHER],
     processingInstitutions: ["Tannery", "Leatherworkers' guild"],
     intermediateGoods: ["leather"],
     finalProducts: ["boots", "armor", "belts", "saddles"],
@@ -476,6 +509,7 @@ export const RESOURCE_CHAINS = {
   },
   fish: {
     rawResource: "fish",
+    processingTags: [TAG.FOOD],
     processingInstitutions: ["Fishmonger", "Salters' guild"],
     intermediateGoods: ["fresh fish", "salted fish"],
     finalProducts: ["preserved fish", "fish oil"],
@@ -484,6 +518,7 @@ export const RESOURCE_CHAINS = {
   },
   gemstones: {
     rawResource: "gemstones",
+    processingTags: [TAG.LUXURY, TAG.METALWORK],
     processingInstitutions: ["Mine", "Jewelers' guild"],
     intermediateGoods: ["cut gems"],
     finalProducts: ["jewelry", "decorative items"],
@@ -492,6 +527,7 @@ export const RESOURCE_CHAINS = {
   },
   sand: {
     rawResource: "glass sand",
+    processingTags: [TAG.LUXURY],
     processingInstitutions: ["Glassblower"],
     intermediateGoods: ["glass"],
     finalProducts: ["windows", "bottles", "decorative glass"],
@@ -500,7 +536,9 @@ export const RESOURCE_CHAINS = {
   },
   herbs: {
     rawResource: "medicinal herbs",
-    processingInstitutions: ["Herbalist", "Alchemist"],
+    processingTags: [TAG.ALCHEMY, TAG.HEALING],
+    // 'Herbalist' → 'Apothecary'; 'Alchemist' → 'Alchemist shop' (real catalog names).
+    processingInstitutions: ["Apothecary", "Alchemist shop"],
     intermediateGoods: ["potions", "tinctures"],
     finalProducts: ["healing potions", "antidotes"],
     exportValue: "very high",
@@ -509,6 +547,7 @@ export const RESOURCE_CHAINS = {
   // ── Terrain-specific chains ──────────────────────────────────────────────────
   alpineWool: {
     rawResource: "alpine_pasture",
+    processingTags: [TAG.TEXTILE],
     processingInstitutions: ["Weavers' guild", "Fulling mill", "Dyers' guild"],
     intermediateGoods: ["raw wool", "washed fleece", "cloth"],
     finalProducts: ["highland wool", "woolen cloth", "felt"],
@@ -517,6 +556,7 @@ export const RESOURCE_CHAINS = {
   },
   mountainTimber: {
     rawResource: "mountain_timber",
+    processingTags: [TAG.TIMBER],
     processingInstitutions: ["Sawmill", "Carpenters' guild", "Charcoal burner"],
     intermediateGoods: ["lumber", "planks", "charcoal"],
     finalProducts: ["building timber", "charcoal fuel", "furniture"],
@@ -525,7 +565,11 @@ export const RESOURCE_CHAINS = {
   },
   desertSalt: {
     rawResource: "desert_salt",
-    processingInstitutions: ["Salt merchant", "Market"],
+    // No 'salt' capability tag in the catalog — matched by exact name against the
+    // real salt works + market that produce/distribute it.
+    processingTags: [],
+    // 'Salt merchant' → 'Salt works'; 'Market' → 'Market square' (real catalog names).
+    processingInstitutions: ["Salt works", "Market square"],
     intermediateGoods: ["raw salt", "purified salt"],
     finalProducts: ["table salt", "salt for preservation", "salt for trade"],
     exportValue: "high",
@@ -533,6 +577,7 @@ export const RESOURCE_CHAINS = {
   },
   desertGlass: {
     rawResource: "glass_sand",
+    processingTags: [TAG.LUXURY],
     processingInstitutions: ["Glassblower", "Artisan workshop"],
     intermediateGoods: ["glass", "coloured glass"],
     finalProducts: ["blown glass", "windows", "glass vessels", "mirrors"],
@@ -541,7 +586,9 @@ export const RESOURCE_CHAINS = {
   },
   camelCaravan: {
     rawResource: "camel_herds",
-    processingInstitutions: ["Caravanserai", "Stable", "Leather tanner"],
+    processingTags: [TAG.TRANSPORT, TAG.LEATHER],
+    // 'Stable' → 'Stable yard' (real catalog name).
+    processingInstitutions: ["Caravanserai", "Stable yard", "Leather tanner"],
     intermediateGoods: ["hides", "wool", "transport capacity"],
     finalProducts: ["camel leather", "caravan services", "riding animals"],
     exportValue: "very high",
@@ -549,6 +596,7 @@ export const RESOURCE_CHAINS = {
   },
   oasisDate: {
     rawResource: "oasis_water",
+    processingTags: [TAG.FOOD, TAG.MARKET],
     processingInstitutions: ["Market", "Granary", "Merchant"],
     intermediateGoods: ["fresh produce", "dates", "water supply"],
     finalProducts: ["dried dates", "date wine", "water rights"],
@@ -557,7 +605,10 @@ export const RESOURCE_CHAINS = {
   },
   mineralHot: {
     rawResource: "hot_springs_mineral",
-    processingInstitutions: ["Alchemist", "Herbalist", "Bathhouse"],
+    processingTags: [TAG.HEALING, TAG.ALCHEMY],
+    // 'Alchemist' → 'Alchemist shop'; 'Herbalist' → 'Apothecary'; 'Bathhouse' →
+    // 'Public bathhouse' (real catalog names).
+    processingInstitutions: ["Alchemist shop", "Apothecary", "Public bathhouse"],
     intermediateGoods: ["mineral water", "salts", "therapeutic pools"],
     finalProducts: ["medicines", "restorative treatments", "mineral salts"],
     exportValue: "high",

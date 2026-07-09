@@ -10,7 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { generateSettlementReason } from '../narrativeGenerator.js';
-import { generateResourceAnalysis } from '../resourceGenerator.js';
+import { generateResourceAnalysis, resolveNearbyCommodities } from '../resourceGenerator.js';
 import { generateEconomicViability } from '../economicGenerator.js';
 import { generateHistory } from '../historyGenerator.js';
 import { deriveLegacyAnnotations } from '../legacyGenerator.js';
@@ -33,9 +33,15 @@ registerStep('generateNarratives', {
   const terrainT = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
   const allowedResources = TERRAIN_DATA[terrainT]?.allowedResources?.slice(0, 7) || [];
 
-  const resourceAnalysis = generateResourceAnalysis(terrainT, allowedResources, [], institutions, effectiveConfig);
+  // Resource analysis reads the settlement's ACTUALLY-rolled resources (not the
+  // whole terrain slice), so two settlements on the same terrain with different
+  // nearby resources get different analyses. Special resources flow through too.
+  const nearbyResources = resolveNearbyCommodities(effectiveConfig, terrainT);
+  const specialResources = effectiveConfig.specialResources || [];
+  const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig);
   // Viability first: settlementReason is deficit-aware — an isolated settlement
-  // with a food shortfall must not claim self-sufficiency.
+  // with a food shortfall must not claim self-sufficiency. Viability stays on the
+  // terrain slice (terrain POTENTIAL, not the rolled roster) — bounds blast radius.
   const economicViability = generateEconomicViability(
     { tier, population, institutions, economicState, config: { ...effectiveConfig } },
     terrainT, allowedResources
