@@ -104,6 +104,14 @@ const PRESERVATION_RULES = Object.freeze({
   },
 });
 
+/**
+ * @typedef {'always'|'never'|'canon'|'locked'} PreservationRule
+ */
+/**
+ * @param {PreservationRule|string} rule
+ * @param {import('./canonStatus.js').CanonTag} tag
+ * @returns {boolean}
+ */
 function shouldPreserve(rule, tag) {
   if (rule === 'always') return true;
   if (rule === 'never')  return false;
@@ -117,7 +125,7 @@ function shouldPreserve(rule, tag) {
 /**
  * Build the preservation plan for a regeneration mode.
  *
- * @param {Object} settlement
+ * @param {import('./explanation.js').ExplainSettlement|null|undefined} settlement
  * @param {Object} [options]
  * @param {string} [options.mode]    'nudge' | 'rebalance' | 'reforge'
  * @param {Object} [options.change]  Description of the user change
@@ -125,9 +133,11 @@ function shouldPreserve(rule, tag) {
  * @returns {Object} RegenerationPlan
  */
 export function buildRegenerationPlan(settlement, options = {}) {
-  const mode = REGENERATION_MODES.includes(options.mode) ? options.mode : 'rebalance';
+  const mode = /** @type {'nudge'|'rebalance'|'reforge'} */ (
+    REGENERATION_MODES.includes(/** @type {string} */ (options.mode)) ? options.mode : 'rebalance'
+  );
   const contributors = [];
-  if (!REGENERATION_MODES.includes(options.mode)) {
+  if (!REGENERATION_MODES.includes(/** @type {string} */ (options.mode))) {
     contributors.push({
       source: 'options.mode',
       effect: 'fallback',
@@ -153,11 +163,13 @@ export function buildRegenerationPlan(settlement, options = {}) {
   }
 
   const cat = entityCatalog(settlement);
+  /** @type {Array<{id: string, type: string, label: string, reason: string}>} */
   const preserveEntities = [];
+  /** @type {Array<{id: string, type: string, label: string, reason: string}>} */
   const rerollEntities = [];
 
   for (const e of cat) {
-    const rule = PRESERVATION_RULES[mode]?.[e.type] || 'always';
+    const rule = PRESERVATION_RULES[mode]?.[/** @type {keyof (typeof PRESERVATION_RULES)['nudge']} */ (e.type)] || 'always';
     // Look up the entity on the settlement to get its tag. The
     // catalog entry only has { type, id, label }, so for tagging we
     // re-fetch from the appropriate settlement array.
@@ -193,6 +205,11 @@ export function buildRegenerationPlan(settlement, options = {}) {
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/**
+ * @param {import('./explanation.js').ExplainSettlement} settlement
+ * @param {{type: string, id: string, label: string}} catalogEntry
+ * @returns {import('./canonStatus.js').CanonTag}
+ */
 function lookupTagForEntity(settlement, catalogEntry) {
   // Resolve the underlying object (institution, faction, etc.) so we
   // can tag it. For derived entities (system_variable, capacity,
@@ -203,19 +220,19 @@ function lookupTagForEntity(settlement, catalogEntry) {
 
   if (type === 'institution') {
     const inst = (settlement.institutions || []).find(i => i?.id === id);
-    return tagEntityCanon(inst || {});
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (inst || {}));
   }
   if (type === 'faction') {
-    const f = (settlement.powerStructure?.factions || []).find(fac => fac?.id === id);
-    return tagEntityCanon(f || {});
+    const f = (/** @type {{powerStructure?: {factions?: Array<{id?: string}>}}} */ (settlement).powerStructure?.factions || []).find(fac => fac?.id === id);
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (f || {}));
   }
   if (type === 'npc') {
     const n = (settlement.npcs || []).find(npc => npc?.id === id);
-    return tagEntityCanon(n || {});
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (n || {}));
   }
   if (type === 'condition') {
     const c = (settlement.activeConditions || []).find(cond => cond?.id === id);
-    return tagEntityCanon(c || {});
+    return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (c || {}));
   }
   // Derived entities default to generated/draft.
   return tagEntityCanon({});

@@ -59,6 +59,9 @@ export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|
  * in toPublicSafe, which seeds this with a non-empty path so an allowed top-level
  * key is not re-denylisted (e.g. `coherenceNotes` is public despite matching
  * /note/i) while its descendants still are.
+ * @param {unknown} value
+ * @param {string[]} [path]
+ * @returns {unknown}
  */
 export function sanitizePublicValue(value, path = []) {
   if (Array.isArray(value)) {
@@ -68,6 +71,7 @@ export function sanitizePublicValue(value, path = []) {
   }
   if (!value || typeof value !== 'object') return value;
 
+  /** @type {Record<string, unknown>} */
   const out = {};
   for (const [key, child] of Object.entries(value)) {
     const childPath = [...path, key];
@@ -97,9 +101,13 @@ export function sanitizePublicValue(value, path = []) {
  * `gallery_share_narrated` toggle, so even in full mode we still drop the AI
  * base blobs defensively. SECURITY: full mode is reachable ONLY when the
  * gallery row's `gallery_share_dm` is true (set by the owner).
+ * @param {unknown} settlement
+ * @param {{ full?: boolean }} [options]
+ * @returns {Record<string, any>}
  */
 export function toPublicSafe(settlement, { full = false } = {}) {
   if (full) {
+    /** @type {Record<string, any>} */
     let clone;
     try { clone = structuredClone(settlement || {}); }
     catch { clone = JSON.parse(JSON.stringify(settlement || {})); }
@@ -123,6 +131,7 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     // never reads this partial object — see OutputContainer showNarrative.)
     if (clone.aiSettlement && typeof clone.aiSettlement === 'object') {
       const ai = clone.aiSettlement;
+      /** @type {Record<string, unknown>} */
       const compass = {};
       for (const k of ['identityMarkers', 'frictionPoints', 'connectionsMap', 'dmCompass']) {
         if (ai[k] != null) compass[k] = ai[k];
@@ -139,7 +148,10 @@ export function toPublicSafe(settlement, { full = false } = {}) {
   // subsumed by this gate). Each allowed subtree is then run through the recursive
   // denylist seeded at path=[key] — the allowed key itself is not re-denylisted
   // (so `coherenceNotes` survives despite /note/i) while its descendants are.
-  const src = (settlement && typeof settlement === 'object' && !Array.isArray(settlement)) ? settlement : {};
+  const src = /** @type {Record<string, unknown>} */ (
+    (settlement && typeof settlement === 'object' && !Array.isArray(settlement)) ? settlement : {}
+  );
+  /** @type {Record<string, any>} */
   const clean = {};
   for (const key of PUBLIC_TOPLEVEL_KEYS) {
     if (!Object.prototype.hasOwnProperty.call(src, key)) continue;

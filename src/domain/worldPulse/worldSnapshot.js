@@ -5,10 +5,12 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 import { isCanonSave } from '../campaign/canon.js';
 import { ensureWorldState } from './worldState.js';
 
+/** @param {any} save */
 function saveSettlement(save) {
   return save?.settlement || save;
 }
 
+/** @param {any} save */
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.settlementId || save?.name || 'unknown');
 }

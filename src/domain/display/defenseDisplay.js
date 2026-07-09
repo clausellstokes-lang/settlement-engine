@@ -13,12 +13,32 @@
 
 import { buildThreatAssessment } from './threatAssessment.js';
 
+/**
+ * One named force entry from defenseProfile.institutions.
+ * @typedef {{ name?: string, desc?: string, source?: string }} ForceEntry
+ */
+
+/**
+ * The (legacy, generator-shaped) settlement slice these display derivations
+ * read. Structural — NOT the canonical schema shape (defenseProfile /
+ * economicState live outside CanonicalSettlement today).
+ * @typedef {Object} DefenseDisplaySettlement
+ * @property {Array<{ name?: string }>} [institutions]
+ * @property {{ scores?: Record<string, number>, economicGates?: Record<string, number>, institutions?: Record<string, ForceEntry[]> }} [defenseProfile]
+ * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number } }} [economicState]
+ * @property {{ tradeRouteAccess?: string }} [config]
+ */
+
+/** @type {(n: number) => string} */
 const scoreColor = (n) =>
   n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';
 
 /**
  * Per-criminal-operation enforcement note (Defense-tab voice), keyed off the
  * institution name.
+ *
+ * @param {string | null | undefined} name
+ * @returns {string}
  */
 export function criminalOpNote(name) {
   const n = String(name || '').toLowerCase();
@@ -45,6 +65,9 @@ export function criminalOpNote(name) {
 
 /**
  * Per-criminal-operation economic role (Economics-tab voice). Short label.
+ *
+ * @param {string | null | undefined} name
+ * @returns {string}
  */
 export function criminalOpEcon(name) {
   const n = String(name || '').toLowerCase();
@@ -76,6 +99,9 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
  * Classify the settlement's criminal structure from its institution names.
  * Returns { key, label, color, bg, note } or null when there is no organized
  * criminal infrastructure.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string } | null}
  */
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
@@ -96,6 +122,9 @@ export function deriveCriminalStructure(settlement) {
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of
  * { label, status, color, score|null, note }.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {Array<{ label: string, status: string, color: string, score: number | null, note: string }>}
  */
 export function deriveSupportingCapabilities(settlement) {
   const r = settlement || {};
@@ -150,11 +179,13 @@ export function deriveSupportingCapabilities(settlement) {
   return caps;
 }
 
+/** @type {(n: number) => string} */
 const readinessBadge = (n) =>
   n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
 
 // Which defenseProfile.economicGates key funds each readiness row, and what
 // the underfunded expense is called in the funding note.
+/** @type {Readonly<Record<string, [string, string]>>} */
 const READINESS_GATE_FOR = Object.freeze({
   'Beasts & Monsters': ['monster', 'patrol provisioning'],
   'Invasion & War': ['military', 'garrison pay'],
@@ -172,12 +203,16 @@ const READINESS_GATE_FOR = Object.freeze({
  * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
  * garrison pay at 60%") instead of leaving a silently lower bar.
  * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {Array<{ label: string, score: number, status: string, statusColor: string, barColor: string, assess: string, fundingNote: string | null }>}
  */
 export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
   const scores = r.defenseProfile?.scores || {};
   const gates = r.defenseProfile?.economicGates || {};
   const f = r.economicState?.compound?.inst || {};
+  /** @type {Record<string, number>} */
   const scoreFor = {
     'Beasts & Monsters': scores.monster || 0,
     'Invasion & War': scores.military || 0,
@@ -192,8 +227,8 @@ export function deriveDefenseReadiness(settlement) {
     const score = scoreFor[row.label] ?? 0;
     const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
     const gate = gateKey ? gates[gateKey] : undefined;
-    const fundingNote = Number.isFinite(gate) && gate < 1
-      ? `Upkeep underfunded — ${expense} at ${Math.round(gate * 100)}%`
+    const fundingNote = Number.isFinite(gate) && /** @type {number} */ (gate) < 1
+      ? `Upkeep underfunded — ${expense} at ${Math.round(/** @type {number} */ (gate) * 100)}%`
       : null;
     return {
       label: row.label,
@@ -207,6 +242,7 @@ export function deriveDefenseReadiness(settlement) {
   });
 }
 
+/** @type {(arr: ForceEntry[] | null | undefined) => ForceEntry[]} */
 const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).values()];
 
 /**
@@ -214,6 +250,9 @@ const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).v
  * standing forces (garrison + militia + watch, de-duplicated by name),
  * contracted (mercenary), monster-response charter, and arcane defense. Each
  * entry is a force object { name, desc, source } from defenseProfile.institutions.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {{ fortifications: ForceEntry[], standing: ForceEntry[], contracted: ForceEntry[], charter: ForceEntry[], arcane: ForceEntry[] }}
  */
 export function deriveArmedForces(settlement) {
   const inst = settlement?.defenseProfile?.institutions || {};

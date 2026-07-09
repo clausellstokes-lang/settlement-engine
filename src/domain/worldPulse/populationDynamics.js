@@ -12,18 +12,44 @@ const INTERVAL_MONTHS = Object.freeze({
 
 const MIGRATION_CHANNELS = Object.freeze(['migration_pressure', 'trade_route', 'political_authority', 'military_protection']);
 
+/** @typedef {{ get?: (id: any, kind: any) => ({ score?: number } | null | undefined) }} PdPressureIdx */
+/** @typedef {{ id?: any, name?: any, settlement?: { population?: number, activeConditions?: any[] }, activeConditions?: any[] }} Item */
+/** @typedef {Record<string, any>} Rules */
+/** @typedef {{ byId?: { get?: (id: any) => any }, regionalGraph?: any, settlements?: any[], worldState?: { simulationRules?: any, tick?: number } }} PdSnapshot */
+
+/**
+ * @param {unknown} value
+ * @param {number} [fallback]
+ * @returns {number}
+ */
 function finite(value, fallback = 0) {
-  return Number.isFinite(value) ? value : fallback;
+  return Number.isFinite(value) ? /** @type {number} */ (value) : fallback;
 }
 
+/**
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+/**
+ * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @param {any} settlementId
+ * @param {string} kind
+ * @returns {number}
+ */
 function score(pressureIdx, settlementId, kind) {
   return pressureIdx?.get?.(settlementId, kind)?.score || 0;
 }
 
+/**
+ * @param {Item | null | undefined} item
+ * @returns {any[]}
+ */
 function conditionsFor(item) {
   return item?.activeConditions || item?.settlement?.activeConditions || [];
 }
@@ -45,20 +71,35 @@ const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'stressor_residual']);
 // mass-emigration gate; recovery archetypes are deliberately absent.
 const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'regional_migration_pressure']);
 
+/**
+ * @param {Item | null | undefined} item
+ * @param {Set<string>} archetypes
+ * @param {string[]} [systems]
+ * @returns {boolean}
+ */
 function hasConditionSignal(item, archetypes, systems = []) {
   return conditionsFor(item).some(c => {
     if (!c) return false;
     if (archetypes.has(c.archetype)) return true;
     return c.archetype === 'custom_crisis'
-      && (c.affectedSystems || []).some(s => systems.includes(s));
+      && (c.affectedSystems || []).some((/** @type {any} */ s) => systems.includes(s));
   });
 }
 
+/**
+ * @param {string} interval
+ * @returns {number}
+ */
 function intervalMagnitude(interval) {
-  const months = INTERVAL_MONTHS[interval] ?? 1;
+  const months = /** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1;
   return Math.max(0.25, Math.pow(months, 0.85));
 }
 
+/**
+ * @param {any} saveId
+ * @param {any} tick
+ * @returns {string}
+ */
 function migrationChoice(saveId, tick) {
   const text = `${saveId}:${tick}`;
   let hash = 0;
@@ -66,10 +107,15 @@ function migrationChoice(saveId, tick) {
   return ['void', 'distributed', 'concentrated'][hash % 3];
 }
 
+/**
+ * @param {PdSnapshot | null | undefined} snapshot
+ * @param {any} sourceId
+ * @returns {any[]}
+ */
 function candidateDestinations(snapshot, sourceId) {
   const byId = snapshot?.byId;
   const ids = new Set();
-  for (const channel of activeChannelsFrom(snapshot?.regionalGraph, sourceId, { types: MIGRATION_CHANNELS })) {
+  for (const channel of activeChannelsFrom(snapshot?.regionalGraph, sourceId, { types: /** @type {string[]} */ (MIGRATION_CHANNELS) })) {
     if (channel.to && String(channel.to) !== String(sourceId)) ids.add(String(channel.to));
   }
   for (const edge of snapshot?.regionalGraph?.edges || []) {
@@ -81,6 +127,11 @@ function candidateDestinations(snapshot, sourceId) {
   return [...ids].map(id => byId?.get?.(id)).filter(Boolean);
 }
 
+/**
+ * @param {Item} item
+ * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @returns {number}
+ */
 function destinationScore(item, pressureIdx) {
   const id = item.id;
   const safety = 1 - score(pressureIdx, id, 'conflict');
@@ -107,10 +158,20 @@ const RELATIONSHIP_DISPERSAL_WEIGHTS = Object.freeze({
 
 // H12 shim mirrored from stressorDynamics.relationshipTypeOf: legacy saves
 // carry the plural 'trade_partners'; read it as the canonical singular.
+/**
+ * @param {any} edge
+ * @returns {string}
+ */
 function edgeLabel(edge) {
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
+/**
+ * @param {PdSnapshot | null | undefined} snapshot
+ * @param {any} sourceId
+ * @param {any} destId
+ * @returns {number}
+ */
 function relationshipWeight(snapshot, sourceId, destId) {
   const a = String(sourceId);
   const b = String(destId);
@@ -119,7 +180,7 @@ function relationshipWeight(snapshot, sourceId, destId) {
     const from = String(edge?.from || edge?.source || '');
     const to = String(edge?.to || edge?.target || '');
     if (!((from === a && to === b) || (from === b && to === a))) continue;
-    const weight = RELATIONSHIP_DISPERSAL_WEIGHTS[edgeLabel(edge)];
+    const weight = /** @type {Record<string, number>} */ (RELATIONSHIP_DISPERSAL_WEIGHTS)[edgeLabel(edge)];
     if (weight != null) weights.push(weight);
   }
   if (!weights.length) return 1;
@@ -129,13 +190,17 @@ function relationshipWeight(snapshot, sourceId, destId) {
   return worst < 1 ? worst : Math.max(...weights);
 }
 
+/**
+ * @param {{ sourceId: any, migrants: number, snapshot: PdSnapshot | null | undefined, pressureIdx: PdPressureIdx | null | undefined, mode: any, tick: any }} params
+ * @returns {{ mode: any, deltas: any[] }}
+ */
 function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
   const chosenMode = mode === 'roll' ? migrationChoice(sourceId, tick) : mode;
   if (chosenMode === 'void') return { mode: chosenMode, deltas: [] };
 
   // One weighted scorer everywhere: admission filter, ranking, and split
   // weights all see the same relationship-adjusted desirability.
-  const weightedScore = item =>
+  const weightedScore = (/** @type {Item} */ item) =>
     destinationScore(item, pressureIdx) * relationshipWeight(snapshot, sourceId, item.id);
   const destinations = candidateDestinations(snapshot, sourceId)
     .filter(item => weightedScore(item) >= 0.35)
@@ -163,6 +228,12 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
   return { mode: chosenMode, deltas };
 }
 
+/**
+ * @param {Item} item
+ * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @param {Rules} rules
+ * @returns {number}
+ */
 function populationPressureRate(item, pressureIdx, rules) {
   const id = item.id;
   const food = score(pressureIdx, id, 'food');
@@ -185,6 +256,13 @@ function populationPressureRate(item, pressureIdx, rules) {
   return monthlyRate * intensityMultiplier(rules);
 }
 
+/**
+ * @param {Item} item
+ * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @param {string} interval
+ * @param {Rules} rules
+ * @returns {{ pop: number, delta: number, severe: boolean } | null}
+ */
 function deltaForSettlement(item, pressureIdx, interval, rules) {
   const pop = Math.max(0, Math.round(finite(item?.settlement?.population, 0)));
   if (pop <= 0) return null;
@@ -198,6 +276,10 @@ function deltaForSettlement(item, pressureIdx, interval, rules) {
   return { pop, delta, severe };
 }
 
+/**
+ * @param {{ item: Item, interval: string, pressureIdx: PdPressureIdx | null | undefined, snapshot: PdSnapshot | null | undefined, rules: Rules, tick: any }} params
+ * @returns {any}
+ */
 function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }) {
   const result = deltaForSettlement(item, pressureIdx, interval, rules);
   if (!result) return null;
@@ -252,6 +334,12 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   };
 }
 
+/**
+ * @param {PdSnapshot | null | undefined} snapshot
+ * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @param {{ simulationRules?: any, tick?: any, interval?: string }} [context]
+ * @returns {any[]}
+ */
 export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
   if (!rules.populationDynamicsEnabled) return [];
@@ -262,11 +350,17 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
     .filter(Boolean);
 }
 
+/**
+ * @param {{ population?: number, populationHistory?: any[] } | null | undefined} settlement
+ * @param {{ populationDeltas?: any[], generatedAtTick?: any, tick?: any, headline?: any, candidateType?: any, id?: any } | null | undefined} outcome
+ * @param {any} saveId
+ * @returns {any}
+ */
 export function applyPopulationOutcomeToSettlement(settlement, outcome, saveId) {
   if (!settlement || !outcome?.populationDeltas) return settlement;
   const delta = outcome.populationDeltas
-    .filter(item => String(item.saveId) === String(saveId))
-    .reduce((sum, item) => sum + (Number(item.delta) || 0), 0);
+    .filter((/** @type {any} */ item) => String(item.saveId) === String(saveId))
+    .reduce((/** @type {number} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
   if (!delta) return settlement;
   const current = Math.max(0, Math.round(finite(settlement.population, 0)));
   const nextPopulation = Math.max(0, current + Math.round(delta));

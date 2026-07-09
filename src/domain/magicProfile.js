@@ -59,6 +59,32 @@ const ROLE_BANDS = Object.freeze([
 
 // ARCANE_PATTERN + HEALING_PATTERN now imported (single canonical matchers).
 
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+/** @typedef {{ source: string, effect: string, reason: string }} MagicContributor */
+/** @typedef {{ name?: string }} MagicInstitution */
+/**
+ * @typedef {Object} MagicSettlement
+ * @property {{ magicLevel?: string, magicExists?: boolean }} [config]
+ * @property {MagicInstitution[]} [institutions]
+ */
+/**
+ * @typedef {Object} MagicProfile
+ * @property {boolean} magicExists
+ * @property {string} availability
+ * @property {string} legality
+ * @property {string} institutionalControl
+ * @property {string} cost
+ * @property {string} risk
+ * @property {string} religiousAcceptance
+ * @property {{ economic: string, military: string, medical: string, infrastructure: string }} roles
+ * @property {MagicContributor[]} contributors
+ */
+
+/**
+ * @param {MagicSettlement | null | undefined} s
+ * @param {RegExp} pattern
+ * @returns {MagicInstitution[]}
+ */
 function institutionsByPattern(s, pattern) {
   const inst = Array.isArray(s?.institutions) ? s.institutions : [];
   return inst.filter(i => pattern.test(String(i?.name || '')));
@@ -66,9 +92,14 @@ function institutionsByPattern(s, pattern) {
 
 // ── Derivers ─────────────────────────────────────────────────────────────
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveAvailability(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  const tmpl = MAGIC_LEVEL_VALUES[magic] || MAGIC_LEVEL_VALUES.low;
+  const tmpl = MAGIC_LEVEL_VALUES[/** @type {keyof typeof MAGIC_LEVEL_VALUES} */ (magic)] || MAGIC_LEVEL_VALUES.low;
   contributors.push({ source: 'config.magicLevel', effect: 'baseline', reason: `Magic level: ${magic}.` });
 
   // Arcane institutions raise availability one step
@@ -84,6 +115,12 @@ function deriveAvailability(settlement, contributors) {
   return tmpl.availability;
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveLegality(settlement, profiles, contributors) {
   // Religious faction with strong power tends toward restricted/regulated.
   const religious = profiles.find(p => p.archetype === 'religious');
@@ -114,6 +151,12 @@ function deriveLegality(settlement, profiles, contributors) {
   return legality;
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveInstitutionalControl(settlement, profiles, contributors) {
   const arcane = profiles.find(p => p.archetype === 'arcane');
   const arcaneInst = institutionsByPattern(settlement, ARCANE_PATTERN);
@@ -141,6 +184,11 @@ function deriveInstitutionalControl(settlement, profiles, contributors) {
   return 'unregulated';
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveCost(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
   if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic — services cheap.' }); return 'cheap'; }
@@ -150,9 +198,15 @@ function deriveCost(settlement, contributors) {
   return 'extortionate';
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {import('./causalState.js').CausalState} causal
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveRisk(settlement, causal, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  const base = MAGIC_LEVEL_VALUES[magic]?.baseRisk || 'low';
+  const base = MAGIC_LEVEL_VALUES[/** @type {keyof typeof MAGIC_LEVEL_VALUES} */ (magic)]?.baseRisk || 'low';
   contributors.push({ source: 'config.magicLevel', effect: 'baseline', reason: `Baseline risk for ${magic} magic: ${base}.` });
 
   const stabBand = causal.bands?.magical_stability;
@@ -167,6 +221,12 @@ function deriveRisk(settlement, causal, contributors) {
   return base;
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {MagicContributor[]} contributors
+ * @returns {string}
+ */
 function deriveReligiousAcceptance(settlement, profiles, contributors) {
   const religious = profiles.find(p => p.archetype === 'religious');
   const arcane = profiles.find(p => p.archetype === 'arcane');
@@ -188,12 +248,25 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
   return 'wary';
 }
 
+/**
+ * @param {MagicSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @param {import('./settlement.schema.js').CapacityProfile | null} capacity
+ * @param {MagicContributor[]} contributors
+ * @returns {{ economic: string, military: string, medical: string, infrastructure: string }}
+ */
 function deriveRoles(settlement, profiles, capacity, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
   const arcanePower = profiles.find(p => p.archetype === 'arcane')?.power || 0;
   const arcaneInstCount = institutionsByPattern(settlement, ARCANE_PATTERN).length;
   const healingInstCount = institutionsByPattern(settlement, HEALING_PATTERN).length;
 
+  /**
+   * @param {string} name
+   * @param {boolean} present
+   * @param {boolean} integral
+   * @returns {string}
+   */
   function role(name, present, integral) {
     if (integral) {
       contributors.push({ source: 'magicProfile', effect: `${name}_integral`, reason: `${name} role of magic is integral to settlement function.` });
@@ -219,12 +292,14 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
 
 // ── Band step helpers ───────────────────────────────────────────────────
 
+/** @param {readonly string[]} bands @param {string} current @param {number} steps @returns {string} */
 function upBand(bands, current, steps) {
   const idx = bands.indexOf(current);
   if (idx === -1) return current;
   return bands[Math.min(bands.length - 1, idx + steps)];
 }
 
+/** @param {readonly string[]} bands @param {string} current @param {number} steps @returns {string} */
 function downBand(bands, current, steps) {
   const idx = bands.indexOf(current);
   if (idx === -1) return current;
@@ -236,8 +311,8 @@ function downBand(bands, current, steps) {
 /**
  * Derive the structured MagicProfile for a settlement.
  *
- * @param {Object} settlement
- * @returns {Object} MagicProfile
+ * @param {MagicSettlement | null | undefined} settlement
+ * @returns {MagicProfile | null}
  */
 export function deriveMagicProfile(settlement) {
   if (!settlement) return null;
@@ -264,9 +339,10 @@ export function deriveMagicProfile(settlement) {
     };
   }
 
-  const profiles = deriveAllFactionProfiles(settlement);
-  const causal = deriveCausalState(settlement);
-  const capacity = deriveCapacityProfile('magical', settlement);
+  const profiles = /** @type {FactionProfile[]} */ (deriveAllFactionProfiles(/** @type {any} */ (settlement)));
+  const causal = deriveCausalState(/** @type {any} */ (settlement));
+  const capacity = deriveCapacityProfile('magical', /** @type {any} */ (settlement));
+  /** @type {MagicContributor[]} */
   const contributors = [];
 
   return {
@@ -289,7 +365,11 @@ export function magicLegalityBands()     { return [...LEGALITY_BANDS]; }
 export function magicRiskBands()         { return [...RISK_BANDS]; }
 export function magicRoleBands()         { return [...ROLE_BANDS]; }
 
-/** Human-readable summary. */
+/**
+ * Human-readable summary.
+ * @param {MagicSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeMagic(settlement) {
   const m = deriveMagicProfile(settlement);
   if (!m) return [];

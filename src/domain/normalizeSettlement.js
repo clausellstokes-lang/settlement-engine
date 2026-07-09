@@ -57,6 +57,8 @@ import { migrateSettlementToLatest } from './settlementMigrations.js';
  * Hash a seed string into a stable, opaque id. Same seed → same id.
  * Not cryptographically strong — just a deterministic short identifier
  * that survives reruns of the same seed.
+ * @param {unknown} seed
+ * @returns {string}
  */
 function idFromSeed(seed) {
   const s = String(seed);
@@ -81,6 +83,10 @@ function idFromSeed(seed) {
 // settlement always normalizes to the same id. Math.random here produced a fresh id
 // on every load, violating this file's idempotency contract
 // (normalize(normalize(s)) === normalize(s)).
+/**
+ * @param {{ name?: unknown, tier?: unknown, population?: unknown } | null | undefined} settlement
+ * @returns {string}
+ */
 function contentId(settlement) {
   return idFromSeed(JSON.stringify({
     name: settlement?.name ?? null,
@@ -92,10 +98,15 @@ function contentId(settlement) {
 /**
  * Resolve a canonical field value by checking the canonical key first,
  * then each declared alias. Returns the first defined value found.
+ * @param {Record<string, unknown>} settlement
+ * @param {string} canonicalKey
+ * @returns {unknown}
  */
 function resolveAliased(settlement, canonicalKey) {
   if (settlement[canonicalKey] !== undefined) return settlement[canonicalKey];
-  const aliases = FIELD_ALIASES[canonicalKey] || [];
+  /** @type {readonly string[]} */
+  // FIELD_ALIASES is a frozen literal without an index signature; typing it Record<string, string[]> belongs in settlement.schema.js
+  const aliases = /** @type {Record<string, string[]>} */ (FIELD_ALIASES)[canonicalKey] || [];
   for (const alias of aliases) {
     if (settlement[alias] !== undefined) return settlement[alias];
   }
@@ -106,8 +117,8 @@ function resolveAliased(settlement, canonicalKey) {
  * Convert a settlement (any shape — legacy, partially-canonical, fully
  * canonical) into a canonical settlement.
  *
- * @param {Object} settlement
- * @returns {Object} New object — input is not mutated.
+ * @param {Record<string, unknown> | null | undefined} settlement
+ * @returns {Record<string, unknown>} New object — input is not mutated.
  */
 export function normalizeSettlement(settlement) {
   if (!settlement || typeof settlement !== 'object') {
@@ -166,13 +177,15 @@ export function normalizeSettlement(settlement) {
   // current SCHEMA_VERSION constant. Walk the migration chain so the
   // returned object matches the current shape regardless of when it
   // was generated.
-  return migrateSettlementToLatest(out);
+  return /** @type {Record<string, unknown>} */ (migrateSettlementToLatest(out));
 }
 
 /**
  * Whether a settlement appears to have been normalized at least once
  * (has version stamps and a stable id). Useful for short-circuiting
  * repeated normalize calls in hot paths.
+ * @param {{ schemaVersion?: unknown, id?: unknown } | null | undefined} settlement
+ * @returns {boolean}
  */
 export function isNormalized(settlement) {
   return Boolean(

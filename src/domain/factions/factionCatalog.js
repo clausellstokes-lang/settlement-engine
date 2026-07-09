@@ -14,7 +14,9 @@
 
 import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
 
-/** Display labels for the descriptor category keys. */
+/** Display labels for the descriptor category keys.
+ * @type {Readonly<Record<string, string>>}
+ */
 export const FACTION_CATEGORY_LABELS = Object.freeze({
   economy:    'Economy',
   government: 'Government',
@@ -25,6 +27,10 @@ export const FACTION_CATEGORY_LABELS = Object.freeze({
   other:      'Other',
 });
 
+/**
+ * @param {unknown} x
+ * @returns {string}
+ */
 function norm(x) {
   return String(x || '').trim().toLowerCase();
 }
@@ -34,7 +40,8 @@ function norm(x) {
  * older/neighbour records keep a flat settlement.factions. Read both, and
  * accept either `name` or `faction` as the label key.
  *
- * @param {Object} settlement
+ * @typedef {{ name?: string, faction?: string }} FactionNameCarrier
+ * @param {{ powerStructure?: { factions?: FactionNameCarrier[] }, factions?: FactionNameCarrier[] } | null | undefined} settlement
  * @returns {Set<string>} lowercased names already present
  */
 export function presentFactionNames(settlement) {

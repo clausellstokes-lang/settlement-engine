@@ -14,6 +14,24 @@
  * Pure, read-only.
  */
 
+/**
+ * One display-consistency contradiction record (shape shared with
+ * domain/contradictions.js).
+ * @typedef {Object} ConsistencyRecord
+ * @property {string} id
+ * @property {string} type
+ * @property {'invalid'} classification
+ * @property {'block'|'warn'} severity
+ * @property {string} description
+ * @property {string[]} references
+ */
+
+/**
+ * @param {string} type
+ * @param {string} description
+ * @param {{ severity?: 'block'|'warn', references?: string[] }} [options]
+ * @returns {ConsistencyRecord}
+ */
 function record(type, description, { severity = 'block', references = [] } = {}) {
   return { id: `consistency.${type}`, type, classification: 'invalid', severity, description, references };
 }
@@ -21,9 +39,14 @@ function record(type, description, { severity = 'block', references = [] } = {})
 /**
  * Validate a settlement for cross-surface display contradictions.
  * Returns { blocking, warnings } — both arrays of contradiction records.
+ *
+ * @param {{ economicViability?: { summary?: unknown, metrics?: { foodBalance?: { dailyProduction?: unknown, dailyNeed?: unknown, surplus?: unknown, deficit?: unknown } | null } | null } | null } | null | undefined} settlement
+ * @returns {{ blocking: ConsistencyRecord[], warnings: ConsistencyRecord[] }}
  */
 export function validateDossier(settlement) {
+  /** @type {ConsistencyRecord[]} */
   const blocking = [];
+  /** @type {ConsistencyRecord[]} */
   const warnings = [];
   if (!settlement) return { blocking, warnings };
 

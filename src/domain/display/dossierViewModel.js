@@ -43,11 +43,53 @@ const VIABILITY_LABEL = Object.freeze({
   unknown:         'Unknown',
 });
 
+/**
+ * The generator's foodBalance record (economicViability.metrics.foodBalance) —
+ * numeric fields typed `unknown` because they pass through cleanNum coercion.
+ * @typedef {Object} FoodBalanceRecord
+ * @property {unknown} [dailyProduction]
+ * @property {unknown} [dailyNeed]
+ * @property {unknown} [surplus]
+ * @property {unknown} [deficit]
+ * @property {unknown} [deficitPercent]
+ * @property {unknown} [importCoverage]
+ * @property {unknown} [rawDeficit]
+ * @property {string|null} [importChannel]
+ * @property {unknown} [magicFoodOffset]
+ * @property {string|null} [magicFoodNote]
+ */
+
+/**
+ * Structural view of the economicState fields the display model reads.
+ * @typedef {Object} EconStateView
+ * @property {unknown} [primaryExports]
+ * @property {unknown} [exports]
+ * @property {unknown} [isEntrepot]
+ * @property {unknown} [prosperity]
+ * @property {{ stockpile?: { blockaded?: unknown, blockadeBypass?: string|null } | null } | null} [foodSecurity]
+ */
+
+/**
+ * Structural view of the settlement fields the display model reads.
+ * @typedef {Object} DossierSettlementView
+ * @property {{ metrics?: { foodBalance?: FoodBalanceRecord | null, tradeAccess?: string } | null, summary?: string | null, viable?: boolean | null, dependencies?: unknown[] } | null} [economicViability]
+ * @property {EconStateView | null} [economicState]
+ * @property {{ tradeRouteAccess?: string } | null} [config]
+ */
+
+/**
+ * @param {unknown} n
+ * @returns {string|null}
+ */
 function fmtInt(n) {
   const v = cleanNum(n);
   return v == null ? null : Math.round(v).toLocaleString('en-US');
 }
 
+/**
+ * @param {unknown} v
+ * @returns {unknown[]}
+ */
 function toArray(v) {
   if (Array.isArray(v)) return v.filter(Boolean);
   return v ? [v] : [];
@@ -59,6 +101,8 @@ function toArray(v) {
  * dailyProduction / dailyNeed (NOT production / need). Enforces the rule:
  * never show produced=0 & needed=0 next to a non-zero surplus/deficit —
  * fall back to "Not calculated".
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveFoodBalance(settlement) {
   const fb = settlement?.economicViability?.metrics?.foodBalance || null;
@@ -74,8 +118,10 @@ export function deriveFoodBalance(settlement) {
   }
   const produced = cleanNum(fb.dailyProduction);
   const needed   = cleanNum(fb.dailyNeed);
-  const surplus  = Math.max(cleanNum(fb.surplus, 0), 0);
-  const deficit  = Math.max(cleanNum(fb.deficit, 0), 0);
+  // placeholders.cleanNum lacks annotations (inferred fallback: null); it accepts a number fallback and returns number here (crossFileNeeds).
+  const surplus  = Math.max(/** @type {number} */ (cleanNum(fb.surplus, 0)), 0);
+  // same cleanNum annotation gap (crossFileNeeds).
+  const deficit  = Math.max(/** @type {number} */ (cleanNum(fb.deficit, 0)), 0);
   const rawKnown = produced != null && needed != null && (produced > 0 || needed > 0);
 
   // Normalize the residual deficit against need. A raw absolute (e.g. −4096)
@@ -120,8 +166,11 @@ export function deriveFoodBalance(settlement) {
  * Export posture (§1d). Single source for "does this settlement export, and
  * how exposed is that trade?". Reads economicState.primaryExports (what the
  * Economics surface shows), falling back to the legacy economicState.exports.
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveExportPosture(settlement) {
+  /** @type {EconStateView} */
   const eco = settlement?.economicState || {};
   const primary = toArray(eco.primaryExports);
   const exports = primary.length ? primary : toArray(eco.exports);
@@ -131,6 +180,7 @@ export function deriveExportPosture(settlement) {
               || settlement?.config?.tradeRouteAccess
               || 'unknown';
 
+  /** @type {keyof typeof EXPORT_STATUS_LABEL} */
   let status;
   if (count === 0)               status = 'none';
   else if (isEntrepot)           status = 'entrepot';
@@ -153,8 +203,11 @@ export function deriveExportPosture(settlement) {
  * while the dossier shows a food deficit. buildConflict() (economicGenerator)
  * only checks dependency warnings for its "self-sufficient" branch — it
  * ignores a food deficit — which is the contradiction this corrects.
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveViability(settlement) {
+  /** @type {NonNullable<DossierSettlementView['economicViability']>} */
   const v = settlement?.economicViability || {};
   const rawSummary = v.summary || null;
 
@@ -234,6 +287,8 @@ export function deriveViability(settlement) {
  * unexplained. Settlements the pulse has never touched (no stockpile record)
  * report available:false and say nothing. The prose field is named `display`
  * (the view-model idiom) — NOT `note`, which the publicSafe denylist strips.
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveBlockadeRelief(settlement) {
   const sp = settlement?.economicState?.foodSecurity?.stockpile || null;
@@ -251,6 +306,7 @@ export function deriveBlockadeRelief(settlement) {
   return { available: true, blockaded, bypass, display };
 }
 
+/** @type {Readonly<Record<string, string>>} */
 const MAGIC_ROLE_LABEL = Object.freeze({
   economic:       'Economic',
   military:       'Military',
@@ -264,8 +320,22 @@ const MAGIC_ROLE_LABEL = Object.freeze({
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
  * price a magic economy that does not exist.
+ *
+ * @typedef {Object} MagicProfileLike  structural view of magicProfile.js#deriveMagicProfile output
+ * @property {boolean} [magicExists]
+ * @property {string} [availability]
+ * @property {string} [legality]
+ * @property {string} [institutionalControl]
+ * @property {string} [cost]
+ * @property {string} [risk]
+ * @property {string} [religiousAcceptance]
+ * @property {Record<string, string>} roles
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveMagicPosture(settlement) {
+  /** @type {MagicProfileLike | null} */
+  // @ts-expect-error -- deriveMagicProfile declares @returns {Object}; the profile shape is stable (crossFileNeeds: export a MagicProfile typedef from magicProfile.js).
   const m = deriveMagicProfile(settlement);
   if (!m) {
     return { available: false, magicExists: null, display: 'Not assessed', roles: null, roleLines: [] };
@@ -360,6 +430,10 @@ export function deriveTopExport(settlement) {
   return { label: item.good || item.name || item.label || '' };
 }
 
+/**
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @param {{ aiOverlay?: unknown }} [options]  aiOverlay reserved for later milestones
+ */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),

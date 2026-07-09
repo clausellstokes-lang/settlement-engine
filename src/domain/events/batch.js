@@ -61,16 +61,16 @@ export function eventProduces(event) {
   // so a later RESOLVE_STRESSOR in the same batch can target it — by type or
   // label (exact), or through the archetype bridge nsHas runs for free text.
   if (event?.type === 'APPLY_STRESSOR') {
-    const type = String(event.payload?.stressorType || event.targetId || '').trim();
+    const type = String(/** @type {any} */ (event.payload)?.stressorType || event.targetId || '').trim();
     if (!type) return [];
-    const refs = [{ kind: 'stressor', id: type, name: event.payload?.label || labelFromTarget(type) }];
-    const archetype = archetypeForStressor({ type, label: event.payload?.label });
+    const refs = [{ kind: 'stressor', id: type, name: /** @type {any} */ (event.payload)?.label || labelFromTarget(type) }];
+    const archetype = archetypeForStressor({ type, label: /** @type {any} */ (event.payload)?.label });
     if (archetype) refs.push({ kind: 'stressorArchetype', id: archetype, name: archetype });
     return refs;
   }
-  const kind = PRODUCES_KIND[event?.type];
+  const kind = PRODUCES_KIND[/** @type {keyof typeof PRODUCES_KIND} */ (event?.type)];
   if (!kind) return [];
-  const name = labelFromTarget(event?.targetId) || event?.payload?.name || '';
+  const name = labelFromTarget(event?.targetId) || /** @type {any} */ (event?.payload)?.name || '';
   if (!name) return [];
   const id = kind === 'npc' ? '' : `${kind}.${slugify(name)}`;
   return [{ kind, id, name }];
@@ -88,7 +88,8 @@ export function eventProduces(event) {
 export function eventConsumes(event) {
   const t = event?.type;
   const targetId = event?.targetId;
-  const p = event?.payload || {};
+  const p = /** @type {any} */ (event?.payload || {});
+  /** @type {Array<{kind:string, ref:string}>} */
   const refs = [];
   switch (t) {
     case 'REMOVE_INSTITUTION':
@@ -171,6 +172,7 @@ export function eventConsumes(event) {
  */
 export function validateBatch(settlement, events = []) {
   const ns = initNamespace(settlement);
+  /** @type {Array<{index:number, eventId:any, severity:string, message:string}>} */
   const warnings = [];
   events.forEach((event, index) => {
     const label = EVENT_REGISTRY[event?.type]?.label || event?.type || 'Change';
@@ -204,9 +206,9 @@ export function validateBatch(settlement, events = []) {
  *
  * @param {Object} args
  * @param {Object} args.settlement
- * @param {Object} [args.systemState] before-state (derived if omitted)
+ * @param {Object|null} [args.systemState] before-state (derived if omitted)
  * @param {Event[]} args.events
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {{
  *   beforeSettlement: Object, nextSettlement: Object,
  *   beforeSystemState: Object, afterSystemState: Object,
@@ -220,6 +222,7 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
   const beforeSystemState = systemState || deriveSystemState(beforeSettlement);
 
   let working = beforeSettlement;
+  /** @type {Record<string, number>} */
   const summedStateDeltas = {};
   const perEvent = [];
   const rerunKeys = new Set();
@@ -262,7 +265,7 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
 
   const afterStructural = deriveSystemState(working);
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, summedStateDeltas);
-  const systemStateDeltas = compareSystemState(beforeSystemState, afterSystemState);
+  const systemStateDeltas = compareSystemState(/** @type {any} */ (beforeSystemState), afterSystemState);
 
   return {
     beforeSettlement,
@@ -280,8 +283,10 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
 
 // Mirror of eventPipeline.applyAuthoredStateDeltas (kept local so this module
 // stays decoupled from the single-event pipeline).
+/** @param {any} state @param {Record<string, number>} deltas @returns {any} */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
+  /** @type {Record<string, any>} */
   const next = {};
   for (const key of Object.keys(state)) {
     const dim = state[key];
@@ -297,8 +302,10 @@ function applyAuthoredStateDeltas(state, deltas) {
   return next;
 }
 
+/** @param {unknown} x @returns {string} */
 function lc(x) { return String(x || '').trim().toLowerCase(); }
 
+/** @param {any} s @returns {Record<string, Set<string>>} */
 function initNamespace(s) {
   const ns = {
     institution: new Set(),
@@ -332,7 +339,7 @@ function initNamespace(s) {
     ...(Array.isArray(s?.config?.eventConditions) ? s.config.eventConditions : []),
     ...(Array.isArray(s?._config?.eventConditions) ? s._config.eventConditions : []),
   ];
-  const locallyOwned = (c) => {
+  const locallyOwned = (/** @type {any} */ c) => {
     const origin = String(c?.causes?.[0]?.source ?? '');
     return origin === '' || origin === 'event' || origin === 'generation';
   };
@@ -344,6 +351,7 @@ function initNamespace(s) {
   return ns;
 }
 
+/** @param {Record<string, Set<string>>} ns @param {string} kind @param {any} ref @returns {boolean} */
 function nsHas(ns, kind, ref) {
   const r = lc(ref);
   if (!r) return true; // nothing to validate
@@ -368,17 +376,20 @@ function nsHas(ns, kind, ref) {
   return set.has(r) || set.has(label);
 }
 
+/** @param {Record<string, Set<string>>} ns @param {string} kind @param {any} value @returns {void} */
 function nsAdd(ns, kind, value) {
   const v = lc(value);
   if (!v || !ns[kind]) return;
   ns[kind].add(v);
 }
 
+/** @param {unknown} targetId @returns {string} */
 function labelFromTarget(targetId) {
   const tail = String(targetId || '').split('.').pop();
-  return tail.replace(/_/g, ' ');
+  return /** @type {string} */ (tail).replace(/_/g, ' ');
 }
 
+/** @param {unknown} s @returns {string} */
 function slugify(s) {
   return String(s || '')
     .toLowerCase()

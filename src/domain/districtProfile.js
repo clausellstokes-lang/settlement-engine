@@ -41,10 +41,63 @@ const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', '
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+/** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+
+/**
+ * @typedef {Object} Quarter
+ * @property {string} [name]
+ * @property {string} [desc]
+ * @property {string} [location]
+ * @property {string[]} [landmarks]
+ */
+
+/**
+ * @typedef {{ source: string, effect: string, reason: string }} Contributor
+ */
+
+/**
+ * @typedef {{ archetype?: string, label?: string }} ConditionLike
+ */
+
+/**
+ * @typedef {Object} DistrictSettlement
+ * @property {{ prosperity?: any, [key: string]: unknown }} [economicState]
+ * @property {unknown} [institutions]
+ * @property {{ quarters?: Quarter[] }} [spatialLayout]
+ */
+
+/**
+ * @typedef {Object} DistrictProfile
+ * @property {string} id
+ * @property {string} [name]
+ * @property {(string|null)} origin
+ * @property {string} category
+ * @property {string} wealth
+ * @property {string} safety
+ * @property {({ id: string, name: string, archetype: string } | null)} dominantFaction
+ * @property {Array<{ id: string, label: string }>} institutions
+ * @property {string[]} services
+ * @property {string} sensoryIdentity
+ * @property {string} currentTension
+ * @property {string} hook
+ * @property {string[]} connectedDistricts
+ * @property {Contributor[]} contributors
+ */
+
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {{ length: number }} arr
+ * @param {number} idx
+ * @returns {number}
+ */
 function clampIdx(arr, idx) {
   return Math.max(0, Math.min(arr.length - 1, idx));
 }
@@ -63,6 +116,10 @@ const CATEGORY_PATTERNS = Object.freeze([
   { pattern: /residential|commoner|tenement|homestead|district/i,  category: 'residential' },
 ]);
 
+/**
+ * @param {Quarter} quarter
+ * @returns {string}
+ */
 function inferCategory(quarter) {
   const blob = `${quarter.name || ''} ${quarter.desc || ''} ${(quarter.landmarks || []).join(' ')}`;
   for (const { pattern, category } of CATEGORY_PATTERNS) {
@@ -87,8 +144,13 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
   other:        null,
 });
 
+/**
+ * @param {string} category
+ * @param {FactionProfile[]} profiles
+ * @returns {FactionProfile | null}
+ */
 function inferDominantFaction(category, profiles) {
-  const archetype = CATEGORY_TO_ARCHETYPE[category];
+  const archetype = /** @type {Record<string, string | null>} */ (CATEGORY_TO_ARCHETYPE)[category];
   if (!archetype) return null;
   const matching = profiles.filter(p => p.archetype === archetype);
   if (matching.length === 0) return null;
@@ -97,7 +159,14 @@ function inferDominantFaction(category, profiles) {
 }
 
 // Category → base wealth band (settlement prosperity nudges from there).
+/**
+ * @param {string} category
+ * @param {DistrictSettlement} settlement
+ * @param {Contributor[]} contributors
+ * @returns {string}
+ */
 function inferWealth(category, settlement, contributors) {
+  /** @type {Record<string, number>} */
   const base = {
     noble:      5,
     arcane:     4,
@@ -132,7 +201,16 @@ function inferWealth(category, settlement, contributors) {
 }
 
 // Category → base safety band (substrate + threats nudge).
+/**
+ * @param {string} category
+ * @param {DistrictSettlement} settlement
+ * @param {{ scores?: Record<string, number> }} causal
+ * @param {ThreatProfile[]} threats
+ * @param {Contributor[]} contributors
+ * @returns {string}
+ */
 function inferSafety(category, settlement, causal, threats, contributors) {
+  /** @type {Record<string, number>} */
   const base = {
     military:    4,
     civic:       3,
@@ -172,6 +250,11 @@ function inferSafety(category, settlement, causal, threats, contributors) {
 }
 
 // Match institutions by name overlap with the quarter's name / landmarks.
+/**
+ * @param {Quarter} quarter
+ * @param {DistrictSettlement} settlement
+ * @returns {Array<{ id: string, label: string }>}
+ */
 function inferInstitutions(quarter, settlement) {
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   const haystack = `${quarter.name || ''} ${(quarter.landmarks || []).join(' ')}`.toLowerCase();
@@ -186,7 +269,12 @@ function inferInstitutions(quarter, settlement) {
   return matched;
 }
 
+/**
+ * @param {string} category
+ * @returns {string[]}
+ */
 function inferServices(category) {
+  /** @type {Record<string, string[]>} */
   const map = {
     religious:   ['ritual services', 'sanctuary', 'almsgiving'],
     merchant:    ['markets', 'moneylending', 'porter and warehousing'],
@@ -204,6 +292,10 @@ function inferServices(category) {
   return [...(map[category] || [])];
 }
 
+/**
+ * @param {Quarter} quarter
+ * @returns {string}
+ */
 function inferSensoryIdentity(quarter) {
   const parts = [];
   if (quarter.desc) parts.push(String(quarter.desc));
@@ -213,6 +305,12 @@ function inferSensoryIdentity(quarter) {
   return parts.join(' — ') || 'No specific sensory notes recorded.';
 }
 
+/**
+ * @param {string} category
+ * @param {ConditionLike[]} conditions
+ * @param {ThreatProfile[]} threats
+ * @returns {string}
+ */
 function inferCurrentTension(category, conditions, threats) {
   // Category-relevant active conditions become the headline tension.
   for (const cond of conditions) {
@@ -232,6 +330,13 @@ function inferCurrentTension(category, conditions, threats) {
   return 'No acute tension noted.';
 }
 
+/**
+ * @param {string} category
+ * @param {Quarter} quarter
+ * @param {ConditionLike[]} conditions
+ * @param {ThreatProfile[]} threats
+ * @returns {string}
+ */
 function inferHook(category, quarter, conditions, threats) {
   // Prefer condition-driven > threat-driven > category-driven hook.
   for (const cond of conditions) {
@@ -255,6 +360,7 @@ function inferHook(category, quarter, conditions, threats) {
     }
   }
   // Category-default hooks (light).
+  /** @type {Record<string, string>} */
   const defaults = {
     religious:   'A junior priest is gathering names of those the senior clergy refuse to bury.',
     merchant:    'A coster captain seeks discreet investors for a route most merchants call closed.',
@@ -272,6 +378,11 @@ function inferHook(category, quarter, conditions, threats) {
   return defaults[category] || defaults.other;
 }
 
+/**
+ * @param {Quarter} quarter
+ * @param {DistrictSettlement} settlement
+ * @returns {string[]}
+ */
 function inferConnectedDistricts(quarter, settlement) {
   const all = settlement.spatialLayout?.quarters || [];
   const out = [];
@@ -287,13 +398,17 @@ function inferConnectedDistricts(quarter, settlement) {
 
 /**
  * Build a structured DistrictProfile for one quarter.
+ *
+ * @param {Quarter | null | undefined} quarter
+ * @param {DistrictSettlement | null | undefined} settlement
+ * @returns {DistrictProfile | null}
  */
 export function deriveDistrictProfile(quarter, settlement) {
   if (!quarter || !quarter.name || !settlement) return null;
-  const profiles = deriveAllFactionProfiles(settlement);
-  const causal = deriveCausalState(settlement);
-  const conditions = deriveAllActiveConditions(settlement);
-  const threats = deriveAllThreatProfiles(settlement);
+  const profiles = /** @type {FactionProfile[]} */ (deriveAllFactionProfiles(/** @type {any} */ (settlement)));
+  const causal = deriveCausalState(/** @type {any} */ (settlement));
+  const conditions = deriveAllActiveConditions(/** @type {any} */ (settlement));
+  const threats = deriveAllThreatProfiles(/** @type {any} */ (settlement));
   const contributors = [];
 
   const category = inferCategory(quarter);
@@ -327,14 +442,18 @@ export function deriveDistrictProfile(quarter, settlement) {
   };
 }
 
-/** Derive every district. */
+/**
+ * Derive every district.
+ * @param {DistrictSettlement | null | undefined} settlement
+ * @returns {DistrictProfile[]}
+ */
 export function deriveAllDistricts(settlement) {
   if (!settlement) return [];
   const quarters = settlement.spatialLayout?.quarters;
   if (!Array.isArray(quarters)) return [];
-  return quarters
+  return /** @type {DistrictProfile[]} */ (quarters
     .map(q => deriveDistrictProfile(q, settlement))
-    .filter(Boolean);
+    .filter(Boolean));
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
@@ -347,6 +466,10 @@ export function supportedDistrictCategories() {
   return [...DISTRICT_CATEGORIES];
 }
 
+/**
+ * @param {DistrictSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeDistricts(settlement) {
   return deriveAllDistricts(settlement)
     .map(d => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`);

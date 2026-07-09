@@ -43,6 +43,10 @@ const MIGRATIONS = Object.freeze([
     from: 0,
     to:   1,
     description: 'Stamp schemaVersion = 1. No structural changes; v0 settlements just lacked the version field.',
+    /**
+     * @param {Record<string, unknown>} settlement
+     * @returns {Record<string, unknown>}
+     */
     migrate(settlement) {
       // Pure passthrough: normalizeSettlement already stamps the
       // version stamp. This entry exists to make the chain explicit
@@ -58,6 +62,9 @@ const MIGRATIONS = Object.freeze([
  * Map a settlement's stored `schemaVersion` to the runner's current
  * pointer. Missing / null / 0 values are treated as v0 so the V0→V1
  * migration applies (which is the no-op stamp).
+ *
+ * @param {{ schemaVersion?: unknown } | null | undefined} settlement
+ * @returns {number}
  */
 function currentVersion(settlement) {
   const v = settlement?.schemaVersion;
@@ -76,11 +83,14 @@ function currentVersion(settlement) {
  * settlement's current version after a migration step). That would
  * mean MIGRATIONS got reordered or had a hole — a code bug, not
  * runtime data drift.
+ *
+ * @param {unknown} settlement
+ * @returns {unknown}
  */
 export function migrateSettlementToLatest(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
 
-  let out = settlement;
+  let out = /** @type {Record<string, unknown>} */ (settlement);
   let safety = 0;
   while (currentVersion(out) < SCHEMA_VERSION) {
     const v = currentVersion(out);

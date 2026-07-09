@@ -42,6 +42,10 @@ const NEUTRAL = Object.freeze({
 });
 
 // Fold the stale lens vocabulary (and any legacy saves) into getMagicLevel's canonical set.
+/**
+ * @param {string | undefined} level  raw band word from config/legacy save (callers guard non-empty; undefined folds to the default)
+ * @returns {'none'|'low'|'medium'|'high'}
+ */
 function canonBand(level) {
   switch (level) {
     case 'pervasive':            return 'high';
@@ -52,10 +56,18 @@ function canonBand(level) {
   }
 }
 
+/** @type {(v: unknown) => v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {Object} settlement
+ * Structural view of the settlement fields this ledger reads.
+ * @typedef {Object} MagicLedgerSource
+ * @property {{ magicLevel?: string, priorityMagic?: number, magicExists?: boolean } | null} [config]
+ * @property {string} [magicLevel]  legacy top-level band (pre-config saves)
+ */
+
+/**
+ * @param {MagicLedgerSource | null | undefined} settlement
  * @returns {MagicLedger}
  */
 export function magicLedger(settlement) {
@@ -66,7 +78,9 @@ export function magicLedger(settlement) {
   if (!hasPriority && !hasBand) return NEUTRAL;
   const magicExists = cfg?.magicExists !== false;
   // Effective dial: a dead-magic world is 0 regardless of the slider.
-  const priorityMagic = hasPriority ? (magicExists ? cfg.priorityMagic : 0) : (magicExists ? 50 : 0);
+  /** @type {number} */
+  // `hasPriority` (isNum predicate over cfg?.priorityMagic) guarantees a finite number here; TS cannot track the aliased optional-chain predicate.
+  const priorityMagic = hasPriority ? (magicExists ? /** @type {any} */ (cfg).priorityMagic : 0) : (magicExists ? 50 : 0);
   // Prefer the granular dial (canonical vocabulary guaranteed); else fold a legacy band.
   const magicLevel = hasPriority ? getMagicLevel(priorityMagic) : canonBand(rawBand);
   return { priorityMagic, magicLevel, magicExists, present: true };

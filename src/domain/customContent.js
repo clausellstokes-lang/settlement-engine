@@ -41,6 +41,23 @@ export const INSTITUTION_CATEGORIES = Object.freeze([
   'other',
 ]);
 
+/**
+ * @typedef {Object} RawCustomEntity
+ * @property {string} [name]
+ * @property {string} [label]
+ * @property {string} [text]
+ * @property {string} [type]
+ * @property {string} [controlledBy]
+ * @property {string} [controller]
+ * @property {string} [factionAffiliation]
+ * @property {string} [threatType]
+ * @property {string} [category]
+ * @property {string[]} [risks]
+ * @property {string[]} [provides]
+ * @property {string[]} [requires]
+ * @property {{ substrate?: Object, capacities?: Object }} [effects]
+ */
+
 // ── Type inference ───────────────────────────────────────────────────────
 
 const TYPE_PATTERNS = Object.freeze([
@@ -55,6 +72,10 @@ const TYPE_PATTERNS = Object.freeze([
   // Default to institution if a noun-looking name is present
 ]);
 
+/**
+ * @param {RawCustomEntity | null | undefined} rawEntity
+ * @returns {string | null}
+ */
 export function inferCustomEntityType(rawEntity) {
   if (!rawEntity) return null;
   // Explicit type wins
@@ -82,9 +103,13 @@ const INSTITUTION_CATEGORY_PATTERNS = Object.freeze([
   { pattern: /(infirmary|hospice|herbalist|apothecary|healer|hospital)/i,                 category: 'healing' },
 ]);
 
+/**
+ * @param {string} name
+ * @returns {keyof typeof CATEGORY_TEMPLATES}
+ */
 function inferInstitutionCategory(name) {
   for (const { pattern, category } of INSTITUTION_CATEGORY_PATTERNS) {
-    if (pattern.test(name)) return category;
+    if (pattern.test(name)) return /** @type {keyof typeof CATEGORY_TEMPLATES} */ (category);
   }
   return 'other';
 }
@@ -205,6 +230,9 @@ const CATEGORY_TEMPLATES = Object.freeze({
 
 /**
  * Classify a custom institution. Returns the structured envelope.
+ * @param {RawCustomEntity | null | undefined} rawEntity
+ * @param {{ config?: { magicLevel?: string } }} [settlement]
+ * @returns {Object | null}
  */
 export function classifyCustomInstitution(rawEntity, settlement) {
   if (!rawEntity) return null;
@@ -263,6 +291,7 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 // ── Other-type classifiers (light) ──────────────────────────────────────
 
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomFaction(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
   const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
@@ -279,6 +308,7 @@ function classifyCustomFaction(rawEntity) {
   };
 }
 
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomNpc(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed NPC');
   return {
@@ -294,6 +324,7 @@ function classifyCustomNpc(rawEntity) {
   };
 }
 
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomThreat(rawEntity) {
   const name = String(rawEntity.name || rawEntity.label || 'Unnamed threat');
   return {
@@ -309,6 +340,7 @@ function classifyCustomThreat(rawEntity) {
   };
 }
 
+/** @param {RawCustomEntity} rawEntity */
 function classifyCustomHook(rawEntity) {
   const text = String(rawEntity.text || rawEntity.name || 'Unnamed hook');
   return {
@@ -329,8 +361,8 @@ function classifyCustomHook(rawEntity) {
 /**
  * Classify any user-added entity. Dispatches by inferred type.
  *
- * @param {Object} rawEntity   { name?, text?, type?, ...optional structured fields }
- * @param {Object} [settlement]
+ * @param {RawCustomEntity} rawEntity   { name?, text?, type?, ...optional structured fields }
+ * @param {{ config?: { magicLevel?: string } }} [settlement]
  * @returns {Object | null}
  */
 export function classifyCustomEntity(rawEntity, settlement) {
@@ -354,8 +386,9 @@ export function supportedCustomContentTypes() {
 export function supportedInstitutionCategories() {
   return [...INSTITUTION_CATEGORIES];
 }
+/** @param {string} category */
 export function institutionCategoryTemplate(category) {
-  const t = CATEGORY_TEMPLATES[category];
+  const t = CATEGORY_TEMPLATES[/** @type {keyof typeof CATEGORY_TEMPLATES} */ (category)];
   if (!t) return null;
   return {
     provides:     [...t.provides],

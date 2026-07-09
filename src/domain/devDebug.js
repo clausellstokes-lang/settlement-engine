@@ -38,8 +38,13 @@ import { detectContradictions } from './contradictions.js';
 import { entityCatalog } from './explanation.js';
 import { canonBreakdown } from './canonStatus.js';
 
+/** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
+/** @typedef {CanonicalSettlement & { name?: string, tier?: string }} DebugSettlement */
+
+/** @param {CanonicalSettlement} settlement */
 function tracesByStepCounts(settlement) {
   const traces = getTraces(settlement);
+  /** @type {Record<string, number>} */
   const out = {};
   for (const t of traces) {
     if (!t?.step) continue;
@@ -48,8 +53,10 @@ function tracesByStepCounts(settlement) {
   return out;
 }
 
+/** @param {CanonicalSettlement} settlement */
 function tracesByTypeCounts(settlement) {
   const traces = getTraces(settlement);
+  /** @type {Record<string, number>} */
   const out = {};
   for (const t of traces) {
     if (!t?.targetType) continue;
@@ -61,7 +68,7 @@ function tracesByTypeCounts(settlement) {
 /**
  * Build the full dev-debug envelope.
  *
- * @param {Object} settlement
+ * @param {DebugSettlement | null | undefined} settlement
  * @returns {Object}
  */
 export function deriveDevDebug(settlement) {
@@ -111,15 +118,24 @@ export function deriveDevDebug(settlement) {
     districts:      deriveAllDistricts(settlement),
     contradictions: detectContradictions(settlement),
     entityCatalog:  entityCatalog(settlement),
-    canonBreakdown: canonBreakdown(settlement),
+    canonBreakdown: canonBreakdown(
+      /** @type {import('./canonStatus.js').CanonSettlementSource} */ (
+        /** @type {unknown} */ (settlement)
+      )
+    ),
   };
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Just the counts — useful for dev dashboard tiles. */
+/**
+ * Just the counts — useful for dev dashboard tiles.
+ * @param {DebugSettlement | null | undefined} settlement
+ */
 export function devDebugCounts(settlement) {
-  const d = deriveDevDebug(settlement);
+  const d = /** @type {{ traces: { total: number }, factions: unknown[], supplyChains: unknown[], conditions: unknown[], threats: unknown[], hooks: unknown[], clocks: unknown[], districts: unknown[], contradictions: unknown[], entityCatalog: unknown[] }} */ (
+    deriveDevDebug(settlement)
+  );
   return {
     traces:        d.traces.total,
     factions:      d.factions.length,
@@ -134,7 +150,11 @@ export function devDebugCounts(settlement) {
   };
 }
 
-/** Return only the traces that affect a specific entity id. */
+/**
+ * Return only the traces that affect a specific entity id.
+ * @param {CanonicalSettlement} settlement
+ * @param {string} entityId
+ */
 export function tracesForEntity(settlement, entityId) {
   return [
     ...tracesByType(settlement, 'entity'),

@@ -23,6 +23,53 @@
  * — institutions, factions, npcs, hooks, chains, conditions, etc.
  */
 
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {'generated'|'user'|'event'|'ai_overlay'} CanonSource */
+/** @typedef {'draft'|'canon'|'optional'|'superseded'} CanonStatus */
+
+/**
+ * The explicit + heuristic fields the tagger reads off any entity.
+ * @typedef {Object} CanonTaggable
+ * @property {string} [source]
+ * @property {string} [_source]
+ * @property {string} [canonStatus]
+ * @property {boolean} [locked]
+ * @property {boolean} [pinned]
+ * @property {boolean} [superseded]
+ * @property {boolean} [_authored]
+ * @property {boolean} [userAuthored]
+ * @property {string} [appliedAt]
+ * @property {string} [causeEventId]
+ * @property {boolean} [_aiPolished]
+ * @property {boolean} [_aiOverlay]
+ */
+
+/**
+ * @typedef {Object} CanonTag
+ * @property {CanonSource} source
+ * @property {CanonStatus} canonStatus
+ * @property {boolean} locked
+ */
+
+/**
+ * Settlement entity arrays canonBreakdown walks.
+ * @typedef {Object} CanonSettlementSource
+ * @property {Array<CanonTaggable|null>} [institutions]
+ * @property {{factions?: Array<CanonTaggable|null>}} [powerStructure]
+ * @property {Array<CanonTaggable|null>} [npcs]
+ * @property {Array<CanonTaggable|null>} [activeConditions]
+ * @property {Array<CanonTaggable|null>} [eventLog]
+ */
+
+/**
+ * @typedef {Object} CanonBreakdown
+ * @property {Record<CanonSource, number>} bySource
+ * @property {Record<CanonStatus, number>} byStatus
+ * @property {number} locked
+ * @property {number} total
+ */
+
 // ── Vocabularies ─────────────────────────────────────────────────────────
 
 export const CANON_SOURCES = Object.freeze([
@@ -35,11 +82,17 @@ export const CANON_STATUSES = Object.freeze([
 
 // ── Single-entity tagger ────────────────────────────────────────────────
 
+/**
+ * @param {CanonTaggable} entity
+ * @returns {CanonSource}
+ */
 function inferSource(entity) {
   if (typeof entity.source === 'string' && CANON_SOURCES.includes(entity.source)) {
+    // @ts-ignore -- includes() checked membership in the CanonSource vocabulary; TS does not narrow through it.
     return entity.source;
   }
   if (typeof entity._source === 'string' && CANON_SOURCES.includes(entity._source)) {
+    // @ts-ignore -- includes() checked membership in the CanonSource vocabulary; TS does not narrow through it.
     return entity._source;
   }
   if (entity._authored === true || entity.userAuthored === true) return 'user';
@@ -48,8 +101,14 @@ function inferSource(entity) {
   return 'generated';
 }
 
+/**
+ * @param {CanonTaggable} entity
+ * @param {CanonSource} source
+ * @returns {CanonStatus}
+ */
 function inferCanonStatus(entity, source) {
   if (typeof entity.canonStatus === 'string' && CANON_STATUSES.includes(entity.canonStatus)) {
+    // @ts-ignore -- includes() checked membership in the CanonStatus vocabulary; TS does not narrow through it.
     return entity.canonStatus;
   }
   if (entity.superseded === true) return 'superseded';
@@ -66,6 +125,12 @@ function inferCanonStatus(entity, source) {
   return 'draft';
 }
 
+/**
+ * @param {CanonTaggable} entity
+ * @param {CanonSource} source
+ * @param {CanonStatus} canonStatus
+ * @returns {boolean}
+ */
 function inferLocked(entity, source, canonStatus) {
   if (entity.locked === true || entity.pinned === true) return true;
   // User-canon entities default to locked; the user has staked them.
@@ -78,8 +143,8 @@ function inferLocked(entity, source, canonStatus) {
 /**
  * Compute the canon tag for a single entity.
  *
- * @param {Object} entity
- * @returns {{source: string, canonStatus: string, locked: boolean}}
+ * @param {CanonTaggable | null | undefined} entity
+ * @returns {CanonTag}
  */
 export function tagEntityCanon(entity /* , settlement */) {
   if (!entity || typeof entity !== 'object') {
@@ -97,6 +162,9 @@ export function tagEntityCanon(entity /* , settlement */) {
  * Tag every entity in a flat array. Returns an array of
  * `{ entity, ...tag }` records so consumers can render lists with
  * the tag attached without modifying the entity itself.
+ * @param {Array<CanonTaggable|null> | null | undefined} entities
+ * @param {object} [settlement]
+ * @returns {Array<CanonTag & {entity: CanonTaggable|null}>}
  */
 // eslint-disable-next-line no-unused-vars
 export function tagEntityList(entities, settlement) {
@@ -107,8 +175,11 @@ export function tagEntityList(entities, settlement) {
 /**
  * Count entities by source + canon status across the major
  * settlement entity arrays.
+ * @param {CanonSettlementSource | null | undefined} settlement
+ * @returns {CanonBreakdown}
  */
 export function canonBreakdown(settlement) {
+  /** @type {CanonBreakdown} */
   const out = {
     bySource: { generated: 0, user: 0, event: 0, ai_overlay: 0 },
     byStatus: { draft: 0, canon: 0, optional: 0, superseded: 0 },
@@ -117,6 +188,7 @@ export function canonBreakdown(settlement) {
   };
   if (!settlement) return out;
 
+  /** @param {Array<CanonTaggable|null> | undefined} arr */
   const collect = (arr) => {
     if (!Array.isArray(arr)) return;
     for (const e of arr) {
@@ -140,9 +212,11 @@ export function canonBreakdown(settlement) {
 
 // ── Catalog accessors ───────────────────────────────────────────────────
 
+/** @returns {string[]} */
 export function supportedCanonSources() {
   return [...CANON_SOURCES];
 }
+/** @returns {string[]} */
 export function supportedCanonStatuses() {
   return [...CANON_STATUSES];
 }

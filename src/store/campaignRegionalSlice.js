@@ -58,6 +58,16 @@ import {
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
 
+/**
+ * The slice of a pending world-pulse proposal's outcome that the roaming-twin
+ * undo reads. WorldState keeps proposal entries loosely typed
+ * (Record<string, unknown> — many producers, normalized on read), so we narrow
+ * locally to the shape stressors.js#residualOutcome actually writes:
+ * candidateType 'stressor_residual' and condition.triggeredAt.sourceEventTargetId
+ * = the resolved stressor's id.
+ * @typedef {{ candidateType?: string, condition?: { triggeredAt?: { sourceEventTargetId?: string } } }} ResidualOutcomeRef
+ */
+
 // ── Cross-slice contract ──────────────────────────────────────────────────
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. This slice's contract:
@@ -323,8 +333,8 @@ export const createCampaignRegionalSlice = (set, get) => ({
           stressors: [...stressors.filter(st => !(st.id === restored.id
             || (st.status === 'residual' && sameType(st) && String(st.originSettlementId || '') === sid))), restored],
           proposals: (worldState.proposals || []).filter(p => !(p.status === 'pending'
-            && p.outcome?.candidateType === 'stressor_residual'
-            && String(p.outcome?.condition?.triggeredAt?.sourceEventTargetId || '') === restored.id)),
+            && /** @type {ResidualOutcomeRef | undefined} */ (p.outcome)?.candidateType === 'stressor_residual'
+            && String(/** @type {ResidualOutcomeRef | undefined} */ (p.outcome)?.condition?.triggeredAt?.sourceEventTargetId || '') === restored.id)),
         };
       } else {
         return;

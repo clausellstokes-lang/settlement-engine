@@ -33,13 +33,33 @@ import { entityCatalog } from './explanation.js';
 
 // ── Catalog diff ─────────────────────────────────────────────────────────
 
+/**
+ * @typedef {Object} CatalogEntry
+ * @property {string} type
+ * @property {string} id
+ * @property {string} [label]
+ */
+
+/**
+ * Index a settlement's entity catalog by entity id.
+ * @param {object|null|undefined} settlement
+ * @returns {Map<string, CatalogEntry>}
+ */
 function catalogIndex(settlement) {
-  const cat = entityCatalog(settlement);
+  // entityCatalog is null-tolerant and reads only loosely-shaped fields; the
+  // cast bridges its narrowed ExplainSettlement param from our opaque snapshot.
+  const cat = entityCatalog(/** @type {import('./explanation.js').ExplainSettlement|null|undefined} */ (settlement));
   const byId = new Map();
   for (const e of cat) byId.set(e.id, e);
   return byId;
 }
 
+/**
+ * Set-diff the entity catalogs of two settlement snapshots.
+ * @param {object} before
+ * @param {object} after
+ * @returns {{ preserved: CatalogEntry[], added: CatalogEntry[], removed: CatalogEntry[] }}
+ */
 function diffEntityCatalogs(before, after) {
   const beforeMap = catalogIndex(before);
   const afterMap  = catalogIndex(after);
@@ -145,7 +165,21 @@ export function deriveRegenerationDelta(before, after) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Total count of structural changes across all layers. */
+/**
+ * @typedef {Object} RegenerationDeltaLike
+ * @property {ReadonlyArray<unknown>} [directEffects]
+ * @property {ReadonlyArray<unknown>} [rippleEffects]
+ * @property {ReadonlyArray<unknown>} [capacityShifts]
+ * @property {ReadonlyArray<unknown>} [dailyLifeShifts]
+ * @property {CatalogEntry[]} [newEntities]
+ * @property {CatalogEntry[]} [removedEntities]
+ */
+
+/**
+ * Total count of structural changes across all layers.
+ * @param {RegenerationDeltaLike|null|undefined} delta
+ * @returns {number}
+ */
 export function regenerationDeltaSize(delta) {
   if (!delta) return 0;
   return (delta.directEffects?.length    || 0)
@@ -156,8 +190,13 @@ export function regenerationDeltaSize(delta) {
        + (delta.removedEntities?.length  || 0);
 }
 
-/** Group new entities by type. Useful for "what's new" UI sections. */
+/**
+ * Group new entities by type. Useful for "what's new" UI sections.
+ * @param {RegenerationDeltaLike|null|undefined} delta
+ * @returns {Record<string, CatalogEntry[]>}
+ */
 export function newEntitiesByType(delta) {
+  /** @type {Record<string, CatalogEntry[]>} */
   const out = {};
   for (const e of delta?.newEntities || []) {
     if (!out[e.type]) out[e.type] = [];

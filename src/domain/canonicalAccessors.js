@@ -26,8 +26,8 @@
  * strings, not stressor objects, and substrate readers expect objects with
  * type/name/severity.
  *
- * @param {Object} settlement
- * @returns {Array<Object>}
+ * @param {{ stressors?: unknown, stress?: unknown, stresses?: unknown } | null | undefined} settlement
+ * @returns {Array<Record<string, unknown>>} stressor-shaped objects (see settlement.schema.js StressorEntry)
  */
 export function canonStressors(settlement) {
   const s = settlement || {};
@@ -35,7 +35,12 @@ export function canonStressors(settlement) {
     if (Array.isArray(c)) return c;
   }
   // A single stressor stored as a bare object (legacy fixtures) counts as one.
+  // (The two @ts-expect-errors below: typeof narrows only to `object`, which TS
+  // won't assign to the keyed Record element type — the values are known-plain
+  // stressor objects from legacy fixtures.)
+  // @ts-expect-error -- see note above
   if (s.stressors && typeof s.stressors === 'object') return [s.stressors];
+  // @ts-expect-error -- see note above
   if (s.stress && typeof s.stress === 'object') return [s.stress];
   return [];
 }
@@ -43,8 +48,8 @@ export function canonStressors(settlement) {
 /**
  * The settlement's exports — canonical `economicState.primaryExports`, falling
  * back to the legacy `exports` alias.
- * @param {Object} settlement
- * @returns {Array}
+ * @param {{ economicState?: { primaryExports?: unknown, exports?: unknown } } | null | undefined} settlement
+ * @returns {Array<unknown>}
  */
 export function canonExports(settlement) {
   const ec = settlement?.economicState || {};
@@ -56,8 +61,8 @@ export function canonExports(settlement) {
 /**
  * The settlement's imports — canonical `economicState.primaryImports`, falling
  * back to the legacy `imports` alias.
- * @param {Object} settlement
- * @returns {Array}
+ * @param {{ economicState?: { primaryImports?: unknown, imports?: unknown } } | null | undefined} settlement
+ * @returns {Array<unknown>}
  */
 export function canonImports(settlement) {
   const ec = settlement?.economicState || {};

@@ -24,6 +24,31 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState, SYSTEM_VARIABLES, CAUSAL_BANDS } from './causalState.js';
 import { detectContradictions } from './contradictions.js';
 
+/**
+ * The aggregate payload the DEV dashboard renders.
+ * @typedef {Object} DistributionAggregate
+ * @property {number} n
+ * @property {Record<string, number>} institutionFrequency
+ * @property {Record<string, number>} prosperityBands
+ * @property {Record<string, number>} factionArchetypes
+ * @property {Record<string, number>} foodSecurity
+ * @property {Record<string, Record<string, number>>} substrateBandFloors
+ * @property {Record<string, number>} contradictionTypes
+ * @property {{institutions: number, factions: number, npcs: number, hooks: number, chains: number}} averages
+ */
+
+/**
+ * The (legacy, generator-shaped) settlement slice this aggregator reads.
+ * @typedef {Object} DistributionSettlement
+ * @property {Array<{name?: string}>} [institutions]
+ * @property {{prosperity?: string | {tier?: string}, foodSecurity?: {band?: string}, safetyProfile?: {blackMarketCapture?: number}, activeChains?: import('./supplyChainState.js').LegacyChain[]}} [economicState]
+ * @property {unknown[]} [npcs]
+ * @property {unknown[]} [plotHooks]
+ * @property {Array<import('./factionProfile.js').FactionLike>} [factions]
+ * @property {number | {total?: number} | null} [population]
+ */
+
+/** @returns {DistributionAggregate} */
 function blank() {
   return {
     n: 0,
@@ -43,10 +68,18 @@ function blank() {
   };
 }
 
+/**
+ * @param {Record<string, number>} obj
+ * @param {string} key
+ */
 function incr(obj, key) {
   obj[key] = (obj[key] || 0) + 1;
 }
 
+/**
+ * @param {string | null | undefined} name
+ * @returns {string}
+ */
 function institutionCategory(name) {
   const n = String(name || '').toLowerCase();
   if (/granary|mill|silo|storage|bakery|farm/.test(n))           return 'food';
@@ -64,8 +97,8 @@ function institutionCategory(name) {
 /**
  * Aggregate distribution stats across many settlements. Pure.
  *
- * @param {Object[]} settlements
- * @returns {Object}
+ * @param {Array<DistributionSettlement | null | undefined>} settlements
+ * @returns {DistributionAggregate}
  */
 export function aggregateDistribution(settlements) {
   if (!Array.isArray(settlements) || settlements.length === 0) {
@@ -94,18 +127,18 @@ export function aggregateDistribution(settlements) {
     }
 
     // Prosperity band
-    const prosp = s.economicState?.prosperity?.tier
+    const prosp = /** @type {{tier?: string} | undefined} */ (s.economicState?.prosperity)?.tier
                || s.economicState?.prosperity
                || 'unspecified';
     incr(out.prosperityBands, String(prosp));
 
     // Faction archetypes
-    const profs = deriveAllFactionProfiles(s);
+    const profs = /** @type {Array<import('./factionProfile.js').FactionProfile>} */ (deriveAllFactionProfiles(s));
     factSum += profs.length;
     for (const p of profs) incr(out.factionArchetypes, p.archetype || 'unknown');
 
     // Substrate bands
-    const causal = deriveCausalState(s);
+    const causal = /** @type {{bands: Record<string, string>}} */ (deriveCausalState(s));
     for (const v of SYSTEM_VARIABLES) {
       const band = causal.bands[v];
       if (band && out.substrateBandFloors[v][band] !== undefined) {
@@ -118,7 +151,7 @@ export function aggregateDistribution(settlements) {
     if (fs?.band) incr(out.foodSecurity, fs.band);
 
     // Contradiction types
-    for (const c of detectContradictions(s)) {
+    for (const c of /** @type {Array<{type: string}>} */ (detectContradictions(s))) {
       incr(out.contradictionTypes, c.type);
     }
 
@@ -140,6 +173,10 @@ export function aggregateDistribution(settlements) {
 /**
  * Convert an aggregate to a flat array of `{label, value}` rows
  * suitable for table rendering.
+ *
+ * @param {DistributionAggregate | null | undefined} aggregate
+ * @param {'institutionFrequency' | 'prosperityBands' | 'factionArchetypes' | 'foodSecurity' | 'contradictionTypes'} section
+ * @returns {Array<{label: string, value: number}>}
  */
 export function distributionRows(aggregate, section) {
   if (!aggregate || !aggregate[section]) return [];
@@ -150,7 +187,10 @@ export function distributionRows(aggregate, section) {
     .sort((a, b) => (b.value || 0) - (a.value || 0));
 }
 
-/** Catalog of available sections for the dashboard. */
+/**
+ * Catalog of available sections for the dashboard.
+ * @returns {Array<'institutionFrequency' | 'prosperityBands' | 'factionArchetypes' | 'foodSecurity' | 'contradictionTypes'>}
+ */
 export function distributionSections() {
   return [
     'institutionFrequency',

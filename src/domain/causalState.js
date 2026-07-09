@@ -57,6 +57,75 @@ import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile */
+/** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
+/** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
+
+/**
+ * The 5-band vocabulary (see CAUSAL_BANDS below).
+ * @typedef {'surplus'|'adequate'|'strained'|'critical'|'collapsed'} CausalBand
+ */
+
+/**
+ * Settlement shape as the derivers actually read it — the legacy generator
+ * fields this substrate consumes. (CanonicalSettlement in
+ * settlement.schema.js does not yet declare these generator-era fields;
+ * see crossFileNeeds.)
+ * @typedef {Object} CausalSettlementSource
+ * @property {number | {total?: number} | null} [population]
+ * @property {{monsterThreat?: string, tradeRouteAccess?: string, magicLevel?: string,
+ *             priorityMagic?: number, magicExists?: boolean}} [config]
+ * @property {string} [tradeRouteAccess]
+ * @property {string} [magicLevel]
+ * @property {unknown} [stressors]
+ * @property {unknown} [stress]
+ * @property {unknown} [stresses]
+ * @property {{governingName?: string, publicLegitimacy?: {score?: unknown, label?: unknown} | number | null}} [powerStructure]
+ * @property {import('./defenseLedger.js').DefenseLedgerSource['defenseProfile'] & {hasWalls?: boolean} | null} [defenseProfile]
+ * @property {{safetyProfile?: {blackMarketCapture?: number},
+ *             activeChains?: import('./supplyChainState.js').LegacyChain[]}} [economicState]
+ * @property {{blackMarketCapture?: number}} [safetyProfile]
+ * @property {unknown[]} [institutions]
+ */
+
+/**
+ * One derived substrate variable with its trace.
+ * @typedef {Object} SystemVariable
+ * @property {string} variable
+ * @property {number} score
+ * @property {CausalBand} band
+ * @property {CausalContributor[]} contributors
+ */
+
+/**
+ * Result of a per-variable deriver, before finalization.
+ * @typedef {{score: number, contributors: CausalContributor[]}} DeriverResult
+ */
+
+/**
+ * The full derived substrate.
+ * @typedef {Object} CausalState
+ * @property {Record<string, SystemVariable>} variables
+ * @property {Record<string, CausalBand>} bands
+ * @property {Record<string, number>} scores
+ * @property {Record<CausalBand, string[]>} summary
+ */
+
+/**
+ * One entry of the compareCausalState() delta list.
+ * @typedef {Object} CausalStateDelta
+ * @property {string} variable
+ * @property {number} before
+ * @property {number} after
+ * @property {number} change
+ * @property {CausalBand} bandBefore
+ * @property {CausalBand} bandAfter
+ * @property {'higher_is_better'|'lower_is_better'} polarity
+ * @property {string} explanation
+ */
+
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
@@ -103,6 +172,9 @@ export const CAUSAL_BANDS = Object.freeze([
  * 50 is the neutral / no-information score and lands in 'adequate' —
  * the substrate is default-optimistic; surfaces only flag pressure
  * when there's evidence for it.
+ *
+ * @param {unknown} score
+ * @returns {CausalBand}
  */
 export function causalBand(score) {
   const s = typeof score === 'number' ? Math.max(0, Math.min(100, score)) : 50;
@@ -113,7 +185,11 @@ export function causalBand(score) {
   return 'collapsed';
 }
 
-/** Round-trip: band → numeric center. */
+/**
+ * Round-trip: band → numeric center.
+ * @param {string} band
+ * @returns {number}
+ */
 export function defaultScoreForCausalBand(band) {
   switch (band) {
     case 'surplus':    return 85;
@@ -135,12 +211,24 @@ export function defaultScoreForCausalBand(band) {
  * @property {string} reason   — Human-readable explanation.
  */
 
+/**
+ * @param {CausalContributor[]} contributors
+ * @param {string} source
+ * @param {string} effect
+ * @param {number} delta
+ * @param {string} reason
+ * @returns {void}
+ */
 function push(contributors, source, effect, delta, reason) {
   contributors.push({ source, effect, delta, reason });
 }
 
 // ── Population helper ────────────────────────────────────────────────────
 
+/**
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {number}
+ */
 function populationOf(settlement) {
   const pop = settlement?.population;
   if (typeof pop === 'number') return pop;
@@ -159,11 +247,17 @@ function populationOf(settlement) {
 // structured push() calls so the contributors list is the trace of
 // exactly how the score got to its final value.
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveFoodSecurity(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Supply chain stability for the food_security need
+  /** @type {DerivedSupplyChainState[]} */
   const chains = deriveAllSupplyChainStates(s);
   const foodChains = chains.filter(c => c.needKey === 'food_security');
   for (const c of foodChains) {
@@ -207,8 +301,13 @@ function deriveFoodSecurity(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveLaborCapacity(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Population scaling
@@ -229,8 +328,13 @@ function deriveLaborCapacity(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function derivePublicLegitimacy(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Read the conserved legitimacy quantity via the governance ledger. This lens IS
@@ -269,8 +373,13 @@ function derivePublicLegitimacy(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveRulingAuthority(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Combination of governing legitimacy + governing faction power. Legitimacy via the
@@ -286,6 +395,8 @@ function deriveRulingAuthority(s) {
   }
 
   // Identify governing faction's power
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const governingName = s.powerStructure?.governingName || '';
   if (governingName && profiles.length) {
@@ -314,12 +425,19 @@ function deriveRulingAuthority(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveFactionPower(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Healthy faction system = balance with a clear governing center.
   // We use the power-share spread among profiles.
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   if (profiles.length === 0) {
     return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
@@ -350,8 +468,13 @@ function deriveFactionPower(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveTradeConnectivity(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Trade access from generator config. Canonical semantics map EVERY emitted
@@ -371,10 +494,12 @@ function deriveTradeConnectivity(s) {
   // Trade supply chains. The real need-group key is 'trade_entrepot'
   // (supplyChainData.js) — the old 'trade' filter matched nothing, so
   // trade chains never fed connectivity at all (Cohesion Wave 5 #2).
+  /** @type {DerivedSupplyChainState[]} */
   const chains = deriveAllSupplyChainStates(s);
   const tradeChains = chains.filter(c => c.needKey === 'trade_entrepot');
   for (const c of tradeChains) {
     if (c.status === 'stable') { score += 5; push(contributors, c.id, 'stable', +5, `${c.name} runs normally.`); }
+    // @ts-ignore -- redundant guard (the else-branch already excludes 'stable'); kept byte-identical for the golden master.
     else if (c.status !== 'stable') {
       const m = c.status === 'blocked' || c.status === 'collapsing' ? -18 : -8;
       score += m;
@@ -393,14 +518,19 @@ function deriveTradeConnectivity(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveHealingCapacity(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
   // Offered healing services rescue the harsh "absent" penalty (informal care; P3.3b Stage 4b):
   // a town providing wound care / medical care / relief is not "no healing", just not robust.
-  const heal = healingLedger(s);
+  const heal = healingLedger(/** @type {import('./healingLedger.js').HealingSettlementView} */ (s));
   const healers = heal.healerCount;
   if (healers >= 3) {
     score += 12; push(contributors, 'institutions', 'broad', +12, `${healers} healing-capable institutions present.`);
@@ -423,8 +553,13 @@ function deriveHealingCapacity(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveDefenseReadiness(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   const def = s.defenseProfile || {};
@@ -455,8 +590,13 @@ function deriveDefenseReadiness(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveCriminalOpportunity(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Direct: blackMarketCapture if available
@@ -469,6 +609,8 @@ function deriveCriminalOpportunity(s) {
   }
 
   // Faction power: criminal factions
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const criminal = profiles.find(p => p.archetype === 'criminal');
   if (criminal && typeof criminal.power === 'number') {
@@ -490,10 +632,17 @@ function deriveCriminalOpportunity(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveReligiousAuthority(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const religious = profiles.find(p => p.archetype === 'religious');
   if (religious && typeof religious.power === 'number') {
@@ -508,10 +657,15 @@ function deriveReligiousAuthority(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveHousingPressure(s) {
   // INVERTED: high score = LOW pressure (consistent with the other vars
   // where higher = better). Variable name kept for roadmap parity.
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   const pop = populationOf(s);
@@ -519,6 +673,7 @@ function deriveHousingPressure(s) {
   const stressors = canonStressors(s);
   // 'migration' added: /migrant/ does not substring-match 'mass_migration',
   // so the generation stress type never registered as housing pressure.
+  // @ts-ignore -- canonStressors() returns Array<object>: entries are heterogeneous (string | {type} | {name}); String() handles every shape.
   const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
   if (refugeeStress) {
     score -= 18;
@@ -544,8 +699,13 @@ function deriveHousingPressure(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveInfrastructureCondition(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Anchor infrastructure to the persisted defense scores via the conserved defense ledger:
@@ -568,8 +728,13 @@ function deriveInfrastructureCondition(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveMagicalStability(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Read via the conserved magic ledger (canonical band vocabulary). Behaviour-preserving:
@@ -581,6 +746,8 @@ function deriveMagicalStability(s) {
   else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, `Low magic investment limits arcane resilience.`); }
 
   // Arcane factions present?
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
   const profiles = deriveAllFactionProfiles(s);
   const arcane = profiles.find(p => p.archetype === 'arcane');
   if (arcane) {
@@ -603,17 +770,25 @@ function deriveMagicalStability(s) {
   return { score, contributors };
 }
 
+/**
+ * @param {CausalSettlementSource} s
+ * @returns {DeriverResult}
+ */
 function deriveSocialTrust(s) {
   let score = 50;
+  /** @type {CausalContributor[]} */
   const contributors = [];
 
   // Strongly downstream of public legitimacy
+  /** @type {number | { score?: unknown, label?: unknown } | null | undefined} */
   const leg = s.powerStructure?.publicLegitimacy;
+  // legacy saves carry a bare-number legitimacy; reading .score off it yields undefined and the typeof guard rejects it.
+  // @ts-ignore -- .score access is guarded by the typeof check; bare-number legs fail it.
   if (leg && typeof leg.score === 'number') {
-    const c = Math.round((leg.score - 50) * 0.4);
+    const c = Math.round((/** @type {{ score: number }} */ (leg).score - 50) * 0.4);
     score += c;
     push(contributors, 'powerStructure.publicLegitimacy', 'tracks_legitimacy', c,
-      `Public legitimacy ${leg.score} colors trust.`);
+      `Public legitimacy ${/** @type {{ score: number }} */ (leg).score} colors trust.`);
   }
 
   // Conditions that affect social_trust
@@ -625,6 +800,7 @@ function deriveSocialTrust(s) {
   }
 
   // Dominant-NPC removal stress
+  // @ts-ignore -- deriveAllNpcProfiles (npcProfile.js, owned elsewhere) is still untyped; once it returns NpcProfile[] this ignore is inert.
   const dominantNpcs = deriveAllNpcProfiles(s).filter(p => p.rank === 'dominant');
   if (dominantNpcs.length === 0) {
     score -= 4;
@@ -636,6 +812,7 @@ function deriveSocialTrust(s) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
+/** @type {Readonly<Record<string, (s: CausalSettlementSource) => DeriverResult>>} */
 const DERIVERS = Object.freeze({
   food_security:           deriveFoodSecurity,
   labor_capacity:          deriveLaborCapacity,
@@ -653,6 +830,12 @@ const DERIVERS = Object.freeze({
   social_trust:            deriveSocialTrust,
 });
 
+/**
+ * @param {string} name
+ * @param {number} raw
+ * @param {CausalContributor[]} contributors
+ * @returns {SystemVariable}
+ */
 function finalizeVariable(name, raw, contributors) {
   const score = Math.max(0, Math.min(100, Math.round(raw)));
   // Band off the polarity-ADJUSTED score. criminal_opportunity is the lone
@@ -675,8 +858,8 @@ function finalizeVariable(name, raw, contributors) {
  * about food security).
  *
  * @param {string} variable   One of SYSTEM_VARIABLES.
- * @param {Object} settlement
- * @returns {Object | null}    SystemVariable, or null for unknown variable.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {SystemVariable | null}    SystemVariable, or null for unknown variable.
  */
 export function deriveSystemVariable(variable, settlement) {
   if (!variable || !DERIVERS[variable]) return null;
@@ -688,8 +871,8 @@ export function deriveSystemVariable(variable, settlement) {
 /**
  * Derive the full causal substrate.
  *
- * @param {Object} settlement
- * @returns {Object} {
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {CausalState} {
  *   variables: { [name]: SystemVariable },
  *   bands:     { [name]: CausalBand },
  *   scores:    { [name]: number },
@@ -698,6 +881,7 @@ export function deriveSystemVariable(variable, settlement) {
  * }
  */
 export function deriveCausalState(settlement) {
+  /** @type {Record<string, SystemVariable>} */
   const variables = {};
   for (const name of SYSTEM_VARIABLES) {
     if (!settlement) {
@@ -707,8 +891,11 @@ export function deriveCausalState(settlement) {
       variables[name] = finalizeVariable(name, score, contributors);
     }
   }
+  /** @type {Record<string, CausalBand>} */
   const bands = {};
+  /** @type {Record<string, number>} */
   const scores = {};
+  /** @type {Record<CausalBand, string[]>} */
   const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [] };
   for (const name of SYSTEM_VARIABLES) {
     const v = variables[name];
@@ -721,13 +908,22 @@ export function deriveCausalState(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Convenience accessor — band for one variable. */
+/**
+ * Convenience accessor — band for one variable.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @param {string} variable
+ * @returns {CausalBand | null}
+ */
 export function bandForVariable(settlement, variable) {
   const v = deriveSystemVariable(variable, settlement);
   return v ? v.band : null;
 }
 
-/** Returns all variables currently at strained/critical/collapsed bands. */
+/**
+ * Returns all variables currently at strained/critical/collapsed bands.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function pressuresOn(settlement) {
   const state = deriveCausalState(settlement);
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
@@ -736,6 +932,8 @@ export function pressuresOn(settlement) {
 /**
  * Human-readable summary of what's wrong (or right) with the settlement
  * right now. Returns an array of single-line strings.
+ * @param {CausalSettlementSource | null | undefined} settlement
+ * @returns {string[]}
  */
 export function summarizeCausalState(settlement) {
   const state = deriveCausalState(settlement);
@@ -779,6 +977,10 @@ const LOWER_IS_BETTER = new Set([
   'criminal_opportunity',
 ]);
 
+/**
+ * @param {string} variable
+ * @returns {'higher_is_better'|'lower_is_better'}
+ */
 export function variablePolarity(variable) {
   if (HIGHER_IS_BETTER.has(variable)) return 'higher_is_better';
   if (LOWER_IS_BETTER.has(variable))  return 'lower_is_better';
@@ -792,6 +994,7 @@ export function variablePolarity(variable) {
 // reported alongside the legacy 4-dimension delta. Mirrors the shape of
 // compareSystemState so consumers can render the two side-by-side.
 
+/** @type {Readonly<Record<string, string>>} */
 const VARIABLE_LABEL = Object.freeze({
   food_security:           'Food security',
   labor_capacity:          'Labor capacity',
@@ -809,6 +1012,15 @@ const VARIABLE_LABEL = Object.freeze({
   social_trust:            'Social trust',
 });
 
+/**
+ * @param {string} variable
+ * @param {number} before
+ * @param {number} after
+ * @param {number} change
+ * @param {CausalBand} bandBefore
+ * @param {CausalBand} bandAfter
+ * @returns {string}
+ */
 function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {
   const label = VARIABLE_LABEL[variable] || variable;
   const polar = variablePolarity(variable);
@@ -829,9 +1041,14 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
  * Each entry:
  *   { variable, before, after, change, bandBefore, bandAfter,
  *     polarity, explanation }
+ *
+ * @param {CausalState | null | undefined} before
+ * @param {CausalState | null | undefined} after
+ * @returns {CausalStateDelta[]}
  */
 export function compareCausalState(before, after) {
   if (!before || !after) return [];
+  /** @type {CausalStateDelta[]} */
   const out = [];
   for (const name of SYSTEM_VARIABLES) {
     const b = before.scores?.[name];

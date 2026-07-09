@@ -45,16 +45,49 @@ import { recalculateFactionRelationships } from '../factionRelationshipUpdate.js
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
+/** @typedef {import('../types.js').StateDimension} StateDimension */
+/** @typedef {import('../types.js').Delta} Delta */
+/** @typedef {import('../types.js').FactionResponse} FactionResponse */
+
+/**
+ * Substrate-layer (Phase 17) diff entry, as produced by compareCausalState.
+ * Local shape mirror — causalState.js documents the entry in prose only.
+ * @typedef {Object} CausalStateDelta
+ * @property {string} variable
+ * @property {number} [before]
+ * @property {number} [after]
+ * @property {number} change
+ * @property {string} [bandBefore]
+ * @property {string} [bandAfter]
+ * @property {string} [polarity]
+ * @property {string} [explanation]
+ */
+
+/**
+ * Pipeline warning entry. `severity: 'mismatch'` aborts the pipeline;
+ * `'soft'` records a non-fatal sub-system failure.
+ * @typedef {Object} PipelineWarning
+ * @property {string} severity
+ * @property {string} message
+ */
 
 // ── Authored-delta application ───────────────────────────────────────────
 // Identical math to the legacy previewEvent#applyStateDeltas, kept here
 // so the pipeline can layer the registry's authored deltas on top of
 // the structurally-derived SystemState.
 
+/**
+ * Layer authored additive deltas onto a derived SystemState.
+ * (The Record intersection gives string-key access over the four fixed
+ * dimensions; SystemState is structurally assignable to it.)
+ * @param {SystemState & Record<string, StateDimension>} state
+ * @param {Record<string, number>|null|undefined} deltas
+ * @returns {SystemState}
+ */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
-  /** @type {SystemState} */
-  const next = /** @type {SystemState} */ ({});
+  /** @type {SystemState & Record<string, StateDimension>} */
+  const next = /** @type {SystemState & Record<string, StateDimension>} */ ({});
   for (const key of Object.keys(state)) {
     const dim = state[key];
     const change = deltas?.[key] ?? 0;
@@ -86,7 +119,7 @@ function applyAuthoredStateDeltas(state, deltas) {
  *
  * @param {SystemState} systemState — a freshly derived SystemState
  * @param {Event}  event
- * @param {Object} [settlement] the BEFORE settlement (authored deltas may read it)
+ * @param {Object|null} [settlement] the BEFORE settlement (authored deltas may read it)
  * @returns {SystemState}
  */
 export function layerAuthoredDeltas(systemState, event, settlement = null) {
@@ -111,12 +144,12 @@ export function layerAuthoredDeltas(systemState, event, settlement = null) {
  * @property {SystemState}  afterSystemState
  * @property {Object}       beforeCausalState
  * @property {Object}       afterCausalState
- * @property {Array<Object>} systemStateDeltas
- * @property {Array<Object>} causalStateDeltas
+ * @property {Delta[]}      systemStateDeltas
+ * @property {CausalStateDelta[]} causalStateDeltas
  * @property {Array<Object>} factionRelationshipDeltas
- * @property {Array<Object>} factionResponses
+ * @property {FactionResponse[]} factionResponses
  * @property {string}       narrativeSummary
- * @property {Array<Object>} warnings
+ * @property {PipelineWarning[]} warnings
  */
 
 /**
@@ -137,7 +170,11 @@ export function runEventPipeline(settlement, event, options = {}) {
   const beforeCausalState = deriveCausalState(beforeSettlement);
 
   // 1. Validate the event
+  /** @type {NonNullable<(typeof EVENT_REGISTRY)[Event['type']]>} */
+  // @ts-ignore -- the initializer can be null, but every null path exits via
+  // the mismatch early-return below; past it, spec is non-null by construction.
   const spec = event ? EVENT_REGISTRY[event.type] : null;
+  /** @type {PipelineWarning[]} */
   const warnings = [];
   if (!event || !spec) {
     warnings.push({ severity: 'mismatch', message: `Unknown event type: ${event?.type}` });
@@ -167,6 +204,8 @@ export function runEventPipeline(settlement, event, options = {}) {
   // 2. Mutate a cloned settlement — entity-level changes (status flips,
   //    impairments, NPC patches, propagation). mutateSettlement never
   //    mutates the input.
+  // @ts-ignore -- mutate.js declares args.now as string|undefined but its own
+  // default is `now = null`; the declared type there should be string|null.
   const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event, now });
 
   // 3. Re-derive structural SystemState from the mutated settlement
@@ -197,22 +236,24 @@ export function runEventPipeline(settlement, event, options = {}) {
   // 7. Phase 14 faction relationship deltas — computed against the
   //    BEFORE settlement because the deltas describe how the event
   //    moves factions, not what the post-event state already reflects.
+  /** @type {ReturnType<typeof recalculateFactionRelationships>} */
   let factionRelationshipDeltas = [];
   if (!skipFactionResponses) {
     try {
       factionRelationshipDeltas = recalculateFactionRelationships(beforeSettlement, event);
-    } catch (e) {
+    } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction relationship calc failed: ${e?.message || e}` });
     }
   }
 
   // 8. Faction responses (existing system) — computed against the
   //    MUTATED settlement so impaired factions speak as such.
+  /** @type {ReturnType<typeof generateFactionResponses>} */
   let factionResponses = [];
   if (!skipFactionResponses) {
     try {
-      factionResponses = generateFactionResponses(nextSettlement, event);
-    } catch (e) {
+      factionResponses = generateFactionResponses(/** @type {import('./factionResponses.js').SettlementLike} */ (nextSettlement), event);
+    } catch (/** @type {any} */ e) {
       warnings.push({ severity: 'soft', message: `Faction responses failed: ${e?.message || e}` });
     }
   }
@@ -256,6 +297,9 @@ export function runEventPipeline(settlement, event, options = {}) {
  * systemStateDeltas only. The substrate's causalStateDeltas ship
  * separately in `diagnosticLines` for internal/debug surfaces; nothing
  * DM-facing should render them.
+ *
+ * @param {EventPipelineResult|null|undefined} result
+ * @returns {{ lines: string[], diagnosticLines: string[], systemDeltaCount: number, causalDeltaCount: number, factionDeltaCount: number }}
  */
 export function summarizeEventResult(result) {
   if (!result) {

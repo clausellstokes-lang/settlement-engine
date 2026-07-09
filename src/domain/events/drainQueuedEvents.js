@@ -23,8 +23,8 @@
  * tick.
  *
  * @param {object} args
- * @param {Array}  args.queue  worldState.pendingEvents: [{ queueId, saveId, event, queuedAt }]
- * @param {Array}  args.saves  campaign member saves: [{ id, settlement, campaignState }]
+ * @param {Array<any>}  args.queue  worldState.pendingEvents: [{ queueId, saveId, event, queuedAt }]
+ * @param {Array<any>}  args.saves  campaign member saves: [{ id, settlement, campaignState }]
  * @param {string} args.now    one timestamp for the whole tick (simultaneity)
  * @param {number|null} [args.tick] worldState.tick, stamped on each drained entry
  * @returns {{ updates: Array<{ saveId:string, settlement:object, systemState:object, eventLog:Array, authoredEvent:object|null }>,
@@ -40,13 +40,20 @@ import { reconcileSettlementChange } from '../settlementReconciliation.js';
 import { twinDirectiveForEvent } from '../crisisLifecycle.js';
 import { wallClockNow } from '../clock.js';
 
+/** @param {*} value */
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
 }
 
+/**
+ * @param {{ queue?: Array<any>, saves?: Array<any>, now?: string, tick?: number|null }} [args]
+ */
 export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow(), tick = null } = {}) {
+  /** @type {any[]} */
   const updates = [];
+  /** @type {any[]} */
   const twinDirectives = [];
+  /** @type {any[]} */
   const partyImpacts = [];
   let drainedCount = 0;
   if (!Array.isArray(queue) || queue.length === 0) {
@@ -91,7 +98,7 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
         // A single malformed queued event must not abort the whole tick.
         continue;
       }
-      const nextSettlement = reconcileSettlementChange(out.nextSettlement, settlement, {
+      const nextSettlement = reconcileSettlementChange(/** @type {any} */ (out.nextSettlement), settlement, {
         source: 'canon_event',
         changeType: event?.type,
         changeLabel: event?.targetId || event?.payload?.label || event?.id,

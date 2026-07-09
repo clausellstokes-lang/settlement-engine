@@ -13,8 +13,9 @@ import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { byNameCodepoint } from '../deterministicSort.js';
 
 /**
+ * @typedef {{ id: string, name: string, category?: string, description?: string, tags?: string[] | string }} CompendiumInstitution
  * @param {Array<{name?:string}>} institutions  institutions already present
- * @param {Array<Object>} customInstitutions     Compendium institutions
+ * @param {CompendiumInstitution[]} customInstitutions     Compendium institutions
  * @returns {Array<{ id:string, name:string, category:string, tierKey?:string,
  *   desc:string, tags:string[], def?:Object, isCustom?:boolean, alreadyAdded:boolean }>}
  */

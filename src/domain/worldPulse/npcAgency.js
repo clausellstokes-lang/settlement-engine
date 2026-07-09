@@ -171,11 +171,28 @@ const GOALS = [
   'survive_crisis',
 ];
 
+/** @typedef {Record<string, any>} NpcState */
+/** @typedef {Record<string, any>} NpcLike */
+/** @typedef {Record<string, any>} Snapshot */
+/** @typedef {Record<string, any>} NpcWorldState */
+/** @typedef {{ get?: (id: any, kind: any) => ({ score?: number } | null | undefined) }} PressureIdx */
+/** @typedef {{ tier: any, conditions: string[], crisis: boolean, relationship: string, signature: string }} NpcContext */
+
+/**
+ * @param {unknown} value
+ * @returns {number}
+ */
 function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
+  const n = Number.isFinite(value) ? /** @type {number} */ (value) : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/**
+ * @param {any} saveId
+ * @param {NpcLike | null | undefined} npc
+ * @param {any} index
+ * @returns {string}
+ */
 export function npcId(saveId, npc, index) {
   return `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || `npc_${index}`)}`;
 }
@@ -186,11 +203,17 @@ export function npcId(saveId, npc, index) {
  * shed) during world-pulse ticks — not just at generation. Pure + deterministic
  * (no rng/Date); returns the same settlement reference when nothing changed.
  */
+/**
+ * @param {{ npcs?: any[] } | null | undefined} settlement
+ * @param {Record<string, any> | null | undefined} npcStates
+ * @param {any} settlementId
+ * @returns {any}
+ */
 export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlementId) {
   const npcs = settlement?.npcs;
   if (!Array.isArray(npcs) || !npcStates) return settlement;
   let changed = false;
-  const nextNpcs = npcs.map((npc, index) => {
+  const nextNpcs = npcs.map((/** @type {any} */ npc, /** @type {number} */ index) => {
     const st = npcStates[npcId(settlementId, npc, index)];
     if (!st) return npc;
     const corrupt = !!st.corruption;
@@ -204,10 +227,19 @@ export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlement
   return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }
 
+/**
+ * @param {{ random: () => number }} rng
+ * @param {any[]} arr
+ * @returns {any}
+ */
 function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
+/**
+ * @param {NpcLike} [npc]
+ * @returns {number}
+ */
 function notability(npc = {}) {
   if (npc.importance === 'pillar') return 1;
   if (npc.importance === 'key') return 0.82;
@@ -218,6 +250,10 @@ function notability(npc = {}) {
   return 0.38;
 }
 
+/**
+ * @param {NpcLike} [npc]
+ * @returns {number}
+ */
 function dotRankFor(npc = {}) {
   const score = notability(npc);
   if (score >= 0.82) return 3;
@@ -225,6 +261,10 @@ function dotRankFor(npc = {}) {
   return 1;
 }
 
+/**
+ * @param {NpcLike} [npc]
+ * @returns {string}
+ */
 function inferRoleArchetype(npc = {}) {
   const text = `${npc.name || ''} ${npc.label || ''} ${npc.role || ''} ${npc.title || ''} ${npc.description || ''}`.toLowerCase();
   for (const [role, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
@@ -233,6 +273,12 @@ function inferRoleArchetype(npc = {}) {
   return 'civic';
 }
 
+/**
+ * @param {NpcLike} npc
+ * @param {{ settlement?: any }} item
+ * @param {number} index
+ * @returns {string}
+ */
 function factionIdFor(npc = {}, item, index) {
   const direct = npc.factionId || npc.faction || npc.affiliation || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
@@ -241,16 +287,32 @@ function factionIdFor(npc = {}, item, index) {
   return faction ? stablePart(faction.id || faction.name || faction.label) : 'unaffiliated';
 }
 
+/**
+ * @param {PressureIdx} pressureIdx
+ * @param {any} settlementId
+ * @param {string[]} [kinds]
+ * @returns {number}
+ */
 function pressureScore(pressureIdx, settlementId, kinds = []) {
   return kinds
     .map(kind => pressureIdx.get?.(settlementId, kind)?.score || 0)
     .reduce((max, score) => Math.max(max, score), 0);
 }
 
+/**
+ * @param {Snapshot | null | undefined} snapshot
+ * @param {{ settlementId?: any }} state
+ * @returns {any}
+ */
 function settlementForState(snapshot, state) {
-  return (snapshot?.settlements || []).find(item => String(item.id) === String(state.settlementId)) || null;
+  return (snapshot?.settlements || []).find((/** @type {any} */ item) => String(item.id) === String(state.settlementId)) || null;
 }
 
+/**
+ * @param {Snapshot | null | undefined} snapshot
+ * @param {any} settlementId
+ * @returns {string}
+ */
 function dominantRelationshipContext(snapshot, settlementId) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sid = String(settlementId);
@@ -281,13 +343,22 @@ function dominantRelationshipContext(snapshot, settlementId) {
 const CRISIS_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'rebellion']);
 const CRISIS_SYSTEMS = ['food_security', 'healing_capacity', 'defense_readiness'];
 
+/**
+ * @param {{ archetype?: any, affectedSystems?: any[] } | null | undefined} c
+ * @returns {boolean}
+ */
 function isCrisisCondition(c) {
   if (!c) return false;
   if (CRISIS_ARCHETYPES.has(c.archetype)) return true;
   return c.archetype === 'custom_crisis'
-    && (c.affectedSystems || []).some(s => CRISIS_SYSTEMS.includes(s));
+    && (c.affectedSystems || []).some((/** @type {any} */ s) => CRISIS_SYSTEMS.includes(s));
 }
 
+/**
+ * @param {Snapshot | null | undefined} snapshot
+ * @param {{ settlementId?: any }} state
+ * @returns {NpcContext}
+ */
 function contextForNpc(snapshot, state) {
   const item = settlementForState(snapshot, state);
   const tier = item?.settlement?.tier || 'village';
@@ -296,7 +367,7 @@ function contextForNpc(snapshot, state) {
   // archetype is dropped rather than falling back to label, so a cosmetic
   // label edit can never re-trigger a goal rebranch.
   const conditions = active
-    .map(c => (typeof c?.archetype === 'string' ? c.archetype : ''))
+    .map((/** @type {any} */ c) => (typeof c?.archetype === 'string' ? c.archetype : ''))
     .filter(Boolean)
     .sort()
     .slice(0, 3);
@@ -310,6 +381,11 @@ function contextForNpc(snapshot, state) {
   };
 }
 
+/**
+ * @param {any} previousTier
+ * @param {any} nextTier
+ * @returns {string | null}
+ */
 function tierDirection(previousTier, nextTier) {
   const order = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const prev = order.indexOf(previousTier);
@@ -318,6 +394,11 @@ function tierDirection(previousTier, nextTier) {
   return next > prev ? 'promotion' : 'demotion';
 }
 
+/**
+ * @param {NpcState} state
+ * @param {NpcContext} context
+ * @returns {{ shortGoal: string, longGoal: string } | null}
+ */
 function branchedGoals(state, context) {
   const dir = tierDirection(state.contextTier, context.tier);
   if (context.relationship === 'vassal') {
@@ -352,13 +433,24 @@ function branchedGoals(state, context) {
   return null;
 }
 
+/**
+ * @param {number} dotRank
+ * @returns {string}
+ */
 function roleSeatFor(dotRank) {
   if (dotRank >= 3) return 'leader_champion';
   if (dotRank === 2) return 'lieutenant_operator';
   return 'agent_protege';
 }
 
+/**
+ * @param {NpcWorldState} worldState
+ * @param {Snapshot} snapshot
+ * @param {any} rng
+ * @returns {any}
+ */
 export function ensureNpcStates(worldState, snapshot, rng) {
+  /** @type {Record<string, any>} */
   const npcStates = { ...(worldState.npcStates || {}) };
   for (const item of snapshot.settlements) {
     const npcs = item.settlement?.npcs || [];
@@ -366,7 +458,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
     // prosperity), used as the fallback rule for legacy saves whose NPCs predate
     // generation-time corruption (no npc.corrupt set).
     const climate = readCorruptionClimate(item.settlement);
-    npcs.forEach((npc, index) => {
+    npcs.forEach((/** @type {any} */ npc, /** @type {number} */ index) => {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
         let st = npcStates[id];
@@ -428,7 +520,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         corruptVector = null;
       }
       const roleArchetype = inferRoleArchetype(npc);
-      const roleDef = NPC_ROLE_ARCHETYPES[roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
+      const roleDef = /** @type {Record<string, any>} */ (NPC_ROLE_ARCHETYPES)[roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
       const dotRank = dotRankFor(npc);
       npcStates[id] = {
         npcId: id,
@@ -475,7 +567,12 @@ export function ensureNpcStates(worldState, snapshot, rng) {
 // Corruption heat lingers (corrupt NPCs stay hot) but cools for the rest.
 const NPC_RELAX = Object.freeze({ momentum: 0.82, ambitionHeat: 0.85, leverage: 0.9, corruptionHeat: 0.92 });
 
+/**
+ * @param {NpcWorldState} worldState
+ * @returns {any}
+ */
 export function relaxNpcStates(worldState) {
+  /** @type {Record<string, any>} */
   const npcStates = { ...(worldState.npcStates || {}) };
   for (const [id, s] of Object.entries(npcStates)) {
     npcStates[id] = {
@@ -508,8 +605,17 @@ export function relaxNpcStates(worldState) {
  *
  * @returns {{ worldState: object, exposures: Array<object> }}
  */
+/**
+ * @param {NpcWorldState} worldState
+ * @param {Snapshot | null | undefined} snapshot
+ * @param {any} rng
+ * @param {{ tick?: number, guildStrengthBy?: { get: (id: any) => any } | null }} [opts]
+ * @returns {{ worldState: any, exposures: any[] }}
+ */
 export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
+  /** @type {Record<string, any>} */
   const npcStates = { ...(worldState.npcStates || {}) };
+  /** @type {any[]} */
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
@@ -533,7 +639,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     const onsetSecurity = clamp01(effSecurity * (1 - patronage.drag));
     const exposureSecurity = climate.security;
     const npcs = item.settlement?.npcs || [];
-    npcs.forEach((npc, index) => {
+    npcs.forEach((/** @type {any} */ npc, /** @type {number} */ index) => {
       const id = npcId(item.id, npc, index);
       const s = npcStates[id];
       if (!s) return;
@@ -601,8 +707,16 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   return { worldState: { ...worldState, npcStates }, exposures };
 }
 
+/**
+ * @param {NpcState} state
+ * @param {string} actionFamily
+ * @param {number} pressure
+ * @param {any} tick
+ * @param {NpcState | null} [rivalTarget]
+ * @returns {any}
+ */
 function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
-  const action = NPC_ACTION_FAMILIES[actionFamily];
+  const action = /** @type {Record<string, any>} */ (NPC_ACTION_FAMILIES)[actionFamily];
   const severity = clamp01(
     pressure * 0.5
     + state.ambition * 0.24
@@ -675,11 +789,16 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
   };
 }
 
+/**
+ * @param {NpcState} state
+ * @param {any[]} states
+ * @returns {any}
+ */
 function rivalryTargetFor(state, states) {
   const rivals = states
-    .filter(other => other.npcId !== state.npcId && other.settlementId === state.settlementId)
-    .sort((a, b) => (b.dotRank || 1) - (a.dotRank || 1));
-  return rivals.find(other => other.factionId !== state.factionId) || rivals[0] || null;
+    .filter((/** @type {any} */ other) => other.npcId !== state.npcId && other.settlementId === state.settlementId)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.dotRank || 1) - (a.dotRank || 1));
+  return rivals.find((/** @type {any} */ other) => other.factionId !== state.factionId) || rivals[0] || null;
 }
 
 // Goal culmination — a long-burning ambition finally pays off. Fires when an
@@ -689,6 +808,11 @@ function rivalryTargetFor(state, states) {
 // rank; the condition shifts the local power balance and propagates regionally.
 const GOAL_CULMINATION_THRESHOLD = 0.8;
 
+/**
+ * @param {NpcState} state
+ * @param {any} tick
+ * @returns {any}
+ */
 function npcGoalCulmination(state, tick) {
   const nextRank = Math.min(3, (state.dotRank || 1) + 1);
   const goal = String(state.longGoal || 'expand_influence').replace(/_/g, ' ');
@@ -733,6 +857,12 @@ function npcGoalCulmination(state, tick) {
   };
 }
 
+/**
+ * @param {NpcState} state
+ * @param {NpcContext} context
+ * @param {any} tick
+ * @returns {any}
+ */
 function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
@@ -772,6 +902,12 @@ function npcGoalRebranch(state, context, tick) {
   };
 }
 
+/**
+ * @param {Snapshot} snapshot
+ * @param {PressureIdx} pressureIdx
+ * @param {{ tick?: any }} [options]
+ * @returns {any[]}
+ */
 export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const states = Object.values(snapshot.worldState.npcStates || {});
@@ -795,16 +931,16 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     const cooldown = state.lastActedTick != null && tick - state.lastActedTick < 2;
     if (cooldown) continue;
 
-    const roleDef = NPC_ROLE_ARCHETYPES[state.roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
-    const actionScores = roleDef.preferredActions.map((actionFamily) => {
-      const action = NPC_ACTION_FAMILIES[actionFamily];
+    const roleDef = /** @type {Record<string, any>} */ (NPC_ROLE_ARCHETYPES)[state.roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
+    const actionScores = roleDef.preferredActions.map((/** @type {any} */ actionFamily) => {
+      const action = /** @type {Record<string, any>} */ (NPC_ACTION_FAMILIES)[actionFamily];
       const pressure = pressureScore(pressureIdx, state.settlementId, action.pressureKinds);
       const ambitionBoost = actionFamily === 'seek_promotion' ? state.ambition * 0.16 + (state.ambitionHeat || 0) * 0.2 : 0;
       const corruptionBoost = state.corruption && ['exploit', 'sabotage', 'hoard', 'undermine_rival'].includes(actionFamily) ? 0.12 : 0;
       return { actionFamily, pressure: clamp01(pressure + ambitionBoost + corruptionBoost) };
     });
 
-    const best = actionScores.sort((a, b) => b.pressure - a.pressure)[0];
+    const best = actionScores.sort((/** @type {any} */ a, /** @type {any} */ b) => b.pressure - a.pressure)[0];
     const minimum = state.dotRank >= 3 ? 0.34 : 0.42;
     if (!best || best.pressure < minimum || state.ambition < 0.42) continue;
 
@@ -817,12 +953,24 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   return out;
 }
 
+/**
+ * @param {Snapshot} snapshot
+ * @param {PressureIdx} pressureIdx
+ * @param {{ tick?: any }} [options]
+ * @returns {any[]}
+ */
 export function deriveNpcCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateNpcRules(snapshot, pressureIdx, options);
 }
 
+/**
+ * @param {NpcWorldState} worldState
+ * @param {{ npcId?: any, npcPatch?: any, id?: any, candidateType?: any, metadata?: any } | null | undefined} outcome
+ * @returns {any}
+ */
 export function applyNpcPatch(worldState, outcome) {
   if (!outcome?.npcId) return worldState;
+  /** @type {Record<string, any>} */
   const npcStates = { ...(worldState.npcStates || {}) };
   const current = npcStates[outcome.npcId] || {};
   const patch = outcome.npcPatch || {};

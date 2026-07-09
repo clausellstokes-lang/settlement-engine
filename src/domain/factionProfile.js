@@ -33,17 +33,83 @@
 import { factionArchetype, FACTION_ARCHETYPES as FA } from './factionArchetypes.js';
 import { governanceLedger } from './governanceLedger.js';
 
+/**
+ * The flat legacy faction record the generator emits (all fields optional —
+ * this module is tolerant of partial shapes).
+ * @typedef {Object} FactionLike
+ * @property {string} [faction]  legacy name field
+ * @property {string} [name]
+ * @property {number} [power]
+ * @property {string} [desc]
+ * @property {boolean} [isGoverning]
+ * @property {string[]} [controlsInstitutionIds]
+ */
+
+/**
+ * The slice of powerStructure/power this module reads.
+ * @typedef {Object} PowerBlock
+ * @property {string} [governingName]
+ * @property {string} [governingFactionName]
+ * @property {{ score?: unknown, label?: unknown }|number|null} [publicLegitimacy]
+ * @property {FactionLike[]} [factions]
+ */
+
+/**
+ * The slice of a settlement this module reads.
+ * @typedef {Object} SettlementCtx
+ * @property {PowerBlock|null} [powerStructure]
+ * @property {PowerBlock|null} [power]
+ * @property {FactionLike[]} [factions]
+ */
+
+/**
+ * @typedef {'government'|'military'|'merchant'|'religious'|'criminal'|'arcane'|'craft'|'occupation'|'other'} ProfileArchetype
+ */
+
+/**
+ * @typedef {Object} ArchetypeTemplate
+ * @property {string[]} wants
+ * @property {string[]} fears
+ * @property {string[]} leverage
+ * @property {string[]} vulnerabilities
+ * @property {Record<string, string>} resources  band values: low / medium / high
+ */
+
+/**
+ * @typedef {Object} FactionProfile
+ * @property {string} id
+ * @property {string} name
+ * @property {ProfileArchetype} archetype
+ * @property {number} power
+ * @property {number} legitimacy
+ * @property {Record<string, string>} resources
+ * @property {string[]} wants
+ * @property {string[]} fears
+ * @property {string[]} leverage
+ * @property {string[]} vulnerabilities
+ * @property {string} [desc]
+ * @property {string[]} controlsInstitutionIds
+ */
+
 // Small inline id helper — derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
 // across into src/lib (which is outside the domain tsconfig include).
 // Matches the format produced by src/lib/entities.js#idOf so consumers
 // querying traces by id see the same shape from both call paths.
+/**
+ * @param {string} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '')
     .toLowerCase();
 }
+/**
+ * @param {string} name
+ * @returns {string}
+ */
 function factionIdFromName(name) {
   return `faction.${snakeCase(name)}`;
 }
@@ -58,6 +124,7 @@ function factionIdFromName(name) {
 // correctly 'criminal'.
 
 /** canonical archetype → factionProfile's local archetype vocabulary. */
+/** @type {Readonly<Record<string, ProfileArchetype>>} */
 const CANONICAL_TO_PROFILE = Object.freeze({
   [FA.GOVERNMENT]: 'government', [FA.NOBLE]: 'government', [FA.CIVIC]: 'government',
   [FA.MILITARY]: 'military', [FA.MERCHANT]: 'merchant', [FA.RELIGIOUS]: 'religious',
@@ -70,6 +137,8 @@ const CANONICAL_TO_PROFILE = Object.freeze({
  * Archetype for a faction, in factionProfile's local vocabulary
  * (occupation/criminal/arcane/religious/military/merchant/craft/government/other).
  * Delegates detection to the canonical factionArchetype() so every layer agrees.
+ * @param {FactionLike|string|null|undefined} faction
+ * @returns {ProfileArchetype}
  */
 export function deriveFactionArchetype(faction) {
   if (!faction) return 'other';
@@ -82,6 +151,7 @@ export function deriveFactionArchetype(faction) {
 // user content adopts the same shape). The roadmap calls out
 // resource-band values explicitly: low / medium / high.
 
+/** @type {Readonly<Record<string, ArchetypeTemplate>> & { other: ArchetypeTemplate }} */
 const ARCHETYPE_TEMPLATES = Object.freeze({
   government: {
     wants:    ['maintain authority', 'collect taxes / tribute', 'preserve order'],
@@ -151,6 +221,8 @@ const ARCHETYPE_TEMPLATES = Object.freeze({
 /**
  * Look up the archetype template. Returns 'other' for unknown values.
  * Read-only — returns a shallow clone so callers can safely customize.
+ * @param {string} archetype
+ * @returns {ArchetypeTemplate}
  */
 export function templateForArchetype(archetype) {
   const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.other;
@@ -174,6 +246,11 @@ export function templateForArchetype(archetype) {
 // updates after events) lands, this derivation will be the place
 // where event-driven legitimacy adjustments aggregate.
 
+/**
+ * @param {FactionLike|string} faction
+ * @param {SettlementCtx|null|undefined} settlement
+ * @returns {number}
+ */
 function legitimacyFor(faction, settlement) {
   const power = settlement?.powerStructure || settlement?.power;
   if (!power) return 50;
@@ -209,11 +286,11 @@ function legitimacyFor(faction, settlement) {
  * produces the same output. Lossless on the input fields — `power`,
  * `desc`, etc. are preserved on the returned profile.
  *
- * @param {Object|string} faction
- * @param {Object} [settlement]   Optional context for legitimacy
+ * @param {FactionLike|string} faction
+ * @param {SettlementCtx} [settlement]   Optional context for legitimacy
  *                                derivation. If omitted, legitimacy
  *                                falls back to 50 (neutral).
- * @returns {Object} The enriched profile.
+ * @returns {FactionProfile|null} The enriched profile.
  */
 export function deriveFactionProfile(faction, settlement) {
   if (!faction) return null;
@@ -257,6 +334,8 @@ export function deriveFactionProfile(faction, settlement) {
  * Convenience: enrich every faction on a settlement into a structured
  * profile. Useful for the PipelineRail / PDF faction section that
  * wants to render the whole roster.
+ * @param {SettlementCtx|null|undefined} settlement
+ * @returns {Array<FactionProfile|null>}
  */
 export function deriveAllFactionProfiles(settlement) {
   if (!settlement) return [];

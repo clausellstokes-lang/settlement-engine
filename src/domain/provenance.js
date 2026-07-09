@@ -33,7 +33,7 @@ const TRUST_KEYS = Object.freeze({
 /**
  * Build the structured provenance summary.
  *
- * @param {Object} settlement
+ * @param {Record<string, any>} settlement
  * @returns {Object}
  */
 export function deriveProvenanceSummary(settlement) {

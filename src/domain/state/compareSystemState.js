@@ -60,7 +60,7 @@ export function compareSystemState(before, after) {
       before: b,
       after:  a,
       change,
-      severity:    severityFor(change),
+      severity:    /** @type {Delta['severity']} */ (severityFor(change)),
       explanation: explain(key, b, a, change),
     });
   }
@@ -70,6 +70,13 @@ export function compareSystemState(before, after) {
   return deltas;
 }
 
+/**
+ * @param {StateKey} key
+ * @param {number} before
+ * @param {number} after
+ * @param {number} change
+ * @returns {string}
+ */
 function explain(key, before, after, change) {
   const label  = LABEL[key];
   const polar  = POLARITY[key];

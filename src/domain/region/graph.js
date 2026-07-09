@@ -11,6 +11,13 @@ import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.j
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
 import { wallClockNow } from '../clock.js';
 
+/** @typedef {{ id?: string, name?: string|null, tier?: string|null, settlementId?: string|null, updatedAt?: string }} RegionNode */
+/** @typedef {{ id?: string, from?: string, to?: string, relationshipType?: string, relation?: string, status?: string, channelIds?: string[], evidence?: any[], updatedAt?: string }} RegionEdge */
+/** @typedef {{ id?: string, type?: string, from?: string, to?: string, direction?: string, status?: string, visibility?: string, strength?: number, severity?: number, confidence?: number, goods?: any[], evidence?: any[], explanation?: string, relationshipType?: string|null, relationshipKey?: string|null, discoveredAt?: string, confirmedAt?: string|null, updatedAt?: string, [k: string]: any }} RegionChannel */
+/** @typedef {{ id?: string, status?: string, severity?: number, confidence?: number, delayTicks?: number, ageTicks?: number, maxAgeTicks?: number|null, waveDepth?: number, waveDecay?: number, createdAt?: string|null, updatedAt?: string, expiresAtTick?: number, conditionId?: string, appliedAt?: string, ignoredAt?: string, expiredAt?: string, resolvedAt?: string, [k: string]: any }} RegionImpact */
+/** @typedef {{ schemaVersion?: number, nodes?: RegionNode[], edges?: RegionEdge[], channels?: RegionChannel[], queuedImpacts?: RegionImpact[], eventLog?: any[], updatedAt?: string }} RegionGraph */
+/** @typedef {Record<string, any>} RegionOptions */
+
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
 // H18: the eventLog is a bounded audit trail, not cold storage. Wizard News is
@@ -79,15 +86,18 @@ function nowIso() {
 // bundles minted 0 channels from it, discovery confidence dropped). The
 // producer now writes the canonical 'trade_partner'; this shim heals LEGACY
 // saves wherever link/edge labels enter the regional layer.
+/** @type {Readonly<Record<string, string>>} */
 const LEGACY_RELATIONSHIP_LABEL_ALIASES = Object.freeze({
   trade_partners: 'trade_partner',
 });
 
+/** @param {unknown} label */
 export function canonicalRelationshipLabel(label) {
   const raw = String(label || '').trim();
   return LEGACY_RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
 }
 
+/** @param {unknown} value */
 export function stablePart(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -96,10 +106,15 @@ export function stablePart(value) {
     .slice(0, 80) || 'unknown';
 }
 
+/**
+ * @param {unknown} from
+ * @param {unknown} to
+ */
 export function edgeIdFor(from, to) {
   return `edge.${stablePart(from)}.${stablePart(to)}`;
 }
 
+/** @param {RegionChannel} channel */
 export function channelIdFor(channel) {
   const goods = Array.isArray(channel.goods) && channel.goods.length
     ? channel.goods.map(g => g.id || g).sort().join('_')
@@ -116,6 +131,10 @@ export function channelIdFor(channel) {
 // Deterministic timestamps (R4): every normalize* default-stamp path takes a
 // threaded `now` so replay stamps no wall-clock time; nowIso() is the
 // fallback ONLY when no `now` is provided.
+/**
+ * @param {RegionNode | null | undefined} node
+ * @param {string | null} [now]
+ */
 function normalizeNode(node, now = null) {
   if (!node?.id) return null;
   return {
@@ -127,6 +146,10 @@ function normalizeNode(node, now = null) {
   };
 }
 
+/**
+ * @param {RegionEdge | null | undefined} edge
+ * @param {string | null} [now]
+ */
 function normalizeEdge(edge, now = null) {
   if (!edge?.from || !edge?.to) return null;
   return {
@@ -141,9 +164,13 @@ function normalizeEdge(edge, now = null) {
   };
 }
 
+/**
+ * @param {RegionImpact | null | undefined} impact
+ * @param {string | null} [now]
+ */
 function normalizeImpact(impact, now = null) {
   if (!impact?.id) return null;
-  const status = REGIONAL_IMPACT_STATUSES.includes(impact.status)
+  const status = REGIONAL_IMPACT_STATUSES.includes(/** @type {string} */ (impact.status))
     ? impact.status
     : 'queued';
   return {
@@ -152,23 +179,27 @@ function normalizeImpact(impact, now = null) {
     status,
     severity: clamp01(impact.severity ?? 0),
     confidence: clamp01(impact.confidence ?? 0.5),
-    delayTicks: Math.max(0, Number.isFinite(impact.delayTicks) ? impact.delayTicks : 0),
-    ageTicks: Math.max(0, Number.isFinite(impact.ageTicks) ? impact.ageTicks : 0),
+    delayTicks: Math.max(0, Number.isFinite(impact.delayTicks) ? /** @type {number} */ (impact.delayTicks) : 0),
+    ageTicks: Math.max(0, Number.isFinite(impact.ageTicks) ? /** @type {number} */ (impact.ageTicks) : 0),
     maxAgeTicks: Number.isFinite(impact.maxAgeTicks) ? impact.maxAgeTicks : null,
-    waveDepth: Math.max(0, Number.isFinite(impact.waveDepth) ? impact.waveDepth : 0),
+    waveDepth: Math.max(0, Number.isFinite(impact.waveDepth) ? /** @type {number} */ (impact.waveDepth) : 0),
     waveDecay: clamp01(impact.waveDecay ?? 1),
     createdAt: impact.createdAt || now || nowIso(),
     updatedAt: impact.updatedAt || impact.createdAt || now || nowIso(),
   };
 }
 
+/**
+ * @param {RegionChannel | null | undefined} channel
+ * @param {string | null} [now]
+ */
 export function normalizeChannel(channel, now = null) {
   if (!channel?.from || !channel?.to || !channel?.type) return null;
-  if (!REGIONAL_CHANNEL_TYPES.includes(channel.type)) return null;
-  const status = REGIONAL_CHANNEL_STATUSES.includes(channel.status)
+  if (!REGIONAL_CHANNEL_TYPES.includes(/** @type {string} */ (channel.type))) return null;
+  const status = REGIONAL_CHANNEL_STATUSES.includes(/** @type {string} */ (channel.status))
     ? channel.status
     : 'suggested';
-  const visibility = REGIONAL_CHANNEL_VISIBILITIES.includes(channel.visibility)
+  const visibility = REGIONAL_CHANNEL_VISIBILITIES.includes(/** @type {string} */ (channel.visibility))
     ? channel.visibility
     : (DEFAULT_GM_CHANNEL_TYPES.has(channel.type) ? 'gm' : 'public');
   const normalized = {
@@ -194,11 +225,13 @@ export function normalizeChannel(channel, now = null) {
   return normalized;
 }
 
+/** @param {unknown} value */
 function clamp01(value) {
   const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {any[]} [items] */
 function dedupeById(items) {
   const map = new Map();
   for (const item of items || []) {
@@ -208,6 +241,10 @@ function dedupeById(items) {
   return [...map.values()];
 }
 
+/**
+ * @param {RegionGraph} [graph]
+ * @param {RegionOptions} [options]
+ */
 export function ensureRegionalGraph(graph = {}, options = {}) {
   // Deterministic timestamps: ensure mints state (inferred edges below, plus
   // any missing default stamp), so callers that thread options.now get
@@ -247,6 +284,10 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   };
 }
 
+/**
+ * @param {any} save
+ * @param {string | null} [now]
+ */
 function nodeFromSave(save, now = null) {
   const state = deriveRegionalState(save);
   if (!state.id) return null;
@@ -259,14 +300,19 @@ function nodeFromSave(save, now = null) {
   });
 }
 
+/** @param {any} save */
 function neighbourLinksFor(save) {
-  const settlement = settlementFromSave(save);
+  const settlement = /** @type {any} */ (settlementFromSave(save));
   return settlement?.neighbourNetwork
       || settlement?.neighborNetwork
       || settlement?.neighbourLinks
       || [];
 }
 
+/**
+ * @param {any} link
+ * @param {any[]} saves
+ */
 function findTargetSave(link, saves) {
   const targetId = link?.id || link?.targetId || link?.settlementId;
   if (targetId) {
@@ -282,6 +328,11 @@ function findTargetSave(link, saves) {
  * Build a regional graph scaffold from saved settlements and their current
  * neighbourNetwork links. This does not auto-confirm any causal channel.
  */
+/**
+ * @param {any[]} [saves]
+ * @param {RegionGraph | null} [existingGraph]
+ * @param {RegionOptions} [options]
+ */
 export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, options = {}) {
   // Deterministic timestamps: callers thread options.now so a rebuild replay
   // stamps no wall-clock time (wall clock ONLY when not provided).
@@ -291,7 +342,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgesById = new Map(edges.map(e => [e.id, e]));
-  const pairKeyFor = (a, b) => [String(a), String(b)].sort().join('::');
+  const pairKeyFor = (/** @type {any} */ a, /** @type {any} */ b) => [String(a), String(b)].sort().join('::');
   const edgesByPair = new Map();
   for (const e of edges) {
     const key = pairKeyFor(e.from, e.to);
@@ -337,7 +388,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
             ...existingEdge,
             relationshipType: liveType,
             evidence: [
-              ...(existingEdge.evidence || []).filter(item => item?.source !== 'neighbourNetwork'),
+              ...(existingEdge.evidence || []).filter((/** @type {any} */ item) => item?.source !== 'neighbourNetwork'),
               { source: 'neighbourNetwork', reason: `Linked as ${liveType}.` },
             ],
             updatedAt: now || nowIso(),
@@ -387,6 +438,11 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
  * channel takes the candidate's status (discovery candidates are born
  * 'suggested').
  */
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionChannel[]} [channels]
+ * @param {RegionOptions} [options]
+ */
 export function addRegionalChannels(graph, channels = [], options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
   // no wall-clock time); the wall clock is the fallback ONLY when absent.
@@ -418,6 +474,10 @@ export function addRegionalChannels(graph, channels = [], options = {}) {
   return ensureRegionalGraph({ ...current, channels: [...byId.values()], updatedAt: now }, { now });
 }
 
+/**
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
+ */
 function relationshipEvidence(relationshipType, options = {}) {
   return [{
     source: 'relationship_label',
@@ -426,6 +486,11 @@ function relationshipEvidence(relationshipType, options = {}) {
   }];
 }
 
+/**
+ * @param {RegionChannel} raw
+ * @param {string} relationshipType
+ * @param {RegionOptions} [options]
+ */
 function relationshipChannel(raw, relationshipType, options = {}) {
   const now = options.now || nowIso();
   return normalizeChannel({
@@ -441,6 +506,16 @@ function relationshipChannel(raw, relationshipType, options = {}) {
   });
 }
 
+/**
+ * @param {string} type
+ * @param {string} from
+ * @param {string} to
+ * @param {string} relationshipType
+ * @param {RegionOptions} options
+ * @param {number} strength
+ * @param {number} confidence
+ * @param {RegionOptions} [extra]
+ */
 function twoWayChannels(type, from, to, relationshipType, options, strength, confidence, extra = {}) {
   return [
     relationshipChannel({ type, from, to, strength, confidence, ...extra }, relationshipType, options),
@@ -452,6 +527,11 @@ function twoWayChannels(type, from, to, relationshipType, options, strength, con
  * Convert a relationship label into confirmed regional channels. Direction is
  * edge-significant for hierarchical labels: edge.from is the patron/overlord,
  * edge.to is the client/vassal.
+ */
+/**
+ * @param {RegionEdge | null | undefined} edge
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
  */
 export function relationshipChannelBundle(edge, relationshipType, options = {}) {
   if (!edge?.from || !edge?.to || !relationshipType) return [];
@@ -508,9 +588,15 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
     );
   }
 
-  return out.filter(Boolean);
+  return /** @type {RegionChannel[]} */ (out.filter(Boolean));
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionEdge | null | undefined} edge
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
+ */
 export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -519,7 +605,7 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
   const from = String(edge?.from || '');
   const to = String(edge?.to || '');
   const relationshipKey = options.relationshipKey || edge?.id || `${from}->${to}`;
-  const samePair = channel =>
+  const samePair = (/** @type {RegionChannel} */ channel) =>
     (String(channel.from) === from && String(channel.to) === to)
     || (String(channel.from) === to && String(channel.to) === from);
   const channels = current.channels.map(channel => {
@@ -542,7 +628,7 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
       };
     }
     const relationshipGenerated = channel.relationshipKey === relationshipKey
-      || (samePair(channel) && (channel.evidence || []).some(item => item.source === 'relationship_label'));
+      || (samePair(channel) && (channel.evidence || []).some((/** @type {any} */ item) => item.source === 'relationship_label'));
     // DM 'disabled' survives label changes outright — were it parked as
     // dormant here, a later re-establishment would re-confirm it.
     if (!relationshipGenerated || channel.status === 'disabled') return channel;
@@ -559,6 +645,12 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
   return addRegionalChannels({ ...current, channels, updatedAt: now }, bundle, { now });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {string} channelId
+ * @param {string} status
+ * @param {RegionOptions} [options]
+ */
 export function setRegionalChannelStatus(graph, channelId, status, options = {}) {
   if (!REGIONAL_CHANNEL_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
@@ -575,6 +667,12 @@ export function setRegionalChannelStatus(graph, channelId, status, options = {})
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {string} channelId
+ * @param {string} visibility
+ * @param {RegionOptions} [options]
+ */
 export function setRegionalChannelVisibility(graph, channelId, visibility, options = {}) {
   if (!REGIONAL_CHANNEL_VISIBILITIES.includes(visibility)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
@@ -586,6 +684,11 @@ export function setRegionalChannelVisibility(graph, channelId, visibility, optio
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {string} settlementId
+ * @param {{ includeSuggested?: boolean, types?: string[]|null, visibility?: string[]|null, excludeHidden?: boolean }} [options]
+ */
 export function activeChannelsFrom(graph, settlementId, options = {}) {
   const { includeSuggested = false, types = null, visibility = null, excludeHidden = false } = options;
   const typeSet = Array.isArray(types) ? new Set(types) : null;
@@ -600,6 +703,11 @@ export function activeChannelsFrom(graph, settlementId, options = {}) {
   });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {{ recordedAt?: string, [k: string]: any }} event
+ * @param {RegionOptions} [options]
+ */
 export function appendRegionalEvent(graph, event, options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -613,6 +721,11 @@ export function appendRegionalEvent(graph, event, options = {}) {
   }, { now });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionImpact[]} [impacts]
+ * @param {RegionOptions} [options]
+ */
 export function queueRegionalImpacts(graph, impacts = [], options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
@@ -650,6 +763,13 @@ export function queueRegionalImpacts(graph, impacts = [], options = {}) {
   }, { now });
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {string} impactId
+ * @param {string} status
+ * @param {RegionOptions} [patch]
+ * @param {RegionOptions} [options]
+ */
 export function setRegionalImpactStatus(graph, impactId, status, patch = {}, options = {}) {
   if (!REGIONAL_IMPACT_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
   const now = options.now || nowIso();
@@ -670,15 +790,21 @@ export function setRegionalImpactStatus(graph, impactId, status, patch = {}, opt
   return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
 }
 
+/** @param {RegionImpact | null | undefined} impact */
 export function isRegionalImpactAvailable(impact) {
   return impact?.status === 'queued' && (impact.delayTicks || 0) <= 0;
 }
 
+/**
+ * @param {RegionGraph} graph
+ * @param {number} [ticks]
+ * @param {{ now?: string|null, currentTick?: number|null }} [options]
+ */
 export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
   const now = options.now || nowIso();
   const current = ensureRegionalGraph(graph || {}, { now });
   const amount = Math.max(1, Math.floor(Number.isFinite(ticks) ? ticks : 1));
-  const currentTick = Number.isFinite(options.currentTick) ? options.currentTick : null;
+  const currentTick = /** @type {number | null} */ (Number.isFinite(options.currentTick) ? options.currentTick : null);
   const queuedImpacts = current.queuedImpacts.map(impact => {
     if (impact.status !== 'queued') return impact;
     const ageTicks = Math.max(0, (impact.ageTicks || 0) + amount);
@@ -699,6 +825,7 @@ export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
   return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
 }
 
+/** @param {RegionGraph} graph */
 export function buildRegionalIndexes(graph) {
   const current = ensureRegionalGraph(graph || {});
   const outgoingBySettlement = new Map();

@@ -44,12 +44,22 @@ import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressors.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
+/**
+ * @typedef {{ name?: string, status?: string, _worldPulseInactive?: boolean, [key: string]: unknown }} InstitutionLike
+ * @typedef {{ type?: string, lifecycleStage?: string, affectedSettlementIds?: unknown[], severity?: number, [key: string]: unknown }} StressorLike
+ * @typedef {{ config?: { magicExists?: boolean }, institutions?: InstitutionLike[], tier?: string, economicState?: { foodSecurity?: Record<string, any>, [key: string]: unknown }, defenseProfile?: { scores?: Record<string, any>, economicGates?: Record<string, any>, [key: string]: unknown }, [key: string]: unknown }} FoodSettlement
+ */
+
+/** @type {(v: number, lo: number, hi: number) => number} */
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
+/** @type {(v: number) => number} */
 const round1 = v => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
 // one-decimal rounding would silently erase them.
+/** @type {(v: number) => number} */
 const round2 = v => Math.round(v * 100) / 100;
 
+/** @type {Readonly<Record<string, number>>} */
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
@@ -70,6 +80,7 @@ export const STOCKPILE_TUNING = Object.freeze({
 });
 
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
+/** @type {Set<string | undefined>} */
 const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 
 // ── Blockade bypass channel — LIVE-FIRST (Wave 8 frozen-vs-live) ─────────
@@ -96,12 +107,18 @@ const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 // already priced as airshipBesieged). Both paths stay gated on
 // magicExists — a no-magic world's circle is masonry, not a channel.
 
+/** @type {Set<string | undefined>} */
 const TRANSPORT_DOWN_STATUSES = new Set(['removed', 'destroyed', 'remnant']);
 // The engine's canonical standing predicate (institutionLifecycle's
 // activeInstitutions): removed/destroyed status OR the pulse-inactive flag.
+/** @type {(inst: InstitutionLike | null | undefined) => boolean} */
 const transportIsDown = (inst) =>
   TRANSPORT_DOWN_STATUSES.has(inst?.status) || inst?._worldPulseInactive === true;
 
+/**
+ * @param {InstitutionLike | null | undefined} inst
+ * @returns {'teleport' | 'airship' | null}
+ */
 function transportChannelOf(inst) {
   const n = String(inst?.name || '').toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
@@ -110,7 +127,10 @@ function transportChannelOf(inst) {
 }
 
 /** The magical import channel that can run a blockade, or null. Live-first;
- *  see the block comment above for the verdict-fallback contract. */
+ *  see the block comment above for the verdict-fallback contract.
+ * @param {FoodSettlement | null | undefined} settlement
+ * @returns {'teleport' | 'airship' | null}
+ */
 export function resolveBlockadeBypassChannel(settlement) {
   if (settlement?.config?.magicExists === false) return null;
   let sawTransportSignal = false;
@@ -143,6 +163,7 @@ export function resolveBlockadeBypassChannel(settlement) {
 const RESILIENCE_STORAGE_POINTS = 35;       // mirrors foodGenerator's storage slice
 const RESILIENCE_STORAGE_FULL_MONTHS = 12;  // …at months/12 scaling
 
+/** @param {number} months @returns {number} */
 function resilienceStorageComponent(months) {
   return (clamp(months, 0, 24) / RESILIENCE_STORAGE_FULL_MONTHS) * RESILIENCE_STORAGE_POINTS;
 }
@@ -151,9 +172,12 @@ function resilienceStorageComponent(months) {
  * Storage capacity in months, mirroring the generator's granary tier table
  * (foodGenerator baseStorage) so play-time refills can't exceed what the
  * infrastructure could ever have held.
+ * @param {FoodSettlement | null | undefined} settlement
+ * @returns {number}
  */
 export function storageCapacityMonths(settlement) {
   const names = (settlement?.institutions || []).map(i => String(i?.name || '').toLowerCase());
+  /** @param {...string} fragments */
   const has = (...fragments) => names.some(n => fragments.some(f => n.includes(f)));
   const tier = String(settlement?.tier || 'village');
   const base = has('state granary') ? (tier === 'metropolis' ? 12 : 8)
@@ -170,6 +194,11 @@ export function storageCapacityMonths(settlement) {
  * severityBySettlement map, H8) — the gate and the drain math both run on
  * the severity the settlement actually experiences. Origins (full severity)
  * return the stressor record itself, identity intact.
+ */
+/**
+ * @param {StressorLike[]} worldStateStressors
+ * @param {string} settlementId
+ * @returns {StressorLike | null}
  */
 export function blockadeFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
@@ -196,6 +225,11 @@ export function blockadeFor(worldStateStressors = [], settlementId) {
  * THIS settlement (spread targets are attenuated via severityBySettlement),
  * so a spread famine drains the target's granary slower than the origin's.
  */
+/**
+ * @param {StressorLike[]} worldStateStressors
+ * @param {string} settlementId
+ * @returns {StressorLike | null}
+ */
 export function famineFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
   for (const s of worldStateStressors || []) {
@@ -217,7 +251,7 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * written back through the same gate so the 'Disasters & Famine' row moves
  * with the granary instead of freezing at the generation value.
  *
- * @param {Object} settlement
+ * @param {FoodSettlement} settlement
  * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
@@ -362,7 +396,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       ...(_disasterMoved ? {
         defenseProfile: {
           ...settlement.defenseProfile,
-          scores: { ...settlement.defenseProfile.scores, disaster: nextDisaster },
+          scores: { ...(/** @type {{ scores?: Record<string, any> }} */ (settlement.defenseProfile)).scores, disaster: nextDisaster },
         },
       } : {}),
     },

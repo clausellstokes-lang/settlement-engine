@@ -30,6 +30,13 @@
 
 import { deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 
+/**
+ * @typedef {Object} ActiveConditionShape
+ * @property {string} [status]
+ * @property {{ expiresAtTicks: number|null }} duration
+ * @property {Array<Object>} [causes]
+ */
+
 // ── Pre-event snapshot (applyEvent stamps it onto logEntry.undo) ─────────
 
 // Live resolved outputs + the authored delta record the resource events
@@ -50,6 +57,7 @@ const TRADE_ECONOMIC_KEYS = Object.freeze([
   'primaryExports', 'primaryImports', 'transit', 'exports', 'imports',
 ]);
 
+/** @type {Record<string, readonly string[]>} */
 const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   DEPLETE_RESOURCE:   RESOURCE_CONFIG_KEYS,
   RECOVERED_RESOURCE: RESOURCE_CONFIG_KEYS,
@@ -67,6 +75,7 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   RESOLVE_STRESSOR:   Object.freeze(['stressorEdits']),
 });
 
+/** @type {Record<string, readonly string[]>} */
 const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
   ADD_TRADE_GOOD:    TRADE_ECONOMIC_KEYS,
   REMOVE_TRADE_GOOD: TRADE_ECONOMIC_KEYS,
@@ -92,6 +101,7 @@ const NPC_ROSTER_KEYS = Object.freeze(['npcs']);
 // entry with no provenance stamp, so the pre-event copy is the only way back.
 const STRESS_CONTAINER_KEYS = Object.freeze(['stressors', 'stress', 'stresses']);
 
+/** @type {Record<string, readonly string[]>} */
 const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
   BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
@@ -147,13 +157,17 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
 // pre-event _config copy — one snapshot restores both.
 const MIRRORED_RECORD_KEYS = Object.freeze(['resourceEdits', 'customTradeGoods', 'stressorEdits']);
 
-const clone = (v) => JSON.parse(JSON.stringify(v));
+const clone = (/** @type {*} */ v) => JSON.parse(JSON.stringify(v));
 
 /** { keys: every key audited, values: only the keys present (cloned) } —
  *  presence matters: a key the event GREW must be deleted on undo, not
  *  emptied, so an undone settlement stays byte-identical to one that never
- *  saw the event. */
+ *  saw the event.
+ *  @param {Record<string, any>|null|undefined} source
+ *  @param {readonly string[]} keys
+ *  @returns {{ keys: string[], values: Record<string, any> }} */
 function snapshotKeys(source, keys) {
+  /** @type {Record<string, any>} */
   const values = {};
   if (source && typeof source === 'object') {
     for (const k of keys) {
@@ -169,7 +183,7 @@ function snapshotKeys(source, keys) {
  * are provenance-scrubable (the common case) — only the resource/trade-good
  * family needs a snapshot.
  *
- * @param {Object} settlement  the BEFORE settlement
+ * @param {Record<string, any>} settlement  the BEFORE settlement
  * @param {import('../types.js').Event} event
  * @returns {Object|null}
  */
@@ -178,6 +192,7 @@ export function captureEventUndoSnapshot(settlement, event) {
   const configKeys = SNAPSHOT_CONFIG_KEYS[event?.type];
   const settlementKeys = SNAPSHOT_SETTLEMENT_KEYS[event?.type];
   if (!configKeys && !settlementKeys) return null;
+  /** @type {Record<string, ReturnType<typeof snapshotKeys>>} */
   const snapshot = {};
   if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
   const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event?.type];
@@ -186,7 +201,13 @@ export function captureEventUndoSnapshot(settlement, event) {
   return snapshot;
 }
 
+/**
+ * @param {Object|null|undefined} target
+ * @param {{ keys?: string[], values?: Record<string, any> }} snap
+ * @returns {Record<string, any>}
+ */
 function restoreKeys(target, snap) {
+  /** @type {Record<string, any>} */
   const next = { ...(target || {}) };
   for (const k of snap?.keys || []) {
     if (snap.values && k in snap.values) next[k] = clone(snap.values[k]);
@@ -195,21 +216,26 @@ function restoreKeys(target, snap) {
   return next;
 }
 
+/**
+ * @param {Record<string, any>} s
+ * @param {*} snapshot
+ * @returns {Record<string, any>}
+ */
 function restoreSnapshottedRecords(s, snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return s;
   let next = s;
   if (snapshot.config) {
     next = { ...next, config: restoreKeys(next.config, snapshot.config) };
     if (next._config && typeof next._config === 'object') {
-      const mirrored = (snapshot.config.keys || []).filter(k => MIRRORED_RECORD_KEYS.includes(k));
+      const mirrored = (snapshot.config.keys || []).filter((/** @type {string} */ k) => MIRRORED_RECORD_KEYS.includes(k));
       if (mirrored.length) {
         next = {
           ...next,
           _config: restoreKeys(next._config, {
             keys: mirrored,
             values: Object.fromEntries(mirrored
-              .filter(k => snapshot.config.values && k in snapshot.config.values)
-              .map(k => [k, snapshot.config.values[k]])),
+              .filter((/** @type {string} */ k) => snapshot.config.values && k in snapshot.config.values)
+              .map((/** @type {string} */ k) => [k, snapshot.config.values[k]])),
           }),
         };
       }
@@ -240,14 +266,18 @@ function restoreSnapshottedRecords(s, snapshot) {
  * call: a condition that had ALREADY drifted to 'easing' on its own comes
  * back at the template default, and the next tick's pre-expiry window
  * re-eases it — the drift self-corrects.
+ *
+ * @param {{ duration?: { expiresAtTicks?: number|null } }} condition
+ * @param {Array<Object>} strippedCauses
+ * @returns {ActiveConditionShape}
  */
 function unEase(condition, strippedCauses) {
-  const restored = deriveActiveCondition({
+  const restored = /** @type {ActiveConditionShape} */ (/** @type {*} */ (deriveActiveCondition({
     ...condition,
     status: undefined,
     duration: { ...(condition.duration || {}), expiresAtTicks: undefined },
     causes: strippedCauses,
-  });
+  })));
   // Never IMMORTALIZE via undo: a template-less archetype derives a null
   // cap — keep the wind-down's clamped cap instead.
   if (restored.duration.expiresAtTicks === null
@@ -271,6 +301,10 @@ function unEase(condition, strippedCauses) {
  * second onset of the same archetype+target OVERWROTE the first event's
  * condition, so undoing the second cannot restore the first's copy — the
  * crisis drops entirely. Same class as re-authoring a stressor then undoing.
+ *
+ * @param {Record<string, any>} s
+ * @param {string} eventId
+ * @returns {Record<string, any>}
  */
 function withoutEventConditions(s, eventId) {
   const list = Array.isArray(s.activeConditions) ? s.activeConditions : [];
@@ -283,7 +317,7 @@ function withoutEventConditions(s, eventId) {
       changed = true;
       continue;
     }
-    const stripped = causes.filter((cause, i) =>
+    const stripped = causes.filter((/** @type {any} */ cause, /** @type {number} */ i) =>
       i === 0 || cause?.source !== 'event' || cause?.eventId !== eventId);
     if (stripped.length === causes.length) {
       kept.push(c);
@@ -304,6 +338,10 @@ function withoutEventConditions(s, eventId) {
  * the un-eased condition above is the engine truth NOW, and the restored
  * stressorEdits.added record brings the authored entry back on the next
  * regeneration.
+ *
+ * @param {Record<string, any>} s
+ * @param {string} eventId
+ * @returns {Record<string, any>}
  */
 function withoutEventStressEntries(s, eventId) {
   let next = s;
@@ -324,6 +362,10 @@ function withoutEventStressEntries(s, eventId) {
  * clears only when the popped event wrote it (an earlier plague's
  * overwritten annotation is unrecoverable — same overwrite class as the
  * condition limitation above).
+ *
+ * @param {Record<string, any>|null|undefined} config
+ * @param {string} eventId
+ * @returns {Record<string, any>|null|undefined}
  */
 function scrubConfigAnnotations(config, eventId) {
   if (!config || typeof config !== 'object') return config;
@@ -341,6 +383,11 @@ function scrubConfigAnnotations(config, eventId) {
   return next;
 }
 
+/**
+ * @param {Record<string, any>} s
+ * @param {string} eventId
+ * @returns {Record<string, any>}
+ */
 function withoutEventAnnotations(s, eventId) {
   let next = s;
   const config = scrubConfigAnnotations(s.config, eventId);
@@ -354,10 +401,15 @@ function withoutEventAnnotations(s, eventId) {
  * DESTROY_SETTLEMENT stamps its event id on both the settlement and the
  * config flag, so the revival is exact. Status restores to 'active' —
  * destruction is the only settlement-level status writer.
+ *
+ * @param {Record<string, any>} s
+ * @param {string} eventId
+ * @returns {Record<string, any>}
  */
 function withoutEventDestruction(s, eventId) {
   if (s.destroyedByEventId !== eventId) return s;
   const { destroyedAt: _a, destroyedByEventId: _b, destroyedCause: _c, destroyedReason: _d, ...rest } = s;
+  /** @type {Record<string, any>} */
   let next = { ...rest, status: 'active' };
   if (next.config?._destroyedByEventId === eventId) {
     const { _destroyed, _destroyedByEventId, ...cfg } = next.config;
@@ -372,10 +424,14 @@ function withoutEventDestruction(s, eventId) {
  * destroyedByEventId/removedByEventId idiom). Without this, an added entity
  * survived its own undo. Re-add of a pre-existing entity (the idempotent
  * un-remove branch) carries no createdByEventId, so it is left intact.
+ *
+ * @param {Record<string, any>} s
+ * @param {string} eventId
+ * @returns {Record<string, any>}
  */
 function withoutEventCreations(s, eventId) {
   let next = s;
-  const dropCreated = (arr) => arr.filter(e => e?.createdByEventId !== eventId);
+  const dropCreated = (/** @type {Array<Record<string, any>>} */ arr) => arr.filter(e => e?.createdByEventId !== eventId);
   if (Array.isArray(next.npcs) && next.npcs.some(n => n?.createdByEventId === eventId)) {
     next = { ...next, npcs: dropCreated(next.npcs) };
   }

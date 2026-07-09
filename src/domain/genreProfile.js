@@ -143,10 +143,41 @@ const NEUTRAL_TEMPLATE = Object.freeze({
 // ── Composer ─────────────────────────────────────────────────────────────
 
 /**
+ * @typedef {Object} GenreTemplate
+ * @property {string[]} institutionEmphasis
+ * @property {string[]} threatTypeBias
+ * @property {string} magicBias
+ * @property {string} violenceLevel
+ * @property {string} weirdnessTolerance
+ * @property {string} hookStyle
+ * @property {string} proseDensity
+ */
+
+/**
+ * @typedef {Object} GenreContributor
+ * @property {string} source
+ * @property {string} effect
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} GenreProfile
+ * @property {string|null} genre
+ * @property {string[]} institutionEmphasis
+ * @property {string[]} threatTypeBias
+ * @property {string} magicBias
+ * @property {string} violenceLevel
+ * @property {string} weirdnessTolerance
+ * @property {string} hookStyle
+ * @property {string} proseDensity
+ * @property {GenreContributor[]} contributors
+ */
+
+/**
  * Derive the structured GenreProfile.
  *
- * @param {Object} settlement
- * @returns {Object} GenreProfile
+ * @param {{ config?: { genre?: unknown }, genre?: unknown } | null | undefined} settlement
+ * @returns {GenreProfile}
  */
 export function deriveGenreProfile(settlement) {
   if (!settlement) {
@@ -164,7 +195,7 @@ export function deriveGenreProfile(settlement) {
   }
 
   const normalized = String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
-  const template = GENRE_TEMPLATES[normalized];
+  const template = GENRE_TEMPLATES[/** @type {keyof typeof GENRE_TEMPLATES} */ (normalized)];
   if (!template) {
     contributors.push({
       source: 'config.genre',
@@ -181,6 +212,12 @@ export function deriveGenreProfile(settlement) {
   return finalizeProfile(normalized, template, contributors);
 }
 
+/**
+ * @param {string|null} genre
+ * @param {GenreTemplate} template
+ * @param {GenreContributor[]} contributors
+ * @returns {GenreProfile}
+ */
 function finalizeProfile(genre, template, contributors) {
   return {
     genre,
@@ -202,9 +239,12 @@ export function supportedGenres() {
   return [...CANONICAL_GENRES];
 }
 
-/** Catalog accessor for a single genre's template (read-only copy). */
+/** Catalog accessor for a single genre's template (read-only copy).
+ * @param {string} genre
+ * @returns {GenreTemplate | null}
+ */
 export function genreTemplate(genre) {
-  const t = GENRE_TEMPLATES[genre];
+  const t = GENRE_TEMPLATES[/** @type {keyof typeof GENRE_TEMPLATES} */ (genre)];
   if (!t) return null;
   return {
     institutionEmphasis: [...t.institutionEmphasis],
@@ -217,7 +257,10 @@ export function genreTemplate(genre) {
   };
 }
 
-/** Human-readable summary. */
+/** Human-readable summary.
+ * @param {{ config?: { genre?: unknown }, genre?: unknown } | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeGenre(settlement) {
   const g = deriveGenreProfile(settlement);
   return [

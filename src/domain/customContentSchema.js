@@ -114,7 +114,9 @@ export const TRADE_CATEGORIES = Object.freeze([
 const _TRADE_CAT_BY_KEY = new Map(TRADE_CATEGORIES.map((c) => [c.key, c]));
 
 /** Display label for a `satisfies` value: a known category key → its label; a
- *  free-text ("Other") value → returned as-is by the caller (this returns null). */
+ *  free-text ("Other") value → returned as-is by the caller (this returns null).
+ *  @param {unknown} value
+ *  @returns {string|null} */
 export function tradeCategoryLabelOf(value) {
   if (!value) return null;
   return _TRADE_CAT_BY_KEY.get(String(value))?.label || null;
@@ -122,10 +124,13 @@ export function tradeCategoryLabelOf(value) {
 
 /** Picker options for the `satisfies` field: the unified categories as builtins
  *  (value=key) + any free-text value currently in use across custom goods/
- *  institutions (the "Other" escape hatch — persists only while referenced). */
+ *  institutions (the "Other" escape hatch — persists only while referenced).
+ *  @param {Record<string, Array<{ satisfies?: unknown }> | undefined> | null | undefined} customContent  a customContent blob (institutions / tradeGoods buckets read here)
+ *  @returns {{ builtins: Array<{ value: string, label: string }>, customs: string[] }} */
 export function satisfiesOptions(customContent) {
   const builtins = TRADE_CATEGORIES.map((c) => ({ value: c.key, label: c.label }));
   const knownKeys = new Set(TRADE_CATEGORIES.map((c) => c.key));
+  /** @type {Map<string, string>} */
   const seen = new Map();
   for (const type of ['institutions', 'tradeGoods']) {
     for (const item of (customContent?.[type] || [])) {
@@ -149,14 +154,28 @@ export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', '
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Normalize a comma-string or array of tags to a clean lowercase array. */
+/**
+ * A tag/toggle-bearing custom entity — the structural subset the tag helpers read.
+ * @typedef {Object} TaggableEntity
+ * @property {unknown} [tags]      comma-string or array of tag words
+ * @property {unknown} [magical]   toggle folded into the tag set
+ * @property {unknown} [criminal]  toggle folded into the tag set
+ */
+
+/**
+ * Normalize a comma-string or array of tags to a clean lowercase array.
+ * @param {unknown} raw
+ * @returns {string[]}
+ */
 export function normalizeTags(raw) {
   if (Array.isArray(raw)) return raw.map((t) => String(t).trim().toLowerCase()).filter(Boolean);
   if (typeof raw === 'string') return raw.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean);
   return [];
 }
 
-/** Effective tags including the magical / criminal toggles folded in. */
+/** Effective tags including the magical / criminal toggles folded in.
+ *  @param {TaggableEntity} [entity]
+ *  @returns {string[]} */
 export function effectiveTags(entity = {}) {
   const tags = new Set(normalizeTags(entity?.tags));
   if (entity?.magical) tags.add('magical');
@@ -164,10 +183,12 @@ export function effectiveTags(entity = {}) {
   return Array.from(tags);
 }
 
+/** @param {TaggableEntity} [entity] @returns {boolean} */
 export function isMagical(entity = {}) {
   return entity?.magical === true || normalizeTags(entity?.tags).includes('magical');
 }
 
+/** @param {TaggableEntity} [entity] @returns {boolean} */
 export function isCriminal(entity = {}) {
   return entity?.criminal === true || normalizeTags(entity?.tags).includes('criminal');
 }
@@ -185,6 +206,7 @@ export function isCriminal(entity = {}) {
  */
 export function eligibleCustomContent(customContent, { tier } = {}) {
   if (!customContent || typeof customContent !== 'object' || !tier) return customContent;
+  /** @type {Record<string, unknown>} */
   const out = {};
   for (const [bucket, items] of Object.entries(customContent)) {
     out[bucket] = Array.isArray(items) ? items.filter((it) => passesTierGate(it, tier)) : items;
@@ -196,6 +218,10 @@ export function eligibleCustomContent(customContent, { tier } = {}) {
  * Does `entity` satisfy its tier gate at the given settlement `tier`?
  * tierMin / tierMax are inclusive; missing gates mean "no bound". Unknown tiers
  * pass (fail-open — never hide content over a typo).
+ *
+ * @param {{ tierMin?: unknown, tierMax?: unknown }} [entity]
+ * @param {string | null | undefined} [tier]
+ * @returns {boolean}
  */
 export function passesTierGate(entity = {}, tier) {
   if (!tier) return true;

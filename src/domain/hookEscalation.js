@@ -35,7 +35,8 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 // returns a flat array. Tolerant of missing fields / mixed shapes.
 
 /**
- * @returns {Array} Raw hook entries gathered from across the settlement.
+ * @param {Record<string, any>} settlement
+ * @returns {Array<Record<string, any>>} Raw hook entries gathered from across the settlement.
  *                  Shapes vary; downstream consumers pass each through
  *                  deriveStructuredHook to normalize.
  */
@@ -105,6 +106,7 @@ export function collectAllHooks(settlement) {
 // Hooks come in three shapes: bare string, { hook: string, … }, or
 // { text: string, … }. Normalize to a single text field.
 
+/** @param {*} raw @returns {string} */
 function hookTextFrom(raw) {
   if (raw == null) return '';
   if (typeof raw === 'string') return raw.trim();
@@ -116,11 +118,13 @@ function hookTextFrom(raw) {
   return '';
 }
 
+/** @param {*} raw @param {string} fallback @returns {string} */
 function hookCategoryFrom(raw, fallback) {
   if (raw && typeof raw === 'object' && typeof raw.category === 'string') return raw.category;
   return fallback;
 }
 
+/** @param {*} raw @returns {string} */
 function hookSeverityFrom(raw) {
   if (raw && typeof raw === 'object' && typeof raw.severity === 'string') return raw.severity;
   return 'medium';
@@ -158,6 +162,8 @@ const ORIGIN_RULES = [
 
 /**
  * Best-effort classifier returning one of the canonical origin labels.
+ * @param {*} hookText
+ * @returns {string}
  */
 export function deriveHookOrigin(hookText) {
   const text = String(hookText || '');
@@ -173,6 +179,7 @@ export function deriveHookOrigin(hookText) {
 // failure-consequence heuristic — short prose anchored to the origin
 // category. Consumers (PDF, AI overlay) can render directly.
 
+/** @type {Record<string, { ifIgnored: string[], possibleResolutions: string[] }>} */
 const ORIGIN_CONSEQUENCES = Object.freeze({
   chain: {
     ifIgnored: [
@@ -267,6 +274,10 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
  *   }
  *
  * Pure; tolerant; returns null for empty hooks.
+ *
+ * @param {*} rawWrapper
+ * @param {Record<string, any>} [settlement]
+ * @returns {Record<string, any>|null}
  */
 export function deriveStructuredHook(rawWrapper, settlement) {
   if (!rawWrapper) return null;
@@ -306,12 +317,15 @@ export function deriveStructuredHook(rawWrapper, settlement) {
   };
 }
 
-/** Convert every hook on the settlement into a structured form. */
+/** Convert every hook on the settlement into a structured form.
+ * @param {Record<string, any>} settlement
+ * @returns {Array<Record<string, any>>}
+ */
 export function deriveAllStructuredHooks(settlement) {
   if (!settlement) return [];
-  return collectAllHooks(settlement)
+  return /** @type {Array<Record<string, any>>} */ (collectAllHooks(settlement)
     .map(wrapper => deriveStructuredHook(wrapper, settlement))
-    .filter(Boolean);
+    .filter(Boolean));
 }
 
 // ── Escalation clocks ──────────────────────────────────────────────────
@@ -389,8 +403,9 @@ const CLOCK_TEMPLATES = Object.freeze({
  * values. Unknown tokens are preserved so the rendered stage still
  * reads cleanly when no actor is available.
  */
+/** @param {string} stage @param {Record<string, any>} vars @returns {string} */
 function fillStage(stage, vars) {
-  return stage.replace(/\{(\w+)\}/g, (match, name) => {
+  return stage.replace(/\{(\w+)\}/g, (/** @type {string} */ match, /** @type {string} */ name) => {
     return vars[name] || match;
   });
 }
@@ -406,6 +421,8 @@ function fillStage(stage, vars) {
  *   }
  *
  * Tolerant: returns an empty array when no triggers are present.
+ * @param {Record<string, any>} settlement
+ * @returns {Array<Record<string, any>>}
  */
 export function deriveEscalationClocks(settlement) {
   if (!settlement) return [];
@@ -463,7 +480,7 @@ export function deriveEscalationClocks(settlement) {
   // their archetypes differ, that's the seed for a split. Avoids false
   // positives for single-archetype dominance.
   if (factions.length >= 2) {
-    const sorted = [...factions].sort((a, b) => (b.power || 0) - (a.power || 0));
+    const sorted = [.../** @type {any[]} */ (factions)].sort((a, b) => (b.power || 0) - (a.power || 0));
     const top = sorted[0], second = sorted[1];
     const powerDelta = (top.power || 0) - (second.power || 0);
     if (powerDelta <= 8 && top.archetype !== second.archetype) {
@@ -485,13 +502,17 @@ export function deriveEscalationClocks(settlement) {
 
 // ── Diagnostic helpers ──────────────────────────────────────────────────
 
-/** Aggregate count by origin classification. */
+/** Aggregate count by origin classification.
+ * @param {Record<string, any>} settlement
+ * @returns {Record<string, number>}
+ */
 export function structuredHookOriginBreakdown(settlement) {
+  /** @type {Record<string, number>} */
   const out = {
     pressure: 0, factionConflict: 0, institution: 0,
     npc: 0, chain: 0, external: 0, other: 0,
   };
-  for (const h of deriveAllStructuredHooks(settlement)) {
+  for (const h of /** @type {Array<Record<string, any>>} */ (deriveAllStructuredHooks(settlement))) {
     if (out[h.origin] !== undefined) out[h.origin] += 1;
   }
   return out;

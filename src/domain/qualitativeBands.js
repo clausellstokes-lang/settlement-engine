@@ -31,6 +31,7 @@ import { deriveAllDistricts } from './districtProfile.js';
 // canonical; consumers can opt into the display labels for user-facing
 // surfaces.
 
+/** @type {Readonly<Record<string, Readonly<Record<string, string>>>>} */
 const DISPLAY_LABELS = Object.freeze({
   // Phase 17 substrate / Phase 21 capacities share the same 5-band
   // vocabulary. The roadmap example "Legitimacy: Contested" implies
@@ -112,6 +113,15 @@ export function displayBandLabel(domain, band) {
 
 // ── Reference parsing ───────────────────────────────────────────────────
 
+/**
+ * A band reference — bare id string or `{ id, domain }` object.
+ * @typedef {string | { id?: string | null, domain?: string }} BandRef
+ */
+
+/**
+ * @param {BandRef | null | undefined} ref
+ * @returns {{ id?: string | null, domain?: string }}
+ */
 function parseRef(ref) {
   if (typeof ref === 'string') return { id: ref };
   if (ref && typeof ref === 'object') return ref;
@@ -129,8 +139,8 @@ function parseRef(ref) {
  *   - 'threat.<id>' (severity band)
  *   - 'district.<id>' with { domain: 'wealth' | 'safety' } modifier
  *
- * @param {string | {id: string, domain?: string}} ref
- * @param {Object} settlement
+ * @param {BandRef} ref
+ * @param {import('./settlement.schema.js').CanonicalSettlement | null | undefined} settlement
  * @returns {string | null}
  */
 export function bandFor(ref, settlement) {
@@ -142,21 +152,21 @@ export function bandFor(ref, settlement) {
   if (id.startsWith('var.')) {
     const name = id.slice('var.'.length);
     if (!SYSTEM_VARIABLES.includes(name)) return null;
-    return deriveCausalState(settlement).bands?.[name] || null;
+    return /** @type {{bands?: Record<string, string>}} */ (deriveCausalState(settlement)).bands?.[name] || null;
   }
   if (SYSTEM_VARIABLES.includes(id)) {
-    return deriveCausalState(settlement).bands?.[id] || null;
+    return /** @type {{bands?: Record<string, string>}} */ (deriveCausalState(settlement)).bands?.[id] || null;
   }
 
   // Capacity
   if (id.startsWith('capacity.')) {
     const name = id.slice('capacity.'.length);
-    if (!CAPACITY_NAMES.includes(name)) return null;
-    const p = deriveCapacityProfile(name, settlement);
+    if (!/** @type {readonly string[]} */ (CAPACITY_NAMES).includes(name)) return null;
+    const p = /** @type {{band?: string} | null} */ (deriveCapacityProfile(/** @type {import('./capacityModel.js').CapacityName} */ (name), settlement));
     return p?.band || null;
   }
-  if (CAPACITY_NAMES.includes(id)) {
-    const p = deriveCapacityProfile(id, settlement);
+  if (/** @type {readonly string[]} */ (CAPACITY_NAMES).includes(id)) {
+    const p = /** @type {{band?: string} | null} */ (deriveCapacityProfile(/** @type {import('./capacityModel.js').CapacityName} */ (id), settlement));
     return p?.band || null;
   }
 
@@ -168,19 +178,19 @@ export function bandFor(ref, settlement) {
 
   // Condition
   if (id.startsWith('condition.')) {
-    const c = findActiveCondition(settlement, id);
+    const c = /** @type {import('./settlement.schema.js').ActiveCondition | null} */ (findActiveCondition(settlement, id));
     return c?.severityBand || null;
   }
 
   // Threat
   if (id.startsWith('threat.')) {
-    const t = deriveAllThreatProfiles(settlement).find(x => x.id === id);
+    const t = /** @type {Array<{id?: string, severityBand?: string}>} */ (deriveAllThreatProfiles(settlement)).find(x => x.id === id);
     return t?.severityBand || null;
   }
 
   // District — needs a domain modifier (wealth | safety).
   if (id.startsWith('district.')) {
-    const d = deriveAllDistricts(settlement).find(x => x.id === id);
+    const d = /** @type {Array<{id?: string, wealth: string, safety: string}>} */ (deriveAllDistricts(settlement)).find(x => x.id === id);
     if (!d) return null;
     if (domain === 'safety') return d.safety;
     return d.wealth;  // default
@@ -192,6 +202,10 @@ export function bandFor(ref, settlement) {
 /**
  * Convenience: return the user-facing display value for any reference.
  * Routes the right domain to displayBandLabel automatically.
+ *
+ * @param {BandRef} ref
+ * @param {import('./settlement.schema.js').CanonicalSettlement | null | undefined} settlement
+ * @returns {string}
  */
 export function displayValueFor(ref, settlement) {
   const { id, domain } = parseRef(ref);
@@ -201,7 +215,7 @@ export function displayValueFor(ref, settlement) {
   if (id.startsWith('var.') || SYSTEM_VARIABLES.includes(id)) {
     return displayBandLabel('substrate', band);
   }
-  if (id.startsWith('capacity.') || CAPACITY_NAMES.includes(id)) {
+  if (id.startsWith('capacity.') || /** @type {readonly string[]} */ (CAPACITY_NAMES).includes(id)) {
     return displayBandLabel('capacity', band);
   }
   if (id.startsWith('chain.'))     return displayBandLabel('chain', band);
@@ -219,6 +233,10 @@ export function supportedBandDomains() {
   return Object.keys(DISPLAY_LABELS);
 }
 
+/**
+ * @param {string} domain
+ * @returns {Record<string, string> | null}
+ */
 export function displayLabelsFor(domain) {
   const m = DISPLAY_LABELS[domain];
   return m ? { ...m } : null;

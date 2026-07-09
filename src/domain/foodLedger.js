@@ -43,15 +43,18 @@ const NEUTRAL = Object.freeze({
   present: false,        // true once a real foodSecurity object backed it
 });
 
+/** @param {unknown} v @returns {v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
+/** @param {unknown} v @param {number} d @returns {number} */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {Object} settlement
+ * @param {{ economicState?: { foodSecurity?: unknown, [key: string]: unknown } | null, foodSecurity?: unknown } | null | undefined} settlement
  * @returns {FoodLedger}
  */
 export function foodLedger(settlement) {
-  const fs = settlement?.economicState?.foodSecurity || settlement?.foodSecurity || null;
+  /** @type {Record<string, unknown>} */
+  const fs = /** @type {any} */ (settlement?.economicState?.foodSecurity || settlement?.foodSecurity || null);
   if (!fs || typeof fs !== 'object') return NEUTRAL;
   return {
     dailyNeed:        num(fs.dailyNeed, 0),

@@ -28,7 +28,28 @@ const DISRUPTED_STATUSES = new Set(['blocked', 'collapsing', 'scarce', 'captured
 
 const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
 
-/** Read an NPC secret regardless of shape — generators emit { what, stakes }. */
+/**
+ * @typedef {Object} TableNpc
+ * @property {string} [name]
+ * @property {number} [power]
+ * @property {string} [influence]
+ * @property {string} [role]
+ * @property {string} [title]
+ * @property {string | { what?: string } | null} [secret]
+ * @property {{ short?: string }} [goal]
+ * @property {string} [want]
+ */
+
+/**
+ * @typedef {Object} TableSettlement
+ * @property {TableNpc[]} [npcs]
+ * @property {{ legacyAnnotations?: Array<{ annotation?: string, eventName?: string }> }} [history]
+ */
+
+/** Read an NPC secret regardless of shape — generators emit { what, stakes }.
+ * @param {TableNpc | null | undefined} npc
+ * @returns {string}
+ */
 function npcSecretText(npc) {
   if (!npc?.secret) return '';
   return typeof npc.secret === 'string' ? npc.secret : (npc.secret.what || '');
@@ -37,7 +58,7 @@ function npcSecretText(npc) {
 /** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
 
 /**
- * @param {Object} settlement
+ * @param {TableSettlement | null | undefined} settlement
  * @returns {TableEntry[]}
  */
 export function tonightAtTheTable(settlement) {
@@ -53,7 +74,7 @@ export function tonightAtTheTable(settlement) {
   const ranked = [...npcs].sort((a, b) => {
     const pw = (b.power || 0) - (a.power || 0);
     if (pw !== 0) return pw;
-    return (INFLUENCE_RANK[a.influence] ?? 3) - (INFLUENCE_RANK[b.influence] ?? 3);
+    return (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (a.influence)] ?? 3) - (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (b.influence)] ?? 3);
   });
   for (const npc of ranked.slice(0, 2)) {
     const role = (npc.role || npc.title || '').toLowerCase();
@@ -96,7 +117,7 @@ export function tonightAtTheTable(settlement) {
   } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
     out.push({
       kind: 'TWIST',
-      title: ranked[2].name,
+      title: /** @type {string} */ (ranked[2].name),
       body:  truncate(npcSecretText(ranked[2]), 120),
     });
   }
@@ -104,7 +125,7 @@ export function tonightAtTheTable(settlement) {
   // ── Red flag ─────────────────────────────────────────────────────────
   // A "don't mention" derived live from a disrupted supply chain — the
   // settlement carries no supplyChainState.failures array of its own.
-  const disrupted = deriveAllSupplyChainStates(settlement)
+  const disrupted = deriveAllSupplyChainStates(/** @type {import('../supplyChainState.js').ChainsSettlementSource} */ (settlement))
     .filter(c => DISRUPTED_STATUSES.has(c.status));
   if (disrupted.length > 0) {
     const f = disrupted[0];
@@ -120,6 +141,11 @@ export function tonightAtTheTable(settlement) {
   return out.slice(0, MAX_ENTRIES);
 }
 
+/**
+ * @param {unknown} s
+ * @param {number} n
+ * @returns {string}
+ */
 function truncate(s, n) {
   const str = String(s || '');
   if (str.length <= n) return str;

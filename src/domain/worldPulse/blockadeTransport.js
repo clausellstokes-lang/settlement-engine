@@ -20,6 +20,10 @@ import { withImpairment, withoutEventImpairments } from '../entities/status.js';
 const AIRSHIP_RE = /airship/i;
 const CAUSE_PREFIX = 'stressor-blockade:';
 
+/**
+ * @param {number | undefined} severity blockade stressor severity, 0-1
+ * @returns {number} 'access' impairment severity to stamp on the dock
+ */
 function blockadeSeverityToImpairment(severity) {
   // 0.4 (gate) → 0.46, 1.0 → 0.7: impaired, never inoperable — the dock
   // keeps flying, the math of HOW MUCH lands lives in foodStockpile.
@@ -27,8 +31,10 @@ function blockadeSeverityToImpairment(severity) {
 }
 
 /**
- * @param {Object} settlement
- * @param {any} blockade - active siege/occupation stressor gripping this settlement, or null
+ * @typedef {import('../entities/status.js').Impairment} Impairment
+ * @typedef {{ name?: string, impairments?: Impairment[] }} TransportInstitution
+ * @param {{ institutions?: TransportInstitution[] }} settlement
+ * @param {{ id?: string, severity?: number } | null | undefined} blockade - active siege/occupation stressor gripping this settlement, or null
  * @param {{ now?: string }} [options]
  */
 export function applyBlockadeTransportImpairment(settlement, blockade, { now } = {}) {

@@ -318,9 +318,47 @@ const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];
 // ── Severity / band helpers ──────────────────────────────────────────────
 
 /**
+ * @typedef {{ elapsedTicks: number, expiresAtTicks: (number|null) }} ConditionDuration
+ * @typedef {{ tick: number, sourceEventType: (string|null), sourceEventTargetId: (string|null) }} ConditionTriggeredAt
+ */
+
+/**
+ * @typedef {Object} ActiveCondition
+ * @property {string} id
+ * @property {string} archetype
+ * @property {string} label
+ * @property {string} description
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} status
+ * @property {ConditionTriggeredAt} triggeredAt
+ * @property {ConditionDuration} duration
+ * @property {string[]} affectedSystems
+ * @property {any[]} causes
+ */
+
+/**
+ * @typedef {Object} ActiveConditionInput
+ * @property {string} [id]
+ * @property {string} [archetype]
+ * @property {string} [label]
+ * @property {string} [description]
+ * @property {number} [severity]
+ * @property {string} [status]
+ * @property {Partial<ConditionTriggeredAt>} [triggeredAt]
+ * @property {Partial<ConditionDuration>} [duration]
+ * @property {string[]} [affectedSystems]
+ * @property {any[]} [causes]
+ */
+
+/** @typedef {Record<string, any>} CondSettlement */
+
+/**
  * Map a 0..1 severity score to a band. Anything <0 returns 'low',
  * >1 returns 'critical'. Boundaries: ≥0.75 critical, ≥0.5 high, ≥0.25
  * medium, else low.
+ * @param {unknown} severity
+ * @returns {string}
  */
 export function severityBand(severity) {
   const s = typeof severity === 'number' ? severity : 0;
@@ -330,7 +368,11 @@ export function severityBand(severity) {
   return 'low';
 }
 
-/** Returns the default severity for a band — symmetric to severityBand. */
+/**
+ * Returns the default severity for a band — symmetric to severityBand.
+ * @param {string} band
+ * @returns {number}
+ */
 export function defaultSeverityForBand(band) {
   switch (band) {
     case 'critical': return 0.85;
@@ -346,16 +388,29 @@ export function defaultSeverityForBand(band) {
 // condition twice produces the same id) — falls back to a hash of the
 // archetype + label on first construction.
 
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {string} s
+ * @returns {string}
+ */
 function shortHash(s) {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
+/**
+ * @param {unknown} archetype
+ * @param {{ sourceEventId?: any, suffix?: any, label?: any, tick?: any }} [opts]
+ * @returns {string}
+ */
 export function conditionIdFromArchetype(archetype, opts = {}) {
   const arche = snakeCase(archetype || 'unknown');
   if (opts.sourceEventId) {
@@ -373,8 +428,8 @@ export function conditionIdFromArchetype(archetype, opts = {}) {
 // shapes, and inserts a stable id. Idempotent.
 
 /**
- * @param {Object} condition  Partial or already-canonical condition.
- * @returns {Object | null}    Canonical-shape condition, or null on bad input.
+ * @param {ActiveConditionInput | null | undefined} condition  Partial or already-canonical condition.
+ * @returns {ActiveCondition | null}    Canonical-shape condition, or null on bad input.
  */
 export function deriveActiveCondition(condition) {
   if (!condition || typeof condition !== 'object') return null;
@@ -383,7 +438,7 @@ export function deriveActiveCondition(condition) {
     ? condition.archetype
     : 'unknown';
 
-  const tmpl = CONDITION_ARCHETYPE_TEMPLATES[archetype] || null;
+  const tmpl = /** @type {Record<string, any>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype] || null;
 
   const severity = typeof condition.severity === 'number'
     ? Math.max(0, Math.min(1, condition.severity))
@@ -404,7 +459,7 @@ export function deriveActiveCondition(condition) {
       : condition.duration.expiresAtTicks,
   };
 
-  const status = VALID_STATUSES.has(condition.status)
+  const status = VALID_STATUSES.has(/** @type {string} */ (condition.status))
     ? condition.status
     : (tmpl ? tmpl.defaultStatus : 'stable');
 
@@ -436,18 +491,31 @@ export function deriveActiveCondition(condition) {
 }
 
 /** Derive every condition on a settlement. Returns []. for missing data. */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {ActiveCondition[]}
+ */
 export function deriveAllActiveConditions(settlement) {
   if (!settlement) return [];
   const arr = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  return arr.map(deriveActiveCondition).filter(Boolean);
+  return /** @type {ActiveCondition[]} */ (arr.map(deriveActiveCondition).filter(Boolean));
 }
 
-/** Flat archetype keys from canonical conditions. Used by Phase 15 advanceTime. */
+/**
+ * Flat archetype keys from canonical conditions. Used by Phase 15 advanceTime.
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function activeArchetypes(settlement) {
   return deriveAllActiveConditions(settlement).map(c => c.archetype);
 }
 
-/** Lookup by id OR by archetype. Returns the first match or null. */
+/**
+ * Lookup by id OR by archetype. Returns the first match or null.
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {any} idOrArchetype
+ * @returns {ActiveCondition | null}
+ */
 export function findActiveCondition(settlement, idOrArchetype) {
   if (!idOrArchetype) return null;
   const all = deriveAllActiveConditions(settlement);
@@ -463,6 +531,11 @@ export function findActiveCondition(settlement, idOrArchetype) {
  * Add (or overwrite) an active condition. If a condition with the same
  * id already exists it is replaced. Returns a new settlement.
  */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {ActiveConditionInput} partial
+ * @returns {any}
+ */
 export function withActiveCondition(settlement, partial) {
   if (!settlement) return settlement;
   const canonical = deriveActiveCondition(partial);
@@ -474,6 +547,11 @@ export function withActiveCondition(settlement, partial) {
 }
 
 /** Remove a condition by id. No-op if not found. Returns a new settlement. */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {any} conditionId
+ * @returns {any}
+ */
 export function withoutActiveCondition(settlement, conditionId) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
@@ -507,9 +585,13 @@ export function withoutActiveCondition(settlement, conditionId) {
  * deliberately excluded: generation re-derives its own, and world/regional
  * conditions belong to the campaign layer (worldPulse/reconcile.js).
  */
+/**
+ * @param {{ causes?: any[] } | null | undefined} condition
+ * @returns {boolean}
+ */
 export function isEventSourcedCondition(condition) {
   return Array.isArray(condition?.causes)
-    && condition.causes.some(c => c?.source === 'event');
+    && condition.causes.some((/** @type {any} */ c) => c?.source === 'event');
 }
 
 /**
@@ -519,6 +601,10 @@ export function isEventSourcedCondition(condition) {
  * the input settlement untouched when there is nothing to record and no
  * stale record to update, so no-op events and plain settlements stay
  * byte-identical.
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {any}
  */
 export function withEventConditionsSynced(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
@@ -531,13 +617,13 @@ export function withEventConditionsSynced(settlement) {
   // Both record copies hold canonical-shape conditions written by this same
   // projection (stable key order), so a JSON comparison is a reliable
   // already-in-sync check.
-  const synced = (rec) => JSON.stringify(rec) === JSON.stringify(projected);
+  const synced = (/** @type {any} */ rec) => JSON.stringify(rec) === JSON.stringify(projected);
   if ((config ? synced(config.eventConditions) : !projected.length)
     && (raw ? synced(raw.eventConditions) : true)) {
     return settlement;
   }
   const next = { ...settlement, config: { ...(settlement.config || {}), eventConditions: projected } };
-  if (raw) next._config = { ...raw, eventConditions: projected };
+  if (raw) /** @type {any} */ (next)._config = { ...raw, eventConditions: projected };
   return next;
 }
 
@@ -590,14 +676,19 @@ const EASING_SEVERITY_FLOOR = 0.05;
 // a condition's life.
 const EXPIRY_EASING_WINDOW_TICKS = 2;
 
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @param {string} interval
+ * @returns {any}
+ */
 export function withTickedConditionDurations(settlement, interval) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
   if (existing.length === 0) return settlement;
 
-  const increment = INTERVAL_TICK_INCREMENTS[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
+  const increment = /** @type {Record<string, number>} */ (INTERVAL_TICK_INCREMENTS)[interval] ?? INTERVAL_TICK_INCREMENTS.one_month;
 
-  const next = existing.map(c => {
+  const next = existing.map((/** @type {any} */ c) => {
     const canonical = deriveActiveCondition(c);
     if (!canonical) return c;
     const elapsedTicks = canonical.duration.elapsedTicks + increment;
@@ -606,7 +697,7 @@ export function withTickedConditionDurations(settlement, interval) {
     const windingDown = typeof cap === 'number'
       && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
     const driftStatus = windingDown ? 'easing' : c.status;
-    const driftPerTick = SEVERITY_DRIFT_PER_TICK[driftStatus] ?? 0;
+    const driftPerTick = /** @type {Record<string, number>} */ (SEVERITY_DRIFT_PER_TICK)[driftStatus] ?? 0;
     let severity = canonical.severity;
     if (driftPerTick > 0) {
       severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
@@ -638,6 +729,10 @@ export function withTickedConditionDurations(settlement, interval) {
  * `{ settlement, expired }`.
  *
  * @returns {{settlement: Object, expired: Array<Object>}}
+ */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {{ settlement: any, expired: ActiveCondition[] }}
  */
 export function withExpiredConditionsRemoved(settlement) {
   if (!settlement) return { settlement, expired: [] };
@@ -679,10 +774,17 @@ export function withExpiredConditionsRemoved(settlement) {
  *     summaryLines: [...],
  *   }
  */
+/**
+ * @param {CondSettlement | null | undefined} settlement
+ * @returns {{ count: number, byArchetype: Record<string, number>, bySeverityBand: Record<string, number>, summaryLines: string[] }}
+ */
 export function summarizeActiveConditions(settlement) {
   const all = deriveAllActiveConditions(settlement);
+  /** @type {Record<string, number>} */
   const byArchetype = {};
+  /** @type {Record<string, number>} */
   const bySeverityBand = { low: 0, medium: 0, high: 0, critical: 0 };
+  /** @type {string[]} */
   const summaryLines = [];
 
   for (const c of all) {
@@ -705,8 +807,12 @@ export function supportedConditionArchetypes() {
 }
 
 /** Catalog access — exposes the per-archetype defaults for UI/help text. */
+/**
+ * @param {string} archetype
+ * @returns {any}
+ */
 export function conditionArchetypeTemplate(archetype) {
-  return CONDITION_ARCHETYPE_TEMPLATES[archetype] || null;
+  return /** @type {Record<string, any>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype] || null;
 }
 
 /** Canonical severity band list. */

@@ -17,7 +17,10 @@
 import { classifyInstitution } from '../events/registry.js';
 import { inferImportance } from '../entities/npcs.js';
 
-/** Role sets per institution kind. The first entry is the senior office. */
+/**
+ * Role sets per institution kind. The first entry is the senior office.
+ * @type {Readonly<Record<string, ReadonlyArray<{ role: string, importance: string }>>>}
+ */
 export const INSTITUTION_ROLES = Object.freeze({
   religious:       [{ role: 'High Priest',    importance: 'pillar' }, { role: 'Priest',     importance: 'key' },     { role: 'Acolyte',    importance: 'notable' }],
   law_enforcement: [{ role: 'Watch Captain',  importance: 'pillar' }, { role: 'Sergeant',   importance: 'key' },     { role: 'Guard',      importance: 'notable' }],
@@ -39,14 +42,28 @@ export const FACTION_SEAT_ROLES = Object.freeze([
 
 const INFLUENCE_BY_IMPORTANCE = Object.freeze({ pillar: 85, key: 60, notable: 35, minor: 10 });
 
-/** Roles available at a given institution (derived from its kind). */
+/**
+ * @typedef {'pillar' | 'key' | 'notable' | 'minor'} RoleImportance
+ * @typedef {{ role: string, importance: string, seat?: string }} RoleEntry
+ * @typedef {import('../settlement.schema.js').Faction & { internalSeats: Record<string, unknown> }} FactionWithSeats
+ */
+
+/**
+ * Roles available at a given institution (derived from its kind).
+ * @param {import('../settlement.schema.js').Institution | null | undefined} institution
+ * @returns {readonly RoleEntry[]}
+ */
 export function rolesForInstitution(institution) {
   if (!institution) return [];
   const kind = classifyInstitution(institution.name || institution.id || '');
   return INSTITUTION_ROLES[kind] || INSTITUTION_ROLES.other;
 }
 
-/** Roles (seats) available within a faction. */
+/**
+ * Roles (seats) available within a faction.
+ * @param {FactionWithSeats | null | undefined} faction
+ * @returns {readonly RoleEntry[]}
+ */
 export function rolesForFaction(faction) {
   const seats = faction?.internalSeats && Object.keys(faction.internalSeats).length
     ? FACTION_SEAT_ROLES.filter(r => r.seat in faction.internalSeats)
@@ -58,6 +75,9 @@ export function rolesForFaction(faction) {
  * The importance tier implied by a role. Matches against the supplied role
  * list first (the authoritative source), then falls back to the name-pattern
  * inference used elsewhere so a free-typed role still gets a sensible tier.
+ * @param {string | null | undefined} roleLabel
+ * @param {readonly RoleEntry[]} [roles]
+ * @returns {string | null}
  */
 export function importanceForRole(roleLabel, roles = []) {
   if (!roleLabel) return null;
@@ -66,7 +86,11 @@ export function importanceForRole(roleLabel, roles = []) {
   return inferImportance({ role: roleLabel });
 }
 
-/** A default 0-100 influence for an importance tier. */
+/**
+ * A default 0-100 influence for an importance tier.
+ * @param {RoleImportance} importance
+ * @returns {number | null}
+ */
 export function influenceForImportance(importance) {
   return INFLUENCE_BY_IMPORTANCE[importance] ?? null;
 }

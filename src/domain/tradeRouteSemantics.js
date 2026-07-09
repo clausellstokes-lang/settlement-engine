@@ -39,6 +39,7 @@ const TIER_DELTAS = Object.freeze({
  * Raw route value → canonical tier. Covers the values generation actually emits
  * AND the legacy major/minor/standard/none vocabulary the old readers branched on.
  */
+/** @type {Readonly<Record<string, 'major'|'standard'|'isolated'>>} */
 const ROUTE_TIER = Object.freeze({
   // Real generated values
   crossroads: 'major',     // multi-route hub
@@ -54,13 +55,20 @@ const ROUTE_TIER = Object.freeze({
   none:       'isolated',
 });
 
-/** @returns {'major'|'standard'|'isolated'|'unknown'} the canonical tier for a route value. */
+/**
+ * @param {string|null|undefined} value raw trade-route value
+ * @returns {'major'|'standard'|'isolated'|'unknown'} the canonical tier for a route value.
+ */
 export function tradeRouteTier(value) {
   if (!value) return 'unknown';
   return ROUTE_TIER[String(value).toLowerCase()] || 'unknown';
 }
 
-/** True when the route is isolated/none (no real regional connection). */
+/**
+ * True when the route is isolated/none (no real regional connection).
+ * @param {string|null|undefined} value raw trade-route value
+ * @returns {boolean}
+ */
 export function isIsolatedRoute(value) {
   return tradeRouteTier(value) === 'isolated';
 }

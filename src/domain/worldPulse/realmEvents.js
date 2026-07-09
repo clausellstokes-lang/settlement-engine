@@ -76,6 +76,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
   },
 ]);
 
+/** @type {Readonly<Record<string, string>>} */
 const REALM_LABELS = Object.freeze({
   famine: 'The Great Hunger',
   siege: 'The War',

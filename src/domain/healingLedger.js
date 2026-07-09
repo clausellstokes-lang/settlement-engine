@@ -36,7 +36,14 @@ export const HEALING_INSTITUTION_PATTERN =
  */
 
 /**
- * @param {Object} settlement
+ * @typedef {Object} HealingSettlementView
+ * @property {Array<{name?: string}>} [institutions]
+ * @property {{availableServices?: {healing?: string[]}}} [economicState]
+ * @property {{healing?: string[]}} [availableServices]
+ */
+
+/**
+ * @param {HealingSettlementView} [settlement]
  * @returns {HealingLedger}
  */
 export function healingLedger(settlement) {

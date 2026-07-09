@@ -20,8 +20,35 @@ const HONEST_DOMINANT = Object.freeze(['diligent', 'earnest', 'principled', 'vig
 const HONEST_FLAW = Object.freeze(['stubborn', 'proud', 'aloof', 'blunt', 'rigid', 'severe']);
 const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal — determined to stay above suspicion.';
 
-/** Build a fresh successor for an ousted NPC, inheriting their seat. */
+/**
+ * @typedef {Object} SuccessorRng
+ * @property {(arr: readonly string[]) => string} [pick]
+ * @property {(min: number, max: number) => number} [randInt]
+ * @property {(label: string) => SuccessorRng} [fork]
+ */
+
+/**
+ * @typedef {Object} OustedNpc
+ * @property {string} [name]
+ * @property {string} [role]
+ * @property {string} [category]
+ * @property {string} [factionAffiliation]
+ * @property {string} [factionLink]
+ * @property {string} [institutionId]
+ * @property {*} [importance]
+ * @property {{ modifier?: *, tell?: *, speech?: * }} [personality]
+ * @property {{ short?: string, long?: string }} [goal]
+ * @property {*} [power]
+ * @property {*} [influence]
+ */
+
+/**
+ * Build a fresh successor for an ousted NPC, inheriting their seat.
+ * @param {OustedNpc} [ousted]
+ * @param {SuccessorRng} [rng]
+ */
 export function successorNpc(ousted = {}, rng) {
+  /** @param {readonly string[]} arr */
   const pick = (arr) => (rng && rng.pick ? rng.pick(arr) : arr[0]);
   const num = rng && rng.randInt ? rng.randInt(100000, 999999) : 100000;
   return {
@@ -52,6 +79,11 @@ export function successorNpc(ousted = {}, rng) {
 /**
  * Replace any NPC named in `oustedNames` with a fresh successor (same seat).
  * Pure; returns the same settlement reference when there's nothing to replace.
+ */
+/**
+ * @param {{ npcs?: OustedNpc[] } | null | undefined} settlement
+ * @param {unknown[]} oustedNames
+ * @param {SuccessorRng} [rng]
  */
 export function replaceOustedNpcs(settlement, oustedNames, rng) {
   const names = new Set((oustedNames || []).map((n) => String(n).toLowerCase()).filter(Boolean));

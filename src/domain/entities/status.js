@@ -49,7 +49,21 @@
  *  @property {string} causeEventId    timeline link — supports undo and replay
  *  @property {string=} description    human-readable, surfaced in UI/PDF (optional —
  *                                     auto-generated from propagation if absent)
- *  @property {string=} appliedAt      ISO timestamp
+ *  @property {(string|null)=} appliedAt  ISO timestamp; explicitly null when applied
+ *                                     inside the pure event pipeline (no wall clock)
+ */
+
+/**
+ * Minimal structural shape of anything that can carry a status and
+ * impairments — institutions, factions, and NPCs all qualify. `status`
+ * is a string (not the EntityStatus union) because NPCs use their own
+ * lifecycle vocabulary ('dead' | 'missing' | …, see entities/npcs.js
+ * NpcStatus) while institutions/factions use EntityStatus; both flow
+ * through these helpers.
+ *
+ * @typedef {Object} StatusEntity
+ * @property {string=} status
+ * @property {Impairment[]=} impairments
  */
 
 /** Default status when no impairments exist. */
@@ -86,7 +100,7 @@ export function mkImpairment(type, severity, causeEventId, description) {
  * Status field on the entity wins if it's a removal/destruction state;
  * otherwise impairments determine impaired vs active.
  *
- * @param {Object} entity   institution/faction/npc with optional `status` and `impairments`
+ * @param {StatusEntity | null | undefined} entity   institution/faction/npc with optional `status` and `impairments`
  * @returns {EntityStatus}
  */
 export function effectiveStatus(entity) {
@@ -106,9 +120,10 @@ export function effectiveStatus(entity) {
  * Returns a new entity object — never mutates the input. The pipeline
  * uses this to compose patches; the store reducer applies them.
  *
- * @param {Object} entity
+ * @template {StatusEntity} T
+ * @param {T} entity
  * @param {Impairment} impairment
- * @returns {Object} new entity
+ * @returns {T} new entity
  */
 export function withImpairment(entity, impairment) {
   if (!entity) return entity;
@@ -136,6 +151,11 @@ export function withImpairment(entity, impairment) {
 /**
  * Remove all impairments produced by a given event id — the inverse of
  * withImpairment. Used by undoLastEvent to restore prior state.
+ *
+ * @template {StatusEntity} T
+ * @param {T} entity
+ * @param {string} causeEventId
+ * @returns {T} new entity
  */
 export function withoutEventImpairments(entity, causeEventId) {
   if (!entity) return entity;
@@ -155,6 +175,10 @@ export function withoutEventImpairments(entity, causeEventId) {
  *
  * Compounding rule: combined = 1 - prod(1 - s_i). Two 0.5 impairments
  * yield 0.75, not 1.0 — preserves "still has some capacity."
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @param {ImpairmentType | string} type   dimension to aggregate
+ * @returns {number} combined severity, 0-1 (3 decimal places)
  */
 export function severityFor(entity, type) {
   const impairments = (entity?.impairments || []).filter(i => i.type === type);
@@ -164,6 +188,10 @@ export function severityFor(entity, type) {
   return Number((1 - surviving).toFixed(3));
 }
 
+/**
+ * @param {number} v
+ * @returns {number}
+ */
 function clamp01(v) {
   if (!Number.isFinite(v)) return 0;
   if (v < 0) return 0;
@@ -174,6 +202,9 @@ function clamp01(v) {
 /**
  * True if the entity is at full capacity with no impairments.
  * Convenient predicate for UI rendering ("show damaged badge?").
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @returns {boolean}
  */
 export function isFullyActive(entity) {
   return effectiveStatus(entity) === STATUS_ACTIVE;

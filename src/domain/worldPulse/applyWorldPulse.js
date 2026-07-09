@@ -26,10 +26,85 @@ import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
 
+/**
+ * @typedef {Object} ProposalPayload
+ * @property {string} [kind]
+ * @property {string} [relationshipKey]
+ * @property {string} [toType]
+ * @property {string} [reason]
+ */
+
+/**
+ * A world-pulse outcome. Assembled across many generators (population, tier,
+ * resource, institution, relationship, npc, faction, stressor, ...), so most
+ * fields are situational (all optional).
+ * @typedef {Object} Outcome
+ * @property {string} [id]
+ * @property {string} [type]
+ * @property {string} [candidateType]
+ * @property {string} [applyMode]
+ * @property {string} [headline]
+ * @property {string} [appliedHeadline]
+ * @property {string} [summary]
+ * @property {number} [severity]
+ * @property {string} [targetSaveId]
+ * @property {string} [relationshipKey]
+ * @property {string[]} [affectedSettlementIds]
+ * @property {string[]} [reasons]
+ * @property {boolean} [partySourced]
+ * @property {*} [tierChange]
+ * @property {*} [resourcePatch]
+ * @property {*} [institutionPatch]
+ * @property {*} [condition]
+ * @property {*} [relationshipPatch]
+ * @property {ProposalPayload} [proposalPayload]
+ * @property {{ toPowerName?: string, cause?: string, tick?: number|null, losers?: any[] }} [powerTransfer]
+ * @property {{ id?: string, type?: string, originContext?: any }} [stressor]
+ * @property {Array<{ saveId?: string }>} [populationDeltas]
+ */
+
+/**
+ * @typedef {Object} NewsEntry
+ * @property {string} [id]
+ * @property {number} [tick]
+ * @property {string} [scope]
+ * @property {string} [significance]
+ * @property {number} [score]
+ * @property {string} [headline]
+ * @property {string} [summary]
+ * @property {string} [kind]
+ * @property {string} [impactKind]
+ * @property {*} [channelType]
+ * @property {number} [severity]
+ * @property {Array<string | undefined>} [settlementIds]
+ * @property {string[]} [impactIds]
+ * @property {string[]} [channelIds]
+ * @property {string} [sourceEventId]
+ * @property {Array<string | undefined>} [tags]
+ * @property {string[]} [reasons]
+ */
+
+/**
+ * @typedef {Object} AwpRegionalEdge
+ * @property {string} [id]
+ * @property {string} [from]
+ * @property {string} [to]
+ * @property {string} [type]
+ * @property {string} [relationshipType]
+ */
+
+/**
+ * @typedef {Object} RegionalGraph
+ * @property {AwpRegionalEdge[]} [edges]
+ * @property {any[]} [queuedImpacts]
+ */
+
+/** @param {*} value */
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
 }
 
+/** @param {*} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
@@ -88,6 +163,7 @@ const APPLIED_HEADLINE_REWRITES = [
   [/\bmay undermine rival\b/, 'undermines rival'],
 ];
 
+/** @param {Outcome} outcome */
 function appliedHeadlineFor(outcome) {
   if (outcome.appliedHeadline) return outcome.appliedHeadline;
   const headline = outcome.headline || '';
@@ -97,9 +173,14 @@ function appliedHeadlineFor(outcome) {
   return headline;
 }
 
+/**
+ * @param {Outcome} outcome
+ * @param {number} [tick]
+ * @param {string} [status]
+ */
 function newsEntryForOutcome(outcome, tick, status = 'applied') {
   const scope = (outcome.affectedSettlementIds || []).length >= 3 ? 'realm' : outcome.relationshipKey ? 'regional' : 'settlement';
-  let major = outcome.applyMode === 'proposal' || outcome.severity >= 0.72 || (outcome.affectedSettlementIds || []).length >= 3;
+  let major = outcome.applyMode === 'proposal' || /** @type {number} */ (outcome.severity) >= 0.72 || (outcome.affectedSettlementIds || []).length >= 3;
   // Significance honesty: NPC micro-posturing (npc_* candidateTypes at
   // settlement scope, below the severity bar) never exceeds 'notable' — a
   // courtier's manoeuvre is not 'major' just because it routes as a proposal.
@@ -145,6 +226,7 @@ const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
 // migration (propagation) — exempts the outcome from suppression. Drift-only
 // is what remains: pure npc/faction posturing patches and single-settlement
 // population drift.
+/** @param {Outcome} outcome */
 function isDriftOnlyOutcome(outcome) {
   // Party-sourced outcomes are deliberate DM action, never drift: every
   // outcome partyImpact.js builds is stamped partySourced, and a repeated
@@ -160,14 +242,21 @@ function isDriftOnlyOutcome(outcome) {
   return (outcome.populationDeltas || []).length <= 1;
 }
 
+/** @param {unknown[]} [reasons] */
 function curationReasonsKey(reasons) {
   return JSON.stringify([...new Set((reasons || []).filter(Boolean).map(String))]);
 }
 
+/** @param {unknown[]} [settlementIds] */
 function curationSettlementsKey(settlementIds) {
   return JSON.stringify([...new Set((settlementIds || []).map(String))].sort());
 }
 
+/**
+ * @param {NewsEntry} entry
+ * @param {NewsEntry[]} priorEntries
+ * @param {number} [tick]
+ */
 function isMetronomeRepeat(entry, priorEntries, tick) {
   const idsKey = curationSettlementsKey(entry.settlementIds);
   const reasonsKey = curationReasonsKey(entry.reasons);
@@ -179,13 +268,14 @@ function isMetronomeRepeat(entry, priorEntries, tick) {
   // metronomes keep constant headlines, so intended suppression survives.
   return priorEntries.some(prior =>
     prior.kind === 'applied'
-    && tick - (prior.tick ?? -Infinity) < DRIFT_REEMIT_COOLDOWN_TICKS
+    && /** @type {number} */ (tick) - (prior.tick ?? -Infinity) < DRIFT_REEMIT_COOLDOWN_TICKS
     && prior.impactKind === entry.impactKind
     && prior.headline === entry.headline
     && curationSettlementsKey(prior.settlementIds) === idsKey
     && curationReasonsKey(prior.reasons) === reasonsKey);
 }
 
+/** @param {Outcome} outcome */
 function affectedSaveIdsForOutcome(outcome) {
   const ids = new Set();
   for (const delta of outcome.populationDeltas || []) {
@@ -197,6 +287,11 @@ function affectedSaveIdsForOutcome(outcome) {
   return [...ids];
 }
 
+/**
+ * @param {*} settlement
+ * @param {Outcome} outcome
+ * @param {string} saveId
+ */
 function applyOutcomeToSettlement(settlement, outcome, saveId) {
   if (!settlement || !outcome) return settlement;
   let next = settlement;
@@ -218,8 +313,8 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   // is gone, or already governs) safely no-ops; the condition below still
   // records the turmoil.
   if (outcome.powerTransfer && String(outcome.targetSaveId) === String(saveId)) {
-    const result = transferRulingPower(next, outcome.powerTransfer.toPowerName, {
-      cause: outcome.powerTransfer.cause || 'coup',
+    const result = transferRulingPower(next, /** @type {string} */ (outcome.powerTransfer.toPowerName), {
+      cause: /** @type {'coup' | 'election' | 'succession' | 'conquest' | 'appointment'} */ (outcome.powerTransfer.cause || 'coup'),
       tick: outcome.powerTransfer.tick ?? null,
       losers: outcome.powerTransfer.losers || [],
     });
@@ -231,6 +326,10 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   return next;
 }
 
+/**
+ * @param {*} beforeSettlement
+ * @param {*} afterSettlement
+ */
 function settlementChanged(beforeSettlement, afterSettlement) {
   if (beforeSettlement === afterSettlement) return false;
   try {
@@ -240,6 +339,10 @@ function settlementChanged(beforeSettlement, afterSettlement) {
   }
 }
 
+/**
+ * @param {{ saveId?: string, save?: { name?: string } }} entry
+ * @param {{ name?: string }} [settlement]
+ */
 function saveLike(entry, settlement) {
   return {
     id: String(entry.saveId),
@@ -248,12 +351,17 @@ function saveLike(entry, settlement) {
   };
 }
 
+/**
+ * @param {any} graph
+ * @param {Outcome} outcome
+ * @param {string} [now]
+ */
 function applyRelationshipLabelToGraph(graph, outcome, now) {
   if (outcome.proposalPayload?.kind !== 'relationship_label_change') return graph;
   const { relationshipKey, toType } = outcome.proposalPayload;
   return {
     ...graph,
-    edges: (graph.edges || []).map(edge => {
+    edges: (graph.edges || []).map((/** @type {any} */ edge) => {
       if (relationshipKeyFromEdge(edge) !== relationshipKey) return edge;
       return {
         ...edge,
@@ -265,10 +373,14 @@ function applyRelationshipLabelToGraph(graph, outcome, now) {
   };
 }
 
+/**
+ * @param {any} graph
+ * @param {Outcome} outcome
+ */
 function relationshipEdgeForOutcome(graph, outcome) {
   const key = outcome.proposalPayload?.relationshipKey || outcome.relationshipKey;
   if (!key) return null;
-  return (graph.edges || []).find(edge => relationshipKeyFromEdge(edge) === key) || null;
+  return (graph.edges || []).find((/** @type {any} */ edge) => relationshipKeyFromEdge(edge) === key) || null;
 }
 
 /**
@@ -281,6 +393,10 @@ function relationshipEdgeForOutcome(graph, outcome) {
  * so channels and dossiers assert the real hierarchy. Symmetric labels and
  * unstamped (DM-authored) hierarchy edges resolve as not-reversed and pass
  * through untouched.
+ */
+/**
+ * @param {Record<string, any> | null | undefined} edge
+ * @param {*} relState
  */
 function roleOrientedEdge(edge, relState) {
   if (!edge || !relationshipRoles(edge, relState).reversed) return edge;
@@ -303,6 +419,9 @@ function roleOrientedEdge(edge, relState) {
  * pulse; a pair with an un-saved end leaves neighbourNetwork untouched (we
  * cannot reconcile the reciprocal link of a settlement we are not carrying).
  */
+/**
+ * @param {{ settlementUpdates: Map<string, any>, edge: any, toType?: string, tick?: number }} args
+ */
 function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, toType, tick }) {
   if (!edge?.from || !edge?.to || !toType) return;
   const fromId = String(edge.from);
@@ -320,9 +439,11 @@ function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, to
     const network = Array.isArray(entry.settlement?.neighbourNetwork) ? entry.settlement.neighbourNetwork : [];
     if (!network.length) continue;
     const otherName = otherEntry.save?.name || otherEntry.settlement?.name || null;
-    const role = rolesForCanonicalEdge(labelled, selfId).sourceRole;
+    // rolesForCanonicalEdge's 3rd param (_targetId) is unused; typedef marks it
+    // required, so front the call with a 2-arg view to match the actual usage.
+    const role = /** @type {(edge: any, sourceId: any) => any} */ (rolesForCanonicalEdge)(labelled, selfId).sourceRole;
     let touched = false;
-    const next = network.map(link => {
+    const next = network.map((/** @type {any} */ link) => {
       const matches = String(link?.id || '') === otherId
         || String(link?.targetId || '') === otherId
         || String(link?.settlementId || '') === otherId
@@ -357,6 +478,9 @@ function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, to
  * emits Wizard News — the realignment is major campaign politics, not a
  * silent field rewrite. One entry per flipped edge, naming both settlements
  * and the flip.
+ */
+/**
+ * @param {{ cascade: any, edge: any, nameFor: (id: any) => string, outcome: Outcome, tick?: number }} args
  */
 function cascadeNewsEntry({ cascade, edge, nameFor, outcome, tick }) {
   const edgeKey = cascade.edgeKey || cascade.relationshipKey;
@@ -398,6 +522,9 @@ const IMPORTANCE_RANK = Object.freeze({ pillar: 3, key: 2, notable: 1 });
  * name as tiebreak. Covert by design: no news entry — the DM finds the
  * corrupt flag in the dossier, the table finds it the hard way.
  */
+/**
+ * @param {{ state: any, settlementUpdates: Map<string, any>, saveId?: string, originContext: any }} args
+ */
 function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext }) {
   const sid = String(saveId || '');
   const entry = settlementUpdates.get(sid);
@@ -411,7 +538,7 @@ function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext }
   // traitor, and default-locale collation can reorder accented names across
   // machines, breaking replay determinism.
   eligible.sort((a, b) => {
-    const rank = (IMPORTANCE_RANK[b.npc.importance] || 0) - (IMPORTANCE_RANK[a.npc.importance] || 0);
+    const rank = (IMPORTANCE_RANK[/** @type {keyof typeof IMPORTANCE_RANK} */ (b.npc.importance)] || 0) - (IMPORTANCE_RANK[/** @type {keyof typeof IMPORTANCE_RANK} */ (a.npc.importance)] || 0);
     if (rank) return rank;
     const an = String(a.npc.name || '');
     const bn = String(b.npc.name || '');
@@ -487,7 +614,7 @@ export function applyWorldPulseOutcomes({
   if (advanceNewsTick) {
     feed = {
       ...feed,
-      currentTick: Number.isFinite(tick) ? Math.max(0, Math.floor(tick)) : feed.currentTick + 1,
+      currentTick: Number.isFinite(tick) ? Math.max(0, Math.floor(/** @type {number} */ (tick))) : feed.currentTick + 1,
     };
   }
   const settlementUpdates = new Map(settlementMap ? [...settlementMap.entries()] : []);
@@ -509,7 +636,7 @@ export function applyWorldPulseOutcomes({
   for (const outcome of outcomes) {
     if (outcome.applyMode === 'proposal') {
       const proposal = {
-        id: proposalIdFor(outcome, tick),
+        id: proposalIdFor(outcome, /** @type {number} */ (tick)),
         status: 'pending',
         createdAt: now,
         updatedAt: now,
@@ -539,7 +666,7 @@ export function applyWorldPulseOutcomes({
           graph,
           beforeSettlement: saveLike(entry, beforeSettlement),
           afterSettlement: saveLike(entry, afterSettlement),
-          event: {
+          event: /** @type {any} */ ({
             id: outcome.id,
             type: 'WORLD_PULSE',
             targetId: saveId,
@@ -548,9 +675,9 @@ export function applyWorldPulseOutcomes({
               candidateType: outcome.candidateType,
               outcomeType: outcome.type,
             },
-          },
+          }),
           activeSettlementId: outcome.targetSaveId || saveId,
-          visibleSettlementIds: snapshot.settlements.map(item => item.id),
+          visibleSettlementIds: snapshot.settlements.map((/** @type {any} */ item) => item.id),
           maxDepth: propagationDepth,
           now,
         });
@@ -564,7 +691,9 @@ export function applyWorldPulseOutcomes({
       // know the edge WAS hostile before this outcome rewrote it.
       const beforeEdge = relationshipEdgeForOutcome(graph, outcome);
       const beforeType = beforeEdge ? String(beforeEdge.relationshipType || beforeEdge.type || '') : null;
-      state = applyRelationshipPatch(state, outcome, now);
+      // applyRelationshipPatch types its `now` param as number, but every
+      // caller (and this one) passes the ISO string clock — front it as-is.
+      state = applyRelationshipPatch(state, outcome, /** @type {any} */ (now));
       graph = applyRelationshipLabelToGraph(graph, outcome, now);
       if (outcome.proposalPayload?.kind === 'relationship_label_change') {
         const edge = relationshipEdgeForOutcome(graph, outcome);
@@ -614,8 +743,8 @@ export function applyWorldPulseOutcomes({
             // H15: every flipped third-party edge emits Wizard News (one
             // entry per cascade change, naming both settlements + the flip).
             const settlementNameById = new Map((snapshot.settlements || [])
-              .map(item => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
-            const nameFor = id => settlementNameById.get(String(id)) || String(id ?? 'unknown');
+              .map((/** @type {any} */ item) => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
+            const nameFor = (/** @type {any} */ id) => settlementNameById.get(String(id)) || String(id ?? 'unknown');
             // T1's cascadeChanges shape and the legacy hierarchy.changes shape
             // share fromType/toType/reason but key the edge differently — the
             // union defeats the checker, so normalize through `any` here.
@@ -638,11 +767,11 @@ export function applyWorldPulseOutcomes({
         // instead of leaving them to bleed out at 0.02/tick while the former
         // belligerents trade politely.
         if (beforeType === 'hostile' && outcome.proposalPayload.toType !== 'hostile') {
-          const wind = windDownSponsoredStressors(state, beforeEdge || edge, {
+          const wind = windDownSponsoredStressors(state, beforeEdge || edge, /** @type {any} */ ({
             tick,
             now,
             toType: outcome.proposalPayload.toType,
-          });
+          }));
           state = wind.worldState;
           for (const stressor of wind.woundDown) {
             newsEntries.push({
@@ -671,7 +800,7 @@ export function applyWorldPulseOutcomes({
     if (outcome.type === 'npc') state = applyNpcPatch(state, outcome);
     if (outcome.type === 'faction') state = applyFactionPatch(state, outcome);
     if (outcome.type === 'stressor' && outcome.stressor) {
-      const byId = new Map((state.stressors || []).map(stressor => [stressor.id, stressor]));
+      const byId = new Map((state.stressors || []).map((/** @type {any} */ stressor) => [stressor.id, stressor]));
       // Birth time is sacred: escalation/spread re-upserts the same record,
       // so the FIRST createdAt wins (the crisis was born once) while
       // updatedAt moves with every touch.
@@ -696,7 +825,7 @@ export function applyWorldPulseOutcomes({
     // built from the selected set upstream) records every outcome regardless.
     const appliedEntry = newsEntryForOutcome(outcome, tick, 'applied');
     if (!isDriftOnlyOutcome(outcome)
-        || !isMetronomeRepeat(appliedEntry, [...feed.entries, ...newsEntries], tick)) {
+        || !isMetronomeRepeat(appliedEntry, /** @type {NewsEntry[]} */ ([...feed.entries, ...newsEntries]), tick)) {
       newsEntries.push(appliedEntry);
     }
   }
@@ -719,7 +848,7 @@ export function applyWorldPulseOutcomes({
       if (!entry?.settlement) continue;
       const conditionId = impact.conditionId || legacyRegionalConditionId(impact);
       const conditions = Array.isArray(entry.settlement.activeConditions) ? entry.settlement.activeConditions : [];
-      if (conditions.some(condition => condition?.id === conditionId)) continue;
+      if (conditions.some((/** @type {any} */ condition) => condition?.id === conditionId)) continue;
       // R4: now threads through to updatedAt too, not just resolvedAt —
       // replay stamps no wall-clock time anywhere on the reconciled row.
       graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now }, { now });
@@ -751,7 +880,7 @@ export function applyWorldPulseOutcomes({
  * @param {string} [args.now]
  */
 export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow() } = {}) {
-  const proposal = (campaign?.worldState?.proposals || []).find(item => item.id === proposalId);
+  const proposal = (campaign?.worldState?.proposals || []).find((/** @type {any} */ item) => item.id === proposalId);
   if (!proposal || proposal.status !== 'pending') return null;
   const outcome = { ...(proposal.outcome || {}), applyMode: 'auto' };
   const settlementMap = new Map((saves || []).map(save => [String(save.id || save.settlement?.id), { saveId: String(save.id || save.settlement?.id), save, settlement: save.settlement || save }]));
@@ -764,7 +893,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     snapshot,
     // updatedAt threaded explicitly: updateProposalStatus falls back to the
     // wall clock for it, which would break replay-identical worldState.
-    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now }),
+    worldState: updateProposalStatus(campaign.worldState, /** @type {string} */ (proposalId), 'applied', { appliedAt: now, updatedAt: now }),
     regionalGraph: campaign.regionalGraph,
     wizardNews: campaign.wizardNews,
     settlementMap,
@@ -775,6 +904,6 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     advanceRegionalImpacts: false,
     simulationRules: campaign.worldState?.simulationRules,
   });
-  result.worldState = updateProposalStatus(result.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now });
+  result.worldState = updateProposalStatus(result.worldState, /** @type {string} */ (proposalId), 'applied', { appliedAt: now, updatedAt: now });
   return result;
 }

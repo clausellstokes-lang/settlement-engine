@@ -65,10 +65,87 @@ import { sanitizeRelationshipMemoryContext as sanitizeWorldPulseRelationshipMemo
 import { canonBreakdown, tagEntityCanon } from './canonStatus.js';
 import { walkUserEdits } from './userEdits.js';
 
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {import('./canonStatus.js').CanonSource} CanonSource */
+/** @typedef {import('./canonStatus.js').CanonStatus} CanonStatus */
+/** @typedef {import('./canonStatus.js').CanonTaggable} CanonTaggable */
+/** @typedef {import('./capacityModel.js').CapacityBand} CapacityBand */
+
+/**
+ * Settlement shape as this composer reads it directly. Everything else
+ * flows through the Tier 2-5 derivations, which accept the full object.
+ * @typedef {import('./dailyLife.js').DailyLifeSettlement & {
+ *   id?: string,
+ *   name?: string,
+ *   tier?: string,
+ *   _seed?: string,
+ *   schemaVersion?: number,
+ *   simulationVersion?: number,
+ *   population?: number | {total?: number} | null,
+ *   institutions?: Array<import('./dailyLife.js').InstitutionLike & CanonTaggable>,
+ *   npcs?: Array<CanonTaggable|null>,
+ *   activeConditions?: Array<CanonTaggable|null>,
+ *   eventLog?: Array<CanonTaggable|null>,
+ *   powerStructure?: {
+ *     governingName?: string,
+ *     governingFactionName?: string,
+ *     publicLegitimacy?: {score?: unknown, label?: unknown} | number | null,
+ *     factions?: Array<import('./factionProfile.js').FactionLike & CanonTaggable>,
+ *   },
+ * }} AiSettlement
+ */
+
+/**
+ * Magic facets as deriveMagicProfile (magicProfile.js, still untyped)
+ * returns them.
+ * @typedef {Object} MagicProfileLike
+ * @property {boolean} [magicExists]
+ * @property {string} availability
+ * @property {string} legality
+ * @property {string} institutionalControl
+ * @property {string} cost
+ * @property {string} risk
+ * @property {string} religiousAcceptance
+ * @property {Record<string, string>} roles
+ */
+
+/**
+ * A locked-entity reference in the constraints block.
+ * @typedef {Object} LockedEntityRef
+ * @property {string} id
+ * @property {string} type
+ * @property {string} label
+ * @property {CanonSource} source
+ * @property {CanonStatus} canonStatus
+ */
+
+/**
+ * The grounding payload fields the section assembler + summarizer read.
+ * (The full envelope is documented in the module header.)
+ * @typedef {Object} AiGroundingPayloadLike
+ * @property {{name?: string|null, tier?: string|null, population?: number|{total?: number}|null}|null} [identity]
+ * @property {{substrate?: Record<string, string>, capacities?: Record<string, string>}} [bands]
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [chains]
+ * @property {unknown[]} [conditions]
+ * @property {unknown[]} [threats]
+ * @property {unknown[]} [npcs]
+ * @property {unknown[]} [hooks]
+ * @property {unknown[]} [contradictions]
+ * @property {unknown[]} [districts]
+ * @property {{relationships?: unknown[]}|null} [relationshipMemory]
+ * @property {{forbidden?: string[], lockedEntities?: unknown[], userDirection?: string|null}} [constraints]
+ */
+
 // Surface the user's hand-authored values verbatim in the grounding
 // payload. The structured profile sections strip prose down to typed
 // fields, so the AI wouldn't see the actual edited text without this
 // dedicated section.
+/**
+ * @param {AiSettlement | null | undefined} settlement
+ * @returns {Array<{kind: string, entityIndex: number|null, label: string, path: string, value: unknown, editedAt: string|null}>}
+ */
 function collectUserEditsSummary(settlement) {
   if (!settlement) return [];
   return walkUserEdits(settlement).map(({ kind, entityIndex, entity, path, record }) => ({
@@ -99,7 +176,12 @@ const CANONICAL_CAPACITY_LENSES = Object.freeze([
   'magical',
 ]);
 
+/**
+ * @param {Record<string, CapacityBand> | null | undefined} bands
+ * @returns {Record<string, CapacityBand>}
+ */
 function canonicalCapacityBands(bands) {
+  /** @type {Record<string, CapacityBand>} */
   const out = {};
   for (const name of CANONICAL_CAPACITY_LENSES) {
     if (bands && bands[name] !== undefined) out[name] = bands[name];
@@ -116,7 +198,13 @@ function canonicalCapacityBands(bands) {
 // both surfaces ground on the one Tier 4.8 derivation. Dead-magic worlds
 // carry magicExists:false with the profile's honest 'absent' bands (W5#3).
 
+/**
+ * @param {AiSettlement} settlement
+ * @returns {(MagicProfileLike & {magicExists: boolean}) | null}
+ */
 function magicGroundingFacets(settlement) {
+  /** @type {MagicProfileLike | null} */
+  // @ts-ignore -- deriveMagicProfile (magicProfile.js, owned elsewhere) still returns {Object}; inert once it is typed.
   const m = deriveMagicProfile(settlement);
   if (!m) return null;
   return {
@@ -147,10 +235,19 @@ const DEFAULT_OPTIONS = Object.freeze({
 // locked, anything committed via an event (those are timeline-anchored).
 // We walk the settlement's tagged entity arrays and collect references.
 
+/**
+ * @param {AiSettlement | null | undefined} settlement
+ * @returns {LockedEntityRef[]}
+ */
 function collectLockedEntities(settlement) {
+  /** @type {LockedEntityRef[]} */
   const out = [];
   if (!settlement) return out;
 
+  // Entities are read with caller-supplied dynamic keys (idKey/nameKey), so
+  // the element type is an open record — the walked arrays are heterogeneous
+  // legacy shapes and every read is defensively defaulted.
+  /** @type {(arr: Array<Record<string, any>|null> | undefined, type: string, idKey?: string, nameKey?: string, _tagSettlement?: object) => void} */
   const collect = (arr, type, idKey = 'id', nameKey = 'name', _tagSettlement) => {
     if (!Array.isArray(arr)) return;
     for (const entity of arr) {
@@ -191,7 +288,12 @@ const STATIC_FORBIDDEN = Object.freeze([
   'Removing or replacing any entity tagged as user-authored.',
 ]);
 
+/**
+ * @param {AiSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function forbiddenChanges(settlement) {
+  /** @type {string[]} */
   const out = [...STATIC_FORBIDDEN];
   if (!settlement) return out;
 
@@ -227,12 +329,20 @@ export function forbiddenChanges(settlement) {
 // prompt budget without much benefit. We sort by severity (critical →
 // high → medium → low) and clip to the top N.
 
+/** @type {Record<string, number>} */
 const HOOK_SEVERITY_ORDER = { critical: 4, high: 3, medium: 2, low: 1 };
 
+/**
+ * @param {AiSettlement} settlement
+ * @param {number} n
+ * @returns {Array<{severity?: string} | null>}
+ */
 function topHooksBySeverity(settlement, n) {
   const all = deriveAllStructuredHooks(settlement);
   const sorted = [...all].sort((a, b) => {
+    // @ts-ignore -- deriveAllStructuredHooks filter(Boolean)s its nulls away; TS does not narrow through BooleanConstructor.
     const aw = HOOK_SEVERITY_ORDER[a.severity] || 0;
+    // @ts-ignore -- same filter(Boolean) narrowing gap.
     const bw = HOOK_SEVERITY_ORDER[b.severity] || 0;
     return bw - aw;
   });
@@ -244,12 +354,13 @@ function topHooksBySeverity(settlement, n) {
 /**
  * Build the structured grounding envelope.
  *
- * @param {Object} settlement
+ * @param {AiSettlement | null | undefined} settlement
  * @param {Object} [options]
  * @param {number} [options.topHooks=5]
  * @param {boolean} [options.dominantNpcsOnly=true]
  * @param {boolean} [options.includeContradictions=true]
  * @param {string|null} [options.userDirection=null]
+ * @param {{settlementId?: unknown, generatedAtTick?: (number|null), relationships?: import('./worldPulse/relationshipMemory.js').RelationshipContextEntryInput[]} | null} [options.relationshipMemoryContext=null]
  * @returns {Object} AiGroundingPayload
  */
 export function buildAiGroundingPayload(settlement, options = {}) {
@@ -319,6 +430,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
     conditions:      deriveAllActiveConditions(settlement),
     threats:         deriveAllThreatProfiles(settlement),
     npcs:            opts.dominantNpcsOnly
+                       // @ts-ignore -- deriveAllNpcProfiles (npcProfile.js, owned elsewhere) is still untyped; inert once it returns NpcProfile[].
                        ? allNpcs.filter(n => n.rank === 'dominant')
                        : allNpcs,
     history:         deriveHistoryBeats(settlement),
@@ -367,6 +479,11 @@ const OUTPUT_FORMAT_REMINDER = `Output MUST preserve every proper noun from the 
  * canonical facts (because it'd live inside `constraints.userDirection`
  * in the serialized dossier JSON).
  */
+/**
+ * @param {AiGroundingPayloadLike | null | undefined} payload
+ * @param {{developerInstructions?: string}} [options]
+ * @returns {{system: string, developer: string, dossier: string, direction: string|null, format: string}}
+ */
 export function assemblePromptSections(payload, options = {}) {
   // Build a dossier-safe copy of the payload that omits the user
   // direction from `constraints`. The direction MUST live only in the
@@ -394,6 +511,8 @@ export function assemblePromptSections(payload, options = {}) {
 /**
  * Flat array of payload-summary lines for debug / "what went into the
  * prompt?" surfaces.
+ * @param {AiGroundingPayloadLike | null | undefined} payload
+ * @returns {string[]}
  */
 export function summarizeGroundingPayload(payload) {
   if (!payload) return [];

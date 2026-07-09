@@ -13,15 +13,92 @@ import { TIER_ORDER } from '../../data/constants.js';
 
 const UNHEALTHY_CHAIN_STATUSES = new Set(['strained', 'scarce', 'blocked', 'captured', 'substituted', 'collapsing']);
 
+/** @typedef {import('./goodsCatalog.js').CatalogEntry} RegionGood */
+/** @typedef {import('./goodsCatalog.js').GoodInput} RegionGoodInput */
+/** @typedef {import('../supplyChainState.js').DerivedSupplyChainState} RegionChain */
+
+/**
+ * @typedef {Object} RegionEconomic
+ * @property {RegionGoodInput[]} [primaryExports]
+ * @property {RegionGoodInput[]} [exports]
+ * @property {RegionGoodInput[]} [transit]
+ * @property {RegionGoodInput[]} [primaryImports]
+ * @property {RegionGoodInput[]} [imports]
+ * @property {RegionGoodInput[]} [necessityImports]
+ * @property {RegionGoodInput[]} [localProduction]
+ * @property {string} [tradeAccess]
+ */
+/**
+ * @typedef {Object} RegionConfig
+ * @property {unknown[]} [_cutRoutes]
+ * @property {string} [tradeRouteAccess]
+ * @property {string[]} [nearbyResources]
+ * @property {Record<string, unknown>} [nearbyResourcesState]
+ */
+/**
+ * @typedef {Object} RegionSettlement
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [tier]
+ * @property {number} [population]
+ * @property {RegionEconomic} [economicState]
+ * @property {RegionEconomic} [economy]
+ * @property {RegionConfig} [config]
+ * @property {string} [tradeRouteAccess]
+ */
+/**
+ * A save record or a bare settlement — the projection accepts either.
+ * @typedef {RegionSettlement & { settlement?: RegionSettlement, config?: RegionConfig }} RegionInput
+ */
+/**
+ * @typedef {Object} RegionEvent
+ * @property {string} [type]
+ * @property {string} [id]
+ * @property {{ severity?: unknown, size?: unknown, candidateType?: unknown, outcomeType?: unknown }} [payload]
+ */
+/**
+ * @typedef {Object} RegionDeltaCause
+ * @property {RegionEvent} [event]
+ * @property {string} [reason]
+ */
+/**
+ * @typedef {Object} RegionalState
+ * @property {(string|null)} id
+ * @property {(string|null)} [settlementId]
+ * @property {(string|null)} name
+ * @property {(string|null)} tier
+ * @property {number} population
+ * @property {Array<RegionGood & { sourceLabel: string }>} exports
+ * @property {Array<RegionGood & { sourceLabel: string }>} imports
+ * @property {Array<RegionGood & { sourceLabel: string }>} localProduction
+ * @property {RegionChain[]} activeChains
+ * @property {{ access: string, open: boolean, cut: boolean, cutRoutes: unknown[], conditionCuts: unknown[] }} route
+ * @property {RegionGood[]} depletedGoods
+ */
+
+/**
+ * @param {RegionInput | null | undefined} input
+ * @returns {RegionSettlement | null}
+ */
 export function settlementFromSave(input) {
   if (!input) return null;
   return input.settlement || input;
 }
 
+/**
+ * @param {RegionInput | null | undefined} input
+ * @param {RegionSettlement | null | undefined} settlement
+ * @returns {string | null}
+ */
 function saveIdOf(input, settlement) {
   return input?.id || settlement?.id || null;
 }
 
+/**
+ * @template {{ id?: unknown }} T
+ * @param {T[] | null | undefined} items
+ * @returns {T[]}
+ */
 function uniqueById(items) {
   const out = [];
   const seen = new Set();
@@ -33,24 +110,40 @@ function uniqueById(items) {
   return out;
 }
 
+/**
+ * @param {RegionSettlement | null | undefined} settlement
+ * @returns {RegionEconomic}
+ */
 function economicOf(settlement) {
   return settlement?.economicState || settlement?.economy || {};
 }
 
+/**
+ * @param {RegionSettlement | null | undefined} settlement
+ * @param {RegionInput | null | undefined} save
+ * @returns {RegionConfig}
+ */
 function configOf(settlement, save) {
   return settlement?.config || save?.config || {};
 }
 
+/**
+ * @param {RegionSettlement | null | undefined} settlement
+ */
 function routeCutSignals(settlement) {
   const config = settlement?.config || {};
   const cutRoutes = Array.isArray(config._cutRoutes) ? config._cutRoutes : [];
   const conditions = deriveAllActiveConditions(settlement);
-  const conditionCuts = conditions.filter(c =>
+  const conditionCuts = conditions.filter((/** @type {{ archetype?: string }} */ c) =>
     c.archetype === 'trade_route_cut' || c.archetype === 'regional_route_disruption'
   );
   return { cutRoutes, conditionCuts };
 }
 
+/**
+ * @param {RegionSettlement | null | undefined} settlement
+ * @param {RegionInput | null | undefined} save
+ */
 function tradeRouteState(settlement, save) {
   const cfg = configOf(settlement, save);
   const access = cfg.tradeRouteAccess || economicOf(settlement).tradeAccess || settlement?.tradeRouteAccess || 'none';
@@ -66,6 +159,7 @@ function tradeRouteState(settlement, save) {
   };
 }
 
+/** @param {RegionSettlement | null | undefined} settlement @returns {RegionGoodInput[]} */
 function exportLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -75,6 +169,7 @@ function exportLabels(settlement) {
   ];
 }
 
+/** @param {RegionSettlement | null | undefined} settlement @returns {RegionGoodInput[]} */
 function importLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -84,6 +179,7 @@ function importLabels(settlement) {
   ];
 }
 
+/** @param {RegionSettlement | null | undefined} settlement @returns {RegionGoodInput[]} */
 function localProductionLabels(settlement) {
   const econ = economicOf(settlement);
   return [
@@ -92,8 +188,10 @@ function localProductionLabels(settlement) {
   ];
 }
 
+/** @param {RegionSettlement | null | undefined} settlement @returns {RegionGood[]} */
 function resourceDepletionState(settlement) {
   const state = settlement?.config?.nearbyResourcesState || {};
+  /** @type {RegionGood[]} */
   const depleted = [];
   for (const [label, status] of Object.entries(state)) {
     if (status === 'depleted') {
@@ -114,6 +212,8 @@ function resourceDepletionState(settlement) {
  * route; graph nodes read id/name/tier; world-pulse readers consume
  * buildWorldSnapshot items, not this projection) — and they were embedded
  * twice per event-log record. Dropped; re-add only with a real reader.
+ * @param {RegionInput | null | undefined} input
+ * @returns {RegionalState}
  */
 export function deriveRegionalState(input) {
   const settlement = settlementFromSave(input);
@@ -141,16 +241,27 @@ export function deriveRegionalState(input) {
     exports: normalizeGoodsList(exportLabels(settlement)),
     imports: normalizeGoodsList(importLabels(settlement)),
     localProduction: normalizeGoodsList(localProductionLabels(settlement)),
-    activeChains: deriveAllSupplyChainStates(settlement),
+    activeChains: deriveAllSupplyChainStates(/** @type {import('../supplyChainState.js').ChainsSettlementSource} */ (settlement)),
     route: tradeRouteState(settlement, input),
     depletedGoods: resourceDepletionState(settlement),
   };
 }
 
+/**
+ * @template {{ id?: unknown }} T
+ * @param {T[] | null | undefined} items
+ * @returns {Map<unknown, T>}
+ */
 function byId(items) {
   return new Map((items || []).map(item => [item.id, item]));
 }
 
+/**
+ * @param {string} kind
+ * @param {RegionGood[]} beforeGoods
+ * @param {RegionGood[]} afterGoods
+ * @param {string} source
+ */
 function diffGoods(kind, beforeGoods, afterGoods, source) {
   const out = [];
   const before = byId(beforeGoods);
@@ -179,6 +290,10 @@ function diffGoods(kind, beforeGoods, afterGoods, source) {
   return out;
 }
 
+/**
+ * @param {RegionalState} beforeState
+ * @param {RegionalState} afterState
+ */
 function diffChains(beforeState, afterState) {
   const out = [];
   const before = byId(beforeState.activeChains);
@@ -200,6 +315,7 @@ function diffChains(beforeState, afterState) {
   return out;
 }
 
+/** @param {string} status @returns {number} */
 function severityForChainStatus(status) {
   switch (status) {
     case 'collapsing': return 0.95;
@@ -212,6 +328,11 @@ function severityForChainStatus(status) {
   }
 }
 
+/**
+ * @param {RegionalState} beforeState
+ * @param {RegionalState} afterState
+ * @param {RegionEvent} [event]
+ */
 function diffRoute(beforeState, afterState, event) {
   if (event?.type === 'CUT_TRADE_ROUTE') {
     return [{
@@ -240,11 +361,16 @@ function diffRoute(beforeState, afterState, event) {
   return [];
 }
 
+/** @param {string} tier @returns {number} */
 function tierRank(tier) {
   const index = TIER_ORDER.indexOf(tier);
   return index >= 0 ? index : -1;
 }
 
+/**
+ * @param {RegionalState} beforeState
+ * @param {RegionalState} afterState
+ */
 function diffTier(beforeState, afterState) {
   if (!beforeState.tier || !afterState.tier || beforeState.tier === afterState.tier) return [];
   const beforeRank = tierRank(beforeState.tier);
@@ -259,12 +385,22 @@ function diffTier(beforeState, afterState) {
   }];
 }
 
+/**
+ * @param {number} beforePopulation
+ * @param {number} afterPopulation
+ * @param {RegionEvent} [event]
+ */
 function populationKind(beforePopulation, afterPopulation, event) {
   const candidateType = String(event?.payload?.candidateType || event?.payload?.outcomeType || '').toLowerCase();
   if (/migration|emigration|refugee/.test(candidateType) || event?.type === 'REFUGEE_WAVE') return 'migration_wave';
   return afterPopulation > beforePopulation ? 'population_growth' : 'population_loss';
 }
 
+/**
+ * @param {RegionalState} beforeState
+ * @param {RegionalState} afterState
+ * @param {RegionEvent} [event]
+ */
 function diffPopulation(beforeState, afterState, event) {
   const beforePopulation = Math.max(0, Number(beforeState.population) || 0);
   const afterPopulation = Math.max(0, Number(afterState.population) || 0);
@@ -282,10 +418,14 @@ function diffPopulation(beforeState, afterState, event) {
   }];
 }
 
+/**
+ * @param {RegionSettlement | null | undefined} beforeSettlement
+ * @param {RegionSettlement | null | undefined} afterSettlement
+ */
 function diffCausal(beforeSettlement, afterSettlement) {
   try {
-    const before = deriveCausalState(beforeSettlement);
-    const after = deriveCausalState(afterSettlement);
+    const before = deriveCausalState(/** @type {any} */ (beforeSettlement));
+    const after = deriveCausalState(/** @type {any} */ (afterSettlement));
     return compareCausalState(before, after)
       .filter(d => Math.abs(d.change || 0) >= 8)
       .map(d => ({
@@ -302,6 +442,11 @@ function diffCausal(beforeSettlement, afterSettlement) {
   }
 }
 
+/**
+ * @param {RegionEvent | null | undefined} event
+ * @param {number} [fallback]
+ * @returns {number}
+ */
 function eventMagnitude(event, fallback = 0.55) {
   const severity = event?.payload?.severity;
   if (typeof severity === 'number' && Number.isFinite(severity)) {
@@ -313,6 +458,7 @@ function eventMagnitude(event, fallback = 0.55) {
   return fallback;
 }
 
+/** @param {RegionEvent | null | undefined} event */
 function eventRegionalChanges(event) {
   if (!event?.type) return [];
   switch (event.type) {
@@ -358,6 +504,9 @@ function eventRegionalChanges(event) {
 
 /**
  * Derive the regional significance of a local before/after settlement change.
+ * @param {RegionInput | null | undefined} beforeInput
+ * @param {RegionInput | null | undefined} afterInput
+ * @param {RegionDeltaCause} [cause]
  */
 export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
   const beforeSettlement = settlementFromSave(beforeInput);

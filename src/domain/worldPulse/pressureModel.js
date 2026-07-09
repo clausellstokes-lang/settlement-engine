@@ -1,10 +1,75 @@
 import { activeChannelsFrom } from '../region/index.js';
 
+/**
+ * @typedef {Object} PressureCondition
+ * @property {string} archetype
+ * @property {string[]} [affectedSystems]
+ */
+
+/**
+ * @typedef {Object} PressureSettlement
+ * @property {string} id
+ * @property {string} [name]
+ * @property {{ scores?: Record<string, number> }} [causal]
+ * @property {PressureCondition[]} [activeConditions]
+ */
+
+/**
+ * @typedef {Object} RegionalEdge
+ * @property {string} [id]
+ * @property {string} [from]
+ * @property {string} [to]
+ * @property {string} [source]
+ * @property {string} [target]
+ */
+
+/**
+ * @typedef {Object} RegionalChannel
+ * @property {string} [type]
+ * @property {string} [status]
+ * @property {string} [from]
+ * @property {string} [to]
+ */
+
+/**
+ * @typedef {Object} PMRelationshipState
+ * @property {string} [relationshipType]
+ * @property {number} [fear]
+ * @property {number} [resentment]
+ */
+
+/**
+ * @typedef {Object} PressureSnapshot
+ * @property {PressureSettlement[]} settlements
+ * @property {{ calendar?: { season?: string }, relationshipStates?: Record<string, PMRelationshipState> }} worldState
+ * @property {{ edges?: RegionalEdge[], channels?: RegionalChannel[] }} [regionalGraph]
+ * @property {{ get?: (id: string) => (PressureSettlement | undefined) }} [byId]
+ */
+
+/**
+ * @typedef {Object} Pressure
+ * @property {string} settlementId
+ * @property {string} [settlementName]
+ * @property {string} kind
+ * @property {string} label
+ * @property {number} score
+ * @property {string[]} reasons
+ */
+
+/**
+ * @param {number} value
+ * @returns {number}
+ */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/**
+ * @param {number} score
+ * @param {boolean} [invert]
+ * @returns {number}
+ */
 function pressureFromScore(score, invert = true) {
   const value = Number.isFinite(score) ? score : 50;
   return invert ? clamp01((70 - value) / 70) : clamp01(value / 100);
@@ -30,6 +95,12 @@ const CRIME_ARCHETYPES = new Set(['regional_criminal_pressure', 'trade_route_cut
 
 // Returns the deduped archetype ids that matched — reason strings must name
 // the real matched archetypes, never a fabricated classification.
+/**
+ * @param {PressureSettlement} item
+ * @param {Set<string>} archetypes
+ * @param {string[]} [systems]
+ * @returns {string[]}
+ */
 function matchedConditionArchetypes(item, archetypes, systems = []) {
   const matched = [];
   for (const c of item.activeConditions || []) {
@@ -41,9 +112,15 @@ function matchedConditionArchetypes(item, archetypes, systems = []) {
   return [...new Set(matched)];
 }
 
+/**
+ * @param {PressureSnapshot} snapshot
+ * @param {string} settlementId
+ * @param {string[]} [types]
+ * @returns {number}
+ */
 function countChannels(snapshot, settlementId, types = []) {
   const set = new Set(types);
-  return activeChannelsFrom(snapshot.regionalGraph, settlementId, { types }).filter(channel => set.has(channel.type)).length;
+  return activeChannelsFrom(/** @type {import('../region/graph.js').RegionGraph} */ (snapshot.regionalGraph), settlementId, { types }).filter(channel => set.has(channel.type)).length;
 }
 
 // ── Relationship → pressure feedback ─────────────────────────────────────────
@@ -53,6 +130,11 @@ function countChannels(snapshot, settlementId, types = []) {
 //   • a trade-dependency supplier in a food crisis raises the dependent's FOOD
 //     pressure (the supplier's famine becomes the dependent's problem)
 
+/**
+ * @param {PressureSnapshot} snapshot
+ * @param {string} settlementId
+ * @returns {PMRelationshipState[]}
+ */
 function relationshipsTouching(snapshot, settlementId) {
   const sid = String(settlementId);
   const states = snapshot.worldState?.relationshipStates || {};
@@ -67,16 +149,26 @@ function relationshipsTouching(snapshot, settlementId) {
   return out;
 }
 
+/**
+ * @param {PressureSnapshot} snapshot
+ * @param {string} settlementId
+ * @returns {number}
+ */
 function relationshipHostility(snapshot, settlementId) {
   let max = 0;
   for (const r of relationshipsTouching(snapshot, settlementId)) {
-    if (['hostile', 'cold_war', 'rival'].includes(r.relationshipType)) {
+    if (['hostile', 'cold_war', 'rival'].includes(/** @type {string} */ (r.relationshipType))) {
       max = Math.max(max, (r.fear || 0) * 0.6 + (r.resentment || 0) * 0.4);
     }
   }
   return max;
 }
 
+/**
+ * @param {PressureSnapshot} snapshot
+ * @param {string} settlementId
+ * @returns {boolean}
+ */
 function supplierInFoodCrisis(snapshot, settlementId) {
   // trade_dependency channels point supplier → dependent.
   const channels = (snapshot.regionalGraph?.channels || []).filter(c =>
@@ -88,12 +180,17 @@ function supplierInFoodCrisis(snapshot, settlementId) {
   return false;
 }
 
+/**
+ * @param {PressureSnapshot} snapshot
+ * @returns {Pressure[]}
+ */
 export function deriveSettlementPressures(snapshot) {
+  /** @type {Pressure[]} */
   const out = [];
   const season = snapshot.worldState.calendar?.season;
 
   for (const item of snapshot.settlements) {
-    const scores = item.causal?.scores || {};
+    const scores = item.causal?.scores || /** @type {Record<string, number>} */ ({});
     const base = {
       settlementId: item.id,
       settlementName: item.name,
@@ -230,8 +327,14 @@ export function deriveSettlementPressures(snapshot) {
   }));
 }
 
+/**
+ * @param {Pressure[]} [pressures]
+ * @returns {{ bySettlement: Record<string, Pressure[]>, get: (settlementId: string, kind: string) => (Pressure | null), strongest: (settlementId: string, kinds?: string[]) => (Pressure | null) }}
+ */
 export function pressureIndex(pressures = []) {
+  /** @type {Map<string, Pressure>} */
   const map = new Map();
+  /** @type {Record<string, Pressure[]>} */
   const bySettlement = {};
   for (const pressure of pressures) {
     map.set(`${pressure.settlementId}:${pressure.kind}`, pressure);
@@ -242,9 +345,9 @@ export function pressureIndex(pressures = []) {
   return {
     bySettlement,
     get: (settlementId, kind) => map.get(`${settlementId}:${kind}`) || null,
-    strongest: (settlementId, kinds = []) => kinds
+    strongest: (settlementId, kinds = []) => /** @type {Pressure[]} */ (kinds
       .map(kind => map.get(`${settlementId}:${kind}`))
-      .filter(Boolean)
+      .filter(Boolean))
       .sort((a, b) => b.score - a.score)[0] || null,
   };
 }

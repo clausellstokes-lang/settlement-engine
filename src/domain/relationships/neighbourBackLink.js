@@ -24,11 +24,13 @@ import {
 } from './canonicalRelationship.js';
 
 // ── NPC pairing helpers ──────────────────────────────────────────────────────
+/** @type {Record<string, string[]>} */
 const NPC_PAIR_CATS = {
   trade_partner: ['economy'], allied: ['economy', 'military'], patron: ['military', 'economy'],
   client: ['economy'], rival: ['economy', 'military'], cold_war: ['military', 'criminal'],
   hostile: ['military'], vassal: ['military', 'economy'], neutral: ['economy'],
 };
+/** @type {Record<string, (a: any, ar: any, b: any, br: any, bs: any) => string>} */
 const CONTACT_DESC = {
   trade_partner: (a, ar, b, br, bs) => `${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
   allied:        (a, ar, b, br, bs) => `${a} (${ar}) coordinates with ${b} (${br}) of ${bs} on matters of mutual defense and policy.`,
@@ -41,11 +43,12 @@ const CONTACT_DESC = {
   neutral:       (a, ar, b, br, bs) => `${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
 };
 
+/** @param {any} settlementA @param {any} settlementB @param {string} relType @param {any} linkId */
 export function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
   const cats = NPC_PAIR_CATS[relType] || ['economy'];
   const descFn = CONTACT_DESC[relType] || CONTACT_DESC.neutral;
-  let npcsA = (settlementA.npcs || []).filter(n => cats.includes((n.category || '').toLowerCase()));
-  let npcsB = (settlementB.npcs || []).filter(n => cats.includes((n.category || '').toLowerCase()));
+  let npcsA = /** @type {any[]} */ (settlementA.npcs || []).filter((/** @type {any} */ n) => cats.includes((n.category || '').toLowerCase()));
+  let npcsB = /** @type {any[]} */ (settlementB.npcs || []).filter((/** @type {any} */ n) => cats.includes((n.category || '').toLowerCase()));
   if (!npcsA.length) npcsA = (settlementA.npcs || []).slice(0, 3);
   if (!npcsB.length) npcsB = (settlementB.npcs || []).slice(0, 3);
   if (!npcsA.length || !npcsB.length) return { forA: [], forB: [] };
@@ -62,8 +65,9 @@ export function buildInterSettlementNPCs(settlementA, settlementB, relType, link
   return { forA, forB };
 }
 
+/** @param {any[]} saves @param {any} name @returns {any} */
 export function findSaveByName(saves, name) {
-  return saves.find(s => s.name === name || s.settlement?.name === name) || null;
+  return saves.find((/** @type {any} */ s) => s.name === name || s.settlement?.name === name) || null;
 }
 
 /**
@@ -85,6 +89,7 @@ export function findSaveByName(saves, name) {
  * Pure + idempotent: re-running drops any prior entry for the same partner /
  * linkId before re-adding, so repeated saves do not duplicate links.
  */
+/** @param {any} entry @param {any[]} existingSaves @returns {any} */
 export function buildNeighbourBackLink(entry, existingSaves) {
   const settlement = entry?.settlement;
   const nr = settlement?.neighborRelationship;
@@ -97,9 +102,9 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   const relType = nr.relationshipType || 'neutral';
   const linkId = `link_${saveId}_${partnerSave.id}`;
-  const edge = canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave);
+  const edge = /** @type {any} */ (canonicalEdgeForLink({ relationshipType: relType }, { id: saveId }, partnerSave));
   const roles = rolesForCanonicalEdge(edge, saveId, partnerSave.id);
-  const definition = { relationshipType: edge.relationshipType, from: edge.from, to: edge.to };
+  const definition = /** @type {any} */ ({ relationshipType: edge.relationshipType, from: edge.from, to: edge.to });
 
   const entryForOwn = {
     id: partnerSave.id, linkId, name: partnerSave.name, neighbourName: partnerSave.name,
@@ -121,13 +126,13 @@ export function buildNeighbourBackLink(entry, existingSaves) {
 
   const ownSettlement = {
     ...settlement,
-    neighbourNetwork: [entryForOwn, ...(settlement.neighbourNetwork || []).filter(n => n.name !== partnerSave.name && n.linkId !== linkId)],
-    interSettlementRelationships: [...(settlement.interSettlementRelationships || []).filter(r => r.linkId !== linkId), ...npcForOwn, ...conflictForOwn],
+    neighbourNetwork: [entryForOwn, .../** @type {any[]} */ (settlement.neighbourNetwork || []).filter((/** @type {any} */ n) => n.name !== partnerSave.name && n.linkId !== linkId)],
+    interSettlementRelationships: [.../** @type {any[]} */ (settlement.interSettlementRelationships || []).filter((/** @type {any} */ r) => r.linkId !== linkId), ...npcForOwn, ...conflictForOwn],
   };
   const partnerSettlement = {
     ...partnerSave.settlement,
-    neighbourNetwork: [entryForPartner, ...(partnerSave.settlement.neighbourNetwork || []).filter(n => n.id !== saveId && n.linkId !== linkId)],
-    interSettlementRelationships: [...(partnerSave.settlement.interSettlementRelationships || []).filter(r => r.linkId !== linkId), ...npcForPartner, ...conflictForPartner],
+    neighbourNetwork: [entryForPartner, .../** @type {any[]} */ (partnerSave.settlement.neighbourNetwork || []).filter((/** @type {any} */ n) => n.id !== saveId && n.linkId !== linkId)],
+    interSettlementRelationships: [.../** @type {any[]} */ (partnerSave.settlement.interSettlementRelationships || []).filter((/** @type {any} */ r) => r.linkId !== linkId), ...npcForPartner, ...conflictForPartner],
   };
 
   return {

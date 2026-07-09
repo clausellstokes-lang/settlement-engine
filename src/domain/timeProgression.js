@@ -38,11 +38,88 @@ import {
 
 /** @typedef {import('./settlement.schema.js').TickInterval} TickInterval */
 
+/**
+ * A single faction delta as produced by recalculateFactionRelationships
+ * (local shape mirror — that module declares its updates only as Array<Object>).
+ * @typedef {Object} TickFactionDelta
+ * @property {string} factionId
+ * @property {string} field
+ * @property {number} delta
+ * @property {string} reason
+ */
+
+/**
+ * The externally-threaded clock state ({ clockStages: { [clockId]: stage } }).
+ * @typedef {Object} TickState
+ * @property {Record<string, number>} [clockStages]
+ */
+
+/**
+ * The slice of a faction record this module reads/writes.
+ * @typedef {Object} TPFaction
+ * @property {string} [faction]
+ * @property {number} [power]
+ * @property {boolean} [isGoverning]
+ * @property {Record<string, number>} [_timePressure]
+ */
+
+/**
+ * The slice of powerStructure this module reads/writes.
+ * @typedef {Object} TPPowerStructure
+ * @property {TPFaction[]} [factions]
+ * @property {{ score?: number }|null} [publicLegitimacy]
+ * @property {string} [governingName]
+ */
+
+/**
+ * The slice of a settlement this module reads.
+ * @typedef {Object} TPSettlement
+ * @property {TPPowerStructure|null} [powerStructure]
+ * @property {Array<Object>} [activeConditions]
+ */
+
+/**
+ * Structured single-tick report.
+ * A single clock-advancement report entry.
+ * @typedef {Object} ClockAdvancement
+ * @property {string} clockId
+ * @property {string} label
+ * @property {number} previousStage
+ * @property {number} stage
+ * @property {number} totalStages
+ * @property {string|null} stageDescription
+ * @property {boolean} completed
+ * @property {string} [triggerDescription]
+ */
+
+/**
+ * A clock that fell off (its trigger resolved) between ticks.
+ * @typedef {Object} ClockResolution
+ * @property {string} clockId
+ * @property {number} previousStage
+ * @property {boolean} resolved
+ */
+
+/**
+ * Structured single-tick report.
+ * @typedef {Object} TimeProgressionTick
+ * @property {string} interval
+ * @property {string[]} appliedConditions
+ * @property {TickFactionDelta[]} factionDeltas
+ * @property {Object} [factionSummary]
+ * @property {ClockAdvancement[]} clockAdvancements
+ * @property {ClockResolution[]} clockResolutions
+ * @property {Array<Object>} conditionsExpired
+ * @property {Array<Object>} [activeConditions]
+ * @property {string[]} summary
+ */
+
 // ── Intervals ────────────────────────────────────────────────────────────
 // Each interval scales the intensity of applied conditions. Larger
 // intervals compound more, but we don't simply multiply — pressures
 // have diminishing returns past a point. Use sub-linear scaling.
 
+/** @type {Readonly<Record<string, number>> & { one_month: number }} */
 const INTERVAL_SCALES = Object.freeze({
   one_week:   0.25,
   one_month:  1.00,
@@ -52,6 +129,10 @@ const INTERVAL_SCALES = Object.freeze({
 
 const VALID_INTERVALS = new Set(Object.keys(INTERVAL_SCALES));
 
+/**
+ * @param {string} interval
+ * @returns {number}
+ */
 function intervalScale(interval) {
   return INTERVAL_SCALES[interval] ?? INTERVAL_SCALES.one_month;
 }
@@ -61,6 +142,10 @@ function intervalScale(interval) {
 // label / multipliers / boolean flags must update too. Centralized
 // here so advance + forecast both produce consistent settlement state.
 
+/**
+ * @param {number} score
+ * @returns {{ label: string, color: string, govMultiplier: number, crimMultiplier: number }}
+ */
 function reBand(score) {
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
   if (clamped >= 75) return { label: 'Endorsed',          color: '#1a5a28', govMultiplier: 1.30, crimMultiplier: 0.75 };
@@ -70,6 +155,11 @@ function reBand(score) {
   return { label: 'Legitimacy Crisis', color: '#8b1a1a', govMultiplier: 0.60, crimMultiplier: 1.30 };
 }
 
+/**
+ * @param {{ score?: number }|null} legitimacy
+ * @param {number} delta
+ * @returns {({ score?: number } & Record<string, unknown>)|null}
+ */
 function applyLegitimacyDelta(legitimacy, delta) {
   if (!legitimacy) return legitimacy;
   const newScore = Math.max(0, Math.min(100, Math.round((legitimacy.score || 0) + delta)));
@@ -96,6 +186,11 @@ function applyLegitimacyDelta(legitimacy, delta) {
 // report. Once completed, a clock holds at stage 6 until the trigger
 // resolves.
 
+/**
+ * @param {TPSettlement} settlement
+ * @param {TickState|null|undefined} previousState
+ * @returns {{ nextStages: Record<string, number>, advancements: ClockAdvancement[], resolutions: ClockResolution[] }}
+ */
 function advanceClocks(settlement, previousState) {
   // Re-derive the current clock set from the settlement. Any clock no
   // longer triggered (e.g. supply chain recovered) drops off.
@@ -103,7 +198,9 @@ function advanceClocks(settlement, previousState) {
   const liveIds = new Set(liveClocks.map(c => c.id));
 
   const prevStages = previousState?.clockStages || {};
+  /** @type {Record<string, number>} */
   const nextStages = {};
+  /** @type {ClockAdvancement[]} */
   const advancements = [];
 
   for (const clock of liveClocks) {
@@ -124,6 +221,7 @@ function advanceClocks(settlement, previousState) {
 
   // Clocks that fell off (no longer triggered) get a 'resolved' note
   // so the report can narrate the recovery.
+  /** @type {ClockResolution[]} */
   const resolutions = [];
   for (const oldId of Object.keys(prevStages)) {
     if (!liveIds.has(oldId)) {
@@ -146,6 +244,11 @@ function advanceClocks(settlement, previousState) {
 // they're band-only. Tier 4.16 (custom user content) will add
 // numeric storage for those bands.
 
+/**
+ * @param {TPSettlement} settlement
+ * @param {TickFactionDelta[]} allDeltas
+ * @returns {TPSettlement}
+ */
 function applyFactionDeltasToSettlement(settlement, allDeltas) {
   if (!allDeltas || allDeltas.length === 0) return settlement;
 
@@ -223,15 +326,15 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
  * Advance the settlement by one interval. Returns the new settlement,
  * a structured report, and the next clock state.
  *
- * @param {Object} settlement
+ * @param {TPSettlement} settlement
  * @param {Object} [options]
  * @param {TickInterval} [options.interval='one_month']
  * @param {string[]}     [options.activeConditions]      Archetype keys (e.g. 'plague').
  *                                                       When omitted, reads from
  *                                                       settlement.activeConditions
  *                                                       (Tier 2.3 canonical state).
- * @param {Object}       [options.previousTickState]     { clockStages: { [clockId]: int } }
- * @returns {Object} { newSettlement, tick, nextTickState }
+ * @param {TickState|null} [options.previousTickState]   { clockStages: { [clockId]: int } }
+ * @returns {{ newSettlement: TPSettlement, tick: TimeProgressionTick, nextTickState: TickState|null }}
  */
 export function advanceTime(settlement, options = {}) {
   const {
@@ -269,8 +372,12 @@ export function advanceTime(settlement, options = {}) {
   const scale = intervalScale(usableInterval);
 
   // ── 1. Collect faction deltas from every active condition ───────────
+  /** @type {TickFactionDelta[]} */
   const allDeltas = [];
   for (const conditionArchetype of sourceArchetypes) {
+    /** @type {TickFactionDelta[]} */
+    // @ts-ignore -- factionRelationshipUpdate.js declares its updates only as
+    // Array<Object>; the shape mirror above is the documented update record.
     const deltas = recalculateFactionRelationships(
       settlement,
       { type: `CONDITION_TICK_${conditionArchetype.toUpperCase()}` },
@@ -295,6 +402,9 @@ export function advanceTime(settlement, options = {}) {
   newSettlement = withTickedConditionDurations(newSettlement, usableInterval);
   const expiryResult = withExpiredConditionsRemoved(newSettlement);
   newSettlement = expiryResult.settlement;
+  /** @type {Array<{ label: string, duration: { elapsedTicks: number } }>} */
+  // @ts-ignore -- activeConditions.js declares expired only as Array<Object>;
+  // canonical conditions always carry label + duration.elapsedTicks.
   const conditionsExpired = expiryResult.expired;
 
   // ── 4. Advance clocks (against the NEW settlement state so a clock
@@ -351,13 +461,13 @@ export function advanceTime(settlement, options = {}) {
  * grounding. The cumulative summary lets the AI overlay narrate the
  * full trajectory rather than a single tick.
  *
- * @param {Object}        settlement
+ * @param {TPSettlement}  settlement
  * @param {Object}        [options]                       Same as advanceTime, plus `ticks`.
  * @param {number}        [options.ticks=1]               How many tick cycles to run.
  * @param {TickInterval}  [options.interval='one_month']
  * @param {string[]}      [options.activeConditions=[]]
- * @param {Object}        [options.previousTickState]
- * @returns {Object} { projectedSettlement, ticks: TimeProgressionTick[], finalState }
+ * @param {TickState|null} [options.previousTickState]
+ * @returns {{ projectedSettlement: TPSettlement, ticks: TimeProgressionTick[], finalState: TickState|null }}
  */
 export function forecastTime(settlement, options = {}) {
   const { ticks = 1, previousTickState = null, ...tickOptions } = options;
@@ -365,6 +475,7 @@ export function forecastTime(settlement, options = {}) {
 
   let current = settlement;
   let state = previousTickState;
+  /** @type {TimeProgressionTick[]} */
   const ticksOut = [];
 
   for (let i = 0; i < safeTicks; i++) {
@@ -389,6 +500,8 @@ export function forecastTime(settlement, options = {}) {
 /**
  * Aggregate forecast across all ticks. Returns:
  *   { totalDeltas: byFaction, summaryLines: string[], clocksAtFinal }
+ * @param {{ ticks?: TimeProgressionTick[], finalState?: TickState|null }|null|undefined} forecast
+ * @returns {{ totalDeltas: Object, summaryLines: string[], clocksAtFinal: Record<string, number> }}
  */
 export function summarizeForecast(forecast) {
   if (!forecast || !Array.isArray(forecast.ticks)) {

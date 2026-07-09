@@ -34,10 +34,11 @@ export const ANOMALY_TYPES = Object.freeze([
 
 // ── Detectors ────────────────────────────────────────────────────────────
 
+/** @param {Record<string, any>} settlement @returns {Array<Record<string, any>>} */
 function detectFactionInstitutionRefs(settlement) {
   const out = [];
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const institutionIds = new Set(inst.map(i => i?.id).filter(Boolean));
+  const institutionIds = new Set(inst.map((/** @type {any} */ i) => i?.id).filter(Boolean));
   const factions = settlement.powerStructure?.factions || [];
   for (const f of factions) {
     const refs = Array.isArray(f?.controlsInstitutionIds) ? f.controlsInstitutionIds : [];
@@ -58,10 +59,11 @@ function detectFactionInstitutionRefs(settlement) {
   return out;
 }
 
+/** @param {Record<string, any>} settlement @returns {Array<Record<string, any>>} */
 function detectChainMissingProcessors(settlement) {
   const out = [];
   const inst = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const institutionNames = new Set(inst.map(i => String(i?.name || '')));
+  const institutionNames = new Set(inst.map((/** @type {any} */ i) => String(i?.name || '')));
   const chains = deriveAllSupplyChainStates(settlement);
   for (const c of chains) {
     const processors = Array.isArray(c.processingInstitutions) ? c.processingInstitutions : [];
@@ -81,16 +83,18 @@ function detectChainMissingProcessors(settlement) {
   return out;
 }
 
+/** @param {Record<string, any>} settlement @returns {Array<Record<string, any>>} */
 function detectStressorUnconsumed(settlement) {
   // A stressor is "consumed" if there's a matching active condition,
   // threat, or causal-state contributor referencing it. We do a coarse
   // check: any stressor with a 'name' or 'type' that doesn't appear
   // anywhere as a tag is flagged.
+  /** @type {Array<Record<string, any>>} */
   const out = [];
   const stressors = Array.isArray(settlement.stressors) ? settlement.stressors : [];
   if (stressors.length === 0) return out;
   const conditions = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
-  const condArchetypes = new Set(conditions.map(c => c?.archetype).filter(Boolean));
+  const condArchetypes = new Set(conditions.map((/** @type {any} */ c) => c?.archetype).filter(Boolean));
   for (const s of stressors) {
     if (!s) continue;
     const key = String(s.type || s.name || '').toLowerCase();
@@ -112,10 +116,11 @@ function detectStressorUnconsumed(settlement) {
   return out;
 }
 
+/** @param {Record<string, any>} settlement @returns {Array<Record<string, any>>} */
 function detectNpcFactionRefs(settlement) {
   const out = [];
   const factions = settlement.powerStructure?.factions || [];
-  const factionNames = new Set(factions.map(f => String(f?.faction || f?.name || '').toLowerCase()));
+  const factionNames = new Set(factions.map((/** @type {any} */ f) => String(f?.faction || f?.name || '').toLowerCase()));
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
   for (const n of npcs) {
     if (!n?.factionAffiliation) continue;
@@ -137,6 +142,7 @@ function detectNpcFactionRefs(settlement) {
   return out;
 }
 
+/** @param {Record<string, any>} settlement @returns {Array<Record<string, any>>} */
 function detectTraceMissingFields(settlement) {
   const out = [];
   const traces = Array.isArray(settlement.simulationTrace) ? settlement.simulationTrace : [];
@@ -161,6 +167,7 @@ function detectTraceMissingFields(settlement) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
+/** @param {Record<string, any>} settlement */
 export function detectDevAnomalies(settlement) {
   if (!settlement) return { anomalies: [], count: 0 };
   const anomalies = [
@@ -173,8 +180,11 @@ export function detectDevAnomalies(settlement) {
   return { anomalies, count: anomalies.length };
 }
 
-/** Group anomalies by severity for dashboard tiles. */
+/** Group anomalies by severity for dashboard tiles.
+ * @param {Record<string, any>} settlement
+ */
 export function anomalyBreakdown(settlement) {
+  /** @type {Record<string, number>} */
   const out = { info: 0, warning: 0, error: 0, total: 0 };
   const { anomalies } = detectDevAnomalies(settlement);
   for (const a of anomalies) {

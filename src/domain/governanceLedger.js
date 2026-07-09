@@ -34,10 +34,19 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
+/** @type {(v: unknown) => v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {Object} settlement
+ * Structural view of the settlement fields this ledger reads.
+ * `publicLegitimacy` is canonically an object `{ score, label }`, but legacy
+ * saves persisted a bare number — both are honoured below.
+ * @typedef {Object} GovernanceLedgerSource
+ * @property {{ publicLegitimacy?: { score?: unknown, label?: unknown } | number | null } | null} [powerStructure]
+ */
+
+/**
+ * @param {GovernanceLedgerSource | null | undefined} settlement
  * @returns {GovernanceLedger}
  */
 export function governanceLedger(settlement) {

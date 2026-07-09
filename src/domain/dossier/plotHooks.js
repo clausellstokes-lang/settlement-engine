@@ -34,31 +34,116 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   relationship: { color: '#5a3a1a', label: 'Relationships' },
 });
 
+/**
+ * A raw hook as produced by the generators: either a bare string, or an object
+ * carrying the prose under `hook`/`text` (plus optional category/severity).
+ * @typedef {string | { hook?: unknown, text?: unknown, category?: unknown, severity?: unknown }} PlotHookRaw
+ */
+
+/**
+ * A normalized dossier plot hook.
+ * @typedef {Object} PlotHook
+ * @property {string} text
+ * @property {string} [source]
+ * @property {string} [role]
+ * @property {(string|null)} [sub]
+ * @property {string} category
+ * @property {number} priority
+ * @property {boolean} [accent]
+ * @property {Array<{ kind: string, label: unknown, id: unknown }>} [links]
+ */
+
+/** @param {unknown} hook @returns {string} */
 function textForHook(hook) {
   if (typeof hook === 'string') return hook;
   if (!hook) return '';
-  if (typeof hook.hook === 'string') return hook.hook;
-  if (typeof hook.text === 'string') return hook.text;
+  if (typeof (/** @type {{ hook?: unknown }} */ (hook)).hook === 'string') return /** @type {string} */ ((/** @type {{ hook?: unknown }} */ (hook)).hook);
+  if (typeof (/** @type {{ text?: unknown }} */ (hook)).text === 'string') return /** @type {string} */ ((/** @type {{ text?: unknown }} */ (hook)).text);
   return String(hook);
 }
 
+/** @param {unknown} text @returns {string} */
 function cleanHook(text) {
   return String(text || '').replace(/^\s*PLOT HOOK:\s*/i, '').trim();
 }
 
+/**
+ * @param {PlotHook[]} out
+ * @param {Record<string, unknown>} hook
+ */
 function push(out, hook) {
   const text = cleanHook(hook.text);
   if (!text) return;
-  out.push({
+  out.push(/** @type {PlotHook} */ ({
     ...hook,
     text,
     category: hook.category || 'tension',
     priority: Number.isFinite(hook.priority) ? hook.priority : 5,
     accent: Boolean(hook.accent),
-  });
+  }));
 }
 
+/**
+ * @typedef {Object} PlotHookNpc
+ * @property {PlotHookRaw[]} [plotHooks]
+ * @property {string} [name]
+ * @property {string} [role]
+ * @property {string} [title]
+ * @property {string} [factionAffiliation]
+ * @property {string} [influence]
+ * @property {number} [power]
+ * @property {string} [id]
+ */
+/**
+ * @typedef {Object} PlotHookConflict
+ * @property {PlotHookRaw[]} [plotHooks]
+ * @property {string} [intensity]
+ * @property {string[]} [parties]
+ * @property {string} [issue]
+ */
+/**
+ * @typedef {Object} PlotHookTension
+ * @property {PlotHookRaw[]} [plotHooks]
+ * @property {string} [type]
+ * @property {string} [description]
+ */
+/**
+ * @typedef {Object} PlotHookRelationship
+ * @property {string} [tension]
+ * @property {string} [npc1Name]
+ * @property {string} [npc2Name]
+ * @property {string} [npc1Id]
+ * @property {string} [npc2Id]
+ * @property {string} [npc1Role]
+ * @property {string} [npc2Role]
+ * @property {string} [typeName]
+ * @property {string} [type]
+ * @property {(string|number)} [strength]
+ * @property {boolean} [flagDriven]
+ */
+/**
+ * @typedef {Object} PlotHookEvent
+ * @property {PlotHookRaw[]} [plotHooks]
+ * @property {string} [type]
+ * @property {number} [yearsAgo]
+ * @property {boolean} [anchored]
+ */
+/**
+ * @typedef {Object} PlotHookSettlement
+ * @property {PlotHookNpc[]} [npcs]
+ * @property {PlotHookConflict[]} [conflicts]
+ * @property {{ currentTensions?: PlotHookTension[], historicalEvents?: PlotHookEvent[], [key: string]: unknown }} [history]
+ * @property {PlotHookRelationship[]} [relationships]
+ * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
+ * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
+ */
+
+/**
+ * @param {PlotHookSettlement} [settlement]
+ * @returns {PlotHook[]}
+ */
 export function collectPlotHooks(settlement = {}) {
+  /** @type {PlotHook[]} */
   const hooks = [];
 
   (settlement.npcs || []).forEach((npc) => {
@@ -92,7 +177,7 @@ export function collectPlotHooks(settlement = {}) {
   });
 
   (settlement.history?.currentTensions || []).forEach((tension) => {
-    const label = TENSION_LABELS[tension.type] || tension.type || 'Tension';
+    const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || tension.type || 'Tension';
     (tension.plotHooks || []).forEach((hook) => push(hooks, {
       text: textForHook(hook),
       source: label,
@@ -122,12 +207,12 @@ export function collectPlotHooks(settlement = {}) {
   });
 
   (settlement.economicViability?.plotHooks || []).forEach((hook) => {
-    const h = typeof hook === 'object' && hook ? hook : { hook };
+    const h = /** @type {{ hook?: unknown, text?: unknown, category?: unknown, severity?: unknown }} */ (typeof hook === 'object' && hook ? hook : { hook });
     push(hooks, {
       text: textForHook(h),
       source: h.category || 'Economy',
       role: '',
-      sub: ['high', 'critical'].includes(h.severity) ? `${h.severity} severity` : null,
+      sub: ['high', 'critical'].includes(/** @type {string} */ (h.severity)) ? `${h.severity} severity` : null,
       category: 'economics',
       priority: h.severity === 'critical' ? 9 : h.severity === 'high' ? 8 : 7,
       accent: h.severity === 'critical' || h.severity === 'high',
@@ -143,7 +228,7 @@ export function collectPlotHooks(settlement = {}) {
   }));
 
   (settlement.history?.historicalEvents || []).forEach((event) => {
-    const label = EVENT_LABELS[event.type] || EVENT_LABELS.political;
+    const label = EVENT_LABELS[/** @type {keyof typeof EVENT_LABELS} */ (event.type)] || EVENT_LABELS.political;
     (event.plotHooks || []).forEach((hook) => push(hooks, {
       text: textForHook(hook),
       source: `${label} Event`,
@@ -158,8 +243,12 @@ export function collectPlotHooks(settlement = {}) {
   return hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
 }
 
+/**
+ * @param {PlotHook[]} [hooks]
+ * @returns {Record<string, number>}
+ */
 export function countPlotHookCategories(hooks = []) {
-  return hooks.reduce((acc, hook) => {
+  return hooks.reduce((/** @type {Record<string, number>} */ acc, hook) => {
     acc[hook.category] = (acc[hook.category] || 0) + 1;
     return acc;
   }, {});

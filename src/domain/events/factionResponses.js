@@ -19,12 +19,15 @@ import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').FactionResponse} FactionResponse */
+/** @typedef {Event & { payload?: Record<string, unknown> }} EventWithPayload */
+/** @typedef {{ id?: string, name?: string, faction?: string, [key: string]: unknown }} FactionLike */
+/** @typedef {{ powerStructure?: { factions?: FactionLike[] }, factions?: FactionLike[], [key: string]: unknown }} SettlementLike */
 
 /**
  * Compute responses from every faction in `settlement.powerStructure.factions`
  * that matches a known archetype, given an event.
  *
- * @param {Object} settlement
+ * @param {SettlementLike | null | undefined} settlement
  * @param {Event}  event
  * @returns {FactionResponse[]}
  */
@@ -35,7 +38,7 @@ export function generateFactionResponses(settlement, event) {
   for (const faction of factions) {
     const archetype = matchArchetype(faction);
     if (!archetype) continue;
-    const response = ARCHETYPE_RESPONDERS[archetype]?.(faction, event, settlement);
+    const response = ARCHETYPE_RESPONDERS[archetype]?.(faction, /** @type {EventWithPayload} */ (event), settlement);
     if (response) out.push(/** @type {FactionResponse} */ (response));
   }
   return out;
@@ -45,6 +48,8 @@ export function generateFactionResponses(settlement, event) {
 // archetypes produce a response today; every other canonical archetype maps to
 // null (the caller skips it). New archetypes: add a mapping here + a responder in
 // ARCHETYPE_RESPONDERS.
+/** @typedef {'merchant_guild' | 'temple' | 'watch' | 'thieves_guild'} ResponderKey */
+/** @type {Readonly<Record<string, ResponderKey>>} */
 const CANONICAL_TO_RESPONDER = Object.freeze({
   [FA.CRIMINAL]:  'thieves_guild',
   [FA.RELIGIOUS]: 'temple',
@@ -56,6 +61,8 @@ const CANONICAL_TO_RESPONDER = Object.freeze({
  * Map a faction to its responder key via the shared canonical archetype detector,
  * so faction responses classify factions the same way every other layer does.
  * Falls back to `null` for archetypes with no responder (the caller skips them).
+ * @param {FactionLike} faction
+ * @returns {ResponderKey | null}
  */
 function matchArchetype(faction) {
   return CANONICAL_TO_RESPONDER[factionArchetype(faction)] || null;
@@ -84,6 +91,11 @@ const ARCHETYPE_RESPONDERS = {
  * authored. The AI narrative layer (when wired) gets the structured
  * response and can elaborate; the structured response is the source of
  * truth.
+ */
+/**
+ * @param {FactionLike} faction
+ * @param {EventWithPayload} event
+ * @param {SettlementLike | null | undefined} [_settlement]
  */
 function respondAsMerchantGuild(faction, event, _settlement) {
   const name = faction.name || faction.faction || 'Merchant Guild';
@@ -197,6 +209,10 @@ function respondAsMerchantGuild(faction, event, _settlement) {
  *               sermons, claim to moral high ground.
  * Vulnerability: depends on legitimacy that can collapse from a single
  *               failed prophecy or scandal.
+ */
+/**
+ * @param {FactionLike} faction
+ * @param {EventWithPayload} event
  */
 function respondAsTemple(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Temple';
@@ -314,6 +330,10 @@ function respondAsTemple(faction, event /* , settlement */) {
  *               networks, holding cells.
  * Vulnerability: vulnerable to political shifts in the ruling order;
  *               low pay creates corruption pressure.
+ */
+/**
+ * @param {FactionLike} faction
+ * @param {EventWithPayload} event
  */
 function respondAsWatch(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Watch';
@@ -445,6 +465,10 @@ function respondAsWatch(faction, event /* , settlement */) {
  * Vulnerability: depends on watch corruption and on the silence of its
  *               own ranks.
  */
+/**
+ * @param {FactionLike} faction
+ * @param {EventWithPayload} event
+ */
 function respondAsThievesGuild(faction, event /* , settlement */) {
   const name = faction.name || faction.faction || 'Thieves\' Guild';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
@@ -552,6 +576,10 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
 
 // ── helpers shared with registry's classification ──────────────────────────
 
+/**
+ * @param {string | null | undefined} targetId
+ * @returns {'food_storage' | 'religious' | 'law_enforcement' | 'trade' | 'other'}
+ */
 function classifyInstitutionTarget(targetId) {
   const n = String(targetId || '').toLowerCase();
   if (/granary|mill|silo|storage|warehouse/.test(n))           return 'food_storage';
@@ -561,8 +589,12 @@ function classifyInstitutionTarget(targetId) {
   return 'other';
 }
 
+/**
+ * @param {string | null | undefined} targetId
+ * @returns {string}
+ */
 function labelOf(targetId) {
   if (!targetId) return 'institution';
-  const tail = String(targetId).split('.').pop();
+  const tail = /** @type {string} */ (String(targetId).split('.').pop());
   return tail.replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
 }

@@ -33,10 +33,12 @@ import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 
+/** @param {*} value */
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
 }
 
+/** @param {Record<string, any> | null} [patch] */
 function compactNpcPatch(patch = null) {
   if (!patch) return null;
   return {
@@ -50,6 +52,7 @@ function compactNpcPatch(patch = null) {
   };
 }
 
+/** @param {Record<string, any>} [outcome] */
 function compactOutcomeForHistory(outcome = {}) {
   return {
     id: outcome.id,
@@ -89,6 +92,7 @@ function compactOutcomeForHistory(outcome = {}) {
   };
 }
 
+/** @param {any[]} [entries] */
 function compactImpactDigest(entries = []) {
   return entries
     .filter(Boolean)
@@ -113,10 +117,15 @@ function compactImpactDigest(entries = []) {
     .slice(0, 18);
 }
 
+/** @param {any} save */
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.name || 'unknown');
 }
 
+/**
+ * @param {any} snapshot
+ * @param {Map<string, any>} localSettlements
+ */
 function buildSettlementMap(snapshot, localSettlements) {
   const map = new Map();
   for (const item of snapshot.settlements) {
@@ -129,6 +138,11 @@ function buildSettlementMap(snapshot, localSettlements) {
   return map;
 }
 
+/**
+ * @param {any} worldState
+ * @param {any} campaign
+ * @param {string} interval
+ */
 function nextWorldStateForPulse(worldState, campaign, interval) {
   const current = ensureWorldState(worldState, campaign);
   const tick = current.tick + 1;
@@ -141,9 +155,14 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
 
 const VALID_INTERVALS = new Set(['one_week', 'one_month', 'one_season', 'one_year']);
 
-/** @returns {import('../settlement.schema.js').TickInterval} */
+/**
+ * @param {string} [interval]
+ * @returns {import('../settlement.schema.js').TickInterval}
+ */
 function usableTickInterval(interval) {
-  return VALID_INTERVALS.has(interval) ? interval : 'one_month';
+  return VALID_INTERVALS.has(/** @type {string} */ (interval))
+    ? /** @type {import('../settlement.schema.js').TickInterval} */ (interval)
+    : 'one_month';
 }
 
 /**
@@ -160,7 +179,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
+  /** @type {any} */
   let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };
+  /** @type {any} */
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
   worldState = ensureAllRelationshipStates(worldState, snapshot);
@@ -184,7 +205,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // factions; it drags effective security down inside this tick's onset /
   // exposure / capture rolls (the feedback loop), bounded so it never runs away.
   let guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
-  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy });
+  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), /** @type {any} */ ({ tick: worldState.tick, guildStrengthBy }));
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
@@ -259,7 +280,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Prune tick-state for settlements no longer in the campaign: stale entries
   // would serialize forever, and a REUSED save id must not inherit a dead
   // settlement's drift streaks. Deterministic — derived purely from the snapshot.
-  const liveTickStateIds = new Set(snapshot.settlements.map(item => String(item.id)));
+  const liveTickStateIds = new Set(snapshot.settlements.map((/** @type {any} */ item) => String(item.id)));
   for (const key of Object.keys(settlementTickStates)) {
     if (!liveTickStateIds.has(key)) delete settlementTickStates[key];
   }
@@ -279,7 +300,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const reformEvents = [];
   for (const sid of [...localSettlements.keys()]) {
     let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
-    const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
+    const exps = /** @type {any[]} */ (corruption.exposures || []).filter((/** @type {any} */ e) => String(e.settlementId) === String(sid));
     if (exps.length) s = applyCorruptionImpairments(s, exps, { now });
     // §corruption duality — organic reform: a corruption-impaired institution
     // whose corrupt insiders are gone gets a security-scaled chance to clean
@@ -331,7 +352,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
 
   // §corruption 1b-ii-c — prune the npcStates of ousted-and-replaced NPCs so the
   // phantom doesn't keep holding a faction seat after its settlement NPC is gone.
-  const oustedIds = new Set((corruption.exposures || []).filter((e) => e.kind === 'ousted').map((e) => e.npcId));
+  const oustedIds = new Set((corruption.exposures || []).filter((/** @type {any} */ e) => e.kind === 'ousted').map((/** @type {any} */ e) => e.npcId));
   if (oustedIds.size) {
     const npcStates = { ...worldState.npcStates };
     let pruned = false;
@@ -345,7 +366,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     return { ...save, settlement: localSettlements.get(id) };
   });
   const postTimeCampaign = { ...campaign, worldState, regionalGraph: snapshot.regionalGraph };
-  const postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
+  const postTimeSnapshot = /** @type {any} */ (buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState }));
   const pressures = deriveSettlementPressures(postTimeSnapshot);
   const pIndex = pressureIndex(pressures);
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
@@ -368,16 +389,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     interval: tickInterval,
     simulationRules,
   });
-  const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
+  const candidates = evaluateWorldPulseRules(postTimeSnapshot, /** @type {import('./candidateEvents.js').WorldPulseContext} */ ({
     pressures,
     pressureIndex: pIndex,
     tick: worldState.tick,
     interval: tickInterval,
     simulationRules,
-  });
+  }));
   const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates];
   const { selected, rollExplanations } = rollCandidates(
-    [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
+    [...agedStressors.residualOutcomes.filter((/** @type {any} */ o) => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
     { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility) },
   );
@@ -444,21 +465,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     proposalCount: applied.proposals.length,
     selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory),
     impactDigest: compactImpactDigest(applied.newsEntries),
-    resolvedStressors: agedStressors.resolved.map(stressor => ({
+    resolvedStressors: agedStressors.resolved.map((/** @type {any} */ stressor) => ({
       id: stressor.id,
       type: stressor.type,
       label: stressor.label,
       resolutionChance: stressor.resolutionChance,
       resolutionRoll: stressor.resolutionRoll,
     })),
-    graduatedStressors: (agedStressors.graduated || []).map(stressor => ({
+    graduatedStressors: (agedStressors.graduated || []).map((/** @type {any} */ stressor) => ({
       id: stressor.id,
       type: stressor.type,
       label: stressor.label,
     })),
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
-    corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map(e => ({
+    corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map((/** @type {any} */ e) => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
       criminalInstitution: e.criminalInstitution, homeInstitution: e.homeInstitution,
     })),
@@ -475,7 +496,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // capped feed with 30 near-identical headlines. Re-emit when membership
   // changes or after the cooldown lapses (keeps long arcs visible).
   const ARC_REEMIT_COOLDOWN_TICKS = 6;
-  const isFreshArcEntry = (entry) => {
+  const isFreshArcEntry = (/** @type {any} */ entry) => {
     if (!['realm', 'compound'].includes(entry.kind)) return true;
     // The feed is newest-first, so the cooldown window must be a tick filter —
     // a tail slice would inspect the OLDEST entries once the feed exceeds it.
@@ -494,7 +515,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Wave 7 #3 — capture transitions reach the DM: the factionCaptureEvents
   // pulseRecord rollup above was consumed by nobody, so a faction falling to
   // (or breaking from) the underworld never surfaced in the Chronicle.
-  const settlementNameFor = (id) => {
+  const settlementNameFor = (/** @type {any} */ id) => {
     const entry = settlementMap.get(String(id));
     return entry?.save?.name || entry?.settlement?.name || String(id);
   };

@@ -20,9 +20,10 @@ const SPREAD_CHANNEL_ALIASES = Object.freeze({
   wilderness_frontier: 'resource_competition',
 });
 
-/** Map a stressor spread-channel name onto a canonical regional channel type, or null if unknown. */
+/** Map a stressor spread-channel name onto a canonical regional channel type, or null if unknown.
+ * @param {any} name @returns {string|null} */
 export function canonicalSpreadChannel(name) {
-  const mapped = SPREAD_CHANNEL_ALIASES[name] || name;
+  const mapped = /** @type {Record<string, string>} */ (SPREAD_CHANNEL_ALIASES)[name] || name;
   return REGIONAL_CHANNEL_TYPES.includes(mapped) ? mapped : null;
 }
 
@@ -268,6 +269,7 @@ export const STRESSOR_CATALOG = Object.freeze({
   },
 });
 
+/** @param {any} value @returns {number} */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
@@ -283,8 +285,10 @@ function clamp01(value) {
 const SPREAD_ATTENUATION = 0.72;
 const SPREAD_SEVERITY_FLOOR = 0.2;
 
+/** @param {any} map @returns {Record<string, number>|null} */
 function normalizeSeverityMap(map) {
   if (!map || typeof map !== 'object') return null;
+  /** @type {Record<string, number>} */
   const out = {};
   for (const [saveId, value] of Object.entries(map)) {
     if (Number.isFinite(value)) out[String(saveId)] = clamp01(value);
@@ -299,12 +303,14 @@ function normalizeSeverityMap(map) {
  * stamped at spread time and never re-aged, so the record's CURRENT severity
  * caps them — a spread never bites harder than the crisis does at its origin.
  */
+/** @param {any} stressor @param {any} saveId @returns {number} */
 export function effectiveStressorSeverity(stressor, saveId) {
   const recorded = clamp01(stressor?.severity ?? 0);
   const entry = stressor?.severityBySettlement?.[String(saveId)];
   return Number.isFinite(entry) ? Math.min(recorded, clamp01(entry)) : recorded;
 }
 
+/** @param {any} stressor @returns {string} */
 function idFor(stressor) {
   return stressor.id || [
     'world_stressor',
@@ -313,8 +319,9 @@ function idFor(stressor) {
   ].join('.');
 }
 
+/** @param {any} type @returns {any} */
 function catalogFor(type) {
-  return STRESSOR_CATALOG[type] || {
+  return /** @type {any} */ (STRESSOR_CATALOG)[type] || {
     label: String(type || 'Regional pressure').replace(/_/g, ' '),
     durationPolicy: 'episodic',
     pressureKinds: [],
@@ -325,6 +332,7 @@ function catalogFor(type) {
   };
 }
 
+/** @param {any} stressor @returns {string} */
 function lifecycleStageFor(stressor) {
   if (stressor.status === 'resolved') return 'resolved';
   if (stressor.status === 'residual') return 'residual';
@@ -335,6 +343,7 @@ function lifecycleStageFor(stressor) {
   return 'active';
 }
 
+/** @param {any} [stressor] @returns {any} */
 export function normalizeStressor(stressor = {}) {
   const type = stressor.type || 'regional_pressure';
   const defaults = catalogFor(type);
@@ -352,7 +361,7 @@ export function normalizeStressor(stressor = {}) {
     severityBySettlement: normalizeSeverityMap(stressor.severityBySettlement),
     age: Math.max(0, Number.isFinite(stressor.age) ? stressor.age : 0),
     durationPolicy,
-    decayRate: clamp01(stressor.decayRate ?? STRESSOR_POLICIES[durationPolicy]?.decay ?? 0.08),
+    decayRate: clamp01(stressor.decayRate ?? /** @type {any} */ (STRESSOR_POLICIES)[durationPolicy]?.decay ?? 0.08),
     spreadChannels: Array.isArray(stressor.spreadChannels) ? [...stressor.spreadChannels] : [...(defaults.spreadChannels || [])],
     affectedSettlementIds: Array.isArray(stressor.affectedSettlementIds)
       ? [...new Set(stressor.affectedSettlementIds.map(String))]
@@ -401,8 +410,9 @@ export function normalizeStressor(stressor = {}) {
   };
 }
 
+/** @param {any} stressor @param {any} snapshot @param {any} [assessment] @returns {any} */
 function resolutionChance(stressor, snapshot, assessment = undefined) {
-  const policy = STRESSOR_POLICIES[stressor.durationPolicy] || STRESSOR_POLICIES.episodic;
+  const policy = /** @type {any} */ (STRESSOR_POLICIES)[stressor.durationPolicy] || STRESSOR_POLICIES.episodic;
   let chance = policy.baseResolutionChance + Math.max(0, stressor.age - 1) * 0.04;
   // Counterforces: settlement strength shifts the recovery hazard both ways.
   // Generalizes the old hard-coded disease_outbreak healing_capacity check —
@@ -433,14 +443,16 @@ const CAUSAL_SYSTEM_ALIASES = Object.freeze({
   tax_revenue: 'trade_connectivity',
 });
 
+/** @param {any[]} [systems] @returns {any[]} */
 function canonicalAffectedSystems(systems = []) {
-  return [...new Set(systems.map(name => CAUSAL_SYSTEM_ALIASES[name] || name))];
+  return [...new Set(systems.map(name => /** @type {Record<string, string>} */ (CAUSAL_SYSTEM_ALIASES)[name] || name))];
 }
 
+/** @param {any} stressor @param {any} tick @returns {any[]} */
 function residualOutcome(stressor, tick) {
-  const targetIds = stressor.affectedSettlementIds || [];
+  const targetIds = /** @type {any[]} */ (stressor.affectedSettlementIds || []);
   const defaults = catalogFor(stressor.type);
-  return targetIds.map(targetSaveId => {
+  return targetIds.map((/** @type {any} */ targetSaveId) => {
     // Truthful aftermath (T3): the residual scar matches what THIS settlement
     // actually experienced — a spread target's attenuated severity (the
     // severityBySettlement stamp), not the record's origin severity.
@@ -487,12 +499,13 @@ function residualOutcome(stressor, tick) {
  * (its per-source breakdown names the strengths that led the recovery) and
  * the synergy table (the companions it ended despite).
  */
+/** @param {any} stressor @param {any} assessment @param {any} synergy @returns {any} */
 function resolutionContextFor(stressor, assessment, synergy) {
-  const leadingSources = (assessment?.sourceBreakdown || [])
-    .filter(source => source.value >= 0.6)
-    .sort((a, b) => b.value - a.value)
+  const leadingSources = /** @type {any[]} */ (assessment?.sourceBreakdown || [])
+    .filter((/** @type {any} */ source) => source.value >= 0.6)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.value - a.value)
     .slice(0, 3)
-    .map(source => ({ source: source.label, value: Math.round(source.value * 100) / 100 }));
+    .map((/** @type {any} */ source) => ({ source: source.label, value: Math.round(source.value * 100) / 100 }));
   const companions = synergy?.companions || [];
   const narrative = [
     leadingSources.length
@@ -519,6 +532,7 @@ function resolutionContextFor(stressor, assessment, synergy) {
 // arrivals experience full record severity (the zone IS there — unlike a
 // spread, nothing is attenuated by distance).
 
+/** @param {any} stressor @param {any} vacatedSaveId @param {any} tick @returns {any} */
 function wanderDepartureOutcome(stressor, vacatedSaveId, tick) {
   const defaults = catalogFor(stressor.type);
   const residualSeverity = Math.max(0.15, effectiveStressorSeverity(stressor, vacatedSaveId) * 0.45);
@@ -553,12 +567,14 @@ function wanderDepartureOutcome(stressor, vacatedSaveId, tick) {
   };
 }
 
+/** @param {any} stressor @param {any} wander @param {any} snapshot @param {any} rng @param {any} tick @param {any} now @returns {any} */
 function wanderStep(stressor, wander, snapshot, rng, tick, now) {
   const graph = snapshot?.regionalGraph;
   if (!graph) return { stressor, vacatedOutcomes: [] };
   const fork = typeof rng.fork === 'function' ? rng.fork(`wander:${stressor.id}`) : rng;
   if (fork.random() > (wander.chance ?? 0.35)) return { stressor, vacatedOutcomes: [] };
-  const affected = (stressor.affectedSettlementIds || []).map(String);
+  const affected = /** @type {any[]} */ (stressor.affectedSettlementIds || []).map(String);
+  /** @type {Set<string>} */
   const targets = new Set();
   for (const sourceId of affected) {
     for (const channel of activeChannelsFrom(graph, sourceId, { types: wander.channels || [] })) {
@@ -576,7 +592,7 @@ function wanderStep(stressor, wander, snapshot, rng, tick, now) {
   const vacatedOutcomes = [];
   while (nextAffected.length > Math.max(1, wander.maxFootprint ?? 2)) {
     const vacated = nextAffected.shift();
-    delete severityBySettlement[vacated];
+    delete severityBySettlement[/** @type {string} */ (vacated)];
     vacatedOutcomes.push(wanderDepartureOutcome(stressor, vacated, tick));
   }
   return {
@@ -599,6 +615,7 @@ const ECHO_HALF_LIFE_TICKS = 6;
 const ECHO_DECAY_FACTOR = Math.pow(0.5, 1 / ECHO_HALF_LIFE_TICKS);
 const ECHO_GRADUATION_FLOOR = 0.1;
 
+/** @param {any} resolvedStressor @param {any} now @returns {any} */
 function echoOf(resolvedStressor, now) {
   return normalizeStressor({
     ...resolvedStressor,
@@ -625,11 +642,16 @@ function echoOf(resolvedStressor, now) {
   });
 }
 
+/** @param {any[]} stressors @param {any} snapshot @param {any} rng @param {any} [options] @returns {any} */
 export function ageRoamingStressors(stressors = [], snapshot, rng, options = {}) {
   const tick = options.tick ?? 0;
+  /** @type {any[]} */
   const active = [];
+  /** @type {any[]} */
   const resolved = [];
+  /** @type {any[]} */
   const residualOutcomes = [];
+  /** @type {any[]} */
   const graduated = [];
   // Normalize the whole list up front: synergy assessment needs every
   // co-located companion (including echoes) visible while aging each one.
@@ -834,6 +856,7 @@ export function adjustStressorSeverityById(stressors = [], stressorId, delta, op
   return { stressors: next, changed };
 }
 
+/** @param {any} pressure @returns {string[]} */
 function stressorTypesForPressure(pressure) {
   return Object.entries(STRESSOR_CATALOG)
     // Deprecated types (slave_revolt) never birth organically — they remain
@@ -843,6 +866,7 @@ function stressorTypesForPressure(pressure) {
     .map(([type]) => type);
 }
 
+/** @param {any} type @param {any} pressure @param {any} tick @param {any} [extras] @returns {any} */
 function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
   const { snapshot = null, echo = null, gate = null } = extras;
   const defaults = catalogFor(type);
@@ -896,19 +920,22 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
   };
 }
 
+/** @param {any} pressure @param {any} tick @returns {any} */
 export function stressorCandidateForPressure(pressure, tick) {
   if (!pressure || pressure.score < 0.56) return null;
   // Gates that can hard-block need the world snapshot to read their context;
   // this snapshot-less path conservatively skips those types (the coup always
   // behaved so). Gradient-only gates are simply not applied here.
-  const type = stressorTypesForPressure(pressure).filter(t => !STRESSOR_SPAWN_GATES[t]?.requiresSnapshot)[0];
+  const type = stressorTypesForPressure(pressure).filter(t => !(/** @type {any} */ (STRESSOR_SPAWN_GATES)[t])?.requiresSnapshot)[0];
   if (!type) return null;
   return candidateForTypeAndPressure(type, pressure, tick);
 }
 
 const INACTIVE_STATUSES = new Set(['resolved', 'dormant', 'residual']);
 
+/** @param {any[]} stressors @returns {Set<string>} */
 function existingStressorKeys(stressors = []) {
+  /** @type {Set<string>} */
   const keys = new Set();
   for (const raw of stressors) {
     const stressor = normalizeStressor(raw);
@@ -920,7 +947,9 @@ function existingStressorKeys(stressors = []) {
   return keys;
 }
 
+/** @param {any[]} stressors @returns {Map<string, any>} */
 function echoIndex(stressors = []) {
+  /** @type {Map<string, any>} */
   const index = new Map();
   for (const raw of stressors) {
     const stressor = normalizeStressor(raw);
@@ -966,11 +995,12 @@ export function setStressorAttacker(stressors = [], stressorId, attacker = {}, o
   return { stressors: next, changed };
 }
 
+/** @param {any} snapshot @param {any} stressor @returns {any[]} */
 function spreadTargetsFor(snapshot, stressor) {
   const graph = snapshot?.regionalGraph;
   if (!graph) return [];
-  const affected = new Set((stressor.affectedSettlementIds || []).map(String));
-  const types = [...new Set((stressor.spreadChannels || []).map(canonicalSpreadChannel).filter(Boolean))];
+  const affected = new Set(/** @type {any[]} */ (stressor.affectedSettlementIds || []).map(String));
+  const types = /** @type {string[]} */ ([...new Set(/** @type {any[]} */ (stressor.spreadChannels || []).map(canonicalSpreadChannel).filter(Boolean))]);
   if (!types.length) return [];
   // Confirmed, directed channels only — suggested channels never propagate
   // (design principle). A crisis flows outward from each affected settlement
@@ -990,13 +1020,15 @@ function spreadTargetsFor(snapshot, stressor) {
   return [...targets.entries()].map(([targetSaveId, sourceSeverity]) => ({ targetSaveId, sourceSeverity }));
 }
 
+/** @param {any} snapshot @param {any} pressureIdx @param {any} [context] @returns {any} */
 export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const pressures = context.pressures || [];
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
-  const currentStressors = (snapshot?.worldState?.stressors || []).map(normalizeStressor);
+  const currentStressors = /** @type {any[]} */ (snapshot?.worldState?.stressors || []).map(normalizeStressor);
   const existingKeys = existingStressorKeys(currentStressors);
   const echoes = echoIndex(currentStressors);
+  /** @type {any[]} */
   const candidates = [];
 
   // A WANDERED stressor has drifted off its birth origin: its stable id
@@ -1013,7 +1045,7 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       if (activeIds.has(idFor({ type, originSettlementId: String(pressure.settlementId) }))) continue;
       // Organic birth gates (stressorGates.js): the gate can block the spawn
       // entirely or scale its odds; its reasons land on the candidate.
-      const spawnGate = STRESSOR_SPAWN_GATES[type];
+      const spawnGate = /** @type {any} */ (STRESSOR_SPAWN_GATES)[type];
       const gate = spawnGate ? spawnGate(snapshot, pressure, { tick }) : null;
       if (spawnGate && !gate) continue;
       candidates.push(candidateForTypeAndPressure(type, pressure, tick, {
@@ -1027,10 +1059,10 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   for (const stressor of currentStressors) {
     if (!['active', 'emerging', 'peaking', 'easing'].includes(stressor.lifecycleStage)) continue;
     const defaults = catalogFor(stressor.type);
-    const strongestPressure = (stressor.affectedSettlementIds || [])
-      .map(id => (defaults.pressureKinds || []).map(kind => pressureIdx.get?.(id, kind)?.score || 0))
+    const strongestPressure = /** @type {any[]} */ (stressor.affectedSettlementIds || [])
+      .map((/** @type {any} */ id) => /** @type {any[]} */ (defaults.pressureKinds || []).map((/** @type {any} */ kind) => pressureIdx.get?.(id, kind)?.score || 0))
       .flat()
-      .reduce((max, score) => Math.max(max, score), 0);
+      .reduce((/** @type {any} */ max, /** @type {any} */ score) => Math.max(max, score), 0);
 
     if (strongestPressure > 0.62 && stressor.severity < 0.92) {
       const severity = clamp01((stressor.severity + strongestPressure) / 2 + 0.08);
@@ -1059,7 +1091,7 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       });
     }
 
-    if (stressor.severity > 0.42 && !['off', 'local'].includes(rules.propagationMode)) {
+    if (stressor.severity > 0.42 && !['off', 'local'].includes(/** @type {any} */ (rules.propagationMode))) {
       for (const { targetSaveId, sourceSeverity } of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
         const targetKey = `${stressor.type}:${targetSaveId}`;
         if (existingKeys.has(targetKey)) continue;

@@ -19,7 +19,11 @@ import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const CEILING = 4649; // committed max strict-error count — lower as the domain is annotated; never raise
+// The burn-down is COMPLETE (Wave B, 2026-07-09): 4,649 → 0 across 133 files,
+// golden byte-identical (annotations only). The ceiling is now a hard ZERO —
+// the domain kernel is fully strict-clean and any new strict error fails the
+// gate outright. Never raise.
+const CEILING = 0;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.domain-strict-baseline.json'), 'utf8'));
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));

@@ -30,7 +30,18 @@ export const COMPENDIUM_TABS = Object.freeze([
   'tiers', 'economy', 'power', 'arcane', 'stress', 'neighbour', 'institutions',
 ]);
 
+/**
+ * @typedef {Object} CompendiumEntry
+ * @property {string} id
+ * @property {string} term
+ * @property {string} category
+ * @property {string} tab
+ * @property {string} anchor
+ * @property {string} [keywords]
+ */
+
 // kebab-case slug for stable entry ids and anchor fallbacks.
+/** @param {unknown} s @returns {string} */
 function slug(s) {
   return String(s || '')
     .toLowerCase()
@@ -135,8 +146,9 @@ const REL_ENTRIES = REL_TYPES.map((r) => ({
 /**
  * The flat, frozen index. Order here is the stable tiebreak order when
  * two entries score equally (after term-length).
+ * @type {ReadonlyArray<CompendiumEntry>}
  */
-export const COMPENDIUM_INDEX = Object.freeze([
+export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ ([
   ...TIER_ENTRIES,
   ...ROUTE_ENTRIES,
   ...THREAT_ENTRIES,
@@ -146,10 +158,16 @@ export const COMPENDIUM_INDEX = Object.freeze([
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
-].map(Object.freeze));
+].map(Object.freeze)));
 
 // ── Scoring ────────────────────────────────────────────────────────────────
 
+/**
+ * @param {CompendiumEntry} entry
+ * @param {string} q
+ * @param {string[]} tokens
+ * @returns {number}
+ */
 function scoreEntry(entry, q, tokens) {
   const term = entry.term.toLowerCase();
   const haystack = `${term} ${(entry.keywords || '').toLowerCase()} ${entry.category.toLowerCase()}`;
@@ -169,8 +187,8 @@ function scoreEntry(entry, q, tokens) {
  * Search the Compendium index. Pure; returns ranked navigation targets.
  *
  * @param {string} query — raw user input.
- * @param {{ limit?: number, index?: ReadonlyArray<object> }} [opts]
- * @returns {Array<object>} ranked entries (the index objects themselves).
+ * @param {{ limit?: number, index?: ReadonlyArray<CompendiumEntry> }} [opts]
+ * @returns {Array<CompendiumEntry>} ranked entries (the index objects themselves).
  */
 export function searchCompendium(query, opts = {}) {
   const limit = opts.limit ?? 8;

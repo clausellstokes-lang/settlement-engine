@@ -20,10 +20,17 @@
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
 
+/**
+ * @typedef {{ name?: string, category?: string, impairments?: Array<{ type?: string, [key: string]: unknown }>, [key: string]: unknown }} InstitutionLike
+ * @typedef {{ personality?: { flaw?: unknown, dominant?: unknown }, flaw?: unknown, corrupt?: boolean, ousted?: boolean, factionAffiliation?: unknown, factionLink?: unknown, institutionId?: unknown, [key: string]: unknown }} NpcLike
+ * @typedef {{ economicState?: Record<string, any>, safetyProfile?: Record<string, any>, institutions?: InstitutionLike[], npcs?: NpcLike[], [key: string]: unknown }} ClimateSettlement
+ */
+
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
 // to the engine's corruption vectors {greed, hunger_for_status, fear,
 // forbidden_patron, fanaticism}. A flaw NOT in this map is not corruptible.
+/** @type {Readonly<Record<string, string>>} */
 const FLAW_VECTOR = Object.freeze({
   greedy: 'greed',
   corrupt: 'greed',
@@ -46,18 +53,21 @@ const FLAW_VECTOR = Object.freeze({
 
 export const CORRUPTIBLE_FLAWS = Object.freeze(Object.keys(FLAW_VECTOR));
 
+/** @param {unknown} flaw @returns {boolean} */
 export function isCorruptibleFlaw(flaw) {
   if (!flaw) return false;
   return Object.prototype.hasOwnProperty.call(FLAW_VECTOR, String(flaw).toLowerCase());
 }
 
-/** Corruption vector for a flaw; defaults to 'greed' for an unmapped value. */
+/** Corruption vector for a flaw; defaults to 'greed' for an unmapped value.
+ * @param {unknown} flaw @returns {string} */
 export function corruptionVectorForFlaw(flaw) {
   return FLAW_VECTOR[String(flaw || '').toLowerCase()] || 'greed';
 }
 
 /** The NPC's corruptible flaw (lowercased) if any, else null. Reads the common
- *  shapes: npc.personality.flaw, npc.flaw, npc.personality.dominant. */
+ *  shapes: npc.personality.flaw, npc.flaw, npc.personality.dominant.
+ * @param {NpcLike | null | undefined} npc @returns {string | null} */
 export function npcCorruptibleFlaw(npc) {
   const candidates = [npc?.personality?.flaw, npc?.flaw, npc?.personality?.dominant];
   for (const c of candidates) {
@@ -83,7 +93,9 @@ export const CORRUPTION_TUNING = Object.freeze({
   outReplaceAtNotable: 0.08,
 });
 
+/** @type {(x: number, lo: number, hi: number) => number} */
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+/** @type {(x: number) => number} */
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
 /**
@@ -132,19 +144,22 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
 // Importance tiers (entities/npcs.js): pillar > key > notable > minor.
 export const IMPORTANCE_LADDER = Object.freeze(['pillar', 'key', 'notable', 'minor']);
 
-/** Demote one importance step (floor = minor). Unknown → 'notable'. */
+/** Demote one importance step (floor = minor). Unknown → 'notable'.
+ * @param {string} importance @returns {string} */
 export function demoteImportance(importance) {
   const i = IMPORTANCE_LADDER.indexOf(importance);
   if (i < 0) return 'notable';
   return IMPORTANCE_LADDER[Math.min(IMPORTANCE_LADDER.length - 1, i + 1)];
 }
 
-/** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1). */
+/** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1).
+ * @param {number | string | null | undefined} dotRank @returns {number} */
 export function demoteDotRank(dotRank) {
   return Math.max(1, (Number(dotRank) || 1) - 1);
 }
 
-/** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced. */
+/** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced.
+ * @param {string} importance @returns {boolean} */
 export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
@@ -155,7 +170,8 @@ export function canBeOuted(importance) {
 // toward 'none'. Higher the corrupt member's seat, the faster it climbs.
 export const CAPTURE_LADDER = Object.freeze(['none', 'adversarial', 'equilibrium', 'corrupted', 'capture']);
 
-/** Step the ladder one rung up (toward capture) or down (toward none). */
+/** Step the ladder one rung up (toward capture) or down (toward none).
+ * @param {string} state @param {boolean} up @returns {string} */
 export function advanceCaptureState(state, up) {
   const i = CAPTURE_LADDER.indexOf(state);
   const cur = i < 0 ? 0 : i;
@@ -214,7 +230,8 @@ export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = 
   return clamp(base * diversityMult, 0, 1);
 }
 
-/** Effective security after the guild's drag — bounded so it never reaches zero. */
+/** Effective security after the guild's drag — bounded so it never reaches zero.
+ * @param {number} security @param {number} strength @returns {number} */
 export function guildEffectiveSecurity(security, strength) {
   return n01(n01(security) * (1 - n01(strength) * GUILD_TUNING.securityDrag));
 }
@@ -230,12 +247,14 @@ const PROSPERITY_SCORE = Object.freeze({
   prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
 });
 
+/** @param {unknown} value @returns {number} */
 function prosperityScore(value) {
   const s = String(value || '').toLowerCase();
   for (const [k, v] of Object.entries(PROSPERITY_SCORE)) { if (s.includes(k)) return v; }
   return 0.4; // unknown → middling
 }
 
+/** @param {InstitutionLike | null | undefined} inst @returns {boolean} */
 function isCriminalInstitution(inst) {
   if (!inst) return false;
   // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
@@ -246,7 +265,7 @@ function isCriminalInstitution(inst) {
 }
 
 /**
- * @param {object} settlement
+ * @param {ClimateSettlement | null | undefined} settlement
  * @returns {{crime:number, security:number, prosperity:number, hasCriminalInst:boolean, criminalInstitutions:string[]}}
  */
 export function readCorruptionClimate(settlement) {
@@ -254,7 +273,9 @@ export function readCorruptionClimate(settlement) {
   const sp = eco.safetyProfile || settlement?.safetyProfile || {};
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
 
-  const criminalInstitutions = institutions.filter(isCriminalInstitution).map((i) => i.name).filter(Boolean);
+  const criminalInstitutions = /** @type {string[]} */ (
+    institutions.filter(isCriminalInstitution).map((/** @type {InstitutionLike} */ i) => i.name).filter(Boolean)
+  );
   const hasCriminalInst = criminalInstitutions.length > 0
     || (Array.isArray(sp.criminalInstitutions) && sp.criminalInstitutions.length > 0);
 
@@ -296,6 +317,7 @@ export const PATRONAGE_TUNING = Object.freeze({
   proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
 });
 
+/** @param {unknown} a @param {unknown} b @returns {boolean} */
 function nameMatches(a, b) {
   const x = String(a || '').trim().toLowerCase();
   const y = String(b || '').trim().toLowerCase();
@@ -303,7 +325,8 @@ function nameMatches(a, b) {
   return x === y || x.includes(y) || y.includes(x);
 }
 
-/** The home-institution fields the exposure path reads, in the same order. */
+/** The home-institution fields the exposure path reads, in the same order.
+ * @param {NpcLike | null | undefined} npc @returns {unknown} */
 export function npcHomeInstitution(npc) {
   return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
 }
@@ -316,7 +339,7 @@ export function npcHomeInstitution(npc) {
  *              made it public); drags onset security AND raises the exposure
  *              visibility of anyone still corrupt inside it.
  *
- * @param {object} settlement
+ * @param {ClimateSettlement | null | undefined} settlement
  * @returns {{covert: string[], revealed: string[]}}
  */
 export function compromisedSecurityInstitutions(settlement) {
@@ -347,7 +370,7 @@ export function compromisedSecurityInstitutions(settlement) {
  * effective security (covert + revealed both count: a bought watch shields
  * recruits whether or not the town knows it's bought).
  *
- * @param {object} settlement
+ * @param {ClimateSettlement | null | undefined} settlement
  * @returns {{drag: number, covert: string[], revealed: string[]}}
  */
 export function patronageSecurityDrag(settlement) {

@@ -20,11 +20,12 @@ const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
  * @param {any} [args.wizardNews]   campaign.wizardNews ({ entries, currentTick })
  * @param {any} [args.worldState]   campaign.worldState
  * @param {any} [args.snapshot]     a world snapshot (for settlement names + conditions)
- * @param {number} [args.tick]      restrict to a single tick (default: the latest)
+ * @param {number|null} [args.tick]  restrict to a single tick (default: the latest)
  * @param {number} [args.lookback]  how many recent ticks to include when tick is omitted
  * @returns {Object} grounding payload — pure data, no PII
  */
 export function buildChronicleGrounding({ wizardNews, worldState, snapshot, tick = null, lookback = 1 } = {}) {
+  /** @type {any[]} */
   const allEntries = Array.isArray(wizardNews?.entries) ? wizardNews.entries : [];
   // Default window: the latest tick that HAS entries — the feed clock can sit
   // ahead of the newest entry (manual impact advances, entry-less pulses),
@@ -38,15 +39,15 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, tick
 
   const entries = allEntries.filter(e => (e.tick ?? 0) >= minTick && (e.tick ?? 0) <= latestTick);
 
-  const settlements = (snapshot?.settlements || []).map(item => ({
+  const settlements = /** @type {any[]} */ (snapshot?.settlements || []).map(item => ({
     id: item.id,
     name: item.name,
-    conditions: (item.activeConditions || [])
+    conditions: /** @type {any[]} */ (item.activeConditions || [])
       .slice(0, 6)
       .map(c => ({ label: c.label || c.archetype, archetype: c.archetype, severity: c.severity })),
   }));
 
-  const stressors = (worldState?.stressors || [])
+  const stressors = /** @type {any[]} */ (worldState?.stressors || [])
     .filter(s => ACTIVE_STAGES.has(s.lifecycleStage || 'active'))
     .slice(0, 12)
     .map(s => ({

@@ -23,30 +23,88 @@
 import { buildRegistry } from '../lib/customRegistry.js';
 import { compareCodepoint } from './deterministicSort.js';
 
+// ── Types ──────────────────────────────────────────────────────────────────
+
+/**
+ * Custom-content entities as this module reads them. Ref-list fields
+ * tolerate the comma-separated-string legacy encoding (see toList).
+ * @typedef {{ name?: string, localUid?: string, id?: string, produces?: string[] | string, requires?: string[] | string }} CustomInstitution
+ * @typedef {{ name?: string, localUid?: string, id?: string, requires?: string[] | string, providedBy?: string[] | string }} CustomService
+ * @typedef {{ name?: string, localUid?: string, id?: string, commodities?: string[] | string, yields?: string[] | string, enables?: string[] | string }} CustomResource
+ * @typedef {{ name?: string, localUid?: string, id?: string, requiredInstitution?: string[] | string, requiredResources?: string[] | string }} CustomTradeGood
+ */
+
+/**
+ * The custom-content slice blob, as far as chain inference reads it.
+ * @typedef {Object} CustomContentLike
+ * @property {CustomInstitution[]} [institutions]
+ * @property {CustomService[]} [services]
+ * @property {CustomResource[]} [resources]
+ * @property {CustomTradeGood[]} [tradeGoods]
+ */
+
+/**
+ * A node in the inferred provides/requires graph.
+ * @typedef {Object} ChainNode
+ * @property {string}   uid
+ * @property {string}   name
+ * @property {string}   kind      'institution' | 'service' | 'resource' | 'good'
+ * @property {string[]} provides  normalized commodity tokens
+ * @property {string[]} requires  normalized commodity tokens
+ */
+
+/**
+ * A directed provides→requires edge between two nodes.
+ * @typedef {{ from: string, to: string, commodity: string }} ChainEdge
+ */
+
+/** @param {unknown} s */
 const norm = (s) => String(s || '').trim().toLowerCase();
+/** @param {unknown} s */
 const stem = (s) => norm(s).split(/[\s(]/)[0];
 
 /** Bidirectional stem-overlap match — the same rule the chain renderer + the
- *  generator's dependency matcher use, so inference and rendering never disagree. */
+ *  generator's dependency matcher use, so inference and rendering never disagree.
+ *  @param {unknown} a
+ *  @param {unknown} b
+ *  @returns {boolean}
+ */
 function tokenMatch(a, b) {
   const as = stem(a), bs = stem(b);
   if (!as || !bs) return false;
   return norm(a).includes(bs) || norm(b).includes(as);
 }
 
+/**
+ * Coerce a list-ish value (array, or legacy comma-separated string) to an array.
+ * @overload
+ * @param {string | ReadonlyArray<string> | null | undefined} v
+ * @returns {string[]}
+ */
+/**
+ * @template T
+ * @overload
+ * @param {ReadonlyArray<T> | null | undefined} v
+ * @returns {T[]}
+ */
+/**
+ * @param {unknown} v
+ * @returns {unknown[]}
+ */
 function toList(v) {
   if (Array.isArray(v)) return v.filter(Boolean);
   if (typeof v === 'string' && v.trim()) return v.split(',').map((s) => s.trim()).filter(Boolean);
   return [];
 }
 
+/** @param {unknown} s */
 const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 /**
- * @param {Object} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
- * @param {Object} [opts]
- * @param {(refId:string)=>(string|null)} [opts.resolve]  dependency-refId → entity name (defaults to a registry built from customContent)
- * @param {{primaryExports?:string[], primaryImports?:string[], name?:string}} [opts.neighbour]
+ * @param {CustomContentLike} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
+ * @param {{ resolve?: (refId: string) => (string | null), neighbour?: { primaryExports?: string[], primaryImports?: string[], name?: string } }} [opts]
+ *   opts.resolve — dependency-refId → entity name (defaults to a registry built from customContent);
+ *   opts.neighbour — a neighbour's trade surface to reconcile import/export endpoints against.
  * @returns {Array<Object>}  discovered chains (activeChain superset), sorted by chainId
  */
 export function inferSupplyChains(customContent = {}, opts = {}) {
@@ -60,11 +118,25 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       return (typeof refId === 'string' && !refId.includes(':')) ? refId : null;
     };
   }
+  /**
+   * @param {string | ReadonlyArray<string> | null | undefined} refs
+   * @returns {string[]}
+   */
+  // @ts-ignore -- filter(Boolean) removes the nulls at runtime; TS does not narrow through BooleanConstructor here.
   const resolveNames = (refs) => toList(refs).map((r) => resolve(r)).filter(Boolean);
 
   const cc = customContent || {};
+  /** @type {ChainNode[]} */
   const nodes = [];
+  /** @type {Map<string, ChainNode>} */
   const byName = new Map();
+  /**
+   * @param {{ name?: string, localUid?: string, id?: string }} item
+   * @param {string} kind
+   * @param {Array<string | null | undefined>} provides
+   * @param {Array<string | null | undefined>} requires
+   * @returns {void}
+   */
   const addNode = (item, kind, provides, requires) => {
     const name = item && item.name && String(item.name).trim();
     if (!name) return;
@@ -97,7 +169,13 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   // good path instead of the built-in step collapsing to a trade endpoint. The
   // seeded node provides its own name; the processor pass below gives a built-in
   // processing institution its inputs.
+  /** @type {Record<string, string>} */
   const PREBUILT_KIND = { institutions: 'institution', services: 'service', resources: 'resource', tradeGoods: 'good' };
+  /**
+   * @param {string} name
+   * @param {string} kind
+   * @returns {ChainNode | null}
+   */
   const ensureNode = (name, kind) => {
     const key = norm(name);
     if (!name || byName.has(key)) return byName.get(key) || null;
@@ -106,6 +184,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     byName.set(key, node);
     return node;
   };
+  /** @param {unknown} refId */
   const seedRef = (refId) => {
     if (typeof refId !== 'string' || !refId.startsWith('prebuilt:') || !registry?.resolve) return;
     const e = registry.resolve(refId);
@@ -145,6 +224,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
 
   // Edges: A.provides token matches B.requires token.
   const seenEdge = new Set();
+  /** @type {ChainEdge[]} */
   const edges = [];
   for (const a of nodes) {
     for (const b of nodes) {
@@ -160,16 +240,28 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     }
   }
 
+  /** @type {Map<string, ChainNode>} */
   const byUid = new Map(nodes.map((n) => [n.uid, n]));
+  /** @type {Map<string, ChainEdge[]>} */
   const out = new Map(nodes.map((n) => [n.uid, []]));
+  /** @type {Map<string, number>} */
   const inbound = new Map(nodes.map((n) => [n.uid, 0]));
+  // @ts-ignore -- both maps are seeded with every node uid above, so .get() never misses here.
   for (const e of edges) { out.get(e.from).push(e); inbound.set(e.to, inbound.get(e.to) + 1); }
   for (const arr of out.values()) arr.sort((x, y) => compareCodepoint(`${x.commodity}${x.to}`, `${y.commodity}${y.to}`));
 
   // Sources: no inbound edge but at least one outbound. Walk to maximal paths.
+  // @ts-ignore -- `out` is seeded with every node uid above, so .get() never misses here.
   const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && out.get(n.uid).length > 0)
     .sort((a, b) => compareCodepoint(a.uid, b.uid));
+  /** @type {ChainEdge[][]} */
   const paths = [];
+  /**
+   * @param {string} uid
+   * @param {ChainEdge[]} path
+   * @param {Set<string>} visited
+   * @returns {void}
+   */
   const walk = (uid, path, visited) => {
     const outs = out.get(uid) || [];
     const next = outs.filter((e) => !visited.has(e.to));
@@ -187,6 +279,8 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   const discovered = [];
   for (const path of paths) {
     const uids = [path[0].from, ...path.map((e) => e.to)];
+    /** @type {ChainNode[]} */
+    // @ts-ignore -- filter(Boolean) removes the undefineds at runtime; TS does not narrow through BooleanConstructor here.
     const chainNodes = uids.map((u) => byUid.get(u)).filter(Boolean);
     if (chainNodes.length < 2) continue;
     const chainId = `discovered.${slug(uids.join('-'))}`;

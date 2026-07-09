@@ -60,8 +60,86 @@ import { governanceLedger } from './governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 
+// ── Types ────────────────────────────────────────────────────────────────
+
+/**
+ * @typedef {import('./settlement.schema.js').CapacityName} CapacityName
+ * @typedef {import('./settlement.schema.js').CapacityContributor} CapacityContributor
+ * @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition
+ * @typedef {import('./settlement.schema.js').ThreatProfile} ThreatProfile
+ * @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile
+ * @typedef {import('./settlement.schema.js').SupplyChainState} SupplyChainState
+ * @typedef {import('./settlement.schema.js').StressorEntry} StressorEntry
+ */
+
+/**
+ * Capacity band vocabulary — the five ratio bands plus the out-of-band
+ * 'absent' (see CAPACITY_BANDS below).
+ * @typedef {'surplus' | 'adequate' | 'strained' | 'critical' | 'collapsed' | 'absent'} CapacityBand
+ */
+
+/**
+ * The runtime save shape as this module reads it — a loose structural
+ * superset of CanonicalSettlement (generated saves carry `config`,
+ * `economicState`, etc. directly).
+ * @typedef {Object} SettlementLike
+ * @property {number | { total?: number } | null} [population]
+ * @property {Array<{ name?: string }>} [institutions]
+ * @property {{ magicLevel?: string, monsterThreat?: string, tradeRouteAccess?: string, magicExists?: boolean }} [config]
+ * @property {StressorEntry[] | StressorEntry} [stressors]
+ * @property {{ primaryExports?: unknown, exports?: unknown, activeChains?: import('./supplyChainState.js').LegacyChain[] }} [economicState]
+ * @property {{ activeChains?: import('./supplyChainState.js').LegacyChain[] }} [economy]
+ * @property {import('./supplyChainState.js').LegacyChain[]} [supplyChains]
+ * @property {import('./defenseLedger.js').DefenseLedgerSource['defenseProfile']} [defenseProfile]
+ * @property {import('./governanceLedger.js').GovernanceLedgerSource['powerStructure']} [powerStructure]
+ */
+
+/**
+ * A stressor entry as the legacy aliases actually carry it — name/type
+ * may be absent or non-string on old saves, so both are read as unknown
+ * and coerced via String(). The required toString anchors assignability
+ * from canonStressors' `Array<object>` return.
+ * @typedef {{ name?: unknown, type?: unknown, toString(): string }} StressorLike
+ */
+
+/**
+ * A supply-chain state as this module reads it. `status` is a plain
+ * string (not the closed SupplyChainStatus union) because chains that
+ * pass through applyRegionalPressureToStatus can carry legacy statuses.
+ * @typedef {{ id: string, name: string, needKey?: string, status: string }} ChainLike
+ */
+
+/**
+ * Per-settlement derivation context built once by buildContext().
+ * @typedef {Object} CapacityContext
+ * @property {ActiveCondition[]}  conditions
+ * @property {FactionProfile[]}   profiles
+ * @property {ChainLike[]}        chains
+ * @property {ThreatProfile[]}    threats
+ */
+
+/**
+ * The raw supply/demand core each per-capacity deriver returns; the
+ * composer (finalizeCapacity) wraps it with the canonical envelope.
+ * @typedef {Object} CapacityCore
+ * @property {number} supply
+ * @property {number} demand
+ * @property {CapacityContributor[]} supplyContributors
+ * @property {CapacityContributor[]} demandContributors
+ */
+
+/**
+ * The envelope returned by deriveAllCapacities().
+ * @typedef {Object} CapacityState
+ * @property {Record<string, import('./settlement.schema.js').CapacityProfile>} capacities
+ * @property {Record<string, CapacityBand>} bands
+ * @property {Record<string, number>} ratios
+ * @property {Record<CapacityBand, CapacityName[]>} summary
+ */
+
 // ── Canonical catalog ────────────────────────────────────────────────────
 
+/** @type {ReadonlyArray<CapacityName>} */
 export const CAPACITY_NAMES = Object.freeze([
   'labor',
   'healing',
@@ -113,6 +191,9 @@ const RATIO_BOUNDS = Object.freeze({
  * Map a supply/demand ratio to a capacity band.
  *   ≥1.20 surplus | ≥0.95 adequate | ≥0.70 strained | ≥0.35 critical
  *   else collapsed.
+ *
+ * @param {number} ratio
+ * @returns {CapacityBand}
  */
 export function capacityBand(ratio) {
   if (typeof ratio !== 'number' || !isFinite(ratio)) return 'adequate';
@@ -125,14 +206,30 @@ export function capacityBand(ratio) {
 
 // ── Supply / demand helpers ──────────────────────────────────────────────
 
+/**
+ * @param {number} score
+ * @returns {number}
+ */
 function clamp(score) {
   return Math.max(0, Math.min(100, score));
 }
 
+/**
+ * @param {CapacityContributor[]} arr
+ * @param {string} source
+ * @param {string} effect
+ * @param {number} delta
+ * @param {string} reason
+ * @returns {void}
+ */
 function push(arr, source, effect, delta, reason) {
   arr.push({ source, effect, delta, reason });
 }
 
+/**
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {number}
+ */
 function populationOf(settlement) {
   const pop = settlement?.population;
   if (typeof pop === 'number') return pop;
@@ -140,11 +237,21 @@ function populationOf(settlement) {
   return 0;
 }
 
+/**
+ * @param {SettlementLike | null | undefined} settlement
+ * @param {RegExp} pattern
+ * @returns {string[]}
+ */
 function institutionNamesMatching(settlement, pattern) {
   const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   return inst.filter(i => pattern.test(String(i?.name || ''))).map(i => i?.name || '');
 }
 
+/**
+ * @param {FactionProfile[]} profiles
+ * @param {string} archetype
+ * @returns {number}
+ */
 function factionPower(profiles, archetype) {
   const match = profiles.find(p => p.archetype === archetype);
   return match ? (match.power || 0) : 0;
@@ -155,8 +262,15 @@ function factionPower(profiles, archetype) {
 // Each deriver returns { supply: number, demand: number, supplyContributors,
 // demandContributors }. The composer wraps with the canonical envelope.
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveLabor(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 50;
   let demand = 50;
@@ -199,8 +313,15 @@ function deriveLabor(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveHealing(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 40;
   let demand = 50;
@@ -210,7 +331,7 @@ function deriveHealing(s, ctx) {
   // informal care (P3.3b Stage 4b) — so they rescue the harsh "absent" penalty rather than reading
   // as no healing at all. ~17% of generated settlements offer healing services without a
   // healer-named institution; they were being mis-read as having zero healing.
-  const heal = healingLedger(s);
+  const heal = healingLedger(/** @type {any} */ (s));
   const healers = heal.healerCount;
   if (healers >= 3) {
     supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
@@ -259,8 +380,15 @@ function deriveHealing(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveDefense(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 40;
   let demand = 50;
@@ -317,8 +445,15 @@ function deriveDefense(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveAdministrative(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 50;
   let demand = 50;
@@ -371,8 +506,15 @@ function deriveAdministrative(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveFoodProduction(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 45;
   let demand = 50;
@@ -445,6 +587,7 @@ function deriveFoodProduction(s, ctx) {
       demand += m; push(demandContributors, cond.id, 'anchor_lost', +m, `${cond.label} pushes everyone onto remaining sources.`);
     }
   }
+  /** @type {StressorLike[]} */
   const stressors = canonStressors(s);
   if (stressors.some(st => /refugee|migrant|influx/i.test(String(st?.name || st?.type || st)))) {
     demand += 12; push(demandContributors, 'stressors.refugee', 'influx', +12, 'Refugee influx raises food demand.');
@@ -456,8 +599,15 @@ function deriveFoodProduction(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} _ctx
+ * @returns {CapacityCore}
+ */
 function deriveTransport(s, _ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 45;
   let demand = 50;
@@ -498,8 +648,15 @@ function deriveTransport(s, _ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveReligiousWelfare(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 40;
   let demand = 50;
@@ -537,8 +694,15 @@ function deriveReligiousWelfare(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveCraft(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
   let supply = 45;
   let demand = 50;
@@ -581,8 +745,15 @@ function deriveCraft(s, ctx) {
   };
 }
 
+/**
+ * @param {SettlementLike} s
+ * @param {CapacityContext} ctx
+ * @returns {CapacityCore}
+ */
 function deriveMagical(s, ctx) {
+  /** @type {CapacityContributor[]} */
   const supplyContributors = [];
+  /** @type {CapacityContributor[]} */
   const demandContributors = [];
 
   // Dead-magic guard (W5#3): in a magicExists:false world there is no arcane
@@ -658,6 +829,12 @@ const DERIVERS = Object.freeze({
 // trends 'improving'; anything else (no condition input, or mixed
 // easing/stable) holds 'stable'. Vocabulary matches the CapacityProfile
 // typedef ('improving' | 'stable' | 'worsening').
+/**
+ * @param {ActiveCondition[]} conditions
+ * @param {CapacityContributor[]} supplyContributors
+ * @param {CapacityContributor[]} demandContributors
+ * @returns {'improving' | 'stable' | 'worsening'}
+ */
 function conditionTrajectory(conditions, supplyContributors, demandContributors) {
   if (!Array.isArray(conditions) || conditions.length === 0) return 'stable';
   const sources = new Set([
@@ -671,6 +848,15 @@ function conditionTrajectory(conditions, supplyContributors, demandContributors)
   return 'stable';
 }
 
+/**
+ * @param {CapacityName} name
+ * @param {number} supply
+ * @param {number} demand
+ * @param {CapacityContributor[]} supplyContributors
+ * @param {CapacityContributor[]} demandContributors
+ * @param {ActiveCondition[]} [conditions]
+ * @returns {import('./settlement.schema.js').CapacityProfile}
+ */
 function finalizeCapacity(name, supply, demand, supplyContributors, demandContributors, conditions = []) {
   // 0/0 is not a ratio story: the capacity simply is not present (today:
   // magical in a dead-magic world). Band it 'absent' instead of letting the
@@ -693,12 +879,19 @@ function finalizeCapacity(name, supply, demand, supplyContributors, demandContri
 /**
  * Build the context (active conditions, threats, factions, chains)
  * once per settlement so each capacity deriver doesn't re-derive.
+ *
+ * @param {SettlementLike} settlement
+ * @returns {CapacityContext}
  */
 function buildContext(settlement) {
   return {
     conditions: deriveAllActiveConditions(settlement),
+    // @ts-ignore -- deriveAllFactionProfiles is annotated Array<FactionProfile|null>; a null only
+    // appears for a falsy faction entry (corrupt save). Consumers here have always assumed no nulls.
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
+    // @ts-ignore -- deriveAllThreatProfiles filter(Boolean)s its nulls at runtime; TS does not
+    // narrow through BooleanConstructor (same suppression as supplyChainState.js#deriveAllSupplyChainStates).
     threats:    deriveAllThreatProfiles(settlement),
   };
 }
@@ -706,9 +899,9 @@ function buildContext(settlement) {
 /**
  * Derive one named capacity profile.
  *
- * @param {string} name        One of CAPACITY_NAMES.
- * @param {Object} settlement
- * @returns {Object | null}    CapacityProfile, or null for unknown.
+ * @param {CapacityName} name  One of CAPACITY_NAMES.
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {import('./settlement.schema.js').CapacityProfile | null}  CapacityProfile, or null for unknown.
  */
 export function deriveCapacityProfile(name, settlement) {
   if (!name || !DERIVERS[name]) return null;
@@ -721,8 +914,8 @@ export function deriveCapacityProfile(name, settlement) {
 /**
  * Derive every canonical capacity. Builds context once.
  *
- * @param {Object} settlement
- * @returns {Object} {
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {CapacityState} {
  *   capacities: { [name]: CapacityProfile },
  *   bands: { [name]: CapacityBand },
  *   ratios: { [name]: number },
@@ -731,8 +924,11 @@ export function deriveCapacityProfile(name, settlement) {
  */
 export function deriveAllCapacities(settlement) {
   if (!settlement) {
+    /** @type {Record<string, import('./settlement.schema.js').CapacityProfile>} */
     const empty = {};
+    /** @type {Record<string, CapacityBand>} */
     const bands = {};
+    /** @type {Record<string, number>} */
     const ratios = {};
     for (const name of CAPACITY_NAMES) {
       empty[name] = finalizeCapacity(name, 50, 50, [], []);
@@ -748,9 +944,13 @@ export function deriveAllCapacities(settlement) {
   }
 
   const ctx = buildContext(settlement);
+  /** @type {Record<string, import('./settlement.schema.js').CapacityProfile>} */
   const capacities = {};
+  /** @type {Record<string, CapacityBand>} */
   const bands = {};
+  /** @type {Record<string, number>} */
   const ratios = {};
+  /** @type {Record<CapacityBand, CapacityName[]>} */
   const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [], absent: [] };
 
   for (const name of CAPACITY_NAMES) {
@@ -767,7 +967,11 @@ export function deriveAllCapacities(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Count capacities at each band. */
+/**
+ * Count capacities at each band.
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {Record<CapacityBand, number>}
+ */
 export function capacityBreakdown(settlement) {
   const out = { surplus: 0, adequate: 0, strained: 0, critical: 0, collapsed: 0, absent: 0 };
   const state = deriveAllCapacities(settlement);
@@ -778,7 +982,11 @@ export function capacityBreakdown(settlement) {
   return out;
 }
 
-/** Human-readable lines suitable for AI / PDF / UI. */
+/**
+ * Human-readable lines suitable for AI / PDF / UI.
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeCapacities(settlement) {
   const state = deriveAllCapacities(settlement);
   const out = [];
@@ -789,7 +997,11 @@ export function summarizeCapacities(settlement) {
   return out;
 }
 
-/** Capacities currently at strained/critical/collapsed. */
+/**
+ * Capacities currently at strained/critical/collapsed.
+ * @param {SettlementLike | null | undefined} settlement
+ * @returns {CapacityName[]}
+ */
 export function strainedCapacities(settlement) {
   const state = deriveAllCapacities(settlement);
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
@@ -821,6 +1033,15 @@ const CAPACITY_LABEL_LOOKUP = CAPACITY_LABEL;
  * @property {string} explanation
  */
 
+/**
+ * @param {CapacityName} name
+ * @param {string} beforeBand
+ * @param {string} afterBand
+ * @param {number} supplyChange
+ * @param {number} demandChange
+ * @param {number} ratioChange
+ * @returns {string}
+ */
 function explainCapacityDelta(name, beforeBand, afterBand, supplyChange, demandChange, ratioChange) {
   const label = CAPACITY_LABEL_LOOKUP[name] || name;
   if (beforeBand !== afterBand) {
@@ -839,12 +1060,13 @@ function explainCapacityDelta(name, beforeBand, afterBand, supplyChange, demandC
  * Diff two capacity states. Returns structured deltas for every
  * capacity whose supply, demand, or band changed.
  *
- * @param {Object} before  Output of deriveAllCapacities.
- * @param {Object} after   Output of deriveAllCapacities.
+ * @param {CapacityState | null | undefined} before  Output of deriveAllCapacities.
+ * @param {CapacityState | null | undefined} after   Output of deriveAllCapacities.
  * @returns {CapacityDelta[]}
  */
 export function compareCapacityStates(before, after) {
   if (!before || !after) return [];
+  /** @type {CapacityDelta[]} */
   const out = [];
   for (const name of CAPACITY_NAMES) {
     const b = before.capacities?.[name];

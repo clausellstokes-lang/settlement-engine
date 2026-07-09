@@ -91,21 +91,41 @@ const RULE_COMPARISON_KEYS = Object.freeze([
   ...BOOLEAN_KEYS,
 ]);
 
+/**
+ * @param {unknown} value
+ * @param {readonly unknown[]} allowed
+ * @param {unknown} fallback
+ * @returns {unknown}
+ */
 function enumValue(value, allowed, fallback) {
   return allowed.includes(value) ? value : fallback;
 }
 
+/**
+ * @typedef {{ rules?: Record<string, unknown> }} PresetEntry
+ */
+
+/**
+ * @param {Record<string, unknown>} rules
+ * @param {PresetEntry | undefined} preset
+ * @returns {boolean}
+ */
 function rulesMatchPreset(rules, preset) {
   return RULE_COMPARISON_KEYS.every(key => rules[key] === preset?.rules?.[key]);
 }
 
+/**
+ * @param {SimulationRulesInput} input
+ * @param {Record<string, unknown>} rules
+ * @returns {string}
+ */
 function presetIdForRules(input, rules) {
-  const explicit = typeof input.presetId === 'string' && SIMULATION_RULE_PRESETS[input.presetId]
+  const explicit = typeof input.presetId === 'string' && /** @type {Record<string, PresetEntry>} */ (SIMULATION_RULE_PRESETS)[input.presetId]
     ? input.presetId
     : null;
-  if (explicit && rulesMatchPreset(rules, SIMULATION_RULE_PRESETS[explicit])) return explicit;
+  if (explicit && rulesMatchPreset(rules, /** @type {Record<string, PresetEntry>} */ (SIMULATION_RULE_PRESETS)[explicit])) return explicit;
   const inferred = Object.keys(SIMULATION_RULE_PRESETS)
-    .find(id => rulesMatchPreset(rules, SIMULATION_RULE_PRESETS[id]));
+    .find(id => rulesMatchPreset(rules, /** @type {Record<string, PresetEntry>} */ (SIMULATION_RULE_PRESETS)[id]));
   return inferred || CUSTOM_SIMULATION_PRESET_ID;
 }
 
@@ -120,9 +140,9 @@ export function normalizeSimulationRules(raw = {}) {
     migrationMode: enumValue(input.migrationMode, MIGRATION_MODES, DEFAULT_SIMULATION_RULES.migrationMode),
   };
   for (const key of BOOLEAN_KEYS) {
-    next[key] = input[key] === undefined ? DEFAULT_SIMULATION_RULES[key] : input[key] !== false;
+    /** @type {Record<string, unknown>} */ (next)[key] = input[key] === undefined ? /** @type {Record<string, unknown>} */ (DEFAULT_SIMULATION_RULES)[key] : input[key] !== false;
   }
-  next.presetId = presetIdForRules(input, next);
+  /** @type {Record<string, unknown>} */ (next).presetId = presetIdForRules(input, next);
   return next;
 }
 

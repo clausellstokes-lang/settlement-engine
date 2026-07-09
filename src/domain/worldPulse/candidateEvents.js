@@ -5,6 +5,68 @@ import { evaluateStressorRules, stressorCandidateForPressure } from './stressors
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 
+/**
+ * @typedef {Object} CePressure
+ * @property {number} score
+ * @property {string} kind
+ * @property {string[]} reasons
+ * @property {string} label
+ * @property {string} [settlementId]
+ * @property {string} [settlementName]
+ */
+
+/**
+ * @typedef {Object} Candidate
+ * @property {string} [id]
+ * @property {string} [type]
+ * @property {string} [candidateType]
+ * @property {string} [targetSaveId]
+ * @property {string} [relationshipKey]
+ * @property {string} [factionId]
+ * @property {string} [npcId]
+ * @property {string} [ruleId]
+ * @property {string} [ruleFamily]
+ * @property {string} [applyMode]
+ * @property {number} severity
+ * @property {number} [probability]
+ * @property {number} [roll]
+ * @property {string[]} [reasons]
+ * @property {string[]} [conflictTags]
+ * @property {{ settlementId?: string, flowKind?: string, [key: string]: * }} [metadata]
+ * @property {{ kind?: string }} [proposalPayload]
+ * @property {Object} [conflictResolution]
+ */
+
+/**
+ * @typedef {Object} CandidateBudgets
+ * @property {number} [maxCandidates]
+ * @property {number} [maxPerSettlement]
+ * @property {number} [maxRelationshipLabelProposals]
+ * @property {number} [maxGovernmentChallenges]
+ * @property {number} [maxNpcProposals]
+ */
+
+/**
+ * @typedef {Object} WorldPulseSnapshot
+ * @property {{ tick?: number, simulationRules?: Object }} [worldState]
+ */
+
+/**
+ * @typedef {Object} WorldPulseContext
+ * @property {number} [tick]
+ * @property {CePressure[]} [pressures]
+ * @property {*} [pressureIndex]
+ * @property {Object} [simulationRules]
+ * @property {CandidateBudgets} [budgets]
+ */
+
+/**
+ * @typedef {Object} CandidateRng
+ * @property {() => number} random
+ * @property {(label: string) => CandidateRng} [fork]
+ */
+
+/** @param {unknown} value */
 function stablePart(value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 }
@@ -21,12 +83,18 @@ export const VOLATILITY_MULTIPLIERS = Object.freeze({
   turbulent: 1.6,
 });
 
+/** @param {string} volatility */
 export function volatilityMultiplier(volatility) {
-  return VOLATILITY_MULTIPLIERS[volatility] ?? 1.0;
+  return VOLATILITY_MULTIPLIERS[/** @type {keyof typeof VOLATILITY_MULTIPLIERS} */ (volatility)] ?? 1.0;
 }
 
+/**
+ * @param {CePressure | null | undefined} pressure
+ * @param {number} tick
+ */
 function pressureConditionCandidate(pressure, tick) {
   if (!pressure || pressure.score < 0.5) return null;
+  /** @type {Record<string, string>} */
   const archetypeByKind = {
     food: 'famine',
     disease: 'plague',
@@ -35,6 +103,7 @@ function pressureConditionCandidate(pressure, tick) {
     legitimacy: 'faction_challenge',
     crime: 'regional_criminal_pressure',
   };
+  /** @type {Record<string, string>} */
   const labelByKind = {
     food: 'Famine pressure',
     disease: 'Disease outbreak',
@@ -85,6 +154,7 @@ function pressureConditionCandidate(pressure, tick) {
   };
 }
 
+/** @param {Candidate} candidate */
 function candidateIdentity(candidate) {
   return [
     candidate.type,
@@ -96,16 +166,22 @@ function candidateIdentity(candidate) {
 // Stable identity for ordering and rng forks. Candidate ids embed settlement /
 // relationship / faction ids and the tick — never the candidate's POSITION in
 // the saves array — so sorting and rolling by this key is order-independent.
+/** @param {Candidate} candidate */
 function stableCandidateKey(candidate) {
   return String(candidate.id || candidateIdentity(candidate));
 }
 
+/**
+ * @param {Candidate} a
+ * @param {Candidate} b
+ */
 function compareStableKeys(a, b) {
   const keyA = stableCandidateKey(a);
   const keyB = stableCandidateKey(b);
   return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
 }
 
+/** @param {Candidate} candidate */
 function exclusiveTags(candidate) {
   return (candidate.conflictTags || []).filter(tag =>
     /^label:/.test(tag)
@@ -119,6 +195,10 @@ function exclusiveTags(candidate) {
   );
 }
 
+/**
+ * @param {Candidate[]} [candidates]
+ * @param {CandidateBudgets} [budgets]
+ */
 export function resolveCandidateConflicts(candidates = [], budgets = {}) {
   const maxCandidates = budgets.maxCandidates ?? 90;
   const maxPerSettlement = budgets.maxPerSettlement ?? 14;
@@ -180,8 +260,12 @@ export function resolveCandidateConflicts(candidates = [], budgets = {}) {
   return selected.sort((a, b) => (b.severity - a.severity) || compareStableKeys(a, b));
 }
 
+/**
+ * @param {WorldPulseSnapshot} snapshot
+ * @param {WorldPulseContext} [context]
+ */
 export function evaluateWorldPulseRules(snapshot, context = {}) {
-  const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
+  const tick = /** @type {number} */ (Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0);
   const pressures = context.pressures || [];
   const pressureIndex = context.pressureIndex;
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
@@ -198,15 +282,15 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
     candidates.push(...evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules }));
   }
   if (rules.relationshipDynamicsEnabled) {
-    candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+    candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, /** @type {{ tick?: number }} */ ({ ...context, tick, simulationRules: rules })));
   }
   if (rules.npcAgencyEnabled) {
-    candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+    candidates.push(...evaluateNpcRules(/** @type {any} */ (snapshot), pressureIndex, /** @type {{ tick?: any }} */ ({ ...context, tick, simulationRules: rules })));
   }
   if (rules.factionCompetitionEnabled) {
-    candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+    candidates.push(...evaluateFactionRules(/** @type {any} */ (snapshot), pressureIndex, /** @type {{ tick?: number }} */ ({ ...context, tick, simulationRules: rules })));
   }
-  if (!['off', 'local'].includes(rules.propagationMode) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
+  if (!['off', 'local'].includes(/** @type {string} */ (rules.propagationMode)) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
     candidates.push(...deriveFlowCandidates(snapshot, { tick, simulationRules: rules }).filter(candidate => {
       if (candidate.metadata?.flowKind === 'population') return rules.migrationFlowsEnabled;
       if (candidate.metadata?.flowKind === 'trade') return rules.tradeFlowsEnabled;
@@ -217,7 +301,11 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   return resolveCandidateConflicts(candidates, context.budgets || {});
 }
 
+/**
+ * @param {{ pressures?: CePressure[], relationshipCandidates?: Candidate[], npcCandidates?: Candidate[], factionCandidates?: Candidate[], tick?: number }} [input]
+ */
 export function generateWorldPulseCandidates({ pressures = [], relationshipCandidates = [], npcCandidates = [], factionCandidates = [], tick = 0 } = {}) {
+  /** @type {Candidate[]} */
   const candidates = [];
   for (const pressure of pressures) {
     const condition = pressureConditionCandidate(pressure, tick);
@@ -235,16 +323,25 @@ export function generateWorldPulseCandidates({ pressures = [], relationshipCandi
 // iteration order — reordering the saves array can no longer reshuffle which
 // candidates pass. Test stubs without fork() fall back to the shared stream
 // (the constant-roll stubs in the suites are position-independent anyway).
+/**
+ * @param {CandidateRng} rng
+ * @param {Candidate} candidate
+ */
 function candidateRoll(rng, candidate) {
   if (typeof rng.fork !== 'function') return rng.random();
   return rng.fork(`roll:${stableCandidateKey(candidate)}`).random();
 }
 
+/**
+ * @param {Candidate[]} candidates
+ * @param {CandidateRng} rng
+ * @param {{ maxAuto?: number, maxProposals?: number, volatility?: number }} [options]
+ */
 export function rollCandidates(candidates = [], rng, options = {}) {
   const maxAuto = options.maxAuto ?? 6;
   const maxProposals = options.maxProposals ?? 5;
   // World volatility scales pass probability (default 1.0 = unchanged).
-  const volatility = Number.isFinite(options.volatility) ? options.volatility : 1;
+  const volatility = /** @type {number} */ (Number.isFinite(options.volatility) ? options.volatility : 1);
   const selected = [];
   const rollExplanations = [];
   let autoCount = 0;

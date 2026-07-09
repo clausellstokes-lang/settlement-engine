@@ -8,6 +8,7 @@ const SYMMETRIC_TYPES = new Set([
   'criminal_network',
 ]);
 
+/** @type {Record<string, number>} */
 const TIER_RANK = {
   thorp: 0,
   hamlet: 1,
@@ -31,18 +32,47 @@ export const RELATIONSHIP_SELECTIONS = [
   { value: 'vassal_of', label: 'Current settlement is vassal' },
 ];
 
+/**
+ * A settlement save record (or the settlement itself) — only the fields this
+ * module reads. Legacy saves store population as a bare number, canonical ones
+ * as `{ total }`.
+ * @typedef {Object} SettlementSaveLike
+ * @property {string=} id
+ * @property {string=} tier
+ * @property {{ id?: string, tier?: string, population?: number | { total?: number } }=} settlement
+ */
+
+/**
+ * @param {SettlementSaveLike | null | undefined} save
+ * @returns {number} tier rank plus a small population-scaled bonus
+ */
 function strengthScore(save) {
   const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
+  // @ts-expect-error -- population is number | { total } across save generations; `.total ||` is the tolerant read
   const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
   return (TIER_RANK[tier] ?? 2) + Math.min(0.8, Math.log10(Math.max(1, population)) / 8);
 }
 
+/**
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string }} stronger endpoint first
+ */
 function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
   return strengthScore(targetSave) > strengthScore(sourceSave)
     ? { from: String(targetId), to: String(sourceId) }
     : { from: String(sourceId), to: String(targetId) };
 }
 
+/**
+ * @typedef {{ relationshipType: string, from: string, to: string, sourceRole: string, targetRole: string }} RelationshipDefinition
+ * @param {string} selection  a RELATIONSHIP_SELECTIONS value
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @returns {RelationshipDefinition}
+ */
 export function relationshipDefinition(selection, sourceId, targetId) {
   const source = String(sourceId);
   const target = String(targetId);
@@ -70,6 +100,11 @@ export function relationshipDefinition(selection, sourceId, targetId) {
   return relationshipDefinition('neutral', source, target);
 }
 
+/**
+ * @param {RelationshipDefinition} definition
+ * @param {string} localRole
+ * @returns {{ relationshipType: string, relationshipFrom: string, relationshipTo: string, localRelationshipRole: string, displayRelationshipType: string }}
+ */
 export function relationshipLinkMetadata(definition, localRole) {
   return {
     relationshipType: definition.relationshipType,
@@ -80,6 +115,12 @@ export function relationshipLinkMetadata(definition, localRole) {
   };
 }
 
+/**
+ * @param {{ from?: string, relationshipType?: string } | null | undefined} edge
+ * @param {string} sourceId
+ * @param {string} _targetId
+ * @returns {{ sourceRole: string, targetRole: string }}
+ */
 export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
   const sourceIsFrom = String(edge?.from) === String(sourceId);
   if (edge?.relationshipType === 'patron') {
@@ -101,6 +142,19 @@ export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
 /**
  * Resolve new canonical metadata and old display-oriented saves to one edge.
  * Legacy hierarchical links infer the stronger endpoint as patron/overlord.
+ *
+ * @typedef {Object} RelationshipLinkLike
+ * @property {string=} relationshipType
+ * @property {string=} type                      legacy alias of relationshipType
+ * @property {string=} relationshipFrom
+ * @property {string=} relationshipTo
+ * @property {string=} localRelationshipRole
+ * @property {string=} displayRelationshipType
+ *
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string, relationshipType: string } | null}
  */
 export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   const sourceId = sourceSave?.id || sourceSave?.settlement?.id;
@@ -128,6 +182,10 @@ export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   return { from: String(sourceId), to: String(targetId), relationshipType: rawType };
 }
 
+/**
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @returns {string} relationship type as seen from the local settlement
+ */
 export function localPropagationType(link) {
   const role = link?.localRelationshipRole || link?.displayRelationshipType;
   if (role === 'client') return 'patron';

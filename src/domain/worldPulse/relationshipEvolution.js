@@ -1,9 +1,181 @@
 import { TIER_ORDER } from '../../data/constants.js';
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+/**
+ * A regional-graph edge between two settlements. Identity and endpoints are
+ * carried under several legacy aliases; every field is optional because edges
+ * arrive from many authoring paths.
+ * @typedef {Object} RelationshipEdge
+ * @property {string} [id]
+ * @property {string} [from]
+ * @property {string} [to]
+ * @property {string} [source]
+ * @property {string} [target]
+ * @property {string} [a]
+ * @property {string} [b]
+ * @property {string} [settlementAId]
+ * @property {string} [settlementBId]
+ * @property {string} [relationshipType]
+ * @property {string} [type]
+ * @property {string} [relation]
+ * @property {string|null} [legacyRelationshipType]
+ * @property {string|null} [normalizedDirection]
+ */
 
-const stablePart = (value) =>
+/**
+ * One incident / history / posture entry attached to a relationship state.
+ * @typedef {Object} RelationshipIncident
+ * @property {string} [type]
+ * @property {number} [tick]
+ * @property {string} [reason]
+ */
+
+/**
+ * The baseline metric vector for a relationship type.
+ * @typedef {Object} RelationshipDefaults
+ * @property {number} trust
+ * @property {number} resentment
+ * @property {number} dependency
+ * @property {number} leverage
+ * @property {number} fear
+ * @property {number} tradeBalance
+ * @property {number} pactStrength
+ */
+
+/**
+ * Persistent per-edge relationship state (produced by ensureRelationshipState).
+ * @typedef {Object} RelationshipState
+ * @property {string} relationshipType
+ * @property {number} trust
+ * @property {number} resentment
+ * @property {number} dependency
+ * @property {number} leverage
+ * @property {number} fear
+ * @property {number} tradeBalance
+ * @property {number} militaryBurden
+ * @property {number} aidBurden
+ * @property {number} obligationFatigue
+ * @property {number} pactStrength
+ * @property {RelationshipIncident[]} recentIncidents
+ * @property {RelationshipIncident[]} history
+ * @property {unknown[]} hierarchyResolutions
+ * @property {string} trajectory
+ * @property {string|null} proposedRelationshipType
+ * @property {number|null} lastTransitionTick
+ * @property {string|null} updatedAt
+ * @property {number} overlordWeaknessStreak
+ * @property {string|null} posture
+ * @property {number} memoryScore
+ * @property {number} dailyLifeWeight
+ * @property {number|null} postureUpdatedAtTick
+ * @property {string[]} postureReasons
+ * @property {string|null} overlordSaveId
+ * @property {string|null} vassalSaveId
+ * @property {string|null} patronSaveId
+ * @property {string|null} clientSaveId
+ * @property {Record<string, unknown>|null} relationshipMemory
+ */
+
+/**
+ * The per-settlement pressure vector (buildPressureSummary output).
+ * @typedef {Object} PressureSummary
+ * @property {number} food
+ * @property {number} disease
+ * @property {number} conflict
+ * @property {number} hostility
+ * @property {number} trade
+ * @property {number} legitimacy
+ * @property {number} crime
+ * @property {number} economy
+ * @property {number} defense
+ */
+
+/**
+ * The pressure index handed to rule evaluation.
+ * @typedef {Object} PressureIndex
+ * @property {(saveId: string, type: string) => ({ score?: number }|null|undefined)} [get]
+ * @property {Record<string, Array<{ type?: string, severity?: number }>>} [bySettlement]
+ */
+
+/**
+ * A settlement record resolved from the snapshot index.
+ * @typedef {Object} SettlementItem
+ * @property {{ tier?: string, population?: number }} [settlement]
+ * @property {string} [name]
+ */
+
+/**
+ * World state blob threaded through the tick pipeline.
+ * @typedef {Object} RelationshipWorldState
+ * @property {Record<string, RelationshipState>} [relationshipStates]
+ * @property {number} [tick]
+ */
+
+/**
+ * Read-only world snapshot the rules query.
+ * @typedef {Object} RelationshipSnapshot
+ * @property {{ edges?: RelationshipEdge[], channels?: Array<{ status: string, type: string, from?: unknown, to?: unknown, strength?: number, severity?: number }> }} [regionalGraph]
+ * @property {RelationshipEdge[]} [relationships]
+ * @property {{ relationshipStates?: Record<string, RelationshipState>, tick?: number, stressors?: Array<{ type?: string, affectedSettlementIds?: unknown[], status: string }> }} [worldState]
+ * @property {{ get?: (id: string) => (SettlementItem|null|undefined) }} [byId]
+ */
+
+/**
+ * The evaluation context passed to every relationship rule function.
+ * @typedef {Object} RuleCtx
+ * @property {RelationshipEdge} edge
+ * @property {RelationshipEdge} originalEdge
+ * @property {RelationshipState} relState
+ * @property {PressureSummary} sourcePressure
+ * @property {PressureSummary} targetPressure
+ * @property {PressureIndex} pressureIdx
+ * @property {RelationshipSnapshot} snapshot
+ * @property {number} tick
+ */
+
+/**
+ * Options bag for candidateBase — the merged ctx + details object. `relState`
+ * is always supplied (it rides in from the rule ctx); every other field is
+ * optional and populated per rule family. The index signature admits the ad-hoc
+ * keys individual rules attach.
+ * @typedef {{
+ *   [k: string]: unknown,
+ *   relState: RelationshipState,
+ *   edge?: RelationshipEdge,
+ *   tick?: number,
+ *   ruleId?: string,
+ *   candidateType?: string,
+ *   severity?: number,
+ *   probability?: number,
+ *   reasons?: string[],
+ *   summary?: string,
+ *   applyMode?: string,
+ *   relationshipPatch?: Record<string, unknown>,
+ *   proposalPayload?: unknown,
+ *   metadata?: Record<string, unknown>,
+ *   condition?: unknown,
+ *   targetSaveId?: string,
+ *   conflictTags?: string[],
+ * }} CandidateBaseArgs
+ */
+
+/**
+ * Loose details bag spread into candidateBase by labelProposal / internalDrift.
+ * Unlike CandidateBaseArgs it does NOT require relState — that is supplied by
+ * the spread ctx at the call site.
+ * @typedef {{
+ *   [k: string]: unknown,
+ *   ruleId?: string,
+ *   reasons?: string[],
+ *   metadata?: Record<string, unknown>,
+ *   relationshipPatch?: Record<string, unknown>,
+ *   conflictTags?: string[],
+ * }} RuleDetails
+ */
+
+const clamp01 = (/** @type {unknown} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
+
+const stablePart = (/** @type {unknown} */ value) =>
   String(value || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 
 // Deterministic 0..1 fork keyed on identity text (FNV-1a + avalanche). Used
@@ -12,6 +184,10 @@ const stablePart = (value) =>
 // identical whichever side the save happened to author at 'from'. The fmix32
 // finalizer matters: without it, single-character tick changes barely move
 // the high bits and one side raids for ten straight ticks.
+/**
+ * @param {string} text
+ * @returns {number}
+ */
 function hash01(text) {
   let h = 0x811c9dc5;
   for (let i = 0; i < text.length; i += 1) {
@@ -26,6 +202,7 @@ function hash01(text) {
   return (h >>> 0) / 4294967296;
 }
 
+/** @type {Record<string, RelationshipDefaults>} */
 const RELATIONSHIP_DEFAULTS = {
   neutral: {
     trust: 0.45,
@@ -183,6 +360,7 @@ export const RELATIONSHIP_RULE_MATRIX = {
   ],
 };
 
+/** @type {Record<string, string>} */
 export const RELATIONSHIP_TYPE_ALIASES = {
   trade: "trade_partner",
   alliance: "allied",
@@ -194,11 +372,15 @@ export const RELATIONSHIP_TYPE_ALIASES = {
   criminal_corridor: "criminal_network",
 };
 
-export const normalizeRelationshipType = (type) =>
+export const normalizeRelationshipType = (/** @type {unknown} */ type) =>
   RELATIONSHIP_TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
 
 const normalizeType = normalizeRelationshipType;
 
+/**
+ * @param {RelationshipEdge} [edge]
+ * @returns {string}
+ */
 export function relationshipKeyFromEdge(edge) {
   if (edge?.id) return edge.id;
   const from = edge?.from || edge?.source || edge?.a || "unknown-a";
@@ -206,6 +388,10 @@ export function relationshipKeyFromEdge(edge) {
   return `rel.${from}.${to}`;
 }
 
+/**
+ * @param {RelationshipEdge} [edge]
+ * @returns {{ from: any, to: any }}
+ */
 export function getRelationshipSettlements(edge) {
   return {
     from: edge?.from || edge?.source || edge?.a || edge?.settlementAId,
@@ -222,6 +408,11 @@ export function getRelationshipSettlements(edge) {
  * DM-authored vassal/patron edge carries no stamp and keeps its strict edge
  * direction (from = overlord/patron).
  */
+/**
+ * @param {RelationshipEdge} edge
+ * @param {RelationshipState} [relState]
+ * @returns {{ seniorId: string, juniorId: string, reversed: boolean }}
+ */
 export function relationshipRoles(edge, relState) {
   const { from, to } = getRelationshipSettlements(edge);
   const fromId = String(from);
@@ -236,6 +427,10 @@ export function relationshipRoles(edge, relState) {
   return { seniorId: fromId, juniorId: toId, reversed: false };
 }
 
+/**
+ * @param {RelationshipEdge} [edge]
+ * @returns {RelationshipEdge}
+ */
 export function normalizeRelationshipEdge(edge = {}) {
   const relationshipType = normalizeRelationshipType(edge.relationshipType || edge.type || edge.relation || "neutral");
   if (relationshipType !== "client") {
@@ -266,6 +461,11 @@ export function normalizeRelationshipEdge(edge = {}) {
   };
 }
 
+/**
+ * @param {RelationshipEdge} edge
+ * @param {Record<string, any>} [existing]
+ * @returns {RelationshipState}
+ */
 export function ensureRelationshipState(edge, existing = {}) {
   const normalizedEdge = normalizeRelationshipEdge(edge);
   const rawType = existing.relationshipType || normalizedEdge?.relationshipType || "neutral";
@@ -314,15 +514,25 @@ export function ensureRelationshipState(edge, existing = {}) {
   };
 }
 
+/**
+ * @param {{ edges?: RelationshipEdge[] }} [graph]
+ * @param {Record<string, Record<string, any>>} [existingStates]
+ * @returns {Record<string, RelationshipState>}
+ */
 export function ensureRelationshipStatesForGraph(graph = { edges: [] }, existingStates = {}) {
   return Object.fromEntries(
-    (graph.edges || []).map((edge) => {
+    (graph.edges || []).map((/** @type {RelationshipEdge} */ edge) => {
       const key = relationshipKeyFromEdge(edge);
       return [key, ensureRelationshipState(normalizeRelationshipEdge(edge), existingStates[key])];
     }),
   );
 }
 
+/**
+ * @param {RelationshipWorldState} worldState
+ * @param {RelationshipSnapshot} [snapshot]
+ * @returns {RelationshipWorldState}
+ */
 export function ensureAllRelationshipStates(worldState, snapshot) {
   return {
     ...worldState,
@@ -339,11 +549,15 @@ export function ensureAllRelationshipStates(worldState, snapshot) {
 // of the gap to baseline closed each tick.
 const RELATIONSHIP_RELAX = 0.12;
 
+/**
+ * @param {RelationshipWorldState} [worldState]
+ * @returns {RelationshipWorldState}
+ */
 export function relaxRelationshipStates(worldState) {
   const relationshipStates = { ...(worldState?.relationshipStates || {}) };
   for (const [key, s] of Object.entries(relationshipStates)) {
     const base = RELATIONSHIP_DEFAULTS[s.relationshipType] || RELATIONSHIP_DEFAULTS.neutral;
-    const toward = (cur, target) => clamp01((cur ?? target) + (target - (cur ?? target)) * RELATIONSHIP_RELAX);
+    const toward = (/** @type {number} */ cur, /** @type {number} */ target) => clamp01((cur ?? target) + (target - (cur ?? target)) * RELATIONSHIP_RELAX);
     relationshipStates[key] = {
       ...s,
       trust: toward(s.trust, base.trust),
@@ -354,19 +568,19 @@ export function relaxRelationshipStates(worldState) {
   return { ...worldState, relationshipStates };
 }
 
-const pressureFor = (pressureIdx, saveId, type) => {
+const pressureFor = (/** @type {PressureIndex} */ pressureIdx, /** @type {string} */ saveId, /** @type {string} */ type) => {
   const direct = pressureIdx?.get?.(saveId, type);
   if (direct) return direct.score || 0;
   const settlementPressures = pressureIdx?.bySettlement?.[saveId] || [];
   return settlementPressures.find((pressure) => pressure.type === type)?.severity || 0;
 };
 
-const strongestPressure = (pressureIdx, saveId, types) =>
+const strongestPressure = (/** @type {PressureIndex} */ pressureIdx, /** @type {string} */ saveId, /** @type {string[]} */ types) =>
   types.reduce((max, type) => Math.max(max, pressureFor(pressureIdx, saveId, type)), 0);
 
-const mean = (...values) => values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length;
+const mean = (/** @type {number[]} */ ...values) => values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length;
 
-const candidateBase = ({
+const candidateBase = (/** @type {CandidateBaseArgs} */ {
   edge,
   relState,
   tick,
@@ -418,7 +632,7 @@ const candidateBase = ({
   };
 };
 
-const labelProposal = (ctx, toType, candidateType, details) => {
+const labelProposal = (/** @type {RuleCtx} */ ctx, /** @type {string} */ toType, /** @type {string} */ candidateType, /** @type {RuleDetails} */ details) => {
   const { edge, relState, tick } = ctx;
   const key = relationshipKeyFromEdge(edge);
   const fromType = relState.relationshipType;
@@ -449,33 +663,51 @@ const labelProposal = (ctx, toType, candidateType, details) => {
   });
 };
 
-const internalDrift = (ctx, candidateType, details) => candidateBase({ ...ctx, ...details, candidateType });
+const internalDrift = (/** @type {RuleCtx} */ ctx, /** @type {string} */ candidateType, /** @type {RuleDetails} */ details) => candidateBase({ ...ctx, ...details, candidateType });
 
 // PAIR-STABLE attribution for genuinely mutual drifts (an arms race, a thaw,
 // a shared border incident): news/inbox rows land on the lower-sorted
 // settlement id, so attribution never flips with edge authoring order.
-const pairStableId = (edge) => {
+const pairStableId = (/** @type {RelationshipEdge} */ edge) => {
   const s = getRelationshipSettlements(edge);
   return String(s.from) <= String(s.to) ? String(s.from) : String(s.to);
 };
 
-const hasRecentIncident = (relState, type, tick, cooldown = 2) =>
+const hasRecentIncident = (/** @type {RelationshipState} */ relState, /** @type {string} */ type, /** @type {number} */ tick, cooldown = 2) =>
   (relState.recentIncidents || []).some((incident) => incident.type === type && tick - (incident.tick || 0) <= cooldown);
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} saveId
+ * @returns {SettlementItem|null}
+ */
 function itemFor(snapshot, saveId) {
   return snapshot?.byId?.get?.(String(saveId)) || null;
 }
 
+/**
+ * @param {SettlementItem|null} [item]
+ * @returns {number}
+ */
 function tierRankFor(item) {
   const tier = item?.settlement?.tier || "village";
   const rank = TIER_ORDER.indexOf(tier);
   return rank >= 0 ? rank : TIER_ORDER.indexOf("village");
 }
 
+/**
+ * @param {SettlementItem|null} [item]
+ * @returns {number}
+ */
 function populationFor(item) {
   return Math.max(0, Number(item?.settlement?.population) || 0);
 }
 
+/**
+ * @param {SettlementItem|null} item
+ * @param {Partial<PressureSummary>} [pressure]
+ * @returns {number}
+ */
 function settlementStrength(item, pressure = {}) {
   const pop = populationFor(item);
   const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
@@ -488,6 +720,12 @@ function settlementStrength(item, pressure = {}) {
   );
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} a
+ * @param {unknown} b
+ * @returns {any}
+ */
 function relationshipTypeBetween(snapshot, a, b) {
   const states = snapshot?.worldState?.relationshipStates || {};
   for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
@@ -501,6 +739,12 @@ function relationshipTypeBetween(snapshot, a, b) {
   return null;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @param {unknown} targetId
+ * @param {unknown} attackerId
+ * @returns {number}
+ */
 function protectorBackingScore(ctx, targetId, attackerId) {
   const states = ctx.snapshot?.worldState?.relationshipStates || {};
   let max = 0;
@@ -542,6 +786,11 @@ function protectorBackingScore(ctx, targetId, attackerId) {
   return clamp01(max);
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @param {{ overlordId: unknown, vassalId: unknown, overlordPressure: PressureSummary, vassalPressure: PressureSummary }} params
+ * @returns {any}
+ */
 function canSubjugateDirection(ctx, { overlordId, vassalId, overlordPressure, vassalPressure }) {
   const source = itemFor(ctx.snapshot, overlordId);
   const target = itemFor(ctx.snapshot, vassalId);
@@ -561,6 +810,10 @@ function canSubjugateDirection(ctx, { overlordId, vassalId, overlordPressure, va
 // which side the save authored at 'from'. Both directions run the original
 // math; if both qualify the stronger side leads, with the settlement id as a
 // stable, orientation-independent tiebreak.
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any}
+ */
 function subjugationDirection(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const forward = canSubjugateDirection(ctx, {
@@ -582,6 +835,11 @@ function subjugationDirection(ctx) {
   return forward || reverse || null;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @param {{ patronId: unknown, clientId: unknown, patronPressure: PressureSummary, clientPressure: PressureSummary }} params
+ * @returns {any}
+ */
 function patronageEligibilityDirection(ctx, { patronId, clientId, patronPressure, clientPressure }) {
   const source = itemFor(ctx.snapshot, patronId);
   const target = itemFor(ctx.snapshot, clientId);
@@ -609,6 +867,10 @@ function patronageEligibilityDirection(ctx, { patronId, clientId, patronPressure
 
 // H16: patronage forms from the STRONGER side regardless of edge orientation;
 // same math both ways, stronger patron wins a double-qualify, id tiebreak.
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any}
+ */
 function patronageEligibility(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const forward = patronageEligibilityDirection(ctx, {
@@ -630,6 +892,12 @@ function patronageEligibility(ctx) {
   return forward.eligible ? forward : reverse.eligible ? reverse : forward;
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} settlementId
+ * @param {string[]} [types]
+ * @returns {Array<{ relationshipKey: string, thirdPartyId: string, relationshipType: string, relState: RelationshipState }>}
+ */
 function relationshipThirdParties(snapshot, settlementId, types = []) {
   const typeSet = new Set(types);
   const states = snapshot?.worldState?.relationshipStates || {};
@@ -649,6 +917,12 @@ function relationshipThirdParties(snapshot, settlementId, types = []) {
   return out;
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} a
+ * @param {unknown} b
+ * @returns {number}
+ */
 function supplyExposure(snapshot, a, b) {
   const pair = new Set([String(a), String(b)]);
   let max = 0;
@@ -661,6 +935,11 @@ function supplyExposure(snapshot, a, b) {
   return max;
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} vassalId
+ * @returns {boolean}
+ */
 function activeRebellionAgainstVassal(snapshot, vassalId) {
   return (snapshot?.worldState?.stressors || []).some(stressor =>
     stressor?.type === "rebellion"
@@ -669,6 +948,12 @@ function activeRebellionAgainstVassal(snapshot, vassalId) {
   );
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {unknown} a
+ * @param {unknown} b
+ * @returns {any}
+ */
 function sharedHostileThird(snapshot, a, b) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const hostileToA = new Set();
@@ -689,6 +974,10 @@ function sharedHostileThird(snapshot, a, b) {
   return [...hostileToA].filter(id => hostileToB.has(id)).sort()[0] || null;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any}
+ */
 function sharedEnemyAllianceCandidate(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   if (!settlements.from || !settlements.to) return null;
@@ -715,6 +1004,10 @@ function sharedEnemyAllianceCandidate(ctx) {
   });
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function neutralRules(ctx) {
   const { relState, sourcePressure, targetPressure, tick } = ctx;
   const combinedTrade = mean(sourcePressure.trade, targetPressure.trade);
@@ -807,6 +1100,10 @@ function neutralRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function tradePartnerRules(ctx) {
   const { relState, sourcePressure, targetPressure, tick } = ctx;
   const tradeStress = mean(sourcePressure.trade, targetPressure.trade);
@@ -894,6 +1191,10 @@ function tradePartnerRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function alliedRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, snapshot } = ctx;
   const settlements = getRelationshipSettlements(edge);
@@ -1062,6 +1363,10 @@ function alliedRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function patronRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure } = ctx;
   // H16: a pulse-driven patronage may have crowned the edge's authored 'to'
@@ -1174,6 +1479,10 @@ function patronRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function clientRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const autonomyPressure = mean(sourcePressure.legitimacy, sourcePressure.economy, relState.resentment);
@@ -1248,6 +1557,10 @@ function clientRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function vassalRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, tick } = ctx;
   // H16: a subjugation may have crowned the edge's authored 'to' side as the
@@ -1475,6 +1788,10 @@ function vassalRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function rivalRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.resentment);
@@ -1581,6 +1898,10 @@ function rivalRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function coldWarRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
@@ -1716,6 +2037,10 @@ function coldWarRules(ctx) {
 // deterministically on pair identity + tick instead of edge orientation.
 const RAID_STRENGTH_TIE = 0.04;
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function hostileRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const settlements = getRelationshipSettlements(ctx.edge);
@@ -1785,7 +2110,7 @@ function hostileRules(ctx) {
       vassalId: subjugation.vassalId,
       vassalState: { ...relState, ...patchValues, relationshipType: "vassal" },
     });
-    const nameOf = (id) => itemFor(ctx.snapshot, id)?.name || id;
+    const nameOf = (/** @type {unknown} */ id) => itemFor(ctx.snapshot, id)?.name || id;
     const baseReason = "A hostile imbalance can create occupation, tribute, or forced vassalage pressure.";
     const realignmentSummary = cascadePreview.length
       ? ` Accepting also realigns ${cascadePreview.length} third-party relationship${cascadePreview.length > 1 ? "s" : ""}: ${cascadePreview
@@ -1885,6 +2210,10 @@ function hostileRules(ctx) {
   return candidates;
 }
 
+/**
+ * @param {RuleCtx} ctx
+ * @returns {any[]}
+ */
 function criminalNetworkRules(ctx) {
   const { relState, sourcePressure, targetPressure, tick } = ctx;
   const settlements = getRelationshipSettlements(ctx.edge);
@@ -1985,6 +2314,7 @@ function criminalNetworkRules(ctx) {
   return candidates;
 }
 
+/** @type {Record<string, (ctx: RuleCtx) => any[]>} */
 const RULE_EVALUATORS = {
   neutral: neutralRules,
   trade_partner: tradePartnerRules,
@@ -1998,6 +2328,11 @@ const RULE_EVALUATORS = {
   criminal_network: criminalNetworkRules,
 };
 
+/**
+ * @param {PressureIndex} pressureIdx
+ * @param {string} saveId
+ * @returns {PressureSummary}
+ */
 function buildPressureSummary(pressureIdx, saveId) {
   return {
     food: pressureFor(pressureIdx, saveId, "food"),
@@ -2012,11 +2347,19 @@ function buildPressureSummary(pressureIdx, saveId) {
   };
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {PressureIndex} pressureIdx
+ * @param {{ tick?: number }} [context]
+ * @returns {any[]}
+ */
 export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
-  const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
+  // Number.isFinite is not a TS narrowing guard, so the ternary widens to
+  // number | undefined; the runtime value is always a finite number here.
+  const tick = /** @type {number} */ (Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0);
   const states = snapshot?.worldState?.relationshipStates || {};
 
-  return (snapshot?.regionalGraph?.edges || snapshot?.relationships || []).flatMap((edge) => {
+  return (snapshot?.regionalGraph?.edges || snapshot?.relationships || []).flatMap((/** @type {RelationshipEdge} */ edge) => {
     const key = relationshipKeyFromEdge(edge);
     const normalizedEdge = normalizeRelationshipEdge(edge);
     const relState = ensureRelationshipState(normalizedEdge, states[key]);
@@ -2041,10 +2384,22 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
   });
 }
 
+/**
+ * @param {RelationshipSnapshot} snapshot
+ * @param {PressureIndex} pressureIdx
+ * @param {{ tick?: number }} [options]
+ * @returns {any[]}
+ */
 export function deriveRelationshipCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateRelationshipRules(snapshot, pressureIdx, options);
 }
 
+/**
+ * @param {RelationshipWorldState} worldState
+ * @param {any} outcome
+ * @param {number} now
+ * @returns {RelationshipWorldState}
+ */
 export function applyRelationshipPatch(worldState, outcome, now) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
   const current = ensureRelationshipState({}, worldState.relationshipStates?.[outcome.relationshipKey]);

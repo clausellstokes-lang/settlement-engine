@@ -29,6 +29,7 @@ import { byNameCodepoint } from './deterministicSort.js';
  * union and to register the matching ROAMING stressor when an authored
  * stressor event lands inside a canon campaign.
  */
+/** @type {Readonly<Record<string, string>>} */
 export const GEN_TO_PULSE_TYPE = Object.freeze({
   under_siege: 'siege',
   famine: 'famine',
@@ -47,13 +48,21 @@ export const GEN_TO_PULSE_TYPE = Object.freeze({
   mass_migration: 'mass_migration',
 });
 
-/** The roaming type an authored stressor key maps to (identity for campaign-only types). */
+/**
+ * The roaming type an authored stressor key maps to (identity for campaign-only types).
+ * @param {string | null | undefined} key
+ * @returns {string | null}
+ */
 export function pulseTypeForStressorKey(key) {
   if (!key) return null;
   if (GEN_TO_PULSE_TYPE[key]) return GEN_TO_PULSE_TYPE[key];
-  return STRESSOR_CATALOG[key] ? key : null;
+  return (/** @type {Record<string, unknown>} */ (STRESSOR_CATALOG))[key] ? key : null;
 }
 
+/**
+ * @param {{ affectedSystems?: unknown[] }} def
+ * @returns {string}
+ */
 function pulseDesc(def) {
   const systems = (def.affectedSystems || [])
     .slice(0, 3)

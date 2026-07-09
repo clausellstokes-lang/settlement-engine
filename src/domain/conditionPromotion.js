@@ -76,7 +76,7 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /coup|putsch/i,                                         archetype: 'faction_challenge' },
 ]);
 
-/** @returns {string|null} the condition archetype this stressor promotes to, or null. */
+/** @param {*} stressor @returns {string|null} the condition archetype this stressor promotes to, or null. */
 export function archetypeForStressor(stressor) {
   // `.label` included: world-pulse stressors carry their display text as
   // `label` (stressors.js normalizeStressor), not `name` — a label-only
@@ -101,9 +101,9 @@ export function archetypeForStressor(stressor) {
  * Scoped by `archetype` so re-promoting the settlement's OTHER stressors never
  * re-attributes their conditions to the new event.
  *
- * @param {Object} settlement
- * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}} [origin]
- * @returns {Object}
+ * @param {Record<string, any>} settlement
+ * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}|null} [origin]
+ * @returns {Record<string, any>}
  */
 export function promoteStressorsToConditions(settlement, origin = null) {
   if (!settlement) return settlement;
@@ -182,13 +182,15 @@ export function promoteStressorsToConditions(settlement, origin = null) {
  * event conditions of one archetype (two severed routes) keep their distinct
  * ids and all survive. Pure, deterministic, consumes no rng — a config
  * without the record generates byte-identically.
+ * @param {Record<string, any>} settlement
+ * @returns {Record<string, any>}
  */
 export function reapplyEventConditions(settlement) {
   const record = settlement?.config?.eventConditions ?? settlement?._config?.eventConditions;
   if (!Array.isArray(record) || record.length === 0) return settlement;
   let next = settlement;
   for (const entry of record) {
-    const condition = deriveActiveCondition(entry);
+    const condition = /** @type {Record<string, any>} */ (deriveActiveCondition(entry));
     if (!condition) continue;
     for (const cond of next.activeConditions || []) {
       if (cond?.archetype === condition.archetype

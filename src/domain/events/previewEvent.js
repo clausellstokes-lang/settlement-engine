@@ -45,7 +45,7 @@ export function previewEvent({ settlement, systemState, event }) {
     factionResponses: result.factionResponses,
     narrativeSummary: result.narrativeSummary,
     affectedSteps: [],
-    warnings: result.warnings,
+    warnings: /** @type {import('../types.js').CoherenceWarning[]} */ (result.warnings),
     // Phase 18 additions — substrate + faction-delta access. These
     // don't carry timestamps so they're safe to expose on the legacy
     // pure-preview shape.

@@ -24,6 +24,47 @@ import { deriveCausalState } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities } from './capacityModel.js';
 
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+/** @typedef {import('./capacityModel.js').CapacityState} CapacityState */
+/** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+
+/** @typedef {'invalid'|'rare_but_justified'|'interesting_tension'|'user_authored_exception'} ContradictionClassification */
+
+/**
+ * @typedef {Object} ContradictionReference
+ * @property {string} id
+ * @property {string} label
+ * @property {string} type
+ */
+
+/**
+ * @typedef {Object} Contradiction
+ * @property {string} id
+ * @property {string} type
+ * @property {ContradictionClassification} classification
+ * @property {string} description
+ * @property {string} explanation
+ * @property {string[]} consequences
+ * @property {ContradictionReference[]} references
+ */
+
+/**
+ * The slice of a settlement the detectors read.
+ * @typedef {Object} ContradictionSettlement
+ * @property {string} [tier]
+ * @property {Array<{ id?: string, name?: string }|null>} [institutions]
+ */
+
+/**
+ * The full input the composer accepts: the local slice plus the slices the
+ * composed derivations (threats, capacities) declare for themselves.
+ * @typedef {ContradictionSettlement
+ *   & import('./threatProfile.js').ThreatSurfaceSettlement
+ *   & import('./capacityModel.js').SettlementLike
+ *   & import('./causalState.js').CausalSettlementSource} ContradictionSettlementInput
+ */
+
 export const CONTRADICTION_CLASSIFICATIONS = Object.freeze([
   'invalid',
   'rare_but_justified',
@@ -42,14 +83,33 @@ export const CONTRADICTION_TYPES = Object.freeze([
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
+/**
+ * @param {string} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {string} type
+ * @param {string} suffix
+ * @returns {string}
+ */
 function contradictionId(type, suffix) {
   return `contradiction.${type}.${snakeCase(suffix || 'unknown')}`;
 }
 
+/**
+ * @param {Object} args
+ * @param {string} args.type
+ * @param {ContradictionClassification} args.classification
+ * @param {string} args.description
+ * @param {string} args.explanation
+ * @param {string[]} [args.consequences]
+ * @param {ContradictionReference[]} [args.references]
+ * @returns {Contradiction}
+ */
 function contradiction({ type, classification, description, explanation, consequences, references }) {
   return {
     id: contradictionId(type, description || ''),
@@ -67,6 +127,10 @@ function contradiction({ type, classification, description, explanation, consequ
 const OVERSIZED_PATTERN = /(cathedral|grand|college|conclave|fortress|citadel|palace|university)/i;
 const ENFORCEMENT_PATTERN = /(watch|garrison|barracks|militia|guard|constabulary|sheriff)/i;
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @returns {Contradiction[]}
+ */
 function detectOversizedInstitutions(settlement) {
   const tier = settlement.tier;
   if (tier !== 'village' && tier !== 'hamlet') return [];
@@ -83,12 +147,18 @@ function detectOversizedInstitutions(settlement) {
         'authority structure tilts toward the institution\'s patrons',
         'visitors and pilgrims outnumber locals in season',
       ],
+      // @ts-ignore -- inst.name is non-empty here: the OVERSIZED_PATTERN guard
+      // above only passes named institutions, which TS cannot see through test().
       references: [{ id: inst.id || `institution.${snakeCase(inst.name)}`, label: inst.name, type: 'institution' }],
     }));
   }
   return out;
 }
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @returns {Contradiction[]}
+ */
 function detectMissingEnforcement(settlement) {
   const tier = settlement.tier;
   if (tier !== 'town' && tier !== 'city') return [];
@@ -109,6 +179,11 @@ function detectMissingEnforcement(settlement) {
   })];
 }
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @param {CausalState} causal
+ * @returns {Contradiction[]}
+ */
 function detectLegitimacyVsCrime(settlement, causal) {
   const legBand = causal.bands.public_legitimacy;
   const crimScore = causal.scores.criminal_opportunity ?? 50;
@@ -133,7 +208,13 @@ function detectLegitimacyVsCrime(settlement, causal) {
   return [];
 }
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @returns {Contradiction[]}
+ */
 function detectOrphanedFactionPower(settlement, profiles) {
+  /** @type {Contradiction[]} */
   const out = [];
   const inst = settlement.institutions || [];
   const RELIGIOUS_INST = /(temple|chapel|monastery|abbey|cathedral|shrine|sanctum)/i;
@@ -165,7 +246,14 @@ function detectOrphanedFactionPower(settlement, profiles) {
   return out;
 }
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @param {CausalState} causal
+ * @param {CapacityState} capacities
+ * @returns {Contradiction[]}
+ */
 function detectSurplusButCritical(settlement, causal, capacities) {
+  /** @type {Contradiction[]} */
   const out = [];
   // food_security surplus but food_production capacity critical/collapsed — the
   // two layers tell different stories. Surface as a tension worth telling.
@@ -196,7 +284,14 @@ function detectSurplusButCritical(settlement, causal, capacities) {
   return out;
 }
 
+/**
+ * @param {ContradictionSettlement} settlement
+ * @param {ThreatProfile[]} threats
+ * @param {CapacityState} capacities
+ * @returns {Contradiction[]}
+ */
 function detectThreatWithoutResponse(settlement, threats, capacities) {
+  /** @type {Contradiction[]} */
   const out = [];
   for (const threat of threats) {
     if (threat.severity < 0.6) continue;  // only acute threats
@@ -237,11 +332,16 @@ function detectThreatWithoutResponse(settlement, threats, capacities) {
 /**
  * Detect every contradiction on a settlement. Pure read-only.
  *
- * @param {Object} settlement
- * @returns {Object[]} Contradiction[]
+ * @param {ContradictionSettlementInput|null|undefined} settlement
+ * @returns {Contradiction[]}
  */
 export function detectContradictions(settlement) {
   if (!settlement) return [];
+  /** @type {FactionProfile[]} */
+  // @ts-ignore -- deriveAllFactionProfiles maps deriveFactionProfile over the
+  // roster, which yields null only for falsy roster entries; a real roster
+  // never contains them (see bugs note: a falsy entry would crash the
+  // p.power read below regardless of typing).
   const profiles   = deriveAllFactionProfiles(settlement);
   const causal     = deriveCausalState(settlement);
   const threats    = deriveAllThreatProfiles(settlement);
@@ -256,7 +356,11 @@ export function detectContradictions(settlement) {
   ];
 }
 
-/** Group by classification. */
+/**
+ * Group by classification.
+ * @param {ContradictionSettlementInput|null|undefined} settlement
+ * @returns {Record<ContradictionClassification, number>}
+ */
 export function contradictionBreakdown(settlement) {
   const out = { invalid: 0, rare_but_justified: 0, interesting_tension: 0, user_authored_exception: 0 };
   for (const c of detectContradictions(settlement)) {

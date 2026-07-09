@@ -26,6 +26,31 @@
 /** @typedef {import('../entities/npcs.js').NpcStructural} NpcStructural */
 
 /**
+ * The event shape the registry reads. Identical to {@link Event} except the
+ * `payload` bag is indexable (generators stamp arbitrary type-specific keys).
+ * @typedef {Omit<Event, 'payload'> & { payload?: Record<string, any> }} RegistryEvent
+ */
+/**
+ * The subset of a settlement the narrate/stateDeltas closures read.
+ * @typedef {Object} RegistrySettlement
+ * @property {string} [name]
+ * @property {Array<Record<string, unknown>>} [stressors]
+ * @property {Array<Record<string, unknown>>} [stress]
+ * @property {Array<Record<string, unknown>>} [stresses]
+ * @property {Array<{ id?: string, name?: string, factionAffiliation?: string }>} [npcs]
+ */
+/**
+ * One event's impact specification.
+ * @typedef {Object} EventSpec
+ * @property {string} [label]
+ * @property {string} [description]
+ * @property {boolean} [requiresTarget]
+ * @property {string} [targetPrompt]
+ * @property {(event: RegistryEvent, settlement?: RegistrySettlement) => Record<string, number>} [stateDeltas]
+ * @property {(event: RegistryEvent, settlement?: RegistrySettlement) => string} [narrate]
+ */
+
+/**
  * Each spec may now optionally declare entity patches the apply step
  * commits against the settlement object. This is the architecture
  * fix the audit kept flagging: events must mutate entities, not just
@@ -42,6 +67,10 @@
 /**
  * Coarse institution classification by name pattern. Replaced by tag
  * lookup once the catalog migrates to structured tags.
+ */
+/**
+ * @param {unknown} name
+ * @returns {keyof typeof INSTITUTION_KIND_DELTAS}
  */
 export function classifyInstitution(name) {
   const n = String(name || '').toLowerCase();
@@ -130,7 +159,7 @@ export const RERUN_KEYS_FOR_EVENT = {
  *   - stateDeltas(event, settlement) → partial SystemState additive numbers
  *   - narrate(event, settlement)     → one-line DM-facing summary
  */
-export const EVENT_REGISTRY = {
+export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   ADD_INSTITUTION: {
     label: 'Add institution',
     description: 'A new institution is established. New civic capacity, new factional weight.',
@@ -270,7 +299,7 @@ export const EVENT_REGISTRY = {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
       const map = { minor: 0, notable: 2, key: 5, pillar: 8 };
-      return { resilience: +(map[importance] ?? 2) };
+      return { resilience: +(map[/** @type {keyof typeof map} */ (importance)] ?? 2) };
     },
     narrate(event) {
       const role = event.payload?.role ? ` as ${event.payload.role}` : '';
@@ -292,7 +321,7 @@ export const EVENT_REGISTRY = {
                     notable: { resilience: -3, volatility: +3 },
                     key:     { resilience: -8, volatility: +8 },
                     pillar:  { resilience: -14, volatility: +15 } };
-      return map[importance] || map.notable;
+      return map[/** @type {keyof typeof map} */ (importance)] || map.notable;
     },
     narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
@@ -314,7 +343,7 @@ export const EVENT_REGISTRY = {
         corrupt:           { resilience: +3, volatility: +5 },
         faction_captured:  { resilience: +4, volatility: +2 },
       };
-      return map[quality] || map.competent;
+      return map[/** @type {keyof typeof map} */ (quality)] || map.competent;
     },
     narrate(event) {
       const role = event.payload?.role || 'a vacant role';
@@ -460,7 +489,7 @@ export const EVENT_REGISTRY = {
         medium: { resilience: -10, resourcePressure: +14, externalThreat: +6, volatility: +4 },
         large:  { resilience: -16, resourcePressure: +20, externalThreat: +8, volatility: +8 },
       };
-      return map[size] || map.medium;
+      return map[/** @type {keyof typeof map} */ (size)] || map.medium;
     },
     narrate(event) {
       const size = event.payload?.size || 'medium';
@@ -633,7 +662,7 @@ export const EVENT_REGISTRY = {
         succession:  { volatility: +8,  resilience: -2 },
         appointment: { volatility: +6,  resilience: -2 },
       };
-      return map[cause] || map.coup;
+      return map[/** @type {keyof typeof map} */ (cause)] || map.coup;
     },
     narrate(event, settlement) {
       const cause = event.payload?.cause || 'coup';
@@ -659,9 +688,9 @@ export const EVENT_REGISTRY = {
       // entry is still present here). Word-banded legacy severities ('medium')
       // fall through to the 0.5 default.
       const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
-      const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(settlement?.[k]));
+      const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray((/** @type {Record<string, unknown>} */ (settlement))?.[k]));
       const entry = containerKey
-        ? settlement[containerKey].find(st =>
+        ? (/** @type {Record<string, Array<Record<string, unknown>>>} */ (settlement))[containerKey].find(st =>
             String(st?.type || '').toLowerCase() === type
             || String(st?.name || '').toLowerCase() === type)
         : null;
@@ -782,29 +811,34 @@ export const EVENT_REGISTRY = {
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },
-};
+});
 
 /** All EventTypes the engine knows about. Useful for UI option lists. */
 export const EVENT_TYPES = /** @type {EventType[]} */ (Object.keys(EVENT_REGISTRY));
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
+/** @param {Record<string, number>} deltas @returns {Record<string, number>} */
 function invertSigns(deltas) {
+  /** @type {Record<string, number>} */
   const out = {};
   for (const [k, v] of Object.entries(deltas)) out[k] = -v;
   return out;
 }
 
+/** @param {Record<string, number>} deltas @param {number} factor @returns {Record<string, number>} */
 function scale(deltas, factor) {
+  /** @type {Record<string, number>} */
   const out = {};
   for (const [k, v] of Object.entries(deltas)) out[k] = Math.round(v * factor);
   return out;
 }
 
+/** @param {unknown} targetId @returns {string} */
 function labelOf(targetId) {
   if (!targetId) return 'target';
   // Strip "category." prefix if present (e.g. "institution.granary" → "granary")
   const tail = String(targetId).split('.').pop();
   // Title-case for display
-  return tail.replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
+  return /** @type {string} */ (tail).replace(/^[a-z]/, c => c.toUpperCase()).replace(/_/g, ' ');
 }

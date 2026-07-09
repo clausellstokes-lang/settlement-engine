@@ -14,6 +14,15 @@ import { healingLedger } from '../healingLedger.js';
 import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
+/**
+ * @typedef {{ id?: string, name?: string, settlement?: Record<string, any>, neighbourNetwork?: any[], [key: string]: unknown }} SaveLike
+ * @typedef {{ id?: string | null, name?: string | null, tier?: unknown, population?: number, exports?: any[], imports?: any[], route?: { open?: boolean, [key: string]: unknown }, [key: string]: unknown }} NodeLike
+ * @typedef {{ id?: unknown, targetId?: unknown, neighbourName?: unknown, name?: unknown, relationshipType?: unknown, type?: unknown, [key: string]: unknown }} LinkLike
+ * @typedef {{ label: string, id?: string, criticality?: number, [key: string]: unknown }} GoodLike
+ * @typedef {Record<string, unknown>} ChannelLike
+ */
+
+/** @type {Set<string>} */
 const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'trade_partner',
   'allied',
@@ -24,31 +33,34 @@ const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'neutral',
 ]);
 
+/** @param {SaveLike | null | undefined} sourceSave @param {SaveLike | null | undefined} targetSave @returns {string | null} */
 function relationBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  const link = links.find(n =>
+  const link = links.find((/** @type {LinkLike} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
   return link?.relationshipType || link?.type || null;
 }
 
+/** @param {SaveLike | null | undefined} sourceSave @param {SaveLike | null | undefined} targetSave @returns {LinkLike | null} */
 function linkBetween(sourceSave, targetSave) {
   const links = sourceSave?.settlement?.neighbourNetwork
     || sourceSave?.neighbourNetwork
     || [];
   const targetId = targetSave?.id || targetSave?.settlement?.id;
   const targetName = targetSave?.name || targetSave?.settlement?.name;
-  return links.find(n =>
+  return links.find((/** @type {LinkLike} */ n) =>
     (targetId && String(n.id || n.targetId) === String(targetId))
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   ) || null;
 }
 
+/** @param {{ type: string, from: NodeLike, to: NodeLike, rel: string, strength?: number, confidence?: number, explanation?: string }} args @returns {ChannelLike | null} */
 function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation }) {
   return candidate({
     type,
@@ -63,11 +75,13 @@ function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence =
   });
 }
 
+/** @param {Array<ChannelLike | null>} out @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
 function addTwoWay(out, type, a, b, rel, strength, confidence, explanation) {
   out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation }));
   out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation }));
 }
 
+/** @param {Array<ChannelLike | null>} out @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addPatronageChannels(out, patron, client, rel, strength = 0.62, confidence = 0.7) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -98,6 +112,7 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
   }));
 }
 
+/** @param {Array<ChannelLike | null>} out @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -129,13 +144,15 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
   addTwoWay(out, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @returns {Array<ChannelLike | null>} */
 function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
+  /** @type {Array<ChannelLike | null>} */
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
   const targetRel = relationBetween(targetSave, sourceSave);
   const relationshipLink = linkBetween(sourceSave, targetSave)
     || linkBetween(targetSave, sourceSave);
-  const canonical = canonicalEdgeForLink(relationshipLink, sourceSave, targetSave);
+  const canonical = canonicalEdgeForLink(/** @type {Parameters<typeof canonicalEdgeForLink>[0]} */ (relationshipLink), sourceSave, targetSave);
   if (canonical?.relationshipType === 'patron') {
     const patron = String(canonical.from) === String(source.id) ? source : target;
     const client = patron === source ? target : source;
@@ -167,6 +184,7 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   return out.filter(Boolean);
 }
 
+/** @param {GoodLike[]} goods @param {number} [base] @returns {number} */
 function channelStrengthForGoods(goods, base = 0.5) {
   if (!goods.length) return base;
   const maxCriticality = Math.max(...goods.map(g => goodCriticality(g)));
@@ -174,6 +192,7 @@ function channelStrengthForGoods(goods, base = 0.5) {
   return Math.max(0.1, Math.min(1, base + maxCriticality * 0.35 + countLift));
 }
 
+/** @param {string | null | undefined} rel @returns {number} */
 function relationshipConfidence(rel) {
   if (!rel) return 0.55;
   if (rel === 'trade_partner') return 0.9;
@@ -186,6 +205,7 @@ function relationshipConfidence(rel) {
   return 0.5;
 }
 
+/** @param {ChannelLike} raw @returns {ChannelLike | null} */
 function candidate(raw) {
   return normalizeChannel({
     status: 'suggested',
@@ -218,11 +238,12 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
  * carries an institutions array yet has neither a healing institution nor an
  * offered healing service.
  */
+/** @param {SaveLike | null | undefined} save */
 function healingCapacityOf(save) {
   const settlement = settlementFromSave(save) || {};
-  const ledger = healingLedger(settlement);
-  const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-  const anchor = institutions.find(i => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
+  const ledger = healingLedger(/** @type {Parameters<typeof healingLedger>[0]} */ (settlement));
+  const institutions = Array.isArray((/** @type {{ institutions?: any[] }} */ (settlement)).institutions) ? (/** @type {{ institutions?: any[] }} */ (settlement)).institutions : [];
+  const anchor = institutions.find((/** @type {{ name?: unknown }} */ i) => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
   return {
     healerCount: ledger.healerCount,
     anchorName: anchor ? String(anchor.name) : null,
@@ -231,8 +252,9 @@ function healingCapacityOf(save) {
   };
 }
 
+/** @param {unknown} tier @returns {number | null} */
 function tierRankOf(tier) {
-  const rank = TIER_ORDER.indexOf(tier);
+  const rank = TIER_ORDER.indexOf(/** @type {string} */ (tier));
   return rank >= 0 ? rank : null;
 }
 
@@ -247,6 +269,7 @@ function tierRankOf(tier) {
  * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
  */
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {{ now?: string }} [options] @returns {ChannelLike[]} */
 export function discoverDependencyCandidates(sourceSave, targetSave, options = {}) {
   const source = deriveRegionalState(sourceSave);
   const target = deriveRegionalState(targetSave);
@@ -254,6 +277,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
 
   const rel = relationBetween(sourceSave, targetSave) || relationBetween(targetSave, sourceSave);
   const relConfidence = relationshipConfidence(rel);
+  /** @type {Array<ChannelLike | null>} */
   const out = [];
 
   const sourceExportsTargetImports = goodsIntersect(source.exports, target.imports);
@@ -347,10 +371,10 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   if (routeTradeLink) {
     const sourceHealing = healingCapacityOf(sourceSave);
     const targetHealing = healingCapacityOf(targetSave);
-    for (const [provider, dependent, capacity, need] of [
+    for (const [provider, dependent, capacity, need] of /** @type {Array<[NodeLike, NodeLike, ReturnType<typeof healingCapacityOf>, ReturnType<typeof healingCapacityOf>]>} */ ([
       [source, target, sourceHealing, targetHealing],
       [target, source, targetHealing, sourceHealing],
-    ]) {
+    ])) {
       if (!capacity.provider || !need.lacking) continue;
       out.push(candidate({
         type: 'service_dependency',
@@ -407,14 +431,16 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
 
   // Deterministic timestamp: same idiom as deriveRegionalImpacts — stamp the
   // threaded `now` over candidate()'s wall-clock default when provided.
-  const candidates = out.filter(Boolean);
+  const candidates = /** @type {ChannelLike[]} */ (out.filter(Boolean));
   if (options.now) {
     return candidates.map(channel => ({ ...channel, discoveredAt: options.now, updatedAt: options.now }));
   }
   return candidates;
 }
 
+/** @param {SaveLike[]} [saves] @param {{ now?: string }} [options] @returns {ChannelLike[]} */
 export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
+  /** @type {ChannelLike[]} */
   const out = [];
   const seen = new Set();
   for (let i = 0; i < saves.length; i++) {
@@ -429,8 +455,9 @@ export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
   return out;
 }
 
+/** @param {SaveLike[]} [saves] @param {unknown} [existingGraph] @param {{ now?: string }} [options] */
 export function deriveGraphWithDiscoveredCandidates(saves = [], existingGraph = null, options = {}) {
-  const graph = deriveRegionalGraphFromSaves(saves, existingGraph, options);
+  const graph = deriveRegionalGraphFromSaves(saves, /** @type {Parameters<typeof deriveRegionalGraphFromSaves>[1]} */ (existingGraph), options);
   const candidates = discoverCampaignDependencyCandidates(saves, options);
   return addRegionalChannels(graph, candidates, options);
 }

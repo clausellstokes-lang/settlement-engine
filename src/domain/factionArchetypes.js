@@ -69,6 +69,7 @@ const NAME_RULES = Object.freeze([
   { archetype: A.GOVERNMENT, re: /council|government|reeve|steward|appointee|democratic|elder/i },
 ]);
 
+/** @param {*} value @returns {string} */
 function normCategory(value) {
   return String(value || '').trim().toLowerCase();
 }
@@ -86,7 +87,7 @@ export function factionArchetype(faction) {
   if (typeof faction === 'string') return inferFromText(faction);
   const f = /** @type {any} */ (faction);
 
-  const cat = normCategory(f.category);
+  const cat = /** @type {keyof typeof CATEGORY_MAP} */ (normCategory(f.category));
   if (cat && CATEGORY_MAP[cat]) return CATEGORY_MAP[cat];
 
   const text = [f.name, f.faction, f.label, f.type, f.description]
@@ -94,6 +95,7 @@ export function factionArchetype(faction) {
   return inferFromText(text);
 }
 
+/** @param {*} text @returns {string} */
 function inferFromText(text) {
   const t = String(text || '').toLowerCase();
   if (!t.trim()) return A.OTHER;

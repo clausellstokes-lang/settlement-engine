@@ -79,6 +79,19 @@ export const THREAT_STAGES = Object.freeze([
   'latent', 'developing', 'active', 'imminent', 'realized',
 ]);
 
+/**
+ * Per-type template defaults for the canonical threat vocabulary.
+ * @typedef {Object} ThreatTemplate
+ * @property {string} label
+ * @property {string} description
+ * @property {string} vector
+ * @property {string} visibility
+ * @property {string[]} affectedSystems
+ * @property {string[]} beneficiaries
+ * @property {string[]} victims
+ */
+
+/** @type {Readonly<Record<string, ThreatTemplate>> & { other: ThreatTemplate }} */
 const THREAT_TYPE_TEMPLATES = Object.freeze({
   monster_pressure: {
     label: 'Monster pressure',
@@ -269,9 +282,81 @@ function threatIdFor(type, source, label) {
 // Each collector returns 0+ raw threats it spotted on a particular
 // settlement surface. The composer normalizes them into ThreatProfile.
 
-/** Walk every surface and return raw threat-shaped entries. */
+/**
+ * A loose threat-shaped value found on any settlement surface.
+ * @typedef {Object} RawThreat
+ * @property {string=} id
+ * @property {string=} name
+ * @property {string=} label
+ * @property {string=} type
+ * @property {string=} description
+ * @property {number=} severity
+ * @property {string=} source
+ * @property {string=} target
+ * @property {string=} vector
+ * @property {string=} visibility
+ * @property {string=} trajectory
+ * @property {string=} currentStage
+ * @property {string[]=} beneficiaries
+ * @property {string[]=} victims
+ * @property {string[]=} affectedSystems
+ * @property {Object=} neighbour     hostile-neighbour surface carrier
+ * @property {Object=} condition     linked Phase 16 active condition
+ */
+
+/**
+ * A collected surface hit before normalization into a ThreatProfile.
+ * @typedef {Object} ThreatSource
+ * @property {(RawThreat | Record<string, unknown> | string)=} raw
+ * @property {(string|null)=} inferredType
+ * @property {string=} originSurface
+ * @property {string=} id      present when an already-canonical threat is passed through
+ * @property {string=} type
+ */
+
+/**
+ * The settlement surfaces this module reads (all optional / legacy-tolerant).
+ * @typedef {Object} ThreatSurfaceSettlement
+ * @property {{ monsterThreat?: string, magicLevel?: string, priorityMagic?: number, magicExists?: boolean }=} config
+ * @property {string=} magicLevel      legacy top-level magic band (pre-config saves)
+ * @property {unknown=} stressors      resolved via canonStressors (alias-tolerant)
+ * @property {unknown=} stress
+ * @property {unknown=} stresses
+ * @property {{ scores?: { military?: number, monster?: number, internal?: number, economic?: number, magical?: number }, threats?: Array<RawThreat | string> }=} defenseProfile
+ * @property {Array<RawThreat | string>=} threats
+ * @property {Array<{ name?: string, relationshipType?: string }>=} neighbours
+ * @property {Array<{ name?: string, relationshipType?: string }>=} neighbourNetwork
+ */
+
+/**
+ * The canonical normalized threat entry (roadmap Phase 20 shape).
+ * @typedef {Object} ThreatProfile
+ * @property {string} id
+ * @property {string} type
+ * @property {string} label
+ * @property {string} description
+ * @property {string} source
+ * @property {string} target
+ * @property {string} vector
+ * @property {string} visibility
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} trajectory
+ * @property {string} currentStage
+ * @property {string[]} beneficiaries
+ * @property {string[]} victims
+ * @property {string[]} affectedSystems
+ * @property {string} originSurface
+ * @property {Partial<RawThreat>} raw
+ */
+
+/** Walk every surface and return raw threat-shaped entries.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {ThreatSource[]}
+ */
 export function collectThreatSources(settlement) {
   if (!settlement) return [];
+  /** @type {ThreatSource[]} */
   const out = [];
 
   // 1. config.monsterThreat — environmental wilderness pressure
@@ -330,6 +415,7 @@ export function collectThreatSources(settlement) {
       const label = typeof t === 'string' ? t : (t.label || t.name || 'Unnamed threat');
       out.push({
         raw: t,
+        // @ts-expect-error -- t may be a bare string; `?.type ||` tolerates it (strings have no type field)
         inferredType: t?.type || inferThreatType(label),
         originSurface: 'defenseProfile',
       });
@@ -343,6 +429,7 @@ export function collectThreatSources(settlement) {
       const label = typeof t === 'string' ? t : (t.label || t.name || 'Unnamed threat');
       out.push({
         raw: t,
+        // @ts-expect-error -- t may be a bare string; `?.type ||` tolerates it (strings have no type field)
         inferredType: t?.type || inferThreatType(label),
         originSurface: 'threats',
       });
@@ -416,6 +503,10 @@ export function collectThreatSources(settlement) {
 
 // Map a 0..100 score to its inverse 0..1 threat severity (low score
 // = high threat pressure).
+/**
+ * @param {number} score
+ * @returns {number}
+ */
 function clampInv(score) {
   const s = Math.max(0, Math.min(100, score));
   return Math.max(0, Math.min(1, (60 - s) / 60));
@@ -427,19 +518,24 @@ function clampInv(score) {
  * Enrich a single collected threat-source entry into a canonical
  * ThreatProfile. Pure; idempotent.
  *
- * @param {Object} source  { raw, inferredType, originSurface } from
+ * @param {(ThreatSource & Partial<RawThreat>) | null | undefined} source
+ *                         { raw, inferredType, originSurface } from
  *                         collectThreatSources, or a structured threat
  *                         passed in directly.
- * @returns {Object | null}
+ * @param {unknown} [_settlement]
+ * @returns {ThreatProfile | null}
  */
 export function deriveThreatProfile(source, _settlement) {
   if (!source) return null;
 
   // Accept already-canonical threats by pass-through (idempotent contract).
   if (typeof source.id === 'string' && source.id.startsWith('threat.') && source.type) {
+    // @ts-expect-error -- the id/type guard identifies an already-canonical ThreatProfile (idempotent pass-through)
     return source;
   }
 
+  /** @type {Partial<RawThreat>} */
+  // @ts-expect-error -- raw may be a bare string or loose record from legacy threat lists; every read below is `raw?.prop ||` tolerant
   const raw = source.raw || source;
   const type = source.inferredType || raw?.type || inferThreatType(
     raw?.name || raw?.label || ''
@@ -486,20 +582,30 @@ export function deriveThreatProfile(source, _settlement) {
   };
 }
 
-/** Derive every threat across all surfaces. Returns []. */
+/** Derive every threat across all surfaces. Returns [].
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {ThreatProfile[]}
+ */
 export function deriveAllThreatProfiles(settlement) {
   if (!settlement) return [];
   const sources = collectThreatSources(settlement);
-  return sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean);
+  // filter(Boolean) removes the nulls; TS does not narrow the built-in Boolean callback
+  return /** @type {ThreatProfile[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Count threats by type / band / stage. */
+/** Count threats by type / band / stage.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {{ count: number, byType: Record<string, number>, byBand: Record<string, number>, byStage: Record<string, number> }}
+ */
 export function threatBreakdown(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
+  /** @type {Record<string, number>} */
   const byType = {};
+  /** @type {Record<string, number>} */
   const byBand = { low: 0, medium: 0, high: 0, critical: 0 };
+  /** @type {Record<string, number>} */
   const byStage = { latent: 0, developing: 0, active: 0, imminent: 0, realized: 0 };
   for (const t of profiles) {
     byType[t.type] = (byType[t.type] || 0) + 1;
@@ -512,8 +618,11 @@ export function threatBreakdown(settlement) {
 /**
  * Flat list of system variables pressured by the active threats.
  * Useful for the Phase 17 substrate to cross-reference. Deduplicated.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {string[]}
  */
 export function pressuresOnSubstrate(settlement) {
+  /** @type {Set<string>} */
   const out = new Set();
   for (const t of deriveAllThreatProfiles(settlement)) {
     for (const s of t.affectedSystems || []) out.add(s);
@@ -521,7 +630,10 @@ export function pressuresOnSubstrate(settlement) {
   return Array.from(out);
 }
 
-/** Human-readable lines suitable for AI / PDF / UI. */
+/** Human-readable lines suitable for AI / PDF / UI.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
@@ -535,7 +647,10 @@ export function supportedThreatTypes() {
   return [...THREAT_TYPES];
 }
 
-/** Catalog template accessor for UI / help text. */
+/** Catalog template accessor for UI / help text.
+ * @param {string} type
+ * @returns {ThreatTemplate | null}
+ */
 export function threatTypeTemplate(type) {
   return THREAT_TYPE_TEMPLATES[type] || null;
 }

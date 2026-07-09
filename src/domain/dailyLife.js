@@ -45,6 +45,64 @@ import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
 
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile */
+/** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
+/** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
+/** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
+/** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+/** @typedef {import('./capacityModel.js').CapacityState} CapacityState */
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+
+/**
+ * A structured reference pointer consumers can hand to explainEntity.
+ * @typedef {{id: string, label: string, type: string}} SlotReference
+ */
+
+/**
+ * One canonical daily-life slot.
+ * @typedef {Object} DailyLifeSlot
+ * @property {string} key
+ * @property {string} label
+ * @property {string} text
+ * @property {string} source
+ * @property {SlotReference[]} references
+ */
+
+/**
+ * Institution entry as this module reads it.
+ * @typedef {{id?: string, name: string}} InstitutionLike
+ */
+
+/**
+ * Settlement fields this module reads directly (everything else flows
+ * through the substrate derivers, which take the full settlement).
+ * @typedef {Object} DailyLifeSettlement
+ * @property {InstitutionLike[]} [institutions]
+ * @property {import('./supplyChainState.js').ChainsSettlementSource['economicState']} [economicState]
+ * @property {import('./threatProfile.js').ThreatSurfaceSettlement['config']} [config]
+ * @property {import('./settlement.schema.js').StressorEntry[] | import('./settlement.schema.js').StressorEntry} [stressors]
+ */
+
+/**
+ * History-beat fields this module reads (historyBeats.js is still untyped).
+ * @typedef {{key: string, label: string, text: string, source: string}} HistoryBeatLike
+ */
+
+/**
+ * The precomputed substrate context shared by every slot deriver.
+ * @typedef {Object} DailyLifeContext
+ * @property {FactionProfile[]} profiles
+ * @property {DerivedSupplyChainState[]} chains
+ * @property {ActiveCondition[]} conditions
+ * @property {ThreatProfile[]} threats
+ * @property {CapacityState} capacities
+ * @property {CausalState} causal
+ * @property {{recentDisruption?: HistoryBeatLike|null, unresolvedWound?: HistoryBeatLike|null}} history
+ * @property {NpcProfile[]} npcs
+ */
+
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 export const DAILY_LIFE_SLOTS = Object.freeze([
@@ -58,6 +116,7 @@ export const DAILY_LIFE_SLOTS = Object.freeze([
   'recent_changes',
 ]);
 
+/** @type {Readonly<Record<string, string>>} */
 const SLOT_LABELS = Object.freeze({
   food_culture:         'Food culture',
   dawn_work:            'Dawn work',
@@ -81,15 +140,29 @@ const SLOT_LABELS = Object.freeze({
 // always produces a slot — even when data is thin, it falls back to
 // a generic but truthful line.
 
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @param {RegExp} pattern
+ * @returns {InstitutionLike[]}
+ */
 function institutionByPattern(settlement, pattern) {
   const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   return inst.filter(i => pattern.test(String(i?.name || '')));
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveFoodCulture(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
@@ -133,6 +206,11 @@ function deriveFoodCulture(s, ctx) {
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
 // craft band used to gate now keys off faction power alone.
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveDawnWork(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
@@ -159,6 +237,11 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} _ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveGatheringPlaces(s, _ctx) {
   const refs = [];
   const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
@@ -189,6 +272,11 @@ function deriveGatheringPlaces(s, _ctx) {
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveChildWarnings(s, ctx) {
   const refs = [];
   // Top threats by severity
@@ -206,6 +294,10 @@ function deriveChildWarnings(s, ctx) {
   return slot('child_warnings', text, 'top threats by severity', refs);
 }
 
+/**
+ * @param {ThreatProfile} threat
+ * @returns {string}
+ */
 function threatWarning(threat) {
   switch (threat.type) {
     case 'monster_pressure':    return 'the road past sundown';
@@ -223,6 +315,11 @@ function threatWarning(threat) {
   }
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveCommonerResentments(s, ctx) {
   const refs = [];
   const causalState = ctx.causal;
@@ -266,6 +363,11 @@ function deriveCommonerResentments(s, ctx) {
   return slot('commoner_resentments', text, 'criminal_opportunity + food_production + public_legitimacy + corruption', refs);
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveOutsiderImpressions(s, ctx) {
   const refs = [];
   const top = [...ctx.threats].sort((a, b) => b.severity - a.severity)[0];
@@ -295,6 +397,11 @@ function deriveOutsiderImpressions(s, ctx) {
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveUnspokenTopics(s, ctx) {
   const refs = [];
   const topics = [];
@@ -327,6 +434,11 @@ function deriveUnspokenTopics(s, ctx) {
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
 }
 
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveRecentChanges(s, ctx) {
   const refs = [];
   const changes = [];
@@ -363,6 +475,13 @@ function deriveRecentChanges(s, ctx) {
 
 // ── Slot helper ──────────────────────────────────────────────────────────
 
+/**
+ * @param {string} key
+ * @param {string} text
+ * @param {string} source
+ * @param {SlotReference[]} references
+ * @returns {DailyLifeSlot}
+ */
 function slot(key, text, source, references) {
   return {
     key,
@@ -375,6 +494,7 @@ function slot(key, text, source, references) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
+/** @type {Readonly<Record<string, (s: DailyLifeSettlement, ctx: DailyLifeContext) => DailyLifeSlot>>} */
 const DERIVERS = Object.freeze({
   food_culture:         deriveFoodCulture,
   dawn_work:            deriveDawnWork,
@@ -390,14 +510,20 @@ const DERIVERS = Object.freeze({
  * Build the substrate context once per call so each slot deriver
  * doesn't re-derive.
  */
+/**
+ * @param {DailyLifeSettlement} settlement
+ * @returns {DailyLifeContext}
+ */
 function buildContext(settlement) {
   return {
+    // @ts-ignore -- deriveAllFactionProfiles returns null entries only for nullish roster rows, which the generator never emits.
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
     conditions: deriveAllActiveConditions(settlement),
     threats:    deriveAllThreatProfiles(settlement),
     capacities: deriveAllCapacities(settlement),
     causal:     deriveCausalState(settlement),
+    // @ts-ignore -- deriveHistoryBeats (historyBeats.js, owned elsewhere) still returns {Object}; inert once it is typed.
     history:    deriveHistoryBeats(settlement),
     npcs:       deriveAllNpcProfiles(settlement),
   };
@@ -407,8 +533,8 @@ function buildContext(settlement) {
  * Derive one named daily-life slot.
  *
  * @param {string} key   One of DAILY_LIFE_SLOTS.
- * @param {Object} settlement
- * @returns {Object | null}    DailyLifeSlot, or null for unknown key.
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {DailyLifeSlot | null}    DailyLifeSlot, or null for unknown key.
  */
 export function deriveDailyLifeSlot(key, settlement) {
   if (!key || !DERIVERS[key]) return null;
@@ -422,19 +548,23 @@ export function deriveDailyLifeSlot(key, settlement) {
 /**
  * Derive every canonical daily-life slot. Builds context once.
  *
- * @returns {Object} {
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {{slots: Record<string, DailyLifeSlot>, summary: string[]}} {
  *   slots: { [key]: DailyLifeSlot },
  *   summary: string[],
  * }
  */
 export function deriveDailyLife(settlement) {
   if (!settlement) {
+    /** @type {Record<string, DailyLifeSlot>} */
     const empty = {};
     for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '—', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
+  /** @type {Record<string, DailyLifeSlot>} */
   const slots = {};
+  /** @type {string[]} */
   const summary = [];
   for (const key of DAILY_LIFE_SLOTS) {
     const s = DERIVERS[key](settlement, ctx);
@@ -446,7 +576,11 @@ export function deriveDailyLife(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Flat array of `${label}: ${text}` lines. */
+/**
+ * Flat array of `${label}: ${text}` lines.
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeDailyLife(settlement) {
   return deriveDailyLife(settlement).summary;
 }
@@ -477,12 +611,13 @@ export function supportedDailyLifeSlots() {
  * Diff two daily-life envelopes. Returns slot-level diffs for any
  * slot whose text changed.
  *
- * @param {Object} before  Output of deriveDailyLife.
- * @param {Object} after   Output of deriveDailyLife.
+ * @param {{slots?: Record<string, DailyLifeSlot>} | null | undefined} before  Output of deriveDailyLife.
+ * @param {{slots?: Record<string, DailyLifeSlot>} | null | undefined} after   Output of deriveDailyLife.
  * @returns {DailyLifeDelta[]}
  */
 export function compareDailyLife(before, after) {
   if (!before || !after) return [];
+  /** @type {DailyLifeDelta[]} */
   const out = [];
   for (const key of DAILY_LIFE_SLOTS) {
     const b = before.slots?.[key];

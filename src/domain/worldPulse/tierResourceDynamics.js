@@ -7,20 +7,113 @@ import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 
+/** @typedef {import('./worldState.js').WorldState} TrdWorldState */
+/** @typedef {ReturnType<typeof normalizeSimulationRules>} SimRules */
+/** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | null | undefined) }} TrdPressureIndex */
+/**
+ * @typedef {Object} TRDInstitution
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [category]
+ * @property {string} [status]
+ * @property {string[]} [tags]
+ * @property {boolean} [required]
+ * @property {string} [requiredForTier]
+ * @property {boolean} [_worldPulseInactive]
+ * @property {boolean} [_worldPulseTierAdded]
+ * @property {(string|null)} [removedByWorldPulseOutcomeId]
+ * @property {string} [remnantReason]
+ * @property {(string|null)} [createdByWorldPulseOutcomeId]
+ */
+/**
+ * @typedef {Object} TRDConfig
+ * @property {unknown[]} [nearbyResources]
+ * @property {Record<string, unknown>} [nearbyResourcesState]
+ * @property {unknown[]} [nearbyResourcesDepleted]
+ * @property {string} [tier]
+ * @property {string} [settType]
+ */
+/**
+ * @typedef {Object} TRDSettlement
+ * @property {string} [tier]
+ * @property {number} [population]
+ * @property {TRDInstitution[]} [institutions]
+ * @property {TRDConfig} [config]
+ * @property {{ primaryExports?: unknown[], primaryImports?: unknown[] }} [economicState]
+ * @property {unknown[]} [nearbyResources]
+ * @property {unknown[]} [nearbyResourcesDepleted]
+ * @property {unknown[]} [tierHistory]
+ * @property {unknown[]} [institutionHistory]
+ * @property {unknown[]} [resourceHistory]
+ */
+/**
+ * @typedef {Object} TRDItem
+ * @property {string} id
+ * @property {string} [name]
+ * @property {TRDSettlement} [settlement]
+ * @property {{ resourcePressure?: { value?: unknown } }} [system]
+ */
+/**
+ * @typedef {Object} TRDSpec
+ * @property {boolean} [required]
+ * @property {string} [desc]
+ * @property {string[]} [tags]
+ * @property {string} [minTier]
+ * @property {string} [exclusiveGroup]
+ */
+/**
+ * @typedef {Object} TRDEntry
+ * @property {string} name
+ * @property {string} category
+ * @property {TRDSpec} spec
+ */
+/**
+ * @typedef {Object} TRDOutcome
+ * @property {(string|null)} [id]
+ * @property {{ fromTier?: string, toTier?: string, direction?: string, saveId?: string }} [tierChange]
+ * @property {{ resource?: string, state?: string, saveId?: string }} [resourcePatch]
+ * @property {string} [headline]
+ * @property {string} [candidateType]
+ */
+/**
+ * @typedef {Object} TierDrift
+ * @property {string} direction
+ * @property {string} fromTier
+ * @property {string} toTier
+ * @property {number} support
+ * @property {number} severity
+ * @property {string} reason
+ * @property {number} [streak]
+ * @property {number} [lastEvaluatedTick]
+ */
+
+/** @param {unknown} value @returns {number} */
 function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
+  const n = Number.isFinite(value) ? /** @type {number} */ (value) : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/** @param {string | undefined} tier @returns {number} */
 function tierRank(tier) {
-  const idx = TIER_ORDER.indexOf(tier);
+  const idx = TIER_ORDER.indexOf(/** @type {string} */ (tier));
   return idx >= 0 ? idx : TIER_ORDER.indexOf('village');
 }
 
+/**
+ * @param {TrdPressureIndex | null | undefined} pressureIdx
+ * @param {unknown} settlementId
+ * @param {string} kind
+ * @returns {number}
+ */
 function pressure(pressureIdx, settlementId, kind) {
-  return pressureIdx?.get?.(settlementId, kind)?.score || 0;
+  return pressureIdx?.get?.(/** @type {string} */ (settlementId), kind)?.score || 0;
 }
 
+/**
+ * @param {TrdPressureIndex | null | undefined} pressureIdx
+ * @param {unknown} settlementId
+ * @returns {number}
+ */
 function supportScore(pressureIdx, settlementId) {
   const food = pressure(pressureIdx, settlementId, 'food');
   const conflict = pressure(pressureIdx, settlementId, 'conflict');
@@ -30,21 +123,25 @@ function supportScore(pressureIdx, settlementId) {
   return clamp01(1 - (food * 0.22 + conflict * 0.24 + trade * 0.2 + legitimacy * 0.2 + disease * 0.14));
 }
 
+/** @param {unknown} tier @returns {TRDEntry[]} */
 export function entriesForTier(tier) {
-  const tierCatalog = institutionalCatalog[tier] || {};
+  const tierCatalog = institutionalCatalog[/** @type {keyof typeof institutionalCatalog} */ (tier)] || {};
+  /** @type {TRDEntry[]} */
   const entries = [];
   for (const [category, group] of Object.entries(tierCatalog)) {
     for (const [name, spec] of Object.entries(group || {})) {
-      entries.push({ name, category, spec: spec || {} });
+      entries.push({ name, category, spec: /** @type {TRDSpec} */ (spec || {}) });
     }
   }
   return entries;
 }
 
+/** @param {unknown} tier @returns {TRDEntry[]} */
 function requiredInstitutionsForTier(tier) {
   return entriesForTier(tier).filter(entry => entry.spec.required);
 }
 
+/** @param {unknown} name @returns {(TRDEntry & { nativeTier: string }) | null} */
 export function catalogEntryByName(name) {
   const needle = String(name || '').toLowerCase();
   for (const tier of TIER_ORDER) {
@@ -54,16 +151,23 @@ export function catalogEntryByName(name) {
   return null;
 }
 
+/** @param {TRDSettlement | null | undefined} settlement @returns {Set<string>} */
 export function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
     .filter(inst => inst?.status !== 'removed' && !inst?._worldPulseInactive)
     .map(inst => String(inst.name || '').toLowerCase()));
 }
 
+/** @param {string} name @returns {string} */
 function institutionId(name) {
   return `institution.${stablePart(name)}`;
 }
 
+/**
+ * @param {TRDEntry} entry
+ * @param {string} tier
+ * @param {TRDOutcome | null | undefined} outcome
+ */
 function newInstitution(entry, tier, outcome) {
   return {
     id: institutionId(entry.name),
@@ -79,11 +183,13 @@ function newInstitution(entry, tier, outcome) {
   };
 }
 
+/** @param {TRDSettlement | null | undefined} settlement @param {string} toTier @returns {TRDEntry[]} */
 function promotionAdditions(settlement, toTier) {
   const names = existingInstitutionNames(settlement);
   return requiredInstitutionsForTier(toTier).filter(entry => !names.has(entry.name.toLowerCase()));
 }
 
+/** @param {TRDInstitution | null | undefined} inst @param {string} toTier @returns {boolean} */
 function shouldRemoveForDemotion(inst, toTier) {
   if (!inst || inst.status === 'removed' || inst._worldPulseInactive) return false;
   if (inst._worldPulseTierAdded && inst.requiredForTier && !tierAtLeast(toTier, inst.requiredForTier)) return true;
@@ -94,6 +200,7 @@ function shouldRemoveForDemotion(inst, toTier) {
   return false;
 }
 
+/** @param {TRDInstitution | null | undefined} inst @returns {{ fate: string, status: string }} */
 function demotionFateForInstitution(inst) {
   const entry = catalogEntryByName(inst?.name);
   const category = String(inst?.category || entry?.category || '').toLowerCase();
@@ -107,6 +214,11 @@ function demotionFateForInstitution(inst) {
   return { fate: 'hollowed_out', status: 'remnant' };
 }
 
+/**
+ * @param {TRDInstitution} inst
+ * @param {TRDOutcome | null | undefined} outcome
+ * @param {string} toTier
+ */
 function deactivateForDemotion(inst, outcome, toTier) {
   const fate = demotionFateForInstitution(inst);
   return {
@@ -123,6 +235,7 @@ function deactivateForDemotion(inst, outcome, toTier) {
   };
 }
 
+/** @param {string} direction @param {string} targetTier @returns {number} */
 function requiredStreak(direction, targetTier) {
   const rank = tierRank(targetTier);
   return direction === 'promotion'
@@ -130,6 +243,11 @@ function requiredStreak(direction, targetTier) {
     : Math.max(2, Math.ceil((rank + 1) / 2));
 }
 
+/**
+ * @param {TRDItem} item
+ * @param {TrdPressureIndex | null | undefined} pressureIdx
+ * @returns {TierDrift | null}
+ */
 function tierEligibility(item, pressureIdx) {
   const settlement = item.settlement || {};
   const currentTier = settlement.tier || popToTier(settlement.population || 0);
@@ -139,18 +257,18 @@ function tierEligibility(item, pressureIdx) {
   const nextTier = TIER_ORDER[rank + 1] || null;
   const previousTier = TIER_ORDER[rank - 1] || null;
 
-  if (nextTier && pop >= (POPULATION_RANGES[nextTier]?.min || Infinity) * 0.92 && support >= 0.62) {
+  if (nextTier && pop >= (POPULATION_RANGES[/** @type {keyof typeof POPULATION_RANGES} */ (nextTier)]?.min || Infinity) * 0.92 && support >= 0.62) {
     return {
       direction: 'promotion',
       fromTier: currentTier,
       toTier: nextTier,
       support,
-      severity: clamp01((pop / (POPULATION_RANGES[nextTier]?.min || pop)) * 0.45 + support * 0.55),
+      severity: clamp01((pop / (POPULATION_RANGES[/** @type {keyof typeof POPULATION_RANGES} */ (nextTier)]?.min || pop)) * 0.45 + support * 0.55),
       reason: `${currentTier} is near ${nextTier} population and has sustained trade, defense, and legitimacy support.`,
     };
   }
 
-  const currentMin = POPULATION_RANGES[currentTier]?.min || 0;
+  const currentMin = POPULATION_RANGES[/** @type {keyof typeof POPULATION_RANGES} */ (currentTier)]?.min || 0;
   const hardPopulationFailure = previousTier && pop < currentMin * 0.82;
   const structuralFailure = previousTier && support <= 0.25;
   const strainedBelowFloor = previousTier && pop < currentMin && support < 0.45;
@@ -168,6 +286,11 @@ function tierEligibility(item, pressureIdx) {
   return null;
 }
 
+/**
+ * @param {TRDItem} item
+ * @param {TierDrift & { streak: number }} drift
+ * @param {number} tick
+ */
 function tierCandidate(item, drift, tick) {
   const minimum = requiredStreak(drift.direction, drift.toTier);
   if (drift.streak < minimum) return null;
@@ -211,6 +334,7 @@ function tierCandidate(item, drift, tick) {
   };
 }
 
+/** @param {TRDSettlement | null | undefined} settlement @returns {string[]} */
 function resourceList(settlement) {
   return [
     ...(settlement?.config?.nearbyResources || []),
@@ -218,6 +342,7 @@ function resourceList(settlement) {
   ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
+/** @param {TRDSettlement | null | undefined} settlement @param {string} resource @returns {unknown} */
 function resourceState(settlement, resource) {
   const explicit = settlement?.config?.nearbyResourcesState?.[resource];
   if (explicit) return explicit;
@@ -225,12 +350,14 @@ function resourceState(settlement, resource) {
   return depleted.has(resource) ? 'depleted' : 'allow';
 }
 
+/** @param {TRDItem} item @param {TrdPressureIndex | null | undefined} pressureIdx @returns {number} */
 function resourcePressure(item, pressureIdx) {
   const systemValue = item?.system?.resourcePressure?.value;
-  if (Number.isFinite(systemValue)) return clamp01(systemValue / 100);
+  if (Number.isFinite(systemValue)) return clamp01(/** @type {number} */ (systemValue) / 100);
   return clamp01(pressure(pressureIdx, item.id, 'food') * 0.4 + pressure(pressureIdx, item.id, 'trade') * 0.35 + pressure(pressureIdx, item.id, 'conflict') * 0.25);
 }
 
+/** @param {unknown} value @returns {Set<string>} */
 function tokenSet(value) {
   return new Set(String(value || '')
     .toLowerCase()
@@ -239,6 +366,7 @@ function tokenSet(value) {
     .filter(token => token.length >= 4));
 }
 
+/** @param {unknown} text @param {unknown} resource @returns {boolean} */
 function textMatchesResource(text, resource) {
   const resourceTokens = tokenSet(resource);
   if (!resourceTokens.size) return false;
@@ -248,6 +376,7 @@ function textMatchesResource(text, resource) {
 
 // Mirror of goodsCatalog's comparable(): annotation-stripped, alnum-only form
 // so 'River fish (taxed by occupation)' compares equal to 'River fish'.
+/** @param {unknown} value @returns {string} */
 function comparableLabel(value) {
   return String(value || '')
     .replace(/\([^)]*\)/g, ' ')
@@ -265,15 +394,17 @@ function comparableLabel(value) {
 // ('fishing_grounds') rarely appear in those labels ('River fish', 'Raw wool'),
 // which is why a token match alone called canonically-exported resources
 // local-only. Static data, so resolved once per resource key.
+/** @type {Map<string, { labels: Set<string>, ids: Set<string | null> }>} */
 const resourceGoodsVocabularyCache = new Map();
+/** @param {unknown} resource @returns {{ labels: Set<string>, ids: Set<string | null> }} */
 function resourceGoodsVocabulary(resource) {
   const key = String(resource || '');
   const cached = resourceGoodsVocabularyCache.get(key);
   if (cached) return cached;
-  const goods = new Set(RESOURCE_DATA[key]?.tradeGoods || []);
-  for (const composite of RESOURCE_TO_CHAINS[key] || []) {
+  const goods = new Set(RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (key)]?.tradeGoods || []);
+  for (const composite of RESOURCE_TO_CHAINS[/** @type {keyof typeof RESOURCE_TO_CHAINS} */ (key)] || []) {
     const [needKey, ...innerParts] = String(composite).split('.');
-    const chain = (SUPPLY_CHAIN_NEEDS[needKey]?.chains || []).find(c => c.id === innerParts.join('.'));
+    const chain = (SUPPLY_CHAIN_NEEDS[/** @type {keyof typeof SUPPLY_CHAIN_NEEDS} */ (needKey)]?.chains || []).find(c => c.id === innerParts.join('.'));
     if (!chain) continue;
     for (const good of chain.rawInputs || []) goods.add(good);
     for (const good of chain.intermediateGoods || []) goods.add(good);
@@ -287,6 +418,7 @@ function resourceGoodsVocabulary(resource) {
   return vocabulary;
 }
 
+/** @param {unknown[] | null | undefined} labels @param {unknown} resource @returns {boolean} */
 function tradeListMatchesResource(labels, resource) {
   const vocabulary = resourceGoodsVocabulary(resource);
   return (labels || []).some(label => {
@@ -299,6 +431,7 @@ function tradeListMatchesResource(labels, resource) {
 /** Exported for pin tests: classification feeds depletion trade-load and the
  *  primary-export recovery block, so mislabeling an exported resource as
  *  local-only underweights it in the drift logic. */
+/** @param {TRDSettlement | null | undefined} settlement @param {unknown} resource @returns {string} */
 export function resourceEconomicRole(settlement, resource) {
   const economicState = settlement?.economicState || {};
   const exportsList = economicState.primaryExports || [];
@@ -316,6 +449,13 @@ export function resourceEconomicRole(settlement, resource) {
   return 'local_resource';
 }
 
+/**
+ * @param {TRDItem} item
+ * @param {TrdPressureIndex | null | undefined} pressureIdx
+ * @param {SimRules} rules
+ * @param {number} tick
+ * @param {TierDrift | null | undefined} previousDrift
+ */
 function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
   const settlement = item.settlement || {};
   const resources = resourceList(settlement);
@@ -355,10 +495,10 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         conflictTags: [`resource:${item.id}:${resource}`],
       });
     } else if (state === 'depleted' && ((pressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
-      const recovery = canRecoverResource(resource, settlement, {
+      const recovery = canRecoverResource(resource, /** @type {any} */ (settlement), /** @type {any} */ ({
         demotion: previousDrift?.direction === 'demotion',
         pressureScore,
-      });
+      }));
       if (!recovery.canRecover) continue;
       const severity = clamp01((1 - pressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
       out.push({
@@ -388,25 +528,32 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
   return out;
 }
 
+/**
+ * @param {Partial<TrdWorldState> | null | undefined} worldState
+ * @param {{ settlements?: TRDItem[] } | null | undefined} snapshot
+ * @param {TrdPressureIndex | null | undefined} pressureIdx
+ * @param {{ simulationRules?: unknown, tick?: number, interval?: string }} [context]
+ */
 export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
-  const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
+  const tick = Number.isFinite(context.tick) ? /** @type {number} */ (context.tick) : (worldState?.tick || 0);
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
+  /** @type {Record<string, unknown>} */
   const driftBySettlement = {};
   // Tier candidate ids are tick-suffixed, so an unresolved tier proposal would
   // gain a duplicate every eligible tick: one pending tier proposal per
   // settlement. Streak tracking continues so a resolved proposal re-emits.
-  const pendingTierProposals = new Set((worldState?.proposals || [])
+  const pendingTierProposals = new Set(/** @type {Array<{ status?: string, outcome?: { tierChange?: { saveId?: unknown } } }>} */ (worldState?.proposals || [])
     .filter(proposal => proposal?.status === 'pending' && proposal?.outcome?.tierChange?.saveId != null)
-    .map(proposal => String(proposal.outcome.tierChange.saveId)));
+    .map(proposal => String(/** @type {{ tierChange: { saveId: unknown } }} */ (proposal.outcome).tierChange.saveId)));
 
   for (const item of snapshot?.settlements || []) {
-    const previous = settlementTickStates[item.id] || {};
+    const previous = /** @type {{ tierDrift?: Partial<TierDrift> }} */ (settlementTickStates[item.id] || {});
     const eligibility = rules.tierDriftEnabled ? tierEligibility(item, pressureIdx) : null;
     let tierDrift = null;
     if (eligibility) {
-      const prior = previous.tierDrift || {};
+      const prior = /** @type {Partial<TierDrift>} */ (previous.tierDrift || {});
       const sameTrack = prior.direction === eligibility.direction && prior.toTier === eligibility.toTier;
       tierDrift = {
         ...eligibility,
@@ -434,6 +581,10 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
   };
 }
 
+/**
+ * @param {TRDSettlement | null | undefined} settlement
+ * @param {TRDOutcome | null | undefined} outcome
+ */
 export function applyTierOutcomeToSettlement(settlement, outcome) {
   if (!settlement || !outcome?.tierChange) return settlement;
   const { fromTier, toTier, direction } = outcome.tierChange;
@@ -444,6 +595,7 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   const currentTier = settlement.tier || popToTier(settlement.population || 0);
   if (currentTier !== fromTier) return settlement;
   let institutions = Array.isArray(settlement.institutions) ? [...settlement.institutions] : [];
+  /** @type {Array<{ name?: string, category?: (string|null), fate?: string, tier?: string }>} */
   const institutionFates = [];
 
   if (direction === 'promotion') {
@@ -452,7 +604,7 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
     // behind by an earlier demotion) — promotionAdditions cannot see those
     // because existingInstitutionNames excludes them. Reactivate the remnant
     // instead of appending a same-name duplicate.
-    const additions = promotionAdditions(settlement, toTier);
+    const additions = promotionAdditions(settlement, /** @type {string} */ (toTier));
     const reactivated = new Set();
     institutions = institutions.map(inst => {
       const match = additions.find(entry => entry.name.toLowerCase() === String(inst?.name || '').toLowerCase());
@@ -486,19 +638,19 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
           fate: 'added',
           tier: toTier,
         });
-        return newInstitution(entry, toTier, outcome);
+        return newInstitution(entry, /** @type {string} */ (toTier), outcome);
       });
     institutions = [...institutions, ...fresh];
   } else {
     institutions = institutions.map(inst => {
-      if (!shouldRemoveForDemotion(inst, toTier)) return inst;
+      if (!shouldRemoveForDemotion(inst, /** @type {string} */ (toTier))) return inst;
       institutionFates.push({
         name: inst.name,
         category: inst.category || catalogEntryByName(inst.name)?.category || null,
         fate: demotionFateForInstitution(inst).fate,
         tier: toTier,
       });
-      return deactivateForDemotion(inst, outcome, toTier);
+      return deactivateForDemotion(inst, outcome, /** @type {string} */ (toTier));
     });
   }
 
@@ -532,12 +684,17 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   };
 }
 
+/**
+ * @param {TRDSettlement | null | undefined} settlement
+ * @param {TRDOutcome | null | undefined} outcome
+ */
 export function applyResourceOutcomeToSettlement(settlement, outcome) {
   if (!settlement || !outcome?.resourcePatch) return settlement;
   const { resource, state } = outcome.resourcePatch;
   const config = settlement.config || {};
+  /** @type {Record<string, unknown>} */
   const resourceStateMap = { ...(config.nearbyResourcesState || {}) };
-  resourceStateMap[resource] = state;
+  resourceStateMap[/** @type {string} */ (resource)] = state;
   const depletedSet = new Set(config.nearbyResourcesDepleted || settlement.nearbyResourcesDepleted || []);
   if (state === 'depleted') depletedSet.add(resource);
   else depletedSet.delete(resource);

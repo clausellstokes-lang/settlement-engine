@@ -22,9 +22,45 @@
 
 import { resolveCrisisLocally } from '../crisisLifecycle.js';
 
+/**
+ * A resolved / graduated roaming-stressor twin as the world pulse records it.
+ * (No canonical typedef exists in worldPulse/stressors.js yet — this is the
+ * structural subset this module reads.)
+ * @typedef {Object} EchoStressor
+ * @property {string} id
+ * @property {string} label
+ * @property {string} type
+ * @property {number} [severity]        0..1 current severity
+ * @property {number} [peakSeverity]    0..1 historical peak
+ * @property {unknown[]} [residualEffects]  residual-effect slugs (stringified for display)
+ * @property {Array<string|number>} [affectedSettlementIds]
+ * @property {string|number} [resolvedAt]
+ * @property {string} [resolutionReason]
+ * @property {string|number} [originSettlementId]
+ */
+
+/**
+ * A campaign-era (or generation-era) historical event record, as read by
+ * HistoryTab / historyBeats. Structural subset used here.
+ * @typedef {Object} HistoricalEventRecord
+ * @property {string} [campaignEventId]
+ * @property {boolean} [campaignEra]
+ * @property {number} [tick]
+ * @property {string} [name]
+ * @property {string} [type]
+ * @property {string[]} [lastingEffects]
+ */
+
+/**
+ * Structural subset of a settlement this module touches.
+ * @typedef {Object} AftermathSettlement
+ * @property {{ historicalEvents?: HistoricalEventRecord[] } | null} [history]
+ */
+
 // Stressor type -> the history event-type vocabulary the generators already
 // use (historyData EVENT_TYPE_NAMES). Unmapped types fall back to
 // external_threat, which renders sensibly for anything crisis-shaped.
+/** @type {Readonly<Record<string, string>>} */
 const HISTORY_EVENT_TYPE = Object.freeze({
   siege: 'external_threat',
   wartime: 'external_threat',
@@ -51,6 +87,10 @@ const HISTORY_EVENT_TYPE = Object.freeze({
 
 const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
 
+/**
+ * @param {number} peak  0..1 peak severity
+ * @returns {'catastrophic'|'major'|'moderate'|'minor'}
+ */
 function severityWord(peak) {
   if (peak >= 0.85) return 'catastrophic';
   if (peak >= 0.6) return 'major';
@@ -58,6 +98,10 @@ function severityWord(peak) {
   return 'minor';
 }
 
+/**
+ * @param {EchoStressor} stressor
+ * @returns {string}
+ */
 function residualText(stressor) {
   return (stressor.residualEffects || []).slice(0, 3).join(', ').replace(/_/g, ' ');
 }
@@ -66,11 +110,21 @@ function residualText(stressor) {
 // lastingEffects as a STRING ARRAY — generator-era events all use arrays, and
 // the renderers call .join/.map on it. A bare string would pass their
 // `?.length > 0` guards and crash the render.
+/**
+ * @param {EchoStressor} stressor
+ * @returns {string[]}
+ */
 function residualList(stressor) {
   return (stressor.residualEffects || []).slice(0, 3).map(s => String(s).replace(/_/g, ' '));
 }
 
-/** Wizard-News entries for stressors that resolved this tick. */
+/**
+ * Wizard-News entries for stressors that resolved this tick.
+ * @param {EchoStressor[]} [resolved]
+ * @param {number} [tick]
+ * @param {string|number|null} [now]  timestamp threaded in by the caller
+ * @returns {Object[]}
+ */
 export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
   return resolved.map(stressor => ({
     id: `wizard_news.${tick}.aftermath.${stressor.id}`,
@@ -97,7 +151,13 @@ export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
   }));
 }
 
-/** Wizard-News entries for echoes that faded into history this tick. */
+/**
+ * Wizard-News entries for echoes that faded into history this tick.
+ * @param {EchoStressor[]} [graduated]
+ * @param {number} [tick]
+ * @param {string|number|null} [now]  timestamp threaded in by the caller
+ * @returns {Object[]}
+ */
 export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
   return graduated.map(stressor => ({
     id: `wizard_news.${tick}.history.${stressor.id}`,
@@ -127,10 +187,24 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
  * the settlement's present-day past), and are capped so a long campaign
  * can't balloon the record. Idempotent per echo id.
  *
- * @param {Object} settlement
- * @param {Object} echo        the graduated stressor record
+ * @overload
+ * @param {AftermathSettlement} settlement
+ * @param {EchoStressor | null | undefined} echo  the graduated stressor record
  * @param {number} tick
- * @returns {Object} new settlement (same reference when nothing changed)
+ * @returns {AftermathSettlement} new settlement (same reference when nothing changed)
+ */
+/**
+ * @overload
+ * @param {null | undefined} settlement
+ * @param {EchoStressor | null | undefined} echo
+ * @param {number} tick
+ * @returns {null | undefined} identity — nothing to record on
+ */
+/**
+ * @param {AftermathSettlement | null | undefined} settlement
+ * @param {EchoStressor | null | undefined} echo
+ * @param {number} tick
+ * @returns {AftermathSettlement | null | undefined}
  */
 export function withCampaignHistoryEvent(settlement, echo, tick) {
   if (!settlement || !echo) return settlement;
@@ -180,9 +254,9 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
  * Deterministic; identity no-op when nothing local matches (the common case
  * for pulse-born crises).
  *
- * @param {Object} settlement          a settlementUpdates settlement
- * @param {Array}  resolvedStressors   the pulse result's resolved twins
- * @param {string|number} saveId       the settlement's save id
+ * @param {Object} settlement          a settlementUpdates settlement (shape per crisisLifecycle.resolveCrisisLocally)
+ * @param {EchoStressor[]} [resolvedStressors]  the pulse result's resolved twins
+ * @param {string|number} [saveId]     the settlement's save id
  * @returns {Object} new settlement (same reference when untouched)
  */
 export function withOrganicStressorResolution(settlement, resolvedStressors = [], saveId) {
@@ -198,6 +272,11 @@ export function withOrganicStressorResolution(settlement, resolvedStressors = []
  * Apply graduation history to every affected settlement in a local map
  * (advanceCampaignWorld's settlement working set). Mutates the Map values
  * immutably; returns the count of settlements written.
+ *
+ * @param {Map<string, AftermathSettlement>} localSettlements
+ * @param {EchoStressor[]} [graduated]
+ * @param {number} [tick]
+ * @returns {number} count of settlements written
  */
 export function recordGraduationsIntoHistory(localSettlements, graduated = [], tick = 0) {
   let written = 0;

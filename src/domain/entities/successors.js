@@ -17,6 +17,13 @@
 /** @typedef {import('./npcs.js').NpcStructural} NpcStructural */
 
 /**
+ * The slice of a settlement successor inference reads — just the NPC
+ * roster. Full settlement objects satisfy this structurally.
+ * @typedef {Object} SettlementWithNpcs
+ * @property {NpcStructural[]=} npcs
+ */
+
+/**
  * Find the most likely successors to an outgoing NPC.
  *
  * Ranking criteria (in order):
@@ -31,8 +38,8 @@
  * institutional/faction links is the standard successor.
  *
  * @param {Object} args
- * @param {NpcStructural} args.outgoing
- * @param {Object} args.settlement
+ * @param {NpcStructural | null | undefined} args.outgoing
+ * @param {SettlementWithNpcs | null | undefined} args.settlement
  * @param {number} [args.limit=3]
  * @returns {NpcStructural[]} ranked candidates
  */
@@ -60,6 +67,12 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
  * populated before any deaths occur. If no candidates exist yet, the
  * field is empty and the SuccessorPrompt will fall back to free-form
  * input.
+ *
+ * @param {Object} args
+ * @param {NpcStructural | null | undefined} args.npc
+ * @param {SettlementWithNpcs | null | undefined} args.settlement
+ * @param {number} [args.limit=3]
+ * @returns {string[]} candidate npc ids (or names when no id exists)
  */
 export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
   return inferSuccessors({ outgoing: npc, settlement, limit })
@@ -67,6 +80,12 @@ export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
     .filter(Boolean);
 }
 
+/**
+ * @param {NpcStructural} candidate
+ * @param {Set<string>} outInst   institution ids the outgoing NPC was linked to
+ * @param {Set<string>} outFac    faction ids the outgoing NPC was linked to
+ * @returns {number} successor-fitness score; 0 = no overlap, irrelevant
+ */
 function scoreCandidate(candidate, outInst, outFac) {
   // Institutional overlap is the strongest signal — internal succession
   // is the standard inheritance pattern (deputy mayor becomes mayor).

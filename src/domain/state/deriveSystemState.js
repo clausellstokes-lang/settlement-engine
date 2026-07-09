@@ -33,9 +33,45 @@ import { prosperityRank } from '../../data/constants.js';
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
 
+/**
+ * Structural view of the economicState fields this derivation reads.
+ * `prosperity` is canonically `{ tier }`; legacy saves carry a bare string
+ * (the intersection member types the string branch so `?.tier` is `undefined`).
+ * @typedef {Object} EconStateLike
+ * @property {{ tier?: string } | (string & { tier?: undefined }) | null} [prosperity]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {Array<{ resourceDepleted?: unknown, substituteActive?: unknown }>} [activeChains]
+ * @property {unknown} [primaryImports]
+ * @property {unknown} [imports]
+ */
 
 /**
- * @param {Object} settlement — the engine's settlement object
+ * Structural view of the powerStructure fields this derivation reads.
+ * @typedef {Object} PowerLike
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ score?: unknown, label?: unknown } | number | null} [publicLegitimacy]
+ */
+
+/**
+ * Structural view of the settlement fields this derivation reads.
+ * @typedef {Object} SystemStateSource
+ * @property {EconStateLike} [economicState]
+ * @property {Array<{ status?: unknown }>} [institutions]
+ * @property {PowerLike | null} [powerStructure]
+ * @property {unknown[]} [factions]
+ * @property {unknown[]} [conflicts]
+ * @property {{ blackMarketCapture?: number } | null} [safetyProfile]
+ * @property {{ monsterThreat?: string, nearbyResourcesState?: Record<string, string> | null, tradeRouteAccess?: string } | null} [config]
+ * @property {Array<{ relationshipType?: string }>} [neighbourNetwork]
+ * @property {Array<{ relationshipType?: string }>} [neighbourLinks]
+ * @property {unknown} [stressors]
+ * @property {unknown} [stress]
+ * @property {unknown} [stresses]
+ */
+
+/**
+ * @param {SystemStateSource | null | undefined} settlement — the engine's settlement object
  * @returns {SystemState}
  */
 export function deriveSystemState(settlement) {
@@ -53,10 +89,15 @@ export function deriveSystemState(settlement) {
  * Can the settlement absorb shocks? Drivers: prosperity, food security,
  * income/export diversity, public legitimacy. Famine, single-source
  * exports, and impaired institutions push it down.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveResilience(s) {
   let value = 50;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
   // Prosperity is a strong signal — graded across the CANONICAL tier vocabulary
@@ -64,6 +105,7 @@ function deriveResilience(s) {
   // 'Subsistence/Struggling' plus a 'Modest' the generator never emits, so the three
   // most common middle tiers (Poor/Moderate/Comfortable) contributed ZERO resilience
   // signal — the headline shock-absorption dial ignored most towns' economies.
+  /** @type {EconStateLike} */
   const econ = s.economicState || {};
   const prosperity = econ.prosperity?.tier || econ.prosperity || null;
   const pRank = prosperityRank(prosperity);
@@ -132,12 +174,18 @@ function deriveResilience(s) {
  * relationships between factions, criminal capture, low public
  * legitimacy. A stable monoculture scores low; a town with rivals,
  * thieves' guilds, and weak rulers scores high.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveVolatility(s) {
   let value = 30; // baseline — most towns have some friction
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
+  /** @type {PowerLike} */
   const power = s.powerStructure || {};
   const factions = power.factions || s.factions || [];
   if (factions.length >= 5) {
@@ -156,6 +204,7 @@ function deriveVolatility(s) {
   }
 
   // Criminal capture: when shadow networks have outsized influence
+  /** @type {{ blackMarketCapture?: number }} */
   const safety = econOf(s).safetyProfile || s.safetyProfile || {};
   const blackMarketCapture = safety.blackMarketCapture || 0;
   if (blackMarketCapture >= 30) {
@@ -201,10 +250,15 @@ function deriveVolatility(s) {
 /**
  * How much pressure comes from outside the settlement? Monster threat,
  * hostile neighbours, raids/sieges/occupation in stressors.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveExternalThreat(s) {
   let value = 30;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
   const monsterThreat = s.config?.monsterThreat || 'safe';
@@ -248,13 +302,19 @@ function deriveExternalThreat(s) {
 /**
  * Are key materials under strain? Depleted resources, narrow chain
  * dependencies, unmet imports. High value = the place will hurt soon.
+ *
+ * @param {SystemStateSource} s
+ * @returns {StateDimension}
  */
 function deriveResourcePressure(s) {
   let value = 30;
+  /** @type {string[]} */
   const drivers = [];
+  /** @type {string[]} */
   const risks = [];
 
   // Depleted resources
+  /** @type {Record<string, string>} */
   const resourceState = s.config?.nearbyResourcesState || {};
   const depleted = Object.entries(resourceState).filter(([, st]) => st === 'depleted');
   if (depleted.length > 0) {
@@ -288,8 +348,17 @@ function deriveResourcePressure(s) {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+/**
+ * @param {SystemStateSource | null | undefined} s
+ * @returns {EconStateLike}
+ */
 function econOf(s) { return s?.economicState || {}; }
 
+/**
+ * @param {unknown} items     candidate institutions array (any shape tolerated)
+ * @param {string[]} statuses status words that count
+ * @returns {number}
+ */
 function countByStatus(items, statuses) {
   if (!Array.isArray(items)) return 0;
   const set = new Set(statuses);
@@ -300,6 +369,11 @@ function countByStatus(items, statuses) {
  * Wrap raw value+drivers+risks into the StateDimension shape with band
  * label and clamped value. Centralizing this means every dimension comes
  * out of derivation in the same shape — no surprises for the UI consumer.
+ *
+ * @param {number} rawValue
+ * @param {string[]} drivers
+ * @param {string[]} risks
+ * @returns {StateDimension}
  */
 function finalize(rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));

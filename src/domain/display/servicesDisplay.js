@@ -11,6 +11,7 @@
 
 // Expected service categories per tier. (Was J0 in tabConstants; moved here so
 // screen + print derive absences from one map.)
+/** @type {Readonly<Record<string, readonly string[]>>} */
 export const EXPECTED_SERVICES_BY_TIER = Object.freeze({
   thorp:      ['food'],
   hamlet:     ['food', 'healing'],
@@ -20,6 +21,7 @@ export const EXPECTED_SERVICES_BY_TIER = Object.freeze({
   metropolis: ['food', 'healing', 'equipment', 'information', 'lodging', 'legal', 'transport', 'entertainment'],
 });
 
+/** @type {Readonly<Record<string, string>>} */
 const SERVICE_LABELS = Object.freeze({
   lodging: 'Lodging', food: 'Food & Drink', equipment: 'Equipment',
   magic: 'Magical Services', information: 'Information', healing: 'Healing',
@@ -27,6 +29,11 @@ const SERVICE_LABELS = Object.freeze({
   entertainment: 'Entertainment', employment: 'Employment', criminal: 'Criminal Services',
 });
 
+/**
+ * Human-readable label for a service-category key.
+ * @param {string} key service-category key
+ * @returns {string}
+ */
 export const serviceLabel = (key) => SERVICE_LABELS[key] || key;
 
 /**
@@ -34,6 +41,9 @@ export const serviceLabel = (key) => SERVICE_LABELS[key] || key;
  * Mirrors the web ServicesTab's `missing` computation. `availableServices` is
  * the settlement.availableServices map (category key -> array of services).
  * Returns [{ key, label }].
+ * @param {string} tier settlement tier (thorp..metropolis)
+ * @param {Record<string, unknown>|null|undefined} availableServices settlement.availableServices map
+ * @returns {Array<{ key: string, label: string }>}
  */
 export function deriveNotableAbsences(tier, availableServices) {
   const expected = EXPECTED_SERVICES_BY_TIER[tier] || [];

@@ -30,6 +30,21 @@ import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 
 /** @typedef {import('../types.js').Event} Event */
+/**
+ * A settlement is a schemaless open object here — every handler spreads it
+ * (`{ ...s, ... }`) and reads a wide, evolving surface (config, institutions,
+ * factions, npcs, powerStructure, economicState, neighbourNetwork,
+ * activeConditions, _config, …). There is no single schema to import, so the
+ * honest local type is an open record (mirrors domain/aiGrounding.js).
+ * @typedef {any} MutSettlement
+ */
+/**
+ * The stamped event the handlers receive: an {@link Event} plus the dynamic
+ * fields the mutation layer reads off it (timestamp, createdAt, and the
+ * type-specific `payload.*` bag). Matches mutateSettlement's own `timedEvent`
+ * cast to `any` — the event is treated as an open bag past its core fields.
+ * @typedef {any} MutateEvent
+ */
 
 /**
  * Apply an event's patches to the settlement. Returns a new settlement
@@ -40,7 +55,7 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
  * @param {Object} args
  * @param {Object} args.settlement
  * @param {Event} args.event
- * @param {string} [args.now] deterministic ISO timestamp for replay/tests
+ * @param {string | null} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {Object} mutated settlement
  */
 export function mutateSettlement({ settlement, event, now = null }) {
@@ -185,7 +200,7 @@ export function mutateSettlement({ settlement, event, now = null }) {
 
 // ── Institution mutations ──────────────────────────────────────────────────
 
-function destroySettlement(s, event) {
+function destroySettlement(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   return {
     ...s,
     status: 'destroyed',
@@ -203,7 +218,7 @@ function destroySettlement(s, event) {
 // A FOOD ANCHOR is the load-bearing food infrastructure the food_anchor_lost
 // template names (granary, mill, fishery) — losing one is a settlement-level food
 // crisis, not just a closed shop. Sawmills/lumber mills cut wood, not flour.
-function isFoodAnchorInstitution(inst) {
+function isFoodAnchorInstitution(/** @type {any} */ inst) {
   const n = String(inst?.name || '').toLowerCase();
   if (!n) return false;
   // 'fisher|fishing' catches Fisher's landing + Fishing community (production)
@@ -217,7 +232,7 @@ function isFoodAnchorInstitution(inst) {
 // crippled. These archetypes had rich consumers (capacity, causal, daily life,
 // districts, threats) but NO producer — destroying the granary updated faction
 // edges yet never raised the food crisis those consumers were waiting for.
-function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
+function withFoodAnchorLostIfAnchor(/** @type {MutSettlement} */ next, /** @type {any} */ inst, /** @type {MutateEvent} */ event, /** @type {number} */ severity) {
   if (!isFoodAnchorInstitution(inst)) return next;
   // Outright REMOVAL is the ceiling (0.8); damage/impairment clamps strictly below
   // it (0.5..0.75) so a badly burned granary can never read as a WORSE food crisis
@@ -233,7 +248,7 @@ function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
   });
 }
 
-function damageInstitution(s, event) {
+function damageInstitution(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   const severity = Number(event.payload?.severity ?? 0.7);
@@ -252,7 +267,7 @@ function damageInstitution(s, event) {
   return next;
 }
 
-function removeInstitution(s, event) {
+function removeInstitution(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   const removed = { ...inst, status: STATUS_REMOVED, removedByEventId: event.id };
@@ -279,12 +294,12 @@ function removeInstitution(s, event) {
   return next;
 }
 
-function addInstitution(s, event) {
+function addInstitution(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const name = labelFromTarget(event.targetId);
   const list = s.institutions || [];
   // Idempotent: if an institution with the same name already exists,
   // we don't duplicate — we just clear any prior REMOVED status.
-  const existing = list.find(i => i.name?.toLowerCase() === name.toLowerCase());
+  const existing = list.find((/** @type {any} */ i) => i.name?.toLowerCase() === name.toLowerCase());
   if (existing) {
     const restored = { ...existing, status: 'active', impairments: [] };
     return replaceInstitution(s, existing, restored);
@@ -301,7 +316,7 @@ function addInstitution(s, event) {
   return { ...s, institutions: [...list, newInst] };
 }
 
-function impairInstitution(s, event) {
+function impairInstitution(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
@@ -323,7 +338,7 @@ function impairInstitution(s, event) {
   return next;
 }
 
-function restoreInstitution(s, event) {
+function restoreInstitution(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   // If the user supplied a specific cause event id, remove only those
@@ -337,7 +352,7 @@ function restoreInstitution(s, event) {
 
 // ── Faction mutations ──────────────────────────────────────────────────────
 
-function impairFaction(s, event) {
+function impairFaction(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const faction = findFaction(s, event.targetId);
   if (!faction) return s;
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
@@ -354,7 +369,7 @@ function impairFaction(s, event) {
   return next;
 }
 
-function restoreFaction(s, event) {
+function restoreFaction(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const faction = findFaction(s, event.targetId);
   if (!faction) return s;
   const causeId = event.payload?.causeEventId;
@@ -370,14 +385,14 @@ function restoreFaction(s, event) {
  * and writes to powerStructure.factions (the canonical location) so the
  * power-structure rerun and seat logic see it.
  */
-function addFaction(s, event) {
+function addFaction(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const name = labelFromTarget(event.targetId) || event.payload?.name;
   if (!name) return s;
   const psFactions = s.powerStructure?.factions;
   const flatFactions = s.factions;
   const list = psFactions || flatFactions || [];
   const existing = list.find(
-    f => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
+    (/** @type {any} */ f) => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
   );
   if (existing) {
     return replaceFaction(s, existing, { ...existing, status: 'active', impairments: [] });
@@ -416,7 +431,7 @@ function addFaction(s, event) {
  * invisible. Verbatim match wins, then a slug-equivalent roster entry, then
  * the slug itself (catalog fallback).
  */
-function resolveRosterKey(config, raw) {
+function resolveRosterKey(/** @type {any} */ config, /** @type {any} */ raw) {
   const slug = slugify(raw);
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
   const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
@@ -428,7 +443,7 @@ function resolveRosterKey(config, raw) {
 
 // Slug-equivalent key comparison — the same tolerance the handlers' live
 // filters use ('moonpetal_grove' ≡ 'Moonpetal grove'). Empty slugs never match.
-function slugEq(a, b) {
+function slugEq(/** @type {any} */ a, /** @type {any} */ b) {
   if (a === b) return true;
   const sa = slugify(a);
   return !!sa && sa === slugify(b);
@@ -447,7 +462,7 @@ function slugEq(a, b) {
  * The handlers keep the four lists mutually agreeing (an ADD clears the
  * key's removed/depleted records, a DEPLETE clears its recovered record, …).
  */
-function resourceEditsOf(config) {
+function resourceEditsOf(/** @type {any} */ config) {
   const re = config?.resourceEdits || {};
   return {
     added: Array.isArray(re.added) ? re.added : [],
@@ -469,7 +484,7 @@ function resourceEditsOf(config) {
  * deltas are the part that must survive. (resourceEdits is genuine user
  * input, deliberately NOT in settlementSlice's DERIVED_CONFIG_KEYS strip.)
  */
-function withResourceEdits(s, livePatch, resourceEdits) {
+function withResourceEdits(/** @type {MutSettlement} */ s, /** @type {any} */ livePatch, /** @type {any} */ resourceEdits) {
   const next = { ...s, config: { ...(s.config || {}), ...livePatch, resourceEdits } };
   if (s._config && typeof s._config === 'object') {
     next._config = { ...s._config, resourceEdits };
@@ -477,7 +492,7 @@ function withResourceEdits(s, livePatch, resourceEdits) {
   return next;
 }
 
-function depleteResource(s, event) {
+function depleteResource(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
   // Write the key form the roster actually holds (resolveRosterKey) into the
@@ -492,22 +507,22 @@ function depleteResource(s, event) {
     nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
   }, {
     ...edits,
-    depleted: edits.depleted.some(k => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
-    recovered: edits.recovered.filter(k => !slugEq(k, key)),
+    depleted: edits.depleted.some((/** @type {any} */ k) => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
+    recovered: edits.recovered.filter((/** @type {any} */ k) => !slugEq(k, key)),
   });
 }
 
 // RECOVERED_RESOURCE — the inverse: clear BOTH depletion formats so chains, exports,
 // food, and resource pressure all see the recovery. (Previously a registry no-op: the
 // depleted set was never cleared, so a recovered resource stayed depleted forever.)
-function recoveredResource(s, event) {
+function recoveredResource(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
   const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
   if (!keys.size) return s;
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) if (state[k] === 'depleted') state[k] = 'allow';
-  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k));
+  const depleted = (config.nearbyResourcesDepleted || []).filter((/** @type {any} */ k) => !keys.has(k));
   // Recorded under the roster-resolved form — the key a regenerated roster
   // holds. Recorded even when nothing was depleted LIVE: in random mode the
   // depletion may exist only in the re-roll, and the recovered record is
@@ -519,8 +534,8 @@ function recoveredResource(s, event) {
     nearbyResourcesDepleted: depleted,
   }, {
     ...edits,
-    depleted: edits.depleted.filter(k => !slugEq(k, key)),
-    recovered: edits.recovered.some(k => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
+    depleted: edits.depleted.filter((/** @type {any} */ k) => !slugEq(k, key)),
+    recovered: edits.recovered.some((/** @type {any} */ k) => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
   });
 }
 
@@ -529,7 +544,7 @@ function recoveredResource(s, event) {
 // `stress`/`stresses`), and when the removed threat was a SIEGE promotes the
 // siege_lifted recovery condition — previously a registry no-op, leaving the
 // siege_lifted consumer tree (defense/food/legitimacy/trade recovery) dead.
-function removedThreat(s, event) {
+function removedThreat(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const label = labelFromTarget(event.targetId).toLowerCase();
   let next = { ...s };
   let removed = null;
@@ -557,7 +572,7 @@ function removedThreat(s, event) {
 // STARTED_RIOT — durable aftermath via the generic residual archetype with an
 // explicit riot framing (no new archetype invented; the provided affectedSystems
 // override the residual template per deriveActiveCondition precedence).
-function startedRiot(s, event) {
+function startedRiot(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const severity = Number(event.payload?.severity ?? 0.6);
   const where = event.targetId ? ` in ${labelFromTarget(event.targetId)}` : '';
   return withActiveCondition(s, {
@@ -584,9 +599,10 @@ const ALLIANCE_REL = 'allied';
 // bundles minted 0 channels from it). Composer payloads still carry the
 // plural, so normalize at the write chokepoint. (Kept tiny + local: the
 // regional layer's canonicalRelationshipLabel covers the read side.)
+/** @type {Record<string, string>} */
 const LEGACY_REL_ALIASES = { trade_partners: 'trade_partner' };
-const canonicalRelType = rel => LEGACY_REL_ALIASES[String(rel || '').toLowerCase()] || rel;
-function setNeighbourRelationship(s, event) {
+const canonicalRelType = (/** @type {any} */ rel) => LEGACY_REL_ALIASES[String(rel || '').toLowerCase()] || rel;
+function setNeighbourRelationship(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const targetId = event.targetId;
   if (!targetId) return s;
   const relType = event.type === 'BROKERED_ALLIANCE'
@@ -594,7 +610,7 @@ function setNeighbourRelationship(s, event) {
     : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
   const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
   let touched = false;
-  const next = network.map((link) => {
+  const next = network.map((/** @type {any} */ link) => {
     const matches = String(link?.name || '') === String(targetId)
       || String(link?.neighbourName || '') === String(targetId)
       || String(link?.id || '') === String(targetId)
@@ -607,7 +623,7 @@ function setNeighbourRelationship(s, event) {
   return { ...s, neighbourNetwork: next };
 }
 
-function cutTradeRoute(s, event) {
+function cutTradeRoute(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   // Mark the trade route status on settlement.config — coarse but
   // sufficient until the full campaign-graph route model lands.
   const config = s.config || {};
@@ -638,7 +654,7 @@ function cutTradeRoute(s, event) {
 
 // ── NPC mutations ──────────────────────────────────────────────────────────
 
-function addNpc(s, event) {
+function addNpc(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const npc = createNpc({
     name: labelFromTarget(event.targetId) || event.payload?.name,
     role: event.payload?.role,
@@ -653,7 +669,7 @@ function addNpc(s, event) {
   return { ...s, npcs: [...(s.npcs || []), npc] };
 }
 
-function killNpcMutation(s, event) {
+function killNpcMutation(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const npc = findNpc(s, event.targetId);
   if (!npc) return s;
   const importance = event.payload?.importance || npc.importance || inferImportance(npc);
@@ -689,7 +705,7 @@ function killNpcMutation(s, event) {
   return next;
 }
 
-function assignNpcMutation(s, event) {
+function assignNpcMutation(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const npc = findNpc(s, event.targetId) || createNpc({ name: labelFromTarget(event.targetId) });
   const institutionId = event.payload?.institutionId;
   const inst = institutionId ? findInstitution(s, institutionId) : null;
@@ -705,7 +721,7 @@ function assignNpcMutation(s, event) {
   });
   // Replace or insert the NPC record
   const list = s.npcs || [];
-  const idx = list.findIndex(n => idOf(n) === idOf(npc));
+  const idx = list.findIndex((/** @type {any} */ n) => idOf(n) === idOf(npc));
   let next = idx >= 0
     ? { ...s, npcs: [...list.slice(0, idx), result.npc, ...list.slice(idx + 1)] }
     : { ...s, npcs: [...list, result.npc] };
@@ -721,7 +737,7 @@ function assignNpcMutation(s, event) {
       const cleared = {
         ...targetInst,
         impairments: (targetInst.impairments || [])
-          .filter(i => i.type !== 'staffing'),
+          .filter((/** @type {any} */ i) => i.type !== 'staffing'),
       };
       let withCleared = replaceInstitution(next, targetInst, cleared);
       for (const { impairment } of result.restorations) {
@@ -742,7 +758,7 @@ function assignNpcMutation(s, event) {
  * settlement's primary authority is gone, with all the consequences
  * that entails. Reuses killNpcMutation under the hood.
  */
-function killLeaderMutation(s, event) {
+function killLeaderMutation(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const enrichedEvent = {
     ...event,
     payload: { ...(event.payload || {}), importance: 'pillar' },
@@ -755,7 +771,7 @@ function killLeaderMutation(s, event) {
  * (faction OR institution; we try both). Propagates so a corrupt watch
  * captain hits both the watch institution and the controlling faction.
  */
-function exposeCorruption(s, event) {
+function exposeCorruption(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   // §corruption Phase 4 — prefer a corrupt NPC target: clean + scar them and
   // impair BOTH the tied criminal institution and their home institution/faction
   // (the same path organic exposure uses). Falls back to faction/institution.
@@ -779,7 +795,7 @@ function exposeCorruption(s, event) {
   // ruling_authority (its ONLY condition reaction), administrative capacity,
   // daily life, districts, and threats — but no event ever produced it, so the
   // whole consumer tree was dead and the scandal vanished on re-derivation.
-  const scandal = (next) => withActiveCondition(next, {
+  const scandal = (/** @type {any} */ next) => withActiveCondition(next, {
     archetype: 'corruption_exposed',
     severity,
     triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: event.targetId },
@@ -807,7 +823,7 @@ function exposeCorruption(s, event) {
 // §corruption Phase 4 + 1b-ii-c — DM exposes a specific corrupt NPC: impair the
 // tied criminal + home institution/faction (shared organic path), then remove the
 // disgraced NPC and install a fresh successor in their seat.
-function exposeCorruptNpc(s, npc, event) {
+function exposeCorruptNpc(/** @type {MutSettlement} */ s, /** @type {any} */ npc, /** @type {MutateEvent} */ event) {
   const now = event.timestamp || event.createdAt || null;
   const exposure = {
     npcId: npc.id || npc.name,
@@ -816,9 +832,9 @@ function exposeCorruptNpc(s, npc, event) {
     criminalInstitution: npc.corruptTies?.criminalInstitution || null,
     homeInstitution: npc.factionAffiliation || npc.factionLink || null,
   };
-  const next = applyCorruptionImpairments(s, [exposure], { now });
+  const next = /** @type {MutSettlement} */ (applyCorruptionImpairments(s, [exposure], { now }));
   const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
-  const nextNpcs = (next.npcs || []).map((n) => (n === npc ? successorNpc(n, rng) : n));
+  const nextNpcs = (next.npcs || []).map((/** @type {any} */ n) => (n === npc ? successorNpc(n, rng) : n));
   // The NPC scandal is also a durable corruption_exposed condition (see exposeCorruption).
   return withActiveCondition({ ...next, npcs: nextNpcs }, {
     archetype: 'corruption_exposed',
@@ -831,11 +847,11 @@ function exposeCorruptNpc(s, npc, event) {
 // §corruption Phase 4 — removing/destroying a criminal institution severs the
 // corruption ties of NPCs bound to it: they separate from criminal activity.
 // No-op for a non-criminal institution (no NPC names it as a tie).
-function severCorruptionTiesTo(s, institutionName) {
+function severCorruptionTiesTo(/** @type {MutSettlement} */ s, /** @type {any} */ institutionName) {
   const n = String(institutionName || '').toLowerCase();
   if (!n) return s;
   let changed = false;
-  const nextNpcs = (s.npcs || []).map((npc) => {
+  const nextNpcs = (s.npcs || []).map((/** @type {any} */ npc) => {
     if (npc.corrupt && String(npc.corruptTies?.criminalInstitution || '').toLowerCase() === n) {
       changed = true;
       return { ...npc, corrupt: false, corruptionVector: null, ousted: true };
@@ -851,7 +867,7 @@ function severCorruptionTiesTo(s, institutionName) {
 // reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
 // so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
 // Covert by design: no public legitimacy impairment here (that is the exposure consequence).
-function imposeCorruption(s, event) {
+function imposeCorruption(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const npc = findNpc(s, event.targetId);
   if (!npc || npc.corrupt) return s; // need a real, not-already-corrupt NPC
 
@@ -886,7 +902,7 @@ function imposeCorruption(s, event) {
  * reapplyEventConditions' targeting: GENERATION-stamped twins only,
  * world/regional conditions untouched.
  */
-function withoutGenerationTwin(s, archetype) {
+function withoutGenerationTwin(/** @type {MutSettlement} */ s, /** @type {any} */ archetype) {
   let next = s;
   for (const cond of next.activeConditions || []) {
     if (cond?.archetype === archetype
@@ -904,7 +920,7 @@ function withoutGenerationTwin(s, archetype) {
  * can consume it. Coarse for v1; future versions will derive specific
  * institution strain from the wave size.
  */
-function refugeeWave(s, event) {
+function refugeeWave(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const config = s.config || {};
   const waves = Array.isArray(config._refugeeWaves) ? [...config._refugeeWaves] : [];
   const size = event.payload?.size || 'medium';
@@ -937,7 +953,7 @@ function refugeeWave(s, event) {
  * disease name. Strains healing institutions (capacity impairment),
  * propagates through faction links so the watch and temple respond.
  */
-function plague(s, event) {
+function plague(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const severity = Number(event.payload?.severity ?? 0.6);
   const config = s.config || {};
   const annotation = {
@@ -957,7 +973,7 @@ function plague(s, event) {
   }
   // Apply a capacity impairment to any healing-tagged institution so
   // the simulation reflects the strain.
-  const healing = (next.institutions || []).filter(i => /hospital|temple|infirm|healer/i.test(i.name || ''));
+  const healing = (next.institutions || []).filter((/** @type {any} */ i) => /hospital|temple|infirm|healer/i.test(i.name || ''));
   for (const inst of healing) {
     const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
       type: 'capacity',
@@ -988,7 +1004,7 @@ function plague(s, event) {
  * is named in the payload, damage it; otherwise just record the raid
  * on the settlement so the next pipeline rerun consumes it.
  */
-function raidOrMonsterAttack(s, event) {
+function raidOrMonsterAttack(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const severity = Number(event.payload?.severity ?? 0.6);
   const config = s.config || {};
   const raids = Array.isArray(config._raidHistory) ? [...config._raidHistory] : [];
@@ -1036,7 +1052,7 @@ function raidOrMonsterAttack(s, event) {
  * channel for directives); the store recomputes the directive from the event
  * (crisisLifecycle.twinDirectiveForEvent) at its single consumer chokepoint.
  */
-function applyStressor(s, event) {
+function applyStressor(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   return crisisOnset({ settlement: s, event }).settlement;
 }
 
@@ -1054,7 +1070,7 @@ function applyStressor(s, event) {
  * hard-validates the faction ref (batch.js eventConsumes) and the composer
  * only offers real factions.
  */
-function changeRulingPower(s, event) {
+function changeRulingPower(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const cause = event.payload?.cause || 'coup';
   // Try the raw target first (the picker passes the faction name verbatim);
   // fall back to the de-slugged form for "faction.some_name" style ids.
@@ -1063,6 +1079,7 @@ function changeRulingPower(s, event) {
     result = transferRulingPower(s, labelFromTarget(event.targetId), { cause });
   }
   if (result.error) return s;
+  /** @type {Record<string, number>} */
   const severityByCause = { coup: 0.55, conquest: 0.65, election: 0.25, succession: 0.3, appointment: 0.3 };
   return withActiveCondition(result.settlement, {
     archetype: 'government_overthrown',
@@ -1071,7 +1088,7 @@ function changeRulingPower(s, event) {
     causes: [{
       source: 'event',
       eventId: event.id,
-      detail: `${result.transfer.authorityName} took power by ${cause}; the government now sits as a ${result.transfer.toGovernment.toLowerCase()}.`,
+      detail: `${/** @type {any} */ (result.transfer).authorityName} took power by ${cause}; the government now sits as a ${/** @type {any} */ (result.transfer).toGovernment.toLowerCase()}.`,
     }],
   });
 }
@@ -1092,12 +1109,12 @@ function changeRulingPower(s, event) {
  * picker offers the live stressors). The roaming world-pulse twin resolves
  * at the store layer through the lifecycle's 'resolve' twinDirective.
  */
-function resolveStressor(s, event) {
+function resolveStressor(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   return crisisResolve({ settlement: s, event }).settlement;
 }
 
 /** Display label for a trade-good list entry (strings + legacy {name, good} objects). */
-function tradeGoodLabel(entry) {
+function tradeGoodLabel(/** @type {any} */ entry) {
   if (typeof entry === 'string') return entry;
   return String(entry?.name || entry?.good || '');
 }
@@ -1109,7 +1126,7 @@ function tradeGoodLabel(entry) {
  * { transit } entrepôt goods, { removed } the suppression list that keeps a
  * removal of a generator-derived good gone across regenerations.
  */
-function customTradeGoodsOf(config) {
+function customTradeGoodsOf(/** @type {any} */ config) {
   const ctg = config?.customTradeGoods || {};
   return {
     exports: Array.isArray(ctg.exports) ? ctg.exports : [],
@@ -1127,7 +1144,7 @@ function customTradeGoodsOf(config) {
  * (customTradeGoods is genuine user input, deliberately NOT in
  * settlementSlice's DERIVED_CONFIG_KEYS strip.)
  */
-function withCustomTradeGoods(s, customTradeGoods) {
+function withCustomTradeGoods(/** @type {MutSettlement} */ s, /** @type {any} */ customTradeGoods) {
   const next = { ...s, config: { ...(s.config || {}), customTradeGoods } };
   if (s._config && typeof s._config === 'object') {
     next._config = { ...s._config, customTradeGoods };
@@ -1148,7 +1165,7 @@ function withCustomTradeGoods(s, customTradeGoods) {
  * regeneration. Re-adding a removed good clears its suppression entry — the
  * two formats must keep agreeing.
  */
-function addTradeGood(s, event) {
+function addTradeGood(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const label = String(event.payload?.label || event.targetId || '').trim();
   if (!label) return s;
   const direction = event.payload?.direction === 'import' ? 'import' : 'export';
@@ -1157,7 +1174,7 @@ function addTradeGood(s, event) {
   const listKey = direction === 'import' ? 'primaryImports' : 'primaryExports';
   const list = Array.isArray(ec[listKey]) ? ec[listKey] : [];
   const written = entrepot ? `${label} (transit)` : label;
-  const has = (arr, l) => arr.some(e => tradeGoodLabel(e).toLowerCase() === l.toLowerCase());
+  const has = (/** @type {any} */ arr, /** @type {any} */ l) => arr.some((/** @type {any} */ e) => tradeGoodLabel(e).toLowerCase() === l.toLowerCase());
 
   let nextEc = ec;
   if (!has(list, written)) nextEc = { ...nextEc, [listKey]: [...list, written] };
@@ -1168,8 +1185,8 @@ function addTradeGood(s, event) {
 
   const ctg = customTradeGoodsOf(s.config);
   const bucket = entrepot ? 'transit' : (direction === 'import' ? 'imports' : 'exports');
-  const inBucket = ctg[bucket].some(l => String(l).toLowerCase() === label.toLowerCase());
-  const removed = ctg.removed.filter(l => String(l).toLowerCase() !== label.toLowerCase());
+  const inBucket = ctg[bucket].some((/** @type {any} */ l) => String(l).toLowerCase() === label.toLowerCase());
+  const removed = ctg.removed.filter((/** @type {any} */ l) => String(l).toLowerCase() !== label.toLowerCase());
   const configChanged = !inBucket || removed.length !== ctg.removed.length;
 
   if (nextEc === ec && !configChanged) return s;
@@ -1196,7 +1213,7 @@ function addTradeGood(s, event) {
  * suppression list, so a removal — even of a generator-derived good — stays
  * gone across a full regeneration.
  */
-function removeTradeGood(s, event) {
+function removeTradeGood(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const raw = String(event.payload?.label || event.targetId || '').trim();
   if (!raw) return s;
   const base = raw.replace(/\s*\(transit\)\s*$/i, '').trim();
@@ -1215,7 +1232,7 @@ function removeTradeGood(s, event) {
   }
 
   const ctg = customTradeGoodsOf(s.config);
-  const strike = (arr) => arr.filter(l => !targets.has(String(l).toLowerCase()));
+  const strike = (/** @type {any} */ arr) => arr.filter((/** @type {any} */ l) => !targets.has(String(l).toLowerCase()));
   const struck = {
     exports: strike(ctg.exports),
     imports: strike(ctg.imports),
@@ -1228,7 +1245,7 @@ function removeTradeGood(s, event) {
 
   if (!changed && !configChanged) return s;
   let next = changed ? { ...s, economicState: nextEc } : s;
-  const alreadyRemoved = ctg.removed.some(l => String(l).toLowerCase() === base.toLowerCase());
+  const alreadyRemoved = ctg.removed.some((/** @type {any} */ l) => String(l).toLowerCase() === base.toLowerCase());
   next = withCustomTradeGoods(next, {
     ...struck,
     removed: alreadyRemoved ? ctg.removed : [...ctg.removed, base],
@@ -1246,11 +1263,11 @@ function removeTradeGood(s, event) {
  * the dossier gold-tints them. Re-adding a depleted node clears the
  * depletion record — the two formats must keep agreeing.
  */
-function addResource(s, event) {
+function addResource(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const raw = String(event.targetId || '').trim();
   if (!raw) return s;
   const slug = slugify(raw);
-  const catalogKey = RESOURCE_DATA[raw] ? raw : (RESOURCE_DATA[slug] ? slug : null);
+  const catalogKey = /** @type {Record<string, any>} */ (RESOURCE_DATA)[raw] ? raw : (/** @type {Record<string, any>} */ (RESOURCE_DATA)[slug] ? slug : null);
   const key = catalogKey || raw;
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
@@ -1263,7 +1280,7 @@ function addResource(s, event) {
     nearbyResourcesState: { ...state, [key]: 'allow' },
     // Slug-equivalent filter: also clears the legacy slug-form record the
     // old depleteResource wrote for custom resources ('moonpetal_grove').
-    nearbyResourcesDepleted: depleted.filter(k => k !== key && slugify(k) !== slug),
+    nearbyResourcesDepleted: depleted.filter((/** @type {any} */ k) => k !== key && slugify(k) !== slug),
     ...(catalogKey
       ? {}
       : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
@@ -1271,11 +1288,11 @@ function addResource(s, event) {
     ...edits,
     // An opened node starts open: clear the key's removed suppression AND
     // its depleted record (mirrors the live nearbyResourcesDepleted filter).
-    added: edits.added.some(e => slugEq(String(e?.key || ''), key))
+    added: edits.added.some((/** @type {any} */ e) => slugEq(String(e?.key || ''), key))
       ? edits.added
       : [...edits.added, { key, custom: !catalogKey }],
-    removed: edits.removed.filter(k => !slugEq(k, key)),
-    depleted: edits.depleted.filter(k => !slugEq(k, key)),
+    removed: edits.removed.filter((/** @type {any} */ k) => !slugEq(k, key)),
+    depleted: edits.depleted.filter((/** @type {any} */ k) => !slugEq(k, key)),
   });
 }
 
@@ -1286,31 +1303,31 @@ function addResource(s, event) {
  * nearbyResourcesState entry, and nearbyResourcesDepleted — matching raw,
  * slugified, and de-slugged forms the way recoveredResource does.
  */
-function removeResource(s, event) {
+function removeResource(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   const raw = String(event.targetId || '').trim();
   if (!raw) return s;
   const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
-  if (!nearby.some(k => keys.has(k))) return s;
+  if (!nearby.some((/** @type {any} */ k) => keys.has(k))) return s;
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) delete state[k];
   // The roster forms actually struck — what the suppression list must name
   // so a regenerated roster (same key forms) drops them again.
-  const struckKeys = nearby.filter(k => keys.has(k));
-  const hitsStruck = k => struckKeys.some(sk => slugEq(k, sk));
+  const struckKeys = nearby.filter((/** @type {any} */ k) => keys.has(k));
+  const hitsStruck = (/** @type {any} */ k) => struckKeys.some((/** @type {any} */ sk) => slugEq(k, sk));
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
-    nearbyResources: nearby.filter(k => !keys.has(k)),
-    nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter(k => !keys.has(k)),
+    nearbyResources: nearby.filter((/** @type {any} */ k) => !keys.has(k)),
+    nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter((/** @type {any} */ k) => !keys.has(k)),
     nearbyResourcesState: state,
-    nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k)),
+    nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter((/** @type {any} */ k) => !keys.has(k)),
   }, {
     ...edits,
-    added: edits.added.filter(e => !hitsStruck(String(e?.key || ''))),
-    removed: [...edits.removed, ...struckKeys.filter(k => !edits.removed.some(r => slugEq(r, k)))],
-    depleted: edits.depleted.filter(k => !hitsStruck(k)),
-    recovered: edits.recovered.filter(k => !hitsStruck(k)),
+    added: edits.added.filter((/** @type {any} */ e) => !hitsStruck(String(e?.key || ''))),
+    removed: [...edits.removed, ...struckKeys.filter((/** @type {any} */ k) => !edits.removed.some((/** @type {any} */ r) => slugEq(r, k)))],
+    depleted: edits.depleted.filter((/** @type {any} */ k) => !hitsStruck(k)),
+    recovered: edits.recovered.filter((/** @type {any} */ k) => !hitsStruck(k)),
   });
 }
 
@@ -1331,7 +1348,7 @@ const NPC_STANDING_FIELDS = Object.freeze(['importance', 'influence', 'structura
  * Missing target or peer → settlement no-op (batch staging hard-validates
  * both refs; the composer only offers real same-faction pairs).
  */
-function swapNpcStanding(s, event) {
+function swapNpcStanding(/** @type {MutSettlement} */ s, /** @type {MutateEvent} */ event) {
   // Empty refs must never reach findNpc: '' loose-matches the first NPC
   // whose id is null (String(null || '') === ''), silently swapping with a
   // bystander instead of no-opping.
@@ -1348,7 +1365,7 @@ function swapNpcStanding(s, event) {
     return s;
   }
 
-  const carryStanding = (from, onto) => {
+  const carryStanding = (/** @type {any} */ from, /** @type {any} */ onto) => {
     const next = { ...onto };
     for (const field of NPC_STANDING_FIELDS) {
       if (field in from || field in onto) next[field] = from[field];
@@ -1375,21 +1392,21 @@ function swapNpcStanding(s, event) {
 
 // ── Lookups + identity helpers ─────────────────────────────────────────────
 
-const idOf        = (i) => i?.id || i?.name || '';
-const factionIdOf = (f) => f?.id || f?.faction || f?.name || '';
-const eventTime = (event) => event.timestamp || event.createdAt;
+const idOf        = (/** @type {any} */ i) => i?.id || i?.name || '';
+const factionIdOf = (/** @type {any} */ f) => f?.id || f?.faction || f?.name || '';
+const eventTime = (/** @type {MutateEvent} */ event) => event.timestamp || event.createdAt;
 
-function findInstitution(s, target) {
+function findInstitution(/** @type {MutSettlement} */ s, /** @type {any} */ target) {
   const list = s.institutions || [];
   const t = String(target || '').toLowerCase();
-  return list.find(i =>
+  return list.find((/** @type {any} */ i) =>
     String(i.id || '').toLowerCase() === t ||
     String(i.name || '').toLowerCase() === t ||
     String(i.name || '').toLowerCase() === labelFromTarget(target).toLowerCase(),
   );
 }
 
-function findFaction(s, target) {
+function findFaction(/** @type {MutSettlement} */ s, /** @type {any} */ target) {
   // Generated settlements carry their factions on powerStructure.factions (every
   // reader and replaceFaction's write target use it); s.factions is often an empty
   // legacy array. Search the union so faction-targeted events don't silently no-op.
@@ -1403,29 +1420,29 @@ function findFaction(s, target) {
   );
 }
 
-function findNpc(s, target) {
+function findNpc(/** @type {MutSettlement} */ s, /** @type {any} */ target) {
   const list = s.npcs || [];
   const t = String(target || '').toLowerCase();
-  return list.find(n =>
+  return list.find((/** @type {any} */ n) =>
     String(n.id || '').toLowerCase() === t ||
     String(n.name || '').toLowerCase() === t ||
     String(n.name || '').toLowerCase() === labelFromTarget(target).toLowerCase(),
   );
 }
 
-function replaceInstitution(s, oldInst, newInst) {
+function replaceInstitution(/** @type {MutSettlement} */ s, /** @type {any} */ oldInst, /** @type {any} */ newInst) {
   const list = s.institutions || [];
-  const idx = list.findIndex(i => i === oldInst);
+  const idx = list.findIndex((/** @type {any} */ i) => i === oldInst);
   if (idx === -1) return s;
   return { ...s, institutions: [...list.slice(0, idx), newInst, ...list.slice(idx + 1)] };
 }
 
-function replaceFaction(s, oldF, newF) {
+function replaceFaction(/** @type {MutSettlement} */ s, /** @type {any} */ oldF, /** @type {any} */ newF) {
   // Factions can live in two places — settlement.factions or
   // settlement.powerStructure.factions. Normalize on the latter.
   if (s.powerStructure?.factions) {
     const list = s.powerStructure.factions;
-    const idx = list.findIndex(f => f === oldF);
+    const idx = list.findIndex((/** @type {any} */ f) => f === oldF);
     if (idx >= 0) {
       return {
         ...s,
@@ -1437,7 +1454,7 @@ function replaceFaction(s, oldF, newF) {
     }
   }
   if (s.factions) {
-    const idx = s.factions.findIndex(f => f === oldF);
+    const idx = s.factions.findIndex((/** @type {any} */ f) => f === oldF);
     if (idx >= 0) {
       return { ...s, factions: [...s.factions.slice(0, idx), newF, ...s.factions.slice(idx + 1)] };
     }
@@ -1445,19 +1462,19 @@ function replaceFaction(s, oldF, newF) {
   return s;
 }
 
-function replaceNpc(s, oldN, newN) {
+function replaceNpc(/** @type {MutSettlement} */ s, /** @type {any} */ oldN, /** @type {any} */ newN) {
   const list = s.npcs || [];
-  const idx = list.findIndex(n => n === oldN);
+  const idx = list.findIndex((/** @type {any} */ n) => n === oldN);
   if (idx === -1) return s;
   return { ...s, npcs: [...list.slice(0, idx), newN, ...list.slice(idx + 1)] };
 }
 
-function labelFromTarget(targetId) {
-  const tail = String(targetId || '').split('.').pop();
+function labelFromTarget(/** @type {any} */ targetId) {
+  const tail = /** @type {string} */ (String(targetId || '').split('.').pop());
   return tail.replace(/_/g, ' ');
 }
 
-function slugify(s) {
+function slugify(/** @type {any} */ s) {
   return String(s || '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')

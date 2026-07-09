@@ -51,6 +51,9 @@ const VIEW_TITLES = Object.freeze({
 
 // ── Per-view derivers ───────────────────────────────────────────────────
 
+/** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
+
+/** @param {CanonicalSettlement} settlement */
 function viewNarrative(settlement) {
   const spine = deriveSimulationSpine(settlement);
   const daily = deriveDailyLife(settlement);
@@ -64,6 +67,7 @@ function viewNarrative(settlement) {
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewSimulation(settlement) {
   const causal = deriveCausalState(settlement);
   const capacities = deriveAllCapacities(settlement);
@@ -79,9 +83,13 @@ function viewSimulation(settlement) {
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewDelta(settlement) {
   const events = Array.isArray(settlement.eventLog) ? settlement.eventLog : [];
-  const recent = events.slice(-10);
+  const recent =
+    /** @type {Array<{ appliedAt?: string, event?: { type?: string }, narrativeSummary?: string }>} */ (
+      events.slice(-10)
+    );
   return {
     eventLog: recent,
     summary: recent.length
@@ -90,16 +98,19 @@ function viewDelta(settlement) {
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewFaction(settlement) {
   const profiles = deriveAllFactionProfiles(settlement);
   return {
     factions: profiles,
     summary: profiles.length
-      ? profiles.map(p => `${p.name} (${p.archetype}, power ${p.power}).`)
+      ? /** @type {import('./factionProfile.js').FactionProfile[]} */ (profiles).map(
+          p => `${p.name} (${p.archetype}, power ${p.power}).`)
       : ['No factions on this settlement.'],
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewSupplyChain(settlement) {
   const chains = deriveAllSupplyChainStates(settlement);
   return {
@@ -110,6 +121,7 @@ function viewSupplyChain(settlement) {
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewTimeline(settlement) {
   const beats = deriveHistoryBeats(settlement);
   const clocks = deriveEscalationClocks(settlement);
@@ -127,12 +139,14 @@ function viewTimeline(settlement) {
   };
 }
 
+/** @param {CanonicalSettlement} settlement */
 function viewDistrict(settlement) {
   const districts = deriveAllDistricts(settlement);
   return {
     districts,
     summary: districts.length
-      ? districts.map(d => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`)
+      ? /** @type {Array<{ name?: string, category?: string, wealth?: string, safety?: string, currentTension?: string }>} */ (districts).map(
+          d => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`)
       : ['No districts on this settlement.'],
   };
 }
@@ -152,11 +166,12 @@ const VIEW_DERIVERS = Object.freeze({
 /**
  * Build a causal view payload.
  *
- * @param {Object} settlement
+ * @param {CanonicalSettlement | null | undefined} settlement
  * @param {string} viewName
  * @returns {Object}
  */
 export function deriveCausalView(settlement, viewName) {
+  const key = /** @type {keyof typeof VIEW_DERIVERS} */ (viewName);
   if (!CAUSAL_VIEWS.includes(viewName)) {
     return {
       view: viewName,
@@ -168,15 +183,15 @@ export function deriveCausalView(settlement, viewName) {
   if (!settlement) {
     return {
       view: viewName,
-      title: VIEW_TITLES[viewName],
+      title: VIEW_TITLES[key],
       entries: null,
       summary: ['No settlement to view.'],
     };
   }
-  const entries = VIEW_DERIVERS[viewName](settlement);
+  const entries = VIEW_DERIVERS[key](settlement);
   return {
     view: viewName,
-    title: VIEW_TITLES[viewName],
+    title: VIEW_TITLES[key],
     entries,
     summary: entries.summary || [],
   };
@@ -187,6 +202,7 @@ export function supportedCausalViews() {
   return [...CAUSAL_VIEWS];
 }
 
+/** @param {string} viewName */
 export function viewTitle(viewName) {
-  return VIEW_TITLES[viewName] || viewName;
+  return VIEW_TITLES[/** @type {keyof typeof VIEW_TITLES} */ (viewName)] || viewName;
 }

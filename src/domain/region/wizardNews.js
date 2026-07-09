@@ -11,6 +11,115 @@ export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
 
 const MAX_ENTRIES = 240;
 
+// ── Types ──────────────────────────────────────────────────────────────────
+
+/** @typedef {{id?: string, label?: string}} ImpactGood */
+
+/**
+ * A queued regional impact (region/propagation.js shape) as this module
+ * reads it.
+ * @typedef {Object} WizardRegionalImpact
+ * @property {string | number} [id]
+ * @property {string} [kind]
+ * @property {string} [status]
+ * @property {string} [channelType]
+ * @property {string | number} [channelId]
+ * @property {number} [severity]
+ * @property {number} [waveDepth]
+ * @property {number} [delayTicks]
+ * @property {ImpactGood[]} [goods]
+ * @property {string | number} [sourceSettlementId]
+ * @property {string | number} [targetSettlementId]
+ * @property {string} [sourceSettlementName]
+ * @property {string} [targetSettlementName]
+ * @property {Array<string | number>} [pathSettlementIds]
+ * @property {string} [explanation]
+ * @property {string | null} [sourceEventId]
+ */
+
+/**
+ * @typedef {Object} WizardGraphEvent
+ * @property {string} [id]
+ * @property {Array<string | number>} [impactIds]
+ * @property {{type?: string, id?: string}} [sourceEvent]
+ */
+
+/**
+ * The regional-graph slice this module reads (ensureRegionalGraph output).
+ * @typedef {Object} WizardGraph
+ * @property {Array<{id?: string | number, name?: string}>} [nodes]
+ * @property {Array<{id?: string | number, type?: string}>} [channels]
+ * @property {WizardGraphEvent[]} [eventLog]
+ * @property {WizardRegionalImpact[]} [queuedImpacts]
+ */
+
+/**
+ * Canonical normalized feed entry (normalizeEntry output).
+ * @typedef {Object} WizardNewsEntry
+ * @property {number} schemaVersion
+ * @property {string} id
+ * @property {string} createdAt
+ * @property {number} tick
+ * @property {string} scope
+ * @property {string} significance
+ * @property {number} score
+ * @property {string} headline
+ * @property {string} summary
+ * @property {string} kind
+ * @property {string | null} impactKind
+ * @property {string | null} channelType
+ * @property {number} severity
+ * @property {string[]} settlementIds
+ * @property {string[]} impactIds
+ * @property {string[]} channelIds
+ * @property {string | null} sourceEventId
+ * @property {string[]} tags
+ * @property {string[]} reasons
+ */
+
+/**
+ * A raw (possibly partial / persisted) entry accepted by normalizeEntry.
+ * @typedef {Object} RawWizardNewsEntry
+ * @property {string | number} [id]
+ * @property {string} [createdAt]
+ * @property {number} [tick]
+ * @property {string} [scope]
+ * @property {string} [significance]
+ * @property {number} [score]
+ * @property {string} [headline]
+ * @property {string} [summary]
+ * @property {string} [kind]
+ * @property {string | null} [impactKind]
+ * @property {string | null} [channelType]
+ * @property {number} [severity]
+ * @property {Array<string | number | null | undefined>} [settlementIds]
+ * @property {Array<string | number | null | undefined>} [impactIds]
+ * @property {Array<string | number | null | undefined>} [channelIds]
+ * @property {string | null} [sourceEventId]
+ * @property {Array<string | number | null | undefined>} [tags]
+ * @property {Array<string | number | null | undefined>} [reasons]
+ */
+
+/**
+ * @typedef {Object} WizardNewsOptions
+ * @property {string} [now]          deterministic timestamp for replay
+ * @property {number} [tick]
+ * @property {string} [createdAt]
+ * @property {Object} [graph]
+ * @property {string} [transition]
+ * @property {WizardGraphEvent | null} [event]
+ * @property {number} [maxEntries]
+ */
+
+/**
+ * @typedef {Object} WizardNewsFeed
+ * @property {number} [schemaVersion]
+ * @property {number} [currentTick]
+ * @property {RawWizardNewsEntry[]} [entries]
+ * @property {string} [updatedAt]
+ */
+
+/** @type {Set<string | undefined>} */
 const CRITICAL_IMPACT_KINDS = new Set([
   'import_shortage',
   'authority_instability',
@@ -20,6 +129,7 @@ const CRITICAL_IMPACT_KINDS = new Set([
   'route_disruption',
 ]);
 
+/** @type {Set<string | undefined>} */
 const CRITICAL_CHANNEL_TYPES = new Set([
   'trade_dependency',
   'trade_route',
@@ -29,6 +139,7 @@ const CRITICAL_CHANNEL_TYPES = new Set([
   'resource_competition',
 ]);
 
+/** @type {Readonly<Record<string, string>>} */
 const IMPACT_LABELS = Object.freeze({
   import_shortage: 'Import shortage',
   export_market_loss: 'Export market loss',
@@ -44,6 +155,7 @@ const IMPACT_LABELS = Object.freeze({
   religious_pressure: 'Religious pressure',
 });
 
+/** @type {Readonly<Record<string, string>>} */
 const TRANSITION_LABELS = Object.freeze({
   queued: 'Queued',
   ready: 'Ready',
@@ -57,15 +169,28 @@ function nowIso() {
   return wallClockNow();
 }
 
+/**
+ * @param {unknown} value
+ * @param {number} [fallback]
+ * @returns {number}
+ */
 function finiteNumber(value, fallback = 0) {
-  return Number.isFinite(value) ? value : fallback;
+  return /** @type {number} */ (Number.isFinite(value) ? value : fallback);
 }
 
+/**
+ * @param {unknown} value
+ * @returns {number}
+ */
 function clamp01(value) {
   const n = finiteNumber(value, 0);
   return Math.max(0, Math.min(1, n));
 }
 
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
 function human(value) {
   if (!value) return '';
   return String(value)
@@ -73,22 +198,43 @@ function human(value) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
+/**
+ * @param {string | null | undefined} kind
+ * @returns {string}
+ */
 function impactLabel(kind) {
-  return IMPACT_LABELS[kind] || human(kind) || 'Regional pressure';
+  return IMPACT_LABELS[/** @type {string} */ (kind)] || human(kind) || 'Regional pressure';
 }
 
+/**
+ * @param {string | null | undefined} transition
+ * @returns {string}
+ */
 function transitionLabel(transition) {
-  return TRANSITION_LABELS[transition] || human(transition) || 'Update';
+  return TRANSITION_LABELS[/** @type {string} */ (transition)] || human(transition) || 'Update';
 }
 
+/**
+ * @param {WizardGraph} graph
+ * @returns {Map<string, string>}
+ */
 function nodeNameMap(graph) {
-  return new Map((graph.nodes || []).map(node => [String(node.id), node.name || String(node.id)]));
+  return new Map((graph.nodes || []).map(node => /** @type {[string, string]} */ ([String(node.id), node.name || String(node.id)])));
 }
 
+/**
+ * @param {WizardGraph} graph
+ * @returns {Map<string, {id?: string | number, type?: string}>}
+ */
 function channelMap(graph) {
-  return new Map((graph.channels || []).map(channel => [String(channel.id), channel]));
+  return new Map((graph.channels || []).map(channel => /** @type {[string, {id?: string | number, type?: string}]} */ ([String(channel.id), channel])));
 }
 
+/**
+ * @param {WizardGraph} graph
+ * @param {string | number | null | undefined} impactId
+ * @returns {WizardGraphEvent | null}
+ */
 function eventForImpact(graph, impactId) {
   if (!impactId) return null;
   return (graph.eventLog || []).find(event =>
@@ -96,14 +242,26 @@ function eventForImpact(graph, impactId) {
   ) || null;
 }
 
+/**
+ * @param {ImpactGood[]} [goods]
+ * @returns {number}
+ */
 function maxCriticality(goods = []) {
   return (goods || []).reduce((max, good) => Math.max(max, goodCriticality(good)), 0);
 }
 
+/**
+ * @param {Array<unknown> | null | undefined} [values]
+ * @returns {string[]}
+ */
 function compactIds(values = []) {
   return [...new Set((values || []).filter(Boolean).map(String))];
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @returns {string[]}
+ */
 function pathSettlementIds(impact) {
   return compactIds([
     impact.sourceSettlementId,
@@ -112,10 +270,16 @@ function pathSettlementIds(impact) {
   ]);
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @param {string} [transition]
+ * @returns {{score: number, reasons: string[]}}
+ */
 function scoreImpact(impact, transition = 'queued') {
   const severity = clamp01(impact.severity);
   const pathCount = pathSettlementIds(impact).length;
   const criticality = maxCriticality(impact.goods);
+  /** @type {string[]} */
   const reasons = [];
   let score = Math.round(severity * 70);
 
@@ -172,6 +336,11 @@ function scoreImpact(impact, transition = 'queued') {
   return { score, reasons };
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @param {string} [transition]
+ * @returns {{score: number, reasons: string[], significance: string}}
+ */
 function significanceForImpact(impact, transition = 'queued') {
   const severity = clamp01(impact.severity);
   const pathCount = pathSettlementIds(impact).length;
@@ -190,12 +359,22 @@ function significanceForImpact(impact, transition = 'queued') {
   };
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @returns {string}
+ */
 function scopeForImpact(impact) {
   if (pathSettlementIds(impact).length >= 3 || (impact.waveDepth || 0) > 0) return 'realm';
   if (impact.sourceSettlementId && impact.targetSettlementId && String(impact.sourceSettlementId) !== String(impact.targetSettlementId)) return 'regional';
   return 'settlement';
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @param {string} transition
+ * @param {Map<string, string>} names
+ * @returns {string}
+ */
 function headlineForImpact(impact, transition, names) {
   const label = impactLabel(impact.kind);
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'Unknown settlement';
@@ -211,6 +390,14 @@ function headlineForImpact(impact, transition, names) {
   return `${target} faces ${label.toLowerCase()}`;
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @param {string} transition
+ * @param {Map<string, string>} names
+ * @param {Map<string, {id?: string | number, type?: string}>} channels
+ * @param {WizardGraphEvent | null} event
+ * @returns {string}
+ */
 function summaryForImpact(impact, transition, names, channels, event) {
   const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId || 'A regional source';
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'the target';
@@ -225,6 +412,11 @@ function summaryForImpact(impact, transition, names, channels, event) {
   return `${prefix}${goodsPart}${eventPart}: ${explanation}`;
 }
 
+/**
+ * @param {WizardRegionalImpact} impact
+ * @param {string} transition
+ * @returns {string[]}
+ */
 function tagList(impact, transition) {
   return compactIds([
     transition,
@@ -237,6 +429,11 @@ function tagList(impact, transition) {
 
 // Deterministic timestamps: callers thread options.now so replay stamps no
 // wall-clock time; the wall clock is the fallback ONLY when not provided.
+/**
+ * @param {RawWizardNewsEntry | null | undefined} entry
+ * @param {WizardNewsOptions} [options]
+ * @returns {WizardNewsEntry | null}
+ */
 function normalizeEntry(entry, options = {}) {
   if (!entry?.id) return null;
   const severity = clamp01(entry.severity);
@@ -268,6 +465,10 @@ function normalizeEntry(entry, options = {}) {
   };
 }
 
+/**
+ * @param {WizardNewsEntry[]} entries
+ * @returns {WizardNewsEntry[]}
+ */
 function sortEntries(entries) {
   return entries.slice().sort((a, b) => {
     if (b.tick !== a.tick) return b.tick - a.tick;
@@ -276,10 +477,15 @@ function sortEntries(entries) {
   });
 }
 
+/**
+ * @param {WizardNewsFeed | null | undefined} [feed]
+ * @param {WizardNewsOptions} [options]
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ */
 export function ensureWizardNewsFeed(feed = {}, options = {}) {
-  const entries = Array.isArray(feed?.entries)
+  const entries = /** @type {WizardNewsEntry[]} */ (Array.isArray(feed?.entries)
     ? feed.entries.map(entry => normalizeEntry(entry, options)).filter(Boolean)
-    : [];
+    : []);
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     currentTick: Math.max(0, Math.floor(finiteNumber(feed?.currentTick, 0))),
@@ -288,6 +494,12 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
   };
 }
 
+/**
+ * @param {WizardNewsFeed | null | undefined} [feed]
+ * @param {number} [ticks]
+ * @param {WizardNewsOptions} [options]
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ */
 export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
   const amount = Math.max(1, Math.floor(finiteNumber(ticks, 1)));
@@ -298,6 +510,11 @@ export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   };
 }
 
+/**
+ * @param {WizardRegionalImpact | null | undefined} impact
+ * @param {WizardNewsOptions} [options]
+ * @returns {WizardNewsEntry | null}
+ */
 export function createWizardNewsEntryFromImpact(impact, options = {}) {
   if (!impact?.id) return null;
   const graph = ensureRegionalGraph(options.graph || {});
@@ -331,9 +548,15 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
   });
 }
 
+/**
+ * @param {WizardGraph | null | undefined} [beforeGraph]
+ * @param {WizardGraph | null | undefined} [afterGraph]
+ * @param {WizardNewsOptions} [options]
+ * @returns {WizardNewsEntry[]}
+ */
 export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGraph = {}, options = {}) {
-  const before = ensureRegionalGraph(beforeGraph || {});
-  const after = ensureRegionalGraph(afterGraph || {});
+  const before = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
+  const after = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
   const beforeById = new Map(before.queuedImpacts.map(impact => [impact.id, impact]));
   const entries = [];
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
@@ -368,6 +591,12 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
   return sortEntries(entries);
 }
 
+/**
+ * @param {WizardNewsFeed | null | undefined} [feed]
+ * @param {RawWizardNewsEntry[]} [entries]
+ * @param {WizardNewsOptions} [options]
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ */
 export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
   const byId = new Map(current.entries.map(entry => [entry.id, entry]));

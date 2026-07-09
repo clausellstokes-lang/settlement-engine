@@ -14,6 +14,9 @@ const BAD_TOKENS = new Set(['undefined', 'null', 'nan']);
 /**
  * Clean a display string. Returns `fallback` for null/empty/garbage values.
  * Strips dangling commas/separators and collapses runs of whitespace.
+ * @param {unknown} value
+ * @param {string | null} [fallback]
+ * @returns {string | null}
  */
 export function cleanText(value, fallback = null) {
   if (value == null) return fallback;
@@ -28,14 +31,24 @@ export function cleanText(value, fallback = null) {
   return s === '' ? fallback : s;
 }
 
-/** Coerce to a finite number, else `fallback`. Note: 0 is a valid result. */
+/**
+ * Coerce to a finite number, else `fallback`. Note: 0 is a valid result.
+ * @param {unknown} value
+ * @param {number | null} [fallback]
+ * @returns {number | null}
+ */
 export function cleanNum(value, fallback = null) {
   if (value == null || value === '') return fallback;
   const n = Number(value);
   return Number.isFinite(n) ? n : fallback;
 }
 
-/** Join parts with a separator, dropping empties; never a dangling separator. */
+/**
+ * Join parts with a separator, dropping empties; never a dangling separator.
+ * @param {unknown} parts
+ * @param {string} [sep]
+ * @returns {string}
+ */
 export function joinClean(parts, sep = ' · ') {
   return (Array.isArray(parts) ? parts : [parts])
     .map((p) => cleanText(p))

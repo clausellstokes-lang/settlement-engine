@@ -40,11 +40,19 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
+/** @type {(v: unknown) => v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
+/** @type {(v: unknown, d: number) => number} */
 const num = (v, d) => (isNum(v) ? v : d);
 
 /**
- * @param {Object} settlement
+ * Structural view of the settlement fields this ledger reads.
+ * @typedef {Object} DefenseLedgerSource
+ * @property {{ scores?: { military?: unknown, monster?: unknown, internal?: unknown, economic?: unknown, magical?: unknown } | null, readiness?: { score?: unknown } | null, magicDependency?: unknown } | null} [defenseProfile]
+ */
+
+/**
+ * @param {DefenseLedgerSource | null | undefined} settlement
  * @returns {DefenseLedger}
  */
 export function defenseLedger(settlement) {
@@ -57,8 +65,10 @@ export function defenseLedger(settlement) {
     internal:        num(sc.internal, 50),
     economic:        num(sc.economic, 50),
     magical:         num(sc.magical, 50),
-    readinessScore:  num(dp.readiness?.score, 50),
-    magicDependency: dp.magicDependency === true,
+    // `sc` non-null (guard above) implies `dp` non-null; TS cannot link the aliases.
+    readinessScore:  num(/** @type {any} */ (dp).readiness?.score, 50),
+    // same alias link: `sc` truthy guarantees `dp` is the profile object.
+    magicDependency: /** @type {any} */ (dp).magicDependency === true,
     present: true,
   };
 }

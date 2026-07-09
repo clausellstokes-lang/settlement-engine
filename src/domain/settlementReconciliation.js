@@ -1,19 +1,39 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
 import { wallClockNow } from './clock.js';
 
+/** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
+/** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
+/** @typedef {CanonicalSettlement & { reconciliationLog?: Object[] }} ReconcilableSettlement */
+
+/**
+ * @param {ActiveCondition | null | undefined} condition
+ * @returns {string | null}
+ */
 function conditionId(condition) {
   return condition?.archetype || condition?.id || condition?.label || null;
 }
 
+/**
+ * @param {unknown} value
+ * @returns {string | null}
+ */
 function compactLabel(value) {
   const text = String(value || '').trim();
   return text ? text.slice(0, 160) : null;
 }
 
+/**
+ * @param {ReconcilableSettlement | null | undefined} nextSettlement
+ * @param {ReconcilableSettlement | null | undefined} priorSettlement
+ * @param {{ now?: string, source?: string, changeType?: unknown, changeLabel?: unknown }} [options]
+ * @returns {ReconcilableSettlement | null | undefined}
+ */
 export function reconcileSettlementChange(nextSettlement, priorSettlement, options = {}) {
   if (!nextSettlement || !priorSettlement) return nextSettlement;
   const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
-  const reconciled = preserveWorldConditions(nextSettlement, priorSettlement);
+  const reconciled = /** @type {ReconcilableSettlement} */ (
+    preserveWorldConditions(nextSettlement, priorSettlement)
+  );
   const entry = {
     at: options.now || wallClockNow(),
     source: options.source || 'settlement_change',

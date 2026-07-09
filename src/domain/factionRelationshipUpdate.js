@@ -185,6 +185,22 @@ const ARCHETYPE_IMPACTS = Object.freeze({
 
 const FOOD_INSTITUTION_PATTERNS = /granary|mill|bakery|farm|orchard|fishery/i;
 
+/**
+ * @typedef {{ type?: string, targetId?: string, factionImpactArchetype?: string }} EventLike
+ */
+
+/**
+ * @typedef {{ field: string, delta: number, reason: string }} DeltaSpec
+ */
+
+/**
+ * @typedef {{ factionId: string, factionName?: string, archetype?: string, field: string, delta: number | string, eventType?: string, eventTargetId?: (string | null) }} FactionUpdate
+ */
+
+/**
+ * @param {EventLike | null | undefined} event
+ * @returns {string | null}
+ */
 function inferEventArchetype(event) {
   if (!event) return null;
 
@@ -217,10 +233,18 @@ function inferEventArchetype(event) {
 
 // ── Faction match helpers ────────────────────────────────────────────────
 
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/**
+ * @param {unknown} name
+ * @returns {string | null}
+ */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -240,13 +264,9 @@ function factionIdFromName(name) {
  *   recalculateFactionRelationships(settlement, { type: 'PLAGUE' }, { archetype: 'plague' })
  *
  * @param {Object} settlement
- * @param {Object} event              { type, targetId?, factionImpactArchetype?, … }
- * @param {Object} [options]
- * @param {string} [options.archetype]  Override; bypasses inference.
- * @param {Object} [options.targetNpc]  When archetype is 'dominant_npc_removed',
- *                                      the structured profile of the NPC being
- *                                      removed. Required for that archetype.
- * @returns {Array<Object>} Updates.
+ * @param {EventLike} event              { type, targetId?, factionImpactArchetype?, … }
+ * @param {{ archetype?: string, targetNpc?: { archetype?: string, factionLink?: string, id?: string } }} [options]
+ * @returns {FactionUpdate[]} Updates.
  */
 export function recalculateFactionRelationships(settlement, event, options = {}) {
   if (!settlement || !event) return [];
@@ -254,10 +274,10 @@ export function recalculateFactionRelationships(settlement, event, options = {})
   const archetype = options.archetype || inferEventArchetype(event);
   if (!archetype) return [];
 
-  const impacts = ARCHETYPE_IMPACTS[archetype];
+  const impacts = /** @type {Record<string, Record<string, DeltaSpec[]>>} */ (ARCHETYPE_IMPACTS)[archetype];
   if (!impacts) return [];
 
-  const profiles = deriveAllFactionProfiles(settlement);
+  const profiles = /** @type {import('./factionProfile.js').FactionProfile[]} */ (deriveAllFactionProfiles(settlement));
   if (profiles.length === 0) return [];
 
   const out = [];
@@ -349,7 +369,12 @@ export function recalculateFactionRelationships(settlement, event, options = {})
  * with summed numeric deltas per field. Useful for the "net change per
  * faction" surface and for Tier 4.12 forecast tooling.
  */
+/**
+ * @param {FactionUpdate[]} updates
+ * @returns {Record<string, { factionId: string, factionName?: string, archetype?: string, deltas: Record<string, number> }>}
+ */
 export function summarizeByFaction(updates) {
+  /** @type {Record<string, { factionId: string, factionName?: string, archetype?: string, deltas: Record<string, number> }>} */
   const out = {};
   for (const u of updates || []) {
     if (typeof u.delta !== 'number') continue; // skip band changes for now

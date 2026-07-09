@@ -39,19 +39,72 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 
 const A = FACTION_ARCHETYPES;
 
+// ── Types ──────────────────────────────────────────────────────────────────
+
+/**
+ * A powerStructure faction entry (legacy generator shape — `faction` is the
+ * display name field; some entries also carry `name`).
+ * @typedef {Object} RulingFaction
+ * @property {string} [faction]
+ * @property {string} [name]
+ * @property {string} [desc]
+ * @property {number} [power]
+ * @property {boolean} [isGoverning]
+ * @property {string[]} [modifiers]
+ * @property {boolean} [legitimacyCrisis]
+ * @property {string | null} [crisisNote]
+ */
+
+/**
+ * @typedef {Object} FactionRelationshipEdge
+ * @property {string[]} [pair]
+ * @property {string} [type]
+ * @property {string} [direction]
+ * @property {string} [narrative]
+ */
+
+/**
+ * @typedef {Object} PowerStructure
+ * @property {RulingFaction[]} [factions]
+ * @property {string} [governingName]
+ * @property {string} [government]
+ * @property {{score?: number, label?: string, govMultiplier?: number}} [publicLegitimacy]
+ * @property {FactionRelationshipEdge[]} [factionRelationships]
+ * @property {Array<{label: string, cause: string, tick: number | null}>} [previousGovernments]
+ * @property {string} [stability]
+ * @property {string} [recentConflict]
+ */
+
+/**
+ * @typedef {Object} RulingPowerSettlement
+ * @property {PowerStructure} [powerStructure]
+ * @property {string} [tier]
+ */
+
+/** @param {number} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
+/**
+ * @param {unknown} value
+ * @param {number} [fallback]
+ * @returns {number}
+ */
 function num(value, fallback = 0) {
-  return Number.isFinite(value) ? value : fallback;
+  return /** @type {number} */ (Number.isFinite(value) ? value : fallback);
 }
 
+/** @param {number} value */
 function round2(value) {
   return Math.round(value * 100) / 100;
 }
 
+/**
+ * @param {RulingFaction | null | undefined} faction
+ * @returns {string}
+ */
 function nameOf(faction) {
   return String(faction?.faction || faction?.name || '').trim();
 }
@@ -66,6 +119,10 @@ function nameOf(faction) {
 const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
 const LARGE_TIERS = new Set(['city', 'metropolis']);
 
+/**
+ * @param {string | null | undefined} tier
+ * @returns {'small' | 'town' | 'large'}
+ */
 function tierBand(tier) {
   const t = String(tier || '').toLowerCase();
   if (SMALL_TIERS.has(t)) return 'small';
@@ -73,6 +130,7 @@ function tierBand(tier) {
   return 'town';
 }
 
+/** @type {Readonly<Record<string, {small: string, town: string, large: string}>>} */
 export const GOVERNMENT_PREFERENCES = Object.freeze({
   [A.MILITARY]:   { small: 'Militia Command',        town: 'Military Council',       large: 'Grand Military Council' },
   [A.RELIGIOUS]:  { small: 'Church Council',         town: 'Theocratic Council',     large: 'High Theocratic Council' },
@@ -93,6 +151,7 @@ export const GOVERNMENT_PREFERENCES = Object.freeze({
 });
 
 // Fallbacks when the preferred label collides with an existing faction name.
+/** @type {Readonly<Record<string, string>>} */
 const ALT_GOVERNMENT_LABELS = Object.freeze({
   [A.MERCHANT]: 'Merchant oligarchy',
   [A.NOBLE]:    'Noble Regency',
@@ -100,6 +159,7 @@ const ALT_GOVERNMENT_LABELS = Object.freeze({
   [A.RELIGIOUS]: 'Ecclesiastical Council',
 });
 
+/** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_DESCS = Object.freeze({
   [A.MILITARY]:   'Officers govern; security doctrine sets policy and the chain of command is the chain of authority.',
   [A.RELIGIOUS]:  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.',
@@ -119,13 +179,21 @@ const GOVERNMENT_DESCS = Object.freeze({
 /**
  * The government-type label an authoritative power of the given archetype
  * prefers at the given settlement tier.
+ *
+ * @param {string} archetype
+ * @param {string | null | undefined} tier
+ * @returns {string}
  */
 export function governmentLabelFor(archetype, tier) {
   const prefs = GOVERNMENT_PREFERENCES[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
   return prefs[tierBand(tier)];
 }
 
-/** The faction entry currently carrying the governing seat. */
+/**
+ * The faction entry currently carrying the governing seat.
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {RulingFaction | null}
+ */
 export function governingFactionOf(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
@@ -139,6 +207,7 @@ export function governingFactionOf(settlement) {
 // different rates — a garrison couples better than a craft guild. Influence
 // ranking still dominates (factors stay near 1).
 
+/** @type {Readonly<Record<string, number>>} */
 const COUP_COERCION = Object.freeze({
   [A.MILITARY]: 1.25,
   [A.NOBLE]: 1.1,
@@ -156,6 +225,11 @@ const COUP_COERCION = Object.freeze({
 
 const MIN_CONTENDER_POWER = 5;
 
+/**
+ * @param {{name: string, power: number, weight: number}} a
+ * @param {{name: string, power: number, weight: number}} b
+ * @returns {number}
+ */
 function byWeightDescThenName(a, b) {
   if (b.weight !== a.weight) return b.weight - a.weight;
   if (b.power !== a.power) return b.power - a.power;
@@ -173,7 +247,7 @@ function byWeightDescThenName(a, b) {
  * amplified weight must match or beat the weakest challenger; a thinner
  * field always admits the incumbent (the pool is the top 3 by definition).
  *
- * @param {Object} settlement
+ * @param {RulingPowerSettlement | null | undefined} settlement
  * @returns {{ governing: Object|null,
  *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
  *            incumbent: { name:string|null, power:number, govMultiplier:number,
@@ -229,13 +303,14 @@ export function coupContenders(settlement) {
  * ruler's case is too weak to even be heard: the fall is near-certain).
  *
  * @param {Object} args
- * @param {Object} args.settlement
+ * @param {RulingPowerSettlement} args.settlement
  * @param {{ random: () => number }} args.rng
  * @param {number} [args.severity]              coup severity at the verdict (0..1)
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
- *            challengers:Array, incumbent:Object, reason:string }}
+ *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
+ *            incumbent:Object, reason:string }}
  */
 export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null }) {
   const { challengers, incumbent } = coupContenders(settlement);
@@ -257,7 +332,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // A hotter coup (higher severity) erodes the incumbent's edge; the
     // ruling-authority score nudges ±0.125 across its full range.
     const severityDrag = 1.15 - 0.4 * clamp01(severity);
-    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (rulingAuthorityScore - 50) / 400 : 0;
+    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {number} */ (rulingAuthorityScore) - 50) / 400 : 0;
     pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj));
   }
 
@@ -293,6 +368,10 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
 // and timeProgression's private reBand — the two existing writers. Keep all
 // three in step if the bands ever move.
 
+/**
+ * @param {{score?: number, label?: string, govMultiplier?: number} | null} prev
+ * @param {number} score
+ */
 function rebandLegitimacy(prev, score) {
   const clamped = Math.max(0, Math.min(100, Math.round(score)));
   let band;
@@ -340,6 +419,13 @@ const STABILITY_BY_CAUSE = Object.freeze({
 
 const MAX_PREVIOUS_GOVERNMENTS = 6;
 
+/**
+ * @param {string} archetype
+ * @param {string | null | undefined} tier
+ * @param {RulingFaction[]} factions
+ * @param {RulingFaction | null} governing
+ * @returns {string}
+ */
 function resolveGovernmentLabel(archetype, tier, factions, governing) {
   const preferred = governmentLabelFor(archetype, tier);
   const taken = new Set(
@@ -365,7 +451,7 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * when the transfer can't apply (no governing seat, unknown faction,
  * faction already governs).
  *
- * @param {Object} settlement
+ * @param {RulingPowerSettlement} settlement
  * @param {string} newPowerName    faction name (powerStructure.factions entry)
  * @param {Object} [opts]
  * @param {'coup'|'election'|'succession'|'conquest'|'appointment'} [opts.cause]
@@ -374,11 +460,13 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
-  const cause = RULING_POWER_CAUSES.includes(opts.cause) ? opts.cause : 'coup';
-  const tick = Number.isFinite(opts.tick) ? opts.tick : null;
+  const cause = /** @type {keyof typeof LEGITIMACY_SEEDS} */ (RULING_POWER_CAUSES.includes(/** @type {string} */ (opts.cause)) ? opts.cause : 'coup');
+  const tick = /** @type {number | null} */ (Number.isFinite(opts.tick) ? opts.tick : null);
   const losers = Array.isArray(opts.losers) ? opts.losers : [];
 
-  const ps = settlement?.powerStructure;
+  // Non-null by construction: when powerStructure is missing, governingFactionOf
+  // returns null and we bail on the next check before ever reading `ps`.
+  const ps = /** @type {PowerStructure} */ (settlement?.powerStructure);
   const factions = Array.isArray(ps?.factions) ? ps.factions : [];
   const governing = governingFactionOf(settlement);
   if (!governing) return { settlement, transfer: null, error: 'no_governing_faction' };
@@ -444,7 +532,9 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     }
     return next;
   });
+  /** @type {FactionRelationshipEdge[]} */
   const extraRelationships = [];
+  /** @type {(a: string, b: string) => boolean} */
   const havePair = (a, b) => renamedRelationships.concat(extraRelationships)
     .some(rel => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
   if (!pairedWithWinner && toGovernment !== winnerName) {

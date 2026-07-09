@@ -42,6 +42,59 @@
 
 import { wallClockMs } from './clock.js';
 
+// ── Types ──────────────────────────────────────────────────────────────────
+// Canonical trace shapes. Downstream code should import these instead of
+// re-declaring them:  /** @typedef {import('../trace.js').Trace} Trace */
+// (settlement.schema.js's TraceEntry is the older, narrower sibling; this
+// module is the authority on what recordTrace actually stores.)
+
+/**
+ * One cause that pushed a decision — "WHY did this happen?"
+ * @typedef {Object} TraceCause
+ * @property {string} source    id of the pushing entity/system ('threat.banditry')
+ * @property {string=} effect   short effect phrase ('+30% likelihood')
+ * @property {string=} reason   free-text human-readable explanation
+ */
+
+/**
+ * One downstream consequence a decision declares — "WHAT does this feed?"
+ * @typedef {Object} TraceEffect
+ * @property {string} target    id of the affected entity/system ('publicOrder')
+ * @property {string=} effect   short effect phrase ('improved')
+ * @property {string=} reason   free-text human-readable explanation
+ */
+
+/**
+ * A structured receipt for one engine decision. See the module header for
+ * the full contract. `step` and `ts` are optional in the type because old
+ * saves persisted traces before those fields were universal; recordTrace
+ * always stamps `ts` on the way in.
+ *
+ * @typedef {Object} Trace
+ * @property {string} targetType   'institution' | 'faction' | 'npc' | … (ALLOWED_TARGET_TYPES)
+ * @property {string} targetId     stable id of the affected entity
+ * @property {string=} step        pipeline step name that produced the trace
+ * @property {string} result       short verb ('selected', 'subsumed', 'impaired', …)
+ * @property {TraceCause[]=} causes
+ * @property {TraceEffect[]=} downstreamEffects
+ * @property {number=} ts          timestamp (auto-stamped by recordTrace if absent)
+ */
+
+/**
+ * The mutable container recordTrace appends to — a pipeline ctx during
+ * generation, or a settlement object outside it.
+ *
+ * @typedef {Object} TraceContext
+ * @property {Trace[]=} simulationTrace
+ * @property {number=} _traceClock   monotonic counter for deterministic runs
+ */
+
+/**
+ * Anything traces can be read back off of (settlement or ctx).
+ * @typedef {Object} TraceCarrier
+ * @property {Trace[]=} simulationTrace
+ */
+
 // ── Dev-only shape validation ──────────────────────────────────────────────
 // Defensive enough to catch the most common authoring mistakes (forgot
 // targetId, mixed up step/result, passed a string where an array was
@@ -54,6 +107,7 @@ const ALLOWED_TARGET_TYPES = new Set([
   'condition', 'district', 'history',
 ]);
 
+/** @param {Trace | null | undefined} trace */
 function validateTrace(trace) {
   // Validation is cheap (a handful of property checks); always-on. If
   // the cost ever shows up in a profile, gate this behind a build-time
@@ -114,6 +168,10 @@ function validateTrace(trace) {
  *
  * Mutates `ctx.simulationTrace` in place (initializing it if absent).
  * Returns the recorded trace for chaining.
+ *
+ * @param {TraceContext | null | undefined} ctx
+ * @param {Trace} trace
+ * @returns {Trace | null} the enriched trace, or null when ctx is unusable
  */
 export function recordTrace(ctx, trace) {
   if (!ctx || typeof ctx !== 'object') return null;
@@ -149,6 +207,10 @@ export function recordTrace(ctx, trace) {
 /**
  * Record many traces in one call. Useful for steps that emit a batch of
  * traces (e.g. assembleInstitutions emitting one per selected institution).
+ *
+ * @param {TraceContext | null | undefined} ctx
+ * @param {Trace[]} traces
+ * @returns {void}
  */
 export function recordTraces(ctx, traces) {
   if (!Array.isArray(traces)) return;
@@ -159,25 +221,40 @@ export function recordTraces(ctx, traces) {
 // Pure read-only helpers. Never mutate. Safe to call from React components,
 // PDF renderers, AI prompt assemblers, etc.
 
-/** All traces on a settlement, in insertion order. */
+/** All traces on a settlement, in insertion order.
+ * @param {TraceCarrier | null | undefined} settlement
+ * @returns {Trace[]}
+ */
 export function getTraces(settlement) {
   if (!settlement || typeof settlement !== 'object') return [];
   return Array.isArray(settlement.simulationTrace) ? settlement.simulationTrace : [];
 }
 
-/** Traces affecting a specific entity id. */
+/** Traces affecting a specific entity id.
+ * @param {TraceCarrier | null | undefined} settlement
+ * @param {string | null | undefined} targetId
+ * @returns {Trace[]}
+ */
 export function tracesFor(settlement, targetId) {
   if (!targetId) return [];
   return getTraces(settlement).filter(t => t.targetId === targetId);
 }
 
-/** Traces emitted by a specific pipeline step. */
+/** Traces emitted by a specific pipeline step.
+ * @param {TraceCarrier | null | undefined} settlement
+ * @param {string | null | undefined} stepName
+ * @returns {Trace[]}
+ */
 export function tracesByStep(settlement, stepName) {
   if (!stepName) return [];
   return getTraces(settlement).filter(t => t.step === stepName);
 }
 
-/** Traces of a specific target type ('institution', 'faction', etc.). */
+/** Traces of a specific target type ('institution', 'faction', etc.).
+ * @param {TraceCarrier | null | undefined} settlement
+ * @param {string | null | undefined} targetType
+ * @returns {Trace[]}
+ */
 export function tracesByType(settlement, targetType) {
   if (!targetType) return [];
   return getTraces(settlement).filter(t => t.targetType === targetType);
@@ -186,6 +263,10 @@ export function tracesByType(settlement, targetType) {
 /**
  * Reverse causality: which traces list `sourceId` in any of their causes?
  * Useful for "what did this stressor end up causing?" style queries.
+ *
+ * @param {TraceCarrier | null | undefined} settlement
+ * @param {string | null | undefined} sourceId
+ * @returns {Trace[]}
  */
 export function tracesCausedBy(settlement, sourceId) {
   if (!sourceId) return [];
@@ -197,6 +278,10 @@ export function tracesCausedBy(settlement, sourceId) {
 /**
  * Forward causality: which traces declare `targetId` as a downstream
  * effect? "What feeds into the public-order subsystem?"
+ *
+ * @param {TraceCarrier | null | undefined} settlement
+ * @param {string | null | undefined} targetId
+ * @returns {Trace[]}
  */
 export function tracesAffecting(settlement, targetId) {
   if (!targetId) return [];
@@ -208,6 +293,9 @@ export function tracesAffecting(settlement, targetId) {
 /**
  * Render-friendly summary of a single trace — short lines suitable for
  * a tooltip or expanded rail step. Pure; returns strings, not JSX.
+ *
+ * @param {Trace | null | undefined} trace
+ * @returns {{ headline: string, causes: string[], downstreamEffects: string[] } | null}
  */
 export function summarizeTrace(trace) {
   if (!trace) return null;

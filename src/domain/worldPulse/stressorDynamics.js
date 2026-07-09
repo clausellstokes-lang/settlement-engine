@@ -33,6 +33,7 @@ import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 
+/** @param {any} value */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
@@ -42,6 +43,7 @@ function clamp01(value) {
 // Same name-regex idiom the capacity model uses; counts are normalized at
 // 2 matching institutions = full credit so redundancy (not just presence)
 // is what earns the bonus.
+/** @type {Record<string, RegExp>} */
 const INSTITUTION_CLASSES = Object.freeze({
   food: /(granary|mill|farm|orchard|fishery|silo)/i,
   admin: /(court|hall|council|government|chancery|registry|moot|forum)/i,
@@ -52,30 +54,47 @@ const INSTITUTION_CLASSES = Object.freeze({
   finance: /(bank|counting|mint|exchange|guildhall)/i,
 });
 
+/**
+ * @param {any} settlement
+ * @param {any} className
+ */
 export function institutionClassValue(settlement, className) {
   const re = INSTITUTION_CLASSES[className];
   if (!re) return 0;
   const count = (settlement?.institutions || [])
-    .filter(inst => re.test(String(inst?.name || ''))).length;
+    .filter((/** @type {any} */ inst) => re.test(String(inst?.name || ''))).length;
   return Math.min(1, count / 2);
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} settlementId
+ */
 function edgesTouching(snapshot, settlementId) {
   const id = String(settlementId);
   const edges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
-  return edges.filter(e => String(e?.from) === id || String(e?.to) === id);
+  return edges.filter((/** @type {any} */ e) => String(e?.from) === id || String(e?.to) === id);
 }
 
+/**
+ * @param {any} edge
+ * @returns {any}
+ */
 export function relationshipTypeOf(edge) {
   // H12 shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
+/**
+ * @param {any} snapshot
+ * @param {any} settlementId
+ * @param {any} channelType
+ */
 function incomingChannels(snapshot, settlementId, channelType) {
   const id = String(settlementId);
   const channels = snapshot?.regionalGraph?.channels || snapshot?.channels || [];
-  return channels.filter(c =>
+  return channels.filter((/** @type {any} */ c) =>
     String(c?.to) === id
     && String(c?.type) === channelType
     && String(c?.status || 'confirmed') === 'confirmed');
@@ -85,6 +104,12 @@ function incomingChannels(snapshot, settlementId, channelType) {
 // A source is { kind, key?, weight, floor?, invert? } evaluated to 0..1 for
 // one settlement (a snapshot.byId entry: { settlement, causal, ... }).
 
+/**
+ * @param {any} source
+ * @param {any} entry
+ * @param {any} snapshot
+ * @param {any} settlementId
+ */
 function sourceValue(source, entry, snapshot, settlementId) {
   const settlement = entry?.settlement;
   switch (source.kind) {
@@ -114,12 +139,12 @@ function sourceValue(source, entry, snapshot, settlementId) {
       if (source.key === 'military_protection') {
         const hasChannel = incomingChannels(snapshot, settlementId, 'military_protection').length > 0;
         const hasAlly = edgesTouching(snapshot, settlementId)
-          .some(e => relationshipTypeOf(e) === 'allied');
+          .some((/** @type {any} */ e) => relationshipTypeOf(e) === 'allied');
         return hasChannel || hasAlly ? 1 : 0;
       }
       if (source.key === 'trade_partner') {
         const count = edgesTouching(snapshot, settlementId)
-          .filter(e => ['trade_partner', 'allied'].includes(relationshipTypeOf(e))).length;
+          .filter((/** @type {any} */ e) => ['trade_partner', 'allied'].includes(relationshipTypeOf(e))).length;
         return Math.min(1, count / 2);
       }
       if (source.key === 'arcane_relief') {
@@ -127,7 +152,7 @@ function sourceValue(source, entry, snapshot, settlementId) {
         // incoming information channel from a neighbour whose own arcane
         // institutions still function. One capable neighbour = full credit.
         const capable = incomingChannels(snapshot, settlementId, 'information_flow')
-          .some(channel => {
+          .some((/** @type {any} */ channel) => {
             const neighbor = snapshot?.byId?.get?.(String(channel?.from))?.settlement;
             return institutionClassValue(neighbor, 'arcane') > 0;
           });
@@ -153,6 +178,7 @@ const DEFAULT_EFFECTS = Object.freeze({
   requireAllFloors: false,
 });
 
+/** @type {Record<string, any>} */
 export const STRESSOR_COUNTERFORCES = Object.freeze({
   siege: {
     // The conjunctive trio: defense readiness, stored food, and a populace
@@ -368,6 +394,7 @@ const FLOOR_MISS_CAP = 0.5;
 
 // Human names for counterforce sources — the resolution receipt prints these
 // ("Recovery led by stored food (0.83), trade connectivity (0.71)").
+/** @type {Record<string, string>} */
 const SOURCE_LABELS = Object.freeze({
   'food:resilience': 'food resilience',
   'food:storage': 'stored food',
@@ -379,6 +406,7 @@ const SOURCE_LABELS = Object.freeze({
   'ally:arcane_relief': 'external arcane relief',
 });
 
+/** @param {any} source */
 function sourceLabel(source) {
   const direct = SOURCE_LABELS[`${source.kind}:${source.key}`];
   if (direct) return direct;
@@ -402,8 +430,8 @@ export function counterforceAssessment(stressor, snapshot) {
   if (!profile) return null;
   const effects = { ...DEFAULT_EFFECTS, ...profile };
   const entries = (stressor.affectedSettlementIds || [])
-    .map(id => ({ id: String(id), entry: snapshot?.byId?.get?.(String(id)) }))
-    .filter(item => item.entry);
+    .map((/** @type {any} */ id) => ({ id: String(id), entry: snapshot?.byId?.get?.(String(id)) }))
+    .filter((/** @type {any} */ item) => item.entry);
   if (!entries.length) return null;
 
   let scoreSum = 0;
@@ -412,7 +440,7 @@ export function counterforceAssessment(stressor, snapshot) {
   for (const { id, entry } of entries) {
     let weighted = 0;
     let weightTotal = 0;
-    profile.sources.forEach((source, idx) => {
+    profile.sources.forEach((/** @type {any} */ source, /** @type {any} */ idx) => {
       const value = sourceValue(source, entry, snapshot, id);
       weighted += value * source.weight;
       weightTotal += source.weight;
@@ -427,7 +455,7 @@ export function counterforceAssessment(stressor, snapshot) {
     : rawScore;
   // Per-source breakdown (averaged across the footprint): names the
   // strengths behind the score — the resolution receipt reads this.
-  const sourceBreakdown = profile.sources.map((source, idx) => ({
+  const sourceBreakdown = profile.sources.map((/** @type {any} */ source, /** @type {any} */ idx) => ({
     kind: source.kind,
     key: source.key || null,
     label: sourceLabel(source),
@@ -459,6 +487,7 @@ export function counterforceAssessment(stressor, snapshot) {
 // for hard causal dependencies: a blockade famine cannot lift while the
 // siege stands, no matter the roll.
 
+/** @type {Record<string, any>} */
 export const STRESSOR_SYNERGIES = Object.freeze({
   famine: {
     disease_outbreak: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the sick cannot work the fields' },
@@ -519,15 +548,20 @@ export const STRESSOR_SYNERGIES = Object.freeze({
 
 const ACTIVE_SYNERGY_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
+/** @param {any} other */
 function isActiveCompanion(other) {
   const stage = other?.lifecycleStage
     || (other?.status && other.status !== 'active' ? other.status : 'active');
   return ACTIVE_SYNERGY_STAGES.has(stage);
 }
 
+/**
+ * @param {any} a
+ * @param {any} b
+ */
 function shareSettlement(a, b) {
   const mine = new Set((a?.affectedSettlementIds || []).map(String));
-  return (b?.affectedSettlementIds || []).some(id => mine.has(String(id)));
+  return (b?.affectedSettlementIds || []).some((/** @type {any} */ id) => mine.has(String(id)));
 }
 
 /**
@@ -593,9 +627,14 @@ export function synergyAssessment(stressor, allStressors = []) {
 // `attackerLabel` (setStressorAttacker in stressors.js) when and if they
 // decide. Nothing downstream assumes an attacker exists.
 
+/** @type {Record<string, number>} */
 const HOSTILE_RANK = Object.freeze({ hostile: 3, cold_war: 2, rival: 1 });
 const MEMORY_LOOKBACK_TICKS = 12;
 
+/**
+ * @param {any} snapshot
+ * @param {any} settlementId
+ */
 export function hostileNeighborsOf(snapshot, settlementId) {
   const id = String(settlementId);
   const out = [];
@@ -618,6 +657,11 @@ export function hostileNeighborsOf(snapshot, settlementId) {
  * A hostility that fizzled but is still in living memory: scan relationship
  * histories for a recent hostile -> something-else label transition touching
  * this settlement. Returns the most recent within the lookback, or null.
+ */
+/**
+ * @param {any} snapshot
+ * @param {any} settlementId
+ * @param {any} currentTick
  */
 export function recentHostileMemory(snapshot, settlementId, currentTick) {
   const id = String(settlementId);
@@ -645,6 +689,7 @@ const WAR_STRESSOR_TYPES = Object.freeze(['siege', 'wartime', 'occupation', 'bet
 // Table-facing hooks per spawn variant — the same catalog type is a
 // different adventure depending on who is behind it. Surfaced on the
 // stressor card and in the AI chronicle grounding.
+/** @type {Record<string, string[]>} */
 export const VARIANT_HOOKS = Object.freeze({
   foreign_sponsored: [
     'A courier carries coin that traces back across the border.',
@@ -723,12 +768,24 @@ export const VARIANT_HOOKS = Object.freeze({
  * Returns an originContext to stamp on the newborn stressor, or null when
  * the type has no context-sensitive variants.
  */
+/**
+ * @param {any} type
+ * @param {any} settlementId
+ * @param {any} snapshot
+ * @param {number} [tick]
+ */
 export function interpretStressorOrigin(type, settlementId, snapshot, tick = 0) {
   const ctx = interpretOriginContext(type, settlementId, snapshot, tick);
   if (!ctx) return null;
   return { ...ctx, hooks: VARIANT_HOOKS[ctx.variant] || [] };
 }
 
+/**
+ * @param {any} type
+ * @param {any} settlementId
+ * @param {any} snapshot
+ * @param {number} [tick]
+ */
 function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
   if (type === 'betrayal') {
     const hostiles = hostileNeighborsOf(snapshot, settlementId);
@@ -789,7 +846,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
   }
 
   if (type === 'insurgency') {
-    const occupied = (snapshot?.worldState?.stressors || []).some(s =>
+    const occupied = (snapshot?.worldState?.stressors || []).some((/** @type {any} */ s) =>
       s?.type === 'occupation'
       && !['resolved', 'dormant', 'residual'].includes(s.status)
       && (s.affectedSettlementIds || []).map(String).includes(String(settlementId)));
@@ -812,7 +869,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     const id = String(settlementId);
     const entry = snapshot?.byId?.get?.(id);
     const stressorsNow = snapshot?.worldState?.stressors || [];
-    const activeHere = t => stressorsNow.some(s =>
+    const activeHere = (/** @type {any} */ t) => stressorsNow.some((/** @type {any} */ s) =>
       s?.type === t
       && !['resolved', 'dormant', 'residual'].includes(s.status)
       && (s.affectedSettlementIds || []).map(String).includes(id));
@@ -844,7 +901,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
 
   if (type === 'magic_deadzone') {
     const id = String(settlementId);
-    const burnout = (snapshot?.worldState?.stressors || []).some(s =>
+    const burnout = (snapshot?.worldState?.stressors || []).some((/** @type {any} */ s) =>
       s?.type === 'magical_instability'
       && s?.status === 'residual'
       && (s.memoryStrength ?? 0) > 0.15
@@ -879,7 +936,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       // Birth-time field snapshot — NARRATIVE only. The verdict recomputes
       // contenders from live state (the whole point of the brewing window is
       // that party/user action can change the field before the knives move).
-      contenders: contest.challengers.map(c => ({
+      contenders: contest.challengers.map((/** @type {any} */ c) => ({
         name: c.name, archetype: c.archetype, power: c.power, weight: c.weight,
       })),
       incumbent: { ...contest.incumbent },
@@ -899,6 +956,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
 }
 
 // Which conspiracy a coup reads as, by the leading challenger's archetype.
+/** @type {Record<string, string>} */
 const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
   military: 'barracks_coup',
   merchant: 'merchant_cabal',
@@ -917,12 +975,18 @@ const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
  *
  * @returns {{ worldState: any, woundDown: any[] }}
  */
+/**
+ * @param {any} worldState
+ * @param {any} edge
+ * @param {{ tick?: number, now?: any, toType?: any }} [options]
+ */
 export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = null, toType = null } = {}) {
   const a = String(edge?.from ?? '');
   const b = String(edge?.to ?? '');
   if (!a || !b) return { worldState, woundDown: [] };
+  /** @type {any[]} */
   const woundDown = [];
-  const stressors = (worldState?.stressors || []).map(stressor => {
+  const stressors = (worldState?.stressors || []).map((/** @type {any} */ stressor) => {
     if (!WAR_STRESSOR_TYPES.includes(stressor?.type)) return stressor;
     if (['resolved', 'dormant', 'residual'].includes(stressor?.status)) return stressor;
     const ctx = stressor?.originContext || {};
@@ -952,6 +1016,12 @@ export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = n
  * The mirror handshake: a sponsored war-stressor RESOLVING writes an incident
  * back onto the relationship edge, feeding relationshipMemory (which finally
  * gets a second mechanical producer).
+ */
+/**
+ * @param {any} worldState
+ * @param {any} regionalGraph
+ * @param {any[]} resolvedStressors
+ * @param {number} [tick]
  */
 export function recordWarResolutionIncidents(worldState, regionalGraph, resolvedStressors = [], tick = 0) {
   let states = worldState?.relationshipStates || {};

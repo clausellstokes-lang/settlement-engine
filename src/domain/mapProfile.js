@@ -35,6 +35,80 @@ import { deriveCausalState } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
 
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+
+/**
+ * Settlement view this module reads. Config keys are declared broadly so
+ * the object stays structurally assignable to the source shapes that
+ * {@link deriveRegionalGraph} and {@link deriveAllThreatProfiles} accept.
+ * @typedef {Object} MapSettlement
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {{ terrain?: string, biome?: string, riverAccess?: string, river?: string,
+ *   roadAccess?: string, road?: string, tradeRouteAccess?: string, monsterThreat?: string,
+ *   region?: string, magicLevel?: string, priorityMagic?: number, magicExists?: boolean }} [config]
+ * @property {Object} [defenseProfile]
+ * @property {Array<{ name?: string }>} [institutions]
+ */
+
+/**
+ * One provenance entry appended to the contributors list.
+ * @typedef {Object} MapContributor
+ * @property {string} source
+ * @property {string} effect
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} MapProfileInputs
+ * @property {string|null} terrain
+ * @property {string|null} biome
+ * @property {string|null} riverAccess
+ * @property {string|null} roadAccess
+ * @property {string|null} tradeRouteAccess
+ * @property {string|null} monsterThreat
+ * @property {string|null} region
+ */
+
+/**
+ * @typedef {Object} RegionalAuthorityEntry
+ * @property {string} id
+ * @property {string} name
+ * @property {string} relationshipType
+ */
+
+/**
+ * @typedef {Object} HazardMarker
+ * @property {string} id
+ * @property {string} label
+ * @property {string} kind
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} visibility
+ */
+
+/**
+ * @typedef {Object} SuggestedFeature
+ * @property {string} feature
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} MapProfileOutputs
+ * @property {string} roadImportance
+ * @property {string} defensiveTerrain
+ * @property {RegionalAuthorityEntry[]} regionalAuthority
+ * @property {HazardMarker[]} hazardMarkers
+ * @property {SuggestedFeature[]} suggestedFeatures
+ */
+
+/**
+ * @typedef {Object} MapProfile
+ * @property {MapProfileInputs} inputs
+ * @property {MapProfileOutputs} outputs
+ * @property {MapContributor[]} contributors
+ */
+
 // ── Output bands ─────────────────────────────────────────────────────────
 
 const ROAD_IMPORTANCE_BANDS = Object.freeze(['low', 'moderate', 'major', 'critical']);
@@ -44,6 +118,10 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 
 // ── Input envelope ───────────────────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @returns {MapProfileInputs}
+ */
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
@@ -59,6 +137,12 @@ function deriveInputs(settlement) {
 
 // ── Output: roadImportance ──────────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {string}
+ */
 function deriveRoadImportance(settlement, causal, contributors) {
   const trade = causal.scores?.trade_connectivity ?? 50;
   const access = settlement.config?.tradeRouteAccess;
@@ -80,6 +164,12 @@ function deriveRoadImportance(settlement, causal, contributors) {
 
 // ── Output: defensiveTerrain ────────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {string}
+ */
 function deriveDefensiveTerrain(settlement, causal, contributors) {
   const defense = causal.scores?.defense_readiness ?? 50;
   const terrain = settlement.config?.terrain || '';
@@ -106,6 +196,11 @@ function deriveDefensiveTerrain(settlement, causal, contributors) {
 
 // ── Output: regionalAuthority ───────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @param {MapContributor[]} contributors
+ * @returns {RegionalAuthorityEntry[]}
+ */
 function deriveRegionalAuthority(settlement, contributors) {
   const graph = deriveRegionalGraph(settlement);
   const authorities = [];
@@ -132,6 +227,11 @@ function deriveRegionalAuthority(settlement, contributors) {
 
 // ── Output: hazardMarkers ───────────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @param {MapContributor[]} contributors
+ * @returns {HazardMarker[]}
+ */
 function deriveHazardMarkers(settlement, contributors) {
   const threats = deriveAllThreatProfiles(settlement);
   const out = [];
@@ -158,6 +258,12 @@ function deriveHazardMarkers(settlement, contributors) {
 
 // ── Output: suggestedFeatures ───────────────────────────────────────────
 
+/**
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {SuggestedFeature[]}
+ */
 function deriveSuggestedFeatures(settlement, causal, contributors) {
   const out = [];
   // Walls suggested for fortified-ish defense bands
@@ -190,8 +296,8 @@ function deriveSuggestedFeatures(settlement, causal, contributors) {
 /**
  * Derive the structured MapProfile.
  *
- * @param {Object} settlement
- * @returns {Object} MapProfile
+ * @param {MapSettlement} settlement
+ * @returns {MapProfile}
  */
 export function deriveMapProfile(settlement) {
   if (!settlement) {
@@ -203,6 +309,7 @@ export function deriveMapProfile(settlement) {
   }
 
   const causal = deriveCausalState(settlement);
+  /** @type {MapContributor[]} */
   const contributors = [];
 
   return {
@@ -223,7 +330,11 @@ export function deriveMapProfile(settlement) {
 export function roadImportanceBands()    { return [...ROAD_IMPORTANCE_BANDS]; }
 export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; }
 
-/** Human-readable summary. */
+/**
+ * Human-readable summary.
+ * @param {MapSettlement} settlement
+ * @returns {string[]}
+ */
 export function summarizeMap(settlement) {
   const m = deriveMapProfile(settlement);
   return [
