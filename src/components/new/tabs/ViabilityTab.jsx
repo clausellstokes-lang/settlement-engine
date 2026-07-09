@@ -134,14 +134,14 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
             <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
             <div style={{fontSize: FS['11.5'],color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
             {v2.suggestedFixes?.[0] && (
-              <div style={{fontSize: FS['10.5'],color:MUTED,marginTop:4,fontStyle:'italic'}}> {v2.suggestedFixes[0]}</div>
+              <div style={{fontSize: FS['10.5'],color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
             )}
           </div>
         ))}
       </Section>}
 
       {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
-      {structViolations.length>0&&<Section title={` Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
+      {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
           <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',borderRadius:6,padding:'10px 14px',marginBottom:8}}>
             <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>

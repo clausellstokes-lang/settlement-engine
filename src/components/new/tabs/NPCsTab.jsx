@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
@@ -72,7 +72,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
-          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',color:MUTED,fontSize:FS.md}}></span>
+          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Filter by name, role, or faction"
             placeholder="Filter by name, role, or faction…"
@@ -114,7 +114,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
     
       {/* NPC Relationships */}
       {(settlement?.relationships?.length > 0) && (
-        <Collapsible title={` NPC Relationships (${settlement.relationships.length})`} defaultOpen={false}>
+        <Collapsible title={`NPC Relationships (${settlement.relationships.length})`} defaultOpen={false}>
           <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
             {(settlement?.relationships||[]).filter(r=>r.flagDriven).slice(0,6).map((r,i)=>(
               <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>

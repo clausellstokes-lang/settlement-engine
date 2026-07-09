@@ -79,7 +79,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
       </button>
       {open&&<div style={{padding:'10px 14px',background:'rgba(250,248,244,0.97)',borderTop:`1px solid ${style.border}`}}>
         <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}> {rel.tension}</div>}
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
       </div>}
     </div>
   );

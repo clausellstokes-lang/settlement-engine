@@ -50,7 +50,6 @@ const InstNode = ({ name, present, st }) => (
     border: `1px ${present ? 'solid' : 'dashed'} ${present ? st.border : '#c8b898'}`,
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xxs }}></span>
     <span style={{ fontSize: FS.xs, fontWeight: present ? 700 : 400,
       color: present ? st.color : '#9c8068',
       fontStyle: present ? 'normal' : 'italic' }}>
@@ -66,7 +65,6 @@ const ImportNode = ({ label }) => (
     background: swatch.infoBg, border: '1px dashed #a0b0d8',
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xxs }}></span>
     <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
   </div>
 );
@@ -135,7 +133,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || ''}</span>
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
         {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
-        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch.infoBg, border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
+        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch.infoBg, border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}>imported</span>}
         <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );

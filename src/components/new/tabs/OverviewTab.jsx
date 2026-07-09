@@ -181,7 +181,6 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         {(r.conflicts||[]).map((c,i)=>{
           const iHigh=c.intensity==='high';
           return <div key={i} style={{display:'flex',gap:8,marginBottom:6}}>
-            <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:iHigh?'#8b1a1a':'#a0762a'}}></span>
             <div>
               <div style={{display:'flex',gap:6,alignItems:'baseline',flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
@@ -268,7 +267,6 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',borderRadius:7,padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
-            <span style={{color:swatch['#8B3A1A'],flexShrink:0}}></span>
             <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}

@@ -204,7 +204,7 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SITUATION ROW (3 scannable tiles) ───────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <SitTile label="Power" value={powStab.split(';')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
+        <SitTile label="Power" value={powStab.split(';')[0].split('(')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
         <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
@@ -213,7 +213,7 @@ function SummaryTab({ settlement:r }) {
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:8,padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
         <FactionBar factions={allFactions.slice(0,5)}/>
-        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}> {ps.recentConflict}</p>}
+        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>⚠ {ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>Active Conflicts</div>
@@ -221,7 +221,6 @@ function SummaryTab({ settlement:r }) {
             {allConflicts.map((c,i)=>{
               const iHigh=c.intensity==='high';
               return <div key={i} style={{display:'flex',alignItems:'flex-start',gap:8,padding:'6px 8px',background:'rgba(250,248,244,0.97)',borderRadius:5,borderLeft:`3px solid ${iHigh?'#8b1a1a':'#a0762a'}`}}>
-                <span style={{fontSize:FS.xs,flexShrink:0,marginTop:1}}></span>
                 <div style={{flex:1,minWidth:0}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:ink}}>{c.parties?.[0]}</span>
                   <span style={{fontSize:FS.xs,color:muted}}> vs </span>

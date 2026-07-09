@@ -471,8 +471,8 @@ export default function ConfigurationPanel(){
         </div>
       </div>
       <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
-      <div style={{marginTop:10}}><Collapsible title=" Nearby Resources" status={config.nearbyResourcesRandom!==false?' Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
-      <div style={{marginTop:6}}><Collapsible title=" Settlement Stress" status={config.selectedStressesRandom!==false?' Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      <div style={{marginTop:10}}><Collapsible title="Nearby Resources" status={config.nearbyResourcesRandom!==false?'Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      <div style={{marginTop:6}}><Collapsible title="Settlement Stress" status={config.selectedStressesRandom!==false?'Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
     </div>
   </div>;
 }

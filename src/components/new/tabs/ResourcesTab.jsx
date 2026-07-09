@@ -129,7 +129,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',borderRadius:4,padding:'2px 9px',fontWeight:600}}> {fmtKey(rk)}</span>)}
+                  : <span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',borderRadius:4,padding:'2px 9px',fontWeight:600}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>

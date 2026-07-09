@@ -348,7 +348,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
       {/* ── VULNERABILITIES ───────────────────────────────────────────────── */}
       {defViolations.length>0
-        ?<Section title={` Vulnerabilities (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
+        ?<Section title={`Vulnerabilities (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
             return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,borderRadius:6,padding:'9px 13px',marginBottom:6}}>

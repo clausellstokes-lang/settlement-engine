@@ -354,6 +354,21 @@ export default [
           selector: "ReturnStatement > Literal[value=', ']",
           message: "Returning the literal ', ' is a corrupted em-dash placeholder — return EMPTY_VALUE from components/theme.js.",
         },
+        // Ternary fallback (`cond ? value : ', '`). Only the ALTERNATE slot is
+        // restricted: PipelineRail's legitimate joiner is `k > 0 ? ', ' : ''`
+        // (consequent slot), and consequent-position placeholders can't be
+        // distinguished from that joiner shape — they stay a documented residual.
+        {
+          selector: "ConditionalExpression[alternate.value=', ']",
+          message: "', ' as a ternary fallback is a corrupted em-dash placeholder — use EMPTY_VALUE from components/theme.js.",
+        },
+        // `const X = ', '` — the corrupted form of theme.js's own
+        // `EMPTY_VALUE = '—'`. A joiner constant is not a real loss: pass the
+        // literal to .join(', ') directly instead of naming it.
+        {
+          selector: "VariableDeclarator > Literal[value=', ']",
+          message: "A ', ' constant is a corrupted em-dash placeholder (cf. EMPTY_VALUE in components/theme.js) — restore '—', or inline the literal into .join(', ') if it is a joiner.",
+        },
         {
           selector: 'JSXElement > JSXText:first-child[value=/^\\s*,\\s/]',
           message: "JSX copy opening with ', ' is a decapitated em-dash (e.g. '— Choose an archetype —') — restore the em-dash.",
