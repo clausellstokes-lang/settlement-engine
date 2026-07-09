@@ -8,14 +8,15 @@
  *   - an explicit user choice (updatedAt > 0) is honored VERBATIM;
  *   - a record with updatedAt === 0 is treated as untouched → new default
  *     (this is what makes the "the user touched it" distinction real);
- *   - DNT is a hard override of BOTH tiers;
- *   - the first-run disclosure gates correctly.
+ *   - DNT is a hard override of BOTH tiers.
+ *
+ * The opt-out is SILENT: there is no first-run disclosure notice. The disclosure
+ * lives only in PrivacySettings (Privacy & data) — see tests/ui/privacySettings.test.jsx.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  CONSENT_KEY, CONSENT_MODEL_VERSION, RESEARCH_DISCLOSURE_KEY,
+  CONSENT_KEY, CONSENT_MODEL_VERSION,
   getConsent, setConsent, isClassAllowed,
-  researchDisclosureNeeded, markResearchDisclosed,
 } from '../../src/lib/consent.js';
 
 function setDNT(on) {
@@ -78,27 +79,5 @@ describe('consent model v2 — research opt-out default', () => {
 
   it('exposes CONSENT_MODEL_VERSION = 2', () => {
     expect(CONSENT_MODEL_VERSION).toBe(2);
-  });
-});
-
-describe('first-run research disclosure', () => {
-  it('is needed when research is on and not yet disclosed', () => {
-    expect(researchDisclosureNeeded()).toBe(true);
-  });
-
-  it('is not needed once marked disclosed', () => {
-    markResearchDisclosed();
-    expect(localStorage.getItem(RESEARCH_DISCLOSURE_KEY)).toBe('1');
-    expect(researchDisclosureNeeded()).toBe(false);
-  });
-
-  it('is not needed under DNT (nothing will fire)', () => {
-    setDNT(true);
-    expect(researchDisclosureNeeded()).toBe(false);
-  });
-
-  it('is not needed when the user has turned research off', () => {
-    setConsent({ research: false });
-    expect(researchDisclosureNeeded()).toBe(false);
   });
 });

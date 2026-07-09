@@ -37,10 +37,6 @@ export const CONSENT_KEY = 'sf_consent_v1';
 export const CONSENT_MODEL_VERSION = 2;
 export const CONSENT_TIERS = Object.freeze(['essential', 'research', 'ai_prose']);
 
-/** First-run research disclosure flag — the "you're contributing anonymous
- *  structure; here's the off switch" notice is shown at most once, then dismissed. */
-export const RESEARCH_DISCLOSURE_KEY = 'sf_research_disclosed_v1';
-
 /** DNT check — honored as a hard opt-out of ALL telemetry, including essential. */
 export function dntEnabled() {
   if (typeof navigator === 'undefined') return false;
@@ -115,27 +111,4 @@ export function isClassAllowed(eventClass, consent = getConsent()) {
   if (eventClass === 'research') return consent.research === true;
   if (eventClass === 'ai_prose') return consent.ai_prose === true;
   return consent.essential === true; // 'essential' (default)
-}
-
-// ── First-run research disclosure (the opt-out's honesty surface) ────────────
-/**
- * Should the first-run research disclosure be shown? True only when research
- * capture would actually fire under the CURRENT (default or chosen) consent —
- * i.e. research is on, DNT is off — AND the user has not yet seen/dismissed the
- * notice. Because research now defaults ON, this is what makes the opt-out
- * honest: the user is told, once, before any structural data leaves.
- */
-export function researchDisclosureNeeded(consent = getConsent()) {
-  if (dntEnabled() || consent.research !== true) return false;
-  try {
-    if (typeof localStorage === 'undefined') return true;
-    return localStorage.getItem(RESEARCH_DISCLOSURE_KEY) !== '1';
-  } catch { return false; }
-}
-
-/** Mark the first-run research disclosure as seen (idempotent; never throws). */
-export function markResearchDisclosed() {
-  try {
-    if (typeof localStorage !== 'undefined') localStorage.setItem(RESEARCH_DISCLOSURE_KEY, '1');
-  } catch { /* storage unavailable — the notice may reappear; harmless */ }
 }

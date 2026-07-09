@@ -206,15 +206,16 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | Constant | Event | Class | Trigger | Props |
 |---|---|---|---|---|
 | `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, consent_version, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable; `consent_version` stamps the consent-model basis (see below) |
-| `CONSENT_UPDATED` | `consent_updated` | essential | `setConsent()` in `src/lib/consent.js` | `{ research:'granted'\|'denied'\|'unset', ai_prose:'granted'\|'denied'\|'unset', surface:'account'\|'opt_in_card'\|'banner' }` |
+| `CONSENT_UPDATED` | `consent_updated` | essential | `setConsent()` in `src/lib/consent.js` | `{ research:'granted'\|'denied'\|'unset', ai_prose:'granted'\|'denied'\|'unset', surface:'account' }` |
 
 > **Consent model v2 (research opt-out).** `research` flipped from opt-IN (default
 > false) to opt-OUT (default `!dntEnabled()`). CONSENT_KEY is preserved: prior
 > explicit choices are honored via `updatedAt` provenance (updatedAt>0 ⇒ user
 > touched it ⇒ honor verbatim; absence/0 ⇒ new default). Every research capture
-> carries `CONSENT_MODEL_VERSION` (=2) so the consent basis is auditable. A
-> first-run `ResearchDisclosureNotice` (surface `opt_in_card`) tells the user,
-> once, before structural data leaves — DNT is a hard override of all telemetry.
+> carries `CONSENT_MODEL_VERSION` (=2) so the consent basis is auditable. The
+> opt-out is **silent** — no pop-up and no first-run notice anywhere; the
+> disclosure is hosted in the account page's **Privacy & data** section
+> (`PrivacySettings`, surface `account`). DNT is a hard override of all telemetry.
 > Server side: migration 051 sets `profiles.telemetry_consent` research default to
 > true for NEW ROWS ONLY (existing rows are never mass-updated).
 
