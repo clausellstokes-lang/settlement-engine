@@ -19,7 +19,7 @@ import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
-import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
+import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
@@ -123,7 +123,7 @@ export default function EventComposer() {
   // across all tiers (free text still wins; the label is the storage format).
   const tradeGoodSuggestions = useMemo(() => {
     const names = new Set();
-    for (const tierGoods of Object.values(EXPORT_GOODS_BY_TIER || {})) {
+    for (const tierGoods of Object.values(GOODS_MODIFIERS_BY_TIER || {})) {
       for (const name of Object.keys(tierGoods || {})) names.add(name);
     }
     return [...names].sort((a, b) => a.localeCompare(b));

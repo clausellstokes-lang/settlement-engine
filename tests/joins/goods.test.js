@@ -71,6 +71,59 @@ describe('joins: GOODS_MODIFIERS_BY_TIER requiredInstitution resolves against th
   });
 });
 
+describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export shape', () => {
+  // F30 pin: GOODS_MODIFIERS_BY_TIER is now the SINGLE goods table — the live
+  // generator table (getGoodsModifiers), the wizard grid (TradeDynamicsPanel),
+  // the EventComposer datalist, and the prebuilt registry all read it. The
+  // export good shape is { category, p, on, [requiredInstitution], desc }: a
+  // numeric probability p in (0,1] and a boolean default-on flag. getGoodsModifiers
+  // gates on `spec.on && _rng() < spec.p`, so a good with a non-numeric p or a
+  // non-boolean on silently never rolls (or always rolls) — the exact drift
+  // class this file guards. The one deliberate exception is the resource/route
+  // BOOST schema (town/Enslaved persons): institution/route boosts instead of a
+  // p/on export shape, left inert by getGoodsModifiers (spec.on is undefined).
+
+  const isBoostSpec = (def) =>
+    'institutionBoost' in def || 'routeBoost' in def || 'resourceBoost' in def;
+
+  test('every standard good has numeric p in (0,1] and boolean on', () => {
+    const offenders = [];
+    for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
+      for (const [good, def] of Object.entries(goods)) {
+        if (isBoostSpec(def)) continue; // pinned separately below
+        const pOk = typeof def.p === 'number' && def.p > 0 && def.p <= 1;
+        const onOk = typeof def.on === 'boolean';
+        if (!pOk || !onOk) {
+          offenders.push(`${tier}/${good} -> p=${JSON.stringify(def.p)}, on=${JSON.stringify(def.on)}`);
+        }
+      }
+    }
+    expect(offenders, `goods with an invalid p/on export shape: ${offenders.join('; ')}`).toEqual([]);
+  });
+
+  test('the only non-p/on entries are the known boost specs', () => {
+    // A new boost-schema (or otherwise shapeless) entry surfaces here for review
+    // rather than silently joining the table as an inert good.
+    const boostEntries = [];
+    for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
+      for (const [good, def] of Object.entries(goods)) {
+        if (isBoostSpec(def)) boostEntries.push(`${tier}/${good}`);
+      }
+    }
+    expect(boostEntries).toEqual(['town/Enslaved persons']);
+  });
+
+  test('pin is not vacuous (standard goods are actually walked)', () => {
+    let n = 0;
+    for (const goods of Object.values(GOODS_MODIFIERS_BY_TIER)) {
+      for (const def of Object.values(goods)) {
+        if (typeof def.p === 'number' && typeof def.on === 'boolean') n++;
+      }
+    }
+    expect(n).toBeGreaterThanOrEqual(40);
+  });
+});
+
 describe('behavior: repaired joins produce DM-visible output', () => {
   afterEach(() => clearActiveRng());
 

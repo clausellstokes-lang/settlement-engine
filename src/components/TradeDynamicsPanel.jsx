@@ -3,7 +3,7 @@ import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
-import {SERVICE_TIER_DATA} from '../generators/servicesGenerator';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData';
 import {TIER_ORDER} from '../generators/helpers';
 
 const CAT_COLORS = {
@@ -24,14 +24,14 @@ function getGoodsForTier(tier) {
   if (tier === 'all') {
     const seen = new Set(), out = [];
     (TIER_ORDER||[]).forEach(t => {
-      const data = SERVICE_TIER_DATA[t] || {};
+      const data = GOODS_MODIFIERS_BY_TIER[t] || {};
       Object.entries(data).forEach(([name,def]) => {
         if (!seen.has(name)) { seen.add(name); out.push({name,...def,_tier:t}); }
       });
     });
     return out;
   }
-  const data = SERVICE_TIER_DATA[tier] || {};
+  const data = GOODS_MODIFIERS_BY_TIER[tier] || {};
   return Object.entries(data).map(([name,def]) => ({name,...def}));
 }
 

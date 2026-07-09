@@ -225,7 +225,7 @@ export const customDeps = {
   // ── Required institution for a trade good ──────────────────────────────
   /**
    * Resolve a trade good's `requiredInstitution` field — which may be a
-   * legacy bare name (prebuilt EXPORT_GOODS_BY_TIER form) or a refId from
+   * legacy bare name (prebuilt GOODS_MODIFIERS_BY_TIER form) or a refId from
    * the custom system — to the institution NAME the engine should match
    * against in `settlement.institutions[].name`.
    */

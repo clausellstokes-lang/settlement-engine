@@ -28,7 +28,6 @@ import { INDUSTRY_WATER_NEEDS, RESOURCE_DATA } from '../data/resourceData.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 import { GOODS_MODIFIERS_BY_TIER, COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES } from '../data/tradeGoodsData.js';
 import { evaluateWaterDependency } from './helpers.js';
-import { SERVICE_TIER_DATA } from './servicesGenerator.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../domain/region/goodsCatalog.js';
 // ─── Economic helper functions ──────────────────────────────
 import {
@@ -955,49 +954,6 @@ const getCommoditiesForResources = (resources = []) => {
   return [...commodities];
 };
 
-// computeIncomeStreams
-const _computeIncomeStreams = (tier, institutions = [], route = 'road', goodsToggles = {}, config = {}) => {
-  const localProduction = getInstitutionEconomicBonus(config.nearbyResources || [], institutions);
-  const necessityImports = getInstitutionServices(
-    tier,
-    route,
-    localProduction,
-    institutions,
-    config.nearbyResources || []
-  );
-  const isEntrepot = getTradeModifiers(route, institutions);
-  const hasSaltLocal = necessityImports.some((i) => i.toLowerCase() === 'salt');
-  const exports = getHistoryModifiers(tier, institutions, goodsToggles)
-    .filter((item) => !necessityImports.includes(item.name))
-    .filter((item) => {
-      const name = typeof item === 'string' ? item : item?.name || '';
-      return !(hasSaltLocal && !isEntrepot && isSaltPreserved(name));
-    });
-  const imports = getUpgradeChain(tier, route, false, goodsToggles);
-  const bonuses = [];
-  if (isEntrepot && route === 'crossroads' && !['thorp', 'hamlet'].includes(tier))
-    bonuses.push({
-      source: 'Entrepôt Trade',
-      percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
-      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
-    });
-  if (route === 'port' && institutions.some((i) => i.name.toLowerCase().includes('international trade')))
-    bonuses.push({
-      source: 'International Commerce',
-      percentage: 25,
-      desc: 'Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.',
-    });
-  return {
-    exports,
-    imports,
-    isEntrepot,
-    transit: isEntrepot ? imports.filter((i) => !necessityImports.includes(i)).slice(0, 4) : [],
-    incomeBonuses: bonuses,
-    localProduction,
-    necessityImports,
-  };
-};
-
 // getInstitutionServices
 const getInstitutionServices = (tier, route, localProduction, institutions = [], nearbyResources = []) => {
   // Isolated settlements cannot import anything — they are self-contained by definition.
@@ -1040,25 +996,6 @@ const getTradeModifiers = (route, institutions = []) => {
     route === 'crossroads' ||
     (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
   );
-};
-
-// getHistoryModifiers
-const getHistoryModifiers = (tier, institutions = [], goodsToggles = {}) => {
-  const tierData = SERVICE_TIER_DATA[tier] || {};
-  const exports = [];
-  Object.entries(tierData).forEach(([goodName, spec]) => {
-    const toggleKey = `${tier}_export_${goodName}`;
-    // Custom-content extension: resolve `requiredInstitution` if it's a
-    // refId. For prebuilt entries it's a plain name → passthrough.
-    const reqInst = spec.requiredInstitution
-      ? _customDeps.resolveInstitutionRequirement(spec.requiredInstitution)
-      : '';
-    (goodsToggles[toggleKey] !== void 0 ? goodsToggles[toggleKey] : spec.on) &&
-      ((reqInst &&
-        !institutions.some((inst) => inst.name === reqInst || inst.name.includes(reqInst))) ||
-        (_rng() < spec.p && exports.push(goodName)));
-  });
-  return exports;
 };
 
 // isSaltPreserved

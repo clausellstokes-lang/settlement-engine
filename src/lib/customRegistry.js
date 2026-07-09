@@ -24,7 +24,7 @@
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { INSTITUTION_SERVICES } from '../data/institutionServices.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
-import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
+import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
 // Import the pure-data meta map, not the full stressTypes.js. The full
 // file has runtime closures that capture _rng from generators/rngContext -
 // loading it sync (which we do here, from app boot via dependencyEngine)
@@ -249,7 +249,7 @@ function enumeratePrebuiltTradeGoods() {
       }
     }
   };
-  ingest(EXPORT_GOODS_BY_TIER, 'export');
+  ingest(GOODS_MODIFIERS_BY_TIER, 'export');
   ingest(IMPORT_GOODS_BY_TIER, 'import');
   return Array.from(out.values()).map(g => ({
     ...g,
