@@ -32,24 +32,34 @@ export default defineConfig({
     // lazy/manual chunks (engine and vendor-pdf). Keep the warning meaningful
     // for true runaway bundles without failing every healthy production build.
     chunkSizeWarningLimit: 2000,
-    // Tighter modulePreload policy. By default Vite preloads every chunk
-    // reachable from the entry (including lazy-import targets), so even
-    // chunks we deliberately gated behind user action (vendor-pdf, engine)
-    // get downloaded on first paint — defeating the lazy boundary.
+    // modulePreload policy — strips the <link rel="modulepreload"> HINT
+    // for vendor-pdf. IMPORTANT: this filter only removes a preload hint;
+    // it does NOT remove a static import edge. It is therefore only
+    // effective for a chunk that is NOT already in the entry's static
+    // import closure — for a chunk the entry statically imports, the
+    // browser fetches it regardless of any preload hint. The thing that
+    // actually keeps vendor-pdf out of the first-paint static graph is the
+    // helper pin in manualChunks (see the "Vite runtime helpers" rule
+    // above); this filter is the belt-and-suspenders that also suppresses
+    // the redundant preload hint once the static edge is gone.
     //
-    // This filter keeps preload for genuinely-sync deps and drops the
-    // chunks that only fire on user interaction:
-    //   - vendor-pdf (~619 kB gz): only when the user exports a PDF
-    //   - engine     (~187 kB gz): only when the user generates / regenerates
+    //   - vendor-pdf (~616 kB gz): only fetched when the user exports a PDF.
+    //     Trade-off: first PDF export takes an extra ~50-500ms (broadband /
+    //     mobile) for the network fetch; subsequent exports hit the HTTP
+    //     cache.
     //
-    // Trade-off: first PDF export and first generation each take an extra
-    // ~50-500ms (broadband / mobile) for the network fetch. Subsequent
-    // calls hit the HTTP cache. Net: shave ~800 kB gz off first paint
-    // for the common case where the user is browsing the world map or
-    // existing campaigns and never touches Generate / Export.
+    // NOTE on engine: `engine` is intentionally NOT in this filter. Unlike
+    // vendor-pdf, the engine chunk (~214 kB gz) is *genuinely* in the
+    // entry's first-paint static closure today — it's reached by several
+    // eager store/domain edges (worldPulse advance, neighbour backlink,
+    // coherence draft-check, defense display). Filtering its preload hint
+    // would only hide that cost, not remove it: the browser would still
+    // fetch it (just later, unhinted), which is strictly worse. Making
+    // engine truly lazy requires converting those call-sites to dynamic
+    // import() — tracked separately, out of scope here.
     modulePreload: {
       resolveDependencies(_filename, deps) {
-        return deps.filter(d => !/\/(vendor-pdf|engine)-[A-Za-z0-9_-]+\.js$/.test(d));
+        return deps.filter(d => !/\/vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(d));
       },
     },
     rollupOptions: {
@@ -73,6 +83,26 @@ export default defineConfig({
       },
       output: {
         manualChunks(id) {
+          // ── Vite runtime helpers (MUST be first) ──────────────────
+          // Vite injects a tiny (~20-line) __vitePreload helper whenever
+          // the app uses dynamic import(). Rollup is free to co-locate
+          // that helper into ANY chunk it emits — and it picks the
+          // vendor-pdf chunk. The entry then statically imports vendor-pdf
+          // (`import{_ as D}from"./vendor-pdf-*.js"`) *just to reach the
+          // 20-line helper*, dragging the whole 1.85 MB / 616 kB gz PDF
+          // stack into the first-paint static graph and defeating the
+          // lazy boundary entirely.
+          //
+          // Pin the helper into vendor-state — a tiny chunk (~16 kB) that
+          // is always eager on first paint anyway (zustand/immer). Now the
+          // entry's static edge for the helper points at a chunk it already
+          // loads, and vendor-pdf leaves the static closure. This is the
+          // fix that actually keeps vendor-pdf lazy; the modulePreload
+          // filter below only strips a preload *hint*, it can't remove a
+          // real static import edge.
+          if (id.includes('vite/preload-helper') || id.includes('vite/dynamic-import-helper'))
+            return 'vendor-state';
+
           // ── Vendor chunks (stable, cached across deploys) ─────────
           if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/'))
             return 'vendor-react';
@@ -114,18 +144,23 @@ export default defineConfig({
           // ── circular imports that prevent clean sub-chunking)      ──
           //
           // settlementSlice dynamically imports the generators via
-          // loadEngine(), and the catalog lookups that were the only
-          // pure sync importers were extracted into lookups.js (routed
-          // to data above). Engine module code therefore no longer
-          // executes at startup for catalog reads.
+          // loadEngine() for the generation path, and the catalog lookups
+          // that were pure sync importers were extracted into lookups.js
+          // (routed to data above).
           //
-          // Residual: store/index → lib/dependencyEngine → customRegistry
-          // → data/stressTypes → generators/rngContext keeps a small
-          // static engine reference in the entry chunk. Removing it
-          // requires extracting STRESS_INSTITUTION_EFFECTS out of
-          // stressTypes.js (which also depends on rngContext at runtime).
-          // Deferred — small payoff vs. the data ↔ engine circular-import
-          // restructure needed to do it cleanly.
+          // HONEST STATUS: despite the naming, the engine chunk is NOT lazy
+          // today. The entry statically reaches it (~660 kB / 214 kB gz)
+          // through several eager store/domain edges that run on first
+          // paint, not behind loadEngine() — among them worldPulse advance,
+          // neighbour backlink resolution, the coherence draft-check, and
+          // the defense display path. So engine sits in the first-paint
+          // static closure and the first-paint byte budget in
+          // tests/build/vendorPdfLazy.test.js accounts for it.
+          //
+          // Making engine truly lazy requires converting those call-sites
+          // to dynamic import() (and untangling the data ↔ engine circular
+          // imports). Tracked separately — out of scope for the vendor-pdf
+          // helper-pin fix that keeps THIS file's changes surgical.
           if (id.includes('/src/generators/'))
             return 'engine';
 
