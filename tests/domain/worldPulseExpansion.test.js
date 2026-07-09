@@ -401,7 +401,13 @@ describe('World Pulse expansion systems', () => {
     expect(promoted.institutionHistory.some(entry => entry.fate === 'added')).toBe(true);
   });
 
-  test('resource recovery respects renewability and high-magic taxonomy', () => {
+  // E4-2b (cadence damping): exhaustibles used to return canRecover:false, so a
+  // calm settlement's iron/stone/gems ratcheted to PERMANENT depletion. A
+  // sustained calm (pressure ≤ 0.2) now opens a SLOW, quiet-gated recovery for
+  // them (prospecting reopens seams; trade substitutes). Renewables still
+  // recover at the fast natural rate; magic still needs high/pervasive magic —
+  // a moderate-magic town does NOT recover a magical node even when calm.
+  test('resource recovery: renewables fast, exhaustibles slow-under-calm, magic gated', () => {
     const worldState = { tick: 3, simulationRules: normalizeSimulationRules() };
     const lowPressure = pressureIndex(['iron', 'forest', 'magicLow', 'magicHigh'].flatMap(settlementId => [
       { settlementId, kind: 'food', score: 0.05 },
@@ -423,9 +429,19 @@ describe('World Pulse expansion systems', () => {
 
     const result = evaluateTierResourceDynamics(worldState, snapshot, lowPressure, { tick: 4 });
     const recoveries = result.candidates.filter(candidate => candidate.candidateType === 'resource_recovery');
+    const ironRec = recoveries.find(candidate => candidate.targetSaveId === 'iron');
+    const forestRec = recoveries.find(candidate => candidate.targetSaveId === 'forest');
 
-    expect(recoveries.some(candidate => candidate.targetSaveId === 'iron')).toBe(false);
-    expect(recoveries.some(candidate => candidate.targetSaveId === 'forest')).toBe(true);
+    // Exhaustible iron now recovers under sustained calm — but slowly.
+    expect(ironRec).toBeTruthy();
+    expect(forestRec).toBeTruthy();
+    // Bounded/damped: the exhaustible's recovery probability is a fraction of
+    // the renewable's (years of prospecting, not a season's regrowth).
+    expect(ironRec.probability).toBeLessThan(forestRec.probability);
+    expect(ironRec.reasons.some(r => /prospecting|reopened|substitution/i.test(r))).toBe(true);
+
+    // Magic recovery is still gated on high/pervasive magic — calm alone does
+    // not restore a magical node in a moderate-magic town.
     expect(recoveries.some(candidate => candidate.targetSaveId === 'magicLow')).toBe(false);
     expect(recoveries.some(candidate => candidate.targetSaveId === 'magicHigh')).toBe(true);
   });

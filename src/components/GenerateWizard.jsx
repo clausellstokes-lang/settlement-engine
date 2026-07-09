@@ -280,10 +280,15 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   }, [clearSettlement, setWizardMode, setWizardStep]);
 
   const requestExit = useCallback((kind) => {
-    // Unsaved + generated → warn before discarding the random draft.
-    if (settlement && !activeSaveId) { setPendingExit(kind); return; }
+    // Warn before discarding an unsaved random draft — but only when the user
+    // actually has a save path to lose it to. Anonymous visitors have NO Save
+    // affordance (the anon model is ephemeral by design: roll freely, sign in
+    // to keep), so a "you'll lose your draft" confirm is misleading friction —
+    // and it stranded the "New returns to a fresh state" flow behind a dialog
+    // the anon path never expects (the e2e regression, mobile-safari + chromium).
+    if (settlement && !activeSaveId && authTier !== 'anon') { setPendingExit(kind); return; }
     doExit(kind);
-  }, [settlement, activeSaveId, doExit]);
+  }, [settlement, activeSaveId, authTier, doExit]);
 
   /** Back — one step, to the config you generated from (choices intact). */
   const handleBack = useCallback(() => requestExit('back'), [requestExit]);

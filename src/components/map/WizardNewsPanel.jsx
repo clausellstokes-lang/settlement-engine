@@ -35,18 +35,17 @@ function StatusIcon({ kind, major, color }) {
   return <RadioTower size={15} color={color} />;
 }
 
-function groupsFor(entries = []) {
-  const groups = new Map();
-  for (const entry of entries) {
-    if (!groups.has(entry.tick)) groups.set(entry.tick, []);
-    groups.get(entry.tick).push(entry);
+// Partition threads into the DM's own settlements vs the rest of the realm.
+// Membership is by save id: a thread is "mine" when any settlement it touches
+// is in the campaign's settlementIds.
+function partitionThreads(threads = [], mineIds = new Set()) {
+  const mine = [];
+  const elsewhere = [];
+  for (const thread of threads) {
+    const touchesMine = (thread.settlementIds || []).some(id => mineIds.has(String(id)));
+    (touchesMine ? mine : elsewhere).push(thread);
   }
-  return [...groups.entries()]
-    .map(([tick, tickEntries]) => ({
-      tick,
-      entries: tickEntries.slice().sort((a, b) => b.score - a.score),
-    }))
-    .sort((a, b) => b.tick - a.tick);
+  return { mine, elsewhere };
 }
 
 function MetaPill({ children, tone = 'neutral' }) {
@@ -165,6 +164,50 @@ function NewsEntry({ entry, compact = false, nameById }) {
   );
 }
 
+// A threaded arc, rendered collapsed-with-progression: the latest stage is
+// always shown; a multi-stage arc gets a disclosure that reveals the earlier
+// stages (oldest → newest) so a slow-burning story reads as ONE entry instead
+// of a wall of near-duplicates.
+function ThreadCard({ thread, compact = false, nameById }) {
+  const head = thread.head;
+  if (!head) return null;
+  if (thread.size <= 1) {
+    return <NewsEntry entry={head} compact={compact} nameById={nameById} />;
+  }
+  const priorStages = thread.entries.slice(0, -1); // everything before the head, oldest → newest
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <NewsEntry entry={head} compact={compact} nameById={nameById} />
+      <details style={{
+        border: `1px solid ${BORDER2}`,
+        borderRadius: 8,
+        background: CARD_ALT,
+        overflow: 'hidden',
+      }}>
+        <summary style={{
+          cursor: 'pointer',
+          padding: '6px 10px',
+          color: SECOND,
+          fontFamily: sans,
+          fontSize: FS.xxs,
+          fontWeight: 900,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+        }}>
+          <RadioTower size={12} color={GOLD} />
+          {thread.size}-stage arc · show earlier {priorStages.length === 1 ? 'update' : 'updates'}
+        </summary>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8 }}>
+          {priorStages.map(entry => (
+            <NewsEntry key={entry.id} entry={entry} compact nameById={nameById} />
+          ))}
+        </div>
+      </details>
+    </div>
+  );
+}
+
 function SectionHeader({ icon: Icon, title, count }) {
   return (
     <div style={{
@@ -196,10 +239,59 @@ function SectionHeader({ icon: Icon, title, count }) {
   );
 }
 
+// One partition column ("Your settlements" / "Elsewhere in the realm"). Threads
+// arrive pre-ordered (major-first, then recency); each renders collapsed-with-
+// progression via ThreadCard.
+function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById }) {
+  return (
+    <div style={{ minWidth: 0 }}>
+      <SectionHeader icon={icon} title={title} count={threads.length} />
+      {majorCount > 0 && (
+        <div style={{ marginTop: -4, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+          {majorCount} significant {majorCount === 1 ? 'arc' : 'arcs'}
+        </div>
+      )}
+      {threads.length === 0 ? (
+        <div style={{
+          border: `1px dashed ${BORDER}`,
+          borderRadius: 8,
+          padding: 16,
+          color: MUTED,
+          fontFamily: sans,
+          fontSize: FS.sm,
+          background: CARD_ALT,
+        }}>
+          {emptyText}
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {threads.map(thread => (
+            <ThreadCard key={thread.arcId} thread={thread} nameById={nameById} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function WizardNewsPanel({ campaign }) {
   const summary = useMemo(() => summarizeWizardNews(campaign?.wizardNews), [campaign?.wizardNews]);
-  const majorGroups = useMemo(() => groupsFor(summary.major), [summary.major]);
-  const notableGroups = useMemo(() => groupsFor(summary.notables), [summary.notables]);
+  // Arc-threaded, then partitioned into the DM's own settlements vs the wider
+  // realm. deriveNewsThreads already orders threads major-first then by recency
+  // (deterministic codepoint tiebreak), so both columns lead with what matters.
+  const mineIds = useMemo(() => new Set((campaign?.settlementIds || []).map(String)), [campaign?.settlementIds]);
+  const { mine: mineThreads, elsewhere: elsewhereThreads } = useMemo(
+    () => partitionThreads(summary.threads, mineIds),
+    [summary.threads, mineIds],
+  );
+  const mineMajorCount = useMemo(
+    () => mineThreads.filter(t => t.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR).length,
+    [mineThreads],
+  );
+  const elsewhereMajorCount = useMemo(
+    () => elsewhereThreads.filter(t => t.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR).length,
+    [elsewhereThreads],
+  );
   const total = summary.feed.entries.length;
   const saves = useStore(state => state.savedSettlements);
   const appendCampaignChronicle = useStore(state => state.appendCampaignChronicle);
@@ -361,99 +453,23 @@ export default function WizardNewsPanel({ campaign }) {
         gap: 16,
         alignItems: 'start',
       }}>
-        <div style={{ minWidth: 0 }}>
-          <SectionHeader
-            icon={AlertTriangle}
-            title="Most Significant News"
-            count={summary.major.length}
-          />
-          {majorGroups.length === 0 ? (
-            <div style={{
-              border: `1px dashed ${BORDER}`,
-              borderRadius: 8,
-              padding: 16,
-              color: MUTED,
-              fontFamily: sans,
-              fontSize: FS.sm,
-              background: CARD_ALT,
-            }}>
-              No significant news yet.
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {majorGroups.map(group => (
-                <details key={group.tick} open style={{
-                  border: `1px solid ${BORDER2}`,
-                  borderRadius: 8,
-                  background: CARD,
-                  overflow: 'hidden',
-                }}>
-                  <summary style={{
-                    cursor: 'pointer',
-                    padding: '8px 10px',
-                    color: SECOND,
-                    fontFamily: sans,
-                    fontSize: FS.xs,
-                    fontWeight: 900,
-                    background: CARD_ALT,
-                  }}>
-                    Tick {group.tick} · {group.entries.length} major update{group.entries.length === 1 ? '' : 's'}
-                  </summary>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
-                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} nameById={nameById} />)}
-                  </div>
-                </details>
-              ))}
-            </div>
-          )}
-        </div>
+        <ThreadColumn
+          icon={AlertTriangle}
+          title="Your Settlements"
+          threads={mineThreads}
+          majorCount={mineMajorCount}
+          emptyText="No news about your settlements yet."
+          nameById={nameById}
+        />
 
-        <div style={{ minWidth: 0 }}>
-          <SectionHeader
-            icon={RadioTower}
-            title="Realm Notables"
-            count={summary.notables.length}
-          />
-          {notableGroups.length === 0 ? (
-            <div style={{
-              border: `1px dashed ${BORDER}`,
-              borderRadius: 8,
-              padding: 16,
-              color: MUTED,
-              fontFamily: sans,
-              fontSize: FS.sm,
-              background: CARD_ALT,
-            }}>
-              No realm notables yet.
-            </div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {notableGroups.map((group, index) => (
-                <details key={group.tick} open={index === 0} style={{
-                  border: `1px solid ${BORDER2}`,
-                  borderRadius: 8,
-                  background: CARD,
-                  overflow: 'hidden',
-                }}>
-                  <summary style={{
-                    cursor: 'pointer',
-                    padding: '8px 10px',
-                    color: SECOND,
-                    fontFamily: sans,
-                    fontSize: FS.xs,
-                    fontWeight: 900,
-                    background: CARD_ALT,
-                  }}>
-                    Tick {group.tick} · {group.entries.length} notable update{group.entries.length === 1 ? '' : 's'}
-                  </summary>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
-                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} compact nameById={nameById} />)}
-                  </div>
-                </details>
-              ))}
-            </div>
-          )}
-        </div>
+        <ThreadColumn
+          icon={RadioTower}
+          title="Elsewhere in the Realm"
+          threads={elsewhereThreads}
+          majorCount={elsewhereMajorCount}
+          emptyText="No news elsewhere in the realm yet."
+          nameById={nameById}
+        />
       </div>
     </section>
   );

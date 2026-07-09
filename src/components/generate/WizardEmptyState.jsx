@@ -76,7 +76,17 @@ export function WizardEmptyState({
       {!showModePicker && authTier === 'anon' && (
         <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
           Want full control?{' '}
-          <Button variant="ghost" size="sm" onClick={onSignIn} style={{ display: 'inline-flex', textDecoration: 'underline' }}>
+          {/* P99 mobile pointer-target floor: the sm ghost button is 28px tall.
+              Grow the TAP target to the 44px floor with vertical padding, then
+              pull it back with equal negative margin so the inline text line
+              stays exactly where it was (transparent ghost bg → zero visual
+              regression; only the hit area grows). */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onSignIn}
+            style={{ display: 'inline-flex', textDecoration: 'underline', minHeight: 44, paddingTop: 10, paddingBottom: 10, marginTop: -8, marginBottom: -8 }}
+          >
             Sign in (free)
           </Button>
           {' '}to unlock Basic &amp; Advanced generation.

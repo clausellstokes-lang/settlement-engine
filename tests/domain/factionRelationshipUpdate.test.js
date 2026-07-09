@@ -13,6 +13,7 @@ import {
   supportedArchetypes,
   factionIdFromName,
 } from '../../src/domain/factionRelationshipUpdate.js';
+import { supportedConditionArchetypes } from '../../src/domain/activeConditions.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 // ── Sample settlements ──────────────────────────────────────────────────
@@ -327,6 +328,51 @@ describe('supportedArchetypes()', () => {
     expect(list).toContain('food_anchor_lost');
     expect(list).toContain('dominant_npc_removed');
     expect(list).toContain('siege_lifted');
+  });
+});
+
+// ── Closed-set coverage pin: the documented 1:1 claim ──────────────────
+// activeConditions.js:35 promises "condition archetypes map 1:1 to delta
+// templates." Before E4 this was a 6-of-30 claim: 24 condition archetypes
+// advanced time with NO faction narrative. This pin machine-checks the 1:1
+// so the two vocabularies can never silently drift apart again — a new
+// condition archetype without a faction template (or vice versa) fails here.
+describe('faction-impact ↔ condition archetype coverage (closed set)', () => {
+  it('every condition archetype has a faction-impact template', () => {
+    const impactSet = new Set(supportedArchetypes());
+    const missing = supportedConditionArchetypes().filter(a => !impactSet.has(a));
+    expect(missing, `condition archetypes with no faction template: ${missing.join(', ')}`).toEqual([]);
+  });
+
+  it('every faction-impact archetype is a real condition archetype (no orphans)', () => {
+    const conditionSet = new Set(supportedConditionArchetypes());
+    const orphans = supportedArchetypes().filter(a => !conditionSet.has(a));
+    expect(orphans, `faction templates with no condition archetype: ${orphans.join(', ')}`).toEqual([]);
+  });
+
+  it('the two vocabularies are exactly 1:1 (all 30 archetypes)', () => {
+    const impacts = [...supportedArchetypes()].sort();
+    const conditions = [...supportedConditionArchetypes()].sort();
+    expect(impacts).toEqual(conditions);
+    expect(impacts).toHaveLength(30);
+  });
+
+  it('each authored archetype produces at least one delta against a full roster', () => {
+    for (const archetype of supportedConditionArchetypes()) {
+      // dominant_npc_removed routes through targetNpc, not the roster loop.
+      if (archetype === 'dominant_npc_removed') continue;
+      const updates = recalculateFactionRelationships(
+        multiFactionSettlement(),
+        { type: `CONDITION_TICK_${archetype.toUpperCase()}` },
+        { archetype },
+      );
+      expect(updates.length, `${archetype} produced no faction deltas`).toBeGreaterThan(0);
+      // Magnitudes stay in the documented moderate band (3–10 per delta).
+      for (const u of updates) {
+        expect(Math.abs(u.delta), `${archetype}/${u.field} magnitude ${u.delta}`).toBeGreaterThanOrEqual(2);
+        expect(Math.abs(u.delta), `${archetype}/${u.field} magnitude ${u.delta}`).toBeLessThanOrEqual(10);
+      }
+    }
   });
 });
 

@@ -470,8 +470,21 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
     const economicRole = resourceEconomicRole(settlement, resource);
     const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
-    const effectivePressure = clamp01(pressureScore + tradeLoad);
-    if (state !== 'depleted' && (effectivePressure >= 0.64 || rank >= tierRank('city'))) {
+    // CADENCE DAMPING (E4-2b): a larger settlement genuinely consumes local
+    // resources faster — but that has to be a BOUNDED PRESSURE TERM, not an
+    // unconditional trigger. The old gate `effectivePressure >= 0.64 || rank >=
+    // tierRank('city')` OR-bypassed the threshold, so every calm city/metropolis
+    // rolled depletion for EVERY resource EVERY tick regardless of real demand —
+    // and because exhaustibles (iron, stone, gems, salt) return canRecover:false,
+    // a peaceful city one-way ratcheted them to PERMANENT depletion on a long
+    // campaign. Fold tier in as a small, capped additive extraction load so
+    // depletion tracks ACTUAL pressure (export load, food/trade/conflict stress):
+    // a calm city now sits below the gate; only a city under genuine demand
+    // crosses it. Tier still shows up in severity below, so a city that does
+    // cross depletes harder than a village at the same pressure.
+    const tierLoad = Math.min(0.18, Math.max(0, rank - tierRank('town')) * 0.06);
+    const effectivePressure = clamp01(pressureScore + tradeLoad + tierLoad);
+    if (state !== 'depleted' && effectivePressure >= 0.64) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({
         id: `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
@@ -495,11 +508,24 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         conflictTags: [`resource:${item.id}:${resource}`],
       });
     } else if (state === 'depleted' && ((pressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
+      // CADENCE DAMPING (E4-2b): exhaustibles (iron/stone/gem/salt/clay and
+      // strategic resources) return canRecover:false from the taxonomy — once
+      // depleted they could never come back, so a calm settlement's resources
+      // only ever ratcheted down. A SUSTAINED CALM (very low pressure) now opens
+      // a slow, event-gated recovery for them: prospecting reopens seams,
+      // substitution and trade backfill demand. It is damped (low probability)
+      // and bounded (quiet only) — calm becomes gradual recovery, not permanent
+      // decay — while a resource under any real pressure still cannot regrow.
+      const quietRecovery = pressureScore <= 0.2;
       const recovery = canRecoverResource(resource, /** @type {any} */ (settlement), /** @type {any} */ ({
         demotion: previousDrift?.direction === 'demotion',
         pressureScore,
+        quietRecovery,
       }));
       if (!recovery.canRecover) continue;
+      // Exhaustible/magical recovery is deliberately slow — a fraction of the
+      // renewable rate. It represents years of prospecting, not a season's regrowth.
+      const slow = recovery.taxonomy.recoveryMode === 'manual' || recovery.taxonomy.recoveryMode === 'requires_high_magic';
       const severity = clamp01((1 - pressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
       out.push({
         id: `candidate.resource.recover.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
@@ -509,7 +535,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         ruleFamily: 'resource',
         targetSaveId: item.id,
         severity,
-        probability: clamp01(0.08 + severity * 0.34),
+        probability: clamp01((slow ? 0.02 : 0.08) + severity * (slow ? 0.1 : 0.34)),
         applyMode: 'auto',
         headline: `${resource.replace(/_/g, ' ')} may recover`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,

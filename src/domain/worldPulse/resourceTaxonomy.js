@@ -110,7 +110,7 @@ export function classifyResource(resource) {
 /**
  * @param {unknown} resource
  * @param {MagicSettlement} [settlement]
- * @param {{ forceRecovery?: boolean, magicRecovery?: boolean }} [context]
+ * @param {{ forceRecovery?: boolean, magicRecovery?: boolean, quietRecovery?: boolean }} [context]
  */
 export function canRecoverResource(resource, settlement, context = {}) {
   const taxonomy = classifyResource(resource);
@@ -126,6 +126,19 @@ export function canRecoverResource(resource, settlement, context = {}) {
       reason: canRecover
         ? 'High magic can re-stabilize this magical resource.'
         : 'Magical resource recovery requires high or pervasive magic.',
+    };
+  }
+  // E4-2b: exhaustible / strategic resources ('manual' recoveryMode) have no
+  // natural regrowth — but a sustained calm (quietRecovery) lets prospecting
+  // reopen seams and trade substitution slowly restore access. This is the
+  // bounded, event-gated path that keeps a peaceful settlement's exhaustibles
+  // from ratcheting to permanent depletion; the caller damps its probability
+  // so it stays slow. A resource under real pressure never reaches here.
+  if (context.quietRecovery) {
+    return {
+      canRecover: true,
+      taxonomy,
+      reason: 'A long quiet spell lets prospecting, reopened seams, or trade substitution slowly restore this exhaustible resource.',
     };
   }
   return {

@@ -629,5 +629,108 @@ export function summarizeWizardNews(feed = {}) {
   }
 
   byTick.sort((a, b) => b.tick - a.tick);
-  return { feed: current, major, notables, byTick };
+  return { feed: current, major, notables, byTick, threads: deriveNewsThreads(current.entries) };
+}
+
+// ── Arc threading ───────────────────────────────────────────────────────────
+// A DM reads news as STORIES, not isolated ticks: an impact that queues, matures
+// (ready), takes hold (applied), then resolves is ONE arc; a recurring pressure
+// of the same kind on the same place is one escalating arc. Threading collapses
+// each arc into a single entry with its progression, so a slow-burning story
+// (or a damped-but-repeating world-pulse beat) reads as one thread instead of a
+// wall of near-duplicates. Determinism is preserved: arcs order by significance,
+// then tick, then score, then a codepoint tiebreak on the stable arc id.
+
+/**
+ * Stable arc identity for an entry. A regional impact's lifecycle
+ * (queued → ready → applied → resolved) threads on its impact id; anything else
+ * threads by (substantive type × primary settlement) so the same kind of
+ * pressure recurring on the same place is recognised as one continuing arc.
+ * @param {WizardNewsEntry} entry
+ * @returns {string}
+ */
+function arcIdForEntry(entry) {
+  if (Array.isArray(entry.impactIds) && entry.impactIds.length) {
+    return `impact:${entry.impactIds[0]}`;
+  }
+  const place = (Array.isArray(entry.settlementIds) && entry.settlementIds[0]) || 'realm';
+  const kind = entry.impactKind || entry.kind || 'update';
+  return `arc:${kind}:${place}`;
+}
+
+/**
+ * @param {string} significance
+ * @returns {number}
+ */
+function significanceRank(significance) {
+  return significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR ? 1 : 0;
+}
+
+/**
+ * A threaded arc.
+ * @typedef {Object} WizardNewsThread
+ * @property {string} arcId
+ * @property {WizardNewsEntry[]} entries   chronological (oldest → newest); each carries entry.thread
+ * @property {WizardNewsEntry} head        the latest stage (what the panel renders collapsed)
+ * @property {number} size
+ * @property {string} significance         MAJOR if any stage is major
+ * @property {number} tick                 head tick (for ordering)
+ * @property {number} score                max score across stages
+ * @property {string[]} settlementIds      union across stages
+ */
+
+/**
+ * Group feed entries into arcs. Stamps each entry (on a copy) with
+ *   entry.thread = { arcId, stage, priorEntryIds }
+ * and returns the arcs newest/most-significant first. Pure; deterministic.
+ * @param {WizardNewsEntry[]} entries
+ * @returns {WizardNewsThread[]}
+ */
+export function deriveNewsThreads(entries = []) {
+  /** @type {Map<string, WizardNewsEntry[]>} */
+  const byArc = new Map();
+  for (const entry of entries || []) {
+    if (!entry?.id) continue;
+    const arcId = arcIdForEntry(entry);
+    const bucket = byArc.get(arcId);
+    if (bucket) bucket.push(entry);
+    else byArc.set(arcId, [entry]);
+  }
+
+  /** @type {WizardNewsThread[]} */
+  const threads = [];
+  for (const [arcId, arcEntries] of byArc.entries()) {
+    // Chronological progression: oldest → newest. Codepoint tiebreak keeps the
+    // stage order deterministic when two stages land on the same tick.
+    const chronological = arcEntries.slice().sort((/** @type {WizardNewsEntry} */ a, /** @type {WizardNewsEntry} */ b) =>
+      (a.tick - b.tick) || (a.score - b.score) || compareCodepoint(a.id, b.id));
+
+    /** @type {string[]} */
+    const priorEntryIds = [];
+    const stamped = chronological.map((/** @type {WizardNewsEntry} */ entry, /** @type {number} */ index) => {
+      const thread = { arcId, stage: index + 1, priorEntryIds: [...priorEntryIds] };
+      priorEntryIds.push(entry.id);
+      return { ...entry, thread };
+    });
+
+    const head = stamped[stamped.length - 1];
+    threads.push({
+      arcId,
+      entries: stamped,
+      head,
+      size: stamped.length,
+      significance: stamped.some(e => e.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR)
+        ? WIZARD_NEWS_SIGNIFICANCE.MAJOR
+        : WIZARD_NEWS_SIGNIFICANCE.NOTABLE,
+      tick: head.tick,
+      score: stamped.reduce((max, e) => Math.max(max, e.score || 0), 0),
+      settlementIds: [...new Set(stamped.flatMap(e => e.settlementIds || []))],
+    });
+  }
+
+  return threads.sort((a, b) =>
+    (significanceRank(b.significance) - significanceRank(a.significance))
+    || (b.tick - a.tick)
+    || (b.score - a.score)
+    || compareCodepoint(a.arcId, b.arcId));
 }
