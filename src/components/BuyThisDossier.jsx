@@ -47,10 +47,12 @@ export default function BuyThisDossier({ settlement }) {
     setBusy(true); setError(null);
     try {
       const checkoutToken = createDossierCheckoutToken();
-      if (!stashPendingDossier(settlement, checkoutToken)) {
-        throw new Error('This browser cannot safely retain the dossier through checkout. Enable local storage and try again.');
-      }
-      await startCheckout('single_dossier', { checkoutToken });
+      // Persist the settlement server-side (via startCheckout → create-checkout,
+      // findings F21/F23) AND keep a local stash as a best-effort fallback. The
+      // server copy is now the durable source of truth, so a localStorage
+      // failure (e.g. private mode) no longer blocks the purchase.
+      stashPendingDossier(settlement, checkoutToken);
+      await startCheckout('single_dossier', { checkoutToken, settlement });
       // startCheckout redirects on success, so we only reach this
       // line on failure.
     } catch (e) {

@@ -41,15 +41,15 @@ function makeStub(opts: StubOpts = {}) {
   const calls: {
     rpc: Array<{ fn: string; args: unknown }>;
     authUpdates: unknown[];
-    profileUpdates: Array<{ vals: Record<string, unknown>; col: string; val: string }>;
+    profileUpdates: Array<{ table: string; vals: Record<string, unknown>; col: string; val: string }>;
   } = { rpc: [], authUpdates: [], profileUpdates: [] };
   const client = {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
-    from: (_table: string) => {
+    from: (table: string) => {
       let col = '', val = '';
       const chain: Record<string, unknown> = {
         update: (vals: Record<string, unknown>) => ({
-          eq: (c: string, v: string) => { calls.profileUpdates.push({ vals, col: c, val: v }); return Promise.resolve({ error: null }); },
+          eq: (c: string, v: string) => { calls.profileUpdates.push({ table, vals, col: c, val: v }); return Promise.resolve({ error: null }); },
         }),
         select: () => chain,
         eq: (c: string, v: string) => { col = c; val = v; return chain; },
@@ -148,4 +148,52 @@ Deno.test('subscription.deleted for a BOUND non-founder downgrades exactly that 
   assertEquals((dg!.args as { target_user: string }).target_user, 'u9');
   // The webhook must NEVER write a stripe_customer_id binding outside checkout.
   assertEquals(stub.calls.profileUpdates.some((u) => 'stripe_customer_id' in u.vals), false);
+});
+
+// ── F21/F23: single_dossier binds the paid session to the persisted dossier ──
+Deno.test('single_dossier checkout backfills dossier_purchases.stripe_session_id from the checkout_token', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent(
+    { product: 'single_dossier', checkout_token: 'tok_abcdefabcdefabcdefabcdef', supabase_user_id: '' },
+    { id: 'cs_paid_1' },
+  );
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const bind = stub.calls.profileUpdates.find(
+    (u) => u.table === 'dossier_purchases' && 'stripe_session_id' in u.vals,
+  );
+  assertEquals(bind !== undefined, true);
+  assertEquals(bind!.col, 'checkout_token');
+  assertEquals(bind!.val, 'tok_abcdefabcdefabcdefabcdef');
+  assertEquals((bind!.vals as { stripe_session_id: string }).stripe_session_id, 'cs_paid_1');
+  // No account mutations for an anonymous one-shot.
+  assertEquals(stub.calls.authUpdates.length, 0);
+});
+
+Deno.test('single_dossier session bind is idempotent on replay (same session id, no throw)', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent(
+    { product: 'single_dossier', checkout_token: 'tok_abcdefabcdefabcdefabcdef', supabase_user_id: '' },
+    { id: 'cs_paid_2' },
+  );
+  const signed = { 'stripe-signature': await sign(body, SECRET) };
+  const r1 = await handleStripeWebhook(req(body, signed), stub);
+  const r2 = await handleStripeWebhook(req(body, signed), stub);
+  assertEquals(r1.status, 200);
+  assertEquals(r2.status, 200);
+  const binds = stub.calls.profileUpdates.filter(
+    (u) => u.table === 'dossier_purchases' && 'stripe_session_id' in u.vals,
+  );
+  // Both deliveries write the SAME session id to the SAME token row — a no-op
+  // on the second pass (idempotent by same value).
+  assertEquals(binds.length, 2);
+  assertEquals(binds.every((b) => (b.vals as { stripe_session_id: string }).stripe_session_id === 'cs_paid_2'), true);
+});
+
+Deno.test('single_dossier without a checkout_token is a no-op bind (not an error)', async () => {
+  const stub = makeStub();
+  const body = checkoutEvent({ product: 'single_dossier', supabase_user_id: '' }, { id: 'cs_paid_3' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.profileUpdates.some((u) => u.table === 'dossier_purchases'), false);
 });

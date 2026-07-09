@@ -275,10 +275,22 @@ export async function handleStripeWebhook(
         });
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
-        // One-shot purchase, no account required. Nothing to mutate on
-        // user state — the customer's receipt + the success-page redirect
-        // (handled client-side via session_id query param) deliver the PDF.
-        // We log it so audit can match against Stripe payments.
+        // One-shot purchase, no account required. Bind the paid Stripe session
+        // to the server-persisted dossier (findings F21/F23) so the settlement
+        // is recoverable server-side even if the buyer's browser never returns.
+        // Idempotent: re-processing the same event writes the same session id to
+        // the same token row (a no-op). A missing row (persistence hiccuped at
+        // checkout) is not an error — the client stash is the fallback.
+        const token = session.metadata?.checkout_token;
+        if (token) {
+          const { error: bindErr } = await supabase
+            .from('dossier_purchases')
+            .update({ stripe_session_id: session.id })
+            .eq('checkout_token', token);
+          if (bindErr) {
+            console.warn(`[stripe-webhook] dossier session bind failed for token: ${bindErr.message}`);
+          }
+        }
         // PII: do NOT log customer_email — the session id reconciles to the email
         // inside Stripe's own access controls. (A+ P0.2)
         console.log(`single_dossier purchased: session=${session.id}`);

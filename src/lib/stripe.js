@@ -66,7 +66,9 @@ const PRODUCTS = new Proxy({}, {
 /**
  * Create a Stripe Checkout session and redirect.
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string }} options
+ * @param {{ checkoutToken?: string, settlement?: object }} options — For
+ *        single_dossier, `settlement` is persisted server-side before payment so
+ *        the paid dossier survives a lost/overwritten local stash (F21/F23).
  */
 export async function startCheckout(product, options = {}) {
   if (!isConfigured) {
@@ -94,11 +96,22 @@ export async function startCheckout(product, options = {}) {
     throw new Error('You must be signed in to purchase');
   }
 
-  const { data, error } = await supabase.functions.invoke('create-checkout', {
-    body: { product, checkoutToken },
-  });
+  const body = { product, checkoutToken };
+  // Only single_dossier carries a settlement to persist; other products bind to
+  // the account server-side and never ship the artifact through checkout.
+  if (isAnonymousProduct && options.settlement) {
+    body.settlement = options.settlement;
+  }
 
-  if (error) throw new Error(error.message || 'Checkout failed');
+  const { data, error } = await supabase.functions.invoke('create-checkout', { body });
+
+  if (error) {
+    // Surface the server's specific message (e.g. the 413 size-guard rejection)
+    // instead of the generic "non-2xx" wrapper, so the buyer learns WHY before
+    // paying rather than after.
+    const classified = await classifyInvokeError(error, 'Checkout failed');
+    throw classified;
+  }
   if (!data?.url) throw new Error('No checkout URL returned');
 
   // Redirect to Stripe
@@ -124,13 +137,20 @@ export async function startCustomerPortal() {
 
 /**
  * Check URL params for post-checkout status (called on app mount).
- * Returns { status, product, sessionId } or null.
+ * Returns { status, product, sessionId, dossierToken } or null.
+ *
+ * `dossierToken` (the `dt` param) is present only for a single_dossier return —
+ * create-checkout appends it to the success_url so the browser recovers the
+ * EXACT one-time token for this purchase (Stripe only fills in session_id). That
+ * lets the success page verify precisely its own paid session even when several
+ * dossiers were bought in the same browser (F21).
  */
 export function checkCheckoutResult() {
   const params = new URLSearchParams(window.location.search);
   const checkout = params.get('checkout');
   const product  = params.get('product');
   const sessionId = params.get('session_id');
+  const dossierToken = params.get('dt');
 
   if (!checkout) return null;
 
@@ -139,12 +159,45 @@ export function checkCheckoutResult() {
   url.searchParams.delete('checkout');
   url.searchParams.delete('product');
   url.searchParams.delete('session_id');
+  url.searchParams.delete('dt');
   window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
 
-  return { status: checkout, product, sessionId };
+  return { status: checkout, product, sessionId, dossierToken };
 }
 
-/** Verify an anonymous single-dossier payment before releasing the PDF. */
+/**
+ * Normalize a supabase.functions.invoke() error into an Error carrying a
+ * `transient` flag and `status`, so callers can offer Retry (429 / 5xx / network)
+ * vs. a terminal "contact support" path (4xx). Reads the server's JSON body via
+ * the FunctionsHttpError.context Response when available.
+ */
+export async function classifyInvokeError(error, fallbackMessage = 'Request failed') {
+  let status = 0;
+  let bodyMessage = null;
+  try {
+    const ctx = error?.context;
+    if (ctx && typeof ctx.status === 'number') status = ctx.status;
+    if (ctx && typeof ctx.clone === 'function') {
+      const parsed = await ctx.clone().json().catch(() => null);
+      bodyMessage = parsed?.error || null;
+    }
+  } catch {
+    // Non-HTTP error (network / relay) — leave status 0.
+  }
+  // status 0 => network/relay failure (transient). 429 and 5xx are transient.
+  const transient = status === 0 || status === 429 || (status >= 500 && status <= 599);
+  const err = new Error(bodyMessage || error?.message || fallbackMessage);
+  err.transient = transient;
+  err.status = status;
+  return err;
+}
+
+/**
+ * Verify an anonymous single-dossier payment before releasing the PDF.
+ * Returns { verified, sessionId, settlement } — `settlement` is the
+ * server-persisted dossier (or null → caller falls back to the local stash).
+ * Throws an Error with `.transient` set for retryable failures (429/5xx/network).
+ */
 export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
   if (!isConfigured) throw new Error('Payments are not configured');
   if (typeof sessionId !== 'string' || !sessionId.startsWith('cs_')) {
@@ -157,9 +210,46 @@ export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
   const { data, error } = await supabase.functions.invoke('verify-single-dossier', {
     body: { sessionId, checkoutToken },
   });
-  if (error) throw new Error(error.message || 'Purchase verification failed');
-  if (!data?.verified) throw new Error(data?.error || 'Purchase could not be verified');
+  if (error) throw await classifyInvokeError(error, 'Purchase verification failed');
+  if (!data?.verified) {
+    const err = new Error(data?.error || 'Purchase could not be verified');
+    err.transient = false;
+    throw err;
+  }
   return data;
+}
+
+/**
+ * Verify an account-bound checkout session (credits / premium / founder) for the
+ * signed-in caller. Returns { verified, product, status }. Throws with
+ * `.transient` set for retryable failures. Used by the post-checkout
+ * reconciliation flow (F23) to confirm the session server-side before polling
+ * the entitlement.
+ */
+export async function verifyCheckoutSession(sessionId) {
+  if (!isConfigured) throw new Error('Payments are not configured');
+  if (typeof sessionId !== 'string' || !sessionId.startsWith('cs_')) {
+    throw new Error('Missing checkout session');
+  }
+  const { data, error } = await supabase.functions.invoke('verify-checkout-session', {
+    body: { sessionId },
+  });
+  if (error) throw await classifyInvokeError(error, 'Purchase verification failed');
+  return data; // { verified, product, status }
+}
+
+/** Read the signed-in user's current profile tier fresh from the server. */
+export async function fetchProfileTier() {
+  if (!isConfigured) return 'anon';
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return 'anon';
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('tier')
+    .eq('id', user.id)
+    .single();
+  if (error || !data) return 'free';
+  return data.tier || 'free';
 }
 
 /**

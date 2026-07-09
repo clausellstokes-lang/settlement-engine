@@ -126,34 +126,90 @@ export default function App() {
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
 
-  // Initialize auth session on mount + check post-checkout result + load credits
+  // Initialize auth session on mount + reconcile post-checkout result + load credits.
+  //
+  // F23: we NEVER declare success from the ?checkout=success URL alone (spoofable
+  // + races the webhook). For account-bound products we verify the session
+  // server-side, then poll the real entitlement (credit balance / profile tier)
+  // until it lands — toasting success only then, showing a persistent
+  // "processing" notice on timeout, and a terminal notice on a verified failure.
   useEffect(() => {
     initAuth();
     initOnboarding();
-    import('./lib/stripe.js').then(async ({ checkCheckoutResult, fetchCreditBalance }) => {
-      // Handle Stripe checkout return
+    let cancelled = false;
+    import('./lib/stripe.js').then(async (stripeLib) => {
+      const { checkCheckoutResult, fetchCreditBalance } = stripeLib;
       const result = checkCheckoutResult();
-      if (result?.status === 'success') {
+
+      // Prime the balance on every mount (and capture it as the reconcile baseline).
+      const primed = await fetchCreditBalance().catch(() => 0);
+      if (!cancelled) setCreditBalance(primed);
+
+      if (!result) return;
+
+      if (result.status === 'success') {
         if (result.product === 'single_dossier') {
           const { attachPendingDossierCheckout } = await import('./lib/pendingDossier.js');
-          attachPendingDossierCheckout(result.sessionId);
-          // The single-dossier flow needs a full landing page (PDF
-          // download + sign-up upsell), not just a toast. Replace so the
-          // Stripe-return URL isn't a Back-button trap.
-          navigate('dossier-success', { replace: true });
-        } else {
+          // Bind Stripe's session to THIS purchase's token (the dt param) so
+          // concurrent purchases never cross-contaminate (F21). Forward
+          // session_id + dt to the landing page so it can verify precisely its
+          // own paid session — even on a different device where no stash exists.
+          attachPendingDossierCheckout(result.sessionId, result.dossierToken || null);
+          const search = [
+            result.sessionId ? `session_id=${encodeURIComponent(result.sessionId)}` : '',
+            result.dossierToken ? `dt=${encodeURIComponent(result.dossierToken)}` : '',
+          ].filter(Boolean).join('&');
+          navigate('dossier-success', { replace: true, search: search ? `?${search}` : '' });
+          return;
+        }
+
+        // Account-bound product: reconcile the entitlement instead of the URL.
+        if (!cancelled) setCheckoutToast({ text: 'Confirming your purchase…', persistent: true });
+        const { reconcileCheckout, OUTCOME } = await import('./lib/checkoutReconcile.js');
+        const outcome = await reconcileCheckout(result, {
+          verifySession: (sid) => stripeLib.verifyCheckoutSession(sid),
+          fetchCreditBalance: stripeLib.fetchCreditBalance,
+          fetchTier: stripeLib.fetchProfileTier,
+          baselineBalance: primed,
+          onCreditBalance: (bal) => { if (!cancelled) setCreditBalance(bal); },
+          onEntitlement: () => initAuth(),   // land the fresh tier/credits in the store
+        });
+        if (cancelled) return;
+        if (outcome.outcome === OUTCOME.SUCCESS) {
           const msg = result.product === 'premium'
             ? 'Cartographer activated!'
             : result.product === 'founder_lifetime'
               ? 'Welcome aboard, Founder!'
               : 'Credits added!';
-          setCheckoutToast(msg);
-          setTimeout(() => setCheckoutToast(null), 4000);
+          setCheckoutToast({ text: msg, persistent: false });
+          setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
+        } else if (outcome.outcome === OUTCOME.PROCESSING) {
+          const ref = (result.sessionId || '').slice(0, 12);
+          setCheckoutToast({
+            text: `Payment received — your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
+            persistent: true,
+          });
+        } else {
+          setCheckoutToast({
+            text: 'We couldn’t confirm this purchase. If you were charged, contact support with your Stripe receipt.',
+            persistent: true,
+          });
+        }
+      } else if (result.status === 'cancelled') {
+        // Restore-on-cancel (F21): the buyer bailed out of Stripe. Their in-flight
+        // settlement lived only in the stash across the redirect; if the editor
+        // is empty, put it back so the artifact they were about to buy isn't lost.
+        const { readRestorablePendingDossier } = await import('./lib/pendingDossier.js');
+        const restorable = readRestorablePendingDossier();
+        if (!cancelled && restorable?.settlement && !useStore.getState().settlement) {
+          useStore.getState().setSettlement(restorable.settlement);
+          navigate('generate', { replace: true });
+          setCheckoutToast({ text: 'Restored the dossier you were about to buy.', persistent: false });
+          setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 5000);
         }
       }
-      // Always fetch credit balance on mount
-      fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
+    return () => { cancelled = true; };
   }, [initAuth, initOnboarding, setCreditBalance]);
 
   useEffect(() => {
@@ -170,6 +226,37 @@ export default function App() {
     import('./lib/stripe.js').then(({ fetchCreditBalance }) =>
       fetchCreditBalance().then(bal => setCreditBalance(bal)));
   }, [authLoading, authUserId, setCreditBalance]);
+
+  // F23: refetch credits + tier on tab focus / visibility (small, throttled to
+  // once per 15s). If a purchase's webhook grant landed while the tab was
+  // backgrounded, this surfaces it without a manual reload — and upgrades the
+  // store tier the moment premium actually flips server-side.
+  useEffect(() => {
+    if (authLoading) return;
+    let last = 0;
+    const refetch = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'hidden') return;
+      const now = Date.now();
+      if (now - last < 15000) return;
+      last = now;
+      import('./lib/stripe.js').then(async ({ fetchCreditBalance, fetchProfileTier }) => {
+        try { setCreditBalance(await fetchCreditBalance()); } catch { /* ignore */ }
+        // Only chase a tier flip for non-premium accounts (elevated/premium have
+        // nothing to gain, anon has no profile).
+        if (authTier !== 'anon' && authTier !== 'premium') {
+          try {
+            if ((await fetchProfileTier()) === 'premium') initAuth();
+          } catch { /* ignore */ }
+        }
+      }).catch(() => {});
+    };
+    window.addEventListener('focus', refetch);
+    document.addEventListener('visibilitychange', refetch);
+    return () => {
+      window.removeEventListener('focus', refetch);
+      document.removeEventListener('visibilitychange', refetch);
+    };
+  }, [authLoading, authTier, setCreditBalance, initAuth]);
 
   // ── Auth guards ─────────────────────────────────────────────────────────
   // Gated routes redirect once the session has resolved. 'auth' views bounce
@@ -687,18 +774,40 @@ export default function App() {
         </Suspense>
       )}
 
-      {/* ── Checkout success toast ────────────────────────────── */}
+      {/* ── Checkout result notice ────────────────────────────────
+          F23: `checkoutToast` is { text, persistent }. A confirmed success is a
+          brief green auto-dismiss toast; a "still processing" / failed-to-confirm
+          notice is a PERSISTENT, dismissible amber banner (never a false green
+          success) so a lagging/failed webhook can't leave the user misinformed. */}
       {checkoutToast && (
         <div style={{
           position: 'fixed', top: SP.xl, left: '50%', transform: 'translateX(-50%)',
-          zIndex: 2000, padding: `${SP.md}px ${SP.xxl}px`,
-          background: 'linear-gradient(135deg, #2a7a2a, #4a8a4a)',
+          zIndex: 2000, padding: `${SP.md}px ${SP.xl}px`,
+          maxWidth: 'min(92vw, 520px)',
+          background: checkoutToast.persistent
+            ? 'linear-gradient(135deg, #7a5a1a, #9a7a2a)'
+            : 'linear-gradient(135deg, #2a7a2a, #4a8a4a)',
           color: swatch.white, borderRadius: R.xl,
           fontSize: FS.md, fontWeight: 700, fontFamily: sans,
           boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
           animation: 'fadeIn 0.3s ease-out',
+          display: 'flex', alignItems: 'center', gap: SP.md,
         }}>
-          {checkoutToast}
+          <span>{checkoutToast.text}</span>
+          {checkoutToast.persistent && (
+            <button
+              type="button"
+              onClick={() => setCheckoutToast(null)}
+              aria-label="Dismiss"
+              style={{
+                background: 'transparent', border: 'none', color: swatch.white,
+                fontSize: FS.lg, fontWeight: 700, cursor: 'pointer', lineHeight: 1,
+                padding: 0, marginLeft: 'auto',
+              }}
+            >
+              ×
+            </button>
+          )}
         </div>
       )}
 

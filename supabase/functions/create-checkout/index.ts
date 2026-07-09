@@ -13,6 +13,13 @@
  * legacy SKUs stay listed so refund and replay links keep resolving
  * after the catalog rotates.
  *
+ * Single-dossier durability (findings F21/F23): before creating the Stripe
+ * session for `single_dossier`, the settlement in the request body is persisted
+ * server-side in `dossier_purchases` keyed by the client's one-time
+ * checkout_token. That makes the paid dossier recoverable even if the buyer's
+ * localStorage stash is lost, overwritten by a second Buy click, or on another
+ * device. The stash is now a fallback, not the source of truth.
+ *
  * Environment variables (set in Supabase dashboard):
  *   STRIPE_SECRET_KEY                 — Stripe secret key
  *   CLIENT_URL                        — Frontend origin (e.g. https://yourapp.com)
@@ -38,7 +45,23 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
+const defaultStripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
+
+// Service-role admin client (bypasses RLS). Used to look up the caller's Stripe
+// customer id and to persist the single-dossier settlement. Exposed as a
+// factory so tests can inject a recording stub via deps.adminClient.
+function adminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Upper bound on a persisted single-dossier settlement. A real settlement JSON
+// is a few tens of KB; 512KB is generous headroom while keeping the row (and any
+// abusive payload) bounded. Rejected pre-payment so the buyer sees the error
+// before Stripe collects a cent.
+const MAX_DOSSIER_BYTES = 512 * 1024;
 
 const PRICE_MAP: Record<string, string> = {
   // ── Active catalog ───────────────────────────────────────────────────────
@@ -95,8 +118,25 @@ function getCorsHeaders(req?: Request) {
   };
 }
 
-serve(async (req) => {
+function json(body: unknown, status: number, corsHeaders: Record<string, string>) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}
+
+/**
+ * Exported (not just inlined into serve) so the size guard + dossier-persistence
+ * behavior can be EXECUTION-tested: index.test.ts injects a recording supabase
+ * stub via `deps.adminClient` and a Stripe stub via `deps.stripe`. Production
+ * passes nothing, so behavior is identical to the previous inline handler.
+ */
+export async function handleCreateCheckout(
+  req: Request,
+  deps: { adminClient?: typeof adminClient; stripe?: Stripe } = {},
+): Promise<Response> {
   const corsHeaders = getCorsHeaders(req);
+  const stripe = deps.stripe ?? defaultStripe;
 
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -110,7 +150,8 @@ serve(async (req) => {
 
   try {
     // Parse request body first so we know whether the product requires auth.
-    const { product, checkoutToken } = await req.json();
+    // `settlement` is only meaningful for single_dossier (persisted below).
+    const { product, checkoutToken, settlement } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -125,6 +166,41 @@ serve(async (req) => {
       && (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128)
     ) {
       throw new Error('A valid dossier checkout token is required');
+    }
+
+    // ── Single-dossier: persist the settlement server-side BEFORE payment ────
+    // (findings F21/F23) so the paid dossier survives a lost/overwritten
+    // localStorage stash or a device switch. The size guard is a hard 413 the
+    // client surfaces PRE-payment; a transient DB error falls back to the client
+    // stash rather than blocking a buyer who is about to pay.
+    if (isAnonymousProduct && settlement !== undefined && settlement !== null) {
+      let byteSize: number;
+      try {
+        byteSize = new TextEncoder().encode(JSON.stringify(settlement)).length;
+      } catch {
+        return json({ error: 'The settlement could not be serialized for checkout.' }, 400, corsHeaders);
+      }
+      if (byteSize > MAX_DOSSIER_BYTES) {
+        return json(
+          { error: `This settlement is too large to purchase (${byteSize} bytes; limit ${MAX_DOSSIER_BYTES}). Trim it and try again.` },
+          413,
+          corsHeaders,
+        );
+      }
+      try {
+        const admin = (deps.adminClient ?? adminClient)();
+        const { error: upsertErr } = await admin
+          .from('dossier_purchases')
+          .upsert(
+            { checkout_token: checkoutToken, settlement, byte_size: byteSize },
+            { onConflict: 'checkout_token' },
+          );
+        if (upsertErr) {
+          console.warn('[create-checkout] dossier persist failed; client stash will be the fallback:', upsertErr.message);
+        }
+      } catch (e) {
+        console.warn('[create-checkout] dossier persist threw; client stash will be the fallback:', (e as Error)?.message ?? 'unknown');
+      }
     }
 
     const authHeader = req.headers.get('Authorization');
@@ -156,10 +232,7 @@ serve(async (req) => {
     let stripeCustomerId: string | null = null;
 
     if (user) {
-      const admin = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-      );
+      const admin = (deps.adminClient ?? adminClient)();
       const { data: profile } = await admin
         .from('profiles')
         .select('stripe_customer_id')
@@ -187,11 +260,19 @@ serve(async (req) => {
     // customer_email — Stripe collects it on the checkout page and
     // sends it back on session.completed via session.customer_details
     // and session.customer (which the webhook reads).
+    //
+    // single_dossier success_url also carries `dt=<checkout_token>` so the
+    // returning browser recovers the EXACT token for this purchase (the URL only
+    // gets session_id from Stripe). That closes F21(a): a second Buy click gets
+    // its own token/session/row, and each return page verifies precisely its own.
     const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
+    const successUrl = isAnonymousProduct
+      ? `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}&dt=${encodeURIComponent(checkoutToken)}`
+      : `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}`;
     const sessionParams: Record<string, unknown> = {
       mode,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}`,
+      success_url: successUrl,
       cancel_url:  `${clientUrl}?checkout=cancelled`,
       metadata: {
         supabase_user_id: user?.id ?? '',
@@ -219,4 +300,11 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Bind the HTTP listener only when run as the entrypoint. Guarding on
+// import.meta.main keeps the Deno test suite (which imports this module for its
+// exported handler) from starting a second server on the shared port.
+if (import.meta.main) {
+  serve((req) => handleCreateCheckout(req));
+}

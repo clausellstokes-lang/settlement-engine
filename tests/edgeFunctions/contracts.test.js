@@ -977,7 +977,10 @@ describe('Tier 3.3 — every function uses Deno serve + ESM imports', () => {
   it('every function calls serve()', () => {
     for (const name of ALL_FUNCTIONS) {
       const src = readFunction(name);
-      expect(src.match(/^serve\s*\(/m), name).toBeTruthy();
+      // serve() may be top-level OR guarded behind `if (import.meta.main)` — the
+      // standard Deno idiom that lets a module export its handler for execution
+      // tests without binding the shared test port. Allow leading indentation.
+      expect(src.match(/^\s*serve\s*\(/m), name).toBeTruthy();
     }
   });
 });
@@ -1163,7 +1166,7 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
     // path is still mandatory for every NON-single_dossier product,
     // and supabase_user_id still comes from the server-verified JWT
     // for any product that does provide auth.
-    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product(?:\s*,\s*checkoutToken)?\s*\}\s*=\s*await\s*req\.json/);
+    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product(?:\s*,\s*checkoutToken)?(?:\s*,\s*settlement)?\s*\}\s*=\s*await\s*req\.json/);
     const authIdx = checkoutSrc.search(/getUser\s*\(/);
     expect(bodyIdx).toBeGreaterThan(0);
     expect(authIdx).toBeGreaterThan(0);
