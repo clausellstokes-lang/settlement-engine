@@ -95,13 +95,61 @@ import { wallClockMs } from './clock.js';
  * @property {Trace[]=} simulationTrace
  */
 
+// ── Receipts (Track K §C2) ──────────────────────────────────────────────────
+// One receipt type unifying the two vocabularies that predate it: the
+// generation-time Trace (here) and the eventLog / snapshot entries the store
+// carried loosely (Track K §C1). A Receipt is a DERIVED / EMITTED view — the
+// canonical stores (settlement.simulationTrace, the eventLog) stay untouched;
+// a Receipt is built on read, never persisted, so C2 moves no storage and no
+// golden. See docs/TRACK_K_DESIGN.md §C2 and tests/domain/receipt.test.js.
+
+/**
+ * The receipt SOURCE lanes — which mutation path emitted the receipt.
+ * @type {readonly ['generation','event','pulse','edit']}
+ */
+export const RECEIPT_SOURCES = /** @type {const} */ (['generation', 'event', 'pulse', 'edit']);
+
+/**
+ * The closed `kind` vocabulary. It IS trace.js's target-type set
+ * (ALLOWED_TARGET_TYPES) — every Receipt.kind, whatever its source, is one of
+ * these strings. Generation receipts carry the trace's own targetType; the
+ * store's event receipts use 'event' and its snapshot receipts use 'history'
+ * (both members). Pinned as a closed set by tests/domain/receipt.test.js: a
+ * receipt whose kind is not here fails conformance.
+ * @type {readonly string[]}
+ */
+export const RECEIPT_KINDS = /** @type {readonly string[]} */ (Object.freeze([
+  'institution', 'faction', 'npc', 'resource', 'stressor',
+  'service', 'supply_chain', 'threat', 'hook', 'event',
+  'condition', 'district', 'history',
+]));
+
+/**
+ * A unified causal receipt — Track K §C2. A stable id, the SOURCE lane that
+ * emitted it, a KIND drawn from the closed target-type vocabulary
+ * (RECEIPT_KINDS), and the SAME {@link TraceCause} / {@link TraceEffect} arrays
+ * a Trace already carries (reused verbatim — no remapping). `tick` is the
+ * world-pulse tick for 'pulse' receipts and null for every other source.
+ *
+ * @typedef {Object} Receipt
+ * @property {string} id       stable `${source}:${targetId}:${n}`
+ * @property {'generation'|'event'|'pulse'|'edit'} source
+ * @property {string} kind     one of RECEIPT_KINDS
+ * @property {TraceCause[]} causes    WHY this happened
+ * @property {TraceEffect[]} effects  WHAT it feeds
+ * @property {number|null} tick       pulse tick, else null
+ */
+
 // ── Dev-only shape validation ──────────────────────────────────────────────
 // Defensive enough to catch the most common authoring mistakes (forgot
 // targetId, mixed up step/result, passed a string where an array was
 // expected) without becoming a heavy validator. Disabled in prod via
 // the early return.
 
-const ALLOWED_TARGET_TYPES = new Set([
+// Exported so the Receipt conformance pin (tests/domain/receipt.test.js) can
+// assert RECEIPT_KINDS stays exactly this vocabulary — adding a target type
+// without adding the matching kind (or vice versa) fails the closed-set pin.
+export const ALLOWED_TARGET_TYPES = new Set([
   'institution', 'faction', 'npc', 'resource', 'stressor',
   'service', 'supply_chain', 'threat', 'hook', 'event',
   'condition', 'district', 'history',
@@ -312,4 +360,60 @@ export function summarizeTrace(trace) {
     causes: causeLines,
     downstreamEffects: downstreamLines,
   };
+}
+
+// ── Receipt builders (Track K §C2) ──────────────────────────────────────────
+// Pure derivations. Nothing here mutates or persists; a Receipt is a read-time
+// view over data that already lives on the settlement / eventLog.
+
+/**
+ * Low-level Receipt constructor. Composes the stable id (`${source}:${targetId}
+ * :${n}`) and normalizes the cause/effect/tick fields. Every higher-level
+ * builder — receiptFromTrace here, receiptFromEventLogEntry in
+ * events/mutate.js, the store's snapshot receipt — routes through this so the
+ * id format and defaults live in one place.
+ *
+ * @param {Object} args
+ * @param {'generation'|'event'|'pulse'|'edit'} args.source
+ * @param {string} args.kind          one of RECEIPT_KINDS
+ * @param {string} args.targetId      id segment (the affected entity / event)
+ * @param {number} [args.n]           ordinal disambiguator (default 0)
+ * @param {TraceCause[]} [args.causes]
+ * @param {TraceEffect[]} [args.effects]
+ * @param {number|null} [args.tick]
+ * @returns {Receipt}
+ */
+export function makeReceipt({ source, kind, targetId, n = 0, causes = [], effects = [], tick = null }) {
+  return {
+    id: `${source}:${targetId}:${n}`,
+    source,
+    kind,
+    causes: Array.isArray(causes) ? causes : [],
+    effects: Array.isArray(effects) ? effects : [],
+    tick: typeof tick === 'number' ? tick : null,
+  };
+}
+
+/**
+ * Derive a {@link Receipt} from a generation {@link Trace}. The trace's
+ * targetType IS the receipt kind (both are trace.js's closed vocabulary); its
+ * `causes` / `downstreamEffects` ARE the receipt's cause / effect arrays (same
+ * TraceCause / TraceEffect shape — reused verbatim). Generation is not
+ * tick-bound, so `tick` is null. Pure; the source trace is never mutated.
+ *
+ * @param {Trace | null | undefined} trace
+ * @param {number} [index]   position in the trace log — the receipt-id ordinal
+ * @returns {Receipt | null}
+ */
+export function receiptFromTrace(trace, index = 0) {
+  if (!trace || typeof trace !== 'object') return null;
+  return makeReceipt({
+    source: 'generation',
+    kind: trace.targetType,
+    targetId: trace.targetId,
+    n: index,
+    causes: trace.causes || [],
+    effects: trace.downstreamEffects || [],
+    tick: null,
+  });
 }

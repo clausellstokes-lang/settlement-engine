@@ -53,6 +53,8 @@ import {
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
+import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
+import { makeReceipt } from '../domain/trace.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
@@ -511,14 +513,20 @@ export const createSettlementSlice = (set, get) => ({
     }
     const persisted = Boolean(targetSaveId && persistedHistory);
     if (persisted) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
-    // Track K §C1 — ActionResult envelope. The immutable snapshot rides in
-    // `receipts` as-is (C2 tightens the Receipt type); its id is surfaced on
-    // `after.snapshotId` for callers that only need to reference it.
+    // Track K §C2 — ActionResult envelope. The immutable snapshot maps to an
+    // 'edit'-source Receipt (kind 'history': a checkpoint in the settlement's
+    // timeline); the snapshot id is also surfaced on `after.snapshotId` for
+    // callers that only need to reference it.
     const timeline = targetSaveId ? 'saved' : 'draft';
     return makeActionResult('recordSnapshot', {
       before: { targetSaveId: targetSaveId ?? null, timeline },
       after:  { snapshotId: snapshot.id, kind: snapshot.kind, label: snapshot.label, timeline },
-      receipts: [snapshot],
+      receipts: [makeReceipt({
+        source: 'edit',
+        kind: 'history',
+        targetId: snapshot.id,
+        causes: [{ source: 'edit', effect: snapshot.kind, reason: snapshot.label }],
+      })],
       persistenceOps: persisted
         ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: ['versionHistory'] }]
         : [],
@@ -1008,10 +1016,10 @@ export const createSettlementSlice = (set, get) => ({
       };
     });
     if (persist) persistSaveUpdate(id, persist);
-    // Track K §C1 — ActionResult envelope. `receipts` carries the
-    // DESTROY_SETTLEMENT eventLog entry this action appended to the save's log
-    // (C2 tightens the Receipt type). No current consumer reads the return, so
-    // both branches are full envelopes (ok:false when the save wasn't found).
+    // Track K §C2 — ActionResult envelope. `receipts` carries an 'event'
+    // Receipt derived from the DESTROY_SETTLEMENT eventLog entry this action
+    // appended to the save's log. No current consumer reads the return, so both
+    // branches are full envelopes (ok:false when the save wasn't found).
     if (!persist) {
       return makeActionResult('destroySavedSettlement', {
         ok: false,
@@ -1019,10 +1027,13 @@ export const createSettlementSlice = (set, get) => ({
       });
     }
     const destroyLog = persist.campaignState?.eventLog || [];
+    const destroyReceipt = destroyLog.length
+      ? receiptFromEventLogEntry(destroyLog[destroyLog.length - 1], destroyLog.length - 1)
+      : null;
     return makeActionResult('destroySavedSettlement', {
       before: { id: String(id), reason },
       after:  { id: String(id), status: 'destroyed', destroyedReason: reason },
-      receipts: destroyLog.length ? [destroyLog[destroyLog.length - 1]] : [],
+      receipts: destroyReceipt ? [destroyReceipt] : [],
       persistenceOps: [{ saveId: String(id), kind: 'save-update', fields: ['settlement', 'campaignState', 'timestamp'] }],
     });
   },
@@ -1364,15 +1375,17 @@ export const createSettlementSlice = (set, get) => ({
     // the per-consumer rationale; all canon-only and best-effort + guarded.
     rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
 
-    // Track K §C1 — ActionResult envelope. `receipts` carries the eventLog
-    // entry this apply produced (C2 tightens the Receipt type); consumers that
-    // need it read result.receipts[0]. The direct-apply path fires no single
-    // analytics event of its own — regional propagation fires its own inside
-    // the ripple helper, conditionally — so analyticsEvent is null. The
-    // clock-bound (`return queued`) and no-settlement (`return null`) early
-    // returns above are deliberately NOT enveloped: they delegate to
-    // queueSettlementEvent / bail, and their callers already read those shapes.
+    // Track K §C2 — ActionResult envelope. `receipts` carries an 'event'
+    // Receipt derived from the eventLog entry this apply produced (the event is
+    // the cause, the SystemState deltas the effects); consumers that need it
+    // read result.receipts[0]. The direct-apply path fires no single analytics
+    // event of its own — regional propagation fires its own inside the ripple
+    // helper, conditionally — so analyticsEvent is null. The clock-bound
+    // (`return queued`) and no-settlement (`return null`) early returns above
+    // are deliberately NOT enveloped: they delegate to queueSettlementEvent /
+    // bail, and their callers already read those shapes.
     const persistedToSave = Boolean(activeSaveId && afterState.settlement);
+    const eventReceipt = receiptFromEventLogEntry(logEntry);
     return makeActionResult('applyEvent', {
       before: {
         eventType: event?.type ?? null,
@@ -1387,7 +1400,7 @@ export const createSettlementSlice = (set, get) => ({
         appliedAt: logEntry.appliedAt ?? null,
         systemState: _dimsSummary(afterState.systemState),
       },
-      receipts: [logEntry],
+      receipts: eventReceipt ? [eventReceipt] : [],
       persistenceOps: persistedToSave
         ? [{ saveId: String(activeSaveId), kind: 'save-update', fields: ['settlement', 'campaignState'] }]
         : [],

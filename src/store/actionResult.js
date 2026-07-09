@@ -8,12 +8,12 @@
  * rewriting any orchestration. It is adopted action-by-action, never
  * speculatively — an action converts when a consumer needs its envelope.
  *
- * This is C1 ONLY. `receipts` and `persistenceOps` are typed LOOSELY here and
- * carry the shapes the actions already produce (eventLog entries, snapshots,
- * and a plain description of the persistSaveUpdate that ran). C2 unifies the
- * Receipt type (trace + explanation); C3 makes PersistenceOp a durable outbox
- * op. Until then the fields exist and are populated, but their element types
- * are placeholders — see the per-typedef TODOs.
+ * `receipts` is now the unified Track K §C2 Receipt type (imported from
+ * domain/trace.js): each canon-path action maps the shape it already produced —
+ * an eventLog entry, a DESTROY_SETTLEMENT entry, or a version snapshot — through
+ * a Receipt builder (receiptFromTrace / receiptFromEventLogEntry / makeReceipt),
+ * so the envelope carries derived causal receipts, not raw stored shapes.
+ * `persistenceOps` stays typed LOOSELY (C3 makes it a durable outbox op).
  *
  * No side effects live here. `makeActionResult` is a pure constructor: the
  * action still fires its own analytics / persistence this step (the
@@ -22,12 +22,8 @@
  */
 
 /**
- * @typedef {Object} Receipt
- * LOOSE placeholder for C1. Today this carries the shape the action already
- * produces — an eventLog entry (applyEvent) or a version snapshot
- * (recordSnapshot / destroy's DESTROY_SETTLEMENT log entry). C2 replaces this
- * with the unified trace+explanation Receipt type (stable id, source, kind,
- * causes[], effects[], tick). TODO(Track K C2): tighten this typedef.
+ * The unified causal receipt — Track K §C2, defined in domain/trace.js.
+ * @typedef {import('../domain/trace.js').Receipt} Receipt
  */
 
 /**
@@ -68,7 +64,7 @@
  *   applyEvent
  *     before: { eventType, targetId, phase, activeSaveId, systemState:<dims> }
  *     after:  { phase, logged, appliedAt, systemState:<dims> }
- *     receipts: [logEntry]         — the eventLog entry this apply produced
+ *     receipts: [Receipt]          — 'event' receipt derived from the eventLog entry this apply produced
  *     persistenceOps: [{saveId, kind:'save-update', fields:['settlement','campaignState']}]  (canon w/ active save)
  *
  *   undoLastEvent
@@ -80,7 +76,7 @@
  *   recordSnapshot
  *     before: { targetSaveId, timeline:'saved'|'draft' }
  *     after:  { snapshotId, kind, label, timeline }
- *     receipts: [snapshot]         — the immutable checkpoint just recorded
+ *     receipts: [Receipt]          — 'edit'/kind:'history' receipt for the immutable checkpoint just recorded
  *     persistenceOps: [{saveId, kind:'save-update', fields:['versionHistory']}]  (saved timeline only)
  *
  *   revertToSnapshot
@@ -92,7 +88,7 @@
  *   destroySavedSettlement
  *     before: { id, reason }
  *     after:  { id, status:'destroyed', destroyedReason }
- *     receipts: [destroyLogEntry]  — the DESTROY_SETTLEMENT event appended to the save's log
+ *     receipts: [Receipt]          — 'event' receipt derived from the DESTROY_SETTLEMENT entry appended to the save's log
  *     persistenceOps: [{saveId, kind:'save-update', fields:['settlement','campaignState','timestamp']}]
  *
  * where <dims> is a coarse SystemState summary

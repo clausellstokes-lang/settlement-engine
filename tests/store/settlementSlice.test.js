@@ -201,10 +201,12 @@ describe('settlementSlice — applyPendingPreview integrity', () => {
       payload: { severity: 0.8 }, cause: 'player_action',
     };
     store.getState().previewEvent(event);
-    // applyPendingPreview passes through applyEvent's Track K §C1 ActionResult
-    // envelope; the eventLog entry rides in receipts[0].
+    // applyPendingPreview passes through applyEvent's Track K ActionResult
+    // envelope; receipts[0] is the §C2 'event' Receipt derived from the eventLog
+    // entry (id `event:${event.id}:0`). The canonical entry still lands on the log.
     const result = store.getState().applyPendingPreview();
-    expect(result.receipts[0].event.id).toBe('preview-1');
+    expect(result.receipts[0].source).toBe('event');
+    expect(result.receipts[0].id).toBe('event:preview-1:0');
     expect(store.getState().eventLog[0].event.id).toBe('preview-1');
     expect(store.getState().pendingPreview).toBeNull();
   });

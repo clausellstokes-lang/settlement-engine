@@ -28,8 +28,12 @@ import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } fr
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { makeReceipt } from '../trace.js';
 
 /** @typedef {import('../types.js').Event} Event */
+/** @typedef {import('../trace.js').Receipt} Receipt */
+/** @typedef {import('../trace.js').TraceCause} TraceCause */
+/** @typedef {import('../trace.js').TraceEffect} TraceEffect */
 /**
  * A settlement is a schemaless open object here — every handler spreads it
  * (`{ ...s, ... }`) and reads a wide, evolving surface (config, institutions,
@@ -196,6 +200,52 @@ export function mutateSettlement({ settlement, event, now = null }) {
   // customTradeGoods / resourceEdits discipline) follows. This is what lets
   // a full regeneration re-promote them instead of silently dropping them.
   return withEventConditionsSynced(next);
+}
+
+// ── Receipts (Track K §C2) ──────────────────────────────────────────────────
+
+/**
+ * Derive a {@link Receipt} from a committed event's log entry — the 'event'
+ * lane of the unified receipt type. It reads exactly what the apply path
+ * already produced (no new state): the store writes a full EventLogEntry
+ * (`{ event, deltas, narrativeSummary, ... }`) per canon apply and a leaner
+ * flat entry (`{ id, type, targetId, narrativeSummary }`) for
+ * DESTROY_SETTLEMENT — both are accepted here.
+ *
+ * The event is the CAUSE (one {@link TraceCause} naming its type + target); each
+ * SystemState delta is an EFFECT (one {@link TraceEffect} per moved dimension).
+ * `kind` is 'event' (a member of trace.js's target-type vocabulary); events are
+ * not tick-bound, so `tick` is null. Pure — reads the entry, mutates nothing.
+ *
+ * @param {any} entry   an EventLogEntry, or a flat entry that IS the event
+ * @param {number} [index]
+ * @returns {Receipt | null}
+ */
+export function receiptFromEventLogEntry(entry, index = 0) {
+  if (!entry || typeof entry !== 'object') return null;
+  // Nested EventLogEntry ({ event, ... }) or a flat entry that is itself the event.
+  const event = entry.event && typeof entry.event === 'object' ? entry.event : entry;
+  const type = event.type || 'EVENT';
+  const targetId = event.id || event.targetId || type;
+
+  /** @type {TraceCause} */
+  const cause = { source: String(type) };
+  if (event.targetId) cause.effect = `targets ${event.targetId}`;
+  if (entry.narrativeSummary) cause.reason = String(entry.narrativeSummary);
+
+  /** @type {TraceEffect[]} */
+  const effects = [];
+  if (Array.isArray(entry.deltas)) {
+    for (const d of entry.deltas) {
+      if (!d || d.key == null) continue;
+      /** @type {TraceEffect} */
+      const effect = { target: String(d.key), effect: `${d.change > 0 ? '+' : ''}${d.change}` };
+      if (d.explanation) effect.reason = String(d.explanation);
+      effects.push(effect);
+    }
+  }
+
+  return makeReceipt({ source: 'event', kind: 'event', targetId, n: index, causes: [cause], effects, tick: null });
 }
 
 // ── Institution mutations ──────────────────────────────────────────────────

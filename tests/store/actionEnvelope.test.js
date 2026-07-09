@@ -201,13 +201,15 @@ describe('Track K §C1 — ActionResult adoption ratchet', () => {
     }
   });
 
-  test('each envelope carries loose C1 receipts/persistenceOps arrays', () => {
-    // C1 types receipts/persistenceOps LOOSELY (C2/C3 tighten them). Pin only
-    // that they are arrays here, and that the success paths that persist carry
-    // at least one op so C3 has a real seam to evolve.
+  test('each envelope carries receipts/persistenceOps arrays', () => {
+    // receipts is now the Track K §C2 Receipt[] (persistenceOps stays loose for
+    // C3). Pin that they are arrays, that applyEvent's receipt is the derived
+    // 'event' Receipt for this event (not the raw eventLog entry), and that the
+    // persisting success paths carry at least one op so C3 has a real seam.
     const applied = INVOKERS.applyEvent();
     expect(Array.isArray(applied.receipts)).toBe(true);
-    expect(applied.receipts[0]?.event?.id).toBe('env-apply'); // the eventLog entry rides here
+    expect(applied.receipts[0]?.source).toBe('event');
+    expect(applied.receipts[0]?.id).toBe('event:env-apply:0'); // `${source}:${event.id}:${n}`
     const destroyed = INVOKERS.destroySavedSettlement();
     expect(destroyed.persistenceOps.length).toBeGreaterThan(0);
     expect(destroyed.persistenceOps[0].saveId).toBe('save-x');

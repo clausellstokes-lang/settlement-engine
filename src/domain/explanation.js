@@ -30,7 +30,7 @@
  *     and a structured detail surface.
  */
 
-import { tracesFor, tracesAffecting, tracesCausedBy } from './trace.js';
+import { tracesFor, tracesAffecting, tracesCausedBy, receiptFromTrace } from './trace.js';
 import { deriveFactionProfile, deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveNpcProfile, deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
@@ -96,7 +96,13 @@ import { deriveAllDistricts } from './districtProfile.js';
  * @property {Object|null} profile
  * @property {ExplainReference[]} references
  * @property {string[]} sources
+ * @property {Receipt[]} receipts   Track K §C2 — the trace-backed Receipt[] view
+ *   (ADDITIVE: alongside the existing causes/downstreamEffects; empty for
+ *   entities whose explainer is not trace-backed)
  */
+
+/** @typedef {import('./trace.js').Receipt} Receipt */
+/** @typedef {import('./trace.js').Trace} Trace */
 
 /**
  * The canonical settlement, plus the legacy `npcs` roster this module still
@@ -196,7 +202,26 @@ function emptyEnvelope(type, id) {
     profile: null,
     references: [],
     sources: [],
+    receipts: [],
   };
+}
+
+/**
+ * Track K §C2 — the unified {@link Receipt}[] view of a trace set, for an
+ * envelope's additive `receipts` field. Same underlying traces the
+ * tracesAsCauses / tracesAsDownstream bridges surface, shaped as first-class
+ * Receipts (stable id, source, kind).
+ * @param {Trace[]} traces
+ * @returns {Receipt[]}
+ */
+function tracesToReceipts(traces) {
+  /** @type {Receipt[]} */
+  const out = [];
+  (traces || []).forEach((t, i) => {
+    const r = receiptFromTrace(t, i);
+    if (r) out.push(r);
+  });
+  return out;
 }
 
 /**
@@ -211,6 +236,7 @@ function emptyEnvelope(type, id) {
  * @param {Object|null} [args.profile]
  * @param {ExplainReference[]} [args.references]
  * @param {string[]} [args.sources]
+ * @param {Receipt[]} [args.receipts]
  * @returns {ExplanationEnvelope}
  */
 function envelope({
@@ -222,6 +248,7 @@ function envelope({
   profile = null,
   references = [],
   sources = [],
+  receipts = [],
 }) {
   return {
     entityType: type,
@@ -234,6 +261,7 @@ function envelope({
     profile,
     references,
     sources,
+    receipts,
   };
 }
 
@@ -364,6 +392,7 @@ export function explainInstitution(settlement, institutionId) {
     profile,
     references,
     sources: ['simulationTrace', 'supplyChains', 'factionProfiles'],
+    receipts: tracesToReceipts(traces),
   });
 }
 
@@ -444,6 +473,7 @@ export function explainFaction(settlement, factionId) {
     profile: profileSummary,
     references,
     sources: ['simulationTrace', 'factionProfile'],
+    receipts: tracesToReceipts(traces),
   });
 }
 
@@ -513,6 +543,7 @@ export function explainNpc(settlement, npcId) {
     profile: profileSummary,
     references,
     sources: ['simulationTrace', 'npcProfile'],
+    receipts: tracesToReceipts(traces),
   });
 }
 
@@ -581,6 +612,7 @@ export function explainSupplyChain(settlement, chainId) {
     profile,
     references,
     sources: ['simulationTrace', 'supplyChainState'],
+    receipts: tracesToReceipts(traces),
   });
 }
 
