@@ -259,6 +259,36 @@ export default [
     },
   },
 
+  // ── F31 — generator size ratchet (max-lines) ─────────────────────────────────
+  // The three de-minified monoliths (economicGenerator 2,650 / powerGenerator
+  // 2,493 / servicesGenerator 2,033) were decomposed into thin barrels over
+  // economy/ + power/ + services/ modules, all under 800 effective lines, with
+  // the golden master byte-identical. This ratchet locks the shape: a generator
+  // file that grows past 800 fails the gate. The five remaining >800 legacy
+  // files (npcGenerator 1640, narrativeGenerator 1220, historyGenerator 1108,
+  // computeActiveChains 920, defenseGenerator 802) are grandfathered by
+  // explicit override below — a burn-down worklist, not a licence: decompose
+  // one, DELETE its override (shrink-only, same doctrine as every baseline).
+  // @enforced-by max-lines (this rule)
+  {
+    files: ['src/generators/**/*.js'],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    files: [
+      'src/generators/npcGenerator.js',
+      'src/generators/narrativeGenerator.js',
+      'src/generators/historyGenerator.js',
+      'src/generators/computeActiveChains.js',
+      'src/generators/defenseGenerator.js',
+    ],
+    rules: {
+      'max-lines': 'off', // grandfathered — see ratchet note above; shrink-only
+    },
+  },
+
   // ── A+ P1.3 — forked design-token const guard (components) ──────────────────
   // no-raw-color only inspects JSX style props; this catches `const X = '#hex'`
   // re-declarations of token values. 43 files are grandfathered in
