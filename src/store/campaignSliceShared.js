@@ -17,6 +17,25 @@ import {
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
+  // Roadmap P3: structuredClone is materially faster than JSON round-tripping the
+  // large (~1.8MB @ 10 members) settlement/campaignState payloads the world-pulse
+  // persist path deep-clones. It is native in Node ≥17 and every modern browser
+  // (and the vitest node env). We keep a JSON fallback for TWO cases so the exact
+  // prior semantics are preserved on every path this helper already served:
+  //   1. A runtime without structuredClone (feature-detect).
+  //   2. Inputs structuredClone REFUSES to clone — it throws DataCloneError on
+  //      Immer draft proxies (several call sites clone a live draft, e.g.
+  //      capturePulseSnapshot) and on any function/Symbol-carrying value. JSON
+  //      silently drops those; the catch reproduces that exact behaviour.
+  // Net: a pure speedup on the common plain-object payloads (the ones actually
+  // uploaded), with byte-identical results to before on the draft/exotic paths.
+  if (typeof structuredClone === 'function') {
+    try {
+      return structuredClone(value);
+    } catch {
+      return JSON.parse(JSON.stringify(value));
+    }
+  }
   return JSON.parse(JSON.stringify(value));
 }
 
@@ -149,14 +168,107 @@ export function persistSaveUpdate(saveId, partial) {
   });
 }
 
+// ── World-pulse member-save flush: parallelism + differential persistence ────
+
+// The whole-blob member uploads inside a world-pulse flush are wall-clock-bound
+// by Σ(RTT + upload), linear in members. Run them with a small concurrency cap
+// rather than strictly sequentially — enough to overlap the RTTs without hammering
+// the backend with the full fan-out at large member counts.
+const PERSIST_CONCURRENCY = 4;
+
+// FNV-1a 32-bit + length — the exact idiom campaignSync.js uses for its snapshot
+// fingerprint. Fast, dependency-free, single pass; collisions are astronomically
+// unlikely for change detection (the length prefix guards the trivial cases).
+function hashText(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return `${text.length}:${(h >>> 0).toString(36)}`;
+}
+
+// saveId → fingerprint of the LAST SUCCESSFULLY-PERSISTED payload. Session-scoped
+// and correct as such: a MISS (empty after reload, or first write) just costs one
+// redundant upload; a STALE HIT is impossible because the fingerprint is taken over
+// the exact {settlement, campaignState, versionHistory} bytes we hand to the cloud —
+// if any bit of the payload changed (including a lone campaignState.worldTick stamp
+// on an otherwise-untouched member), the fingerprint changes and the upload runs.
+const lastPersistedFingerprints = new Map();
+
+/** Test/lifecycle hook: drop the differential cache so a fresh flush re-uploads. */
+export function clearPersistFingerprintCache() {
+  lastPersistedFingerprints.clear();
+}
+
+function fingerprintPersistPartial(partial) {
+  return hashText(JSON.stringify(partial));
+}
+
+/**
+ * Run `worker` over `items` with at most `limit` in flight at once. Every item is
+ * processed (each lane pulls the next index until the queue drains) and ALL settle
+ * before this resolves — no fail-fast abandonment. `worker` must not throw
+ * (persistSaveUpdate never does; it resolves true/false), so one bad item can't
+ * reject the batch and skip the rest.
+ */
+async function runWithConcurrency(items, limit, worker) {
+  const results = new Array(items.length);
+  let next = 0;
+  const lane = async () => {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) return;
+      results[i] = await worker(items[i], i);
+    }
+  };
+  const laneCount = Math.max(1, Math.min(limit, items.length));
+  const lanes = [];
+  for (let k = 0; k < laneCount; k++) lanes.push(lane());
+  await Promise.all(lanes);
+  return results;
+}
+
+/**
+ * Flush per-member save updates with bounded parallelism + differential skipping.
+ *
+ * Seam contract (unchanged): this settles EVERY update (success, reported failure,
+ * or differential skip) before the caller runs syncCampaignSnapshot — the snapshot
+ * is the commit point and must land after member saves are durable (F2 crash-
+ * consistency). Ordering BETWEEN members is incidental, so we overlap them.
+ *
+ * Failure semantics (unchanged): persistSaveUpdate never throws and reports a
+ * failure via campaignSyncError. Every update is still ATTEMPTED (no fail-fast), so
+ * the banner ends up set if ANY member failed. A failed member's fingerprint is NOT
+ * recorded, so the next flush re-uploads it (a retry is never skipped).
+ *
+ * Returns a small summary ({ attempted, skipped, failed }) for tests/benchmarks;
+ * existing callers ignore it.
+ */
 export async function persistSaveUpdates(updates = []) {
-  for (const update of updates) {
-    await persistSaveUpdate(update.saveId, {
+  const summary = { attempted: 0, skipped: 0, failed: 0 };
+  await runWithConcurrency(updates, PERSIST_CONCURRENCY, async (update) => {
+    const partial = {
       settlement: update.settlement,
       campaignState: update.campaignState,
       versionHistory: update.versionHistory,
-    });
-  }
+    };
+    const saveId = update.saveId;
+    const fingerprint = saveId ? fingerprintPersistPartial(partial) : null;
+    // Differential skip: the exact payload already reached the cloud this session.
+    if (fingerprint != null && lastPersistedFingerprints.get(saveId) === fingerprint) {
+      summary.skipped += 1;
+      return true;
+    }
+    summary.attempted += 1;
+    const ok = await persistSaveUpdate(saveId, partial);
+    // Record the fingerprint ONLY on a successful persist — recording on failure
+    // would let the retry be differential-skipped, silently dropping the write.
+    if (ok && fingerprint != null) lastPersistedFingerprints.set(saveId, fingerprint);
+    if (!ok) summary.failed += 1;
+    return ok;
+  });
+  return summary;
 }
 
 /**

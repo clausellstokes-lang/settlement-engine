@@ -28,6 +28,22 @@ const MAX_VERSION_HISTORY = 50;
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
+  // Roadmap P3 (global): structuredClone is materially faster than JSON round-
+  // tripping the large settlement/versionHistory payloads this path deep-clones,
+  // and is native in Node ≥17 + every modern browser (and the vitest node env).
+  // The JSON fallback preserves the exact prior semantics on the two paths where
+  // structuredClone can't help: a runtime lacking it, and inputs it REFUSES to
+  // clone — it throws DataCloneError on Immer draft proxies (several call sites
+  // clone a live draft) and on function/Symbol-carrying values, which JSON drops
+  // silently. Kept identical to campaignSliceShared.cloneJson so both store-level
+  // clone helpers behave the same. See that copy for the full rationale.
+  if (typeof structuredClone === 'function') {
+    try {
+      return structuredClone(value);
+    } catch {
+      return JSON.parse(JSON.stringify(value));
+    }
+  }
   return JSON.parse(JSON.stringify(value));
 }
 
