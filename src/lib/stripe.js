@@ -166,10 +166,16 @@ export function checkCheckoutResult() {
 }
 
 /**
+ * An Error augmented with retryability metadata for checkout/verify callers.
+ * @typedef {Error & { transient?: boolean, status?: number }} CheckoutError
+ */
+
+/**
  * Normalize a supabase.functions.invoke() error into an Error carrying a
  * `transient` flag and `status`, so callers can offer Retry (429 / 5xx / network)
  * vs. a terminal "contact support" path (4xx). Reads the server's JSON body via
  * the FunctionsHttpError.context Response when available.
+ * @returns {Promise<CheckoutError>}
  */
 export async function classifyInvokeError(error, fallbackMessage = 'Request failed') {
   let status = 0;
@@ -186,7 +192,7 @@ export async function classifyInvokeError(error, fallbackMessage = 'Request fail
   }
   // status 0 => network/relay failure (transient). 429 and 5xx are transient.
   const transient = status === 0 || status === 429 || (status >= 500 && status <= 599);
-  const err = new Error(bodyMessage || error?.message || fallbackMessage);
+  const err = /** @type {CheckoutError} */ (new Error(bodyMessage || error?.message || fallbackMessage));
   err.transient = transient;
   err.status = status;
   return err;
@@ -212,7 +218,7 @@ export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
   });
   if (error) throw await classifyInvokeError(error, 'Purchase verification failed');
   if (!data?.verified) {
-    const err = new Error(data?.error || 'Purchase could not be verified');
+    const err = /** @type {CheckoutError} */ (new Error(data?.error || 'Purchase could not be verified'));
     err.transient = false;
     throw err;
   }
@@ -225,6 +231,7 @@ export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
  * `.transient` set for retryable failures. Used by the post-checkout
  * reconciliation flow (F23) to confirm the session server-side before polling
  * the entitlement.
+ * @returns {Promise<{verified: boolean, product?: string, status?: string, transient?: boolean}>}
  */
 export async function verifyCheckoutSession(sessionId) {
   if (!isConfigured) throw new Error('Payments are not configured');

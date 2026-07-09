@@ -21,6 +21,7 @@
 
 // Codepoint (UTF-16 code-unit) order. Nullish coerces to '' so mixed/absent
 // keys never throw and always sort deterministically.
+/** @type {(a: unknown, b: unknown) => number} */
 export const compareCodepoint = (a, b) => {
   const x = String(a ?? '');
   const y = String(b ?? '');
@@ -28,4 +29,5 @@ export const compareCodepoint = (a, b) => {
 };
 
 // Convenience comparator for the common `{ name }` shape.
+/** @type {(a: {name?: unknown} | null | undefined, b: {name?: unknown} | null | undefined) => number} */
 export const byNameCodepoint = (a, b) => compareCodepoint(a?.name, b?.name);

@@ -1,5 +1,5 @@
 {
-  "total": 4649,
+  "total": 4642,
   "files": {
     "src/domain/activeConditions.js": 73,
     "src/domain/aiGrounding.js": 39,
@@ -96,7 +96,7 @@
     "src/domain/stressorPicker.js": 8,
     "src/domain/summary/tonightAtTheTable.js": 9,
     "src/domain/supplyChainState.js": 63,
-    "src/domain/threatProfile.js": 56,
+    "src/domain/threatProfile.js": 51,
     "src/domain/timeProgression.js": 25,
     "src/domain/trace.js": 26,
     "src/domain/tradeRouteSemantics.js": 3,
@@ -113,7 +113,7 @@
     "src/domain/worldPulse/factionCompetition.js": 104,
     "src/domain/worldPulse/flows.js": 8,
     "src/domain/worldPulse/foodStockpile.js": 24,
-    "src/domain/worldPulse/institutionLifecycle.js": 77,
+    "src/domain/worldPulse/institutionLifecycle.js": 75,
     "src/domain/worldPulse/npcAgency.js": 95,
     "src/domain/worldPulse/partyImpact.js": 27,
     "src/domain/worldPulse/populationDynamics.js": 59,

@@ -78,6 +78,7 @@ export async function reconcileCheckout(result, deps) {
   // 1. Server-side verification. A definitive "not your paid session" is
   //    terminal; a transient failure (429/5xx/network) is NOT — we still poll
   //    the entitlement, which is the ground truth.
+  /** @type {{verified: boolean, product?: string, status?: string, transient?: boolean}} */
   let verify;
   if (typeof sessionId === 'string' && sessionId && typeof verifySession === 'function') {
     try {

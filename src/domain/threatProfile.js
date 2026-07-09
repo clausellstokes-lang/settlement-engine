@@ -194,7 +194,8 @@ const THREAT_TYPE_TEMPLATES = Object.freeze({
 
 const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 
-/** 0..1 score → 4-band severity. Matches Phase 16 conditions. */
+/** 0..1 score → 4-band severity. Matches Phase 16 conditions.
+ * @param {unknown} severity */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.75) return 'critical';
@@ -203,7 +204,8 @@ export function threatSeverityBand(severity) {
   return 'low';
 }
 
-/** 0..1 score → 5-stage progression. */
+/** 0..1 score → 5-stage progression.
+ * @param {unknown} severity */
 export function severityToStage(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.8) return 'realized';
@@ -232,6 +234,7 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);
 
+/** @param {unknown} text */
 function inferThreatType(text) {
   if (!text) return 'other';
   const s = String(text);
@@ -243,16 +246,19 @@ function inferThreatType(text) {
 
 // ── Id helper ────────────────────────────────────────────────────────────
 
+/** @param {unknown} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+/** @param {string} s */
 function shortHash(s) {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
+/** @param {string|undefined} type @param {string|undefined} source @param {string|undefined} label */
 function threatIdFor(type, source, label) {
   const t = snakeCase(type || 'other');
   const suffix = shortHash(`${source || ''}.${label || ''}`);
