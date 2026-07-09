@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { saves as savesService } from '../../lib/saves.js';
+import { useStore } from '../../store';
 import { sans, FS, SP, swatch } from '../theme.js';
 import { Save } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
@@ -26,7 +27,7 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
     setSaveError(null);
     setSaving(true);
     try {
-      await savesService.save({
+      const saveId = await savesService.save({
         name: settlement.name || 'Untitled Settlement',
         tier: settlement.tier || 'unknown',
         settlement,
@@ -34,6 +35,13 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
+      // F34 — this is a REAL save chokepoint. Fire the first_save/third_save
+      // pricing moment + 'saved' research capture here (the dead store
+      // saveSettlement action used to host them). Fire-and-forget.
+      import('../../store/saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId, settlement, store: useStore }))
+        .catch(() => { /* never block the save */ });
     } catch (e) {
       console.error('Save failed:', e);
       setSaveError(`Failed to save: ${e.message || e}`);

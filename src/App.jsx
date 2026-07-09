@@ -17,12 +17,13 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info } from 'lucide-react';
+import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info, X } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
+import { supportMailto } from './copy/support.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -651,7 +652,7 @@ export default function App() {
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <span>All rights reserved</span>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <a href="mailto:clausellstokes@aol.com" style={{
+          <a href={supportMailto()} style={{
             color: MUTED, textDecoration: 'none', display: 'inline-flex',
             alignItems: 'center', gap: 4,
             padding: isMobile ? `0 ${SP.sm}px` : 0,
@@ -795,18 +796,15 @@ export default function App() {
         }}>
           <span>{checkoutToast.text}</span>
           {checkoutToast.persistent && (
-            <button
-              type="button"
-              onClick={() => setCheckoutToast(null)}
-              aria-label="Dismiss"
-              style={{
-                background: 'transparent', border: 'none', color: swatch.white,
-                fontSize: FS.lg, fontWeight: 700, cursor: 'pointer', lineHeight: 1,
-                padding: 0, marginLeft: 'auto',
-              }}
-            >
-              ×
-            </button>
+            <span style={{ marginLeft: 'auto', display: 'inline-flex' }}>
+              <IconButton
+                Icon={X}
+                label="Dismiss"
+                tone="inverse"
+                size="sm"
+                onClick={() => setCheckoutToast(null)}
+              />
+            </span>
           )}
         </div>
       )}

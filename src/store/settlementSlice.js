@@ -77,7 +77,6 @@ import {
 // Workshop, sample fork — counts against the same 3/day allowance. The
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
-import { activeSaveCount } from '../lib/saveAccess.js';
 // WS4 decomposition — pure/leaf helpers extracted to a sibling.
 import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
@@ -238,9 +237,17 @@ export const createSettlementSlice = (set, get) => ({
     state.activePricingMoment = null;
   }),
 
-  // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
-  // bump anonymous → intermediate after first narrate spend. Bumped
-  // alongside spendCredits in creditsSlice; here we just declare it.
+  // P104 / X-4 — Lifetime narrate count, read by hooks/useReaderAudience.js to
+  // promote anonymous → intermediate after the first narrate spend.
+  //
+  // TODO(F34 · cross-slice wiring): bumpLifetimeNarrate has no caller yet, so the
+  // count never increments and the audience-promotion signal never fires. The
+  // real narrate-success point lives in aiSlice.requestNarrative — right after the
+  // `set(state => { state.aiSettlement = result; ... })` commit and the
+  // `track(EVENTS.AI_GENERATION_COMPLETED, { type: 'narrative', ... })` call
+  // (src/store/aiSlice.js, the requestNarrative success branch). Add
+  // `get().bumpLifetimeNarrate();` there. That file is outside this change's fence,
+  // so the incrementer is left in place (not deleted) to be wired from aiSlice.
   lifetimeNarrateCount: 0,
   bumpLifetimeNarrate: () => set(state => {
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
@@ -540,9 +547,6 @@ export const createSettlementSlice = (set, get) => ({
     return true;
   },
 
-  // Reactive update state
-  whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
-  pendingChange: null,   // { type, payload } describing the proposed mutation
   // Tier 5.1: structured delta from the most recent regenerate. UI
   // surfaces it via the RegenerationDeltaCard until dismissed.
   lastRegenerationDelta: null,
@@ -624,10 +628,9 @@ export const createSettlementSlice = (set, get) => ({
     const eng = await loadEngine();
 
     const seed = seedOverride || eng.generateSeed();
-      // Capture the full pipeline context so reactive applyChange/applyEvent
-      // can re-run only affected steps with the same seed instead of paying
-      // for a full regeneration. Without this, every "what changed?" feature
-      // either rerolls the town's identity or fails outright.
+      // Capture the full pipeline context (lastCtx) so the pipeline-rail
+      // diagnostics and section-regen config recovery can read the exact
+      // resolved context this run produced, instead of re-deriving it.
     let capturedCtx = null;
       // Per-step trace for the "How this was simulated" rail. Each step
       // contributes one entry with a factual summary derived from the
@@ -715,8 +718,6 @@ export const createSettlementSlice = (set, get) => ({
         state.aiSourceFingerprint = null;
         state.aiPartialFailure = null;
         state.showNarrative = false;
-        state.whatIfPreview = null;
-        state.pendingChange = null;
         state.pendingPreview = null;
         state.pipelineHistory = pipelineHistory;
         // P100 — arm the reveal overlay. PipelineReveal mounts when this
@@ -805,8 +806,6 @@ export const createSettlementSlice = (set, get) => ({
       state.activeSaveId = null;
       state.lastSeed = null;
       state.lastCtx = null;
-      state.whatIfPreview = null;
-      state.pendingChange = null;
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
@@ -870,266 +869,15 @@ export const createSettlementSlice = (set, get) => ({
   clearLastRegenerationDelta: () =>
     set(state => { state.lastRegenerationDelta = null; }),
 
-  // ── Reactive updates (What-If engine) ──────────────────────────────────────
-
-  /**
-   * Propose a change without applying it. Computes the delta preview.
-   * type: 'addInstitution' | 'removeInstitution' | 'addStressor' | 'removeStressor'
-   *       | 'addNeighbour' | 'removeNeighbour'
-   * payload: change-specific data
-   */
-  proposeChange: (type, payload) => {
-    const state = get();
-    const { settlement } = state;
-    if (!settlement) return;
-
-    // Build the config overrides for this change type. Stressor what-ifs
-    // carry a config DELTA under overrides.config (selectedStresses /
-    // selectedStressesRandom, occasionally stressorEdits) — never a whole
-    // config object: applyChange layers these keys over the raw _config it
-    // rebuilds, and spreading the resolved settlement.config snapshot here
-    // would smuggle derived keys (stressTypes, _magicTradeOnly, …) back in
-    // as generation input.
-    let changedKeys = [];
-    let overrides = {};
-
-    // The stressor set the engine ACTUALLY produced (resolveStress →
-    // stressConfirmPass thread it into the resolved config snapshot). This
-    // — not the raw selectedStresses pool — is the base a stressor what-if
-    // edits: under random mode the raw pool is empty, so a pool-based add
-    // would erase every emergent stressor as a side effect, and a
-    // pool-based remove would erase ALL of them (empty pool +
-    // random:false ⇒ generateStress returns null). Promoting the visible
-    // set into the pinned pool is a deliberate user act (the
-    // ConfigurationPanel's un-random toggle does the same), not a silent
-    // derived-config echo.
-    const effectiveStressTypes = () =>
-      settlement.config?.stressTypes
-        || (settlement.config?.stressType ? [settlement.config.stressType] : []);
-
-    switch (type) {
-      case 'addInstitution': {
-        // Force-add an institution by toggling it to require
-        const key = `${settlement.tier}::${payload.category}::${payload.name}`;
-        const newToggles = { ...(settlement.config?._institutionToggles || {}), [key]: { allow: true, require: true } };
-        overrides = { institutionToggles: newToggles };
-        changedKeys = ['institutionToggles'];
-        break;
-      }
-      case 'removeInstitution': {
-        const key = `${settlement.tier}::${payload.category}::${payload.name}`;
-        const newToggles = { ...(settlement.config?._institutionToggles || {}), [key]: { allow: false, require: false, forceExclude: true } };
-        overrides = { institutionToggles: newToggles };
-        changedKeys = ['institutionToggles'];
-        break;
-      }
-      case 'addStressor': {
-        const effective = effectiveStressTypes();
-        const config = {
-          selectedStresses: effective.includes(payload.stressType)
-            ? [...effective]
-            : [...effective, payload.stressType],
-          selectedStressesRandom: false,
-        };
-        // A RESOLVE_STRESSOR event suppresses config-forced re-rolls of its
-        // type (resolveStress's stressorEdits.resolved filter). An explicit
-        // re-add supersedes that suppression — without clearing it, this
-        // what-if would pin the type into the pool and the overlay would
-        // filter it right back out, a silent no-op. Raw-first read mirrors
-        // applyChange's merge base.
-        const edits = (settlement._config || settlement.config || {}).stressorEdits;
-        const resolved = Array.isArray(edits?.resolved) ? edits.resolved : [];
-        const lower = (v) => String(v || '').toLowerCase();
-        if (resolved.some(r => lower(r) === lower(payload.stressType))) {
-          config.stressorEdits = {
-            ...edits,
-            resolved: resolved.filter(r => lower(r) !== lower(payload.stressType)),
-          };
-        }
-        overrides = { config };
-        changedKeys = ['config'];
-        break;
-      }
-      case 'removeStressor':
-        // Event-authored stressors (config.stressorEdits.added) are NOT
-        // touched here: the overlay re-applies them post-roll, and ending
-        // one belongs to the event channel (RESOLVE_STRESSOR), not a config
-        // what-if.
-        overrides = {
-          config: {
-            selectedStresses: effectiveStressTypes().filter(t => t !== payload.stressType),
-            selectedStressesRandom: false,
-          },
-        };
-        changedKeys = ['config'];
-        break;
-      default:
-        return;
-    }
-
-    set(s => {
-      s.pendingChange = { type, payload, changedKeys, overrides };
-    });
-  },
-
-  /**
-   * Apply the pending what-if change for real.
-   *
-   * IMPORTANT — same-seed reuse: this used to call `generateSeed()`,
-   * meaning every applied change rerolled the entire town under a fresh
-   * seed. That destroyed continuity (the name, the founding lore, the
-   * unrelated NPCs all shifted). The current implementation reuses
-   * `lastSeed` so the deterministic PRNG produces the same output for
-   * any subsystem the change doesn't affect — only the genuinely
-   * impacted parts move. The only path to a new seed is an explicit
-   * regeneration call.
-   *
-   * Edits run the WHOLE pipeline under the reused seed — deterministic and
-   * correct, and the only model we keep. A step-level partial-rerun engine was
-   * explored and retired (it was dead, buggy, and the wrong abstraction); the
-   * derived state layer is already recomputed on demand, so a full same-seed
-   * regen plus fresh derivation is both correct and fast enough at this scale.
-   */
-  applyChange: async () => {
-    const state = get();
-    const { pendingChange } = state;
-    if (!pendingChange) return;
-
-    const fullConfig = {
-      // Prefer the RAW pre-resolution config (sentinels intact) so the
-      // resolved choices stop propagating generation after generation.
-      // Behavior-preserving for what-if edits: the same lastSeed below
-      // re-resolves any 'random' sentinel to the identical value.
-      // The settlement.config fallback (pre-_config saves) is the resolved
-      // snapshot — strip its derived keys so emergent stress / stale
-      // isolation flags don't come back as forced input.
-      ...(state.settlement?._config
-        || stripDerivedConfigKeys(state.settlement?.config)
-        || state.config),
-      // Stressor what-ifs ride a config DELTA (proposeChange builds only
-      // the keys that change: selectedStresses / selectedStressesRandom,
-      // occasionally stressorEdits) layered over the raw base so the
-      // proposed change wins. Institution what-ifs keep their own
-      // toggles channel below.
-      ...(pendingChange.overrides.config || {}),
-      _institutionToggles: pendingChange.overrides.institutionToggles || state.institutionToggles,
-      _categoryToggles:    state.categoryToggles,
-      _goodsToggles:       state.goodsToggles,
-      _servicesToggles:    state.servicesToggles,
-    };
-
-    const eng = await loadEngine();
-
-    // The settlement's OWN stamped seed is authoritative for a what-if rerun
-    // (finding F2): a loaded save must re-resolve under the seed that made it,
-    // not whatever seed the session last generated — otherwise a single edit
-    // silently swaps the town. Fall back to lastSeed, then a fresh seed only for
-    // a brand-new draft that was never generated through the pipeline.
-    const seed = state.settlement?._seed || state.lastSeed || eng.generateSeed();
-    let capturedCtx = null;
-    const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
-        seed,
-        // §14 P2 — tier-gate homebrew for this settlement (fail-open; see above).
-        customContent: state.config?.useCustomContent === false
-          ? {}
-          : eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
-        onComplete: (ctx) => { capturedCtx = ctx; },
-    });
-    // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
-    // authored conditions survive a local regeneration. EVENT-authored ones
-    // already ride through config.eventConditions (reapplyEventConditions, and
-    // isWorldAuthoredCondition disclaims them so they aren't carried twice) —
-    // without this reconcile, the same what-if click kept the DM's authored
-    // crises but silently erased every pulse/party/regional one.
-    const reconciled = reconcileSettlementChange(result, state.settlement, {
-      source: 'what_if_change',
-      changeType: pendingChange.type,
-      changeLabel: pendingChange.payload?.name || pendingChange.payload?.stressType,
-    });
-    let nextSystemState = state.systemState;
-    try { nextSystemState = deriveSystemState(reconciled); } catch (e) {
-      console.warn('[settlementSlice.applyChange] deriveSystemState failed:', e);
-    }
-    set(s => {
-        s.settlement     = reconciled;
-        s.lastSeed       = seed;       // unchanged unless missing — preserves identity
-        s.lastCtx        = capturedCtx;
-        s.systemState    = nextSystemState;
-        s.pendingChange  = null;
-        s.whatIfPreview  = null;
-    });
-  },
-
-  dismissChange: () =>
-    set(state => {
-      state.pendingChange = null;
-      state.whatIfPreview = null;
-    }),
-
   // ── Saved settlements ──────────────────────────────────────────────────────
 
-  /**
-   * Save the current settlement, snapshotting the live lifecycle state
-   * (phase / eventLog / systemState / locks / provenance timestamps) into
-   * the save record's `campaignState` so a subsequent reload restores
-   * exactly what the user is looking at.
-   *
-   * Without this snapshot, two saves would share whatever was last in
-   * the global slice — exactly the bug the audit flagged. The
-   * `campaign_state` JSONB column on Supabase plus the migration helper
-   * in `lib/saves.js` round-trip these fields.
-   */
-  saveSettlement: (settlement) => {
-    const state = get();
-    if (!state.canSave()) return false;
-
-    const max = state.maxSaves();
-    const activeCount = activeSaveCount(state.savedSettlements);
-    if (activeCount >= max) return false;
-
-    const wasFirstSave = activeCount === 0;
-    const wasThirdSave = activeCount === 2 && max === 3;
-
-    // Lift the new save id + campaignState out of the set() so the
-    // research-capture below can address the freshly-saved record by id.
-    // Same id shape and value as before — purely a hoist, no behaviour change.
-    const newSaveId = `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-    const newCampaignState = pickleCampaignState(state);
-
-    set(s => {
-      s.savedSettlements.push({
-        ...settlement,
-        savedAt: Date.now(),
-        id: newSaveId,
-        campaignState: newCampaignState,
-      });
-    });
-
-    // P103 / X-2 — first_save + third_save pricing moments. Fire-and-
-    // forget so the save action returns promptly; the moment library
-    // enforces 24h-per-moment cooldown so this can't spam.
-    if (wasFirstSave || wasThirdSave) {
-      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
-        const reason = wasThirdSave ? 'third_save' : 'first_save';
-        triggerPricingMoment(reason, (content) => {
-          // Use the store-bound opener so PricingMomentCard renders.
-          get().setActivePricingMoment(content);
-        }, { tier: state.auth?.tier });
-      }).catch(() => { /* never block a save */ });
-    }
-
-    // Analytics — fire-and-forget structural snapshot at the 'saved' moment.
-    // captureFingerprint skips silently without a stable uuid (local ids) or
-    // consent; it never throws and never affects the save's return.
-    import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
-      captureFingerprint('saved', settlement, {
-        save: { ...settlement, id: newSaveId, campaignState: newCampaignState },
-        settlementUuid: newSaveId,
-      });
-    }).catch(() => {});
-
-    return true;
-  },
+  // NOTE (F34): the old `saveSettlement` store action lived here but was DEAD —
+  // every real save path (SaveToLibraryButton + the SAVE_SETTLEMENT auth intent)
+  // calls savesService.save() directly, so this action never ran and its
+  // first_save/third_save pricing moments + 'saved' research capture never fired.
+  // Those side effects were revived as a testable helper (src/store/saveMoments.js,
+  // recordSaveMomentForActiveSave) and are now invoked from the real save
+  // chokepoints. The dead action was removed rather than kept as a decoy.
 
   /** Bulk-replace the savedSettlements array (used for hydration from savesService). */
   setSavedSettlements: (settlements) =>
@@ -1747,10 +1495,9 @@ export const createSettlementSlice = (set, get) => ({
     state.settlement     = save.settlement || state.settlement;
     state.activeSaveId   = save.id || null;
     // Recover the seed from the save (row column first, then the blob's stamped
-    // `_seed`), and NEVER fall back to the stale session seed (finding F2): a
-    // wrong seed is worse than none, because applyChange reruns the whole
-    // pipeline under lastSeed and would silently replace this town with another.
-    // null is honest — ProvenanceBlock shows "unknown", not a lie.
+    // `_seed`), and NEVER fall back to the stale session seed (finding F2): the
+    // seed is surfaced in ProvenanceBlock "for replay / sharing", so a wrong seed
+    // is worse than none. null is honest — ProvenanceBlock shows "unknown".
     state.lastSeed       = save.seed ?? save.settlement?._seed ?? null;
     state.phase          = cs.phase || 'draft';
     state.eventLog       = Array.isArray(cs.eventLog) ? [...cs.eventLog] : [];
@@ -1760,7 +1507,6 @@ export const createSettlementSlice = (set, get) => ({
     state.canonizedAt    = cs.canonizedAt || null;
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
-    state.pendingChange  = null;
     // Identity-leak audit (same class as the phase/eventLog hydration fix
     // above): reset ALL session-only, non-persisted UI state so opening save B
     // never inherits save A's in-flight state. Without this, a rename queued

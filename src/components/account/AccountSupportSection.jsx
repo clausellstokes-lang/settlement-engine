@@ -8,6 +8,7 @@
  */
 import { Headphones, Check } from 'lucide-react';
 import { GOLD, SECOND, BORDER, sans, SP, R, FS, swatch } from '../theme.js';
+import { SUPPORT_EMAIL, supportMailto } from '../../copy/support.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -47,8 +48,8 @@ export default function AccountSupportSection({
           <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>
             Have a question or issue? Send us a message and we'll get back to you.
             You can also email us directly at{' '}
-            <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD, fontWeight: 600 }}>
-              clausellstokes@aol.com
+            <a href={supportMailto()} style={{ color: GOLD, fontWeight: 600 }}>
+              {SUPPORT_EMAIL}
             </a>
           </div>
 

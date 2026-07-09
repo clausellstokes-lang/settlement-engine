@@ -20,6 +20,11 @@ const TONES = {
   ghost:    { bg: 'transparent',                fg: '#6b5340', border: 'transparent', hover: 'rgba(160,118,42,0.08)' },
   active:   { bg: 'rgba(160,118,42,0.12)',      fg: '#1c1409', border: '#a0762a', hover: 'rgba(160,118,42,0.18)' },
   danger:   { bg: '#fff',                       fg: '#8b1a1a', border: '#c89a9a', hover: '#fff5f5' },
+  // Borderless white glyph for use ON a saturated/colored surface (e.g. a
+  // dismiss × on a fixed toast/banner). The only tone whose contrast is
+  // guaranteed by its host, not the app background — reach for it only when
+  // the button sits on a dark/colored fill.
+  inverse:  { bg: 'transparent',                fg: '#ffffff', border: 'transparent', hover: 'rgba(255,255,255,0.18)' },
 };
 
 const SIZES = {

@@ -19,6 +19,7 @@ import { useStore } from '../store/index.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, serif_, SP, R, FS, swatch } from './theme.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import { t } from '../copy/index.js';
+import { supportMailto } from '../copy/support.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
@@ -173,7 +174,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                 <Headphones size={14} color={GOLD} />
                 <span style={{ fontSize: FS.sm, color: SECOND }}>
                   Need help?{' '}
-                  <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD, textDecoration: 'none', fontWeight: 600 }}>
+                  <a href={supportMailto()} style={{ color: GOLD, textDecoration: 'none', fontWeight: 600 }}>
                     Contact Support
                   </a>
                 </span>

@@ -1,7 +1,6 @@
-// dailyLifeLogic.js — Pure data extraction and prompt-building for DailyLifeTab.
+// dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
-import { formatStability } from '../../generators/aiLayer.js';
 
 
 export function extractSettlementContext(s) {
@@ -153,11 +152,6 @@ export function extractSettlementContext(s) {
     historicalCharacter: hist.historicalCharacter || null,
   };
 }
-// getMagicBand — now delegates to computeEffectiveMagicPresence (single source of truth)
-function getMagicBand(magic, _mInstCount = 0, institutions = [], config = {}) {
-  return computeEffectiveMagicPresence(institutions, config).band;
-}
-
 
 // ── Terrain daily-life context ──────────────────────────────────────────────
 const TERRAIN_CONTEXT = {
@@ -203,130 +197,3 @@ const DEFENSE_CONTEXT = {
   'Vulnerable':     'The settlement has minimal defenses. A determined raiding party could take it. People are aware of this and it shapes how they live — they know where to run, they keep their valuables hidden, they have arrangements with neighbours for emergencies. The watch exists mainly to deal with drunks.',
   'Undefended':     'There are no walls, no garrison, no meaningful watch. The settlement is completely open. People have learned to live with this — some by forming informal neighbourhood watch arrangements, some by simply accepting that danger is a fact of life here. Strangers are watched carefully because there is no gate to watch them at.',
 };
-
-// ── Magic presence daily-life feel ───────────────────────────────────────────
-const MAGIC_CONTEXT = {
-  none:     'There is no magic in this world. Unexplained things have mundane explanations or are attributed to god, luck, or rumour. No one has seen a spell cast. The apothecary uses herbs, the healer uses poultices, and the priest prays. Strange events are talked about for years.',
-  low:      'Magic exists but is rare enough that most people have never seen it directly. The travelling fortune-teller may or may not be genuine. There are stories of a hedge wizard two villages over. People are curious about magic rather than afraid of it, and deeply sceptical of anyone who claims it.',
-  moderate: 'Magic is real and occasionally encountered. The settlement may have a hedge wizard, a divine healer, or an alchemist operating openly. People have opinions about magic — some trust it, some distrust it, most treat it as a specialist service like a blacksmith. It is not everyday but it is not shocking.',
-  high:     'Magic is woven into daily life. The apothecary stocks potions. The healer channels divine power openly. Magical lights, wards, or constructs may be visible in the settlement. People have practical relationships with magic — they know what it costs, who provides it, and what it cannot do. The impossible has become the unremarkable.',
-};
-
-
-
-export function buildPrompt(ctx) {
-  const lines = [];
-
-
-
-  // Context descriptions are on ctx object (computed in extractSettlementContext)
-
-  lines.push(`SETTLEMENT DATA`);
-  lines.push(`Tier: ${ctx.tierLabel}${ctx.population ? ` (population ~${ctx.population.toLocaleString()})` : ''}`);
-  lines.push(`Overall prosperity: ${ctx.prospBand}`);
-
-  lines.push(`\nPHYSICAL & CULTURAL CONTEXT`);
-  if (ctx.terrainCtx) lines.push(`Terrain (${ctx.terrain}): ${ctx.terrainCtx}`);
-  if (ctx.cultureCtx) lines.push(`Culture (${ctx.culture}): ${ctx.cultureCtx}`);
-  if (ctx.routeCtx)   lines.push(`Trade access (${ctx.tradeRoute}): ${ctx.routeCtx}`);
-  if (!ctx.terrainCtx && !ctx.cultureCtx && !ctx.routeCtx) lines.push('Generic mixed-culture plains settlement on a road.');
-
-  lines.push(`\nGOVERNANCE`);
-  if (ctx.govFaction) {
-    lines.push(`Governing faction: ${ctx.govFaction}${ctx.govCat ? ` (${ctx.govCat})` : ''}${ctx.govPower ? ` — holds ${ctx.govPower}% of political power` : ''}`);
-  } else {
-    lines.push(`No clear governing faction — power is contested or absent`);
-  }
-  lines.push(`Political stability: ${formatStability(ctx.stability)}`);
-  if (ctx.conflicts.length) lines.push(`Active conflicts: ${ctx.conflicts.join('; ')}`);
-  if (ctx.tensions.length)  lines.push(`Current tensions: ${ctx.tensions.join('; ')}`);
-
-  lines.push(`\nECONOMY`);
-  lines.push(`Economic score: ${ctx.econScore}/100`);
-  // Food — historically calibrated language
-  const fd = Math.round(ctx.foodDeficit);
-  const fs = Math.round(ctx.foodSurplus);
-  const hasFamine = ctx.stressTypes.includes('famine');
-  const hasSiege  = ctx.stressTypes.includes('under_siege');
-  if (fd <= 0) {
-    if (fs > 20) lines.push(`Food: surplus (${fs}% above need) — comfortable supply, prices stable, grain stores building`);
-    else if (fs > 0) lines.push(`Food: modest surplus (${fs}%) — adequate but little buffer`);
-    else lines.push(`Food: roughly self-sufficient — subsistence met, little margin`);
-  } else if (fd <= 10) {
-    lines.push(`Food: minor shortfall (${fd}% deficit) — prices somewhat elevated; most households manage, the poorest feel it as smaller portions and occasional skipped meals`);
-  } else if (fd <= 20) {
-    lines.push(`Food: significant shortfall (${fd}% deficit) — grain prices have risen noticeably; the landless poor and recent arrivals are the first to go hungry; middling households are economising; no general starvation but visible hardship at the bottom`);
-  } else if (fd <= 35) {
-    lines.push(`Food: serious shortage (${fd}% deficit) — bread prices are punishing for the poor; beggars visible near markets; children of the poorest families are going without; the prosperous are paying more but eating; this is a crisis for the bottom quarter of the population, not yet a general famine`);
-  } else {
-    const severeNote = hasFamine ? ' — active famine conditions' : hasSiege ? ' — siege is cutting supply lines' : ' — no viable trade route to cover the gap';
-    lines.push(`Food: severe shortage (${fd}% deficit)${severeNote}; starvation is a real and present danger across large parts of the population, not just the poorest; mortality is rising; the social order is under pressure`);
-  }
-  if (ctx.chainNames.length) lines.push(`Active economic chains: ${ctx.chainNames.join(', ')}`);
-  if (ctx.incomeCount) lines.push(`Income sources: ${ctx.incomeCount}`);
-
-  // Defense posture for AI context
-  if (ctx.defenseReadinessLabel) {
-    lines.push(`Defense posture: ${ctx.defenseReadinessLabel} — ${ctx.defenseCtx || ''}`);
-  }
-
-  // Magic presence for AI context
-  // Build minimal institutions array for the effective magic computation
-  const _promptMagicInsts = (ctx.magicInstitutions || []).map(n => ({ name: n, category: 'Magic' }));
-  const _promptMagicCfg = { priorityMagic: ctx.magic, nearbyResources: [] };
-  const magicBandForPrompt = getMagicBand(ctx.magic, 0, _promptMagicInsts, _promptMagicCfg);
-  lines.push(`Magic in this world: ${magicBandForPrompt} — ${MAGIC_CONTEXT[magicBandForPrompt] || ''}`);
-  if (ctx.magicInstitutions?.length) lines.push(`Magic institutions present: ${ctx.magicInstitutions.slice(0,4).join(', ')}`);
-
-  lines.push(`\nSAFETY & ORDER`);
-  lines.push(`Internal safety score: ${ctx.safetyScore}/100`);
-  if (ctx.watchExists)    lines.push(`Has organised watch or guard presence`);
-  if (ctx.garrisonExists) lines.push(`Has military garrison`);
-  if (ctx.crimeTypes.length)    lines.push(`Crime types: ${ctx.crimeTypes.join(', ')}`);
-  if (ctx.criminalInsts.length) lines.push(`Criminal institutions: ${ctx.criminalInsts.join(', ')}`);
-
-  if (ctx.stressTypes.length) {
-    lines.push(`\nACTIVE STRESSES`);
-    lines.push(ctx.stressTypes.join(', '));
-  }
-
-  if (Object.keys(ctx.keyInsts).length) {
-    lines.push(`\nKEY INSTITUTIONS`);
-    Object.entries(ctx.keyInsts).forEach(([cat, names]) => {
-      lines.push(`${cat}: ${names.join(', ')}`);
-    });
-  }
-
-  if (ctx.historicalCharacter) {
-    lines.push(`\nHistorical character: ${ctx.historicalCharacter}`);
-  }
-
-  if (ctx.magicScore > 20 || ctx.magicDep) {
-    lines.push(`\nMagic presence score: ${ctx.magicScore}/100${ctx.magicDep ? ' (settlement is magic-dependent)' : ''}`);
-  }
-
-  if (ctx.religion > 60) {
-    lines.push(`Religion is a strong social force here (priority ${ctx.religion}/100)`);
-  }
-
-  lines.push(`\n---`);
-  lines.push(`\nWrite a Daily Life description of this settlement for a tabletop RPG dungeon master.`);
-  lines.push(`\nRequirements:`);
-  lines.push(`- 3 to 4 paragraphs of flowing prose, no bullet points, no headers, no numbered lists`);
-  lines.push(`- Focus on the lived experience of ordinary people — not the political or economic structure itself, but how those structures feel from street level`);
-  lines.push(`- Show how the factors interact and reinforce each other. A corrupt lord + food shortage + criminal underbelly reads differently from a stable lord + same food shortage. Weave the causes and effects together naturally`);
-  lines.push(`- Be specific and concrete. Name what people eat, what they fear, what they talk about, where they gather, how they feel about those in power`);
-  lines.push(`- Tone: grounded worldbuilding. Not purple prose, not game-manual voice. The kind of thing a DM reads and immediately knows how a local NPC would speak and what they'd be worried about`);
-  lines.push(`- If things are going well, show that genuinely — not every settlement is miserable`);
-  lines.push(`- Food shortages and stresses create consequences for specific groups — typically the poorest first. A 15-20% food deficit does not mean everyone is starving; it means the landless and the recent arrivals are going hungry while most people are paying more for bread. Scale the severity language to match the actual deficit level provided`);
-  lines.push(`- These consequences are historically normal and expected, not exceptional or implausible — a feudal society with high criminal activity and poor governance will naturally have suffering; describe it as the ordinary texture of that kind of place, not as crisis unless the numbers warrant it`);
-  lines.push(`- The paragraphs should feel like they belong together, not like separate topic blocks`);
-  lines.push(`- The terrain, culture, and trade route are not background — they shape the physical texture of daily life directly. The desert's water discipline, the port's constant foreigners, the mountain's winter isolation, the celtic hall's storytelling culture — weave these into the specific details rather than mentioning them as labels`);
-  lines.push(`- A DM reading this should be able to close their eyes and picture the smell, the sound, the light, the rhythm of the place`);
-  lines.push(`- Do not mention game mechanics, stats, or score numbers`);
-  lines.push(`- Do not start with "In the [settlement name]" or "This settlement" — drop directly into the world`);
-
-  return lines.join('\n');
-}
-
-// ── Anchor facts strip ────────────────────────────────────────────────────────

@@ -119,74 +119,11 @@ function hydratedSettlement() {
   return withActiveCondition(withActiveCondition(cut, PULSE_COND), REGIONAL_COND);
 }
 
-describe('join: applyChange (what-if regeneration) preserves world conditions', () => {
-  test('pulse + regional conditions survive; event conditions are not duplicated', async () => {
-    const store = makeStore();
-    store.setState(s => {
-      s.settlement = hydratedSettlement();
-      s.lastSeed = SEED;
-    });
-
-    store.getState().proposeChange('addInstitution', { category: 'civic', name: 'Granary' });
-    expect(store.getState().pendingChange?.type).toBe('addInstitution');
-    await store.getState().applyChange();
-
-    const after = store.getState().settlement;
-    // The world conditions survived the rebuild — evolved state intact, not
-    // an onset restart.
-    const famine = condOf(after, 'famine');
-    expect(famine).toHaveLength(1);
-    expect(famine[0].id).toBe(PULSE_COND.id);
-    expect(famine[0].severity).toBe(0.7);
-    expect(famine[0].duration.elapsedTicks).toBe(3);
-    const regional = condOf(after, 'regional_route_disruption');
-    expect(regional).toHaveLength(1);
-    expect(regional[0].id).toBe(REGIONAL_COND.id);
-
-    // The event condition came through its OWN seam exactly once — the
-    // reconcile must not carry a second copy.
-    const cut = condOf(after, 'trade_route_cut');
-    expect(cut).toHaveLength(1);
-    expect(cut[0].causes.some(c => c.source === 'event' && c.eventId === 'ev-cut')).toBe(true);
-
-    // World conditions stay OUT of the event record (no double ownership).
-    expect(after.config.eventConditions).toHaveLength(1);
-    expect(after.config.eventConditions[0].archetype).toBe('trade_route_cut');
-
-    // The reconcile is receipted.
-    expect(after.reconciliationLog.at(-1)).toMatchObject({
-      source: 'what_if_change',
-      changeType: 'addInstitution',
-    });
-    expect(after.reconciliationLog.at(-1).preservedWorldConditionIds)
-      .toEqual(expect.arrayContaining(['famine', 'regional_route_disruption']));
-    expect(after.reconciliationLog.at(-1).preservedWorldConditionIds)
-      .not.toContain('trade_route_cut');
-
-    // SystemState was derived from the RECONCILED settlement.
-    expect(store.getState().systemState).toBeTruthy();
-    expect(store.getState().pendingChange).toBeNull();
-  });
-
-  test('chained what-ifs are a fixpoint — no condition growth on the second apply', async () => {
-    const store = makeStore();
-    store.setState(s => {
-      s.settlement = hydratedSettlement();
-      s.lastSeed = SEED;
-    });
-
-    store.getState().proposeChange('addInstitution', { category: 'civic', name: 'Granary' });
-    await store.getState().applyChange();
-    store.getState().proposeChange('removeInstitution', { category: 'civic', name: 'Granary' });
-    await store.getState().applyChange();
-
-    const after = store.getState().settlement;
-    expect(condOf(after, 'famine')).toHaveLength(1);
-    expect(condOf(after, 'regional_route_disruption')).toHaveLength(1);
-    expect(condOf(after, 'trade_route_cut')).toHaveLength(1);
-    expect(after.reconciliationLog).toHaveLength(2);
-  });
-});
+// NOTE (F34): the applyChange (what-if regeneration) describe block was removed
+// here with the dead what-if engine (proposeChange/applyChange had zero
+// component/store consumers). The generateSettlement reroll path below still
+// exercises reconcileSettlementChange's world-condition preservation on a live
+// path, so that invariant stays covered.
 
 describe('join: generateSettlement (reroll) preserves world conditions', () => {
   test('a regenerate with a settlement on screen carries the campaign layer', async () => {

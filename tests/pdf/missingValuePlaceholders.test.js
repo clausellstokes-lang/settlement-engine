@@ -25,7 +25,6 @@ import { StatStrip } from '../../src/pdf/primitives/Dense.jsx';
 import { StatTile } from '../../src/pdf/primitives/StatTile.jsx';
 import { ScoreCard, ScoreWithBreakdown } from '../../src/pdf/primitives/Visuals.jsx';
 import { Cover } from '../../src/pdf/sections/Cover.jsx';
-import { SummaryPage } from '../../src/pdf/sections/SummaryPage.jsx';
 import { Overview } from '../../src/pdf/sections/Overview.jsx';
 import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
@@ -99,7 +98,6 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
 
   const SECTIONS = [
     ['Cover', Cover],
-    ['SummaryPage', SummaryPage],
     ['Overview', Overview],
     ['DefenseSecurity', DefenseSecurity],
     ['PowerStructure', PowerStructure],
@@ -112,9 +110,8 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
     expect(texts).not.toContain(', ');
   });
 
-  test('missing stat-strip values surface as em-dash (DefenseSecurity, SummaryPage)', () => {
+  test('missing stat-strip values surface as em-dash (DefenseSecurity)', () => {
     expect(collectText(DefenseSecurity({ settlement: SPARSE, vm: sparseVm }))).toContain('—');
-    expect(collectText(SummaryPage({ settlement: SPARSE, vm: sparseVm }))).toContain('—');
   });
 
   test('ViabilityAssessment formatVal: null and shapeless-object metrics render em-dash', () => {

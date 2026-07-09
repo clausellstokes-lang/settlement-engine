@@ -114,6 +114,13 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         settlement: payload.settlement,
         config: payload.config || null,
       });
+      // F34 — this is the REAL post-signup save chokepoint. Fire the
+      // first_save/third_save pricing moment + 'saved' research capture here
+      // (the dead store saveSettlement action used to host them). Fire-and-forget.
+      import('./saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId: result, settlement: payload.settlement, store: useStore }))
+        .catch(() => { /* never block the save */ });
       // Fire analytics + a toast via the store so the user sees the result.
       const { Funnel, EVENTS } = await import('../lib/analytics.js');
       Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {

@@ -247,30 +247,14 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   });
 });
 
-describe('settlementSlice — saveSettlement persists campaignState', () => {
-  let store;
-  beforeEach(() => {
-    store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
-  });
-
-  test('a saved canonized settlement carries phase, eventLog, canonizedAt in campaignState', () => {
-    store.getState().canonize();
-    store.getState().applyEvent({
-      id: 'save-test-1', type: 'IMPAIR_INSTITUTION', targetId: 'institution.temple',
-      payload: { dimension: 'legitimacy', severity: 0.5 }, cause: 'player_action',
-    });
-    store.getState().saveSettlement(store.getState().settlement);
-
-    const [save] = store.getState().savedSettlements;
-    expect(save.campaignState).toBeTruthy();
-    expect(save.campaignState.phase).toBe('canon');
-    expect(save.campaignState.eventLog).toHaveLength(1);
-    expect(save.campaignState.canonizedAt).toBeTruthy();
-    expect(save.campaignState.systemState).toBeTruthy();
-  });
-});
+// NOTE (F34): the 'saveSettlement persists campaignState' describe block was
+// removed with the dead saveSettlement store action (no real save path called
+// it — SaveToLibraryButton + the SAVE_SETTLEMENT auth intent hit
+// savesService.save() directly). campaignState round-trip fidelity is still
+// covered by the hydrateFromSave + active-save-integration blocks below, which
+// exercise the pickleCampaignState → campaignState path used by the live save
+// service. The revived first_save/third_save funnel is pinned in
+// tests/store/saveMoments.test.js.
 
 describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
   let store;

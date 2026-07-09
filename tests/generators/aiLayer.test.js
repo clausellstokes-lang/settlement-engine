@@ -17,7 +17,7 @@ import {
   normalizePlotHook,
   runAiLayer,
 } from '../../src/generators/aiLayer.js';
-import { extractSettlementContext, buildPrompt } from '../../src/components/new/dailyLifeLogic.js';
+import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
 
 describe('flattenServices (AI context normalizer)', () => {
   test('flattens the category-keyed object shape into one list', () => {
@@ -317,8 +317,10 @@ describe('dailyLifeLogic food surplus is a percent of dailyNeed', () => {
     const ctx = extractSettlementContext(baseSettlement({
       economicViability: { metrics: { foodBalance: { dailyNeed: 1000, surplus: 400, deficit: 0 } } },
     }));
+    // buildPrompt (which rendered "Food: surplus (40% above need)") was dead code
+    // and was removed (F34); the surplus-percent derivation it consumed lives in
+    // extractSettlementContext and is what actually matters here.
     expect(ctx.foodSurplus).toBe(40);
-    expect(buildPrompt(ctx)).toContain('Food: surplus (40% above need)');
   });
 
   test('a big absolute surplus no longer reads as a four-digit percent', () => {

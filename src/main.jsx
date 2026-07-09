@@ -40,8 +40,51 @@ installAnalyticsQueue();
         : p.startsWith('/gallery') ? 'gallery'
           : p.startsWith('/pricing') ? 'pricing' : 'other';
   } catch { /* default */ }
-  track(EVENTS.SESSION_STARTED, { is_return: rv.is_return, days_since_last_visit_band: rv.days_since_last_visit_band, auth_state: 'anon', entry_route_kind: entry });
+  // Stamp the visit now (rv already captured the PRIOR stamp above).
   stampVisit();
+
+  // session_started's auth_state must be honest. Auth resolves asynchronously
+  // after boot (App mounts → initAuth → getSession), so firing 'anon'
+  // synchronously here lied for every returning signed-in user. Analytics events
+  // queue locally (analyticsQueue), so a 1-2s defer is free: wait for the first
+  // auth resolution and read the REAL tier. auth.loading starts `true`
+  // (authSlice) and flips false once the session check completes; a fallback
+  // timer fires the honest 'unknown' if auth never resolves (misconfig).
+  const baseProps = {
+    is_return: rv.is_return,
+    days_since_last_visit_band: rv.days_since_last_visit_band,
+    entry_route_kind: entry,
+  };
+  const authStateFor = (tier) => (tier === 'anon' || tier === 'free') ? tier : 'premium';
+  let sessionStartFired = false;
+  const fireSessionStart = (auth_state) => {
+    if (sessionStartFired) return;
+    sessionStartFired = true;
+    track(EVENTS.SESSION_STARTED, { ...baseProps, auth_state });
+  };
+  const authAtBoot = useStore.getState().auth;
+  if (authAtBoot && authAtBoot.loading === false) {
+    // Already resolved (e.g. a synchronous rehydrate) — fire immediately.
+    fireSessionStart(authStateFor(authAtBoot.tier));
+  } else {
+    const unsub = useStore.subscribe(
+      (s) => s.auth?.loading,
+      (loading) => {
+        if (loading === false) {
+          fireSessionStart(authStateFor(useStore.getState().auth?.tier));
+          try { unsub(); } catch { /* already torn down */ }
+        }
+      },
+    );
+    // Safety net: still count the session — honestly, as 'unknown' — if auth
+    // never resolves (Supabase unconfigured / initAuth never reached).
+    setTimeout(() => {
+      if (!sessionStartFired) {
+        fireSessionStart('unknown');
+        try { unsub(); } catch { /* already torn down */ }
+      }
+    }, 8000);
+  }
 }
 
 // Production error reporting: window-level errors + unhandled rejections.

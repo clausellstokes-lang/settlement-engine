@@ -559,12 +559,14 @@ const ENTRY_WRITERS = Object.freeze([
 ]);
 
 // (b) The regen-survival record (config.stressorEdits) vocabulary:
+// (settlementSlice.js dropped out of this set with the F34 what-if-engine
+// deletion — the addStressor what-if that cleared the suppression was its only
+// non-comment occurrence of `stressorEdits`.)
 const STRESSOR_EDITS_FILES = Object.freeze([
   'domain/crisisLifecycle.js',             // the ONLY writer (onset record / resolve suppression)
   'domain/events/undoEvent.js',            // pre-event snapshot restore (logEntry.undo)
   'generators/steps/resolveStress.js',     // the regeneration overlay (consumer)
   'generators/steps/stressConfirmPass.js', // forced-set guard (consumer)
-  'store/settlementSlice.js',              // the addStressor what-if clears the suppression
 ]);
 
 // (c) The roaming-twin store actions:

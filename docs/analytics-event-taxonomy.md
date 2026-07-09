@@ -195,7 +195,9 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | `SETTLEMENT_REOPENED` | `settlement_reopened` | essential | library open handler (SettlementsPanel / store load) | `{ days_since_edited_band (now − campaignState.editedAt ?? savedAt), canon_phase, has_ai_data, save_count_band, via:'library'\|'welcome_back'\|'deep_link' }` — **the revisit-gap event** |
 | `SETTLEMENT_DELETED` | `settlement_deleted` | essential | `saves` delete call site | `{ canon_phase, age_days_band, had_ai_data, was_published }` |
 | `LIBRARY_VIEWED` | `library_viewed` | essential | SettlementsPanel mount (session-deduped via `useFunnelEvent`) | `{ save_count_band, campaign_count }` |
-| `SESSION_STARTED` | `session_started` | essential | session id mint (`src/lib/session.js`) | `{ is_return, days_since_last_visit_band (useReturnVisit stamp), auth_state:'anon'\|'free'\|'premium', entry_route_kind:'home'\|'dossier'\|'gallery'\|'pricing'\|'other' }` |
+| `SESSION_STARTED` | `session_started` | essential | boot (`src/main.jsx`), **deferred until auth resolves** | `{ is_return, days_since_last_visit_band (useReturnVisit stamp), auth_state:'anon'\|'free'\|'premium'\|'unknown', entry_route_kind:'home'\|'dossier'\|'gallery'\|'pricing'\|'other' }` |
+
+> `session_started` fires at boot but is **held until the first auth resolution** so `auth_state` reflects the real tier (auth resolves asynchronously after boot; firing at boot forced a false `'anon'` for returning signed-in users — F34). Events queue locally, so the 1-2s defer is lossless. `'unknown'` is the honest fallback if auth never resolves (Supabase unconfigured / init not reached).
 
 ## 10. `research` / `consent`
 
