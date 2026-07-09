@@ -387,6 +387,18 @@ verify_jwt = false
 [functions.verify-single-dossier]
 verify_jwt = false
 
+# Anonymous analytics ingest — unauthenticated by design (the device token is a
+# body field, not a JWT). This is the SINGLE SOURCE OF TRUTH for the flag:
+# scripts/deploy.sh derives its `--no-verify-jwt` posture by parsing this file, so
+# the config/deploy split-brain (create-checkout was deployed --no-verify-jwt with
+# no matching config entry; verify-checkout-session was never deployed at all)
+# can't recur. Every function NOT pinned `verify_jwt = false` here deploys
+# JWT-gated (the platform default): create-checkout, verify-checkout-session,
+# generate-narrative, generate-chronicle, admin-actions, create-customer-portal,
+# send-email, analytics-export.
+[functions.ingest-events]
+verify_jwt = false
+
 [analytics]
 enabled = true
 port = 54327

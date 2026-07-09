@@ -274,7 +274,9 @@ describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
       .mockResolvedValueOnce({
         data: [{
           id: '1', public_slug: 's1', name: 'X', tier: 'town',
-          data: { foo: 'bar', dmCompass: { secret: true } }, published_at: '2025-01-01', view_count: 3,
+          // population is on the public top-level allowlist; dmCompass is not
+          // (and is DM-private) — the projection keeps the former, drops the latter.
+          data: { population: 1200, dmCompass: { secret: true } }, published_at: '2025-01-01', view_count: 3,
         }],
         error: null,
       })
@@ -285,7 +287,7 @@ describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
     expect(dossier).toMatchObject({
       id: '1',
       slug: 's1', name: 'X', tier: 'town',
-      settlement: { foo: 'bar' },
+      settlement: { population: 1200 },
       publishedAt: '2025-01-01', viewCount: 3,
       netVotes: 4,
       voteState: { netVotes: 4, voted: true },

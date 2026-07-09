@@ -132,40 +132,42 @@ fi
 ok "API keys retrieved"
 
 # ── Step 5: Deploy edge functions ───────────────────────────────────────────
+#
+# The verify_jwt posture lives in ONE place: supabase/config.toml. We DERIVE the
+# `--no-verify-jwt` flag from it per function instead of hardcoding a second list
+# here — that duplicated list was the config/deploy split-brain (create-checkout
+# shipped --no-verify-jwt with no config entry; verify-checkout-session was never
+# deployed at all). Auto-discovering the functions from the filesystem also means
+# a new function can never be silently left undeployed.
 
 info "Step 5: Deploying edge functions..."
 
-npx supabase functions deploy create-checkout --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: create-checkout"
+CONFIG_TOML="$PROJECT_DIR/supabase/config.toml"
 
-npx supabase functions deploy create-customer-portal --project-ref "$PROJECT_REF"
-ok "Deployed: create-customer-portal"
+# Echo "--no-verify-jwt" iff config.toml pins `verify_jwt = false` for $1, else
+# nothing (platform default = JWT-gated). Reads ONLY the [functions.<name>] block.
+verify_jwt_flag() {
+  awk -v fn="$1" '
+    $0 == "[functions." fn "]" { inblock = 1; next }
+    /^\[/ { inblock = 0 }
+    inblock {
+      line = $0; gsub(/[[:space:]]/, "", line)
+      if (line == "verify_jwt=false") { print "--no-verify-jwt"; exit }
+    }
+  ' "$CONFIG_TOML"
+}
 
-npx supabase functions deploy verify-single-dossier --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: verify-single-dossier"
+for fn_dir in "$PROJECT_DIR"/supabase/functions/*/; do
+  fn="$(basename "$fn_dir")"
+  # Skip shared helpers and any non-function directory (no index.ts entrypoint).
+  [[ "$fn" == _* ]] && continue
+  [[ -f "$fn_dir/index.ts" ]] || continue
 
-npx supabase functions deploy generate-narrative --project-ref "$PROJECT_REF"
-ok "Deployed: generate-narrative"
-
-npx supabase functions deploy generate-chronicle --project-ref "$PROJECT_REF"
-ok "Deployed: generate-chronicle"
-
-npx supabase functions deploy stripe-webhook --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: stripe-webhook"
-
-npx supabase functions deploy admin-actions --project-ref "$PROJECT_REF"
-ok "Deployed: admin-actions"
-
-npx supabase functions deploy send-email --project-ref "$PROJECT_REF"
-ok "Deployed: send-email"
-
-# Analytics intelligence layer (docs/simulation-intelligence-layer.md). ingest is
-# anonymous (--no-verify-jwt); export is secret-gated (called by cron via pg_net).
-npx supabase functions deploy ingest-events --project-ref "$PROJECT_REF" --no-verify-jwt
-ok "Deployed: ingest-events"
-
-npx supabase functions deploy analytics-export --project-ref "$PROJECT_REF"
-ok "Deployed: analytics-export"
+  flag="$(verify_jwt_flag "$fn")"
+  # shellcheck disable=SC2086 # intentional word-split: $flag is "" or one flag
+  npx supabase functions deploy "$fn" --project-ref "$PROJECT_REF" $flag
+  ok "Deployed: $fn${flag:+ (no-verify-jwt)}"
+done
 
 # ── Step 6: Stripe setup ───────────────────────────────────────────────────
 
@@ -311,7 +313,7 @@ echo "════════════════════════�
 echo ""
 echo "  Supabase URL:    $SUPABASE_URL"
 echo "  Project ref:     $PROJECT_REF"
-echo "  Edge functions:  5 deployed"
+echo "  Edge functions:  all in supabase/functions/ (JWT posture from config.toml)"
 echo "  Stripe products: 3 created"
 echo "  Webhook:         $WEBHOOK_URL"
 echo ""

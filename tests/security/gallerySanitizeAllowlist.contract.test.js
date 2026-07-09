@@ -1,0 +1,163 @@
+/**
+ * gallerySanitizeAllowlist.contract.test.js — the public-projection ALLOWLIST
+ * drift pin + round trip (review finding: sanitizer failed OPEN).
+ *
+ * Migration 050 flipped the SERVER settlement sanitizer
+ * (_gallery_sanitize_public_json) and its CLIENT twin (publicSafe.js
+ * toPublicSafe) from a top-level DENYLIST to a top-level ALLOWLIST, so a future
+ * DM-private top-level field can no longer leak just because its key misses the
+ * private-key regex. This file guards the two halves that must stay true:
+ *
+ *   1. DRIFT PIN — the SQL allowlist (parsed from the migration text) and the JS
+ *      PUBLIC_TOPLEVEL_KEYS export are the SAME set. If one side gains/loses a
+ *      key without the other, this fails.
+ *   2. ROUND TRIP — sanitizing a REAL freshly-generated settlement (plus the
+ *      narrated + DM-private keys the app attaches later) retains every key the
+ *      public dossier renders and drops every DM-private key. Too-tight would
+ *      break the gallery; too-loose would leak.
+ */
+
+import { describe, it, expect } from 'vitest';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { toPublicSafe, PUBLIC_TOPLEVEL_KEYS } from '../../src/domain/display/publicSafe.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+
+const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '050_money_and_public_projection_hardening.sql');
+
+/** Parse the `public_toplevel constant text[] := array[ '…','…' ];` literal from
+ *  migration 050 into a JS array of the quoted keys. */
+function parseSqlAllowlist(sql) {
+  const m = sql.match(/public_toplevel\s+constant\s+text\[\]\s*:=\s*array\[([\s\S]*?)\]/i);
+  if (!m) throw new Error('could not find public_toplevel allowlist in migration 050');
+  return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
+}
+
+const migExists = existsSync(MIGRATION);
+
+describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)', () => {
+  const sql = readFileSync(MIGRATION, 'utf-8');
+
+  it('the migration flips to a top-level allowlist (not a bare denylist)', () => {
+    // The settlement ROOT gate is the allowlist; the deeper denylist stays.
+    expect(sql).toMatch(/is_toplevel\s+and\s+not\s*\(key\s*=\s*any\(public_toplevel\)\)/);
+    expect(sql).toMatch(/not\s+is_toplevel\s+and\s+key\s*~\*/); // denylist only deeper
+  });
+
+  it('the SQL allowlist and JS PUBLIC_TOPLEVEL_KEYS are identical sets', () => {
+    const sqlKeys = parseSqlAllowlist(sql).sort();
+    const jsKeys = [...PUBLIC_TOPLEVEL_KEYS].sort();
+    expect(sqlKeys).toEqual(jsKeys);
+    // No accidental duplicates on either side.
+    expect(new Set(sqlKeys).size).toBe(sqlKeys.length);
+    expect(new Set(jsKeys).size).toBe(jsKeys.length);
+  });
+
+  it('the allowlist excludes the known leak-prone / DM-private top-level keys', () => {
+    const set = new Set(PUBLIC_TOPLEVEL_KEYS);
+    for (const forbidden of [
+      'aiData', 'aiSettlement', 'aiDailyLife', 'aiOverlays', 'userCanon',
+      'dmNotes', 'dmCompass', 'dossierNotes', 'notes', 'narrativeNotes', 'tabNotes',
+      'plotHooks', 'pinnedNpc', 'identityMarkers', 'frictionPoints', 'connectionsMap',
+      'simulationTrace', 'pendingEdits', 'campaign', 'version_history',
+    ]) {
+      expect(set.has(forbidden)).toBe(false);
+    }
+  });
+});
+
+describe('public sanitizer allowlist — round trip against a REAL settlement', () => {
+  const settlement = generateSettlementPipeline({}, null, { seed: 'allowlist-round-trip', customContent: {} });
+
+  // Every top-level key a fresh generation produces that IS on the allowlist must
+  // survive (retain what the public dossier renders — too-tight breaks the gallery).
+  it('retains every allowlisted key present in a freshly generated settlement', () => {
+    const out = toPublicSafe(settlement);
+    const allow = new Set(PUBLIC_TOPLEVEL_KEYS);
+    const expected = Object.keys(settlement).filter(k => allow.has(k));
+    expect(expected.length).toBeGreaterThan(20); // sanity: it's a rich object
+    for (const k of expected) {
+      expect(out, `expected public key "${k}" to survive`).toHaveProperty(k);
+    }
+  });
+
+  // Generation-time private keys (present in a fresh settlement) must NOT leak —
+  // these are exactly the class the old denylist missed.
+  it('drops the AI/owner-private keys a fresh generation carries (aiOverlays, userCanon, simulationTrace)', () => {
+    const out = toPublicSafe(settlement);
+    for (const k of ['aiOverlays', 'userCanon', 'simulationTrace']) {
+      // Only assert if the generator actually emitted it (belt + suspenders).
+      if (k in settlement) expect(out[k], `"${k}" must be dropped`).toBeUndefined();
+    }
+  });
+
+  // App-attached DM-private blocks (added after generation) must be dropped by
+  // omission — the whole point of the fail-closed flip.
+  it('drops later-attached DM-private top-level blocks', () => {
+    const hydrated = {
+      ...settlement,
+      dmNotes: 'the BBEG is the mayor',
+      aiData: { aiSettlement: { secret: 1 } },
+      aiSettlement: { name: 'refined', dmCompass: { twist: 't' } },
+      aiDailyLife: { dawn: 'z' },
+      dmCompass: { hooks: ['h'] },
+      plotHooks: ['the heir is hidden'],
+      dossierNotes: 'prep notes',
+      narrativeNotes: { economics: 'per-tab prose' },
+      pendingEdits: [{ field: 'x' }],
+      campaign: { worldState: { secret: true } },
+      version_history: [{ v: 1 }],
+      // A brand-new DM-private field with a key the OLD denylist would MISS.
+      dmBriefingDossierV2: { theTruth: 'leaks under a denylist' },
+    };
+    const out = toPublicSafe(hydrated);
+    for (const k of [
+      'dmNotes', 'aiData', 'aiSettlement', 'aiDailyLife', 'dmCompass', 'plotHooks',
+      'dossierNotes', 'narrativeNotes', 'pendingEdits', 'campaign', 'version_history',
+      'dmBriefingDossierV2',
+    ]) {
+      expect(out[k], `"${k}" must not leak`).toBeUndefined();
+    }
+    // …while ordinary public content still comes through.
+    expect(out.name).toBe(settlement.name);
+    expect(out.tier).toBe(settlement.tier);
+  });
+
+  // The shareNarrated gallery base is s.ai_data.aiSettlement — a full refined
+  // clone. thesis + dailyLife (the narrated public prose) MUST survive; the DM
+  // Compass + per-tab notes on that same object MUST be stripped.
+  it('narrated base: keeps thesis + dailyLife, strips the DM Compass fields', () => {
+    const narratedClone = {
+      ...settlement,
+      thesis: 'A salt town that forgot its own founding.',
+      dailyLife: 'Dawn breaks over the brine flats…',
+      tabNotes: { economics: 'prose' },
+      narrativeNotes: { economics: 'prose' },
+      dmCompass: { hooks: ['h'] },
+      identityMarkers: ['brine-stained boardwalks'],
+      frictionPoints: [{ who: 'A vs B' }],
+      connectionsMap: [{ from: 'A', to: 'B' }],
+    };
+    const out = toPublicSafe(narratedClone);
+    expect(out.thesis).toBe('A salt town that forgot its own founding.');
+    expect(out.dailyLife).toBe('Dawn breaks over the brine flats…');
+    for (const k of ['tabNotes', 'narrativeNotes', 'dmCompass', 'identityMarkers', 'frictionPoints', 'connectionsMap']) {
+      expect(out[k], `"${k}" must be stripped`).toBeUndefined();
+    }
+  });
+
+  // Deeper-level defense-in-depth: an allowed top-level subtree still gets its
+  // nested DM-private keys stripped by the recursive denylist.
+  it('still strips DM-private keys nested inside an allowed subtree', () => {
+    const withNested = {
+      ...settlement,
+      history: { ...(settlement.history || {}), dmNote: 'a hidden aside', currentTensions: ['visible'] },
+      economicState: { ...(settlement.economicState || {}), secretLedger: 'hidden' },
+    };
+    const out = toPublicSafe(withNested);
+    expect(out.history).toBeDefined();
+    expect(out.history.dmNote).toBeUndefined();          // nested denylist
+    expect(out.history.currentTensions).toEqual(['visible']); // preserved
+    expect(out.economicState.secretLedger).toBeUndefined();
+  });
+});

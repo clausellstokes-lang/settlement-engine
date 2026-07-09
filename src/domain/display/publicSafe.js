@@ -12,24 +12,54 @@
  * for stored public reads; this client projection is defense-in-depth and
  * powers pre-publish previews + the anonymous result view.
  *
- * SECURITY: the denylist must only ever GROW. Removing a key here can leak
- * DM-private data into a public surface. (Consolidated here from gallery.js
- * so there is a single, named, tested projection — not logic buried in a
- * data-access module.)
+ * SECURITY — the projection FAILS CLOSED. The settlement ROOT is gated by an
+ * explicit ALLOWLIST of known-public top-level fields (PUBLIC_TOPLEVEL_KEYS):
+ * anything not on it is dropped, so a future DM-private top-level field can't
+ * leak just because its key misses the denylist. DEEPER levels keep the
+ * recursive private-key denylist (which must only ever GROW) + the NPC
+ * allowlist as defense-in-depth. Both halves are mirrored server-side; the
+ * top-level allowlist is pinned identical to the SQL by
+ * tests/security/gallerySanitizeAllowlist.contract.test.js.
  *
  * Pure; never mutates its input.
  */
 
-// Recursive key denylist. Any object key matching this is dropped entirely.
-// The `dm`/`gm` alternations use a word boundary (\bdm/\bgm) so they match the
-// real DM-private keys (dmNotes, dmCompass, dmNote, and any future dm*/gm* key)
-// WITHOUT the bare-substring over-match that previously stripped legitimate keys
-// like `landmarks`, `admin`, `administrative`, and `isAdmin` from public output.
-// NOTE: the server's authoritative _gallery_sanitize_public_json carries the same
-// over-match and needs a matching SQL migration (Postgres uses \y for boundaries).
+// ── Public top-level allowlist ──────────────────────────────────────────────
+// Character-identical (order-independent) to migration 050's public_toplevel
+// array inside _gallery_sanitize_public_json. Derived from what the public
+// dossier / gallery renders (gallery RPCs 020–033, publicChronicle,
+// OutputContainer playerView) plus the two narrated-public fields (thesis,
+// dailyLife) that the shareNarrated base (ai_data.aiSettlement) surfaces.
+// EXCLUDED on purpose (private / leak-prone / not publicly rendered): aiData,
+// aiSettlement, aiDailyLife, aiOverlays, userCanon, dmNotes, dmCompass,
+// dossierNotes, notes, narrativeNotes, tabNotes, plotHooks, pinnedNpc,
+// identityMarkers, frictionPoints, connectionsMap, simulationTrace, pendingEdits,
+// campaign, version_history.
+export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
+  '_config', '_seed', 'activeConditions', 'arrivalScene', 'availableServices',
+  'coherenceNotes', 'config', 'conflicts', 'dailyLife', 'defenseProfile',
+  'economicState', 'economicViability', 'factions', 'generatorVersion', 'history',
+  'id', 'institutions', 'name', 'neighborRelationship', 'npcs',
+  'population', 'powerStructure', 'pressureSentence', 'prominentRelationship', 'relationships',
+  'resourceAnalysis', 'schemaVersion', 'settlementReason', 'simulationVersion', 'spatialLayout',
+  'stress', 'stressors', 'structuralSuggestions', 'structuralViolations', 'thesis',
+  'tier',
+]);
+
+// Recursive DEEPER-level key denylist. Any nested object key matching this is
+// dropped entirely. The `dm`/`gm` alternations use a word boundary (\bdm/\bgm)
+// so they match the real DM-private keys (dmNotes, dmCompass, dmNote, and any
+// future dm*/gm* key) WITHOUT the bare-substring over-match that previously
+// stripped legitimate keys like `landmarks`, `admin`, and `isAdmin`.
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
 
-/** Recursively strip denied keys; preserves history.currentTensions. */
+/**
+ * Recursively strip denied keys from a subtree; preserves history.currentTensions.
+ * This is the DEEP denylist (defense-in-depth). The top-level ALLOWLIST gate lives
+ * in toPublicSafe, which seeds this with a non-empty path so an allowed top-level
+ * key is not re-denylisted (e.g. `coherenceNotes` is public despite matching
+ * /note/i) while its descendants still are.
+ */
 export function sanitizePublicValue(value, path = []) {
   if (Array.isArray(value)) {
     return value
@@ -102,12 +132,20 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     }
     return clone;
   }
-  const clean = sanitizePublicValue(settlement || {});
-  delete clean.aiData;
-  delete clean.plotHooks;
-  delete clean.dmCompass;
-  delete clean.dossierNotes;
-  delete clean.notes;
+  // Default projection — FAIL CLOSED. Gate the settlement ROOT to the top-level
+  // allowlist first: any key not on PUBLIC_TOPLEVEL_KEYS is dropped, so a future
+  // DM-private top-level field can't leak just because it misses the denylist
+  // (the aiData/plotHooks/dmCompass/dossierNotes/notes explicit deletes are now
+  // subsumed by this gate). Each allowed subtree is then run through the recursive
+  // denylist seeded at path=[key] — the allowed key itself is not re-denylisted
+  // (so `coherenceNotes` survives despite /note/i) while its descendants are.
+  const src = (settlement && typeof settlement === 'object' && !Array.isArray(settlement)) ? settlement : {};
+  const clean = {};
+  for (const key of PUBLIC_TOPLEVEL_KEYS) {
+    if (!Object.prototype.hasOwnProperty.call(src, key)) continue;
+    const sanitized = sanitizePublicValue(src[key], [key]);
+    if (sanitized !== undefined) clean[key] = sanitized;
+  }
   if (Array.isArray(clean.npcs)) {
     clean.npcs = clean.npcs.map(npc => ({
       id: npc.id,
