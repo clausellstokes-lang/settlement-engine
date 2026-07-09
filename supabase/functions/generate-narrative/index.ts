@@ -1712,7 +1712,12 @@ function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
   return { signal: ctrl.signal, cancel: () => clearTimeout(id) };
 }
 
-async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4): Promise<Response> {
+// The trailing `fetch` param is the injectable provider-fetch seam: it defaults
+// to the global fetch, and the handler threads deps.anthropicFetch down through
+// callModel so the execution test can drive the spend → fail → refund path
+// deterministically. Naming it `fetch` (shadowing the global) keeps the call
+// site — and the AbortController signal it threads — byte-identical.
+async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4, fetch: typeof globalThis.fetch = globalThis.fetch): Promise<Response> {
   const deadline = Date.now() + TOTAL_BUDGET_MS;
   // Each attempt gets its OWN controller+timer (a retry must not inherit a spent
   // budget), capped by whatever remains of the overall deadline. The timer is
@@ -1764,7 +1769,7 @@ async function runWithConcurrency<T>(items: T[], limit: number, worker: (item: T
 
 // ── Anthropic call ──────────────────────────────────────────────────────────
 
-async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<string> {
+async function callAnthropic(prompt: string, maxTokens: number, model: string, fetchImpl: typeof fetch = fetch): Promise<string> {
   if (!ANTHROPIC_API_KEY) throw new Error('Anthropic API key is not configured');
   const res = await fetchAiWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -1778,7 +1783,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
       max_tokens: maxTokens,
       messages: [{ role: 'user', content: prompt }],
     }),
-  });
+  }, 4, fetchImpl);
 
   if (!res.ok) {
     const errBody = await res.text();
@@ -1789,7 +1794,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
   return (json.content?.[0]?.text || '').trim();
 }
 
-async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<string> {
+async function callOpenAI(prompt: string, maxTokens: number, model: string, fetchImpl: typeof fetch = fetch): Promise<string> {
   if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
   const res = await fetchAiWithRetry('https://api.openai.com/v1/responses', {
     method: 'POST',
@@ -1802,7 +1807,7 @@ async function callOpenAI(prompt: string, maxTokens: number, model: string): Pro
       input: prompt,
       max_output_tokens: maxTokens,
     }),
-  });
+  }, 4, fetchImpl);
 
   if (!res.ok) {
     const errBody = await res.text();
@@ -1829,6 +1834,7 @@ async function callModel(
   modelPreference: ModelPreference,
   featureType: string,
   usageTelemetry?: AiUsageRecord[],
+  fetchImpl: typeof fetch = fetch,
 ): Promise<string> {
   const profile = MODEL_PROFILES[modelPreference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   const model = profile[phase];
@@ -1837,8 +1843,8 @@ async function callModel(
   let ok = false;
   try {
     output = profile.provider === 'openai'
-      ? await callOpenAI(prompt, maxTokens, model)
-      : await callAnthropic(prompt, maxTokens, model);
+      ? await callOpenAI(prompt, maxTokens, model, fetchImpl)
+      : await callAnthropic(prompt, maxTokens, model, fetchImpl);
     ok = true;
     return output;
   } finally {
@@ -1925,10 +1931,50 @@ function isEmptyPayload(payload: unknown): boolean {
   return false;
 }
 
+// ── Injectable seams (mirrors stripe-webhook's extracted-handler deps) ───────
+// The money path — spend_credits (as the user) → stream → provider failure →
+// refund_credits (as service_role) — had zero executed coverage. The handler is
+// exported as handleGenerateNarrative(req, deps) so index.test.ts can drive it
+// against recording stubs. THREE seams, each resolved through `deps` with a
+// production fallback so `serve()` (no deps) is byte-identical to the previous
+// inline handler:
+//   • userClient(authHeader) — anon client bound to the caller's JWT. Runs
+//     auth.getUser() and the spend_credits RPC AS THE USER (RLS-scoped).
+//   • adminClient()          — service-role client. Runs refund_credits, which
+//     migration 033 grants to service_role only (a user can't self-refund a
+//     successful spend).
+//   • anthropicFetch         — the provider fetch, threaded into callModel →
+//     callAnthropic/callOpenAI → fetchAiWithRetry.
+function userClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+function adminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+type GenerateNarrativeDeps = {
+  userClient?: typeof userClient;
+  adminClient?: typeof adminClient;
+  anthropicFetch?: typeof fetch;
+};
+
 // ── Main handler ────────────────────────────────────────────────────────────
 
-serve(async (req) => {
+export async function handleGenerateNarrative(
+  req: Request,
+  deps: GenerateNarrativeDeps = {},
+): Promise<Response> {
   const corsHeaders = getCorsHeaders(req);
+  // Provider fetch seam — the injected fetch (tests) or the real global fetch.
+  const providerFetch = deps.anthropicFetch ?? fetch;
 
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -1949,17 +1995,25 @@ serve(async (req) => {
   };
 
   try {
-    // Authenticate
+    // Authenticate. Auth failures return 401 (Unauthorized) BEFORE any spend —
+    // distinct from the generic 400 the catch below returns for bad payloads /
+    // spend errors. No credit is touched on this path.
     const authHeader = req.headers.get('Authorization');
-    if (!authHeader) throw new Error('Missing authorization header');
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
 
-    const supabaseUser = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
+    const supabaseUser = (deps.userClient ?? userClient)(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
-    if (authError || !user) throw new Error('Not authenticated');
+    if (authError || !user) {
+      return new Response(
+        JSON.stringify({ error: 'Not authenticated' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
 
     // Parse request
     const {
@@ -2011,10 +2065,7 @@ serve(async (req) => {
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
     const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseAdmin = (deps.adminClient ?? adminClient)();
 
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
     // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
@@ -2159,7 +2210,7 @@ serve(async (req) => {
             await Promise.all(entries.map(async ([fieldName, cfg]) => {
               try {
                 const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext, confirmedChronicleContext);
-                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
+                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry, providerFetch);
                 results[fieldName] = value;
                 send({ field: fieldName, value });
               } catch (e) {
@@ -2222,6 +2273,7 @@ serve(async (req) => {
                 selectedModelPreference,
                 type,
                 usageTelemetry,
+                providerFetch,
               );
             } catch (e) {
               await refund();
@@ -2265,7 +2317,7 @@ serve(async (req) => {
                   dynamicPreservation,
                   confirmedAiGuidance,
                 );
-                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
+                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry, providerFetch);
                 const parsed = safeJsonParse(raw);
 
                 // Silent-shape-mismatch detection (see narrative loop above).
@@ -2332,6 +2384,7 @@ serve(async (req) => {
               selectedModelPreference,
               type,
               usageTelemetry,
+              providerFetch,
             );
           } catch (e) {
             await refund();
@@ -2366,7 +2419,7 @@ serve(async (req) => {
               }
 
               const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation, confirmedAiGuidance);
-              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
+              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry, providerFetch);
               const parsed = safeJsonParse(raw);
 
               // Silent-shape-mismatch detection: snapshot the field before apply,
@@ -2442,4 +2495,8 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+// Production entry point — no deps, so every seam falls back to its real
+// implementation and behavior matches the previous inline `serve` handler.
+serve(handleGenerateNarrative);

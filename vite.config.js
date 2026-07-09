@@ -225,6 +225,28 @@ export default defineConfig({
         'src/pdf/**',            // PDF renderer — covered by visual QA
         'src/components/**/*.jsx', // UI; tested via integration/E2E if added later
       ],
+      // ── Coverage floors for the money / security modules (a RATCHET, not an
+      //    aspiration). These per-file thresholds fail `npm run test:coverage`
+      //    (and the dedicated `test:coverage:floors`) if coverage on any of
+      //    these files regresses more than ~5 points below where it is today, so
+      //    a change that quietly deletes a spend/refund/save/checkout test can't
+      //    ship green. Only these globs are floored; the rest of src/ is
+      //    unthresholded so the warning rate stays low.
+      //
+      //    Floors were set to measured − ~5pts (min 0), from a full-suite
+      //    `vitest run --coverage` on 2026-07-09. Measured % Stmts/Branch/Funcs/
+      //    Lines are in the trailing comment on each entry. Re-measure and raise
+      //    a floor whenever you meaningfully add coverage — never lower one to
+      //    make a red build pass.
+      thresholds: {
+        'src/lib/checkoutReconcile.js': { statements: 83, branches: 78, functions: 61, lines: 83 }, // measured 88.09 / 83.33 / 66.66 / 88.88
+        'src/lib/creditLedger.js':      { statements: 10, branches: 21, functions: 23, lines: 12 }, // measured 15.38 / 26.08 / 28.57 / 17.24 (known-thin: mostly async supabase paths)
+        'src/lib/pendingDossier.js':    { statements: 78, branches: 77, functions: 85, lines: 86 }, // measured 83.18 / 82.00 / 90.00 / 91.30
+        'src/lib/saves.js':             { statements: 68, branches: 68, functions: 75, lines: 79 }, // measured 73.36 / 73.97 / 80.95 / 84.55
+        'src/lib/stripe.js':            { statements: 0,  branches: 0,  functions: 9,  lines: 0 },  // measured 3.57 / 0.00 / 14.28 / 4.16 (known-thin: redirect-only, exercised via UI smoke)
+        'src/store/aiSlice.js':         { statements: 42, branches: 39, functions: 35, lines: 46 }, // measured 47.48 / 44.85 / 40.16 / 51.37
+        'src/store/creditsSlice.js':    { statements: 11, branches: 0,  functions: 7,  lines: 11 }, // measured 16.12 / 0.00 / 12.50 / 16.00
+      },
     },
   },
 });

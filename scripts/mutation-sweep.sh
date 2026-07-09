@@ -5,9 +5,40 @@
 # enforcement spine holds the weight the docs claim. Leaves the tree clean.
 #
 # Run from repo root on a clean working tree for the touched files.
+#
+# CI wiring: this runs as the opt-in `mutation-sweep` job in
+# .github/workflows/ci.yml — workflow_dispatch + a weekly cron ONLY, never
+# per-push, because it runs a gate step once per injected mutation (slow). The
+# job's fresh checkout is clean, so the dirty-tree guard below is a no-op there.
 cd "$(dirname "$0")/.." || exit 2
 PASS=0; FAIL=0
 results=()
+
+# ── Dirty-tree refusal guard ─────────────────────────────────────────────────
+# This sweep MUTATES tracked files and reverts each with `git checkout -- <file>`.
+# On a dirty tree that revert would DISCARD a maintainer's uncommitted work in
+# any of those files. Refuse up front unless the files it touches are clean.
+# Override for an intentional throwaway run with MUTATION_SWEEP_ALLOW_DIRTY=1.
+MUTATED_FILES=(
+  src/domain/userEdits.js
+  src/generators/cascadeGenerator.js
+  src/data/stressTypes.js
+  src/data/categoryVocabulary.js
+  src/data/entityTags.js
+  src/domain/display/parityContract.js
+  ARCHITECTURE.md
+  src/domain/events/undoEvent.js
+)
+if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
+  dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
+  if [ -n "$dirty" ]; then
+    echo "mutation-sweep: refusing to run — files this sweep reverts have uncommitted changes:" >&2
+    echo "$dirty" >&2
+    echo "Commit or stash them first ('git checkout --' revert would discard them)." >&2
+    echo "Set MUTATION_SWEEP_ALLOW_DIRTY=1 to override." >&2
+    exit 2
+  fi
+fi
 
 # check_caught <label> <file> <check-cmd>
 # Call AFTER the file has been mutated. check-cmd must EXIT NONZERO when the

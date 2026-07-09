@@ -19,6 +19,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:coverage:floors": "vitest run --coverage --coverage.reporter=text --coverage.include=src/lib/stripe.js --coverage.include=src/lib/creditLedger.js --coverage.include=src/lib/checkoutReconcile.js --coverage.include=src/lib/pendingDossier.js --coverage.include=src/lib/saves.js --coverage.include=src/store/aiSlice.js --coverage.include=src/store/creditsSlice.js",
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install",
     "test:e2e:ui": "playwright test --ui",

@@ -8,6 +8,12 @@ on:
     branches: ['**']
   pull_request:
     branches: [master, main]
+  # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
+  # gated to these events only). Per-push/PR runs are unaffected — the sweep runs
+  # a gate step once per injected mutation and is too slow for the hot path.
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
 
 jobs:
   check:
@@ -113,6 +119,28 @@ jobs:
   # The money-path trust boundaries (stripe-webhook signature verification; later
   # the generate-narrative refund decision) are RUN here against forged vs. signed
   # requests — the regex-over-source contracts in vitest can't prove behavior.
+  coverage-floors:
+    # Coverage floors for the money / security modules — a regression RATCHET
+    # on the highest-consequence files (spend/refund via aiSlice+creditsSlice,
+    # saves, checkout reconcile, credit ledger, stripe, pending dossier). Runs
+    # the suite under v8 coverage and fails if any floored file drops more than
+    # ~5pts below its measured baseline (floors in vite.config.js
+    # coverage.thresholds; a deleted money-path test is exactly the regression
+    # this catches). Parallel to `check` so the ratchet never doubles the
+    # critical path's wall-clock.
+    name: Coverage floors (money / security)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Coverage floors
+        run: npm run test:coverage:floors
+
   deno-tests:
     name: Edge function execution tests (Deno)
     runs-on: ubuntu-latest
@@ -127,6 +155,32 @@ jobs:
       - name: Run edge-function Deno tests
         run: deno task test:edge
 
+  # ── Enforcement-spine mutation sweep (opt-in) ───────────────────────────────
+  # Injects a deliberate regression per enforced invariant and asserts the gate
+  # catches each one (scripts/mutation-sweep.sh). It runs a gate step PER mutation
+  # (slow), so it is kept OFF the per-push/PR hot path: only the weekly cron and a
+  # manual workflow_dispatch trigger it. The fresh checkout is clean, so the
+  # script's dirty-tree guard is a no-op here; a MISSED regression (a gate that
+  # stayed green under a planted bug) exits nonzero and fails this job.
+  mutation-sweep:
+    name: Enforcement mutation sweep (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run mutation sweep
+        run: bash scripts/mutation-sweep.sh
+
   # ── Production deploy gated on the full green gate (finding F35) ─────────────
   # "The gate is the product": production must advance only through CI. This job
   # runs ONLY after check + e2e + deno-tests pass, ONLY on master. It is a safe
@@ -136,7 +190,7 @@ jobs:
   # once configured, CI becomes the ONLY path to production.
   deploy:
     name: Deploy to production (gated)
-    needs: [check, e2e, deno-tests]
+    needs: [check, e2e, deno-tests, coverage-floors]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
