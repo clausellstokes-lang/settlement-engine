@@ -19,7 +19,12 @@
  * resulting action through recordPartyImpact, and only in a canon campaign.
  */
 
-import { PARTY_IMPACT_KINDS } from '../worldPulse/partyImpact.js';
+// Leaf import ON PURPOSE: this module is eager (settlementSlice → applyEvent,
+// first paint). Importing partyImpact.js instead would drag the whole
+// world-pulse apply pipeline (applyWorldPulse, relationshipEvolution,
+// npcAgency, factionCompetition, … — 152 kB minified) back into the entry
+// chunk just for this const.
+import { PARTY_IMPACT_KINDS } from '../worldPulse/partyImpactKinds.js';
 
 // Settlement event type → party-impact kind + which action field carries the
 // event's targetId. Only world-scale analogs belong here.

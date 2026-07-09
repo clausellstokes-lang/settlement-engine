@@ -30,28 +30,15 @@ import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } 
 import { ensureRelationshipState } from './relationshipEvolution.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { PARTY_IMPACT_KINDS } from './partyImpactKinds.js';
+
+// Re-exported so the worldPulse barrel and simulation-side importers keep the
+// historical import path. Eager first-paint code (domain/events/
+// partyEventLinkage.js) must import partyImpactKinds.js directly — importing
+// THIS module drags the whole apply pipeline into the entry chunk.
+export { PARTY_IMPACT_KINDS };
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
-
-/**
- * Catalog of party impact kinds. `targets` documents the fields the DM must
- * supply; `defaultMagnitude` is the decisiveness (0..1) when unspecified. This
- * is exported so a UI can render the picker and validate input.
- */
-export const PARTY_IMPACT_KINDS = Object.freeze({
-  resolve_stressor:    { targets: ['stressorId'],               defaultMagnitude: 1.0,  label: 'Resolve a crisis', note: 'The party ended an active stressor (broke the siege, cured the plague).' },
-  ease_stressor:       { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Ease a crisis',    note: 'The party blunted but did not end a stressor.' },
-  worsen_stressor:     { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Worsen a crisis',  note: 'The party (or their failure) deepened a stressor.' },
-  name_attacker:       { targets: ['stressorId'],               defaultMagnitude: 0.3,  label: 'Name the attacker', note: 'The DM identifies the force behind a war-shaped stressor — another settlement, or a force with no settlement at all (a goblin warband, a mercenary company).' },
-  broker_relationship: { targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Broker peace',     note: 'The party de-escalated a relationship between two settlements.' },
-  inflame_relationship:{ targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Inflame a feud',   note: 'The party escalated a relationship between two settlements.' },
-  clear_condition:     { targets: ['settlementId', 'condition'],defaultMagnitude: 1.0,  label: 'Resolve a condition', note: 'The party removed an active condition from a settlement.' },
-  impose_condition:    { targets: ['settlementId', 'archetype'],defaultMagnitude: 0.6,  label: 'Cause a condition', note: 'The party caused a new active condition.' },
-  bolster_faction:     { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Empower a faction', note: 'The party strengthened a faction\'s standing.' },
-  undermine_faction:   { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Undermine a faction', note: 'The party weakened a faction\'s standing.' },
-  empower_npc:         { targets: ['settlementId', 'npcId'],    defaultMagnitude: 0.5,  label: 'Aid an NPC',        note: 'The party advanced an NPC\'s position.' },
-  remove_npc:          { targets: ['settlementId', 'npcId'],    defaultMagnitude: 1.0,  label: 'Remove an NPC',     note: 'The party removed a key NPC (killed, exiled, captured).' },
-});
 
 // Relationship de-/escalation ladder, worst → best.
 const RELATIONSHIP_LADDER = ['hostile', 'cold_war', 'rival', 'neutral', 'trade_partner', 'allied'];

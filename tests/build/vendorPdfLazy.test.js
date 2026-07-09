@@ -37,30 +37,34 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // ── First-paint static-closure byte budget ──────────────────────────────────
 // The entry's transitive static import closure is everything the browser is
 // forced to download before it can paint. Measured after the worldPulse
-// lazy-engine split (2026-07-09, `npm run build`):
+// lazy-engine split + the PARTY_IMPACT_KINDS leaf extraction (2026-07-09,
+// `npm run build`):
 //
-//   data          417,151   +  engine        655,641
-//   index(entry)  664,652   +  vendor-icons   30,041
+//   data          417,151   +  engine        655,647
+//   index(entry)  512,248   +  vendor-icons   30,041
 //   vendor-react  193,160   +  vendor-state   17,031
 //   ──────────────────────────────────────────────────
-//   MEASURED TOTAL: 1,977,676 raw bytes (~1.89 MB)
+//   MEASURED TOTAL: 1,825,278 raw bytes (~1.74 MB)
 //
-// The entry (index) chunk dropped ~47 kB (711,694 → 664,652) when the campaign
-// world-pulse advance/preview/apply-proposal/party machinery was moved behind a
-// memoized dynamic import (loadWorldEngine in campaignWorldPulseSlice.js): the
-// advance-exclusive modules (advanceCampaignWorld, candidateEvents, coup,
-// factionCapture, flows, pressureModel, realmEvents, thievesGuild,
-// blockadeTransport) now split into their own lazy chunk fetched on the first
-// pulse action, not on boot.
-//
-// STILL in this closure (a KNOWN, out-of-scope anchor): applyWorldPulse + its
-// heavy graph (relationshipEvolution, npcAgency, factionCompetition,
-// relationshipMemory, institutionLifecycle, tier/population dynamics, partyImpact)
-// are pulled by settlementSlice → domain/events/partyEventLinkage.js →
-// worldPulse/partyImpact.js — a PARTY_IMPACT_KINDS const import that drags the
-// whole module because the project doesn't mark modules side-effect-free.
-// Extracting that const to a leaf module would let this fall out of first paint
-// too (the store edges are already dynamic).
+// Two worldPulse cuts got it here:
+//   1. (−47 kB) The campaign world-pulse advance/preview/apply-proposal/party
+//      machinery moved behind a memoized dynamic import (loadWorldEngine in
+//      campaignWorldPulseSlice.js), splitting the advance-exclusive modules
+//      (advanceCampaignWorld, candidateEvents, coup, factionCapture, flows,
+//      pressureModel, realmEvents, thievesGuild, blockadeTransport) into a
+//      lazy chunk fetched on the first pulse action, not on boot.
+//   2. (−152 kB, entry 664,652 → 512,248) The LAST static anchor into the
+//      apply pipeline was cut: settlementSlice → domain/events/
+//      partyEventLinkage.js imported PARTY_IMPACT_KINDS from
+//      worldPulse/partyImpact.js, dragging applyWorldPulse + its heavy graph
+//      (relationshipEvolution, npcAgency, factionCompetition,
+//      relationshipMemory, institutionLifecycle, tier/population dynamics)
+//      into first paint for one const. The const now lives in the
+//      dependency-free leaf worldPulse/partyImpactKinds.js (partyImpact.js
+//      re-exports it), and the whole apply graph is lazy. If this budget
+//      fails and the closure listing shows an applyWorldPulse/relationship*
+//      chunk, someone re-imported a worldPulse simulation module from eager
+//      store/domain code — import the leaf (or a new leaf) instead.
 //
 // vendor-pdf (1.85 MB / 616 kB gz) is intentionally NOT in this closure.
 // engine (~213 kB gz) IS — it's genuinely reached by eager store/domain
@@ -69,7 +73,7 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // ever move DOWN as chunks are made lazy, never up without a deliberate,
 // documented reason. If this fails high, something (very likely vendor-pdf)
 // re-entered the static graph — check the closure listing the test prints.
-const CLOSURE_BUDGET_BYTES = 2_075_000; // 1,977,676 measured + ~5%
+const CLOSURE_BUDGET_BYTES = 1_915_000; // 1,825,278 measured + ~5%
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
