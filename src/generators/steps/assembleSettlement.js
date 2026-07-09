@@ -10,6 +10,11 @@
 
 import { registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
+// F8: re-render stress summaries with the real settlement name. resolveStress
+// (step 3) rolled them 16 steps ago with an empty name and stashed the
+// rng-derived choice in each entry's `summaryRoll`; we re-render here now that
+// the name exists.
+import { renderStressSummary } from '../stressNarrative.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
@@ -38,7 +43,11 @@ registerStep('assembleSettlement', {
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
   reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['settlement'],
-  mutates: ['powerStructure'], // normalizes the power roster in place (A+ P1.7 contract)
+  // normalizes the power roster in place; F8 also re-renders each stress entry's
+  // summary in place with the real name (resolveStress rolled them name-blind) and
+  // deletes the transient summaryRoll token — a declared in-place write of `stress`
+  // (A+ P1.7 contract).
+  mutates: ['powerStructure', 'stress'],
   phase: 'assembly',
 }, (ctx) => {
   const {
@@ -51,8 +60,16 @@ registerStep('assembleSettlement', {
   } = ctx;
   const config = ctx.config || {};
 
+  // F8: mint the settlement name up front so the stress summaries — rolled with
+  // an empty name back in resolveStress (step 3) — can be re-rendered with the
+  // real name below. generateSettlementName draws rng (prefix + suffix indices);
+  // keeping the mint here, immediately before the settlement literal, preserves
+  // its exact draw position — nothing between the ctx destructure and the literal
+  // consumes rng, so the customName short-circuit and draw order are unchanged.
+  const settlementName = (effectiveConfig.customName?.trim()) || generateSettlementName(culture);
+
   const settlement = {
-    name: (effectiveConfig.customName?.trim()) || generateSettlementName(culture),
+    name: settlementName,
     tier,
     population,
     institutions,
@@ -102,6 +119,29 @@ registerStep('assembleSettlement', {
     // read _config first so 'random' stays random across regenerations.
     _config: { ...config },
   };
+
+  // F8: re-render each stress entry's summary with the real settlement name.
+  // resolveStress baked a PROVISIONAL empty-name summary (leading-space prose
+  // like " is under active siege…") and stashed the sole rng-derived choice
+  // (wartime's profit coin) in `summaryRoll`. Now that the name exists we
+  // re-render from that token and delete the transient field so it never
+  // persists or enters the golden hash. Handles both dual-written containers
+  // (stress + stressors — same object refs) and both shapes (bare object vs
+  // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
+  // carry their own summary) are left untouched.
+  const rerenderStressSummary = (container) => {
+    if (!container) return;
+    const entries = Array.isArray(container) ? container : [container];
+    for (const e of entries) {
+      if (e && typeof e === 'object'
+          && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
+        e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);
+        delete e.summaryRoll;
+      }
+    }
+  };
+  rerenderStressSummary(settlement.stress);
+  rerenderStressSummary(settlement.stressors);
 
   // Narrative overlays
   settlement.pressureSentence = generatePressureSentence(settlement);

@@ -8,8 +8,7 @@
 
 import { random as _rng } from './rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
-import { getInstFlags } from './priorityHelpers.js';
-import { stressSummary } from './stressNarrative.js';
+import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
 
@@ -23,27 +22,37 @@ const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 /**
  * Construct a full stress entry object from a stress type key and its map data.
  *
- * The summary text used to be an embedded `stressData.summary({ name })` closure
- * inside the STRESS_TYPE_MAP data; A+ Track H moved it to stressNarrative.js with
- * rng + instFlags as EXPLICIT params. We pass rngContext.random (the same draw
- * the pipeline uses) so wartime's `rng() < 0.45` fires at the identical point —
- * preserving byte-identical, same-seed output.
+ * F8 (roll/render split): the settlement NAME does not exist at pipeline time —
+ * resolveStress (step 3) rolls stress with name==='' and the name is minted 16
+ * steps later in assembleSettlement. So we split the summary in two:
+ *   - rollStressSummary draws the rng-derived choice (only wartime draws) into a
+ *     small JSON-serializable `summaryRoll` token, at the EXACT position the old
+ *     single-phase `stressSummary` call drew rng — keeping every downstream rng
+ *     fork byte-identical.
+ *   - renderStressSummary produces a PROVISIONAL summary now (name is '' here, so
+ *     guarded templates render 'the settlement'; bare-name templates render a
+ *     leading space). Nothing reads `.summary` before assembly, where
+ *     assembleSettlement re-renders it from `summaryRoll` with the real name and
+ *     then deletes the transient token.
  *
- * @param {string} settlementName
- * @param {string} stressType    - key from STRESS_TYPE_MAP
- * @param {Object} stressData    - STRESS_TYPE_MAP[stressType]
- * @param {Object} instFlags     - getInstFlags(config, institutions) output
+ * @param {string} settlementName  - '' at pipeline time; the real name at assembly
+ * @param {string} stressType      - key from STRESS_TYPE_MAP
+ * @param {Object} stressData      - STRESS_TYPE_MAP[stressType]
  */
-const buildStressEntry = (settlementName, stressType, stressData, instFlags) => ({
-  type:          stressType,
-  label:         stressData.label,
-  icon:          stressData.icon,
-  colour:        stressData.colour,
-  summary:       stressSummary(stressType, { name: settlementName }, { rng: _rng, instFlags }),
-  crisisHook:    stressData.crisisHook,
-  viabilityNote: stressData.viabilityNote,
-  historyColour: stressData.historyColour,
-});
+const buildStressEntry = (settlementName, stressType, stressData) => {
+  const summaryRoll = rollStressSummary(stressType, { rng: _rng });
+  return {
+    type:          stressType,
+    label:         stressData.label,
+    icon:          stressData.icon,
+    colour:        stressData.colour,
+    summaryRoll,
+    summary:       renderStressSummary(stressType, settlementName, summaryRoll),
+    crisisHook:    stressData.crisisHook,
+    viabilityNote: stressData.viabilityNote,
+    historyColour: stressData.historyColour,
+  };
+};
 
 // ─── buildStressContext ───────────────────────────────────────────────────────
 
@@ -215,17 +224,11 @@ const STRESS_SEVERITY_WEIGHT = {
 export const generateStress = (settlement, config = {}) => {
   const { tier, institutions = [], name } = settlement;
 
-  // Institution/priority flags for the stressor summaries. getInstFlags is
-  // RNG-neutral (no random()/pick()/chance() draw — it derives from priorities +
-  // institution names), so computing it here does not perturb draw order. It is
-  // passed explicitly to every summary so the data layer stays pure.
-  const instFlags = getInstFlags(config, institutions);
-
   // ── Mode 0: stressTypes array (from UI/config) ─────────────────────────
   if (config.stressTypes?.length && config.selectedStressesRandom !== false) {
     const entries = config.stressTypes
       .filter(t => STRESS_TYPE_MAP[t])
-      .map(t => buildStressEntry(name, t, STRESS_TYPE_MAP[t], instFlags));
+      .map(t => buildStressEntry(name, t, STRESS_TYPE_MAP[t]));
     if (entries.length === 1) return entries[0];
     if (entries.length > 1) return entries;
   }
@@ -233,7 +236,7 @@ export const generateStress = (settlement, config = {}) => {
   // ── Mode 1: Forced single stress type ─────────────────────────────────
   if (config.stressType && STRESS_TYPE_MAP[config.stressType] &&
       config.selectedStressesRandom !== false) {
-    return buildStressEntry(name, config.stressType, STRESS_TYPE_MAP[config.stressType], instFlags);
+    return buildStressEntry(name, config.stressType, STRESS_TYPE_MAP[config.stressType]);
   }
 
   // ── Mode 2: User-selected pool (checkbox list) ─────────────────────────
@@ -243,7 +246,7 @@ export const generateStress = (settlement, config = {}) => {
 
     const entries = selected
       .filter(type => STRESS_TYPE_MAP[type])
-      .map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type], instFlags));
+      .map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type]));
 
     if (entries.length === 0) return null;
     return entries.length === 1 ? entries[0] : entries;
@@ -281,6 +284,6 @@ export const generateStress = (settlement, config = {}) => {
                : _rng() < 0.10 ? sorted.slice(0, 2) : sorted.slice(0, 1);
 
   if (active.length === 0) return null;
-  if (active.length === 1) return buildStressEntry(name, active[0], STRESS_TYPE_MAP[active[0]], instFlags);
-  return active.map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type], instFlags));
+  if (active.length === 1) return buildStressEntry(name, active[0], STRESS_TYPE_MAP[active[0]]);
+  return active.map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type]));
 };

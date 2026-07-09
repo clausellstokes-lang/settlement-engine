@@ -10,31 +10,70 @@
  * removed here, keeping ONLY the text that actually rendered today, while the
  * instFlags param is now a real, explicitly-passed value.
  *
- * rng and instFlags are EXPLICIT parameters (no implicit module globals), so the
- * RNG draw happens at the same point, in the same order, producing byte-identical
- * output to the old inline closures.
+ * F8 (roll/render split): the summary is now produced in TWO phases so it can be
+ * rendered with the settlement NAME, which is minted 16 steps after the stress
+ * step rolls. resolveStress calls generateStress with an empty name, so the old
+ * single-phase `stressSummary` baked prose like " is under active siege…" into
+ * the persisted entry (bare leading `${name}` with name===''). We now:
+ *   1. rollStressSummary(type, {rng})  — draws ONLY the rng-derived choice into a
+ *      small JSON-serializable token, at the exact rng draw point of the old call.
+ *   2. renderStressSummary(type, name, roll)  — pure text render, called again at
+ *      assembly once the real name exists.
+ * Only `wartime` draws rng (its `rng() < 0.45` profit coin); every other template
+ * is rng-free, so the token is `null` for them and the draw order is byte-identical
+ * to the old inline closures.
  */
 
 /**
- * Resolve the one-paragraph summary for a stressor type.
+ * Roll the rng-derived choices for a stressor summary.
  *
- * @param {string} type  - key from STRESS_TYPE_MAP (e.g. 'famine')
- * @param {{ name?: string }} ctx - render context (settlement name)
- * @param {{ rng?: () => number, instFlags?: object }} [deps]
- *   rng       - the seeded draw (rngContext.random) — pass the SAME instance the
- *               pipeline uses so draw order is preserved.
- *   instFlags - getInstFlags(config, institutions) output. Real value now (the
- *               old code's `typeof getInstFlags` guard never bound it), but the
- *               rendered text below is the historical else-path, byte-identical.
- * @returns {string}
+ * Returns a small JSON-serializable token (or null) capturing any decision that
+ * depends on the seeded stream, so the text can be re-rendered later with the real
+ * settlement name WITHOUT re-drawing rng. Only `wartime` draws: its profit/loss
+ * coin. The draw happens here, via the explicitly-passed rng, at the SAME point in
+ * the pipeline the old inline `_rng()` fired — preserving draw order.
+ *
+ * @param {string} type - key from STRESS_TYPE_MAP (e.g. 'wartime')
+ * @param {{ rng?: () => number }} [deps] - rng: the seeded draw (rngContext.random)
+ * @returns {?Object} JSON-serializable roll token, or null for rng-free types
  */
-export function stressSummary(type, ctx = {}, { rng, instFlags } = {}) {
-  const name = ctx?.name;
-  const fn = SUMMARIES[type];
-  return fn ? fn(name, { rng, instFlags }) : undefined;
+export function rollStressSummary(type, { rng } = {}) {
+  // wartime is the ONLY summary that consults rng.
+  return type === 'wartime' ? { profit: rng() < 0.45 } : null;
 }
 
-const SUMMARIES = {
+/**
+ * Render the one-paragraph summary for a stressor type.
+ *
+ * Pure: no rng, no globals. The 9 templates that lead with (or embed) a bare name
+ * interpolate the REAL settlement name; the 5 that already guard keep their
+ * `name || 'the settlement'` fallback; wartime branches on the pre-rolled token.
+ *
+ * @param {string} type - key from STRESS_TYPE_MAP
+ * @param {string} [name] - the real settlement name (empty/undefined at roll time)
+ * @param {?Object} [roll] - token from rollStressSummary (only wartime uses it)
+ * @returns {string|undefined}
+ */
+export function renderStressSummary(type, name, roll) {
+  const fn = RENDERERS[type];
+  return fn ? fn(name, roll) : undefined;
+}
+
+/**
+ * Legacy single-call shim. Any caller not yet migrated to the roll/render split
+ * keeps working: it rolls and renders in one shot. instFlags is accepted but
+ * unused (no template consults it anymore).
+ *
+ * @param {string} type
+ * @param {{ name?: string }} ctx
+ * @param {{ rng?: () => number, instFlags?: object }} [deps]
+ * @returns {string|undefined}
+ */
+export function stressSummary(type, ctx = {}, { rng } = {}) {
+  return renderStressSummary(type, ctx?.name, rollStressSummary(type, { rng }));
+}
+
+const RENDERERS = {
   under_siege: (name) =>
     `${name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
 
@@ -98,12 +137,12 @@ const SUMMARIES = {
     (name || "the settlement") +
     " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
 
-  // wartime: the only summary that draws from rng. The draw happens here, via the
-  // explicitly-passed rng, at the same point as the old inline `_rng()` call —
-  // preserving draw order and byte-identical output.
-  wartime: (name, { rng }) => {
+  // wartime: the only summary that draws from rng. rollStressSummary made the draw
+  // (`rng() < 0.45` → roll.profit) at the pipeline's draw point; this pure render
+  // just branches on that pre-rolled token — byte-identical to the old inline text.
+  wartime: (name, roll) => {
     const s = name || "the settlement";
-    return rng() < 0.45
+    return roll?.profit
       ? s +
           " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. The garrison is reinforced and well-supplied. Prices are high and merchants with the right connections are getting richer. The cost will come due — it always does — but for now the war is good for business."
       : s +

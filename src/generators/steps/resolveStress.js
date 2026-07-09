@@ -128,7 +128,18 @@ registerStep('resolveStress', {
       // rolled entry's icon/colour/summary.
       entries = idx === -1
         ? [...entries, authored]
-        : entries.map((st, i) => (i === idx ? { ...st, ...authored } : st));
+        : entries.map((st, i) => {
+            if (i !== idx) return st;
+            const merged = { ...st, ...authored };
+            // F8: when the event authors its OWN summary, it wins — drop the
+            // rolled entry's summaryRoll token copied in from `st` so
+            // assembleSettlement's name re-render can't overwrite the authored
+            // prose. When the event authors no summary (the common upsert — it
+            // refreshes severity/label only), keep summaryRoll so the rolled
+            // entry's provisional summary is still re-rendered with the real name.
+            if (authored.summary != null) delete merged.summaryRoll;
+            return merged;
+          });
       recordTrace(ctx, {
         targetType: 'stressor',
         targetId:   `stressor.${type}`,
