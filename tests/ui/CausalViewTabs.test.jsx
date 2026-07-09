@@ -83,6 +83,48 @@ describe('CausalViewTabs — tabs', () => {
   });
 });
 
+describe('CausalViewTabs — keyboard (WAI-ARIA tabs pattern)', () => {
+  // Keydown handlers live on the tab buttons (the focusable widgets); a real
+  // keydown fires on whichever tab currently holds focus.
+  const activeTab = () => screen.getByRole('tab', { selected: true });
+
+  test('ArrowRight moves selection to the next lens', () => {
+    render(<CausalViewTabs settlement={fixture()} />);
+    fireEvent.keyDown(activeTab(), { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: /Simulation/i }).getAttribute('aria-selected')).toBe('true');
+    expect(screen.getByRole('tab', { name: /Narrative/i }).getAttribute('aria-selected')).toBe('false');
+  });
+
+  test('ArrowLeft from the first lens wraps to the last', () => {
+    render(<CausalViewTabs settlement={fixture()} />);
+    fireEvent.keyDown(activeTab(), { key: 'ArrowLeft' });
+    expect(screen.getByRole('tab', { name: /District/i }).getAttribute('aria-selected')).toBe('true');
+  });
+
+  test('Home and End jump to the first and last lens', () => {
+    render(<CausalViewTabs settlement={fixture()} defaultView="delta" />);
+    fireEvent.keyDown(activeTab(), { key: 'End' });
+    expect(screen.getByRole('tab', { name: /District/i }).getAttribute('aria-selected')).toBe('true');
+    fireEvent.keyDown(activeTab(), { key: 'Home' });
+    expect(screen.getByRole('tab', { name: /Narrative/i }).getAttribute('aria-selected')).toBe('true');
+  });
+
+  test('the newly selected tab takes focus and roving tabindex', () => {
+    render(<CausalViewTabs settlement={fixture()} />);
+    fireEvent.keyDown(activeTab(), { key: 'ArrowRight' });
+    const sim = screen.getByRole('tab', { name: /Simulation/i });
+    expect(sim.getAttribute('tabindex')).toBe('0');
+    expect(document.activeElement).toBe(sim);
+  });
+
+  test('arrow keys fire onViewChange with the new lens key', () => {
+    const onViewChange = vi.fn();
+    render(<CausalViewTabs settlement={fixture()} onViewChange={onViewChange} />);
+    fireEvent.keyDown(activeTab(), { key: 'ArrowRight' });
+    expect(onViewChange).toHaveBeenCalledWith('simulation');
+  });
+});
+
 describe('CausalViewTabs — panel content', () => {
   test('the tabpanel maps to the active tab via aria-labelledby + id', () => {
     render(<CausalViewTabs settlement={fixture()} />);

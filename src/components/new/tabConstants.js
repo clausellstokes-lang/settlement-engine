@@ -1,7 +1,12 @@
 import { swatch } from '../theme.js';
 // Shared constants for all tab components
 
-export const isMobile = () => window.innerWidth < 640;
+// F28 — the old `isMobile = () => window.innerWidth < 640` helper was a
+// non-reactive one-shot read: it never re-evaluated on resize/rotate, so a tab
+// laid out for desktop stayed desktop after the viewport narrowed (and vice
+// versa). All consumers now use the reactive `useIsMobile` hook
+// (src/hooks/useIsMobile.js), which subscribes to window resize. The export was
+// removed once the last call site migrated — reach for the hook, not a helper.
 
 // ── Tier 7.19 — BODY token (sweep across components) ─────────────────────────
 // The tabs historically used a per-file `const second=swatch['#6B5340']` for body

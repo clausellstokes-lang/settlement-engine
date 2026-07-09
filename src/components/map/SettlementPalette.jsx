@@ -13,6 +13,13 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, san
 
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
   const [query, setQuery] = useState('');
+  // F28 — keyboard placement is impossible here: a settlement lands on the map
+  // by dragging its card onto an <iframe> world map at a pointer coordinate,
+  // resolved by the FMG bridge in WorldMap.jsx. There is no keyboard-reachable
+  // map target, so pressing Enter on a card can't place it. Rather than lie via
+  // role="button"+aria-label "Drag X onto the map" (an action a keyboard user
+  // can't take), the card now announces honest guidance into this live region.
+  const [placementHint, setPlacementHint] = useState('');
   const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
   // P136 / M-6 — hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
@@ -91,7 +98,15 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
               key={save.id}
               save={save}
               placed={placedSettlements.has(String(save.id))}
-              onClick={() => setSelectedBurgId(null)}
+              onSelect={(name, isPlaced) => {
+                setSelectedBurgId(null);
+                setHover?.(save.id); // surface the QuickInspector peek
+                setPlacementHint(
+                  isPlaced
+                    ? `${name} is already placed on the map.`
+                    : `${name} selected. Drag its card onto the map with a mouse or touch to place it — keyboard placement isn't available for the map yet.`,
+                );
+              }}
               onHover={(hovering) => {
                 if (hovering) setHover?.(save.id);
                 else clearHover?.();
@@ -101,14 +116,19 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
         )}
       </div>
 
-      {/* Footer hint */}
-      <div style={{
-        padding: `${SP.xs}px ${SP.md}px`,
-        borderTop: `1px solid ${BORDER2}`,
-        fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
-        textAlign: 'center',
-      }}>
-        Drag a card onto the map to place it.
+      {/* Footer hint — doubles as an aria-live region so a keyboard user who
+          selects a card (Enter/Space) hears honest placement guidance instead
+          of a silently-inert "button". */}
+      <div
+        aria-live="polite"
+        style={{
+          padding: `${SP.xs}px ${SP.md}px`,
+          borderTop: `1px solid ${BORDER2}`,
+          fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+          textAlign: 'center',
+        }}
+      >
+        {placementHint || 'Drag a card onto the map to place it.'}
       </div>
     </div>
   );
@@ -130,7 +150,7 @@ const THREAT_COLOR = {
   plagued: '#A23434',
 };
 
-function SettlementCard({ save, placed, onHover }) {
+function SettlementCard({ save, placed, onSelect, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
   const tier = save.tier || settlement.tier || ', ';
@@ -163,13 +183,28 @@ function SettlementCard({ save, placed, onHover }) {
     }));
   }
 
+  // F28 — Enter/Space is a REAL action now: it selects the settlement (drives
+  // the QuickInspector peek) and announces honest placement guidance via the
+  // palette's aria-live footer. Placement itself remains a pointer drag (the
+  // map is an untabbable iframe), so the aria-label no longer commands a
+  // keyboard-impossible "Drag … onto the map".
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault(); // Space would otherwise scroll the list
+      onSelect?.(name, placed);
+    }
+  }
+
   return (
     <div
       draggable
       role="button"
       tabIndex={0}
-      aria-label={`Drag ${name} onto the map`}
+      aria-label={placed
+        ? `${name}, already placed on the map`
+        : `${name}, ${tier}. Press Enter for placement options.`}
       onDragStart={handleDragStart}
+      onKeyDown={handleKeyDown}
       style={{
         display: 'flex', alignItems: 'flex-start', gap: SP.xs,
         padding: `${SP.xs}px ${SP.sm}px`,

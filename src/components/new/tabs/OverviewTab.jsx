@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -44,8 +44,8 @@ function StatusTag({ label, value, _color, accent }) {
 export function OverviewTab({ settlement:r, narrativeNote}) {
   const [instOpen, setInstOpen] = useState(false);
   const [spatialOpen, setSpatialOpen] = useState(false);
+  const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r) return null;
-  const mobile = isMobile();
 
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};

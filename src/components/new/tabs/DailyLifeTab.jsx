@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { FS, swatch, CARD } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
-import {isMobile, PROSPERITY_COLORS} from '../tabConstants';
+import {PROSPERITY_COLORS} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -45,7 +46,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
   const [loadMsg, setLoadMsg]       = useState('');
-  const mobile = isMobile();
+  const mobile = useIsMobile();
 
   const requestDailyLife = useStore(s => s.requestDailyLife);
   const getCost = useStore(s => s.getCost);

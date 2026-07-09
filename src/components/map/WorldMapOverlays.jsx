@@ -1,6 +1,6 @@
 /**
  * WorldMapOverlays.jsx — floating overlays for the world map: toast, confirm
- * dialogs, simulation-rules dialog, guided tour, and the spinner keyframes.
+ * dialogs, simulation-rules dialog, and the guided tour.
  *
  * Extracted verbatim from WorldMap.jsx (no logic change). Pure presentational:
  * every piece of state and every handler lives in the parent WorldMap and is
@@ -75,11 +75,9 @@ export function WorldMapOverlays({
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
 
-      {/* Spinner animation */}
-      <style>{`
-        .sf-spin { animation: sf-spin 1.2s linear infinite; }
-        @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
+      {/* Spinner keyframes (`.sf-spin`) now live globally in src/index.css so
+          the Button primitive's busy spinner animates everywhere, not only
+          while this world-map overlay is mounted. */}
     </>
   );
 }

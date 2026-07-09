@@ -23,7 +23,7 @@
  * owns only the active-tab state.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { deriveCausalView, CAUSAL_VIEWS } from '../../domain/causalViews.js';
 
@@ -58,6 +58,7 @@ const VIEW_DESCRIPTIONS = Object.freeze({
 
 export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewChange }) {
   const [view, setView] = useState(defaultView);
+  const tabRefs = useRef([]);
 
   const derived = useMemo(() => {
     if (!settlement) return null;
@@ -73,6 +74,30 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
   const handleChange = (next) => {
     setView(next);
     if (typeof onViewChange === 'function') onViewChange(next);
+  };
+
+  // WAI-ARIA tabs keyboard pattern (horizontal orientation, selection follows
+  // focus). Roving tabindex was already in place (active tab = 0, rest = -1),
+  // but with no arrow handler 6 of the 7 lenses were keyboard-unreachable. We
+  // move BOTH focus and selection: ArrowLeft/Right step (wrapping), Home/End
+  // jump to the ends. The handler lives on the tab buttons (the focusable
+  // widgets), not the tablist container — keydown fires on the focused tab.
+  const handleTabKeyDown = (e) => {
+    const idx = CAUSAL_VIEWS.indexOf(view);
+    if (idx < 0) return;
+    let nextIdx;
+    switch (e.key) {
+      case 'ArrowRight': nextIdx = (idx + 1) % CAUSAL_VIEWS.length; break;
+      case 'ArrowLeft':  nextIdx = (idx - 1 + CAUSAL_VIEWS.length) % CAUSAL_VIEWS.length; break;
+      case 'Home':       nextIdx = 0; break;
+      case 'End':        nextIdx = CAUSAL_VIEWS.length - 1; break;
+      default: return;
+    }
+    e.preventDefault();
+    handleChange(CAUSAL_VIEWS[nextIdx]);
+    // The button DOM node is stable across the re-render, so focusing it here
+    // is safe even though its tabindex flips to 0 on the next paint.
+    tabRefs.current[nextIdx]?.focus();
   };
 
   if (!settlement) {
@@ -105,6 +130,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
       <div
         role="tablist"
         aria-label="Causal views"
+        aria-orientation="horizontal"
         style={{
           display: 'flex', gap: 0,
           overflowX: 'auto',
@@ -112,17 +138,19 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
           background: swatch['#FAF6EE'],
         }}
       >
-        {CAUSAL_VIEWS.map(v => {
+        {CAUSAL_VIEWS.map((v, i) => {
           const active = v === view;
           return (
             <button
               key={v}
+              ref={el => { tabRefs.current[i] = el; }}
               role="tab"
               aria-selected={active}
               aria-controls={`causal-view-panel-${v}`}
               id={`causal-view-tab-${v}`}
               tabIndex={active ? 0 : -1}
               onClick={() => handleChange(v)}
+              onKeyDown={handleTabKeyDown}
               style={{
                 padding: '8px 14px',
                 background: active ? COLORS.activeBg : 'transparent',

@@ -5,14 +5,14 @@
  *
  * Verifies primary surfaces render at narrow viewport widths without
  * crashing or producing horizontal overflow. jsdom doesn't render to
- * pixels, but it does set `window.innerWidth` which our `isMobile()`
- * helper reads, so we can exercise the mobile branch of every
+ * pixels, but it does set `window.innerWidth` which the `useIsMobile`
+ * hook reads, so we can exercise the mobile branch of every
  * `mobile ? X : Y` ternary in the layout code.
  *
  * We do NOT validate exact widths in pixels — jsdom layout is fake
  * (no flexbox, no media queries actually trigger). What we check:
  *   1. The component renders without throwing at mobile width
- *   2. The `isMobile()` helper returns true at the chosen width
+ *   2. The `useIsMobile` hook returns true at the chosen width
  *   3. Mobile-only flags propagate correctly
  *
  * Real mobile QA happens in Playwright with actual viewports — this
@@ -22,16 +22,17 @@
 
 import React from 'react';
 import { describe, test, expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
-import { isMobile } from '../../src/components/new/tabConstants.js';
+import { render, cleanup, renderHook, act } from '@testing-library/react';
+import useIsMobile from '../../src/hooks/useIsMobile.js';
 
 // jsdom defaults to 1024px. Save the original so we can restore between tests.
 const ORIGINAL_INNER_WIDTH = window.innerWidth;
 
 function setViewportWidth(width) {
-  // jsdom's window is a writable object; mutating innerWidth changes
-  // what code reading window.innerWidth sees. We can't trigger a real
-  // resize event, but our isMobile() helper just reads innerWidth.
+  // jsdom's window is a writable object; mutating innerWidth changes what
+  // code reading window.innerWidth sees. useIsMobile reads it at mount and
+  // then on every 'resize' event — tests that need the live update dispatch
+  // a synthetic resize (see the reactivity test below).
   Object.defineProperty(window, 'innerWidth', {
     configurable: true,
     writable: true,
@@ -60,23 +61,40 @@ vi.mock('../../src/lib/founderSeats.js', () => ({
   fetchFounderSeatsRemaining: vi.fn(() => Promise.resolve(500)),
 }));
 
-describe('Tier 7.18 — Mobile viewport baseline', () => {
-  test('isMobile() returns true at 360px (iPhone SE width)', () => {
-    expect(isMobile()).toBe(true);
+describe('Tier 7.18 — Mobile viewport baseline (useIsMobile)', () => {
+  test('useIsMobile() is true at 360px (iPhone SE width)', () => {
+    const { result } = renderHook(() => useIsMobile());
+    expect(result.current).toBe(true);
   });
 
-  test('isMobile() returns false at 1024px (desktop)', () => {
+  test('useIsMobile() is false at 1024px (desktop)', () => {
     setViewportWidth(1024);
-    expect(isMobile()).toBe(false);
+    const { result } = renderHook(() => useIsMobile());
+    expect(result.current).toBe(false);
     setViewportWidth(360);  // restore for downstream tests
   });
 
-  test('isMobile() threshold is at 640px', () => {
+  test('useIsMobile() threshold is at 640px', () => {
     setViewportWidth(639);
-    expect(isMobile()).toBe(true);
+    expect(renderHook(() => useIsMobile()).result.current).toBe(true);
     setViewportWidth(640);
-    expect(isMobile()).toBe(false);
+    expect(renderHook(() => useIsMobile()).result.current).toBe(false);
     setViewportWidth(360);
+  });
+
+  // F28 — the reason the non-reactive isMobile() helper was retired: the hook
+  // must update when the viewport changes (resize / device rotation), not only
+  // at first mount.
+  test('useIsMobile() reacts to a resize event', () => {
+    setViewportWidth(1024);
+    const { result } = renderHook(() => useIsMobile());
+    expect(result.current).toBe(false);
+    act(() => {
+      setViewportWidth(500);
+      window.dispatchEvent(new Event('resize'));
+    });
+    expect(result.current).toBe(true);
+    setViewportWidth(360);  // restore for downstream tests
   });
 });
 

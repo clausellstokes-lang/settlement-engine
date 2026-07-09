@@ -3,8 +3,6 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
-import {isMobile} from '../tabConstants';
-
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
@@ -13,7 +11,6 @@ import { truncateAtWord } from '../../../lib/text.js';
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
-  const _mobile = isMobile();
   if (!r) return null;
 
   const d = r.defenseProfile || {};

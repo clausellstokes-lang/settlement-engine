@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, serif, Collapsible, Section, Empty, TabIntro} from '../Primitives';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import Button from '../../primitives/Button.jsx';
@@ -25,10 +25,10 @@ function formatRecentDate(value) {
 
 export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
+  const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
-  const mobile = isMobile();
 
   // Extended event type colors (EVENT_COLORS only covers 5 types)
   const ALL_EC = {

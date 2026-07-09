@@ -4,7 +4,7 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans, TabIntro } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
-import {isMobile} from '../tabConstants';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import {ServiceItem} from '../serviceComponents';
 import {NarrativeNote} from '../NarrativeNote';
@@ -13,7 +13,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   const [search, setSearch] = useState('');
   const [openCats, setOpenCats] = useState({});
   const tier = settlement?.tier || 'town';
-  const mobile = isMobile();
+  const mobile = useIsMobile();
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
   if (!hasServices) return (

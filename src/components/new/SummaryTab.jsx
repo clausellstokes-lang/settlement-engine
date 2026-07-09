@@ -7,6 +7,7 @@ import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLin
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -94,10 +95,10 @@ function SummaryTab({ settlement:r }) {
   const [settingOpen,setSettingOpen]=useState(false);
   const [hooksOpen,setHooksOpen]=useState(true);
   const [instOpen,setInstOpen]=useState(false);
+  const isMobile = useIsMobile(); // reactive; hook must precede the early return (rules-of-hooks)
   if (!r) return null;
 
   const {name,tier,population:pop,institutions:g=[],npcs:w=[],factions:_factionGroups=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
-  const isMobile=window.innerWidth<640;
   const stresses=(Array.isArray(stressRaw)?stressRaw:stressRaw?[stressRaw]:[]).filter(Boolean);
   const allFactions=ps?.factions||[];
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');

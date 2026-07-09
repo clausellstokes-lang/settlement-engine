@@ -132,3 +132,15 @@ button {
 @media (prefers-reduced-motion: reduce) {
   @keyframes sf-goldShimmer { 0%, 100% { background-position: 0% 0; } }
 }
+
+/* Busy/loading spinner. Consumed by the Button primitive (busy state) and
+ * the map loaders via className="sf-spin". This lived as an inline <style>
+ * in WorldMapOverlays.jsx, so the keyframe only existed while the world map
+ * was mounted — every other `.sf-spin` (Button busy state app-wide) rendered
+ * a frozen icon. Hoisting it here makes the animation global.
+ * Reduced-motion is handled globally in styles/a11y.css, whose
+ * `*, *::before, *::after { animation-duration: 1ms; animation-iteration-count: 1 }`
+ * rule collapses this spin (and every other animation) — no per-keyframe
+ * override needed here. */
+.sf-spin { animation: sf-spin 1.2s linear infinite; }
+@keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
