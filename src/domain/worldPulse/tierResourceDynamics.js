@@ -6,6 +6,12 @@ import { exactGoodId } from '../region/goodsCatalog.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
+// Phase 4 W-F4b (item 2b) — development fidelity: a chaotic-devout economy mis-RANKS
+// its value chains, acting on a NOISY ESTIMATE of resource pressure (suboptimal
+// expansions, late pivots, lingering on saturated chains). chaosPull 0 (lawful/neutral/
+// no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical; and with no injected rng the
+// term is inert, so every existing evaluateTierResourceDynamics caller is unchanged.
+import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -310,14 +316,19 @@ export function resourceEconomicRole(settlement, resource) {
  * @param {any} rules
  * @param {any} tick
  * @param {any} previousDrift
+ * @param {{ fork?: (key: string) => { random: () => number } }|null} [rng]  W-F4b: the pulse PRNG (DI'd) — enables the development-fidelity term; absent ⇒ inert.
  */
-function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
+function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rng = null) {
   const settlement = item.settlement || {};
   const resources = resourceList(settlement);
   if (!resources.length) return [];
   const rank = tierRank(settlement.tier);
   const pressureScore = resourcePressure(item, pressureIdx);
   const multiplier = intensityMultiplier(rules);
+  // W-F4b item 2b: the settlement's development-fidelity pull — 0 (⇒ every perceived
+  // pressure equals the true pressure, byte-identical) unless it carries a chaotic-devout
+  // patron with a projected piety record. Computed once per settlement.
+  const chaosPull = rng ? chaosPullOf(settlement) : 0;
   const out = [];
 
   for (const resource of resources.slice(0, 8)) {
@@ -325,7 +336,14 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
     const economicRole = resourceEconomicRole(settlement, resource);
     const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
-    const effectivePressure = clamp01(pressureScore + tradeLoad);
+    // The chaotic-devout economy acts on a NOISY per-chain estimate of pressure (its
+    // value ranking) — so it over/under-develops the wrong chains. Seeded per (site,
+    // tick,settlement,resource); factor EXACTLY 1 (byte-identical) when chaosPull ≤ 0.
+    const perceivedNoise = fidelityFactor({ rng, site: 'development', tick, cid: String(item.id), decisionKey: `chain:${resource}`, chaosPull });
+    const effectivePressure = clamp01((pressureScore + tradeLoad) * perceivedNoise);
+    // The same noisy estimate governs the RECOVERY decision (a chaotic economy is late
+    // to reopen a saturated chain). Equals pressureScore exactly when chaosPull ≤ 0.
+    const perceivedPressureScore = clamp01(pressureScore * perceivedNoise);
     if (state !== 'depleted' && (effectivePressure >= 0.64 || (rank >= tierRank('city') && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE))) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({
@@ -349,7 +367,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         metadata: { resource, fromState: state, toState: 'depleted', economicRole, resourceTaxonomy: taxonomy },
         conflictTags: [`resource:${item.id}:${resource}`],
       });
-    } else if (state === 'depleted' && ((pressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
+    } else if (state === 'depleted' && ((perceivedPressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
       // CADENCE DAMPING (E4-2b): exhaustibles (iron/stone/gem/salt/clay and
       // strategic resources) return canRecover:false from the taxonomy — once
       // depleted they could never come back, so a calm settlement's resources
@@ -358,17 +376,17 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
       // substitution and trade backfill demand. It is damped (low probability)
       // and bounded (quiet only) — calm becomes gradual recovery, not permanent
       // decay — while a resource under any real pressure still cannot regrow.
-      const quietRecovery = pressureScore <= 0.2;
+      const quietRecovery = perceivedPressureScore <= 0.2;
       const recovery = canRecoverResource(resource, settlement, {
         demotion: previousDrift?.direction === 'demotion',
-        pressureScore,
+        pressureScore: perceivedPressureScore,
         quietRecovery,
       });
       if (!recovery.canRecover) continue;
       // Exhaustible/magical recovery is deliberately slow — a fraction of the
       // renewable rate. It represents years of prospecting, not a season's regrowth.
       const slow = recovery.taxonomy.recoveryMode === 'manual' || recovery.taxonomy.recoveryMode === 'requires_high_magic';
-      const severity = clamp01((1 - pressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
+      const severity = clamp01((1 - perceivedPressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
       out.push({
         id: `candidate.resource.recover.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
         type: 'resource',
@@ -382,7 +400,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         headline: `${resource.replace(/_/g, ' ')} may recover`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [
-          `Resource pressure ${pressureScore.toFixed(2)} is low enough for recovery.`,
+          `Resource pressure ${perceivedPressureScore.toFixed(2)} is low enough for recovery.`,
           recovery.reason,
           previousDrift?.direction === 'demotion' ? 'Demotion pressure implies reduced consumption.' : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
@@ -405,6 +423,9 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
 export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
+  // W-F4b item 2b: the pulse PRNG, DI'd via context (kernel passes it). Absent ⇒ the
+  // development-fidelity term is inert ⇒ every non-kernel caller stays byte-identical.
+  const rng = context.rng && typeof context.rng.fork === 'function' ? context.rng : null;
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
   const driftBySettlement = /** @type {any} */ ({});
@@ -437,7 +458,7 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
     driftBySettlement[item.id] = tierDrift;
 
     if (rules.resourceDriftEnabled) {
-      candidates.push(...resourceCandidatesFor(item, pressureIdx, rules, tick, tierDrift));
+      candidates.push(...resourceCandidatesFor(item, pressureIdx, rules, tick, tierDrift, rng));
     }
   }
 

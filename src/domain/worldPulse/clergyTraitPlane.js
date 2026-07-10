@@ -27,6 +27,7 @@
  */
 
 import { npcCorruptibleFlaw, npcAlignmentScore } from '../corruption.js';
+import { evil01, chaos01 } from './deityAxes.js';
 
 /**
  * The trait→plane table: a lowercased AUTHORED personality descriptor (dominant /
@@ -198,4 +199,80 @@ export function readClergyPlane(settlement) {
   const withinConflict = clamp01(sumSpread / weight - (Math.abs(e) + Math.abs(c)));
   const variance = clamp01(Math.max(betweenVar, 0.5 * withinConflict));
   return { e, c, taint, variance, revealedTaint: clamp01(sumRevealed / weight), weight };
+}
+
+// ── TARGETED FOOTHOLDS (owner's clergy-lens refinement — W-F4b, item 3) ────────
+// The clergy-plane-refined addendum: "misaligned influential clergy → conversion as
+// TARGETED FOOTHOLDS — the rival whose plane matches a SPECIFIC NPC's traits recruits
+// THAT NPC; usurpation is cast, named, and narratable per the legibility law." This
+// reads the SAME per-trait plane, but per-NPC (not aggregated): an influential
+// minister whose authored traits lean toward a present RIVAL's plane AND away from the
+// PATRON's plane is AVAILABLE to that rival. A trait-neutral / unflawed priesthood
+// projects the zero plane ⇒ no availability ⇒ no foothold ⇒ byte-identical.
+export const FOOTHOLD_TUNING = Object.freeze({
+  MATCH_MIN: 0.55,      // min availability (rivalFit − patronFit, over ±2 each) to cast a foothold
+  MIN_ORG_POWER: 0.4,   // only NOTABLE+ clergy carry the institutional clout to matter (notable=0.4)
+  CONFLICT_W: 0.5,      // a CONFLICTED minister (high trait spread) is MORE available to a usurper
+  MAX_PER_SETTLEMENT: 2,// bound the emission (strongest availabilities first)
+});
+
+/** Signed plane coords of a deity snapshot: (malice, disorder) each −1..+1 (0 = neutral). @param {DeitySnapshot} d */
+const deityPlaneOf = (/** @type {DeitySnapshot} */ d) => ({ e: 2 * evil01(d) - 1, c: 2 * chaos01(d) - 1 });
+/** @typedef {{ alignmentAxis?: string, lawAxis?: string, name?: string }} DeitySnapshot */
+
+/**
+ * Find the influential ministering clergy each PRESENT RIVAL deity can recruit as a
+ * TARGETED FOOTHOLD: an NPC whose authored trait plane leans toward the rival AND away
+ * from the patron. `availability` = (rival plane · npc plane) − (patron plane · npc plane),
+ * lifted by the NPC's own trait CONFLICT (spread) — the owner's "conflicted → available".
+ * Returns codepoint-stable, strongest-first, at most one foothold per rival and at most
+ * MAX_PER_SETTLEMENT overall. Empty for a trait-neutral priesthood / no rivals. Pure.
+ *
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {DeitySnapshot|null|undefined} patronDeity
+ * @param {Array<{ ref: string, snapshot: DeitySnapshot }>} rivals present non-patron deities
+ * @returns {Array<{ npcId: string, npcName: string, rivalRef: string, rivalName: string, availability: number }>}
+ */
+export function targetedFootholds(settlement, patronDeity, rivals) {
+  const T = FOOTHOLD_TUNING;
+  if (!patronDeity || !Array.isArray(rivals) || !rivals.length) return [];
+  const ps = settlement?.powerStructure || {};
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const clergyFactionIds = new Set(
+    factions.filter((f) => String(f?.archetype || '') === 'religious' && f?.id != null).map((f) => String(f.id)),
+  );
+  if (!clergyFactionIds.size) return [];
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const patronPlane = deityPlaneOf(patronDeity);
+  const dot = (/** @type {{e:number,c:number}} */ p, /** @type {{e:number,c:number}} */ q) => p.e * q.e + p.c * q.c;
+
+  // Collect the influential, trait-bearing ministers ONCE (codepoint-stable order).
+  const ministers = [];
+  for (const npc of npcs) {
+    const linked = Array.isArray(npc?.linkedFactionIds) ? npc.linkedFactionIds.map(String) : [];
+    if (!linked.some((/** @type {string} */ id) => clergyFactionIds.has(id))) continue;
+    if (orgPower(npc) < T.MIN_ORG_POWER) continue;
+    const plane = npcTraitPlane(npc);
+    if (plane.spread <= 0) continue;                          // trait-neutral ⇒ never available
+    ministers.push({ id: String(npc?.id ?? ''), name: String(npc?.name || npc?.id || 'a minister'), plane });
+  }
+  if (!ministers.length) return [];
+  ministers.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+
+  /** @type {Array<{ npcId: string, npcName: string, rivalRef: string, rivalName: string, availability: number }>} */
+  const matches = [];
+  for (const rival of [...rivals].sort((a, b) => (a.ref < b.ref ? -1 : a.ref > b.ref ? 1 : 0))) {
+    const rivalPlane = deityPlaneOf(rival.snapshot);
+    let best = null;
+    for (const m of ministers) {
+      const availability = (dot(rivalPlane, m.plane) - dot(patronPlane, m.plane)) + T.CONFLICT_W * clamp(m.plane.spread - (Math.abs(m.plane.e) + Math.abs(m.plane.c)), 0, 2);
+      if (availability < T.MATCH_MIN) continue;
+      if (!best || availability > best.availability || (availability === best.availability && m.id < best.npcId)) {
+        best = { npcId: m.id, npcName: m.name, rivalRef: rival.ref, rivalName: String(rival.snapshot?.name || rival.ref), availability };
+      }
+    }
+    if (best) matches.push(best);
+  }
+  matches.sort((a, b) => b.availability - a.availability || (a.rivalRef < b.rivalRef ? -1 : a.rivalRef > b.rivalRef ? 1 : 0));
+  return matches.slice(0, T.MAX_PER_SETTLEMENT);
 }

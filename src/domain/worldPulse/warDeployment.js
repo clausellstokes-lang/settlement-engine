@@ -43,6 +43,11 @@ import { logistic, clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } from './feasibilityGate.js';
+// Phase 4 W-F4b (item 2a) — the alignment-conditioned fidelity term: a chaotic-devout
+// besieger classifies the matchup on a NOISY ESTIMATE of the true capacities (fights
+// refused wars / quits winnable ones), then the roll below reads the TRUE values.
+// chaosPull 0 (lawful/neutral/no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical.
+import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
 import { formatCount } from '../formatNumber.js';
 import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
@@ -761,10 +766,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0 }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -801,9 +806,23 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
     : defenderCap.homeDefense) + (Number(defenderReliefBonus) || 0);
 
   // ── HARD FEASIBILITY GATE (deterministic, NO rng). ───────────────────────────────
+  // W-F4b item 2a: a chaotic-devout besieger CLASSIFIES on a noisy ESTIMATE of the two
+  // capacities (own force + defender), so it fights calculator-refused wars and quits
+  // winnable ones. The estimate perturbs the CLASSIFY inputs ONLY — the siege roll
+  // (logOdds below) and every later branch read the TRUE coalitionCurrent/defenderCurrent,
+  // so a mis-classified attacker is delivered INTO a fight and then faces real odds
+  // (the owner's variance-with-occasional-payoff). attackerFidelity 0 ⇒ factor 1, NO
+  // rng forked ⇒ byte-identical for every deity-free / lawful / no-piety besieger.
+  const decisionCid = besiegers.length ? String(besiegers[0]) : String(targetId);
+  const estAttacker = attackerFidelity > 0
+    ? Math.max(0, coalitionCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `own:${stablePart(targetId)}`, chaosPull: attackerFidelity }))
+    : coalitionCurrent;
+  const estDefender = attackerFidelity > 0
+    ? Math.max(0, defenderCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `foe:${stablePart(targetId)}`, chaosPull: attackerFidelity }))
+    : defenderCurrent;
   const { verdict, ratio, reasons } = classifyFeasibility({
-    attackerCurrent: coalitionCurrent,
-    defenderCurrent,
+    attackerCurrent: estAttacker,
+    defenderCurrent: estDefender,
     coalitionSize: besiegers.length,
     defenderItem,
     attackerFacets: bestFacets,
@@ -1146,7 +1165,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const defenderReliefBonus = allyDefenseEnabled
       ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets))
       : 0;
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus });
+    // W-F4b item 2a: the PRIMARY besieger's (besiegers[0]) alignment-conditioned
+    // fidelity pull — 0 (⇒ the classify inputs stay TRUE, byte-identical) unless it
+    // carries a chaotic-devout patron with a projected piety record.
+    const attackerFidelity = besiegers.length ? chaosPullOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) : 0;
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front

@@ -866,6 +866,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     tick: worldState.tick,
     interval: tickInterval,
     simulationRules,
+    rng,   // W-F4b item 2b: enables the development-fidelity term (inert without a chaotic-devout patron)
   });
   worldState = tierResource.worldState;
   // Institution lifecycle — economic growth/decline of supply-chain

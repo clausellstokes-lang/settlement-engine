@@ -54,13 +54,17 @@ import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolve
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
 import { deityTemper, chaos01 } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
+// Phase 4 W-F4b — the SPREAD-lane inter-deity stance CONSUMER (betrayal/pact events,
+// pair-forked rolls, cooldowns, realm cap). Spread-gated ⇒ inert when off; all-neutral
+// realms read zero stance ⇒ no event ⇒ byte-identical.
+import { evaluateDeityStanceLane, betrayalCooldownPairs, footholdOutcome } from './deityStanceLane.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { prosperityRank } from '../../data/constants.js';
 // Phase 4 W-F3 — the piety amplifier (§2.3 sites #1/#4/#5) + the clergy lens. All
 // reads go through the identity short-circuit (absent record ⇒ 1.0), so every
 // deity-free / tick-0 / zero-span path stays byte-identical.
 import { pietyMultOf, pietyRecord, devotionOf, amplifierTag, oppositionDampener } from './piety.js';
-import { readClergyPlane } from './clergyTraitPlane.js';
+import { readClergyPlane, targetedFootholds } from './clergyTraitPlane.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -249,6 +253,39 @@ function deityBearers(snapshot) {
     .filter((/** @type {any} */ item) => Boolean(item?.settlement?.config?.primaryDeitySnapshot))
     .map((/** @type {any} */ item) => String(item.id))
     .sort(codepoint);
+}
+
+/**
+ * Codepoint-sorted (a < b) pairs of DEITY-BEARING settlements connected by a
+ * relationship edge or graph channel — the global stance lane's input. `positive`
+ * marks a COOPERATIVE relationship (allied/trade/patron/vassal — a pact a betrayal
+ * could break); channels contribute relatedness only (war_front is not a pact). A
+ * pair is deduped and reads positive if ANY connecting edge is cooperative. Pure.
+ * @param {{ regionalGraph?: { edges?: Array<Record<string, unknown>>, channels?: Array<Record<string, unknown>> }, relationships?: Array<Record<string, unknown>>, channels?: Array<Record<string, unknown>> }} snapshot
+ * @param {string[]} bearers
+ * @returns {Array<{ a: string, b: string, positive: boolean }>}
+ */
+function deityBearerPairs(snapshot, bearers) {
+  const bearerSet = new Set(bearers.map(String));
+  /** @type {Map<string, { a: string, b: string, positive: boolean }>} */
+  const byPair = new Map();
+  const note = (/** @type {unknown} */ x, /** @type {unknown} */ y, /** @type {boolean} */ positive) => {
+    const p = String(x ?? ''); const q = String(y ?? '');
+    if (!p || !q || p === q || !bearerSet.has(p) || !bearerSet.has(q)) return;
+    const a = p < q ? p : q;
+    const b = p < q ? q : p;
+    const key = `${a}::${b}`;
+    const prev = byPair.get(key);
+    byPair.set(key, { a, b, positive: Boolean(prev?.positive) || positive });
+  };
+  for (const e of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const type = String(e?.relationshipType || e?.type || '');
+    note(e?.from, e?.to, FAITH_CARRIER_RELATIONSHIPS.includes(type));
+  }
+  for (const c of snapshot?.regionalGraph?.channels || snapshot?.channels || []) {
+    note(c?.from, c?.to, false);
+  }
+  return [...byPair.keys()].sort(codepoint).map((k) => /** @type {{ a: string, b: string, positive: boolean }} */ (byPair.get(k)));
 }
 
 /**
@@ -524,6 +561,26 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         if (deity) note(cid, deity, OCC_CARRIER_FLOOR, true);
       }
     }
+
+    // Global inter-deity STANCE lane (W-F4b, item 1): over the codepoint-sorted
+    // deity-bearing RELATED pairs, fire seeded, cooldown-and-cap-gated BETRAYAL / PACT
+    // events, each composed with the ACTING settlement's tick-START piety composite
+    // (pietyMultOf) and cause-chained. Spread-gated (this branch) ⇒ inert when off; an
+    // all-True-Neutral / legacy realm reads zero stance ⇒ no event ⇒ byte-identical.
+    // Its outcomes thread the deterministic apply set exactly like conversion outcomes.
+    const stancePairs = deityBearerPairs(snapshot, bearers);
+    if (stancePairs.length) {
+      const stance = evaluateDeityStanceLane({
+        pairs: stancePairs,
+        deityOf: (/** @type {string} */ id) => deitySnapshotFor(snapshot, id),
+        pietyMultOf: (/** @type {string} */ id) => pietyMultOf(snapshot?.byId?.get?.(String(id))?.settlement),
+        nameFor,
+        tick,
+        rng,
+        cooldownPairs: betrayalCooldownPairs(worldState, tick),
+      });
+      for (const o of stance.outcomes) outcomes.push(o);
+    }
   }
 
   // 3. Evolve each settlement's pantheon (codepoint-sorted ⇒ deterministic).
@@ -639,6 +696,37 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       realmMult,
       dampener: oppositionDampener(state),
     });
+
+    // Item 3 — TARGETED FOOTHOLDS (spread-gated; rides item 1's outcome plumbing). A
+    // present RIVAL creed recruits the SPECIFIC influential minister whose authored
+    // traits lean toward IT and away from the patron (the owner's clergy-lens
+    // refinement — usurpation named + narratable). A trait-neutral priesthood / no
+    // rival ⇒ no match ⇒ no outcome ⇒ byte-identical. Cause-chained per the legibility
+    // law; composed with the acting settlement's piety on the receipt.
+    if (spread && state.patronRef) {
+      const patronForFoothold = patronSnapshot(state);
+      const rivals = Object.keys(state.deities)
+        .filter((k) => k !== state.patronRef && !state.deities[k].suppressed && state.deities[k].snapshot)
+        .map((k) => ({ ref: k, snapshot: state.deities[k].snapshot }));
+      for (const f of targetedFootholds(settlement, patronForFoothold, rivals)) {
+        const reasons = [
+          `${f.npcName}, a minister of ${nameFor(cid)}, leans toward ${f.rivalName} and away from ${patronForFoothold?.name || 'the patron'}, opening a foothold for the rival creed.`,
+        ];
+        if (pietyMult > 1) reasons.push(`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`);
+        outcomes.push(footholdOutcome({
+          cid,
+          cityName: nameFor(cid),
+          npcId: f.npcId,
+          npcName: f.npcName,
+          rivalRef: f.rivalRef,
+          rivalName: f.rivalName,
+          patronName: patronForFoothold?.name || 'the patron',
+          tick,
+          reasons,
+          amplifiers: pietyMult !== 1 ? { localMult: pietyMult, realmMult } : null,
+        }));
+      }
+    }
 
     // 3c. patron change → a gradual conversion outcome (re-embed the new patron).
     if (state.patronRef && state.patronRef !== prevPatron) {
