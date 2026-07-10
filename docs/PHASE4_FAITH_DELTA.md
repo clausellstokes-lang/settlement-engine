@@ -724,3 +724,48 @@ agent's golden checks (the standing lint-staged/golden hazard — manager commit
 
 Golden-event budget for Phase 4: exactly two reviewed events (W-F1 worldpulse-oracle
 rebase, W-F5 generator golden), distinct from the merge program's single regen.
+
+---
+
+## OWNER DESIGN REFINEMENT (2026-07-10) — the stance heuristic and the axis integration directive
+
+Supersedes decision 2's "temperament retained" posture and refines §3's stance design. Owner's words, formalized:
+
+### The stance heuristic (fills W-F2's tables)
+- **EVIL = self-centered, non-consolidated.** High aggression baseline against ALL alignments
+  INCLUDING its own (strikes out / out-manipulates / seeks control, power, influence). In
+  conflict-target preference, only a SLIGHT tilt toward good/neutral over evil — evil does not
+  form a bloc. Evil alliances are transactional and carry standing betrayal risk.
+- **GOOD = common-ground-seeking, consolidated.** Cooperation bias toward mutual benefit
+  (touches trade formation and treaty terms, not just war). Low conflict baseline against
+  everyone, EXCEPT strong, consolidated aggression against evil.
+- **Emergent consequence (the design's self-balancing property):** coalitions of light vs a
+  fractious darkness arise from the asymmetry itself — evil is locally strong / globally weak
+  (fragments), good is globally strong / slow to strike (stable, not expansionist). Neither
+  pole dominates the map by construction.
+- **LAW axis governs method + durability, not direction:** lawful evil = ordered domination
+  (vassalage, coercive-but-held treaties); chaotic evil = raids + betrayal; lawful good =
+  pacts + institutions; chaotic good = ad-hoc aid. Treaty half-life scales with lawfulness.
+
+### The amplifier composition (stance × piety)
+The patron deity's stance is an AMPLIFIER on the settlement's generated temperament: it biases
+the settlement's own actions, its trade posture, and its willingness to sue for peace — scaled
+by piety (W-F3's local scalar). Direction from stance, magnitude from piety; a nominal
+settlement barely shifts, a devout one substantially. Consumption seams: dispositionLedger
+inputs, trade salience/coercion willingness, war wind-down / peace-suing thresholds.
+
+### The axis integration directive (OWNER, supersedes the additive-model ratification)
+warbound × peaceful is INTEGRATED INTO lawful×chaos + good×evil — not retained as an
+independent stored axis. "Warlike" becomes a DERIVED, TARGET-CONDITIONAL property: no deity is
+abstractly warlike; aggression(A→B) derives from A's two-axis alignment + the stance tables +
+target B's alignment. Staged execution:
+- **W-F2 (revised):** deityStance.js implements the target-conditional tables above + a
+  temper-DERIVATION SHIM — stored temperament becomes read-time-derived from the two axes
+  (byte-compatible during transition; the niche key still reads the derived value).
+- **W-F3:** piety amplifiers unchanged, now explicitly the magnitude knob on stance bleed.
+- **W-F4 (grown):** the structural retirement — stored temperament axis removed (migration for
+  the deity-shape CHECKs, niche re-key onto derived temper, warbound-conversion + mandate-fit
+  re-plumbed to the derivation). This is the redesign's heavy half.
+- **W-F7:** re-certification becomes a FULL re-run against the W-F0 baseline (not a delta) —
+  the niche-composition change requires it. Envelope targets: the self-balancing property above
+  must be OBSERVABLE (no runaway pole across the config grid).
